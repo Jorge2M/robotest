@@ -33,7 +33,7 @@ public class ClientApiLoyaltyPointsDev {
 	
 	public ClientApiLoyaltyPointsDev() {}
 	
-	public ResultAddPoints addLoyaltyPoints(User user, int loyaltyPoints) throws Exception {
+	public ResultAddPoints addLoyaltyPoints(User user, int loyaltyPoints) {
 		//En los servidores de Robotest la llamada a consumer devuelve un 401
 		//String idConsumer = getContactIdConsumer(emailConsumer);
 		//String countryConsumer = getCountryConsumer(userTest.getEmail());

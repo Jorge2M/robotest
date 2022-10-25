@@ -177,7 +177,7 @@ public class PageFavoritos extends PageBase {
 		return tallaSelected;
 	}
 	
-	public void clickButtonAddToBagAndWait(String refProducto, String codigoColor) throws Exception {
+	public void clickButtonAddToBagAndWait(String refProducto, String codigoColor) {
 		clickButtonAddToBag(refProducto, codigoColor);
 		String xpathCapaTallas = getXPathCapaTallas(refProducto, codigoColor);
 		state(State.Visible, xpathCapaTallas).wait(1).build();

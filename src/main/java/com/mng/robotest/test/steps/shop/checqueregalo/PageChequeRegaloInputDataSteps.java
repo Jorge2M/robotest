@@ -40,7 +40,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	@Step (
 		description="Introducimos en el campo de <b>tarjeta regalo</b>#{numTarjeta} para consultar el saldo",
 		expected="Se carga la página donde salen nuevos campos visibles como el de <b>cvv</b>")
-	public void inputDataTarjetaRegalo(String numTarjeta) throws Exception {
+	public void inputDataTarjetaRegalo(String numTarjeta) {
 		PageChequeRegaloInputDataNew pageNew = ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData);
 		pageNew.introducirTarjetaConsultaSaldo(numTarjeta);
 		pageNew.clickBotonValidar();
@@ -95,7 +95,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	@Step (
 		description="Seleccionamos la cantidad de <b>#{importeToClick}</b>",
 		expected="Se selecciona correctamente el importe")
-	public void seleccionarCantidades(Importe importeToClick) throws Exception {
+	public void seleccionarCantidades(Importe importeToClick) {
 		pageChequeRegaloInputData.clickImporteCheque(importeToClick);
 	}
 

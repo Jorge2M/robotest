@@ -24,7 +24,7 @@ public class Reg002 extends TestBase {
 	
 	private final Map<String, String> dataRegister = new HashMap<>();
 	
-	public Reg002(Pais pais, IdiomaPais idioma) throws Exception {
+	public Reg002(Pais pais, IdiomaPais idioma) {
 		super();
 		dataTest.setPais(pais);
 		dataTest.setIdioma(idioma);

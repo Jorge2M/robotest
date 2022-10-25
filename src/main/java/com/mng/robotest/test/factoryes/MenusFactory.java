@@ -16,7 +16,7 @@ public class MenusFactory {
 	
 	@Factory
 	@Parameters({"countrys", "lineas"})
-	public Object[] createInstances(String countrysStr, String lineas, ITestContext ctxTestRun) throws Exception {
+	public Object[] createInstances(String countrysStr, String lineas, ITestContext ctxTestRun) {
 		List<PaisIdioma> listTests = new ArrayList<>();
 		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
 		AppEcom app = (AppEcom)inputData.getApp();

@@ -20,7 +20,7 @@ public class PageSelTdaMantoSteps extends StepBase {
 		description="Seleccionamos el entorno \"" + TAG_TIENDA + "\"", 
 		expected="Aparece la página de Menús",
 		saveErrorData=SaveWhen.Never)
-	public void selectTienda(String codigoAlmacen, String codigoPais) throws Exception {
+	public void selectTienda(String codigoAlmacen, String codigoPais) {
 		TiendaManto tienda = TiendaManto.getTienda(codigoAlmacen, codigoPais, app);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_TIENDA, tienda.name());
 		

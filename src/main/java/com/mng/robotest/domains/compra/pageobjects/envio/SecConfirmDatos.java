@@ -34,7 +34,7 @@ public class SecConfirmDatos extends PageBase {
 		return state(Visible, XPATH_INPUT_POST_NUMBER_ID_DEUTSCHLAND).check();
 	}
 	
-	public void sendDataInputPostNumberIdDeutschland(String data) throws Exception {
+	public void sendDataInputPostNumberIdDeutschland(String data) {
 		sendKeysWithRetry(data, By.xpath(XPATH_INPUT_POST_NUMBER_ID_DEUTSCHLAND), 2, driver);
 	}
 

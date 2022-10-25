@@ -1,12 +1,12 @@
-package com.mng.robotest.test.steps.otras;
+package com.mng.robotest.domains.otros.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.otros.pageobjects.PageGoogle;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.pageobject.otras.PageGoogle;
 import com.mng.robotest.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 
@@ -51,7 +51,7 @@ public class GoogleSteps extends PageBase {
 	@Validation (
 		description="Aparece la página de <b>Landing</b> o <b>Prehome</b>",
 		level=State.Defect)	
-	private boolean checkInitialPageShop() throws Exception {
+	private boolean checkInitialPageShop() {
 		boolean isPageLanding = (new PageLanding()).isPage();
 		boolean isPagePrehome = new PagePrehome().isPage();
 		return (isPageLanding || isPagePrehome);

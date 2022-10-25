@@ -15,7 +15,7 @@ public class PageGestorSaldosTPVSteps {
 	public static ChecksTM validateIsPage(WebDriver driver) {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
-			"Estamos en la página " + PageGestorSaldosTPV.titulo,
+			"Estamos en la página " + PageGestorSaldosTPV.TITULO,
 			PageGestorSaldosTPV.isPage(driver), State.Defect);
 	 	checks.add(
 			"Aparece el input de fecha de TPV",

@@ -50,7 +50,7 @@ public class PageMultibanco1rstSteps extends StepBase {
 	@Step (
 		description="Seleccionar el botón \"Pagar\"", 
 		expected="Aparece la página de \"En progreso\"")
-	public void continueToNextPage() throws Exception {
+	public void continueToNextPage() {
 		pageMultibanco1rst.continueToNextPage();
 		new PageMultibancoEnProgresoSteps().validateIsPage();
 	}

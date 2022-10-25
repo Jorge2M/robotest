@@ -60,7 +60,7 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		click(menu.getBy()).exec();
 	}
 
-	public boolean clickMenuIfinState(MenuUserDesktop menu, State stateExpected) throws Exception {
+	public boolean clickMenuIfinState(MenuUserDesktop menu, State stateExpected) {
 		if (isMenuInState(menu, stateExpected)) {
 			moveToElement(menu.getBy());
 			clickMenu(menu);
@@ -69,7 +69,7 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		return false;
 	}	
 	
-	public void MoveAndclickMenu(MenuUserDesktop menu) throws Exception {
+	public void MoveAndclickMenu(MenuUserDesktop menu) {
 		moveToElement(menu.getBy());
 		clickMenu(menu);
 	}

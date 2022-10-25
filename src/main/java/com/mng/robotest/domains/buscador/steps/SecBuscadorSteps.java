@@ -49,7 +49,7 @@ public class SecBuscadorSteps extends StepBase {
 		searchArticuloCommon(product);
 	}
 	
-	private void searchArticuloCommon(GarmentCatalog product) throws Exception {
+	private void searchArticuloCommon(GarmentCatalog product) {
 		ArticuloNavigations.buscarArticulo(product.getArticleWithMoreStock(), channel, app);
 		PageObjTM.waitForPageLoaded(driver);  
 		PageFichaSteps pageFichaSteps = new PageFichaSteps();
@@ -59,7 +59,7 @@ public class SecBuscadorSteps extends StepBase {
 	@Step (
 		description="Introducir la categoría de producto <b>#{categoriaABuscar} </b>(existe categoría: #{categoriaExiste})</b>", 
 		expected="El resultado de la búsqueda es el correcto :-)")
-	public void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste) throws Exception {
+	public void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste) {
 		SecCabecera.buscarTexto(categoriaABuscar, channel, app);
 		PageObjTM.waitForPageLoaded(driver);	
 		if (categoriaExiste) { 

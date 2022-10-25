@@ -33,7 +33,7 @@ public class GetterGarment {
 		this.target = getUrlBase(initialURL);
 	}
 	
-	public GarmentFicha getGarment(String idGarment) throws Exception {
+	public GarmentFicha getGarment(String idGarment) {
 		WebTarget webTarget = getWebTargetGarment(idGarment);
 		Builder builder = webTarget
 				.request(MediaType.APPLICATION_JSON)

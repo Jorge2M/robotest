@@ -75,7 +75,7 @@ public class PagePedidosMantoSteps extends StepBase {
 		description="Buscamos pedidos con id registro",
 		expected="Debemos obtener el ID del pedido",
 		saveErrorData=SaveWhen.Never)
-	public DataPedido getPedidoUsuarioRegistrado(DataPedido dPedidoPrueba) throws Exception {
+	public DataPedido getPedidoUsuarioRegistrado(DataPedido dPedidoPrueba) {
 		int posicionPedidoActual = 6;
 		int posicionMaxPaginaPedidos = 105;
 		do {
@@ -106,7 +106,7 @@ public class PagePedidosMantoSteps extends StepBase {
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
 		saveErrorData=SaveWhen.Never)
-	public DataPedido getDataPedido(DataPedido dPedidoPrueba) throws Exception {
+	public DataPedido getDataPedido(DataPedido dPedidoPrueba) {
 		DataBag dBagPrueba = new DataBag();
 		List<String> referencias = new PageDetallePedido().getReferenciasArticulosDetallePedido();
 		for (String referencia : referencias) {
@@ -131,7 +131,7 @@ public class PagePedidosMantoSteps extends StepBase {
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
 		saveErrorData=SaveWhen.Never)
-	public DataPedido getDataCliente(DataPedido dPedidoPrueba) throws Exception {
+	public DataPedido getDataCliente(DataPedido dPedidoPrueba) {
 		new PageDetallePedido().clickLinkDetallesCliente();
 		PageDetalleCliente pageDetalleCliente = new PageDetalleCliente();
 		dPedidoPrueba.getPago().setDni(pageDetalleCliente.getUserDniText());

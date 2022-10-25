@@ -105,7 +105,7 @@ public class PageLanding extends PageBase {
 		return banners;
 	}
 
-	public boolean haySecc_Art_Banners(AppEcom app) throws Exception {
+	public boolean haySecc_Art_Banners(AppEcom app) {
 		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		if (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle()) {
 			return true;
@@ -140,8 +140,7 @@ public class PageLanding extends PageBase {
 		return false;
 	}
 		
-	private boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, Channel channel) 
-	throws Exception {
+	private boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, Channel channel) {
 		for (Element element : elementsCanBeContained) {
 			boolean elementContained = false;
 			switch (element) {

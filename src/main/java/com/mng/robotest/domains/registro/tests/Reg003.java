@@ -41,7 +41,7 @@ public class Reg003 extends TestBase {
 	private final VersionRegistroSuite version;
 	private Map<String, String> dataRegister = new HashMap<>();
 	
-	public Reg003(Pais pais, IdiomaPais idioma, boolean accessFromFactory) throws Exception {
+	public Reg003(Pais pais, IdiomaPais idioma, boolean accessFromFactory) {
 		super();
 		dataTest.setPais(pais);
 		dataTest.setIdioma(idioma);

@@ -36,7 +36,7 @@ public class BannerCabeceraObject extends BannerObject {
 	}
 	
 	@Override
-	public void clickBannerAndWaitLoad(DataBanner dataBanner) throws Exception {
+	public void clickBannerAndWaitLoad(DataBanner dataBanner) {
 		WebElement bannerWeb = dataBanner.getBannerWeb();
 		By byLink = By.xpath(XPATH_ANCOR_RELATIVE_BANNER);
 		WebElement bannerLink;

@@ -156,7 +156,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	@Step (
 		description="Introducir un código de vendedor correcto #{codigoVendedor} y pulsar el botón \"Aceptar\"", 
 		expected="El vendedor queda registrado")
-	public void stepIntroduceCodigoVendedorVOTF(String codigoVendedor) throws Exception {
+	public void stepIntroduceCodigoVendedorVOTF(String codigoVendedor) {
 		page1DktopCheckout.inputVendedorVOTF(codigoVendedor);
 		page1DktopCheckout.acceptInputVendedorVOTF();
 		checkAfterInputCodigoVendedor(codigoVendedor);				

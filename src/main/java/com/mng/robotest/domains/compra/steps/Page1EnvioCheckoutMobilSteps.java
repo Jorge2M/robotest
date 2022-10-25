@@ -91,7 +91,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validaResultImputPromoEmpl() throws Exception {
+	public ChecksTM validaResultImputPromoEmpl() {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 2;
 	 	checks.add(

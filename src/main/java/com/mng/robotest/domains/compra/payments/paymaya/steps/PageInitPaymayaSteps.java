@@ -26,7 +26,7 @@ public class PageInitPaymayaSteps {
 	@Step(
 		description="Seleccionamos el botón PayMaya para el checkout express",
 		expected="Aparece la página de identificación de PayMaya")
-	public PageIdentPaymayaSteps clickPaymayaButton() throws Exception {
+	public PageIdentPaymayaSteps clickPaymayaButton() {
 		pageInitPaymaya.clickButtonPayMaya();
 		PageIdentPaymayaSteps pageIdentPaymayaSteps = new PageIdentPaymayaSteps();
 		pageIdentPaymayaSteps.checkPage();

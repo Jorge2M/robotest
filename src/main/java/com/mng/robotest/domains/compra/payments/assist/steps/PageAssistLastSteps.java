@@ -10,7 +10,7 @@ public class PageAssistLastSteps extends StepBase {
 	@Step (
 		description="Seleccionar el botón de Submit", 
 		expected="Aparece la página de resultado de Mango")
-	public void clickSubmit() throws Exception {
+	public void clickSubmit() {
 		new PageAssistLast().clickButtonSubmit();
 	}
 }

@@ -61,7 +61,7 @@ public class SecSelectorPreciosDesktop extends PageBase {
 		waitLoadPage();
 	}
 
-	private void moveToCornerSelector(TypeClick typeCorner) throws Exception {
+	private void moveToCornerSelector(TypeClick typeCorner) {
 		waitLoadPage();
 		moveToElement(XPATH_FILTRO_WRAPPER_SHOP);
 		switch (typeCorner) {

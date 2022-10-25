@@ -65,7 +65,7 @@ public abstract class SecCabecera extends PageBase {
 		return state(Present, XPATH_LINK_LOGO_MANGO).wait(seconds).check();
 	}
 
-	public void hoverLogoMango() throws Exception {
+	public void hoverLogoMango() {
 		if (state(Present, XPATH_LINK_LOGO_MANGO).check()) {
 			moveToElement(XPATH_LINK_LOGO_MANGO);
 		}
@@ -89,7 +89,7 @@ public abstract class SecCabecera extends PageBase {
 		return (getNumArticulosBolsa() > 0);
 	}
 
-	public String getNumberArtIcono() throws Exception {
+	public String getNumberArtIcono() {
 		waitLoadPage(); //Para evitar staleElement en la línea posterior
 		String xpathNumberArtIcono = getXPathNumberArtIcono();
 		if (state(Visible, xpathNumberArtIcono).check()) {

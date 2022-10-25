@@ -16,7 +16,7 @@ public class ListRegistrosXPais {
 	@SuppressWarnings("unused")
 	@Factory
 	@Parameters({"countrys", "lineas"})
-	public Object[] createInstances(String listaPaisesStr, String lineas, ITestContext ctxTestRun) throws Exception {
+	public Object[] createInstances(String listaPaisesStr, String lineas, ITestContext ctxTestRun) {
 		List<Object> listTests = new ArrayList<>();
 		AppEcom appE = (AppEcom)TestMaker.getInputParamsSuite(ctxTestRun).getApp();
 		try {

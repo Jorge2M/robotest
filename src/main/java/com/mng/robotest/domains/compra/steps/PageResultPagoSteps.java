@@ -104,7 +104,7 @@ public class PageResultPagoSteps extends StepBase {
 	@Step (
 		description="Seleccionar el link \"Mis Compras\"",
 		expected="Aparece la página de \"Mis compras\" o la de \"Acceso a Mis compras\" según si el usuario está o no loginado")
-	public void selectMisCompras() throws Exception {
+	public void selectMisCompras() {
 		pageResultPago.clickMisCompras();	 
 		if (dataTest.isUserRegistered()) {
 			new PageMisComprasSteps().validateIsPage();
@@ -116,7 +116,7 @@ public class PageResultPagoSteps extends StepBase {
 	@Step (
 		description="Seleccionar el botón \"Descubrir lo último\" o el icono de Mango", 
 		expected="Volvemos a la portada")
-	public void selectSeguirDeShopping(AppEcom app) throws Exception {  
+	public void selectSeguirDeShopping(AppEcom app) {  
 		if (pageResultPago.isVisibleDescubrirLoUltimo()) {
 			pageResultPago.clickDescubrirLoUltimo();
 		} else {

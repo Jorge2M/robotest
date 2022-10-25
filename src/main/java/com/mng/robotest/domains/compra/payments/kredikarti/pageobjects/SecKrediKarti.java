@@ -42,7 +42,7 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
 		return result;
 	}
 
-	public void clickRadioPagoAPlazo(int numRadio) throws Exception {
+	public void clickRadioPagoAPlazo(int numRadio) {
 		goToIframe();
 		String xpathRadio = getXPathRadioPagoAPlazo(numRadio);
 		click(xpathRadio).exec();

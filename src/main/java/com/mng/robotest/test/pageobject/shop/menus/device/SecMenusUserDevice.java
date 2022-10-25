@@ -74,7 +74,7 @@ public class SecMenusUserDevice extends PageBase {
 		}
 	}
 	
-	public boolean isMenuInState(MenuUserDevice menu, State state) throws Exception {
+	public boolean isMenuInState(MenuUserDevice menu, State state) {
 		secCabecera.clickIconoMenuHamburguerMobil(true);
 		return (state(state, menu.getBy(app)).check());
 	}
@@ -99,7 +99,7 @@ public class SecMenusUserDevice extends PageBase {
 		return false;
 	}	
 	
-	public void MoveAndclickMenu(MenuUserDevice menu) throws Exception {
+	public void MoveAndclickMenu(MenuUserDevice menu) {
 		secCabecera.clickIconoMenuHamburguerMobil(true);
 		moveToElement(menu.getBy(app));
 		clickMenu(menu);

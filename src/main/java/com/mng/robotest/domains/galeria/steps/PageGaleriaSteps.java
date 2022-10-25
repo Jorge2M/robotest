@@ -107,7 +107,7 @@ public class PageGaleriaSteps extends StepBase {
 		return (datosArticulo);
 	}
 
-	public void shopTallasArticulo(int posArticulo) throws Exception {
+	public void shopTallasArticulo(int posArticulo) {
 		if (channel.isDevice() || app==AppEcom.outlet) {
 			showTallasOutletAndMovil(posArticulo);
 		} else {
@@ -331,7 +331,7 @@ public class PageGaleriaSteps extends StepBase {
 	}
 
 	@Validation
-	private ChecksTM checkBackTo1ersElementOk() throws Exception {
+	private ChecksTM checkBackTo1ersElementOk() {
 		ChecksTM checks = ChecksTM.getNew();
 	  	checks.add(
 			"Es clickable el 1er elemento de la lista",
@@ -474,7 +474,7 @@ public class PageGaleriaSteps extends StepBase {
 		description="Seleccionar el " + tagNumArtConColores + "o artículo con variedad de colores (" + tagNombre1erArt + " " + tagPrecio1erArt + ")", 
 		expected="Aparece el artículo original(" + tagNombre1erArt + " " + tagPrecio1erArt + ")",
 		saveNettraffic=SaveWhen.Always)
-	public void selecArticuloGaleriaStep(int numArtConColores) throws Exception {
+	public void selecArticuloGaleriaStep(int numArtConColores) {
 		WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
 		String nombre1erArt = pageGaleria.getNombreArticulo(articuloColores);
 		String precio1erArt = pageGaleria.getPrecioArticulo(articuloColores);
@@ -579,7 +579,7 @@ public class PageGaleriaSteps extends StepBase {
 	@Step (
 		description="Seleccionar el link del listado a <b>#{numColumnas.name()} columnas</b>", 
 		expected="Aparece un listado de artículos a #{numColumnas.name()} columnas")
-	public void selectListadoXColumnasDesktop(NumColumnas numColumnas)	throws Exception {
+	public void selectListadoXColumnasDesktop(NumColumnas numColumnas)	{
 		((PageGaleriaDesktop)pageGaleria).clickLinkColumnas(numColumnas);
 		checkIsVisibleLayoutListadoXcolumns(numColumnas);
 	}

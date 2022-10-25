@@ -79,7 +79,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		description="Seleccionamos el botón \"Continuar\" (hay carácteres no-latinos introducidos en la dirección)",
 		expected="Aparece un aviso indicando que en la dirección no pueden figurar carácteres no-latinos",
 		saveImagePage=SaveWhen.Always)
-	public void clickContinuarAndExpectAvisoDirecWithNoLatinCharacters() throws Exception {
+	public void clickContinuarAndExpectAvisoDirecWithNoLatinCharacters() {
 		page2IdentCheckout.clickBotonContinuarAndWait(2);	  
 		checkAvisoDireccionWithNoLatinCharacters();
 	}

@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.otras;
+package com.mng.robotest.domains.otros.pageobjects;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -27,7 +27,7 @@ public class PageGoogle extends PageBase {
 		return (XPATH_LINK_NO_PUBLI_TEXT + "[text()[contains(.,'" + textContained + "')]]");	
 	}
 
-	public void searchTextAndWait(String textToSearch) throws Exception {
+	public void searchTextAndWait(String textToSearch) {
 		getElement(XPATH_INPUT_TEXT).clear(); 
 		getElement(XPATH_INPUT_TEXT).sendKeys(textToSearch); 
 		getElement(XPATH_INPUT_TEXT).sendKeys(Keys.RETURN);

@@ -70,7 +70,7 @@ public class PageCheckoutWrapper extends PageBase {
 		secTarjetaPci.inputDni(dni);
 	}
 	
-	public void inputCodigoPromoAndAccept(String codigoPromo) throws Exception {
+	public void inputCodigoPromoAndAccept(String codigoPromo) {
 		if (channel==Channel.mobile) {
 			page1MobilCheckout.inputCodigoPromoAndAccept(codigoPromo);
 		} else {
@@ -107,7 +107,7 @@ public class PageCheckoutWrapper extends PageBase {
 		return (page1DktopCheckout.isPresentDiaNaciPromoEmpl());
 	}	
 	
-	public void inputDNIPromoEmpl(String dni) throws Exception {
+	public void inputDNIPromoEmpl(String dni) {
 		if (channel==Channel.mobile) {
 			page1MobilCheckout.inputDNIPromoEmpl(dni);
 		} else {

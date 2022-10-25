@@ -80,7 +80,7 @@ public class PageMenusManto extends PageBase {
 		return state(Present, xpathNextPosicion).check();
 	}
 	
-	public String clickMenuAndAcceptAlertIfExists(String textoMenu) throws Exception {
+	public String clickMenuAndAcceptAlertIfExists(String textoMenu) {
 		try {
 			clickMenu(textoMenu);
 		} catch (UnhandledAlertException f) {

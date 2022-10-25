@@ -25,7 +25,7 @@ public class ModalMultidirectionSteps extends StepBase {
 	}	
 	
 	@Validation
-	public ChecksTM checkInitialContent() throws Exception {
+	public ChecksTM checkInitialContent() {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 3;
 		Optional<Direction> mainDirectionOpt = modalMultidirection.getPrincipalDirection(seconds);
@@ -47,7 +47,7 @@ public class ModalMultidirectionSteps extends StepBase {
 	@Step (
 		description="Clickar el link \"Añadir otra dirección\"",
 		expected="Aparece el modal para la introducción de los datos de la nueva dirección")
-	public void clickAnyadirOtraDireccion() throws Exception {
+	public void clickAnyadirOtraDireccion() {
 		modalMultidirection.clickAnyadirOtraDireccion();
 		new ModalDirecEnvioNewSteps().checkIsVisible();
 		GenericChecks.checkDefault();

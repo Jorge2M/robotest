@@ -17,7 +17,7 @@ public class SecProductDescrOldSteps {
 	private final SecProductDescrOld secProductDescrOld = new SecProductDescrOld();
 	
 	@Validation
-	public ChecksTM validateAreInStateInitial(AppEcom appE) throws Exception {
+	public ChecksTM validateAreInStateInitial(AppEcom appE) {
 		ChecksTM checks = ChecksTM.getNew();
 		for (TypePanel typePanel : TypePanel.values()) {
 			TypeStatePanel stateExpected = TypeStatePanel.MISSING;

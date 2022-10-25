@@ -29,7 +29,7 @@ public class MenusUserWrapper extends PageBase {
 	private final SecCabecera secCabecera = SecCabecera.getNew(channel, app);
 //	private final SecMenuLateralDevice secMenuLateralMobil = new SecMenuLateralDevice();
 	
-	public boolean isMenuInState(UserMenu menu, State state) throws Exception {
+	public boolean isMenuInState(UserMenu menu, State state) {
 		return (isMenuInStateUntil(menu, state, 0));
 	}
 	

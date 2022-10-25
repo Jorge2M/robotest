@@ -36,7 +36,7 @@ public class SecMenusUserSteps extends StepBase {
 	@Step (
 		description="Seleccionar el menú de usuario \"Favoritos\"", 
 		expected="Aparece la página de gestión de favoritos con los artículos correctos")
-	public void selectFavoritos() throws Exception {
+	public void selectFavoritos() {
 		clickUserMenu(FAVORITOS);
 		PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
 		pageFavoritosSteps.validaIsPageOK();
@@ -46,7 +46,7 @@ public class SecMenusUserSteps extends StepBase {
 		description="Seleccionar el menú de usuario \"Regístrate\" y la pestaña \"Regístrate\"", 
 		expected="Aparece al página inicial del registro",
 		saveHtmlPage=SaveWhen.Always)
-	public void selectRegistrate() throws Exception {
+	public void selectRegistrate() {
 		clickUserMenu(REGISTRATE);
 		PageRegistroIniOutlet pageRegistroIni = new PageRegistroIniOutlet();  
 		pageRegistroIni.clickRegisterTab();
@@ -72,7 +72,7 @@ public class SecMenusUserSteps extends StepBase {
 	@Validation (
 		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
-	private boolean checkIsVisibleIniciarSesionLink(int seconds) throws Exception {
+	private boolean checkIsVisibleIniciarSesionLink(int seconds) {
 		return (userMenus.isMenuInStateUntil(INICIAR_SESION, Present, seconds));
 	}
 	
@@ -84,7 +84,7 @@ public class SecMenusUserSteps extends StepBase {
 	@Step (
 		description="Identificarse con los datos del registro (#{userConnect})", 
 		expected="La nueva identificación es correcta")
-	public void identification(String userConnect, String userPassword) throws Exception {
+	public void identification(String userConnect, String userPassword) {
 		new PageIdentificacion().iniciarSesion(userConnect, userPassword);
 		checkIsVisibleLinkCerrarSesion();
 		GenericChecks.checkDefault();
@@ -155,7 +155,7 @@ public class SecMenusUserSteps extends StepBase {
 			"Seleccionar el link \"Mango Likes You\"<br>" + 
 			"<b>info</b>: el usuario tiene " + TagPoints + " puntos", 
 		expected="Aparece la página de \"Mi cuenta\"")
-	public int clickMenuMangoLikesYou() throws Exception {
+	public int clickMenuMangoLikesYou() {
 		clickUserMenu(MANGO_LIKES_YOU);
 		PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps();
 		int numberPoints = pageHomeLikesSteps.checkIsPageOk().getNumberPoints();
@@ -167,7 +167,7 @@ public class SecMenusUserSteps extends StepBase {
 	}
 
 	@Validation
-	public ChecksTM checkVisibilityLinkMangoLikesYou() throws Exception {	
+	public ChecksTM checkVisibilityLinkMangoLikesYou() {	
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
 		if (channel==Channel.desktop && app==AppEcom.shop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
@@ -204,8 +204,7 @@ public class SecMenusUserSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM checkLoyaltyPoints(int initPoints, int donatedPoints, int finalPoints) 
-	throws Exception {
+	public ChecksTM checkLoyaltyPoints(int initPoints, int donatedPoints, int finalPoints) {
 		ChecksTM checks = ChecksTM.getNew();
  		int loyaltyPointsExpected = initPoints - donatedPoints;
  		
@@ -222,7 +221,7 @@ public class SecMenusUserSteps extends StepBase {
 	
 	@Step (
 		description="Hover sobre el link <b>Iniciar Sesión</b> o <b>Mi cuenta</b> para mostrar el menú de usuario")
-	public void hoverLinkForShowUserMenuDesktop() throws Exception {
+	public void hoverLinkForShowUserMenuDesktop() {
 		userMenus.hoverIconForShowUserMenuDesktopShop();
 	}
 	

@@ -22,7 +22,7 @@ public class Reg004 extends TestBase {
 	private final String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
 	private Map<String, String> dataRegister = new HashMap<>();
 
-	public Reg004(Pais pais, IdiomaPais idioma) throws Exception {
+	public Reg004(Pais pais, IdiomaPais idioma) {
 		super();
 		dataTest.setPais(pais);
 		dataTest.setIdioma(idioma);

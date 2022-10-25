@@ -9,11 +9,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.test.pageobject.manto.PageSelTda;
 import com.mng.robotest.test.pageobject.shop.PageJCAS;
 
-/**
- * Clase que implementa los diferentes steps/validations asociados asociados a la página de Login de Manto
- * @author jorge.munoz
- *
- */
+
 public class PageLoginMantoSteps {
 
 	public static void login(String urlManto, String usrManto, String passManto, WebDriver driver) throws Exception {
@@ -31,7 +27,7 @@ public class PageLoginMantoSteps {
 		expected=
 			"Aparece la página de selección de login o selección de tienda",
 		saveErrorData=SaveWhen.Never)
-	public static void goToMantoIfNotYet(String urlManto, WebDriver driver) throws Exception {
+	public static void goToMantoIfNotYet(String urlManto, WebDriver driver) {
 		String currentURL = driver.getCurrentUrl();
 		if (currentURL.compareTo(urlManto)!=0) {
 			driver.manage().deleteAllCookies();
@@ -43,7 +39,7 @@ public class PageLoginMantoSteps {
 		description="Identificarse desde la página de Jasig CAS con #{usrManto}",
 		expected="Aparece la página de selección de la tienda",
 		saveErrorData=SaveWhen.Never)
-	public static void identFromJasigCasPage(String usrManto, String passManto) throws Exception {
+	public static void identFromJasigCasPage(String usrManto, String passManto) {
 		new PageJCAS().identication(usrManto, passManto);
 	}
 

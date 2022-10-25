@@ -45,11 +45,11 @@ public class PageIdentificacion extends PageBase {
 		getElement(XPATH_INPUT_PASSWORD).sendKeys(password);
 	}
 
-	public void login(String user, String password) throws Exception {
+	public void login(String user, String password) {
 		iniciarSesion(user, password);
 	}
 	
-	public void logoff() throws Exception {
+	public void logoff() {
 		new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, Clickable);
 	}
 

@@ -53,7 +53,7 @@ public class PageGiropay1rstSteps extends StepBase {
 	@Step (
 		description="Pulsamos el botón para continuar con el Pago", 
 		expected="Aparece la página de Test de introducción de datos de Giropay")
-	public void clickButtonContinuePay() throws Exception {
+	public void clickButtonContinuePay() {
 		pageGiropay1rst.clickButtonContinuePay();
 		new PageGiropayInputBankSteps().checkIsPage();
 	}

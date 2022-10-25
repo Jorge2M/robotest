@@ -19,7 +19,7 @@ public class GenericFactory {
 	
 	@Factory
 	@Parameters({"countrys"})
-	public Object[] createInstances(String listaPaisesStr, ITestContext ctxTestRun) throws Exception {
+	public Object[] createInstances(String listaPaisesStr, ITestContext ctxTestRun) {
 		List<Object> listTests = new ArrayList<>();
 		try {
 			Suites suite = (Suites)TestMaker.getInputParamsSuite(ctxTestRun).getSuite();

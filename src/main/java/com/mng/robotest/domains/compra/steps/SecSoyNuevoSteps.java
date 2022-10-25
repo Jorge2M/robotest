@@ -20,9 +20,7 @@ public class SecSoyNuevoSteps extends StepBase {
 			"2. Introducimos el email <b>#{email}</b> (existente: <b>#{emailExistsYet}</b>)<br>" + 
 			"3. Seleccionamos \"Continuar\"", 
 		expected="Aparece la página de introducción de datos del usuario")
-	public void inputEmailAndContinue(
-			String email, boolean emailExistsYet, boolean userRegistered, Pais pais) throws Exception {
-		
+	public void inputEmailAndContinue(String email, boolean emailExistsYet, boolean userRegistered, Pais pais) {
 		secSoyNuevo.setCheckPubliNewsletter(ActionNewsL.DEACTIVATE);
 		secSoyNuevo.inputEmail(email);
 		secSoyNuevo.clickContinue();

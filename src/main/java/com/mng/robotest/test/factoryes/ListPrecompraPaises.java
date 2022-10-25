@@ -22,7 +22,7 @@ public class ListPrecompraPaises {
 	@SuppressWarnings("unused")
 	@Parameters({"countrys"})
 	@Factory
-	public Object[] createInstances(String countrys, ITestContext ctxTestRun) throws Exception {
+	public Object[] createInstances(String countrys, ITestContext ctxTestRun) {
 		List<Object> listTests = new ArrayList<>();
 		try {
 			InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);

@@ -41,7 +41,7 @@ public class PageGestorChequesSteps extends PageBase {
 		description="Introducimos el email <b>#{mail}</b> y damos click al botón \"Correo del cliente\"",
 		expected="Muestra los cheques asociados al mail correctamente",
 		saveErrorData=SaveWhen.Never)
-	public void inputMailAndClickCorreoCliente(String mail) throws Exception {
+	public void inputMailAndClickCorreoCliente(String mail) {
 		pageGestorCheques.inputMailAndClickCorreoReceptorButton(mail);
 		validateInitData(100, mail);
 	}
@@ -62,9 +62,8 @@ public class PageGestorChequesSteps extends PageBase {
 		description="Damos click al pedido de la #{numFila}a fila",
 		expected="Muestra la página de detalles del pedido",
 		saveErrorData=SaveWhen.Never)
-	public void clickPedido(int numFila, String mail) throws Exception {
-		String pedido;
-		pedido = pageGestorCheques.clickPedido(numFila, mail);
+	public void clickPedido(int numFila, String mail) {
+		String pedido = pageGestorCheques.clickPedido(numFila, mail);
 		validateDetailsCheques(pedido, mail);
 		validateDataFromCheque();
 	}
@@ -75,11 +74,14 @@ public class PageGestorChequesSteps extends PageBase {
 		checks.add(
 			"Aparece la página de" + PageGestorCheques.tituloDetalles,
 			pageGestorCheques.isPageDetalles(), State.Defect);
+		
 		checks.add(
 			"Como email del apartado \"Cheque número\" aparece" + mail,
 			pageGestorCheques.comprobarMailDetallesCheque(mail), State.Defect);
+		
 		checks.add("Como id del pedido aparece\"" + pedido  + "\"",
 			pageGestorCheques.comprobarPedidoDetallesCheque(pedido), State.Defect);
+		
 		return checks;
 	}
 
@@ -87,7 +89,7 @@ public class PageGestorChequesSteps extends PageBase {
 		description="Damos click a <b>Volver a cheques</b>",
 		expected="Muestra la página de información sobre los cheques",
 		saveErrorData=SaveWhen.Never)
-	public void volverCheques () throws Exception {
+	public void volverCheques () {
 		click(ButtonsCheque.VOLVER_CHEQUES.getBy()).exec();
 		validateButtons();
 	}
@@ -224,7 +226,7 @@ public class PageGestorChequesSteps extends PageBase {
 		description="Accedemos al numero de cheque",
 		expected="Aparece toda la información de dicho cheque pero no un email",
 		saveErrorData=SaveWhen.Never)
-	public void chequeDetails () throws Exception {
+	public void chequeDetails () {
 		click(ButtonsCheque.CHEQUE_DATA.getBy()).exec();
 		validateEmptyMail();
 		validateDataFromCheque();

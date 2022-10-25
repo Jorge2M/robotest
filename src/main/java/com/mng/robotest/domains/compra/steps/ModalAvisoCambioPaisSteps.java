@@ -22,7 +22,7 @@ public class ModalAvisoCambioPaisSteps extends StepBase {
 	}
 	
 	@Validation
-	private ChecksTM checkConfirmacionCambio(Pais paisEnvio) throws Exception {
+	private ChecksTM checkConfirmacionCambio(Pais paisEnvio) {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 10;
 	 	checks.add(

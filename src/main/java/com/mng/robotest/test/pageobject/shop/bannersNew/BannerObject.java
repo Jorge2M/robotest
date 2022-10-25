@@ -113,7 +113,7 @@ public abstract class BannerObject extends PageBase {
 		return this.bannerType;
 	}
 
-	public void clickBannerAndWaitLoad(DataBanner dataBanner) throws Exception {
+	public void clickBannerAndWaitLoad(DataBanner dataBanner) {
 		WebElement bannerWeb = dataBanner.getBannerWeb();
 		click(bannerWeb, driver).type(TypeClick.javascript).waitLoadPage(10).exec();
 	}

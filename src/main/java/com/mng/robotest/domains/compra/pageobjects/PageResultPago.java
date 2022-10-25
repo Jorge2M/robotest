@@ -43,7 +43,7 @@ public class PageResultPago extends PageBase {
 		click(XPATH_DESCUBRIR_LO_ULTIMO_BUTTON).exec();
 	}
 
-	public String getCodigoPedido(int seconds) throws Exception {
+	public String getCodigoPedido(int seconds) {
 		if (state(Present, XPATH_CODIGO_PEDIDO_ESTANDAR).wait(seconds).check()) {
 			return getElement(XPATH_CODIGO_PEDIDO_ESTANDAR).getText();
 		}

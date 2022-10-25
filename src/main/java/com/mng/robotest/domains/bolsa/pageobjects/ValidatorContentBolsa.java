@@ -22,7 +22,7 @@ public class ValidatorContentBolsa extends PageBase {
 		storeArticlesFromScreen();
 	}
 	
-	private void storeArticlesFromScreen() throws Exception {
+	private void storeArticlesFromScreen() {
 		linesArticlesInScreen.clear();
 		secBolsa.setBolsaToStateIfNotYet(StateBolsa.OPEN);
 		int numArticles = secBolsa.getLineasArtBolsa().getNumLinesArticles();

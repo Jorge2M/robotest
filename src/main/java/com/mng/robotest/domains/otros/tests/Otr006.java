@@ -1,4 +1,4 @@
-package com.mng.robotest.test.appshop.otras;
+package com.mng.robotest.domains.otros.tests;
 
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.steps.shop.modales.ModalChatBotSteps;

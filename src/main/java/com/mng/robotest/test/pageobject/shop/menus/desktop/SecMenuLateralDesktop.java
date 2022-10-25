@@ -58,7 +58,7 @@ public class SecMenuLateralDesktop extends PageBase {
 	/**
 	 * @return si es o no visible un menú lateral de 1er (menu2oNivel=null) o 2o nivel (menu2oNivel!=null)
 	 */
-	public boolean isVisibleMenu(MenuLateralDesktop menu) throws Exception {
+	public boolean isVisibleMenu(MenuLateralDesktop menu) {
 		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(pageGaleria);
 		secFiltros.showLateralMenus();

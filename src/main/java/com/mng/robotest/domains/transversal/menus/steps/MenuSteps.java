@@ -358,7 +358,7 @@ public class MenuSteps extends StepBase {
 		return checks;
 	}
 	
-	private boolean checkLinea(LineaType lineaType, ThreeState stateLinea) throws Exception {
+	private boolean checkLinea(LineaType lineaType, ThreeState stateLinea) {
 		if (lineaType.isActiveIn(channel)) {
 			if (stateLinea!=ThreeState.UNKNOWN) {
 				return true;

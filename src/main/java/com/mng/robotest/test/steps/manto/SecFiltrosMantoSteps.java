@@ -43,8 +43,7 @@ public class SecFiltrosMantoSteps {
 		expected="La búsqueda es correcta",
 		saveErrorData=SaveWhen.Never)
 	public void setFiltrosYbuscar(
-			DataPedido dataPedido, @SuppressWarnings("unused") TypeSearch typeSearch, LocalDate fechaDesde, LocalDate fechaHasta) 
-					throws Exception {
+			DataPedido dataPedido, TypeSearch typeSearch, LocalDate fechaDesde, LocalDate fechaHasta) {
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		step.replaceInDescription(TAG_NOMBRE_PAGO, dataPedido.getPago().getNombre());
 		step.replaceInDescription(TAG_LIT_TIENDA, SecCabecera.getLitTienda(secFiltros.driver));

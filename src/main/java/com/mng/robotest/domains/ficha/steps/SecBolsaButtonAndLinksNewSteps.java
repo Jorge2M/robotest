@@ -22,7 +22,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 	@Step (
 		description="Seleccionar el link <b>Envío gratis a tienda</b>",
 		expected="Aparece el modal con los datos a nivel de envío y devolución")
-	public void selectEnvioYDevoluciones() throws Exception {
+	public void selectEnvioYDevoluciones() {
 		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.ENVIO_GRATIS_TIENDA);
 		new ModEnvioYdevolNewSteps().checkIsVisible();
 	}
@@ -30,7 +30,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 	@Step (
 		description="Seleccionar el link <b>Detalle del producto</b>",
 		expected="Se scrolla hasta el apartado de \"Descripción\"")
-	public void selectDetalleDelProducto(LineaType lineaType) throws Exception {
+	public void selectDetalleDelProducto(LineaType lineaType) {
 		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.DETALLE_PRODUCTO);
 		checkScrollToDescription();
 		checkBreadCrumbs();
@@ -79,7 +79,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 	@Step (
 		description="Seleccionar el link <b>Compartir</b>",
 		expected="Aparece el modal para compartir el enlace")
-	public void selectLinkCompartir(String codigoPais) throws Exception {
+	public void selectLinkCompartir(String codigoPais) {
 		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.COMPARTIR);
 		checkAppearsModalShareSocial(codigoPais);
 	}

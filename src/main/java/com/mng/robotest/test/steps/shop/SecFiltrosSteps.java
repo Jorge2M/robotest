@@ -28,7 +28,7 @@ public class SecFiltrosSteps extends StepBase {
 		description="Seleccionar los colores <b>" + TAG_LIT_COLORS_TO_SELECT + "</b>", 
 		expected="Aparece la galería de imágenes",
 		saveNettraffic=SaveWhen.Always)
-	public int selectFiltroColores(List<Color> colorsToSelect, String litMenu) throws Exception {
+	public int selectFiltroColores(List<Color> colorsToSelect, String litMenu) {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_LIT_COLORS_TO_SELECT, Color.getListNamesFiltros(colorsToSelect).toString());
 		int numArticulos1page = secFiltros.selecFiltroColoresAndReturnNumArticles(colorsToSelect);			
 		checkAfterSelectFiltroColores(colorsToSelect, litMenu, numArticulos1page);
@@ -63,7 +63,7 @@ public class SecFiltrosSteps extends StepBase {
 		description="Seleccionar los menús <b>" + tagLitMenusToSelect + "</b>", 
 		expected="Aparece la galería de artículos",
 		saveNettraffic=SaveWhen.Always)
-	public void selectFiltroMenus(List<MenuLateralDesktop> menusToSelect) throws Exception {
+	public void selectFiltroMenus(List<MenuLateralDesktop> menusToSelect) {
 		List<String> listMenus = getListMenusStr(menusToSelect);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(tagLitMenusToSelect, StringUtils.join(menusToSelect, ","));
 		secFiltros.selectMenu2onLevel(listMenus);		

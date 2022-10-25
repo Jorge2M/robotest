@@ -103,7 +103,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		click(xpathButtonIdioma).type(TypeClick.javascript).exec();
 	}
 
-	public void inputPaisAndSelect(String nombrePais) throws Exception {
+	public void inputPaisAndSelect(String nombrePais) {
 		String codigoPais = getCodigoPais(nombrePais);
 		if (!channel.isDevice()) {
 			new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class[contains(.,'chosen-with-drop')]]")));
@@ -256,7 +256,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		}
 	}
 	
-	public void selecionIdiomaAndEnter() throws Exception { 
+	public void selecionIdiomaAndEnter() { 
 		if (pais.getListIdiomas().size() > 1) {
 			//Si el país tiene más de 1 idioma seleccionar el que nos llega como parámetro
 			seleccionaIdioma(pais.getNombre_pais(), idioma.getCodigo().getLiteral());

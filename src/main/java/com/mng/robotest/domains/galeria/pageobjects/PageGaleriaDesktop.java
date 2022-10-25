@@ -546,8 +546,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		}
 	}
 	
-	public void clickSliders(WebElement articulo, List<TypeSlider> typeSliderList)
-			throws Exception {
+	public void clickSliders(WebElement articulo, List<TypeSlider> typeSliderList) {
 		for (TypeSlider typeSlider : typeSliderList) {
 			clickSlider(articulo, typeSlider);
 		}
@@ -688,7 +687,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		}
 	}
 	
-	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) throws Exception {
+	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) {
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel);
 		secFiltros.makeFilters(Visibility.Invisible);
 		hearthIcon.click();

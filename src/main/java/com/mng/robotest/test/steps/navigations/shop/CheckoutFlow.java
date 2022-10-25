@@ -541,7 +541,7 @@ public class CheckoutFlow extends StepBase {
 			return dataPago;
 		}
 		
-		public CheckoutFlow build() throws Exception {
+		public CheckoutFlow build() {
 			return new CheckoutFlow(
 					getDataPago(), 
 					pago, 

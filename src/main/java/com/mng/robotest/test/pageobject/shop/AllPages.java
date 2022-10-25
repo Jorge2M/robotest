@@ -82,7 +82,7 @@ public class AllPages extends PageBase {
 	/**
 	 * Función para detectar elementos http maliciosos incrustados en el atributo 'src'
 	 */
-	public List<String> httpMalicious(ITestContext context, Pais pais) throws Exception {
+	public List<String> httpMalicious(ITestContext context, Pais pais) {
 		boolean malicious = true;
 		if (pais != null) {
 			List<String> paisesOK = new ArrayList<>();

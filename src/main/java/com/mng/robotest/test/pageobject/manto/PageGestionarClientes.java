@@ -82,12 +82,12 @@ public class PageGestionarClientes extends PageBase {
 		clickBuscarButtonAndWaitSeconds(waitSeconds);
 	}
 
-	public void inputDni(String dni) throws Exception {
-		driver.findElement(By.xpath(XPATH_INPUT_DNI)).sendKeys(dni);
+	public void inputDni(String dni) {
+		getElement(XPATH_INPUT_DNI).sendKeys(dni);
 	}
 	
-	public void clickBuscarButtonAndWaitSeconds(int waitSeconds) throws Exception {
-		driver.findElement(By.xpath(XPATH_BUSCAR_BUTTON)).click();
+	public void clickBuscarButtonAndWaitSeconds(int waitSeconds) {
+		getElement(XPATH_BUSCAR_BUTTON).click();
 	}
 
 	public boolean isVisibleTablaInformacion() {

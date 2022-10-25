@@ -167,7 +167,7 @@ public class PagePedidos extends PageBase {
 		driver.findElement(By.xpath(xpathLineaEnvTienda + "/td[" + posIdPedido + "]/a")).click();
 	}
 	
-	public String getTiendaFisicaFromListaPedidos() throws Exception {
+	public String getTiendaFisicaFromListaPedidos() {
 		clickPedidoWithTypeEnvio(Envio.TIENDA);
 		return (new PageDetallePedido().getTiendaIfExists());
 	}

@@ -90,8 +90,7 @@ public class Par001 extends TestBase {
 		return false;
 	}	
 	
-	private void clickMenuDependingLine(LineaType lineaType, SublineaType sublineaType) 
-			throws Exception {
+	private void clickMenuDependingLine(LineaType lineaType, SublineaType sublineaType) {
 		String menu = "";
 		GroupType groupType = GroupType.PRENDAS;
 		switch (lineaType) {

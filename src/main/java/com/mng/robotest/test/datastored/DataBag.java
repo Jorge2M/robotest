@@ -69,7 +69,7 @@ public class DataBag implements Serializable {
 		return this.listArticulos.get(index);
 	}
 	
-	public List<ArticuloScreen> getListArticlesTypeViewInBolsa() throws Exception {
+	public List<ArticuloScreen> getListArticlesTypeViewInBolsa() {
 		List<ArticuloScreen> listToReturn = new ArrayList<>();
 		ListIterator<ArticuloScreen> it = this.listArticulos.listIterator();
 		while (it.hasNext()) {

@@ -68,7 +68,7 @@ public class PageAssist1rst extends PageBase {
 		return inputsOk;
 	}
 	
-	public void inputDataPagoAndWaitSubmitAvailable(Pago pago) throws Exception {
+	public void inputDataPagoAndWaitSubmitAvailable(Pago pago) {
 		//Input data
 		if (channel.isDevice()) {
 			getElement(XPATH_INPUT_NUM_TRJ_MOVIL).sendKeys(pago.getNumtarj());

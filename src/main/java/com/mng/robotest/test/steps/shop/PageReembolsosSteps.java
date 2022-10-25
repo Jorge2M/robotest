@@ -53,7 +53,7 @@ public class PageReembolsosSteps extends StepBase {
 	 * @param webdriver
 	 * @param saldoEsperado saldo que validaremos exista en el apartado de "Saldo en cuenta" de la página de configuración del reembolso
 	 */
-	public void gotoRefundsFromMenuAndValidaSalCta(boolean paisConSaldoCta, float saldoCtaEsperado) throws Exception {
+	public void gotoRefundsFromMenuAndValidaSalCta(boolean paisConSaldoCta, float saldoCtaEsperado) {
 		gotoRefundsFromMenu(paisConSaldoCta);
 		checkIsOkSaldoEnCuenta(saldoCtaEsperado);
 	}

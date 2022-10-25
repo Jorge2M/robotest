@@ -68,7 +68,7 @@ public class PageGestionarClientesSteps {
 		description="Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"" + TagTypeButton + "\"",
 		expected="Aparece el mensaje correspondiente y el botón Alta",
 		saveErrorData=SaveWhen.Never)
-	public void clickThirdButton() throws Exception {
+	public void clickThirdButton() {
 		TypeThirdButton typeButton = pageGestionarClientes.getTypeThirdButton();	
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagTypeButton, typeButton.toString());
 		pageGestionarClientes.clickThirdButtonAndWaitSeconds(typeButton, 3);   
@@ -95,11 +95,9 @@ public class PageGestionarClientesSteps {
 		description="Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"Detalles\"",
 		expected="Muestra los detalles del cliente correctamente",
 		saveErrorData=SaveWhen.Never)
-	public void clickDetallesButton(String dni) throws Exception {
-		String idCliente;
-		int waitSeconds = 3;
-		idCliente = pageGestionarClientes.getIdClienteTablaFromDni(dni);
-		pageGestionarClientes.clickDetallesButtonAndWaitSeconds(waitSeconds);	
+	public void clickDetallesButton(String dni) {
+		String idCliente = pageGestionarClientes.getIdClienteTablaFromDni(dni);
+		pageGestionarClientes.clickDetallesButtonAndWaitSeconds(3);	
 		checkAfterClickDetalles(dni, idCliente);
 	}
 	

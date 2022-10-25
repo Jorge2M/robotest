@@ -81,7 +81,7 @@ public class CheckerSEO extends PageBase implements Checker {
 		return listaErrorsInHtmlFormat;
 	}
 	
-	private List<String> validaCanonical(WebDriver driver) throws Exception {
+	private List<String> validaCanonical(WebDriver driver) {
 		List<String> listaErrorsInHtmlFormat = new ArrayList<>();
 		if (!new AllPages().isPresentTagCanonical()) {
 			//El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha

@@ -14,7 +14,7 @@ public class Bus001 extends TestBase {
 	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
 	private final PageHomeMarcasSteps pageHomeMarcasSteps = new PageHomeMarcasSteps();
 	
-	public Bus001(String categoriaProdExistente, String catProdInexistente) throws Exception {
+	public Bus001(String categoriaProdExistente, String catProdInexistente) {
 		super();
 		this.categoriaProdExistente = categoriaProdExistente;
 		this.catProdInexistente = catProdInexistente;

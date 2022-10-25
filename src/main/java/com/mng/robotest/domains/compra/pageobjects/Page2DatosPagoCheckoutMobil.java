@@ -117,7 +117,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		return state(Clickable, XPATH_BUTTON_FINALIZAR_COMPRA).wait(seconds).check();
 	}
 
-	public void waitAndClickFinalizarCompra(int seconds) throws Exception {
+	public void waitAndClickFinalizarCompra(int seconds) {
 		isClickableButtonFinalizarCompraUntil(seconds);
 		clickButtonFinalizarCompra();
 		
@@ -314,7 +314,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		return state(Present, XPATH_ARTICLE_BOLSA).check();
 	}
 
-	public void confirmarPagoFromMetodos() throws Exception {
+	public void confirmarPagoFromMetodos() {
 		clickButtonFinalizarCompra();
 	}
 	
@@ -326,7 +326,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 	
 
-	public void clickFinalizarCompraAndWait(int seconds) throws Exception {
+	public void clickFinalizarCompraAndWait(int seconds) {
 		clickButtonFinalizarCompra();
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
@@ -339,7 +339,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		new PageRedirectPasarelaLoading().isPageNotVisibleUntil(seconds);
 	}
 	
-	public String getPrecioTotalFromResumen(boolean normalize) throws Exception {
+	public String getPrecioTotalFromResumen(boolean normalize) {
 		String precioTotal = "";
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 		precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPATH_PRECIO_TOTAL);
@@ -349,7 +349,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		return ImporteScreen.normalizeImportFromScreen(precioTotal);
 	}
 	
-	public String getCroaciaPrecioTotalInEuros(boolean normalize) throws Exception {
+	public String getCroaciaPrecioTotalInEuros(boolean normalize) {
 		String precioTotal = "";
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 		precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPATH_PRECIO_TOTAL_CROATIA_EUROS);

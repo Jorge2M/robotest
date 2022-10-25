@@ -84,8 +84,7 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 		description="@rewritable",
 		expected="Aparece la página de introducción de datos del niño o la de datos de la dirección (según se podían o no seleccionar niños)")
 	public void setDataAndLineasRandom(
-			String fechaNacimiento, boolean paisConNinos, int numNinos, Map<String,String> dataRegistroOK) 
-					throws Exception {
+			String fechaNacimiento, boolean paisConNinos, int numNinos, Map<String,String> dataRegistroOK) {
 		String tagListaRandom = "@lineasRandom";
 		String stepDescription = 
 			"Introducir datos adicionales y pulsar \"Continue\" si no existen niños: <br>" +

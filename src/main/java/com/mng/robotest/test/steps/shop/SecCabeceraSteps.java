@@ -20,7 +20,7 @@ public class SecCabeceraSteps extends StepBase {
 	@Step (
 		description="Seleccionar el logo de Mango", 
 		expected="Se accede a la página principal de la línea")
-	public void selecLogo() throws Exception {
+	public void selecLogo() {
 		secCabecera.clickLogoMango();
 	}
 
@@ -43,7 +43,7 @@ public class SecCabeceraSteps extends StepBase {
 	@Step (
 		description="Establecer con visibilidad #{setVisible} el menú izquierdo de móvil",
 		expected="El menú lateral se establece con visibilidad #{setVisible}")
-	public void setVisibilityLeftMenuMobil(boolean setVisible) throws Exception {
+	public void setVisibilityLeftMenuMobil(boolean setVisible) {
 		secCabecera.clickIconoMenuHamburguerMobil(setVisible);
 	}
 }

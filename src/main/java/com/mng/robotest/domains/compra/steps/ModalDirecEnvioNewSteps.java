@@ -42,7 +42,7 @@ public class ModalDirecEnvioNewSteps extends StepBase {
 	@Step (
 		description="Clickar el botón <b>Eliminar</b>", 
 		expected="Aparece el modal de confirmación de la eliminación")
-	public void clickEliminarButton() throws Exception {
+	public void clickEliminarButton() {
 		modalDirecEnvio.clickRemoveButton();
 		checkIsModalConfirmacionEliminar();
 	}

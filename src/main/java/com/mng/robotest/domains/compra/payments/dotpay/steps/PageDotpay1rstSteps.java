@@ -51,7 +51,7 @@ public class PageDotpay1rstSteps extends StepBase {
 	@Step (
 		description="Seleccionar el link hacia el Pago", 
 		expected="Aparece la página de selección del canal de pago")
-	public void clickToPay(String importeTotal, String codPais) throws Exception {
+	public void clickToPay(String importeTotal, String codPais) {
 		pageDotpay1rst.clickToPay();
 		new PageDotpayPaymentChannelSteps().validateIsPage(importeTotal, codPais);
 	}

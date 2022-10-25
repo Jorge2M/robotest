@@ -47,7 +47,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	@Step(
 		description="Seleccionamos el link <b>Añadir bordado</b>",
 		expected="Aparece el modal para la personalización de la prenda")
-	public void selectLinkPersonalizacion () throws Exception {
+	public void selectLinkPersonalizacion () {
 		click(ModalElement.ANADIR_BORDADO_LINK.getBy(channel)).type(javascript).exec();
 		validateModal();
 		GenericChecks.checkDefault();
@@ -172,7 +172,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	@Step(
 		description="Seleccionamos el botón \"Confirmar\"",
 		expected="Aparece el apartado 4 de la personalización")
-	public void selectSize () throws Exception {
+	public void selectSize () {
 		click(getBotonSiguienteVisible()).exec();
 		validateSizeList(2);
 	}
@@ -187,7 +187,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	@Step(
 		description="Seleccionamos el botón \"Siguiente\"",
 		expected="Aparece el modal con las opciones para ver la bolsa o seguir comprando")
-	public void confirmCustomization() throws Exception {
+	public void confirmCustomization() {
 		click(getBotonSiguienteVisible()).exec();
 		validateAddBag(2);
 	}

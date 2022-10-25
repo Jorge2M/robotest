@@ -4,11 +4,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
 
-	private static String XPATH_WRAPPER_VISA = "//div[@class='ui-card__wrapper']";
-	private static String XPATH_WRAPPER_VISA_ACTIVE = XPATH_WRAPPER_VISA + "//div[@class[contains(.,'ui-card__brand-debvisa')]]";
-	private static String XPATH_NEXT_BUTTON = "//button[@id[contains(.,'next')]]";
-	private static String XPATH_BACK_BUTTON = "//button[@id[contains(.,'back')]]";
-	private static String XPATH_BUTTON_NEXT_PAY = "//button[@id='submit' and @class[contains(.,'submit-arrow')]]";
+	private static final String XPATH_WRAPPER_VISA = "//div[@class='ui-card__wrapper']";
+	private static final String XPATH_WRAPPER_VISA_ACTIVE = XPATH_WRAPPER_VISA + "//div[@class[contains(.,'ui-card__brand-debvisa')]]";
+	private static final String XPATH_NEXT_BUTTON = "//button[@id[contains(.,'next')]]";
+	private static final String XPATH_BACK_BUTTON = "//button[@id[contains(.,'back')]]";
+	private static final String XPATH_BUTTON_NEXT_PAY = "//button[@id='submit' and @class[contains(.,'submit-arrow')]]";
 	
 	@Override
 	public boolean isPageUntil(int seconds) {

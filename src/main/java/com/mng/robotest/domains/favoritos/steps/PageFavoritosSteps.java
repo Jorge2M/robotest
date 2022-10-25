@@ -36,7 +36,7 @@ public class PageFavoritosSteps extends StepBase {
 		return checks;
 	}
 	
-	public void clear(ArticuloScreen articulo) throws Exception {
+	public void clear(ArticuloScreen articulo) {
 		dataTest.getDataFavoritos().removeArticulo(articulo);
 		clear(articulo.getReferencia(), articulo.getCodigoColor());
 	}
@@ -104,7 +104,7 @@ public class PageFavoritosSteps extends StepBase {
 	@Step (
 		description="Eliminamos de Favoritos los posibles artículos existentes",
 		expected="No queda ningún artículo en Favoritos")
-	public void clearAll() throws Exception {
+	public void clearAll() {
 		dataTest.getDataFavoritos().clear();
 		pageFavoritos.clearAllArticulos();
 		checkFavoritosWithoutArticles();

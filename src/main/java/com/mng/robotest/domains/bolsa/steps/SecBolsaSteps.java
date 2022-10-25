@@ -52,7 +52,7 @@ public class SecBolsaSteps extends StepBase {
 	@Step (
 		description="Cerrar la bolsa", 
 		expected="Se cierra la bolsa")
-	public void closeInMobil() throws Exception {
+	public void closeInMobil() {
 		secBolsa.closeInMobil();
 		checkBolsaDisappears(3);
 	}
@@ -67,7 +67,7 @@ public class SecBolsaSteps extends StepBase {
 	@Step (
 		description="Mediante click o hover conseguir que la bolsa quede en estado #{stateBolsaExpected}", 
 		expected="La bolsa queda en estado #{stateBolsaExpected}")
-	public void forceStateBolsaTo(StateBolsa stateBolsaExpected) throws Exception {
+	public void forceStateBolsaTo(StateBolsa stateBolsaExpected) {
 		secBolsa.setBolsaToStateIfNotYet(stateBolsaExpected);
 		validateBolsaInState(stateBolsaExpected, 1);
 	}
@@ -104,7 +104,7 @@ public class SecBolsaSteps extends StepBase {
 		description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + TAG_LISTA_ART,
 		expected="Los productos se dan de alta en la bolsa correctamente",
 		saveNettraffic=SaveWhen.Always)
-	public void altaBolsaArticulos(List<GarmentCatalog> listParaAlta) throws Exception {
+	public void altaBolsaArticulos(List<GarmentCatalog> listParaAlta) {
 		includeListaArtInTestCaseDescription(listParaAlta);
 		for (int i=0; i<listParaAlta.size(); i++) {
 			GarmentCatalog artTmp = listParaAlta.get(i);
@@ -265,7 +265,7 @@ public class SecBolsaSteps extends StepBase {
 		}
 	}
 
-	public void click1erArticuloBolsa() throws Exception {
+	public void click1erArticuloBolsa() {
 		ArticuloScreen articuloClickado = dataTest.getDataBag().getArticulo(0);
 		clickArticuloBolsa(articuloClickado);
 	}

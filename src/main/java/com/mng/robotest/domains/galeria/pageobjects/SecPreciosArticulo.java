@@ -57,7 +57,7 @@ public class SecPreciosArticulo extends PageBase {
 		return state(Present, articulo).by(byPrecioRebajado).check();
 	}
 
-	public List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) throws Exception {
+	public List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) {
 		List<WebElement> listPrecios = new ArrayList<WebElement>();
 		waitLoadPage();
 		for (WebElement articulo : listArticles) {

@@ -11,7 +11,7 @@ public class PopupFindAddress extends PageBase {
 	private static final String XPATH_BUTTON_LUPA = "//button[@class='btn_search']";
 	private static final String XPATH_LINK_DIRECC = "//button[@class='link_post']";
 	
-	public String goToPopupAndWait(String mainWindowHandle, int seconds) throws Exception { 
+	public String goToPopupAndWait(String mainWindowHandle, int seconds) { 
 		String popupBuscador = switchToAnotherWindow(driver, mainWindowHandle);
 		try {
 			isIFrameUntil(seconds);

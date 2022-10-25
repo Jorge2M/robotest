@@ -21,7 +21,7 @@ public class Fav001 extends TestBase {
 	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 	
-	public Fav001(Pais pais, IdiomaPais idioma) throws Exception {
+	public Fav001(Pais pais, IdiomaPais idioma) {
 		super();
 		dataTest.setPais(pais);
 		dataTest.setIdioma(idioma);

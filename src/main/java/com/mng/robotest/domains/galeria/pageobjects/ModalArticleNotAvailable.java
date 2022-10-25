@@ -10,7 +10,7 @@ public class ModalArticleNotAvailable extends PageBase {
 	private static final String XPATH_MODAL = "//div[@id='bocataAvisame']";
 	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_MODAL + "//div[@class[contains(.,'botonCerrarAvisame')]]";
 	
-	public boolean inStateUntil(StateModal stateModal, int seconds) throws Exception {
+	public boolean inStateUntil(StateModal stateModal, int seconds) {
 		switch (stateModal) {
 		case visible:
 			return isVisibleUntil(seconds);

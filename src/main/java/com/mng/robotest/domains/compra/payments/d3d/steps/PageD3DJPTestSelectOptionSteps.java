@@ -30,7 +30,7 @@ public class PageD3DJPTestSelectOptionSteps extends StepBase {
 	@Step (
 		description="Seleccionamos la opción \"Successful\" y clickamos en el botón \"Submit\"", 
 		expected="Aparece la página de resultado OK")
-	public void clickSubmitButton() throws Exception {
+	public void clickSubmitButton() {
 		pageD3DJPTestSelectOption.selectOption(OptionD3D.SUCCESSFUL);
 		pageD3DJPTestSelectOption.clickSubmitButton();
 	}

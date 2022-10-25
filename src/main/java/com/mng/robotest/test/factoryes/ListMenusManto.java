@@ -71,12 +71,9 @@ public class ListMenusManto {
 		return listMenuNames;
 	}
 	
-	private void goToMantoLoginAndSelectTienda(/*String urlManto, */String usrManto, String passManto, WebDriver driver) 
-	throws Exception {
+	private void goToMantoLoginAndSelectTienda(String usrManto, String passManto, WebDriver driver) {
 		String codigoEspanya = "001";
 		String almacenEspanya = "001";
-//		driver.manage().deleteAllCookies();
-//		driver.get(urlManto);
 		new PageJCAS().identication(usrManto, passManto);
 		TiendaManto tienda = TiendaManto.getTienda(almacenEspanya, codigoEspanya, AppEcom.shop);
 		if (!PageSelTda.isPage(driver)) {

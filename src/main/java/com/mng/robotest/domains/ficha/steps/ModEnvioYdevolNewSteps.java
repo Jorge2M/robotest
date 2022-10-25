@@ -21,7 +21,7 @@ public class ModEnvioYdevolNewSteps extends StepBase {
 	@Step (
 		description="Seleccionar el aspa para cerrar el modal de \"Envío y devolución\"",
 		expected="Desaparece el modal")
-	public void clickAspaForClose() throws Exception {
+	public void clickAspaForClose() {
 		modEnvioYdev.clickAspaForClose();
 		checkIsVisibleModalDatosEnvio();
 	}

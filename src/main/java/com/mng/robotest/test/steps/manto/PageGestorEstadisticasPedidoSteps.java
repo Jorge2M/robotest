@@ -15,7 +15,7 @@ public class PageGestorEstadisticasPedidoSteps {
 	public static ChecksTM validateIsPage(WebDriver driver) {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
-			"Estamos en la página " + PageGestorEstadisticasPedido.titulo,
+			"Estamos en la página " + PageGestorEstadisticasPedido.TITULO,
 			PageGestorEstadisticasPedido.isPage(driver), State.Defect);
 	 	checks.add(
 			"Aparece el input de fecha de inicio",

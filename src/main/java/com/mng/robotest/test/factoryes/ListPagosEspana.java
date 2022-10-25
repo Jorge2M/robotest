@@ -19,18 +19,17 @@ public class ListPagosEspana implements Serializable {
 	
 	private static final long serialVersionUID = 6058455886676687127L;
 	
-	Pais espana = null;
-	IdiomaPais castellano = null;
-	Pais francia = null;
-	IdiomaPais frances = null;
-	Pais USA = null;
+	private Pais espana = null;
+	private IdiomaPais castellano = null;
+	private Pais francia = null;
+	private IdiomaPais frances = null;
 	
-	final boolean usrReg = true;
-	final boolean empleado = true;
-	final boolean testVale = true;
-	final boolean manyArticles = true;
-	final boolean twoArticles = true;
-	final boolean anulPedido = true;
+	private static final boolean USR_REG = true;
+	private static final boolean EMPLEADO = true;
+	private static final boolean TEST_VALE = true;
+	private static final boolean MANY_ARTICLES = true;
+	private static final boolean TWO_ARTICLES = true;
+	private static final boolean ANUL_PEDIDO = true;
 	
 	@Factory(
 		  groups={"Compra", "Canal:all_App:all"}, 
@@ -56,7 +55,7 @@ public class ListPagosEspana implements Serializable {
 				createTestPagosVotf(listTests, appE, channel, ctx);
 			}
 		}
-		catch (Throwable e) {
+		catch (Exception e) {
 			throw e;
 		}
 	
@@ -68,7 +67,6 @@ public class ListPagosEspana implements Serializable {
 		this.francia = PaisGetter.get(PaisShop.FRANCE);
 		this.castellano = espana.getListIdiomas().get(0);
 		this.frances = francia.getListIdiomas().get(0);
-		this.USA = PaisGetter.get(PaisShop.USA);
 	}
 	
 	private void createTestPagosEspana(List<Object> listTests, AppEcom app, Channel channel, ITestContext ctx) {
@@ -80,11 +78,11 @@ public class ListPagosEspana implements Serializable {
 			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx)) {
 				if (pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
 					if ("VISA".compareTo(pago.getNombre())==0) {
-						createTestPago(listTests, espana, castellano, pago, app, channel, !usrReg, !empleado, testVale, manyArticles, !anulPedido, prioridad);
-						createTestPago(listTests, espana, castellano, pago, app, channel, usrReg, !empleado, !testVale, !manyArticles, !anulPedido, prioridad);
-						createTestPago(listTests, espana, castellano, pago, app, channel, usrReg, empleado, !testVale, !manyArticles, !anulPedido, prioridad);
+						createTestPago(listTests, espana, castellano, pago, app, channel, !USR_REG, !EMPLEADO, TEST_VALE, MANY_ARTICLES, !ANUL_PEDIDO, prioridad);
+						createTestPago(listTests, espana, castellano, pago, app, channel, USR_REG, !EMPLEADO, !TEST_VALE, !MANY_ARTICLES, !ANUL_PEDIDO, prioridad);
+						createTestPago(listTests, espana, castellano, pago, app, channel, USR_REG, EMPLEADO, !TEST_VALE, !MANY_ARTICLES, !ANUL_PEDIDO, prioridad);
 					} else {
-						createTestPago(listTests, espana, castellano, pago, app, channel, usrRegIntermitente, !empleado, !testVale, !manyArticles, !anulPedido, prioridad);
+						createTestPago(listTests, espana, castellano, pago, app, channel, usrRegIntermitente, !EMPLEADO, !TEST_VALE, !MANY_ARTICLES, !ANUL_PEDIDO, prioridad);
 						usrRegIntermitente=!usrRegIntermitente; //Iremos alternando entre usr registrado y no-registrado
 					}
 					
@@ -101,7 +99,7 @@ public class ListPagosEspana implements Serializable {
 			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx)) {
 				if (pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
 					if ("VISA".compareTo(pago.getNombre())==0) {
-						createTestPago(listTests, francia, frances, pago, app, channel, !usrReg, !empleado, !testVale, !twoArticles, anulPedido, 1);
+						createTestPago(listTests, francia, frances, pago, app, channel, !USR_REG, !EMPLEADO, !TEST_VALE, !TWO_ARTICLES, ANUL_PEDIDO, 1);
 						break;
 					}
 				}
@@ -114,7 +112,7 @@ public class ListPagosEspana implements Serializable {
 		for (Pago pago : listPagosToTest) {
 			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx)) {
 				if (pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
-					createTestPago(listTests, espana, castellano, pago, app, channel, !usrReg, !empleado, !testVale, twoArticles, !anulPedido, 1);
+					createTestPago(listTests, espana, castellano, pago, app, channel, !USR_REG, !EMPLEADO, !TEST_VALE, TWO_ARTICLES, !ANUL_PEDIDO, 1);
 					break;
 				}
 			}

@@ -33,7 +33,7 @@ public class PageYandexPayingByCodeSteps extends StepBase {
 	@Step (
 		description="Seleccionamos el botón para volver a Mango", 
 		expected="Aparece la página Mango de resultado OK del pago")
-	public void clickBackToMango() throws Exception {
+	public void clickBackToMango() {
 		new PageYandexPayingByCode().clickBackToMango();
 	}
 }

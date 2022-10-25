@@ -56,7 +56,7 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		description="Seleccionamos en el desplegable la opción <b>PreProduccion</b>",
 		expected="Aparecen los diferentes indicadores de secciones",
 		saveErrorData = SaveWhen.Never)
-	private void selectPreProduccion() throws Exception {
+	private void selectPreProduccion() {
 		select(Orden.desplegableTiendas.getBy(), "shop.org.pre.mango.com").type(Value).exec();
 		click(Orden.verTiendas.getBy()).exec();
 		validatePreProductionElements();
@@ -84,7 +84,7 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		description="Seleccionamos la seccion de <b>She</b>",
 		expected="Podemos seleccionar que queremos realizar",
 		saveErrorData = SaveWhen.Never)
-	private void selectShe() throws Exception {
+	private void selectShe() {
 		click(Section.She.getBy()).waitLoadPage(3).exec();
 		validateSectionShe(13);
 	}
@@ -121,9 +121,8 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		description="Seleccionamos <b>Camisas</b> en el desplegable de tipo de prenda y confirmamos nuestra seleccion",
 		expected="Aparecen fotos en pantalla",
 		saveErrorData = SaveWhen.Never)
-	private void selectTipoPrenda() throws Exception {
+	private void selectTipoPrenda() {
 		select(Orden.selectorPrendas.getBy(), "camisas_she").type(Value).exec();
-//	  Thread.sleep(100);
 		click(Orden.verPrendas.getBy()).waitLink(2).exec();
 		validateTipoPrenda();
 	}
@@ -146,7 +145,7 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		description="Enviamos la primera prenda al final",
 		expected="La prenda ha cambiado",
 		saveErrorData = SaveWhen.Never)
-	private void bajarPrenda() throws Exception {
+	private void bajarPrenda() {
 		click(Orden.primeraPrenda.getBy()).exec();
 		moveToElement(Orden.bajarPrenda.getBy());
 		click(Orden.bajarPrenda.getBy()).waitLink(3).exec();
@@ -196,7 +195,7 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		description="Aplicamos el nuevo orden a las prendas",
 		expected="Se despliega el modal de la ordenacion de predas",
 		saveErrorData = SaveWhen.Never)
-	private void aceptarOrdenPais() throws Exception {
+	private void aceptarOrdenPais() {
 		click(Modal.applyCountry.getBy()).waitLoadPage(3).exec();
 		validateBajarPrenda(10);
 	}

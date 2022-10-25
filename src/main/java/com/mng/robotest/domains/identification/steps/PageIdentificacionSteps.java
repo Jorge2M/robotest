@@ -12,7 +12,7 @@ public class PageIdentificacionSteps extends StepBase {
 	@Step (
 		description="Seleccionar el link 'Iniciar Sesión' e introducir credenciales incorrectas: <b>#{usrExistente}, #{password}</b>",
 		expected="Aparece el correspondiente mensaje de error")
-	public void inicioSesionDatosKO(String usrExistente, String password) throws Exception {
+	public void inicioSesionDatosKO(String usrExistente, String password) {
 		new PageIdentificacion().iniciarSesion(usrExistente, password);
 		checkTextoCredencialesKO();
 		GenericChecks.checkDefault();	

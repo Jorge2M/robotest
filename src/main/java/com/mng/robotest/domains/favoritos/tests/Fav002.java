@@ -23,7 +23,7 @@ public class Fav002 extends TestBase {
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 	
-	public Fav002(Pais pais, IdiomaPais idioma) throws Exception {
+	public Fav002(Pais pais, IdiomaPais idioma) {
 		super();
 		dataTest.setPais(pais);
 		dataTest.setIdioma(idioma);
@@ -47,7 +47,7 @@ public class Fav002 extends TestBase {
 		pageFavoritosSteps.clearAll();
 	}	
 
-	private void goToGaleryAndSelectArticle() throws Exception {
+	private void goToGaleryAndSelectArticle() {
 		if (app==AppEcom.outlet) {
 			clickMenu("Vestidos");
 		} else {
@@ -60,7 +60,7 @@ public class Fav002 extends TestBase {
 		pageGaleriaSteps.selectArticulo(article1);
 	}	
 
-	private void clickFavoritesInFicha() throws Exception {
+	private void clickFavoritesInFicha() {
 		PageFichaSteps pageFichaArtStpv = new PageFichaSteps();
 		pageFichaArtStpv.selectAnadirAFavoritos();
 	}	
@@ -76,7 +76,7 @@ public class Fav002 extends TestBase {
 		pageFavoritosSteps.closeShareModal();
 	}	
 	
-	private void selectFirstFavoriteAndAddBolsa() throws Exception {
+	private void selectFirstFavoriteAndAddBolsa() {
 		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		pageFavoritosSteps.clickArticuloImg(firstFavorite);
 		

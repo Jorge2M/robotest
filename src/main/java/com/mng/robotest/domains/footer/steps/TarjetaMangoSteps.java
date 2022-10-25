@@ -13,7 +13,7 @@ public class TarjetaMangoSteps extends StepBase {
 
 	private final PageInputDataSolMangoCard pageInputDataSolMangoCard = new PageInputDataSolMangoCard();
 	
-	public void checkSolicitarTarjeta () throws Exception {
+	public void checkSolicitarTarjeta () {
 		selectLoQuieroAhoraButton();
 	}
 	 

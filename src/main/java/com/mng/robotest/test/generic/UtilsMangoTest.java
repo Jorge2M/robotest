@@ -153,7 +153,7 @@ public class UtilsMangoTest extends PageBase {
 		PageObjTM.waitForPageLoaded(driver, 5);
 	}
 	
-	public boolean validarLinea(Pais pais, Linea linea) throws Exception {
+	public boolean validarLinea(Pais pais, Linea linea) {
 		if (!linea.isActiveIn(channel)) {
 			return false;
 		}

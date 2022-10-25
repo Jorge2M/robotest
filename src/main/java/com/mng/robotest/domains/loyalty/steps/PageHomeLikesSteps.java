@@ -38,7 +38,7 @@ public class PageHomeLikesSteps extends StepBase {
 	@Step(
 		description="Seleccionar el link \"Compra un descuento\"",
 		expected="Aparece la página de \"Compra con descuento\"")
-	public void clickOpcionCompraUnDescuento() throws Exception {
+	public void clickOpcionCompraUnDescuento() {
 		pageHomeLikes.clickButton(ButtonUseLikes.COMPRA_CON_DESCUENTO);
 		new PageHomePurchaseWithDiscountSteps()
 			.checkHomePurchaseWithDiscountPageOk();

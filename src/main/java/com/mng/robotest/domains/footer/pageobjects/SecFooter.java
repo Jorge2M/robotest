@@ -114,7 +114,7 @@ public class SecFooter extends PageBase {
 		return state(Present, getXPathCapaFooter()).check();
 	}
 	
-	public boolean isVisible() throws Exception {
+	public boolean isVisible() {
 		waitLoadPage();
 		return state(Visible, getXPathCapaFooter()).check();
 	}	
@@ -128,7 +128,7 @@ public class SecFooter extends PageBase {
 		click(xpathLink).exec();
 	}
 	
-	public String clickLinkAndGetWindowFatherHandle(FooterLink footerType) throws Exception {
+	public String clickLinkAndGetWindowFatherHandle(FooterLink footerType) {
 		clickLink(footerType);
 		String windowFatherHandle = driver.getWindowHandle();
 		if (footerType.pageInNewTab) {

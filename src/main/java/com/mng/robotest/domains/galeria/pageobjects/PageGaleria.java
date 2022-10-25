@@ -591,7 +591,7 @@ public abstract class PageGaleria extends PageBase {
 		return numTotalArticles;
 	}
 
-	private void goToLastPage() throws Exception {
+	private void goToLastPage() {
 		goToPage(99);
 	}
 

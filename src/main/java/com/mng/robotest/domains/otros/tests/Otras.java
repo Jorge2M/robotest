@@ -1,4 +1,4 @@
-package com.mng.robotest.test.appshop.otras;
+package com.mng.robotest.domains.otros.tests;
 
 import org.testng.annotations.*;
 

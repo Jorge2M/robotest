@@ -131,7 +131,7 @@ public class SeoSteps extends StepBase {
 	}
 
 	@Validation
-	private static ChecksTM checkResultUrlSitemal(WebDriver driver) throws Exception {
+	private static ChecksTM checkResultUrlSitemal(WebDriver driver) {
 		ChecksTM checks = ChecksTM.getNew();
 		PageSitemap pageSitemap = new PageSitemap();
 		boolean sitemapOk = pageSitemap.isCorrect();

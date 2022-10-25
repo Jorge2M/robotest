@@ -20,7 +20,7 @@ public class PageOtpPaymayaSteps {
 	@Step(
 		description="Introducimos el otp (<b>#{otp}</b>) y pulsamos \"Proceed\"",
 		expected="Aparece la página de resultado de paymaya")
-	public PageResultPaymayaSteps proceed(String otp) throws Exception {
+	public PageResultPaymayaSteps proceed(String otp) {
 		pageOtpPaymaya.proceed(otp);
 		PageResultPaymayaSteps pageResultPaymayaSteps = new PageResultPaymayaSteps();
 		pageResultPaymayaSteps.checkPage();

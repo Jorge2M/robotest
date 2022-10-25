@@ -25,7 +25,7 @@ public class Com009 extends TestBase {
 	private final ModalDirecEnvioNewSteps modalDirecEnvioSteps = new ModalDirecEnvioNewSteps();
     private final CompraSteps compraSteps = new CompraSteps();
 
-    public Com009(Pais pais, IdiomaPais idioma) throws Exception {
+    public Com009(Pais pais, IdiomaPais idioma) {
     	if (pais!=null) {
     		dataTest.setPais(pais);
     		dataTest.setIdioma(idioma);

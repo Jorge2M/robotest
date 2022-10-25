@@ -96,7 +96,7 @@ public class SecSelectDPoint extends PageBase {
 		return getDataDeliveryPointSelected();
 	}
 
-	public DataDeliveryPoint getDataDeliveryPointSelected() throws Exception {
+	public DataDeliveryPoint getDataDeliveryPointSelected() {
 		DataDeliveryPoint dataDp = new DataDeliveryPoint();
 		waitLoadPage(); //For avoid StaleElementReferenceException
 		WebElement dpSelected = getDeliveryPointSelected();

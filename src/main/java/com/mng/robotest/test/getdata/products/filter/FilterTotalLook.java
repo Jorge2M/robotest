@@ -51,7 +51,7 @@ public class FilterTotalLook implements Filter {
 		return Optional.empty();
 	}
 	
-	private GarmentDetails getTotalLookGarment(GarmentCatalog product) throws Exception {
+	private GarmentDetails getTotalLookGarment(GarmentCatalog product) {
 		WebTarget webTarget = getWebTargetTotalLookGarment(product);
 		Builder builder = webTarget
 				.request(MediaType.APPLICATION_JSON)

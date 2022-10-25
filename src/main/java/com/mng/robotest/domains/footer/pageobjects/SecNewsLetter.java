@@ -29,7 +29,7 @@ public class SecNewsLetter extends PageBase {
 		return getNewsLetterMsgText().contains(literal);
 	}
 
-	public void clickFooterSuscripcion() throws Exception {
+	public void clickFooterSuscripcion() {
 		new ModalClubMangoLikes().closeModalIfVisible();
 		SecFooter secFooter = new SecFooter();
 		secFooter.moveTo();

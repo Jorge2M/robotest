@@ -37,7 +37,7 @@ public class PageTrustpayTestConfirmSteps extends StepBase {
 	@Step (
 		description="Seleccionar el botón para continuar con el pago", 
 		expected="El pago se completa correctamente")
-	public void clickButtonOK() throws Exception {
+	public void clickButtonOK() {
 		pageTrustpayTestConfirm.clickButton(typeButtons.OK);
 	}
 }

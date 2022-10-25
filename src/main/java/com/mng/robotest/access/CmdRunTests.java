@@ -34,7 +34,7 @@ public class CmdRunTests {
 		TestMaker.execSuite(executor, false);
 	}
 
-	public static List<TestMethod> getDataTestAnnotationsToExec(InputParamsMango inputParams) throws Exception {
+	public static List<TestMethod> getDataTestAnnotationsToExec(InputParamsMango inputParams) {
 		Suites suiteValue = (Suites)inputParams.getSuite();
 		switch (suiteValue) {
 		case SmokeTest:

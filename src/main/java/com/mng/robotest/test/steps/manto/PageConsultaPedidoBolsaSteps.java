@@ -25,8 +25,7 @@ public class PageConsultaPedidoBolsaSteps extends StepBase {
 		expected="Aparece la página de detalle de #{typeDetalle} correcta",
 		saveImagePage=SaveWhen.Always,
 		saveErrorData=SaveWhen.Never)
-	public void detalleFromListaPedBol(DataPedido dataPedido, TypeDetalle typeDetalle) 
-			throws Exception {
+	public void detalleFromListaPedBol(DataPedido dataPedido, TypeDetalle typeDetalle) {
 		new PagePedidos().clickLinkPedidoInLineas(dataPedido.getCodigoPedidoManto(), typeDetalle);
 		validacionesTotalesPedido(dataPedido, typeDetalle);
 	}

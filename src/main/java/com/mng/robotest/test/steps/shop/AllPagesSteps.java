@@ -17,7 +17,7 @@ import com.mng.robotest.test.pageobject.shop.AllPages;
 public class AllPagesSteps extends StepBase {
 
 	@Validation
-	public ChecksTM validatePageWithFooter() throws Exception {
+	public ChecksTM validatePageWithFooter() {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el footer",
@@ -43,7 +43,7 @@ public class AllPagesSteps extends StepBase {
 	@Step (
 		description="Realizamos un <b>back</b> del navegador", 
 		expected="Se vuelve a la página anterior")
-	public void backNagegador() throws Exception {
+	public void backNagegador() {
 		driver.navigate().back();
 		int seconds = 10;
 		PageObjTM.waitForPageLoaded(driver, seconds);

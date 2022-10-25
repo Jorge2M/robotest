@@ -110,7 +110,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 		return state(Visible, ConsultaSaldo.VALIDAR.getBy()).wait(seconds).check();
 	}
 	
-	public void introducirCvc(String cvvNumber) throws Exception {
+	public void introducirCvc(String cvvNumber) {
 		WebElement cvvTarjeta = driver.findElement(ConsultaSaldo.CVV_TARJETA.getBy());
 		cvvTarjeta.clear();
 		cvvTarjeta.sendKeys(cvvNumber);

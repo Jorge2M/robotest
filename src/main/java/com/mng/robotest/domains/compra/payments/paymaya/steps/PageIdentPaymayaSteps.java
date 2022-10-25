@@ -23,7 +23,7 @@ public class PageIdentPaymayaSteps extends PageBase {
 			"Introducimos las credenciales del usuario PayMaya (<b>#{user}/#{password}</b>) y pulsamos \"Entrar\"",
 		expected=
 			"Aparece la página de introducción del otp")
-	public PageOtpPaymayaSteps login(String user, String password) throws Exception {
+	public PageOtpPaymayaSteps login(String user, String password) {
 		pageIdentPaymaya.login(user, password);
 		PageOtpPaymayaSteps pageOtpPaymayaSteps = new PageOtpPaymayaSteps();
 		pageOtpPaymayaSteps.checkPage();

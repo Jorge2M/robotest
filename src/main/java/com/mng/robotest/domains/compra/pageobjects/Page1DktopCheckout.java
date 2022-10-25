@@ -250,7 +250,7 @@ public class Page1DktopCheckout extends PageBase {
 			clickAplicarPromo();
 		}
 	}
-	public boolean isVisibleInputCodigoPromoUntil(int seconds) throws Exception {
+	public boolean isVisibleInputCodigoPromoUntil(int seconds) {
 		return state(Visible, XPATH_INPUT_PROMO).wait(seconds).check();
 	}
 
@@ -375,7 +375,7 @@ public class Page1DktopCheckout extends PageBase {
 		return getElement(XPATH_RED_ERROR).getText();
 	}	
 	
-	public String getPrecioTotalFromResumen(boolean normalize) throws Exception {
+	public String getPrecioTotalFromResumen(boolean normalize) {
 		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XPATH_PRECIO_TOTAL);
 		if (!normalize) {
 			return precioTotal;
@@ -383,7 +383,7 @@ public class Page1DktopCheckout extends PageBase {
 		return (ImporteScreen.normalizeImportFromScreen(precioTotal));
 	}
 	
-	public String getCroaciaPrecioTotalInEuros(boolean normalize) throws Exception {
+	public String getCroaciaPrecioTotalInEuros(boolean normalize) {
 		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XPATH_PRECIO_TOTAL_CROATIA_EUROS);
 		if (!normalize) {
 			return precioTotal;
@@ -449,7 +449,7 @@ public class Page1DktopCheckout extends PageBase {
 		return true;
 	}
 	
-	public String getPrecioSubTotalFromResumen() throws Exception {
+	public String getPrecioSubTotalFromResumen() {
 		return new PageCheckoutWrapper().formateaPrecioTotal(XPATH_PRECIO_SUBTOTAL);
 	}
 	
@@ -537,7 +537,7 @@ public class Page1DktopCheckout extends PageBase {
 	 * Función que, partiendo de la página con los métodos de pago del checkout, realiza la confirmación del pago
 	 * (Simplemente selecciona "Confirmar pago")
 	 */
-	public void confirmarPagoFromMetodos() throws Exception {
+	public void confirmarPagoFromMetodos() {
 		clickConfirmarPago();
 	}
 

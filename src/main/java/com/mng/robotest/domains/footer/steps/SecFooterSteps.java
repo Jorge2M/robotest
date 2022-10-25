@@ -20,7 +20,7 @@ public class SecFooterSteps extends StepBase {
 	private final SecFooter secFooter = new SecFooter();
 	
 	@Validation 
-	public ChecksTM validaLinksFooter() throws Exception { 
+	public ChecksTM validaLinksFooter() { 
 		ChecksTM checks = ChecksTM.getNew();
 		for (FooterLink footerLink : FooterLink.getFooterLinksFiltered(app, channel)) {
 			checks.add(
