@@ -9,6 +9,8 @@ import com.mng.robotest.test.beans.Pais;
 
 public class Utilidades {
 
+	private Utilidades() {}
+	
 	/**
 	 * Get the lines to test
 	 * @param lineasParam list of lines, comma separated

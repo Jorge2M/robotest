@@ -28,7 +28,7 @@ public class CookiesCheckerTest {
 		var checker = new CookiesChecker(allowedCookies, new ArrayList<Pattern>());
 		var notAllowedCookies = checker.getNotAllowedCookies(pageCookies);
 		
-		assertTrue(notAllowedCookies.size()==2);
+		assertEquals(2, notAllowedCookies.size());
 		
 		List<String> notAllowedNames = Arrays.asList(
 				notAllowedCookies.get(0).getName(),
@@ -50,7 +50,7 @@ public class CookiesCheckerTest {
 		var checker = new CookiesChecker(allowedCookies, whiteList);
 		var notAllowedCookies = checker.getNotAllowedCookies(pageCookies);
 		
-		assertTrue(notAllowedCookies.size()==1);
+		assertEquals(1, notAllowedCookies.size());
 		assertTrue(notAllowedCookies.get(0).getName().contains("Cookie52"));
 	}	
 	
@@ -64,7 +64,7 @@ public class CookiesCheckerTest {
 		var checker = new CookiesChecker(allowedCookies, new ArrayList<Pattern>());
 		var notAllowedCookies = checker.getNotAllowedCookies(pageCookies);
 		
-		assertTrue(notAllowedCookies.size()==0);
+		assertEquals(0, notAllowedCookies.size());
 	}
 	
 	private List<Cookie> mockAllowedCookies(List<String> cookies) {

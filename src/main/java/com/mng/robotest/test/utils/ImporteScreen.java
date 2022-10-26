@@ -13,6 +13,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ImporteScreen {
 	
+	private ImporteScreen() {}
+	
 	public static String normalizeImportFromScreen(String screenImport) {
 		String impToReturn = screenImport.replaceAll("[^\\d.,]", "");
 		
@@ -116,7 +118,7 @@ public class ImporteScreen {
 	
 	private static List<String> getPosibleLitImportInScreen(String importe, String codPais) {
 		//Posibles importes a nivel General
-		List<String> listOfImports = new ArrayList<String>();
+		List<String> listOfImports = new ArrayList<>();
 		listOfImports.add(importe);
 		if (importe.contains(".")) {
 			listOfImports.add(importe.replace(".", ","));

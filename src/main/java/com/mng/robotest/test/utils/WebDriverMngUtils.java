@@ -11,6 +11,8 @@ import com.mng.robotest.test.generic.stackTrace;
 
 public class WebDriverMngUtils {
 	
+	private WebDriverMngUtils() {}
+	
 	/**
 	 * Cargamos el errorPage y de allí extraemos el nodo
 	 */

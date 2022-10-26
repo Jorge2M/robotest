@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class UtilsPageGaleria {
 	
+	private UtilsPageGaleria() {}
+	
 	public static String getCodColorFromSrcImg(String srcImagenColor) {
 		String codColor = "";
 		Pattern pattern = Pattern.compile("_(.*?)-(.*?)_(.*?).jpg");

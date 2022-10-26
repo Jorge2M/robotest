@@ -8,6 +8,8 @@ import com.mng.robotest.access.InputParamsMango;
 
 public class UtilsData {
 
+	private UtilsData() {}
+	
 	public static String getNameCloudTest() {
 		try {
 			String initialURL = ((InputParamsMango)TestMaker.getInputParamsSuite()).getUrlBase();

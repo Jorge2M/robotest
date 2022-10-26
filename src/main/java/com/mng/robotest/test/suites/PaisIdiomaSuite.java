@@ -2,6 +2,8 @@ package com.mng.robotest.test.suites;
 
 import static com.mng.robotest.test.suites.SuiteMakerResources.getParametersSuiteShop;
 
+import java.io.Serializable;
+
 import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.github.jorge2m.testmaker.domain.SuiteMaker;
@@ -10,7 +12,9 @@ import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.ErrorStorer;
 import com.mng.robotest.test.factoryes.LineasBannersFactory;
 
-public class PaisIdiomaSuite extends SuiteMaker {
+public class PaisIdiomaSuite extends SuiteMaker implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	public enum VersionPaisSuite implements FlagsNaviationLineas {
 		V1(true, false, false, false),

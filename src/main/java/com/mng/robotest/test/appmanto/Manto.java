@@ -190,8 +190,10 @@ public class Manto {
 		PageLoginMantoSteps.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		new PageSelTdaMantoSteps().selectTienda(almacenEspanya, codigoEspanya);
 		new PageMenusMantoSteps().goToGestorEstadisticasPedido();
-		PageGestorEstadisticasPedidoSteps.searchZalandoOrdersInformation(driver);
-		PageGestorEstadisticasPedidoSteps.compareLastDayInformation(driver);
+		
+		var pageGestorEstadisticasPedidoSteps = new PageGestorEstadisticasPedidoSteps();
+		pageGestorEstadisticasPedidoSteps.searchZalandoOrdersInformation();
+		pageGestorEstadisticasPedidoSteps.compareLastDayInformation();
 	}
 	
 //	@Test(
@@ -221,8 +223,10 @@ public class Manto {
 		PageLoginMantoSteps.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
 		new PageSelTdaMantoSteps().selectTienda(almacenEspanya, codigoEspanya);
 		new PageMenusMantoSteps().goToGestorConsultaCambioFamilia();
-		PageGestorConsultaCambioFamiliaSteps.selectAccesoriosAndClickConsultaPorFamiliaButton(driver);
-		PageGestorConsultaCambioFamiliaSteps.clickCambioFamiliaButton(driver);
+		
+		var pageGestorConsultaCambioFamiliaSteps = new PageGestorConsultaCambioFamiliaSteps();
+		pageGestorConsultaCambioFamiliaSteps.selectAccesoriosAndClickConsultaPorFamiliaButton();
+		pageGestorConsultaCambioFamiliaSteps.clickCambioFamiliaButton();
 	}
 	
 	@Test(

@@ -86,7 +86,7 @@ public class AccesoNavigations extends StepBase {
 		}
 	}
 	
-	public void cambioPais(Pais newPais, IdiomaPais newIdioma) throws Exception {
+	public void cambioPais(Pais newPais, IdiomaPais newIdioma) {
 		if (channel.isDevice() && app==AppEcom.outlet) {
 			new SecMenusUserSteps().cambioPaisMobil(newPais, newIdioma);
 		} else {

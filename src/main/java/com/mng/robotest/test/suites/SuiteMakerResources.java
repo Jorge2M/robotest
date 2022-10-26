@@ -13,6 +13,8 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 public class SuiteMakerResources {
 	
+	private SuiteMakerResources() {}
+	
 	public static Map<String,String> getParametersSuiteShop(InputParamsMango params) {
 		Map<String,String> parametersReturn = new HashMap<>();
 		

@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.loyalty.tests;
 
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.List;
 
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.compra.tests.CompraSteps;
@@ -15,6 +15,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
+
 
 public class Loy001 extends TestBase {
 
@@ -61,7 +62,7 @@ public class Loy001 extends TestBase {
 		return dataPago;
 	}
 
-	private void checkPedidosManto(CopyOnWriteArrayList<DataPedido> pedidos) throws Exception {
+	private void checkPedidosManto(List<DataPedido> pedidos) throws Exception {
 		new CompraSteps().checkPedidosManto(pedidos);
 	}
 }

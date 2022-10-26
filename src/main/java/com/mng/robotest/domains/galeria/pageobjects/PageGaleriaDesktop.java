@@ -439,7 +439,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	public List<String> getArticlesTemporadaXWithLiteralInLabel(List<Integer> temporadasX, List<LabelArticle> listLabels) {
-		List<String> dataTextArticles = new ArrayList<String>();
+		List<String> dataTextArticles = new ArrayList<>();
 	   	for (LabelArticle label : listLabels) {
 	   		String xpathLit = getXPathDataArticuloTemporadaXWithLabel(temporadasX, label);
 			dataTextArticles.addAll(getDataFromArticlesLiteral(xpathLit));
@@ -448,7 +448,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private List<String> getDataFromArticlesLiteral(String xpathLiteralArticle) {
-		List<String> dataTextArticles = new ArrayList<String>();
+		List<String> dataTextArticles = new ArrayList<>();
 		for (WebElement litWebEl : getElements(xpathLiteralArticle)) {
 			String referencia = litWebEl.getAttribute("id").replaceAll("_info", "");
 			dataTextArticles.add(litWebEl.getText() + " (" + referencia + ")");

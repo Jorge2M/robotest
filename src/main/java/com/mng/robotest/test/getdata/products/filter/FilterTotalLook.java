@@ -72,7 +72,7 @@ public class FilterTotalLook implements Filter {
 				return null;
 			}
 		} else {
-			Log4jTM.getLogger().warn(String.format("Problem in call to %s. Status response %s", webTarget.getUri(), response.getStatus()));
+			Log4jTM.getLogger().warn(() -> String.format("Problem in call to %s. Status response %s", webTarget.getUri(), response.getStatus()));
 			return null;
 		}
 

@@ -248,7 +248,7 @@ public class SecBolsaSteps extends StepBase {
 		description="Se selecciona el botón \"COMPRAR\" de la bolsa", 
 		expected="Se muestra la página de identificación",
 		saveNettraffic=SaveWhen.Always)
-	public void selectButtonComprar() throws Exception {
+	public void selectButtonComprar() {
 		secBolsa.clickBotonComprar(10);
 		validaSelectButtonComprar();
 		GenericChecks.checkDefault();

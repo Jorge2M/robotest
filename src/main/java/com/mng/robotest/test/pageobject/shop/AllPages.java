@@ -104,7 +104,7 @@ public class AllPages extends PageBase {
 				if (isMaliciousHttp(context, tagHttp)) {
 					String src = tagHttp.getAttribute("src");
 					listaHttpMalicious.add(driver.getCurrentUrl() + ". <br><b>Http malicious!</b> " + ".id:" + tagHttp.getAttribute("id") + ",src:" + src);
-					Log4jTM.getLogger().warn(
+					Log4jTM.getLogger().warn(() ->
 							driver.getCurrentUrl() + ". Http malicious! " + 
 							", id:" + tagHttp.getAttribute("id") + 
 							", src:" + src);

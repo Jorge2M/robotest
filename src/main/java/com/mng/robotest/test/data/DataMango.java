@@ -5,9 +5,8 @@ import java.sql.Timestamp;
 
 public class DataMango {
 	
-	/**
-	 * @return un email único gracias a la inclusión de un timestamp
-	 */
+	private DataMango() {}
+	
 	public static String getEmailNonExistentTimestamp() {
 		java.util.Date date = new java.util.Date();
 		String timestamp =  new Timestamp(date.getTime()).toString().trim()

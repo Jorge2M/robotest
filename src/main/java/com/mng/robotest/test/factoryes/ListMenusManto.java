@@ -29,7 +29,7 @@ public class ListMenusManto {
 	@Factory
 	public Object[] createInstances(ITestContext ctxTestRun) throws Exception {
 		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
-		List<Menus> listTests = new ArrayList<Menus>();
+		List<Menus> listTests = new ArrayList<>();
 		AppEcom appEcom = (AppEcom)inputData.getApp();
 		try {
 			List<String> listCabeceraMenus = getListCabecerasMenus(inputData.getUrlBase(), ctxTestRun);

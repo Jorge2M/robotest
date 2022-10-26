@@ -170,7 +170,7 @@ public class CheckerImgsBroken implements Checker {
 	
 							// Siempre pintaremos el mensaje de warning en el caso de prueba y en la consola
 							listaImgBroken.add(driver.getCurrentUrl() + descError);
-							Log4jTM.getLogger().warn(driver.getCurrentUrl() + descError);
+							Log4jTM.getLogger().warn(() -> driver.getCurrentUrl() + descError);
 						}
 						else {
 							Log4jTM.getLogger().warn("Imagen con SRC {} y status OK (2xx) pero con tamaño nulo en la página {} and id {}", currentImageUrl, i, imageId);

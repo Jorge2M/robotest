@@ -58,7 +58,7 @@ public class SecPreciosArticulo extends PageBase {
 	}
 
 	public List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) {
-		List<WebElement> listPrecios = new ArrayList<WebElement>();
+		List<WebElement> listPrecios = new ArrayList<>();
 		waitLoadPage();
 		for (WebElement articulo : listArticles) {
 			//WebElement precio = getElementVisible(articulo, By.xpath("." + XPathPrecioDefinitivoRelativeArticle));

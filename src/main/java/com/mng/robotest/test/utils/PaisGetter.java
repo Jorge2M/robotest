@@ -19,6 +19,8 @@ import com.mng.robotest.test.data.PaisShop;
 
 public class PaisGetter {
 	
+	private PaisGetter() {}
+	
 	private static final String NameFileCountiesXml = "ListCountries.xml";
 	private static final List<Pais> listAllCountries = getListAllCountries();
 	private static final List<String> charactersAllCountries = Arrays.asList("*", "X", "");

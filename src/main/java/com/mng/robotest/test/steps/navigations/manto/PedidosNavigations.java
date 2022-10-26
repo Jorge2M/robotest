@@ -1,7 +1,7 @@
 package com.mng.robotest.test.steps.navigations.manto;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CopyOnWriteArrayList;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
@@ -29,8 +29,8 @@ import com.mng.robotest.test.steps.manto.SecFiltrosMantoSteps.TypeSearch;
 
 public class PedidosNavigations {
 
-	public static void testPedidosEnManto(CopyOnWriteArrayList<DataPedido> listPedidos, AppEcom appE, WebDriver driver)
-	throws Exception {
+	public static void testPedidosEnManto(List<DataPedido> listPedidos, AppEcom appE, WebDriver driver)
+			throws Exception {
 		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
 		if (appE!=AppEcom.votf) {  
 			TestCaseTM testCase = getTestCase();
@@ -52,7 +52,7 @@ public class PedidosNavigations {
 		return testCaseOpt.get();
 	}
 	
-	private static void testPedidosEnManto(DataMantoAccess dMantoAcc, CopyOnWriteArrayList<DataPedido> listPedidos, WebDriver driver) 
+	private static void testPedidosEnManto(DataMantoAccess dMantoAcc, List<DataPedido> listPedidos, WebDriver driver) 
 	throws Exception {
 		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		if (typeAccess==TypeAccess.Bat) {
@@ -70,7 +70,7 @@ public class PedidosNavigations {
 	 * Partiendo de la página de menús, ejecutamos todos los pasos/validaciones para validar una lista de pedidos
 	 * @param listPaisPedido lista de pedidos a validar
 	 */
-	public static void validacionListaPagosStepss(CopyOnWriteArrayList<DataPedido> listDataPedidos, AppEcom appE, WebDriver driver) 
+	public static void validacionListaPagosStepss(List<DataPedido> listDataPedidos, AppEcom appE, WebDriver driver) 
 	throws Exception {
 		//Bucle para obtener la lista de Países -> Pedidos
 		for (DataPedido dataPedido : listDataPedidos) {

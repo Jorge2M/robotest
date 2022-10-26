@@ -89,7 +89,7 @@ public class Com009 extends TestBase {
         modalDirecEnvioSteps.inputDataAndEdit(directionEdit);
 	}
 
-	private void addDireccion(DirectionData directionSecondary) throws Exception {
+	private void addDireccion(DirectionData directionSecondary) {
 		new CheckoutSteps().clickEditarDirecEnvio();
     	modalMultidirectionSteps.checkInitialContent();
     	addAnotherDireccion(directionSecondary);

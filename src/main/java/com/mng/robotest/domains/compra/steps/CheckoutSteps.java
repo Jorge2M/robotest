@@ -42,6 +42,7 @@ public class CheckoutSteps extends StepBase {
 	private final Page1EnvioCheckoutMobilSteps page1MobilCheckSteps = new Page1EnvioCheckoutMobilSteps();
 	private final SecIdealSteps secIdealSteps = new SecIdealSteps();
 	private final SecTarjetaPciSteps secTarjetaPciSteps = new SecTarjetaPciSteps();
+	private final PageRedirectPasarelaLoadingSteps pageRedirectPasarelaLoadingSteps = new PageRedirectPasarelaLoadingSteps();
 	
 	public PageCheckoutWrapper getPageCheckoutWrapper() {
 		return pageCheckoutWrapper;
@@ -311,7 +312,7 @@ public class CheckoutSteps extends StepBase {
 		}
 
 		pageCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
-		PageRedirectPasarelaLoadingSteps.validateDisappeared(5, driver);
+		pageRedirectPasarelaLoadingSteps.validateDisappeared(5);
 		GenericChecks.checkDefault();
 	}
 
@@ -329,7 +330,7 @@ public class CheckoutSteps extends StepBase {
 		pageCheckoutWrapper.clickRadioTrjGuardada();
 		pageCheckoutWrapper.inputCvcTrjGuardadaIfVisible(cvc);
 		pageCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
-		PageRedirectPasarelaLoadingSteps.validateDisappeared(5, driver);
+		pageRedirectPasarelaLoadingSteps.validateDisappeared(5);
 	}
 
 	@Step (
@@ -367,7 +368,7 @@ public class CheckoutSteps extends StepBase {
 			Log4jTM.getLogger().warn("Problem in click Confirm payment button", e);
 		}
 							
-		PageRedirectPasarelaLoadingSteps.validateDisappeared(5, driver);
+		pageRedirectPasarelaLoadingSteps.validateDisappeared(5);
 	}	
 	
 	private static final String TAG_TARJETA = "@TagTarjeta";

@@ -1,13 +1,11 @@
 package com.mng.robotest.test.pageobject.manto;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageGestorEstadisticasPedido {
+public class PageGestorEstadisticasPedido extends PageBase {
 
 	public static final String TITULO = "ESTADISTICAS PEDIDOS";
 	private static final String INI_XPATH_TITULO = "//td[@class='txt11B' and text()[contains(.,'";
@@ -21,83 +19,80 @@ public class PageGestorEstadisticasPedido {
 	private static final String XPATH_RADIUS_BUTTON_DIA_ANTERIOR = "//label[text()[contains(.,'Dia Anterior')]]/../input[@type='radio']";
 	private static final String XPATH_COMPARAR_BUTTON = "//input[@id='form:comparar']";
 
-	public static String getXPathTitulo(String title) {
+	public String getXPathTitulo(String title) {
 		return (INI_XPATH_TITULO + title + "')]]");
 	}
 
-	public static String getXPathColumnaCompararVerde(String tabla){
+	public String getXPathColumnaCompararVerde(String tabla){
 		return (tabla + "//tr[1]//td[@class='colum5' and text()[contains(.,'0 €')]][1]");
 	}
 
-	public static String getXPathColumnaCompararRoja(String tabla){
+	public String getXPathColumnaCompararRoja(String tabla){
 		return (tabla + "//tr[1]//td[@class='colum6' and text()='0 %'][1]");
 	}
 
-	public static boolean isPage(WebDriver driver) {
-		String xpath = getXPathTitulo(TITULO);
-		return (state(Present, By.xpath(xpath), driver).check());
+	public boolean isPage() {
+		return state(Present, getXPathTitulo(TITULO)).check();
 	}
 
-	public static boolean isVisibleStartDateInput(WebDriver driver) {
-		return (state(Visible, By.xpath(XPATH_START_DATE), driver).check());
+	public boolean isVisibleStartDateInput() {
+		return state(Visible, XPATH_START_DATE).check();
 	}
 	
-	public static boolean isVisibleEndDateInput(WebDriver driver) {
-		return (state(Visible, By.xpath(XPATH_END_DATE), driver).check());
+	public boolean isVisibleEndDateInput() {
+		return state(Visible, XPATH_END_DATE).check();
 	}
 
-	public static void selectZalandoAndClickShowOrdersButton(WebDriver driver) {
-		selectTodosLosZalandos(driver);
-		clickMostrarPedidosButton(driver);
+	public void selectZalandoAndClickShowOrdersButton() {
+		selectTodosLosZalandos();
+		clickMostrarPedidosButton();
 	}
 
-	private static void selectTodosLosZalandos(WebDriver driver) {
-		driver.findElement(By.xpath(XPATH_SELECT_OPTION)).click();
-		driver.findElement(By.xpath(XPATH_TODOS_LOS_ZALANDOS_OPTION)).click();
+	private void selectTodosLosZalandos() {
+		click(XPATH_SELECT_OPTION).exec();
+		click(XPATH_TODOS_LOS_ZALANDOS_OPTION).exec();
 	}
 	
-	private static void clickMostrarPedidosButton(WebDriver driver) {
-		click(By.xpath(XPATH_MOSTRAR_PEDIDOS_BUTTON), driver).waitLoadPage(60).exec();
-		state(Invisible, By.xpath(XPATH_LOAD_POPUP_IMAGE), driver)
-				.wait(60).check();
+	private void clickMostrarPedidosButton() {
+		click(XPATH_MOSTRAR_PEDIDOS_BUTTON).waitLoadPage(60).exec();
+		state(Invisible, XPATH_LOAD_POPUP_IMAGE).wait(60).check();
 	}
 
-	public static boolean isTablaInformacionVisible(WebDriver driver) {
-		return (state(Visible, By.xpath(XPATH_TABLA_INFORMACION), driver).check());
+	public boolean isTablaInformacionVisible() {
+		return state(Visible, XPATH_TABLA_INFORMACION).check();
 	}
 
-	public static boolean isColumnaCompararVerdeZero(WebDriver driver) {
+	public boolean isColumnaCompararVerdeZero() {
 		String xpath = getXPathColumnaCompararVerde(XPATH_TABLA_INFORMACION);
-		return (state(Present, By.xpath(xpath), driver).check());
+		return state(Present, xpath).check();
 	}
 	
-	public static boolean isColumnaCompararRojoZero(WebDriver driver) {
+	public boolean isColumnaCompararRojoZero() {
 		String xpath = getXPathColumnaCompararRoja(XPATH_TABLA_INFORMACION);
-		return (state(Present, By.xpath(xpath), driver).check());
+		return state(Present, xpath).check();
 	}
 
-	public static void selectDiaAnteriorAndClickCompararButton(WebDriver driver) {
-		selectDiaAnteriorRadius(driver);
-		clickCompararButton(driver);
+	public void selectDiaAnteriorAndClickCompararButton() {
+		selectDiaAnteriorRadius();
+		clickCompararButton();
 	}
 
-	private static void selectDiaAnteriorRadius(WebDriver driver) {
-		driver.findElement(By.xpath(XPATH_RADIUS_BUTTON_DIA_ANTERIOR)).click();
+	private void selectDiaAnteriorRadius() {
+		click(XPATH_RADIUS_BUTTON_DIA_ANTERIOR).exec();
 	}
 	
-	private static void clickCompararButton(WebDriver driver) {
-		click(By.xpath(XPATH_COMPARAR_BUTTON), driver).waitLoadPage(60).exec();
-		state(Invisible, By.xpath(XPATH_LOAD_POPUP_IMAGE), driver)
-			.wait(60).check();
+	private void clickCompararButton() {
+		click(XPATH_COMPARAR_BUTTON).waitLoadPage(60).exec();
+		state(Invisible, XPATH_LOAD_POPUP_IMAGE).wait(60).check();
 	}
 
-	public static boolean isColumnaCompararVerdeNoZero(WebDriver driver) {
+	public boolean isColumnaCompararVerdeNoZero() {
 		String xpath = getXPathColumnaCompararVerde(XPATH_TABLA_INFORMACION);
-		return (!state(Present, By.xpath(xpath), driver).check());
+		return !state(Present, xpath).check();
 	}
 
-	public static boolean isColumnaCompararRojaNoZero(WebDriver driver) {
+	public boolean isColumnaCompararRojaNoZero() {
 		String xpath = getXPathColumnaCompararRoja(XPATH_TABLA_INFORMACION);
-		return (!state(Present, By.xpath(xpath), driver).check());
+		return !state(Present, xpath).check();
 	}
 }

@@ -2,7 +2,6 @@ package com.mng.robotest.domains.compra.tests;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ClickElement;
 import com.mng.robotest.domains.compra.payments.FactoryPagos;
@@ -26,7 +25,7 @@ public class CompraSteps extends StepBase {
 		pagoSteps.startPayment(executePayment);
 	}
 	
-	public void checkPedidosManto(CopyOnWriteArrayList<DataPedido> listPedidos) throws Exception {
+	public void checkPedidosManto(List<DataPedido> listPedidos) throws Exception {
 		List<CheckPedido> listChecks = Arrays.asList(
 			CheckPedido.CONSULTAR_BOLSA, 
 			CheckPedido.CONSULTAR_PEDIDO);
@@ -34,7 +33,7 @@ public class CompraSteps extends StepBase {
 		checkPedidosManto(listChecks, listPedidos);
 	}
 	
-	public void checkPedidosManto(List<CheckPedido> listChecks, CopyOnWriteArrayList<DataPedido> listPedidos) 
+	public void checkPedidosManto(List<CheckPedido> listChecks, List<DataPedido> listPedidos) 
 			throws Exception {
 		DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(listPedidos, listChecks);
 		PedidoNavigations.testPedidosEnManto(checksPedidos, app, driver);

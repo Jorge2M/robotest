@@ -9,6 +9,8 @@ import com.mng.robotest.test.pageobject.shop.modales.ModalBuscadorTiendas;
 
 public class FactoryPageFromFooter {
 	
+	private FactoryPageFromFooter() {}
+	
 	public static PageFromFooter make(FooterLink typeFooterLink) {
 		switch (typeFooterLink) {
 		case AYUDA:

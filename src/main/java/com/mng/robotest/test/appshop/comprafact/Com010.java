@@ -66,7 +66,7 @@ public class Com010 extends TestBase {
 			.checkout(From.BOLSA);
 		
 		if (dataPago.getFTCkout().checkManto) {
-			List<CheckPedido> listChecks = new ArrayList<CheckPedido>(Arrays.asList(
+			List<CheckPedido> listChecks = new ArrayList<>(Arrays.asList(
 				CheckPedido.CONSULTAR_BOLSA, 
 				CheckPedido.CONSULTAR_PEDIDO));
 			if (checkAnulaPedido) {

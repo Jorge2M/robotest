@@ -1,6 +1,7 @@
 package com.mng.robotest.test.datastored;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -11,7 +12,7 @@ public class DataPago {
 
 	ConfigCheckout FTCkout;
 	DataPedido dataPedido;
-	CopyOnWriteArrayList<DataPedido> listPedidos = new CopyOnWriteArrayList<>();
+	List<DataPedido> listPedidos = new CopyOnWriteArrayList<>();
 	boolean userWithStoreC = false;
 	float saldoCta = 0;
 	boolean okCheckChar;
@@ -78,7 +79,7 @@ public class DataPago {
 		this.saldoCta = saldoCta;
 	}
 	
-	public CopyOnWriteArrayList<DataPedido> getListPedidos() {
+	public List<DataPedido> getListPedidos() {
 		return this.listPedidos;
 	}
 	

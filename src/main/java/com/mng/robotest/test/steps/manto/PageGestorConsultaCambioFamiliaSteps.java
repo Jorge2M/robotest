@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.manto;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
@@ -11,20 +9,22 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
 public class PageGestorConsultaCambioFamiliaSteps {
 
+	private PageGestorConsultaCambioFamilia pageGestorConsultaCambioFamilia = new PageGestorConsultaCambioFamilia();
+	
 	@Validation
-	public static ChecksTM validateIsPage(WebDriver driver) {
+	public ChecksTM validateIsPage() {
 		ChecksTM checks = ChecksTM.getNew();
 	 	checks.add(
 			"Estamos en la página " + PageGestorConsultaCambioFamilia.TITULO,
-			PageGestorConsultaCambioFamilia.isPage(driver), State.Defect);
+			pageGestorConsultaCambioFamilia.isPage(), State.Defect);
 	 	
 	 	checks.add(
 			"Aparece la tabla de \"Consulta\"",
-			PageGestorConsultaCambioFamilia.isVisibleConsultaTable(driver), State.Defect);
+			pageGestorConsultaCambioFamilia.isVisibleConsultaTable(), State.Defect);
 	 	
 	 	checks.add(
 			"El botón \"Consulta está\" \"disabled\"",
-			PageGestorConsultaCambioFamilia.isDisabledConsultaButton(driver), State.Defect);
+			pageGestorConsultaCambioFamilia.isDisabledConsultaButton(), State.Defect);
 	 	
 		return checks;
 	}
@@ -33,20 +33,22 @@ public class PageGestorConsultaCambioFamiliaSteps {
 		description="Buscamos productos por la familia <b>Accesorios</b>",
 		expected="Muestra la tabla con productos que corresponden con esta familia",
 		saveErrorData=SaveWhen.Never)
-	public static void selectAccesoriosAndClickConsultaPorFamiliaButton(WebDriver driver) {
-		PageGestorConsultaCambioFamilia.selectAccesoriosAndClickConsultaPorFamiliaButton(driver);
-		checkAfterSearchProductXfamilia(driver);
+	public void selectAccesoriosAndClickConsultaPorFamiliaButton() {
+		pageGestorConsultaCambioFamilia.selectAccesoriosAndClickConsultaPorFamiliaButton();
+		checkAfterSearchProductXfamilia();
 	}
 	
 	@Validation
-	private static ChecksTM checkAfterSearchProductXfamilia(WebDriver driver) {
+	private ChecksTM checkAfterSearchProductXfamilia() {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la tabla con los productos",
-			PageGestorConsultaCambioFamilia.isTablaProductosVisible(driver), State.Defect);
+			pageGestorConsultaCambioFamilia.isTablaProductosVisible(), State.Defect);
+		
 		checks.add(
 			"El campo de la tabla \"Traducción familia principal\" de la primera fila contiene el atributo \"Accesorios\"",
-			PageGestorConsultaCambioFamilia.checkFirstRowProductIsRight(driver), State.Defect);
+			pageGestorConsultaCambioFamilia.checkFirstRowProductIsRight(), State.Defect);
+		
 		return checks;
 	}
 
@@ -54,20 +56,22 @@ public class PageGestorConsultaCambioFamiliaSteps {
 		description="Damos click al botón <b>Cambio Familia</b>",
 		expected="Muestra la página que permite gestionar los cambios de familia",
 		saveErrorData=SaveWhen.Never)
-	public static void clickCambioFamiliaButton(WebDriver driver) {
-		PageGestorConsultaCambioFamilia.clickCambioFamiliaButton(driver);
-		checkAfeterClickCambioFamilia(driver);
+	public void clickCambioFamiliaButton() {
+		pageGestorConsultaCambioFamilia.clickCambioFamiliaButton();
+		checkAfeterClickCambioFamilia();
 	}
 	
 	@Validation
-	private static ChecksTM checkAfeterClickCambioFamilia(WebDriver driver) {
+	private ChecksTM checkAfeterClickCambioFamilia() {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la tabla con las opciones para los cambios de familia",
-			PageGestorConsultaCambioFamilia.isTablaCambioFamiliaVisible(driver), State.Defect);
+			pageGestorConsultaCambioFamilia.isTablaCambioFamiliaVisible(), State.Defect);
+		
 		checks.add(
 			"El botón \"Consulta\" ya no está \"disabled\"",
-			!PageGestorConsultaCambioFamilia.isDisabledConsultaButton(driver), State.Defect);
+			!pageGestorConsultaCambioFamilia.isDisabledConsultaButton(), State.Defect);
+		
 		return checks;
 	}
 }

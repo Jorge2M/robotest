@@ -152,8 +152,8 @@ public class MenusUserWrapper extends PageBase {
 					innerHTML = shadowLoyaltyPoints.toString();
 				}
 				int numberBlocksLoyalty = driver.findElements(By.tagName("loyalty-user-menu")).size();
-				Log4jTM.getLogger().info("Contenido del elemento HTML loyalty-user-menu  " + innerHTML);
-				Log4jTM.getLogger().info("Número de bloques de Loyalty " + numberBlocksLoyalty);
+				Log4jTM.getLogger().info(() -> "Contenido del elemento HTML loyalty-user-menu  " + innerHTML);
+				Log4jTM.getLogger().info(() -> "Número de bloques de Loyalty " + numberBlocksLoyalty);
 				Pattern pattern = Pattern.compile("tienes (.*?) Likes");
 				Matcher matcher = pattern.matcher(innerHTML);
 				if (matcher.find()) {

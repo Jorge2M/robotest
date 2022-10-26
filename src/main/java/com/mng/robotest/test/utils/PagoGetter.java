@@ -12,6 +12,8 @@ import com.github.jorge2m.testmaker.conf.Channel;
 
 public class PagoGetter {
 	
+	private PagoGetter() {}
+	
 	public static List<PaymentCountry> getListPayments(String codCountry, AppEcom app, boolean isEmpleado) {
 		List<Pais> listCountries = PaisGetter.get(Arrays.asList(codCountry));
 		return getListPaymentsFromCountries(listCountries, app, isEmpleado);

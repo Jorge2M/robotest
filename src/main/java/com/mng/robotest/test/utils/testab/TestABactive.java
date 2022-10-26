@@ -12,6 +12,8 @@ import com.github.jorge2m.testmaker.conf.Channel;
 
 public class TestABactive {
 
+	private TestABactive() {}
+	
 	public static void currentTestABsToActivate(Channel channel, AppEcom app, WebDriver driver) throws Exception {
 		List<TestABactData> listTestABsToActivate = new ArrayList<>();
 

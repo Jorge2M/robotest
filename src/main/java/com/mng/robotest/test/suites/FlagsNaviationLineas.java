@@ -1,6 +1,8 @@
 package com.mng.robotest.test.suites;
 
-public interface FlagsNaviationLineas {
+import java.io.Serializable;
+
+public interface FlagsNaviationLineas extends Serializable {
 
 	public boolean testLineas();
 	public boolean testBanners();

@@ -201,7 +201,7 @@ public class CheckoutFlow extends StepBase {
 		}
 	}
 	
-	public void testInputCodPromoEmplSpain() throws Exception {
+	public void testInputCodPromoEmplSpain() {
 		AccesoEmpl accesoEmpl = AccesoEmpl.forSpain(); 
 		pageCheckoutWrapperSteps.inputTarjetaEmplEnCodPromo(pais, accesoEmpl);
 		pageCheckoutWrapperSteps.inputDataEmplEnPromoAndAccept(accesoEmpl);

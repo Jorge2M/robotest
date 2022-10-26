@@ -46,7 +46,7 @@ public class DataFavoritos {
 	}
 	
 	public void removeArticulo(ArticuloScreen articulo) {
-		List<ArticuloScreen> listResult = new ArrayList<ArticuloScreen>();
+		List<ArticuloScreen> listResult = new ArrayList<>();
 		for (ArticuloScreen artFavs : this.listArticulos) {
 			if (artFavs.getReferencia().compareTo(articulo.getReferencia())!=0 ||
 				artFavs.getCodigoColor().compareTo(articulo.getCodigoColor())!=0) {

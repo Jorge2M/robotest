@@ -97,7 +97,7 @@ public class PageMenusMantoSteps extends PageBase {
 	
 	public void goToGestorEstadisticasPedido() throws Exception {
 		goToMainMenusAndClickMenu("Estadisticas Pedidos");
-		PageGestorEstadisticasPedidoSteps.validateIsPage(driver);
+		new PageGestorEstadisticasPedidoSteps().validateIsPage();
 	}
 	
 	public void goToGestorSaldosTPV() throws Exception {
@@ -107,7 +107,7 @@ public class PageMenusMantoSteps extends PageBase {
 	
 	public void goToGestorConsultaCambioFamilia() throws Exception {
 		goToMainMenusAndClickMenu("Gestor de familias");
-		PageGestorConsultaCambioFamiliaSteps.validateIsPage(driver);
+		new PageGestorConsultaCambioFamiliaSteps().validateIsPage();
 	}
 	
 	public void goToOrdenadorDePrendas() throws Exception {

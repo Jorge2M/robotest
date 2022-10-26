@@ -20,7 +20,7 @@ public class PaisGetterTest {
 		Pais pais = PaisGetter.get(PaisShop.ESPANA);
 		
 		//Then
-		assertTrue(pais.getCodigo_pais().compareTo(PaisShop.ESPANA.getCodigoPais())==0);
+		assertEquals(PaisShop.ESPANA.getCodigoPais(), pais.getCodigo_pais());
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class PaisGetterTest {
 		//Then
 		assertTrue(checkListContainsCodPais(listCountries, "001"));
 		assertTrue(checkListContainsCodPais(listCountries, "011"));
-		assertTrue(listCountries.size()==2);
+		assertEquals(2, listCountries.size());
 	}
 	
 	@Test

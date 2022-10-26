@@ -1,7 +1,7 @@
 package com.mng.robotest.test.utils;
 
 import static com.mng.robotest.test.data.PaisShop.*;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +34,7 @@ public class PagoGetterTest {
 		assertTrue(listPaymentsResult.contains("TARJETA MANGO"));
 		assertTrue(listPaymentsResult.contains("VISA"));
 		assertTrue(listPaymentsResult.contains("VISA ELECTRON"));
-		assertTrue(listPaymentsResult.size()==7);
+		assertEquals(7, listPaymentsResult.size());
 	}
 	
 	@Test
@@ -55,6 +55,6 @@ public class PagoGetterTest {
 		assertTrue(listPaymentsResult.contains("PAYPAL"));
 		assertTrue(listPaymentsResult.contains("Utánvételes Fizetés"));
 		assertTrue(listPaymentsResult.contains("AMERICAN EXPRESS"));
-		assertTrue(listPaymentsResult.size()==6);
+		assertEquals(6, listPaymentsResult.size());
 	}
 }

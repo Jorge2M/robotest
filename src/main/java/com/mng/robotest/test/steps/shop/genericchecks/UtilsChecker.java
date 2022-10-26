@@ -15,6 +15,8 @@ import com.mng.robotest.conftestmaker.AppEcom;
 
 public class UtilsChecker {
 
+	private UtilsChecker() {}
+	
 	public static GestorDatosHarJSON getGestorHar(WebDriver driver) {
 		GestorDatosHarJSON gestorHAR = null;
 		

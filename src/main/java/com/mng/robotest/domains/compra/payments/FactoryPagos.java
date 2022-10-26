@@ -33,6 +33,8 @@ import com.mng.robotest.test.beans.Pago.TypePago;
 import com.mng.robotest.test.datastored.DataPago;
 
 public class FactoryPagos {
+
+	private FactoryPagos() {}
 	
 	public static PagoSteps makePagoSteps(DataPago dataPago) throws Exception {
 		TypePago typePago = dataPago.getDataPedido().getPago().getTypePago();

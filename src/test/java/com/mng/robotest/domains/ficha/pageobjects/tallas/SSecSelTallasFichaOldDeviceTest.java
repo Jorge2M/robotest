@@ -23,7 +23,7 @@ public class SSecSelTallasFichaOldDeviceTest {
 						"text()='4' or starts-with(text(),'4 ') or starts-with(text(),'4cm') or " +
 						"text()='0' or starts-with(text(),'0 ') or starts-with(text(),'0cm')]";
 
-		assertTrue(xpath.compareTo(xpathExpected)==0);
+		assertEquals(0, xpath.compareTo(xpathExpected));
 	}
 
 }
