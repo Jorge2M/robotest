@@ -13,6 +13,8 @@
 		<skipUnitTests>${skipTests}</skipUnitTests>
         <nexus.url>https://nexus.sys.mango/nexus</nexus.url>
         
+        <aspectj.version>1.9.9.1</aspectj.version>
+        
         <sonar.host.url>https://sonarqube.pro-k8s-tools.sys.mango</sonar.host.url>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
@@ -89,14 +91,14 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
-			<version>1.9.1</version>
+			<version>${aspectj.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjtools -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjtools</artifactId>
-			<version>1.9.1</version>
+			<version>${aspectj.version}</version>
 		</dependency>
 
 

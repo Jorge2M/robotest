@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Test;
 
-import com.mng.robotest.test.getdata.products.data.ProductList;
+import com.mng.robotest.getdata.productlist.entity.ProductList;
 
 public class ProductListIT {
 

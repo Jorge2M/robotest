@@ -11,10 +11,10 @@ import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.domains.ficha.steps.ModalBuscadorTiendasSteps;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
+import com.mng.robotest.getdata.productlist.GetterProducts;
+import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.getdata.products.GetterProducts;
-import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 
 import javassist.NotFoundException;
 

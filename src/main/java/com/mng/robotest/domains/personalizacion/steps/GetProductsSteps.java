@@ -6,10 +6,10 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.test.getdata.products.GetterProducts;
-import com.mng.robotest.test.getdata.products.Menu;
-import com.mng.robotest.test.getdata.products.GetterProducts.MethodGetter;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.GetterProducts;
+import com.mng.robotest.getdata.productlist.Menu;
+import com.mng.robotest.getdata.productlist.GetterProducts.MethodGetter;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 
 public class GetProductsSteps extends StepBase {
 

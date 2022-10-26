@@ -18,13 +18,13 @@ import org.testng.ITestContext;
 
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;

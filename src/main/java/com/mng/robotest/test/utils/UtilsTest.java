@@ -10,12 +10,12 @@ import java.text.ParseException;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.getdata.productlist.GetterProducts;
+import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.getdata.products.GetterProducts;
-import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.getdata.products.sort.SortFactory.SortBy;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 
 public class UtilsTest {

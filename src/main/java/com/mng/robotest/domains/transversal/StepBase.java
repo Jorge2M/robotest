@@ -11,8 +11,8 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.test.data.Color;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.utils.UtilsTest;

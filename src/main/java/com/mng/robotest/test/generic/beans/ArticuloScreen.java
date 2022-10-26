@@ -2,9 +2,9 @@ package com.mng.robotest.test.generic.beans;
 
 import java.util.List;
 
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.Talla;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 

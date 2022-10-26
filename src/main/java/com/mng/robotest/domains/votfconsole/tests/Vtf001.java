@@ -8,13 +8,13 @@ import org.openqa.selenium.WebDriver;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.votfconsole.steps.ConsolaVotfSteps;
+import com.mng.robotest.getdata.productlist.GetterProducts;
+import com.mng.robotest.getdata.productlist.Menu;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.getdata.products.GetterProducts;
-import com.mng.robotest.test.getdata.products.Menu;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
 import com.mng.robotest.test.utils.PaisGetter;
 
 public class Vtf001 extends TestBase {

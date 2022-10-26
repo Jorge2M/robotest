@@ -11,15 +11,15 @@ import java.util.Optional;
 import org.junit.Test;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.getdata.productlist.GetterProducts;
+import com.mng.robotest.getdata.productlist.Menu;
+import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.ProductLabel;
+import com.mng.robotest.getdata.productlist.sort.SortFactory;
+import com.mng.robotest.getdata.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.getdata.products.GetterProducts;
-import com.mng.robotest.test.getdata.products.Menu;
-import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.getdata.products.data.ProductLabel;
-import com.mng.robotest.test.getdata.products.sort.SortFactory;
-import com.mng.robotest.test.getdata.products.sort.SortFactory.SortBy;
 import com.mng.robotest.test.utils.PaisGetter;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;

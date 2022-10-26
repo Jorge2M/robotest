@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 
 public class ArticuloNavigations {

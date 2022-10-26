@@ -27,13 +27,13 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
+import com.mng.robotest.getdata.productlist.GetterProducts;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenusWebAll;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.data.Constantes.ThreeState;
-import com.mng.robotest.test.getdata.products.GetterProducts;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog.Article;
 import com.mng.robotest.test.pageobject.shop.AllPages;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test.steps.shop.banner.SecBannersSteps;

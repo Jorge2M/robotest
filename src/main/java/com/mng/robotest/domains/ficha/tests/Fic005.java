@@ -11,10 +11,10 @@ import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.ficha.steps.SecModalPersonalizacionSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.test.getdata.products.GetterProducts;
-import com.mng.robotest.test.getdata.products.Menu;
-import com.mng.robotest.test.getdata.products.ProductFilter.FilterType;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.GetterProducts;
+import com.mng.robotest.getdata.productlist.Menu;
+import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 
 import javassist.NotFoundException;
 

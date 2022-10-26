@@ -24,9 +24,9 @@ import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.Acti
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ColorType;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.getdata.products.data.GarmentCatalog;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
