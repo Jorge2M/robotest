@@ -19,7 +19,7 @@
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.jacoco.reportPaths>${project.build.directory}/coverage-merged/merged.exec</sonar.jacoco.reportPaths>
-        <sonar.coverage.exclusions>**/pageobjects/**/*, **/pageobject/**/*, **/steps/**/*, **/tests/**/*, **/suites/**/*, **/beans/**/*</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>**/pageobjects/**/*, **/pageobject/**/*, **/steps/**/*, **/tests/**/*, **/suites/**/*, **/beans/**/*, **/entity/**/*</sonar.coverage.exclusions>
         <sonar.language>java</sonar.language>
 	</properties>
 
