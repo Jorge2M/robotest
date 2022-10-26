@@ -15,9 +15,6 @@ public class EntityImage implements Serializable {
 	private String type; 
 	private String width;
 	
-	public EntityImage() {
-	}
-
 	public String getUrl() {
 		return url;
 	}

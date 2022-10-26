@@ -16,9 +16,6 @@ public class EntitySizeDescriptions implements Serializable {
 	private String further; 
 	private String furtherEn;
 	
-	public EntitySizeDescriptions() {
-	}
-
 	public String getBase() {
 		return base;
 	}

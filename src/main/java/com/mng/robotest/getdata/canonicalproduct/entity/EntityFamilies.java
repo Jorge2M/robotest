@@ -17,9 +17,6 @@ public class EntityFamilies implements Serializable {
 	private List<EntityFamilyOnline> online;
 	private List<String> subfamiliesOnline;
 	
-	public EntityFamilies() {
-	}
-
 	public String getErpId() {
 		return erpId;
 	}

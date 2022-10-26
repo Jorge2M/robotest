@@ -14,9 +14,6 @@ public class EntityFamilyOnline implements Serializable {
 	private String id; 
 	private String name;
 	
-	public EntityFamilyOnline() {
-	}
-
 	public String getId() {
 		return id;
 	}

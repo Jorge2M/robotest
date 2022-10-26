@@ -17,9 +17,6 @@ public class EntitySize implements Serializable {
 	private String ean;
 	private List<EntityStockDetails> stockDetails;
 	
-	public EntitySize() {
-	}
-
 	public String getId() {
 		return id;
 	}

@@ -15,9 +15,6 @@ public class EntityPrice implements Serializable {
     private String type;
     private String promotionName;	
 	
-	public EntityPrice() {
-	}
-
 	public String getCurrency() {
 		return currency;
 	}

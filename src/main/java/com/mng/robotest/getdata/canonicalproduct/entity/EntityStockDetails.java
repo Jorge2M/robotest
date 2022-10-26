@@ -9,9 +9,6 @@ public class EntityStockDetails implements Serializable {
 	private String warehouse;
 	private int stock;
 	
-	public EntityStockDetails() {
-	}
-
 	public String getWarehouse() {
 		return warehouse;
 	}

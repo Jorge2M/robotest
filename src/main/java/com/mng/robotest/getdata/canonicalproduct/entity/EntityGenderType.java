@@ -14,9 +14,6 @@ public class EntityGenderType implements Serializable {
 	private String id; 
 	private String name;
 	
-	public EntityGenderType() {
-	}
-
 	public String getId() {
 		return id;
 	}

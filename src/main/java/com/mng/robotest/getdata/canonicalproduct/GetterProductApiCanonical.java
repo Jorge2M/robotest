@@ -14,7 +14,7 @@ import com.mng.robotest.getdata.canonicalproduct.entity.EntityProduct;
 
 public class GetterProductApiCanonical {
 
-	private final String target = "https://internal-canonical-products.pro.k8s.mango/v1/products";
+	private static final String target = "https://internal-canonical-products.pro.k8s.mango/v1/products";
 	private final String codPaisAlf;
 	private final String codIdiomAlf;
 	
@@ -35,7 +35,7 @@ public class GetterProductApiCanonical {
 		return Optional.empty();
 	}
 	
-	private WebTarget getWebTarget(String idProducto) throws Exception {
+	private WebTarget getWebTarget(String idProducto) {
 		Client client = ClientBuilder.newBuilder().build();
 		return 
 			client
@@ -46,12 +46,10 @@ public class GetterProductApiCanonical {
 	}	
 	
 	private String normalizeCodPais(String codPaisAlf) {
-		switch (codPaisAlf) {
-		case "ES1":
+		if (codPaisAlf.compareTo("ES1")==0) {
 			return "ES-CN";
-		default:
-			return codPaisAlf;
 		}
+		return codPaisAlf;
 	}
 	
 }

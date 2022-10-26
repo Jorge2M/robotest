@@ -17,9 +17,6 @@ public class EntityRelatedModel implements Serializable {
 	private String type; 
 	private List<String> productIds;
 	
-	public EntityRelatedModel() {
-	}
-
 	public String getId() {
 		return id;
 	}

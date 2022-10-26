@@ -17,9 +17,6 @@ public class EntityDescriptions implements Serializable {
 	@JsonProperty("long") private List<String> longDescription;
 	@JsonProperty("shortEn") private String englishShortDescription;
 	
-	public EntityDescriptions() {
-	}
-
 	public String getShortDescription() {
 		return shortDescription;
 	}

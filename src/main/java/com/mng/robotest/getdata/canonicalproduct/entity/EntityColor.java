@@ -22,9 +22,6 @@ public class EntityColor implements Serializable {
 	private List<EntityVideo> videos;
 	private EntityPrice price;
 	
-	public EntityColor() {
-	}
-	
 	public String getId() {
 		return id;
 	}

@@ -14,9 +14,6 @@ public class EntityVideo implements Serializable {
 	private String url; 
 	private String width;
 	
-	public EntityVideo() {
-	}
-
 	public String getUrl() {
 		return url;
 	}

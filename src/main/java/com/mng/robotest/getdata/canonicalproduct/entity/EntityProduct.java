@@ -14,7 +14,7 @@ public class EntityProduct implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@JsonProperty("_id")private String _id;
+	@JsonProperty("_id")private String idMongo;
 	private String id;
 	private String seller; 
 	private String tariffHeading; 
@@ -38,14 +38,11 @@ public class EntityProduct implements Serializable {
 	private String channelId;
 	private String updateDate;
 	
-	public EntityProduct() {
-	}
-	
 	public String get_id() {
-		return _id;
+		return idMongo;
 	}
 	public void set_id(String _id) {
-		this._id = _id;
+		this.idMongo = _id;
 	}
 	public String getId() {
 		return id;

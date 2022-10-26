@@ -15,9 +15,6 @@ public class EntityLabel implements Serializable {
 	private String name;
 	private int order;
 	
-	public EntityLabel() {
-	}
-
 	public String getId() {
 		return id;
 	}
