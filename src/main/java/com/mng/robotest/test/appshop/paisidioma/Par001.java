@@ -123,7 +123,7 @@ public class Par001 extends TestBase {
 	private boolean testBanners(Linea linea) {
 		return (
 			flagsNavigation.testBanners() && 
-			linea.getContentDeskType()==TypeContentDesk.BANNERS);
+			linea.getContentDeskType()==TypeContentDesk.banners);
 	}
 	
 	private boolean testMenus(Linea linea, Sublinea sublinea) {

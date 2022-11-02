@@ -292,15 +292,15 @@ public class MenuSteps extends StepBase {
 		
 	private void checkContentGaleriaAfterClickLinea(Linea linea) {
 		switch (linea.getContentDeskType()) {
-		case ARTICULOS:
+		case articulos:
 			new PageGaleriaSteps().validaArtEnContenido(3);
 			break;
-		case BANNERS:
+		case banners:
 			if (!channel.isDevice()) {
 				new SecBannersSteps(1).validaBannEnContenido();
 			}
 			break;
-		case VACIO:
+		case vacio:
 			break;
 		default:
 			break;
