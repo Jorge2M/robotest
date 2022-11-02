@@ -158,20 +158,19 @@ public enum PaisShop {
 	}
 	
 	public boolean isEquals(Pais pais) {
-		return this==getPais(pais.getCodigo_pais());
+		return this==from(pais.getCodigo_pais());
 	}
 	
 	public static PaisShop getPais(Pais pais) {
-		return getPais(pais.getCodigo_pais());
+		return from(pais.getCodigo_pais());
 	}
 	
-	public static PaisShop getPais(String codigoPais) {
+	public static PaisShop from(String codigoPais) {
 		for (PaisShop paisShop : PaisShop.values()) {
 			if (paisShop.getCodigoPais().compareTo(codigoPais)==0) {
 				return paisShop;
 			}
 		}
-		
 		return null;
 	}
 }

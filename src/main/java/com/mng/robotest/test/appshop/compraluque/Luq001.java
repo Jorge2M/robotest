@@ -61,7 +61,7 @@ public class Luq001 extends TestBase {
 	}
 	
 	private List<GarmentCatalog> getListArticles() {
-		PaisShop paisShop = PaisShop.getPais(dataTest.getCodigoPais());
+		PaisShop paisShop = PaisShop.from(dataTest.getCodigoPais());
 		switch (paisShop) {
 		case USA:
 		case IRELAND:
@@ -71,7 +71,7 @@ public class Luq001 extends TestBase {
 	}
 	
 	private String getCodPostal() {
-		PaisShop paisShop = PaisShop.getPais(dataTest.getCodigoPais());
+		PaisShop paisShop = PaisShop.from(dataTest.getCodigoPais());
 		switch (paisShop) {
 		case CANADA:
 			return codPostalesCanada.get(this.rand.nextInt(codPostalesCanada.size())); 

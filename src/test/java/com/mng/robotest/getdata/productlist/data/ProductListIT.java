@@ -1,4 +1,4 @@
-package com.mng.robotest.test.getproducts.data;
+package com.mng.robotest.getdata.productlist.data;
 
 import static org.junit.jupiter.api.Assertions.*;
 

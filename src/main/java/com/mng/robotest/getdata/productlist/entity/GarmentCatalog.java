@@ -3,6 +3,7 @@ package com.mng.robotest.getdata.productlist.entity;
 import java.util.List;
 import java.util.Optional;
 
+import com.mng.robotest.getdata.canonicalproduct.entity.EntityProduct;
 import com.mng.robotest.test.generic.beans.ValeDiscount;
 
 public class GarmentCatalog {
@@ -16,6 +17,7 @@ public class GarmentCatalog {
 	private List<Color> colors;
 	private Labels labels;
 	private AnalyticsEventsData analyticsEventsData;
+	private EntityProduct canonicalProduct;
 	
 	private ValeDiscount valePais = null;
 	private String urlFicha;
@@ -186,5 +188,11 @@ public class GarmentCatalog {
 	}
 	public void setShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
+	}
+	public EntityProduct getCanonicalProduct() {
+		return canonicalProduct;
+	}
+	public void setCanonicalProduct(EntityProduct canonicalProduct) {
+		this.canonicalProduct = canonicalProduct;
 	}
 }

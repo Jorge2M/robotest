@@ -23,6 +23,8 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.getdata.UtilsData;
+import com.mng.robotest.getdata.canonicalproduct.GetterProductApiCanonical;
+import com.mng.robotest.getdata.canonicalproduct.entity.EntityProduct;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.getdata.productlist.entity.ProductList;
@@ -51,6 +53,7 @@ public class GetterProducts {
 	private final Integer pagina;
 	private final List<FilterType> filters;
 	private final SortBy sortBy;
+	private final boolean extraCanonicalInfo;
 	private final WebDriver driver;
 	private final MethodGetter method;
 	private final boolean retryPro;
@@ -73,6 +76,7 @@ public class GetterProducts {
 			boolean retryPro, 
 			List<FilterType> filters,
 			SortBy sortBy,
+			boolean extraCanonicalInfo,
 			WebDriver driver) throws Exception {
 		
 		urlForJavaCall = getUrlForJavaCall(url);
@@ -97,6 +101,7 @@ public class GetterProducts {
 		this.driver = driver;
 		this.filters = filters;
 		this.sortBy = sortBy;
+		this.extraCanonicalInfo = extraCanonicalInfo;
 		this.productList = getProductList();
 		this.productFilter = new ProductFilter(productList, app, urlForJavaCall);
 	}
@@ -146,7 +151,7 @@ public class GetterProducts {
 		}
 	}
 	
-	public ProductList getProductList() {
+	public ProductList getProductList() throws Exception {
 		if (productList!=null) {
 			return productList;
 		}
@@ -168,7 +173,21 @@ public class GetterProducts {
 				break;
 			}
 		}
+		
+		if (extraCanonicalInfo) {
+			addCanonicalInfo(productListReturn);
+		}
 		return productListReturn;
+	}
+	
+	private void addCanonicalInfo(ProductList productList) throws Exception {
+		var getterProductApiCanonical = new GetterProductApiCanonical(codigoPaisAlf, "ES"); 
+		for (GarmentCatalog garmentCatalog : productList.getAllGarments()) {
+			Optional<EntityProduct> canonicalProduct = getterProductApiCanonical.getProduct(garmentCatalog.getGarmentId());
+			if (canonicalProduct.isPresent()) {
+				garmentCatalog.setCanonicalProduct(canonicalProduct.get());
+			}
+		}
 	}
 
 	private Optional<ProductList> getProductsFromMenu(MenuProduct menuCandidate, boolean withStock) {
@@ -228,6 +247,7 @@ public class GetterProducts {
 				false,
 				filters,
 				sortBy,
+				extraCanonicalInfo,
 				driver);
 		return getterPro.getProductList();
 	}
@@ -387,6 +407,7 @@ public class GetterProducts {
 		private String codigoIdiomAlf = "";
 		private List<FilterType> filters;
 		private SortBy sortBy;
+		private boolean extraCanonicalInfo;
 		private List<MenuI> menusCandidates = 
 			Arrays.asList(
 				Menu.Shorts, 
@@ -465,6 +486,10 @@ public class GetterProducts {
 			this.sortBy = sortBy;
 			return this;
 		}
+		public Builder extraCanonicalInfo(boolean extraCanonicalInfo) {
+			this.extraCanonicalInfo = extraCanonicalInfo;
+			return this;
+		}
 		public GetterProducts build() throws Exception {
 			return (
 				new GetterProducts(
@@ -481,6 +506,7 @@ public class GetterProducts {
 						retryPro, 
 						filters,
 						sortBy,
+						extraCanonicalInfo,
 						driver));
 		}
 		

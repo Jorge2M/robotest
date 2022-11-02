@@ -26,7 +26,7 @@ public class SecConfirmDatosSteps extends StepBase {
 	
 	public void setDataIfNeeded() {
 		String codigoPais = dataTest.getCodigoPais();
-		if (PaisShop.DEUTSCHLAND == PaisShop.getPais(codigoPais) &&
+		if (PaisShop.DEUTSCHLAND == PaisShop.from(codigoPais) &&
 			secConfirmDatos.isVisibleInputPostNumberIdDeutschland()) {
 			inputPostNumberId("0038594352");
 		}

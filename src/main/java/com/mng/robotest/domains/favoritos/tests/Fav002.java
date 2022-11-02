@@ -61,8 +61,7 @@ public class Fav002 extends TestBase {
 	}	
 
 	private void clickFavoritesInFicha() {
-		PageFichaSteps pageFichaArtStpv = new PageFichaSteps();
-		pageFichaArtStpv.selectAnadirAFavoritos();
+		new PageFichaSteps().selectAnadirAFavoritos();
 	}	
 	
 	private void login() throws Exception {

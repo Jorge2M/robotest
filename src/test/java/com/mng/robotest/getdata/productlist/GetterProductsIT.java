@@ -1,4 +1,4 @@
-package com.mng.robotest.test.getproducts;
+package com.mng.robotest.getdata.productlist;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,8 +11,7 @@ import java.util.Optional;
 import org.junit.Test;
 
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.getdata.productlist.GetterProducts;
-import com.mng.robotest.getdata.productlist.Menu;
+import com.mng.robotest.getdata.productlist.GetterProducts.Builder;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.getdata.productlist.entity.ProductLabel;
@@ -27,18 +26,24 @@ import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.Li
 public class GetterProductsIT {
 	
 	private static GetterProducts getterProducts;
-	private final int numProducts = 20;
+	private static GetterProducts getterProductsAndCanonicalData;
+	private static final int numProducts = 20;
+	private static final Pais espana = PaisGetter.get(PaisShop.ESPANA);	
+	
+	private static final Builder getterProductsBuilder = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigo_alf(), AppEcom.shop, null)
+			.linea(she)
+			.menu(Menu.Shorts)
+			.numProducts(numProducts)
+			.pagina(1)
+			.sortBy(SortBy.STOCK_DESCENDENT);
 	
 	public GetterProductsIT() throws Exception {
 		if (getterProducts==null) {
-			Pais espana = PaisGetter.get(PaisShop.ESPANA);
-			getterProducts = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigo_alf(), AppEcom.shop, null)
-					.linea(she)
-					.menu(Menu.Shorts)
-					.numProducts(numProducts)
-					.pagina(1)
-					.sortBy(SortBy.STOCK_DESCENDENT)
-					.build();
+			getterProducts = getterProductsBuilder.build();
+		}
+		if (getterProductsAndCanonicalData==null) {
+			getterProductsAndCanonicalData = getterProductsBuilder
+					.extraCanonicalInfo(true).build();
 		}
 	}
 	
@@ -99,6 +104,18 @@ public class GetterProductsIT {
 		
 		//Then
 		assertNull(garmentNoOnline);
+	}
+	
+	@Test
+	public void testGetProductWithCanonicalData() throws Exception {
+		//When
+		List<GarmentCatalog> listProducts = getterProductsAndCanonicalData.getAll();
+		
+		//Then
+		assertTrue(listProducts.get(0).getCanonicalProduct()!=null);
+		assertEquals(listProducts.size(), numProducts);
+		assertTrue(listProducts.get(0).getStock()>0);
+		assertTrue(isListSortedByStock(listProducts));
 	}
 	
 	private GarmentCatalog getGarmentOnline(List<GarmentCatalog> garments) {
