@@ -12,6 +12,7 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
+import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.utils.PaisGetter;
 
 
@@ -31,6 +32,7 @@ public class Com011 extends TestBase {
 		if (!isPRO()) {
 			DataPago dataPago = executeVisaPayment();
 			checkMisCompras(dataPago);
+			checkPedidos(dataPago);
 		} 
 	}
 	
@@ -64,5 +66,9 @@ public class Com011 extends TestBase {
 		new ModalDetalleCompraSteps().checkIsDataVisible();
 	}    
 	
-	//TODO añadir Manto
+	private void checkPedidos(DataPago dataPago) throws Exception {
+		DataPedido dataPedido = dataPago.getDataPedido();
+		dataPedido.setEmailCheckout(dataTest.getUserConnected());
+		new CompraSteps().checkPedidosManto(Arrays.asList(dataPago.getDataPedido())); 
+	}
 }
