@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import com.github.jorge2m.testmaker.unittestdata.AppEcom;
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.getdata.canonicalproduct.entity.EntityProduct;
 
 class GetterProductApiCanonicalIT {
