@@ -19,7 +19,7 @@ public class PaisIdioma implements Serializable {
 	private String index_fact = "";
 	public int prioridad;
 	private FlagsNaviationLineas flagsNavigation = VersionPaisSuite.V1;
-	private Pais pais = PaisGetter.get(PaisShop.ESPANA);
+	private Pais pais = PaisGetter.from(PaisShop.ESPANA);
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
 	
 	private final List<Linea> linesToTest;

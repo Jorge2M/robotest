@@ -17,7 +17,7 @@ public class Com008 extends TestBase {
 	
 	public Com008() throws Exception {
 		dataTest.setUserRegistered(true);
-		dataTest.setPais(PaisGetter.get(PaisShop.CROATIA));
+		dataTest.setPais(PaisGetter.from(PaisShop.CROATIA));
 		dataTest.setIdioma(dataTest.getPais().getListIdiomas().get(0));
 	}
 	

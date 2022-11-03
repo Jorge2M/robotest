@@ -11,9 +11,9 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.ValidatorContentBolsa;
-import com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsaCommon.DataArtBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.domains.compra.steps.Page1IdentCheckoutSteps;
@@ -22,11 +22,13 @@ import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.getdata.productlist.GetterProducts;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
+
 
 public class SecBolsaSteps extends StepBase {
 
@@ -85,11 +87,11 @@ public class SecBolsaSteps extends StepBase {
 				.filter(FilterType.MANY_COLORS)
 				.build();
 		
-		List<GarmentCatalog> listParaAlta = getterProducts.getAll().subList(0, numArticulos);
-		altaListaArticulosEnBolsa(listParaAlta);
+		List<GarmentCatalog> garments = getterProducts.getAll().subList(0, numArticulos);
+		altaListaArticulosEnBolsa(Article.getArticlesCandidateForTest(garments));
 	}
 
-	public void altaListaArticulosEnBolsa(List<GarmentCatalog> listArticlesForAdd) 
+	public void altaListaArticulosEnBolsa(List<Article> listArticlesForAdd) 
 			throws Exception {
 		if (listArticlesForAdd!=null && !listArticlesForAdd.isEmpty()) {
 			altaBolsaArticulos(listArticlesForAdd);
@@ -104,14 +106,11 @@ public class SecBolsaSteps extends StepBase {
 		description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + TAG_LISTA_ART,
 		expected="Los productos se dan de alta en la bolsa correctamente",
 		saveNettraffic=SaveWhen.Always)
-	public void altaBolsaArticulos(List<GarmentCatalog> listParaAlta) {
-		includeListaArtInTestCaseDescription(listParaAlta);
+	public void altaBolsaArticulos(List<Article> listParaAlta) {
+		insertArticlesInStepDescription(listParaAlta);
 		for (int i=0; i<listParaAlta.size(); i++) {
-			GarmentCatalog artTmp = listParaAlta.get(i);
+			Article artTmp = listParaAlta.get(i);
 			ArticuloScreen articulo = new UtilsMangoTest().addArticuloBolsa(artTmp);
-			if (artTmp.isVale()) {
-				articulo.setVale(artTmp.getValePais());
-			}
 			dataTest.getDataBag().addArticulo(articulo);
 		}
 
@@ -120,23 +119,23 @@ public class SecBolsaSteps extends StepBase {
 		}
 	}
 
-	private void includeListaArtInTestCaseDescription(List<GarmentCatalog> listParaAlta) {
-		//Obtener el literal con la lista de artículos a dar de alta en la bolsa
-		String listaArtStr = "";
+	private void insertArticlesInStepDescription(List<Article> listParaAlta) {
+		StringBuilder str = new StringBuilder();
+		str.append("<ul style=\"font-weight: bold;\">");
 		for (int i=0; i<listParaAlta.size(); i++) {
-			GarmentCatalog artTmp = listParaAlta.get(i);
-			listaArtStr = listaArtStr + artTmp.getGarmentId();
-			if (artTmp.isVale()) {
-				listaArtStr = listaArtStr + " (le aplica el vale " + artTmp.getValePais().getCodigoVale() + ")";
+			Article artTmp = listParaAlta.get(i);
+			str.append("<li>" +
+					artTmp.getGarmentId() + " - " + 
+					artTmp.getColorLabel() + " - " + 
+					artTmp.getSize().getLabel());
+			
+			if (artTmp.getSizeCanonical()!=null && artTmp.getWareHouse()!=null) { 
+				str.append(" (store: " + artTmp.getWareHouse() + ")");
 			}
-
-			//Si no es el último artículo le añadimos una coma
-			if (i < (listParaAlta.size() - 1)) {
-				listaArtStr = listaArtStr + "<br>";
-			}
+			str.append("</li>");
 		}
-
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_LISTA_ART, listaArtStr);
+		str.append("</ul>");
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_LISTA_ART, str.toString());
 	}
 
 	public void validaAltaArtBolsa() throws Exception {

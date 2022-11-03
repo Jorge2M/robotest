@@ -23,7 +23,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 public class Ree002 extends TestBase {
 
-	private static final Pais EMIRATOS = PaisGetter.get(PaisShop.UNITED_ARAB_EMIRATES);
+	private static final Pais EMIRATOS = PaisGetter.from(PaisShop.UNITED_ARAB_EMIRATES);
 	private static final IdiomaPais EMIRATOS_ARABE = EMIRATOS.getListIdiomas().get(0);
 	
 	@Override

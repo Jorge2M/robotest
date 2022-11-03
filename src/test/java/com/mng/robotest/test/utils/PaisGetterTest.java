@@ -17,7 +17,7 @@ public class PaisGetterTest {
 	@Test
 	public void testGetPais() throws Exception {
 		//When
-		Pais pais = PaisGetter.get(PaisShop.ESPANA);
+		Pais pais = PaisGetter.from(PaisShop.ESPANA);
 		
 		//Then
 		assertEquals(PaisShop.ESPANA.getCodigoPais(), pais.getCodigo_pais());
@@ -27,7 +27,7 @@ public class PaisGetterTest {
 	public void testException_WhenGetPaisThatNotExists() throws Exception {
 		//Then <- When
 		assertThrows(NoSuchElementException.class, () -> {
-			PaisGetter.get(PaisShop.FAKE_COUNTRY);
+			PaisGetter.from(PaisShop.FAKE_COUNTRY);
 		});
 	}
 	

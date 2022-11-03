@@ -3,8 +3,13 @@ package com.mng.robotest.getdata.productlist.entity;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.mng.robotest.getdata.canonicalproduct.entity.EntityColor;
 import com.mng.robotest.getdata.canonicalproduct.entity.EntityProduct;
+import com.mng.robotest.getdata.canonicalproduct.entity.EntitySize;
 import com.mng.robotest.test.generic.beans.ValeDiscount;
+
 
 public class GarmentCatalog {
 
@@ -26,56 +31,38 @@ public class GarmentCatalog {
 	public GarmentCatalog(String garmentId) {
 		this.garmentId = garmentId;
 	}
-	
-	public Article getArticleDefaultColorAndMoreStock() {
-		Article articulo = new Article();
-		articulo.setGarmentId(garmentId);
-		Optional<Color> colorDefaultOpt = getDefaultColor();
-		if (!colorDefaultOpt.isPresent()) {
-			return null;
-		}
-		articulo.setColor(colorDefaultOpt.get());
-		articulo.setSize(colorDefaultOpt.get().getSizeWithMoreStock());
-		return articulo;
-	}
-	
-	public Article getArticleWithMoreStock() {
-		Article articulo = new Article();
-		articulo.setGarmentId(garmentId);
-		Color colorMoreStock = getColorWithMoreStock();
-		articulo.setColor(colorMoreStock);
-		if (colorMoreStock!=null) {
-			articulo.setSize(colorMoreStock.getSizeWithMoreStock());
-		}
-		return articulo;
-	}
-	
-	private Optional<Color> getDefaultColor() {
-		if (colors==null) {
-			return Optional.empty();
-		}
-		for (Color color : colors) {
-			if (color.isDefaultColor()) {
-				return Optional.of(color);
-			}
-		}
-		return Optional.of(colors.get(0));
-	}
-	
-	private Color getColorWithMoreStock() {
-		if (colors==null) {
-			return null;
-		}
-		Color colorWithMoreStock = null;
-		for (Color color : colors) {
-			if (colorWithMoreStock == null ||
-				color.getStock() > colorWithMoreStock.getStock()) {
-				colorWithMoreStock = color;
-			}
-		}
-		return colorWithMoreStock;
-	}
 
+	
+	private Article getArticleWithMoreStock() {
+		Article articulo = new Article();
+		articulo.setGarmentId(garmentId);
+		articulo.setUrlFicha(urlFicha);
+
+		Color colorResult = colors.get(0);
+		Size sizeResult = colorResult.getSizes().get(0);
+		for (Color color : colors) {
+			Size size = color.getSizeWithMoreStock();
+			if (size.getStock() > colorResult.getStock()) {
+				colorResult = color;
+				sizeResult = size; 
+			}
+		}
+		
+		articulo.setColor(colorResult);
+		articulo.setSize(sizeResult);
+		
+		var articleCanonical = getArticleCanonical(colorResult, sizeResult);
+		if (articleCanonical.isPresent()) {
+			EntityColor colorCanonical = articleCanonical.get().getLeft();
+			EntitySize sizeCanonical = articleCanonical.get().getRight();
+			articulo.setColorCanonical(colorCanonical);
+			articulo.setSizeCanonical(sizeCanonical);
+			articulo.setWareHouse(sizeCanonical.getStockDetails().get(0).getWarehouse());
+		}
+		
+		return articulo;
+	}
+	
 	public String getGarmentId() {
 		return garmentId;
 	}
@@ -131,6 +118,19 @@ public class GarmentCatalog {
 		String garmentId;
 		Color color;
 		Size size;
+		EntityColor colorCanonical;
+		EntitySize sizeCanonical;
+		String urlFicha;
+		String wareHouse;
+		
+		public static Article getArticleCandidateForTest(GarmentCatalog garment) { 		
+			return garment.getArticleWithMoreStock();
+		}
+		public static List<Article> getArticlesCandidateForTest(List<GarmentCatalog> garments) {
+			return garments.stream()
+					.map(g -> g.getArticleWithMoreStock())
+					.toList();
+		}
 		
 		public String getGarmentId() {
 			return garmentId;
@@ -155,6 +155,30 @@ public class GarmentCatalog {
 		}
 		public void setSize(Size size) {
 			this.size = size;
+		}
+		public String getUrlFicha() {
+			return urlFicha;
+		}
+		public void setUrlFicha(String urlFicha) {
+			this.urlFicha = urlFicha;
+		}
+		public String getWareHouse() {
+			return wareHouse;
+		}
+		public void setWareHouse(String wareHouse) {
+			this.wareHouse = wareHouse;
+		}
+		public EntityColor getColorCanonical() {
+			return colorCanonical;
+		}
+		public void setColorCanonical(EntityColor colorCanonical) {
+			this.colorCanonical = colorCanonical;
+		}
+		public EntitySize getSizeCanonical() {
+			return sizeCanonical;
+		}
+		public void setSizeCanonical(EntitySize sizeCanonical) {
+			this.sizeCanonical = sizeCanonical;
 		}
 	}
 
@@ -195,4 +219,69 @@ public class GarmentCatalog {
 	public void setCanonicalProduct(EntityProduct canonicalProduct) {
 		this.canonicalProduct = canonicalProduct;
 	}
+	
+	public void removeArticlesWithoutMaxStock() {
+		removeOtherArticles(getArticleWithMoreStock());
+	}
+	
+	private void removeOtherArticles(Article articleMaintain) {
+		removeOtherArticlesFromMain(articleMaintain);
+		removeOtherArticlesFromCanonical(articleMaintain);
+	}
+	
+	private void removeOtherArticlesFromMain(Article articleMaintain) {
+		Color colorMaintain = articleMaintain.getColor();
+		Size sizeMaintain = colorMaintain.getSizeWithMoreStock();
+		
+		colors = getColors().stream()
+				.filter(c -> c.getId().compareTo(colorMaintain.getId())==0)
+				.toList();
+		
+		Color color = colors.get(0);
+		color.setSizes(color.getSizes().stream()
+				.filter(s -> s.getId()==sizeMaintain.getId())
+				.toList());
+	}
+	
+	private void removeOtherArticlesFromCanonical(Article articleMaintain) {
+		Color colorMaintain = articleMaintain.getColor();
+		Size sizeMaintain = colorMaintain.getSizeWithMoreStock();
+
+		List<EntityColor> listFiltered = canonicalProduct.getColors().stream()
+				.filter(c -> c.getId().compareTo(colorMaintain.getId())==0)
+				.toList();
+		canonicalProduct.setColors(listFiltered);
+		
+		EntityColor color = canonicalProduct.getColors().get(0);
+		color.setSizes(color.getSizes().stream()
+				.filter(s -> s.getId().compareTo(String.valueOf(sizeMaintain.getId()))==0)
+				.toList());
+	}
+
+	public String getAlmacenFirstArticle() {
+		return getCanonicalProduct()
+					.getColors().get(0)
+					.getSizes().get(0)
+					.getStockDetails().get(0)
+					.getWarehouse();
+	}
+	
+	private Optional<Pair<EntityColor, EntitySize>> getArticleCanonical(Color color, Size size) {
+		if (canonicalProduct==null) {
+			return Optional.empty();
+		}
+		
+		for (EntityColor colorCanonical : canonicalProduct.getColors()) {
+			if (colorCanonical.getId().compareTo(color.getId())==0) {
+				for (EntitySize sizeCanonical : colorCanonical.getSizes()) {
+					if (sizeCanonical.getId().compareTo(String.valueOf(size.getId()))==0) {
+						return Optional.of(Pair.of(colorCanonical, sizeCanonical));
+					}
+				}
+			}
+		}
+		
+		return Optional.empty();
+	}
+	
 }

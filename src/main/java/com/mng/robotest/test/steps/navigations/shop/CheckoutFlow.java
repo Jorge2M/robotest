@@ -36,7 +36,7 @@ import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.domains.compra.steps.PageResultPagoTpvSteps;
 import com.mng.robotest.domains.identification.pageobjects.PageIdentificacion;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.getdata.usuarios.UserShop;
 import com.mng.robotest.test.beans.AccesoEmpl;
@@ -55,6 +55,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.UtilsTest;
 
+
 public class CheckoutFlow extends StepBase {
 
 	public enum From { PREHOME, BOLSA, IDENTIFICATION, CHECKOUT, METODOSPAGO }
@@ -63,7 +64,7 @@ public class CheckoutFlow extends StepBase {
 	private final Pago pago;
 	private final EgyptCity egyptCity;
 	private final List<Pais> finalCountrys;
-	private final List<GarmentCatalog> listArticles;
+	private final List<Article> listArticles;
 	private final Pais pais = dataTest.getPais();
 	
 	private final ValeDiscount valeTest = new ValeDiscount("TEST", 10, "EXTRA SOBRE LOS ARTÍCULOS");
@@ -73,7 +74,7 @@ public class CheckoutFlow extends StepBase {
 	private CheckoutFlow (
 			DataPago dataPago, 
 			Pago pago, 
-			List<GarmentCatalog> listArticles, 
+			List<Article> listArticles, 
 			List<Pais> finalCountrys,
 			EgyptCity egyptCity) {
 		this.finalCountrys = finalCountrys;
@@ -111,7 +112,7 @@ public class CheckoutFlow extends StepBase {
 		return dataPago;
 	}
 	
-	private List<GarmentCatalog> makeListArticles() {
+	private List<Article> makeListArticles() {
 		try {
 			return UtilsTest.getArticlesForTest(pais, app, 2, driver);
 		}
@@ -460,7 +461,7 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	public static class BuilderCheckout {
-		private List<GarmentCatalog> listArticles = null;
+		private List<Article> listArticles = null;
 		private List<Pais> finalCountrys = null;
 		private Pago pago = null;
 		private EgyptCity egyptCity = null;
@@ -479,7 +480,7 @@ public class CheckoutFlow extends StepBase {
 			this.dataPago = dataPago;
 		}
 		
-		public BuilderCheckout listArticles(List<GarmentCatalog> listArticles) {
+		public BuilderCheckout listArticles(List<Article> listArticles) {
 			this.listArticles = listArticles;
 			return this;
 		}

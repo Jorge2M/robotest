@@ -15,12 +15,12 @@ public class PagoGetter {
 	private PagoGetter() {}
 	
 	public static List<PaymentCountry> getListPayments(String codCountry, AppEcom app, boolean isEmpleado) {
-		List<Pais> listCountries = PaisGetter.get(Arrays.asList(codCountry));
+		List<Pais> listCountries = PaisGetter.from(Arrays.asList(codCountry));
 		return getListPaymentsFromCountries(listCountries, app, isEmpleado);
 	}
 	
 	public static List<PaymentCountry> getListPayments(List<String> listCodCountries, AppEcom app, boolean isEmpleado) {
-		List<Pais> listCountries = PaisGetter.get(listCodCountries);
+		List<Pais> listCountries = PaisGetter.from(listCodCountries);
 		return getListPaymentsFromCountries(listCountries, app, isEmpleado);
 	}
 	

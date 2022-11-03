@@ -10,7 +10,7 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.getdata.productlist.GetterProducts;
 import com.mng.robotest.getdata.productlist.Menu;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
@@ -20,6 +20,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
+
 
 public class Com001 extends TestBase {
 
@@ -55,7 +56,7 @@ public class Com001 extends TestBase {
 					.build()
 					.checkout(From.PREHOME);
 		} else {
-			List<GarmentCatalog> articlesShop = getArticlesShop();
+			List<Article> articlesShop = getArticlesShop();
 			new BuilderCheckout(dataPago)
 					.pago(dataTest.getPais().getPago("VISA"))
 					.listArticles(articlesShop)
@@ -68,16 +69,16 @@ public class Com001 extends TestBase {
 		new CompraSteps().checkPedidosManto(dataPago.getListPedidos()); 
 	}
 	
-	private List<GarmentCatalog> getArticlesShop() throws NotFoundException, Exception {
-		Optional<List<GarmentCatalog>> articlesHomeOpt = getArticlesHome();
+	private List<Article> getArticlesShop() throws NotFoundException, Exception {
+		Optional<List<Article>> articlesHomeOpt = getArticlesHome();
 		if (!articlesHomeOpt.isPresent()) {
 			throw new NotFoundException("Home Garment Not Found");
 		}
 		
 		//TODO actualmente no funciona el buscador por referencia de productos Intimissimi (CFIT-1265)
 		//confiamos que esté listo el 1-octubre-2022
-		if (!UtilsTest.dateBeforeToday("2022-11-01")) {
-			Optional<List<GarmentCatalog>> articlesIntimissimiOpt = getArticlesIntimissimi();
+		if (!UtilsTest.dateBeforeToday("2022-12-15")) {
+			Optional<List<Article>> articlesIntimissimiOpt = getArticlesIntimissimi();
 			if (!articlesIntimissimiOpt.isPresent()) {
 				throw new NotFoundException("Home Garment Not Found");
 			}
@@ -87,7 +88,7 @@ public class Com001 extends TestBase {
 		}
 	}
 	
-	private Optional<List<GarmentCatalog>> getArticlesHome() throws Exception {
+	private Optional<List<Article>> getArticlesHome() throws Exception {
 		if (app==AppEcom.outlet) {
 			return Optional.empty();
 		}
@@ -101,10 +102,10 @@ public class Com001 extends TestBase {
 			.filter(FilterType.STOCK)
 			.build();
 		
-		return Optional.of(getterProducts.getAll());
+		return Optional.of(Article.getArticlesCandidateForTest(getterProducts.getAll()));
 	}
 	
-	private Optional<List<GarmentCatalog>> getArticlesIntimissimi() throws Exception {
+	private Optional<List<Article>> getArticlesIntimissimi() throws Exception {
 		if (app==AppEcom.outlet) {
 			return Optional.empty();
 		}
@@ -118,7 +119,7 @@ public class Com001 extends TestBase {
 			.filter(FilterType.STOCK)
 			.build();
 		
-		return Optional.of(getterProducts.getAll());
+		return Optional.of(Article.getArticlesCandidateForTest(getterProducts.getAll()));
 	}
 
 }

@@ -19,6 +19,7 @@ import org.testng.ITestContext;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Constantes;
@@ -59,7 +60,7 @@ public class UtilsMangoTest extends PageBase {
 		return testCaseOpt.get();
 	}
 
-	public ArticuloScreen addArticuloBolsa(GarmentCatalog selArticulo) {
+	public ArticuloScreen addArticuloBolsa(Article selArticulo) {
 		ArticuloScreen articulo = ArticuloNavigations.selectArticuloTallaColorByRef(selArticulo, app, channel, driver);
 		PageFicha.of(channel).clickAnadirBolsaButtonAndWait(); 
 		return articulo;

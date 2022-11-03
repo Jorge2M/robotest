@@ -11,7 +11,7 @@ import com.mng.robotest.test.utils.PaisGetter;
 
 public class Otr005 extends TestBase {
 
-	private static final Pais JAPON = PaisGetter.get(PaisShop.JAPON);
+	private static final Pais JAPON = PaisGetter.from(PaisShop.JAPON);
 	private static final IdiomaPais JAPONES = JAPON.getListIdiomas().get(0);	
 	
 	@Override

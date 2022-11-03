@@ -31,6 +31,8 @@ import com.mng.robotest.getdata.productlist.entity.ProductList;
 import com.mng.robotest.getdata.productlist.filter.Filter;
 import com.mng.robotest.getdata.productlist.filter.FilterStock;
 import com.mng.robotest.getdata.productlist.sort.SortFactory.SortBy;
+import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
@@ -174,14 +176,15 @@ public class GetterProducts {
 			}
 		}
 		
-		if (extraCanonicalInfo) {
+		if (extraCanonicalInfo && productListReturn!=null) {
 			addCanonicalInfo(productListReturn);
 		}
 		return productListReturn;
 	}
 	
 	private void addCanonicalInfo(ProductList productList) throws Exception {
-		var getterProductApiCanonical = new GetterProductApiCanonical(codigoPaisAlf, "ES"); 
+		Pais pais = PaisGetter.fromCodAlf(codigoPaisAlf);
+		var getterProductApiCanonical = new GetterProductApiCanonical(codigoPaisAlf, pais.getCodigo_alf());
 		for (GarmentCatalog garmentCatalog : productList.getAllGarments()) {
 			Optional<EntityProduct> canonicalProduct = getterProductApiCanonical.getProduct(garmentCatalog.getGarmentId());
 			if (canonicalProduct.isPresent()) {

@@ -42,7 +42,7 @@ public class GestorUsersShop {
 	}
 	
 	private UserShop getCountryMakedUser(PaisShop paisShop) {
-		Pais pais = PaisGetter.get(paisShop);
+		Pais pais = PaisGetter.from(paisShop);
 		String user = String.format("e2e.%s.test@mango.com", pais.getCodigo_alf().toLowerCase());
 		return new UserShop(user, "hsXPv7rUoYw3QnMKRhPT");
 	}

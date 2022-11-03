@@ -8,7 +8,7 @@ import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.compra.tests.CompraSteps;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
@@ -17,6 +17,7 @@ import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.utils.UtilsTest;
+
 
 public class Com010 extends TestBase {
 
@@ -42,8 +43,7 @@ public class Com010 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access(dataTest.isUserRegistered());
-		List<GarmentCatalog> listArticles = UtilsTest.getArticlesForTest(dataTest.getPais(), app, 3, driver);
-		
+		List<Article> listArticles = UtilsTest.getArticlesForTest(dataTest.getPais(), app, 3, driver);
 		if (!manyArticles) {
 			listArticles = Arrays.asList(listArticles.get(0));
 		}

@@ -19,7 +19,7 @@ public class Com003 extends TestBase {
 	public void execute() throws Exception {
 		DataPago dataPago = getDataPago(configCheckout);
 		dataPago = new BuilderCheckout(dataPago)
-			.finalCountrys(Arrays.asList(PaisGetter.get(PaisShop.FRANCE)))
+			.finalCountrys(Arrays.asList(PaisGetter.from(PaisShop.FRANCE)))
 			.build()
 			.checkout(From.PREHOME);		
 	}

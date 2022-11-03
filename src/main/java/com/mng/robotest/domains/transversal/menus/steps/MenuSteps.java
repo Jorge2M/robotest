@@ -429,7 +429,7 @@ public class MenuSteps extends StepBase {
 	public void checkURLRedirectFicha() throws Exception {
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver).build();
 		GarmentCatalog product = getterProducts.getAll().get(0);
-		Article article = product.getArticleWithMoreStock();
+		Article article = Article.getArticleCandidateForTest(product);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_REF_ARTICLE, article.getGarmentId());
 		TestMaker.getCurrentStepInExecution().replaceInExpected(TAG_REF_ARTICLE, article.getGarmentId());
 		

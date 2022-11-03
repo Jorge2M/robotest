@@ -38,7 +38,7 @@ public class DataTest implements Cloneable, Serializable {
 	
 	public static DataTest getData(PaisShop paisShop) {
 		DataTest dataTest = new DataTest();
-		dataTest.pais = PaisGetter.get(paisShop);
+		dataTest.pais = PaisGetter.from(paisShop);
 		dataTest.idioma = dataTest.pais.getListIdiomas().get(0);
 		return dataTest;
 	}	

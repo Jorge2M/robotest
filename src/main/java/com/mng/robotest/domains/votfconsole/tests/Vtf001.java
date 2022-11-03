@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.votfconsole.tests;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -10,12 +9,12 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.votfconsole.steps.ConsolaVotfSteps;
 import com.mng.robotest.getdata.productlist.GetterProducts;
 import com.mng.robotest.getdata.productlist.Menu;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.utils.PaisGetter;
+
 
 public class Vtf001 extends TestBase {
 
@@ -52,7 +51,7 @@ public class Vtf001 extends TestBase {
 	}
 
 	private List<Article> getArticlesAvailable(int numProductsMax, WebDriver driver) throws Exception {
-		Pais espana = PaisGetter.get(PaisShop.ESPANA);
+		Pais espana = PaisGetter.from(PaisShop.ESPANA);
 		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigo_alf(), AppEcom.votf, driver).
 				linea(LineaType.she).
 				menu(Menu.Shorts).
@@ -60,11 +59,7 @@ public class Vtf001 extends TestBase {
 				pagina(1).
 				build();
 		
-		List<Article> listArticles = new ArrayList<>();
-		for (GarmentCatalog garment : getterProducts.getAll()) {
-			listArticles.add(garment.getArticleWithMoreStock());
-		}
-		return listArticles;
+		return Article.getArticlesCandidateForTest(getterProducts.getAll());
 	}
 
 }

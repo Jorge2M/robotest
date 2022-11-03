@@ -3,6 +3,8 @@ package com.mng.robotest.domains.transversal;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb;
@@ -11,11 +13,12 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.utils.UtilsTest;
+
 
 public abstract class StepBase extends PageBase {
 
@@ -70,7 +73,11 @@ public abstract class StepBase extends PageBase {
 		new SecFiltrosSteps().selectFiltroColores(colors, FactoryMenus.get(menu).getMenu());
 	}	
 	
-	protected List<GarmentCatalog> getArticles(int numArticles) throws Exception {
+	protected List<Article> getArticles(int numArticles) throws Exception {
 		return UtilsTest.getArticlesForTest(dataTest.getPais(), app, numArticles, driver);
+	}
+	
+	protected Pair<Article, Article> getTwoArticlesFromDistinctWarehouses() throws Exception {
+		return UtilsTest.getTwoArticlesFromDistinctWarehouses();
 	}
 }

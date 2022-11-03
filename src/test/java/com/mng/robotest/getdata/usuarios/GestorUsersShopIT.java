@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 import org.junit.Test;
 
-import com.mng.robotest.getdata.usuarios.GestorUsersShop;
-import com.mng.robotest.getdata.usuarios.UserShop;
 import com.mng.robotest.getdata.usuarios.UserShop.StateUser;
 
 public class GestorUsersShopIT {

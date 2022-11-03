@@ -10,7 +10,7 @@ import com.mng.robotest.test.utils.PaisGetter;
 
 public class Otr001 extends TestBase {
 
-	private static final Pais FRANCIA = PaisGetter.get(PaisShop.FRANCE);
+	private static final Pais FRANCIA = PaisGetter.from(PaisShop.FRANCE);
 	private static final IdiomaPais FRANCIA_FRANCES = FRANCIA.getListIdiomas().get(0);
 	
 	@Override

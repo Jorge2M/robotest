@@ -24,7 +24,7 @@ public class ArticuloScreen {
 	public ArticuloScreen() {}
 	
 	public ArticuloScreen(GarmentCatalog productStock) {
-		Article articleStock = productStock.getArticleWithMoreStock();
+		Article articleStock = Article.getArticleCandidateForTest(productStock);
 		this.referencia = articleStock.getGarmentId();
 		this.codigoColor = articleStock.getColor().getId();
 		this.talla = Talla.fromValue(articleStock.getSize().getId2Digits());

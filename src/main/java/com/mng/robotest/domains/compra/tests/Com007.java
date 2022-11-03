@@ -31,7 +31,7 @@ public class Com007 extends TestBase {
 	private final DataPago dataPago;
 	
 	public Com007() throws Exception {
-		dataTest.setPais(PaisGetter.get(PaisShop.FRANCE));
+		dataTest.setPais(PaisGetter.from(PaisShop.FRANCE));
 		dataTest.setUserRegistered(true);
 		dataTest.setUserConnected("francia.test@mango.com");
 		dataTest.setPasswordUser(GetterSecrets.factory()

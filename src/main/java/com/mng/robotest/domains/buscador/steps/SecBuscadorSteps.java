@@ -15,6 +15,7 @@ import com.mng.robotest.domains.galeria.pageobjects.PageGaleria.From;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
@@ -50,7 +51,7 @@ public class SecBuscadorSteps extends StepBase {
 	}
 	
 	private void searchArticuloCommon(GarmentCatalog product) {
-		ArticuloNavigations.buscarArticulo(product.getArticleWithMoreStock(), channel, app);
+		ArticuloNavigations.buscarArticulo(Article.getArticleCandidateForTest(product), channel, app);
 		PageObjTM.waitForPageLoaded(driver);  
 		PageFichaSteps pageFichaSteps = new PageFichaSteps();
 		pageFichaSteps.checkIsFichaAccordingTypeProduct(product);

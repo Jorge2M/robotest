@@ -3,7 +3,7 @@ package com.mng.robotest.domains.bolsa.pageobjects;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsaCommon.DataArtBolsa;
+import com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Constantes;

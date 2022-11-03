@@ -16,7 +16,7 @@ public class Favoritos implements Serializable {
 	
 	private String index_fact = "";
 	public int prioridad;
-	private Pais pais = PaisGetter.get(PaisShop.ESPANA);
+	private Pais pais = PaisGetter.from(PaisShop.ESPANA);
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
 
 	public Favoritos() {}

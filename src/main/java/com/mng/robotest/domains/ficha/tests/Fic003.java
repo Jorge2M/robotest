@@ -18,7 +18,7 @@ import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.Su
 
 public class Fic003 extends TestBase {
 
-	private final Pais corea = PaisGetter.get(PaisShop.COREA_DEL_SUR);
+	private final Pais corea = PaisGetter.from(PaisShop.COREA_DEL_SUR);
 	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 	private final PageFichaSteps pageFichaSteps = new PageFichaSteps();
 

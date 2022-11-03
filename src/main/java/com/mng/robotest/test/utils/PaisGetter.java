@@ -25,11 +25,11 @@ public class PaisGetter {
 	private static final List<Pais> listAllCountries = getListAllCountries();
 	private static final List<String> charactersAllCountries = Arrays.asList("*", "X", "");
 
-	public static Pais get(PaisShop paisShop) throws NoSuchElementException {
-		return (get(paisShop.getCodigoPais()));
+	public static Pais from(PaisShop paisShop) throws NoSuchElementException {
+		return (from(paisShop.getCodigoPais()));
 	}
 	
-	public static Pais get(String codPais) throws NoSuchElementException {
+	public static Pais from(String codPais) throws NoSuchElementException {
 		for (Pais pais : listAllCountries) {
 			if (codPais.compareTo(pais.getCodigo_pais())==0) {
 				return pais;
@@ -38,7 +38,16 @@ public class PaisGetter {
 		throw new NoSuchElementException(codPais + " is not in the XML of countries");
 	}
 	
-	public static List<Pais> get(List<String> listCodCountries) {
+	public static Pais fromCodAlf(String codPaisAlf) throws NoSuchElementException {
+		for (Pais pais : listAllCountries) {
+			if (codPaisAlf.compareTo(pais.getCodigo_alf())==0) {
+				return pais;
+			}
+		}
+		throw new NoSuchElementException(codPaisAlf + " is not in the XML of countries");
+	}	
+	
+	public static List<Pais> from(List<String> listCodCountries) {
 		List<Pais> listToReturn = new ArrayList<>();
 		for (Pais pais : listAllCountries) {
 			if (listCodCountries.contains(pais.getCodigo_pais())) {
@@ -57,7 +66,7 @@ public class PaisGetter {
 			return getAllCountries();
 		}
 		List<String> listCountries = Arrays.asList(countries.split(","));
-		return (get(listCountries));
+		return (from(listCountries));
 	}
 	
 	public static List<Pais> getAllCountries() {

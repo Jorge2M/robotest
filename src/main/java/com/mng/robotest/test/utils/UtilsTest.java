@@ -7,15 +7,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.getdata.productlist.GetterProducts;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.getdata.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.test.data.PaisShop;
+import com.mng.robotest.test.exceptions.NotFoundException;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 
 public class UtilsTest {
@@ -125,30 +129,67 @@ public class UtilsTest {
 		return "";
 	}
 	
-	public static GarmentCatalog getArticleForTest(Pais pais, AppEcom app, WebDriver driver) throws Exception {
-		List<GarmentCatalog> articles = getArticlesForTest(pais, app, driver);
+	public static Article getArticleForTest(Pais pais, AppEcom app, WebDriver driver) throws Exception {
+		List<Article> articles = getArticlesForTest(pais, app, driver);
 		return articles.get(0);
 	}
 	
 	static int maxArticles = 99;
-	public static List<GarmentCatalog> getArticlesForTest(Pais pais, AppEcom app, WebDriver driver) throws Exception {
+	public static List<Article> getArticlesForTest(Pais pais, AppEcom app, WebDriver driver) throws Exception {
 		return (getArticlesForTest(pais, app, maxArticles, driver));
 	}
 	
-	public static List<GarmentCatalog> getArticlesForTest(
+	public static List<Article> getArticlesForTest(
 			Pais pais, AppEcom app, int maxArticlesAwayVale, WebDriver driver) throws Exception {
 		
-		List<GarmentCatalog> listProducts;
+		
 		GetterProducts getterProducts = new GetterProducts
 				.Builder(pais.getCodigo_alf(), app, driver)
 				.filter(FilterType.STOCK)
 				.sortBy(SortBy.STOCK_DESCENDENT)
 				.build();
 
-		listProducts = getterProducts.getAll();
-		if (listProducts.size() > maxArticlesAwayVale) {
-			return (listProducts.subList(0, maxArticlesAwayVale));
+		List<GarmentCatalog> listProducts = getterProducts.getAll();
+		List<Article> listArticles = Article.getArticlesCandidateForTest(listProducts);
+		if (listArticles.size() > maxArticlesAwayVale) {
+			return (listArticles.subList(0, maxArticlesAwayVale));
 		}
-		return listProducts;
+		return listArticles;
 	}
+	
+	public static Pair<Article, Article> getTwoArticlesFromDistinctWarehouses() throws Exception {
+		List<GarmentCatalog> listGarments = getProductFromApi();
+		
+		GarmentCatalog garment1 = listGarments.get(0);
+		garment1.removeArticlesWithoutMaxStock();
+		String almacen1 = garment1.getAlmacenFirstArticle();
+		GarmentCatalog garment2 = null;
+		for (GarmentCatalog garment : listGarments) {
+			garment.removeArticlesWithoutMaxStock();
+			String almacen = garment.getAlmacenFirstArticle(); 
+			if (almacen.compareTo(almacen1)!=0) {
+				garment2 = garment;
+				break;
+			}
+		}
+		
+		if (garment2==null) {
+			throw new NotFoundException("Not found article of warehouse <> " + almacen1);
+		}
+		
+		return Pair.of(
+				Article.getArticleCandidateForTest(garment1), 
+				Article.getArticleCandidateForTest(garment2));
+	}	
+	
+	private static List<GarmentCatalog> getProductFromApi() throws Exception {
+		Pais deutschland = PaisGetter.from(PaisShop.DEUTSCHLAND);
+		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", deutschland.getCodigo_alf(), AppEcom.shop, null)
+			.sortBy(SortBy.STOCK_DESCENDENT)
+			.extraCanonicalInfo(true)
+			.build();
+		return getterProducts.getAll();
+	}	
+	
+	
 }

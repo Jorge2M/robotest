@@ -77,7 +77,7 @@ public class SecDataProduct extends PageBase {
 		}
 	}
 
-	private static final String XPATH_NOMBRE_COLOR_SELECTED_DESKTOP = ColorType.SELECTED.getXPath() + "//img[@class='color-image']";
+	private static final String XPATH_NOMBRE_COLOR_SELECTED_DESKTOP = "//*[@class='colors-info-name']";
 
 	//xpaths asociados al tema tallas
 	private static final String XPATH_CAPA_AVISAME = "//*[@id='bocataAvisame']";
@@ -180,7 +180,7 @@ public class SecDataProduct extends PageBase {
 		switch (channel) {
 			case desktop:
 				if (state(Present, XPATH_NOMBRE_COLOR_SELECTED_DESKTOP).check()) {
-					return getElement(XPATH_NOMBRE_COLOR_SELECTED_DESKTOP).getAttribute("alt");
+					return getElement(XPATH_NOMBRE_COLOR_SELECTED_DESKTOP).getText();
 				}
 				return Constantes.COLOR_DESCONOCIDO;
 			case mobile:

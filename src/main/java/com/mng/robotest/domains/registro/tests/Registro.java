@@ -18,7 +18,7 @@ public class Registro implements Serializable {
 	private String index_fact = "";
 	private boolean accessFromFactory = false;
 	public int prioridad;
-	private Pais pais = PaisGetter.get(PaisShop.ESPANA);
+	private Pais pais = PaisGetter.from(PaisShop.ESPANA);
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
 	
 	public Registro() { }

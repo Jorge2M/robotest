@@ -11,6 +11,7 @@ import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.getdata.productlist.entity.Color;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.getdata.productlist.entity.Size;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
@@ -42,7 +43,7 @@ public class Luq001 extends TestBase {
 	
 	public void execute() throws Exception {
 		//Data For Test
-		List<GarmentCatalog> listArticles = getListArticles();
+		List<Article> listArticles = getListArticles();
 		
 		//Access and add articles
 		access();
@@ -60,7 +61,7 @@ public class Luq001 extends TestBase {
 			.checkout(From.BOLSA);
 	}
 	
-	private List<GarmentCatalog> getListArticles() {
+	private List<Article> getListArticles() {
 		PaisShop paisShop = PaisShop.from(dataTest.getCodigoPais());
 		switch (paisShop) {
 		case USA:
@@ -82,10 +83,14 @@ public class Luq001 extends TestBase {
 	
 	private Pais getPaisRandom(List<PaisShop> listaPaises) {
 		int randomNumber = this.rand.nextInt(listaPaises.size());
-		return PaisGetter.get(listaPaises.get(randomNumber));
+		return PaisGetter.from(listaPaises.get(randomNumber));
 	}
 	
-	private List<GarmentCatalog> getArticles() {
+	private List<Article> getArticles() {
+		return Article.getArticlesCandidateForTest(getProducts());
+	}
+	
+	private List<GarmentCatalog> getProducts() {
 		List<GarmentCatalog> listReturn = new ArrayList<>();
 		int randomNumber = this.rand.nextInt(2);
 		if (randomNumber>=0) {

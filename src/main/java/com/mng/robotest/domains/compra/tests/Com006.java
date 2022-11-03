@@ -13,7 +13,7 @@ import com.mng.robotest.test.utils.PaisGetter;
 
 public class Com006 extends TestBase {
 
-	private static final Pais ITALIA = PaisGetter.get(PaisShop.ITALIA);
+	private static final Pais ITALIA = PaisGetter.from(PaisShop.ITALIA);
 	private static final IdiomaPais ITALIANO = ITALIA.getListIdiomas().get(0);
 	
 	private final DataPago dataPago;
