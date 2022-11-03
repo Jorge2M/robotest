@@ -13,7 +13,7 @@ public class PaisAplicaVale implements Serializable {
 
 	private static final long serialVersionUID = 7404913971070937277L;
 	
-	private String index_fact;
+	private String indexFact;
 	
 	public final int prioridad;
 	private final ConfigCheckout fTCkoutIni;
@@ -28,7 +28,7 @@ public class PaisAplicaVale implements Serializable {
 				.emaiExists()
 				.version(version).build();
 		
-		this.index_fact = 
+		this.indexFact = 
 			pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + " - " + 
 			idioma.getCodigo().getLiteral();
 	}
@@ -37,7 +37,7 @@ public class PaisAplicaVale implements Serializable {
 		groups={"Pagos", "shop-movil-web", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, 
 		description="Compra usuario no registrado")
 	public void CHK001_Compra() throws Exception {
-		TestCaseTM.addNameSufix(this.index_fact);
+		TestCaseTM.addNameSufix(this.indexFact);
 		new Chk001(pais, idioma, fTCkoutIni).execute();
 	}
 	

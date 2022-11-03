@@ -89,7 +89,7 @@ public class PageMisComprasSteps extends StepBase {
 	}
 	
 	@Step (
-		description="Seleccionamos el ticket  #{idTicket} de la lista", 
+		description="Seleccionamos el ticket <b>#{idTicket}</b> de la lista", 
 		expected="Aparece una sección con los detalles de la Compra")
 	public void selectCompra(String idTicket) {
 		pageMisCompras.selectTicket(idTicket);	  

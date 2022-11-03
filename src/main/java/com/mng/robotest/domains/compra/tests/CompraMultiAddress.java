@@ -12,7 +12,7 @@ public class CompraMultiAddress implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String index_fact = "";
+	private String indexFact = "";
 	public int prioridad;
 	private Pais pais;
 	private IdiomaPais idioma;
@@ -23,14 +23,14 @@ public class CompraMultiAddress implements Serializable {
 	public CompraMultiAddress(Pais pais, IdiomaPais idioma) {
 		this.pais = pais;
 		this.idioma = idioma;
-		this.index_fact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
+		this.indexFact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
 	}	
 	
 	@Test (
 		groups={"Compra", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true,
 		description="[Usuario registrado] Acceder a la sección de multidirecciones del checkout y añadir/eliminar una dirección")
 	public void COM009_MultiAddress() throws Exception {
-		TestCaseTM.addNameSufix(this.index_fact);
+		TestCaseTM.addNameSufix(this.indexFact);
 		new Com009(pais, idioma).execute();
 	}
 

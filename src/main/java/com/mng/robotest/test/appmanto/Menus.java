@@ -27,7 +27,7 @@ public class Menus implements Serializable {
 	String cabeceraName = "";
 	String cabeceraNameNext = "";
 	int prioridad = 1;
-	String index_fact = "";
+	String indexFact = "";
 	
 	/**
 	 * Constructor para invocación desde @Factory
@@ -35,9 +35,9 @@ public class Menus implements Serializable {
 	public Menus(String cabeceraName, String cabeceraNameNext, int prioridad) {
 		this.cabeceraName = cabeceraName;
 		this.cabeceraNameNext = cabeceraNameNext;
-		this.index_fact = cabeceraName;
+		this.indexFact = cabeceraName;
 		this.prioridad = prioridad;
-		this.index_fact = " (" + cabeceraName + ")";
+		this.indexFact = " (" + cabeceraName + ")";
 	}
 
 	public DataMantoAccess getDataMantoAccess() {
@@ -65,7 +65,7 @@ public class Menus implements Serializable {
 		groups={"Menus", "Canal:desktop_App:all"},
 		description="Consulta de menús")
 	public void MAN005_ConsultaMenus() throws Exception {
-		TestCaseTM.addNameSufix(this.index_fact);
+		TestCaseTM.addNameSufix(this.indexFact);
 		DataMantoAccess dMantoAcc = getDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
 		PageLoginMantoSteps.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);

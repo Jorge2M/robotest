@@ -14,7 +14,7 @@ public class MiCuenta implements Serializable {
 	private static final long serialVersionUID = 2188911402476562105L;
 	
 	public int prioridad;
-	private String index_fact = "";
+	private String indexFact = "";
 	private Pais pais = PaisGetter.from(PaisShop.ESPANA);
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
 
@@ -24,7 +24,7 @@ public class MiCuenta implements Serializable {
 	public MiCuenta(Pais pais, IdiomaPais idioma, int prioridad) {
 		this.pais = pais;
 		this.idioma = idioma;
-		this.index_fact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
+		this.indexFact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
 		this.prioridad = prioridad;
 	}	
 	
@@ -34,7 +34,7 @@ public class MiCuenta implements Serializable {
 	@Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
 	public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
 			throws Exception {
-		TestCaseTM.addNameSufix(this.index_fact);
+		TestCaseTM.addNameSufix(this.indexFact);
 		new Mic001(pais, idioma, userConDevolucionPeroNoEnPRO, passwordUserConDevolucion).execute();
 	}
 	
@@ -45,7 +45,7 @@ public class MiCuenta implements Serializable {
 	public void MIC002_CheckConsultaMisCompras(
 			String userWithOnlinePurchases, String userWithStorePurchases, 
 			String passUserWithOnlinePurchases, String passUserWithStorePurchases) throws Exception {
-		TestCaseTM.addNameSufix(this.index_fact);
+		TestCaseTM.addNameSufix(this.indexFact);
 		new Mic002(
 				pais, idioma, 
 				userWithOnlinePurchases, userWithStorePurchases,

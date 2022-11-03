@@ -15,7 +15,7 @@ public class Registro implements Serializable {
 	
 	private static final long serialVersionUID = 9220128375933995114L;
 	
-	private String index_fact = "";
+	private String indexFact = "";
 	private boolean accessFromFactory = false;
 	public int prioridad;
 	private Pais pais = PaisGetter.from(PaisShop.ESPANA);
@@ -27,7 +27,7 @@ public class Registro implements Serializable {
 	public Registro(Pais pais, IdiomaPais idioma, int prioridad) {
 		this.pais = pais;
 		this.idioma = idioma;
-		this.index_fact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
+		this.indexFact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
 		this.prioridad = prioridad;
 		this.accessFromFactory = true;
 	}
@@ -43,7 +43,7 @@ public class Registro implements Serializable {
 		groups={"Registro", "Canal:all_App:outlet"},
 		description="Registro con errores en la introducción de los datos")
 	public void REG002_RegistroNOK() throws Exception {
-		TestCaseTM.addNameSufix(this.index_fact);
+		TestCaseTM.addNameSufix(this.indexFact);
 		new Reg002(pais, idioma).execute();
 	}
 
@@ -51,7 +51,7 @@ public class Registro implements Serializable {
 		groups={"Registro", "Canal:desktop,mobile_App:outlet,shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG003_RegistroOK_publi() throws Exception {
-		TestCaseTM.addNameSufix(this.index_fact);
+		TestCaseTM.addNameSufix(this.indexFact);
 		new Reg003(pais, idioma, accessFromFactory).execute();
 	}
 	
@@ -59,7 +59,7 @@ public class Registro implements Serializable {
 		groups={"Registro", "Canal:desktop_App:outlet"}, alwaysRun=true, 
 		description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
 	public void REG004_RegistroOK_NoPubli() throws Exception {
-		TestCaseTM.addNameSufix(this.index_fact);
+		TestCaseTM.addNameSufix(this.indexFact);
 		new Reg004(pais, idioma).execute();
 	}
 }

@@ -78,6 +78,6 @@ public abstract class StepBase extends PageBase {
 	}
 	
 	protected Pair<Article, Article> getTwoArticlesFromDistinctWarehouses() throws Exception {
-		return UtilsTest.getTwoArticlesFromDistinctWarehouses();
+		return UtilsTest.getTwoArticlesFromDistinctWarehouses(dataTest.getPais(), app);
 	}
 }

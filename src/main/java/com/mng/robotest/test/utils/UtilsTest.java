@@ -18,9 +18,9 @@ import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.getdata.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+
 
 public class UtilsTest {
 	
@@ -157,8 +157,8 @@ public class UtilsTest {
 		return listArticles;
 	}
 	
-	public static Pair<Article, Article> getTwoArticlesFromDistinctWarehouses() throws Exception {
-		List<GarmentCatalog> listGarments = getProductFromApi();
+	public static Pair<Article, Article> getTwoArticlesFromDistinctWarehouses(Pais pais, AppEcom app) throws Exception {
+		List<GarmentCatalog> listGarments = getProductFromApi(pais, app);
 		
 		GarmentCatalog garment1 = listGarments.get(0);
 		garment1.removeArticlesWithoutMaxStock();
@@ -182,9 +182,9 @@ public class UtilsTest {
 				Article.getArticleCandidateForTest(garment2));
 	}	
 	
-	private static List<GarmentCatalog> getProductFromApi() throws Exception {
-		Pais deutschland = PaisGetter.from(PaisShop.DEUTSCHLAND);
-		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", deutschland.getCodigo_alf(), AppEcom.shop, null)
+	private static List<GarmentCatalog> getProductFromApi(Pais pais, AppEcom app) throws Exception {
+		//GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", deutschland.getCodigo_alf(), AppEcom.shop, null)
+		GetterProducts getterProducts = new GetterProducts.Builder(pais	.getCodigo_alf(), app, null)
 			.sortBy(SortBy.STOCK_DESCENDENT)
 			.extraCanonicalInfo(true)
 			.build();

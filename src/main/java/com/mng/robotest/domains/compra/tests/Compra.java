@@ -65,7 +65,7 @@ public class Compra {
 	}
 	
 	@Test (
-		groups={"Compra", "Canal:all_App:shop,outlet"}, alwaysRun=true,
+		groups={"Compra", "Canal:all_App:shop"}, alwaysRun=true,
 		description="[Usuario registrado] Compra utilizando artículos Multialmacén")
 	public void COM011_Compra_Multialmacen() throws Exception {
 		new Com011().execute();

@@ -19,7 +19,7 @@ public class Com011 extends TestBase {
 
 	public Com011() throws Exception {
 		dataTest.setUserRegistered(true);
-		if (dataTest.getPais()==null) {
+		if (inputParamsSuite.getListaPaises().isEmpty()) {
 			dataTest.setPais(PaisGetter.from(PaisShop.DEUTSCHLAND));
 		}
 	}
@@ -63,4 +63,6 @@ public class Com011 extends TestBase {
 		pageMisComprasSteps.selectCompra(codigoPedido);
 		new ModalDetalleCompraSteps().checkIsDataVisible();
 	}    
+	
+	//TODO añadir Manto
 }

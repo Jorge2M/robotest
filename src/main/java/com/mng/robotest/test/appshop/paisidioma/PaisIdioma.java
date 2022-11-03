@@ -16,7 +16,7 @@ public class PaisIdioma implements Serializable {
 	
 	private static final long serialVersionUID = 7000361927887748996L;
 	
-	private String index_fact = "";
+	private String indexFact = "";
 	public int prioridad;
 	private FlagsNaviationLineas flagsNavigation = VersionPaisSuite.V1;
 	private Pais pais = PaisGetter.from(PaisShop.ESPANA);
@@ -35,7 +35,7 @@ public class PaisIdioma implements Serializable {
 		if (linesToTest.size()==1) {
 			lineaStr = "-" + linesToTest.get(0).getType();
 		}
-		this.index_fact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral() + lineaStr;
+		this.indexFact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral() + lineaStr;
 		this.pais = pais;
 		this.idioma = idioma;
 		this.linesToTest = linesToTest;
@@ -46,7 +46,7 @@ public class PaisIdioma implements Serializable {
 		groups={"Lineas", "Canal:all_App:shop,outlet"}, 
 		description="Acceso desde prehome y navegación por todas las líneas/sublíneas del país + selección menú/s")
 	public void PAR001_Lineas() throws Exception {
-		TestCaseTM.addNameSufix(this.index_fact);
+		TestCaseTM.addNameSufix(this.indexFact);
 		new Par001(pais, idioma, linesToTest, flagsNavigation).execute();
 	}
 	

@@ -57,7 +57,11 @@ public class GarmentCatalog {
 			EntitySize sizeCanonical = articleCanonical.get().getRight();
 			articulo.setColorCanonical(colorCanonical);
 			articulo.setSizeCanonical(sizeCanonical);
-			articulo.setWareHouse(sizeCanonical.getStockDetails().get(0).getWarehouse());
+			if (sizeCanonical.getStockDetails()!=null) {
+				articulo.setWareHouse(sizeCanonical.getStockDetails().get(0).getWarehouse());
+			} else {
+				articulo.setWareHouse(null);
+			}
 		}
 		
 		return articulo;
@@ -226,7 +230,9 @@ public class GarmentCatalog {
 	
 	private void removeOtherArticles(Article articleMaintain) {
 		removeOtherArticlesFromMain(articleMaintain);
-		removeOtherArticlesFromCanonical(articleMaintain);
+		if (canonicalProduct!=null) {
+			removeOtherArticlesFromCanonical(articleMaintain);
+		}
 	}
 	
 	private void removeOtherArticlesFromMain(Article articleMaintain) {
@@ -259,11 +265,14 @@ public class GarmentCatalog {
 	}
 
 	public String getAlmacenFirstArticle() {
-		return getCanonicalProduct()
-					.getColors().get(0)
-					.getSizes().get(0)
-					.getStockDetails().get(0)
-					.getWarehouse();
+		if (canonicalProduct!=null) {
+			return canonicalProduct
+						.getColors().get(0)
+						.getSizes().get(0)
+						.getStockDetails().get(0)
+						.getWarehouse();
+		}
+		return null;
 	}
 	
 	private Optional<Pair<EntityColor, EntitySize>> getArticleCanonical(Color color, Size size) {

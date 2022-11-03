@@ -17,10 +17,12 @@ public class GetterProductApiCanonical {
 	private static final String target = "https://internal-canonical-products.pro.k8s.mango/v1/products";
 	private final String codPaisAlf;
 	private final String codIdiomAlf;
+	private final String channelId;
 	
-	public GetterProductApiCanonical(String codPaisAlf, String codIdiomAlf) {
+	public GetterProductApiCanonical(String codPaisAlf, String codIdiomAlf, String channelId) {
 		this.codPaisAlf = normalizeCodPais(codPaisAlf);
 		this.codIdiomAlf = codIdiomAlf;
+		this.channelId = channelId;
 	}
 	
 	public Optional<EntityProduct> getProduct(String idProducto) throws Exception {
@@ -42,7 +44,8 @@ public class GetterProductApiCanonical {
 				.target(target)
 				.path(idProducto)
 				.queryParam("countryId", codPaisAlf)
-				.queryParam("languageId", codIdiomAlf);
+				.queryParam("languageId", codIdiomAlf)
+				.queryParam("channelId", channelId);
 	}	
 	
 	private String normalizeCodPais(String codPaisAlf) {

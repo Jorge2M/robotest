@@ -184,7 +184,7 @@ public class GetterProducts {
 	
 	private void addCanonicalInfo(ProductList productList) throws Exception {
 		Pais pais = PaisGetter.fromCodAlf(codigoPaisAlf);
-		var getterProductApiCanonical = new GetterProductApiCanonical(codigoPaisAlf, pais.getCodigo_alf());
+		var getterProductApiCanonical = new GetterProductApiCanonical(codigoPaisAlf, pais.getCodigo_alf(), app.name());
 		for (GarmentCatalog garmentCatalog : productList.getAllGarments()) {
 			Optional<EntityProduct> canonicalProduct = getterProductApiCanonical.getProduct(garmentCatalog.getGarmentId());
 			if (canonicalProduct.isPresent()) {

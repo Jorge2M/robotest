@@ -9,13 +9,13 @@ import com.mng.robotest.test.factoryes.entities.EgyptCity;
 public class EgyptOrderTest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String index_fact;
+	private String indexFact;
 	private final EgyptCity egyptCity;
 	
 	
 	public EgyptOrderTest(EgyptCity egyptCity) {
 		this.egyptCity = egyptCity;
-		this.index_fact = getIndexFactoria(egyptCity);
+		this.indexFact = getIndexFactoria(egyptCity);
 	}
 	
 	private String getIndexFactoria(EgyptCity egyptCity) {
@@ -26,7 +26,7 @@ public class EgyptOrderTest implements Serializable {
 		groups={"Compra", "Canal:desktop_App:shop"},
 		description="Test de compra en Egypto parametrizado por stado y ciudad")
 	public void EGY001_Compra() throws Exception {
-		TestCaseTM.addNameSufix(this.index_fact);
+		TestCaseTM.addNameSufix(this.indexFact);
 		new Egy001(egyptCity).execute();
 	}
 	

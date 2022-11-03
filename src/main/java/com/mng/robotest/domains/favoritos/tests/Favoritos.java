@@ -14,7 +14,7 @@ public class Favoritos implements Serializable {
 
 	private static final long serialVersionUID = -3932978752450813757L;
 	
-	private String index_fact = "";
+	private String indexFact = "";
 	public int prioridad;
 	private Pais pais = PaisGetter.from(PaisShop.ESPANA);
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
@@ -25,7 +25,7 @@ public class Favoritos implements Serializable {
 	public Favoritos(Pais pais, IdiomaPais idioma, int prioridad) {
 		this.pais = pais;
 		this.idioma = idioma;
-		this.index_fact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
+		this.indexFact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
 		this.prioridad = prioridad;
 	} 
 
@@ -33,7 +33,7 @@ public class Favoritos implements Serializable {
 		groups={"Favoritos", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario registrado] Alta favoritos desde la galería")
 	public void FAV001_AltaFavoritosDesdeGaleria() throws Exception {
-		TestCaseTM.addNameSufix(this.index_fact);
+		TestCaseTM.addNameSufix(this.indexFact);
 		new Fav001(pais, idioma).execute();
 	}
 
@@ -41,7 +41,7 @@ public class Favoritos implements Serializable {
 		groups={"Favoritos", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario no registrado] Alta favoritos desde la galería Mango-Home y posterior identificación")
 	public void FAV002_AltaFavoritosDesdeFicha() throws Exception {
-		TestCaseTM.addNameSufix(this.index_fact);
+		TestCaseTM.addNameSufix(this.indexFact);
 		new Fav002(pais, idioma).execute();
 	}
 }
