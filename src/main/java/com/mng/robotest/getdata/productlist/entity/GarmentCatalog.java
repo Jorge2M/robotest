@@ -42,7 +42,7 @@ public class GarmentCatalog {
 		Size sizeResult = colorResult.getSizes().get(0);
 		for (Color color : colors) {
 			Size size = color.getSizeWithMoreStock();
-			if (size.getStock() > colorResult.getStock()) {
+			if (size.getStock() > sizeResult.getStock()) {
 				colorResult = color;
 				sizeResult = size; 
 			}
