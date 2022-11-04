@@ -1,6 +1,7 @@
 package com.mng.robotest.test.generic.beans;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
@@ -135,14 +136,10 @@ public class ArticuloScreen {
 		return iguales;
 	}
 	
-	public boolean isPresentInList(List<ArticuloScreen> listaArticulos) {
-		for (ArticuloScreen articulo : listaArticulos) {
-			if (isTheSame(articulo)) {
-				return true;
-			}
-		}
-		
-		return false;
+	public Optional<ArticuloScreen> searchInList(List<ArticuloScreen> listaArticulos) {
+		return listaArticulos.stream()
+			.filter(a -> isTheSame(a))
+			.findFirst();
 	}
 	
 	public boolean isTheSame(ArticuloScreen articulo) {

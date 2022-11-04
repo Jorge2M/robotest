@@ -23,6 +23,7 @@ import com.mng.robotest.getdata.productlist.GetterProducts;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.getdata.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
@@ -85,6 +86,7 @@ public class SecBolsaSteps extends StepBase {
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais()
 				.getCodigo_alf(), app, driver)
 				.filter(FilterType.MANY_COLORS)
+				.sortBy(SortBy.STOCK_DESCENDENT)
 				.build();
 		
 		List<GarmentCatalog> garments = getterProducts.getAll().subList(0, numArticulos);

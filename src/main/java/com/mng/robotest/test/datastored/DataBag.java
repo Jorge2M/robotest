@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Optional;
 
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.utils.ImporteScreen;
+
 
 public class DataBag implements Serializable { 
 
@@ -74,13 +76,13 @@ public class DataBag implements Serializable {
 		ListIterator<ArticuloScreen> it = this.listArticulos.listIterator();
 		while (it.hasNext()) {
 			ArticuloScreen articulo = it.next();
-			if (articulo.isPresentInList(listToReturn)) {
-				articulo.incrementarCantidad(1);
+			Optional<ArticuloScreen> articuloInList = articulo.searchInList(listToReturn);
+			if (articuloInList.isPresent()) {
+				articuloInList.get().incrementarCantidad(1);
 			} else {
 				listToReturn.add(articulo);
 			}
 		}
-
 		return listToReturn;
 	}
 	

@@ -10,8 +10,10 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallasFicha {
 	
 	private static final String XPATH_CAPA_TALLAS = "//div[@id='sizesContainer']"; 
-	private static final String XPATH_SELECTOR_TALLAS = XPATH_CAPA_TALLAS + "//div[@role='list']";
-	private static final String XPATH_LIST_TALLAS_FOR_SELECT = XPATH_CAPA_TALLAS + "//div[@role='list']";
+//	private static final String XPATH_SELECTOR_TALLAS = XPATH_CAPA_TALLAS + "//div[@role='list']";
+//	private static final String XPATH_LIST_TALLAS_FOR_SELECT = XPATH_CAPA_TALLAS + "//div[@role='list']";
+	private static final String XPATH_SELECTOR_TALLAS = XPATH_CAPA_TALLAS + "//ul";
+	private static final String XPATH_LIST_TALLAS_FOR_SELECT = XPATH_CAPA_TALLAS + "//ul";	
 	private static final String XPATH_TALLA_ITEM = XPATH_CAPA_TALLAS + "//span[@data-available]";
 	private static final String XPATH_TALLA_AVAILABLE = XPATH_TALLA_ITEM + "//self::*[@data-available='true']";
 	private static final String XPATH_TALLA_UNAVAILABLE = XPATH_TALLA_ITEM + "//self::*[@data-available='false']";
