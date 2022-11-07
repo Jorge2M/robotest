@@ -14,12 +14,12 @@ import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria.From;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
+
 
 public class SecBuscadorSteps extends StepBase {
 
@@ -29,32 +29,32 @@ public class SecBuscadorSteps extends StepBase {
 	@Step (
 		description=
 			"Buscar el artículo<br>"+ 
-			TabHTML + "id: <b>#{product.getGarmentId()}</b><br>" + 
-			TabHTML + "color: <b>#{product.getArticleWithMoreStock().getColorLabel()}</b>", 
+			TabHTML + "id: <b>#{article.getArticleId()}</b><br>" + 
+			TabHTML + "color: <b>#{article.getColor().getLabel()}</b>", 
 		expected="Aparece la ficha del producto")
-	public void searchArticulo(GarmentCatalog product) {
-		searchArticuloCommon(product);
+	public void searchArticulo(Article article) {
+		searchArticuloCommon(article);
 	}
 	
 	private static final String TagValuesFilters = "@TagValuesFilters";
 	@Step (
 		description=
 			"Buscar el artículo<br>"+ 
-			TabHTML + "id: <b>#{product.getGarmentId()}</b><br>" + 
-			TabHTML + "color: <b>#{product.getArticleWithMoreStock().getColorLabel()}</b><br>" +
+			TabHTML + "id: <b>#{article.getArticleId()}</b><br>" + 
+			TabHTML + "color: <b>#{article.getColor().getLabel()}</b><br>" +
 			TabHTML + "filters: <b>" + TagValuesFilters + "</b>", 
 		expected="Aparece la ficha del producto")
-	public void searchArticulo(GarmentCatalog product, List<FilterType> infoFilters) {
+	public void searchArticulo(Article article, List<FilterType> infoFilters) {
 		String filterValues = infoFilters.stream().map(FilterType::name).collect(Collectors.joining(","));
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagValuesFilters, filterValues);
-		searchArticuloCommon(product);
+		searchArticuloCommon(article);
 	}
 	
-	private void searchArticuloCommon(GarmentCatalog product) {
-		ArticuloNavigations.buscarArticulo(Article.getArticleCandidateForTest(product), channel, app);
+	private void searchArticuloCommon(Article article) {
+		ArticuloNavigations.buscarArticulo(article, channel, app);
 		PageObjTM.waitForPageLoaded(driver);  
 		PageFichaSteps pageFichaSteps = new PageFichaSteps();
-		pageFichaSteps.checkIsFichaAccordingTypeProduct(product);
+		pageFichaSteps.checkIsFichaAccordingTypeProduct(article);
 	}
 
 	@Step (

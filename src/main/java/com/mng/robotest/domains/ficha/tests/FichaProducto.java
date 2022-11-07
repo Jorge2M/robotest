@@ -6,8 +6,8 @@ import org.testng.annotations.Test;
 public class FichaProducto {
 	
 	@Test (
-			groups={"FichaProducto", "Canal:all_App:all"}, alwaysRun=true,
-			description="[Usuario registrado] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
+		groups={"FichaProducto", "Canal:all_App:all"}, alwaysRun=true,
+		description="[Usuario registrado] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
 	public void FIC001_FichaFromSearch_PrimaryFeatures_Reg() throws Exception {
 		new Fic001().execute();
 	}

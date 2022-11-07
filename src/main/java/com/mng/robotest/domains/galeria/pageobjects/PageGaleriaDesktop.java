@@ -693,9 +693,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 		SecCabecera secCabecera = SecCabecera.getNew(channel, app);
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel);
 		secCabecera.bring(BringTo.BACKGROUND);
-		secFiltros.bringFilters(BringTo.BACKGROUND);
+		secFiltros.bring(BringTo.BACKGROUND);
 		hearthIcon.click();
-		secFiltros.bringFilters(BringTo.FRONT);
+		secFiltros.bring(BringTo.FRONT);
 		secCabecera.bring(BringTo.FRONT);
 	}
 	

@@ -24,7 +24,7 @@ import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.Acti
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ColorType;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
@@ -33,6 +33,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 
 import java.util.Arrays;
 import java.util.List;
+
 
 public class PageFichaSteps extends StepBase {
 
@@ -49,8 +50,8 @@ public class PageFichaSteps extends StepBase {
 		return this.pageFicha;
 	}
 
-	public void checkIsFichaAccordingTypeProduct(GarmentCatalog product) {
-		checkIsFichaArtDisponible(product.getGarmentId(), 3);
+	public void checkIsFichaAccordingTypeProduct(Article article) {
+		checkIsFichaArtDisponible(article.getArticleId(), 3);
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
 				GenericCheck.ImgsBroken,
@@ -207,9 +208,10 @@ public class PageFichaSteps extends StepBase {
 	public boolean selectAnadirALaBolsaTallaPrevNoSelected() {
 		selectAnadirALaBolsaStep();
 		boolean isTallaUnica = pageFicha.isTallaUnica();
-		checkAvisoTallaUnica(isTallaUnica);
 		if (!isTallaUnica && channel.isDevice()) {
 			checkListaTallasVisible();
+		} else {
+			checkAvisoTallaUnica(isTallaUnica);
 		}
 
 		return isTallaUnica;

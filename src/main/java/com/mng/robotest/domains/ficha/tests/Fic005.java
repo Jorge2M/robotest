@@ -15,16 +15,17 @@ import com.mng.robotest.getdata.productlist.GetterProducts;
 import com.mng.robotest.getdata.productlist.Menu;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 
 import javassist.NotFoundException;
 
 public class Fic005 extends TestBase {
 
-	final GarmentCatalog articlePersonalizable;
+	private final Article articlePersonalizable;
 	
-	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	final PageFichaSteps pageFichaSteps = new PageFichaSteps();
-	final SecModalPersonalizacionSteps modalPersonalizacionSteps = new SecModalPersonalizacionSteps();
+	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
+	private final PageFichaSteps pageFichaSteps = new PageFichaSteps();
+	private final SecModalPersonalizacionSteps modalPersonalizacionSteps = new SecModalPersonalizacionSteps();
 	
 	public Fic005() throws Exception {
 		super();
@@ -65,7 +66,7 @@ public class Fic005 extends TestBase {
 		}
 	}
 	
-	private GarmentCatalog getArticlePersonalizable(String codigoPais, AppEcom app, WebDriver driver) 
+	private Article getArticlePersonalizable(String codigoPais, AppEcom app, WebDriver driver) 
 			throws Exception {
 		
 		Optional<GarmentCatalog> articlePersonalizable = new GetterProducts
@@ -80,7 +81,7 @@ public class Fic005 extends TestBase {
 		if (!articlePersonalizable.isPresent()) {
 			throw new NotFoundException("Not found article with filter " + FilterType.PERSONALIZABLE);
 		}
-		return articlePersonalizable.get();
+		return Article.getArticleCandidateForTest(articlePersonalizable.get());
 	}	
 
 }

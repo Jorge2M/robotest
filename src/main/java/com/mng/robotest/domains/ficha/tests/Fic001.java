@@ -14,16 +14,17 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.getdata.productlist.GetterProducts;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
-import javassist.NotFoundException;
 
 public class Fic001 extends TestBase {
 
-	private final Optional<GarmentCatalog> articleOnline;
+	private final Optional<GarmentCatalog> productOnline;
+	private final Optional<GarmentCatalog> produtNoOnlineWithColors;
 	private final List<FilterType> filterOnline = Arrays.asList(FilterType.ONLINE);
 	private final List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NO_ONLINE, FilterType.MANY_COLORS);
-	private final Optional<GarmentCatalog> articleNoOnlineWithColors;
 	
 	private final PageFichaSteps pageFichaSteps = new PageFichaSteps();
 	
@@ -34,14 +35,14 @@ public class Fic001 extends TestBase {
 				.numProducts(80)
 				.build();
 
-		articleOnline = getterProducts.getOne(filterOnline);
-		articleNoOnlineWithColors = getterProducts.getOne(filterNoOnlineWithColors);
+		productOnline = getterProducts.getOne(filterOnline);
+		produtNoOnlineWithColors = getterProducts.getOne(filterNoOnlineWithColors);
 	}
 	
 	@Override
 	public void execute() throws Exception {
 		accessAndClearData();
-		if (articleOnline.isPresent()) {
+		if (productOnline.isPresent()) {
 			articleOnlineTest();
 		}
 		stopIfNoPresentArticleNoOnlineWithColors();
@@ -49,14 +50,16 @@ public class Fic001 extends TestBase {
 	}
 
 	private void articleOnlineTest() {
-		new SecBuscadorSteps().searchArticulo(articleOnline.get(), filterOnline);
+		Article articleOnline = Article.getArticleCandidateForTest(productOnline.get());
+		new SecBuscadorSteps().searchArticulo(articleOnline, filterOnline);
 		pageFichaSteps.checkLinkDispTiendaInvisible();
 	}
 	
 	private void articleNoOnlineTest() throws Exception {
-		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors.get(), filterNoOnlineWithColors);
+		Article articleNoOnlineWithColors = Article.getArticleCandidateForTest(produtNoOnlineWithColors.get());
+		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
 		boolean isTallaUnica = pageFichaSteps.selectAnadirALaBolsaTallaPrevNoSelected();
-		ArticuloScreen articulo = new ArticuloScreen(articleNoOnlineWithColors.get());
+		ArticuloScreen articulo = new ArticuloScreen(produtNoOnlineWithColors.get());
 		pageFichaSteps.selectColorAndSaveData(articulo);
 		pageFichaSteps.selectTallaAndSaveData(articulo);
 		ifTallaUnicaClearBolsa(isTallaUnica);
@@ -74,7 +77,7 @@ public class Fic001 extends TestBase {
 	}
 
 	private void stopIfNoPresentArticleNoOnlineWithColors() throws NotFoundException {
-		if (!articleNoOnlineWithColors.isPresent()) {
+		if (!produtNoOnlineWithColors.isPresent()) {
 			List<String> filtersLabels = 
 				filterNoOnlineWithColors
 					.stream()
@@ -83,7 +86,7 @@ public class Fic001 extends TestBase {
 			
 			throw new NotFoundException("Not found article with filters " + String.join(",", filtersLabels));
 		}
-	}
+	}	
 	
 	private void ifTallaUnicaClearBolsa(boolean isTallaUnica) throws Exception {
 		//Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"

@@ -18,14 +18,15 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 import com.mng.robotest.getdata.productlist.GetterProducts;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 
 public class Fic002 extends TestBase {
 
-	final GarmentCatalog garment;
-	final boolean isTotalLook;
+	private final Article article;
+	private final boolean isTotalLook;
 
-	final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	final PageFichaSteps pageFichaSteps = new PageFichaSteps();
+	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
+	private final PageFichaSteps pageFichaSteps = new PageFichaSteps();
 
 	public Fic002() throws Exception {
 		super();
@@ -37,6 +38,7 @@ public class Fic002 extends TestBase {
 		Optional<GarmentCatalog> articleWithTotalLook = getterProducts
 				.getOne(Arrays.asList(FilterType.TOTAL_LOOK));
 		
+		GarmentCatalog garment;
 		if (articleWithTotalLook.isPresent()) {
 			this.isTotalLook = true;
 			garment = articleWithTotalLook.get();
@@ -49,12 +51,13 @@ public class Fic002 extends TestBase {
 				throw new NoSuchElementException("Article not retrieved from GetterProducts service");
 			}
 		}
+		article = Article.getArticleCandidateForTest(garment);
 	}
 
 	@Override
 	public void execute() throws Exception {
 		access();
-		secBuscadorSteps.searchArticulo(garment);
+		secBuscadorSteps.searchArticulo(article);
 		if (channel.isDevice()) {
 			pageFichaDeviceTest();
 		} else {

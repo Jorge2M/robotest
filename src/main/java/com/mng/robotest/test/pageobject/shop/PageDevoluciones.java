@@ -3,7 +3,6 @@ package com.mng.robotest.test.pageobject.shop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -63,14 +62,7 @@ public class PageDevoluciones extends PageBase {
 	}
 
 	public void clickSolicitarRecogida() {
-		click(XPATH_BUTTON_SOLICITAR_RECOGIDA).exec();
-		
-		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un par de veces
-		for (int i=0; i<2; i++) {
-			if (isVisibleSolicitarRecogidaButton()) {
-				click(XPATH_BUTTON_SOLICITAR_RECOGIDA).type(TypeClick.javascript).exec();
-			}
-		}
+		click(XPATH_BUTTON_SOLICITAR_RECOGIDA).waitLink(1).exec();
 	}
 
 	public boolean isVisibleSolicitarRecogidaButton() {

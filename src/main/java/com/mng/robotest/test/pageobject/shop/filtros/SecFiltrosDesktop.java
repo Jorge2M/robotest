@@ -100,7 +100,7 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 		//TODO
 	}	
 	
-	public void bringFilters(BringTo bringTo) {
+	public void bring(BringTo bringTo) {
 		bringElement(getElement(XPATH_WRAPPER), bringTo);
 	}
 	
