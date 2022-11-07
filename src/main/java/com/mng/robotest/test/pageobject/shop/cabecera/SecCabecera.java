@@ -45,6 +45,10 @@ public abstract class SecCabecera extends PageBase {
 		return (SecCabeceraOutlet_Mobil)this;
 	}
 	
+	public void bring(BringTo bringTo) {
+		bringElement(getElement(XPATH_HEADER), bringTo);
+	}
+	
 	public static void buscarTexto(String referencia, Channel channel, AppEcom app) {
 		MenusUserWrapper menusUser = new MenusUserWrapper();
 		menusUser.isMenuInStateUntil(UserMenu.LUPA, State.Visible, 1);

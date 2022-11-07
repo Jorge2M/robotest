@@ -15,13 +15,14 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
-import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop.Visibility;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 
 public class PageGaleriaDesktop extends PageGaleria {
 	
@@ -689,10 +690,13 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) {
+		SecCabecera secCabecera = SecCabecera.getNew(channel, app);
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel);
-		secFiltros.makeFilters(Visibility.Invisible);
+		secCabecera.bring(BringTo.BACKGROUND);
+		secFiltros.bringFilters(BringTo.BACKGROUND);
 		hearthIcon.click();
-		secFiltros.makeFilters(Visibility.Visible);
+		secFiltros.bringFilters(BringTo.FRONT);
+		secCabecera.bring(BringTo.FRONT);
 	}
 	
 	@Override

@@ -2,9 +2,6 @@ package com.mng.robotest.test.pageobject.shop.filtros;
 
 import java.util.List;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -14,6 +11,7 @@ import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenuLateralDesktop;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 
 public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	
@@ -102,16 +100,8 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 		//TODO
 	}	
 	
-	public enum Visibility {Visible, Invisible}
-	
-	public void makeFilters(Visibility visibility) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		WebElement element = getElement(XPATH_WRAPPER);
-		String style = "block";
-		if (visibility == Visibility.Invisible) {
-			style = "none";
-		}
-		js.executeScript("arguments[0].setAttribute('style', 'display:" + style + "')", element);
+	public void bringFilters(BringTo bringTo) {
+		bringElement(getElement(XPATH_WRAPPER), bringTo);
 	}
 	
 	private static final String XPATH_LINK_COLLECTION = "//div[@id='navigationContainer']/button";
