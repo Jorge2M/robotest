@@ -137,7 +137,7 @@ public abstract class PageGaleria extends PageBase {
 		}
 	}
 
-	private static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE_DESKTOP = "//span[@class[contains(.,'icon-favorite')]]";
+	private static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE_DESKTOP = "//*[@data-testid='button-icon']";
 	private static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE_MOVIL = "//span[@class[contains(.,'product-favorite')]]";
 	String getXPathHearthIconRelativeArticle() {
 		switch (channel) {
