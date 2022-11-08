@@ -784,8 +784,10 @@ public class PageGaleriaSteps extends StepBase {
 		
 		if (app==AppEcom.shop) {
 			checks.add (
-				"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + secondsIcon + " segundos)",
-				pageGaleria.isArticleWithHearthIconPresentUntil(1, secondsIcon), State.Warn);
+				Check.make(
+					"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + secondsIcon + " segundos)",
+					pageGaleria.isArticleWithHearthIconPresentUntil(1, secondsIcon), State.Info)
+				.store(StoreType.None).build());
 			
 			checks.add (
 		        Check.make(

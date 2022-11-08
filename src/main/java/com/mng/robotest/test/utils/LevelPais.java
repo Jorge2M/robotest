@@ -3,9 +3,9 @@ package com.mng.robotest.test.utils;
 import com.mng.robotest.conftestmaker.AppEcom;
 
 public enum LevelPais {
-	top(5,3),
-	conCompraNoTop(2,2),
-	sinCompra(1,1);
+	TOP(3,3),
+	CON_COMPRA_NO_TOP(2,2),
+	SIN_COMPRA(1,1);
 	
 	int numBannersTestShop;
 	int numBannersTestOutlet;

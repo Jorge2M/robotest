@@ -464,12 +464,12 @@ public class Pais implements Serializable {
 
 	public LevelPais getLevelPais() {
 		if (isPaisTop()) {
-			return LevelPais.top;
+			return LevelPais.TOP;
 		}
 		if (!getTiendasOnlineList().isEmpty()) {
-			return LevelPais.conCompraNoTop;
+			return LevelPais.CON_COMPRA_NO_TOP;
 		}
-		return LevelPais.sinCompra;
+		return LevelPais.SIN_COMPRA;
 	}
 
 	@Override
