@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.domains.galeria.pageobjects.SecPreciosArticulo.TipoPrecio;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
@@ -146,7 +147,7 @@ public class PageGaleriaDevice extends PageGaleria {
 
 	@Override
 	public int getNumFavoritoIcons() {
-		return getElements(getXPathHearthIconRelativeArticle()).size();
+		return getElements(XPATH_HEARTH_ICON_RELATIVE_ARTICLE).size();
 	}
 		
 	@Override
@@ -198,6 +199,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public String getCodColorArticulo(int numArticulo) throws Exception {
 		String xpathArticulo = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
+		moveToElement(By.xpath(xpathArticulo));
 		String image = getImagenArticulo(getElement(xpathArticulo));
 		return UtilsPageGaleria.getCodColorFromSrcImg(image);
 	}
@@ -308,14 +310,14 @@ public class PageGaleriaDevice extends PageGaleria {
 		return articulo;
 	}
 
-	@Override
-	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {
-		if (hearthIcon.getAttribute("class").contains("favorite--active")) {
-			return StateFavorito.MARCADO;
-		}
-		return StateFavorito.DESMARCADO;
-	}
-
+//	@Override
+//	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {
+//		if (hearthIcon.getAttribute("class").contains("favorite--active")) {
+//			return StateFavorito.MARCADO;
+//		}
+//		return StateFavorito.DESMARCADO;
+//	}
+//
 	@Override
 	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
 		moveToElement(hearthIcon);

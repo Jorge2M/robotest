@@ -7,8 +7,8 @@ import com.mng.robotest.domains.transversal.PageBase;
 public class ModalArticleNotAvailable extends PageBase {
 
 	public enum StateModal {visible, notvisible}	
-	private static final String XPATH_MODAL = "//div[@id='bocataAvisame']";
-	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_MODAL + "//div[@class[contains(.,'botonCerrarAvisame')]]";
+	private static final String XPATH_MODAL = "//div[@data-testid[contains(.,'backInStock.dialog')]]/../..";
+	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_MODAL + "//button[@data-testid='modal.close.button']";
 	
 	public boolean inStateUntil(StateModal stateModal, int seconds) {
 		switch (stateModal) {

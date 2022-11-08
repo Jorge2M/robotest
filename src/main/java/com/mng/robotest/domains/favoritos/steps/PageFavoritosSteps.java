@@ -24,7 +24,7 @@ public class PageFavoritosSteps extends StepBase {
 	public ChecksTM validaIsPageOK() {
 		ChecksTM checks = ChecksTM.getNew();
 		int secondsCapa = 3;
-		int secondsArticles = 1;
+		int secondsArticles = 2;
 		checks.add(
 			"Está visible la capa de favoritos con artículos (la esperamos hasta " + secondsCapa + " segundos)",
 			pageFavoritos.isSectionArticlesVisibleUntil(secondsCapa), State.Defect);

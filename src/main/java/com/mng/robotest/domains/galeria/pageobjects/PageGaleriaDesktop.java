@@ -261,7 +261,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	@Override
 	public int getNumFavoritoIcons() {
-		String xpathHearthIcon = getXPathHearthIconRelativeArticle();
+		String xpathHearthIcon = XPATH_HEARTH_ICON_RELATIVE_ARTICLE;
 		return getElements(xpathHearthIcon).size();
 	}
 
@@ -745,14 +745,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 			}
 		}
 		return "";
-	}
-
-	@Override
-	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {
-		if (hearthIcon.getAttribute("class").contains("icon-fill")) {
-			return StateFavorito.MARCADO;
-		}
-		return StateFavorito.DESMARCADO;
 	}
 
 	public void clickLinkColumnas(NumColumnas numColumnas) {

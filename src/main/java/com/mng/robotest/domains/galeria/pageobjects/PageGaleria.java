@@ -30,6 +30,7 @@ import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+
 public abstract class PageGaleria extends PageBase {
 
 	public enum From {MENU, BUSCADOR}
@@ -76,7 +77,6 @@ public abstract class PageGaleria extends PageBase {
 	public abstract void showTallasArticulo(int posArticulo);
 	public abstract boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds);
 	public abstract ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception;
-	public abstract StateFavorito getStateHearthIcon(WebElement hearthIcon);
 	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
 
 	public static final List<LabelArticle> listLabelsNew = Arrays.asList(
@@ -90,8 +90,10 @@ public abstract class PageGaleria extends PageBase {
 					"@class='product-list-info-name' or " +
 					"@class[contains(.,'_1P8s4')] or " + //TODO (Outlet) a la espera que Sergio Campillo proporcione un identificador válido
 					"@class[contains(.,'product-name')]";
-	static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[" + CLASS_PRODUCT_ITEM + "]";
-	static final String XPATH_LINK_RELATIVE_TO_ARTICLE = ".//a[@class='product-link']";
+	
+	protected static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[" + CLASS_PRODUCT_ITEM + "]";
+	protected static final String XPATH_LINK_RELATIVE_TO_ARTICLE = ".//a[@class='product-link']";
+	protected static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE = "//*[@data-testid='button-icon']";
 
 	public static PageGaleria getNew(Channel channel) {
 		return getNew(From.MENU, channel);
@@ -137,21 +139,11 @@ public abstract class PageGaleria extends PageBase {
 		}
 	}
 
-	private static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE_DESKTOP = "//*[@data-testid='button-icon']";
-	private static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE_MOVIL = "//span[@class[contains(.,'product-favorite')]]";
-	String getXPathHearthIconRelativeArticle() {
-		switch (channel) {
-			case desktop:
-				return XPATH_HEARTH_ICON_RELATIVE_ARTICLE_DESKTOP;
-			case mobile:
-			default:
-				return XPATH_HEARTH_ICON_RELATIVE_ARTICLE_MOVIL;
-		}
-	}
+
 
 	String getXPathArticleHearthIcon(int posArticulo) {
 		String xpathArticulo = "(" + xpathArticuloBase + ")[" + posArticulo + "]";
-		return (xpathArticulo + getXPathHearthIconRelativeArticle());
+		return (xpathArticulo + XPATH_HEARTH_ICON_RELATIVE_ARTICLE);
 	}
 
 	String getXPathArticuloNoDoble() {
@@ -706,5 +698,12 @@ public abstract class PageGaleria extends PageBase {
 
 	public static List<LabelArticle> getListlabelsnew() {
 		return listLabelsNew;
+	}
+	
+	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {
+		if (hearthIcon.getAttribute("class").contains("icon-fill")) {
+			return StateFavorito.MARCADO;
+		}
+		return StateFavorito.DESMARCADO;
 	}
 }
