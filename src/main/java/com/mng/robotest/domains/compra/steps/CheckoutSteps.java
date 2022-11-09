@@ -160,7 +160,7 @@ public class CheckoutSteps extends StepBase {
 	@Step (
 		description="Si existen y están plegados, desplegamos el bloque con los métodos de pago", 
 		expected="Aparecen los métodos de pagos asociados al país")
-	public void despliegaYValidaMetodosPago(boolean isEmpl) throws Exception {
+	public void despliegaYValidaMetodosPago(boolean isEmpl) {
 		TestMaker.getCurrentStepInExecution().addExpectedText(": " + dataTest.getPais().getStringPagosTest(app, isEmpl));
 		pageCheckoutWrapper.despliegaMetodosPago();
 		validaMetodosPagoDisponibles(isEmpl);

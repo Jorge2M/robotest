@@ -182,7 +182,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	/**
 	 * Realizamos las acciones necesarias para forzar el click sobre un método de pago y esperamos a que desaparezcan las capas de loading
 	 */
-	public void forceClickMetodoPagoAndWait(String nombrePago) throws Exception {
+	public void forceClickMetodoPagoAndWait(String nombrePago) {
 		goToPageFromCheckoutIfNeeded();
 		despliegaMetodosPago();
 		moveToFirstMetodoPagoLine();

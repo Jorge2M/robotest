@@ -399,7 +399,7 @@ public abstract class PageGaleria extends PageBase {
 				AttributeArticle.REFERENCIA));
 	}
 
-	private ListDataArticleGalery getListArticles(List<AttributeArticle> attributes) throws Exception {
+	private ListDataArticleGalery getListArticles(List<AttributeArticle> attributes) {
 		return getListArticles(null, attributes);
 	}
 

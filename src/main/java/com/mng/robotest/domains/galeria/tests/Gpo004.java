@@ -66,7 +66,7 @@ public class Gpo004 extends TestBase {
 		pageGaleriaSteps.scrollFromFirstPage(dataScroll);
 	}
 
-	private void selectArticleInOtherLabel() throws Exception {
+	private void selectArticleInOtherLabel() {
 		LocationArticle loc1rsArticle1rstPage = LocationArticle.getInstanceInPage(2, 1);
 		pageGaleriaSteps.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage);
 	}

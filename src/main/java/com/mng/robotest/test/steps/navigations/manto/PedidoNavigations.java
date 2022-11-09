@@ -123,7 +123,7 @@ public class PedidoNavigations {
 		}
 	}
 	
-	private static void anularPedidoSteps(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
+	private static void anularPedidoSteps(DataPedido dataPedido, AppEcom app, WebDriver driver) {
 		if (!new PageDetallePedido().isPage(dataPedido.getCodigoPedidoManto())) {
 			consultarPedidoSteps(dataPedido, app, driver);
 		}

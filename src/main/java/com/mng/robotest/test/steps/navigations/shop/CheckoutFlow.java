@@ -176,7 +176,7 @@ public class CheckoutFlow extends StepBase {
 				GenericCheck.NetTraffic)).checks();
 	}
 	
-	private void test1rstPageCheckout() throws Exception {
+	private void test1rstPageCheckout() {
 		if ((dataPago.getFTCkout().checkPromotionalCode || dataPago.getFTCkout().userIsEmployee) && 
 			 app!=AppEcom.votf) {
 			if (dataPago.getFTCkout().userIsEmployee && ESPANA.isEquals(pais)) {

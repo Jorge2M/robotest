@@ -22,7 +22,7 @@ public class SecSelectDPointSteps extends StepBase {
 	@Step (
 		description="Introducimos la provincia <b>" + TAG_SEARCH_DP + "</b> + Return", 
 		expected="Aparecen puntos de recogida de " + TAG_SEARCH_DP)
-	public void searchPoblacion(DataSearchDeliveryPoint dataSearchDp) throws Exception {
+	public void searchPoblacion(DataSearchDeliveryPoint dataSearchDp) {
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		step.replaceInDescription(TAG_SEARCH_DP, dataSearchDp.data);
 		step.replaceInExpected(TAG_SEARCH_DP, dataSearchDp.data);

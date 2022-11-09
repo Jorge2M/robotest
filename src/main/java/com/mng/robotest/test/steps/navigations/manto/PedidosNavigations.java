@@ -70,8 +70,7 @@ public class PedidosNavigations {
 	 * Partiendo de la página de menús, ejecutamos todos los pasos/validaciones para validar una lista de pedidos
 	 * @param listPaisPedido lista de pedidos a validar
 	 */
-	public static void validacionListaPagosStepss(List<DataPedido> listDataPedidos, AppEcom appE, WebDriver driver) 
-	throws Exception {
+	public static void validacionListaPagosStepss(List<DataPedido> listDataPedidos, AppEcom appE, WebDriver driver) {
 		//Bucle para obtener la lista de Países -> Pedidos
 		for (DataPedido dataPedido : listDataPedidos) {
 			//Sólo consultamos el pedido si el pago se realizó de forma correcta

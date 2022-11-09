@@ -525,7 +525,7 @@ public class Page2IdentCheckout extends PageBase {
 		return localidad.getAttribute(VALUE);
 	}
 
-	public void setSelectLocalidadesProvCity(int posInSelect, Map<String,String> datosRegistro) throws Exception {
+	public void setSelectLocalidadesProvCity(int posInSelect, Map<String,String> datosRegistro) {
 		String datoSeteado = setSelectLocalidadesProvCity(posInSelect);
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("localidadesProvCity", datoSeteado);
