@@ -46,7 +46,7 @@ public class Reg002 extends TestBase {
 	}
 	
 	private void registerWithoutInputData() {
-		pageRegistroIniSteps.clickRegistrateButton(dataRegister, ErrorRegister.InputWarnings);
+		pageRegistroIniSteps.clickRegistrateButton(dataRegister, ErrorRegister.INPUT_WARINGS);
 	}
 	
 	private void registerWithIncorrectInputData() {
@@ -75,7 +75,7 @@ public class Reg002 extends TestBase {
 		
 		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.PAGEINICIAL);
 		pageRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
-		pageRegistroIniSteps.clickRegistrateButton(dataRegister, ErrorRegister.UsrNoExistsInGmail);
+		pageRegistroIniSteps.clickRegistrateButton(dataRegister, ErrorRegister.USR_NO_EXISTS_IN_GMAIL);
 	}
 
 	private void registerWithExistentEmail() {
@@ -94,6 +94,6 @@ public class Reg002 extends TestBase {
 		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.PAGEINICIAL);
 		
 		pageRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
-		pageRegistroIniSteps.clickRegistrateButton(dataRegister, ErrorRegister.UsrExistsInMango);
+		pageRegistroIniSteps.clickRegistrateButton(dataRegister, ErrorRegister.USR_EXISTS_IN_MANGO);
 	}
 }

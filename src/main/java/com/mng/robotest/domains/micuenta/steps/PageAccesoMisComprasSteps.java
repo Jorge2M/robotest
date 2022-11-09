@@ -59,16 +59,16 @@ public class PageAccesoMisComprasSteps extends StepBase {
 		new PageMisComprasSteps().validateIsPage();
 	}
 
-	static final String tagUsuario = "@TagUsuario";
+	static final String TAG_USUARIO = "@TagUsuario";
 	@Step (
 		description=
 			"En el bloque de \"No Registrado\", introducir el usuario/núm pedido " + 
-			"(" + tagUsuario + " / <b style=\"color:blue;\">#{dataPedido.getCodpedido()}</b>)" + 
+			"(" + TAG_USUARIO + " / <b style=\"color:blue;\">#{dataPedido.getCodpedido()}</b>)" + 
 			" y pulsar \"Buscar pedido\"", 
 		expected="Aparece la página de detalle del pedido")
 	public void buscarPedidoForNoRegistrado(DataPedido dataPedido) {
 		String usuario = dataPedido.getEmailCheckout();
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagUsuario, usuario);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_USUARIO, usuario);
 
 		pageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido()); 
 		pageAccesoMisCompras.clickBuscarPedidoBlockNo(); 

@@ -51,10 +51,10 @@ public class Gpo004 extends TestBase {
 
 		
 		List<Color> colorsToFilter = new ArrayList<>();
-		colorsToFilter.add(Color.Blanco);
+		colorsToFilter.add(Color.BLANCO);
 		if (app==AppEcom.shop) {
-			colorsToFilter.add(Color.Negro);
-			colorsToFilter.add(Color.Azul);
+			colorsToFilter.add(Color.NEGRO);
+			colorsToFilter.add(Color.AZUL);
 			filterGaleryByColors(CAMISAS_SHE, colorsToFilter);
 		} else {
 			filterGaleryByColors(ABRIGOS_SHE, colorsToFilter);

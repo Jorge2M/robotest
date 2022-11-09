@@ -413,11 +413,11 @@ public class GetterProducts {
 		private boolean extraCanonicalInfo;
 		private List<MenuI> menusCandidates = 
 			Arrays.asList(
-				Menu.Shorts, 
-				Menu.Camisas, 
-				Menu.Pijamas,
-				Menu.Faldas,
-				Menu.Fulares);
+				Menu.SHORTS, 
+				Menu.CAMISAS, 
+				Menu.PIJAMAS,
+				Menu.FALDAS,
+				Menu.FULARES);
 		
 		private Integer pagina = 1;
 		private MethodGetter method = MethodGetter.ANY;

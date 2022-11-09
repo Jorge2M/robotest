@@ -189,7 +189,7 @@ public class CheckoutSteps extends StepBase {
 			return checks;
 		}
 		for (int i=0; i<listPagos.size(); i++) {
-			if (listPagos.get(i).getTypePago()!=TypePago.TpvVotf) {
+			if (listPagos.get(i).getTypePago()!=TypePago.TPV_VOTF) {
 				String pagoNameExpected = listPagos.get(i).getNombre(channel, app);
 			 	checks.add(
 					"Aparece el logo/pestaña asociado al pago <b>" + pagoNameExpected + "</b>",
@@ -245,9 +245,9 @@ public class CheckoutSteps extends StepBase {
 			Log4jTM.getLogger().warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), dataTest.getPais().getNombre_pais(), e);
 		}
 
-		if (pago.getTypePago()==TypePago.TarjetaIntegrada || 
-			pago.getTypePago()==TypePago.KrediKarti ||
-			pago.getTypePago()==TypePago.Bancontact) {
+		if (pago.getTypePago()==TypePago.TARJETA_INTEGRADA || 
+			pago.getTypePago()==TypePago.KREDI_KARTI ||
+			pago.getTypePago()==TypePago.BANCONTACT) {
 			validateSelectPagoTRJintegrada(pago);
 			return true;
 		} else {

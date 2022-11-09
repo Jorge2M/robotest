@@ -298,7 +298,7 @@ public class CheckoutFlow extends StepBase {
 				pageResultPagoSteps.checkUrl(10);
 			}
 			else {
-				if (pagoToTest.getTypePago()!=TypePago.TpvVotf) {
+				if (pagoToTest.getTypePago()!=TypePago.TPV_VOTF) {
 					pageResultPagoSteps.validateIsPageOk(dataPago);
 					if (channel!=Channel.mobile && 
 						!dataPago.getFTCkout().chequeRegalo &&

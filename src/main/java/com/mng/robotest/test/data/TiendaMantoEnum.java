@@ -4,21 +4,21 @@ import com.mng.robotest.conftestmaker.AppEcom;
 
 public class TiendaMantoEnum {
 	public enum TiendaManto {
-		EuropaShop ("Europa Palau", "001", AppEcom.shop),
-		EuropaOutlet ("Europa Montcada", "001", AppEcom.outlet),
-		AlemaniaShop ("Alemania", "004", AppEcom.shop),
-		USAShop ("USA New Jersey", "400", AppEcom.shop),
-		USAOutlet ("Outlet USA", "400", AppEcom.outlet),
-		RusiaShop ("Rusia (Major)", "084", AppEcom.shop),
-		RusiaOutlet ("Outlet Rusia", "075", AppEcom.outlet),
-		TurquiaShop ("Turquía Estambul", "052", AppEcom.shop),
-		AlhokairShop("Alhokair", "632", AppEcom.shop),
+		EUROPA_SHOP ("Europa Palau", "001", AppEcom.shop),
+		EUROPA_OUTLET ("Europa Montcada", "001", AppEcom.outlet),
+		ALEMANIA_SHOP ("Alemania", "004", AppEcom.shop),
+		USA_SHOP ("USA New Jersey", "400", AppEcom.shop),
+		USA_OUTLET ("Outlet USA", "400", AppEcom.outlet),
+		RUSIA_SHOP ("Rusia (Major)", "084", AppEcom.shop),
+		RUSIA_OUTLET ("Outlet Rusia", "075", AppEcom.outlet),
+		TURQUIA_SHOP ("Turquía Estambul", "052", AppEcom.shop),
+		ALHOKAIR_SHOP("Alhokair", "632", AppEcom.shop),
 		//TurquiaOutlet ("Outlet Turquia", "052", AppEcom.outlet),
-		ChinaShop ("China Shangai", "720", AppEcom.shop),
-		ColombiaShop ("Mercadeo deposit", "480", AppEcom.shop),
-		MercadoShop("Mercadeo Deposit", "481", AppEcom.shop),
-		MexicoShop("Mexico", "412", AppEcom.shop),
-		PhilippinesShop("Trimarket Philippines", "708", AppEcom.shop);
+		CHINA_SHOP ("China Shangai", "720", AppEcom.shop),
+		COLOMBIA_SHOP ("Mercadeo deposit", "480", AppEcom.shop),
+		MERCADO_SHOP("Mercadeo Deposit", "481", AppEcom.shop),
+		MEXICO_SHOP("Mexico", "412", AppEcom.shop),
+		PHILIPPINES_SHOP("Trimarket Philippines", "708", AppEcom.shop);
 		
 		public String litPantManto = "";
 		public String codAlmacen = "";
@@ -41,9 +41,9 @@ public class TiendaMantoEnum {
 			}
 			
 			if (appE==AppEcom.shop) {
-				return TiendaManto.EuropaShop;
+				return TiendaManto.EUROPA_SHOP;
 			}
-			return TiendaManto.EuropaOutlet;
+			return TiendaManto.EUROPA_OUTLET;
 		}
 	}
 }

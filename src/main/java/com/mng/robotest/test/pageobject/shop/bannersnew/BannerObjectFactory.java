@@ -4,11 +4,11 @@ public class BannerObjectFactory {
 	
 	public static BannerObject make(BannerType bannerType) {
 		switch (bannerType) {
-		case Cabecera:
+		case CABECERA:
 			return (new BannerCabeceraObject(bannerType));
-		case Standar:
+		case STANDAR:
 			return (new BannerStandarObject(bannerType));
-		case Edits:
+		case EDITS:
 			return (new BannerEditsObject(bannerType));
 		default:
 			return null;

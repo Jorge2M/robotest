@@ -20,36 +20,36 @@ public class Pago implements Serializable {
 	private static final long serialVersionUID = -2329928763754362241L;
 
 	public enum TypePago {
-		TarjetaIntegrada, 
-		TMango, 
-		KrediKarti, 
-		Billpay, 
-		Paypal, 
-		Mercadopago, 
-		Amazon, 
-		Postfinance, 
-		Trustpay, 
-		Multibanco, 
-		Paytrail, 
-		Dotpay, 
-		Ideal, 
-		Eps,
-		Sepa, 
-		Giropay, 
-		Sofort, 
-		Klarna,
-		KlarnaUK,
-		PaysecureQiwi, 
-		Assist, 
-		PasarelaOtras, 
+		TARJETA_INTEGRADA, 
+		TARJETA_MANGO, 
+		KREDI_KARTI, 
+		BILLPAY, 
+		PAYPAL, 
+		MERCADOPAGO, 
+		AMAZON, 
+		POSTFINANCE, 
+		TRUSTPAY, 
+		MULTIBANCO, 
+		PAYTRAIL, 
+		DOTPAY, 
+		IDEAL, 
+		EPS,
+		SEPA, 
+		GIROPAY, 
+		SOFORT, 
+		KLARNA,
+		KLARNA_UK,
+		PAYSECURE_QIWI, 
+		ASSIST, 
+		PASARELA_OTRAS, 
 		KCP,
-		ContraReembolso,
-		Bancontact,
-		ProcessOut,
-		Yandex,
-		PayMaya,
-		StoreCredit, 
-		TpvVotf
+		CONTRA_REEMBOLSO,
+		BANCONTACT,
+		PROCESS_OUT,
+		YANDEX,
+		PAYMAYA,
+		STORE_CREDIT, 
+		TPV_VOTF
 	}
 	
 	public enum TypeTarj {
@@ -105,67 +105,67 @@ public class Pago implements Serializable {
 	public TypePago getTypePago() {
 		switch (this.type) {
 		case "TRJintegrada":
-			return TypePago.TarjetaIntegrada;
+			return TypePago.TARJETA_INTEGRADA;
 		case "TMango":
-			return TypePago.TMango;			
+			return TypePago.TARJETA_MANGO;			
 		case "KrediKarti": 
-			return TypePago.KrediKarti;
+			return TypePago.KREDI_KARTI;
 		case "Billpay":
-			return TypePago.Billpay;
+			return TypePago.BILLPAY;
 		case "Paypal":
-			return TypePago.Paypal;			
+			return TypePago.PAYPAL;			
 		case "Mercadopago":
-			return TypePago.Mercadopago;				
+			return TypePago.MERCADOPAGO;				
 		case "Amazon":
-			return TypePago.Amazon;				
+			return TypePago.AMAZON;				
 		case "Postfinance":
-			return TypePago.Postfinance;				
+			return TypePago.POSTFINANCE;				
 		case "Trustpay":
-			return TypePago.Trustpay;				
+			return TypePago.TRUSTPAY;				
 		case "Multibanco":
-			return TypePago.Multibanco;				
+			return TypePago.MULTIBANCO;				
 		case "Paytrail":
-			return TypePago.Paytrail;				
+			return TypePago.PAYTRAIL;				
 		case "Dotpay":
-			return TypePago.Dotpay;				
+			return TypePago.DOTPAY;				
 		case "Ideal":
-			return TypePago.Ideal;	  
+			return TypePago.IDEAL;	  
 		case "Eps":
-			return TypePago.Eps;
+			return TypePago.EPS;
 		case "Sepa":
-			return TypePago.Sepa;				
+			return TypePago.SEPA;				
 		case "Giropay":
-			return TypePago.Giropay;				
+			return TypePago.GIROPAY;				
 		case "Sofort":
-			return TypePago.Sofort;	 
+			return TypePago.SOFORT;	 
 		case "Paymaya":
-			return TypePago.PayMaya;
+			return TypePago.PAYMAYA;
 		case "Klarna":
-			return TypePago.Klarna;		  
+			return TypePago.KLARNA;		  
 		case "KlarnaUK":
-			return TypePago.KlarnaUK;	
+			return TypePago.KLARNA_UK;	
 		case "PaysecureQiwi":
-			return TypePago.PaysecureQiwi;				
+			return TypePago.PAYSECURE_QIWI;				
 		case "Assist":
-			return TypePago.Assist;				
+			return TypePago.ASSIST;				
 		case "PasarelaOtras":
-			return TypePago.PasarelaOtras;
+			return TypePago.PASARELA_OTRAS;
 		case "KCP":
 			return TypePago.KCP;
 		case "ContraReembolso":
-			return TypePago.ContraReembolso;
+			return TypePago.CONTRA_REEMBOLSO;
 		case "Bancontact":
-			return TypePago.Bancontact;			
+			return TypePago.BANCONTACT;			
 		case "Yandex":
-			return TypePago.Yandex;				
+			return TypePago.YANDEX;				
 		case "storecredit":
-			return TypePago.StoreCredit;
+			return TypePago.STORE_CREDIT;
 		case "ProcessOut":
-			return TypePago.ProcessOut;
+			return TypePago.PROCESS_OUT;
 		case "tpvvotf":
-			return TypePago.TpvVotf;
+			return TypePago.TPV_VOTF;
 		default:
-			return TypePago.TarjetaIntegrada;
+			return TypePago.TARJETA_INTEGRADA;
 		}
 	}
 	

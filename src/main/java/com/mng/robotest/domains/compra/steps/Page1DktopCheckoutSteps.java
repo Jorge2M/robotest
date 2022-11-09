@@ -74,7 +74,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + seconds + " segundos)",
 			page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(seconds), State.Defect);
 	 	
-		Descuento descuento = new Descuento(app, DiscountType.Empleado);
+		Descuento descuento = new Descuento(app, DiscountType.EMPLEADO);
 	 	checks.add(
 			"Para todos los artículos, el % de descuento final es como mínimo del " + 
 			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + ")",

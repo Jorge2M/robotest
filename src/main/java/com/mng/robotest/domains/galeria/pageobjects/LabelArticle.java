@@ -4,14 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum LabelArticle {
-	ComingSoon (Arrays.asList(
+	COMING_SOON (Arrays.asList(
 			"Coming Soon",
 			"Coming soon")),
-	NewNow (Arrays.asList(
+	NEW_NOW (Arrays.asList(
 			"New Now", 
 			"جديد الآن", 
 			"در حال حاضر جدید")),
-	NewCollection (Arrays.asList(
+	NEW_COLLECTION (Arrays.asList(
 			"Nueva Colección", 
 			"New Collection", 
 			"Nouvelle Collection",		   

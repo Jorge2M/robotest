@@ -28,7 +28,7 @@ public class Gpo001 extends TestBase {
 	public void execute() throws Exception {
 		access();
 		clickMenu(CAMISAS_SHE);
-		filterGaleryByColor(CAMISAS_SHE, Color.Blanco);
+		filterGaleryByColor(CAMISAS_SHE, Color.BLANCO);
 		if (channel==Channel.desktop) {
 			changeTwoToFourColumns();
 		}

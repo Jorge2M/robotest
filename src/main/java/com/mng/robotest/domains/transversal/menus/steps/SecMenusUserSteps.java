@@ -148,11 +148,11 @@ public class SecMenusUserSteps extends StepBase {
 		modalCambioPaisSteps.cambioPais(newPais, newIdioma);
 	}
 
-	private static final String TagPoints = "@TagPoints";
+	private static final String TAG_POINTS = "@TagPoints";
 	@Step (
 		description=
 			"Seleccionar el link \"Mango Likes You\"<br>" + 
-			"<b>info</b>: el usuario tiene " + TagPoints + " puntos", 
+			"<b>info</b>: el usuario tiene " + TAG_POINTS + " puntos", 
 		expected="Aparece la página de \"Mi cuenta\"")
 	public int clickMenuMangoLikesYou() {
 		clickUserMenu(MANGO_LIKES_YOU);
@@ -161,7 +161,7 @@ public class SecMenusUserSteps extends StepBase {
 		GenericChecks.checkDefault();
 		
 		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(TagPoints, String.valueOf(numberPoints));
+		step.replaceInDescription(TAG_POINTS, String.valueOf(numberPoints));
 		return (numberPoints);
 	}
 

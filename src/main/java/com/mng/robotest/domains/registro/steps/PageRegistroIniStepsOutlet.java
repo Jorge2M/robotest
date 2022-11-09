@@ -80,14 +80,14 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	}
 
 	public enum ErrorRegister {
-		None,
-		InputWarnings,
-		UsrExistsInMango,
-		UsrNoExistsInGmail
+		NONE,
+		INPUT_WARINGS,
+		USR_EXISTS_IN_MANGO,
+		USR_NO_EXISTS_IN_GMAIL
 	}
 	
 	public void clickRegistrateButton(Map<String,String> dataRegistro) {
-		clickRegistrateButton(dataRegistro, ErrorRegister.None);
+		clickRegistrateButton(dataRegistro, ErrorRegister.NONE);
 	}
 	
 	@Step (
@@ -98,19 +98,19 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		validaIsInvisibleCapaLoading(15);
 		
 		switch (errorExpected) {
-		case None:
+		case NONE:
 			new PageRegistroSegundaStepsOutlet().validaIsPageRegistroOK(dataRegistro);
 			break;
-		case InputWarnings:
+		case INPUT_WARINGS:
 			int numInputsObligatoriosNoInf = pageRegistroIni.getNumInputsObligatoriosNoInformados();
 			if (numInputsObligatoriosNoInf > 0) {
 				validateAreInputsWithErrorMessageAssociated(numInputsObligatoriosNoInf);  
 			}
 			break;
-		case UsrExistsInMango:
+		case USR_EXISTS_IN_MANGO:
 			validaEmailYaRegistradoShown(5);
 			break;
-		case UsrNoExistsInGmail:
+		case USR_NO_EXISTS_IN_GMAIL:
 			validaEmailIncorrectShown(5);
 			break;
 		}

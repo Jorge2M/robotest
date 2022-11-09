@@ -1,16 +1,16 @@
 package com.mng.robotest.domains.galeria.steps;
 
 public class LocationArticle {
-	public enum AccessFrom {InitCatalog, InitPage}
+	public enum AccessFrom { INIT_CATALOG, INIT_PAGE }
 	
-	public AccessFrom accessFrom = AccessFrom.InitPage;
+	public AccessFrom accessFrom = AccessFrom.INIT_PAGE;
 	public int numPage = 0;
 	public int numArticle = 0;
 	
 	
 	public static LocationArticle getInstanceInPage(int numPage, int numArticle) {
 		LocationArticle location = new LocationArticle();
-		location.accessFrom = AccessFrom.InitPage;
+		location.accessFrom = AccessFrom.INIT_PAGE;
 		location.numPage = numPage;
 		location.numArticle = numArticle;
 		return location;
@@ -18,7 +18,7 @@ public class LocationArticle {
 	
 	public static LocationArticle getInstanceInCatalog(int numArticle) {
 		LocationArticle location = new LocationArticle();
-		location.accessFrom = AccessFrom.InitCatalog;
+		location.accessFrom = AccessFrom.INIT_CATALOG;
 		location.numArticle = numArticle;
 		return location;
 	}
@@ -27,9 +27,9 @@ public class LocationArticle {
 	public String toString() {
 		String init = numArticle + "º from " + accessFrom.name();
 		switch (accessFrom) {
-		case InitCatalog:
+		case INIT_CATALOG:
 			return (init);
-		case InitPage:
+		case INIT_PAGE:
 		default:
 			return (init + " " + numPage + "ª");
 		}
@@ -38,8 +38,8 @@ public class LocationArticle {
 
 	public boolean isFirstInGalery() {
 		return (
-			(accessFrom==AccessFrom.InitCatalog && numArticle==1) ||
-			(accessFrom==AccessFrom.InitPage && numPage==1 && numArticle==1)
+			(accessFrom==AccessFrom.INIT_CATALOG && numArticle==1) ||
+			(accessFrom==AccessFrom.INIT_PAGE && numPage==1 && numArticle==1)
 		);
 	}
 }

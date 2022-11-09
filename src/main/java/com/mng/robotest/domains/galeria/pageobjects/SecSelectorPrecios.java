@@ -11,7 +11,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecSelectorPrecios extends PageBase {
 	
-	public enum TypeClick { left, right }
+	public enum TypeClick { LEFT, RIGHT }
 	
 	private static final String XPATH_LINEA_FILTRO_SHOP = "//div[@class[contains(.,'input-range__track--background')]]"; //
 	private static final String XPATH_IMPORTE_MINIMO_SHOP = "(" + XPATH_LINEA_FILTRO_SHOP + "//span[@class[contains(.,'label-container')]])[1]"; //
@@ -51,13 +51,13 @@ public class SecSelectorPrecios extends PageBase {
 	 * @param margenPixelsDerecha indica los píxels desde la derecha del selector donde ejecutaremos el click para definir un máximo
 	 */
 	public void clickMinAndMax(int margenPixelsIzquierda, int margenPixelsDerecha) throws Exception {
-		click(TypeClick.right, -30);
-		click(TypeClick.left, 30);
+		click(TypeClick.RIGHT, -30);
+		click(TypeClick.LEFT, 30);
 	}
 
 	private void click(TypeClick typeClick, int pixelsFromCorner) throws Exception {
 		Actions builder = new Actions(driver);
-		moveToCornerSelector(TypeClick.right);
+		moveToCornerSelector(TypeClick.RIGHT);
 		Thread.sleep(2000);
 		moveToCornerSelector(typeClick);
 		waitLoadPage();
@@ -69,10 +69,10 @@ public class SecSelectorPrecios extends PageBase {
 		waitForPageLoaded(driver);
 		moveToElement(XPATH_FILTRO_WRAPPER_SHOP);
 		switch (typeCorner) {
-		case left: 
+		case LEFT: 
 			moveToElement(XPATH_LEFT_CORNER_SHOP);
 			break;
-		case right:
+		case RIGHT:
 			moveToElement(XPATH_RIGHT_CORNER_SHOP);
 		}
 	}

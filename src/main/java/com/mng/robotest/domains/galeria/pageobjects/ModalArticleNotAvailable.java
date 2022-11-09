@@ -6,16 +6,17 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class ModalArticleNotAvailable extends PageBase {
 
-	public enum StateModal {visible, notvisible}	
+	public enum StateModal { VISIBLE, NOT_VISIBLE }
+	
 	private static final String XPATH_MODAL = "//div[@data-testid[contains(.,'backInStock.dialog')]]/../..";
 	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_MODAL + "//button[@data-testid='modal.close.button']";
 	
 	public boolean inStateUntil(StateModal stateModal, int seconds) {
 		switch (stateModal) {
-		case visible:
+		case VISIBLE:
 			return isVisibleUntil(seconds);
 		default:
-		case notvisible:
+		case NOT_VISIBLE:
 			return isNotVisibleUntil(seconds);
 		}
 	}

@@ -1,7 +1,7 @@
 package com.mng.robotest.getdata.productlist.entity;
 
 public enum TypeProduct {
-	Any,
-	ManyColors,
-	CompletaTuLook;
+	ANY,
+	MANY_COLORS,
+	COMPLETA_TU_LOOK;
 }

@@ -10,7 +10,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageGestionarClientes extends PageBase {
 
 	public enum TypeThirdButton {
-		Alta("alta"), Baja("baja");
+		ALTA("alta"), 
+		BAJA("baja");
 		
 		public String mensaje;
 		private TypeThirdButton(String mensaje) {
@@ -22,10 +23,10 @@ public class PageGestionarClientes extends PageBase {
 		}
 		
 		public TypeThirdButton buttonExpectedAfterClick() {
-			if (this==TypeThirdButton.Alta) {
-				return TypeThirdButton.Baja;
+			if (this==TypeThirdButton.ALTA) {
+				return TypeThirdButton.BAJA;
 			}
-			return TypeThirdButton.Alta;
+			return TypeThirdButton.ALTA;
 		}
 	} 
 	
@@ -99,10 +100,10 @@ public class PageGestionarClientes extends PageBase {
 	}
 
 	public TypeThirdButton getTypeThirdButton() {
-		if (isVisibleThirdButtonUntil(TypeThirdButton.Alta, 0)) {
-			return (TypeThirdButton.Alta);
+		if (isVisibleThirdButtonUntil(TypeThirdButton.ALTA, 0)) {
+			return (TypeThirdButton.ALTA);
 		}
-		return (TypeThirdButton.Baja); 
+		return (TypeThirdButton.BAJA); 
 	}
 	
 	public String getIdClienteTablaFromDni(String dni) {

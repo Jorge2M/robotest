@@ -80,9 +80,9 @@ public abstract class PageGaleria extends PageBase {
 	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
 
 	public static final List<LabelArticle> listLabelsNew = Arrays.asList(
-			LabelArticle.ComingSoon,
-			LabelArticle.NewNow,
-			LabelArticle.NewCollection);
+			LabelArticle.COMING_SOON,
+			LabelArticle.NEW_NOW,
+			LabelArticle.NEW_COLLECTION);
 
 	static final String CLASS_PRODUCT_ITEM =
 			"@class[contains(.,'productList__name')] or " +
@@ -329,9 +329,9 @@ public abstract class PageGaleria extends PageBase {
 
 	public WebElement getArticulo(LocationArticle locationArt) {
 		switch (locationArt.accessFrom) {
-			case InitCatalog:
+			case INIT_CATALOG:
 				return (getArticulo(locationArt.numArticle));
-			case InitPage:
+			case INIT_PAGE:
 			default:
 				return (getArticleFromPagina(locationArt.numPage, locationArt.numArticle));
 		}

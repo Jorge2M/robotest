@@ -96,9 +96,9 @@ public class Com001 extends TestBase {
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 			.linea(home)
 			.menusCandidates(Arrays.asList(
-					Menu.Albornoces, 
-					Menu.Toallas, 
-					Menu.Alfombras))
+					Menu.ALBORNOCES, 
+					Menu.TOALLAS, 
+					Menu.ALFOMBRAS))
 			.filter(FilterType.STOCK)
 			.build();
 		
@@ -113,9 +113,9 @@ public class Com001 extends TestBase {
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 			.linea(she)
 			.menusCandidates(Arrays.asList(
-					Menu.Sujetadores, 
-					Menu.Braguitas, 
-					Menu.Lenceria))
+					Menu.SUJETADORES, 
+					Menu.BRAGUITAS, 
+					Menu.LENCERIA))
 			.filter(FilterType.STOCK)
 			.build();
 		

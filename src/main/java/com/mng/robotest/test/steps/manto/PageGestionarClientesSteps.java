@@ -56,8 +56,8 @@ public class PageGestionarClientesSteps {
 		int seconds = 1;
 	 	checks.add(
 			"Aparece el botón de Alta o Baja (los esperamos un máximo de " + seconds + " segundos)",
-			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Baja, seconds) ||
-			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.Alta, seconds), 
+			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.BAJA, seconds) ||
+			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.ALTA, seconds), 
 			State.Defect);
 	 	
 	 	return checks;

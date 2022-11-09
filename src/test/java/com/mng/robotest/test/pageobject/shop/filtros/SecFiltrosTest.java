@@ -12,7 +12,7 @@ public class SecFiltrosTest {
 	@Test
 	public void testUrlWithAllTheColors() {
 		//Define data-context
-		List<Color> listColorsToValidate = Arrays.asList(Color.Blanco, Color.Verde);
+		List<Color> listColorsToValidate = Arrays.asList(Color.BLANCO, Color.VERDE);
 		String url = getUrlWithColors(listColorsToValidate);
 		
 		//Execute code to test
@@ -25,8 +25,8 @@ public class SecFiltrosTest {
 	@Test
 	public void testUrlWithoutAllTheColors() {
 		//Define data-context
-		List<Color> listColorsToValidate = Arrays.asList(Color.Blanco, Color.Verde);
-		String url = getUrlWithColors(Arrays.asList(Color.Rojo, Color.Verde));
+		List<Color> listColorsToValidate = Arrays.asList(Color.BLANCO, Color.VERDE);
+		String url = getUrlWithColors(Arrays.asList(Color.ROJO, Color.VERDE));
 		
 		//Execute code to test
 		boolean resultCheck = SecFiltros.checkUrlAfterFilterContainsColors(listColorsToValidate, url);
@@ -38,7 +38,7 @@ public class SecFiltrosTest {
 	@Test
 	public void testUrlNotMeetPattern() {
 		//Define data-context
-		List<Color> listColorsToValidate = Arrays.asList(Color.Blanco, Color.Verde);
+		List<Color> listColorsToValidate = Arrays.asList(Color.BLANCO, Color.VERDE);
 		String url = "https://shop.mango.com/es/mujer/prendas";
 		
 		//Execute code to test

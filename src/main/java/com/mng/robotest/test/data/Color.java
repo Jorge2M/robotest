@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Color {
-	Negro("1", "Negros"),
-	Blanco("10", "Blancos"),
-	Rojo("11", "Rojos"),
-	Gris("12", "Grises"),
-	Azul("13", "Azules"),
-	Beige("14", "Beige"),
-	Verde("2", "Verdes"),
-	Marron("3", "Marrones"),
-	Crudo("4", "Crudos"),
-	Rosa("5", "Rosas");
+	NEGRO("1", "Negros"),
+	BLANCO("10", "Blancos"),
+	ROJO("11", "Rojos"),
+	GRIS("12", "Grises"),
+	AZUL("13", "Azules"),
+	BEIGE("14", "Beige"),
+	VERDE("2", "Verdes"),
+	MARRON("3", "Marrones"),
+	CRUDO("4", "Crudos"),
+	ROSA("5", "Rosas");
 	
 	String codigoColor;
 	String nameFiltro;

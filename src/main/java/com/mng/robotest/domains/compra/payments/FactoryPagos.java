@@ -41,91 +41,91 @@ public class FactoryPagos {
 		
 		PagoSteps pagoMaked = null; 
 		switch (typePago) {
-		case TarjetaIntegrada:
+		case TARJETA_INTEGRADA:
 			pagoMaked = new PagoTarjetaIntegrada(dataPago);
 			break;
-		case KrediKarti:
+		case KREDI_KARTI:
 			pagoMaked = new PagoKrediKarti(dataPago);
 			break;
-		case TMango:
+		case TARJETA_MANGO:
 			pagoMaked = new PagoTMango(dataPago);
 			break;
-		case Billpay:
+		case BILLPAY:
 			pagoMaked = new PagoBillpay(dataPago);
 			break;
-		case Paypal:
+		case PAYPAL:
 			pagoMaked = new PagoPaypal(dataPago);
 			break;  
-		case Mercadopago:
+		case MERCADOPAGO:
 			pagoMaked = new PagoMercadopago(dataPago);
 			break;
-		case Amazon:
+		case AMAZON:
 			pagoMaked = new PagoAmazon(dataPago);
 			break;			
-		case Postfinance:
+		case POSTFINANCE:
 			pagoMaked = new PagoPostfinance(dataPago);
 			break;			
-		case Trustpay:
+		case TRUSTPAY:
 			pagoMaked = new PagoTrustpay(dataPago);
 			break;			
-		case Multibanco:
+		case MULTIBANCO:
 			pagoMaked = new PagoMultibanco(dataPago);
 			break;			
-		case Paytrail:
+		case PAYTRAIL:
 			pagoMaked = new PagoPaytrail(dataPago);
 			break;			
-		case Dotpay:
+		case DOTPAY:
 			pagoMaked = new PagoDotpay(dataPago);
 			break;			
-		case Ideal:
+		case IDEAL:
 			pagoMaked = new PagoIdeal(dataPago);
 			break;   
-		case Eps:
+		case EPS:
 			pagoMaked = new PagoEps(dataPago);
 			break;  
-		case Sepa:
+		case SEPA:
 			pagoMaked = new PagoSepa(dataPago);
 			break;			
-		case Giropay:
+		case GIROPAY:
 			pagoMaked = new PagoGiropay(dataPago);
 			break;			
-		case Sofort:
+		case SOFORT:
 			pagoMaked = new PagoSofort(dataPago);
 			break;	   
-		case PayMaya:
+		case PAYMAYA:
 			pagoMaked = new PagoPayMaya(dataPago);
 			break;
-		case Klarna:
+		case KLARNA:
 			pagoMaked = new PagoKlarna(dataPago);
 			break;
-		case KlarnaUK:
+		case KLARNA_UK:
 			pagoMaked = new PagoKlarnaUK(dataPago);
 			break;
-		case PaysecureQiwi:
+		case PAYSECURE_QIWI:
 			pagoMaked = new PagoPaysecureQiwi(dataPago);
 			break;
-		case Assist:
+		case ASSIST:
 			pagoMaked = new PagoAssist(dataPago);
 			break;			
-		case Yandex:
+		case YANDEX:
 			pagoMaked = new PagoYandex(dataPago);
 			break;
-		case PasarelaOtras:
+		case PASARELA_OTRAS:
 			pagoMaked = new PagoPasarelaOtras(dataPago);
 			break;
 		case KCP:
 			pagoMaked = new PagoKCP(dataPago);
 			break;
-		case ContraReembolso:			
+		case CONTRA_REEMBOLSO:			
 			pagoMaked = new PagoContraReembolso(dataPago);
 			break;
-		case Bancontact:
+		case BANCONTACT:
 			pagoMaked = new PagoBancontact(dataPago);
 			break;
-		case ProcessOut:
+		case PROCESS_OUT:
 			pagoMaked = new PagoProcessOut(dataPago);
 			break;
-		case TpvVotf:
+		case TPV_VOTF:
 			pagoMaked = new PagoTpvVotf(dataPago);
 			break;
 		default:

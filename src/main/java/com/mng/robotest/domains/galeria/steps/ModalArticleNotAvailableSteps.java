@@ -24,7 +24,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 		expected="El modal queda en estado No-visible")
 	public void clickAspaForClose() {
 		modalArticleNotAvailable.clickAspaForClose();
-		validateState(1, StateModal.notvisible);
+		validateState(1, StateModal.NOT_VISIBLE);
 	}
 
 	@Validation

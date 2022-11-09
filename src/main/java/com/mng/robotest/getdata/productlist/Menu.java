@@ -3,19 +3,19 @@ package com.mng.robotest.getdata.productlist;
 import com.mng.robotest.conftestmaker.AppEcom;
 
 public enum Menu implements MenuI {
-	Camisas("prendas", "camisas", "14,414", "14", "14", "14"),
-	CamisasHE("prendas", "camisas", "120", "120", "120", "120"),
-	Toallas("bano", "toallas", "722", "722", "722", "722"),
-	Albornoces("bano", "albornoces", "726", "726", "726", "726"),
-	Alfombras("bano", "alfombras", "724", "724", "724", "724"),
-	Sujetadores("intimissimi", "bra", "821", "821", "821", "821"),
-	Braguitas("intimissimi", "knickers", "822", "822", "822", "822"),
-	Lenceria("intimissimi", "lingerie", "823", "823", "823", "823"),
-	Vaqueros("prendas", "vaqueros", "28,428", "28,428", "28,428", "28,428"),
-	Shorts("prendas", "shorts", "25,422", "25", "25,422", "25"),
-	Pijamas("prendas", "pijamas", "628", "628", "628", "628"),
-	Faldas("prendas", "faldas", "20", "20", "20", "20"),
-	Fulares("accesorio", "fulares", "141", "141", "141", "141");
+	CAMISAS("prendas", "camisas", "14,414", "14", "14", "14"),
+	CAMISAS_HE("prendas", "camisas", "120", "120", "120", "120"),
+	TOALLAS("bano", "toallas", "722", "722", "722", "722"),
+	ALBORNOCES("bano", "albornoces", "726", "726", "726", "726"),
+	ALFOMBRAS("bano", "alfombras", "724", "724", "724", "724"),
+	SUJETADORES("intimissimi", "bra", "821", "821", "821", "821"),
+	BRAGUITAS("intimissimi", "knickers", "822", "822", "822", "822"),
+	LENCERIA("intimissimi", "lingerie", "823", "823", "823", "823"),
+	VAQUEROS("prendas", "vaqueros", "28,428", "28,428", "28,428", "28,428"),
+	SHORTS("prendas", "shorts", "25,422", "25", "25,422", "25"),
+	PIJAMAS("prendas", "pijamas", "628", "628", "628", "628"),
+	FALDAS("prendas", "faldas", "20", "20", "20", "20"),
+	FULARES("accesorio", "fulares", "141", "141", "141", "141");
 	
 	String seccion;
 	String galeria;

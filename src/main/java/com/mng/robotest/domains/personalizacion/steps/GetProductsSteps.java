@@ -23,7 +23,7 @@ public class GetProductsSteps extends StepBase {
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 			.method(MethodGetter.WEBDRIVER)
 			.linea(LineaType.she)
-			.menu(Menu.Vaqueros)
+			.menu(Menu.VAQUEROS)
 			.build();
 		
 		isPersonalization(2, 4, getterProducts);

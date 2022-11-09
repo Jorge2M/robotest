@@ -31,9 +31,9 @@ public class SecPreciosArticulo extends PageBase {
 
 	public String getXPathPrecioArticulo(TypeArticle typeArticle) {
 		switch (typeArticle) {
-		case rebajado:
+		case REBAJADO:
 			return TipoPrecio.PRECIO_REBAJADO_DEFINITIVO.getXPath();
-		case norebajado:
+		case NO_REBAJADO:
 		default:
 			return TipoPrecio.PRECIO_NO_REBAJADO_DEFINITIVO.getXPath();
 		}

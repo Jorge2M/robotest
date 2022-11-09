@@ -396,9 +396,9 @@ public class PageCheckoutWrapper extends PageBase {
 	
 	public boolean validateDiscountOk(PreciosArticulo preciosArtScreen, Descuento descuento) {
 		switch (descuento.getDiscountOver()) {
-		case OriginalPrice:
+		case ORIGINAL_PRICE:
 			return (validateDiscountOverOriginalPrice(preciosArtScreen, descuento.getPercentageDesc()));
-		case LastPriceOrSale:
+		case LAST_PRICE_OR_SALE:
 		default:
 			return (validateDiscountOverLastPriceOrSale(preciosArtScreen, descuento.getPercentageDesc()));
 		}

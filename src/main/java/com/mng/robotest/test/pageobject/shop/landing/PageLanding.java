@@ -116,7 +116,7 @@ public class PageLanding extends PageBase {
 			return true;
 		}
 		
-		BannerObject banners = BannerObjectFactory.make(BannerType.Standar);
+		BannerObject banners = BannerObjectFactory.make(BannerType.STANDAR);
 		if (banners.isVisibleAnyBanner()) {
 			return true;
 		}

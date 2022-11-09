@@ -18,7 +18,7 @@ public class SecTarjetaPciSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsSectionOk(Pago pago) {
 		ChecksTM checks = ChecksTM.getNew();
-		if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KrediKarti) {
+		if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KREDI_KARTI) {
 			int seconds = 5;
 		 	checks.add(
 				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel, app) + 
@@ -34,7 +34,7 @@ public class SecTarjetaPciSteps extends StepBase {
 			secTarjetaPci.isPresentSelectMes() &&
 			secTarjetaPci.isPresentSelectAny(), State.Defect);  
 	 	
-	 	if (pago.getTypePago()!=TypePago.Bancontact) {
+	 	if (pago.getTypePago()!=TypePago.BANCONTACT) {
 		 	checks.add(
 				"Aparece también el campo <b>CVC</b>",
 				secTarjetaPci.isPresentInputCvc(), State.Defect); 

@@ -338,7 +338,7 @@ public class Pais implements Serializable {
 	 * @return si el país tiene asociado el pago de "Store Credit"
 	 */
 	public boolean existsPagoStoreCredit() {
-		return (getPagoType(TypePago.StoreCredit)!=null);
+		return (getPagoType(TypePago.STORE_CREDIT)!=null);
 	}
 
 	public boolean isEspanya() {
@@ -439,7 +439,7 @@ public class Pais implements Serializable {
 		List<Pago> listPagosApp = getListPagosForTest(app, testEmpleado); 
 		for (int i=0; i<listPagosApp.size(); i++) {
 			//Filtramos el pago "storecredit"
-			if (listPagosApp.get(i).getTypePago()!=TypePago.StoreCredit) {
+			if (listPagosApp.get(i).getTypePago()!=TypePago.STORE_CREDIT) {
 				metodosPago = metodosPago + ",<br> " + listPagosApp.get(i).getNombre();
 			}
 		}

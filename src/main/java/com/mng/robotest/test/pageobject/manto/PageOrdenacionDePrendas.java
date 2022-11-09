@@ -7,19 +7,19 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 public class PageOrdenacionDePrendas {
 	
 	public enum Orden implements ElementPage {
-		titulo("ORDENADOR DE PRENDAS"),
-		initialTitulo("//td[@class='txt11B' and text()[contains(.,'ORDENADOR DE PRENDAS')]]"),
-		desplegableTiendas("//select[@id[contains(.,'host')]]"),
-		verTiendas("//input[@id[contains(.,'j_id_2f')]]"),
-		selectorOrdenacion("//select[@name[contains(.,'secciones')]]"),
-		selectorPrendas("//select[@id[contains(.,'menus')]]"),
-		verPrendas("//input[@value[contains(.,'Ver Prendas')]]"),
-		pruebaImagen("//ul[@id='grupo_0']"),
-		pruebaCamisa("//p[@class='mensaje10' and text()[contains(.,'camisas_she')]]"),
-		bajarPrenda("//a[@id='idDos']"),
-		primeraPrenda("//ul[@id='grupo_0']//li[1]"),
-		segundaPrenda("//ul[@id='grupo_0']//li[2]"),
-		aplicarOrden("//button[@onclick[contains(.,'aplicarOrden')]]");
+		TITULO("ORDENADOR DE PRENDAS"),
+		INITIAL_TITULO("//td[@class='txt11B' and text()[contains(.,'ORDENADOR DE PRENDAS')]]"),
+		DESPLEGABLE_TIENDAS("//select[@id[contains(.,'host')]]"),
+		VER_TIENDAS("//input[@id[contains(.,'j_id_2f')]]"),
+		SELECTOR_ORDENACION("//select[@name[contains(.,'secciones')]]"),
+		SELECTOR_PRENDAS("//select[@id[contains(.,'menus')]]"),
+		VER_PRENDAS("//input[@value[contains(.,'Ver Prendas')]]"),
+		PRUEBA_IMAGEN("//ul[@id='grupo_0']"),
+		PRUEBA_CAMISA("//p[@class='mensaje10' and text()[contains(.,'camisas_she')]]"),
+		BAJAR_PRENDA("//a[@id='idDos']"),
+		PRIMERA_PRENDA("//ul[@id='grupo_0']//li[1]"),
+		SEGUNDA_PRENDA("//ul[@id='grupo_0']//li[2]"),
+		APLICAR_ORDEN("//button[@onclick[contains(.,'aplicarOrden')]]");
 		
 		String xpath;
 		By by;
@@ -38,10 +38,10 @@ public class PageOrdenacionDePrendas {
 	}
 	
 	public enum Modal implements ElementPage {
-		container("//div[@id='aplicarOrden']"),
-		applyGeneric("//input[@value='Aplicar orden genérico']"),
-		applyCountry("//input[@value='Aplicar orden país']"),
-		cancel("//button[@id='cancelarAplicar']");
+		CONTAINER("//div[@id='aplicarOrden']"),
+		APPLY_GENERIC("//input[@value='Aplicar orden genérico']"),
+		APPLY_COUNTRY("//input[@value='Aplicar orden país']"),
+		CANCEL("//button[@id='cancelarAplicar']");
 		
 		By by;
 		Modal(String xpath) {

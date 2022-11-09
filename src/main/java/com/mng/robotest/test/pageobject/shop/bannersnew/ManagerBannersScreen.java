@@ -44,7 +44,7 @@ public class ManagerBannersScreen extends PageBase {
 		clearBannersData(listBannerTypes);
 		for (BannerType bannerType : listBannerTypes) {
 			BannerObject bannerObject = BannerObjectFactory.make(bannerType);
-			if (bannerType==BannerType.Standar) {
+			if (bannerType==BannerType.STANDAR) {
 				//Para recopilar este tipo de banners hemos de paginar para asegurarnos que se visualizan todos
 				new Actions(driver).sendKeys(Keys.PAGE_DOWN).perform();
 			}

@@ -4,12 +4,12 @@ import com.mng.robotest.conftestmaker.AppEcom;
 
 public class Descuento {
 	
-	static final int percDescEmpleadoShop = 25;
-	static final int percDescEmpleadoOutlet = 10;
+	private static final int PERC_DESC_EMPLEADO_SHOP = 25;
+	private static final int PERC_DESC_EMPLEADO_OUTLET = 10;
 	
 	public enum DiscountOver {
-		OriginalPrice("descuento sobre el precio original"), 
-		LastPriceOrSale("descuento adicional sobre el último precio/rebaja");
+		ORIGINAL_PRICE("descuento sobre el precio original"), 
+		LAST_PRICE_OR_SALE("descuento adicional sobre el último precio/rebaja");
 		
 		String description;
 		private DiscountOver(String description) {
@@ -21,14 +21,14 @@ public class Descuento {
 		}
 	};
 	
-	public enum DiscountType {Vale, Empleado};
+	public enum DiscountType {VALE, EMPLEADO};
 	
 	int percentageDesc = 0;
 	DiscountOver discountOver;
 
 	public Descuento(int porcentajeDesc) {
 		this.percentageDesc = porcentajeDesc;
-		this.discountOver = DiscountOver.OriginalPrice; //Default value
+		this.discountOver = DiscountOver.ORIGINAL_PRICE; //Default value
 		
 	}
 	
@@ -39,14 +39,14 @@ public class Descuento {
 	
 	public Descuento(AppEcom app, DiscountType discType) {
 		this.discountOver = getTypeDescuentoForApp(app);
-		if (discType==DiscountType.Empleado) {
+		if (discType==DiscountType.EMPLEADO) {
 			switch (app) {
 			case outlet:
-				this.percentageDesc = percDescEmpleadoOutlet;
+				this.percentageDesc = PERC_DESC_EMPLEADO_OUTLET;
 				break;
 			case shop:
 			default:
-				this.percentageDesc = percDescEmpleadoShop;
+				this.percentageDesc = PERC_DESC_EMPLEADO_SHOP;
 			}
 		}
 		else
@@ -64,10 +64,10 @@ public class Descuento {
 	public static DiscountOver getTypeDescuentoForApp(AppEcom app) {
 		switch (app) {
 		case outlet:
-			return DiscountOver.LastPriceOrSale;
+			return DiscountOver.LAST_PRICE_OR_SALE;
 		case shop:
 		default:
-			return DiscountOver.OriginalPrice;
+			return DiscountOver.ORIGINAL_PRICE;
 		}
 	}
 }

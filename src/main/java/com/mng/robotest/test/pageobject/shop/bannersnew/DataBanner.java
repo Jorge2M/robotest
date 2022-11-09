@@ -111,9 +111,9 @@ public class DataBanner {
 	
 	public DestinoType getDestinoType() {
 		if (urlBanner!=null && urlBanner.contains("redirect.faces") && urlBanner.contains("producto=")) {
-			return (DestinoType.Ficha);
+			return (DestinoType.FICHA);
 		}
-		return (DestinoType.Otros);
+		return (DestinoType.OTROS);
 	}
 	
 	public boolean isOverlayedWith(DataBanner dataBanner2) {

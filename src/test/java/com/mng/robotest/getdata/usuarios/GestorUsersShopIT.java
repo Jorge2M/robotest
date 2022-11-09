@@ -15,7 +15,7 @@ public class GestorUsersShopIT {
     public void testCheckoutFromGestorWithFreeUsers() {
         new GestorUsersShop().reset();
         UserShop userShop = GestorUsersShop.getUser(); //Code to test
-        assertEquals("Checkout gets User in state " + StateUser.busy, StateUser.busy, userShop.stateUser);
+        assertEquals("Checkout gets User in state " + StateUser.BUSY, StateUser.BUSY, userShop.stateUser);
         
         int intervalSeconds = 5;
         Calendar beforeCurrentDate = Calendar.getInstance();
@@ -32,11 +32,11 @@ public class GestorUsersShopIT {
     	gestorUsers.reset();
         Calendar beforeCurrentDate = Calendar.getInstance();
         beforeCurrentDate.add(Calendar.SECOND, -5);
-        gestorUsers.addUserShop(new UserShop("user.oldest@mango.com", "", StateUser.busy, beforeCurrentDate));
-        gestorUsers.addUserShop(new UserShop("user.newest@mango.com", "", StateUser.busy));
+        gestorUsers.addUserShop(new UserShop("user.oldest@mango.com", "", StateUser.BUSY, beforeCurrentDate));
+        gestorUsers.addUserShop(new UserShop("user.newest@mango.com", "", StateUser.BUSY));
         
         UserShop userShop = GestorUsersShop.getUser(); //Code to test
-        assertEquals("Checkout gets User in state " + StateUser.busy, StateUser.busy, userShop.stateUser);
+        assertEquals("Checkout gets User in state " + StateUser.BUSY, StateUser.BUSY, userShop.stateUser);
         assertEquals("Checkout gets Busy-User with oldest data checkout", "user.oldest@mango.com", userShop.user);
         assertTrue("The dateCheckout of the user is stablished to the current date", userShop.dateLastCheckout.after(beforeCurrentDate));
     }
@@ -45,9 +45,9 @@ public class GestorUsersShopIT {
     public void testCheckoutGetsDiferentUsers() {
     	GestorUsersShop gestorUsers = new GestorUsersShop();
     	gestorUsers.reset();
-    	gestorUsers.addUserShop(new UserShop("user1.test@mango.com", "", StateUser.free));
-    	gestorUsers.addUserShop(new UserShop("user2.test@mango.com", "", StateUser.free));
-    	gestorUsers.addUserShop(new UserShop("user3.test@mango.com", "", StateUser.free));
+    	gestorUsers.addUserShop(new UserShop("user1.test@mango.com", "", StateUser.FREE));
+    	gestorUsers.addUserShop(new UserShop("user2.test@mango.com", "", StateUser.FREE));
+    	gestorUsers.addUserShop(new UserShop("user3.test@mango.com", "", StateUser.FREE));
 
         Set<UserShop> setUsers = new HashSet<>(); //Set not adds duplicated elements
         setUsers.add(GestorUsersShop.getUser()); //Code to test

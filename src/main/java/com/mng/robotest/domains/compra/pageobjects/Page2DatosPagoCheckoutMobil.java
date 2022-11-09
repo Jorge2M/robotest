@@ -251,9 +251,9 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 
 	public boolean isVisibleTextoBajoPagoUntil(Pago pago, int seconds) {
 		switch (pago.getTypePago()) {
-		case TMango:
+		case TARJETA_MANGO:
 			return (secTMango.isVisibleUntil(seconds));
-		case Billpay:
+		case BILLPAY:
 			return (secBillpay.isVisibleUntil(seconds));
 		default:
 			String xpathTexto = getXPathTextUnderPago(pago.getNombre(channel, app));

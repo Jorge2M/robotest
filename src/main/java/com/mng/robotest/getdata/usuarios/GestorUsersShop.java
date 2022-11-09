@@ -16,7 +16,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 public class GestorUsersShop {
 
 	private static CopyOnWriteArrayList<UserShop> listTestPerformanceUsers;
-	private static final int minutesForUserLiberation = 30;
+	private static final int MINUTES_FOR_USER_LIBERATION = 30;
 
 	public GestorUsersShop() {
 		if (listTestPerformanceUsers==null) {
@@ -52,8 +52,8 @@ public class GestorUsersShop {
 		Integer[] listRandomInts = getRandomListNotRepeated(listTestPerformanceUsers.size());
 		for (Integer index : listRandomInts) {
 			UserShop user = listTestPerformanceUsers.get(index.intValue());
-			if (user.stateUser==StateUser.free) {
-				user.stateUser = StateUser.busy;
+			if (user.stateUser==StateUser.FREE) {
+				user.stateUser = StateUser.BUSY;
 				user.dateLastCheckout = Calendar.getInstance();
 				return user;
 			}
@@ -89,11 +89,11 @@ public class GestorUsersShop {
 	private void releaseTestPerformanceUsedUsers() {
 		Calendar hoy = Calendar.getInstance();
 		for (UserShop user : listTestPerformanceUsers) {
-			if (user.stateUser==StateUser.busy) {
+			if (user.stateUser==StateUser.BUSY) {
 				Calendar dateToLiberateUser = (Calendar)user.dateLastCheckout.clone();
-				dateToLiberateUser.add(Calendar.MINUTE, minutesForUserLiberation);
+				dateToLiberateUser.add(Calendar.MINUTE, MINUTES_FOR_USER_LIBERATION);
 				if (hoy.after(dateToLiberateUser)) {
-					user.stateUser=StateUser.free;
+					user.stateUser=StateUser.FREE;
 				}
 			}
 		}

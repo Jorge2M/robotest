@@ -54,7 +54,7 @@ public class Vtf001 extends TestBase {
 		Pais espana = PaisGetter.from(PaisShop.ESPANA);
 		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigo_alf(), AppEcom.votf, driver).
 				linea(LineaType.she).
-				menu(Menu.Shorts).
+				menu(Menu.SHORTS).
 				numProducts(numProductsMax).
 				pagina(1).
 				build();

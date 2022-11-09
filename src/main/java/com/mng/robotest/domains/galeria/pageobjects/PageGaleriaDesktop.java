@@ -64,7 +64,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		super(from);
 	}
 	
-	public enum TypeArticle {rebajado, norebajado};
+	public enum TypeArticle { REBAJADO, NO_REBAJADO }
 	private static final String XPATH_ANCESTOR_ARTICLE = "//ancestor::div[@class[contains(.,'product-list-info')]]";
 	
 	private String getXPathDataArticuloOfType(TypeArticle typeArticle) {
@@ -106,7 +106,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 
 	private String getXPathDataArticuloRebajadoWithLabel(LabelArticle label) {
 		String xpathLabelWithLit = getXPathLabel(label);
-		return (getXPathDataArticuloOfType(TypeArticle.rebajado) + xpathLabelWithLit + "/..");
+		return (getXPathDataArticuloOfType(TypeArticle.REBAJADO) + xpathLabelWithLit + "/..");
 	}
 
 	private String getXPathDataArticuloTemporadaXWithLabel(List<Integer> temporadasX, LabelArticle label) {

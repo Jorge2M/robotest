@@ -14,7 +14,7 @@ import com.mng.robotest.getdata.canonicalproduct.entity.EntityProduct;
 
 public class GetterProductApiCanonical {
 
-	private static final String target = "https://internal-canonical-products.pro.k8s.mango/v1/products";
+	private static final String TARGET = "https://internal-canonical-products.pro.k8s.mango/v1/products";
 	private final String codPaisAlf;
 	private final String codIdiomAlf;
 	private final String channelId;
@@ -41,7 +41,7 @@ public class GetterProductApiCanonical {
 		Client client = ClientBuilder.newBuilder().build();
 		return 
 			client
-				.target(target)
+				.target(TARGET)
 				.path(idProducto)
 				.queryParam("countryId", codPaisAlf)
 				.queryParam("languageId", codIdiomAlf)

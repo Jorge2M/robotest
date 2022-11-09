@@ -131,9 +131,9 @@ public class Page1DktopCheckout extends PageBase {
 
 	public boolean isVisibleBloquePagoNoTRJIntegradaUntil(Pago pago, int seconds) {
 		switch (pago.getTypePago()) {
-		case TMango:
+		case TARJETA_MANGO:
 			return (secTMango.isVisibleUntil(seconds));
-		case Billpay:
+		case BILLPAY:
 			return (secBillpay.isVisibleUntil(seconds));
 		default:
 			String nameExpected = pago.getNombreInCheckout(channel, app).toLowerCase();

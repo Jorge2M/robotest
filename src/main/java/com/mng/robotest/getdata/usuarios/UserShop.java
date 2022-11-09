@@ -4,10 +4,10 @@ import java.util.Calendar;
 
 
 public class UserShop {
-	public enum StateUser {free, busy}
+	public enum StateUser {FREE, BUSY}
 	public String user;
 	public String password;
-	public StateUser stateUser = StateUser.free;
+	public StateUser stateUser = StateUser.FREE;
 	public Calendar dateLastCheckout = Calendar.getInstance();
 	
 	public UserShop(String user, String password, StateUser stateUser) {

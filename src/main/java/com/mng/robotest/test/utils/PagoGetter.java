@@ -60,7 +60,7 @@ public class PagoGetter {
 				for (Pago pago : pais.getListPagos()) {
 					if ((!isEmpleado || (isEmpleado && pago.isForEmpleado())) &&
 						//El storecredito lo mantenemos al margen de la lista pues no aparece como un icono
-						(pago.getTypePago()!=TypePago.StoreCredit) && 
+						(pago.getTypePago()!=TypePago.STORE_CREDIT) && 
 						pago.getTiendasList().contains(app)) {
 						PaymentCountry paymentCountry = new PaymentCountry(pais.getCodigo_pais(), pago);
 						listPaymentsToReturn.add(paymentCountry);
