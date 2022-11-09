@@ -2386,7 +2386,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <!-- TODO volver a restaurar AMEX cuando esté solventado el tema de la tarjeta guardada -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipoenvioshop='ASM' tipoenviooutlet='ASM' provinciaenvio="MADRID" tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373">&TPV-555;</pago>
+	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipoenvioshop='ASM' tipoenviooutlet='STANDARD' provinciaenvio="MADRID" tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373">&TPV-555;</pago>
 <!-- Inicialmente estaba tipoenvioshop='NEXTDAY' pero se desactivó así que lo hemos sustituído por 'TIENDA' -->
 <pago 
 	type="TMango" tiendas="shop,outlet" empleado="s" 
