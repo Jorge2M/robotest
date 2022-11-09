@@ -19,7 +19,7 @@ public class PagoPasarelaOtras extends PagoSteps {
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		new PagePasarelaOtrasSteps().validateIsPage(dataPago.getDataPedido().getImporteTotal());
 		if (execPay) {
-			throw new PaymethodWithoutTestPayImplementedException(MsgNoPayImplemented);
+			throw new PaymethodWithoutTestPayImplementedException(MSG_NO_PAY_IMPLEMENTED);
 		}
 	}	
 }

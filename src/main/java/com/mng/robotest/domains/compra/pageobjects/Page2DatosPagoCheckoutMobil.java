@@ -202,7 +202,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		moveToElement(XPATH_LINEA_PAGO_LAYOUT_LINEA);
 	}
 	
-	public void despliegaMetodosPago() throws Exception {
+	public void despliegaMetodosPago() {
 		if (areMetodosPagoPlegados()) { 
 			clickLinkFormasPagoFor(TypeActionLinkFP.DESPLEGAR_PAGOS);
 			metodosPagosInStateUntil(false, 3);
@@ -232,7 +232,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		isMethodInStateUntil(nombrePago, StateMethod.SELECTED, 1);
 	}
 
-	private void clickMetodoPago(String nombrePago) throws Exception {
+	private void clickMetodoPago(String nombrePago) {
 		String xpathClickMetodoPago = getXPathRadioPago(nombrePago);
 		moveToElement(xpathClickMetodoPago);
 		

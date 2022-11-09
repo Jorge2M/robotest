@@ -188,7 +188,7 @@ public class SecMenusUserSteps extends StepBase {
 	}
 
 	@Validation
-	public ChecksResultWithNumberPoints checkAngGetLoyaltyPoints(int seconds) throws Exception {
+	public ChecksResultWithNumberPoints checkAngGetLoyaltyPoints(int seconds) {
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
 		if (channel==Channel.desktop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();

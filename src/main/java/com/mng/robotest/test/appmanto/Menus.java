@@ -45,11 +45,11 @@ public class Menus implements Serializable {
 		TestCaseTM testCase = getTestCase();
 		TestRunTM testRun = testCase.getTestRunParent();
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
-		dMantoAcc.urlManto = inputParams.getUrlBase();
-		dMantoAcc.userManto = testRun.getParameter(Constantes.PARAM_USR_MANTO);
-		dMantoAcc.passManto = testRun.getParameter(Constantes.PARAM_PAS_MANTO);
-		dMantoAcc.channel = Channel.desktop;
-		dMantoAcc.appE = AppEcom.shop;
+		dMantoAcc.setUrlManto(inputParams.getUrlBase());
+		dMantoAcc.setUserManto(testRun.getParameter(Constantes.PARAM_USR_MANTO));
+		dMantoAcc.setPassManto(testRun.getParameter(Constantes.PARAM_PAS_MANTO));
+		dMantoAcc.setChannel(Channel.desktop);
+		dMantoAcc.setAppE(AppEcom.shop);
 		return dMantoAcc;
 	}
 	
@@ -68,7 +68,7 @@ public class Menus implements Serializable {
 		TestCaseTM.addNameSufix(this.indexFact);
 		DataMantoAccess dMantoAcc = getDataMantoAccess();
 		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoSteps.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
+		PageLoginMantoSteps.login(dMantoAcc.getUrlManto(), dMantoAcc.getUserManto(), dMantoAcc.getPassManto(), driver);
 		String codigoEspanya = "001";
 		String codigoAlmacenEspanya = "001";
 		new PageSelTdaMantoSteps().selectTienda(codigoAlmacenEspanya, codigoEspanya);

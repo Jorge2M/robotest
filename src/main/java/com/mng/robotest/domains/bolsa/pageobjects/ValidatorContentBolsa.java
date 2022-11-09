@@ -76,29 +76,29 @@ public class ValidatorContentBolsa extends PageBase {
 		case REFERENCIA:
 			break;
 		case NOMBRE:
-			if (!articleExpected.getNombre().contains(articuloScreen.nombre)) {
+			if (!articleExpected.getNombre().contains(articuloScreen.getNombre())) {
 				return false;
 			}
 			break;
 		case COLOR:
-			if (articleExpected.getColorName().toLowerCase().compareTo(articuloScreen.color.toLowerCase())!=0 &&
+			if (articleExpected.getColorName().toLowerCase().compareTo(articuloScreen.getColor().toLowerCase())!=0 &&
 				articleExpected.getColorName().compareTo(Constantes.COLOR_DESCONOCIDO)!=0) {
 				return false;
 			}
 			break;
 		case TALLA:
-			if (articleExpected.getTalla()!=articuloScreen.talla) {
+			if (articleExpected.getTalla()!=articuloScreen.getTalla()) {
 				return false;
 			}
 			break;					
 		case CANTIDAD:
-			if (articleExpected.getNumero()!=Integer.valueOf(articuloScreen.cantidad)) {
+			if (articleExpected.getNumero()!=Integer.valueOf(articuloScreen.getCantidad())) {
 				return false;
 			}
 			break;
 		case PRECIO_TOTAL:
 			float precioArticulosExpected = articleExpected.getPrecioDescontado() * articleExpected.getNumero();
-			if (precioArticulosExpected!=articuloScreen.precio) {
+			if (precioArticulosExpected!=articuloScreen.getPrecio()) {
 				return false;
 			}
 			break;
@@ -109,7 +109,7 @@ public class ValidatorContentBolsa extends PageBase {
 	
 	private ArticuloDataBolsaScreen getArticleInScreenByReference(String reference) {
 		for (ArticuloDataBolsaScreen articuloScreen : linesArticlesInScreen) {
-			if (articuloScreen.referencia.equals(reference)) {
+			if (articuloScreen.getReferencia().equals(reference)) {
 				return articuloScreen;
 			}
 		}

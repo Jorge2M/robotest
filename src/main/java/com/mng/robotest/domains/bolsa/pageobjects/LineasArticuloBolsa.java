@@ -103,7 +103,7 @@ public class LineasArticuloBolsa extends PageBase {
 		return XPATH_LINK_RELATIVE_ARTICLE;
 	}	
 	
-	public void clearArticuloAndWait(String refArticulo) throws Exception {
+	public void clearArticuloAndWait(String refArticulo) {
 		String xpathClearArt = getXPathLinkBorrarArt(refArticulo);
 		click(xpathClearArt).waitLoadPage(30).exec();
 	}
@@ -231,12 +231,12 @@ public class LineasArticuloBolsa extends PageBase {
 		}
 		
 		ArticuloDataBolsaScreen articleData = new ArticuloDataBolsaScreen();
-		articleData.referencia = getReferenciaArticle(lineaArticleWeb);
-		articleData.nombre = getDataArticle(DataArtBolsa.NOMBRE, lineaArticleWeb);
-		articleData.color = getDataArticle(DataArtBolsa.COLOR, lineaArticleWeb);
-		articleData.talla = Talla.fromLabel(getDataArticle(DataArtBolsa.TALLA, lineaArticleWeb));
-		articleData.cantidad = getDataArticle(DataArtBolsa.CANTIDAD, lineaArticleWeb);
-		articleData.precio = getPrecioArticle(lineaArticleWeb);
+		articleData.setReferencia(getReferenciaArticle(lineaArticleWeb));
+		articleData.setNombre(getDataArticle(DataArtBolsa.NOMBRE, lineaArticleWeb));
+		articleData.setColor(getDataArticle(DataArtBolsa.COLOR, lineaArticleWeb));
+		articleData.setTalla(Talla.fromLabel(getDataArticle(DataArtBolsa.TALLA, lineaArticleWeb)));
+		articleData.setCantidad(getDataArticle(DataArtBolsa.CANTIDAD, lineaArticleWeb));
+		articleData.setPrecio(getPrecioArticle(lineaArticleWeb));
 		return articleData;
 	}	
 	

@@ -26,7 +26,7 @@ public class PagoBillpay extends PagoSteps {
 		
 		if (execPay) {
 			dataPago = checkoutFlow.checkout(From.METODOSPAGO);
-			throw new PaymethodWithoutTestPayImplementedException(MsgNoPayImplemented);
+			throw new PaymethodWithoutTestPayImplementedException(MSG_NO_PAY_IMPLEMENTED);
 		}
 	}	
 }

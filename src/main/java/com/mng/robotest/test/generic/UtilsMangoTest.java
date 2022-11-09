@@ -119,7 +119,7 @@ public class UtilsMangoTest extends PageBase {
 	/**
 	 * Abrimos un enlacen en una nueva pestaña
 	 */
-	public void openLinkInNewTab(By by) throws Exception {
+	public void openLinkInNewTab(By by) {
 		WebElement element = driver.findElement(by);
 		openLinkInNewTab(element);
 	}

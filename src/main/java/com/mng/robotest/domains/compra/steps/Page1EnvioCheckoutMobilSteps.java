@@ -62,14 +62,14 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	@Validation (
 		description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	public boolean validaBlockSelected(TipoTransporte tipoTransporte, int seconds) throws Exception {
+	public boolean validaBlockSelected(TipoTransporte tipoTransporte, int seconds) {
 		return (page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, seconds));
 	}
 	
 	@Step (
 		description="Seleccionar el botón \"Continuar\"", 
 		expected="Aparece la página asociada al Paso-2")
-	public void clickContinuarToMetodosPago() throws Exception {
+	public void clickContinuarToMetodosPago() {
 		page1EnvioCheckoutMobil.clickContinuar();
 		new CheckoutSteps().validateLoadingDisappears(10);
 		checkAppearsStep2();

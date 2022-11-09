@@ -15,7 +15,7 @@ public abstract class PagoSteps extends StepBase {
 	protected final CheckoutSteps pageCheckoutWrapperSteps = new CheckoutSteps();
 	
 	public DataPago dataPago;
-	public static String MsgNoPayImplemented = "No está diponible la parte del test que permite completar/ejecutar el pago";
+	public static final String MSG_NO_PAY_IMPLEMENTED = "No está diponible la parte del test que permite completar/ejecutar el pago";
 
 	private boolean availableExecPay = false;
 

@@ -421,8 +421,9 @@ public abstract class PageGaleria extends PageBase {
 				.anyMatch(a -> a.getReferencia().compareTo(referencia)==0);
 	}
 
-	private DataArticleGalery getDataArticulo(WebElement articulo, List<AttributeArticle> attributes)
-			throws Exception {
+	private DataArticleGalery getDataArticulo(
+			WebElement articulo, List<AttributeArticle> attributes) {
+		
 		DataArticleGalery dataArticle = new DataArticleGalery();
 		for (AttributeArticle attribute : attributes) {
 			switch (attribute) {
@@ -526,11 +527,11 @@ public abstract class PageGaleria extends PageBase {
 			secFooter.moveTo();
 		}
 
-		datosScroll.paginaFinal = lastPage;
-		datosScroll.finalAlcanzado = secFooter.isVisible();
-		datosScroll.articulosMostrados = getNumArticulos();
-		datosScroll.articulosDobleTamano = getTotalNumArticles(numArticlesDoubleXpage);
-		datosScroll.articulosTotalesPagina = getTotalNumArticles(numArticlesXpage);
+		datosScroll.setPaginaFinal(lastPage);
+		datosScroll.setFinalAlcanzado(secFooter.isVisible());
+		datosScroll.setArticulosMostrados(getNumArticulos());
+		datosScroll.setArticulosDobleTamano(getTotalNumArticles(numArticlesDoubleXpage));
+		datosScroll.setArticulosTotalesPagina(getTotalNumArticles(numArticlesXpage));
 		return (datosScroll);
 	}
 
@@ -658,7 +659,7 @@ public abstract class PageGaleria extends PageBase {
 		return false;
 	}
 
-	public String openArticuloPestanyaAndGo(WebElement article, AppEcom app) throws Exception {
+	public String openArticuloPestanyaAndGo(WebElement article, AppEcom app) {
 		String galeryWindowHandle = driver.getWindowHandle();
 		forceVisibilityImageArticle(article);
 		new UtilsMangoTest().openLinkInNewTab(article);

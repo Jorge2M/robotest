@@ -58,7 +58,7 @@ public class Gpo001 extends TestBase {
 			pageGaleriaSteps.seleccionaOrdenacionGaleria(FilterOrdenacion.PrecioDesc, nameMenuCamisas);
 		
 		dataScroll.validateArticlesExpected = true;
-		dataScroll.numArticlesExpected = datosScrollFinalGaleria.articulosTotalesPagina;
+		dataScroll.numArticlesExpected = datosScrollFinalGaleria.getArticulosTotalesPagina();
 		pageGaleriaSteps.scrollFromFirstPage(dataScroll);	
 		
 		pageGaleriaSteps.seleccionaOrdenacionGaleria(FilterOrdenacion.PrecioAsc, nameMenuCamisas, numArticulosPantalla);

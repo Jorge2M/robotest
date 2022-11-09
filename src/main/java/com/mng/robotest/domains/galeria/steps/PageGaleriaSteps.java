@@ -197,14 +197,14 @@ public class PageGaleriaSteps extends StepBase {
 			checkVisibilityFooter(pageToScroll, app);
 		}
 		if (pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
-			checkAreMoreArticlesThatInitially(datosScroll.articulosMostrados, numArticulosInicio);
+			checkAreMoreArticlesThatInitially(datosScroll.getArticulosMostrados(), numArticulosInicio);
 		}
 		if (dataForScroll.ordenacionExpected != FilterOrdenacion.NOordenado) {
 			checkArticlesOrdered(dataForScroll.ordenacionExpected);
 		}
 		checkNotRepeatedArticles();
 		if (dataForScroll.validateArticlesExpected) {
-			checkNumArticlesInScreen(datosScroll.articulosTotalesPagina, dataForScroll.numArticlesExpected);
+			checkNumArticlesInScreen(datosScroll.getArticulosTotalesPagina(), dataForScroll.numArticlesExpected);
 		}
 		
 		List<GenericCheck> listChecks = new ArrayList<>();
@@ -218,7 +218,7 @@ public class PageGaleriaSteps extends StepBase {
 			listChecks.add(GenericCheck.ImgsBroken);
 		}
 		
-		datosScroll.step = TestMaker.getCurrentStepInExecution();
+		datosScroll.setStep(TestMaker.getCurrentStepInExecution());
 		return datosScroll;
 	}
 
@@ -475,7 +475,7 @@ public class PageGaleriaSteps extends StepBase {
 		description="Seleccionar el " + TAG_NUM_ART_CON_COLORES + "o artículo con variedad de colores (" + TAG_NOMBRE_1ER_ART + " " + TAG_PRECIO_1ER_ART + ")", 
 		expected="Aparece el artículo original(" + TAG_NOMBRE_1ER_ART + " " + TAG_PRECIO_1ER_ART + ")",
 		saveNettraffic=SaveWhen.Always)
-	public void selecArticuloGaleriaStep(int numArtConColores) throws Exception {
+	public void selecArticuloGaleriaStep(int numArtConColores) {
 		WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
 		String nombre1erArt = pageGaleria.getNombreArticulo(articuloColores);
 		String precio1erArt = pageGaleria.getPrecioArticulo(articuloColores);

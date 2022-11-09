@@ -46,7 +46,7 @@ public class SecSelectorPreciosDesktop extends PageBase {
 	 * @param margenPixelsIzquierda indica los píxels desde la izquierda del selector donde ejecutaremos el click para definir un mínimo
 	 * @param margenPixelsDerecha indica los píxels desde la derecha del selector donde ejecutaremos el click para definir un máximo
 	 */
-	public void clickMinAndMax(int margenPixelsIzquierda, int margenPixelsDerecha) throws Exception {
+	public void clickMinAndMax(int margenPixelsIzquierda, int margenPixelsDerecha) {
 		click(TypeClick.RIGHT, -30);
 		click(TypeClick.LEFT, 30);
 	}

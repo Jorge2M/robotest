@@ -79,7 +79,7 @@ public class AccesoNavigations extends StepBase {
 		}
 	}	
 	
-	public void cambioPaisFromHomeIfNeeded(Pais newPais, IdiomaPais newIdioma) throws Exception {
+	public void cambioPaisFromHomeIfNeeded(Pais newPais, IdiomaPais newIdioma) {
 		String codigoPaisActual = (new PageLanding()).getCodigoPais();
 		if (newPais.getCodigo_pais().compareTo(codigoPaisActual)!=0) {
 			cambioPais(newPais, newIdioma);

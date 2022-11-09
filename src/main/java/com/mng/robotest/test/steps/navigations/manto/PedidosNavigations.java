@@ -36,10 +36,10 @@ public class PedidosNavigations {
 			TestCaseTM testCase = getTestCase();
 			TestRunTM testRun = testCase.getTestRunParent();
 			DataMantoAccess dMantoAcc = new DataMantoAccess();
-			dMantoAcc.urlManto = testRun.getParameter(Constantes.PARAM_URL_MANTO);
-			dMantoAcc.userManto = testRun.getParameter(Constantes.PARAM_USR_MANTO);
-			dMantoAcc.passManto = testRun.getParameter(Constantes.PARAM_PAS_MANTO);
-			dMantoAcc.appE = appE;
+			dMantoAcc.setUrlManto(testRun.getParameter(Constantes.PARAM_URL_MANTO));
+			dMantoAcc.setUserManto(testRun.getParameter(Constantes.PARAM_USR_MANTO));
+			dMantoAcc.setPassManto(testRun.getParameter(Constantes.PARAM_PAS_MANTO));
+			dMantoAcc.setAppE(appE);
 			testPedidosEnManto(dMantoAcc, listPedidos, driver);
 		}
 	}
@@ -61,8 +61,8 @@ public class PedidosNavigations {
 
 		//Si existen pedidos que validar y no se trata de un acceso desde la línea de comandos (típicamente .bat)
 		if (listPedidos!=null && listPedidos.size()>0 && typeAccess!=TypeAccess.Bat) {
-			PageLoginMantoSteps.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
-			PedidosNavigations.validacionListaPagosStepss(listPedidos, dMantoAcc.appE, driver);
+			PageLoginMantoSteps.login(dMantoAcc.getUrlManto(), dMantoAcc.getUserManto(), dMantoAcc.getPassManto(), driver);
+			PedidosNavigations.validacionListaPagosStepss(listPedidos, dMantoAcc.getAppE(), driver);
 		}
 	}
 	

@@ -46,7 +46,7 @@ public class PageMenusMantoSteps extends PageBase {
 	 	return checks;
 	}
 	
-	public void goToBolsas() throws Exception {
+	public void goToBolsas() {
 		if (!new PageBolsas().isPage()) {
 			goToMainMenusAndClickMenu("Bolsas");
 			checkIsVisiblePageBolsas(); 
@@ -60,7 +60,7 @@ public class PageMenusMantoSteps extends PageBase {
 		return new PageBolsas().isPage();
 	}
 	
-	public void goToPedidos() throws Exception {
+	public void goToPedidos() {
 		if (!new PagePedidos().isPage()) {
 			goToMainMenusAndClickMenu("Pedidos");
 			checkIsVisiblePagePedidos();
@@ -74,49 +74,48 @@ public class PageMenusMantoSteps extends PageBase {
 		return new PagePedidos().isPage();
 	}
 	
-	public void goToConsultarTiendas() throws Exception {
+	public void goToConsultarTiendas() {
 		goToMainMenusAndClickMenu("Consultar Tiendas");
 		new PageConsultaTiendaSteps().validateIsPage();
 	}
 
-	public void goToIdEans()  throws Exception{
+	public void goToIdEans()  {
 		goToMainMenusAndClickMenu("EANS");
 		new PageConsultaIdEansSteps().validateIsPage();
 	}
 
-	public void goToGestionarClientes() throws Exception{
+	public void goToGestionarClientes() {
 		goToMainMenusAndClickMenu("Gestionar Clientes");
 		new PageGestionarClientesSteps().validateIsPage();
 	}
 	
-	public void goToGestorCheques() throws Exception {
+	public void goToGestorCheques() {
 		goToMainMenusAndClickMenu("Gestor de Cheques");
 		PageGestorChequesSteps pageGestorSteps = new PageGestorChequesSteps(driver);
 		pageGestorSteps.validateIsPage();
 	}
 	
-	public void goToGestorEstadisticasPedido() throws Exception {
+	public void goToGestorEstadisticasPedido() {
 		goToMainMenusAndClickMenu("Estadisticas Pedidos");
 		new PageGestorEstadisticasPedidoSteps().validateIsPage();
 	}
 	
-	public void goToGestorSaldosTPV() throws Exception {
+	public void goToGestorSaldosTPV() {
 		goToMainMenusAndClickMenu("Gestor de Saldos de TPV");
 		new PageGestorSaldosTPVSteps().validateIsPage();
 	}
 	
-	public void goToGestorConsultaCambioFamilia() throws Exception {
+	public void goToGestorConsultaCambioFamilia() {
 		goToMainMenusAndClickMenu("Gestor de familias");
 		new PageGestorConsultaCambioFamiliaSteps().validateIsPage();
 	}
 	
-	public void goToOrdenadorDePrendas() throws Exception {
+	public void goToOrdenadorDePrendas() {
 		goToMainMenusAndClickMenu("Ordenador de Prendas");
 		new PageOrdenacionDePrendasSteps(driver).validateIsPage();
 	}
 	
-	public void comprobarMenusManto(String cabeceraName, String cabeceraNameNext) 
-			throws Exception {
+	public void comprobarMenusManto(String cabeceraName, String cabeceraNameNext) {
 		List<String> listSubMenuNames = pageMenusManto.getListSubMenusName(cabeceraName, cabeceraNameNext);
 		for (String subMenu : listSubMenuNames) {
 			goToMainMenusAndClickMenu(subMenu);

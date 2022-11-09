@@ -42,10 +42,10 @@ public class PedidoNavigations {
 			if (appE!=AppEcom.votf) {  
 				TestRunTM testRun = getTestCase().getTestRunParent();
 				DataMantoAccess dMantoAcc = new DataMantoAccess();
-				dMantoAcc.urlManto = testRun.getParameter(Constantes.PARAM_URL_MANTO);
-				dMantoAcc.userManto = testRun.getParameter(Constantes.PARAM_USR_MANTO);
-				dMantoAcc.passManto = testRun.getParameter(Constantes.PARAM_PAS_MANTO);
-				dMantoAcc.appE = appE;
+				dMantoAcc.setUrlManto(testRun.getParameter(Constantes.PARAM_URL_MANTO));
+				dMantoAcc.setUserManto(testRun.getParameter(Constantes.PARAM_USR_MANTO));
+				dMantoAcc.setPassManto(testRun.getParameter(Constantes.PARAM_PAS_MANTO));
+				dMantoAcc.setAppE(appE);
 				testPedidosEnManto(dMantoAcc, dataCheckPedidos, driver);
 			}
 		}
@@ -63,8 +63,8 @@ public class PedidoNavigations {
 			throws Exception {
 		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccess.Bat) {
-			PageLoginMantoSteps.login(dMantoAcc.urlManto, dMantoAcc.userManto, dMantoAcc.passManto, driver);
-			PedidoNavigations.validacionListPedidosStepss(dataCheckPedidos, dMantoAcc.appE, driver);
+			PageLoginMantoSteps.login(dMantoAcc.getUrlManto(), dMantoAcc.getUserManto(), dMantoAcc.getPassManto(), driver);
+			PedidoNavigations.validacionListPedidosStepss(dataCheckPedidos, dMantoAcc.getAppE(), driver);
 		}
 	}
 	

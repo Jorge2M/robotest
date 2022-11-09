@@ -353,7 +353,7 @@ public class Page2IdentCheckout extends PageBase {
 		return datoSeteado;
 	}
 	
-	public void setSelectLocalidadesIfVisible(int posInSelect, Map<String,String> datosRegistro) throws Exception {
+	public void setSelectLocalidadesIfVisible(int posInSelect, Map<String,String> datosRegistro) {
 		String datoSeteado = setSelectLocalidadesIfVisible(posInSelect);
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("cfCity", datoSeteado);
@@ -435,7 +435,7 @@ public class Page2IdentCheckout extends PageBase {
 		return datoSeteado;
 	}
 	
-	public void setSelectEstadosPaisIfVisible(Map<String,String> datosRegistro) throws InterruptedException {
+	public void setSelectEstadosPaisIfVisible(Map<String,String> datosRegistro) {
 	   	String datoSeteado = "";
 		if ("001".compareTo(pais.getCodigo_pais())==0) {
 			datoSeteado = setSeletEstadoEspanya("Barcelona");
@@ -462,16 +462,16 @@ public class Page2IdentCheckout extends PageBase {
 	
 	private enum TypeLocalidad { PROV_CITY, DISTRITO, COD_POSTAL, NEIGHBOURHOOD_CITY }
 	
-	private String setSelectLocalidadesProvCity(int posInSelect) throws Exception {
+	private String setSelectLocalidadesProvCity(int posInSelect) {
 		return (setSelectLocalidades(TypeLocalidad.PROV_CITY, posInSelect));
 	}
-	private String setSelectLocalidadesNeighbourhoodCity(int posInSelect) throws Exception {
+	private String setSelectLocalidadesNeighbourhoodCity(int posInSelect) {
 		return (setSelectLocalidades(TypeLocalidad.NEIGHBOURHOOD_CITY, posInSelect));
 	}
-	private String setSelectDistrito(int posInSelect) throws Exception {
+	private String setSelectDistrito(int posInSelect) {
 		return (setSelectLocalidades(TypeLocalidad.DISTRITO, posInSelect));
 	}
-	private String setSelectCodPostal(int posInSelect) throws Exception {
+	private String setSelectCodPostal(int posInSelect) {
 		return (setSelectLocalidades(TypeLocalidad.COD_POSTAL, posInSelect));
 	}
 	private String setSelectLocalidades(TypeLocalidad typeLocalidad, int posInSelect) {

@@ -334,7 +334,7 @@ public class Page1DktopCheckout extends PageBase {
 		moveToElement(XPATH_IMPORTE_TOTAL_COMPRA);
 	}
 	
-	public void despliegaMetodosPago() throws Exception {
+	public void despliegaMetodosPago() {
 		if (areMetodosPagoPlegados()) {
 		   clickDesplegablePagos();
 		   metodosPagosInStateUntil(false, 5);

@@ -166,7 +166,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation
-	public ChecksTM validaNumArtEnBolsa() throws Exception {
+	public ChecksTM validaNumArtEnBolsa() {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 3;
 		String itemsSaved = String.valueOf(dataTest.getDataBag().getListArticulos().size());

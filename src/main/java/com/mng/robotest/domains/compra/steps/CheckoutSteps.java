@@ -484,7 +484,7 @@ public class CheckoutSteps extends StepBase {
 		}
 	}
 	
-	public void loyaltyPointsApplyDesktop() throws Exception {
+	public void loyaltyPointsApplyDesktop() {
 		float subTotalInicial = UtilsMangoTest.round(pageCheckoutWrapper.getImportSubtotalDesktop(), 2);
 		float loyaltyPointsNoRound = pageCheckoutWrapper.applyAndGetLoyaltyPoints();
 		float loyaltyPoints = UtilsMangoTest.round(loyaltyPointsNoRound, 2);
@@ -512,7 +512,7 @@ public class CheckoutSteps extends StepBase {
 		return false;
 	}
 	
-	public void loyaltyPointsApplyMobil() throws Exception {
+	public void loyaltyPointsApplyMobil() {
 		float loyaltyPointsNoRound = pageCheckoutWrapper.applyAndGetLoyaltyPoints();
 		float loyaltyPoints = UtilsMangoTest.round(loyaltyPointsNoRound, 2);
 		validateLoyaltyPointsDiscountMobilUntil(loyaltyPoints, 3);

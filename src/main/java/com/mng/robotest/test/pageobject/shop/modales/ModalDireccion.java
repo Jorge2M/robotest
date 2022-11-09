@@ -54,8 +54,7 @@ public abstract class ModalDireccion extends PageBase {
 			sendDataToInputs(dataToSend, xpathFormModal);
 	}
 	
-	public void sendDataToInputs(DataDireccion dataToSend, String xpathFormModal) 
-			throws Exception {
+	public void sendDataToInputs(DataDireccion dataToSend, String xpathFormModal) {
 		try {
 			Iterator<Entry<DataDirType, String>> it = dataToSend.getDataDireccion().entrySet().iterator();
 			while (it.hasNext()) {

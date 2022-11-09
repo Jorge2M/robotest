@@ -74,9 +74,9 @@ public class Gpo004 extends TestBase {
 	private int scrollToLastAndSelectArticle() throws Exception {
 		dataScroll.numPageToScroll = PageGaleria.MAX_PAGE_TO_SCROLL;
 		DataScroll datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
-		LocationArticle loc1rsArticleLastPage = LocationArticle.getInstanceInPage(datosScrollFinalGaleria.paginaFinal, 1);
+		LocationArticle loc1rsArticleLastPage = LocationArticle.getInstanceInPage(datosScrollFinalGaleria.getPaginaFinal(), 1);
 		pageGaleriaSteps.selectArticulo(loc1rsArticleLastPage);
-		return datosScrollFinalGaleria.articulosTotalesPagina;
+		return datosScrollFinalGaleria.getArticulosTotalesPagina();
 	}
 
 	private void goBackToGalery() {

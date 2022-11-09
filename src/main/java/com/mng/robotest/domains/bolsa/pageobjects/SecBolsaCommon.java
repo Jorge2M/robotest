@@ -100,7 +100,7 @@ public abstract class SecBolsaCommon extends PageBase {
 		}
 	}
 
-	public void clearArticulos() throws Exception {
+	public void clearArticulos() {
 		setBolsaToStateIfNotYet(StateBolsa.OPEN);
 		int ii = 0;
 		do {

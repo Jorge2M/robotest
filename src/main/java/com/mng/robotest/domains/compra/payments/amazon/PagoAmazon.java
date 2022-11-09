@@ -19,7 +19,7 @@ public class PagoAmazon extends PagoSteps {
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		new PageAmazonIdentSteps().validateIsPage(dataPago.getDataPedido());
 		if (execPay) {
-			throw new PaymethodWithoutTestPayImplementedException(MsgNoPayImplemented);
+			throw new PaymethodWithoutTestPayImplementedException(MSG_NO_PAY_IMPLEMENTED);
 		}
 	}
 	

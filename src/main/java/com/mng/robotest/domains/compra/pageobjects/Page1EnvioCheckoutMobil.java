@@ -170,7 +170,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		selectMetodoEnvioAfterLinkOtrosIfNeeded(tipoTransporte);
 	}
 
-	public void selectMetodoEnvioAfterLinkOtrosIfNeeded(TipoTransporte tipoTransporte) throws Exception {
+	public void selectMetodoEnvioAfterLinkOtrosIfNeeded(TipoTransporte tipoTransporte) {
 		openOtrosMetodosDeEnvio();
 		if (tipoTransporte.isDroppoint() &&
 			isBlockSelectedUntil(tipoTransporte, 0) &&
