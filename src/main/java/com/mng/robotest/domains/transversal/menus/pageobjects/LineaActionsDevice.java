@@ -23,7 +23,6 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	private static final String XPATH_LINK_LINEA_NINO = XPATH_LINK_LINEA_NINA;
 	private static final String XPATH_LINK_LINEA_TEEN = "//*[@data-testid='header.menuItem.teen']";
 	private static final String XPATH_LINK_LINEA_KIDS = XPATH_LINK_LINEA_NINA; //p.e. Bolivia
-	private static final String XPATH_LINK_LINEA_VIOLETA = "//*[@data-testid='header.menuItem.violeta']";
 	private static final String XPATH_LINK_LINEA_HOME = "//*[@data-testid='header.menuItem.home']";
 	
 	private static final String XPATH_LINK_SUBLINEA_NINA = "//*[@data-testid[contains(.,'header.tabButton.sections_nina')]]";
@@ -52,8 +51,6 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 			return XPATH_LINK_LINEA_TEEN;
 		case kids: 
 			return XPATH_LINK_LINEA_KIDS;
-		case violeta: 
-			return XPATH_LINK_LINEA_VIOLETA;
 		case home:
 			return XPATH_LINK_LINEA_HOME;
 		default:

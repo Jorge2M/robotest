@@ -114,7 +114,7 @@ public class Par001 extends TestBase {
 	
 	public void testSpecificFeaturesForLinea(Linea linea) throws Exception {
 		if (testBanners(linea)) {
-			int maxBannersToTest = getMaxBannersToTest();
+			int maxBannersToTest = getMaxBannersToTest(linea.getType());
 			SecBannersSteps secBannersSteps = new SecBannersSteps(maxBannersToTest);
 			secBannersSteps.testPageBanners(maxBannersToTest);
 		}
@@ -137,9 +137,9 @@ public class Par001 extends TestBase {
 		return false;
 	}
 	
-	private int getMaxBannersToTest() {
+	private int getMaxBannersToTest(LineaType linea) {
 		LevelPais levelPais = dataTest.getPais().getLevelPais();
-		return levelPais.getNumBannersTest(app);
+		return levelPais.getNumBannersTest(linea);
 	}
 	
 }

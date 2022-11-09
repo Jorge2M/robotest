@@ -44,11 +44,6 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 			numLineas+=1;
 		}
 		
-		if (pais.getShoponline().stateLinea(LineaType.violeta, app)==ThreeState.TRUE) {
-			lineasComaSeparated+="," + LineaType.violeta.name();
-			numLineas+=1;
-		}
-		
 		if (app==AppEcom.outlet) {
 			lineasComaSeparated+=",outlet";
 			numLineas+=1;

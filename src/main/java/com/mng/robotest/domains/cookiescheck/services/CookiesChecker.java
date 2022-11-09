@@ -21,12 +21,10 @@ public class CookiesChecker {
 		allowedCookies = new CookiesFinder().getAllowedCookies();
 		whiteList = Optional.of(
 				Arrays.asList(
-						//Pattern.compile("_ga_NOTFORGA4TRACKING"), 
-						//Pattern.compile("_ga_NC306DXESG"),
 						Pattern.compile("_ga_.*"),
 						Pattern.compile("MangoHQ"),
-						//Pattern.compile("_dc_gtm_UA-855910-34"),
 						Pattern.compile("_dc_gtm_.*"),
+						Pattern.compile("JSESSIONID"),
 						Pattern.compile("JSESSIONIDPRE")));
 	}
 	
