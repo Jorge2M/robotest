@@ -360,8 +360,7 @@ public class PageGaleriaSteps extends StepBase {
 			"Seleccionar el #{posColor}o color (" + TAG_SRC_PNG_2O_COLOR +") no seleccionado del #{numArtConColores}o " + 
 			"artículo con variedad de colores (" + TAG_NOMBRE_1ER_ARTIC + ", " + TAG_PRECIO_1ER_ARTIC +")", 
 		expected="Se selecciona el color")
-	public String selecColorFromArtGaleriaStep(int numArtConColores, int posColor) 
-	throws Exception {
+	public String selecColorFromArtGaleriaStep(int numArtConColores, int posColor) {
 		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
 		PageObjTM.waitForPageLoaded(driver, 2);
 
@@ -375,8 +374,8 @@ public class PageGaleriaSteps extends StepBase {
 		String srcImg1erArt = pageGaleria.getImagenArticulo(articuloColores);
 		step.replaceInDescription(TAG_SRC_PNG_2O_COLOR, colorToClick.getAttribute("src"));
 	   
-		click(colorToClick, driver).exec();
-		Thread.sleep(100);
+		click(colorToClick).exec();
+		waitMillis(100);
 		
 		String srcImgAfterClickColor = pageGaleria.getImagenArticulo(articuloColores);
 		checkImageIsModified(srcImg1erArt, srcImgAfterClickColor);

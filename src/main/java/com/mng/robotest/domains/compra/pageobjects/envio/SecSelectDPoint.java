@@ -134,8 +134,8 @@ public class SecSelectDPoint extends PageBase {
 		click(XPATH_SELECCIONAR_BUTTON).waitLoadPage(seconds).exec();
 	}
 
-	public boolean deliveryPointSelectedContainsPoblacionUntil(DataSearchDeliveryPoint dataSearchDp, int seconds) 
-			throws Exception {
+	public boolean deliveryPointSelectedContainsPoblacionUntil(
+			DataSearchDeliveryPoint dataSearchDp, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			try {
 				DataDeliveryPoint dataDp = getDataDeliveryPointSelected();
@@ -159,7 +159,7 @@ public class SecSelectDPoint extends PageBase {
 			catch (Exception e) {
 				Log4jTM.getLogger().warn("Exception selecting Provincia in droppoints", e);
 			}
-			Thread.sleep(1000);
+			waitMillis(1000);
 		}
 		
 		return false;

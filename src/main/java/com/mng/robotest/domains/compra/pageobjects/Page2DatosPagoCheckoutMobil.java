@@ -140,14 +140,13 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		return StateMethod.UNSELECTED;
 	}
 	
-	public boolean isMethodInStateUntil(String nombrePago, StateMethod stateExpected, int seconds) 
-	throws Exception {
+	public boolean isMethodInStateUntil(String nombrePago, StateMethod stateExpected, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			StateMethod actualState = getStateMethod(nombrePago);
 			if (actualState==stateExpected) {
 				return true;
 			}
-			Thread.sleep(1000);
+			waitMillis(1000);
 		}
 		return false;
 	}
@@ -215,15 +214,14 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		return state(Visible, xpathOtrasFormasPagoPlegado).check();
 	}
 
-	public void metodosPagosInStateUntil(boolean plegados, int seconds) throws Exception {
+	public void metodosPagosInStateUntil(boolean plegados, int seconds) {
 		int i=0;
 		do {
 			boolean arePlegados = areMetodosPagoPlegados();
 			if (arePlegados==plegados) {
 				break;
 			}
-
-			Thread.sleep(1000);
+			waitMillis(1000);
 			i+=1;
 		}
 		while (i<seconds);
@@ -265,7 +263,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	 * Revisa si el método de pago no está visible. En este caso mira si existen secciones plegadas que puedan estar ocultándolo  (como p.e. en México) 
 	 * y las va desplegando hasta que encuentra el método de pago   
 	 */
-	private void searchMetPagoLayoutLineaInSections(String nombrePago) throws Exception {
+	private void searchMetPagoLayoutLineaInSections(String nombrePago) {
 		String xpathClickMetodoPago = getXPathPago(nombrePago);
 		boolean methodDisplayed = getElement(xpathClickMetodoPago).isDisplayed();
 		if (!methodDisplayed) {
@@ -273,7 +271,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 			int i=0;
 			while (!methodDisplayed && i<listSecciones.size()) {
 				listSecciones.get(i).click();
-				Thread.sleep(500);
+				waitMillis(500);
 				methodDisplayed = getElement(xpathClickMetodoPago).isDisplayed();
 				i+=1; 
 			}

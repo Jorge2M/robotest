@@ -35,7 +35,7 @@ public class PageRegistroDirecOutlet extends PageBase {
 				.inputDataPorDefectoSegunPais(dataRegistro.get("cfEmail"), false, false, channel));
 	}
 	
-	public void sendDataToInputs(ListDataRegistro dataToSend, int repeat) throws Exception {
+	public void sendDataToInputs(ListDataRegistro dataToSend, int repeat) {
 		for (int i=0; i<repeat; i++) {
 			for (DataRegistro dataInput : dataToSend.getDataPageDirec()) {
 				switch (dataInput.getDataRegType()) {
@@ -58,8 +58,7 @@ public class PageRegistroDirecOutlet extends PageBase {
 					break;
 				}
 			}
-			
-			Thread.sleep(1000);
+			waitMillis(1000);
 		}
 	}
 	

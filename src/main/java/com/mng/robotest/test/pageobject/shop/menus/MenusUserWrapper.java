@@ -130,7 +130,7 @@ public class MenusUserWrapper extends PageBase {
 		}
 	}
 	
-	public LoyaltyData checkAndGetLoyaltyPointsUntil(int seconds) throws Exception {
+	public LoyaltyData checkAndGetLoyaltyPointsUntil(int seconds) {
 		//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver supports shadow-dom
 		LoyaltyData loyaltyData = new LoyaltyData(false, 0);
 		By byLoyaltyUserMenu = By.tagName("loyalty-user-menu");
@@ -163,8 +163,7 @@ public class MenusUserWrapper extends PageBase {
 					break;
 				}
 			}
-			
-			Thread.sleep(1000);
+			waitMillis(1000);
 		}
 		
 		return loyaltyData;

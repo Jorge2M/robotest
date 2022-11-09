@@ -464,11 +464,11 @@ public abstract class PageGaleria extends PageBase {
 		return true;
 	}
 
-	public boolean backTo1erArticulo(String xpathIconoUpGalery) throws InterruptedException {
+	public boolean backTo1erArticulo(String xpathIconoUpGalery) {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", ""); //Asure icon showed
 		clickIconoUpToGaleryIfVisible(xpathIconoUpGalery);
 		boolean isVisible1erArt = isVisibleArticuloUntil(1, 2);
-		Thread.sleep(1000);
+		waitMillis(1000);
 		return isVisible1erArt;
 	}
 
@@ -694,7 +694,7 @@ public abstract class PageGaleria extends PageBase {
 		return false;
 	}
 
-	public String getImagenArticulo(WebElement articulo) throws Exception {
+	public String getImagenArticulo(WebElement articulo) {
 		waitLoadPage();
 		WebElement imagen = getImagenElementArticulo(articulo);
 		if (imagen!=null) {

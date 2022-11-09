@@ -347,14 +347,14 @@ public class Page1DktopCheckout extends PageBase {
 			!state(Visible, XPATH_OTRAS_FORMAS_PAGO).check());
 	}
 
-	private void metodosPagosInStateUntil(boolean plegados, int seconds) throws Exception {
+	private void metodosPagosInStateUntil(boolean plegados, int seconds) {
 		int i=0;
 		do {
 			boolean arePlegados = areMetodosPagoPlegados();
 			if (arePlegados==plegados) {
 				break;
 			}
-			Thread.sleep(1000);
+			waitMillis(1000);
 			i+=1;
 		}
 		while (i<seconds);

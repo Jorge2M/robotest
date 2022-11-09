@@ -107,8 +107,8 @@ public class CheckoutSteps extends StepBase {
 	@Validation (
 		description="Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta #{seconds} segundos)",
 		level=State.Warn)
-	public boolean validateLoadingDisappears(int seconds) throws Exception {
-		Thread.sleep(200); //Damos tiempo a que aparezca la capa de "Cargando"
+	public boolean validateLoadingDisappears(int seconds) {
+		waitMillis(200); //Damos tiempo a que aparezca la capa de "Cargando"
 		return (pageCheckoutWrapper.isNoDivLoadingUntil(seconds));
 	}
 	
@@ -497,15 +497,16 @@ public class CheckoutSteps extends StepBase {
 			"Se aplica el descuento de <b>#{descuento}</b> al subtotal inicial de #{subtotalInicial} " + 
 			"(lo esperamos hasta #{seconds})",
 		level=State.Defect)
-	public boolean validateLoyaltyPointsDiscountDesktopUntil(float descuento, float subtotalInicial, int seconds) 
-			throws Exception {
+	public boolean validateLoyaltyPointsDiscountDesktopUntil(
+			float descuento, float subtotalInicial, int seconds) {
+		
 		for (int i=0; i<seconds; i++) {
 			float subTotalActual = pageCheckoutWrapper.getImportSubtotalDesktop();
 			float estimado = UtilsMangoTest.round(subtotalInicial - descuento, 2);
 			if (estimado == subTotalActual) {
 				return true;
 			}
-			Thread.sleep(1000);
+			waitMillis(1000);
 		}
 		
 		return false;
@@ -520,13 +521,13 @@ public class CheckoutSteps extends StepBase {
 	@Validation (
 		description="Aparece un descuento aplicado de #{descuento} (lo esperamos hasta #{seconds})",
 		level=State.Defect)
-	public boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int seconds) throws Exception {
+	public boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			float discountApplied = UtilsMangoTest.round(pageCheckoutWrapper.getDiscountLoyaltyAppliedMobil(), 2);
 			if (discountApplied == descuento) {
 				return true;
 			}
-			Thread.sleep(1000);
+			waitMillis(1000);
 		}
 		
 		return false;

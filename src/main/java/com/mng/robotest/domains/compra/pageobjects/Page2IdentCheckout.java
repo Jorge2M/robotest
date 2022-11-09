@@ -325,7 +325,7 @@ public class Page2IdentCheckout extends PageBase {
 	/**
 	 * @param posInSelect: elemento del desplegable que queremos desplegar (comenzando desde el 1)
 	 */
-	public String setSelectLocalidadesIfVisible(int posInSelect) throws InterruptedException {
+	public String setSelectLocalidadesIfVisible(int posInSelect) {
 		String datoSeteado = "";
 		boolean staleElement = true;
 		int i=0;
@@ -342,7 +342,7 @@ public class Page2IdentCheckout extends PageBase {
 					staleElement = false;
 				}
 				catch (StaleElementReferenceException e) {
-					Thread.sleep(500);
+					waitMillis(500);
 					Log4jTM.getLogger().warn("Exception setting localidad from select", e);
 				}
 			}
@@ -408,7 +408,7 @@ public class Page2IdentCheckout extends PageBase {
 		}
 	}   
 	
-	public String setSelectEstados1PaisIfVisible() throws InterruptedException {
+	public String setSelectEstados1PaisIfVisible() {
 		String datoSeteado = "";
 		
 		//Tenemos problemas aleatorios de StaleElementReferenceException con este elemento
@@ -425,7 +425,7 @@ public class Page2IdentCheckout extends PageBase {
 					staleElement = false;
 				}
 				catch (StaleElementReferenceException e) {
-					Thread.sleep(500);
+					waitMillis(500);
 					Log4jTM.getLogger().warn("Exception selecting Estados from select", e);
 				}
 			}
@@ -474,7 +474,7 @@ public class Page2IdentCheckout extends PageBase {
 	private String setSelectCodPostal(int posInSelect) throws Exception {
 		return (setSelectLocalidades(TypeLocalidad.COD_POSTAL, posInSelect));
 	}
-	private String setSelectLocalidades(TypeLocalidad typeLocalidad, int posInSelect) throws Exception {
+	private String setSelectLocalidades(TypeLocalidad typeLocalidad, int posInSelect) {
 		String datoSeteado = "";
 		String xpathSelect = "";
 		switch (typeLocalidad) {
@@ -504,7 +504,7 @@ public class Page2IdentCheckout extends PageBase {
 					staleElement = false;
 				}
 				catch (StaleElementReferenceException | NoSuchElementException e) {
-					Thread.sleep(1000);
+					waitMillis(1000);
 					Log4jTM.getLogger().warn("Exception selecting localidad from select. ", e);
 				}
 			}

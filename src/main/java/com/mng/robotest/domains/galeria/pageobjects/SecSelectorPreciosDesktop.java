@@ -51,10 +51,10 @@ public class SecSelectorPreciosDesktop extends PageBase {
 		click(TypeClick.LEFT, 30);
 	}
 
-	private void click(TypeClick typeClick, int pixelsFromCorner) throws Exception {
+	private void click(TypeClick typeClick, int pixelsFromCorner) {
 		Actions builder = new Actions(driver);
 		moveToCornerSelector(TypeClick.RIGHT);
-		Thread.sleep(2000);
+		waitMillis(2000);
 		moveToCornerSelector(typeClick);
 		waitLoadPage();
 		builder.moveByOffset(pixelsFromCorner, 0).click().build().perform();

@@ -163,8 +163,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		return (descuentoFloat > 0);
 	}
 
-	public void selectMetodoAfterPositioningIn1Envio(TipoTransporte tipoTransporte)
-	throws Exception {
+	public void selectMetodoAfterPositioningIn1Envio(TipoTransporte tipoTransporte) throws Exception {
 		if (!isPageUntil(0)) {
 			clickLink1EnvioAndWaitForPage();
 		}
@@ -208,8 +207,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		}
 	}
 
-	public boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int seconds)
-			throws Exception {
+	public boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int seconds) {
 		String xpathBlock = getXPathBlockMetodo(tipoTransporte);
 		for (int i = 0; i <= seconds; i++) {
 			try {
@@ -220,8 +218,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 			} catch (StaleElementReferenceException ex) {
 				//
 			}
-
-			Thread.sleep(1000);
+			waitMillis(1000);
 		}
 		return false;
 	}

@@ -172,7 +172,7 @@ public class SecBolsaSteps extends StepBase {
 		String itemsSaved = String.valueOf(dataTest.getDataBag().getListArticulos().size());
 	 	checks.add(
 			"Existen " + dataTest.getDataBag().getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + seconds + " segundos)",
-			secBolsa.numberItemsIsUntil(itemsSaved, channel, app, seconds), State.Warn);
+			secBolsa.numberItemsIsUntil(itemsSaved, seconds), State.Warn);
 	 	
 	 	return checks;
 	}

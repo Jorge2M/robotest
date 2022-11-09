@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -18,6 +17,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.utils.ImporteScreen;
+
 
 public abstract class SecBolsaCommon extends PageBase {
 
@@ -58,18 +58,17 @@ public abstract class SecBolsaCommon extends PageBase {
 		click(xpathComprarBt).type(TypeClick.javascript).exec();
 	}
 	
-	public String getNumberArtIcono(Channel channel, AppEcom app) {
+	public String getNumberArtIcono() {
 		return (SecCabecera.getNew(channel, app).getNumberArtIcono());
 	}
 	
-	public boolean numberItemsIsUntil(String itemsMightHave, Channel channel, AppEcom app, int maxSecodsToWait) 
-	throws Exception {
-		for (int i=0; i<=maxSecodsToWait; i++) {
-			String itemsPantalla = getNumberArtIcono(channel, app);
+	public boolean numberItemsIsUntil(String itemsMightHave, int seconds) {
+		for (int i=0; i<=seconds; i++) {
+			String itemsPantalla = getNumberArtIcono();
 			if (itemsMightHave.compareTo(itemsPantalla)==0) {
 				return true;
 			}
-			Thread.sleep(1000);
+			waitMillis(1000);
 		}
 		return false;
 	}
@@ -130,7 +129,7 @@ public abstract class SecBolsaCommon extends PageBase {
 			}
 			ii += 1;
 		}
-		while (!numberItemsIsUntil("0", channel, app, 0) && ii<10);
+		while (!numberItemsIsUntil("0", 0) && ii<10);
 
 		setBolsaToStateIfNotYet(StateBolsa.CLOSED);
 	}

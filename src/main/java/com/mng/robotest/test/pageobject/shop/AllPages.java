@@ -52,27 +52,26 @@ public class AllPages extends PageBase {
 		return state(Present, xpath).check();
 	}
 
-	public boolean validateUrlNotMatchUntil(String url, int maxSeconds) throws Exception {
+	public boolean validateUrlNotMatchUntil(String url, int maxSeconds) {
 		int seconds = 0;
 		do {
 			if (url.compareTo(driver.getCurrentUrl())!=0) {
 				return true;
 			}
-			Thread.sleep(1000);
+			waitMillis(1000);
 			seconds+=1;
 		}
 		while (seconds<maxSeconds);
 		return false;
 	}
 	
-	public boolean validateElementsNotEqualsUntil(int elementosPagina, int margin, int maxSeconds) 
-			throws Exception {
+	public boolean validateElementsNotEqualsUntil(int elementosPagina, int margin, int maxSeconds) {
 		int seconds = 0;
 		do {
 			if (Math.abs(elementosPagina - getElements("//*").size()) > margin) {
 				return true;
 			}
-			Thread.sleep(1000);
+			waitMillis(1000);
 			seconds+=1;
 		}
 		while (seconds<maxSeconds);

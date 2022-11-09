@@ -124,17 +124,17 @@ public class UtilsMangoTest extends PageBase {
 		openLinkInNewTab(element);
 	}
 	
-	public void openLinkInNewTab(WebElement element) throws Exception {
+	public void openLinkInNewTab(WebElement element) {
 		Actions a = new Actions(driver);
 		PageObjTM.moveToElement(element, driver);
-		Thread.sleep(500);
+		waitMillis(500);
 		PageObjTM.moveToElement(element, driver);
-		Thread.sleep(500);
+		waitMillis(500);
 		a.moveToElement(element)
 			.keyDown(Keys.CONTROL)
 			.click()
 			.keyUp(Keys.CONTROL).build().perform();
-		Thread.sleep(500);
+		waitMillis(500);
 	}
 	
 	/** Metodo de acceso a cualquier menú de la pantalla principal de Manto.

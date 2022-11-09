@@ -22,9 +22,9 @@ public class PageMenusMantoSteps extends PageBase {
 		description="Desde la página de menús, seleccionamos el menú \"#{subMenu}\"", 
 		expected="Aparece la página al menú seleccionado",
 		saveErrorData=SaveWhen.Never)
-	public void goToMainMenusAndClickMenu(String subMenu) throws Exception {
+	public void goToMainMenusAndClickMenu(String subMenu) {
 		if (!pageMenusManto.isPage()) {
-			Thread.sleep(1000);
+			waitMillis(1000);
 			SecCabecera.clickLinkVolverMenuAndWait(driver, 60);
 		}
 		String textAlert = pageMenusManto.clickMenuAndAcceptAlertIfExists(subMenu);

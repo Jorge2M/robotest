@@ -173,14 +173,14 @@ public class PageReembolsos extends PageBase {
 		click(XPATH_BUTTON_SAVE_TRANSF).exec();
 	}
 
-	public boolean isVisibleModalConfTransf(int seconds) throws Exception {
+	public boolean isVisibleModalConfTransf(int seconds) {
 		//En el caso de móvil el div se oculta desplazándolo x píxeles por debajo de la coordenada 0Y
 		if (channel.isDevice()) {
 			for (int i=0; i<seconds; i++) {
 				if (getElement(XPATH_MODAL_CONF_TRANS).getLocation().getY()>0) {
 					return (true);
 				}
-				Thread.sleep(1000);
+				waitMillis(1000);
 			}
 			return false;
 		}
@@ -189,14 +189,14 @@ public class PageReembolsos extends PageBase {
 		return state(Visible, XPATH_MODAL_CONF_TRANS).wait(seconds).check();
 	}
 
-	public boolean isNotVisibleModalConfTransf(int seconds) throws Exception {
+	public boolean isNotVisibleModalConfTransf(int seconds) {
 		//En el caso de móvil el div se oculta desplazándolo x píxeles por debajo de la coordenada 0Y
 		if (channel.isDevice()) {
 			for (int i=0; i<seconds; i++) {
 				if (getElement(XPATH_MODAL_CONF_TRANS).getLocation().getY()<20) {
 					return (true);
 				}
-				Thread.sleep(1000);
+				waitMillis(1000);
 			}
 			return false;
 		}

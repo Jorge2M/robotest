@@ -82,10 +82,9 @@ public abstract class ModalDireccion extends PageBase {
 		}
 	}
 	
-	public void selectPoblacion(String poblacion, String xpathFormModal) 
-			throws Exception {
+	public void selectPoblacion(String poblacion, String xpathFormModal) {
 		state(State.Visible, xpathFormModal + XPATH_SELECT_POBLACION).wait(2).check();
-		Thread.sleep(1000);
+		waitMillis(1000);
 		new Select(getElement(xpathFormModal + XPATH_SELECT_POBLACION)).selectByValue(poblacion);
 	}
 	
