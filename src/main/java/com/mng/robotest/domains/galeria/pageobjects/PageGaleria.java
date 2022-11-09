@@ -55,7 +55,7 @@ public abstract class PageGaleria extends PageBase {
 	public abstract String getXPathLinkRelativeToArticle();
 	public abstract int getLayoutNumColumnas();
 	public abstract WebElement getArticuloConVariedadColoresAndHover(int numArticulo);
-	public abstract WebElement getImagenElementArticulo(WebElement articulo) throws Exception;
+	public abstract WebElement getImagenElementArticulo(WebElement articulo);
 	public abstract WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor);
 	public abstract ArticuloScreen getArticuloObject(int numArticulo) throws Exception;
 	public abstract String getNombreArticulo(WebElement articulo);
@@ -636,7 +636,22 @@ public abstract class PageGaleria extends PageBase {
 
 	public void clickArticulo(WebElement articulo) {
 		moveToElement(articulo);
-		click(articulo).waitLoadPage(30).exec();
+		if (!isVisibleImageArticle(articulo, 2)) {
+			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,+50)", "");
+			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", "");
+			isVisibleImageArticle(articulo, 2);
+		}
+		click(articulo).waitLoadPage(30).exec(); //getImagenElementArticulo(articulo);
+	}
+	
+	private boolean isVisibleImageArticle(WebElement articulo, int maxSeconds) {
+		for (int i=0; i<maxSeconds; i++) {
+			if (getImagenElementArticulo(articulo)!=null) {
+				return true;
+			}
+			PageBase.waitMillis(1000);
+		}
+		return false;
 	}
 
 	public String openArticuloPestanyaAndGo(WebElement article, AppEcom app)

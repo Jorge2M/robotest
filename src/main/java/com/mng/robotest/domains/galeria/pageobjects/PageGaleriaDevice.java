@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.domains.galeria.pageobjects.SecPreciosArticulo.TipoPrecio;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
@@ -77,6 +76,7 @@ public class PageGaleriaDevice extends PageGaleria {
 		return "//a";
 	}
 	
+	@Override
 	public String getXPathCabeceraBusquedaProd() {
 		return ("//*[@id='buscador_cabecera2']");
 	}

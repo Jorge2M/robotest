@@ -1,13 +1,11 @@
 package com.mng.robotest.test.pageobject.manto;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
-public class PageGestorSaldosTPV {
+public class PageGestorSaldosTPV extends PageBase {
 
 	public static final String TITULO = "Gestor de Saldos de TPV";
 	private static final String INI_XPATH_TITULO = "//td[@class='txt11B' and text()[contains(.,'";
@@ -18,54 +16,54 @@ public class PageGestorSaldosTPV {
 	private static final String XPATH_WIDGET_ERROR = "//div[@aria-describedby='error']";
 	private static final String XPATH_LOAD_POPUP_IMAGE = "//img[@src='../images/loadingFonsNegre.gif']";
 
-	public static String getXPathTitulo(String title){
+	public String getXPathTitulo(String title){
 		return (INI_XPATH_TITULO + title + "')]]");
 	}  
 	
-	public static String getXPathIdTPVTablaSaldos(String tpv) {
+	public String getXPathIdTPVTablaSaldos(String tpv) {
 		return INI_XPATH_ID_TPV_TABLA_SALDOS + tpv + "')] or text()[contains(.,'OUTLET TPV : " + tpv + "')]]";
 	}
 	
-	public static boolean isPage(WebDriver driver) {
+	public boolean isPage() {
 		String xpath = getXPathTitulo(TITULO);
-		return (state(Present, By.xpath(xpath), driver).check());
+		return state(Present, xpath).check();
 	}
 
-	public static boolean isVisibleTPVInput(WebDriver driver) {
-		return (state(Visible, By.xpath(XPATH_INPUT_TPV), driver).check());
+	public boolean isVisibleTPVInput() {
+		return state(Visible, XPATH_INPUT_TPV).check();
 	}
 
-	public static void insertTPVAndClickConsultarSaldos(String tpv, WebDriver driver) {
-		insertTPV(tpv, driver);
-		clickConsultarSaldos(driver);
+	public void insertTPVAndClickConsultarSaldos(String tpv) {
+		insertTPV(tpv);
+		clickConsultarSaldos();
 	}
 
-	private static void insertTPV(String tpv, WebDriver driver) {
-		driver.findElement(By.xpath(XPATH_INPUT_TPV)).click();
-		driver.findElement(By.xpath(XPATH_INPUT_TPV)).clear();
-		driver.findElement(By.xpath(XPATH_INPUT_TPV)).sendKeys(tpv);
+	private void insertTPV(String tpv) {
+		getElement(XPATH_INPUT_TPV).click();
+		getElement(XPATH_INPUT_TPV).clear();
+		getElement(XPATH_INPUT_TPV).sendKeys(tpv);
 		
 	}
 	
-	private static void clickConsultarSaldos(WebDriver driver) {
-		driver.findElement(By.xpath(XPATH_CONSULTAR_SALDOS_BUTTON)).click();
-		state(Invisible, By.xpath(XPATH_LOAD_POPUP_IMAGE), driver)
+	private void clickConsultarSaldos() {
+		getElement(XPATH_CONSULTAR_SALDOS_BUTTON).click();
+		state(Invisible, XPATH_LOAD_POPUP_IMAGE)
 			.wait(120).check();
 	}
 
-	public static boolean isTablaSaldosVisible(WebDriver driver) {
-		waitForPageLoaded(driver);
-		return (state(Visible, By.xpath(XPATH_TABLA_SALDOS), driver).check());
+	public boolean isTablaSaldosVisible() {
+		waitLoadPage();
+		return state(Visible, XPATH_TABLA_SALDOS).check();
 	}
 
-	public static boolean isTPVIDVisible(String tpv, WebDriver driver) {
+	public boolean isTPVIDVisible(String tpv) {
 		String xpath = getXPathIdTPVTablaSaldos(tpv);
-		return (state(Visible, By.xpath(xpath), driver).check());
+		return state(Visible, xpath).check();
 	}
 
-	public static boolean isUnvalidTPVMessageVisible(WebDriver driver) {
-		waitForPageLoaded(driver);
-		return (state(Visible, By.xpath(XPATH_WIDGET_ERROR), driver).check());
+	public boolean isUnvalidTPVMessageVisible() {
+		waitLoadPage();
+		return state(Visible, XPATH_WIDGET_ERROR).check();
 	}
 	
 }

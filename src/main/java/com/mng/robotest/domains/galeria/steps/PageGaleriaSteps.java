@@ -3,6 +3,7 @@ package com.mng.robotest.domains.galeria.steps;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -99,10 +100,7 @@ public class PageGaleriaSteps extends StepBase {
 		pageFichaSteps.validaDetallesProducto(datosArticulo);
 		pageFichaSteps.validaPrevNext(locationArt);
 
-		//Validaciones sección BreadCrumb + Next
-//		if (channel==Channel.desktop) {
-			pageFichaSteps.validaBreadCrumbFicha(urlGaleria);
-//		}
+		pageFichaSteps.validaBreadCrumbFicha(urlGaleria);
 		
 		return (datosArticulo);
 	}
@@ -478,7 +476,7 @@ public class PageGaleriaSteps extends StepBase {
 		description="Seleccionar el " + TAG_NUM_ART_CON_COLORES + "o artículo con variedad de colores (" + TAG_NOMBRE_1ER_ART + " " + TAG_PRECIO_1ER_ART + ")", 
 		expected="Aparece el artículo original(" + TAG_NOMBRE_1ER_ART + " " + TAG_PRECIO_1ER_ART + ")",
 		saveNettraffic=SaveWhen.Always)
-	public void selecArticuloGaleriaStep(int numArtConColores) {
+	public void selecArticuloGaleriaStep(int numArtConColores) throws Exception {
 		WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
 		String nombre1erArt = pageGaleria.getNombreArticulo(articuloColores);
 		String precio1erArt = pageGaleria.getPrecioArticulo(articuloColores);

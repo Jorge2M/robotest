@@ -66,6 +66,8 @@ public class GroupWeb extends PageBase {
 		public List<LineaType> getLineas() {
 			return lineas;
 		}
+		
+		@Override
 		public String toString() {
 			return name().toLowerCase();
 		}

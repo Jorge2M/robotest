@@ -102,7 +102,7 @@ public class PageMenusMantoSteps extends PageBase {
 	
 	public void goToGestorSaldosTPV() throws Exception {
 		goToMainMenusAndClickMenu("Gestor de Saldos de TPV");
-		PageGestorSaldosTPVSteps.validateIsPage(driver);
+		new PageGestorSaldosTPVSteps().validateIsPage();
 	}
 	
 	public void goToGestorConsultaCambioFamilia() throws Exception {

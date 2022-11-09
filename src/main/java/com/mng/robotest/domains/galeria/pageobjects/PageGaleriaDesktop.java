@@ -202,7 +202,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public WebElement getImagenElementArticulo(WebElement articulo) {
 		moveToElement(articulo);
 		By byImg = By.xpath(getXPathImgArticulo(articulo));			
-		if (state(State.Present, articulo).by(byImg).check()) {
+		if (state(State.Visible, articulo).by(byImg).check()) {
 			return getElement(byImg);
 		}
 		return null;
