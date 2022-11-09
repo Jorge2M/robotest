@@ -11,7 +11,8 @@ public class FilterManyColors implements Filter {
 	public List<GarmentCatalog> filter(List<GarmentCatalog> garments) throws Exception {
 		List<GarmentCatalog> listGarmentsWithManyColors = new ArrayList<>();
 		for (GarmentCatalog garment : garments) {
-			if (garment.getColors().size() > 1) {
+			if (garment.getColors().size() > 1 ||
+				garment.getNumberOfColors() > 1) {
 				listGarmentsWithManyColors.add(garment);
 			}
 		}

@@ -22,6 +22,7 @@ public class GarmentCatalog {
 	private List<Color> colors;
 	private Labels labels;
 	private AnalyticsEventsData analyticsEventsData;
+	private int numberOfColors;
 	private EntityProduct canonicalProduct;
 	
 	private ValeDiscount valePais = null;
@@ -291,6 +292,12 @@ public class GarmentCatalog {
 		}
 		
 		return Optional.empty();
+	}
+	public int getNumberOfColors() {
+		return numberOfColors;
+	}
+	public void setNumberOfColors(int numberOfColors) {
+		this.numberOfColors = numberOfColors;
 	}
 	
 }
