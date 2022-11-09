@@ -34,10 +34,7 @@ public class FilterOnline implements Filter {
 		if (online && !reverse) {
 			return true;
 		}
-		if (!online && reverse) {
-			return true;
-		}
-		return false;
+		return (!online && reverse);
 	}
 	
 	private boolean isGarmentOnline(GarmentCatalog garment) {

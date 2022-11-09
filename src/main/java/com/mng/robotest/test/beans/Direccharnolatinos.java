@@ -30,10 +30,8 @@ public class Direccharnolatinos implements Serializable {
 	}
 	
 	public boolean check() {
-		if (this.getCheck()!=null && this.getCheck().compareTo("s")==0) {
-			return true;
-		}
-		return false;
+		return (this.getCheck()!=null && 
+				this.getCheck().compareTo("s")==0);
 	}
 		
 	@Override

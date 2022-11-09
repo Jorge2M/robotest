@@ -227,7 +227,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		while (i<seconds);
 	}	
 	
-	public void clickMetodoPagoAndWait(String nombrePago) throws Exception {
+	public void clickMetodoPagoAndWait(String nombrePago) {
 		clickMetodoPago(nombrePago);
 		isMethodInStateUntil(nombrePago, StateMethod.SELECTED, 1);
 	}

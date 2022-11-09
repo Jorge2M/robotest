@@ -214,7 +214,7 @@ public class PageCheckoutWrapper extends PageBase {
 		return page1DktopCheckout.isMetodoPagoPresent(metodoPago);
 	}
 	
-	public void despliegaMetodosPago() throws Exception {
+	public void despliegaMetodosPago() {
 		if (channel==Channel.mobile) {
 			page2MobilCheckout.despliegaMetodosPago();
 		} else {

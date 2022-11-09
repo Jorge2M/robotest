@@ -404,8 +404,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	private ListDataArticleGalery getListArticles(
-			List<DataArticleGalery> filter,
-			List<AttributeArticle> attributes) throws Exception {
+			List<DataArticleGalery> filter, List<AttributeArticle> attributes) {
 		ListDataArticleGalery listReturn = new ListDataArticleGalery();
 		for (WebElement articulo : getListaArticulos()) {
 			String refColor = getRefColorArticulo(articulo);

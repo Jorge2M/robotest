@@ -50,10 +50,10 @@ public class PageSofort4thSteps extends StepBase {
 	}
 
 	@Step (
-		description="Introducción del TAN: #{TANSofort} y pulsamos aceptar", 
+		description="Introducción del TAN: #{tanSofort} y pulsamos aceptar", 
 		expected="El pago se realiza correctamente")
-	public void inputTANandAccept(String TANSofort) {
-		pageSofort4th.inputTAN(TANSofort);
+	public void inputTANandAccept(String tanSofort) {
+		pageSofort4th.inputTAN(tanSofort);
 		pageSofort4th.clickSubmitButton();
 	}
 }

@@ -101,19 +101,19 @@ public class TipoTransporteEnum {
 		 */
 		private DataSearchDp dataSearchDp = null;
 
-		private TipoTransporte(String idAnalytics, String _code, String _descripcion, boolean entregaDomicilio,
-							   String _codigoIntercambio, boolean franjaHoraria, boolean droppoint, DataSearchDp dataSearchDp) {
-			this(idAnalytics, _code, _descripcion, entregaDomicilio, _codigoIntercambio, franjaHoraria, droppoint);
+		private TipoTransporte(String idAnalytics, String code, String _descripcion, boolean entregaDomicilio,
+							   String codigoIntercambio, boolean franjaHoraria, boolean droppoint, DataSearchDp dataSearchDp) {
+			this(idAnalytics, code, _descripcion, entregaDomicilio, codigoIntercambio, franjaHoraria, droppoint);
 			this.dataSearchDp = dataSearchDp;
 		}
 		
-		private TipoTransporte(String idAnalytics, String _code, String _descripcion, boolean entregaDomicilio,
-							   String _codigoIntercambio, boolean franjaHoraria, boolean droppoint) {
+		private TipoTransporte(String idAnalytics, String code, String descripcion, boolean entregaDomicilio,
+							   String codigoIntercambio, boolean franjaHoraria, boolean droppoint) {
 			this.idAnalytics = idAnalytics;
-			this.codigo = _code;
-			this.descripcion = _descripcion;
+			this.codigo = code;
+			this.descripcion = descripcion;
 			this.entregaDomicilio = entregaDomicilio;
-			this.codigoIntercambio = _codigoIntercambio;
+			this.codigoIntercambio = codigoIntercambio;
 			this.franjaHoraria = franjaHoraria;
 			this.droppoint = droppoint;
 		}

@@ -531,19 +531,19 @@ public class Page2IdentCheckout extends PageBase {
 			datosRegistro.put("localidadesProvCity", datoSeteado);
 		}
 	}	 
-	public void setSelectDistrito(int posInSelect, Map<String,String> datosRegistro) throws Exception {
+	public void setSelectDistrito(int posInSelect, Map<String,String> datosRegistro) {
 		String datoSeteado = setSelectDistrito(posInSelect);
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("distrito", datoSeteado);
 		}
 	}
-	public void setSelectCodPostal(int posInSelect, Map<String,String> datosRegistro) throws Exception {
+	public void setSelectCodPostal(int posInSelect, Map<String,String> datosRegistro) {
 		String datoSeteado = setSelectCodPostal(posInSelect);
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("selectCodPosta", datoSeteado);
 		}
 	}
-	public void setSelectLocalidadesNeighbourhoodCity(int posInSelect, Map<String,String> datosRegistro) throws Exception {
+	public void setSelectLocalidadesNeighbourhoodCity(int posInSelect, Map<String,String> datosRegistro) {
 		String datoSeteado = setSelectLocalidadesNeighbourhoodCity(posInSelect);
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("localidadesNeighbourhoodCity", datoSeteado);

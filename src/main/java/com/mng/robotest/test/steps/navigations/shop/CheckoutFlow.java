@@ -337,7 +337,7 @@ public class CheckoutFlow extends StepBase {
 		}
 	}	
 	
-	private void actionsWhenSessionLoss() throws Exception {
+	private void actionsWhenSessionLoss() {
 		new ModalCambioPais().closeModalIfVisible();
 		new AccesoNavigations().cambioPaisFromHomeIfNeeded(pais, dataTest.getIdioma());
 	}

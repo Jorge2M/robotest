@@ -87,7 +87,7 @@ public class PedidosNavigations {
 		}
 	}	
 	
-	public static void validaPedidoStepss(DataPedido dataPedido, AppEcom appE, WebDriver driver) throws Exception {
+	public static void validaPedidoStepss(DataPedido dataPedido, AppEcom appE, WebDriver driver) {
 		new PageSelTdaMantoSteps().selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais());
 		
 		new PageMenusMantoSteps().goToBolsas();

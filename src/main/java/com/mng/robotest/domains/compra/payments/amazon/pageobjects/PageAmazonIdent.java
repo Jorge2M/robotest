@@ -15,10 +15,7 @@ public class PageAmazonIdent extends PageBase {
 	}
 	
 	public boolean isPageIdent() {
-		if (state(Visible, XPATH_INPUT_EMAIL).check() &&
-			state(Visible, XPATH_INPUT_PASSWORD).check()) {
-			return true;
-		}
-		return false;
+		return (state(Visible, XPATH_INPUT_EMAIL).check() &&
+				state(Visible, XPATH_INPUT_PASSWORD).check());
 	}
 }

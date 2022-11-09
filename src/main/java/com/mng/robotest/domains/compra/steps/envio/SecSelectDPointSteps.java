@@ -36,8 +36,7 @@ public class SecSelectDPointSteps extends StepBase {
 	}
 	
 	@Validation
-	private ChecksTM checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp) 
-			throws Exception {
+	private ChecksTM checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp) {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 5;
 		State stateVal = State.Warn;

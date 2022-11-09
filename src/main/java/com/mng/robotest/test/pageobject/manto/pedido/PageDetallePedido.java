@@ -6,7 +6,6 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.domains.transversal.PageBase;
@@ -38,24 +37,24 @@ public class PageDetallePedido extends PageBase {
 
 	public boolean isPage() {
 		String xpath = "//td[text()[contains(.,'DETALLES PEDIDOS')]]";
-		return (state(Present, By.xpath(xpath)).check());
+		return state(Present, xpath).check();
 	}
 
 	public boolean isPage(String idPedido) {
 		if (isPage()) {
 			String xpathLabelIdPedido = getXPathLabelIdPedido(idPedido);
-			return (state(Visible, By.xpath(xpathLabelIdPedido)).check());
+			return state(Visible, xpathLabelIdPedido).check();
 		}
 		return false;
 	}
 
 	public String getCodigoPais() {
-		return (driver.findElement(By.xpath(XPATH_CODIGO_POSTAL)).getText());
+		return getElement(XPATH_CODIGO_POSTAL).getText();
 	}
 
 	public String getTiendaIfExists() {
-		if (state(Present, By.xpath(XPATH_LINK_ENVIO_TIENDA)).check()) {
-			String lineaTexto = driver.findElement(By.xpath(XPATH_LINK_ENVIO_TIENDA)).getText();
+		if (state(Present, XPATH_LINK_ENVIO_TIENDA).check()) {
+			String lineaTexto = getElement(XPATH_LINK_ENVIO_TIENDA).getText();
 			Pattern pattern = Pattern.compile("(.*?)ENVIO A TIENDA(.*?)(\\d+)");
 			Matcher matcher = pattern.matcher(lineaTexto);
 			if (matcher.find()) {
@@ -66,11 +65,11 @@ public class PageDetallePedido extends PageBase {
 	}
 
 	public String getEstadoPedido() {
-		return (driver.findElement(By.xpath(XPATH_ESTADO_PEDIDO)).getText());
+		return getElement(XPATH_ESTADO_PEDIDO).getText();
 	}
 	
 	public String getTipoServicio() {
-		return (driver.findElement(By.xpath(XPATH_TIPO_SERVICIO)).getText());
+		return getElement(XPATH_TIPO_SERVICIO).getText();
 	}
 	
 	public boolean isCodPaisPedido(String codPaisPedido) {
@@ -79,28 +78,25 @@ public class PageDetallePedido extends PageBase {
 	}
 	
 	public String get1rstLineDatosEnvioText() {
-		return (driver.findElement(By.xpath("//table[1]/tbody/tr/td[2]//tr[4]")).getText());
+		return getElement("//table[1]/tbody/tr/td[2]//tr[4]").getText();
 	}
 	
 	public boolean isDireccionPedido(String direcPedido) {
-		String dirLinea1 = driver.findElement(By.xpath("//table[1]/tbody/tr/td[2]//tr[8]")).getText();
-		String dirLinea2 = driver.findElement(By.xpath("//table[1]/tbody/tr/td[2]//tr[9]")).getText();
-		String dirLinea3 = driver.findElement(By.xpath("//table[1]/tbody/tr/td[2]//tr[10]")).getText();
+		String dirLinea1 = getElement("//table[1]/tbody/tr/td[2]//tr[8]").getText();
+		String dirLinea2 = getElement("//table[1]/tbody/tr/td[2]//tr[9]").getText();
+		String dirLinea3 = getElement("//table[1]/tbody/tr/td[2]//tr[10]").getText();
 		
 		String codPostal = (dirLinea3.split("-").length>0) ? dirLinea3.split("-")[0].trim() : "";
 		String poblacion = (dirLinea3.split("-").length>1) ? dirLinea3.split("-")[1].trim() : "";
 		
-		if (direcPedido.contains(dirLinea1) &&
-			direcPedido.contains(dirLinea2) &&
-			direcPedido.contains(codPostal) &&
-			direcPedido.contains(poblacion)) {
-			return true;
-		}
-		return false;
+		return (direcPedido.contains(dirLinea1) &&
+				direcPedido.contains(dirLinea2) &&
+				direcPedido.contains(codPostal) &&
+				direcPedido.contains(poblacion));
 	}
 	
 	public boolean isPedidoInStateMenos1NULL() {
-		String estado = driver.findElement(By.xpath(XPATH_ESTADO_PEDIDO)).getText();
+		String estado = getElement(XPATH_ESTADO_PEDIDO).getText();
 		return (estado.contains("-1 - NULL"));
 	}
 	
@@ -118,14 +114,14 @@ public class PageDetallePedido extends PageBase {
 	}
 
 	public void gotoListaPedidos() {
-		if (state(Present, By.xpath(XPATH_LINK_VOLVER_PEDIDOS)).check()) {
-			click(By.xpath(XPATH_LINK_VOLVER_PEDIDOS)).exec();
+		if (state(Present, XPATH_LINK_VOLVER_PEDIDOS).check()) {
+			click(XPATH_LINK_VOLVER_PEDIDOS).exec();
 		}
 	}
 
 	public List<String> getReferenciasArticulosDetallePedido() {
 		List <String> referenciasText = new ArrayList<>();
-		List<WebElement> referencias = driver.findElements(By.xpath(XPATH_REFERENCIA_ARTICULO));
+		List<WebElement> referencias = getElements(XPATH_REFERENCIA_ARTICULO);
 		
 		for (WebElement referencia : referencias){
 			referenciasText.add(referencia.getText().replace(" ", ""));
@@ -134,10 +130,10 @@ public class PageDetallePedido extends PageBase {
 	}
 
 	public void clickLinkDetallesCliente() {
-		click(By.xpath(XPATH_LINK_DETALLES_CLIENTE)).exec();
+		click(XPATH_LINK_DETALLES_CLIENTE).exec();
 	}
 	
 	public void clickIrAGenerarButton() {
-		click(By.xpath(XPATH_IR_A_GENERAR_BUTTON)).exec();
+		click(XPATH_IR_A_GENERAR_BUTTON).exec();
 	}
 }

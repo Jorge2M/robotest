@@ -115,28 +115,24 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	private static final String XPATH_LINK_FILTRAR = "//span[@class[contains(.,'icon-fill-filter')]]";
 	private static final String XPATH_CAPA_FILTERS = "//div[@class[contains(.,'filters--')]]";
 	private static final String XPATH_BUTTON_FILTRAR = XPATH_CAPA_FILTERS + "//button[@class[contains(.,'primary')]]";
+	
 	public void showFilters() {
-		//if (app!=AppEcom.outlet) {
-			if (!isFiltersShopVisible(1) &&
-				state(State.Clickable, XPATH_LINK_FILTRAR).check()) {
-				click(XPATH_LINK_FILTRAR).exec();
-			}
-		//}
+		if (!isFiltersShopVisible(1) &&
+			state(State.Clickable, XPATH_LINK_FILTRAR).check()) {
+			click(XPATH_LINK_FILTRAR).exec();
+		}
 	}
 	public void hideFilters() {
-		//if (app!=AppEcom.outlet) {
-			if (isFiltersShopVisible(1) &&
-				state(State.Clickable, XPATH_LINK_FILTRAR).check()) {
-				click(XPATH_LINK_FILTRAR).exec();
-			}
-		//}
+		if (isFiltersShopVisible(1) &&
+			state(State.Clickable, XPATH_LINK_FILTRAR).check()) {
+			click(XPATH_LINK_FILTRAR).exec();
+		}
 	}
 	public void acceptFilters() {
-		//if (app!=AppEcom.outlet) {
-			click(XPATH_BUTTON_FILTRAR).exec();
-		//}
+		click(XPATH_BUTTON_FILTRAR).exec();
 	}
 	private boolean isFiltersShopVisible(int seconds) {
 		return state(State.Visible, XPATH_CAPA_FILTERS).wait(seconds).check();
 	}
+	
 }

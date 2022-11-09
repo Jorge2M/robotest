@@ -105,7 +105,7 @@ public class PedidoNavigations {
 		}
 	}
 	
-	private static void consultarBolsaSteps(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
+	private static void consultarBolsaSteps(DataPedido dataPedido, AppEcom app, WebDriver driver) {
 		new PageMenusMantoSteps().goToBolsas();
 		new SecFiltrosMantoSteps(driver).setFiltrosYbuscar(dataPedido, TypeSearch.BOLSA);
 		boolean existLinkPedido = new PageBolsasMantoSteps().validaLineaBolsa(dataPedido).getExistsLinkCodPed();
@@ -114,7 +114,7 @@ public class PedidoNavigations {
 		}
 	}
 	
-	private static void consultarPedidoSteps(DataPedido dataPedido, AppEcom app, WebDriver driver) throws Exception {
+	private static void consultarPedidoSteps(DataPedido dataPedido, AppEcom app, WebDriver driver) {
 		new PageMenusMantoSteps().goToPedidos();
 		new SecFiltrosMantoSteps(driver).setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
 		boolean existLinkPedido = new PagePedidosMantoSteps().validaLineaPedido(dataPedido).getExistsLinkCodPed();

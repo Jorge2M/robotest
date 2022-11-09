@@ -84,7 +84,7 @@ public class CheckoutSteps extends StepBase {
 		}
 	} 
 
-	public void goToMetodosPagoMobile() throws Exception {
+	public void goToMetodosPagoMobile() {
 		page1MobilCheckSteps.clickContinuarToMetodosPago();
 	}
 	
@@ -473,7 +473,7 @@ public class CheckoutSteps extends StepBase {
 	@Step (
 		description="Seleccionamos el botón para aplicar el descuento de Loyalty Points",
 		expected="Se aplica correctamente el descuento")
-	public void loyaltyPointsApply() throws Exception {
+	public void loyaltyPointsApply() {
 		switch (channel) {
 		case desktop, tablet:
 			loyaltyPointsApplyDesktop();

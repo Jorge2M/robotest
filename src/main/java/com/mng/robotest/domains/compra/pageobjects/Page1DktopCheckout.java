@@ -316,7 +316,7 @@ public class Page1DktopCheckout extends PageBase {
 	/**
 	 * Realizamos las acciones necesarias para forzar el click sobre un método de pago y esperamos a que desaparezcan las capas de loading
 	 */
-	public void forceClickMetodoPagoAndWait(String metodoPago) throws Exception {
+	public void forceClickMetodoPagoAndWait(String metodoPago) {
 		despliegaMetodosPago();
 		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.waitUntilNoDivLoading(2);
@@ -523,10 +523,8 @@ public class Page1DktopCheckout extends PageBase {
 	
 	public boolean isMarkedQuieroFactura() {
 		WebElement radio = getElement(XPATH_LINK_SOLICITAR_FACTURA);
-		if (radio.getAttribute("checked")!=null && radio.getAttribute("checked").contains("true")) {
-			return true;
-		}
-		return false;
+		return (radio.getAttribute("checked")!=null && 
+				radio.getAttribute("checked").contains("true"));
 	}
 	
 	public boolean isArticulos() {

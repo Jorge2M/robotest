@@ -14,11 +14,8 @@ public class PageSofort4th extends PageBase {
 	private static final String XPATH_INPUT_TAN = "//input[(@id[contains(.,'BackendFormTAN')] or @id[contains(.,'BackendFormTan')]) and @type='text']";
 	
 	public boolean isPage() {
-		if (driver.getTitle().toLowerCase().contains("sofort") && 
-			state(Visible, XPATH_INPUT_USER).check()) {
-			return true;
-		}
-		return false;
+		return (driver.getTitle().toLowerCase().contains("sofort") && 
+				state(Visible, XPATH_INPUT_USER).check());
 	}
 	
 	public void inputUserPass(String user, String password) {
@@ -42,7 +39,7 @@ public class PageSofort4th extends PageBase {
 		return state(Visible, XPATH_INPUT_TAN).check();
 	}
 	
-	public void inputTAN(String TAN) {
-		getElement(XPATH_INPUT_TAN).sendKeys(TAN);	
+	public void inputTAN(String tan) {
+		getElement(XPATH_INPUT_TAN).sendKeys(tan);	
 	}		
 }

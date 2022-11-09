@@ -163,7 +163,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		return (descuentoFloat > 0);
 	}
 
-	public void selectMetodoAfterPositioningIn1Envio(TipoTransporte tipoTransporte) throws Exception {
+	public void selectMetodoAfterPositioningIn1Envio(TipoTransporte tipoTransporte) {
 		if (!isPageUntil(0)) {
 			clickLink1EnvioAndWaitForPage();
 		}

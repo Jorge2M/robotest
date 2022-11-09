@@ -51,7 +51,6 @@ public class LineasArticuloBolsa extends PageBase {
 		}
 	}
 	
-//	private static final String XPATH_ITEM = "//li//a[@data-testid[contains(.,'image.detail')]]/ancestor::li";
 	private static final String XPATH_ITEM = "//li[@data-testid='bag.item']";	
 	private static final String XPATH_LINK_RELATIVE_ARTICLE = ".//img";
 	private static final String XPATH_NOMBRE_RELATIVE_ARTICLE = ".//*[@data-testid='bag.item.detail.button']";

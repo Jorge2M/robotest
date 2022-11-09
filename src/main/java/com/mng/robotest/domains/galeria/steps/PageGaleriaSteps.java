@@ -62,7 +62,7 @@ public class PageGaleriaSteps extends StepBase {
 	@Step (
 		description="Seleccionamos el artículo #{locationArt} en una pestaña aparte", 
 		expected="Aparece la ficha del artículo seleccionado en una pestaña aparte")
-	public void selectArticuloEnPestanyaAndBack(LocationArticle locationArt) throws Exception {
+	public void selectArticuloEnPestanyaAndBack(LocationArticle locationArt) {
 		String galeryWindowHandle = driver.getWindowHandle();
 		DataFichaArt datosArticulo = new DataFichaArt();
 
