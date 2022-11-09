@@ -84,7 +84,7 @@ public abstract class SecCabecera extends PageBase {
 		int numArticulos = 0;
 		String numArtStr = getNumberArtIcono();
 		if (numArtStr.matches("\\d+$")) {
-			numArticulos = Integer.valueOf(numArtStr).intValue();
+			numArticulos = Integer.parseInt(numArtStr);
 		}
 		return numArticulos;
 	}	

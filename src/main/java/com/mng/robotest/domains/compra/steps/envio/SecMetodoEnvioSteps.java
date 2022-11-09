@@ -78,7 +78,7 @@ public class SecMetodoEnvioSteps extends StepBase {
 		}
 	}
 	
-	public boolean fluxSelectEnvio(DataPago dataPago) throws Exception {
+	public boolean fluxSelectEnvio(DataPago dataPago) {
 		boolean pagoPintado = false;
 		Pago pago = dataPago.getDataPedido().getPago();
 		if (pago.getTipoEnvio(app)!=null) {

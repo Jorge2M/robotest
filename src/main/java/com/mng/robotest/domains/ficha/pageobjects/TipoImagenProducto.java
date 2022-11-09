@@ -319,7 +319,7 @@ public enum TipoImagenProducto implements Serializable {
 	public int getIndexDetalle() {
 		int indice = 1;
 		if (this.isTipoDetalle()) {
-			indice = Integer.valueOf(this.idDB.substring(1, 2)).intValue();
+			indice = Integer.parseInt(this.idDB.substring(1, 2));
 		}
 		return indice;
 	}
@@ -332,7 +332,7 @@ public enum TipoImagenProducto implements Serializable {
 	public int getColumnas() {
 		int columnas = 1;
 		if (this.isTipoOutfit()) {
-			columnas = Integer.valueOf(this.idDB.substring(1, 2)).intValue();
+			columnas = Integer.parseInt(this.idDB.substring(1, 2));
 		}
 		return columnas;
 	}

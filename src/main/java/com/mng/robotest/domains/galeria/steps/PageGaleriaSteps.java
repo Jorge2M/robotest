@@ -246,7 +246,7 @@ public class PageGaleriaSteps extends StepBase {
 	}
 	
 	@Validation
-	private ChecksTM checkNotRepeatedArticles() throws Exception {
+	private ChecksTM checkNotRepeatedArticles() {
 		ChecksTM checks = ChecksTM.getNew();
 		List<DataArticleGalery> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
 		String producRepeatedWarning = "";
@@ -566,8 +566,8 @@ public class PageGaleriaSteps extends StepBase {
 		return (pageGaleria.iconsInCorrectState(posIconsSelected, actionFav));
 	}
 
-	public ListDataArticleGalery selectListadoXColumnasDesktop(NumColumnas numColumnas, ListDataArticleGalery listArticlesGaleriaAnt)
-			throws Exception {
+	public ListDataArticleGalery selectListadoXColumnasDesktop(
+			NumColumnas numColumnas, ListDataArticleGalery listArticlesGaleriaAnt){
 		selectListadoXColumnasDesktop(numColumnas);
 		ListDataArticleGalery listArticlesGaleriaAct = pageGaleria.getListDataArticles();
 		if (listArticlesGaleriaAnt!=null) {

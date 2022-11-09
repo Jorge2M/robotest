@@ -10,8 +10,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallasFicha {
 	
 	private static final String XPATH_CAPA_TALLAS = "//div[@id='sizesContainer']"; 
-//	private static final String XPATH_SELECTOR_TALLAS = XPATH_CAPA_TALLAS + "//div[@role='list']";
-//	private static final String XPATH_LIST_TALLAS_FOR_SELECT = XPATH_CAPA_TALLAS + "//div[@role='list']";
 	private static final String XPATH_SELECTOR_TALLAS = XPATH_CAPA_TALLAS + "//ul";
 	private static final String XPATH_LIST_TALLAS_FOR_SELECT = XPATH_CAPA_TALLAS + "//ul";	
 	private static final String XPATH_TALLA_ITEM = XPATH_CAPA_TALLAS + "//span[@data-available]";
@@ -20,19 +18,9 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	private static final String XPATH_ICON_DESPLEGABLE_TALLAS = "//i[@class[contains(.,'icon-outline-down')]]";
 	private static final String XPATH_TALLA_SELECTED = XPATH_ICON_DESPLEGABLE_TALLAS + "/../span";
 	private static final String XPATH_MSG_AVISO_TALLA = XPATH_CAPA_TALLAS + "//span";
-//	private static final String XPATH_TALLA_UNICA = 	
-	
-//	private static final String XPATH_CAPA_TALLAS = "//form/div[@class='sizes']";
-//	private static final String XPATH_SELECTOR_TALLAS = XPATH_CAPA_TALLAS + "/div[@class='selector']";
-//	private static final String XPATH_LIST_TALLAS_FOR_SELECT = XPATH_SELECTOR_TALLAS + "//div[@class[contains(.,'selector-list')]]";
-//	private static final String XPATH_TALLA_ITEM = XPATH_CAPA_TALLAS + "//span[(@role='option' or @role='button') and not(@data-available='false')]";
-//	private static final String XPATH_TALLA_AVAILABLE = XPATH_TALLA_ITEM + "//self::span[@data-available='true' or @class='single-size']";
-//	private static final String XPATH_TALLA_UNAVAILABLE = XPATH_TALLA_ITEM + "//self::span[not(@data-available) and not(@class='single-size')]";
-//	private static final String XPATH_TALLA_SELECTED = XPATH_TALLA_ITEM + "//self::span[@class[contains(.,'selector-trigger')] or @class='single-size']";
-//	private static final String XPATH_TALLA_UNICA = XPATH_TALLA_ITEM + "//self::span[@class[contains(.,'single-size')]]";
 	
 	private String getXPathTallaByCodigo(String codigoNumericoTalla) {
-		int numTalla = Integer.valueOf(codigoNumericoTalla);
+		int numTalla = Integer.parseInt(codigoNumericoTalla);
 		return (XPATH_TALLA_ITEM + "//self::span[@id='size-" + codigoNumericoTalla + "' or @id='size-" + numTalla + "']"); 
 	}
 	

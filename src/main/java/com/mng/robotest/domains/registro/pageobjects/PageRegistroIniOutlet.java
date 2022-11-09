@@ -143,7 +143,7 @@ public class PageRegistroIniOutlet extends PageBase {
 	}
 	
 	public Map<String,String> sendDataAccordingCountryToInputs(
-			String emailNonExistent, boolean clickPubli, Channel channel) throws Exception {
+			String emailNonExistent, boolean clickPubli, Channel channel) {
 		return new Page2IdentCheckout().inputDataPorDefectoSegunPais(emailNonExistent, false, clickPubli, channel);
 	}
 	

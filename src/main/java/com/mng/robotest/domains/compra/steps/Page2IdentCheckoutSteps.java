@@ -48,8 +48,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		description="Introducimos los datos del cliente según el país", 
 		expected="Se hace clickable el botón \"Continuar\"",
 		saveImagePage=SaveWhen.Always)
-	public Map<String, String> inputDataPorDefecto(String emailUsr, boolean inputDireccCharNoLatinos) 
-			throws Exception {
+	public Map<String, String> inputDataPorDefecto(String emailUsr, boolean inputDireccCharNoLatinos) {
 		Map<String, String> datosRegistro = 
 			page2IdentCheckout.inputDataPorDefectoSegunPais(emailUsr, inputDireccCharNoLatinos, false, channel);
 		

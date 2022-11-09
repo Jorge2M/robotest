@@ -44,7 +44,7 @@ public class Com008 extends TestBase {
 		new SecBolsaSteps().selectButtonComprar();
 	}
 	
-	private void continueAndUnfoldPayments() throws Exception {
+	private void continueAndUnfoldPayments() {
 		if (channel==Channel.mobile) {
 			checkoutSteps.goToMetodosPagoMobile();
 		}

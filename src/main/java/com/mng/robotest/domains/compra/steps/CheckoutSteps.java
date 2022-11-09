@@ -229,7 +229,7 @@ public class CheckoutSteps extends StepBase {
 	@Step (
 		description="Seleccionamos el icono/pestaña correspondiente al método de pago y esperamos la desaparición de los \"loading\"",
 		expected="La operación se ejecuta correctamente")
-	public boolean forceClickIconoPagoAndWait(Pago pago, boolean pintaNombrePago) throws Exception {
+	public boolean forceClickIconoPagoAndWait(Pago pago, boolean pintaNombrePago) {
 		if (pintaNombrePago) {
 			String pintaPago = "<b style=\"color:blue;\">" + pago.getNombre(channel, app) + "</b>:"; 
 			StepTM step = TestMaker.getCurrentStepInExecution();

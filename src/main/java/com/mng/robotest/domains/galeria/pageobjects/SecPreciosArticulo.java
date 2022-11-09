@@ -79,7 +79,7 @@ public class SecPreciosArticulo extends PageBase {
 
 		for (WebElement prendaPrecio : listaPreciosPrendas) {
 			String entero = prendaPrecio.getText();
-			float precioActual = Float.valueOf(entero.replace(",",".").replaceAll("[^\\d.]", "")).floatValue();
+			float precioActual = Float.parseFloat(entero.replace(",",".").replaceAll("[^\\d.]", ""));
 			if (typeOrden==FilterOrdenacion.PrecioAsc) {
 				if (precioActual < precioAnt) {
 					return (precioAnt + "->" + precioActual);
@@ -101,7 +101,7 @@ public class SecPreciosArticulo extends PageBase {
 		List<WebElement> listaPreciosPrendas = getListaPreciosPrendas(listaArticles);
 		for (WebElement prendaPrecio : listaPreciosPrendas) {
 			String entero = prendaPrecio.getText();
-			float precioActual = Float.valueOf(entero.replace(",",".").replaceAll("[^\\d.]", "")).floatValue();
+			float precioActual = Float.parseFloat(entero.replace(",",".").replaceAll("[^\\d.]", ""));
 			if (precioActual < minimo || precioActual > maximo) {
 				return false;
 			}

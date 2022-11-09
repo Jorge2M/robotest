@@ -29,8 +29,7 @@ public class PageRegistroDirecOutlet extends PageBase {
 		return getNumElementsVisible(XPATH_DIV_ERROR);
 	}
 	
-	public void sendDataAccordingCountryToInputs(Map<String,String> dataRegistro) 
-			throws Exception {
+	public void sendDataAccordingCountryToInputs(Map<String,String> dataRegistro) {
 		dataRegistro.putAll(new Page2IdentCheckout()
 				.inputDataPorDefectoSegunPais(dataRegistro.get("cfEmail"), false, false, channel));
 	}

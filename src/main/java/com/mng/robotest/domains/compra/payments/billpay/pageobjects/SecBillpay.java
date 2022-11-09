@@ -41,9 +41,9 @@ public class SecBillpay extends PageBase {
 	 */
 	public void putBirthday(String datNac) {
 		String[] valuesDate = datNac.split("-");
-		int dia = Integer.valueOf(valuesDate[0]).intValue();
-		int mes = Integer.valueOf(valuesDate[1]).intValue();
-		int any = Integer.valueOf(valuesDate[2]).intValue();
+		int dia = Integer.parseInt(valuesDate[0]);
+		int mes = Integer.parseInt(valuesDate[1]);
+		int any = Integer.parseInt(valuesDate[2]);
 		new Select(getElement(XPATH_SELECT_BIRTHDAY)).selectByValue(String.valueOf(dia));
 		new Select(getElement(XPATH_SELECT_BIRTH_MONTH)).selectByValue(String.valueOf(mes));
 		new Select(getElement(XPATH_SELECT_BIRTH_YEAR)).selectByValue(String.valueOf(any));

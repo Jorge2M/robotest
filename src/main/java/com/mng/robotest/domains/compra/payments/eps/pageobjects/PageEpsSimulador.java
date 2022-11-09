@@ -12,9 +12,13 @@ public class PageEpsSimulador extends PageBase {
 		FIFTEEN_MINUTES(15), 
 		SIXTY_MINUTES(60);
 		
-		public int minutes;
+		private final int minutes;
 		private TypeDelay(int minutes) {
 			this.minutes = minutes;
+		}
+		
+		public int getMinutes() {
+			return minutes;
 		}
 	};
 	

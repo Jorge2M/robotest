@@ -104,7 +104,7 @@ public class Com009 extends TestBase {
         return dataPago;
     }
 
-    private void selectEnvioEstandard() throws Exception {
+    private void selectEnvioEstandard() {
     	DataPago dataPago = getDataPago();
     	Pago pagoVISA = dataTest.getPais().getPago("VISA");
     	pagoVISA.setTipoEnvio(TipoTransporte.STANDARD);

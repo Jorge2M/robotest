@@ -35,13 +35,13 @@ public class SecSelectorPrecios extends PageBase {
 
 	public int getImporteMinimo() {
 		By byImporteMinimo = By.xpath(XPATH_IMPORTE_MINIMO_SHOP);
-		Integer valueOf = Integer.valueOf(driver.findElement(byImporteMinimo).getText());
+		Integer valueOf = Integer.parseInt(driver.findElement(byImporteMinimo).getText());
 		return valueOf.intValue();
 	}
 
 	public int getImporteMaximo() {
 		By byImporteMaximo = By.xpath(XPATH_IMPORTE_MAXIMO_SHOP);
-		Integer valueOf = Integer.valueOf(driver.findElement(byImporteMaximo).getText());
+		Integer valueOf = Integer.parseInt(driver.findElement(byImporteMaximo).getText());
 		return valueOf.intValue();
 	}
 

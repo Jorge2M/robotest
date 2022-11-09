@@ -68,8 +68,7 @@ public class PedidoNavigations {
 		}
 	}
 	
-	public static void validacionListPedidosStepss(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) 
-	throws Exception {
+	public static void validacionListPedidosStepss(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) {
 		List<CheckPedido> listChecks = dataCheckPedidos.getListChecks();
 		for (DataPedido dataPedido : dataCheckPedidos.getListPedidos()) {
 			if (dataPedido.isResultadoOk()) {
