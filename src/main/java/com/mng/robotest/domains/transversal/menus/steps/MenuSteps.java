@@ -209,12 +209,11 @@ public class MenuSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkArticlesContainsLiteralsDesktop(List<String> articles) {
-		ChecksTM checks = ChecksTM.getNew();
-		
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel);
 		List<String> articlesNoValid = pageGaleriaDesktop.getArticlesNoValid(articles);
 		State stateVal = (articlesNoValid.size()<10) ? State.Warn : State.Defect;
 		
+		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			Check.make(
 				"Todos los artículos contienen alguno de los literales: <b>" + articles + "</b>",

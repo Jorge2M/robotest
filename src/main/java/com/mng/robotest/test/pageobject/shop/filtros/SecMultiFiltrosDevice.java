@@ -118,16 +118,9 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		waitLoadPage();
 	}
 	private String getXPathFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
-		String labelFiltro = stripAccents(textFiltro);
-		if (typeFiltro==FiltroMobil.Familia) {
-			return(
-				".//*[@name[contains(.,'" + labelFiltro + "')] or " + 
-				"@name[contains(.,'" + upperCaseFirst(labelFiltro) + "')]]/../span");
-		} else {
-			return (
-				".//*[text()[contains(.,'" + textFiltro + "')] or " + 
-				"text()[contains(.,'" + upperCaseFirst(labelFiltro) + "')]]");
-		}
+		return "//a[@class='filter-option']//span[" + 
+					"text()[contains(.,'" + textFiltro + "')] or " +
+					"text()[contains(.,'" + upperCaseFirst(textFiltro) + "')]]/..";
 	}
 	
 	public static String stripAccents(String text) {
