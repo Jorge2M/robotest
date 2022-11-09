@@ -635,13 +635,17 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public void clickArticulo(WebElement articulo) {
+		forceVisibilityImageArticle(articulo);
+		click(articulo).waitLoadPage(30).exec();
+	}
+	
+	private void forceVisibilityImageArticle(WebElement articulo) {
 		moveToElement(articulo);
 		if (!isVisibleImageArticle(articulo, 2)) {
 			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,+50)", "");
 			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", "");
 			isVisibleImageArticle(articulo, 2);
 		}
-		click(articulo).waitLoadPage(30).exec(); //getImagenElementArticulo(articulo);
 	}
 	
 	private boolean isVisibleImageArticle(WebElement articulo, int maxSeconds) {
@@ -654,9 +658,9 @@ public abstract class PageGaleria extends PageBase {
 		return false;
 	}
 
-	public String openArticuloPestanyaAndGo(WebElement article, AppEcom app)
-			throws Exception {
+	public String openArticuloPestanyaAndGo(WebElement article, AppEcom app) throws Exception {
 		String galeryWindowHandle = driver.getWindowHandle();
+		forceVisibilityImageArticle(article);
 		new UtilsMangoTest().openLinkInNewTab(article);
 
 		//Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible

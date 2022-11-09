@@ -557,11 +557,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public void clickSlider(WebElement articulo, TypeSlider typeSlider) {
 		hoverArticle(articulo);
 		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
-//		if (!state(State.Visible, xpathSlider).check()) {
-//			secTallas.bringSizesBack(articulo);
-//			SecCabecera.getNew(channel, app).hoverIconoBolsa();
-//			hoverArticle(articulo);
-//		}
 		waitMillis(500);
 		click(articulo).by(By.xpath(xpathSlider)).exec();
 	}
