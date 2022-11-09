@@ -112,7 +112,7 @@ public class CheckoutSteps extends StepBase {
 		return (pageCheckoutWrapper.isNoDivLoadingUntil(seconds));
 	}
 	
-	public void despliegaYValidaMetodosPago() throws Exception {
+	public void despliegaYValidaMetodosPago() {
 		despliegaYValidaMetodosPago(false);
 	}
 	

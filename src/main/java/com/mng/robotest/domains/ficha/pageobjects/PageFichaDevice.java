@@ -40,7 +40,7 @@ public class PageFichaDevice extends PageFicha {
 	private static final String XPATH_MODAL_NO_STOCK = "//div[@class='modalNoStock show']";
 	private static final String XPATH_IMAGEN_CARRUSEL_IZQ = "//div[@class='carousel-img-container']//img[@class[contains(.,'carousel-img')]]";
 
-	private String getXPathIsPage(String referencia, Channel channel) {
+	private String getXPathIsPage(String referencia) {
 		return XPATH_CONTAINER_FICHA + secDataProduct.getXPathLinReferencia(referencia);
 	}
 
@@ -78,7 +78,7 @@ public class PageFichaDevice extends PageFicha {
 	@Override
 	public boolean isFichaArticuloUntil(String refArticulo, int seconds) {
 		String refSinColor = refArticulo.substring(0,8);
-		String xpathFichaRef = getXPathIsPage(refSinColor, channel);
+		String xpathFichaRef = getXPathIsPage(refSinColor);
 		return state(Present, xpathFichaRef).wait(seconds).check();
 	}
 

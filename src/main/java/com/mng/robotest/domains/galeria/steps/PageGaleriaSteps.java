@@ -71,7 +71,7 @@ public class PageGaleriaSteps extends StepBase {
 		datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
-		String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo, app);
+		String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo);
 		PageFichaSteps pageFichaSteps = new PageFichaSteps();
 		pageFichaSteps.validaDetallesProducto(datosArticulo);
 

@@ -585,8 +585,7 @@ public class Page2IdentCheckout extends PageBase {
 	}
 	
 	public Map<String,String> inputDataPorDefectoSegunPais(
-			String emailUsr, boolean testCharNoLatinos, boolean clickPubli, Channel channel)
-					throws Exception {
+			String emailUsr, boolean testCharNoLatinos, boolean clickPubli, Channel channel) {
 		
 		Map<String,String> datosSeteados = new HashMap<>();
 		String nombreUsr = "Jorge";

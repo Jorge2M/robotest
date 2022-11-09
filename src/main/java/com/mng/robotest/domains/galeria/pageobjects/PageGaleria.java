@@ -377,7 +377,7 @@ public abstract class PageGaleria extends PageBase {
 
 	private enum AttributeArticle { NOMBRE, REFERENCIA, IMAGEN }
 
-	public List<DataArticleGalery> searchArticleRepeatedInGallery() throws Exception {
+	public List<DataArticleGalery> searchArticleRepeatedInGallery() {
 		ListDataArticleGalery list = getListArticles(Arrays.asList(
 				AttributeArticle.NOMBRE,
 				AttributeArticle.REFERENCIA));
@@ -393,7 +393,7 @@ public abstract class PageGaleria extends PageBase {
 		return (list.getArticlesRepeated());
 	}
 
-	public ListDataArticleGalery getListDataArticles() throws Exception {
+	public ListDataArticleGalery getListDataArticles() {
 		return getListArticles(Arrays.asList(
 				AttributeArticle.NOMBRE,
 				AttributeArticle.REFERENCIA));
@@ -658,7 +658,7 @@ public abstract class PageGaleria extends PageBase {
 		return false;
 	}
 
-	public String openArticuloPestanyaAndGo(WebElement article, AppEcom app) {
+	public String openArticuloPestanyaAndGo(WebElement article) {
 		String galeryWindowHandle = driver.getWindowHandle();
 		forceVisibilityImageArticle(article);
 		new UtilsMangoTest().openLinkInNewTab(article);

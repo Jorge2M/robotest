@@ -54,7 +54,7 @@ public class IDPClientService {
         return identityToken;
     }
 
-    public IdentityToken resourceOwnerToken(String key, String secret) throws Exception {
+    public IdentityToken resourceOwnerToken(String secret) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .uri(URI.create(baseUrl + OAUTH_TOKEN_ENDPOINT))

@@ -25,7 +25,7 @@ public class ErrorStorer extends EvidenceStorer {
 	protected String captureContent(StepTM step) {
 		String content = "";
 		try {
-			content = capturaErrorPage(step);
+			content = capturaErrorPage();
 		}
 		catch (Exception e) {
 			step.getSuiteParent().getLogger().warn("Exception capturin error. " + e);
@@ -36,7 +36,7 @@ public class ErrorStorer extends EvidenceStorer {
 	/**
 	 * Se realiza una captura de ./errorPage.faces pues allí se pueden encontrar los datos de la instancia
 	 */
-	private String capturaErrorPage(StepTM step) throws Exception {
+	private String capturaErrorPage() throws Exception {
 		String htmlPageError = "";
 		InputParamsTM inputParams = TestMaker.getInputParamsSuite();
 		String driverId = inputParams.getDriver();

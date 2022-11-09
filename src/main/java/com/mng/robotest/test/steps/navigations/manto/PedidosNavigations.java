@@ -52,8 +52,8 @@ public class PedidosNavigations {
 		return testCaseOpt.get();
 	}
 	
-	private static void testPedidosEnManto(DataMantoAccess dMantoAcc, List<DataPedido> listPedidos, WebDriver driver) 
-	throws Exception {
+	private static void testPedidosEnManto(
+			DataMantoAccess dMantoAcc, List<DataPedido> listPedidos, WebDriver driver) {
 		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		if (typeAccess==TypeAccess.Bat) {
 			return;

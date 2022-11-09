@@ -41,7 +41,7 @@ public class ModalDroppointsSteps extends StepBase {
 		return (!modalDroppoints.isVisible());
 	}
 	
-	public void fluxSelectDroppoint(DataPago dataPago) throws Exception {
+	public void fluxSelectDroppoint(DataPago dataPago) {
 		Pago pago = dataPago.getDataPedido().getPago();
 		DataSearchDeliveryPoint dataSearchDp = DataSearchDeliveryPoint.getInstance(pago, app, dataTest.getPais());
 		secSelectDPointSteps.searchPoblacion(dataSearchDp);

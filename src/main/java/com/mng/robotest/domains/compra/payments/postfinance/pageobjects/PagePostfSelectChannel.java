@@ -27,7 +27,7 @@ public class PagePostfSelectChannel extends PageBase {
 	}
 	
 	public boolean isPage(int seconds) {
-		return state(State.Visible, By.xpath(ChannelPF.Card.getXPath())).check();
+		return state(State.Visible, ChannelPF.Card.getXPath()).wait(seconds).check();
 	}
 	
 	public void selectChannel(ChannelPF channelPF) {

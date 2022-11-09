@@ -20,15 +20,15 @@ public class PageDetallePedidoSteps {
 	private final WebDriver driver = TestMaker.getDriverTestCase();
 	
 	public PageDetallePedidoSteps(Channel channel, AppEcom app) {
-		PageDetallePedido pageDetalle = DetallePedido.NEW.getPageObject(channel, app);
+		PageDetallePedido pageDetalle = DetallePedido.NEW.getPageObject(channel);
 		if (pageDetalle.isPage()) {
 			this.pageDetalle = pageDetalle;
 		} else {
-			pageDetalle = DetallePedido.OLD.getPageObject(channel, app);
+			pageDetalle = DetallePedido.OLD.getPageObject(channel);
 			if (pageDetalle.isPage()) {
 				this.pageDetalle = pageDetalle;
 			} else {
-				this.pageDetalle = DetallePedido.OLD_OLD.getPageObject(channel, app);
+				this.pageDetalle = DetallePedido.OLD_OLD.getPageObject(channel);
 			}
 		}
 	}

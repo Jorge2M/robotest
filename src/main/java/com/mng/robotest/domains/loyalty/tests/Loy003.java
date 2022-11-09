@@ -36,9 +36,9 @@ public class Loy003 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access();
-		int loyaltyPointsIni = LoyaltyCommons.clickMangoLikesYou(channel, app);
+		int loyaltyPointsIni = LoyaltyCommons.clickMangoLikesYou();
 		if (loyaltyPointsIni < 3000 && !isPRO()) {
-			loyaltyPointsIni = LoyaltyCommons.addLoyaltyPoints(USER, channel, app);
+			loyaltyPointsIni = LoyaltyCommons.addLoyaltyPoints(USER);
 		}
 		pageHomeLikesSteps.clickConseguirPorLikesButton();
 		

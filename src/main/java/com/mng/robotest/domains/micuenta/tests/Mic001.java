@@ -10,19 +10,16 @@ import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisDatosSteps;
 import com.mng.robotest.domains.micuenta.steps.PageSuscripcionesSteps;
 import com.mng.robotest.domains.transversal.TestBase;
-import com.mng.robotest.test.beans.IdiomaPais;
-import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.PagePrehomeSteps;
+
 
 public class Mic001 extends TestBase {
 
 	private final PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
 	private final PageMisDatosSteps pageMisDatosSteps = new PageMisDatosSteps();
 	
-	public Mic001(
-			Pais pais, IdiomaPais idioma, 
-			String userConDevolucionPeroSoloEnPRO, String passwordUserConDevolucion) {
+	public Mic001(String userConDevolucionPeroSoloEnPRO, String passwordUserConDevolucion) {
 		dataTest.setUserConnected(userConDevolucionPeroSoloEnPRO);
 		dataTest.setPasswordUser(passwordUserConDevolucion);
 		dataTest.setUserRegistered(true);

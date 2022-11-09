@@ -61,7 +61,7 @@ public class Loy005 extends TestBase {
 	}
 
 	private int clickMangoLikesYou() {
-		return LoyaltyCommons.clickMangoLikesYou(channel, app);
+		return LoyaltyCommons.clickMangoLikesYou();
 	}
 	
 	private int givePoints(int pointsRegalar, int iniPointsEmisor) {

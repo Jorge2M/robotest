@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.micuenta.pageobjects;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.conftestmaker.AppEcom;
+
 
 public interface PageDetallePedido {
 	
@@ -10,7 +10,7 @@ public interface PageDetallePedido {
 		OLD,
 		NEW;
 		
-		public PageDetallePedido getPageObject(Channel channel, AppEcom app) {
+		public PageDetallePedido getPageObject(Channel channel) {
 			switch (this) {
 			case OLD_OLD:
 				return (new PageDetalleCompraOldOld());

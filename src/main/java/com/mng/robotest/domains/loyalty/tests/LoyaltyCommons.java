@@ -1,10 +1,9 @@
 package com.mng.robotest.domains.loyalty.tests;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
+
 
 public class LoyaltyCommons {
 	
@@ -13,15 +12,15 @@ public class LoyaltyCommons {
 
 	private LoyaltyCommons() {}
 	
-	public static int clickMangoLikesYou(Channel channel, AppEcom app) {
+	public static int clickMangoLikesYou() {
 		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
 		return secMenusUserSteps.clickMenuMangoLikesYou();
 	}
 	
-	public static int addLoyaltyPoints(User user, Channel channel, AppEcom app) {
+	public static int addLoyaltyPoints(User user) {
 		ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
 		client.addLoyaltyPoints(user, 25000);
-		return clickMangoLikesYou(channel, app);
+		return clickMangoLikesYou();
 	}
 
 }

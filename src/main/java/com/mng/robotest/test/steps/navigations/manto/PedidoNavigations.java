@@ -83,8 +83,8 @@ public class PedidoNavigations {
 		}
 	}	
 	
-	public static void validaPedidoStepss(DataPedido dataPedido, List<CheckPedido> listChecks, AppEcom app, WebDriver driver) 
-			throws Exception {
+	public static void validaPedidoStepss(
+			DataPedido dataPedido, List<CheckPedido> listChecks, AppEcom app, WebDriver driver) {
 		new PageSelTdaMantoSteps().selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais());
 		if (listChecks.contains(CheckPedido.CONSULTAR_BOLSA)) {
 			consultarBolsaSteps(dataPedido, app, driver);

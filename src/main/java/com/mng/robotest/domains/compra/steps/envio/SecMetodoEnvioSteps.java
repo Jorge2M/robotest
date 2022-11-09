@@ -63,7 +63,7 @@ public class SecMetodoEnvioSteps extends StepBase {
 	}
 	
 
-	public void selectMetodoEnvio(DataPago dataPago, String nombrePago) throws Exception {
+	public void selectMetodoEnvio(DataPago dataPago, String nombrePago) {
 		alterTypeEnviosAccordingContext(dataPago);
 		Pago pago = dataPago.getDataPedido().getPago();
 		TipoTransporte tipoTransporte = pago.getTipoEnvioType(app);

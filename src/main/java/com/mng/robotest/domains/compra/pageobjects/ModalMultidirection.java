@@ -66,7 +66,7 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	public Optional<Direction> getDirection(String address, int seconds) {
-		for (int i=0; i<5; i++) {
+		for (int i=0; i<seconds; i++) {
 			Optional<Direction> direction = getDirection(address);
 			if (direction.isPresent()) {
 				return direction;

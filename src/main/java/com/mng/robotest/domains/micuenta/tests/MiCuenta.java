@@ -35,7 +35,7 @@ public class MiCuenta implements Serializable {
 	public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
 			throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
-		new Mic001(pais, idioma, userConDevolucionPeroNoEnPRO, passwordUserConDevolucion).execute();
+		new Mic001(userConDevolucionPeroNoEnPRO, passwordUserConDevolucion).execute();
 	}
 	
 	@Test (
