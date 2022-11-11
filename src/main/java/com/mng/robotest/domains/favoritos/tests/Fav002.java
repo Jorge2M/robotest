@@ -53,7 +53,7 @@ public class Fav002 extends TestBase {
 		} else {
 			clickMenu(new MenuWeb
 					.Builder("Albornoces")
-					.linea(home)
+					.linea(HOME)
 					.group(BANO).build());
 		}
 		LocationArticle article1 = LocationArticle.getInstanceInCatalog(1);

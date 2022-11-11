@@ -89,7 +89,7 @@ public class Reg003 extends TestBase {
 	}
 	
 	private void secondPageRegister() {
-		boolean paisConNinos = dataTest.getPais().getShoponline().stateLinea(LineaType.nina, app)==ThreeState.TRUE;
+		boolean paisConNinos = dataTest.getPais().getShoponline().stateLinea(LineaType.NINA, app)==ThreeState.TRUE;
 		pageRegistroSegundaSteps.setDataAndLineasRandom("23/4/1974", paisConNinos, 2, dataRegister);
 		if (paisConNinos) {
 			ListDataNinos listaNinos = new ListDataNinos();

@@ -38,8 +38,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			"  - El resto de datos específicos para el país \"#{pais.getNombre_pais()}\"", 
 		expected=
 			"No aparece ningún mensaje de dato incorrecto")
-	public Map<String,String> sendDataAccordingCountryToInputs(String emailNonExistent, boolean clickPubli) 
-			throws Exception {
+	public Map<String,String> sendDataAccordingCountryToInputs(String emailNonExistent, boolean clickPubli) {
 		Map<String,String> dataSended = new HashMap<>();
 		dataSended = pageRegistroIni.sendDataAccordingCountryToInputs(emailNonExistent, clickPubli, channel);
 		validateNotAreErrorMessageInCorrectFields();

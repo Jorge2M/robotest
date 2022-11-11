@@ -59,8 +59,7 @@ public class PedidoNavigations {
 		return testCaseOpt.get();
 	}
 	
-	private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) 
-			throws Exception {
+	private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) {
 		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccess.Bat) {
 			PageLoginMantoSteps.login(dMantoAcc.getUrlManto(), dMantoAcc.getUserManto(), dMantoAcc.getPassManto(), driver);

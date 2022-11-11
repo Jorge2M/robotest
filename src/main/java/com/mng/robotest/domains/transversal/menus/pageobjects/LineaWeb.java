@@ -10,13 +10,13 @@ import com.mng.robotest.domains.transversal.PageBase;
 public class LineaWeb extends PageBase implements LineaActions {
 
 	public enum LineaType { 
-		she("mujer", "outlet", "she", "she", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
-		he("hombre", "outletH", "he", "he", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
-		nina("ninas", "outletA", "kidsA", "nina", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
-		nino("ninos", "outletO", "kidsO", "nino", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
-		kids("kids", "outletX", "kids", "kids", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)),
-		teen("teen", "?", "teen", "teen", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)),
-		home("home", "home", "home", "home", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet));
+		SHE("mujer", "outlet", "she", "she", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
+		HE("hombre", "outletH", "he", "he", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
+		NINA("ninas", "outletA", "kidsA", "nina", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
+		NINO("ninos", "outletO", "kidsO", "nino", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)), 
+		KIDS("kids", "outletX", "kids", "kids", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)),
+		TEEN("teen", "?", "teen", "teen", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet)),
+		HOME("home", "home", "home", "home", Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet));
 		
 		String literal = "";
 		String sufixOutlet = "";
@@ -32,14 +32,14 @@ public class LineaWeb extends PageBase implements LineaActions {
 		}
 		
 		public String getLiteral(AppEcom app) {
-			if (app!=AppEcom.outlet && (this==nina || this==nino)) {
+			if (app!=AppEcom.outlet && (this==NINA || this==NINO)) {
 				return "kids";
 			}
 			return this.literal;
 		}
 		
 		public String name(AppEcom app) {
-			if (app!=AppEcom.outlet && (this==nina || this==nino)) {
+			if (app!=AppEcom.outlet && (this==NINA || this==NINO)) {
 				return "kids";
 			}
 			return name();
@@ -50,7 +50,7 @@ public class LineaWeb extends PageBase implements LineaActions {
 		}
 		
 		public String getSufixOutlet(Channel channel) {
-			if (this.compareTo(LineaType.she)==0 &&
+			if (this.compareTo(LineaType.SHE)==0 &&
 				channel.isDevice()) {
 				return "outlet ";
 			}
@@ -80,18 +80,17 @@ public class LineaWeb extends PageBase implements LineaActions {
 					return lineaType;
 				}
 			}
-			
 			return null;
 		} 
 	}	
 	
 	public enum SublineaType { 
-		teen_nina("teenA", "teenA", "nina", LineaType.teen),
-		teen_nino("teenO", "teenO", "nino", LineaType.teen),
-		nina_nina("nina", "nina", "nina", LineaType.nina), 
-		nina_bebe("babyNina", "babyNina", "bebe", LineaType.nina),
-		nino_nino("nino", "nino", "nino", LineaType.nino), 
-		nino_bebe("babyNino", "babyNino", "bebe", LineaType.nino); 
+		TEEN_NINA("teenA", "teenA", "nina", LineaType.TEEN),
+		TEEN_NINO("teenO", "teenO", "nino", LineaType.TEEN),
+		NINA_NINA("nina", "nina", "nina", LineaType.NINA), 
+		NINA_BEBE("babyNina", "babyNina", "bebe", LineaType.NINA),
+		NINO_NINO("nino", "nino", "nino", LineaType.NINO), 
+		NINO_BEBE("babyNino", "babyNino", "bebe", LineaType.NINO); 
 		
 		String idShop = "";
 		String idOutlet = "";
@@ -105,12 +104,10 @@ public class LineaWeb extends PageBase implements LineaActions {
 		}
 		
 		public String getId(AppEcom app) {
-			switch (app) {
-			case outlet:
+			if (app==AppEcom.outlet) {
 				return idOutlet;
-			default:
-				return idShop;
 			}
+			return idShop;
 		}
 		
 		public String getText() {

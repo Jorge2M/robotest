@@ -36,7 +36,7 @@ public class FactoryMenus {
 	private static MenuWeb getVestidosShe() {
 		return new MenuWeb
 			.Builder("Vestidos")
-			.linea(LineaType.she)
+			.linea(LineaType.SHE)
 			.group(GroupType.PRENDAS)
 			.articles(Arrays.asList("Vestido", "Pichi", "Peto", "Mono", "Caftán", "Blusón"))
 			.subMenusShop(Arrays.asList("largos", "cortos", "midi"))
@@ -47,7 +47,7 @@ public class FactoryMenus {
 	private static MenuWeb getCamisasBasicasShe() {
 		return new MenuWeb
 			.Builder("Camisas")
-			.linea(LineaType.she)
+			.linea(LineaType.SHE)
 			.group(GroupType.PRENDAS)
 			.articles(Arrays.asList(
 					"Camisa", "Blusa", "Bluson", "Blusón", "Top", "Bustier", "Body", "Camisero", 
@@ -61,7 +61,7 @@ public class FactoryMenus {
 	private static MenuWeb getAbrigosShe() {
 		return new MenuWeb
 			.Builder("Abrigos")
-			.linea(LineaType.she)
+			.linea(LineaType.SHE)
 			.group(GroupType.PRENDAS)
 			.articles(Arrays.asList("Anorak", "Abrigo", "Gabardina", "Trench", "Parka", "Chubasquero"))
 			.subMenus(Arrays.asList("abrigos", "gabardinas"))
@@ -73,7 +73,7 @@ public class FactoryMenus {
 	private static MenuWeb getCardigansJerseisJerseisShe() {
 		return new MenuWeb
 			.Builder("Cardigans y jerséis")
-			.linea(LineaType.she)
+			.linea(LineaType.SHE)
 			.group(GroupType.PRENDAS)
 			.articles(Arrays.asList("Jersey", "Chaleco", "Top", "Sudadera", "Cárdigan", "Cardigan"))
 			.subMenus(Arrays.asList("jerséis", "cárdigans"))
@@ -84,7 +84,7 @@ public class FactoryMenus {
 	private static MenuWeb getAbrigosHe() {
 		return new MenuWeb
 			.Builder("Abrigos")
-			.linea(LineaType.he)
+			.linea(LineaType.HE)
 			.group(GroupType.PRENDAS)
 			.articles(Arrays.asList("Abrigo", "Anorak"))
 			.subMenus(Arrays.asList("abrigos", "anoraks"))

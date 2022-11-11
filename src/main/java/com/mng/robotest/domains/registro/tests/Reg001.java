@@ -31,7 +31,7 @@ public class Reg001 extends TestBase {
 			"08720",
 			"23/04/1974",
 			GenderOption.MASCULINO,
-			Arrays.asList(LineaType.she, LineaType.he, LineaType.kids));
+			Arrays.asList(LineaType.SHE, LineaType.HE, LineaType.KIDS));
 
 	@Override
 	public void execute() throws Exception {

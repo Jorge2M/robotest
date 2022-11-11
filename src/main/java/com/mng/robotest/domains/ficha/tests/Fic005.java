@@ -71,7 +71,7 @@ public class Fic005 extends TestBase {
 		
 		Optional<GarmentCatalog> articlePersonalizable = new GetterProducts
 				.Builder(codigoPais, app, driver)
-				.linea(LineaType.he)
+				.linea(LineaType.HE)
 				.menu(Menu.CAMISAS_HE)
 				.numProducts(5)
 				.filter(FilterType.PERSONALIZABLE)

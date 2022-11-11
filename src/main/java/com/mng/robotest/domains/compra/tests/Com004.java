@@ -52,7 +52,7 @@ public class Com004 extends TestBase {
 	}
 	
 	private void selectFooterLinkChequeRegalo() {
-		new MenuSteps().clickLinea(she);
+		new MenuSteps().clickLinea(SHE);
 		new SecFooterSteps().clickLinkFooter(FooterLink.CHEQUE_REGALO, false);
 	}	
 	

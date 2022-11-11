@@ -22,7 +22,7 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	}
 	
 	public static final List<LineaType> ALL_LINEAS = Arrays.asList(
-			LineaType.she, LineaType.he, LineaType.kids, LineaType.home); 
+			LineaType.SHE, LineaType.HE, LineaType.KIDS, LineaType.HOME); 
 	
 	private static final String XPATH_MODAL_CONTENT = "//div[@id[contains(.,'registerModal')]]";
 	private static final String XPATH_INPUT_NOMBRE = "//input[@id='name']";

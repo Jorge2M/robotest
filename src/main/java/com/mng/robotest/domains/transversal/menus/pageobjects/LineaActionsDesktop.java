@@ -33,11 +33,11 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 		if (app==AppEcom.outlet) {
 			return lineaType.getSufixOutlet(channel);
 		}
-		return lineaType.name(app);
+		return lineaType.name(app).toLowerCase();
 	}	
 	
 	private String getXPathSublinea() {
-		if (sublineaType==SublineaType.teen_nino) {
+		if (sublineaType==SublineaType.TEEN_NINO) {
 			//Existe un problema en la página y a veces es TeenO y otras veces TeenP
 			return XPATH_SUBLINEA_WITH_2TAG
 					.replace(TAG_ID_SUBLINEA, sublineaType.getId(app))

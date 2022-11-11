@@ -53,7 +53,7 @@ public class Vtf001 extends TestBase {
 	private List<Article> getArticlesAvailable(int numProductsMax, WebDriver driver) throws Exception {
 		Pais espana = PaisGetter.from(PaisShop.ESPANA);
 		GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigo_alf(), AppEcom.votf, driver).
-				linea(LineaType.she).
+				linea(LineaType.SHE).
 				menu(Menu.SHORTS).
 				numProducts(numProductsMax).
 				pagina(1).

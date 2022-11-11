@@ -94,7 +94,7 @@ public class Com001 extends TestBase {
 		}
 		
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
-			.linea(home)
+			.linea(HOME)
 			.menusCandidates(Arrays.asList(
 					Menu.ALBORNOCES, 
 					Menu.TOALLAS, 
@@ -111,7 +111,7 @@ public class Com001 extends TestBase {
 		}
 		
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
-			.linea(she)
+			.linea(SHE)
 			.menusCandidates(Arrays.asList(
 					Menu.SUJETADORES, 
 					Menu.BRAGUITAS, 

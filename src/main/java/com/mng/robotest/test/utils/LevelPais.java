@@ -27,17 +27,17 @@ public enum LevelPais {
 	
 	public int getNumBannersTest(LineaType linea) {
 		switch (linea) {
-		case she:
+		case SHE:
 			return numBannersShe;
-		case he:
+		case HE:
 			return numBannersHe;
-		case nina:
+		case NINA:
 			return numBannersNina;
-		case nino:
+		case NINO:
 			return numBannersNino;
-		case teen:
+		case TEEN:
 			return numBannersTeen;
-		case home:
+		case HOME:
 			return numBannersHome;
 		default:
 			return numBannersHome;

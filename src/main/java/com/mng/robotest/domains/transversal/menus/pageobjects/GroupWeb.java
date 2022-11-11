@@ -14,31 +14,31 @@ import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.Li
 
 public class GroupWeb extends PageBase {
 	
-	private static final List<LineaType> ALL_LINES = Arrays.asList(she, he, teen, nina, nino, home);
-	private static final List<LineaType> ALL_EXCEPT_HOME = Arrays.asList(she, he, teen, nina, nino); 
-	private static final List<LineaType> SHE = Arrays.asList(she);
-	private static final List<LineaType> HE = Arrays.asList(he);
-	private static final List<LineaType> HOME = Arrays.asList(home);
+	private static final List<LineaType> ALL_LINES = Arrays.asList(SHE, HE, TEEN, NINA, NINO, HOME);
+	private static final List<LineaType> ALL_EXCEPT_HOME = Arrays.asList(SHE, HE, TEEN, NINA, NINO); 
+	private static final List<LineaType> SHE_LINE = Arrays.asList(SHE);
+	private static final List<LineaType> HE_LINE = Arrays.asList(HE);
+	private static final List<LineaType> HOME_LINE = Arrays.asList(HOME);
 	
 	public enum GroupResponse { MENUS, ARTICLES, MORE } 
 	
 	public enum GroupType {
 		NEW_NOW("nuevo", ARTICLES, ALL_LINES),
-		SELECTION("SELECTION", ARTICLES, SHE),
+		SELECTION("SELECTION", ARTICLES, SHE_LINE),
 		PRENDAS("prendas", MENUS, ALL_EXCEPT_HOME), 
 		ACCESORIOS("accesorios", MENUS, ALL_EXCEPT_HOME), 
-		TALLAS_PLUS("violeta", ARTICLES, SHE), 
-		TRAJES("sastreria", MENUS, HE),
-		BASICOS("basics", ARTICLES, HOME),
-		DORMITORIO("dormitorio", MENUS, HOME),
-		BANO("bano", MENUS, HOME), 
-		SALON("salon", MENUS, HOME),
-		COCINA_Y_COMEDOR("cociona", MENUS, HOME),
-		ROPA_CASA("ropa_casa", MENUS, HOME),
-		VELAS_Y_AROMAS("velas_y_aromas", MENUS, HOME),
+		TALLAS_PLUS("violeta", ARTICLES, SHE_LINE), 
+		TRAJES("sastreria", MENUS, HE_LINE),
+		BASICOS("basics", ARTICLES, HOME_LINE),
+		DORMITORIO("dormitorio", MENUS, HOME_LINE),
+		BANO("bano", MENUS, HOME_LINE), 
+		SALON("salon", MENUS, HOME_LINE),
+		COCINA_Y_COMEDOR("cociona", MENUS, HOME_LINE),
+		ROPA_CASA("ropa_casa", MENUS, HOME_LINE),
+		VELAS_Y_AROMAS("velas_y_aromas", MENUS, HOME_LINE),
 		PROMOCION("promocionado", MENUS, ALL_LINES), 
-		INTIMISSIMI("intimissimi", MENUS, SHE), 
-		RITUALS("rituals", MENUS, SHE),
+		INTIMISSIMI("intimissimi", MENUS, SHE_LINE), 
+		RITUALS("rituals", MENUS, SHE_LINE),
 		COLECCIONES("colecciones", MORE, ALL_EXCEPT_HOME),
 		DESTACADOS("destacados", MORE, ALL_LINES);
 	
@@ -78,7 +78,7 @@ public class GroupWeb extends PageBase {
 	private final GroupType group;
 	
 	public GroupWeb(GroupType group) {
-		this.linea = LineaType.she;
+		this.linea = LineaType.SHE;
 		this.sublinea = null;
 		this.group = group; 
 	}

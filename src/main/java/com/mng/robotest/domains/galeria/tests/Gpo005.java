@@ -23,7 +23,7 @@ public class Gpo005 extends TestBase {
 			clickMenu(CARDIGANS_Y_JERSEIS_SHE);
 		} else {
 			clickGroup(NEW_NOW);
-			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.she, null);
+			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);
 		}
 		
 		if (!channel.isDevice()) {
@@ -31,7 +31,7 @@ public class Gpo005 extends TestBase {
 		}
 
 		if (app!=AppEcom.outlet && !channel.isDevice()) {
-			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.she, null);
+			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);
 		}	
 		
 		clickMenu(VESTIDOS_SHE);

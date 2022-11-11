@@ -22,16 +22,16 @@ public class PageSelectLineaVOTFSteps extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el banner correspondiente a SHE",
-			pageSelectLineaVOTF.isBannerPresent(LineaType.she), State.Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.SHE), State.Warn);
 		checks.add(
 			"Aparece el banner correspondiente a MAN",
-			pageSelectLineaVOTF.isBannerPresent(LineaType.he), State.Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.HE), State.Warn);
 		checks.add(
 			"Aparece el banner correspondiente a NIÑAS",
-			pageSelectLineaVOTF.isBannerPresent(LineaType.nina), State.Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.NINA), State.Warn);
 		checks.add(
 			"Aparece el banner correspondiente a NIÑOS",
-			pageSelectLineaVOTF.isBannerPresent(LineaType.nino), State.Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.NINO), State.Warn);
 		return checks;
 	}
 	
@@ -39,8 +39,8 @@ public class PageSelectLineaVOTFSteps extends StepBase {
 		description="Seleccionar el #{umMenu}o menu de Mujer y finalmente seleccionar el logo de Mango",
 		expected="Aparece la página inicial de SHE")
 	public void selectMenuAndLogoMango(int numMenu) {
-		pageSelectLineaVOTF.clickBanner(LineaType.she);
-		pageSelectLineaVOTF.clickMenu(LineaType.she, numMenu);
+		pageSelectLineaVOTF.clickBanner(LineaType.SHE);
+		pageSelectLineaVOTF.clickMenu(LineaType.SHE, numMenu);
 		
 		SecCabecera.getNew(channel, AppEcom.votf).clickLogoMango();
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dataTest.getPais()));

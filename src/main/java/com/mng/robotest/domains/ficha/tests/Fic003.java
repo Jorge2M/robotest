@@ -34,8 +34,8 @@ public class Fic003 extends TestBase {
 		closeModalNewsLetterIfExists();
 		clickMenu(new MenuWeb
 				.Builder("Pantalones")
-				.linea(nina)
-				.sublinea(nina_nina).build());
+				.linea(NINA)
+				.sublinea(NINA_NINA).build());
 		
 		DataFichaArt dataArtOrigin = selectFirstArticleInGalery();
 
@@ -60,7 +60,7 @@ public class Fic003 extends TestBase {
 			}
 		} else {
 			if (TypePanel.KC_SAFETY.getListApps().contains(app)) {
-				pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(nina);
+				pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(NINA);
 			}
 		}
 	}

@@ -35,7 +35,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		checkScrollToDescription();
 		checkBreadCrumbs();
 		if (TypePanel.KC_SAFETY.getListApps().contains(app) &&
-			(lineaType==LineaType.nina || lineaType==LineaType.nino)) {
+			(lineaType==LineaType.NINA || lineaType==LineaType.NINO)) {
 			checkKcSafety();
 		}
 	}

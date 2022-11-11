@@ -13,7 +13,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	private final MenuWeb menu;
 	
 	private String getXPathMenu() {
-		String idLinea = menu.getLinea().name();
+		String idLinea = menu.getLinea().name().toLowerCase();
 		if (menu.getSublinea()!=null) {
 			idLinea = menu.getSublinea().getId(app);
 		}

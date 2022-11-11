@@ -52,8 +52,8 @@ public class AccesoNavigations extends StepBase {
 	
 	public void goFromLineasToMultimarcaVOTF() {
 		PageSelectLineaVOTF pageSelectLineaVOTF = new PageSelectLineaVOTF();
-		pageSelectLineaVOTF.clickBanner(LineaType.she);
-		pageSelectLineaVOTF.clickMenu(LineaType.she, 1);
+		pageSelectLineaVOTF.clickBanner(LineaType.SHE);
+		pageSelectLineaVOTF.clickMenu(LineaType.SHE, 1);
 		
 		//Cuando se selecciona el icono de Mango deja de tener efecto el forzado del TestAB de la cabecera que habíamos ejecutado previamente
 		SecCabecera.getNew(channel, AppEcom.votf).clickLogoMango();

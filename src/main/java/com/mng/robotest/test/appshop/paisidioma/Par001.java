@@ -94,10 +94,10 @@ public class Par001 extends TestBase {
 		String menu = "";
 		GroupType groupType = GroupType.PRENDAS;
 		switch (lineaType) {
-		case nina, nino:
+		case NINA, NINO:
 			menu = "camisas";
 			break;
-		case home:
+		case HOME:
 			groupType = GroupType.DORMITORIO;
 			menu = "mantas_dormitorio";
 			break;

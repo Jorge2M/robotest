@@ -31,7 +31,7 @@ public class GetterProductsIT {
 	private static final Pais espana = PaisGetter.from(PaisShop.ESPANA);	
 	
 	private static final Builder getterProductsBuilder = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigo_alf(), AppEcom.shop, null)
-			.linea(she)
+			.linea(SHE)
 			.menu(Menu.SHORTS)
 			.numProducts(numProducts)
 			.pagina(1)

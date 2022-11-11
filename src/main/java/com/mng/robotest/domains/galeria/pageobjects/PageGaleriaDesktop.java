@@ -194,7 +194,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		LineaType lineaType = LineaType.getLineaType(idLinCarrusel);
 		return 
 		    (lineaType!=null && 
-		    (lineaType==LineaType.nina || lineaType==LineaType.nino) &&
+		    (lineaType==LineaType.NINA || lineaType==LineaType.NINO) &&
 		    (state(Present, ".//a[@href[contains(.,'" + lineaType.getId2() + "')]]").check()));
 	}
 	

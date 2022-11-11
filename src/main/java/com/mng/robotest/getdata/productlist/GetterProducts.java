@@ -272,10 +272,10 @@ public class GetterProducts {
 		
 		if (menu.getGaleria()!=null && "".compareTo(menu.getGaleria())!=0) {
 			webTarget = webTarget
-				.path("sections_" + lineaType.name() + "." + menu.getSeccion() + "_" + lineaType.name());
+				.path("sections_" + lineaType.name().toLowerCase() + "." + menu.getSeccion() + "_" + lineaType.name());
 		} else {
 			webTarget = webTarget
-				.path("sections_" + lineaType.name() + "." + menu.getSeccion());			
+				.path("sections_" + lineaType.name().toLowerCase() + "." + menu.getSeccion());			
 		}
 		
 		if (menu.getFamilia()!=null && "".compareTo(menu.getFamilia())!=0) {
@@ -284,7 +284,7 @@ public class GetterProducts {
 				tag = "accesorio";
 			}
 			webTarget = webTarget
-				.queryParam("idSubSection", menu.getGaleria() + "_" + lineaType.name())
+				.queryParam("idSubSection", menu.getGaleria() + "_" + lineaType.name().toLowerCase())
 				.queryParam("menu", tag + ";" + menu.getFamilia());
 		}
 		
@@ -317,8 +317,8 @@ public class GetterProducts {
 				.path(codigoPaisAlf)
 				.path(codigoPaisAlf.toLowerCase())
 				.path(getLineaPath())
-				.path("sections_" + lineaType.name() + "_Perfumes_imssm." + menu.getSeccion() + "_" + lineaType.name())
-				.queryParam("idSubSection", menu.getGaleria() + "_" + lineaType.name())
+				.path("sections_" + lineaType.name() + "_Perfumes_imssm." + menu.getSeccion() + "_" + lineaType.name().toLowerCase())
+				.queryParam("idSubSection", menu.getGaleria() + "_" + lineaType.name().toLowerCase())
 				.queryParam("menu", "familia;" + menu.getFamilia())
 				.queryParam("pageNum", pagina)
 				.queryParam("columnsPerRow", "1")
@@ -395,7 +395,7 @@ public class GetterProducts {
 		if (app==AppEcom.outlet) {
 			return "outlet";
 		} else {
-			return lineaType.name();
+			return lineaType.name().toLowerCase();
 		}
 	}
 	
@@ -404,7 +404,7 @@ public class GetterProducts {
 		private final String codigoPaisAlf;
 		private final AppEcom app;
 		private final WebDriver driver;
-		private LineaType lineaType = LineaType.she;
+		private LineaType lineaType = LineaType.SHE;
 		private Integer numProducts = 40;
 		private Integer minProducts = 3;
 		private String codigoIdiomAlf = "";

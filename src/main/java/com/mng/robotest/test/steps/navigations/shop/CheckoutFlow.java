@@ -131,7 +131,7 @@ public class CheckoutFlow extends StepBase {
 		secBolsaSteps.altaListaArticulosEnBolsa(listArticles);
 	}
 	
-	private void testFromIdentificationToMetodosPago() throws Exception {
+	private void testFromIdentificationToMetodosPago() {
 		if (dataTest.isUserRegistered()) {
 			dataPago.getDataPedido().setEmailCheckout(dataTest.getUserConnected());
 		} else {
@@ -144,7 +144,7 @@ public class CheckoutFlow extends StepBase {
 		}
 	}
 	
-	private void testFromIdentToCheckoutIni() throws Exception {
+	private void testFromIdentToCheckoutIni() {
 		boolean validaCharNoLatinos = (pais!=null && dataTest.getPais().getDireccharnolatinos().check() && app!=AppEcom.votf);
 		String emailCheckout = UtilsMangoTest.getEmailForCheckout(pais, dataPago.getFTCkout().emailExists); 
 		dataPago.getDataPedido().setEmailCheckout(emailCheckout);

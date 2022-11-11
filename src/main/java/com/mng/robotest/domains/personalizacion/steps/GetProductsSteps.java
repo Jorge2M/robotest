@@ -22,7 +22,7 @@ public class GetProductsSteps extends StepBase {
 	public void callProductListService(LineaType linea, String seccion, String galeria, String familia) throws Exception {
 		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 			.method(MethodGetter.WEBDRIVER)
-			.linea(LineaType.she)
+			.linea(LineaType.SHE)
 			.menu(Menu.VAQUEROS)
 			.build();
 		

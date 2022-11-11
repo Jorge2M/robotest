@@ -129,7 +129,7 @@ public class MenuWeb extends PageBase implements MenuActions {
 		
 		public Builder(String menu) {
 			this.menu = menu;
-			this.linea = LineaType.she;
+			this.linea = LineaType.SHE;
 			this.group = GroupType.PRENDAS;
 		}
 		

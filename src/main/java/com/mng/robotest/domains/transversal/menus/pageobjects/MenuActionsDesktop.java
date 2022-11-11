@@ -16,7 +16,7 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}
 	
 	private String getXPathMenuStandard() {
-		String idLinea = menu.getLinea().name();
+		String idLinea = menu.getLinea().name().toLowerCase();
 		if (menu.getSublinea()!=null) {
 			idLinea = menu.getSublinea().getId(app);
 		}

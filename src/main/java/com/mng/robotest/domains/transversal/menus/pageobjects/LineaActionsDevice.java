@@ -39,19 +39,19 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	
 	private String getXPathLineaLink() throws IllegalArgumentException {
 		switch (lineaType) {
-		case she: 
+		case SHE: 
 			return XPATH_LINK_LINEA_MUJER;
-		case he: 
+		case HE: 
 			return XPATH_LINK_LINEA_HOMBRE;
-		case nina:
+		case NINA:
 			return XPATH_LINK_LINEA_NINA;
-		case nino: 
+		case NINO: 
 			return XPATH_LINK_LINEA_NINO;
-		case teen:
+		case TEEN:
 			return XPATH_LINK_LINEA_TEEN;
-		case kids: 
+		case KIDS: 
 			return XPATH_LINK_LINEA_KIDS;
-		case home:
+		case HOME:
 			return XPATH_LINK_LINEA_HOME;
 		default:
 			throw new IllegalArgumentException("The line " + lineaType + " is not present in the movil channel");
@@ -60,17 +60,17 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	
 	private String getXPathSublineaLink() {
 		switch (sublineaType) {
-		case nina_nina:
+		case NINA_NINA:
 			return XPATH_LINK_SUBLINEA_NINA;
-		case teen_nina:
+		case TEEN_NINA:
 			return XPATH_LINK_SUBLINEA_TEEN_NINA;
-		case nina_bebe:
+		case NINA_BEBE:
 			return XPATH_LINK_SUBLINEA_BEBE_NINA;
-		case nino_nino:
+		case NINO_NINO:
 			return XPATH_LINK_SUBLINEA_NINO;
-		case teen_nino:
+		case TEEN_NINO:
 			return XPATH_LINK_SUBLINEA_TEEN_NINO;
-		case nino_bebe:
+		case NINO_BEBE:
 		default:
 			return XPATH_LINK_SUBLINEA_BEBE_NINO;
 		}

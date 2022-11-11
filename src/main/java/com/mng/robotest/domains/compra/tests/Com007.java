@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.compra.tests;
 
-import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.she;
+import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.SHE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -64,7 +64,7 @@ public class Com007 extends TestBase {
 	}	
 
 	private void selectFooterLinkChequeRegalo() {
-		new MenuSteps().clickLinea(she);
+		new MenuSteps().clickLinea(SHE);
 		new SecFooterSteps().clickLinkFooter(FooterLink.CHEQUE_REGALO_OLD, false);
 	}
 

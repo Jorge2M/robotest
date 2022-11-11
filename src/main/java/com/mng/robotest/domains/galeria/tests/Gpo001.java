@@ -35,7 +35,7 @@ public class Gpo001 extends TestBase {
 		checkScroll();		
 	}
 
-	private void changeTwoToFourColumns() throws Exception {
+	private void changeTwoToFourColumns() {
 		PageGaleriaDesktop pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.MENU, channel);
 		ListDataArticleGalery listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
 		listArticlesGaleria2Cols = pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO, listArticlesGaleria2Cols);

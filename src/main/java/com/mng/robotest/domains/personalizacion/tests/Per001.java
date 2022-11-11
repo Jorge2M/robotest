@@ -16,7 +16,7 @@ public class Per001 extends TestBase {
 
 	private void selectCamisasAndCheckProducts() throws Exception {
 		clickMenu("Camisas");
-		new GetProductsSteps().callProductListService(LineaType.she, "prendas", "camisas", "14");
+		new GetProductsSteps().callProductListService(LineaType.SHE, "prendas", "camisas", "14");
 	}
 
 	private void scrollAndCheckDuplicatedProducts() throws Exception {

@@ -87,7 +87,7 @@ public class Fic002 extends TestBase {
 			pageFichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
 		}
 
-		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(LineaType.she);
+		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(LineaType.SHE);
 		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.getCodigoPais());
 	}
 

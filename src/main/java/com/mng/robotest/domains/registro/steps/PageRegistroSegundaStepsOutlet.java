@@ -28,19 +28,19 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 		String lineasComaSeparated = "";
 		int numLineas = 0;
-		if (pais.getShoponline().stateLinea(LineaType.she, app)==ThreeState.TRUE) {
-			lineasComaSeparated = LineaType.she.name();
+		if (pais.getShoponline().stateLinea(LineaType.SHE, app)==ThreeState.TRUE) {
+			lineasComaSeparated = LineaType.SHE.name();
 			numLineas+=1;
 		}
 		
-		if (pais.getShoponline().stateLinea(LineaType.he, app)==ThreeState.TRUE) {
-			lineasComaSeparated+="," + LineaType.he.name();
+		if (pais.getShoponline().stateLinea(LineaType.HE, app)==ThreeState.TRUE) {
+			lineasComaSeparated+="," + LineaType.HE.name();
 			numLineas+=1;
 		}
 		
-		if (pais.getShoponline().stateLinea(LineaType.nina, app)==ThreeState.TRUE ||
-			pais.getShoponline().stateLinea(LineaType.nino, app)==ThreeState.TRUE) {
-			lineasComaSeparated+="," + LineaType.kids.name();
+		if (pais.getShoponline().stateLinea(LineaType.NINA, app)==ThreeState.TRUE ||
+			pais.getShoponline().stateLinea(LineaType.NINO, app)==ThreeState.TRUE) {
+			lineasComaSeparated+="," + LineaType.KIDS.name();
 			numLineas+=1;
 		}
 		

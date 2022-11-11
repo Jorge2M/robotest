@@ -41,7 +41,7 @@ public class MenusWebAllDevice extends PageBase implements MenusWebAll {
 	}
 	
 	private boolean isMenuOpen(int seconds) {
-		return (new LineaWeb(LineaType.she).isLineaPresent(seconds));
+		return (new LineaWeb(LineaType.SHE).isLineaPresent(seconds));
 	}
 	private boolean isMenuClose(int seconds) {
 		for (int i=0; i<seconds; i++) {
