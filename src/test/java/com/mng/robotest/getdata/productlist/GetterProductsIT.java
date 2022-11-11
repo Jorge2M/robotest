@@ -53,7 +53,7 @@ public class GetterProductsIT {
 		List<GarmentCatalog> listProducts = getterProducts.getAll();
 		
 		//Then
-		assertEquals(listProducts.size(), numProducts);
+		assertEquals(numProducts, listProducts.size());
 		assertTrue(listProducts.get(0).getStock()>0);
 		assertTrue(isListSortedByStock(listProducts));
 	}

@@ -272,7 +272,7 @@ public class GetterProducts {
 		
 		if (menu.getGaleria()!=null && "".compareTo(menu.getGaleria())!=0) {
 			webTarget = webTarget
-				.path("sections_" + lineaType.name().toLowerCase() + "." + menu.getSeccion() + "_" + lineaType.name());
+				.path("sections_" + lineaType.name().toLowerCase() + "." + menu.getSeccion() + "_" + lineaType.name().toLowerCase());
 		} else {
 			webTarget = webTarget
 				.path("sections_" + lineaType.name().toLowerCase() + "." + menu.getSeccion());			
@@ -317,7 +317,7 @@ public class GetterProducts {
 				.path(codigoPaisAlf)
 				.path(codigoPaisAlf.toLowerCase())
 				.path(getLineaPath())
-				.path("sections_" + lineaType.name() + "_Perfumes_imssm." + menu.getSeccion() + "_" + lineaType.name().toLowerCase())
+				.path("sections_" + lineaType.name().toLowerCase() + "_Perfumes_imssm." + menu.getSeccion() + "_" + lineaType.name().toLowerCase())
 				.queryParam("idSubSection", menu.getGaleria() + "_" + lineaType.name().toLowerCase())
 				.queryParam("menu", "familia;" + menu.getFamilia())
 				.queryParam("pageNum", pagina)
