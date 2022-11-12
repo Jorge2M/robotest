@@ -36,7 +36,7 @@ public class FactoryPagos {
 
 	private FactoryPagos() {}
 	
-	public static PagoSteps makePagoSteps(DataPago dataPago) throws Exception {
+	public static PagoSteps makePagoSteps(DataPago dataPago) {
 		TypePago typePago = dataPago.getDataPedido().getPago().getTypePago();
 		
 		PagoSteps pagoMaked = null; 

@@ -22,7 +22,7 @@ public class PagoPaypal extends PagoSteps {
 	private final PagePaypalSelectPagoSteps pagePaypalSelectPagoSteps = new PagePaypalSelectPagoSteps();
 	private final PagePaypalConfirmacionSteps pagePaypalConfirmacionSteps = new PagePaypalConfirmacionSteps();
 	
-	public PagoPaypal(DataPago dataPago) throws Exception {
+	public PagoPaypal(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

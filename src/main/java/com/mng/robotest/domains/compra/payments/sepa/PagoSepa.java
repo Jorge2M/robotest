@@ -11,7 +11,7 @@ public class PagoSepa extends PagoSteps {
 	
 	PageSepa1rstSteps pageSepa1rstSteps = new PageSepa1rstSteps();
 	
-	public PagoSepa(DataPago dataPago) throws Exception {
+	public PagoSepa(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

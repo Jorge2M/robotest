@@ -8,7 +8,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageSelectLineaVOTF extends PageBase {
 
 	private String getXPathLineaSection(LineaType linea) {
-		return ("//div[@id='" + linea.name() + "' and @class[contains(.,'section')]]");
+		return ("//div[@id='" + linea.name().toLowerCase() + "' and @class[contains(.,'section')]]");
 	}
 	
 	private String getXPathLineaLink(LineaType linea) {

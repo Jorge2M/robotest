@@ -11,7 +11,7 @@ public class PagoEps extends PagoSteps {
 
 	PageEpsSimuladorSteps pageEpsSimuladorSteps = new PageEpsSimuladorSteps();
 	
-	public PagoEps(DataPago dataPago) throws Exception {
+	public PagoEps(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

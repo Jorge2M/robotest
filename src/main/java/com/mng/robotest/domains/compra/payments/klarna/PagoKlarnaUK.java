@@ -9,7 +9,7 @@ public class PagoKlarnaUK extends PagoSteps {
 	
 	private final PageKlarnaSteps pageKlarnaSteps = new PageKlarnaSteps();
 
-	public PagoKlarnaUK(DataPago dataPago) throws Exception {
+	public PagoKlarnaUK(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

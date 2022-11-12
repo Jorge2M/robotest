@@ -45,7 +45,7 @@ public class IDPClientService {
                 .build();
     }
 
-    public IdentityToken clientCredentialsToken() throws Exception {
+    public IdentityToken clientCredentialsToken() throws IOException {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .uri(URI.create(baseUrl + OAUTH_TOKEN_ENDPOINT + "?" + GRANT_TYPE + "=" + CLIENT_CREDENTIALS))
@@ -54,7 +54,7 @@ public class IDPClientService {
         return identityToken;
     }
 
-    public IdentityToken resourceOwnerToken(String secret) throws Exception {
+    public IdentityToken resourceOwnerToken(String secret) throws IOException {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .uri(URI.create(baseUrl + OAUTH_TOKEN_ENDPOINT))
@@ -63,7 +63,7 @@ public class IDPClientService {
         return parseIdentityToken(httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).join().body());
     }
 
-    public IdentityToken refreshToken(String refreshTokenValue) throws Exception {
+    public IdentityToken refreshToken(String refreshTokenValue) throws IOException {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .uri(URI.create(baseUrl + OAUTH_TOKEN_ENDPOINT))
@@ -72,7 +72,7 @@ public class IDPClientService {
         return parseIdentityToken(httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).join().body());
     }
 
-    public SignatureKey signatureKey() throws Exception {
+    public SignatureKey signatureKey() throws IOException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create(baseUrl + OAUTH_TOKEN_KEY_ENDPOINT))

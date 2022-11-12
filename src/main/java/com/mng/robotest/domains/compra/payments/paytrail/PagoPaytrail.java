@@ -10,7 +10,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoPaytrail extends PagoSteps {
 	
-	public PagoPaytrail(DataPago dataPago) throws Exception {
+	public PagoPaytrail(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

@@ -7,7 +7,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoMultibanco extends PagoSteps {
 
-	public PagoMultibanco( DataPago dataPago) throws Exception {
+	public PagoMultibanco( DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

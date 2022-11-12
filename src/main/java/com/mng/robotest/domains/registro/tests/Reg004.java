@@ -40,7 +40,7 @@ public class Reg004 extends TestBase {
 		userMenusSteps.selectRegistrate();
 	}
 
-	private void registerAndGoShoppingNoPubli() throws Exception {
+	private void registerAndGoShoppingNoPubli() {
 		dataRegister = pageRegistroIniSteps.sendDataAccordingCountryToInputs(emailNonExistent, false);
 		pageRegistroIniSteps.clickRegistrateButton(dataRegister);
 		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister);

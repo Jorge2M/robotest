@@ -16,7 +16,7 @@ public class PagoPayMaya extends PagoSteps {
 	private final PageOtpPaymayaSteps pageOtpPaymayaSteps = new PageOtpPaymayaSteps();
 	private final PageResultPaymayaSteps pageResultPaymayaSteps = new PageResultPaymayaSteps();
 	
-	public PagoPayMaya(DataPago dataPago) throws Exception {
+	public PagoPayMaya(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

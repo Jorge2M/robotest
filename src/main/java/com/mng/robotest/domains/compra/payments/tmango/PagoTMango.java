@@ -11,7 +11,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoTMango extends PagoSteps {
 
-	public PagoTMango(DataPago dataPago) throws Exception {
+	public PagoTMango(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

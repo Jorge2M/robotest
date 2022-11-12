@@ -10,7 +10,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoPaysecureQiwi extends PagoSteps {
 
-	public PagoPaysecureQiwi(DataPago dataPago) throws Exception {
+	public PagoPaysecureQiwi(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

@@ -1,6 +1,7 @@
 package com.mng.robotest.domains.cookiescheck.services;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -59,7 +60,7 @@ public class HttpCookiesFinder implements CookiesRepository {
         }
     }
     
-    private HttpPost buildPostRequestWith(IdentityToken identityToken) throws Exception {
+    private HttpPost buildPostRequestWith(IdentityToken identityToken) throws UnsupportedEncodingException {
         HttpPost post = new HttpPost(url);
         post.addHeader("Content-Type", "application/json");
         post.addHeader("Authorization", "Bearer " + identityToken.getAccess_token());

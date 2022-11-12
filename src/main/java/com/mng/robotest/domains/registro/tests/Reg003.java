@@ -72,7 +72,7 @@ public class Reg003 extends TestBase {
 
 	}
 
-	private void registerAndGoShoppingSiPubli() throws Exception {
+	private void registerAndGoShoppingSiPubli() {
 		firstPageRegister();
 		secondPageRegister();
 		thirdPageRegister();
@@ -82,7 +82,7 @@ public class Reg003 extends TestBase {
 		}
 	}
 
-	private void firstPageRegister() throws Exception {
+	private void firstPageRegister() {
 		String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
 		dataRegister = pageRegistroIniSteps.sendDataAccordingCountryToInputs(emailNonExistent, true);
 		pageRegistroIniSteps.clickRegistrateButton(dataRegister);
@@ -99,7 +99,7 @@ public class Reg003 extends TestBase {
 		}
 	}	
 	
-	private void thirdPageRegister() throws Exception {
+	private void thirdPageRegister() {
 		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister);
 		pageRegistroDirecSteps.clickFinalizarButton();
 	}

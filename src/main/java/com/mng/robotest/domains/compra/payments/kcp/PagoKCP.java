@@ -7,7 +7,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoKCP extends PagoSteps {
 	
-	public PagoKCP(DataPago dataPago) throws Exception {
+	public PagoKCP(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

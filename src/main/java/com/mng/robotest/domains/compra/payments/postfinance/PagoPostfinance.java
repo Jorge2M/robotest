@@ -11,7 +11,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoPostfinance extends PagoSteps {
 	
-	public PagoPostfinance(DataPago dataPago) throws Exception {
+	public PagoPostfinance(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

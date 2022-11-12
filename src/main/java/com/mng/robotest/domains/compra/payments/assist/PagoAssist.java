@@ -11,7 +11,7 @@ public class PagoAssist extends PagoSteps {
 	private final PageAssist1rstSteps pageAssist1rstSteps = new PageAssist1rstSteps();
 	private final PageAssistLastSteps pageAssistLastSteps = new PageAssistLastSteps();
 	
-	public PagoAssist(DataPago dataPago) throws Exception {
+	public PagoAssist(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

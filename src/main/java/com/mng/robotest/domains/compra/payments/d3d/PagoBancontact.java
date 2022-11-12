@@ -9,7 +9,7 @@ import com.mng.robotest.test.datastored.DataPedido;
 
 public class PagoBancontact extends PagoSteps {
 	
-	public PagoBancontact(DataPago dataPago) throws Exception {
+	public PagoBancontact(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

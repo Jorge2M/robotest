@@ -13,7 +13,7 @@ public class PagoGiropay extends PagoSteps {
 	private final PageGiropay1rstSteps pageGiropay1rstSteps = new PageGiropay1rstSteps();
 	private final PageGiropayInputBankSteps pageGiropayInputBankSteps = new PageGiropayInputBankSteps(); 
 	
-	public PagoGiropay(DataPago dataPago) throws Exception {
+	public PagoGiropay(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

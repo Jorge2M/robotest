@@ -22,10 +22,12 @@ public class PageSuscripciones extends PageBase {
 	}
 	
 	private String getXPathNewsletterDesmarcadas(String linea) {
-		return (XPATH_CHECKBOX_NEWSLETTER + "//input[not(@checked) and @data-component-id[contains(.,'_" + linea + "')]]");
+		return (XPATH_CHECKBOX_NEWSLETTER + 
+				"//input[not(@checked) and @data-component-id[contains(.,'_" + linea.toLowerCase() + "')]]");
 	}
 	private String getXPathNewsletterMarcadas(String linea) {
-		return (XPATH_CHECKBOX_NEWSLETTER + "//input[@checked and @data-component-id[contains(.,'_" + linea + "')]]");
+		return (XPATH_CHECKBOX_NEWSLETTER + 
+				"//input[@checked and @data-component-id[contains(.,'_" + linea.toLowerCase() + "')]]");
 	}	
 	
 	public boolean isPage() {

@@ -12,7 +12,7 @@ public class PagoKlarna extends PagoSteps {
 	
 	private final PageKlarnaSteps pageKlarnaSteps = new PageKlarnaSteps();
 
-	public PagoKlarna(DataPago dataPago) throws Exception {
+	public PagoKlarna(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

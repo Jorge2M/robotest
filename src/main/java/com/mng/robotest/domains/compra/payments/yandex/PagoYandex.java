@@ -10,7 +10,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoYandex extends PagoSteps {
 	
-	public PagoYandex(DataPago dataPago) throws Exception {
+	public PagoYandex(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

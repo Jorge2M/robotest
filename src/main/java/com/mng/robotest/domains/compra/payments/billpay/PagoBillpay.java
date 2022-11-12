@@ -8,7 +8,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoBillpay extends PagoSteps {
 	
-	public PagoBillpay(DataPago dataPago) throws Exception {
+	public PagoBillpay(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

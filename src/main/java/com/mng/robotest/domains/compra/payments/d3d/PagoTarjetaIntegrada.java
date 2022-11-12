@@ -8,7 +8,7 @@ import com.mng.robotest.test.datastored.DataPedido;
 
 public class PagoTarjetaIntegrada extends PagoSteps {
 
-	public PagoTarjetaIntegrada(DataPago dataPago) throws Exception {
+	public PagoTarjetaIntegrada(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

@@ -6,7 +6,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoContraReembolso extends PagoSteps {
 	
-	public PagoContraReembolso(DataPago dataPago) throws Exception {
+	public PagoContraReembolso(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

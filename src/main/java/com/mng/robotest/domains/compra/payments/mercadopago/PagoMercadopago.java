@@ -14,7 +14,7 @@ public class PagoMercadopago extends PagoSteps {
 
 	private static final String CODIGO_SEGURIDAD = "123";
 	
-	public PagoMercadopago(DataPago dataPago) throws Exception {
+	public PagoMercadopago(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

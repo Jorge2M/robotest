@@ -6,7 +6,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoTpvVotf extends PagoSteps {
 	
-	public PagoTpvVotf(DataPago dataPago) throws Exception {
+	public PagoTpvVotf(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}

@@ -14,7 +14,7 @@ public class PagoDotpay extends PagoSteps {
 	private final PageDotpayPaymentChannelSteps pageDotpayPaymentChannelSteps = new PageDotpayPaymentChannelSteps();
 	private final PageDotpayAcceptSimulationSteps pageDotpayAcceptSimulationSteps = new PageDotpayAcceptSimulationSteps();
 	
-	public PagoDotpay(DataPago dataPago) throws Exception {
+	public PagoDotpay(DataPago dataPago) {
 		super(dataPago);
 		super.setAvaliableExecPay(true);
 	}
