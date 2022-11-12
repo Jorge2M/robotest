@@ -2,6 +2,7 @@ package com.mng.robotest.test.factoryes;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class EgyptOrdersFactory {
 	
 	private EgyptCities getEgyptCities() throws Exception {
 		Reader reader = new InputStreamReader(
-				EgyptOrdersFactory.class.getResourceAsStream("/egypt_towns.json"), "utf-8");
+				EgyptOrdersFactory.class.getResourceAsStream("/egypt_towns.json"), StandardCharsets.UTF_8);
 		
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(reader, EgyptCities.class);

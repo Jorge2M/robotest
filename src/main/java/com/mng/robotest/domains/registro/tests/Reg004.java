@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.registro.tests;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.mng.robotest.domains.registro.steps.PageRegistroDirecStepsOutlet;
@@ -20,7 +19,6 @@ public class Reg004 extends TestBase {
 	private final PageRegistroFinStepsOutlet pageRegistroFinSteps = new PageRegistroFinStepsOutlet(); 
 	
 	private final String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
-	private Map<String, String> dataRegister = new HashMap<>();
 
 	public Reg004(Pais pais, IdiomaPais idioma) {
 		super();
@@ -41,7 +39,9 @@ public class Reg004 extends TestBase {
 	}
 
 	private void registerAndGoShoppingNoPubli() {
-		dataRegister = pageRegistroIniSteps.sendDataAccordingCountryToInputs(emailNonExistent, false);
+		Map<String, String> dataRegister = 
+				pageRegistroIniSteps.sendDataAccordingCountryToInputs(emailNonExistent, false);
+		
 		pageRegistroIniSteps.clickRegistrateButton(dataRegister);
 		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister);
 		pageRegistroDirecSteps.clickFinalizarButton();

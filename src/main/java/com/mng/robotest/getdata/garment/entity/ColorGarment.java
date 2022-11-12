@@ -20,7 +20,7 @@ public class ColorGarment {
 	Price price;
 	List<SizeGarment> sizes;
     @JsonInclude(NON_EMPTY)
-    List<? extends Object> images;
+    List<Object> images;
 	String accessibilityText;
 	DataLayerColor dataLayer;
 	
@@ -91,7 +91,7 @@ public class ColorGarment {
 		}
 
 	}
-	public List<? extends Object> getImages() {
+	public List<Object> getImages() {
 		return images;
 	}
 	
@@ -127,7 +127,7 @@ public class ColorGarment {
 		return imagesReturn;
 	}
 	*/
-	public void setImages(List<? extends Object> images) {
+	public void setImages(List<Object> images) {
 		this.images = images;
 	}
 	public String getAccessibilityText() {

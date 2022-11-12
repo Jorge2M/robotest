@@ -29,22 +29,26 @@ public class CookiesFinder {
     Optional<List<Cookie>> getCookiesFromHttp() {
     	try {
 		    CookiesRepository cookiesRepo = new HttpCookiesFinder();
-		    List<Cookie> cookies;
-		    try {
-		    	cookies = cookiesRepo.retrieveCookies();
-		    } catch (Exception e) {
-		    	return Optional.empty(); 
-		    }
-		    if (cookies==null || cookies.isEmpty()) {
-		    	logger.warn("Problem retrieving cookies from http service");
-		    	return Optional.empty();
-		    }
-		    return Optional.of(cookies);
+		    return getCookiesFromRepo(cookiesRepo);
     	} catch (Exception e) {
     		logger.warn("Problem retrieving cookies from http service", e);
             return Optional.empty();
     	}
     }
+
+	private Optional<List<Cookie>> getCookiesFromRepo(CookiesRepository cookiesRepo) {
+		List<Cookie> cookies;
+		try {
+			cookies = cookiesRepo.retrieveCookies();
+		} catch (Exception e) {
+			return Optional.empty(); 
+		}
+		if (cookies==null || cookies.isEmpty()) {
+			logger.warn("Problem retrieving cookies from http service");
+			return Optional.empty();
+		}
+		return Optional.of(cookies);
+	}
     
     boolean isNeededRefreshDataCookies(int secondsPersistence) {
     	if (listCookies.isEmpty()) {

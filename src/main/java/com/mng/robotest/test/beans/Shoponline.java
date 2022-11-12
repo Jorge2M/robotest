@@ -62,9 +62,6 @@ public class Shoponline implements Serializable {
 		case "n":
 			stateLinea = ThreeState.FALSE;
 			break;
-		case "?":
-			stateLinea = ThreeState.UNKNOWN;
-			break;
 		default:
 			break;
 		}

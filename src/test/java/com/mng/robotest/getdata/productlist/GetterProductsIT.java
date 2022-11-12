@@ -113,7 +113,7 @@ public class GetterProductsIT {
 		
 		//Then
 		assertTrue(listProducts.get(0).getCanonicalProduct()!=null);
-		assertEquals(listProducts.size(), numProducts);
+		assertEquals(numProducts, listProducts.size());
 		assertTrue(listProducts.get(0).getStock()>0);
 		assertTrue(isListSortedByStock(listProducts));
 	}

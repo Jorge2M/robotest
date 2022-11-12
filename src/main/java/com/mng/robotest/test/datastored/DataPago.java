@@ -18,11 +18,6 @@ public class DataPago {
 	boolean okCheckChar;
 	Map<String, String> datosRegistro = new HashMap<>();
 	
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return super.clone();
-	}
-	
 	public DataPago(ConfigCheckout FTCkout) {
 		setFTCkout(FTCkout);
 	}

@@ -2,23 +2,14 @@ package com.mng.robotest.test.steps.shop.pedidos;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.micuenta.pageobjects.PageInputPedido;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.datastored.DataPedido;
 
+public class PageInputPedidoSteps extends StepBase {
 
-public class PageInputPedidoSteps {
-
-	private final Channel channel;
-	private final AppEcom app;
 	private final PageInputPedido pageInputPedido = new PageInputPedido();
-	
-	private PageInputPedidoSteps(Channel channel, AppEcom app) {
-		this.channel = channel;
-		this.app = app;
-	}
 	
 	@Validation (
 		description="La página contiene un campo para la introducción del Nº de pedido",

@@ -60,7 +60,7 @@ public class PedidosNavigations {
 		}
 
 		//Si existen pedidos que validar y no se trata de un acceso desde la línea de comandos (típicamente .bat)
-		if (listPedidos!=null && listPedidos.size()>0 && typeAccess!=TypeAccess.Bat) {
+		if (listPedidos!=null && listPedidos.size()>0) {
 			PageLoginMantoSteps.login(dMantoAcc.getUrlManto(), dMantoAcc.getUserManto(), dMantoAcc.getPassManto(), driver);
 			PedidosNavigations.validacionListaPagosStepss(listPedidos, dMantoAcc.getAppE(), driver);
 		}
