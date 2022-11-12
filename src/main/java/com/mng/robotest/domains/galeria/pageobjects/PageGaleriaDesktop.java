@@ -126,13 +126,13 @@ public class PageGaleriaDesktop extends PageGaleria {
 			int temporada = listTemporadas.get(i);
 			switch (controlTemp) {
 			case ARTICLES_FROM:
-				xpathResult += "starts-with(@id, " + String.valueOf(temporada) + ")";
+				xpathResult += "starts-with(@id, " + temporada + ")";
 				if (i<(listTemporadas.size()-1)) {
 					xpathResult+=" or ";
 				}
 				break;
 			case ARTICLES_FROM_OTHER:
-				xpathResult += "not(starts-with(@id, " + String.valueOf(temporada) + "))";
+				xpathResult += "not(starts-with(@id, " + temporada + "))";
 				if (i<(listTemporadas.size()-1)) {
 					xpathResult+=" and ";
 				}

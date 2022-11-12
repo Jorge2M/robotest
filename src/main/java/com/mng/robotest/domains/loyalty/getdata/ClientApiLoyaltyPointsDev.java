@@ -90,7 +90,7 @@ public class ClientApiLoyaltyPointsDev {
 	}
 	
 	private ListConsumers getDataConsumerFromCache(String emailConsumer) {
-		return (ListConsumers)consumerDataCache.get(emailConsumer); 
+		return consumerDataCache.get(emailConsumer); 
 	}
 	private void storeDataConsumerInCache(String emailConsumer, ListConsumers listConsumers) {
 		consumerDataCache.put(emailConsumer, listConsumers);

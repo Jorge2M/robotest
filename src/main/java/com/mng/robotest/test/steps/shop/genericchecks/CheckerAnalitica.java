@@ -14,9 +14,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.UtilsTest;
-import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
-
 
 public class CheckerAnalitica implements Checker {
 
@@ -42,7 +40,7 @@ public class CheckerAnalitica implements Checker {
 	}
 	
 	private State getLevel() {
-		InputParamsTM inputParamsSuite = (InputParamsMango)TestMaker.getInputParamsSuite();
+		InputParamsTM inputParamsSuite = TestMaker.getInputParamsSuite();
 		if (inputParamsSuite!=null && 
 			inputParamsSuite.getApp()!=null &&
 			inputParamsSuite.getApp()==AppEcom.votf) {
