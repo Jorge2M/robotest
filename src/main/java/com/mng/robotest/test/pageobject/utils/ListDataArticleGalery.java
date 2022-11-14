@@ -69,8 +69,7 @@ public class ListDataArticleGalery {
 	
 	public boolean isPresentArticleWithReferencia(String referencia) {
 		return listNombreYRef.stream()
-		        .filter(a -> a.getReferencia().compareTo(referencia)==0)
-		        .findAny().isPresent();
+		        .anyMatch(a -> a.getReferencia().compareTo(referencia)==0);
 	}
 	
 	/**

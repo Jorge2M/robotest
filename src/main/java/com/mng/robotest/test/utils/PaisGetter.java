@@ -81,7 +81,7 @@ public class PaisGetter {
 		}
 		catch (JAXBException e) {
 			Log4jTM.getLogger().error(e);
-			return null;
+			return new ArrayList<>();
 		}
 		Iterator<Continente> itContinentes = xmlFiltered.getResponse().iterator();
 		while (itContinentes.hasNext()) {

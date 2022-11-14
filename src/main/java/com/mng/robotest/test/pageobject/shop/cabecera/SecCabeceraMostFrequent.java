@@ -14,7 +14,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
 
-public class SecCabecera_MostFrequent extends SecCabecera {
+public class SecCabeceraMostFrequent extends SecCabecera {
 	
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop = new ModalUserSesionShopDesktop(); 
 	

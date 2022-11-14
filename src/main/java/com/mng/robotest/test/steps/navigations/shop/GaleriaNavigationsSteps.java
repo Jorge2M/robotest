@@ -12,7 +12,7 @@ public class GaleriaNavigationsSteps extends StepBase {
 		boolean articleAvailable = false;
 		PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 		while (!articleAvailable && posArticulo<5) {
-			pageGaleriaSteps.shopTallasArticulo(posArticulo);
+			pageGaleriaSteps.showTallasArticulo(posArticulo);
 			int tallaToSelect = 1;
 			try {
 				articleAvailable = pageGaleriaSteps.selectTallaAvailableArticulo(posArticulo, tallaToSelect);

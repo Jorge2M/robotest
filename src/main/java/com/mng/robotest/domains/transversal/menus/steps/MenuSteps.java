@@ -61,8 +61,7 @@ public class MenuSteps extends StepBase {
 		expected=
 			"La selección es correcta")	
 	public void clickMenu(MenuWeb menu) {
-		menu.click();
-		checkSelecMenu(menu);
+		menuClick(menu);
 	}
 	
 	public void clickGroup(GroupWeb group) {
@@ -80,8 +79,7 @@ public class MenuSteps extends StepBase {
 		expected=
 			"La selección es correcta")	
 	private void clickGroupLinea(GroupWeb group) {
-		group.click();
-		checkSelecGroup(group);
+		selectGroup(group);
 	}
 
 	@Step (
@@ -91,9 +89,13 @@ public class MenuSteps extends StepBase {
 		expected=
 			"La selección es correcta")	
 	private void clickGroupSublinea(GroupWeb group) {
+		selectGroup(group);
+	}	
+	
+	private void selectGroup(GroupWeb group) {
 		group.click();
 		checkSelecGroup(group);
-	}	
+	}
 	 
 	private void checkSelecGroup(GroupWeb groupWeb) {
 		if (groupWeb.getGroup().getGroupResponse()==GroupResponse.ARTICLES) {
@@ -117,6 +119,10 @@ public class MenuSteps extends StepBase {
 		expected=
 			"La selección es correcta")	
 	private void clickMenuSublinea(MenuWeb menu) {
+		menuClick(menu);
+	}
+	
+	private void menuClick(MenuWeb menu) {
 		menu.click();
 		checkSelecMenu(menu);
 	}

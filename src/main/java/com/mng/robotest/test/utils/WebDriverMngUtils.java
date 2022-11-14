@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
 import com.mng.robotest.conftestmaker.ErrorStorer;
-import com.mng.robotest.test.generic.stackTrace;
+import com.mng.robotest.test.generic.StackTrace;
 
 public class WebDriverMngUtils {
 	
@@ -38,8 +38,8 @@ public class WebDriverMngUtils {
 		return nodo;
 	}
 
-	public static stackTrace stackTaceException(WebDriver driver, ITestContext context) throws Exception {
-		stackTrace resExcep = new stackTrace();
+	public static StackTrace stackTaceException(WebDriver driver, ITestContext context) throws Exception {
+		StackTrace resExcep = new StackTrace();
 		resExcep.setException("");
 		resExcep.setExiste(false);
 		resExcep.setRepetida(false);

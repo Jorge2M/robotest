@@ -138,7 +138,7 @@ public class ArticuloScreen {
 	
 	public Optional<ArticuloScreen> searchInList(List<ArticuloScreen> listaArticulos) {
 		return listaArticulos.stream()
-			.filter(a -> isTheSame(a))
+			.filter(this::isTheSame)
 			.findFirst();
 	}
 	

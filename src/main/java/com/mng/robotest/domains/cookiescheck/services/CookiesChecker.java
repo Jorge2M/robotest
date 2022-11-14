@@ -59,14 +59,12 @@ public class CookiesChecker {
 	
 	private boolean isCookieInWhiteList(org.openqa.selenium.Cookie cookie) {
 		return whiteList.get().stream()
-				.filter(w -> cookieInPattern(cookie, w))
-				.findAny().isPresent();
+				.anyMatch(w -> cookieInPattern(cookie, w));
 	}
 	
 	private boolean isCookieInListAllowed(org.openqa.selenium.Cookie cookie) {
 		return allowedCookies.get().stream()
-		        .filter(c -> c.getCookieName().compareTo(cookie.getName())==0)
-		        .findAny().isPresent();		
+		        .anyMatch(c -> c.getCookieName().compareTo(cookie.getName())==0);		
 	}
 	
 	private boolean cookieInPattern(org.openqa.selenium.Cookie cookie, Pattern whiteItem) {

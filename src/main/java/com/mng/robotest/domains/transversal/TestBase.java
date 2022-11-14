@@ -10,7 +10,7 @@ public abstract class TestBase extends StepBase {
 
 	public abstract void execute() throws Exception;
 	
-	public static ThreadLocal<DataTest> DATA_TEST = new ThreadLocal<>();
+	public static final ThreadLocal<DataTest> DATA_TEST = new ThreadLocal<>();
 	
 	protected TestBase() {
 		if (!inputParamsSuite.getListaPaises().isEmpty()) {

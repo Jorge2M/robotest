@@ -46,7 +46,7 @@ public class PageMisDatosSteps extends StepBase {
 		
 		checks.add(
 			"El Nombre contiene el definido durante el registro: <b>" + nombre + "</b>",
-			!(pageMisDatos.getNumInputContentVoid() > 1), State.Defect);
+			(pageMisDatos.getNumInputContentVoid() <= 1), State.Defect);
 		
 		checks.add(
 			"El Apellidos contiene el definido durante el registro: <b>" + apellidos + "</b>",

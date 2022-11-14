@@ -161,7 +161,7 @@ public class CheckerImgsBroken implements Checker {
 	
 							// Sólo si hemos superado el máximo de errores (para todas las imágenes cortadas detectadas) mostraremos el warning en el caso de prueba
 							if (numErrors > maxErrors) {
-								if (!(resultado.getResultado() == ResultadoErrores.Resultado.ERRORES)) {
+								if (resultado.getResultado() != ResultadoErrores.Resultado.ERRORES) {
 									resultado.setResultado(ResultadoErrores.Resultado.MAX_ERRORES);
 								}
 							} else {

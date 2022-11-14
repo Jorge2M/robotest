@@ -70,7 +70,7 @@ public class GestorUsersShop {
 		return userBusyOldest;
 	}
 	
-	private void storeTestPerformanceUsers() {
+	synchronized private static void storeTestPerformanceUsers() {
 		String PASSWORD_TEST_PERFORMANCE = 
 				GetterSecrets.factory()
 					.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
@@ -109,7 +109,7 @@ public class GestorUsersShop {
 	}
 	
 	//For UnitTest purposes
-	void addUserShop(UserShop userShop) {
+	synchronized static void addUserShop(UserShop userShop) {
 		if (listTestPerformanceUsers==null) {
 			listTestPerformanceUsers = new CopyOnWriteArrayList<>();
 		}

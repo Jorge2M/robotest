@@ -17,8 +17,8 @@ public class LocalStorage {
   }
 
   public boolean isItemPresentInLocalStorage(String item) {
-	return !(js.executeScript(String.format(
-		"return window.localStorage.getItem('%s');", item)) == null);
+	return (js.executeScript(String.format(
+		"return window.localStorage.getItem('%s');", item)) != null);
   }
 
   public String getItemFromLocalStorage(String key) {

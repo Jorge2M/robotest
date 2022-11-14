@@ -133,7 +133,7 @@ public class GarmentCatalog {
 		}
 		public static List<Article> getArticlesCandidateForTest(List<GarmentCatalog> garments) {
 			return garments.stream()
-					.map(g -> g.getArticleWithMoreStock())
+					.map(GarmentCatalog::getArticleWithMoreStock)
 					.toList();
 		}
 		

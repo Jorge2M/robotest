@@ -112,7 +112,7 @@ public class GetterProductsIT {
 		List<GarmentCatalog> listProducts = getterProductsAndCanonicalData.getAll();
 		
 		//Then
-		assertTrue(listProducts.get(0).getCanonicalProduct()!=null);
+		assertNotNull(listProducts.get(0).getCanonicalProduct());
 		assertEquals(numProducts, listProducts.size());
 		assertTrue(listProducts.get(0).getStock()>0);
 		assertTrue(isListSortedByStock(listProducts));

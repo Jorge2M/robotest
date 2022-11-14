@@ -71,7 +71,7 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 		//By default all lines are selected
 		ALL_LINEAS.stream()
 			.filter(s -> !lineasToSelect.contains(s))
-			.forEach(s -> unselectLinea(s));
+			.forEach(this::unselectLinea);
 	}
 	private void unselectLinea(LineaType linea) {
 		String xpathCheckbox = getXPathCheckboxLinea(linea);

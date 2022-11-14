@@ -24,7 +24,7 @@ public abstract class PageFicha extends PageBase {
 	public abstract boolean isModalNoStockVisible(int seconds);
 
 	protected final SecDataProduct secDataProduct = new SecDataProduct(); //Name, color, talla section
-	public static SecFitFinder secFitFinder; //Guía de tallas v.Fit Finder
+	protected final SecFitFinder secFitFinder = new SecFitFinder(); //Guía de tallas v.Fit Finder
 
 	public SecDataProduct getSecDataProduct() {
 		return secDataProduct;

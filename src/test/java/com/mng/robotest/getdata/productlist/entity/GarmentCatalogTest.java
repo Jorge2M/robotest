@@ -19,8 +19,8 @@ class GarmentCatalogTest extends GarmentCatalog {
 		Color color = garmentMock.getColors().get(0);
 		Size size = color.getSizes().get(0);
 		
-		assertTrue(garmentMock.getColors().size()==1);
-		assertTrue(color.getSizes().size()==1);
+		assertEquals(1, garmentMock.getColors().size());
+		assertEquals(1, color.getSizes().size());
 		assertEquals("Blanco", color.getId());
 		assertEquals(19, size.getId());
 	}

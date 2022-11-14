@@ -32,17 +32,17 @@ public abstract class SecCabecera extends PageBase {
 	
 	public static SecCabecera getNew(Channel channel, AppEcom app) {
 		if (channel==Channel.mobile && app==AppEcom.outlet) {
-			return new SecCabeceraOutlet_Mobil();
+			return new SecCabeceraOutletMobil();
 		}
-		return new SecCabecera_MostFrequent();
+		return new SecCabeceraMostFrequent();
 	}
 	
-	public SecCabecera_MostFrequent getShop_DesktopMobile() {
-		return (SecCabecera_MostFrequent)this;
+	public SecCabeceraMostFrequent getShop_DesktopMobile() {
+		return (SecCabeceraMostFrequent)this;
 	}
 	
-	public SecCabeceraOutlet_Mobil getOutletMobil() {
-		return (SecCabeceraOutlet_Mobil)this;
+	public SecCabeceraOutletMobil getOutletMobil() {
+		return (SecCabeceraOutletMobil)this;
 	}
 	
 	public void bring(BringTo bringTo) {

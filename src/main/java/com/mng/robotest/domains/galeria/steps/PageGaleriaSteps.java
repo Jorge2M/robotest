@@ -105,26 +105,29 @@ public class PageGaleriaSteps extends StepBase {
 		return (datosArticulo);
 	}
 
-	public void shopTallasArticulo(int posArticulo) {
-		if (channel.isDevice() || app==AppEcom.outlet) {
-			showTallasOutletAndMovil(posArticulo);
+	public void showTallasArticulo(int posArticulo) {
+		if (channel.isDevice()) {
+			showTallasDevice(posArticulo);
 		} else {
-			showTallasShopDesktop(posArticulo);
+			showTallasDesktop(posArticulo);
 		}
 	}
 
 	@Step (
 		description="Posicionarse sobre el artículo en la posición <b>#{posArticulo}</b>, esperar que aparezca el link \"Añadir\" y seleccionarlo", 
 		expected="Aparece la capa con la información de las tallas")
-	private void showTallasOutletAndMovil(int posArticulo) {
-		pageGaleria.showTallasArticulo(posArticulo);
-		checkIsVisibleCapaInfoTallas(posArticulo, 1);
+	private void showTallasDevice(int posArticulo) {
+		showTallas(posArticulo);
 	}
 	
 	@Step (
 		description="Posicionarse sobre el artículo en la posición <b>#{posArticulo}</b>", 
 		expected="Aparece la capa con la información de las tallas")
-	private void showTallasShopDesktop(int posArticulo) {
+	private void showTallasDesktop(int posArticulo) {
+		showTallas(posArticulo);
+	}
+	
+	private void showTallas(int posArticulo) {
 		pageGaleria.showTallasArticulo(posArticulo);
 		checkIsVisibleCapaInfoTallas(posArticulo, 1);
 	}
