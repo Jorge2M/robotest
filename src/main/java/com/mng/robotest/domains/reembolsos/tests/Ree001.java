@@ -1,12 +1,12 @@
-package com.mng.robotest.test.appshop.reembolsos;
+package com.mng.robotest.domains.reembolsos.tests;
 
+import com.mng.robotest.domains.reembolsos.pageobjects.PageReembolsos;
+import com.mng.robotest.domains.reembolsos.pageobjects.PageReembolsos.TypeReembolso;
+import com.mng.robotest.domains.reembolsos.steps.PageReembolsosSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.pageobject.shop.PageReembolsos;
-import com.mng.robotest.test.pageobject.shop.PageReembolsos.TypeReembolso;
-import com.mng.robotest.test.steps.shop.PageReembolsosSteps;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;

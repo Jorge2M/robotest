@@ -3,8 +3,8 @@ package com.mng.robotest.domains.micuenta.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.reembolsos.pageobjects.PageReembolsos;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.pageobject.shop.PageReembolsos;
 
 public class PageReembolsosSteps extends StepBase {
 

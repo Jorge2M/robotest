@@ -1,4 +1,4 @@
-package com.mng.robotest.test.appshop.reembolsos;
+package com.mng.robotest.domains.reembolsos.tests;
 
 public class Reembolsos {
 	

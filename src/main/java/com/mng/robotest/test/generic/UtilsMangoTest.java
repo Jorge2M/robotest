@@ -3,6 +3,7 @@
 package com.mng.robotest.test.generic;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Iterator;
@@ -67,7 +68,7 @@ public class UtilsMangoTest extends PageBase {
 	
 	public static float round(final float d, final int decimalPlace) {
 		BigDecimal bd = new BigDecimal(Float.toString(d));
-		bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+		bd = bd.setScale(decimalPlace, RoundingMode.HALF_UP);
 		return bd.floatValue();
 	}
 
