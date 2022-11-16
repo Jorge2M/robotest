@@ -7,6 +7,8 @@ import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.footer.steps.TarjetaMangoSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 
+import static com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink.*;
+
 public class Foo001 extends TestBase {
 
 	private final SecFooterSteps secFooterSteps = new SecFooterSteps();
@@ -22,14 +24,11 @@ public class Foo001 extends TestBase {
 		String urlInitialPage = driver.getCurrentUrl();
 		List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(app, channel);
 		for (FooterLink footerLinkToValidate : listFooterLinksToValidate) {
-			switch (footerLinkToValidate) {
-			case MANGO_CARD:
+			if (footerLinkToValidate == MANGO_CARD) { 
 				secFooterSteps.clickLinkFooter(footerLinkToValidate, false);
 				new TarjetaMangoSteps().checkSolicitarTarjeta();
-				break;
-			default:
+			} else {
 				secFooterSteps.clickLinkFooter(footerLinkToValidate, true);
-				driver.get(urlInitialPage);
 			}
 			driver.get(urlInitialPage);
 		}

@@ -33,7 +33,7 @@ public class PageMisCompras extends PageBase {
 			"@data-testid[contains(.,'inactivePurchases')]]";
 	
 	private static final String XPATH_TICKET = XPATH_LIST_TICKETS + "//div[@class[contains(.,'layout-content')]]";
-	private static final String XPATH_PRICE_RELATIVE_TICKET = ".//*[@data-testid='price']";	
+	private static final String XPATH_PRICE_RELATIVE_TICKET = ".//*[@data-testid='myPurchases.price']";	
 	private static final String XPATH_FECHA_RELATIVE_TICKET = ".//span[@class[contains(.,'sg-caption-light')]]";
 	
 	public List<Ticket> getTickets() {

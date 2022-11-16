@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.domains.compra.steps.envio.DataSearchDeliveryPoint.DataSearchDp.*;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.domains.compra.steps.envio.DataDeliveryPoint;
@@ -139,8 +140,7 @@ public class SecSelectDPoint extends PageBase {
 		for (int i=0; i<seconds; i++) {
 			try {
 				DataDeliveryPoint dataDp = getDataDeliveryPointSelected();
-				switch (dataSearchDp.typeData) {
-				case Provincia:
+				if (dataSearchDp.typeData == Provincia) {
 					String provincia = dataSearchDp.data;
 					String provinciaLow = dataSearchDp.data.toLowerCase();
 					String prov1rstLetterCapital = provinciaLow.substring(0, 1).toUpperCase() + provinciaLow.substring(1);
@@ -148,12 +148,11 @@ public class SecSelectDPoint extends PageBase {
 						dataDp.getCPandPoblacion().contains(prov1rstLetterCapital)) {
 						return true;
 					}
-					break;
-				case CodigoPostal:
+				}
+				else { 
 					if (dataDp.getCodPostal().contains(dataSearchDp.data)) {
 						return true;
 					}
-					break;
 				}
 			}
 			catch (Exception e) {
