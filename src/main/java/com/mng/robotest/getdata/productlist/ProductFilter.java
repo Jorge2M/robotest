@@ -23,7 +23,7 @@ public class ProductFilter {
 		NO_ONLINE, 
 		STOCK,
 		PERSONALIZABLE
-	};
+	}
 	
 	private final ProductList productList;
 	private final AppEcom app;

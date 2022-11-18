@@ -6,6 +6,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
@@ -30,15 +31,8 @@ public class SecMenuLateralDesktop extends PageBase {
 			.replaceFirst("-", "/")));
 	}
 	
-	private String getXPathSelectedRelativeMenu() {
-		switch (app) {
-		default:
-			return XPATH_SELECTED_RELATIVE_MENU_SHOP;
-		}
-	}
-	
 	public String getXPathLinkMenuSelected(MenuLateralDesktop menu) {
-		return (getXPathLinkMenu(menu) + getXPathSelectedRelativeMenu());
+		return (getXPathLinkMenu(menu) + XPATH_SELECTED_RELATIVE_MENU_SHOP);
 	}
 
 	public boolean isSelectedMenu(MenuLateralDesktop menu, int seconds) {
@@ -69,10 +63,10 @@ public class SecMenuLateralDesktop extends PageBase {
 	private static final String XPATH_CAPA_MENUS_OUTLET = "//div[@id='sticky']/aside[@id='filters']";
 	
 	public boolean isVisibleCapaMenus(int seconds) {
-		switch (app) {
-		case outlet:
+		if (app==AppEcom.outlet) {
 			return state(State.Visible, XPATH_CAPA_MENUS_OUTLET).wait(seconds).check();
-		default:
+		}
+		else {
 			return state(State.Visible, XPATH_CAPA_MENUS_SHOP).wait(seconds).check();
 		}
 	}

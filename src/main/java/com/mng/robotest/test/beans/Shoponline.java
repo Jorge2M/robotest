@@ -46,11 +46,10 @@ public class Shoponline implements Serializable {
 		ThreeState stateLinea = ThreeState.UNKNOWN;
 		String stateLineaStr = "";
 		if (linea!=null) {
-			switch (app) {
-			case outlet:
+			if (app==AppEcom.outlet) {
 				stateLineaStr = linea.getOutlet();
-				break;
-			default:
+			}
+			else {
 				stateLineaStr = linea.getShop();
 			}
 		}

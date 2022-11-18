@@ -87,8 +87,8 @@ public class PageGestionarClientes extends PageBase {
 		getElement(XPATH_INPUT_DNI).sendKeys(dni);
 	}
 	
-	public void clickBuscarButtonAndWaitSeconds(int waitSeconds) {
-		getElement(XPATH_BUSCAR_BUTTON).click();
+	public void clickBuscarButtonAndWaitSeconds(int seconds) {
+		click(XPATH_BUSCAR_BUTTON).waitLink(seconds).exec();
 	}
 
 	public boolean isVisibleTablaInformacion() {

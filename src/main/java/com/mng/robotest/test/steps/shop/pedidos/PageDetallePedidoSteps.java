@@ -8,7 +8,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.micuenta.beans.Ticket;
 import com.mng.robotest.domains.micuenta.pageobjects.PageDetallePedido;
 import com.mng.robotest.domains.micuenta.pageobjects.PageDetallePedido.DetallePedido;
@@ -19,7 +18,7 @@ public class PageDetallePedidoSteps {
 	private final PageDetallePedido pageDetalle;
 	private final WebDriver driver = TestMaker.getDriverTestCase();
 	
-	public PageDetallePedidoSteps(Channel channel, AppEcom app) {
+	public PageDetallePedidoSteps(Channel channel) {
 		PageDetallePedido pageDetalle = DetallePedido.NEW.getPageObject(channel);
 		if (pageDetalle.isPage()) {
 			this.pageDetalle = pageDetalle;

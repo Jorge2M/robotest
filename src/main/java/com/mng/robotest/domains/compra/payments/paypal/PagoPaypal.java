@@ -32,13 +32,11 @@ public class PagoPaypal extends PagoSteps {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		modalPreloaderSppinerSteps.validateAppearsAndDisappears();
-		switch (getInitPagePaypal()) {
-		case LOGIN:
+		if (getInitPagePaypal() == InitPagePaypal.LOGIN) {
 			pagePaypalLoginSteps.validateIsPageUntil(0);
-			break;
-		case CREACION_CUENTA:
+		}
+		else {
 			pagePaypalCreacionCuentaSteps.clickButtonIniciarSesion();
-			break;
 		}
 		
 		if (execPay) {

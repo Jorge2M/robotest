@@ -15,7 +15,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 
 public class SecBannerHeadGallery extends PageBase {
 	
-	public enum TypeLinkInfo { MORE, LESS };
+	public enum TypeLinkInfo { MORE, LESS }
 	
 	private static final String XPATH_BANNER = "//div[@class='bannerHead' or @class='firstBanner' or @class='innerBanner' or @class='_2mOAS']"; //React
 	private static final String XPATH_BANNER_WITH_VIDEO = XPATH_BANNER + "//div[@data-video]";

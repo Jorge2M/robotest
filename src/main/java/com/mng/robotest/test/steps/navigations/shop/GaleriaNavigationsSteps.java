@@ -3,11 +3,10 @@ package com.mng.robotest.test.steps.navigations.shop;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.beans.Pais;
 
 public class GaleriaNavigationsSteps extends StepBase {
 	
-	public void selectTalla(Pais pais) throws Exception {
+	public void selectTalla() throws Exception {
 		int posArticulo=1;
 		boolean articleAvailable = false;
 		PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();

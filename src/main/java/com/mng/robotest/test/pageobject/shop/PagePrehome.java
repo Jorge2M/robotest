@@ -28,7 +28,7 @@ import com.mng.robotest.test.utils.testab.TestABactive;
 
 public class PagePrehome extends PageBase implements PageFromFooter {
 
-	enum ButtonEnter { ENTER, CONTINUAR };
+	enum ButtonEnter { ENTER, CONTINUAR }
 	
 	private final Pais pais = dataTest.getPais();
 	private final IdiomaPais idioma = dataTest.getIdioma();
@@ -79,8 +79,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 
 	public String getCodigoPais(String nombrePais) {
 		String xpathOptionPais = getXPathOptionPaisFromName(nombrePais);
-		String codigoPais = getElement(xpathOptionPais).getAttribute("value");
-		return codigoPais;
+		return getElement(xpathOptionPais).getAttribute("value");
 	}
 
 	public boolean isPaisSelectedWithMarcaCompra() {

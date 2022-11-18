@@ -172,13 +172,12 @@ public class SecMenusUserSteps extends StepBase {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
 		boolean visibilityMLY = userMenus.isMenuInStateUntil(MANGO_LIKES_YOU, Present, 1);
-		switch (app) {
-		case shop:
+		if (app==AppEcom.shop) {
 			checks.add(
 				"Sí aparece el link de \"Mango Likes You\" en el menú de usuario",
 				visibilityMLY, State.Defect);
-			break;
-		default:
+		}
+		else {
 			checks.add(
 				"No aparece el link de \"Mango Likes You\" en el menú de usuario",
 				!visibilityMLY, State.Defect);

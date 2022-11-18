@@ -81,7 +81,7 @@ public class SecBannersSteps extends StepBase {
 				break;
 			default:				
 			case OTROS:
-				validacionesBannerEstandar(2, channel, app);
+				validacionesBannerEstandar(2, channel);
 				break;
 			}
 		}
@@ -134,17 +134,17 @@ public class SecBannersSteps extends StepBase {
 			"- Ficha<br>" +
 			"- Bloque de contenido con imágenes o página acceso",
 		level=State.Warn)
-	public boolean validacionesBannerEstandar(int seconds, Channel channel, AppEcom app) {
+	public boolean validacionesBannerEstandar(int seconds, Channel channel) {
 		for (int i=0; i<seconds; i++) {
-			if (validacionesBannerEstandar(channel, app)) {
+			if (validacionesBannerEstandar(channel)) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	private boolean validacionesBannerEstandar(Channel channel, AppEcom app) {
-		if (!pageLanding.haySecc_Art_Banners(app) &&
+	private boolean validacionesBannerEstandar(Channel channel) {
+		if (!pageLanding.haySecc_Art_Banners() &&
 			!pageLanding.hayImgsEnContenido()) {
 			PageFicha pageFicha = PageFicha.of(channel);
 			return pageFicha.isPageUntil(0);

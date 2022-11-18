@@ -168,6 +168,6 @@ public class PageHomeLikesSteps extends StepBase {
 		}
 		public void setFinPointsReceptorReal(int finPointsReceptorReal) {
 			this.finPointsReceptorReal = finPointsReceptorReal;
-		};
+		}
 	}
 }

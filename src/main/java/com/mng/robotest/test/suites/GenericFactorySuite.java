@@ -20,11 +20,10 @@ public class GenericFactorySuite extends SuiteMaker {
 		testRun.setStorerErrorStep(new ErrorStorer());
 		addTestRun(testRun);
 		setParallelMode(ParallelMode.METHODS);
-		switch ((Suites)inputParams.getSuite()) {
-		case ListFavoritos: 
+		if ((Suites)inputParams.getSuite()==Suites.ListFavoritos) { 
 			setThreadCount(1);
-			break;
-		default:
+		}
+		else {
 			setThreadCount(5);
 		}
 	}

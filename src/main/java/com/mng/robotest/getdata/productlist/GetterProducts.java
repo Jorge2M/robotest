@@ -516,7 +516,7 @@ public class GetterProducts {
 		private List<MenuProduct> getMenusProduct() {
 			List<MenuProduct> listReturn = new ArrayList<>();
 			for (MenuI menu : menusCandidates) {
-				listReturn.add(new MenuProduct(menu, app, url));
+				listReturn.add(new MenuProduct(menu, app));
 			}
 			return listReturn;
 		}
@@ -527,10 +527,10 @@ public class GetterProducts {
 		private final String galeria;
 		private final String familia;
 		
-		public MenuProduct(MenuI menu, AppEcom app, String urlBase) {
+		public MenuProduct(MenuI menu, AppEcom app) {
 			this.seccion = menu.getSeccion();
 			this.galeria = menu.getGaleria();
-			this.familia = menu.getFamilia(app, isPro(urlBase));
+			this.familia = menu.getFamilia(app, isPro());
 		}
 		
 		public String getSeccion() {
@@ -543,7 +543,7 @@ public class GetterProducts {
 			return this.familia;
 		}
 		
-		private boolean isPro(String urlBase) {
+		private boolean isPro() {
 			try {
 				return new PageBase().isPRO();
 			}

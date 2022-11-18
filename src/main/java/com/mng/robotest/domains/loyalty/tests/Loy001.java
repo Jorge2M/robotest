@@ -43,7 +43,7 @@ public class Loy001 extends TestBase {
 		clickGroup(NEW_NOW);
 //		//en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
 //		driver.navigate().refresh();
-		new GaleriaNavigationsSteps().selectTalla(dataTest.getPais());
+		new GaleriaNavigationsSteps().selectTalla();
 	}
 	
 	private DataPago checkoutExecution() throws Exception {

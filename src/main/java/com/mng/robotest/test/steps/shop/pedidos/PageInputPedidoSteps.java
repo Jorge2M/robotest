@@ -30,7 +30,7 @@ public class PageInputPedidoSteps extends StepBase {
 		pageInputPedido.inputPedido(codPedido);
 		pageInputPedido.clickRecuperarDatos();
 
-		PageDetallePedidoSteps pageDetPedidoSteps = new PageDetallePedidoSteps(channel, app);
+		PageDetallePedidoSteps pageDetPedidoSteps = new PageDetallePedidoSteps(channel);
 		pageDetPedidoSteps.validateIsPageOk(dataPedido);
 	}
 }

@@ -65,8 +65,7 @@ public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 			moveToElement(xpathLinkColor);
 			click(xpathLinkColor).exec();
 		}
-		int numArticles = pageGaleria.waitForArticleVisibleAndGetNumberOfThem(10);
-		return numArticles;
+		return pageGaleria.waitForArticleVisibleAndGetNumberOfThem(10);
 	}
 	
 	@Override

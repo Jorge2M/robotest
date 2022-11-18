@@ -45,12 +45,10 @@ public class PagoGetter {
 		for (PaymentCountry payment : listPayments) {
 			listLabels.add(payment.pago.getNameFilter(channel, app));
 		}
-		List<String> listSortedAndWithoutDuplicates = listLabels.stream()
+		return listLabels.stream()
 			.distinct()
 			.sorted()
 			.toList();
-		
-		return listSortedAndWithoutDuplicates;
 	}
 	
 	private static List<PaymentCountry> getListPaymentsFromCountries(List<Pais> listCountries, AppEcom app, boolean isEmpleado) {

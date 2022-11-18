@@ -119,24 +119,23 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return  (xpathPagina + getXPathArticulo(sizeArticle));
 	}
 
-	public enum ControlTemporada {ARTICLES_FROM, ARTICLES_FROM_OTHER};
+	public enum ControlTemporada {ARTICLES_FROM, ARTICLES_FROM_OTHER}
+	
 	String getXPathArticuloTemporadasX(ControlTemporada controlTemp, List<Integer> listTemporadas) {
 		String xpathResult = xpathArticuloBase + "/self::*[@id and ";
 		for (int i=0; i<listTemporadas.size(); i++) {
 			int temporada = listTemporadas.get(i);
-			switch (controlTemp) {
-			case ARTICLES_FROM:
+			if (controlTemp == ControlTemporada.ARTICLES_FROM) {
 				xpathResult += "starts-with(@id, " + temporada + ")";
 				if (i<(listTemporadas.size()-1)) {
 					xpathResult+=" or ";
 				}
-				break;
-			case ARTICLES_FROM_OTHER:
+			}
+			else {
 				xpathResult += "not(starts-with(@id, " + temporada + "))";
 				if (i<(listTemporadas.size()-1)) {
 					xpathResult+=" and ";
 				}
-				break;
 			}
 		}
 

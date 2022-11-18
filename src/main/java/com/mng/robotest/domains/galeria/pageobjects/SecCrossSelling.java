@@ -3,6 +3,7 @@ package com.mng.robotest.domains.galeria.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -14,12 +15,10 @@ public class SecCrossSelling extends PageBase {
 	private static final String XPATH_SECTION_DESKTOP = "//section[@id='crossSelling']";
 
 	private String getXPathSection() {
-		switch (channel) {
-		case desktop:
+		if (channel==Channel.desktop) {
 			return XPATH_SECTION_DESKTOP;
-		default:
-			return XPATH_SECTION_MOVIL;
 		}
+		return XPATH_SECTION_MOVIL;
 	}
 	
 	public String getXPath_link(int numLink) {

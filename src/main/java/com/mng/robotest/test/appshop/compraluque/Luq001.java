@@ -73,12 +73,10 @@ public class Luq001 extends TestBase {
 	
 	private String getCodPostal() {
 		PaisShop paisShop = PaisShop.from(dataTest.getCodigoPais());
-		switch (paisShop) {
-		case CANADA:
+		if (paisShop==PaisShop.CANADA) {
 			return codPostalesCanada.get(this.rand.nextInt(codPostalesCanada.size())); 
-		default:
-			return dataTest.getPais().getCodpos();
 		}
+		return dataTest.getPais().getCodpos();
 	}
 	
 	private Pais getPaisRandom(List<PaisShop> listaPaises) {

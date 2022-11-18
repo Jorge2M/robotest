@@ -74,11 +74,11 @@ public class ArticuloNavigations {
 	public static void buscarArticulo(Article article, Channel channel, AppEcom app) {
 		SecCabecera.buscarTexto(article.getGarmentId(), channel, app);
 		if (article.getColor()!=null) {
-			selectColorIfExists(article.getColor().getId(), channel, app);
+			selectColorIfExists(article.getColor().getId(), channel);
 		}
 	}
 
-	private static void selectColorIfExists(String colourCode, Channel channel, AppEcom app) {
+	private static void selectColorIfExists(String colourCode, Channel channel) {
 		if (colourCode!=null && "".compareTo(colourCode)!=0) {
 			PageFicha pageFicha = PageFicha.of(channel);
 			if (pageFicha.getSecDataProduct().isClickableColor(colourCode) &&

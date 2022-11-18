@@ -51,15 +51,12 @@ public class GetterGarment {
 	}
 	
 	private WebTarget getWebTargetGarment(String idGarment) {
-		WebTarget webTarget =  
-			client
+		return client
 				.target(target)
 				.path("services")
 				.path("garments")
 				.path(idGarment)
 				.property(ClientProperties.FOLLOW_REDIRECTS, Boolean.TRUE);
-				
-		return webTarget;
 	}
 	
 	private static String getUrlBase(String initialURL) {

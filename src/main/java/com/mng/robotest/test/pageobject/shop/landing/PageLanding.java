@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
@@ -105,7 +104,7 @@ public class PageLanding extends PageBase {
 		return banners;
 	}
 
-	public boolean haySecc_Art_Banners(AppEcom app) {
+	public boolean haySecc_Art_Banners() {
 		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		if (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle()) {
 			return true;
@@ -125,9 +124,9 @@ public class PageLanding extends PageBase {
 	}
 	
 	public boolean isSomeElementVisibleInPage(
-			List<Element> elementsCanBeContained, AppEcom app, Channel channel, int seconds) {
+			List<Element> elementsCanBeContained, Channel channel, int seconds) {
 		for (int i=0; i<seconds; i++) {
-			if (isSomeElementVisibleInPage(elementsCanBeContained, app, channel)) {
+			if (isSomeElementVisibleInPage(elementsCanBeContained, channel)) {
 				return true;
 			}
 			waitMillis(1000);
@@ -135,7 +134,7 @@ public class PageLanding extends PageBase {
 		return false;
 	}
 		
-	private boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, AppEcom app, Channel channel) {
+	private boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, Channel channel) {
 		for (Element element : elementsCanBeContained) {
 			boolean elementContained = false;
 			switch (element) {

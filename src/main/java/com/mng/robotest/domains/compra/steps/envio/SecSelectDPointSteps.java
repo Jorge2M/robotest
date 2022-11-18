@@ -40,7 +40,7 @@ public class SecSelectDPointSteps extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 5;
 		State stateVal = State.Warn;
-		if (dataSearchDp.typeData==DataSearchDp.CodigoPostal) {
+		if (dataSearchDp.typeData==DataSearchDp.CODIGO_POSTAL) {
 			stateVal = State.Info;
 		}
 	 	checks.add(

@@ -20,7 +20,7 @@ public class PageEpsSimulador extends PageBase {
 		public int getMinutes() {
 			return minutes;
 		}
-	};
+	}
 	
 	private static final String XPATH_LOGO_EPS = "//img[@class='paymentMethodLogo' and @src[contains(.,'eps.png')]]";
 	private static final String XPATH_CONTINUE_BUTTON = "//button[@value='pendingauthorised']";

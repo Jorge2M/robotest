@@ -73,6 +73,6 @@ public class PageAccesoMisComprasSteps extends StepBase {
 		pageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido()); 
 		pageAccesoMisCompras.clickBuscarPedidoBlockNo(); 
 
-		new PageDetallePedidoSteps(channel, app).validateIsPageOk(dataPedido);
+		new PageDetallePedidoSteps(channel).validateIsPageOk(dataPedido);
 	}
 }

@@ -140,7 +140,7 @@ public class SecSelectDPoint extends PageBase {
 		for (int i=0; i<seconds; i++) {
 			try {
 				DataDeliveryPoint dataDp = getDataDeliveryPointSelected();
-				if (dataSearchDp.typeData == Provincia) {
+				if (dataSearchDp.typeData == PROVINCIA) {
 					String provincia = dataSearchDp.data;
 					String provinciaLow = dataSearchDp.data.toLowerCase();
 					String prov1rstLetterCapital = provinciaLow.substring(0, 1).toUpperCase() + provinciaLow.substring(1);

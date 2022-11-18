@@ -15,7 +15,7 @@ public class FilterOnline implements Filter {
 	}
 	
 	public FilterOnline(boolean reverse) {
-		this.reverse = true;
+		this.reverse = reverse;
 	}
 	
 	@Override

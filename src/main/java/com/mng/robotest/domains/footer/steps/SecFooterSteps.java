@@ -78,12 +78,7 @@ public class SecFooterSteps extends StepBase {
 			 secFooter.clickLinkCambioPais(); 
 		 }
 		 modalCambioPaisSteps.validateIsVisible(5);
-		 try {
-			 modalCambioPaisSteps.cambioPais(newPais, newIdioma);  
-		 }
-		 catch (Exception e) {
-			 System.out.println(e);
-		 }
+		 modalCambioPaisSteps.cambioPais(newPais, newIdioma);  
 	 }
 	 
 	 @Step (

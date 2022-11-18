@@ -15,7 +15,8 @@ public class FactoryMenus {
 		ABRIGOS_SHE,
 		CARDIGANS_Y_JERSEIS_JERSEIS_SHE,
 		CARDIGANS_Y_JERSEIS_SHE,
-		ABRIGOS_HE };
+		ABRIGOS_HE 
+	}
 	
 	public static MenuWeb get(MenuItem menu) {
 		switch (menu) {

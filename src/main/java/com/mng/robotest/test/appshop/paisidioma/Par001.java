@@ -43,7 +43,7 @@ public class Par001 extends TestBase {
 		new PagePrehomeSteps().seleccionPaisIdiomaAndEnter();
 		new PageHomeMarcasSteps().validateIsPageWithCorrectLineas();
 		for (Linea linea : linesToTest) {
-			if (new UtilsMangoTest().validarLinea(dataTest.getPais(), linea)) {
+			if (new UtilsMangoTest().validarLinea(linea)) {
 				validaLinea(linea, null);
 				for (Sublinea sublinea : linea.getListSublineas(app)) {
 					validaLinea(linea, sublinea);

@@ -89,7 +89,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		filtroLinea.click();
 		waitLoadPage();
 		for (String textFiltro : listTextFiltros) {
-			String xpathFiltroOption = getXPathFiltroOption(typeFiltro, textFiltro);
+			String xpathFiltroOption = getXPathFiltroOption(textFiltro);
 			if (!state(Visible, xpathFiltroOption).check()) {
 				close();
 				return false;
@@ -112,12 +112,12 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		WebElement filtroLinea = getElement(typeFiltro.getXPathLineaFiltro());
 		filtroLinea.click();
 		waitLoadPage();
-		By byFiltroOption = By.xpath(getXPathFiltroOption(typeFiltro, textFiltro));
+		By byFiltroOption = By.xpath(getXPathFiltroOption(textFiltro));
 		state(Clickable, byFiltroOption).wait(1).check();
 		filtroLinea.findElement(byFiltroOption).click();
 		waitLoadPage();
 	}
-	private String getXPathFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
+	private String getXPathFiltroOption(String textFiltro) {
 		return "//a[@class='filter-option']//span[" + 
 					"text()[contains(.,'" + textFiltro + "')] or " +
 					"text()[contains(.,'" + upperCaseFirst(textFiltro) + "')]]/..";

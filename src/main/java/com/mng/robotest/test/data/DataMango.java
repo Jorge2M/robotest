@@ -14,7 +14,6 @@ public class DataMango {
 				.replace(" ", "")
 				.replace("-", ".");
 		
-		String emailUnico = "mng_test" + "_" + timestamp + "@mango.com";
-		return emailUnico;
+		return "mng_test" + "_" + timestamp + "@mango.com";
 	}
 }

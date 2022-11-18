@@ -41,8 +41,7 @@ public class Egy001 extends TestBase {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkPagos().build();
 		
-		DataPago dataPago = getDataPago(configCheckout);
-		return dataPago;
+		return getDataPago(configCheckout);
 	}
 
 }

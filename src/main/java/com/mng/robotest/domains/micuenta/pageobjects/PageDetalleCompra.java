@@ -22,13 +22,10 @@ public abstract class PageDetalleCompra extends PageBase implements PageDetalleP
 	public abstract void gotoListaMisCompras();
 	
 	public static PageDetalleCompra make(Channel channel) {
-		switch (channel) {
-		case desktop:
+		if (channel==Channel.desktop) {
 			return new PageDetalleCompraDesktop();
-		case mobile, tablet:
-			return new PageDetalleCompraMobil();
 		}
-		return null;
+		return new PageDetalleCompraMobil();
 	}
 	
 	protected PageDetalleCompra() {

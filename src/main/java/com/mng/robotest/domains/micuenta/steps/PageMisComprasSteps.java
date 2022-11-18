@@ -76,7 +76,7 @@ public class PageMisComprasSteps extends StepBase {
 		saveHtmlPage=SaveWhen.IfProblem)
 	public void selectCompraOnline(int posInLista, String codPais) {
 		Ticket ticket = pageMisCompras.selectTicket(TypeTicket.Online, posInLista);	   
-		PageDetallePedidoSteps pageDetPedidoSteps = new PageDetallePedidoSteps(channel, app);
+		PageDetallePedidoSteps pageDetPedidoSteps = new PageDetallePedidoSteps(channel);
 		pageDetPedidoSteps.validateIsPageOk(ticket, codPais);	   
 	}
 

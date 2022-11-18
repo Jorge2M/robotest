@@ -64,11 +64,10 @@ public class SecSelectorPreciosDesktop extends PageBase {
 	private void moveToCornerSelector(TypeClick typeCorner) {
 		waitLoadPage();
 		moveToElement(XPATH_FILTRO_WRAPPER_SHOP);
-		switch (typeCorner) {
-		case LEFT: 
+		if (typeCorner==TypeClick.LEFT) { 
 			moveToElement(XPATH_LEFT_CORNER_SHOP);
-			break;
-		case RIGHT:
+		}
+		else {
 			moveToElement(XPATH_RIGHT_CORNER_SHOP);
 		}
 	}

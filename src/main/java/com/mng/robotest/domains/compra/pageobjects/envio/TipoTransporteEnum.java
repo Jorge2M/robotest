@@ -18,31 +18,31 @@ public class TipoTransporteEnum {
 		/** Transporte Express */
 		EXPRESS("EXPRESS","E", "Express", true, "EXP", false, false),
 		/** [Droppoint] Transporte Packstation */
-		PACKSTATION("PACKSTATION","P", "Packstation", false, "DRP", false, true, CodigoPostal),
+		PACKSTATION("PACKSTATION","P", "Packstation", false, "DRP", false, true, CODIGO_POSTAL),
 		/** [Droppoint] Transporte Pickpoint */
-		PICKPOINT("PICKPOINT","Q", "Pickpoint", false, "DRP", false, true, Provincia),
+		PICKPOINT("PICKPOINT","Q", "Pickpoint", false, "DRP", false, true, PROVINCIA),
 		/** [Droppoint] Transporte Droppoint */
-		DROPPOINT("DROPPOINT","D", "Droppoint", false, "DRP", false, true, CodigoPostal),
+		DROPPOINT("DROPPOINT","D", "Droppoint", false, "DRP", false, true, CODIGO_POSTAL),
 		/** [Droppoint] Transporte PostNL */
-		POSTNLPOINT("POSTNLPOINT","L", "PostNL", false, "DRP", false, true, CodigoPostal),
+		POSTNLPOINT("POSTNLPOINT","L", "PostNL", false, "DRP", false, true, CODIGO_POSTAL),
 		/** [Droppoint] Transporte Postnord */
-		POSTNORD("POSTNORD","O", "Postnord", false, "DRP", false, true, CodigoPostal),
+		POSTNORD("POSTNORD","O", "Postnord", false, "DRP", false, true, CODIGO_POSTAL),
 		/** [Droppoint] Transporte ASM */
-		ASM("ASM","A", "ASM", false, "DRP", false, true, CodigoPostal),
+		ASM("ASM","A", "ASM", false, "DRP", false, true, CODIGO_POSTAL),
 //		/** [Droppoint] Transporte Chronopost */
 //		CHRONOPOST("CHRONOPOST","C", "CHR", false, "DRP", false, true, CodigoPostal),
 		/** [Droppoint] Transporte Chronopost */
-		CHRONOPOST("CHRONOPOST","C", "CHR", false, "DRP", false, true, CodigoPostal),
+		CHRONOPOST("CHRONOPOST","C", "CHR", false, "DRP", false, true, CODIGO_POSTAL),
 		/** [Droppoint] Transporte Correos */
-		CORREOS("CORREOS","R", "Correos", false, "DRP", false, true, CodigoPostal),
+		CORREOS("CORREOS","R", "Correos", false, "DRP", false, true, CODIGO_POSTAL),
 		/** [Droppoint] Transporte Bpost */
-		BPOST("BPOST","B", "Bpost", false, "DRP", false, true, CodigoPostal),
+		BPOST("BPOST","B", "Bpost", false, "DRP", false, true, CODIGO_POSTAL),
 		/** [Droppoint] Transporte InPost */
-		INPOST("INPOST","I", "InPost", false, "DRP", false, true, CodigoPostal),
+		INPOST("INPOST","I", "InPost", false, "DRP", false, true, CODIGO_POSTAL),
 		/** [Droppoint] Transporte Collect Plus */
-		COLLECT_PLUS("COLLECT_PLUS","F", "Collect Plus", false, "DRP", false, true, CodigoPostal),
+		COLLECT_PLUS("COLLECT_PLUS","F", "Collect Plus", false, "DRP", false, true, CODIGO_POSTAL),
 		/** [Droppoint] Transporte Meest */
-		MEEST("MEEST","G", "Meest", false, "DRP", false, true, CodigoPostal),
+		MEEST("MEEST","G", "Meest", false, "DRP", false, true, CODIGO_POSTAL),
 		/** Transporte Nextday */
 		NEXTDAY("NEXTDAY","N", "24 Horas", true, "24H", false, false), //Urgente - No horario personalizado
 		/** Transporte Nextday con franjas */
@@ -58,7 +58,7 @@ public class TipoTransporteEnum {
 		/** Transporte Llica */
 		LLICA("LLICA","Z", "Llica", false, "LLC", false, false),
 		/** Transporte Envio a Tienda */
-		TIENDA("TIENDA","T", "Envio Tienda", false, "TDA", false, true, Provincia);
+		TIENDA("TIENDA","T", "Envio Tienda", false, "TDA", false, true, PROVINCIA);
 		;
 		
 		/**

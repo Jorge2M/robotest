@@ -214,14 +214,12 @@ public class LineasArticuloBolsa extends PageBase {
 
 	public ArticuloDataBolsaScreen getArticuloDataByPosicion(int posicion) {
 		WebElement lineaArticleWeb = getLineaArticuloByPosicion(posicion);
-		ArticuloDataBolsaScreen articleData = getArticuloBolsaData(lineaArticleWeb); 
-		return articleData;
+		return getArticuloBolsaData(lineaArticleWeb); 
 	}
 	
 	public ArticuloDataBolsaScreen getArticuloDataByReferencia(String reference) {
 		WebElement lineaArticleWeb = getLineaArticuloByReferencia(reference);
-		ArticuloDataBolsaScreen articleData = getArticuloBolsaData(lineaArticleWeb);
-		return articleData;
+		return getArticuloBolsaData(lineaArticleWeb);
 	}
 	
 	private ArticuloDataBolsaScreen getArticuloBolsaData(WebElement lineaArticleWeb) {

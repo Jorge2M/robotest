@@ -23,12 +23,18 @@ public class SecIdeal extends PageBase {
 		TEST_ISSUER_PENDING("Test Issuer Pending", "1161"),
 		TEST_ISSUER_CANCELLED("Test Issuer Cancelled", "1162");
 		
-		public String nombre; 
-		public String valueOption;
-		
+		private String nombre; 
+		private String valueOption;
 		private BancoSeleccionado(String nombre, String valueOption) {
 			this.nombre = nombre;
 			this.valueOption = valueOption;
+		}
+		
+		public String getNombre() {
+			return nombre;
+		}
+		public String getValueOption() {
+			return valueOption;
 		}
 	}
 

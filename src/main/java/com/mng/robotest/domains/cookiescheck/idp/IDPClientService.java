@@ -50,11 +50,11 @@ public class IDPClientService {
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .uri(URI.create(baseUrl + OAUTH_TOKEN_ENDPOINT + "?" + GRANT_TYPE + "=" + CLIENT_CREDENTIALS))
                 .build();
-        IdentityToken identityToken = parseIdentityToken(httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).join().body());
-        return identityToken;
+        
+        return parseIdentityToken(httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString()).join().body());
     }
 
-    public IdentityToken resourceOwnerToken(String secret) throws IOException {
+    public IdentityToken resourceOwnerToken() throws IOException {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .uri(URI.create(baseUrl + OAUTH_TOKEN_ENDPOINT))

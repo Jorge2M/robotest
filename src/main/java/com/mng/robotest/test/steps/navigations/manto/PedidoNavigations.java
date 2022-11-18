@@ -85,12 +85,12 @@ public class PedidoNavigations {
 			DataPedido dataPedido, List<CheckPedido> listChecks, AppEcom app, WebDriver driver) {
 		new PageSelTdaMantoSteps().selectTienda(dataPedido.getCodigoAlmacen(), dataPedido.getCodigoPais());
 		if (listChecks.contains(CheckPedido.CONSULTAR_BOLSA)) {
-			consultarBolsaSteps(dataPedido, app, driver);
+			consultarBolsaSteps(dataPedido, driver);
 		}
 		
 		if (app!=AppEcom.votf) {
 			if (listChecks.contains(CheckPedido.CONSULTAR_PEDIDO)) {
-				consultarPedidoSteps(dataPedido, app, driver);	
+				consultarPedidoSteps(dataPedido, driver);	
 			}
 			
 			if (listChecks.contains(CheckPedido.ANULAR)) {
@@ -103,7 +103,7 @@ public class PedidoNavigations {
 		}
 	}
 	
-	private static void consultarBolsaSteps(DataPedido dataPedido, AppEcom app, WebDriver driver) {
+	private static void consultarBolsaSteps(DataPedido dataPedido, WebDriver driver) {
 		new PageMenusMantoSteps().goToBolsas();
 		new SecFiltrosMantoSteps(driver).setFiltrosYbuscar(dataPedido, TypeSearch.BOLSA);
 		boolean existLinkPedido = new PageBolsasMantoSteps().validaLineaBolsa(dataPedido).getExistsLinkCodPed();
@@ -112,7 +112,7 @@ public class PedidoNavigations {
 		}
 	}
 	
-	private static void consultarPedidoSteps(DataPedido dataPedido, AppEcom app, WebDriver driver) {
+	private static void consultarPedidoSteps(DataPedido dataPedido, WebDriver driver) {
 		new PageMenusMantoSteps().goToPedidos();
 		new SecFiltrosMantoSteps(driver).setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
 		boolean existLinkPedido = new PagePedidosMantoSteps().validaLineaPedido(dataPedido).getExistsLinkCodPed();
@@ -123,7 +123,7 @@ public class PedidoNavigations {
 	
 	private static void anularPedidoSteps(DataPedido dataPedido, AppEcom app, WebDriver driver) {
 		if (!new PageDetallePedido().isPage(dataPedido.getCodigoPedidoManto())) {
-			consultarPedidoSteps(dataPedido, app, driver);
+			consultarPedidoSteps(dataPedido, driver);
 		}
 		
 		new PageConsultaPedidoBolsaSteps().clickButtonIrAGenerar(dataPedido.getCodigoPedidoManto());

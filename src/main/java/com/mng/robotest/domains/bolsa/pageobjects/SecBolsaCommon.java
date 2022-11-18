@@ -21,7 +21,7 @@ import com.mng.robotest.test.utils.ImporteScreen;
 
 public abstract class SecBolsaCommon extends PageBase {
 
-	public enum StateBolsa { OPEN, CLOSED };
+	public enum StateBolsa { OPEN, CLOSED }
 	
 	abstract String getXPathPanelBolsa();
 	abstract String getXPathBotonComprar();

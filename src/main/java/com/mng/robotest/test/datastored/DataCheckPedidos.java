@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DataCheckPedidos {
 
-	public enum CheckPedido { CONSULTAR_BOLSA, CONSULTAR_PEDIDO, ANULAR };
+	public enum CheckPedido { CONSULTAR_BOLSA, CONSULTAR_PEDIDO, ANULAR }
 	
 	private final List<DataPedido> listPedidos;
 	private final List<CheckPedido> listChecks;

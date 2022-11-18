@@ -5,7 +5,6 @@ import static org.apache.http.impl.client.HttpClients.createDefault;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
@@ -23,7 +22,6 @@ import com.mng.robotest.domains.loyalty.getdata.data.ListConsumers;
 import com.mng.robotest.domains.loyalty.getdata.data.ResultAddPoints;
 import com.mng.robotest.domains.loyalty.getdata.data.TransferPoints;
 import com.mng.robotest.test.exceptions.NotFoundException;
-
 
 public class ClientApiLoyaltyPointsDev {
 
@@ -103,16 +101,13 @@ public class ClientApiLoyaltyPointsDev {
 		transferPoints.setLocation_id(11667);
 		transferPoints.setComments("hola");
 				
-		Client client = ClientBuilder.newBuilder().build();
-		ResultAddPoints result = 
-			client
+		return 
+			ClientBuilder.newBuilder().build()
 				.target("https://api.loyal.guru/profiles")
 				.path(user.getContactId())
 				.path("give_score")	
 				.request(MediaType.APPLICATION_JSON_TYPE)
 				.header("Authorization", "Basic dmljdG9yLnBhcmVyYStwcmVAbWFuZ28uY29tOmVjOWU0NmQ5NzIwMWNjN2U0Nzg0NTgxM2FkZWU1MTE4")
 				.post(Entity.json(transferPoints), ResultAddPoints.class);
-		
-		return result;
 	}
 }

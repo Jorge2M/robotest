@@ -72,10 +72,6 @@ public class SecCabeceraOutletMobil extends SecCabecera {
 	}
 
 	public void click(IconoCabOutletMobil icono) {
-		click(icono, app);
-	}
-
-	public void click(IconoCabOutletMobil icono, AppEcom app) {
 		click(icono.getBy()).type(TypeClick.javascript).exec();
 	}
 

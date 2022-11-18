@@ -19,9 +19,9 @@ public class Descuento {
 		public String getDescription() {
 			return this.description;
 		}
-	};
+	}
 	
-	public enum DiscountType {VALE, EMPLEADO};
+	public enum DiscountType {VALE, EMPLEADO}
 	
 	int percentageDesc = 0;
 	DiscountOver discountOver;
@@ -29,7 +29,6 @@ public class Descuento {
 	public Descuento(int porcentajeDesc) {
 		this.percentageDesc = porcentajeDesc;
 		this.discountOver = DiscountOver.ORIGINAL_PRICE; //Default value
-		
 	}
 	
 	public Descuento(int porcentajeDesc, AppEcom app) {

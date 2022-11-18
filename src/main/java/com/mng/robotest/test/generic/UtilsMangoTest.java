@@ -154,11 +154,8 @@ public class UtilsMangoTest extends PageBase {
 		PageObjTM.waitForPageLoaded(driver, 5);
 	}
 	
-	public boolean validarLinea(Pais pais, Linea linea) {
-		if (!linea.isActiveIn(channel)) {
-			return false;
-		}
-		return true;
+	public boolean validarLinea(Linea linea) {
+		return linea.isActiveIn(channel);
 	}
 	
 	public static String getEmailForCheckout(Pais pais, boolean emailThatExists) {

@@ -6,7 +6,8 @@ import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 
 public class DataSearchDeliveryPoint {
-	public enum DataSearchDp {Provincia, CodigoPostal}
+	
+	public enum DataSearchDp { PROVINCIA, CODIGO_POSTAL }
 	
 	public String data;
 	public DataSearchDp typeData;
@@ -16,13 +17,11 @@ public class DataSearchDeliveryPoint {
 		DataSearchDeliveryPoint dataDp = new DataSearchDeliveryPoint();
 		dataDp.tipoTransporte = pago.getTipoEnvioType(app);
 		dataDp.typeData = pago.getTipoEnvioType(app).getDataSearchDp();
-		switch (dataDp.typeData) {
-		case CodigoPostal:
+		if (dataDp.typeData == DataSearchDp.CODIGO_POSTAL) {
 			dataDp.data = pais.getCodpos();
-			break;
-		case Provincia:
+		}
+		else {
 			dataDp.data = pago.getProvinciaEnvio();
-			break;
 		}
 		
 		return dataDp;
