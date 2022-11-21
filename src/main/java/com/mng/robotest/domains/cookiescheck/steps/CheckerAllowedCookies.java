@@ -26,8 +26,8 @@ public class CheckerAllowedCookies implements Checker {
 			Check.make(
 				"Se comprueba que todas las cookies existentes en la página están permitidas",
 				resultCheck.getLeft(), State.Info)
-			//.code("COOKIE_TRUST")
 			.info(getInfoError(resultCheck))
+			.code("COOKIE_TRUST")			
 			.store(StoreType.None)
 			.send(SendType.Alert).build());
 		
