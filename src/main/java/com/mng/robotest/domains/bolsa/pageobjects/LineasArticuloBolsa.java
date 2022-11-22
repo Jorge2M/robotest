@@ -74,7 +74,7 @@ public class LineasArticuloBolsa extends PageBase {
 	
 	//TODO cuando se active la nueva bolsa en pro se puede eliminar el segundo xpath	
 	private static final String XPATH_ITEM_REF = XPATH_LINK_ITEM_REF + "/ancestor::li";
-	private static final String XPATH_ITEM_REF_OLD = XPATH_LINK_ITEM_REF_OLD + "/ancestor:div[@class[contains(.,'layout-row')]]";
+	private static final String XPATH_ITEM_REF_OLD = XPATH_LINK_ITEM_REF_OLD + "/ancestor::div[@class[contains(.,'layout-row')]]";
 	
 	private String getXPathLinkBorrarArt(String refArticulo) {
 		return "(" + getXPathLinkBorrarArtNew(refArticulo) + " | " +
