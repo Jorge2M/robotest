@@ -51,7 +51,10 @@ public class LineasArticuloBolsa extends PageBase {
 		}
 	}
 	
-	private static final String XPATH_ITEM = "//li[@data-testid='bag.item']";	
+	//TODO cuando se active la nueva bolsa en pro se puede eliminar el segundo xpath
+	private static final String XPATH_ITEM = "//li[@data-testid='bag.item']";
+	private static final String XPATH_ITEM_OLD = "//div[@class[contains(.,'layout-row')]]";
+	
 	private static final String XPATH_LINK_RELATIVE_ARTICLE = ".//img";
 	private static final String XPATH_NOMBRE_RELATIVE_ARTICLE = ".//*[@data-testid='bag.item.detail.button']";
 	private static final String XPATH_CANTIDAD_RELATIVE_ARTICLE = ".//*[@data-testid='bag.item.quantity']";
@@ -63,13 +66,28 @@ public class LineasArticuloBolsa extends PageBase {
 	private static final String XPATH_COLOR_RELATIVE_ARTICLE = XPATH_NOMBRE_RELATIVE_ARTICLE + "/..//p[3]";
 
 	private static final String XPATH_PRECIO_RELATIVE_ARTICLE = ".//*[@data-testid[contains(.,'currentPrice')]]";
+	
+	//TODO cuando se active la nueva bolsa en pro se puede eliminar el segundo xpath
 	private static final String TAG_REF = "[TAGREF]";
 	private static final String XPATH_LINK_ITEM_REF = XPATH_ITEM + "//img[@src[contains(.,'" + TAG_REF + "')]]";
+	private static final String XPATH_LINK_ITEM_REF_OLD = XPATH_ITEM_OLD + "//img[@src[contains(.,'" + TAG_REF + "')]]";
+	
+	//TODO cuando se active la nueva bolsa en pro se puede eliminar el segundo xpath	
 	private static final String XPATH_ITEM_REF = XPATH_LINK_ITEM_REF + "/ancestor::li";
+	private static final String XPATH_ITEM_REF_OLD = XPATH_LINK_ITEM_REF_OLD + "/ancestor:div[@class[contains(.,'layout-row')]]";
 	
 	private String getXPathLinkBorrarArt(String refArticulo) {
-		String xpathItemWithTag = getXPathLineaWithTagRef();
-		String xpathLinkBorrarArtRef = xpathItemWithTag + "//*[@data-testid[contains(.,'removeItem.button')]]";
+		return "(" + getXPathLinkBorrarArtNew(refArticulo) + " | " +
+			   getXPathLinkBorrarArtOld(refArticulo) + ")";
+	}
+	
+	private String getXPathLinkBorrarArtNew(String refArticulo) {
+		String xpathLinkBorrarArtRef = XPATH_ITEM_REF + "//*[@data-testid[contains(.,'removeItem.button')]]";
+		return xpathLinkBorrarArtRef.replace(TAG_REF, refArticulo);
+	}
+	
+	private String getXPathLinkBorrarArtOld(String refArticulo) {
+		String xpathLinkBorrarArtRef = XPATH_ITEM_REF_OLD + "//*[@data-testid[contains(.,'removeItem.button')]]";
 		return xpathLinkBorrarArtRef.replace(TAG_REF, refArticulo);
 	}
 
@@ -89,18 +107,6 @@ public class LineasArticuloBolsa extends PageBase {
 			return "";
 		}
 	}
-	
-	private String getXPathLinea() {
-		return XPATH_ITEM;
-	}
-	
-	private String getXPathLineaWithTagRef() {
-		return XPATH_ITEM_REF;
-	}
-	
-	private String getXPathLinkRelativeArticle() {
-		return XPATH_LINK_RELATIVE_ARTICLE;
-	}	
 	
 	public void clearArticuloAndWait(String refArticulo) {
 		String xpathClearArt = getXPathLinkBorrarArt(refArticulo);
@@ -134,19 +140,16 @@ public class LineasArticuloBolsa extends PageBase {
 	}
 
 	private String getXPathLineaArticleByPosicion(int posicion) {
-		String xpathLinea = getXPathLinea();
-		return ("(" + xpathLinea + ")[" + posicion + "]");
+		return ("(" + XPATH_ITEM + ")[" + posicion + "]");
 	}
 	
 	private static final String TAG_REFERENCE = "@Reference";
 	private String getXPathLineaArticleByReference(String reference) {
-		String xpathLinWithTag = getXPathLineaWithTagRef();
-		return xpathLinWithTag.replace(TAG_REFERENCE, reference);
+		return XPATH_ITEM_REF.replace(TAG_REFERENCE, reference);
 	}
 	
 	public int getNumLinesArticles() {
-		String xpathLinea = getXPathLinea();
-		return getElements(xpathLinea).size();
+		return getElements(XPATH_ITEM).size();
 	}
 	
 	public WebElement getLineaArticuloByPosicion(int posicion) {
@@ -201,14 +204,13 @@ public class LineasArticuloBolsa extends PageBase {
 	}
 	
 	private WebElement getLineaLinkArticle(WebElement lineaArticleWeb) {
-		String xpathLinRelative = getXPathLinkRelativeArticle();
-		state(State.Visible, lineaArticleWeb).by(By.xpath(xpathLinRelative)).wait(2).check();
+		state(State.Visible, lineaArticleWeb).by(By.xpath(XPATH_LINK_RELATIVE_ARTICLE)).wait(2).check();
 		try {
-			return lineaArticleWeb.findElement(By.xpath(xpathLinRelative));
+			return lineaArticleWeb.findElement(By.xpath(XPATH_LINK_RELATIVE_ARTICLE));
 		} 
 		catch (Exception e) {
 			waitMillis(2000);
-			return lineaArticleWeb.findElement(By.xpath(xpathLinRelative));
+			return lineaArticleWeb.findElement(By.xpath(XPATH_LINK_RELATIVE_ARTICLE));
 		}
 	}
 

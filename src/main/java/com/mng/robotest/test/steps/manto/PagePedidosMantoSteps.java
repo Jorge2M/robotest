@@ -17,9 +17,10 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.manto.PageDetalleCliente;
 import com.mng.robotest.test.pageobject.manto.pedido.PageDetallePedido;
 import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos;
-import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.IdColumn;
 import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
 import com.mng.robotest.test.utils.ImporteScreen;
+
+import static com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.IdColumn.*;
 
 
 public class PagePedidosMantoSteps extends StepBase {
@@ -35,10 +36,10 @@ public class PagePedidosMantoSteps extends StepBase {
 			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + seconds + " segundos)",
 			pagePedidos.isInvisibleCapaLoadingUntil(seconds), State.Defect);
 	 	
-	 	checks.setExistsLinkCodPed(pagePedidos.isPresentDataInPedido(IdColumn.IDPEDIDO, dataPedido.getCodigoPedidoManto(), TypeDetalle.PEDIDO, 0));
+	 	checks.setExistsLinkCodPed(pagePedidos.isPresentDataInPedido(IDPEDIDO, dataPedido.getCodigoPedidoManto(), TypeDetalle.PEDIDO, 0));
 	 	
 	 	checks.add(
-			"En la columna " + IdColumn.IDPEDIDO.textoColumna + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto(),
+			"En la columna " + IDPEDIDO.getTextoColumna() + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto(),
 			checks.getExistsLinkCodPed(), State.Warn);
 	 	
 	 	checks.add(
@@ -47,25 +48,25 @@ public class PagePedidosMantoSteps extends StepBase {
 		
 		if (app!=AppEcom.outlet) {
 		 	checks.add(
-				"En la columna " + IdColumn.TPV.textoColumna + " Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId(),
-				pagePedidos.isPresentDataInPedido(IdColumn.TPV, dataPedido.getPago().getTpv().getId(), TypeDetalle.PEDIDO, 0), 
+				"En la columna " + TPV.getTextoColumna() + " Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId(),
+				pagePedidos.isPresentDataInPedido(TPV, dataPedido.getPago().getTpv().getId(), TypeDetalle.PEDIDO, 0), 
 				State.Warn);
 		}
 
 	 	checks.add(
-			"En la columna " + IdColumn.EMAIL.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout(),
-			pagePedidos.isPresentDataInPedido(IdColumn.EMAIL, dataPedido.getEmailCheckout(), TypeDetalle.PEDIDO, 0), 
+			"En la columna " + EMAIL.getTextoColumna() + " aparece el email asociado: " + dataPedido.getEmailCheckout(),
+			pagePedidos.isPresentDataInPedido(EMAIL, dataPedido.getEmailCheckout(), TypeDetalle.PEDIDO, 0), 
 			State.Warn);
 	 	
-	 	String xpathCeldaImporte = pagePedidos.getXPathCeldaLineaPedido(IdColumn.TOTAL, TypeDetalle.PEDIDO);
+	 	String xpathCeldaImporte = pagePedidos.getXPathCeldaLineaPedido(TOTAL, TypeDetalle.PEDIDO);
 	 	checks.add(
 			"En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto(),
 			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), xpathCeldaImporte, driver), 
 			State.Warn);
 	 	
 	 	checks.add(
-			"En la columna " + IdColumn.TARJETA.textoColumna + " aparece el tipo de tarjeta: " + dataPedido.getCodtipopago(),
-			pagePedidos.isPresentDataInPedido(IdColumn.TARJETA, dataPedido.getCodtipopago(), TypeDetalle.PEDIDO, 0), 
+			"En la columna " + TARJETA.getTextoColumna() + " aparece el tipo de tarjeta: " + dataPedido.getCodtipopago(),
+			pagePedidos.isPresentDataInPedido(TARJETA, dataPedido.getCodtipopago(), TypeDetalle.PEDIDO, 0), 
 			State.Warn);
 		
 		return checks;

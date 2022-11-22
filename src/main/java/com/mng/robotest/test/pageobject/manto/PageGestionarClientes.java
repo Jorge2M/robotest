@@ -13,7 +13,7 @@ public class PageGestionarClientes extends PageBase {
 		ALTA("alta"), 
 		BAJA("baja");
 		
-		public String mensaje;
+		private String mensaje;
 		private TypeThirdButton(String mensaje) {
 			this.mensaje = mensaje;
 		}
@@ -41,16 +41,16 @@ public class PageGestionarClientes extends PageBase {
 	private static final String XPATH_FORM_TABLA_DETALLES_BUTTON = XPATH_FORM_TABLA + "//input[@value='Detalles']";
 	private static final String XPATH_SPAN_MENSAJE = "//span[text()[contains(.,'";
 	
-	public String getXPathIdClienteFromXPathDni(String dni){
+	private String getXPathIdClienteFromXPathDni(String dni){
 		String XPathDni = getXPathDniTabla(dni);
 		return XPathDni + "/ancestor::tr/td[1]";
 	}
 	
-	public String getXPathThirdButton(TypeThirdButton typeButton) {
+	private String getXPathThirdButton(TypeThirdButton typeButton) {
 		return (XPATH_FORM_TABLA + "//input[@value='" + typeButton + "']");
 	}
 	
-	public String getXPathDniTabla(String dni){
+	private String getXPathDniTabla(String dni){
 		return XPATH_FORM_TABLA + "//td[@title='" + dni + "']";
 	}
 	

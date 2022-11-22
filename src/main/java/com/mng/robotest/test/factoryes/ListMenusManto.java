@@ -12,7 +12,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.appmanto.Menus;
-import com.mng.robotest.test.data.TiendaMantoEnum.TiendaManto;
+import com.mng.robotest.test.data.TiendaManto;
 import com.mng.robotest.test.pageobject.manto.PageSelTda;
 import com.mng.robotest.test.pageobject.manto.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.PageJCAS;

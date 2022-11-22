@@ -33,7 +33,7 @@ public class PageGenerarPedido extends PageBase {
 		DB(10),	
 		NULL(-1);
 		
-		public int value;
+		private int value;
 		EstadoPedido(int value) {
 			this.value = value;
 		}

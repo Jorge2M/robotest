@@ -15,7 +15,7 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 		NO_BINARIO('X'), 
 		PREFIERO_NO_INCLUIRLO('N');
 	
-		public char code;
+		private char code;
 		private GenderOption(char code) {
 			this.code = code;
 		}

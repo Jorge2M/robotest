@@ -43,11 +43,15 @@ public class PagePedidos extends PageBase {
 		TIPO_CHEQUE("Tipo Cheque", false),
 		TOTAL_EUROS("Total Euros", false);
 		
-		public String textoColumna;
-		public boolean isLink;
+		private String textoColumna;
+		private boolean isLink;
 		private IdColumn(String textoColumna, boolean isLink) {
 			this.textoColumna = textoColumna;
 			this.isLink = isLink;
+		}
+		
+		public String getTextoColumna() {
+			return textoColumna;
 		}
 	}
 	

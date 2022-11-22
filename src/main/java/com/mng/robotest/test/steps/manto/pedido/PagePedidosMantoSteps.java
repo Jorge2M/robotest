@@ -41,7 +41,7 @@ public class PagePedidosMantoSteps extends StepBase {
 			pagePedidos.isPresentDataInPedido(IdColumn.IDPEDIDO, dataPedido.getCodigoPedidoManto(), TypeDetalle.PEDIDO, 0));
 		
 	 	checks.add(
-			"En la columna " + IdColumn.IDPEDIDO.textoColumna + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto(),
+			"En la columna " + IdColumn.IDPEDIDO.getTextoColumna() + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto(),
 			checks.getExistsLinkCodPed(), State.Warn);
 	 	
 	 	checks.add(
@@ -51,14 +51,14 @@ public class PagePedidosMantoSteps extends StepBase {
 	 	//En el caso de Outlet no tenemos la información del TPV que toca
 	 	if (app!=AppEcom.outlet) {
 		 	checks.add(
-				"En la columna " + IdColumn.TPV.textoColumna + 
+				"En la columna " + IdColumn.TPV.getTextoColumna() + 
 				" Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId(),
 				pagePedidos.isPresentDataInPedido(IdColumn.TPV, dataPedido.getPago().getTpv().getId(), TypeDetalle.PEDIDO, 0), 
 				State.Warn);
 	 	}
 		
 	 	checks.add(
-			"En la columna " + IdColumn.EMAIL.textoColumna + " aparece el email asociado: " + dataPedido.getEmailCheckout(),
+			"En la columna " + IdColumn.EMAIL.getTextoColumna() + " aparece el email asociado: " + dataPedido.getEmailCheckout(),
 			pagePedidos.isPresentDataInPedido(IdColumn.EMAIL, dataPedido.getEmailCheckout(), TypeDetalle.PEDIDO, 0), 
 			State.Warn);
 	 	

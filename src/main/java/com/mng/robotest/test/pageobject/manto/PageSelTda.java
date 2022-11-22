@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.mng.robotest.test.data.TiendaMantoEnum.TiendaManto;
+import com.mng.robotest.test.data.TiendaManto;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -20,7 +20,7 @@ public class PageSelTda {
 	static String XPathCeldaTextSelectEntorno = "//td[text()[contains(.,'Seleccion de Entorno')]]";
 
 	public static String getXpath_linkTienda(TiendaManto tienda) {
-		return ("//a[text()[contains(.,'" + tienda.litPantManto + "')]]");
+		return ("//a[text()[contains(.,'" + tienda.getLitPantManto() + "')]]");
 	}
 
 	public static boolean isPage(WebDriver driver) {
