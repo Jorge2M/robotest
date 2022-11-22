@@ -202,7 +202,7 @@ public class GetterProducts {
 			}
 		}
 		catch (Exception e) {
-			Log4jTM.getLogger().warn("Problem retriving articles of type %s for country %s", menuCandidate, codigoPaisAlf, e);
+			Log4jTM.getLogger().warn("Problem retriving articles of type {} for country {}. {}", menuCandidate, codigoPaisAlf, e);
 		}
 		return Optional.empty();
 	}

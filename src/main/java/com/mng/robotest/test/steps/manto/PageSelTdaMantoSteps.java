@@ -23,11 +23,12 @@ public class PageSelTdaMantoSteps extends StepBase {
 		TiendaManto tienda = TiendaManto.getTienda(codigoAlmacen, codigoPais, app);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_TIENDA, tienda.name());
 		
-		if (!PageSelTda.isPage(driver)) {
-			SecCabecera.clickButtonSelTienda(driver);
+		var pageSelTda = new PageSelTda();
+		if (!pageSelTda.isPage()) {
+			new SecCabecera().clickButtonSelTienda();
 		}
 		
-		PageSelTda.selectTienda(tienda, driver);
+		pageSelTda.selectTienda(tienda);
 		checkIsPageMenusManto();
 	}
 	

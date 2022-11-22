@@ -1,32 +1,28 @@
 package com.mng.robotest.test.pageobject.manto;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.mng.robotest.domains.transversal.PageBase;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+public class SecCabecera extends PageBase {
 
-public class SecCabecera {
+	private static final String XPATH_LIT_TIENDA = "//td/span[@class='txt8BDis']";
+	private static final String XPATH_BUTTON_SEL_TIENDA = "//input[@type='submit' and @value[contains(.,'Seleccionar tienda')]]";
+	private static final String XPATH_LINK_VOLVER_MENU = "//a[text()[contains(.,'volver al menu')]] | //a/img[@src='/images/logo-mango.png']";
 
-	static String XPathLitTienda = "//td/span[@class='txt8BDis']";
-	static String XPathButtonSelTienda = "//input[@type='submit' and @value[contains(.,'Seleccionar tienda')]]";
-	static String XPathLinkVolverMenu = "//a[text()[contains(.,'volver al menu')]] | //a/img[@src='/images/logo-mango.png']";
-
-	public static String getLitTienda(WebDriver driver) {
-		String litTienda = "";
-		if (state(Present, By.xpath(XPathLitTienda), driver).check()) {
-			litTienda = driver.findElement(By.xpath(XPathLitTienda)).getText();	
+	public String getLitTienda() {
+		if (state(Present, XPATH_LIT_TIENDA).check()) {
+			return getElement(XPATH_LIT_TIENDA).getText();	
 		}
-		return litTienda;
+		return "";
 	}
 
-	public static void clickButtonSelTienda(WebDriver driver) {
-		click(By.xpath(XPathButtonSelTienda), driver).exec();
+	public void clickButtonSelTienda() {
+		click(XPATH_BUTTON_SEL_TIENDA).exec();
 	}
 
-	public static void clickLinkVolverMenuAndWait(WebDriver driver, int seconds) {
-		click(By.xpath(XPathLinkVolverMenu), driver).waitLink(seconds).exec();
+	public void clickLinkVolverMenuAndWait(int seconds) {
+		click(XPATH_LINK_VOLVER_MENU).waitLink(seconds).exec();
 		waitForPageLoaded(driver, seconds);
 	}
 }

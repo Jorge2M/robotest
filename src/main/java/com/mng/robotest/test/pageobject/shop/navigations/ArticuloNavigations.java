@@ -1,23 +1,19 @@
 package com.mng.robotest.test.pageobject.shop.navigations;
 
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 
+public class ArticuloNavigations extends StepBase {
 
-public class ArticuloNavigations {
-
-	public static ArticuloScreen selectArticuloTallaColorByRef(Article articleStock, AppEcom app, Channel channel, WebDriver driver) {
+	public ArticuloScreen selectArticuloTallaColorByRef(Article articleStock) {
 		ArticuloScreen articulo = new ArticuloScreen();
 		articulo.setReferencia(articleStock.getGarmentId());
 		if (articleStock.getUrlFicha()==null || "".compareTo(articleStock.getUrlFicha())==0) {
-			buscarArticulo(articleStock, channel, app);
+			buscarArticulo(articleStock);
 		} else {
 			driver.get(articleStock.getUrlFicha());
 		}
@@ -71,14 +67,14 @@ public class ArticuloNavigations {
 		return articulo;
 	}
 
-	public static void buscarArticulo(Article article, Channel channel, AppEcom app) {
+	public void buscarArticulo(Article article) {
 		SecCabecera.buscarTexto(article.getGarmentId(), channel, app);
 		if (article.getColor()!=null) {
-			selectColorIfExists(article.getColor().getId(), channel);
+			selectColorIfExists(article.getColor().getId());
 		}
 	}
 
-	private static void selectColorIfExists(String colourCode, Channel channel) {
+	private void selectColorIfExists(String colourCode) {
 		if (colourCode!=null && "".compareTo(colourCode)!=0) {
 			PageFicha pageFicha = PageFicha.of(channel);
 			if (pageFicha.getSecDataProduct().isClickableColor(colourCode) &&

@@ -11,20 +11,12 @@ import com.mng.robotest.test.pageobject.manto.PageGestorCheques.TablaCheque;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-
 
 public class PageGestorChequesSteps extends PageBase {
 	
-	private final PageGestorCheques pageGestorCheques;
+	private final PageGestorCheques pageGestorCheques = new PageGestorCheques();
 	
-	public PageGestorChequesSteps(WebDriver driver) {
-		super(driver);
-		this.pageGestorCheques = new PageGestorCheques(driver);
-	}
-
 	public void validateIsPage() {
 		validatePage();
 		validateButtons();

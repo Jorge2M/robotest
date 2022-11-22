@@ -76,12 +76,14 @@ public class ListMenusManto {
 		String almacenEspanya = "001";
 		new PageJCAS().identication(usrManto, passManto);
 		TiendaManto tienda = TiendaManto.getTienda(almacenEspanya, codigoEspanya, AppEcom.shop);
-		if (!PageSelTda.isPage(driver)) {
-			SecCabecera.clickButtonSelTienda(driver);
+		var pageSelTda = new PageSelTda();
+		var secCabecera = new SecCabecera();
+		if (!pageSelTda.isPage()) {
+			secCabecera.clickButtonSelTienda();
 		}
-		if (!PageSelTda.isPage(driver)) {
-			SecCabecera.clickButtonSelTienda(driver);
+		if (!pageSelTda.isPage()) {
+			secCabecera.clickButtonSelTienda();
 		}
-		PageSelTda.selectTienda(tienda, driver);
+		pageSelTda.selectTienda(tienda);
 	}
 }

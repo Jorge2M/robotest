@@ -8,23 +8,20 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.manto.SecCabecera;
 import com.mng.robotest.test.pageobject.manto.SecFiltros;
 
 
-public class SecFiltrosMantoSteps {
+public class SecFiltrosMantoSteps extends StepBase {
 
 	public enum TypeSearch { BOLSA, PEDIDO } 
 	
 	private static final String TAG_NOMBRE_PAGO = "@TagNombrePago";
 	private static final String TAG_LIT_TIENDA = "@TagLitTienda";
 	
-	private final SecFiltros secFiltros;
-	
-	public SecFiltrosMantoSteps(WebDriver driver) {
-		secFiltros = new SecFiltros(driver);
-	}
+	private final SecFiltros secFiltros = new SecFiltros();
 	
 	public void setFiltrosYbuscar(DataPedido dataPedido, TypeSearch typeSearch) {
 		LocalDate fechaHoy = secFiltros.getFechaHastaValue();
@@ -46,7 +43,7 @@ public class SecFiltrosMantoSteps {
 			DataPedido dataPedido, TypeSearch typeSearch, LocalDate fechaDesde, LocalDate fechaHasta) {
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		step.replaceInDescription(TAG_NOMBRE_PAGO, dataPedido.getPago().getNombre());
-		step.replaceInDescription(TAG_LIT_TIENDA, SecCabecera.getLitTienda(secFiltros.driver));
+		step.replaceInDescription(TAG_LIT_TIENDA, new SecCabecera().getLitTienda());
 		
 		if (dataPedido.getCodigoPedidoManto()!=null) {
 			secFiltros.setFiltroCodPedido(dataPedido.getCodigoPedidoManto());

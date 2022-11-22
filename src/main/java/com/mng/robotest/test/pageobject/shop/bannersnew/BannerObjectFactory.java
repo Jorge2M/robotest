@@ -2,6 +2,8 @@ package com.mng.robotest.test.pageobject.shop.bannersnew;
 
 public class BannerObjectFactory {
 	
+	private BannerObjectFactory() {}
+	
 	public static BannerObject make(BannerType bannerType) {
 		switch (bannerType) {
 		case CABECERA:

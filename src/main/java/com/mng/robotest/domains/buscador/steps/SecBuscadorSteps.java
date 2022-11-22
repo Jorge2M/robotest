@@ -51,7 +51,7 @@ public class SecBuscadorSteps extends StepBase {
 	}
 	
 	private void searchArticuloCommon(Article article) {
-		ArticuloNavigations.buscarArticulo(article, channel, app);
+		new ArticuloNavigations().buscarArticulo(article);
 		PageObjTM.waitForPageLoaded(driver);  
 		PageFichaSteps pageFichaSteps = new PageFichaSteps();
 		pageFichaSteps.checkIsFichaAccordingTypeProduct(article);

@@ -125,7 +125,9 @@ public class SecMetodoEnvioSteps extends StepBase {
 			if (pago.getTipoEnvioType(app)==TipoTransporte.TIENDA) {
 				pago.setTipoEnvioShop(TipoTransporte.STANDARD);
 				pago.setTipoEnvioOutlet(TipoTransporte.STANDARD);
-				Log4jTM.getLogger().info("Modificado tipo de envío: " + pago.getTipoEnvioType(app) + " -> " + TipoTransporte.STANDARD);
+				Log4jTM.getLogger().info(
+						"Modificado tipo de envío: {} -> {}", 
+						pago.getTipoEnvioType(app), TipoTransporte.STANDARD);
 			}
 			
 			//Esto no está muy claro si es correcto, pero la configuración en Manto de los transportes dice que en el caso de Outlet los 

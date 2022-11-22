@@ -62,7 +62,7 @@ public class PedidoNavigations {
 	private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) {
 		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccess.Bat) {
-			PageLoginMantoSteps.login(dMantoAcc.getUrlManto(), dMantoAcc.getUserManto(), dMantoAcc.getPassManto(), driver);
+			new PageLoginMantoSteps().login(dMantoAcc.getUrlManto(), dMantoAcc.getUserManto(), dMantoAcc.getPassManto());
 			PedidoNavigations.validacionListPedidosStepss(dataCheckPedidos, dMantoAcc.getAppE(), driver);
 		}
 	}
@@ -105,7 +105,7 @@ public class PedidoNavigations {
 	
 	private static void consultarBolsaSteps(DataPedido dataPedido, WebDriver driver) {
 		new PageMenusMantoSteps().goToBolsas();
-		new SecFiltrosMantoSteps(driver).setFiltrosYbuscar(dataPedido, TypeSearch.BOLSA);
+		new SecFiltrosMantoSteps().setFiltrosYbuscar(dataPedido, TypeSearch.BOLSA);
 		boolean existLinkPedido = new PageBolsasMantoSteps().validaLineaBolsa(dataPedido).getExistsLinkCodPed();
 		if (existLinkPedido) {
 			new PageConsultaPedidoBolsaSteps().detalleFromListaPedBol(dataPedido, TypeDetalle.BOLSA);
@@ -114,7 +114,7 @@ public class PedidoNavigations {
 	
 	private static void consultarPedidoSteps(DataPedido dataPedido, WebDriver driver) {
 		new PageMenusMantoSteps().goToPedidos();
-		new SecFiltrosMantoSteps(driver).setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
+		new SecFiltrosMantoSteps().setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
 		boolean existLinkPedido = new PagePedidosMantoSteps().validaLineaPedido(dataPedido).getExistsLinkCodPed();
 		if (existLinkPedido) { 
 			new PageConsultaPedidoBolsaSteps().detalleFromListaPedBol(dataPedido, TypeDetalle.PEDIDO);

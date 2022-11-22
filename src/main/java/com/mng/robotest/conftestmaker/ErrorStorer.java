@@ -28,7 +28,7 @@ public class ErrorStorer extends EvidenceStorer {
 			content = capturaErrorPage();
 		}
 		catch (Exception e) {
-			step.getSuiteParent().getLogger().warn("Exception capturin error. " + e);
+			step.getSuiteParent().getLogger().warn("Exception capturin error. {}", e);
 		}
 		return content;
 	}

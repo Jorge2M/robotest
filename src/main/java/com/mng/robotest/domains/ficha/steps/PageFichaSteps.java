@@ -293,10 +293,10 @@ public class PageFichaSteps extends StepBase {
 	public boolean validateNotVisibleButtonFavoritos(ActionFavButton buttonType) {
 		switch (buttonType) {
 			case REMOVE:
-				return (pageFicha.isVisibleButtonElimFavoritos());
+				return pageFicha.isVisibleButtonElimFavoritos();
 			case ADD:
 			default:
-				return (pageFicha.isVisibleButtonAnadirFavoritos());
+				return pageFicha.isVisibleButtonAnadirFavoritos();
 		}
 	}
 

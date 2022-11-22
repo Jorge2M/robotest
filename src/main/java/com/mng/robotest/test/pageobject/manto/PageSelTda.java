@@ -1,37 +1,27 @@
 package com.mng.robotest.test.pageobject.manto;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.TiendaManto;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+public class PageSelTda extends PageBase {
 
-/**
- * Implementa la "API" de interacción con la página de "Selección de la tienda en Manto" (la posterior al login) 
- * @author jorge.munoz
- *
- */
-public class PageSelTda {
+	private static final String XPATH_CELDA_TEXT_SELECT_ENTORNO = "//td[text()[contains(.,'Seleccion de Entorno')]]";
 
-	static String XPathCeldaTextSelectEntorno = "//td[text()[contains(.,'Seleccion de Entorno')]]";
-
-	public static String getXpath_linkTienda(TiendaManto tienda) {
+	private String getXpathLinkTienda(TiendaManto tienda) {
 		return ("//a[text()[contains(.,'" + tienda.getLitPantManto() + "')]]");
 	}
 
-	public static boolean isPage(WebDriver driver) {
-		return isPage(0, driver);
+	public boolean isPage() {
+		return isPage(0);
 	}
-	public static boolean isPage(int seconds, WebDriver driver) {
-		return (state(Present, By.xpath(XPathCeldaTextSelectEntorno), driver).wait(seconds).check());
+	public boolean isPage(int seconds) {
+		return state(Present, XPATH_CELDA_TEXT_SELECT_ENTORNO).wait(seconds).check();
 	}
 
-	public static void selectTienda(TiendaManto tienda, WebDriver driver) {
-		String xpath = getXpath_linkTienda(tienda);
-		click(By.xpath(xpath), driver).type(TypeClick.webdriver).exec();
+	public void selectTienda(TiendaManto tienda) {
+		click(getXpathLinkTienda(tienda)).type(TypeClick.webdriver).exec();
 	}
 }

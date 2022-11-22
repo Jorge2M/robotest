@@ -1,13 +1,11 @@
 package com.mng.robotest.test.pageobject.manto;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.domains.transversal.PageBase;
-
 
 public class PageGestorCheques extends PageBase {
 	
@@ -70,10 +68,6 @@ public class PageGestorCheques extends PageBase {
 		public By getBy() {
 			return by;
 		}
-	}
-	
-	public PageGestorCheques(WebDriver driver) {
-		super(driver);
 	}
 	
 	private String getXPathFila(int numFila) {

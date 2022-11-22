@@ -4,12 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class SecFiltros extends PageBase {
 
@@ -21,10 +19,6 @@ public class SecFiltros extends PageBase {
 	private static final String XPATH_BUTTON_BUSCAR = "//input[@value='Buscar']";
 	
 	private static final DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	
-	public SecFiltros(WebDriver driver) {
-		super(driver);
-	}
 
 	public void setFiltroCodPedido(String codigoPedidoManto) {
 		driver.findElement(By.xpath(XPATH_FILTRO_COD_PEDIDO)).clear();

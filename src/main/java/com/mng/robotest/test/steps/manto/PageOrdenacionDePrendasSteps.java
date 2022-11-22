@@ -1,6 +1,5 @@
 package com.mng.robotest.test.steps.manto;
 
-import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
@@ -12,15 +11,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
 public class PageOrdenacionDePrendasSteps extends PageBase {
 
-	static String refPrenda = "";
+	public static final String REF_PRENDA = "";
 	
-	public PageOrdenacionDePrendasSteps(WebDriver driver) {
-		super(driver);
-	}
-
 	public void mantoOrdenacionInicio() {
 		selectPreProduccion();
 		selectShe();

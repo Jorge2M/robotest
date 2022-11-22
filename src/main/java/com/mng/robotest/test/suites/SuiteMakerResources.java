@@ -51,13 +51,17 @@ public class SuiteMakerResources {
 		parametersReturn.put("categoriaProdExistente", "BOLSOS");
 		parametersReturn.put("catProdInexistente", "Anchoas del Cantábrico");
 		
+		String PASSWORD_FRANCIA = 
+				GetterSecrets.factory()
+					.getCredentials(SecretType.SHOP_FRANCIA_USER)
+					.getPassword();
+		parametersReturn.put("userWithOnlinePurchases" ,"mangotest.redsauce@gmail.com");
+		parametersReturn.put("passUserWithOnlinePurchases", PASSWORD_FRANCIA);
+
 		String PASSWORD_STANDARD = 
 				GetterSecrets.factory()
 					.getCredentials(SecretType.SHOP_STANDARD_USER)
 					.getPassword();
-		parametersReturn.put("userWithOnlinePurchases" ,"espana.test@mango.com");
-		parametersReturn.put("passUserWithOnlinePurchases", PASSWORD_STANDARD);
-		
 		parametersReturn.put("userWithStorePurchases" ,"ticket_digital_es@mango.com");
 		parametersReturn.put("passUserWithStorePurchases", PASSWORD_STANDARD);
 		

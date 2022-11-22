@@ -25,7 +25,7 @@ public class PageMenusMantoSteps extends PageBase {
 	public void goToMainMenusAndClickMenu(String subMenu) {
 		if (!pageMenusManto.isPage()) {
 			waitMillis(1000);
-			SecCabecera.clickLinkVolverMenuAndWait(driver, 60);
+			new SecCabecera().clickLinkVolverMenuAndWait(60);
 		}
 		String textAlert = pageMenusManto.clickMenuAndAcceptAlertIfExists(subMenu);
 		checkIsPageOfSubmenu(subMenu, textAlert);
@@ -91,8 +91,7 @@ public class PageMenusMantoSteps extends PageBase {
 	
 	public void goToGestorCheques() {
 		goToMainMenusAndClickMenu("Gestor de Cheques");
-		PageGestorChequesSteps pageGestorSteps = new PageGestorChequesSteps(driver);
-		pageGestorSteps.validateIsPage();
+		new PageGestorChequesSteps().validateIsPage();
 	}
 	
 	public void goToGestorEstadisticasPedido() {
@@ -112,7 +111,7 @@ public class PageMenusMantoSteps extends PageBase {
 	
 	public void goToOrdenadorDePrendas() {
 		goToMainMenusAndClickMenu("Ordenador de Prendas");
-		new PageOrdenacionDePrendasSteps(driver).validateIsPage();
+		new PageOrdenacionDePrendasSteps().validateIsPage();
 	}
 	
 	public void comprobarMenusManto(String cabeceraName, String cabeceraNameNext) {

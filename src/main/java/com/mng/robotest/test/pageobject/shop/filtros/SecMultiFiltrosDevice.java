@@ -118,7 +118,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		waitLoadPage();
 	}
 	private String getXPathFiltroOption(String textFiltro) {
-		return "//a[@class='filter-option']//span[" + 
+		return "//a[@class='filter-option' or @class='order-option']//span[" + 
 					"text()[contains(.,'" + textFiltro + "')] or " +
 					"text()[contains(.,'" + upperCaseFirst(textFiltro) + "')]]/..";
 	}

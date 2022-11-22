@@ -3,7 +3,6 @@ package com.mng.robotest.test.appmanto;
 import java.io.Serializable;
 import java.util.Optional;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -67,8 +66,7 @@ public class Menus implements Serializable {
 	public void MAN005_ConsultaMenus() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
 		DataMantoAccess dMantoAcc = getDataMantoAccess();
-		WebDriver driver = TestMaker.getDriverTestCase();
-		PageLoginMantoSteps.login(dMantoAcc.getUrlManto(), dMantoAcc.getUserManto(), dMantoAcc.getPassManto(), driver);
+		new PageLoginMantoSteps().login(dMantoAcc.getUrlManto(), dMantoAcc.getUserManto(), dMantoAcc.getPassManto());
 		String codigoEspanya = "001";
 		String codigoAlmacenEspanya = "001";
 		new PageSelTdaMantoSteps().selectTienda(codigoAlmacenEspanya, codigoEspanya);

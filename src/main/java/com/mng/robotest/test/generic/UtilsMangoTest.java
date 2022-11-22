@@ -61,7 +61,7 @@ public class UtilsMangoTest extends PageBase {
 	}
 
 	public ArticuloScreen addArticuloBolsa(Article selArticulo) {
-		ArticuloScreen articulo = ArticuloNavigations.selectArticuloTallaColorByRef(selArticulo, app, channel, driver);
+		ArticuloScreen articulo = new ArticuloNavigations().selectArticuloTallaColorByRef(selArticulo);
 		PageFicha.of(channel).clickAnadirBolsaButtonAndWait(); 
 		return articulo;
 	}

@@ -114,8 +114,7 @@ public class LineasArticuloBolsa extends PageBase {
 	}
 	
 	public void clickArticle(int position) {
-		By byArticle = By.xpath(getXPathItem(position));
-		WebElement article = driver.findElement(byArticle);
+		WebElement article = getElement(getXPathItem(position));
 		click(article).by(By.xpath(XPATH_LINK_RELATIVE_ARTICLE)).exec();
 	}
 	
@@ -131,8 +130,9 @@ public class LineasArticuloBolsa extends PageBase {
 		return (ImporteScreen.getFloatFromImporteMangoScreen(importe));		
 	}
 	
+	//TODO cuando suba la nueva bolsa quitar el XPATH_ITEM_OLD
 	private String getXPathItem(int position) {
-		return "(" + XPATH_ITEM + ")[" + position + "]";
+		return "(" + XPATH_ITEM + " | " + XPATH_ITEM_OLD + ")[" + position + "]";
 	}
 	
 	private String getXPathLinkBorrarArt() {
