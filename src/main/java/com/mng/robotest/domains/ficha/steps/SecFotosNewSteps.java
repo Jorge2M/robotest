@@ -39,17 +39,17 @@ public class SecFotosNewSteps extends StepBase {
 	@Validation 
 	private ChecksTM checkLayoutFicha(boolean isFichaAccesorios) {
 		ChecksTM checks = ChecksTM.getNew();
-		int numFotosExpected1rstLine_A = 1;
-		int numFotosExpected1rstLine_B = 2;
+		int numFotosExpected1rstLineA = 1;
+		int numFotosExpected1rstLineB = 2;
 		if (isFichaAccesorios) {
-			numFotosExpected1rstLine_A = 2;
-			numFotosExpected1rstLine_B = 2;
+			numFotosExpected1rstLineA = 2;
+			numFotosExpected1rstLineB = 2;
 		}
 		
 		int numFotos1rstLine = secFotosNew.getNumFotosLine(1);
 	 	checks.add(
-			"La 1a línea tiene " + numFotosExpected1rstLine_A + " o " + numFotosExpected1rstLine_B + " fotos",
-			numFotos1rstLine==numFotosExpected1rstLine_A || numFotos1rstLine==numFotosExpected1rstLine_B, State.Warn);
+			"La 1a línea tiene " + numFotosExpected1rstLineA + " o " + numFotosExpected1rstLineB + " fotos",
+			numFotos1rstLine==numFotosExpected1rstLineA || numFotos1rstLine==numFotosExpected1rstLineB, State.Warn);
 	 	
 	 	int numLinesFotos = secFotosNew.getNumLinesFotos();
 	 	int numFotosLastLine = 0;

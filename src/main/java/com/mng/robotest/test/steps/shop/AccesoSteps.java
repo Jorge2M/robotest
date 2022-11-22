@@ -54,10 +54,10 @@ public class AccesoSteps extends StepBase {
 			registro+= "Borrar la Bolsa<br>";
 		}
 
-		StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
-		StepTestMaker.replaceInDescription(TAG_NOMBRE_PAIS, dataTest.getPais().getNombre_pais());
-		StepTestMaker.replaceInDescription(TAG_LITERAL_IDIOMA, dataTest.getIdioma().getCodigo().getLiteral());
-		StepTestMaker.replaceInDescription(TAG_REGISTRO, registro);
+		StepTM stepTestMaker = TestMaker.getCurrentStepInExecution();
+		stepTestMaker.replaceInDescription(TAG_NOMBRE_PAIS, dataTest.getPais().getNombre_pais());
+		stepTestMaker.replaceInDescription(TAG_LITERAL_IDIOMA, dataTest.getIdioma().getCodigo().getLiteral());
+		stepTestMaker.replaceInDescription(TAG_REGISTRO, registro);
 
 		new AccesoNavigations().accesoHomeAppWeb();
 		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {

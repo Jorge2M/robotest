@@ -116,7 +116,7 @@ public class CheckerImgsBroken implements Checker {
 		}
 		
 		// Declaring a dynamic string of array which will store src of all the broken images
-		List<String> BrokenimageUrl = new ArrayList<>();
+		List<String> brokenimageUrl = new ArrayList<>();
 		String script = "return (typeof arguments[0].naturalWidth!=\"undefined\" &&  arguments[0].naturalWidth>0)";
 		int i = 0;
 		for (WebElement image : allImages) { 
@@ -124,17 +124,17 @@ public class CheckerImgsBroken implements Checker {
 			// En ocasiones falla la ejecución del JavaScript porque la página no está preparada
 			// así que reintentamos la petición 5 veces durante 10 segundos
 			int intentos = 0;
-			boolean excep_stale = false;
+			boolean excepStale = false;
 			Object imgStatus = new Object();
 			do {
 				try {
 					intentos += 1;
 					imgStatus = eventFiringWebDriver.executeScript(script, image); 
 				} catch (StaleElementReferenceException e) {
-					excep_stale = true;
+					excepStale = true;
 					PageBase.waitMillis(2000);
 				}
-			} while (excep_stale && intentos < 5);
+			} while (excepStale && intentos < 5);
 
 			if (imgStatus.equals(Boolean.valueOf(false)) && image.isDisplayed()) {
 				String imageSrc = getImageSrc(image); 
@@ -146,7 +146,7 @@ public class CheckerImgsBroken implements Checker {
 						String currentImageUrl = imageSrc;
 						if (!verifyImgHttpActive(image)) {
 							String imageUrl = currentImageUrl;
-							BrokenimageUrl.add(imageUrl);
+							brokenimageUrl.add(imageUrl);
 	
 							// Buscamos el error en el contexto y obtenemos el número
 							String descError = ". <br><b>Image Broken!</b> " + ",id:" + imageId + ",src: " + currentImageUrl + " ";

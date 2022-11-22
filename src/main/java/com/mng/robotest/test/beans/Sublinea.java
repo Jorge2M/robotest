@@ -1,8 +1,10 @@
 package com.mng.robotest.test.beans;
 
+import java.io.Serializable;
+
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 
-public class Sublinea extends Linea {
+public class Sublinea extends Linea implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

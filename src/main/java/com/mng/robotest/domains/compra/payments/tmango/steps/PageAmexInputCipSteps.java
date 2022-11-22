@@ -30,8 +30,8 @@ public class PageAmexInputCipSteps extends StepBase {
 	@Step (
 		description="Introducimos el CIP #{CIP} y pulsamos el botón \"Aceptar\"", 
 		expected="Aparece una página de la pasarela de resultado OK")
-	public void inputCipAndAcceptButton(String CIP, String importeTotal) {
-		pageAmexInputCip.inputCIP(CIP);
+	public void inputCipAndAcceptButton(String cip, String importeTotal) {
+		pageAmexInputCip.inputCIP(cip);
 		pageAmexInputCip.clickAceptarButton();
 		new PageAmexResultSteps().validateIsPageOk(importeTotal);
 	}

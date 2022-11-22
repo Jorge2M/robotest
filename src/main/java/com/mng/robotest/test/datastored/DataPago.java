@@ -18,16 +18,16 @@ public class DataPago {
 	boolean okCheckChar;
 	Map<String, String> datosRegistro = new HashMap<>();
 	
-	public DataPago(ConfigCheckout FTCkout) {
-		setFTCkout(FTCkout);
+	public DataPago(ConfigCheckout ftCkout) {
+		setFTCkout(ftCkout);
 	}
 	
 	public ConfigCheckout getFTCkout() {
 		return this.FTCkout;
 	}
 	
-	public void setFTCkout(ConfigCheckout FTCkout) {
-		this.FTCkout = FTCkout;
+	public void setFTCkout(ConfigCheckout ftCkout) {
+		this.FTCkout = ftCkout;
 	}
 	
 	public void setPago(Pago pago) {

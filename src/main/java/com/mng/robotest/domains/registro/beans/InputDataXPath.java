@@ -2,22 +2,22 @@ package com.mng.robotest.domains.registro.beans;
 
 
 public class InputDataXPath {
-	String XPath;
-	String XPathDivError;
-	String msgErrorPrevRegistro;
+	private final String xPath;
+	private final String xPathDivError;
+	private final String msgErrorPrevRegistro;
 	
-	public InputDataXPath(String XPath, String XPathDivError, String msgErrorPrevRegistro) {
-		this.XPath = XPath;
-		this.XPathDivError = XPathDivError;
+	public InputDataXPath(String xPath, String xPathDivError, String msgErrorPrevRegistro) {
+		this.xPath = xPath;
+		this.xPathDivError = xPathDivError;
 		this.msgErrorPrevRegistro = msgErrorPrevRegistro;
 	}
 	
 	public String getXPah() {
-		return this.XPath;
+		return this.xPath;
 	}
 	
 	public String getXPathDivError() {
-		return this.XPathDivError;
+		return this.xPathDivError;
 	}
 	
 	public String getMsgErrorPrevRegistro() {

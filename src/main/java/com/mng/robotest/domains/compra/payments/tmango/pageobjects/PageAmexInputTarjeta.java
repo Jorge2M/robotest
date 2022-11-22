@@ -17,11 +17,11 @@ public class PageAmexInputTarjeta extends PageBase {
 		return state(Present, XPATH_PAGE_REDSYS).wait(seconds).check();
 	}
 	
-	public void inputDataTarjeta(String numTarj, String mesCad, String anyCad, String Cvc) {
+	public void inputDataTarjeta(String numTarj, String mesCad, String anyCad, String cvc) {
 		getElement(XPATH_INPUT_NUM_TARJ).sendKeys(numTarj);
 		getElement(XPATH_INPUT_MES_CAD).sendKeys(mesCad);
 		getElement(XPATH_INPUT_ANY_CAD).sendKeys(anyCad);
-		getElement(XPATH_INPUT_CVC).sendKeys(Cvc);
+		getElement(XPATH_INPUT_CVC).sendKeys(cvc);
 	}
 
 	public boolean isPresentNumTarj() {

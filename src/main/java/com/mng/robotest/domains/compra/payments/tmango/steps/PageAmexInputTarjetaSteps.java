@@ -42,8 +42,8 @@ public class PageAmexInputTarjetaSteps extends StepBase {
 	@Step (
 		description="Introducimos los datos de la tarjeta: #{numTarj} / #{mesCad}-#{anyCad} / #{Cvc} y pulsamos el botón \"Pagar\"", 
 		expected="Aparece la página de simulación del pago RedSys")
-	public PageRedsysSimSteps inputTarjetaAndPayButton(String numTarj, String mesCad, String anyCad, String Cvc, String importeTotal) {
-		pageAmexInputTarjeta.inputDataTarjeta(numTarj, mesCad, anyCad, Cvc);
+	public PageRedsysSimSteps inputTarjetaAndPayButton(String numTarj, String mesCad, String anyCad, String cvc, String importeTotal) {
+		pageAmexInputTarjeta.inputDataTarjeta(numTarj, mesCad, anyCad, cvc);
 		pageAmexInputTarjeta.clickPagarButton();
 		
 		PageRedsysSimSteps pageRedsysSimSteps = new PageRedsysSimSteps();

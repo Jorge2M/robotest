@@ -101,9 +101,9 @@ public class TipoTransporteEnum {
 		 */
 		private DataSearchDp dataSearchDp = null;
 
-		private TipoTransporte(String idAnalytics, String code, String _descripcion, boolean entregaDomicilio,
+		private TipoTransporte(String idAnalytics, String code, String descripcion, boolean entregaDomicilio,
 							   String codigoIntercambio, boolean franjaHoraria, boolean droppoint, DataSearchDp dataSearchDp) {
-			this(idAnalytics, code, _descripcion, entregaDomicilio, codigoIntercambio, franjaHoraria, droppoint);
+			this(idAnalytics, code, descripcion, entregaDomicilio, codigoIntercambio, franjaHoraria, droppoint);
 			this.dataSearchDp = dataSearchDp;
 		}
 		

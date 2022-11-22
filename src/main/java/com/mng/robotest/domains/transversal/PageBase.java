@@ -153,18 +153,18 @@ public class PageBase extends PageObjTM {
 	}    
     
 	public boolean isEntornoPRO(String url) {
-		List<String> URLsProShop   = Arrays.asList("shop.mango.com", "shoptest.pro.mango.com");
-		List<String> URLsProOutlet = Arrays.asList("www.mangooutlet.com", "outlettest.pro.mango.com");
+		List<String> urlsProShop   = Arrays.asList("shop.mango.com", "shoptest.pro.mango.com");
+		List<String> urlsProOutlet = Arrays.asList("www.mangooutlet.com", "outlettest.pro.mango.com");
 		Iterator<String> itURLsPRO = null;
 		if (app==AppEcom.outlet) {
-			itURLsPRO = URLsProOutlet.iterator();
+			itURLsPRO = urlsProOutlet.iterator();
 		} else {
-			itURLsPRO = URLsProShop.iterator();
+			itURLsPRO = urlsProShop.iterator();
 		}
 		
 		while (itURLsPRO.hasNext()) {
-			String URL = itURLsPRO.next();
-			if (url.contains(URL)) {
+			String urlStr = itURLsPRO.next();
+			if (url.contains(urlStr)) {
 				return true;
 			}
 		}

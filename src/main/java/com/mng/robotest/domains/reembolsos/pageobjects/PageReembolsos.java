@@ -104,9 +104,9 @@ public class PageReembolsos extends PageBase {
 		return state(Visible, XPATH_TEXT_IBANA_AFTER_SAVE).check();
 	}
 
-	public void typeInputIBAN(String IBAN) {
+	public void typeInputIBAN(String iban) {
 		getElement(XPATH_INPUT_IBAN).clear();
-		getElement(XPATH_INPUT_IBAN).sendKeys(IBAN);
+		getElement(XPATH_INPUT_IBAN).sendKeys(iban);
 	}
 
 	public void typeIdPassportIfInputExists(String idPassport) {
@@ -131,10 +131,10 @@ public class PageReembolsos extends PageBase {
 			isVisibleInputIBAN());
 	}
 
-	public void typeInputsTransf(String banco, String titular, String IBAN, String idPassport) {
+	public void typeInputsTransf(String banco, String titular, String iban, String idPassport) {
 		typeInputBanco(banco);
 		typeInputTitular(titular);
-		typeInputIBAN(IBAN);
+		typeInputIBAN(iban);
 		typeIdPassportIfInputExists(idPassport);
 		typeDateOfBirthIfInputExists(23, 4, 1974);
 	}

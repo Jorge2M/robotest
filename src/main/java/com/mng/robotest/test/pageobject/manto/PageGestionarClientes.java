@@ -42,8 +42,8 @@ public class PageGestionarClientes extends PageBase {
 	private static final String XPATH_SPAN_MENSAJE = "//span[text()[contains(.,'";
 	
 	private String getXPathIdClienteFromXPathDni(String dni){
-		String XPathDni = getXPathDniTabla(dni);
-		return XPathDni + "/ancestor::tr/td[1]";
+		String xpathDni = getXPathDniTabla(dni);
+		return xpathDni + "/ancestor::tr/td[1]";
 	}
 	
 	private String getXPathThirdButton(TypeThirdButton typeButton) {
