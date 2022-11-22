@@ -52,7 +52,7 @@ public class CheckerImgsBroken implements Checker {
 		
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
-			Check.make(descripValidac, isCheckOk, GenericCheck.ImgsBroken.getLevel())
+			Check.make(descripValidac, isCheckOk, GenericCheck.IMGS_BROKEN.getLevel())
 				.info(infoExecution).build());
 		
 		return checks;

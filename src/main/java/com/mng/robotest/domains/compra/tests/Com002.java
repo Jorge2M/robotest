@@ -25,7 +25,7 @@ public class Com002 extends TestBase {
 				.emaiExists().build();
 		
 		dataPago = getDataPago(configCheckout);
-		dataTest.setGenericChecksDisabled(Arrays.asList(GenericCheck.Analitica));
+		dataTest.setGenericChecksDisabled(Arrays.asList(GenericCheck.ANALITICA));
 	}
 	
 	@Override

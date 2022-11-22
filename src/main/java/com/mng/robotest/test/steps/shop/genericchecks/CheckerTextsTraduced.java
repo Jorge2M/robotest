@@ -19,7 +19,7 @@ public class CheckerTextsTraduced implements Checker {
 		checks.add(
 			"No hay textos sin traducir (que comiencen por \"#\")<br>" + 
 			getFormatHtmlListMessages(listElemsWithoutTraduction),
-			listElemsWithoutTraduction.size()==0, GenericCheck.TextsTraduced.getLevel());
+			listElemsWithoutTraduction.size()==0, GenericCheck.TEXTS_TRADUCED.getLevel());
 		
 		return checks;
 	}

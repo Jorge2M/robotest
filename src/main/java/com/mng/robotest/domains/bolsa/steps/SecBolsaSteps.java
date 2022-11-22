@@ -147,7 +147,7 @@ public class SecBolsaSteps extends StepBase {
 		}
 		validaCuadranArticulosBolsa();
 		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(GenericCheck.GoogleAnalytics)).checks();
+		GenericChecks.from(Arrays.asList(GenericCheck.GOOGLE_ANALYTICS)).checks();
 	}
 
 	@Validation

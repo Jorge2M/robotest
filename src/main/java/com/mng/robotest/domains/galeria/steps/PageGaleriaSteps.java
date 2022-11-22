@@ -212,13 +212,13 @@ public class PageGaleriaSteps extends StepBase {
 		
 		List<GenericCheck> listChecks = new ArrayList<>();
 		listChecks.add(GenericCheck.SEO); 
-		listChecks.add(GenericCheck.JSerrors); 
-		listChecks.add(GenericCheck.Analitica);
-		listChecks.add(GenericCheck.TextsTraduced);
-		listChecks.add(GenericCheck.NetTraffic);
-		listChecks.add(GenericCheck.GoogleAnalytics);
+		listChecks.add(GenericCheck.JS_ERRORS); 
+		listChecks.add(GenericCheck.ANALITICA);
+		listChecks.add(GenericCheck.TEXTS_TRADUCED);
+		listChecks.add(GenericCheck.NET_TRAFFIC);
+		listChecks.add(GenericCheck.GOOGLE_ANALYTICS);
 		if (dataForScroll.validaImgBroken) {
-			listChecks.add(GenericCheck.ImgsBroken);
+			listChecks.add(GenericCheck.IMGS_BROKEN);
 		}
 		
 		datosScroll.setStep(TestMaker.getCurrentStepInExecution());
@@ -493,8 +493,8 @@ public class PageGaleriaSteps extends StepBase {
 
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.GoogleAnalytics, 
-				GenericCheck.NetTraffic)).checks();	   
+				GenericCheck.GOOGLE_ANALYTICS, 
+				GenericCheck.NET_TRAFFIC)).checks();	   
 	}
 
 	@Validation

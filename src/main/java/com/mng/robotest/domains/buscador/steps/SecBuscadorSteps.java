@@ -69,7 +69,7 @@ public class SecBuscadorSteps extends StepBase {
 			areProducts(3);
 		}
 		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks();
+		GenericChecks.from(Arrays.asList(GenericCheck.IMGS_BROKEN)).checks();
 	}
 
 	@Validation (

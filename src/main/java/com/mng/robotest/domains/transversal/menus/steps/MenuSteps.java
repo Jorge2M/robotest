@@ -172,8 +172,8 @@ public class MenuSteps extends StepBase {
 		
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.GoogleAnalytics,
-				GenericCheck.NetTraffic)).checks();
+				GenericCheck.GOOGLE_ANALYTICS,
+				GenericCheck.NET_TRAFFIC)).checks();
 	}
 	
 	@Validation
@@ -265,7 +265,7 @@ public class MenuSteps extends StepBase {
 		checkContentGaleriaAfterClickLinea(linea);
 
 		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks();
+		GenericChecks.from(Arrays.asList(GenericCheck.IMGS_BROKEN)).checks();
 	}	
 	
 	@Step (
@@ -330,7 +330,7 @@ public class MenuSteps extends StepBase {
 		checkContentGaleriaAfterClickLinea(subLinea);
 
 		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(GenericCheck.ImgsBroken)).checks();
+		GenericChecks.from(Arrays.asList(GenericCheck.IMGS_BROKEN)).checks();
 	}		
 	
 	@Validation (

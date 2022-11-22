@@ -110,8 +110,8 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.GoogleAnalytics,
-				GenericCheck.NetTraffic)).checks();
+				GenericCheck.GOOGLE_ANALYTICS,
+				GenericCheck.NET_TRAFFIC)).checks();
 	}
 	
 	@Validation

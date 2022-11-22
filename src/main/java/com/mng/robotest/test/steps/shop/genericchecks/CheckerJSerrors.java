@@ -30,7 +30,7 @@ public class CheckerJSerrors implements Checker {
 			checks.add(
 				Check.make(
 				    descripValidac,
-				    resultadoOK || (resultadoLogs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES), GenericCheck.JSerrors.getLevel())
+				    resultadoOK || (resultadoLogs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES), GenericCheck.JS_ERRORS.getLevel())
 				.info(getInfoError(resultadoLogs))
 				.store(StoreType.None)
 				.build());

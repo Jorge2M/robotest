@@ -14,13 +14,13 @@ public class GenericChecks extends PageBase {
 	
 	public enum GenericCheck {
 		SEO(State.Info),
-		JSerrors(State.Info),
-		ImgsBroken(State.Warn),
-		Analitica(State.Defect),
-		NetTraffic(State.Warn),
-		TextsTraduced(State.Defect),
-		GoogleAnalytics(State.Warn),
-		CookiesAllowed(State.Defect);
+		JS_ERRORS(State.Info),
+		IMGS_BROKEN(State.Warn),
+		ANALITICA(State.Defect),
+		NET_TRAFFIC(State.Warn),
+		TEXTS_TRADUCED(State.Defect),
+		GOOGLE_ANALYTICS(State.Warn),
+		COOKIES_ALLOWED(State.Defect);
 		
 		State state;
 		private GenericCheck(State state) {
@@ -42,10 +42,10 @@ public class GenericChecks extends PageBase {
 	
 	public static void checkDefault() {
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.CookiesAllowed,
-				GenericCheck.JSerrors, 
-				GenericCheck.TextsTraduced,
-				GenericCheck.Analitica)).checks();
+				GenericCheck.COOKIES_ALLOWED,
+				GenericCheck.JS_ERRORS, 
+				GenericCheck.TEXTS_TRADUCED,
+				GenericCheck.ANALITICA)).checks();
 	}
 	
 	public void checks() {
@@ -61,7 +61,7 @@ public class GenericChecks extends PageBase {
 	}
 	
 	private boolean checkEnabled(GenericCheck genericCheck) {
-		if (genericCheck==GenericCheck.TextsTraduced) {
+		if (genericCheck==GenericCheck.TEXTS_TRADUCED) {
 			return false;
 		}
 		if (dataTest.getGenericChecksDisabled()!=null && 

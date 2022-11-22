@@ -90,8 +90,8 @@ public class PagePrehomeSteps extends StepBase {
 		
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.GoogleAnalytics,
-				GenericCheck.NetTraffic)).checks();
+				GenericCheck.GOOGLE_ANALYTICS,
+				GenericCheck.NET_TRAFFIC)).checks();
 		
 		if (execValidacs) {
 			checkPagePostPreHome();

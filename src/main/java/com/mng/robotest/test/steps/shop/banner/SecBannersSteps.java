@@ -112,7 +112,7 @@ public class SecBannersSteps extends StepBase {
 	 		"- El número de elementos DOM ha variado (en " + marginElements + " o más) con respecto al original (" + elementosPagPadre + ")",
 	 		(!urlEqual || !elemsEqual), State.Warn); 
 	 	
-	 	Checker checkImagesBroken = Checker.make(GenericCheck.ImgsBroken);
+	 	Checker checkImagesBroken = Checker.make(GenericCheck.IMGS_BROKEN);
 	 	ChecksTM checksImgs = checkImagesBroken.check(driver);
 	 	checks.add(checksImgs.get(0));
 	 	

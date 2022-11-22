@@ -172,8 +172,8 @@ public class CheckoutFlow extends StepBase {
 		page2IdentCheckoutSteps.clickContinuar(dataTest.isUserRegistered());
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.GoogleAnalytics, 
-				GenericCheck.NetTraffic)).checks();
+				GenericCheck.GOOGLE_ANALYTICS, 
+				GenericCheck.NET_TRAFFIC)).checks();
 	}
 	
 	private void test1rstPageCheckout() {
@@ -313,8 +313,8 @@ public class CheckoutFlow extends StepBase {
 				pagoSteps.storePedidoForMantoAndResetData();
 				GenericChecks.checkDefault();
 				GenericChecks.from(Arrays.asList(
-						GenericCheck.GoogleAnalytics,
-						GenericCheck.NetTraffic)).checks();
+						GenericCheck.GOOGLE_ANALYTICS,
+						GenericCheck.NET_TRAFFIC)).checks();
 			}
 		}
 	}

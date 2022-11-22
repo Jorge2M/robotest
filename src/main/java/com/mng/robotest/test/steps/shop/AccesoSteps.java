@@ -77,8 +77,8 @@ public class AccesoSteps extends StepBase {
 		checkLinksAfterLogin();
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.GoogleAnalytics, 
-				GenericCheck.NetTraffic)).checks();
+				GenericCheck.GOOGLE_ANALYTICS, 
+				GenericCheck.NET_TRAFFIC)).checks();
 	}
 	
 	@Validation
@@ -170,24 +170,23 @@ public class AccesoSteps extends StepBase {
 	}
 
 
-	static final String tagNombrePaisOrigen = "@TagPaisOrigen";
-	static final String tagCodigoPaisOrigen = "@TagCodigoPaisOrigen";
-	static final String tagNombreIdiomaOrigen = "@TagIdiomaOrigen";
-	static final String tagNodoOrigen = "@TagNodoOrigen";
-	static final String tagNodoDestino = "@TagNodoDestino";
+	private static final String TAG_NOMBRE_PAIS_ORIGEN = "@TagPaisOrigen";
+	private static final String TAG_CODIGO_PAIS_ORIGEN = "@TagCodigoPaisOrigen";
+	private static final String TAG_NOMBRE_IDIOMA_ORIGEN = "@TagIdiomaOrigen";
+	
 	@Step (
 		description=
 			"Datos del cambio de país <br>" + 
-			"<b>" + tagNombrePaisOrigen + "</b> (" + tagCodigoPaisOrigen + "), <b>idioma " + tagNombreIdiomaOrigen + "</b><br>" +  
+			"<b>" + TAG_NOMBRE_PAIS_ORIGEN + "</b> (" + TAG_CODIGO_PAIS_ORIGEN + "), <b>idioma " + TAG_NOMBRE_IDIOMA_ORIGEN + "</b><br>" +  
 			"<b>#{paisDestino.getNombre_pais()}</b> (#{paisDestino.getCodigo_pais()}), <b>idioma #{idiomaDestino.getLiteral()}</b>",
 		expected=
 			"Se accede a la shop de #{paisDestino.getNombre_pais()} en #{idiomaDestino.getLiteral()}",
 		saveHtmlPage=SaveWhen.Always)
 	public void accesoPRYCambioPais(Pais paisDestino, IdiomaPais idiomaDestino) throws Exception {
 		StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
-		StepTestMaker.replaceInDescription(tagNombrePaisOrigen, dataTest.getPais().getNombre_pais());
-		StepTestMaker.replaceInDescription(tagCodigoPaisOrigen, dataTest.getCodigoPais());
-		StepTestMaker.replaceInDescription(tagNombreIdiomaOrigen, dataTest.getIdioma().getLiteral());
+		StepTestMaker.replaceInDescription(TAG_NOMBRE_PAIS_ORIGEN, dataTest.getPais().getNombre_pais());
+		StepTestMaker.replaceInDescription(TAG_CODIGO_PAIS_ORIGEN, dataTest.getCodigoPais());
+		StepTestMaker.replaceInDescription(TAG_NOMBRE_IDIOMA_ORIGEN, dataTest.getIdioma().getLiteral());
 	
 		manySteps();
 
@@ -212,18 +211,19 @@ public class AccesoSteps extends StepBase {
 	 * @param listPaisAsocIP lista de posibles países asociados a la IP del usuario (actualmente España, Irlanda o USA)
 	 * @return el país asociado a la IP (al que te proponen cambiar en el modal)
 	 */
-	static final String tagUrlAccesoPaisNoIp = "@TagUrlAccesoPaisNoIp";
-	static final String tagLiteralIdiomaOrigen = "@TagLiteralIdiomaOrigen";
+	private static final String TAG_URL_ACCESO_PAIS_NO_IP = "@TagUrlAccesoPaisNoIp";
+	private static final String TAG_LITERAL_IDIOMA_ORIGEN = "@TagLiteralIdiomaOrigen";
+	
 	@Step (
-		description="Acceder a la shop vía la URL <b>" + tagUrlAccesoPaisNoIp + "</b> (#{paisAccesoNoIP.getNombre_pais()} / " + tagLiteralIdiomaOrigen + ")", 
+		description="Acceder a la shop vía la URL <b>" + TAG_URL_ACCESO_PAIS_NO_IP + "</b> (#{paisAccesoNoIP.getNombre_pais()} / " + TAG_LITERAL_IDIOMA_ORIGEN + ")", 
 		expected="Aparece un modal solicitando confirmación del país")
 	public static Pais accesoConURLPaisNoIP(String urlBaseTest, Pais paisAccesoNoIP, Pais paisAccesoPrevio, Pais paisPrevConf, 
 											int vecesPaisConfPrev, List<Pais> listPaisAsocIP, WebDriver driver) throws Exception {
 		Pais paisAsocIP = null;
 		String urlAccesoPaisNoIp = paisAccesoNoIP.getUrlPaisEstandar(urlBaseTest);
 		IdiomaPais idiomaOrigen = paisAccesoNoIP.getListIdiomas().get(0);
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagUrlAccesoPaisNoIp, urlAccesoPaisNoIp);
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagLiteralIdiomaOrigen, idiomaOrigen.getLiteral());
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_ACCESO_PAIS_NO_IP, urlAccesoPaisNoIp);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_LITERAL_IDIOMA_ORIGEN, idiomaOrigen.getLiteral());
 		
 		driver.get(urlAccesoPaisNoIp);
 		PageObjTM.waitForPageLoaded(driver);
@@ -310,18 +310,19 @@ public class AccesoSteps extends StepBase {
 		return checks;
 	}
 	
-	static final String tagPaisBotonCambio = "@TagPaisBotonCambio";
-	static final String tagHrefBotonCambio = "@TagHrefBotonCambio";
+	private static final String TAG_PAIS_BOTON_CAMBIO = "@TagPaisBotonCambio";
+	private static final String TAG_HREF_BOTON_CAMBIO = "@TagHrefBotonCambio";
+	
 	@Step (
-		description="Confirmamos la propuesta de país del modal <b>" + tagPaisBotonCambio + "</b>", 
-		expected="Se redirige a la URL " + tagHrefBotonCambio)
+		description="Confirmamos la propuesta de país del modal <b>" + TAG_PAIS_BOTON_CAMBIO + "</b>", 
+		expected="Se redirige a la URL " + TAG_HREF_BOTON_CAMBIO)
 	public static void selectConfirmPaisModal(WebDriver driver) {
 		ModalCambioPais modalCambioPais = new ModalCambioPais();
 		
 		String paisBotonCambio = modalCambioPais.getTextPaisButtonChagePais();
 		String hrefBotonCambioPais = modalCambioPais.getHRefPaisButtonChagePais();
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagPaisBotonCambio, paisBotonCambio);
-		TestMaker.getCurrentStepInExecution().replaceInExpected(tagHrefBotonCambio, hrefBotonCambioPais);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_PAIS_BOTON_CAMBIO, paisBotonCambio);
+		TestMaker.getCurrentStepInExecution().replaceInExpected(TAG_HREF_BOTON_CAMBIO, hrefBotonCambioPais);
 		
 		modalCambioPais.clickButtonChangePais();
 		checkIsDoneRedirectToCountry(paisBotonCambio, hrefBotonCambioPais, driver);
@@ -330,8 +331,8 @@ public class AccesoSteps extends StepBase {
 	@Validation (
 		description="Se redirige a la URL del país #{paisBotonCambio} (#{hrefBotonCambioPais})",
 		level=State.Defect)
-	private static boolean checkIsDoneRedirectToCountry(@SuppressWarnings("unused") String paisBotonCambio, 
-														String hrefBotonCambioPais, WebDriver driver) {
+	private static boolean checkIsDoneRedirectToCountry(
+			String paisBotonCambio, String hrefBotonCambioPais, WebDriver driver) {
 		return (driver.getCurrentUrl().toLowerCase().contains(hrefBotonCambioPais.toLowerCase()));
 	}
 	

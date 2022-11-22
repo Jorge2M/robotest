@@ -14,19 +14,19 @@ public interface Checker {
 		switch (check) {
 		case SEO:
 			return new CheckerSEO();
-		case JSerrors:
+		case JS_ERRORS:
 			return new CheckerJSerrors();
-		case ImgsBroken:
+		case IMGS_BROKEN:
 			return new CheckerImgsBroken();
-		case Analitica:
+		case ANALITICA:
 			return new CheckerAnalitica();
-		case GoogleAnalytics:
+		case GOOGLE_ANALYTICS:
 			return new CheckerGoogleAnalytics();
-		case TextsTraduced:
+		case TEXTS_TRADUCED:
 			return new CheckerTextsTraduced();
-		case NetTraffic:
+		case NET_TRAFFIC:
 			return new CheckerNetTraffic();
-		case CookiesAllowed:
+		case COOKIES_ALLOWED:
 			return new CheckerAllowedCookies();
 		}
 		

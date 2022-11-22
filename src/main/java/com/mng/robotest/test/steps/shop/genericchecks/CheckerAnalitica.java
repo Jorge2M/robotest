@@ -52,7 +52,7 @@ public class CheckerAnalitica implements Checker {
 		if (UtilsTest.dateBeforeToday("2023-01-31")) {
 			return State.Warn;
 		}
-		return GenericCheck.Analitica.getLevel();
+		return GenericCheck.ANALITICA.getLevel();
 	}
 	
 	private boolean stringIs(String value, int number) {

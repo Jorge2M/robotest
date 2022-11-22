@@ -21,7 +21,7 @@ public class PaisGetter {
 	
 	private PaisGetter() {}
 	
-	private static final String NameFileCountiesXml = "ListCountries.xml";
+	private static final String NAME_FILE_COUNTRIES_XML = "ListCountries.xml";
 	private static final List<Pais> listAllCountries = getListAllCountries();
 	private static final List<String> charactersAllCountries = Arrays.asList("*", "X", "");
 
@@ -99,7 +99,7 @@ public class PaisGetter {
 		Response response;
 		JAXBContext jaxbContext = JAXBContext.newInstance(Response.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		InputStream countriesXmlStream = PaisGetter.class.getResourceAsStream("/" + NameFileCountiesXml);
+		InputStream countriesXmlStream = PaisGetter.class.getResourceAsStream("/" + NAME_FILE_COUNTRIES_XML);
 		response = (Response)jaxbUnmarshaller.unmarshal(countriesXmlStream);
 		return response;
 	}

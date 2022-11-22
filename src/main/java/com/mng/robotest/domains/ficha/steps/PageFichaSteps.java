@@ -54,8 +54,8 @@ public class PageFichaSteps extends StepBase {
 		checkIsFichaArtDisponible(article.getArticleId(), 3);
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(
-				GenericCheck.ImgsBroken,
-				GenericCheck.NetTraffic)).checks();
+				GenericCheck.IMGS_BROKEN,
+				GenericCheck.NET_TRAFFIC)).checks();
 	}
 
 	@Validation (
