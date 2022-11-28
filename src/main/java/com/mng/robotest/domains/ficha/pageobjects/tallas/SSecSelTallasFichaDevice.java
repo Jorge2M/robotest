@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.openqa.selenium.JavascriptExecutor;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 
@@ -125,6 +127,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 			if (isVisibleSelectorTallasUntil(1)) {
 				break;
 			}
+			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,+25)", "");
 		}
 	}
 
