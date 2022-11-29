@@ -10,6 +10,8 @@ import com.mng.robotest.domains.registro.steps.PageRegistroPersonalizacionShopSt
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.test.beans.IdiomaPais;
+import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
@@ -22,17 +24,25 @@ public class Reg001 extends TestBase {
 	private final String emailNotExistent = DataMango.getEmailNonExistentTimestamp();
 	private final String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_STANDARD_USER).getPassword();
 	
-	private final DataNewRegister dataNewRegister = new DataNewRegister(
-			emailNotExistent, 
-			passStandard, 
-			"665015122", 
-			true,
-			"Jorge",
-			"08720",
-			"23/04/1974",
-			GenderOption.MASCULINO,
-			Arrays.asList(LineaType.SHE, LineaType.HE, LineaType.KIDS));
+	private final DataNewRegister dataNewRegister;
 
+	public Reg001(Pais pais, IdiomaPais idioma) {
+		super();
+		dataTest.setPais(pais);
+		dataTest.setIdioma(idioma);
+		
+		dataNewRegister = new DataNewRegister(
+				emailNotExistent, 
+				passStandard, 
+				pais.getTelefono(), 
+				true,
+				"Jorge",
+				pais.getCodpos(),
+				"23/04/1974",
+				GenderOption.MASCULINO,
+				Arrays.asList(LineaType.SHE, LineaType.HE, LineaType.KIDS));
+	}
+	
 	@Override
 	public void execute() throws Exception {
 		accesoAndClickRegistrate();

@@ -36,7 +36,8 @@ public class Registro implements Serializable {
 		groups={"Registro", "Canal:all_App:shop", "SupportsFactoryCountrys"},
 		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG001_NewRegisterOK() throws Exception {
-		new Reg001().execute();
+		TestCaseTM.addNameSufix(this.indexFact);
+		new Reg001(pais, idioma).execute();
 	}
 	
 	@Test (
