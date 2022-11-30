@@ -18,13 +18,13 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	private final LineaType lineaType;
 	private final SublineaType sublineaType;
 	
-	private static final String XPATH_LINK_LINEA_MUJER = "//*[@data-testid='header.menuItem.she']";
-	private static final String XPATH_LINK_LINEA_HOMBRE = "//*[@data-testid='header.menuItem.he']";
-	private static final String XPATH_LINK_LINEA_NINA = "//*[@data-testid='header.menuItem.kids']";
-	private static final String XPATH_LINK_LINEA_NINO = XPATH_LINK_LINEA_NINA;
-	private static final String XPATH_LINK_LINEA_TEEN = "//*[@data-testid='header.menuItem.teen']";
-	private static final String XPATH_LINK_LINEA_KIDS = XPATH_LINK_LINEA_NINA; //p.e. Bolivia
-	private static final String XPATH_LINK_LINEA_HOME = "//*[@data-testid='header.menuItem.home']";
+//	private static final String XPATH_LINK_LINEA_MUJER = "//*[@data-testid='header.menuItem.she']";
+//	private static final String XPATH_LINK_LINEA_HOMBRE = "//*[@data-testid='header.menuItem.he']";
+//	private static final String XPATH_LINK_LINEA_NINA = "//*[@data-testid='header.menuItem.kids']";
+//	private static final String XPATH_LINK_LINEA_NINO = XPATH_LINK_LINEA_NINA;
+//	private static final String XPATH_LINK_LINEA_TEEN = "//*[@data-testid='header.menuItem.teen']";
+//	private static final String XPATH_LINK_LINEA_KIDS = XPATH_LINK_LINEA_NINA; //p.e. Bolivia
+//	private static final String XPATH_LINK_LINEA_HOME = "//*[@data-testid='header.menuItem.home']";
 	
 	private static final String XPATH_LINK_SUBLINEA_NINA = "//*[@data-testid[contains(.,'header.tabButton.sections_nina')]]";
 	private static final String XPATH_LINK_SUBLINEA_BEBE_NINA = "//*[@data-testid[contains(.,'header.tabButton.sections_babyNina')]]";
@@ -41,19 +41,17 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	private String getXPathLineaLink() throws IllegalArgumentException {
 		switch (lineaType) {
 		case SHE: 
-			return XPATH_LINK_LINEA_MUJER;
-		case HE: 
-			return XPATH_LINK_LINEA_HOMBRE;
-		case NINA:
-			return XPATH_LINK_LINEA_NINA;
-		case NINO: 
-			return XPATH_LINK_LINEA_NINO;
+		case HE:
 		case TEEN:
-			return XPATH_LINK_LINEA_TEEN;
-		case KIDS: 
-			return XPATH_LINK_LINEA_KIDS;
 		case HOME:
-			return XPATH_LINK_LINEA_HOME;
+			if (app==AppEcom.outlet) {
+				return "//*[@data-testid='header.menuItem." + lineaType.getSufixOutlet(channel).trim() + "']";
+			}
+			return "//*[@data-testid='header.menuItem." + lineaType.getId2() + "']";
+		case NINA:
+		case NINO:
+		case KIDS:			
+			return "//*[@data-testid='header.menuItem.kids']";
 		default:
 			throw new IllegalArgumentException("The line " + lineaType + " is not present in the movil channel");
 		}

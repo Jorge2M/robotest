@@ -6,7 +6,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
@@ -18,60 +17,49 @@ public class SecMenusUserDevice extends PageBase {
 	
 	public enum MenuUserDevice implements ElementPage {
 		AYUDA(
-			"//*[@data-label='ayuda']",
+			//"//*[@data-label='ayuda']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'help')]]"),
 		MIS_COMPRAS(
-			"//*[@data-label='mis-compras']",
+			//"//*[@data-label='mis-compras']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'mypurchases')]]"),
 		PEDIDOS(
-			"//*[@data-label='pedidos']",
+			//"//*[@data-label='pedidos']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'mypurchases')]]"),
 		CERRAR_SESION(
-			"//*[@data-label='cerrar_sesion']",
+			//"//*[@data-label='cerrar_sesion']",
 			"//a[@href[contains(.,'/logout')]]"),
 		FAVORITOS(
-			"//*[@data-label='favoritos']",
+			//"//*[@data-label='favoritos']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'favorites')]]"),
 		INICIAR_SESION(
-			"//*[@data-label='iniciar_sesion']",
+			//"//*[@data-label='iniciar_sesion']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'login')]]"),
 		REGISTRATE(
-			"//*[@data-label='iniciar_sesion']",
+			//"//*[@data-label='iniciar_sesion']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'login')]]"),
 		MI_CUENTA(
-			"//*[@data-label='mi_cuenta']",
+			//"//*[@data-label='mi_cuenta']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'account')]]"),
 		MANGO_LIKES_YOU(
-			"//*[text()[contains(.,'Mango likes you')]]",
+			//"//*[text()[contains(.,'Mango likes you')]]",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'mangolikesyou')]]"),
 		CAMBIO_PAIS(
-			"//*[@data-label='cambio_pais']",
+			//"//*[@data-label='cambio_pais']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'preHome')]]");
 
-		private static final String XPATH_CAPA_USER_MENU_OUTLET = "//ul[@class='menu-section-user-menu-links']";
-		private static final String XPATH_CAPA_USER_MENU_SHOP = "//ul";
-		private By byMenuOutlet;
-		private By byMenuShop;
-		MenuUserDevice(String xpathOutlet, String xpathShop) {
-			byMenuOutlet = By.xpath(XPATH_CAPA_USER_MENU_OUTLET + xpathOutlet);
-			byMenuShop = By.xpath(XPATH_CAPA_USER_MENU_SHOP + xpathShop);
+		private static final String XPATH_CAPA_USER_MENU = "//ul";
+		private By byMenu;
+		MenuUserDevice(String xpath) {
+			byMenu = By.xpath(XPATH_CAPA_USER_MENU + xpath);
 		}
 
 		@Override
 		public By getBy() {
-			throw new IllegalArgumentException("Undefined app");
-		}
-		
-		@Override
-		public By getBy(Enum<?> app) {
-			if (app==AppEcom.outlet) {
-				return byMenuOutlet;
-			}
-			return byMenuShop;
+			return byMenu;
 		}
 		@Override
-		public By getBy(Channel channel, Enum<?> app) {
-			return getBy(app);
+		public By getBy(Channel channel) {
+			return getBy();
 		}
 	}
 	
