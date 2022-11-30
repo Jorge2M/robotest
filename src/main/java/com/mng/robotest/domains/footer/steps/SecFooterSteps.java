@@ -11,7 +11,7 @@ import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
@@ -86,7 +86,7 @@ public class SecFooterSteps extends StepBase {
 		expected="Aparecen los textos legales de RGPD")
 	public void validaRGPDFooter(Boolean clickRegister) {
 		if (!clickRegister) {
-			SecCabecera.getNew(channel, app).clickLogoMango();
+			new SecCabeceraMostFrequent().clickLogoMango();
 		}
 		secFooter.clickFooterSuscripcion();
 		if (dataTest.getPais().getRgpd().equals("S")) {

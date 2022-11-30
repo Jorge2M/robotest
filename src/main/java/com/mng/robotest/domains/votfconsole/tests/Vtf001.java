@@ -23,7 +23,7 @@ public class Vtf001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		consolaVotfSteps.accesoPagInicial();
-		consolaVotfSteps.selectEntornoTestAndCons("Prepro k8s");
+		consolaVotfSteps.selectEntornoTestAndCons("PRE HTTPS INTERNAL K8S");
 
 		String idArticle = searchForArticleAvailable(15, consolaVotfSteps, driver);
 		consolaVotfSteps.consultarDispEnvTienda(idArticle);

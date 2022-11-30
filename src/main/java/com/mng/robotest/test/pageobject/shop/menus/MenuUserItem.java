@@ -10,8 +10,7 @@ import java.util.List;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraOutletMobil.IconoCabOutletMobil;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent.IconoCabeceraShop_DesktopMobile;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent.IconoCabecera;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusUserDevice.MenuUserDevice;
 
@@ -44,8 +43,7 @@ public class MenuUserItem {
 	public enum TypeMenu {
 		IconoCabeceraShop_DesktopMobile,
 		MenuUserDesktop,
-		MenuUserDevice,
-		IconoCabOutletMobil
+		MenuUserDevice
 	}
 	
 	private final UserMenu menu;
@@ -73,7 +71,7 @@ public class MenuUserItem {
 	}
 	
 	private TypeMenu getTypeMenu(ElementPage link) {
-		if (link instanceof IconoCabeceraShop_DesktopMobile) {
+		if (link instanceof IconoCabecera) {
 			return TypeMenu.IconoCabeceraShop_DesktopMobile;
 		}
 		if (link instanceof MenuUserDesktop) {
@@ -81,9 +79,6 @@ public class MenuUserItem {
 		}
 		if (link instanceof MenuUserDevice) {
 			return TypeMenu.MenuUserDevice;
-		}
-		if (link instanceof IconoCabOutletMobil) {
-			return TypeMenu.IconoCabOutletMobil;
 		}
 		return null;
 	}
@@ -118,25 +113,23 @@ public class MenuUserItem {
 	}
 	
 	private ElementPage getMenuLupa() {
-		if (app==AppEcom.outlet && channel==Channel.mobile) {
-			return IconoCabOutletMobil.LUPA;
-		}
-		return IconoCabeceraShop_DesktopMobile.lupa;
+		return IconoCabecera.lupa;
 	}
 	
 	private ElementPage getMenuIniciarSesion() {
-		if (app==AppEcom.outlet || channel==Channel.tablet) {
-			if (channel==Channel.desktop) {
-				return IconoCabeceraShop_DesktopMobile.iniciarsesion;
-			}
-			if (channel.isDevice()) {
-				return MenuUserDevice.INICIAR_SESION;
-			}
-		}
-		if (app==AppEcom.shop || app==AppEcom.votf) {
-			return IconoCabeceraShop_DesktopMobile.iniciarsesion;
-		}
-		return null;
+//		if (app==AppEcom.outlet || channel==Channel.tablet) {
+//			if (channel==Channel.desktop) {
+//				return IconoCabecera.iniciarsesion;
+//			}
+//			if (channel.isDevice()) {
+//				return MenuUserDevice.INICIAR_SESION;
+//			}
+//		}
+//		if (app==AppEcom.shop || app==AppEcom.votf) {
+//			return IconoCabecera.iniciarsesion;
+//		}
+//		return null;
+		return IconoCabecera.iniciarsesion;
 	}
 	
 	private ElementPage getMenuCerrarSesion() {
@@ -162,14 +155,14 @@ public class MenuUserItem {
 	private ElementPage getMenuMiCuenta() {
 		if (app==AppEcom.outlet || channel==Channel.tablet) {
 			if (channel==Channel.desktop) {
-				return IconoCabeceraShop_DesktopMobile.micuenta;
+				return IconoCabecera.micuenta;
 			}
 			if (channel.isDevice()) {
 				return MenuUserDevice.MI_CUENTA;
 			}
 		}
 		if (app==AppEcom.shop || app==AppEcom.votf) {
-			return IconoCabeceraShop_DesktopMobile.micuenta;
+			return IconoCabecera.micuenta;
 		}
 		return null;
 	}
@@ -179,7 +172,7 @@ public class MenuUserItem {
 			return MenuUserDevice.FAVORITOS;
 		}
 
-		return IconoCabeceraShop_DesktopMobile.favoritos;
+		return IconoCabecera.favoritos;
 	}
 	
 	private ElementPage getMenuMisCompras() {

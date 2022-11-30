@@ -11,12 +11,12 @@ public interface SecSearch {
 	public static SecSearch getNew(Channel channel, AppEcom app) {
 		if (channel.isDevice()) {
 			if (channel==Channel.tablet) {
-				return new SecSearchDeviceShop();
+				return new SecSearchDevice();
 			}
-			if (app==AppEcom.outlet) {
-				return new SecSearchMobilOutlet();
-			}
-			return new SecSearchDeviceShop();
+//			if (app==AppEcom.outlet) {
+//				return new SecSearchMobilOutlet();
+//			}
+			return new SecSearchDevice();
 		}
 		return new SecSearchDesktop();
 	}

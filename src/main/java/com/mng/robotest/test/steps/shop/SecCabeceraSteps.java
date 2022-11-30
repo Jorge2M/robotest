@@ -8,10 +8,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 
 public class SecCabeceraSteps extends StepBase {
 
-	private final SecCabecera secCabecera = SecCabecera.getNew(channel, app);
+	private final SecCabecera secCabecera = new SecCabeceraMostFrequent();
 	
 	public SecCabecera getSecCabecera() {
 		return secCabecera;

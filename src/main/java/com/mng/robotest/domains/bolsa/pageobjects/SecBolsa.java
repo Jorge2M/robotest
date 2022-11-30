@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 public class SecBolsa extends SecBolsaCommon {
@@ -111,14 +112,14 @@ public class SecBolsa extends SecBolsaCommon {
 	}
 
 	private void setBolsaDesktopToState(StateBolsa stateBolsaExpected) {
-		SecCabecera secCabecera = SecCabecera.getNew(channel, app);
+		SecCabecera secCabecera = new SecCabeceraMostFrequent();
 		secCabecera.clickIconoBolsaWhenDisp(2);
 		isInStateUntil(stateBolsaExpected, 2);
 	}
 	
 	private void setBolsaMobileToState(StateBolsa stateBolsaExpected) {
 		if (stateBolsaExpected==StateBolsa.OPEN) {
-			SecCabecera.getNew(channel, app).clickIconoBolsaWhenDisp(2);
+			new SecCabeceraMostFrequent().clickIconoBolsaWhenDisp(2);
 		} else {
 			if (app==AppEcom.outlet) {
 				clickIconoCloseMobile();

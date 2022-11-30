@@ -26,7 +26,7 @@ import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -37,7 +37,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class UtilsMangoTest extends PageBase {
 
 	public void goToPaginaInicio() throws Exception {
-		boolean existeLogo = SecCabecera.getNew(channel, app).clickLogoMango();
+		boolean existeLogo = new SecCabeceraMostFrequent().clickLogoMango();
 		if (!existeLogo) {
 			ITestContext ctx = getTestCase().getTestRunParent().getTestNgContext();
 			String urlPaginaPostAcceso = (String)ctx.getAttribute(Constantes.ATTR_URL_PAG_POST_ACCESO); 

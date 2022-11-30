@@ -19,7 +19,7 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.acceptcookies.SectionCookies;
 import com.mng.robotest.test.pageobject.shop.acceptcookies.ModalSetCookies.SectionConfCookies;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraOutletMobil;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test.pageobject.utils.LocalStorage;
 import com.mng.robotest.test.steps.shop.acceptcookies.ModalSetCookiesSteps;
@@ -168,8 +168,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		selecPaisIdiomaYAccede();
 		new ModalLoyaltyAfterAccess().closeModalIfVisible();
 		if (channel.isDevice()) {
-			SecCabeceraOutletMobil secCabecera = new SecCabeceraOutletMobil();
-			secCabecera.closeSmartBannerIfExistsMobil();
+			new SecCabeceraMostFrequent().closeSmartBannerIfExistsMobil();
 		}
 	}
 	

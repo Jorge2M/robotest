@@ -12,7 +12,7 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.PageJCAS;
 import com.mng.robotest.test.pageobject.shop.PagePrehome;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test.pageobject.votf.PageAlertaVOTF;
 import com.mng.robotest.test.pageobject.votf.PageLoginVOTF;
@@ -56,7 +56,7 @@ public class AccesoNavigations extends StepBase {
 		pageSelectLineaVOTF.clickMenu(LineaType.SHE, 1);
 		
 		//Cuando se selecciona el icono de Mango deja de tener efecto el forzado del TestAB de la cabecera que habíamos ejecutado previamente
-		SecCabecera.getNew(channel, AppEcom.votf).clickLogoMango();
+		new SecCabeceraMostFrequent().clickLogoMango();
 	}
 	
 	public void accesoVOTF() throws Exception {

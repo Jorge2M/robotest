@@ -4,12 +4,11 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.AccesoVOTF;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.votf.PageSelectLineaVOTF;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
@@ -42,7 +41,7 @@ public class PageSelectLineaVOTFSteps extends StepBase {
 		pageSelectLineaVOTF.clickBanner(LineaType.SHE);
 		pageSelectLineaVOTF.clickMenu(LineaType.SHE, numMenu);
 		
-		SecCabecera.getNew(channel, AppEcom.votf).clickLogoMango();
+		new SecCabeceraMostFrequent().clickLogoMango();
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dataTest.getPais()));
 		new SectionBarraSupVOTFSteps().validate(accesoVOTF.getUsuario());
 		

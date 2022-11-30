@@ -1,5 +1,6 @@
 package com.mng.robotest.getdata.canonicalproduct.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
@@ -7,12 +8,14 @@ import java.io.Serializable;
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 
 @JsonInclude(NON_EMPTY)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EntityFamilyOnline implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	private String id; 
 	private String name;
+	private String nameEn;
 	
 	public String getId() {
 		return id;
@@ -28,5 +31,13 @@ public class EntityFamilyOnline implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getNameEn() {
+		return nameEn;
+	}
+
+	public void setNameEn(String nameEn) {
+		this.nameEn = nameEn;
 	}
 }

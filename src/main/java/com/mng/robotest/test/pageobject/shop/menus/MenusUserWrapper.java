@@ -14,20 +14,18 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraOutletMobil.IconoCabOutletMobil;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent.IconoCabeceraShop_DesktopMobile;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent.IconoCabecera;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusUserDevice;
-//import com.mng.robotest.test.pageobject.shop.menus.device.SecMenuLateralDevice;
 import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusUserDevice.MenuUserDevice;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 
 public class MenusUserWrapper extends PageBase {
 	
-	private final SecCabecera secCabecera = SecCabecera.getNew(channel, app);
-//	private final SecMenuLateralDevice secMenuLateralMobil = new SecMenuLateralDevice();
+	private final SecCabecera secCabecera = new SecCabeceraMostFrequent();
 	
 	public boolean isMenuInState(UserMenu menu, State state) {
 		return (isMenuInStateUntil(menu, state, 0));
@@ -66,7 +64,7 @@ public class MenusUserWrapper extends PageBase {
 		} else {
 			isMenuInStateUntil(menu, State.Visible, 2);
 			MenuUserItem menuUserItem = new MenuUserItem(menu, channel, app);
-			moveToElement(menuUserItem.getLink().getBy(channel, app));
+			moveToElement(menuUserItem.getLink().getBy(channel));
 		}
 	}
 	
@@ -99,13 +97,11 @@ public class MenusUserWrapper extends PageBase {
 		ElementPage menuLink = menu.getLink();
 		switch (menu.getType()) {
 			case IconoCabeceraShop_DesktopMobile:
-				return (secCabecera.getShop_DesktopMobile().isIconoInStateUntil((IconoCabeceraShop_DesktopMobile)menuLink, state, seconds));
+				return (secCabecera.getShop_DesktopMobile().isIconoInStateUntil((IconoCabecera)menuLink, state, seconds));
 			case MenuUserDesktop:
 				return (secCabecera.getShop_DesktopMobile().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menuLink, state, seconds));
 			case MenuUserDevice:
 				return (new SecMenusUserDevice().isMenuInStateUntil((MenuUserDevice)menuLink, state, seconds));
-			case IconoCabOutletMobil:
-				return (secCabecera.getOutletMobil().isElementInStateUntil((IconoCabOutletMobil)menuLink, state, seconds));
 			default:
 				return false;
 		}
@@ -115,7 +111,7 @@ public class MenusUserWrapper extends PageBase {
 		ElementPage menuLink = menu.getLink();
 		switch (menu.getType()) {
 			case IconoCabeceraShop_DesktopMobile:
-				secCabecera.getShop_DesktopMobile().clickIconoAndWait((IconoCabeceraShop_DesktopMobile)menuLink);
+				secCabecera.getShop_DesktopMobile().clickIconoAndWait((IconoCabecera)menuLink);
 				break;
 			case MenuUserDesktop:
 				secCabecera.getShop_DesktopMobile().hoverIconForShowUserMenuDesktop();
@@ -123,9 +119,6 @@ public class MenusUserWrapper extends PageBase {
 				break;
 			case MenuUserDevice:
 				new SecMenusUserDevice().clickMenu((MenuUserDevice)menuLink);
-				break;
-			case IconoCabOutletMobil:
-				secCabecera.getOutletMobil().click((IconoCabOutletMobil)menuLink);
 				break;
 		}
 	}

@@ -13,7 +13,7 @@ import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 public class PageResultPagoSteps extends StepBase {
@@ -120,7 +120,7 @@ public class PageResultPagoSteps extends StepBase {
 		if (pageResultPago.isVisibleDescubrirLoUltimo()) {
 			pageResultPago.clickDescubrirLoUltimo();
 		} else {
-			SecCabecera.getNew(channel, app).clickLogoMango();
+			new SecCabeceraMostFrequent().clickLogoMango();
 		}
 	}
 	

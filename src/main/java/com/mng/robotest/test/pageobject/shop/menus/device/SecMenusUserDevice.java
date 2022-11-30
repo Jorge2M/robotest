@@ -9,11 +9,12 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 
 
 public class SecMenusUserDevice extends PageBase {
 
-	private final SecCabecera secCabecera = SecCabecera.getNew(channel, app);
+	private final SecCabecera secCabecera = new SecCabeceraMostFrequent();
 	
 	public enum MenuUserDevice implements ElementPage {
 		AYUDA(

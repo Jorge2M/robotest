@@ -16,6 +16,7 @@ import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -684,7 +685,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) {
-		SecCabecera secCabecera = SecCabecera.getNew(channel, app);
+		SecCabecera secCabecera = new SecCabeceraMostFrequent();
 		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel);
 		secCabecera.bring(BringTo.BACKGROUND);
 		secFiltros.bring(BringTo.BACKGROUND);

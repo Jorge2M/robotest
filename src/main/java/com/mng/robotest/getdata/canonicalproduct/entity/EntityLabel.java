@@ -1,5 +1,6 @@
 package com.mng.robotest.getdata.canonicalproduct.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
@@ -7,6 +8,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 import java.io.Serializable;
 
 @JsonInclude(NON_EMPTY)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EntityLabel implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

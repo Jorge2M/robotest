@@ -6,6 +6,7 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.modales.ModalActPoliticaPrivacidad;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
@@ -79,7 +80,7 @@ public class PageIdentificacion extends PageBase {
 	public void clickIniciarSesionAndWait(Channel channel, AppEcom app) {
 		if (channel.isDevice()) {
 			//En el caso de mobile nos tenemos que asegurar que están desplegados los menús
-			SecCabecera secCabeceraDevice = SecCabecera.getNew(channel, app);
+			SecCabecera secCabeceraDevice = new SecCabeceraMostFrequent();
 			boolean toOpen = true;
 			secCabeceraDevice.clickIconoMenuHamburguerMobil(toOpen);
 			

@@ -11,6 +11,7 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 
 public class LineaActionsDevice extends PageBase implements LineaActions {
 
@@ -79,7 +80,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	@Override
 	public void clickLinea() {
 		boolean toOpenMenus = true;
-		SecCabecera secCabecera = SecCabecera.getNew(channel, app);
+		SecCabecera secCabecera = new SecCabeceraMostFrequent();
 		secCabecera.clickIconoMenuHamburguerMobil(toOpenMenus);
 		Linea linea = Linea.getLinea(lineaType, dataTest.getPais());
 		if ("n".compareTo(linea.getExtended())==0) {

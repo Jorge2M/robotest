@@ -30,19 +30,8 @@ public abstract class SecCabecera extends PageBase {
 	public abstract void clickIconoBolsaWhenDisp(int seconds);
 	public abstract void hoverIconoBolsa();
 	
-	public static SecCabecera getNew(Channel channel, AppEcom app) {
-		if (channel==Channel.mobile && app==AppEcom.outlet) {
-			return new SecCabeceraOutletMobil();
-		}
-		return new SecCabeceraMostFrequent();
-	}
-	
 	public SecCabeceraMostFrequent getShop_DesktopMobile() {
 		return (SecCabeceraMostFrequent)this;
-	}
-	
-	public SecCabeceraOutletMobil getOutletMobil() {
-		return (SecCabeceraOutletMobil)this;
 	}
 	
 	public void bring(BringTo bringTo) {

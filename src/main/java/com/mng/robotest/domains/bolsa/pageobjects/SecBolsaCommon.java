@@ -15,7 +15,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 
@@ -59,7 +59,7 @@ public abstract class SecBolsaCommon extends PageBase {
 	}
 	
 	public String getNumberArtIcono() {
-		return (SecCabecera.getNew(channel, app).getNumberArtIcono());
+		return (new SecCabeceraMostFrequent().getNumberArtIcono());
 	}
 	
 	public boolean numberItemsIsUntil(String itemsMightHave, int seconds) {

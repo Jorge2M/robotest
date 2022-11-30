@@ -26,7 +26,7 @@ import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.getdata.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
@@ -39,7 +39,7 @@ public class SecBolsaSteps extends StepBase {
 		description="Eliminamos los posibles artículos existentes en la Bolsa",
 		expected="La bolsa queda vacía")
 	public void clear() throws Exception {
-		if (SecCabecera.getNew(channel, app).hayArticulosBolsa()) {
+		if (new SecCabeceraMostFrequent().hayArticulosBolsa()) {
 			secBolsa.clearArticulos();
 		}
 	}

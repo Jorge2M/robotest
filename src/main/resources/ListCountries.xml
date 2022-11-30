@@ -1013,10 +1013,10 @@
 	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna='23.04.1974'>&TPV-208;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='PACKSTATION' tipoenviooutlet='PACKSTATION' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-549;</pago>
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipoenviooutlet='PACKSTATION' numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-515;</pago>

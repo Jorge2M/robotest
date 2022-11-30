@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroFinOutlet;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 
 public class PageRegistroFinStepsOutlet extends StepBase {
 	
@@ -25,7 +25,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 		expected="Se accede a la shop correctamente")
 	public void clickIrDeShoppingButton() {
 		pageRegistroFin.clickIrDeShopping();
-		SecCabecera.getNew(channel, app).clickLogoMango();
+		new SecCabeceraMostFrequent().clickLogoMango();
 		validateWeAreLogged();
 	}
 	
@@ -40,7 +40,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"El logo de Mango redirige al país/idioma origen: " + dataTest.getIdioma().getAcceso(),
-			SecCabecera.getNew(channel, app)
+			new SecCabeceraMostFrequent()
 				.validaLogoMangoGoesToIdioma(dataTest.getIdioma()), State.Warn);
 		return checks;		
 	}
