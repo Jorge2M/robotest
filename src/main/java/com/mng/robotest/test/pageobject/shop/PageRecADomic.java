@@ -6,8 +6,8 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageRecADomic extends PageBase {
 
-	private static final String XPATH_IS_PAGE_RECOGIDA ="//micro-frontend[@id='myReturns']";
-	private static final String XPATH_NO_HAY_PEDIDOS = "//*[@data-testid[contains(.,'noPurchasesFound')]]";
+	private static final String XPATH_IS_PAGE_RECOGIDA ="//*[@class[contains(.,'devoluciones_misPedidos')]]";
+	private static final String XPATH_NO_HAY_PEDIDOS = "//*[@class[contains(.,'noOrders')]]";
 
 	public boolean isPage() {
 		return state(Present, XPATH_IS_PAGE_RECOGIDA).check();
