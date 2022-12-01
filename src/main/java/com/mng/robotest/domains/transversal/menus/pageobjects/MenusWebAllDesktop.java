@@ -26,7 +26,7 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 	}
 	
 	private String getXPathMenuItem(LineaType linea) {
-		return XPATH_MENU_ITEM + "//self::*[@id[contains(.,'_" + linea + "')]]";
+		return XPATH_MENU_ITEM + "//self::*[@id[contains(.,'_" + linea.toString().toLowerCase() + "')]]";
 	}
 	
 	@Override
