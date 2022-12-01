@@ -12,7 +12,7 @@ public class PageRecogidaDomicSteps extends StepBase {
 	private final PageRecADomic pageRecADomic = new PageRecADomic();
 	
 	@Validation
-	public ChecksTM vaidaIsPageSinDevoluciones () {
+	public ChecksTM validaIsPageSinDevoluciones () {
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de Recogida a Domicilio",

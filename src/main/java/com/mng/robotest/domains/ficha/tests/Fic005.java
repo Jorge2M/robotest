@@ -73,7 +73,7 @@ public class Fic005 extends TestBase {
 				.Builder(codigoPais, app, driver)
 				.linea(LineaType.HE)
 				.menu(Menu.CAMISAS_HE)
-				.numProducts(5)
+				.numProducts(40)
 				.filter(FilterType.PERSONALIZABLE)
 				.build()
 				.getOne();

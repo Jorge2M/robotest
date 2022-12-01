@@ -30,7 +30,7 @@ public class PageGaleriaDevice extends PageGaleria {
 			  "@class[contains(.,'product-image')] or " +
 			  "@id[contains(.,'product-image')])]";
 	private static final String XPATH_IMG_COD_COLOR_WITH_TAG_COLOR = 
-		"//div[@class[contains(.,'color-container')] and @id='" + TAG_ID_COLOR + "']/img";
+		"//*[@class[contains(.,'color-container')] and @id='" + TAG_ID_COLOR + "']/img";
 	
 	private static final String XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-actions')]]/button";
 	private static final String XPATH_CAPA_TALLAS_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-sizes-container')]]";

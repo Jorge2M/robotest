@@ -705,6 +705,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public void clickHearhIcon(int posArticle) throws Exception {
 		//Nos posicionamos en el icono del Hearth 
 		String xpathIcon = getXPathArticleHearthIcon(posArticle);
+		state(Visible, xpathIcon).wait(1).check();
 		WebElement hearthIcon = getElement(xpathIcon);
 		moveToElement(hearthIcon);
 		

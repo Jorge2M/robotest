@@ -50,7 +50,7 @@ public class SecDataProduct extends PageBase {
 	}
 
 	//xpaths asociados a los colores
-	private static final String XPATH_COLOR = "//div[@class[contains(.,'color-container')]]";
+	private static final String XPATH_COLOR = "//*[@class[contains(.,'color-container')]]";
 	private static final String CLASS_COLOR_NO_DISP = "@class[contains(.,'--no-stock')] or @class[contains(.,'--cross-out')]";
 	public enum ColorType implements ElementPage {
 		SELECTED("//div[@class[contains(.,'color-container--selected')]]"),
@@ -89,10 +89,10 @@ public class SecDataProduct extends PageBase {
 	private static final String XPATH_PRECIO_REBAJADO = "//span[@data-testid[contains(.,'crossedOutPrice')]]";
 
 	//xpaths asociados a los colores de la prenda
-	private static final String XPATH_COLORES_PRENDA_SIN_IDENTIFICAR = "//div[@class[contains(.,'color-container')]]";
+	private static final String XPATH_COLORES_PRENDA_SIN_IDENTIFICAR = "//*[@class[contains(.,'color-container')]]";
 
 	private String getXPathPastillaColorClick(String codigoColor) {
-		return ("//div[@class[contains(.,'color-container')] and @id='" + codigoColor + "']/img");
+		return ("//*[@class[contains(.,'color-container')] and @id='" + codigoColor + "']/img");
 	}
 
 	//xpath asociados a los datos básicoos del artículo (nombre y referencia)
