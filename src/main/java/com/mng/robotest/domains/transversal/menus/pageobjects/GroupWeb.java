@@ -3,7 +3,6 @@ package com.mng.robotest.domains.transversal.menus.pageobjects;
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -130,7 +129,7 @@ public class GroupWeb extends PageBase {
 		if (channel.isDevice()) {
 			return XPATH_SUBMENU_DEVICE;
 		}
-		return XPATH_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea); 
+		return XPATH_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase()); 
 	}
 	
 	public void click() {
@@ -143,7 +142,7 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private void clickGroup() {
-		click(getXPathGroup()).type(TypeClick.javascript).exec(); 
+		click(getXPathGroup()).state(State.Visible).exec(); 
 		if (!isVisibleSubMenus() && group.getGroupResponse()==GroupResponse.MENUS) {
 			waitMillis(1000);
 			click(getXPathGroup()).exec();
