@@ -56,10 +56,6 @@ public class Reg003 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		if (channel==Channel.desktop && app==AppEcom.shop) {
-			return;
-		}
-		
 		access();
 		new ModalSuscripcionSteps().validaRGPDModal();
 		
