@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
@@ -43,7 +44,7 @@ public class PageMisCompras extends PageBase {
 		try {
 			return getTicketsStaleUnsafe();
 		}
-		catch (StaleElementReferenceException e) {
+		catch (StaleElementReferenceException | NoSuchElementException e) {
 			waitMillis(1000);
 			return getTicketsStaleUnsafe();
 		}
@@ -158,15 +159,16 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private String getPrecioTicketPage(WebElement boxDataTicket) {
-		return (boxDataTicket.findElement(By.xpath(XPATH_PRICE_RELATIVE_TICKET)).getText());
+		return getElement(boxDataTicket, XPATH_PRICE_RELATIVE_TICKET).getText();
 	}
 	
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
-		String textLinea = "0" + boxDataTicket.findElement(By.xpath(XPATH_ITEMS_RELATIVE_TICKET)).getText();
-		return (Integer.valueOf(textLinea.replaceAll("[^0-9]", "")));
+		//if (PageBase.state(State.Visible, boxDataTicket, XPATH_ITEMS_RELATIVE_TICKET)) 
+		String textLinea = "0" + getElement(boxDataTicket, XPATH_ITEMS_RELATIVE_TICKET).getText();
+		return Integer.valueOf(textLinea.replaceAll("[^0-9]", ""));
 	}
 	
 	private String getFechaTicketPage(WebElement boxDataTicket) {
-		return (boxDataTicket.findElement(By.xpath(XPATH_FECHA_RELATIVE_TICKET)).getText());
+		return getElement(boxDataTicket, XPATH_FECHA_RELATIVE_TICKET).getText();
 	} 
 }

@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.transversal.menus.steps;
 
-import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.ABRIGOS_SHE;
+import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.ABRIGOS_HE;
 
 import java.net.URI;
 import java.util.Arrays;
@@ -421,7 +421,7 @@ public class MenuSteps extends StepBase {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_ACCESO, urlAccesoCorreo);
 
 		driver.navigate().to(urlAccesoCorreo);
-		new MenuSteps().checkSelecMenu(FactoryMenus.get(ABRIGOS_SHE));
+		new MenuSteps().checkSelecMenu(FactoryMenus.get(ABRIGOS_HE));
 	}
 	
 	private static final String TAG_REF_ARTICLE = "@TagRefArticle";

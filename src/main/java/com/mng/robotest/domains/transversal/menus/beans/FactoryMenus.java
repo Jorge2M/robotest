@@ -65,7 +65,8 @@ public class FactoryMenus {
 			.linea(LineaType.SHE)
 			.group(GroupType.PRENDAS)
 			.articles(Arrays.asList("Anorak", "Abrigo", "Gabardina", "Trench", "Parka", "Chubasquero"))
-			.subMenus(Arrays.asList("abrigos", "gabardinas"))
+			.subMenusShop(Arrays.asList("abrigos", "gabardinas"))
+			.subMenusOutlet(Arrays.asList("abrigos", "anoraks"))
 			.subMenu("performance")
 			.articlesSubMenu(Arrays.asList("Anorak"))
 			.build();
@@ -87,8 +88,9 @@ public class FactoryMenus {
 			.Builder("Abrigos")
 			.linea(LineaType.HE)
 			.group(GroupType.PRENDAS)
-			.articles(Arrays.asList("Abrigo", "Anorak"))
-			.subMenus(Arrays.asList("abrigos", "anoraks"))
+			.articles(Arrays.asList("Abrigo", "Anorak", "Parka", "Trench", "Chaquetón", "Sobrecamisa", "Chaleco", "Chaqueta", "Cazadora"))
+			.subMenusShop(Arrays.asList("abrigos", "básicos"))
+			.subMenusOutlet(Arrays.asList("todo", "chaquetas de piel"))
 			.build();
 	}
 }
