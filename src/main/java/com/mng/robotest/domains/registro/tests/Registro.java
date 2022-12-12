@@ -48,9 +48,8 @@ public class Registro implements Serializable {
 		new Reg002(pais, idioma).execute();
 	}
 
-	//TODO remove shop
 	@Test (
-		groups={"Registro", "Canal:all_App:outlet,shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
+		groups={"Registro", "Canal:all_App:outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG003_RegistroOK_publi() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);

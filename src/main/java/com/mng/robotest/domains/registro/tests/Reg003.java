@@ -3,8 +3,6 @@ package com.mng.robotest.domains.registro.tests;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.registro.beans.DataNino;

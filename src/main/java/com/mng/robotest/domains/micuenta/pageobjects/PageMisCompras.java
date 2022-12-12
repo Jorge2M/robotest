@@ -27,7 +27,7 @@ public class PageMisCompras extends PageBase {
 	private static final String XPATH_ID_RELATIVE_TICKET = ".//*[@data-testid[contains(.,'purchaseNumber')]]";
 	
 	//TODO solicitado data-testid a Carla (11-02-2022)
-	private static final String XPATH_ITEMS_RELATIVE_TICKET = ".//div[@class[contains(.,'layout-row')]]//div[@class[contains(.,'layout-placeholder')] and @class[contains(.,'sg-body-small')]]";	
+	private static final String XPATH_ITEMS_RELATIVE_TICKET = ".//div[@class[contains(.,'layout-row')]]//div[@class[contains(.,'layout-placeholder')] and @class[contains(.,'md7')]]";	
 	
 	private static final String XPATH_LIST_TICKETS = 
 		"//*[@data-testid[contains(.,'activePurchases')] or " +
@@ -35,7 +35,7 @@ public class PageMisCompras extends PageBase {
 	
 	private static final String XPATH_TICKET = XPATH_LIST_TICKETS + "//div[@class[contains(.,'layout-content')]]";
 	private static final String XPATH_PRICE_RELATIVE_TICKET = ".//*[@data-testid='myPurchases.price']";	
-	private static final String XPATH_FECHA_RELATIVE_TICKET = ".//span[@class[contains(.,'sg-caption-light')]]";
+	private static final String XPATH_FECHA_RELATIVE_TICKET = ".//*[@data-testid='myPurchases.purchaseCard.date']";
 	
 	public List<Ticket> getTickets() {
 		isVisibleTicket(5);
@@ -163,7 +163,6 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
-		//if (PageBase.state(State.Visible, boxDataTicket, XPATH_ITEMS_RELATIVE_TICKET)) 
 		String textLinea = "0" + getElement(boxDataTicket, XPATH_ITEMS_RELATIVE_TICKET).getText();
 		return Integer.valueOf(textLinea.replaceAll("[^0-9]", ""));
 	}
