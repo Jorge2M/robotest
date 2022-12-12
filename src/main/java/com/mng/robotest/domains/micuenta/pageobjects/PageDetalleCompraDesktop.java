@@ -14,7 +14,7 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	private static final String XPATH_IMPORTE = "//*[@data-testid='myPurchases.price']";
 	
 	//TODO necesitaría un data-testid
-	private static final String XPATH_DIRECCION_ENVIO_ONLINE = XPATH_ID_TICKET + "/../..//h2[@class[contains(.,'sg-headline')]]/..";
+	private static final String XPATH_DIRECCION_ENVIO_ONLINE = XPATH_ID_TICKET + "/../..//h2[@class[contains(.,'text-title-l')]]/..";
 	private static final String XPATH_LINK_TO_MIS_COMPRAS = "//*[@data-testid[contains(.,'detail.goBack')]]";
 	
 	@Override
