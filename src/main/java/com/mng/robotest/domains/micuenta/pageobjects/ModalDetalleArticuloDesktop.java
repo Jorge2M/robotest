@@ -8,7 +8,7 @@ public class ModalDetalleArticuloDesktop extends ModalDetalleArticulo {
 	private static final String XPATH_ASPA_FOR_CLOSE = "//*[@data-testid[contains(.,'modal.close')]]";
 	private static final String XPATH_CONTAINER_DESCRIPTION = "//*[@data-testid[contains(.,'modal.content')]]";
 	private static final String XPATH_REFERENCIA = XPATH_CONTAINER_DESCRIPTION + "//div/div[3]/div";
-	private static final String XPATH_NOMBRE = XPATH_CONTAINER_DESCRIPTION + "//div[@class[contains(.,'sg-headline')]]";
+	private static final String XPATH_NOMBRE = XPATH_CONTAINER_DESCRIPTION + "//div[@class[contains(.,'text-title-l')]]";
 	private static final String XPATH_PRECIO = XPATH_CONTAINER_DESCRIPTION + "//*[@data-testid[contains(.,'product.paidPrice')]]";
 	
 	@Override
