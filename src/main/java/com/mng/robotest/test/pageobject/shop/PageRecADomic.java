@@ -6,11 +6,11 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageRecADomic extends PageBase {
 
-	private static final String XPATH_IS_PAGE_RECOGIDA ="//*[@class[contains(.,'devoluciones_misPedidos')]]";
-	private static final String XPATH_NO_HAY_PEDIDOS = "//*[@class[contains(.,'noOrders')]]";
+	private static final String XPATH_IS_PAGE_RECOGIDA ="//*[@data-testid[contains(.,'noPurchasesFound.page')]]";
+	private static final String XPATH_NO_HAY_PEDIDOS = "//*[@data-testid[contains(.,'noPurchasesFound.page')]]";
 
-	public boolean isPage() {
-		return state(Present, XPATH_IS_PAGE_RECOGIDA).check();
+	public boolean isPage(int seconds) {
+		return state(Present, XPATH_IS_PAGE_RECOGIDA).wait(seconds).check();
 	}
 
 	public boolean noHayPedidos() {
