@@ -99,7 +99,18 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 			"Variante 1"),
 		Arrays.asList(Channel.desktop),
 		Arrays.asList(AppEcom.shop)
-	);		
+	),
+	
+	KIRITAKI_LOGIN_DESKTOP_MOBILE(
+		"KIRITAKI- login [shop-outlet][desktop - mobile]",
+		"JAyY02hnRCCvoOEHppLbPw",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1"),
+		Arrays.asList(Channel.desktop, Channel.desktop),
+		Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf)
+	);
 
 
 //	 ES_SHOP_XXX_EMP_vs_FH_Search_Desktop (
