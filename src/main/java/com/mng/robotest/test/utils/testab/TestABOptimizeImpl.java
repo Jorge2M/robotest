@@ -101,17 +101,39 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(AppEcom.shop)
 	),
 	
-	KIRITAKI_LOGIN_DESKTOP_MOBILE(
-		"KIRITAKI- login [shop-outlet][desktop - mobile]",
+	KIRITAKI_LOGIN_DESKTOP_MOBILE_PRE(
+		"KIRITAKI- login [shop-outlet][desktop - mobile] PRE",
 		"JAyY02hnRCCvoOEHppLbPw",
 		Arrays.asList(0,1),
 		Arrays.asList(
 			"Variante 0 - Original",
 			"Variante 1"),
-		Arrays.asList(Channel.desktop, Channel.desktop),
+		Arrays.asList(Channel.desktop, Channel.mobile),
 		Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf)
-	);
+	),
 
+	KIRITAKI_LOGIN_DESKTOP_PRO(
+		"KIRITAKI- login [shop-outlet][desktop] PRO",
+		"B48P4S8pSiajjRl2U2h_AQ",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf)
+	),	
+	
+	KIRITAKI_LOGIN_MOBILE_PRO(
+		"KIRITAKI- login [shop-outlet][mobile] PRO",
+		"hZK_tYsgQf6axBuLqFgOOg",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf)
+	);		
+	
 
 //	 ES_SHOP_XXX_EMP_vs_FH_Search_Desktop (
 //		"PLP - Desktop - Navigation filters",
