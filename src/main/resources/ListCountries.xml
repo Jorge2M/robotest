@@ -610,9 +610,6 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-514;</pago>
-<pago 
-	type="ContraReembolso" tiendas="shop,outlet"
-	nombre="PLAĆANJE POUZEĆEM" namefilter="PLACANJE POUZECEM" testpasarela='s' testpago='s'>&TPV-179;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>

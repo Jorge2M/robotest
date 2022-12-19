@@ -28,7 +28,7 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	private static final String XPATH_INPUT_NOMBRE = "//input[@id='name']";
 	private static final String XPATH_INPUT_POSTALCODE = "//input[@id='postalCode']";
 	private static final String XPATH_INPUT_DATE_BIRTH = "//input[@id='birthDate']";
-	private static final String XPATH_SAVE_BUTTON = XPATH_MODAL_CONTENT + "//button[@type='button']";
+	private static final String XPATH_SAVE_BUTTON = XPATH_MODAL_CONTENT + "//button[@type='submit']";
 	
 	private static final String TAG_GENDER = "@TagGender";
 	private static final String XPATH_CHECKBOX_GENEDER_WITH_TAG = "//label[@for='gender-" + TAG_GENDER + "']";
@@ -55,6 +55,7 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	}
 	
 	public void inputPostalCode(String postalCode) {
+		state(State.Visible, XPATH_INPUT_POSTALCODE).wait(2).check();
 		getElement(XPATH_INPUT_POSTALCODE).sendKeys(postalCode);
 	}
 	

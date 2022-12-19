@@ -22,7 +22,7 @@ public class Reg001 extends TestBase {
 	private final PageRegistroPersonalizacionShopSteps pageRegistroPersonalizacionSteps = new PageRegistroPersonalizacionShopSteps();
 	
 	private final String emailNotExistent = DataMango.getEmailNonExistentTimestamp();
-	private final String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_STANDARD_USER).getPassword();
+	private final String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_ROBOT_USER).getPassword();
 	
 	private final DataNewRegister dataNewRegister;
 

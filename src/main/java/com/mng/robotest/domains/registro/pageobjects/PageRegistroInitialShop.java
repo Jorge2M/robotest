@@ -11,7 +11,7 @@ public class PageRegistroInitialShop extends PageBase {
 	private static final String XPATH_INPUT_PASSWORD = XPATH_MODAL_CONTENT + "//input[@id='password']";
 	private static final String XPATH_INPUT_MOVIL = XPATH_MODAL_CONTENT + "//input[@id='mobile-number']";
 	private static final String XPATH_RADIO_GIVE_PROMOTIONS = XPATH_MODAL_CONTENT + "//input[@id='newsletter']";
-	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//div[@class='mng-form-buttons']/button[@type='button']";
+	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//div[@class='mng-form-buttons']/button[@type='submit']";
 	
 	public boolean isPage() {
 		return isPageUntil(0);

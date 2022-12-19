@@ -602,7 +602,7 @@ public class Page2IdentCheckout extends PageBase {
 		String movil = "665015122";
 		movil = pais.getTelefono();
 		String dni = pais.getDni();
-		String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_STANDARD_USER).getPassword();
+		String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_ROBOT_USER).getPassword();
 		
 		// Lo repetimos 2 veces porque el sendKeys sufre un bug ocasional que envía los datos a inputs incorrectos
 		isNombreUsuarioVisible(3);
