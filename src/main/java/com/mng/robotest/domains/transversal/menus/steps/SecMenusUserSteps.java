@@ -34,7 +34,8 @@ public class SecMenusUserSteps extends StepBase {
 	
 	@Step (
 		description="Seleccionar el menú de usuario \"Favoritos\"", 
-		expected="Aparece la página de gestión de favoritos con los artículos correctos")
+		expected="Aparece la página de gestión de favoritos con los artículos correctos",
+		saveHtmlPage=SaveWhen.IfProblem)
 	public void selectFavoritos() {
 		clickUserMenu(FAVORITOS);
 		PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
