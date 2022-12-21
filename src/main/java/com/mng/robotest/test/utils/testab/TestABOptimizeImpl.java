@@ -112,27 +112,49 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf)
 	),
 
-	KIRITAKI_LOGIN_DESKTOP_PRO(
-		"KIRITAKI- login [shop-outlet][desktop] PRO",
+	KIRITAKI_LOGIN_SHOP_DESKTOP_PRO(
+		"KIRITAKI- login [shop][desktop] PRO",
 		"B48P4S8pSiajjRl2U2h_AQ",
 		Arrays.asList(0,1),
 		Arrays.asList(
 			"Variante 0 - Original",
 			"Variante 1"),
 		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf)
+		Arrays.asList(AppEcom.shop, AppEcom.votf)
 	),	
 	
-	KIRITAKI_LOGIN_MOBILE_PRO(
-		"KIRITAKI- login [shop-outlet][mobile] PRO",
+	KIRITAKI_LOGIN_SHOP_MOBILE_PRO(
+		"KIRITAKI- login [shop][mobile] PRO",
 		"hZK_tYsgQf6axBuLqFgOOg",
 		Arrays.asList(0,1),
 		Arrays.asList(
 			"Variante 0 - Original",
 			"Variante 1"),
 		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf)
-	);		
+		Arrays.asList(AppEcom.shop, AppEcom.votf)
+	),
+
+	KIRITAKI_LOGIN_OUTLET_DESKTOP_PRO(
+		"KIRITAKI- login [outlet][desktop] PRO",
+		"S66daei3SqK45Y1owb-IJg",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.outlet)
+	),	
+	
+	KIRITAKI_LOGIN_OUTLET_MOBILE_PRO(
+		"KIRITAKI- login [outlet][mobile] PRO",
+		"hvgw_o9OR_6a7iccCMnkdg",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1"),
+		Arrays.asList(Channel.desktop),
+		Arrays.asList(AppEcom.outlet)
+	);
 	
 
 //	 ES_SHOP_XXX_EMP_vs_FH_Search_Desktop (
