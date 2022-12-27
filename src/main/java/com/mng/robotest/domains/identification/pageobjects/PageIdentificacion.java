@@ -26,7 +26,7 @@ public class PageIdentificacion extends PageBase {
 	private static final String XPATH_INPUT_USER = "//*[@data-testid='logon.login.emailInput']";
 	private static final String XPATH_INPUT_PASSWORD = "//*[@data-testid='logon.login.passInput']";	
 //	private static final String XPATH_SUBMIT_BUTTON = "//div[@class='submitContent']/input[@type='submit']";
-	private static final String XPATH_INICIAR_SESION = "*[@data-testid[contains(.,'loginButton')]]";	
+	private static final String XPATH_INICIAR_SESION = "//*[@data-testid[contains(.,'loginButton')]]";	
 
 	public boolean isVisibleUserUntil(int seconds) {
 		return state(Visible, XPATH_INPUT_USER).wait(seconds).check();
