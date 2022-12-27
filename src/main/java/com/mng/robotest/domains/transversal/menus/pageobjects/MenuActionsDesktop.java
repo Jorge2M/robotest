@@ -46,7 +46,7 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	
 	@Override
 	public String click() {
-		clickGroup();
+		hoverGroup();
 		return clickMenuSuperior();
 	}
 	@Override
@@ -72,6 +72,10 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 		GroupWeb group = new GroupWeb(menu.getLinea(), menu.getSublinea(), menu.getGroup());
 		group.click();
 	}
+	private void hoverGroup() {
+		GroupWeb group = new GroupWeb(menu.getLinea(), menu.getSublinea(), menu.getGroup());
+		group.hover();
+	}	
 	
 	private String clickMenuSuperior() {
 		String nameMenu = getElement(getXPathMenu()).getText(); 

@@ -136,6 +136,10 @@ public class GroupWeb extends PageBase {
 		hoverLinea(); 
 		clickGroup();
 	}
+	public void hover() {
+		hoverLinea(); 
+		hoverGroup();
+	}	
 	public boolean isPresent() {
 		hoverLinea();
 		return state(State.Visible, getXPathGroup()).wait(1).check();
@@ -149,6 +153,15 @@ public class GroupWeb extends PageBase {
 			click(getXPathGroup()).exec();
 		}
 	}
+	
+	private void hoverGroup() {
+		state(State.Visible, getXPathGroup()).wait(1).check();
+		moveToElement(getXPathGroup()); 
+		if (!isVisibleSubMenus() && group.getGroupResponse()==GroupResponse.MENUS) {
+			waitMillis(1000);
+			moveToElement(getXPathGroup());
+		}
+	}	
 	
 	private void hoverLinea() {
 		LineaWeb lineaWeb = new LineaWeb(linea, sublinea);
