@@ -20,11 +20,11 @@ public class TestABactive {
 		listTestABsToActivate.add(TestABactData.getNew(TestABGoogleExpImpl.MVPCheckoutDesktop, 0));
 		//listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.New_Registry_MLY_Desktop_PRO, 0));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.New_Registry_MLY_Mobile_PRO, 0));
-		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.KIRITAKI_LOGIN_DESKTOP_MOBILE_PRE, 0));
-		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.KIRITAKI_LOGIN_SHOP_DESKTOP_PRO, 0));		
-		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.KIRITAKI_LOGIN_SHOP_MOBILE_PRO, 0));
-		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.KIRITAKI_LOGIN_OUTLET_DESKTOP_PRO, 0));		
-		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.KIRITAKI_LOGIN_OUTLET_MOBILE_PRO, 0));		
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.KIRITAKI_LOGIN_DESKTOP_MOBILE_PRE, 1));
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.KIRITAKI_LOGIN_SHOP_DESKTOP_PRO, 1));		
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.KIRITAKI_LOGIN_SHOP_MOBILE_PRO, 1));
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.KIRITAKI_LOGIN_OUTLET_DESKTOP_PRO, 1));		
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.KIRITAKI_LOGIN_OUTLET_MOBILE_PRO, 1));		
 		
 //		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.GPS_NEW_MENU_MOBILE_PRE, 0));
 //		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.GPS_NEW_MENU_MOBILE_PRO, 0));
