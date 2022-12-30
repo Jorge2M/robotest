@@ -5054,9 +5054,10 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="JCB" testpasarela='s'>&TPV-362;</pago>
+<!-- 
 <pago 
 	type="Paymaya" tiendas="shop"
-	nombre="Paymaya" testpasarela='s' testpago='s' usrpaymaya='639212456051' passwordpaymaya='Password1' otppaymaya='123456'>&TPV-016;</pago>
+	nombre="Paymaya" testpasarela='s' testpago='s' usrpaymaya='639212456051' passwordpaymaya='Password1' otppaymaya='123456'>&TPV-016;</pago>-->
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-184;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
@@ -5208,12 +5209,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-564;</pago>
-<pago 
-	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002" mescad="03" anycad="2030" cvc="7373">&TPV-072;</pago>
-<pago 
-	type="Paypal" tiendas="shop,outlet"
-	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-614;</pago>
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
@@ -5370,9 +5365,10 @@ where
 <linea id="NINA"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
+<!-- 
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-564;</pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-564;</pago>-->
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="เก็บเงินปลายทาง" namefilter="Tailandia_Contra_Reembolso" testpasarela='s' testpago='s'>&TPV-148;</pago>

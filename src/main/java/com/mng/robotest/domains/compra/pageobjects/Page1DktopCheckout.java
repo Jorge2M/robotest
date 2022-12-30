@@ -147,11 +147,6 @@ public class Page1DktopCheckout extends PageBase {
 		if (TEXT_KREDI_KARTI.compareTo(metodoPago)==0) {
 			return XPATH_PESTANYA_KREDI_KARTI;
 		}
-		
-		//TODO eliminar cuando añadan el "KLARNA" al value del input
-		if (metodoPago.compareTo("KLARNA")==0) {
-			return "//div[@class[contains(.,'cuadroPago')]]/input[@value='klarna' and @type='radio']";
-		}
 		String metodoPagoClick = new PageCheckoutWrapper().getMethodInputValue(metodoPago);
 		return (XPATH_RADIO_PAGO_WITH_TAG.replace(TAG_METODO_PAGO, metodoPagoClick));
 	}
