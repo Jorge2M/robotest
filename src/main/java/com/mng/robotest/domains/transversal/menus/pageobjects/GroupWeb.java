@@ -157,11 +157,22 @@ public class GroupWeb extends PageBase {
 	private void hoverGroup() {
 		state(State.Visible, getXPathGroup()).wait(1).check();
 		moveToElement(getXPathGroup()); 
-		if (!isVisibleSubMenus() && group.getGroupResponse()==GroupResponse.MENUS) {
+		for (int i=0; i<3; i++) {
+			if (isGroupCorrectlySelected()) {
+				break;
+			}
 			waitMillis(1000);
 			moveToElement(getXPathGroup());
 		}
-	}	
+	}
+	private boolean isGroupCorrectlySelected() {
+		return (isGroupSelected() &&
+			   (isVisibleSubMenus() || group.getGroupResponse()!=GroupResponse.MENUS));
+	}
+	private boolean isGroupSelected() {
+		String fontWeight = getElement(getXPathGroup()).getCssValue("font-weight");
+		return (Integer.valueOf(fontWeight)>500);
+	}
 	
 	private void hoverLinea() {
 		LineaWeb lineaWeb = new LineaWeb(linea, sublinea);
