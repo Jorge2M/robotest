@@ -8,7 +8,7 @@ public class ModalDetalleArticuloMobile extends ModalDetalleArticulo {
 
 	private static final String XPATH_ASPA_FOR_CLOSE = "//i[@class[contains(.,'icon-outline-close')]]";
 	private static final String XPATH_REFERENCIA = "//*[@data-testid='myPurchases.detail.reference']";
-	private static final String XPATH_NOMBRE = "//div[@class='sg-subtitle']";
+	private static final String XPATH_NOMBRE = "//div[@class[contains(.,'text-title-l')]]";
 	private static final String XPATH_PRECIO = "//*[@data-testid[contains(.,'product.paidPrice')]]"; 
 	
 	@Override
@@ -34,6 +34,7 @@ public class ModalDetalleArticuloMobile extends ModalDetalleArticulo {
 	}
 	@Override
 	public String getPrecio() {
+		state(State.Visible, XPATH_PRECIO).wait(1).check();
 		return getElement(XPATH_PRECIO).getText();
 	}
 	@Override

@@ -48,13 +48,12 @@ public class Gpo004 extends TestBase {
 		} else {
 			clickMenu(ABRIGOS_SHE);
 		}
-
 		
 		List<Color> colorsToFilter = new ArrayList<>();
 		colorsToFilter.add(Color.BLANCO);
+		colorsToFilter.add(Color.NEGRO);
+		colorsToFilter.add(Color.AZUL);			
 		if (app==AppEcom.shop) {
-			colorsToFilter.add(Color.NEGRO);
-			colorsToFilter.add(Color.AZUL);
 			filterGaleryByColors(CAMISAS_SHE, colorsToFilter);
 		} else {
 			filterGaleryByColors(ABRIGOS_SHE, colorsToFilter);

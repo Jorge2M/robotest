@@ -13,7 +13,7 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	private final SectionPrendas sectionPrendas = new SectionPrendas();
 	
 	private static final String XPATH_ID_TICKET = "//*[@data-testid[contains(.,'purchaseDetail.purchaseNumber')]]";
-	private static final String XPATH_LINEA_IMPORTE = "//*[@data-testid='price']";
+	private static final String XPATH_LINEA_IMPORTE = "//div[@class[contains(.,'text-body-s')]]//*[@data-testid='myPurchases.price']";
 	
 	private static final String XPATH_DESPLEGABLE_DATOS_ENVIO = "//button[@id='accordion-purchase-0-title']";
 	private static final String XPATH_DATOS_ENVIO = "//dd[@id='accordion-purchase-0']/div";

@@ -640,10 +640,12 @@ public abstract class PageGaleria extends PageBase {
 	}
 	
 	private void forceVisibilityImageArticle(WebElement articulo) {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-800)", "");
 		moveToElement(articulo);
+		//bringElement(articulo, BringTo.FRONT); 
 		if (!isVisibleImageArticle(articulo, 2)) {
-			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,+50)", "");
 			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", "");
+			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,+50)", "");
 			isVisibleImageArticle(articulo, 2);
 		}
 	}

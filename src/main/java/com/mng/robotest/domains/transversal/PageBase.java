@@ -182,12 +182,13 @@ public class PageBase extends PageObjTM {
 	protected enum BringTo { FRONT, BACKGROUND }
 	
 	protected void bringElement(WebElement element, BringTo action) {
-		String display = "none";
+		String script = "arguments[0].style.display='none';";
 		if (action==BringTo.FRONT) {
-			display = "block";
+			script = 
+					"arguments[0].style.display='block';" + 
+					"arguments[0].style.zIndex='999';" +
+					"arguments[0].style.position='absolute';";
 		}
-		
-		((JavascriptExecutor) driver).executeScript("arguments[0].style.display='" + display + "';", element);
-		state(State.Invisible, element).wait(1).check();
+		((JavascriptExecutor) driver).executeScript(script, element);
 	}
 }

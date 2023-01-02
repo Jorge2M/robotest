@@ -8,7 +8,8 @@ public class SectionPrendas extends PageBase {
 	private static final String XPATH_DATA_ARTICULO = "//*[@data-testid[contains(.,'detail.productInfo')]]/../..";
 	private static final String XPATH_REFERENCIA_ARTICULO = "//*[@data-testid[contains(.,'detail.reference')]]";
 	private static final String XPATH_NOMBRE_ARTICULO = "//button[@class[contains(.,'text-title')]]";
-	private static final String XPATH_PRECIO_ARTICULO = "//*[@data-testid[contains(.,'detail.productPrice')]]/div";
+	//private static final String XPATH_PRECIO_ARTICULO = "//*[@data-testid[contains(.,'detail.productPrice')]]/div";
+	private static final String XPATH_PRECIO_ARTICULO = "//*[@data-testid[contains(.,'myPurchases.detail.paidPrice')]]";	
 	
 	public int getNumPrendas() {
 		return getElements(XPATH_ARTICULO).size();

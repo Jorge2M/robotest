@@ -2,6 +2,7 @@ package com.mng.robotest.domains.micuenta.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -20,6 +21,9 @@ public class PageMiCuenta extends PageBase {
 	
 	public void clickMisCompras() {
 		click(XPATH_LINK_MIS_COMPRAS).exec();
+		if (!state(Invisible, XPATH_LINK_MIS_COMPRAS).wait(1).check()) {
+			click(XPATH_LINK_MIS_COMPRAS).exec();
+		}
 	}
 	
 	public void clickSuscripciones() {
