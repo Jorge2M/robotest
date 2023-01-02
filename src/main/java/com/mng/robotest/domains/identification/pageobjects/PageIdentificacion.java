@@ -42,7 +42,7 @@ public class PageIdentificacion extends PageBase {
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().error(e);
-		}
+		} 
 		//waitMillis(250);
 		getElement(XPATH_INPUT_USER).sendKeys(usuario);
 		//waitMillis(250);

@@ -130,7 +130,7 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"Variante 0 - Original",
 			"Variante 1"),
-		Arrays.asList(Channel.desktop),
+		Arrays.asList(Channel.mobile),
 		Arrays.asList(AppEcom.shop, AppEcom.votf)
 	),
 
@@ -152,7 +152,7 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"Variante 0 - Original",
 			"Variante 1"),
-		Arrays.asList(Channel.desktop),
+		Arrays.asList(Channel.mobile),
 		Arrays.asList(AppEcom.outlet)
 	);
 	
