@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -26,7 +25,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageRegistroIniOutlet extends PageBase {
 	
-	private static final String XPATH_PESTANYA_REGISTRO = "//*[@class[contains(.,'registerTab')]]";
+//	private static final String XPATH_PESTANYA_REGISTRO = "//*[@class[contains(.,'registerTab')]]";
 	private static final String XPATH_HEADER_NEWS = "//div[@class[contains(.,'registerModal')]]//div[@class='info']";
 	
 	private static final String XPATH_NEWSLETTER_TITLE = XPATH_HEADER_NEWS + "//p[@class[contains(.,'newsletter-register-title')]]";
@@ -92,12 +91,12 @@ public class PageRegistroIniOutlet extends PageBase {
 		}
 	}
 	
-	public void clickRegisterTab() {
-		click(XPATH_PESTANYA_REGISTRO).type(TypeClick.javascript).exec();
-	}
+//	public void clickRegisterTab() {
+//		click(XPATH_PESTANYA_REGISTRO).type(TypeClick.javascript).exec();
+//	}
 	
 	public boolean isPageUntil(int seconds) {
-		return state(Visible, XPATH_PESTANYA_REGISTRO).wait(seconds).check();
+		return state(Visible, XPATH_INPUT_NAME).wait(seconds).check();
 	}
 	
 	public boolean isCapaLoadingInvisibleUntil(int seconds) {
@@ -148,7 +147,7 @@ public class PageRegistroIniOutlet extends PageBase {
 	}
 	
 	public void sendDataToInputs(ListDataRegistro dataToSend) {
-		clickRegisterTab();
+		//clickRegisterTab();
 		for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
 			if (dataInput.dataRegType!=DataRegType.CODPAIS) {
 				sendKeysToInput(dataInput.dataRegType, dataInput.data);

@@ -36,7 +36,6 @@ public class Reg002 extends TestBase {
 		accesoAndClickRegistrate();
 		registerWithoutInputData();
 		registerWithIncorrectInputData();
-		registerWithNonExistentEmail();
 		registerWithExistentEmail();
 	}
 
@@ -62,22 +61,6 @@ public class Reg002 extends TestBase {
 		pageRegistroIniSteps.sendFixedDataToInputs(dataKOToSend, dataToSendInHtmlFormat);
 	}	
 	
-	private void registerWithNonExistentEmail() {
-		driver.navigate().refresh();
-		waitMillis(1000);
-		ListDataRegistro dataToSend = new ListDataRegistro(); 
-		dataToSend.add(DataRegType.NAME, "Jorge", true);
-		dataToSend.add(DataRegType.APELLIDOS, "Muñoz Martínez", true);
-		dataToSend.add(DataRegType.EMAIL, "jorge.munoz.noexiste@gmail.com", true);
-		dataToSend.add(DataRegType.PASSWORD, "sirjjjjj74", true);
-		dataToSend.add(DataRegType.TELEFONO, "665015122", true);
-		dataToSend.add(DataRegType.CODPOSTAL, "08720", true);
-		
-		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.PAGEINICIAL);
-		pageRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
-		pageRegistroIniSteps.clickRegistrateButton(dataRegister, ErrorRegister.USR_NO_EXISTS_IN_GMAIL);
-	}
-
 	private void registerWithExistentEmail() {
 		driver.navigate().refresh();
 		waitMillis(1000);

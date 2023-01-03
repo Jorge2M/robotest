@@ -43,13 +43,13 @@ public class SecMenusUserSteps extends StepBase {
 	}
 
 	@Step (
-		description="Seleccionar el menú de usuario \"Regístrate\" y la pestaña \"Regístrate\"", 
+		description="Seleccionar el menú de usuario \"Regístrate\"", 
 		expected="Aparece al página inicial del registro",
 		saveHtmlPage=SaveWhen.Always)
 	public void selectRegistrate() {
 		clickUserMenu(REGISTRATE);
 		PageRegistroIniOutlet pageRegistroIni = new PageRegistroIniOutlet();  
-		pageRegistroIni.clickRegisterTab();
+		//pageRegistroIni.clickRegisterTab();
 		if (app==AppEcom.outlet) {
 			PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
 			pageRegistroIniSteps.validaIsPageUntil(5);

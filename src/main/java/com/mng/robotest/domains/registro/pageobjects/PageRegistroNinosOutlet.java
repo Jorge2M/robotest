@@ -75,5 +75,8 @@ public class PageRegistroNinosOutlet extends PageBase {
 	
 	public void clickContinuar() {
 		click(XPATH_BOTON_CONTINUAR).exec();
+		if (!state(Invisible, XPATH_BOTON_CONTINUAR).wait(1).check()) {
+			click(XPATH_BOTON_CONTINUAR).exec();
+		}
 	}
 }
