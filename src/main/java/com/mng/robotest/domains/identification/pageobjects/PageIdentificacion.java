@@ -19,13 +19,10 @@ import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.
 public class PageIdentificacion extends PageBase {
 	
 	private static final String AVISO_CREDENCIALES_KO = "Tu e-mail o contraseña no son correctos";
-	private static final String XPATH_ERROR_CREDENCIALES_KO = "//div[@class='formErrors']//li[text()[contains(.,'" + AVISO_CREDENCIALES_KO + "')]]";
+	private static final String XPATH_ERROR_CREDENCIALES_KO = "//*[text()[contains(.,'" + AVISO_CREDENCIALES_KO + "')]]";
 	private static final String XPATH_HAS_OLVIDADO_CONTRASENYA = "//span[text()[contains(.,'¿Has olvidado tu contraseña?')]]/../../a";
-//	private static final String XPATH_INPUT_USER = "//input[@id[contains(.,'userMail')]]";
-//	private static final String XPATH_INPUT_PASSWORD = "//input[@id[contains(.,'chkPwd')]]";
 	private static final String XPATH_INPUT_USER = "//*[@data-testid='logon.login.emailInput']";
 	private static final String XPATH_INPUT_PASSWORD = "//*[@data-testid='logon.login.passInput']";	
-//	private static final String XPATH_INICIAR_SESION = "//div[@class='submitContent']/input[@type='submit']";
 	private static final String XPATH_INICIAR_SESION = "//*[@data-testid[contains(.,'loginButton')]]";	
 
 	public boolean isVisibleUserUntil(int seconds) {
@@ -43,9 +40,7 @@ public class PageIdentificacion extends PageBase {
 		catch (Exception e) {
 			Log4jTM.getLogger().error(e);
 		} 
-		//waitMillis(250);
 		getElement(XPATH_INPUT_USER).sendKeys(usuario);
-		//waitMillis(250);
 		getElement(XPATH_INPUT_PASSWORD).sendKeys(password);
 	}
 

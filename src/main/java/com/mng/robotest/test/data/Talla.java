@@ -12,7 +12,7 @@ public enum Talla {
 	T10("10", Arrays.asList("90x150")),
 	T18("18", Arrays.asList("XXS")),
 	T19("19", Arrays.asList("XS")),
-	T20("20", Arrays.asList("S")),
+	T20("20", Arrays.asList("S","XS-S")),
 	T21("21", Arrays.asList("M")),
 	T22("22", Arrays.asList("L")),
 	T23("23", Arrays.asList("XL")),

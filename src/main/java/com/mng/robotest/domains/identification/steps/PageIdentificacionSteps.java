@@ -19,7 +19,7 @@ public class PageIdentificacionSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el texto \"#{PageIdentificacion.getLiteralAvisiCredencialesKO()}\"",
+		description="Aparece el texto de introducción errónea de credenciales",
 		level=State.Defect)
 	private boolean checkTextoCredencialesKO() {
 		return new PageIdentificacion().isErrorEmailoPasswordKO();
