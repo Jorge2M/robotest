@@ -155,7 +155,7 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private void hoverGroup() {
-		state(State.Visible, getXPathGroup()).wait(1).check();
+		state(State.Visible, getXPathGroup()).wait(2).check();
 		moveToElement(getXPathGroup()); 
 		for (int i=0; i<3; i++) {
 			if (isGroupCorrectlySelected()) {
@@ -167,9 +167,10 @@ public class GroupWeb extends PageBase {
 	}
 	private boolean isGroupCorrectlySelected() {
 		return (isGroupSelected() &&
-			   (isVisibleSubMenus() || group.getGroupResponse()!=GroupResponse.MENUS));
+			   (group.getGroupResponse()!=GroupResponse.MENUS || isVisibleSubMenus()));
 	}
 	private boolean isGroupSelected() {
+		waitMillis(200);
 		String fontWeight = getElement(getXPathGroup()).getCssValue("font-weight");
 		return (Integer.valueOf(fontWeight)>500);
 	}
