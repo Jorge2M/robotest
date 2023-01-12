@@ -22,11 +22,27 @@ public class PageIdentificacion extends PageBase {
 	private static final String XPATH_ERROR_CREDENCIALES_KO = "//*[text()[contains(.,'" + AVISO_CREDENCIALES_KO + "')]]";
 	private static final String XPATH_HAS_OLVIDADO_CONTRASENYA = "//span[text()[contains(.,'¿Has olvidado tu contraseña?')]]/../../a";
 	private static final String XPATH_INPUT_USER = "//*[@data-testid='logon.login.emailInput']";
-	private static final String XPATH_INPUT_PASSWORD = "//*[@data-testid='logon.login.passInput']";	
+	private static final String XPATH_INPUT_PASSWORD = "//*[@data-testid='logon.login.passInput']";
+	private static final String XPATH_INPUT_USER_OLD = "//input[@id[contains(.,'userMail')]]";
+	private static final String XPATH_INPUT_PASSWORD_OLD = "//input[@id[contains(.,'chkPwd')]]";	
 	private static final String XPATH_INICIAR_SESION = "//*[@data-testid[contains(.,'loginButton')]]";	
 
+	private String getXPathInputUser() {
+		if (channel==Channel.tablet) {
+			return XPATH_INPUT_USER_OLD;
+		}
+		return XPATH_INPUT_USER;
+	}
+	private String getXPathInputPassword() {
+		if (channel==Channel.tablet) {
+			return XPATH_INPUT_PASSWORD_OLD;
+		}
+		return XPATH_INPUT_PASSWORD;
+		
+	}
+	
 	public boolean isVisibleUserUntil(int seconds) {
-		return state(Present, XPATH_INPUT_USER).wait(seconds).check();
+		return state(Present, getXPathInputUser()).wait(seconds).check();
 	}
 
 	public String getLiteralAvisiCredencialesKO() {
@@ -35,13 +51,13 @@ public class PageIdentificacion extends PageBase {
 
 	public void inputUserPassword(String usuario, String password) {
 		try {
-			getElement(XPATH_INPUT_USER).clear();
+			getElement(getXPathInputUser()).clear();
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().error(e);
 		} 
-		getElement(XPATH_INPUT_USER).sendKeys(usuario);
-		getElement(XPATH_INPUT_PASSWORD).sendKeys(password);
+		getElement(getXPathInputUser()).sendKeys(usuario);
+		getElement(getXPathInputPassword()).sendKeys(password);
 	}
 
 	public void login(String user, String password) {
@@ -96,7 +112,7 @@ public class PageIdentificacion extends PageBase {
 	}
 	
 	public boolean isErrorEmailoPasswordKO() {
-		return state(Present, XPATH_ERROR_CREDENCIALES_KO).check();
+		return state(Present, XPATH_ERROR_CREDENCIALES_KO).wait(1).check();
 	}
 
 	public void clickHasOlvidadoContrasenya() {
