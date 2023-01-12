@@ -25,7 +25,8 @@ public class PageIdentificacion extends PageBase {
 	private static final String XPATH_INPUT_PASSWORD = "//*[@data-testid='logon.login.passInput']";
 	private static final String XPATH_INPUT_USER_OLD = "//input[@id[contains(.,'userMail')]]";
 	private static final String XPATH_INPUT_PASSWORD_OLD = "//input[@id[contains(.,'chkPwd')]]";	
-	private static final String XPATH_INICIAR_SESION = "//*[@data-testid[contains(.,'loginButton')]]";	
+	private static final String XPATH_INICIAR_SESION = "//*[@data-testid[contains(.,'loginButton')]]";
+	private static final String XPATH_INICIAR_SESION_OLD = "//div[@class='submitContent']/input[@type='submit']";
 
 	private String getXPathInputUser() {
 		if (channel==Channel.tablet) {
@@ -38,11 +39,16 @@ public class PageIdentificacion extends PageBase {
 			return XPATH_INPUT_PASSWORD_OLD;
 		}
 		return XPATH_INPUT_PASSWORD;
-		
 	}
+	private String getXPathIniciarSesion() {
+		if (channel==Channel.tablet) {
+			return XPATH_INICIAR_SESION_OLD;
+		}
+		return XPATH_INICIAR_SESION;
+	}	
 	
 	public boolean isVisibleUserUntil(int seconds) {
-		return state(Present, getXPathInputUser()).wait(seconds).check();
+		return state(Visible, getXPathInputUser()).wait(seconds).check();
 	}
 
 	public String getLiteralAvisiCredencialesKO() {
@@ -81,14 +87,14 @@ public class PageIdentificacion extends PageBase {
 	}	
 	
 	private void clickButtonEntrar() {
-		click(XPATH_INICIAR_SESION).waitLoadPage(10).exec(); 
+		click(getXPathIniciarSesion()).waitLoadPage(10).exec(); 
 		if (isButtonEntrarVisible()) {
-			click(XPATH_INICIAR_SESION).type(javascript).waitLoadPage(10).exec();
+			click(getXPathIniciarSesion()).type(javascript).waitLoadPage(10).exec();
 		}
 	}
 	
 	public boolean isButtonEntrarVisible() {
-		return state(Visible, XPATH_INICIAR_SESION).check();
+		return state(Visible, getXPathIniciarSesion()).check();
 	}
 
 	public void clickIniciarSesionAndWait(Channel channel, AppEcom app) {
