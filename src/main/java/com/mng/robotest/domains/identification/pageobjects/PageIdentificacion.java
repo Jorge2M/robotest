@@ -21,34 +21,43 @@ public class PageIdentificacion extends PageBase {
 	private static final String AVISO_CREDENCIALES_KO = "Tu e-mail o contraseña no son correctos";
 	private static final String XPATH_ERROR_CREDENCIALES_KO = "//*[text()[contains(.,'" + AVISO_CREDENCIALES_KO + "')]]";
 	private static final String XPATH_HAS_OLVIDADO_CONTRASENYA = "//span[text()[contains(.,'¿Has olvidado tu contraseña?')]]/../../a";
-	private static final String XPATH_INPUT_USER = "//*[@data-testid='logon.login.emailInput']";
-	private static final String XPATH_INPUT_PASSWORD = "//*[@data-testid='logon.login.passInput']";
+	private static final String XPATH_INPUT_USER_NEW = "//*[@data-testid='logon.login.emailInput']";
+	private static final String XPATH_INPUT_PASSWORD_NEW = "//*[@data-testid='logon.login.passInput']";	
+	private static final String XPATH_INICIAR_SESION_NEW = "//*[@data-testid[contains(.,'loginButton')]]";
+	
+	//TODO eliminar una de las 2 versiones cuando se determine el TestAB
 	private static final String XPATH_INPUT_USER_OLD = "//input[@id[contains(.,'userMail')]]";
 	private static final String XPATH_INPUT_PASSWORD_OLD = "//input[@id[contains(.,'chkPwd')]]";	
-	private static final String XPATH_INICIAR_SESION = "//*[@data-testid[contains(.,'loginButton')]]";
 	private static final String XPATH_INICIAR_SESION_OLD = "//div[@class='submitContent']/input[@type='submit']";
+	
+	private boolean newPage = true;
 
 	private String getXPathInputUser() {
-		if (channel==Channel.tablet) {
-			return XPATH_INPUT_USER_OLD;
+		if (newPage) {
+			return XPATH_INPUT_USER_NEW;
 		}
-		return XPATH_INPUT_USER;
+		return XPATH_INPUT_USER_OLD;
 	}
 	private String getXPathInputPassword() {
-		if (channel==Channel.tablet) {
-			return XPATH_INPUT_PASSWORD_OLD;
+		if (newPage) {
+			return XPATH_INPUT_PASSWORD_NEW;
 		}
-		return XPATH_INPUT_PASSWORD;
-	}
+		return XPATH_INPUT_PASSWORD_OLD;
+	}	
 	private String getXPathIniciarSesion() {
-		if (channel==Channel.tablet) {
-			return XPATH_INICIAR_SESION_OLD;
+		if (newPage) {
+			return XPATH_INICIAR_SESION_NEW;
 		}
-		return XPATH_INICIAR_SESION;
+		return XPATH_INICIAR_SESION_OLD;
 	}	
 	
 	public boolean isVisibleUserUntil(int seconds) {
-		return state(Visible, getXPathInputUser()).wait(seconds).check();
+		boolean visible = state(Visible, XPATH_INPUT_USER_NEW + "/..").wait(seconds).check();
+		if (!visible) {
+			newPage = false;
+			return state(Present, XPATH_INPUT_USER_OLD).check();
+		}
+		return visible;
 	}
 
 	public String getLiteralAvisiCredencialesKO() {
@@ -74,11 +83,9 @@ public class PageIdentificacion extends PageBase {
 		new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, Clickable);
 	}
 
-	
 	public void iniciarSesion(String user, String password) {
 		clickIniciarSesionAndWait(channel, app);
 		isVisibleUserUntil(10);
-		//normalizeLoginForDefeatAkamai(channel, app, driver);
 		new PageIdentificacion().inputUserPassword(user, password);
 		clickButtonEntrar();
 		new ModalCambioPais().closeModalIfVisible();
@@ -118,7 +125,7 @@ public class PageIdentificacion extends PageBase {
 	}
 	
 	public boolean isErrorEmailoPasswordKO() {
-		return state(Present, XPATH_ERROR_CREDENCIALES_KO).wait(1).check();
+		return state(Present, XPATH_ERROR_CREDENCIALES_KO).check();
 	}
 
 	public void clickHasOlvidadoContrasenya() {
