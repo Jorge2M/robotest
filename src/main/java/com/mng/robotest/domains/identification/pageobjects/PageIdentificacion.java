@@ -30,8 +30,12 @@ public class PageIdentificacion extends PageBase {
 	private static final String XPATH_INPUT_PASSWORD_OLD = "//input[@id[contains(.,'chkPwd')]]";	
 	private static final String XPATH_INICIAR_SESION_OLD = "//div[@class='submitContent']/input[@type='submit']";
 	
-	private boolean newPage = true;
+	private final boolean newPage;
 
+	public PageIdentificacion() {
+		newPage = state(Visible, XPATH_INPUT_USER_NEW + "/..").wait(5).check();
+	}
+	
 	private String getXPathInputUser() {
 		if (newPage) {
 			return XPATH_INPUT_USER_NEW;
@@ -52,12 +56,7 @@ public class PageIdentificacion extends PageBase {
 	}	
 	
 	public boolean isVisibleUserUntil(int seconds) {
-		boolean visible = state(Visible, XPATH_INPUT_USER_NEW + "/..").wait(seconds).check();
-		if (!visible) {
-			newPage = false;
-			return state(Present, XPATH_INPUT_USER_OLD).check();
-		}
-		return visible;
+		return state(Visible, getXPathInputUser()).wait(seconds).check();
 	}
 
 	public String getLiteralAvisiCredencialesKO() {
