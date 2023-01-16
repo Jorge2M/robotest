@@ -13,7 +13,6 @@ import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.*;
 
 public class PageIdentificacion extends PageBase {
@@ -30,26 +29,36 @@ public class PageIdentificacion extends PageBase {
 	private static final String XPATH_INPUT_PASSWORD_OLD = "//input[@id[contains(.,'chkPwd')]]";	
 	private static final String XPATH_INICIAR_SESION_OLD = "//div[@class='submitContent']/input[@type='submit']";
 	
-	private final boolean newPage;
-
-	public PageIdentificacion() {
-		newPage = state(Visible, XPATH_INPUT_USER_NEW + "/..").wait(5).check();
+	public boolean isNewPage() {
+		if (channel!=Channel.tablet) {
+			return true;
+		}
+		for (int i=0; i<5; i++) {
+			if (state(Visible, XPATH_INPUT_USER_NEW + "/..").check()) {
+				return true;
+			}
+			if (state(Visible, XPATH_INPUT_USER_OLD).check()) {
+				return false;
+			}
+			waitMillis(1000);
+		}
+		return true;
 	}
 	
 	private String getXPathInputUser() {
-		if (newPage) {
+		if (isNewPage()) {
 			return XPATH_INPUT_USER_NEW;
 		}
 		return XPATH_INPUT_USER_OLD;
 	}
 	private String getXPathInputPassword() {
-		if (newPage) {
+		if (isNewPage()) {
 			return XPATH_INPUT_PASSWORD_NEW;
 		}
 		return XPATH_INPUT_PASSWORD_OLD;
 	}	
 	private String getXPathIniciarSesion() {
-		if (newPage) {
+		if (isNewPage()) {
 			return XPATH_INICIAR_SESION_NEW;
 		}
 		return XPATH_INICIAR_SESION_OLD;
@@ -94,13 +103,13 @@ public class PageIdentificacion extends PageBase {
 	
 	private void clickButtonEntrar() {
 		click(getXPathIniciarSesion()).waitLoadPage(10).exec(); 
-		if (isButtonEntrarVisible()) {
-			click(getXPathIniciarSesion()).type(javascript).waitLoadPage(10).exec();
-		}
+//		if (isButtonEntrarPresent()) {
+//			click(getXPathIniciarSesion()).type(javascript).waitLoadPage(10).exec();
+//		}
 	}
 	
-	public boolean isButtonEntrarVisible() {
-		return state(Visible, getXPathIniciarSesion()).check();
+	public boolean isButtonEntrarPresent() {
+		return state(Present, getXPathIniciarSesion()).check();
 	}
 
 	public void clickIniciarSesionAndWait(Channel channel, AppEcom app) {
