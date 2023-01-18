@@ -24,23 +24,19 @@ public class SecCabeceraMostFrequent extends SecCabecera {
 	
 	public enum IconoCabecera implements ElementPage {
 		lupa(
-			//"//*[@class[contains(.,'user-icon-button')]]//span[@class[contains(.,'-search')]]/..", //Outlet
-			"//*[@data-testid='header.userMenu.search.button']",
+			//TODO eliminar el 1o cuando suba la actual versión a pro (24-enero)
+			"//*[@data-testid='header.userMenu.search.button' or @data-testid='header.userMenu.search.button']",
 			"//*[@data-testid[contains(.,'header.userMenu.searchIconButton')]]"),
 		iniciarsesion(
-			//"//*[@class[contains(.,'user-icon-button')] and @id='login_any' or @id='login_mobile_any' or @id='login_tablet_any']/span[@class[contains(.,'-account')]]/..", //Outlet
 			"//*[@data-testid='header.userMenu.login_mobile_any']",
 			"//*[@data-testid='header.userMenu.login_any']"),
 		micuenta(
-			//"//*[@class[contains(.,'user-icon-button')] and @id='login' or @id='login_mobile' or @id='login_tablet']/span[@class[contains(.,'-account')]]/..", //Outlet
 			"//*[@data-testid='header.userMenu.login_mobile']",
 			"//*[@data-testid='header.userMenu.login']"),
 		favoritos(
-			//"//*[@class[contains(.,'user-icon-button')]]//span[@class[contains(.,'-favorites')]]/..", //Outlet
 			"//*[@data-testid='header.userMenu.favorites_mobile_any']",
 			"//*[@data-testid[contains(.,'header.userMenu.favorites')]]"),
 		bolsa(
-			//"//*[@class[contains(.,'user-icon-button')]]//span[@class[contains(.,'-bag')]]/..", //Outlet
 			"//*[@data-testid='header-user-menu-bag']",
 			"//*[@data-testid[contains(.,'header.userMenu.bolsa')] or " + //TODO eliminar cuando todos los países vayan por la nueva bolsa 
 			    "@data-testid[contains(.,'header-user-menu-bag')]]");
