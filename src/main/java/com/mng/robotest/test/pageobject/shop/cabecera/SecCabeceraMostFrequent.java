@@ -24,9 +24,9 @@ public class SecCabeceraMostFrequent extends SecCabecera {
 	
 	public enum IconoCabecera implements ElementPage {
 		lupa(
-			//TODO eliminar el 1o cuando suba la actual versión a pro (24-enero)
-			"//*[@data-testid='header.userMenu.search.button' or @data-testid='header.userMenu.search.button']",
-			"//*[@data-testid[contains(.,'header.userMenu.searchIconButton')]]"),
+			"//*[@data-testid='header.userMenu.search.button']",
+			//TODO eliminar el 1o cuando suba la actual versión a pro (24-enero)			
+			"//*[@data-testid[contains(.,'header.userMenu.searchIconButton')] or @data-testid='header.userMenu.search.button']"),
 		iniciarsesion(
 			"//*[@data-testid='header.userMenu.login_mobile_any']",
 			"//*[@data-testid='header.userMenu.login_any']"),
