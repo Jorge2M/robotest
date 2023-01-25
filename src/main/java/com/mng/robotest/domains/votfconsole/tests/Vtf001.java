@@ -25,7 +25,7 @@ public class Vtf001 extends TestBase {
 		consolaVotfSteps.accesoPagInicial();
 		consolaVotfSteps.selectEntornoTestAndCons("PRE HTTPS INTERNAL K8S");
 
-		String idArticle = searchForArticleAvailable(15, consolaVotfSteps, driver);
+		String idArticle = searchForArticleAvailable(20, consolaVotfSteps, driver);
 		consolaVotfSteps.consultarDispEnvTienda(idArticle);
 		String codigoPedido = consolaVotfSteps.realizarSolicitudTienda(idArticle);
 		String codigoPedidoFull = consolaVotfSteps.obtenerPedidos(codigoPedido);

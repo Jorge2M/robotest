@@ -15,7 +15,6 @@ import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.identification.pageobjects.PageIdentificacion;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
-import com.mng.robotest.domains.registro.pageobjects.PageRegistroIniOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.domains.transversal.StepBase;
@@ -43,18 +42,19 @@ public class SecMenusUserSteps extends StepBase {
 	}
 
 	@Step (
-		description="Seleccionar el menú de usuario \"Regístrate\"", 
+		description="Seleccionar el menú de usuario <b>Regístrate</b>", 
 		expected="Aparece al página inicial del registro",
 		saveHtmlPage=SaveWhen.Always)
 	public void selectRegistrate() {
 		clickUserMenu(REGISTRATE);
-		PageRegistroIniOutlet pageRegistroIni = new PageRegistroIniOutlet();  
-		//pageRegistroIni.clickRegisterTab();
 		if (app==AppEcom.outlet) {
 			PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
 			pageRegistroIniSteps.validaIsPageUntil(5);
 			pageRegistroIniSteps.validaIsRGPDVisible();
 		} else {
+			if (channel.isDevice()) {
+				new PageIdentificacion().clickButtonCrearCuenta();
+			}
 			PageRegistroInitialShopSteps pageRegistroIniSteps = new PageRegistroInitialShopSteps();
 			pageRegistroIniSteps.checkIsPageUntil(5);
 		}

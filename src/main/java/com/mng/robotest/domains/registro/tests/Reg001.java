@@ -46,6 +46,7 @@ public class Reg001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		accesoAndClickRegistrate();
+		selectLinkPoliticaPrivacidad();
 		inputInitialDataAndClickCreate();
 		inputPersonalizedDataAndClickGuardar();
 		checkLoginAndUserData();
@@ -55,6 +56,12 @@ public class Reg001 extends TestBase {
 		access();
 		new SecMenusUserSteps().selectRegistrate();
 	}	
+	
+	private void selectLinkPoliticaPrivacidad() {
+		pageRegistroInitialSteps.clickPoliticaPrivacidad();
+		pageRegistroInitialSteps.clickPoliticaPrivacidadModal();
+		pageRegistroInitialSteps.closeModalPoliticaPrivacidad();
+	}
 	
 	private void inputInitialDataAndClickCreate() {
 		pageRegistroInitialSteps.inputData(dataNewRegister);

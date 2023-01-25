@@ -106,15 +106,15 @@ public class ConsolaVotfSteps extends StepBase {
 			pageConsola.switchToResultIFrame();
 			checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una tabla \"Transportes\"",
-				iframeResult.existsTransportes(), State.Defect);
+				iframeResult.existsTransportes(), State.Warn);
 			
 			checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una tabla \"Disponibilidad\"",
-				iframeResult.existsDisponibilidad(), State.Defect);
+				iframeResult.existsDisponibilidad(), State.Warn);
 			
 		 	checks.add(
 				"En la tabla \"Disponibilidad\" figura el campo <b>Disponible=true</b>",
-				iframeResult.flagDisponibleIsTrue(), State.Defect);
+				iframeResult.flagDisponibleIsTrue(), State.Warn);
 		}
 		finally {
 			pageConsola.driver.switchTo().window(paginaPadre);

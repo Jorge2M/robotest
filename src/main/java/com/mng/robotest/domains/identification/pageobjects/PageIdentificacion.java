@@ -23,6 +23,7 @@ public class PageIdentificacion extends PageBase {
 	private static final String XPATH_INPUT_USER_NEW = "//*[@data-testid='logon.login.emailInput']";
 	private static final String XPATH_INPUT_PASSWORD_NEW = "//*[@data-testid='logon.login.passInput']";	
 	private static final String XPATH_INICIAR_SESION_NEW = "//*[@data-testid[contains(.,'loginButton')]]";
+	private static final String XPATH_CREAR_CUENTA = "//button[@data-testid[contains(.,'createAccountButton')]]";
 	
 	//TODO eliminar una de las 2 versiones cuando se determine el TestAB
 	private static final String XPATH_INPUT_USER_OLD = "//input[@id[contains(.,'userMail')]]";
@@ -103,9 +104,13 @@ public class PageIdentificacion extends PageBase {
 	
 	private void clickButtonEntrar() {
 		click(getXPathIniciarSesion()).waitLoadPage(10).exec(); 
-//		if (isButtonEntrarPresent()) {
-//			click(getXPathIniciarSesion()).type(javascript).waitLoadPage(10).exec();
-//		}
+	}
+	
+	public void clickButtonCrearCuenta() {
+		//TODO fix waitLink in 2.1.34 TestMaker version
+		click(XPATH_CREAR_CUENTA).waitLink(10).exec();
+//		state(Clickable, XPATH_CREAR_CUENTA).wait(5).check();
+//		click(XPATH_CREAR_CUENTA).exec();
 	}
 	
 	public boolean isButtonEntrarPresent() {

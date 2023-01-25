@@ -1,8 +1,10 @@
 package com.mng.robotest.test.pageobject.shop.cabecera;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -141,16 +143,25 @@ public class SecCabeceraMostFrequent extends SecCabecera {
 	public void hoverIconForShowUserMenuDesktop() {
 		int i=0;
 		while (!modalUserSesionShopDesktop.isVisible() && i<3) {
-			if (isIconoInState(IconoCabecera.iniciarsesion, State.Visible)) {
-				hoverIcono(IconoCabecera.iniciarsesion); 
-			} else {
-				hoverIcono(IconoCabecera.micuenta);
-			}
+			hoverVisibleUserIcon();
 			if (modalUserSesionShopDesktop.isVisible()) {
 				break;
 			}
 			waitMillis(1000);
 			i+=1;
+		}
+	}
+
+	private void hoverVisibleUserIcon() {
+		try {
+			if (isIconoInState(IconoCabecera.iniciarsesion, State.Visible)) {
+				hoverIcono(IconoCabecera.iniciarsesion); 
+			} else {
+				hoverIcono(IconoCabecera.micuenta);
+			}
+		}
+		catch (NoSuchElementException e) {
+			Log4jTM.getLogger().warn("Problem hover user icon", e);
 		}
 	}
 }

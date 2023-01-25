@@ -2,6 +2,7 @@ package com.mng.robotest.domains.registro.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageRegistroInitialShop extends PageBase {
@@ -12,6 +13,22 @@ public class PageRegistroInitialShop extends PageBase {
 	private static final String XPATH_INPUT_MOVIL = XPATH_MODAL_CONTENT + "//input[@id='mobile-number']";
 	private static final String XPATH_RADIO_GIVE_PROMOTIONS = XPATH_MODAL_CONTENT + "//input[@id='newsletter']";
 	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//div[@class='mng-form-buttons']/button[@type='submit']";
+	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = XPATH_MODAL_CONTENT + "//*[@data-testid='registry.consentgdprMobile.container']//*[@data-testid='mng-link']";
+	private static final String XPATH_MODAL_POLITICA_PRIVACIDAD_DESKTOP = "//div[@name='gdprLayer']";
+	private static final String XPATH_MODAL_POLITICA_PRIVACIDAD_MOBILE = "//*[@data-testid='sheet.draggable.dialog']";
+	private static final String XPATH_LINK_POLITICA_PRIVACIDAD_MODAL = "//*[@data-testid='mng-link']";
+	private static final String XPATH_CLOSE_MODAL_DESKTOP = "//*[@data-testid='modal.close.button']";
+	private static final String XPATH_CLOSE_MODAL_DEVICE = "//*[@data-testid='sheet.overlay']";	
+	
+	private String getXPathModalPoliticaPrivacidad() {
+		if (channel==Channel.desktop) {
+			return XPATH_MODAL_POLITICA_PRIVACIDAD_DESKTOP;
+		}
+		return XPATH_MODAL_POLITICA_PRIVACIDAD_MOBILE;
+	}
+	private String getXPathLinkPoliticaPrivacidadModal() {
+		return getXPathModalPoliticaPrivacidad() + XPATH_LINK_POLITICA_PRIVACIDAD_MODAL;
+	}
 	
 	public boolean isPage() {
 		return isPageUntil(0);
@@ -38,5 +55,25 @@ public class PageRegistroInitialShop extends PageBase {
 	
 	public void clickCreateAccountButton() {
 		click(XPATH_CREATE_ACCOUNT_BUTTON).exec();
+	}
+	
+	public void clickPoliticaPrivacidad() {
+		click(XPATH_LINK_POLITICA_PRIVACIDAD).exec();
+	}
+	public boolean isModalPoliticaPrivacidadVisible() {
+		return state(Visible, getXPathModalPoliticaPrivacidad()).check();
+	}
+	public boolean isModalPoliticaPrivacidadInvisible(int seconds) {
+		return state(Invisible, getXPathModalPoliticaPrivacidad()).wait(seconds).check();
+	}	
+	public void clickPoliticaPrivacidadModal() {
+		click(getXPathLinkPoliticaPrivacidadModal()).exec();
+	}
+	public void closeModalPoliticaPrivacidad() {
+		if (channel.isDevice()) {
+			click(XPATH_CLOSE_MODAL_DEVICE).exec();
+		} else {
+			click(XPATH_CLOSE_MODAL_DESKTOP).exec();
+		}
 	}
 }

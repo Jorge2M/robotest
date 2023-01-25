@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.registro.steps;
 
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
@@ -40,12 +39,51 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	
 	@Step (
 		description="Pulsar el botón <b>Crear cuenta</b>",
-		expected="Aparece la página de personalización del registro",
-		saveImagePage=SaveWhen.Always)
+		expected="Aparece la página de personalización del registro")
 	public void clickCreateAccountButton() {
 		pageRegistroInitial.clickCreateAccountButton();
 		new PageRegistroPersonalizacionShopSteps().checkIsPageUntil(5);
 		GenericChecks.checkDefault();
 	}	
+
+	@Step (
+		description="Pulsar el link <b>Política de privacidad</b>",
+		expected="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"")	
+	public void clickPoliticaPrivacidad() {
+		pageRegistroInitial.clickPoliticaPrivacidad();
+		if (pageRegistroInitial.isModalPoliticaPrivacidadInvisible(0)) {
+			pageRegistroInitial.clickPoliticaPrivacidad();
+		}
+		checkIsModalPoliticaPrivacidadVisible();
+	}
+	@Validation (
+		description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"",
+		level=State.Defect)
+	public boolean checkIsModalPoliticaPrivacidadVisible() {
+		return pageRegistroInitial.isModalPoliticaPrivacidadVisible();
+	}	
+	
+	@Step (
+		description="Pulsar el link <b>Política de privacidad</b> del modal",
+		expected="Aparece una nueva página con la política de privacidad y cookies")
+	public void clickPoliticaPrivacidadModal() {
+		pageRegistroInitial.clickPoliticaPrivacidadModal();
+		//pagePoliticaPrivacidad.checkIsVisible();
+	}
+
+	@Step (
+		description="Cerrar el modal de la política de privacidad",
+		expected="Desaparece el modal")	
+	public void closeModalPoliticaPrivacidad() {
+		pageRegistroInitial.closeModalPoliticaPrivacidad();
+		checkIsModalPoliticaPrivacidadInvisible();
+	}
+	
+	@Validation (
+		description="Desaparece el modal de \"Cómo protegemos y tratamos tus datos?\"",
+		level=State.Defect)
+	public boolean checkIsModalPoliticaPrivacidadInvisible() {
+		return pageRegistroInitial.isModalPoliticaPrivacidadInvisible(2);
+	}
 	
 }
