@@ -1,5 +1,7 @@
 package com.mng.robotest.domains.registro.steps;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
@@ -63,12 +65,28 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		return pageRegistroInitial.isModalPoliticaPrivacidadVisible();
 	}	
 	
+	public void clickPoliticaPrivacidadModal() {
+		Pair<String, String> pair = clickPoliticaPrivacidadModalStep();
+		switchToParent(pair.getLeft(), pair.getRight());
+	}
+	
 	@Step (
 		description="Pulsar el link <b>Política de privacidad</b> del modal",
 		expected="Aparece una nueva página con la política de privacidad y cookies")
-	public void clickPoliticaPrivacidadModal() {
+	private Pair<String, String> clickPoliticaPrivacidadModalStep() {
+		String parentWindow = driver.getWindowHandle();
 		pageRegistroInitial.clickPoliticaPrivacidadModal();
-		//pagePoliticaPrivacidad.checkIsVisible();
+		String childWindow = switchToAnotherWindow(driver, parentWindow);
+		new PagePoliticaPrivacidadSteps().checkIsPageUntil(1);
+		return Pair.of(parentWindow, childWindow);
+	}
+	
+	private void switchToParent(String parentWindow, String childWindow) {
+		if (childWindow.compareTo(parentWindow)!=0) {
+			driver.switchTo().window(childWindow);
+			driver.close();
+			driver.switchTo().window(parentWindow);
+		}
 	}
 
 	@Step (

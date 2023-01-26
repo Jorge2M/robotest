@@ -108,9 +108,9 @@ public class PageIdentificacion extends PageBase {
 	
 	public void clickButtonCrearCuenta() {
 		//TODO fix waitLink in 2.1.34 TestMaker version
-		click(XPATH_CREAR_CUENTA).waitLink(10).exec();
-//		state(Clickable, XPATH_CREAR_CUENTA).wait(5).check();
-//		click(XPATH_CREAR_CUENTA).exec();
+//		click(XPATH_CREAR_CUENTA).waitLink(10).exec();
+		state(Clickable, XPATH_CREAR_CUENTA).wait(5).check();
+		click(XPATH_CREAR_CUENTA).exec();
 	}
 	
 	public boolean isButtonEntrarPresent() {
