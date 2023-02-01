@@ -64,9 +64,11 @@ public class PageMisDatosSteps extends StepBase {
 			"El Código postal contiene el definido durante el registro: <b>" + codpostal + "</b>",
 			(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0), State.Defect);
 		
-		checks.add(
-			"La población contiene la definida durante el registro: <b>" + poblacion + "</b>",
-			(pageMisDatos.getTextInputPoblacion().compareTo(poblacion)==0), State.Defect);
+		if (poblacion!=null) {
+			checks.add(
+				"La población contiene la definida durante el registro: <b>" + poblacion + "</b>",
+				(pageMisDatos.getTextInputPoblacion().compareTo(poblacion)==0), State.Defect);
+		}
 		
 		checks.add(
 			"Está seleccionado el país definido durante el registro: <b>" + codpais + "</b>",

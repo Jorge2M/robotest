@@ -42,6 +42,7 @@ public class Page2IdentCheckout extends PageBase {
 	private static final String XPATH_INPUT_DIRECCION2 = "//input[@id[contains(.,':cfDir2')]]";
 	private static final String XPATH_CHECK_PUBLICIDAD = "//input[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]/..";
 	private static final String XPATH_CHECK_OVER18YEARS = "//input[@data-component-id[contains(.,'cfPriv18')]]";
+	private static final String XPATH_CHECK_READCONSENT = "//input[@data-component-id[contains(.,'cfPriv')]]";	
 	private static final String XPATH_INPUT_EMAIL = "//input[@id[contains(.,':cfEmail')]]";
 	private static final String XPATH_INPUT_DNI = "//input[@id[contains(.,':cfDni')]]";
 	private static final String XPATH_INPUT_CODPOST = "//input[@id[contains(.,':cfCp')]]";
@@ -170,8 +171,9 @@ public class Page2IdentCheckout extends PageBase {
 	
 	public void setInputDireccion1IfVisible(String direccion1, Map<String,String> datosRegistro) {
 		boolean datoSeteado = setInputIfVisible(XPATH_INPUT_DIRECCION1, direccion1);
-		if (datoSeteado)
+		if (datoSeteado) {
 			datosRegistro.put("cfDir1", direccion1);
+		}
 	}	
 	
 	public void setInputDireccion2IfVisible(String direccion1, Map<String,String> datosRegistro) {
@@ -279,7 +281,7 @@ public class Page2IdentCheckout extends PageBase {
 	/**
 	 * Si existe, utiliza el botón "Find Address" para establecer la dirección (actualmente sólo existe en Corea del Sur)
 	 */
-	public void setDireccionWithFindAddressIfExists() {
+	public void setDireccionWithFindAddressIfExists(Map<String,String> datosRegistro) {
 		String codPostalSeteado = getCodigoPostal();
 		if (pais.getCodpos().compareTo(codPostalSeteado)!=0 &&
 			state(Visible, By.xpath(XPATH_BOTON_FIND_ADDRESS)).check()) {
@@ -300,7 +302,17 @@ public class Page2IdentCheckout extends PageBase {
 			catch (Exception e) {
 				Log4jTM.getLogger().warn("Exception clicking Find Address button", e);
 			}
-			finally { driver.switchTo().window(mainWindowHandle); }
+			finally { 
+				driver.switchTo().window(mainWindowHandle);
+				if (state(State.Present, XPATH_INPUT_DIRECCION1 + "//self::*[string-length(@value)>0]").wait(1).check()) {
+					String direccion1 = getElement(XPATH_INPUT_DIRECCION1).getAttribute("value");
+					datosRegistro.put("cfDir1", direccion1);
+				}
+				if (state(State.Present, XPATH_INPUT_CODPOST).check()) {
+					String direccion1 = getElement(XPATH_INPUT_CODPOST).getAttribute("value");
+					datosRegistro.put("cfCp", direccion1);
+				}
+			}
 		}
 	}
 
@@ -332,6 +344,16 @@ public class Page2IdentCheckout extends PageBase {
 		}
 		datosRegistro.put("cfPriv18", "false");
 	}
+	
+	public void clickReadConsentIfVisible(Map<String,String> datosRegistro) {
+		if (state(Present, XPATH_CHECK_READCONSENT).check()) {
+			moveToElement(XPATH_CHECK_READCONSENT);
+			getElement(XPATH_CHECK_READCONSENT).click();
+			datosRegistro.put("cfPriv", "true");
+			return;
+		}
+		datosRegistro.put("cfPriv", "false");
+	}	
 
 	/**
 	 * @param posInSelect: elemento del desplegable que queremos desplegar (comenzando desde el 1)
@@ -626,7 +648,7 @@ public class Page2IdentCheckout extends PageBase {
 			setEmailIfExists(emailUsr, datosSeteados);
 			setInputDireccion1IfVisible(direccion1, datosSeteados);
 			setInputDireccion2IfVisible(direccion2, datosSeteados);
-			setDireccionWithFindAddressIfExists();
+			setDireccionWithFindAddressIfExists(datosSeteados);
 			setPaisIfVisibleAndNotSelected(datosSeteados);
 			setCodPostalIfExistsAndWait(codPostalPais, datosSeteados);
 			setInputPoblacionIfVisible(cfCity, datosSeteados);
@@ -646,6 +668,7 @@ public class Page2IdentCheckout extends PageBase {
 					setCheckHombreIfVisible(datosSeteados);
 				}
 				clickOver18YearsIfVisible(datosSeteados);
+				clickReadConsentIfVisible(datosSeteados);
 			}
 		}
 		

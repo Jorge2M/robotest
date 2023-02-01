@@ -13,6 +13,7 @@ import com.mng.robotest.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroIniOutlet;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.utils.UtilsTest;
 
@@ -35,7 +36,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			"  - Un email no existente: <b>#{emailNonExistent}</b><br>" +
 			"  - Password usuario: *****<br>" + 
 			"  - Seleccionar el link de publicidad<br>" +
-			"  - El resto de datos específicos para el país \"#{pais.getNombre_pais()}\"", 
+			"  - El resto de datos específicos para el país", 
 		expected=
 			"No aparece ningún mensaje de dato incorrecto")
 	public Map<String,String> sendDataAccordingCountryToInputs(String emailNonExistent, boolean clickPubli) {
@@ -167,15 +168,19 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	}
 
 	public void validaIsRGPDVisible() {
-		if (pais.getRgpd().equals("S")) {
-			validateRGPD_inCountryWithRgpd(pais.getCodigo_alf());
-		} else {
-			validateRGPD_inCountryWithoutRgpd(pais.getCodigo_pais());
+		if (PaisShop.COREA_DEL_SUR.isEquals(pais)) {
+			validateRGPDInCorea();
+			return;
 		}
-	}  
+		if (pais.getRgpd().equals("S")) {
+			validateRGPDInCountryWithRgpd(pais.getCodigo_alf());
+			return;
+		}
+		validateRGPDInCountryWithoutRgpd(pais.getCodigo_pais());
+	}
 	
 	@Validation
-	public ChecksTM validateRGPD_inCountryWithRgpd(String codigoPais) {
+	public ChecksTM validateRGPDInCountryWithRgpd(String codigoPais) {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 1;
 		checks.add(
@@ -195,7 +200,27 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validateRGPD_inCountryWithoutRgpd(String codigoPais) {
+	public ChecksTM validateRGPDInCorea() {
+		ChecksTM checks = ChecksTM.getNew();
+		int seconds = 1;
+		checks.add(
+			"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro",
+			!pageRegistroIni.isTextoRGPDVisible(), State.Defect);
+		
+		checks.add(
+			"El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro", 
+			!pageRegistroIni.isTextoLegalRGPDVisible(), State.Defect);
+		
+		checks.add(
+			"<b>SI</b> está presente el checkbox para recibir promociones e información personalizada" +
+			" (lo esperamos hasta " + seconds + " segundos)",
+			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds), State.Defect);
+		
+		return checks;
+	}
+	
+	@Validation
+	public ChecksTM validateRGPDInCountryWithoutRgpd(String codigoPais) {
 		ChecksTM checks = ChecksTM.getNew();
 		int seconds = 1;
 		checks.add(

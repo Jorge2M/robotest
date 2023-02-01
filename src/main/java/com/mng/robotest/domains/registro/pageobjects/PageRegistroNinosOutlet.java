@@ -16,7 +16,8 @@ public class PageRegistroNinosOutlet extends PageBase {
 	private static final String XPATH_SELECT_MES_NACIMIENTO = "//select[@id[contains(.,'naciMes')]]";
 	private static final String XPATH_SELECT_ANY_NACIMIENTO = "//select[@id[contains(.,'naciAny')]]";
 	private static final String XPATH_BOTON_CONTINUAR = 
-		"//div[@class[contains(.,'registerStepsModal')]]//div[@class='submitContent']//input[@type='submit']";
+			"//div[@class[contains(.,'registerStepsModal')]]" + 
+	        "//form[@id[contains(.,'cfKids')]]//input[@type='submit']";
 	
 	public boolean isPageUntil(int seconds) {
 		String xpath = "//form[@id[contains(.,'cfKids')]]";
@@ -75,7 +76,7 @@ public class PageRegistroNinosOutlet extends PageBase {
 	
 	public void clickContinuar() {
 		click(XPATH_BOTON_CONTINUAR).exec();
-		if (!state(Invisible, XPATH_BOTON_CONTINUAR).wait(1).check()) {
+		if (!state(Invisible, XPATH_BOTON_CONTINUAR).wait(2).check()) {
 			click(XPATH_BOTON_CONTINUAR).exec();
 		}
 	}
