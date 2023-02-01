@@ -45,7 +45,7 @@ public class Registro implements Serializable {
 	public void REG005_OldRegisterCorea() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
 		Pais corea = COREA_DEL_SUR.getPais();
-		IdiomaPais coreano = corea.getListIdiomas().get(1);
+		IdiomaPais coreano = corea.getListIdiomas().get(0);
 		new Reg003(corea, coreano, false).execute();
 	}	
 	
