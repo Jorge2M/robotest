@@ -20,6 +20,7 @@ import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
@@ -47,7 +48,7 @@ public class SecMenusUserSteps extends StepBase {
 		saveHtmlPage=SaveWhen.Always)
 	public void selectRegistrate() {
 		clickUserMenu(REGISTRATE);
-		if (app==AppEcom.outlet) {
+		if (app==AppEcom.outlet || PaisShop.COREA_DEL_SUR.isEquals(dataTest.getPais())) {
 			PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
 			pageRegistroIniSteps.validaIsPageUntil(5);
 			pageRegistroIniSteps.validaIsRGPDVisible();
