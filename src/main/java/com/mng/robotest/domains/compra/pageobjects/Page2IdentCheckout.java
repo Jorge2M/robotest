@@ -41,6 +41,7 @@ public class Page2IdentCheckout extends PageBase {
 	private static final String XPATH_INPUT_DIRECCION1 = "//input[@id[contains(.,':cfDir1')]]";
 	private static final String XPATH_INPUT_DIRECCION2 = "//input[@id[contains(.,':cfDir2')]]";
 	private static final String XPATH_CHECK_PUBLICIDAD = "//input[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]/..";
+	private static final String XPATH_CHECK_OVER18YEARS = "//input[@data-component-id[contains(.,'cfPriv18')]]";
 	private static final String XPATH_INPUT_EMAIL = "//input[@id[contains(.,':cfEmail')]]";
 	private static final String XPATH_INPUT_DNI = "//input[@id[contains(.,':cfDni')]]";
 	private static final String XPATH_INPUT_CODPOST = "//input[@id[contains(.,':cfCp')]]";
@@ -320,6 +321,16 @@ public class Page2IdentCheckout extends PageBase {
 			}
 		}
 		datosRegistro.put("cfPubli", "false");
+	}
+	
+	public void clickOver18YearsIfVisible(Map<String,String> datosRegistro) {
+		if (state(Present, XPATH_CHECK_OVER18YEARS).check()) {
+			moveToElement(XPATH_CHECK_OVER18YEARS);
+			getElement(XPATH_CHECK_OVER18YEARS).click();
+			datosRegistro.put("cfPriv18", "true");
+			return;
+		}
+		datosRegistro.put("cfPriv18", "false");
 	}
 
 	/**
@@ -629,9 +640,12 @@ public class Page2IdentCheckout extends PageBase {
 			setInputProvEstadoIfVisible(cfState, datosSeteados);
 			setInputDniIfVisible(dni, datosSeteados);
 			setSelectEstadosPaisIfVisible(datosSeteados);
-			if (i==0 && clickPubli) {
-				clickPublicidadIfVisible(datosSeteados);
-				setCheckHombreIfVisible(datosSeteados);
+			if (i==0) {
+				if (clickPubli) {
+					clickPublicidadIfVisible(datosSeteados);
+					setCheckHombreIfVisible(datosSeteados);
+				}
+				clickOver18YearsIfVisible(datosSeteados);
 			}
 		}
 		

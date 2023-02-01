@@ -18,15 +18,15 @@ public class Otr006 extends TestBase {
 			return;
 		}
 		
-		String option1 = "Estado de mi pedido";
+		String option1 = "Club Mango likes you";
 		chatBotSteps.isVisibleOption(option1, 5);
 		chatBotSteps.selectOption(option1);
 		
-		String option2 = "Retraso de mi pedido";
+		String option2 = "Cómo utilizar mis Likes";
 		chatBotSteps.isVisibleOption(option2, 5);
 		chatBotSteps.selectOption(option2);
 		
-		chatBotSteps.checkResponseVisible("Si has recibido un e-mail de retraso de tu pedido no te preocupes", 3);
+		chatBotSteps.checkResponseVisible("Utiliza tus Likes como descuento en tienda y online", 3);
 		chatBotSteps.isVisibleButton("¡Sí, gracias!", 3);		
 	}
 	

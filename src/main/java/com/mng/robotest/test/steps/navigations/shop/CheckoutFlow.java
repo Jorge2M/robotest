@@ -149,9 +149,9 @@ public class CheckoutFlow extends StepBase {
 		String emailCheckout = UtilsMangoTest.getEmailForCheckout(pais, dataPago.getFTCkout().emailExists); 
 		dataPago.getDataPedido().setEmailCheckout(emailCheckout);
 
-		Page1IdentCheckoutSteps page1IdentCheckoutSteps = new Page1IdentCheckoutSteps();
+		var page1IdentCheckoutSteps = new Page1IdentCheckoutSteps();
 		page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dataPago.getFTCkout().emailExists, dataTest.isUserRegistered(), pais);
-		Page2IdentCheckoutSteps page2IdentCheckoutSteps = new Page2IdentCheckoutSteps(egyptCity);
+		var page2IdentCheckoutSteps = new Page2IdentCheckoutSteps(egyptCity);
 		boolean emailOk = page2IdentCheckoutSteps.checkEmail(emailCheckout);
 		if (!emailOk) {
 			//Existe un problema según el cual en ocasiones no se propaga el email desde la página de identificación

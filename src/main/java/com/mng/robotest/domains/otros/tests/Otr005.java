@@ -3,20 +3,20 @@ package com.mng.robotest.domains.otros.tests;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test.steps.shop.PageIniShopJaponSteps;
 import com.mng.robotest.test.steps.shop.PagePrehomeSteps;
-import com.mng.robotest.test.utils.PaisGetter;
+
+import static com.mng.robotest.test.data.PaisShop.*;
 
 public class Otr005 extends TestBase {
 
-	private static final Pais JAPON = PaisGetter.from(PaisShop.JAPON);
-	private static final IdiomaPais JAPONES = JAPON.getListIdiomas().get(0);	
+	private static final Pais JAPAN = JAPON.getPais();
+	private static final IdiomaPais JAPONES = JAPAN.getListIdiomas().get(0);	
 	
 	@Override
 	public void execute() throws Exception {
-		dataTest.setPais(JAPON);
+		dataTest.setPais(JAPAN);
 		dataTest.setIdioma(JAPONES);
 		PagePrehomeSteps pagePrehomeSteps = new PagePrehomeSteps();
 		new PagePrehome().previousAccessShopSteps(true);

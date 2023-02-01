@@ -5,10 +5,12 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.compra.pageobjects.SecSoyNuevo;
-import com.mng.robotest.domains.compra.pageobjects.SecSoyNuevo.ActionNewsL;
+import com.mng.robotest.domains.compra.pageobjects.SecSoyNuevo.RadioState;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
+
+import static com.mng.robotest.test.data.PaisShop.*;
 
 public class SecSoyNuevoSteps extends StepBase {
 
@@ -16,12 +18,15 @@ public class SecSoyNuevoSteps extends StepBase {
 	
 	@Step (
 		description=
-			"1. Desmarcamos el check NewsLetter<br>" + 
+			"1. Desmarcamos el check  NewsLetter<br>" + 
 			"2. Introducimos el email <b>#{email}</b> (existente: <b>#{emailExistsYet}</b>)<br>" + 
 			"3. Seleccionamos \"Continuar\"", 
 		expected="Aparece la página de introducción de datos del usuario")
 	public void inputEmailAndContinue(String email, boolean emailExistsYet, boolean userRegistered, Pais pais) {
-		secSoyNuevo.setCheckPubliNewsletter(ActionNewsL.DEACTIVATE);
+		secSoyNuevo.setCheckPubliNewsletter(RadioState.DEACTIVATE);
+		if (COREA_DEL_SUR.isEquals(pais)) {
+			secSoyNuevo.setCheckConsentimiento(RadioState.ACTIVATE);
+		}
 		secSoyNuevo.inputEmail(email);
 		secSoyNuevo.clickContinue();
 

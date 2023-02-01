@@ -10,18 +10,17 @@ import com.mng.robotest.domains.micuenta.steps.ModalDetalleCompraSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
-import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.utils.PaisGetter;
 
+import static com.mng.robotest.test.data.PaisShop.*;
 
 public class Com011 extends TestBase {
 
 	public Com011() throws Exception {
 		dataTest.setUserRegistered(true);
 		if (inputParamsSuite.getListaPaises().isEmpty()) {
-			dataTest.setPais(PaisGetter.from(PaisShop.DEUTSCHLAND));
+			dataTest.setPais(DEUTSCHLAND.getPais());
 		}
 	}
 	

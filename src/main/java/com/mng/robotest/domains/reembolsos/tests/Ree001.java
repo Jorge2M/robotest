@@ -6,14 +6,14 @@ import com.mng.robotest.domains.reembolsos.steps.PageReembolsosSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
+import static com.mng.robotest.test.data.PaisShop.*;
+
 public class Ree001 extends TestBase {
 	
-	private static final Pais EMIRATOS = PaisGetter.from(PaisShop.UNITED_ARAB_EMIRATES);
+	private static final Pais EMIRATOS = UNITED_ARAB_EMIRATES.getPais();
 	private static final IdiomaPais EMIRATOS_ARABE = EMIRATOS.getListIdiomas().get(0);
 	
 	@Override

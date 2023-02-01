@@ -5,8 +5,8 @@ import org.testng.annotations.*;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.utils.PaisGetter;
+
+import static com.mng.robotest.test.data.PaisShop.*;
 
 import java.io.Serializable;
 
@@ -16,7 +16,7 @@ public class Favoritos implements Serializable {
 	
 	private String indexFact = "";
 	public int prioridad;
-	private Pais pais = PaisGetter.from(PaisShop.ESPANA);
+	private Pais pais = ESPANA.getPais();
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
 
 	public Favoritos() {}

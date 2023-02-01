@@ -4,10 +4,10 @@ import org.testng.annotations.*;
 
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.test.beans.*;
-import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.suites.FlagsNaviationLineas;
 import com.mng.robotest.test.suites.PaisIdiomaSuite.VersionPaisSuite;
-import com.mng.robotest.test.utils.PaisGetter;
+
+import static com.mng.robotest.test.data.PaisShop.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +19,7 @@ public class PaisIdioma implements Serializable {
 	private String indexFact = "";
 	public int prioridad;
 	private FlagsNaviationLineas flagsNavigation = VersionPaisSuite.V1;
-	private Pais pais = PaisGetter.from(PaisShop.ESPANA);
+	private Pais pais = ESPANA.getPais();
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
 	
 	private final List<Linea> linesToTest;

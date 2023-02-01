@@ -12,7 +12,6 @@ import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.test.data.Constantes;
-import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.generic.ChequeRegalo;
@@ -20,9 +19,10 @@ import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.I
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.checqueregalo.PageChequeRegaloInputDataSteps;
-import com.mng.robotest.test.utils.PaisGetter;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
+
+import static com.mng.robotest.test.data.PaisShop.*;
 
 public class Com007 extends TestBase {
 
@@ -31,7 +31,7 @@ public class Com007 extends TestBase {
 	private final DataPago dataPago;
 	
 	public Com007() throws Exception {
-		dataTest.setPais(PaisGetter.from(PaisShop.FRANCE));
+		dataTest.setPais(FRANCE.getPais());
 		dataTest.setUserRegistered(true);
 		dataTest.setUserConnected("francia.test@mango.com");
 		dataTest.setPasswordUser(GetterSecrets.factory()

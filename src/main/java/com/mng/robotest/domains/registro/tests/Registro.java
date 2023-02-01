@@ -6,10 +6,9 @@ import org.testng.annotations.Test;
 
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 
+import static com.mng.robotest.test.data.PaisShop.*;
 
 public class Registro implements Serializable {
 	
@@ -18,7 +17,7 @@ public class Registro implements Serializable {
 	private String indexFact = "";
 	private boolean accessFromFactory = false;
 	public int prioridad;
-	private Pais pais = PaisGetter.from(PaisShop.ESPANA);
+	private Pais pais = ESPANA.getPais();
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
 	
 	public Registro() { }
@@ -39,6 +38,16 @@ public class Registro implements Serializable {
 		TestCaseTM.addNameSufix(this.indexFact);
 		new Reg001(pais, idioma).execute();
 	}
+	
+	@Test (
+		groups={"Registro", "Canal:all_App:shop"},
+		description="Alta/Registro de un usuario en Corea (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
+	public void REG005_OldRegisterCorea() throws Exception {
+		TestCaseTM.addNameSufix(this.indexFact);
+		Pais corea = COREA_DEL_SUR.getPais();
+		IdiomaPais coreano = corea.getListIdiomas().get(0);
+		new Reg003(corea, coreano, false).execute();
+	}	
 	
 	@Test (
 		groups={"Registro", "Canal:all_App:outlet"},

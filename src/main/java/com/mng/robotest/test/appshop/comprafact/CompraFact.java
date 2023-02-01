@@ -9,8 +9,8 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.utils.PaisGetter;
+
+import static com.mng.robotest.test.data.PaisShop.*;
 
 public class CompraFact implements Serializable {
 
@@ -18,7 +18,7 @@ public class CompraFact implements Serializable {
 	
 	public int prioridad;
 	private String indexFact = "";
-	private Pais pais = PaisGetter.from(PaisShop.ESPANA);
+	private Pais pais = ESPANA.getPais();
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
 	private Pago pago = null;
 	private boolean usrRegistrado = false;

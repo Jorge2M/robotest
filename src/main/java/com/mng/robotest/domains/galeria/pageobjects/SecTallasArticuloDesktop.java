@@ -12,8 +12,8 @@ public class SecTallasArticuloDesktop extends PageBase {
 	
 	private final String XPATH_ARTICULO;
 	private final String XPATH_CAPA_TALLAS_ARTICULO_SHOP = "//div[@class[contains(.,'sizes-container')]]";
-	private static final String XPATH_TALLA_AVAILABLE = "//button[@data-testid='si-stock']";
-	private static final String XPATH_TALLA_UNAVAILABLE =	"//button[@data-testid='no-stock']";
+	private static final String XPATH_TALLA_AVAILABLE = "//button[@data-testid[contains(.,'size.available')]]";
+	private static final String XPATH_TALLA_UNAVAILABLE =	"//button[@data-testid[contains(.,'size.unavailable')]]";
 	private static final String CLASS_CAPA_ACTIVE_SHOP = "@class[contains(.,'active')]";
 	
 	public SecTallasArticuloDesktop(String xpathArticulo) {

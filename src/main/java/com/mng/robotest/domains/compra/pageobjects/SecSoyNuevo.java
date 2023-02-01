@@ -11,7 +11,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecSoyNuevo extends PageBase {
 	
-	public enum ActionNewsL { ACTIVATE, DEACTIVATE }
+	public enum RadioState { ACTIVATE, DEACTIVATE }
 
 	private static final String XPATH_FORM_IDENT = "//div[@class='register' or @id='registerCheckOut']//form"; //desktop y mobil
 	private static final String XPATH_INPUT_EMAIL = XPATH_FORM_IDENT + "//input[@id[contains(.,'expMail')]]";
@@ -24,6 +24,8 @@ public class SecSoyNuevo extends PageBase {
 	private static final String XPATH_INPUT_PUBLICIDAD_MOBIL = "//input[@id[contains(.,'publicidadActiva')]]";
 	private static final String XPATH_RADIO_PUBLICIDAD_DESKTOP = XPATH_INPUT_PUBLICIDAD_DESKTOP;
 	private static final String XPATH_RADIO_PUBLICIDAD_MOBIL = "//div[@class[contains(.,'subscribe__checkbox')]]";
+	
+	private static final String XPATH_INPUT_CONSENTIMIENTO = "//input[@data-component-id='privacidad']";
 	
 	private String getXPathInputPublicidad() {
 		if (channel==Channel.mobile) {
@@ -57,10 +59,27 @@ public class SecSoyNuevo extends PageBase {
 		String checked = getElement(getXPathInputPublicidad()).getAttribute("checked");
 		return checked!=null;
 	}
+	public boolean isCheckedConsentimiento() {
+		if (state(State.Invisible, XPATH_INPUT_CONSENTIMIENTO).check()) {
+			return false;
+		}
+		String checked = getElement(XPATH_INPUT_CONSENTIMIENTO).getAttribute("checked");
+		return checked!=null;
+	}	
 
-	public void setCheckPubliNewsletter(ActionNewsL action) {
+	public void setCheckPubliNewsletter(RadioState action) {
 		boolean isActivated = isCheckedPubliNewsletter();
 		String xpathRadio = getXPathRadioPublicidad();
+		clickRadio(action, isActivated, xpathRadio);
+	}
+	
+	public void setCheckConsentimiento(RadioState action) {
+		boolean isActivated = isCheckedConsentimiento();
+		String xpathRadio = XPATH_INPUT_CONSENTIMIENTO;
+		clickRadio(action, isActivated, xpathRadio);		
+	}
+
+	private void clickRadio(RadioState action, boolean isActivated, String xpathRadio) {
 		switch (action) {
 		case ACTIVATE:
 			if (!isActivated) {

@@ -1,6 +1,7 @@
 package com.mng.robotest.test.data;
 
 import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.test.utils.PaisGetter;
 
 public enum PaisShop {
 	ALBANIA("070"),
@@ -151,6 +152,10 @@ public enum PaisShop {
 	private PaisShop(String codigoPais, String nameInPrehome) {
 		this.codigoPais = codigoPais;
 		this.nameInPrehome = nameInPrehome;
+	}
+	
+	public Pais getPais() {
+		return PaisGetter.from(this);
 	}
 	
 	public String getCodigoPais() {

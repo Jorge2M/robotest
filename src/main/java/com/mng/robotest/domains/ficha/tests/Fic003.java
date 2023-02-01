@@ -8,17 +8,16 @@ import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
-import com.mng.robotest.test.utils.PaisGetter;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType.*;
+import static com.mng.robotest.test.data.PaisShop.*;
 
 public class Fic003 extends TestBase {
 
-	private final Pais corea = PaisGetter.from(PaisShop.COREA_DEL_SUR);
+	private final Pais corea = COREA_DEL_SUR.getPais();
 	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 	private final PageFichaSteps pageFichaSteps = new PageFichaSteps();
 

@@ -12,8 +12,8 @@ import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.appshop.comprafact.CompraFact;
 import com.mng.robotest.test.beans.*;
-import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.utils.PaisGetter;
+
+import static com.mng.robotest.test.data.PaisShop.*;
 
 public class ListPagosEspana implements Serializable {
 	
@@ -63,8 +63,8 @@ public class ListPagosEspana implements Serializable {
 	}
 	
 	private void getDataCountrys() throws Exception {
-		this.espana = PaisGetter.from(PaisShop.ESPANA);
-		this.francia = PaisGetter.from(PaisShop.FRANCE);
+		this.espana = ESPANA.getPais();
+		this.francia = FRANCE.getPais();
 		this.castellano = espana.getListIdiomas().get(0);
 		this.frances = francia.getListIdiomas().get(0);
 	}

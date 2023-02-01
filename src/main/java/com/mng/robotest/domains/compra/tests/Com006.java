@@ -4,22 +4,21 @@ import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.utils.PaisGetter;
 
+import static com.mng.robotest.test.data.PaisShop.*;
 
 public class Com006 extends TestBase {
 
-	private static final Pais ITALIA = PaisGetter.from(PaisShop.ITALIA);
-	private static final IdiomaPais ITALIANO = ITALIA.getListIdiomas().get(0);
+	private static final Pais ITALIA_PAIS = ITALIA.getPais();
+	private static final IdiomaPais ITALIANO = ITALIA_PAIS.getListIdiomas().get(0);
 	
 	private final DataPago dataPago;
 	
 	public Com006() throws Exception {
-		dataTest.setPais(ITALIA);
+		dataTest.setPais(ITALIA_PAIS);
 		dataTest.setIdioma(ITALIANO);
 		
 		ConfigCheckout configCheckout = ConfigCheckout.config()
