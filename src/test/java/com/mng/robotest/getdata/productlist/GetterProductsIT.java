@@ -47,7 +47,7 @@ public class GetterProductsIT {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void testGetProducts() throws Exception {
 		//When
 		List<GarmentCatalog> listProducts = getterProducts.getAll();
@@ -67,7 +67,7 @@ public class GetterProductsIT {
 		return listProducts.equals(listProductsSorted);
 	}
 	
-	//@Test
+	@Test
 	public void testGetProductsManyColors() throws Exception {
 		//When
 		List<GarmentCatalog> listProducts = getterProducts.getAll(Arrays.asList(FilterType.MANY_COLORS));
@@ -77,7 +77,7 @@ public class GetterProductsIT {
 		assertTrue(listProducts.get(0).getColors().size()>0);
 	}
 
-	//@Test
+	@Test
 	public void testGetProductCompletaTuLook() throws Exception {
 		//When
 		Optional<GarmentCatalog> product = getterProducts.getOne(Arrays.asList(FilterType.TOTAL_LOOK));
@@ -86,7 +86,7 @@ public class GetterProductsIT {
 		assertTrue(product.isPresent());
 	}
 	
-	//@Test
+	@Test
 	public void testGetProductNoOnline() throws Exception {
 		//When
 		List<GarmentCatalog> products = getterProducts.getAll(Arrays.asList(FilterType.NO_ONLINE));
@@ -96,7 +96,7 @@ public class GetterProductsIT {
 		assertNull(garmentOnline);
 	}
 	
-	//@Test
+	@Test
 	public void testGetProductOnline() throws Exception {
 		//When
 		List<GarmentCatalog> products = getterProducts.getAll(Arrays.asList(FilterType.ONLINE));
@@ -106,7 +106,7 @@ public class GetterProductsIT {
 		assertNull(garmentNoOnline);
 	}
 	
-	//@Test
+	@Test
 	public void testGetProductWithCanonicalData() throws Exception {
 		//When
 		List<GarmentCatalog> listProducts = getterProductsAndCanonicalData.getAll();

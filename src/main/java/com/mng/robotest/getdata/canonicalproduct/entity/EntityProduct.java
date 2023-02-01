@@ -38,7 +38,6 @@ public class EntityProduct implements Serializable {
 	private String countryId;
 	private String languageId;
 	private String channelId;
-	private String updateDate;
 	
 	public String get_id() {
 		return idMongo;
@@ -174,13 +173,4 @@ public class EntityProduct implements Serializable {
 	public void setChannelId(String channelId) {
 		this.channelId = channelId;
 	}
-
-	public String getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
-	}
-
 }
