@@ -36,6 +36,7 @@ public class PopupFindAddress extends PageBase {
 
 	public void clickButtonLupa() {
 		click(XPATH_BUTTON_LUPA).exec();
+		waitMillis(1000); //sin este wait no funciona en modo headless
 	}
 
 	public void clickFirstDirecc() {

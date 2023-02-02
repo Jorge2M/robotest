@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroAddressDataOutlet;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroDirecOutlet;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
@@ -48,7 +49,8 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 	
 	@Step (
 		description= "Seleccionar el botón \"<b>Finalizar</b>\"", 
-		expected="Aparece la página final del proceso de registro")
+		expected="Aparece la página final del proceso de registro",
+		saveHtmlPage=SaveWhen.IfProblem)
 	public void clickFinalizarButton() {
 		pageRegistroDirec.clickFinalizarButton();
 		new PageRegistroFinStepsOutlet().isPageUntil(5);
