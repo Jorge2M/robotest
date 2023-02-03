@@ -14,6 +14,7 @@ import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
+import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 public class PageResultPagoSteps extends StepBase {
@@ -33,6 +34,7 @@ public class PageResultPagoSteps extends StepBase {
 		if (dataPago.getFTCkout().checkLoyaltyPoints) {
 			validateBlockNewLoyaltyPoints();
 		}
+		GenericChecks.checkDefault();
 	}
 	
 	@Validation (

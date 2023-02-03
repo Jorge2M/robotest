@@ -313,7 +313,6 @@ public class CheckoutSteps extends StepBase {
 
 		pageCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
 		pageRedirectPasarelaLoadingSteps.validateDisappeared(5);
-		GenericChecks.checkDefault();
 	}
 
 	@Validation (
