@@ -57,7 +57,8 @@ public class Reg003 extends TestBase {
 		access();
 		new ModalSuscripcionSteps().validaRGPDModal();
 		
-		userMenusSteps.selectRegistrate();
+		//userMenusSteps.selectRegistrate();
+		new SecMenusUserSteps().selectRegistrate();
 		if(version.register()) {
 			registerAndGoShoppingSiPubli();
 		} else {
