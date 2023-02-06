@@ -74,6 +74,7 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	}
 	
 	public void setFechaNacimiento(String dia, String mes, String any) {
+		waitForPageLoaded(driver);
 		selectDiaNacimByText(dia);
 		selectMesNacimByText(mes);
 		selectAnyNacimByText(any);
