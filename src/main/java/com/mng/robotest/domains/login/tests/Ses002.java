@@ -1,4 +1,4 @@
-package com.mng.robotest.domains.identification.tests;
+package com.mng.robotest.domains.login.tests;
 
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.steps.shop.AccesoSteps;

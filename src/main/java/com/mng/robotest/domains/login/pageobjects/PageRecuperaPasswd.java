@@ -1,4 +1,4 @@
-package com.mng.robotest.domains.identification.pageobjects;
+package com.mng.robotest.domains.login.pageobjects;
 
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.AllPages;

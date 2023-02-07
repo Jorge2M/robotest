@@ -34,7 +34,7 @@ import com.mng.robotest.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.domains.compra.steps.Page2IdentCheckoutSteps;
 import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.domains.compra.steps.PageResultPagoTpvSteps;
-import com.mng.robotest.domains.identification.pageobjects.PageIdentificacion;
+import com.mng.robotest.domains.login.pageobjects.PageIdentificacion;
 import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.getdata.usuarios.GestorUsersShop;

@@ -16,10 +16,10 @@ import com.mng.robotest.domains.buscador.tests.Buscador;
 import com.mng.robotest.domains.compra.tests.Compra;
 import com.mng.robotest.domains.compra.tests.CompraMultiAddress;
 import com.mng.robotest.domains.favoritos.tests.Favoritos;
-import com.mng.robotest.domains.ficha.tests.FichaProducto;
+import com.mng.robotest.domains.ficha.tests.Ficha;
 import com.mng.robotest.domains.footer.tests.Footer;
-import com.mng.robotest.domains.galeria.tests.GaleriaProducto;
-import com.mng.robotest.domains.identification.tests.Sesion;
+import com.mng.robotest.domains.galeria.tests.Galeria;
+import com.mng.robotest.domains.login.tests.Login;
 import com.mng.robotest.domains.loyalty.tests.Loyalty;
 import com.mng.robotest.domains.micuenta.tests.MiCuenta;
 import com.mng.robotest.domains.otros.tests.Otras;
@@ -57,15 +57,15 @@ public class SmokeTestSuite extends SuiteMaker {
 		return Arrays.asList(
 			Otras.class,
 			Seo.class,
-			Sesion.class,
+			Login.class,
 			Bolsa.class,
-			FichaProducto.class,
+			Ficha.class,
 			Ayuda.class,
 			Buscador.class,
 			Footer.class,
 			Registro.class,
 			PaisIdioma.class,
-			GaleriaProducto.class,
+			Galeria.class,
 			Compra.class,
 			CompraMultiAddress.class,
 			ListPagosEspana.class,

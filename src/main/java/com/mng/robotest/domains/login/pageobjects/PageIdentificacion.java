@@ -1,4 +1,4 @@
-package com.mng.robotest.domains.identification.pageobjects;
+package com.mng.robotest.domains.login.pageobjects;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;

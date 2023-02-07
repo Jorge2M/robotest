@@ -1,11 +1,11 @@
-package com.mng.robotest.domains.identification.tests;
+package com.mng.robotest.domains.login.tests;
 
-import com.mng.robotest.domains.identification.steps.PageIdentificacionSteps;
-import com.mng.robotest.domains.identification.steps.PageRecuperaPasswdSteps;
+import com.mng.robotest.domains.login.steps.PageIdentificacionSteps;
+import com.mng.robotest.domains.login.steps.PageRecuperaPasswdSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.data.Constantes;
 
-public class Ses001 extends TestBase {
+public class Log001 extends TestBase {
 
 	private final PageIdentificacionSteps pageIdentificacionSteps = new PageIdentificacionSteps();
 	

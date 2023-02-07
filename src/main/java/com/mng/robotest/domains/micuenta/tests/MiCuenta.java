@@ -29,7 +29,7 @@ public class MiCuenta implements Serializable {
 	}	
 	
 	@Test (
-		groups={"Canal:desktop_App:shop,outlet", "Micuenta", "CI"}, alwaysRun=true, 
+		groups={"Micuenta", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
 		description="Verificar opciones de 'mi cuenta'")
 	@Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
 	public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 

@@ -12,7 +12,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
-import com.mng.robotest.domains.identification.pageobjects.PageIdentificacion;
+import com.mng.robotest.domains.login.pageobjects.PageIdentificacion;
 import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
