@@ -33,7 +33,7 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 	}
 	
 	@Step (
-		description="Introducir los datos correctos para el país #{pais.getNombre_pais()}", 
+		description="Introducir los datos correctos para el país}", 
 		expected="No aparece ningún mensaje de error")
 	public void sendDataAccordingCountryToInputs(Map<String,String> dataRegistro) {
 		pageRegistroDirec.sendDataAccordingCountryToInputs(dataRegistro);

@@ -42,7 +42,7 @@ public class Page2IdentCheckout extends PageBase {
 	private static final String XPATH_INPUT_DIRECCION2 = "//input[@id[contains(.,':cfDir2')]]";
 	private static final String XPATH_CHECK_PUBLICIDAD = "//input[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]/..";
 	private static final String XPATH_CHECK_OVER18YEARS = "//input[@data-component-id[contains(.,'cfPriv18')]]";
-	private static final String XPATH_CHECK_READCONSENT = "//input[@data-component-id[contains(.,'cfPriv')]]";	
+	private static final String XPATH_CHECK_READCONSENT = "//input[@data-component-id[contains(.,'cfPriv')] and not(@data-component-id[contains(.,'cfPriv18')])]";	
 	private static final String XPATH_INPUT_EMAIL = "//input[@id[contains(.,':cfEmail')]]";
 	private static final String XPATH_INPUT_DNI = "//input[@id[contains(.,':cfDni')]]";
 	private static final String XPATH_INPUT_CODPOST = "//input[@id[contains(.,':cfCp')]]";
