@@ -37,7 +37,7 @@ public class Compra {
 	}
 	
 	@Test (
-		groups={"Compra", "Canal:all_App:all"}, alwaysRun=true,
+		groups={"Registro_Express", "Canal:all_App:all"}, alwaysRun=true,
 		description="[Usuario no registrado] Pre-compra. Cierre/Inicio sesión correcto")
 	public void COM005_Compra_noReg_emailNoExist() throws Exception {
 		new Com005().execute();
