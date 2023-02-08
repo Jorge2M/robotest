@@ -138,7 +138,7 @@ public class PageIdentificacion extends PageBase {
 	}
 	
 	public boolean isErrorEmailoPasswordKO() {
-		return state(Present, XPATH_ERROR_CREDENCIALES_KO).check();
+		return state(Present, XPATH_ERROR_CREDENCIALES_KO).wait(1).check();
 	}
 
 	public void clickHasOlvidadoContrasenya() {

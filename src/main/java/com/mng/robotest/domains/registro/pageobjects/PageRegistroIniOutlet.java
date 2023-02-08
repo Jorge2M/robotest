@@ -11,9 +11,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.Log4jTM;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.domains.compra.pageobjects.Page2IdentCheckout;
@@ -187,15 +184,15 @@ public class PageRegistroIniOutlet extends PageBase {
 	public void clickButtonRegistrate() {
 		click(XPATH_BUTTON_REGISTRATE).exec();
 		
-		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-		if (isButtonRegistrateVisible()) {
-			try {
-				click(XPATH_BUTTON_REGISTRATE).type(javascript).exec();
-			}
-			catch (Exception e) {
-				Log4jTM.getLogger().info("Problem in second click to Registrate Button", e);
-			}
-		}
+//		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
+//		if (isButtonRegistrateVisible()) {
+//			try {
+//				click(XPATH_BUTTON_REGISTRATE).type(javascript).exec();
+//			}
+//			catch (Exception e) {
+//				Log4jTM.getLogger().info("Problem in second click to Registrate Button", e);
+//			}
+//		}
 	}
 	
 	public boolean isVisibleErrorUsrDuplicadoUntil(int seconds) {

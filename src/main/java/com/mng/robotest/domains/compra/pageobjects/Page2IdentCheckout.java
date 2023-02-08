@@ -24,6 +24,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.test.data.PaisShop.*;
 
 public class Page2IdentCheckout extends PageBase {
 
@@ -403,22 +404,20 @@ public class Page2IdentCheckout extends PageBase {
 		String datoSeteado = "";
 		WebElement provinciaPais = getElementPriorizingDisplayed(XPATH_SELECT_PROV_PAIS);
 		if (provinciaPais!=null) {
-			switch (PaisShop.getPais(pais)) {
-			case UKRAINE:
+			if (PaisShop.getPais(pais)==UKRAINE) {
 				if (channel==Channel.desktop) {
 					return selectProvinciaUkraineDesktop();
 				}
-				break;
-			case EGYPT:
+			}
+			if (PaisShop.getPais(pais)==EGYPT) {
 				if (egyptCity!=null) {
 				    return selectProvinciaEgyptCity(provinciaPais);
 				}
-				break;
-			default:
-				new Select(provinciaPais).selectByIndex(1);
-				datoSeteado = provinciaPais.getAttribute(VALUE);
-				return datoSeteado;
 			}
+			
+			new Select(provinciaPais).selectByIndex(1);
+			datoSeteado = provinciaPais.getAttribute(VALUE);
+			return datoSeteado;
 		}	  
 		return "";
 	}
@@ -548,7 +547,7 @@ public class Page2IdentCheckout extends PageBase {
 	}
 	
 	private String selectLocalidad(WebElement localidad, int posInSelect) {
-		if (PaisShop.getPais(pais)==PaisShop.EGYPT && 
+		if (PaisShop.getPais(pais)==EGYPT && 
 			egyptCity!=null) {
 			new Select(localidad).selectByVisibleText(egyptCity.getCity());
 			return egyptCity.getCity();

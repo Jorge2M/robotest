@@ -5365,13 +5365,9 @@ where
 <linea id="NINA"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<!-- 
-<pago 
-	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-564;</pago>-->
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
-	nombre="เก็บเงินปลายทาง" namefilter="Tailandia_Contra_Reembolso" testpasarela='s' testpago='s'>&TPV-148;</pago>
+	nombre="2c2p" namefilter="Tailandia_Contra_Reembolso" testpasarela='s' testpago='s'>&TPV-148;</pago>
 <invertida>N</invertida>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
