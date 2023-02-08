@@ -9,7 +9,7 @@ public class PagePoliticaPrivacidad extends PageBase {
 	private static final String XPATH_CABECERA = "//h1[text()[contains(.,'Política de privacidad')]]";
 	
 	public boolean isPageUntil(int seconds) {
-		return state(Visible, XPATH_CABECERA).wait(seconds).check();
+		return state(Visible, XPATH_CABECERA).wait(3).check();
 	}
 	
 

@@ -39,7 +39,7 @@ public class MiCuenta implements Serializable {
 	}
 	
 	@Test (
-		groups={"Micuenta", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
+		groups={"Miscompras", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="Consulta de mis compras con un usuario con datos a nivel de Tienda y Online")
 	@Parameters({"userWithOnlinePurchases", "userWithStorePurchases", "passUserWithOnlinePurchases", "passUserWithStorePurchases"})
 	public void MIC002_CheckConsultaMisCompras(
