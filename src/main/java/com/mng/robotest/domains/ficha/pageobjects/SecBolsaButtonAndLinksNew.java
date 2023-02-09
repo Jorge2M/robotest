@@ -57,9 +57,9 @@ public class SecBolsaButtonAndLinksNew extends PageBase {
 		return state(Visible, XPATH_BUTTON_FAVORITOS).check();
 	}
 
-	public boolean isVisibleButtonFavoritos(ActionFavButton actionButton) {
+	public boolean isVisibleButtonFavoritos(ActionFavButton actionButton, int seconds) {
 		String xpathButtonFav = getXPathButtonFavoritos(actionButton);
-		return (state(Visible, xpathButtonFav).wait(2).check());
+		return (state(Visible, xpathButtonFav).wait(seconds).check());
 	}
 
 	public void selectFavoritosButton(ActionFavButton actionButton) {

@@ -14,8 +14,8 @@ public abstract class PageFicha extends PageBase {
 	public abstract void selectRemoveFromFavoritosButton();
 	public abstract boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds);
 	public abstract boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds);
-	public abstract boolean isVisibleButtonElimFavoritos();
-	public abstract boolean isVisibleButtonAnadirFavoritos();
+	public abstract boolean isVisibleButtonElimFavoritos(int seconds);
+	public abstract boolean isVisibleButtonAnadirFavoritos(int seconds);
 	public abstract String getNameLinkBuscarEnTienda();
 	public abstract void selectBuscarEnTiendaLink();
 	public abstract boolean isVisibleBuscarEnTiendaLink();

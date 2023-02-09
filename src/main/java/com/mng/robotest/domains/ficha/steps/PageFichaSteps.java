@@ -293,10 +293,10 @@ public class PageFichaSteps extends StepBase {
 	public boolean validateNotVisibleButtonFavoritos(ActionFavButton buttonType) {
 		switch (buttonType) {
 			case REMOVE:
-				return pageFicha.isVisibleButtonElimFavoritos();
+				return pageFicha.isVisibleButtonElimFavoritos(3);
 			case ADD:
 			default:
-				return pageFicha.isVisibleButtonAnadirFavoritos();
+				return pageFicha.isVisibleButtonAnadirFavoritos(3);
 		}
 	}
 
@@ -330,10 +330,10 @@ public class PageFichaSteps extends StepBase {
 	public boolean validateVisibleButtonFavoritos(ActionFavButton buttonType) {
 		switch (buttonType) {
 			case REMOVE:
-				return (pageFicha.isVisibleButtonElimFavoritos());
+				return (pageFicha.isVisibleButtonElimFavoritos(1));
 			case ADD:
 			default:
-				return (pageFicha.isVisibleButtonAnadirFavoritos());
+				return (pageFicha.isVisibleButtonAnadirFavoritos(1));
 		}
 	}
 

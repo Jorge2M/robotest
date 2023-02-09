@@ -72,13 +72,13 @@ public class PageFichaDesktop extends PageFicha {
 	}
 
 	@Override
-	public boolean isVisibleButtonElimFavoritos() {
-		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(ActionFavButton.REMOVE));
+	public boolean isVisibleButtonElimFavoritos(int seconds) {
+		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(ActionFavButton.REMOVE, seconds));
 	}
 
 	@Override
-	public boolean isVisibleButtonAnadirFavoritos() {
-		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(ActionFavButton.ADD));
+	public boolean isVisibleButtonAnadirFavoritos(int seconds) {
+		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(ActionFavButton.ADD, seconds));
 	}
 
 	@Override
