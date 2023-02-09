@@ -108,13 +108,13 @@ public class PageFichaDevice extends PageFicha {
 	}
 
 	@Override
-	public boolean isVisibleButtonElimFavoritos() {
-		return state(Visible, XPATH_BUTTON_FAVORITOS_FOR_REMOVE).wait(2).check();
+	public boolean isVisibleButtonElimFavoritos(int seconds) {
+		return state(Visible, XPATH_BUTTON_FAVORITOS_FOR_REMOVE).wait(seconds).check();
 	}
 
 	@Override
-	public boolean isVisibleButtonAnadirFavoritos() {
-		return state(Visible, XPATH_BUTTON_FAVORITOS_FOR_ADD).wait(2).check();
+	public boolean isVisibleButtonAnadirFavoritos(int seconds) {
+		return state(Visible, XPATH_BUTTON_FAVORITOS_FOR_ADD).wait(seconds).check();
 	}
 
 	@Override
