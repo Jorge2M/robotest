@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroPersonalizacionShop;
 import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.test.steps.shop.AccesoSteps;
 
 public class PageRegistroPersonalizacionShopSteps extends StepBase {
 
@@ -48,8 +48,9 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 	}		
 	
 	public void checkWeAreLogged() {
-		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
-		secMenusUserSteps.checkIsVisibleLinkCerrarSesionUntil(2);
+//		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
+//		secMenusUserSteps.checkIsVisibleLinkCerrarSesionUntil(2);
+		new AccesoSteps().checkIsLogged(2);
 	}	
 	
 }

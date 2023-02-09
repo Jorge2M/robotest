@@ -44,7 +44,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		expected="Aparece la página de personalización del registro")
 	public void clickCreateAccountButton() {
 		pageRegistroInitial.clickCreateAccountButton();
-		new PageRegistroPersonalizacionShopSteps().checkIsPageUntil(5);
+		new PageRegistroPersonalizacionShopSteps().checkIsPageUntil(8);
 		GenericChecks.checkDefault();
 	}	
 
