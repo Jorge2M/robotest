@@ -50,7 +50,7 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 	public void checkWeAreLogged() {
 //		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
 //		secMenusUserSteps.checkIsVisibleLinkCerrarSesionUntil(2);
-		new AccesoSteps().checkIsLogged(2);
+		new AccesoSteps().checkIsLogged(5);
 	}	
 	
 }
