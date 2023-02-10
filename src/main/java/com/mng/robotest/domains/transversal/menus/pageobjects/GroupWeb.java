@@ -137,8 +137,13 @@ public class GroupWeb extends PageBase {
 		clickGroup();
 	}
 	public void hover() {
-		hoverLinea(); 
-		hoverGroup();
+		for (int i=0; i<3; i++) {
+			hoverLinea(); 
+			hoverGroup();
+			if (isGroupCorrectlySelected()) {
+				break;
+			}
+		}
 	}	
 	public boolean isPresent() {
 		hoverLinea();
@@ -157,24 +162,8 @@ public class GroupWeb extends PageBase {
 	private void hoverGroup() {
 		state(State.Visible, getXPathGroup()).wait(2).check();
 		moveToElement(getXPathGroup()); 
-		for (int i=0; i<5; i++) {
-			if (isGroupCorrectlySelected(1)) {
-				break;
-			}
-			moveToElement(getXPathGroup());
-			waitMillis(100);
-		}
 	}
-	private boolean isGroupCorrectlySelected(int seconds) {
-		for (int i=0; i<seconds; i++) {
-			if (isGroupCorrectlySelected()) {
-				return true;
-			}
-			waitForPageLoaded(driver);
-			waitMillis(1000);
-		}
-		return false;
-	}
+	
 	private boolean isGroupCorrectlySelected() {
 		return (isGroupSelected() &&
 			   (group.getGroupResponse()!=GroupResponse.MENUS || isVisibleSubMenus()));
