@@ -158,13 +158,21 @@ public class GroupWeb extends PageBase {
 		state(State.Visible, getXPathGroup()).wait(2).check();
 		moveToElement(getXPathGroup()); 
 		for (int i=0; i<5; i++) {
-			if (isGroupCorrectlySelected()) {
+			if (isGroupCorrectlySelected(1)) {
 				break;
+			}
+			moveToElement(getXPathGroup());
+		}
+	}
+	private boolean isGroupCorrectlySelected(int seconds) {
+		for (int i=0; i<seconds; i++) {
+			if (isGroupCorrectlySelected()) {
+				return true;
 			}
 			waitForPageLoaded(driver);
 			waitMillis(1000);
-			moveToElement(getXPathGroup());
 		}
+		return false;
 	}
 	private boolean isGroupCorrectlySelected() {
 		return (isGroupSelected() &&
