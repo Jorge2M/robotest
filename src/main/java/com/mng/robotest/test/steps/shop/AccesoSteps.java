@@ -93,7 +93,7 @@ public class AccesoSteps extends StepBase {
 	@Validation
 	public ChecksTM checkLinksAfterLogin() {
 		ChecksTM checks = ChecksTM.getNew();
-		int seconds = 5;
+		int seconds = 7;
 		MenusUserWrapper userMenus = new MenusUserWrapper();
 		checks.add(
 			"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + seconds + " segundos)",

@@ -134,7 +134,7 @@ public class PageGaleriaDevice extends PageGaleria {
 		moveToElement(articulo);
 		By byImg = By.xpath("." + XPATH_IMG_RELATIVE_ARTICLE);
 		if (state(Present, articulo).by(byImg).wait(3).check()) {
-			return getElement(byImg);
+			return getElement(articulo, "." + XPATH_IMG_RELATIVE_ARTICLE);
 		}
 		return null;
 	}
@@ -198,7 +198,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public String getCodColorArticulo(int numArticulo) throws Exception {
-		String xpathArticulo = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
+		String xpathArticulo = xpathArticuloBase + "//self::*[@data-testid[contains(.,'product-" + (numArticulo-1) + "')]]";
 		moveToElement(By.xpath(xpathArticulo));
 		String image = getImagenArticulo(getElement(xpathArticulo));
 		return UtilsPageGaleria.getCodColorFromSrcImg(image);
