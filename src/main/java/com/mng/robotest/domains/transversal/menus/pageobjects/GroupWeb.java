@@ -162,6 +162,7 @@ public class GroupWeb extends PageBase {
 				break;
 			}
 			moveToElement(getXPathGroup());
+			waitMillis(100);
 		}
 	}
 	private boolean isGroupCorrectlySelected(int seconds) {
