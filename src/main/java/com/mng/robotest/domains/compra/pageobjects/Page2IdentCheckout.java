@@ -529,16 +529,16 @@ public class Page2IdentCheckout extends PageBase {
 		boolean staleElement = true;
 		int i=0;
 		while (staleElement && i<3) {
-			List<WebElement> localidadesList = getElementsVisible(xpathSelect);
-			if (!localidadesList.isEmpty()) {
-				try {
+			try {
+				List<WebElement> localidadesList = getElementsVisible(xpathSelect);
+				if (!localidadesList.isEmpty()) {
 					datoSeteado = selectLocalidad(localidadesList.get(0), posInSelect);
 					staleElement = false;
 				}
-				catch (StaleElementReferenceException | NoSuchElementException e) {
-					waitMillis(1000);
-					Log4jTM.getLogger().warn("Exception selecting localidad from select. ", e);
-				}
+			}
+			catch (StaleElementReferenceException | NoSuchElementException e) {
+				waitMillis(1000);
+				Log4jTM.getLogger().warn("Exception selecting localidad from select. ", e);
 			}
 			i+=1;
 		}
