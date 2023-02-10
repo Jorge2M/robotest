@@ -157,10 +157,11 @@ public class GroupWeb extends PageBase {
 	private void hoverGroup() {
 		state(State.Visible, getXPathGroup()).wait(2).check();
 		moveToElement(getXPathGroup()); 
-		for (int i=0; i<3; i++) {
+		for (int i=0; i<5; i++) {
 			if (isGroupCorrectlySelected()) {
 				break;
 			}
+			waitForPageLoaded(driver);
 			waitMillis(1000);
 			moveToElement(getXPathGroup());
 		}
