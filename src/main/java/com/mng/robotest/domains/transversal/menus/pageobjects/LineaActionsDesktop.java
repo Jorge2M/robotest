@@ -58,11 +58,13 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 
 	@Override
 	public void clickLinea() {
-		click(getXPathLinea()).waitLink(1).exec();
+		state(State.Present, getXPathLinea()).wait(1).check();
+		click(getXPathLinea()).exec();
 	}	
 	@Override 
 	public void clickSublinea() {
-		click(getXPathSublinea()).waitLink(1).exec();
+		state(State.Present, getXPathLinea()).wait(1).check();
+		click(getXPathSublinea()).exec();
 	}
 	@Override
 	public void hoverLinea() {
