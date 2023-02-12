@@ -2074,7 +2074,8 @@
 <codpos>125032</codpos>
 <telefono>9123456789</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<!-- Reactivar cuando se reactive la compra -->
+<tiendas_online><!-- shop,outlet,votf--></tiendas_online>
 <miscompras>false</miscompras>
 <moneda>%@ RUB</moneda>
 <maximo_bolsa>60000</maximo_bolsa>
@@ -2730,7 +2731,8 @@ where
 <codpos>01001</codpos>
 <telefono>0501111111</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<!-- Reactivar cuando se reactive la compra -->
+<tiendas_online><!-- shop,votf--></tiendas_online>
 <miscompras>false</miscompras>
 <moneda>%@ UAH</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
@@ -4625,7 +4627,8 @@ where
 <codpos>040900</codpos>
 <telefono>7012345678</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<!-- Reactivar cuando se reactive la compra -->
+<tiendas_online><!-- shop,votf--></tiendas_online>
 <miscompras>true</miscompras>
 <moneda>%@ KZT</moneda>
 <maximo_bolsa>250000</maximo_bolsa>
