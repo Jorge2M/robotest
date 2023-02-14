@@ -22,6 +22,9 @@ public class PageMisDatos extends PageBase {
 	private static final String XPATH_SELECT_PROVINCIA = "//select[@id[contains(.,':estadosPais')]]";
 	private static final String XPATH_OPTION_PAIS_SELECTED = XPATH_SELECT_PAIS + "/option[@selected]";
 	private static final String XPATH_OPTION_PROVINCIA_SELECTED = XPATH_SELECT_PROVINCIA + "/option[@selected]";
+	private static final String XPATH_LINK_ELIMINAR_CUENTA = "//a[@href[contains(.,'account/baja')]]";
+	private static final String XPATH_BUTTON_CONFIRM_ELIMINAR_CUENTA = "//input[@value='Eliminar cuenta']";
+	private static final String XPATH_MESSAGE_CUENTA_CANCELADA_OK = "//div[@class='messageConfirmation']/h3[text()='Cuenta eliminada']";
 	
 	public String getTextInputNombre() {
 		return getElement(XPATH_INPUT_NOMBRE).getAttribute("value");
@@ -99,5 +102,14 @@ public class PageMisDatos extends PageBase {
 	
 	public boolean pageResOK() { 
 		return state(Present, XPATH_PAGE_RES_OK).check();
+	}
+	
+	public void cancelarCuenta() {
+		click(XPATH_LINK_ELIMINAR_CUENTA).exec();
+		click(XPATH_BUTTON_CONFIRM_ELIMINAR_CUENTA).waitLink(3).exec();
+	}
+	
+	public boolean isMessageCuentaCanceladaOkVisible(int seconds) {
+		return state(Visible, XPATH_MESSAGE_CUENTA_CANCELADA_OK).wait(seconds).check();
 	}
 }

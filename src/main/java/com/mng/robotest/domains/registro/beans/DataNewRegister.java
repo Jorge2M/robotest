@@ -1,5 +1,6 @@
 package com.mng.robotest.domains.registro.beans;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroPersonalizacionShop.GenderOption;
@@ -32,6 +33,19 @@ public class DataNewRegister {
 		this.gender = gender;
 		this.lineas = lineas;
 	}
+	
+	public DataNewRegister(String email, String password, String movil) {
+		this.email = email;
+		this.password = password;
+		this.movil = movil;
+		this.checkPromotions = false;
+		
+		this.name = "";
+		this.postalCode = "";
+		this.dateOfBirth = "";
+		this.gender = GenderOption.FEMENINO;
+		this.lineas = Arrays.asList(LineaType.SHE);
+	}	
 
 	public String getEmail() {
 		return email;

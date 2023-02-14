@@ -135,4 +135,20 @@ public class PageMisDatosSteps extends StepBase {
 	public boolean validaContenidoNombre(String nombre) {
 		return pageMisDatos.getValueNombreInput().contains(nombre);
 	}
+
+	@Step(
+		description = "Seleccionar el link Cancelar cuenta",
+		expected = "Aparece la página de resultado de cancelación de la cuenta ok")
+	public void cancelarCuenta() {
+		pageMisDatos.cancelarCuenta();
+		checkCuentaCanceladaOk(3);
+	}
+	
+	@Validation (
+		description="Aparece un mensaje de cuenta cancelada correctamente (lo esperamos #{seconds} segundos)",
+		level=State.Defect)
+	private boolean checkCuentaCanceladaOk(int seconds) {
+		return pageMisDatos.isMessageCuentaCanceladaOkVisible(seconds);
+	}
+	
 }

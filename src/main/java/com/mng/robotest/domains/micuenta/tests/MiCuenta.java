@@ -52,4 +52,12 @@ public class MiCuenta implements Serializable {
 				passUserWithOnlinePurchases, passUserWithStorePurchases).execute();
 	}
 	
+	@Test (
+		groups={"Micuenta", "Canal:desktop,mobile_App:shop"}, 
+		description="Registro y cancelación de la cuenta creada")
+	public void MIC003_CancelacionCuenta() 
+			throws Exception {
+		new Mic003().execute();
+	}	
+	
 }

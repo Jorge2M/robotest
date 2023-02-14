@@ -91,12 +91,28 @@ public class SecMenusUserSteps extends StepBase {
 		GenericChecks.checkDefault();
 	}
 	
+	@Step (
+		description="Identificarse con los datos del registro (#{userConnect})", 
+		expected="La nueva identificación es incorrecta")
+	public void identificationKO(String userConnect, String userPassword) {
+		new PageIdentificacion().iniciarSesion(userConnect, userPassword);
+		checkIsInvisibleLinkCerrarSesion();
+		GenericChecks.checkDefault();
+	}	
+	
 	@Validation (
 		description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)",
 		level=State.Defect)
 	public boolean checkIsVisibleLinkCerrarSesion() {	
 		return isVisibleLinkCerrarSesion();
 	}
+	
+	@Validation (
+		description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)",
+		level=State.Defect)
+	public boolean checkIsInvisibleLinkCerrarSesion() {	
+		return isInvisibleLinkCerrarSesion();
+	}	
 	
 	@Validation (
 		description=
@@ -130,6 +146,12 @@ public class SecMenusUserSteps extends StepBase {
 		}
 		return (userMenus.isMenuInStateUntil(CERRAR_SESION, Present, 1));
 	}
+	private boolean isInvisibleLinkCerrarSesion() {
+		if (channel==Channel.desktop) {
+			userMenus.hoverIconForShowUserMenuDesktopShop();
+		}
+		return (!userMenus.isMenuInStateUntil(CERRAR_SESION, Present, 1));
+	}	
 
 	@Step (
 		description="Seleccionar el link \"Mi cuenta\"", 
