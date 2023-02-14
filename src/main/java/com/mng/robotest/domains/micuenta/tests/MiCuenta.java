@@ -51,4 +51,5 @@ public class MiCuenta implements Serializable {
 				userWithOnlinePurchases, userWithStorePurchases,
 				passUserWithOnlinePurchases, passUserWithStorePurchases).execute();
 	}
+	
 }

@@ -25,6 +25,13 @@ public class Loyalty {
 	public void LOY003_Exhange_Compra_Entrada() throws Exception {
 		new Loy003().execute();
 	}
+	
+	@Test (
+		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
+		description="Navegación por Mango Likes You History y Help")
+	public void LOY004_Exhange_Compra_Entrada() throws Exception {
+		new Loy004().execute();
+	}	
 
 	@Test (
 		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},

@@ -10,10 +10,32 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 
 
-public class PageHomeLikes extends PageBase {
+public class PageMangoLikesYou extends PageBase {
 
 	private static final String XPATH_WRAPP_PAGE = "//micro-frontend[@id='loyaltySpace']";
-	private static final String XPATH_POINTS = XPATH_WRAPP_PAGE + "//div[@id='space-header']/div[3]"; 
+	private static final String XPATH_POINTS = XPATH_WRAPP_PAGE + "//div[@id='space-header']/div[3]";
+	private static final String XPATH_LIST_MOVIMIENTOS = "//div[@id='history-list']";
+	
+	//TODO solicitar data-testid en lugar de React
+	private static final String XPATH_LINK_AYUDA = "//div[text()='Ayuda']";
+	
+	//TODO solicitar data-testid en lugar de React
+	private static final String XPATH_MOVIMIENTO = XPATH_LIST_MOVIMIENTOS + "/div"; 
+	
+	//TODO solicitar data-testid en lugar de React (Kiritaki)
+	public enum TabLink {
+		VENTAJAS("//button[text()='Ventajas']"),
+		CONSEGUIR_LIKES("//button[text()='Conseguir Likes']"),
+		HISTORIAL("//button[text()='Historial']");
+		
+		private String xpath;
+		private TabLink(String xpath) {
+			this.xpath = xpath;
+		}
+		public String xpath() {
+			return xpath;
+		}
+	}
 	
 	public enum ButtonUseLikes {
 		COMPRA_CON_DESCUENTO("//button/span[text()='Comprar con descuento']"),
@@ -29,6 +51,10 @@ public class PageHomeLikes extends PageBase {
 		public String xpath() {
 			return xpath;
 		}
+	}
+	
+	public void click(TabLink tabLink) {
+		click(tabLink.xpath()).exec();
 	}
 	
 	public boolean checkIsPageUntil(int seconds) {
@@ -57,5 +83,17 @@ public class PageHomeLikes extends PageBase {
 
 	public void clickButton(ButtonUseLikes button) {
 		click(button.xpath()).exec();
+	}
+	
+	public boolean isMovimientoVisible(int seconds) {
+		return state(Visible, XPATH_MOVIMIENTO).wait(seconds).check();
+	}
+	
+	public void clickAyuda() {
+		click(XPATH_LINK_AYUDA).exec();
+	}
+	
+	public boolean isPageAyudaMangoLikesYouVisible(int seconds) {
+		return state(Visible, "//h1[text()='Club Mango Likes you']").wait(seconds).check();
 	}
 }

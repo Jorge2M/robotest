@@ -13,7 +13,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.login.pageobjects.PageIdentificacion;
-import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
+import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
@@ -158,7 +158,7 @@ public class SecMenusUserSteps extends StepBase {
 		expected="Aparece la página de \"Mi cuenta\"")
 	public int clickMenuMangoLikesYou() {
 		clickUserMenu(MANGO_LIKES_YOU);
-		PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps();
+		PageMangoLikesYouSteps pageHomeLikesSteps = new PageMangoLikesYouSteps();
 		int numberPoints = pageHomeLikesSteps.checkIsPageOk().getNumberPoints();
 		GenericChecks.checkDefault();
 		

@@ -3,7 +3,7 @@ package com.mng.robotest.domains.loyalty.tests;
 import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes;
 import com.mng.robotest.domains.loyalty.steps.PageHomeDonateLikesSteps;
-import com.mng.robotest.domains.loyalty.steps.PageHomeLikesSteps;
+import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
@@ -13,7 +13,7 @@ public class Loy002 extends TestBase {
 
 	public static final User USER = new User("test.performance21@mango.com", "6877377061230042978", "ES");
 	
-	private final PageHomeLikesSteps pageHomeLikesSteps = new PageHomeLikesSteps();
+	private final PageMangoLikesYouSteps pageHomeLikesSteps = new PageMangoLikesYouSteps();
 	private final PageHomeDonateLikesSteps pageHomeDonateLikesSteps = new PageHomeDonateLikesSteps();
 	private final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
 	
