@@ -106,6 +106,9 @@ public class PageMisDatos extends PageBase {
 	
 	public void cancelarCuenta() {
 		click(XPATH_LINK_ELIMINAR_CUENTA).exec();
+		if (!state(Invisible, XPATH_LINK_ELIMINAR_CUENTA).wait(1).check()) {
+			click(XPATH_LINK_ELIMINAR_CUENTA).exec();
+		}
 		click(XPATH_BUTTON_CONFIRM_ELIMINAR_CUENTA).waitLink(3).exec();
 	}
 	
