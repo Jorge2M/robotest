@@ -31,19 +31,22 @@ public class PageIdentificacion extends PageBase {
 	private static final String XPATH_INICIAR_SESION_OLD = "//div[@class='submitContent']/input[@type='submit']";
 	
 	public boolean isNewPage() {
-		if (channel!=Channel.tablet) {
-			return true;
-		}
-		for (int i=0; i<5; i++) {
-			if (state(Visible, XPATH_INPUT_USER_NEW + "/..").check()) {
-				return true;
-			}
-			if (state(Visible, XPATH_INPUT_USER_OLD).check()) {
-				return false;
-			}
-			waitMillis(1000);
-		}
-		return true;
+		//Finalmente se han decantado por la antigua página
+		return false;
+//		if (false) {
+//		if (channel!=Channel.tablet) {
+//			return true;
+//		}
+//		for (int i=0; i<5; i++) {
+//			if (state(Visible, XPATH_INPUT_USER_NEW + "/..").check()) {
+//				return true;
+//			}
+//			if (state(Visible, XPATH_INPUT_USER_OLD).check()) {
+//				return false;
+//			}
+//			waitMillis(1000);
+//		}
+//		return true;
 	}
 	
 	private String getXPathInputUser() {
