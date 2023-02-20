@@ -145,23 +145,22 @@ public class PageBase extends PageObjTM {
 		if (TestCaseTM.getTestCaseInExecution().isEmpty()) {
 			return false;
 		}
-		String urlBase = TestMaker.getInputParamsSuite().getUrlBase();
-		if (isEntornoPRO(urlBase)) {
+		if (isEnvPRO()) {
 			return true;
 		}
-		return isEntornoPRO(driver.getCurrentUrl());
-	}    
+		return isPRO(driver.getCurrentUrl());
+	}
+	
+	public static boolean isEnvPRO() {
+		String urlBase = TestMaker.getInputParamsSuite().getUrlBase();
+		return isPRO(urlBase);
+	}
     
-	public boolean isEntornoPRO(String url) {
-		List<String> urlsProShop   = Arrays.asList("shop.mango.com", "shoptest.pro.mango.com");
-		List<String> urlsProOutlet = Arrays.asList("www.mangooutlet.com", "outlettest.pro.mango.com");
+	public static boolean isPRO(String url) {
+		List<String> urlsPro   = Arrays.asList(
+				"shop.mango.com", "shoptest.pro.mango.com", "www.mangooutlet.com", "outlettest.pro.mango.com");
 		Iterator<String> itURLsPRO = null;
-		if (app==AppEcom.outlet) {
-			itURLsPRO = urlsProOutlet.iterator();
-		} else {
-			itURLsPRO = urlsProShop.iterator();
-		}
-		
+		itURLsPRO = urlsPro.iterator();
 		while (itURLsPRO.hasNext()) {
 			String urlStr = itURLsPRO.next();
 			if (url.contains(urlStr)) {

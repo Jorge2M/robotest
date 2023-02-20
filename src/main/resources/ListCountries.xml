@@ -5361,10 +5361,10 @@ where
 <miscompras>false</miscompras>
 <moneda>%@ THB</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<tienda she="s" he="s" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="HE"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea id="HE"        shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINA"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>

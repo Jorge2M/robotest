@@ -65,12 +65,22 @@ public class Registro implements Serializable {
 	
 	@Test (
 		groups={"Registro", "Canal:all_App:shop"},
-		description="Alta/Registro de un usuario en Corea (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
-	public void REG005_OldRegisterCorea() throws Exception {
+		description="Alta/Registro nuevo de un usuario en Corea (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
+	public void REG005_NewRegisterCorea() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
 		Pais corea = COREA_DEL_SUR.getPais();
 		IdiomaPais ingles = corea.getListIdiomas().get(1);
-		new Reg003(corea, ingles, false).execute();
+		new Reg001(corea, ingles).execute();
+	}	
+	
+	@Test (
+		groups={"Registro", "Canal:all_App:shop"},
+		description="Alta/Registro antiguo de un usuario en Islandia y (seleccionando link de publicidad) posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
+	public void REG006_OldRegisterIslandia() throws Exception {
+		TestCaseTM.addNameSufix(this.indexFact);
+		Pais islandia = ICELAND.getPais();
+		IdiomaPais ingles = islandia.getListIdiomas().get(0);
+		new Reg003(islandia, ingles, false).execute();
 	}	
 		
 }

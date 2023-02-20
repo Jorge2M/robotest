@@ -27,7 +27,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
 	public boolean validaIsPageUntil(int seconds) {
-		return (pageRegistroIni.isPageUntil(seconds));
+		return pageRegistroIni.isPageUntil(seconds);
 	}
 
 	@Step (

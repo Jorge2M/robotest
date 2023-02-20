@@ -51,7 +51,7 @@ public class SecMenusUserSteps extends StepBase {
 		if (channel.isDevice()) {
 			new PageIdentificacion().clickTabRegistrate();
 		}
-		if (app==AppEcom.outlet || PaisShop.COREA_DEL_SUR.isEquals(dataTest.getPais())) {
+		if (app==AppEcom.outlet || PaisShop.ICELAND.isEquals(dataTest.getPais())) {
 			PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
 			pageRegistroIniSteps.validaIsPageUntil(5);
 			pageRegistroIniSteps.validaIsRGPDVisible();
