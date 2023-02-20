@@ -20,56 +20,16 @@ public class PageIdentificacion extends PageBase {
 	private static final String AVISO_CREDENCIALES_KO = "Tu e-mail o contraseña no son correctos";
 	private static final String XPATH_ERROR_CREDENCIALES_KO = "//*[text()[contains(.,'" + AVISO_CREDENCIALES_KO + "')]]";
 	private static final String XPATH_HAS_OLVIDADO_CONTRASENYA = "//span[text()[contains(.,'¿Has olvidado tu contraseña?')]]/../../a";
-	private static final String XPATH_INPUT_USER_NEW = "//*[@data-testid='logon.login.emailInput']";
-	private static final String XPATH_INPUT_PASSWORD_NEW = "//*[@data-testid='logon.login.passInput']";	
-	private static final String XPATH_INICIAR_SESION_NEW = "//*[@data-testid[contains(.,'loginButton')]]";
-	private static final String XPATH_CREAR_CUENTA = "//button[@data-testid[contains(.,'createAccountButton')]]";
-	
-	//TODO eliminar una de las 2 versiones cuando se determine el TestAB
-	private static final String XPATH_INPUT_USER_OLD = "//input[@id[contains(.,'userMail')]]";
-	private static final String XPATH_INPUT_PASSWORD_OLD = "//input[@id[contains(.,'chkPwd')]]";	
-	private static final String XPATH_INICIAR_SESION_OLD = "//div[@class='submitContent']/input[@type='submit']";
-	
-	public boolean isNewPage() {
-		//Finalmente se han decantado por la antigua página
-		return false;
-//		if (false) {
-//		if (channel!=Channel.tablet) {
-//			return true;
-//		}
-//		for (int i=0; i<5; i++) {
-//			if (state(Visible, XPATH_INPUT_USER_NEW + "/..").check()) {
-//				return true;
-//			}
-//			if (state(Visible, XPATH_INPUT_USER_OLD).check()) {
-//				return false;
-//			}
-//			waitMillis(1000);
-//		}
-//		return true;
-	}
-	
-	private String getXPathInputUser() {
-		if (isNewPage()) {
-			return XPATH_INPUT_USER_NEW;
-		}
-		return XPATH_INPUT_USER_OLD;
-	}
-	private String getXPathInputPassword() {
-		if (isNewPage()) {
-			return XPATH_INPUT_PASSWORD_NEW;
-		}
-		return XPATH_INPUT_PASSWORD_OLD;
-	}	
-	private String getXPathIniciarSesion() {
-		if (isNewPage()) {
-			return XPATH_INICIAR_SESION_NEW;
-		}
-		return XPATH_INICIAR_SESION_OLD;
-	}	
+//	private static final String XPATH_INPUT_USER_NEW = "//*[@data-testid='logon.login.emailInput']";
+//	private static final String XPATH_INPUT_PASSWORD_NEW = "//*[@data-testid='logon.login.passInput']";	
+//	private static final String XPATH_INICIAR_SESION_NEW = "//*[@data-testid[contains(.,'loginButton')]]";
+	private static final String XPATH_TAB_REGISTRATE = "//p[@class[contains(.,'registerTab')]]";
+	private static final String XPATH_INPUT_USER = "//input[@id[contains(.,'userMail')]]";
+	private static final String XPATH_INPUT_PASSWORD = "//input[@id[contains(.,'chkPwd')]]";	
+	private static final String XPATH_INICIAR_SESION = "//div[@class='submitContent']/input[@type='submit']";
 	
 	public boolean isVisibleUserUntil(int seconds) {
-		return state(Visible, getXPathInputUser()).wait(seconds).check();
+		return state(Visible, XPATH_INPUT_USER).wait(seconds).check();
 	}
 
 	public String getLiteralAvisiCredencialesKO() {
@@ -78,13 +38,13 @@ public class PageIdentificacion extends PageBase {
 
 	public void inputUserPassword(String usuario, String password) {
 		try {
-			getElement(getXPathInputUser()).clear();
+			getElement(XPATH_INPUT_USER).clear();
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().error(e);
 		} 
-		getElement(getXPathInputUser()).sendKeys(usuario);
-		getElement(getXPathInputPassword()).sendKeys(password);
+		getElement(XPATH_INPUT_USER).sendKeys(usuario);
+		getElement(XPATH_INPUT_PASSWORD).sendKeys(password);
 	}
 
 	public void login(String user, String password) {
@@ -106,18 +66,16 @@ public class PageIdentificacion extends PageBase {
 	}	
 	
 	private void clickButtonEntrar() {
-		click(getXPathIniciarSesion()).waitLoadPage(10).exec(); 
+		click(XPATH_INICIAR_SESION).waitLoadPage(10).exec(); 
 	}
 	
-	public void clickButtonCrearCuenta() {
-		//TODO fix waitLink in 2.1.34 TestMaker version
-//		click(XPATH_CREAR_CUENTA).waitLink(10).exec();
-		state(Clickable, XPATH_CREAR_CUENTA).wait(5).check();
-		click(XPATH_CREAR_CUENTA).exec();
+	public void clickTabRegistrate() {
+		state(Clickable, XPATH_TAB_REGISTRATE).wait(5).check();
+		click(XPATH_TAB_REGISTRATE).exec();
 	}
 	
 	public boolean isButtonEntrarPresent() {
-		return state(Present, getXPathIniciarSesion()).check();
+		return state(Present, XPATH_INICIAR_SESION).check();
 	}
 
 	public void clickIniciarSesionAndWait(Channel channel, AppEcom app) {

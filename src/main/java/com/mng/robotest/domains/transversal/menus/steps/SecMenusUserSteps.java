@@ -49,7 +49,7 @@ public class SecMenusUserSteps extends StepBase {
 	public void selectRegistrate() {
 		clickUserMenu(REGISTRATE);
 		if (channel.isDevice()) {
-			new PageIdentificacion().clickButtonCrearCuenta();
+			new PageIdentificacion().clickTabRegistrate();
 		}
 		if (app==AppEcom.outlet || PaisShop.COREA_DEL_SUR.isEquals(dataTest.getPais())) {
 			PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
