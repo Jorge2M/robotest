@@ -64,7 +64,7 @@ public class SecBolsaButtonAndLinksNew extends PageBase {
 
 	public void selectFavoritosButton(ActionFavButton actionButton) {
 		String xpathButtonFav = getXPathButtonFavoritos(actionButton);
-		click(xpathButtonFav).exec();
+		click(xpathButtonFav).waitLink(1).exec();
 	}
 
 	public boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds) {
