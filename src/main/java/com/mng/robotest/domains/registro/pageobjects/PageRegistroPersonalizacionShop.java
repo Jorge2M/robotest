@@ -70,9 +70,15 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	
 	public void selectLineas(List<LineaType> lineasToSelect) {
 		//By default all lines are selected
-		ALL_LINEAS.stream()
+		getAllLineasCountry().stream()
 			.filter(s -> !lineasToSelect.contains(s))
 			.forEach(this::unselectLinea);
+	}
+	private List<LineaType> getAllLineasCountry() {
+		return dataTest.getPais().getShoponline().getLineasToTest(app).stream()
+				.map(s -> s.getType())
+				.filter(s -> ALL_LINEAS.contains(s))
+				.toList();
 	}
 	private void unselectLinea(LineaType linea) {
 		String xpathCheckbox = getXPathCheckboxLinea(linea);
