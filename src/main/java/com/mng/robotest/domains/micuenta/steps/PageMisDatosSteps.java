@@ -34,7 +34,7 @@ public class PageMisDatosSteps extends StepBase {
 		String nombre = datosRegOk.get("cfName");
 		String apellidos = datosRegOk.get("cfSname");
 		String email = datosRegOk.get("cfEmail");
-		String direccion = datosRegOk.get("cfDir1");
+//		String direccion = datosRegOk.get("cfDir1");
 //		String codpostal = datosRegOk.get("cfCp");
 //		String poblacion = datosRegOk.get("cfCity");
 		String provincia = datosRegOk.get("estadosPais");
@@ -56,10 +56,10 @@ public class PageMisDatosSteps extends StepBase {
 			"El Email contiene el definido durante el registro: <b>" + email + "</b>",
 			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0), State.Defect);
 		
-		checks.add(
-			"La Dirección contiene la definida durante el registro: <b>" + direccion + "</b>",
-			(pageMisDatos.getTextInputDireccion().compareTo(direccion)==0), State.Defect);
-		
+//		checks.add(
+//			"La Dirección contiene la definida durante el registro: <b>" + direccion + "</b>",
+//			(pageMisDatos.getTextInputDireccion().compareTo(direccion)==0), State.Defect);
+//		
 //		checks.add(
 //			"El Código postal contiene el definido durante el registro: <b>" + codpostal + "</b>",
 //			(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0), State.Defect);

@@ -82,7 +82,7 @@ public class PageMiCuentaSteps extends StepBase {
 		GenericChecks.checkDefault();
 		if (dataRegistro.get("cfCp")!=null) {
 			goToMisDirecciones();
-			new PageMisDireccionesSteps().checkPostalCode(dataRegistro.get("cfCp"));
+			new PageMisDireccionesSteps().checkData(dataRegistro);
 		}
 	}
 	public void goToMisDatosAndValidateData(DataNewRegister dataNewRegister) {
@@ -91,7 +91,7 @@ public class PageMiCuentaSteps extends StepBase {
 		GenericChecks.checkDefault();
 		if (dataNewRegister.isPostalCode()) {
 			goToMisDirecciones();
-			new PageMisDireccionesSteps().checkPostalCode(dataNewRegister.getPostalCode());
+			new PageMisDireccionesSteps().checkData(dataNewRegister);
 		}
 	}	
 	
