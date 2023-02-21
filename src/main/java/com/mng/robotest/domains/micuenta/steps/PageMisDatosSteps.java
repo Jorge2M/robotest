@@ -24,7 +24,7 @@ public class PageMisDatosSteps extends StepBase {
 		
 		checks.add(
 			"El campo de email contiene " + usuarioReg,
-			pageMisDatos.getValueEmailInput().compareTo(usuarioReg.toUpperCase())==0, State.Warn);
+			pageMisDatos.getValueEmailInput().toUpperCase().compareTo(usuarioReg.toUpperCase())==0, State.Warn);
 
 		return checks;
 	}
