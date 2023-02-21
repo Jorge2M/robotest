@@ -3,6 +3,7 @@ package com.mng.robotest.domains.compra.pageobjects;
 import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 public class PageResultPago extends PageBase {
 	
@@ -56,6 +57,9 @@ public class PageResultPago extends PageBase {
 
 	public void clickMisCompras() {
 		click(XPATH_BUTTON_MIS_COMPRAS).exec();
+		if (!state(Invisible, XPATH_BUTTON_MIS_COMPRAS).wait(1).check()) {
+			click(XPATH_BUTTON_MIS_COMPRAS).type(javascript).exec();
+		}
 	}
 
 	public boolean isVisibleBlockNewLoyaltyPoints() {
