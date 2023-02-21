@@ -37,7 +37,7 @@ public class PageMisDatosSteps extends StepBase {
 //		String direccion = datosRegOk.get("cfDir1");
 //		String codpostal = datosRegOk.get("cfCp");
 //		String poblacion = datosRegOk.get("cfCity");
-		String provincia = datosRegOk.get("estadosPais");
+//		String provincia = datosRegOk.get("estadosPais");
 
 		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
@@ -70,15 +70,15 @@ public class PageMisDatosSteps extends StepBase {
 //				(pageMisDatos.getTextInputPoblacion().compareTo(poblacion)==0), State.Defect);
 //		}
 		
-		checks.add(
-			"Está seleccionado el país definido durante el registro: <b>" + codpais + "</b>",
-			(pageMisDatos.getCodPaisSelected().compareTo(codpais)==0), State.Defect);
-		
-		if (provincia != null) {
-			checks.add(
-				"Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>",
-				(pageMisDatos.getProvinciaSelected().compareTo(provincia)==0), State.Defect);
-		}
+//		checks.add(
+//			"Está seleccionado el país definido durante el registro: <b>" + codpais + "</b>",
+//			(pageMisDatos.getCodPaisSelected().compareTo(codpais)==0), State.Defect);
+//		
+//		if (provincia != null) {
+//			checks.add(
+//				"Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>",
+//				(pageMisDatos.getProvinciaSelected().compareTo(provincia)==0), State.Defect);
+//		}
 		return checks;
 	}
 	

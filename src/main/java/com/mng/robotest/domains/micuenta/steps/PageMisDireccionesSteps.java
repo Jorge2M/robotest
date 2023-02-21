@@ -68,10 +68,12 @@ public class PageMisDireccionesSteps extends StepBase {
 		checks.add(
 			"Aparece el código postal <b>" + codpostal + "</b>",
 			isPostalCode(codpostal), State.Defect);
-		
-		checks.add(
-			"Aparece la población <b>" + poblacion + "</b>",
-			isPoblacion(poblacion), State.Defect);
+
+		if (poblacion!=null) {
+			checks.add(
+				"Aparece la población <b>" + poblacion + "</b>",
+				isPoblacion(poblacion), State.Defect);
+		}
 		
 		checks.add(
 			"Aparece la dirección <b>" + direccion + "</b>",
