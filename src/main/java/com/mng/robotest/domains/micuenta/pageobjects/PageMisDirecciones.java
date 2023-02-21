@@ -1,0 +1,29 @@
+package com.mng.robotest.domains.micuenta.pageobjects;
+
+import com.mng.robotest.domains.transversal.PageBase;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+public class PageMisDirecciones extends PageBase {
+
+	private static final String XPATH_MICROFRONTEND = "//micro-frontend[@id='myAddresses']"; 
+	private static final String XPATH_LINK_EDITAR = "//*[@data-testid[contains(.,'addressCard')]]//a";
+	private static final String XPATH_INPUT_CODPOSTAL = "//*[@data-testid='address.form.postalCode']";
+	private static final String XPATH_BOTON_GUARDAR = "//*[@data-testid='deliveryAddress.form.button.submit']";
+	
+	public boolean isPage(int seconds) {
+		return state(Visible, XPATH_MICROFRONTEND).wait(seconds).check();
+	}
+	
+	public void clickLinkEditar() {
+		click(XPATH_LINK_EDITAR).waitLink(3).exec();
+		state(Visible, XPATH_BOTON_GUARDAR).wait(5).check();
+	}
+	public String getCodigoPostal() {
+		return getElement(XPATH_INPUT_CODPOSTAL).getAttribute("value");
+	}
+	public void guardar() {
+		click(XPATH_BOTON_GUARDAR).exec();
+	}
+	
+}

@@ -67,6 +67,9 @@ public class DataNewRegister {
 	public String getPostalCode() {
 		return postalCode;
 	}
+	public boolean isPostalCode() {
+		return (postalCode!=null && "".compareTo(postalCode)!=0);
+	}
 
 	public String getDateOfBirth() {
 		return dateOfBirth;

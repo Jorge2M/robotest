@@ -5,6 +5,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta;
+import com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta.Link;
 import com.mng.robotest.domains.reembolsos.pageobjects.PageReembolsos;
 import com.mng.robotest.domains.reembolsos.pageobjects.PageReembolsos.TypeReembolso;
 import com.mng.robotest.domains.transversal.StepBase;
@@ -23,7 +24,7 @@ public class PageReembolsosSteps extends StepBase {
 		description="Seleccionar la opción \"Reembolsos\"", 
 		expected="Aparece la página de reembolsos")
 	public void selectReembolsos(boolean paisConSaldoCta) {
-		new PageMiCuenta().clickReembolsos();
+		new PageMiCuenta().click(Link.REEMBOLSOS);
 		checkClickReembolsos(paisConSaldoCta);
 	}
 	

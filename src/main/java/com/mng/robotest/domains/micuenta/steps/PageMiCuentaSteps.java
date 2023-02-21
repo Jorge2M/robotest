@@ -14,13 +14,15 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
+import static com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta.Link.*;
+
 public class PageMiCuentaSteps extends StepBase {
 	
 	private final PageMiCuenta pageMiCuenta = new PageMiCuenta();
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	
 	@Validation(
-		description="1) Aparece la página de \"Mi cuenta\" (la esperamos hasta #{seconds} segundos)",
+		description="Aparece la página de \"Mi cuenta\" (la esperamos hasta #{seconds} segundos)",
 		level=State.Defect)
 	public boolean validateIsPage (int seconds) {
 		return pageMiCuenta.isPageUntil(seconds);
@@ -30,15 +32,29 @@ public class PageMiCuentaSteps extends StepBase {
 		userMenusSteps.clickMenuMiCuenta();
 		clickLinkMisDatos(usuarioReg);
 	}
+	
+	private void goToMisDirecciones() {
+		userMenusSteps.clickMenuMiCuenta();
+		clickLinkMisDirecciones();
+	}
 
 	@Step(
-		description = "Seleccionar el link \"Mis datos\"",
-		expected = "Aparece la página de \"Mis datos\"")
+		description = "Seleccionar el link <b>Mis datos</b>",
+		expected = "Aparece la página de Mis datos")
 	private void clickLinkMisDatos (String usuarioReg) {
-		pageMiCuenta.clickMisDatos();
+		pageMiCuenta.click(MIS_DATOS);
 		new PageMisDatosSteps().validaIsPage(usuarioReg);
 		GenericChecks.checkDefault();
 	}
+	
+	@Step(
+		description = "Seleccionar el link <b>Mis direcciones</b>",
+		expected = "Aparece la página de Mis direcciones")
+	private void clickLinkMisDirecciones() {
+		pageMiCuenta.click(MIS_DIRECCIONES);
+		new PageMisDireccionesSteps().checkIsPage(3);
+		GenericChecks.checkDefault();
+	}	
 
 	public void goToMisComprasFromMenu() {
 		userMenusSteps.clickMenuMiCuenta();
@@ -49,7 +65,7 @@ public class PageMiCuentaSteps extends StepBase {
 		description = "Seleccionar el link \"Mis Compras\"",
 		expected = "Aparece la página de \"Mis Compras\"")
 	private void goToMisComprasFromMenuAndValidate() {
-		pageMiCuenta.clickMisCompras();
+		pageMiCuenta.click(MIS_COMPRAS);
 		if (channel.isDevice() &&
 			new PageInfoNewMisComprasMovil().isPage()) {
 			new PageInfoNewMisComprasMovilSteps().validateIsPage();
@@ -64,11 +80,19 @@ public class PageMiCuentaSteps extends StepBase {
 		goToMisDatos(dataRegistro.get("cfEmail"));
 		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataRegistro, codPais);
 		GenericChecks.checkDefault();
+		if (dataRegistro.get("cfCp")!=null) {
+			goToMisDirecciones();
+			new PageMisDireccionesSteps().checkPostalCode(dataRegistro.get("cfCp"));
+		}
 	}
 	public void goToMisDatosAndValidateData(DataNewRegister dataNewRegister) {
 		goToMisDatos(dataNewRegister.getEmail());
 		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataNewRegister);
 		GenericChecks.checkDefault();
+		if (dataNewRegister.isPostalCode()) {
+			goToMisDirecciones();
+			new PageMisDireccionesSteps().checkPostalCode(dataNewRegister.getPostalCode());
+		}
 	}	
 	
 	public void goToSuscripciones() {
@@ -80,7 +104,7 @@ public class PageMiCuentaSteps extends StepBase {
 		description = "Seleccionar el link \"Suscripciones\"",
 		expected = "Aparece la página de \"Suscripciones\"")
 	private void clickLinkSuscripciones() {
-		pageMiCuenta.clickSuscripciones();
+		pageMiCuenta.click(SUSCRIPCIONES);
 		new PageSuscripcionesSteps().validaIsPage();
 		GenericChecks.checkDefault();
 	}
@@ -103,7 +127,7 @@ public class PageMiCuentaSteps extends StepBase {
 		description = "Seleccionar el link \"Devoluciones\"",
 		expected = "Aparece la página de \"Devoluciones\"")
 	private void clickLinkDevoluciones() {
-		pageMiCuenta.clickDevoluciones();
+		pageMiCuenta.click(DEVOLUCIONES);
 		new PageDevolucionesSteps().validaIsPage();
 	}
 
@@ -116,7 +140,7 @@ public class PageMiCuentaSteps extends StepBase {
 		description = "Seleccionar el link \"Reembolsos\"",
 		expected = "Aparece la página de \"Reembolsos\"")
 	private void clickLinkReembolsos() {
-		pageMiCuenta.clickReembolsos();
+		pageMiCuenta.click(REEMBOLSOS);
 		new PageReembolsosSteps().validateIsPage();
 	}
 }
