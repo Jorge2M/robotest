@@ -35,19 +35,31 @@ public class PageMisDatos extends PageBase {
 	}
 	
 	public String getTextInputEmail() {
-		return getElement(XPATH_INPUT_EMAIL).getAttribute("value");
+		if (state(Present, XPATH_INPUT_EMAIL).check()) {
+			return getElement(XPATH_INPUT_EMAIL).getAttribute("value");
+		}
+		return "";
 	}
 
 	public String getTextInputDireccion() {
-		return getElement(XPATH_INPUT_DIRECCION).getAttribute("value");
+		if (state(Present, XPATH_INPUT_DIRECCION).check()) {
+			return getElement(XPATH_INPUT_DIRECCION).getAttribute("value");
+		}
+		return "";
 	}
 	
 	public String getTextInputCodPostal() {
-		return getElement(XPATH_INPUT_COD_POSTAL).getAttribute("value");
+		if (state(Present, XPATH_INPUT_COD_POSTAL).check()) {
+			return getElement(XPATH_INPUT_COD_POSTAL).getAttribute("value");
+		}
+		return "";
 	}
 	
 	public String getTextInputPoblacion() {
-		return getElement(XPATH_INPUT_POBLACION).getAttribute("value");
+		if (state(Present, XPATH_INPUT_POBLACION).check()) {
+			return getElement(XPATH_INPUT_POBLACION).getAttribute("value");
+		}
+		return "";
 	}
 	
 	public String getCodPaisSelected() {
