@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.testng.annotations.Test;
 
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
@@ -20,7 +21,7 @@ public class Registro implements Serializable {
 	private Pais pais = ESPANA.getPais();
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
 	
-	public Registro() { }
+	public Registro() {	}
 	
 	//From @Factory
 	public Registro(Pais pais, IdiomaPais idioma, int prioridad) {
@@ -36,6 +37,9 @@ public class Registro implements Serializable {
 		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG001_NewRegisterOK() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
+		if (isPro()) {
+			return;
+		}
 		new Reg001(pais, idioma).execute();
 	}
 	
@@ -44,6 +48,9 @@ public class Registro implements Serializable {
 		description="Registro con errores en la introducción de los datos")
 	public void REG002_RegistroNOK() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
+		if (isPro()) {
+			return;
+		}
 		new Reg002(pais, idioma).execute();
 	}
 
@@ -52,6 +59,9 @@ public class Registro implements Serializable {
 		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG003_RegistroOK_publi() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
+		if (isPro()) {
+			return;
+		}
 		new Reg003(pais, idioma, accessFromFactory).execute();
 	}
 	
@@ -60,6 +70,9 @@ public class Registro implements Serializable {
 		description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
 	public void REG004_RegistroOK_NoPubli() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
+		if (isPro()) {
+			return;
+		}
 		new Reg004(pais, idioma).execute();
 	}
 	
@@ -68,6 +81,9 @@ public class Registro implements Serializable {
 		description="Alta/Registro nuevo de un usuario en Corea (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG005_NewRegisterCorea() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
+		if (isPro()) {
+			return;
+		}
 		Pais corea = COREA_DEL_SUR.getPais();
 		IdiomaPais ingles = corea.getListIdiomas().get(1);
 		new Reg001(corea, ingles).execute();
@@ -78,9 +94,17 @@ public class Registro implements Serializable {
 		description="Alta/Registro antiguo de un usuario en Islandia y (seleccionando link de publicidad) posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG006_OldRegisterIslandia() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
+		if (isPro()) {
+			return;
+		}
 		Pais islandia = ICELAND.getPais();
 		IdiomaPais ingles = islandia.getListIdiomas().get(0);
 		new Reg003(islandia, ingles, false).execute();
 	}	
+
+	private boolean isPro() {
+		return PageBase.isEnvPRO();
+	}
+
 		
 }
