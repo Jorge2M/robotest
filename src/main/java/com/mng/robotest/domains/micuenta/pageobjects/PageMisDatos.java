@@ -11,9 +11,9 @@ public class PageMisDatos extends PageBase {
 	private static final String XPATH_INPUT_EMAIL = "//input[@id[contains(.,'cfEmail')]]";
 	private static final String XPATH_INPUT_NOMBRE = "//input[@id[contains(.,'cfName')]]";
 	private static final String XPATH_INPUT_APELLIDOS = "//input[@id[contains(.,'cfSname')]]";
-//	private static final String XPATH_INPUT_DIRECCION = "//input[@id[contains(.,'cfDir1')]]";
-//	private static final String XPATH_INPUT_COD_POSTAL = "//input[@id[contains(.,'cfCp')]]";
-//	private static final String XPATH_INPUT_POBLACION = "//input[@id[contains(.,'cfCity')]]";
+	private static final String XPATH_INPUT_DIRECCION = "//input[@id[contains(.,'cfDir1')]]";
+	private static final String XPATH_INPUT_COD_POSTAL = "//input[@id[contains(.,'cfCp')]]";
+	private static final String XPATH_INPUT_POBLACION = "//input[@id[contains(.,'cfCity')]]";
 	private static final String XPATH_BOTON_GUARDAR_CAMBIOS = "//div[@class='submitContent']/input[@type='submit']";
 	private static final String XPATH_PAGE_RES_OK = "//span[text()[contains(.,'Tus datos han sido modificados en nuestra base de datos.')]]";
 	private static final String XPATH_INPUT_PASSWORD_TYPE_PASSWORD = "//input[@id[contains(.,'cfPass')] and @type='password']";
@@ -38,17 +38,17 @@ public class PageMisDatos extends PageBase {
 		return getElement(XPATH_INPUT_EMAIL).getAttribute("value");
 	}
 
-//	public String getTextInputDireccion() {
-//		return getElement(XPATH_INPUT_DIRECCION).getAttribute("value");
-//	}
-//	
-//	public String getTextInputCodPostal() {
-//		return getElement(XPATH_INPUT_COD_POSTAL).getAttribute("value");
-//	}
-//	
-//	public String getTextInputPoblacion() {
-//		return getElement(XPATH_INPUT_POBLACION).getAttribute("value");
-//	}
+	public String getTextInputDireccion() {
+		return getElement(XPATH_INPUT_DIRECCION).getAttribute("value");
+	}
+	
+	public String getTextInputCodPostal() {
+		return getElement(XPATH_INPUT_COD_POSTAL).getAttribute("value");
+	}
+	
+	public String getTextInputPoblacion() {
+		return getElement(XPATH_INPUT_POBLACION).getAttribute("value");
+	}
 	
 	public String getCodPaisSelected() {
 		if (state(Present, XPATH_OPTION_PAIS_SELECTED).check()) {

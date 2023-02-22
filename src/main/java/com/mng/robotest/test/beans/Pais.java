@@ -38,10 +38,10 @@ public class Pais implements Serializable {
 	String telefono;
 	String dni;
 	String tiendas_online;
+	String misdirecciones;
 	String moneda;
 	String maximo_bolsa;
 	String control_net;
-	String ticketStore_enabled;
 	
 	Tienda tienda = new Tienda();
 	Shoponline shoponline = new Shoponline();
@@ -216,18 +216,21 @@ public class Pais implements Serializable {
 		this.control_net = control_net;
 	}		
 	
-	public boolean isTicketStoreEnabled() {
-		return (getTicketStore_enabled()!=null && 
-				"true".compareTo(getTicketStore_enabled())==0);
+	public boolean isMisdirecciones(AppEcom app) {
+		if (app!=AppEcom.shop) {
+			return false;
+		}
+		return (getMisdirecciones()!=null && 
+				"true".compareTo(getMisdirecciones())==0);
 	}
 	
-	public String getTicketStore_enabled() {
-		return this.ticketStore_enabled;
+	public String getMisdirecciones() {
+		return this.misdirecciones;
 	}
 	
 	@XmlElement
-	public void setTicketStore_enabled(String ticketStore_enabled) {
-		this.ticketStore_enabled = ticketStore_enabled;
+	public void setMisdirecciones(String misdirecciones) {
+		this.misdirecciones = misdirecciones;
 	}
 
 	public Direccharnolatinos getDireccharnolatinos() {

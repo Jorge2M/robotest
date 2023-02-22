@@ -80,7 +80,7 @@ public class PageMiCuentaSteps extends StepBase {
 		goToMisDatos(dataRegistro.get("cfEmail"));
 		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataRegistro, codPais);
 		GenericChecks.checkDefault();
-		if (dataRegistro.get("cfCp")!=null) {
+		if (dataTest.getPais().isMisdirecciones(app)) {
 			goToMisDirecciones();
 			new PageMisDireccionesSteps().checkData(dataRegistro);
 		}
@@ -89,7 +89,7 @@ public class PageMiCuentaSteps extends StepBase {
 		goToMisDatos(dataNewRegister.getEmail());
 		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataNewRegister);
 		GenericChecks.checkDefault();
-		if (dataNewRegister.isPostalCode()) {
+		if (dataTest.getPais().isMisdirecciones(app)) {
 			goToMisDirecciones();
 			new PageMisDireccionesSteps().checkData(dataNewRegister);
 		}
