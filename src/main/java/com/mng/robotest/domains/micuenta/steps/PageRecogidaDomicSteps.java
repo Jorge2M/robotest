@@ -14,7 +14,7 @@ public class PageRecogidaDomicSteps extends StepBase {
 	@Validation
 	public ChecksTM validaIsPageSinDevoluciones () {
 		ChecksTM checks = ChecksTM.getNew();
-		int seconds = 3;
+		int seconds = 5;
 		checks.add(
 			"Aparece la página de Recogida a Domicilio (la esperamos hasta " + seconds + " segundos)",
 			pageRecADomic.isPage(seconds), State.Defect);
