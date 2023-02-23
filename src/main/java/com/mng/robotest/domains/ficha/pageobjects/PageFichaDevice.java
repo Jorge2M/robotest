@@ -94,7 +94,7 @@ public class PageFichaDevice extends PageFicha {
 
 	@Override
 	public void selectRemoveFromFavoritosButton() {
-		click(XPATH_BUTTON_FAVORITOS_FOR_REMOVE).waitLink(1).exec();
+		click(XPATH_BUTTON_FAVORITOS_FOR_REMOVE).waitLink(2).exec();
 	}
 
 	@Override
