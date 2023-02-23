@@ -113,10 +113,10 @@ public class PageMangoLikesYouSteps extends StepBase {
 	}
 	
 	@Step(
-		description="Seleccionar el 1er botón \"Saber más Likes\"",
-		expected="Aparece una página para conseguir por 1200 Likes")
+		description="Seleccionar el 1er botón para la compra de una entrada de cine",
+		expected="Aparece una página para conseguir la entrada de cine")
 	private void clickSaberMas() {
-		pageMangoLikesYou.clickButton(ButtonUseLikes.SABER_MAS);
+		pageMangoLikesYou.clickButton(ButtonUseLikes.ENTRADA_CINE);
 		new PageHomeConseguirPorLikesSteps().checkIsPage(2);
 		
 	}
