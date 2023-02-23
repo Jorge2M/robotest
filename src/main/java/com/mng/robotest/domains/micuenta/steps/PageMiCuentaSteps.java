@@ -77,22 +77,22 @@ public class PageMiCuentaSteps extends StepBase {
 	}
  
 	public void goToMisDatosAndValidateData(Map<String,String> dataRegistro, String codPais) {
-		goToMisDatos(dataRegistro.get("cfEmail"));
-		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataRegistro, codPais);
-		GenericChecks.checkDefault();
 		if (dataTest.getPais().isMisdirecciones(app)) {
 			goToMisDirecciones();
 			new PageMisDireccionesSteps().checkData(dataRegistro);
-		}
+		}		
+		goToMisDatos(dataRegistro.get("cfEmail"));
+		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataRegistro, codPais);
+		GenericChecks.checkDefault();
 	}
 	public void goToMisDatosAndValidateData(DataNewRegister dataNewRegister) {
-		goToMisDatos(dataNewRegister.getEmail());
-		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataNewRegister);
-		GenericChecks.checkDefault();
 		if (dataTest.getPais().isMisdirecciones(app)) {
 			goToMisDirecciones();
 			new PageMisDireccionesSteps().checkData(dataNewRegister);
 		}
+		goToMisDatos(dataNewRegister.getEmail());
+		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataNewRegister);
+		GenericChecks.checkDefault();
 	}	
 	
 	public void goToSuscripciones() {
