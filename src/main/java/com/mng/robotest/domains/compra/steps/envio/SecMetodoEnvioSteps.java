@@ -1,5 +1,6 @@
 package com.mng.robotest.domains.compra.steps.envio;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -67,14 +68,10 @@ public class SecMetodoEnvioSteps extends StepBase {
 		alterTypeEnviosAccordingContext(dataPago);
 		Pago pago = dataPago.getDataPedido().getPago();
 		TipoTransporte tipoTransporte = pago.getTipoEnvioType(app);
-		switch (channel) {
-		case desktop:
-		case tablet:
-			selectMetodoEnvio(tipoTransporte, nombrePago, dataPago);
-			break;
-		case mobile:
+		if (channel==Channel.mobile || dataTest.getPais().isCheckoutmvp()) {
 			new Page1EnvioCheckoutMobilSteps().selectMetodoEnvio(tipoTransporte, nombrePago, dataPago);
-			break;
+		} else {
+			selectMetodoEnvio(tipoTransporte, nombrePago, dataPago);
 		}
 	}
 	

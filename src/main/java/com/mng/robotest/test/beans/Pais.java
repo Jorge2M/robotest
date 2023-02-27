@@ -39,6 +39,7 @@ public class Pais implements Serializable {
 	String dni;
 	String tiendas_online;
 	String misdirecciones;
+	String checkoutmvp;
 	String moneda;
 	String maximo_bolsa;
 	String control_net;
@@ -223,7 +224,7 @@ public class Pais implements Serializable {
 		return (getMisdirecciones()!=null && 
 				"true".compareTo(getMisdirecciones())==0);
 	}
-	
+
 	public String getMisdirecciones() {
 		return this.misdirecciones;
 	}
@@ -231,8 +232,22 @@ public class Pais implements Serializable {
 	@XmlElement
 	public void setMisdirecciones(String misdirecciones) {
 		this.misdirecciones = misdirecciones;
+	}	
+	
+	public boolean isCheckoutmvp() {
+		return (getCheckoutmvp()!=null && 
+				"true".compareTo(getCheckoutmvp())==0);
+	}	
+	
+	public String getCheckoutmvp() {
+		return this.checkoutmvp;
 	}
 
+	@XmlElement
+	public void setCheckoutmvp(String checkoutmvp) {
+		this.checkoutmvp = checkoutmvp;
+	}	
+	
 	public Direccharnolatinos getDireccharnolatinos() {
 		return this.direccharnolatinos;
 	}

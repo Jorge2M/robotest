@@ -201,7 +201,7 @@ public class PageCheckoutWrapper extends PageBase {
 	}
 	
 	public boolean isPresentMetodosPago() {
-		if (channel==Channel.mobile) {
+		if (channel==Channel.mobile || dataTest.getPais().isCheckoutmvp()) {
 			return page2MobilCheckout.isPresentMetodosPago();
 		}
 		return page1DktopCheckout.isPresentMetodosPago();

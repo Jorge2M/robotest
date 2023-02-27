@@ -235,6 +235,7 @@
 <telefono>672020241</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>true</checkoutmvp>
 <moneda>ALL %@</moneda>
 <maximo_bolsa>999999999999</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -477,6 +478,7 @@
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>true</checkoutmvp>
 <moneda>%@ BAM</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -2090,6 +2092,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>true</checkoutmvp>
 <moneda>%@ DIN</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -4178,6 +4181,7 @@ where
 <telefono>62836675</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>true</checkoutmvp>
 <moneda>%@ HKD</moneda>
 <maximo_bolsa>15000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -4715,6 +4719,7 @@ where
 <telefono>126946551</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>true</checkoutmvp>
 <moneda>%@ MYR</moneda>
 <maximo_bolsa>4500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -5059,6 +5064,7 @@ where
 <telefono>81234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>true</checkoutmvp>
 <moneda>%@ SGD</moneda>
 <maximo_bolsa>400</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -5305,6 +5311,7 @@ where
 <telefono>0501234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>true</checkoutmvp>
 <moneda>%@ AED</moneda>
 <maximo_bolsa>990</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -5797,6 +5804,7 @@ where
 <telefono>665015122</telefono>
 <dni>9007263637083</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>true</checkoutmvp>
 <moneda>ZAR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n" edits="s"></tienda>

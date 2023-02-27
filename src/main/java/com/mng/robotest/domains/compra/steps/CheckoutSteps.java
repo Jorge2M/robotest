@@ -77,7 +77,7 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	public void validateIsFirstPage(boolean userLogged) {
-		if (channel==Channel.mobile) {
+		if (channel==Channel.mobile || dataTest.getPais().isCheckoutmvp()) {
 			page1MobilCheckSteps.validateIsPage(userLogged);
 		} else {
 			page1DktopCheckSteps.validateIsPageOK();

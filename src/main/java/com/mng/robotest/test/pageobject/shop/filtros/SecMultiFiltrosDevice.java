@@ -113,8 +113,9 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		filtroLinea.click();
 		waitLoadPage();
 		By byFiltroOption = By.xpath(getXPathFiltroOption(textFiltro));
-		state(Clickable, byFiltroOption).wait(1).check();
-		filtroLinea.findElement(byFiltroOption).click();
+		//state(Clickable, byFiltroOption).wait(1).check();
+		click(filtroLinea).by(byFiltroOption).waitLink(1).exec();
+		//filtroLinea.findElement(byFiltroOption).click();
 		waitLoadPage();
 	}
 	private String getXPathFiltroOption(String textFiltro) {
