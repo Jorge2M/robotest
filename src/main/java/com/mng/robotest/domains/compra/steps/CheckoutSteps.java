@@ -77,7 +77,7 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	public void validateIsFirstPage(boolean userLogged) {
-		if (channel==Channel.mobile || dataTest.getPais().isCheckoutmvp()) {
+		if (isCheckoutMobile()) {
 			page1MobilCheckSteps.validateIsPage(userLogged);
 		} else {
 			page1DktopCheckSteps.validateIsPageOK();
@@ -112,7 +112,7 @@ public class CheckoutSteps extends StepBase {
 		return (pageCheckoutWrapper.isNoDivLoadingUntil(seconds));
 	}
 	
-	public void despliegaYValidaMetodosPago() {
+	void despliegaYValidaMetodosPago() {
 		despliegaYValidaMetodosPago(false);
 	}
 	
@@ -256,14 +256,14 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	public void validateSelectPagoTRJintegrada(Pago pago) {
-		if (channel==Channel.desktop) {
+		if (!isCheckoutMobile()) {
 			validateIsPresentButtonCompraDesktop();
 		}
 		getSecTarjetaPciSteps().validateIsSectionOk(pago);
 	}
 	
 	public boolean validateSelectPagoNoTRJintegrada(Pago pago) {
-		if (channel==Channel.desktop) {
+		if (!isCheckoutMobile()) {
 			validateIsPresentButtonCompraDesktop();
 		}
 		return checkIsVisibleTextUnderPayment(pago.getNombreInCheckout(channel, app), pago, 2);
@@ -429,7 +429,7 @@ public class CheckoutSteps extends StepBase {
 	}
 		
 	public void validaResultImputPromoEmpl() {
-		if (channel.isDevice()) {
+		if (isCheckoutMobile()) {
 			page1MobilCheckSteps.validaResultImputPromoEmpl();
 		} else {
 			page1DktopCheckSteps.validaResultImputPromoEmpl();
@@ -473,13 +473,10 @@ public class CheckoutSteps extends StepBase {
 		description="Seleccionamos el botón para aplicar el descuento de Loyalty Points",
 		expected="Se aplica correctamente el descuento")
 	public void loyaltyPointsApply() {
-		switch (channel) {
-		case desktop, tablet:
-			loyaltyPointsApplyDesktop();
-			break;
-		case mobile:
-		default:
+		if (isCheckoutMobile()) {
 			loyaltyPointsApplyMobil();
+		} else {
+			loyaltyPointsApplyDesktop();
 		}
 	}
 	
@@ -531,4 +528,8 @@ public class CheckoutSteps extends StepBase {
 		
 		return false;
 	}
+	
+	private boolean isCheckoutMobile() {
+		return (channel==Channel.mobile || dataTest.getPais().isCheckoutmvp());
+	}	
 }

@@ -17,7 +17,7 @@ public class TestABactive {
 	public static void currentTestABsToActivate(Channel channel, AppEcom app, WebDriver driver) throws Exception {
 		List<TestABactData> listTestABsToActivate = new ArrayList<>();
 
-		listTestABsToActivate.add(TestABactData.getNew(TestABGoogleExpImpl.MVPCheckoutDesktop, 0));
+//		listTestABsToActivate.add(TestABactData.getNew(TestABGoogleExpImpl.MVPCheckoutDesktop, 0));
 		//listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.New_Registry_MLY_Desktop_PRO, 0));
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.New_Registry_MLY_Mobile_PRO, 0));
 //		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.KIRITAKI_LOGIN_DESKTOP_MOBILE_PRE, 1));

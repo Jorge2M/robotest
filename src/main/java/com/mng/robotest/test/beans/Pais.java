@@ -243,7 +243,7 @@ public class Pais implements Serializable {
 		return this.checkoutmvp;
 	}
 
-	@XmlElement
+	@XmlElement(name="checkoutmvp")
 	public void setCheckoutmvp(String checkoutmvp) {
 		this.checkoutmvp = checkoutmvp;
 	}	

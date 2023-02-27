@@ -57,12 +57,12 @@ public class Compra {
 		new Com007().execute();
 	}
 	
-//	@Test (
-//		groups={"Compra", "Canal:desktop_App:shop"}, alwaysRun=true,
-//		description="Compra Serbia [usuario registrado] [MVP Checkout]")
-//	public void COM008_Compra_Croacia() throws Exception {
-//		new Com008().execute();
-//	}
+	@Test (
+		groups={"Compra", "Canal:desktop_App:shop"}, alwaysRun=true,
+		description="Compra Serbia [usuario registrado] [MVP Checkout]")
+	public void COM008_Compra_Croacia() throws Exception {
+		new Com008().execute();
+	}
 	
 	@Test (
 		groups={"Compra_Multialmacen", "Canal:all_App:shop"}, alwaysRun=true,

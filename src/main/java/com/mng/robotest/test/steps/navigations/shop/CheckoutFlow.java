@@ -139,7 +139,7 @@ public class CheckoutFlow extends StepBase {
 		}
 		
 		test1rstPageCheckout();
-		if (channel==Channel.mobile) {
+		if (isCheckoutMobile()) {
 			pageCheckoutWrapperSteps.goToMetodosPagoMobile();
 		}
 	}
@@ -183,7 +183,7 @@ public class CheckoutFlow extends StepBase {
 				testInputCodPromoEmplSpain();
 			} else {
 				if (dataPago.getFTCkout().chequeRegalo) {
-					if (channel==Channel.mobile) {
+					if (isCheckoutMobile()) {
 						new Page1EnvioCheckoutMobil().inputCodigoPromo(valeTest.getCodigoVale());
 					} else {
 						testValeDescuento();
@@ -211,7 +211,7 @@ public class CheckoutFlow extends StepBase {
 	private void checkMetodosPagos(List<Pais> paisesDestino) throws Exception {
 		try {
 			DataPedido dataPedido = dataPago.getDataPedido();
-			if (channel!=Channel.mobile) {
+			if (!isCheckoutMobile()) {
 				pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 			}
 				
@@ -300,7 +300,7 @@ public class CheckoutFlow extends StepBase {
 			else {
 				if (pagoToTest.getTypePago()!=TypePago.TPV_VOTF) {
 					pageResultPagoSteps.validateIsPageOk(dataPago);
-					if (channel!=Channel.mobile && 
+					if (!isCheckoutMobile() && 
 						!dataPago.getFTCkout().chequeRegalo &&
 						dataPago.getFTCkout().checkMisCompras) {
 						pageResultPagoSteps.selectLinkMisComprasAndValidateCompra(dataPago);
@@ -332,7 +332,7 @@ public class CheckoutFlow extends StepBase {
 		secBolsaSteps.altaArticlosConColores(1);
 		secBolsaSteps.selectButtonComprar();
 		testFromIdentificationToMetodosPago();
-		if (channel!=Channel.mobile) {
+		if (!isCheckoutMobile()) {
 			pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 		}
 	}	
@@ -383,7 +383,7 @@ public class CheckoutFlow extends StepBase {
 		DataPedido dataPedido = dataPago.getDataPedido(); 
 		Pago pagoPais = dataPedido.getPago();
 		try {
-			if (channel!=Channel.mobile) {
+			if (!isCheckoutMobile()) {
 				pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 			}
 			testPagoFromCheckoutToEnd(pagoPais);
@@ -413,7 +413,7 @@ public class CheckoutFlow extends StepBase {
 	private void aceptarCompraDesdeMetodosPago() {
 		DataPedido dataPedido = dataPago.getDataPedido();
 		dataPedido.setCodtipopago("R");
-		if (channel!=Channel.mobile) {
+		if (!isCheckoutMobile()) {
 			pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 			pageCheckoutWrapperSteps.pasoBotonAceptarCompraDesktop();
 		} else {
@@ -554,4 +554,7 @@ public class CheckoutFlow extends StepBase {
 		}
 	}
 	
+	private boolean isCheckoutMobile() {
+		return (channel==Channel.mobile || dataTest.getPais().isCheckoutmvp());
+	}		
 }

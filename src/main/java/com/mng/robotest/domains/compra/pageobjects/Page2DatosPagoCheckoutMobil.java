@@ -45,7 +45,10 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	
 	private static final String XPATH_ARTICLE_BOLSA = "//div[@id[contains(.,'panelBolsa:iteradorEntrega')]]";
 	
-	private static final String XPATH_PRECIO_TOTAL = "//*[@data-testid='summaryTotalPrice.price']";
+	private static final String XPATH_PRECIO_TOTAL = "//*[" + 
+			"@data-testid='summaryTotalPrice.price'" + " or " + 
+			"@data-testid[contains(.,'total.amount')]]"; //desktop mvp
+	
 	private static final String XPATH_PRECIO_TOTAL_CROATIA_EUROS = "//*[@data-testid='summaryTotalPrice.additionalPrice.1']";
 	private static final String XPATH_DIRECCION_ENVIO_TEXT = "//p[@class='address']";
 	

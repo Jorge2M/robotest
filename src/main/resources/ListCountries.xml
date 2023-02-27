@@ -280,6 +280,7 @@
 <telefono>345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -330,6 +331,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -396,6 +398,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>15000000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" kids="n" baby="n"></tienda>
@@ -420,6 +423,7 @@
 <telefono>465162757</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -524,6 +528,7 @@
 <telefono>871234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ BGL</moneda>
 <maximo_bolsa>3000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"/>
@@ -571,6 +576,7 @@
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ HRK</moneda>
 <maximo_bolsa>8500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -615,6 +621,7 @@
 <telefono>94123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -668,6 +675,7 @@
 <telefono>602123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ CSK</moneda>
 <maximo_bolsa>43000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -721,6 +729,7 @@
 <telefono>20123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ DKK</moneda>
 <maximo_bolsa>11200</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -784,6 +793,7 @@
 <telefono>5123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <outlet_online>true</outlet_online>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
@@ -842,6 +852,7 @@
 <telefono>0401234567</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -908,6 +919,7 @@
 <telefono>0612345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -963,6 +975,7 @@
 <telefono>017632021234</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -1041,6 +1054,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -1068,6 +1082,7 @@
 <telefono>6951234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -1126,6 +1141,7 @@
 <telefono>201234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ HUF</moneda>
 <maximo_bolsa>375000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -1176,7 +1192,8 @@
 <codpos>220</codpos>
 <telefono>6123456</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online> 
+<tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp> 
 <moneda>%@ ISK</moneda> 
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda> 
@@ -1226,6 +1243,7 @@
 <telefono>881234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -1277,6 +1295,7 @@
 <telefono>3123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -1332,6 +1351,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -1357,6 +1377,7 @@
 <telefono>21234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -1406,6 +1427,7 @@
 <telefono>7916972</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>2300</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -1450,6 +1472,7 @@
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ LTL</moneda>
 <maximo_bolsa>5200</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -1503,6 +1526,7 @@
 <telefono>621345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -1555,6 +1579,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ MKD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -1579,6 +1604,7 @@
 <telefono>79123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -1627,6 +1653,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ MDL</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -1651,6 +1678,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -1699,7 +1727,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -1726,6 +1754,7 @@
 <telefono>0612345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -1782,6 +1811,7 @@
 <telefono>99123456</telefono>
 <dni>10000000146</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -1808,6 +1838,7 @@
 <telefono>40123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ NOK</moneda>
 <maximo_bolsa>12000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -1872,6 +1903,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ PLZ</moneda>
 <maximo_bolsa>5800</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -1929,6 +1961,7 @@
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -1983,6 +2016,7 @@
 <telefono>722560300</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ RON</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -2030,6 +2064,7 @@
 <dni>34763592N</dni>
 <!-- Reactivar cuando se reactive la compra -->
 <tiendas_online><!-- shop,outlet,votf--></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ RUB</moneda>
 <maximo_bolsa>60000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -2136,6 +2171,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -2193,6 +2229,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <telefono>030123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -2251,6 +2288,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <misdirecciones>true</misdirecciones>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
@@ -2342,6 +2380,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" nina="s" nino="s" baby="s"></tienda>
@@ -2407,6 +2446,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" nina="s" nino="s" baby="s"></tienda>
@@ -2468,6 +2508,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" nina="s" nino="s" baby="s"></tienda>
@@ -2534,6 +2575,7 @@ where
 <telefono>0765260000</telefono><!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ SEK</moneda>
 <maximo_bolsa>14000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -2598,6 +2640,7 @@ where
 <telefono>754111234</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ CHF</moneda>
 <maximo_bolsa>2300</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -2674,6 +2717,7 @@ where
 <dni>34763592N</dni>
 <!-- Reactivar cuando se reactive la compra -->
 <tiendas_online><!-- shop,votf--></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ UAH</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -2718,6 +2762,7 @@ where
 <telefono>07123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>GBP %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
@@ -2779,6 +2824,7 @@ where
 <telefono>07123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>GBP %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -2832,6 +2878,7 @@ where
 <telefono>5612345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ AWG</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -2874,6 +2921,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -2898,6 +2946,7 @@ where
 <telefono>6135550165</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ CAN</moneda>
 <maximo_bolsa>2500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -2943,6 +2992,7 @@ where
 <telefono>50012345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ CRC</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -2985,6 +3035,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ CUP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -3008,6 +3059,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ DOP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -3031,6 +3083,7 @@ where
 <telefono>71234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ USD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -3077,6 +3130,7 @@ where
 <telefono>690123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -3125,6 +3179,7 @@ where
 <telefono>41234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -3168,6 +3223,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>HNL %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" edits="s"></tienda>
@@ -3213,6 +3269,7 @@ where
 <telefono>8183202020</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ MXP</moneda>
 <maximo_bolsa>13000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -3275,6 +3332,7 @@ where
 <telefono>96671040</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -3317,6 +3375,7 @@ where
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ USD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -3365,6 +3424,7 @@ where
 <address>538 Clinton St #4</address>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ USD</moneda>
 <maximo_bolsa>2000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda> 
@@ -3425,6 +3485,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ ARS</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -3448,6 +3509,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ BRL</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -3471,6 +3533,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ BRL</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -3494,6 +3557,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ CLP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" kids="s" baby="n"></tienda>
@@ -3516,6 +3580,7 @@ where
 <telefono>3101234567</telefono>
 <dni>8001984561</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ COP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -3570,6 +3635,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ USD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -3594,6 +3660,7 @@ where
 <telefono>696123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -3642,6 +3709,7 @@ where
 <telefono>694123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -3689,6 +3757,7 @@ where
 <telefono>81234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -3734,6 +3803,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" kids="s" baby="n"></tienda>
@@ -3756,6 +3826,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ PEN</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" kids="s" baby="n"></tienda>
@@ -3778,6 +3849,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" kids="n" baby="n"></tienda>
@@ -3800,6 +3872,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -3823,6 +3896,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>VEB %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -3848,6 +3922,7 @@ where
 <telefono>412345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ AUD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="n" nino="s" baby="n"></tienda>
@@ -3894,6 +3969,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -3920,6 +3996,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ AMD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -3944,6 +4021,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ AZN</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -3978,6 +4056,7 @@ where
 <telefono>31234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>BHD %@</moneda>
 <maximo_bolsa>780</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -4028,6 +4107,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>USD %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -4063,6 +4143,7 @@ where
 <telefono>13910998888</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ CNY</moneda>
 <maximo_bolsa>12900</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -4148,6 +4229,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ GEL</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -4231,6 +4313,7 @@ where
 <telefono>9123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ INR</moneda>
 <maximo_bolsa>17000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -4278,6 +4361,7 @@ where
 <telefono>812345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ IDR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -4319,6 +4403,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -4342,6 +4427,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -4365,6 +4451,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ ILS</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" kids="s" baby="n"></tienda>
@@ -4388,6 +4475,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>JPY %@</moneda>
 <maximo_bolsa>195000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -4432,6 +4520,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ CUP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -4455,6 +4544,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ CUP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -4479,6 +4569,7 @@ where
 <telefono>775669933</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ JOD</moneda>
 <maximo_bolsa>999999999</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -4522,6 +4613,7 @@ where
 <dni>34763592N</dni>
 <!-- Reactivar cuando se reactive la compra -->
 <tiendas_online><!-- shop,votf--></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ KZT</moneda>
 <maximo_bolsa>250000</maximo_bolsa>
 <tienda she="s" he="s" touch="s" nina="s" nino="s" baby="n"></tienda>
@@ -4566,6 +4658,7 @@ where
 <telefono>51234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ KWD</moneda>
 <maximo_bolsa>999999999</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -4614,6 +4707,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ KGS</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -4638,6 +4732,7 @@ where
 <telefono>3123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ LBP</moneda>
 <maximo_bolsa>1250000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -4687,6 +4782,7 @@ where
 <telefono>68258508</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>MOP %@</moneda>
 <maximo_bolsa>15000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -4764,6 +4860,7 @@ where
 <telefono>7712345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda> 
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda> 
@@ -4809,6 +4906,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ MNT</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -4833,6 +4931,7 @@ where
 <telefono>91234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ OMR</moneda>
 <maximo_bolsa>500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -4883,6 +4982,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -4916,6 +5016,7 @@ where
 <telefono>9123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ PHP</moneda>
 <maximo_bolsa>21000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -4965,6 +5066,7 @@ where
 <telefono>33123456</telefono>
 <dni>27612405934</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>QAR %@</moneda>
 <maximo_bolsa>3000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -5014,6 +5116,7 @@ where
 <telefono>512345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>SAR %@</moneda>
 <maximo_bolsa>3000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -5114,6 +5217,7 @@ where
 <telefono>01665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ KRW</moneda>
 <maximo_bolsa>2000000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -5155,6 +5259,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5178,6 +5283,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ SYP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5201,6 +5307,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <!--<tiendas_online>shop,votf</tiendas_online>-->
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ TWD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -5235,6 +5342,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ THB</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5262,6 +5370,7 @@ where
 <telefono>5301234567</telefono>
 <dni>10000000146</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ TRL</moneda>
 <maximo_bolsa>3500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -5363,6 +5472,7 @@ where
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ UZS</moneda>
 <maximo_bolsa>999999999999</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -5405,6 +5515,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ USD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -5431,6 +5542,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ DZD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5455,6 +5567,7 @@ where
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5478,6 +5591,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5501,6 +5615,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5526,6 +5641,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5549,6 +5665,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -5573,6 +5690,7 @@ where
 <telefono>1123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EGP</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
@@ -5617,6 +5735,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ EUR</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5640,6 +5759,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -5663,6 +5783,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -5686,6 +5807,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>LYD %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5710,6 +5832,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
@@ -5735,6 +5858,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ MAD</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5758,6 +5882,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5781,6 +5906,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>EUR %@</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
@@ -5836,6 +5962,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
+<checkoutmvp>false</checkoutmvp>
 <moneda>%@ TND</moneda>
 <maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
