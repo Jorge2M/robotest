@@ -450,6 +450,6 @@ public class PageCheckoutWrapper extends PageBase {
 	}
 	
 	private boolean isCheckoutMobile() {
-		return (channel==Channel.mobile || dataTest.getPais().isCheckoutmvp());
+		return (channel==Channel.mobile || dataTest.getPais().isCheckoutMvp());
 	}	
 }

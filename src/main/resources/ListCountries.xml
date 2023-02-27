@@ -235,9 +235,7 @@
 <telefono>672020241</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>S</checkoutmvp>
 <moneda>ALL %@</moneda>
-<maximo_bolsa>999999999999</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea id="SHE"       		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -264,7 +262,7 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-559;</pago>
-<invertida>N</invertida>
+<mvp>S</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -280,9 +278,7 @@
 <telefono>345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -315,7 +311,7 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -331,9 +327,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -384,7 +378,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -398,15 +392,13 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>15000000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" kids="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -423,9 +415,7 @@
 <telefono>465162757</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -468,7 +458,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -482,9 +472,7 @@
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>S</checkoutmvp>
 <moneda>%@ BAM</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -502,9 +490,6 @@
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
-<micuenta>N</micuenta>
-<marcamng>N</marcamng>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-526;</pago>
@@ -514,6 +499,9 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-526;</pago>
+<mvp>S</mvp>
+<micuenta>N</micuenta>
+<marcamng>N</marcamng>
 </pais>
 
 <pais nombre_pais="Bulgaria" codigo="068">
@@ -528,9 +516,7 @@
 <telefono>871234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ BGL</moneda>
-<maximo_bolsa>3000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -560,7 +546,7 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="НАЛОЖЕН ПЛАТЕЖ" testpasarela='s' testpago='s'>&TPV-183;</pago><!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -576,9 +562,7 @@
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ HRK</moneda>
-<maximo_bolsa>8500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -606,7 +590,7 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-514;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -621,9 +605,7 @@
 <telefono>94123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -659,7 +641,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -675,9 +657,7 @@
 <telefono>602123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ CSK</moneda>
-<maximo_bolsa>43000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -714,7 +694,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -729,9 +709,7 @@
 <telefono>20123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ DKK</moneda>
-<maximo_bolsa>11200</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -776,7 +754,7 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-606;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <mobiluser>20123456</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
@@ -793,10 +771,8 @@
 <telefono>5123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <outlet_online>true</outlet_online>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -836,7 +812,7 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-185;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -852,9 +828,7 @@
 <telefono>0401234567</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -902,7 +876,7 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <mobiluser>0401234567</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
@@ -919,9 +893,7 @@
 <telefono>0612345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -958,7 +930,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -975,9 +947,7 @@
 <telefono>017632021234</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1039,7 +1009,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1054,9 +1024,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -1064,7 +1032,7 @@
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1082,9 +1050,7 @@
 <telefono>6951234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1125,7 +1091,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1141,9 +1107,7 @@
 <telefono>201234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ HUF</moneda>
-<maximo_bolsa>375000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1179,7 +1143,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1193,9 +1157,7 @@
 <telefono>6123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp> 
 <moneda>%@ ISK</moneda> 
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda> 
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1228,7 +1190,7 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago> 
-<invertida>N</invertida> 
+<mvp>N</mvp> 
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1243,9 +1205,7 @@
 <telefono>881234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1279,7 +1239,7 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1295,9 +1255,7 @@
 <telefono>3123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1337,7 +1295,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1351,9 +1309,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -1361,7 +1317,7 @@
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1377,9 +1333,7 @@
 <telefono>21234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1412,7 +1366,7 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-186;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1427,9 +1381,7 @@
 <telefono>7916972</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>2300</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1456,7 +1408,7 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-558;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1472,9 +1424,7 @@
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ LTL</moneda>
-<maximo_bolsa>5200</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1510,7 +1460,7 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-184;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1526,9 +1476,7 @@
 <telefono>621345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1565,7 +1513,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1579,9 +1527,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ MKD</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -1589,7 +1535,7 @@
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1604,9 +1550,7 @@
 <telefono>79123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1639,7 +1583,7 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1653,9 +1597,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ MDL</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -1663,7 +1605,7 @@
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1678,9 +1620,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1713,7 +1653,7 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='n' testpago='n' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago> <!-- Desactivada la validación de la pasarela porque no acepta mail asociado a otro país -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1727,9 +1667,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1737,7 +1675,7 @@
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1754,9 +1692,7 @@
 <telefono>0612345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1796,7 +1732,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1811,9 +1747,7 @@
 <telefono>99123456</telefono>
 <dni>10000000146</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -1821,7 +1755,7 @@
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1838,9 +1772,7 @@
 <telefono>40123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ NOK</moneda>
-<maximo_bolsa>12000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1887,7 +1819,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1903,9 +1835,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ PLZ</moneda>
-<maximo_bolsa>5800</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1945,7 +1875,7 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -1961,9 +1891,7 @@
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2000,7 +1928,7 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2016,9 +1944,7 @@
 <telefono>722560300</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ RON</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2048,7 +1974,7 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" 
 	nombre="PLATA PRIN RAMBURS" nombremovil="Plata Prin Ramburs" testpasarela='s' testpago='s'>&TPV-178;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2064,9 +1990,7 @@
 <dni>34763592N</dni>
 <!-- Reactivar cuando se reactive la compra -->
 <tiendas_online><!-- shop,outlet,votf--></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ RUB</moneda>
-<maximo_bolsa>60000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2113,7 +2037,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="tpvvotf" tiendas="votf" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-196;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2127,9 +2051,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>S</checkoutmvp>
 <moneda>%@ DIN</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2156,7 +2078,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-532;</pago>
-<invertida>N</invertida>
+<mvp>S</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2171,9 +2093,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2214,7 +2134,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n" 
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-181;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2229,9 +2149,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <telefono>030123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2271,7 +2189,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-182;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2288,10 +2206,8 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <misdirecciones>true</misdirecciones>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" nina="s" nino="s" baby="s" teen="s" home="s"></tienda>
 <shoponline> 
 <linea    	  id="SHE" 	     shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2349,7 +2265,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <transporte nombre="Estándar"           importe="2,95"     gratuito="30"/>
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
 <transporte nombre="Urgente 24 h"       importe="7,95"     gratuito="99999"/>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <!-- select * from MNGBD.tarjeta_empleados where codigo_carnet = '8000000002266'; -->
@@ -2380,9 +2296,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" nina="s" nino="s" baby="s"></tienda>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2430,7 +2344,7 @@ where
 <transporte nombre="Estándar"           importe="2,95"     gratuito="30"/>
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
 <transporte nombre="Urgente 24 h"       importe="7,95"     gratuito="99999"/>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2446,9 +2360,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" nina="s" nino="s" baby="s"></tienda>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2492,7 +2404,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2508,9 +2420,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1500</maximo_bolsa>
 <tienda she="s" he="s" nina="s" nino="s" baby="s"></tienda>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2558,7 +2468,7 @@ where
 <transporte nombre="Estándar"           importe="2,95"     gratuito="30"/>
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
 <transporte nombre="Urgente 24 h"       importe="7,95"     gratuito="99999"/>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2575,9 +2485,7 @@ where
 <telefono>0765260000</telefono><!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ SEK</moneda>
-<maximo_bolsa>14000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners" contentMovil="menus2"/>
@@ -2622,7 +2530,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <mobiluser>0765-260000</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
@@ -2640,9 +2548,7 @@ where
 <telefono>754111234</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ CHF</moneda>
-<maximo_bolsa>2300</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2699,7 +2605,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <emailuser>jorge.munoz@mango.com</emailuser> <!-- Utilizaremos un email con timestamp para superar el control de fraude de "Rechnung" -->
@@ -2717,9 +2623,7 @@ where
 <dni>34763592N</dni>
 <!-- Reactivar cuando se reactive la compra -->
 <tiendas_online><!-- shop,votf--></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ UAH</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2746,7 +2650,7 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-187;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2762,9 +2666,7 @@ where
 <telefono>07123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>GBP %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2809,7 +2711,7 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-065;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2824,9 +2726,7 @@ where
 <telefono>07123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>GBP %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2862,7 +2762,7 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-607;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2878,9 +2778,7 @@ where
 <telefono>5612345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ AWG</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2898,7 +2796,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <pago 
@@ -2921,9 +2819,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2931,7 +2827,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2946,9 +2842,7 @@ where
 <telefono>6135550165</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ CAN</moneda>
-<maximo_bolsa>2500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2978,7 +2872,7 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-613;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -2992,9 +2886,7 @@ where
 <telefono>50012345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ CRC</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3012,7 +2904,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <pago 
@@ -3035,9 +2927,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ CUP</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -3045,7 +2935,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -3059,9 +2949,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ DOP</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3069,7 +2957,7 @@ where
 <linea id="NINA"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -3083,9 +2971,7 @@ where
 <telefono>71234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ USD</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3115,7 +3001,7 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-604;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -3130,9 +3016,7 @@ where
 <telefono>690123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3150,7 +3034,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <pago 
@@ -3179,9 +3063,7 @@ where
 <telefono>41234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3199,7 +3081,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>S</marcamng>
 <pago 
@@ -3223,9 +3105,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>HNL %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" edits="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3244,7 +3124,7 @@ where
 </linea>
 <linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>S</marcamng>
 <pago 
@@ -3269,9 +3149,7 @@ where
 <telefono>8183202020</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ MXP</moneda>
-<maximo_bolsa>13000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3315,7 +3193,7 @@ where
 	type="Mercadopago" shop="s" outlet="s" 
 	nombre="mercadopago_transferencia" testpasarela='n' testpago='n'>&TPV-222;</pago>
 -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <!-- <emailuser>test_user_722183@testuser.com</emailuser>--> <!-- Es preciso probar con este email para que se pinte el pago 'mercadopago' -->
@@ -3332,9 +3210,7 @@ where
 <telefono>96671040</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3352,7 +3228,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <pago 
@@ -3375,9 +3251,7 @@ where
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ USD</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3395,7 +3269,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>S</marcamng>
 <pago 
@@ -3424,9 +3298,7 @@ where
 <address>538 Clinton St #4</address>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ USD</moneda>
-<maximo_bolsa>2000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda> 
 <shoponline>
 <linea id="SHE"       		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3469,7 +3341,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-197;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -3485,9 +3357,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ ARS</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -3495,7 +3365,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>S</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>S</marcamng>
 </pais>
@@ -3509,16 +3379,14 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ BRL</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>S</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>S</marcamng>
 </pais>
@@ -3533,9 +3401,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ BRL</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -3543,7 +3409,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>S</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>S</marcamng>
 </pais>
@@ -3557,16 +3423,14 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ CLP</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" kids="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>S</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -3580,9 +3444,7 @@ where
 <telefono>3101234567</telefono>
 <dni>8001984561</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ COP</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3600,7 +3462,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>S</marcamng>
 <pago 
@@ -3635,9 +3497,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ USD</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3645,7 +3505,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>S</marcamng>
 </pais>
@@ -3660,9 +3520,7 @@ where
 <telefono>696123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3680,7 +3538,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <pago 
@@ -3709,9 +3567,7 @@ where
 <telefono>694123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3729,7 +3585,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <pago 
@@ -3757,9 +3613,7 @@ where
 <telefono>81234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3777,7 +3631,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>S</marcamng>
 <pago 
@@ -3803,16 +3657,14 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" kids="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>S</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -3826,16 +3678,14 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ PEN</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" kids="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>S</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -3849,16 +3699,14 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" kids="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="KIDS"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>S</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -3872,9 +3720,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3882,7 +3728,7 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>S</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -3896,9 +3742,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>VEB %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -3906,7 +3750,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>S</marcamng>
 </pais>
@@ -3922,9 +3766,7 @@ where
 <telefono>412345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ AUD</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="n" nino="s" baby="n"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3940,7 +3782,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>S</marcamng>
 <pago 
@@ -3969,9 +3811,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -3979,7 +3819,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>S</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -3996,9 +3836,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ AMD</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4006,7 +3844,7 @@ where
 <linea id="NINA"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4021,9 +3859,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ AZN</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4041,7 +3877,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4056,9 +3892,7 @@ where
 <telefono>31234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>BHD %@</moneda>
-<maximo_bolsa>780</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4091,7 +3925,7 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-163;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <!-- <emailuser>bahrein.test@mango.com</emailuser>--> <!-- Es preciso probar con este email si queremos certificar el tema de storec -->
@@ -4107,9 +3941,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>USD %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4127,7 +3959,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4143,9 +3975,7 @@ where
 <telefono>13910998888</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ CNY</moneda>
-<maximo_bolsa>12900</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4215,7 +4045,7 @@ where
 <pago
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-195;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4229,9 +4059,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ GEL</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4249,7 +4077,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4263,9 +4091,7 @@ where
 <telefono>62836675</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>S</checkoutmvp>
 <moneda>%@ HKD</moneda>
-<maximo_bolsa>15000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4299,7 +4125,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>S</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4313,9 +4139,7 @@ where
 <telefono>9123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ INR</moneda>
-<maximo_bolsa>17000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4346,7 +4170,7 @@ where
 <pago 
 	type="offline" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-162;</pago>--> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4361,9 +4185,7 @@ where
 <telefono>812345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ IDR</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4389,7 +4211,7 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-533;</pago>-->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4403,9 +4225,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4413,7 +4233,7 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4427,9 +4247,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4437,7 +4255,7 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4451,16 +4269,14 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ ILS</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" kids="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4475,9 +4291,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>JPY %@</moneda>
-<maximo_bolsa>195000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -4506,7 +4320,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4520,9 +4334,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ CUP</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -4530,7 +4342,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4544,9 +4356,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ CUP</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -4554,7 +4364,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4569,9 +4379,7 @@ where
 <telefono>775669933</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ JOD</moneda>
-<maximo_bolsa>999999999</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4598,7 +4406,7 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-562;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4613,9 +4421,7 @@ where
 <dni>34763592N</dni>
 <!-- Reactivar cuando se reactive la compra -->
 <tiendas_online><!-- shop,votf--></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ KZT</moneda>
-<maximo_bolsa>250000</maximo_bolsa>
 <tienda she="s" he="s" touch="s" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4643,7 +4449,7 @@ where
 <pago 
 	type="Assist" tiendas="shop,outlet"
 	nombre="JCB" testpasarela='s'>&TPV-036;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4658,9 +4464,7 @@ where
 <telefono>51234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ KWD</moneda>
-<maximo_bolsa>999999999</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4693,7 +4497,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4707,9 +4511,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ KGS</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -4717,7 +4519,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4732,9 +4534,7 @@ where
 <telefono>3123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ LBP</moneda>
-<maximo_bolsa>1250000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4768,7 +4568,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4782,9 +4582,7 @@ where
 <telefono>68258508</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>MOP %@</moneda>
-<maximo_bolsa>15000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -4801,7 +4599,7 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-566;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4815,9 +4613,7 @@ where
 <telefono>126946551</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>S</checkoutmvp>
 <moneda>%@ MYR</moneda>
-<maximo_bolsa>4500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4847,7 +4643,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>S</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4860,9 +4656,7 @@ where
 <telefono>7712345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda> 
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda> 
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4892,7 +4686,7 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-614;</pago>
-<invertida>N</invertida> 
+<mvp>N</mvp> 
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <entregadomic>N</entregadomic>
@@ -4906,9 +4700,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ MNT</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4916,7 +4708,7 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -4931,9 +4723,7 @@ where
 <telefono>91234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ OMR</moneda>
-<maximo_bolsa>500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4966,7 +4756,7 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-166;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <!--<emailuser>oman.test.saldo@mango.com</emailuser>--> <!-- Es preciso probar con este email si queremos certificar el tema de storec -->
@@ -4982,9 +4772,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5002,7 +4790,7 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5016,9 +4804,7 @@ where
 <telefono>9123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ PHP</moneda>
-<maximo_bolsa>21000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5051,7 +4837,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>S</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5066,9 +4852,7 @@ where
 <telefono>33123456</telefono>
 <dni>27612405934</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>QAR %@</moneda>
-<maximo_bolsa>3000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5101,7 +4885,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago> 
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5116,9 +4900,7 @@ where
 <telefono>512345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>SAR %@</moneda>
-<maximo_bolsa>3000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5151,7 +4933,7 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-161;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 <!-- <emailuser>arabia.test@mango.com</emailuser>--> <!-- Es preciso probar con este email si queremos certificar el tema de storec -->
@@ -5167,9 +4949,7 @@ where
 <telefono>81234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>S</checkoutmvp>
 <moneda>%@ SGD</moneda>
-<maximo_bolsa>400</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5199,7 +4979,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>S</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5217,9 +4997,7 @@ where
 <telefono>01665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ KRW</moneda>
-<maximo_bolsa>2000000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5245,7 +5023,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5259,9 +5037,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -5269,7 +5045,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5283,9 +5059,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ SYP</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -5293,7 +5067,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5307,9 +5081,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <!--<tiendas_online>shop,votf</tiendas_online>-->
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ TWD</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -5327,7 +5099,7 @@ where
 	<sublinea id="TEEN_NINO" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5342,9 +5114,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ THB</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5355,7 +5125,7 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="2c2p" namefilter="Tailandia_Contra_Reembolso" testpasarela='s' testpago='s'>&TPV-148;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5370,9 +5140,7 @@ where
 <telefono>5301234567</telefono>
 <dni>10000000146</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ TRL</moneda>
-<maximo_bolsa>3500</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5405,7 +5173,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-198;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5420,9 +5188,7 @@ where
 <telefono>0501234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>S</checkoutmvp>
 <moneda>%@ AED</moneda>
-<maximo_bolsa>990</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5458,7 +5224,7 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5472,9 +5238,7 @@ where
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ UZS</moneda>
-<maximo_bolsa>999999999999</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5501,7 +5265,7 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-560;</pago>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5515,9 +5279,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ USD</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5525,7 +5287,7 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5542,9 +5304,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ DZD</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -5552,7 +5312,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5567,9 +5327,7 @@ where
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5577,7 +5335,7 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5591,9 +5349,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -5601,7 +5357,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5615,9 +5371,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -5625,7 +5379,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5641,9 +5395,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -5651,7 +5403,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5665,9 +5417,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5675,7 +5425,7 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5690,9 +5440,7 @@ where
 <telefono>1123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EGP</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5720,7 +5468,7 @@ where
 <pago 
 	type="externa" tiendas="shop,outlet"
 	nombre="cashu" testpasarela='s' testpago='s'>&TPV-550;</pago>-->
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5735,9 +5483,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ EUR</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -5745,7 +5491,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5759,9 +5505,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5769,7 +5513,7 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5783,9 +5527,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5793,7 +5535,7 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5807,9 +5549,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>LYD %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5817,7 +5557,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5832,9 +5572,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5842,7 +5580,7 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5858,9 +5596,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ MAD</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -5868,7 +5604,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5882,9 +5618,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -5892,7 +5626,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5906,9 +5640,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>EUR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -5916,7 +5648,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5930,9 +5662,7 @@ where
 <telefono>665015122</telefono>
 <dni>9007263637083</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<checkoutmvp>S</checkoutmvp>
 <moneda>ZAR %@</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n" edits="s"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5946,7 +5676,7 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-548;</pago>
-<invertida>S</invertida>
+<mvp>S</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>
@@ -5962,9 +5692,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<checkoutmvp>N</checkoutmvp>
 <moneda>%@ TND</moneda>
-<maximo_bolsa>1000</maximo_bolsa>
 <tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
@@ -5972,7 +5700,7 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<invertida>N</invertida>
+<mvp>N</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>

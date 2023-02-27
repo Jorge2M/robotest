@@ -555,6 +555,6 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	private boolean isCheckoutMobile() {
-		return (channel==Channel.mobile || dataTest.getPais().isCheckoutmvp());
+		return (channel==Channel.mobile || dataTest.getPais().isCheckoutMvp());
 	}		
 }

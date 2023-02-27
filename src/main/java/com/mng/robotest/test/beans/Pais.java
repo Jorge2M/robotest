@@ -39,10 +39,7 @@ public class Pais implements Serializable {
 	String dni;
 	String tiendas_online;
 	String misdirecciones;
-	String checkoutmvp;
 	String moneda;
-	String maximo_bolsa;
-	String control_net;
 	
 	Tienda tienda = new Tienda();
 	Shoponline shoponline = new Shoponline();
@@ -50,11 +47,11 @@ public class Pais implements Serializable {
 	@XmlElement(name="pago") 
 	List<Pago> listPagos = new LinkedList<>();
 	
-	String invertida;
 	String marcamng;
 	String emailuser;
 	String passuser;
 	String mobiluser;
+	String mvp;
 	String micuenta;
 	
 	@XmlElement(name="metodopago") 
@@ -189,6 +186,20 @@ public class Pais implements Serializable {
 		}
 		return listApps;
 	}   
+
+	public String getmvp() {
+		return this.mvp;
+	}
+
+	@XmlElement(name="mvp")
+	public void setmvp(String mvp) {
+		this.mvp = mvp;
+	}
+	
+	public boolean isCheckoutMvp() {
+		return (getmvp()!=null && 
+				"S".compareTo(getmvp())==0);
+	}	
 	
 	public String getMoneda() {
 		return this.moneda;
@@ -199,24 +210,6 @@ public class Pais implements Serializable {
 		this.moneda = moneda;
 	}
 
-	public String getMaximo_bolsa() {
-		return this.maximo_bolsa;
-	}
-
-	@XmlElement
-	public void setMaximo_bolsa(String maximo_bolsa) {
-		this.maximo_bolsa = maximo_bolsa;
-	} 
-
-	public String getControl_net() {
-		return this.control_net;
-	}
-	
-	@XmlElement
-	public void setControl_net(String control_net) {
-		this.control_net = control_net;
-	}		
-	
 	public boolean isMisdirecciones(AppEcom app) {
 		if (app!=AppEcom.shop) {
 			return false;
@@ -232,20 +225,6 @@ public class Pais implements Serializable {
 	@XmlElement
 	public void setMisdirecciones(String misdirecciones) {
 		this.misdirecciones = misdirecciones;
-	}	
-	
-	public boolean isCheckoutmvp() {
-		return (getCheckoutmvp()!=null && 
-				"S".compareTo(getCheckoutmvp())==0);
-	}	
-	
-	public String getCheckoutmvp() {
-		return this.checkoutmvp;
-	}
-
-	@XmlElement(name="checkoutmvp")
-	public void setCheckoutmvp(String checkoutmvp) {
-		this.checkoutmvp = checkoutmvp;
 	}	
 	
 	public Direccharnolatinos getDireccharnolatinos() {
@@ -277,15 +256,6 @@ public class Pais implements Serializable {
 	
 	public List<Pago> getListPagos() {
 		return this.listPagos;
-	}
-	
-	public String getInvertida() {
-		return this.invertida;
-	}
-
-	@XmlElement
-	public void setInvertida(String invertida) {
-		this.invertida = invertida;
 	}
 	
 	public String getMarcamng() {
@@ -493,8 +463,8 @@ public class Pais implements Serializable {
 	@Override
 	public String toString() {
 		return "Pais [nombre_pais="+ this.nombre_pais + ", codigo_pais=" + this.codigo_pais + ", listIdiomas=" + this.listIdiomas + ", tarifa=" + this.tarifa + ", codpos=" + this.codpos + ", telefono=" + this.telefono + ", dni=" + this.dni +
-				", shop_online=" + ", moneda=" + this.moneda + ", maximo_bolsa=" + this.maximo_bolsa + 
-				", " + this.tienda + ", " + this.shoponline + ", invertida=" + this.invertida + ", marmamng=" + this.marcamng + ", micuenta=" + this.micuenta + 
+				", shop_online=" + ", moneda=" + this.moneda + 
+				", " + this.tienda + ", " + this.shoponline + ", marmamng=" + this.marcamng + ", micuenta=" + this.micuenta + 
 				", toString()=" + super.toString() + "]";
 	}
 }
