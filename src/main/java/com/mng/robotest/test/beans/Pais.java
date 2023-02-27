@@ -236,7 +236,7 @@ public class Pais implements Serializable {
 	
 	public boolean isCheckoutmvp() {
 		return (getCheckoutmvp()!=null && 
-				"true".compareTo(getCheckoutmvp())==0);
+				"S".compareTo(getCheckoutmvp())==0);
 	}	
 	
 	public String getCheckoutmvp() {
