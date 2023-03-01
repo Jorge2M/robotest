@@ -13,7 +13,7 @@ public class Login {
 
 	@Test (
 		groups={"Login", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
-		description="[Usuario registrado] Verificar inicio sesión")
+		description="Verificar inicio sesión usuario credenciales correctas")
 	public void LOG002_IniciarSesion_OK() throws Exception {
 		new Log002().execute();
 	}

@@ -34,7 +34,7 @@ public class Registro implements Serializable {
 	
 	@Test (
 		groups={"Registro", "Canal:all_App:shop", "SupportsFactoryCountrys"},
-		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
+		description="Registro nuevo de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG001_NewRegisterOK() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {
@@ -45,7 +45,7 @@ public class Registro implements Serializable {
 	
 	@Test (
 		groups={"Registro", "Canal:all_App:outlet"},
-		description="Registro con errores en la introducción de los datos")
+		description="Registro antiguo con errores en la introducción de los datos")
 	public void REG002_RegistroNOK() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {
@@ -56,7 +56,7 @@ public class Registro implements Serializable {
 
 	@Test (
 		groups={"Registro", "Canal:all_App:outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
-		description="Alta/Registro de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
+		description="Registro antiguo de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG003_RegistroOK_publi() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {
@@ -67,7 +67,7 @@ public class Registro implements Serializable {
 	
 	@Test (
 		groups={"Registro", "Canal:desktop_App:outlet"}, alwaysRun=true, 
-		description="Alta/Registro de un usuario (sin seleccionar el link de publicidad)")
+		description="Registro antiguo de un usuario (sin seleccionar el link de publicidad)")
 	public void REG004_RegistroOK_NoPubli() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {
@@ -78,7 +78,7 @@ public class Registro implements Serializable {
 	
 	@Test (
 		groups={"Registro", "Canal:all_App:shop"},
-		description="Alta/Registro nuevo de un usuario en Corea (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
+		description="Registro nuevo de un usuario en Corea (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG005_NewRegisterCorea() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {

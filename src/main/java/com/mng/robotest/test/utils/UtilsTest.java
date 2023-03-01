@@ -142,7 +142,6 @@ public class UtilsTest {
 	public static List<Article> getArticlesForTest(
 			Pais pais, AppEcom app, int maxArticlesAwayVale, WebDriver driver) throws Exception {
 		
-		
 		GetterProducts getterProducts = new GetterProducts
 				.Builder(pais.getCodigo_alf(), app, driver)
 				.filter(FilterType.STOCK)
@@ -165,9 +164,10 @@ public class UtilsTest {
 		String almacen1 = garment1.getAlmacenFirstArticle();
 		GarmentCatalog garment2 = null;
 		for (GarmentCatalog garment : listGarments) {
+			//TODO montar una función que borre los artículos de otros almacenes
 			garment.removeArticlesWithoutMaxStock();
 			String almacen = garment.getAlmacenFirstArticle(); 
-			if (almacen.compareTo(almacen1)!=0) {
+			if (almacen!=null && almacen.compareTo(almacen1)!=0) {
 				garment2 = garment;
 				break;
 			}

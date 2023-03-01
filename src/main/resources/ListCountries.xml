@@ -974,7 +974,7 @@
 	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipoenviooutlet='PACKSTATION' numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-549;</pago>
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipoenviooutlet='PACKSTATION' tipoenvioshop='PACKSTATION' numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-549;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-515;</pago>
@@ -4170,7 +4170,7 @@ where
 <pago 
 	type="offline" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-162;</pago>--> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<mvp>N</mvp>
+<mvp>S</mvp>
 <micuenta>N</micuenta>
 <marcamng>N</marcamng>
 </pais>

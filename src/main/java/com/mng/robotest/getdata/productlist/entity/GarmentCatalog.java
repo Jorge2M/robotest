@@ -267,11 +267,13 @@ public class GarmentCatalog {
 
 	public String getAlmacenFirstArticle() {
 		if (canonicalProduct!=null) {
-			return canonicalProduct
-						.getColors().get(0)
-						.getSizes().get(0)
-						.getStockDetails().get(0)
-						.getWarehouse();
+			var stockDetails = canonicalProduct
+					.getColors().get(0)
+					.getSizes().get(0)
+					.getStockDetails(); 
+			if (stockDetails!=null) {
+				return stockDetails.get(0).getWarehouse();
+			}
 		}
 		return null;
 	}

@@ -21,7 +21,7 @@ public class Loyalty {
 
 	@Test (
 		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
-		description="Conseguir algo por likes")
+		description="Compra entrada cine a cambio de Likes")
 	public void LOY003_Exhange_Compra_Entrada() throws Exception {
 		new Loy003().execute();
 	}
