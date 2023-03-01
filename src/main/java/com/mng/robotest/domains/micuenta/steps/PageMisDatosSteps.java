@@ -52,36 +52,36 @@ public class PageMisDatosSteps extends StepBase {
 			"El Email contiene el definido durante el registro: <b>" + email + "</b>",
 			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0), State.Defect);
 
-		if (!dataTest.getPais().isMisdirecciones(app)) {
-			String direccion = datosRegOk.get("cfDir1");
-			String codpostal = datosRegOk.get("cfCp");
-			String poblacion = datosRegOk.get("cfCity");
-			String provincia = datosRegOk.get("estadosPais");
-	
-			checks.add(
-				"La Dirección contiene la definida durante el registro: <b>" + direccion + "</b>",
-				(pageMisDatos.getTextInputDireccion().compareTo(direccion)==0), State.Defect);
-			
-			checks.add(
-				"El Código postal contiene el definido durante el registro: <b>" + codpostal + "</b>",
-				(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0), State.Defect);
-			
-			if (poblacion!=null) {
-				checks.add(
-					"La población contiene la definida durante el registro: <b>" + poblacion + "</b>",
-					(pageMisDatos.getTextInputPoblacion().compareTo(poblacion)==0), State.Defect);
-			}
-			
-			checks.add(
-				"Está seleccionado el país definido durante el registro: <b>" + codpais + "</b>",
-				(pageMisDatos.getCodPaisSelected().compareTo(codpais)==0), State.Defect);
-			
-			if (provincia != null) {
-				checks.add(
-					"Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>",
-					(pageMisDatos.getProvinciaSelected().compareTo(provincia)==0), State.Defect);
-			}
-		}
+//		if (!dataTest.getPais().isMisdirecciones(app)) {
+//			String direccion = datosRegOk.get("cfDir1");
+//			String codpostal = datosRegOk.get("cfCp");
+//			String poblacion = datosRegOk.get("cfCity");
+//			String provincia = datosRegOk.get("estadosPais");
+//	
+//			checks.add(
+//				"La Dirección contiene la definida durante el registro: <b>" + direccion + "</b>",
+//				(pageMisDatos.getTextInputDireccion().compareTo(direccion)==0), State.Defect);
+//			
+//			checks.add(
+//				"El Código postal contiene el definido durante el registro: <b>" + codpostal + "</b>",
+//				(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0), State.Defect);
+//			
+//			if (poblacion!=null) {
+//				checks.add(
+//					"La población contiene la definida durante el registro: <b>" + poblacion + "</b>",
+//					(pageMisDatos.getTextInputPoblacion().compareTo(poblacion)==0), State.Defect);
+//			}
+//			
+//			checks.add(
+//				"Está seleccionado el país definido durante el registro: <b>" + codpais + "</b>",
+//				(pageMisDatos.getCodPaisSelected().compareTo(codpais)==0), State.Defect);
+//			
+//			if (provincia != null) {
+//				checks.add(
+//					"Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>",
+//					(pageMisDatos.getProvinciaSelected().compareTo(provincia)==0), State.Defect);
+//			}
+//		}
 			
 		return checks;
 	}

@@ -38,7 +38,6 @@ public class Pais implements Serializable {
 	String telefono;
 	String dni;
 	String tiendas_online;
-	String misdirecciones;
 	String moneda;
 	
 	Tienda tienda = new Tienda();
@@ -47,7 +46,7 @@ public class Pais implements Serializable {
 	@XmlElement(name="pago") 
 	List<Pago> listPagos = new LinkedList<>();
 	
-	String marcamng;
+	String multidireccion;
 	String emailuser;
 	String passuser;
 	String mobiluser;
@@ -214,19 +213,10 @@ public class Pais implements Serializable {
 		if (app!=AppEcom.shop) {
 			return false;
 		}
-		return (getMisdirecciones()!=null && 
-				"true".compareTo(getMisdirecciones())==0);
+		return (getMultidireccion()!=null && 
+				"S".compareTo(getMultidireccion())==0);
 	}
 
-	public String getMisdirecciones() {
-		return this.misdirecciones;
-	}
-	
-	@XmlElement
-	public void setMisdirecciones(String misdirecciones) {
-		this.misdirecciones = misdirecciones;
-	}	
-	
 	public Direccharnolatinos getDireccharnolatinos() {
 		return this.direccharnolatinos;
 	}
@@ -258,13 +248,13 @@ public class Pais implements Serializable {
 		return this.listPagos;
 	}
 	
-	public String getMarcamng() {
-		return this.marcamng;
+	public String getMultidireccion() {
+		return this.multidireccion;
 	}
 
 	@XmlElement
-	public void setMarcamng(String marcamng) {
-		this.marcamng = marcamng;
+	public void setMultidireccion(String multidireccion) {
+		this.multidireccion = multidireccion;
 	}
 	
 	public String getEmailuser() {
@@ -464,7 +454,7 @@ public class Pais implements Serializable {
 	public String toString() {
 		return "Pais [nombre_pais="+ this.nombre_pais + ", codigo_pais=" + this.codigo_pais + ", listIdiomas=" + this.listIdiomas + ", tarifa=" + this.tarifa + ", codpos=" + this.codpos + ", telefono=" + this.telefono + ", dni=" + this.dni +
 				", shop_online=" + ", moneda=" + this.moneda + 
-				", " + this.tienda + ", " + this.shoponline + ", marmamng=" + this.marcamng + ", micuenta=" + this.micuenta + 
+				", " + this.tienda + ", " + this.shoponline + ", micuenta=" + this.micuenta + 
 				", toString()=" + super.toString() + "]";
 	}
 }
