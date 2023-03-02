@@ -34,6 +34,15 @@ public class GarmentCatalog {
 		this.garmentId = garmentId;
 	}
 
+	public boolean isAnyArticleWithStock() {
+		for (Color color : colors) {
+			int stock = color.getSizeWithMoreStock().getStock();
+			if (stock>0) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	private Article getArticleWithMoreStock() {
 		Article articulo = new Article();

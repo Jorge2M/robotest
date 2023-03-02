@@ -164,10 +164,12 @@ public class UtilsTest {
 		String almacen1 = garment1.getAlmacenFirstArticle();
 		GarmentCatalog garment2 = null;
 		for (GarmentCatalog garment : listGarments) {
-			garment.removeArticlesAlmacen(almacen1);
-			if (!garment.getColors().isEmpty()) {
-				garment2 = garment;
-				break;
+			if (garment!=garment1) {
+				garment.removeArticlesAlmacen(almacen1);
+				if (!garment.getColors().isEmpty() && garment.isAnyArticleWithStock()) {
+					garment2 = garment;
+					break;
+				}
 			}
 		}
 		
