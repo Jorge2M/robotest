@@ -1,5 +1,6 @@
 package com.mng.robotest.getdata.productlist.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -223,6 +224,52 @@ public class GarmentCatalog {
 	}
 	public void setCanonicalProduct(EntityProduct canonicalProduct) {
 		this.canonicalProduct = canonicalProduct;
+		
+	}
+	
+	public void removeArticlesAlmacen(String almacen) {
+		var articlesAlmacen = getArticlesFromAlmacen(almacen);
+		if (articlesAlmacen.isEmpty()) {
+			return;
+		}
+		var listColorsNew = new ArrayList<Color>();
+		for (Color color : getColors()) {
+			var listSizesNew = new ArrayList<Size>();
+			for (Size size : color.getSizes()) {
+				if (!articleInList(color, size, articlesAlmacen)) {
+					listSizesNew.add(size); 
+				}
+			}
+			if (!listSizesNew.isEmpty()) {
+				color.setSizes(listSizesNew);
+				listColorsNew.add(color);
+			}
+		}
+		colors = listColorsNew;
+	}
+	
+	private boolean articleInList(
+			Color color, Size size, List<Pair<EntityColor, EntitySize>> listArticles) {
+		return listArticles.stream()
+			.filter(i -> i.getLeft().getId().compareTo(color.getId())==0)
+			.anyMatch(i -> i.getRight().getId().compareTo(String.valueOf(size.getId()))==0);
+	}
+	
+	private List<Pair<EntityColor, EntitySize>> getArticlesFromAlmacen(String almacen) {
+		var listArticles = new ArrayList<Pair<EntityColor, EntitySize>>();
+		if (canonicalProduct==null) {
+			return listArticles;
+		}
+		for (EntityColor color : canonicalProduct.getColors()) {
+			for (EntitySize size : color.getSizes()) {
+				var stockDetails = size.getStockDetails();
+				if (stockDetails!=null && 
+					almacen.compareTo(stockDetails.get(0).getWarehouse())==0) { 
+					listArticles.add(Pair.of(color, size));
+				}
+			}
+		}
+		return listArticles;
 	}
 	
 	public void removeArticlesWithoutMaxStock() {

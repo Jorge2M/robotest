@@ -164,10 +164,8 @@ public class UtilsTest {
 		String almacen1 = garment1.getAlmacenFirstArticle();
 		GarmentCatalog garment2 = null;
 		for (GarmentCatalog garment : listGarments) {
-			//TODO montar una función que borre los artículos de otros almacenes
-			garment.removeArticlesWithoutMaxStock();
-			String almacen = garment.getAlmacenFirstArticle(); 
-			if (almacen!=null && almacen.compareTo(almacen1)!=0) {
+			garment.removeArticlesAlmacen(almacen1);
+			if (!garment.getColors().isEmpty()) {
 				garment2 = garment;
 				break;
 			}

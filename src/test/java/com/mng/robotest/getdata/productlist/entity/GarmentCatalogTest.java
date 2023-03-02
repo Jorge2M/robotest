@@ -2,13 +2,16 @@ package com.mng.robotest.getdata.productlist.entity;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import com.mng.robotest.getdata.canonicalproduct.entity.EntityColor;
 import com.mng.robotest.getdata.canonicalproduct.entity.EntityProduct;
 import com.mng.robotest.getdata.canonicalproduct.entity.EntitySize;
+import com.mng.robotest.getdata.canonicalproduct.entity.EntityStockDetails;
 
 class GarmentCatalogTest extends GarmentCatalog {
 
@@ -21,6 +24,22 @@ class GarmentCatalogTest extends GarmentCatalog {
 		
 		assertEquals(1, garmentMock.getColors().size());
 		assertEquals(1, color.getSizes().size());
+		assertEquals("Blanco", color.getId());
+		assertEquals(19, size.getId());
+	}
+	
+	@Test
+	void testRemoveArticlesAlmacen() {
+		GarmentCatalog garmentMock = getMockGarmentCatalog();
+		garmentMock.removeArticlesAlmacen("001");
+		
+		var colors = garmentMock.getColors();
+		Color color = colors.get(0);
+		var sizes = color.getSizes();
+		Size size = sizes.get(0);
+		
+		assertEquals(1, colors.size());
+		assertEquals(1, sizes.size());
 		assertEquals("Blanco", color.getId());
 		assertEquals(19, size.getId());
 	}
@@ -61,22 +80,26 @@ class GarmentCatalogTest extends GarmentCatalog {
 	private EntityProduct getMockCanonical() {
 		EntityProduct product = new EntityProduct();
 		product.setId("12345678");
-		
+
 		EntitySize size1 = new EntitySize();
 		size1.setId("19");
+		size1.setStockDetails(getMockStockDetails("001"));
 		
 		EntitySize size2 = new EntitySize();
 		size2.setId("20");
-		
-		EntitySize size3 = new EntitySize();
-		size3.setId("19");
-		
-		EntitySize size4 = new EntitySize();
-		size4.setId("18");
+		size2.setStockDetails(getMockStockDetails("001"));
 		
 		EntityColor color1 = new EntityColor();
 		color1.setId("Rojo");
 		color1.setSizes(Arrays.asList(size1, size2));
+		
+		EntitySize size3 = new EntitySize();
+		size3.setId("19");
+		size3.setStockDetails(getMockStockDetails("004"));
+		
+		EntitySize size4 = new EntitySize();
+		size4.setId("18");
+		size4.setStockDetails(getMockStockDetails("001"));
 		
 		EntityColor color2 = new EntityColor();
 		color2.setId("Blanco");
@@ -86,5 +109,13 @@ class GarmentCatalogTest extends GarmentCatalog {
 		
 		return product;
 	}
+	
+	private List<EntityStockDetails> getMockStockDetails(String almacen) {
+		var stockDetails = new ArrayList<EntityStockDetails>();
+		stockDetails.add(new EntityStockDetails());
+		stockDetails.get(0).setWarehouse(almacen);
+		return stockDetails;
+	}
+
 	
 }
