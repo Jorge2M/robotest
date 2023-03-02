@@ -60,9 +60,10 @@ public class Com011 extends TestBase {
 		new PageResultPagoSteps().selectMisCompras();
 		
 		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps();
-		pageMisComprasSteps.validateIsCompraOnline(codigoPedido);
-		pageMisComprasSteps.selectCompra(codigoPedido);
-		new ModalDetalleCompraSteps().checkIsDataVisible();
+		if (pageMisComprasSteps.validateIsCompraOnline(codigoPedido)) {
+			pageMisComprasSteps.selectCompra(codigoPedido);
+			new ModalDetalleCompraSteps().checkIsDataVisible();
+		}
 	}    
 	
 	private void checkPedidos(DataPago dataPago) throws Exception {

@@ -19,7 +19,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageMisCompras extends PageBase {
 
-	public enum TypeTicket {Tienda, Online}
+	public enum TypeTicket {Tienda, Online, Undefined}
 	private List<Ticket> listTickets = null;
 	
 	private static final String XPATH_CAPA_CONTENEDORA_DESKTOP = "//micro-frontend[@id='myPurchasesDesktop']";
@@ -142,6 +142,9 @@ public class PageMisCompras extends PageBase {
 	
 	private TypeTicket getTypeTicketPage(WebElement boxDataTicket) {
 		String idMangoTicket = getIdTicketPage(boxDataTicket);
+		if ("".compareTo(idMangoTicket)==0) {
+			return TypeTicket.Undefined;
+		}
 		if (StringUtils.isNumeric(idMangoTicket)) {
 			return TypeTicket.Tienda;
 		}
@@ -149,7 +152,11 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private String getIdTicketPage(WebElement boxDataTicket) {
-		String lineaId = boxDataTicket.findElement(By.xpath(XPATH_ID_RELATIVE_TICKET)).getText();
+		By byIdTicket = By.xpath(XPATH_ID_RELATIVE_TICKET);
+		if (!state(State.Visible, boxDataTicket).by(byIdTicket).check()) {
+			return "";
+		}
+		String lineaId = getElement(boxDataTicket, byIdTicket).getText();
 		Pattern pattern = Pattern.compile("_*: (.*)"); boxDataTicket.getAttribute("innerHTML");
 		Matcher matcher = pattern.matcher(lineaId);
 		if (matcher.find()) {
@@ -163,6 +170,9 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
+		if (state(State.Visible, XPATH_ITEMS_RELATIVE_TICKET).check()) {
+			return 0;
+		}
 		String textLinea = "0" + getElement(boxDataTicket, XPATH_ITEMS_RELATIVE_TICKET).getText();
 		return Integer.valueOf(textLinea.replaceAll("[^0-9]", ""));
 	}

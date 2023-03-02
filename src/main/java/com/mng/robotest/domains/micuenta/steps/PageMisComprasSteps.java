@@ -3,7 +3,6 @@ package com.mng.robotest.domains.micuenta.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
-import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -38,30 +37,33 @@ public class PageMisComprasSteps extends StepBase {
 	  	return checks;
 	}
 	
-	public ChecksTM validateIsCompraOnline(String codPedido) {
+	public boolean validateIsCompraOnline(String codPedido) {
 		return validateIsCompraOnline(codPedido, false);
 	}
 	
-	@Validation
-	public ChecksTM validateIsCompraOnline(String codPedido, boolean isChequeRegalo) {
-		ChecksTM checks = ChecksTM.getNew();
-		State stateVal = State.Warn;
-		StoreType store = StoreType.Evidences;
+	public boolean validateIsCompraOnline(String codPedido, boolean isChequeRegalo) {
 		if (isChequeRegalo) {
-			stateVal = State.Info;
-			store = StoreType.None;
+			return validateIsCompraOnlineChequeRegalo(codPedido, 2);
 		}
-		
-		int seconds = 2;
-		checks.add(
-		    Check.make(
-			    "Es visible la compra " + TypeTicket.Online + 
-			    " asociada al pedido <b>" + codPedido + "</b> (la experamos " + seconds + ")",
-			    pageMisCompras.isTicketOnline(codPedido, seconds), stateVal)
-		    .store(store).build());
-		
-		return checks;
+		return validateIsCompraOnlinePrendas(codPedido, 2);
 	}
+	
+	@Validation (
+		description=
+			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> (la esperamos #{seconds}) segundos",
+		level=State.Defect)
+	private boolean validateIsCompraOnlinePrendas(String codPedido, int seconds) {
+		return pageMisCompras.isTicketOnline(codPedido, seconds);
+	}
+	
+	@Validation (
+		description=
+			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> (la esperamos #{seconds}) segundos",
+		level=State.Info,
+		store=StoreType.None)
+	private boolean validateIsCompraOnlineChequeRegalo(String codPedido, int seconds) {
+		return pageMisCompras.isTicketOnline(codPedido, seconds);
+	}	
 	
 	@Validation (
 		description="Es visible una compra de tipo #{typeTicket} (la esperamos hasta #{seconds} segundos)",
