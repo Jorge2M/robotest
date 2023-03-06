@@ -57,12 +57,13 @@ public class Loy001 extends TestBase {
         dataPago.setPago(dataTest.getPais().getPago("MASTERCARD"));
         new CompraSteps().startPayment(dataPago, true);
         new PageResultPagoSteps().validateIsPageOk(dataPago);
-        return dataPago.getDataPedido().getIdCompra();
+        return dataPago.getDataPedido().getCodpedido();
     }
     
     private void checkLoyaltyPointsGenerated(String idPedido) {
-    	int points = new PageResultPagoSteps().checkLoyaltyPointsGenerated().getNumberPoints();
-		LoyaltyCommons.clickMangoLikesYou();
+    	var pageResultPagoSteps = new PageResultPagoSteps();
+    	int points = pageResultPagoSteps.checkLoyaltyPointsGenerated().getNumberPoints();
+		pageResultPagoSteps.clickLinkDescuentosExperiencias();
 		new PageMangoLikesYouSteps().click(TabLink.HISTORIAL);
 		new PageHistorialLikesSteps().checkPointsForEnvioTiendaPayment(points, idPedido);
     }

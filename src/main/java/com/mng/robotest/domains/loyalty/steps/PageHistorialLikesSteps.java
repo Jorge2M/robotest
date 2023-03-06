@@ -25,12 +25,14 @@ public class PageHistorialLikesSteps extends StepBase {
 			"El primer movimiento es de <b>" + points + "</b> puntos",
 			!mov1Opt.isEmpty() && mov1Opt.get().getPoints()==points, State.Defect);
 			
-		//-> sólo faltaría el control del código de pedido
+		checks.add(
+			"El primer movimiento hace referencia al código de pedido <b>" + idPedido + "</b>",
+			!mov1Opt.isEmpty() && mov1Opt.get().getConcepto().contains(idPedido), State.Defect);
 		
 		var mov2Opt = pageHistorialLikes.getLoyaltyMovement(2);
 		checks.add(
 			"El segundo movimiento es de <b>10</b> puntos",
-			!mov2Opt.isEmpty() && mov1Opt.get().getPoints()==10, State.Defect);
+			!mov2Opt.isEmpty() && mov2Opt.get().getPoints()==10, State.Defect);
 		
 		return checks;
 	}

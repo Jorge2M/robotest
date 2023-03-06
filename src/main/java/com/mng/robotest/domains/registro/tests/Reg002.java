@@ -68,7 +68,7 @@ public class Reg002 extends TestBase {
 		dataToSend.add(DataRegType.NAME, "Jorge", true);
 		dataToSend.add(DataRegType.APELLIDOS, "Muñoz Martínez", true);
 		
-		Secret secret = GetterSecrets.factory().getCredentials(SecretType.SHOP_JORGE_USER);
+		Secret secret = GetterSecrets.factory().getCredentials(SecretType.SHOP_PERFORMANCE_USER);
 		dataToSend.add(DataRegType.EMAIL, secret.getUser(), true);
 		dataToSend.add(DataRegType.PASSWORD, secret.getPassword(), true);
 		

@@ -4,6 +4,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import java.util.Optional;
 
+import org.openqa.selenium.WebElement;
+
 import com.mng.robotest.domains.loyalty.beans.LoyaltyMovement;
 import com.mng.robotest.domains.transversal.PageBase;
 
@@ -42,7 +44,11 @@ public class PageHistorialLikes extends PageBase {
 		return getElement(getXPathConcepto(position)).getText();
 	}
 	private int getPoints(int position) {
-		return Integer.valueOf(getElement(getXPathPoints(position)).getText());
+		WebElement pointsElem = getElement(getXPathPoints(position));
+		if (pointsElem!=null) {
+			return Integer.valueOf(pointsElem.getText().replaceAll("[^\\d.,]", "")); 
+		}
+		return 0;
 	}
 
 }

@@ -20,8 +20,6 @@ public class GetterHardCodeSecrets extends GetterSecretsFromInputStream {
 			"      <password_standard>mango457</password_standard>" + lineJump +
 			"      <user_robot>robot.test@mango.com</user_robot>" + lineJump +
 			"      <password_robot>sirjorge75</password_robot>" + lineJump +
-			"      <user_jorge>jorge.munoz.sge@mango.com</user_jorge>" + lineJump +
-			"      <password_jorge>sirjorge75</password_jorge>" + lineJump +
 			"      <user_francia>francia.test@mango.com</user_francia>" + lineJump +
 			"      <password_francia>mango123</password_francia>" + lineJump +
 			"      <user_francia_votf>francia.test@mango.com</user_francia_votf>" + lineJump +

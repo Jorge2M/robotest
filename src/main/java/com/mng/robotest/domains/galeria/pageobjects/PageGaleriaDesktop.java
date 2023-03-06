@@ -508,9 +508,9 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception {
 		//Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
 		waitLoadPage();
-		if (!isVisibleArticleCapaTallasUntil(posArticulo, 1)) {
+		//if (!isVisibleArticleCapaTallasUntil(posArticulo, 1)) {
 			showTallasArticulo(posArticulo);
-		}
+		//}
 		
 		String xpathTalla = secTallas.getXPathArticleTallaAvailable(posArticulo, posTalla);
 		if (state(State.Visible, xpathTalla).check()) {

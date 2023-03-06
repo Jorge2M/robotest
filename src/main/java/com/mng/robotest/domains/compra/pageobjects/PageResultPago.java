@@ -18,6 +18,7 @@ public class PageResultPago extends PageBase {
 	public static final String XPATH_BUTTON_MIS_COMPRAS = "//button[@data-testid[contains(.,'goToMyPurchases')]]";
 	public static final String XPATH_MICROFRONTEND_LOYALTY = "//micro-frontend[@name='purchaseConfirmation']";
 	public static final String XPATH_BLOCK_NEW_LOYALTY_POINTS = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
+	public static final String XPATH_LINK_DESCUENTOS_Y_EXPERIENCIAS = "//*[@data-testid='mng-link']";
 
 	public boolean checkUrl(int seconds) {
 		for (int i=0; i<seconds; i++) {
@@ -54,8 +55,8 @@ public class PageResultPago extends PageBase {
 		return "";
 	}
 
-	public boolean isButtonMisCompras() {
-		return state(Visible, XPATH_BUTTON_MIS_COMPRAS).check();
+	public boolean isButtonMisCompras(int seconds) {
+		return state(Visible, XPATH_BUTTON_MIS_COMPRAS).wait(seconds).check();
 	}
 
 	public void clickMisCompras() {
@@ -74,5 +75,9 @@ public class PageResultPago extends PageBase {
 			return Integer.valueOf(microLikes.getAttribute("likes"));
 		}
 		return 0;
+	}
+	
+	public void clickLinkDescuentosExperiencias() {
+		click(XPATH_LINK_DESCUENTOS_Y_EXPERIENCIAS).exec();
 	}
 }

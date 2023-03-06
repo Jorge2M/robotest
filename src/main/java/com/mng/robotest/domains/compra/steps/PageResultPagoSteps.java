@@ -8,6 +8,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.compra.pageobjects.PageResultPago;
+import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.domains.micuenta.steps.PageAccesoMisComprasSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
@@ -74,9 +75,10 @@ public class PageResultPagoSteps extends StepBase {
 	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), State.Warn);
 		
 		if (channel==Channel.desktop) {
+			int seconds = 1;
 			checks.add(
-		  		"Aparece el link hacia las compras",
-		  		pageResultPago.isButtonMisCompras(), State.Warn);
+		  		"Aparece el link hacia las compras (lo esperamos " + seconds + " segundos)",
+		  		pageResultPago.isButtonMisCompras(seconds), State.Warn);
 		}
 		
 		int seconds = 5;
@@ -110,6 +112,14 @@ public class PageResultPagoSteps extends StepBase {
 		  	.info(String.format("Se generan <b>%s</b> Likes", checks.getNumberPoints())).build());
 	  	
 	  	return checks;
+	}
+	
+	@Step(
+		description="Seleccionar el link <b>descuentos y experiencias</b>", 
+		expected="Aparece la página de Mango Likes You")	
+	public void clickLinkDescuentosExperiencias() {
+		pageResultPago.clickLinkDescuentosExperiencias();
+		new PageMangoLikesYouSteps().checkIsPageOk();
 	}
 	
 	@Step (
