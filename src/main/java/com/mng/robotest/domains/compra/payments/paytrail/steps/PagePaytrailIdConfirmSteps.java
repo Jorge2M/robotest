@@ -14,7 +14,7 @@ public class PagePaytrailIdConfirmSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal, String codPais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	   	checks.add(
 			"Aparece la página de introducción del ID de confirmación",
 			pagePaytrailIdConfirm.isPage(), State.Defect);

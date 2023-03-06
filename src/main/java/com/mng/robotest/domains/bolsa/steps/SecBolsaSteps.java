@@ -152,7 +152,7 @@ public class SecBolsaSteps extends StepBase {
 
 	@Validation
 	private ChecksTM checkIsBolsaVisibleInDesktop() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 1;
 	 	checks.add(
 			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + seconds + " segundos)",
@@ -167,7 +167,7 @@ public class SecBolsaSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validaNumArtEnBolsa() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 3;
 		String itemsSaved = String.valueOf(dataTest.getDataBag().getListArticulos().size());
 	 	checks.add(
@@ -179,7 +179,7 @@ public class SecBolsaSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validaCuadranArticulosBolsa() throws Exception {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa();
 		checks.add(
 			"Cuadra el númeo de artículos existentes en la bolsa",

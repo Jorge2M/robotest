@@ -20,7 +20,7 @@ public class SecFotosNewSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkTypeOfFirstFoto() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		DataFoto dataFoto = secFotosNew.getDataFoto(1, 1);
 	 	checks.add(
 			"La 1a foto es de tipo <b>" + TipoImagenProducto.DETALLES + " o " + 
@@ -38,7 +38,7 @@ public class SecFotosNewSteps extends StepBase {
 		  
 	@Validation 
 	private ChecksTM checkLayoutFicha(boolean isFichaAccesorios) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int numFotosExpected1rstLineA = 1;
 		int numFotosExpected1rstLineB = 2;
 		if (isFichaAccesorios) {

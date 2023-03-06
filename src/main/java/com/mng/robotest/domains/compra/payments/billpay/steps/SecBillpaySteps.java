@@ -13,7 +13,7 @@ public class SecBillpaySteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsSectionOk() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparecen 3 desplegables para la selección de la fecha de nacimiento",
 			secBillpay.isPresentSelectBirthBirthYear() &&
@@ -44,7 +44,7 @@ public class SecBillpaySteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkLastschriftAfterAccept() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el campo para la introducción del titular",
 			secBillpay.isPresentInputTitular(), State.Defect);

@@ -5,6 +5,8 @@ import com.mng.robotest.domains.transversal.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
+import org.openqa.selenium.WebElement;
+
 public class PageResultPago extends PageBase {
 	
 	private static final String XPATH_TEXT_CONFIRMACION_PAGO_ESTANDAR = "//*[@data-testid[contains(.,'confirmationText')] or @data-testid='purchaseConfirmation.confirmationText']";
@@ -14,6 +16,7 @@ public class PageResultPago extends PageBase {
 	public static final String XPATH_CODIGO_PEDIDO_CONTRAREEMBOLSO_DESKTOP = "//div[@class='labels']//*[@class[contains(.,'data')] and string-length(text())=6]";
 	public static final String XPATH_CODIGO_PEDIDO_CONTRAREEMBOLSO_MOBIL = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
 	public static final String XPATH_BUTTON_MIS_COMPRAS = "//button[@data-testid[contains(.,'goToMyPurchases')]]";
+	public static final String XPATH_MICROFRONTEND_LOYALTY = "//micro-frontend[@name='purchaseConfirmation']";
 	public static final String XPATH_BLOCK_NEW_LOYALTY_POINTS = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
 
 	public boolean checkUrl(int seconds) {
@@ -64,5 +67,12 @@ public class PageResultPago extends PageBase {
 
 	public boolean isVisibleBlockNewLoyaltyPoints() {
 		return state(Visible, XPATH_BLOCK_NEW_LOYALTY_POINTS).check();
+	}
+	public int getLikesGenerated() {
+		WebElement microLikes = getElement(XPATH_MICROFRONTEND_LOYALTY);
+		if (microLikes!=null) {
+			return Integer.valueOf(microLikes.getAttribute("likes"));
+		}
+		return 0;
 	}
 }

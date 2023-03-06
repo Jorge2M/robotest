@@ -21,7 +21,7 @@ public class SecFooterSteps extends StepBase {
 	
 	@Validation 
 	public ChecksTM validaLinksFooter() { 
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		for (FooterLink footerLink : FooterLink.getFooterLinksFiltered(app, channel)) {
 			checks.add(
 				"Aparecen el link <b>" + footerLink + "</b> en el footer",
@@ -41,7 +41,7 @@ public class SecFooterSteps extends StepBase {
 	 
 	@Validation
 	private ChecksTM checkPageCorrectAfterSelectLinkFooter(String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter);
 		String windowActualHandle = driver.getWindowHandle();
 		boolean newWindowInNewTab = (windowActualHandle.compareTo(windowFatherHandle)!=0);

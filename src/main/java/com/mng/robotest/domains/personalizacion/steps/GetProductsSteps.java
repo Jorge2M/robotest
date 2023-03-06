@@ -32,7 +32,7 @@ public class GetProductsSteps extends StepBase {
 	@Validation
 	public ChecksTM isPersonalization(int minArticles, int maxArticles, GetterProducts getterProducts) 
 			throws Exception {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int numArticlesPersonalized = getNumArticlesPersonalized(getterProducts);
 	 	checks.add(
 	 		"El número de artículos personalizados está entre " + minArticles + " y " + maxArticles + 

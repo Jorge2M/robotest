@@ -63,7 +63,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	
 	@Validation
 	public ChecksTM validateMessagesErrorDependingInputs(ListDataRegistro dataToSend) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
 			String dataInputString = dataInput.getDataRegType() + " (<b>" + dataInput.getData() + "</b>)";
 			if (dataInput.isValidPrevRegistro()) {
@@ -140,7 +140,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	
 	@Validation
 	public ChecksTM validateAreInputsWithErrorMessageAssociated(int numInputsObligatoriosNoInf) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int numInputsTypePassrod = pageRegistroIni.getNumberInputsTypePassword();
 		int numErrCampObligatorio = pageRegistroIni.getNumberMsgCampoObligatorio();
 		
@@ -181,7 +181,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	
 	@Validation
 	public ChecksTM validateRGPDInCountryWithRgpd(String codigoPais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 1;
 		checks.add(
 			"El texto de info de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
@@ -201,7 +201,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	
 	@Validation
 	public ChecksTM validateRGPDInCorea() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 1;
 		checks.add(
 			"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro",
@@ -221,7 +221,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	
 	@Validation
 	public ChecksTM validateRGPDInCountryWithoutRgpd(String codigoPais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 1;
 		checks.add(
 			"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,

@@ -29,7 +29,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 
 	@Validation
 	public ChecksTM checkVisibleAvisame() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		boolean isVisibleModal = modalArticleNotAvailable.isVisibleUntil(2);
 		boolean isVisibleRPGD = modalArticleNotAvailable.isVisibleRPGD(2);
 		checks.add(

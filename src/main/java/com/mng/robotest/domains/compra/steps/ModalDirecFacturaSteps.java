@@ -16,7 +16,7 @@ public class ModalDirecFacturaSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsOk() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
 			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + seconds + " seconds)",
@@ -44,7 +44,7 @@ public class ModalDirecFacturaSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterChangeDireccion() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Desaparece el modal de introducción de los datos de la dirección",
 	 		!modalDirecFactura.isVisibleFormUntil(0), State.Defect);

@@ -13,7 +13,7 @@ public class PageInitPaymayaSteps {
 	
 	@Validation
 	public ChecksTM checkPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página inicial de PayMaya",
 			pageInitPaymaya.isPage(), State.Warn); 

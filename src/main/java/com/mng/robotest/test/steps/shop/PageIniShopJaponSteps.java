@@ -10,7 +10,7 @@ public class PageIniShopJaponSteps extends StepBase {
 
 	@Validation 
 	public ChecksTM validaPageIniJapon(int seconds) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Estamos en la página inicial de la shop de Japón (la esperamos hasta " + seconds + " segundos):<br>" +
 			"   - El título es \"" + PageIniShopJapon.TITLE + "\"<br>" +		

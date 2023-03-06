@@ -20,7 +20,7 @@ public class PagePostfCodSegSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPageTest(String nombrePago, String importeTotal) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la pasarela de pagos de PostFinance E-Payment de Test",
 			pagePostfCodSeg.isPasarelaPostfinanceTest(nombrePago), State.Defect);
@@ -45,7 +45,7 @@ public class PagePostfCodSegSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPagePro(String importeTotal) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
 			"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + seconds + " segundos)",

@@ -51,7 +51,7 @@ public class BannerHeadGallerySteps {
 
 	@Validation
 	public ChecksTM checkBannerContainsText(List<String> possibleTexts) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		String textBanner = secBannerHeadDesktop.getText();
 		checks.add(
 				"El banner de cabecera contiene el texto <b>" + possibleTexts.get(0) + "</b>",
@@ -69,7 +69,7 @@ public class BannerHeadGallerySteps {
 
 	@Validation
 	public ChecksTM checkBannerSalesHead(TypeGalery typeGalery, Pais pais, IdiomaPais idioma) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 				"<b style=\"color:blue\">Rebajas</b></br>" +
 						"Es visible el banner de cabecera",
@@ -104,7 +104,7 @@ public class BannerHeadGallerySteps {
 
 	@Validation
 	ChecksTM checkBannerHeadSalesOff(IdiomaPais idioma) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		String saleTraduction = UtilsTest.getSaleTraduction(idioma);
 		checks.add(
 				"<b style=\"color:blue\">Rebajas</b></br>" +

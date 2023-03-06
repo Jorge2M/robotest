@@ -25,7 +25,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPageOK() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		boolean isPageInitCheckout = page1DktopCheckout.isPageUntil(seconds);
 	 	checks.add(
@@ -48,7 +48,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsVersionChequeRegalo(ChequeRegalo chequeRegalo) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
 			"Aparece la página inicial del Checkout (la esperamos un máximo de " + seconds + " segundos)<br>",
@@ -68,7 +68,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaResultImputPromoEmpl() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
 			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + seconds + " segundos)",
@@ -116,7 +116,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterInputDiscountVale(ValeDiscount valePais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 1;
 		boolean isVisibleError = page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(seconds);
 	 	checks.add(
@@ -128,7 +128,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkValeDiscountIsCorrect(ValeDiscount valePais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		Descuento descuento = new Descuento(valePais.getPorcDescuento(), app);
 	 	checks.add(
 			"En los artículos a los que aplica, el descuento es de " +  
@@ -165,7 +165,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterInputCodigoVendedor(String codigoVendedor) {
 		int seconds = 3;
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Desaparece el campo de Input del código de vendedor (lo esperamos hasta " + seconds + " segundos)",
 			!page1DktopCheckout.isVisibleInputVendedorVOTF(seconds), State.Defect);

@@ -1,21 +1,21 @@
 package com.mng.robotest.domains.loyalty.tests;
 
-import java.util.List;
-
-import com.mng.robotest.domains.compra.beans.ConfigCheckout;
+import com.mng.robotest.domains.compra.steps.CheckoutSteps;
+import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.domains.compra.tests.CompraSteps;
 import com.mng.robotest.domains.loyalty.beans.User;
+import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
+import com.mng.robotest.domains.loyalty.steps.PageHistorialLikesSteps;
+import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.datastored.DataPago;
-import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.steps.navigations.shop.GaleriaNavigationsSteps;
-import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
 
+import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 
 public class Loy001 extends TestBase {
 
@@ -34,35 +34,37 @@ public class Loy001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		accessAndClearData();
-		addBagArticleNoRebajado();
-		DataPago dataPago = checkoutExecution();
-		checkPedidosManto(dataPago.getListPedidos());
+		addBagArticleNoRebajadoAndClickComprar();
+		inputLoyaltyPoints();
+		String idPedido = executeMastercardEnvioTiendaPayment();
+		checkLoyaltyPointsGenerated(idPedido);		
 	}
 	
-	private void addBagArticleNoRebajado() throws Exception {
+	private void addBagArticleNoRebajadoAndClickComprar() throws Exception {
 		clickGroup(NEW_NOW);
-//		//en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
-//		driver.navigate().refresh();
 		new GaleriaNavigationsSteps().selectTalla();
+        new SecBolsaSteps().selectButtonComprar();
 	}
 	
-	private DataPago checkoutExecution() throws Exception {
-		
-		ConfigCheckout configCheckout = ConfigCheckout.config()
-				.checkPagos()
-				.emaiExists()
-				.checkLoyaltyPoints().build();		
-		
-		DataPago dataPago = getDataPago(configCheckout);
-		dataPago = new CheckoutFlow.BuilderCheckout(dataPago)
-			.pago(dataTest.getPais().getPago("VISA"))
-			.build()
-			.checkout(From.BOLSA);
-		
-		return dataPago;
+	private void inputLoyaltyPoints() {
+		var checkoutSteps = new CheckoutSteps();
+		checkoutSteps.validateBlockLoyalty();
+		checkoutSteps.loyaltyPointsApply();
 	}
-
-	private void checkPedidosManto(List<DataPedido> pedidos) throws Exception {
-		new CompraSteps().checkPedidosManto(pedidos);
-	}
+	
+    private String executeMastercardEnvioTiendaPayment() throws Exception {
+        DataPago dataPago = getDataPago();
+        dataPago.setPago(dataTest.getPais().getPago("MASTERCARD"));
+        new CompraSteps().startPayment(dataPago, true);
+        new PageResultPagoSteps().validateIsPageOk(dataPago);
+        return dataPago.getDataPedido().getIdCompra();
+    }
+    
+    private void checkLoyaltyPointsGenerated(String idPedido) {
+    	int points = new PageResultPagoSteps().checkLoyaltyPointsGenerated().getNumberPoints();
+		LoyaltyCommons.clickMangoLikesYou();
+		new PageMangoLikesYouSteps().click(TabLink.HISTORIAL);
+		new PageHistorialLikesSteps().checkPointsForEnvioTiendaPayment(points, idPedido);
+    }
+	
 }

@@ -18,7 +18,7 @@ public class AllPagesSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validatePageWithFooter() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el footer",
 			(new SecFooter()).isPresent(), State.Warn);

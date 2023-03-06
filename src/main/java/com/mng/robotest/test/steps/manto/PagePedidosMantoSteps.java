@@ -149,7 +149,7 @@ public class PagePedidosMantoSteps extends StepBase {
 
 	@Validation
 	private static ChecksTM checkAfterSearchPedido(DataPedido dPedidoPrueba, WebDriver driver) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni(),
 			!dPedidoPrueba.getPago().getDni().equals(""), State.Defect);

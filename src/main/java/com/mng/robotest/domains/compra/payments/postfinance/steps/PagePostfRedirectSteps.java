@@ -11,7 +11,7 @@ public class PagePostfRedirectSteps {
 	
 	@Validation
 	public ChecksTM isPageAndFinallyDisappears() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 10;
 		checks.add(
 			"Aparece una página de redirección con un botón OK",

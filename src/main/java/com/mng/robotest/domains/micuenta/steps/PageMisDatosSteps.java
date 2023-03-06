@@ -16,7 +16,7 @@ public class PageMisDatosSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaIsPage (String usuarioReg) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
 			"Aparece una página con el la cabecera \"Mis datos\" (esperamos hasta " + seconds + " segundos)",
@@ -35,7 +35,7 @@ public class PageMisDatosSteps extends StepBase {
 		String apellidos = datosRegOk.get("cfSname");
 		String email = datosRegOk.get("cfEmail");
 
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece un campo de contraseña de tipo password",
 			pageMisDatos.isVisiblePasswordTypePassword(), State.Defect);
@@ -91,7 +91,7 @@ public class PageMisDatosSteps extends StepBase {
 		String nombre = dataNewRegister.getName();
 		String email = dataNewRegister.getEmail();
 
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece un campo de contraseña de tipo password",
 			pageMisDatos.isVisiblePasswordTypePassword(), State.Defect);

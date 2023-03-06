@@ -14,7 +14,7 @@ public class PageTrustPayResultSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkIsPage(String importeTotal) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		String textHeader = "Payment In Progress";
 	 	checks.add(
 			"Figura el encabezamiento \"" + textHeader,

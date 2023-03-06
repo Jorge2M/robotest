@@ -39,7 +39,7 @@ public class PagePrehomeSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkPaisSelected() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		if (channel==Channel.desktop) {
 			checks.add(
 			    Check.make(
@@ -100,7 +100,7 @@ public class PagePrehomeSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkPagePostPreHome() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		String title = driver.getTitle().toLowerCase();
 		if (app==AppEcom.outlet) {
 			checks.add(

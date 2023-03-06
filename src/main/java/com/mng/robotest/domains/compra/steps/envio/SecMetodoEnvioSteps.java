@@ -43,7 +43,7 @@ public class SecMetodoEnvioSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaBlockSelectedDesktop(TipoTransporte tipoTransporte) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	  	checks.add(
 			"Desaparece la capa de Loading  (lo esperamos hasta " + seconds + " segundos)",

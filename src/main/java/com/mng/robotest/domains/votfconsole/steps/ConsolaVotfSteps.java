@@ -25,7 +25,7 @@ public class ConsolaVotfSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterAccessInitialPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el apartado \"Test servicios VOTF\"",
 			pageConsola.existTestServVOTF(), State.Warn);
@@ -135,7 +135,7 @@ public class ConsolaVotfSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterClickConsultDispEnvioTienda(String paginaPadre) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		try {
 			pageConsola.switchToResultIFrame();
 		 	checks.add(
@@ -277,7 +277,7 @@ public class ConsolaVotfSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterPreconfirmarPedido(String codigoPedidoFull) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		String paginaPadre = pageConsola.driver.getWindowHandle();
 		try {
 			pageConsola.switchToResultIFrame();
@@ -307,7 +307,7 @@ public class ConsolaVotfSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterConfirmarPedido(String codigoPedidoFull) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		String paginaPadre = pageConsola.driver.getWindowHandle();
 		try {
 			pageConsola.switchToResultIFrame();

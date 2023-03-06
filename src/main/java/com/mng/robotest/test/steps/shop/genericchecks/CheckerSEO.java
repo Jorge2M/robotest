@@ -22,7 +22,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 public class CheckerSEO extends PageBase implements Checker {
 
 	public ChecksTM check(WebDriver driver) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		
 		ResultadoErrores resValidac = validacionesGenericasSEO(driver);
 		String descripValidac = "Se cumplen las validaciones genéricas de SEO";

@@ -14,7 +14,7 @@ public class PageResultPagoTpvSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPageOk(DataPedido dataPedido, String codPais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece un texto de confirmación de la compra",
 			pageResultPagoTpv.isPresentCabeceraConfCompra(), State.Warn);

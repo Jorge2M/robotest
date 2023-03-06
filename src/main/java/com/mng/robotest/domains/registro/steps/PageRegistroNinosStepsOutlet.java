@@ -15,7 +15,7 @@ public class PageRegistroNinosStepsOutlet extends StepBase {
 	
 	@Validation
 	public ChecksTM validaIsPageWithNinos(int numNinos) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + seconds + " segundos)",

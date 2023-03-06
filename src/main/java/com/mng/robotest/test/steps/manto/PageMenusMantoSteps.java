@@ -33,7 +33,7 @@ public class PageMenusMantoSteps extends PageBase {
 	
 	@Validation
 	private ChecksTM checkIsPageOfSubmenu(String subMenu, String textAlertObtained) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 2;
 	 	checks.add(
 			"Aparece la página asociada al menú <b>" + subMenu + "</b> (la esperamos hasta " + seconds + " segundos)",

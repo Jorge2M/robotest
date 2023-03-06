@@ -12,7 +12,7 @@ public class PageYandexMoneyResultSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsResultOk() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página de resultado de Yandex Money",
 			pageYandexMoneyResult.isPage(), State.Defect);

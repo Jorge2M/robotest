@@ -14,7 +14,7 @@ public class SecTMangoSteps {
 	
 	@Validation
 	public ChecksTM validateIsSectionOk() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el bloque de selección de la forma de pago",
 			secTMango.isVisibleUntil(0), State.Defect); 

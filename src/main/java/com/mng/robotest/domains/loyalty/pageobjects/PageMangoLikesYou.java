@@ -7,20 +7,13 @@ import java.util.regex.Pattern;
 
 import com.mng.robotest.domains.transversal.PageBase;
 
-
-
-
 public class PageMangoLikesYou extends PageBase {
 
 	private static final String XPATH_WRAPP_PAGE = "//micro-frontend[@id='loyaltySpace']";
 	private static final String XPATH_POINTS = XPATH_WRAPP_PAGE + "//div[@id='space-header']/div[3]";
-	private static final String XPATH_LIST_MOVIMIENTOS = "//div[@id='history-list']";
 	
 	//TODO solicitar data-testid en lugar de React
 	private static final String XPATH_LINK_AYUDA = "//div[text()='Ayuda']";
-	
-	//TODO solicitar data-testid en lugar de React
-	private static final String XPATH_MOVIMIENTO = XPATH_LIST_MOVIMIENTOS + "/div"; 
 	
 	//TODO solicitar data-testid en lugar de React (Kiritaki)
 	public enum TabLink {
@@ -83,10 +76,6 @@ public class PageMangoLikesYou extends PageBase {
 
 	public void clickButton(ButtonUseLikes button) {
 		click(button.xpath()).exec();
-	}
-	
-	public boolean isMovimientoVisible(int seconds) {
-		return state(Visible, XPATH_MOVIMIENTO).wait(seconds).check();
 	}
 	
 	public void clickAyuda() {

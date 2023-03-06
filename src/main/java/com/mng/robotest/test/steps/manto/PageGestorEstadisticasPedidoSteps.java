@@ -15,7 +15,7 @@ public class PageGestorEstadisticasPedidoSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Estamos en la página " + PageGestorEstadisticasPedido.TITULO,
 			pageGestorEstadisticasPedido.isPage(), State.Defect);
@@ -42,7 +42,7 @@ public class PageGestorEstadisticasPedidoSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterSelectMostrarPedidosZalandos() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la tabla de información",
 			pageGestorEstadisticasPedido.isTablaInformacionVisible(), State.Defect);
@@ -69,7 +69,7 @@ public class PageGestorEstadisticasPedidoSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterCompararDias() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Las columnas de comparación en verde no contienen \"0 €\"",
 			pageGestorEstadisticasPedido.isColumnaCompararVerdeNoZero(), State.Defect);

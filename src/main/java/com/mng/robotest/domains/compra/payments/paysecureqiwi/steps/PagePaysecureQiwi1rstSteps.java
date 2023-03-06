@@ -15,7 +15,7 @@ public class PagePaysecureQiwi1rstSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página inicial de la pasarela PaySecure",
 			pagePaysecureQiwi.isPage(), State.Warn);

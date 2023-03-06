@@ -14,7 +14,7 @@ public class PageSepaResultMobilSteps {
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal, String codPais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de resultado de SEPA para móvil",
 			pageSepaResultMobil.isPage(), State.Warn);	

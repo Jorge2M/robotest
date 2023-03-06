@@ -19,7 +19,7 @@ public class PageSepa1rstSteps {
 	
 	@Validation
 	public ChecksTM validateIsPage(String nombrePago, String importeTotal, String codPais, Channel channel) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
 			pageSepa1rst.isPresentIconoSepa(channel), State.Warn);

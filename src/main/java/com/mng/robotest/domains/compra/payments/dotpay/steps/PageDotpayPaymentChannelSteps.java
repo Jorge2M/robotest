@@ -15,7 +15,7 @@ public class PageDotpayPaymentChannelSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal, String codPais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Aparece la página de Dotpay para la selección del banco",
 			pageDotpayPaymentChannel.isPage(), State.Warn);

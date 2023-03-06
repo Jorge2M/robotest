@@ -31,7 +31,7 @@ public class PageHomeConseguirPorLikesSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkAfterConseguirButton() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
 			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + seconds + " segundos)",

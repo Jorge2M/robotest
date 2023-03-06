@@ -29,15 +29,16 @@ public class Loyalty {
 	@Test (
 		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
 		description="Navegación por Mango Likes You History y Help")
-	public void LOY004_Exhange_Compra_Entrada() throws Exception {
+	public void LOY004_History_Help() throws Exception {
 		new Loy004().execute();
 	}	
 
-	@Test (
-		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
-		description="Transferencia de Likes de un cliente a otro")
-	public void LOY005_TransferLikes_To_Another_Client() throws Exception {
-		new Loy005().execute();
-	}
+//  Se ha desactivado la operativa de transferencia de Likes
+//	@Test (
+//		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
+//		description="Transferencia de Likes de un cliente a otro")
+//	public void LOY005_TransferLikes_To_Another_Client() throws Exception {
+//		new Loy005().execute();
+//	}
 
 }

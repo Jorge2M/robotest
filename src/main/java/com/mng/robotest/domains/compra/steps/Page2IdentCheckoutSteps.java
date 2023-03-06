@@ -27,7 +27,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage(boolean emailYetExists, int seconds) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + seconds + " segundos)",
 			page2IdentCheckout.isPageUntil(seconds), State.Defect);

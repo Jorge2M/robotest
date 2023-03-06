@@ -17,7 +17,7 @@ import com.mng.robotest.test.exceptions.NotFoundException;
 public class CheckerNetTraffic implements Checker {
 
 	public ChecksTM check(WebDriver driver) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		GestorDatosHarJSON gestorHAR = UtilsChecker.getGestorHar(driver);
 		if (gestorHAR!=null) {
 			validaNetTraffic(gestorHAR);												  
@@ -28,7 +28,7 @@ public class CheckerNetTraffic implements Checker {
 	@SuppressWarnings({ "rawtypes" })
 	@Validation
 	private ChecksTM validaNetTraffic(GestorDatosHarJSON gestorHAR) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		boolean peticionesOk = true;
 		String infoWarnings = "";
 		Optional<JSONArray> listEntriesTotalOpt = getListEntries(gestorHAR);

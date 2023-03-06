@@ -97,7 +97,6 @@ public class Com009 extends TestBase {
     
     private DataPago executeVisaPayment() throws Exception {
         DataPago dataPago = getDataPago();
-        dataPago.setPago(dataTest.getPais().getPago("VISA"));
         compraSteps.startPayment(dataPago, true);
 
         new PageResultPagoSteps().validateIsPageOk(dataPago);

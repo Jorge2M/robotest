@@ -17,7 +17,7 @@ public class PageAccesoMisComprasSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
 			"Aparece la página de \"Acceso a Mis Compras\" (la esperamos hasta " + seconds + " segundos)",

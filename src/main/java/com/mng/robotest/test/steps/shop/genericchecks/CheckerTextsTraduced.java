@@ -14,7 +14,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 public class CheckerTextsTraduced implements Checker {
 
 	public ChecksTM check(WebDriver driver) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		List<String> listElemsWithoutTraduction = getTextsWithSostenido(driver);
 		checks.add(
 			"No hay textos sin traducir (que comiencen por \"#\")<br>" + 

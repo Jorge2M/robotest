@@ -30,7 +30,7 @@ public class ModalDetalleCompraSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkIsDataVisible() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 3;
 		checks.add(
 			"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + seconds + " segundos)",
@@ -54,7 +54,7 @@ public class ModalDetalleCompraSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkDataContent(Ticket compra) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Figura un id de tícket " + compra.getId(),
 			pageDetalleCompra.getIdTicket(compra.getType()).compareTo(compra.getId())==0, State.Warn);

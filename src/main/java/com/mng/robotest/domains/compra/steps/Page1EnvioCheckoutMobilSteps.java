@@ -20,7 +20,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage(boolean userLogged) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
 			"Aparece la página correspondiente al paso-1 (la esperamos " + seconds + " segundos)",
@@ -92,7 +92,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaResultImputPromoEmpl() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 2;
 	 	checks.add(
 			"Aparece el descuento total aplicado al empleado (en menos de " + seconds + " segundos)",

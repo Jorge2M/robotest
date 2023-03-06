@@ -15,7 +15,7 @@ public class PageAmazonIdentSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage(DataPedido dataPedido) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece una página con el logo de Amazon",
 			pageAmazonIdent.isLogoAmazon(), State.Warn);

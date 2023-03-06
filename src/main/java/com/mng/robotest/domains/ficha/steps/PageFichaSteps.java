@@ -68,7 +68,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validateIsFichaArtAlgunoColorNoDisponible(String refArticulo) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 				"Aparece la página correspondiente a la ficha del artículo " + refArticulo,
 				pageFicha.isFichaArticuloUntil(refArticulo, 0), State.Defect);
@@ -89,7 +89,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validaDetallesProducto(DataFichaArt datosArticulo) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		if (datosArticulo.availableReferencia()) {
 			int seconds = 3;
 			checks.add(
@@ -181,7 +181,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation
 	public ChecksTM checkAppearsCapaAvisame() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 				"No aparece el botón \"COMPRAR\"",
 				!secBolsa.isVisibleBotonComprar(), State.Defect);
@@ -219,7 +219,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation
 	public ChecksTM checkAvisoTallaUnica(boolean isTallaUnica) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		boolean isVisibleAviso = pageFicha.getSecDataProduct().getSecSelTallas()
 				.isVisibleAvisoSeleccionTalla();
 		
@@ -302,7 +302,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation
 	private ChecksTM checkCapaAltaFavoritos() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds1 = 3;
 		checks.add(
 				"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + seconds1 + " segundos)",
@@ -403,7 +403,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validaPrevNext(LocationArticle locationArt) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		boolean isVisiblePrevLink = pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.PREV, seconds);
 		if (locationArt.isFirstInGalery()) {
@@ -477,7 +477,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation
 	public ChecksTM checkImgCentralAfterZoom(String pngImgCentralOriginal) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 				"Se aplica un Zoom sobre la imagen central",
 				((PageFichaDevice)pageFicha).isVisibleFichaConZoom(), State.Defect);
@@ -505,7 +505,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validaBreadCrumbFicha(String urlGaleryOrigin) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Existen el bloque correspondiente a las <b>BreadCrumb</b>",
 			new SecDetalleProduct().isVisibleBreadcrumbs(0), State.Defect);

@@ -16,7 +16,7 @@ public class ModalDirecEnvioOldSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsOk() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
 			"Es visible el formulario para la introducción de la \"Dirección de envío\" (lo esperamos hasta #{seconds} seconds)",
@@ -40,7 +40,7 @@ public class ModalDirecEnvioOldSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterUpdateData() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout();
 		int seconds = 2; 
 		checks.add(

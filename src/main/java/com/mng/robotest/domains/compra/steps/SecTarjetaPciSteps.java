@@ -17,7 +17,7 @@ public class SecTarjetaPciSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsSectionOk(Pago pago) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KREDI_KARTI) {
 			int seconds = 5;
 		 	checks.add(

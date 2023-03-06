@@ -16,7 +16,7 @@ public class PageGestionarClientesSteps {
 	
 	@Validation
 	public ChecksTM validateIsPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Estamos en la página " + PageGestionarClientes.TITULO,
 			pageGestionarClientes.isPage(), State.Defect);
@@ -44,7 +44,7 @@ public class PageGestionarClientesSteps {
 	
 	@Validation
 	private ChecksTM checkAfterSearchByDni(String dni) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Se muestra la tabla de información",
 			pageGestionarClientes.isVisibleTablaInformacion(), State.Defect);
@@ -77,7 +77,7 @@ public class PageGestionarClientesSteps {
 	
 	@Validation
 	private ChecksTM checkAfterClickButton(TypeThirdButton typeButton) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el mensaje <b>" + typeButton.getMensaje() + "</b>",
 			pageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton), State.Defect);
@@ -103,7 +103,7 @@ public class PageGestionarClientesSteps {
 	
 	@Validation
 	private ChecksTM checkAfterClickDetalles(String dni, String idCliente) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el id del cliente <b>" + idCliente + "</b>",
 			pageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente), State.Defect);

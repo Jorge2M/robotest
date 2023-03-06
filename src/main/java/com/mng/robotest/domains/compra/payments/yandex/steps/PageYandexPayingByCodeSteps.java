@@ -14,7 +14,7 @@ public class PageYandexPayingByCodeSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal, String codPais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página de <b>Paying by code</b>",
 			pageYandexPayingByCode.isPage(), State.Warn);

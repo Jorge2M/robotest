@@ -13,7 +13,7 @@ public class PageGestorConsultaCambioFamiliaSteps {
 	
 	@Validation
 	public ChecksTM validateIsPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Estamos en la página " + PageGestorConsultaCambioFamilia.TITULO,
 			pageGestorConsultaCambioFamilia.isPage(), State.Defect);
@@ -40,7 +40,7 @@ public class PageGestorConsultaCambioFamiliaSteps {
 	
 	@Validation
 	private ChecksTM checkAfterSearchProductXfamilia() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la tabla con los productos",
 			pageGestorConsultaCambioFamilia.isTablaProductosVisible(), State.Defect);
@@ -63,7 +63,7 @@ public class PageGestorConsultaCambioFamiliaSteps {
 	
 	@Validation
 	private ChecksTM checkAfeterClickCambioFamilia() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la tabla con las opciones para los cambios de familia",
 			pageGestorConsultaCambioFamilia.isTablaCambioFamiliaVisible(), State.Defect);

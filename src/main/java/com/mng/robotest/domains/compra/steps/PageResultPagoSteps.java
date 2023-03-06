@@ -4,6 +4,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.compra.pageobjects.PageResultPago;
@@ -11,6 +12,7 @@ import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBl
 import com.mng.robotest.domains.micuenta.steps.PageAccesoMisComprasSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps.ChecksResultWithNumberPoints;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
@@ -31,9 +33,6 @@ public class PageResultPagoSteps extends StepBase {
 	public void validateIsPageOk(DataPago dataPago) {
 		validateTextConfirmacionPago();
 		validateDataPedido(dataPago);
-		if (dataPago.getFTCkout().checkLoyaltyPoints) {
-			validateBlockNewLoyaltyPoints();
-		}
 		GenericChecks.checkDefault();
 	}
 	
@@ -46,7 +45,7 @@ public class PageResultPagoSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateTextConfirmacionPago() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds1 = 10;
 		boolean isVisibleTextConfirmacion = pageResultPago.isVisibleTextoConfirmacionPago(seconds1);
 		checks.add(
@@ -63,7 +62,7 @@ public class PageResultPagoSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateDataPedido(DataPago dataPago) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		String importeTotal = "";
 		if (dataTest.getDataBag()!=null && "".compareTo(dataTest.getDataBag().getImporteTotal())!=0) {
 			importeTotal = dataTest.getDataBag().getImporteTotal();
@@ -96,11 +95,21 @@ public class PageResultPagoSteps extends StepBase {
 		return checks;
 	}
 	
-	@Validation (
-		description="Aparece el bloque informando que se han generado nuevos Loyalty Points",
-		level=State.Defect)
-	public boolean validateBlockNewLoyaltyPoints() {
-		return (pageResultPago.isVisibleBlockNewLoyaltyPoints());
+	@Validation
+	public ChecksResultWithNumberPoints checkLoyaltyPointsGenerated() {
+		var checks = new ChecksResultWithNumberPoints();
+	  	checks.add(
+		  	"Aparece el bloque con los nuevos <b>Loyalty Points</b> generados",
+		  	pageResultPago.isVisibleBlockNewLoyaltyPoints(), State.Defect);
+		
+	  	checks.setNumberPoints(pageResultPago.getLikesGenerated());
+	  	checks.add(
+	  		Check.make(
+	  			"El número de likes es > 0",
+	  			checks.getNumberPoints()>0, State.Defect)
+		  	.info(String.format("Se generan <b>%s</b> Likes", checks.getNumberPoints())).build());
+	  	
+	  	return checks;
 	}
 	
 	@Step (

@@ -16,7 +16,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 public class CheckerJSerrors implements Checker {
 
 	public ChecksTM check(WebDriver driver) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		
 		//Nota: No funciona con GeckoDriver porque no están implementados los servicios al no formar parte del protocolo W3C https://github.com/w3c/webdriver/issues/406
 		if (PageObjTM.getTypeDriver(driver)!=EmbeddedDriver.firefox &&

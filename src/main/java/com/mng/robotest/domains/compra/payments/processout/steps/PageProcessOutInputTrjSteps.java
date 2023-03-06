@@ -15,7 +15,7 @@ public class PageProcessOutInputTrjSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkIsPage(String importeTotal) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Estamos en la página con el formulario para la introducción de los datos de la tarjeta",
 			pageObject.checkIsPage(), State.Defect);

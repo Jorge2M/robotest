@@ -39,7 +39,7 @@ public class SecSoyNuevoSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validaRGPDText() {  
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		if (dataTest.getPais().getRgpd().equals("S")) {
 		 	checks.add(

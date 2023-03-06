@@ -19,7 +19,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 public class CheckerAnalitica implements Checker {
 
 	public ChecksTM check(WebDriver driver) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		
 		String commandJs = "return window.dataLayer.filter((object) => object.event === 'loadDataLayer').length";
 		JavascriptExecutor js = (JavascriptExecutor)driver;

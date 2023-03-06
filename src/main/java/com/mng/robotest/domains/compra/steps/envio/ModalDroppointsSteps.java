@@ -17,7 +17,7 @@ public class ModalDroppointsSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaIsVisible() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 3;
 	  	checks.add(
 			"Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + seconds + " segundos)",

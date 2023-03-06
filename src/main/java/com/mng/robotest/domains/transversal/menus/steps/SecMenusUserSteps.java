@@ -227,7 +227,7 @@ public class SecMenusUserSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkLoyaltyPoints(int initPoints, int donatedPoints, int finalPoints) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
  		int loyaltyPointsExpected = initPoints - donatedPoints;
  		
  		//TODO hemos de Defect a Warning porque en PRE no funciona esta operativa desde hace tiempo

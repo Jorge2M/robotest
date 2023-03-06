@@ -15,7 +15,7 @@ public class PageDevolucionesSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaIsPage () {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de devoluciones",
 			pageDevoluciones.isPage(), State.Defect);

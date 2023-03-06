@@ -16,7 +16,7 @@ public class PageYandex1rstSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsPage(String emailUsr, String importeTotal, String codPais) {
 		//Esta validación debería hacerse en un punto posterior, una vez se ha intentado enviar el input que es cuando se genera el botón retry.
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página inicial de Yandex",
 			pageYandex1rst.isPage(), State.Warn);

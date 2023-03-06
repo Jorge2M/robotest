@@ -36,7 +36,7 @@ public class PageConsultaPedidoBolsaSteps extends StepBase {
 	}
 	
 	public ChecksTM validaDatosEnvioPedido(DataPedido dataPedido, TypeDetalle typeDetalle) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		TipoTransporte tipoTransporte = dataPedido.getPago().getTipoEnvioType(app);
 	 	checks.add(
 			"El campo \"tipo servicio\" contiene el valor <b>" + tipoTransporte.getCodigoIntercambio() + "</b> (asociado al tipo de envío " + tipoTransporte + ")",
@@ -55,7 +55,7 @@ public class PageConsultaPedidoBolsaSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaDatosGeneralesPedido(DataPedido dataPedido) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la pantalla de detalle del pedido",
 			pageDetallePedido.isPage(), State.Warn);

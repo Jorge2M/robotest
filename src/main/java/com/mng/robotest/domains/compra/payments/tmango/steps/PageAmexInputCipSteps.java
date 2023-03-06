@@ -14,7 +14,7 @@ public class PageAmexInputCipSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPageOk(String importeTotal, String codigoPais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
 			"Aparece la página de introducción del CIP (la esperamos hasta " + seconds + " segundos)",

@@ -17,7 +17,9 @@ public class CompraSteps extends StepBase {
 	public CompraSteps() {}
 	
 	public void startPayment(DataPago dataPago, boolean executePayment) throws Exception {
-		dataPago.setPago(dataTest.getPais().getPago("VISA"));
+		if (dataPago.getPago()==null) {
+			dataPago.setPago(dataTest.getPais().getPago("VISA"));
+		}
 		PagoSteps pagoSteps = FactoryPagos.makePagoSteps(dataPago);
 		pagoSteps.startPayment(executePayment);
 	}

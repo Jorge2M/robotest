@@ -14,7 +14,7 @@ public class ModalBuscadorTiendasSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaBusquedaConResultados() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
 			"La capa de búsqueda es visible<br>" +

@@ -14,7 +14,7 @@ public class PagePaytrailResultadoOkSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal, String codPais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	   	checks.add(
 			"Aparece la página de resultado Ok de Paytrail",
 			pagePaytrailResultadoOk.isPage(), State.Defect);

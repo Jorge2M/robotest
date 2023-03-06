@@ -26,7 +26,7 @@ public class ModalMultidirectionSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkInitialContent() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 3;
 		Optional<Direction> mainDirectionOpt = modalMultidirection.getPrincipalDirection(seconds);
 	 	checks.add(
@@ -56,7 +56,7 @@ public class ModalMultidirectionSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkAfterAddDirection(DirectionData direction) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		String address = direction.getDireccion().toLowerCase();
 		int seconds = 5;
 		Optional<Direction> directionOpt = modalMultidirection.getDirection(address, seconds);

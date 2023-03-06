@@ -50,7 +50,7 @@ public class SecConfirmDatosSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkConfirmacionCambioDireccionEnvio(DataPedido dataPedido) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
 			"Desaparece la capa de Droppoints (lo esperamos hasta " + seconds + " segundos)",

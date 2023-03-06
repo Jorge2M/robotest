@@ -40,7 +40,7 @@ public class PageGestorChequesSteps extends PageBase {
 
 	@Validation
 	public ChecksTM validateInitData(int numPedidos, String mail) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparecen más de \"" + numPedidos + "\" pedidos",
 			pageGestorCheques.comprobarNumeroPedidos(numPedidos), State.Defect);
@@ -62,7 +62,7 @@ public class PageGestorChequesSteps extends PageBase {
 
 	@Validation
 	public ChecksTM validateDetailsCheques(String pedido, String mail) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de" + PageGestorCheques.TITULO_DETALLES,
 			pageGestorCheques.isPageDetalles(), State.Defect);
@@ -88,7 +88,7 @@ public class PageGestorChequesSteps extends PageBase {
 
 	@Validation
 	public ChecksTM validateButtons() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Existe el botón de <b>Id del pedido</b>",
 			state(Present, ButtonsCheque.ID_PEDIDO.getBy()).wait(3).check(), State.Defect);
@@ -109,7 +109,7 @@ public class PageGestorChequesSteps extends PageBase {
 
 	@Validation
 	public ChecksTM validateSecondDataCheque() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"En la tabla activo existe un apartado para <b>ACTIVO</b>",
 			state(Present, TablaCheque.ACTIVO.getBy()).wait(3).check(), State.Defect);
@@ -128,7 +128,7 @@ public class PageGestorChequesSteps extends PageBase {
 
 	@Validation
 	public ChecksTM validateThirdDataCheque() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"En la tabla divisa existe un apartado para <b>DIVISA</b>",
 			state(Present, TablaCheque.DIVISA.getBy()).wait(3).check(), State.Defect);
@@ -149,7 +149,7 @@ public class PageGestorChequesSteps extends PageBase {
 
 	@Validation
 	public ChecksTM validatePedidosData() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Id</b>",
 			state(Present, TablaCheque.ID_PEDIDOS.getBy()).wait(3).check(), State.Defect);
@@ -170,7 +170,7 @@ public class PageGestorChequesSteps extends PageBase {
 
 	@Validation
 	public ChecksTM validateButtonsDataCheque() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Existe el boton para <b>Modificar</b>",
 			state(Present, ButtonsCheque.MODIFICAR.getBy()).wait(3).check(), State.Defect);
@@ -233,7 +233,7 @@ public class PageGestorChequesSteps extends PageBase {
 
 	@Validation
 	public ChecksTM validateInitDataCheque() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Existe la tabla que contiene <b>Activo</b>",
 			state(Present, TablaCheque.ACTIVO.getBy()).wait(3).check(), State.Defect);

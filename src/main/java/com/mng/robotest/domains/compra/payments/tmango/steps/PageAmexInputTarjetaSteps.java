@@ -14,7 +14,7 @@ public class PageAmexInputTarjetaSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPageOk(String importeTotal) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		String codPais = dataTest.getCodigoPais();
 		int seconds = 5;
 	 	checks.add(

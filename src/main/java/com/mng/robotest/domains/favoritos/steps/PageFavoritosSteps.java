@@ -22,7 +22,7 @@ public class PageFavoritosSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaIsPageOK() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int secondsCapa = 3;
 		int secondsArticles = 2;
 		checks.add(
@@ -51,7 +51,7 @@ public class PageFavoritosSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkShareIsOk() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el modal de favoritos compartidos",
 			pageFavoritos.checkShareModalUntill(5), State.Defect);
@@ -112,7 +112,7 @@ public class PageFavoritosSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkFavoritosWithoutArticles() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"No queda ningún artículo en Favoritos",
 			!pageFavoritos.hayArticulos(), State.Defect);

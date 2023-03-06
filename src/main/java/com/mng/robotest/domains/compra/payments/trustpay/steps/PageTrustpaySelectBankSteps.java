@@ -20,7 +20,7 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkIsPage(String nombrePago, String importeTotal) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
 			pageTrustpaySelectBank.isPresentEntradaPago(nombrePago), State.Warn);

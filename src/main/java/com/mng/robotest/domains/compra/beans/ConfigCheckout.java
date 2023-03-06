@@ -19,14 +19,12 @@ public class ConfigCheckout implements Cloneable, Serializable {
 	public final boolean checkPromotionalCode;
 	public final boolean chequeRegalo;
 	public final boolean storeCredit;
-	public final boolean checkLoyaltyPoints;
 	public final boolean stressMode;
 	
 	private ConfigCheckout(
 			boolean checkPasarelas,	boolean checkPagos,	boolean checkManto,	boolean checkMisCompras,
 			boolean emailExists, boolean checkSavedCard, boolean userIsEmployee, boolean acceptCookies,
-			boolean checkPromotionalCode, boolean chequeRegalo,	boolean storeCredit, boolean checkLoyaltyPoints,
-			boolean stressMode) {
+			boolean checkPromotionalCode, boolean chequeRegalo,	boolean storeCredit, boolean stressMode) {
 		this.checkPasarelas = checkPasarelas;
 		this.checkPagos = checkPagos;
 		this.checkManto = checkManto;
@@ -38,7 +36,6 @@ public class ConfigCheckout implements Cloneable, Serializable {
 		this.checkPromotionalCode = checkPromotionalCode;
 		this.chequeRegalo = chequeRegalo;
 		this.storeCredit = storeCredit;
-		this.checkLoyaltyPoints = checkLoyaltyPoints;
 		this.stressMode = stressMode;
 	}
 	
@@ -70,7 +67,6 @@ public class ConfigCheckout implements Cloneable, Serializable {
 		private boolean checkPromotionalCode;
 		private boolean chequeRegalo;
 		private boolean storeCredit;
-		private boolean checkLoyaltyPoints;
 		private boolean stressMode;
 		
 		public Builder version(VersionPagosSuite version) {
@@ -127,10 +123,6 @@ public class ConfigCheckout implements Cloneable, Serializable {
 			this.checkPromotionalCode = promotion;
 			return this;
 		}		
-		public Builder checkLoyaltyPoints() {
-			this.checkLoyaltyPoints = true;
-			return this;
-		}
 		public Builder emaiExists() {
 			this.emailExists = true;
 			return this;
@@ -183,7 +175,6 @@ public class ConfigCheckout implements Cloneable, Serializable {
 						checkPromotionalCode,
 						chequeRegalo,
 						storeCredit,
-						checkLoyaltyPoints,
 						stressMode));
 		}
 	}

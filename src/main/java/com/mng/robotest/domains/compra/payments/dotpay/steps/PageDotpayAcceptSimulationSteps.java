@@ -14,7 +14,7 @@ public class PageDotpayAcceptSimulationSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage(int seconds) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Aparece la página para la aceptación de la simulación (la esperamos hasta " + seconds + " segundos)",
 			pageDotpayAcceptSimulation.isPage(seconds), State.Warn);

@@ -23,7 +23,7 @@ public class ModalAvisoCambioPaisSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkConfirmacionCambio(Pais paisEnvio) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 10;
 	 	checks.add(
 			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + seconds + " segundos)",

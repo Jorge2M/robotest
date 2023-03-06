@@ -13,7 +13,7 @@ public class SecFitFinderSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsOkAndClose() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 2;
 	  	checks.add(
 			"Es visible el Wrapper con la guía de tallas (lo esperamos hasta " + seconds + " seconds)",

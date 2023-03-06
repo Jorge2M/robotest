@@ -27,7 +27,7 @@ public class GoogleSteps extends PageBase {
 	
 	@Validation
 	private ChecksTM checkLinksMango() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 3;
 		checks.add(
 			"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + seconds + " segundos)",

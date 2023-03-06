@@ -15,7 +15,7 @@ public class PagePaytrailEpaymentSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage() { 
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	   	checks.add(
 			"Aparece la página inicial de E-Payment",
 			pageEpaymentIdent.isPage(), State.Warn);

@@ -58,7 +58,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkResultSelectFiltro(DataFilterPrecios dataFilter) throws Exception {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.minimoOrig + "</b> y ahora es <b>" + dataFilter.minimoFinal + "</b>",
 			dataFilter.minimoFinal > dataFilter.minimoOrig, State.Warn);

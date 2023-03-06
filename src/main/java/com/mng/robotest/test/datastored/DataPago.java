@@ -33,6 +33,9 @@ public class DataPago {
 	public void setPago(Pago pago) {
 		getDataPedido().setPago(pago);
 	}
+	public Pago getPago() {
+		return getDataPedido().getPago();
+	}
 	
 	public DataPedido getDataPedido() {
 		return this.dataPedido;

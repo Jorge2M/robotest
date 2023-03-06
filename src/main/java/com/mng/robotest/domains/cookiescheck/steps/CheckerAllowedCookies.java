@@ -21,7 +21,7 @@ public class CheckerAllowedCookies implements Checker {
 	public ChecksTM check(WebDriver driver) {
 		CookiesChecker cookiesChecker = new CookiesChecker();
 		Pair<Boolean, List<Cookie>> resultCheck = cookiesChecker.check(driver);
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			Check.make(
 				"Se comprueba que todas las cookies existentes en la página están permitidas",

@@ -50,7 +50,7 @@ public class CheckerImgsBroken implements Checker {
 				maxErroresReachedInAllImages(resultadoImgs) ||
 				allImagesBrokenAreInWhitelist(resultadoImgs);
 		
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			Check.make(descripValidac, isCheckOk, GenericCheck.IMGS_BROKEN.getLevel())
 				.info(infoExecution).build());

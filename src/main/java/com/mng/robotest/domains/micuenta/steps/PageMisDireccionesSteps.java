@@ -50,7 +50,7 @@ public class PageMisDireccionesSteps extends StepBase {
 	@Validation
 	private ChecksTM checkIsData(DataNewRegister dataNewRegister) {
 		
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el código postal <b>" + dataNewRegister.getPostalCode() + "</b>",
 			isPostalCode(dataNewRegister.getPostalCode()), State.Defect);
@@ -64,7 +64,7 @@ public class PageMisDireccionesSteps extends StepBase {
 		String poblacion = dataOldRegister.get("cfCity");
 		String direccion = dataOldRegister.get("cfDir1");
 
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el código postal <b>" + codpostal + "</b>",
 			isPostalCode(codpostal), State.Defect);

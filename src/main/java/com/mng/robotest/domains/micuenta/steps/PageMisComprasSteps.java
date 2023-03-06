@@ -19,7 +19,7 @@ public class PageMisComprasSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validateIsPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de \"Mis Compras\" (la esperamos hasta " + seconds + " segundos)",
@@ -30,7 +30,7 @@ public class PageMisComprasSteps extends StepBase {
 		
 	@Validation
 	private ChecksTM checkListArticlesVoid(TypeTicket typeCompra) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"No aparece ningún tícket",
 			!pageMisCompras.areTickets(), State.Warn);

@@ -30,7 +30,7 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 			switch (dataPedido.getPago().getTipotarjEnum()) {
 			case VISAD3D:
 				PageD3DLoginSteps pageD3DLoginSteps = new PageD3DLoginSteps();
-				boolean isD3D = pageD3DLoginSteps.validateIsD3D(2);
+				boolean isD3D = pageD3DLoginSteps.validateIsD3D(10);
 				pageD3DLoginSteps.isImporteVisible(dataPedido.getImporteTotal());
 				dataPedido.setCodtipopago("Y");
 				if (isD3D) {

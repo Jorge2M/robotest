@@ -16,7 +16,7 @@ public class PageHomeDonateLikesSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkIsPage(int seconds) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la pagina de <b>Donar Likes</b>",
 			pageHomeDonateLikes.checkIsPage(0), State.Defect);
@@ -39,7 +39,7 @@ public class PageHomeDonateLikesSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkAfterDonateLikes(ButtonLikes buttonSelected) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
 			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + seconds + " segundos)",

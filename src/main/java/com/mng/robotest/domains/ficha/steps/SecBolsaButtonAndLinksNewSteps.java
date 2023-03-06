@@ -49,7 +49,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkBreadCrumbs() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Figura el bloque de BreadCrumbs",
 			secDetalleProductNew.isVisibleBreadcrumbs(0), State.Warn);
@@ -86,7 +86,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAppearsModalShareSocial(String codigoPais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 1;
 	 	checks.add(
 	 		"Aparece el modal para compartir a nivel social (lo esperamos hasta " + seconds + " segundos) ",

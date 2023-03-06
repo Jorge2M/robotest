@@ -92,7 +92,7 @@ public class AccesoSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkLinksAfterLogin() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 7;
 		MenusUserWrapper userMenus = new MenusUserWrapper();
 		checks.add(

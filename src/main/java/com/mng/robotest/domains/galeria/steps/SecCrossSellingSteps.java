@@ -16,7 +16,7 @@ public class SecCrossSellingSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaIsCorrect(LineaType lineaType, SublineaType sublineaType) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		if (!secCrossSelling.isSectionVisible()) {
 			pageGaleria.scrollToPageFromFirst(PageGaleria.MAX_PAGE_TO_SCROLL);

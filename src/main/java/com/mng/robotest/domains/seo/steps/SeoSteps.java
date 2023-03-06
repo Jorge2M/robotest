@@ -38,7 +38,7 @@ public class SeoSteps extends StepBase {
 
 	@Validation
 	private ChecksTM checkPageRobotsTxt(String urlSitemap) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 
 		String contRobots1 =
 				"User-Agent: *\n" +
@@ -132,7 +132,7 @@ public class SeoSteps extends StepBase {
 
 	@Validation
 	private static ChecksTM checkResultUrlSitemal(WebDriver driver) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		PageSitemap pageSitemap = new PageSitemap();
 		boolean sitemapOk = pageSitemap.isCorrect();
 		checks.add(

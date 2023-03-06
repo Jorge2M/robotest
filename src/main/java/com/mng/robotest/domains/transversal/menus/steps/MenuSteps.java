@@ -178,7 +178,7 @@ public class MenuSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM isTitleAssociatedMenu(String nameMenu) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		boolean isTitleAccording = new AllPages().isTitleAssociatedToMenu(nameMenu);
 	 	checks.add(
 	 		Check.make(
@@ -219,7 +219,7 @@ public class MenuSteps extends StepBase {
 		List<String> articlesNoValid = pageGaleriaDesktop.getArticlesNoValid(articles);
 		State stateVal = (articlesNoValid.size()<10) ? State.Warn : State.Defect;
 		
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			Check.make(
 				"Todos los artículos contienen alguno de los literales: <b>" + articles + "</b>",
@@ -343,7 +343,7 @@ public class MenuSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM checkLineasCountry() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		LineaType[] lineasToTest = LineaType.values();
 		for (LineaType lineaType : lineasToTest) {
 			ThreeState apareceLinea = dataTest.getPais().getShoponline().stateLinea(lineaType, app);

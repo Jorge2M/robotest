@@ -37,7 +37,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 	
 	@Validation
 	public ChecksTM validateLogoGoesToPaisIdioma() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"El logo de Mango redirige al país/idioma origen: " + dataTest.getIdioma().getAcceso(),
 			new SecCabeceraMostFrequent()

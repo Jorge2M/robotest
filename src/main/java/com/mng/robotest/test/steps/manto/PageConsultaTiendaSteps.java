@@ -47,7 +47,7 @@ public class PageConsultaTiendaSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterInputTienda() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la información de la tienda",
 			pageConsultaTienda.apareceInformacionTienda(), State.Defect);

@@ -196,10 +196,6 @@ public class CheckoutFlow extends StepBase {
 			new Page1DktopCheckoutSteps().stepIntroduceCodigoVendedorVOTF("111111");
 		}
 		
-		if (dataPago.getFTCkout().checkLoyaltyPoints) {
-			pageCheckoutWrapperSteps.validateBlockLoyalty();
-			pageCheckoutWrapperSteps.loyaltyPointsApply();
-		}
 	}
 	
 	public void testInputCodPromoEmplSpain() {

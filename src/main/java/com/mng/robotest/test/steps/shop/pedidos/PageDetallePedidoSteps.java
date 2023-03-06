@@ -44,7 +44,7 @@ public class PageDetallePedidoSteps {
 	
 	@Validation
 	public ChecksTM areOkPrendasOnline(int numPrendasCompraOnline) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 2;
 	  	checks.add(
 	  		"Es visible alguna prenda (la esperamos hasta " + seconds + " segundos)",
@@ -68,7 +68,7 @@ public class PageDetallePedidoSteps {
 	
 	@Validation
 	private ChecksTM validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	  	checks.add(
 	  		"Aparece la página de detalle del pedido",
 	  		pageDetalle.isPage(), State.Warn);	   

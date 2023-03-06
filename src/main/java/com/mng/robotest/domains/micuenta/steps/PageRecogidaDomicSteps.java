@@ -13,7 +13,7 @@ public class PageRecogidaDomicSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaIsPageSinDevoluciones () {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de Recogida a Domicilio (la esperamos hasta " + seconds + " segundos)",

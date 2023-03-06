@@ -18,7 +18,7 @@ public class PageDotpay1rstSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage(String nombrePago, String importeTotal, String codPais) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
 			pageDotpay1rst.isPresentEntradaPago(nombrePago), State.Warn);

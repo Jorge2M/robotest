@@ -123,7 +123,7 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM isCroatiaImportInFn() throws Exception {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	String precioScreen = pageCheckoutWrapper.getPrecioTotalFromResumen(false);
 	 	String importeStr = pageCheckoutWrapper.getPrecioTotalFromResumen(true);
 	 	Float importe = Float.valueOf(importeStr.replace(",", "."));
@@ -141,7 +141,7 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM isCroatiaImportInEuros() throws Exception {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	String precioScreenEuros = pageCheckoutWrapper.getCroaciaPrecioTotalInEuros(false);
 	 	String importeStrEuros = pageCheckoutWrapper.getCroaciaPrecioTotalInEuros(true);
 	 	Float importeEuros = Float.valueOf(importeStrEuros.replace(",", "."));
@@ -173,7 +173,7 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAvailablePagos(boolean isEmpl) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país " + 
 			"(" + dataTest.getPais().getListPagosForTest(app, isEmpl).size() + ")",
@@ -183,7 +183,7 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkLogosPagos(boolean isEmpl) { 
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		List<Pago> listPagos = dataTest.getPais().getListPagosForTest(app, isEmpl);
 		if (listPagos.size()==1 && channel.isDevice()) {
 			return checks;
@@ -384,7 +384,7 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterInputTarjetaEmpleado(Pais pais, AccesoEmpl accesoEmpl) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
 			"Aparece el campo de introducción del primer apellido (lo esperamos hasta " + seconds + " segundos)",

@@ -18,7 +18,7 @@ public class SecProductDescrOldSteps {
 	
 	@Validation
 	public ChecksTM validateAreInStateInitial(AppEcom appE) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		for (TypePanel typePanel : TypePanel.values()) {
 			TypeStatePanel stateExpected = TypeStatePanel.MISSING;
 			if (typePanel.getListApps().contains(appE)) {

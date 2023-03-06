@@ -33,7 +33,7 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 
 	@Validation
 	public ChecksTM validateIsPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Estamos en la página " + Orden.TITULO.getXPath(),
 			state(Visible, Orden.INITIAL_TITULO.getBy()).wait(10).check(), State.Defect);
@@ -58,7 +58,7 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 
 	@Validation
 	private ChecksTM validatePreProductionElements() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Está presente el enlace de <b>She</b>",
 			state(Visible, Section.She.getBy()).wait(10).check(), State.Defect);
@@ -101,7 +101,7 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 
 	@Validation
 	private ChecksTM validateSectionPrenda() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Se vuelve visible el selector de tipo de <b>Prendas</b>",
 			state(Visible, Orden.SELECTOR_PRENDAS.getBy()).wait(13).check(), State.Defect);
@@ -124,7 +124,7 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 
 	@Validation
 	private ChecksTM validateTipoPrenda() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 20;
 		checks.add(
 			"Aparecen imagenes en la nueva página (lo esperamos hasta " + seconds + " segundos)",
@@ -148,7 +148,7 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 
 	@Validation
 	private ChecksTM validateBajarPrenda(int seconds) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Se sigue viendo la segunda prenda",
 			state(Visible, Orden.SEGUNDA_PRENDA.getBy()).wait(seconds).check(), State.Defect);
@@ -169,7 +169,7 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 
 	@Validation
 	private ChecksTM validateAplicarOrden() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece correctamente el modal de confirmacion",
 			state(Visible, Modal.CONTAINER.getBy()).wait(15).check(), State.Defect);

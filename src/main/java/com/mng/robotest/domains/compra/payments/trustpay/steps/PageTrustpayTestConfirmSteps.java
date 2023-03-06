@@ -14,7 +14,7 @@ public class PageTrustpayTestConfirmSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Figura el botón \"OK\"",
 			pageTrustpayTestConfirm.isPresentButton(typeButtons.OK), State.Defect);

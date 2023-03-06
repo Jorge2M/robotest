@@ -39,7 +39,7 @@ public class SecFiltrosSteps extends StepBase {
 	private ChecksTM checkAfterSelectFiltroColores(
 			List<Color> colorsSelected, String litMenu, int numArticulos1page) {
 		
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		List<String> listCodColors = Color.getListCodigosColor(colorsSelected);
 		String currentUrl = driver.getCurrentUrl();
 	 	checks.add(

@@ -37,7 +37,7 @@ public class SecSelectDPointSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		State stateVal = State.Warn;
 		if (dataSearchDp.typeData==DataSearchDp.CODIGO_POSTAL) {
@@ -53,7 +53,7 @@ public class SecSelectDPointSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaDeliveryPointOfType(TypeDeliveryPoint typeDp) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 3;
 	 	checks.add(
 			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + seconds + " segundos)",

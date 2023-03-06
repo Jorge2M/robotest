@@ -34,7 +34,7 @@ public class TarjetaMangoSteps extends StepBase {
 	 @Validation
 	 private ChecksTM checkAfterClickLoQuieroAhoraButton() {
 		 PageMangoCard pageMangoCard = new PageMangoCard();
-		 ChecksTM checks = ChecksTM.getNew();
+		 var checks = ChecksTM.getNew();
 		 checks.add(
 			"Aparece el campo <b>Nombre</b>",
 	 		pageMangoCard.isPresentNameField(), State.Warn);
@@ -74,7 +74,7 @@ public class TarjetaMangoSteps extends StepBase {
 	 
 	 @Validation
 	 private ChecksTM checkAfterClickLoQuieroAhoraUnderForm() {
-  		ChecksTM checks = ChecksTM.getNew();
+  		var checks = ChecksTM.getNew();
 		String ventanaPadre = driver.getWindowHandle();
 		PageObjTM.switchToAnotherWindow(driver, ventanaPadre);	
 		waitMillis(1000); //El javascript lanzado por "waitForPageLoaded" rompe la carga de la página -> hemos de aplicar wait explícito previo
@@ -101,7 +101,7 @@ public class TarjetaMangoSteps extends StepBase {
 	 
 	 @Validation
 	 private ChecksTM checkValidPageTarjetaMango(String ventanaOriginal) {
-  		ChecksTM checks = ChecksTM.getNew();
+  		var checks = ChecksTM.getNew();
 	 	checks.add(
 	 		"Aparece la página de Solicitud de tu Tarjeta MANGO",
 	 		pageInputDataSolMangoCard.isPage2(), State.Defect);

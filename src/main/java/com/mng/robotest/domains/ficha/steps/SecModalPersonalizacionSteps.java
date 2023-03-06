@@ -36,7 +36,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	
 	@Validation
 	private ChecksTM checkAreArticleCustomizable(State levelError) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"El artículo es personalizable (aparece el link \"Añadir bordado\")",
 			state(Present, ModalElement.ANADIR_BORDADO_LINK.getBy(channel)).wait(1).check(), 
@@ -56,7 +56,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 	@Validation
 	private ChecksTM validateModal() {
 		int seconds = 3;
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el modal de personalización con el botón <b>Siguiente</b> (lo esperamos hasta " + seconds + " segundos)",
 			isBotonSiguienteVisible(seconds), 
@@ -105,7 +105,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 
 	@Validation
 	public ChecksTM validateIconSelectedDesktop() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 3;
 		checks.add(
 			"Aparece seleccionado el primer icono",
@@ -140,7 +140,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 
 	@Validation
 	public ChecksTM validateWhereDesktop() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 3;
 		checks.add(
 			"Aparecen las opciones correspondientes a la ubicación del bordado",
@@ -156,7 +156,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 
 	@Validation
 	public ChecksTM validateSelectionColor() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 3;
 		checks.add(
 			"Aparecen los botones correspondientes a los colores",

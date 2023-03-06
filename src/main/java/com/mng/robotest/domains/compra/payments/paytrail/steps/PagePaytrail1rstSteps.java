@@ -15,7 +15,7 @@ public class PagePaytrail1rstSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		String nombrePagoCabecera = "Finnish E-Banking";
 		int seconds = 2;
 		checks.add(

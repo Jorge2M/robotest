@@ -27,7 +27,7 @@ public class SecCabeceraSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validateIconoBolsa() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(Visible, 2);
 		if (dataTest.getPais().isVentaOnline()) {
 			checks.add(

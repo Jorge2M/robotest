@@ -15,7 +15,7 @@ public class PageGestorSaldosTPVSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Estamos en la página " + PageGestorSaldosTPV.TITULO,
 			pageGestorSaldosTPV.isPage(), State.Defect);
@@ -38,7 +38,7 @@ public class PageGestorSaldosTPVSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterConsultSaldosTpv(String tpv) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la tabla de saldos",
 			pageGestorSaldosTPV.isTablaSaldosVisible(), State.Defect);

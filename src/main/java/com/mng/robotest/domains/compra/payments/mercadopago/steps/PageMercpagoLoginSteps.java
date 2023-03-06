@@ -14,7 +14,7 @@ public class PageMercpagoLoginSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de identificación de Mercadopago",
 			pageMercpagoLogin.isPage(), State.Defect);

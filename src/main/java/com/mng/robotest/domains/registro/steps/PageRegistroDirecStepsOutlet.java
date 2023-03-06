@@ -18,7 +18,7 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 	
 	@Validation
 	public ChecksTM isPageFromPais() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 3;
 		checks.add(
 			"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + seconds + " segundos)",

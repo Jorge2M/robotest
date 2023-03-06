@@ -17,7 +17,7 @@ import com.mng.robotest.test.exceptions.NotFoundException;
 public class CheckerGoogleAnalytics implements Checker {
 
 	public ChecksTM check(WebDriver driver) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		
 		GestorDatosHarJSON gestorHAR = UtilsChecker.getGestorHar(driver);
 		if (gestorHAR!=null) {

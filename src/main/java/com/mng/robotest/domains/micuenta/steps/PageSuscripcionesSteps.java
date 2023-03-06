@@ -32,7 +32,7 @@ public class PageSuscripcionesSteps extends StepBase {
 		StringTokenizer tokensLinDesmarcadas = new StringTokenizer(lineasUnchecked, ",");
 		int numLinDesmarcadas = tokensLinDesmarcadas.countTokens();
 
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparecen "  + numLineasTotales + " Newsletter",
 			pageSuscripciones.getNumNewsletters()==numLineasTotales, State.Warn);
@@ -52,7 +52,7 @@ public class PageSuscripcionesSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaIsDataAssociatedToRegister(List<LineaType> linesMarked) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		
 		List<LineaType> linesAll = PageRegistroPersonalizacionShop.ALL_LINEAS;
 		int numLineasTotales = PageRegistroPersonalizacionShop.ALL_LINEAS.size();

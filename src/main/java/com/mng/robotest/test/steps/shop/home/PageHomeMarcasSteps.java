@@ -28,7 +28,7 @@ public class PageHomeMarcasSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPageOk() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		if (app!=AppEcom.outlet) {
 			checks.add(
 				"Aparece la home de marcas/multimarcas según el país",

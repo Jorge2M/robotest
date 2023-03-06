@@ -25,7 +25,7 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 	
 	@Validation
 	public ChecksTM validaIsPageRegistroOK(Map<String,String> dataRegistro) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		String lineasComaSeparated = "";
 		int numLineas = 0;
 		if (pais.getShoponline().stateLinea(LineaType.SHE, app)==ThreeState.TRUE) {

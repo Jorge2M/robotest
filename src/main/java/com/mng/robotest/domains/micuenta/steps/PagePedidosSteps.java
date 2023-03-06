@@ -13,7 +13,7 @@ public class PagePedidosSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validaIsPageSinPedidos (String usrRegistrado) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de \"Mis Pedidos\"",
 			pageMispedidos.isPage(), State.Defect);

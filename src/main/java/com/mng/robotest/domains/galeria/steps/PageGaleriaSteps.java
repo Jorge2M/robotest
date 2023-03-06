@@ -249,7 +249,7 @@ public class PageGaleriaSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkNotRepeatedArticles() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		List<DataArticleGalery> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
 		String producRepeatedWarning = "";
 		if (productsRepeated!=null && !productsRepeated.isEmpty()) {
@@ -307,7 +307,7 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation
 	private ChecksTM checkOrderListArticles(FilterOrdenacion typeOrdenacion, int numArticulosPant, int numArticulosValidar) 
 	throws Exception {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Aparecen > 1 prendas",
 			numArticulosPant > 1, State.Warn);
@@ -333,7 +333,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation
 	private ChecksTM checkBackTo1ersElementOk() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Es clickable el 1er elemento de la lista",
 			pageGaleria.isClickableArticuloUntil(1, 0), State.Warn);
@@ -446,7 +446,7 @@ public class PageGaleriaSteps extends StepBase {
 			//Si hemos realizado varios clicks y sólo hay 2 imágenes habremos vuelto a la inicial
 			state = State.Warn;
 		}
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Se modifica la imagen asociada al artículo (<b>antes</b>: " + srcImg1erSlider + ", <b>ahora</b>: " + srcImg2oSlider,
 			srcImg2oSlider.compareTo(srcImg1erSlider)!=0, state);
@@ -498,7 +498,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation
 	private ChecksTM checkIsFichaArticle(String nombre1erArt, String precio1erArt, int seconds) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 
 		PageFicha pageFicha = PageFicha.of(channel);
 	  	checks.add(
@@ -592,7 +592,7 @@ public class PageGaleriaSteps extends StepBase {
 	private ChecksTM checkArticlesEqualsToPreviousGalery(
 		int articulosComprobar, ListDataArticleGalery listArticlesGaleriaAnt, 
 		ListDataArticleGalery listArticlesGaleriaAct, NumColumnas numColumnas) {
-   		ChecksTM checks = ChecksTM.getNew();
+   		var checks = ChecksTM.getNew();
    		
    		boolean articlesEquals = listArticlesGaleriaAct.isArticleListEquals(listArticlesGaleriaAnt, articulosComprobar);
    		String infoWarning = "";
@@ -626,7 +626,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation
 	private ChecksTM checkFiltrosSalesOnInGalerySale(SecMenusFiltroCollection filtrosCollection) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 	 		"<b style=\"color:blue\">Rebajas</b></br>" +
 	 		"Son visibles los menús laterales de filtro a nivel detemporadas (Collection)",
@@ -686,7 +686,7 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation
 	public ChecksTM validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles,
 											   State levelError, StoreType store) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM_OTHER, listTemporadas);
@@ -719,7 +719,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, StoreType store) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		List<String> listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
 		checks.add(
@@ -757,7 +757,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation
 	private static ChecksTM checkAfterClickInfoRebajas(WebDriver driver) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		SecBannerHeadGallery secBannerHead = new PageGaleriaDesktop().getSecBannerHead();
 		int seconds = 1;
 		checks.add(
@@ -774,7 +774,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation
 	public ChecksTM validateGaleriaAfeterSelectMenu() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int secondsArticle = 8;
 		int secondsIcon = 2;
 		checks.add (
@@ -800,7 +800,7 @@ public class PageGaleriaSteps extends StepBase {
 
 //	@Validation
 //	public ChecksTM checkVisibilitySubmenus(List<Menu2onLevel> menus2onLevel) {
-//		ChecksTM checks = ChecksTM.getNew();
+//		var checks = ChecksTM.getNew();
 //		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
 //			checks.add(
 //				"Aparece el submenú <b>" + menu2oNivelTmp.getNombre() + "</b>",

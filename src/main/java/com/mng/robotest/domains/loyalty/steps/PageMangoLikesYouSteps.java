@@ -19,7 +19,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 	
 	@Validation
 	public ChecksResultWithNumberPoints checkIsPageOk() {
-		ChecksResultWithNumberPoints checks = new ChecksResultWithNumberPoints();
+		var checks = new ChecksResultWithNumberPoints();
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de <b>Mango likes you</b> (esperamos hasta " + seconds + " segundos)",
@@ -74,15 +74,8 @@ public class PageMangoLikesYouSteps extends StepBase {
 	public void click(TabLink tabLink) {
 		pageMangoLikesYou.click(tabLink);
 		if (tabLink==TabLink.HISTORIAL) {
-			checkHistorialVisible(5);
+			new PageHistorialLikesSteps().checkHistorialVisible(5);
 		}
-	}
-	
-	@Validation (
-		description="Aparece el historial de movimientos de Loyalty (lo esperamos #{seconds} segundos)",
-		level=State.Defect)
-	public boolean checkHistorialVisible(int seconds) {
-		return pageMangoLikesYou.isMovimientoVisible(seconds);
 	}
 	
 	@Step(

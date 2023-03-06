@@ -18,7 +18,7 @@ public class PageSelectLineaVOTFSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage() { 
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el banner correspondiente a SHE",
 			pageSelectLineaVOTF.isBannerPresent(LineaType.SHE), State.Warn);

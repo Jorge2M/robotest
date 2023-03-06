@@ -7,6 +7,7 @@ import java.util.*;
 import javax.xml.bind.annotation.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago.TypePago;
 import com.mng.robotest.test.utils.LevelPais;
 import com.mng.robotest.test.utils.PagoGetter;
@@ -197,7 +198,8 @@ public class Pais implements Serializable {
 	
 	public boolean isCheckoutMvp() {
 		return (getmvp()!=null && 
-				"S".compareTo(getmvp())==0);
+				"S".compareTo(getmvp())==0 &&
+				PageBase.isEnvPRO());
 	}	
 	
 	public String getMoneda() {

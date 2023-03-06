@@ -90,7 +90,7 @@ public class SecBannersSteps extends StepBase {
 	@Validation
 	public ChecksTM validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre) 
 	throws Exception {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds1 = 3;
 		int marginElements = 2;
 		int seconds2 = 1;

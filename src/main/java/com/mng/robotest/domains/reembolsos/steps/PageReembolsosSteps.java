@@ -30,7 +30,7 @@ public class PageReembolsosSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkClickReembolsos(boolean paisConSaldoCta) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de reembolsos",
 			pageReembolsos.isPage(), State.Defect);		
@@ -103,7 +103,7 @@ public class PageReembolsosSteps extends StepBase {
 
 	@Validation
 	private ChecksTM checkAfterModifyDataTransferencia() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 15;
 		checks.add(
 			"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + seconds + " segundos)",
@@ -128,7 +128,7 @@ public class PageReembolsosSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkAfterSelectStoreCredit() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	   	checks.add(
 			"Aparece seleccionado el radiobutton de \"Store Credit\"",
 			pageReembolsos.isCheckedRadio(TypeReembolso.STORE_CREDIT), State.Warn);

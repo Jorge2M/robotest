@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -109,13 +110,21 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	}
 
 	private void clickFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
+		try {
+			clickFiltroOptionStaleNotSafe(typeFiltro, textFiltro);
+		}
+		catch (StaleElementReferenceException e) {
+			waitMillis(500);
+			clickFiltroOptionStaleNotSafe(typeFiltro, textFiltro);
+		}
+	}
+	
+	private void clickFiltroOptionStaleNotSafe(FiltroMobil typeFiltro, String textFiltro) {
 		WebElement filtroLinea = getElement(typeFiltro.getXPathLineaFiltro());
 		filtroLinea.click();
 		waitLoadPage();
 		By byFiltroOption = By.xpath(getXPathFiltroOption(textFiltro));
-		//state(Clickable, byFiltroOption).wait(1).check();
 		click(filtroLinea).by(byFiltroOption).waitLink(1).exec();
-		//filtroLinea.findElement(byFiltroOption).click();
 		waitLoadPage();
 	}
 	private String getXPathFiltroOption(String textFiltro) {

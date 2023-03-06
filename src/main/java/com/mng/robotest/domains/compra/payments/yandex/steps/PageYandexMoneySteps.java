@@ -25,7 +25,7 @@ public class PageYandexMoneySteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkIsPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el input para el <b>Payment Code</b>",
 			pageYandexMoney.isVisibleInputPaymentCode(), State.Warn);

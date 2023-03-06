@@ -14,7 +14,7 @@ public class PageRecuperaPasswdSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM isPage() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
 			"Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + seconds + " segundos)",
@@ -39,7 +39,7 @@ public class PageRecuperaPasswdSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM isPageCambioPassword() {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
 			"Aparece el mensaje de \"Revisa tu email\" (lo esperamos hasta " + seconds + " segundos)",

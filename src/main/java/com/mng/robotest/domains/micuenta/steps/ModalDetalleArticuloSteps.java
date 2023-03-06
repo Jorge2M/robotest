@@ -33,7 +33,7 @@ public class ModalDetalleArticuloSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsOkArticle(ArticuloScreen articulo) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		
 		checks.add(
 			"Se muestra la referencia " + articulo.getReferencia(),

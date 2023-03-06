@@ -12,7 +12,7 @@ public class PagePasarelaOtrasSteps extends StepBase {
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal) {
-		ChecksTM checks = ChecksTM.getNew();
+		var checks = ChecksTM.getNew();
 		if (channel==Channel.desktop) {
 		   	checks.add(
 				"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
