@@ -199,8 +199,7 @@ public class Pais implements Serializable {
 	
 	public boolean isCheckoutMvp() {
 		return (getmvp()!=null && 
-				"S".compareTo(getmvp())==0 &&
-				PageBase.isEnvPRO());
+				"S".compareTo(getmvp())==0);
 	}	
 	
 	public String getMoneda() {
