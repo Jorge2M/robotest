@@ -35,7 +35,7 @@ public class PageMiCuentaSteps extends StepBase {
 	
 	private void goToMisDirecciones() {
 		userMenusSteps.clickMenuMiCuenta();
-		clickLinkMisDirecciones();
+	    clickLinkMisDirecciones();
 	}
 
 	@Step(

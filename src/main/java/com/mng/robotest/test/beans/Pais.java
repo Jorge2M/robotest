@@ -11,6 +11,7 @@ import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago.TypePago;
 import com.mng.robotest.test.utils.LevelPais;
 import com.mng.robotest.test.utils.PagoGetter;
+import com.mng.robotest.test.utils.UtilsTest;
 import com.mng.robotest.test.utils.PagoGetter.PaymentCountry;
 
 @XmlRootElement
@@ -213,6 +214,10 @@ public class Pais implements Serializable {
 
 	public boolean isMisdirecciones(AppEcom app) {
 		if (app!=AppEcom.shop) {
+			return false;
+		}
+		//TODO eliminar el if cuando el nuevo apartado de "Mis Direcciones" esté subido a PRO
+		if (PageBase.isEnvPRO() && UtilsTest.dateBeforeToday("2023-04-07")) {
 			return false;
 		}
 		return (getMultidireccion()!=null && 

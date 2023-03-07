@@ -7,6 +7,7 @@ import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.domains.loyalty.steps.PageHistorialLikesSteps;
 import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps;
+import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.GaleriaNavigationsSteps;
@@ -36,8 +37,10 @@ public class Loy001 extends TestBase {
 		accessAndClearData();
 		addBagArticleNoRebajadoAndClickComprar();
 		inputLoyaltyPoints();
-		String idPedido = executeMastercardEnvioTiendaPayment();
-		checkLoyaltyPointsGenerated(idPedido);		
+		if (!PageBase.isEnvPRO()) {
+			String idPedido = executeMastercardEnvioTiendaPayment();
+			checkLoyaltyPointsGenerated(idPedido);
+		}
 	}
 	
 	private void addBagArticleNoRebajadoAndClickComprar() throws Exception {
