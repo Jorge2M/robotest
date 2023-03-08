@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroPersonalizacionShop;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 
 public class PageRegistroPersonalizacionShopSteps extends StepBase {
@@ -20,22 +21,34 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 		return pageRegistroPersonalizacion.isPageUntil(seconds);
 	}
 	
+	public void inputData(DataNewRegister data) {
+		inputDataWithouBirthDate(data);
+		if (PaisShop.getPais(dataTest.getPais())!=PaisShop.COREA_DEL_SUR) {
+			inputBirthDate(data.getDateOfBirth());
+		}
+	}
+	
 	@Step (
 		description=
 			"Introducir los datos:<br>" + 
 			"  - Nombre: <b>#{data.getName()}</b><br>" +
 			"  - Código postal: <b>#{data.getPostalCode()}</br>" + 
-			"  - Fecha de nacimiento: <b>#{data.getDateOfBirth()}</b><br>" +
 			"  - Género: <b>#{data.getGender()}</b><br>" +
 			"  - Líneas: <b>#{data.getLineas()}</b>",
 		expected=
 			"La introducción de datos es correcta")
-	public void inputData(DataNewRegister data) {
+	private void inputDataWithouBirthDate(DataNewRegister data) {
 		pageRegistroPersonalizacion.inputPostalCode(data.getPostalCode());
-		pageRegistroPersonalizacion.inputDateOfBirth(data.getDateOfBirth());
 		pageRegistroPersonalizacion.inputName(data.getName());
 		pageRegistroPersonalizacion.selectGender(data.getGender());
 		pageRegistroPersonalizacion.selectLineas(data.getLineas());
+	}		
+	
+	@Step (
+		description="Introducir la Fecha de nacimiento: <b>#{birthDate}</b><br>",
+		expected="La introducción de datos es correcta")
+	private void inputBirthDate(String birthDate) {
+		pageRegistroPersonalizacion.inputDateOfBirth(birthDate);
 	}	
 	
 	@Step (

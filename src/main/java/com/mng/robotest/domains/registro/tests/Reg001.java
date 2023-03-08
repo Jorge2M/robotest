@@ -13,6 +13,7 @@ import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataMango;
+import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
@@ -38,7 +39,7 @@ public class Reg001 extends TestBase {
 				true,
 				"Jorge",
 				pais.getCodpos(),
-				"23/04/1974",
+				"04/23/1974",
 				GenderOption.MASCULINO,
 				Arrays.asList(LineaType.SHE, LineaType.HE, LineaType.KIDS));
 	}
@@ -46,7 +47,11 @@ public class Reg001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		accesoAndClickRegistrate();
-		selectLinkPoliticaPrivacidad();
+		if (isCorea()) {
+			inputBirthDateAndConsentPersonalInfo();			
+		} else {
+			selectLinkPoliticaPrivacidad();
+		}
 		inputInitialDataAndClickCreate();
 		inputPersonalizedDataAndClickGuardar();
 		checkLoginAndUserData();
@@ -56,6 +61,12 @@ public class Reg001 extends TestBase {
 		access();
 		new SecMenusUserSteps().selectRegistrate();
 	}	
+	
+	private void inputBirthDateAndConsentPersonalInfo() {
+		pageRegistroInitialSteps.clickConsentPersonalInformationLink();
+		pageRegistroInitialSteps.clickConsentPersonalInformationRadio();
+		pageRegistroInitialSteps.inputBirthDate(dataNewRegister.getDateOfBirth());
+	}
 	
 	private void selectLinkPoliticaPrivacidad() {
 		pageRegistroInitialSteps.clickPoliticaPrivacidad();
@@ -80,5 +91,8 @@ public class Reg001 extends TestBase {
 		pageMiCuentaSteps.goToSuscripcionesAndValidateData(dataNewRegister.getLineas());
 	}	
 
+	private boolean isCorea() {
+		return PaisShop.getPais(dataTest.getPais())==PaisShop.COREA_DEL_SUR;
+	}
 
 }

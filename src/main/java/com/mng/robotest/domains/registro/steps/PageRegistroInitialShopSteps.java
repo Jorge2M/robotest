@@ -48,6 +48,19 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		GenericChecks.checkDefault();
 	}	
 
+	public void inputBirthDate(String birthdate) {
+		pageRegistroInitial.inputBirthDate(birthdate);
+	}
+	public void clickLinkGivePromotions() {
+		pageRegistroInitial.clickLinkGivePromotions();
+	}
+	public void clickConsentPersonalInformationLink() {
+		pageRegistroInitial.clickConsentPersonalInformationLink();
+	}
+	public void clickConsentPersonalInformationRadio() {
+		pageRegistroInitial.clickConsentPersonalInformationRadio();
+	}
+
 	@Step (
 		description="Pulsar el link <b>Política de privacidad</b>",
 		expected="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"")	

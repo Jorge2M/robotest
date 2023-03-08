@@ -10,9 +10,17 @@ public class PageRegistroInitialShop extends PageBase {
 	private static final String XPATH_MODAL_CONTENT = "//div[@id[contains(.,'registerModal')]]";
 	private static final String XPATH_INPUT_EMAIL = XPATH_MODAL_CONTENT + "//input[@id='email']";
 	private static final String XPATH_INPUT_PASSWORD = XPATH_MODAL_CONTENT + "//input[@id='password']";
+	
+	private static final String XPATH_INPUT_BIRTHDATE = "//input[@id='birthdate']";
+	
 	private static final String XPATH_INPUT_MOVIL = XPATH_MODAL_CONTENT + "//input[@id='mobile-number']";
 	private static final String XPATH_RADIO_GIVE_PROMOTIONS = XPATH_MODAL_CONTENT + "//input[@id='newsletter']";
-	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//div[@class='mng-form-buttons']/button[@type='submit']";
+	private static final String XPATH_LINK_GIVE_PROMOTIONS = XPATH_RADIO_GIVE_PROMOTIONS + "/..//*[@data-testid='mng-link']";	
+	private static final String XPATH_RADIO_CONSENT_PERSONAL_INFORMATION = "//input[@id='createAccountLegal']";
+	private static final String XPATH_LINK_CONSENT_PERSONAL_INFORMATION = XPATH_RADIO_CONSENT_PERSONAL_INFORMATION + "/..//*[@data-testid='mng-link']";
+
+	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//div[@class='mng-form-buttons']/button[@type='submit']";	
+	
 	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = XPATH_MODAL_CONTENT + "//*[@data-testid='registry.consentgdprMobile.container']//*[@data-testid='mng-link']";
 	private static final String XPATH_MODAL_POLITICA_PRIVACIDAD_DESKTOP = "//div[@name='gdprLayer']";
 	private static final String XPATH_MODAL_POLITICA_PRIVACIDAD_MOBILE = "//*[@data-testid='sheet.draggable.dialog']";
@@ -49,8 +57,21 @@ public class PageRegistroInitialShop extends PageBase {
 		getElement(XPATH_INPUT_MOVIL).sendKeys(number);
 	}	
 	
+	public void inputBirthDate(String birthdate) {
+		getElement(XPATH_INPUT_BIRTHDATE).sendKeys(birthdate);
+	}
+	
 	public void clickRadioGivePromotions() {
 		click(XPATH_RADIO_GIVE_PROMOTIONS).exec();
+	}
+	public void clickLinkGivePromotions() {
+		click(XPATH_LINK_GIVE_PROMOTIONS).exec();
+	}
+	public void clickConsentPersonalInformationRadio() {
+		click(XPATH_RADIO_CONSENT_PERSONAL_INFORMATION).exec();
+	}	
+	public void clickConsentPersonalInformationLink() {
+		click(XPATH_LINK_CONSENT_PERSONAL_INFORMATION).exec();
 	}
 	
 	public void clickCreateAccountButton() {
