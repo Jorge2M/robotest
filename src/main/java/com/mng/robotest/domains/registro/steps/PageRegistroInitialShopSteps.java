@@ -48,15 +48,29 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		GenericChecks.checkDefault();
 	}	
 
+	@Step(
+		description="Introducir la fecha de nacimiento <b>#{birthdate}</b>",
+		expected="El dato se introduce correctamente")	
 	public void inputBirthDate(String birthdate) {
 		pageRegistroInitial.inputBirthDate(birthdate);
 	}
-	public void clickLinkGivePromotions() {
-		pageRegistroInitial.clickLinkGivePromotions();
-	}
+	
+	@Step(
+		description="Seleccionar el link <b>Collection and use</b>",
+		expected="Aparece el apartado de collection and use")	
 	public void clickConsentPersonalInformationLink() {
 		pageRegistroInitial.clickConsentPersonalInformationLink();
+		checkPersonalInformationInfoVisible();
+	}	
+	@Validation(
+	    description="Aparece el apartado de \"Collection and use of your personal information\"",
+	    level=State.Defect)	
+	public boolean checkPersonalInformationInfoVisible() {
+		return pageRegistroInitial.checkPersonalInformationInfoVisible();
 	}
+	@Step(
+		description="Seleccionar el checkbox <b>Collection and use</b>",
+		expected="Se selecciona el checkbox")	
 	public void clickConsentPersonalInformationRadio() {
 		pageRegistroInitial.clickConsentPersonalInformationRadio();
 	}

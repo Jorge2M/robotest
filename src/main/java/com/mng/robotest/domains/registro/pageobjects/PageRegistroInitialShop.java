@@ -18,6 +18,7 @@ public class PageRegistroInitialShop extends PageBase {
 	private static final String XPATH_LINK_GIVE_PROMOTIONS = XPATH_RADIO_GIVE_PROMOTIONS + "/..//*[@data-testid='mng-link']";	
 	private static final String XPATH_RADIO_CONSENT_PERSONAL_INFORMATION = "//input[@id='createAccountLegal']";
 	private static final String XPATH_LINK_CONSENT_PERSONAL_INFORMATION = XPATH_RADIO_CONSENT_PERSONAL_INFORMATION + "/..//*[@data-testid='mng-link']";
+	private static final String XPATH_PERSONAL_INFORMATION_INFO = "//div[@id='createAccountLegal_description']";	
 
 	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//div[@class='mng-form-buttons']/button[@type='submit']";	
 	
@@ -72,6 +73,9 @@ public class PageRegistroInitialShop extends PageBase {
 	}	
 	public void clickConsentPersonalInformationLink() {
 		click(XPATH_LINK_CONSENT_PERSONAL_INFORMATION).exec();
+	}
+	public boolean checkPersonalInformationInfoVisible() {
+		return state(Visible, XPATH_PERSONAL_INFORMATION_INFO).check();
 	}
 	
 	public void clickCreateAccountButton() {
