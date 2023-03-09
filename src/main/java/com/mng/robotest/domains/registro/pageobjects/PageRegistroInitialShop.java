@@ -23,7 +23,7 @@ public class PageRegistroInitialShop extends PageBase {
 	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//div[@class='mng-form-buttons']/button[@type='submit']";	
 	
 	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = XPATH_MODAL_CONTENT + "//*[@data-testid='registry.consentgdprMobile.container']//*[@data-testid='mng-link']";
-	private static final String XPATH_MODAL_POLITICA_PRIVACIDAD_DESKTOP = "//div[@name='gdprLayer']";
+	private static final String XPATH_MODAL_POLITICA_PRIVACIDAD_DESKTOP = "//div[@aria-labelledby[contains(.,'gdprLayer')]]";
 	private static final String XPATH_MODAL_POLITICA_PRIVACIDAD_MOBILE = "//*[@data-testid='sheet.draggable.dialog']";
 	private static final String XPATH_LINK_POLITICA_PRIVACIDAD_MODAL = "//*[@data-testid='mng-link']";
 	private static final String XPATH_CLOSE_MODAL_DESKTOP = "//*[@data-testid='modal.close.button']";
