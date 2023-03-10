@@ -10,9 +10,9 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	private static final String XPATH_PAIS_SELECCIONADO = "//input[@data-testid='countrySelector.country.inputSearch.search']";
 	private static final String XPATH_PAIS_OPTION = "//li[@data-testid[contains(.,'countrySelector.country.list.option')]]";
 	private static final String XPATH_ICON_SALE_PAIS_SELECCIONADO = XPATH_PAIS_SELECCIONADO + "//span[@class[contains(.,'icon-outline-bag')]]";
-	private static final String XPATH_SELECTOR_IDIOMAS = "//div[@id='countrySelector.languages']";
+	private static final String XPATH_SELECTOR_IDIOMAS = "//div[@id='countrySelector.languagues']/..";
 	private static final String XPATH_IDIOMA_OPTION = XPATH_SELECTOR_IDIOMAS + "//div";
-	private static final String XPATH_BUTTON_ACCEPT = "//div[@class[contains(.,'CountrySelector')]]//button";
+	private static final String XPATH_BUTTON_ACCEPT = "//div[@class[contains(.,'CountrySelector')]]//button[@type='submit']";
 	
 	private String getXPathCountryItemFromCodigo(String codigoPrehome) {
 		return XPATH_PAIS_OPTION + "//self::*[value='" + codigoPrehome + "']";
@@ -21,7 +21,7 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 		return XPATH_PAIS_OPTION + "//self::*[text='" + nameCountry + "']";
 	}
 	private String getXPathIdiomaItemFromName(String nameIdioma) {
-		return XPATH_IDIOMA_OPTION + "//self::*[text='" + nameIdioma + "']";
+		return XPATH_IDIOMA_OPTION + "//self::*[@name='" + nameIdioma + "']";
 	}
 	
 	@Override
@@ -56,12 +56,13 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	
 	@Override
 	public boolean isPaisSelected() {
+		state(Visible, XPATH_PAIS_SELECCIONADO).wait(1).check();
 		return getElement(XPATH_PAIS_SELECCIONADO).getAttribute("value")
 				.contains(pais.getNombre_pais());
 	}
 	
 	private void unfoldCountrys() {
-		click(XPATH_SELECTOR_PAISES).build();
+		click(XPATH_SELECTOR_PAISES).exec();
 	}
 	
 	private void inputAndSelectCountry() {
@@ -81,14 +82,29 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	}
 	
 	@Override
-	void selectButtonForEnter() {
-		click(XPATH_BUTTON_ACCEPT).exec();
-	}	
-	
-	@Override
 	void seleccionaIdioma(String nombrePais, String nombreIdioma) {
+		unfoldIdiomas();
 		String xpathButtonIdioma = getXPathIdiomaItemFromName(nombreIdioma);
 		click(xpathButtonIdioma).exec();
+	}
+	
+	@Override
+	public void selecionIdiomaAndEnter() { 
+		if (pais.getListIdiomas().size() > 1) {
+			seleccionaIdioma(pais.getNombre_pais(), idioma.getCodigo().getLiteral());
+		} 
+		selectButtonForEnter();
+		isNotPageUntil(30);
+		waitLoadPage();
+	}
+
+	private void unfoldIdiomas() {
+		click(XPATH_SELECTOR_IDIOMAS).exec();
+	}
+	
+	@Override
+	void selectButtonForEnter() {
+		click(XPATH_BUTTON_ACCEPT).exec();
 	}	
 	
 }

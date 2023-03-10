@@ -5,6 +5,7 @@ import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 public class PagePrehome implements PagePrehomeI, PageFromFooter {
 
 	private PagePrehomeI pagePreHome = null;
+	private boolean preHomeLocated = false;
 	
 	public String getName() {
 		return "Prehome";
@@ -45,23 +46,31 @@ public class PagePrehome implements PagePrehomeI, PageFromFooter {
 		pagePreHome.selecionIdiomaAndEnter();
 	}
 	public void accesoShopViaPrehome(boolean acceptCookies) throws Exception {
-		setPagePreHome();
+		previousAccessShopSteps(acceptCookies);
 		pagePreHome.accesoShopViaPrehome(acceptCookies);
 	}
 	
 	public void previousAccessShopSteps(boolean acceptCookies) throws Exception {
 		setPagePreHome();
 		pagePreHome.previousAccessShopSteps(acceptCookies);
+		setPagePreHome();
 	}
 
 	private void setPagePreHome() {
-		if (pagePreHome==null) {
+		if (!preHomeLocated || pagePreHome==null) {
 			PagePrehomeI pagePrehomeOld = new PagePrehomeOld();
 			if (pagePrehomeOld.isPage()) {
+				preHomeLocated = true;
 				pagePreHome = pagePrehomeOld;
-			} else {
-				pagePreHome = new PagePrehomeNew();
+				return;
+			} 
+			PagePrehomeI pagePrehomeNew = new PagePrehomeNew();
+			if (pagePrehomeNew.isPage()) {
+				preHomeLocated = true;
+				pagePreHome = pagePrehomeNew;
+				return;
 			}
+			pagePreHome = pagePrehomeOld;
 		}
 	}
 	

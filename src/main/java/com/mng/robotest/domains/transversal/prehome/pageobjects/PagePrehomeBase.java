@@ -19,12 +19,12 @@ public abstract class PagePrehomeBase extends PageBase {
 	abstract void selecionPais();
 	abstract void seleccionaIdioma(String nombrePais, String nombreIdioma);
 	abstract void selectButtonForEnter();
+	abstract void selecionIdiomaAndEnter();
 	
 	protected final Pais pais = dataTest.getPais();
 	protected final IdiomaPais idioma = dataTest.getIdioma();
 	
 	public void accesoShopViaPrehome(boolean acceptCookies) throws Exception {
-		previousAccessShopSteps(acceptCookies);
 		selecPaisIdiomaYAccede();
 		new ModalLoyaltyAfterAccess().closeModalIfVisible();
 		if (channel.isDevice()) {
@@ -44,18 +44,6 @@ public abstract class PagePrehomeBase extends PageBase {
 		selecionIdiomaAndEnter();
 	}
 	
-	public void selecionIdiomaAndEnter() { 
-		if (pais.getListIdiomas().size() > 1) {
-			//Si el país tiene más de 1 idioma seleccionar el que nos llega como parámetro
-			seleccionaIdioma(pais.getNombre_pais(), idioma.getCodigo().getLiteral());
-		} else {
-			selectButtonForEnter();
-		}
-	
-		//Esperamos a que desaparezca la página de Prehome
-		isNotPageUntil(30);
-		waitLoadPage();
-	}
 	
 	private void reloadIfServiceUnavailable() {
 		if (driver.getPageSource().contains("Service Unavailable")) {

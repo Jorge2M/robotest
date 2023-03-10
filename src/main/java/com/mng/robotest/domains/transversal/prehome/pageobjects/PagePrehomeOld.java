@@ -123,6 +123,18 @@ public class PagePrehomeOld extends PagePrehomeBase implements PagePrehomeI {
 		}
 	}
 
+	@Override
+	public void selecionIdiomaAndEnter() { 
+		if (pais.getListIdiomas().size() > 1) {
+			seleccionaIdioma(pais.getNombre_pais(), idioma.getCodigo().getLiteral());
+		} else {
+			selectButtonForEnter();
+		}
+	
+		isNotPageUntil(30);
+		waitLoadPage();
+	}
+	
 	private boolean clickButtonForEnterIfExists(ButtonEnter buttonEnter, String codigoPais) {
 		String xpathButton = getXPathButtonForEnter(buttonEnter, codigoPais);
 		if (state(Present, xpathButton).check() && 
