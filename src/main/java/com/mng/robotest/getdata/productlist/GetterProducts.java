@@ -408,7 +408,7 @@ public class GetterProducts {
 		private Integer numProducts = 40;
 		private Integer minProducts = 3;
 		private String codigoIdiomAlf = "";
-		private List<FilterType> filters;
+		private List<FilterType> filters = new ArrayList<>();
 		private SortBy sortBy;
 		private boolean extraCanonicalInfo;
 		private List<MenuI> menusCandidates = 

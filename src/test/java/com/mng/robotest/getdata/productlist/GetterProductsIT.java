@@ -32,7 +32,7 @@ public class GetterProductsIT {
 	
 	private static final Builder getterProductsBuilder = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigo_alf(), AppEcom.shop, null)
 			.linea(SHE)
-			.menu(Menu.SHORTS)
+			.menu(Menu.CAMISAS)
 			.numProducts(numProducts)
 			.pagina(1)
 			.sortBy(SortBy.STOCK_DESCENDENT);
