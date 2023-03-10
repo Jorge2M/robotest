@@ -7,6 +7,7 @@ import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.getdata.productlist.entity.ProductList;
 import com.mng.robotest.getdata.productlist.filter.Filter;
+import com.mng.robotest.getdata.productlist.filter.FilterBlackList;
 import com.mng.robotest.getdata.productlist.filter.FilterManyColors;
 import com.mng.robotest.getdata.productlist.filter.FilterOnline;
 import com.mng.robotest.getdata.productlist.filter.FilterPersonalizable;
@@ -22,7 +23,8 @@ public class ProductFilter {
 		ONLINE, 
 		NO_ONLINE, 
 		STOCK,
-		PERSONALIZABLE
+		PERSONALIZABLE,
+		BLACK_LIST
 	}
 	
 	private final ProductList productList;
@@ -82,6 +84,8 @@ public class ProductFilter {
 			return new FilterStock();
 		case PERSONALIZABLE:
 			return new FilterPersonalizable();
+		case BLACK_LIST:
+			return new FilterBlackList();
 		default:
 			return null;
 		}
