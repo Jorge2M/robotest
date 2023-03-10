@@ -27,6 +27,7 @@ public class Pais implements Serializable {
 	//Indica si el país existe en la Shop (sólo es 'n' para el caso de Japón que sólo aparece a nivel de la preHome)
 	String exists = "s";
 	String codigo_alf;
+	String codigo_prehome;
 		
 	@XmlElement(name="idioma") 
 	List<IdiomaPais> listIdiomas = new LinkedList<>();
@@ -94,10 +95,21 @@ public class Pais implements Serializable {
 		this.codigo_alf = codigo_alf;
 	}
 	
-	public List<IdiomaPais> getListIdiomas() {
-		return this.listIdiomas;
+	@XmlElement
+	public void setCodigo_prehome(String codigo_prehome) {
+		this.codigo_prehome = codigo_prehome;
+	}
+	
+	public String getCodigo_prehome() {
+		if (codigo_prehome==null) {
+			return codigo_alf;
+		}
+		return codigo_prehome;
 	}
 
+	public List<IdiomaPais> getListIdiomas() {
+		return this.listIdiomas;
+	}	
 
 	public String getTarifa() {
 		return this.tarifa;

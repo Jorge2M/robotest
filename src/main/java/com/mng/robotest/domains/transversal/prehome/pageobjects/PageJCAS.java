@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop;
+package com.mng.robotest.domains.transversal.prehome.pageobjects;
 
 import org.openqa.selenium.By;
 

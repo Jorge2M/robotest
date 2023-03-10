@@ -598,6 +598,7 @@
 <pais nombre_pais="Cyprus (Euros)" codigo="600">
 <codigo_pais>600</codigo_pais>
 <codigo_alf>CY</codigo_alf>
+<codigo_prehome>CY1</codigo_prehome>
 <idioma acceso="cy">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>CY</tarifa>
@@ -2287,6 +2288,7 @@ where
 <pais nombre_pais="España (Ceuta)" codigo="022">
 <codigo_pais>022</codigo_pais>
 <codigo_alf>ES2</codigo_alf>
+<codigo_prehome>ES-CE</codigo_prehome>
 <idioma acceso="es2" idioma_descripcion="ES">ES</idioma>
 <paistop>N</paistop>
 <rgpd>S</rgpd>
@@ -2351,6 +2353,7 @@ where
 <pais nombre_pais="España (Islas Canarias)" codigo="021">
 <codigo_pais>021</codigo_pais>
 <codigo_alf>ES1</codigo_alf>
+<codigo_prehome>CN</codigo_prehome>
 <idioma acceso="es1" idioma_descripcion="ES">ES</idioma>
 <paistop>N</paistop>
 <rgpd>S</rgpd>
@@ -2411,6 +2414,7 @@ where
 <pais nombre_pais="España (Melilla)" codigo="023">
 <codigo_pais>023</codigo_pais>
 <codigo_alf>ES3</codigo_alf>
+<codigo_prehome>ES-ML</codigo_prehome>
 <idioma acceso="es3" idioma_descripcion="ES">ES</idioma>
 <paistop>N</paistop>
 <rgpd>S</rgpd>

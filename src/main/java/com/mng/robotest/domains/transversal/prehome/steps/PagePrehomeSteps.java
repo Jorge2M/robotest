@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.shop;
+package com.mng.robotest.domains.transversal.prehome.steps;
 
 import java.util.Arrays;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -12,10 +12,10 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.transversal.prehome.pageobjects.PageJCAS;
+import com.mng.robotest.domains.transversal.prehome.pageobjects.PagePrehome;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.pageobject.shop.PageJCAS;
-import com.mng.robotest.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test.steps.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
@@ -44,7 +44,7 @@ public class PagePrehomeSteps extends StepBase {
 			checks.add(
 			    Check.make(
 				    "Queda seleccionado el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")",
-				    pagePrehome.isPaisSelectedDesktop(), State.Warn)
+				    pagePrehome.isPaisSelected(), State.Warn)
 			    .store(StoreType.None).build());
 		}
 		

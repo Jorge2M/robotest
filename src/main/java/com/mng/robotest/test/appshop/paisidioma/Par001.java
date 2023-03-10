@@ -8,6 +8,7 @@ import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
+import com.mng.robotest.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
@@ -17,7 +18,6 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 import com.mng.robotest.test.beans.Linea.TypeContentDesk;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
-import com.mng.robotest.test.steps.shop.PagePrehomeSteps;
 import com.mng.robotest.test.steps.shop.banner.SecBannersSteps;
 import com.mng.robotest.test.steps.shop.home.PageHomeMarcasSteps;
 import com.mng.robotest.test.suites.FlagsNaviationLineas;

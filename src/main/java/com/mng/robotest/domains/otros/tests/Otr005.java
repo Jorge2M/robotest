@@ -1,11 +1,11 @@
 package com.mng.robotest.domains.otros.tests;
 
 import com.mng.robotest.domains.transversal.TestBase;
+import com.mng.robotest.domains.transversal.prehome.pageobjects.PagePrehome;
+import com.mng.robotest.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test.steps.shop.PageIniShopJaponSteps;
-import com.mng.robotest.test.steps.shop.PagePrehomeSteps;
 
 import static com.mng.robotest.test.data.PaisShop.*;
 

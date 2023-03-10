@@ -1,0 +1,98 @@
+package com.mng.robotest.domains.transversal.prehome.pageobjects;
+
+import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.test.beans.IdiomaPais;
+import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.test.pageobject.shop.acceptcookies.SectionCookies;
+import com.mng.robotest.test.pageobject.shop.acceptcookies.ModalSetCookies.SectionConfCookies;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
+import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
+import com.mng.robotest.test.pageobject.utils.LocalStorage;
+import com.mng.robotest.test.steps.shop.acceptcookies.ModalSetCookiesSteps;
+import com.mng.robotest.test.steps.shop.acceptcookies.SectionCookiesSteps;
+import com.mng.robotest.test.utils.testab.TestABactive;
+
+public abstract class PagePrehomeBase extends PageBase {
+
+	abstract boolean isPageUntil(int seconds);
+	abstract boolean isNotPageUntil(int seconds);
+	abstract void selecionPais();
+	abstract void seleccionaIdioma(String nombrePais, String nombreIdioma);
+	abstract void selectButtonForEnter();
+	
+	protected final Pais pais = dataTest.getPais();
+	protected final IdiomaPais idioma = dataTest.getIdioma();
+	
+	public void accesoShopViaPrehome(boolean acceptCookies) throws Exception {
+		previousAccessShopSteps(acceptCookies);
+		selecPaisIdiomaYAccede();
+		new ModalLoyaltyAfterAccess().closeModalIfVisible();
+		if (channel.isDevice()) {
+			new SecCabeceraMostFrequent().closeSmartBannerIfExistsMobil();
+		}
+	}
+	
+	public void previousAccessShopSteps(boolean acceptCookies) throws Exception {
+		reloadIfServiceUnavailable();
+		new PageJCAS().identJCASifExists();
+		TestABactive.currentTestABsToActivate(channel, app, driver);
+		manageCookies(acceptCookies);
+	}
+	
+	public void selecPaisIdiomaYAccede() {
+		selecionPais();
+		selecionIdiomaAndEnter();
+	}
+	
+	public void selecionIdiomaAndEnter() { 
+		if (pais.getListIdiomas().size() > 1) {
+			//Si el país tiene más de 1 idioma seleccionar el que nos llega como parámetro
+			seleccionaIdioma(pais.getNombre_pais(), idioma.getCodigo().getLiteral());
+		} else {
+			selectButtonForEnter();
+		}
+	
+		//Esperamos a que desaparezca la página de Prehome
+		isNotPageUntil(30);
+		waitLoadPage();
+	}
+	
+	private void reloadIfServiceUnavailable() {
+		if (driver.getPageSource().contains("Service Unavailable")) {
+			driver.navigate().refresh();
+		}
+	}
+	
+	private void manageCookies(boolean acceptCookies) {
+		SectionCookiesSteps sectionCookiesSteps = new SectionCookiesSteps();
+		if (acceptCookies) {
+			if (new SectionCookies().isVisible(2)) {
+				sectionCookiesSteps.accept();
+			}
+		} else {
+			//Enable Only performance cookies for suport to TestABs
+			changeCookieOptanonConsent();
+			enablePerformanceCookies();
+		}
+	}
+	
+	private void changeCookieOptanonConsent() {
+		new SectionCookiesSteps().changeCookie_OptanonConsent();
+	}
+	
+	private void enablePerformanceCookies() {
+		ModalSetCookiesSteps modalSetCookiesSteps = new SectionCookiesSteps().setCookies();
+		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_DE_RENDIMIENTO);
+		modalSetCookiesSteps.enableSwitchCookies();
+		modalSetCookiesSteps.saveConfiguration();
+	}	
+	
+	protected void setInitialModalsOff() {
+		//Damos de alta la cookie de newsLetter porque no podemos gestionar correctamente el cierre 
+		//del modal en la página de portada (es aleatorio y aparece en un intervalo de 0 a 5 segundos)
+		LocalStorage localStorage = new LocalStorage(driver);
+		localStorage.setItemInLocalStorage("modalRegistroNewsletter", "0");
+		localStorage.setItemInLocalStorage("modalAdhesionLoyalty", "true");
+	}
+
+}

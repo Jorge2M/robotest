@@ -5,8 +5,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.transversal.prehome.pageobjects.PageJCAS;
 import com.mng.robotest.test.pageobject.manto.PageSelTda;
-import com.mng.robotest.test.pageobject.shop.PageJCAS;
 
 public class PageLoginMantoSteps extends StepBase {
 

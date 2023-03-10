@@ -8,7 +8,6 @@ import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.pageobject.shop.PagePrehome;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
@@ -30,7 +29,6 @@ public class Fic003 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access();
-		closeModalNewsLetterIfExists();
 		clickMenu(new MenuWeb
 				.Builder("Pantalones")
 				.linea(NINA)
@@ -41,10 +39,6 @@ public class Fic003 extends TestBase {
 		kcSafetyTest();
 		pageFichaSteps.selectLinkNavigation(ProductNav.NEXT, dataArtOrigin.getReferencia());
 		pageFichaSteps.selectLinkNavigation(ProductNav.PREV, dataArtOrigin.getReferencia());
-	}
-
-	private void closeModalNewsLetterIfExists() {
-		new PagePrehome().closeModalNewsLetterIfExists();
 	}
 
 	private DataFichaArt selectFirstArticleInGalery() {
