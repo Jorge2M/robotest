@@ -13,7 +13,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	private final ModalArticleNotAvailable modalArticleNotAvailable = new ModalArticleNotAvailable();
 	
 	@Validation (
-		description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} (lo esperamos hasta #{seconds} segundos)",
+		description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} (lo esperamos #{seconds} segundos)",
 		level=State.Info)
 	public boolean validateState(int seconds, StateModal stateModal) {
 		return modalArticleNotAvailable.inStateUntil(stateModal, seconds);
@@ -42,4 +42,36 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 		
 		return checks;
 	}
+	
+	@Step (
+		description="Introducimos el mail #{mail} y pulsamos el botón <b>Recibir Aviso</b>", 
+		expected="Aparece el modal de Petición confirmada")
+	public void inputMailAndClickRecibirAviso(String mail) {
+		modalArticleNotAvailable.inputMail(mail);
+		modalArticleNotAvailable.clickRecibirAviso();
+		checkModalAvisoOkVisible(2);
+	}
+	
+	@Validation (
+		description="Aparece el modal de petición confirmada OK (lo esperamos #{seconds} segundos)",
+		level=State.Defect)
+	public boolean checkModalAvisoOkVisible(int seconds) {
+		return modalArticleNotAvailable.isModalAvisoOkVisible(seconds);
+	}
+	
+	@Step (
+		description="Seleccionamos el botón <b>Entendido</b>", 
+		expected="Desaparece el modal de petición confirmada OK")
+	public void clickButtonEntendido() {
+		modalArticleNotAvailable.clickButtonEntendido();
+		checkModalAvisoOkInvisible(1);
+	}
+	
+	@Validation (
+		description="Desaparece el modal de petición confirmada OK (lo esperamos #{seconds} segundos)",
+		level=State.Defect)	
+	public boolean checkModalAvisoOkInvisible(int seconds) {
+		return modalArticleNotAvailable.isModalAvisoOkInvisible(seconds);
+	}	
+	
 }

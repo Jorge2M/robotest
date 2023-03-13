@@ -35,7 +35,7 @@ public class Galeria {
 	}
 
 	@Test (
-		groups={"Galeria", "Canal:desktop_App:shop"}, alwaysRun=true,
+		groups={"Galeria", "Avísame", "Canal:desktop_App:shop"}, alwaysRun=true,
 		description="[Usuario registrado] Acceder a galería camisas. Forzar caso avisame en listado")
 	public void GPO007_Galeria_Camisas() throws Exception {
 		new Gpo007().execute();
