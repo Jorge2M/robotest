@@ -8,7 +8,7 @@ import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 
 public class FilterBlackList implements Filter {
 	
-	private static final List<String> BLACK_LIST = Arrays.asList("47100065", "47110064", "47020218");
+	private static final List<String> BLACK_LIST = Arrays.asList("47100065", "47110064", "47020218", "47091313", "47057124");
 	
 	@Override
 	public List<GarmentCatalog> filter(List<GarmentCatalog> garments) throws Exception {
