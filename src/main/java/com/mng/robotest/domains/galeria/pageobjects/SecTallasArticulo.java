@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.domains.transversal.PageBase;
 
 
-public class SecTallasArticuloDesktop extends PageBase {
+public class SecTallasArticulo extends PageBase {
 	
 	private final String XPATH_ARTICULO;
 	private final String XPATH_CAPA_TALLAS_ARTICULO_SHOP = "//div[@class[contains(.,'sizes-container')]]";
@@ -16,7 +16,7 @@ public class SecTallasArticuloDesktop extends PageBase {
 	private static final String XPATH_TALLA_UNAVAILABLE =	"//button[@data-testid[contains(.,'size.unavailable')]]";
 	private static final String CLASS_CAPA_ACTIVE_SHOP = "@class[contains(.,'active')]";
 	
-	public SecTallasArticuloDesktop(String xpathArticulo) {
+	public SecTallasArticulo(String xpathArticulo) {
 		this.XPATH_ARTICULO = xpathArticulo;
 	}
 	

@@ -28,7 +28,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageGaleriaDesktop extends PageGaleria {
 	
 	private final SecColoresArticuloDesktop secColores = new SecColoresArticuloDesktop();
-	private final SecTallasArticuloDesktop secTallas = new SecTallasArticuloDesktop(xpathArticuloBase);
 	private final SecSubmenusGallery secSubmenusGallery = new SecSubmenusGallery();
 	private final SecBannerHeadGallery secBannerHead = new SecBannerHeadGallery();
 	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
@@ -523,6 +522,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return null;
 	}
 
+	@Override
 	public void selectTallaArticleNotAvalaible() {
 		String xpathTallaNoDipo = secTallas.getXPathArticleTallaNotAvailable();
 		click(xpathTallaNoDipo).exec();

@@ -40,16 +40,19 @@ public abstract class PageGaleria extends PageBase {
 	protected final From from;
 	protected final String xpathArticuloBase;
 	protected final SecPreciosArticulo secPrecios = new SecPreciosArticulo();
+	protected final SecTallasArticulo secTallas;
 
 	protected PageGaleria() {
 		super();
 		this.from = From.MENU;
 		this.xpathArticuloBase = getXPathArticulo();
+		this.secTallas = new SecTallasArticulo(xpathArticuloBase);
 	}
 
 	protected PageGaleria(From from) {
 		this.from = from;
 		this.xpathArticuloBase = getXPathArticulo();
+		this.secTallas = new SecTallasArticulo(xpathArticuloBase);
 	}
 
 	public abstract String getXPathLinkRelativeToArticle();
@@ -138,8 +141,6 @@ public abstract class PageGaleria extends PageBase {
 			return XPATH_ARTICULO_DEVICE;
 		}
 	}
-
-
 
 	String getXPathArticleHearthIcon(int posArticulo) {
 		String xpathArticulo = "(" + xpathArticuloBase + ")[" + posArticulo + "]";
@@ -230,6 +231,11 @@ public abstract class PageGaleria extends PageBase {
 
 	public void moveToArticleAndGetObject(int posArticulo) {
 		moveToElement(getXPathLinkArticulo(posArticulo) + "/..");
+	}
+	
+	public void selectTallaArticleNotAvalaible() {
+		String xpathTallaNoDipo = secTallas.getXPathArticleTallaNotAvailable();
+		click(xpathTallaNoDipo).exec();
 	}
 
 	/**

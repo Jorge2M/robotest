@@ -283,7 +283,7 @@ public class PageGaleriaDevice extends PageGaleria {
 		String xpathButtonAnyadir = getXPathButtonAnyadirArticle(posArticulo);
 		click(xpathButtonAnyadir).exec();
 	}
-
+	
 	@Override
 	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
 		String xpathCapa = getXPathArticleCapaTallas(posArticulo);

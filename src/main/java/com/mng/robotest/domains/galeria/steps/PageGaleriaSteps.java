@@ -158,8 +158,7 @@ public class PageGaleriaSteps extends StepBase {
 		expected="Se abre el modal de avimase de la prenda",
 		saveHtmlPage=SaveWhen.Always)
 	public void selectTallaNoDisponibleArticulo() {
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-		pageGaleriaDesktop.selectTallaArticleNotAvalaible();
+		pageGaleria.selectTallaArticleNotAvalaible();
 	}
 	
 	public DataScroll scrollFromFirstPage() throws Exception {
