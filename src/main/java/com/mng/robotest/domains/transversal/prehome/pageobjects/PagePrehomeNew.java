@@ -12,7 +12,7 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	private static final String XPATH_ICON_SALE_PAIS_SELECCIONADO = XPATH_PAIS_SELECCIONADO + "//span[@class[contains(.,'icon-outline-bag')]]";
 	private static final String XPATH_SELECTOR_IDIOMAS = "//div[@id='countrySelector.languagues']/..";
 	private static final String XPATH_IDIOMA_OPTION = XPATH_SELECTOR_IDIOMAS + "//div";
-	private static final String XPATH_BUTTON_ACCEPT = "//div[@class[contains(.,'CountrySelector')]]//button[@type='submit']";
+	private static final String XPATH_BUTTON_ACCEPT = "//form//button[@type='submit']"; //Necesitamos un data-testid (React)
 	
 	private String getXPathCountryItemFromCodigo(String codigoPrehome) {
 		return XPATH_PAIS_OPTION + "//self::*[value='" + codigoPrehome + "']";

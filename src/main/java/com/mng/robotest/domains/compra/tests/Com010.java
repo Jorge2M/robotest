@@ -1,4 +1,4 @@
-package com.mng.robotest.test.appshop.comprafact;
+package com.mng.robotest.domains.compra.tests;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
-import com.mng.robotest.domains.compra.tests.CompraSteps;
 import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.beans.IdiomaPais;

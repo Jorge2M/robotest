@@ -10,7 +10,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.appshop.comprafact.CompraFact;
+import com.mng.robotest.domains.compra.factories.CompraFact;
 import com.mng.robotest.test.beans.*;
 
 import static com.mng.robotest.test.data.PaisShop.*;

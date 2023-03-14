@@ -1,4 +1,4 @@
-package com.mng.robotest.test.appshop.comprafact;
+package com.mng.robotest.domains.compra.factories;
 
 import java.io.Serializable;
 import org.testng.annotations.Test;
@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.compra.tests.Com010;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;

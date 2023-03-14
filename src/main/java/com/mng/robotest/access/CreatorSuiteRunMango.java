@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 import com.mng.robotest.conftestmaker.Suites;
 import com.mng.robotest.domains.votfconsole.suites.ConsolaVotfSuite;
-import com.mng.robotest.test.suites.CompraLuqueSuite;
-import com.mng.robotest.test.suites.EgyptOrdersSuite;
 import com.mng.robotest.test.suites.GenericFactorySuite;
 import com.mng.robotest.test.suites.MenusMantoSuite;
 import com.mng.robotest.test.suites.MenusPaisSuite;
@@ -60,10 +58,6 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 				return (new GenericFactorySuite(inputParamsMango));
 			case RegistrosPaises:
 				return (new RegistrosSuite(inputParamsMango));
-			case CompraLuque:
-				return (new CompraLuqueSuite(inputParamsMango));
-			case EgyptOrders:
-				return (new EgyptOrdersSuite(inputParamsMango));				
 			default:
 			}
 		}
