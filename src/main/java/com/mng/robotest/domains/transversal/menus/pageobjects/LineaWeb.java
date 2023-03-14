@@ -172,9 +172,11 @@ public class LineaWeb extends PageBase implements LineaActions {
 	}
 	@Override
 	public void hoverSublinea() {
-		lineaActions.hoverSublinea();
-		if (!lineaActions.isSublineaSelected(1)) {
+		for (int i=0; i<3; i++) {
 			lineaActions.hoverSublinea();
+			if (lineaActions.isSublineaSelected(1)) {
+				break;
+			}
 		}
 	}
 	@Override
