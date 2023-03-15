@@ -17,7 +17,7 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	private static final String XPATH_BUTTON_ACCEPT = "//form//button[@type='submit']"; //Necesitamos un data-testid (React)
 	
 	private String getXPathCountryItemFromCodigo(String codigoPrehome) {
-		return XPATH_PAIS_OPTION + "//self::*[value='" + codigoPrehome + "']";
+		return XPATH_PAIS_OPTION + "//self::*[@value='" + codigoPrehome + "']";
 	}
 	private String getXPathCountryItemFromName(String nameCountry) {
 		return XPATH_PAIS_OPTION + "//self::*[text='" + nameCountry + "']";
@@ -77,7 +77,7 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 
 	private String getNameCountry() {
 		String xpathCountryOption = getXPathCountryItemFromCodigo(pais.getCodigo_prehome());
-		return getElement(xpathCountryOption).getText();
+		return getElement(xpathCountryOption + "//p").getText();
 	}
 	
 	private void clickCountry(String nameCountry) {
