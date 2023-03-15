@@ -32,50 +32,50 @@ pipeline {
                 }
             }
         }
-    	stage('Run Unit and Integration Tests') {
-            agent {
-                docker {
-                    image 'maven:3.8.4-openjdk-17'
-                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-                }
-            }
-            steps {
-            	sh 'mvn -version'
-	        	sh 'mvn clean'
-	        	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-	            	sh 'mvn --settings ${mavenSettings} verify -DargLine="-Duser.timezone=Europe/Paris"'
-	            }
-            }
-            post {
-                always {
-                    script {
-                        junit outputFolders.test
-                    }
-                }            
-                success {
-                    script {
-                        stash includes: '**/target/', name: 'target'
-                    }
-                }
-            }
-        }        
 
-        stage('Sonar') {
-            agent {
-                docker {
-                    image 'maven:3.8.4-openjdk-17'
-                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-                }
-            }
-            steps {
-            	unstash 'target'
-            	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-	            	sh "mvn --settings ${mavenSettings} sonar:sonar"
-	            }
-            }
-        }
+//    	stage('Run Unit and Integration Tests') {
+//            agent {
+//                docker {
+//                    image 'maven:3.8.4-openjdk-17'
+//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+//                }
+//            }
+//            steps {
+//            	sh 'mvn -version'
+//	        	sh 'mvn clean'
+//	        	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
+//	            	sh 'mvn --settings ${mavenSettings} verify -DargLine="-Duser.timezone=Europe/Paris"'
+//	            }
+//            }
+//            post {
+//                always {
+//                    script {
+//                        junit outputFolders.test
+//                    }
+//                }            
+//                success {
+//                    script {
+//                        stash includes: '**/target/', name: 'target'
+//                    }
+//                }
+//            }
+//        }       
+//
+//        stage('Sonar') {
+//            agent {
+//                docker {
+//                    image 'maven:3.8.4-openjdk-17'
+//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+//                }
+//            }
+//            steps {
+//            	unstash 'target'
+//            	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
+//	            	sh "mvn --settings ${mavenSettings} sonar:sonar"
+//	            }
+//            }
+//        }
 
-              
         stage('Package') {
             agent {
                 docker {

@@ -4,8 +4,8 @@ import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 
 public class PagePrehome implements PagePrehomeI, PageFromFooter {
 
-	private PagePrehomeI pagePreHome = null;
-	private boolean preHomeLocated = false;
+	private final PagePrehomeI pagePreHome = new PagePrehomeNew();
+	//private boolean preHomeLocated = false;
 	
 	public String getName() {
 		return "Prehome";
@@ -57,21 +57,21 @@ public class PagePrehome implements PagePrehomeI, PageFromFooter {
 	}
 
 	private void setPagePreHome() {
-		if (!preHomeLocated || pagePreHome==null) {
-			PagePrehomeI pagePrehomeOld = new PagePrehomeOld();
-			if (pagePrehomeOld.isPage()) {
-				preHomeLocated = true;
-				pagePreHome = pagePrehomeOld;
-				return;
-			} 
-			PagePrehomeI pagePrehomeNew = new PagePrehomeNew();
-			if (pagePrehomeNew.isPageUntil(2)) {
-				preHomeLocated = true;
-				pagePreHome = pagePrehomeNew;
-				return;
-			}
-			pagePreHome = pagePrehomeOld;
-		}
+//		if (!preHomeLocated || pagePreHome==null) {
+//			PagePrehomeI pagePrehomeOld = new PagePrehomeOld();
+//			if (pagePrehomeOld.isPage()) {
+//				preHomeLocated = true;
+//				pagePreHome = pagePrehomeOld;
+//				return;
+//			} 
+//			PagePrehomeI pagePrehomeNew = new PagePrehomeNew();
+//			if (pagePrehomeNew.isPageUntil(2)) {
+//				preHomeLocated = true;
+//				pagePreHome = pagePrehomeNew;
+//				return;
+//			}
+//			pagePreHome = pagePrehomeOld;
+//		}
 	}
 	
 }
