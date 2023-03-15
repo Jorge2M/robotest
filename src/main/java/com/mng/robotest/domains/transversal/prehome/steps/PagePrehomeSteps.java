@@ -76,13 +76,18 @@ public class PagePrehomeSteps extends StepBase {
 		seleccionPaisIdiomaAndEnter(false);
 	}
 	
+	public void seleccionPaisIdiomaAndEnter(boolean execValidacs) throws Exception {
+		pagePrehome.previousAccessShopSteps(true);
+		accesoShopViaPrehome(execValidacs);	
+	}
+	
 	private final String TagPais = "@TAGPAIS";
 	private final String TagIdioma = "@TAGIDIOMA";
 	@Step (
 		description="Acceder a la página de inicio y seleccionar el país <b>" + TagPais + "</b>, el idioma <b>" + TagIdioma + "</b> y acceder",
 		expected="Se accede correctamente al pais / idioma seleccionados",
 		saveNettraffic=SaveWhen.Always)
-	public void seleccionPaisIdiomaAndEnter(boolean execValidacs) throws Exception {
+	private void accesoShopViaPrehome(boolean execValidacs) throws Exception {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagPais, pais.getNombre_pais());
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagIdioma, idioma.getLiteral());
 		

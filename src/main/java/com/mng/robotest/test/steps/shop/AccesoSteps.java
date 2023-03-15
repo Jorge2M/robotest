@@ -46,9 +46,7 @@ public class AccesoSteps extends StepBase {
 	@Step (
 		description="Acceder a Mango (" + TAG_NOMBRE_PAIS + "/" + TAG_LITERAL_IDIOMA + ")<br>" + TAG_REGISTRO, 
 		expected="Se accede correctamente",
-		saveNettraffic=SaveWhen.Always,
-		saveHtmlPage=SaveWhen.Always,
-		saveImagePage=SaveWhen.Always)
+		saveNettraffic=SaveWhen.Always)
 	public void oneStep(boolean clearArticulos) throws Exception {
 		String registro = "";
 		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {

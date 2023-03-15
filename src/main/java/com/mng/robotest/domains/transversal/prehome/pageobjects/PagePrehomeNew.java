@@ -4,6 +4,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
+import org.openqa.selenium.NoSuchElementException;
+
 public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 
 	private static final String XPATH_SELECTOR_PAISES = "//*[@data-testid='countrySelector.country']";
@@ -63,6 +65,8 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	
 	private void unfoldCountrys() {
 		click(XPATH_SELECTOR_PAISES).exec();
+		//TODO 15-03 quitar
+		//throw new NoSuchElementException("aaaaaa");
 	}
 	
 	private void inputAndSelectCountry() {

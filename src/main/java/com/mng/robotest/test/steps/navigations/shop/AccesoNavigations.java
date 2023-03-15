@@ -46,6 +46,7 @@ public class AccesoNavigations extends StepBase {
 			goFromLineasToMultimarcaVOTF();
 			pagePrehome.previousAccessShopSteps(acceptCookies);
 		} else {
+			pagePrehome.previousAccessShopSteps(acceptCookies);
 			pagePrehome.accesoShopViaPrehome(acceptCookies);
 		}
 	}

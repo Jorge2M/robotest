@@ -46,7 +46,6 @@ public class PagePrehome implements PagePrehomeI, PageFromFooter {
 		pagePreHome.selecionIdiomaAndEnter();
 	}
 	public void accesoShopViaPrehome(boolean acceptCookies) throws Exception {
-		previousAccessShopSteps(acceptCookies);
 		pagePreHome.accesoShopViaPrehome(acceptCookies);
 	}
 	
