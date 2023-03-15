@@ -71,7 +71,7 @@ public class ModalCambioPais extends PageBase {
 	
 	public void closeModalIfVisible() {
 		if (isVisibleModalUntil(0)) {
-			getElement(XPATH_ASPA_CLOSE).click();
+			getElementVisible(XPATH_ASPA_CLOSE).click();
 			state(State.Invisible, XPATH_MODAL).wait(1).check();
 		}
 	}
