@@ -2353,7 +2353,7 @@ where
 <pais nombre_pais="España (Islas Canarias)" codigo="021">
 <codigo_pais>021</codigo_pais>
 <codigo_alf>ES1</codigo_alf>
-<codigo_prehome>CN</codigo_prehome>
+<codigo_prehome>ES-CN</codigo_prehome>
 <idioma acceso="es1" idioma_descripcion="ES">ES</idioma>
 <paistop>N</paistop>
 <rgpd>S</rgpd>
@@ -5478,7 +5478,7 @@ where
 
 <pais nombre_pais="France (La Réunion)" codigo="372">
 <codigo_pais>372</codigo_pais>
-<codigo_alf>FR</codigo_alf>
+<codigo_alf>RE</codigo_alf>
 <idioma acceso="re">FR</idioma>
 <rgpd>S</rgpd>
 <tarifa>FR</tarifa>

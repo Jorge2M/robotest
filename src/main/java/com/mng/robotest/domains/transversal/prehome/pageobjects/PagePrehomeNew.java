@@ -4,8 +4,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
-import org.openqa.selenium.NoSuchElementException;
-
 public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 
 	private static final String XPATH_SELECTOR_PAISES = "//*[@data-testid='countrySelector.country']";
@@ -20,7 +18,7 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 		return XPATH_PAIS_OPTION + "//self::*[@value='" + codigoPrehome + "']";
 	}
 	private String getXPathCountryItemFromName(String nameCountry) {
-		return XPATH_PAIS_OPTION + "//self::*[text='" + nameCountry + "']";
+		return XPATH_PAIS_OPTION + "//self::*[text()='" + nameCountry + "']";
 	}
 	private String getXPathIdiomaItemFromName(String nameIdioma) {
 		return XPATH_IDIOMA_OPTION + "//self::*[@name='" + nameIdioma + "']";
@@ -72,6 +70,7 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	private void inputAndSelectCountry() {
 		String nameCountry = getNameCountry();
 		getElement(XPATH_PAIS_SELECCIONADO).sendKeys(nameCountry);
+		waitMillis(500);
 		clickCountry(nameCountry);
 	}
 
@@ -84,6 +83,16 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 		String xpathCountryOption = getXPathCountryItemFromName(nameCountry);
 		click(xpathCountryOption).exec();
 	}
+	
+//	private boolean isPaisSelectedUntil(int seconds) {
+//		for (int i=0; i<seconds; i++) {
+//			if (isPaisSelected()) {
+//				return true;
+//			}
+//			waitMillis(1000);
+//		}
+//		return false;
+//	}
 	
 	@Override
 	void seleccionaIdioma(String nombrePais, String nombreIdioma) {
