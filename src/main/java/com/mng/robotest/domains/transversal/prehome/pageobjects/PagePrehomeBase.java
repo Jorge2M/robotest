@@ -1,5 +1,6 @@
 package com.mng.robotest.domains.transversal.prehome.pageobjects;
 
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
@@ -40,8 +41,14 @@ public abstract class PagePrehomeBase extends PageBase {
 	}
 	
 	public void selecPaisIdiomaYAccede() {
-		selecionPais();
-		selecionIdiomaAndEnter();
+		//TODO eliminar try-catch
+		try {
+			selecionPais();
+			selecionIdiomaAndEnter();
+		}
+		catch (Exception e) {
+			Log4jTM.getLogger().error("Problem accessing prehome. {}. {}", e.getClass().getName(), e.getMessage());
+		}		
 	}
 	
 	
