@@ -4,6 +4,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+
 public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 
 	private static final String XPATH_SELECTOR_PAISES = "//*[@data-testid='countrySelector.country']";
@@ -118,8 +120,8 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	@Override
 	void selectButtonForEnter() {
 		click(XPATH_BUTTON_ACCEPT).exec();
-		if (state(Visible, XPATH_BUTTON_ACCEPT).wait(1).check()) {
-			click(XPATH_BUTTON_ACCEPT).exec();
+		if (!state(Invisible, XPATH_BUTTON_ACCEPT).wait(1).check()) {
+			click(XPATH_BUTTON_ACCEPT).type(TypeClick.javascript).exec();
 		}
 	}	
 	
