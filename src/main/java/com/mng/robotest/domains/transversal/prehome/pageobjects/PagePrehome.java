@@ -65,7 +65,7 @@ public class PagePrehome implements PagePrehomeI, PageFromFooter {
 				return;
 			} 
 			PagePrehomeI pagePrehomeNew = new PagePrehomeNew();
-			if (pagePrehomeNew.isPage()) {
+			if (pagePrehomeNew.isPageUntil(2)) {
 				preHomeLocated = true;
 				pagePreHome = pagePrehomeNew;
 				return;
