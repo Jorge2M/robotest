@@ -88,6 +88,10 @@ public abstract class PagePrehomeBase extends PageBase {
 		LocalStorage localStorage = new LocalStorage(driver);
 		localStorage.setItemInLocalStorage("modalRegistroNewsletter", "0");
 		localStorage.setItemInLocalStorage("modalAdhesionLoyalty", "true");
+		
+		//TODO 15-03 Revisar!
+		localStorage.setItemInLocalStorage("modalSPShown", "1");
+		localStorage.setItemInLocalStorage("MangoShopModalIPConfirmed", "ES-es__2");
 	}
 
 }
