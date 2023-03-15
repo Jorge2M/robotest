@@ -6,7 +6,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 
-	private static final String XPATH_SELECTOR_PAISES = "//div[@class[contains(.,'CountrySelector__row')]]";
+	private static final String XPATH_SELECTOR_PAISES = "//*[@data-testid='countrySelector.country']";
 	private static final String XPATH_PAIS_SELECCIONADO = "//input[@data-testid='countrySelector.country.inputSearch.search']";
 	private static final String XPATH_PAIS_OPTION = "//li[@data-testid[contains(.,'countrySelector.country.list.option')]]";
 	private static final String XPATH_ICON_SALE_PAIS_SELECCIONADO = XPATH_PAIS_SELECCIONADO + "//span[@class[contains(.,'icon-outline-bag')]]";
