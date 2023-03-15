@@ -1198,7 +1198,7 @@
 
 <pais nombre_pais="Ireland" codigo="007">
 <codigo_pais>007</codigo_pais>
-<codigo_alf>ID</codigo_alf>
+<codigo_alf>IE</codigo_alf>
 <idioma acceso="ie">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>IR</tarifa>
@@ -1304,6 +1304,7 @@
 <pais nombre_pais="Kosovo" codigo="095">
 <codigo_pais>095</codigo_pais>
 <codigo_alf>BA1</codigo_alf>
+<codigo_prehome>XK</codigo_prehome>
 <idioma acceso="ba1">IN</idioma>
 <tarifa>KV</tarifa>
 <codpos>10012</codpos>
