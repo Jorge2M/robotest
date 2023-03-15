@@ -49,6 +49,7 @@ public class AccesoSteps extends StepBase {
 		expected="Se accede correctamente",
 		saveImagePage=SaveWhen.Always,
 		saveHtmlPage=SaveWhen.Always,		
+		saveErrorData=SaveWhen.Always,
 		saveNettraffic=SaveWhen.Always)
 	public void oneStep(boolean clearArticulos) throws Exception {
 		String registro = "";
