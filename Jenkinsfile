@@ -84,7 +84,7 @@ pipeline {
                 }
             }
             steps {
-            	unstash 'target'
+            	//unstash 'target'
             	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
 	            	sh "mvn --settings ${mavenSettings} -B package -DskipTests"
 	            }
