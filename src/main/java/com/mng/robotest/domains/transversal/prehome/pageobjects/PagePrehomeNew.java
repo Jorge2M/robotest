@@ -4,6 +4,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
+import org.openqa.selenium.NoSuchElementException;
+
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
@@ -66,7 +68,7 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	private void unfoldCountrys() {
 		click(XPATH_SELECTOR_PAISES).exec();
 		//TODO 15-03 quitar
-		//throw new NoSuchElementException("aaaaaa");
+		throw new NoSuchElementException("aaaaaa");
 	}
 	
 	private void inputAndSelectCountry() {
@@ -85,16 +87,6 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 		String xpathCountryOption = getXPathCountryItemFromName(nameCountry);
 		click(xpathCountryOption).exec();
 	}
-	
-//	private boolean isPaisSelectedUntil(int seconds) {
-//		for (int i=0; i<seconds; i++) {
-//			if (isPaisSelected()) {
-//				return true;
-//			}
-//			waitMillis(1000);
-//		}
-//		return false;
-//	}
 	
 	@Override
 	void seleccionaIdioma(String nombrePais, String nombreIdioma) {
@@ -120,7 +112,7 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	@Override
 	void selectButtonForEnter() {
 		click(XPATH_BUTTON_ACCEPT).exec();
-		if (!state(Invisible, XPATH_BUTTON_ACCEPT).wait(1).check()) {
+		if (!state(Invisible, XPATH_BUTTON_ACCEPT).wait(5).check()) {
 			click(XPATH_BUTTON_ACCEPT).type(TypeClick.javascript).exec();
 		}
 	}	
