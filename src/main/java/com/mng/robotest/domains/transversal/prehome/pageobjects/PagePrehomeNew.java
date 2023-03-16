@@ -4,6 +4,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
 public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
@@ -12,8 +13,9 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	private static final String XPATH_PAIS_SELECCIONADO = "//input[@data-testid='countrySelector.country.inputSearch.search']";
 	private static final String XPATH_PAIS_OPTION = "//li[@data-testid[contains(.,'countrySelector.country.list.option')]]";
 	private static final String XPATH_ICON_SALE_PAIS_SELECCIONADO = XPATH_PAIS_SELECCIONADO + "//span[@class[contains(.,'icon-outline-bag')]]";
-	private static final String XPATH_SELECTOR_IDIOMAS = "//div[@id='countrySelector.languagues']/..";
-	private static final String XPATH_IDIOMA_OPTION = XPATH_SELECTOR_IDIOMAS + "//div";
+	private static final String XPATH_SELECTOR_IDIOMAS = "//*[@data-testid='countrySelector.languagues']/..";
+	private static final String XPATH_IDIOMA_OPTION_DESKTOP = XPATH_SELECTOR_IDIOMAS + "//div";
+	private static final String XPATH_IDIOMA_OPTION_MOBILE = XPATH_SELECTOR_IDIOMAS + "//option";
 	private static final String XPATH_BUTTON_ACCEPT = "//form//button[@type='submit']"; //Necesitamos un data-testid (React)
 	
 	private String getXPathCountryItemFromCodigo(String codigoPrehome) {
@@ -23,7 +25,10 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 		return XPATH_PAIS_OPTION + "//self::*[text()='" + nameCountry + "']";
 	}
 	private String getXPathIdiomaItemFromName(String nameIdioma) {
-		return XPATH_IDIOMA_OPTION + "//self::*[@name='" + nameIdioma + "']";
+		if (channel==Channel.desktop) {
+		    return XPATH_IDIOMA_OPTION_DESKTOP + "//self::*[@name='" + nameIdioma + "']";
+		}
+		return XPATH_IDIOMA_OPTION_MOBILE + "//self::*[text()='" + nameIdioma + "']";
 	}
 	
 	@Override
@@ -65,8 +70,6 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	
 	private void unfoldCountrys() {
 		click(XPATH_SELECTOR_PAISES).exec();
-		//TODO 15-03 quitar
-		//throw new NoSuchElementException("aaaaaa");
 	}
 	
 	private void inputAndSelectCountry() {

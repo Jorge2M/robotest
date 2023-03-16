@@ -4,7 +4,7 @@ import org.testng.xml.XmlSuite.ParallelMode;
 
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.ErrorStorer;
-import com.mng.robotest.test.appmanto.Manto;
+import com.mng.robotest.domains.manto.tests.Manto;
 import com.github.jorge2m.testmaker.domain.SuiteMaker;
 import com.github.jorge2m.testmaker.domain.TestRunMaker;
 

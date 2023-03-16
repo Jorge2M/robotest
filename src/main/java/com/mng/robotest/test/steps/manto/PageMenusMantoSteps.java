@@ -74,11 +74,6 @@ public class PageMenusMantoSteps extends PageBase {
 		return new PagePedidos().isPage();
 	}
 	
-	public void goToConsultarTiendas() {
-		goToMainMenusAndClickMenu("Consultar Tiendas");
-		new PageConsultaTiendaSteps().validateIsPage();
-	}
-
 	public void goToIdEans()  {
 		goToMainMenusAndClickMenu("EANS");
 		new PageConsultaIdEansSteps().validateIsPage();
@@ -97,11 +92,6 @@ public class PageMenusMantoSteps extends PageBase {
 	public void goToGestorEstadisticasPedido() {
 		goToMainMenusAndClickMenu("Estadisticas Pedidos");
 		new PageGestorEstadisticasPedidoSteps().validateIsPage();
-	}
-	
-	public void goToGestorSaldosTPV() {
-		goToMainMenusAndClickMenu("Gestor de Saldos de TPV");
-		new PageGestorSaldosTPVSteps().validateIsPage();
 	}
 	
 	public void goToGestorConsultaCambioFamilia() {
