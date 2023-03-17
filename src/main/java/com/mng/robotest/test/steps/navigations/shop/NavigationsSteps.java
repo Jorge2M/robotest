@@ -1,6 +1,6 @@
 package com.mng.robotest.test.steps.navigations.shop;
 
-import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.steps.shop.AllPagesSteps;
 import com.mng.robotest.test.steps.shop.SecCabeceraSteps;
 import com.mng.robotest.test.steps.shop.landing.PageLandingSteps;

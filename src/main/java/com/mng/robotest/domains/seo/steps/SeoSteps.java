@@ -15,10 +15,10 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.seo.beans.Sitemapindex;
 import com.mng.robotest.domains.seo.beans.Sitemapindex.Sitemap;
 import com.mng.robotest.domains.seo.pageobjects.PageSitemap;
-import com.mng.robotest.domains.transversal.StepBase;
 
 public class SeoSteps extends StepBase {
 

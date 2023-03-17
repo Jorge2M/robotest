@@ -1,7 +1,7 @@
-package com.mng.robotest.domains.transversal;
+package com.mng.robotest.domains.base;
 
+import com.mng.robotest.domains.base.datatest.DataTest;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
-import com.mng.robotest.test.data.DataTest;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;

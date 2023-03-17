@@ -1,11 +1,12 @@
 package com.mng.robotest.domains.otros.tests;
 
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 
 import static com.mng.robotest.test.data.PaisShop.*;
+
+import com.mng.robotest.domains.base.TestBase;
 
 public class Otr003 extends TestBase {
 

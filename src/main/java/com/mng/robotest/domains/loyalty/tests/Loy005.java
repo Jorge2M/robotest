@@ -1,11 +1,11 @@
 package com.mng.robotest.domains.loyalty.tests;
 
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
 import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.domains.loyalty.steps.PageRegalarMisLikesSteps;
 import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps.DataRegaloPuntos;
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;

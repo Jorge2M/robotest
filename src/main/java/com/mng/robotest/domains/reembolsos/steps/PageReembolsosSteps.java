@@ -4,11 +4,11 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta.Link;
 import com.mng.robotest.domains.reembolsos.pageobjects.PageReembolsos;
 import com.mng.robotest.domains.reembolsos.pageobjects.PageReembolsos.TypeReembolso;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 
 public class PageReembolsosSteps extends StepBase {

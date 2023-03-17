@@ -3,7 +3,7 @@ package com.mng.robotest.domains.galeria.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.github.jorge2m.testmaker.conf.Channel;
 

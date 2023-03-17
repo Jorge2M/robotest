@@ -3,8 +3,8 @@ package com.mng.robotest.domains.seo.tests;
 import java.net.URI;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.seo.steps.SeoSteps;
-import com.mng.robotest.domains.transversal.TestBase;
 
 public class Seo001 extends TestBase {
 

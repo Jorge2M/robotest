@@ -11,7 +11,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PageJCAS;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PagePrehome;
 import com.mng.robotest.test.beans.IdiomaPais;

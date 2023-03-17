@@ -1,7 +1,7 @@
 package com.mng.robotest.test.pageobject.shop.navigations;
 
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;

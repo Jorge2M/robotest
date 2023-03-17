@@ -1,11 +1,11 @@
 package com.mng.robotest.domains.galeria.tests;
 
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.steps.navigations.shop.GaleriaNavigationsSteps;
 
 import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.galeria.steps.ModalArticleNotAvailableSteps;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 

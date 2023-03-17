@@ -5,10 +5,10 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.pageobjects.PageFavoritos;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 

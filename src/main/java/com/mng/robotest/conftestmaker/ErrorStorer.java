@@ -13,7 +13,7 @@ import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMake
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.github.jorge2m.testmaker.testreports.stepstore.EvidenceStorer;
 import com.github.jorge2m.testmaker.testreports.stepstore.StepEvidence;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 public class ErrorStorer extends EvidenceStorer {
 

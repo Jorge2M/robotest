@@ -3,8 +3,8 @@ package com.mng.robotest.domains.compra.steps.envio;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.envio.ModalDroppoints;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.datastored.DataPago;
 

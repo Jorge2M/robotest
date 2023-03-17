@@ -2,7 +2,7 @@ package com.mng.robotest.domains.compra.payments.billpay.pageobjects;
 
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

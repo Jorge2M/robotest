@@ -10,7 +10,7 @@ public class PageOrdenacionDePrendas {
 		TITULO("ORDENADOR DE PRENDAS"),
 		INITIAL_TITULO("//td[@class='txt11B' and text()[contains(.,'ORDENADOR DE PRENDAS')]]"),
 		DESPLEGABLE_TIENDAS("//select[@id[contains(.,'host')]]"),
-		VER_TIENDAS("//input[@id[contains(.,'j_id_2f')]]"),
+		VER_TIENDAS("//input[@value='Ver tiendas']"),
 		SELECTOR_ORDENACION("//select[@name[contains(.,'secciones')]]"),
 		SELECTOR_PRENDAS("//select[@id[contains(.,'menus')]]"),
 		VER_PRENDAS("//input[@value[contains(.,'Ver Prendas')]]"),
@@ -57,9 +57,9 @@ public class PageOrdenacionDePrendas {
 	public enum Section implements ElementPage {
 		She("//input[@src[contains(.,'cabecera_mango_she')]]"),
 		He("//input[@src[contains(.,'cabecera_mango_he')]]"),
-		Nina("//input[@src[contains(.,'cabecera_mango_nina')]]"),
-		Nino("//input[@src[contains(.,'cabecera_mango_nino')]]"),
-		Teen("//input[@src[contains(.,'cabecera_mango_teen')]]");
+		Ninos("//input[@src[contains(.,'cabecera_mango_kids')]]"),
+		Teen("//input[@src[contains(.,'cabecera_mango_teen')]]"),
+		Home("//input[@src[contains(.,'cabecera_mango_home')]]");
 		
 		By by;
 		Section(String xpath) {

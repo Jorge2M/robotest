@@ -3,7 +3,7 @@ package com.mng.robotest.test.pageobject.shop;
 import org.openqa.selenium.Keys;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 public class SecKrediKartiCheckout extends PageBase {
 

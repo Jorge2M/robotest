@@ -1,19 +1,19 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.pageobject.manto.PageGestorCheques;
-import com.mng.robotest.test.pageobject.manto.PageGestorCheques.ButtonsCheque;
-import com.mng.robotest.test.pageobject.manto.PageGestorCheques.TablaCheque;
+import com.mng.robotest.domains.base.StepMantoBase;
+import com.mng.robotest.domains.manto.pageobjects.PageGestorCheques;
+import com.mng.robotest.domains.manto.pageobjects.PageGestorCheques.ButtonsCheque;
+import com.mng.robotest.domains.manto.pageobjects.PageGestorCheques.TablaCheque;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
-public class PageGestorChequesSteps extends PageBase {
+public class PageGestorChequesSteps extends StepMantoBase {
 	
 	private final PageGestorCheques pageGestorCheques = new PageGestorCheques();
 	
@@ -92,18 +92,23 @@ public class PageGestorChequesSteps extends PageBase {
 		checks.add(
 			"Existe el botón de <b>Id del pedido</b>",
 			state(Present, ButtonsCheque.ID_PEDIDO.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"Existe el botón de <b>Numero de cheque</b>",
 			state(Present, ButtonsCheque.NUM_CHEQUE.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"Existe el botón de <b>Id de compra</b>",
 			state(Clickable, ButtonsCheque.ID_COMPRA.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"Existe el botón de <b>Correo del receptor</b>",
 			state(Clickable, ButtonsCheque.CORREO_RECEPTOR.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"Existe el botón de <b>Correo del comprador</b>",
 			state(Clickable, ButtonsCheque.CORREO_COMPRADOR.getBy()).wait(3).check(), State.Defect);
+		
 		return checks;
 	}
 
@@ -113,9 +118,11 @@ public class PageGestorChequesSteps extends PageBase {
 		checks.add(
 			"En la tabla activo existe un apartado para <b>ACTIVO</b>",
 			state(Present, TablaCheque.ACTIVO.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"En la tabla activo existe un apartado para <b>CHARGEBACK</b>",
 			state(Present, TablaCheque.CHARGE_BACK.getBy()).wait(3).check(), State.Defect);
+		
 		return checks;
 	}
 
@@ -132,18 +139,23 @@ public class PageGestorChequesSteps extends PageBase {
 		checks.add(
 			"En la tabla divisa existe un apartado para <b>DIVISA</b>",
 			state(Present, TablaCheque.DIVISA.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"En la tabla divisa existe un apartado para <b>VALOR TOTAL</b>",
 			state(Present, TablaCheque.VALOR_TOTAL.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"En la tabla divisa existe un apartado para <b>SALDO</b>",
 			state(Clickable, TablaCheque.SALDO.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"En la tabla divisa existe un apartado para <b>FECHA DE COMPRA</b>",
 			state(Clickable, TablaCheque.FECHA_COMPRA.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"En la tabla divisa existe un apartado para <b>VALIDEZ</b>",
 			state(Clickable, TablaCheque.VALIDEZ.getBy()).wait(3).check(), State.Defect);
+		
 		return checks;
 	}
 
@@ -153,18 +165,23 @@ public class PageGestorChequesSteps extends PageBase {
 		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Id</b>",
 			state(Present, TablaCheque.ID_PEDIDOS.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Fecha</b>",
 			state(Present, TablaCheque.FECHA_PEDIDOS.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Total</b>",
 			state(Present, TablaCheque.TOTAL_PEDIDOS.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Usuario</b>",
 			state(Present, TablaCheque.USUARIO_PEDIDOS.getBy()).wait(3).check(), State.Defect);
+		
 		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Accion</b>",
 			state(Present, TablaCheque.ACTIVO_PEDIDOS.getBy()).wait(3).check(), State.Defect);
+		
 		return checks;
 	}
 

@@ -3,9 +3,9 @@ package com.mng.robotest.test.steps.manto;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.base.StepBase;
+import com.mng.robotest.domains.manto.pageobjects.PageBolsas;
 import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.pageobject.manto.PageBolsas;
 
 
 public class PageBolsasMantoSteps extends StepBase {

@@ -5,7 +5,7 @@ import org.openqa.selenium.Cookie;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
-import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.pageobject.shop.acceptcookies.SectionCookies;
 
 public class SectionCookiesSteps extends StepBase {

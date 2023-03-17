@@ -7,8 +7,8 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop;
 

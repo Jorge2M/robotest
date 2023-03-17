@@ -4,16 +4,16 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PageJCAS;
 import com.mng.robotest.test.pageobject.manto.PageSelTda;
 
 public class PageLoginMantoSteps extends StepBase {
 
-	public void login(String urlManto, String usrManto, String passManto) {
-		goToMantoIfNotYet(urlManto);
+	public void login() {
+		goToMantoIfNotYet(dataMantoTest.getUrlManto());
 		if (!new PageSelTda().isPage()) {
-			identFromJasigCasPage(usrManto, passManto);
+			identFromJasigCasPage(dataMantoTest.getUserManto(), dataMantoTest.getPassManto());
 		}
 		checkIsPageSelectTienda(25);
 	}

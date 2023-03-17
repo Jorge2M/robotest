@@ -1,10 +1,10 @@
 package com.mng.robotest.domains.micuenta.tests;
 
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisDatosSteps;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.steps.shop.SecCabeceraSteps;

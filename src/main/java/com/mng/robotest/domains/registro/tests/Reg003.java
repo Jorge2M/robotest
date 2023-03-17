@@ -3,6 +3,7 @@ package com.mng.robotest.domains.registro.tests;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.registro.beans.DataNino;
@@ -13,7 +14,6 @@ import com.mng.robotest.domains.registro.steps.PageRegistroFinStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroNinosStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroSegundaStepsOutlet;
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;

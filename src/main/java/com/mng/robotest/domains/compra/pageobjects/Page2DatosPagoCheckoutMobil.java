@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.payments.billpay.pageobjects.SecBillpay;
 import com.mng.robotest.domains.compra.payments.tmango.pageobjects.SecTMango;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.utils.ImporteScreen;
 

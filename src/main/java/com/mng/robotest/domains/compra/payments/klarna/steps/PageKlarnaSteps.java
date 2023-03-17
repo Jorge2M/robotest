@@ -3,9 +3,9 @@ package com.mng.robotest.domains.compra.payments.klarna.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.klarna.pageobjects.DataKlarna;
 import com.mng.robotest.domains.compra.payments.klarna.pageobjects.PageKlarna;
-import com.mng.robotest.domains.transversal.StepBase;
 
 public class PageKlarnaSteps extends StepBase {
 

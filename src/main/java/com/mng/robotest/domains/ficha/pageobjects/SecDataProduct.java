@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.ficha.pageobjects.tallas.SSecSelTallasFicha;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.utils.ImporteScreen;

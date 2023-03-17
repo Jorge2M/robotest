@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.manto.pedido;
+package com.mng.robotest.domains.manto.pageobjects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.datastored.DataPedido;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -26,10 +26,7 @@ public class PageDetallePedido extends PageBase {
 	private static final String XPATH_LINK_VOLVER_PEDIDOS = "//a[text()[contains(.,'volver a pedidos')]]";
 	private static final String XPATH_REFERENCIA_ARTICULO = "//a[@onclick[contains(.,'var div =')]]";
 	private static final String XPATH_LINK_DETALLES_CLIENTE = "//input[@value='Detalles Cliente']";
-	
 	private static final String	XPATH_IR_A_GENERAR_BUTTON = "//input[@value='ir a Generar']";
-	private static final String	XPATH_DETALLES_CLIENTE_BUTTON = "//input[@value='Detalles Cliente']";
-	private static final String	XPATH_DEVOLUCIONES = "//input[@value='Devoluciones']";
 
 	private String getXPathLabelIdPedido(String idPedido) {
 		return (XPATH_LABEL_ID_PEDIDO.replace(TAG_ID_PEDIDO, idPedido));
@@ -73,8 +70,7 @@ public class PageDetallePedido extends PageBase {
 	}
 	
 	public boolean isCodPaisPedido(String codPaisPedido) {
-		String paisLit = getCodigoPais();
-		return (paisLit.contains(codPaisPedido));
+		return getCodigoPais().contains(codPaisPedido);
 	}
 	
 	public String get1rstLineDatosEnvioText() {
@@ -122,7 +118,6 @@ public class PageDetallePedido extends PageBase {
 	public List<String> getReferenciasArticulosDetallePedido() {
 		List <String> referenciasText = new ArrayList<>();
 		List<WebElement> referencias = getElements(XPATH_REFERENCIA_ARTICULO);
-		
 		for (WebElement referencia : referencias){
 			referenciasText.add(referencia.getText().replace(" ", ""));
 		}

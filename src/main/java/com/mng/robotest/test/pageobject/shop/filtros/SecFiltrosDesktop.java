@@ -5,8 +5,8 @@ import java.util.List;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenuLateralDesktop;
 

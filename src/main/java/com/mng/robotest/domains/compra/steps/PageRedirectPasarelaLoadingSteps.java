@@ -2,8 +2,8 @@ package com.mng.robotest.domains.compra.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.PageRedirectPasarelaLoading;
-import com.mng.robotest.domains.transversal.StepBase;
 
 public class PageRedirectPasarelaLoadingSteps extends StepBase {
 	

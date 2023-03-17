@@ -1,4 +1,4 @@
-package com.mng.robotest.test.data;
+package com.mng.robotest.domains.base.datatest;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,6 +7,7 @@ import com.mng.robotest.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.getdata.usuarios.UserShop;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;

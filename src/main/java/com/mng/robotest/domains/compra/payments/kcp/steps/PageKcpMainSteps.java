@@ -2,8 +2,8 @@ package com.mng.robotest.domains.compra.payments.kcp.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.kcp.pageobjects.PageKcpMain;
-import com.mng.robotest.domains.transversal.StepBase;
 
 
 public class PageKcpMainSteps extends StepBase {

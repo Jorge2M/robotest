@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.kredikarti.pageobjects.SecKrediKarti;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 

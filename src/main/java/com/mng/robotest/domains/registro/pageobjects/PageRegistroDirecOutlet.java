@@ -6,10 +6,10 @@ import java.util.Map;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.pageobjects.Page2IdentCheckout;
 import com.mng.robotest.domains.registro.beans.DataRegistro;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro;
-import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

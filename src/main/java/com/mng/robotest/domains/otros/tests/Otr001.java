@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.otros.tests;
 
-import com.mng.robotest.domains.transversal.TestBase;
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;

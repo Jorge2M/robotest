@@ -4,8 +4,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.trustpay.pageobjects.PageTrustPayResult;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 public class PageTrustPayResultSteps extends StepBase {

@@ -7,8 +7,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.dotpay.pageobjects.PageDotpay1rst;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 

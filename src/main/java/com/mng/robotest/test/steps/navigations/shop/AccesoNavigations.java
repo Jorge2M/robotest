@@ -2,8 +2,8 @@ package com.mng.robotest.test.steps.navigations.shop;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.beans.AccesoVOTF;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;

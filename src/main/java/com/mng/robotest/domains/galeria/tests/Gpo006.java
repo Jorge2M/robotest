@@ -2,8 +2,8 @@ package com.mng.robotest.domains.galeria.tests;
 
 import java.util.Arrays;
 
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
-import com.mng.robotest.domains.transversal.TestBase;
 
 import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 import static com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeSlider.*;

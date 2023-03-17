@@ -6,8 +6,8 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.postfinance.pageobjects.PagePostfCodSeg;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 public class PagePostfCodSegSteps extends StepBase {

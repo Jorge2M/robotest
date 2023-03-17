@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.testng.annotations.Test;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;

@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.steps;
 
 import java.util.List;
 
@@ -6,12 +6,11 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.domains.transversal.StepBase;
-import com.mng.robotest.test.pageobject.manto.PageConsultaIdEans;
+import com.mng.robotest.domains.base.StepMantoBase;
+import com.mng.robotest.domains.manto.pageobjects.PageConsultaIdEans;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
-
-public class PageConsultaIdEansSteps extends StepBase {
+public class PageConsultaIdEansSteps extends StepMantoBase {
 
 	private final PageConsultaIdEans pageConsultaIdEans = new PageConsultaIdEans();
 	

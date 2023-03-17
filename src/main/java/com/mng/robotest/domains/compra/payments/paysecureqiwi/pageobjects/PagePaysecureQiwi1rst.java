@@ -5,7 +5,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import org.openqa.selenium.By;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 public class PagePaysecureQiwi1rst extends PageBase {
 	

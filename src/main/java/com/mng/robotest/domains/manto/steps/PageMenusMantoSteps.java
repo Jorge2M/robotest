@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.steps;
 
 import java.util.List;
 
@@ -7,14 +7,15 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.pageobject.manto.PageBolsas;
+import com.mng.robotest.domains.base.StepMantoBase;
+import com.mng.robotest.domains.manto.pageobjects.PageBolsas;
+import com.mng.robotest.domains.manto.pageobjects.PageMenusManto;
+import com.mng.robotest.domains.manto.pageobjects.PageOrdenacionDePrendasSteps;
+import com.mng.robotest.domains.manto.pageobjects.PagePedidos;
 import com.mng.robotest.test.pageobject.manto.SecCabecera;
-import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos;
-import com.mng.robotest.test.pageobject.shop.PageMenusManto;
+import com.mng.robotest.test.steps.manto.PageGestorEstadisticasPedidoSteps;
 
-
-public class PageMenusMantoSteps extends PageBase {
+public class PageMenusMantoSteps extends StepMantoBase {
 
 	private final PageMenusManto pageMenusManto = new PageMenusManto();
 	
@@ -92,11 +93,6 @@ public class PageMenusMantoSteps extends PageBase {
 	public void goToGestorEstadisticasPedido() {
 		goToMainMenusAndClickMenu("Estadisticas Pedidos");
 		new PageGestorEstadisticasPedidoSteps().validateIsPage();
-	}
-	
-	public void goToGestorConsultaCambioFamilia() {
-		goToMainMenusAndClickMenu("Gestor de familias");
-		new PageGestorConsultaCambioFamiliaSteps().validateIsPage();
 	}
 	
 	public void goToOrdenadorDePrendas() {

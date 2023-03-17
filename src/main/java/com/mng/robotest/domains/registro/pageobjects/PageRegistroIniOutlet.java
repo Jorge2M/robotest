@@ -13,12 +13,12 @@ import org.openqa.selenium.support.ui.Select;
 import com.github.jorge2m.testmaker.conf.Channel;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.pageobjects.Page2IdentCheckout;
 import com.mng.robotest.domains.registro.beans.DataRegistro;
 import com.mng.robotest.domains.registro.beans.InputDataXPath;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.domains.registro.beans.ListDataRegistro.DataRegType;
-import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageRegistroIniOutlet extends PageBase {
 	

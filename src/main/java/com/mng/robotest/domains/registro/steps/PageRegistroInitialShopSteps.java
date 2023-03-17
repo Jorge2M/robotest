@@ -5,9 +5,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroInitialShop;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class PageRegistroInitialShopSteps extends StepBase {

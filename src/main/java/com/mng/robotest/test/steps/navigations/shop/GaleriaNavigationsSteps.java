@@ -1,8 +1,8 @@
 package com.mng.robotest.test.steps.navigations.shop;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
-import com.mng.robotest.domains.transversal.StepBase;
 
 public class GaleriaNavigationsSteps extends StepBase {
 	

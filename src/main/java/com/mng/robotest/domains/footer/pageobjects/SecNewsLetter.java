@@ -3,7 +3,7 @@ package com.mng.robotest.domains.footer.pageobjects;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.pageobject.shop.modales.ModalClubMangoLikes;
 
 public class SecNewsLetter extends PageBase {

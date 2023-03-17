@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.otros.tests;
 
-import com.mng.robotest.domains.transversal.TestBase;
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.test.steps.shop.modales.ModalChatBotSteps;
 import com.mng.robotest.test.steps.shop.modales.ModalNewsletterSteps;
 

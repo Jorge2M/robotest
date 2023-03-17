@@ -10,8 +10,8 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.AllPages;
 
 public class AllPagesSteps extends StepBase {

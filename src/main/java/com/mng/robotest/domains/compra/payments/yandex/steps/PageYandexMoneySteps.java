@@ -5,8 +5,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.yandex.pageobjects.PageYandexMoney;
-import com.mng.robotest.domains.transversal.StepBase;
 
 public class PageYandexMoneySteps extends StepBase {
 

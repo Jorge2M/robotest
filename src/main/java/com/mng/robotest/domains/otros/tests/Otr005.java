@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.otros.tests;
 
-import com.mng.robotest.domains.transversal.TestBase;
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PagePrehome;
 import com.mng.robotest.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.test.beans.IdiomaPais;

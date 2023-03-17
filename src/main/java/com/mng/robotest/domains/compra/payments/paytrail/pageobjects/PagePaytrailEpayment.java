@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.compra.payments.paytrail.pageobjects;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 public class PagePaytrailEpayment extends PageBase {
 

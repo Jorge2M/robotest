@@ -1,8 +1,8 @@
 package com.mng.robotest.domains.login.tests;
 
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.login.steps.PageIdentificacionSteps;
 import com.mng.robotest.domains.login.steps.PageRecuperaPasswdSteps;
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.data.Constantes;
 
 public class Log001 extends TestBase {

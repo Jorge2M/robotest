@@ -1,8 +1,8 @@
 package com.mng.robotest.domains.micuenta.pageobjects;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 

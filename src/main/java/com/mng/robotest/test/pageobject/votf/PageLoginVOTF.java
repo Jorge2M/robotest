@@ -1,6 +1,6 @@
 package com.mng.robotest.test.pageobject.votf;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.utils.testab.TestABactive;
 
 public class PageLoginVOTF extends PageBase {

@@ -14,8 +14,8 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.micuenta.beans.Ticket;
-import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageMisCompras extends PageBase {
 

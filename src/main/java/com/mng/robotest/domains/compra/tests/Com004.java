@@ -3,11 +3,11 @@ package com.mng.robotest.domains.compra.tests;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.datastored.DataPago;

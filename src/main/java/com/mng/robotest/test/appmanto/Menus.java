@@ -6,11 +6,11 @@ import java.util.Optional;
 import org.testng.annotations.Test;
 
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.base.datatest.DataMantoTest;
+import com.mng.robotest.domains.manto.steps.PageMenusMantoSteps;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.exceptions.NotFoundException;
-import com.mng.robotest.test.steps.manto.DataMantoAccess;
 import com.mng.robotest.test.steps.manto.PageLoginMantoSteps;
-import com.mng.robotest.test.steps.manto.PageMenusMantoSteps;
 import com.mng.robotest.test.steps.manto.PageSelTdaMantoSteps;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
@@ -39,8 +39,8 @@ public class Menus implements Serializable {
 		this.indexFact = " (" + cabeceraName + ")";
 	}
 
-	public DataMantoAccess getDataMantoAccess() {
-		DataMantoAccess dMantoAcc = new DataMantoAccess();
+	public DataMantoTest getDataMantoAccess() {
+		DataMantoTest dMantoAcc = DataMantoTest.make();
 		TestCaseTM testCase = getTestCase();
 		TestRunTM testRun = testCase.getTestRunParent();
 		InputParamsTM inputParams = testCase.getInputParamsSuite();
@@ -65,8 +65,7 @@ public class Menus implements Serializable {
 		description="Consulta de menús")
 	public void MAN005_ConsultaMenus() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
-		DataMantoAccess dMantoAcc = getDataMantoAccess();
-		new PageLoginMantoSteps().login(dMantoAcc.getUrlManto(), dMantoAcc.getUserManto(), dMantoAcc.getPassManto());
+		new PageLoginMantoSteps().login();
 		String codigoEspanya = "001";
 		String codigoAlmacenEspanya = "001";
 		new PageSelTdaMantoSteps().selectTienda(codigoAlmacenEspanya, codigoEspanya);

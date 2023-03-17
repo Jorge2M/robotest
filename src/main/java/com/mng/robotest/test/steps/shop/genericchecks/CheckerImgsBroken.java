@@ -23,7 +23,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 

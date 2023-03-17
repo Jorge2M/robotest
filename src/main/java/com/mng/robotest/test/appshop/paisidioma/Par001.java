@@ -2,9 +2,9 @@ package com.mng.robotest.test.appshop.paisidioma;
 
 import java.util.List;
 
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;

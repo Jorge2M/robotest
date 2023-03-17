@@ -1,10 +1,10 @@
 package com.mng.robotest.domains.micuenta.tests;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.test.beans.IdiomaPais;

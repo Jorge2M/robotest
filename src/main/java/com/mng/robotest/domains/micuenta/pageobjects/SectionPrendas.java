@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.micuenta.pageobjects;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 public class SectionPrendas extends PageBase {
 

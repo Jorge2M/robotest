@@ -1,6 +1,6 @@
 package com.mng.robotest.test.pageobject.chequeregalo;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.ChequeRegalo;
 

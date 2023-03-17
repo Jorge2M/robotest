@@ -2,8 +2,8 @@ package com.mng.robotest.domains.registro.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.registro.pageobjects.PagePoliticaPrivacidad;
-import com.mng.robotest.domains.transversal.StepBase;
 
 public class PagePoliticaPrivacidadSteps extends StepBase {
 

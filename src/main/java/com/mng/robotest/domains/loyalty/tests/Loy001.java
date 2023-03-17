@@ -7,8 +7,6 @@ import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.domains.loyalty.steps.PageHistorialLikesSteps;
 import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps;
-import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.GaleriaNavigationsSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
@@ -16,6 +14,8 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
 
+import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 
 public class Loy001 extends TestBase {

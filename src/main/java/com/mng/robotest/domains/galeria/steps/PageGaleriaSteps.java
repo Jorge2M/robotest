@@ -17,6 +17,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
@@ -30,7 +31,6 @@ import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArtic
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeSlider;
 import com.mng.robotest.domains.galeria.pageobjects.SecBannerHeadGallery.TypeLinkInfo;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;

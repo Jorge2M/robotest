@@ -9,10 +9,10 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.payments.billpay.pageobjects.SecBillpay;
 import com.mng.robotest.domains.compra.payments.eps.pageobjects.SecEps;
 import com.mng.robotest.domains.compra.payments.tmango.pageobjects.SecTMango;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.data.Descuento;
 import com.mng.robotest.test.generic.ChequeRegalo;

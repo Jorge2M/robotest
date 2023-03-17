@@ -1,11 +1,11 @@
-package com.mng.robotest.test.pageobject.manto;
+package com.mng.robotest.domains.manto.pageobjects;
 
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -34,19 +34,19 @@ public class PageConsultaIdEans extends PageBase {
 	}
 
 	public boolean isVisibleTituloPagina() {
-		return state(Visible, By.xpath(XPATH_TITULO_PAGINA)).check();
+		return state(Visible, XPATH_TITULO_PAGINA).check();
 	}
 
 	public boolean isVisibleDivBusquedaExcel() {	
-		return state(Visible, By.xpath(XPATH_DIV_BUSQUEDA_EXCEL)).check();
+		return state(Visible, XPATH_DIV_BUSQUEDA_EXCEL).check();
 	}
 
 	public boolean isVisibleDivBusquedaRapida() {
-		return state(Visible, By.xpath(XPATH_DIV_BUSQUEDA_RAPIDA)).check();
+		return state(Visible, XPATH_DIV_BUSQUEDA_RAPIDA).check();
 	}
 
 	public boolean isVisibleTablaInformacionUntil(int seconds) {
-		return state(Visible, By.xpath(XPATH_HEADER_TABLA_ID)).wait(seconds).check();
+		return state(Visible, XPATH_HEADER_TABLA_ID).wait(seconds).check();
 	}
 
 	public void inputPedidosAndClickBuscarDatos(List<String> pedidosPrueba) {
@@ -55,19 +55,19 @@ public class PageConsultaIdEans extends PageBase {
 	}
 	
 	public void inputPedidos(List<String> pedidosPrueba) {
-		driver.findElement(By.xpath(XPATH_TEXT_AREA_BUSQUEDA_RAPIDA)).clear();
+		getElement(XPATH_TEXT_AREA_BUSQUEDA_RAPIDA).clear();
 		for (String pedido : pedidosPrueba) {
-			driver.findElement(By.xpath(XPATH_TEXT_AREA_BUSQUEDA_RAPIDA)).sendKeys(pedido);
-			driver.findElement(By.xpath(XPATH_TEXT_AREA_BUSQUEDA_RAPIDA)).sendKeys(Keys.ENTER);
+			getElement(XPATH_TEXT_AREA_BUSQUEDA_RAPIDA).sendKeys(pedido);
+			getElement(XPATH_TEXT_AREA_BUSQUEDA_RAPIDA).sendKeys(Keys.ENTER);
 		}
 	}
 	
 	public void clickBuscarDatosContactoButton() {
-		driver.findElement(By.xpath(XPATH_BOTON_BUSCAR_DATOS_CONTACTO)).click();
+		getElement(XPATH_BOTON_BUSCAR_DATOS_CONTACTO).click();
 	}
 
 	public int getLineasPedido() {
-		return driver.findElements(By.xpath(XPATH_LINEA_PEDIDO_TABLA_ID)).size();
+		return getElements(XPATH_LINEA_PEDIDO_TABLA_ID).size();
 	}
 
 	public boolean isPedidosTablaCorrecto(List<String> pedidosPrueba) {
@@ -89,7 +89,7 @@ public class PageConsultaIdEans extends PageBase {
 	}
 	
 	private void clickBuscarIdentificadoresPedidoButton() {
-		driver.findElement(By.xpath(XPATH_BOTON_BUSCAR_IDENTIFICADORES_PEDIDO)).click();
+		getElement(XPATH_BOTON_BUSCAR_IDENTIFICADORES_PEDIDO).click();
 	}
 	
 
@@ -101,7 +101,7 @@ public class PageConsultaIdEans extends PageBase {
 	}
 	
 	private void clickBuscarTrackingsButton() {
-		driver.findElement(By.xpath(XPATH_BOTON_BUSCAR_TRACKINGS)).click();
+		getElement(XPATH_BOTON_BUSCAR_TRACKINGS).click();
 	}
 
 	
@@ -113,13 +113,12 @@ public class PageConsultaIdEans extends PageBase {
 	}
 
 	private void clickBuscarDatosEanButton() {
-		driver.findElement(By.xpath(XPATH_BOTON_BUSCAR_DATOS_EAN)).click();
+		getElement(XPATH_BOTON_BUSCAR_DATOS_EAN).click();
 	}
 
 	public boolean isArticulosTablaCorrecto(List<String> articulosPrueba) {
 		for (String articulo : articulosPrueba) {
-			String xpathLineaPedido = getXPathLineaPedido(articulo);
-			if (!state(Visible, By.xpath(xpathLineaPedido)).check()) {
+			if (!state(Visible, getXPathLineaPedido(articulo)).check()) {
 				return false;
 			}
 		}

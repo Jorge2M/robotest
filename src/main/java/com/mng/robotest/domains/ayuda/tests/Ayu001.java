@@ -1,9 +1,9 @@
 package com.mng.robotest.domains.ayuda.tests;
 
 import com.mng.robotest.domains.ayuda.steps.AyudaSteps;
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
-import com.mng.robotest.domains.transversal.TestBase;
 
 public class Ayu001 extends TestBase {
 

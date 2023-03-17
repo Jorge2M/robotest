@@ -2,7 +2,7 @@ package com.mng.robotest.domains.compra.tests;
 
 import org.testng.annotations.*;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 public class Compra {
 

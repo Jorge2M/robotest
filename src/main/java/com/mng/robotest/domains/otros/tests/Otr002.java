@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.otros.tests;
 
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.otros.steps.GoogleSteps;
-import com.mng.robotest.domains.transversal.TestBase;
 
 public class Otr002 extends TestBase {
 

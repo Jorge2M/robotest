@@ -1,7 +1,7 @@
 package com.mng.robotest.test.steps.votf;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
-import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.pageobject.votf.PageAlertaVOTF;
 import com.mng.robotest.test.pageobject.votf.PageSelectIdiomaVOTF;
 

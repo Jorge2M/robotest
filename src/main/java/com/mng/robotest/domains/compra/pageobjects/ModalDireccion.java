@@ -9,8 +9,8 @@ import org.openqa.selenium.support.ui.Select;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.pageobjects.DataDireccion.DataDirType;
-import com.mng.robotest.domains.transversal.PageBase;
 
 public abstract class ModalDireccion extends PageBase {
 

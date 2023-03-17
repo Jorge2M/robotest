@@ -3,8 +3,8 @@ package com.mng.robotest.domains.login.steps;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.login.pageobjects.PageIdentificacion;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class PageIdentificacionSteps extends StepBase {

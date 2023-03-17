@@ -5,7 +5,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 public class PageMangoLikesYou extends PageBase {
 

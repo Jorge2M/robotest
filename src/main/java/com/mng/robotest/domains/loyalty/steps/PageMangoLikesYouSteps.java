@@ -3,10 +3,10 @@ package com.mng.robotest.domains.loyalty.steps;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.ButtonUseLikes;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps.ChecksResultWithNumberPoints;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;

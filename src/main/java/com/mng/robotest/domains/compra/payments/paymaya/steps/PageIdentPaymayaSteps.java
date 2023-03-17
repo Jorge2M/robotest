@@ -3,8 +3,8 @@ package com.mng.robotest.domains.compra.payments.paymaya.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.payments.paymaya.pageobjects.PageIdentPaymaya;
-import com.mng.robotest.domains.transversal.PageBase;
 
 
 public class PageIdentPaymayaSteps extends PageBase {

@@ -1,11 +1,8 @@
-package com.mng.robotest.test.pageobject.manto;
+package com.mng.robotest.domains.manto.pageobjects;
 
-import org.openqa.selenium.By;
-
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageBolsas extends PageBase {
 
@@ -30,32 +27,32 @@ public class PageBolsas extends PageBase {
 	}
 
 	public boolean isPage() {
-		return (state(Present, By.xpath(XPATH_MAIN_FORM)).check());
+		return (state(Present, XPATH_MAIN_FORM).check());
 	}
 
 	public int getNumLineas() {
-		return (driver.findElements(By.xpath(XPATH_LINEA)).size());
+		return getElements(XPATH_LINEA).size();
 	}
 	
 	public boolean presentLinkPedidoInBolsaUntil(String codigoPedido, int seconds) {
 		String xpath = getXpathLinkPedidoInBolsa(codigoPedido);
-		return (state(Present, By.xpath(xpath)).wait(seconds).check());
+		return state(Present, xpath).wait(seconds).check();
 	}
 
 	public boolean presentIdTpvInBolsa(String idTpv) {
 		String xpath = getXpathIdTpvInBolsa(idTpv);
-		return state(Present, By.xpath(xpath)).check();
+		return state(Present, xpath).check();
 	}
 
 	public boolean presentCorreoInBolsa(String correo) {
 		String xpath = getXpath_correoInBolsa(correo);
-		return state(Present, By.xpath(xpath)).check();
+		return state(Present, xpath).check();
 	}
 
 	public String getIdCompra(String idPedido) {
 		String xpathIdCompra = getXpathLinkIdCompraInBolsa(idPedido);
-		if (state(Present, By.xpath(xpathIdCompra)).check()) {
-			String textIdCompra = driver.findElement(By.xpath(xpathIdCompra)).getText();
+		if (state(Present, xpathIdCompra).check()) {
+			String textIdCompra = getElement(xpathIdCompra).getText();
 			return (textIdCompra.substring(0, textIdCompra.indexOf(" ")));
 		}
 		return "";

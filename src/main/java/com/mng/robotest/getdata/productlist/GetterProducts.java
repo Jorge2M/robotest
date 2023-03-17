@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.getdata.UtilsData;
 import com.mng.robotest.getdata.canonicalproduct.GetterProductApiCanonical;
@@ -413,10 +413,10 @@ public class GetterProducts {
 		private boolean extraCanonicalInfo;
 		private List<MenuI> menusCandidates = 
 			Arrays.asList(
-				Menu.SHORTS, 
 				Menu.CAMISAS, 
 				Menu.PIJAMAS,
 				Menu.FALDAS,
+				Menu.SHORTS,
 				Menu.FULARES);
 		
 		private Integer pagina = 1;

@@ -2,10 +2,10 @@ package com.mng.robotest.domains.registro.tests;
 
 import java.util.Map;
 
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.registro.steps.PageRegistroDirecStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroFinStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;

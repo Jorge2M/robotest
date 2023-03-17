@@ -1,11 +1,11 @@
-package com.mng.robotest.test.pageobject.manto.pedido;
+package com.mng.robotest.domains.manto.pageobjects;
 
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -104,7 +104,7 @@ public class PagePedidos extends PageBase {
 
 	public int getPosicionColumn(IdColumn idColumn, TypeDetalle typeDetalle) {
 		String xpathTdCabeceraPedidos = getXPathTdCabeceraTablaPedidos(typeDetalle); 
-		List<WebElement> listColumns = driver.findElements(By.xpath(xpathTdCabeceraPedidos));
+		List<WebElement> listColumns = getElements(xpathTdCabeceraPedidos);
 		int i=0;
 		for (WebElement tdColumn : listColumns) {
 			i+=1;
@@ -117,29 +117,30 @@ public class PagePedidos extends PageBase {
 	}
 
 	public boolean isPage() {
-		return (state(Present, By.xpath(XPATH_MAIN_FORM)).check());
+		return state(Present, XPATH_MAIN_FORM).check();
 	}
 
 	public boolean isInvisibleCapaLoadingUntil(int seconds) {
-		return (state(Invisible, By.xpath(XPATH_CAPA_LOADING)).wait(seconds).check());
+		return state(Invisible, XPATH_CAPA_LOADING).wait(seconds).check();
 	}
 
 	public int getNumLineas() {
-		return (driver.findElements(By.xpath(XPATH_LINEA_PEDIDO)).size());
+		return getElements(XPATH_LINEA_PEDIDO).size();
 	}
 	
 	public void clickLinkPedidoInLineas(String codigoPedidoManto, TypeDetalle typeDetalle) {
 		String xpath = getXPathDataPedidoInLineas(IdColumn.IDPEDIDO, codigoPedidoManto, typeDetalle);
-		click(By.xpath(xpath), driver).exec();
+		click(xpath).exec();
 	}
 
 	public boolean isPresentDataInPedido(IdColumn idColumn, String data, TypeDetalle typeDetalle, int seconds) {
 		String xpath = getXPathDataPedidoInLineas(idColumn, data, typeDetalle);
-		return (state(Present, By.xpath(xpath)).wait(seconds).check());
+		return state(Present, xpath).wait(seconds).check();
 	}
 
 	public String getCodigoPedidoUsuarioRegistrado(int posicionPedidoActual) {
-		return driver.findElement(By.xpath(getPedidoForThisIdRegistro(getXPathIdRegistroForLine(posicionPedidoActual)))).getText();
+		String xpath = getXPathIdRegistroForLine(posicionPedidoActual);
+		return getElement(getPedidoForThisIdRegistro(xpath)).getText();
 	}	
 	
 	private String getXPathLineaPedidoWithTypeEnvio(Envio envio) {
@@ -154,21 +155,21 @@ public class PagePedidos extends PageBase {
 	public int getPosicionPedidoUsuarioRegistrado(int posicionPedidoActual) {
 		int iterator = posicionPedidoActual;
 		String xpath = getXPathIdRegistroForLine(posicionPedidoActual);
-		state(Visible, By.xpath(xpath), driver).wait(400).check();
-		while (driver.findElement(By.xpath(getXPathIdRegistroForLine(iterator))).getText().equals("0")) {
+		state(Visible, xpath).wait(400).check();
+		while (getElement(getXPathIdRegistroForLine(iterator)).getText().equals("0")) {
 			iterator++;
 		}
 		return iterator;
 	}
 
 	public void clickPaginaSiguientePedidos() {
-		click(By.xpath(XPATH_LINK_PAGINA_SIGUIENTE_PEDIDOS)).exec();
+		click(XPATH_LINK_PAGINA_SIGUIENTE_PEDIDOS).exec();
 	}
 
 	public void clickPedidoWithTypeEnvio(Envio envio) {
 		String xpathLineaEnvTienda = getXPathLineaPedidoWithTypeEnvio(envio);
 		int posIdPedido = getPosicionColumn(IdColumn.IDPEDIDO, TypeDetalle.PEDIDO);
-		driver.findElement(By.xpath(xpathLineaEnvTienda + "/td[" + posIdPedido + "]/a")).click();
+		getElement(xpathLineaEnvTienda + "/td[" + posIdPedido + "]/a").click();
 	}
 	
 	public String getTiendaFisicaFromListaPedidos() {

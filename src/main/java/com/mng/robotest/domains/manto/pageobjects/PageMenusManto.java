@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop;
+package com.mng.robotest.domains.manto.pageobjects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -61,7 +61,6 @@ public class PageMenusManto extends PageBase {
 				return true;
 			}
 		}
-		
 		return false;
 	}
 

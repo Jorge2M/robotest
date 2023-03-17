@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.galeria.pageobjects;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 public class SecSubmenusGallery extends PageBase {
 

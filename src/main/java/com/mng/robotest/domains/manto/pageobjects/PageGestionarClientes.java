@@ -1,25 +1,25 @@
-package com.mng.robotest.test.pageobject.manto;
+package com.mng.robotest.domains.manto.pageobjects;
 
-import org.openqa.selenium.By;
-
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageGestionarClientes extends PageBase {
 
 	public enum TypeThirdButton {
-		ALTA("alta"), 
-		BAJA("baja");
+		ALTA("Alta"), 
+		BAJA("Baja");
 		
-		private String mensaje;
-		private TypeThirdButton(String mensaje) {
-			this.mensaje = mensaje;
+		private String literal;
+		private TypeThirdButton(String literal) {
+			this.literal = literal;
 		}
 		
+		public String literal() {
+			return this.literal;
+		}
 		public String getMensaje() {
-			return this.mensaje;
+			return "El cliente ha sido dado de " + literal.toLowerCase();
 		}
 		
 		public TypeThirdButton buttonExpectedAfterClick() {
@@ -47,7 +47,7 @@ public class PageGestionarClientes extends PageBase {
 	}
 	
 	private String getXPathThirdButton(TypeThirdButton typeButton) {
-		return (XPATH_FORM_TABLA + "//input[@value='" + typeButton + "']");
+		return (XPATH_FORM_TABLA + "//input[@value='" + typeButton.literal() + "']");
 	}
 	
 	private String getXPathDniTabla(String dni){
@@ -67,15 +67,15 @@ public class PageGestionarClientes extends PageBase {
 	}
 
 	public boolean isPage() {
-		return (state(Visible, By.xpath(XPATH_TITULO)).check());
+		return state(Visible, XPATH_TITULO).check();
 	}
 
 	public boolean isVisibleFormBuscarClientes() {
-		return (state(Visible, By.xpath(XPATH_FORM_BUSCAR_CLIENTES)).check());
+		return state(Visible, XPATH_FORM_BUSCAR_CLIENTES).check();
 	}
 
 	public boolean isVisibleFormTratarClientes() {
-		return (state(Visible, By.xpath(XPATH_FORM_TRATAR_CLIENTES)).check());
+		return state(Visible, XPATH_FORM_TRATAR_CLIENTES).check();
 	}
 
 	public void inputDniAndClickBuscarButton(String dni, int waitSeconds) {
@@ -92,52 +92,48 @@ public class PageGestionarClientes extends PageBase {
 	}
 
 	public boolean isVisibleTablaInformacion() {
-		return (state(Visible, By.xpath(XPATH_FORM_TABLA)).wait(20).check());
+		return state(Visible, XPATH_FORM_TABLA).wait(20).check();
 	}
 
 	public boolean getDniTabla(String dni) {
-		return (state(Visible, By.xpath(getXPathDniTabla(dni))).wait(20).check());
+		return state(Visible, getXPathDniTabla(dni)).wait(20).check();
 	}
 
 	public TypeThirdButton getTypeThirdButton() {
-		if (isVisibleThirdButtonUntil(TypeThirdButton.ALTA, 0)) {
+		if (isVisibleThirdButton(TypeThirdButton.ALTA, 0)) {
 			return (TypeThirdButton.ALTA);
 		}
 		return (TypeThirdButton.BAJA); 
 	}
 	
 	public String getIdClienteTablaFromDni(String dni) {
-		return driver.findElement(By.xpath(getXPathIdClienteFromXPathDni(dni))).getText();
+		return getElement(getXPathIdClienteFromXPathDni(dni)).getText();
 	}
 	
-	public boolean isVisibleThirdButtonUntil(TypeThirdButton typeButton, int seconds) {
+	public boolean isVisibleThirdButton(TypeThirdButton typeButton, int seconds) {
 		String xpathButton = getXPathThirdButton(typeButton); 
-		return (state(Visible, By.xpath(xpathButton)).wait(seconds).check());
+		return state(Visible, xpathButton).wait(seconds).check();
 	}
 	
 	public void clickThirdButtonAndWaitSeconds(TypeThirdButton typeButton, int seconds) {
-		By byElem = By.xpath(getXPathThirdButton(typeButton));
-		click(byElem).waitLoadPage(seconds).exec();
+		click(getXPathThirdButton(typeButton)).waitLoadPage(seconds).exec();
 	}
 	
 	public void clickDetallesButtonAndWaitSeconds(int seconds) {
-		By byElem = By.xpath(XPATH_FORM_TABLA_DETALLES_BUTTON);
-		click(byElem).waitLoadPage(seconds).exec();
+		click(XPATH_FORM_TABLA_DETALLES_BUTTON).waitLoadPage(seconds).exec();
 	}
 	
 	public boolean isVisibleMensajeClickThirdButton(TypeThirdButton typeButton) {
 		String mensaje = typeButton.getMensaje();
-		return (state(Visible, By.xpath(getXPathSpanMensajeThirdButton(mensaje))).check());
+		return state(Visible, getXPathSpanMensajeThirdButton(mensaje)).check();
 	}
 
 	public boolean isVisibleIdClienteClickDetallesButton(String idCliente) {
-		String xpath = getXPathDetallesClienteIdCliente(idCliente);
-		return (state(Visible, By.xpath(xpath)).check());
+		return state(Visible, getXPathDetallesClienteIdCliente(idCliente)).check();
 	}
 
 	public boolean isVisibleDniClickDetallesButton(String dni) {
-		String xpath = getXPathDetallesClienteDni(dni);
-		return (state(Visible, By.xpath(xpath)).check());
+		return state(Visible, getXPathDetallesClienteDni(dni)).check();
 	}
 
 }

@@ -12,21 +12,21 @@ import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.base.StepBase;
+import com.mng.robotest.domains.base.datatest.DataMantoTest;
+import com.mng.robotest.domains.manto.pageobjects.PageDetallePedido;
+import com.mng.robotest.domains.manto.pageobjects.PagePedidos.TypeDetalle;
+import com.mng.robotest.domains.manto.steps.PageMenusMantoSteps;
+import com.mng.robotest.domains.manto.steps.SecFiltrosMantoSteps;
+import com.mng.robotest.domains.manto.steps.SecFiltrosMantoSteps.TypeSearch;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.exceptions.NotFoundException;
-import com.mng.robotest.test.pageobject.manto.pedido.PageDetallePedido;
-import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
-import com.mng.robotest.test.steps.manto.DataMantoAccess;
 import com.mng.robotest.test.steps.manto.PageBolsasMantoSteps;
 import com.mng.robotest.test.steps.manto.PageConsultaPedidoBolsaSteps;
 import com.mng.robotest.test.steps.manto.PageLoginMantoSteps;
-import com.mng.robotest.test.steps.manto.PageMenusMantoSteps;
 import com.mng.robotest.test.steps.manto.PagePedidosMantoSteps;
 import com.mng.robotest.test.steps.manto.PageSelTdaMantoSteps;
-import com.mng.robotest.test.steps.manto.SecFiltrosMantoSteps;
-import com.mng.robotest.test.steps.manto.SecFiltrosMantoSteps.TypeSearch;
 
 public class PedidosNavigations extends StepBase {
 
@@ -35,7 +35,7 @@ public class PedidosNavigations extends StepBase {
 		if (app!=AppEcom.votf) {  
 			TestCaseTM testCase = getTestCase();
 			TestRunTM testRun = testCase.getTestRunParent();
-			DataMantoAccess dMantoAcc = new DataMantoAccess();
+			DataMantoTest dMantoAcc = DataMantoTest.make();
 			dMantoAcc.setUrlManto(testRun.getParameter(Constantes.PARAM_URL_MANTO));
 			dMantoAcc.setUserManto(testRun.getParameter(Constantes.PARAM_USR_MANTO));
 			dMantoAcc.setPassManto(testRun.getParameter(Constantes.PARAM_PAS_MANTO));
@@ -53,7 +53,7 @@ public class PedidosNavigations extends StepBase {
 	}
 	
 	private void testPedidosEnManto(
-			DataMantoAccess dMantoAcc, List<DataPedido> listPedidos, WebDriver driver) {
+			DataMantoTest dMantoAcc, List<DataPedido> listPedidos, WebDriver driver) {
 		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		if (typeAccess==TypeAccess.Bat) {
 			return;
@@ -61,7 +61,7 @@ public class PedidosNavigations extends StepBase {
 
 		//Si existen pedidos que validar y no se trata de un acceso desde la línea de comandos (típicamente .bat)
 		if (listPedidos!=null && listPedidos.size()>0) {
-			new PageLoginMantoSteps().login(dMantoAcc.getUrlManto(), dMantoAcc.getUserManto(), dMantoAcc.getPassManto());
+			new PageLoginMantoSteps().login();
 			new PedidosNavigations().validacionListaPagosStepss(listPedidos);
 		}
 	}

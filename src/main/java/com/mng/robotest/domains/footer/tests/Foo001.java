@@ -2,10 +2,10 @@ package com.mng.robotest.domains.footer.tests;
 
 import java.util.List;
 
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.footer.steps.TarjetaMangoSteps;
-import com.mng.robotest.domains.transversal.TestBase;
 
 import static com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink.*;
 

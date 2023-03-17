@@ -2,8 +2,8 @@ package com.mng.robotest.test.pageobject.manto;
 
 import org.openqa.selenium.By;
 
-import com.mng.robotest.domains.transversal.PageBase;
-import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos;
+import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.manto.pageobjects.PagePedidos;
 
 
 public class PageDetalleCliente extends PageBase {

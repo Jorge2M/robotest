@@ -4,8 +4,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.sofort.pageobjects.PageSofort2on;
-import com.mng.robotest.domains.transversal.StepBase;
 
 public class PageSofort2onSteps extends StepBase {
 	

@@ -6,9 +6,9 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisDirecciones;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
-import com.mng.robotest.domains.transversal.StepBase;
 
 public class PageMisDireccionesSteps extends StepBase {
 

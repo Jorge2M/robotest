@@ -6,10 +6,10 @@ import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.beans.Ticket;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.steps.shop.pedidos.PageDetallePedidoSteps;
 
 public class PageMisComprasSteps extends StepBase {

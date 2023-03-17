@@ -1,16 +1,19 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.test.pageobject.manto.PageGestionarClientes;
-import com.mng.robotest.test.pageobject.manto.PageGestionarClientes.TypeThirdButton;
+import com.mng.robotest.domains.base.StepMantoBase;
+import com.mng.robotest.domains.manto.pageobjects.PageGestionarClientes;
+import com.mng.robotest.domains.manto.pageobjects.PageGestionarClientes.TypeThirdButton;
+
+import static com.mng.robotest.domains.manto.pageobjects.PageGestionarClientes.TypeThirdButton.*;
+
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
-
-public class PageGestionarClientesSteps {
+public class PageGestionarClientesSteps extends StepMantoBase {
 
 	private final PageGestionarClientes pageGestionarClientes = new PageGestionarClientes();
 	
@@ -56,8 +59,8 @@ public class PageGestionarClientesSteps {
 		int seconds = 1;
 	 	checks.add(
 			"Aparece el botón de Alta o Baja (los esperamos un máximo de " + seconds + " segundos)",
-			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.BAJA, seconds) ||
-			pageGestionarClientes.isVisibleThirdButtonUntil(TypeThirdButton.ALTA, seconds), 
+			pageGestionarClientes.isVisibleThirdButton(BAJA, seconds) ||
+			pageGestionarClientes.isVisibleThirdButton(ALTA, seconds), 
 			State.Defect);
 	 	
 	 	return checks;
@@ -69,7 +72,7 @@ public class PageGestionarClientesSteps {
 		expected="Aparece el mensaje correspondiente y el botón Alta",
 		saveErrorData=SaveWhen.Never)
 	public void clickThirdButton() {
-		TypeThirdButton typeButton = pageGestionarClientes.getTypeThirdButton();	
+		var typeButton = pageGestionarClientes.getTypeThirdButton();	
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagTypeButton, typeButton.toString());
 		pageGestionarClientes.clickThirdButtonAndWaitSeconds(typeButton, 3);   
 		checkAfterClickButton(typeButton);
@@ -79,14 +82,14 @@ public class PageGestionarClientesSteps {
 	private ChecksTM checkAfterClickButton(TypeThirdButton typeButton) {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
-			"Aparece el mensaje <b>" + typeButton.getMensaje() + "</b>",
+			"Aparece el mensaje <b>" + typeButton.literal() + "</b>",
 			pageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton), State.Defect);
 	 	
 		int seconds = 2;
 		TypeThirdButton buttonExpected = typeButton.buttonExpectedAfterClick();
 	 	checks.add(
 			"Aparece el botón \"Alta\" (lo esperamos hasta " + seconds + " segundos)",
-			pageGestionarClientes.isVisibleThirdButtonUntil(buttonExpected, seconds), State.Defect);
+			pageGestionarClientes.isVisibleThirdButton(buttonExpected, seconds), State.Defect);
 		
 	 	return checks;
 	}

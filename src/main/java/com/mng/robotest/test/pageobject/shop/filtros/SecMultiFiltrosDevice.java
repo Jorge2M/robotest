@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.data.Color;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

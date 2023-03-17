@@ -1,11 +1,11 @@
-package com.mng.robotest.test.pageobject.manto;
+package com.mng.robotest.domains.manto.pageobjects;
 
 import org.openqa.selenium.By;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 public class PageGestorCheques extends PageBase {
 	
@@ -95,7 +95,7 @@ public class PageGestorCheques extends PageBase {
 	}
 	
 	private String getXPathTitulo(String title){
-		return (INI_XPATH_TITULO + title + "')]]");
+		return INI_XPATH_TITULO + title + "')]]";
 	}
 	
 	private String getXPathDetallesMail(String mail){
@@ -107,12 +107,12 @@ public class PageGestorCheques extends PageBase {
 	}
 	
 	public boolean isPage() {
-		return (state(Present, By.xpath(getXPathTitulo(TITULO))).check());
+		return state(Present, getXPathTitulo(TITULO)).check();
 	}
 
 	public boolean isPageDetalles() {
 		String xpath = getXPathTitulo(TITULO_DETALLES);
-		return (state(Present, By.xpath(xpath)).check());
+		return state(Present, xpath).check();
 	}
 
 	public void inputMailAndClickCorreoReceptorButton(String mail) {
@@ -126,40 +126,35 @@ public class PageGestorCheques extends PageBase {
 	}
 
 	private void inputMail(String mail) {
-		driver.findElement(By.xpath(XPATH_TEXT_AREA)).click();
-		driver.findElement(By.xpath(XPATH_TEXT_AREA)).clear();
-		driver.findElement(By.xpath(XPATH_TEXT_AREA)).sendKeys(mail);
+		getElement(XPATH_TEXT_AREA).click();
+		getElement(XPATH_TEXT_AREA).clear();
+		getElement(XPATH_TEXT_AREA).sendKeys(mail);
 	}
 	
 	private void clickCorreoReceptorButtonAndWaitLoad() {
-		click(By.xpath(XPATH_CORREO_RECEPTOR_BUTTON)).exec();
+		click(XPATH_CORREO_RECEPTOR_BUTTON).exec();
 	}
 
 	public boolean comprobarNumeroPedidos(int numPedidosEsther) {
-		String xpath = getXPathFila(numPedidosEsther);
-		return (state(Visible, By.xpath(xpath)).wait(20).check());
+		return state(Visible, getXPathFila(numPedidosEsther)).wait(20).check();
 	}
 
 	public boolean isMailCorrecto(String mail) {
-		String xpath = getXPathMailFila(1, mail);
-		return (state(Visible, By.xpath(xpath)).wait(20).check());
+		return state(Visible, getXPathMailFila(1, mail)).wait(20).check();
 	}
 
 	public String clickPedido(int numFila, String mail) {
 		String pedido = getTextPedidoFromXPath(numFila, mail);
-		By byElem = By.xpath(getXPathLinkPedido(numFila, mail));
-		click(byElem).exec();
+		click(getXPathLinkPedido(numFila, mail)).exec();
 		return pedido; 
 	}
 
 	public boolean comprobarMailDetallesCheque(String mail) {
-		String xpath = getXPathDetallesMail(mail);
-		return (state(Present, By.xpath(xpath)).check());
+		return state(Present, getXPathDetallesMail(mail)).check();
 	}
 
 	public boolean comprobarPedidoDetallesCheque(String pedido) {
-		String xpath = getXPathDetallesPedido(pedido);
-		return (state(Present, By.xpath(xpath)).check());
+		return state(Present, getXPathDetallesPedido(pedido)).check();
 	}
 
 }

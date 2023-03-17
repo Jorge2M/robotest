@@ -1,11 +1,11 @@
 package com.mng.robotest.domains.compra.pageobjects;
 
-import com.mng.robotest.domains.transversal.PageBase;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import org.openqa.selenium.WebElement;
+
+import com.mng.robotest.domains.base.PageBase;
 
 public class PageResultPago extends PageBase {
 	

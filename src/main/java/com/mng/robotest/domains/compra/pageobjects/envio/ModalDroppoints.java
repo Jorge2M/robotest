@@ -3,10 +3,10 @@ package com.mng.robotest.domains.compra.pageobjects.envio;
 import org.openqa.selenium.Keys;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.pageobjects.envio.SecSelectDPoint.TypeDeliveryPoint;
 import com.mng.robotest.domains.compra.steps.envio.DataDeliveryPoint;
 import com.mng.robotest.domains.compra.steps.envio.DataSearchDeliveryPoint;
-import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

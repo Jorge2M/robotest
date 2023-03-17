@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 public class MenusWebAllDevice extends PageBase implements MenusWebAll {

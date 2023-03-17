@@ -5,10 +5,10 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.domains.compra.pageobjects.envio.ModalDroppoints;
 import com.mng.robotest.domains.compra.pageobjects.envio.SecConfirmDatos;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPedido;
 

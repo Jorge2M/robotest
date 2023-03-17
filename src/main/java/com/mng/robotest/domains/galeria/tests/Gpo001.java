@@ -1,13 +1,13 @@
 package com.mng.robotest.domains.galeria.tests;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria.From;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.NumColumnas;
 import com.mng.robotest.domains.galeria.steps.DataForScrollStep;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;

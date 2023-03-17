@@ -6,8 +6,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticle;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

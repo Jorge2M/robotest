@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.manto.pedido;
+package com.mng.robotest.domains.manto.steps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,21 +9,20 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.compra.steps.envio.DataDeliveryPoint;
-import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.manto.pageobjects.PageDetallePedido;
+import com.mng.robotest.domains.manto.pageobjects.PagePedidos;
+import com.mng.robotest.domains.manto.pageobjects.PagePedidos.IdColumn;
+import com.mng.robotest.domains.manto.pageobjects.PagePedidos.TypeDetalle;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.manto.PageDetalleCliente;
-import com.mng.robotest.test.pageobject.manto.pedido.PageDetallePedido;
-import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos;
-import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.IdColumn;
-import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
 import com.mng.robotest.test.steps.manto.ChecksResultWithFlagLinkCodPed;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-
-public class PagePedidosMantoSteps extends StepBase {
+public class PagePedidosMantoSteps extends StepMantoBase {
 
 	private final PagePedidos pagePedidos = new PagePedidos();
 	
@@ -75,7 +74,7 @@ public class PagePedidosMantoSteps extends StepBase {
 		description="Buscamos pedidos con id registro",
 		expected="Debemos obtener el ID del pedido",
 		saveErrorData=SaveWhen.Never)
-	public DataPedido getPedidoUsuarioRegistrado(DataPedido dPedidoPrueba) {
+	public void setPedidoUsuarioRegistrado(DataPedido dPedidoPrueba) {
 		int posicionPedidoActual = 6;
 		int posicionMaxPaginaPedidos = 105;
 		do {
@@ -90,8 +89,6 @@ public class PagePedidosMantoSteps extends StepBase {
 
 		pagePedidos.clickLinkPedidoInLineas(pagePedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual), TypeDetalle.PEDIDO);
 		checkCodePedidoOk(dPedidoPrueba);
-
-		return dPedidoPrueba;
 	}
 	
 	@Validation (
@@ -105,7 +102,7 @@ public class PagePedidosMantoSteps extends StepBase {
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
 		saveErrorData=SaveWhen.Never)
-	public DataPedido getDataPedido(DataPedido dPedidoPrueba) {
+	public void setDataPedido(DataPedido dPedidoPrueba) {
 		DataBag dBagPrueba = new DataBag();
 		List<String> referencias = new ArrayList<>();
 		ArticuloScreen articulo;
@@ -117,8 +114,6 @@ public class PagePedidosMantoSteps extends StepBase {
 		}
 		dPedidoPrueba.setDataBag(dBagPrueba);
 		checkPedidoWithReferences(referencias, dPedidoPrueba);
-
-		return dPedidoPrueba;
 	}
 
 	@Validation (
@@ -132,7 +127,7 @@ public class PagePedidosMantoSteps extends StepBase {
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
 		saveErrorData=SaveWhen.Never)
-	public DataPedido getDataCliente(DataPedido dPedidoPrueba) {
+	public void setDataCliente(DataPedido dPedidoPrueba) {
 		PageDetallePedido pageDetallePedido = new PageDetallePedido();
 		pageDetallePedido.clickLinkDetallesCliente();
 		PageDetalleCliente pageDetalleCliente = new PageDetalleCliente();
@@ -144,8 +139,6 @@ public class PagePedidosMantoSteps extends StepBase {
 		dPedidoPrueba.getPago().setUseremail(pageDetalleCliente.getUserEmailText());
 		pageDetalleCliente.clickLinkVolverPedidos();
 		checkAfterSearchPedidosWithIdRegister(dPedidoPrueba);
-
-		return dPedidoPrueba;
 	}
 
 	@Validation
@@ -166,12 +159,11 @@ public class PagePedidosMantoSteps extends StepBase {
 		description="Un pedido con tienda física en la lista de pedidos",
 		expected="Debemos obtener una tienda física válida",
 		saveErrorData=SaveWhen.Never)
-	public DataPedido getTiendaFisicaListaPedidos(DataPedido dPedidoPrueba) {
+	public void setTiendaFisicaListaPedidos(DataPedido dPedidoPrueba) {
 		DataDeliveryPoint dEnvioPrueba = new DataDeliveryPoint();
 		dPedidoPrueba.setDataDeliveryPoint(dEnvioPrueba);
 		dPedidoPrueba.getDataDeliveryPoint().setCodigo(pagePedidos.getTiendaFisicaFromListaPedidos());
 		checkIsTiendaFisica(dPedidoPrueba.getDataDeliveryPoint().getCodigo());
-		return dPedidoPrueba;
 	}
 	
 	@Validation (

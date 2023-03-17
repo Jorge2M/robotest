@@ -7,23 +7,23 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.base.datatest.DataMantoTest;
+import com.mng.robotest.domains.manto.pageobjects.PageDetallePedido;
+import com.mng.robotest.domains.manto.pageobjects.PagePedidos.TypeDetalle;
+import com.mng.robotest.domains.manto.steps.PageMenusMantoSteps;
+import com.mng.robotest.domains.manto.steps.PagePedidosMantoSteps;
+import com.mng.robotest.domains.manto.steps.SecFiltrosMantoSteps;
+import com.mng.robotest.domains.manto.steps.SecFiltrosMantoSteps.TypeSearch;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.exceptions.NotFoundException;
-import com.mng.robotest.test.pageobject.manto.pedido.PageDetallePedido;
-import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
-import com.mng.robotest.test.steps.manto.DataMantoAccess;
 import com.mng.robotest.test.steps.manto.PageBolsasMantoSteps;
 import com.mng.robotest.test.steps.manto.PageLoginMantoSteps;
-import com.mng.robotest.test.steps.manto.PageMenusMantoSteps;
 import com.mng.robotest.test.steps.manto.PageSelTdaMantoSteps;
-import com.mng.robotest.test.steps.manto.SecFiltrosMantoSteps;
-import com.mng.robotest.test.steps.manto.SecFiltrosMantoSteps.TypeSearch;
 import com.mng.robotest.test.steps.manto.pedido.PageConsultaPedidoBolsaSteps;
 import com.mng.robotest.test.steps.manto.pedido.PageGenerarPedidoSteps;
-import com.mng.robotest.test.steps.manto.pedido.PagePedidosMantoSteps;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
@@ -41,7 +41,7 @@ public class PedidoNavigations {
 			//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
 			if (appE!=AppEcom.votf) {  
 				TestRunTM testRun = getTestCase().getTestRunParent();
-				DataMantoAccess dMantoAcc = new DataMantoAccess();
+				DataMantoTest dMantoAcc = DataMantoTest.make();
 				dMantoAcc.setUrlManto(testRun.getParameter(Constantes.PARAM_URL_MANTO));
 				dMantoAcc.setUserManto(testRun.getParameter(Constantes.PARAM_USR_MANTO));
 				dMantoAcc.setPassManto(testRun.getParameter(Constantes.PARAM_PAS_MANTO));
@@ -59,10 +59,10 @@ public class PedidoNavigations {
 		return testCaseOpt.get();
 	}
 	
-	private static void testPedidosEnManto(DataMantoAccess dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) {
+	private static void testPedidosEnManto(DataMantoTest dMantoAcc, DataCheckPedidos dataCheckPedidos, WebDriver driver) {
 		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		if (dataCheckPedidos.areChecksToExecute() && typeAccess!=TypeAccess.Bat) {
-			new PageLoginMantoSteps().login(dMantoAcc.getUrlManto(), dMantoAcc.getUserManto(), dMantoAcc.getPassManto());
+			new PageLoginMantoSteps().login();
 			PedidoNavigations.validacionListPedidosStepss(dataCheckPedidos, dMantoAcc.getAppE(), driver);
 		}
 	}

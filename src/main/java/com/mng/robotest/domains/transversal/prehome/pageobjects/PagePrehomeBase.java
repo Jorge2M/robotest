@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.transversal.prehome.pageobjects;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.acceptcookies.SectionCookies;

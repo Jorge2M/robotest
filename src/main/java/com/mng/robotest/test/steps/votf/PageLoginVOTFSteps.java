@@ -3,7 +3,7 @@ package com.mng.robotest.test.steps.votf;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.beans.AccesoVOTF;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.votf.PageLoginVOTF;

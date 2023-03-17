@@ -3,8 +3,8 @@ package com.mng.robotest.test.pageobject.shop.modales;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
-import com.mng.robotest.domains.transversal.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

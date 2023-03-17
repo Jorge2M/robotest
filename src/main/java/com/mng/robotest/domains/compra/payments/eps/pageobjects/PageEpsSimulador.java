@@ -2,7 +2,7 @@ package com.mng.robotest.domains.compra.payments.eps.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 public class PageEpsSimulador extends PageBase {
 

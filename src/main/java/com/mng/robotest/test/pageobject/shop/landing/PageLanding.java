@@ -6,10 +6,10 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.pageobject.shop.bannersnew.BannerObject;
 import com.mng.robotest.test.pageobject.shop.bannersnew.BannerObjectFactory;
 import com.mng.robotest.test.pageobject.shop.bannersnew.BannerType;

@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.NoSuchElementException;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.beans.Direction;
-import com.mng.robotest.domains.transversal.PageBase;
 
 public class ModalMultidirection extends PageBase {
 

@@ -7,10 +7,10 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.envio.ModalDroppoints;
 import com.mng.robotest.domains.compra.pageobjects.envio.SecSelectDPoint.TypeDeliveryPoint;
 import com.mng.robotest.domains.compra.steps.envio.DataSearchDeliveryPoint.DataSearchDp;
-import com.mng.robotest.domains.transversal.StepBase;
 
 
 public class SecSelectDPointSteps extends StepBase {

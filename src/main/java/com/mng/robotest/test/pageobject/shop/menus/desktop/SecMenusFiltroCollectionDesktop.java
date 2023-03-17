@@ -1,6 +1,6 @@
 package com.mng.robotest.test.pageobject.shop.menus.desktop;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusFiltroCollection;
 

@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.loyalty.beans.LoyaltyMovement;
-import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageHistorialLikes extends PageBase {
 	

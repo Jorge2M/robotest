@@ -4,6 +4,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.ficha.pageobjects.ModCompartirNew;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew;
 import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct;
@@ -11,7 +12,6 @@ import com.mng.robotest.domains.ficha.pageobjects.ModCompartirNew.IconSocial;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.LinksAfterBolsa;
 import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 public class SecBolsaButtonAndLinksNewSteps extends StepBase {

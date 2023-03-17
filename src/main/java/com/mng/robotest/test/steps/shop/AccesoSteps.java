@@ -14,12 +14,12 @@ import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.data.DataTest;
+import com.mng.robotest.domains.base.StepBase;
+import com.mng.robotest.domains.base.datatest.DataTest;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.login.pageobjects.PageIdentificacion;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;

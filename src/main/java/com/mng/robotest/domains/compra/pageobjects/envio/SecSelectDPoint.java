@@ -11,9 +11,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.mng.robotest.domains.compra.steps.envio.DataSearchDeliveryPoint.DataSearchDp.*;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.steps.envio.DataDeliveryPoint;
 import com.mng.robotest.domains.compra.steps.envio.DataSearchDeliveryPoint;
-import com.mng.robotest.domains.transversal.PageBase;
 
 
 public class SecSelectDPoint extends PageBase {

@@ -1,4 +1,4 @@
-package com.mng.robotest.domains.transversal;
+package com.mng.robotest.domains.base;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +20,8 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.Bu
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.data.DataTest;
+import com.mng.robotest.domains.base.datatest.DataMantoTest;
+import com.mng.robotest.domains.base.datatest.DataTest;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 
@@ -30,6 +31,7 @@ public class PageBase extends PageObjTM {
 	protected final AppEcom app;
 	protected final InputParamsMango inputParamsSuite;
 	protected DataTest dataTest = TestBase.DATA_TEST.get();
+	protected DataMantoTest dataMantoTest = TestMantoBase.DATA_MANTO_TEST.get();
 	
 	public PageBase() {
 		super();

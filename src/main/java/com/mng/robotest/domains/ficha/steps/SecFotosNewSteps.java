@@ -3,10 +3,10 @@ package com.mng.robotest.domains.ficha.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.ficha.beans.DataFoto;
 import com.mng.robotest.domains.ficha.pageobjects.SecFotosNew;
 import com.mng.robotest.domains.ficha.pageobjects.TipoImagenProducto;
-import com.mng.robotest.domains.transversal.StepBase;
 
 
 public class SecFotosNewSteps extends StepBase {

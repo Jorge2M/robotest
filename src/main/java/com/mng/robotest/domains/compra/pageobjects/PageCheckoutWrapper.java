@@ -4,11 +4,11 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.pageobjects.envio.SecMetodoEnvioDesktop;
 import com.mng.robotest.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.domains.compra.pageobjects.pci.SecTarjetaPci;
 import com.mng.robotest.domains.compra.payments.eps.pageobjects.SecEps;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.data.Descuento;
 import com.mng.robotest.test.datastored.DataPedido;

@@ -1,22 +1,24 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.pageobjects;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.test.pageobject.manto.PageOrdenacionDePrendas.*;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageOrdenacionDePrendasSteps extends PageBase {
+import org.openqa.selenium.StaleElementReferenceException;
+
+public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 
 	public static final String REF_PRENDA = "";
 	
 	public void mantoOrdenacionInicio() {
-		selectPreProduccion();
+		selectDisponibilidadPreAndClickVerTiendas();
 		selectShe();
 	}
 
@@ -37,23 +39,35 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		checks.add(
 			"Estamos en la página " + Orden.TITULO.getXPath(),
 			state(Visible, Orden.INITIAL_TITULO.getBy()).wait(10).check(), State.Defect);
+		
 		checks.add(
 			"Aparece el desplegable de tiendas",
 			state(Visible, Orden.DESPLEGABLE_TIENDAS.getBy()).wait(10).check(), State.Defect);
+		
 		checks.add(
 			"El botón <b>Ver Tiendas</b> está en la página",
 			state(Visible, Orden.VER_TIENDAS.getBy()).wait(10).check(), State.Defect);
+		
 		return checks;
 	}
 
 	@Step(
-		description="Seleccionamos en el desplegable la opción <b>PreProduccion</b>",
+		description="Seleccionamos la opción <b>Disponibilidad Pre</b> + Ver tiendas",
 		expected="Aparecen los diferentes indicadores de secciones",
 		saveErrorData = SaveWhen.Never)
-	private void selectPreProduccion() {
-		select(Orden.DESPLEGABLE_TIENDAS.getBy(), "shop.org.pre.mango.com").type(Value).exec();
+	private void selectDisponibilidadPreAndClickVerTiendas() {
+		clickDesplegableTiendas();
 		click(Orden.VER_TIENDAS.getBy()).exec();
 		validatePreProductionElements();
+	}
+	
+	private void clickDesplegableTiendas() {
+		try {
+			select(Orden.DESPLEGABLE_TIENDAS.getBy(), "availability.ws.pre.mango.com").type(Value).exec();
+		}
+		catch (StaleElementReferenceException e) {
+			//Hay un error en TestMaker donde no se contempla este caso
+		}
 	}
 
 	@Validation
@@ -62,15 +76,19 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		checks.add(
 			"Está presente el enlace de <b>She</b>",
 			state(Visible, Section.She.getBy()).wait(10).check(), State.Defect);
+		
 		checks.add(
 			"Está presente el enlace de <b>He</b>",
-			state(Visible, Section.He.getBy()).wait(10).check(), State.Defect);
+			state(Visible, Section.He.getBy()).check(), State.Defect);
+		
 		checks.add(
-			"Está presente el enlace de <b>Nina</b>",
-			state(Visible, Section.Nina.getBy()).wait(10).check(), State.Defect);
+			"Está presente el enlace de <b>Niños</b>",
+			state(Visible, Section.Ninos.getBy()).check(), State.Defect);
+
 		checks.add(
-			"Aparece correctamente el boton de <b>cancelar</b>",
-			state(Visible, Section.Nino.getBy()).wait(10).check(), State.Defect);
+			"Está presente el enlace de <b>Home</b>",
+			state(Visible, Section.Home.getBy()).check(), State.Defect);		
+		
 		return checks;
 	}
 
@@ -105,9 +123,11 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		checks.add(
 			"Se vuelve visible el selector de tipo de <b>Prendas</b>",
 			state(Visible, Orden.SELECTOR_PRENDAS.getBy()).wait(13).check(), State.Defect);
+		
 		checks.add(
 			"Podemos ver el <b>botón</b> para ver las prendas",
 			state(Visible, Orden.VER_PRENDAS.getBy()).wait(13).check(), State.Defect);
+		
 		return checks;
 	}
 
@@ -116,11 +136,27 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		expected="Aparecen fotos en pantalla",
 		saveErrorData = SaveWhen.Never)
 	private void selectTipoPrenda() {
-		select(Orden.SELECTOR_PRENDAS.getBy(), "camisas_she").type(Value).exec();
-		click(Orden.VER_PRENDAS.getBy()).waitLink(2).exec();
+		selectCamisasShe();
+		clickVerPrendas();
 		validateTipoPrenda();
 	}
-
+	private void selectCamisasShe() {
+		try {
+			select(Orden.SELECTOR_PRENDAS.getBy(), "camisas_she").type(Value).exec();
+		}
+		catch (StaleElementReferenceException e) {
+			//Hay un error en TestMaker donde no se contempla este caso
+		}
+	}
+	private void clickVerPrendas() {
+		try {
+			click(Orden.VER_PRENDAS.getBy()).waitLink(2).exec();
+		}
+		catch (StaleElementReferenceException e) {
+			waitMillis(1000);
+			click(Orden.VER_PRENDAS.getBy()).exec();
+		}
+	}
 
 	@Validation
 	private ChecksTM validateTipoPrenda() {
@@ -129,9 +165,11 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		checks.add(
 			"Aparecen imagenes en la nueva página (lo esperamos hasta " + seconds + " segundos)",
 			state(Visible, Orden.PRUEBA_IMAGEN.getBy()).wait(seconds).check(), State.Defect);
+		
 		checks.add(
 			"Estamos en la sección que corresponde <b>camisas</b>",
 			state(Visible, Orden.PRUEBA_CAMISA.getBy()).wait(seconds).check(), State.Defect);
+		
 		return checks;
 	}
 
@@ -152,9 +190,11 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		checks.add(
 			"Se sigue viendo la segunda prenda",
 			state(Visible, Orden.SEGUNDA_PRENDA.getBy()).wait(seconds).check(), State.Defect);
+		
 		checks.add(
 			"La primera prenda no se corresponde con la que había inicialmente",
 			state(Visible, Orden.PRIMERA_PRENDA.getBy()).wait(seconds).check(), State.Defect);
+		
 		return checks;
 	}
 
@@ -173,15 +213,19 @@ public class PageOrdenacionDePrendasSteps extends PageBase {
 		checks.add(
 			"Aparece correctamente el modal de confirmacion",
 			state(Visible, Modal.CONTAINER.getBy()).wait(15).check(), State.Defect);
+		
 		checks.add(
 			"Aparece correctamente el boton de <b>aplicar general</b>",
 			state(Visible, Modal.APPLY_GENERIC.getBy()).wait(15).check(), State.Defect);
+		
 		checks.add(
 			"Aparece correctamente el boton de <b>aplicar pais</b>",
 			state(Visible, Modal.APPLY_COUNTRY.getBy()).wait(15).check(), State.Defect);
+		
 		checks.add(
 			"Aparece correctamente el boton de <b>cancelar</b>",
 			state(Visible, Modal.CANCEL.getBy()).wait(15).check(), State.Defect);
+		
 		return checks;
 	}
 

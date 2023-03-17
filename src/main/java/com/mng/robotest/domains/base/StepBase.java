@@ -1,4 +1,4 @@
-package com.mng.robotest.domains.transversal;
+package com.mng.robotest.domains.base;
 
 import java.util.Arrays;
 import java.util.List;

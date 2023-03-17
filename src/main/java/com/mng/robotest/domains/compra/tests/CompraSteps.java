@@ -3,9 +3,9 @@ package com.mng.robotest.domains.compra.tests;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.FactoryPagos;
 import com.mng.robotest.domains.compra.payments.PagoSteps;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;

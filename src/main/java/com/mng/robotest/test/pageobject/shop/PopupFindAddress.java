@@ -1,7 +1,7 @@
 package com.mng.robotest.test.pageobject.shop;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

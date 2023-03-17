@@ -1,6 +1,6 @@
 package com.mng.robotest.test.pageobject.shop;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 public class PageErrorPage extends PageBase {
 	

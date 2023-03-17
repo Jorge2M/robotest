@@ -2,8 +2,8 @@ package com.mng.robotest.domains.compra.payments;
 
 import static com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.steps.CheckoutSteps;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;

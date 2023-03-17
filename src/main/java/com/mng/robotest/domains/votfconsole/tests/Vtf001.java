@@ -5,11 +5,11 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.transversal.TestBase;
 import com.mng.robotest.domains.votfconsole.steps.ConsolaVotfSteps;
 import com.mng.robotest.getdata.productlist.GetterProducts;
 import com.mng.robotest.getdata.productlist.Menu;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 import static com.mng.robotest.test.data.PaisShop.*;

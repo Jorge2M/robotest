@@ -2,7 +2,7 @@ package com.mng.robotest.domains.reembolsos.pageobjects;
 
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

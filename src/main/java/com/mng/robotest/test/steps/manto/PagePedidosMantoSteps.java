@@ -1,5 +1,7 @@
 package com.mng.robotest.test.steps.manto;
 
+import static com.mng.robotest.domains.manto.pageobjects.PagePedidos.IdColumn.*;
+
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 
@@ -9,18 +11,16 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.steps.envio.DataDeliveryPoint;
-import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.manto.pageobjects.PageDetallePedido;
+import com.mng.robotest.domains.manto.pageobjects.PagePedidos;
+import com.mng.robotest.domains.manto.pageobjects.PagePedidos.TypeDetalle;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.manto.PageDetalleCliente;
-import com.mng.robotest.test.pageobject.manto.pedido.PageDetallePedido;
-import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos;
-import com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.TypeDetalle;
 import com.mng.robotest.test.utils.ImporteScreen;
-
-import static com.mng.robotest.test.pageobject.manto.pedido.PagePedidos.IdColumn.*;
 
 
 public class PagePedidosMantoSteps extends StepBase {

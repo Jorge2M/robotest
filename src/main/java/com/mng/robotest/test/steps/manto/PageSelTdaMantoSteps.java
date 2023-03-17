@@ -5,11 +5,11 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.base.StepBase;
+import com.mng.robotest.domains.manto.pageobjects.PageMenusManto;
 import com.mng.robotest.test.data.TiendaManto;
 import com.mng.robotest.test.pageobject.manto.PageSelTda;
 import com.mng.robotest.test.pageobject.manto.SecCabecera;
-import com.mng.robotest.test.pageobject.shop.PageMenusManto;
 
 public class PageSelTdaMantoSteps extends StepBase {
 	

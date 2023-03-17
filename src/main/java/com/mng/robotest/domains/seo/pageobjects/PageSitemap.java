@@ -8,8 +8,8 @@ import java.util.Optional;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.seo.beans.Sitemapindex;
-import com.mng.robotest.domains.transversal.PageBase;
 
 public class PageSitemap extends PageBase {
 	

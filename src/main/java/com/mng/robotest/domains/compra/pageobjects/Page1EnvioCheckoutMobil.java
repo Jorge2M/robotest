@@ -6,8 +6,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
-import com.mng.robotest.domains.transversal.PageBase;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 public class Page1EnvioCheckoutMobil extends PageBase {

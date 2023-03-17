@@ -1,20 +1,17 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.steps;
 
 import java.time.LocalDate;
-
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.domains.transversal.StepBase;
+import com.mng.robotest.domains.base.StepMantoBase;
+import com.mng.robotest.domains.manto.pageobjects.SecFiltros;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.manto.SecCabecera;
-import com.mng.robotest.test.pageobject.manto.SecFiltros;
 
-
-public class SecFiltrosMantoSteps extends StepBase {
+public class SecFiltrosMantoSteps extends StepMantoBase {
 
 	public enum TypeSearch { BOLSA, PEDIDO } 
 	

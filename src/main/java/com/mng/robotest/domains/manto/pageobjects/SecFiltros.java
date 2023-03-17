@@ -1,11 +1,9 @@
-package com.mng.robotest.test.pageobject.manto;
+package com.mng.robotest.domains.manto.pageobjects;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import org.openqa.selenium.By;
-
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -21,44 +19,44 @@ public class SecFiltros extends PageBase {
 	private static final DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 	public void setFiltroCodPedido(String codigoPedidoManto) {
-		driver.findElement(By.xpath(XPATH_FILTRO_COD_PEDIDO)).clear();
-		driver.findElement(By.xpath(XPATH_FILTRO_COD_PEDIDO)).sendKeys(codigoPedidoManto);
+		getElement(XPATH_FILTRO_COD_PEDIDO).clear();
+		getElement(XPATH_FILTRO_COD_PEDIDO).sendKeys(codigoPedidoManto);
 	}
 	
 	public void setFiltroFDesde(LocalDate fechaDesde) {
 		String fechaDesdeInput = fechaDesde.format(formatDate);
-		driver.findElement(By.xpath(XPATH_FILTRO_FDESDE)).clear();
-		driver.findElement(By.xpath(XPATH_FILTRO_FDESDE)).sendKeys(fechaDesdeInput);
+		getElement(XPATH_FILTRO_FDESDE).clear();
+		getElement(XPATH_FILTRO_FDESDE).sendKeys(fechaDesdeInput);
 	}
 	
 	public void setFiltroImporteTotal(String importeTotal) {
-		driver.findElement(By.xpath(XPATH_FILTRO_IMPORTE_TOTAL)).clear();
-		driver.findElement(By.xpath(XPATH_FILTRO_IMPORTE_TOTAL)).sendKeys(importeTotal);
+		getElement(XPATH_FILTRO_IMPORTE_TOTAL).clear();
+		getElement(XPATH_FILTRO_IMPORTE_TOTAL).sendKeys(importeTotal);
 	}
 	
 	public void setFiltroFHasta(LocalDate fechaHasta) {
 		String fechaHastaInput = fechaHasta.format(formatDate);
-		driver.findElement(By.xpath(XPATH_FILTRO_FHASTA)).clear();
-		driver.findElement(By.xpath(XPATH_FILTRO_FHASTA)).sendKeys(fechaHastaInput);
+		getElement(XPATH_FILTRO_FHASTA).clear();
+		getElement(XPATH_FILTRO_FHASTA).sendKeys(fechaHastaInput);
 	}
 
 	public void setFiltroCodPaisIfExists(String codigoPais) {
-		if (state(Present, By.xpath(XPATH_FILTRO_COD_PAIS), driver).check()) {
-			driver.findElement(By.xpath(XPATH_FILTRO_COD_PAIS)).clear();
-			driver.findElement(By.xpath(XPATH_FILTRO_COD_PAIS)).sendKeys(codigoPais);
+		if (state(Present, XPATH_FILTRO_COD_PAIS).check()) {
+			getElement(XPATH_FILTRO_COD_PAIS).clear();
+			getElement(XPATH_FILTRO_COD_PAIS).sendKeys(codigoPais);
 		}
 	}
 
 	public String getFechaDesdeValue() {
-		return (driver.findElement(By.xpath(XPATH_FILTRO_FDESDE)).getAttribute("value"));
+		return getElement(XPATH_FILTRO_FDESDE).getAttribute("value");
 	}
 
 	public LocalDate getFechaHastaValue() {
-		String fechaHastaScreen = driver.findElement(By.xpath(XPATH_FILTRO_FHASTA)).getAttribute("value");
+		String fechaHastaScreen = getElement(XPATH_FILTRO_FHASTA).getAttribute("value");
 		return LocalDate.parse(fechaHastaScreen, formatDate);
 	}
 
 	public void clickButtonBuscar() {
-		click(By.xpath(XPATH_BUTTON_BUSCAR)).exec();
+		click(XPATH_BUTTON_BUSCAR).exec();
 	}
 }

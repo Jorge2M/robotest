@@ -5,8 +5,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.footer.pageobjects.PageMangoCard;
-import com.mng.robotest.domains.transversal.StepBase;
 import com.mng.robotest.test.pageobject.shop.PageInputDataSolMangoCard;
 
 public class TarjetaMangoSteps extends StepBase {

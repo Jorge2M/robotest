@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.ITestContext;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.domains.transversal.PageBase;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.beans.Pais;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
