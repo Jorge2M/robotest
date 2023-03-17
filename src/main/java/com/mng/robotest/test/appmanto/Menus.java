@@ -7,11 +7,11 @@ import org.testng.annotations.Test;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.datatest.DataMantoTest;
+import com.mng.robotest.domains.manto.steps.PageLoginMantoSteps;
 import com.mng.robotest.domains.manto.steps.PageMenusMantoSteps;
+import com.mng.robotest.domains.manto.steps.PageSelTdaMantoSteps;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.exceptions.NotFoundException;
-import com.mng.robotest.test.steps.manto.PageLoginMantoSteps;
-import com.mng.robotest.test.steps.manto.PageSelTdaMantoSteps;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
 //import com.github.jorge2m.testmaker.domain.InputParamsTM;

@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.steps;
 
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 

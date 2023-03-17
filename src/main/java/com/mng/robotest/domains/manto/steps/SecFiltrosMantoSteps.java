@@ -7,9 +7,9 @@ import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.domains.base.StepMantoBase;
+import com.mng.robotest.domains.manto.pageobjects.SecCabecera;
 import com.mng.robotest.domains.manto.pageobjects.SecFiltros;
 import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.pageobject.manto.SecCabecera;
 
 public class SecFiltrosMantoSteps extends StepMantoBase {
 

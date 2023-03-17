@@ -16,17 +16,17 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.base.datatest.DataMantoTest;
 import com.mng.robotest.domains.manto.pageobjects.PageDetallePedido;
 import com.mng.robotest.domains.manto.pageobjects.PagePedidos.TypeDetalle;
+import com.mng.robotest.domains.manto.steps.PageBolsasMantoSteps;
+import com.mng.robotest.domains.manto.steps.PageConsultaPedidoBolsaSteps;
+import com.mng.robotest.domains.manto.steps.PageLoginMantoSteps;
 import com.mng.robotest.domains.manto.steps.PageMenusMantoSteps;
+import com.mng.robotest.domains.manto.steps.PageSelTdaMantoSteps;
 import com.mng.robotest.domains.manto.steps.SecFiltrosMantoSteps;
 import com.mng.robotest.domains.manto.steps.SecFiltrosMantoSteps.TypeSearch;
+import com.mng.robotest.domains.manto.steps.pedidos.PagePedidosMantoSteps;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.exceptions.NotFoundException;
-import com.mng.robotest.test.steps.manto.PageBolsasMantoSteps;
-import com.mng.robotest.test.steps.manto.PageConsultaPedidoBolsaSteps;
-import com.mng.robotest.test.steps.manto.PageLoginMantoSteps;
-import com.mng.robotest.test.steps.manto.PagePedidosMantoSteps;
-import com.mng.robotest.test.steps.manto.PageSelTdaMantoSteps;
 
 public class PedidosNavigations extends StepBase {
 

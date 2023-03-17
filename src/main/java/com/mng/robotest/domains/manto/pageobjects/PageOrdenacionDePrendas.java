@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.manto;
+package com.mng.robotest.domains.manto.pageobjects;
 
 import org.openqa.selenium.By;
 

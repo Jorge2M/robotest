@@ -1,15 +1,14 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.steps.pedidos;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.domains.base.StepBase;
-import com.mng.robotest.test.pageobject.manto.PageGestorEstadisticasPedido;
+import com.mng.robotest.domains.base.StepMantoBase;
+import com.mng.robotest.domains.manto.pageobjects.PageGestorEstadisticasPedido;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
-
-public class PageGestorEstadisticasPedidoSteps extends StepBase {
+public class PageGestorEstadisticasPedidoSteps extends StepMantoBase {
 
 	private final PageGestorEstadisticasPedido pageGestorEstadisticasPedido = new PageGestorEstadisticasPedido();
 	
@@ -36,7 +35,9 @@ public class PageGestorEstadisticasPedidoSteps extends StepBase {
 		expected="Muestra la tabla de información correctamente",
 		saveErrorData=SaveWhen.Never)
 	public void searchZalandoOrdersInformation() {
-		pageGestorEstadisticasPedido.selectZalandoAndClickShowOrdersButton();
+		pageGestorEstadisticasPedido.selectZalandoEs();
+		pageGestorEstadisticasPedido.inputFechaInicioYesterday();
+		pageGestorEstadisticasPedido.clickMostrarPedidosButton();
 		checkAfterSelectMostrarPedidosZalandos();
 	}
 	

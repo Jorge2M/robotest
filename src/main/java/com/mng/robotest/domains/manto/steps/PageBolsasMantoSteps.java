@@ -1,14 +1,13 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.base.StepBase;
+import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.manto.pageobjects.PageBolsas;
 import com.mng.robotest.test.datastored.DataPedido;
 
-
-public class PageBolsasMantoSteps extends StepBase {
+public class PageBolsasMantoSteps extends StepMantoBase {
 
 	private final PageBolsas pageBolsas = new PageBolsas();
 	

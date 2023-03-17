@@ -1,18 +1,17 @@
-package com.mng.robotest.test.steps.manto.pedido;
+package com.mng.robotest.domains.manto.steps.pedidos;
+
+import static com.mng.robotest.domains.manto.pageobjects.PageGenerarPedido.EstadoPedido.*;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
 import com.github.jorge2m.testmaker.conf.State;
-import com.mng.robotest.domains.base.StepBase;
-import com.mng.robotest.test.pageobject.manto.pedido.PageGenerarPedido;
-import com.mng.robotest.test.pageobject.manto.pedido.PageGenerarPedido.EstadoPedido;
+import com.mng.robotest.domains.base.StepMantoBase;
+import com.mng.robotest.domains.manto.pageobjects.PageGenerarPedido;
+import com.mng.robotest.domains.manto.pageobjects.PageGenerarPedido.EstadoPedido;
 
-import static com.mng.robotest.test.pageobject.manto.pedido.PageGenerarPedido.EstadoPedido.*;
-
-
-public class PageGenerarPedidoSteps extends StepBase {
+public class PageGenerarPedidoSteps extends StepMantoBase {
 
 	private final PageGenerarPedido pageGenerarPedido = new PageGenerarPedido();
 	

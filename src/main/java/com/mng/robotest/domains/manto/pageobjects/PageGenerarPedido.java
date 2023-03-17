@@ -1,6 +1,5 @@
-package com.mng.robotest.test.pageobject.manto.pedido;
+package com.mng.robotest.domains.manto.pageobjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
@@ -9,7 +8,6 @@ import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
-
 
 public class PageGenerarPedido extends PageBase {
 
@@ -48,7 +46,7 @@ public class PageGenerarPedido extends PageBase {
 	}
 	
 	public boolean isPage(String idPedido) {
-		WebElement inputIdPedido = getElementWeb(By.xpath(XPATH_INPUT_PURCHORDER_NUM), driver);
+		WebElement inputIdPedido = getElementWeb(XPATH_INPUT_PURCHORDER_NUM);
 		if (inputIdPedido!=null) {
 			String valueInput = inputIdPedido.getAttribute("value");
 			if (valueInput!=null) {
@@ -70,27 +68,26 @@ public class PageGenerarPedido extends PageBase {
 	
 	private void selectEstadoStaleUnsafe(EstadoPedido estado) {
 		String value = String.valueOf(estado.value);
-		select(By.xpath(XPATH_ESTADO_PEDIDO_SELECT), value)
+		select(XPATH_ESTADO_PEDIDO_SELECT, value)
 			.type(Value).wait(30).exec();
 	}
 	
 	public EstadoPedido getEstadoPedido() {
-		String estado = driver
-				.findElement(By.xpath(XPATH_ESTADO_PEDIDO_SELECT + "/option[@selected]"))
+		String estado = getElement(XPATH_ESTADO_PEDIDO_SELECT + "/option[@selected]")
 				.getAttribute("value");
 		
 		return EstadoPedido.getEstado(Integer.valueOf(estado));
 	}
 	
 	public void clickGenerarFicheroPedido() {
-		click(By.xpath(XPATH_GENERAR_FICHERO_BUTTON)).exec();
+		click(XPATH_GENERAR_FICHERO_BUTTON).exec();
 	}
 	
 	public boolean isVisibleMessageFileCreated() {
-		return state(Visible, By.xpath(XPATH_MESSAGE_OK_FICHERO_CREADO)).check();
+		return state(Visible, XPATH_MESSAGE_OK_FICHERO_CREADO).check();
 	}
 	
 	public void clickInformarBancoEnCasoCancelacionAlGenerarPedido() {
-		click(By.xpath(XPATH_RADIO_INFORMA_BANCO)).exec();
+		click(XPATH_RADIO_INFORMA_BANCO).exec();
 	}
 }

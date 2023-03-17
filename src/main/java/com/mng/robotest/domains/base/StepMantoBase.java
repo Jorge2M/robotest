@@ -2,15 +2,15 @@ package com.mng.robotest.domains.base;
 
 import java.time.LocalDate;
 
+import com.mng.robotest.domains.manto.steps.PageLoginMantoSteps;
 import com.mng.robotest.domains.manto.steps.PageMenusMantoSteps;
 import com.mng.robotest.domains.manto.steps.PagePedidosMantoSteps;
+import com.mng.robotest.domains.manto.steps.PageSelTdaMantoSteps;
 import com.mng.robotest.domains.manto.steps.SecFiltrosMantoSteps;
 import com.mng.robotest.domains.manto.steps.SecFiltrosMantoSteps.TypeSearch;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.steps.manto.PageLoginMantoSteps;
-import com.mng.robotest.test.steps.manto.PageSelTdaMantoSteps;
 
 public abstract class StepMantoBase extends PageBase {
 

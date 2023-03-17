@@ -1,17 +1,17 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.domains.base.StepBase;
+import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.manto.pageobjects.PageMenusManto;
+import com.mng.robotest.domains.manto.pageobjects.PageSelTda;
+import com.mng.robotest.domains.manto.pageobjects.SecCabecera;
 import com.mng.robotest.test.data.TiendaManto;
-import com.mng.robotest.test.pageobject.manto.PageSelTda;
-import com.mng.robotest.test.pageobject.manto.SecCabecera;
 
-public class PageSelTdaMantoSteps extends StepBase {
+public class PageSelTdaMantoSteps extends StepMantoBase {
 	
 	private static final String TAG_TIENDA = "@TagTienda";
 	
@@ -38,16 +38,5 @@ public class PageSelTdaMantoSteps extends StepBase {
 	private boolean checkIsPageMenusManto() {
 		return (new PageMenusManto().isPage());
 	}
-
-//	/**
-//	 * Accede a la tienda asociada al almacén (sólo si no estamos en ella ya)
-//	 */
-//	public static void goToTiendaPais(String codigoAlmacen, String codigoPais,  AppEcom appE, WebDriver driver) 
-//	throws Exception {
-//		String tiendaActual = SecCabecera.getLitTienda(driver);
-//		TiendaManto tiendaToGo = TiendaManto.getTienda(codigoAlmacen, codigoPais, appE);
-//		if (!tiendaActual.contains(tiendaToGo.litPantManto)) {
-//			selectTienda(codigoAlmacen, codigoPais, appE, driver);
-//		}
-//	}
+	
 }

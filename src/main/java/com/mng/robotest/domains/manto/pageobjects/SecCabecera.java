@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.manto;
+package com.mng.robotest.domains.manto.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

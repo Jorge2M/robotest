@@ -2,10 +2,6 @@ package com.mng.robotest.domains.manto.tests;
 
 import org.testng.annotations.Test;
 
-import com.mng.robotest.domains.manto.steps.PageMenusMantoSteps;
-import com.mng.robotest.test.steps.manto.PageGestorEstadisticasPedidoSteps;
-import com.mng.robotest.test.steps.manto.PageLoginMantoSteps;
-
 public class Manto {
 
 	@Test(
@@ -34,13 +30,7 @@ public class Manto {
 		groups={"Manto", "Canal:desktop_App:all"}, 
 		description="Consulta de estadísticas de pedidos")
 	public void MAN005_GestorEstadisticasPedidos() throws Exception {
-		new PageLoginMantoSteps().login();
-		//new PageSelTdaMantoSteps().selectTienda(almacenEspanya, codigoEspanya);
-		new PageMenusMantoSteps().goToGestorEstadisticasPedido();
-		
-		var pageGestorEstadisticasPedidoSteps = new PageGestorEstadisticasPedidoSteps();
-		pageGestorEstadisticasPedidoSteps.searchZalandoOrdersInformation();
-		pageGestorEstadisticasPedidoSteps.compareLastDayInformation();
+		new Man005().execute();
 	}
 	
 	@Test(

@@ -1,14 +1,14 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.domains.base.StepBase;
+import com.mng.robotest.domains.base.StepMantoBase;
+import com.mng.robotest.domains.manto.pageobjects.PageSelTda;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PageJCAS;
-import com.mng.robotest.test.pageobject.manto.PageSelTda;
 
-public class PageLoginMantoSteps extends StepBase {
+public class PageLoginMantoSteps extends StepMantoBase {
 
 	public void login() {
 		goToMantoIfNotYet(dataMantoTest.getUrlManto());

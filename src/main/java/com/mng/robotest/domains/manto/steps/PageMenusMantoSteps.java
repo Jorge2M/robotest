@@ -12,8 +12,8 @@ import com.mng.robotest.domains.manto.pageobjects.PageBolsas;
 import com.mng.robotest.domains.manto.pageobjects.PageMenusManto;
 import com.mng.robotest.domains.manto.pageobjects.PageOrdenacionDePrendasSteps;
 import com.mng.robotest.domains.manto.pageobjects.PagePedidos;
-import com.mng.robotest.test.pageobject.manto.SecCabecera;
-import com.mng.robotest.test.steps.manto.PageGestorEstadisticasPedidoSteps;
+import com.mng.robotest.domains.manto.pageobjects.SecCabecera;
+import com.mng.robotest.domains.manto.steps.pedidos.PageGestorEstadisticasPedidoSteps;
 
 public class PageMenusMantoSteps extends StepMantoBase {
 

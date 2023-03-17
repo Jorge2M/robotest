@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -6,7 +6,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.base.StepBase;
+import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.domains.manto.pageobjects.PageDetallePedido;
 import com.mng.robotest.domains.manto.pageobjects.PagePedidos;
@@ -15,8 +15,7 @@ import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-
-public class PageConsultaPedidoBolsaSteps extends StepBase {
+public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 
 	private final PageDetallePedido pageDetallePedido = new PageDetallePedido();
 	

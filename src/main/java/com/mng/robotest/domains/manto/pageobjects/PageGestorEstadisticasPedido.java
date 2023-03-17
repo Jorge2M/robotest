@@ -1,9 +1,11 @@
-package com.mng.robotest.test.pageobject.manto;
+package com.mng.robotest.domains.manto.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.domains.base.PageBase;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+import com.mng.robotest.domains.base.PageBase;
 
 public class PageGestorEstadisticasPedido extends PageBase {
 
@@ -12,7 +14,8 @@ public class PageGestorEstadisticasPedido extends PageBase {
 	private static final String XPATH_START_DATE = "//input[@class='dateTimePicker']";
 	private static final String XPATH_END_DATE = "//input[@class='dateTimePickerFin']";
 	private static final String XPATH_SELECT_OPTION = "//td[text()[contains(.,'Que informacion deseas?')]]/select";
-	private static final String XPATH_TODOS_LOS_ZALANDOS_OPTION = "//option[@value='allzalando']";
+	private static final String XPATH_INPUT_FECHA_INICIO = "//input[@class='dateTimePicker']";
+	private static final String XPATH_ZALANDO_ES_OPTION = "//option[@value='marketplace_40']";
 	private static final String XPATH_MOSTRAR_PEDIDOS_BUTTON = "//input[@id='form:consultar']";
 	private static final String XPATH_LOAD_POPUP_IMAGE = "//img[@src='../images/loadingFonsNegre.gif']";
 	private static final String XPATH_TABLA_INFORMACION = "//td/table[@class='txt8' and @border='2']";
@@ -43,17 +46,19 @@ public class PageGestorEstadisticasPedido extends PageBase {
 		return state(Visible, XPATH_END_DATE).check();
 	}
 
-	public void selectZalandoAndClickShowOrdersButton() {
-		selectTodosLosZalandos();
-		clickMostrarPedidosButton();
-	}
-
-	private void selectTodosLosZalandos() {
+	public void selectZalandoEs() {
 		click(XPATH_SELECT_OPTION).exec();
-		click(XPATH_TODOS_LOS_ZALANDOS_OPTION).exec();
+		click(XPATH_ZALANDO_ES_OPTION).exec();
 	}
 	
-	private void clickMostrarPedidosButton() {
+	public void inputFechaInicioYesterday() {
+		LocalDate dateYesterday = LocalDate.now().minusDays(1);
+		String fechaInput = dateYesterday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		getElement(XPATH_INPUT_FECHA_INICIO).clear();
+		getElement(XPATH_INPUT_FECHA_INICIO).sendKeys(fechaInput);
+	}
+	
+	public void clickMostrarPedidosButton() {
 		click(XPATH_MOSTRAR_PEDIDOS_BUTTON).waitLoadPage(60).exec();
 		state(Invisible, XPATH_LOAD_POPUP_IMAGE).wait(60).check();
 	}

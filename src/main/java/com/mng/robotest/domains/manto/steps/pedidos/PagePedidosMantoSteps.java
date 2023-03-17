@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.manto;
+package com.mng.robotest.domains.manto.steps.pedidos;
 
 import static com.mng.robotest.domains.manto.pageobjects.PagePedidos.IdColumn.*;
 
@@ -11,19 +11,19 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.domains.base.StepBase;
+import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.compra.steps.envio.DataDeliveryPoint;
+import com.mng.robotest.domains.manto.pageobjects.PageDetalleCliente;
 import com.mng.robotest.domains.manto.pageobjects.PageDetallePedido;
 import com.mng.robotest.domains.manto.pageobjects.PagePedidos;
 import com.mng.robotest.domains.manto.pageobjects.PagePedidos.TypeDetalle;
+import com.mng.robotest.domains.manto.steps.ChecksResultWithFlagLinkCodPed;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.manto.PageDetalleCliente;
 import com.mng.robotest.test.utils.ImporteScreen;
 
-
-public class PagePedidosMantoSteps extends StepBase {
+public class PagePedidosMantoSteps extends StepMantoBase {
 
 	private final PagePedidos pagePedidos = new PagePedidos();
 	
