@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.galeria.tests;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.TestBase;
@@ -15,7 +14,6 @@ import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.steps.shop.AllPagesSteps;
 
 import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
-
 
 public class Gpo004 extends TestBase {
 
@@ -48,14 +46,16 @@ public class Gpo004 extends TestBase {
 		} else {
 			clickMenu(ABRIGOS_SHE);
 		}
-		
-		List<Color> colorsToFilter = new ArrayList<>();
+
+		var colorsToFilter = new ArrayList<Color>();
 		colorsToFilter.add(Color.BLANCO);
 		colorsToFilter.add(Color.NEGRO);
 		colorsToFilter.add(Color.AZUL);			
 		if (app==AppEcom.shop) {
 			filterGaleryByColors(CAMISAS_SHE, colorsToFilter);
 		} else {
+			colorsToFilter.add(Color.MARRON);
+			colorsToFilter.add(Color.BEIGE);
 			filterGaleryByColors(ABRIGOS_SHE, colorsToFilter);
 		}
 	}
