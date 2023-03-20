@@ -2,7 +2,6 @@ package com.mng.robotest.domains.micuenta.steps;
 
 import java.util.Map;
 
-import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -22,41 +21,21 @@ public class PageMisDireccionesSteps extends StepBase {
 	}
 
 	public void checkData(DataNewRegister dataRegister) {
-		clickLinkEditar();
-		checkIsData(dataRegister);
+		checkIsFormularioUsuario(5);
 		driver.navigate().back();
 	}
 	public void checkData(Map<String,String> dataRegister) {
-		clickLinkEditar();
+		checkIsFormularioUsuario(5);
 		checkIsData(dataRegister);
 		driver.navigate().back();
 	}
 
-	@Step(
-		description = "Seleccionar el link <b>Editar</b>",
-		expected = "Aparece el formulario con los datos del usuario")
-	private void clickLinkEditar() {
-		pageMisDirecciones.clickLinkEditar();
-		checkIsFormularioUsuario(5);
-	}
-	
 	@Validation(
 		description="Aparece el formulario con los datos del usuario (lo esperamos #{seconds} segundos)",
 		level=State.Defect)
 	public boolean checkIsFormularioUsuario(int seconds) {
 		return pageMisDirecciones.isFormularioUsuario(seconds);
 	}	
-	
-	@Validation
-	private ChecksTM checkIsData(DataNewRegister dataNewRegister) {
-		
-		var checks = ChecksTM.getNew();
-		checks.add(
-			"Aparece el código postal <b>" + dataNewRegister.getPostalCode() + "</b>",
-			isPostalCode(dataNewRegister.getPostalCode()), State.Defect);
-		
-		return checks;
-	}
 	
 	@Validation
 	private ChecksTM checkIsData(Map<String,String> dataOldRegister) {

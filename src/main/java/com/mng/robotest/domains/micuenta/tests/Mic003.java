@@ -22,7 +22,7 @@ public class Mic003 extends TestBase {
 
 	public Mic003() {
 		super();
-		
+
 		dataNewRegister = new DataNewRegister(
 				emailNotExistent, 
 				passStandard, 
