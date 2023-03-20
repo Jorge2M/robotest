@@ -277,12 +277,13 @@ public class MenuSteps extends StepBase {
 	public void hoverLineaDesktop(LineaWeb lineaWeb) {
 		lineaWeb.hoverLinea();	   
 		validateHoverLineaDesktop(lineaWeb);
+		waitMillis(100);
 	}	
 	
 	@Validation (
 		description="Aparecen los menús",
-		level=State.Info,
-		store=StoreType.None)
+		level=State.Info)
+		//store=StoreType.None)
 	public boolean validateHoverLineaDesktop(LineaWeb lineaWeb) {
 		return MenusWebAll.make(channel).isMenuInState(true, 1);
 	}	

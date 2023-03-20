@@ -3,8 +3,6 @@ package com.mng.robotest.domains.transversal.menus.pageobjects;
 import java.util.Arrays;
 import java.util.List;
 
-import org.openqa.selenium.NoSuchElementException;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
@@ -149,21 +147,8 @@ public class LineaWeb extends PageBase implements LineaActions {
 	}
 	@Override
 	public void clickSublinea() {
-		clickLineaControllingNoSuchElement();
+		lineaActions.clickSublinea();
 		if (!lineaActions.isSublineaSelected(1)) {
-			lineaActions.clickSublinea();
-		}
-	}
-	private void clickLineaControllingNoSuchElement() {
-		try {
-			lineaActions.clickSublinea();
-		} 
-		catch (NoSuchElementException e) {
-			if (channel.isDevice()) {
-				clickLinea();
-			} else {
-				hoverLinea();
-			}
 			lineaActions.clickSublinea();
 		}
 	}
