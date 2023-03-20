@@ -159,7 +159,11 @@ public class LineaWeb extends PageBase implements LineaActions {
 			lineaActions.clickSublinea();
 		} 
 		catch (NoSuchElementException e) {
-			clickLinea();
+			if (channel.isDevice()) {
+				clickLinea();
+			} else {
+				hoverLinea();
+			}
 		}
 	}
 	
