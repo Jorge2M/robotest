@@ -62,7 +62,7 @@ public class PageMenusMantoSteps extends StepMantoBase {
 		return new PageBolsas().isPage();
 	}
 	
-	public void goToPedidos() {
+	public void goToPedidosStep() {
 		if (!new PagePedidos().isPage()) {
 			goToMainMenusAndClickMenu("Pedidos");
 			checkIsVisiblePagePedidos();

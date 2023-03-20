@@ -34,7 +34,7 @@ public abstract class StepMantoBase extends PageBase {
 	}
 	
 	private void goToPedidos() {
-        new PageMenusMantoSteps().goToPedidos();
+        new PageMenusMantoSteps().goToPedidosStep();
 	}
 	
 	private DataPedido makeDataPedido() {
@@ -58,7 +58,7 @@ public abstract class StepMantoBase extends PageBase {
 	private void setDataPedido(DataPedido pedidoData) {
 		PagePedidosMantoSteps pagePedidosMantoSteps = new PagePedidosMantoSteps();
 		pagePedidosMantoSteps.setPedidoUsuarioRegistrado(pedidoData);
-		pagePedidosMantoSteps.setDataPedido(pedidoData);
+		pagePedidosMantoSteps.setDataPedidoStep(pedidoData);
 		pagePedidosMantoSteps.setDataCliente(pedidoData);
 		pagePedidosMantoSteps.setTiendaFisicaListaPedidos(pedidoData);
 	}

@@ -6,7 +6,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.buscador.pageobjects.SecSearch;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenusWebAll;
@@ -16,7 +15,7 @@ import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 
 public abstract class SecCabecera extends PageBase {
 	
-	protected final SecSearch secSearch = SecSearch.getNew(channel, app);
+	protected final SecSearch secSearch = SecSearch.getNew(channel);
 
 	private static final String XPATH_HEADER = "//header";
 	private static final String XPATH_LINK_LOGO_MANGO = 
@@ -38,11 +37,11 @@ public abstract class SecCabecera extends PageBase {
 		bringElement(getElement(XPATH_HEADER), bringTo);
 	}
 	
-	public static void buscarTexto(String referencia, Channel channel, AppEcom app) {
+	public static void buscarTexto(String referencia, Channel channel) {
 		MenusUserWrapper menusUser = new MenusUserWrapper();
 		menusUser.isMenuInStateUntil(UserMenu.LUPA, State.Visible, 1);
 		menusUser.clickMenuAndWait(UserMenu.LUPA);
-		SecSearch secSearch = SecSearch.getNew(channel, app);
+		SecSearch secSearch = SecSearch.getNew(channel);
 		secSearch.search(referencia);
 	}
 	

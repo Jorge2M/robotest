@@ -101,7 +101,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
 		saveErrorData=SaveWhen.Never)
-	public void setDataPedido(DataPedido dPedidoPrueba) {
+	public void setDataPedidoStep(DataPedido dPedidoPrueba) {
 		DataBag dBagPrueba = new DataBag();
 		List<String> referencias = new ArrayList<>();
 		ArticuloScreen articulo;

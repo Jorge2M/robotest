@@ -68,7 +68,7 @@ public class ArticuloNavigations extends StepBase {
 	}
 
 	public void buscarArticulo(Article article) {
-		SecCabecera.buscarTexto(article.getGarmentId(), channel, app);
+		SecCabecera.buscarTexto(article.getGarmentId(), channel);
 		if (article.getColor()!=null) {
 			selectColorIfExists(article.getColor().getId());
 		}

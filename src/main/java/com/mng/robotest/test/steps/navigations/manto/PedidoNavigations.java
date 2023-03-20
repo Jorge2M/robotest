@@ -113,7 +113,7 @@ public class PedidoNavigations {
 	}
 	
 	private static void consultarPedidoSteps(DataPedido dataPedido, WebDriver driver) {
-		new PageMenusMantoSteps().goToPedidos();
+		new PageMenusMantoSteps().goToPedidosStep();
 		new SecFiltrosMantoSteps().setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
 		boolean existLinkPedido = new PagePedidosMantoSteps().validaLineaPedido(dataPedido).getExistsLinkCodPed();
 		if (existLinkPedido) { 

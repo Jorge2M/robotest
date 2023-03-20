@@ -100,7 +100,7 @@ public class PedidosNavigations extends StepBase {
 		}
 		
 		if (app!=AppEcom.votf) {
-			new PageMenusMantoSteps().goToPedidos();
+			new PageMenusMantoSteps().goToPedidosStep();
 			secFiltrosMantoSteps.setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
 			boolean existsLinkCodPed = new PagePedidosMantoSteps().validaLineaPedido(dataPedido).getExistsLinkCodPed();	
 			if (existsLinkCodPed) {

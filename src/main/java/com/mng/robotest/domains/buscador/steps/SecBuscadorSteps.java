@@ -61,7 +61,7 @@ public class SecBuscadorSteps extends StepBase {
 		description="Introducir la categoría de producto <b>#{categoriaABuscar} </b>(existe categoría: #{categoriaExiste})</b>", 
 		expected="El resultado de la búsqueda es el correcto :-)")
 	public void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste) {
-		SecCabecera.buscarTexto(categoriaABuscar, channel, app);
+		SecCabecera.buscarTexto(categoriaABuscar, channel);
 		PageObjTM.waitForPageLoaded(driver);	
 		if (categoriaExiste) { 
 			areProducts(categoriaABuscar, 3);
