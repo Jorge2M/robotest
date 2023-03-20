@@ -164,6 +164,7 @@ public class LineaWeb extends PageBase implements LineaActions {
 			} else {
 				hoverLinea();
 			}
+			lineaActions.clickSublinea();
 		}
 	}
 	
