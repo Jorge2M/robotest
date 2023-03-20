@@ -5,7 +5,6 @@ import java.util.Arrays;
 import com.mng.robotest.conftestmaker.Suites;
 import com.mng.robotest.domains.votfconsole.suites.ConsolaVotfSuite;
 import com.mng.robotest.test.suites.GenericFactorySuite;
-import com.mng.robotest.test.suites.MenusMantoSuite;
 import com.mng.robotest.test.suites.MenusPaisSuite;
 import com.mng.robotest.test.suites.PagosPaisesSuite;
 import com.mng.robotest.test.suites.PaisIdiomaSuite;
@@ -50,8 +49,6 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 				return (new PaisIdiomaSuite(inputParamsMango));
 			case MenusPais:
 				return (new MenusPaisSuite(inputParamsMango));
-			case MenusManto:
-				return (new MenusMantoSuite(inputParamsMango));
 			case ConsolaVotf:
 				return (new ConsolaVotfSuite(inputParamsMango));
 			case ListFavoritos, ListMiCuenta, CheckoutMultiAddress:

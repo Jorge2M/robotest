@@ -20,7 +20,7 @@ public class Man008 extends TestMantoBase {
 	private void checkOrdenadorDePrendas() {
 		var pageOrdenacionDePrendasSteps = new PageOrdenacionDePrendasSteps();
 		pageOrdenacionDePrendasSteps.mantoOrdenacionInicio();
-		pageOrdenacionDePrendasSteps.mantoSeccionPrendas();
+		pageOrdenacionDePrendasSteps.mantoSeccionNuevo();
 		pageOrdenacionDePrendasSteps.ordenacionModal();		
 	}
 

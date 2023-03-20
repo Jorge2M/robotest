@@ -2,16 +2,18 @@ package com.mng.robotest.domains.manto.pageobjects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.manto.tests.MenusFact.Section;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageMenusManto extends PageBase {
 
@@ -20,18 +22,13 @@ public class PageMenusManto extends PageBase {
 	private static final String XPATH_CABECERA_MENU = "//table//td[@bgcolor='#505050']/span";
 	private static final String XPATH_LINK_MENU = "//table//a[@onclick]";
 	
-	public String getXPathLinkMenu(String menu) {
+	private String getXPathLinkMenu(String menu) {
 		return "//a[text()[contains(.,'" + menu + "')]]";
 	}
-	
-	private String getXPathNextElement(String xpathPosicionInicial) {
-		return xpathPosicionInicial + "/../following::td/a";
+	private String getXPathSubMenusFromSection(Section section) {
+		return "//td/span[text()='" + section.getCabecera() + "']/../../following::tr";
 	}
 	
-	private String getXPathFirstElement(String menuName) {
-		return XPATH_CABECERA_MENU + "[text()='" + menuName + "']" + "/../following::td";
-	}
-
 	private String getTextMenuTitulo() {
 		return getElement(XPATH_TITULO).getText();
 	}
@@ -39,7 +36,7 @@ public class PageMenusManto extends PageBase {
 	public boolean isPage() {
 		return state(Present, XPATH_CELDA_TEXT_MENU_PRINCIPAL).check();
 	}
-
+	
 	public boolean validateIsPage(String subMenu, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			if (vaidateIsPage(subMenu)) {
@@ -68,17 +65,6 @@ public class PageMenusManto extends PageBase {
 		return state(Present, XPATH_TITULO).check();
 	}
 
-	private boolean isNextXPathMenuHeader(String xpathPosicionInicial, String nextMenuName) {
-		String xpathNextPosicion = xpathPosicionInicial + "/../following::td/child::node()";
-		String texto = getElement(xpathNextPosicion).getText();
-		return (!nextMenuName.equals(texto));
-	}
-	
-	private boolean isNextXPathEndTable(String xpathPosicionInicial) {
-		String xpathNextPosicion = xpathPosicionInicial + "/../following::td/child::node()";
-		return state(Present, xpathNextPosicion).check();
-	}
-	
 	public String clickMenuAndAcceptAlertIfExists(String textoMenu) {
 		try {
 			clickMenu(textoMenu);
@@ -142,30 +128,31 @@ public class PageMenusManto extends PageBase {
 		return listCabecerasNames;
 	}
 
-	public List<String> getListSubMenusName(String menuName, String nextMenuName) {
-		List<String> listSubMenusNames = new ArrayList<>();
-		List<WebElement> listSubMenus = getListSubMenus(menuName, nextMenuName);
-		for (WebElement menu : listSubMenus) {
-			listSubMenusNames.add(menu.getText());
-		}
-		return listSubMenusNames;
+	public List<String> getListSubMenusName(Section section) {
+		return getListAncorSubMenusFromSection(section).stream()
+				.map(a -> a.getText()).toList();
 	}
 	
-	public List<WebElement> getListSubMenus(String menuName, String nextMenuName) {
-		String xpathPosicionInicial = getXPathFirstElement(menuName);
-		List<WebElement> elements = new ArrayList<>();
-		elements.add(getElement(xpathPosicionInicial));
-		if (nextMenuName==null) {
-			while (isNextXPathEndTable(xpathPosicionInicial)){
-				xpathPosicionInicial = getXPathNextElement(xpathPosicionInicial);
-				elements.add(getElement(xpathPosicionInicial));
+	private List<WebElement> getListAncorSubMenusFromSection(Section section) {
+		var menusResult = new ArrayList<WebElement>();
+		String xpathMenu = getXPathSubMenusFromSection(section);
+		for (WebElement menuItemTr : getElements(xpathMenu)) {
+			var ancorMenu = getAncorInMenu(menuItemTr); 
+			if (ancorMenu.isPresent()) {
+				menusResult.add(ancorMenu.get());
+			} else {
+				break;
 			}
-			return elements;
 		}
-		while (isNextXPathMenuHeader(xpathPosicionInicial, nextMenuName)) {
-			xpathPosicionInicial = getXPathNextElement(xpathPosicionInicial);
-			elements.add(getElement(xpathPosicionInicial));
-		}
-		return elements;
+		return menusResult;
 	}
+	private Optional<WebElement> getAncorInMenu(WebElement menuItemTr) {
+		try {
+			return Optional.of(getElement(menuItemTr, ".//a"));
+		}
+		catch (NoSuchElementException e) {
+			return Optional.empty();
+		}
+	}
+	
 }

@@ -22,9 +22,8 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		selectShe();
 	}
 
-	public void mantoSeccionPrendas() {
-		selectSectionPrenda();
-		selectTipoPrenda();
+	public void mantoSeccionNuevo() {
+		selectSectionNuevo();
 		bajarPrenda();
 	}
 
@@ -109,45 +108,17 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 	}
 
 	@Step(
-		description="Seleccionamos la sección de <b>prendas</b> en el desplegable",
-		expected="Nos aparece otro desplegable con los tipos de prenda",
+		description="Seleccionamos la sección de <b>Nuevo</b> en el desplegable + <b>Ver prendas</b>",
+		expected="Aparece el botón \"Aplicar Orden\" y una lista de prendas",
 		saveErrorData = SaveWhen.Never)
-	private void selectSectionPrenda() {
-		select(Orden.SELECTOR_ORDENACION.getBy(), "prendas_she").type(Value).exec();
-		validateSectionPrenda();
-	}
-
-	@Validation
-	private ChecksTM validateSectionPrenda() {
-		var checks = ChecksTM.getNew();
-		checks.add(
-			"Se vuelve visible el selector de tipo de <b>Prendas</b>",
-			state(Visible, Orden.SELECTOR_PRENDAS.getBy()).wait(13).check(), State.Defect);
-		
-		checks.add(
-			"Podemos ver el <b>botón</b> para ver las prendas",
-			state(Visible, Orden.VER_PRENDAS.getBy()).wait(13).check(), State.Defect);
-		
-		return checks;
-	}
-
-	@Step(
-		description="Seleccionamos <b>Camisas</b> en el desplegable de tipo de prenda y confirmamos nuestra seleccion",
-		expected="Aparecen fotos en pantalla",
-		saveErrorData = SaveWhen.Never)
-	private void selectTipoPrenda() {
-		selectCamisasShe();
+	private void selectSectionNuevo() {
+		select(Orden.SELECTOR_ORDENACION.getBy(), "nuevo").type(Value).exec();
 		clickVerPrendas();
-		validateTipoPrenda();
+		checkButtonAplicarOrdenVisible(15);
+		checkImagesVisible();
 	}
-	private void selectCamisasShe() {
-		try {
-			select(Orden.SELECTOR_PRENDAS.getBy(), "camisas_she").type(Value).exec();
-		}
-		catch (StaleElementReferenceException e) {
-			//Hay un error en TestMaker donde no se contempla este caso
-		}
-	}
+
+	
 	private void clickVerPrendas() {
 		try {
 			click(Orden.VER_PRENDAS.getBy()).waitLink(2).exec();
@@ -156,21 +127,20 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 			waitMillis(1000);
 			click(Orden.VER_PRENDAS.getBy()).exec();
 		}
+	}	
+	
+	@Validation(
+        description="Es visible el botón \"Aplicar Orden\" (lo esperamos #{seconds} segundos)",
+        level=State.Warn)
+	private boolean checkButtonAplicarOrdenVisible(int seconds) {
+        return state(Visible, Orden.APLICAR_ORDEN.getBy()).wait(seconds).check();
 	}
 
-	@Validation
-	private ChecksTM validateTipoPrenda() {
-		var checks = ChecksTM.getNew();
-		int seconds = 20;
-		checks.add(
-			"Aparecen imagenes en la nueva página (lo esperamos hasta " + seconds + " segundos)",
-			state(Visible, Orden.PRUEBA_IMAGEN.getBy()).wait(seconds).check(), State.Defect);
-		
-		checks.add(
-			"Estamos en la sección que corresponde <b>camisas</b>",
-			state(Visible, Orden.PRUEBA_CAMISA.getBy()).wait(seconds).check(), State.Defect);
-		
-		return checks;
+	@Validation(
+        description="Aparecen imagenes en la nueva página",
+        level=State.Defect)
+	private boolean checkImagesVisible() {
+        return state(Visible, Orden.PRUEBA_IMAGEN.getBy()).check();
 	}
 
 	@Step(

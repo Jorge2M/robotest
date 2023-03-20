@@ -26,7 +26,6 @@ public class Manto {
 	}
 	
 	@Test(
-		//enabled=false, //La operativa siempre falla en pre por timeout			
 		groups={"Manto", "Canal:desktop_App:all"}, 
 		description="Consulta de estadísticas de pedidos")
 	public void MAN005_GestorEstadisticasPedidos() throws Exception {

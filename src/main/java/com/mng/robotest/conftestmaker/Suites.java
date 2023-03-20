@@ -9,7 +9,6 @@ public enum Suites implements SuiteTest {
 	PaisIdiomaBanner(10), 
 	Campanas(10),
 	MenusPais(10), 
-	MenusManto(50),
 	ConsolaVotf(10), 
 	ListFavoritos(10),
 	CheckoutMultiAddress(10),

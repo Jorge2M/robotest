@@ -113,7 +113,7 @@ public class PagePrehomeNew extends PagePrehomeBase implements PagePrehomeI {
 	@Override
 	void selectButtonForEnter() {
 		click(XPATH_BUTTON_ACCEPT).exec();
-		if (!state(Invisible, XPATH_BUTTON_ACCEPT).wait(5).check()) {
+		if (!state(Invisible, XPATH_BUTTON_ACCEPT).wait(8).check()) {
 			click(XPATH_BUTTON_ACCEPT).type(TypeClick.javascript).exec();
 		}
 	}	

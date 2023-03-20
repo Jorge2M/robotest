@@ -15,7 +15,7 @@ public class PageOrdenacionDePrendas {
 		SELECTOR_PRENDAS("//select[@id[contains(.,'menus')]]"),
 		VER_PRENDAS("//input[@value[contains(.,'Ver Prendas')]]"),
 		PRUEBA_IMAGEN("//ul[@id='grupo_0']"),
-		PRUEBA_CAMISA("//p[@class='mensaje10' and text()[contains(.,'camisas_she')]]"),
+		PRUEBA_CAMISA("//p[@class='mensaje12' and text()[contains(.,'camisas_she')]]"),
 		BAJAR_PRENDA("//a[@id='idDos']"),
 		PRIMERA_PRENDA("//ul[@id='grupo_0']//li[1]"),
 		SEGUNDA_PRENDA("//ul[@id='grupo_0']//li[2]"),

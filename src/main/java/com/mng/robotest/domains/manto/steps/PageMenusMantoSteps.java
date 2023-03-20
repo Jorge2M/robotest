@@ -14,6 +14,7 @@ import com.mng.robotest.domains.manto.pageobjects.PageOrdenacionDePrendasSteps;
 import com.mng.robotest.domains.manto.pageobjects.PagePedidos;
 import com.mng.robotest.domains.manto.pageobjects.SecCabecera;
 import com.mng.robotest.domains.manto.steps.pedidos.PageGestorEstadisticasPedidoSteps;
+import com.mng.robotest.domains.manto.tests.MenusFact.Section;
 
 public class PageMenusMantoSteps extends StepMantoBase {
 
@@ -100,8 +101,8 @@ public class PageMenusMantoSteps extends StepMantoBase {
 		new PageOrdenacionDePrendasSteps().validateIsPage();
 	}
 	
-	public void comprobarMenusManto(String cabeceraName, String cabeceraNameNext) {
-		List<String> listSubMenuNames = pageMenusManto.getListSubMenusName(cabeceraName, cabeceraNameNext);
+	public void comprobarMenusManto(Section section) {
+		List<String> listSubMenuNames = pageMenusManto.getListSubMenusName(section);
 		for (String subMenu : listSubMenuNames) {
 			goToMainMenusAndClickMenu(subMenu);
 		}
