@@ -4,6 +4,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.manto.pageobjects.PageOrdenacionDePrendas.*;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
@@ -23,7 +24,7 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 	}
 
 	public void mantoSeccionNuevo() {
-		selectSectionNuevo();
+		selectSectionNuevoMasVerPrendas();
 		bajarPrenda();
 	}
 
@@ -111,13 +112,20 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		description="Seleccionamos la sección de <b>Nuevo</b> en el desplegable + <b>Ver prendas</b>",
 		expected="Aparece el botón \"Aplicar Orden\" y una lista de prendas",
 		saveErrorData = SaveWhen.Never)
-	private void selectSectionNuevo() {
-		select(Orden.SELECTOR_ORDENACION.getBy(), "nuevo").type(Value).exec();
+	private void selectSectionNuevoMasVerPrendas() {
+		selectNuevo();
 		clickVerPrendas();
 		checkButtonAplicarOrdenVisible(25);
 		checkImagesVisible();
 	}
-
+	private void selectNuevo() {
+		try {
+			select(Orden.SELECTOR_ORDENACION.getBy(), "nuevo").type(Value).exec();
+		} catch (StaleElementReferenceException e) {
+			PageBase.waitMillis(1000);
+			select(Orden.SELECTOR_ORDENACION.getBy(), "nuevo").type(Value).exec();
+		}
+	}
 	
 	private void clickVerPrendas() {
 		try {

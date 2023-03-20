@@ -36,18 +36,15 @@ public class PedidoNavigations {
 	
 	public static void testPedidosEnManto(DataCheckPedidos dataCheckPedidos, AppEcom appE, WebDriver driver) 
 			throws Exception {
-		//TODO activar cuando funcione manto en k8s-toos-pro (pdt vuelva Carlos)
-		if (false) {
-			//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
-			if (appE!=AppEcom.votf) {  
-				TestRunTM testRun = getTestCase().getTestRunParent();
-				DataMantoTest dMantoAcc = DataMantoTest.make();
-				dMantoAcc.setUrlManto(testRun.getParameter(Constantes.PARAM_URL_MANTO));
-				dMantoAcc.setUserManto(testRun.getParameter(Constantes.PARAM_USR_MANTO));
-				dMantoAcc.setPassManto(testRun.getParameter(Constantes.PARAM_PAS_MANTO));
-				dMantoAcc.setAppE(appE);
-				testPedidosEnManto(dMantoAcc, dataCheckPedidos, driver);
-			}
+		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
+		if (appE!=AppEcom.votf) {  
+			TestRunTM testRun = getTestCase().getTestRunParent();
+			DataMantoTest dMantoAcc = DataMantoTest.make();
+			dMantoAcc.setUrlManto(testRun.getParameter(Constantes.PARAM_URL_MANTO));
+			dMantoAcc.setUserManto(testRun.getParameter(Constantes.PARAM_USR_MANTO));
+			dMantoAcc.setPassManto(testRun.getParameter(Constantes.PARAM_PAS_MANTO));
+			dMantoAcc.setAppE(appE);
+			testPedidosEnManto(dMantoAcc, dataCheckPedidos, driver);
 		}
 	}
 	
