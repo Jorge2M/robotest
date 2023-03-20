@@ -81,14 +81,14 @@ public class PageGestionarClientesSteps extends StepMantoBase {
 	@Validation
 	private ChecksTM checkAfterClickButton(TypeThirdButton typeButton) {
 		var checks = ChecksTM.getNew();
-	 	checks.add(
-			"Aparece el mensaje <b>" + typeButton.literal() + "</b>",
-			pageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton), State.Defect);
-	 	
 		int seconds = 2;
+	 	checks.add(
+			"Aparece el mensaje <b>" + typeButton.literal() + "</b> (lo esperamos " + seconds + " segundos)",
+			pageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, seconds), State.Defect);
+	 	
 		TypeThirdButton buttonExpected = typeButton.buttonExpectedAfterClick();
 	 	checks.add(
-			"Aparece el botón \"Alta\" (lo esperamos hasta " + seconds + " segundos)",
+			"Aparece el botón \"Alta\" (lo esperamos " + seconds + " segundos)",
 			pageGestionarClientes.isVisibleThirdButton(buttonExpected, seconds), State.Defect);
 		
 	 	return checks;

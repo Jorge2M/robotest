@@ -114,7 +114,7 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 	private void selectSectionNuevo() {
 		select(Orden.SELECTOR_ORDENACION.getBy(), "nuevo").type(Value).exec();
 		clickVerPrendas();
-		checkButtonAplicarOrdenVisible(15);
+		checkButtonAplicarOrdenVisible(25);
 		checkImagesVisible();
 	}
 

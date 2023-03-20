@@ -9,22 +9,22 @@ public class MenusFact implements Serializable {
 	private static final long serialVersionUID = -5780907750259210736L;
 
 	public enum Section {
-//		PEDIDOS("Pedidos"),
-//		VALES("Vales"),
-//		CLIENTES("Clientes"),
-//		DEVOLUCIONES("Devoluciones"),
-//		ADMINISTRACION_TRANSPORTES("Administración transportes"),
-//		BLOQUEO_PRODUCTOS("Bloqueo Productos"),
-		MARKETPLACES("Marketplaces");
-//		BLOQUES("Bloques"),
-//		ATENCION_AL_CLIENTE("Atencion al cliente"),
-//		ESTADISTICAS("Estadisticas."),
-//		TIENDAS_FISICAS("Tiendas físicas"),
-//		PRODUCTOS("Productos"),
-//		ORDEN("Orden"),
-//		PROMOCIONES("Promociones"),
-//		REBAJAS("Rebajas"),
-//		OTRAS("Otras");
+		PEDIDOS("Pedidos"),
+		VALES("Vales"),
+		CLIENTES("Clientes"),
+		DEVOLUCIONES("Devoluciones"),
+		ADMINISTRACION_TRANSPORTES("Administración transportes"),
+		BLOQUEO_PRODUCTOS("Bloqueo Productos"),
+		MARKETPLACES("Marketplaces"),
+		BLOQUES("Bloques"),
+		ATENCION_AL_CLIENTE("Atencion al cliente"),
+		ESTADISTICAS("Estadisticas."),
+		TIENDAS_FISICAS("Tiendas físicas"),
+		PRODUCTOS("Productos"),
+		ORDEN("Orden"),
+		PROMOCIONES("Promociones"),
+		REBAJAS("Rebajas"),
+		OTRAS("Otras");
 		
 		private final String cabecera;
 		private Section(String cabecera) {
@@ -46,7 +46,7 @@ public class MenusFact implements Serializable {
 		this.section = section;
 		this.indexFact = section.getCabecera();
 		this.prioridad = prioridad;
-		this.indexFact = " (" + section.getCabecera() + ")";
+		this.indexFact = section.getCabecera();
 	}
 
 	@Test(

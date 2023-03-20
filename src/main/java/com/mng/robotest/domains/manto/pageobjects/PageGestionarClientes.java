@@ -123,9 +123,9 @@ public class PageGestionarClientes extends PageBase {
 		click(XPATH_FORM_TABLA_DETALLES_BUTTON).waitLoadPage(seconds).exec();
 	}
 	
-	public boolean isVisibleMensajeClickThirdButton(TypeThirdButton typeButton) {
+	public boolean isVisibleMensajeClickThirdButton(TypeThirdButton typeButton, int seconds) {
 		String mensaje = typeButton.getMensaje();
-		return state(Visible, getXPathSpanMensajeThirdButton(mensaje)).check();
+		return state(Visible, getXPathSpanMensajeThirdButton(mensaje)).wait(seconds).check();
 	}
 
 	public boolean isVisibleIdClienteClickDetallesButton(String idCliente) {
