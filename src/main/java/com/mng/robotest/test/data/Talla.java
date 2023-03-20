@@ -21,7 +21,7 @@ public enum Talla {
 	T26("26", Arrays.asList("22")),	
 	T27("27", Arrays.asList("24")),	
 	T28("28", Arrays.asList("26")),	
-	T32("32", Arrays.asList("32")),
+	T32("32", Arrays.asList("32", "4", "0")),
 	T33("33", Arrays.asList("33")),
 	T34("34", Arrays.asList("34")),
 	T35("35", Arrays.asList("35")),
