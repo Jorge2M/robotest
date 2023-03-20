@@ -25,7 +25,7 @@ public enum CodIdioma {
 	SE("Svenska"),
 	TH("ไทย"),
 	TR("Türk"),
-	US("English"),
+	US("English (USA)"),
 	ZH("中文"),
 	AR("العربية");
 	

@@ -1,29 +1,33 @@
 package com.mng.robotest.domains.manto.tests;
 
 import com.mng.robotest.domains.base.TestMantoBase;
-import com.mng.robotest.domains.manto.steps.PageGestionarClientesSteps;
+import com.mng.robotest.domains.manto.steps.PageGestorChequesSteps;
 import com.mng.robotest.domains.manto.steps.PageMenusMantoSteps;
 
 public class Man003 extends TestMantoBase {
 
+	private static final String MAIL = "esther.esteve@mango.com";
+	private static final String CHEQUE = "204028046151"; 
+	
 	@Override
 	public void execute() {
 		accesoAlmacenEspanya();
-		var pedido = searchPedido();
-		goToGestionarClientes();
-		consultaCliente(pedido.getPago().getDni());
+		goToGestorCheques();
+		checkCheques();
 	}
 	
-	private void goToGestionarClientes() {
-		new PageMenusMantoSteps().goToGestionarClientes();
+	private void goToGestorCheques() {
+		new PageMenusMantoSteps().goToGestorCheques();		
 	}
 	
-	private void consultaCliente(String dni) {
-		var pageGestionarClientesSteps = new PageGestionarClientesSteps();
-		pageGestionarClientesSteps.inputDniAndClickBuscar(dni);
-		pageGestionarClientesSteps.clickThirdButton();
-		pageGestionarClientesSteps.clickThirdButton();
-		pageGestionarClientesSteps.clickDetallesButton(dni);
+	private void checkCheques() {
+		var pageGestChecksSteps = new PageGestorChequesSteps();
+		pageGestChecksSteps.inputMailAndClickCorreoCliente(MAIL);
+		pageGestChecksSteps.clickPedido(10, MAIL);
+		pageGestChecksSteps.volverCheques();
+		pageGestChecksSteps.inputCheque(CHEQUE);
+		pageGestChecksSteps.chequeDetails();
+		pageGestChecksSteps.volverCheques();
 	}
 
 }

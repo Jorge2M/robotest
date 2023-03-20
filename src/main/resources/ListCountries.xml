@@ -598,7 +598,6 @@
 <pais nombre_pais="Cyprus (Euros)" codigo="600">
 <codigo_pais>600</codigo_pais>
 <codigo_alf>CY</codigo_alf>
-<codigo_prehome>CY1</codigo_prehome>
 <idioma acceso="cy">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>CY</tarifa>
@@ -2723,6 +2722,7 @@ where
 <pais nombre_pais="United Kingdom (Channel Islands)" codigo="019">
 <codigo_pais>019</codigo_pais>
 <codigo_alf>GB1</codigo_alf>
+<codigo_prehome>GB-CHA</codigo_prehome>
 <idioma acceso="gb1">IN</idioma>
 <rgpd>S</rgpd>
 <tarifa>JY</tarifa>

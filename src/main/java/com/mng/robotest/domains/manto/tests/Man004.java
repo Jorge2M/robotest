@@ -1,33 +1,26 @@
 package com.mng.robotest.domains.manto.tests;
 
 import com.mng.robotest.domains.base.TestMantoBase;
-import com.mng.robotest.domains.manto.steps.PageGestorChequesSteps;
 import com.mng.robotest.domains.manto.steps.PageMenusMantoSteps;
+import com.mng.robotest.domains.manto.steps.pedidos.PageGestorEstadisticasPedidoSteps;
 
 public class Man004 extends TestMantoBase {
 
-	private static final String MAIL = "esther.esteve@mango.com";
-	private static final String CHEQUE = "204028046151"; 
-	
 	@Override
 	public void execute() {
 		accesoAlmacenEspanya();
-		goToGestorCheques();
-		checkCheques();
+		goToGestorEstadisticasPedido();		
+		comparePedidosZalandoES();
 	}
 	
-	private void goToGestorCheques() {
-		new PageMenusMantoSteps().goToGestorCheques();		
+	private void goToGestorEstadisticasPedido() {
+		new PageMenusMantoSteps().goToGestorEstadisticasPedido();
 	}
 	
-	private void checkCheques() {
-		var pageGestChecksSteps = new PageGestorChequesSteps();
-		pageGestChecksSteps.inputMailAndClickCorreoCliente(MAIL);
-		pageGestChecksSteps.clickPedido(10, MAIL);
-		pageGestChecksSteps.volverCheques();
-		pageGestChecksSteps.inputCheque(CHEQUE);
-		pageGestChecksSteps.chequeDetails();
-		pageGestChecksSteps.volverCheques();
+	private void comparePedidosZalandoES() {
+		var pageGestorEstadisticasPedidoSteps = new PageGestorEstadisticasPedidoSteps();
+		pageGestorEstadisticasPedidoSteps.searchZalandoOrdersInformation();
+		pageGestorEstadisticasPedidoSteps.compareLastDayInformation();
 	}
 
 }

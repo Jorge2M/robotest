@@ -10,7 +10,7 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 public class ArticuloNavigations extends StepBase {
 
 	public ArticuloScreen selectArticuloTallaColorByRef(Article articleStock) {
-		ArticuloScreen articulo = new ArticuloScreen();
+		var articulo = new ArticuloScreen();
 		articulo.setReferencia(articleStock.getGarmentId());
 		if (articleStock.getUrlFicha()==null || "".compareTo(articleStock.getUrlFicha())==0) {
 			buscarArticulo(articleStock);
@@ -19,7 +19,7 @@ public class ArticuloNavigations extends StepBase {
 		}
 
 		//Esperamos un máximo de 10 segundos a que aparezca la ficha del artículo
-		PageFicha pageFicha = PageFicha.of(channel);
+		var pageFicha = PageFicha.of(channel);
 		pageFicha.isFichaArticuloUntil(articulo.getReferencia(), 10);
 
 		String idColor = null;
