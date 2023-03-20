@@ -1,9 +1,11 @@
 package com.mng.robotest.domains.manto.pageobjects;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebElement;
@@ -21,6 +23,10 @@ public class PageMenusManto extends PageBase {
 	private static final String XPATH_CELDA_TEXT_MENU_PRINCIPAL = "//td[text()[contains(.,'Menú principal')]]";
 	private static final String XPATH_CABECERA_MENU = "//table//td[@bgcolor='#505050']/span";
 	private static final String XPATH_LINK_MENU = "//table//a[@onclick]";
+	
+	private static final List<Pair<Section, String>> BLACK_LIST_MENUS = Arrays.asList(
+			Pair.of(Section.MARKETPLACES, "· Zalando Shapes"),
+			Pair.of(Section.MARKETPLACES, "· Publish Errors")); 
 	
 	private String getXPathLinkMenu(String menu) {
 		return "//a[text()[contains(.,'" + menu + "')]]";
@@ -130,7 +136,9 @@ public class PageMenusManto extends PageBase {
 
 	public List<String> getListSubMenusName(Section section) {
 		return getListAncorSubMenusFromSection(section).stream()
-				.map(a -> a.getText()).toList();
+				.map(a -> a.getText())
+				.filter(t -> !BLACK_LIST_MENUS.contains(Pair.of(section, t)))
+				.toList();
 	}
 	
 	private List<WebElement> getListAncorSubMenusFromSection(Section section) {
