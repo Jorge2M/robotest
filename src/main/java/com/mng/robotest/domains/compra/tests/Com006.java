@@ -31,16 +31,12 @@ public class Com006 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		fromPrehomeToCheckout();
-		checkPedido();		
+		checkPedidos(dataPago.getListPedidos());		
 	}
 
 	private void fromPrehomeToCheckout() throws Exception {
 		new BuilderCheckout(dataPago)
 			.build()
 			.checkout(From.PREHOME);
-	}
-
-	private void checkPedido() throws Exception {
-		new CompraSteps().checkPedidosManto(dataPago.getListPedidos()); 
 	}
 }

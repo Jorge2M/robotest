@@ -69,6 +69,6 @@ public class Com011 extends TestBase {
 	private void checkPedidos(DataPago dataPago) throws Exception {
 		DataPedido dataPedido = dataPago.getDataPedido();
 		dataPedido.setEmailCheckout(dataTest.getUserConnected());
-		new CompraSteps().checkPedidosManto(Arrays.asList(dataPago.getDataPedido())); 
+		checkPedidos(Arrays.asList(dataPago.getDataPedido()));
 	}
 }

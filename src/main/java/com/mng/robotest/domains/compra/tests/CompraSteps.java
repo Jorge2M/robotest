@@ -35,7 +35,7 @@ public class CompraSteps extends StepBase {
 	public void checkPedidosManto(List<CheckPedido> listChecks, List<DataPedido> listPedidos) 
 			throws Exception {
 		DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(listPedidos, listChecks);
-		PedidoNavigations.testPedidosEnManto(checksPedidos, app, driver);
+		new PedidoNavigations().testPedidosShopEnManto(checksPedidos);
 	}
 	
 }

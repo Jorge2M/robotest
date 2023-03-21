@@ -48,7 +48,7 @@ public class Com010 extends TestBase {
 		}
 		
 		new SecBolsaSteps().altaListaArticulosEnBolsa(listArticles);
-		
+
 		//Hasta página Checkout
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkPagos()

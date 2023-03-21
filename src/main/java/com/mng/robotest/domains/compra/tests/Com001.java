@@ -21,7 +21,6 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 
-
 public class Com001 extends TestBase {
 
 	private final DataPago dataPago;
@@ -46,7 +45,7 @@ public class Com001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		checkout();
-		checkPedidos();
+		checkPedidos(dataPago.getListPedidos());
 	}
 
 	private void checkout() throws Exception {
@@ -65,10 +64,6 @@ public class Com001 extends TestBase {
 		}
 	}
 
-	private void checkPedidos() throws Exception {
-		new CompraSteps().checkPedidosManto(dataPago.getListPedidos()); 
-	}
-	
 	private List<Article> getArticlesShop() throws NotFoundException, Exception {
 		Optional<List<Article>> articlesHomeOpt = getArticlesHome();
 		if (!articlesHomeOpt.isPresent()) {
