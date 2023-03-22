@@ -92,7 +92,7 @@ public class Ree002 extends TestBase {
 			}
 			
 			pageReembolsosSteps.gotoRefundsFromMenuAndValidaSalCta(dataTest.getPais().existsPagoStoreCredit(), saldoCtaEsperado);
-			checkPedidos(dataPago.getListPedidos());
+			checkPedidosManto(dataPago.getListPedidos());
 		}		
 	}
 

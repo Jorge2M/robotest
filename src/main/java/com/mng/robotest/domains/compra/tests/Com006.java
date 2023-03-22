@@ -31,7 +31,7 @@ public class Com006 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		fromPrehomeToCheckout();
-		checkPedidos(dataPago.getListPedidos());		
+		checkPedidosManto(dataPago.getListPedidos());		
 	}
 
 	private void fromPrehomeToCheckout() throws Exception {

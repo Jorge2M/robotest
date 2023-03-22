@@ -88,6 +88,6 @@ public class Com004 extends TestBase {
 			CheckPedido.CONSULTAR_PEDIDO,
 			CheckPedido.ANULAR); 
 		
-		new CompraSteps().checkPedidosManto(listChecks, dataPago.getListPedidos());
+		checkPedidosManto(listChecks, dataPago.getListPedidos());
 	}
 }

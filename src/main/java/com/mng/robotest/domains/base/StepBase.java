@@ -17,6 +17,7 @@ import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.datastored.DataPedido;
+import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.utils.UtilsTest;
@@ -83,9 +84,13 @@ public abstract class StepBase extends PageBase {
 		return UtilsTest.getTwoArticlesFromDistinctWarehouses(dataTest.getPais(), app);
 	}
 	
-	protected void checkPedidos(List<DataPedido> listPedidos) throws Exception {
+	protected void checkPedidosManto(List<DataPedido> listPedidos) throws Exception {
 		new ManXXX(listPedidos).execute();
 	}
+	protected void checkPedidosManto(List<CheckPedido> listChecks, List<DataPedido> listPedidos) 
+			throws Exception {
+		new ManXXX(listChecks, listPedidos).execute();
+	}	
 	
 
 }

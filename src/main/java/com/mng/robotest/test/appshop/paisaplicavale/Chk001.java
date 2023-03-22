@@ -26,7 +26,7 @@ public class Chk001 extends TestBase {
 			.checkout(From.PREHOME);
 		
 		if (dataPago.getFTCkout().checkManto) {
-			checkPedidos(dataPago.getListPedidos());
+			checkPedidosManto(dataPago.getListPedidos());
 		}		
 	}
 

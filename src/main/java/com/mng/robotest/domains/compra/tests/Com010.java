@@ -71,7 +71,7 @@ public class Com010 extends TestBase {
 			if (checkAnulaPedido) {
 				listChecks.add(CheckPedido.ANULAR);
 			}
-			new CompraSteps().checkPedidosManto(listChecks, dataPago.getListPedidos());
+			checkPedidosManto(listChecks, dataPago.getListPedidos());
 		}
 	}
 	

@@ -45,7 +45,7 @@ public class Com001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		checkout();
-		checkPedidos(dataPago.getListPedidos());
+		checkPedidosManto(dataPago.getListPedidos());
 	}
 
 	private void checkout() throws Exception {
