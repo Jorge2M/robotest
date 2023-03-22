@@ -37,7 +37,7 @@ public class UtilsTest {
 	/**
 	 * @param date format yyyy-MM-dd
 	 */
-	public static boolean dateBeforeToday(String date) {
+	public static boolean todayBeforeDate(String date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date dateLimit = sdf.parse(date);

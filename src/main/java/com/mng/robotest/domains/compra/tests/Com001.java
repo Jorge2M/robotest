@@ -72,7 +72,7 @@ public class Com001 extends TestBase {
 		
 		//TODO actualmente no funciona el buscador por referencia de productos Intimissimi (CFIT-1265)
 		//confiamos que esté listo el 1-Junio-2023
-		if (!UtilsTest.dateBeforeToday("2023-06-01")) {
+		if (!UtilsTest.todayBeforeDate("2023-06-01")) {
 			Optional<List<Article>> articlesIntimissimiOpt = getArticlesIntimissimi();
 			if (!articlesIntimissimiOpt.isPresent()) {
 				throw new NotFoundException("Home Garment Not Found");

@@ -228,7 +228,7 @@ public class Pais implements Serializable {
 			return false;
 		}
 		//TODO eliminar el if cuando el nuevo apartado de "Mis Direcciones" esté subido a PRO
-		if (PageBase.isEnvPRO() && UtilsTest.dateBeforeToday("2023-04-07")) {
+		if (PageBase.isEnvPRO() && UtilsTest.todayBeforeDate("2023-04-07")) {
 			return false;
 		}
 		return (getMultidireccion()!=null && 
