@@ -5,6 +5,8 @@ import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 
 
@@ -41,6 +43,17 @@ public class PageHomeDonateLikes extends PageBase {
 		return state(Visible, XPATH_PAGE).wait(seconds).check();
 	}
 	
+	public boolean isVisibleAny(List<ButtonLikes> listButtons, int seconds) {
+		if (isVisible(listButtons.get(0), seconds)) {
+			return true;
+		}
+		for (int i=1; i<listButtons.size(); i++) {
+			if (isVisible(listButtons.get(i), 0)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	public boolean isVisible(ButtonLikes buttonLikes, int seconds) {
 		return state(Visible, buttonLikes.getXPath()).wait(seconds).check();
 	}

@@ -1,13 +1,16 @@
 package com.mng.robotest.domains.loyalty.tests;
 
+import java.util.Arrays;
+
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.loyalty.beans.User;
-import com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes;
 import com.mng.robotest.domains.loyalty.steps.PageHomeDonateLikesSteps;
 import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
+
+import static com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes.*;
 
 public class Loy002 extends TestBase {
 
@@ -45,12 +48,11 @@ public class Loy002 extends TestBase {
 		pageHomeLikesSteps.clickButtonDonarLikes();
 		
 		if (!isPRO()) {
-			ButtonLikes donateButton = ButtonLikes.BUTTON_100_LIKES;
-			pageHomeDonateLikesSteps.selectDonateButton(donateButton);
+			var listButtons = Arrays.asList(BUTTON_50_LIKES, BUTTON_100_LIKES);
+			int likesDonated = pageHomeDonateLikesSteps.selectDonateButton(listButtons);
 			int loyaltyPointsFin = secMenusUserSteps.clickMenuMangoLikesYou();
-			
 			secMenusUserSteps.checkLoyaltyPoints(
-					loyaltyPointsIni, donateButton.getNumLikes(), loyaltyPointsFin);
+					loyaltyPointsIni, likesDonated, loyaltyPointsFin);
 		}
 	}
 }

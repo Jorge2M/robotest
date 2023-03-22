@@ -1,17 +1,20 @@
 package com.mng.robotest.domains.loyalty.steps;
 
+import java.util.Arrays;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou;
-import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.ButtonUseLikes;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps.ChecksResultWithNumberPoints;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 
+import static com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes.*;
+import static com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.ButtonUseLikes.*;
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageMangoLikesYouSteps extends StepBase {
 
@@ -23,17 +26,17 @@ public class PageMangoLikesYouSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de <b>Mango likes you</b> (esperamos hasta " + seconds + " segundos)",
-			pageMangoLikesYou.checkIsPageUntil(4), State.Defect);
+			pageMangoLikesYou.checkIsPageUntil(4), Defect);
 		
 		int secondsButton = 10;
 		checks.add(
 			"Es visible el botón \"Compra con descuento\" (esperamos hasta " + secondsButton + " segundos)",
-			pageMangoLikesYou.isVisibleButton(ButtonUseLikes.COMPRA_CON_DESCUENTO, secondsButton), State.Defect);
+			pageMangoLikesYou.isVisibleButton(COMPRA_CON_DESCUENTO, secondsButton), Defect);
 		
 		checks.setNumberPoints(pageMangoLikesYou.getPoints());
 		checks.add(
 			"El número de puntos Loyalty es > 0",
-			checks.getNumberPoints() > 0, State.Warn);
+			checks.getNumberPoints() > 0, Warn);
 		return checks;
 	}
 
@@ -63,7 +66,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página específica de ayuda para MangoLikesYou (la esperamos #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkPageAyudaMangoLikesYouVisible(int seconds) {
 		return pageMangoLikesYou.isPageAyudaMangoLikesYouVisible(seconds);
 	}	
@@ -82,7 +85,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		description="Seleccionar el link \"Compra un descuento\"",
 		expected="Aparece la página de \"Compra con descuento\"")
 	public void clickOpcionCompraUnDescuento() {
-		pageMangoLikesYou.clickButton(ButtonUseLikes.COMPRA_CON_DESCUENTO);
+		pageMangoLikesYou.clickButton(COMPRA_CON_DESCUENTO);
 		new PageHomePurchaseWithDiscountSteps()
 			.checkHomePurchaseWithDiscountPageOk();
 	}
@@ -91,13 +94,13 @@ public class PageMangoLikesYouSteps extends StepBase {
 		description="Seleccionar el 1er botón \"Donar Likes\"",
 		expected="Aparece una página para donar mis Likes")
 	public void clickButtonDonarLikes() {
-		pageMangoLikesYou.clickButton(ButtonUseLikes.DONAR_MIS_LIKES);
-		new PageHomeDonateLikesSteps().checkIsPage(5);
+		pageMangoLikesYou.clickButton(DONAR_MIS_LIKES);
+		new PageHomeDonateLikesSteps().checkIsPage(5, Arrays.asList(BUTTON_50_LIKES, BUTTON_100_LIKES));
 		GenericChecks.checkDefault();
 	}
 	
 	public void clickConseguirPorLikesButton() {
-		if (pageMangoLikesYou.isVisibleButton(ButtonUseLikes.LIKES_1200, 0)) {
+		if (pageMangoLikesYou.isVisibleButton(LIKES_1200, 0)) {
 			click1200Likes();
 		} else {
 			clickSaberMas();
@@ -109,7 +112,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		description="Seleccionar el 1er botón para la compra de una entrada de cine",
 		expected="Aparece una página para conseguir la entrada de cine")
 	private void clickSaberMas() {
-		pageMangoLikesYou.clickButton(ButtonUseLikes.ENTRADA_CINE);
+		pageMangoLikesYou.clickButton(ENTRADA_CINE);
 		new PageHomeConseguirPorLikesSteps().checkIsPage(2);
 		
 	}
@@ -118,7 +121,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		description="Seleccionar el 1er botón \"1200 Likes\"",
 		expected="Aparece una página para conseguir por 1200 Likes")
 	private void click1200Likes() {
-		pageMangoLikesYou.clickButton(ButtonUseLikes.LIKES_1200);
+		pageMangoLikesYou.clickButton(LIKES_1200);
 		new PageHomeConseguirPorLikesSteps().checkIsPage(2);
 	}
 	
@@ -126,7 +129,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		description="Seleccionar el 1er botón \"Regalar mis Likes\"",
 		expected="Aparece la página para regalar mis Likes")
 	public PageRegalarMisLikesSteps clickButtonRegalarMisLikes() {
-		pageMangoLikesYou.clickButton(ButtonUseLikes.REGALAR_MIS_LIKES);
+		pageMangoLikesYou.clickButton(REGALAR_MIS_LIKES);
 		PageRegalarMisLikesSteps pageRegalarSteps = new PageRegalarMisLikesSteps();
 		pageRegalarSteps.checkIsPage();
 		return pageRegalarSteps;
@@ -138,7 +141,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 			"- El emisor tenía inicialmente #{dataPoints.getIniPointsEmisor()} y el receptor #{dataPoints.getIniPointsReceptor()}<br>" +
 			"- Validamos que el emisor tenga finalmente <b>#{dataPoints.getFinPointsEmisorExpected()}</b> y el receptor <b>#{dataPoints.getFinPointsReceptorExpected()}</b><br>" +
 			"- Info: lo que se ve realmente es que el emisor acaba teniendo #{dataPoints.getFinPointsEmisorReal()} y el receptor #{dataPoints.getFinPointsReceptorReal()}",
-		level=State.Defect)
+		level=Defect)
 	public static boolean checkRegalarPointsOk(DataRegaloPuntos dataPoints) {
 		return (
 			dataPoints.getFinPointsEmisorExpected()==dataPoints.getFinPointsEmisorReal() &&
