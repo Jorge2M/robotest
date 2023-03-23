@@ -29,19 +29,19 @@ public abstract class ModalDireccion extends PageBase {
 	
 	private String getXPathInput(DataDirType inputType) {
 		switch (inputType) {
-		case nif:
+		case NIF:
 			return XPATH_INPUT_NIF;
-		case name:
+		case NAME:
 			return XPATH_INPUT_NAME;
-		case apellidos:
+		case APELLIDOS:
 			return XPATH_INPUT_APELLIDOS;
-		case direccion:
+		case DIRECCION:
 			return XPATH_INPUT_DIRECCION;
-		case codpostal:
+		case CODPOSTAL:
 			return XPATH_INPUT_CODPOSTAL;
-		case email:
+		case EMAIL:
 			return XPATH_INPUT_EMAIL;
-		case telefono:
+		case TELEFONO:
 			return XPATH_INPUT_TELEFONO;
 		default:
 			return "";
@@ -59,13 +59,13 @@ public abstract class ModalDireccion extends PageBase {
 			while (it.hasNext()) {
 				Map.Entry<DataDirType, String> pair = it.next();
 				switch (pair.getKey()) {
-				case poblacion:
+				case POBLACION:
 					selectPoblacion(pair.getValue(), xpathFormModal);
 					break;
-				case provincia:
+				case PROVINCIA:
 					selectProvincia(pair.getValue(), xpathFormModal);
 					break;
-				case codigoPais:
+				case CODIGOPAIS:
 					selectPais(pair.getValue(), xpathFormModal);
 					break;
 				default:

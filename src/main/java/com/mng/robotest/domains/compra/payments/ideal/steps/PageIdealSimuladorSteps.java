@@ -2,9 +2,10 @@ package com.mng.robotest.domains.compra.payments.ideal.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.ideal.pageobjects.PageIdealSimulador;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageIdealSimuladorSteps extends StepBase {
 
@@ -12,7 +13,7 @@ public class PageIdealSimuladorSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página de simulación de Ideal",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateIsPage() { 
 		return pageIdealSimulador.isPage();
 	}

@@ -5,7 +5,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -27,6 +26,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
 import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.*;
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecMenusUserSteps extends StepBase {
 	
@@ -71,7 +71,7 @@ public class SecMenusUserSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsVisibleIniciarSesionLink(int seconds) {
 		return (userMenus.isMenuInStateUntil(INICIAR_SESION, Present, seconds));
 	}
@@ -101,14 +101,14 @@ public class SecMenusUserSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsVisibleLinkCerrarSesion() {	
 		return isVisibleLinkCerrarSesion();
 	}
 	
 	@Validation (
 		description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsInvisibleLinkCerrarSesion() {	
 		return isInvisibleLinkCerrarSesion();
 	}	
@@ -117,7 +117,7 @@ public class SecMenusUserSteps extends StepBase {
 		description=
 			"Aparece el link superior de \"Cerrar Sesión\" (estamos loginados). " + 
 			"Lo esperamos hasta #{seconds} segundos",
-		level=State.Defect)	
+		level=Defect)	
 	public boolean checkIsVisibleLinkCerrarSesionUntil(int seconds) {
 		if (isVisibleLinkCerrarSesionExceptionSafe()) {
 			return true;
@@ -197,12 +197,12 @@ public class SecMenusUserSteps extends StepBase {
 		if (app==AppEcom.shop) {
 			checks.add(
 				"Sí aparece el link de \"Mango Likes You\" en el menú de usuario",
-				visibilityMLY, State.Defect);
+				visibilityMLY, Defect);
 		}
 		else {
 			checks.add(
 				"No aparece el link de \"Mango Likes You\" en el menú de usuario",
-				!visibilityMLY, State.Defect);
+				!visibilityMLY, Defect);
 		}
 		
 		return checks;  
@@ -218,7 +218,7 @@ public class SecMenusUserSteps extends StepBase {
 		checks.setNumberPoints(loyaltyData.numberPoints);
 	 	checks.add(
 			"Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta " + seconds + " segundos)",
-			loyaltyData.isPresent, State.Defect);
+			loyaltyData.isPresent, Defect);
 	 	
 		return checks;
 	}
@@ -234,7 +234,7 @@ public class SecMenusUserSteps extends StepBase {
 			"Los Loyalty Points que figuran ahora en la web (<b>" + finalPoints + "</b>) " + 
 			"coinciden con los <b>" + loyaltyPointsExpected + "</b> esperados " + 
 			"(inicialmente teníamos " + initPoints + " y hemos utilizado " + donatedPoints + ")",
-			finalPoints==loyaltyPointsExpected, State.Warn);
+			finalPoints==loyaltyPointsExpected, Warn);
 	 	
 	 	return checks;
 	}

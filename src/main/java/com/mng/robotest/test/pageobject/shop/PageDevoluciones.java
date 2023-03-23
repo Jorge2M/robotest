@@ -45,7 +45,7 @@ public class PageDevoluciones extends PageBase {
 		}
 
 		public void click(WebDriver driver) {
-			new PageBase(driver).click(By.xpath(xpathLink)).exec();
+			new PageBase(driver).click(xpathLink).exec();
 		}
 		
 		public void waitForInState(boolean plegada, int seconds, WebDriver driver) {

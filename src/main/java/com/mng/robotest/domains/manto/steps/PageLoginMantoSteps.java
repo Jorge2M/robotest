@@ -2,11 +2,12 @@ package com.mng.robotest.domains.manto.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.manto.pageobjects.PageSelTda;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PageJCAS;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageLoginMantoSteps extends StepMantoBase {
 
@@ -43,7 +44,7 @@ public class PageLoginMantoSteps extends StepMantoBase {
 
 	@Validation (
 		description="Aparece la página de selección de la tienda (la esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkIsPageSelectTienda(int seconds) {
 		return (new PageSelTda().isPage(seconds));
 	}

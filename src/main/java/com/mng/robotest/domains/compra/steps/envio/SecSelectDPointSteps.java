@@ -12,6 +12,7 @@ import com.mng.robotest.domains.compra.pageobjects.envio.ModalDroppoints;
 import com.mng.robotest.domains.compra.pageobjects.envio.SecSelectDPoint.TypeDeliveryPoint;
 import com.mng.robotest.domains.compra.steps.envio.DataSearchDeliveryPoint.DataSearchDp;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecSelectDPointSteps extends StepBase {
 	
@@ -39,9 +40,9 @@ public class SecSelectDPointSteps extends StepBase {
 	private ChecksTM checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp) {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
-		State stateVal = State.Warn;
+		State stateVal = Warn;
 		if (dataSearchDp.typeData==DataSearchDp.CODIGO_POSTAL) {
-			stateVal = State.Info;
+			stateVal = Info;
 		}
 	 	checks.add(
 			"La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.data + 
@@ -57,11 +58,11 @@ public class SecSelectDPointSteps extends StepBase {
 		int seconds = 3;
 	 	checks.add(
 			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + seconds + " segundos)",
-			modalDroppoints.isDroppointVisibleUntil(1, seconds), State.Defect);
+			modalDroppoints.isDroppointVisibleUntil(1, seconds), Defect);
 	 	
 	 	checks.add(
 			"El 1er delivery point de la lista es de tipo <b>" + typeDp + "</b>",
-			modalDroppoints.getTypeDeliveryPoint(1)==typeDp, State.Defect);
+			modalDroppoints.getTypeDeliveryPoint(1)==typeDp, Defect);
 	 	
 	 	return checks;
 	}
@@ -77,7 +78,7 @@ public class SecSelectDPointSteps extends StepBase {
 	
 	@Validation (
 		description="Queda seleccionado el Droppoint #{position}",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsSelectedDroppoint(int position) {
 		return modalDroppoints.isDroppointSelected(position);
 	}

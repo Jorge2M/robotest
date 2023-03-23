@@ -1,6 +1,5 @@
 package com.mng.robotest.test.steps.shop;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -9,6 +8,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecCabeceraSteps extends StepBase {
 
@@ -32,11 +33,11 @@ public class SecCabeceraSteps extends StepBase {
 		if (dataTest.getPais().isVentaOnline()) {
 			checks.add(
 				"<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)",
-				isVisibleIconoBolsa, State.Warn);
+				isVisibleIconoBolsa, Warn);
 		} else {
 			checks.add(
 				"<b>No</b> es posible comprar (aparece la capa relacionada con la bolsa)",
-				!isVisibleIconoBolsa, State.Warn);
+				!isVisibleIconoBolsa, Warn);
 		}
 		return checks;
 	}

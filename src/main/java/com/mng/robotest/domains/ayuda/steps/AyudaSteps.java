@@ -2,10 +2,10 @@ package com.mng.robotest.domains.ayuda.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.ayuda.pageobjects.PagesAyuda;
 import com.mng.robotest.domains.base.StepBase;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class AyudaSteps extends StepBase {
 	
@@ -20,7 +20,7 @@ public class AyudaSteps extends StepBase {
 	
 	@Validation(
 		description="Está presente la pregunta <b>#{questionText}</b>",
-		level= State.Defect)
+		level= Defect)
 	public boolean checkIsQuestionVisible(String questionText) {
 		return pageAyuda.isQuestionVisible(questionText);
 	}
@@ -34,7 +34,7 @@ public class AyudaSteps extends StepBase {
 
 	@Validation(
 		description="Está presente el texto <b>#{text}</b>",
-		level= State.Defect)
+		level= Defect)
 	public boolean checkIsTextVisible(String text) {
 		return pageAyuda.isTextVisible(text);
 	}

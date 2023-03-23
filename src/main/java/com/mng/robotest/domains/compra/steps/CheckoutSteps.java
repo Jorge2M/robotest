@@ -9,7 +9,6 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.domains.base.StepBase;
@@ -27,6 +26,8 @@ import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class CheckoutSteps extends StepBase {
 
@@ -106,7 +107,7 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation (
 		description="Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	public boolean validateLoadingDisappears(int seconds) {
 		waitMillis(200); //Damos tiempo a que aparezca la capa de "Cargando"
 		return (pageCheckoutWrapper.isNoDivLoadingUntil(seconds));
@@ -130,11 +131,11 @@ public class CheckoutSteps extends StepBase {
 	 	
 	 	checks.add(
 			"El precio (" + precioScreen + ") existe y es > 0",
-			(importe!=null && importe>0), State.Defect);
+			(importe!=null && importe>0), Defect);
 		
 	 	checks.add(
 			"El precio contiene la divisa <b>Kn</b>",
-			precioScreen.contains("Kn"), State.Defect);
+			precioScreen.contains("Kn"), Defect);
 	 	
 		return checks;
 	}
@@ -148,11 +149,11 @@ public class CheckoutSteps extends StepBase {
 	 	
 	 	checks.add(
 			"El precio (" + precioScreenEuros + ") existe y es > 0",
-			(importeEuros!=null && importeEuros>0), State.Defect);
+			(importeEuros!=null && importeEuros>0), Defect);
 		
 	 	checks.add(
 			"El precio contiene la divisa <b>€</b>",
-			precioScreenEuros.contains("€"), State.Defect);
+			precioScreenEuros.contains("€"), Defect);
 	 	
 	 	return checks;
 	}
@@ -177,7 +178,7 @@ public class CheckoutSteps extends StepBase {
 	 	checks.add(
 			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país " + 
 			"(" + dataTest.getPais().getListPagosForTest(app, isEmpl).size() + ")",
-			pageCheckoutWrapper.isNumMetodosPagoOK(isEmpl), State.Warn);		
+			pageCheckoutWrapper.isNumMetodosPagoOK(isEmpl), Warn);		
 		return checks;
 	}
 	
@@ -193,7 +194,7 @@ public class CheckoutSteps extends StepBase {
 				String pagoNameExpected = listPagos.get(i).getNombre(channel, app);
 			 	checks.add(
 					"Aparece el logo/pestaña asociado al pago <b>" + pagoNameExpected + "</b>",
-					pageCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected), State.Defect);	
+					pageCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected), Defect);	
 			}
 		}   
 		
@@ -271,14 +272,14 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation (
 		description="Se hace visible el texto bajo el método de pago: #{nombrePago} (lo esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsVisibleTextUnderPayment(@SuppressWarnings("unused") String nombrePago, Pago pago, int seconds) {
 		return (pageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, seconds));
 	}
 	
 	@Validation (
 		description="Aparece el botón de \"Confirmar Compra\"",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateIsPresentButtonCompraDesktop() {
 		return (pageCheckoutWrapper.getPage1DktopCheckout().isPresentButtonConfPago());
 	}
@@ -317,7 +318,7 @@ public class CheckoutSteps extends StepBase {
 
 	@Validation (
 		description="Está disponible una tarjeta guardada de tipo #{tipoTarjeta}",
-		level=State.Warn)
+		level=Warn)
 	public boolean isTarjetaGuardadaAvailable(String tipoTarjeta) {
 		return (pageCheckoutWrapper.isAvailableTrjGuardada(tipoTarjeta));
 	}
@@ -350,7 +351,7 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkAfterClickVerResumen(int seconds) {
 		return (pageCheckoutWrapper.getPage2MobilCheckout().isClickableButtonFinalizarCompraUntil(seconds));
 	}
@@ -388,23 +389,23 @@ public class CheckoutSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Aparece el campo de introducción del primer apellido (lo esperamos hasta " + seconds + " segundos)",
-			pageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(seconds), State.Defect);
+			pageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(seconds), Defect);
 		
 		boolean isPresentInputDni = pageCheckoutWrapper.isPresentInputDNIPromoEmpl();
 		if (accesoEmpl.getNif()!=null) {
 		 	checks.add(
 				"Aparece el campo de introducción del DNI/Pasaporte",
-				isPresentInputDni, State.Defect);
+				isPresentInputDni, Defect);
 		} else {
 		 	checks.add(
 				"Noparece el campo de introducción del DNI/Pasaporte",
-				!isPresentInputDni, State.Defect);
+				!isPresentInputDni, Defect);
 		}
 		
 		boolean isPresentInputFechaNac = pageCheckoutWrapper.isPresentDiaNaciPromoEmpl();
 	 	checks.add(
 			"No aparece el campo de introducción de la fecha de nacimiento",
-			!isPresentInputFechaNac, State.Defect);	
+			!isPresentInputFechaNac, Defect);	
 		
 		return checks;
 	}
@@ -457,14 +458,14 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el banco \"#{ombreBanco}\" en el cuadro de selección",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsVisibleBank(String nombreBanco) {
 		return (pageCheckoutWrapper.isBancoSeleccionado(nombreBanco));
 	}
 
 	@Validation (
 		description="Aparece el botón que permite aplicar los Loyalty Points",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateBlockLoyalty() {
 		return (pageCheckoutWrapper.isVisibleButtonForApplyLoyaltyPoints());
 	}
@@ -492,7 +493,7 @@ public class CheckoutSteps extends StepBase {
 		description=
 			"Se aplica el descuento de <b>#{descuento}</b> al subtotal inicial de #{subtotalInicial} " + 
 			"(lo esperamos hasta #{seconds})",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateLoyaltyPointsDiscountDesktopUntil(
 			float descuento, float subtotalInicial, int seconds) {
 		
@@ -516,7 +517,7 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece un descuento aplicado de #{descuento} (lo esperamos hasta #{seconds})",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			float discountApplied = UtilsMangoTest.round(pageCheckoutWrapper.getDiscountLoyaltyAppliedMobil(), 2);

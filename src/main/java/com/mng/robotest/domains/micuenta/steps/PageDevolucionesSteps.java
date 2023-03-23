@@ -2,12 +2,13 @@ package com.mng.robotest.domains.micuenta.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.pageobject.shop.PageDevoluciones;
 import com.mng.robotest.test.pageobject.shop.PageDevoluciones.Devolucion;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageDevolucionesSteps extends StepBase {
 
@@ -18,19 +19,19 @@ public class PageDevolucionesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de devoluciones",
-			pageDevoluciones.isPage(), State.Defect);
+			pageDevoluciones.isPage(), Defect);
 		
 		checks.add(
 			"Aparece la opción de " + Devolucion.EN_TIENDA.getLiteral(),
-			Devolucion.EN_TIENDA.isPresentLink(driver), State.Defect);
+			Devolucion.EN_TIENDA.isPresentLink(driver), Defect);
 		
 		checks.add(
 			"Aparece la opcion de " + Devolucion.EN_DOMICILIO.getLiteral(),
-			Devolucion.EN_DOMICILIO.isPresentLink(driver), State.Defect);
+			Devolucion.EN_DOMICILIO.isPresentLink(driver), Defect);
 		
 		checks.add(
 			"Aparece la opción de " + Devolucion.PUNTO_CELERITAS.getLiteral(),
-			Devolucion.EN_DOMICILIO.isPresentLink(driver), State.Defect);
+			Devolucion.EN_DOMICILIO.isPresentLink(driver), Defect);
 		
 		return checks;
 	}

@@ -2,7 +2,6 @@ package com.mng.robotest.domains.compra.steps.envio;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -15,6 +14,8 @@ import com.mng.robotest.domains.compra.pageobjects.envio.TipoTransporteEnum.Tipo
 import com.mng.robotest.domains.compra.steps.Page1EnvioCheckoutMobilSteps;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.datastored.DataPago;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecMetodoEnvioSteps extends StepBase {
 
@@ -47,11 +48,11 @@ public class SecMetodoEnvioSteps extends StepBase {
 		int seconds = 5;
 	  	checks.add(
 			"Desaparece la capa de Loading  (lo esperamos hasta " + seconds + " segundos)",
-			new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), State.Warn);
+			new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
 	  	
 	  	checks.add(
 			"Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>",
-			secMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, seconds), State.Warn);
+			secMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, seconds), Warn);
 	  	
 	  	return checks;
 	}

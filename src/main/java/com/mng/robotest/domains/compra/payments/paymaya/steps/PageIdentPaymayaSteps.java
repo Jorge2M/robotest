@@ -2,10 +2,10 @@ package com.mng.robotest.domains.compra.payments.paymaya.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.payments.paymaya.pageobjects.PageIdentPaymaya;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageIdentPaymayaSteps extends PageBase {
 
@@ -13,7 +13,7 @@ public class PageIdentPaymayaSteps extends PageBase {
 	
 	@Validation (
 		description="Aparece la página de identificación en PayMaya",
-		level=State.Warn)
+		level=Warn)
 	public boolean checkPage() {
 		return pageIdentPaymaya.isPage();
 	}

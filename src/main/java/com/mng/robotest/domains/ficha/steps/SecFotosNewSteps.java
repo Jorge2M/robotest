@@ -1,13 +1,13 @@
 package com.mng.robotest.domains.ficha.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.ficha.beans.DataFoto;
 import com.mng.robotest.domains.ficha.pageobjects.SecFotosNew;
 import com.mng.robotest.domains.ficha.pageobjects.TipoImagenProducto;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecFotosNewSteps extends StepBase {
 
@@ -31,7 +31,7 @@ public class SecFotosNewSteps extends StepBase {
 			dataFoto.typeImage==TipoImagenProducto.DETALLES || 
 			dataFoto.typeImage==TipoImagenProducto.DETALLES_9 || 
 			dataFoto.typeImage==TipoImagenProducto.OUTFIT || 
-			dataFoto.typeImage==TipoImagenProducto.BODEGON), State.Defect);
+			dataFoto.typeImage==TipoImagenProducto.BODEGON), Defect);
 	 	
 	 	return checks;
 	}
@@ -49,7 +49,7 @@ public class SecFotosNewSteps extends StepBase {
 		int numFotos1rstLine = secFotosNew.getNumFotosLine(1);
 	 	checks.add(
 			"La 1a línea tiene " + numFotosExpected1rstLineA + " o " + numFotosExpected1rstLineB + " fotos",
-			numFotos1rstLine==numFotosExpected1rstLineA || numFotos1rstLine==numFotosExpected1rstLineB, State.Warn);
+			numFotos1rstLine==numFotosExpected1rstLineA || numFotos1rstLine==numFotosExpected1rstLineB, Warn);
 	 	
 	 	int numLinesFotos = secFotosNew.getNumLinesFotos();
 	 	int numFotosLastLine = 0;
@@ -59,7 +59,7 @@ public class SecFotosNewSteps extends StepBase {
 		int minFotosExpectedLastLine = 5;
 	 	checks.add(
 			"La última línea tiene < " + minFotosExpectedLastLine + " fotos",
-			numFotosLastLine<minFotosExpectedLastLine, State.Warn);
+			numFotosLastLine<minFotosExpectedLastLine, Warn);
 	 	
 	 	if (numLinesFotos > 2) {
 	 		boolean allLinesWith2fotos = true;
@@ -72,7 +72,7 @@ public class SecFotosNewSteps extends StepBase {
 			}
 		 	checks.add(
 				"Las líneas intermedias tienen 2 fotos",
-				allLinesWith2fotos, State.Warn);
+				allLinesWith2fotos, Warn);
 	 	}	
 	 	
 	 	return checks;

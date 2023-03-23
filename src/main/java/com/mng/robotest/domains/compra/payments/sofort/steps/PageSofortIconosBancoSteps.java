@@ -1,10 +1,11 @@
 package com.mng.robotest.domains.compra.payments.sofort.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.sofort.pageobjects.PageSofort1rst;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 /**
  * Page1: la página inicial de Sofort (la posterior a la selección del botón "Confirmar Pago")
@@ -17,7 +18,7 @@ public class PageSofortIconosBancoSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la 1a página de Sofort (la esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	public boolean validateIsPageUntil(int seconds) {
 		return pageSofort1rst.isPageVisibleUntil(seconds);
 	}

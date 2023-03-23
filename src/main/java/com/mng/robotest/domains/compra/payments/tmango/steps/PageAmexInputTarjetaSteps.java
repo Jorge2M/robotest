@@ -2,11 +2,12 @@ package com.mng.robotest.domains.compra.payments.tmango.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.tmango.pageobjects.PageAmexInputTarjeta;
 import com.mng.robotest.test.utils.ImporteScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageAmexInputTarjetaSteps extends StepBase {
 	
@@ -19,22 +20,22 @@ public class PageAmexInputTarjetaSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Aparece la pasarela de pagos de RedSys (la esperamos hasta " + seconds + " segundos)",
-			pageAmexInputTarjeta.isPasarelaRedSysUntil(seconds), State.Defect); 
+			pageAmexInputTarjeta.isPasarelaRedSysUntil(seconds), Defect); 
 	 	
 	 	checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
 	 	
 	 	checks.add(
 			"Aparecen los campos de introducción de tarjeta, fecha caducidad y código de seguridad",
 			pageAmexInputTarjeta.isPresentNumTarj() &&
 			pageAmexInputTarjeta.isPresentInputMesCad() &&
 			pageAmexInputTarjeta.isPresentInputAnyCad() &&
-			pageAmexInputTarjeta.isPresentInputCvc(), State.Warn); 
+			pageAmexInputTarjeta.isPresentInputCvc(), Warn); 
 	 	
 	 	checks.add(
 			"Figura un botón de Aceptar",
-			pageAmexInputTarjeta.isPresentPagarButton(), State.Defect); 
+			pageAmexInputTarjeta.isPresentPagarButton(), Defect); 
 	 	
 	 	return checks;
 	}

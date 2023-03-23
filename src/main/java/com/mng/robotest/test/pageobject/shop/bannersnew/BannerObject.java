@@ -84,10 +84,10 @@ public abstract class BannerObject extends PageBase {
 	}
 	
 	private String getTextBannerNormalized(String texto) {
-		texto = texto.replaceAll("\t", "").trim();
+		texto = texto.replace("\t", "").trim();
 		while (texto.contains("\n\n") || texto.contains("\n ")) {
-			texto = texto.replaceAll("\n\n", "\n");
-			texto = texto.replaceAll("\n ", "\n");
+			texto = texto.replace("\n\n", "\n");
+			texto = texto.replace("\n ", "\n");
 		}
 		return texto;
 	}

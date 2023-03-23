@@ -16,6 +16,8 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 import com.mng.robotest.test.utils.UtilsTest;
 import com.mng.robotest.conftestmaker.AppEcom;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class CheckerAnalitica implements Checker {
 
 	public ChecksTM check(WebDriver driver) {
@@ -44,13 +46,13 @@ public class CheckerAnalitica implements Checker {
 		if (inputParamsSuite!=null && 
 			inputParamsSuite.getApp()!=null &&
 			inputParamsSuite.getApp()==AppEcom.votf) {
-			return State.Info;
+			return Info;
 		}
 		
 		//TODO actualmente hay muchos errores -> reportar a Alberte
 		//mientras tanto lo ponemos en Warning
 		if (UtilsTest.todayBeforeDate("2023-04-01")) {
-			return State.Warn;
+			return Warn;
 		}
 		return GenericCheck.ANALITICA.getLevel();
 	}

@@ -12,16 +12,16 @@ import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.ficha.pageobjects.SecModalPersonalizacion.ModalElement;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 import org.openqa.selenium.WebElement;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecModalPersonalizacionSteps extends PageBase {
 
 	public boolean checkArticleCustomizable() {
-		return checkArticleCustomizable(State.Defect);
+		return checkArticleCustomizable(Defect);
 	}
 	
 	public boolean checkArticleCustomizable(State levelError) {
@@ -60,19 +60,19 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		checks.add(
 			"Aparece el modal de personalización con el botón <b>Siguiente</b> (lo esperamos hasta " + seconds + " segundos)",
 			isBotonSiguienteVisible(seconds), 
-			State.Warn);
+			Warn);
 		
 		checks.add(
 			"Aparece la opción <b>Un icono</b> (la esperamos hasta " + seconds + " segundos)",
 			state(Visible, ModalElement.BUTTON_UN_ICONO.getBy(channel)).wait(seconds).check(), 
-			State.Warn);
+			Warn);
 	
 		return checks;
 	}
 
 	@Validation(
 		description="1) Aparece la cabecera correspondiente a la personalizacion de la prenda",
-		level=State.Warn)
+		level=Warn)
 	private boolean validationInitMblCustomization(int seconds, ModalElement element) {
 		return (state(Visible, element.getBy(channel)).wait(seconds).check());
 	}
@@ -87,7 +87,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 
 	@Validation(
 		description="1) Aparece la lista de iconos seleccionables",
-		level=State.Warn)
+		level=Warn)
 	public boolean validationIconSelection(int seconds) {
 		return (state(Visible, ModalElement.ICON_SELECTION.getBy(channel)).wait(seconds).check());
 	}
@@ -110,11 +110,11 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		checks.add(
 			"Aparece seleccionado el primer icono",
 			state(Visible, ModalElement.ICON_SELECTION.getBy()).wait(seconds).check(), 
-			State.Warn);
+			Warn);
 		checks.add(
 			"Podemos confirmar nuestra seleccion",
 			isBotonSiguienteVisible(seconds),
-			State.Warn);
+			Warn);
 		return checks;
 	}
 
@@ -145,12 +145,12 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		checks.add(
 			"Aparecen las opciones correspondientes a la ubicación del bordado",
 			state(Visible, ModalElement.POSITION_BUTTON.getBy()).wait(seconds).check(),
-			State.Warn);
+			Warn);
 		checks.add(
 			"Podemos confirmar nuestra seleccion",
 			isBotonSiguienteVisible(seconds),
 			//state(Visible, ModalElement.Siguiente.getBy()).wait(seconds).check(),
-			State.Warn);
+			Warn);
 		return checks;
 	}
 
@@ -161,11 +161,11 @@ public class SecModalPersonalizacionSteps extends PageBase {
 		checks.add(
 			"Aparecen los botones correspondientes a los colores",
 			state(Visible, ModalElement.COLORS_CONTAINER.getBy()).wait(seconds).check(),
-			State.Warn);
+			Warn);
 		checks.add(
 			"Aparece el botón de \"Confirmar\"",
 			state(Present, ModalElement.SIGUIENTE.getBy()).wait(seconds).check(),
-			State.Warn);
+			Warn);
 		return checks;
 	}
 
@@ -179,7 +179,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 
 	@Validation(
 		description="1) Aparecen los botones con los posibles tamaños del bordado",
-		level=State.Warn)
+		level=Warn)
 	private boolean validateSizeList(int seconds) {
 		return (state(Visible, ModalElement.SIZE_CONTAINER.getBy(channel)).wait(seconds).check());
 	}
@@ -194,7 +194,7 @@ public class SecModalPersonalizacionSteps extends PageBase {
 
 	@Validation(
 		description="1) Aparece el botón para añadir a la bolsa",
-		level=State.Warn)
+		level=Warn)
 	private boolean validateAddBag(int seconds) {
 		return isBotonSiguienteVisible(seconds);
 	}
@@ -212,14 +212,14 @@ public class SecModalPersonalizacionSteps extends PageBase {
 
 	@Validation(
 		description="1) En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean validateCustomizationProof(int seconds) {
 		return (state(Visible, ModalElement.BOLSA_PROOF.getBy(channel)).wait(seconds).check());
 	}
 
 	@Validation(
 		description="Es visible el apartado <b>#{level}</b>",
-		level=State.Warn)
+		level=Warn)
 	public boolean validateCabeceraStep(int level) {
 		switch (level) {
 		case 1:

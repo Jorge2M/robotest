@@ -1,13 +1,14 @@
 package com.mng.robotest.domains.compra.payments.amazon.steps;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.amazon.pageobjects.PageAmazonIdent;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.utils.ImporteScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageAmazonIdentSteps extends StepBase {
 	
@@ -18,16 +19,16 @@ public class PageAmazonIdentSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece una página con el logo de Amazon",
-			pageAmazonIdent.isLogoAmazon(), State.Warn);
+			pageAmazonIdent.isLogoAmazon(), Warn);
 		
 		checks.add(
 			"Aparece los campos para la identificación (usuario/password)",
-			pageAmazonIdent.isPageIdent(), State.Defect);
+			pageAmazonIdent.isPageIdent(), Defect);
 		
 		if (channel==Channel.desktop) {
 			checks.add(
 				"En la página resultante figura el importe total de la compra (" + dataPedido.getImporteTotal() + ")",
-				ImporteScreen.isPresentImporteInScreen(dataPedido.getImporteTotal(), dataTest.getCodigoPais(), driver), State.Warn);
+				ImporteScreen.isPresentImporteInScreen(dataPedido.getImporteTotal(), dataTest.getCodigoPais(), driver), Warn);
 		}
 		return checks;
 	}

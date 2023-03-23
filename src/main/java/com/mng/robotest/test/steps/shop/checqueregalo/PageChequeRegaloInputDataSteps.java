@@ -3,7 +3,6 @@ package com.mng.robotest.test.steps.shop.checqueregalo;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.steps.CheckoutSteps;
@@ -11,6 +10,8 @@ import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputDataNew;
 import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.*;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageChequeRegaloInputDataSteps extends PageBase {
 
@@ -32,7 +33,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 
 	@Validation (
 		description="Aparece el cuadro de introduccion de datos determinado (lo esperamos hasta #{maxSegundos} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkInputDataTarjeta(int maxSegundos) {
 		return ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).isInputTarjetaVisible(maxSegundos);
 	}
@@ -49,7 +50,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	
 	@Validation (
 		description="Es visible el campo de <b>cvv</b> (lo esperamos hasta #{seconds} segundos)</br>",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkInputOtherData(int seconds) {
 		var pageNew = ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData);
 		return pageNew.isVisibleCvv(seconds);
@@ -72,7 +73,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	
 	@Validation (
 		description="La tarjeta introducida no tiene saldo disponible",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkConsultaSaldoTarjeta(int seconds) {
 		return ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).isTarjetaWithoutSaldo(seconds);
 	}
@@ -87,7 +88,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 
 	@Validation (
 		description="Estamos en la página inicial (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsInitPage(int seconds) {
 		return ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).isPageCorrectUntil(seconds);
 	}
@@ -109,7 +110,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	
 	@Validation (
 		description="Aparece la capa para introducir los datos del cheque regalo (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsVisibleCapaInputCheque(int seconds) {
 		return pageChequeRegaloInputData.isVisibleDataInput(seconds);
 	}

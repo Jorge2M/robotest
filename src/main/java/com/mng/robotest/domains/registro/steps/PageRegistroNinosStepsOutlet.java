@@ -2,12 +2,13 @@ package com.mng.robotest.domains.registro.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.registro.beans.ListDataNinos;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroNinosOutlet;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageRegistroNinosStepsOutlet extends StepBase {
 	
@@ -19,10 +20,10 @@ public class PageRegistroNinosStepsOutlet extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + seconds + " segundos)",
-			pageRegistroNinos.isPageUntil(seconds), State.Defect);
+			pageRegistroNinos.isPageUntil(seconds), Defect);
 		checks.add(
 			"Aparecen inputs para introducir <b>" + numNinos + "</b>",
-			pageRegistroNinos.getNumInputsNameNino()==numNinos, State.Defect);
+			pageRegistroNinos.getNumInputsNameNino()==numNinos, Defect);
 		return checks;		
 	}
 	

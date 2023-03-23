@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.compra.steps.envio;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -12,6 +11,8 @@ import com.mng.robotest.domains.compra.pageobjects.envio.SecConfirmDatos;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPedido;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class SecConfirmDatosSteps extends StepBase {
 
 	private final ModalDroppoints modalDroppoints = new ModalDroppoints();
@@ -19,7 +20,7 @@ public class SecConfirmDatosSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible la capa de confirmación de los datos (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateIsVisible(int seconds) {
 		return (secConfirmDatos.isVisibleUntil(seconds));
 	}
@@ -54,18 +55,18 @@ public class SecConfirmDatosSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Desaparece la capa de Droppoints (lo esperamos hasta " + seconds + " segundos)",
-			modalDroppoints.isInvisibleUntil(seconds), State.Warn);
+			modalDroppoints.isInvisibleUntil(seconds), Warn);
 		
 		DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();
 		String textDireccionEnvioCompleta = new PageCheckoutWrapper().getTextDireccionEnvioCompleta();
 		dataPedido.setDireccionEnvio(textDireccionEnvioCompleta);
 		checks.add(
 			"Se modifica la dirección de envío por la del Delivery Point (" + dataDp.getDireccion() + ")",
-			textDireccionEnvioCompleta.contains(dataDp.getDireccion()), State.Defect);
+			textDireccionEnvioCompleta.contains(dataDp.getDireccion()), Defect);
 		
 		checks.add(
 			"Se modifica el código postal de envío por el del Delivery Point (" + dataDp.getCPandPoblacion() + ")",
-			textDireccionEnvioCompleta.contains(dataDp.getCPandPoblacion()), State.Defect);
+			textDireccionEnvioCompleta.contains(dataDp.getCPandPoblacion()), Defect);
 		
 		return checks;
 	}

@@ -1,14 +1,11 @@
 package com.mng.robotest.domains.ficha.steps;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
@@ -34,6 +31,8 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 import java.util.Arrays;
 import java.util.List;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageFichaSteps extends StepBase {
 
@@ -71,18 +70,18 @@ public class PageFichaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 				"Aparece la página correspondiente a la ficha del artículo " + refArticulo,
-				pageFicha.isFichaArticuloUntil(refArticulo, 0), State.Defect);
+				pageFicha.isFichaArticuloUntil(refArticulo, 0), Defect);
 
 		checks.add(
 				"Aparece algún color no disponible",
-				state(Present, ColorType.UNAVAILABLE.getBy(), driver).check(), State.Defect);
+				state(Present, ColorType.UNAVAILABLE.getBy(), driver).check(), Defect);
 
 		return checks;
 	}
 
 	@Validation (
 		description="Aparece la página de Ficha",
-		level=State.Warn)
+		level=Warn)
 	public boolean validateIsFichaCualquierArticulo() {
 		return (pageFicha.isPageUntil(0));
 	}
@@ -95,14 +94,14 @@ public class PageFichaSteps extends StepBase {
 			checks.add(
 				"Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() +
 				" (la esperamos hasta " + seconds + " segundos)",
-				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), seconds), State.Defect);
+				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), seconds), Defect);
 		}
 
 		if (datosArticulo.availableNombre()) {
 			String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt().trim();
 			checks.add(
 				"Como nombre del artículo aparece el seleccionado: " + datosArticulo.getNombre(),
-				datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())==0, State.Warn);
+				datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())==0, Warn);
 		}
 
 		return checks;
@@ -133,7 +132,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description="Está seleccionado el color con código <b>#{codigoColor}<b>",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsSelectedColor(String codigoColor) {
 		String codigoColorPage = pageFicha.getSecDataProduct().getCodeColor(ColorType.SELECTED);
 		return (codigoColorPage.contains(codigoColor));
@@ -159,7 +158,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description="Queda seleccionada la talla <b>#{talla.name()}</b> (esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkTallaSelected(Talla talla, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			Talla tallaSelected = pageFicha.getTallaSelected();
@@ -184,12 +183,12 @@ public class PageFichaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 				"No aparece el botón \"COMPRAR\"",
-				!secBolsa.isVisibleBotonComprar(), State.Defect);
+				!secBolsa.isVisibleBotonComprar(), Defect);
 
 		boolean isVisibleAvisame = pageFicha.getSecDataProduct().isVisibleCapaAvisame();
 		checks.add(
 				"Aparece la capa de introducción de avísame",
-				isVisibleAvisame, State.Defect);
+				isVisibleAvisame, Defect);
 
 		return checks;
 	}
@@ -226,18 +225,18 @@ public class PageFichaSteps extends StepBase {
 		if (isTallaUnica) {
 			checks.add(
 					"NO aparece un aviso indicando que hay que seleccionar la talla",
-					!isVisibleAviso, State.Defect);
+					!isVisibleAviso, Defect);
 		} else {
 			checks.add(
 					"SÍ aparece un aviso indicando que hay que seleccionar la talla",
-					isVisibleAviso, State.Defect);
+					isVisibleAviso, Defect);
 		}
 		return checks;
 	}
 
 	@Validation (
 		description="Se hace visible la lista de tallas",
-		level=State.Warn)
+		level=Warn)
 	public boolean checkListaTallasVisible() {
 		return (pageFicha.getSecDataProduct().getSecSelTallas().isVisibleListTallasForSelectUntil(0));
 	}
@@ -288,7 +287,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description="No aparece el icono de favorito marcado al cambiar de color",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateNotVisibleButtonFavoritos(ActionFavButton buttonType) {
 		switch (buttonType) {
 			case REMOVE:
@@ -305,12 +304,12 @@ public class PageFichaSteps extends StepBase {
 		int seconds1 = 3;
 		checks.add(
 				"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + seconds1 + " segundos)",
-				pageFicha.isVisibleDivAnadiendoAFavoritosUntil(seconds1), State.Info);
+				pageFicha.isVisibleDivAnadiendoAFavoritosUntil(seconds1), Info);
 
 		int seconds2 = 3;
 		checks.add(
 				"La capa superior acaba desapareciendo (lo esperamos hasta " + seconds2 + " segundos)",
-				pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(seconds2), State.Warn);
+				pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(seconds2), Warn);
 
 		return checks;
 	}
@@ -325,7 +324,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description="Aparece el botón de #{buttonType} a Favoritos",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateVisibleButtonFavoritos(ActionFavButton buttonType) {
 		switch (buttonType) {
 			case REMOVE:
@@ -338,14 +337,14 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description="Es visible el link de <b>Disponibilidad en Tienda</b>",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkLinkDispTiendaVisible() {
 		return pageFicha.isVisibleBuscarEnTiendaLink();
 	}
 
 	@Validation (
 		description="Es invisible el link de <b>Disponibilidad en Tienda</b>",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkLinkDispTiendaInvisible() {
 		return !pageFicha.isVisibleBuscarEnTiendaLink();
 	}
@@ -386,7 +385,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description="Es visible el slider de artículos de tipo <b>#{typeSlider}</b>",
-		level=State.Info,
+		level=Info,
 		store=StoreType.None)
 	public boolean checkSliderVisible(Slider typeSlider) {
 		return (pageFicha.isVisibleSlider(typeSlider));
@@ -394,7 +393,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description="El número de artículos del slider de tipo <b>#{typeSlider}</b> es > #{numArtMin}",
-		level=State.Warn)
+		level=Warn)
 	public boolean checkNumArticlesSlider(int numArtMin, Slider typeSlider) {
 		return (pageFicha.getNumArtVisiblesSlider(typeSlider) > numArtMin);
 	}
@@ -407,16 +406,16 @@ public class PageFichaSteps extends StepBase {
 		if (locationArt.isFirstInGalery()) {
 			checks.add(
 					"No es visible el link <b>Prev</b> (lo esperamos hasta " + seconds + " segundos)",
-					!isVisiblePrevLink, State.Warn);
+					!isVisiblePrevLink, Warn);
 		} else {
 			checks.add(
 					"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + seconds + " segundos)",
-					isVisiblePrevLink, State.Warn);
+					isVisiblePrevLink, Warn);
 		}
 		if (app==AppEcom.outlet || channel==Channel.desktop) {
 			checks.add(
 					"Es visible el link <b>Next</b>",
-					pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.NEXT, 0), State.Warn);
+					pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.NEXT, 0), Warn);
 		}
 		return checks;
 	}
@@ -441,7 +440,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description="Existe más de una imagen de carrusel a la izquierda de la imagen principal",
-		level=State.Warn)
+		level=Warn)
 	public boolean validaExistsImgsCarruselIzqFichaOld() {
 		return (((PageFichaDevice)pageFicha).getNumImgsCarruselIzq() >= 2);
 	}
@@ -459,7 +458,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkImgCentralIsAssociatedToCarruselSelect(String pngImagenCarrusel) {
 		return (((PageFichaDevice)pageFicha).srcImagenCentralCorrespondsToImgCarrusel(pngImagenCarrusel));
 	}
@@ -478,11 +477,11 @@ public class PageFichaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 				"Se aplica un Zoom sobre la imagen central",
-				((PageFichaDevice)pageFicha).isVisibleFichaConZoom(), State.Defect);
+				((PageFichaDevice)pageFicha).isVisibleFichaConZoom(), Defect);
 
 		checks.add(
 				"La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal,
-				((PageFichaDevice)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal), State.Defect);
+				((PageFichaDevice)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal), Defect);
 
 		return checks;
 	}
@@ -496,7 +495,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkZoomImageCentralDissapeared() {
 		return !((PageFichaDevice)pageFicha).isVisibleFichaConZoom();
 	}
@@ -506,12 +505,12 @@ public class PageFichaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Existen el bloque correspondiente a las <b>BreadCrumb</b>",
-			new SecDetalleProduct().isVisibleBreadcrumbs(0), State.Defect);
+			new SecDetalleProduct().isVisibleBreadcrumbs(0), Defect);
 
 		String urlGaleryBC = new SecDetalleProduct().getUrlItemBreadCrumb(ItemBreadcrumb.GALERIA);
 		checks.add(
 			"El link correspondiente a la Galería del artículo linca a la URL " + urlGaleryOrigin,
-			urlGaleryOrigin.contains(urlGaleryBC), State.Warn);
+			urlGaleryOrigin.contains(urlGaleryBC), Warn);
 
 		return checks;
 	}

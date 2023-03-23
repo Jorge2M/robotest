@@ -5,7 +5,6 @@ import java.net.URI;
 import org.openqa.selenium.By;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -22,6 +21,7 @@ import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test.steps.shop.genericchecks.Checker;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecBannersSteps extends StepBase {
 	
@@ -97,7 +97,7 @@ public class SecBannersSteps extends StepBase {
 		var allPages = new AllPages(); 
 	 	checks.add(
 	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + seconds1 + " segundos)",
-	 		allPages.validateUrlNotMatchUntil(urlPagPadre, seconds1), State.Defect);  
+	 		allPages.validateUrlNotMatchUntil(urlPagPadre, seconds1), Defect);  
 	 	
 	 	boolean urlEqual = false;
 	 	boolean elemsEqual = false;
@@ -109,7 +109,7 @@ public class SecBannersSteps extends StepBase {
 	 		"La página cambia: <br>" + 
 	 		"- La URL cambia o <br>" + 
 	 		"- El número de elementos DOM ha variado (en " + marginElements + " o más) con respecto al original (" + elementosPagPadre + ")",
-	 		(!urlEqual || !elemsEqual), State.Warn); 
+	 		(!urlEqual || !elemsEqual), Warn); 
 	 	
 	 	Checker checkImagesBroken = Checker.make(GenericCheck.IMGS_BROKEN);
 	 	ChecksTM checksImgs = checkImagesBroken.check(driver);
@@ -119,7 +119,7 @@ public class SecBannersSteps extends StepBase {
 		URI uriPagActual = new URI(urlPagActual);
 	 	checks.add(
 	 		"El dominio de la página se corresponde con el de la página padre:" + uriPagPadre.getHost(),
-	 		uriPagPadre.getHost().compareTo(uriPagActual.getHost())==0, State.Defect);	
+	 		uriPagPadre.getHost().compareTo(uriPagActual.getHost())==0, Defect);	
 	 	
 	 	return checks;
 	}
@@ -132,7 +132,7 @@ public class SecBannersSteps extends StepBase {
 			"- Banners<br>" + 
 			"- Ficha<br>" +
 			"- Bloque de contenido con imágenes o página acceso",
-		level=State.Warn)
+		level=Warn)
 	public boolean validacionesBannerEstandar(int seconds, Channel channel) {
 		for (int i=0; i<seconds; i++) {
 			if (validacionesBannerEstandar(channel)) {
@@ -153,7 +153,7 @@ public class SecBannersSteps extends StepBase {
 
 	@Validation (
 		description="El bloque de contenido (homeContent o bannerHome) existe y tiene >= 1 banner o >=1 map o >=1 items-edit",
-		level=State.Warn)
+		level=Warn)
 	public boolean validaBannEnContenido() {
 		boolean existBanners = managerBannersScreen.existBanners();
 		boolean existsMaps = pageLanding.hayMaps();

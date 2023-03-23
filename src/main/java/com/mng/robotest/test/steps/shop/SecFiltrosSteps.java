@@ -9,7 +9,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
@@ -17,6 +16,8 @@ import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltros;
 import com.mng.robotest.test.pageobject.shop.menus.MenuLateralDesktop;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecFiltrosSteps extends StepBase {
 
@@ -45,15 +46,15 @@ public class SecFiltrosSteps extends StepBase {
 	 	checks.add(
 			"En la URL (*) aparece el parámetro c= que contiene los códigos de color <b>" + 
 			listCodColors.toString() + "</b> (*) " + currentUrl + "<br>",
-			SecFiltros.checkUrlAfterFilterContainsColors(colorsSelected, currentUrl), State.Warn);		
+			SecFiltros.checkUrlAfterFilterContainsColors(colorsSelected, currentUrl), Warn);		
 		
 	 	checks.add(
 			"Aparece una pantalla en la que el title contiene \"" + litMenu.toUpperCase(),
-			driver.getTitle().toUpperCase().contains(litMenu.toUpperCase()), State.Warn);
+			driver.getTitle().toUpperCase().contains(litMenu.toUpperCase()), Warn);
 	 	
 	 	checks.add(
 			"En pantalla aparecen >1 artículos (están apareciendo " + numArticulos1page + ")",
-			numArticulos1page>1, State.Warn);
+			numArticulos1page>1, Warn);
 	 	
 	 	return checks;
 	}

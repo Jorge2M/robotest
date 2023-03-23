@@ -2,7 +2,6 @@ package com.mng.robotest.domains.registro.steps;
 
 import java.util.Map;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroAddressDataOutlet;
@@ -10,6 +9,8 @@ import com.mng.robotest.domains.registro.pageobjects.PageRegistroDirecOutlet;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageRegistroDirecStepsOutlet extends StepBase {
 	
@@ -22,12 +23,12 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 		int seconds = 3;
 		checks.add(
 			"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + seconds + " segundos)",
-			pageRegistroAddressData.isPageUntil(seconds), State.Warn);
+			pageRegistroAddressData.isPageUntil(seconds), Warn);
 		
 		checks.add(
 			"Si existe el desplebagle de países, en él aparece el país con código " + dataTest.getCodigoPais() + " (" + dataTest.getPais().getNombre_pais() + ")",
 			!pageRegistroAddressData.existsDesplegablePaises() || 
-			pageRegistroAddressData.isOptionPaisSelected(dataTest.getCodigoPais()), State.Warn);
+			pageRegistroAddressData.isOptionPaisSelected(dataTest.getCodigoPais()), Warn);
 		
 		return checks;
 	}
@@ -42,7 +43,7 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 
 	@Validation(
 		description="No aparece ningún mensaje de error asociado a los campos de entrada",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateInputDataOk() {
 		return (pageRegistroDirec.getNumberMsgInputInvalid() <= 0);
 	}

@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.manto.pageobjects.PageConsultaIdEans;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageConsultaIdEansSteps extends StepMantoBase {
 
@@ -19,15 +20,15 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Es visible el contenido de la pestaña Busqueda Excel",
-			pageConsultaIdEans.isVisibleDivBusquedaExcel(), State.Defect);
+			pageConsultaIdEans.isVisibleDivBusquedaExcel(), Defect);
 	 	
 	 	checks.add(
 			"Es visible el contenido de la pestaña Busqueda Rapida",
-			pageConsultaIdEans.isVisibleDivBusquedaRapida(), State.Defect);
+			pageConsultaIdEans.isVisibleDivBusquedaRapida(), Defect);
 	 	
 	 	checks.add(
 			"Es visible el título de página correcto",
-			pageConsultaIdEans.isVisibleTituloPagina(), State.Defect);
+			pageConsultaIdEans.isVisibleTituloPagina(), Defect);
 	 	
 	 	return checks;
 	}
@@ -45,17 +46,18 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 	private ChecksTM checkAfterConsultContact(List<String> pedidosPrueba) {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
-		checks.add(
-			"Se muestra la tabla de información (la esperamos un máximo de " + seconds + " segundos)",
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), State.Defect);
+		
+		checks.add(String.format(
+			"Se muestra la tabla de información (la esperamos un máximo de %s segundos)", seconds),
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), Defect);
 		
 		checks.add(
 			"El número de líneas de pedido es " + pedidosPrueba.size(),
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), State.Defect);
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), Defect);
 		
 		checks.add(
 			"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.size(),
-			pageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba), State.Defect);
+			pageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba), Defect);
 		
 		return checks;
 	}
@@ -75,15 +77,15 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 		int seconds = 2;
 		checks.add(
 			"Se muestra la tabla de información (la esperamos un máximo de " + seconds + " segundos)",
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), State.Defect);
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), Defect);
 		
 		checks.add(
 			"El número de líneas de pedido es " + pedidosPrueba.size(),
-			pageConsultaIdEans.getLineasPedido()==pedidosPrueba.size(), State.Defect);
+			pageConsultaIdEans.getLineasPedido()==pedidosPrueba.size(), Defect);
 		
 		checks.add(
 			"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.toString(),
-			pageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba), State.Defect);
+			pageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba), Defect);
 		
 		return checks;
 	}
@@ -99,7 +101,7 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 	
 	@Validation (
 		description="Se muestra la tabla de información (la esperamos un máximo de #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsTableTrackingsInformation(int seconds) {
 		return pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds);
 	}
@@ -119,15 +121,15 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 		int seconds = 2;
 		checks.add(
 			"Se muestra la tabla de información (la esperamos un máximo de " + seconds + " segundos)",
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), State.Defect);
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), Defect);
 		
 		checks.add(
 			"El número de líneas de artículos es " + articulosPrueba.size(),
-			pageConsultaIdEans.getLineasPedido()==articulosPrueba.size(), State.Defect);
+			pageConsultaIdEans.getLineasPedido()==articulosPrueba.size(), Defect);
 		
 		checks.add(
 			"Aparece una línea por cada uno de los artículos <b>" + articulosPrueba.toString(),
-			pageConsultaIdEans.isArticulosTablaCorrecto(articulosPrueba), State.Defect);
+			pageConsultaIdEans.isArticulosTablaCorrecto(articulosPrueba), Defect);
 		
 		return checks;
 	}

@@ -2,11 +2,12 @@ package com.mng.robotest.domains.compra.payments.trustpay.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.trustpay.pageobjects.PageTrustPayResult;
 import com.mng.robotest.test.utils.ImporteScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageTrustPayResultSteps extends StepBase {
 	
@@ -18,16 +19,16 @@ public class PageTrustPayResultSteps extends StepBase {
 		String textHeader = "Payment In Progress";
 	 	checks.add(
 			"Figura el encabezamiento \"" + textHeader,
-			pageTrustPayResult.headerContains(textHeader), State.Defect);
+			pageTrustPayResult.headerContains(textHeader), Defect);
 	 	
 	 	String codPais = dataTest.getCodigoPais();
 	 	checks.add(
 			"Figura el importe total de la compra (" + importeTotal + ")",
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
 	 	
 	 	checks.add(
 			"Figura el botón \"continue\"",
-			pageTrustPayResult.isPresentButtonContinue(), State.Defect);
+			pageTrustPayResult.isPresentButtonContinue(), Defect);
 	 	
 	 	return checks;
 	}

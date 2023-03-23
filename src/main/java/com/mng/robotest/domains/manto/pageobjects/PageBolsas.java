@@ -13,16 +13,16 @@ public class PageBolsas extends PageBase {
 		return "//table//tr/td[1]/a[text()[contains(.,'" + pedidoManto + "')]]";
 	}
 	
-	public String getXpathLinkIdCompraInBolsa(String pedidoManto) {
+	private String getXpathLinkIdCompraInBolsa(String pedidoManto) {
 		String xpathPedido = getXpathLinkPedidoInBolsa(pedidoManto);
 		return xpathPedido + "/../a[2]";
 	}
 		
-	public String getXpathIdTpvInBolsa(String idTpv) {
+	private String getXpathIdTpvInBolsa(String idTpv) {
 		return "//table//tr/td[8]/span[text()[contains(.,'" + idTpv + "')]]";
 	}
 	
-	public String getXpath_correoInBolsa(String correo) {
+	private String getXpathCorreoInBolsa(String correo) {
 		return "//table//tr/td[7]/span[text()[contains(.,'" + correo.toLowerCase() + "')] or text()[contains(.,'" + correo.toUpperCase() + "')]]";
 	}
 
@@ -45,7 +45,7 @@ public class PageBolsas extends PageBase {
 	}
 
 	public boolean presentCorreoInBolsa(String correo) {
-		String xpath = getXpath_correoInBolsa(correo);
+		String xpath = getXpathCorreoInBolsa(correo);
 		return state(Present, xpath).check();
 	}
 

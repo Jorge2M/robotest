@@ -2,9 +2,10 @@ package com.mng.robotest.domains.micuenta.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageInfoNewMisComprasMovil;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageInfoNewMisComprasMovilSteps extends StepBase {
 
@@ -12,7 +13,7 @@ public class PageInfoNewMisComprasMovilSteps extends StepBase {
 	
 	@Validation(
 		description="1) Aparece la página \"New!\" informativa a nivel de \"Mis Compras\"",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateIsPage() {
 		return pageInfoNewMisComprasMovil.isPage();
 	}

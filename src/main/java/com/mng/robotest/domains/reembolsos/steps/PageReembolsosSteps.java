@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.reembolsos.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -10,6 +9,8 @@ import com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta.Link;
 import com.mng.robotest.domains.reembolsos.pageobjects.PageReembolsos;
 import com.mng.robotest.domains.reembolsos.pageobjects.PageReembolsos.TypeReembolso;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageReembolsosSteps extends StepBase {
 
@@ -33,18 +34,18 @@ public class PageReembolsosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de reembolsos",
-			pageReembolsos.isPage(), State.Defect);		
+			pageReembolsos.isPage(), Defect);		
 		
 		boolean isVisibleTransferenciaSection = pageReembolsos.isVisibleTransferenciaSectionUntil(5);
 		boolean isVisibleStoreCreditSection = pageReembolsos.isVisibleStorecreditSection();
 		if (paisConSaldoCta) {
 			checks.add(
 				"El país SÍ tiene asociado Saldo en Cuenta -> Aparecen las secciones de \"Saldo en cuenta\" y \"Transferencia bancaria\"",
-				isVisibleTransferenciaSection && isVisibleStoreCreditSection, State.Defect);
+				isVisibleTransferenciaSection && isVisibleStoreCreditSection, Defect);
 		} else {
 			checks.add(
 				"El país NO tiene asociado Saldo en Cuenta -> Aparece la sección de \"Transferencia bancaria\" y no la de \"Saldo en cuenta\"",
-				isVisibleTransferenciaSection && !isVisibleStoreCreditSection, State.Defect);
+				isVisibleTransferenciaSection && !isVisibleStoreCreditSection, Defect);
 		}
 		return checks;
 	}
@@ -61,7 +62,7 @@ public class PageReembolsosSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el saldo en cuenta que esperamos: <b>#{saldoCtaEsperado}</b>",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsOkSaldoEnCuenta(float saldoCtaEsperado) {
 		float saldoCtaPage = pageReembolsos.getImporteStoreCredit();
 		return (saldoCtaEsperado==saldoCtaPage);
@@ -82,7 +83,7 @@ public class PageReembolsosSteps extends StepBase {
 	
 	@Validation (
 		description="Los campos de input Banco, Titular e IBAN se hacen visibles",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkInputsVisiblesAfterClickTransferencia() {
 	   return pageReembolsos.isVisibleInputsTransf();
 	}
@@ -109,11 +110,11 @@ public class PageReembolsosSteps extends StepBase {
 			"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + seconds + " segundos)",
 			pageReembolsos.isVisibleTextBancoUntil(seconds) &&
 			pageReembolsos.isVisibleTextTitular() &&
-			pageReembolsos.isVisibleTextIBAN(), State.Defect);
+			pageReembolsos.isVisibleTextIBAN(), Defect);
 		
 		checks.add(
 			"Aparece seleccionado el radiobutton de \"Transferencia bancaria\"",
-			pageReembolsos.isCheckedRadio(TypeReembolso.TRANSFERENCIA), State.Warn);
+			pageReembolsos.isCheckedRadio(TypeReembolso.TRANSFERENCIA), Warn);
 		
 		return checks;
 	}
@@ -131,11 +132,11 @@ public class PageReembolsosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	   	checks.add(
 			"Aparece seleccionado el radiobutton de \"Store Credit\"",
-			pageReembolsos.isCheckedRadio(TypeReembolso.STORE_CREDIT), State.Warn);
+			pageReembolsos.isCheckedRadio(TypeReembolso.STORE_CREDIT), Warn);
 	   	
 	   	checks.add(
 			"Aparece un saldo >= 0",
-			pageReembolsos.getImporteStoreCredit()>=0, State.Defect);
+			pageReembolsos.getImporteStoreCredit()>=0, Defect);
 	   	
 	   	return checks;
 	}
@@ -150,7 +151,7 @@ public class PageReembolsosSteps extends StepBase {
 	
 	@Validation (
 		description="Desaparece el botón \"Save\" de Store Credit (lo esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkButtonSaveDisappears(int seconds) {
 		return !pageReembolsos.isVisibleSaveButtonStoreCreditUntil(seconds);
 	}

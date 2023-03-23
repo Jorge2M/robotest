@@ -2,7 +2,6 @@ package com.mng.robotest.test.steps.shop.modales;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.domains.base.StepBase;
@@ -12,13 +11,15 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.steps.shop.home.PageHomeMarcasSteps;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class ModalCambioPaisSteps extends StepBase {
 	
 	private final ModalCambioPais modalCambioPais = new ModalCambioPais();
 	
 	@Validation (
 		description="Aparece el modal de selección de país (lo esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateIsVisible(int seconds) {
 		return modalCambioPais.isVisibleModalUntil(seconds);
 	}

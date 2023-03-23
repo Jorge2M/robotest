@@ -1,17 +1,13 @@
 package com.mng.robotest.domains.compra.payments.postfinance.pageobjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
-
 
 public class PagePostfSelectChannel extends PageBase {
 
 	public enum ChannelPF {
-		App("opfc"),
-		Card("classic");
+		APP("opfc"),
+		CARD("classic");
 		
 		private final String id;
 		private ChannelPF(String id) {
@@ -22,15 +18,11 @@ public class PagePostfSelectChannel extends PageBase {
 		}
 	}
 	
-	public PagePostfSelectChannel(WebDriver driver) {
-		super(driver);
-	}
-	
 	public boolean isPage(int seconds) {
-		return state(State.Visible, ChannelPF.Card.getXPath()).wait(seconds).check();
+		return state(State.Visible, ChannelPF.CARD.getXPath()).wait(seconds).check();
 	}
 	
 	public void selectChannel(ChannelPF channelPF) {
-		click(By.xpath(channelPF.getXPath())).exec();
+		click(channelPF.getXPath()).exec();
 	}
 }

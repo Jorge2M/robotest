@@ -2,9 +2,10 @@ package com.mng.robotest.domains.compra.payments.giropay.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.giropay.pageobjects.PageGiropayInputBank;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageGiropayInputBankSteps extends StepBase {
 
@@ -12,7 +13,7 @@ public class PageGiropayInputBankSteps extends StepBase {
 	
 	@Validation(
 		description="Estamos en la página de introducción del banco",
-		level=State.Warn)
+		level=Warn)
 	public boolean checkIsPage() {
 		return pageGiropayInputBank.checkIsPage();
 	}

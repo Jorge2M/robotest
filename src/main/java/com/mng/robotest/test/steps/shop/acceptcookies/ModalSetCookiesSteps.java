@@ -2,10 +2,11 @@ package com.mng.robotest.test.steps.shop.acceptcookies;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.pageobject.shop.acceptcookies.ModalSetCookies;
 import com.mng.robotest.test.pageobject.shop.acceptcookies.ModalSetCookies.SectionConfCookies;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalSetCookiesSteps extends StepBase {
 
@@ -13,14 +14,14 @@ public class ModalSetCookiesSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible el modal para el seteo de Cookies (lo esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean isVisible(int seconds) {
 		return modalSetCookies.isVisible(seconds);
 	}
 	
 	@Validation (
 		description="No es visible el modal para el seteo de Cookies (lo esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	public boolean isInvisible(int seconds) {
 		return modalSetCookies.isInvisible(seconds);
 	}
@@ -35,7 +36,7 @@ public class ModalSetCookiesSteps extends StepBase {
 	
 	@Validation (
 		description="Está seleccionada la sección #{section.getNombre()}",
-		level=State.Warn)
+		level=Warn)
 	public boolean checkSectionUnfold(SectionConfCookies section) {
 		return modalSetCookies.isSectionUnfold(section);
 	}
@@ -58,14 +59,14 @@ public class ModalSetCookiesSteps extends StepBase {
 	
 	@Validation (
 		description="El switch de las cookies está activado",
-		level=State.Warn)
+		level=Warn)
 	public boolean checkSwitchEnabled() {
 		return modalSetCookies.isSwitchEnabled();
 	}
 	
 	@Validation (
 		description="El switch de las cookies está desactivado",
-		level=State.Warn)
+		level=Warn)
 	public boolean checkSwitchNotEnabled() {
 		return !modalSetCookies.isSwitchEnabled();
 	}

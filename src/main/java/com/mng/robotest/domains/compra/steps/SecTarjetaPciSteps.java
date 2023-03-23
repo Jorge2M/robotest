@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.compra.steps;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
@@ -9,6 +8,8 @@ import com.mng.robotest.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.domains.compra.pageobjects.pci.SecTarjetaPci;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pago.TypePago;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecTarjetaPciSteps extends StepBase {
 	
@@ -23,8 +24,7 @@ public class SecTarjetaPciSteps extends StepBase {
 		 	checks.add(
 				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel, app) + 
 				" (lo esperamos hasta " + seconds + " segundo)",
-				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel, app), seconds), 
-				State.Warn);	
+				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel, app), seconds), Warn);	
 		}
 		
 	 	checks.add(
@@ -32,17 +32,17 @@ public class SecTarjetaPciSteps extends StepBase {
 			secTarjetaPci.isPresentInputNumberUntil(1) &&
 			secTarjetaPci.isPresentInputTitular() &&
 			secTarjetaPci.isPresentSelectMes() &&
-			secTarjetaPci.isPresentSelectAny(), State.Defect);  
+			secTarjetaPci.isPresentSelectAny(), Defect);  
 	 	
 	 	if (pago.getTypePago()!=TypePago.BANCONTACT) {
 		 	checks.add(
 				"Aparece también el campo <b>CVC</b>",
-				secTarjetaPci.isPresentInputCvc(), State.Defect); 
+				secTarjetaPci.isPresentInputCvc(), Defect); 
 	 	}
 		if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0) {
 		 	checks.add(
 				"Aparece también el campo <b>DNI(C.C)</b>",
-				secTarjetaPci.isPresentInputDni(), State.Defect); 
+				secTarjetaPci.isPresentInputDni(), Defect); 
 		}
 		return checks;
 	}

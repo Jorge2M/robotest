@@ -20,13 +20,15 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class PageResultPagoSteps extends StepBase {
 
 	private final PageResultPago pageResultPago = new PageResultPago();
 	
 	@Validation (
 		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean validaIsPageUntil(int seconds) {
 		return (pageResultPago.isVisibleTextoConfirmacionPago(seconds));
 	}
@@ -39,7 +41,7 @@ public class PageResultPagoSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la URL correspondiente a la página de resultado OK (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkUrl(int seconds) {
 		return (pageResultPago.checkUrl(seconds));
 	}
@@ -51,12 +53,12 @@ public class PageResultPagoSteps extends StepBase {
 		boolean isVisibleTextConfirmacion = pageResultPago.isVisibleTextoConfirmacionPago(seconds1);
 		checks.add(
 			"Aparece un texto de confirmación del pago (lo esperamos hasta " + seconds1 + " segundos)",
-			isVisibleTextConfirmacion, State.Warn);
+			isVisibleTextConfirmacion, Warn);
 		if (!isVisibleTextConfirmacion) {
 			int seconds2 = 20;
 			checks.add(
 				"Si no aparece lo esperamos " + seconds2 + " segundos",
-				pageResultPago.isVisibleTextoConfirmacionPago(seconds2), State.Defect);
+				pageResultPago.isVisibleTextoConfirmacionPago(seconds2), Defect);
 		}
 		return checks;
 	}
@@ -72,13 +74,13 @@ public class PageResultPagoSteps extends StepBase {
 		}
 	  	checks.add(
 	  		"Aparece el importe " + importeTotal + " de la operación",
-	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), State.Warn);
+	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), Warn);
 		
 		if (channel==Channel.desktop) {
 			int seconds = 1;
 			checks.add(
 		  		"Aparece el link hacia las compras (lo esperamos " + seconds + " segundos)",
-		  		pageResultPago.isButtonMisCompras(seconds), State.Warn);
+		  		pageResultPago.isButtonMisCompras(seconds), Warn);
 		}
 		
 		int seconds = 5;
@@ -86,7 +88,7 @@ public class PageResultPagoSteps extends StepBase {
 		boolean isCodPedidoVisible = "".compareTo(codigoPed)!=0;
 		checks.add(
 	  		"Aparece el código de pedido (" + codigoPed + ") (lo esperamos hasta " + seconds + " segundos)",
-	  		isCodPedidoVisible, State.Defect);
+	  		isCodPedidoVisible, Defect);
 		
 		DataPedido dataPedido = dataPago.getDataPedido();
 		if (isCodPedidoVisible) {
@@ -102,13 +104,13 @@ public class PageResultPagoSteps extends StepBase {
 		var checks = new ChecksResultWithNumberPoints();
 	  	checks.add(
 		  	"Aparece el bloque con los nuevos <b>Loyalty Points</b> generados",
-		  	pageResultPago.isVisibleBlockNewLoyaltyPoints(), State.Defect);
+		  	pageResultPago.isVisibleBlockNewLoyaltyPoints(), Defect);
 		
 	  	checks.setNumberPoints(pageResultPago.getLikesGenerated());
 	  	checks.add(
 	  		Check.make(
 	  			"El número de likes es > 0",
-	  			checks.getNumberPoints()>0, State.Defect)
+	  			checks.getNumberPoints()>0, Defect)
 		  	.info(String.format("Se generan <b>%s</b> Likes", checks.getNumberPoints())).build());
 	  	
 	  	return checks;

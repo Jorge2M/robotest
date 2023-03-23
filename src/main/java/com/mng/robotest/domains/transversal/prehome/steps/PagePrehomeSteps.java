@@ -5,7 +5,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -19,6 +18,8 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.steps.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PagePrehomeSteps extends StepBase {
 	
@@ -44,7 +45,7 @@ public class PagePrehomeSteps extends StepBase {
 			checks.add(
 			    Check.make(
 				    "Queda seleccionado el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")",
-				    pagePrehome.isPaisSelected(), State.Warn)
+				    pagePrehome.isPaisSelected(), Warn)
 			    .store(StoreType.None).build());
 		}
 		
@@ -53,13 +54,13 @@ public class PagePrehomeSteps extends StepBase {
 			checks.add(
 			    Check.make(
 				    "El país <b>Sí</b> tiene la marca de venta online\"",
-				    isPaisWithMarcaCompra, State.Warn)
+				    isPaisWithMarcaCompra, Warn)
 			    .store(StoreType.None).build());
 		} else {
 			checks.add(
 			    Check.make(
 				    "El país <b>No</b> tiene la marca de venta online\"",
-				    !isPaisWithMarcaCompra, State.Warn)
+				    !isPaisWithMarcaCompra, Warn)
 			    .store(StoreType.None).build());
 		}
 		return checks;
@@ -110,11 +111,11 @@ public class PagePrehomeSteps extends StepBase {
 		if (app==AppEcom.outlet) {
 			checks.add(
 				"Aparece una pantalla en la que el título contiene <b>outlet</b>",
-				title.contains("outlet"), State.Defect);
+				title.contains("outlet"), Defect);
 		} else {
 			checks.add(
 				"Aparece una pantalla en la que el título contiene <b>mango</b>",
-				title.contains("mango"), State.Defect);
+				title.contains("mango"), Defect);
 		}
 		return checks;
 	}

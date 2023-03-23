@@ -44,6 +44,8 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class PageGaleriaSteps extends StepBase {
 
 	public final SecCrossSellingSteps secCrossSellingSteps = new SecCrossSellingSteps();
@@ -132,7 +134,7 @@ public class PageGaleriaSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la capa con la información de las tallas (la esperamos hasta #{seconds} segundos",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkIsVisibleCapaInfoTallas(int posArticulo, int seconds) {
 		return pageGaleria.isVisibleArticleCapaTallasUntil(posArticulo, seconds);
 	}
@@ -223,7 +225,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation (
 		description="Sí aparece el footer",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkVisibilityFooter(int pageToScroll, AppEcom app) {
 		return (new SecFooter()).isVisible();
 	}
@@ -232,14 +234,14 @@ public class PageGaleriaSteps extends StepBase {
 		description=
 			"En pantalla aparecen más artículos (#{numArticlesCurrently}) " + 
 			"de los que había inicialmente (#{numArticlesInit})",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkAreMoreArticlesThatInitially(int numArticlesCurrently, int numArticlesInit) {
 		return (numArticlesCurrently > numArticlesInit);
 	}
 
 	@Validation (
 		description="Los artículos aparecen ordenados por #{orderExpected}",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkArticlesOrdered(FilterOrdenacion orderExpected) throws Exception {
 		return (pageGaleria.articlesInOrder(orderExpected));
 	}
@@ -251,13 +253,13 @@ public class PageGaleriaSteps extends StepBase {
 		String producRepeatedWarning = "";
 		if (productsRepeated!=null && !productsRepeated.isEmpty()) {
 			producRepeatedWarning+=
-				"<br><b style=\"color:" + State.Warn.getColorCss() + "\">Warning!</b>: " + 
+				"<br><b style=\"color:" + Warn.getColorCss() + "\">Warning!</b>: " + 
 				"hay " + productsRepeated.size() + " productos repetidos, " + 
 				"por ejemplo el <b>" + productsRepeated.get(0).toString();
 		}
 	  	checks.add(
 			"No aparece ningún artículo repetido" + producRepeatedWarning,
-			productsRepeated==null || productsRepeated.size()==0, State.Defect);
+			productsRepeated==null || productsRepeated.size()==0, Defect);
 	  	
 	  	return checks;
 	}
@@ -266,7 +268,7 @@ public class PageGaleriaSteps extends StepBase {
 		description=
 			"En pantalla aparecen exactamente #{numArticlesInPage} artículos " + 
 			"(están apareciendo #{numArticlesExpected}",
-		level=State.Info)
+		level=Info)
 	private boolean checkNumArticlesInScreen(int numArticlesInPage, int numArticlesExpected) {
 		return (numArticlesInPage==numArticlesExpected);
 	}
@@ -296,7 +298,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation (
 		description="Aparece una pantalla en la que el title contiene <b>#{tipoPrendasGaleria}",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkIsVisiblePageWithTitle(String tipoPrendasGaleria) {
 		return (driver.getTitle().toLowerCase().contains(tipoPrendasGaleria));
 	}
@@ -307,15 +309,15 @@ public class PageGaleriaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Aparecen > 1 prendas",
-			numArticulosPant > 1, State.Warn);
+			numArticulosPant > 1, Warn);
 		if (numArticulosValidar>=0) {
 		  	checks.add(
 				"Aparecen " + numArticulosValidar + " artículos",
-				numArticulosValidar==numArticulosPant, State.Info);
+				numArticulosValidar==numArticulosPant, Info);
 		}
 	  	checks.add(
 			"Los artículos aparecen ordenados por " + typeOrdenacion.name(),
-			pageGaleria.articlesInOrder(typeOrdenacion), State.Warn);
+			pageGaleria.articlesInOrder(typeOrdenacion), Warn);
 	  	
 	  	return checks;
 	}
@@ -333,13 +335,13 @@ public class PageGaleriaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Es clickable el 1er elemento de la lista",
-			pageGaleria.isClickableArticuloUntil(1, 0), State.Warn);
+			pageGaleria.isClickableArticuloUntil(1, 0), Warn);
 	  	
 		SecFiltros secFiltros = SecFiltros.make(channel, app);
 		int seconds = 2;
 	  	checks.add(
 			"Es clickable el bloque de filtros (esperamos hasta " + seconds + " segundos)",
-			secFiltros.isClickableFiltroUntil(seconds), State.Warn);
+			secFiltros.isClickableFiltroUntil(seconds), Warn);
 	  	
 	  	return checks;
 	}
@@ -384,7 +386,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation (
 		description="Se modifica la imagen correspondiente al artículo",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkImageIsModified(String srcImg1erArt, String srcImgAfterClickColor) {
 		return (!srcImgAfterClickColor.contains(srcImg1erArt));
 	}
@@ -438,10 +440,10 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation
 	private ChecksTM checkImageSliderArticleHasChanged(String srcImg1erSlider, String srcImg2oSlider, int numClicks) {
-		State state = State.Defect;
+		State state = Defect;
 		if (numClicks>1) {
 			//Si hemos realizado varios clicks y sólo hay 2 imágenes habremos vuelto a la inicial
-			state = State.Warn;
+			state = Warn;
 		}
 		var checks = ChecksTM.getNew();
 		checks.add(
@@ -453,7 +455,7 @@ public class PageGaleriaSteps extends StepBase {
    
    @Validation (
 	   description="El src de la imagen <b>ahora</b> (#{srcImgActual}) es la <b>original</b> (#{srcImgOriginalExpected})",
-	   level=State.Defect)
+	   level=Defect)
    private boolean checkActualImgSliderIsTheExpected(String srcImgActual, String srcImgOriginalExpected) {
 	   return (srcImgActual.compareTo(srcImgOriginalExpected)==0);
    }
@@ -500,7 +502,7 @@ public class PageGaleriaSteps extends StepBase {
 		PageFicha pageFicha = PageFicha.of(channel);
 	  	checks.add(
 			"Aparece la página de ficha (la esperamos hasta " + seconds + " segundos)",
-			pageFicha.isPageUntil(seconds), State.Warn);
+			pageFicha.isPageUntil(seconds), Warn);
 	  	
 		String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt();
 		String precioArtFicha = pageFicha.getSecDataProduct().getPrecioFinalArticulo();
@@ -510,8 +512,8 @@ public class PageGaleriaSteps extends StepBase {
 			    "   - Nombre " + nombre1erArt + "<br>" + 
 			    "   - Precio " + precio1erArt,
 			    nombreArtFicha.toUpperCase().contains(nombre1erArt.toUpperCase()) &&
-			    precioArtFicha.replaceAll(" ", "").toUpperCase().contains(precio1erArt.replaceAll(" ", "").toUpperCase()),
-			    State.Info)
+			    precioArtFicha.replace(" ", "").toUpperCase().contains(precio1erArt.replace(" ", "").toUpperCase()),
+			    Info)
 	  	    .store(StoreType.None).build());
 		
 	  	return checks;
@@ -519,7 +521,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation (
 		description="Existe algún vídeo en la galería",
-		level=State.Warn)
+		level=Warn)
 	public boolean validaHayVideoEnGaleria() {
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		return (pageGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.VIDEO));
@@ -527,7 +529,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation (
 		description="Aparece una página con artículos (la esperamos #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	public boolean validaArtEnContenido(int seconds) {
 		return (pageGaleria.isVisibleArticleUntil(1, seconds));
 	}
@@ -559,7 +561,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation (
 		description="Quedan #{estadoFinal} los iconos asociados a los artículos con posiciones <b>#{posIconsSelected.toString()}</b>",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkIconosInCorrectState(TypeActionFav actionFav, @SuppressWarnings("unused") String estadoFinal, 
 											  List<Integer> posIconsSelected) {
 		return (pageGaleria.iconsInCorrectState(posIconsSelected, actionFav));
@@ -595,27 +597,27 @@ public class PageGaleriaSteps extends StepBase {
    		String infoWarning = "";
    		if (!articlesEquals) {
    			DataArticleGalery articleGaleryActualNotFit = listArticlesGaleriaAct.getFirstArticleThatNotFitWith(listArticlesGaleriaAnt);
-   			infoWarning+="<br><b style=\"color:" + State.Info.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería anterior (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
+   			infoWarning+="<br><b style=\"color:" + Info.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería anterior (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
    			infoWarning+=listArticlesGaleriaAct.getTableHTLMCompareArticlesGaleria(listArticlesGaleriaAnt);
    		}
    		checks.add(
    			"Los primeros " + articulosComprobar + " artículos de la galería a " + 
    			numColumnas.name() + " columnas son iguales a los de la anterior galería" + infoWarning,
-   			articlesEquals, State.Info);
+   			articlesEquals, Info);
    		
    		return checks;
 	}
 
 	@Validation (
 		description="Aparece el layout correspondiente al listado a <b>#{numColumnas.name()} columnas</b>",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkIsVisibleLayoutListadoXcolumns(NumColumnas numColumnas) {
 		return (pageGaleria.getLayoutNumColumnas()==((PageGaleriaDesktop)pageGaleria).getNumColumnas(numColumnas));
 	}
 
 	@Validation (
 		description="Estamos en la página de Galería",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkIsPageGaleria(WebDriver driver) {
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		return (pageGaleriaDesktop.isPage());
@@ -627,24 +629,24 @@ public class PageGaleriaSteps extends StepBase {
 	 	checks.add(
 	 		"<b style=\"color:blue\">Rebajas</b></br>" +
 	 		"Son visibles los menús laterales de filtro a nivel detemporadas (Collection)",
-	 		filtrosCollection.isVisible(), State.Defect);
+	 		filtrosCollection.isVisible(), Defect);
 	 	
 	 	checks.add(
 	 		"Aparece el filtro para todas las temporadas <b>All</b>)",
-	 		filtrosCollection.isVisibleMenu(FilterCollection.all), State.Warn);
+	 		filtrosCollection.isVisibleMenu(FilterCollection.all), Warn);
 	 	
 	 	checks.add(
 	 		"Aparece el filtro para las ofertas <b>Sale</b>",
-	 		filtrosCollection.isVisibleMenu(FilterCollection.sale), State.Warn);
+	 		filtrosCollection.isVisibleMenu(FilterCollection.sale), Warn);
 	 	
 	 	checks.add(
 	 		"Aparece el filtro para las ofertas <b>Sale</b>",
-	 		filtrosCollection.isVisibleMenu(FilterCollection.sale), State.Warn);
+	 		filtrosCollection.isVisibleMenu(FilterCollection.sale), Warn);
 	 	
 	 	checks.add(
 	 	    Check.make(
 	 		    "Aparece el filtro para la nueva temporada <b>Next season preview</b>",
-	 		    filtrosCollection.isVisibleMenu(FilterCollection.nextSeason), State.Info)
+	 		    filtrosCollection.isVisibleMenu(FilterCollection.nextSeason), Info)
 	 	    .store(StoreType.None).build());
 	 	
 	 	return checks;
@@ -654,7 +656,7 @@ public class PageGaleriaSteps extends StepBase {
 		description=
 			"<b style=\"color:blue\">Rebajas</b></br>" +
 			"No son visibles los menús laterales de filtro a nivel detemporadas (Collection)<b>",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkFiltrosSaleInGaleryNoSale(SecMenusFiltroCollection filtrosCollection) {
 		return (!filtrosCollection.isVisible());
 	}
@@ -663,7 +665,7 @@ public class PageGaleriaSteps extends StepBase {
 		description=
 			"<b style=\"color:blue\">Rebajas</b></br>" +
 			"No aparece el filtro para las ofertas <b>Sale</b>",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkFiltrosSalesOff(SecMenusFiltroCollection filtrosCollection) {
 		return (!filtrosCollection.isVisibleMenu(FilterCollection.sale));
 	}
@@ -673,11 +675,11 @@ public class PageGaleriaSteps extends StepBase {
 	}
 
 	public void validaArticlesOfTemporadas(List<Integer> listTemporadas) {
-		validaArticlesOfTemporadas(listTemporadas, false, State.Warn, StoreType.Evidences);
+		validaArticlesOfTemporadas(listTemporadas, false, Warn, StoreType.Evidences);
 	}
 
 	public void validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles) {
-		validaArticlesOfTemporadas(listTemporadas, validaNotNewArticles, State.Warn, StoreType.Evidences);
+		validaArticlesOfTemporadas(listTemporadas, validaNotNewArticles, Warn, StoreType.Evidences);
 	}
 
 	@Validation
@@ -697,7 +699,7 @@ public class PageGaleriaSteps extends StepBase {
 		String infoWarning = "";
 		if (!listArtWrong.isEmpty()) {
 			infoWarning+=
-					"<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " +
+					"<br><lin style=\"color:" + Warn.getColorCss() + ";\"><b>Warning!</b>: " +
 							"hay " + listArtWrong.size() + " artículos que no pertenecen a las temporadas " + listTemporadas + ":<br>";
 			for (String nameWrong : listArtWrong) {
 				infoWarning+=(nameWrong + "<br>");
@@ -734,7 +736,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	private void addInfoArtWrongToDescription(List<String> listArtWrong, TypeArticle typeArticle, Check validation) {
 		String textToAdd =
-				"<br><lin style=\"color:" + State.Warn.getColorCss() + ";\"><b>Warning!</b>: " +
+				"<br><lin style=\"color:" + Warn.getColorCss() + ";\"><b>Warning!</b>: " +
 						"hay " + listArtWrong.size() + " artículos que son del tipo <b>" + typeArticle + "</b><br>:";
 		for (String nameWrong : listArtWrong) {
 			textToAdd+=(nameWrong + "<br>");
@@ -760,11 +762,11 @@ public class PageGaleriaSteps extends StepBase {
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
 			"Se despliega la información relativa a las rebajas (lo esperamos hasta " + seconds + " segundos)",
-			secBannerHead.isVisibleInfoRebajasUntil(seconds), State.Warn);
+			secBannerHead.isVisibleInfoRebajasUntil(seconds), Warn);
 		
 		checks.add(
 			"Aparece el link de <b>Menos info</b>",
-			secBannerHead.isVisibleLinkTextInfoRebajas(TypeLinkInfo.LESS), State.Warn);
+			secBannerHead.isVisibleLinkTextInfoRebajas(TypeLinkInfo.LESS), Warn);
 		
 		return checks;
 	}
@@ -776,19 +778,19 @@ public class PageGaleriaSteps extends StepBase {
 		int secondsIcon = 2;
 		checks.add (
 			"Como mínimo se obtiene un artículo (lo esperamos hasta " + secondsArticle + " segundos)",
-			pageGaleria.isVisibleArticleUntil(1, secondsArticle), State.Warn);
+			pageGaleria.isVisibleArticleUntil(1, secondsArticle), Warn);
 		
 		if (app==AppEcom.shop) {
 			checks.add (
 				Check.make(
 					"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + secondsIcon + " segundos)",
-					pageGaleria.isArticleWithHearthIconPresentUntil(1, secondsIcon), State.Info)
+					pageGaleria.isArticleWithHearthIconPresentUntil(1, secondsIcon), Info)
 				.store(StoreType.None).build());
 			
 			checks.add (
 		        Check.make(
 				    "Cada artículo tiene 1 icono de favoritos asociado",
-				    pageGaleria.eachArticlesHasOneFavoriteIcon(), State.Info)
+				    pageGaleria.eachArticlesHasOneFavoriteIcon(), Info)
 		        .store(StoreType.None).build());
 		}
 
@@ -802,7 +804,7 @@ public class PageGaleriaSteps extends StepBase {
 //			checks.add(
 //				"Aparece el submenú <b>" + menu2oNivelTmp.getNombre() + "</b>",
 //				((PageGaleriaDesktop)pageGaleria).getSecSubmenusGallery().isVisibleSubmenu(menu2oNivelTmp.getNombre()), 
-//				State.Warn);
+//				Warn);
 //		}
 //		return checks;
 //	}

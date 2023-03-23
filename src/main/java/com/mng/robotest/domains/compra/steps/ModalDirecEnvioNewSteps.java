@@ -2,10 +2,11 @@ package com.mng.robotest.domains.compra.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.DirectionData;
 import com.mng.robotest.domains.compra.pageobjects.ModalDirecEnvioNew;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalDirecEnvioNewSteps extends StepBase {
 
@@ -13,7 +14,7 @@ public class ModalDirecEnvioNewSteps extends StepBase {
 	
 	@Validation (
 		description="Visible el Modal para Añadir/Editar una dirección",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsVisible() {
 		return modalDirecEnvio.isVisible(2);
 	}
@@ -49,7 +50,7 @@ public class ModalDirecEnvioNewSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el modal de confirmación de la eliminación",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsModalConfirmacionEliminar() {
 		return modalDirecEnvio.isVisibleModalConfirmacionEliminar(1);
 	}	

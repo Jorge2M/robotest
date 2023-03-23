@@ -9,6 +9,8 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.paytrail.pageobjects.PagePaytrail1rst;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class PagePaytrail1rstSteps extends StepBase {
 	
 	private final PagePaytrail1rst pagePaytrail1rst = new PagePaytrail1rst();
@@ -20,11 +22,11 @@ public class PagePaytrail1rstSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePagoCabecera + "</b>",
-			pagePaytrail1rst.isPresentEntradaPago(nombrePagoCabecera), State.Warn);
+			pagePaytrail1rst.isPresentEntradaPago(nombrePagoCabecera), Warn);
 		
-		State stateVal = State.Warn;
+		State stateVal = Warn;
 		if (channel.isDevice()) {
-			stateVal = State.Info;
+			stateVal = Info;
 		}
 		String codPais = dataTest.getCodigoPais();
 		checks.add(
@@ -34,11 +36,11 @@ public class PagePaytrail1rstSteps extends StepBase {
 		if (channel==Channel.desktop) {
 			checks.add(
 				"Es visible el desplegable de bancos (lo esperamos hasta " + seconds + " seconds)",
-				pagePaytrail1rst.isVisibleSelectBancosUntil(seconds), State.Warn);
+				pagePaytrail1rst.isVisibleSelectBancosUntil(seconds), Warn);
 			
 			checks.add(
 				"Figura un botón de pago",
-				pagePaytrail1rst.isPresentButtonPago(), State.Defect);
+				pagePaytrail1rst.isPresentButtonPago(), Defect);
 		}
 		
 		return checks;

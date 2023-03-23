@@ -11,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -19,6 +18,8 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.seo.beans.Sitemapindex;
 import com.mng.robotest.domains.seo.beans.Sitemapindex.Sitemap;
 import com.mng.robotest.domains.seo.pageobjects.PageSitemap;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SeoSteps extends StepBase {
 
@@ -105,19 +106,19 @@ public class SeoSteps extends StepBase {
 
 		checks.add(
 				"Figura el siguiente contenido: <br>" + contRobots1.replace("\n", "<br>"),
-				driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase()), State.Defect);
+				driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase()), Defect);
 		if (app==AppEcom.outlet) {
 			checks.add(
 					"Figura el siguiente contenido: <br>" + contRobots2.replace("\n", "<br>"),
-					driver.getPageSource().contains(contRobots2), State.Defect);
+					driver.getPageSource().contains(contRobots2), Defect);
 		}
 		checks.add(
 				"Figura el siguiente contenido: <br>" + contRobots3.replace("\n", "<br>"),
-				driver.getPageSource().contains(contRobots3), State.Defect);
+				driver.getPageSource().contains(contRobots3), Defect);
 
 		checks.add(
 				"Figura el siguiente contenido: <br>" + contRobots4.replace("\n", "<br>"),
-				driver.getPageSource().contains(contRobots4), State.Defect);
+				driver.getPageSource().contains(contRobots4), Defect);
 
 		return checks;
 	}
@@ -137,7 +138,7 @@ public class SeoSteps extends StepBase {
 		boolean sitemapOk = new PageSitemap().isCorrect();
 		checks.add(
 				"Obtenemos un XML con formato de sitemap",
-				sitemapOk, State.Defect);
+				sitemapOk, Defect);
 
 		if (sitemapOk) {
 			Optional<Sitemapindex> sitemapIndexOpt = pageSitemap.getSiteMap();
@@ -156,7 +157,7 @@ public class SeoSteps extends StepBase {
 				}
 				checks.add(
 						"Todos los tags <b>lastmod</b> contienen la fecha del día: " + currentDay,
-						lastModsContainsCurrentDay, State.Defect);
+						lastModsContainsCurrentDay, Defect);
 			}
 		}
 

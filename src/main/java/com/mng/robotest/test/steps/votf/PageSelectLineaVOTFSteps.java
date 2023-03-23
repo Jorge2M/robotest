@@ -1,6 +1,5 @@
 package com.mng.robotest.test.steps.votf;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -12,6 +11,8 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.votf.PageSelectLineaVOTF;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class PageSelectLineaVOTFSteps extends StepBase {
 
 	private final PageSelectLineaVOTF pageSelectLineaVOTF = new PageSelectLineaVOTF();
@@ -21,16 +22,20 @@ public class PageSelectLineaVOTFSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el banner correspondiente a SHE",
-			pageSelectLineaVOTF.isBannerPresent(LineaType.SHE), State.Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.SHE), Warn);
+		
 		checks.add(
 			"Aparece el banner correspondiente a MAN",
-			pageSelectLineaVOTF.isBannerPresent(LineaType.HE), State.Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.HE), Warn);
+		
 		checks.add(
 			"Aparece el banner correspondiente a NIÑAS",
-			pageSelectLineaVOTF.isBannerPresent(LineaType.NINA), State.Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.NINA), Warn);
+		
 		checks.add(
 			"Aparece el banner correspondiente a NIÑOS",
-			pageSelectLineaVOTF.isBannerPresent(LineaType.NINO), State.Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.NINO), Warn);
+		
 		return checks;
 	}
 	

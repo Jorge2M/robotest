@@ -9,7 +9,6 @@ import java.util.List;
 import org.junit.Test;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.StateExecution;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -19,6 +18,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.TestCaseBean;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.conftestmaker.Suites;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class RobotestRestE2E extends ServerRestE2E {
 
@@ -68,7 +68,7 @@ public class RobotestRestE2E extends ServerRestE2E {
 
 		//Check Suite
 		assertTrue(suiteData!=null);
-		assertTrue(suiteData.getResult()==State.Ok || suiteData.getResult()==State.Info || suiteData.getResult()==State.Warn);
+		assertTrue(suiteData.getResult()==Ok || suiteData.getResult()==Info || suiteData.getResult()==Warn);
 		assertEquals(suiteData.getStateExecution(), StateExecution.Finished);
 		assertEquals(suiteData.getListTestRun().size(), 1);
 		
@@ -76,7 +76,7 @@ public class RobotestRestE2E extends ServerRestE2E {
 		List<TestCaseBean> listTestCases = suiteData.getListTestRun().get(0).getListTestCase();
 		assertEquals(listTestCases.size(), 2);
 		TestCaseBean testCase = listTestCases.get(0);
-		assertTrue(testCase.getResult()==State.Ok || suiteData.getResult()==State.Warn || testCase.getResult()==State.Info);
+		assertTrue(testCase.getResult()==Ok || suiteData.getResult()==Warn || testCase.getResult()==Info);
 		assertEquals(testCase.getListStep().size(), 5);
 		
 		//Check Step1
@@ -85,19 +85,19 @@ public class RobotestRestE2E extends ServerRestE2E {
 			"Check descripción Step1 (\"" + step1.getDescripcion() + "\")",
 			"Acceder a Mango (España (Península y Baleares)/Castellano)<br>"
 			.compareTo(step1.getDescripcion())==0);
-		assertTrue(step1.getResultSteps()==State.Ok || step1.getResultSteps()==State.Info);
+		assertTrue(step1.getResultSteps()==Ok || step1.getResultSteps()==Info);
 		assertEquals(step1.getListChecksTM().size(), 0);
 		
 		//Check Validation1 (from Step2)
 		StepTM step2 = testCase.getListStep().get(1);
 		ChecksTM checkGroup1 = step2.getListChecksTM().get(0);
-		assertTrue(checkGroup1.getStateValidation()==State.Ok || checkGroup1.getStateValidation()==State.Info);
+		assertTrue(checkGroup1.getStateValidation()==Ok || checkGroup1.getStateValidation()==Info);
 		assertEquals(checkGroup1.getListChecks().size(), 1);
 		Check check1 = checkGroup1.getListChecks().get(0);
 		assertTrue(
 			"Check descripción Step1 (\"" + check1.getDescription() + "\")",
 			check1.getDescription().contains("No es visible la sección inferior para la configuración de las cookies"));
-		assertTrue(check1.getStateResult()==State.Ok || check1.getStateResult()==State.Info);
+		assertTrue(check1.getStateResult()==Ok || check1.getStateResult()==Info);
 		
 		checkReporsSuiteExists(suiteData);
 	
@@ -111,7 +111,7 @@ public class RobotestRestE2E extends ServerRestE2E {
 		
 		//Check Suite
 		assertTrue(suiteData!=null);
-		assertEquals(suiteData.getResult(), State.Ok);
+		assertEquals(suiteData.getResult(), Ok);
 		assertEquals(suiteData.getStateExecution(), StateExecution.Finished);
 		assertEquals(suiteData.getListTestRun().size(), 1);
 		
@@ -126,7 +126,7 @@ public class RobotestRestE2E extends ServerRestE2E {
 			checkExistsTestCase("España (Península y Baleares) (001)", listTestCases));
 		
 		TestCaseBean testCase = listTestCases.get(0);
-		assertTrue(testCase.getResult()==State.Ok || testCase.getResult()==State.Info || testCase.getResult()==State.Warn);
+		assertTrue(testCase.getResult()==Ok || testCase.getResult()==Info || testCase.getResult()==Warn);
 		assertEquals(testCase.getListStep().size(), 8);
 		
 		//Check Step4
@@ -135,12 +135,12 @@ public class RobotestRestE2E extends ServerRestE2E {
 			"Check descripción Step4 (\"" + step4.getDescripcion() + "\")",
 			step4.getDescripcion().contains("Se selecciona el botón"));
 		
-		assertTrue(step4.getResultSteps()==State.Ok || step4.getResultSteps()==State.Info || step4.getResultSteps()==State.Warn);
+		assertTrue(step4.getResultSteps()==Ok || step4.getResultSteps()==Info || step4.getResultSteps()==Warn);
 		assertEquals(step4.getListChecksTM().size(), 3);
 		
 		//Check Validation1 (from Step4)
 		ChecksTM checkGroup1 = step4.getListChecksTM().get(1);
-		assertTrue(checkGroup1.getStateValidation()==State.Ok || checkGroup1.getStateValidation()==State.Info || checkGroup1.getStateValidation()==State.Warn);
+		assertTrue(checkGroup1.getStateValidation()==Ok || checkGroup1.getStateValidation()==Info || checkGroup1.getStateValidation()==Warn);
 		assertEquals(checkGroup1.getListChecks().size(), 1);
 		
 		checkReporsSuiteExists(suiteData);

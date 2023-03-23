@@ -3,7 +3,6 @@ package com.mng.robotest.test.steps.shop.pedidos;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -12,6 +11,8 @@ import com.mng.robotest.domains.micuenta.beans.Ticket;
 import com.mng.robotest.domains.micuenta.pageobjects.PageDetallePedido;
 import com.mng.robotest.domains.micuenta.pageobjects.PageDetallePedido.DetallePedido;
 import com.mng.robotest.test.datastored.DataPedido;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageDetallePedidoSteps {
 	
@@ -48,10 +49,10 @@ public class PageDetallePedidoSteps {
 		int seconds = 2;
 	  	checks.add(
 	  		"Es visible alguna prenda (la esperamos hasta " + seconds + " segundos)",
-	  		pageDetalle.isVisiblePrendaUntil(seconds), State.Info);	
+	  		pageDetalle.isVisiblePrendaUntil(seconds), Info);	
 	  	checks.add(
 	  		"Aparecen " + numPrendasCompraOnline + " prendas",
-	  		pageDetalle.getNumPrendas()==numPrendasCompraOnline, State.Warn);	
+	  		pageDetalle.getNumPrendas()==numPrendasCompraOnline, Warn);	
 		return checks;
 	}
 	
@@ -71,13 +72,13 @@ public class PageDetallePedidoSteps {
 		var checks = ChecksTM.getNew();
 	  	checks.add(
 	  		"Aparece la página de detalle del pedido",
-	  		pageDetalle.isPage(), State.Warn);	   
+	  		pageDetalle.isPage(), Warn);	   
 	  	checks.add(
 	  		"En la página figura el Nº de pedido: " + codPedido,
-	  		driver.getPageSource().contains(codPedido), State.Info);	
+	  		driver.getPageSource().contains(codPedido), Info);	
 	  	checks.add(
 	  		"Como total figura el importe: " + importeTotalWithoutCurrency,
-	  		pageDetalle.isPresentImporteTotal(importeTotalWithoutCurrency, codPais), State.Info);
+	  		pageDetalle.isPresentImporteTotal(importeTotalWithoutCurrency, codPais), Info);
 	  	return checks;
 	}
 	

@@ -55,11 +55,11 @@ public class PageOrdenacionDePrendas {
 	}
 	
 	public enum Section implements ElementPage {
-		She("//input[@src[contains(.,'cabecera_mango_she')]]"),
-		He("//input[@src[contains(.,'cabecera_mango_he')]]"),
-		Ninos("//input[@src[contains(.,'cabecera_mango_kids')]]"),
-		Teen("//input[@src[contains(.,'cabecera_mango_teen')]]"),
-		Home("//input[@src[contains(.,'cabecera_mango_home')]]");
+		SHE("//input[@src[contains(.,'cabecera_mango_she')]]"),
+		HE("//input[@src[contains(.,'cabecera_mango_he')]]"),
+		NINOS("//input[@src[contains(.,'cabecera_mango_kids')]]"),
+		TEEN("//input[@src[contains(.,'cabecera_mango_teen')]]"),
+		HOME("//input[@src[contains(.,'cabecera_mango_home')]]");
 		
 		By by;
 		Section(String xpath) {

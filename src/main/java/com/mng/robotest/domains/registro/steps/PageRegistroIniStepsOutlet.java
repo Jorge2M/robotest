@@ -3,7 +3,6 @@ package com.mng.robotest.domains.registro.steps;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -17,6 +16,7 @@ import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.utils.UtilsTest;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageRegistroIniStepsOutlet extends StepBase {
 	
@@ -25,7 +25,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	
 	@Validation (
 		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean validaIsPageUntil(int seconds) {
 		return pageRegistroIni.isPageUntil(seconds);
 	}
@@ -48,7 +48,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	
 	@Validation (
 		description="No aparece mensaje de error en los campos con datos correctos",
-		level=State.Warn)
+		level=Warn)
 	public boolean validateNotAreErrorMessageInCorrectFields() {
 		return (!pageRegistroIni.isVisibleAnyInputErrorMessage());
 	}
@@ -69,11 +69,11 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			if (dataInput.isValidPrevRegistro()) {
 				checks.add(
 					"No aparece mensaje de error el el campo con datos correctos: <b>" + dataInputString + "</b>",
-					pageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType) <= 0, State.Warn);
+					pageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType) <= 0, Warn);
 			} else {
 				checks.add(
 					"Sí aparece mensaje de error el el campo con datos incorrectos: <b>" + dataInputString + "</b>",
-					pageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType) > 0, State.Warn);
+					pageRegistroIni.getNumberMsgInputInvalid(dataInput.dataRegType) > 0, Warn);
 			}
 		}
 		return checks;
@@ -119,21 +119,21 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	
 	@Validation (
 		description="Desaparece la capa de loading (lo esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	public boolean validaIsInvisibleCapaLoading(int seconds) {
 		return (pageRegistroIni.isCapaLoadingInvisibleUntil(seconds));
 	}
 	
 	@Validation (
 		description="Aparece un error <b>Email ya registrado</b> (lo esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean validaEmailYaRegistradoShown(int seconds) {
 		return(pageRegistroIni.isVisibleErrorUsrDuplicadoUntil(seconds));
 	}
 	
 	@Validation (
 		description="Aparece un error <b>Email incorrecto</b> (lo esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean validaEmailIncorrectShown(int seconds) {
 		return(pageRegistroIni.isVisibleErrorEmailIncorrecto(seconds));
 	}
@@ -146,11 +146,11 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		
 		checks.add(
 			"Aparecen " + numInputsObligatoriosNoInf + " errores de campo obligatorio",
-			(numInputsObligatoriosNoInf + numInputsTypePassrod) >= numErrCampObligatorio, State.Warn);
+			(numInputsObligatoriosNoInf + numInputsTypePassrod) >= numErrCampObligatorio, Warn);
 		if (pageRegistroIni.isVisibleSelectPais()) {
 			checks.add(
 				"Existe desplegable país -> aparece seleccionado el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")",
-				pageRegistroIni.isSelectedOptionPais(pais.getCodigo_pais()), State.Warn);
+				pageRegistroIni.isSelectedOptionPais(pais.getCodigo_pais()), Warn);
 		}
 		
 		return checks;
@@ -160,7 +160,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		description=
 		"<b style=\"color:blue\">Rebajas</b></br>" +
 		"1) El mensaje de NewsLetter no aparece o si aparece no contiene el símbolo de porcentaje",
-		level=State.Info,
+		level=Info,
 		store=StoreType.None)
 	public boolean validaRebajasJun2018() {
 		String percentageSymbol = UtilsTest.getPercentageSymbol(dataTest.getIdioma());
@@ -185,16 +185,16 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		int seconds = 1;
 		checks.add(
 			"El texto de info de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
-			pageRegistroIni.isTextoRGPDVisible(), State.Defect);
+			pageRegistroIni.isTextoRGPDVisible(), Defect);
 		
 		checks.add(
 			"El texto legal de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
-			pageRegistroIni.isTextoLegalRGPDVisible(), State.Defect);
+			pageRegistroIni.isTextoLegalRGPDVisible(), Defect);
 		
 		checks.add(
 			"<b>SI</b> está presente el checkbox para recibir promociones e información personalizada para el pais" +
 			codigoPais + " (lo esperamos hasta " + seconds + " segundos)",
-			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds), State.Defect);
+			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds), Defect);
 		
 		return checks;
 	}
@@ -205,16 +205,16 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		int seconds = 1;
 		checks.add(
 			"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro",
-			!pageRegistroIni.isTextoRGPDVisible(), State.Defect);
+			!pageRegistroIni.isTextoRGPDVisible(), Defect);
 		
 		checks.add(
 			"El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro", 
-			!pageRegistroIni.isTextoLegalRGPDVisible(), State.Defect);
+			!pageRegistroIni.isTextoLegalRGPDVisible(), Defect);
 		
 		checks.add(
 			"<b>SI</b> está presente el checkbox para recibir promociones e información personalizada" +
 			" (lo esperamos hasta " + seconds + " segundos)",
-			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds), State.Defect);
+			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds), Defect);
 		
 		return checks;
 	}
@@ -225,16 +225,16 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		int seconds = 1;
 		checks.add(
 			"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
-			!pageRegistroIni.isTextoRGPDVisible(), State.Defect);
+			!pageRegistroIni.isTextoRGPDVisible(), Defect);
 		
 		checks.add(
 			"El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
-			!pageRegistroIni.isTextoLegalRGPDVisible(), State.Defect);
+			!pageRegistroIni.isTextoLegalRGPDVisible(), Defect);
 		
 		checks.add(
 			"<b>NO</b> es visible el checkbox para recibir promociones e información personalizada para el pais " + 
 			codigoPais + " (lo esperamos hasta " + seconds + " segundos)",
-			!pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds), State.Defect);
+			!pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds), Defect);
 		
 		return checks;
 	}

@@ -6,7 +6,6 @@ import java.util.StringTokenizer;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageSuscripciones;
@@ -14,13 +13,15 @@ import com.mng.robotest.domains.micuenta.pageobjects.PageSuscripciones.NewsLette
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroPersonalizacionShop;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class PageSuscripcionesSteps extends StepBase {
 
 	private final PageSuscripciones pageSuscripciones = new PageSuscripciones();
 	
 	@Validation(
 		description="1) Aparece la página de \"Suscripciones\"",
-		level=State.Warn)
+		level=Warn)
 	public boolean validaIsPage () {
 		return pageSuscripciones.isPage();
 	}
@@ -35,17 +36,17 @@ public class PageSuscripcionesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparecen "  + numLineasTotales + " Newsletter",
-			pageSuscripciones.getNumNewsletters()==numLineasTotales, State.Warn);
+			pageSuscripciones.getNumNewsletters()==numLineasTotales, Warn);
 		
 		checks.add(
 			"Aparecen "  + numLinDesmarcadas + " suscripciones desmarcadas",
-			pageSuscripciones.getNumNewslettersDesmarcadas()==numLinDesmarcadas, State.Warn);
+			pageSuscripciones.getNumNewslettersDesmarcadas()==numLinDesmarcadas, Warn);
 		
 		while (tokensLinDesmarcadas.hasMoreElements()) {
 			String lineaStr = tokensLinDesmarcadas.nextToken();
 			checks.add(
 				"Aparecen desmarcadas las suscripciones de: " + lineasUnchecked,
-				pageSuscripciones.isNewsletterDesmarcada(lineaStr), State.Warn);
+				pageSuscripciones.isNewsletterDesmarcada(lineaStr), Warn);
 		}
 		return checks;
 	}
@@ -58,17 +59,17 @@ public class PageSuscripcionesSteps extends StepBase {
 		int numLineasTotales = PageRegistroPersonalizacionShop.ALL_LINEAS.size();
 		checks.add(
 				"Aparecen "  + PageRegistroPersonalizacionShop.ALL_LINEAS.size() + " Newsletter",
-				pageSuscripciones.getNumNewsletters()==numLineasTotales, State.Warn);
+				pageSuscripciones.getNumNewsletters()==numLineasTotales, Warn);
 		
 		for (LineaType linea : linesAll) {
 			if (linesMarked.contains(linea)) {
 				checks.add(
 				    "Aparecen marcada la suscripción de <b>" + linea + "</b>",
-				    pageSuscripciones.isNewsletterMarcada(linea.name()), State.Defect);
+				    pageSuscripciones.isNewsletterMarcada(linea.name()), Defect);
 			} else {
 				checks.add(
 					"Aparecen desmarcada la suscripción de <b>" + linea + "</b>",
-					pageSuscripciones.isNewsletterDesmarcada(linea.name()), State.Warn);				
+					pageSuscripciones.isNewsletterDesmarcada(linea.name()), Warn);				
 			}
 		}
 		return checks;
@@ -88,7 +89,7 @@ public class PageSuscripcionesSteps extends StepBase {
 
 	@Validation(
 		description="1) Aparece una pantalla de resultado OK (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean validateIsPageResult (int seconds) {
 		return pageSuscripciones.isPageResOKUntil(seconds);
 	}

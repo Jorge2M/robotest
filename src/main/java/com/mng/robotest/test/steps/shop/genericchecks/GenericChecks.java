@@ -8,19 +8,21 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.PageBase;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class GenericChecks extends PageBase {
 
 	private final List<GenericCheck> listChecks;
 	
 	public enum GenericCheck {
-		SEO(State.Info),
-		JS_ERRORS(State.Info),
-		IMGS_BROKEN(State.Warn),
-		ANALITICA(State.Defect),
-		NET_TRAFFIC(State.Warn),
-		TEXTS_TRADUCED(State.Defect),
-		GOOGLE_ANALYTICS(State.Warn),
-		COOKIES_ALLOWED(State.Defect);
+		SEO(Info),
+		JS_ERRORS(Info),
+		IMGS_BROKEN(Warn),
+		ANALITICA(Defect),
+		NET_TRAFFIC(Warn),
+		TEXTS_TRADUCED(Defect),
+		GOOGLE_ANALYTICS(Warn),
+		COOKIES_ALLOWED(Defect);
 		
 		State state;
 		private GenericCheck(State state) {

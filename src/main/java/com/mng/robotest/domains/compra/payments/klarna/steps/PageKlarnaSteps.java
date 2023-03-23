@@ -2,10 +2,11 @@ package com.mng.robotest.domains.compra.payments.klarna.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.klarna.pageobjects.DataKlarna;
 import com.mng.robotest.domains.compra.payments.klarna.pageobjects.PageKlarna;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageKlarnaSteps extends StepBase {
 
@@ -13,7 +14,7 @@ public class PageKlarnaSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página inicial de Klarna (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsPage(int seconds) { 
 		return pageKlarna.isPage(seconds);
 	}
@@ -31,7 +32,7 @@ public class PageKlarnaSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el modal de introducción de los datos del usuario (lo esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsModalInputUserData(int seconds) { 
 		return pageKlarna.isVisibleModalInputUserData(seconds);
 	}
@@ -52,14 +53,14 @@ public class PageKlarnaSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible el modal para la introducción del número personal (lo esperamos hasta #{seconds} segundos)",
-		level=State.Info)
+		level=Info)
 	public boolean checkModalInputPersonNumber(int seconds) { 
 		return pageKlarna.isVisibleModalPersonNumber(seconds);
 	}
 	
 	@Validation (
 		description="Es visible el modal para la introducción del phone number (lo esperamos hasta #{seconds} segundos)",
-		level=State.Info)
+		level=Info)
 	public boolean checkModalInputPhoneNumber(int seconds) { 
 		return pageKlarna.isVisibleModalInputPhone(seconds);
 	}

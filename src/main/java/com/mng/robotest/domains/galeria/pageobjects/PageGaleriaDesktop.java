@@ -450,7 +450,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	private List<String> getDataFromArticlesLiteral(String xpathLiteralArticle) {
 		List<String> dataTextArticles = new ArrayList<>();
 		for (WebElement litWebEl : getElements(xpathLiteralArticle)) {
-			String referencia = litWebEl.getAttribute("id").replaceAll("_info", "");
+			String referencia = litWebEl.getAttribute("id").replace("_info", "");
 			dataTextArticles.add(litWebEl.getText() + " (" + referencia + ")");
 		}
 		

@@ -1,11 +1,12 @@
 package com.mng.robotest.domains.compra.payments.mercadopago.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.mercadopago.pageobjects.PageMercpagoConf;
 import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageMercpagoConfSteps extends StepBase {
 
@@ -13,7 +14,7 @@ public class PageMercpagoConfSteps extends StepBase {
 	
 	@Validation (
 		description="Estamos en la página de confirmación del pago (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean validaIsPageUntil(int seconds) {  
 		return pageMercpagoConf.isPageUntil(seconds);
 	}

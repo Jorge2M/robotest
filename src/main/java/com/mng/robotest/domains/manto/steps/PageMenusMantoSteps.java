@@ -4,17 +4,17 @@ import java.util.List;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.manto.pageobjects.PageBolsas;
 import com.mng.robotest.domains.manto.pageobjects.PageMenusManto;
-import com.mng.robotest.domains.manto.pageobjects.PageOrdenacionDePrendasSteps;
 import com.mng.robotest.domains.manto.pageobjects.PagePedidos;
 import com.mng.robotest.domains.manto.pageobjects.SecCabecera;
 import com.mng.robotest.domains.manto.steps.pedidos.PageGestorEstadisticasPedidoSteps;
 import com.mng.robotest.domains.manto.tests.MenusFact.Section;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageMenusMantoSteps extends StepMantoBase {
 
@@ -39,11 +39,11 @@ public class PageMenusMantoSteps extends StepMantoBase {
 		int seconds = 2;
 	 	checks.add(
 			"Aparece la página asociada al menú <b>" + subMenu + "</b> (la esperamos hasta " + seconds + " segundos)",
-			pageMenusManto.validateIsPage(subMenu, seconds), State.Defect);
+			pageMenusManto.validateIsPage(subMenu, seconds), Defect);
 	 	
 	 	checks.add(
 			"No aparece ninguna ventana de alerta",
-			"".compareTo(textAlertObtained)==0, State.Warn);
+			"".compareTo(textAlertObtained)==0, Warn);
 	 	
 	 	return checks;
 	}
@@ -57,7 +57,7 @@ public class PageMenusMantoSteps extends StepMantoBase {
 	
 	@Validation (
 		description="Aparece la página de Bolsas",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsVisiblePageBolsas() {
 		return new PageBolsas().isPage();
 	}
@@ -71,7 +71,7 @@ public class PageMenusMantoSteps extends StepMantoBase {
 	
 	@Validation (
 		description="Aparece la página de Pedidos",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsVisiblePagePedidos() {
 		return new PagePedidos().isPage();
 	}

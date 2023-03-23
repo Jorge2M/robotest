@@ -3,12 +3,13 @@ package com.mng.robotest.domains.otros.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.otros.pageobjects.PageGoogle;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PagePrehome;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class GoogleSteps extends PageBase {
 
@@ -31,11 +32,11 @@ public class GoogleSteps extends PageBase {
 		int seconds = 3;
 		checks.add(
 			"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + seconds + " segundos)",
-			pageGoogle.validaFirstLinkContainsUntil("Mango", seconds), State.Defect);	
+			pageGoogle.validaFirstLinkContainsUntil("Mango", seconds), Defect);	
 		
 		checks.add(
 			"El 1er link no-anuncion no contiene \"robots.txt\"",
-			!pageGoogle.validaFirstLinkContainsUntil("robots.txt", 0), State.Warn);
+			!pageGoogle.validaFirstLinkContainsUntil("robots.txt", 0), Warn);
 		
 		return checks;
 	}
@@ -50,7 +51,7 @@ public class GoogleSteps extends PageBase {
 	
 	@Validation (
 		description="Aparece la página de <b>Landing</b> o <b>Prehome</b>",
-		level=State.Defect)	
+		level=Defect)	
 	private boolean checkInitialPageShop() {
 		boolean isPageLanding = (new PageLanding()).isPage();
 		boolean isPagePrehome = new PagePrehome().isPage();

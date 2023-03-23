@@ -1,8 +1,8 @@
 package com.mng.robotest.domains.compra.payments.dotpay.steps;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -11,6 +11,7 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.dotpay.pageobjects.PageDotpay1rst;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageDotpay1rstSteps extends StepBase {
 	
@@ -21,12 +22,12 @@ public class PageDotpay1rstSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
-			pageDotpay1rst.isPresentEntradaPago(nombrePago), State.Warn);
+			pageDotpay1rst.isPresentEntradaPago(nombrePago), Warn);
 	  	
-	  	State stateVal = State.Warn;
+	  	State stateVal = Warn;
 	  	StoreType store = StoreType.Evidences;
 		if (channel.isDevice()) {
-			stateVal = State.Info;
+			stateVal = Info;
 			store = StoreType.None;
 		}
 	  	checks.add(
@@ -37,12 +38,12 @@ public class PageDotpay1rstSteps extends StepBase {
 	  	
 	  	checks.add(
 			"Aparece la cabecera indicando la 'etapa' del pago",
-			pageDotpay1rst.isPresentCabeceraStep(nombrePago), State.Warn);
+			pageDotpay1rst.isPresentCabeceraStep(nombrePago), Warn);
 	  	
 	  	if (channel==Channel.desktop) {
 		  	checks.add(
 				"Figura un botón de pago",
-				pageDotpay1rst.isPresentButtonPago(), State.Defect);
+				pageDotpay1rst.isPresentButtonPago(), Defect);
 	  	}
 	  	
 	  	return checks;

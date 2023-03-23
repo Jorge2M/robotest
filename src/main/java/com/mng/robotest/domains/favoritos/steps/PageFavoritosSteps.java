@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.favoritos.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -11,6 +10,8 @@ import com.mng.robotest.domains.favoritos.pageobjects.PageFavoritos;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageFavoritosSteps extends StepBase {
 	
@@ -27,11 +28,11 @@ public class PageFavoritosSteps extends StepBase {
 		int secondsArticles = 2;
 		checks.add(
 			"Está visible la capa de favoritos con artículos (la esperamos hasta " + secondsCapa + " segundos)",
-			pageFavoritos.isSectionArticlesVisibleUntil(secondsCapa), State.Defect);
+			pageFavoritos.isSectionArticlesVisibleUntil(secondsCapa), Defect);
 		
 		checks.add(
 			"Aparecen los artículos (los esperamos hasta " + secondsArticles + " segundos): <br>" + dataTest.getDataFavoritos().getListArtDescHTML(),
-			pageFavoritos.areVisibleArticlesUntil(secondsArticles), State.Defect);
+			pageFavoritos.areVisibleArticlesUntil(secondsArticles), Defect);
 		
 		return checks;
 	}
@@ -54,19 +55,19 @@ public class PageFavoritosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el modal de favoritos compartidos",
-			pageFavoritos.checkShareModalUntill(5), State.Defect);
+			pageFavoritos.checkShareModalUntill(5), Defect);
 		
 		checks.add(
 			"Aparece el boton de compartir por Telegram",
-			pageFavoritos.isShareTelegramFavoritesVisible(), State.Defect);
+			pageFavoritos.isShareTelegramFavoritesVisible(), Defect);
 		
 		checks.add(
 			"Aparece el boton de compartir por WhatsApp",
-			pageFavoritos.isShareWhatsappFavoritesVisible(), State.Defect);
+			pageFavoritos.isShareWhatsappFavoritesVisible(), Defect);
 		
 		checks.add(
 			"Aparece la url para copiarla y compartir como texto", 
-			pageFavoritos.isShareUrlFavoritesVisible(), State.Defect);
+			pageFavoritos.isShareUrlFavoritesVisible(), Defect);
 		
 		return checks;
 	}
@@ -81,7 +82,7 @@ public class PageFavoritosSteps extends StepBase {
 	
 	@Validation (
 		description="Desaparece el modal de favoritos compartidos (lo esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	public boolean checkShareIsClosedUntil(int seconds) {
 		return (pageFavoritos.checkShareModalInvisible(seconds));
 	}
@@ -96,7 +97,7 @@ public class PageFavoritosSteps extends StepBase {
 	
 	@Validation (
 		description="Desaparece de Favoritos el artículo con referencia <b>#{refArticle}</b> y código de color <b>#{codColor}</b> (lo esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkArticleDisappearsFromFavoritesUntil(String refArticle, String codColor, int seconds) {
 		return (pageFavoritos.isInvisibleArticleUntil(refArticle, codColor, seconds));
 	}
@@ -115,10 +116,10 @@ public class PageFavoritosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"No queda ningún artículo en Favoritos",
-			!pageFavoritos.hayArticulos(), State.Defect);
+			!pageFavoritos.hayArticulos(), Defect);
 		checks.add(
 			"Aparece el botón \"Inspírate con lo último\"",
-			pageFavoritos.isVisibleButtonEmpty(), State.Warn);
+			pageFavoritos.isVisibleButtonEmpty(), Warn);
 		return checks;
 	}  
 	

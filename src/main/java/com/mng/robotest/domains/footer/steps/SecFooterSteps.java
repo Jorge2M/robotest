@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.footer.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -15,6 +14,8 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class SecFooterSteps extends StepBase {
 	
 	private final SecFooter secFooter = new SecFooter();
@@ -25,7 +26,7 @@ public class SecFooterSteps extends StepBase {
 		for (FooterLink footerLink : FooterLink.getFooterLinksFiltered(app, channel)) {
 			checks.add(
 				"Aparecen el link <b>" + footerLink + "</b> en el footer",
-				secFooter.checkFooter(footerLink), State.Defect);
+				secFooter.checkFooter(footerLink), Defect);
 		}
 		return checks;
 	}
@@ -49,11 +50,11 @@ public class SecFooterSteps extends StepBase {
 		try {
 			checks.add(
 				"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + seconds + " segundos)",
-				pageObject.isPageCorrectUntil(seconds), State.Warn);
+				pageObject.isPageCorrectUntil(seconds), Warn);
 			if (typeFooter.pageInNewTab()) {
 				checks.add(
 					"Aparece la página en una ventana aparte",
-					newWindowInNewTab, State.Warn);		
+					newWindowInNewTab, Warn);		
 			}
 		}
 		finally {
@@ -98,14 +99,14 @@ public class SecFooterSteps extends StepBase {
 	 
 	@Validation (
 		description="El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais #{codigoPais}",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsRGPDpresent(String codigoPais) {
  		return secFooter.isTextoLegalRGPDPresent();
 	}
 	
 	@Validation (
 		description="El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais #{codigoPais}",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsNotPresentRGPD(String codigoPais) {
  		return !secFooter.isTextoLegalRGPDPresent();
 	}	

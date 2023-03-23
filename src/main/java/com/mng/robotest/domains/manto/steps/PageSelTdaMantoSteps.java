@@ -2,7 +2,6 @@ package com.mng.robotest.domains.manto.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.domains.base.StepMantoBase;
@@ -10,6 +9,8 @@ import com.mng.robotest.domains.manto.pageobjects.PageMenusManto;
 import com.mng.robotest.domains.manto.pageobjects.PageSelTda;
 import com.mng.robotest.domains.manto.pageobjects.SecCabecera;
 import com.mng.robotest.test.data.TiendaManto;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageSelTdaMantoSteps extends StepMantoBase {
 	
@@ -34,7 +35,7 @@ public class PageSelTdaMantoSteps extends StepMantoBase {
 	
 	@Validation(
 		description="Aparece la página del Menú principal de Manto donde se encuentran todas las opciones de éste",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsPageMenusManto() {
 		return (new PageMenusManto().isPage());
 	}

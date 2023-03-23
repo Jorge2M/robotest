@@ -1,11 +1,11 @@
 package com.mng.robotest.domains.micuenta.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.pageobject.shop.PageMispedidos;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PagePedidosSteps extends StepBase {
 
@@ -16,15 +16,15 @@ public class PagePedidosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de \"Mis Pedidos\"",
-			pageMispedidos.isPage(), State.Defect);
+			pageMispedidos.isPage(), Defect);
 		
 		checks.add(
 			"La página contiene " + usrRegistrado ,
-			pageMispedidos.elementContainsText(usrRegistrado), State.Warn);
+			pageMispedidos.elementContainsText(usrRegistrado), Warn);
 		
 		checks.add(
 			"La lista de pedidos está vacía",
-			pageMispedidos.listaPedidosVacia(), State.Warn);
+			pageMispedidos.listaPedidosVacia(), Warn);
 		
 		return checks;
 	}

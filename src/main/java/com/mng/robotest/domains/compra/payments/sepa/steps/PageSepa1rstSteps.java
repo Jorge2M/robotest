@@ -12,6 +12,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.domains.compra.payments.sepa.pageobjects.PageSepa1rst;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageSepa1rstSteps {
 	
@@ -22,12 +23,12 @@ public class PageSepa1rstSteps {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
-			pageSepa1rst.isPresentIconoSepa(channel), State.Warn);
+			pageSepa1rst.isPresentIconoSepa(channel), Warn);
 		
-		State stateVal = State.Warn;
+		State stateVal = Warn;
 		StoreType store = StoreType.Evidences;
 		if (channel.isDevice()) {
-			stateVal = State.Info;
+			stateVal = Info;
 			store = StoreType.None;
 		}
 		checks.add(
@@ -38,18 +39,18 @@ public class PageSepa1rstSteps {
 		
 		checks.add(
 			"Aparece la cabecera indicando la 'etapa' del pago",
-			pageSepa1rst.isPresentCabeceraStep(), State.Warn);		
+			pageSepa1rst.isPresentCabeceraStep(), Warn);		
 		
 		if (channel==Channel.desktop) {
 			checks.add(
 				"Figura el campo de introducción del titular",
-				pageSepa1rst.isPresentInputTitular(), State.Warn);
+				pageSepa1rst.isPresentInputTitular(), Warn);
 			checks.add(
 				"Figura el campo de introducción del la cuenta",
-				pageSepa1rst.isPresentInputCuenta(), State.Warn);
+				pageSepa1rst.isPresentInputCuenta(), Warn);
 			checks.add(
 				"Figura un botón de pago",
-				pageSepa1rst.isPresentButtonPagoDesktop(), State.Defect);
+				pageSepa1rst.isPresentButtonPagoDesktop(), Defect);
 		}
 		
 		return checks;

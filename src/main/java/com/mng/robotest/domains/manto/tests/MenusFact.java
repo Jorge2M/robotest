@@ -52,7 +52,7 @@ public class MenusFact implements Serializable {
 	@Test(
 		groups={"Manto", "Canal:desktop_App:all"},
 		description="Consulta de menús")
-	public void MAN900_ConsultaMenus() throws Exception {
+	public void MAN900_ConsultaMenus() {
 		TestCaseTM.addNameSufix(this.indexFact);
 		new Man900(section).execute();
 	}

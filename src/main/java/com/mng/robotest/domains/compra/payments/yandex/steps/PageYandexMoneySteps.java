@@ -2,11 +2,12 @@ package com.mng.robotest.domains.compra.payments.yandex.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.yandex.pageobjects.PageYandexMoney;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageYandexMoneySteps extends StepBase {
 
@@ -28,11 +29,11 @@ public class PageYandexMoneySteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el input para el <b>Payment Code</b>",
-			pageYandexMoney.isVisibleInputPaymentCode(), State.Warn);
+			pageYandexMoney.isVisibleInputPaymentCode(), Warn);
 	 	
 	 	checks.add(
 			"Aparece el input para el importe",
-			pageYandexMoney.isVisibleInputImport(), State.Warn);
+			pageYandexMoney.isVisibleInputImport(), Warn);
 	 	
 	 	return checks;
 	}

@@ -2,11 +2,12 @@ package com.mng.robotest.domains.compra.payments.pasarelaotras.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.test.utils.ImporteScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PagePasarelaOtrasSteps extends StepBase {
 	
@@ -16,11 +17,11 @@ public class PagePasarelaOtrasSteps extends StepBase {
 		if (channel==Channel.desktop) {
 		   	checks.add(
 				"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-				ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), State.Warn);
+				ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), Warn);
 		}
 	   	checks.add(
 			"No se trata de la página de precompra (no aparece los logos de formas de pago)",
-			new PageCheckoutWrapper().isPresentMetodosPago(), State.Defect);
+			new PageCheckoutWrapper().isPresentMetodosPago(), Defect);
 	   	
 	   	return checks;
 	}

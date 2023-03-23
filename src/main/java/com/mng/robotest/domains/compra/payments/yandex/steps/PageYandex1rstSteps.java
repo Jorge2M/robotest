@@ -2,12 +2,13 @@ package com.mng.robotest.domains.compra.payments.yandex.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.yandex.pageobjects.PageYandex1rst;
 import com.mng.robotest.domains.compra.payments.yandex.pageobjects.PageYandexPayingByCode;
 import com.mng.robotest.test.utils.ImporteScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageYandex1rstSteps extends StepBase {
 	
@@ -19,15 +20,15 @@ public class PageYandex1rstSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página inicial de Yandex",
-			pageYandex1rst.isPage(), State.Warn);
+			pageYandex1rst.isPage(), Warn);
 	 	
 	 	checks.add(
 			"Figura preinformado el email del usuario: " + emailUsr,
-			pageYandex1rst.isValueEmail(emailUsr), State.Warn);
+			pageYandex1rst.isValueEmail(emailUsr), Warn);
 	 	
 	 	checks.add(
 			"Aparece el importe de la compra por pantalla: " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
 	 	
 		return checks;
 	}

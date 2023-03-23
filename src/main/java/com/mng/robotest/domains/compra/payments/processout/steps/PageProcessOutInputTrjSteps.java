@@ -2,12 +2,13 @@ package com.mng.robotest.domains.compra.payments.processout.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.processout.pageobjects.PageProcessOutInputTrj;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.utils.ImporteScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageProcessOutInputTrjSteps extends StepBase {
 
@@ -18,16 +19,16 @@ public class PageProcessOutInputTrjSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Estamos en la página con el formulario para la introducción de los datos de la tarjeta",
-			pageObject.checkIsPage(), State.Defect);
+			pageObject.checkIsPage(), Defect);
 		
 		String codPais = dataTest.getCodigoPais();
 		checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
 		
 		checks.add(
 			"Figura un botón de pago",
-			pageObject.isPresentButtonPago(), State.Defect);
+			pageObject.isPresentButtonPago(), Defect);
 		
 		return checks;
 	}

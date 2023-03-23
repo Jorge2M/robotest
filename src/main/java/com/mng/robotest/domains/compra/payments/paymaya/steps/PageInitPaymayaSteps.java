@@ -2,10 +2,10 @@ package com.mng.robotest.domains.compra.payments.paymaya.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.compra.payments.paymaya.pageobjects.PageInitPaymaya;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageInitPaymayaSteps {
 
@@ -16,10 +16,10 @@ public class PageInitPaymayaSteps {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página inicial de PayMaya",
-			pageInitPaymaya.isPage(), State.Warn); 
+			pageInitPaymaya.isPage(), Warn); 
 	 	checks.add(
 			"Aparece la imagen del QR",
-			pageInitPaymaya.isQrVisible(), State.Defect);
+			pageInitPaymaya.isQrVisible(), Defect);
 	 	return checks;
 	}
 	

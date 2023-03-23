@@ -1,12 +1,13 @@
 package com.mng.robotest.domains.compra.steps.envio;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.envio.ModalDroppoints;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.datastored.DataPago;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalDroppointsSteps extends StepBase {
 	
@@ -21,22 +22,22 @@ public class ModalDroppointsSteps extends StepBase {
 		int seconds = 3;
 	  	checks.add(
 			"Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + seconds + " segundos)",
-			modalDroppoints.isInvisibleCargandoMsgUntil(seconds), State.Warn);
+			modalDroppoints.isInvisibleCargandoMsgUntil(seconds), Warn);
 	  	
 	  	checks.add(
 			"Aparece un 1er Droppoint visible (lo esperamos hasta " + seconds + " segundos)",
-			modalDroppoints.isDroppointVisibleUntil(1, seconds), State.Info);
+			modalDroppoints.isDroppointVisibleUntil(1, seconds), Info);
 	  	
 	  	checks.add(
 			"Sí aparece el modal con el mapa de Droppoints",
-			modalDroppoints.isVisible(), State.Defect);
+			modalDroppoints.isVisible(), Defect);
 	  	
 	  	return checks;
 	}
 	
 	@Validation (
 		description="No aparece el modal con el mapa de Droppoints",
-		level=State.Defect)
+		level=Defect)
 	public boolean validaIsNotVisible() {
 		return (!modalDroppoints.isVisible());
 	}

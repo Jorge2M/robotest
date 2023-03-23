@@ -8,6 +8,8 @@ import com.mng.robotest.domains.compra.pageobjects.PageResultPagoTpv;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class PageResultPagoTpvSteps extends StepBase {
 	
 	private final PageResultPagoTpv pageResultPagoTpv = new PageResultPagoTpv();
@@ -17,12 +19,12 @@ public class PageResultPagoTpvSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece un texto de confirmación de la compra",
-			pageResultPagoTpv.isPresentCabeceraConfCompra(), State.Warn);
+			pageResultPagoTpv.isPresentCabeceraConfCompra(), Warn);
 	 	
 		String importeTotal = dataPedido.getImporteTotal();
 	 	checks.add(
 			"Aparece el importe " + importeTotal + " de la operación",
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
 	 	
 	 	boolean isVisibleCodPedido = pageResultPagoTpv.isVisibleCodPedido();
 	 	String codPedido = "";
@@ -31,7 +33,7 @@ public class PageResultPagoTpvSteps extends StepBase {
 	 	}
 	 	checks.add(
 			"Aparece el código de pedido <b>" + codPedido + "</b>",
-			isVisibleCodPedido, State.Defect);
+			isVisibleCodPedido, Defect);
 	 	
 		dataPedido.setCodpedido(codPedido); 
 		dataPedido.setResejecucion(State.Ok);

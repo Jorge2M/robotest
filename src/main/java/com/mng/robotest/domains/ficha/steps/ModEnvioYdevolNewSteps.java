@@ -2,10 +2,10 @@ package com.mng.robotest.domains.ficha.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.ficha.pageobjects.ModEnvioYdevolNew;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModEnvioYdevolNewSteps extends StepBase {
 
@@ -13,7 +13,7 @@ public class ModEnvioYdevolNewSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el modal con los datos a nivel de envío y devolución",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsVisible() {
 		return modEnvioYdev.isVisibleUntil(1);
 	}
@@ -28,7 +28,7 @@ public class ModEnvioYdevolNewSteps extends StepBase {
 	
 	@Validation (
 		description="No es visible el modal con los datos a nivel de envío y devolución",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkIsVisibleModalDatosEnvio() {
 		return !modEnvioYdev.isVisibleUntil(1);
 	}

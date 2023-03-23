@@ -4,11 +4,12 @@ import java.util.Map;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisDatos;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageMisDatosSteps extends StepBase {
 
@@ -20,11 +21,11 @@ public class PageMisDatosSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece una página con el la cabecera \"Mis datos\" (esperamos hasta " + seconds + " segundos)",
-			pageMisDatos.isPage(seconds), State.Warn);
+			pageMisDatos.isPage(seconds), Warn);
 		
 		checks.add(
 			"El campo de email contiene " + usuarioReg,
-			pageMisDatos.getValueEmailInput().toUpperCase().compareTo(usuarioReg.toUpperCase())==0, State.Warn);
+			pageMisDatos.getValueEmailInput().toUpperCase().compareTo(usuarioReg.toUpperCase())==0, Warn);
 
 		return checks;
 	}
@@ -38,19 +39,19 @@ public class PageMisDatosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece un campo de contraseña de tipo password",
-			pageMisDatos.isVisiblePasswordTypePassword(), State.Defect);
+			pageMisDatos.isVisiblePasswordTypePassword(), Defect);
 		
 		checks.add(
 			"El Nombre contiene el definido durante el registro: <b>" + nombre + "</b>",
-			(pageMisDatos.getNumInputContentVoid() <= 1), State.Defect);
+			(pageMisDatos.getNumInputContentVoid() <= 1), Defect);
 		
 		checks.add(
 			"El Apellidos contiene el definido durante el registro: <b>" + apellidos + "</b>",
-			(pageMisDatos.getTextInputNombre().compareTo(nombre)==0), State.Defect);
+			(pageMisDatos.getTextInputNombre().compareTo(nombre)==0), Defect);
 		
 		checks.add(
 			"El Email contiene el definido durante el registro: <b>" + email + "</b>",
-			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0), State.Defect);
+			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0), Defect);
 
 //		if (!dataTest.getPais().isMisdirecciones(app)) {
 //			String direccion = datosRegOk.get("cfDir1");
@@ -60,26 +61,26 @@ public class PageMisDatosSteps extends StepBase {
 //	
 //			checks.add(
 //				"La Dirección contiene la definida durante el registro: <b>" + direccion + "</b>",
-//				(pageMisDatos.getTextInputDireccion().compareTo(direccion)==0), State.Defect);
+//				(pageMisDatos.getTextInputDireccion().compareTo(direccion)==0), Defect);
 //			
 //			checks.add(
 //				"El Código postal contiene el definido durante el registro: <b>" + codpostal + "</b>",
-//				(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0), State.Defect);
+//				(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0), Defect);
 //			
 //			if (poblacion!=null) {
 //				checks.add(
 //					"La población contiene la definida durante el registro: <b>" + poblacion + "</b>",
-//					(pageMisDatos.getTextInputPoblacion().compareTo(poblacion)==0), State.Defect);
+//					(pageMisDatos.getTextInputPoblacion().compareTo(poblacion)==0), Defect);
 //			}
 //			
 //			checks.add(
 //				"Está seleccionado el país definido durante el registro: <b>" + codpais + "</b>",
-//				(pageMisDatos.getCodPaisSelected().compareTo(codpais)==0), State.Defect);
+//				(pageMisDatos.getCodPaisSelected().compareTo(codpais)==0), Defect);
 //			
 //			if (provincia != null) {
 //				checks.add(
 //					"Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>",
-//					(pageMisDatos.getProvinciaSelected().compareTo(provincia)==0), State.Defect);
+//					(pageMisDatos.getProvinciaSelected().compareTo(provincia)==0), Defect);
 //			}
 //		}
 			
@@ -94,21 +95,21 @@ public class PageMisDatosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece un campo de contraseña de tipo password",
-			pageMisDatos.isVisiblePasswordTypePassword(), State.Defect);
+			pageMisDatos.isVisiblePasswordTypePassword(), Defect);
 		
 		checks.add(
 			"El Nombre contiene el definido durante el registro: <b>" + nombre + "</b>",
-			(pageMisDatos.getTextInputNombre().compareTo(nombre)==0), State.Defect);
+			(pageMisDatos.getTextInputNombre().compareTo(nombre)==0), Defect);
 		
 		checks.add(
 			"El Email contiene el definido durante el registro: <b>" + email + "</b>",
-			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0), State.Defect);
+			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0), Defect);
 		
 		if (!dataTest.getPais().isMisdirecciones(app)) {
 			String codpostal = dataNewRegister.getPostalCode();
 			checks.add(
 				"El código postal contiene el definido durante el registro: <b>" + codpostal + "</b>",
-				(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0), State.Defect);
+				(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0), Defect);
 		}
 		
 		return checks;
@@ -130,14 +131,14 @@ public class PageMisDatosSteps extends StepBase {
 
 	@Validation(
 		description = "1) Aparece una pantalla de resultado Ok de la suscripción",
-		level = State.Defect)
+		level = Defect)
 	private boolean validateModificationOfData() {
 		return pageMisDatos.pageResOK();
 	}
 
 	@Validation (
 		description="En el campo del nombre figura<b>: #{nombre}<b>",
-		level=State.Warn)
+		level=Warn)
 	public boolean validaContenidoNombre(String nombre) {
 		return pageMisDatos.getValueNombreInput().contains(nombre);
 	}
@@ -152,7 +153,7 @@ public class PageMisDatosSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece un mensaje de cuenta cancelada correctamente (lo esperamos #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkCuentaCanceladaOk(int seconds) {
 		return pageMisDatos.isMessageCuentaCanceladaOkVisible(seconds);
 	}

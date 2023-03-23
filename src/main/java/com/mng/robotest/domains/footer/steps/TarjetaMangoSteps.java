@@ -2,12 +2,13 @@ package com.mng.robotest.domains.footer.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.footer.pageobjects.PageMangoCard;
 import com.mng.robotest.test.pageobject.shop.PageInputDataSolMangoCard;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class TarjetaMangoSteps extends StepBase {
 
@@ -37,27 +38,27 @@ public class TarjetaMangoSteps extends StepBase {
 		 var checks = ChecksTM.getNew();
 		 checks.add(
 			"Aparece el campo <b>Nombre</b>",
-	 		pageMangoCard.isPresentNameField(), State.Warn);
+	 		pageMangoCard.isPresentNameField(), Warn);
 		 
 		 checks.add(
 	 		"Aparece el campo <b>Primer Apellido</b>",
-	 		pageMangoCard.isPresentFirstSurnameField(), State.Warn);
+	 		pageMangoCard.isPresentFirstSurnameField(), Warn);
 		 
 		 checks.add(
 	 		"Aparece el campo <b>Segundo Apellido</b>",
-	 		pageMangoCard.isPresentSecondSurnameField(), State.Warn);
+	 		pageMangoCard.isPresentSecondSurnameField(), Warn);
 		 
 		 checks.add(
 	 		"Aparece el campo <b>Movil</b>",
-	 		pageMangoCard.isPresentMobileField(), State.Warn);
+	 		pageMangoCard.isPresentMobileField(), Warn);
 		 
 		 checks.add(
 	 		"Aparece el campo <b>Mail</b>",
-	 		pageMangoCard.isPresentMailField(), State.Warn);
+	 		pageMangoCard.isPresentMailField(), Warn);
 		 
 		 checks.add(
 	 		"Aparece el botón <b>¡Lo quiero ahora!</b>",
-	 		pageMangoCard.isPresentButtonSolMangoCardNow(), State.Warn);
+	 		pageMangoCard.isPresentButtonSolMangoCardNow(), Warn);
 		 
 	 	return checks;
 	 }
@@ -80,12 +81,12 @@ public class TarjetaMangoSteps extends StepBase {
 		PageObjTM.waitForPageLoaded(driver, 10);
 	 	checks.add(
 	 		"Aparece una nueva ventana",
-	 		true, State.Warn);	
+	 		true, Warn);	
 	 	
 		int seconds = 3;
 	 	checks.add(
 	 		"Aparece un modal de aviso de trámite de la solicitud con un botón \"Continuar\" (la esperamos hasta " + seconds + " segundos)",
-	 		new PageInputDataSolMangoCard().isPresentBotonContinuarModalUntil(seconds), State.Warn);
+	 		new PageInputDataSolMangoCard().isPresentBotonContinuarModalUntil(seconds), Warn);
 	 	
 	 	return checks;
 	 }
@@ -103,34 +104,34 @@ public class TarjetaMangoSteps extends StepBase {
   		var checks = ChecksTM.getNew();
 	 	checks.add(
 	 		"Aparece la página de Solicitud de tu Tarjeta MANGO",
-	 		pageInputDataSolMangoCard.isPage2(), State.Defect);
+	 		pageInputDataSolMangoCard.isPage2(), Defect);
 	 	
 	 	try {
 			//Nos posicionamos en el iframe central para recorrer contenido (datos personales y datos bancarios).
 			pageInputDataSolMangoCard.gotoiFramePage2();
 		 	checks.add(
 		 		"Aparece el apartado \"Datos personales\"",
-		 		pageInputDataSolMangoCard.isPresentDatosPersonalesPage2(), State.Warn);
+		 		pageInputDataSolMangoCard.isPresentDatosPersonalesPage2(), Warn);
 		 	
 		 	checks.add(
 		 		"Aparece el apartado \"Datos bancarios\"",
-		 		pageInputDataSolMangoCard.isPresentDatosBancariosPage2(), State.Defect);
+		 		pageInputDataSolMangoCard.isPresentDatosBancariosPage2(), Defect);
 		 	
 		 	checks.add(
 		 		"Aparece el apartado \"Datos de contacto\"",
-		 		pageInputDataSolMangoCard.isPresentDatosContactoPage2(), State.Warn);
+		 		pageInputDataSolMangoCard.isPresentDatosContactoPage2(), Warn);
 		 	
 		 	checks.add(
 		 		"Aparece el apartado \"Datos socioeconómicos\"",
-		 		pageInputDataSolMangoCard.isPresentDatosSocioeconomicosPage2(), State.Warn);
+		 		pageInputDataSolMangoCard.isPresentDatosSocioeconomicosPage2(), Warn);
 		 	
 		 	checks.add(
 		 		"Aparece el apartado \"Modalidad de pago de tu MANGO Card\"",
-		 		pageInputDataSolMangoCard.isPresentModalidadpagoPage2(), State.Warn);
+		 		pageInputDataSolMangoCard.isPresentModalidadpagoPage2(), Warn);
 		 	
 		 	checks.add(
 		 		"Aparece el botón \"Continuar\"",
-		 		pageInputDataSolMangoCard.isPresentButtonContinuarPage2(), State.Warn);
+		 		pageInputDataSolMangoCard.isPresentButtonContinuarPage2(), Warn);
 	 	}
 		finally {
 			driver.close();

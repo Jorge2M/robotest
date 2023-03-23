@@ -2,11 +2,12 @@ package com.mng.robotest.domains.compra.payments.trustpay.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.trustpay.pageobjects.PageTrustpayTestConfirm;
 import com.mng.robotest.domains.compra.payments.trustpay.pageobjects.PageTrustpayTestConfirm.typeButtons;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageTrustpayTestConfirmSteps extends StepBase {
 	
@@ -17,19 +18,19 @@ public class PageTrustpayTestConfirmSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Figura el botón \"OK\"",
-			pageTrustpayTestConfirm.isPresentButton(typeButtons.OK), State.Defect);
+			pageTrustpayTestConfirm.isPresentButton(typeButtons.OK), Defect);
 		
 		checks.add(
 			"Figura el botón \"ANNOUNCED\"",
-			pageTrustpayTestConfirm.isPresentButton(typeButtons.ANNOUNCED), State.Warn);
+			pageTrustpayTestConfirm.isPresentButton(typeButtons.ANNOUNCED), Warn);
 		
 		checks.add(
 			"Figura el botón \"FAIL\"",
-			pageTrustpayTestConfirm.isPresentButton(typeButtons.FAIL), State.Warn);
+			pageTrustpayTestConfirm.isPresentButton(typeButtons.FAIL), Warn);
 		
 		checks.add(
 			"Figura el botón \"PENDING\"",
-			pageTrustpayTestConfirm.isPresentButton(typeButtons.PENDING), State.Warn);
+			pageTrustpayTestConfirm.isPresentButton(typeButtons.PENDING), Warn);
 		
 		return checks;
 	}

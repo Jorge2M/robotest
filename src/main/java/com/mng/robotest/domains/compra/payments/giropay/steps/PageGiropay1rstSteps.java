@@ -11,6 +11,7 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.giropay.pageobjects.PageGiropay1rst;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageGiropay1rstSteps extends StepBase {
 
@@ -22,12 +23,12 @@ public class PageGiropay1rstSteps extends StepBase {
 		String codPais = dataTest.getCodigoPais();
 		checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago.toLowerCase() + "</b>",
-			pageGiropay1rst.isPresentIconoGiropay(), State.Warn);	
+			pageGiropay1rst.isPresentIconoGiropay(), Warn);	
 
-		State stateVal = State.Warn;
+		State stateVal = Warn;
 		StoreType store = StoreType.Evidences;
 		if (channel.isDevice()) {
-			stateVal = State.Info;
+			stateVal = Info;
 			store = StoreType.None;
 		}
 		checks.add(
@@ -38,13 +39,13 @@ public class PageGiropay1rstSteps extends StepBase {
 		
 		checks.add(
 			"Aparece la cabecera indicando la 'etapa' del pago",
-			pageGiropay1rst.isPresentCabeceraStep(), State.Warn);	
+			pageGiropay1rst.isPresentCabeceraStep(), Warn);	
 
 		if (channel==Channel.desktop) {
 			int seconds = 2;
 			checks.add(
 				"Figura un botón de pago (lo esperamos hasta " + seconds + " segundos)",
-				pageGiropay1rst.isPresentButtonPagoDesktopUntil(seconds), State.Defect);
+				pageGiropay1rst.isPresentButtonPagoDesktopUntil(seconds), Defect);
 		}
 		
 		return checks;

@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.galeria.steps;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -12,6 +11,8 @@ import com.mng.robotest.domains.galeria.pageobjects.SecSelectorPreciosDesktop;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class SecSelectorPreciosSteps extends StepBase {
 
 	private final SecSelectorPreciosDesktop selectorPreciosDesktop = new SecSelectorPreciosDesktop();
@@ -19,7 +20,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 
 	@Validation (
 		description="Es visible el selector de precios",
-		level=State.Warn)
+		level=Warn)
 	public boolean validaIsSelector() {
 		return (selectorPreciosDesktop.isVisible());
 	}
@@ -61,16 +62,16 @@ public class SecSelectorPreciosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.minimoOrig + "</b> y ahora es <b>" + dataFilter.minimoFinal + "</b>",
-			dataFilter.minimoFinal > dataFilter.minimoOrig, State.Warn);
+			dataFilter.minimoFinal > dataFilter.minimoOrig, Warn);
 		
 		checks.add(
 			"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.maximoOrig + "</b> y ahora es <b>" + dataFilter.maximoFinal + "</b>",
-			dataFilter.maximoFinal < dataFilter.maximoOrig, State.Warn);
+			dataFilter.maximoFinal < dataFilter.maximoOrig, Warn);
 		
 		PageGaleria pageGaleria = PageGaleria.getNew(channel);
 		checks.add(
 			"Todos los precios están en el intervalo [" + dataFilter.minimoFinal + ", " + dataFilter.maximoFinal + "]",
-			pageGaleria.preciosInIntervalo(dataFilter.minimoFinal, dataFilter.maximoFinal), State.Warn);
+			pageGaleria.preciosInIntervalo(dataFilter.minimoFinal, dataFilter.maximoFinal), Warn);
 		
 		return checks;
 	}

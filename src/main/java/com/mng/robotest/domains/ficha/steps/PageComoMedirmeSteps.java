@@ -1,10 +1,10 @@
 package com.mng.robotest.domains.ficha.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.ficha.pageobjects.PageComoMedirme;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageComoMedirmeSteps extends StepBase {
 
@@ -12,7 +12,7 @@ public class PageComoMedirmeSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página de <b>Cómo medirme</b> en una nueva pestaña",
-		level=State.Warn)
+		level=Warn)
 	public boolean isPageInNewTab() {
 		return (pageComoMedirme.goToPageInNewTabCheckAndClose());
 	}

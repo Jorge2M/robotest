@@ -2,10 +2,11 @@ package com.mng.robotest.test.steps.shop.pedidos;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageInputPedido;
 import com.mng.robotest.test.datastored.DataPedido;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageInputPedidoSteps extends StepBase {
 
@@ -13,7 +14,7 @@ public class PageInputPedidoSteps extends StepBase {
 	
 	@Validation (
 		description="La página contiene un campo para la introducción del Nº de pedido",
-		level=State.Warn)
+		level=Warn)
 	public boolean validateIsPage() {
 		return (pageInputPedido.isVisibleInputPedido());
 	}

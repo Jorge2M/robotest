@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -20,6 +19,7 @@ import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecBuscadorSteps extends StepBase {
 
@@ -74,7 +74,7 @@ public class SecBuscadorSteps extends StepBase {
 
 	@Validation (
 		description="Aparece como mínimo un producto de tipo #{categoriaABuscar}  (lo esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean areProducts(String categoriaABuscar, int seconds) {
 		String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
 		return "".compareTo(pageGaleria.getNombreArticuloWithText(producSin1erCaracter, seconds))!=0;
@@ -82,7 +82,7 @@ public class SecBuscadorSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece algún producto (lo esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean areProducts(int seconds) {
 		return pageGaleria.isVisibleArticleUntil(1, seconds);
 	}

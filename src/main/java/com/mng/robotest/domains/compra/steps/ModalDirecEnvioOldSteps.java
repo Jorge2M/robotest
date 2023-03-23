@@ -2,13 +2,14 @@ package com.mng.robotest.domains.compra.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.DataDireccion;
 import com.mng.robotest.domains.compra.pageobjects.ModalDirecEnvioOld;
 import com.mng.robotest.domains.compra.pageobjects.Page1DktopCheckout;
 import com.mng.robotest.domains.compra.pageobjects.PageCheckoutWrapper;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalDirecEnvioOldSteps extends StepBase {
 	
@@ -20,11 +21,11 @@ public class ModalDirecEnvioOldSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Es visible el formulario para la introducción de la \"Dirección de envío\" (lo esperamos hasta #{seconds} seconds)",
-			modalDirecEnvio.isVisibleFormUntil(seconds), State.Defect);
+			modalDirecEnvio.isVisibleFormUntil(seconds), Defect);
 	 	
 	 	checks.add(
 			"Es visible el botón \"Actualizar\"",
-			modalDirecEnvio.isVisibleButtonActualizar(), State.Defect);
+			modalDirecEnvio.isVisibleButtonActualizar(), Defect);
 	 	
 	 	return checks;
 	}
@@ -45,11 +46,11 @@ public class ModalDirecEnvioOldSteps extends StepBase {
 		int seconds = 2; 
 		checks.add(
 			"Aparece un modal de alerta alertando de un posible cambio de precios (lo esperamos hasta " + seconds + " segundos)",
-			page1DktopCheckout.getModalAvisoCambioPais().isVisibleUntil(seconds), State.Warn);
+			page1DktopCheckout.getModalAvisoCambioPais().isVisibleUntil(seconds), Warn);
 		
 		checks.add(
 			"Desaparece la capa de Loading (lo esperamos hasta " + seconds + "segundos", 
-			new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), State.Warn);
+			new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
 		
 		return checks;
 	}

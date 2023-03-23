@@ -1,8 +1,8 @@
 package com.mng.robotest.domains.manto.tests;
 
 import com.mng.robotest.domains.base.TestMantoBase;
-import com.mng.robotest.domains.manto.pageobjects.PageOrdenacionDePrendasSteps;
 import com.mng.robotest.domains.manto.steps.PageMenusMantoSteps;
+import com.mng.robotest.domains.manto.steps.PageOrdenacionDePrendasSteps;
 
 public class Man005 extends TestMantoBase {
 

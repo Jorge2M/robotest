@@ -1,12 +1,12 @@
 package com.mng.robotest.domains.micuenta.steps;
 
-
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.pageobjects.ModalDetalleArticulo;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalDetalleArticuloSteps extends StepBase {
 	
@@ -26,7 +26,7 @@ public class ModalDetalleArticuloSteps extends StepBase {
 
 	@Validation(
 		description="Aparece el modal correspondiente al artículo (lo esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	public boolean checkIsVisible(int seconds) { 
 		return modalDetalleArticulo.isVisible(seconds);
 	}
@@ -37,15 +37,15 @@ public class ModalDetalleArticuloSteps extends StepBase {
 		
 		checks.add(
 			"Se muestra la referencia " + articulo.getReferencia(),
-			modalDetalleArticulo.existsReferencia(articulo.getReferencia(), 1), State.Warn);
+			modalDetalleArticulo.existsReferencia(articulo.getReferencia(), 1), Warn);
 		
 		checks.add(
 			"Se muestra el nombre " + articulo.getNombre(),
-			modalDetalleArticulo.getNombre().compareTo(articulo.getNombre())==0, State.Warn);
+			modalDetalleArticulo.getNombre().compareTo(articulo.getNombre())==0, Warn);
 		
 		checks.add(
 			"Se muestra el precio " + articulo.getPrecio(),
-			modalDetalleArticulo.getPrecio().contains(articulo.getPrecio()), State.Warn);
+			modalDetalleArticulo.getPrecio().contains(articulo.getPrecio()), Warn);
 		
 		return checks;
 	}

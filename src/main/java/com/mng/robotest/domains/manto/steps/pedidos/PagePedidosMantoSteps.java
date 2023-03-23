@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -23,6 +22,8 @@ import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class PagePedidosMantoSteps extends StepMantoBase {
 
 	private final PagePedidos pagePedidos = new PagePedidos();
@@ -34,40 +35,40 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		int seconds = 30;
 	 	checks.add(
 			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + seconds + " segundos)",
-			pagePedidos.isInvisibleCapaLoadingUntil(seconds), State.Defect);
+			pagePedidos.isInvisibleCapaLoadingUntil(seconds), Defect);
 	 	
 	 	checks.setExistsLinkCodPed(pagePedidos.isPresentDataInPedido(IDPEDIDO, dataPedido.getCodigoPedidoManto(), TypeDetalle.PEDIDO, 0));
 	 	
 	 	checks.add(
 			"En la columna " + IDPEDIDO.getTextoColumna() + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto(),
-			checks.getExistsLinkCodPed(), State.Warn);
+			checks.getExistsLinkCodPed(), Warn);
 	 	
 	 	checks.add(
 			"Aparece un solo pedido",
-			pagePedidos.getNumLineas()==1, State.Warn);
+			pagePedidos.getNumLineas()==1, Warn);
 		
 		if (app!=AppEcom.outlet) {
 		 	checks.add(
 				"En la columna " + TPV.getTextoColumna() + " Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId(),
 				pagePedidos.isPresentDataInPedido(TPV, dataPedido.getPago().getTpv().getId(), TypeDetalle.PEDIDO, 0), 
-				State.Warn);
+				Warn);
 		}
 
 	 	checks.add(
 			"En la columna " + EMAIL.getTextoColumna() + " aparece el email asociado: " + dataPedido.getEmailCheckout(),
 			pagePedidos.isPresentDataInPedido(EMAIL, dataPedido.getEmailCheckout(), TypeDetalle.PEDIDO, 0), 
-			State.Warn);
+			Warn);
 	 	
 	 	String xpathCeldaImporte = pagePedidos.getXPathCeldaLineaPedido(TOTAL, TypeDetalle.PEDIDO);
 	 	checks.add(
 			"En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto(),
 			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), xpathCeldaImporte, driver), 
-			State.Warn);
+			Warn);
 	 	
 	 	checks.add(
 			"En la columna " + TARJETA.getTextoColumna() + " aparece el tipo de tarjeta: " + dataPedido.getCodtipopago(),
 			pagePedidos.isPresentDataInPedido(TARJETA, dataPedido.getCodtipopago(), TypeDetalle.PEDIDO, 0), 
-			State.Warn);
+			Warn);
 		
 		return checks;
 	}
@@ -98,7 +99,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	
 	@Validation (
 		description="Tenemos código de pedido #{codPedido}",
-		level=State.Defect)
+		level=Defect)
 	private static boolean checkCodigoPedido(String codPedido, WebDriver driver) {
 		return (("".compareTo(codPedido))!=0);
 	}
@@ -123,7 +124,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	
 	@Validation (
 		description="El pedido tiene las referencias #{referencias.toString()}",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkPedidoWithReferences(List<String> referencias, DataPedido dPedidoPrueba) {
 		return (!dPedidoPrueba.getDataBag().getListArticulos().isEmpty());
 	}
@@ -152,10 +153,10 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni(),
-			!dPedidoPrueba.getPago().getDni().equals(""), State.Defect);
+			!dPedidoPrueba.getPago().getDni().equals(""), Defect);
 	 	checks.add(
 			"Tenemos el Email del cliente " + dPedidoPrueba.getPago().getUseremail(),
-			!dPedidoPrueba.getPago().getUseremail().equals(""), State.Defect);
+			!dPedidoPrueba.getPago().getUseremail().equals(""), Defect);
 	 	return checks;
 	}
 	
@@ -175,7 +176,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	
 	@Validation (
 		description="Tenemos la tienda física #{codigoDeliveryPoint}",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkTiendaFisica(String codigoDeliveryPoint) {
 		return (!codigoDeliveryPoint.equals(""));
 	}

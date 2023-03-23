@@ -2,11 +2,11 @@ package com.mng.robotest.domains.loyalty.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.loyalty.pageobjects.PageRegalarMisLikes;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageRegalarMisLikesSteps extends StepBase {
 
@@ -30,7 +30,7 @@ public class PageRegalarMisLikesSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible el bloque para la introducción de los Likes a regalar",
-		level=State.Warn)
+		level=Warn)
 	public boolean checkCuantosLikesVisible() {
 		return (pageRegalarMisLikes.checkIsVisibleBlockCuantosLikes());
 	}

@@ -7,6 +7,8 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.eps.pageobjects.PageEpsSelBanco;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class PageEpsSelBancoSteps extends StepBase {
 
 	private final PageEpsSelBanco pageEpsSelBanco = new PageEpsSelBanco();
@@ -17,11 +19,11 @@ public class PageEpsSelBancoSteps extends StepBase {
 		String codPais = dataTest.getCodigoPais();
 		checks.add(
 			"Figura el icono correspondiente al pago <b>EPS</b>",
-			pageEpsSelBanco.isPresentIconoEps(), State.Warn);
+			pageEpsSelBanco.isPresentIconoEps(), Warn);
 		
-		State stateVal = State.Warn;
+		State stateVal = Warn;
 		if (channel.isDevice()) {
-			stateVal=State.Info;
+			stateVal=Info;
 		}
 		checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
@@ -29,7 +31,7 @@ public class PageEpsSelBancoSteps extends StepBase {
 		
 		checks.add(
 			"Aparece el logo del banco seleccionado",
-			pageEpsSelBanco.isVisibleIconoBanco(), State.Warn);
+			pageEpsSelBanco.isVisibleIconoBanco(), Warn);
 		
 		return checks;
 	}

@@ -4,11 +4,12 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroInitialShop;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageRegistroInitialShopSteps extends StepBase {
 
@@ -16,7 +17,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsPageUntil(int seconds) {
 		return pageRegistroInitial.isPageUntil(seconds);
 	}
@@ -64,7 +65,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	}	
 	@Validation(
 	    description="Aparece el apartado de \"Collection and use of your personal information\"",
-	    level=State.Defect)	
+	    level=Defect)	
 	public boolean checkPersonalInformationInfoVisible() {
 		return pageRegistroInitial.checkPersonalInformationInfoVisible();
 	}
@@ -87,7 +88,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	}
 	@Validation (
 		description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsModalPoliticaPrivacidadVisible() {
 		return pageRegistroInitial.isModalPoliticaPrivacidadVisible();
 	}	
@@ -126,7 +127,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	
 	@Validation (
 		description="Desaparece el modal de \"Cómo protegemos y tratamos tus datos?\"",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsModalPoliticaPrivacidadInvisible() {
 		return pageRegistroInitial.isModalPoliticaPrivacidadInvisible(2);
 	}

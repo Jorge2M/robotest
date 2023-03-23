@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.compra.payments.mercadopago.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
@@ -8,6 +7,8 @@ import com.mng.robotest.domains.compra.payments.mercadopago.pageobjects.PageMerc
 import com.mng.robotest.domains.compra.payments.mercadopago.pageobjects.PageMercpagoDatosTrjDesktop;
 import com.mng.robotest.domains.compra.payments.mercadopago.pageobjects.PageMercpagoDatosTrjMobil;
 import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageMercpagoDatosTrjSteps extends StepBase {
 	
@@ -23,7 +24,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 
 	@Validation (
 		description="Estamos en la página de introducción de los datos de la tarjeta (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean validaIsPage(int seconds) {
 		return (pageMercpagoDatosTrj.isPageUntil(seconds));
 	}	
@@ -50,7 +51,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	
 	@Validation (
 		description="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa (lo esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	private boolean isWrapperTarjetaVisibleVisaDataMobil(int seconds) {
 		 return (((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).isActiveWrapperVisaUntil(seconds));
 	}
@@ -65,7 +66,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el icono de Visa a la derecha de la tarjeta (lo esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	private boolean isVisaIconAtRightTrjDesktop(int seconds) {
 		return (((PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj).isVisibleVisaIconUntil(seconds));
 	}
@@ -128,7 +129,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece activado el botón \"Next\" para continuar con el pago (lo esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	private boolean isEnabledButtonNextMobil(int seconds) {
 		return (((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).isClickableButtonNextPayUntil(seconds));
 	}

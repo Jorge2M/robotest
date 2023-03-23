@@ -1,11 +1,12 @@
 package com.mng.robotest.domains.compra.payments.ideal.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.ideal.pageobjects.SecIdeal;
 import com.mng.robotest.domains.compra.payments.ideal.pageobjects.SecIdeal.BancoSeleccionado;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecIdealSteps extends StepBase {
 
@@ -13,7 +14,7 @@ public class SecIdealSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el bloque de selección del banco",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateIsSectionOk() {
 		int seconds = 1;
 		return (secIdeal.isVisibleSelectorOfBank(seconds));

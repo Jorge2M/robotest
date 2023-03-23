@@ -6,10 +6,11 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.manto.pageobjects.PageGenerarPedido;
 import com.mng.robotest.domains.manto.pageobjects.PageGenerarPedido.EstadoPedido;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageGenerarPedidoSteps extends StepMantoBase {
 
@@ -17,7 +18,7 @@ public class PageGenerarPedidoSteps extends StepMantoBase {
 	
 	@Validation (
 		description="Aparece la página de generación asociada al pedido <b>#{idPedido}</b>",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateIsPage(String idPedido) {
 		return pageGenerarPedido.isPage(idPedido);
 	}
@@ -44,7 +45,7 @@ public class PageGenerarPedidoSteps extends StepMantoBase {
 	
 	@Validation (
 		description="Aparece el mensaje de <b>Fichero creado correctamente</b>",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkMsgFileCreatedCorrectly() {
 		return pageGenerarPedido.isVisibleMessageFileCreated();
 	}

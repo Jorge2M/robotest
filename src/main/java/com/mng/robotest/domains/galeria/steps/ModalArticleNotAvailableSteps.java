@@ -2,11 +2,12 @@ package com.mng.robotest.domains.galeria.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.galeria.pageobjects.ModalArticleNotAvailable;
 import com.mng.robotest.domains.galeria.pageobjects.ModalArticleNotAvailable.StateModal;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalArticleNotAvailableSteps extends StepBase {
 
@@ -14,7 +15,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	
 	@Validation (
 		description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} (lo esperamos #{seconds} segundos)",
-		level=State.Info)
+		level=Info)
 	public boolean validateState(int seconds, StateModal stateModal) {
 		return modalArticleNotAvailable.inStateUntil(stateModal, seconds);
 	}
@@ -34,11 +35,11 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 		boolean isVisibleRPGD = modalArticleNotAvailable.isVisibleRPGD(2);
 		checks.add(
 			"Si aparece el modal de avisame",
-			isVisibleModal, State.Defect);
+			isVisibleModal, Defect);
 		
 		checks.add(
 			"Si aparece la descripcion de RPGD de usuario",
-			isVisibleRPGD, State.Defect);
+			isVisibleRPGD, Defect);
 		
 		return checks;
 	}
@@ -54,7 +55,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el modal de petición confirmada OK (lo esperamos #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkModalAvisoOkVisible(int seconds) {
 		return modalArticleNotAvailable.isModalAvisoOkVisible(seconds);
 	}
@@ -69,7 +70,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	
 	@Validation (
 		description="Desaparece el modal de petición confirmada OK (lo esperamos #{seconds} segundos)",
-		level=State.Defect)	
+		level=Defect)	
 	public boolean checkModalAvisoOkInvisible(int seconds) {
 		return modalArticleNotAvailable.isModalAvisoOkInvisible(seconds);
 	}	

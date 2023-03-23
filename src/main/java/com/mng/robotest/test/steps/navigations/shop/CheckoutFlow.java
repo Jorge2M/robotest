@@ -26,7 +26,6 @@ import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.compra.pageobjects.DataDireccion;
 import com.mng.robotest.domains.compra.pageobjects.Page1EnvioCheckoutMobil;
-import com.mng.robotest.domains.compra.pageobjects.DataDireccion.DataDirType;
 import com.mng.robotest.domains.compra.payments.FactoryPagos;
 import com.mng.robotest.domains.compra.payments.PagoSteps;
 import com.mng.robotest.domains.compra.steps.CheckoutSteps;
@@ -55,6 +54,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.UtilsTest;
 
+import static com.mng.robotest.domains.compra.pageobjects.DataDireccion.DataDirType.*;
 
 public class CheckoutFlow extends StepBase {
 
@@ -233,14 +233,14 @@ public class CheckoutFlow extends StepBase {
 						//Test funcionalidad "Quiero recibir factura"
 						pageCheckoutWrapperSteps.clickSolicitarFactura();
 						var dataDirFactura = new DataDireccion();
-						dataDirFactura.put(DataDirType.nif, "76367949Z");
-						dataDirFactura.put(DataDirType.name, "Carolina");
-						dataDirFactura.put(DataDirType.apellidos, "Rancaño Pérez");
-						dataDirFactura.put(DataDirType.codpostal, "08720");
-						dataDirFactura.put(DataDirType.direccion, "c./ mossen trens nº6 5º1ª");
-						dataDirFactura.put(DataDirType.email, "crp1974@hotmail.com");
-						dataDirFactura.put(DataDirType.telefono, "665015122");
-						dataDirFactura.put(DataDirType.poblacion, "PEREPAU");
+						dataDirFactura.put(NIF, "76367949Z");
+						dataDirFactura.put(NAME, "Carolina");
+						dataDirFactura.put(APELLIDOS, "Rancaño Pérez");
+						dataDirFactura.put(CODPOSTAL, "08720");
+						dataDirFactura.put(DIRECCION, "c./ mossen trens nº6 5º1ª");
+						dataDirFactura.put(EMAIL, "crp1974@hotmail.com");
+						dataDirFactura.put(TELEFONO, "665015122");
+						dataDirFactura.put(POBLACION, "PEREPAU");
 						new CheckoutSteps().getModalDirecFacturaSteps()
 							.inputDataAndActualizar(dataDirFactura);
 					}
@@ -249,14 +249,14 @@ public class CheckoutFlow extends StepBase {
 						//Test funcionalidad "Cambio dirección de envío"
 						pageCheckoutWrapperSteps.clickEditarDirecEnvio();
 						var dataDirEnvio = new DataDireccion();
-						dataDirEnvio.put(DataDirType.codigoPais, paisChange.getCodigo_pais());
-						dataDirEnvio.put(DataDirType.codpostal, paisChange.getCodpos());					
-						dataDirEnvio.put(DataDirType.name, "Jorge");
-						dataDirEnvio.put(DataDirType.apellidos, "Muñoz Martínez");
-						dataDirEnvio.put(DataDirType.direccion, "c./ mossen trens nº6 5º1ª");
+						dataDirEnvio.put(CODIGOPAIS, paisChange.getCodigo_pais());
+						dataDirEnvio.put(CODPOSTAL, paisChange.getCodpos());					
+						dataDirEnvio.put(NAME, "Jorge");
+						dataDirEnvio.put(APELLIDOS, "Muñoz Martínez");
+						dataDirEnvio.put(DIRECCION, "c./ mossen trens nº6 5º1ª");
 						UserShop userShop = GestorUsersShop.getUser();
-						dataDirEnvio.put(DataDirType.email, userShop.user);
-						dataDirEnvio.put(DataDirType.telefono, "665015122");
+						dataDirEnvio.put(EMAIL, userShop.user);
+						dataDirEnvio.put(TELEFONO, "665015122");
 						pageCheckoutWrapperSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
 						pageCheckoutWrapperSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
 						dataTest.setPais(paisChange);

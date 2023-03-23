@@ -2,7 +2,6 @@ package com.mng.robotest.domains.manto.steps.pedidos;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -14,6 +13,8 @@ import com.mng.robotest.domains.manto.pageobjects.PagePedidos.TypeDetalle;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.utils.ImporteScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 
@@ -40,7 +41,7 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 		TipoTransporte tipoTransporte = dataPedido.getPago().getTipoEnvioType(app);
 		checks.add(
 			"El campo \"tipo servicio\" contiene el valor <b>" + tipoTransporte.getCodigoIntercambio() + "</b> (asociado al tipo de envío " + tipoTransporte + ")",
-			pageDetallePedido.getTipoServicio().compareTo(tipoTransporte.getCodigoIntercambio())==0, State.Info);		
+			pageDetallePedido.getTipoServicio().compareTo(tipoTransporte.getCodigoIntercambio())==0, Info);		
 		
 		if (typeDetalle==TypeDetalle.PEDIDO && 
 			dataPedido.getTypeEnvio()==TipoTransporte.TIENDA && 
@@ -48,7 +49,7 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 			String textEnvioTienda = dataPedido.getDataDeliveryPoint().getCodigo();
 			checks.add(
 				"En los datos de envío aparece el texto <b>ENVIO A TIENDA " + textEnvioTienda + "</b>",
-				pageDetallePedido.get1rstLineDatosEnvioText().contains(textEnvioTienda), State.Defect);			  
+				pageDetallePedido.get1rstLineDatosEnvioText().contains(textEnvioTienda), Defect);			  
 		}
 		return checks;
 	}
@@ -58,19 +59,19 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la pantalla de detalle del pedido",
-			pageDetallePedido.isPage(), State.Warn);
+			pageDetallePedido.isPage(), Warn);
 		
 		checks.add(
 			"Aparece un TOTAL de: " + dataPedido.getImporteTotalManto(),
-			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XPATH_IMNPORTE_TOTAL, driver), State.Warn);
+			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XPATH_IMNPORTE_TOTAL, driver), Warn);
 		
 		checks.add(
 			"Las 3 líneas de la dirección de envío figuran en la dirección del pedido (" + dataPedido.getDireccionEnvio() +")",
-			pageDetallePedido.isDireccionPedido(dataPedido.getDireccionEnvio()), State.Warn);
+			pageDetallePedido.isDireccionPedido(dataPedido.getDireccionEnvio()), Warn);
 		
 		checks.add(
 			"Figura el código de país (" + dataPedido.getCodigoPais() + ")",
-			pageDetallePedido.isCodPaisPedido(dataPedido.getCodigoPais()), State.Warn);
+			pageDetallePedido.isCodPaisPedido(dataPedido.getCodigoPais()), Warn);
 		
 		Pago pago = dataPedido.getPago();
 		if (pago.getTpv().getEstado()!=null &&
@@ -80,12 +81,12 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 			boolean pedidoInStateMenos1Null = pageDetallePedido.isPedidoInStateMenos1NULL();
 			checks.add(
 				"Aparece uno de los resultados posibles según el TPV: " + pago.getTpv().getEstado(),
-				isPedidoInStateTpv, State.Warn);
+				isPedidoInStateTpv, Warn);
 			
 			if (!isPedidoInStateTpv) {
 				checks.add(
 					"El pedido no está en estado -1-NULL",
-					!pedidoInStateMenos1Null, State.Defect);
+					!pedidoInStateMenos1Null, Defect);
 			}
 		}  
 		return checks;

@@ -1,18 +1,19 @@
-package com.mng.robotest.domains.manto.pageobjects;
+package com.mng.robotest.domains.manto.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.base.StepMantoBase;
-import com.mng.robotest.domains.manto.pageobjects.PageOrdenacionDePrendas.*;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+
+import org.openqa.selenium.StaleElementReferenceException;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
-import org.openqa.selenium.StaleElementReferenceException;
+import static com.mng.robotest.domains.manto.pageobjects.PageOrdenacionDePrendas.Orden.*;
+import static com.mng.robotest.domains.manto.pageobjects.PageOrdenacionDePrendas.Section.*;
+import static com.mng.robotest.domains.manto.pageobjects.PageOrdenacionDePrendas.Modal.*;
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 
@@ -37,16 +38,16 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 	public ChecksTM validateIsPage() {
 		var checks = ChecksTM.getNew();
 		checks.add(
-			"Estamos en la página " + Orden.TITULO.getXPath(),
-			state(Visible, Orden.INITIAL_TITULO.getBy()).wait(10).check(), State.Defect);
+			"Estamos en la página " + TITULO.getXPath(),
+			state(Visible, INITIAL_TITULO.getBy()).wait(10).check(), Defect);
 		
 		checks.add(
 			"Aparece el desplegable de tiendas",
-			state(Visible, Orden.DESPLEGABLE_TIENDAS.getBy()).wait(10).check(), State.Defect);
+			state(Visible, DESPLEGABLE_TIENDAS.getBy()).wait(10).check(), Defect);
 		
 		checks.add(
 			"El botón <b>Ver Tiendas</b> está en la página",
-			state(Visible, Orden.VER_TIENDAS.getBy()).wait(10).check(), State.Defect);
+			state(Visible, VER_TIENDAS.getBy()).wait(10).check(), Defect);
 		
 		return checks;
 	}
@@ -57,13 +58,13 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		saveErrorData = SaveWhen.Never)
 	private void selectDisponibilidadPreAndClickVerTiendas() {
 		clickDesplegableTiendas();
-		click(Orden.VER_TIENDAS.getBy()).exec();
+		click(VER_TIENDAS.getBy()).exec();
 		validatePreProductionElements();
 	}
 	
 	private void clickDesplegableTiendas() {
 		try {
-			select(Orden.DESPLEGABLE_TIENDAS.getBy(), "availability.ws.pre.mango.com").type(Value).exec();
+			select(DESPLEGABLE_TIENDAS.getBy(), "availability.ws.pre.mango.com").type(Value).exec();
 		}
 		catch (StaleElementReferenceException e) {
 			//Hay un error en TestMaker donde no se contempla este caso
@@ -75,19 +76,19 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Está presente el enlace de <b>She</b>",
-			state(Visible, Section.She.getBy()).wait(10).check(), State.Defect);
+			state(Visible, SHE.getBy()).wait(10).check(), Defect);
 		
 		checks.add(
 			"Está presente el enlace de <b>He</b>",
-			state(Visible, Section.He.getBy()).check(), State.Defect);
+			state(Visible, HE.getBy()).check(), Defect);
 		
 		checks.add(
 			"Está presente el enlace de <b>Niños</b>",
-			state(Visible, Section.Ninos.getBy()).check(), State.Defect);
+			state(Visible, NINOS.getBy()).check(), Defect);
 
 		checks.add(
 			"Está presente el enlace de <b>Home</b>",
-			state(Visible, Section.Home.getBy()).check(), State.Defect);		
+			state(Visible, HOME.getBy()).check(), Defect);		
 		
 		return checks;
 	}
@@ -97,15 +98,15 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		expected="Podemos seleccionar que queremos realizar",
 		saveErrorData = SaveWhen.Never)
 	private void selectShe() {
-		click(Section.She.getBy()).waitLoadPage(3).exec();
+		click(SHE.getBy()).waitLoadPage(3).exec();
 		validateSectionShe(13);
 	}
 
 	@Validation(
 		description="1) Está presente el selector de secciones dentro de <b>She</b>",
-		level=State.Warn)
+		level=Warn)
 	private boolean validateSectionShe(int seconds) {
-		return (state(Visible, Orden.SELECTOR_ORDENACION.getBy()).wait(seconds).check());
+		return (state(Visible, SELECTOR_ORDENACION.getBy()).wait(seconds).check());
 	}
 
 	@Step(
@@ -120,35 +121,35 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 	}
 	private void selectNuevo() {
 		try {
-			select(Orden.SELECTOR_ORDENACION.getBy(), "nuevo").type(Value).exec();
+			select(SELECTOR_ORDENACION.getBy(), "nuevo").type(Value).exec();
 		} catch (StaleElementReferenceException e) {
-			PageBase.waitMillis(1000);
-			select(Orden.SELECTOR_ORDENACION.getBy(), "nuevo").type(Value).exec();
+			waitMillis(1000);
+			select(SELECTOR_ORDENACION.getBy(), "nuevo").type(Value).exec();
 		}
 	}
 	
 	private void clickVerPrendas() {
 		try {
-			click(Orden.VER_PRENDAS.getBy()).waitLink(2).exec();
+			click(VER_PRENDAS.getBy()).waitLink(2).exec();
 		}
 		catch (StaleElementReferenceException e) {
 			waitMillis(1000);
-			click(Orden.VER_PRENDAS.getBy()).exec();
+			click(VER_PRENDAS.getBy()).exec();
 		}
 	}	
 	
 	@Validation(
         description="Es visible el botón \"Aplicar Orden\" (lo esperamos #{seconds} segundos)",
-        level=State.Warn)
+        level=Warn)
 	private boolean checkButtonAplicarOrdenVisible(int seconds) {
-        return state(Visible, Orden.APLICAR_ORDEN.getBy()).wait(seconds).check();
+        return state(Visible, APLICAR_ORDEN.getBy()).wait(seconds).check();
 	}
 
 	@Validation(
         description="Aparecen imagenes en la nueva página",
-        level=State.Defect)
+        level=Defect)
 	private boolean checkImagesVisible() {
-        return state(Visible, Orden.PRUEBA_IMAGEN.getBy()).check();
+        return state(Visible, PRUEBA_IMAGEN.getBy()).check();
 	}
 
 	@Step(
@@ -156,9 +157,9 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		expected="La prenda ha cambiado",
 		saveErrorData = SaveWhen.Never)
 	private void bajarPrenda() {
-		click(Orden.PRIMERA_PRENDA.getBy()).exec();
-		moveToElement(Orden.BAJAR_PRENDA.getBy());
-		click(Orden.BAJAR_PRENDA.getBy()).waitLink(3).exec();
+		click(PRIMERA_PRENDA.getBy()).exec();
+		moveToElement(BAJAR_PRENDA.getBy());
+		click(BAJAR_PRENDA.getBy()).waitLink(3).exec();
 		validateBajarPrenda(15);
 	}
 
@@ -167,11 +168,11 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Se sigue viendo la segunda prenda",
-			state(Visible, Orden.SEGUNDA_PRENDA.getBy()).wait(seconds).check(), State.Defect);
+			state(Visible, SEGUNDA_PRENDA.getBy()).wait(seconds).check(), Defect);
 		
 		checks.add(
 			"La primera prenda no se corresponde con la que había inicialmente",
-			state(Visible, Orden.PRIMERA_PRENDA.getBy()).wait(seconds).check(), State.Defect);
+			state(Visible, PRIMERA_PRENDA.getBy()).wait(seconds).check(), Defect);
 		
 		return checks;
 	}
@@ -181,7 +182,7 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		expected="Se despliega el modal de la ordenacion de predas",
 		saveErrorData = SaveWhen.Never)
 	private void aplicarOrden() {
-		click(Orden.APLICAR_ORDEN.getBy()).waitLoadPage(3).exec();
+		click(APLICAR_ORDEN.getBy()).waitLoadPage(3).exec();
 		validateAplicarOrden();
 	}
 
@@ -190,19 +191,19 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece correctamente el modal de confirmacion",
-			state(Visible, Modal.CONTAINER.getBy()).wait(15).check(), State.Defect);
+			state(Visible, CONTAINER.getBy()).wait(15).check(), Defect);
 		
 		checks.add(
 			"Aparece correctamente el boton de <b>aplicar general</b>",
-			state(Visible, Modal.APPLY_GENERIC.getBy()).wait(15).check(), State.Defect);
+			state(Visible, APPLY_GENERIC.getBy()).wait(15).check(), Defect);
 		
 		checks.add(
 			"Aparece correctamente el boton de <b>aplicar pais</b>",
-			state(Visible, Modal.APPLY_COUNTRY.getBy()).wait(15).check(), State.Defect);
+			state(Visible, APPLY_COUNTRY.getBy()).wait(15).check(), Defect);
 		
 		checks.add(
 			"Aparece correctamente el boton de <b>cancelar</b>",
-			state(Visible, Modal.CANCEL.getBy()).wait(15).check(), State.Defect);
+			state(Visible, CANCEL.getBy()).wait(15).check(), Defect);
 		
 		return checks;
 	}
@@ -212,7 +213,7 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		expected="Se despliega el modal de la ordenacion de predas",
 		saveErrorData = SaveWhen.Never)
 	private void aceptarOrdenPais() {
-		click(Modal.APPLY_COUNTRY.getBy()).waitLoadPage(3).exec();
+		click(APPLY_COUNTRY.getBy()).waitLoadPage(3).exec();
 		validateBajarPrenda(10);
 	}
 }

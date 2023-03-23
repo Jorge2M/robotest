@@ -2,8 +2,9 @@ package com.mng.robotest.domains.compra.payments.paysecureqiwi.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.compra.payments.paysecureqiwi.pageobjects.PageQiwiInputTlfn;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageQiwiInputTlfnSteps {
 				 
@@ -11,7 +12,7 @@ public class PageQiwiInputTlfnSteps {
 	
 	@Validation (
 		description="Aparece una página con el campo de introducción del Qiwi Mobile Phone",
-		level=State.Warn)
+		level=Warn)
 	public boolean validateIsPage() { 
 		return pageQiwiInputTlfn.isPresentInputPhone();
 	}

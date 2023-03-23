@@ -4,9 +4,10 @@ import org.openqa.selenium.Cookie;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.pageobject.shop.acceptcookies.SectionCookies;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SectionCookiesSteps extends StepBase {
 
@@ -53,7 +54,7 @@ public class SectionCookiesSteps extends StepBase {
 	
 	@Validation (
 		description="No es visible la sección inferior para la configuración de las cookies",
-		level=State.Warn)
+		level=Warn)
 	public boolean checkSectionInvisible() {
 		return (sectionCookies.isInvisible(2));
 	}

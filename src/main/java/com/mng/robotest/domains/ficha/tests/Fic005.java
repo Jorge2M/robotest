@@ -16,6 +16,8 @@ import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 
 import javassist.NotFoundException;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class Fic005 extends TestBase {
 
 	private final Article articlePersonalizable;
@@ -56,7 +58,7 @@ public class Fic005 extends TestBase {
 		int numColors = pageFichaSteps.getFicha().getNumColors();
 		for (int i=1; i<=numColors; i++) {
 			pageFichaSteps.selectColor(i);
-			State levelError = (i==numColors) ? State.Defect : State.Info;
+			State levelError = (i==numColors) ? Defect : Info;
 			if (modalPersonalizacionSteps.checkArticleCustomizable(levelError)) {
 				break;
 			}

@@ -22,7 +22,6 @@ import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.utils.UtilsTest;
 
-
 public abstract class StepBase extends PageBase {
 
 	protected void access(boolean clearData) throws Exception {

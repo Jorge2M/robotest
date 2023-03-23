@@ -2,9 +2,10 @@ package com.mng.robotest.domains.compra.payments.sofort.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.sofort.pageobjects.PageSofort4th;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageSofort4thSteps extends StepBase {
 	
@@ -12,7 +13,7 @@ public class PageSofort4thSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página de introducción del Usuario/Password de \"SOFORT\"",
-		level=State.Warn)
+		level=Warn)
 	public boolean validaIsPage() { 
 		return pageSofort4th.isPage();
 	}
@@ -28,7 +29,7 @@ public class PageSofort4thSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece un formulario para la selección de la cuenta",
-		level=State.Warn)
+		level=Warn)
 	public boolean validateAppearsCtaForm() {
 		return pageSofort4th.isVisibleFormSelCta();
 	}
@@ -44,7 +45,7 @@ public class PageSofort4thSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece un campo para la introducción del TAN",
-		level=State.Warn)
+		level=Warn)
 	public boolean validateAppearsInputTAN() {
 		return (pageSofort4th.isVisibleInputTAN());
 	}

@@ -1,11 +1,12 @@
 package com.mng.robotest.domains.compra.payments.billpay.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.billpay.pageobjects.SecBillpay;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecBillpaySteps extends StepBase {
 	
@@ -19,11 +20,11 @@ public class SecBillpaySteps extends StepBase {
 			secBillpay.isPresentSelectBirthBirthYear() &&
 			secBillpay.isPresentSelectBirthMonth() &&
 			secBillpay.isPresentSelectBirthDay(), 
-			State.Defect); 
+			Defect); 
 	 	
 	 	checks.add(
 			"Aparece el check de \"Acepto\"",
-			secBillpay.isPresentRadioAcepto(), State.Defect); 
+			secBillpay.isPresentRadioAcepto(), Defect); 
 	 	
 	 	return checks;
 	}
@@ -47,15 +48,15 @@ public class SecBillpaySteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el campo para la introducción del titular",
-			secBillpay.isPresentInputTitular(), State.Defect);
+			secBillpay.isPresentInputTitular(), Defect);
 	 	
 	 	checks.add(
 			"Aparece el campo para la introducción del IBAN",
-	 		secBillpay.isPresentInputIBAN(), State.Defect);
+	 		secBillpay.isPresentInputIBAN(), Defect);
 	 	
 	 	checks.add(
 			"Aparece el campo para la introducción del BIC",
-			secBillpay.isPresentInputBIC(), State.Defect);
+			secBillpay.isPresentInputBIC(), Defect);
 	 	
 	 	return checks;
 	}

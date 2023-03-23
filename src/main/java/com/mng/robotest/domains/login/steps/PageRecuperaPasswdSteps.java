@@ -2,11 +2,12 @@ package com.mng.robotest.domains.login.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.login.pageobjects.PageRecuperaPasswd;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageRecuperaPasswdSteps extends StepBase {
 	
@@ -18,11 +19,11 @@ public class PageRecuperaPasswdSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + seconds + " segundos)",
-			pageRecuperaPasswd.isPageUntil(seconds), State.Defect);
+			pageRecuperaPasswd.isPageUntil(seconds), Defect);
 		
 		checks.add(
 			"Aparece el campo para la introducción del correo",
-			pageRecuperaPasswd.isPresentInputCorreo(), State.Defect);
+			pageRecuperaPasswd.isPresentInputCorreo(), Defect);
 		
 		return checks;
 	}
@@ -43,11 +44,11 @@ public class PageRecuperaPasswdSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece el mensaje de \"Revisa tu email\" (lo esperamos hasta " + seconds + " segundos)",
-			pageRecuperaPasswd.isVisibleRevisaTuEmailUntil(seconds), State.Defect);
+			pageRecuperaPasswd.isVisibleRevisaTuEmailUntil(seconds), Defect);
 		
 		checks.add(
 			"Aparece el botón \"Ir de Shopping\"",
-			pageRecuperaPasswd.isVisibleButtonIrDeShopping(), State.Defect);
+			pageRecuperaPasswd.isVisibleButtonIrDeShopping(), Defect);
 		
 		return checks;
 	}

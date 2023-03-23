@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.compra.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -8,6 +7,8 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.ModalAvisoCambioPais;
 import com.mng.robotest.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.test.beans.Pais;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalAvisoCambioPaisSteps extends StepBase {
 
@@ -27,11 +28,11 @@ public class ModalAvisoCambioPaisSteps extends StepBase {
 		int seconds = 10;
 	 	checks.add(
 			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + seconds + " segundos)",
-			modalAvisoCambioPais.isInvisibleUntil(seconds), State.Defect);		
+			modalAvisoCambioPais.isInvisibleUntil(seconds), Defect);		
 	 	
 	 	checks.add(
 			"En la dirección de envió aparece el país " + paisEnvio.getNombre_pais(),
-			new PageCheckoutWrapper().direcEnvioContainsPais(paisEnvio.getNombre_pais()), State.Defect);
+			new PageCheckoutWrapper().direcEnvioContainsPais(paisEnvio.getNombre_pais()), Defect);
 	 	
 		return checks;
 	}

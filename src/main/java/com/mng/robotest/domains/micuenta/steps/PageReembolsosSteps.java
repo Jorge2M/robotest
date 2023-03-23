@@ -1,10 +1,11 @@
 package com.mng.robotest.domains.micuenta.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.reembolsos.pageobjects.PageReembolsos;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageReembolsosSteps extends StepBase {
 
@@ -15,12 +16,12 @@ public class PageReembolsosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de Reembolsos",
-			pageReembolsos.isPage(), State.Defect);
+			pageReembolsos.isPage(), Defect);
 		
 		checks.add(
 			"Aparecen los inputs de BANCO, TITULAR e IBAN",
 			(pageReembolsos.existsInputBanco() && pageReembolsos.existsInputTitular() && pageReembolsos.existsInputIBAN()), 
-			State.Warn);
+			Warn);
 		
 		return checks;
 	}

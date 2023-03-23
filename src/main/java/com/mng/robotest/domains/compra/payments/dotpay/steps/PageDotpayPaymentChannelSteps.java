@@ -2,12 +2,12 @@ package com.mng.robotest.domains.compra.payments.dotpay.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.dotpay.pageobjects.PageDotpayPaymentChannel;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageDotpayPaymentChannelSteps extends StepBase {
 
@@ -18,11 +18,11 @@ public class PageDotpayPaymentChannelSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Aparece la página de Dotpay para la selección del banco",
-			pageDotpayPaymentChannel.isPage(), State.Warn);
+			pageDotpayPaymentChannel.isPage(), Warn);
 	  	
 	  	checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
 		return checks;
 	}
 	
@@ -36,7 +36,7 @@ public class PageDotpayPaymentChannelSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible el bloque de introducción del nombre (lo esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	private boolean isVisibleBlockInputNombre(int seconds) {
 		return pageDotpayPaymentChannel.isVisibleBlockInputDataUntil(seconds);
 	}

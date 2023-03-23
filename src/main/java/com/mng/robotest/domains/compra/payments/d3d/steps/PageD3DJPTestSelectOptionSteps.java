@@ -2,12 +2,12 @@ package com.mng.robotest.domains.compra.payments.d3d.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.d3d.pageobjects.PageD3DJPTestSelectOption;
 import com.mng.robotest.domains.compra.payments.d3d.pageobjects.PageD3DJPTestSelectOption.OptionD3D;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageD3DJPTestSelectOptionSteps extends StepBase {
 	
@@ -15,14 +15,14 @@ public class PageD3DJPTestSelectOptionSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página de Test correspondiente al D3D de JPMorgan (la esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	public boolean validateIsD3D(int seconds) {
 		return pageD3DJPTestSelectOption.isPageUntil(seconds);
 	}	
 	
 	@Validation (
 		description="Aparece el importe #{importeTotal} de la operación",
-		level=State.Warn)
+		level=Warn)
 	public boolean isImporteVisible(String importeTotal, String codPais) {
 		return (ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver));
 	}

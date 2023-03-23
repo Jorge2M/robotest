@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.micuenta.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -11,6 +10,8 @@ import com.mng.robotest.domains.micuenta.beans.Ticket;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
 import com.mng.robotest.test.steps.shop.pedidos.PageDetallePedidoSteps;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageMisComprasSteps extends StepBase {
 	
@@ -23,7 +24,7 @@ public class PageMisComprasSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de \"Mis Compras\" (la esperamos hasta " + seconds + " segundos)",
-			pageMisCompras.isPageUntil(seconds), State.Warn);
+			pageMisCompras.isPageUntil(seconds), Warn);
 		
 		return checks;
 	}
@@ -33,7 +34,7 @@ public class PageMisComprasSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"No aparece ningún tícket",
-			!pageMisCompras.areTickets(), State.Warn);
+			!pageMisCompras.areTickets(), Warn);
 	  	return checks;
 	}
 	
@@ -51,7 +52,7 @@ public class PageMisComprasSteps extends StepBase {
 	@Validation (
 		description=
 			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> (la esperamos #{seconds}) segundos",
-		level=State.Defect)
+		level=Defect)
 	private boolean validateIsCompraOnlinePrendas(String codPedido, int seconds) {
 		return pageMisCompras.isTicketOnline(codPedido, seconds);
 	}
@@ -59,7 +60,7 @@ public class PageMisComprasSteps extends StepBase {
 	@Validation (
 		description=
 			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> (la esperamos #{seconds}) segundos",
-		level=State.Info,
+		level=Info,
 		store=StoreType.None)
 	private boolean validateIsCompraOnlineChequeRegalo(String codPedido, int seconds) {
 		return pageMisCompras.isTicketOnline(codPedido, seconds);
@@ -67,7 +68,7 @@ public class PageMisComprasSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible una compra de tipo #{typeTicket} (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateIsCompraOfType(TypeTicket typeTicket, int seconds) {
 		return pageMisCompras.isTicket(typeTicket, seconds);
 	}

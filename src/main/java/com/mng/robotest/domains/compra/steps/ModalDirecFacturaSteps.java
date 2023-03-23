@@ -2,13 +2,14 @@ package com.mng.robotest.domains.compra.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.DataDireccion;
 import com.mng.robotest.domains.compra.pageobjects.ModalDirecFactura;
 import com.mng.robotest.domains.compra.pageobjects.Page1DktopCheckout;
 import com.mng.robotest.domains.compra.pageobjects.PageCheckoutWrapper;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalDirecFacturaSteps extends StepBase {
 
@@ -20,16 +21,16 @@ public class ModalDirecFacturaSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + seconds + " seconds)",
-			modalDirecFactura.isVisibleFormUntil(seconds), State.Defect);	
+			modalDirecFactura.isVisibleFormUntil(seconds), Defect);	
 	 	
 	 	checks.add(
 			"Es visible el botón \"Actualizar\"",
-	 		modalDirecFactura.isVisibleButtonActualizar(), State.Defect);
+	 		modalDirecFactura.isVisibleButtonActualizar(), Defect);
 	 	
 	 	seconds = 2;
 	 	checks.add(
 	 		"Desaparece la capa de Loading (lo esperamos hasta " + seconds + "segundos", 
-	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), State.Warn);
+	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
 		return checks;
 	}
 	
@@ -47,16 +48,16 @@ public class ModalDirecFacturaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Desaparece el modal de introducción de los datos de la dirección",
-	 		!modalDirecFactura.isVisibleFormUntil(0), State.Defect);
+	 		!modalDirecFactura.isVisibleFormUntil(0), Defect);
 	 	
 	 	checks.add(
 			"Queda marcado el radiobutton \"Quiero recibir una factura\"",
-			new Page1DktopCheckout().isMarkedQuieroFactura(), State.Defect);
+			new Page1DktopCheckout().isMarkedQuieroFactura(), Defect);
 	 	
 	 	int seconds = 2;
 	 	checks.add(
 	 		"Desaparece la capa de Loading (lo esperamos hasta " + seconds + "segundos", 
-	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), State.Warn);
+	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
 	 	
 	 	return checks;
 	}

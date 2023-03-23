@@ -13,7 +13,6 @@ import com.mng.robotest.test.datastored.DataPedido;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
 public class PageDetallePedido extends PageBase {
 
 	private static final String TAG_ID_PEDIDO = "@tagIdPedido";

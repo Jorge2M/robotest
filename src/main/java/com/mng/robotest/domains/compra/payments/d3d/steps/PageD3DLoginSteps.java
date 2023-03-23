@@ -2,11 +2,12 @@ package com.mng.robotest.domains.compra.payments.d3d.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.d3d.pageobjects.PageD3DLogin;
 import com.mng.robotest.test.utils.ImporteScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageD3DLoginSteps extends StepBase {
 
@@ -14,7 +15,7 @@ public class PageD3DLoginSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página de identificación D3D (la esperamos hasta #{seconds} segundos)",
-		level=State.Info,		
+		level=Info,		
 		store=StoreType.None)
 	public boolean validateIsD3D(int seconds) {
 		return pageD3DLogin.isPageUntil(seconds);
@@ -22,7 +23,7 @@ public class PageD3DLoginSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible el importe total de la operación #{importeTotal}",
-		level=State.Warn)
+		level=Warn)
 	public boolean isImporteVisible(String importeTotal) {
 		String codPais = dataTest.getCodigoPais();
 		return ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver);

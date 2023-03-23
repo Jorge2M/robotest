@@ -4,7 +4,6 @@ import java.util.Map;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -17,6 +16,8 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.data.Constantes.ThreeState;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageRegistroSegundaStepsOutlet extends StepBase {
 	
@@ -54,18 +55,18 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la 2ª página de introducción de datos (la esperamos hasta " + seconds + " segs)",
-			pageRegistroSegunda.isPageUntil(seconds), State.Warn);
+			pageRegistroSegunda.isPageUntil(seconds), Warn);
 		checks.add(
 			Check.make(
 			    "Se pueden seleccionar las colecciones " + lineasComaSeparated,
-			    pageRegistroSegunda.isPresentInputForLineas(lineasComaSeparated), State.Info)
+			    pageRegistroSegunda.isPresentInputForLineas(lineasComaSeparated), Info)
 			.store(StoreType.None).build());
 		
 		int numColecciones = pageRegistroSegunda.getNumColecciones();
 		checks.add(
 			Check.make(
 			    "Aparece un número de colecciones coincidente con el número de líneas (" + numLineas + ")",
-			    numColecciones==numLineas, State.Info)
+			    numColecciones==numLineas, Info)
 			.store(StoreType.None).build());
 		
 		return checks;

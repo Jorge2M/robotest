@@ -2,10 +2,11 @@ package com.mng.robotest.domains.compra.payments.eps.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.eps.pageobjects.PageEpsSimulador;
 import com.mng.robotest.domains.compra.payments.eps.pageobjects.PageEpsSimulador.TypeDelay;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageEpsSimuladorSteps extends StepBase {
 	
@@ -13,7 +14,7 @@ public class PageEpsSimuladorSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página de simulación de EPS",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateIsPage() { 
 		return pageEpsSimulador.isPage();
 	}

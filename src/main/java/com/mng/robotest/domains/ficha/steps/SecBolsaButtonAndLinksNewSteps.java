@@ -2,7 +2,6 @@ package com.mng.robotest.domains.ficha.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.ficha.pageobjects.ModCompartirNew;
@@ -13,6 +12,8 @@ import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.Link
 import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 
@@ -42,7 +43,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 	
 	@Validation (
 		description="Se scrolla hasta el apartado de \"Descriptión\"",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkScrollToDescription() {
 		return secDetalleProductNew.isVisibleUntil(3);
 	}
@@ -52,26 +53,26 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Figura el bloque de BreadCrumbs",
-			secDetalleProductNew.isVisibleBreadcrumbs(0), State.Warn);
+			secDetalleProductNew.isVisibleBreadcrumbs(0), Warn);
 	 	
 	 	checks.add(
 			"Es visible el item " + ItemBreadcrumb.LINEA,
-			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.LINEA), State.Warn);
+			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.LINEA), Warn);
 	 	
 	 	checks.add(
 			"Es visible el item " + ItemBreadcrumb.SUBGALERIA,
-			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.SUBGALERIA), State.Warn);
+			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.SUBGALERIA), Warn);
 	 	
 	 	checks.add(
 			"Es visible el item " + ItemBreadcrumb.GALERIA,
-			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.GALERIA), State.Warn);
+			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.GALERIA), Warn);
 	 	
 	 	return checks;
 	}
 	
 	@Validation (
 		description="Aparece el bloque de \"KcSafety\"",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkKcSafety() {
 		return (secDetalleProductNew.isVisibleBlockKcSafety());
 	}
@@ -90,7 +91,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		int seconds = 1;
 	 	checks.add(
 	 		"Aparece el modal para compartir a nivel social (lo esperamos hasta " + seconds + " segundos) ",
-	 		new ModCompartirNew().isVisibleUntil(seconds), State.Defect);
+	 		new ModCompartirNew().isVisibleUntil(seconds), Defect);
 		
 		boolean isPaisChina = (codigoPais.compareTo("720")==0);
 		for (IconSocial icon : IconSocial.values()) {
@@ -98,11 +99,11 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 			if (isPaisChina != icon.isSpecificChina()) {
 			 	checks.add(
 			 		"No es visible el icono de " + icon,
-			 		!isVisibleIcon, State.Warn);
+			 		!isVisibleIcon, Warn);
 			} else {
 			 	checks.add(
 			 		"Sí es visible el icono de " + icon,
-			 		isVisibleIcon, State.Warn);
+			 		isVisibleIcon, Warn);
 			}
 		}
 

@@ -2,7 +2,6 @@ package com.mng.robotest.domains.votfconsole.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.votfconsole.pageobjects.IframeResult;
@@ -10,6 +9,7 @@ import com.mng.robotest.domains.votfconsole.pageobjects.PageConsola;
 import com.mng.robotest.domains.votfconsole.utils.ChecksResultWithStringData;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ConsolaVotfSteps extends StepBase {
 
@@ -28,11 +28,11 @@ public class ConsolaVotfSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el apartado \"Test servicios VOTF\"",
-			pageConsola.existTestServVOTF(), State.Warn);
+			pageConsola.existTestServVOTF(), Warn);
 	 	
 	 	checks.add(
 			"Aparece el apartado \"Consola comandos VOTF\"",
-			pageConsola.existConsolaComVOTF(), State.Warn);
+			pageConsola.existConsolaComVOTF(), Warn);
 	 	
 		return checks;
 	}
@@ -69,7 +69,7 @@ public class ConsolaVotfSteps extends StepBase {
 	
 	@Validation (
 		description="En el bloque de \"Petición/Resultado\" aparece el literal \"" + PageConsola.MSG_CONS_TIPOS_ENVIO_OK + "\"",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkAfterConsultarTiposEnvio(String paginaPadre) {
 		boolean resultado = true;
 		try {
@@ -106,15 +106,15 @@ public class ConsolaVotfSteps extends StepBase {
 			pageConsola.switchToResultIFrame();
 			checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una tabla \"Transportes\"",
-				iframeResult.existsTransportes(), State.Warn);
+				iframeResult.existsTransportes(), Warn);
 			
 			checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una tabla \"Disponibilidad\"",
-				iframeResult.existsDisponibilidad(), State.Warn);
+				iframeResult.existsDisponibilidad(), Warn);
 			
 		 	checks.add(
 				"En la tabla \"Disponibilidad\" figura el campo <b>Disponible=true</b>",
-				iframeResult.flagDisponibleIsTrue(), State.Warn);
+				iframeResult.flagDisponibleIsTrue(), Warn);
 		}
 		finally {
 			pageConsola.driver.switchTo().window(paginaPadre);
@@ -140,11 +140,11 @@ public class ConsolaVotfSteps extends StepBase {
 			pageConsola.switchToResultIFrame();
 		 	checks.add(
 				"En el bloque de \"Petición/Resultado\" NO aparece una tabla \"transportes__content\"",
-				!iframeResult.existsTransportes(), State.Defect);
+				!iframeResult.existsTransportes(), Defect);
 		 	
 		 	checks.add(
 				"Aparece una línea de \"TipoStock:\" con contenido",
-				iframeResult.isPresentTipoStock(), State.Defect);
+				iframeResult.isPresentTipoStock(), Defect);
 		}
 		finally {
 			pageConsola.driver.switchTo().window(paginaPadre);
@@ -178,17 +178,17 @@ public class ConsolaVotfSteps extends StepBase {
 		checks.add(
 			"En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Código de pedido\"" + 
 			"(la esperamos hasta " + seconds + " segundos)",
-			iframeResult.isPresentCodigoPedido(seconds), State.Warn);
+			iframeResult.isPresentCodigoPedido(seconds), Warn);
 		
 		String codigoPedido = iframeResult.getCodigoPedido();
 		checks.setData(codigoPedido);
 		checks.add(
 			"Aparece un código de pedido",
-			"".compareTo(codigoPedido)!=0, State.Defect);
+			"".compareTo(codigoPedido)!=0, Defect);
 		
 		checks.add(
 			"Aparece el literal \"Resultado creación pedido: (0) Total\"",
-			iframeResult.resCreacionPedidoOk(), State.Warn);
+			iframeResult.resCreacionPedidoOk(), Warn);
 		
 	 	return checks;
 	}
@@ -224,14 +224,14 @@ public class ConsolaVotfSteps extends StepBase {
 	
 	@Validation (
 		description = "En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Pedidos\" (la esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkIsLineaPedidos(int seconds) {
 		return iframeResult.isPresentListaPedidosUntil(seconds);
 	}
 	
 	@Validation (
 		description = "En la lista de pedidos aparece el generado anteriormente: #{codigoPedido} (lo esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsPresentPedidoInList(String codigoPedido, int seconds) {
 		String codigoPedidoFull = iframeResult.getPedidoFromListaPedidosUntil(codigoPedido, seconds);
 	 	return "".compareTo(codigoPedidoFull)!=0;
@@ -249,7 +249,7 @@ public class ConsolaVotfSteps extends StepBase {
 	
 	@Validation (
 		description="En el bloque de \"Petición/Resultado\" aparece una línea \"Seleccionado: #{codigoPedidoFull}\"",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkAfterSelectPedido(String codigoPedidoFull) {
 		boolean resultado = true;
 		String paginaPadre = pageConsola.driver.getWindowHandle();
@@ -283,11 +283,11 @@ public class ConsolaVotfSteps extends StepBase {
 			pageConsola.switchToResultIFrame();
 		 	checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una línea \"Preconfirmado\"", 
-				iframeResult.isLineaPreconfirmado(), State.Warn);
+				iframeResult.isLineaPreconfirmado(), Warn);
 		 	
 		 	checks.add(
 				"Aparece un XML con el dato \"&lt;pedido&gt;" + codigoPedidoFull + "&lt;/pedido&gt;\"",
-				iframeResult.isPedidoInXML(codigoPedidoFull), State.Defect);
+				iframeResult.isPedidoInXML(codigoPedidoFull), Defect);
 		}
 		finally {
 			pageConsola.driver.switchTo().window(paginaPadre);
@@ -313,7 +313,7 @@ public class ConsolaVotfSteps extends StepBase {
 			pageConsola.switchToResultIFrame();
 		 	checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una línea \"Confirmado: " + codigoPedidoFull + "\"", 
-				iframeResult.resConfPedidoOk(codigoPedidoFull), State.Warn);	 
+				iframeResult.resConfPedidoOk(codigoPedidoFull), Warn);	 
 		}
 		finally {
 			pageConsola.driver.switchTo().window(paginaPadre);

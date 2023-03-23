@@ -4,11 +4,12 @@ import java.util.Map;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisDirecciones;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageMisDireccionesSteps extends StepBase {
 
@@ -16,7 +17,7 @@ public class PageMisDireccionesSteps extends StepBase {
 	
 	@Validation(
 		description="Aparece la página de \"Mis direcciones\" (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsPage (int seconds) {
 		return pageMisDirecciones.isPage(seconds);
 	}
@@ -42,7 +43,7 @@ public class PageMisDireccionesSteps extends StepBase {
 	
 	@Validation(
 		description="Aparece el formulario con los datos del usuario (lo esperamos #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsFormularioUsuario(int seconds) {
 		return pageMisDirecciones.isFormularioUsuario(seconds);
 	}	
@@ -53,7 +54,7 @@ public class PageMisDireccionesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el código postal <b>" + dataNewRegister.getPostalCode() + "</b>",
-			isPostalCode(dataNewRegister.getPostalCode()), State.Defect);
+			isPostalCode(dataNewRegister.getPostalCode()), Defect);
 		
 		return checks;
 	}
@@ -67,17 +68,17 @@ public class PageMisDireccionesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el código postal <b>" + codpostal + "</b>",
-			isPostalCode(codpostal), State.Defect);
+			isPostalCode(codpostal), Defect);
 
 		if (poblacion!=null) {
 			checks.add(
 				"Aparece la población <b>" + poblacion + "</b>",
-				isPoblacion(poblacion), State.Defect);
+				isPoblacion(poblacion), Defect);
 		}
 		
 		checks.add(
 			"Aparece la dirección <b>" + direccion + "</b>",
-			isDireccion(direccion), State.Defect);
+			isDireccion(direccion), Defect);
 		
 		return checks;
 	}	

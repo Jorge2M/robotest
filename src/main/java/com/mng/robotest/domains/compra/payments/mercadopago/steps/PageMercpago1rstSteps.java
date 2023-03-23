@@ -2,9 +2,10 @@ package com.mng.robotest.domains.compra.payments.mercadopago.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.mercadopago.pageobjects.PageMercpago1rst;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageMercpago1rstSteps extends StepBase {
 	
@@ -12,7 +13,7 @@ public class PageMercpago1rstSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página inicial de Mercado para la introducción de datos (la esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	public boolean validateIsPageUntil(int seconds) {
 	   return pageMercpago1rst.isPageUntil(seconds);
 	}

@@ -2,11 +2,11 @@ package com.mng.robotest.domains.ficha.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.pageobject.shop.modales.ModalBuscadorTiendas;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalBuscadorTiendasSteps extends StepBase {
 
@@ -19,11 +19,11 @@ public class ModalBuscadorTiendasSteps extends StepBase {
 	 	checks.add(
 			"La capa de búsqueda es visible<br>" +
 			"Incidencia PRO (https://jira.mango.com/browse/CLAV-3853)",
-			modalBuscadorTiendas.isVisible(1), State.Warn);
+			modalBuscadorTiendas.isVisible(1), Warn);
 	 	
 	 	checks.add(
 			"Se ha localizado alguna tienda (la esperamos hasta " + seconds + " segundos)",
-			modalBuscadorTiendas.isPresentAnyTiendaUntil(seconds), State.Warn);
+			modalBuscadorTiendas.isPresentAnyTiendaUntil(seconds), Warn);
 	 	
 		return checks;
 	}
@@ -38,7 +38,7 @@ public class ModalBuscadorTiendasSteps extends StepBase {
 	
 	@Validation (
 		description="La capa correspondiente a la búsqueda desaparece",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkModalSearchInvisible() {
 		return (!modalBuscadorTiendas.isVisible());
 	}

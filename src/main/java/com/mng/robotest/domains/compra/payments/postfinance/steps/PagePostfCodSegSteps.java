@@ -2,13 +2,14 @@ package com.mng.robotest.domains.compra.payments.postfinance.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.postfinance.pageobjects.PagePostfCodSeg;
 import com.mng.robotest.test.utils.ImporteScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PagePostfCodSegSteps extends StepBase {
 	
@@ -23,21 +24,21 @@ public class PagePostfCodSegSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la pasarela de pagos de PostFinance E-Payment de Test",
-			pagePostfCodSeg.isPasarelaPostfinanceTest(nombrePago), State.Defect);
+			pagePostfCodSeg.isPasarelaPostfinanceTest(nombrePago), Defect);
 		
 		checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-			pagePostfCodSeg.isPresentButtonAceptar(), State.Defect);
+			pagePostfCodSeg.isPresentButtonAceptar(), Defect);
 		
 		boolean existsCode = pagePostfCodSeg.isPresentInputCodSeg();
 		if (isPostfinanceEcard(nombrePago)) {
 			checks.add(
 				"SÍ existe el campo de introducción del código de seguridad",
-				existsCode, State.Defect);
+				existsCode, Defect);
 		} else {
 			checks.add(
 				"NO existe el campo de introducción del código de seguridad",
-				!existsCode, State.Defect);
+				!existsCode, Defect);
 		}
 
 		return checks;
@@ -49,16 +50,16 @@ public class PagePostfCodSegSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + seconds + " segundos)",
-			pagePostfCodSeg.isPasarelaPostfinanceProUntil(seconds), State.Defect);
+			pagePostfCodSeg.isPasarelaPostfinanceProUntil(seconds), Defect);
 		
 		String codPais = dataTest.getCodigoPais();
 		checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
 		
 		checks.add(
 			"Aparece el botón Weiter (Aceptar)",
-			pagePostfCodSeg.isPresentButtonWeiter(), State.Defect);
+			pagePostfCodSeg.isPresentButtonWeiter(), Defect);
 		
 		return checks;
 	}

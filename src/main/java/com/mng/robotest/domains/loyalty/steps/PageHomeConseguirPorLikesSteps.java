@@ -2,12 +2,12 @@ package com.mng.robotest.domains.loyalty.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeConseguirPorLikes;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageHomeConseguirPorLikesSteps extends StepBase {
 
@@ -15,7 +15,7 @@ public class PageHomeConseguirPorLikesSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el botón de \"Conseguir por Likes\" (esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsPage(int seconds) {
 		return pageHomeConseguirPorLikes.isPage(seconds);
 	}
@@ -35,7 +35,7 @@ public class PageHomeConseguirPorLikesSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + seconds + " segundos)",
-			pageHomeConseguirPorLikes.isVisibleIconOperationDoneUntil(seconds), State.Defect);
+			pageHomeConseguirPorLikes.isVisibleIconOperationDoneUntil(seconds), Defect);
 
 		return checks;
 	}	

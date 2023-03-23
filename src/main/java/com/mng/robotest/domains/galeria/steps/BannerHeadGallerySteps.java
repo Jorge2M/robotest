@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -16,6 +15,8 @@ import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps.TypeGalery;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.utils.UtilsTest;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class BannerHeadGallerySteps {
 
@@ -43,7 +44,7 @@ public class BannerHeadGallerySteps {
 
 	@Validation (
 			description="El Banner de Cabecera contiene algún texto",
-			level=State.Warn)
+			level=Warn)
 	public boolean checkBannerContainsSomeText() {
 		String textBanner = secBannerHeadDesktop.getText();
 		return ("".compareTo(textBanner)!=0);
@@ -55,7 +56,7 @@ public class BannerHeadGallerySteps {
 		String textBanner = secBannerHeadDesktop.getText();
 		checks.add(
 				"El banner de cabecera contiene el texto <b>" + possibleTexts.get(0) + "</b>",
-				textBannersContainsPossibleText(textBanner, possibleTexts), State.Defect);
+				textBannersContainsPossibleText(textBanner, possibleTexts), Defect);
 		return checks;
 	}
 
@@ -73,30 +74,30 @@ public class BannerHeadGallerySteps {
 		checks.add(
 				"<b style=\"color:blue\">Rebajas</b></br>" +
 						"Es visible el banner de cabecera",
-				secBannerHeadDesktop.isVisible(), State.Defect);
+				secBannerHeadDesktop.isVisible(), Defect);
 
 		String saleTraduction = UtilsTest.getSaleTraduction(idioma);
 		String textBanner = secBannerHeadDesktop.getText();
 		checks.add(
 				"El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o " + saleTraduction + ")",
 				UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction),
-				State.Defect);
+				Defect);
 		checks.add(
 				"El banner de cabecera contiene un link de \"Más info\"",
-				secBannerHeadDesktop.isVisibleLinkInfoRebajas(), State.Warn);
+				secBannerHeadDesktop.isVisibleLinkInfoRebajas(), Warn);
 
 		boolean bannerLincable = secBannerHeadDesktop.isLinkable();
 		if (typeGalery==TypeGalery.SALES || !pais.isVentaOnline()) {
 			checks.add(
 					Check.make(
 									"El banner de cabecera no es lincable",
-									!bannerLincable, State.Info)
+									!bannerLincable, Info)
 							.store(StoreType.None).build());
 		}
 		else {
 			checks.add(
 					"El banner de cabecera sí es lincable",
-					bannerLincable, State.Warn);
+					bannerLincable, Warn);
 		}
 
 		return checks;
@@ -109,7 +110,7 @@ public class BannerHeadGallerySteps {
 		checks.add(
 				"<b style=\"color:blue\">Rebajas</b></br>" +
 						"El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")",
-				!secBannerHeadDesktop.isSalesBanner(idioma), State.Defect);
+				!secBannerHeadDesktop.isSalesBanner(idioma), Defect);
 
 		return checks;
 	}

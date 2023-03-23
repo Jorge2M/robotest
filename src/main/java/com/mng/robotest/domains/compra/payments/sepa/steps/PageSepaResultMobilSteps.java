@@ -2,11 +2,11 @@ package com.mng.robotest.domains.compra.payments.sepa.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.compra.payments.sepa.pageobjects.PageSepaResultMobil;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageSepaResultMobilSteps {
 	
@@ -17,12 +17,12 @@ public class PageSepaResultMobilSteps {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de resultado de SEPA para móvil",
-			pageSepaResultMobil.isPage(), State.Warn);	
+			pageSepaResultMobil.isPage(), Warn);	
 		
 		checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, pageSepaResultMobil.driver), 
-			State.Warn);
+			Warn);
 		
 		return checks;
 	}

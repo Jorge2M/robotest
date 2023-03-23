@@ -14,6 +14,8 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.trustpay.pageobjects.PageTrustpaySelectBank;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class PageTrustpaySelectBankSteps extends StepBase {
 
 	private final PageTrustpaySelectBank pageTrustpaySelectBank = new PageTrustpaySelectBank();
@@ -23,11 +25,11 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
-			pageTrustpaySelectBank.isPresentEntradaPago(nombrePago), State.Warn);
+			pageTrustpaySelectBank.isPresentEntradaPago(nombrePago), Warn);
 	 	
-	 	State level = State.Warn;
+	 	State level = Warn;
 		if (channel.isDevice()) {
-			level = State.Info;
+			level = Info;
 		}
 		String codPais = dataTest.getCodigoPais();
 	 	checks.add(
@@ -36,16 +38,16 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 	 	
 	 	checks.add(
 			"Aparece la cabecera indicando la 'etapa' del pago",
-			pageTrustpaySelectBank.isPresentCabeceraStep(nombrePago), State.Warn);
+			pageTrustpaySelectBank.isPresentCabeceraStep(nombrePago), Warn);
 	 	
 		if (channel==Channel.desktop) {
 		 	checks.add(
 				"Figura el desplegable de bancos",
-				pageTrustpaySelectBank.isPresentSelectBancos(), State.Warn);
+				pageTrustpaySelectBank.isPresentSelectBancos(), Warn);
 		 	
 		 	checks.add(
 				"Figura un botón de pago",
-				pageTrustpaySelectBank.isPresentButtonPago(), State.Defect); 
+				pageTrustpaySelectBank.isPresentButtonPago(), Defect); 
 		}
 		
 		return checks;

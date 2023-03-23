@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.micuenta.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -10,6 +9,8 @@ import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras;
 import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.steps.shop.pedidos.PageDetallePedidoSteps;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageAccesoMisComprasSteps extends StepBase {
 
@@ -21,16 +22,16 @@ public class PageAccesoMisComprasSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece la página de \"Acceso a Mis Compras\" (la esperamos hasta " + seconds + " segundos)",
-			pageAccesoMisCompras.isPage(seconds), State.Warn);
+			pageAccesoMisCompras.isPage(seconds), Warn);
 		
 		seconds = 3;
 		checks.add(
 			"Aparece el bloque \"Ya estoy registrado\" (lo esperamos hasta " + seconds + "segundos)",
-			pageAccesoMisCompras.isPresentBlock(TypeBlock.SI_REGISTRADO, seconds), State.Warn);
+			pageAccesoMisCompras.isPresentBlock(TypeBlock.SI_REGISTRADO, seconds), Warn);
 		
 		checks.add(
 			"Aparece el bloque de \"No estoy registrado\"",
-			pageAccesoMisCompras.isPresentBlock(TypeBlock.NO_REGISTRADO), State.Warn);
+			pageAccesoMisCompras.isPresentBlock(TypeBlock.NO_REGISTRADO), Warn);
 		
 		return checks;
 	}
@@ -45,7 +46,7 @@ public class PageAccesoMisComprasSteps extends StepBase {
 	
 	@Validation (
 		description="Se hace visible el bloque de \"#{typeBlock}\" (lo esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	private boolean checkIsVisibleBlock(TypeBlock typeBlock, int seconds) {
 		return (pageAccesoMisCompras.isVisibleBlockUntil(typeBlock, seconds));
 	}

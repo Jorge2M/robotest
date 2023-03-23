@@ -1,12 +1,13 @@
 package com.mng.robotest.domains.compra.payments.yandex.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.yandex.pageobjects.PageYandexPayingByCode;
 import com.mng.robotest.test.utils.ImporteScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageYandexPayingByCodeSteps extends StepBase {
 	
@@ -17,15 +18,15 @@ public class PageYandexPayingByCodeSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página de <b>Paying by code</b>",
-			pageYandexPayingByCode.isPage(), State.Warn);
+			pageYandexPayingByCode.isPage(), Warn);
 	 	
 	 	checks.add(
 			"Aparece el importe de la compra por pantalla: " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), State.Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
 	 	
 	 	checks.add(
 			"Aparece un <b>PaymentCode</b>",
-			pageYandexPayingByCode.isVisiblePaymentCode(), State.Defect);
+			pageYandexPayingByCode.isVisiblePaymentCode(), Defect);
 	 	
 	 	return checks;
 	}

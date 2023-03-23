@@ -2,12 +2,13 @@ package com.mng.robotest.domains.registro.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroFinOutlet;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageRegistroFinStepsOutlet extends StepBase {
 	
@@ -15,7 +16,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 	
 	@Validation(
 		description="Aparece la página final del proceso de registro (la esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	public boolean isPageUntil(int seconds) {
 		return pageRegistroFin.isPageUntil(seconds);
 	}
@@ -40,7 +41,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 		checks.add(
 			"El logo de Mango redirige al país/idioma origen: " + dataTest.getIdioma().getAcceso(),
 			new SecCabeceraMostFrequent()
-				.validaLogoMangoGoesToIdioma(dataTest.getIdioma()), State.Warn);
+				.validaLogoMangoGoesToIdioma(dataTest.getIdioma()), Warn);
 		return checks;		
 	}
 }

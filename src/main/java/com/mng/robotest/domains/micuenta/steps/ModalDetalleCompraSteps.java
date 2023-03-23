@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.micuenta.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -10,6 +9,8 @@ import com.mng.robotest.domains.micuenta.beans.Ticket;
 import com.mng.robotest.domains.micuenta.pageobjects.ModalDetalleArticulo;
 import com.mng.robotest.domains.micuenta.pageobjects.PageDetalleCompra;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalDetalleCompraSteps extends StepBase {
 	
@@ -23,7 +24,7 @@ public class ModalDetalleCompraSteps extends StepBase {
 	
 	public void validateIsOk(Ticket compraTienda) {
 		ChecksTM checks = checkIsDataVisible();
-		if (!checks.calculateStateValidation().isMoreCriticThan(State.Warn)) {
+		if (!checks.calculateStateValidation().isMoreCriticThan(Warn)) {
 			checkDataContent(compraTienda);
 		}
 	}
@@ -34,20 +35,20 @@ public class ModalDetalleCompraSteps extends StepBase {
 		int seconds = 3;
 		checks.add(
 			"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + seconds + " segundos)",
-			pageDetalleCompra.isVisibleDataTicket(seconds), State.Warn);
+			pageDetalleCompra.isVisibleDataTicket(seconds), Warn);
 		
 		seconds = 2;
 		checks.add(
 			"Son visibles los datos del tícket (los esperamos hasta " + seconds + " segundos)",
-			pageDetalleCompra.isVisibleDataTicket(seconds), State.Defect);
+			pageDetalleCompra.isVisibleDataTicket(seconds), Defect);
 		
 		checks.add(
 			"Figura un id de tícket (lo esperamos hasta " + seconds + " segundos)",
-			pageDetalleCompra.isVisibleIdTicket(seconds), State.Defect);
+			pageDetalleCompra.isVisibleIdTicket(seconds), Defect);
 		
 		checks.add(
 			"Figura alguna prenda (la esperamos hasta " + seconds + " segundos)",
-			pageDetalleCompra.isVisiblePrendaUntil(seconds), State.Warn);
+			pageDetalleCompra.isVisiblePrendaUntil(seconds), Warn);
 		
 		return checks;
 	}
@@ -57,13 +58,13 @@ public class ModalDetalleCompraSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Figura un id de tícket " + compra.getId(),
-			pageDetalleCompra.getIdTicket(compra.getType()).compareTo(compra.getId())==0, State.Warn);
+			pageDetalleCompra.getIdTicket(compra.getType()).compareTo(compra.getId())==0, Warn);
 		checks.add(
 			"Figura el importe " + compra.getPrecio(),
-			pageDetalleCompra.getImporte().contains(compra.getPrecio()), State.Warn);
+			pageDetalleCompra.getImporte().contains(compra.getPrecio()), Warn);
 		checks.add(
 			"Existen " + compra.getNumItems() + " prendas",
-			pageDetalleCompra.getNumPrendas()==compra.getNumItems(), State.Warn);
+			pageDetalleCompra.getNumPrendas()==compra.getNumItems(), Warn);
 		return checks;
 	}
 	
@@ -89,7 +90,7 @@ public class ModalDetalleCompraSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible la dirección <b>#{address}</b>",
-		level=State.Defect)
+		level=Defect)
 	public boolean checkIsVisibleDirection(String address) {
 		return pageDetalleCompra.isVisibleDireccionEnvio(address);
 	}

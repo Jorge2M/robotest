@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.compra.steps;
 
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -13,6 +12,8 @@ import com.mng.robotest.domains.compra.pageobjects.envio.TipoTransporteEnum.Tipo
 import com.mng.robotest.domains.compra.steps.envio.ModalDroppointsSteps;
 import com.mng.robotest.test.datastored.DataPago;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class Page1EnvioCheckoutMobilSteps extends StepBase {
 
 	private final Page1EnvioCheckoutMobil page1EnvioCheckoutMobil = new Page1EnvioCheckoutMobil();
@@ -24,16 +25,16 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece la página correspondiente al paso-1 (la esperamos " + seconds + " segundos)",
-			page1EnvioCheckoutMobil.isPageUntil(seconds), State.Warn);
+			page1EnvioCheckoutMobil.isPageUntil(seconds), Warn);
 		
 		checks.add(
 			"Aparece el botón de introducción del código promocional",
-			page1EnvioCheckoutMobil.isVisibleInputCodigoPromoUntil(0), State.Defect);
+			page1EnvioCheckoutMobil.isVisibleInputCodigoPromoUntil(0), Defect);
 		
 		if (!userLogged) {
 			checks.add(
 				"Aparece seleccionado el método de envío \"Estándar\"",
-				page1EnvioCheckoutMobil.isPresentEnvioStandard(), State.Warn);
+				page1EnvioCheckoutMobil.isPresentEnvioStandard(), Warn);
 		}
 		return checks;
 	}
@@ -61,7 +62,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	
 	@Validation (
 		description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{seconds} segundos)",
-		level=State.Warn)
+		level=Warn)
 	public boolean validaBlockSelected(TipoTransporte tipoTransporte, int seconds) {
 		return (page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, seconds));
 	}
@@ -78,14 +79,14 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página asociada al Paso-2",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkAppearsStep2() {
 		return new Page2DatosPagoCheckoutMobil().isPageUntil(3);
 	}
 	
 	@Validation (
 		description="Están presentes los métodos de pago",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkAppearsPageWithPaymentMethods() {
 		return new PageCheckoutWrapper().isPresentMetodosPago();
 	}
@@ -96,11 +97,11 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		int seconds = 2;
 	 	checks.add(
 			"Aparece el descuento total aplicado al empleado (en menos de " + seconds + " segundos)",
-			page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(seconds), State.Warn);
+			page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(seconds), Warn);
 	 	
 	 	checks.add(
 			"Aparece un descuento de empleado mayor que 0",
-			page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(), State.Warn);
+			page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(), Warn);
 	 	
 	 	return checks;
 	}

@@ -7,12 +7,12 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.testreports.stepstore.GestorDatosHarJSON;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.exceptions.NotFoundException;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class CheckerGoogleAnalytics implements Checker {
 
@@ -29,7 +29,7 @@ public class CheckerGoogleAnalytics implements Checker {
 			String urlGoogleAnalytics = "://www.google-analytics.com/collect";
 		 	checks.add(
 				"Está lanzándose 1 petición que contiene <b>" + urlGoogleAnalytics + "</b> y el parámetro <b>\"t=pageview\"</b>",
-				numLineas==1, State.Warn);
+				numLineas==1, Warn);
 		 	
 		 	if (numLineas!=0) {
 				JSONObject entrieJSON = (JSONObject)listEntriesFilteredPageOpt.get().get(0);
@@ -38,10 +38,10 @@ public class CheckerGoogleAnalytics implements Checker {
 				JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
 			 	checks.add(
 					"La petición es de tipo <b>\"GET\"</b>",
-					requestJSON.get("method").toString().compareTo("GET")!=0, State.Warn);
+					requestJSON.get("method").toString().compareTo("GET")!=0, Warn);
 			 	checks.add(
 					"El response status de la petición es de tipo <b>2xx</b>",
-					responseJSON.get("status").toString().matches("2\\d\\d"), State.Warn);
+					responseJSON.get("status").toString().matches("2\\d\\d"), Warn);
 			 	
 				String valueTid1 = "UA-855910-26";
 				String valueTid2 = "UA-855910-3";
@@ -56,7 +56,7 @@ public class CheckerGoogleAnalytics implements Checker {
 					paramTid!=null && 
 					(((String)paramTid.get("value")).compareTo(valueTid1)==0 || 
 					 ((String)paramTid.get("value")).compareTo(valueTid2)==0 ||
-					 ((String)paramTid.get("value")).compareTo(valueTid3)==0), State.Warn);
+					 ((String)paramTid.get("value")).compareTo(valueTid3)==0), Warn);
 		 	}	 
 		}
 		

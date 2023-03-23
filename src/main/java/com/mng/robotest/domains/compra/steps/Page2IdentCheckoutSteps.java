@@ -6,12 +6,13 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.Page2IdentCheckout;
 import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.generic.UtilsMangoTest;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class Page2IdentCheckoutSteps extends StepBase {
 	
@@ -30,16 +31,16 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + seconds + " segundos)",
-			page2IdentCheckout.isPageUntil(seconds), State.Defect);
+			page2IdentCheckout.isPageUntil(seconds), Defect);
 	 	checks.add(
 			"Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña",
-			page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists), State.Warn);
+			page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists), Warn);
 	 	return checks;
 	}
 	
 	@Validation (
 		description="Figura el email <b>#{email}</b>",
-		level=State.Warn)
+		level=Warn)
 	public boolean checkEmail(String email) {
 		return page2IdentCheckout.checkEmail(email);
 	}
@@ -59,7 +60,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 	
 	@Validation (
 		description="Se hace clickable el botón \"Continuar\" (lo esperamos hasta #{seconds})",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkIsVisibleContiueButton(int seconds) {
 		return (page2IdentCheckout.isContinuarClickableUntil(seconds));
 	}
@@ -84,7 +85,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 			
 	@Validation (
 		description="Aparece el aviso a nivel de aduanas que indica que la dirección contiene carácteres no-latinos",
-		level=State.Defect)
+		level=Defect)
 	private boolean checkAvisoDireccionWithNoLatinCharacters() {
 		return (page2IdentCheckout.isDisplayedAvisoAduanas());
 	}

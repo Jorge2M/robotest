@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageInfoNewMisComprasMovil;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta;
@@ -15,6 +14,7 @@ import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 import static com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta.Link.*;
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageMiCuentaSteps extends StepBase {
 	
@@ -23,7 +23,7 @@ public class PageMiCuentaSteps extends StepBase {
 	
 	@Validation(
 		description="Aparece la página de \"Mi cuenta\" (la esperamos hasta #{seconds} segundos)",
-		level=State.Defect)
+		level=Defect)
 	public boolean validateIsPage (int seconds) {
 		return pageMiCuenta.isPageUntil(seconds);
 	}

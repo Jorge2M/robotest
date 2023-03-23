@@ -404,15 +404,11 @@ public class Page2IdentCheckout extends PageBase {
 		String datoSeteado = "";
 		WebElement provinciaPais = getElementPriorizingDisplayed(XPATH_SELECT_PROV_PAIS);
 		if (provinciaPais!=null) {
-			if (PaisShop.getPais(pais)==UKRAINE) {
-				if (channel==Channel.desktop) {
-					return selectProvinciaUkraineDesktop();
-				}
+			if (PaisShop.getPais(pais)==UKRAINE && channel==Channel.desktop) {
+				return selectProvinciaUkraineDesktop();
 			}
-			if (PaisShop.getPais(pais)==EGYPT) {
-				if (egyptCity!=null) {
-				    return selectProvinciaEgyptCity(provinciaPais);
-				}
+			if (PaisShop.getPais(pais)==EGYPT && egyptCity!=null) {
+			    return selectProvinciaEgyptCity(provinciaPais);
 			}
 			
 			new Select(provinciaPais).selectByIndex(1);
@@ -631,8 +627,7 @@ public class Page2IdentCheckout extends PageBase {
 		String cfCity = "VILAFRANCA";
 		String codPostalPais = pais.getCodpos();
 		String cfState = "BARCELONA";		
-		String movil = "665015122";
-		movil = pais.getTelefono();
+		String movil = pais.getTelefono();
 		String dni = pais.getDni();
 		String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_ROBOT_USER).getPassword();
 		
