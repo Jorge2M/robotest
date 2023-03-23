@@ -53,7 +53,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	 	}
 		
 	 	checks.add(String.format(
-	 		"En la columna %s aparece el email asociado: %s", dataPedido.getEmailCheckout()),
+	 		"En la columna %s aparece el email asociado: %s", EMAIL.getTextoColumna(), dataPedido.getEmailCheckout()),
 	 		pagePedidos.isPresentDataInPedido(EMAIL, dataPedido.getEmailCheckout(), PEDIDO, 0), Warn);
 	 	
 	 	String xpathCeldaImporte = pagePedidos.getXPathCeldaLineaPedido(TOTAL, PEDIDO);
