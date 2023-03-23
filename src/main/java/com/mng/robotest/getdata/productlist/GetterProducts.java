@@ -35,8 +35,8 @@ import com.mng.robotest.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class GetterProducts {
 	
@@ -357,11 +357,11 @@ public class GetterProducts {
 		try {
 			PageObjTM.loadUrlInAnotherTabTitle(urlGetProducts, nameTab, driver);
 			var page = new PageBase(driver);
-			if (page.state(State.Visible, By.id("rawdata-tab")).check()) {
+			if (page.state(Visible, By.id("rawdata-tab")).check()) {
 				page.click(By.id("rawdata-tab")).exec();
 			}
 			By bodyPreBy = By.xpath("//body//pre");
-			if (page.state(State.Present, bodyPreBy).check()) {
+			if (page.state(Present, bodyPreBy).check()) {
 				body = driver.findElement(bodyPreBy).getText();
 			}
 		} 

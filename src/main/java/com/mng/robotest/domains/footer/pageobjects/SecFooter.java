@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -124,7 +123,7 @@ public class SecFooter extends PageBase {
 		moveToElement(footerType.getXPathRelativeCapa());
 		
 		String xpathLink = footerType.getXPathRelativeCapa();
-		state(State.Visible, xpathLink).wait(2).check();
+		state(Visible, xpathLink).wait(2).check();
 		click(xpathLink).exec();
 	}
 	

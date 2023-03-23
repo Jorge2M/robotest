@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.beans.Pais;
@@ -78,7 +77,7 @@ public class Page2IdentCheckout extends PageBase {
 	}
 	
 	public boolean checkEmail(String email) {
-		if (state(State.Visible, XPATH_INPUT_EMAIL).check()) {
+		if (state(Visible, XPATH_INPUT_EMAIL).check()) {
 			String emailScreen = getElement(XPATH_INPUT_EMAIL).getAttribute(VALUE);
 			if (emailScreen!=null) {
 				return (email.compareTo(emailScreen)==0);
@@ -119,7 +118,7 @@ public class Page2IdentCheckout extends PageBase {
 	}
 	
 	public boolean isNombreUsuarioVisible(int seconds) {
-		return state(State.Visible, XPATH_INPUT_NOMBRE_USR).wait(seconds).check();
+		return state(Visible, XPATH_INPUT_NOMBRE_USR).wait(seconds).check();
 	}
 	
 	public void setNombreUsuarioIfVisible(String nombreUsr, Map<String,String> datosRegistro) {
@@ -305,11 +304,11 @@ public class Page2IdentCheckout extends PageBase {
 			}
 			finally { 
 				driver.switchTo().window(mainWindowHandle);
-				if (state(State.Present, XPATH_INPUT_DIRECCION1 + "//self::*[string-length(@value)>0]").wait(1).check()) {
+				if (state(Present, XPATH_INPUT_DIRECCION1 + "//self::*[string-length(@value)>0]").wait(1).check()) {
 					String direccion1 = getElement(XPATH_INPUT_DIRECCION1).getAttribute("value");
 					datosRegistro.put("cfDir1", direccion1);
 				}
-				if (state(State.Present, XPATH_INPUT_CODPOST).check()) {
+				if (state(Present, XPATH_INPUT_CODPOST).check()) {
 					String direccion1 = getElement(XPATH_INPUT_CODPOST).getAttribute("value");
 					datosRegistro.put("cfCp", direccion1);
 				}

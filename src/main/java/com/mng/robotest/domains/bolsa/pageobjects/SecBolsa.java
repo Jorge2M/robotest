@@ -1,8 +1,5 @@
 package com.mng.robotest.domains.bolsa.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
-
 import java.util.ListIterator;
 
 import org.openqa.selenium.By;
@@ -12,6 +9,8 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.utils.ImporteScreen;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecBolsa extends SecBolsaCommon {
 

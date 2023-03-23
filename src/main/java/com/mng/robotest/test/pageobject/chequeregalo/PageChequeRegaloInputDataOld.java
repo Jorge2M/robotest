@@ -1,11 +1,10 @@
 package com.mng.robotest.test.pageobject.chequeregalo;
 
 import org.openqa.selenium.By;
-
 import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.test.generic.ChequeRegalo;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageChequeRegaloInputDataOld extends PageChequeRegaloInputData implements PageFromFooter {
 	
@@ -21,7 +20,7 @@ public class PageChequeRegaloInputDataOld extends PageChequeRegaloInputData impl
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return state(State.Present, XPATH_CONTENT).wait(seconds).check();
+		return state(Present, XPATH_CONTENT).wait(seconds).check();
 	}
 	
 	private String getXPathRadio(Importe importe) {
@@ -40,7 +39,7 @@ public class PageChequeRegaloInputDataOld extends PageChequeRegaloInputData impl
 	
 	@Override
 	public boolean isVisibleDataInput(int seconds) {
-		return state(State.Visible, XPATH_INPUT_NOMBRE).wait(seconds).check();
+		return state(Visible, XPATH_INPUT_NOMBRE).wait(seconds).check();
 	}
 	
 	@Override

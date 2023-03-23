@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
@@ -20,8 +19,10 @@ import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusUserDevice;
 import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusUserDevice.MenuUserDevice;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class MenusUserWrapper extends PageBase {
 	
@@ -72,7 +73,7 @@ public class MenusUserWrapper extends PageBase {
 		//TODO eliminar en un futuro. Actualmente existe un TestAB en el icono de 
 		// identificación de usuario que provoca que en ocasiones tarde del orden de 5 segundos en aparecer
 		if (menu==UserMenu.INICIAR_SESION) {
-			isMenuInStateUntil(menu, State.Visible, 5);
+			isMenuInStateUntil(menu, Visible, 5);
 		}
 		
 		moveToMenu(menu);

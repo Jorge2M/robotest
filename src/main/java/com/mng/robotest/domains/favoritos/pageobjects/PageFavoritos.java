@@ -9,7 +9,6 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
@@ -167,7 +166,7 @@ public class PageFavoritos extends PageBase {
 			//Ejecutamos el click mediante JavaScript porque en el caso de móvil en ocasiones el aspa de cerrado queda por debajo de la cabecera
 			String xpath = xpathArtWithIdItem + "//span[@class[contains(.,'icofav-eliminar')]]";
 			click(xpath).type(javascript).exec();
-			state(State.Invisible, xpathArtWithIdItem).wait(3).build();
+			state(Invisible, xpathArtWithIdItem).wait(3).build();
 		}
 	}
 
@@ -179,7 +178,7 @@ public class PageFavoritos extends PageBase {
 	public void clickButtonAddToBagAndWait(String refProducto, String codigoColor) {
 		clickButtonAddToBag(refProducto, codigoColor);
 		String xpathCapaTallas = getXPathCapaTallas(refProducto, codigoColor);
-		state(State.Visible, xpathCapaTallas).wait(1).build();
+		state(Visible, xpathCapaTallas).wait(1).build();
 	}
 	
 	private void clickButtonAddToBag(String refProducto, String codigoColor) {
@@ -229,7 +228,7 @@ public class PageFavoritos extends PageBase {
 		Talla talla = Talla.fromLabel(tallaDisponible.getText());
 		tallaDisponible.click();
 		String xpathCapaTallas = getXPathCapaTallas(refProducto, codigoColor);
-		state(State.Invisible, xpathCapaTallas).wait(1).build();
+		state(Invisible, xpathCapaTallas).wait(1).build();
 		
 		return talla;
 	}

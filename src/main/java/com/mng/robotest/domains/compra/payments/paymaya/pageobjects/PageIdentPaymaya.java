@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.compra.payments.paymaya.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageIdentPaymaya extends PageBase {
 
@@ -11,7 +11,7 @@ public class PageIdentPaymaya extends PageBase {
 	private static final String XPATH_LOGIN_BUTTON = "//input[@class[contains(.,'login-btn')]]";
 	
 	public boolean isPage() {
-		return state(State.Visible, XPATH_WRAPPER_LOGIN).check();
+		return state(Visible, XPATH_WRAPPER_LOGIN).check();
 	}
 	
 	public void login(String user, String password) {

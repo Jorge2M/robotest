@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.compra.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,9 +8,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.NoSuchElementException;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.beans.Direction;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalMultidirection extends PageBase {
 
@@ -102,14 +101,14 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	private String getDirectionItem(WebElement lineDirection, DirectionItem item) {
-		if (state(State.Visible, lineDirection).by(By.xpath(item.getXPath())).check()) {
+		if (state(Visible, lineDirection).by(By.xpath(item.getXPath())).check()) {
 			return getElement(lineDirection, "." + item.getXPath()).getText();
 		}
 		return "";
 	}
 	
 	private boolean isPrincipal(WebElement lineDirection) {
-		return state(State.Visible, lineDirection).by(By.xpath("." + XPATH_TEXT_PRINCIPAL)).check();
+		return state(Visible, lineDirection).by(By.xpath("." + XPATH_TEXT_PRINCIPAL)).check();
 	}
 	
 	public void clickEditAddress(String address) throws NoSuchElementException {
@@ -130,7 +129,7 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	public boolean isModalInvisible(int seconds) {
-		return state(State.Invisible, XPATH_MODAL_DIRECTIONS).wait(seconds).check();
+		return state(Invisible, XPATH_MODAL_DIRECTIONS).wait(seconds).check();
 	}
 
 }

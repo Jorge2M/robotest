@@ -2,7 +2,6 @@ package com.mng.robotest.domains.transversal.menus.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -58,17 +57,17 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 
 	@Override
 	public void clickLinea() {
-		state(State.Present, getXPathLinea()).wait(1).check();
+		state(Present, getXPathLinea()).wait(1).check();
 		click(getXPathLinea()).exec();
 	}	
 	@Override 
 	public void clickSublinea() {
-		state(State.Present, getXPathLinea()).wait(1).check();
+		state(Present, getXPathLinea()).wait(1).check();
 		click(getXPathSublinea()).exec();
 	}
 	@Override
 	public void hoverLinea() {
-		state(State.Visible, getXPathLinea()).wait(1).check();
+		state(Visible, getXPathLinea()).wait(1).check();
 		moveToElement(getXPathLinea());
 	}
 	@Override 

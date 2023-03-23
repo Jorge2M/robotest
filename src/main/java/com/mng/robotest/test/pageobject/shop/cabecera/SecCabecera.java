@@ -3,15 +3,16 @@ package com.mng.robotest.test.pageobject.shop.cabecera;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.buscador.pageobjects.SecSearch;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenusWebAll;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public abstract class SecCabecera extends PageBase {
 	
@@ -39,7 +40,7 @@ public abstract class SecCabecera extends PageBase {
 	
 	public static void buscarTexto(String referencia, Channel channel) {
 		var menusUser = new MenusUserWrapper();
-		menusUser.isMenuInStateUntil(UserMenu.LUPA, State.Visible, 1);
+		menusUser.isMenuInStateUntil(UserMenu.LUPA, Visible, 1);
 		menusUser.clickMenuAndWait(UserMenu.LUPA);
 		SecSearch secSearch = SecSearch.getNew(channel);
 		secSearch.search(referencia);

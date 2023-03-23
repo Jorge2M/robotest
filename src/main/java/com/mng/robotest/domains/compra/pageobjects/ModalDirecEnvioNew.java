@@ -1,9 +1,9 @@
 package com.mng.robotest.domains.compra.pageobjects;
 
 import org.openqa.selenium.Keys;
-
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalDirecEnvioNew extends PageBase {
 
@@ -32,7 +32,7 @@ public class ModalDirecEnvioNew extends PageBase {
 
 	}
 	public boolean isVisible(int seconds) {
-		return state(State.Present, InputType.NOMBRE.getXPath()).wait(seconds).check();
+		return state(Present, InputType.NOMBRE.getXPath()).wait(seconds).check();
 	}
 	
 	public void inputData(DirectionData direction) {
@@ -75,11 +75,11 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 
 	private boolean isPresent(InputType inputType) {
-		return state(State.Present, inputType.getXPath()).check();
+		return state(Present, inputType.getXPath()).check();
 	}
 	
 	private void setProvinciaIfNotYet() {
-		if (state(State.Visible, XPATH_SELECTOR_PROVINCIA).check()) {
+		if (state(Visible, XPATH_SELECTOR_PROVINCIA).check()) {
 			String valueInicial = getElement(XPATH_SELECTOR_PROVINCIA).getAttribute("value");
 			if ("".compareTo(valueInicial)==0) {
 				setProvincia();
@@ -115,7 +115,7 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 
 	public boolean isVisibleModalConfirmacionEliminar(int seconds) {
-		return state(State.Visible, XPATH_REMOVE_CONFIRM_BUTTON).wait(seconds).check();
+		return state(Visible, XPATH_REMOVE_CONFIRM_BUTTON).wait(seconds).check();
 	}
 	
 	public void clickConfirmEliminarButton() {

@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -53,14 +52,14 @@ public class SecSoyNuevo extends PageBase {
 	}
 
 	public boolean isCheckedPubliNewsletter() {
-		if (state(State.Invisible, getXPathInputPublicidad()).check()) {
+		if (state(Invisible, getXPathInputPublicidad()).check()) {
 			return false;
 		}
 		String checked = getElement(getXPathInputPublicidad()).getAttribute("checked");
 		return checked!=null;
 	}
 	public boolean isCheckedConsentimiento() {
-		if (state(State.Invisible, XPATH_INPUT_CONSENTIMIENTO).check()) {
+		if (state(Invisible, XPATH_INPUT_CONSENTIMIENTO).check()) {
 			return false;
 		}
 		String checked = getElement(XPATH_INPUT_CONSENTIMIENTO).getAttribute("checked");

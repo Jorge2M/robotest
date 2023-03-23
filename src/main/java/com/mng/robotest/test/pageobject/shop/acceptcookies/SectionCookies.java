@@ -1,7 +1,7 @@
 package com.mng.robotest.test.pageobject.shop.acceptcookies;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SectionCookies extends PageBase {
 
@@ -9,11 +9,11 @@ public class SectionCookies extends PageBase {
 	private static final String XPATH_SET_COOKIES_BUTTON = "//button[@id[contains(.,'pc-btn')]]";
 	
 	public boolean isVisible(int seconds) {
-		return state(State.Visible, XPATH_ACCEPT_BUTTON).wait(seconds).check();
+		return state(Visible, XPATH_ACCEPT_BUTTON).wait(seconds).check();
 	}
 	
 	public boolean isInvisible(int seconds) {
-		return state(State.Invisible, XPATH_ACCEPT_BUTTON).wait(seconds).check();
+		return state(Invisible, XPATH_ACCEPT_BUTTON).wait(seconds).check();
 	}
 	
 	public void accept() {

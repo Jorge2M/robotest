@@ -3,7 +3,6 @@ package com.mng.robotest.test.pageobject.shop.filtros;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
@@ -118,13 +117,13 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	
 	public void showFilters() {
 		if (!isFiltersShopVisible(1) &&
-			state(State.Clickable, XPATH_LINK_FILTRAR).check()) {
+			state(Clickable, XPATH_LINK_FILTRAR).check()) {
 			click(XPATH_LINK_FILTRAR).exec();
 		}
 	}
 	public void hideFilters() {
 		if (isFiltersShopVisible(1) &&
-			state(State.Clickable, XPATH_LINK_FILTRAR).check()) {
+			state(Clickable, XPATH_LINK_FILTRAR).check()) {
 			click(XPATH_LINK_FILTRAR).exec();
 		}
 	}
@@ -132,7 +131,7 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 		click(XPATH_BUTTON_FILTRAR).exec();
 	}
 	private boolean isFiltersShopVisible(int seconds) {
-		return state(State.Visible, XPATH_CAPA_FILTERS).wait(seconds).check();
+		return state(Visible, XPATH_CAPA_FILTERS).wait(seconds).check();
 	}
 	
 }

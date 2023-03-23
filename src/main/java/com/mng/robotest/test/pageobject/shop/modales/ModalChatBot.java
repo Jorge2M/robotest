@@ -1,7 +1,7 @@
 package com.mng.robotest.test.pageobject.shop.modales;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalChatBot extends PageBase {
 
@@ -21,7 +21,7 @@ public class ModalChatBot extends PageBase {
 	}
 	
 	public boolean checkIconVisible() {
-		return state(State.Visible, XPATH_ICON).check();
+		return state(Visible, XPATH_ICON).check();
 	}
 	
 	public void clickIcon() {
@@ -29,12 +29,11 @@ public class ModalChatBot extends PageBase {
 	}
 	
 	public boolean checkWebchatVisible(int seconds) {
-		return state(State.Visible, XPATH_WEBCHAT).wait(seconds).check();
+		return state(Visible, XPATH_WEBCHAT).wait(seconds).check();
 	}
 
 	public boolean isOptionVisible(String text, int seconds) {
-		String xpath = getXPathOption(text);
-		return state(State.Visible, xpath).wait(seconds).check();
+		return state(Visible, getXPathOption(text)).wait(seconds).check();
 	}
 	
 	public void clickOption(String text) {
@@ -43,12 +42,10 @@ public class ModalChatBot extends PageBase {
 	}
 	
 	public boolean isResponseVisible(String text, int seconds) {
-		String xpath = getXPathResponse(text);
-		return state(State.Visible, xpath).wait(seconds).check();
+		return state(Visible, getXPathResponse(text)).wait(seconds).check();
 	}
 	
 	public boolean isButtonVisible(String text, int seconds) {
-		String xpath = getXPathButton(text);
-		return state(State.Visible, xpath).wait(seconds).check();
+		return state(Visible, getXPathButton(text)).wait(seconds).check();
 	}
 }

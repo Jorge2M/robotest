@@ -1,8 +1,9 @@
 package com.mng.robotest.domains.compra.payments.processout.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.beans.Pago;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageProcessOutInputTrj extends PageBase {
 
@@ -14,7 +15,7 @@ public class PageProcessOutInputTrj extends PageBase {
 	private static final String XPATH_BUTTON_PAGO = "//a[@class[contains(.,'form-submit')]]";
 	
 	public boolean checkIsPage() {
-		return state(State.Visible, XPATH_FORMULARIO_TRJ).check();
+		return state(Visible, XPATH_FORMULARIO_TRJ).check();
 	}
 	
 	public void inputDataTrj(Pago pago) {
@@ -25,7 +26,7 @@ public class PageProcessOutInputTrj extends PageBase {
 	}
 	
 	public boolean isPresentButtonPago() {
-		return state(State.Visible, XPATH_BUTTON_PAGO).check();
+		return state(Visible, XPATH_BUTTON_PAGO).check();
 	}
 	
 	public void clickButtonPay() {

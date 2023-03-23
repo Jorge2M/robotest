@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.bolsa.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,11 +9,12 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.utils.ImporteScreen;
 import com.mng.robotest.test.utils.UtilsTest;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class LineasArticuloBolsa extends PageBase {
 
@@ -204,7 +203,7 @@ public class LineasArticuloBolsa extends PageBase {
 	}
 	
 	private WebElement getLineaLinkArticle(WebElement lineaArticleWeb) {
-		state(State.Visible, lineaArticleWeb).by(By.xpath(XPATH_LINK_RELATIVE_ARTICLE)).wait(2).check();
+		state(Visible, lineaArticleWeb).by(By.xpath(XPATH_LINK_RELATIVE_ARTICLE)).wait(2).check();
 		try {
 			return lineaArticleWeb.findElement(By.xpath(XPATH_LINK_RELATIVE_ARTICLE));
 		} 

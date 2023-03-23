@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.compra.payments.klarna.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageKlarna extends PageBase {
 
@@ -14,12 +14,12 @@ public class PageKlarna extends PageBase {
 	private static final String XPATH_IFRMAE = "//iframe[@id[contains(.,'klarna-hpp-instance-fullscreen')]]";
 	
 	public boolean isPage(int seconds) {
-		return state(State.Visible, XPATH_BUY_BUTTON).wait(seconds).check();
+		return state(Visible, XPATH_BUY_BUTTON).wait(seconds).check();
 	}
 	
 	public void clickBuyButton() {
 		click(XPATH_BUY_BUTTON).exec();
-		if (!state(State.Invisible, XPATH_BUY_BUTTON).wait(2).check()) {
+		if (!state(Invisible, XPATH_BUY_BUTTON).wait(2).check()) {
 			click(XPATH_BUY_BUTTON).exec();
 		}
 	}

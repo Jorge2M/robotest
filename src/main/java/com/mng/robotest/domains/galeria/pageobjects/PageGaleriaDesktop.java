@@ -19,7 +19,6 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -201,7 +200,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public WebElement getImagenElementArticulo(WebElement articulo) {
 		moveToElement(articulo);
 		By byImg = By.xpath(getXPathImgArticulo(articulo));			
-		if (state(State.Visible, articulo).by(byImg).check()) {
+		if (state(Visible, articulo).by(byImg).check()) {
 			return getElement(byImg);
 		}
 		return null;
@@ -487,7 +486,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	@Override
 	public void moveToArticleAndGetObject(int posArticulo) {
 		String xpathArticle = getXPathLinkArticulo(posArticulo) + "/..";
-		state(State.Visible, xpathArticle).wait(1).check();
+		state(Visible, xpathArticle).wait(1).check();
 		moveToElement(xpathArticle);
 	}
 
@@ -512,7 +511,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		//}
 		
 		String xpathTalla = secTallas.getXPathArticleTallaAvailable(posArticulo, posTalla);
-		if (state(State.Visible, xpathTalla).check()) {
+		if (state(Visible, xpathTalla).check()) {
 			WebElement tallaToSelect = getElement(xpathTalla);
 			ArticuloScreen articulo = getArticuloObject(posArticulo);
 			articulo.setTalla(Talla.fromLabel(tallaToSelect.getText()));

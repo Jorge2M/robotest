@@ -5,7 +5,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test.utils.ImporteScreen;
@@ -178,7 +178,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 			clickEditarDireccion();
 		} else {
 			String xpathLink = getXPathRadioMetodo(tipoTransporte);
-			state(State.Visible, xpathLink).wait(2).check();
+			state(Visible, xpathLink).wait(2).check();
 			click(xpathLink).type(javascript).waitLink(2).exec();
 			waitMillis(1000);
 		}
@@ -197,13 +197,13 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public void openOtrosMetodosDeEnvio() {
-		if (state(State.Visible, XPATH_OPEN_METODOS_ENVIO).wait(2).check()) {
+		if (state(Visible, XPATH_OPEN_METODOS_ENVIO).wait(2).check()) {
 			try {
 				click(XPATH_OPEN_METODOS_ENVIO).type(javascript).exec();
 			} catch (Exception e) {
 				click(XPATH_OPEN_METODOS_ENVIO).exec();
 			}
-			state(State.Visible, XPATH_CLOSE_METODOS_ENVIO).wait(2).check();
+			state(Visible, XPATH_CLOSE_METODOS_ENVIO).wait(2).check();
 		}
 	}
 

@@ -1,9 +1,9 @@
 package com.mng.robotest.domains.compra.pageobjects;
 
 import org.openqa.selenium.By;
-
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecDireccionEnvioDesktop extends PageBase {
 
@@ -50,7 +50,7 @@ public class SecDireccionEnvioDesktop extends PageBase {
 	}
 	
 	private boolean isNewSection() {
-		return state(State.Visible, XPath.SECTION.getXPathNew()).check();
+		return state(Visible, XPath.SECTION.getXPathNew()).check();
 	}
 	
 	public void clickEditDireccion() {
@@ -65,12 +65,12 @@ public class SecDireccionEnvioDesktop extends PageBase {
 	public String getTextDireccionEnvio() {
 		if (isNewSection()) {
 			String xpathDireccion = getXPath(XPath.DIRECCION_ENVIO);
-			if (state(State.Present, xpathDireccion).check()) {
+			if (state(Present, xpathDireccion).check()) {
 				return getElement(xpathDireccion).getText();
 			}
 			return "";
 		}
-		if (state(State.Present, XPATH_DIRECCION_ENVIO_OLD).check()) {
+		if (state(Present, XPATH_DIRECCION_ENVIO_OLD).check()) {
 			return (
 				getElement(XPATH_DIRECCION_ENVIO_OLD).getText() + ", " +
 				getElement(XPATH_POBLACION_ENVIO_OLD).getText() + ", " +

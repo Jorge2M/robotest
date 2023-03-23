@@ -10,10 +10,11 @@ import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.github.jorge2m.testmaker.testreports.stepstore.EvidenceStorer;
 import com.github.jorge2m.testmaker.testreports.stepstore.StepEvidence;
 import com.mng.robotest.domains.base.PageBase;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ErrorStorer extends EvidenceStorer {
 
@@ -68,7 +69,7 @@ public class ErrorStorer extends EvidenceStorer {
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("window.open('" + uri.getScheme() + "://" + uri.getHost() + "/errorPage.faces" + "', '" + titlePant + "');");
 		driver.switchTo().window(titlePant);
-		new PageBase(driver).state(State.Present, By.xpath("//*[@class='stackTrace']")).wait(5).check();
+		new PageBase(driver).state(Present, By.xpath("//*[@class='stackTrace']")).wait(5).check();
 		driver.getPageSource();
 		return windowHandle;
 	}

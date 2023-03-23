@@ -2,9 +2,9 @@ package com.mng.robotest.test.pageobject.shop.acceptcookies;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalSetCookies extends PageBase {
 	
@@ -38,11 +38,11 @@ public class ModalSetCookies extends PageBase {
 	}
 	
 	public boolean isVisible(int seconds) {
-		return state(State.Visible, XPATH_SAVE_CONF_BUTTON).wait(seconds).check();
+		return state(Visible, XPATH_SAVE_CONF_BUTTON).wait(seconds).check();
 	}
 	
 	public boolean isInvisible(int seconds) {
-		return state(State.Invisible, XPATH_SAVE_CONF_BUTTON).wait(seconds).check();
+		return state(Invisible, XPATH_SAVE_CONF_BUTTON).wait(seconds).check();
 	}
 	
 	public void saveConfiguration() {
@@ -74,12 +74,12 @@ public class ModalSetCookies extends PageBase {
 	}
 	
 	public boolean isSwitchEnabled() {
-		WebElement wrapperSwitch = getElementVisible(XPATH_WRAPPER_SWITCH);
-		return state(State.Present, wrapperSwitch).by(By.xpath(XPATH_INPUT_SWITCH_HANDLER + "//self::*[@checked]")).check();
+		var wrapperSwitch = getElementVisible(XPATH_WRAPPER_SWITCH);
+		return state(Present, wrapperSwitch).by(By.xpath(XPATH_INPUT_SWITCH_HANDLER + "//self::*[@checked]")).check();
 	}
 	
 	public void clickSwitchCookies() {
-		WebElement switchElem = getElementVisible(XPATH_SWITCH_COOKIES);
+		var switchElem = getElementVisible(XPATH_SWITCH_COOKIES);
 		click(switchElem).exec();
 	}
 }

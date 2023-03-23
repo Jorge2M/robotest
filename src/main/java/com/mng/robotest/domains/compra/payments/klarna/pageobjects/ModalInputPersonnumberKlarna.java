@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.compra.payments.klarna.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalInputPersonnumberKlarna extends PageBase {
 
@@ -15,7 +15,7 @@ public class ModalInputPersonnumberKlarna extends PageBase {
 	}
 	
 	public boolean isModal(int seconds) {
-		return state(State.Visible, getXPathInputPersonNumber()).wait(seconds).check();
+		return state(Visible, getXPathInputPersonNumber()).wait(seconds).check();
 	}
 	
 	public void inputPersonNumber(String personnumber) {
@@ -24,7 +24,7 @@ public class ModalInputPersonnumberKlarna extends PageBase {
 	
 	public void clickButtonConf() {
 		click(XPATH_BUTTON_CONF).exec();
-		if (state(State.Visible, XPATH_SECOND_BUTTON_CONF).wait(2).check()) {
+		if (state(Visible, XPATH_SECOND_BUTTON_CONF).wait(2).check()) {
 			click(XPATH_SECOND_BUTTON_CONF).exec();
 		}
 	}

@@ -3,13 +3,14 @@ package com.mng.robotest.domains.transversal.menus.pageobjects;
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupResponse.*;
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class GroupWeb extends PageBase {
 	
@@ -147,12 +148,12 @@ public class GroupWeb extends PageBase {
 	}	
 	public boolean isPresent() {
 		hoverLinea();
-		return state(State.Visible, getXPathGroup()).wait(1).check();
+		return state(Visible, getXPathGroup()).wait(1).check();
 	}
 	
 	private void clickGroup() {
-		state(State.Visible, getXPathGroup()).wait(1).check();
-		click(getXPathGroup()).state(State.Visible).exec(); 
+		state(Visible, getXPathGroup()).wait(1).check();
+		click(getXPathGroup()).state(Visible).exec(); 
 		if (!isVisibleSubMenus() && group.getGroupResponse()==GroupResponse.MENUS) {
 			waitMillis(1000);
 			click(getXPathGroup()).exec();
@@ -160,7 +161,7 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private void hoverGroup() {
-		state(State.Visible, getXPathGroup()).wait(2).check();
+		state(Visible, getXPathGroup()).wait(2).check();
 		moveToElement(getXPathGroup()); 
 	}
 	
@@ -195,7 +196,7 @@ public class GroupWeb extends PageBase {
 	}
 	
 	public boolean isVisibleSubMenus() {
-		return state(State.Visible, getXPathSubmenu()).check();
+		return state(Visible, getXPathSubmenu()).check();
 	}
 	
 }

@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.compra.payments.tmango.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageRedsysSim extends PageBase {
 
@@ -30,7 +30,7 @@ public class PageRedsysSim extends PageBase {
 	
 	public boolean isPage() {
 		String xpathOption = getXPathOption(OptionRedSys.AUTENTICACION_CON_EXITO);
-		return state(State.Present, xpathOption).check();
+		return state(Present, xpathOption).check();
 	}
 	
 	public void selectOption(OptionRedSys option) {

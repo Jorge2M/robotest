@@ -1,7 +1,8 @@
 package com.mng.robotest.domains.compra.payments.klarna.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalUserDataKlarna extends PageBase {
 
@@ -27,7 +28,7 @@ public class ModalUserDataKlarna extends PageBase {
 	private static final String XPATH_BUTTON_CONTINUE = "//button[@id='button-primary']";
 	
 	public boolean isModal(int seconds) {
-		return state(State.Visible, InputKlarna.EMAIL.getXPath()).wait(seconds).check();
+		return state(Visible, InputKlarna.EMAIL.getXPath()).wait(seconds).check();
 	}
 	
 	public void inputData(DataKlarna dataKlarna) {
@@ -83,13 +84,13 @@ public class ModalUserDataKlarna extends PageBase {
 	
 	public void clickButtonContinue() {
 		click(XPATH_BUTTON_CONTINUE).exec();
-		if (!state(State.Invisible, XPATH_BUTTON_CONTINUE).wait(2).check()) {
+		if (!state(Invisible, XPATH_BUTTON_CONTINUE).wait(2).check()) {
 			click(XPATH_BUTTON_CONTINUE).exec();
 		}
 	}
 	
 	private boolean isVisible(InputKlarna inputKlarna) {
-		return state(State.Visible, inputKlarna.getXPath()).check();
+		return state(Visible, inputKlarna.getXPath()).check();
 	}
 	
 	private String getInputValue(InputKlarna inputKlarna) {

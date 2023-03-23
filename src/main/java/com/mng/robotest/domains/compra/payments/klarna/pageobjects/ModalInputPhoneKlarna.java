@@ -1,9 +1,9 @@
 package com.mng.robotest.domains.compra.payments.klarna.pageobjects;
 
 import org.openqa.selenium.WebElement;
-
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalInputPhoneKlarna extends PageBase {
 
@@ -13,7 +13,7 @@ public class ModalInputPhoneKlarna extends PageBase {
 	private static final String XPATH_BUTTON_CONFIRM = "//span[@id[contains(.,'kp-purchase-review-continue-button')]]";
 	
 	public boolean isModal(int seconds) {
-		return state(State.Visible, XPATH_INPUT_PHONE_NUMBER).wait(seconds).check();
+		return state(Visible, XPATH_INPUT_PHONE_NUMBER).wait(seconds).check();
 	}
 	
 	public void inputPhoneNumber(String phoneNumber) {
@@ -30,7 +30,7 @@ public class ModalInputPhoneKlarna extends PageBase {
 	}
 	
 	private boolean isInputOtpVisible(int seconds) {
-		return state(State.Visible, XPATH_INPUT_OTP).wait(seconds).check();
+		return state(Visible, XPATH_INPUT_OTP).wait(seconds).check();
 	}
 	
 	public void inputOTP(String otp) {
@@ -40,7 +40,7 @@ public class ModalInputPhoneKlarna extends PageBase {
 	}
 	
 	private boolean isButtonConfirmVisible(int seconds) {
-		return state(State.Visible, XPATH_BUTTON_CONFIRM).wait(seconds).check();
+		return state(Visible, XPATH_BUTTON_CONFIRM).wait(seconds).check();
 	}
 	
 	public void clickButtonConfirm() {

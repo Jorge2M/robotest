@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -22,7 +21,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	private static final String XPATH_INPUT_DNI = XPATH_BLOCK + "//input[@name[contains(.,'dni')]]"; //Specific for Codensa (Colombia)
 	
 	protected void goToIframe() {
-		state(State.Visible, XPATH_IFRAME).wait(2).check();
+		state(Visible, XPATH_IFRAME).wait(2).check();
 		driver.switchTo().frame(getElement(XPATH_IFRAME));
 	}
 	

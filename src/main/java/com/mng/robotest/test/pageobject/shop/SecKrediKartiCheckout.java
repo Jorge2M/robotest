@@ -1,9 +1,9 @@
 package com.mng.robotest.test.pageobject.shop;
 
 import org.openqa.selenium.Keys;
-
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecKrediKartiCheckout extends PageBase {
 
@@ -32,8 +32,7 @@ public class SecKrediKartiCheckout extends PageBase {
 	}
 	
 	public boolean isVisiblePagoAPlazoUntil(int seconds) {
-		String xpathCapaPlazo = getXPathCapaPagoPlazo();
-		return state(State.Visible, xpathCapaPlazo).wait(seconds).check();
+		return state(Visible, getXPathCapaPagoPlazo()).wait(seconds).check();
 	}
 	
 	public void clickRadioPlazo(int posicion) {

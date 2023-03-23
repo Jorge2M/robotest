@@ -3,7 +3,6 @@ package com.mng.robotest.test.pageobject.shop.modales;
 import java.util.Iterator;
 import java.util.List;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.beans.Pais;
 
@@ -72,7 +71,7 @@ public class ModalCambioPais extends PageBase {
 	public void closeModalIfVisible() {
 		if (isVisibleModalUntil(0)) {
 			getElementVisible(XPATH_ASPA_CLOSE).click();
-			state(State.Invisible, XPATH_MODAL).wait(1).check();
+			state(Invisible, XPATH_MODAL).wait(1).check();
 		}
 	}
 }

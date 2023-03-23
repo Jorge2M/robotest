@@ -6,9 +6,10 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 
@@ -50,7 +51,7 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 	}
 	
 	private boolean isMenuOpen(int seconds) {
-		return state(State.Visible, XPATH_WRAPPER_MENU).wait(seconds).check();
+		return state(Visible, XPATH_WRAPPER_MENU).wait(seconds).check();
 	}
 	private boolean isMenuClose(int seconds) {
 		for (int i=0; i<seconds; i++) {

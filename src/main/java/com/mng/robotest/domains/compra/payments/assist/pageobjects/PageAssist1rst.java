@@ -2,7 +2,6 @@ package com.mng.robotest.domains.compra.payments.assist.pageobjects;
 
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.beans.Pago;
 
@@ -99,8 +98,7 @@ public class PageAssist1rst extends PageBase {
 	}
 
 	public void waitForBotonAvailable(int seconds) {
-		String xpathBoton = getXPathButtonPago();
-		state(State.Present, xpathBoton).wait(seconds);
+		state(Present, getXPathButtonPago()).wait(seconds);
 	}
 	
 	public boolean invisibilityBotonPagoUntil(int seconds) {

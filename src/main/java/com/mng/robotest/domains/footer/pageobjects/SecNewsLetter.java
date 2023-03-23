@@ -2,9 +2,10 @@ package com.mng.robotest.domains.footer.pageobjects;
 
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.pageobject.shop.modales.ModalClubMangoLikes;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecNewsLetter extends PageBase {
 
@@ -34,7 +35,7 @@ public class SecNewsLetter extends PageBase {
 		new SecFooter().moveTo();
 		
 		String xpathLink = XPATH_TEXT_AREA_MAIL_SUSCRIPTION;
-		state(State.Visible, xpathLink).wait(2).check();
+		state(Visible, xpathLink).wait(2).check();
 		click(xpathLink).exec();
 	}
 

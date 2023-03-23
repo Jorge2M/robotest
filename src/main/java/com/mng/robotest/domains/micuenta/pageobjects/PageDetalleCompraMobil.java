@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.micuenta.pageobjects;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
@@ -45,7 +44,7 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	@Override
 	public boolean isVisibleIdTicket(int seconds) {
-		return state(State.Visible, XPATH_ID_TICKET).wait(seconds).check();
+		return state(Visible, XPATH_ID_TICKET).wait(seconds).check();
 	}
 	@Override
 	public String getIdTicket(TypeTicket typeTicket) {
@@ -53,7 +52,7 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	@Override
 	public String getImporte() {
-		state(State.Visible, XPATH_LINEA_IMPORTE).wait(2).check();
+		state(Visible, XPATH_LINEA_IMPORTE).wait(2).check();
 		return getElementWeb(XPATH_LINEA_IMPORTE).getText();
 	}
 	@Override
@@ -83,9 +82,9 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	
 	private void makeVisibleDatosEnvio() {
-		if (state(State.Invisible, XPATH_DATOS_ENVIO).check()) {
+		if (state(Invisible, XPATH_DATOS_ENVIO).check()) {
 			click(XPATH_DESPLEGABLE_DATOS_ENVIO).exec();
-			state(State.Visible, XPATH_DATOS_ENVIO).wait(1).check();
+			state(Visible, XPATH_DATOS_ENVIO).wait(1).check();
 		}
 	}
 }

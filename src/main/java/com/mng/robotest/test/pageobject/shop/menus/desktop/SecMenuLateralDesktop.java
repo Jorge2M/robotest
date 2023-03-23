@@ -2,8 +2,6 @@ package com.mng.robotest.test.pageobject.shop.menus.desktop;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
@@ -64,10 +62,10 @@ public class SecMenuLateralDesktop extends PageBase {
 	
 	public boolean isVisibleCapaMenus(int seconds) {
 		if (app==AppEcom.outlet) {
-			return state(State.Visible, XPATH_CAPA_MENUS_OUTLET).wait(seconds).check();
+			return state(Visible, XPATH_CAPA_MENUS_OUTLET).wait(seconds).check();
 		}
 		else {
-			return state(State.Visible, XPATH_CAPA_MENUS_SHOP).wait(seconds).check();
+			return state(Visible, XPATH_CAPA_MENUS_SHOP).wait(seconds).check();
 		}
 	}
 }

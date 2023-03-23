@@ -6,11 +6,10 @@ import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.pageobjects.DataDireccion.DataDirType;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public abstract class ModalDireccion extends PageBase {
 
@@ -82,14 +81,14 @@ public abstract class ModalDireccion extends PageBase {
 	
 	public void selectPoblacion(String poblacion, String xpathFormModal) {
 		String xpath = xpathFormModal + XPATH_SELECT_POBLACION;
-		state(State.Visible, xpath).wait(2).check();
+		state(Visible, xpath).wait(2).check();
 		waitMillis(1000);
 		new Select(getElement(xpath)).selectByValue(poblacion);
 	}
 	
 	public void selectProvincia(String provincia, String xpathFormModal) {
 		String xpath = xpathFormModal + XPATH_SELECT_PROVINCIA;
-		state(State.Clickable, xpath).wait(2).check();
+		state(Clickable, xpath).wait(2).check();
 		new Select(getElement(xpath)).selectByVisibleText(provincia);
 	}
 
@@ -97,7 +96,7 @@ public abstract class ModalDireccion extends PageBase {
 		String xpathSelectedPais = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
 		if (!state(Present, xpathSelectedPais).check()) {
 			String xpath = xpathFormModal + XPATH_SELECT_PAIS;
-			state(State.Clickable, xpath).wait(2).check();
+			state(Clickable, xpath).wait(2).check();
 			new Select(getElement(xpath)).selectByValue(codigoPais);
 		}
 	}

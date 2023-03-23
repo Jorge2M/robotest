@@ -17,13 +17,13 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ClickElement.BuilderClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.BuilderSelect;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.BuilderState;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.datatest.DataMantoTest;
 import com.mng.robotest.domains.base.datatest.DataTest;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 public class PageBase extends PageObjTM {
 

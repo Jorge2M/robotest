@@ -2,7 +2,6 @@ package com.mng.robotest.domains.compra.payments.sofort.pageobjects;
 
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -19,7 +18,7 @@ public class PageSofort2on extends PageBase {
 	}
 	
 	public void acceptCookies() {
-		if (state(State.Visible, XPATH_BUTTON_ACCEPT_COOKIES).check()) {
+		if (state(Visible, XPATH_BUTTON_ACCEPT_COOKIES).check()) {
 			click(XPATH_BUTTON_ACCEPT_COOKIES).exec();
 		}
 	}

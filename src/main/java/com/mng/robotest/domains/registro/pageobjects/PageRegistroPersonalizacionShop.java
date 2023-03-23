@@ -3,9 +3,10 @@ package com.mng.robotest.domains.registro.pageobjects;
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageRegistroPersonalizacionShop extends PageBase {
 
@@ -47,7 +48,7 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 		return isPageUntil(0);
 	}
 	public boolean isPageUntil(int seconds) {
-		return state(State.Present, XPATH_INPUT_NOMBRE).wait(seconds).check(); 
+		return state(Present, XPATH_INPUT_NOMBRE).wait(seconds).check(); 
 	}
 	
 	public void inputName(String name) {
@@ -55,7 +56,7 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	}
 	
 	public void inputPostalCode(String postalCode) {
-		state(State.Visible, XPATH_INPUT_POSTALCODE).wait(2).check();
+		state(Visible, XPATH_INPUT_POSTALCODE).wait(2).check();
 		getElement(XPATH_INPUT_POSTALCODE).sendKeys(postalCode);
 	}
 	

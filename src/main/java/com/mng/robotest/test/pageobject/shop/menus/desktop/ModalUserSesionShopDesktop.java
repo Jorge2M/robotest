@@ -2,8 +2,8 @@ package com.mng.robotest.test.pageobject.shop.menus.desktop;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

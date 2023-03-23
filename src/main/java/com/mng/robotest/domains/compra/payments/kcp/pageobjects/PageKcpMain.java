@@ -1,11 +1,10 @@
 package com.mng.robotest.domains.compra.payments.kcp.pageobjects;
 
 import org.openqa.selenium.By;
-
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageKcpMain extends PageBase {
 
@@ -17,7 +16,7 @@ public class PageKcpMain extends PageBase {
 	
 	public boolean isPage(int seconds) {
 		goToIframe();
-		boolean result = state(State.Present, XPATH_AGREE_ALL_RADIO).wait(seconds).check();
+		boolean result = state(Present, XPATH_AGREE_ALL_RADIO).wait(seconds).check();
 		leaveIframe();
 		return result;
 	}
@@ -30,7 +29,7 @@ public class PageKcpMain extends PageBase {
 	
 	public boolean isVisibleTermAndConditions(int seconds) {
 		goToIframe();
-		boolean isVisible = state(State.Present, XPATH_AGREE_ALL_RADIO).wait(seconds).check();
+		boolean isVisible = state(Present, XPATH_AGREE_ALL_RADIO).wait(seconds).check();
 		leaveIframe();
 		return isVisible;
 	}
@@ -43,7 +42,7 @@ public class PageKcpMain extends PageBase {
 	
 	public boolean isSelectInstallmentVisible(int seconds) {
 		goToIframe();
-		boolean result = state(State.Visible, XPATH_SELECT_INSTALLMENT).wait(seconds).check();
+		boolean result = state(Visible, XPATH_SELECT_INSTALLMENT).wait(seconds).check();
 		leaveIframe();
 		return result;
 	}

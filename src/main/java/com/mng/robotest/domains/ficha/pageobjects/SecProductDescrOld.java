@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 
@@ -92,7 +91,7 @@ public class SecProductDescrOld extends PageBase {
 		WebElement panel = getElement(xpathPanel);
 		if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {
 			By byCapa = By.xpath(".//div[@class[contains(.,'collapsible-info-body')]]");
-			if (state(State.Present, panel).by(byCapa).check()) {
+			if (state(Present, panel).by(byCapa).check()) {
 				WebElement capa = driver.findElement(byCapa);
 				if (capa.getAttribute("class").contains("-opened")) {
 					return TypeStatePanel.UNFOLDED;

@@ -1,8 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects.tallas;
 
-
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.data.Talla;
@@ -14,7 +12,6 @@ import java.util.stream.Collectors;
 import org.openqa.selenium.JavascriptExecutor;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasFicha {
 	
@@ -150,7 +147,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 		}
 		despliegaSelectTallas();
 		String xpathTalla = getXPathOptionTalla(Arrays.asList(tallaLabel));
-		state(State.Clickable, xpathTalla).wait(2).check();
+		state(Clickable, xpathTalla).wait(2).check();
 		click(xpathTalla).exec();
 	}
 	

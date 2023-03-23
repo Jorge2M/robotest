@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.compra.payments.postfinance.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PagePostfSelectChannel extends PageBase {
 
@@ -19,7 +19,7 @@ public class PagePostfSelectChannel extends PageBase {
 	}
 	
 	public boolean isPage(int seconds) {
-		return state(State.Visible, ChannelPF.CARD.getXPath()).wait(seconds).check();
+		return state(Visible, ChannelPF.CARD.getXPath()).wait(seconds).check();
 	}
 	
 	public void selectChannel(ChannelPF channelPF) {

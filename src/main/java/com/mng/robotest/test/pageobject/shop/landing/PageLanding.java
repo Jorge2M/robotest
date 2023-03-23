@@ -5,7 +5,6 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
@@ -96,7 +95,7 @@ public class PageLanding extends PageBase {
 					}
 				}
 			}
-			state(State.Present, xpathImg).wait(15).check();
+			state(Present, xpathImg).wait(15).check();
 		} catch (Exception e) {
 			banners = false;
 		}

@@ -13,7 +13,6 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.micuenta.beans.Ticket;
 
@@ -78,7 +77,7 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private List<WebElement> getTicketsPage() {
-		state(State.Visible, XPATH_TICKET).wait(2).check();
+		state(Visible, XPATH_TICKET).wait(2).check();
 		return getElements(XPATH_TICKET);
 	}
 	
@@ -153,7 +152,7 @@ public class PageMisCompras extends PageBase {
 	
 	private String getIdTicketPage(WebElement boxDataTicket) {
 		By byIdTicket = By.xpath(XPATH_ID_RELATIVE_TICKET);
-		if (!state(State.Visible, boxDataTicket).by(byIdTicket).check()) {
+		if (!state(Visible, boxDataTicket).by(byIdTicket).check()) {
 			return "";
 		}
 		String lineaId = getElement(boxDataTicket, byIdTicket).getText();
@@ -170,7 +169,7 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
-		if (state(State.Visible, XPATH_ITEMS_RELATIVE_TICKET).check()) {
+		if (state(Visible, XPATH_ITEMS_RELATIVE_TICKET).check()) {
 			return 0;
 		}
 		String textLinea = "0" + getElement(boxDataTicket, XPATH_ITEMS_RELATIVE_TICKET).getText();

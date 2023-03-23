@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.galeria.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.base.PageBase;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecSubmenusGallery extends PageBase {
 
@@ -18,11 +18,11 @@ public class SecSubmenusGallery extends PageBase {
 	}
 	
 	public boolean isVisible(int seconds) {
-		return state(State.Visible, XPATH_CAPA).wait(seconds).check();
+		return state(Visible, XPATH_CAPA).wait(seconds).check();
 	}
 	
 	public boolean isVisibleSubmenu(String nameMenu) {
-		return state(State.Visible, getXPathMenu(nameMenu)).wait(1).check();
+		return state(Visible, getXPathMenu(nameMenu)).wait(1).check();
 	}
 	
 	public boolean isMenuSelected(String nameMenu) {

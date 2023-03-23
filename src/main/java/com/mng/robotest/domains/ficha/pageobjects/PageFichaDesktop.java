@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.LinksAfterBolsa;
 
@@ -88,7 +87,7 @@ public class PageFichaDesktop extends PageFicha {
 
 	@Override
 	public boolean isVisibleBuscarEnTiendaLink() {
-		return secBolsaButtonAndLinks.checkLinkInState(LinksAfterBolsa.DISPONIBILIDAD_TIENDA, State.Visible);
+		return secBolsaButtonAndLinks.checkLinkInState(LinksAfterBolsa.DISPONIBILIDAD_TIENDA, Visible);
 	}
 
 	@Override

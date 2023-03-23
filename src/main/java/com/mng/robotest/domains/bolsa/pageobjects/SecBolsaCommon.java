@@ -1,8 +1,5 @@
 package com.mng.robotest.domains.bolsa.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Invisible;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
-
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -12,12 +9,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public abstract class SecBolsaCommon extends PageBase {
 
@@ -54,7 +51,7 @@ public abstract class SecBolsaCommon extends PageBase {
 
 	public void clickBotonComprar( int secondsWait) {
 		String xpathComprarBt = getXPathBotonComprar();
-		state(State.Visible, xpathComprarBt).wait(secondsWait).check();
+		state(Visible, xpathComprarBt).wait(secondsWait).check();
 		click(xpathComprarBt).type(TypeClick.javascript).exec();
 	}
 	
@@ -117,7 +114,7 @@ public abstract class SecBolsaCommon extends PageBase {
 				}
 
 				try {
-					state(State.Present, By.className("bagItem")).wait(3).check();
+					state(Present, By.className("bagItem")).wait(3).check();
 					numArticulos = getLineasArtBolsa().getNumLinesArticles();
 				} 
 				catch (Exception e) {

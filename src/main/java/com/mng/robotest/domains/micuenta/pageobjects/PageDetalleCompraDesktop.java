@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.micuenta.pageobjects;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -49,11 +48,11 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	}
 	@Override
 	public boolean isVisibleIdTicket(int seconds) {
-		return state(State.Visible, getXPathTicket()).wait(seconds).check();
+		return state(Visible, getXPathTicket()).wait(seconds).check();
 	}
 	@Override
 	public String getImporte() {
-		state(State.Visible, XPATH_IMPORTE).wait(2).check();
+		state(Visible, XPATH_IMPORTE).wait(2).check();
 		String importe = getElement(XPATH_IMPORTE).getText();
 		return importe.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
 	}

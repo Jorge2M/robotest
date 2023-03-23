@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.micuenta.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalDetalleArticuloMobile extends ModalDetalleArticulo {
@@ -29,12 +27,12 @@ public class ModalDetalleArticuloMobile extends ModalDetalleArticulo {
 	}
 	@Override
 	public String getNombre() {
-		state(State.Visible, XPATH_NOMBRE).wait(1).check();
+		state(Visible, XPATH_NOMBRE).wait(1).check();
 		return getElement(XPATH_NOMBRE).getText();
 	}
 	@Override
 	public String getPrecio() {
-		state(State.Visible, XPATH_PRECIO).wait(1).check();
+		state(Visible, XPATH_PRECIO).wait(1).check();
 		return getElement(XPATH_PRECIO).getText();
 	}
 	@Override

@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -124,7 +123,7 @@ public class PageFichaDevice extends PageFicha {
 
 	@Override
 	public boolean isVisibleBuscarEnTiendaLink() {
-		return state(State.Visible, XPATH_BUSCAR_ENN_TIENDA_BUTTON).check();
+		return state(Visible, XPATH_BUSCAR_ENN_TIENDA_BUTTON).check();
 	}
 
 	@Override
