@@ -25,20 +25,20 @@ public class SecCabeceraMostFrequent extends SecCabecera {
 	private static final String XPATH_NUM_ARTICLES_MANY_LOCATIONS = "//span[@data-testid[contains(.,'numItems')] or @data-testid[contains(.,'totalItems')]]";
 	
 	public enum IconoCabecera implements ElementPage {
-		lupa(
+		LUPA(
 			"//*[@data-testid='header.userMenu.search.button']",
 			//TODO eliminar el 1o cuando suba la actual versión a pro (24-enero)			
 			"//*[@data-testid[contains(.,'header.userMenu.searchIconButton')] or @data-testid='header.userMenu.search.button']"),
-		iniciarsesion(
+		INICIAR_SESION(
 			"//*[@data-testid='header.userMenu.login_mobile_any']",
 			"//*[@data-testid='header.userMenu.login_any']"),
-		micuenta(
+		MICUENTA(
 			"//*[@data-testid='header.userMenu.login_mobile']",
 			"//*[@data-testid='header.userMenu.login']"),
-		favoritos(
+		FAVORITOS(
 			"//*[@data-testid='header.userMenu.favorites_mobile_any']",
 			"//*[@data-testid[contains(.,'header.userMenu.favorites')]]"),
-		bolsa(
+		BOLSA(
 			"//*[@data-testid='header-user-menu-bag']",
 			"//*[@data-testid[contains(.,'header.userMenu.bolsa')] or " + //TODO eliminar cuando todos los países vayan por la nueva bolsa 
 			    "@data-testid[contains(.,'header-user-menu-bag')]]");
@@ -91,22 +91,22 @@ public class SecCabeceraMostFrequent extends SecCabecera {
 	
 	@Override
 	public void hoverIconoBolsa() {
-		hoverIcono(IconoCabecera.bolsa);
+		hoverIcono(IconoCabecera.BOLSA);
 	}
 	
 	@Override
 	public boolean isInStateIconoBolsa(State state, int seconds) {
-		return (isIconoInState(IconoCabecera.bolsa, state, seconds));
+		return (isIconoInState(IconoCabecera.BOLSA, state, seconds));
 	}
 	
 	@Override
 	public void clickIconoBolsa() {
-		clickIconoAndWait(IconoCabecera.bolsa);
+		clickIconoAndWait(IconoCabecera.BOLSA);
 	}
 
 	@Override
 	public void clickIconoBolsaWhenDisp(int seconds) {
-		boolean isIconoClickable = state(Clickable, IconoCabecera.bolsa.getBy(channel)).wait(seconds).check();
+		boolean isIconoClickable = state(Clickable, IconoCabecera.BOLSA.getBy(channel)).wait(seconds).check();
 		if (isIconoClickable) {
 			clickIconoBolsa(); 
 		}
@@ -155,10 +155,10 @@ public class SecCabeceraMostFrequent extends SecCabecera {
 
 	private void hoverVisibleUserIcon() {
 		try {
-			if (isIconoInState(IconoCabecera.iniciarsesion, Visible)) {
-				hoverIcono(IconoCabecera.iniciarsesion); 
+			if (isIconoInState(IconoCabecera.INICIAR_SESION, Visible)) {
+				hoverIcono(IconoCabecera.INICIAR_SESION); 
 			} else {
-				hoverIcono(IconoCabecera.micuenta);
+				hoverIcono(IconoCabecera.MICUENTA);
 			}
 		}
 		catch (NoSuchElementException e) {

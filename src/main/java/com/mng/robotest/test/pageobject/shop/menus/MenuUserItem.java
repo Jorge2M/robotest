@@ -113,23 +113,11 @@ public class MenuUserItem {
 	}
 	
 	private ElementPage getMenuLupa() {
-		return IconoCabecera.lupa;
+		return IconoCabecera.LUPA;
 	}
 	
 	private ElementPage getMenuIniciarSesion() {
-//		if (app==AppEcom.outlet || channel==Channel.tablet) {
-//			if (channel==Channel.desktop) {
-//				return IconoCabecera.iniciarsesion;
-//			}
-//			if (channel.isDevice()) {
-//				return MenuUserDevice.INICIAR_SESION;
-//			}
-//		}
-//		if (app==AppEcom.shop || app==AppEcom.votf) {
-//			return IconoCabecera.iniciarsesion;
-//		}
-//		return null;
-		return IconoCabecera.iniciarsesion;
+		return IconoCabecera.INICIAR_SESION;
 	}
 	
 	private ElementPage getMenuCerrarSesion() {
@@ -155,14 +143,14 @@ public class MenuUserItem {
 	private ElementPage getMenuMiCuenta() {
 		if (app==AppEcom.outlet || channel==Channel.tablet) {
 			if (channel==Channel.desktop) {
-				return IconoCabecera.micuenta;
+				return IconoCabecera.MICUENTA;
 			}
 			if (channel.isDevice()) {
 				return MenuUserDevice.MI_CUENTA;
 			}
 		}
 		if (app==AppEcom.shop || app==AppEcom.votf) {
-			return IconoCabecera.micuenta;
+			return IconoCabecera.MICUENTA;
 		}
 		return null;
 	}
@@ -172,7 +160,7 @@ public class MenuUserItem {
 			return MenuUserDevice.FAVORITOS;
 		}
 
-		return IconoCabecera.favoritos;
+		return IconoCabecera.FAVORITOS;
 	}
 	
 	private ElementPage getMenuMisCompras() {

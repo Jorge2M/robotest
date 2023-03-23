@@ -60,7 +60,7 @@ public class ModalCambioPais extends PageBase {
 	}	
 	
 	public String getHRefPaisButtonChagePais() {
-		String xpath = getXPathButtonToChangePais(""/*urlAccesoPais*/);
+		String xpath = getXPathButtonToChangePais("");
 		return getElement(xpath).getAttribute("href");
 	}
 	

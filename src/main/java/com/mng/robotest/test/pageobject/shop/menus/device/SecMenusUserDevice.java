@@ -63,12 +63,12 @@ public class SecMenusUserDevice extends PageBase {
 	
 	public boolean isMenuInState(MenuUserDevice menu, State state) {
 		secCabecera.clickIconoMenuHamburguerMobil(true);
-		return (state(state, menu.getBy(app)).check());
+		return state(state, menu.getBy(app)).check();
 	}
 	
 	public boolean isMenuInStateUntil(MenuUserDevice menu, State state, int seconds) {
 		secCabecera.clickIconoMenuHamburguerMobil(true);
-		return (state(state, menu.getBy(app)).wait(seconds).check());
+		return state(state, menu.getBy(app)).wait(seconds).check();
 	}
 	
 	public void clickMenu(MenuUserDevice menu) {
