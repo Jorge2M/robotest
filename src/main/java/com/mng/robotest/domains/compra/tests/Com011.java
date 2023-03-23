@@ -59,7 +59,7 @@ public class Com011 extends TestBase {
 		String codigoPedido = dataPago.getDataPedido().getCodpedido();
 		new PageResultPagoSteps().selectMisCompras();
 		
-		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps();
+		var pageMisComprasSteps = new PageMisComprasSteps();
 		if (pageMisComprasSteps.validateIsCompraOnline(codigoPedido)) {
 			pageMisComprasSteps.selectCompra(codigoPedido);
 			new ModalDetalleCompraSteps().checkIsDataVisible();

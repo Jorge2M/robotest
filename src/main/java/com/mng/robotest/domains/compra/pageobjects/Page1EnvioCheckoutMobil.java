@@ -87,7 +87,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	 * @param fechaNaci en formato "dd-mm-aaaa"
 	 */
 	public void selectFechaNacPromoEmpl(String fechaNaci) {
-		StringTokenizer fechaTokenizada = (new StringTokenizer(fechaNaci, "-"));
+		var fechaTokenizada = (new StringTokenizer(fechaNaci, "-"));
 		selectDiaNacPromoEmpl(fechaTokenizada.nextToken());
 		selectMesNacPromoEmpl(fechaTokenizada.nextToken());
 		selectAnyNacPromoEmpl(fechaTokenizada.nextToken());

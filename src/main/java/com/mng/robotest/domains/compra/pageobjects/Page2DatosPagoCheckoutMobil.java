@@ -69,8 +69,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	
 	private String getXPathRadioPago(String nombrePago) {
 		if (nombrePago.contains("mercadopago")) {
-			PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
-			String methodRadioName = pageCheckoutWrapper.getMethodInputValue(nombrePago);
+			String methodRadioName = new PageCheckoutWrapper().getMethodInputValue(nombrePago);
 			return ("//div[@data-custom-radio-id='" + methodRadioName + "']"); 
 		}
 		//TODO eliminar cuando añadan el valor klarna al atributo data-analytics-value
@@ -341,9 +340,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 	
 	public String getPrecioTotalFromResumen(boolean normalize) {
-		String precioTotal = "";
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
-		precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPATH_PRECIO_TOTAL);
+		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XPATH_PRECIO_TOTAL);
 		if (!normalize) {
 			return precioTotal;
 		}
@@ -351,9 +348,8 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 	
 	public String getCroaciaPrecioTotalInEuros(boolean normalize) {
-		String precioTotal = "";
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
-		precioTotal = pageCheckoutWrapper.formateaPrecioTotal(XPATH_PRECIO_TOTAL_CROATIA_EUROS);
+		String precioTotal = new PageCheckoutWrapper()
+				.formateaPrecioTotal(XPATH_PRECIO_TOTAL_CROATIA_EUROS);
 		if (!normalize) {
 			return precioTotal;
 		}

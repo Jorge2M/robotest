@@ -9,7 +9,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoEps extends PagoSteps {
 
-	PageEpsSimuladorSteps pageEpsSimuladorSteps = new PageEpsSimuladorSteps();
+	private final PageEpsSimuladorSteps pageEpsSimuladorSteps = new PageEpsSimuladorSteps();
 	
 	public PagoEps(DataPago dataPago) {
 		super(dataPago);

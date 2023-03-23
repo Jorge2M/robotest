@@ -98,7 +98,7 @@ public class PageDetallePedido extends PageBase {
 	
 	public boolean isStateInTpvStates(DataPedido dataPedido) {
 		boolean estadoEncontrado = false;
-		StringTokenizer st = new StringTokenizer(dataPedido.getPago().getTpv().getEstado(), ";");
+		var st = new StringTokenizer(dataPedido.getPago().getTpv().getEstado(), ";");
 		String estadoPant = getEstadoPedido();
 		while(st.hasMoreTokens()) {
 			String estado = st.nextToken();

@@ -34,7 +34,7 @@ public abstract class BannerObject extends PageBase {
 		int i=0;
 		while (itBannerScreen.hasNext() && i<maxBannersToLoad) {
 			WebElement bannerScreen = itBannerScreen.next();
-			DataBanner dataBanner = new DataBanner();
+			var dataBanner = new DataBanner();
 			dataBanner.setBannerType(getBannerType());
 			dataBanner.setBannerWeb(bannerScreen);
 			dataBanner.setLocation(bannerScreen.getLocation());

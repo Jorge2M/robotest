@@ -31,7 +31,7 @@ public class Fic001 extends TestBase {
 	public Fic001() throws Exception {
 		super();
 		dataTest.setUserRegistered(true);
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
+		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 				.numProducts(80)
 				.build();
 
@@ -59,7 +59,7 @@ public class Fic001 extends TestBase {
 		Article articleNoOnlineWithColors = Article.getArticleCandidateForTest(produtNoOnlineWithColors.get());
 		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
 		boolean isTallaUnica = pageFichaSteps.selectAnadirALaBolsaTallaPrevNoSelected();
-		ArticuloScreen articulo = new ArticuloScreen(produtNoOnlineWithColors.get());
+		var articulo = new ArticuloScreen(produtNoOnlineWithColors.get());
 		pageFichaSteps.selectColorAndSaveData(articulo);
 		pageFichaSteps.selectTallaAndSaveData(articulo);
 		ifTallaUnicaClearBolsa(isTallaUnica);

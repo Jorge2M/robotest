@@ -162,7 +162,7 @@ public class ArticuloScreen {
 		}
 		@Override
 		public String toString() {
-			StringBuilder retorno = new StringBuilder();
+			var retorno = new StringBuilder();
 			if (!colorName.isEmpty()) {
 				retorno.append(colorName + " (");
 			}

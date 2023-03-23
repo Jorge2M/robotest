@@ -69,8 +69,8 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}
 
 	private void hoverGroup() {
-		GroupWeb group = new GroupWeb(menu.getLinea(), menu.getSublinea(), menu.getGroup());
-		group.hover();
+		new GroupWeb(menu.getLinea(), menu.getSublinea(), menu.getGroup())
+			.hover();
 	}	
 	
 	private String clickMenuSuperior() {

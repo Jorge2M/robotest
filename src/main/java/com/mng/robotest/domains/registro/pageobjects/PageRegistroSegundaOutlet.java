@@ -64,7 +64,7 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	 * @param fechaNacimiento en formato DD/MM/AAAA
 	 */
 	public void setFechaNacimiento(String fechaNacimiento) {
-		StringTokenizer st = new StringTokenizer(fechaNacimiento, "/");
+		var st = new StringTokenizer(fechaNacimiento, "/");
 		setFechaNacimiento(st.nextToken(), st.nextToken(), st.nextToken());
 	}
 	
@@ -101,7 +101,7 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	 */
 	public boolean isPresentInputForLineas(String lineasComaSeparated) {
 		boolean isPresentInputs = true;
-		StringTokenizer tokensLinea = new StringTokenizer(lineasComaSeparated, ",");
+		var tokensLinea = new StringTokenizer(lineasComaSeparated, ",");
 		while (tokensLinea.hasMoreElements()) {
 			String lineaStr=tokensLinea.nextToken();
 			String xpathCheckboxLinea = getXPath_checkboxLinea(lineaStr);
@@ -119,7 +119,7 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	 * @return las líneas desmarcadas separadas por comas
 	 */
 	public String desmarcarLineasRandom(String lineasComaSeparated) {
-		StringTokenizer tokensLin = new StringTokenizer(lineasComaSeparated, ",");
+		var tokensLin = new StringTokenizer(lineasComaSeparated, ",");
 		String lineasDesmarcadas = "";
 		int i=0;
 		while (tokensLin.hasMoreElements()) { 

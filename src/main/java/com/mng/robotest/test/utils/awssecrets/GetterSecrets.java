@@ -25,7 +25,7 @@ public interface GetterSecrets {
 	}
 	
 	public static GetterSecrets factory() {
-		GetterSecrets getterSecrets = new GetterLocalFileSecrets();
+		var getterSecrets = new GetterLocalFileSecrets();
 		if (getterSecrets.isAvailable()) {
 			return getterSecrets;
 		}

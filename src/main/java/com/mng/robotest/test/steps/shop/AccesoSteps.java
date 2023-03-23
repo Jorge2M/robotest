@@ -96,7 +96,7 @@ public class AccesoSteps extends StepBase {
 	public ChecksTM checkLinksAfterLogin() {
 		var checks = ChecksTM.getNew();
 		int seconds = 7;
-		MenusUserWrapper userMenus = new MenusUserWrapper();
+		var userMenus = new MenusUserWrapper();
 		checks.add(
 			"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + seconds + " segundos)",
 			userMenus.isMenuInStateUntil(MI_CUENTA, Present, seconds), Defect);
@@ -142,8 +142,7 @@ public class AccesoSteps extends StepBase {
 			new PagePrehomeSteps().seleccionPaisIdiomaAndEnter(false);
 			if (dataTest.isUserRegistered()) {
 				identificacionEnMango();
-				SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-				secBolsaSteps.clear();
+				new SecBolsaSteps().clear();
 			}
 		}
 	}
@@ -173,7 +172,7 @@ public class AccesoSteps extends StepBase {
 			new PageSelectIdiomaVOTFSteps().selectIdiomaAndContinue();
 		}
 
-		PageSelectLineaVOTFSteps pageSelectLineaVOTFSteps = new PageSelectLineaVOTFSteps();
+		var pageSelectLineaVOTFSteps = new PageSelectLineaVOTFSteps();
 		pageSelectLineaVOTFSteps.validateIsPage();
 		GenericChecks.checkDefault();
 		
@@ -260,7 +259,7 @@ public class AccesoSteps extends StepBase {
 			List<Pais> listPaisAsocIP, WebDriver driver) throws Exception {
 		
 		ResultValWithPais checks = ResultValWithPais.getNew();
-		ModalCambioPais modalCambioPais = new ModalCambioPais();
+		var modalCambioPais = new ModalCambioPais();
 		
 		checks.add(
 			"Aparece un modal solicitando confirmación de país",
@@ -328,8 +327,7 @@ public class AccesoSteps extends StepBase {
 		description="Confirmamos la propuesta de país del modal <b>" + TAG_PAIS_BOTON_CAMBIO + "</b>", 
 		expected="Se redirige a la URL " + TAG_HREF_BOTON_CAMBIO)
 	public static void selectConfirmPaisModal(WebDriver driver) {
-		ModalCambioPais modalCambioPais = new ModalCambioPais();
-		
+		var modalCambioPais = new ModalCambioPais();
 		String paisBotonCambio = modalCambioPais.getTextPaisButtonChagePais();
 		String hrefBotonCambioPais = modalCambioPais.getHRefPaisButtonChagePais();
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_PAIS_BOTON_CAMBIO, paisBotonCambio);

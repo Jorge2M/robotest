@@ -43,7 +43,7 @@ public abstract class PageDetalleCompra extends PageBase implements PageDetalleP
 
 	public ArticuloScreen getDataArticulo(int posArticulo) {
 		//Sólo informamos algunos datos relevantes del artículo
-		ArticuloScreen articulo = new ArticuloScreen();
+		var articulo = new ArticuloScreen();
 		articulo.setReferencia(getReferenciaArticulo(posArticulo));
 		articulo.setNombre(getNombreArticulo(posArticulo));
 		articulo.setPrecio(getPrecioArticulo(posArticulo));

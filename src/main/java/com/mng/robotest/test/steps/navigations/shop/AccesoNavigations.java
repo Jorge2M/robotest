@@ -40,7 +40,7 @@ public class AccesoNavigations extends StepBase {
 	}
 	
 	public void accesoHomeAppWeb(boolean acceptCookies) throws Exception {
-		PagePrehome pagePrehome = new PagePrehome();
+		var pagePrehome = new PagePrehome();
 		if (app==AppEcom.votf) {
 			accesoVOTF();
 			goFromLineasToMultimarcaVOTF();
@@ -52,7 +52,7 @@ public class AccesoNavigations extends StepBase {
 	}
 	
 	public void goFromLineasToMultimarcaVOTF() {
-		PageSelectLineaVOTF pageSelectLineaVOTF = new PageSelectLineaVOTF();
+		var pageSelectLineaVOTF = new PageSelectLineaVOTF();
 		pageSelectLineaVOTF.clickBanner(LineaType.SHE);
 		pageSelectLineaVOTF.clickMenu(LineaType.SHE, 1);
 		
@@ -61,7 +61,7 @@ public class AccesoNavigations extends StepBase {
 	}
 	
 	public void accesoVOTF() throws Exception {
-		PageLoginVOTF pageLoginVOTF = new PageLoginVOTF();
+		var pageLoginVOTF = new PageLoginVOTF();
 		pageLoginVOTF.goToFromUrlAndSetTestABs();
 		new PageJCAS().identJCASifExists();
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(pais));
@@ -74,7 +74,7 @@ public class AccesoNavigations extends StepBase {
 			pageSelectIdiomaVOTF.clickButtonAceptar();
 		}
 
-		PageAlertaVOTF pageAlertaVOTF = new PageAlertaVOTF();
+		var pageAlertaVOTF = new PageAlertaVOTF();
 		if (pageAlertaVOTF.isPage()) {
 			pageAlertaVOTF.clickButtonContinuar();
 		}

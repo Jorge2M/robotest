@@ -56,7 +56,7 @@ public class DataKlarna {
 	}
 	
 	public String getHtmlFormattedData() {
-		StringBuilder htmlMsg = new StringBuilder();
+		var htmlMsg = new StringBuilder();
 		if (getEmail()!=null) {
 			htmlMsg.append("<b>" + EMAIL + "</b>:" + getEmail() + "<br>");
 		}

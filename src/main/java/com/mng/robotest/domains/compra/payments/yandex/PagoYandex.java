@@ -21,7 +21,7 @@ public class PagoYandex extends PagoSteps {
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = this.dataPago.getDataPedido();
 		
-		PageYandex1rstSteps pageYandex1rstSteps = new PageYandex1rstSteps();
+		var pageYandex1rstSteps = new PageYandex1rstSteps();
 		pageYandex1rstSteps.validateIsPage(dataPedido.getEmailCheckout(), dataPedido.getImporteTotal(), dataTest.getCodigoPais());
 		if (execPay) {
 			this.dataPago.getDataPedido().setCodtipopago("?");
@@ -34,7 +34,7 @@ public class PagoYandex extends PagoSteps {
 			}
 
 			String tabNameYandexMoney = "yandexMoney";
-			PageYandexMoneySteps pageYandexMoneySteps = new PageYandexMoneySteps();
+			var pageYandexMoneySteps = new PageYandexMoneySteps();
 			pageYandexMoneySteps.accessInNewTab(tabNameYandexMoney);
 			pageYandexMoneySteps.inputDataAndPay(paymentCode, dataPedido.getImporteTotal());
 			pageYandexMoneySteps.closeTabByTitle(tabNameYandexMoney, windowHandlePageYandex1rst);

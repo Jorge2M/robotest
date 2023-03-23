@@ -74,7 +74,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + seconds + " segundos)",
 			page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(seconds), State.Defect);
 	 	
-		Descuento descuento = new Descuento(app, DiscountType.EMPLEADO);
+		var descuento = new Descuento(app, DiscountType.EMPLEADO);
 	 	checks.add(
 			"Para todos los artículos, el % de descuento final es como mínimo del " + 
 			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + ")",
@@ -102,7 +102,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		expected="Aparece la página de resumen de artículos con los descuentos correctamente aplicados",
 		saveNettraffic=SaveWhen.Always)
 	public void inputValeDescuento(ValeDiscount valePais) { 
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
+		var pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
 		dataTest.getDataBag().setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen(true));	
 		checkAfterInputDiscountVale(valePais);
@@ -129,7 +129,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	@Validation
 	private ChecksTM checkValeDiscountIsCorrect(ValeDiscount valePais) {
 		var checks = ChecksTM.getNew();
-		Descuento descuento = new Descuento(valePais.getPorcDescuento(), app);
+		var descuento = new Descuento(valePais.getPorcDescuento(), app);
 	 	checks.add(
 			"En los artículos a los que aplica, el descuento es de " +  
 			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + "):" +

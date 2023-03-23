@@ -81,7 +81,7 @@ public class PagePostfCodSegSteps extends StepBase {
 			driver.switchTo().defaultContent(); 
 		}
 		
-		PagePostfRedirectSteps pagePostfRedirectSteps = new PagePostfRedirectSteps();
+		var pagePostfRedirectSteps = new PagePostfRedirectSteps();
 		pagePostfRedirectSteps.isPageAndFinallyDisappears();
 		return pagePostfRedirectSteps;
 	}

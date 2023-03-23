@@ -25,7 +25,7 @@ public class PageIdentPaymayaSteps extends PageBase {
 			"Aparece la página de introducción del otp")
 	public PageOtpPaymayaSteps login(String user, String password) {
 		pageIdentPaymaya.login(user, password);
-		PageOtpPaymayaSteps pageOtpPaymayaSteps = new PageOtpPaymayaSteps();
+		var pageOtpPaymayaSteps = new PageOtpPaymayaSteps();
 		pageOtpPaymayaSteps.checkPage();
 		return pageOtpPaymayaSteps;
 	}

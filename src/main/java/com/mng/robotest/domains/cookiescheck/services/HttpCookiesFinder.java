@@ -48,8 +48,8 @@ public class HttpCookiesFinder implements CookiesRepository {
                 throw new IrretrievableCookies(message);
             }
             
-            ObjectMapper mapper = new ObjectMapper();
-            CookiesData cookiesData = mapper.readValue(response.getEntity().getContent(), CookiesData.class); 
+            CookiesData cookiesData = new ObjectMapper()
+            		.readValue(response.getEntity().getContent(), CookiesData.class); 
             return cookiesData.getContent();
         } catch (IOException io) {
             logger.error("Error parsing the cookies information: {}", io);
@@ -71,10 +71,10 @@ public class HttpCookiesFinder implements CookiesRepository {
     
     private IdentityToken getIdentityToken() throws Exception {
     	//Credentials for obtain the READ Token for Cookie
-    	IdpCredentials idpCredentials = new IdpCredentials(
+    	var idpCredentials = new IdpCredentials(
     			"001ef8b226344441859f84dd913d0d5b",
     			"97bFu9YETKpjCu3dx8RMRd9GvMdLcYl0"); 
-    	IDPClientService idpClientService = new IDPClientService(
+    	var idpClientService = new IDPClientService(
     			"https://mango.my.onetrust.com/api/access/v1/", 
     			idpCredentials);
     	

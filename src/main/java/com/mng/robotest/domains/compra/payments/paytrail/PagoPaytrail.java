@@ -20,7 +20,7 @@ public class PagoPaytrail extends PagoSteps {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
-		PagePaytrail1rstSteps pagePaytrail1rstSteps = new PagePaytrail1rstSteps();
+		var pagePaytrail1rstSteps = new PagePaytrail1rstSteps();
 		pagePaytrail1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal());
 		pagePaytrail1rstSteps.selectBancoAndContinue();
 		if (execPay) {

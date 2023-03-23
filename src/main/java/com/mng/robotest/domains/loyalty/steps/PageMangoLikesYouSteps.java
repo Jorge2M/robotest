@@ -146,7 +146,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		expected="Aparece la página para regalar mis Likes")
 	public PageRegalarMisLikesSteps clickButtonRegalarMisLikes() {
 		pageMangoLikesYou.clickButton(REGALAR_MIS_LIKES);
-		PageRegalarMisLikesSteps pageRegalarSteps = new PageRegalarMisLikesSteps();
+		var pageRegalarSteps = new PageRegalarMisLikesSteps();
 		pageRegalarSteps.checkIsPage();
 		return pageRegalarSteps;
 	}

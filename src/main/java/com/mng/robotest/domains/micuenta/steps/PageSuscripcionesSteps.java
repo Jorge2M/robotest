@@ -29,7 +29,7 @@ public class PageSuscripcionesSteps extends StepBase {
 	public ChecksTM validaIsDataAssociatedToRegister(Map<String,String> datosRegOk) {
 		int numLineasTotales = Integer.parseInt(datosRegOk.get("numlineas"));
 		String lineasUnchecked = datosRegOk.get("clicklineas");
-		StringTokenizer tokensLinDesmarcadas = new StringTokenizer(lineasUnchecked, ",");
+		var tokensLinDesmarcadas = new StringTokenizer(lineasUnchecked, ",");
 		int numLinDesmarcadas = tokensLinDesmarcadas.countTokens();
 
 		var checks = ChecksTM.getNew();

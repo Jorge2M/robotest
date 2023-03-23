@@ -22,7 +22,7 @@ public class PageOtpPaymayaSteps {
 		expected="Aparece la página de resultado de paymaya")
 	public PageResultPaymayaSteps proceed(String otp) {
 		pageOtpPaymaya.proceed(otp);
-		PageResultPaymayaSteps pageResultPaymayaSteps = new PageResultPaymayaSteps();
+		var pageResultPaymayaSteps = new PageResultPaymayaSteps();
 		pageResultPaymayaSteps.checkPage();
 		return pageResultPaymayaSteps;
 	}

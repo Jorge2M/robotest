@@ -86,7 +86,7 @@ public class Reg001 extends TestBase {
 	
 	private void checkLoginAndUserData() {
 		new SecMenusUserSteps().logoffLogin(dataNewRegister.getEmail(), dataNewRegister.getPassword());
-		PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
+		var pageMiCuentaSteps = new PageMiCuentaSteps();
 		pageMiCuentaSteps.goToMisDatosAndValidateData(dataNewRegister);
 		pageMiCuentaSteps.goToSuscripcionesAndValidateData(dataNewRegister.getLineas());
 	}	

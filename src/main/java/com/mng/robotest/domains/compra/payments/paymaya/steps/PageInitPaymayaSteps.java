@@ -28,7 +28,7 @@ public class PageInitPaymayaSteps {
 		expected="Aparece la página de identificación de PayMaya")
 	public PageIdentPaymayaSteps clickPaymayaButton() {
 		pageInitPaymaya.clickButtonPayMaya();
-		PageIdentPaymayaSteps pageIdentPaymayaSteps = new PageIdentPaymayaSteps();
+		var pageIdentPaymayaSteps = new PageIdentPaymayaSteps();
 		pageIdentPaymayaSteps.checkPage();
 		return pageIdentPaymayaSteps;
 	}

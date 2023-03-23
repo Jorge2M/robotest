@@ -133,8 +133,8 @@ public class SeoSteps extends StepBase {
 	@Validation
 	private static ChecksTM checkResultUrlSitemal(WebDriver driver) {
 		var checks = ChecksTM.getNew();
-		PageSitemap pageSitemap = new PageSitemap();
-		boolean sitemapOk = pageSitemap.isCorrect();
+		var pageSitemap = new PageSitemap();
+		boolean sitemapOk = new PageSitemap().isCorrect();
 		checks.add(
 				"Obtenemos un XML con formato de sitemap",
 				sitemapOk, State.Defect);

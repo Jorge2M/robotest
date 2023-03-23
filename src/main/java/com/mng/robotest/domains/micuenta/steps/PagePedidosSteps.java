@@ -9,7 +9,7 @@ import com.mng.robotest.test.pageobject.shop.PageMispedidos;
 
 public class PagePedidosSteps extends StepBase {
 
-	PageMispedidos pageMispedidos = new PageMispedidos();
+	private final PageMispedidos pageMispedidos = new PageMispedidos();
 	
 	@Validation
 	public ChecksTM validaIsPageSinPedidos (String usrRegistrado) {

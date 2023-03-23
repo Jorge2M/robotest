@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.FactoryPagos;
-import com.mng.robotest.domains.compra.payments.PagoSteps;
 import com.mng.robotest.test.datastored.DataCheckPedidos;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
@@ -20,7 +19,7 @@ public class CompraSteps extends StepBase {
 		if (dataPago.getPago()==null) {
 			dataPago.setPago(dataTest.getPais().getPago("VISA"));
 		}
-		PagoSteps pagoSteps = FactoryPagos.makePagoSteps(dataPago);
+		var pagoSteps = FactoryPagos.makePagoSteps(dataPago);
 		pagoSteps.startPayment(executePayment);
 	}
 	

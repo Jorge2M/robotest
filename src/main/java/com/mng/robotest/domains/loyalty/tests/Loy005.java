@@ -47,7 +47,7 @@ public class Loy005 extends TestBase {
 		login(RECEPTOR_USER, dataTest.getPasswordUser());
 		int finPointsReceptor = clickMangoLikesYou();
 		
-		DataRegaloPuntos dataPoints = new DataRegaloPuntos();
+		var dataPoints = new DataRegaloPuntos();
 		dataPoints.setClienteEmisor(EMISOR_USER.getEmail());
 		dataPoints.setClienteReceptor(RECEPTOR_USER.getEmail());
 		dataPoints.setPointsRegalados(pointsToGive);
@@ -66,8 +66,7 @@ public class Loy005 extends TestBase {
 	
 	private int givePoints(int pointsRegalar, int iniPointsEmisor) {
 		if (iniPointsEmisor < pointsRegalar && !isPRO()) {
-			ClientApiLoyaltyPointsDev client = new ClientApiLoyaltyPointsDev();
-			client.addLoyaltyPoints(EMISOR_USER, 25000);
+			new ClientApiLoyaltyPointsDev().addLoyaltyPoints(EMISOR_USER, 25000);
 			iniPointsEmisor = clickMangoLikesYou();
 		}
 

@@ -11,7 +11,7 @@ import com.mng.robotest.test.utils.ImporteScreen;
 
 public class PageDotpayPaymentChannelSteps extends StepBase {
 
-	PageDotpayPaymentChannel pageDotpayPaymentChannel = new PageDotpayPaymentChannel();
+	private final PageDotpayPaymentChannel pageDotpayPaymentChannel = new PageDotpayPaymentChannel();
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal, String codPais) {

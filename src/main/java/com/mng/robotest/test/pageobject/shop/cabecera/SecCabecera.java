@@ -38,7 +38,7 @@ public abstract class SecCabecera extends PageBase {
 	}
 	
 	public static void buscarTexto(String referencia, Channel channel) {
-		MenusUserWrapper menusUser = new MenusUserWrapper();
+		var menusUser = new MenusUserWrapper();
 		menusUser.isMenuInStateUntil(UserMenu.LUPA, State.Visible, 1);
 		menusUser.clickMenuAndWait(UserMenu.LUPA);
 		SecSearch secSearch = SecSearch.getNew(channel);

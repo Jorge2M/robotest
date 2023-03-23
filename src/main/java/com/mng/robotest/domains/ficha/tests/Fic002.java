@@ -31,11 +31,11 @@ public class Fic002 extends TestBase {
 	public Fic002() throws Exception {
 		super();
 
-		GetterProducts getterProducts = new GetterProducts
+		var getterProducts = new GetterProducts
 				.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 				.build();
 
-		Optional<GarmentCatalog> articleWithTotalLook = getterProducts
+		var articleWithTotalLook = getterProducts
 				.getOne(Arrays.asList(FilterType.TOTAL_LOOK));
 		
 		GarmentCatalog garment;

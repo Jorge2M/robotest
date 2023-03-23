@@ -289,7 +289,7 @@ public class Page2IdentCheckout extends PageBase {
 			clickBotonFindAddress();
 			String mainWindowHandle = driver.getWindowHandle();
 			try {
-				PopupFindAddress popupFindAddress = new PopupFindAddress();
+				var popupFindAddress = new PopupFindAddress();
 				String popupBuscador = popupFindAddress.goToPopupAndWait(mainWindowHandle, 5);
 				if ("".compareTo(popupBuscador)!=0 && popupFindAddress.isIFrameUntil(0)) {
 					popupFindAddress.switchToIFrame();

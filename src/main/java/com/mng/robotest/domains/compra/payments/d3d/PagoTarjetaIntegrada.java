@@ -29,7 +29,7 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 			}
 			switch (dataPedido.getPago().getTipotarjEnum()) {
 			case VISAD3D:
-				PageD3DLoginSteps pageD3DLoginSteps = new PageD3DLoginSteps();
+				var pageD3DLoginSteps = new PageD3DLoginSteps();
 				boolean isD3D = pageD3DLoginSteps.validateIsD3D(10);
 				pageD3DLoginSteps.isImporteVisible(dataPedido.getImporteTotal());
 				dataPedido.setCodtipopago("Y");
@@ -39,7 +39,7 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 				
 				break;
 			case VISAD3D_JP:
-				PageD3DJPTestSelectOptionSteps pageD3DJPTestSelectOptionSteps = new PageD3DJPTestSelectOptionSteps();
+				var pageD3DJPTestSelectOptionSteps = new PageD3DJPTestSelectOptionSteps();
 				boolean isD3DJP = pageD3DJPTestSelectOptionSteps.validateIsD3D(1);
 				pageD3DJPTestSelectOptionSteps.isImporteVisible(dataPedido.getImporteTotal(), dataTest.getCodigoPais());
 				dataPedido.setCodtipopago("Y");

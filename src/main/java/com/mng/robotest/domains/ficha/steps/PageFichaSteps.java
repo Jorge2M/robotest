@@ -248,8 +248,7 @@ public class PageFichaSteps extends StepBase {
 	public void selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo) throws Exception {
 		selectAnadirALaBolsaStep();
 		dataTest.getDataBag().addArticulo(articulo);
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-		secBolsaSteps.validaAltaArtBolsa();
+		new SecBolsaSteps().validaAltaArtBolsa();
 	}
 
 	@Step (
@@ -369,8 +368,7 @@ public class PageFichaSteps extends StepBase {
 		if (isVisibleLink) {
 			switch (app) {
 				case outlet:
-					PageComoMedirmeSteps pageComoMedirmeSteps = new PageComoMedirmeSteps();
-					pageComoMedirmeSteps.isPageInNewTab();
+					new PageComoMedirmeSteps().isPageInNewTab();
 					break;
 				case shop:
 				default:

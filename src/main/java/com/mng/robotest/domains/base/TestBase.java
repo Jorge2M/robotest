@@ -27,8 +27,8 @@ public abstract class TestBase extends StepBase {
 	}
 	
 	protected DataPago getDataPago(ConfigCheckout configCheckout) {
-		DataPago dataPago = new DataPago(configCheckout);
-		DataPedido dataPedido = new DataPedido(dataTest.getPais(), dataTest.getDataBag());
+		var dataPago = new DataPago(configCheckout);
+		var dataPedido = new DataPedido(dataTest.getPais(), dataTest.getDataBag());
 		dataPago.setDataPedido(dataPedido);
 		return dataPago;
 	}	

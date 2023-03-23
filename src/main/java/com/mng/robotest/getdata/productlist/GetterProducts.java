@@ -28,7 +28,6 @@ import com.mng.robotest.getdata.canonicalproduct.entity.EntityProduct;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.getdata.productlist.entity.ProductList;
-import com.mng.robotest.getdata.productlist.filter.Filter;
 import com.mng.robotest.getdata.productlist.filter.FilterStock;
 import com.mng.robotest.getdata.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.test.beans.Pais;
@@ -208,8 +207,7 @@ public class GetterProducts {
 	}
 	
 	private boolean hasProductsWithStock(ProductList productList) throws Exception {
-		Filter filterStock = new FilterStock();
-		return !filterStock.filter(productList.getAllGarments(sortBy)).isEmpty();
+		return !new FilterStock().filter(productList.getAllGarments(sortBy)).isEmpty();
 	}
 	
 	private ProductList getProductList(MenuProduct menu) throws Exception {
@@ -236,7 +234,7 @@ public class GetterProducts {
 	}
 	
 	private ProductList getProductListFromPro() throws Exception {
-		GetterProducts getterPro = new GetterProducts(
+		var getterPro = new GetterProducts(
 				"https://shop.mango.com/", 
 				codigoPaisAlf,
 				codigoIdiomAlf,
@@ -358,7 +356,7 @@ public class GetterProducts {
 		String body = null;
 		try {
 			PageObjTM.loadUrlInAnotherTabTitle(urlGetProducts, nameTab, driver);
-			PageBase page = new PageBase(driver);
+			var page = new PageBase(driver);
 			if (page.state(State.Visible, By.id("rawdata-tab")).check()) {
 				page.click(By.id("rawdata-tab")).exec();
 			}

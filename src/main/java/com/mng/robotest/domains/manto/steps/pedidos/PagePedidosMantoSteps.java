@@ -108,10 +108,10 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		expected="Debemos obtener la información del cliente",
 		saveErrorData=SaveWhen.Never)
 	public DataPedido getDataPedido(DataPedido dPedidoPrueba) {
-		DataBag dBagPrueba = new DataBag();
+		var dBagPrueba = new DataBag();
 		List<String> referencias = new PageDetallePedido().getReferenciasArticulosDetallePedido();
 		for (String referencia : referencias) {
-			ArticuloScreen articulo = new ArticuloScreen();
+			var articulo = new ArticuloScreen();
 			articulo.setReferencia(referencia);
 			dBagPrueba.addArticulo(articulo);
 		}
@@ -134,7 +134,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		saveErrorData=SaveWhen.Never)
 	public DataPedido getDataCliente(DataPedido dPedidoPrueba) {
 		new PageDetallePedido().clickLinkDetallesCliente();
-		PageDetalleCliente pageDetalleCliente = new PageDetalleCliente();
+		var pageDetalleCliente = new PageDetalleCliente();
 		dPedidoPrueba.getPago().setDni(pageDetalleCliente.getUserDniText());
 		if (dPedidoPrueba.getPago().getDni().equals("")) {
 			dPedidoPrueba.getPago().setDni("41507612h");
@@ -164,7 +164,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		expected="Debemos obtener una tienda física válida",
 		saveErrorData=SaveWhen.Never)
 	public DataPedido getTiendaFisicaListaPedidos(DataPedido dPedidoPrueba) {
-		DataDeliveryPoint dEnvioPrueba = new DataDeliveryPoint();
+		var dEnvioPrueba = new DataDeliveryPoint();
 		dPedidoPrueba.setDataDeliveryPoint(dEnvioPrueba);
 		dPedidoPrueba.getDataDeliveryPoint().setCodigo(pagePedidos.getTiendaFisicaFromListaPedidos());
 		String codigoDeliveryPoint = dPedidoPrueba.getDataDeliveryPoint().getCodigo();

@@ -42,7 +42,7 @@ public class PageRegalarMisLikesSteps extends StepBase {
 		pageRegalarMisLikes.inputLikesToRegalar(numLikesToRegalar);
 		pageRegalarMisLikes.clickEnviarRegalo();
 		
-		PageResultadoRegaloLikesSteps pageResult = new PageResultadoRegaloLikesSteps();
+		var pageResult = new PageResultadoRegaloLikesSteps();
 		pageResult.checkIsEnvioLikesOk(3);
 		GenericChecks.checkDefault();
 		return pageResult;

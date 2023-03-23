@@ -19,8 +19,8 @@ public class CheckerAllowedCookies implements Checker {
 
 	@Override
 	public ChecksTM check(WebDriver driver) {
-		CookiesChecker cookiesChecker = new CookiesChecker();
-		Pair<Boolean, List<Cookie>> resultCheck = cookiesChecker.check(driver);
+		var cookiesChecker = new CookiesChecker();
+		var resultCheck = cookiesChecker.check(driver);
 		var checks = ChecksTM.getNew();
 		checks.add(
 			Check.make(

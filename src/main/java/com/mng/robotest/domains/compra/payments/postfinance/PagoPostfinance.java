@@ -27,7 +27,7 @@ public class PagoPostfinance extends PagoSteps {
 			managePageSelectChannel();
 		}
 		
-		PagePostfCodSegSteps pagePostfCodSegSteps = new PagePostfCodSegSteps();
+		var pagePostfCodSegSteps = new PagePostfCodSegSteps();
 		if (pagePostfCodSegSteps.getPageObj().isPasarelaTest()) {
 			pagePostfCodSegSteps.validateIsPageTest(nombrePago, importeTotal);
 		} else {
@@ -45,7 +45,7 @@ public class PagoPostfinance extends PagoSteps {
 	}
 	
 	private void managePageSelectChannel() {
-		PagePostfSelectChannelSteps pagePostfSelectChannelSteps = new PagePostfSelectChannelSteps(driver);
+		var pagePostfSelectChannelSteps = new PagePostfSelectChannelSteps(driver);
 		pagePostfSelectChannelSteps.checkIsPage(2);
 		pagePostfSelectChannelSteps.selectChannel(ChannelPF.Card);
 	}

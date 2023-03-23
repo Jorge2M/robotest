@@ -115,14 +115,14 @@ public class Com009 extends TestBase {
 		String codigoPedido = dataPago.getDataPedido().getCodpedido();
 		new PageResultPagoSteps().selectMisCompras();
 		
-		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps();
+		var pageMisComprasSteps = new PageMisComprasSteps();
 		pageMisComprasSteps.validateIsCompraOnline(codigoPedido);
 		pageMisComprasSteps.selectCompra(codigoPedido);
 		new ModalDetalleCompraSteps().checkIsVisibleDirection(address);
 	}    
     
     private DirectionData makeDireccionSecundaria() {
-		DirectionData direction = new DirectionData();
+		var direction = new DirectionData();
 		direction.setNombre("Jorge");
 		direction.setApellidos("Muñoz Martínez");
 		direction.setDireccion("c./mossen trens nº6 5º1ª " + Timestamp.from(Instant.now()));
@@ -133,7 +133,7 @@ public class Com009 extends TestBase {
     }
     
     private DirectionData makeDireccionPrincipal() {
-		DirectionData direction = new DirectionData();
+		var direction = new DirectionData();
 		direction.setNombre("Sonia");
 		direction.setApellidos("Vidal");
 		direction.setDireccion("c./xxxx nº6 5º1ª " + Timestamp.from(Instant.now()));
@@ -144,7 +144,7 @@ public class Com009 extends TestBase {
     }    
     
     private DirectionData editDirection(DirectionData direction) {
-    	DirectionData directionReturn = DirectionData.from(direction);
+    	var directionReturn = DirectionData.from(direction);
     	directionReturn.setNombre("Robotest");
     	directionReturn.setApellidos("Pruebas");
         return directionReturn;

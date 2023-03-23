@@ -91,7 +91,7 @@ public class ListDataRegistro {
 	}
 	
 	public String getFormattedHTMLData(PageData pageData) {
-		StringBuilder dataHtml = new StringBuilder();
+		var dataHtml = new StringBuilder();
 		List<DataRegistro> dataToPrint = new ArrayList<>();
 		
 		switch (pageData) {

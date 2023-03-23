@@ -34,7 +34,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 		description="Utilizar el selector de precio: Mínimo=" + TAG_MINIMO + " Máximo=" + TAG_MAXIMO, 
 		expected="Aparecen artículos con precio en el intervalo seleccionado")
 	public void seleccionaIntervalo() throws Exception {
-		DataFilterPrecios dataFilter = new DataFilterPrecios();
+		var dataFilter = new DataFilterPrecios();
 		if (channel==Channel.desktop) {
 			secFiltrosDesktop.showFilters();
 		}

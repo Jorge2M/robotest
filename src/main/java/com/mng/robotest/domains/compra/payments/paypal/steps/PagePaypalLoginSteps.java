@@ -9,7 +9,7 @@ import com.mng.robotest.domains.compra.payments.paypal.pageobjects.PagePaypalLog
 
 public class PagePaypalLoginSteps extends StepBase {
 
-	PagePaypalLogin pagePaypalLogin = new PagePaypalLogin();
+	private final PagePaypalLogin pagePaypalLogin = new PagePaypalLogin();
 	
 	@Validation (
 		description="Aparece la página de login (la esperamos hasta un máximo de #{seconds} segundos)",

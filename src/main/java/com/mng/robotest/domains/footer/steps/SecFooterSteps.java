@@ -72,7 +72,7 @@ public class SecFooterSteps extends StepBase {
 		expected="Aparece el modal para el cambio de país")
 	 public void cambioPais(Pais newPais, IdiomaPais newIdioma) {
 		 secFooter.clickLinkCambioPais();
-		 ModalCambioPaisSteps modalCambioPaisSteps = new ModalCambioPaisSteps();
+		 var modalCambioPaisSteps = new ModalCambioPaisSteps();
 		 if (!modalCambioPaisSteps.validateIsVisible(3)) {
 			 //Hay un problema según el cuál en ocasiones no funciona el click así que lo repetimos
 			 secFooter.clickLinkCambioPais(); 

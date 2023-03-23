@@ -41,7 +41,7 @@ public class ModalDirecEnvioOldSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterUpdateData() {
 		var checks = ChecksTM.getNew();
-		Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout();
+		var page1DktopCheckout = new Page1DktopCheckout();
 		int seconds = 2; 
 		checks.add(
 			"Aparece un modal de alerta alertando de un posible cambio de precios (lo esperamos hasta " + seconds + " segundos)",

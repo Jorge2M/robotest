@@ -26,7 +26,7 @@ public class PagoBancontact extends PagoSteps {
 			Pago pago = dataPedido.getPago();
 			//En el caso de Bancontact siempre saltará el D3D
 			if (dataPedido.getPago().getTipotarjEnum()==TypeTarj.VISAD3D) {
-				PageD3DLoginSteps pageD3DLoginSteps = new PageD3DLoginSteps();
+				var pageD3DLoginSteps = new PageD3DLoginSteps();
 				isD3D = pageD3DLoginSteps.validateIsD3D(2);
 				pageD3DLoginSteps.isImporteVisible(dataPedido.getImporteTotal());
 				if (isD3D) {

@@ -4,7 +4,7 @@ import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
-import com.mng.robotest.test.steps.navigations.shop.GaleriaNavigationsSteps;
+import com.mng.robotest.test.steps.navigations.shop.GaleriaSteps;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 
@@ -23,7 +23,7 @@ public class Bor001 extends TestBase {
 	}	
 
 	private void selectTallaArticle() throws Exception {
-		new GaleriaNavigationsSteps().selectTalla();
+		new GaleriaSteps().selectTalla();
 	}
 	
 	private void navigateToCheckoutAndCheckEmployee() throws Exception {

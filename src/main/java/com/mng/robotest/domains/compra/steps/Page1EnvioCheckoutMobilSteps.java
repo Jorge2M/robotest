@@ -45,7 +45,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 			TipoTransporte tipoTransporte, @SuppressWarnings("unused") String nombrePago, DataPago dataPago) {
 		page1EnvioCheckoutMobil.selectMetodoAfterPositioningIn1Envio(tipoTransporte);
 		if (!tipoTransporte.isEntregaDomicilio()) {
-			ModalDroppoints modalDroppoints = new ModalDroppoints();
+			var modalDroppoints = new ModalDroppoints();
 			if (modalDroppoints.isErrorMessageVisibleUntil()) {
 				modalDroppoints.searchAgainByUserCp(dataPago.getDatosRegistro().get("cfCp"));
 			}

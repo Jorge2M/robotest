@@ -7,7 +7,7 @@ public class Otr002 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {
-		GoogleSteps googleSteps = new GoogleSteps();
+		var googleSteps = new GoogleSteps();
 		googleSteps.accessGoogleAndSearchMango();
 		googleSteps.selectFirstLinkSinPublicidad();		
 	}

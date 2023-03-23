@@ -45,7 +45,7 @@ public class GarmentCatalog {
 	}
 	
 	private Article getArticleWithMoreStock() {
-		Article articulo = new Article();
+		var articulo = new Article();
 		articulo.setGarmentId(garmentId);
 		articulo.setUrlFicha(urlFicha);
 

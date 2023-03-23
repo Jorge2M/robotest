@@ -451,8 +451,7 @@ public class MenuSteps extends StepBase {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_ACCESO, urlAccesoCorreo);
 		driver.navigate().to(urlAccesoCorreo);
 
-		DataFichaArt datosArticulo = new DataFichaArt(article.getGarmentId(), "");
-		PageFichaSteps pageFichaSteps = new PageFichaSteps();
-		pageFichaSteps.validaDetallesProducto(datosArticulo);
+		var datosArticulo = new DataFichaArt(article.getGarmentId(), "");
+		new PageFichaSteps().validaDetallesProducto(datosArticulo);
 	}	
 }

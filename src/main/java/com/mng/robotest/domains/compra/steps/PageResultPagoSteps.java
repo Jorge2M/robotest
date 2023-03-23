@@ -152,7 +152,7 @@ public class PageResultPagoSteps extends StepBase {
 			new PageMisComprasSteps().validateIsCompraOnline(
 					dataPedido.getCodpedido(), dataPago.getFTCkout().chequeRegalo);
 		} else {
-			PageAccesoMisComprasSteps pageAccesoMisComprasSteps = new PageAccesoMisComprasSteps();
+			var pageAccesoMisComprasSteps = new PageAccesoMisComprasSteps();
 			pageAccesoMisComprasSteps.clickBlock(TypeBlock.NO_REGISTRADO);
 			pageAccesoMisComprasSteps.buscarPedidoForNoRegistrado(dataPago.getDataPedido());
 		}

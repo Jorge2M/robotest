@@ -21,16 +21,16 @@ public class PagoMercadopago extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		DataPedido dataPedido = this.dataPago.getDataPedido();
+		var dataPedido = this.dataPago.getDataPedido();
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
-		PageMercpago1rstSteps pageMercpago1rstSteps = new PageMercpago1rstSteps();
+		var pageMercpago1rstSteps = new PageMercpago1rstSteps();
 		pageMercpago1rstSteps.validateIsPageUntil(5);
 		pageMercpago1rstSteps.clickLinkRegistration();
 		if (execPay) {
 			new PageMercpagoLoginSteps().loginMercadopago(dataPedido.getPago());
-			PageMercpagoDatosTrjSteps pageMercpagoDatosTrjSteps = new PageMercpagoDatosTrjSteps();
+			var pageMercpagoDatosTrjSteps = new PageMercpagoDatosTrjSteps();
 			if (pageMercpagoDatosTrjSteps.getPageObject().getTypeInput()==TypePant.INPUT_DATA_TRJ_NEW) {
 				fluxFromInputDataTrj(dataPedido, pageMercpagoDatosTrjSteps);
 			}
@@ -45,7 +45,7 @@ public class PagoMercadopago extends PagoSteps {
 	private void fluxFromInputDataTrj(
 			DataPedido dataPedido, PageMercpagoDatosTrjSteps pageMercpagoDatosTrjSteps) {
 		pageMercpagoDatosTrjSteps.inputNumTarjeta(dataPedido.getPago().getNumtarj());
-		PageMercpagoDatosTrjSteps.InputData inputData = new PageMercpagoDatosTrjSteps.InputData();
+		var inputData = new PageMercpagoDatosTrjSteps.InputData();
 		inputData.setMesVencimiento(dataPedido.getPago().getMescad());
 		inputData.setAnyVencimiento(dataPedido.getPago().getAnycad());
 		inputData.setCodigoSeguridad(CODIGO_SEGURIDAD);

@@ -11,7 +11,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class PageDevolucionesSteps extends StepBase {
 
-	PageDevoluciones pageDevoluciones = new PageDevoluciones();
+	private final PageDevoluciones pageDevoluciones = new PageDevoluciones();
 	
 	@Validation
 	public ChecksTM validaIsPage () {

@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.galeria.tests;
 
 import com.mng.robotest.test.data.DataMango;
-import com.mng.robotest.test.steps.navigations.shop.GaleriaNavigationsSteps;
+import com.mng.robotest.test.steps.navigations.shop.GaleriaSteps;
 
 import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 
@@ -30,7 +30,7 @@ public class Gpo007 extends TestBase {
 	}
 	
 	private void selectTallaArticle() throws Exception {
-		new GaleriaNavigationsSteps().selectTalla();
+		new GaleriaSteps().selectTalla();
 	}
 
 }

@@ -9,7 +9,7 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoSepa extends PagoSteps {
 	
-	PageSepa1rstSteps pageSepa1rstSteps = new PageSepa1rstSteps();
+	private final PageSepa1rstSteps pageSepa1rstSteps = new PageSepa1rstSteps();
 	
 	public PagoSepa(DataPago dataPago) {
 		super(dataPago);

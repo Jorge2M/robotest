@@ -38,7 +38,7 @@ public class UtilsTest {
 	 * @param date format yyyy-MM-dd
 	 */
 	public static boolean todayBeforeDate(String date) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		var sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date dateLimit = sdf.parse(date);
 			Date dateToday = new Date();
@@ -142,7 +142,7 @@ public class UtilsTest {
 	public static List<Article> getArticlesForTest(
 			Pais pais, AppEcom app, int maxArticlesAwayVale, WebDriver driver) throws Exception {
 		
-		GetterProducts getterProducts = new GetterProducts
+		var getterProducts = new GetterProducts
 				.Builder(pais.getCodigo_alf(), app, driver)
 				.filter(FilterType.STOCK)
 				.sortBy(SortBy.STOCK_DESCENDENT)
@@ -184,7 +184,7 @@ public class UtilsTest {
 	
 	private static List<GarmentCatalog> getProductFromApi(Pais pais, AppEcom app) throws Exception {
 		//GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", deutschland.getCodigo_alf(), AppEcom.shop, null)
-		GetterProducts getterProducts = new GetterProducts.Builder(pais	.getCodigo_alf(), app, null)
+		var getterProducts = new GetterProducts.Builder(pais	.getCodigo_alf(), app, null)
 			.sortBy(SortBy.STOCK_DESCENDENT)
 			.extraCanonicalInfo(true)
 			.build();

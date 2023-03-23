@@ -17,9 +17,9 @@ public class TeamsNotification implements NotificationSender {
 	@Override
 	public void send(String jsonMessage) {
         try (CloseableHttpClient httpClient = createDefault()) {
-            HttpPost post = new HttpPost(TEAMS_CHANNEL_URL);
+            var post = new HttpPost(TEAMS_CHANNEL_URL);
             post.addHeader("Content-Type", "application/json");
-            StringEntity entity = new StringEntity(jsonMessage);
+            var entity = new StringEntity(jsonMessage);
             post.setEntity(entity);
             HttpResponse response = httpClient.execute(post);
             if (response.getStatusLine().getStatusCode() != 200) {

@@ -76,8 +76,7 @@ public class SecBannersSteps extends StepBase {
 			validacionesGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal);
 			switch (dataBanner.getDestinoType()) {
 			case FICHA:
-				PageFichaSteps pageFichaSteps = new PageFichaSteps();
-				pageFichaSteps.validateIsFichaCualquierArticulo();
+				new PageFichaSteps().validateIsFichaCualquierArticulo();
 				break;
 			default:				
 			case OTROS:
@@ -95,7 +94,7 @@ public class SecBannersSteps extends StepBase {
 		int marginElements = 2;
 		int seconds2 = 1;
 		
-		AllPages allPages = new AllPages(); 
+		var allPages = new AllPages(); 
 	 	checks.add(
 	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + seconds1 + " segundos)",
 	 		allPages.validateUrlNotMatchUntil(urlPagPadre, seconds1), State.Defect);  

@@ -85,7 +85,7 @@ public class Reg003 extends TestBase {
 		boolean paisConNinos = dataTest.getPais().getShoponline().stateLinea(LineaType.NINA, app)==ThreeState.TRUE;
 		pageRegistroSegundaSteps.setDataAndLineasRandom("23/4/1974", paisConNinos, 2, dataRegister);
 		if (paisConNinos) {
-			ListDataNinos listaNinos = new ListDataNinos();
+			var listaNinos = new ListDataNinos();
 			listaNinos.add(new DataNino(sexoType.nina, "Martina Muñoz Rancaño", "11/10/2010"));
 			listaNinos.add(new DataNino(sexoType.nina, "Irene Muñoz Rancaño", "29/8/2016"));
 			pageRegistroNinosSteps.sendNinoDataAndContinue(listaNinos);

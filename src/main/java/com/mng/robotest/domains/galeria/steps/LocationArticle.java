@@ -9,7 +9,7 @@ public class LocationArticle {
 	
 	
 	public static LocationArticle getInstanceInPage(int numPage, int numArticle) {
-		LocationArticle location = new LocationArticle();
+		var location = new LocationArticle();
 		location.accessFrom = AccessFrom.INIT_PAGE;
 		location.numPage = numPage;
 		location.numArticle = numArticle;
@@ -17,7 +17,7 @@ public class LocationArticle {
 	}
 	
 	public static LocationArticle getInstanceInCatalog(int numArticle) {
-		LocationArticle location = new LocationArticle();
+		var location = new LocationArticle();
 		location.accessFrom = AccessFrom.INIT_CATALOG;
 		location.numArticle = numArticle;
 		return location;

@@ -125,7 +125,7 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private Ticket getTicket(WebElement ticketScreen) {
-		Ticket ticket = new Ticket();
+		var ticket = new Ticket();
 		ticket.setType(getTypeTicketPage(ticketScreen));
 		ticket.setId(getIdTicketPage(ticketScreen));
 		ticket.setPrecio(getPrecioTicketPage(ticketScreen));

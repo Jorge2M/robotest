@@ -16,7 +16,6 @@ import com.mng.robotest.test.pageobject.shop.acceptcookies.ModalSetCookies.Secti
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test.pageobject.utils.LocalStorage;
-import com.mng.robotest.test.steps.shop.acceptcookies.ModalSetCookiesSteps;
 import com.mng.robotest.test.steps.shop.acceptcookies.SectionCookiesSteps;
 import com.mng.robotest.test.utils.testab.TestABactive;
 
@@ -169,7 +168,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	}
 	
 	private void manageCookies(boolean acceptCookies) {
-		SectionCookiesSteps sectionCookiesSteps = new SectionCookiesSteps();
+		var sectionCookiesSteps = new SectionCookiesSteps();
 		if (acceptCookies) {
 			if (new SectionCookies().isVisible(2)) {
 				sectionCookiesSteps.accept();
@@ -186,7 +185,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	}
 	
 	private void enablePerformanceCookies() {
-		ModalSetCookiesSteps modalSetCookiesSteps = new SectionCookiesSteps().setCookies();
+		var modalSetCookiesSteps = new SectionCookiesSteps().setCookies();
 		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_DE_RENDIMIENTO);
 		modalSetCookiesSteps.enableSwitchCookies();
 		modalSetCookiesSteps.saveConfiguration();
@@ -195,7 +194,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	protected void setInitialModalsOff() {
 		//Damos de alta la cookie de newsLetter porque no podemos gestionar correctamente el cierre 
 		//del modal en la página de portada (es aleatorio y aparece en un intervalo de 0 a 5 segundos)
-		LocalStorage localStorage = new LocalStorage(driver);
+		var localStorage = new LocalStorage(driver);
 		localStorage.setItemInLocalStorage("modalRegistroNewsletter", "0");
 		localStorage.setItemInLocalStorage("modalAdhesionLoyalty", "true");
 		localStorage.setItemInLocalStorage("modalSPShown", "1");

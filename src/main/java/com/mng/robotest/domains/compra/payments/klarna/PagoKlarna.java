@@ -41,7 +41,7 @@ public class PagoKlarna extends PagoSteps {
 	private DataKlarna getDataKlarna() {
 		Pago pago = this.dataPago.getDataPedido().getPago();
 		
-		DataKlarna dataKlarna = new DataKlarna();
+		var dataKlarna = new DataKlarna();
 		dataKlarna.setEmail(Constantes.MAIL_PERSONAL);
 		dataKlarna.setCodPostal(dataTest.getPais().getCodpos());
 		dataKlarna.setUserName("Jorge");

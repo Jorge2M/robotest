@@ -88,7 +88,7 @@ public class Com001 extends TestBase {
 			return Optional.empty();
 		}
 		
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
+		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 			.linea(HOME)
 			.menusCandidates(Arrays.asList(
 					Menu.ALBORNOCES, 
@@ -105,7 +105,7 @@ public class Com001 extends TestBase {
 			return Optional.empty();
 		}
 		
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
+		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 			.linea(SHE)
 			.menusCandidates(Arrays.asList(
 					Menu.SUJETADORES, 

@@ -630,7 +630,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
 		WebElement artWElem = getElements(xpathArticuloBase).get(numArticulo-1);
 		moveToElement(artWElem);
-		ArticuloScreen articulo = new ArticuloScreen();
+		var articulo = new ArticuloScreen();
 		articulo.setReferencia(getRefArticulo(artWElem));
 		articulo.setNombre(getNombreArticulo(artWElem));
 		articulo.setPrecio(getPrecioArticulo(artWElem));

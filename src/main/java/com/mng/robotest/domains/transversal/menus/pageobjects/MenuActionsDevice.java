@@ -59,8 +59,8 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 
 	private void clickGroup() {
-		GroupWeb group = new GroupWeb(menu.getLinea(), menu.getSublinea(), menu.getGroup());
-		group.click();
+		new GroupWeb(menu.getLinea(), menu.getSublinea(), menu.getGroup())
+			.click();
 	}
 	
 	private String clickMenu() {

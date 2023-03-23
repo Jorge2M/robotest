@@ -114,7 +114,7 @@ public class SecDataProduct extends PageBase {
 	}
 
 	public ArticuloScreen getArticuloObject() {
-		ArticuloScreen articulo = new ArticuloScreen();
+		var articulo = new ArticuloScreen();
 		articulo.setReferencia(getReferenciaProducto());
 		articulo.setNombre(getTituloArt());
 		articulo.setPrecio(getPrecioFinalArticulo());

@@ -9,7 +9,7 @@ import com.mng.robotest.domains.compra.payments.paypal.pageobjects.PagePaypalSel
 
 public class PagePaypalSelectPagoSteps extends StepBase {
 	
-	PagePaypalSelectPago pagePaypalSelectPago = new PagePaypalSelectPago();
+	private final PagePaypalSelectPago pagePaypalSelectPago = new PagePaypalSelectPago();
 	
 	@Validation (
 		description="Aparece la página de Selección del Pago (la esperamos hasta #{seconds} segundos)",

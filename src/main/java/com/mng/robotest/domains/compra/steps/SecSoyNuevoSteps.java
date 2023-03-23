@@ -29,9 +29,7 @@ public class SecSoyNuevoSteps extends StepBase {
 		}
 		secSoyNuevo.inputEmail(email);
 		secSoyNuevo.clickContinue();
-
-		Page2IdentCheckoutSteps page2IdentCheckoutSteps = new Page2IdentCheckoutSteps();
-		page2IdentCheckoutSteps.validateIsPage(emailExistsYet, 2);
+		new Page2IdentCheckoutSteps().validateIsPage(emailExistsYet, 2);
 		
 		GenericChecks.checkDefault();
 	}

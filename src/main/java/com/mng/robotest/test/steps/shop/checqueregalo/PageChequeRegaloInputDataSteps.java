@@ -41,7 +41,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 		description="Introducimos en el campo de <b>tarjeta regalo</b>#{numTarjeta} para consultar el saldo",
 		expected="Se carga la página donde salen nuevos campos visibles como el de <b>cvv</b>")
 	public void inputDataTarjetaRegalo(String numTarjeta) {
-		PageChequeRegaloInputDataNew pageNew = ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData);
+		var pageNew = ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData);
 		pageNew.introducirTarjetaConsultaSaldo(numTarjeta);
 		pageNew.clickBotonValidar();
 		checkInputOtherData(2);
@@ -51,7 +51,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 		description="Es visible el campo de <b>cvv</b> (lo esperamos hasta #{seconds} segundos)</br>",
 		level=State.Defect)
 	private boolean checkInputOtherData(int seconds) {
-		PageChequeRegaloInputDataNew pageNew = ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData);
+		var pageNew = ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData);
 		return pageNew.isVisibleCvv(seconds);
 	}
 

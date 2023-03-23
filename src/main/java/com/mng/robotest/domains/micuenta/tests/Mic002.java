@@ -44,7 +44,7 @@ public class Mic002 extends TestBase {
 		new AccesoSteps().identificacionEnMango();
 		
 		new PageMiCuentaSteps().goToMisComprasFromMenu();
-		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps();
+		var pageMisComprasSteps = new PageMisComprasSteps();
 		pageMisComprasSteps.validateIsCompraOfType(TypeTicket.Online, 3);
 		pageMisComprasSteps.selectCompraOnline(1, dataTest.getCodigoPais());
 		pageMisComprasSteps.clickDetalleArticulo(1);
@@ -63,7 +63,7 @@ public class Mic002 extends TestBase {
 		new AccesoSteps().identificacionEnMango();
 		
 		new PageMiCuentaSteps().goToMisComprasFromMenu();
-		PageMisComprasSteps pageMisComprasSteps = new PageMisComprasSteps();
+		var pageMisComprasSteps = new PageMisComprasSteps();
 		pageMisComprasSteps.validateIsCompraOfType(TypeTicket.Tienda, 3);
 		pageMisComprasSteps.selectCompraTienda(1);
 		pageMisComprasSteps.clickDetalleArticulo(1);

@@ -66,7 +66,7 @@ public class Com004 extends TestBase {
 		pageChequeRegaloInputDataSteps.seleccionarCantidades(Importe.EURO_50);
 		pageChequeRegaloInputDataSteps.clickQuieroComprarChequeRegalo();
 		
-		ChequeRegalo chequeRegalo = new ChequeRegalo();
+		var chequeRegalo = new ChequeRegalo();
 		chequeRegalo.setNombre("Jorge");
 		chequeRegalo.setApellidos("Muñoz Martínez");
 		chequeRegalo.setEmail(Constantes.MAIL_PERSONAL);

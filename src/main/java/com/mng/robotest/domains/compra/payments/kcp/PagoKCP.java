@@ -16,7 +16,7 @@ public class PagoKCP extends PagoSteps {
 	public void startPayment(boolean execPay) throws Exception {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
-		PageKcpMainSteps pageKcpMainSteps = new PageKcpMainSteps();
+		var pageKcpMainSteps = new PageKcpMainSteps();
 		pageKcpMainSteps.isPage(30);
 		pageKcpMainSteps.isPresentTermAndConditions(30);
 	}	

@@ -83,7 +83,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	public void altaArticlosConColores(int numArticulos) throws Exception {
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais()
+		var getterProducts = new GetterProducts.Builder(dataTest.getPais()
 				.getCodigo_alf(), app, driver)
 				.filter(FilterType.MANY_COLORS)
 				.sortBy(SortBy.STOCK_DESCENDENT)
@@ -111,8 +111,8 @@ public class SecBolsaSteps extends StepBase {
 	public void altaBolsaArticulos(List<Article> listParaAlta) {
 		insertArticlesInStepDescription(listParaAlta);
 		for (int i=0; i<listParaAlta.size(); i++) {
-			Article artTmp = listParaAlta.get(i);
-			ArticuloScreen articulo = new UtilsMangoTest().addArticuloBolsa(artTmp);
+			var artTmp = listParaAlta.get(i);
+			var articulo = new UtilsMangoTest().addArticuloBolsa(artTmp);
 			dataTest.getDataBag().addArticulo(articulo);
 		}
 
@@ -122,7 +122,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	private void insertArticlesInStepDescription(List<Article> listParaAlta) {
-		StringBuilder str = new StringBuilder();
+		var str = new StringBuilder();
 		str.append("<ul style=\"font-weight: bold;\">");
 		for (int i=0; i<listParaAlta.size(); i++) {
 			Article artTmp = listParaAlta.get(i);
@@ -180,12 +180,12 @@ public class SecBolsaSteps extends StepBase {
 	@Validation
 	public ChecksTM validaCuadranArticulosBolsa() throws Exception {
 		var checks = ChecksTM.getNew();
-		ValidatorContentBolsa validatorBolsa = new ValidatorContentBolsa();
+		var validatorBolsa = new ValidatorContentBolsa();
 		checks.add(
 			"Cuadra el númeo de artículos existentes en la bolsa",
 			validatorBolsa.numArticlesIsCorrect(), State.Warn);
 		
-		List<DataArtBolsa> listDataToValidate = new ArrayList<>();
+		var listDataToValidate = new ArrayList<DataArtBolsa>();
 		listDataToValidate.add(DataArtBolsa.REFERENCIA);
 		checks.add(
 			"Cuadran las referencias de los artículos existentes en la bolsa",

@@ -31,8 +31,7 @@ public class SecNewsLetter extends PageBase {
 
 	public void clickFooterSuscripcion() {
 		new ModalClubMangoLikes().closeModalIfVisible();
-		SecFooter secFooter = new SecFooter();
-		secFooter.moveTo();
+		new SecFooter().moveTo();
 		
 		String xpathLink = XPATH_TEXT_AREA_MAIL_SUSCRIPTION;
 		state(State.Visible, xpathLink).wait(2).check();

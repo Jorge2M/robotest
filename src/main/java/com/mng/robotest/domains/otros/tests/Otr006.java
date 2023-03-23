@@ -10,7 +10,7 @@ public class Otr006 extends TestBase {
 	public void execute() throws Exception {
 		access();
 		new ModalNewsletterSteps().closeIfVisible();
-		ModalChatBotSteps chatBotSteps = new ModalChatBotSteps();
+		var chatBotSteps = new ModalChatBotSteps();
 		if (!chatBotSteps.checkIconVisible()) {
 			return;
 		}

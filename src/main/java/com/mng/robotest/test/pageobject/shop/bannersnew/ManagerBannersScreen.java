@@ -129,8 +129,8 @@ public class ManagerBannersScreen extends PageBase {
 	
 	public static boolean isBanners() {
 		int maxBannersToLoad = 1;
-		ManagerBannersScreen manager = new ManagerBannersScreen(maxBannersToLoad);
-		return manager.existBanners();
+		return new ManagerBannersScreen(maxBannersToLoad)
+				.existBanners();
 	}
 	
 	public void clickBannerAndWaitLoad(int posBanner) {

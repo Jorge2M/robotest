@@ -30,8 +30,8 @@ public class GetterProductApiCanonical {
 		Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
 			String responseBody = response.readEntity(String.class);
-			ObjectMapper objectMapper = new ObjectMapper();
-			EntityProduct productRedis = objectMapper.readValue(responseBody, EntityProduct.class);
+			EntityProduct productRedis = new ObjectMapper()
+					.readValue(responseBody, EntityProduct.class);
 			return Optional.of(productRedis);
 		}
 		return Optional.empty();

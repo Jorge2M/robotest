@@ -65,7 +65,7 @@ public class PageRegistroNinosOutlet extends PageBase {
 			String xpathDia = getXPath_selectDiaNac(i);
 			String xpathMes = getXPath_selectMesNac(i);
 			String xpathAny = getXPath_selectAnyNac(i);
-			StringTokenizer fechaToken = new StringTokenizer(dataNino.getFechaNacimiento(), "/");
+			var fechaToken = new StringTokenizer(dataNino.getFechaNacimiento(), "/");
 			new Select(getElement(xpathDia)).selectByVisibleText(fechaToken.nextToken()); //Día nacimiento
 			new Select(getElement(xpathMes)).selectByValue(fechaToken.nextToken()); //Mes de nacimiento
 			new Select(getElement(xpathAny)).selectByVisibleText(fechaToken.nextToken()); //Año de nacimiento

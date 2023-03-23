@@ -18,7 +18,7 @@ public class ListSizesArticle {
 	}
 	
 	public void addData(String referencia, int widthSrcImg, int widthArticle) {
-		DataSizeArticle dataSizes = new DataSizeArticle();
+		var dataSizes = new DataSizeArticle();
 		dataSizes.referencia = referencia;
 		dataSizes.widthSrcImg = widthSrcImg;
 		dataSizes.widthArticle = widthArticle;

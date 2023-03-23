@@ -83,9 +83,9 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	public List<Direction> getDirections() {
-		List<Direction> listDirections = new ArrayList<>();
+		var listDirections = new ArrayList<Direction>();
 		for (WebElement directionElem : getElements(XPATH_LINE_DIRECTION)) {
-			Direction direction = new Direction();
+			var direction = new Direction();
 			direction.setName(getDirectionItem(directionElem, DirectionItem.NAME));
 			direction.setAddress(getDirectionItem(directionElem, DirectionItem.ADDRESS));
 			direction.setLocation(getDirectionItem(directionElem, DirectionItem.LOCATION));

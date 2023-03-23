@@ -11,7 +11,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class PageRegistroNinosStepsOutlet extends StepBase {
 	
-	PageRegistroNinosOutlet pageRegistroNinos = new PageRegistroNinosOutlet();
+	private final PageRegistroNinosOutlet pageRegistroNinos = new PageRegistroNinosOutlet();
 	
 	@Validation
 	public ChecksTM validaIsPageWithNinos(int numNinos) {

@@ -19,7 +19,7 @@ public class PagoTrustpay extends PagoSteps {
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		String importeTotal = this.dataPago.getDataPedido().getImporteTotal();
 		
-		PageTrustpaySelectBankSteps pageTrustpaySelectBankSteps = new PageTrustpaySelectBankSteps();
+		var pageTrustpaySelectBankSteps = new PageTrustpaySelectBankSteps();
 		pageTrustpaySelectBankSteps.checkIsPage(dataPago.getDataPedido().getPago().getNombre(channel, app), importeTotal);
 		if (execPay) {
 			pageTrustpaySelectBankSteps.selectTestBankAndPay(importeTotal);

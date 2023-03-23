@@ -18,7 +18,7 @@ public class Otr005 extends TestBase {
 	public void execute() throws Exception {
 		dataTest.setPais(JAPAN);
 		dataTest.setIdioma(JAPONES);
-		PagePrehomeSteps pagePrehomeSteps = new PagePrehomeSteps();
+		var pagePrehomeSteps = new PagePrehomeSteps();
 		new PagePrehome().previousAccessShopSteps(true);
 		pagePrehomeSteps.seleccionPaisIdioma();
 		pagePrehomeSteps.entradaShopGivenPaisSeleccionado();

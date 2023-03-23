@@ -24,7 +24,6 @@ import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
-import com.mng.robotest.domains.galeria.pageobjects.SecBannerHeadGallery;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.ControlTemporada;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.NumColumnas;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticle;
@@ -64,7 +63,7 @@ public class PageGaleriaSteps extends StepBase {
 		expected="Aparece la ficha del artículo seleccionado en una pestaña aparte")
 	public void selectArticuloEnPestanyaAndBack(LocationArticle locationArt) {
 		String galeryWindowHandle = driver.getWindowHandle();
-		DataFichaArt datosArticulo = new DataFichaArt();
+		var datosArticulo = new DataFichaArt();
 
 		//Almacenamos el nombre del artículo y su referencia
 		WebElement articulo = pageGaleria.getArticulo(locationArt);
@@ -86,7 +85,7 @@ public class PageGaleriaSteps extends StepBase {
 		description="Seleccionar el artículo #{locationArt}", 
 		expected="Aparece la ficha del artículo seleccionado")
 	public DataFichaArt selectArticulo(LocationArticle locationArt) {
-		DataFichaArt datosArticulo = new DataFichaArt();
+		var datosArticulo = new DataFichaArt();
 		String urlGaleria = driver.getCurrentUrl();
 		
 		//Almacenamos el nombre del artículo y su referencia
@@ -95,7 +94,7 @@ public class PageGaleriaSteps extends StepBase {
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
 		pageGaleria.clickArticulo(articulo);
-		PageFichaSteps pageFichaSteps = new PageFichaSteps();
+		var pageFichaSteps = new PageFichaSteps();
 		pageFichaSteps.validaDetallesProducto(datosArticulo);
 		pageFichaSteps.validaPrevNext(locationArt);
 
@@ -147,8 +146,7 @@ public class PageGaleriaSteps extends StepBase {
 		boolean tallaVisible = (articulo!=null);
 		if (tallaVisible) {
 			dataTest.getDataBag().addArticulo(articulo);
-			SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-			secBolsaSteps.validaAltaArtBolsa();
+			new SecBolsaSteps().validaAltaArtBolsa();
 		}
 		return tallaVisible;
 	}
@@ -757,7 +755,7 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation
 	private static ChecksTM checkAfterClickInfoRebajas(WebDriver driver) {
 		var checks = ChecksTM.getNew();
-		SecBannerHeadGallery secBannerHead = new PageGaleriaDesktop().getSecBannerHead();
+		var secBannerHead = new PageGaleriaDesktop().getSecBannerHead();
 		int seconds = 1;
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +

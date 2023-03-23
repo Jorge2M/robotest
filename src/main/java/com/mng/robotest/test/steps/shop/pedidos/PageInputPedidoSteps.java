@@ -29,8 +29,6 @@ public class PageInputPedidoSteps extends StepBase {
 		pageInputPedido.inputEmailUsr(usuarioAcceso);
 		pageInputPedido.inputPedido(codPedido);
 		pageInputPedido.clickRecuperarDatos();
-
-		PageDetallePedidoSteps pageDetPedidoSteps = new PageDetallePedidoSteps(channel);
-		pageDetPedidoSteps.validateIsPageOk(dataPedido);
+		new PageDetallePedidoSteps(channel).validateIsPageOk(dataPedido);
 	}
 }

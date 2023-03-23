@@ -175,7 +175,7 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private void hoverLinea() {
-		LineaWeb lineaWeb = new LineaWeb(linea, sublinea);
+		var lineaWeb = new LineaWeb(linea, sublinea);
 		lineaWeb.hoverLinea(); 
 		if (sublinea!=null) {
 			lineaWeb.hoverSublinea();

@@ -22,7 +22,7 @@ public class PageSitemap extends PageBase {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Sitemapindex.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			String contentSitemap = getPageSource();
-			StringReader reader = new StringReader(contentSitemap);
+			var reader = new StringReader(contentSitemap);
 			return Optional.of((Sitemapindex)jaxbUnmarshaller.unmarshal(reader));
 		}
 		catch (Exception e) {

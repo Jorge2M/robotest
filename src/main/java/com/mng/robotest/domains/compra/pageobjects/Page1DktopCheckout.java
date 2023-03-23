@@ -195,7 +195,7 @@ public class Page1DktopCheckout extends PageBase {
 	 * @param fechaNaci en formato "dd-mm-aaaa"
 	 */
 	public void selectFechaNacPromoEmpl(String fechaNaci) {
-		StringTokenizer fechaTokenizada = (new StringTokenizer(fechaNaci, "-"));
+		var fechaTokenizada = (new StringTokenizer(fechaNaci, "-"));
 		selectDiaNacPromoEmpl(fechaTokenizada.nextToken());
 		selectMesNacPromoEmpl(fechaTokenizada.nextToken());
 		selectAnyNacPromoEmpl(fechaTokenizada.nextToken());
@@ -313,7 +313,7 @@ public class Page1DktopCheckout extends PageBase {
 	 */
 	public void forceClickMetodoPagoAndWait(String metodoPago) {
 		despliegaMetodosPago();
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
+		var pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.waitUntilNoDivLoading(2);
 		moveToMetodosPago();
 		clickMetodoPago(metodoPago);
@@ -427,14 +427,14 @@ public class Page1DktopCheckout extends PageBase {
 				return false;
 			}
 			
-			PreciosArticulo preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
-			PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
+			var preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
+			var pageCheckoutWrapper = new PageCheckoutWrapper();
 			if (articulo.getValePais()!=null) {
 				if (!pageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuento)) {
 					return false;
 				}
 			} else {
-				Descuento descuentoZero = new Descuento(0);
+				var descuentoZero = new Descuento(0);
 				if (!pageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuentoZero)) {
 					return false;
 				}
@@ -449,7 +449,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	private PreciosArticulo getPreciosArticuloResumen(WebElement articuloWeb) {
-		PreciosArticulo precios = new PreciosArticulo();
+		var precios = new PreciosArticulo();
 		List<WebElement> preciosNoTachados= articuloWeb.findElements(By.xpath("." + XPATH_PRECIO_NO_TACHADO_REL_ARTICLE));
 		List<WebElement> preciosSiTachados= articuloWeb.findElements(By.xpath("." + XPATH_PRECIOO_SI_TACHADO_REL_ARTICLE));
 		int cantidad = Integer.parseInt(articuloWeb.findElement(By.xpath("." + XPATH_CANTIDAD_ARTICULOS)).getText());

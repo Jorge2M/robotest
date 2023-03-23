@@ -11,7 +11,6 @@ import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
-import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
 
 import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
@@ -44,12 +43,12 @@ public class Gpo001 extends TestBase {
 
 	private void checkScroll() throws Exception {
 		String nameMenuCamisas = FactoryMenus.get(CAMISAS_SHE).getMenu();
-		DataForScrollStep dataScroll = new DataForScrollStep();
+		var dataScroll = new DataForScrollStep();
 		dataScroll.numPageToScroll = PageGaleria.MAX_PAGE_TO_SCROLL;
 		dataScroll.ordenacionExpected = FilterOrdenacion.NOordenado;
 		dataScroll.validateArticlesExpected = false;
 		dataScroll.validaImgBroken = true;
-		DataScroll datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
+		var datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
 		
 		if (channel.isDevice()) {
 			pageGaleriaSteps.backTo1erArticleMobilStep();

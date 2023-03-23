@@ -20,13 +20,13 @@ public class PagoPaysecureQiwi extends PagoSteps {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
-		PagePaysecureQiwi1rstSteps pagePaysecureQiwi1rstSteps = new PagePaysecureQiwi1rstSteps();
+		var pagePaysecureQiwi1rstSteps = new PagePaysecureQiwi1rstSteps();
 		pagePaysecureQiwi1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal());
 		pagePaysecureQiwi1rstSteps.clickIconPasarelaQiwi();
 		
 		if (execPay) {
 			String tlfQiwi = dataPago.getDataPedido().getPago().getTelefqiwi();
-			PageQiwiInputTlfnSteps pageQiwiInputTlfnSteps = new PageQiwiInputTlfnSteps();
+			var pageQiwiInputTlfnSteps = new PageQiwiInputTlfnSteps();
 			pageQiwiInputTlfnSteps.inputTelefono(tlfQiwi);
 			pageQiwiInputTlfnSteps.clickConfirmarButton();
 			if (new PagePaysecureConfirm().isPage()) {

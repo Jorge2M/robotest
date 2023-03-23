@@ -20,7 +20,7 @@ public interface SecTarjetaPci {
 	public static SecTarjetaPci makeSecTarjetaPci(Channel channel) {
 		//TODO cuando suba a PRO pci en iframe se podrá eliminar SecTarjetaPciNotInIframeMobil y SecTarjetaPciNotInIframeDesktop
 		if (channel==Channel.desktop) {
-			SecTarjetaPci secTarjetaPci = new SecTarjetaPciNotInIframeDesktop();
+			var secTarjetaPci = new SecTarjetaPciNotInIframeDesktop();
 			if (secTarjetaPci.isPresentInputNumberUntil(1)) {
 				return secTarjetaPci;
 			}

@@ -31,8 +31,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 	
 	public void validateWeAreLogged() {
 		validateLogoGoesToPaisIdioma();
-		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
-		secMenusUserSteps.checkIsVisibleLinkCerrarSesion();
+		new SecMenusUserSteps().checkIsVisibleLinkCerrarSesion();
 	}
 	
 	@Validation

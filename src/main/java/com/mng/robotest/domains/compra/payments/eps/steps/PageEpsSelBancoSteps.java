@@ -9,7 +9,7 @@ import com.mng.robotest.test.utils.ImporteScreen;
 
 public class PageEpsSelBancoSteps extends StepBase {
 
-	PageEpsSelBanco pageEpsSelBanco = new PageEpsSelBanco();
+	private final PageEpsSelBanco pageEpsSelBanco = new PageEpsSelBanco();
 	
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal) {

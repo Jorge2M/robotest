@@ -67,7 +67,7 @@ public class UtilsMangoTest extends PageBase {
 	}
 	
 	public static float round(final float d, final int decimalPlace) {
-		BigDecimal bd = new BigDecimal(Float.toString(d));
+		var bd = new BigDecimal(Float.toString(d));
 		bd = bd.setScale(decimalPlace, RoundingMode.HALF_UP);
 		return bd.floatValue();
 	}

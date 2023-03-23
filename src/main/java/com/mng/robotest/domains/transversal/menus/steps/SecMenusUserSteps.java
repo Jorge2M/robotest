@@ -38,8 +38,7 @@ public class SecMenusUserSteps extends StepBase {
 		saveHtmlPage=SaveWhen.IfProblem)
 	public void selectFavoritos() {
 		clickUserMenu(FAVORITOS);
-		PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
-		pageFavoritosSteps.validaIsPageOK();
+		new PageFavoritosSteps().validaIsPageOK();
 	}
 
 	@Step (
@@ -167,7 +166,7 @@ public class SecMenusUserSteps extends StepBase {
 		expected="Aparece el modal para el cambio de país")
 	public void cambioPaisMobil(Pais newPais, IdiomaPais newIdioma) {
 		clickUserMenu(CAMBIO_PAIS);
-		ModalCambioPaisSteps modalCambioPaisSteps = new ModalCambioPaisSteps();
+		var modalCambioPaisSteps = new ModalCambioPaisSteps();
 		modalCambioPaisSteps.validateIsVisible(5); 
 		modalCambioPaisSteps.cambioPais(newPais, newIdioma);
 	}
@@ -180,8 +179,7 @@ public class SecMenusUserSteps extends StepBase {
 		expected="Aparece la página de \"Mi cuenta\"")
 	public int clickMenuMangoLikesYou() {
 		clickUserMenu(MANGO_LIKES_YOU);
-		PageMangoLikesYouSteps pageHomeLikesSteps = new PageMangoLikesYouSteps();
-		int numberPoints = pageHomeLikesSteps.checkIsPageOk().getNumberPoints();
+		int numberPoints = new PageMangoLikesYouSteps().checkIsPageOk().getNumberPoints();
 		GenericChecks.checkDefault();
 		
 		StepTM step = TestMaker.getCurrentStepInExecution();

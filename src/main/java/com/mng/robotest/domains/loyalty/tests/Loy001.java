@@ -8,7 +8,7 @@ import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.domains.loyalty.steps.PageHistorialLikesSteps;
 import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.test.datastored.DataPago;
-import com.mng.robotest.test.steps.navigations.shop.GaleriaNavigationsSteps;
+import com.mng.robotest.test.steps.navigations.shop.GaleriaSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
@@ -45,7 +45,7 @@ public class Loy001 extends TestBase {
 	
 	private void addBagArticleNoRebajadoAndClickComprar() throws Exception {
 		clickGroup(NEW_NOW);
-		new GaleriaNavigationsSteps().selectTalla();
+		new GaleriaSteps().selectTalla();
         new SecBolsaSteps().selectButtonComprar();
 	}
 	

@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.ficha.tests;
 
-import java.util.Optional;
-
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.State;
@@ -14,7 +12,6 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 import com.mng.robotest.getdata.productlist.GetterProducts;
 import com.mng.robotest.getdata.productlist.Menu;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 
 import javassist.NotFoundException;
@@ -69,7 +66,7 @@ public class Fic005 extends TestBase {
 	private Article getArticlePersonalizable(String codigoPais, AppEcom app, WebDriver driver) 
 			throws Exception {
 		
-		Optional<GarmentCatalog> articlePersonalizable = new GetterProducts
+		var articlePersonalizable = new GetterProducts
 				.Builder(codigoPais, app, driver)
 				.linea(LineaType.HE)
 				.menu(Menu.CAMISAS_HE)

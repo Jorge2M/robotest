@@ -56,7 +56,7 @@ public abstract class StepMantoBase extends PageBase {
 	}
 	
 	private void setDataPedido(DataPedido pedidoData) {
-		PagePedidosMantoSteps pagePedidosMantoSteps = new PagePedidosMantoSteps();
+		var pagePedidosMantoSteps = new PagePedidosMantoSteps();
 		pagePedidosMantoSteps.setPedidoUsuarioRegistrado(pedidoData);
 		pagePedidosMantoSteps.setDataPedidoStep(pedidoData);
 		pagePedidosMantoSteps.setDataCliente(pedidoData);

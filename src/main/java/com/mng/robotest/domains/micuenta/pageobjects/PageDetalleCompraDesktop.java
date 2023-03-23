@@ -79,7 +79,7 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	}
 	@Override
 	public void gotoListaMisCompras() {
-		ModalDetalleArticuloDesktop modalArticulo = new ModalDetalleArticuloDesktop();
+		var modalArticulo = new ModalDetalleArticuloDesktop();
 		if (modalArticulo.isVisible(0)) {
 			modalArticulo.clickAspaForClose();
 			modalArticulo.isInvisible(2);

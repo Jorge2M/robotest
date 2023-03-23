@@ -35,7 +35,7 @@ public class MenusUserWrapper extends PageBase {
 		if (menu==UserMenu.BOLSA) {
 			return (secCabecera.isInStateIconoBolsa(state, seconds));
 		} else {
-			MenuUserItem menuUserItem = new MenuUserItem(menu, channel, app);
+			var menuUserItem = new MenuUserItem(menu, channel, app);
 			return (isMenuInStateUntil(menuUserItem, state, seconds));
 		}
 	}
@@ -45,7 +45,7 @@ public class MenusUserWrapper extends PageBase {
 		if (menu==UserMenu.BOLSA) {
 			secCabecera.clickIconoBolsa();
 		} else {
-			MenuUserItem menuUserItem = new MenuUserItem(menu, channel, app);
+			var menuUserItem = new MenuUserItem(menu, channel, app);
 			clickMenuAndWait(menuUserItem);
 		}
 	}
@@ -63,7 +63,7 @@ public class MenusUserWrapper extends PageBase {
 			secCabecera.hoverIconoBolsa();
 		} else {
 			isMenuInStateUntil(menu, State.Visible, 2);
-			MenuUserItem menuUserItem = new MenuUserItem(menu, channel, app);
+			var menuUserItem = new MenuUserItem(menu, channel, app);
 			moveToElement(menuUserItem.getLink().getBy(channel));
 		}
 	}
@@ -125,7 +125,7 @@ public class MenusUserWrapper extends PageBase {
 	
 	public LoyaltyData checkAndGetLoyaltyPointsUntil(int seconds) {
 		//TODO Workarround for manage shadow-dom Elements. Remove when WebDriver supports shadow-dom
-		LoyaltyData loyaltyData = new LoyaltyData(false, 0);
+		var loyaltyData = new LoyaltyData(false, 0);
 		By byLoyaltyUserMenu = By.tagName("loyalty-user-menu");
 		for (int i=0; i<seconds; i++) {
 			WebElement blockLoyalty = getElementVisible(driver, byLoyaltyUserMenu);

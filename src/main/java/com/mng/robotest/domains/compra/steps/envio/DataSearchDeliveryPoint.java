@@ -14,7 +14,7 @@ public class DataSearchDeliveryPoint {
 	public TipoTransporte tipoTransporte;
 		
 	public static DataSearchDeliveryPoint getInstance(Pago pago, AppEcom app, Pais pais) {
-		DataSearchDeliveryPoint dataDp = new DataSearchDeliveryPoint();
+		var dataDp = new DataSearchDeliveryPoint();
 		dataDp.tipoTransporte = pago.getTipoEnvioType(app);
 		dataDp.typeData = pago.getTipoEnvioType(app).getDataSearchDp();
 		if (dataDp.typeData == DataSearchDp.CODIGO_POSTAL) {

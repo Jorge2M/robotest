@@ -8,7 +8,7 @@ import com.mng.robotest.test.steps.shop.landing.PageLandingSteps;
 public class NavigationsSteps extends StepBase {
 
 	public void gotoPortada() {
-		SecCabeceraSteps secCabeceraSteps =	new SecCabeceraSteps();
+		var secCabeceraSteps =	new SecCabeceraSteps();
 		int i=0;
 		while (!secCabeceraSteps.getSecCabecera().isPresentLogoMango(1) && i<5) {
 			new AllPagesSteps().backNagegador();

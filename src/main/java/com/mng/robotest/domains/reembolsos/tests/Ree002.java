@@ -47,7 +47,7 @@ public class Ree002 extends TestBase {
 		}
 		
 		accessAndClearData();
-		PageReembolsosSteps pageReembolsosSteps = new PageReembolsosSteps();
+		var pageReembolsosSteps = new PageReembolsosSteps();
 		pageReembolsosSteps.gotoRefundsFromMenu(dataTest.getPais().existsPagoStoreCredit());
 		pageReembolsosSteps.selectRadioSalCtaAndRefresh();
 		if (new PageReembolsos().isVisibleSaveButtonStoreCredit()) {

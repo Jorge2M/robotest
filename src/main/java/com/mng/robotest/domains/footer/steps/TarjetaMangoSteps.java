@@ -21,7 +21,7 @@ public class TarjetaMangoSteps extends StepBase {
 		description="Seleccionar el botón con fondo negro \"¡La quiero ahora!\"",
 		expected="La página hace scroll hasta el formulario previo de solicitud de la tarjeta")
 	 public void selectLoQuieroAhoraButton() {
-		 PageMangoCard pageMangoCard = new PageMangoCard();
+		 var pageMangoCard = new PageMangoCard();
 		 String ventanaOriginal = driver.getWindowHandle();
 		 pageMangoCard.clickOnWantMangoCardNow();
 		 if(!driver.getCurrentUrl().contains("shop-ci")) {
@@ -33,7 +33,7 @@ public class TarjetaMangoSteps extends StepBase {
 	 
 	 @Validation
 	 private ChecksTM checkAfterClickLoQuieroAhoraButton() {
-		 PageMangoCard pageMangoCard = new PageMangoCard();
+		 var pageMangoCard = new PageMangoCard();
 		 var checks = ChecksTM.getNew();
 		 checks.add(
 			"Aparece el campo <b>Nombre</b>",
@@ -66,8 +66,7 @@ public class TarjetaMangoSteps extends StepBase {
 		description="Seleccionamos el botón \"¡Lo quiero ahora!\" que aparece debajo del formulario",
 		expected="Se abre una nueva pestaña del Banc Sabadell con un modal y texto \"Solicitud de tu MANGO Card\"")
 	 public void selectLoQuieroAhoraUnderForm() {
-		 PageMangoCard pageMangoCard = new PageMangoCard();
-		 pageMangoCard.clickToGoSecondMangoCardPage();
+		 new PageMangoCard().clickToGoSecondMangoCardPage();
 		 waitMillis(1000);
 		 checkAfterClickLoQuieroAhoraUnderForm();
 	 }

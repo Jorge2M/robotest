@@ -56,7 +56,7 @@ public class SecSelectorPrecios extends PageBase {
 	}
 
 	private void click(TypeClick typeClick, int pixelsFromCorner) {
-		Actions builder = new Actions(driver);
+		var builder = new Actions(driver);
 		moveToCornerSelector(TypeClick.RIGHT);
 		waitMillis(2000);
 		moveToCornerSelector(typeClick);

@@ -49,7 +49,7 @@ public class Reg002 extends TestBase {
 	}
 	
 	private void registerWithIncorrectInputData() {
-		ListDataRegistro dataKOToSend = new ListDataRegistro();
+		var dataKOToSend = new ListDataRegistro();
 		dataKOToSend.add(DataRegType.NAME, "Jorge111", false);
 		dataKOToSend.add(DataRegType.APELLIDOS, "Muñoz Martínez333", false);
 		dataKOToSend.add(DataRegType.EMAIL, "jorge.munoz", false);
@@ -64,7 +64,7 @@ public class Reg002 extends TestBase {
 	private void registerWithExistentEmail() {
 		driver.navigate().refresh();
 		waitMillis(1000);
-		ListDataRegistro dataToSend = new ListDataRegistro(); 
+		var dataToSend = new ListDataRegistro(); 
 		dataToSend.add(DataRegType.NAME, "Jorge", true);
 		dataToSend.add(DataRegType.APELLIDOS, "Muñoz Martínez", true);
 		

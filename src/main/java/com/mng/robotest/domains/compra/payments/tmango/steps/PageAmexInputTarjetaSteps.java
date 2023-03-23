@@ -46,7 +46,7 @@ public class PageAmexInputTarjetaSteps extends StepBase {
 		pageAmexInputTarjeta.inputDataTarjeta(numTarj, mesCad, anyCad, cvc);
 		pageAmexInputTarjeta.clickPagarButton();
 		
-		PageRedsysSimSteps pageRedsysSimSteps = new PageRedsysSimSteps();
+		var pageRedsysSimSteps = new PageRedsysSimSteps();
 		pageRedsysSimSteps.checkPage();
 		return pageRedsysSimSteps;
 	}

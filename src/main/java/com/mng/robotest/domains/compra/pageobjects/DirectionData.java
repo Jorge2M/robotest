@@ -10,7 +10,7 @@ public class DirectionData {
 	private boolean principal;
 
 	public static DirectionData from(DirectionData direction) {
-		DirectionData directionNew = new DirectionData();
+		var directionNew = new DirectionData();
 		directionNew.setNombre(direction.getNombre());
 		directionNew.setApellidos(direction.getApellidos());
 		directionNew.setDireccion(direction.getDireccion());

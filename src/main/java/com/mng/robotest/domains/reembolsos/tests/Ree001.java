@@ -39,7 +39,7 @@ public class Ree001 extends TestBase {
 		}
 			
 		access();
-		PageReembolsosSteps pageReembolsosSteps = new PageReembolsosSteps();
+		var pageReembolsosSteps = new PageReembolsosSteps();
 		pageReembolsosSteps.gotoRefundsFromMenu(paisConSaldoCta);
 		if (paisConSaldoCta) {
 			if (new PageReembolsos().isCheckedRadio(TypeReembolso.STORE_CREDIT)) {

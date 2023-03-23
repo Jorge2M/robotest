@@ -37,8 +37,8 @@ public class LineasArticuloBolsa extends PageBase {
 		
 		public static List<DataArtBolsa> getValuesValidForChannel(Channel channel) {
 			if (channel.isDevice()) {
-				List<DataArtBolsa> listData = new ArrayList<>();
-				for (DataArtBolsa dataArt : DataArtBolsa.values()) {
+				var listData = new ArrayList<DataArtBolsa>();
+				for (var dataArt : DataArtBolsa.values()) {
 					if (dataArt.validMobilWeb) {
 						listData.add(dataArt);
 					}
@@ -229,7 +229,7 @@ public class LineasArticuloBolsa extends PageBase {
 			return null;
 		}
 		
-		ArticuloDataBolsaScreen articleData = new ArticuloDataBolsaScreen();
+		var articleData = new ArticuloDataBolsaScreen();
 		articleData.setReferencia(getReferenciaArticle(lineaArticleWeb));
 		articleData.setNombre(getDataArticle(DataArtBolsa.NOMBRE, lineaArticleWeb));
 		articleData.setColor(getDataArticle(DataArtBolsa.COLOR, lineaArticleWeb));

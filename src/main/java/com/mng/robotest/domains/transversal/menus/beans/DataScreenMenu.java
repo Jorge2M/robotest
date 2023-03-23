@@ -21,7 +21,7 @@ public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 	}
 	
 	public static DataScreenMenu from(WebElement menu, Channel channel) {
-		DataScreenMenu dataMenu = new DataScreenMenu();
+		var dataMenu = new DataScreenMenu();
 		dataMenu.setId(menu.getAttribute("id"));
 		if (channel==Channel.desktop) {
 			WebElement ancor = menu.findElement(By.xpath("./a"));
@@ -41,14 +41,14 @@ public class DataScreenMenu implements Label, Comparable<DataScreenMenu> {
 	}
 	
 	public static DataScreenMenu getNew(String dataGaLabel, String label) {
-		DataScreenMenu dataMenu = new DataScreenMenu();
+		var dataMenu = new DataScreenMenu();
 		dataMenu.setDataTestId(dataGaLabel);
 		dataMenu.setLabel(label);
 		return dataMenu;
 	}
 	
 	public static DataScreenMenu getNew(String label) {
-		DataScreenMenu dataMenu = new DataScreenMenu();
+		var dataMenu = new DataScreenMenu();
 		dataMenu.setLabel(label);
 		return dataMenu;
 	}

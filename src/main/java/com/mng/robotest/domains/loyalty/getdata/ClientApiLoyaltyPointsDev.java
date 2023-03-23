@@ -63,7 +63,7 @@ public class ClientApiLoyaltyPointsDev {
 	
 	private ListConsumers getDataConsumerFromRest(String emailCustomer) throws Exception {
 		String url = "https://iosb.mango.com/osb/api/consumer/search";
-		URIBuilder builder = new URIBuilder(url);
+		var builder = new URIBuilder(url);
 		builder
 			.setParameter("originType", "12")
 			.setParameter("touchpoint", "10251")
@@ -83,8 +83,8 @@ public class ClientApiLoyaltyPointsDev {
             throw new NotFoundException(message);
 	    }
 	    
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(response.getEntity().getContent(), ListConsumers.class);
+        return new ObjectMapper()
+        		.readValue(response.getEntity().getContent(), ListConsumers.class);
 	}
 	
 	private ListConsumers getDataConsumerFromCache(String emailConsumer) {
@@ -95,7 +95,7 @@ public class ClientApiLoyaltyPointsDev {
 	}
 	
 	public ResultAddPoints addLoyaltyPoints(int loyaltyPoints, User user) {
-		TransferPoints transferPoints = new TransferPoints();
+		var transferPoints = new TransferPoints();
 		transferPoints.setScore(loyaltyPoints);
 		transferPoints.setCountry(user.getCountry());
 		transferPoints.setLocation_id(11667);

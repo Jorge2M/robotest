@@ -59,7 +59,7 @@ public interface SecFiltros {
 	
 	public static List<String> getCodColoresFromListCommaSeparated(String listCodColorsCommaSeparated) {
 		List<String> listCodColores = new ArrayList<>();
-		StringTokenizer tokensColores = new StringTokenizer(listCodColorsCommaSeparated, ",");
+		var tokensColores = new StringTokenizer(listCodColorsCommaSeparated, ",");
 		while (tokensColores.hasMoreElements()) {
 			listCodColores.add(tokensColores.nextToken());
 		}

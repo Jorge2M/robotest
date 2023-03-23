@@ -10,7 +10,7 @@ public class BolsaCommons extends StepBase {
 	public void checkBolsa() throws Exception {
 		new AccesoSteps().oneStep(dataTest.isUserRegistered());
 		
-		SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
+		var secBolsaSteps = new SecBolsaSteps();
 		secBolsaSteps.altaArticlosConColores(2);
 		secBolsaSteps.forceStateBolsaTo(StateBolsa.CLOSED);
 		secBolsaSteps.forceStateBolsaTo(StateBolsa.OPEN); 

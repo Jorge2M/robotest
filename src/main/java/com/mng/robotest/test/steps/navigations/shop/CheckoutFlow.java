@@ -232,7 +232,7 @@ public class CheckoutFlow extends StepBase {
 					if (app==AppEcom.shop) {
 						//Test funcionalidad "Quiero recibir factura"
 						pageCheckoutWrapperSteps.clickSolicitarFactura();
-						DataDireccion dataDirFactura = new DataDireccion();
+						var dataDirFactura = new DataDireccion();
 						dataDirFactura.put(DataDirType.nif, "76367949Z");
 						dataDirFactura.put(DataDirType.name, "Carolina");
 						dataDirFactura.put(DataDirType.apellidos, "Rancaño Pérez");
@@ -248,7 +248,7 @@ public class CheckoutFlow extends StepBase {
 					if (app!=AppEcom.votf) {
 						//Test funcionalidad "Cambio dirección de envío"
 						pageCheckoutWrapperSteps.clickEditarDirecEnvio();
-						DataDireccion dataDirEnvio = new DataDireccion();
+						var dataDirEnvio = new DataDireccion();
 						dataDirEnvio.put(DataDirType.codigoPais, paisChange.getCodigo_pais());
 						dataDirEnvio.put(DataDirType.codpostal, paisChange.getCodpos());					
 						dataDirEnvio.put(DataDirType.name, "Jorge");
@@ -272,7 +272,7 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	private void testValeDescuento() {
-		Page1DktopCheckoutSteps page1 = new Page1DktopCheckoutSteps();
+		var page1 = new Page1DktopCheckoutSteps();
 		if ("".compareTo(valeTest.getTextoCheckout())!=0) {
 			page1.checkIsVisibleTextVale(valeTest);
 		}
@@ -289,7 +289,7 @@ public class CheckoutFlow extends StepBase {
 		pagoSteps.startPayment(execPay);
 		dataPedido = dataPago.getDataPedido();
 		if (execPay) {
-			PageResultPagoSteps pageResultPagoSteps = new PageResultPagoSteps();
+			var pageResultPagoSteps = new PageResultPagoSteps();
 			if (dataPago.getFTCkout().stressMode) {
 				pageResultPagoSteps.checkUrl(10);
 			}
@@ -522,7 +522,7 @@ public class CheckoutFlow extends StepBase {
 			if (dataPago!=null) {
 				return dataPago;
 			}
-			DataPago dataPago = new DataPago(
+			var dataPago = new DataPago(
 				ConfigCheckout.config()
 					.checkPasarelas(validaPasarelas)
 					.checkPagos(validaPagos)

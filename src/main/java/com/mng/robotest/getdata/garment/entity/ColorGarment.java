@@ -95,38 +95,6 @@ public class ColorGarment {
 		return images;
 	}
 	
-	/**
-	public List<ImageGarment> getImagesGarment() {
-		List<ImageGarment> imagesReturn = new ArrayList<>();
-		if (images==null) {
-			return imagesReturn;
-		}
-		
-		for (Object image : images) {
-			ElementNSImpl imageElement = ((ElementNSImpl)image);
-			NodeList listNodes = imageElement.getChildNodes();
-			if (listNodes.getLength()>0) {
-				ImageGarment imageGarment = new ImageGarment();
-				imageGarment.setUrl(imageElement.getChildNodes().item(0).getFirstChild().getTextContent());
-				imageGarment.setAltText(imageElement.getChildNodes().item(1).getFirstChild().getTextContent());
-				imagesReturn.add(imageGarment);
-			}
-			if (listNodes.getLength()>2) {
-				ImageGarment imageGarment = new ImageGarment();
-				imageGarment.setUrl(imageElement.getChildNodes().item(2).getFirstChild().getTextContent());
-				imageGarment.setAltText(imageElement.getChildNodes().item(3).getFirstChild().getTextContent());
-				imagesReturn.add(imageGarment);
-			}
-			if (listNodes.getLength()>4) {
-				ImageGarment imageGarment = new ImageGarment();
-				imageGarment.setUrl(imageElement.getChildNodes().item(4).getFirstChild().getTextContent());
-				imageGarment.setAltText(imageElement.getChildNodes().item(5).getFirstChild().getTextContent());
-				imagesReturn.add(imageGarment);
-			}
-		}
-		return imagesReturn;
-	}
-	*/
 	public void setImages(List<Object> images) {
 		this.images = images;
 	}

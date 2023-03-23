@@ -24,7 +24,7 @@ public class PagoTMango extends PagoSteps {
 		pageCheckoutWrapperSteps.getSecTMangoSteps().clickTipoPago(SecTMango.TipoPago.PAGO_HABITUAL);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
-		PageAmexInputTarjetaSteps pageAmexInputTarjetaSteps = new PageAmexInputTarjetaSteps();
+		var pageAmexInputTarjetaSteps = new PageAmexInputTarjetaSteps();
 		pageAmexInputTarjetaSteps.validateIsPageOk(dataPedido.getImporteTotal());
 		
 		if (execPay) {

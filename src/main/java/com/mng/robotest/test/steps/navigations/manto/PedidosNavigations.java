@@ -94,7 +94,7 @@ public class PedidosNavigations extends StepBase {
 		secFiltrosMantoSteps.setFiltrosYbuscar(dataPedido, TypeSearch.BOLSA);
 		boolean existLinkPedido = new PageBolsasMantoSteps().validaLineaBolsa(dataPedido).getExistsLinkCodPed();
 		
-		PageConsultaPedidoBolsaSteps pageConsultaPedidoBolsaSteps = new PageConsultaPedidoBolsaSteps();
+		var pageConsultaPedidoBolsaSteps = new PageConsultaPedidoBolsaSteps();
 		if (existLinkPedido) {
 			pageConsultaPedidoBolsaSteps.detalleFromListaPedBol(dataPedido, TypeDetalle.BOLSA);
 		}

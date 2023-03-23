@@ -52,8 +52,7 @@ public class Mic003 extends TestBase {
 	}
 	
 	private void cancelarCuentaAndCheckLoginKO() {
-		PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
-		pageMiCuentaSteps.goToMisDatosAndValidateData(dataNewRegister);
+		new PageMiCuentaSteps().goToMisDatosAndValidateData(dataNewRegister);
 		new PageMisDatosSteps().cancelarCuenta();
 		var secMenusUserSteps = new SecMenusUserSteps();
 		secMenusUserSteps.logoff();

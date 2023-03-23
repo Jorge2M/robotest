@@ -411,7 +411,7 @@ public abstract class PageGaleria extends PageBase {
 
 	private ListDataArticleGalery getListArticles(
 			List<DataArticleGalery> filter, List<AttributeArticle> attributes) {
-		ListDataArticleGalery listReturn = new ListDataArticleGalery();
+		var listReturn = new ListDataArticleGalery();
 		for (WebElement articulo : getListaArticulos()) {
 			String refColor = getRefColorArticulo(articulo);
 			if (filter==null ||	isPresentArticleWithReferencia(filter, refColor)) {
@@ -429,7 +429,7 @@ public abstract class PageGaleria extends PageBase {
 	private DataArticleGalery getDataArticulo(
 			WebElement articulo, List<AttributeArticle> attributes) {
 		
-		DataArticleGalery dataArticle = new DataArticleGalery();
+		var dataArticle = new DataArticleGalery();
 		for (AttributeArticle attribute : attributes) {
 			switch (attribute) {
 				case NOMBRE:
@@ -508,7 +508,7 @@ public abstract class PageGaleria extends PageBase {
 	 * Desktop: scrolla reiteradamente hasta el último elemento para forzar la paginación
 	 */
 	public DataScroll scrollToPageFromFirst(int numPage) {
-		DataScroll datosScroll = new DataScroll();
+		var datosScroll = new DataScroll();
 		int pageToScroll = getPageToScroll(numPage);
 		goToInitPageAndWaitForArticle();
 
@@ -517,7 +517,7 @@ public abstract class PageGaleria extends PageBase {
 		List<Integer> numArticlesDoubleXpage = new ArrayList<>();
 		initializeDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, pageToScroll + 10);
 		updateDataNumArticles(numArticlesXpage, numArticlesDoubleXpage, lastPage);
-		SecFooter secFooter = new SecFooter();
+		var secFooter = new SecFooter();
 		while (lastPage < pageToScroll) {
 			goToLastPage();
 			int newLastPage = getNumLastPage();

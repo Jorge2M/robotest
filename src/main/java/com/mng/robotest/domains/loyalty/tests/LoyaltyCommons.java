@@ -13,8 +13,7 @@ public class LoyaltyCommons {
 	private LoyaltyCommons() {}
 	
 	public static int clickMangoLikesYou() {
-		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
-		return secMenusUserSteps.clickMenuMangoLikesYou();
+		return new SecMenusUserSteps().clickMenuMangoLikesYou();
 	}
 	
 	public static int addLoyaltyPoints(User user) {
