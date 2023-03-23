@@ -34,7 +34,6 @@ import com.mng.robotest.test.steps.votf.PageSelectLineaVOTFSteps;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.*;
 
 public class AccesoSteps extends StepBase {
@@ -85,8 +84,7 @@ public class AccesoSteps extends StepBase {
 	}
 	
 	@Validation(
-		description="Aparece el link \"Mi cuenta\" (usuario loginado) (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece el link \"Mi cuenta\" (usuario loginado) (lo esperamos hasta #{seconds} segundos)")
 	public boolean checkIsLogged(int seconds) {
 		return new MenusUserWrapper()
 				.isMenuInStateUntil(MI_CUENTA, Present, seconds);
@@ -99,33 +97,33 @@ public class AccesoSteps extends StepBase {
 		var userMenus = new MenusUserWrapper();
 		checks.add(
 			"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + seconds + " segundos)",
-			userMenus.isMenuInStateUntil(MI_CUENTA, Present, seconds), Defect);
+			userMenus.isMenuInStateUntil(MI_CUENTA, Present, seconds));
 		
 		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(FAVORITOS, Present, 0);
 		if (app==AppEcom.outlet) { 
 			checks.add(
 				"NO aparece el link \"Favoritos\"",
-				!isVisibleMenuFav, Defect);
+				!isVisibleMenuFav);
 		} else {
 			checks.add(
 				"Aparece el link \"Favoritos\"",
-				isVisibleMenuFav, Defect);
+				isVisibleMenuFav);
 		}
 		
 		if (channel!=Channel.desktop) {
 			boolean isPresentLinkMisCompras = userMenus.isMenuInState(MIS_COMPRAS, Present);
 			checks.add(
 				"Aparece el link \"Mis Compras\"",
-				isPresentLinkMisCompras, Defect);
+				isPresentLinkMisCompras);
 		}
 		
 		if (channel!=Channel.desktop) {
 			checks.add(
 				"Aparece el link \"Ayuda\"",
-				userMenus.isMenuInState(AYUDA, Visible), Defect);
+				userMenus.isMenuInState(AYUDA, Visible));
 			checks.add(
 				"Aparece el link \"Cerrar sesión\"",
-				userMenus.isMenuInState(CERRAR_SESION, Present), Defect);
+				userMenus.isMenuInState(CERRAR_SESION, Present));
 		}
 		
 		return checks;
@@ -263,24 +261,24 @@ public class AccesoSteps extends StepBase {
 		
 		checks.add(
 			"Aparece un modal solicitando confirmación de país",
-			modalCambioPais.isVisibleModalUntil(0), Defect);
+			modalCambioPais.isVisibleModalUntil(0));
 		
 		if (paisAccesoPrevio==null) {
 			checks.add(
 				"En el modal <b>No</b> aparece un link con la opción de confirmar el país " + paisAccesoNoIP.getNombre_pais() + 
 				" (" + paisAccesoNoIP.getCodigo_pais() + ")",
-				!modalCambioPais.isLinkToConfirmPais(paisAccesoNoIP.getNombre_pais()), Defect);
+				!modalCambioPais.isLinkToConfirmPais(paisAccesoNoIP.getNombre_pais()));
 		} else {
 			if (paisConfirmado==null) {
 				checks.add(
 					"En el modal <b>Sí</b> aparece un link con la opción de confirmar el acceso al país por el que previsamente se ha accedido vía URL: " + 
 					paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")",
-					modalCambioPais.isLinkToConfirmPais(paisAccesoPrevio.getUrlPaisEstandar(urlBaseTest)), Defect);
+					modalCambioPais.isLinkToConfirmPais(paisAccesoPrevio.getUrlPaisEstandar(urlBaseTest)));
 			} else {
 				checks.add(
 					"En el modal <b>No</b> aparece un link con la opción de confirmar el acceso al país por el que previsamente se ha accedido vía URL: " + 
 					paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")",
-					!modalCambioPais.isLinkToConfirmPais(paisAccesoPrevio.getNombre_pais()), Defect);
+					!modalCambioPais.isLinkToConfirmPais(paisAccesoPrevio.getNombre_pais()));
 			}
 		}
 		
@@ -292,7 +290,7 @@ public class AccesoSteps extends StepBase {
 		Pais paisButtonAssociated = modalCambioPais.getPaisOfButtonForChangePais(listPaisAsocIP, urlBaseTest);
 		checks.add(
 			"En el modal aparece un botón con la opción de cambiar a uno de los posibles países asociados a la IP (" + paisesAsocIP + ")",
-			paisButtonAssociated!=null, Defect);
+			paisButtonAssociated!=null);
 		
 		checks.setPais(paisButtonAssociated);
 		
@@ -309,13 +307,13 @@ public class AccesoSteps extends StepBase {
 		ResultValWithPais checks = ResultValWithPais.getNew();
 		checks.add(
 			"No aparece un modal solicitando confirmación de país",
-			!new ModalCambioPais().isVisibleModalUntil(0), Defect);
+			!new ModalCambioPais().isVisibleModalUntil(0));
 		
 		String nombrePaisPrevConf = paisPrevConf.getNombre_pais();
 		String hrefPaisPrevConf = paisPrevConf.getUrlPaisEstandar(urlBaseTest);
 		checks.add(
 			"Se ha redirigido a la URL del país confirmado previamente <b>" + nombrePaisPrevConf + "</b> (" + hrefPaisPrevConf + ")",
-			(driver.getCurrentUrl().toLowerCase().contains(hrefPaisPrevConf.toLowerCase())), Defect);
+			(driver.getCurrentUrl().toLowerCase().contains(hrefPaisPrevConf.toLowerCase())));
 		
 		return checks;
 	}
@@ -338,8 +336,7 @@ public class AccesoSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Se redirige a la URL del país #{paisBotonCambio} (#{hrefBotonCambioPais})",
-		level=Defect)
+		description="Se redirige a la URL del país #{paisBotonCambio} (#{hrefBotonCambioPais})")
 	private static boolean checkIsDoneRedirectToCountry(
 			String paisBotonCambio, String hrefBotonCambioPais, WebDriver driver) {
 		return (driver.getCurrentUrl().toLowerCase().contains(hrefBotonCambioPais.toLowerCase()));

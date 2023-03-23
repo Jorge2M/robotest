@@ -140,11 +140,11 @@ public class ConsolaVotfSteps extends StepBase {
 			pageConsola.switchToResultIFrame();
 		 	checks.add(
 				"En el bloque de \"Petición/Resultado\" NO aparece una tabla \"transportes__content\"",
-				!iframeResult.existsTransportes(), Defect);
+				!iframeResult.existsTransportes());
 		 	
 		 	checks.add(
 				"Aparece una línea de \"TipoStock:\" con contenido",
-				iframeResult.isPresentTipoStock(), Defect);
+				iframeResult.isPresentTipoStock());
 		}
 		finally {
 			pageConsola.driver.switchTo().window(paginaPadre);
@@ -184,7 +184,7 @@ public class ConsolaVotfSteps extends StepBase {
 		checks.setData(codigoPedido);
 		checks.add(
 			"Aparece un código de pedido",
-			"".compareTo(codigoPedido)!=0, Defect);
+			"".compareTo(codigoPedido)!=0);
 		
 		checks.add(
 			"Aparece el literal \"Resultado creación pedido: (0) Total\"",
@@ -230,8 +230,7 @@ public class ConsolaVotfSteps extends StepBase {
 	}
 	
 	@Validation (
-		description = "En la lista de pedidos aparece el generado anteriormente: #{codigoPedido} (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description = "En la lista de pedidos aparece el generado anteriormente: #{codigoPedido} (lo esperamos hasta #{seconds} segundos)")
 	private boolean checkIsPresentPedidoInList(String codigoPedido, int seconds) {
 		String codigoPedidoFull = iframeResult.getPedidoFromListaPedidosUntil(codigoPedido, seconds);
 	 	return "".compareTo(codigoPedidoFull)!=0;
@@ -287,7 +286,7 @@ public class ConsolaVotfSteps extends StepBase {
 		 	
 		 	checks.add(
 				"Aparece un XML con el dato \"&lt;pedido&gt;" + codigoPedidoFull + "&lt;/pedido&gt;\"",
-				iframeResult.isPedidoInXML(codigoPedidoFull), Defect);
+				iframeResult.isPedidoInXML(codigoPedidoFull));
 		}
 		finally {
 			pageConsola.driver.switchTo().window(paginaPadre);

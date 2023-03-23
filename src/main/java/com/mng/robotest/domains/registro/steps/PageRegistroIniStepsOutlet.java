@@ -24,8 +24,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	private final Pais pais = dataTest.getPais();
 	
 	@Validation (
-		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)")
 	public boolean validaIsPageUntil(int seconds) {
 		return pageRegistroIni.isPageUntil(seconds);
 	}
@@ -125,15 +124,13 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece un error <b>Email ya registrado</b> (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece un error <b>Email ya registrado</b> (lo esperamos hasta #{seconds} segundos)")
 	private boolean validaEmailYaRegistradoShown(int seconds) {
 		return(pageRegistroIni.isVisibleErrorUsrDuplicadoUntil(seconds));
 	}
 	
 	@Validation (
-		description="Aparece un error <b>Email incorrecto</b> (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece un error <b>Email incorrecto</b> (lo esperamos hasta #{seconds} segundos)")
 	private boolean validaEmailIncorrectShown(int seconds) {
 		return(pageRegistroIni.isVisibleErrorEmailIncorrecto(seconds));
 	}
@@ -185,16 +182,16 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		int seconds = 1;
 		checks.add(
 			"El texto de info de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
-			pageRegistroIni.isTextoRGPDVisible(), Defect);
+			pageRegistroIni.isTextoRGPDVisible());
 		
 		checks.add(
 			"El texto legal de RGPD <b>SI</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
-			pageRegistroIni.isTextoLegalRGPDVisible(), Defect);
+			pageRegistroIni.isTextoLegalRGPDVisible());
 		
 		checks.add(
 			"<b>SI</b> está presente el checkbox para recibir promociones e información personalizada para el pais" +
 			codigoPais + " (lo esperamos hasta " + seconds + " segundos)",
-			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds), Defect);
+			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds));
 		
 		return checks;
 	}
@@ -205,16 +202,16 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		int seconds = 1;
 		checks.add(
 			"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro",
-			!pageRegistroIni.isTextoRGPDVisible(), Defect);
+			!pageRegistroIni.isTextoRGPDVisible());
 		
 		checks.add(
 			"El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro", 
-			!pageRegistroIni.isTextoLegalRGPDVisible(), Defect);
+			!pageRegistroIni.isTextoLegalRGPDVisible());
 		
 		checks.add(
 			"<b>SI</b> está presente el checkbox para recibir promociones e información personalizada" +
 			" (lo esperamos hasta " + seconds + " segundos)",
-			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds), Defect);
+			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds));
 		
 		return checks;
 	}
@@ -225,16 +222,16 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		int seconds = 1;
 		checks.add(
 			"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
-			!pageRegistroIni.isTextoRGPDVisible(), Defect);
+			!pageRegistroIni.isTextoRGPDVisible());
 		
 		checks.add(
 			"El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
-			!pageRegistroIni.isTextoLegalRGPDVisible(), Defect);
+			!pageRegistroIni.isTextoLegalRGPDVisible());
 		
 		checks.add(
 			"<b>NO</b> es visible el checkbox para recibir promociones e información personalizada para el pais " + 
 			codigoPais + " (lo esperamos hasta " + seconds + " segundos)",
-			!pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds), Defect);
+			!pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds));
 		
 		return checks;
 	}

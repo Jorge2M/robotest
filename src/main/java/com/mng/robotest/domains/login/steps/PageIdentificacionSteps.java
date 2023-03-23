@@ -6,8 +6,6 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.login.pageobjects.PageIdentificacion;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageIdentificacionSteps extends StepBase {
 
 	@Step (
@@ -19,9 +17,7 @@ public class PageIdentificacionSteps extends StepBase {
 		GenericChecks.checkDefault();	
 	}
 	
-	@Validation (
-		description="Aparece el texto de introducción errónea de credenciales",
-		level=Defect)
+	@Validation (description="Aparece el texto de introducción errónea de credenciales")
 	private boolean checkTextoCredencialesKO() {
 		return new PageIdentificacion().isErrorEmailoPasswordKO();
 	}

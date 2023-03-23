@@ -239,9 +239,7 @@ public class PageGaleriaSteps extends StepBase {
 		return (numArticlesCurrently > numArticlesInit);
 	}
 
-	@Validation (
-		description="Los artículos aparecen ordenados por #{orderExpected}",
-		level=Defect)
+	@Validation (description="Los artículos aparecen ordenados por #{orderExpected}")
 	private boolean checkArticlesOrdered(FilterOrdenacion orderExpected) throws Exception {
 		return (pageGaleria.articlesInOrder(orderExpected));
 	}
@@ -259,7 +257,7 @@ public class PageGaleriaSteps extends StepBase {
 		}
 	  	checks.add(
 			"No aparece ningún artículo repetido" + producRepeatedWarning,
-			productsRepeated==null || productsRepeated.size()==0, Defect);
+			productsRepeated==null || productsRepeated.size()==0);
 	  	
 	  	return checks;
 	}
@@ -384,9 +382,7 @@ public class PageGaleriaSteps extends StepBase {
 		return srcImgAfterClickColor;
 	}
 
-	@Validation (
-		description="Se modifica la imagen correspondiente al artículo",
-		level=Defect)
+	@Validation (description="Se modifica la imagen correspondiente al artículo")
 	private boolean checkImageIsModified(String srcImg1erArt, String srcImgAfterClickColor) {
 		return (!srcImgAfterClickColor.contains(srcImg1erArt));
 	}
@@ -454,8 +450,7 @@ public class PageGaleriaSteps extends StepBase {
    }
    
    @Validation (
-	   description="El src de la imagen <b>ahora</b> (#{srcImgActual}) es la <b>original</b> (#{srcImgOriginalExpected})",
-	   level=Defect)
+	   description="El src de la imagen <b>ahora</b> (#{srcImgActual}) es la <b>original</b> (#{srcImgOriginalExpected})")
    private boolean checkActualImgSliderIsTheExpected(String srcImgActual, String srcImgOriginalExpected) {
 	   return (srcImgActual.compareTo(srcImgOriginalExpected)==0);
    }
@@ -629,7 +624,7 @@ public class PageGaleriaSteps extends StepBase {
 	 	checks.add(
 	 		"<b style=\"color:blue\">Rebajas</b></br>" +
 	 		"Son visibles los menús laterales de filtro a nivel detemporadas (Collection)",
-	 		filtrosCollection.isVisible(), Defect);
+	 		filtrosCollection.isVisible());
 	 	
 	 	checks.add(
 	 		"Aparece el filtro para todas las temporadas <b>All</b>)",
@@ -655,8 +650,7 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation (
 		description=
 			"<b style=\"color:blue\">Rebajas</b></br>" +
-			"No son visibles los menús laterales de filtro a nivel detemporadas (Collection)<b>",
-		level=Defect)
+			"No son visibles los menús laterales de filtro a nivel detemporadas (Collection)<b>")
 	private boolean checkFiltrosSaleInGaleryNoSale(SecMenusFiltroCollection filtrosCollection) {
 		return (!filtrosCollection.isVisible());
 	}

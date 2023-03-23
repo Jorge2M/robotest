@@ -16,9 +16,7 @@ public class PageGenerarPedidoSteps extends StepMantoBase {
 
 	private final PageGenerarPedido pageGenerarPedido = new PageGenerarPedido();
 	
-	@Validation (
-		description="Aparece la página de generación asociada al pedido <b>#{idPedido}</b>",
-		level=Defect)
+	@Validation (description="Aparece la página de generación asociada al pedido <b>#{idPedido}</b>")
 	public boolean validateIsPage(String idPedido) {
 		return pageGenerarPedido.isPage(idPedido);
 	}

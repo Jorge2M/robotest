@@ -6,15 +6,11 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.DirectionData;
 import com.mng.robotest.domains.compra.pageobjects.ModalDirecEnvioNew;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class ModalDirecEnvioNewSteps extends StepBase {
 
 	private final ModalDirecEnvioNew modalDirecEnvio = new ModalDirecEnvioNew();
 	
-	@Validation (
-		description="Visible el Modal para Añadir/Editar una dirección",
-		level=Defect)
+	@Validation (description="Visible el Modal para Añadir/Editar una dirección")
 	public boolean checkIsVisible() {
 		return modalDirecEnvio.isVisible(2);
 	}
@@ -48,9 +44,7 @@ public class ModalDirecEnvioNewSteps extends StepBase {
 		checkIsModalConfirmacionEliminar();
 	}
 	
-	@Validation (
-		description="Aparece el modal de confirmación de la eliminación",
-		level=Defect)
+	@Validation (description="Aparece el modal de confirmación de la eliminación")
 	public boolean checkIsModalConfirmacionEliminar() {
 		return modalDirecEnvio.isVisibleModalConfirmacionEliminar(1);
 	}	

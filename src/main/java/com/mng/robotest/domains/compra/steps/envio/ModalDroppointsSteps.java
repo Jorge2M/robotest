@@ -30,14 +30,12 @@ public class ModalDroppointsSteps extends StepBase {
 	  	
 	  	checks.add(
 			"Sí aparece el modal con el mapa de Droppoints",
-			modalDroppoints.isVisible(), Defect);
+			modalDroppoints.isVisible());
 	  	
 	  	return checks;
 	}
 	
-	@Validation (
-		description="No aparece el modal con el mapa de Droppoints",
-		level=Defect)
+	@Validation (description="No aparece el modal con el mapa de Droppoints")
 	public boolean validaIsNotVisible() {
 		return (!modalDroppoints.isVisible());
 	}

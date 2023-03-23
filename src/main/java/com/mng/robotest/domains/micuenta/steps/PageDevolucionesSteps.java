@@ -8,8 +8,6 @@ import com.mng.robotest.test.pageobject.shop.PageDevoluciones;
 import com.mng.robotest.test.pageobject.shop.PageDevoluciones.Devolucion;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageDevolucionesSteps extends StepBase {
 
 	private final PageDevoluciones pageDevoluciones = new PageDevoluciones();
@@ -19,19 +17,19 @@ public class PageDevolucionesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de devoluciones",
-			pageDevoluciones.isPage(), Defect);
+			pageDevoluciones.isPage());
 		
 		checks.add(
 			"Aparece la opción de " + Devolucion.EN_TIENDA.getLiteral(),
-			Devolucion.EN_TIENDA.isPresentLink(driver), Defect);
+			Devolucion.EN_TIENDA.isPresentLink(driver));
 		
 		checks.add(
 			"Aparece la opcion de " + Devolucion.EN_DOMICILIO.getLiteral(),
-			Devolucion.EN_DOMICILIO.isPresentLink(driver), Defect);
+			Devolucion.EN_DOMICILIO.isPresentLink(driver));
 		
 		checks.add(
 			"Aparece la opción de " + Devolucion.PUNTO_CELERITAS.getLiteral(),
-			Devolucion.EN_DOMICILIO.isPresentLink(driver), Defect);
+			Devolucion.EN_DOMICILIO.isPresentLink(driver));
 		
 		return checks;
 	}

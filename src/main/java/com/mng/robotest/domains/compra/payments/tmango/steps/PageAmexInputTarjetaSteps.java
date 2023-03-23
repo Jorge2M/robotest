@@ -20,7 +20,7 @@ public class PageAmexInputTarjetaSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Aparece la pasarela de pagos de RedSys (la esperamos hasta " + seconds + " segundos)",
-			pageAmexInputTarjeta.isPasarelaRedSysUntil(seconds), Defect); 
+			pageAmexInputTarjeta.isPasarelaRedSysUntil(seconds)); 
 	 	
 	 	checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
@@ -35,7 +35,7 @@ public class PageAmexInputTarjetaSteps extends StepBase {
 	 	
 	 	checks.add(
 			"Figura un botón de Aceptar",
-			pageAmexInputTarjeta.isPresentPagarButton(), Defect); 
+			pageAmexInputTarjeta.isPresentPagarButton()); 
 	 	
 	 	return checks;
 	}

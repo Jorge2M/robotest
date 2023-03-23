@@ -24,21 +24,21 @@ public class PagePostfCodSegSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la pasarela de pagos de PostFinance E-Payment de Test",
-			pagePostfCodSeg.isPasarelaPostfinanceTest(nombrePago), Defect);
+			pagePostfCodSeg.isPasarelaPostfinanceTest(nombrePago));
 		
 		checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-			pagePostfCodSeg.isPresentButtonAceptar(), Defect);
+			pagePostfCodSeg.isPresentButtonAceptar());
 		
 		boolean existsCode = pagePostfCodSeg.isPresentInputCodSeg();
 		if (isPostfinanceEcard(nombrePago)) {
 			checks.add(
 				"SÍ existe el campo de introducción del código de seguridad",
-				existsCode, Defect);
+				existsCode);
 		} else {
 			checks.add(
 				"NO existe el campo de introducción del código de seguridad",
-				!existsCode, Defect);
+				!existsCode);
 		}
 
 		return checks;
@@ -50,7 +50,7 @@ public class PagePostfCodSegSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + seconds + " segundos)",
-			pagePostfCodSeg.isPasarelaPostfinanceProUntil(seconds), Defect);
+			pagePostfCodSeg.isPasarelaPostfinanceProUntil(seconds));
 		
 		String codPais = dataTest.getCodigoPais();
 		checks.add(
@@ -59,7 +59,7 @@ public class PagePostfCodSegSteps extends StepBase {
 		
 		checks.add(
 			"Aparece el botón Weiter (Aceptar)",
-			pagePostfCodSeg.isPresentButtonWeiter(), Defect);
+			pagePostfCodSeg.isPresentButtonWeiter());
 		
 		return checks;
 	}

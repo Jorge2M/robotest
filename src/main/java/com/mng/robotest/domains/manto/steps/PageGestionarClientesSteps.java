@@ -11,7 +11,6 @@ import com.mng.robotest.domains.manto.pageobjects.PageGestionarClientes.TypeThir
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
 import static com.mng.robotest.domains.manto.pageobjects.PageGestionarClientes.TypeThirdButton.*;
-import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageGestionarClientesSteps extends StepMantoBase {
 
@@ -22,15 +21,15 @@ public class PageGestionarClientesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Estamos en la página " + PageGestionarClientes.TITULO,
-			pageGestionarClientes.isPage(), Defect);
+			pageGestionarClientes.isPage());
 	 	
 	 	checks.add(
 			"Aparece el apartado de \"Buscar clientes\"",
-			pageGestionarClientes.isVisibleFormBuscarClientes(), Defect);
+			pageGestionarClientes.isVisibleFormBuscarClientes());
 	 	
 	 	checks.add(
 			"Aparece el apartado de \"Tratar clientes\"",
-			pageGestionarClientes.isVisibleFormTratarClientes(), Defect);
+			pageGestionarClientes.isVisibleFormTratarClientes());
 	 	
 		return checks;
 	}
@@ -50,18 +49,17 @@ public class PageGestionarClientesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Se muestra la tabla de información",
-			pageGestionarClientes.isVisibleTablaInformacion(), Defect);
+			pageGestionarClientes.isVisibleTablaInformacion());
 	 	
 	 	checks.add(
 			"Aparece el DNI <b>" + dni + "</b> en la tabla",
-			pageGestionarClientes.getDniTabla(dni), Defect);
+			pageGestionarClientes.getDniTabla(dni));
 	 	
 		int seconds = 1;
 	 	checks.add(String.format(
 			"Aparece el botón de Alta o Baja (los esperamos un máximo de %s segundos)", seconds),
 			pageGestionarClientes.isVisibleThirdButton(BAJA, seconds) ||
-			pageGestionarClientes.isVisibleThirdButton(ALTA, seconds), 
-			Defect);
+			pageGestionarClientes.isVisibleThirdButton(ALTA, seconds));
 	 	
 	 	return checks;
 	}
@@ -84,12 +82,12 @@ public class PageGestionarClientesSteps extends StepMantoBase {
 		int seconds = 2;
 	 	checks.add(String.format(
 			"Aparece el mensaje <b>" + typeButton.literal() + "</b> (lo esperamos %s segundos)", seconds),
-			pageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, seconds), Defect);
+			pageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, seconds));
 	 	
 		TypeThirdButton buttonExpected = typeButton.buttonExpectedAfterClick();
 	 	checks.add(String.format(
 			"Aparece el botón \"Alta\" (lo esperamos %s segundos)", seconds),
-			pageGestionarClientes.isVisibleThirdButton(buttonExpected, seconds), Defect);
+			pageGestionarClientes.isVisibleThirdButton(buttonExpected, seconds));
 		
 	 	return checks;
 	}
@@ -109,11 +107,11 @@ public class PageGestionarClientesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el id del cliente <b>" + idCliente + "</b>",
-			pageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente), Defect);
+			pageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente));
 	 	
 	 	checks.add(
 			"Aparece el dni del cliente <b>" + dni + "</b>",
-			pageGestionarClientes.isVisibleDniClickDetallesButton(dni), Defect);
+			pageGestionarClientes.isVisibleDniClickDetallesButton(dni));
 	 	
 	 	return checks;
 	}

@@ -19,7 +19,7 @@ public class PageProcessOutInputTrjSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Estamos en la página con el formulario para la introducción de los datos de la tarjeta",
-			pageObject.checkIsPage(), Defect);
+			pageObject.checkIsPage());
 		
 		String codPais = dataTest.getCodigoPais();
 		checks.add(
@@ -28,7 +28,7 @@ public class PageProcessOutInputTrjSteps extends StepBase {
 		
 		checks.add(
 			"Figura un botón de pago",
-			pageObject.isPresentButtonPago(), Defect);
+			pageObject.isPresentButtonPago());
 		
 		return checks;
 	}

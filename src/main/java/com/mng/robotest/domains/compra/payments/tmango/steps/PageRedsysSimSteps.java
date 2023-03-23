@@ -5,15 +5,12 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.tmango.pageobjects.PageRedsysSim;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageRedsysSimSteps extends StepBase {
 
 	private final PageRedsysSim pageRedsysSim = new PageRedsysSim();
 	
 	@Validation(
-		description="Aparece la página de Simulador Pago RedSys",
-		level=Defect)
+		description="Aparece la página de Simulador Pago RedSys")
 	public boolean checkPage() {
 		return pageRedsysSim.isPage();
 	}

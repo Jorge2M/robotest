@@ -36,9 +36,7 @@ public class ModalBuscadorTiendasSteps extends StepBase {
 		checkModalSearchInvisible();
 	}
 	
-	@Validation (
-		description="La capa correspondiente a la búsqueda desaparece",
-		level=Defect)
+	@Validation (description="La capa correspondiente a la búsqueda desaparece")
 	private boolean checkModalSearchInvisible() {
 		return (!modalBuscadorTiendas.isVisible());
 	}

@@ -70,8 +70,7 @@ public class SecMenusUserSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{seconds} segundos)")
 	private boolean checkIsVisibleIniciarSesionLink(int seconds) {
 		return (userMenus.isMenuInStateUntil(INICIAR_SESION, Present, seconds));
 	}
@@ -99,16 +98,12 @@ public class SecMenusUserSteps extends StepBase {
 		GenericChecks.checkDefault();
 	}	
 	
-	@Validation (
-		description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)",
-		level=Defect)
+	@Validation (description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)")
 	public boolean checkIsVisibleLinkCerrarSesion() {	
 		return isVisibleLinkCerrarSesion();
 	}
 	
-	@Validation (
-		description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)",
-		level=Defect)
+	@Validation (description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)")
 	public boolean checkIsInvisibleLinkCerrarSesion() {	
 		return isInvisibleLinkCerrarSesion();
 	}	
@@ -116,8 +111,7 @@ public class SecMenusUserSteps extends StepBase {
 	@Validation (
 		description=
 			"Aparece el link superior de \"Cerrar Sesión\" (estamos loginados). " + 
-			"Lo esperamos hasta #{seconds} segundos",
-		level=Defect)	
+			"Lo esperamos hasta #{seconds} segundos")	
 	public boolean checkIsVisibleLinkCerrarSesionUntil(int seconds) {
 		if (isVisibleLinkCerrarSesionExceptionSafe()) {
 			return true;
@@ -197,12 +191,12 @@ public class SecMenusUserSteps extends StepBase {
 		if (app==AppEcom.shop) {
 			checks.add(
 				"Sí aparece el link de \"Mango Likes You\" en el menú de usuario",
-				visibilityMLY, Defect);
+				visibilityMLY);
 		}
 		else {
 			checks.add(
 				"No aparece el link de \"Mango Likes You\" en el menú de usuario",
-				!visibilityMLY, Defect);
+				!visibilityMLY);
 		}
 		
 		return checks;  
@@ -218,7 +212,7 @@ public class SecMenusUserSteps extends StepBase {
 		checks.setNumberPoints(loyaltyData.numberPoints);
 	 	checks.add(
 			"Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta " + seconds + " segundos)",
-			loyaltyData.isPresent, Defect);
+			loyaltyData.isPresent);
 	 	
 		return checks;
 	}

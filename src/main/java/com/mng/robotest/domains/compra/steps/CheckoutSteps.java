@@ -131,11 +131,11 @@ public class CheckoutSteps extends StepBase {
 	 	
 	 	checks.add(
 			"El precio (" + precioScreen + ") existe y es > 0",
-			(importe!=null && importe>0), Defect);
+			(importe!=null && importe>0));
 		
 	 	checks.add(
 			"El precio contiene la divisa <b>Kn</b>",
-			precioScreen.contains("Kn"), Defect);
+			precioScreen.contains("Kn"));
 	 	
 		return checks;
 	}
@@ -149,11 +149,11 @@ public class CheckoutSteps extends StepBase {
 	 	
 	 	checks.add(
 			"El precio (" + precioScreenEuros + ") existe y es > 0",
-			(importeEuros!=null && importeEuros>0), Defect);
+			(importeEuros!=null && importeEuros>0));
 		
 	 	checks.add(
 			"El precio contiene la divisa <b>€</b>",
-			precioScreenEuros.contains("€"), Defect);
+			precioScreenEuros.contains("€"));
 	 	
 	 	return checks;
 	}
@@ -194,7 +194,7 @@ public class CheckoutSteps extends StepBase {
 				String pagoNameExpected = listPagos.get(i).getNombre(channel, app);
 			 	checks.add(
 					"Aparece el logo/pestaña asociado al pago <b>" + pagoNameExpected + "</b>",
-					pageCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected), Defect);	
+					pageCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected));	
 			}
 		}   
 		
@@ -271,15 +271,12 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Se hace visible el texto bajo el método de pago: #{nombrePago} (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Se hace visible el texto bajo el método de pago: #{nombrePago} (lo esperamos hasta #{seconds} segundos)")
 	private boolean checkIsVisibleTextUnderPayment(@SuppressWarnings("unused") String nombrePago, Pago pago, int seconds) {
 		return (pageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, seconds));
 	}
 	
-	@Validation (
-		description="Aparece el botón de \"Confirmar Compra\"",
-		level=Defect)
+	@Validation (description="Aparece el botón de \"Confirmar Compra\"")
 	public boolean validateIsPresentButtonCompraDesktop() {
 		return (pageCheckoutWrapper.getPage1DktopCheckout().isPresentButtonConfPago());
 	}
@@ -389,23 +386,23 @@ public class CheckoutSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Aparece el campo de introducción del primer apellido (lo esperamos hasta " + seconds + " segundos)",
-			pageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(seconds), Defect);
+			pageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(seconds));
 		
 		boolean isPresentInputDni = pageCheckoutWrapper.isPresentInputDNIPromoEmpl();
 		if (accesoEmpl.getNif()!=null) {
 		 	checks.add(
 				"Aparece el campo de introducción del DNI/Pasaporte",
-				isPresentInputDni, Defect);
+				isPresentInputDni);
 		} else {
 		 	checks.add(
 				"Noparece el campo de introducción del DNI/Pasaporte",
-				!isPresentInputDni, Defect);
+				!isPresentInputDni);
 		}
 		
 		boolean isPresentInputFechaNac = pageCheckoutWrapper.isPresentDiaNaciPromoEmpl();
 	 	checks.add(
 			"No aparece el campo de introducción de la fecha de nacimiento",
-			!isPresentInputFechaNac, Defect);	
+			!isPresentInputFechaNac);	
 		
 		return checks;
 	}
@@ -456,16 +453,12 @@ public class CheckoutSteps extends StepBase {
 		checkIsVisibleBank(nombreBanco);
 	}
 	
-	@Validation (
-		description="Aparece el banco \"#{ombreBanco}\" en el cuadro de selección",
-		level=Defect)
+	@Validation (description="Aparece el banco \"#{ombreBanco}\" en el cuadro de selección")
 	private boolean checkIsVisibleBank(String nombreBanco) {
 		return (pageCheckoutWrapper.isBancoSeleccionado(nombreBanco));
 	}
 
-	@Validation (
-		description="Aparece el botón que permite aplicar los Loyalty Points",
-		level=Defect)
+	@Validation (description="Aparece el botón que permite aplicar los Loyalty Points")
 	public boolean validateBlockLoyalty() {
 		return (pageCheckoutWrapper.isVisibleButtonForApplyLoyaltyPoints());
 	}
@@ -492,8 +485,7 @@ public class CheckoutSteps extends StepBase {
 	@Validation (
 		description=
 			"Se aplica el descuento de <b>#{descuento}</b> al subtotal inicial de #{subtotalInicial} " + 
-			"(lo esperamos hasta #{seconds})",
-		level=Defect)
+			"(lo esperamos hasta #{seconds})")
 	public boolean validateLoyaltyPointsDiscountDesktopUntil(
 			float descuento, float subtotalInicial, int seconds) {
 		
@@ -516,8 +508,7 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece un descuento aplicado de #{descuento} (lo esperamos hasta #{seconds})",
-		level=Defect)
+		description="Aparece un descuento aplicado de #{descuento} (lo esperamos hasta #{seconds})")
 	public boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			float discountApplied = UtilsMangoTest.round(pageCheckoutWrapper.getDiscountLoyaltyAppliedMobil(), 2);

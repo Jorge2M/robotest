@@ -31,7 +31,7 @@ public class SecFotosNewSteps extends StepBase {
 			dataFoto.typeImage==TipoImagenProducto.DETALLES || 
 			dataFoto.typeImage==TipoImagenProducto.DETALLES_9 || 
 			dataFoto.typeImage==TipoImagenProducto.OUTFIT || 
-			dataFoto.typeImage==TipoImagenProducto.BODEGON), Defect);
+			dataFoto.typeImage==TipoImagenProducto.BODEGON));
 	 	
 	 	return checks;
 	}

@@ -34,18 +34,18 @@ public class PageReembolsosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de reembolsos",
-			pageReembolsos.isPage(), Defect);		
+			pageReembolsos.isPage());		
 		
 		boolean isVisibleTransferenciaSection = pageReembolsos.isVisibleTransferenciaSectionUntil(5);
 		boolean isVisibleStoreCreditSection = pageReembolsos.isVisibleStorecreditSection();
 		if (paisConSaldoCta) {
 			checks.add(
 				"El país SÍ tiene asociado Saldo en Cuenta -> Aparecen las secciones de \"Saldo en cuenta\" y \"Transferencia bancaria\"",
-				isVisibleTransferenciaSection && isVisibleStoreCreditSection, Defect);
+				isVisibleTransferenciaSection && isVisibleStoreCreditSection);
 		} else {
 			checks.add(
 				"El país NO tiene asociado Saldo en Cuenta -> Aparece la sección de \"Transferencia bancaria\" y no la de \"Saldo en cuenta\"",
-				isVisibleTransferenciaSection && !isVisibleStoreCreditSection, Defect);
+				isVisibleTransferenciaSection && !isVisibleStoreCreditSection);
 		}
 		return checks;
 	}
@@ -61,8 +61,7 @@ public class PageReembolsosSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el saldo en cuenta que esperamos: <b>#{saldoCtaEsperado}</b>",
-		level=Defect)
+		description="Aparece el saldo en cuenta que esperamos: <b>#{saldoCtaEsperado}</b>")
 	private boolean checkIsOkSaldoEnCuenta(float saldoCtaEsperado) {
 		float saldoCtaPage = pageReembolsos.getImporteStoreCredit();
 		return (saldoCtaEsperado==saldoCtaPage);
@@ -82,8 +81,7 @@ public class PageReembolsosSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Los campos de input Banco, Titular e IBAN se hacen visibles",
-		level=Defect)
+		description="Los campos de input Banco, Titular e IBAN se hacen visibles")
 	private boolean checkInputsVisiblesAfterClickTransferencia() {
 	   return pageReembolsos.isVisibleInputsTransf();
 	}
@@ -110,7 +108,7 @@ public class PageReembolsosSteps extends StepBase {
 			"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + seconds + " segundos)",
 			pageReembolsos.isVisibleTextBancoUntil(seconds) &&
 			pageReembolsos.isVisibleTextTitular() &&
-			pageReembolsos.isVisibleTextIBAN(), Defect);
+			pageReembolsos.isVisibleTextIBAN());
 		
 		checks.add(
 			"Aparece seleccionado el radiobutton de \"Transferencia bancaria\"",
@@ -136,7 +134,7 @@ public class PageReembolsosSteps extends StepBase {
 	   	
 	   	checks.add(
 			"Aparece un saldo >= 0",
-			pageReembolsos.getImporteStoreCredit()>=0, Defect);
+			pageReembolsos.getImporteStoreCredit()>=0);
 	   	
 	   	return checks;
 	}

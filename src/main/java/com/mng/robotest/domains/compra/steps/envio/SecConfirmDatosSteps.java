@@ -19,8 +19,7 @@ public class SecConfirmDatosSteps extends StepBase {
 	private final SecConfirmDatos secConfirmDatos = modalDroppoints.getSecConfirmDatos();
 	
 	@Validation (
-		description="Es visible la capa de confirmación de los datos (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Es visible la capa de confirmación de los datos (la esperamos hasta #{seconds} segundos)")
 	public boolean validateIsVisible(int seconds) {
 		return (secConfirmDatos.isVisibleUntil(seconds));
 	}
@@ -62,11 +61,11 @@ public class SecConfirmDatosSteps extends StepBase {
 		dataPedido.setDireccionEnvio(textDireccionEnvioCompleta);
 		checks.add(
 			"Se modifica la dirección de envío por la del Delivery Point (" + dataDp.getDireccion() + ")",
-			textDireccionEnvioCompleta.contains(dataDp.getDireccion()), Defect);
+			textDireccionEnvioCompleta.contains(dataDp.getDireccion()));
 		
 		checks.add(
 			"Se modifica el código postal de envío por el del Delivery Point (" + dataDp.getCPandPoblacion() + ")",
-			textDireccionEnvioCompleta.contains(dataDp.getCPandPoblacion()), Defect);
+			textDireccionEnvioCompleta.contains(dataDp.getCPandPoblacion()));
 		
 		return checks;
 	}

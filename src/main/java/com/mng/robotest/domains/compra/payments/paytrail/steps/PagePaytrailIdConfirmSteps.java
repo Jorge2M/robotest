@@ -18,7 +18,7 @@ public class PagePaytrailIdConfirmSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	   	checks.add(
 			"Aparece la página de introducción del ID de confirmación",
-			pagePaytrailIdConfirm.isPage(), Defect);
+			pagePaytrailIdConfirm.isPage());
 	   	
 	   	checks.add(
 			"Aparece el importe de la compra: " + importeTotal,

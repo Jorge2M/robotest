@@ -6,8 +6,6 @@ import com.mng.robotest.domains.compra.payments.billpay.pageobjects.SecBillpay;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class SecBillpaySteps extends StepBase {
 	
 	private final SecBillpay secBillpay = new SecBillpay();
@@ -19,12 +17,11 @@ public class SecBillpaySteps extends StepBase {
 			"Aparecen 3 desplegables para la selección de la fecha de nacimiento",
 			secBillpay.isPresentSelectBirthBirthYear() &&
 			secBillpay.isPresentSelectBirthMonth() &&
-			secBillpay.isPresentSelectBirthDay(), 
-			Defect); 
+			secBillpay.isPresentSelectBirthDay()); 
 	 	
 	 	checks.add(
 			"Aparece el check de \"Acepto\"",
-			secBillpay.isPresentRadioAcepto(), Defect); 
+			secBillpay.isPresentRadioAcepto()); 
 	 	
 	 	return checks;
 	}
@@ -48,15 +45,15 @@ public class SecBillpaySteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el campo para la introducción del titular",
-			secBillpay.isPresentInputTitular(), Defect);
+			secBillpay.isPresentInputTitular());
 	 	
 	 	checks.add(
 			"Aparece el campo para la introducción del IBAN",
-	 		secBillpay.isPresentInputIBAN(), Defect);
+	 		secBillpay.isPresentInputIBAN());
 	 	
 	 	checks.add(
 			"Aparece el campo para la introducción del BIC",
-			secBillpay.isPresentInputBIC(), Defect);
+			secBillpay.isPresentInputBIC());
 	 	
 	 	return checks;
 	}

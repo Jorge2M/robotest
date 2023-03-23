@@ -19,7 +19,7 @@ public class PageAmexInputCipSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Aparece la página de introducción del CIP (la esperamos hasta " + seconds + " segundos)",
-			pageAmexInputCip.isPageUntil(seconds), Defect);
+			pageAmexInputCip.isPageUntil(seconds));
 	 	
 	 	checks.add(
 			"Aparece el importe de la operación " + importeTotal,

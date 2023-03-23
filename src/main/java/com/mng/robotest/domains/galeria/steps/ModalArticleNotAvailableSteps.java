@@ -35,11 +35,11 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 		boolean isVisibleRPGD = modalArticleNotAvailable.isVisibleRPGD(2);
 		checks.add(
 			"Si aparece el modal de avisame",
-			isVisibleModal, Defect);
+			isVisibleModal);
 		
 		checks.add(
 			"Si aparece la descripcion de RPGD de usuario",
-			isVisibleRPGD, Defect);
+			isVisibleRPGD);
 		
 		return checks;
 	}
@@ -54,8 +54,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el modal de petición confirmada OK (lo esperamos #{seconds} segundos)",
-		level=Defect)
+		description="Aparece el modal de petición confirmada OK (lo esperamos #{seconds} segundos)")
 	public boolean checkModalAvisoOkVisible(int seconds) {
 		return modalArticleNotAvailable.isModalAvisoOkVisible(seconds);
 	}
@@ -69,8 +68,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece el modal de petición confirmada OK (lo esperamos #{seconds} segundos)",
-		level=Defect)	
+		description="Desaparece el modal de petición confirmada OK (lo esperamos #{seconds} segundos)")	
 	public boolean checkModalAvisoOkInvisible(int seconds) {
 		return modalArticleNotAvailable.isModalAvisoOkInvisible(seconds);
 	}	

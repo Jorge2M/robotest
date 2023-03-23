@@ -10,8 +10,6 @@ import com.mng.robotest.domains.manto.pageobjects.PageSelTda;
 import com.mng.robotest.domains.manto.pageobjects.SecCabecera;
 import com.mng.robotest.test.data.TiendaManto;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageSelTdaMantoSteps extends StepMantoBase {
 	
 	private static final String TAG_TIENDA = "@TagTienda";
@@ -34,8 +32,7 @@ public class PageSelTdaMantoSteps extends StepMantoBase {
 	}
 	
 	@Validation(
-		description="Aparece la página del Menú principal de Manto donde se encuentran todas las opciones de éste",
-		level=Defect)
+		description="Aparece la página del Menú principal de Manto donde se encuentran todas las opciones de éste")
 	private boolean checkIsPageMenusManto() {
 		return (new PageMenusManto().isPage());
 	}

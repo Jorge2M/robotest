@@ -7,8 +7,6 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.login.pageobjects.PageRecuperaPasswd;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageRecuperaPasswdSteps extends StepBase {
 	
 	private final PageRecuperaPasswd pageRecuperaPasswd = new PageRecuperaPasswd();
@@ -19,11 +17,11 @@ public class PageRecuperaPasswdSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + seconds + " segundos)",
-			pageRecuperaPasswd.isPageUntil(seconds), Defect);
+			pageRecuperaPasswd.isPageUntil(seconds));
 		
 		checks.add(
 			"Aparece el campo para la introducción del correo",
-			pageRecuperaPasswd.isPresentInputCorreo(), Defect);
+			pageRecuperaPasswd.isPresentInputCorreo());
 		
 		return checks;
 	}
@@ -44,11 +42,11 @@ public class PageRecuperaPasswdSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece el mensaje de \"Revisa tu email\" (lo esperamos hasta " + seconds + " segundos)",
-			pageRecuperaPasswd.isVisibleRevisaTuEmailUntil(seconds), Defect);
+			pageRecuperaPasswd.isVisibleRevisaTuEmailUntil(seconds));
 		
 		checks.add(
 			"Aparece el botón \"Ir de Shopping\"",
-			pageRecuperaPasswd.isVisibleButtonIrDeShopping(), Defect);
+			pageRecuperaPasswd.isVisibleButtonIrDeShopping());
 		
 		return checks;
 	}

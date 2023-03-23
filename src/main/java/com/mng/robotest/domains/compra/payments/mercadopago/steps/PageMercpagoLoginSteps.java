@@ -7,8 +7,6 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.mercadopago.pageobjects.PageMercpagoLogin;
 import com.mng.robotest.test.beans.Pago;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageMercpagoLoginSteps extends StepBase {
 
 	private final PageMercpagoLogin pageMercpagoLogin = new PageMercpagoLogin();
@@ -18,12 +16,12 @@ public class PageMercpagoLoginSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de identificación de Mercadopago",
-			pageMercpagoLogin.isPage(), Defect);
+			pageMercpagoLogin.isPage());
 		
 		checks.add(
 			"En la página figuran los campos de identificación (email + password)",
 			pageMercpagoLogin.isInputUserVisible() &&
-			pageMercpagoLogin.isInputPasswordVisible(), Defect);
+			pageMercpagoLogin.isInputPasswordVisible());
 		
 		return checks;
 	}

@@ -208,9 +208,7 @@ public class MenuSteps extends StepBase {
 		GenericChecks.checkDefault();
 	}
 	
-	@Validation (
-		description="Son visibles los submenus <b>#{menu.getSubMenus()}</b>",
-		level=Defect)
+	@Validation (description="Son visibles los submenus <b>#{menu.getSubMenus()}</b>")
 	private boolean checkVisibilitySubmenus(MenuWeb menu) {
 		return menu.isVisibleSubMenus();
 	}

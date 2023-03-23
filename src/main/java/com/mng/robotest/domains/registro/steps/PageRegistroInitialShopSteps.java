@@ -9,15 +9,12 @@ import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroInitialShop;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageRegistroInitialShopSteps extends StepBase {
 
 	private final PageRegistroInitialShop pageRegistroInitial = new PageRegistroInitialShop();
 	
 	@Validation (
-		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)")
 	public boolean checkIsPageUntil(int seconds) {
 		return pageRegistroInitial.isPageUntil(seconds);
 	}
@@ -64,8 +61,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		checkPersonalInformationInfoVisible();
 	}	
 	@Validation(
-	    description="Aparece el apartado de \"Collection and use of your personal information\"",
-	    level=Defect)	
+	    description="Aparece el apartado de \"Collection and use of your personal information\"")	
 	public boolean checkPersonalInformationInfoVisible() {
 		return pageRegistroInitial.checkPersonalInformationInfoVisible();
 	}
@@ -86,9 +82,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		}
 		checkIsModalPoliticaPrivacidadVisible();
 	}
-	@Validation (
-		description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"",
-		level=Defect)
+	@Validation (description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"")
 	public boolean checkIsModalPoliticaPrivacidadVisible() {
 		return pageRegistroInitial.isModalPoliticaPrivacidadVisible();
 	}	
@@ -125,9 +119,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		checkIsModalPoliticaPrivacidadInvisible();
 	}
 	
-	@Validation (
-		description="Desaparece el modal de \"Cómo protegemos y tratamos tus datos?\"",
-		level=Defect)
+	@Validation (description="Desaparece el modal de \"Cómo protegemos y tratamos tus datos?\"")
 	public boolean checkIsModalPoliticaPrivacidadInvisible() {
 		return pageRegistroInitial.isModalPoliticaPrivacidadInvisible(2);
 	}

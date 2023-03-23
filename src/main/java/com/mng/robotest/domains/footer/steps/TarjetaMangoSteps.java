@@ -104,7 +104,7 @@ public class TarjetaMangoSteps extends StepBase {
   		var checks = ChecksTM.getNew();
 	 	checks.add(
 	 		"Aparece la página de Solicitud de tu Tarjeta MANGO",
-	 		pageInputDataSolMangoCard.isPage2(), Defect);
+	 		pageInputDataSolMangoCard.isPage2());
 	 	
 	 	try {
 			//Nos posicionamos en el iframe central para recorrer contenido (datos personales y datos bancarios).
@@ -115,7 +115,7 @@ public class TarjetaMangoSteps extends StepBase {
 		 	
 		 	checks.add(
 		 		"Aparece el apartado \"Datos bancarios\"",
-		 		pageInputDataSolMangoCard.isPresentDatosBancariosPage2(), Defect);
+		 		pageInputDataSolMangoCard.isPresentDatosBancariosPage2());
 		 	
 		 	checks.add(
 		 		"Aparece el apartado \"Datos de contacto\"",

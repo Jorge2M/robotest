@@ -38,7 +38,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	 	if (!isPageInitCheckout) {
 		 	checks.add(
 				"Si no ha aparecido la esperamos " + (seconds * 2) + " segundos más",
-				page1DktopCheckout.isPageUntil(seconds*2), Defect);
+				page1DktopCheckout.isPageUntil(seconds*2));
 	 	}
 	 	checks.add(
 			"Cuadran los artículos a nivel de la Referencia e Importe",
@@ -53,7 +53,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la página inicial del Checkout (la esperamos un máximo de " + seconds + " segundos)<br>",
-			page1DktopCheckout.isPageUntil(seconds), Defect);
+			page1DktopCheckout.isPageUntil(seconds));
 		
 		checks.add(
 			"Aparecen los datos introducidos:<br>" + 
@@ -73,7 +73,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + seconds + " segundos)",
-			page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(seconds), Defect);
+			page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(seconds));
 	 	
 		var descuento = new Descuento(app, DiscountType.EMPLEADO);
 	 	checks.add(
@@ -85,15 +85,13 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="<b>Sí</b> aparece el texto del vale <b>#{valePais.getCodigoVale()}</b> (\"#{valePais.getTextoCheckout()}\")",
-		level=Defect)
+		description="<b>Sí</b> aparece el texto del vale <b>#{valePais.getCodigoVale()}</b> (\"#{valePais.getTextoCheckout()}\")")
 	public boolean checkIsVisibleTextVale(ValeDiscount valePais) {
 		return (page1DktopCheckout.checkTextValeCampaingIs(valePais.getTextoCheckout()));
 	}
 	
 	@Validation (
-		description="<b>No</b> aparece el texto del vale <b>#{valePais.getCodigoVale()}</b> (\"#{valePais.getTextoCheckout()}\")",
-		level=Defect)
+		description="<b>No</b> aparece el texto del vale <b>#{valePais.getCodigoVale()}</b> (\"#{valePais.getTextoCheckout()}\")")
 	public boolean checkIsNotVisibleTextVale(ValeDiscount valePais) {
 		return (!page1DktopCheckout.checkTextValeCampaingIs(valePais.getTextoCheckout()));
 	}
@@ -122,7 +120,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		boolean isVisibleError = page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(seconds);
 	 	checks.add(
 			"<b>No</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
-			!isVisibleError, Defect);
+			!isVisibleError);
 		
 		return checks;
 	}
@@ -135,7 +133,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 			"En los artículos a los que aplica, el descuento es de " +  
 			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + "):" +
 			dataTest.getDataBag().getListArtDescHTML(),
-			page1DktopCheckout.validateArticlesAndDiscount(descuento), Defect);
+			page1DktopCheckout.validateArticlesAndDiscount(descuento));
 	 	return checks;
 	}
 	
@@ -169,11 +167,11 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Desaparece el campo de Input del código de vendedor (lo esperamos hasta " + seconds + " segundos)",
-			!page1DktopCheckout.isVisibleInputVendedorVOTF(seconds), Defect);
+			!page1DktopCheckout.isVisibleInputVendedorVOTF(seconds));
 	 	
 	 	checks.add(
 			"En su lugar se pinta el código de vendedor " + codigoVendedor,
-			page1DktopCheckout.isVisibleCodigoVendedorVOTF(codigoVendedor), Defect);
+			page1DktopCheckout.isVisibleCodigoVendedorVOTF(codigoVendedor));
 	 	
 	 	return checks;
 	}

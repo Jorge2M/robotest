@@ -5,8 +5,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.yandex.pageobjects.PageYandexMoneyResult;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageYandexMoneyResultSteps extends StepBase {
 	
 	private final PageYandexMoneyResult pageYandexMoneyResult = new PageYandexMoneyResult();
@@ -16,11 +14,11 @@ public class PageYandexMoneyResultSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página de resultado de Yandex Money",
-			pageYandexMoneyResult.isPage(), Defect);
+			pageYandexMoneyResult.isPage());
 	 	
 	 	checks.add(
 			"Aparece un mensaje de transferencia con éxito",
-			pageYandexMoneyResult.isVisibleMsgTransferOk(), Defect);
+			pageYandexMoneyResult.isVisibleMsgTransferOk());
 	 	
 		return checks;   
 	}

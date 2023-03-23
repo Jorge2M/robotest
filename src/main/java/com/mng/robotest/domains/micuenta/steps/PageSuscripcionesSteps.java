@@ -65,7 +65,7 @@ public class PageSuscripcionesSteps extends StepBase {
 			if (linesMarked.contains(linea)) {
 				checks.add(
 				    "Aparecen marcada la suscripción de <b>" + linea + "</b>",
-				    pageSuscripciones.isNewsletterMarcada(linea.name()), Defect);
+				    pageSuscripciones.isNewsletterMarcada(linea.name()));
 			} else {
 				checks.add(
 					"Aparecen desmarcada la suscripción de <b>" + linea + "</b>",
@@ -88,8 +88,7 @@ public class PageSuscripcionesSteps extends StepBase {
 	}
 
 	@Validation(
-		description="1) Aparece una pantalla de resultado OK (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece una pantalla de resultado OK (la esperamos hasta #{seconds} segundos)")
 	private boolean validateIsPageResult (int seconds) {
 		return pageSuscripciones.isPageResOKUntil(seconds);
 	}

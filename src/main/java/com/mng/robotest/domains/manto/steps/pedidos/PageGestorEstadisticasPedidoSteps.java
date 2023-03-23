@@ -7,8 +7,6 @@ import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.manto.pageobjects.PageGestorEstadisticasPedido;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageGestorEstadisticasPedidoSteps extends StepMantoBase {
 
 	private final PageGestorEstadisticasPedido pageGestorEstadisticasPedido = new PageGestorEstadisticasPedido();
@@ -18,15 +16,15 @@ public class PageGestorEstadisticasPedidoSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Estamos en la página " + PageGestorEstadisticasPedido.TITULO,
-			pageGestorEstadisticasPedido.isPage(), Defect);
+			pageGestorEstadisticasPedido.isPage());
 	 	
 	 	checks.add(
 			"Aparece el input de fecha de inicio",
-			pageGestorEstadisticasPedido.isVisibleStartDateInput(), Defect);
+			pageGestorEstadisticasPedido.isVisibleStartDateInput());
 	 	
 	 	checks.add(
 			"Aparece el input de fecha fin",
-			pageGestorEstadisticasPedido.isVisibleEndDateInput(), Defect);
+			pageGestorEstadisticasPedido.isVisibleEndDateInput());
 	 	
 	 	return checks;
 	}
@@ -47,15 +45,15 @@ public class PageGestorEstadisticasPedidoSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la tabla de información",
-			pageGestorEstadisticasPedido.isTablaInformacionVisible(), Defect);
+			pageGestorEstadisticasPedido.isTablaInformacionVisible());
 	 	
 	 	checks.add(
 			"Las columnas de comparación en verde contienen \"0 €\"",
-			pageGestorEstadisticasPedido.isColumnaCompararVerdeZero(), Defect);
+			pageGestorEstadisticasPedido.isColumnaCompararVerdeZero());
 	 	
 	 	checks.add(
 			"Las columnas de comparación en rojo contienen \"0 %\"",
-			pageGestorEstadisticasPedido.isColumnaCompararRojoZero(), Defect);
+			pageGestorEstadisticasPedido.isColumnaCompararRojoZero());
 	 	
 	 	return checks;
 	}
@@ -74,11 +72,11 @@ public class PageGestorEstadisticasPedidoSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Las columnas de comparación en verde no contienen \"0 €\"",
-			pageGestorEstadisticasPedido.isColumnaCompararVerdeNoZero(), Defect);
+			pageGestorEstadisticasPedido.isColumnaCompararVerdeNoZero());
 	 	
 	 	checks.add(
 			"Las columnas de comparación en rojo no contienen \"0 %\"",
-			pageGestorEstadisticasPedido.isColumnaCompararRojaNoZero(), Defect);
+			pageGestorEstadisticasPedido.isColumnaCompararRojaNoZero());
 	 	
 		return checks;
 	}

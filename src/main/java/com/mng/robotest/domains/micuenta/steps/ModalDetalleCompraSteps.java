@@ -40,11 +40,11 @@ public class ModalDetalleCompraSteps extends StepBase {
 		seconds = 2;
 		checks.add(
 			"Son visibles los datos del tícket (los esperamos hasta " + seconds + " segundos)",
-			pageDetalleCompra.isVisibleDataTicket(seconds), Defect);
+			pageDetalleCompra.isVisibleDataTicket(seconds));
 		
 		checks.add(
 			"Figura un id de tícket (lo esperamos hasta " + seconds + " segundos)",
-			pageDetalleCompra.isVisibleIdTicket(seconds), Defect);
+			pageDetalleCompra.isVisibleIdTicket(seconds));
 		
 		checks.add(
 			"Figura alguna prenda (la esperamos hasta " + seconds + " segundos)",
@@ -88,9 +88,7 @@ public class ModalDetalleCompraSteps extends StepBase {
 		pageDetalleCompra.gotoListaMisCompras();
 	}
 	
-	@Validation (
-		description="Es visible la dirección <b>#{address}</b>",
-		level=Defect)
+	@Validation (description="Es visible la dirección <b>#{address}</b>")
 	public boolean checkIsVisibleDirection(String address) {
 		return pageDetalleCompra.isVisibleDireccionEnvio(address);
 	}

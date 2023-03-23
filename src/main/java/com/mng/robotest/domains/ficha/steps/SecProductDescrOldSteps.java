@@ -10,8 +10,6 @@ import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypeStatePanel;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class SecProductDescrOldSteps {
 	
 	private final SecProductDescrOld secProductDescrOld = new SecProductDescrOld();
@@ -26,7 +24,7 @@ public class SecProductDescrOldSteps {
 			}
 		  	checks.add(
 				"El panel <b>" + typePanel + "</b> está en estado <b>" + stateExpected + "</b>",
-				secProductDescrOld.getStatePanel(typePanel)==stateExpected, Defect);
+				secProductDescrOld.getStatePanel(typePanel)==stateExpected);
 		}
 		return checks;
 	}
@@ -49,8 +47,7 @@ public class SecProductDescrOldSteps {
 	}
 	
 	@Validation (
-		description="La sección ha de quedar en estado <b>#{stateExpectedAfterClick}</b> (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="La sección ha de quedar en estado <b>#{stateExpectedAfterClick}</b> (lo esperamos hasta #{seconds} segundos)")
 	private boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int seconds) {
 		return (secProductDescrOld.isPanelInStateUntil(typePanel, stateExpectedAfterClick, seconds));
 	}

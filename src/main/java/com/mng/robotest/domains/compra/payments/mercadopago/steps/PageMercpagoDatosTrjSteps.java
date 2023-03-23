@@ -23,8 +23,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Estamos en la página de introducción de los datos de la tarjeta (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Estamos en la página de introducción de los datos de la tarjeta (la esperamos hasta #{seconds} segundos)")
 	public boolean validaIsPage(int seconds) {
 		return (pageMercpagoDatosTrj.isPageUntil(seconds));
 	}	

@@ -14,16 +14,13 @@ import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 import static com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta.Link.*;
-import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageMiCuentaSteps extends StepBase {
 	
 	private final PageMiCuenta pageMiCuenta = new PageMiCuenta();
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	
-	@Validation(
-		description="Aparece la página de \"Mi cuenta\" (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+	@Validation(description="Aparece la página de \"Mi cuenta\" (la esperamos hasta #{seconds} segundos)")
 	public boolean validateIsPage (int seconds) {
 		return pageMiCuenta.isPageUntil(seconds);
 	}

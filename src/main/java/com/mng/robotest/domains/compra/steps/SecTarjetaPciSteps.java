@@ -32,17 +32,17 @@ public class SecTarjetaPciSteps extends StepBase {
 			secTarjetaPci.isPresentInputNumberUntil(1) &&
 			secTarjetaPci.isPresentInputTitular() &&
 			secTarjetaPci.isPresentSelectMes() &&
-			secTarjetaPci.isPresentSelectAny(), Defect);  
+			secTarjetaPci.isPresentSelectAny());  
 	 	
 	 	if (pago.getTypePago()!=TypePago.BANCONTACT) {
 		 	checks.add(
 				"Aparece también el campo <b>CVC</b>",
-				secTarjetaPci.isPresentInputCvc(), Defect); 
+				secTarjetaPci.isPresentInputCvc()); 
 	 	}
 		if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0) {
 		 	checks.add(
 				"Aparece también el campo <b>DNI(C.C)</b>",
-				secTarjetaPci.isPresentInputDni(), Defect); 
+				secTarjetaPci.isPresentInputDni()); 
 		}
 		return checks;
 	}

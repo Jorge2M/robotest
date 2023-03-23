@@ -41,9 +41,7 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 		validateInputDataOk();
 	}
 
-	@Validation(
-		description="No aparece ningún mensaje de error asociado a los campos de entrada",
-		level=Defect)
+	@Validation(description="No aparece ningún mensaje de error asociado a los campos de entrada")
 	public boolean validateInputDataOk() {
 		return (pageRegistroDirec.getNumberMsgInputInvalid() <= 0);
 	}

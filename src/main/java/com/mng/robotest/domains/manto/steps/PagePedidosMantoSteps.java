@@ -87,8 +87,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	}
 	
 	@Validation (
-		description="Tenemos código de pedido #{dPedidoPrueba.getCodpedido()}",
-		level=Defect)
+		description="Tenemos código de pedido #{dPedidoPrueba.getCodpedido()}")
 	private boolean checkCodePedidoOk(DataPedido dPedidoPrueba) {
 		return (!dPedidoPrueba.getCodpedido().equals(""));
 	}
@@ -111,8 +110,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	}
 
 	@Validation (
-		description="El pedido tiene las referencias #{referencias.toString()}",
-		level=Defect)
+		description="El pedido tiene las referencias #{referencias.toString()}")
 	private boolean checkPedidoWithReferences(List<String> referencias, DataPedido dPedidoPrueba) {
 		return (!dPedidoPrueba.getDataBag().getListArticulos().isEmpty());
 	}
@@ -139,11 +137,11 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni(),
-			!dPedidoPrueba.getPago().getDni().equals(""), Defect);
+			!dPedidoPrueba.getPago().getDni().equals(""));
 	 	
 	 	checks.add(
 			"Tenemos el Email del cliente " + dPedidoPrueba.getPago().getUseremail(),
-			!dPedidoPrueba.getPago().getUseremail().equals(""), Defect);
+			!dPedidoPrueba.getPago().getUseremail().equals(""));
 	 	
 		return checks;
 	}
@@ -159,9 +157,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		checkIsTiendaFisica(dPedidoPrueba.getDataDeliveryPoint().getCodigo());
 	}
 	
-	@Validation (
-		description="Tenemos la tienda física #{codigoDeliveryPoint}",
-		level=Defect)
+	@Validation (description="Tenemos la tienda física #{codigoDeliveryPoint}")
 	private boolean checkIsTiendaFisica(String codigoDeliveryPoint) {
 		return (!codigoDeliveryPoint.equals(""));
 	}

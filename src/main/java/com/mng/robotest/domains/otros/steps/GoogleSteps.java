@@ -32,7 +32,7 @@ public class GoogleSteps extends PageBase {
 		int seconds = 3;
 		checks.add(
 			"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + seconds + " segundos)",
-			pageGoogle.validaFirstLinkContainsUntil("Mango", seconds), Defect);	
+			pageGoogle.validaFirstLinkContainsUntil("Mango", seconds));	
 		
 		checks.add(
 			"El 1er link no-anuncion no contiene \"robots.txt\"",
@@ -49,9 +49,7 @@ public class GoogleSteps extends PageBase {
 		checkInitialPageShop();
 	}
 	
-	@Validation (
-		description="Aparece la página de <b>Landing</b> o <b>Prehome</b>",
-		level=Defect)	
+	@Validation (description="Aparece la página de <b>Landing</b> o <b>Prehome</b>")
 	private boolean checkInitialPageShop() {
 		boolean isPageLanding = (new PageLanding()).isPage();
 		boolean isPagePrehome = new PagePrehome().isPage();

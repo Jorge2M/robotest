@@ -6,15 +6,12 @@ import com.mng.robotest.domains.compra.payments.ideal.pageobjects.SecIdeal.Banco
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class SecIdealSteps extends StepBase {
 
 	private final SecIdeal secIdeal = new SecIdeal();
 	
 	@Validation (
-		description="Aparece el bloque de selección del banco",
-		level=Defect)
+		description="Aparece el bloque de selección del banco")
 	public boolean validateIsSectionOk() {
 		int seconds = 1;
 		return (secIdeal.isVisibleSelectorOfBank(seconds));

@@ -26,7 +26,7 @@ public class PageYandexPayingByCodeSteps extends StepBase {
 	 	
 	 	checks.add(
 			"Aparece un <b>PaymentCode</b>",
-			pageYandexPayingByCode.isVisiblePaymentCode(), Defect);
+			pageYandexPayingByCode.isVisiblePaymentCode());
 	 	
 	 	return checks;
 	}

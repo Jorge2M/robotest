@@ -7,15 +7,12 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeConseguirPorLikes;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageHomeConseguirPorLikesSteps extends StepBase {
 
 	private final PageHomeConseguirPorLikes pageHomeConseguirPorLikes = new PageHomeConseguirPorLikes();
 	
 	@Validation (
-		description="Aparece el botón de \"Conseguir por Likes\" (esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece el botón de \"Conseguir por Likes\" (esperamos hasta #{seconds} segundos)")
 	public boolean checkIsPage(int seconds) {
 		return pageHomeConseguirPorLikes.isPage(seconds);
 	}
@@ -35,7 +32,7 @@ public class PageHomeConseguirPorLikesSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + seconds + " segundos)",
-			pageHomeConseguirPorLikes.isVisibleIconOperationDoneUntil(seconds), Defect);
+			pageHomeConseguirPorLikes.isVisibleIconOperationDoneUntil(seconds));
 
 		return checks;
 	}	

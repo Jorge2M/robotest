@@ -4,8 +4,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.beans.Pais;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class Page1IdentCheckoutSteps extends StepBase {
 	
 	private final SecSoyNuevoSteps secSoyNuevoSteps = new SecSoyNuevoSteps();
@@ -13,8 +11,7 @@ public class Page1IdentCheckoutSteps extends StepBase {
 	
 
 	@Validation (
-		description="Aparece el formulario correspondiente a la identificación (lo esperamos hasta #{seconds} segs)",
-		level=Defect)
+		description="Aparece el formulario correspondiente a la identificación (lo esperamos hasta #{seconds} segs)")
 	public boolean validateIsPage(int seconds) {
 		return (page1IdentCheckout.getSecSoyNuevo().isFormIdentUntil(seconds));
 	}

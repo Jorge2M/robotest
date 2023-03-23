@@ -5,15 +5,12 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.paypal.pageobjects.PagePaypalLogin;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PagePaypalLoginSteps extends StepBase {
 
 	private final PagePaypalLogin pagePaypalLogin = new PagePaypalLogin();
 	
 	@Validation (
-		description="Aparece la página de login (la esperamos hasta un máximo de #{seconds} segundos)",
-		level=Defect)
+		description="Aparece la página de login (la esperamos hasta un máximo de #{seconds} segundos)")
 	public boolean validateIsPageUntil(int seconds) {
 		return pagePaypalLogin.isPageUntil(seconds);
 	}

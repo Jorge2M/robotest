@@ -33,7 +33,7 @@ public class PageResultPagoTpvSteps extends StepBase {
 	 	}
 	 	checks.add(
 			"Aparece el código de pedido <b>" + codPedido + "</b>",
-			isVisibleCodPedido, Defect);
+			isVisibleCodPedido);
 	 	
 		dataPedido.setCodpedido(codPedido); 
 		dataPedido.setResejecucion(State.Ok);

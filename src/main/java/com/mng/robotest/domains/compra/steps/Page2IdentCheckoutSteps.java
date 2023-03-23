@@ -31,7 +31,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + seconds + " segundos)",
-			page2IdentCheckout.isPageUntil(seconds), Defect);
+			page2IdentCheckout.isPageUntil(seconds));
 	 	checks.add(
 			"Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña",
 			page2IdentCheckout.isInputPasswordAccordingEmail(emailYetExists), Warn);
@@ -59,8 +59,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Se hace clickable el botón \"Continuar\" (lo esperamos hasta #{seconds})",
-		level=Defect)
+		description="Se hace clickable el botón \"Continuar\" (lo esperamos hasta #{seconds})")
 	private boolean checkIsVisibleContiueButton(int seconds) {
 		return (page2IdentCheckout.isContinuarClickableUntil(seconds));
 	}
@@ -84,8 +83,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 	}
 			
 	@Validation (
-		description="Aparece el aviso a nivel de aduanas que indica que la dirección contiene carácteres no-latinos",
-		level=Defect)
+		description="Aparece el aviso a nivel de aduanas que indica que la dirección contiene carácteres no-latinos")
 	private boolean checkAvisoDireccionWithNoLatinCharacters() {
 		return (page2IdentCheckout.isDisplayedAvisoAduanas());
 	}

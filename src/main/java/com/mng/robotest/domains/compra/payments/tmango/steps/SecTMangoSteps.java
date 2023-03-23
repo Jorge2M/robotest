@@ -7,8 +7,6 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.domains.compra.payments.tmango.pageobjects.SecTMango;
 import com.mng.robotest.domains.compra.payments.tmango.pageobjects.SecTMango.TipoPago;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class SecTMangoSteps {
 
 	private final SecTMango secTMango = new SecTMango();
@@ -18,11 +16,11 @@ public class SecTMangoSteps {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el bloque de selección de la forma de pago",
-			secTMango.isVisibleUntil(0), Defect); 
+			secTMango.isVisibleUntil(0)); 
 	 	
 	 	checks.add(
 			"Aparece disponible la modalidad de pago:<br>" + secTMango.getDescripcionTipoPago(TipoPago.PAGO_HABITUAL), 
-			secTMango.isModalidadDisponible(SecTMango.TipoPago.PAGO_HABITUAL), Defect);
+			secTMango.isModalidadDisponible(SecTMango.TipoPago.PAGO_HABITUAL));
 	 	
 	 	return checks;
 	}

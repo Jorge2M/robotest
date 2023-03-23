@@ -19,8 +19,6 @@ import com.mng.robotest.domains.seo.beans.Sitemapindex;
 import com.mng.robotest.domains.seo.beans.Sitemapindex.Sitemap;
 import com.mng.robotest.domains.seo.pageobjects.PageSitemap;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class SeoSteps extends StepBase {
 
 	private static final String TAG_URL_ROBOTS = "@TagUrlRobots";
@@ -106,19 +104,19 @@ public class SeoSteps extends StepBase {
 
 		checks.add(
 				"Figura el siguiente contenido: <br>" + contRobots1.replace("\n", "<br>"),
-				driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase()), Defect);
+				driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase()));
 		if (app==AppEcom.outlet) {
 			checks.add(
 					"Figura el siguiente contenido: <br>" + contRobots2.replace("\n", "<br>"),
-					driver.getPageSource().contains(contRobots2), Defect);
+					driver.getPageSource().contains(contRobots2));
 		}
 		checks.add(
 				"Figura el siguiente contenido: <br>" + contRobots3.replace("\n", "<br>"),
-				driver.getPageSource().contains(contRobots3), Defect);
+				driver.getPageSource().contains(contRobots3));
 
 		checks.add(
 				"Figura el siguiente contenido: <br>" + contRobots4.replace("\n", "<br>"),
-				driver.getPageSource().contains(contRobots4), Defect);
+				driver.getPageSource().contains(contRobots4));
 
 		return checks;
 	}
@@ -138,7 +136,7 @@ public class SeoSteps extends StepBase {
 		boolean sitemapOk = new PageSitemap().isCorrect();
 		checks.add(
 				"Obtenemos un XML con formato de sitemap",
-				sitemapOk, Defect);
+				sitemapOk);
 
 		if (sitemapOk) {
 			Optional<Sitemapindex> sitemapIndexOpt = pageSitemap.getSiteMap();
@@ -157,7 +155,7 @@ public class SeoSteps extends StepBase {
 				}
 				checks.add(
 						"Todos los tags <b>lastmod</b> contienen la fecha del día: " + currentDay,
-						lastModsContainsCurrentDay, Defect);
+						lastModsContainsCurrentDay);
 			}
 		}
 

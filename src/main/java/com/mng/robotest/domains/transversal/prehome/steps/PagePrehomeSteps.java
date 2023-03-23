@@ -111,11 +111,11 @@ public class PagePrehomeSteps extends StepBase {
 		if (app==AppEcom.outlet) {
 			checks.add(
 				"Aparece una pantalla en la que el título contiene <b>outlet</b>",
-				title.contains("outlet"), Defect);
+				title.contains("outlet"));
 		} else {
 			checks.add(
 				"Aparece una pantalla en la que el título contiene <b>mango</b>",
-				title.contains("mango"), Defect);
+				title.contains("mango"));
 		}
 		return checks;
 	}

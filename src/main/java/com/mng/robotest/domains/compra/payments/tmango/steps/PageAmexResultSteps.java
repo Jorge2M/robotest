@@ -20,7 +20,7 @@ public class PageAmexResultSteps extends StepBase {
 		int seconds = 2;
 	 	checks.add(
 			"Aparece una página con un mensaje de OK (lo esperamos hasta " + seconds + " segundos)",
-			pageAmexResult.isResultOkUntil(seconds), Defect);
+			pageAmexResult.isResultOkUntil(seconds));
 	 	
 	 	checks.add(
 			"Aparece el importe de la operación " + importeTotal,
@@ -28,7 +28,7 @@ public class PageAmexResultSteps extends StepBase {
 	 	
 	 	checks.add(
 			"Aparece un botón \"CONTINUAR\"",
-			pageAmexResult.isPresentContinueButton(), Defect);
+			pageAmexResult.isPresentContinueButton());
 	 	
 	 	return checks;
 	}

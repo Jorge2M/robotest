@@ -21,11 +21,11 @@ public class ModalDirecEnvioOldSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Es visible el formulario para la introducción de la \"Dirección de envío\" (lo esperamos hasta #{seconds} seconds)",
-			modalDirecEnvio.isVisibleFormUntil(seconds), Defect);
+			modalDirecEnvio.isVisibleFormUntil(seconds));
 	 	
 	 	checks.add(
 			"Es visible el botón \"Actualizar\"",
-			modalDirecEnvio.isVisibleButtonActualizar(), Defect);
+			modalDirecEnvio.isVisibleButtonActualizar());
 	 	
 	 	return checks;
 	}

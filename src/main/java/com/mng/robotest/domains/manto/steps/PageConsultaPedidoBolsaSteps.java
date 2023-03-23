@@ -49,7 +49,7 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 			String textEnvioTienda = dataPedido.getDataDeliveryPoint().getCodigo();
 		 	checks.add(
 				"En los datos de envío aparece el texto <b>ENVIO A TIENDA " + textEnvioTienda + "</b>",
-				pageDetallePedido.get1rstLineDatosEnvioText().contains(textEnvioTienda), Defect);
+				pageDetallePedido.get1rstLineDatosEnvioText().contains(textEnvioTienda));
 	 	}
 	 	return checks;	 
 	}

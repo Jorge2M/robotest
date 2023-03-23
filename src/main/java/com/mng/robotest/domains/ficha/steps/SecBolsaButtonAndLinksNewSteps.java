@@ -41,9 +41,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		}
 	}
 	
-	@Validation (
-		description="Se scrolla hasta el apartado de \"Descriptión\"",
-		level=Defect)
+	@Validation (description="Se scrolla hasta el apartado de \"Descriptión\"")
 	private boolean checkScrollToDescription() {
 		return secDetalleProductNew.isVisibleUntil(3);
 	}
@@ -70,9 +68,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 	 	return checks;
 	}
 	
-	@Validation (
-		description="Aparece el bloque de \"KcSafety\"",
-		level=Defect)
+	@Validation (description="Aparece el bloque de \"KcSafety\"")
 	private boolean checkKcSafety() {
 		return (secDetalleProductNew.isVisibleBlockKcSafety());
 	}
@@ -91,7 +87,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		int seconds = 1;
 	 	checks.add(
 	 		"Aparece el modal para compartir a nivel social (lo esperamos hasta " + seconds + " segundos) ",
-	 		new ModCompartirNew().isVisibleUntil(seconds), Defect);
+	 		new ModCompartirNew().isVisibleUntil(seconds));
 		
 		boolean isPaisChina = (codigoPais.compareTo("720")==0);
 		for (IconSocial icon : IconSocial.values()) {

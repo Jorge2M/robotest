@@ -6,15 +6,12 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.sofort.pageobjects.PageSofort2on;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageSofort2onSteps extends StepBase {
 	
 	private final PageSofort2on pageSofort2on = new PageSofort2on();
 	
 	@Validation (
-		description="Aparece la página de selección del país/banco (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece la página de selección del país/banco (la esperamos hasta #{seconds} segundos)")
 	public boolean validaIsPageUntil(int seconds) {
 		return pageSofort2on.isPageUntil(seconds);
 	}

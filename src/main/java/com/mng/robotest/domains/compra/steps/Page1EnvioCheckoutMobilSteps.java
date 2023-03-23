@@ -29,7 +29,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		
 		checks.add(
 			"Aparece el botón de introducción del código promocional",
-			page1EnvioCheckoutMobil.isVisibleInputCodigoPromoUntil(0), Defect);
+			page1EnvioCheckoutMobil.isVisibleInputCodigoPromoUntil(0));
 		
 		if (!userLogged) {
 			checks.add(
@@ -77,16 +77,12 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		checkAppearsPageWithPaymentMethods();
 	}
 	
-	@Validation (
-		description="Aparece la página asociada al Paso-2",
-		level=Defect)
+	@Validation (description="Aparece la página asociada al Paso-2")
 	private boolean checkAppearsStep2() {
 		return new Page2DatosPagoCheckoutMobil().isPageUntil(3);
 	}
 	
-	@Validation (
-		description="Están presentes los métodos de pago",
-		level=Defect)
+	@Validation (description="Están presentes los métodos de pago")
 	private boolean checkAppearsPageWithPaymentMethods() {
 		return new PageCheckoutWrapper().isPresentMetodosPago();
 	}

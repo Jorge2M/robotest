@@ -11,9 +11,7 @@ public class ModEnvioYdevolNewSteps extends StepBase {
 
 	private final ModEnvioYdevolNew modEnvioYdev = new ModEnvioYdevolNew();
 	
-	@Validation (
-		description="Aparece el modal con los datos a nivel de envío y devolución",
-		level=Defect)
+	@Validation (description="Aparece el modal con los datos a nivel de envío y devolución")
 	public boolean checkIsVisible() {
 		return modEnvioYdev.isVisibleUntil(1);
 	}

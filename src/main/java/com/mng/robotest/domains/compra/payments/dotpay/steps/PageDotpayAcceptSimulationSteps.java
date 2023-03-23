@@ -21,7 +21,7 @@ public class PageDotpayAcceptSimulationSteps extends StepBase {
 	  	
 	  	checks.add(
 			"Figura un botón de aceptar rojo",
-			pageDotpayAcceptSimulation.isPresentRedButtonAceptar(), Defect);
+			pageDotpayAcceptSimulation.isPresentRedButtonAceptar());
 	  	
 	  	return checks;
 	}

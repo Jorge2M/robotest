@@ -6,15 +6,11 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.eps.pageobjects.PageEpsSimulador;
 import com.mng.robotest.domains.compra.payments.eps.pageobjects.PageEpsSimulador.TypeDelay;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageEpsSimuladorSteps extends StepBase {
 	
 	private final PageEpsSimulador pageEpsSimulador = new PageEpsSimulador();
 	
-	@Validation (
-		description="Aparece la página de simulación de EPS",
-		level=Defect)
+	@Validation (description="Aparece la página de simulación de EPS")
 	public boolean validateIsPage() { 
 		return pageEpsSimulador.isPage();
 	}

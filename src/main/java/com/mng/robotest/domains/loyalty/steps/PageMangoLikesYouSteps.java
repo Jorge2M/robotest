@@ -28,12 +28,12 @@ public class PageMangoLikesYouSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de <b>Mango likes you</b> (esperamos hasta " + seconds + " segundos)",
-			pageMangoLikesYou.checkIsPageUntil(4), Defect);
+			pageMangoLikesYou.checkIsPageUntil(4));
 		
 		int secondsButton = 10;
 		checks.add(
 			"Es visible el botón \"Compra con descuento\" (esperamos hasta " + secondsButton + " segundos)",
-			pageMangoLikesYou.isVisibleButton(COMPRA_CON_DESCUENTO, secondsButton), Defect);
+			pageMangoLikesYou.isVisibleButton(COMPRA_CON_DESCUENTO, secondsButton));
 		
 		checks.setNumberPoints(pageMangoLikesYou.getPoints());
 		checks.add(
@@ -66,12 +66,6 @@ public class PageMangoLikesYouSteps extends StepBase {
 		}
 	}
 	
-//	@Validation (
-//		description="Aparece la página específica de ayuda para MangoLikesYou (la esperamos #{seconds} segundos)",
-//		level=Defect)
-//	public boolean checkPageAyudaMangoLikesYouVisible(int seconds) {
-//		return pageMangoLikesYou.isPageAyudaMangoLikesYouVisible(seconds);
-//	}	
 	@Validation
     public ChecksTM checkPageAyudaMangoLikesYouVisible(int seconds) {
 		var checks = ChecksTM.getNew();
@@ -156,8 +150,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 			"- El usuario <b>#{dataPoints.getClienteEmisor()}</b> regala <b>#{dataPoints.getPointsRegalados()}</b> puntos a <b>#{dataPoints.getClienteReceptor()}</b><br>" +
 			"- El emisor tenía inicialmente #{dataPoints.getIniPointsEmisor()} y el receptor #{dataPoints.getIniPointsReceptor()}<br>" +
 			"- Validamos que el emisor tenga finalmente <b>#{dataPoints.getFinPointsEmisorExpected()}</b> y el receptor <b>#{dataPoints.getFinPointsReceptorExpected()}</b><br>" +
-			"- Info: lo que se ve realmente es que el emisor acaba teniendo #{dataPoints.getFinPointsEmisorReal()} y el receptor #{dataPoints.getFinPointsReceptorReal()}",
-		level=Defect)
+			"- Info: lo que se ve realmente es que el emisor acaba teniendo #{dataPoints.getFinPointsEmisorReal()} y el receptor #{dataPoints.getFinPointsReceptorReal()}")
 	public static boolean checkRegalarPointsOk(DataRegaloPuntos dataPoints) {
 		return (
 			dataPoints.getFinPointsEmisorExpected()==dataPoints.getFinPointsEmisorReal() &&

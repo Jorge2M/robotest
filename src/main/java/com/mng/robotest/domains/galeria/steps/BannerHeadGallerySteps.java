@@ -56,7 +56,7 @@ public class BannerHeadGallerySteps {
 		String textBanner = secBannerHeadDesktop.getText();
 		checks.add(
 				"El banner de cabecera contiene el texto <b>" + possibleTexts.get(0) + "</b>",
-				textBannersContainsPossibleText(textBanner, possibleTexts), Defect);
+				textBannersContainsPossibleText(textBanner, possibleTexts));
 		return checks;
 	}
 
@@ -74,14 +74,13 @@ public class BannerHeadGallerySteps {
 		checks.add(
 				"<b style=\"color:blue\">Rebajas</b></br>" +
 						"Es visible el banner de cabecera",
-				secBannerHeadDesktop.isVisible(), Defect);
+				secBannerHeadDesktop.isVisible());
 
 		String saleTraduction = UtilsTest.getSaleTraduction(idioma);
 		String textBanner = secBannerHeadDesktop.getText();
 		checks.add(
 				"El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o " + saleTraduction + ")",
-				UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction),
-				Defect);
+				UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction));
 		checks.add(
 				"El banner de cabecera contiene un link de \"Más info\"",
 				secBannerHeadDesktop.isVisibleLinkInfoRebajas(), Warn);
@@ -110,7 +109,7 @@ public class BannerHeadGallerySteps {
 		checks.add(
 				"<b style=\"color:blue\">Rebajas</b></br>" +
 						"El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")",
-				!secBannerHeadDesktop.isSalesBanner(idioma), Defect);
+				!secBannerHeadDesktop.isSalesBanner(idioma));
 
 		return checks;
 	}

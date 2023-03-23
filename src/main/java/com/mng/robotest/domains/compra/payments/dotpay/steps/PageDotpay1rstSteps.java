@@ -43,7 +43,7 @@ public class PageDotpay1rstSteps extends StepBase {
 	  	if (channel==Channel.desktop) {
 		  	checks.add(
 				"Figura un botón de pago",
-				pageDotpay1rst.isPresentButtonPago(), Defect);
+				pageDotpay1rst.isPresentButtonPago());
 	  	}
 	  	
 	  	return checks;

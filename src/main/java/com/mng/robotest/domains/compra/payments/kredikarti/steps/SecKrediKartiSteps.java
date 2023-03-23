@@ -8,8 +8,6 @@ import com.mng.robotest.domains.compra.payments.kredikarti.pageobjects.SecKrediK
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class SecKrediKartiSteps extends StepBase {
 
 	private final SecKrediKarti secKrediKarti = new SecKrediKarti(); 
@@ -23,8 +21,7 @@ public class SecKrediKartiSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Se carga la capa correspondiente al pago a plazos (en menos de #{seconds} segundos)",
-		level=Defect)
+		description="Se carga la capa correspondiente al pago a plazos (en menos de #{seconds} segundos)")
 	private boolean isVisibleCapaPagoAplazo(Channel channel, int seconds, WebDriver driver) {
 		return (secKrediKarti.isVisiblePagoAPlazoUntil(seconds));
 	}

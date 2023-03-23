@@ -11,7 +11,6 @@ import com.mng.robotest.domains.manto.pageobjects.PageGestorCheques.TablaCheque;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageGestorChequesSteps extends StepMantoBase {
 	
@@ -22,9 +21,7 @@ public class PageGestorChequesSteps extends StepMantoBase {
 		validateButtons();
 	}
 
-	@Validation(
-		description="1) Estamos en la página Gestord de Cheques",
-		level=Defect)
+	@Validation(description="1) Estamos en la página Gestord de Cheques")
 	public boolean validatePage() {
 		return (pageGestorCheques.isPage());
 	}
@@ -43,10 +40,10 @@ public class PageGestorChequesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparecen más de \"" + numPedidos + "\" pedidos",
-			pageGestorCheques.comprobarNumeroPedidos(numPedidos), Defect);
+			pageGestorCheques.comprobarNumeroPedidos(numPedidos));
 		checks.add(
 			"La columna correo de la primera línea es \""+ mail +"\"",
-			pageGestorCheques.isMailCorrecto(mail), Defect);
+			pageGestorCheques.isMailCorrecto(mail));
 		return checks;
 	}
 
@@ -65,14 +62,14 @@ public class PageGestorChequesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de" + PageGestorCheques.TITULO_DETALLES,
-			pageGestorCheques.isPageDetalles(), Defect);
+			pageGestorCheques.isPageDetalles());
 		
 		checks.add(
 			"Como email del apartado \"Cheque número\" aparece" + mail,
-			pageGestorCheques.comprobarMailDetallesCheque(mail), Defect);
+			pageGestorCheques.comprobarMailDetallesCheque(mail));
 		
 		checks.add("Como id del pedido aparece\"" + pedido  + "\"",
-			pageGestorCheques.comprobarPedidoDetallesCheque(pedido), Defect);
+			pageGestorCheques.comprobarPedidoDetallesCheque(pedido));
 		
 		return checks;
 	}
@@ -91,23 +88,23 @@ public class PageGestorChequesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Existe el botón de <b>Id del pedido</b>",
-			state(Present, ButtonsCheque.ID_PEDIDO.getBy()).wait(3).check(), Defect);
+			state(Present, ButtonsCheque.ID_PEDIDO.getBy()).wait(3).check());
 		
 		checks.add(
 			"Existe el botón de <b>Numero de cheque</b>",
-			state(Present, ButtonsCheque.NUM_CHEQUE.getBy()).wait(3).check(), Defect);
+			state(Present, ButtonsCheque.NUM_CHEQUE.getBy()).wait(3).check());
 		
 		checks.add(
 			"Existe el botón de <b>Id de compra</b>",
-			state(Clickable, ButtonsCheque.ID_COMPRA.getBy()).wait(3).check(), Defect);
+			state(Clickable, ButtonsCheque.ID_COMPRA.getBy()).wait(3).check());
 		
 		checks.add(
 			"Existe el botón de <b>Correo del receptor</b>",
-			state(Clickable, ButtonsCheque.CORREO_RECEPTOR.getBy()).wait(3).check(), Defect);
+			state(Clickable, ButtonsCheque.CORREO_RECEPTOR.getBy()).wait(3).check());
 		
 		checks.add(
 			"Existe el botón de <b>Correo del comprador</b>",
-			state(Clickable, ButtonsCheque.CORREO_COMPRADOR.getBy()).wait(3).check(), Defect);
+			state(Clickable, ButtonsCheque.CORREO_COMPRADOR.getBy()).wait(3).check());
 		
 		return checks;
 	}
@@ -117,18 +114,16 @@ public class PageGestorChequesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"En la tabla activo existe un apartado para <b>ACTIVO</b>",
-			state(Present, TablaCheque.ACTIVO.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.ACTIVO.getBy()).wait(3).check());
 		
 		checks.add(
 			"En la tabla activo existe un apartado para <b>CHARGEBACK</b>",
-			state(Present, TablaCheque.CHARGE_BACK.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.CHARGE_BACK.getBy()).wait(3).check());
 		
 		return checks;
 	}
 
-	@Validation(
-		description="1) Aparece el botón para <b>Volver a cheques</b>",
-		level=Defect)
+	@Validation(description="Aparece el botón para <b>Volver a cheques</b>")
 	public boolean validateReturnCheques() {
 		return (state(Present, ButtonsCheque.VOLVER_CHEQUES.getBy()).wait(3).check());
 	}
@@ -138,23 +133,23 @@ public class PageGestorChequesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"En la tabla divisa existe un apartado para <b>DIVISA</b>",
-			state(Present, TablaCheque.DIVISA.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.DIVISA.getBy()).wait(3).check());
 		
 		checks.add(
 			"En la tabla divisa existe un apartado para <b>VALOR TOTAL</b>",
-			state(Present, TablaCheque.VALOR_TOTAL.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.VALOR_TOTAL.getBy()).wait(3).check());
 		
 		checks.add(
 			"En la tabla divisa existe un apartado para <b>SALDO</b>",
-			state(Clickable, TablaCheque.SALDO.getBy()).wait(3).check(), Defect);
+			state(Clickable, TablaCheque.SALDO.getBy()).wait(3).check());
 		
 		checks.add(
 			"En la tabla divisa existe un apartado para <b>FECHA DE COMPRA</b>",
-			state(Clickable, TablaCheque.FECHA_COMPRA.getBy()).wait(3).check(), Defect);
+			state(Clickable, TablaCheque.FECHA_COMPRA.getBy()).wait(3).check());
 		
 		checks.add(
 			"En la tabla divisa existe un apartado para <b>VALIDEZ</b>",
-			state(Clickable, TablaCheque.VALIDEZ.getBy()).wait(3).check(), Defect);
+			state(Clickable, TablaCheque.VALIDEZ.getBy()).wait(3).check());
 		
 		return checks;
 	}
@@ -164,23 +159,23 @@ public class PageGestorChequesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Id</b>",
-			state(Present, TablaCheque.ID_PEDIDOS.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.ID_PEDIDOS.getBy()).wait(3).check());
 		
 		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Fecha</b>",
-			state(Present, TablaCheque.FECHA_PEDIDOS.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.FECHA_PEDIDOS.getBy()).wait(3).check());
 		
 		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Total</b>",
-			state(Present, TablaCheque.TOTAL_PEDIDOS.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.TOTAL_PEDIDOS.getBy()).wait(3).check());
 		
 		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Usuario</b>",
-			state(Present, TablaCheque.USUARIO_PEDIDOS.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.USUARIO_PEDIDOS.getBy()).wait(3).check());
 		
 		checks.add(
 			"En la tabla pedidos realizados existe un apartado para <b>Accion</b>",
-			state(Present, TablaCheque.ACTIVO_PEDIDOS.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.ACTIVO_PEDIDOS.getBy()).wait(3).check());
 		
 		return checks;
 	}
@@ -190,19 +185,19 @@ public class PageGestorChequesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Existe el boton para <b>Modificar</b>",
-			state(Present, ButtonsCheque.MODIFICAR.getBy()).wait(3).check(), Defect);
+			state(Present, ButtonsCheque.MODIFICAR.getBy()).wait(3).check());
 //		checks.add(
 //			"Existe el boton para <b>Añadir</b>",
-//			state(Present, ButtonsCheque.add.getBy()).wait(3).check(), Defect);
+//			state(Present, ButtonsCheque.add.getBy()).wait(3).check());
 		checks.add(
 			"Existe el boton para <b>Reenviar</b>",
-			state(Present, ButtonsCheque.REENVIAR.getBy()).wait(3).check(), Defect);
+			state(Present, ButtonsCheque.REENVIAR.getBy()).wait(3).check());
 		checks.add(
 			"Existe el boton para <b>Editar</b>",
-			state(Present, ButtonsCheque.EDITAR.getBy()).wait(3).check(), Defect);
+			state(Present, ButtonsCheque.EDITAR.getBy()).wait(3).check());
 //		checks.add(
 //			"Existe el boton para <b>Desactivar</b>",
-//			state(Present, ButtonsCheque.desactivar.getBy()).wait(3).check(), Defect);
+//			state(Present, ButtonsCheque.desactivar.getBy()).wait(3).check());
 		return checks;
 	}
 
@@ -224,9 +219,7 @@ public class PageGestorChequesSteps extends StepMantoBase {
 		validateDataCheque(cheque);
 	}
 
-	@Validation(
-		description="1) Aparece el numero de cheque <b>#{cheque}</b> en la tabla de datos",
-		level=Defect)
+	@Validation(description="Aparece el numero de cheque <b>#{cheque}</b> en la tabla de datos")
 	public boolean validateDataCheque(String cheque) {
 		return (!state(Present, ButtonsCheque.VOLVER_CHEQUES.getBy()).wait(3).check());
 	}
@@ -241,9 +234,7 @@ public class PageGestorChequesSteps extends StepMantoBase {
 		validateDataFromCheque();
 	}
 
-	@Validation(
-		description="1) El dato de <b>mail</b> corresponde a un registro <b>vacio</b>",
-		level=Defect)
+	@Validation(description="El dato de <b>mail</b> corresponde a un registro <b>vacio</b>")
 	public boolean validateEmptyMail() {
 		return (!pageGestorCheques.isMailCorrecto(""));
 	}
@@ -253,16 +244,16 @@ public class PageGestorChequesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Existe la tabla que contiene <b>Activo</b>",
-			state(Present, TablaCheque.ACTIVO.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.ACTIVO.getBy()).wait(3).check());
 		checks.add(
 			"Existe la tabla que contiene <b>Divisa</b>",
-			state(Present, TablaCheque.DIVISA.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.DIVISA.getBy()).wait(3).check());
 		checks.add(
 			"Existe la tabla que contiene <b>Pedidos Realizados</b>",
-			state(Present, TablaCheque.PEDIDOS_REALIZADOS.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.PEDIDOS_REALIZADOS.getBy()).wait(3).check());
 		checks.add(
 			"Existe la tabla que contiene <b>Pedidos Eliminados</b>",
-			state(Present, TablaCheque.PEDIDOS_ELIMINADOS.getBy()).wait(3).check(), Defect);
+			state(Present, TablaCheque.PEDIDOS_ELIMINADOS.getBy()).wait(3).check());
 		return checks;
 	}
 }

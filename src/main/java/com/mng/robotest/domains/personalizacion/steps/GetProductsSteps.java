@@ -10,8 +10,6 @@ import com.mng.robotest.getdata.productlist.Menu;
 import com.mng.robotest.getdata.productlist.GetterProducts.MethodGetter;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class GetProductsSteps extends StepBase {
 
 	@Step (
@@ -38,8 +36,7 @@ public class GetProductsSteps extends StepBase {
 	 	checks.add(
 	 		"El número de artículos personalizados está entre " + minArticles + " y " + maxArticles + 
 	 		" (se acaban localizando <b>" + numArticlesPersonalized + " artículos</b>)",
-	 		numArticlesPersonalized >= minArticles && numArticlesPersonalized <= maxArticles, 
-	 		Defect);
+	 		numArticlesPersonalized >= minArticles && numArticlesPersonalized <= maxArticles);
 	 	
 	 	return checks;
 	}

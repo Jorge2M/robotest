@@ -16,7 +16,7 @@ public class PagePedidosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de \"Mis Pedidos\"",
-			pageMispedidos.isPage(), Defect);
+			pageMispedidos.isPage());
 		
 		checks.add(
 			"La página contiene " + usrRegistrado ,

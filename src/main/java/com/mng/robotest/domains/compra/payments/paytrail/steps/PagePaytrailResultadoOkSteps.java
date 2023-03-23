@@ -18,7 +18,7 @@ public class PagePaytrailResultadoOkSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	   	checks.add(
 			"Aparece la página de resultado Ok de Paytrail",
-			pagePaytrailResultadoOk.isPage(), Defect);
+			pagePaytrailResultadoOk.isPage());
 	   	
 	   	checks.add(
 			"Aparece el importe de la compra: " + importeTotal,

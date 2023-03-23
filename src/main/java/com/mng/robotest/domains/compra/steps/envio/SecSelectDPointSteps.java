@@ -58,11 +58,11 @@ public class SecSelectDPointSteps extends StepBase {
 		int seconds = 3;
 	 	checks.add(
 			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + seconds + " segundos)",
-			modalDroppoints.isDroppointVisibleUntil(1, seconds), Defect);
+			modalDroppoints.isDroppointVisibleUntil(1, seconds));
 	 	
 	 	checks.add(
 			"El 1er delivery point de la lista es de tipo <b>" + typeDp + "</b>",
-			modalDroppoints.getTypeDeliveryPoint(1)==typeDp, Defect);
+			modalDroppoints.getTypeDeliveryPoint(1)==typeDp);
 	 	
 	 	return checks;
 	}
@@ -77,8 +77,7 @@ public class SecSelectDPointSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Queda seleccionado el Droppoint #{position}",
-		level=Defect)
+		description="Queda seleccionado el Droppoint #{position}")
 	private boolean checkIsSelectedDroppoint(int position) {
 		return modalDroppoints.isDroppointSelected(position);
 	}

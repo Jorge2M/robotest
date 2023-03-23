@@ -19,8 +19,6 @@ import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class SecBuscadorSteps extends StepBase {
 
 	private final PageGaleria pageGaleria = PageGaleria.getNew(From.BUSCADOR, channel);
@@ -73,16 +71,14 @@ public class SecBuscadorSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Aparece como mínimo un producto de tipo #{categoriaABuscar}  (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece como mínimo un producto de tipo #{categoriaABuscar}  (lo esperamos hasta #{seconds} segundos)")
 	private boolean areProducts(String categoriaABuscar, int seconds) {
 		String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
 		return "".compareTo(pageGaleria.getNombreArticuloWithText(producSin1erCaracter, seconds))!=0;
 	}
 	
 	@Validation (
-		description="Aparece algún producto (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece algún producto (lo esperamos hasta #{seconds} segundos)")
 	private boolean areProducts(int seconds) {
 		return pageGaleria.isVisibleArticleUntil(1, seconds);
 	}

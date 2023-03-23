@@ -27,8 +27,7 @@ public class PageResultPagoSteps extends StepBase {
 	private final PageResultPago pageResultPago = new PageResultPago();
 	
 	@Validation (
-		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta #{seconds} segundos)")
 	public boolean validaIsPageUntil(int seconds) {
 		return (pageResultPago.isVisibleTextoConfirmacionPago(seconds));
 	}
@@ -40,8 +39,7 @@ public class PageResultPagoSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece la URL correspondiente a la página de resultado OK (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece la URL correspondiente a la página de resultado OK (la esperamos hasta #{seconds} segundos)")
 	public boolean checkUrl(int seconds) {
 		return (pageResultPago.checkUrl(seconds));
 	}
@@ -58,7 +56,7 @@ public class PageResultPagoSteps extends StepBase {
 			int seconds2 = 20;
 			checks.add(
 				"Si no aparece lo esperamos " + seconds2 + " segundos",
-				pageResultPago.isVisibleTextoConfirmacionPago(seconds2), Defect);
+				pageResultPago.isVisibleTextoConfirmacionPago(seconds2));
 		}
 		return checks;
 	}
@@ -88,7 +86,7 @@ public class PageResultPagoSteps extends StepBase {
 		boolean isCodPedidoVisible = "".compareTo(codigoPed)!=0;
 		checks.add(
 	  		"Aparece el código de pedido (" + codigoPed + ") (lo esperamos hasta " + seconds + " segundos)",
-	  		isCodPedidoVisible, Defect);
+	  		isCodPedidoVisible);
 		
 		DataPedido dataPedido = dataPago.getDataPedido();
 		if (isCodPedidoVisible) {
@@ -104,7 +102,7 @@ public class PageResultPagoSteps extends StepBase {
 		var checks = new ChecksResultWithNumberPoints();
 	  	checks.add(
 		  	"Aparece el bloque con los nuevos <b>Loyalty Points</b> generados",
-		  	pageResultPago.isVisibleBlockNewLoyaltyPoints(), Defect);
+		  	pageResultPago.isVisibleBlockNewLoyaltyPoints());
 		
 	  	checks.setNumberPoints(pageResultPago.getLikesGenerated());
 	  	checks.add(

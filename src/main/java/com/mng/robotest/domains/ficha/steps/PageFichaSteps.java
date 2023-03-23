@@ -70,11 +70,11 @@ public class PageFichaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 				"Aparece la página correspondiente a la ficha del artículo " + refArticulo,
-				pageFicha.isFichaArticuloUntil(refArticulo, 0), Defect);
+				pageFicha.isFichaArticuloUntil(refArticulo, 0));
 
 		checks.add(
 				"Aparece algún color no disponible",
-				state(Present, ColorType.UNAVAILABLE.getBy(), driver).check(), Defect);
+				state(Present, ColorType.UNAVAILABLE.getBy(), driver).check());
 
 		return checks;
 	}
@@ -94,7 +94,7 @@ public class PageFichaSteps extends StepBase {
 			checks.add(
 				"Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() +
 				" (la esperamos hasta " + seconds + " segundos)",
-				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), seconds), Defect);
+				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), seconds));
 		}
 
 		if (datosArticulo.availableNombre()) {
@@ -130,9 +130,7 @@ public class PageFichaSteps extends StepBase {
 		pageFicha.getSecDataProduct().clickColor(numColor);
 	}
 
-	@Validation (
-		description="Está seleccionado el color con código <b>#{codigoColor}<b>",
-		level=Defect)
+	@Validation (description="Está seleccionado el color con código <b>#{codigoColor}<b>")
 	private boolean checkIsSelectedColor(String codigoColor) {
 		String codigoColorPage = pageFicha.getSecDataProduct().getCodeColor(ColorType.SELECTED);
 		return (codigoColorPage.contains(codigoColor));
@@ -157,8 +155,7 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Queda seleccionada la talla <b>#{talla.name()}</b> (esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Queda seleccionada la talla <b>#{talla.name()}</b> (esperamos hasta #{seconds} segundos)")
 	private boolean checkTallaSelected(Talla talla, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			Talla tallaSelected = pageFicha.getTallaSelected();
@@ -183,12 +180,12 @@ public class PageFichaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 				"No aparece el botón \"COMPRAR\"",
-				!secBolsa.isVisibleBotonComprar(), Defect);
+				!secBolsa.isVisibleBotonComprar());
 
 		boolean isVisibleAvisame = pageFicha.getSecDataProduct().isVisibleCapaAvisame();
 		checks.add(
 				"Aparece la capa de introducción de avísame",
-				isVisibleAvisame, Defect);
+				isVisibleAvisame);
 
 		return checks;
 	}
@@ -225,11 +222,11 @@ public class PageFichaSteps extends StepBase {
 		if (isTallaUnica) {
 			checks.add(
 					"NO aparece un aviso indicando que hay que seleccionar la talla",
-					!isVisibleAviso, Defect);
+					!isVisibleAviso);
 		} else {
 			checks.add(
 					"SÍ aparece un aviso indicando que hay que seleccionar la talla",
-					isVisibleAviso, Defect);
+					isVisibleAviso);
 		}
 		return checks;
 	}
@@ -285,9 +282,7 @@ public class PageFichaSteps extends StepBase {
 		return listColors.get(0);
 	}
 
-	@Validation (
-		description="No aparece el icono de favorito marcado al cambiar de color",
-		level=Defect)
+	@Validation (description="No aparece el icono de favorito marcado al cambiar de color")
 	public boolean validateNotVisibleButtonFavoritos(ActionFavButton buttonType) {
 		switch (buttonType) {
 			case REMOVE:
@@ -322,9 +317,7 @@ public class PageFichaSteps extends StepBase {
 		validateVisibleButtonFavoritos(ActionFavButton.ADD);
 	}
 
-	@Validation (
-		description="Aparece el botón de #{buttonType} a Favoritos",
-		level=Defect)
+	@Validation (description="Aparece el botón de #{buttonType} a Favoritos")
 	public boolean validateVisibleButtonFavoritos(ActionFavButton buttonType) {
 		switch (buttonType) {
 			case REMOVE:
@@ -335,16 +328,12 @@ public class PageFichaSteps extends StepBase {
 		}
 	}
 
-	@Validation (
-		description="Es visible el link de <b>Disponibilidad en Tienda</b>",
-		level=Defect)
+	@Validation (description="Es visible el link de <b>Disponibilidad en Tienda</b>")
 	public boolean checkLinkDispTiendaVisible() {
 		return pageFicha.isVisibleBuscarEnTiendaLink();
 	}
-
-	@Validation (
-		description="Es invisible el link de <b>Disponibilidad en Tienda</b>",
-		level=Defect)
+	
+	@Validation (description="Es invisible el link de <b>Disponibilidad en Tienda</b>")
 	public boolean checkLinkDispTiendaInvisible() {
 		return !pageFicha.isVisibleBuscarEnTiendaLink();
 	}
@@ -457,8 +446,7 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)",
-		level=Defect)
+		description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)")
 	private boolean checkImgCentralIsAssociatedToCarruselSelect(String pngImagenCarrusel) {
 		return (((PageFichaDevice)pageFicha).srcImagenCentralCorrespondsToImgCarrusel(pngImagenCarrusel));
 	}
@@ -476,12 +464,12 @@ public class PageFichaSteps extends StepBase {
 	public ChecksTM checkImgCentralAfterZoom(String pngImgCentralOriginal) {
 		var checks = ChecksTM.getNew();
 		checks.add(
-				"Se aplica un Zoom sobre la imagen central",
-				((PageFichaDevice)pageFicha).isVisibleFichaConZoom(), Defect);
+			"Se aplica un Zoom sobre la imagen central",
+			((PageFichaDevice)pageFicha).isVisibleFichaConZoom());
 
 		checks.add(
-				"La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal,
-				((PageFichaDevice)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal), Defect);
+			"La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal,
+			((PageFichaDevice)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal));
 
 		return checks;
 	}
@@ -494,8 +482,7 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)",
-		level=Defect)
+		description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)")
 	private boolean checkZoomImageCentralDissapeared() {
 		return !((PageFichaDevice)pageFicha).isVisibleFichaConZoom();
 	}
@@ -505,7 +492,7 @@ public class PageFichaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Existen el bloque correspondiente a las <b>BreadCrumb</b>",
-			new SecDetalleProduct().isVisibleBreadcrumbs(0), Defect);
+			new SecDetalleProduct().isVisibleBreadcrumbs(0));
 
 		String urlGaleryBC = new SecDetalleProduct().getUrlItemBreadCrumb(ItemBreadcrumb.GALERIA);
 		checks.add(

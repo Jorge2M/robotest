@@ -32,8 +32,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	}
 
 	@Validation (
-		description="Aparece el cuadro de introduccion de datos determinado (lo esperamos hasta #{maxSegundos} segundos)",
-		level=Defect)
+		description="Aparece el cuadro de introduccion de datos determinado (lo esperamos hasta #{maxSegundos} segundos)")
 	private boolean checkInputDataTarjeta(int maxSegundos) {
 		return ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).isInputTarjetaVisible(maxSegundos);
 	}
@@ -49,8 +48,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	}
 	
 	@Validation (
-		description="Es visible el campo de <b>cvv</b> (lo esperamos hasta #{seconds} segundos)</br>",
-		level=Defect)
+		description="Es visible el campo de <b>cvv</b> (lo esperamos hasta #{seconds} segundos)</br>")
 	private boolean checkInputOtherData(int seconds) {
 		var pageNew = ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData);
 		return pageNew.isVisibleCvv(seconds);
@@ -86,9 +84,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 		checkIsInitPage(2);
 	}
 
-	@Validation (
-		description="Estamos en la página inicial (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+	@Validation (description="Estamos en la página inicial (la esperamos hasta #{seconds} segundos)")
 	private boolean checkIsInitPage(int seconds) {
 		return ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).isPageCorrectUntil(seconds);
 	}
@@ -109,8 +105,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	}
 	
 	@Validation (
-		description="Aparece la capa para introducir los datos del cheque regalo (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece la capa para introducir los datos del cheque regalo (la esperamos hasta #{seconds} segundos)")
 	private boolean checkIsVisibleCapaInputCheque(int seconds) {
 		return pageChequeRegaloInputData.isVisibleDataInput(seconds);
 	}

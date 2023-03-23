@@ -19,7 +19,7 @@ public class PageTrustPayResultSteps extends StepBase {
 		String textHeader = "Payment In Progress";
 	 	checks.add(
 			"Figura el encabezamiento \"" + textHeader,
-			pageTrustPayResult.headerContains(textHeader), Defect);
+			pageTrustPayResult.headerContains(textHeader));
 	 	
 	 	String codPais = dataTest.getCodigoPais();
 	 	checks.add(
@@ -28,7 +28,7 @@ public class PageTrustPayResultSteps extends StepBase {
 	 	
 	 	checks.add(
 			"Figura el botón \"continue\"",
-			pageTrustPayResult.isPresentButtonContinue(), Defect);
+			pageTrustPayResult.isPresentButtonContinue());
 	 	
 	 	return checks;
 	}

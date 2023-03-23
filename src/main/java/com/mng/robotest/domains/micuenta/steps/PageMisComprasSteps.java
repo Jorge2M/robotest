@@ -51,8 +51,7 @@ public class PageMisComprasSteps extends StepBase {
 	
 	@Validation (
 		description=
-			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> (la esperamos #{seconds}) segundos",
-		level=Defect)
+			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> (la esperamos #{seconds}) segundos")
 	private boolean validateIsCompraOnlinePrendas(String codPedido, int seconds) {
 		return pageMisCompras.isTicketOnline(codPedido, seconds);
 	}
@@ -67,8 +66,7 @@ public class PageMisComprasSteps extends StepBase {
 	}	
 	
 	@Validation (
-		description="Es visible una compra de tipo #{typeTicket} (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Es visible una compra de tipo #{typeTicket} (la esperamos hasta #{seconds} segundos)")
 	public boolean validateIsCompraOfType(TypeTicket typeTicket, int seconds) {
 		return pageMisCompras.isTicket(typeTicket, seconds);
 	}

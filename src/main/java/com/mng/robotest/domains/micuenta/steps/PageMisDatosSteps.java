@@ -39,19 +39,19 @@ public class PageMisDatosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece un campo de contraseña de tipo password",
-			pageMisDatos.isVisiblePasswordTypePassword(), Defect);
+			pageMisDatos.isVisiblePasswordTypePassword());
 		
 		checks.add(
 			"El Nombre contiene el definido durante el registro: <b>" + nombre + "</b>",
-			(pageMisDatos.getNumInputContentVoid() <= 1), Defect);
+			(pageMisDatos.getNumInputContentVoid() <= 1));
 		
 		checks.add(
 			"El Apellidos contiene el definido durante el registro: <b>" + apellidos + "</b>",
-			(pageMisDatos.getTextInputNombre().compareTo(nombre)==0), Defect);
+			(pageMisDatos.getTextInputNombre().compareTo(nombre)==0));
 		
 		checks.add(
 			"El Email contiene el definido durante el registro: <b>" + email + "</b>",
-			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0), Defect);
+			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0));
 
 //		if (!dataTest.getPais().isMisdirecciones(app)) {
 //			String direccion = datosRegOk.get("cfDir1");
@@ -61,26 +61,26 @@ public class PageMisDatosSteps extends StepBase {
 //	
 //			checks.add(
 //				"La Dirección contiene la definida durante el registro: <b>" + direccion + "</b>",
-//				(pageMisDatos.getTextInputDireccion().compareTo(direccion)==0), Defect);
+//				(pageMisDatos.getTextInputDireccion().compareTo(direccion)==0));
 //			
 //			checks.add(
 //				"El Código postal contiene el definido durante el registro: <b>" + codpostal + "</b>",
-//				(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0), Defect);
+//				(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0));
 //			
 //			if (poblacion!=null) {
 //				checks.add(
 //					"La población contiene la definida durante el registro: <b>" + poblacion + "</b>",
-//					(pageMisDatos.getTextInputPoblacion().compareTo(poblacion)==0), Defect);
+//					(pageMisDatos.getTextInputPoblacion().compareTo(poblacion)==0));
 //			}
 //			
 //			checks.add(
 //				"Está seleccionado el país definido durante el registro: <b>" + codpais + "</b>",
-//				(pageMisDatos.getCodPaisSelected().compareTo(codpais)==0), Defect);
+//				(pageMisDatos.getCodPaisSelected().compareTo(codpais)==0));
 //			
 //			if (provincia != null) {
 //				checks.add(
 //					"Está seleccionada la provincia definida durante el registro: <b>" + provincia + "</b>",
-//					(pageMisDatos.getProvinciaSelected().compareTo(provincia)==0), Defect);
+//					(pageMisDatos.getProvinciaSelected().compareTo(provincia)==0));
 //			}
 //		}
 			
@@ -95,21 +95,21 @@ public class PageMisDatosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece un campo de contraseña de tipo password",
-			pageMisDatos.isVisiblePasswordTypePassword(), Defect);
+			pageMisDatos.isVisiblePasswordTypePassword());
 		
 		checks.add(
 			"El Nombre contiene el definido durante el registro: <b>" + nombre + "</b>",
-			(pageMisDatos.getTextInputNombre().compareTo(nombre)==0), Defect);
+			(pageMisDatos.getTextInputNombre().compareTo(nombre)==0));
 		
 		checks.add(
 			"El Email contiene el definido durante el registro: <b>" + email + "</b>",
-			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0), Defect);
+			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0));
 		
 		if (!dataTest.getPais().isMisdirecciones(app)) {
 			String codpostal = dataNewRegister.getPostalCode();
 			checks.add(
 				"El código postal contiene el definido durante el registro: <b>" + codpostal + "</b>",
-				(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0), Defect);
+				(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0));
 		}
 		
 		return checks;
@@ -129,9 +129,7 @@ public class PageMisDatosSteps extends StepBase {
 		return newName;
 	}
 
-	@Validation(
-		description = "1) Aparece una pantalla de resultado Ok de la suscripción",
-		level = Defect)
+	@Validation(description = "Aparece una pantalla de resultado Ok de la suscripción")
 	private boolean validateModificationOfData() {
 		return pageMisDatos.pageResOK();
 	}
@@ -152,8 +150,7 @@ public class PageMisDatosSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece un mensaje de cuenta cancelada correctamente (lo esperamos #{seconds} segundos)",
-		level=Defect)
+		description="Aparece un mensaje de cuenta cancelada correctamente (lo esperamos #{seconds} segundos)")
 	private boolean checkCuentaCanceladaOk(int seconds) {
 		return pageMisDatos.isMessageCuentaCanceladaOkVisible(seconds);
 	}

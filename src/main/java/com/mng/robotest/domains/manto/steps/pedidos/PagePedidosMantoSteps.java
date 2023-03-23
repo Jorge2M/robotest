@@ -35,7 +35,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		int seconds = 30;
 	 	checks.add(
 			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + seconds + " segundos)",
-			pagePedidos.isInvisibleCapaLoadingUntil(seconds), Defect);
+			pagePedidos.isInvisibleCapaLoadingUntil(seconds));
 	 	
 	 	checks.setExistsLinkCodPed(pagePedidos.isPresentDataInPedido(IDPEDIDO, dataPedido.getCodigoPedidoManto(), TypeDetalle.PEDIDO, 0));
 	 	
@@ -97,9 +97,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		return dPedidoPrueba;
 	}
 	
-	@Validation (
-		description="Tenemos código de pedido #{codPedido}",
-		level=Defect)
+	@Validation (description="Tenemos código de pedido #{codPedido}")
 	private static boolean checkCodigoPedido(String codPedido, WebDriver driver) {
 		return (("".compareTo(codPedido))!=0);
 	}
@@ -122,9 +120,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		return dPedidoPrueba;
 	}
 	
-	@Validation (
-		description="El pedido tiene las referencias #{referencias.toString()}",
-		level=Defect)
+	@Validation (description="El pedido tiene las referencias #{referencias.toString()}")
 	private boolean checkPedidoWithReferences(List<String> referencias, DataPedido dPedidoPrueba) {
 		return (!dPedidoPrueba.getDataBag().getListArticulos().isEmpty());
 	}
@@ -153,10 +149,10 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Tenemos el DNI del cliente " + dPedidoPrueba.getPago().getDni(),
-			!dPedidoPrueba.getPago().getDni().equals(""), Defect);
+			!dPedidoPrueba.getPago().getDni().equals(""));
 	 	checks.add(
 			"Tenemos el Email del cliente " + dPedidoPrueba.getPago().getUseremail(),
-			!dPedidoPrueba.getPago().getUseremail().equals(""), Defect);
+			!dPedidoPrueba.getPago().getUseremail().equals(""));
 	 	return checks;
 	}
 	
@@ -174,9 +170,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		return dPedidoPrueba;
 	}
 	
-	@Validation (
-		description="Tenemos la tienda física #{codigoDeliveryPoint}",
-		level=Defect)
+	@Validation (description="Tenemos la tienda física #{codigoDeliveryPoint}")
 	private boolean checkTiendaFisica(String codigoDeliveryPoint) {
 		return (!codigoDeliveryPoint.equals(""));
 	}

@@ -39,15 +39,15 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Estamos en la página " + TITULO.getXPath(),
-			state(Visible, INITIAL_TITULO.getBy()).wait(10).check(), Defect);
+			state(Visible, INITIAL_TITULO.getBy()).wait(10).check());
 		
 		checks.add(
 			"Aparece el desplegable de tiendas",
-			state(Visible, DESPLEGABLE_TIENDAS.getBy()).wait(10).check(), Defect);
+			state(Visible, DESPLEGABLE_TIENDAS.getBy()).wait(10).check());
 		
 		checks.add(
 			"El botón <b>Ver Tiendas</b> está en la página",
-			state(Visible, VER_TIENDAS.getBy()).wait(10).check(), Defect);
+			state(Visible, VER_TIENDAS.getBy()).wait(10).check());
 		
 		return checks;
 	}
@@ -76,19 +76,19 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Está presente el enlace de <b>She</b>",
-			state(Visible, SHE.getBy()).wait(10).check(), Defect);
+			state(Visible, SHE.getBy()).wait(10).check());
 		
 		checks.add(
 			"Está presente el enlace de <b>He</b>",
-			state(Visible, HE.getBy()).check(), Defect);
+			state(Visible, HE.getBy()).check());
 		
 		checks.add(
 			"Está presente el enlace de <b>Niños</b>",
-			state(Visible, NINOS.getBy()).check(), Defect);
+			state(Visible, NINOS.getBy()).check());
 
 		checks.add(
 			"Está presente el enlace de <b>Home</b>",
-			state(Visible, HOME.getBy()).check(), Defect);		
+			state(Visible, HOME.getBy()).check());		
 		
 		return checks;
 	}
@@ -145,9 +145,7 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
         return state(Visible, APLICAR_ORDEN.getBy()).wait(seconds).check();
 	}
 
-	@Validation(
-        description="Aparecen imagenes en la nueva página",
-        level=Defect)
+	@Validation(description="Aparecen imagenes en la nueva página")
 	private boolean checkImagesVisible() {
         return state(Visible, PRUEBA_IMAGEN.getBy()).check();
 	}
@@ -168,11 +166,11 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Se sigue viendo la segunda prenda",
-			state(Visible, SEGUNDA_PRENDA.getBy()).wait(seconds).check(), Defect);
+			state(Visible, SEGUNDA_PRENDA.getBy()).wait(seconds).check());
 		
 		checks.add(
 			"La primera prenda no se corresponde con la que había inicialmente",
-			state(Visible, PRIMERA_PRENDA.getBy()).wait(seconds).check(), Defect);
+			state(Visible, PRIMERA_PRENDA.getBy()).wait(seconds).check());
 		
 		return checks;
 	}
@@ -191,19 +189,19 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece correctamente el modal de confirmacion",
-			state(Visible, CONTAINER.getBy()).wait(15).check(), Defect);
+			state(Visible, CONTAINER.getBy()).wait(15).check());
 		
 		checks.add(
 			"Aparece correctamente el boton de <b>aplicar general</b>",
-			state(Visible, APPLY_GENERIC.getBy()).wait(15).check(), Defect);
+			state(Visible, APPLY_GENERIC.getBy()).wait(15).check());
 		
 		checks.add(
 			"Aparece correctamente el boton de <b>aplicar pais</b>",
-			state(Visible, APPLY_COUNTRY.getBy()).wait(15).check(), Defect);
+			state(Visible, APPLY_COUNTRY.getBy()).wait(15).check());
 		
 		checks.add(
 			"Aparece correctamente el boton de <b>cancelar</b>",
-			state(Visible, CANCEL.getBy()).wait(15).check(), Defect);
+			state(Visible, CANCEL.getBy()).wait(15).check());
 		
 		return checks;
 	}

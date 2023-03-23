@@ -26,7 +26,7 @@ public class SecFooterSteps extends StepBase {
 		for (FooterLink footerLink : FooterLink.getFooterLinksFiltered(app, channel)) {
 			checks.add(
 				"Aparecen el link <b>" + footerLink + "</b> en el footer",
-				secFooter.checkFooter(footerLink), Defect);
+				secFooter.checkFooter(footerLink));
 		}
 		return checks;
 	}
@@ -98,15 +98,13 @@ public class SecFooterSteps extends StepBase {
 	}
 	 
 	@Validation (
-		description="El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais #{codigoPais}",
-		level=Defect)
+		description="El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais #{codigoPais}")
 	private boolean checkIsRGPDpresent(String codigoPais) {
  		return secFooter.isTextoLegalRGPDPresent();
 	}
 	
 	@Validation (
-		description="El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais #{codigoPais}",
-		level=Defect)
+		description="El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais #{codigoPais}")
 	private boolean checkIsNotPresentRGPD(String codigoPais) {
  		return !secFooter.isTextoLegalRGPDPresent();
 	}	

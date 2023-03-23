@@ -47,7 +47,7 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 		 	
 		 	checks.add(
 				"Figura un botón de pago",
-				pageTrustpaySelectBank.isPresentButtonPago(), Defect); 
+				pageTrustpaySelectBank.isPresentButtonPago()); 
 		}
 		
 		return checks;

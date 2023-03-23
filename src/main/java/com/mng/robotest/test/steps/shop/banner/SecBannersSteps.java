@@ -97,7 +97,7 @@ public class SecBannersSteps extends StepBase {
 		var allPages = new AllPages(); 
 	 	checks.add(
 	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + seconds1 + " segundos)",
-	 		allPages.validateUrlNotMatchUntil(urlPagPadre, seconds1), Defect);  
+	 		allPages.validateUrlNotMatchUntil(urlPagPadre, seconds1));  
 	 	
 	 	boolean urlEqual = false;
 	 	boolean elemsEqual = false;
@@ -119,7 +119,7 @@ public class SecBannersSteps extends StepBase {
 		URI uriPagActual = new URI(urlPagActual);
 	 	checks.add(
 	 		"El dominio de la página se corresponde con el de la página padre:" + uriPagPadre.getHost(),
-	 		uriPagPadre.getHost().compareTo(uriPagActual.getHost())==0, Defect);	
+	 		uriPagPadre.getHost().compareTo(uriPagActual.getHost())==0);	
 	 	
 	 	return checks;
 	}

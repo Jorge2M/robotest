@@ -8,8 +8,6 @@ import com.mng.robotest.domains.galeria.pageobjects.SecCrossSelling;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class SecCrossSellingSteps extends StepBase {
 
 	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
@@ -24,7 +22,7 @@ public class SecCrossSellingSteps extends StepBase {
 		
 		checks.add(
 			"La sección cross-selling existe (si de primeras no existe scrollamos hasta el final de la galería)",
-			secCrossSelling.isSectionVisible(), Defect);
+			secCrossSelling.isSectionVisible());
 		
 		pageGaleria.goToInitPageAndWaitForArticle();
 		return checks;

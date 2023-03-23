@@ -21,11 +21,11 @@ public class ModalDirecFacturaSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + seconds + " seconds)",
-			modalDirecFactura.isVisibleFormUntil(seconds), Defect);	
+			modalDirecFactura.isVisibleFormUntil(seconds));	
 	 	
 	 	checks.add(
 			"Es visible el botón \"Actualizar\"",
-	 		modalDirecFactura.isVisibleButtonActualizar(), Defect);
+	 		modalDirecFactura.isVisibleButtonActualizar());
 	 	
 	 	seconds = 2;
 	 	checks.add(
@@ -48,11 +48,11 @@ public class ModalDirecFacturaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Desaparece el modal de introducción de los datos de la dirección",
-	 		!modalDirecFactura.isVisibleFormUntil(0), Defect);
+	 		!modalDirecFactura.isVisibleFormUntil(0));
 	 	
 	 	checks.add(
 			"Queda marcado el radiobutton \"Quiero recibir una factura\"",
-			new Page1DktopCheckout().isMarkedQuieroFactura(), Defect);
+			new Page1DktopCheckout().isMarkedQuieroFactura());
 	 	
 	 	int seconds = 2;
 	 	checks.add(

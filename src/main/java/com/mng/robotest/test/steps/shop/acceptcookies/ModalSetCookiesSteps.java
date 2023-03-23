@@ -13,8 +13,7 @@ public class ModalSetCookiesSteps extends StepBase {
 	private final ModalSetCookies modalSetCookies = new ModalSetCookies();
 	
 	@Validation (
-		description="Es visible el modal para el seteo de Cookies (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Es visible el modal para el seteo de Cookies (lo esperamos hasta #{seconds} segundos)")
 	public boolean isVisible(int seconds) {
 		return modalSetCookies.isVisible(seconds);
 	}

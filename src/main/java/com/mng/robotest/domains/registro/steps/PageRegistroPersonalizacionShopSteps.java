@@ -9,15 +9,12 @@ import com.mng.robotest.domains.registro.pageobjects.PageRegistroPersonalizacion
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.steps.shop.AccesoSteps;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageRegistroPersonalizacionShopSteps extends StepBase {
 
 	private final PageRegistroPersonalizacionShop pageRegistroPersonalizacion = new PageRegistroPersonalizacionShop();
 	
 	@Validation (
-		description="Aparece la página de personalización del registro (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece la página de personalización del registro (la esperamos hasta #{seconds} segundos)")
 	public boolean checkIsPageUntil(int seconds) {
 		return pageRegistroPersonalizacion.isPageUntil(seconds);
 	}

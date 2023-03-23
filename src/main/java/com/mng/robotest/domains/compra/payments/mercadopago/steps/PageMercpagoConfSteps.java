@@ -6,15 +6,12 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.mercadopago.pageobjects.PageMercpagoConf;
 import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageMercpagoConfSteps extends StepBase {
 
 	private final PageMercpagoConf pageMercpagoConf = new PageMercpagoConf();
 	
 	@Validation (
-		description="Estamos en la página de confirmación del pago (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Estamos en la página de confirmación del pago (la esperamos hasta #{seconds} segundos)")
 	public boolean validaIsPageUntil(int seconds) {  
 		return pageMercpagoConf.isPageUntil(seconds);
 	}

@@ -8,8 +8,6 @@ import com.mng.robotest.domains.compra.pageobjects.ModalAvisoCambioPais;
 import com.mng.robotest.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.test.beans.Pais;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class ModalAvisoCambioPaisSteps extends StepBase {
 
 	private final ModalAvisoCambioPais modalAvisoCambioPais = new ModalAvisoCambioPais(); 
@@ -28,11 +26,11 @@ public class ModalAvisoCambioPaisSteps extends StepBase {
 		int seconds = 10;
 	 	checks.add(
 			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + seconds + " segundos)",
-			modalAvisoCambioPais.isInvisibleUntil(seconds), Defect);		
+			modalAvisoCambioPais.isInvisibleUntil(seconds));		
 	 	
 	 	checks.add(
 			"En la dirección de envió aparece el país " + paisEnvio.getNombre_pais(),
-			new PageCheckoutWrapper().direcEnvioContainsPais(paisEnvio.getNombre_pais()), Defect);
+			new PageCheckoutWrapper().direcEnvioContainsPais(paisEnvio.getNombre_pais()));
 	 	
 		return checks;
 	}

@@ -28,11 +28,11 @@ public class PageFavoritosSteps extends StepBase {
 		int secondsArticles = 2;
 		checks.add(
 			"Está visible la capa de favoritos con artículos (la esperamos hasta " + secondsCapa + " segundos)",
-			pageFavoritos.isSectionArticlesVisibleUntil(secondsCapa), Defect);
+			pageFavoritos.isSectionArticlesVisibleUntil(secondsCapa));
 		
 		checks.add(
 			"Aparecen los artículos (los esperamos hasta " + secondsArticles + " segundos): <br>" + dataTest.getDataFavoritos().getListArtDescHTML(),
-			pageFavoritos.areVisibleArticlesUntil(secondsArticles), Defect);
+			pageFavoritos.areVisibleArticlesUntil(secondsArticles));
 		
 		return checks;
 	}
@@ -55,19 +55,19 @@ public class PageFavoritosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el modal de favoritos compartidos",
-			pageFavoritos.checkShareModalUntill(5), Defect);
+			pageFavoritos.checkShareModalUntill(5));
 		
 		checks.add(
 			"Aparece el boton de compartir por Telegram",
-			pageFavoritos.isShareTelegramFavoritesVisible(), Defect);
+			pageFavoritos.isShareTelegramFavoritesVisible());
 		
 		checks.add(
 			"Aparece el boton de compartir por WhatsApp",
-			pageFavoritos.isShareWhatsappFavoritesVisible(), Defect);
+			pageFavoritos.isShareWhatsappFavoritesVisible());
 		
 		checks.add(
 			"Aparece la url para copiarla y compartir como texto", 
-			pageFavoritos.isShareUrlFavoritesVisible(), Defect);
+			pageFavoritos.isShareUrlFavoritesVisible());
 		
 		return checks;
 	}
@@ -96,8 +96,7 @@ public class PageFavoritosSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece de Favoritos el artículo con referencia <b>#{refArticle}</b> y código de color <b>#{codColor}</b> (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Desaparece de Favoritos el artículo con referencia <b>#{refArticle}</b> y código de color <b>#{codColor}</b> (lo esperamos hasta #{seconds} segundos)")
 	public boolean checkArticleDisappearsFromFavoritesUntil(String refArticle, String codColor, int seconds) {
 		return (pageFavoritos.isInvisibleArticleUntil(refArticle, codColor, seconds));
 	}
@@ -116,7 +115,7 @@ public class PageFavoritosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"No queda ningún artículo en Favoritos",
-			!pageFavoritos.hayArticulos(), Defect);
+			!pageFavoritos.hayArticulos());
 		checks.add(
 			"Aparece el botón \"Inspírate con lo último\"",
 			pageFavoritos.isVisibleButtonEmpty(), Warn);

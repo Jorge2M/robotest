@@ -40,7 +40,7 @@ public class PagePaytrail1rstSteps extends StepBase {
 			
 			checks.add(
 				"Figura un botón de pago",
-				pagePaytrail1rst.isPresentButtonPago(), Defect);
+				pagePaytrail1rst.isPresentButtonPago());
 		}
 		
 		return checks;

@@ -23,7 +23,7 @@ public class PageAmazonIdentSteps extends StepBase {
 		
 		checks.add(
 			"Aparece los campos para la identificación (usuario/password)",
-			pageAmazonIdent.isPageIdent(), Defect);
+			pageAmazonIdent.isPageIdent());
 		
 		if (channel==Channel.desktop) {
 			checks.add(

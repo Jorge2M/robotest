@@ -16,7 +16,7 @@ public class PageReembolsosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de Reembolsos",
-			pageReembolsos.isPage(), Defect);
+			pageReembolsos.isPage());
 		
 		checks.add(
 			"Aparecen los inputs de BANCO, TITULAR e IBAN",

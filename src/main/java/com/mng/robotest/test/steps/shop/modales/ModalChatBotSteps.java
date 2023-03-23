@@ -5,15 +5,11 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.test.pageobject.shop.modales.ModalChatBot;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class ModalChatBotSteps {
 
 	private final ModalChatBot modalChatBot = new ModalChatBot();
 	
-	@Validation (
-		description="Aparece el icono de ChatBot",
-		level=Defect)
+	@Validation (description="Aparece el icono de ChatBot")
 	public boolean checkIconVisible() {
 		return modalChatBot.checkIconVisible();
 	}
@@ -28,16 +24,12 @@ public class ModalChatBotSteps {
 		
 	}
 	
-	@Validation (
-		description="Aparece la capa del WebChat (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+	@Validation (description="Aparece la capa del WebChat (la esperamos hasta #{seconds} segundos)")
 	private boolean checkWebchatVisible(int seconds) {
 		return modalChatBot.checkWebchatVisible(seconds);
 	}
 	
-	@Validation (
-		description="Es visible la opción #{option} (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+	@Validation (description="Es visible la opción #{option} (la esperamos hasta #{seconds} segundos)")
 	public boolean isVisibleOption(String option, int seconds) {
 		return modalChatBot.isOptionVisible(option, seconds);
 	}
@@ -50,15 +42,12 @@ public class ModalChatBotSteps {
 	}
 	
 	@Validation (
-		description="Aparece una respuesta con el texto #{respuesta} (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece una respuesta con el texto #{respuesta} (la esperamos hasta #{seconds} segundos)")
 	public boolean checkResponseVisible(String respuesta, int seconds) {
 		return modalChatBot.isResponseVisible(respuesta, seconds);
 	}
 	
-	@Validation (
-		description="Aparece el botón #{respuesta} (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+	@Validation (description="Aparece el botón #{respuesta} (lo esperamos hasta #{seconds} segundos)")
 	public boolean isVisibleButton(String button, int seconds) {
 		return modalChatBot.isButtonVisible(button, seconds);
 	}

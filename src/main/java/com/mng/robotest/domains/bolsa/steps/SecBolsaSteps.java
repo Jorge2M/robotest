@@ -10,13 +10,13 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.ValidatorContentBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.domains.compra.steps.Page1IdentCheckoutSteps;
+import com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.getdata.productlist.GetterProducts;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
@@ -30,6 +30,7 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa.*;
 
 public class SecBolsaSteps extends StepBase {
 
@@ -61,8 +62,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Desaparece la bolsa (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Desaparece la bolsa (lo esperamos hasta #{seconds} segundos)")
 	private boolean checkBolsaDisappears(int seconds) {
 		return (secBolsa.isInStateUntil(StateBolsa.CLOSED, seconds));
 	}
@@ -76,8 +76,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="La bolsa queda en estado #{stateBolsaExpected} (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="La bolsa queda en estado #{stateBolsaExpected} (lo esperamos hasta #{seconds} segundos)")
 	private boolean validateBolsaInState(StateBolsa stateBolsaExpected, int seconds) {
 		return (secBolsa.isInStateUntil(stateBolsaExpected, seconds));
 	}
@@ -156,11 +155,11 @@ public class SecBolsaSteps extends StepBase {
 		int seconds = 1;
 	 	checks.add(
 			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + seconds + " segundos)",
-			secBolsa.isInStateUntil(StateBolsa.OPEN, seconds), Defect);
+			secBolsa.isInStateUntil(StateBolsa.OPEN, seconds));
 	 	
 	 	checks.add(
 			"Aparece el botón \"Comprar\" (lo esperamos hasta " + seconds + " segundos)",
-			secBolsa.isVisibleBotonComprarUntil(seconds), Defect);
+			secBolsa.isVisibleBotonComprarUntil(seconds));
 	 	
 		return checks;
 	}
@@ -186,35 +185,35 @@ public class SecBolsaSteps extends StepBase {
 			validatorBolsa.numArticlesIsCorrect(), Warn);
 		
 		var listDataToValidate = new ArrayList<DataArtBolsa>();
-		listDataToValidate.add(DataArtBolsa.REFERENCIA);
+		listDataToValidate.add(REFERENCIA);
 		checks.add(
 			"Cuadran las referencias de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), Warn);
 		
 		listDataToValidate.clear();
-		listDataToValidate.add(DataArtBolsa.NOMBRE);
+		listDataToValidate.add(NOMBRE);
 		checks.add(
 			"Cuadran los nombres de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), Warn);
 		
 		listDataToValidate.clear();
-		listDataToValidate.add(DataArtBolsa.COLOR);
+		listDataToValidate.add(COLOR);
 		checks.add(
 			"Cuadran los colores de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), Warn);
 		
 		listDataToValidate.clear();
-		listDataToValidate.add(DataArtBolsa.TALLA);
+		listDataToValidate.add(TALLA);
 		boolean tallaNumOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
 		listDataToValidate.clear();
-		listDataToValidate.add(DataArtBolsa.TALLA);
+		listDataToValidate.add(TALLA);
 		boolean tallaAlfOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
 		checks.add(
 			"Cuadran las tallas de los artículos existentes en la bolsa",
 			tallaNumOk || tallaAlfOk, Warn);
 		
 		listDataToValidate.clear();
-		listDataToValidate.add(DataArtBolsa.PRECIO_TOTAL);
+		listDataToValidate.add(PRECIO_TOTAL);
 		checks.add(
 			"Cuadran los precios de los artículos existentes en la bolsa",
 			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), Warn);

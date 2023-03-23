@@ -39,7 +39,7 @@ public class PageMenusMantoSteps extends StepMantoBase {
 		int seconds = 2;
 	 	checks.add(
 			"Aparece la página asociada al menú <b>" + subMenu + "</b> (la esperamos hasta " + seconds + " segundos)",
-			pageMenusManto.validateIsPage(subMenu, seconds), Defect);
+			pageMenusManto.validateIsPage(subMenu, seconds));
 	 	
 	 	checks.add(
 			"No aparece ninguna ventana de alerta",
@@ -55,9 +55,7 @@ public class PageMenusMantoSteps extends StepMantoBase {
 		}
 	}
 	
-	@Validation (
-		description="Aparece la página de Bolsas",
-		level=Defect)
+	@Validation (description="Aparece la página de Bolsas")
 	private boolean checkIsVisiblePageBolsas() {
 		return new PageBolsas().isPage();
 	}
@@ -69,9 +67,7 @@ public class PageMenusMantoSteps extends StepMantoBase {
 		}		
 	}	
 	
-	@Validation (
-		description="Aparece la página de Pedidos",
-		level=Defect)
+	@Validation (description="Aparece la página de Pedidos")
 	private boolean checkIsVisiblePagePedidos() {
 		return new PagePedidos().isPage();
 	}

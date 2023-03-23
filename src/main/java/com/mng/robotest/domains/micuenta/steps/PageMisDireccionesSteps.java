@@ -9,15 +9,12 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisDirecciones;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageMisDireccionesSteps extends StepBase {
 
 	private final PageMisDirecciones pageMisDirecciones = new PageMisDirecciones();
 	
 	@Validation(
-		description="Aparece la página de \"Mis direcciones\" (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece la página de \"Mis direcciones\" (la esperamos hasta #{seconds} segundos)")
 	public boolean checkIsPage (int seconds) {
 		return pageMisDirecciones.isPage(seconds);
 	}
@@ -42,8 +39,7 @@ public class PageMisDireccionesSteps extends StepBase {
 	}
 	
 	@Validation(
-		description="Aparece el formulario con los datos del usuario (lo esperamos #{seconds} segundos)",
-		level=Defect)
+		description="Aparece el formulario con los datos del usuario (lo esperamos #{seconds} segundos)")
 	public boolean checkIsFormularioUsuario(int seconds) {
 		return pageMisDirecciones.isFormularioUsuario(seconds);
 	}	
@@ -54,7 +50,7 @@ public class PageMisDireccionesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el código postal <b>" + dataNewRegister.getPostalCode() + "</b>",
-			isPostalCode(dataNewRegister.getPostalCode()), Defect);
+			isPostalCode(dataNewRegister.getPostalCode()));
 		
 		return checks;
 	}
@@ -68,17 +64,17 @@ public class PageMisDireccionesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el código postal <b>" + codpostal + "</b>",
-			isPostalCode(codpostal), Defect);
+			isPostalCode(codpostal));
 
 		if (poblacion!=null) {
 			checks.add(
 				"Aparece la población <b>" + poblacion + "</b>",
-				isPoblacion(poblacion), Defect);
+				isPoblacion(poblacion));
 		}
 		
 		checks.add(
 			"Aparece la dirección <b>" + direccion + "</b>",
-			isDireccion(direccion), Defect);
+			isDireccion(direccion));
 		
 		return checks;
 	}	

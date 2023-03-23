@@ -19,7 +19,7 @@ public class PageInitPaymayaSteps {
 			pageInitPaymaya.isPage(), Warn); 
 	 	checks.add(
 			"Aparece la imagen del QR",
-			pageInitPaymaya.isQrVisible(), Defect);
+			pageInitPaymaya.isQrVisible());
 	 	return checks;
 	}
 	

@@ -50,7 +50,7 @@ public class PageSepa1rstSteps {
 				pageSepa1rst.isPresentInputCuenta(), Warn);
 			checks.add(
 				"Figura un botón de pago",
-				pageSepa1rst.isPresentButtonPagoDesktop(), Defect);
+				pageSepa1rst.isPresentButtonPagoDesktop());
 		}
 		
 		return checks;

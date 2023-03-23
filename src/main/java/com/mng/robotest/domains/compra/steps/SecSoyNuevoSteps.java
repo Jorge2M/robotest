@@ -9,8 +9,6 @@ import com.mng.robotest.domains.compra.pageobjects.SecSoyNuevo.RadioState;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 import static com.mng.robotest.test.data.PaisShop.*;
 
 public class SecSoyNuevoSteps extends StepBase {
@@ -44,11 +42,11 @@ public class SecSoyNuevoSteps extends StepBase {
 		 	checks.add(
 				"El link de política de privacidad existe para el pais " + 
 				dataTest.getCodigoPais() + " lo esperamos hasta " + seconds + " segundos",
-				secSoyNuevo.isLinkPoliticaPrivacidad(seconds), Defect);
+				secSoyNuevo.isLinkPoliticaPrivacidad(seconds));
 		} else {
 		 	checks.add(
 				"El lik de política de privacidad no exite para el pais " + dataTest.getCodigoPais(),
-				!secSoyNuevo.isLinkPoliticaPrivacidad(0), Defect);			
+				!secSoyNuevo.isLinkPoliticaPrivacidad(0));			
 		}
 		
 		return checks;

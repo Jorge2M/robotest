@@ -2,8 +2,9 @@ package com.mng.robotest.domains.ayuda.tests;
 
 import com.mng.robotest.domains.ayuda.steps.AyudaSteps;
 import com.mng.robotest.domains.base.TestBase;
-import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
+
+import static com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink.*;
 
 public class Ayu001 extends TestBase {
 
@@ -17,7 +18,7 @@ public class Ayu001 extends TestBase {
 	}
 	
 	private void checkAyuda() {
-		secFooterSteps.clickLinkFooter(SecFooter.FooterLink.AYUDA, false);
+		secFooterSteps.clickLinkFooter(AYUDA, false);
 		ayudaSteps.clickIcon("Devoluciones, cambios y reembolsos");
 		String question = "¿Cómo puedo cambiar o devolver una compra online de artículos Mango?";
 		ayudaSteps.checkIsQuestionVisible(question);

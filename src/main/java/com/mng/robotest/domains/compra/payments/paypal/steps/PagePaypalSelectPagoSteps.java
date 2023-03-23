@@ -5,15 +5,12 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.paypal.pageobjects.PagePaypalSelectPago;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PagePaypalSelectPagoSteps extends StepBase {
 	
 	private final PagePaypalSelectPago pagePaypalSelectPago = new PagePaypalSelectPago();
 	
 	@Validation (
-		description="Aparece la página de Selección del Pago (la esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece la página de Selección del Pago (la esperamos hasta #{seconds} segundos)")
 	public boolean validateIsPageUntil(int seconds) {
 		return pagePaypalSelectPago.isPageUntil(seconds);
 	}

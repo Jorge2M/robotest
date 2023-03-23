@@ -9,8 +9,6 @@ import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.manto.pageobjects.PageConsultaIdEans;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageConsultaIdEansSteps extends StepMantoBase {
 
 	private final PageConsultaIdEans pageConsultaIdEans = new PageConsultaIdEans();
@@ -20,15 +18,15 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Es visible el contenido de la pestaña Busqueda Excel",
-			pageConsultaIdEans.isVisibleDivBusquedaExcel(), Defect);
+			pageConsultaIdEans.isVisibleDivBusquedaExcel());
 	 	
 	 	checks.add(
 			"Es visible el contenido de la pestaña Busqueda Rapida",
-			pageConsultaIdEans.isVisibleDivBusquedaRapida(), Defect);
+			pageConsultaIdEans.isVisibleDivBusquedaRapida());
 	 	
 	 	checks.add(
 			"Es visible el título de página correcto",
-			pageConsultaIdEans.isVisibleTituloPagina(), Defect);
+			pageConsultaIdEans.isVisibleTituloPagina());
 	 	
 	 	return checks;
 	}
@@ -49,15 +47,15 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 		
 		checks.add(String.format(
 			"Se muestra la tabla de información (la esperamos un máximo de %s segundos)", seconds),
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), Defect);
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds));
 		
 		checks.add(
 			"El número de líneas de pedido es " + pedidosPrueba.size(),
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), Defect);
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds));
 		
 		checks.add(
 			"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.size(),
-			pageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba), Defect);
+			pageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba));
 		
 		return checks;
 	}
@@ -77,15 +75,15 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 		int seconds = 2;
 		checks.add(
 			"Se muestra la tabla de información (la esperamos un máximo de " + seconds + " segundos)",
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), Defect);
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds));
 		
 		checks.add(
 			"El número de líneas de pedido es " + pedidosPrueba.size(),
-			pageConsultaIdEans.getLineasPedido()==pedidosPrueba.size(), Defect);
+			pageConsultaIdEans.getLineasPedido()==pedidosPrueba.size());
 		
 		checks.add(
 			"Aparece una línea por cada uno de los pedidos <b>" + pedidosPrueba.toString(),
-			pageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba), Defect);
+			pageConsultaIdEans.isPedidosTablaCorrecto(pedidosPrueba));
 		
 		return checks;
 	}
@@ -100,8 +98,7 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 	}
 	
 	@Validation (
-		description="Se muestra la tabla de información (la esperamos un máximo de #{seconds} segundos)",
-		level=Defect)
+		description="Se muestra la tabla de información (la esperamos un máximo de #{seconds} segundos)")
 	private boolean checkIsTableTrackingsInformation(int seconds) {
 		return pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds);
 	}
@@ -121,15 +118,15 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 		int seconds = 2;
 		checks.add(
 			"Se muestra la tabla de información (la esperamos un máximo de " + seconds + " segundos)",
-			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds), Defect);
+			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds));
 		
 		checks.add(
 			"El número de líneas de artículos es " + articulosPrueba.size(),
-			pageConsultaIdEans.getLineasPedido()==articulosPrueba.size(), Defect);
+			pageConsultaIdEans.getLineasPedido()==articulosPrueba.size());
 		
 		checks.add(
 			"Aparece una línea por cada uno de los artículos <b>" + articulosPrueba.toString(),
-			pageConsultaIdEans.isArticulosTablaCorrecto(articulosPrueba), Defect);
+			pageConsultaIdEans.isArticulosTablaCorrecto(articulosPrueba));
 		
 		return checks;
 	}

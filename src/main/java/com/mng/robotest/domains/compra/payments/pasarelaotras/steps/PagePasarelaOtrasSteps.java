@@ -21,7 +21,7 @@ public class PagePasarelaOtrasSteps extends StepBase {
 		}
 	   	checks.add(
 			"No se trata de la página de precompra (no aparece los logos de formas de pago)",
-			new PageCheckoutWrapper().isPresentMetodosPago(), Defect);
+			new PageCheckoutWrapper().isPresentMetodosPago());
 	   	
 	   	return checks;
 	}

@@ -11,15 +11,12 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.steps.shop.home.PageHomeMarcasSteps;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class ModalCambioPaisSteps extends StepBase {
 	
 	private final ModalCambioPais modalCambioPais = new ModalCambioPais();
 	
 	@Validation (
-		description="Aparece el modal de selección de país (lo esperamos hasta #{seconds} segundos)",
-		level=Defect)
+		description="Aparece el modal de selección de país (lo esperamos hasta #{seconds} segundos)")
 	public boolean validateIsVisible(int seconds) {
 		return modalCambioPais.isVisibleModalUntil(seconds);
 	}

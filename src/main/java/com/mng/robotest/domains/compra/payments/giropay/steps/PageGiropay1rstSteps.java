@@ -45,7 +45,7 @@ public class PageGiropay1rstSteps extends StepBase {
 			int seconds = 2;
 			checks.add(
 				"Figura un botón de pago (lo esperamos hasta " + seconds + " segundos)",
-				pageGiropay1rst.isPresentButtonPagoDesktopUntil(seconds), Defect);
+				pageGiropay1rst.isPresentButtonPagoDesktopUntil(seconds));
 		}
 		
 		return checks;

@@ -10,8 +10,6 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 import java.util.List;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageHomeDonateLikesSteps extends StepBase {
 	
 	private final PageHomeDonateLikes pageHomeDonateLikes = new PageHomeDonateLikes();
@@ -21,11 +19,11 @@ public class PageHomeDonateLikesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la pagina de <b>Donar Likes</b>",
-			pageHomeDonateLikes.checkIsPage(0), Defect);
+			pageHomeDonateLikes.checkIsPage(0));
 
 		checks.add(
 			"Aparece alguno de los botones para donar " +  listButtons + " Likes (esperamos hasta " + seconds + " segundos)",
-			pageHomeDonateLikes.isVisibleAny(listButtons, seconds), Defect);
+			pageHomeDonateLikes.isVisibleAny(listButtons, seconds));
 		
 		return checks;
 	}
@@ -56,7 +54,7 @@ public class PageHomeDonateLikesSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + seconds + " segundos)",
-			pageHomeDonateLikes.isVisibleIconOperationDoneUntil(seconds), Defect);
+			pageHomeDonateLikes.isVisibleIconOperationDoneUntil(seconds));
 
 		return checks;
 	}	

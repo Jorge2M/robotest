@@ -8,8 +8,6 @@ import com.mng.robotest.domains.registro.beans.ListDataNinos;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroNinosOutlet;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageRegistroNinosStepsOutlet extends StepBase {
 	
 	private final PageRegistroNinosOutlet pageRegistroNinos = new PageRegistroNinosOutlet();
@@ -20,10 +18,10 @@ public class PageRegistroNinosStepsOutlet extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + seconds + " segundos)",
-			pageRegistroNinos.isPageUntil(seconds), Defect);
+			pageRegistroNinos.isPageUntil(seconds));
 		checks.add(
 			"Aparecen inputs para introducir <b>" + numNinos + "</b>",
-			pageRegistroNinos.getNumInputsNameNino()==numNinos, Defect);
+			pageRegistroNinos.getNumInputsNameNino()==numNinos);
 		return checks;		
 	}
 	
