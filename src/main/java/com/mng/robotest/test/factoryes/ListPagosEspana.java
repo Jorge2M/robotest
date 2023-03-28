@@ -32,7 +32,7 @@ public class ListPagosEspana implements Serializable {
 	private static final boolean ANUL_PEDIDO = true;
 	
 	@Factory(
-		  groups={"Compra", "Canal:all_App:all"}, 
+		  groups={"Compra", "Checkout", "Canal:all_App:all"}, 
 		  description=
 	  		"Factoría que incluye varios tests por cada uno de los pagos de España " + 
 	  		"variando los flags de usuario registrado, empleado y métodos de envío")

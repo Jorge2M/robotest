@@ -42,12 +42,16 @@ public class AccesoSteps extends StepBase {
 	private static final String TAG_LITERAL_IDIOMA = "@TagLiteralIdioma";
 	private static final String TAG_REGISTRO = "@TagRegistro";
 	
-	//TODO 15-03 Eliminar saves html y image
+	public void oneStep(boolean clearArticulos) throws Exception {
+		new AccesoNavigations().accesoHomeAppWeb();
+		oneStepAccess(clearArticulos);
+	}
+	
 	@Step (
 		description="Acceder a Mango (" + TAG_NOMBRE_PAIS + "/" + TAG_LITERAL_IDIOMA + ")<br>" + TAG_REGISTRO, 
 		expected="Se accede correctamente",
 		saveNettraffic=SaveWhen.Always)
-	public void oneStep(boolean clearArticulos) throws Exception {
+	private void oneStepAccess(boolean clearArticulos) throws Exception {
 		String registro = "";
 		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
 			registro = "Identificarse con el usuario <b>" + dataTest.getUserConnected() + "</b><br>"; 
@@ -61,7 +65,6 @@ public class AccesoSteps extends StepBase {
 		stepTestMaker.replaceInDescription(TAG_LITERAL_IDIOMA, dataTest.getIdioma().getCodigo().getLiteral());
 		stepTestMaker.replaceInDescription(TAG_REGISTRO, registro);
 
-		new AccesoNavigations().accesoHomeAppWeb();
 		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
 			new PageIdentificacion().iniciarSesion(dataTest.getUserConnected(), dataTest.getPasswordUser());
 		}
