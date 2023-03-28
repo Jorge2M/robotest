@@ -61,20 +61,20 @@ pipeline {
             }
         }       
 
-        stage('Sonar') {
-            agent {
-                docker {
-                    image 'maven:3.8.4-openjdk-17'
-                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
-                }
-            }
-            steps {
-            	unstash 'target'
-            	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
-	            	sh "mvn --settings ${mavenSettings} sonar:sonar"
-	            }
-            }
-        }
+//        stage('Sonar') {
+//            agent {
+//                docker {
+//                    image 'maven:3.8.4-openjdk-17'
+//                    args '-v /home/ubuntu/.m2:/ubuntu/.m2'
+//                }
+//            }
+//            steps {
+//            	unstash 'target'
+//            	configFileProvider([configFile(fileId: M2_CONFIG_FILE, variable: 'mavenSettings')]) {
+//	            	sh "mvn --settings ${mavenSettings} sonar:sonar"
+//	            }
+//            }
+//        }
 
         stage('Package') {
             agent {
