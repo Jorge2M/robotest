@@ -116,9 +116,11 @@ public class PageFavoritosSteps extends StepBase {
 		checks.add(
 			"No queda ningún artículo en Favoritos",
 			!pageFavoritos.hayArticulos());
+		
 		checks.add(
 			"Aparece el botón \"Inspírate con lo último\"",
 			pageFavoritos.isVisibleButtonEmpty(), Warn);
+		
 		return checks;
 	}  
 	

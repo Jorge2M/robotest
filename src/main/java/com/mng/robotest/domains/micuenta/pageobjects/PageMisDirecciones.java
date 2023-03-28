@@ -17,6 +17,10 @@ public class PageMisDirecciones extends PageBase {
 		return state(Visible, XPATH_MICROFRONTEND).wait(seconds).check();
 	}
 	
+	public boolean isLinkEditarVisible() {
+		return state(Visible, XPATH_LINK_EDITAR).check(); 
+	}
+	
 	public void clickLinkEditar() {
 		click(XPATH_LINK_EDITAR).waitLink(3).exec();
 	}
@@ -24,6 +28,7 @@ public class PageMisDirecciones extends PageBase {
 		return state(Visible, XPATH_BOTON_GUARDAR).wait(seconds).check();
 	}
 	public String getCodigoPostal() {
+		state(Visible, XPATH_INPUT_CODPOSTAL).wait(2).check();
 		return getElement(XPATH_INPUT_CODPOSTAL).getAttribute("value");
 	}
 	public String getPoblacion() {

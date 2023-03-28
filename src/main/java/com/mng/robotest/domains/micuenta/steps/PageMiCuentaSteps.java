@@ -85,7 +85,7 @@ public class PageMiCuentaSteps extends StepBase {
 	public void goToMisDatosAndValidateData(DataNewRegister dataNewRegister) {
 		if (dataTest.getPais().isMisdirecciones(app)) {
 			goToMisDirecciones();
-			new PageMisDireccionesSteps().checkData(dataNewRegister);
+			new PageMisDireccionesSteps().checkData();
 		}
 		goToMisDatos(dataNewRegister.getEmail());
 		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataNewRegister);

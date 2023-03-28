@@ -3,8 +3,6 @@ package com.mng.robotest.domains.compra.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
-import org.openqa.selenium.WebElement;
-
 import com.mng.robotest.domains.base.PageBase;
 
 public class PageResultPago extends PageBase {
@@ -70,7 +68,7 @@ public class PageResultPago extends PageBase {
 		return state(Visible, XPATH_BLOCK_NEW_LOYALTY_POINTS).check();
 	}
 	public int getLikesGenerated() {
-		WebElement microLikes = getElement(XPATH_MICROFRONTEND_LOYALTY);
+		var microLikes = getElement(XPATH_MICROFRONTEND_LOYALTY);
 		if (microLikes!=null) {
 			return Integer.valueOf(microLikes.getAttribute("likes"));
 		}

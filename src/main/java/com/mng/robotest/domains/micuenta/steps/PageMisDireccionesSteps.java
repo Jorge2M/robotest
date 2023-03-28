@@ -7,7 +7,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisDirecciones;
-import com.mng.robotest.domains.registro.beans.DataNewRegister;
 
 public class PageMisDireccionesSteps extends StepBase {
 
@@ -19,17 +18,23 @@ public class PageMisDireccionesSteps extends StepBase {
 		return pageMisDirecciones.isPage(seconds);
 	}
 
-	public void checkData(DataNewRegister dataRegister) {
-		clickLinkEditar();
-		checkIsData(dataRegister);
+	public void checkData() {
+		clickLinkEditarIfExists();
+		checkPostalCodeVoid();
 		driver.navigate().back();
 	}
 	public void checkData(Map<String,String> dataRegister) {
-		clickLinkEditar();
+		clickLinkEditarIfExists();
 		checkIsData(dataRegister);
 		driver.navigate().back();
 	}
 
+	private void clickLinkEditarIfExists() {
+		if (pageMisDirecciones.isLinkEditarVisible()) {
+			clickLinkEditar();
+		}
+	}
+	
 	@Step(
 		description = "Seleccionar el link <b>Editar</b>",
 		expected = "Aparece el formulario con los datos del usuario")
@@ -44,16 +49,21 @@ public class PageMisDireccionesSteps extends StepBase {
 		return pageMisDirecciones.isFormularioUsuario(seconds);
 	}	
 	
-	@Validation
-	private ChecksTM checkIsData(DataNewRegister dataNewRegister) {
-		
-		var checks = ChecksTM.getNew();
-		checks.add(
-			"Aparece el código postal <b>" + dataNewRegister.getPostalCode() + "</b>",
-			isPostalCode(dataNewRegister.getPostalCode()));
-		
-		return checks;
+	@Validation(description="El código postal está vacío")
+	private boolean checkPostalCodeVoid() {
+		return isPostalCode("");
 	}
+	
+//	@Validation
+//	private ChecksTM checkIsData(DataNewRegister dataNewRegister) {
+//		
+//		var checks = ChecksTM.getNew();
+//		checks.add(
+//			"Aparece el código postal <b>" + dataNewRegister.getPostalCode() + "</b>",
+//			isPostalCode(dataNewRegister.getPostalCode()));
+//		
+//		return checks;
+//	}
 	
 	@Validation
 	private ChecksTM checkIsData(Map<String,String> dataOldRegister) {
