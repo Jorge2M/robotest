@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class Loyalty {
 	
 	@Test (
-		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
+		groups={"Loyalty", "Compra", "Checkout", "Canal:desktop,mobile_App:shop"},
 		description="Se realiza una compra mediante un usuario loyalty con Likes")
 	public void LOY001_Compra_LikesStored() throws Exception {
 		new Loy001().execute();

@@ -27,7 +27,7 @@ public class CompraMultiAddress implements Serializable {
 	}	
 	
 	@Test (
-		groups={"Compra_Multidireccion", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true,
+		groups={"Compra", "Multidireccion", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true,
 		description="[Usuario registrado] Acceder a la sección de multidirecciones del checkout y añadir/eliminar una dirección")
 	public void COM009_MultiAddress() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
