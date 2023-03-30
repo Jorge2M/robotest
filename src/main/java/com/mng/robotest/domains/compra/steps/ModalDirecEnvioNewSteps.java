@@ -12,7 +12,7 @@ public class ModalDirecEnvioNewSteps extends StepBase {
 	
 	@Validation (description="Visible el Modal para Añadir/Editar una dirección")
 	public boolean checkIsVisible() {
-		return modalDirecEnvio.isVisible(2);
+		return modalDirecEnvio.isVisible(5);
 	}
 
 	@Step (

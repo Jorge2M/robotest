@@ -36,6 +36,9 @@ public class ModalArticleNotAvailable extends PageBase {
 		return state(Visible, XPATH_MODAL).wait(seconds).check();
 	}
 
+	public boolean isVisibleInputEmail(int seconds) {
+		return state(Visible, XPATH_INPUT_MAIL + "/..").wait(seconds).check();
+	}	
 	public void inputMail(String mail) {
 		getElement(XPATH_INPUT_MAIL).sendKeys(mail);
 	}

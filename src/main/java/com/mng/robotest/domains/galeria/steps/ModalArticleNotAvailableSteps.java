@@ -31,15 +31,17 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	@Validation
 	public ChecksTM checkVisibleAvisame() {
 		var checks = ChecksTM.getNew();
-		boolean isVisibleModal = modalArticleNotAvailable.isVisibleUntil(2);
-		boolean isVisibleRPGD = modalArticleNotAvailable.isVisibleRPGD(2);
 		checks.add(
-			"Si aparece el modal de avisame",
-			isVisibleModal);
+			"Aparece el modal de avisame",
+			modalArticleNotAvailable.isVisibleUntil(2));
+
+		checks.add(
+			"Aparece el input para la introducción del email",
+			modalArticleNotAvailable.isVisibleInputEmail(2));		
 		
 		checks.add(
-			"Si aparece la descripcion de RPGD de usuario",
-			isVisibleRPGD);
+			"Aparece la descripcion de RPGD de usuario",
+			modalArticleNotAvailable.isVisibleRPGD(2));
 		
 		return checks;
 	}

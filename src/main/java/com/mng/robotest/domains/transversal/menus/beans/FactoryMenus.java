@@ -53,7 +53,8 @@ public class FactoryMenus {
 			.articles(Arrays.asList(
 					"Camisa", "Blusa", "Bluson", "Blusón", "Top", "Bustier", "Body", "Camisero", 
 					"Poncho", "Corsé"))
-			.subMenus(Arrays.asList("camisas", "blusas", "básicas"))	
+			.subMenusShop(Arrays.asList("camisas", "blusas", "básicas"))	
+			.subMenusOutlet(Arrays.asList("camisas manga larga", "camisas manga corta"))
 			.subMenu("básicas")
 			.articlesSubMenu(Arrays.asList("Camisa", "Blusa", "Top"))
 			.build();

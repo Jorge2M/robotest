@@ -64,11 +64,11 @@ public class ModalDirecEnvioNew extends PageBase {
 		inputData(InputType.NOMBRE, direction.getNombre());
 		inputData(InputType.APELLIDOS, direction.getApellidos());
 		inputData(InputType.DIRECCION, direction.getDireccion());
-		inputData(InputType.CODIGO_POSTAL, direction.getCodPostal());
 		inputData(InputType.MOVIL, direction.getMobil());
 		inputIfExists(InputType.CITY, "BARCELONA");
 		inputIfExists(InputType.PROVINCIA, "BARCELONA");
 		setProvinciaIfNotYet();
+		inputData(InputType.CODIGO_POSTAL, direction.getCodPostal());
 		if (direction.isPrincipal()) {
 			clickLabelDirecPrincipal();
 		}
@@ -100,7 +100,7 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 
 	private boolean isPresent(InputType inputType) {
-		return state(Present, inputType.getXPath()).check();
+		return state(Present, inputType.getXPath()).wait(1).check();
 	}
 	
 	private void setProvinciaIfNotYet() {
@@ -115,7 +115,10 @@ public class ModalDirecEnvioNew extends PageBase {
 		if (state(Visible, XPATH_SELECTOR_PROVINCIA).check()) {
 		    return getElement(XPATH_SELECTOR_PROVINCIA).getAttribute("value");
 		}
-		return getElement(XPATH_PROVINCIA_SELECTED_PRE).getText();
+		if (state(Visible, XPATH_PROVINCIA_SELECTED_PRE).check()) {
+			return getElement(XPATH_PROVINCIA_SELECTED_PRE).getText();
+		}
+		return "";
 	}
 	
 	private void setProvincia() {
