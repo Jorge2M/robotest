@@ -13,7 +13,7 @@ public class SecDireccionEnvioDesktop extends PageBase {
 	
 	public void clickEditDireccion() {
 		waitLoadPage(); //For avoid StaleElementReferenceException
-		click(XPATH_EDIT_DIRECCION_BUTTON).exec();
+		click(XPATH_EDIT_DIRECCION_BUTTON).waitLink(1).exec();
 	}
 
 	public String getTextNombreEnvio() {
