@@ -66,6 +66,7 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 	
 	public void inputData(DirectionData direction) {
+		waitMillis(500);
 		inputData(InputType.NOMBRE, direction.getNombre());
 		inputData(InputType.APELLIDOS, direction.getApellidos());
 		inputData(InputType.DIRECCION, direction.getDireccion());
@@ -156,6 +157,10 @@ public class ModalDirecEnvioNew extends PageBase {
 
 	public void clickLabelDirecPrincipal() {
 		click(getXPathCheckDireccionPrincipal()).exec();
+		if (!getElement(getXPathCheckDireccionPrincipal()).isSelected()) {
+			//En ocasiones falla el 1er click así que ejecutamos un 2o
+			click(getXPathCheckDireccionPrincipal()).exec();
+		}
 	}
 	
 	public void clickSaveButton() {
@@ -163,6 +168,7 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 	
 	public void clickRemoveButton() {
+		moveToElement(getXPathRemoveButton());
 		click(getXPathRemoveButton()).exec();
 	}
 

@@ -131,6 +131,9 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		click(XPATH_BUTTON_ACCEPT).exec();
 		if (!state(Invisible, XPATH_BUTTON_ACCEPT).wait(10).check()) {
 			click(XPATH_BUTTON_ACCEPT).type(TypeClick.javascript).exec();
+			if (!state(Invisible, XPATH_BUTTON_ACCEPT).wait(10).check()) {
+				click(XPATH_BUTTON_ACCEPT).exec();
+			}
 		}
 	}	
 	
