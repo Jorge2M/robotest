@@ -7,7 +7,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalDirecEnvioNew extends PageBase {
 
-	private static final String XPATH_CHECK_DIRECION_PRINCIPAL = "//*[@for='address.form-isMainAddress']";
+	private static final String XPATH_CHECK_DIRECCION_PRINCIPAL = "//*[@for='address.form-isMainAddress']";
+	private static final String XPATH_CHECK_DIRECCION_PRINCIPAL_PRE = "//*[@data-testid='addressForm.isMainAddress']";
 	
 	//TODO dejar sólo una versión cuando la operativa de PRE suba a PRO (28-marzo-2023)
 	private static final String XPATH_SAVE_BUTTON = "//*[@data-testid[contains(.,'save.button')]]";
@@ -41,6 +42,10 @@ public class ModalDirecEnvioNew extends PageBase {
 			return String.format("//input[@data-testid='%s' or @data-testid='%s']", dataTestId, dataTestIdPre);
 		}
 	}
+	
+	private String getXPathCheckDireccionPrincipal() {
+		return "(" + XPATH_CHECK_DIRECCION_PRINCIPAL + " | " + XPATH_CHECK_DIRECCION_PRINCIPAL_PRE + ")";
+	}	
 	
 	private String getXPathSaveButton() {
 		return "(" + XPATH_SAVE_BUTTON + " | " + XPATH_SAVE_BUTTON_PRE + ")";
@@ -150,7 +155,7 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 
 	public void clickLabelDirecPrincipal() {
-		click(XPATH_CHECK_DIRECION_PRINCIPAL).exec();
+		click(getXPathCheckDireccionPrincipal()).exec();
 	}
 	
 	public void clickSaveButton() {

@@ -10,9 +10,9 @@ public class ModalDirecEnvioNewSteps extends StepBase {
 
 	private final ModalDirecEnvioNew modalDirecEnvio = new ModalDirecEnvioNew();
 	
-	@Validation (description="Visible el Modal para Añadir/Editar una dirección")
-	public boolean checkIsVisible() {
-		return modalDirecEnvio.isVisible(5);
+	@Validation (description="Es visible el Modal para Añadir/Editar una dirección (lo esperamos hasta #{seconds} segundos)")
+	public boolean checkIsVisible(int seconds) {
+		return modalDirecEnvio.isVisible(seconds);
 	}
 
 	@Step (
