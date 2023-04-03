@@ -258,14 +258,7 @@ public class MenuSteps extends StepBase {
 		var linea = new LineaWeb(lineaType);
 		var sublinea = new LineaWeb(lineaType, sublineaType);
 		hoverLineaDesktop(linea);
-		try {
-			clickSublinea(sublinea);
-		}
-		catch (NoSuchElementException e) {
-			//Try to fix random problem in selection of Teen - Nina
-			hoverLineaDesktop(linea);
-			clickSublinea(sublinea);					
-		}
+		clickSublinea(sublinea);
 	}
 	
 	@Step (
@@ -340,9 +333,25 @@ public class MenuSteps extends StepBase {
 		expected=
 			"Aparece la página correcta asociada a la línea/sublínea")
 	public void clickSublinea(LineaWeb lineaWeb) {
-		lineaWeb.clickSublinea();
+		clickSublineaManagingException(lineaWeb);
+	}
+	
+	private void clickSublineaManagingException(LineaWeb lineaWeb) {
+		try {
+			lineaWeb.clickSublinea();
+		}
+		catch (NoSuchElementException e) {
+			//Try to fix random problem in selection of Teen - Nina
+			if (channel==Channel.desktop) {
+				lineaWeb.hoverLinea();
+			} else {
+				lineaWeb.clickLinea();
+			}
+			lineaWeb.clickSublinea();					
+		}
 		validaSelecSublinea(lineaWeb);
-	}	
+		
+	}
 	
 	private void validaSelecSublinea(LineaWeb lineaWeb) {
 		validateIsSubLineaSelected(lineaWeb);
