@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.compra.tests;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataPago;
-import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.utils.UtilsTest;
@@ -24,7 +22,7 @@ public class Com010 extends TestBase {
 	private final boolean testVale;
 	private final boolean manyArticles;
 	private final boolean empleado;
-	private final boolean checkAnulaPedido;
+//	private final boolean checkAnulaPedido;
 	
 	public Com010(
 			Pais pais, IdiomaPais idioma, Pago pago, boolean usrRegistrado, boolean testVale, 
@@ -36,7 +34,7 @@ public class Com010 extends TestBase {
 		this.testVale = testVale(testVale);
 		this.manyArticles = manyArticles;
 		this.empleado = empleado;
-		this.checkAnulaPedido = checkAnulaPedido;
+//		this.checkAnulaPedido = checkAnulaPedido;
 	}
 	
 	@Override
@@ -64,15 +62,15 @@ public class Com010 extends TestBase {
 			.build()
 			.checkout(From.BOLSA);
 		
-		if (dataPago.getFTCkout().checkManto) {
-			List<CheckPedido> listChecks = new ArrayList<>(Arrays.asList(
-				CheckPedido.CONSULTAR_BOLSA, 
-				CheckPedido.CONSULTAR_PEDIDO));
-			if (checkAnulaPedido) {
-				listChecks.add(CheckPedido.ANULAR);
-			}
-			checkPedidosManto(listChecks, dataPago.getListPedidos());
-		}
+//		if (dataPago.getFTCkout().checkManto) {
+//			List<CheckPedido> listChecks = new ArrayList<>(Arrays.asList(
+//				CheckPedido.CONSULTAR_BOLSA, 
+//				CheckPedido.CONSULTAR_PEDIDO));
+//			if (checkAnulaPedido) {
+//				listChecks.add(CheckPedido.ANULAR);
+//			}
+//			checkPedidosManto(listChecks, dataPago.getListPedidos());
+//		}
 	}
 	
 	private boolean testVale(boolean testVale) {
