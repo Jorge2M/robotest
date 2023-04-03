@@ -14,7 +14,7 @@ public class Compra {
 	}
 	
 	@Test (
-		groups={"Compra", "Checkout", "Canal:all_App:shop,outlet"}, alwaysRun=true,
+		groups={"Compra", "Pedidomanto", "Checkout", "Canal:all_App:shop,outlet"}, alwaysRun=true,
 		description="[Usuario no registrado] Compra sin permitir todas las cookies y con tarjeta real")
 	public void COM002_Compra_Tarjeta_Real_No_Cookies() throws Exception {
 		new Com002().execute();
@@ -51,7 +51,7 @@ public class Compra {
 	}	
 	
 	@Test (
-		groups={"Compra", "Chequeregalo", "Canal:desktop_App:shop"}, alwaysRun=true,
+		groups={"Compra", "Pedidomanto", "Chequeregalo", "Canal:desktop_App:shop"}, alwaysRun=true,
 		description="Compra cheque regalo Old (Francia)")
 	public void COM007_Cheque_Regalo_Old() throws Exception {
 		new Com007().execute();

@@ -51,7 +51,7 @@ public class CheckerAnalitica implements Checker {
 		
 		//TODO actualmente hay muchos errores -> reportar a Alberte
 		//mientras tanto lo ponemos en Warning
-		if (UtilsTest.todayBeforeDate("2023-04-01")) {
+		if (UtilsTest.todayBeforeDate("2023-11-01")) {
 			return Warn;
 		}
 		return GenericCheck.ANALITICA.getLevel();

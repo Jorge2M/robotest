@@ -110,10 +110,9 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 	
 	private void setProvinciaIfNotYet() {
-		if (state(Present, getXPathSelectorProvincia()).check()) {
-			if ("".compareTo(getValueInitialProvincia())==0) {
-				setProvincia();
-			}
+		if (state(Present, getXPathSelectorProvincia()).check() && 
+		   ("".compareTo(getValueInitialProvincia())==0)) {
+			setProvincia();
 		}
 	}
 
