@@ -6,6 +6,8 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
+import org.openqa.selenium.NoSuchElementException;
+
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -256,10 +258,11 @@ public class MenuSteps extends StepBase {
 		var linea = new LineaWeb(lineaType);
 		var sublinea = new LineaWeb(lineaType, sublineaType);
 		hoverLineaDesktop(linea);
-		clickSublinea(sublinea);
-		
-		//Try to fix random problem in selection of Teen - Nina
-		if (!MenusWebAll.make(channel).isMenuInState(true, 1)) {
+		try {
+			clickSublinea(sublinea);
+		}
+		catch (NoSuchElementException e) {
+			//Try to fix random problem in selection of Teen - Nina
 			hoverLineaDesktop(linea);
 			clickSublinea(sublinea);					
 		}
