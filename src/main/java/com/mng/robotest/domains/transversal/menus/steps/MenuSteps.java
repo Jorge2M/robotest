@@ -240,13 +240,27 @@ public class MenuSteps extends StepBase {
 		}
 		if (sublineaType!=null) {
 			if (channel.isDevice()) {
-				clickLinea(new LineaWeb(lineaType));
+				clickSublineaDevice(lineaType, sublineaType);
 			} else {
-				hoverLineaDesktop(new LineaWeb(lineaType));
+				clickSublineaDesktop(lineaType, sublineaType);
 			}
-			clickSublinea(new LineaWeb(lineaType, sublineaType));
 		}
-	}	
+	}
+	
+	private void clickSublineaDevice(LineaType lineaType, SublineaType sublineaType) {
+		clickLinea(new LineaWeb(lineaType));
+		clickSublinea(new LineaWeb(lineaType, sublineaType));
+	}
+	
+	private void clickSublineaDesktop(LineaType lineaType, SublineaType sublineaType) {
+		hoverLineaDesktop(new LineaWeb(lineaType));
+		clickSublinea(new LineaWeb(lineaType, sublineaType));
+		//Try to fix random problem in selection of Teen - Nina
+		if (!MenusWebAll.make(channel).isMenuInState(true, 1)) {
+			hoverLineaDesktop(new LineaWeb(lineaType));
+			clickSublinea(new LineaWeb(lineaType, sublineaType));					
+		}
+	}
 	
 	@Step (
 		description=
@@ -275,7 +289,7 @@ public class MenuSteps extends StepBase {
 		expected=
 			"Aparecen los menús asociados a la línea #{lineaWeb.getLinea()}")
 	public void hoverLineaDesktop(LineaWeb lineaWeb) {
-		lineaWeb.hoverLinea();	   
+		lineaWeb.hoverLinea();
 		validateHoverLineaDesktop(lineaWeb);
 		waitMillis(100);
 	}	
