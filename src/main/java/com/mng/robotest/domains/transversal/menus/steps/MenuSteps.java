@@ -253,12 +253,15 @@ public class MenuSteps extends StepBase {
 	}
 	
 	private void clickSublineaDesktop(LineaType lineaType, SublineaType sublineaType) {
-		hoverLineaDesktop(new LineaWeb(lineaType));
-		clickSublinea(new LineaWeb(lineaType, sublineaType));
+		var linea = new LineaWeb(lineaType);
+		var sublinea = new LineaWeb(lineaType, sublineaType);
+		hoverLineaDesktop(linea);
+		clickSublinea(sublinea);
+		
 		//Try to fix random problem in selection of Teen - Nina
 		if (!MenusWebAll.make(channel).isMenuInState(true, 1)) {
-			hoverLineaDesktop(new LineaWeb(lineaType));
-			clickSublinea(new LineaWeb(lineaType, sublineaType));					
+			hoverLineaDesktop(linea);
+			clickSublinea(sublinea);					
 		}
 	}
 	
