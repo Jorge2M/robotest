@@ -56,6 +56,10 @@ public class Page1DktopCheckout extends PageBase {
 	private static final String XPATH_OTRAS_FORMAS_PAGO = "//div[@class[contains(.,'formasPago')]]";
 	private static final String XPATH_RED_ERROR = "//div[@class[contains(.,'errorbocatapago')]]";
 	
+	private static final String XPATH_DIRECCION_FACTURACION = "//*[@id[contains(.,'datosCliente')]]";
+	//TODO React solicitar data-testid
+	private static final String XPATH_LINK_DESCARTAR_FACTURA = XPATH_DIRECCION_FACTURACION + "//*[text()='Descartar factura']"; 
+	
 	private static final String XPATH_PRECIO_SUBTOTAL = "//*[@data-testid='subTotalOrder.price']";
 	private static final String XPATH_PRECIO_TOTAL = "//*[@data-testid='totalPromotions.price']";
 	private static final String XPATH_PRECIO_TOTAL_CROATIA_EUROS = "//*[@data-testid='subTotalOrder.additionalPrice.1']";
@@ -506,7 +510,7 @@ public class Page1DktopCheckout extends PageBase {
 
 	public void inputCvcTrjGuardadaIfVisible(String cvc) {
 		if (state(Visible, XPATH_CVC_TRJ_GUARDADA).check()) {
-			WebElement input = getElement(XPATH_CVC_TRJ_GUARDADA);
+			var input = getElement(XPATH_CVC_TRJ_GUARDADA);
 			input.clear();
 			input.sendKeys(cvc);
 		}
@@ -516,10 +520,8 @@ public class Page1DktopCheckout extends PageBase {
 		getElement(XPATH_LINK_SOLICITAR_FACTURA).click();
 	}
 	
-	public boolean isMarkedQuieroFactura() {
-		WebElement radio = getElement(XPATH_LINK_SOLICITAR_FACTURA);
-		return (radio.getAttribute("checked")!=null && 
-				radio.getAttribute("checked").contains("true"));
+	public boolean isVisibleDescartarFacturaLink() {
+		return state(Visible, XPATH_LINK_DESCARTAR_FACTURA).wait(1).check();
 	}
 	
 	public boolean isArticulos() {

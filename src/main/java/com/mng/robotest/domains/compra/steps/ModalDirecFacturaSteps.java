@@ -51,8 +51,8 @@ public class ModalDirecFacturaSteps extends StepBase {
 	 		!modalDirecFactura.isVisibleFormUntil(0));
 	 	
 	 	checks.add(
-			"Queda marcado el radiobutton \"Quiero recibir una factura\"",
-			new Page1DktopCheckout().isMarkedQuieroFactura());
+			"Es visible el link \"Descartar factura\"",
+			new Page1DktopCheckout().isVisibleDescartarFacturaLink());
 	 	
 	 	int seconds = 2;
 	 	checks.add(

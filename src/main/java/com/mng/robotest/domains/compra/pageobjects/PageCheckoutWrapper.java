@@ -313,13 +313,6 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}	
 	
-	public boolean isMarkedQuieroFacturaDesktop() {
-		if (isCheckoutMobile()) {
-			return (page2MobilCheckout.isMarkedQuieroFactura());
-		}
-		return (page1DktopCheckout.isMarkedQuieroFactura());
-	}
-	
 	public void clickEditDirecEnvio() {
 		if (isCheckoutMobile()) {
 			page1MobilCheckout.clickEditDirecEnvio();

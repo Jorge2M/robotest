@@ -43,7 +43,7 @@ public class PaisIdioma implements Serializable {
 	}
 	  
 	@Test (
-		groups={"Lineas", "Canal:all_App:shop,outlet"}, 
+		groups={"Menus", "Galeria", "Canal:all_App:shop,outlet"}, 
 		description="Acceso desde prehome y navegación por todas las líneas/sublíneas del país + selección menú/s")
 	public void PAR001_Lineas() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
