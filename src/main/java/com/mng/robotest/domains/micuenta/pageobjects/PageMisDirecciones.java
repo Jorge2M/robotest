@@ -8,9 +8,9 @@ public class PageMisDirecciones extends PageBase {
 
 	private static final String XPATH_MICROFRONTEND = "//micro-frontend[@id='myAddresses']"; 
 	private static final String XPATH_LINK_EDITAR = "//*[@data-testid[contains(.,'addressCard')]]//a";
-	private static final String XPATH_INPUT_CODPOSTAL = "//*[@data-testid='address.form.postalCode']";
-	private static final String XPATH_INPUT_POBLACION = "//*[@data-testid='address.form.city']";
-	private static final String XPATH_INPUT_DIRECCION = "//*[@data-testid='address.form.address']";
+	private static final String XPATH_INPUT_CODPOSTAL = "//input[@data-testid[contains(.,'.postalCode')]]";
+	private static final String XPATH_INPUT_POBLACION = "//input[@data-testid[contains(.,'.city')]]";
+	private static final String XPATH_INPUT_DIRECCION = "//input[@data-testid[contains(.,'.address')]]";
 	private static final String XPATH_BOTON_GUARDAR = "//*[@data-testid='deliveryAddress.form.button.submit']";
 	
 	public boolean isPage(int seconds) {
