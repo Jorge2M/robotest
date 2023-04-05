@@ -128,6 +128,7 @@ public class PageRegistroIniOutlet extends PageBase {
 		for (int i=0; i<2; i++) {
 			try {
 				String xpathInput = getXPathDataInput(inputType).getXPah();
+				moveToElement(xpathInput);
 				sendKeysWithRetry(dataToSend, By.xpath(xpathInput), 2, driver);
 				break;
 			}

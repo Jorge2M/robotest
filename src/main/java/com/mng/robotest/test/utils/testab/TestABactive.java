@@ -18,7 +18,7 @@ public class TestABactive {
 		List<TestABactData> listTestABsToActivate = new ArrayList<>();
 
 		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.New_Registry_MLY_Mobile_PRO, 0));
-		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PLP_DESKTOP_ESCONDER_MENU_LATERAL_PRE, 1));
+//		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PLP_DESKTOP_ESCONDER_MENU_LATERAL_PRE, 1));
 		
 		TestABmanager.activateTestsAB(listTestABsToActivate, channel, app, driver);
 	}
