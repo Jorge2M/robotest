@@ -124,7 +124,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	}
 
 	private void unfoldIdiomas() {
-		click(XPATH_SELECTOR_IDIOMAS).exec();
+		click(XPATH_SELECTOR_IDIOMAS).waitLink(1).exec();
 	}
 	
 	void selectButtonForEnter() {
@@ -162,7 +162,6 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 			Log4jTM.getLogger().error("Problem accessing prehome. {}. {}", e.getClass().getName(), e.getMessage());
 		}		
 	}
-	
 	
 	private void reloadIfServiceUnavailable() {
 		if (driver.getPageSource().contains("Service Unavailable")) {
