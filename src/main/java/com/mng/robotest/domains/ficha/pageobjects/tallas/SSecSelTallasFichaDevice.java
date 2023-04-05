@@ -17,7 +17,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	private static final String XPATH_SELECTOR_BUTTON = "//*[@data-testid='sizeSelectorButton']";
 	private static final String XPATH_CAPA_TALLAS = "//div[@id='sizesContainerId']";
-	private static final String XPATH_OPTION_TALLA = XPATH_CAPA_TALLAS + "//span[@class='size-text']";
+	private static final String XPATH_OPTION_TALLA = XPATH_CAPA_TALLAS + "//div[@data-testid[contains(.,'sizeSelector.size')]]";
 	private static final String XPATH_TALLA_SELECTED = XPATH_SELECTOR_BUTTON + "//span[@class[contains(.,'size-text')]]";
 	private static final String XPATH_OPTION_TALLA_UNICA = "//button[@id='productFormSelect']//span[@class='one-size-text']";
 	private static final String XPATH_MSG_AVISO_TALLA = "//p[@class[contains(.,'sizes-notify-error')]]";
@@ -26,14 +26,15 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 		super(channel, app);
 	}
 	
-	private String getXPathOptionTallaSegunDisponible(boolean disponible) {
-		String symbol = (disponible) ? "<" : ">";
-		return (XPATH_OPTION_TALLA + "//self::*[string-length(normalize-space(text()))" + symbol + "20]");
+	private String getXPathOptionTallaDisponible() {
+		return XPATH_OPTION_TALLA + "//self::*[@data-testid[contains(.,'size.available')]]";
+	}
+	private String getXPathOptionTallaNoDisponible() {
+		return XPATH_OPTION_TALLA + "//self::*[@data-testid[contains(.,'size.unavailable')]]";
 	}
 	
-	private String getXPathOptionTallaSegunDisponible(boolean disponible, String talla) {
-		String xpathOption = getXPathOptionTallaSegunDisponible(disponible);
-		return (xpathOption + "//self::*[text()[contains(.,'" + talla + "')]]");
+	private String getXPathOptionTallaDisponible(String talla) {
+		return getXPathOptionTallaDisponible() + "//self::*[text()[contains(.,'" + talla + "')]]";
 	}
 	
 	String getXPathOptionTalla(Talla talla) {
@@ -81,14 +82,12 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	@Override
 	public int getNumOptionsTallasNoDisponibles() {
-		String xpathOptions = getXPathOptionTallaSegunDisponible(false);
-		return getElements(xpathOptions).size();
+		return getElements(getXPathOptionTallaNoDisponible()).size();
 	}
 	
 	@Override
 	public boolean isTallaAvailable(String talla) {
-		String xpathTalla = getXPathOptionTallaSegunDisponible(true, talla);
-		return state(Present, xpathTalla).check();
+		return state(Present, getXPathOptionTallaDisponible(talla)).check();
 	}
 	
 	@Override
@@ -166,8 +165,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 			return;
 		}
 		despliegaSelectTallas();
-		String xpathTallaAvailable = getXPathOptionTallaSegunDisponible(true);
-		click(xpathTallaAvailable).exec();
+		click(getXPathOptionTallaDisponible()).exec();
 	}
 
 	/**
