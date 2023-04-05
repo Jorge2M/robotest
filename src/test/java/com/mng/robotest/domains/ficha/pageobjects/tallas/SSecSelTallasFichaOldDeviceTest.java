@@ -17,7 +17,7 @@ public class SSecSelTallasFichaOldDeviceTest {
 
 		String xpathExpected =
 				"//div[@id='sizesContainerId']" +
-						"//span[@class='size-text']" +
+						"//div[@data-testid[contains(.,'sizeSelector.size')]]" +
 						"//self::*[" +
 						"text()='32' or starts-with(text(),'32 ') or starts-with(text(),'32cm') or " +
 						"text()='4' or starts-with(text(),'4 ') or starts-with(text(),'4cm') or " +
