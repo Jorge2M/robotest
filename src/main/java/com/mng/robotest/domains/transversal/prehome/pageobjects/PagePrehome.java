@@ -111,6 +111,9 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	void seleccionaIdioma(String nombrePais, String nombreIdioma) {
 		unfoldIdiomas();
 		String xpathButtonIdioma = getXPathIdiomaItemFromName(nombreIdioma);
+		if (!state(Visible, xpathButtonIdioma).wait(1).check()) {
+			unfoldIdiomas();
+		}
 		click(xpathButtonIdioma).exec();
 	}
 	
@@ -124,7 +127,8 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	}
 
 	private void unfoldIdiomas() {
-		click(XPATH_SELECTOR_IDIOMAS).waitLink(1).exec();
+		state(Visible, XPATH_SELECTOR_IDIOMAS).wait(2).check();
+		click(XPATH_SELECTOR_IDIOMAS).exec();
 	}
 	
 	void selectButtonForEnter() {
