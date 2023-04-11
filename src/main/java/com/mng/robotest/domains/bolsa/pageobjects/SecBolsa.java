@@ -109,6 +109,17 @@ public class SecBolsa extends SecBolsaCommon {
 		}
 	}
 
+	//TODO poner data-testids cuando existan (11-abril-2023)
+	private static final String XPATH_CONTINUAR_SIN_CUENTA_BUTTON_DEVICE = "//a[@href[contains(.,'checkoutAsGuest')]]";
+
+	public void clickIniciarSesionDevice() {
+		click(XPATH_CONTINUAR_SIN_CUENTA_BUTTON_DEVICE).exec();
+	}
+	
+	public boolean isVisibleContinuarSinCuentaButtonDevice(int seconds) {
+		return state(Visible, XPATH_CONTINUAR_SIN_CUENTA_BUTTON_DEVICE).wait(seconds).check();
+	}
+
 	private void setBolsaDesktopToState(StateBolsa stateBolsaExpected) {
 		var secCabecera = new SecCabeceraMostFrequent();
 		secCabecera.clickIconoBolsaWhenDisp(2);

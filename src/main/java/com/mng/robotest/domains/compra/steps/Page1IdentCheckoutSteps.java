@@ -12,7 +12,7 @@ public class Page1IdentCheckoutSteps extends StepBase {
 
 	@Validation (
 		description="Aparece el formulario correspondiente a la identificación (lo esperamos hasta #{seconds} segs)")
-	public boolean validateIsPage(int seconds) {
+	public boolean checkIsPage(int seconds) {
 		return (page1IdentCheckout.getSecSoyNuevo().isFormIdentUntil(seconds));
 	}
 	
@@ -20,7 +20,7 @@ public class Page1IdentCheckoutSteps extends StepBase {
 		secSoyNuevoSteps.inputEmailAndContinue(email, emailExistsYet, userRegistered, pais);
 	}
 	
-	public void validaRGPDText() {
-		secSoyNuevoSteps.validaRGPDText(); 
+	public void checkRGPDText() {
+		secSoyNuevoSteps.checkRGPDText(); 
 	}
 }

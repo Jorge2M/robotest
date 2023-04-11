@@ -9,6 +9,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
@@ -244,25 +245,44 @@ public class SecBolsaSteps extends StepBase {
 		return (secBolsa.isNotThisImporteTotalUntil(importeTotalOrig, seconds));
 	}
 
+	//TODO ajustar cuando suba a producción el nuevo flujo de login-checkout (11-abril-2023)
+	public void selectButtonComprar() {
+		selectButtonComprarBasic();
+		if (!dataTest.isUserRegistered()) {
+			if (channel!=Channel.desktop && 
+			checkVisibleContinuarSinCuentaButtonDevice(1)) {
+				clickIniciarSesionDevice();
+			}
+			new Page1IdentCheckoutSteps().checkIsPage(5);
+			new Page1IdentCheckoutSteps().checkRGPDText();
+		} else {
+			new CheckoutSteps().validateIsFirstPage(dataTest.isUserRegistered());
+		}
+		
+		GenericChecks.checkDefault();
+	}
+	
 	@Step (
 		description="Se selecciona el botón \"COMPRAR\" de la bolsa", 
 		expected="Se muestra la página de identificación",
 		saveNettraffic=SaveWhen.Always)
-	public void selectButtonComprar() {
+	public void selectButtonComprarBasic() {
 		secBolsa.clickBotonComprar(10);
-		validaSelectButtonComprar();
-		GenericChecks.checkDefault();
-		if (!dataTest.isUserRegistered()) {
-			new Page1IdentCheckoutSteps().validaRGPDText();
-		}
+	}
+	
+	@Step (
+		description="Se selecciona el botón <b>Continuar sin cuenta</b>",
+		expected="Se muestra la página de continuar como invitado/a")
+	public void clickIniciarSesionDevice() {
+		secBolsa.clickIniciarSesionDevice();
 	}
 
-	public void validaSelectButtonComprar() {
-		if (dataTest.isUserRegistered()) {
-			new CheckoutSteps().validateIsFirstPage(dataTest.isUserRegistered());
-		} else {
-			new Page1IdentCheckoutSteps().validateIsPage(5);
-		}
+	//TODO poner en defect cuando suba a producción el nuevo flujo de login-checkout (11-abril-2023)
+	@Validation (
+		description="Es visible el botón \"Continuar sin cuenta\" (lo esperamos ahsta #{seconds} segundos)",
+		level=State.Info)
+	private boolean checkVisibleContinuarSinCuentaButtonDevice(int seconds) {
+		return secBolsa.isVisibleContinuarSinCuentaButtonDevice(seconds);
 	}
 
 	public void click1erArticuloBolsa() {

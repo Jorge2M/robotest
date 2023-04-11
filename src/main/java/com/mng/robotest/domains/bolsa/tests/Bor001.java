@@ -14,7 +14,7 @@ public class Bor001 extends TestBase {
 	public void execute() throws Exception {
 		accessAndSelectMenuVestidos();
 		selectTallaArticle();
-		navigateToCheckoutAndCheckEmployee();		
+		navigateToCheckoutAndCheckEmployee();
 	}
 
 	private void accessAndSelectMenuVestidos() throws Exception {
