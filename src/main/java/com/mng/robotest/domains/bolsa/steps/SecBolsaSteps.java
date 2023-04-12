@@ -249,9 +249,9 @@ public class SecBolsaSteps extends StepBase {
 	public void selectButtonComprar() {
 		selectButtonComprarBasic();
 		if (!dataTest.isUserRegistered()) {
-			if (channel!=Channel.desktop && 
+			if (channel==Channel.mobile && 
 			checkVisibleContinuarSinCuentaButtonDevice(1)) {
-				clickIniciarSesionDevice();
+				clickIniciarSesionMobile();
 			}
 			new Page1IdentCheckoutSteps().checkIsPage(5);
 			new Page1IdentCheckoutSteps().checkRGPDText();
@@ -273,8 +273,8 @@ public class SecBolsaSteps extends StepBase {
 	@Step (
 		description="Se selecciona el botón <b>Continuar sin cuenta</b>",
 		expected="Se muestra la página de continuar como invitado/a")
-	public void clickIniciarSesionDevice() {
-		secBolsa.clickIniciarSesionDevice();
+	public void clickIniciarSesionMobile() {
+		secBolsa.clickIniciarSesionMobile();
 	}
 
 	//TODO poner en defect cuando suba a producción el nuevo flujo de login-checkout (11-abril-2023)
@@ -282,7 +282,7 @@ public class SecBolsaSteps extends StepBase {
 		description="Es visible el botón \"Continuar sin cuenta\" (lo esperamos ahsta #{seconds} segundos)",
 		level=State.Info)
 	private boolean checkVisibleContinuarSinCuentaButtonDevice(int seconds) {
-		return secBolsa.isVisibleContinuarSinCuentaButtonDevice(seconds);
+		return secBolsa.isVisibleContinuarSinCuentaButtonMobile(seconds);
 	}
 
 	public void click1erArticuloBolsa() {

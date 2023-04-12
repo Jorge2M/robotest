@@ -4,7 +4,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
 //TODO eliminarla cuando se haya activado en PRO el nuevo flujo de login -> checkout (11-abril-2023)
-public class SecSoyNuevoDeviceOld extends SecSoyNuevo {
+public class SecSoyNuevoMobileOld extends SecSoyNuevo {
 	
 	private static final String XPATH_FORM_IDENT = "//div[@class='register' or @id='registerCheckOut']//form"; //desktop y mobil
 	private static final String XPATH_INPUT_EMAIL = XPATH_FORM_IDENT + "//input[@id[contains(.,'expMail')]]";

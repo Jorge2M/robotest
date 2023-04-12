@@ -23,16 +23,16 @@ public abstract class SecSoyNuevo extends PageBase {
 	
 	//TODO eliminar SecSoyNuevoDeviceOld cuando suba el nuevo flujo de login->checkout a PRO (11-abril-2023)
 	public static SecSoyNuevo make(Channel channel) {
-		if (channel==Channel.desktop) {
+		if (channel!=Channel.mobile) {
 			return new SecSoyNuevoDesktop();
 		}
 	
-		var secSoyNuevoDeviceNew = new SecSoyNuevoDeviceNew();
+		var secSoyNuevoDeviceNew = new SecSoyNuevoMobileNew();
 		if (secSoyNuevoDeviceNew.isSection()) {
 			return secSoyNuevoDeviceNew;
 		}
 		
-		return new SecSoyNuevoDeviceOld();
+		return new SecSoyNuevoMobileOld();
 	}
 	
 	public boolean isFormIdentUntil(int seconds) { 

@@ -110,14 +110,14 @@ public class SecBolsa extends SecBolsaCommon {
 	}
 
 	//TODO poner data-testids cuando existan (11-abril-2023)
-	private static final String XPATH_CONTINUAR_SIN_CUENTA_BUTTON_DEVICE = "//a[@href[contains(.,'checkoutAsGuest')]]";
+	private static final String XPATH_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE = "//a[@href[contains(.,'checkoutAsGuest')]]";
 
-	public void clickIniciarSesionDevice() {
-		click(XPATH_CONTINUAR_SIN_CUENTA_BUTTON_DEVICE).exec();
+	public void clickIniciarSesionMobile() {
+		click(XPATH_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE).exec();
 	}
 	
-	public boolean isVisibleContinuarSinCuentaButtonDevice(int seconds) {
-		return state(Visible, XPATH_CONTINUAR_SIN_CUENTA_BUTTON_DEVICE).wait(seconds).check();
+	public boolean isVisibleContinuarSinCuentaButtonMobile(int seconds) {
+		return state(Visible, XPATH_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE).wait(seconds).check();
 	}
 
 	private void setBolsaDesktopToState(StateBolsa stateBolsaExpected) {
