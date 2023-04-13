@@ -13,7 +13,7 @@ public class Page1IdentCheckoutSteps extends StepBase {
 	@Validation (
 		description="Aparece el formulario correspondiente a la identificación (lo esperamos hasta #{seconds} segs)")
 	public boolean checkIsPage(int seconds) {
-		return (page1IdentCheckout.getSecSoyNuevo().isFormIdentUntil(seconds));
+		return page1IdentCheckout.getSecSoyNuevo().isFormIdentUntil(seconds);
 	}
 	
 	public void inputEmailAndContinue(String email, boolean emailExistsYet, boolean userRegistered, Pais pais) {

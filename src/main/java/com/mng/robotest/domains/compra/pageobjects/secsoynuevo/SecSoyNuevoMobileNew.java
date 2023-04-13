@@ -27,8 +27,8 @@ public class SecSoyNuevoMobileNew extends SecSoyNuevo {
 	}
 	
 	@Override
-	boolean isSection() {
-		return state(Visible, XPATH_BOTON_CONTINUE).check();
+	boolean isSection(int seconds) {
+		return state(Visible, XPATH_BOTON_CONTINUE).wait(seconds).check();
 	}
 	
 	@Override

@@ -21,6 +21,7 @@ public class SecBolsa extends SecBolsaCommon {
 	private static final String XPATH_BOTON_COMPRAR = "//button[@data-testid[contains(.,'checkout.button')]]";
 	private static final String XPATH_PRECIO_SUBTOTAL_DESKTOP = "//*[@data-testid='bag.preview.summary.price']";
 	private static final String XPATH_PRECIO_SUBTOTAL_MOBILE = "//*[@data-testid='bag.preview.summary.price']";
+	private static final String XPATH_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE = "//*[@data-testid[contains(.,'goToContinueAsGuest')]]";	
 
 	@Override
 	String getXPathPanelBolsa() {
@@ -108,9 +109,6 @@ public class SecBolsa extends SecBolsaCommon {
 			}
 		}
 	}
-
-	//TODO poner data-testids cuando existan (11-abril-2023)
-	private static final String XPATH_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE = "//a[@href[contains(.,'checkoutAsGuest')]]";
 
 	public void clickIniciarSesionMobile() {
 		click(XPATH_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE).exec();

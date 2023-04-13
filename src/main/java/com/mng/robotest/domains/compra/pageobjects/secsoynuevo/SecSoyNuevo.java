@@ -14,7 +14,7 @@ public abstract class SecSoyNuevo extends PageBase {
 	abstract String getXPathBotonContinue();
 	abstract String getXPathFormIdent();
 	abstract String getXPathInputEmail();
-	abstract boolean isSection();
+	abstract boolean isSection(int seconds);
 	abstract boolean isInputWithText(String text);
 	public abstract void setCheckPubliNewsletter(RadioState action);
 	public abstract void setCheckConsentimiento(RadioState action);
@@ -28,7 +28,7 @@ public abstract class SecSoyNuevo extends PageBase {
 		}
 	
 		var secSoyNuevoDeviceNew = new SecSoyNuevoMobileNew();
-		if (secSoyNuevoDeviceNew.isSection()) {
+		if (secSoyNuevoDeviceNew.isSection(3)) {
 			return secSoyNuevoDeviceNew;
 		}
 		
