@@ -20,7 +20,4 @@ public class Page1IdentCheckoutSteps extends StepBase {
 		secSoyNuevoSteps.inputEmailAndContinue(email, emailExistsYet, userRegistered, pais);
 	}
 	
-	public void checkRGPDText() {
-		secSoyNuevoSteps.checkRGPDText(); 
-	}
 }

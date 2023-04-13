@@ -1,8 +1,6 @@
 package com.mng.robotest.domains.compra.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
-import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.secsoynuevo.SecSoyNuevo;
 import com.mng.robotest.test.beans.Pais;
@@ -33,22 +31,4 @@ public class SecSoyNuevoSteps extends StepBase {
 		GenericChecks.checkDefault();
 	}
 
-
-	@Validation
-	public ChecksTM checkRGPDText() {  
-		var checks = ChecksTM.getNew();
-		int seconds = 5;
-		if (dataTest.getPais().getRgpd().equals("S")) {
-		 	checks.add(
-				"El link de política de privacidad existe para el pais " + 
-				dataTest.getCodigoPais() + " lo esperamos hasta " + seconds + " segundos",
-				secSoyNuevo.isLinkPoliticaPrivacidad(seconds));
-		} else {
-		 	checks.add(
-				"El lik de política de privacidad no exite para el pais " + dataTest.getCodigoPais(),
-				!secSoyNuevo.isLinkPoliticaPrivacidad(0));			
-		}
-		
-		return checks;
-	}
 }

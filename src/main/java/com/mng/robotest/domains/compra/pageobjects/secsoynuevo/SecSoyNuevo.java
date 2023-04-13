@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.compra.pageobjects.secsoynuevo;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
@@ -18,8 +17,6 @@ public abstract class SecSoyNuevo extends PageBase {
 	abstract boolean isInputWithText(String text);
 	public abstract void setCheckPubliNewsletter(RadioState action);
 	public abstract void setCheckConsentimiento(RadioState action);
-	
-	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = "//span[@data-testid='mng-link']";
 	
 	//TODO eliminar SecSoyNuevoDeviceOld cuando suba el nuevo flujo de login->checkout a PRO (11-abril-2023)
 	public static SecSoyNuevo make(Channel channel) {
@@ -50,10 +47,6 @@ public abstract class SecSoyNuevo extends PageBase {
 		click(getXPathBotonContinue()).type(TypeClick.javascript).exec();
 	}
 
-	public boolean isLinkPoliticaPrivacidad(int seconds) {
-		return state(Visible, XPATH_LINK_POLITICA_PRIVACIDAD).wait(seconds).check();
-	}
-	
 	void clickRadio(RadioState action, boolean isActivated, String xpathRadio) {
 		switch (action) {
 		case ACTIVATE:

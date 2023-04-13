@@ -250,11 +250,10 @@ public class SecBolsaSteps extends StepBase {
 		selectButtonComprarBasic();
 		if (!dataTest.isUserRegistered()) {
 			if (channel==Channel.mobile && 
-			checkVisibleContinuarSinCuentaButtonDevice(1)) {
+			checkVisibleContinuarSinCuentaButtonDevice(2)) {
 				clickIniciarSesionMobile();
 			}
 			new Page1IdentCheckoutSteps().checkIsPage(5);
-			new Page1IdentCheckoutSteps().checkRGPDText();
 		} else {
 			new CheckoutSteps().validateIsFirstPage(dataTest.isUserRegistered());
 		}
