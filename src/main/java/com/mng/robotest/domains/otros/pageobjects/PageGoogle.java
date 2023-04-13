@@ -10,7 +10,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageGoogle extends PageBase {
 
 	private static final String URL_ACCESO = "http://www.google.es";
-	private static final String XPATH_INPUT_TEXT = "//input[@type='text']";
+	private static final String XPATH_INPUT_TEXT = "//textarea[@type='search']";
 	private static final String XPATH_LINK_NO_PUBLI = "//div[@class='g']//a";
 	private static final String XPATH_LINK_NO_PUBLI_TEXT = XPATH_LINK_NO_PUBLI + "//h3";
 	private static final String XPATH_BUTTON_ACCEPT_MODAL_COOKIE = "//button[@id='L2AGLb']";

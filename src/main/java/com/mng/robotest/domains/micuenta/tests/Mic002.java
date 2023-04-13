@@ -33,7 +33,10 @@ public class Mic002 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		compraOnline();
-		compraTienda();		
+		//TODO al usuario ticket_digital_es@mango.com ya no le aparece 
+		//la compra en tienda 8684 porque es de hace > 4 años
+		//descomentar si en algún momento encontramos un usuario con este tipo de compras
+		//compraTienda();		
 	}
 
 	private void compraOnline() throws Exception {
