@@ -1,6 +1,7 @@
 package com.mng.robotest.getdata.canonicalproduct.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
@@ -15,6 +16,8 @@ public class EntitySizeDescriptions implements Serializable {
 	private String baseEn;
 	private String further; 
 	private String furtherEn;
+	private String Short;
+	private String Long;
 	
 	public String getBase() {
 		return base;
@@ -47,4 +50,22 @@ public class EntitySizeDescriptions implements Serializable {
 	public void setFurtherEn(String furtherEn) {
 		this.furtherEn = furtherEn;
 	}
+
+	@JsonProperty("short")
+	public String getShort() {
+		return Short;
+	}
+
+	public void setShort(String s) {
+		Short = s;
+	}
+	
+	@JsonProperty("long")
+	public String getLong() {
+		return Long;
+	}
+
+	public void setLong(String s) {
+		Long = s;
+	}	
 }
