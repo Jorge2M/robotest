@@ -35,6 +35,17 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(AppEcom.shop)
 	),	
 
+	Nuevo_Guest_Checkout_PRE (
+		"Kiritaki - Nuevo Guest Checkout (PRE)",
+		"N2qGaYKSQlCB6rfl8-nImA",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Variante1"),
+		Arrays.asList(Channel.mobile),
+		Arrays.asList(AppEcom.shop)
+	),	
+	
 	GPS_NEW_MENU_MOBILE_PRE(
 		"GPS - New Menu Mobile (1)",
 		"Y9Ad5nDkQtGXnU11J4DtrQ",

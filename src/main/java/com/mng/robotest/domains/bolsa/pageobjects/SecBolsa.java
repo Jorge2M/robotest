@@ -21,6 +21,7 @@ public class SecBolsa extends SecBolsaCommon {
 	private static final String XPATH_BOTON_COMPRAR = "//button[@data-testid[contains(.,'checkout.button')]]";
 	private static final String XPATH_PRECIO_SUBTOTAL_DESKTOP = "//*[@data-testid='bag.preview.summary.price']";
 	private static final String XPATH_PRECIO_SUBTOTAL_MOBILE = "//*[@data-testid='bag.preview.summary.price']";
+	private static final String XPATH_INICIAR_SESION_MOBILE = "//*[@data-testid[contains(.,'goToLogin')]]";
 	private static final String XPATH_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE = "//*[@data-testid[contains(.,'goToContinueAsGuest')]]";	
 
 	@Override
@@ -111,6 +112,10 @@ public class SecBolsa extends SecBolsaCommon {
 	}
 
 	public void clickIniciarSesionMobile() {
+		click(XPATH_INICIAR_SESION_MOBILE).exec();
+	}
+	
+	public void clickContinuarSinCuentaMobile() {
 		click(XPATH_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE).exec();
 	}
 	

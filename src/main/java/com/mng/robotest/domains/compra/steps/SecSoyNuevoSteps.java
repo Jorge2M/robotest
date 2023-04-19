@@ -11,7 +11,7 @@ import static com.mng.robotest.domains.compra.pageobjects.secsoynuevo.SecSoyNuev
 
 public class SecSoyNuevoSteps extends StepBase {
 
-	private final SecSoyNuevo secSoyNuevo = SecSoyNuevo.make(channel);
+	private final SecSoyNuevo secSoyNuevo = SecSoyNuevo.make(channel, app);
 	
 	@Step (
 		description=

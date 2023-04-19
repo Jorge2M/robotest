@@ -11,6 +11,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.ValidatorContentBolsa;
@@ -32,9 +33,15 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa.*;
+import static com.mng.robotest.domains.bolsa.steps.SecBolsaSteps.FluxBolsaCheckout.*;
 
 public class SecBolsaSteps extends StepBase {
 
+	public enum FluxBolsaCheckout {
+		INICIAR_SESION,
+		CONTINUAR_SIN_CUENTA 
+	}
+	
 	private final SecBolsa secBolsa = new SecBolsa();
 	
 	@Step (
@@ -150,6 +157,11 @@ public class SecBolsaSteps extends StepBase {
 		GenericChecks.from(Arrays.asList(GenericCheck.GOOGLE_ANALYTICS)).checks();
 	}
 
+	@Validation(description="La bolsa está vacía")
+	public boolean checkBolsaIsVoid() {
+		return secBolsa.numberItemsIs("0");
+	}
+	
 	@Validation
 	private ChecksTM checkIsBolsaVisibleInDesktop() {
 		var checks = ChecksTM.getNew();
@@ -244,21 +256,44 @@ public class SecBolsaSteps extends StepBase {
 	private boolean checkImporteIsModified(String importeTotalOrig, int seconds) {
 		return (secBolsa.isNotThisImporteTotalUntil(importeTotalOrig, seconds));
 	}
-
-	//TODO ajustar cuando suba a producción el nuevo flujo de login-checkout (11-abril-2023)
+	
 	public void selectButtonComprar() {
+		selectButtonComprar(CONTINUAR_SIN_CUENTA);
+	}
+	
+	public void selectButtonComprar(FluxBolsaCheckout fluxMobile) {
 		selectButtonComprarBasic();
+		fluxPostSelectComprar(fluxMobile);
+		GenericChecks.checkDefault();		
+	}
+
+	private void fluxPostSelectComprar(FluxBolsaCheckout fluxMobile) {
 		if (!dataTest.isUserRegistered()) {
-			if (channel==Channel.mobile && 
-			checkVisibleContinuarSinCuentaButtonDevice(2)) {
-				clickIniciarSesionMobile();
+			if (channel==Channel.mobile) {
+				fluxPostSelectComprarUserNotIdentifiedMobile(fluxMobile);
+			} else {
+				new Page1IdentCheckoutSteps().checkIsPage(5);
 			}
-			new Page1IdentCheckoutSteps().checkIsPage(5);
 		} else {
 			new CheckoutSteps().validateIsFirstPage(dataTest.isUserRegistered());
 		}
-		
-		GenericChecks.checkDefault();
+	}
+
+	//TODO simplificar cuando en Outlet suba el flujo nuevo
+	//(y crear página específica PageContinuarComoInvitadoMobile
+	private void fluxPostSelectComprarUserNotIdentifiedMobile(FluxBolsaCheckout flux) {
+		if (app==AppEcom.shop) {
+			checkVisibleContinuarSinCuentaButtonDevice(2);
+			if (flux==INICIAR_SESION) {
+				clickIniciarSesionMobile();
+				new PageIniciarSesionBolsaMobileSteps().checkIsPage(3);
+			} else {
+				clickContinuarSinCuentaMobile();
+				new Page1IdentCheckoutSteps().checkIsPage(5);
+			}
+		} else {
+			new Page1IdentCheckoutSteps().checkIsPage(5);
+		}
 	}
 	
 	@Step (
@@ -270,16 +305,22 @@ public class SecBolsaSteps extends StepBase {
 	}
 	
 	@Step (
-		description="Se selecciona el botón <b>Continuar sin cuenta</b>",
-		expected="Se muestra la página de continuar como invitado/a")
+		description="Se selecciona el botón <b>Iniciar sesión</b>",
+		expected="Se muestra la página de identificación")
 	public void clickIniciarSesionMobile() {
 		secBolsa.clickIniciarSesionMobile();
+	}	
+	
+	@Step (
+		description="Se selecciona el botón <b>Continuar sin cuenta</b>",
+		expected="Se muestra la página de continuar como invitado/a")
+	public void clickContinuarSinCuentaMobile() {
+		secBolsa.clickContinuarSinCuentaMobile();
 	}
 
-	//TODO poner en defect cuando suba a producción el nuevo flujo de login-checkout (11-abril-2023)
 	@Validation (
 		description="Es visible el botón \"Continuar sin cuenta\" (lo esperamos ahsta #{seconds} segundos)",
-		level=State.Info)
+		level=State.Defect)
 	private boolean checkVisibleContinuarSinCuentaButtonDevice(int seconds) {
 		return secBolsa.isVisibleContinuarSinCuentaButtonMobile(seconds);
 	}

@@ -2,12 +2,10 @@ package com.mng.robotest.domains.loyalty.tests;
 
 import com.mng.robotest.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
-import com.mng.robotest.domains.compra.tests.CompraSteps;
 import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.domains.loyalty.steps.PageHistorialLikesSteps;
 import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps;
-import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.GaleriaSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
@@ -56,11 +54,7 @@ public class Loy001 extends TestBase {
 	}
 	
     private String executeMastercardEnvioTiendaPayment() throws Exception {
-        DataPago dataPago = getDataPago();
-        dataPago.setPago(dataTest.getPais().getPago("MASTERCARD"));
-        new CompraSteps().startPayment(dataPago, true);
-        new PageResultPagoSteps().validateIsPageOk(dataPago);
-        return dataPago.getDataPedido().getCodpedido();
+    	return executeMastercardPayment().getDataPedido().getCodpedido();
     }
     
     private void checkLoyaltyPointsGenerated(String idPedido) {

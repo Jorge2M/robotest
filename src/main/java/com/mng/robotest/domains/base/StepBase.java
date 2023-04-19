@@ -38,7 +38,7 @@ public abstract class StepBase extends PageBase {
 	
 	protected void accessAndClearData() throws Exception {
 		new AccesoSteps().oneStep(true);
-	}	
+	}
 	
 	protected void clickLinea(LineaType lineaType) {
 		new MenuSteps().clickLinea(lineaType);

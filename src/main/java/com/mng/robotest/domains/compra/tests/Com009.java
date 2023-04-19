@@ -23,7 +23,6 @@ public class Com009 extends TestBase {
 	
 	private final ModalMultidirectionSteps modalMultidirectionSteps = new ModalMultidirectionSteps();
 	private final ModalDirecEnvioNewSteps modalDirecEnvioSteps = new ModalDirecEnvioNewSteps();
-    private final CompraSteps compraSteps = new CompraSteps();
 
     public Com009(Pais pais, IdiomaPais idioma) {
     	if (pais!=null) {
@@ -42,10 +41,6 @@ public class Com009 extends TestBase {
     private void accessLoginAndClearBolsa() throws Exception {
         access();
         new SecBolsaSteps().clear();
-    }
-    private void altaArticulosBolsaAndClickComprar() throws Exception {
-        new SecBolsaSteps().altaListaArticulosEnBolsa(getArticles(1));
-        new SecBolsaSteps().selectButtonComprar();
     }
     
     private void changeDirecciones() throws Exception {
@@ -95,14 +90,6 @@ public class Com009 extends TestBase {
     	addAnotherDireccion(directionSecondary);
 	}
     
-    private DataPago executeVisaPayment() throws Exception {
-        DataPago dataPago = getDataPago();
-        compraSteps.startPayment(dataPago, true);
-
-        new PageResultPagoSteps().validateIsPageOk(dataPago);
-        return dataPago;
-    }
-
     private void selectEnvioEstandard() {
     	DataPago dataPago = getDataPago();
     	Pago pagoVISA = dataTest.getPais().getPago("VISA");

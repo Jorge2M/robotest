@@ -83,6 +83,7 @@ public class DataTest implements Cloneable, Serializable {
 		}
 		setUserConnected(userShop.user);
 		setPasswordUser(userShop.password);
+		setUserRegistered(true);
 	}
 
 	public Pais getPais() {

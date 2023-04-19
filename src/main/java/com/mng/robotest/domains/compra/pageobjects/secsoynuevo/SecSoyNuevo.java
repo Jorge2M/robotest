@@ -4,6 +4,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 
 public abstract class SecSoyNuevo extends PageBase {
@@ -18,17 +19,13 @@ public abstract class SecSoyNuevo extends PageBase {
 	public abstract void setCheckPubliNewsletter(RadioState action);
 	public abstract void setCheckConsentimiento(RadioState action);
 	
-	//TODO eliminar SecSoyNuevoDeviceOld cuando suba el nuevo flujo de login->checkout a PRO (11-abril-2023)
-	public static SecSoyNuevo make(Channel channel) {
+	public static SecSoyNuevo make(Channel channel, AppEcom app) {
 		if (channel!=Channel.mobile) {
 			return new SecSoyNuevoDesktop();
 		}
-	
-		var secSoyNuevoDeviceNew = new SecSoyNuevoMobileNew();
-		if (secSoyNuevoDeviceNew.isSection(3)) {
-			return secSoyNuevoDeviceNew;
+		if (app==AppEcom.shop) {
+			return new SecSoyNuevoMobileNew();
 		}
-		
 		return new SecSoyNuevoMobileOld();
 	}
 	

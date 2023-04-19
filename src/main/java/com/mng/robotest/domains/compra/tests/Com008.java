@@ -12,7 +12,6 @@ import com.mng.robotest.test.utils.PaisGetter;
 public class Com008 extends TestBase {
 
 	private final CheckoutSteps checkoutSteps = new CheckoutSteps();
-	private final CompraSteps compraSteps = new CompraSteps();
 	
 	public Com008() throws Exception {
 		dataTest.setUserRegistered(true);
@@ -26,7 +25,7 @@ public class Com008 extends TestBase {
 		altaArticulosBolsaAndClickComprar();
 		continueAndUnfoldPayments();
 		if (!isPRO()) {
-			DataPago dataPago = executeVisaPayment();
+			var dataPago = executeVisaPayment();
 			checkMisCompras(dataPago);
 		}
 	}
@@ -36,11 +35,6 @@ public class Com008 extends TestBase {
 		new SecBolsaSteps().clear();
 	}
 	
-	private void altaArticulosBolsaAndClickComprar() throws Exception {
-		new SecBolsaSteps().altaListaArticulosEnBolsa(getArticles(1));
-		new SecBolsaSteps().selectButtonComprar();
-	}
-	
 	private void continueAndUnfoldPayments() {
 		checkoutSteps.goToMetodosPagoMobile();
 	}	
@@ -48,14 +42,6 @@ public class Com008 extends TestBase {
 	public void checkIsPresentImportInBothCurrencies() throws Exception {
 		checkoutSteps.isCroatiaImportInBothCurrencies();
 	}
-
-	private DataPago executeVisaPayment() throws Exception {
-		DataPago dataPago = getDataPago();
-		compraSteps.startPayment(dataPago, true);
-	
-		new PageResultPagoSteps().validateIsPageOk(dataPago);
-		return dataPago;
-	}	
 	
 	private void checkMisCompras(DataPago dataPago) {
 		String codigoPedido = dataPago.getDataPedido().getCodpedido();

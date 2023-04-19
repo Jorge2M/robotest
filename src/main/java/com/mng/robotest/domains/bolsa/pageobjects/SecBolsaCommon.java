@@ -59,10 +59,14 @@ public abstract class SecBolsaCommon extends PageBase {
 		return (new SecCabeceraMostFrequent().getNumberArtIcono());
 	}
 	
-	public boolean numberItemsIsUntil(String itemsMightHave, int seconds) {
+	
+	public boolean numberItemsIs(String items) {
+		return numberItemsIsUntil(items, 0);
+	}
+	public boolean numberItemsIsUntil(String items, int seconds) {
 		for (int i=0; i<=seconds; i++) {
 			String itemsPantalla = getNumberArtIcono();
-			if (itemsMightHave.compareTo(itemsPantalla)==0) {
+			if (items.compareTo(itemsPantalla)==0) {
 				return true;
 			}
 			waitMillis(1000);

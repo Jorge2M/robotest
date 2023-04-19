@@ -1,15 +1,12 @@
 package com.mng.robotest.domains.compra.tests;
 
 import java.util.Arrays;
-import java.util.List;
-import org.apache.commons.lang3.tuple.Pair;
 
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.domains.micuenta.steps.ModalDetalleCompraSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 
@@ -27,7 +24,7 @@ public class Com011 extends TestBase {
 	@Override
 	public void execute() throws Exception {
         accessLoginAndClearBolsa();
-        altaArticulosBolsaAndClickComprar();
+        altaArticulosBolsaAndComprar();
 		if (!isPRO()) {
 			DataPago dataPago = executeVisaPayment();
 			checkMisCompras(dataPago);
@@ -39,22 +36,12 @@ public class Com011 extends TestBase {
         access();
         new SecBolsaSteps().clear();
     }
-    private void altaArticulosBolsaAndClickComprar() throws Exception {
-		Pair<Article, Article> twoArticles = getTwoArticlesFromDistinctWarehouses();
-		List<Article> articles = Arrays.asList(twoArticles.getLeft(), twoArticles.getRight());
-        new SecBolsaSteps().altaListaArticulosEnBolsa(articles);
-        new SecBolsaSteps().selectButtonComprar();
+    private void altaArticulosBolsaAndComprar() throws Exception {
+		var twoArticles = getTwoArticlesFromDistinctWarehouses();
+		var articles = Arrays.asList(twoArticles.getLeft(), twoArticles.getRight());
+		altaArticulosBolsaAndClickComprar(articles);
     }	
 
-    private DataPago executeVisaPayment() throws Exception {
-        DataPago dataPago = getDataPago();
-        dataPago.setPago(dataTest.getPais().getPago("VISA"));
-        new CompraSteps().startPayment(dataPago, true);
-
-        new PageResultPagoSteps().validateIsPageOk(dataPago);
-        return dataPago;
-    }	
-    
 	private void checkMisCompras(DataPago dataPago) {
 		String codigoPedido = dataPago.getDataPedido().getCodpedido();
 		new PageResultPagoSteps().selectMisCompras();

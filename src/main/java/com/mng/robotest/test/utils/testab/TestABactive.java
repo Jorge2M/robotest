@@ -17,7 +17,7 @@ public class TestABactive {
 	public static void currentTestABsToActivate(Channel channel, AppEcom app, WebDriver driver) throws Exception {
 		List<TestABactData> listTestABsToActivate = new ArrayList<>();
 
-//		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.New_Registry_MLY_Mobile_PRO, 0));
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.Nuevo_Guest_Checkout_PRE, 1));
 //		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PLP_DESKTOP_ESCONDER_MENU_LATERAL_PRE, 1));
 		
 		TestABmanager.activateTestsAB(listTestABsToActivate, channel, app, driver);

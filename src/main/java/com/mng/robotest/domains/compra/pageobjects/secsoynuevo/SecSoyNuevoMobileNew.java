@@ -4,7 +4,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecSoyNuevoMobileNew extends SecSoyNuevo {
 	
-	private static final String XPATH_FORM_IDENT = "//form[@id='guestContinue']";
+	private static final String XPATH_FORM_IDENT = "//form[@id='guestContinueForm']";
 	private static final String XPATH_INPUT_EMAIL = XPATH_FORM_IDENT + "//input[@data-testid='checkout.guestContinue.emailInput']";
 	private static final String XPATH_BOTON_CONTINUE = "//button[@data-testid='checkout.guestContinue.continueOrderButton.continueOrder']";
 	private static final String XPATH_INPUT_PUBLICIDAD = "//input[@data-testid='checkout.guestContinue.subscribeNewsletterCheckbox']";

@@ -1,7 +1,13 @@
 package com.mng.robotest.domains.base;
 
+import java.util.List;
+
 import com.mng.robotest.domains.base.datatest.DataTest;
+import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
+import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
+import com.mng.robotest.domains.compra.tests.CompraSteps;
+import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
@@ -22,6 +28,33 @@ public abstract class TestBase extends StepBase {
 		DATA_TEST.set(dataTest);
 	}
 	
+	protected void altaArticulosBolsaAndClickComprar() throws Exception {
+		altaArticulosBolsaAndClickComprar(1);
+	}
+	
+    protected void altaArticulosBolsaAndClickComprar(int numArticles) throws Exception {
+    	altaArticulosBolsaAndClickComprar(getArticles(numArticles));
+    }	
+    
+    protected void altaArticulosBolsaAndClickComprar(List<Article> articles) throws Exception {
+        new SecBolsaSteps().altaListaArticulosEnBolsa(articles);
+        new SecBolsaSteps().selectButtonComprar();
+    }
+	
+    protected DataPago executeVisaPayment() throws Exception {
+    	return executePayment("VISA");
+    }	    
+    protected DataPago executeMastercardPayment() throws Exception {
+    	return executePayment("MASTERCARD");
+    }
+    protected DataPago executePayment(String payment) throws Exception {
+        DataPago dataPago = getDataPago();
+        dataPago.setPago(dataTest.getPais().getPago(payment));
+        new CompraSteps().startPayment(dataPago, true);
+        new PageResultPagoSteps().validateIsPageOk(dataPago);
+        return dataPago;
+    }
+    
 	protected DataPago getDataPago() {
 		return getDataPago(ConfigCheckout.config().build());
 	}
