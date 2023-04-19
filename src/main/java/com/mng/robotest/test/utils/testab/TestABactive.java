@@ -16,10 +16,8 @@ public class TestABactive {
 	
 	public static void currentTestABsToActivate(Channel channel, AppEcom app, WebDriver driver) throws Exception {
 		List<TestABactData> listTestABsToActivate = new ArrayList<>();
-
-		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.Nuevo_Guest_Checkout_PRE, 1));
-//		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.PLP_DESKTOP_ESCONDER_MENU_LATERAL_PRE, 1));
-		
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.NUEVO_GUEST_CHECKOUT_PRE, 1));
+		listTestABsToActivate.add(TestABactData.getNew(TestABOptimizeImpl.NUEVO_GUEST_CHECKOUT_PRO, 1));
 		TestABmanager.activateTestsAB(listTestABsToActivate, channel, app, driver);
 	}
 }
