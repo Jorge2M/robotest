@@ -6,6 +6,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.base.datatest.DataTest;
 
 public abstract class SecSoyNuevo extends PageBase {
 	
@@ -19,11 +20,14 @@ public abstract class SecSoyNuevo extends PageBase {
 	public abstract void setCheckPubliNewsletter(RadioState action);
 	public abstract void setCheckConsentimiento(RadioState action);
 	
-	public static SecSoyNuevo make(Channel channel, AppEcom app) {
+	public static SecSoyNuevo make(Channel channel, AppEcom app, DataTest dataTest) {
 		if (channel!=Channel.mobile) {
 			return new SecSoyNuevoDesktop();
 		}
-		if (app==AppEcom.shop) {
+		if (app==AppEcom.shop &&
+			!dataTest.getTestCode().contains("COM002")) {
+			//TODO el COM002 va sin cookies con lo que vamos por la variante-0 del TestAB
+			//quitar cuando se desactive el TestAB) {
 			return new SecSoyNuevoMobileNew();
 		}
 		return new SecSoyNuevoMobileOld();

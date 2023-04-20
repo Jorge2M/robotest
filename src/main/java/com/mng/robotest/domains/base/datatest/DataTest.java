@@ -3,6 +3,7 @@ package com.mng.robotest.domains.base.datatest;
 import java.io.Serializable;
 import java.util.List;
 
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.getdata.usuarios.UserShop;
 import com.mng.robotest.test.beans.IdiomaPais;
@@ -17,6 +18,7 @@ public class DataTest implements Cloneable, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	private final String testCode; 
 	private Pais pais = null;
 	private IdiomaPais idioma = null;
 	private boolean userRegistered = false;
@@ -26,9 +28,18 @@ public class DataTest implements Cloneable, Serializable {
 	private DataBag dataBag = new DataBag(); 
 	private DataFavoritos dataFavoritos = new DataFavoritos();
 	
-	public DataTest() { }
+	public DataTest() { 
+		//TODO esperar a 2.1.39 TestMaker para poder hacer uso de .getCode();
+		var test = TestMaker.getTestCase();
+		if (test.isPresent()) {
+			testCode = test.get().getName();
+		} else {
+			testCode = "";
+		}
+	}
 	
 	public DataTest(Pais paisI) {
+		this();
 		this.pais = paisI;
 	}
 	
@@ -52,6 +63,10 @@ public class DataTest implements Cloneable, Serializable {
 		dataTest.userRegistered = this.userRegistered;
 		dataTest.passwordUser = this.passwordUser;
 		return dataTest;
+	}
+	
+	public String getTestCode() {
+		return testCode;
 	}
 	
 	public String getNombrePais() {

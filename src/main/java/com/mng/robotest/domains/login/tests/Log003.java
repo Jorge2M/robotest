@@ -1,6 +1,7 @@
 package com.mng.robotest.domains.login.tests;
 
 import com.mng.robotest.domains.base.TestBase;
+import com.mng.robotest.domains.bolsa.steps.PageIniciarSesionBolsaMobileSteps;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
 
@@ -13,6 +14,7 @@ public class Log003 extends TestBase {
 		access();
 		altaArticulosBolsa();
 		clickComprarAndSelectIniciarSesion();
+		iniciarSesion();
 		if (!isPRO()) {
 			executeVisaPayment();
 			clickVerMisCompras();
@@ -26,6 +28,10 @@ public class Log003 extends TestBase {
 	
 	private void clickComprarAndSelectIniciarSesion() {
 		new SecBolsaSteps().selectButtonComprar(INICIAR_SESION);
+	}
+	
+	private void iniciarSesion() {
+		new PageIniciarSesionBolsaMobileSteps().login();
 	}
 	
 	private void clickVerMisCompras() {
