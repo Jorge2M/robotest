@@ -54,7 +54,48 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 			"V1-Variante1"),
 		Arrays.asList(Channel.mobile),
 		Arrays.asList(AppEcom.shop)
-	),		
+	),
+	PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_SHOP_PRE (
+		"[PLP][MOBILE] Selector Listado Mobile 1 columna",
+		"LDNtdfrQS5K13P4o7I1SvQ",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Variante1"),
+		Arrays.asList(Channel.mobile),
+		Arrays.asList(AppEcom.shop)
+	),	
+	PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_SHOP_PRO (
+		"[PLP][MOBILE] Selector Listado Mobile 1 columna",
+		"uMS4ByiBS9q8ZJnfPm972w",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Variante1"),
+		Arrays.asList(Channel.mobile),
+		Arrays.asList(AppEcom.shop)
+	),	
+	
+	PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_OUTLET_PRO (
+		"[PLP][MOBILE] Selector Listado Mobile 1 columna",
+		"DGvR1803R46RcLwrwagvPg",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Variante1"),
+		Arrays.asList(Channel.mobile),
+		Arrays.asList(AppEcom.outlet)
+	),	
+	PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_OUTLET_PRE (
+		"[PLP][MOBILE] Selector Listado Mobile 1 columna",
+		"HA8t8zCBR66kLo5tc33G6w",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Variante1"),
+		Arrays.asList(Channel.mobile),
+		Arrays.asList(AppEcom.outlet)
+	),	
 	
 	
 	GPS_NEW_MENU_MOBILE_PRE(
