@@ -1,6 +1,7 @@
-package com.mng.robotest.test.pageobject.chequeregalo;
+package com.mng.robotest.domains.chequeregalo.pageobjects;
 
 import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.legal.pageobjects.LegalTextsPage;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.ChequeRegalo;
 
@@ -36,6 +37,14 @@ public abstract class PageChequeRegaloInputData extends PageBase {
 			return new PageChequeRegaloInputDataNew();
 		}
 		return new PageChequeRegaloInputDataOld();
+	}
+	
+	public PageChequeRegaloInputData() {
+		super();
+	} 
+	
+	public PageChequeRegaloInputData(LegalTextsPage legalTextsPage) {
+		super(legalTextsPage);
 	}
 	
 }

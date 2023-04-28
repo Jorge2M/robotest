@@ -29,7 +29,7 @@ public class PageMisDatosSteps extends StepBase {
 
 		return checks;
 	}
-
+	
 	@Validation
 	public ChecksTM validaIsDataAssociatedToRegister(Map<String,String> datosRegOk, String codpais) {
 		String nombre = datosRegOk.get("cfName");

@@ -13,12 +13,14 @@ import com.mng.robotest.conftestmaker.ErrorStorer;
 import com.mng.robotest.domains.ayuda.tests.Ayuda;
 import com.mng.robotest.domains.bolsa.tests.Bolsa;
 import com.mng.robotest.domains.buscador.tests.Buscador;
+import com.mng.robotest.domains.chequeregalo.tests.ChequeRegalo;
 import com.mng.robotest.domains.compra.tests.Compra;
 import com.mng.robotest.domains.compra.tests.CompraMultiAddress;
 import com.mng.robotest.domains.favoritos.tests.Favoritos;
 import com.mng.robotest.domains.ficha.tests.Ficha;
 import com.mng.robotest.domains.footer.tests.Footer;
 import com.mng.robotest.domains.galeria.tests.Galeria;
+import com.mng.robotest.domains.legal.tests.TextosLegales;
 import com.mng.robotest.domains.login.tests.Login;
 import com.mng.robotest.domains.loyalty.tests.Loyalty;
 import com.mng.robotest.domains.micuenta.tests.MiCuenta;
@@ -67,13 +69,16 @@ public class SmokeTestSuite extends SuiteMaker {
 			PaisIdioma.class,
 			Galeria.class,
 			Compra.class,
+			ChequeRegalo.class,
 			CompraMultiAddress.class,
 			ListPagosEspana.class,
 			MiCuenta.class,
 			Favoritos.class,
 			Reembolsos.class,
 			Loyalty.class,
-			Personalizacion.class);
+//			TextosLegales.class,
+			Personalizacion.class
+		);
 	}
 	
 //	public static class MyDriverMaker extends DriverMaker {

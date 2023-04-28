@@ -35,10 +35,14 @@ public class PageMiCuentaSteps extends StepBase {
 	    clickLinkMisDirecciones();
 	}
 
+	public void clickLinkMisDatos() {
+		clickLinkMisDatos(dataTest.getUserConnected());
+	}
+	
 	@Step(
 		description = "Seleccionar el link <b>Mis datos</b>",
 		expected = "Aparece la página de Mis datos")
-	private void clickLinkMisDatos (String usuarioReg) {
+	private void clickLinkMisDatos(String usuarioReg) {
 		pageMiCuenta.click(MIS_DATOS);
 		new PageMisDatosSteps().validaIsPage(usuarioReg);
 		GenericChecks.checkDefault();

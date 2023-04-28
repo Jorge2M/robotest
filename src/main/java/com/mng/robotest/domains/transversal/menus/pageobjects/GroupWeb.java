@@ -118,6 +118,7 @@ public class GroupWeb extends PageBase {
 	private String getXPathGroupLiDesktop() {
 		return  XPATH_GROUP_DESKTOP + "//self::*[@id[contains(.,'" + group.getId() + "')]]";
 	}
+
 	private String getXPathGroupDesktop() {
 		String xpathGroupLi = getXPathGroupLiDesktop();
 		if (group.getGroupResponse()==GroupResponse.ARTICLES) {

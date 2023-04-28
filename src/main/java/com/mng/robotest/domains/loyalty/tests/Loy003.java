@@ -30,12 +30,11 @@ public class Loy003 extends TestBase {
 					.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
 					.getPassword());
 		}
-		dataTest.setUserRegistered(true);
 	}
 	
 	@Override
 	public void execute() throws Exception {
-		access();
+		accessAndLogin();
 		int loyaltyPointsIni = LoyaltyCommons.clickMangoLikesYou();
 		if (loyaltyPointsIni < 3000 && !isPRO()) {
 			loyaltyPointsIni = LoyaltyCommons.addLoyaltyPoints(USER);

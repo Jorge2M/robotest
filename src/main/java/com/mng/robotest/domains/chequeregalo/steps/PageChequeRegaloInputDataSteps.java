@@ -1,15 +1,15 @@
-package com.mng.robotest.test.steps.shop.checqueregalo;
+package com.mng.robotest.domains.chequeregalo.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.chequeregalo.pageobjects.PageChequeRegaloInputData;
+import com.mng.robotest.domains.chequeregalo.pageobjects.PageChequeRegaloInputDataNew;
+import com.mng.robotest.domains.chequeregalo.pageobjects.PageChequeRegaloInputData.*;
 import com.mng.robotest.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.test.generic.ChequeRegalo;
-import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData;
-import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputDataNew;
-import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.*;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 

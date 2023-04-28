@@ -3,7 +3,7 @@ package com.mng.robotest.domains.footer.pageobjects;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.test.pageobject.shop.modales.ModalClubMangoLikes;
+import com.mng.robotest.test.pageobject.shop.modales.ModalsSubscriptions;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -31,7 +31,7 @@ public class SecNewsLetter extends PageBase {
 	}
 
 	public void clickFooterSuscripcion() {
-		new ModalClubMangoLikes().closeModalIfVisible();
+		new ModalsSubscriptions().closeAllIfVisible();
 		new SecFooter().moveTo();
 		
 		String xpathLink = XPATH_TEXT_AREA_MAIL_SUSCRIPTION;

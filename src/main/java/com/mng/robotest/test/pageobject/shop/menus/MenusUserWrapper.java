@@ -129,7 +129,7 @@ public class MenusUserWrapper extends PageBase {
 		var loyaltyData = new LoyaltyData(false, 0);
 		By byLoyaltyUserMenu = By.tagName("loyalty-user-menu");
 		for (int i=0; i<seconds; i++) {
-			WebElement blockLoyalty = getElementVisible(driver, byLoyaltyUserMenu);
+			var blockLoyalty = getElementVisible(driver, byLoyaltyUserMenu);
 			if (blockLoyalty!=null) {
 				//if (WebdrvWrapp.isElementPresent(driver, byLoyaltyUserMenu)) {
 				//WebElement shadowHost = driver.findElement(byLoyaltyUserMenu);

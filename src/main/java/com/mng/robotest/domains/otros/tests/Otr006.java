@@ -2,14 +2,14 @@ package com.mng.robotest.domains.otros.tests;
 
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.test.steps.shop.modales.ModalChatBotSteps;
-import com.mng.robotest.test.steps.shop.modales.ModalNewsletterSteps;
+import com.mng.robotest.test.steps.shop.modales.ModalsSubscriptionsSteps;
 
 public class Otr006 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {
 		access();
-		new ModalNewsletterSteps().closeIfVisible();
+		new ModalsSubscriptionsSteps().closeIfVisible();
 		var chatBotSteps = new ModalChatBotSteps();
 		if (!chatBotSteps.checkIconVisible()) {
 			return;

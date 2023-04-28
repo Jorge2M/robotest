@@ -60,7 +60,7 @@ public class Reg003 extends TestBase {
 		if(version.register()) {
 			registerAndGoShoppingSiPubli();
 		} else {
-			new SecFooterSteps().validaRGPDFooter(version.register());
+			new SecFooterSteps().clickFooterSubscriptionInput(version.register());
 		}
 
 	}
@@ -100,7 +100,7 @@ public class Reg003 extends TestBase {
 	private void goToShopping() {
 		pageRegistroFinSteps.clickIrDeShoppingButton();
 		secCabeceraSteps.selecLogo();
-		new SecFooterSteps().validaRGPDFooter(version.register());
+		new SecFooterSteps().clickFooterSubscriptionInput(version.register());
 	}
 	
 	private void loginAfterRegister() {

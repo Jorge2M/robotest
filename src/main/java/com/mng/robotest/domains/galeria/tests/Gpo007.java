@@ -13,8 +13,7 @@ public class Gpo007 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {
-		dataTest.setUserRegistered(true);
-		access();
+		accessAndLogin();
 		clickMenu(CAMISAS_SHE);
 		checkAvisame();		
 		selectTallaArticle();

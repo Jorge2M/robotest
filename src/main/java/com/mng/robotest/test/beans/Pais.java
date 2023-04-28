@@ -36,6 +36,7 @@ public class Pais implements Serializable {
 	String tarifa;
 	String paistop="";
 	String rgpd="";
+	String loyalty = "N";
 	String codpos;
 	String address;
 	String telefono;
@@ -132,11 +133,21 @@ public class Pais implements Serializable {
 	public String getRgpd() {
 		return this.rgpd;
 	}
-
+	
 	@XmlElement (name="rgpd")
 	public void setRgpd(String rgpd) {
 		this.rgpd = rgpd;
 	} 
+	
+	public boolean isLoyalty() {
+		//Países loyalty localizables en la tabla MNGLOYALTYDB.LOYALTY_TOUCHPOINTS
+		return this.loyalty.compareTo("S")==0;
+	}
+
+	@XmlElement (name="loyalty")
+	public void setLoyalty(String loyalty) {
+		this.loyalty = loyalty;
+	}	
 	
 	public String getCodpos() {
 		if (codpos==null || codpos.compareTo("")==0) {

@@ -9,14 +9,14 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
+import com.mng.robotest.domains.transversal.acceptcookies.pageobjects.SectionCookies;
+import com.mng.robotest.domains.transversal.acceptcookies.pageobjects.ModalSetCookies.SectionConfCookies;
+import com.mng.robotest.domains.transversal.acceptcookies.steps.SectionCookiesSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.pageobject.shop.acceptcookies.SectionCookies;
-import com.mng.robotest.test.pageobject.shop.acceptcookies.ModalSetCookies.SectionConfCookies;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test.pageobject.utils.LocalStorage;
-import com.mng.robotest.test.steps.shop.acceptcookies.SectionCookiesSteps;
 import com.mng.robotest.test.utils.testab.TestABactive;
 
 public class PagePrehome extends PageBase implements PageFromFooter {

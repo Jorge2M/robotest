@@ -3,20 +3,23 @@ package com.mng.robotest.domains.footer.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.legal.pageobjects.LTPageMangoCard;
 
 public class PageMangoCard extends PageBase implements PageFromFooter {
 	
 	private static final String XPATH_GO_MANGO_CARD_BUTTON = "//span[@class='menu-link-button']";
 	private static final String XPATH_GO_MANGO_CARD_BUTTON_MOBILE = "//a[@id='getCardLink']";
 	private static final String XPATH_LINK_SOL_MANGOCARD_PAGE1 = "//button[@class[contains(.,'form-submit')]]";
-	 
 	private static final String XPATH_NAME_FIELD = "//input[@id='datNombre']";
 	private static final String XPATH_FIRST_SURNAME_FIELD = "//input[@id='datApellido1']";
 	private static final String XPATH_SECOND_SURNAME_FIELD = "//input[@id='datApellido2']";
 	private static final String XPATH_MOBILE_FIELD = "//input[@id='datTelMovil']";
 	private static final String XPATH_MAIL_FIELD = "//input[@id='datEmail']";
-	
 	private static final String XPATH_FOR_IDPAGE = "//h2[@class='section-title']";
+	
+	public PageMangoCard() {
+		super(new LTPageMangoCard());
+	}
 	
 	@Override
 	public String getName() {

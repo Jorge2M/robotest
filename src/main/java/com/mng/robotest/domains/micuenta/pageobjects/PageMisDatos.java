@@ -3,6 +3,7 @@ package com.mng.robotest.domains.micuenta.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.legal.pageobjects.LTPageMisDatos;
 
 public class PageMisDatos extends PageBase {
 	
@@ -25,6 +26,10 @@ public class PageMisDatos extends PageBase {
 	private static final String XPATH_LINK_ELIMINAR_CUENTA = "//a[@href[contains(.,'account/baja')]]";
 	private static final String XPATH_BUTTON_CONFIRM_ELIMINAR_CUENTA = "//input[@value='Eliminar cuenta']";
 	private static final String XPATH_MESSAGE_CUENTA_CANCELADA_OK = "//div[@class='messageConfirmation']/h3[text()='Cuenta eliminada']";
+	
+	public PageMisDatos() {
+		super(new LTPageMisDatos());
+	}
 	
 	public String getTextInputNombre() {
 		return getElement(XPATH_INPUT_NOMBRE).getAttribute("value");

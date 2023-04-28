@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.chequeregalo;
+package com.mng.robotest.domains.chequeregalo.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -9,6 +9,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
+import com.mng.robotest.domains.legal.pageobjects.LTPageChequeRegaloInputDataNew;
 import com.mng.robotest.test.generic.ChequeRegalo;
 
 public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData implements PageFromFooter {
@@ -85,6 +86,10 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 		public By getBy() {
 			return by;
 		}
+	}
+	
+	public PageChequeRegaloInputDataNew() {
+		super(new LTPageChequeRegaloInputDataNew());
 	}
 	
 	public void clickConsultaSaldo() {

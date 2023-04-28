@@ -3,6 +3,7 @@ package com.mng.robotest.domains.galeria.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.legal.pageobjects.LTModalArticleNotAvailable;
 
 public class ModalArticleNotAvailable extends PageBase {
 
@@ -12,7 +13,12 @@ public class ModalArticleNotAvailable extends PageBase {
 	private static final String XPATH_INPUT_MAIL = XPATH_MODAL + "//input[@data-testid[contains(.,'emailInput')]]";
 	private static final String XPATH_RECIBIR_AVISO_BUTTON = "//button[@data-testid='listado.backInStock.button.submit']";
 	private static final String XPATH_BUTTON_ENTENDIDO = "//button[@data-testid='listado.backInStock.feedbackButton.closeDialog']";
+	private static final String XPATH_POLITICA_PRIVACIDAD = XPATH_MODAL + "//span[@data-testid='mng-link']";
 	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_MODAL + "//button[@data-testid='modal.close.button']";
+	
+	public ModalArticleNotAvailable() {
+		super(new LTModalArticleNotAvailable());
+	}
 	
 	public boolean inStateUntil(StateModal stateModal, int seconds) {
 		switch (stateModal) {
@@ -53,6 +59,10 @@ public class ModalArticleNotAvailable extends PageBase {
 	}	
 	public void clickButtonEntendido() {
 		click(XPATH_BUTTON_ENTENDIDO).exec();
+	}
+	
+	public void clickPoliticaPrivacidad() {
+		click(XPATH_POLITICA_PRIVACIDAD).exec();
 	}
 	
 	public void clickAspaForClose() {

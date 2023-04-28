@@ -17,51 +17,51 @@ public class TarjetaMangoSteps extends StepBase {
 	public void checkSolicitarTarjeta () {
 		selectLoQuieroAhoraButton();
 	}
-	 
-	 @Step (
+	
+	@Step (
 		description="Seleccionar el botón con fondo negro \"¡La quiero ahora!\"",
 		expected="La página hace scroll hasta el formulario previo de solicitud de la tarjeta")
-	 public void selectLoQuieroAhoraButton() {
-		 var pageMangoCard = new PageMangoCard();
-		 String ventanaOriginal = driver.getWindowHandle();
-		 pageMangoCard.clickOnWantMangoCardNow();
-		 if(!driver.getCurrentUrl().contains("shop-ci")) {
-			 checkAfterClickLoQuieroAhoraButton();
-			 selectLoQuieroAhoraUnderForm();
-			 selectContinueButton(ventanaOriginal);
-		 }
-	 }
+	public void selectLoQuieroAhoraButton() {
+		var pageMangoCard = new PageMangoCard();
+		String ventanaOriginal = driver.getWindowHandle();
+		pageMangoCard.clickOnWantMangoCardNow();
+		if(!driver.getCurrentUrl().contains("shop-ci")) {
+			checkAfterClickLoQuieroAhoraButton();
+			selectLoQuieroAhoraUnderForm();
+			selectContinueButton(ventanaOriginal);
+		}
+	}
 	 
-	 @Validation
-	 private ChecksTM checkAfterClickLoQuieroAhoraButton() {
-		 var pageMangoCard = new PageMangoCard();
-		 var checks = ChecksTM.getNew();
-		 checks.add(
+	@Validation
+	private ChecksTM checkAfterClickLoQuieroAhoraButton() {
+		var pageMangoCard = new PageMangoCard();
+		var checks = ChecksTM.getNew();
+		checks.add(
 			"Aparece el campo <b>Nombre</b>",
 	 		pageMangoCard.isPresentNameField(), Warn);
 		 
-		 checks.add(
+		checks.add(
 	 		"Aparece el campo <b>Primer Apellido</b>",
 	 		pageMangoCard.isPresentFirstSurnameField(), Warn);
 		 
-		 checks.add(
+		checks.add(
 	 		"Aparece el campo <b>Segundo Apellido</b>",
 	 		pageMangoCard.isPresentSecondSurnameField(), Warn);
 		 
-		 checks.add(
+		checks.add(
 	 		"Aparece el campo <b>Movil</b>",
 	 		pageMangoCard.isPresentMobileField(), Warn);
 		 
-		 checks.add(
+		checks.add(
 	 		"Aparece el campo <b>Mail</b>",
 	 		pageMangoCard.isPresentMailField(), Warn);
 		 
-		 checks.add(
+		checks.add(
 	 		"Aparece el botón <b>¡Lo quiero ahora!</b>",
 	 		pageMangoCard.isPresentButtonSolMangoCardNow(), Warn);
 		 
-	 	return checks;
-	 }
+		return checks;
+	}
 	 
 	 @Step (
 		description="Seleccionamos el botón \"¡Lo quiero ahora!\" que aparece debajo del formulario",
@@ -88,20 +88,20 @@ public class TarjetaMangoSteps extends StepBase {
 	 		"Aparece un modal de aviso de trámite de la solicitud con un botón \"Continuar\" (la esperamos hasta " + seconds + " segundos)",
 	 		new PageInputDataSolMangoCard().isPresentBotonContinuarModalUntil(seconds), Warn);
 	 	
-	 	return checks;
-	 }
+		return checks;
+	}
 	 
 	 @Step (
 		description="Seleccionar el botón \"Continuar\"", 
 		expected="Aparece la página del formulario de solicitud de la tarjeta")
-	 private void selectContinueButton(String ventanaOriginal) {
-		 pageInputDataSolMangoCard.clickBotonCerrarModal();
-		 checkValidPageTarjetaMango(ventanaOriginal);
-	 }
+	private void selectContinueButton(String ventanaOriginal) {
+		pageInputDataSolMangoCard.clickBotonCerrarModal();
+		checkValidPageTarjetaMango(ventanaOriginal);
+	}
 	 
-	 @Validation
-	 private ChecksTM checkValidPageTarjetaMango(String ventanaOriginal) {
-  		var checks = ChecksTM.getNew();
+	@Validation
+	private ChecksTM checkValidPageTarjetaMango(String ventanaOriginal) {
+		var checks = ChecksTM.getNew();
 	 	checks.add(
 	 		"Aparece la página de Solicitud de tu Tarjeta MANGO",
 	 		pageInputDataSolMangoCard.isPage2());
@@ -109,27 +109,27 @@ public class TarjetaMangoSteps extends StepBase {
 	 	try {
 			//Nos posicionamos en el iframe central para recorrer contenido (datos personales y datos bancarios).
 			pageInputDataSolMangoCard.gotoiFramePage2();
-		 	checks.add(
+			checks.add(
 		 		"Aparece el apartado \"Datos personales\"",
 		 		pageInputDataSolMangoCard.isPresentDatosPersonalesPage2(), Warn);
 		 	
-		 	checks.add(
+			checks.add(
 		 		"Aparece el apartado \"Datos bancarios\"",
 		 		pageInputDataSolMangoCard.isPresentDatosBancariosPage2());
 		 	
-		 	checks.add(
+			checks.add(
 		 		"Aparece el apartado \"Datos de contacto\"",
 		 		pageInputDataSolMangoCard.isPresentDatosContactoPage2(), Warn);
 		 	
-		 	checks.add(
+			checks.add(
 		 		"Aparece el apartado \"Datos socioeconómicos\"",
 		 		pageInputDataSolMangoCard.isPresentDatosSocioeconomicosPage2(), Warn);
 		 	
-		 	checks.add(
+			checks.add(
 		 		"Aparece el apartado \"Modalidad de pago de tu MANGO Card\"",
 		 		pageInputDataSolMangoCard.isPresentModalidadpagoPage2(), Warn);
 		 	
-		 	checks.add(
+			checks.add(
 		 		"Aparece el botón \"Continuar\"",
 		 		pageInputDataSolMangoCard.isPresentButtonContinuarPage2(), Warn);
 	 	}
@@ -138,6 +138,6 @@ public class TarjetaMangoSteps extends StepBase {
 			driver.switchTo().window(ventanaOriginal);
 		}   
 		 
-	  	return checks;
-	 }
+	 	return checks;
+	}
 }

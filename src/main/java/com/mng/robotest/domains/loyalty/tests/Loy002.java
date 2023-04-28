@@ -23,7 +23,6 @@ public class Loy002 extends TestBase {
 	public Loy002() throws Exception {
 		super();
 		
-		dataTest.setUserRegistered(true);
 		if (isPRO()) {
 			dataTest.setUserConnected(LoyaltyCommons.USER_PRO_WITH_LOY_POINTS.getEmail());
 			dataTest.setPasswordUser(GetterSecrets.factory()
@@ -40,7 +39,7 @@ public class Loy002 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		access();
+		accessAndLogin();
 		int loyaltyPointsIni = LoyaltyCommons.clickMangoLikesYou();
 		if (loyaltyPointsIni < 3000 && !isPRO()) {
 			loyaltyPointsIni = LoyaltyCommons.addLoyaltyPoints(USER);

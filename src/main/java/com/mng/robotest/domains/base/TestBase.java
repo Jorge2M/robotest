@@ -2,6 +2,7 @@ package com.mng.robotest.domains.base;
 
 import java.util.List;
 
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.domains.base.datatest.DataTest;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
@@ -65,4 +66,13 @@ public abstract class TestBase extends StepBase {
 		dataPago.setDataPedido(dataPedido);
 		return dataPago;
 	}	
+	
+	protected void renewBrowser() {
+		dataTest.setUserConnected("");
+		TestMaker.renewDriverTestCase();
+	}
+	protected void renewTest() {
+		dataTest.setUserConnected("");
+		driver.get(inputParamsSuite.getUrlBase());		
+	}
 }

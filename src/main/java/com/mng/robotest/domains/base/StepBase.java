@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.manto.tests.ManXXX;
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem;
@@ -22,6 +24,8 @@ import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.utils.UtilsTest;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public abstract class StepBase extends PageBase {
 
 	protected void access(boolean clearData) throws Exception {
@@ -30,6 +34,14 @@ public abstract class StepBase extends PageBase {
 		} else {
 			access();
 		}
+	}
+	
+	protected void accessAndLogin() throws Exception {
+		accessAndLogin(false);
+	}
+	protected void accessAndLogin(boolean clearData) throws Exception {
+		dataTest.setUserRegistered(true);
+		access(clearData);
 	}
 	
 	protected void access() throws Exception {
@@ -91,5 +103,19 @@ public abstract class StepBase extends PageBase {
 		new ManXXX(listChecks, listPedidos).execute();
 	}	
 	
-
+	@Validation
+	protected ChecksTM checkLegalTextsVisible(PageBase page) {
+		var checks = ChecksTM.getNew();
+		var legalTextsPageOpt = page.getLegalTextsPage();
+		if (!legalTextsPageOpt.isEmpty()) {
+			var legalTextsPage = legalTextsPageOpt.get();
+			for (var legalText : legalTextsPage.getLegalTexts()) {
+				checks.add(
+					"Aparece el texto legal \"" + legalText.getText() + "\"",
+					legalTextsPage.isVisibleLegalText(legalText), Defect);
+			}
+		}
+		return checks;
+	}
+	
 }

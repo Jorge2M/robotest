@@ -26,15 +26,6 @@ public class PageComoMedirme extends PageBase {
 		return state(Visible, XPATH_BLOQUE_GUIA_TALLAS).check();
 	}
 	
-	private boolean goToPageInNewTab(String windowFatherHandle) {
-		String newPageHandle = switchToAnotherWindow(driver, windowFatherHandle);
-		if (newPageHandle.compareTo(windowFatherHandle)==0) {
-			return false;
-		}
-		waitForPageLoaded(driver, 10);
-		return true;
-	}
-	
 	private void close(String windowFatherHandle) {
 		driver.close();
 		driver.switchTo().window(windowFatherHandle);

@@ -1,34 +1,31 @@
-package com.mng.robotest.domains.compra.tests;
+package com.mng.robotest.domains.chequeregalo.tests;
 
 import java.util.Arrays;
 import java.util.List;
 
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.domains.chequeregalo.pageobjects.PageChequeRegaloInputData.Importe;
+import com.mng.robotest.domains.chequeregalo.steps.PageChequeRegaloInputDataSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
-import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.generic.ChequeRegalo;
-import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.steps.shop.checqueregalo.PageChequeRegaloInputDataSteps;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 
-public class Com004 extends TestBase {
+public class Reg001 extends TestBase {
 
 	private final PageChequeRegaloInputDataSteps pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps();
 	
 	private final DataPago dataPago;
 		
-	public Com004() throws Exception {
-		dataTest.setUserRegistered(true);
-		
+	public Reg001() throws Exception {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkMisCompras()
 				.emaiExists()
@@ -47,12 +44,12 @@ public class Com004 extends TestBase {
 	}
 
 	private void loginAndClearBolsa() throws Exception {
-		access();
+		accessAndLogin();
 		new SecBolsaSteps().clear();
 	}
 	
 	private void selectFooterLinkChequeRegalo() {
-		new MenuSteps().clickLinea(SHE);
+		clickLinea(SHE);
 		new SecFooterSteps().clickLinkFooter(FooterLink.CHEQUE_REGALO, false);
 	}	
 	

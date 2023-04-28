@@ -19,13 +19,9 @@ public class Gpo001 extends TestBase {
 
 	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 	
-	public Gpo001() {
-		dataTest.setUserRegistered(true);
-	}
-	
 	@Override
 	public void execute() throws Exception {
-		access();
+		accessAndLogin();
 		clickMenu(CAMISAS_SHE);
 		filterGaleryByColor(CAMISAS_SHE, Color.BLANCO);
 		if (channel==Channel.desktop) {

@@ -30,13 +30,6 @@ public class Compra {
 	}
 	
 	@Test (
-		groups={"Compra", "Chequeregalo", "Canal:desktop_App:shop"}, alwaysRun=true,
-		description="Consulta datos cheque existente y posterior compra Cheque regalo New (España)")
-	public void COM004_Cheque_Regalo_New() throws Exception {
-		new Com004().execute();
-	}
-	
-	@Test (
 		groups={"Registro_Express", "Bolsa", "Canal:all_App:all"}, alwaysRun=true,
 		description="Registro Express, cierre/inicio sesión correcto")
 	public void COM005_Compra_noReg_emailNoExist() throws Exception {
@@ -49,13 +42,6 @@ public class Compra {
 	public void COM006_Compra_Francia_Tienda() throws Exception {
 		new Com006().execute();
 	}	
-	
-	@Test (
-		groups={"Compra", "Pedidomanto", "Chequeregalo", "Canal:desktop_App:shop"}, alwaysRun=true,
-		description="Compra cheque regalo Old (Francia)")
-	public void COM007_Cheque_Regalo_Old() throws Exception {
-		new Com007().execute();
-	}
 	
 	@Test (
 		groups={"Compra", "Checkout", "Canal:desktop_App:shop"}, alwaysRun=true,

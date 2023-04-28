@@ -20,7 +20,7 @@ public class PageYandexMoneySteps extends StepBase {
 		expected="Aparece la página de YandexMoney")
 	public void accessInNewTab(String tabTitle) throws Exception {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_YANDEX, PageYandexMoney.URL_ACCESS);
-		pageYandexMoney.goToPageInNewTab(tabTitle);
+		pageYandexMoney.goToPageInNewTabV(tabTitle);
 		checkIsPage();
 	}
 	

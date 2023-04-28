@@ -20,12 +20,11 @@ public class Loy004 extends TestBase {
 		dataTest.setPasswordUser(GetterSecrets.factory()
 				.getCredentials(SecretType.SHOP_STANDARD_USER)
 				.getPassword());
-		dataTest.setUserRegistered(true);
 	}
 	
 	@Override
 	public void execute() throws Exception {
-		access();
+		accessAndLogin();
 		LoyaltyCommons.clickMangoLikesYou();
 		pageMangoLikesYouSteps.click(TabLink.HISTORIAL);
 		pageMangoLikesYouSteps.clickAyuda();

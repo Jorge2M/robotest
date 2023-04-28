@@ -47,6 +47,13 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	}
 	
 	@Step (
+		description="Seleccionar el link <b>Política de privacidad</b>", 
+		expected="Aparece el texto adicional de política de privacidad")
+	public void clickPoliticaPrivacidad() {
+		modalArticleNotAvailable.clickPoliticaPrivacidad();
+	}
+	
+	@Step (
 		description="Introducimos el mail #{mail} y pulsamos el botón <b>Recibir Aviso</b>", 
 		expected="Aparece el modal de Petición confirmada")
 	public void inputMailAndClickRecibirAviso(String mail) {

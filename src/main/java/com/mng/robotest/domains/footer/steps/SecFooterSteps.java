@@ -31,6 +31,10 @@ public class SecFooterSteps extends StepBase {
 		return checks;
 	}
 
+	public void clickLinkFooter(FooterLink typeFooter) { 
+		clickLinkFooter(typeFooter, false);
+	}
+	
 	@Step (
 		description="Seleccionar el link del footer <b>#{typeFooter}</b>", 
 		expected="Se redirige a la pantalla adecuada")
@@ -82,31 +86,18 @@ public class SecFooterSteps extends StepBase {
 		 modalCambioPaisSteps.cambioPais(newPais, newIdioma);  
 	 }
 	 
+	 public void clickFooterSubscriptionInput() {
+		 clickFooterSubscriptionInput(true);
+	 }
+	 
 	 @Step (
 		description="Hacer click en el cuadro de suscripción del footer",
 		expected="Aparecen los textos legales de RGPD")
-	public void validaRGPDFooter(Boolean clickRegister) {
+	public void clickFooterSubscriptionInput(Boolean clickRegister) {
 		if (!clickRegister) {
 			new SecCabeceraMostFrequent().clickLogoMango();
 		}
 		secFooter.clickFooterSuscripcion();
-		if (dataTest.getPais().getRgpd().equals("S")) {
-			checkIsRGPDpresent(dataTest.getCodigoPais());
-		} else {
-			checkIsNotPresentRGPD(dataTest.getCodigoPais());
-		}
 	}
 	 
-	@Validation (
-		description="El texto legal de RGPD <b>SI</b> existe en el modal de suscripción para el pais #{codigoPais}")
-	private boolean checkIsRGPDpresent(String codigoPais) {
- 		return secFooter.isTextoLegalRGPDPresent();
-	}
-	
-	@Validation (
-		description="El texto legal de RGPD <b>NO</b> existe en el modal de suscripción para el pais #{codigoPais}")
-	private boolean checkIsNotPresentRGPD(String codigoPais) {
- 		return !secFooter.isTextoLegalRGPDPresent();
-	}	
-
 }

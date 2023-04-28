@@ -25,7 +25,6 @@ public class Fav001 extends TestBase {
 		super();
 		dataTest.setPais(pais);
 		dataTest.setIdioma(idioma);
-		dataTest.setUserRegistered(true);
 	}
 	
 	@Override
@@ -39,7 +38,7 @@ public class Fav001 extends TestBase {
 	}
 	
 	private void loginAndClearData() throws Exception {
-		access();
+		accessAndLogin();
 		secBolsaSteps.clear();
 		pageFavoritosSteps.clearAll();
 	}	

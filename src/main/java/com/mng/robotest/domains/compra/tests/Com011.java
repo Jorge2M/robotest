@@ -15,7 +15,6 @@ import static com.mng.robotest.test.data.PaisShop.*;
 public class Com011 extends TestBase {
 
 	public Com011() throws Exception {
-		dataTest.setUserRegistered(true);
 		if (inputParamsSuite.getListaPaises().isEmpty()) {
 			dataTest.setPais(DEUTSCHLAND.getPais());
 		}
@@ -33,7 +32,7 @@ public class Com011 extends TestBase {
 	}
 	
     private void accessLoginAndClearBolsa() throws Exception {
-        access();
+        accessAndLogin();
         new SecBolsaSteps().clear();
     }
     private void altaArticulosBolsaAndComprar() throws Exception {

@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.acceptcookies;
+package com.mng.robotest.domains.transversal.acceptcookies.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

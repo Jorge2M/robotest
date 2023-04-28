@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.shop.acceptcookies;
+package com.mng.robotest.domains.transversal.acceptcookies.pageobjects;
 
 import com.mng.robotest.domains.base.PageBase;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

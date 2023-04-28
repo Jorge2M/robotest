@@ -1,10 +1,10 @@
-package com.mng.robotest.test.steps.shop.acceptcookies;
+package com.mng.robotest.domains.transversal.acceptcookies.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
-import com.mng.robotest.test.pageobject.shop.acceptcookies.ModalSetCookies;
-import com.mng.robotest.test.pageobject.shop.acceptcookies.ModalSetCookies.SectionConfCookies;
+import com.mng.robotest.domains.transversal.acceptcookies.pageobjects.ModalSetCookies;
+import com.mng.robotest.domains.transversal.acceptcookies.pageobjects.ModalSetCookies.SectionConfCookies;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 

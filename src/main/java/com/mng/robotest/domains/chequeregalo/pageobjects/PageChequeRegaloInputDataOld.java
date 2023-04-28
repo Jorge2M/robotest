@@ -1,4 +1,4 @@
-package com.mng.robotest.test.pageobject.chequeregalo;
+package com.mng.robotest.domains.chequeregalo.pageobjects;
 
 import org.openqa.selenium.By;
 import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;

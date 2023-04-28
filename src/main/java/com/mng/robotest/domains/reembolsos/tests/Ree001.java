@@ -27,7 +27,6 @@ public class Ree001 extends TestBase {
 		}
 
 		boolean paisConSaldoCta = dataTest.getPais().existsPagoStoreCredit();
-		dataTest.setUserRegistered(true);
 		dataTest.setUserConnected("mng_test_SA_pruebaSaldo@mango.com");
 		dataTest.setPasswordUser(GetterSecrets.factory()
 				.getCredentials(SecretType.SHOP_STANDARD_USER)
@@ -38,7 +37,7 @@ public class Ree001 extends TestBase {
 			dataTest.setPasswordUser(dataTest.getPais().getPassuser());
 		}
 			
-		access();
+		accessAndLogin();
 		var pageReembolsosSteps = new PageReembolsosSteps();
 		pageReembolsosSteps.gotoRefundsFromMenu(paisConSaldoCta);
 		if (paisConSaldoCta) {

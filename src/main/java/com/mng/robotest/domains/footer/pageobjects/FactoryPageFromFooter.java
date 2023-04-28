@@ -1,10 +1,10 @@
 package com.mng.robotest.domains.footer.pageobjects;
 
 import com.mng.robotest.domains.ayuda.pageobjects.PagesAyuda;
+import com.mng.robotest.domains.chequeregalo.pageobjects.PageChequeRegaloInputDataNew;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PagePrehome;
-import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputDataNew;
 import com.mng.robotest.test.pageobject.shop.modales.ModalBuscadorTiendas;
 
 public class FactoryPageFromFooter {

@@ -1,6 +1,6 @@
 package com.mng.robotest.test.generic;
 
-import com.mng.robotest.test.pageobject.chequeregalo.PageChequeRegaloInputData.Importe;
+import com.mng.robotest.domains.chequeregalo.pageobjects.PageChequeRegaloInputData.Importe;
 
 
 public class ChequeRegalo { 

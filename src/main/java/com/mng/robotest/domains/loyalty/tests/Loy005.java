@@ -26,7 +26,6 @@ public class Loy005 extends TestBase {
 				.getPassword();
 		dataTest.setUserConnected(RECEPTOR_USER.getEmail());
 		dataTest.setPasswordUser(passwordTestPerformmance);
-		dataTest.setUserRegistered(true);
 	}
 	
 	@Override
@@ -35,7 +34,7 @@ public class Loy005 extends TestBase {
 			return;
 		}
 		
-		access();
+		accessAndLogin();
 		int iniPointsReceptor = clickMangoLikesYou();
 		
 		login(EMISOR_USER, dataTest.getPasswordUser());

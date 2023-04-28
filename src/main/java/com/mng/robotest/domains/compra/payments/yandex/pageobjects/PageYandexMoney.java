@@ -17,7 +17,7 @@ public class PageYandexMoney extends PageBase {
 		driver.get(URL_ACCESS);
 	}
 	
-	public void goToPageInNewTab(String titleTab) throws Exception {
+	public void goToPageInNewTabV(String titleTab) throws Exception {
 		loadUrlInAnotherTabTitle(URL_ACCESS, titleTab, driver);
 	}
 	

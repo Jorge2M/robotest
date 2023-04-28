@@ -3,14 +3,14 @@ package com.mng.robotest.domains.footer.pageobjects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import com.github.jorge2m.testmaker.conf.Channel;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.test.pageobject.shop.modales.ModalClubMangoLikes;
+import com.mng.robotest.domains.legal.pageobjects.LTSecFooter;
+import com.mng.robotest.test.pageobject.shop.modales.ModalsSubscriptions;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecFooter extends PageBase {
 
@@ -83,10 +83,12 @@ public class SecFooter extends PageBase {
 
 	}
 	
-	
-	private static final String XPATH_LEGA_LRGPD = "//p[@class='gdpr-text gdpr-data-protection']";
 	private static final String XPATH_CAMBIO_PAIS_SHOP = "//div[@class[contains(.,'modalCambioPaisShow')]]";
 	private static final String XPATH_CAMBIO_PAIS_OUTLET = "//span[@class[contains(.,'countrySelector')]]";
+	
+	public SecFooter() {
+		super(new LTSecFooter());
+	}
 	
 	private String getXPathCapaFooter() {
 		switch (app) {
@@ -119,11 +121,12 @@ public class SecFooter extends PageBase {
 	}	
 	
 	public void clickLink(FooterLink footerType) {
-		new ModalClubMangoLikes().closeModalIfVisible();
+		new ModalsSubscriptions().closeAllIfVisible();
 		moveToElement(footerType.getXPathRelativeCapa());
 		
 		String xpathLink = footerType.getXPathRelativeCapa();
 		state(Visible, xpathLink).wait(2).check();
+		waitMillis(500);
 		click(xpathLink).exec();
 	}
 	
@@ -143,10 +146,6 @@ public class SecFooter extends PageBase {
 
 	public boolean checkFooter(FooterLink footerLink) {
 		return state(Present, getXPathLink(footerLink)).check();
-	}
-	
-	public boolean isTextoLegalRGPDPresent() {
-		return state(Present, XPATH_LEGA_LRGPD).check();
 	}
 	
 	public void moveTo() {

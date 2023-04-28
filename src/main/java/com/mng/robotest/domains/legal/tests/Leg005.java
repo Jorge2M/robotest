@@ -1,0 +1,54 @@
+package com.mng.robotest.domains.legal.tests;
+
+import com.mng.robotest.domains.base.TestBase;
+import com.mng.robotest.domains.galeria.pageobjects.ModalArticleNotAvailable;
+import com.mng.robotest.domains.galeria.steps.ModalArticleNotAvailableSteps;
+import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
+
+import static com.mng.robotest.test.data.PaisShop.*;
+
+/**
+ * Control textos legales "Avisame + suscripción":
+ * https://confluence.mango.com/display/PIUR/Mapeo+de+textos+legales#expand-Avsamesuscripcin
+ *
+ */
+public class Leg005 extends TestBase {
+
+	@Override
+	public void execute() throws Exception {
+		checkPaisComun();
+		renewTest();
+		//TODO el avísame en Arabia falla casi siempre -> avisar a Oriol
+		//TODO el literal notifyMe.arabia.legal.text está en estado PENDING, todavía no existe
+		checkPaisArabia();
+	}
+	
+	private void checkPaisComun() throws Exception {
+		dataTest.setPais(ESPANA.getPais());
+		goToAvisame();
+		clickPoliticaPrivacidad();
+		checkTextoLegal();
+	}
+	private void checkPaisArabia() throws Exception {
+		dataTest.setPais(SAUDI_ARABIA.getPais());
+		dataTest.setIdioma(SAUDI_ARABIA.getPais().getListIdiomas().get(1)); //Inglés
+		goToAvisame();
+		checkTextoLegal();
+	}
+	
+	private void goToAvisame() throws Exception {
+		access();
+		clickMenu("Camisas");
+		new PageGaleriaSteps().selectTallaNoDisponibleArticulo();
+		new ModalArticleNotAvailableSteps().checkVisibleAvisame();
+	}
+	
+	private void clickPoliticaPrivacidad() {
+		new ModalArticleNotAvailableSteps().clickPoliticaPrivacidad();
+	}
+	
+	private void checkTextoLegal() {
+		checkLegalTextsVisible(new ModalArticleNotAvailable());
+	}
+	
+}

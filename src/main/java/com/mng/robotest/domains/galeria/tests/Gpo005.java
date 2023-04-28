@@ -12,13 +12,9 @@ public class Gpo005 extends TestBase {
 
 	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
 	
-	public Gpo005() {
-		dataTest.setUserRegistered(true);
-	}
-	
 	@Override
 	public void execute() throws Exception {
-		access();
+		accessAndLogin();
 		if (app==AppEcom.outlet || channel.isDevice()) {
 			clickMenu(CARDIGANS_Y_JERSEIS_SHE);
 		} else {

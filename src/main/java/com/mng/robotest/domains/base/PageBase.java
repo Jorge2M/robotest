@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,6 +22,7 @@ import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.datatest.DataMantoTest;
 import com.mng.robotest.domains.base.datatest.DataTest;
+import com.mng.robotest.domains.legal.pageobjects.LegalTextsPage;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -32,6 +34,7 @@ public class PageBase extends PageObjTM {
 	protected final InputParamsMango inputParamsSuite;
 	protected DataTest dataTest = TestBase.DATA_TEST.get();
 	protected DataMantoTest dataMantoTest = TestMantoBase.DATA_MANTO_TEST.get();
+	protected LegalTextsPage legalTexts;
 	
 	public PageBase() {
 		super();
@@ -44,6 +47,11 @@ public class PageBase extends PageObjTM {
 			this.app = AppEcom.shop;
 			this.channel = Channel.desktop;			
 		}
+	}
+	
+	public PageBase(LegalTextsPage legalTextsPage) {
+		this();
+		this.legalTexts = legalTextsPage;
 	}
 	
 	public PageBase(WebDriver driver) {
@@ -195,4 +203,21 @@ public class PageBase extends PageObjTM {
 		}
 		((JavascriptExecutor) driver).executeScript(script, element);
 	}
+	
+	protected Optional<LegalTextsPage> getLegalTextsPage() {
+		if (legalTexts==null) {
+			return Optional.empty();
+		}
+		return Optional.of(legalTexts);
+	}
+	
+	protected boolean goToPageInNewTab(String windowFatherHandle) {
+		String newPageHandle = switchToAnotherWindow(driver, windowFatherHandle);
+		if (newPageHandle.compareTo(windowFatherHandle)==0) {
+			return false;
+		}
+		waitForPageLoaded(driver, 10);
+		return true;
+	}
+
 }
