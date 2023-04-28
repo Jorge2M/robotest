@@ -22,6 +22,8 @@ import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.datatest.DataMantoTest;
 import com.mng.robotest.domains.base.datatest.DataTest;
+import com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts;
+import com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts;
 import com.mng.robotest.domains.legal.pageobjects.LegalTextsPage;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu;
@@ -49,9 +51,9 @@ public class PageBase extends PageObjTM {
 		}
 	}
 	
-	public PageBase(LegalTextsPage legalTextsPage) {
+	public PageBase(PageLegalTexts legalTexts) {
 		this();
-		this.legalTexts = legalTextsPage;
+		this.legalTexts = FactoryLegalTexts.make(legalTexts);
 	}
 	
 	public PageBase(WebDriver driver) {

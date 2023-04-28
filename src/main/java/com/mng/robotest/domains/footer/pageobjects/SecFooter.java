@@ -7,10 +7,10 @@ import com.github.jorge2m.testmaker.conf.Channel;
 
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.domains.legal.pageobjects.LTSecFooter;
 import com.mng.robotest.test.pageobject.shop.modales.ModalsSubscriptions;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts.SUSCRIPCION_EN_FOOTER_Y_NON_MODAL_LEGAL_TEXTS;
 
 public class SecFooter extends PageBase {
 
@@ -87,7 +87,7 @@ public class SecFooter extends PageBase {
 	private static final String XPATH_CAMBIO_PAIS_OUTLET = "//span[@class[contains(.,'countrySelector')]]";
 	
 	public SecFooter() {
-		super(new LTSecFooter());
+		super(SUSCRIPCION_EN_FOOTER_Y_NON_MODAL_LEGAL_TEXTS);
 	}
 	
 	private String getXPathCapaFooter() {

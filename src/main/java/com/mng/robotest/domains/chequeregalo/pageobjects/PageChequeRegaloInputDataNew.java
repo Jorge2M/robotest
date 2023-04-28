@@ -6,11 +6,11 @@ import org.openqa.selenium.WebElement;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
-import com.mng.robotest.domains.legal.pageobjects.LTPageChequeRegaloInputDataNew;
 import com.mng.robotest.test.generic.ChequeRegalo;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts.CHEQUE_REGALO_PAGOS_LEGAL_TEXTS;
 
 public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData implements PageFromFooter {
 
@@ -89,7 +89,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	}
 	
 	public PageChequeRegaloInputDataNew() {
-		super(new LTPageChequeRegaloInputDataNew());
+		super(CHEQUE_REGALO_PAGOS_LEGAL_TEXTS);
 	}
 	
 	public void clickConsultaSaldo() {

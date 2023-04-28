@@ -1,9 +1,9 @@
 package com.mng.robotest.domains.ayuda.pageobjects;
 
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.domains.legal.pageobjects.LTPageAyudaContact;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts.FORMULARIO_DE_AYUDA_LEGAL_TEXTS;
 
 public class PageAyudaContact extends PageBase {
 
@@ -12,7 +12,7 @@ public class PageAyudaContact extends PageBase {
 	private static final String XPATH_LLAMA_A_NUESTRO_TELEFONO = XPATH_ICON + "//self::*[@class[contains(.,'phone')]]";
 	
 	public PageAyudaContact() {
-		super(new LTPageAyudaContact());
+		super(FORMULARIO_DE_AYUDA_LEGAL_TEXTS);
 	}
 	
 	public boolean isPage() {

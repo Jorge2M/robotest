@@ -34,11 +34,20 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 		return xpath;
 	}
 	
+	//TODO se puede eliminar el Old cuando los nuevos menús suban a producción (28-04-23)
 	private String getXPathMenuAlternative() {
+		return "(" + getXPathMenuAlternativeOld() + " | " + getXPathMenuAlternativeNew() + ")";
+	}
+	private String getXPathMenuAlternativeOld() {
 		return "//ul/li//a[" + 
 				"@data-testid[contains(.,'header.section.link.')]]" +
-			    "//span[text()[contains(.,'" + menu.getMenu() + "')]]";
+			    "//*[text()[contains(.,'" + menu.getMenu() + "')]]";
 	}
+	private String getXPathMenuAlternativeNew() {
+		return "//ul/li//a[" + 
+				"@data-testid[contains(.,'header.section.link.')]]" +
+			    "//self::*[text()[contains(.,'" + menu.getMenu() + "')]]";
+	}	
 	
 	public MenuActionsDesktop(MenuWeb menu) {
 		this.menu = menu;

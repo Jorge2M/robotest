@@ -75,7 +75,7 @@ public class MenuWeb extends PageBase implements MenuActions {
 	}
 
 	public String getMenu() {
-		return menu;
+		return menu.replace("\nNew!", "");
 	}
 	
 	public String getNameScreen() {

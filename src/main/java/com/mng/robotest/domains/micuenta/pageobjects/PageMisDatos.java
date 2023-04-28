@@ -1,9 +1,9 @@
 package com.mng.robotest.domains.micuenta.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.domains.legal.pageobjects.LTPageMisDatos;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts.MIS_DATOS_LEGAL_TEXTS;
 
 public class PageMisDatos extends PageBase {
 	
@@ -28,7 +28,7 @@ public class PageMisDatos extends PageBase {
 	private static final String XPATH_MESSAGE_CUENTA_CANCELADA_OK = "//div[@class='messageConfirmation']/h3[text()='Cuenta eliminada']";
 	
 	public PageMisDatos() {
-		super(new LTPageMisDatos());
+		super(MIS_DATOS_LEGAL_TEXTS);
 	}
 	
 	public String getTextInputNombre() {

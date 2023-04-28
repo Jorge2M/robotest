@@ -1,10 +1,9 @@
 package com.mng.robotest.domains.chequeregalo.pageobjects;
 
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.domains.legal.pageobjects.LegalTextsPage;
+import com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.ChequeRegalo;
-
 
 public abstract class PageChequeRegaloInputData extends PageBase {
 	
@@ -43,8 +42,8 @@ public abstract class PageChequeRegaloInputData extends PageBase {
 		super();
 	} 
 	
-	public PageChequeRegaloInputData(LegalTextsPage legalTextsPage) {
-		super(legalTextsPage);
+	public PageChequeRegaloInputData(PageLegalTexts legalTexts) {
+		super(legalTexts);
 	}
 	
 }

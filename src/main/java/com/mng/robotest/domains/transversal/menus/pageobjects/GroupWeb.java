@@ -97,8 +97,13 @@ public class GroupWeb extends PageBase {
 	private static final String XPATH_GROUP_DESKTOP = "//li[@data-testid[contains(.,'header.section')]]";
 	
 	private static final String TAG_GROUP = "@tag_group";
-	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP = 
+	
+	//TODO se puede eliminar cuando los nuevos menús suban a PRO (28-04-23)
+	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP_OLD = 
 			"//ul[@data-testid[contains(.,'subfamily')]]/li[@id[contains(.,'" + TAG_GROUP + "')]]";
+	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP_NEW = 
+			"//ul[@data-testid[contains(.,'subfamily')]]/li/*[@data-testid[contains(.,'" + TAG_GROUP + "')]]/..";
+	
 	private static final String XPATH_SUBMENU_DEVICE = "//div[@data-testid='header.subMenu']";
 
 	private String getXPathGroup() {
@@ -141,7 +146,19 @@ public class GroupWeb extends PageBase {
 		if (channel.isDevice()) {
 			return XPATH_SUBMENU_DEVICE;
 		}
-		return XPATH_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase()); 
+		return getXPathSubmenuDesktop(); 
+	}
+	
+	private String getXPathSubmenuDesktop() {
+		return "(" + getXPathSubmenuDesktopOld() + " | " + getXPathSubmenuDesktopNew() + ")";
+	}
+	
+	//TODO se puede eliminar cuando los nuevos menús suban a producción (28-abril-2023)
+	private String getXPathSubmenuDesktopOld() {
+		return XPATH_SUBMENU_WITH_TAG_DESKTOP_OLD.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
+	}
+	private String getXPathSubmenuDesktopNew() {
+		return XPATH_SUBMENU_WITH_TAG_DESKTOP_NEW.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
 	}
 	
 	public void click() {

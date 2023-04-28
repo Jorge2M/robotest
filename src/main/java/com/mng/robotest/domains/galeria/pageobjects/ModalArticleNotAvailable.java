@@ -1,9 +1,9 @@
 package com.mng.robotest.domains.galeria.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.domains.legal.pageobjects.LTModalArticleNotAvailable;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts.AVISAME_Y_SUSCRIPCION_LEGAL_TEXTS;
 
 public class ModalArticleNotAvailable extends PageBase {
 
@@ -17,7 +17,7 @@ public class ModalArticleNotAvailable extends PageBase {
 	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_MODAL + "//button[@data-testid='modal.close.button']";
 	
 	public ModalArticleNotAvailable() {
-		super(new LTModalArticleNotAvailable());
+		super(AVISAME_Y_SUSCRIPCION_LEGAL_TEXTS);
 	}
 	
 	public boolean inStateUntil(StateModal stateModal, int seconds) {

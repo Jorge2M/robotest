@@ -1,9 +1,9 @@
 package com.mng.robotest.domains.footer.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.domains.legal.pageobjects.LTPageMangoCard;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts.MANGO_CARD_LEGAL_TEXTS;
 
 public class PageMangoCard extends PageBase implements PageFromFooter {
 	
@@ -18,7 +18,7 @@ public class PageMangoCard extends PageBase implements PageFromFooter {
 	private static final String XPATH_FOR_IDPAGE = "//h2[@class='section-title']";
 	
 	public PageMangoCard() {
-		super(new LTPageMangoCard());
+		super(MANGO_CARD_LEGAL_TEXTS);
 	}
 	
 	@Override

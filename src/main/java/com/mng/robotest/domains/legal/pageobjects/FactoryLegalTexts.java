@@ -8,37 +8,37 @@ import java.util.NoSuchElementException;
  */
 public class FactoryLegalTexts {
 
-	public enum PageLegalText {
-		NUEVO_REGISTRO,
+	public enum PageLegalTexts {
+		NUEVO_REGISTRO_LEGAL_TEXTS,
 		//ANTIGUO REGISTRO
-		GUEST_CHECKOUT_PASO_1,
-		GUEST_CHECKOUT_PASO_2,
-		SUSCRIPCION,
-		SUSCRIPCION_EN_FOOTER_Y_NON_MODAL,
-		AVISAME_Y_SUSCRIPCION,
-		MIS_DATOS,
-		MANGO_CARD,
-		FORMULARIO_DE_AYUDA,
-		CHEQUE_REGALO_PAGOS;
+		GUEST_CHECKOUT_PASO_1_LEGAL_TEXTS,
+		GUEST_CHECKOUT_PASO_2_LEGAL_TEXTS,
+		SUSCRIPCION_LEGAL_TEXTS,
+		SUSCRIPCION_EN_FOOTER_Y_NON_MODAL_LEGAL_TEXTS,
+		AVISAME_Y_SUSCRIPCION_LEGAL_TEXTS,
+		MIS_DATOS_LEGAL_TEXTS,
+		MANGO_CARD_LEGAL_TEXTS,
+		FORMULARIO_DE_AYUDA_LEGAL_TEXTS,
+		CHEQUE_REGALO_PAGOS_LEGAL_TEXTS;
 	}
 	
-	public static LegalTextsPage make(PageLegalText page) {
+	public static LegalTextsPage make(PageLegalTexts page) {
 		switch(page) {
-		case NUEVO_REGISTRO:
-		case GUEST_CHECKOUT_PASO_1:
-		case GUEST_CHECKOUT_PASO_2:
-		case SUSCRIPCION:
-		case SUSCRIPCION_EN_FOOTER_Y_NON_MODAL:
+		case NUEVO_REGISTRO_LEGAL_TEXTS:
+		case GUEST_CHECKOUT_PASO_1_LEGAL_TEXTS:
+		case GUEST_CHECKOUT_PASO_2_LEGAL_TEXTS:
+		case SUSCRIPCION_LEGAL_TEXTS:
+		case SUSCRIPCION_EN_FOOTER_Y_NON_MODAL_LEGAL_TEXTS:
 			return new LTSecFooter();
-		case AVISAME_Y_SUSCRIPCION:
+		case AVISAME_Y_SUSCRIPCION_LEGAL_TEXTS:
 			return new LTModalArticleNotAvailable();
-		case MIS_DATOS:
+		case MIS_DATOS_LEGAL_TEXTS:
 			return new LTPageMisDatos();
-		case MANGO_CARD:
+		case MANGO_CARD_LEGAL_TEXTS:
 			return new LTPageMangoCard();
-		case FORMULARIO_DE_AYUDA:
+		case FORMULARIO_DE_AYUDA_LEGAL_TEXTS:
 			return new LTPageAyudaContact();
-		case CHEQUE_REGALO_PAGOS:
+		case CHEQUE_REGALO_PAGOS_LEGAL_TEXTS:
 			return new LTPageChequeRegaloInputDataNew();
 		default:
 			throw new NoSuchElementException(page.name());
