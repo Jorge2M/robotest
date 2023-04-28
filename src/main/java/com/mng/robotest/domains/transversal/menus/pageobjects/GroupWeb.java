@@ -115,16 +115,26 @@ public class GroupWeb extends PageBase {
 		return xpath + "//self::*[@data-testid[contains(.,'" + group.getId() + "')]]"; 
 	}
 	
-	private String getXPathGroupLiDesktop() {
-		return  XPATH_GROUP_DESKTOP + "//self::*[@id[contains(.,'" + group.getId() + "')]]";
+	private String getXPathGroupDesktop() {
+		return "(" + getXPathGroupDesktopOld() + " | " + getXPathGroupDesktopNew() + ")";
 	}
 
-	private String getXPathGroupDesktop() {
-		String xpathGroupLi = getXPathGroupLiDesktop();
+	//TODO se puede eliminar cuando la nueva versión suba a PRO (28-abril-2023)
+	private String getXPathGroupDesktopOld() {
+		String xpathGroupLi = XPATH_GROUP_DESKTOP + "//self::*[@id[contains(.,'" + group.getId() + "')]]";
 		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
 			return xpathGroupLi + "/a";
 		}
 		return xpathGroupLi + "/span";
+	}	
+	
+	private String getXPathGroupDesktopNew() {
+		String dataTestId = "[@data-testid[contains(.,'" + group.getId() + "')]]";
+		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
+			return XPATH_GROUP_DESKTOP + "//a" + dataTestId;
+		} else {
+			return XPATH_GROUP_DESKTOP + "//button" + dataTestId;
+		}
 	}
 	
 	private String getXPathSubmenu() {
