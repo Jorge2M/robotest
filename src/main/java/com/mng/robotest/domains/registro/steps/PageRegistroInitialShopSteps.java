@@ -111,13 +111,13 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		}
 	}
 
-	@Step (
-		description="Cerrar el modal de la política de privacidad",
-		expected="Desaparece el modal")	
-	public void closeModalPoliticaPrivacidad() {
-		pageRegistroInitial.closeModalPoliticaPrivacidad();
-		checkIsModalPoliticaPrivacidadInvisible();
-	}
+//	@Step (
+//		description="Cerrar el modal de la política de privacidad",
+//		expected="Desaparece el modal")	
+//	public void closeModalPoliticaPrivacidad() {
+//		pageRegistroInitial.closeModalPoliticaPrivacidad();
+//		checkIsModalPoliticaPrivacidadInvisible();
+//	}
 	
 	@Validation (description="Desaparece el modal de \"Cómo protegemos y tratamos tus datos?\"")
 	public boolean checkIsModalPoliticaPrivacidadInvisible() {

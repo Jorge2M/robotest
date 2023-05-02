@@ -23,13 +23,13 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 import static com.mng.robotest.test.data.PaisShop.*;
 
-public class Reg002 extends TestBase {
+public class Rgl002 extends TestBase {
 
 	private final PageChequeRegaloInputDataSteps pageChequeRegaloInputDataSteps;
 	
 	private final DataPago dataPago;
 	
-	public Reg002() throws Exception {
+	public Rgl002() throws Exception {
 		dataTest.setPais(FRANCE.getPais());
 		dataTest.setUserRegistered(true);
 		dataTest.setUserConnected("francia.test@mango.com");

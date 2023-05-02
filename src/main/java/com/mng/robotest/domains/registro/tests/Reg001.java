@@ -71,7 +71,7 @@ public class Reg001 extends TestBase {
 	private void selectLinkPoliticaPrivacidad() {
 		pageRegistroInitialSteps.clickPoliticaPrivacidad();
 		pageRegistroInitialSteps.clickPoliticaPrivacidadModal();
-		pageRegistroInitialSteps.closeModalPoliticaPrivacidad();
+//		pageRegistroInitialSteps.closeModalPoliticaPrivacidad();
 	}
 	
 	private void inputInitialDataAndClickCreate() {

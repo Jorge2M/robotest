@@ -25,8 +25,8 @@ public class PageDevoluciones extends PageBase {
 			String tagClass = "@tagClass";
 			String xpathBase = "//button[" + tagClass + " and text()[contains(.,'" + this.literal + "')]]";
 			this.xpathLink = xpathBase.replace(tagClass, "@class[contains(.,'panel-heading')]");
-			this.xpathLinkPlegada = xpathBase.replace(tagClass, "@class[contains(.,'opened')]]");
-			this.xpathLinkDesplegada = xpathBase.replace(tagClass, "@class[contains(.,'closed')]]");
+			this.xpathLinkPlegada = xpathBase.replace(tagClass, "@class[contains(.,'opened')]");
+			this.xpathLinkDesplegada = xpathBase.replace(tagClass, "@class[contains(.,'closed')]");
 		}
 		
 		private String getXPath(boolean plegada) {

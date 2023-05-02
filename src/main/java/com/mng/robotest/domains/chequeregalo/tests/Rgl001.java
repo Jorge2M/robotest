@@ -19,15 +19,16 @@ import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 
-public class Reg001 extends TestBase {
+public class Rgl001 extends TestBase {
 
 	private final PageChequeRegaloInputDataSteps pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps();
 	
 	private final DataPago dataPago;
 		
-	public Reg001() throws Exception {
+	public Rgl001() throws Exception {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkMisCompras()
+				.checkPagos()
 				.emaiExists()
 				.chequeRegalo().build();
 		

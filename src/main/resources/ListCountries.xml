@@ -3273,7 +3273,7 @@ where
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <moneda>%@ USD</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<tienda she="s" he="s" touch="na" nina="s" nino="s" baby="s"></tienda>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
