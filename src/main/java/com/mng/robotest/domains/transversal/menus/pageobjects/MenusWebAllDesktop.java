@@ -27,16 +27,8 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 	}
 	
 	private String getXPathMenuItem(LineaType linea) {
-		return "(" + getXPathMenuItemOld(linea) + " | " + getXPathMenuItemNew(linea) + ")"; 
+		return XPATH_MENU_ITEM + "/*[@data-testid[contains(.,'_" + linea.toString().toLowerCase() + "')]]/.."; 
 	}
-	
-	//TODO se puede eliminar cuando los nuevos menús suban a producción (28-04-23)
-	private String getXPathMenuItemOld(LineaType linea) {
-		return XPATH_MENU_ITEM + "//self::*[@id[contains(.,'_" + linea.toString().toLowerCase() + "')]]";
-	}
-	private String getXPathMenuItemNew(LineaType linea) {
-		return XPATH_MENU_ITEM + "/*[@data-testid[contains(.,'_" + linea.toString().toLowerCase() + "')]]/..";
-	}	
 	
 	@Override
 	public List<MenuWeb> getMenus(GroupWeb groupWeb) {
@@ -47,10 +39,9 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 	private List<MenuWeb> getVisibleMenus(GroupWeb groupWeb) {
 		List<MenuWeb> menus = new ArrayList<>();
 		List<WebElement> menuElements = getElements(getXPathMenuItem(groupWeb.getLinea()));
-		boolean isOldMenu = isOldMenu(menuElements);
 		for (WebElement menuElement : menuElements) {
 			menus.add(new MenuWeb
-					.Builder(getNameMenu(menuElement, isOldMenu))
+					.Builder(getNameMenu(menuElement))
 					.linea(groupWeb.getLinea())
 					.sublinea(groupWeb.getSublinea())
 					.group(groupWeb.getGroup())
@@ -59,17 +50,7 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 		return menus;
 	}
 
-	//TODO se puede eliminar la parte del OldMenu cuando los nuevos menús suban a PRO (28-04-23)
-	private boolean isOldMenu(List<WebElement> menuElements) {
-		if (menuElements.isEmpty()) {
-			return false;
-		}
-		return state(Present, menuElements.get(0)).by(By.xpath(".//span/span")).check();
-	}
-	private String getNameMenu(WebElement menuElement, boolean isOldMenu) {
-		if (isOldMenu) {
-			return menuElement.findElement(By.xpath(".//span/span")).getText();	
-		}
+	private String getNameMenu(WebElement menuElement) {
 		return menuElement.findElement(By.xpath(".//a")).getText();
 	}
 	

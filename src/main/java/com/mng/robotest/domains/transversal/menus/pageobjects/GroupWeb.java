@@ -98,10 +98,7 @@ public class GroupWeb extends PageBase {
 	
 	private static final String TAG_GROUP = "@tag_group";
 	
-	//TODO se puede eliminar cuando los nuevos menús suban a PRO (28-04-23)
-	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP_OLD = 
-			"//ul[@data-testid[contains(.,'subfamily')]]/li[@id[contains(.,'" + TAG_GROUP + "')]]";
-	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP_NEW = 
+	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP = 
 			"//ul[@data-testid[contains(.,'subfamily')]]/li/*[@data-testid[contains(.,'" + TAG_GROUP + "')]]/..";
 	
 	private static final String XPATH_SUBMENU_DEVICE = "//div[@data-testid='header.subMenu']";
@@ -121,19 +118,6 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private String getXPathGroupDesktop() {
-		return "(" + getXPathGroupDesktopOld() + " | " + getXPathGroupDesktopNew() + ")";
-	}
-
-	//TODO se puede eliminar cuando la nueva versión suba a PRO (28-abril-2023)
-	private String getXPathGroupDesktopOld() {
-		String xpathGroupLi = XPATH_GROUP_DESKTOP + "//self::*[@id[contains(.,'" + group.getId() + "')]]";
-		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
-			return xpathGroupLi + "/a";
-		}
-		return xpathGroupLi + "/span";
-	}	
-	
-	private String getXPathGroupDesktopNew() {
 		String dataTestId = "[@data-testid[contains(.,'" + group.getId() + "')]]";
 		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
 			return XPATH_GROUP_DESKTOP + "//a" + dataTestId;
@@ -141,7 +125,7 @@ public class GroupWeb extends PageBase {
 			return XPATH_GROUP_DESKTOP + "//button" + dataTestId;
 		}
 	}
-	
+
 	private String getXPathSubmenu() {
 		if (channel.isDevice()) {
 			return XPATH_SUBMENU_DEVICE;
@@ -150,15 +134,7 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private String getXPathSubmenuDesktop() {
-		return "(" + getXPathSubmenuDesktopOld() + " | " + getXPathSubmenuDesktopNew() + ")";
-	}
-	
-	//TODO se puede eliminar cuando los nuevos menús suban a producción (28-abril-2023)
-	private String getXPathSubmenuDesktopOld() {
-		return XPATH_SUBMENU_WITH_TAG_DESKTOP_OLD.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
-	}
-	private String getXPathSubmenuDesktopNew() {
-		return XPATH_SUBMENU_WITH_TAG_DESKTOP_NEW.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
+		return XPATH_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
 	}
 	
 	public void click() {
