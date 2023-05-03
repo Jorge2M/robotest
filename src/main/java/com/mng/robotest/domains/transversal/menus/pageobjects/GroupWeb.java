@@ -94,7 +94,9 @@ public class GroupWeb extends PageBase {
 				"@data-testid[contains(.,'header.tabLink')] or " + 
 				"@data-testid[contains(.,'header.subMenu')]]";
 	private static final String XPATH_GROUP_VIEW_MORE_DEVICE = "//button[@data-testid[contains(.,'viewMore')]]";
-	private static final String XPATH_GROUP_DESKTOP = "//li[@data-testid[contains(.,'header.section')]]";
+	
+	private static final String XPATH_GROUP_DESKTOP_OLD = "//li[@data-testid[contains(.,'header.section')]]";
+	private static final String XPATH_GROUP_DESKTOP_NEW = "//li[@data-testid[contains(.,'menu.section')]]";
 	
 	private static final String TAG_GROUP = "@tag_group";
 	
@@ -117,12 +119,24 @@ public class GroupWeb extends PageBase {
 		return xpath + "//self::*[@data-testid[contains(.,'" + group.getId() + "')]]"; 
 	}
 	
+	//TODO eliminar la parte Old cuando los nuevos data-testids suban a PRO (03-05-23)
 	private String getXPathGroupDesktop() {
+		return "(" + getXPathGroupDesktopOld() + " | " + getXPathGroupDesktopNew() + ")";
+	}
+	private String getXPathGroupDesktopOld() {
 		String dataTestId = "[@data-testid[contains(.,'" + group.getId() + "')]]";
 		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
-			return XPATH_GROUP_DESKTOP + "//a" + dataTestId;
+			return XPATH_GROUP_DESKTOP_OLD + "//a" + dataTestId;
 		} else {
-			return XPATH_GROUP_DESKTOP + "//button" + dataTestId;
+			return XPATH_GROUP_DESKTOP_OLD + "//button" + dataTestId;
+		}
+	}
+	private String getXPathGroupDesktopNew() {
+		String dataTestId = "[@data-testid[contains(.,'" + group.getId() + "')]]";
+		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
+			return XPATH_GROUP_DESKTOP_NEW + "//a" + dataTestId;
+		} else {
+			return XPATH_GROUP_DESKTOP_NEW + "//button" + dataTestId;
 		}
 	}
 

@@ -141,9 +141,9 @@ public class LineaWeb extends PageBase implements LineaActions {
 	@Override
 	public void clickLinea() {
 		lineaActions.clickLinea();
-		if (!lineaActions.isLineaSelected(1)) {
-			lineaActions.clickLinea();
-		}
+//		if (!lineaActions.isLineaSelected(1)) {
+//			lineaActions.clickLinea();
+//		}
 	}
 	@Override
 	public void clickSublinea() {

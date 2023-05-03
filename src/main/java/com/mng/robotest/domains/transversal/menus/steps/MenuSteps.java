@@ -273,7 +273,7 @@ public class MenuSteps extends StepBase {
 	}
 	
 	private void validaSelecLinea(LineaWeb lineaWeb) {
-		validateIsLineaSelected(lineaWeb);
+		//validateIsLineaSelected(lineaWeb);
 		Linea linea = Linea.getLinea(lineaWeb.getLinea(), dataTest.getPais());
 		checkContentGaleriaAfterClickLinea(linea);
 

@@ -14,9 +14,19 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 
 	private static final String XPATH_WRAPPER_MENU = "//div[@id[contains(.,'SubMenu')]]";
-	private static final String XPATH_MENU_ITEM = 
+	
+	//TODO eliminar la parte Old cuando los nuevos data-testids suban a PRO (03-05-23)
+	private static final String XPATH_MENU_ITEM_OLD = 
 			"//li[@data-testid[contains(.,'header.section.link')] and " + 
 			     "string-length(normalize-space(@class))>0]";
+	
+	private static final String XPATH_MENU_ITEM_NEW = 
+			"//li[@data-testid[contains(.,'menu.family.')] and " + 
+			     "string-length(normalize-space(@class))>0]/a[@data-testid[contains(.,'.link')]]/..";	
+	
+	private String getXPathMenuItem() {
+		return "(" + XPATH_MENU_ITEM_OLD + " | " + XPATH_MENU_ITEM_NEW + ")";
+	}
 	
 	@Override
 	public boolean isMenuInState(boolean open, int seconds) {
@@ -27,7 +37,7 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 	}
 	
 	private String getXPathMenuItem(LineaType linea) {
-		return XPATH_MENU_ITEM + "/*[@data-testid[contains(.,'_" + linea.toString().toLowerCase() + "')]]/.."; 
+		return getXPathMenuItem() + "/*[@data-testid[contains(.,'_" + linea.toString().toLowerCase() + "')]]/.."; 
 	}
 	
 	@Override
@@ -38,7 +48,7 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 	
 	private List<MenuWeb> getVisibleMenus(GroupWeb groupWeb) {
 		List<MenuWeb> menus = new ArrayList<>();
-		List<WebElement> menuElements = getElements(getXPathMenuItem(groupWeb.getLinea()));
+		var menuElements = getElements(getXPathMenuItem(groupWeb.getLinea()));
 		for (WebElement menuElement : menuElements) {
 			menus.add(new MenuWeb
 					.Builder(getNameMenu(menuElement))
