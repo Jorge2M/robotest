@@ -8,25 +8,16 @@ import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class PageIdentificacionSteps extends StepBase {
 
-	@Step (
-		description="Seleccionar el link 'Iniciar Sesión' e introducir credenciales incorrectas: <b>#{usrExistente}, #{password}</b>",
-		expected="Aparece el correspondiente mensaje de error")
-	public void inicioSesionDatosKO(String usrExistente, String password) {
-		new PageIdentificacion().iniciarSesion(usrExistente, password);
-		checkTextoCredencialesKO();
-		GenericChecks.checkDefault();	
-	}
-	
 	@Validation (description="Aparece el texto de introducción errónea de credenciales")
-	private boolean checkTextoCredencialesKO() {
-		return new PageIdentificacion().isErrorEmailoPasswordKO();
+	public boolean checkTextoCredencialesKO() {
+		return PageIdentificacion.make().isErrorEmailoPasswordKO();
 	}
 	
 	@Step (
 		description="Seleccionar el link \"¿Has olvidado tu contraseña?\"", 
 		expected="Aparece la página de cambio de contraseña")
 	public void selectHasOlvidadoTuContrasenya() {
-		new PageIdentificacion().clickHasOlvidadoContrasenya(); 
+		PageIdentificacion.make().clickHasOlvidadoContrasenya(); 
 		new PageRecuperaPasswdSteps().isPage();
 		GenericChecks.checkDefault();
 	}

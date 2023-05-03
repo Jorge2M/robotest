@@ -6,10 +6,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageIniciarSesionBolsaMobile extends PageBase {
 
-	private static final String XPATH_USER_INPUT = "//*[@data-testid='checkout.login.emailInput']";
-	private static final String XPATH_PASSWORD_INPUT = "//*[@data-testid='checkout.login.passInput']";
-	private static final String XPATH_MANTENER_SESION_INICIADA_CHECK = "//*[@data-testid='checkout.login.remindmeCheckbox']";
-	private static final String XPATH_INICIAR_SESION_BUTTON = "//*[@data-testid='checkout.login.loginButton.login']";
+	private static final String XPATH_USER_INPUT = "//*[@data-testid[contains(.,'login.emailInput')]]";
+	private static final String XPATH_PASSWORD_INPUT = "//*[@data-testid[contains(.,'login.passInput')]]";
+	private static final String XPATH_INICIAR_SESION_BUTTON = "//*[@data-testid[contains(.,'login.loginButton.login')]]";
+	private static final String XPATH_HAS_OLVIDADO_TU_CONTRASENA = "//*[@data-testid[contains(.,'resetPassword')]]";
 	
 	public boolean isPage(int seconds) {
 		return 
@@ -22,16 +22,16 @@ public class PageIniciarSesionBolsaMobile extends PageBase {
 		clickIniciarSesion();
 	}
 	
-	public boolean isMantenerSesionIniciadaChecked() {
-		return getElement(XPATH_MANTENER_SESION_INICIADA_CHECK).isSelected();
+	public void clickHasOlvidadoContrasenya() {
+		click(XPATH_HAS_OLVIDADO_TU_CONTRASENA).exec();
 	}
 	
-	private void inputCredentials(String user, String password) {
+	public void inputCredentials(String user, String password) {
 		getElement(XPATH_USER_INPUT).sendKeys(user);
 		getElement(XPATH_PASSWORD_INPUT).sendKeys(password);
 	}
 
-	private void clickIniciarSesion() {
+	public void clickIniciarSesion() {
 		click(XPATH_INICIAR_SESION_BUTTON).exec();
 	}
 

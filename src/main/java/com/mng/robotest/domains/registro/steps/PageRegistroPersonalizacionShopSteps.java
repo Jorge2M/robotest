@@ -6,8 +6,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroPersonalizacionShop;
+import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 
 public class PageRegistroPersonalizacionShopSteps extends StepBase {
 

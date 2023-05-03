@@ -3,10 +3,10 @@ package com.mng.robotest.domains.bolsa.tests;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
+import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 
 public class Bor002 extends TestBase {
 

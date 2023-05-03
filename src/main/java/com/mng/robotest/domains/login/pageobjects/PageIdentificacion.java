@@ -1,72 +1,37 @@
 package com.mng.robotest.domains.login.pageobjects;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.Log4jTM;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Clickable;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.CERRAR_SESION;
 
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
-import com.mng.robotest.test.pageobject.shop.modales.ModalActPoliticaPrivacidad;
-import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
-import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.*;
-
-public class PageIdentificacion extends PageBase {
+public abstract class PageIdentificacion extends PageBase {
 	
 	private static final String AVISO_CREDENCIALES_KO = "Tu e-mail o contraseña no son correctos";
 	private static final String XPATH_ERROR_CREDENCIALES_KO = "//*[text()[contains(.,'" + AVISO_CREDENCIALES_KO + "')]]";
-	private static final String XPATH_HAS_OLVIDADO_CONTRASENYA = "//span[text()[contains(.,'¿Has olvidado tu contraseña?')]]/../../a";
-//	private static final String XPATH_INPUT_USER_NEW = "//*[@data-testid='logon.login.emailInput']";
-//	private static final String XPATH_INPUT_PASSWORD_NEW = "//*[@data-testid='logon.login.passInput']";	
-//	private static final String XPATH_INICIAR_SESION_NEW = "//*[@data-testid[contains(.,'loginButton')]]";
+	
+	public abstract boolean isPage(int seconds);
+	public abstract void inputUserPassword(String usuario, String password);
+	public abstract void clickButtonEntrar();
+	public abstract void clickHasOlvidadoContrasenya();	
+	
 	private static final String XPATH_TAB_REGISTRATE = "//p[@class[contains(.,'registerTab')]]";
-	private static final String XPATH_INPUT_USER = "//input[@id[contains(.,'userMail')]]";
-	private static final String XPATH_INPUT_PASSWORD = "//input[@id[contains(.,'chkPwd')]]";	
-	private static final String XPATH_INICIAR_SESION = "//div[@class='submitContent']/input[@type='submit']";
 	
-	public boolean isVisibleUserUntil(int seconds) {
-		return state(Visible, XPATH_INPUT_USER).wait(seconds).check();
-	}
-
-	public String getLiteralAvisiCredencialesKO() {
-		return AVISO_CREDENCIALES_KO;
-	}
-
-	public void inputUserPassword(String usuario, String password) {
-		try {
-			getElement(XPATH_INPUT_USER).clear();
+	//TODO eliminar PageIdentificacionOld cuando se haya eliminado en PRO y Outlet (3-05-2023)
+	public static PageIdentificacion make() {
+		var pageOld = new PageIdentificacionOld();
+		var pageNew = new PageIdentificacionNew();
+		for (int seconds=0; seconds<3; seconds++) {
+			if (pageOld.isPage(seconds)) {
+				return pageOld;
+			}
+			if (pageNew.isPage(seconds)) {
+				return pageNew;
+			}
 		}
-		catch (Exception e) {
-			Log4jTM.getLogger().error(e);
-		} 
-		getElement(XPATH_INPUT_USER).sendKeys(usuario);
-		getElement(XPATH_INPUT_PASSWORD).sendKeys(password);
-	}
-
-	public void login(String user, String password) {
-		iniciarSesion(user, password);
-	}
-	
-	public void logoff() {
-		new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, Clickable);
-	}
-
-	public void iniciarSesion(String user, String password) {
-		clickIniciarSesionAndWait(channel, app);
-		isVisibleUserUntil(10);
-		new PageIdentificacion().inputUserPassword(user, password);
-		clickButtonEntrar();
-		new ModalCambioPais().closeModalIfVisible();
-		new ModalActPoliticaPrivacidad().clickOkIfVisible();
-		new ModalLoyaltyAfterLogin().closeModalIfVisible();
-	}	
-	
-	private void clickButtonEntrar() {
-		click(XPATH_INICIAR_SESION).waitLoadPage(10).exec(); 
+		return pageOld;
 	}
 	
 	public void clickTabRegistrate() {
@@ -74,35 +39,12 @@ public class PageIdentificacion extends PageBase {
 		click(XPATH_TAB_REGISTRATE).exec();
 	}
 	
-	public boolean isButtonEntrarPresent() {
-		return state(Present, XPATH_INICIAR_SESION).check();
-	}
-
-	public void clickIniciarSesionAndWait(Channel channel, AppEcom app) {
-		if (channel.isDevice()) {
-			//En el caso de mobile nos tenemos que asegurar que están desplegados los menús
-			SecCabecera secCabeceraDevice = new SecCabeceraMostFrequent();
-			boolean toOpen = true;
-			secCabeceraDevice.clickIconoMenuHamburguerMobil(toOpen);
-			
-			// Si existe, nos posicionamos y seleccionamos el link \"CERRAR SESIÓN\" 
-			// En el caso de iPhone parece que mantiene la sesión abierta después de un caso de prueba 
-			boolean menuClicado = new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, Clickable);
-			
-			//Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
-			if (menuClicado) {
-				secCabeceraDevice.clickIconoMenuHamburguerMobil(toOpen);
-			}
-		}
-		
-		new MenusUserWrapper().moveAndClick(INICIAR_SESION);
+	public void logoff() {
+		new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, Clickable);
 	}
 	
 	public boolean isErrorEmailoPasswordKO() {
 		return state(Present, XPATH_ERROR_CREDENCIALES_KO).wait(1).check();
 	}
 
-	public void clickHasOlvidadoContrasenya() {
-		click(XPATH_HAS_OLVIDADO_CONTRASENYA).exec();
-	}
 }

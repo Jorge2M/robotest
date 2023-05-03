@@ -10,8 +10,8 @@ import com.mng.robotest.domains.micuenta.steps.PageDevolucionesSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisDatosSteps;
 import com.mng.robotest.domains.micuenta.steps.PageSuscripcionesSteps;
+import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.domains.transversal.prehome.steps.PagePrehomeSteps;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 
 
 public class Mic001 extends TestBase {

@@ -5,6 +5,7 @@ import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisDatosSteps;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
+import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.steps.shop.SecCabeceraSteps;
@@ -56,7 +57,7 @@ public class Mic003 extends TestBase {
 		new PageMisDatosSteps().cancelarCuenta();
 		var secMenusUserSteps = new SecMenusUserSteps();
 		secMenusUserSteps.logoff();
-		secMenusUserSteps.identificationKO(dataNewRegister.getEmail(), dataNewRegister.getPassword());
+		new AccesoSteps().inicioSesionDatosKO(dataNewRegister.getEmail(), dataNewRegister.getPassword());
 	}	
 
 }

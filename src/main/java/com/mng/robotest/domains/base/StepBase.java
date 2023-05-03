@@ -8,6 +8,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.manto.tests.ManXXX;
+import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb;
@@ -20,7 +21,6 @@ import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.utils.UtilsTest;
 

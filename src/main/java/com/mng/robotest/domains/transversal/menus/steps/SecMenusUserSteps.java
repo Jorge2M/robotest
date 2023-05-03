@@ -17,6 +17,7 @@ import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
+import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
@@ -48,7 +49,7 @@ public class SecMenusUserSteps extends StepBase {
 	public void selectRegistrate() {
 		clickUserMenu(REGISTRATE);
 		if (channel.isDevice()) {
-			new PageIdentificacion().clickTabRegistrate();
+			PageIdentificacion.make().clickTabRegistrate();
 		}
 		if (app==AppEcom.outlet || PaisShop.ICELAND.isEquals(dataTest.getPais())) {
 			PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
@@ -77,26 +78,8 @@ public class SecMenusUserSteps extends StepBase {
 	
 	public void logoffLogin(String userConnect, String userPassword) {
 		logoff();
-		identification(userConnect, userPassword);
+		new AccesoSteps().identification(userConnect, userPassword);
 	}
-	
-	@Step (
-		description="Identificarse con los datos del registro (#{userConnect})", 
-		expected="La nueva identificación es correcta")
-	public void identification(String userConnect, String userPassword) {
-		new PageIdentificacion().iniciarSesion(userConnect, userPassword);
-		checkIsVisibleLinkCerrarSesion();
-		GenericChecks.checkDefault();
-	}
-	
-	@Step (
-		description="Identificarse con los datos del registro (#{userConnect})", 
-		expected="La nueva identificación es incorrecta")
-	public void identificationKO(String userConnect, String userPassword) {
-		new PageIdentificacion().iniciarSesion(userConnect, userPassword);
-		checkIsInvisibleLinkCerrarSesion();
-		GenericChecks.checkDefault();
-	}	
 	
 	@Validation (description="Aparece el link superior de \"Cerrar Sesión\" (estamos loginados)")
 	public boolean checkIsVisibleLinkCerrarSesion() {	

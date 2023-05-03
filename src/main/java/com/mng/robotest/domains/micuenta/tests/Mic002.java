@@ -5,11 +5,11 @@ import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMisComprasSteps;
+import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
 
 public class Mic002 extends TestBase {
 	

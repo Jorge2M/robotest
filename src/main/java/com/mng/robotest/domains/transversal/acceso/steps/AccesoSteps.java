@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.shop;
+package com.mng.robotest.domains.transversal.acceso.steps;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -19,13 +19,14 @@ import com.mng.robotest.domains.base.datatest.DataTest;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
-import com.mng.robotest.domains.login.pageobjects.PageIdentificacion;
+import com.mng.robotest.domains.login.steps.PageIdentificacionSteps;
+import com.mng.robotest.domains.transversal.acceso.navigations.AccesoFlows;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
-import com.mng.robotest.test.steps.navigations.shop.AccesoNavigations;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.steps.votf.PageLoginVOTFSteps;
@@ -43,7 +44,7 @@ public class AccesoSteps extends StepBase {
 	private static final String TAG_REGISTRO = "@TagRegistro";
 	
 	public void oneStep(boolean clearArticulos) throws Exception {
-		new AccesoNavigations().accesoHomeAppWeb();
+		new AccesoFlows().accesoHomeAppWeb();
 		oneStepAccess(clearArticulos);
 	}
 	
@@ -66,7 +67,7 @@ public class AccesoSteps extends StepBase {
 		stepTestMaker.replaceInDescription(TAG_REGISTRO, registro);
 
 		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
-			new PageIdentificacion().iniciarSesion(dataTest.getUserConnected(), dataTest.getPasswordUser());
+			new AccesoFlows().login(dataTest.getUserConnected(), dataTest.getPasswordUser());
 		}
 
 		if (clearArticulos) {
@@ -154,16 +155,29 @@ public class AccesoSteps extends StepBase {
 		}
 	}
 
-	@Step (
-		description="Seleccionar \"Iniciar Sesión\" e identificarse con #{dataTest.getUserConnected()}", 
-		expected="La identificación es correcta",
-		saveHtmlPage=SaveWhen.Always,
-		saveNettraffic=SaveWhen.Always)
 	private void iniciarSesion(DataTest dataTest) {
-		new PageIdentificacion().iniciarSesion(dataTest.getUserConnected(), dataTest.getPasswordUser());
+		identification(dataTest.getUserConnected(), dataTest.getPasswordUser());
+	}
+	
+	@Step (
+		description="Seleccionar \"Iniciar Sesión\" e introducir credenciales incorrectas: <b>#{usuario}, #{password}</b>",
+		expected="Aparece el correspondiente mensaje de error")
+	public void inicioSesionDatosKO(String usuario, String password) {
+		new AccesoFlows().login(usuario, password);
+		new PageIdentificacionSteps().checkTextoCredencialesKO();
+		new SecMenusUserSteps().checkIsInvisibleLinkCerrarSesion();
+		GenericChecks.checkDefault();	
+	}
+	
+	@Step (
+		description="Seleccionar <b>Iniciar Sesión</b> e identificarse con el usuario <b>#{userConnect}</b>", 
+		expected="La identificación es correcta",
+		saveNettraffic=SaveWhen.Always)
+	public void identification(String userConnect, String userPassword) {
+		new AccesoFlows().login(userConnect, userPassword);
 		validaIdentificacionEnShop();
 	}
-
+	
 	public void accesoVOTFtoHOME() throws Exception {
 		String urlAcceso = inputParamsSuite.getUrlBase();
 		int numIdiomas = dataTest.getPais().getListIdiomas().size();

@@ -3,7 +3,7 @@ package com.mng.robotest.domains.bolsa.tests;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
-import com.mng.robotest.test.steps.shop.AccesoSteps;
+import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
 
 public class BolsaCommons extends StepBase {
 

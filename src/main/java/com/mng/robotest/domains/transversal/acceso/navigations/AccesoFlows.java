@@ -1,9 +1,15 @@
-package com.mng.robotest.test.steps.navigations.shop;
+package com.mng.robotest.domains.transversal.acceso.navigations;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Clickable;
+import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.CERRAR_SESION;
+import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.INICIAR_SESION;
+
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.domains.login.pageobjects.PageIdentificacion;
 import com.mng.robotest.test.beans.AccesoVOTF;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -12,14 +18,19 @@ import com.mng.robotest.domains.transversal.prehome.pageobjects.PageJCAS;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PagePrehome;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
+import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
+import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
+import com.mng.robotest.test.pageobject.shop.modales.ModalActPoliticaPrivacidad;
+import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
+import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 import com.mng.robotest.test.pageobject.votf.PageAlertaVOTF;
 import com.mng.robotest.test.pageobject.votf.PageLoginVOTF;
 import com.mng.robotest.test.pageobject.votf.PageSelectIdiomaVOTF;
 import com.mng.robotest.test.pageobject.votf.PageSelectLineaVOTF;
 
-public class AccesoNavigations extends StepBase {
+public class AccesoFlows extends StepBase {
 
 	private final Pais pais = dataTest.getPais();
 	private final IdiomaPais idioma = dataTest.getIdioma();
@@ -50,6 +61,37 @@ public class AccesoNavigations extends StepBase {
 			pagePrehome.accesoShopViaPrehome(acceptCookies);
 		}
 	}
+	
+	public void login(String user, String password) {
+		clickIniciarSesionAndWait(channel, app);
+		var pageIdentificacion = PageIdentificacion.make();
+		pageIdentificacion.isPage(5);
+		pageIdentificacion.inputUserPassword(user, password);
+		pageIdentificacion.clickButtonEntrar();
+		new ModalCambioPais().closeModalIfVisible();
+		new ModalActPoliticaPrivacidad().clickOkIfVisible();
+		new ModalLoyaltyAfterLogin().closeModalIfVisible();
+	}	
+	
+	private void clickIniciarSesionAndWait(Channel channel, AppEcom app) {
+		if (channel.isDevice()) {
+			//En el caso de mobile nos tenemos que asegurar que están desplegados los menús
+			SecCabecera secCabeceraDevice = new SecCabeceraMostFrequent();
+			boolean toOpen = true;
+			secCabeceraDevice.clickIconoMenuHamburguerMobil(toOpen);
+			
+			// Si existe, nos posicionamos y seleccionamos el link \"CERRAR SESIÓN\" 
+			// En el caso de iPhone parece que mantiene la sesión abierta después de un caso de prueba 
+			boolean menuClicado = new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, Clickable);
+			
+			//Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
+			if (menuClicado) {
+				secCabeceraDevice.clickIconoMenuHamburguerMobil(toOpen);
+			}
+		}
+		
+		new MenusUserWrapper().moveAndClick(INICIAR_SESION);
+	}	
 	
 	public void goFromLineasToMultimarcaVOTF() {
 		var pageSelectLineaVOTF = new PageSelectLineaVOTF();

@@ -35,6 +35,7 @@ import com.mng.robotest.domains.compra.steps.Page2IdentCheckoutSteps;
 import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.domains.compra.steps.PageResultPagoTpvSteps;
 import com.mng.robotest.domains.login.pageobjects.PageIdentificacion;
+import com.mng.robotest.domains.transversal.acceso.navigations.AccesoFlows;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.getdata.usuarios.GestorUsersShop;
 import com.mng.robotest.getdata.usuarios.UserShop;
@@ -335,7 +336,7 @@ public class CheckoutFlow extends StepBase {
 	
 	private void actionsWhenSessionLoss() {
 		new ModalCambioPais().closeModalIfVisible();
-		new AccesoNavigations().cambioPaisFromHomeIfNeeded(pais, dataTest.getIdioma());
+		new AccesoFlows().cambioPaisFromHomeIfNeeded(pais, dataTest.getIdioma());
 	}
 	
 	private void validaPasarelasPagoPais() throws Exception {
@@ -446,13 +447,13 @@ public class CheckoutFlow extends StepBase {
 		if (dataTest.isUserRegistered()) {
 			stepTestMaker.replaceInDescription(
 				TAG_LOGIN_OR_LOGOFF, "e Identificarse con el usuario <b>" + dataTest.getUserConnected() + "</b>");
-			new AccesoNavigations().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
-			new PageIdentificacion().login(dataTest.getUserConnected(), dataTest.getPasswordUser());
+			new AccesoFlows().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
+			new AccesoFlows().login(dataTest.getUserConnected(), dataTest.getPasswordUser());
 		} else {
 			stepTestMaker.replaceInDescription(
 				TAG_LOGIN_OR_LOGOFF, "(si estamos logados cerramos sesión)");
-			new AccesoNavigations().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
-			new PageIdentificacion().logoff();
+			new AccesoFlows().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
+			PageIdentificacion.make().logoff();
 		}
 	}
 	

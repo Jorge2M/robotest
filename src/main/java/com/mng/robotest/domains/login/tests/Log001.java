@@ -3,6 +3,7 @@ package com.mng.robotest.domains.login.tests;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.login.steps.PageIdentificacionSteps;
 import com.mng.robotest.domains.login.steps.PageRecuperaPasswdSteps;
+import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.test.data.Constantes;
 
 public class Log001 extends TestBase {
@@ -17,8 +18,9 @@ public class Log001 extends TestBase {
 	}
 
 	private void checkIncorrectLogins() {
-		pageIdentificacionSteps.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw");
-		pageIdentificacionSteps.inicioSesionDatosKO(Constantes.MAIL_PERSONAL, "chuflapassw");
+		var accesoSteps = new AccesoSteps();
+		accesoSteps.inicioSesionDatosKO("usuarioKeNoExiste@mango.com", "chuflapassw");
+		accesoSteps.inicioSesionDatosKO(Constantes.MAIL_PERSONAL, "chuflapassw");
 	}
 	
 	private void restorePassword() {
