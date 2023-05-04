@@ -20,7 +20,6 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	private static final String XPATH_LINEA_WITH_TAG_NEW = "//li[@data-testid[contains(.,'menu.brand." + TAG_ID_LINEA + "')]]";
 	
 	private static final String TAG_ID_SUBLINEA = "@SublineaId";
-	private static final String XPATH_SUBLINEA_WITH_TAG = "//li[@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] and @data-testid[contains(.,'section')]]";
 	private static final String TAG_ID_SUBLINEA2 = "@2SublineaId";
 	private static final String XPATH_SUBLINEA_WITH_2TAG = "//li[(@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] or @id[contains(.,'" + TAG_ID_SUBLINEA2 + "')]) and @data-testid[contains(.,'section')]]";
 	
@@ -53,18 +52,20 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 			return XPATH_SUBLINEA_WITH_2TAG
 					.replace(TAG_ID_SUBLINEA, sublineaType.getId(app))
 					.replace(TAG_ID_SUBLINEA2, "teenP") + 
-					"//span";
+					"//button";
 		}
-		return XPATH_SUBLINEA_WITH_TAG
-				.replace(TAG_ID_SUBLINEA, sublineaType.getId(app)) + 
-				"//span";
+		//Existe un problema en la página y a veces es TeenA y otras veces TeenQ
+		return XPATH_SUBLINEA_WITH_2TAG
+				.replace(TAG_ID_SUBLINEA, sublineaType.getId(app))
+				.replace(TAG_ID_SUBLINEA2, "teenQ") + 
+				"//button";
 	}
 	
 	private String getXPathLineaSelected() {
 		return getXPathLinea() + "//a[@aria-expanded='true']";
 	}
 	private String getXPathSublineaSelected() {
-		return getXPathSublinea() + "//self::*[string-length(normalize-space(@class))>0]";
+		return getXPathSublinea() + "//self::*[@aria-expanded='true']";
 	}
 
 	@Override
