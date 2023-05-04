@@ -138,6 +138,7 @@ public class SecBannersSteps extends StepBase {
 			if (validacionesBannerEstandar(channel)) {
 				return true;
 			}
+			waitMillis(1000);
 		}
 		return false;
 	}
