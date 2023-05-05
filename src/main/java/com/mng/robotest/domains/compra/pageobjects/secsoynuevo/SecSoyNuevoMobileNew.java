@@ -11,6 +11,10 @@ public class SecSoyNuevoMobileNew extends SecSoyNuevo {
 	
 	private static final String XPATH_INPUT_CONSENTIMIENTO = "//input[@data-component-id='privacidad']";
 	
+	public SecSoyNuevoMobileNew() {
+		
+	}
+	
 	@Override
 	String getXPathBotonContinue() {
 		return XPATH_BOTON_CONTINUE;

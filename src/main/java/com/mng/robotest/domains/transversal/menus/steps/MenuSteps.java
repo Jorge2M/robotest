@@ -296,7 +296,6 @@ public class MenuSteps extends StepBase {
 	@Validation (
 		description="Aparecen los menús",
 		level=Info)
-		//store=StoreType.None)
 	public boolean validateHoverLineaDesktop(LineaWeb lineaWeb) {
 		return MenusWebAll.make(channel).isMenuInState(true, 1);
 	}	

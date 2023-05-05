@@ -52,5 +52,15 @@ public class TextosLegales {
 	public void LEG006_TextosLegalesSuscripcionFooterAndNonModal() throws Exception {
 		new Leg006().execute();
 	}	
+	
+	@Test(
+		groups={"Legal", "Canal:mobile_App:shop"}, 
+		description="Chequeo textos legales: Suscripción")
+	public void LEG006_TextosLegalesSuscripcion() throws Exception {
+		new Leg007().execute();
+	}	
+	
+	//NOTA: el Suscripción no lo puedo implementar porque es exclusivo de apps
+	//https://confluence.mango.com/pages/viewpage.action?spaceKey=PIUR&title=Mapeo+de+textos+legales#expand-Suscripcin
 
 }

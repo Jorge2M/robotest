@@ -13,7 +13,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 
-	private static final String XPATH_WRAPPER_MENU = "//div[@id[contains(.,'SubMenu')]]";
+	private static final String XPATH_WRAPPER_MENU = "//div[@id[contains(.,'subMenu')]]";
 	
 	//TODO eliminar la parte Old cuando los nuevos data-testids suban a PRO (03-05-23)
 	private static final String XPATH_MENU_ITEM_OLD = 

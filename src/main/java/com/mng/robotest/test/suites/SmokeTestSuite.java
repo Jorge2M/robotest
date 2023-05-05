@@ -76,7 +76,7 @@ public class SmokeTestSuite extends SuiteMaker {
 			Favoritos.class,
 			Reembolsos.class,
 			Loyalty.class,
-//			TextosLegales.class,
+			//TextosLegales.class,
 			Personalizacion.class
 		);
 	}

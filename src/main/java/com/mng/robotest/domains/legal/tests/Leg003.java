@@ -17,12 +17,12 @@ public class Leg003 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		access();		
 		goToMangoCard();
 		checkTextoLegal();
 	}
 	
 	private void goToMangoCard() throws Exception {
+		access();
 		new SecFooterSteps().clickLinkFooter(MANGO_CARD);
 	}	
 	
