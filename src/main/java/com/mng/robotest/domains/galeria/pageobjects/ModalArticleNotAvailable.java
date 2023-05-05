@@ -1,9 +1,10 @@
 package com.mng.robotest.domains.galeria.pageobjects;
 
+import static com.mng.robotest.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.AVISAME_Y_SUSCRIPCION_LEGAL_TEXTS;
+
 import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts.AVISAME_Y_SUSCRIPCION_LEGAL_TEXTS;
 
 public class ModalArticleNotAvailable extends PageBase {
 

@@ -10,7 +10,7 @@ import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.pageobject.shop.modales.ModalsSubscriptions;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts.SUSCRIPCION_EN_FOOTER_Y_NON_MODAL_LEGAL_TEXTS;
+import static com.mng.robotest.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.SUSCRIPCION_EN_FOOTER_Y_NON_MODAL_LEGAL_TEXTS;
 
 public class SecFooter extends PageBase {
 

@@ -37,6 +37,4 @@ public class Leg007 extends TestBase {
 		new SecBolsaSteps().selectButtonComprar(CONTINUAR_SIN_CUENTA);
 	}	
 	
-
-	
 }

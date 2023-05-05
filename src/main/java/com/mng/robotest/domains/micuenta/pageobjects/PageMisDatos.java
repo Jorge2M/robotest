@@ -1,9 +1,10 @@
 package com.mng.robotest.domains.micuenta.pageobjects;
 
+import static com.mng.robotest.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.MIS_DATOS_LEGAL_TEXTS;
+
 import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts.MIS_DATOS_LEGAL_TEXTS;
 
 public class PageMisDatos extends PageBase {
 	

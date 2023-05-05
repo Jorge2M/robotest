@@ -85,7 +85,9 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	}
 	
 	public boolean isAvailableFiltros(FiltroMobil typeFiltro, List<String> listTextFiltros) {
-		goAndClickFiltroButton();
+		if (!goAndClickFiltroButton()) {
+			return false;
+		}
 		WebElement filtroLinea = getElement(typeFiltro.getXPathLineaFiltro());
 		filtroLinea.click();
 		waitLoadPage();
@@ -142,7 +144,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		click(XPATH_BUTTON_APLICAR_FILTROS).exec();
 	}
 	
-	private void goAndClickFiltroButton() {
+	private boolean goAndClickFiltroButton() {
 		if (state(Visible, XPATH_FILTRAR_Y_ORDENAR_BUTTON).check()) {
 			moveToElement(XPATH_FILTRAR_Y_ORDENAR_BUTTON);
 			waitMillis(500);
@@ -151,15 +153,17 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", "");
 		}
 		
-		waitAndClickFiltroButton(2);
+		return waitAndClickFiltroButton(2);
 	}
 	
-	private void waitAndClickFiltroButton(int seconds) {
+	private boolean waitAndClickFiltroButton(int seconds) {
 		if (!isOpenFiltrosUntil(0)) {
-			state(Clickable, XPATH_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
-			click(XPATH_FILTRAR_Y_ORDENAR_BUTTON).type(javascript).exec();
-			isOpenFiltrosUntil(seconds);
+			if (state(Clickable, XPATH_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check()) {
+				click(XPATH_FILTRAR_Y_ORDENAR_BUTTON).type(javascript).exec();
+				return isOpenFiltrosUntil(seconds);
+			}
 		}		
+		return false;
 	}
 	
 	private boolean isOpenFiltrosUntil(int seconds) {

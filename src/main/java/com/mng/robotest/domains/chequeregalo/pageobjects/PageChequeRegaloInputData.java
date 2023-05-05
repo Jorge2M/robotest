@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.chequeregalo.pageobjects;
 
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts;
+import com.mng.robotest.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.ChequeRegalo;
 

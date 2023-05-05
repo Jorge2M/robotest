@@ -1,4 +1,4 @@
-package com.mng.robotest.domains.legal.pageobjects;
+package com.mng.robotest.domains.legal.legaltexts;
 
 import java.util.List;
 import java.util.Optional;

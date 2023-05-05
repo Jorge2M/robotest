@@ -10,7 +10,7 @@ import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.test.generic.ChequeRegalo;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts.CHEQUE_REGALO_PAGOS_LEGAL_TEXTS;
+import static com.mng.robotest.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.CHEQUE_REGALO_PAGOS_LEGAL_TEXTS;
 
 public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData implements PageFromFooter {
 

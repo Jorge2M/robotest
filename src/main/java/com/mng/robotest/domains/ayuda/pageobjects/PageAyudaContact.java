@@ -1,9 +1,10 @@
 package com.mng.robotest.domains.ayuda.pageobjects;
 
+import static com.mng.robotest.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.FORMULARIO_DE_AYUDA_LEGAL_TEXTS;
+
 import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.domains.legal.pageobjects.FactoryLegalTexts.PageLegalTexts.FORMULARIO_DE_AYUDA_LEGAL_TEXTS;
 
 public class PageAyudaContact extends PageBase {
 
