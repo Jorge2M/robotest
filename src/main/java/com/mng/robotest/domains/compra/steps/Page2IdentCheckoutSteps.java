@@ -87,4 +87,11 @@ public class Page2IdentCheckoutSteps extends StepBase {
 	private boolean checkAvisoDireccionWithNoLatinCharacters() {
 		return (page2IdentCheckout.isDisplayedAvisoAduanas());
 	}
+
+	@Step (
+		description="Seleccionar el link <b>Política de privacidad</b>",
+		expected="Se despliega la política de privacidad")	
+	public void clickPoliticaPrivacidad() {
+		page2IdentCheckout.clickPoliticaPrivacidad();
+	}
 }

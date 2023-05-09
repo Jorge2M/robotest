@@ -230,13 +230,11 @@
 <codigo_pais>070</codigo_pais>
 <codigo_alf>AL</codigo_alf>
 <idioma acceso="al">IN</idioma>
-<tarifa>AL</tarifa>
 <codpos>1506</codpos>
 <telefono>672020241</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>ALL %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -274,13 +272,11 @@
 <idioma acceso="ad" idioma_descripcion="ES">ES</idioma>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>AN</tarifa>
 <codpos>AD400</codpos>
 <telefono>345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -324,13 +320,11 @@
 <paistop>S</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>AU</tarifa>
 <codpos>4482</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -389,13 +383,11 @@
 <codigo_pais>073</codigo_pais>
 <codigo_alf>BY</codigo_alf>
 <idioma acceso="by">RU</idioma>
-<tarifa>BR</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" kids="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -413,13 +405,11 @@
 <paistop>S</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>FB</tarifa>
 <codpos>1030</codpos>
 <telefono>465162757</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -470,13 +460,11 @@
 <codigo_pais>093</codigo_pais>
 <codigo_alf>BA</codigo_alf>
 <idioma acceso="ba">IN</idioma>
-<tarifa>KM</tarifa>
 <codpos>08720</codpos>
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ BAM</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -514,13 +502,12 @@
 <idioma acceso="bg-en">IN</idioma>
 <direccharnolatinos check='s' text='check пдреѿ доказателѿтво, 3'/>
 <rgpd>S</rgpd>
-<tarifa>BL</tarifa>
+<loyalty>N</loyalty>
 <codpos>2030</codpos>
 <telefono>871234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ BGL</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"/>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -560,13 +547,12 @@
 <idioma acceso="hr" idioma_descripcion="HR">HR</idioma>
 <idioma acceso="hr-en" idioma_descripcion="IN">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>KK</tarifa>
+<loyalty>N</loyalty>
 <codpos>10363</codpos>
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ HRK</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -603,13 +589,12 @@
 <codigo_alf>CY</codigo_alf>
 <idioma acceso="cy">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>CY</tarifa>
+<loyalty>N</loyalty>
 <codpos>3000</codpos>
 <telefono>94123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -655,13 +640,12 @@
 <idioma acceso="cz">CS</idioma>
 <idioma acceso="cz-en">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>CK</tarifa>
+<loyalty>N</loyalty>
 <codpos>251 99</codpos>
 <telefono>602123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ CSK</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -706,14 +690,13 @@
 <codigo_alf>DK</codigo_alf>
 <idioma acceso="dk">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>DK</tarifa>
+<loyalty>N</loyalty>
 <codpos>2900</codpos>
 <address>Strandvejen 153</address>
 <telefono>20123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ DKK</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -768,15 +751,14 @@
 <codigo_alf>EE</codigo_alf>
 <idioma acceso="ee">IN</idioma>
 <rgpd>S</rgpd>
+<loyalty>N</loyalty>
 <direccharnolatinos check='s' text='check адреѿ доказательѿтва, 3'/>
-<tarifa>EK</tarifa>
 <codpos>08720</codpos>
 <telefono>5123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
 <outlet_online>true</outlet_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -825,14 +807,13 @@
 <codigo_alf>FI</codigo_alf>
 <idioma acceso="fi">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>FL</tarifa>
+<loyalty>N</loyalty>
 <codpos>00240</codpos>
 <address>Palkkatilankatu 5 C 28</address>
 <telefono>0401234567</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -892,13 +873,11 @@
 <paistop>S</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>FF</tarifa>
 <codpos>75001</codpos>
 <telefono>0612345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -946,14 +925,12 @@
 <paistop>S</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>DM</tarifa>
 <codpos>10115</codpos>
 <address>Platz vor dem Neuen Tor 6</address>
 <telefono>017632021234</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1024,13 +1001,12 @@
 <codigo_alf>GI</codigo_alf>
 <idioma acceso="gi">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>GB</tarifa>
+<loyalty>N</loyalty>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1049,14 +1025,13 @@
 <idioma acceso="gr-en">IN</idioma>
 <paistop>S</paistop>
 <rgpd>S</rgpd>
+<loyalty>N</loyalty>
 <direccharnolatinos check='s' text='check στείλετε την παϿαγγελία'/>
-<tarifa>DR</tarifa>
 <codpos>180 30</codpos>
 <telefono>6951234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1107,13 +1082,12 @@
 <idioma acceso="hu">HU</idioma>
 <idioma acceso="hu-en">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>HU</tarifa>
+<loyalty>N</loyalty>
 <codpos>3000</codpos>
 <telefono>201234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ HUF</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1158,12 +1132,12 @@
 <codigo_alf>IS</codigo_alf>
 <idioma acceso="is">IN</idioma> 
 <rgpd>S</rgpd>
+<loyalty>N</loyalty>
 <codpos>220</codpos>
 <telefono>6123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ ISK</moneda> 
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda> 
+<newregister>N</newregister> 
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1206,13 +1180,11 @@
 <idioma acceso="ie">IN</idioma>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>IR</tarifa>
 <codpos>A65 F4E2</codpos>
 <telefono>881234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1257,13 +1229,11 @@
 <paistop>S</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>IL</tarifa>
 <codpos>08720</codpos>
 <telefono>3123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1312,13 +1282,11 @@
 <codigo_alf>BA1</codigo_alf>
 <codigo_prehome>XK</codigo_prehome>
 <idioma acceso="ba1">IN</idioma>
-<tarifa>KV</tarifa>
 <codpos>10012</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1335,14 +1303,13 @@
 <codigo_alf>LV</codigo_alf>
 <idioma acceso="lv">IN</idioma>
 <rgpd>S</rgpd>
+<loyalty>N</loyalty>
 <direccharnolatinos check='s' text='check адреѿ доказательѿтва, 3'/>
-<tarifa>LV</tarifa>
 <codpos>5401</codpos>
 <telefono>21234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1384,13 +1351,12 @@
 <codigo_alf>LI</codigo_alf>
 <idioma acceso="li">AL</idioma>
 <rgpd>S</rgpd>
-<tarifa>FS</tarifa>
+<loyalty>N</loyalty>
 <codpos>9490</codpos>
 <telefono>7916972</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1427,13 +1393,12 @@
 <idioma acceso="lt">IN</idioma>
 <direccharnolatinos check='s' text='check адреѿ доказательѿтва, 3'/>
 <rgpd>S</rgpd>
-<tarifa>LI</tarifa>
+<loyalty>N</loyalty>
 <codpos>08720</codpos>
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ LTL</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1478,15 +1443,13 @@
 <codigo_alf>LU</codigo_alf>
 <idioma acceso="lu" idioma_descripcion="AL">AL</idioma>
 <idioma acceso="lu-fr" idioma_descripcion="FR">FR</idioma>
-<tarifa>LU</tarifa>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
 <codpos>0001</codpos>
 <telefono>621345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1531,13 +1494,11 @@
 <codigo_pais>096</codigo_pais>
 <codigo_alf>MK</codigo_alf>
 <idioma acceso="mk">IN</idioma>
-<tarifa>MD</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ MKD</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1554,13 +1515,12 @@
 <codigo_alf>MT</codigo_alf>
 <idioma acceso="mt">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>LM</tarifa>
+<loyalty>N</loyalty>
 <codpos>ZTN 1073</codpos>
 <telefono>79123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1601,13 +1561,11 @@
 <codigo_pais>074</codigo_pais>
 <codigo_alf>MD</codigo_alf>
 <idioma acceso="md">IN</idioma>
-<tarifa>ML</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ MDL</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1624,13 +1582,12 @@
 <codigo_alf>MC</codigo_alf>
 <idioma acceso="mc">FR</idioma>
 <rgpd>S</rgpd>
-<tarifa>FF</tarifa>
+<loyalty>N</loyalty>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1671,13 +1628,11 @@
 <codigo_pais>090</codigo_pais>
 <codigo_alf>ME</codigo_alf>
 <idioma acceso="me">IN</idioma>
-<tarifa>MN</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1697,13 +1652,11 @@
 <paistop>S</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>FH</tarifa>
 <codpos>1071 ZD</codpos>
 <telefono>0612345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1752,13 +1705,12 @@
 <codigo_alf>CY1</codigo_alf>
 <idioma acceso="cy1">TR</idioma>
 <rgpd>S</rgpd>
-<tarifa>YC</tarifa>
+<loyalty>N</loyalty>
 <codpos>08720</codpos>
 <telefono>99123456</telefono>
 <dni>10000000146</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1776,14 +1728,13 @@
 <idioma acceso="no">NO</idioma>
 <idioma acceso="no-en">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>NO</tarifa>
+<loyalty>N</loyalty>
 <codpos>3728</codpos>
 <address>Hakasteinvegen 243</address>
 <telefono>40123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ NOK</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1841,13 +1792,11 @@
 <paistop>S</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>PZ</tarifa>
 <codpos>62-262</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ PLZ</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1898,13 +1847,11 @@
 <paistop>S</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>ES</tarifa>
 <codpos>4455-111</codpos>
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1951,13 +1898,12 @@
 <idioma acceso="ro">RO</idioma>
 <idioma acceso="ro-en">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>RL</tarifa>
+<loyalty>N</loyalty>
 <codpos>030000</codpos>
 <telefono>722560300</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ RON</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -1996,14 +1942,12 @@
 <codigo_alf>RU</codigo_alf>
 <idioma acceso="ru">RU</idioma>
 <paistop>S</paistop>
-<tarifa>RU</tarifa>
 <codpos>125032</codpos>
 <telefono>9123456789</telefono>
 <dni>34763592N</dni>
 <!-- Reactivar cuando se reactive la compra -->
 <tiendas_online><!-- shop,outlet,votf--></tiendas_online>
-<moneda>%@ RUB</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2058,13 +2002,11 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_pais>094</codigo_pais>
 <codigo_alf>RS</codigo_alf>
 <idioma acceso="rs">IN</idioma>
-<tarifa>YD</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ DIN</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2100,13 +2042,12 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_alf>SK</codigo_alf>
 <idioma acceso="sk">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>SV</tarifa>
+<loyalty>N</loyalty>
 <codpos>811 02</codpos>
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2156,13 +2097,12 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_alf>SI</codigo_alf>
 <idioma acceso="si">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>LM</tarifa>
+<loyalty>N</loyalty>
 <codpos>1000</codpos>
 <telefono>030123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2211,16 +2151,14 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_alf>ES</codigo_alf>
 <idioma acceso="es" idioma_descripcion="ES">ES</idioma>
 <idioma acceso="es-ca" idioma_descripcion="CA">CA</idioma>
+<loyalty>S</loyalty>
 <paistop>S</paistop>
 <rgpd>S</rgpd>
-<loyalty>S</loyalty>
-<tarifa>PT</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" nina="s" nino="s" baby="s" teen="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline> 
 <linea    	  id="SHE" 	     shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2305,13 +2243,11 @@ where
 <paistop>N</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>PT</tarifa>
 <codpos>51003</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2371,13 +2307,11 @@ where
 <paistop>N</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>PT</tarifa>
 <codpos>35229</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2433,13 +2367,11 @@ where
 <paistop>N</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>PT</tarifa>
 <codpos>52004</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2497,14 +2429,13 @@ where
 <idioma acceso="se">SE</idioma>
 <idioma acceso="se-en">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>SK</tarifa>
+<loyalty>N</loyalty>
 <codpos>111 24</codpos>
 <address>Kammakargatan 70</address>
 <telefono>0765260000</telefono><!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ SEK</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners" contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners" contentMovil="menus2"/>
@@ -2562,13 +2493,11 @@ where
 <paistop>S</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>FS</tarifa>
 <codpos>8001</codpos>
 <telefono>754111234</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>%@ CHF</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2636,14 +2565,12 @@ where
 <codigo_alf>UA</codigo_alf>
 <idioma acceso="ua" idioma_descripcion="IN">IN</idioma>
 <idioma acceso="ua-ru" idioma_descripcion="RU">RU</idioma>
-<tarifa>UA</tarifa>
 <codpos>01001</codpos>
 <telefono>0501111111</telefono>
 <dni>34763592N</dni>
 <!-- Reactivar cuando se reactive la compra -->
 <tiendas_online><!-- shop,votf--></tiendas_online>
-<moneda>%@ UAH</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2681,13 +2608,11 @@ where
 <paistop>S</paistop>
 <rgpd>S</rgpd>
 <loyalty>S</loyalty>
-<tarifa>UK</tarifa>
 <codpos>EC1Y 8SY</codpos>
 <telefono>07123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>GBP %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" home="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2742,13 +2667,12 @@ where
 <codigo_prehome>GB-CHA</codigo_prehome>
 <idioma acceso="gb1">IN</idioma>
 <rgpd>S</rgpd>
-<tarifa>JY</tarifa>
+<loyalty>N</loyalty>
 <codpos>GY10 1PB</codpos>
 <telefono>07123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<moneda>GBP %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2794,13 +2718,11 @@ where
 <codigo_pais>474</codigo_pais>
 <codigo_alf>AW</codigo_alf>
 <idioma acceso="aw" >IN</idioma>
-<tarifa>AF</tarifa>
 <codpos>08720</codpos>
 <telefono>5612345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ AWG</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2835,13 +2757,11 @@ where
 <codigo_pais>413</codigo_pais>
 <codigo_alf>BM</codigo_alf>
 <idioma acceso="bm">IN</idioma>
-<tarifa>UD</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2858,13 +2778,11 @@ where
 <codigo_alf>CA</codigo_alf>
 <idioma acceso="ca" idioma_descripcion="IN">IN</idioma>
 <idioma acceso="ca-fr" idioma_descripcion="FR">FR</idioma>
-<tarifa>CD</tarifa>
 <codpos>M5H 2N2</codpos>
 <telefono>6135550165</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ CAN</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2902,13 +2820,11 @@ where
 <codigo_pais>436</codigo_pais>
 <codigo_alf>CR</codigo_alf>
 <idioma acceso="cr">ES</idioma>
-<tarifa>CC</tarifa>
 <codpos>08720</codpos>
 <telefono>50012345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ CRC</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2943,13 +2859,11 @@ where
 <codigo_pais>448</codigo_pais>
 <codigo_alf>CU</codigo_alf>
 <idioma acceso="cu">ES</idioma>
-<tarifa>CP</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ CUP</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2965,13 +2879,11 @@ where
 <codigo_pais>456</codigo_pais>
 <codigo_alf>DO</codigo_alf>
 <idioma acceso="do">ES</idioma>
-<tarifa>DP</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ DOP</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -2987,13 +2899,11 @@ where
 <codigo_pais>428</codigo_pais>
 <codigo_alf>SV</codigo_alf>
 <idioma acceso="sv">ES</idioma>
-<tarifa>SC</tarifa>
 <codpos>1120</codpos>
 <telefono>71234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ USD</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3032,13 +2942,12 @@ where
 <codigo_alf>GP</codigo_alf>
 <idioma acceso="gp">FR</idioma>
 <rgpd>S</rgpd>
-<tarifa>FG</tarifa>
+<loyalty>N</loyalty>
 <codpos>97110</codpos>
 <telefono>690123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3079,13 +2988,11 @@ where
 <codigo_pais>416</codigo_pais>
 <codigo_alf>GT</codigo_alf>
 <idioma acceso="gt">ES</idioma>
-<tarifa>GQ</tarifa>
 <codpos>08720</codpos>
 <telefono>41234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3121,13 +3028,11 @@ where
 <codigo_pais>424</codigo_pais>
 <codigo_alf>HN</codigo_alf>
 <idioma acceso="hn">ES</idioma>
-<tarifa>HL</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>HNL %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s" edits="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3165,13 +3070,11 @@ where
 <codigo_alf>MX</codigo_alf>
 <idioma acceso="mx">ES</idioma>
 <!-- <idioma acceso="mx-en">IN</idioma>-->
-<tarifa>PM</tarifa>
 <codpos>08720</codpos>
 <telefono>8183202020</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ MXP</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
@@ -3225,14 +3128,13 @@ where
 <codigo_alf>CW</codigo_alf>
 <idioma acceso="cw">IN</idioma>
 <rgpd>S</rgpd>
+<loyalty>N</loyalty>
 <!-- <idioma acceso="cw-es">ES</idioma>-->
-<tarifa>NA</tarifa>
 <codpos>08720</codpos>
 <telefono>96671040</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3267,13 +3169,11 @@ where
 <codigo_pais>442</codigo_pais>
 <codigo_alf>PA</codigo_alf>
 <idioma acceso="pa">ES</idioma>
-<tarifa>PN</tarifa>
 <codpos>08720</codpos>
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ USD</moneda>
-<tienda she="s" he="s" touch="na" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3313,14 +3213,12 @@ where
 <idioma acceso="us">US</idioma>
 <idioma acceso="us-es">ES</idioma>
 <paistop>S</paistop>
-<tarifa>UD</tarifa>
 <codpos>11231</codpos>
 <telefono>2014920975</telefono>
 <address>538 Clinton St #4</address>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ USD</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda> 
+<newregister>S</newregister>
 <shoponline>
 <linea id="SHE"       		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3373,13 +3271,11 @@ where
 <codigo_pais>528</codigo_pais>
 <codigo_alf>AR</codigo_alf>
 <idioma acceso="ar">ES</idioma>
-<tarifa>AG</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ ARS</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3395,13 +3291,11 @@ where
 <codigo_pais>516</codigo_pais>
 <codigo_alf>BO</codigo_alf>
 <idioma acceso="bo">ES</idioma>
-<tarifa>B1</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ BRL</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3417,13 +3311,11 @@ where
 <codigo_alf>BR</codigo_alf>
 <idioma acceso="br-en" idioma_descripcion="IN">IN</idioma>
 <idioma acceso="br-es" idioma_descripcion="ES">ES</idioma>
-<tarifa>B1</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ BRL</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3439,13 +3331,11 @@ where
 <codigo_pais>512</codigo_pais>
 <codigo_alf>CL</codigo_alf>
 <idioma acceso="cl">ES</idioma>
-<tarifa>CH</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ CLP</moneda>
-<tienda she="s" he="s" touch="n" kids="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3460,13 +3350,11 @@ where
 <codigo_pais>480</codigo_pais>
 <codigo_alf>CO</codigo_alf>
 <idioma acceso="co">ES</idioma>
-<tarifa>CL</tarifa>
 <codpos>056060</codpos> <!-- Este código posta hace que se muestre el pago "Contra entrega efectivo" -->
 <telefono>3101234567</telefono>
 <dni>8001984561</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ COP</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3513,13 +3401,11 @@ where
 <pais nombre_pais="Ecuador" codigo="500">
 <codigo_pais acceso="EC">500</codigo_pais>
 <idioma acceso="ec">ES</idioma>
-<tarifa>EC</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ USD</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3536,13 +3422,12 @@ where
 <codigo_alf>MQ</codigo_alf>
 <idioma acceso="mq">FR</idioma>
 <rgpd>S</rgpd>
-<tarifa>MF</tarifa>
+<loyalty>N</loyalty>
 <codpos>97201</codpos>
 <telefono>696123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3584,12 +3469,12 @@ where
 <codigo_alf>GF</codigo_alf>
 <idioma acceso="gf">FR</idioma>
 <rgpd>S</rgpd>
+<loyalty>N</loyalty>
 <codpos>97300</codpos>
 <telefono>694123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3634,8 +3519,7 @@ where
 <telefono>81234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3673,13 +3557,11 @@ where
 <codigo_pais>520</codigo_pais>
 <codigo_alf>PY</codigo_alf>
 <idioma acceso="py">ES</idioma>
-<tarifa>PG</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" kids="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3694,13 +3576,11 @@ where
 <codigo_pais>504</codigo_pais>
 <codigo_alf>PE</codigo_alf>
 <idioma acceso="pe">ES</idioma>
-<tarifa>PE</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ PEN</moneda>
-<tienda she="s" he="s" touch="n" kids="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3715,13 +3595,11 @@ where
 <codigo_pais>492</codigo_pais>
 <codigo_alf>SR</codigo_alf>
 <idioma acceso="sr">NL</idioma>
-<tarifa>??</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" kids="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3736,13 +3614,11 @@ where
 <codigo_pais>524</codigo_pais>
 <codigo_alf>UY</codigo_alf>
 <idioma acceso="uy">ES</idioma>
-<tarifa>??</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3758,13 +3634,11 @@ where
 <codigo_pais>484</codigo_pais>
 <codigo_alf>VE</codigo_alf>
 <idioma acceso="ve">ES</idioma>
-<tarifa>MB</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>VEB %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3782,13 +3656,11 @@ where
 <codigo_pais>800</codigo_pais>
 <codigo_alf>AU</codigo_alf>
 <idioma acceso="au">IN</idioma>
-<tarifa>AD</tarifa>
 <codpos>2060</codpos>
 <telefono>412345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ AUD</moneda>
-<tienda she="s" he="s" touch="n" nina="n" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3827,13 +3699,11 @@ where
 <codigo_pais>809</codigo_pais>
 <codigo_alf>NC</codigo_alf>
 <idioma acceso="nc">FR</idioma>
-<tarifa>FN</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3852,13 +3722,11 @@ where
 <codigo_alf>AM</codigo_alf>
 <idioma acceso="am" idioma_descripcion="IN">IN</idioma>
 <idioma acceso="am-ru" idioma_descripcion="RU">RU</idioma>
-<tarifa>AM</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ AMD</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3875,13 +3743,11 @@ where
 <codigo_alf>AZ</codigo_alf>
 <idioma acceso="az" idioma_descripcion="IN">IN</idioma>
 <idioma acceso="az-ru" idioma_descripcion="RU">RU</idioma>
-<tarifa>MT</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ AZN</moneda>
-<tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3908,13 +3774,11 @@ where
 <codigo_alf>BH</codigo_alf>
 <idioma acceso="bh">AR</idioma>
 <idioma acceso="bh-en">IN</idioma>
-<tarifa>BD</tarifa>
 <codpos>08720</codpos>
 <telefono>31234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>BHD %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3957,13 +3821,11 @@ where
 <codigo_pais>696</codigo_pais>
 <codigo_alf>KH</codigo_alf>
 <idioma acceso="kh">IN</idioma>
-<tarifa>RC</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>USD %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -3991,13 +3853,11 @@ where
 <idioma acceso="cn" idioma_descripcion="ZH">ZH</idioma>
 <idioma acceso="cn-en" idioma_descripcion="IN">IN</idioma>
 <paistop>S</paistop>
-<tarifa>CR</tarifa>
 <codpos>266033</codpos>
 <telefono>13910998888</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ CNY</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4075,13 +3935,11 @@ where
 <codigo_pais>076</codigo_pais>
 <codigo_alf>GE</codigo_alf>
 <idioma acceso="ge">IN</idioma>
-<tarifa>GL</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ GEL</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4107,13 +3965,11 @@ where
 <codigo_pais>740</codigo_pais>
 <codigo_alf>HK</codigo_alf>
 <idioma acceso="hk">IN</idioma>
-<tarifa>HD</tarifa>
 <codpos>08720</codpos>
 <telefono>62836675</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ HKD</moneda>
-<tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4155,13 +4011,11 @@ where
 <codigo_pais>664</codigo_pais>
 <codigo_alf>IN</codigo_alf>
 <idioma acceso="in">IN</idioma>
-<tarifa>ID</tarifa>
 <codpos>110006</codpos>
 <telefono>9123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ INR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4201,13 +4055,11 @@ where
 <codigo_alf>ID</codigo_alf>
 <idioma acceso="id">ID</idioma>
 <idioma acceso="id">IN</idioma>
-<tarifa>IN</tarifa>
 <codpos>10350</codpos>
 <telefono>812345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ IDR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4241,13 +4093,11 @@ where
 <codigo_pais>616</codigo_pais>
 <codigo_alf>IR</codigo_alf>
 <idioma acceso="ir">IN</idioma>
-<tarifa>RI</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4263,13 +4113,11 @@ where
 <codigo_pais>612</codigo_pais>
 <codigo_alf>IQ</codigo_alf>
 <idioma acceso="iq">IN</idioma>
-<tarifa>IQ</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4285,13 +4133,11 @@ where
 <codigo_pais>624</codigo_pais>
 <codigo_alf>IL</codigo_alf>
 <idioma acceso="il">IN</idioma>
-<tarifa>EI</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ ILS</moneda>
-<tienda she="s" he="s" touch="n" kids="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4307,13 +4153,11 @@ where
 <codigo_alf>JP</codigo_alf>
 <idioma acceso="jp-ja">JA</idioma>
 <!-- <idioma acceso="jp-en">IN</idioma>-->
-<tarifa>YJ</tarifa>
 <codpos>4640852</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>JPY %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4350,13 +4194,11 @@ where
 <codigo_pais>676</codigo_pais>
 <codigo_alf>MM</codigo_alf>
 <idioma acceso="mm">IN</idioma>
-<tarifa>MY</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ CUP</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4372,13 +4214,11 @@ where
 <codigo_pais>684</codigo_pais>
 <codigo_alf>LA</codigo_alf>
 <idioma acceso="la">IN</idioma>
-<tarifa>LK</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ CUP</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4395,13 +4235,11 @@ where
 <codigo_alf>JO</codigo_alf>
 <idioma acceso="jo">AR</idioma>
 <idioma acceso="jo-en">IN</idioma>
-<tarifa>JD</tarifa>
 <codpos>08720</codpos>
 <telefono>775669933</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ JOD</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4436,14 +4274,12 @@ where
 <codigo_pais>079</codigo_pais>
 <codigo_alf>KZ</codigo_alf>
 <idioma acceso="kz">RU</idioma>
-<tarifa>KZ</tarifa>
 <codpos>040900</codpos>
 <telefono>7012345678</telefono>
 <dni>34763592N</dni>
 <!-- Reactivar cuando se reactive la compra -->
 <tiendas_online><!-- shop,votf--></tiendas_online>
-<moneda>%@ KZT</moneda>
-<tienda she="s" he="s" touch="s" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4480,13 +4316,11 @@ where
 <codigo_alf>KW</codigo_alf>
 <idioma acceso="kw">AR</idioma>
 <idioma acceso="kw-en">IN</idioma>
-<tarifa>KU</tarifa>
 <codpos>08720</codpos>
 <telefono>51234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ KWD</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4527,13 +4361,11 @@ where
 <codigo_pais>083</codigo_pais>
 <codigo_alf>KG</codigo_alf>
 <idioma acceso="kg">RU</idioma>
-<tarifa>KI</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ KGS</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4550,13 +4382,11 @@ where
 <codigo_alf>LB</codigo_alf>
 <idioma acceso="lb">AR</idioma>
 <idioma acceso="lb-en">IN</idioma>
-<tarifa>LL</tarifa>
 <codpos>2038 3054</codpos>
 <telefono>3123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ LBP</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4598,13 +4428,11 @@ where
 <codigo_pais>743</codigo_pais>
 <codigo_alf>MO</codigo_alf>
 <idioma acceso="mo">IN</idioma>
-<tarifa>HD</tarifa>
 <codpos>08720</codpos>
 <telefono>68258508</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>MOP %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4629,13 +4457,11 @@ where
 <codigo_pais>701</codigo_pais>
 <codigo_alf>MY</codigo_alf>
 <idioma acceso="my">IN</idioma>
-<tarifa>MA</tarifa>
 <codpos>08720</codpos>
 <telefono>126946551</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ MYR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4677,8 +4503,7 @@ where
 <telefono>7712345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>EUR %@</moneda> 
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda> 
+<newregister>N</newregister> 
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4721,8 +4546,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ MNT</moneda>
-<tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4739,13 +4563,11 @@ where
 <codigo_alf>OM</codigo_alf>
 <idioma acceso="om">AR</idioma>
 <idioma acceso="om-en">IN</idioma>
-<tarifa>OR</tarifa>
 <codpos>112</codpos>
 <telefono>91234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ OMR</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4788,13 +4610,11 @@ where
 <codigo_pais>662</codigo_pais>
 <codigo_alf>PK</codigo_alf>
 <idioma acceso="pk">IN</idioma>
-<tarifa>PR</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4820,13 +4640,11 @@ where
 <codigo_pais>708</codigo_pais>
 <codigo_alf>PH</codigo_alf>
 <idioma acceso="ph">IN</idioma>
-<tarifa>FI</tarifa>
 <codpos>1008</codpos>
 <telefono>9123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ PHP</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4868,13 +4686,11 @@ where
 <codigo_alf>QA</codigo_alf>
 <idioma acceso="qa">AR</idioma>
 <idioma acceso="qa-en">IN</idioma>
-<tarifa>QR</tarifa>
 <codpos>08720</codpos>
 <telefono>33123456</telefono>
 <dni>27612405934</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>QAR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 	 	  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4916,14 +4732,12 @@ where
 <codigo_alf>SA</codigo_alf>
 <idioma acceso="sa">AR</idioma>
 <idioma acceso="sa-en">IN</idioma>
-<tarifa>AR</tarifa>
 <loyalty>S</loyalty>
 <codpos>11522</codpos>
 <telefono>512345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>SAR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4966,13 +4780,11 @@ where
 <codigo_pais>706</codigo_pais>
 <codigo_alf>SG</codigo_alf>
 <idioma acceso="sg">IN</idioma>
-<tarifa>SD</tarifa>
 <codpos>546080</codpos>
 <telefono>81234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ SGD</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5014,13 +4826,11 @@ where
 <paistop>S</paistop>
 <!-- No es posible checkear la dirección con carácteres no-latinos porque en este país funciona mediante "Find Address" -->
 <!-- <direccharnolatinos check='s' text='check 금하빌딩 43호'/>-->
-<tarifa>WO</tarifa>
 <codpos>06043</codpos>
 <telefono>01665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ KRW</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>S</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5054,13 +4864,11 @@ where
 <codigo_pais>669</codigo_pais>
 <codigo_alf>LK</codigo_alf>
 <idioma acceso="lk">IN</idioma>
-<tarifa>LR</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5076,13 +4884,11 @@ where
 <codigo_pais>608</codigo_pais>
 <codigo_alf>SY</codigo_alf>
 <idioma acceso="sy">IN</idioma>
-<tarifa>SP</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ SYP</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5098,13 +4904,11 @@ where
 <codigo_pais>736</codigo_pais>
 <codigo_alf>TW</codigo_alf>
 <idioma acceso="tw">IN</idioma>
-<tarifa>NT</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <!--<tiendas_online>shop,votf</tiendas_online>-->
-<moneda>%@ TWD</moneda>
-<tienda she="s" he="n" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea 		  id="HE"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5131,13 +4935,11 @@ where
 <codigo_alf>TH</codigo_alf>
 <idioma acceso="th">TH</idioma>
 <idioma acceso="th-en">IN</idioma>
-<tarifa>TH</tarifa>
 <codpos>10560</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ THB</moneda>
-<tienda she="s" he="s" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5158,13 +4960,11 @@ where
 <idioma acceso="tr">TR</idioma>
 <paistop>S</paistop>
 <loyalty>S</loyalty>
-<tarifa>LT</tarifa>
 <codpos>08720</codpos>
 <telefono>5301234567</telefono>
 <dni>10000000146</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ TRL</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5206,13 +5006,11 @@ where
 <codigo_alf>AE</codigo_alf>
 <idioma acceso="ae">AR</idioma>
 <idioma acceso="ae-en">IN</idioma>
-<tarifa>DU</tarifa>
 <codpos>08720</codpos>
 <telefono>0501234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ AED</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5256,13 +5054,11 @@ where
 <codigo_pais>081</codigo_pais>
 <codigo_alf>UZ</codigo_alf>
 <idioma acceso="uz">IN</idioma>
-<tarifa>UZ</tarifa>
 <codpos>100123</codpos>
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ UZS</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5297,13 +5093,11 @@ where
 <codigo_pais>690</codigo_pais>
 <codigo_alf>VN</codigo_alf>
 <idioma acceso="vn">IN</idioma>
-<tarifa>VN</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ USD</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5322,13 +5116,11 @@ where
 <codigo_pais>208</codigo_pais>
 <codigo_alf>DZ</codigo_alf>
 <idioma acceso="dz-fr" idioma_descripcion="FR">FR</idioma>
-<tarifa>DA</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ DZD</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5345,13 +5137,11 @@ where
 <codigo_pais>330</codigo_pais>
 <codigo_alf>AO</codigo_alf>
 <idioma acceso="ao" >IN</idioma>
-<tarifa>AK</tarifa>
 <codpos>08720</codpos>
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5367,13 +5157,11 @@ where
 <codigo_pais>284</codigo_pais>
 <codigo_alf>BJ</codigo_alf>
 <idioma acceso="bj">FR</idioma>
-<tarifa>BI</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5389,13 +5177,11 @@ where
 <codigo_pais>236</codigo_pais>
 <codigo_alf>BF</codigo_alf>
 <idioma acceso="bf">FR</idioma>
-<tarifa>BK</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5413,13 +5199,11 @@ where
 <codigo_alf>CM</codigo_alf>
 <!--<idioma acceso="cm-en" idioma_descripcion="IN">IN</idioma>-->
 <idioma acceso="cm-fr" idioma_descripcion="FR">FR</idioma>
-<tarifa>CN</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5435,13 +5219,11 @@ where
 <codigo_pais>272</codigo_pais>
 <codigo_alf>CI</codigo_alf>
 <idioma acceso="ci">FR</idioma>
-<tarifa>CM</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5458,13 +5240,11 @@ where
 <codigo_alf>EG</codigo_alf>
 <idioma acceso="eg">AR</idioma>
 <idioma acceso="eg-en">IN</idioma>
-<tarifa>EG</tarifa>
 <codpos>08720</codpos>
 <telefono>1123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>%@ EGP</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5501,13 +5281,12 @@ where
 <codigo_alf>RE</codigo_alf>
 <idioma acceso="re">FR</idioma>
 <rgpd>S</rgpd>
-<tarifa>FR</tarifa>
+<loyalty>N</loyalty>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ EUR</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5523,13 +5302,11 @@ where
 <codigo_pais>276</codigo_pais>
 <codigo_alf>GH</codigo_alf>
 <idioma acceso="gh">IN</idioma>
-<tarifa>GC</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5545,13 +5322,11 @@ where
 <codigo_pais>346</codigo_pais>
 <codigo_alf>KE</codigo_alf>
 <idioma acceso="ke">IN</idioma>
-<tarifa>GC</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="s" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5567,13 +5342,11 @@ where
 <codigo_pais>216</codigo_pais>
 <codigo_alf>LY</codigo_alf>
 <idioma acceso="ly">IN</idioma>
-<tarifa>LD</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>LYD %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5590,13 +5363,11 @@ where
 <codigo_alf>MU</codigo_alf>
 <idioma acceso="mu-fr" idioma_descripcion="FR">FR</idioma>
 <idioma acceso="mu-en" idioma_descripcion="IN">IN</idioma>
-<tarifa>MR</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="s" nino="s" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5614,13 +5385,11 @@ where
 <codigo_alf>MA</codigo_alf>
 <idioma acceso="ma-fr" idioma_descripcion="IN">IN</idioma>
 <!-- <idioma acceso="ma" idioma_descripcion="FR">FR</idioma>-->
-<tarifa>MO</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ MAD</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5636,13 +5405,11 @@ where
 <codigo_pais>288</codigo_pais>
 <codigo_alf>NG</codigo_alf>
 <idioma acceso="ng">IN</idioma>
-<tarifa>NN</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5658,13 +5425,11 @@ where
 <codigo_pais>248</codigo_pais>
 <codigo_alf>SN</codigo_alf>
 <idioma acceso="sn">FR</idioma>
-<tarifa>SF</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>EUR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5680,13 +5445,11 @@ where
 <codigo_pais>388</codigo_pais>
 <codigo_alf>ZA</codigo_alf>
 <idioma acceso="za">IN</idioma>
-<tarifa>SR</tarifa>
 <codpos>0083</codpos>
 <telefono>665015122</telefono>
 <dni>9007263637083</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<moneda>ZAR %@</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n" edits="s"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -5710,13 +5473,11 @@ where
 <codigo_alf>TN</codigo_alf>
 <!-- <idioma acceso="tn" idioma_descripcion="IN">IN</idioma>-->
 <idioma acceso="tn-fr" idioma_descripcion="FR">FR</idioma>
-<tarifa>TD</tarifa>
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<moneda>%@ TND</moneda>
-<tienda she="s" he="n" touch="n" nina="n" nino="n" baby="n"></tienda>
+<newregister>N</newregister>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>

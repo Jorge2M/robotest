@@ -24,6 +24,7 @@ import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.test.data.PaisShop.*;
+import static com.mng.robotest.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.*;
 
 public class Page2IdentCheckout extends PageBase {
 
@@ -60,11 +61,13 @@ public class Page2IdentCheckout extends PageBase {
 	private static final String XPATH_BOTON_FIND_ADDRESS = "//input[@class[contains(.,'load-button')] and @type='button']";
 	private static final String XPATH_BOTON_CONTINUAR = "//div[@class='submitContent']/input[@type='submit']";
 	private static final String XPATH_MSG_ADUANAS = "//div[@class='aduanas']";
+	private static final String XPATH_POLITICA_PRIVACIDAD = "//micro-frontend[@id='legalPolicyGuestCheckoutRegistry']//span[@data-testid='mng-link']";	
 	
 	//Con el substring simulamos un ends-with (que no está disponible en xpath 1.0)
 	private static final String XPATH_SELECT_LOCALIDADES = "//select[substring(@id, string-length(@id) - string-length('localidades') +1) = 'localidades']";
 
 	public Page2IdentCheckout() {
+		super(GUEST_CHECKOUT_PASO_2_LEGAL_TEXTS);
 		this.egyptCity = null;
 	}
 	
@@ -684,6 +687,10 @@ public class Page2IdentCheckout extends PageBase {
 
 	public boolean isDisplayedAvisoAduanas() {
 		return state(Visible, XPATH_MSG_ADUANAS).wait(1).check();
+	}
+	
+	public void clickPoliticaPrivacidad() {
+		click(XPATH_POLITICA_PRIVACIDAD).exec();
 	}
 	
 }

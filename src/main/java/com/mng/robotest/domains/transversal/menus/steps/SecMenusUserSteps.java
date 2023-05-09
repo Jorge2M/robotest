@@ -20,7 +20,6 @@ import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
 import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
@@ -51,13 +50,14 @@ public class SecMenusUserSteps extends StepBase {
 		if (channel.isDevice()) {
 			PageIdentificacion.make().clickTabRegistrate();
 		}
-		if (app==AppEcom.outlet || PaisShop.ICELAND.isEquals(dataTest.getPais())) {
+		//if (app==AppEcom.outlet || PaisShop.ICELAND.isEquals(dataTest.getPais())) {
+		if (app==AppEcom.outlet || !dataTest.getPais().newregister()) {
 			PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
 			pageRegistroIniSteps.validaIsPageUntil(5);
 			pageRegistroIniSteps.validaIsRGPDVisible();
 		} else {
 			PageRegistroInitialShopSteps pageRegistroIniSteps = new PageRegistroInitialShopSteps();
-			pageRegistroIniSteps.checkIsPageUntil(5);
+			pageRegistroIniSteps.checkIsPage(5);
 		}
 		GenericChecks.checkDefault();
 	}

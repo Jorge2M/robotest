@@ -36,7 +36,7 @@ public class LTPageMisDatos extends LegalTextsPage {
 	
 	@Override
 	public List<LegalText> getLegalTexts(Pais pais) {
-		if (pais.isLoyalty()) {
+		if (pais.loyalty()) {
 			return PAISES_LOYALTY;
 		}
 		return TEXTO_COMUN_RGPD;

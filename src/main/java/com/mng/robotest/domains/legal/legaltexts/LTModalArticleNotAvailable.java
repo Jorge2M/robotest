@@ -7,6 +7,8 @@ import com.mng.robotest.domains.legal.beans.LegalText;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
 
+import static com.mng.robotest.test.data.PaisShop.*;
+
 public class LTModalArticleNotAvailable extends LegalTextsPage {
 
 	private static final List<LegalText> TEXTO_COMUN_RGPD = Arrays.asList(
@@ -35,7 +37,7 @@ public class LTModalArticleNotAvailable extends LegalTextsPage {
 	
 	@Override
 	public List<LegalText> getLegalTexts(Pais pais) { 
-		if (PaisShop.getPais(pais)==PaisShop.SAUDI_ARABIA) {
+		if (PaisShop.getPais(pais)==SAUDI_ARABIA) {
 			return ARABIA;
 		}
 		return TEXTO_COMUN_RGPD;

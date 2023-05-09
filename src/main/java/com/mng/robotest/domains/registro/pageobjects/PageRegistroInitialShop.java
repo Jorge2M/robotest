@@ -1,8 +1,9 @@
 package com.mng.robotest.domains.registro.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 import com.mng.robotest.domains.base.PageBase;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.*;
 
 public class PageRegistroInitialShop extends PageBase {
 
@@ -26,25 +27,17 @@ public class PageRegistroInitialShop extends PageBase {
 	private static final String XPATH_MODAL_POLITICA_PRIVACIDAD = 
 			"//*[text()[contains(.,'¿Cómo tratamos y protegemos tus datos?')]]" + 
 			"/following-sibling::p";
-//	private static final String XPATH_MODAL_POLITICA_PRIVACIDAD_MOBILE = "//*[@data-testid='sheet.draggable.dialog']";
+
 	private static final String XPATH_LINK_POLITICA_PRIVACIDAD_MODAL = XPATH_MODAL_POLITICA_PRIVACIDAD + "//*[@data-testid='mng-link']";
-//	private static final String XPATH_CLOSE_MODAL_DESKTOP = "//*[@data-testid='modal.close.button']";
-//	private static final String XPATH_CLOSE_MODAL_DEVICE = "//*[@data-testid='sheet.overlay']";	
-	
-//	private String getXPathModalPoliticaPrivacidad() {
-//		if (channel==Channel.desktop) {
-//			return XPATH_MODAL_POLITICA_PRIVACIDAD_DESKTOP;
-//		}
-//		return XPATH_MODAL_POLITICA_PRIVACIDAD_MOBILE;
-//	}
-//	private String getXPathLinkPoliticaPrivacidadModal() {
-//		return getXPathModalPoliticaPrivacidad() + XPATH_LINK_POLITICA_PRIVACIDAD_MODAL;
-//	}
+
+	public PageRegistroInitialShop() {
+		super(NUEVO_REGISTRO_LEGAL_TEXTS);
+	}
 	
 	public boolean isPage() {
-		return isPageUntil(0);
+		return isPage(0);
 	}
-	public boolean isPageUntil(int seconds) {
+	public boolean isPage(int seconds) {
 		return state(Present, XPATH_INPUT_EMAIL).wait(seconds).check();
 	}
 	

@@ -62,6 +62,7 @@ public abstract class LegalTextsPage extends PageBase {
 		}
 	}
 	private boolean isVisibleLegalTextByContent(LegalText legalText) {
+		//getElementsVisible(legalText.getXPath()).get(0).getText().contains(legalText.getText())
 		return getElementsVisible(legalText.getXPath()).stream()
 			.filter(e -> e.getText().contains(legalText.getText()))
 			.findAny().isPresent();

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
@@ -148,9 +147,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		if (state(Visible, XPATH_FILTRAR_Y_ORDENAR_BUTTON).check()) {
 			moveToElement(XPATH_FILTRAR_Y_ORDENAR_BUTTON);
 			waitMillis(500);
-			
-			//Scrollamos un poquito hacia arriba para asegurar
-			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", "");
+			scrollVertical(-50);
 		}
 		
 		return waitAndClickFiltroButton(2);

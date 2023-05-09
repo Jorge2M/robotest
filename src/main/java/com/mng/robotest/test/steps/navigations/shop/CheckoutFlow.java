@@ -147,17 +147,17 @@ public class CheckoutFlow extends StepBase {
 	
 	private void testFromIdentToCheckoutIni() {
 		boolean validaCharNoLatinos = (pais!=null && dataTest.getPais().getDireccharnolatinos().check() && app!=AppEcom.votf);
-		String emailCheckout = UtilsMangoTest.getEmailForCheckout(pais, dataPago.getFTCkout().emailExists); 
+		String emailCheckout = getUserEmail(dataPago.getFTCkout().emailExists); 
 		dataPago.getDataPedido().setEmailCheckout(emailCheckout);
 
 		var page1IdentCheckoutSteps = new Page1IdentCheckoutSteps();
-		page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dataPago.getFTCkout().emailExists, dataTest.isUserRegistered(), pais);
+		page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dataPago.getFTCkout().emailExists);
 		var page2IdentCheckoutSteps = new Page2IdentCheckoutSteps(egyptCity);
 		boolean emailOk = page2IdentCheckoutSteps.checkEmail(emailCheckout);
 		if (!emailOk) {
 			//Existe un problema según el cual en ocasiones no se propaga el email desde la página de identificación
 			new AllPagesSteps().backNagegador();
-			page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dataPago.getFTCkout().emailExists, dataTest.isUserRegistered(), pais);
+			page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dataPago.getFTCkout().emailExists);
 		}
 		
 		Map<String, String> datosRegistro =

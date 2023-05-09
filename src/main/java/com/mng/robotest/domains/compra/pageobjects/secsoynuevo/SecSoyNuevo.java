@@ -1,12 +1,12 @@
 package com.mng.robotest.domains.compra.pageobjects.secsoynuevo;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.base.datatest.DataTest;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
 
 public abstract class SecSoyNuevo extends PageBase {
 	

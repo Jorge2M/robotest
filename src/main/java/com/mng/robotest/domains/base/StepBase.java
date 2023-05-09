@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.manto.tests.ManXXX;
@@ -21,6 +22,7 @@ import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
+import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
 import com.mng.robotest.test.utils.UtilsTest;
 
@@ -111,11 +113,25 @@ public abstract class StepBase extends PageBase {
 			var legalTextsPage = legalTextsPageOpt.get();
 			for (var legalText : legalTextsPage.getLegalTexts()) {
 				checks.add(
-					"Aparece el texto legal \"" + legalText.getText() + "\"",
+					"Aparece el <b>texto legal</b> \"" + legalText.getText() + "\"",
 					legalTextsPage.isVisibleLegalText(legalText), Defect);
 			}
 		}
 		return checks;
+	}
+	
+	public String getUserEmail() {
+		return getUserEmail(true);
+	}
+	public String getUserEmail(boolean emailExists) {
+		return UtilsMangoTest.getEmailForCheckout(dataTest.getPais(), emailExists);
+	}
+	
+	@Step (
+		description="Recargamos la página",
+		expected="")
+	public void refresh() {
+		refreshPage();
 	}
 	
 }

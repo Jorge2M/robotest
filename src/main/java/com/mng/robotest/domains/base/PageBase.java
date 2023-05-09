@@ -8,8 +8,10 @@ import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
@@ -220,6 +222,21 @@ public class PageBase extends PageObjTM {
 		}
 		waitForPageLoaded(driver, 10);
 		return true;
+	}
+	
+	protected void scrollVertical(int y) {
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + y + ")", "");
+	}
+	
+	protected void keyDown(int times) {
+		var actions = new Actions(driver);
+		for (int i=0; i<times; i++) {
+			actions.keyDown(Keys.ARROW_DOWN).perform();
+		}
+	}
+	
+	protected void refreshPage() {
+		driver.navigate().refresh();
 	}
 
 }

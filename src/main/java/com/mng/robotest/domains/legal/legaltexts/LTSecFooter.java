@@ -7,16 +7,18 @@ import com.mng.robotest.domains.legal.beans.LegalText;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
 
+import static com.mng.robotest.test.data.PaisShop.*;
+
 public class LTSecFooter extends LegalTextsPage {
 
-	private static final List<LegalText> TEXTO_COMUN_RGPD = Arrays.asList(
+	private static final List<LegalText> RGPD = Arrays.asList(
 		new LegalText(
 			"subscribe.rgpd.legal.text",
 			"Al suscribirte aceptas nuestra Política de privacidad para que tratemos los datos",
 			"//*[@data-testid='newsletterSubscription.consentgdprDesktop.container']")
 	);
 	
-	private static final List<LegalText> TURQUIA = Arrays.asList(
+	private static final List<LegalText> TURQUIA_LT = Arrays.asList(
 		//TODO pantalla <> confluence <> lokalise
 		new LegalText(
 			"subscribe.turkey.legal.text",
@@ -33,11 +35,11 @@ public class LTSecFooter extends LegalTextsPage {
 	
 	@Override
 	public List<LegalText> getLegalTexts(Pais pais) {
-		if (PaisShop.getPais(pais)==PaisShop.TURQUIA) {
-			return TURQUIA;
+		if (PaisShop.getPais(pais)==TURQUIA) {
+			return TURQUIA_LT;
 		}
 		if (isRgpd(pais)) {
-			return TEXTO_COMUN_RGPD;
+			return RGPD;
 		}
 		return NO_RPGD;
 	}

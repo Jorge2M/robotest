@@ -2,9 +2,12 @@ package com.mng.robotest.domains.legal.tests;
 
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
-import com.mng.robotest.domains.compra.pageobjects.secsoynuevo.SecSoyNuevoMobileNew;
+import com.mng.robotest.domains.compra.pageobjects.Page2IdentCheckout;
+import com.mng.robotest.domains.compra.steps.Page2IdentCheckoutSteps;
+import com.mng.robotest.domains.compra.steps.SecSoyNuevoSteps;
 
 import static com.mng.robotest.domains.bolsa.steps.SecBolsaSteps.FluxBolsaCheckout.CONTINUAR_SIN_CUENTA;
+import static com.mng.robotest.test.data.PaisShop.*;
 
 /**
  * Control textos legales "Guest Checkout - Paso 1":
@@ -15,18 +18,40 @@ public class Leg007 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {
-		goToGuestCheckoutPage1();
-		checkTextoLegal();
+		checkRGPD();
+		renewTest();
+		checkUSA();
+		renewTest();
+		//TODO en Turquía se va por el antiguo flujo bolsa->checkout ¿es correcto?
+		checkTurquia();
 	}
+	
+	private void checkRGPD() throws Exception {
+		dataTest.setPais(ESPANA.getPais());
+		goToGuestCheckoutPage2();
+		clickLinkPoliticaPrivacidad();
+		checkTextoLegal();		
+	}
+	private void checkUSA() throws Exception {
+		dataTest.setPais(USA.getPais());
+		goToGuestCheckoutPage2();
+		checkTextoLegal();		
+	}	
+	private void checkTurquia() throws Exception {
+		dataTest.setPais(TURQUIA.getPais());
+		goToGuestCheckoutPage2();
+		checkTextoLegal();		
+	}	
 
-	private void goToGuestCheckoutPage1() throws Exception {
+	private void goToGuestCheckoutPage2() throws Exception {
 		access();
 		altaArticulosBolsa();
 		clickComprarAndSelectContinuarSinCuenta();
+		inputEmailAndContinue();
 	}
 	
 	private void checkTextoLegal() {
-		checkLegalTextsVisible(new SecSoyNuevoMobileNew());
+		checkLegalTextsVisible(new Page2IdentCheckout());
 	}	
 	
 	private void altaArticulosBolsa() throws Exception {
@@ -36,5 +61,13 @@ public class Leg007 extends TestBase {
 	private void clickComprarAndSelectContinuarSinCuenta() {
 		new SecBolsaSteps().selectButtonComprar(CONTINUAR_SIN_CUENTA);
 	}	
+	
+	private void inputEmailAndContinue() {
+		new SecSoyNuevoSteps().inputEmailAndContinue(getUserEmail());
+	}
+	
+	private void clickLinkPoliticaPrivacidad() {
+		new Page2IdentCheckoutSteps().clickPoliticaPrivacidad();
+	}
 	
 }

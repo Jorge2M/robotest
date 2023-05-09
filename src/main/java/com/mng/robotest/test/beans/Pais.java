@@ -33,16 +33,15 @@ public class Pais implements Serializable {
 	List<IdiomaPais> listIdiomas = new LinkedList<>();
 		
 	Direccharnolatinos direccharnolatinos = new Direccharnolatinos();
-	String tarifa;
 	String paistop="";
 	String rgpd="";
-	String loyalty = "N";
+	String loyalty="";
 	String codpos;
 	String address;
 	String telefono;
 	String dni;
 	String tiendas_online;
-	String moneda;
+	String newregister="";
 	
 	Tienda tienda = new Tienda();
 	Shoponline shoponline = new Shoponline();
@@ -112,15 +111,6 @@ public class Pais implements Serializable {
 		return this.listIdiomas;
 	}	
 
-	public String getTarifa() {
-		return this.tarifa;
-	}
-	
-	@XmlElement
-	public void setTarifa(String tarifa) {
-		this.tarifa = tarifa;
-	}
-	
 	public String getPaistop() {
 		return this.paistop;
 	}
@@ -139,13 +129,13 @@ public class Pais implements Serializable {
 		this.rgpd = rgpd;
 	} 
 	
-	public boolean isLoyalty() {
+	public boolean loyalty() {
 		//Países loyalty localizables en la tabla MNGLOYALTYDB.LOYALTY_TOUCHPOINTS
 		return this.loyalty.compareTo("S")==0;
 	}
 
 	@XmlElement (name="loyalty")
-	public void setLoyalty(String loyalty) {
+	public void setloyalty(String loyalty) {
 		this.loyalty = loyalty;
 	}	
 	
@@ -225,13 +215,13 @@ public class Pais implements Serializable {
 				"S".compareTo(getmvp())==0);
 	}	
 	
-	public String getMoneda() {
-		return this.moneda;
+	public boolean newregister() {
+		return this.newregister.compareTo("S")==0;
 	}
 
-	@XmlElement
-	public void setMoneda(String moneda) {
-		this.moneda = moneda;
+	@XmlElement(name="newregister")
+	public void setNewRegister(String newregister) {
+		this.newregister = newregister;
 	}
 
 	public boolean isMisdirecciones(AppEcom app) {
@@ -481,9 +471,8 @@ public class Pais implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Pais [nombre_pais="+ this.nombre_pais + ", codigo_pais=" + this.codigo_pais + ", listIdiomas=" + this.listIdiomas + ", tarifa=" + this.tarifa + ", codpos=" + this.codpos + ", telefono=" + this.telefono + ", dni=" + this.dni +
-				", shop_online=" + ", moneda=" + this.moneda + 
-				", " + this.tienda + ", " + this.shoponline + ", micuenta=" + this.micuenta + 
+		return "Pais [nombre_pais="+ this.nombre_pais + ", codigo_pais=" + this.codigo_pais + ", listIdiomas=" + this.listIdiomas + ", codpos=" + this.codpos + ", telefono=" + this.telefono + ", dni=" + this.dni +
+				", shop_online=" + ", " + this.tienda + ", " + this.shoponline + ", micuenta=" + this.micuenta + 
 				", toString()=" + super.toString() + "]";
 	}
 }

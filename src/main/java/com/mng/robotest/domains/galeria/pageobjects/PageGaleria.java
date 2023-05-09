@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
@@ -29,7 +28,6 @@ import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public abstract class PageGaleria extends PageBase {
 
@@ -471,7 +469,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public boolean backTo1erArticulo(String xpathIconoUpGalery) {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", ""); //Asure icon showed
+		scrollVertical(-50); //Assure icon showed
 		clickIconoUpToGaleryIfVisible(xpathIconoUpGalery);
 		boolean isVisible1erArt = isVisibleArticuloUntil(1, 2);
 		waitMillis(1000);
@@ -600,7 +598,7 @@ public abstract class PageGaleria extends PageBase {
 			By byPagina = By.xpath(getXPathPagina(paginaActual));
 			if (state(Visible, byPagina).check()) {
 				moveToElement(byPagina);
-				((JavascriptExecutor) driver).executeScript("window.scrollBy(0,+50)", "");
+				scrollVertical(+50);
 				paginaActual+=1;
 			} else {
 				lastPageReached = true;
@@ -646,11 +644,11 @@ public abstract class PageGaleria extends PageBase {
 	}
 	
 	private void forceVisibilityImageArticle(WebElement articulo) {
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-800)", "");
+		scrollVertical(-800);
 		moveToElement(articulo);
 		if (!isVisibleImageArticle(articulo, 2)) {
-			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-50)", "");
-			((JavascriptExecutor) driver).executeScript("window.scrollBy(0,+50)", "");
+			scrollVertical(-50);
+			scrollVertical(+50);
 			isVisibleImageArticle(articulo, 2);
 		}
 	}

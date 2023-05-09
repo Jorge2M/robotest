@@ -15,8 +15,8 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)")
-	public boolean checkIsPageUntil(int seconds) {
-		return pageRegistroInitial.isPageUntil(seconds);
+	public boolean checkIsPage(int seconds) {
+		return pageRegistroInitial.isPage(seconds);
 	}
 
 	@Step (
@@ -54,6 +54,13 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	}
 	
 	@Step(
+		description="Seleccionar el link <b>Collection and use of optional personal information</b>",
+		expected="Aparece el apartado de collection and use")	
+	public void clickLinkGivePromotions() {
+		pageRegistroInitial.clickLinkGivePromotions();
+	}	
+		
+	@Step(
 		description="Seleccionar el link <b>Collection and use</b>",
 		expected="Aparece el apartado de collection and use")	
 	public void clickConsentPersonalInformationLink() {
@@ -65,6 +72,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	public boolean checkPersonalInformationInfoVisible() {
 		return pageRegistroInitial.checkPersonalInformationInfoVisible();
 	}
+	
 	@Step(
 		description="Seleccionar el checkbox <b>Collection and use</b>",
 		expected="Se selecciona el checkbox")	
@@ -77,10 +85,13 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		expected="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"")	
 	public void clickPoliticaPrivacidad() {
 		pageRegistroInitial.clickPoliticaPrivacidad();
-		if (pageRegistroInitial.isModalPoliticaPrivacidadInvisible(0)) {
-			pageRegistroInitial.clickPoliticaPrivacidad();
+		if (dataTest.getPais().loyalty()) {
+			if (pageRegistroInitial.isModalPoliticaPrivacidadInvisible(0)) {
+				pageRegistroInitial.clickPoliticaPrivacidad();
+			}
+			checkIsModalPoliticaPrivacidadVisible();
 		}
-		checkIsModalPoliticaPrivacidadVisible();
+		keyDown(2);
 	}
 	@Validation (description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"")
 	public boolean checkIsModalPoliticaPrivacidadVisible() {
