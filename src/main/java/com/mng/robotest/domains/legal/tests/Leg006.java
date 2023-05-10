@@ -17,7 +17,6 @@ public class Leg006 extends TestBase {
 	public void execute() throws Exception {
 		checkTextoComunRGPD();
 		renewTest();
-		//TODO el texto que aparece en pantalla no coincide con el del confluence (subscribe.turkey.legal.text)
 		checkTurquia();
 		renewTest();		
 		checkNoRGPD();

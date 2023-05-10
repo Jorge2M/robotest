@@ -50,14 +50,12 @@ public class SecMenusUserSteps extends StepBase {
 		if (channel.isDevice()) {
 			PageIdentificacion.make().clickTabRegistrate();
 		}
-		//if (app==AppEcom.outlet || PaisShop.ICELAND.isEquals(dataTest.getPais())) {
 		if (app==AppEcom.outlet || !dataTest.getPais().newregister()) {
-			PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
+			var pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
 			pageRegistroIniSteps.validaIsPageUntil(5);
 			pageRegistroIniSteps.validaIsRGPDVisible();
 		} else {
-			PageRegistroInitialShopSteps pageRegistroIniSteps = new PageRegistroInitialShopSteps();
-			pageRegistroIniSteps.checkIsPage(5);
+			new PageRegistroInitialShopSteps().checkIsPage(5);
 		}
 		GenericChecks.checkDefault();
 	}

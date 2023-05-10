@@ -12,6 +12,46 @@ import org.testng.annotations.*;
  */
 public class TextosLegales {
 	
+	//TODO (Grecia y España) actualmente el problema con el scroll provoca un Defect dado que no se ve el 2o link de Política de privacidad
+	@Test(
+		groups={"Legal", "Canal:mobile_App:shop"}, 
+		description="Chequeo textos legales: Nuevo Registro")
+	public void LEG008_TextosLegalesNuevoRegistro() throws Exception {
+		new Leg008().execute();
+	}	
+	
+	//TODO en Russia salen los textos mal
+	@Test(
+		groups={"Legal", "Canal:mobile_App:shop"}, 
+		description="Chequeo textos legales: Antiguo Registro")
+	public void LEG009_TextosLegalesAntiguoRegistro() throws Exception {
+		new Leg009().execute();
+	}
+	
+	//NOTA: el Guest checkout - Paso 1 no lo puedo implementar porque no aparece en el caso del nuevo flujo bolsa -> checkout	
+	//https://confluence.mango.com/display/PIUR/Mapeo+de+textos+legales#expand-GuestcheckoutPaso1
+	
+	@Test(
+		groups={"Legal", "Canal:mobile_App:shop"}, 
+		description="Chequeo textos legales: Guest checkout - Paso 2")
+	public void LEG007_TextosLegalesGuestCheckoutPaso2() throws Exception {
+		new Leg007().execute();
+	}
+	
+	//NOTA: el Suscripción no lo puedo implementar porque es exclusivo de apps
+	//https://confluence.mango.com/pages/viewpage.action?spaceKey=PIUR&title=Mapeo+de+textos+legales#expand-Suscripcin	
+
+	//TODO el texto que aparece en pantalla no coincide con el del confluence (subscribe.turkey.legal.text)
+	@Test(
+		groups={"Legal", "Canal:mobile_App:shop"}, 
+		description="Chequeo textos legales: Suscripción Footer y non modal")
+	public void LEG006_TextosLegalesSuscripcionFooterAndNonModal() throws Exception {
+		new Leg006().execute();
+	}	
+	
+	
+	//-------
+	
 	@Test(
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Cheque Regalo (Pagos)")
@@ -45,42 +85,6 @@ public class TextosLegales {
 		description="Chequeo textos legales: Avisame + suscripción")
 	public void LEG005_TextosLegalesAvisameSuscripcion() throws Exception {
 		new Leg005().execute();
-	}	
-	
-	@Test(
-		groups={"Legal", "Canal:mobile_App:shop"}, 
-		description="Chequeo textos legales: Suscripción Footer y non modal")
-	public void LEG006_TextosLegalesSuscripcionFooterAndNonModal() throws Exception {
-		new Leg006().execute();
-	}	
-	
-	//NOTA: el Suscripción no lo puedo implementar porque es exclusivo de apps
-	//https://confluence.mango.com/pages/viewpage.action?spaceKey=PIUR&title=Mapeo+de+textos+legales#expand-Suscripcin
-	
-	//NOTA: el Guest checkout - Paso 1 no lo puedo implementar porque no aparece en el caso del nuevo flujo bolsa -> checkout	
-	//https://confluence.mango.com/display/PIUR/Mapeo+de+textos+legales#expand-GuestcheckoutPaso1
-	
-	@Test(
-		groups={"Legal", "Canal:mobile_App:shop"}, 
-		description="Chequeo textos legales: Guest checkout - Paso 2")
-	public void LEG007_TextosLegalesGuestCheckoutPaso2() throws Exception {
-		new Leg007().execute();
-	}	
-	
-	//TODO (Grecia y España) actualmente el problema con el scroll provoca un Defect dado que no se ve el 2o link de Política de privacidad
-	@Test(
-		groups={"Legal", "Canal:mobile_App:shop"}, 
-		description="Chequeo textos legales: Nuevo Registro")
-	public void LEG008_TextosLegalesNuevoRegistro() throws Exception {
-		new Leg008().execute();
-	}	
-	
-	//TODO en Russia salen los textos mal -> Reportar
-	@Test(
-		groups={"Legal", "Canal:mobile_App:shop"}, 
-		description="Chequeo textos legales: Antiguo Registro")
-	public void LEG009_TextosLegalesAntiguoRegistro() throws Exception {
-		new Leg009().execute();
 	}	
 
 }

@@ -7,30 +7,32 @@ import org.openqa.selenium.By;
 
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.legal.beans.LegalText;
+import com.mng.robotest.domains.legal.beans.LegalTextGroup;
 import com.mng.robotest.test.beans.Pais;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public abstract class LegalTextsPage extends PageBase {
 
-	public abstract List<LegalText> getLegalTexts(Pais pais);
+	public abstract LegalTextGroup getLegalTexts(Pais pais);
 	
-	private final List<LegalText> legalTexts;
+	private final LegalTextGroup legalTexts;
 	
 	public LegalTextsPage() {
 		this.legalTexts = getLegalTexts(dataTest.getPais());
 	}
 	
-	public List<LegalText> getLegalTexts() {
+	public LegalTextGroup getLegalTexts() {
 		return legalTexts;
 	}
 	
 	public List<String> getListCodes() {
-		return legalTexts.stream().map(t -> t.getCode()).toList();
+		return legalTexts.getTexts().stream()
+				.map(t -> t.getCode()).toList();
 	}
 	
 	public boolean areVisibleAllLegalTexts() {
-		return legalTexts.stream()
+		return legalTexts.getTexts().stream()
 				.filter(t -> !isVisibleLegalText(t))
 				.findAny().isEmpty();
 	}
@@ -69,7 +71,7 @@ public abstract class LegalTextsPage extends PageBase {
 	}
 
 	private Optional<LegalText> getLegalText(String code) {
-		return legalTexts.stream()
+		return legalTexts.getTexts().stream()
 				.filter(t -> t.getCode().compareTo(code)==0)
 				.findAny();
 	}

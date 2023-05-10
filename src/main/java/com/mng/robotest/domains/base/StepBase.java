@@ -8,6 +8,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.legal.legaltexts.LegalTextsPage;
 import com.mng.robotest.domains.manto.tests.ManXXX;
 import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
@@ -110,14 +111,19 @@ public abstract class StepBase extends PageBase {
 		var checks = ChecksTM.getNew();
 		var legalTextsPageOpt = page.getLegalTextsPage();
 		if (!legalTextsPageOpt.isEmpty()) {
-			var legalTextsPage = legalTextsPageOpt.get();
-			for (var legalText : legalTextsPage.getLegalTexts()) {
-				checks.add(
-					"Aparece el <b>texto legal</b> \"" + legalText.getText() + "\"",
-					legalTextsPage.isVisibleLegalText(legalText), Defect);
-			}
+			checkLegalTexts(checks, legalTextsPageOpt.get());
 		}
 		return checks;
+	}
+
+	private void checkLegalTexts(ChecksTM checks, LegalTextsPage legalTextsPage) {
+		var legalTexts = legalTextsPage.getLegalTexts();
+		checks.setTitle("<b>" + legalTexts.getDescription() + "</b>");
+		for (var legalText : legalTexts.getTexts()) {
+			checks.add(
+				"Aparece el <b>texto legal</b> \"" + legalText.getText() + "\"<br>",
+				legalTextsPage.isVisibleLegalText(legalText), Defect);
+		}
 	}
 	
 	public String getUserEmail() {

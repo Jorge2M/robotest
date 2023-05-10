@@ -39,8 +39,8 @@ import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.
 
 public class AccesoSteps extends StepBase {
 
-	private static final String TAG_NOMBRE_PAIS = "@TagNombrePais";
-	private static final String TAG_LITERAL_IDIOMA = "@TagLiteralIdioma";
+	private static final String TAG_PAIS = "@TagNombrePais";
+	private static final String TAG_IDIOMA = "@TagLiteralIdioma";
 	private static final String TAG_REGISTRO = "@TagRegistro";
 	
 	public void oneStep(boolean clearArticulos) throws Exception {
@@ -49,7 +49,10 @@ public class AccesoSteps extends StepBase {
 	}
 	
 	@Step (
-		description="Acceder a Mango (" + TAG_NOMBRE_PAIS + "/" + TAG_LITERAL_IDIOMA + ")<br>" + TAG_REGISTRO, 
+		description=
+			"Acceder a Mango " + 
+			"(<b style=\"color:brown;\">" + TAG_PAIS + " / " + TAG_IDIOMA + "</b>)<br>" + 
+			TAG_REGISTRO, 
 		expected="Se accede correctamente",
 		saveNettraffic=SaveWhen.Always)
 	private void oneStepAccess(boolean clearArticulos) throws Exception {
@@ -62,8 +65,8 @@ public class AccesoSteps extends StepBase {
 		}
 
 		StepTM stepTestMaker = TestMaker.getCurrentStepInExecution();
-		stepTestMaker.replaceInDescription(TAG_NOMBRE_PAIS, dataTest.getPais().getNombre_pais());
-		stepTestMaker.replaceInDescription(TAG_LITERAL_IDIOMA, dataTest.getIdioma().getCodigo().getLiteral());
+		stepTestMaker.replaceInDescription(TAG_PAIS, dataTest.getPais().getNombre_pais());
+		stepTestMaker.replaceInDescription(TAG_IDIOMA, dataTest.getIdioma().getCodigo().getLiteral());
 		stepTestMaker.replaceInDescription(TAG_REGISTRO, registro);
 
 		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {

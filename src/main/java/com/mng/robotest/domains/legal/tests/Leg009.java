@@ -23,6 +23,10 @@ public class Leg009 extends TestBase {
 		checkArabia();
 		renewTest();
 		checkRusia();
+		renewTest();
+		checkTurquia();
+		renewTest();		
+		checkNoRGPD();
 	}
 	
 	private void checkRGPD() throws Exception {
@@ -49,6 +53,19 @@ public class Leg009 extends TestBase {
 		goToRegister();
 		checkTextoLegal();		
 	}	
+	private void checkTurquia() throws Exception {
+		dataTest.setPais(TURQUIA.getPais());
+		dataTest.setIdioma(TURQUIA.getPais().getListIdiomas().get(0)); //Turco
+		goToRegister();
+		checkTextoLegal();		
+	}
+	
+	private void checkNoRGPD() throws Exception {
+		dataTest.setPais(SERBIA.getPais());
+		dataTest.setIdioma(SERBIA.getPais().getListIdiomas().get(0)); //Inglés
+		goToRegister();
+		checkTextoLegal();		
+	}
 
 	private void goToRegister() throws Exception {
 		access();

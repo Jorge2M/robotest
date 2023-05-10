@@ -10,7 +10,7 @@ import static com.mng.robotest.domains.bolsa.steps.SecBolsaSteps.FluxBolsaChecko
 import static com.mng.robotest.test.data.PaisShop.*;
 
 /**
- * Control textos legales "Guest Checkout - Paso 1":
+ * Control textos legales "Guest Checkout - Paso 2":
  * https://confluence.mango.com/pages/viewpage.action?spaceKey=PIUR&title=Mapeo+de+textos+legales#expand-GuestcheckoutPaso2
  *
  */
@@ -21,9 +21,8 @@ public class Leg007 extends TestBase {
 		checkRGPD();
 		renewTest();
 		checkUSA();
-		renewTest();
-		//TODO en Turquía se va por el antiguo flujo bolsa->checkout ¿es correcto?
-		checkTurquia();
+		//renewTest();
+		//checkTurquia(); //En Turquía no es posible checkearlo porque se va por el antiguo flujo bolsa->checkout
 	}
 	
 	private void checkRGPD() throws Exception {
@@ -37,11 +36,11 @@ public class Leg007 extends TestBase {
 		goToGuestCheckoutPage2();
 		checkTextoLegal();		
 	}	
-	private void checkTurquia() throws Exception {
-		dataTest.setPais(TURQUIA.getPais());
-		goToGuestCheckoutPage2();
-		checkTextoLegal();		
-	}	
+//	private void checkTurquia() throws Exception {
+//		dataTest.setPais(TURQUIA.getPais());
+//		goToGuestCheckoutPage2();
+//		checkTextoLegal();		
+//	}	
 
 	private void goToGuestCheckoutPage2() throws Exception {
 		access();

@@ -173,7 +173,6 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			validateRGPDInCountryWithRgpd(pais.getCodigo_alf());
 			return;
 		}
-		validateRGPDInCountryWithoutRgpd(pais.getCodigo_pais());
 	}
 	
 	@Validation
@@ -216,23 +215,4 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		return checks;
 	}
 	
-	@Validation
-	public ChecksTM validateRGPDInCountryWithoutRgpd(String codigoPais) {
-		var checks = ChecksTM.getNew();
-		int seconds = 1;
-		checks.add(
-			"El texto de info de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
-			!pageRegistroIni.isTextoRGPDVisible());
-		
-		checks.add(
-			"El texto legal de RGPD <b>NO</b> aparece en la pantalla de inicio de registro para el pais " + codigoPais,
-			!pageRegistroIni.isTextoLegalRGPDVisible());
-		
-		checks.add(
-			"<b>NO</b> es visible el checkbox para recibir promociones e información personalizada para el pais " + 
-			codigoPais + " (lo esperamos hasta " + seconds + " segundos)",
-			!pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds));
-		
-		return checks;
-	}
 }
