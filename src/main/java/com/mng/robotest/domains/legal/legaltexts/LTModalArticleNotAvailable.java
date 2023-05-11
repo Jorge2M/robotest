@@ -16,7 +16,7 @@ public class LTModalArticleNotAvailable extends LegalTextsPage {
 		Arrays.asList(
 			new LegalText(
 				"notifyMe.rgpd.legal.text",
-				"Al solicitar un aviso de disponibilidad, confirmas que has leído la",
+				"Al solicitar un aviso de disponibilidad, confirmas que has leído la Política de privacidad",
 				"//p"),
 			
 			new LegalText(
@@ -26,7 +26,7 @@ public class LTModalArticleNotAvailable extends LegalTextsPage {
 			
 			new LegalText(
 				"notifyMe.rgpd.legal.modal.bodycopy",
-				"Responsable: Punto Fa, S.L. Finalidad: Gestión del servicio",
+				"Responsable: Punto Fa, S.L. Finalidad: Gestión del servicio de alertas de disponibilidad y/o, en su caso, servicio de envío de comunicaciones personalizadas. Derechos: Puedes ejercer, en cualquier momento, tus derechos de acceso, rectificación, eliminación, oposición y demás derechos legalmente establecidos a través de personaldata@mango.com. Información adicional: Consulta más información en nuestra Política de privacidad",
 				"//p")		
 		)
 	);
@@ -36,7 +36,7 @@ public class LTModalArticleNotAvailable extends LegalTextsPage {
 		Arrays.asList(
 			new LegalText(
 				"notifyMe.arabia.legal.text",
-				"By subscribing, you confirm that you have read the",
+				"By subscribing, you confirm that you have read the Privacy policy and agree the cross-border transfer of your personal information to Spain and Ireland",
 				"//p")			
 		)
 	);

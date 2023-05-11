@@ -48,6 +48,15 @@ public class TextosLegales {
 	public void LEG006_TextosLegalesSuscripcionFooterAndNonModal() throws Exception {
 		new Leg006().execute();
 	}	
+
+	//TODO el avísame en Arabia falla casi siempre -> avisar a Oriol
+	//TODO el literal notifyMe.arabia.legal.text está en estado PENDING, todavía no existe
+	@Test(
+		groups={"Legal", "Canal:mobile_App:shop"}, 
+		description="Chequeo textos legales: Avisame + suscripción")
+	public void LEG005_TextosLegalesAvisameSuscripcion() throws Exception {
+		new Leg005().execute();
+	}	
 	
 	
 	//-------
@@ -78,13 +87,6 @@ public class TextosLegales {
 		description="Chequeo textos legales: Mis Datos")
 	public void LEG004_TextosLegalesMisDatos() throws Exception {
 		new Leg004().execute();
-	}	
-	
-	@Test(
-		groups={"Legal", "Canal:mobile_App:shop"}, 
-		description="Chequeo textos legales: Avisame + suscripción")
-	public void LEG005_TextosLegalesAvisameSuscripcion() throws Exception {
-		new Leg005().execute();
 	}	
 
 }

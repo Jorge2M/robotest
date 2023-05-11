@@ -18,8 +18,6 @@ public class Leg005 extends TestBase {
 	public void execute() throws Exception {
 		checkPaisComun();
 		renewTest();
-		//TODO el avísame en Arabia falla casi siempre -> avisar a Oriol
-		//TODO el literal notifyMe.arabia.legal.text está en estado PENDING, todavía no existe
 		checkPaisArabia();
 	}
 	
