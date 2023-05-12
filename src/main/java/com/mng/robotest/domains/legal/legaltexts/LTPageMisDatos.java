@@ -13,12 +13,12 @@ public class LTPageMisDatos extends LegalTextsPage {
 		Arrays.asList(
 			new LegalText(
 				"my_account.my_details.legal1",
-				"Al continuar trataremos tus datos, obtenidos a través",
+				"? -> Buscar literal en Serbia (Inglés)",
 				"//p[@class[contains(.,'gdpr-profiling')]]"),
 			
 			new LegalText(
 				"audit.new.form.registrate.step1.dataprivacy.1",
-				"INFORMACIÓN BÁSICA SOBRE PROTECCIÓN DE DATOS. RESPONSABLE: Punto Fa,",
+				"? -> Buscar literal en Serbia (Inglés)",
 				"//*[@loyaltykey='commons.legal.text']",
 				"span[translated='tr-true']")
 		)
@@ -29,12 +29,12 @@ public class LTPageMisDatos extends LegalTextsPage {
 		Arrays.asList(
 			new LegalText(
 				"my_account.my_details.legal1",
-				"Al continuar trataremos tus datos, obtenidos a través",
+				"Al continuar trataremos tus datos, obtenidos a través de tu navegación en la web, para ofrecerte un contenido afín a tus gustos, basándonos en tus interacciones con la marca. Ten en cuenta que podrás oponerte a este tratamiento",				
 				"//p[@class[contains(.,'gdpr-profiling')]]"),
 				
 			new LegalText(
 				"form.registrate.step1.dataprivacy.2.loyalty",
-				"INFORMACIÓN BÁSICA SOBRE PROTECCIÓN DE DATOS. RESPONSABLE: Punto Fa,",
+				"INFORMACIÓN BÁSICA SOBRE PROTECCIÓN DE DATOS. RESPONSABLE: Punto Fa, S.L. FINALIDAD: Gestionar el registro en la web. LEGITIMACIÓN: Consentimiento del interesado. DESTINATARIOS: Empresas del Grupo MANGO y empresas encargadas del tratamiento de datos. Se pueden producir transferencias internacionales. DERECHOS: Puede ejercitar en cualquier momento sus derechos de acceso, rectificación, supresión, oposición y demás derechos legalmente establecidos a través del siguiente email: online@mango.com. INFORMACIÓN ADICIONAL: Puede consultarse la información adicional y detallada sobre protección de datos",				
 				"//*[@loyaltykey='commons.legal.text']",
 				"span[translated='tr-true']")
 		)

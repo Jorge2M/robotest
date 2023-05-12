@@ -1,71 +1,42 @@
 package com.mng.robotest.domains.legal.tests;
 
-import com.mng.robotest.domains.base.TestBase;
-import com.mng.robotest.domains.registro.pageobjects.PageRegistroInitialShop;
-import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
-import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
+import static com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink.AYUDA;
 
-import static com.mng.robotest.test.data.PaisShop.*;
+import com.mng.robotest.domains.ayuda.pageobjects.PageAyudaContact;
+import com.mng.robotest.domains.ayuda.steps.AyudaSteps;
+import com.mng.robotest.domains.base.TestBase;
+import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 
 /**
- * Control textos legales "Nuevo Registro":
- * https://confluence.mango.com/pages/viewpage.action?spaceKey=PIUR&title=Mapeo+de+textos+legales#expand-Nuevoregistro
+ * Control textos legales: Formulario de ayuda (Genki)
+ * https://confluence.mango.com/display/PIUR/Mapeo+de+textos+legales#expand-FormulariodeayudaGenki
  *
  */
 public class Leg008 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {
-		checkRGPD();
-		renewTest();
-		checkLoyalty();
-		renewTest();
-		checkCorea();
-	}
-	
-	private void checkRGPD() throws Exception {
-		dataTest.setPais(GREECE.getPais());
-		dataTest.setIdioma(GREECE.getPais().getListIdiomas().get(1)); //Inglés
-		goToRegister();
-		clickPoliticaPrivacidad();
-		checkTextoLegal();		
-	}
-	private void checkLoyalty() throws Exception {
-		dataTest.setPais(ESPANA.getPais());
-		dataTest.setIdioma(ESPANA.getPais().getListIdiomas().get(0)); //Español
-		goToRegister();
-		clickPoliticaPrivacidad();
-		checkTextoLegal();		
-	}	
-	private void checkCorea() throws Exception {
-		dataTest.setPais(COREA_DEL_SUR.getPais());
-		dataTest.setIdioma(COREA_DEL_SUR.getPais().getListIdiomas().get(1)); //Inglés
-		goToRegister();
-		clickCollectionAndUseLinks();
-		checkTextoLegal();		
-	}	
-
-	private void goToRegister() throws Exception {
 		access();
-		new SecMenusUserSteps().selectRegistrate();
-		refresh(); //Sin esto el click al link "Política de privacidad" falla la 1a vez
-		new PageRegistroInitialShopSteps().checkIsPage(5);
+		goToAyudaWithLegalText();
+		checkTextoLegal();
 	}
 	
-	private void clickPoliticaPrivacidad() {
-		new PageRegistroInitialShopSteps().clickPoliticaPrivacidad();
-	}
-	
-	private void clickCollectionAndUseLinks() {
-		var pageRegistroSteps = new PageRegistroInitialShopSteps();
-		pageRegistroSteps.clickLinkGivePromotions();
-		keyDown(5);
-		pageRegistroSteps.clickConsentPersonalInformationLink();
-		keyDown(5);
+	private void goToAyudaWithLegalText() {
+		new SecFooterSteps().clickLinkFooter(AYUDA);
+		
+		var ayudaSteps = new AyudaSteps();
+		String question = "¿Dónde está mi pedido?";
+		ayudaSteps.checkIsQuestionVisible(question);
+		ayudaSteps.clickQuestion(question);
+
+		ayudaSteps.clickContactarButton();
+		ayudaSteps.clickEscribenosUnMensaje();
+		ayudaSteps.inputsInFormularioAyuda(
+				"Tienda física", 
+				"Información sobre cambios y devoluciones");
 	}
 	
 	private void checkTextoLegal() {
-		checkLegalTextsVisible(new PageRegistroInitialShop());
+		checkLegalTextsVisible(new PageAyudaContact());
 	}	
-	
 }

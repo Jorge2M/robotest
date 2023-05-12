@@ -176,7 +176,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	private void manageCookies(boolean acceptCookies) {
 		var sectionCookiesSteps = new SectionCookiesSteps();
 		if (acceptCookies) {
-			if (new SectionCookies().isVisible(2)) {
+			if (new SectionCookies().isVisible(5)) {
 				sectionCookiesSteps.accept();
 			}
 		} else {

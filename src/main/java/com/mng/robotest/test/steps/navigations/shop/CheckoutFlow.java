@@ -441,7 +441,8 @@ public class CheckoutFlow extends StepBase {
 	@Step (
 		description="Acceder a Mango " + TAG_LOGIN_OR_LOGOFF, 
 		expected="Se accede a Mango",
-		saveNettraffic=SaveWhen.Always)
+		saveNettraffic=SaveWhen.Always,
+		saveErrorData=SaveWhen.Always)
 	private void accessShopAndLoginOrLogoff() throws Exception {
 		StepTM stepTestMaker = TestMaker.getCurrentStepInExecution();		
 		if (dataTest.isUserRegistered()) {

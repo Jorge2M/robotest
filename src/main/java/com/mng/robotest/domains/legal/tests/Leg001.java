@@ -1,31 +1,71 @@
 package com.mng.robotest.domains.legal.tests;
 
 import com.mng.robotest.domains.base.TestBase;
-import com.mng.robotest.domains.chequeregalo.pageobjects.PageChequeRegaloInputDataNew;
-import com.mng.robotest.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.domains.registro.pageobjects.PageRegistroInitialShop;
+import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
+import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 
-import static com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink.*;
+import static com.mng.robotest.test.data.PaisShop.*;
 
 /**
- * Control textos legales:
- * https://confluence.mango.com/display/PIUR/Mapeo+de+textos+legales#expand-ChequeregaloPagos
+ * Control textos legales "Nuevo Registro":
+ * https://confluence.mango.com/pages/viewpage.action?spaceKey=PIUR&title=Mapeo+de+textos+legales#expand-Nuevoregistro
  *
  */
 public class Leg001 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {
-		access();		
-		goToChequeRegalo();
-		checkTextoLegal();
+		checkRGPD();
+		renewTest();
+		checkLoyalty();
+		renewTest();
+		checkCorea();
 	}
 	
-	private void goToChequeRegalo() throws Exception {
-		new SecFooterSteps().clickLinkFooter(CHEQUE_REGALO);
+	private void checkRGPD() throws Exception {
+		dataTest.setPais(GREECE.getPais());
+		dataTest.setIdioma(GREECE.getPais().getListIdiomas().get(1)); //Inglés
+		goToRegister();
+		clickPoliticaPrivacidad();
+		checkTextoLegal();		
+	}
+	private void checkLoyalty() throws Exception {
+		dataTest.setPais(ESPANA.getPais());
+		dataTest.setIdioma(ESPANA.getPais().getListIdiomas().get(0)); //Español
+		goToRegister();
+		clickPoliticaPrivacidad();
+		checkTextoLegal();		
 	}	
+	private void checkCorea() throws Exception {
+		dataTest.setPais(COREA_DEL_SUR.getPais());
+		dataTest.setIdioma(COREA_DEL_SUR.getPais().getListIdiomas().get(1)); //Inglés
+		goToRegister();
+		clickCollectionAndUseLinks();
+		checkTextoLegal();		
+	}	
+
+	private void goToRegister() throws Exception {
+		access();
+		new SecMenusUserSteps().selectRegistrate();
+		refresh(); //Sin esto el click al link "Política de privacidad" falla la 1a vez
+		new PageRegistroInitialShopSteps().checkIsPage(5);
+	}
+	
+	private void clickPoliticaPrivacidad() {
+		new PageRegistroInitialShopSteps().clickPoliticaPrivacidad();
+	}
+	
+	private void clickCollectionAndUseLinks() {
+		var pageRegistroSteps = new PageRegistroInitialShopSteps();
+		pageRegistroSteps.clickLinkGivePromotions();
+		keyDown(5);
+		pageRegistroSteps.clickConsentPersonalInformationLink();
+		keyDown(5);
+	}
 	
 	private void checkTextoLegal() {
-		checkLegalTextsVisible(new PageChequeRegaloInputDataNew());
-	}
-
+		checkLegalTextsVisible(new PageRegistroInitialShop());
+	}	
+	
 }

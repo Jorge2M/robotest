@@ -2,6 +2,7 @@ package com.mng.robotest.domains.transversal.acceptcookies.steps;
 
 import org.openqa.selenium.Cookie;
 
+import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
@@ -16,7 +17,8 @@ public class SectionCookiesSteps extends StepBase {
 	
 	@Step (
 		description="Seleccionamos el botón \"Aceptar\" de la sección inferior de configuración de cookies",
-		expected="Desaparece la sección de configuración de cookies")
+		expected="Desaparece la sección de configuración de cookies",
+		saveErrorData=SaveWhen.Always)
 	public void accept() {
 		sectionCookies.accept();
 		checkSectionInvisible();

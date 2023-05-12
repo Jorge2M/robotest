@@ -17,20 +17,12 @@ public class Leg005 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		checkPaisComun();
-		renewTest();
-		checkPaisArabia();
 	}
 	
 	private void checkPaisComun() throws Exception {
 		dataTest.setPais(ESPANA.getPais());
 		goToAvisame();
 		clickPoliticaPrivacidad();
-		checkTextoLegal();
-	}
-	private void checkPaisArabia() throws Exception {
-		dataTest.setPais(SAUDI_ARABIA.getPais());
-		dataTest.setIdioma(SAUDI_ARABIA.getPais().getListIdiomas().get(1)); //Inglés
-		goToAvisame();
 		checkTextoLegal();
 	}
 	

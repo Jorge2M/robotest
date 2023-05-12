@@ -18,7 +18,7 @@ public class LTPageAyudaContact extends LegalTextsPage {
 			
 			new LegalText(
 				"contactForm.rgpd.bodycopy",
-				"¿CÓMO TRATAMOS Y PROTEGEMOS TUS DATOS? RESPONSABLE: Punto Fa, S.L. FINALIDAD: Gestión y respuesta de consultas relacionadas con tu",
+				"¿CÓMO TRATAMOS Y PROTEGEMOS TUS DATOS? RESPONSABLE: Punto Fa, S.L. FINALIDAD: Gestión y respuesta de consultas relacionadas con tu pedido o temas relacionados con nuestra marca. DERECHOS: Puedes ejercer, en cualquier momento, tus derechos de acceso, rectificación, eliminación, oposición y demás derechos legalmente establecidos a través de personaldata@mango.com. INFORMACIÓN ADICIONAL: Consulta más información en nuestra Política de privacidad",
 				"//p[@class[contains(.,'text-body-s')]]")
 		)
 	);

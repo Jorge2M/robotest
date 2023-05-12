@@ -16,16 +16,16 @@ public class TextosLegales {
 	@Test(
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Nuevo Registro")
-	public void LEG008_TextosLegalesNuevoRegistro() throws Exception {
-		new Leg008().execute();
+	public void LEG001_TextosLegalesNuevoRegistro() throws Exception {
+		new Leg001().execute();
 	}	
 	
 	//TODO en Russia salen los textos mal
 	@Test(
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Antiguo Registro")
-	public void LEG009_TextosLegalesAntiguoRegistro() throws Exception {
-		new Leg009().execute();
+	public void LEG002_TextosLegalesAntiguoRegistro() throws Exception {
+		new Leg002().execute();
 	}
 	
 	//NOTA: el Guest checkout - Paso 1 no lo puedo implementar porque no aparece en el caso del nuevo flujo bolsa -> checkout	
@@ -34,8 +34,8 @@ public class TextosLegales {
 	@Test(
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Guest checkout - Paso 2")
-	public void LEG007_TextosLegalesGuestCheckoutPaso2() throws Exception {
-		new Leg007().execute();
+	public void LEG003_TextosLegalesGuestCheckoutPaso2() throws Exception {
+		new Leg003().execute();
 	}
 	
 	//NOTA: el Suscripción no lo puedo implementar porque es exclusivo de apps
@@ -45,12 +45,11 @@ public class TextosLegales {
 	@Test(
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Suscripción Footer y non modal")
-	public void LEG006_TextosLegalesSuscripcionFooterAndNonModal() throws Exception {
-		new Leg006().execute();
+	public void LEG004_TextosLegalesSuscripcionFooterAndNonModal() throws Exception {
+		new Leg004().execute();
 	}	
 
-	//TODO el avísame en Arabia falla casi siempre -> avisar a Oriol
-	//TODO el literal notifyMe.arabia.legal.text está en estado PENDING, todavía no existe
+	//TODO el 3er literal sale cortado
 	@Test(
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Avisame + suscripción")
@@ -58,35 +57,35 @@ public class TextosLegales {
 		new Leg005().execute();
 	}	
 	
-	
-	//-------
-	
+	//TODO en Serbia (texto común RGPD) no aparecen los textos legales -> parece un error -> reportar
 	@Test(
 		groups={"Legal", "Canal:mobile_App:shop"}, 
-		description="Chequeo textos legales: Cheque Regalo (Pagos)")
-	public void LEG001_TextosLegalesChequeRegalo() throws Exception {
-		new Leg001().execute();
-	}
+		description="Chequeo textos legales: Mis Datos")
+	public void LEG006_TextosLegalesMisDatos() throws Exception {
+		new Leg006().execute();
+	}	
+	
+	//TODO diría que hay un problema en el Confluence 
+	//el texto que figura no es el que aparece en pantalla -> comentar a Cele
+	@Test(
+		groups={"Legal", "Canal:mobile_App:shop"}, 
+		description="Chequeo textos legales: Mango Card")
+	public void LEG007_TextosLegalesMangoCasrd() throws Exception {
+		new Leg007().execute();
+	}	
 	
 	@Test(
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Formulario de ayuda (Genki)")
-	public void LEG002_TextosLegalesFormularioAyuda() throws Exception {
-		new Leg002().execute();
+	public void LEG008_TextosLegalesFormularioAyuda() throws Exception {
+		new Leg008().execute();
 	}
 	
 	@Test(
 		groups={"Legal", "Canal:mobile_App:shop"}, 
-		description="Chequeo textos legales: Mango Card")
-	public void LEG003_TextosLegalesMangoCasrd() throws Exception {
-		new Leg003().execute();
-	}	
+		description="Chequeo textos legales: Cheque Regalo (Pagos)")
+	public void LEG009_TextosLegalesChequeRegalo() throws Exception {
+		new Leg009().execute();
+	}
 	
-	@Test(
-		groups={"Legal", "Canal:mobile_App:shop"}, 
-		description="Chequeo textos legales: Mis Datos")
-	public void LEG004_TextosLegalesMisDatos() throws Exception {
-		new Leg004().execute();
-	}	
-
 }

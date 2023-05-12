@@ -114,6 +114,7 @@ public class SecBolsaSteps extends StepBase {
 	@Step (
 		description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + TAG_LISTA_ART,
 		expected="Los productos se dan de alta en la bolsa correctamente",
+		saveErrorData=SaveWhen.Always,
 		saveNettraffic=SaveWhen.Always)
 	public void altaBolsaArticulos(List<Article> listParaAlta) {
 		insertArticlesInStepDescription(listParaAlta);
