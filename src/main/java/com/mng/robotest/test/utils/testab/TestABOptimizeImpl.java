@@ -37,7 +37,7 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 
 	NUEVO_GUEST_CHECKOUT_PRE (
 		"Kiritaki - Nuevo Guest Checkout (PRE)",
-		"N2qGaYKSQlCB6rfl8-nImA",
+		"csjJNIYMTv-mNwqN2AuTrg",
 		Arrays.asList(0,1),
 		Arrays.asList(
 			"V0-Original", 

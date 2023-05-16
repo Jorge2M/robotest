@@ -11,6 +11,7 @@ import com.mng.robotest.test.suites.PaisIdiomaSuite;
 import com.mng.robotest.test.suites.RegistrosSuite;
 import com.mng.robotest.test.suites.SmokeMantoSuite;
 import com.mng.robotest.test.suites.SmokeTestSuite;
+import com.mng.robotest.test.suites.TextosLegalesSuite;
 import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
 import com.github.jorge2m.testmaker.domain.SuiteMaker;
 //import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
@@ -40,21 +41,23 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 		try {
 			switch ((Suites)inputParams.getSuite()) {
 			case SmokeTest:
-				return (new SmokeTestSuite(inputParamsMango));
+				return new SmokeTestSuite(inputParamsMango);
 			case SmokeManto:
-				return (new SmokeMantoSuite(inputParamsMango));
+				return new SmokeMantoSuite(inputParamsMango);
 			case PagosPaises:
-				return (new PagosPaisesSuite(inputParamsMango));
+				return new PagosPaisesSuite(inputParamsMango);
 			case PaisIdiomaBanner:
-				return (new PaisIdiomaSuite(inputParamsMango));
+				return new PaisIdiomaSuite(inputParamsMango);
 			case MenusPais:
-				return (new MenusPaisSuite(inputParamsMango));
+				return new MenusPaisSuite(inputParamsMango);
 			case ConsolaVotf:
-				return (new ConsolaVotfSuite(inputParamsMango));
+				return new ConsolaVotfSuite(inputParamsMango);
 			case ListFavoritos, ListMiCuenta, CheckoutMultiAddress:
-				return (new GenericFactorySuite(inputParamsMango));
+				return new GenericFactorySuite(inputParamsMango);
 			case RegistrosPaises:
-				return (new RegistrosSuite(inputParamsMango));
+				return new RegistrosSuite(inputParamsMango);
+			case TextosLegales:
+				return new TextosLegalesSuite(inputParamsMango);
 			default:
 			}
 		}

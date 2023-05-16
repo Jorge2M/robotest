@@ -14,6 +14,7 @@ public enum Suites implements SuiteTest {
 	CheckoutMultiAddress(10),
 	ListMiCuenta(10),
 	RegistrosPaises(10),
+	TextosLegales(8),
 	RebajasPaises(10);
 	
 	private final int maxSecondsToWaitStart;
