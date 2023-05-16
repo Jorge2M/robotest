@@ -3,7 +3,7 @@ package com.mng.robotest.test.pageobject.shop.cabecera;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.buscador.pageobjects.SecSearch;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -85,7 +85,8 @@ public abstract class SecCabecera extends PageBase {
 	public String getNumberArtIcono() {
 		waitLoadPage(); //Para evitar staleElement en la línea posterior
 		String xpathNumberArtIcono = getXPathNumberArtIcono();
-		if (state(Visible, xpathNumberArtIcono).check()) {
+		int seconds = (app==AppEcom.outlet) ? 1 : 0; 
+		if (state(Visible, xpathNumberArtIcono).wait(seconds).check()) {
 			return getElement(xpathNumberArtIcono).getText();
 		}
 		return "0";
