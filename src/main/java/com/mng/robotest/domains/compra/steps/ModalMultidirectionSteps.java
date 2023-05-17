@@ -94,7 +94,7 @@ public class ModalMultidirectionSteps extends StepBase {
 		expected="El modal desaparece")
 	public void closeModal() {
 		modalMultidirection.closeModal();
-		checkModalInvisible(1);
+		checkModalInvisible(2);
 	}
 
 	@Validation(
