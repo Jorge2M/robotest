@@ -8,7 +8,7 @@ import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 public class LoyaltyCommons {
 	
 	public static final User USER_PRO_WITH_LOY_POINTS = 
-			new User("ticket_digital_es@mango.com", "6051483560048388114", "ES");
+			new User("ticket_digital_es@mango.com", "6051483570048367458", "ES");
 
 	private LoyaltyCommons() {}
 	

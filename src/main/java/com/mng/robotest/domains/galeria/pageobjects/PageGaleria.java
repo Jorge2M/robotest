@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
@@ -644,12 +645,15 @@ public abstract class PageGaleria extends PageBase {
 	}
 	
 	private void forceVisibilityImageArticle(WebElement articulo) {
-		scrollVertical(-800);
-		moveToElement(articulo);
-		if (!isVisibleImageArticle(articulo, 2)) {
-			scrollVertical(-50);
-			scrollVertical(+50);
-			isVisibleImageArticle(articulo, 2);
+		var originalSize = driver.manage().window().getSize();
+		for (int i=1; i<5; i++) {
+			if (isVisibleImageArticle(articulo, 2)) {
+				return;
+			}
+			driver.manage().window().setSize(new Dimension(i*200,i*200));
+			driver.manage().window().setSize(originalSize);
+			scrollVertical(-800);
+			moveToElement(articulo);
 		}
 	}
 	
