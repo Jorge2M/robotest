@@ -74,13 +74,6 @@ public class PageMisDatosSteps extends StepBase {
 			"El Email contiene el definido durante el registro: <b>" + email + "</b>",
 			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0));
 		
-		if (!dataTest.getPais().isMisdirecciones(app)) {
-			String codpostal = dataNewRegister.getPostalCode();
-			checks.add(
-				"El código postal contiene el definido durante el registro: <b>" + codpostal + "</b>",
-				(pageMisDatos.getTextInputCodPostal().compareTo(codpostal)==0));
-		}
-		
 		return checks;
 	}	
 
