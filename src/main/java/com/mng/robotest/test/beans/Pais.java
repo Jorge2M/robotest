@@ -347,10 +347,10 @@ public class Pais implements Serializable {
 	 * (como se encuentran en el XML pero dando prioridad a los que tienen no tienen testpago='s')
 	 */
 	public List<Pago> getListPagosForTest(AppEcom app, boolean isEmpleado) {
-		List<PaymentCountry> listPagos = PagoGetter.getListPayments(this.getCodigo_pais(), app, isEmpleado);
+		List<PaymentCountry> listPayments = PagoGetter.getListPayments(this.getCodigo_pais(), app, isEmpleado);
 		List<Pago> listPagosFirst =  new ArrayList<>();
 		List<Pago> listPagosLast = new ArrayList<>();
-		for (PaymentCountry payment : listPagos) {
+		for (PaymentCountry payment : listPayments) {
 			Pago pago = payment.pago;
 			if (pago.getTestpago()!=null && pago.getTestpago().compareTo("s")==0) {
 				listPagosFirst.add(pago);

@@ -87,7 +87,6 @@ public class ArticuloNavigations extends StepBase {
 
 	private void selectColorIfExists(String colourCode) {
 		if (colourCode!=null && "".compareTo(colourCode)!=0) {
-			PageFicha pageFicha = PageFicha.of(channel);
 			if (pageFicha.getSecDataProduct().isClickableColor(colourCode) &&
 				pageFicha.isPageUntil(5)) {
 				pageFicha.getSecDataProduct().selectColorWaitingForAvailability(colourCode);

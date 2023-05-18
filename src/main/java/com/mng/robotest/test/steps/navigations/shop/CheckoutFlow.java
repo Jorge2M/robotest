@@ -524,7 +524,7 @@ public class CheckoutFlow extends StepBase {
 			if (dataPago!=null) {
 				return dataPago;
 			}
-			var dataPago = new DataPago(
+			var dPago = new DataPago(
 				ConfigCheckout.config()
 					.checkPasarelas(validaPasarelas)
 					.checkPagos(validaPagos)
@@ -534,9 +534,9 @@ public class CheckoutFlow extends StepBase {
 					.userIsEmployee(isEmpl).build());
 			
 			if (pago!=null) {
-				dataPago.setPago(pago);
+				dPago.setPago(pago);
 			}
-			return dataPago;
+			return dPago;
 		}
 		
 		public CheckoutFlow build() {

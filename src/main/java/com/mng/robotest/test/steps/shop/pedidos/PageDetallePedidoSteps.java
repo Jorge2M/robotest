@@ -20,13 +20,13 @@ public class PageDetallePedidoSteps {
 	private final WebDriver driver = TestMaker.getDriverTestCase();
 	
 	public PageDetallePedidoSteps(Channel channel) {
-		PageDetallePedido pageDetalle = DetallePedido.NEW.getPageObject(channel);
-		if (pageDetalle.isPage()) {
-			this.pageDetalle = pageDetalle;
+		var pageDetallePedido = DetallePedido.NEW.getPageObject(channel);
+		if (pageDetallePedido.isPage()) {
+			this.pageDetalle = pageDetallePedido;
 		} else {
-			pageDetalle = DetallePedido.OLD.getPageObject(channel);
-			if (pageDetalle.isPage()) {
-				this.pageDetalle = pageDetalle;
+			pageDetallePedido = DetallePedido.OLD.getPageObject(channel);
+			if (pageDetallePedido.isPage()) {
+				this.pageDetalle = pageDetallePedido;
 			} else {
 				this.pageDetalle = DetallePedido.OLD_OLD.getPageObject(channel);
 			}

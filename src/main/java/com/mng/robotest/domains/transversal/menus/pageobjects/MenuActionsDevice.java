@@ -64,9 +64,9 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 	
 	private String clickMenu() {
-		String menu = getElement(getXPathMenu()).getText();
+		String menuItem = getElement(getXPathMenu()).getText();
 		click(getXPathMenu()).exec();
-		return menu;
+		return menuItem;
 	}
 	
 	private void clickSubLevelMenu() {

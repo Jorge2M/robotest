@@ -68,7 +68,7 @@ public class Fic005 extends TestBase {
 	private Article getArticlePersonalizable(String codigoPais, AppEcom app, WebDriver driver) 
 			throws Exception {
 		
-		var articlePersonalizable = new GetterProducts
+		var articlePers = new GetterProducts
 				.Builder(codigoPais, app, driver)
 				.linea(LineaType.HE)
 				.menu(Menu.CAMISAS_HE)
@@ -77,10 +77,10 @@ public class Fic005 extends TestBase {
 				.build()
 				.getOne();
 		
-		if (!articlePersonalizable.isPresent()) {
+		if (!articlePers.isPresent()) {
 			throw new NotFoundException("Not found article with filter " + FilterType.PERSONALIZABLE);
 		}
-		return Article.getArticleCandidateForTest(articlePersonalizable.get());
+		return Article.getArticleCandidateForTest(articlePers.get());
 	}	
 
 }

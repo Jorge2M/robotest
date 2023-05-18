@@ -643,11 +643,11 @@ public class Pago implements Serializable {
 	}
 	
 	public String getNombreInCheckout(Channel channel, AppEcom app) {
-		String nombre = getNombre(channel, app);
-		if (nombre.contains("mercadopago")) {
+		String nombrePago = getNombre(channel, app);
+		if (nombrePago.contains("mercadopago")) {
 			return "mercadopago";
 		}
-		return nombre;
+		return nombrePago;
 	}
 	
 //	private boolean isAdyen() {

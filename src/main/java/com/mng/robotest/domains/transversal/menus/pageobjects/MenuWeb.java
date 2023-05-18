@@ -45,9 +45,9 @@ public class MenuWeb extends PageBase implements MenuActions {
 	
 	@Override
 	public String click() {
-		String nameScreen = menuActions.click();
-		this.nameScreen = nameScreen;
-		return nameScreen;
+		String nameScreenMenu = menuActions.click();
+		this.nameScreen = nameScreenMenu;
+		return nameScreenMenu;
 	}
 	@Override
 	public void clickSubMenu() {

@@ -36,8 +36,8 @@ public class GarmentCatalog {
 
 	public boolean isAnyArticleWithStock() {
 		for (Color color : colors) {
-			int stock = color.getSizeWithMoreStock().getStock();
-			if (stock>0) {
+			int stockColor = color.getSizeWithMoreStock().getStock();
+			if (stockColor>0) {
 				return true;
 			}
 		}
