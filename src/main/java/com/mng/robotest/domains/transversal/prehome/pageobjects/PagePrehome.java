@@ -108,7 +108,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		click(xpathCountryOption).exec();
 	}
 	
-	void seleccionaIdioma(String nombrePais, String nombreIdioma) {
+	void seleccionaIdioma(String nombreIdioma) {
 		unfoldIdiomas();
 		String xpathButtonIdioma = getXPathIdiomaItemFromName(nombreIdioma);
 		if (!state(Visible, xpathButtonIdioma).wait(1).check()) {
@@ -119,7 +119,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	
 	public void selecionIdiomaAndEnter() { 
 		if (pais.getListIdiomas().size() > 1) {
-			seleccionaIdioma(pais.getNombre_pais(), idioma.getCodigo().getLiteral());
+			seleccionaIdioma(idioma.getCodigo().getLiteral());
 		} 
 		selectButtonForEnter();
 		isNotPageUntil(30);
@@ -141,7 +141,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		}
 	}	
 	
-	public void accesoShopViaPrehome(boolean acceptCookies) throws Exception {
+	public void accesoShopViaPrehome() throws Exception {
 		selecPaisIdiomaYAccede();
 		new ModalLoyaltyAfterAccess().closeModalIfVisible();
 		if (channel.isDevice()) {

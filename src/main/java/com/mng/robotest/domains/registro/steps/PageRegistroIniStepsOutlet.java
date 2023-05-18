@@ -110,7 +110,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			validaEmailYaRegistradoShown(5);
 			break;
 		case USR_NO_EXISTS_IN_GMAIL:
-			validaEmailIncorrectShown(5);
+			validaEmailIncorrectShown();
 			break;
 		}
 		GenericChecks.checkDefault();
@@ -130,9 +130,9 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece un error <b>Email incorrecto</b> (lo esperamos hasta #{seconds} segundos)")
-	private boolean validaEmailIncorrectShown(int seconds) {
-		return(pageRegistroIni.isVisibleErrorEmailIncorrecto(seconds));
+		description="Aparece un error <b>Email incorrecto</b>")
+	private boolean validaEmailIncorrectShown() {
+		return(pageRegistroIni.isVisibleErrorEmailIncorrecto());
 	}
 	
 	@Validation

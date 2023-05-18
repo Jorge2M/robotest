@@ -201,7 +201,7 @@ public class PageRegistroIniOutlet extends PageBase {
 		return state(Present, xpathError).wait(seconds).check();
 	}	
 	
-	public boolean isVisibleErrorEmailIncorrecto(int seconds) {
+	public boolean isVisibleErrorEmailIncorrecto() {
 		return getNumberMsgInputInvalid(DataRegType.EMAIL)==1;
 	}	
 	

@@ -92,7 +92,7 @@ public class PagePrehomeSteps extends StepBase {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagPais, pais.getNombre_pais());
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TagIdioma, idioma.getLiteral());
 		
-		pagePrehome.accesoShopViaPrehome(true);
+		pagePrehome.accesoShopViaPrehome();
 		
 		GenericChecks.checkDefault();
 		GenericChecks.from(Arrays.asList(

@@ -4,7 +4,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.CERRAR_SESION;
 import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.INICIAR_SESION;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
@@ -58,12 +57,12 @@ public class AccesoFlows extends StepBase {
 			pagePrehome.previousAccessShopSteps(acceptCookies);
 		} else {
 			pagePrehome.previousAccessShopSteps(acceptCookies);
-			pagePrehome.accesoShopViaPrehome(acceptCookies);
+			pagePrehome.accesoShopViaPrehome();
 		}
 	}
 	
 	public void login(String user, String password) {
-		clickIniciarSesionAndWait(channel, app);
+		clickIniciarSesionAndWait();
 		var pageIdentificacion = PageIdentificacion.make();
 		pageIdentificacion.isPage(5);
 		pageIdentificacion.inputUserPassword(user, password);
@@ -73,7 +72,7 @@ public class AccesoFlows extends StepBase {
 		new ModalLoyaltyAfterLogin().closeModalIfVisible();
 	}	
 	
-	private void clickIniciarSesionAndWait(Channel channel, AppEcom app) {
+	private void clickIniciarSesionAndWait() {
 		if (channel.isDevice()) {
 			//En el caso de mobile nos tenemos que asegurar que están desplegados los menús
 			SecCabecera secCabeceraDevice = new SecCabeceraMostFrequent();

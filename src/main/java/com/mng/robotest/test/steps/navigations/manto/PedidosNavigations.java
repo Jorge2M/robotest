@@ -2,7 +2,6 @@ package com.mng.robotest.test.steps.navigations.manto;
 
 import java.util.List;
 import java.util.Optional;
-import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
@@ -40,7 +39,7 @@ public class PedidosNavigations extends StepBase {
 			dMantoAcc.setUserManto(testRun.getParameter(Constantes.PARAM_USR_MANTO));
 			dMantoAcc.setPassManto(testRun.getParameter(Constantes.PARAM_PAS_MANTO));
 			dMantoAcc.setAppE(app);
-			testPedidosEnManto(dMantoAcc, listPedidos, driver);
+			testPedidosManto(listPedidos);
 		}
 	}
 	
@@ -52,8 +51,7 @@ public class PedidosNavigations extends StepBase {
 		return testCaseOpt.get();
 	}
 	
-	private void testPedidosEnManto(
-			DataMantoTest dMantoAcc, List<DataPedido> listPedidos, WebDriver driver) {
+	private void testPedidosManto(List<DataPedido> listPedidos) {
 		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		if (typeAccess==TypeAccess.Bat) {
 			return;

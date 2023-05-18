@@ -10,7 +10,7 @@ public class PagePoliticaPrivacidad extends PageBase {
 			"//*[text()[contains(.,'Política de privacidad')] or text()[contains(.,'Privacy policy')]]";
 	
 	public boolean isPageUntil(int seconds) {
-		return state(Present, XPATH_CABECERA).wait(3).check();
+		return state(Present, XPATH_CABECERA).wait(seconds).check();
 	}
 	
 
