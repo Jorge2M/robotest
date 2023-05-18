@@ -169,10 +169,20 @@ public class SecDataProduct extends PageBase {
 
 	public String getNombreColorMobil(ColorType colorType) {
 		WebElement color = getElementWeb(colorType.getXPath());
-		if (color!=null) {
-			return (color.getAttribute("title"));
+		if (color!=null) { 
+			String colorName = color.getAttribute("aria-label");
+			return normalizeColorName(colorName);
 		}
 		return Constantes.COLOR_DESCONOCIDO;
+	}
+	private String normalizeColorName(String colorName) {
+		//Eliminamos el literal " seleccionado"
+		Pattern pattern = Pattern.compile("(.*) (.*)");
+		Matcher matcher = pattern.matcher(colorName);
+		if (matcher.find()) {
+			return matcher.group(1);
+		}
+		return colorName;
 	}
 
 	public String getNombreColorSelected() {

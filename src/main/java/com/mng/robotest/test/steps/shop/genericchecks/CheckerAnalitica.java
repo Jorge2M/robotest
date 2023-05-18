@@ -50,7 +50,7 @@ public class CheckerAnalitica implements Checker {
 		}
 		
 		//TODO actualmente hay muchos errores -> reportar a Alberte
-		//mientras tanto lo ponemos en Warning
+		//mientras tanto lo ponemos en Warn
 		if (UtilsTest.todayBeforeDate("2023-11-01")) {
 			return Warn;
 		}

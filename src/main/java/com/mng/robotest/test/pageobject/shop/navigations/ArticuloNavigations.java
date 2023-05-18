@@ -1,5 +1,7 @@
 package com.mng.robotest.test.pageobject.shop.navigations;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
@@ -9,19 +11,45 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 
 public class ArticuloNavigations extends StepBase {
 
+	private final PageFicha pageFicha = PageFicha.of(channel);
+	
 	public ArticuloScreen selectArticuloTallaColorByRef(Article articleStock) {
 		var articulo = new ArticuloScreen();
 		articulo.setReferencia(articleStock.getGarmentId());
+		
+		searchArticle(articleStock);
+		pageFicha.isFichaArticuloUntil(articulo.getReferencia(), 10);
+
+		var color = selectColor(articleStock);
+		articulo.setCodigoColor(color.getLeft());
+		articulo.setColorName(color.getRight());
+
+		var talla = selectTalla(articleStock);
+		articulo.setTalla(talla);
+
+		articulo.setPrecio(pageFicha.getSecDataProduct().getPrecioFinalArticulo());
+		articulo.setPrecioSinDesc(getPrecioOriginal(articulo));
+		articulo.setNombre(pageFicha.getSecDataProduct().getTituloArt());
+		
+		return articulo;
+	}
+	
+	public void buscarArticulo(Article article) {
+		SecCabecera.buscarTexto(article.getGarmentId(), channel);
+		if (article.getColor()!=null) {
+			selectColorIfExists(article.getColor().getId());
+		}
+	}	
+
+	private void searchArticle(Article articleStock) {
 		if (articleStock.getUrlFicha()==null || "".compareTo(articleStock.getUrlFicha())==0) {
 			buscarArticulo(articleStock);
 		} else {
 			driver.get(articleStock.getUrlFicha());
 		}
+	}
 
-		//Esperamos un máximo de 10 segundos a que aparezca la ficha del artículo
-		var pageFicha = PageFicha.of(channel);
-		pageFicha.isFichaArticuloUntil(articulo.getReferencia(), 10);
-
+	private Pair<String, String> selectColor(Article articleStock) {
 		String idColor = null;
 		if (articleStock.getColor()!=null) {
 			idColor = articleStock.getColor().getId();
@@ -29,9 +57,11 @@ public class ArticuloNavigations extends StepBase {
 		if (pageFicha.getSecDataProduct().isClickableColor(idColor)) {
 			pageFicha.getSecDataProduct().selectColorWaitingForAvailability(idColor);
 		}
-		articulo.setCodigoColor(idColor);
-		articulo.setColorName(pageFicha.getSecDataProduct().getNombreColorSelected());
-
+		String nameColor = pageFicha.getSecDataProduct().getNombreColorSelected();
+		return Pair.of(idColor, nameColor);
+	}
+	
+	private Talla selectTalla(Article articleStock) {
 		if (articleStock.getSize()!=null) {
 			String size = articleStock.getSize().getId2Digits();
 			if (articleStock.getSize().getLabel().matches("\\d+")) {
@@ -43,34 +73,15 @@ public class ArticuloNavigations extends StepBase {
 		} else {
 			pageFicha.selectTallaByIndex(1);
 		}
-
-		//Almacenamos los 2 valores de la talla seleccionada
-		articulo.setTalla(pageFicha.getTallaSelected());
-
-		// Almacenamos el precio para futuras validaciones (hemos de contemplar todos los posibles formatos según el país)
-		String precio = "";
-		precio = pageFicha.getSecDataProduct().getPrecioFinalArticulo();
-		articulo.setPrecio(precio);
-
-		// Extraemos el precio original tachado (si existe)
+		return pageFicha.getTallaSelected();
+	}	
+	
+	private String getPrecioOriginal(ArticuloScreen articulo) {
 		String precioSinDesc = pageFicha.getSecDataProduct().getPrecioTachadoFromFichaArt();
-
 		if (precioSinDesc!=null && "".compareTo(precioSinDesc)!=0) {
-			articulo.setPrecioSinDesc(precioSinDesc);
+			return precioSinDesc;
 		} else {
-			articulo.setPrecioSinDesc(articulo.getPrecio());
-		}
-
-		// Almacenamos el nombre de artículo para futuras validaciones
-		articulo.setNombre(pageFicha.getSecDataProduct().getTituloArt());
-
-		return articulo;
-	}
-
-	public void buscarArticulo(Article article) {
-		SecCabecera.buscarTexto(article.getGarmentId(), channel);
-		if (article.getColor()!=null) {
-			selectColorIfExists(article.getColor().getId());
+			return articulo.getPrecio();
 		}
 	}
 

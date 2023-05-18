@@ -27,7 +27,7 @@ public class ValidatorContentBolsa extends PageBase {
 		secBolsa.setBolsaToStateIfNotYet(StateBolsa.OPEN);
 		int numArticles = secBolsa.getLineasArtBolsa().getNumLinesArticles();
 		for (int i=1; i<=numArticles; i++) {
-			ArticuloDataBolsaScreen dataArtScreen = secBolsa.getLineasArtBolsa().getArticuloDataByPosicion(i);
+			var dataArtScreen = secBolsa.getLineasArtBolsa().getArticuloDataByPosicion(i);
 			linesArticlesInScreen.add(dataArtScreen);
 		}	
 	}
@@ -36,7 +36,7 @@ public class ValidatorContentBolsa extends PageBase {
 		if (!numArticlesIsCorrect()) {
 			return false;
 		}
-		List<DataArtBolsa> allDataToMatch = DataArtBolsa.getValuesValidForChannel(channel);
+		var allDataToMatch = DataArtBolsa.getValues();
 		return (allArticlesExpectedDataAreInScreen(allDataToMatch));
 	}
 	
@@ -51,18 +51,17 @@ public class ValidatorContentBolsa extends PageBase {
 				return true;
 			}
 		}
-		
 		return false;
 	}
 	
 	private boolean anyArticleInScreenMatchesArticleData(ArticuloScreen articleExpected, List<DataArtBolsa> listDataToMatch) {
-		ArticuloDataBolsaScreen articuloScreen = getArticleInScreenByReference(articleExpected.getReferencia());
+		var articuloScreen = getArticleInScreenByReference(articleExpected.getReferencia());
 		if (articuloScreen==null) {
 			return false;
 		}
 		
 		for (DataArtBolsa typeDataToMatch : listDataToMatch) {
-			if (DataArtBolsa.getValuesValidForChannel(channel).contains(typeDataToMatch) &&
+			if (DataArtBolsa.getValues().contains(typeDataToMatch) &&
 			    articleInScreenMatchArticleData(articleExpected, articuloScreen, typeDataToMatch)) {
 				return true;
 			}

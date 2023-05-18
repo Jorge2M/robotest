@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Optional;
 
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.utils.ImporteScreen;
-
 
 public class DataBag implements Serializable { 
 
@@ -75,8 +73,8 @@ public class DataBag implements Serializable {
 		List<ArticuloScreen> listToReturn = new ArrayList<>();
 		ListIterator<ArticuloScreen> it = this.listArticulos.listIterator();
 		while (it.hasNext()) {
-			ArticuloScreen articulo = it.next();
-			Optional<ArticuloScreen> articuloInList = articulo.searchInList(listToReturn);
+			var articulo = it.next();
+			var articuloInList = articulo.searchInList(listToReturn);
 			if (articuloInList.isPresent()) {
 				articuloInList.get().incrementarCantidad(1);
 			} else {

@@ -1,14 +1,9 @@
 package com.mng.robotest.domains.bolsa.pageobjects;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.utils.ImporteScreen;
@@ -16,37 +11,24 @@ import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class LineasArticuloBolsa extends PageBase {
 
 	public enum DataArtBolsa {
-		REFERENCIA(true), 
-		NOMBRE(true), 
-		COLOR(true), 
-		TALLA(true), 
-		CANTIDAD(true), 
-		PRECIO_ENTERO(true), 
-		PRECIO(false),
-		PRECIO_DECIMAL(true), 
-		PRECIO_TOTAL(true);
+		REFERENCIA, 
+		NOMBRE, 
+		COLOR, 
+		TALLA, 
+		CANTIDAD, 
+		PRECIO_ENTERO, 
+		PRECIO,
+		PRECIO_DECIMAL, 
+		PRECIO_TOTAL;
 		
-		boolean validMobilWeb = true;
-		DataArtBolsa(boolean validMobilWeb) {
-			this.validMobilWeb = validMobilWeb;
-		}
-		
-		public static List<DataArtBolsa> getValuesValidForChannel(Channel channel) {
-			if (channel.isDevice()) {
-				var listData = new ArrayList<DataArtBolsa>();
-				for (var dataArt : DataArtBolsa.values()) {
-					if (dataArt.validMobilWeb) {
-						listData.add(dataArt);
-					}
-				}
-				
-				return listData;
-			}
-				
-			return Arrays.asList(values());
+		public static List<DataArtBolsa> getValues() {
+			return Arrays.asList(DataArtBolsa.values());
 		}
 	}
 	
@@ -66,30 +48,15 @@ public class LineasArticuloBolsa extends PageBase {
 
 	private static final String XPATH_PRECIO_RELATIVE_ARTICLE = ".//*[@data-testid[contains(.,'currentPrice')]]";
 	
-	//TODO cuando se active la nueva bolsa en pro se puede eliminar el segundo xpath
 	private static final String TAG_REF = "[TAGREF]";
 	private static final String XPATH_LINK_ITEM_REF = XPATH_ITEM + "//img[@src[contains(.,'" + TAG_REF + "')]]";
-	private static final String XPATH_LINK_ITEM_REF_OLD = XPATH_ITEM_OLD + "//img[@src[contains(.,'" + TAG_REF + "')]]";
-	
-	//TODO cuando se active la nueva bolsa en pro se puede eliminar el segundo xpath	
 	private static final String XPATH_ITEM_REF = XPATH_LINK_ITEM_REF + "/ancestor::li";
-	private static final String XPATH_ITEM_REF_OLD = XPATH_LINK_ITEM_REF_OLD + "/ancestor::div[@class[contains(.,'layout-row')]]";
 	
 	private String getXPathLinkBorrarArt(String refArticulo) {
-		return "(" + getXPathLinkBorrarArtNew(refArticulo) + " | " +
-			   getXPathLinkBorrarArtOld(refArticulo) + ")";
-	}
-	
-	private String getXPathLinkBorrarArtNew(String refArticulo) {
 		String xpathLinkBorrarArtRef = XPATH_ITEM_REF + "//*[@data-testid[contains(.,'removeItem.button')]]";
 		return xpathLinkBorrarArtRef.replace(TAG_REF, refArticulo);
 	}
 	
-	private String getXPathLinkBorrarArtOld(String refArticulo) {
-		String xpathLinkBorrarArtRef = XPATH_ITEM_REF_OLD + "//*[@data-testid[contains(.,'removeItem.button')]]";
-		return xpathLinkBorrarArtRef.replace(TAG_REF, refArticulo);
-	}
-
 	private String getXPathDataRelativeArticle(DataArtBolsa dataArt) {
 		switch (dataArt) {
 		case NOMBRE:
@@ -162,10 +129,6 @@ public class LineasArticuloBolsa extends PageBase {
 	}
 	
 	private String getDataArticle(DataArtBolsa typeData, WebElement lineaArticle) {
-		if (!DataArtBolsa.getValuesValidForChannel(channel).contains(typeData)) {
-			return "";
-		}
-		
 		String xpathData = getXPathDataRelativeArticle(typeData);
 		WebElement dataWebElement;
 		try {

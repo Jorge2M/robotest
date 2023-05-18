@@ -193,44 +193,44 @@ public class SecBolsaSteps extends StepBase {
 	@Validation
 	public ChecksTM validaCuadranArticulosBolsa() throws Exception {
 		var checks = ChecksTM.getNew();
-		var validatorBolsa = new ValidatorContentBolsa();
+		var checkerBag = new ValidatorContentBolsa();
 		checks.add(
 			"Cuadra el númeo de artículos existentes en la bolsa",
-			validatorBolsa.numArticlesIsCorrect(), Warn);
+			checkerBag.numArticlesIsCorrect(), Warn);
 		
-		var listDataToValidate = new ArrayList<DataArtBolsa>();
-		listDataToValidate.add(REFERENCIA);
+		var listToCheck = new ArrayList<DataArtBolsa>();
+		listToCheck.add(REFERENCIA);
 		checks.add(
 			"Cuadran las referencias de los artículos existentes en la bolsa",
-			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), Warn);
+			checkerBag.allArticlesExpectedDataAreInScreen(listToCheck), Warn);
 		
-		listDataToValidate.clear();
-		listDataToValidate.add(NOMBRE);
+		listToCheck.clear();
+		listToCheck.add(NOMBRE);
 		checks.add(
 			"Cuadran los nombres de los artículos existentes en la bolsa",
-			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), Warn);
+			checkerBag.allArticlesExpectedDataAreInScreen(listToCheck), Warn);
 		
-		listDataToValidate.clear();
-		listDataToValidate.add(COLOR);
+		listToCheck.clear();
+		listToCheck.add(COLOR);
 		checks.add(
 			"Cuadran los colores de los artículos existentes en la bolsa",
-			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), Warn);
+			checkerBag.allArticlesExpectedDataAreInScreen(listToCheck), Warn);
 		
-		listDataToValidate.clear();
-		listDataToValidate.add(TALLA);
-		boolean tallaNumOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
-		listDataToValidate.clear();
-		listDataToValidate.add(TALLA);
-		boolean tallaAlfOk = validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate);
+		listToCheck.clear();
+		listToCheck.add(TALLA);
+		boolean tallaNumOk = checkerBag.allArticlesExpectedDataAreInScreen(listToCheck);
+		listToCheck.clear();
+		listToCheck.add(TALLA);
+		boolean tallaAlfOk = checkerBag.allArticlesExpectedDataAreInScreen(listToCheck);
 		checks.add(
 			"Cuadran las tallas de los artículos existentes en la bolsa",
 			tallaNumOk || tallaAlfOk, Warn);
 		
-		listDataToValidate.clear();
-		listDataToValidate.add(PRECIO_TOTAL);
+		listToCheck.clear();
+		listToCheck.add(PRECIO_TOTAL);
 		checks.add(
 			"Cuadran los precios de los artículos existentes en la bolsa",
-			validatorBolsa.allArticlesExpectedDataAreInScreen(listDataToValidate), Warn);
+			checkerBag.allArticlesExpectedDataAreInScreen(listToCheck), Warn);
 		
 		return checks;
 	}
