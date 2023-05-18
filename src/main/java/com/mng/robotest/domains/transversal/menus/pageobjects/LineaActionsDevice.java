@@ -49,6 +49,9 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 			return "//*[@data-testid='header.menuItem." + lineaType.getId2() + "']";
 		case NINA:
 		case NINO:
+			if (app==AppEcom.outlet) {
+				return "//*[@data-testid='header.menuItem." + lineaType.getSufixOutlet(channel) + "']";
+			}
 		case KIDS:			
 			return "//*[@data-testid='header.menuItem.kids']";
 		default:

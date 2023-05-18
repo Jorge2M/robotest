@@ -102,7 +102,6 @@ public class ValidatorContentBolsa extends PageBase {
 			}
 			break;
 		}
-		
 		return true;
 	}
 	
@@ -112,7 +111,6 @@ public class ValidatorContentBolsa extends PageBase {
 				return articuloScreen;
 			}
 		}
-		
 		return null;
 	}
 }
