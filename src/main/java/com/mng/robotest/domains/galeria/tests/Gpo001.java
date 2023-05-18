@@ -40,23 +40,23 @@ public class Gpo001 extends TestBase {
 	private void checkScroll() throws Exception {
 		String nameMenuCamisas = FactoryMenus.get(CAMISAS_SHE).getMenu();
 		var dataScroll = new DataForScrollStep();
-		dataScroll.numPageToScroll = PageGaleria.MAX_PAGE_TO_SCROLL;
-		dataScroll.ordenacionExpected = FilterOrdenacion.NOordenado;
-		dataScroll.validateArticlesExpected = false;
-		dataScroll.validaImgBroken = true;
+		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
+		dataScroll.setOrdenacionExpected(FilterOrdenacion.NO_ORDENADO);
+		dataScroll.setValidateArticlesExpected(false);
+		dataScroll.setValidaImgBroken(true);
 		var datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
 		
 		if (channel.isDevice()) {
 			pageGaleriaSteps.backTo1erArticleMobilStep();
 		}
 		int numArticulosPantalla = 
-			pageGaleriaSteps.seleccionaOrdenacionGaleria(FilterOrdenacion.PrecioDesc, nameMenuCamisas);
+			pageGaleriaSteps.seleccionaOrdenacionGaleria(FilterOrdenacion.PRECIO_DESC, nameMenuCamisas);
 		
-		dataScroll.validateArticlesExpected = true;
-		dataScroll.numArticlesExpected = datosScrollFinalGaleria.getArticulosTotalesPagina();
+		dataScroll.setValidateArticlesExpected(true);
+		dataScroll.setNumArticlesExpected(datosScrollFinalGaleria.getArticulosTotalesPagina());
 		pageGaleriaSteps.scrollFromFirstPage(dataScroll);	
 		
-		pageGaleriaSteps.seleccionaOrdenacionGaleria(FilterOrdenacion.PrecioAsc, nameMenuCamisas, numArticulosPantalla);
+		pageGaleriaSteps.seleccionaOrdenacionGaleria(FilterOrdenacion.PRECIO_ASC, nameMenuCamisas, numArticulosPantalla);
 		pageGaleriaSteps.scrollFromFirstPage(dataScroll);
 		pageGaleriaSteps.selecColorFromArtGaleriaStep(1, 2);
 		pageGaleriaSteps.selecArticuloGaleriaStep(1);

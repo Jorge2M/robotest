@@ -55,7 +55,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	@Override
 	public boolean isVisibleSubMenus() {
 		return new SecMultiFiltrosDevice()
-				.isAvailableFiltros(FiltroMobil.Familia, menu.getSubMenus());
+				.isAvailableFiltros(FiltroMobil.FAMILIA, menu.getSubMenus());
 	}
 
 	private void clickGroup() {

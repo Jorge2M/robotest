@@ -5,9 +5,9 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.ficha.beans.DataFoto;
 import com.mng.robotest.domains.ficha.pageobjects.SecFotosNew;
-import com.mng.robotest.domains.ficha.pageobjects.TipoImagenProducto;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.mng.robotest.domains.ficha.pageobjects.TipoImagenProducto.*;
 
 public class SecFotosNewSteps extends StepBase {
 
@@ -23,15 +23,15 @@ public class SecFotosNewSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		DataFoto dataFoto = secFotosNew.getDataFoto(1, 1);
 	 	checks.add(
-			"La 1a foto es de tipo <b>" + TipoImagenProducto.DETALLES + " o " + 
-										  TipoImagenProducto.DETALLES_9 + " o " +
-										  TipoImagenProducto.OUTFIT + " o " + 
-										  TipoImagenProducto.BODEGON + "</b>",
+			"La 1a foto es de tipo <b>" + DETALLES + " o " + 
+										  DETALLES_9 + " o " +
+										  OUTFIT + " o " + 
+										  BODEGON + "</b>",
 			dataFoto!=null && (
-			dataFoto.typeImage==TipoImagenProducto.DETALLES || 
-			dataFoto.typeImage==TipoImagenProducto.DETALLES_9 || 
-			dataFoto.typeImage==TipoImagenProducto.OUTFIT || 
-			dataFoto.typeImage==TipoImagenProducto.BODEGON));
+			dataFoto.getTypeImage()==DETALLES || 
+			dataFoto.getTypeImage()==DETALLES_9 || 
+			dataFoto.getTypeImage()==OUTFIT || 
+			dataFoto.getTypeImage()==BODEGON));
 	 	
 	 	return checks;
 	}

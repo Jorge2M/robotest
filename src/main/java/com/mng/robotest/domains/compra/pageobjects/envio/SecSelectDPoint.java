@@ -140,9 +140,9 @@ public class SecSelectDPoint extends PageBase {
 		for (int i=0; i<seconds; i++) {
 			try {
 				DataDeliveryPoint dataDp = getDataDeliveryPointSelected();
-				if (dataSearchDp.typeData == PROVINCIA) {
-					String provincia = dataSearchDp.data;
-					String provinciaLow = dataSearchDp.data.toLowerCase();
+				if (dataSearchDp.getTypeData() == PROVINCIA) {
+					String provincia = dataSearchDp.getData();
+					String provinciaLow = dataSearchDp.getData().toLowerCase();
 					String prov1rstLetterCapital = provinciaLow.substring(0, 1).toUpperCase() + provinciaLow.substring(1);
 					if (dataDp.getCPandPoblacion().contains(provincia) || 
 						dataDp.getCPandPoblacion().contains(prov1rstLetterCapital)) {
@@ -150,7 +150,7 @@ public class SecSelectDPoint extends PageBase {
 					}
 				}
 				else { 
-					if (dataDp.getCodPostal().contains(dataSearchDp.data)) {
+					if (dataDp.getCodPostal().contains(dataSearchDp.getData())) {
 						return true;
 					}
 				}

@@ -1,17 +1,13 @@
 package com.mng.robotest.test.pageobject.shop.filtros;
 
-import java.util.Arrays;
 import java.util.List;
 
 public enum FilterOrdenacion {
-	PrecioAsc("scendente", "asc"), 
-	PrecioDesc("escendente", "desc"), 
-	TemporadaAsc("", ""), 
-	TemporadaDesc("", ""),  
-	BloqueTemporadas_3y4_despues_la_5("", "", Arrays.asList(3,4)),
-	BloqueTemporada_5_despues_la_3y4("", "", Arrays.asList(5)),
-	Temporada4andAfter2and3("", ""),
-	NOordenado("", "");
+	PRECIO_ASC("scendente", "asc"), 
+	PRECIO_DESC("escendente", "desc"), 
+	TEMPORADA_ASC("", ""), 
+	TEMPORADA_DESC("", ""),  
+	NO_ORDENADO("", "");
 	
 	String valueForDesktop;
 	String valueForMobil;

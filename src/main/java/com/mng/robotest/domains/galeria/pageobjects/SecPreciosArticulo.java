@@ -73,14 +73,14 @@ public class SecPreciosArticulo extends PageBase {
 	public String getAnyPrecioNotInOrder(FilterOrdenacion typeOrden, List<WebElement> listArticles) throws Exception {
 		List<WebElement> listaPreciosPrendas = getListaPreciosPrendas(listArticles);
 		float precioAnt = 0;
-		if (typeOrden==FilterOrdenacion.PrecioDesc) {
+		if (typeOrden==FilterOrdenacion.PRECIO_DESC) {
 			precioAnt = 9999999;
 		}
 
 		for (WebElement prendaPrecio : listaPreciosPrendas) {
 			String entero = prendaPrecio.getText();
 			float precioActual = Float.parseFloat(entero.replace(",",".").replaceAll("[^\\d.]", ""));
-			if (typeOrden==FilterOrdenacion.PrecioAsc) {
+			if (typeOrden==FilterOrdenacion.PRECIO_ASC) {
 				if (precioActual < precioAnt) {
 					return (precioAnt + "->" + precioActual);
 				}

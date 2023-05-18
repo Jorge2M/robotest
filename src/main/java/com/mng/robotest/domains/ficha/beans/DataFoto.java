@@ -12,12 +12,12 @@ public class DataFoto {
 	private static final String SRC_REGEX_VIDEOS = ".*?rcs/pics/static/T(.\\d?)/videos/(.*)/(.\\d+)_(.\\d+).(mp4|avi).*";
 	private static final String SRC_REGEX_BASE = ".*?/col_nrf_v3/(.\\d+)_(.\\d+).(jpg|png).*";
 	
-	public String srcFoto = "";
-	public String temporada = ""; 
-	public String size = "";
-	public String referencia = ""; 
-	public String color = "";
-	public TipoImagenProducto typeImage;  
+	private String srcFoto = "";
+	private String temporada = ""; 
+	private String size = "";
+	private String referencia = ""; 
+	private String color = "";
+	private TipoImagenProducto typeImage;  
 	
 	public DataFoto(String srcFoto) {
 		this.srcFoto = srcFoto;
@@ -113,5 +113,29 @@ public class DataFoto {
 		}
 			
 		return TipoImagenProducto.DETALLES;		
+	}
+
+	public String getSrcFoto() {
+		return srcFoto;
+	}
+
+	public String getTemporada() {
+		return temporada;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public TipoImagenProducto getTypeImage() {
+		return typeImage;
 	}
 }

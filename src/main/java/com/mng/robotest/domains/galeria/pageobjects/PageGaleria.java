@@ -242,12 +242,11 @@ public abstract class PageGaleria extends PageBase {
 	 */
 	public String getAnyArticleNotInOrder(FilterOrdenacion typeOrden) throws Exception {
 		switch (typeOrden) {
-			case NOordenado:
+			case NO_ORDENADO:
 				return "";
-			case PrecioAsc, PrecioDesc:
+			case PRECIO_ASC, PRECIO_DESC:
 				return secPrecios.getAnyPrecioNotInOrder(typeOrden, getListaArticulos());
-			case TemporadaDesc, TemporadaAsc, 
-			     BloqueTemporadas_3y4_despues_la_5, BloqueTemporada_5_despues_la_3y4:
+			case TEMPORADA_DESC, TEMPORADA_ASC:
 				return getAnyRefNotInOrderTemporada(typeOrden);
 			default:
 				return "";
@@ -279,22 +278,16 @@ public abstract class PageGaleria extends PageBase {
 				int tempActualInt = Integer.parseInt(tempActual);
 				int tempAnteriorInt = Integer.parseInt(tempAnterior);
 				switch (typeOrden) {
-					case TemporadaDesc:
+					case TEMPORADA_DESC:
 						if (tempActualInt > tempAnteriorInt) {
 							return (refAnterior + "->" + refActual);
 						}
 						break;
-					case TemporadaAsc:
+					case TEMPORADA_ASC:
 						if (tempActualInt < tempAnteriorInt) {
 							return (refAnterior + "->" + refActual);
 						}
 						break;
-					case BloqueTemporadas_3y4_despues_la_5:
-						if ((tempActualInt==1 || tempActualInt==2) && tempAnteriorInt==3) {
-							return (refAnterior + "->" + refActual);
-						}
-						break;
-					case BloqueTemporada_5_despues_la_3y4:
 					default:
 						if (tempActualInt==3 && (tempAnteriorInt==1 || tempAnteriorInt==2)) {
 							return (refAnterior + "->" + refActual);

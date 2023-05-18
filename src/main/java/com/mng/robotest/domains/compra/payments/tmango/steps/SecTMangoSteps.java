@@ -28,12 +28,12 @@ public class SecTMangoSteps {
 	/**
 	 * @param literalTipoPago contiene uno de los valores de SecTMango.pagoHabitual, SecTMango.tresMeses...
 	 */
-	static final String tagDescrPago = "@tagTipoPago";
+	private static final String TAG_DESCR_PAGO = "@tagTipoPago";
 	@Step (
-		description="Seleccionar la forma de pago \"" + tagDescrPago + "\"", 
+		description="Seleccionar la forma de pago \"" + TAG_DESCR_PAGO + "\"", 
 		expected="El resultado es correcto")
 	public void clickTipoPago(TipoPago tipoPago) {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagDescrPago, secTMango.getDescripcionTipoPago(tipoPago));
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_DESCR_PAGO, secTMango.getDescripcionTipoPago(tipoPago));
 		secTMango.clickModalidad(tipoPago);
 	}
 }

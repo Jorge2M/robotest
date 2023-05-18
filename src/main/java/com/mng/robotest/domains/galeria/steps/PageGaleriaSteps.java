@@ -45,6 +45,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion.*;
 
 public class PageGaleriaSteps extends StepBase {
 
@@ -163,8 +164,8 @@ public class PageGaleriaSteps extends StepBase {
 	
 	public DataScroll scrollFromFirstPage() throws Exception {
 		DataForScrollStep data = new DataForScrollStep();
-		data.numPageToScroll = 99;
-		data.ordenacionExpected = FilterOrdenacion.NOordenado;
+		data.setNumPageToScroll(99);
+		data.setOrdenacionExpected(NO_ORDENADO);
 		return scrollFromFirstPage(data);
 	}
 	
@@ -181,7 +182,7 @@ public class PageGaleriaSteps extends StepBase {
 	public DataScroll scrollFromFirstPage(DataForScrollStep dataForScroll) throws Exception {
 
 		DataScroll datosScroll = null;
-		int pageToScroll = dataForScroll.numPageToScroll;
+		int pageToScroll = dataForScroll.getNumPageToScroll();
 		if (channel.isDevice()) {
 			pageToScroll = 3;
 		}
@@ -200,12 +201,12 @@ public class PageGaleriaSteps extends StepBase {
 		if (pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
 			checkAreMoreArticlesThatInitially(datosScroll.getArticulosMostrados(), numArticulosInicio);
 		}
-		if (dataForScroll.ordenacionExpected != FilterOrdenacion.NOordenado) {
-			checkArticlesOrdered(dataForScroll.ordenacionExpected);
+		if (dataForScroll.getOrdenacionExpected()!=NO_ORDENADO) {
+			checkArticlesOrdered(dataForScroll.getOrdenacionExpected());
 		}
 		checkNotRepeatedArticles();
-		if (dataForScroll.validateArticlesExpected) {
-			checkNumArticlesInScreen(datosScroll.getArticulosTotalesPagina(), dataForScroll.numArticlesExpected);
+		if (dataForScroll.isValidateArticlesExpected()) {
+			checkNumArticlesInScreen(datosScroll.getArticulosTotalesPagina(), dataForScroll.getNumArticlesExpected());
 		}
 		
 		List<GenericCheck> listChecks = new ArrayList<>();
@@ -215,7 +216,7 @@ public class PageGaleriaSteps extends StepBase {
 		listChecks.add(GenericCheck.TEXTS_TRADUCED);
 		listChecks.add(GenericCheck.NET_TRAFFIC);
 		listChecks.add(GenericCheck.GOOGLE_ANALYTICS);
-		if (dataForScroll.validaImgBroken) {
+		if (dataForScroll.isValidaImgBroken()) {
 			listChecks.add(GenericCheck.IMGS_BROKEN);
 		}
 		

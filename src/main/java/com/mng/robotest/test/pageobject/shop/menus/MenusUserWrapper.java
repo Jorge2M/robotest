@@ -97,11 +97,11 @@ public class MenusUserWrapper extends PageBase {
 	private boolean isMenuInStateUntil(MenuUserItem menu, State state, int seconds) {
 		ElementPage menuLink = menu.getLink();
 		switch (menu.getType()) {
-			case IconoCabeceraShop_DesktopMobile:
+			case ICONO_CABECERA_SHOP_DESKTOP_MOBILE:
 				return (secCabecera.getShop_DesktopMobile().isIconoInStateUntil((IconoCabecera)menuLink, state, seconds));
-			case MenuUserDesktop:
+			case MENU_USER_DESKTOP:
 				return (secCabecera.getShop_DesktopMobile().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menuLink, state, seconds));
-			case MenuUserDevice:
+			case MENU_USER_DEVICE:
 				return (new SecMenusUserDevice().isMenuInStateUntil((MenuUserDevice)menuLink, state, seconds));
 			default:
 				return false;
@@ -111,14 +111,14 @@ public class MenusUserWrapper extends PageBase {
 	private void clickMenuAndWait(MenuUserItem menu) {
 		ElementPage menuLink = menu.getLink();
 		switch (menu.getType()) {
-			case IconoCabeceraShop_DesktopMobile:
+			case ICONO_CABECERA_SHOP_DESKTOP_MOBILE:
 				secCabecera.getShop_DesktopMobile().clickIconoAndWait((IconoCabecera)menuLink);
 				break;
-			case MenuUserDesktop:
+			case MENU_USER_DESKTOP:
 				secCabecera.getShop_DesktopMobile().hoverIconForShowUserMenuDesktop();
 				secCabecera.getShop_DesktopMobile().getModalUserSesionDesktop().wait1sForItAndclickMenu((MenuUserDesktop)menuLink);
 				break;
-			case MenuUserDevice:
+			case MENU_USER_DEVICE:
 				new SecMenusUserDevice().clickMenu((MenuUserDevice)menuLink);
 				break;
 		}

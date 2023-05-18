@@ -23,28 +23,28 @@ public class SecBuscadorSteps extends StepBase {
 
 	private final PageGaleria pageGaleria = PageGaleria.getNew(From.BUSCADOR, channel);
 	
-	private static final String TabHTML = "&emsp;";
+	private static final String TAB_HTML = "&emsp;";
 	@Step (
 		description=
 			"Buscar el artículo<br>"+ 
-			TabHTML + "id: <b>#{article.getArticleId()}</b><br>" + 
-			TabHTML + "color: <b>#{article.getColor().getLabel()}</b>", 
+			TAB_HTML + "id: <b>#{article.getArticleId()}</b><br>" + 
+			TAB_HTML + "color: <b>#{article.getColor().getLabel()}</b>", 
 		expected="Aparece la ficha del producto")
 	public void searchArticulo(Article article) {
 		searchArticuloCommon(article);
 	}
 	
-	private static final String TagValuesFilters = "@TagValuesFilters";
+	private static final String TAG_VALUES_FILTERS = "@TagValuesFilters";
 	@Step (
 		description=
 			"Buscar el artículo<br>"+ 
-			TabHTML + "id: <b>#{article.getArticleId()}</b><br>" + 
-			TabHTML + "color: <b>#{article.getColor().getLabel()}</b><br>" +
-			TabHTML + "filters: <b>" + TagValuesFilters + "</b>", 
+			TAB_HTML + "id: <b>#{article.getArticleId()}</b><br>" + 
+			TAB_HTML + "color: <b>#{article.getColor().getLabel()}</b><br>" +
+			TAB_HTML + "filters: <b>" + TAG_VALUES_FILTERS + "</b>", 
 		expected="Aparece la ficha del producto")
 	public void searchArticulo(Article article, List<FilterType> infoFilters) {
 		String filterValues = infoFilters.stream().map(FilterType::name).collect(Collectors.joining(","));
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TagValuesFilters, filterValues);
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_VALUES_FILTERS, filterValues);
 		searchArticuloCommon(article);
 	}
 	

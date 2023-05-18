@@ -43,12 +43,10 @@ public class SecFooter extends PageBase {
 		MANGO_OUTLET(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='outlet' and text()[contains(.,'Mango Outlet')]]", true),
 		
 		PREGUNTAS_FRECUENTES(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='ayuda' and text()[contains(.,'Preguntas Frecuentes')]]", false), 
-		//PEDIDOS(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='pedidos' and text()[contains(.,'Pedidos')]]", false), 
 		ENVIO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='envio' and text()[contains(.,'Envío')]]", false), 
 		FORMAS_DE_PAGO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='pago' and text()[contains(.,'Formas de pago')]]", false), 
 		GUIA_DE_TALLAS(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='guiaTallas']", true),
 		MANGO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='shop' and (text()[contains(.,'MANGO')] or text()[contains(.,'Mango')])]", true); 
-		//TRABAJA_CON_NOSOTROS_OUTLET(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='pieTrabajarNew' and text()[contains(.,'Trabaja')]]", true);
 		
 		List<AppEcom> appList;
 		List<Channel> channel;

@@ -26,17 +26,17 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	
 	@Override
 	public void selectOrdenacion(FilterOrdenacion ordenacion) throws Exception {
-		selectFiltroAndWaitLoad(FiltroMobil.Ordenar, ordenacion.getValueForMobil());
+		selectFiltroAndWaitLoad(FiltroMobil.ORDENAR, ordenacion.getValueForMobil());
 	}
 	
 	@Override
 	public void selectCollection(FilterCollection collection) {
-		selectFiltroAndWaitLoad(FiltroMobil.Coleccion, collection.getValueMobil());
+		selectFiltroAndWaitLoad(FiltroMobil.COLECCION, collection.getValueMobil());
 	}
 	
 	@Override
 	public boolean isCollectionFilterPresent() throws Exception {
-		String xpath = FiltroMobil.Coleccion.getXPathLineaFiltro();
+		String xpath = FiltroMobil.COLECCION.getXPathLineaFiltro();
 		return state(Present, xpath).check();
 	}
 	
@@ -56,7 +56,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	 */
 	@Override
 	public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToFilter) {
-		selectFiltrosAndWaitLoad(FiltroMobil.Colores, Color.getListNamesFiltros(colorsToFilter));
+		selectFiltrosAndWaitLoad(FiltroMobil.COLORES, Color.getListNamesFiltros(colorsToFilter));
 		return pageGaleria.waitForArticleVisibleAndGetNumberOfThem(10);
 	}
 	
@@ -67,11 +67,11 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	
 	@Override
 	public void selectMenu2onLevel(List<String> listMenus) {
-		selectFiltrosAndWaitLoad(FiltroMobil.Familia, listMenus);
+		selectFiltrosAndWaitLoad(FiltroMobil.FAMILIA, listMenus);
 	}
 	@Override
 	public void selectMenu2onLevel(String menuLabel) {
-		selectFiltrosAndWaitLoad(FiltroMobil.Familia, Arrays.asList(menuLabel));
+		selectFiltrosAndWaitLoad(FiltroMobil.FAMILIA, Arrays.asList(menuLabel));
 	}
 	
 	/**
@@ -164,7 +164,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	}
 	
 	private boolean isOpenFiltrosUntil(int seconds) {
-		String xpathLineaOrdenar = FiltroMobil.Ordenar.getXPathLineaFiltro();
+		String xpathLineaOrdenar = FiltroMobil.ORDENAR.getXPathLineaFiltro();
 		return state(Visible, xpathLineaOrdenar).wait(seconds).check();
 	}
 	private boolean isCloseFiltrosUntil(int seconds) {

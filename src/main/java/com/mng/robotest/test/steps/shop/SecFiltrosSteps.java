@@ -59,14 +59,14 @@ public class SecFiltrosSteps extends StepBase {
 	 	return checks;
 	}
 	
-	static final String tagLitMenusToSelect = "@TagLitMenusToSelect";
+	private static final String TAG_LIT_MENUS_TO_SELECT = "@TagLitMenusToSelect";
 	@Step (
-		description="Seleccionar los menús <b>" + tagLitMenusToSelect + "</b>", 
+		description="Seleccionar los menús <b>" + TAG_LIT_MENUS_TO_SELECT + "</b>", 
 		expected="Aparece la galería de artículos",
 		saveNettraffic=SaveWhen.Always)
 	public void selectFiltroMenus(List<MenuLateralDesktop> menusToSelect) {
 		List<String> listMenus = getListMenusStr(menusToSelect);
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagLitMenusToSelect, StringUtils.join(menusToSelect, ","));
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_LIT_MENUS_TO_SELECT, StringUtils.join(menusToSelect, ","));
 		secFiltros.selectMenu2onLevel(listMenus);		
 		new PageGaleriaSteps().validateGaleriaAfeterSelectMenu();
 		GenericChecks.checkDefault();

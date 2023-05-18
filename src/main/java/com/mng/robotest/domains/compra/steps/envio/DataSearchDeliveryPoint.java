@@ -9,21 +9,31 @@ public class DataSearchDeliveryPoint {
 	
 	public enum DataSearchDp { PROVINCIA, CODIGO_POSTAL }
 	
-	public String data;
-	public DataSearchDp typeData;
-	public TipoTransporte tipoTransporte;
+	private final String data;
+	private final DataSearchDp typeData;
+	private final TipoTransporte tipoTransporte;
 		
-	public static DataSearchDeliveryPoint getInstance(Pago pago, AppEcom app, Pais pais) {
-		var dataDp = new DataSearchDeliveryPoint();
-		dataDp.tipoTransporte = pago.getTipoEnvioType(app);
-		dataDp.typeData = pago.getTipoEnvioType(app).getDataSearchDp();
-		if (dataDp.typeData == DataSearchDp.CODIGO_POSTAL) {
-			dataDp.data = pais.getCodpos();
+	public DataSearchDeliveryPoint(Pago pago, AppEcom app, Pais pais) {
+		tipoTransporte = pago.getTipoEnvioType(app);
+		typeData = pago.getTipoEnvioType(app).getDataSearchDp();
+		if (typeData == DataSearchDp.CODIGO_POSTAL) {
+			data = pais.getCodpos();
 		}
 		else {
-			dataDp.data = pago.getProvinciaEnvio();
+			data = pago.getProvinciaEnvio();
 		}
-		
-		return dataDp;
 	}
+
+	public String getData() {
+		return data;
+	}
+
+	public DataSearchDp getTypeData() {
+		return typeData;
+	}
+
+	public TipoTransporte getTipoTransporte() {
+		return tipoTransporte;
+	}
+	
 }

@@ -13,28 +13,6 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 	//El id está en el campo "ID d experimento" del detalle en Google Optimize
 	//Si se quiere activar hay que añadirlo en la clase TestABactive
 
-	New_Registry_MLY_Desktop_PRO (
-		"NEW REGISTRY MLY - Desktop PRO",
-		"7RVVwdg2Q0-tYl1ECEidvg",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"V0-Original", 
-			"V1-Variante1"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop)
-	),
-	
-	New_Registry_MLY_Mobile_PRO (
-		"NEW REGISTRY MLY - Mobile PRO",
-		"U2shAUFFRkKpMfDaesBEZw",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"V0-Original", 
-			"V1-Variante1"),
-		Arrays.asList(Channel.mobile),
-		Arrays.asList(AppEcom.shop)
-	),	
-
 	NUEVO_GUEST_CHECKOUT_PRE (
 		"Kiritaki - Nuevo Guest Checkout (PRE)",
 		"csjJNIYMTv-mNwqN2AuTrg",
@@ -120,50 +98,6 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(AppEcom.shop)
 	),	
 	
-	PDP_Desktop_Size_Selector_PRE(
-		"[PDP][DESKTOP] Size Selector",
-		"CUSxSJA4RfmbbIkYEmmMUA",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"Variante 0 - Original",
-			"Variante 1"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop)
-	),
-
-	PDP_Desktop_Size_Selector_Outlet_PRE(
-		"[PDP][DESKTOP] Size Selector",
-		"plupGFDfRP6MjHjKaCxliQ",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"Variante 0 - Original",
-			"Variante 1"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.outlet)
-	),	
-	
-	PDP_Desktop_Size_Selector_Outlet_PRO(
-		"[PDP][DESKTOP] Size Selector",
-		"ivw-Z5sgQ8GqBtC6TFEJAA",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"Variante 0 - Original",
-			"Variante 1"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.outlet)
-	),	
-	
-	PDP_Desktop_Size_Selector_PRO(
-		"[PDP][DESKTOP] Size Selector",
-		"4pmgwV0pSL6osr9cG8pDPA",
-		Arrays.asList(0,1),
-		Arrays.asList(
-			"Variante 0 - Original",
-			"Variante 1"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop)
-	),
-	
 	PLP_DESKTOP_ESCONDER_MENU_LATERAL_PRE(
 		"[PLP][DESKTOP] Esconder menú lateral",
 		"7_ZNHkZORjWkWERWxvAU7w",
@@ -174,19 +108,6 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(Channel.desktop),
 		Arrays.asList(AppEcom.shop)
 	);
-
-	
-
-//	 ES_SHOP_XXX_EMP_vs_FH_Search_Desktop (
-//		"PLP - Desktop - Navigation filters",
-//		"hs4jDFfIRamVMIScEgesvw",
-//		Arrays.asList(0,1),
-//		Arrays.asList(
-//			"Variante 0 - Original",
-//			"Variante 1 - Filtros superiores"),
-//		Arrays.asList(Channel.desktop),
-//		Arrays.asList(AppEcom.shop)
-//	);
 
 	private String idExperiment;
 	private List<Integer> variantesInt;

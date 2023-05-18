@@ -41,9 +41,9 @@ public class MenuUserItem {
 	}
 	
 	public enum TypeMenu {
-		IconoCabeceraShop_DesktopMobile,
-		MenuUserDesktop,
-		MenuUserDevice
+		ICONO_CABECERA_SHOP_DESKTOP_MOBILE,
+		MENU_USER_DESKTOP,
+		MENU_USER_DEVICE
 	}
 	
 	private final UserMenu menu;
@@ -72,13 +72,13 @@ public class MenuUserItem {
 	
 	private TypeMenu getTypeMenu(ElementPage link) {
 		if (link instanceof IconoCabecera) {
-			return TypeMenu.IconoCabeceraShop_DesktopMobile;
+			return TypeMenu.ICONO_CABECERA_SHOP_DESKTOP_MOBILE;
 		}
 		if (link instanceof MenuUserDesktop) {
-			return TypeMenu.MenuUserDesktop;
+			return TypeMenu.MENU_USER_DESKTOP;
 		}
 		if (link instanceof MenuUserDevice) {
-			return TypeMenu.MenuUserDevice;
+			return TypeMenu.MENU_USER_DEVICE;
 		}
 		return null;
 	}

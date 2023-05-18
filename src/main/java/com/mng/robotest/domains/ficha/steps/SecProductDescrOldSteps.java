@@ -29,17 +29,17 @@ public class SecProductDescrOldSteps {
 		return checks;
 	}
 	
-	static final String tagInitStatePanel = "@TagInitState";
-	static final String tagFinalStateExpected = "@TagFinalState";
+	private static final String TAG_INIT_STATE_PANEL = "@TagInitState";
+	private static final String TAG_FINAL_STATE_EXPECTED = "@TagFinalState";
 	@Step (
-		description="Seleccionar el panel <b>#{typePanel}</b> (en estado inicial: " + tagInitStatePanel + ")",
-		expected="La pestaña queda en estado " + tagFinalStateExpected)
+		description="Seleccionar el panel <b>#{typePanel}</b> (en estado inicial: " + TAG_INIT_STATE_PANEL + ")",
+		expected="La pestaña queda en estado " + TAG_FINAL_STATE_EXPECTED)
 	public void selectPanel(TypePanel typePanel) {
 		TypeStatePanel statePanelIni = secProductDescrOld.getStatePanel(typePanel);
 		TypeStatePanel stateExpectedAfterClick = secProductDescrOld.getStatePanelAfterClick(statePanelIni);
 		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(tagInitStatePanel, statePanelIni.toString());
-		step.replaceInExpected(tagFinalStateExpected, stateExpectedAfterClick.toString());
+		step.replaceInDescription(TAG_INIT_STATE_PANEL, statePanelIni.toString());
+		step.replaceInExpected(TAG_FINAL_STATE_EXPECTED, stateExpectedAfterClick.toString());
 		
 		secProductDescrOld.clickPanel(typePanel);
 		int seconds = 1;

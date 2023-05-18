@@ -21,9 +21,9 @@ public class Gpo004 extends TestBase {
 	private final DataForScrollStep dataScroll = new DataForScrollStep();
 	
 	public Gpo004() {
-		dataScroll.ordenacionExpected = FilterOrdenacion.NOordenado;
-		dataScroll.validateArticlesExpected = false;
-		dataScroll.validaImgBroken = true;
+		dataScroll.setOrdenacionExpected(FilterOrdenacion.NO_ORDENADO);
+		dataScroll.setValidateArticlesExpected(false);
+		dataScroll.setValidaImgBroken(true);
 	}
 	
 	@Override
@@ -61,7 +61,7 @@ public class Gpo004 extends TestBase {
 	}
 
 	private void scrollToThirdPage() throws Exception {
-		dataScroll.numPageToScroll = 3;
+		dataScroll.setNumPageToScroll(3);
 		pageGaleriaSteps.scrollFromFirstPage(dataScroll);
 	}
 
@@ -71,7 +71,7 @@ public class Gpo004 extends TestBase {
 	}
 
 	private int scrollToLastAndSelectArticle() throws Exception {
-		dataScroll.numPageToScroll = PageGaleria.MAX_PAGE_TO_SCROLL;
+		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
 		DataScroll datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
 		LocationArticle loc1rsArticleLastPage = LocationArticle.getInstanceInPage(datosScrollFinalGaleria.getPaginaFinal(), 1);
 		pageGaleriaSteps.selectArticulo(loc1rsArticleLastPage);
@@ -83,9 +83,9 @@ public class Gpo004 extends TestBase {
 	}
 
 	private void scrollToLastAndCheck(int articulosTotalesPagina) throws Exception {
-		dataScroll.validateArticlesExpected = true;
-		dataScroll.numArticlesExpected = articulosTotalesPagina;
-		dataScroll.validaImgBroken = false;
+		dataScroll.setValidateArticlesExpected(true);
+		dataScroll.setNumArticlesExpected(articulosTotalesPagina);
+		dataScroll.setValidaImgBroken(false);
 		pageGaleriaSteps.scrollFromFirstPage(dataScroll);
 	}
 

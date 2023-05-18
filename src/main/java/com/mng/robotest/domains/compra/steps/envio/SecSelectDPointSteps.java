@@ -25,11 +25,11 @@ public class SecSelectDPointSteps extends StepBase {
 		expected="Aparecen puntos de recogida de " + TAG_SEARCH_DP)
 	public void searchPoblacion(DataSearchDeliveryPoint dataSearchDp) {
 		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(TAG_SEARCH_DP, dataSearchDp.data);
-		step.replaceInExpected(TAG_SEARCH_DP, dataSearchDp.data);
+		step.replaceInDescription(TAG_SEARCH_DP, dataSearchDp.getData());
+		step.replaceInExpected(TAG_SEARCH_DP, dataSearchDp.getData());
 		
-		TypeDeliveryPoint typeDp = dataSearchDp.tipoTransporte.getTypeDeliveryPoint();
-		modalDroppoints.sendProvincia(dataSearchDp.data);
+		TypeDeliveryPoint typeDp = dataSearchDp.getTipoTransporte().getTypeDeliveryPoint();
+		modalDroppoints.sendProvincia(dataSearchDp.getData());
 		PageObjTM.waitForPageLoaded(driver, 5);   
 
 		checkDroppointSelectedContainsDirecc(dataSearchDp);
@@ -41,11 +41,11 @@ public class SecSelectDPointSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		State stateVal = Warn;
-		if (dataSearchDp.typeData==DataSearchDp.CODIGO_POSTAL) {
+		if (dataSearchDp.getTypeData()==DataSearchDp.CODIGO_POSTAL) {
 			stateVal = Info;
 		}
 	 	checks.add(
-			"La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.data + 
+			"La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.getData() + 
 			"</b> (lo esperamos hasta " + seconds + " segundos)",
 			modalDroppoints.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, seconds), stateVal);
 	 	

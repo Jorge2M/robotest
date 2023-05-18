@@ -53,14 +53,14 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 		return checks;
 	}
 	
-	static final String tagPosibleBanks = "@TagPosibleBanks";
+	private static final String TAG_POSSIBLE_BANKS = "@TagPosibleBanks";
 	@Step (
-		description="Seleccionamos un banco de test (contiene alguno de los textos " + tagPosibleBanks + ") y pulsamos <b>Pay</b>", 
+		description="Seleccionamos un banco de test (contiene alguno de los textos " + TAG_POSSIBLE_BANKS + ") y pulsamos <b>Pay</b>", 
 		expected="Aparece la página de test para la confirmación")
 	public void selectTestBankAndPay(String importeTotal) {
 		List<String> listOfPosibleValues = new ArrayList<>();
 		listOfPosibleValues.addAll(Arrays.asList("TestPay", "Fio banka"));
-		TestMaker.getCurrentStepInExecution().replaceInDescription(tagPosibleBanks, String.join(",", listOfPosibleValues));
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_POSSIBLE_BANKS, String.join(",", listOfPosibleValues));
 
 		pageTrustpaySelectBank.selectBankThatContains(listOfPosibleValues);
 		pageTrustpaySelectBank.clickButtonToContinuePay();

@@ -42,7 +42,7 @@ public class ModalDroppointsSteps extends StepBase {
 	
 	public void fluxSelectDroppoint(DataPago dataPago) {
 		Pago pago = dataPago.getDataPedido().getPago();
-		DataSearchDeliveryPoint dataSearchDp = DataSearchDeliveryPoint.getInstance(pago, app, dataTest.getPais());
+		DataSearchDeliveryPoint dataSearchDp = new DataSearchDeliveryPoint(pago, app, dataTest.getPais());
 		secSelectDPointSteps.searchPoblacion(dataSearchDp);
 		DataDeliveryPoint dataDp = secSelectDPointSteps.clickDeliveryPointAndGetData(2);
 		dataPago.getDataPedido().setTypeEnvio(pago.getTipoEnvioType(app));
