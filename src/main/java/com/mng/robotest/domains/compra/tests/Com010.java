@@ -1,5 +1,6 @@
 package com.mng.robotest.domains.compra.tests;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
@@ -51,7 +53,8 @@ public class Com010 extends TestBase {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkPagos()
 				.checkMisCompras()
-				//.checkManto(!channel.isDevice())
+				//TODO lo activamos temporalmente
+				.checkManto(!channel.isDevice())
 				.emaiExists()
 				.checkPromotionalCode(testVale || empleado)
 				.userIsEmployee(empleado).build();
@@ -62,15 +65,16 @@ public class Com010 extends TestBase {
 			.build()
 			.checkout(From.BOLSA);
 		
-//		if (dataPago.getFTCkout().checkManto) {
-//			List<CheckPedido> listChecks = new ArrayList<>(Arrays.asList(
-//				CheckPedido.CONSULTAR_BOLSA, 
-//				CheckPedido.CONSULTAR_PEDIDO));
+		//TODO lo activamos temporalmente
+		if (dataPago.getFTCkout().checkManto) {
+			List<CheckPedido> listChecks = new ArrayList<>(Arrays.asList(
+				CheckPedido.CONSULTAR_BOLSA, 
+				CheckPedido.CONSULTAR_PEDIDO));
 //			if (checkAnulaPedido) {
 //				listChecks.add(CheckPedido.ANULAR);
 //			}
-//			checkPedidosManto(listChecks, dataPago.getListPedidos());
-//		}
+			checkPedidosManto(listChecks, dataPago.getListPedidos());
+		}
 	}
 	
 	private boolean testVale(boolean testVale) {
