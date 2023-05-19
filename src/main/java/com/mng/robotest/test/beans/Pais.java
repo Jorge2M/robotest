@@ -53,7 +53,6 @@ public class Pais implements Serializable {
 	String emailuser;
 	String passuser;
 	String mobiluser;
-	String mvp;
 	String micuenta;
 	
 	@XmlElement(name="metodopago") 
@@ -201,20 +200,6 @@ public class Pais implements Serializable {
 		return listApps;
 	}   
 
-	public String getmvp() {
-		return this.mvp;
-	}
-
-	@XmlElement(name="mvp")
-	public void setmvp(String mvp) {
-		this.mvp = mvp;
-	}
-	
-	public boolean isCheckoutMvp() {
-		return (getmvp()!=null && 
-				"S".compareTo(getmvp())==0);
-	}	
-	
 	public boolean newregister() {
 		return this.newregister.compareTo("S")==0;
 	}

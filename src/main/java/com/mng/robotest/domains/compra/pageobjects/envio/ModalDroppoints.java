@@ -22,7 +22,7 @@ public class ModalDroppoints extends PageBase {
 	private static final String XPATH_CP_INPUT_BOX = "//div[@class='list__container']//input[@class[contains(.,searchBoxInput)]]";
 	
 	private String getXPathPanelGeneral() {
-		if (channel==Channel.mobile || dataTest.getPais().isCheckoutMvp()) {
+		if (channel==Channel.mobile) {
 			return XPATH_PANEL_GENERAL_MOVIL;
 		}
 		return XPATH_PANEL_GENERAL_DESKTOP;

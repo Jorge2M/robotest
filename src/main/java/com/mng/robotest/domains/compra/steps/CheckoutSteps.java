@@ -78,7 +78,7 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	public void validateIsFirstPage(boolean userLogged) {
-		if (isCheckoutMobile()) {
+		if (isMobile()) {
 			page1MobilCheckSteps.validateIsPage(userLogged);
 		} else {
 			page1DktopCheckSteps.validateIsPageOK();
@@ -257,14 +257,14 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	public void validateSelectPagoTRJintegrada(Pago pago) {
-		if (!isCheckoutMobile()) {
+		if (!isMobile()) {
 			validateIsPresentButtonCompraDesktop();
 		}
 		getSecTarjetaPciSteps().validateIsSectionOk(pago);
 	}
 	
 	public boolean validateSelectPagoNoTRJintegrada(Pago pago) {
-		if (!isCheckoutMobile()) {
+		if (!isMobile()) {
 			validateIsPresentButtonCompraDesktop();
 		}
 		return checkIsVisibleTextUnderPayment(pago.getNombreInCheckout(channel, app), pago, 2);
@@ -427,7 +427,7 @@ public class CheckoutSteps extends StepBase {
 	}
 		
 	public void validaResultImputPromoEmpl() {
-		if (isCheckoutMobile()) {
+		if (isMobile()) {
 			page1MobilCheckSteps.validaResultImputPromoEmpl();
 		} else {
 			page1DktopCheckSteps.validaResultImputPromoEmpl();
@@ -467,7 +467,7 @@ public class CheckoutSteps extends StepBase {
 		description="Seleccionamos el botón para aplicar el descuento de Loyalty Points",
 		expected="Se aplica correctamente el descuento")
 	public void loyaltyPointsApply() {
-		if (isCheckoutMobile()) {
+		if (isMobile()) {
 			loyaltyPointsApplyMobil();
 		} else {
 			loyaltyPointsApplyDesktop();
@@ -521,7 +521,7 @@ public class CheckoutSteps extends StepBase {
 		return false;
 	}
 	
-	private boolean isCheckoutMobile() {
-		return (channel==Channel.mobile || dataTest.getPais().isCheckoutMvp());
+	private boolean isMobile() {
+		return channel==Channel.mobile;
 	}	
 }

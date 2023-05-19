@@ -69,7 +69,7 @@ public class SecMetodoEnvioSteps extends StepBase {
 		alterTypeEnviosAccordingContext(dataPago);
 		Pago pago = dataPago.getDataPedido().getPago();
 		TipoTransporte tipoTransporte = pago.getTipoEnvioType(app);
-		if (channel==Channel.mobile || dataTest.getPais().isCheckoutMvp()) {
+		if (channel==Channel.mobile) {
 			new Page1EnvioCheckoutMobilSteps().selectMetodoEnvio(tipoTransporte, nombrePago, dataPago);
 		} else {
 			selectMetodoEnvio(tipoTransporte, nombrePago, dataPago);

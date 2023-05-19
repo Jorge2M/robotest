@@ -10,15 +10,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 
 public enum TestABGoogleExpImpl implements TestABGoogleExp {
 
-	MVP_CHECKOUT_DESKTOP(
-		"t8C28DR0Sb2tRepMbNXt4A",
-		"sub_8rhk5o_wc6i3wg92ap",
-		Arrays.asList(0,1),
-		Arrays.asList("V0-Original", "V1-MVP Checkout"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop, AppEcom.votf)
-	),
-	
 	SELECTOR_FICHA_MOBIL(
 		"vpc6sLvUTbObe3jyJ97xzQ",
 		"sub_8rhk5o_wc6i3wg92ap",

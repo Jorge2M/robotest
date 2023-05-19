@@ -45,8 +45,8 @@ public class Compra {
 	
 	@Test (
 		groups={"Compra", "Checkout", "Canal:desktop_App:shop"}, alwaysRun=true,
-		description="Compra Serbia [usuario registrado] [MVP Checkout]")
-	public void COM008_Compra_MVP() throws Exception {
+		description="Compra Serbia [usuario registrado]")
+	public void COM008_Compra_Serbia() throws Exception {
 		new Com008().execute();
 	}
 	
