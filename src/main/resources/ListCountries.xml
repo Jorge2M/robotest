@@ -3154,7 +3154,7 @@ where
 <telefono>2014920975</telefono>
 <address>538 Clinton St #4</address>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop,outlet,votf</tiendas_online>
 <newregister>S</newregister>
 <shoponline>
 <linea id="SHE"       		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>

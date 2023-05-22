@@ -104,45 +104,4 @@ public class PaisGetter {
 		return response;
 	}
 
-//	public static boolean isTop(String codigoPais, int numTops) {
-//		ArrayList<String> listTop10 = new ArrayList<>();
-//		listTop10.add("001"); //España (Península y Baleares)
-//		listTop10.add("004"); //Deutschland
-//		listTop10.add("006"); //United Kingdom
-//		listTop10.add("011"); //France métropolitaine
-//		listTop10.add("052"); //Türkiye
-//		listTop10.add("400"); //USA
-//		listTop10.add("003"); //Nederland
-//		listTop10.add("060"); //Poland
-//		listTop10.add("005"); //Italia
-//		listTop10.add("075"); //Россия (Российская Федерация)
-//		boolean encontrado = false;
-//		for (int i=0; i<numTops && i<10; i++) {
-//			if (listTop10.get(i).compareTo(codigoPais)==0) {
-//				encontrado = true;
-//			}
-//		}
-//
-//		return encontrado;
-//	}
-//
-//	public static boolean isTop10(int codigo_pais) {	
-//		ArrayList<Integer> listTop = new ArrayList<>();
-//		listTop.add(Integer.valueOf(004)); //Deutschland");
-//		listTop.add(Integer.valueOf(001)); //España (Península y Baleares)");
-//		listTop.add(Integer.valueOf(011)); //France métropolitaine");
-//		listTop.add(Integer.valueOf(003)); //Nederland");
-//		listTop.add(Integer.valueOf(060)); //Poland ");
-//		listTop.add(Integer.valueOf(052)); //Türkiye");
-//		listTop.add(Integer.valueOf(006)); //United Kingdom");
-//		listTop.add(Integer.valueOf(400)); //USA ");
-//		listTop.add(Integer.valueOf(075)); //Россия (Российская Федерация)");
-//		listTop.add(Integer.valueOf(720)); //中国");
-//		boolean encontrado = false;
-//		if (listTop.contains(Integer.valueOf(codigo_pais))) {
-//			encontrado = true;
-//		}
-//		return encontrado;
-//	}
-	
 }

@@ -11,10 +11,10 @@ public class PageIniciarSesionBolsaMobile extends PageBase {
 	private static final String XPATH_INICIAR_SESION_BUTTON = "//*[@data-testid[contains(.,'login.loginButton.login')]]";
 	private static final String XPATH_HAS_OLVIDADO_TU_CONTRASENA = "//*[@data-testid[contains(.,'resetPassword')]]";
 	
-	private static final String XPATH_USER_INPUT_ACC = "//*[@data-testid[contains(.,'login.emailInput')]]";
-	private static final String XPATH_PASSWORD_INPUT_ACC = "//*[@data-testid[contains(.,'login.passInput')]]";
-	private static final String XPATH_INICIAR_SESION_BUTTON_ACC = "//*[@data-testid[contains(.,'login.loginButton.login')]]";
-	private static final String XPATH_HAS_OLVIDADO_TU_CONTRASENA_ACC = "//*[@data-testid[contains(.,'resetPassword')]]";	
+//	private static final String XPATH_USER_INPUT_ACC = "//*[@data-testid[contains(.,'login.emailInput')]]";
+//	private static final String XPATH_PASSWORD_INPUT_ACC = "//*[@data-testid[contains(.,'login.passInput')]]";
+//	private static final String XPATH_INICIAR_SESION_BUTTON_ACC = "//*[@data-testid[contains(.,'login.loginButton.login')]]";
+//	private static final String XPATH_HAS_OLVIDADO_TU_CONTRASENA_ACC = "//*[@data-testid[contains(.,'resetPassword')]]";	
 	
 	public boolean isPage(int seconds) {
 		return 

@@ -272,7 +272,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public boolean isHeaderArticlesVisible(String textHeader) {
 		if (state(Visible, XPATH_HEADER_ARTICLES).check()) {
-			return getElement(XPATH_HEADER_ARTICLES).getText().contains(textHeader);
+			return getElement(XPATH_HEADER_ARTICLES).getText().toLowerCase().contains(textHeader.toLowerCase());
 		}
 		return false;
 	}

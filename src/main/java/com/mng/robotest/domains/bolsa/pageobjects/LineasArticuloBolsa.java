@@ -32,22 +32,18 @@ public class LineasArticuloBolsa extends PageBase {
 		}
 	}
 	
-	//TODO cuando se active la nueva bolsa en pro se puede eliminar el segundo xpath
 	private static final String XPATH_ITEM = "//li[@data-testid='bag.item']";
-	private static final String XPATH_ITEM_OLD = "//div[@class[contains(.,'layout-row')]]";
 	
 	private static final String XPATH_LINK_RELATIVE_ARTICLE = ".//img";
 	private static final String XPATH_NOMBRE_RELATIVE_ARTICLE = ".//*[@data-testid='bag.item.detail.button']";
 	private static final String XPATH_CANTIDAD_RELATIVE_ARTICLE = ".//*[@data-testid='bag.item.quantity']";
 	
 	//TODO pedir @data-testid
-	private static final String XPATH_TALLA_ALF_RELATIVE_ARTICLE = ".//span[text()[contains(.,'Talla:')]]/../span[2]";
+	private static final String XPATH_TALLA_ALF_RELATIVE_ARTICLE = XPATH_CANTIDAD_RELATIVE_ARTICLE + "/../following-sibling::p";
 	
 	//TODO pedir @data-testid
 	private static final String XPATH_COLOR_RELATIVE_ARTICLE = XPATH_NOMBRE_RELATIVE_ARTICLE + "/..//p[3]";
-
 	private static final String XPATH_PRECIO_RELATIVE_ARTICLE = ".//*[@data-testid[contains(.,'currentPrice')]]";
-	
 	private static final String TAG_REF = "[TAGREF]";
 	private static final String XPATH_LINK_ITEM_REF = XPATH_ITEM + "//img[@src[contains(.,'" + TAG_REF + "')]]";
 	private static final String XPATH_ITEM_REF = XPATH_LINK_ITEM_REF + "/ancestor::li";
@@ -96,9 +92,8 @@ public class LineasArticuloBolsa extends PageBase {
 		return (ImporteScreen.getFloatFromImporteMangoScreen(importe));		
 	}
 	
-	//TODO cuando suba la nueva bolsa quitar el XPATH_ITEM_OLD
 	private String getXPathItem(int position) {
-		return "(" + XPATH_ITEM + " | " + XPATH_ITEM_OLD + ")[" + position + "]";
+		return "(" + XPATH_ITEM + ")[" + position + "]";
 	}
 	
 	private String getXPathLinkBorrarArt() {

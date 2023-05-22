@@ -106,7 +106,7 @@ public class ValidatorContentBolsa extends PageBase {
 	}
 	
 	private ArticuloDataBolsaScreen getArticleInScreenByReference(String reference) {
-		for (ArticuloDataBolsaScreen articuloScreen : linesArticlesInScreen) {
+		for (var articuloScreen : linesArticlesInScreen) {
 			if (articuloScreen.getReferencia().equals(reference)) {
 				return articuloScreen;
 			}

@@ -219,12 +219,9 @@ public class SecBolsaSteps extends StepBase {
 		listToCheck.clear();
 		listToCheck.add(TALLA);
 		boolean tallaNumOk = checkerBag.allArticlesExpectedDataAreInScreen(listToCheck);
-		listToCheck.clear();
-		listToCheck.add(TALLA);
-		boolean tallaAlfOk = checkerBag.allArticlesExpectedDataAreInScreen(listToCheck);
 		checks.add(
 			"Cuadran las tallas de los artículos existentes en la bolsa",
-			tallaNumOk || tallaAlfOk, Warn);
+			tallaNumOk, Warn);
 		
 		listToCheck.clear();
 		listToCheck.add(PRECIO_TOTAL);
