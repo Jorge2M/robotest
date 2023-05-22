@@ -1,10 +1,13 @@
 package com.mng.robotest.test.appshop.paisaplicavale;
 
+import java.util.Arrays;
+
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.datastored.DataPago;
+import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 
@@ -26,7 +29,10 @@ public class Chk001 extends TestBase {
 			.checkout(From.PREHOME);
 		
 		if (dataPago.getFTCkout().checkManto) {
-			checkPedidosManto(dataPago.getListPedidos());
+			var listChecks = Arrays.asList(
+					CheckPedido.CONSULTAR_BOLSA, 
+					CheckPedido.CONSULTAR_PEDIDO);
+			checkPedidosManto(listChecks, dataPago.getListPedidos());
 		}		
 	}
 

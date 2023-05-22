@@ -2,11 +2,9 @@ package com.mng.robotest.domains.login.pageobjects;
 
 import com.mng.robotest.domains.bolsa.pageobjects.PageIniciarSesionBolsaMobile;
 
-public class PageIdentificacionNew extends PageIdentificacion {
+public class PageLogin extends PageIdentificacion {
 
 	private PageIniciarSesionBolsaMobile pageIniciarSesionBolsaMobile = new PageIniciarSesionBolsaMobile();
-	
-	protected PageIdentificacionNew() {}
 	
 	@Override
 	public boolean isPage(int seconds) {

@@ -22,12 +22,11 @@ public class LTSecFooter extends LegalTextsPage {
 	);
 	
 	private static final LegalTextGroup TURQUIA_LT = LegalTextGroup.from(
-		//TODO pantalla <> confluence <> lokalise
 		"FOOTER (TURQUIA)",
 		Arrays.asList(
 			new LegalText(
-				"subscribe.turkey.legal.text",
-				"E-postanızı yazarak kişisel verilerin işlenmesini ve Mango'dan Gizlilik Politikasına uygun olarak iletişim almayı kabul ediyorsunuz",
+				"subscribe.noRgpd.legal.text",
+				"Kayıt olarak Gizlilik Politikamızı ve Promosyon şartlarını kabul etmiş oluyorsunuz.",
 				"//*[@data-testid='consent-tr']")
 		)
 	);

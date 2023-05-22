@@ -152,8 +152,8 @@ public class LTPageRegistroInitialShop extends LegalTextsPage {
 		Arrays.asList(
 			new LegalText(
 				"register.legal_check.privacy_policy",
-				"Gizlilik Politikasını ve Mango üye sözleşmesini kabul ediyorum",
-				"//p")
+				"Kvkk aydinlatma metni ve Mango üye sözleşmesini kabul ediyorum",
+				"//*[@id[contains(.,'privacy_policy')]]")
 		)
 	);	
 	

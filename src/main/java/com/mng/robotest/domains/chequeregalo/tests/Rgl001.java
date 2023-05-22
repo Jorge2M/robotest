@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.chequeregalo.tests;
 
 import java.util.Arrays;
-import java.util.List;
 
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
@@ -81,7 +80,7 @@ public class Rgl001 extends TestBase {
 	}	
 
 	private void checkPedido() throws Exception {
-		List<CheckPedido> listChecks = Arrays.asList(
+		var listChecks = Arrays.asList(
 			CheckPedido.CONSULTAR_BOLSA, 
 			CheckPedido.CONSULTAR_PEDIDO,
 			CheckPedido.ANULAR); 

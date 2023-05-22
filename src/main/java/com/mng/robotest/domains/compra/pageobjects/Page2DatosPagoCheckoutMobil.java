@@ -184,7 +184,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		despliegaMetodosPago();
 		moveToFirstMetodoPagoLine();
 		
-		PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper();
+		var pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.waitUntilNoDivLoading(2);
 		clickMetodoPagoAndWait(nombrePago);
 		pageCheckoutWrapper.waitUntilNoDivLoading(10);

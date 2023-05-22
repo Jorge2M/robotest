@@ -19,21 +19,6 @@ public abstract class PageIdentificacion extends PageBase {
 	
 	private static final String XPATH_TAB_REGISTRATE = "//p[@class[contains(.,'registerTab')]]";
 	
-	//TODO eliminar PageIdentificacionOld cuando se haya eliminado en PRO y Outlet (3-05-2023)
-	public static PageIdentificacion make() {
-		var pageOld = new PageIdentificacionOld();
-		var pageNew = new PageIdentificacionNew();
-		for (int seconds=0; seconds<3; seconds++) {
-			if (pageOld.isPage(seconds)) {
-				return pageOld;
-			}
-			if (pageNew.isPage(seconds)) {
-				return pageNew;
-			}
-		}
-		return pageOld;
-	}
-	
 	public void clickTabRegistrate() {
 		state(Clickable, XPATH_TAB_REGISTRATE).wait(5).check();
 		click(XPATH_TAB_REGISTRATE).exec();

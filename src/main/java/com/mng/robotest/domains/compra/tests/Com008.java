@@ -23,7 +23,6 @@ public class Com008 extends TestBase {
 	public void execute() throws Exception {
 		accessLoginAndClearBolsa();
 		altaArticulosBolsaAndClickComprar();
-		continueAndUnfoldPayments();
 		if (!isPRO()) {
 			var dataPago = executeVisaPayment();
 			checkMisCompras(dataPago);
@@ -34,10 +33,6 @@ public class Com008 extends TestBase {
 		access();
 		new SecBolsaSteps().clear();
 	}
-	
-	private void continueAndUnfoldPayments() {
-		checkoutSteps.goToMetodosPagoMobile();
-	}	
 	
 	public void checkIsPresentImportInBothCurrencies() throws Exception {
 		checkoutSteps.isCroatiaImportInBothCurrencies();

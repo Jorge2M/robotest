@@ -41,7 +41,6 @@ public class TextosLegales {
 	//NOTA: el Suscripción no lo puedo implementar porque es exclusivo de apps (Comenta Cele que en algún momento se extenderá a web en algunos puntos)
 	//https://confluence.mango.com/pages/viewpage.action?spaceKey=PIUR&title=Mapeo+de+textos+legales#expand-Suscripcin	
 
-	//TODO el texto que aparece en pantalla no coincide con el del confluence (subscribe.turkey.legal.text)
 	@Test(
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Suscripción Footer y non modal")

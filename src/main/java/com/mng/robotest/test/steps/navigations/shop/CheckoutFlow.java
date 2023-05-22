@@ -34,7 +34,7 @@ import com.mng.robotest.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.domains.compra.steps.Page2IdentCheckoutSteps;
 import com.mng.robotest.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.domains.compra.steps.PageResultPagoTpvSteps;
-import com.mng.robotest.domains.login.pageobjects.PageIdentificacion;
+import com.mng.robotest.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.domains.transversal.acceso.navigations.AccesoFlows;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.getdata.usuarios.GestorUsersShop;
@@ -454,7 +454,7 @@ public class CheckoutFlow extends StepBase {
 			stepTestMaker.replaceInDescription(
 				TAG_LOGIN_OR_LOGOFF, "(si estamos logados cerramos sesión)");
 			new AccesoFlows().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
-			PageIdentificacion.make().logoff();
+			new PageLogin().logoff();
 		}
 	}
 	

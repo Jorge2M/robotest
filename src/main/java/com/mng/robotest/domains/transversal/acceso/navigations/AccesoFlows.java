@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
-import com.mng.robotest.domains.login.pageobjects.PageIdentificacion;
+import com.mng.robotest.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.test.beans.AccesoVOTF;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -63,10 +63,10 @@ public class AccesoFlows extends StepBase {
 	
 	public void login(String user, String password) {
 		clickIniciarSesionAndWait();
-		var pageIdentificacion = PageIdentificacion.make();
-		pageIdentificacion.isPage(5);
-		pageIdentificacion.inputUserPassword(user, password);
-		pageIdentificacion.clickButtonEntrar();
+		var pageLogin = new PageLogin();
+		pageLogin.isPage(5);
+		pageLogin.inputUserPassword(user, password);
+		pageLogin.clickButtonEntrar();
 		new ModalCambioPais().closeModalIfVisible();
 		new ModalActPoliticaPrivacidad().clickOkIfVisible();
 		new ModalLoyaltyAfterLogin().closeModalIfVisible();
