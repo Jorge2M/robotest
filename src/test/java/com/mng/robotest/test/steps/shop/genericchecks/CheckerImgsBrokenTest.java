@@ -1,7 +1,5 @@
 package com.mng.robotest.test.steps.shop.genericchecks;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,9 +9,13 @@ import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores.Resultado;
+import com.mng.robotest.test.steps.shop.genericchecks.CheckerImgsBroken;
+
+import static org.junit.Assert.*;
 
 public class CheckerImgsBrokenTest {
 
@@ -62,7 +64,7 @@ public class CheckerImgsBrokenTest {
 		resultadoImgsBroken.setListaLogError(listBrokenImages);
 		resultadoImgsBroken.setResultado(Resultado.ERRORES);
 		
-		CheckerImgsBroken checkerSpy = Mockito.spy(CheckerImgsBroken.class);
+		CheckerImgsBroken checkerSpy = Mockito.spy(new CheckerImgsBroken(State.Warn));
 		Mockito.doReturn(resultadoImgsBroken).when(checkerSpy).imagesBroken(any(WebDriver.class), any(Channel.class), anyInt());
 		return checkerSpy;
 	}

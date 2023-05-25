@@ -9,11 +9,14 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
+import com.github.jorge2m.testmaker.service.genericchecks.Checker;
+import com.github.jorge2m.testmaker.service.genericchecks.UtilsChecker;
 import com.github.jorge2m.testmaker.testreports.stepstore.GestorDatosHarJSON;
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.exceptions.NotFoundException;
+import com.mng.robotest.domains.base.PageBase;
 
-public class CheckerGoogleAnalytics implements Checker {
+public class CheckerGoogleAnalytics extends PageBase implements Checker {
 
 	private final State level;
 	
@@ -51,7 +54,7 @@ public class CheckerGoogleAnalytics implements Checker {
 				String valueTid1 = "UA-855910-26";
 				String valueTid2 = "UA-855910-3";
 				String valueTid3 = "UA-855910-34";
-				if (UtilsChecker.getApp()==AppEcom.outlet) {
+				if (app==AppEcom.outlet) {
 					valueTid1 = "UA-855910-5";
 					valueTid2 = "UA-855910-5";
 					valueTid2 = "UA-855910-5";

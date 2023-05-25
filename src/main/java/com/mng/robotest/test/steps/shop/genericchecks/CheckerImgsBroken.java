@@ -23,9 +23,10 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
+import com.github.jorge2m.testmaker.service.genericchecks.Checker;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
-import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.test.exceptions.NotFoundException;
 
 import static com.github.jorge2m.testmaker.testreports.html.ResultadoErrores.Resultado.*;
 
@@ -56,7 +57,7 @@ public class CheckerImgsBroken implements Checker {
 				maxErroresReachedInAllImages(resultadoImgs) ||
 				allImagesBrokenAreInWhitelist(resultadoImgs);
 		
-		var checks = ChecksTM.getNew();
+		ChecksTM checks = ChecksTM.getNew();
 		checks.add(
 			Check.make(descripValidac, isCheckOk, level)
 				.info(infoExecution).build());
@@ -108,10 +109,10 @@ public class CheckerImgsBroken implements Checker {
 	 * @return recopilación de todos los problemas detectados
 	 */
 	private ResultadoErrores imagesBroken(WebDriver driver, int maxImages, int maxErrors, ITestContext ctx) {
-		var resultado = new ResultadoErrores();
+		ResultadoErrores resultado = new ResultadoErrores();
 		resultado.setResultado(ResultadoErrores.Resultado.OK);
 		ArrayList<String> listaImgBroken = new ArrayList<>();
-		var eventFiringWebDriver = new EventFiringWebDriver(driver);
+		EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(driver);
 
 		// Storing all the image elemt in the variable allImages
 		List<WebElement> allImages = eventFiringWebDriver.findElements(By.xpath("//img[@src and not(@src=\"\")]"));
@@ -138,7 +139,7 @@ public class CheckerImgsBroken implements Checker {
 					imgStatus = eventFiringWebDriver.executeScript(script, image); 
 				} catch (StaleElementReferenceException e) {
 					excepStale = true;
-					PageBase.waitMillis(2000);
+					PageObjTM.waitMillis(2000);
 				}
 			} while (excepStale && intentos < 5);
 
@@ -247,7 +248,7 @@ public class CheckerImgsBroken implements Checker {
 	private boolean verifyImgHttpActive(WebElement imgElement) {
 		boolean imgActive = false;
 		try (CloseableHttpClient client = HttpClientBuilder.create().build()) {
-			var request = new HttpGet(getImageSrc(imgElement));
+			HttpGet request = new HttpGet(getImageSrc(imgElement));
 			try (CloseableHttpResponse response = client.execute(request)) {
 				// verifying response code he HttpStatus should be 2xx if not, increment as invalid images count
 				if (String.valueOf(response.getStatusLine().getStatusCode()).matches("[2]\\d\\d")) {

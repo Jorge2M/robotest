@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
@@ -15,7 +16,6 @@ import com.mng.robotest.getdata.productlist.GetterProducts;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
-import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 

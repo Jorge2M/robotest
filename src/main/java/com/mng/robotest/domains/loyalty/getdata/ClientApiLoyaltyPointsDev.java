@@ -17,11 +17,11 @@ import org.apache.logging.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.getdata.data.ListConsumers;
 import com.mng.robotest.domains.loyalty.getdata.data.ResultAddPoints;
 import com.mng.robotest.domains.loyalty.getdata.data.TransferPoints;
-import com.mng.robotest.test.exceptions.NotFoundException;
 
 public class ClientApiLoyaltyPointsDev {
 

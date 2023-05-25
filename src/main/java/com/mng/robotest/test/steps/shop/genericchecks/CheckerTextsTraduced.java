@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.service.genericchecks.Checker;
 
 public class CheckerTextsTraduced implements Checker {
 

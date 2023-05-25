@@ -11,7 +11,7 @@ import com.deque.html.axecore.selenium.AxeBuilder;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.test.steps.shop.genericchecks.Checker;
+import com.github.jorge2m.testmaker.service.genericchecks.Checker;
 
 public class CheckerAccesibility implements Checker {
 

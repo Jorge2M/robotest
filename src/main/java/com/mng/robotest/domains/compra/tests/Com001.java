@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
@@ -12,7 +13,6 @@ import com.mng.robotest.getdata.productlist.Menu;
 import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.datastored.DataPago;
-import com.mng.robotest.test.exceptions.NotFoundException;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.utils.UtilsTest;
