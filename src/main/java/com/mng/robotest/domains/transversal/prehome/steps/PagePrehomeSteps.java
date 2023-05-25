@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.transversal.prehome.steps;
 
-import java.util.Arrays;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
@@ -16,8 +15,6 @@ import com.mng.robotest.domains.transversal.prehome.pageobjects.PageJCAS;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PagePrehome;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -94,10 +91,10 @@ public class PagePrehomeSteps extends StepBase {
 		
 		pagePrehome.accesoShopViaPrehome();
 		
-		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.GOOGLE_ANALYTICS,
-				GenericCheck.NET_TRAFFIC)).checks();
+		checksDefault();
+		checksGeneric()
+			.googleAnalytics()
+			.netTraffic().execute();
 		
 		if (execValidacs) {
 			checkPagePostPreHome();

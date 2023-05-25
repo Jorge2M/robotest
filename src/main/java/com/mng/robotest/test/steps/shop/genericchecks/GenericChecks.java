@@ -1,80 +1,102 @@
 package com.mng.robotest.test.steps.shop.genericchecks;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.domains.base.PageBase;
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
+import com.mng.robotest.domains.accesibilidad.steps.CheckerAccesibility;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
-public class GenericChecks extends PageBase {
+public class GenericChecks extends PageObjTM {
 
-	private final List<GenericCheck> listChecks;
+	private final State accesibility;
+	private final State jsErrors;
+	private final State imgsBroken;
+	private final State netTraffic;
 	
-	public enum GenericCheck {
-		SEO(Info),
-		JS_ERRORS(Info),
-		IMGS_BROKEN(Warn),
-		ANALITICA(Defect),
-		NET_TRAFFIC(Warn),
-		TEXTS_TRADUCED(Defect),
-		GOOGLE_ANALYTICS(Warn),
-		COOKIES_ALLOWED(Defect);
-		
-		State state;
-		private GenericCheck(State state) {
-			this.state = state;
-		}
-		
-		public State getLevel() {
-			return state;
-		}
-	}
-	
-	private GenericChecks(List<GenericCheck> listChecks) {
-		this.listChecks = listChecks;
-	}
-	
-	public static GenericChecks from(List<GenericCheck> listChecks) {
-		return new GenericChecks(listChecks);
-	}
-	
-	public static void checkDefault() {
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.COOKIES_ALLOWED,
-				GenericCheck.JS_ERRORS, 
-				GenericCheck.TEXTS_TRADUCED,
-				GenericCheck.ANALITICA)).checks();
+	private GenericChecks(
+			State accesibility, State jsErrors, State imgsBroken, State netTraffic) {
+		this.accesibility = accesibility;
+		this.jsErrors = jsErrors;
+		this.imgsBroken = imgsBroken;
+		this.netTraffic = netTraffic;
 	}
 	
 	public void checks() {
-		for (GenericCheck genericCheck : listChecks) {
-			if (checkEnabled(genericCheck)) {
-				Checker checker = Checker.make(genericCheck);
-				ChecksTM checks = checker.check(driver);
-				if (checks.size()>0) {
-					createValidation(checks);
-				}
-			}
+		if (accesibility!=null) {
+			executeCheck(new CheckerAccesibility(accesibility));
+		}
+		if (jsErrors!=null) {
+			executeCheck(new CheckerJSerrors(jsErrors));
+		}
+		if (imgsBroken!=null) {
+			executeCheck(new CheckerImgsBroken(imgsBroken));
+		}
+		if (netTraffic!=null) {
+			executeCheck(new CheckerNetTraffic(netTraffic));
 		}
 	}
 	
-	private boolean checkEnabled(GenericCheck genericCheck) {
-		if (genericCheck==GenericCheck.TEXTS_TRADUCED) {
-			return false;
+	public void executeCheck(Checker checker) {
+		ChecksTM checks = checker.check(driver);
+		if (checks.size()>0) {
+			createValidation(checks);
 		}
-		if (dataTest.getGenericChecksDisabled()!=null && 
-			dataTest.getGenericChecksDisabled().contains(genericCheck)) {
-			return false;
-		}
-		return true;
 	}
 	
 	@Validation
 	private ChecksTM createValidation(ChecksTM checks) {
 		return checks;
 	}
+	
+	public static class BuilderCheck {
+		
+		protected State accesibility;
+		protected State jsErrors;
+		protected State imgsBroken;
+		protected State netTraffic;
+		
+		public BuilderCheck accesibility(State level) {
+			accesibility = level;
+			return this;
+		}
+		public BuilderCheck accesibility() {
+			accesibility = Warn;
+			return this;
+		}
+
+		public BuilderCheck jsErrors(State level) {
+			jsErrors = level;
+			return this;
+		}
+		public BuilderCheck jsErrors() {
+			jsErrors = Info;
+			return this;
+		}
+
+		public BuilderCheck imgsBroken(State level) {
+			imgsBroken = level;
+			return this;
+		}
+		public BuilderCheck imgsBroken() {
+			imgsBroken = Warn;
+			return this;
+		}
+
+		public BuilderCheck netTraffic(State level) {
+			netTraffic = level;
+			return this;
+		}
+		public BuilderCheck netTraffic() {
+			netTraffic = Warn;
+			return this;
+		}
+		
+		public GenericChecks build() {
+			return new GenericChecks(accesibility, jsErrors, imgsBroken, netTraffic);
+		}
+		
+	}
+	
 }

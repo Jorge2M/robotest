@@ -18,6 +18,7 @@ import org.testng.ITestContext;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
@@ -25,7 +26,6 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.exceptions.NotFoundException;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 import static com.github.jorge2m.testmaker.testreports.html.ResultadoErrores.Resultado.*;
 
@@ -34,7 +34,13 @@ public class CheckerImgsBroken implements Checker {
 	private static final int MAX_ERRORES = 1;
 	private static final List<String> WHITELIST = Arrays.asList(
 			"https://st.mngbcn.com/images/imgWar/loadingGif/teen.gif");
+	
+	private final State level;
 
+	public CheckerImgsBroken(State level) {
+		this.level = level;
+	}
+	
 	@Override
 	public ChecksTM check(WebDriver driver) {
 		ResultadoErrores resultadoImgs = imagesBroken(driver, Channel.desktop, MAX_ERRORES);
@@ -52,7 +58,7 @@ public class CheckerImgsBroken implements Checker {
 		
 		var checks = ChecksTM.getNew();
 		checks.add(
-			Check.make(descripValidac, isCheckOk, GenericCheck.IMGS_BROKEN.getLevel())
+			Check.make(descripValidac, isCheckOk, level)
 				.info(infoExecution).build());
 		
 		return checks;

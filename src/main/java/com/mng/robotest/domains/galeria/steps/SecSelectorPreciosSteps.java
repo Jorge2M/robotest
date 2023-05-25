@@ -9,7 +9,6 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.SecSelectorPreciosDesktop;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -54,7 +53,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_MAXIMO, String.valueOf(dataFilter.maximoFinal));	
 		checkResultSelectFiltro(dataFilter);
 
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	@Validation

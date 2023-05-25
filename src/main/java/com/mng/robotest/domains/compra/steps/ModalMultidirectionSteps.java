@@ -10,7 +10,6 @@ import com.mng.robotest.domains.compra.beans.Direction;
 import com.mng.robotest.domains.compra.pageobjects.DirectionData;
 import com.mng.robotest.domains.compra.pageobjects.ModalMultidirection;
 import com.mng.robotest.domains.compra.pageobjects.PageCheckoutWrapper;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class ModalMultidirectionSteps extends StepBase {
 
@@ -48,7 +47,7 @@ public class ModalMultidirectionSteps extends StepBase {
 	public void clickAnyadirOtraDireccion() {
 		modalMultidirection.clickAnyadirOtraDireccion();
 		new ModalDirecEnvioNewSteps().checkIsVisible(3);
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 
 	

@@ -6,7 +6,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.pageobject.shop.PageDevoluciones;
 import com.mng.robotest.test.pageobject.shop.PageDevoluciones.Devolucion;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class PageDevolucionesSteps extends StepBase {
 
@@ -42,6 +41,6 @@ public class PageDevolucionesSteps extends StepBase {
 		Devolucion.EN_DOMICILIO.waitForInState(true, 2, driver);
 		pageDevoluciones.clickSolicitarRecogida();
 		new PageRecogidaDomicSteps().validaIsPageSinDevoluciones();
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 }

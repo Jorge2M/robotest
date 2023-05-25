@@ -3,7 +3,6 @@ package com.mng.robotest.domains.transversal.menus.steps;
 import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.ABRIGOS_HE;
 
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.NoSuchElementException;
@@ -39,8 +38,6 @@ import com.mng.robotest.test.data.Constantes.ThreeState;
 import com.mng.robotest.test.pageobject.shop.AllPages;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test.steps.shop.banner.SecBannersSteps;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -174,10 +171,10 @@ public class MenuSteps extends StepBase {
 			checkArticlesContainsLiteralsDesktop(menu.getArticles());
 		}
 		
-		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.GOOGLE_ANALYTICS,
-				GenericCheck.NET_TRAFFIC)).checks();
+		checksDefault();
+		checksGeneric()
+			.googleAnalytics()
+			.netTraffic().execute();
 	}
 	
 	@Validation
@@ -207,7 +204,7 @@ public class MenuSteps extends StepBase {
 			menu.getArticlesSubMenu()!=null && !menu.getArticlesSubMenu().isEmpty()) {
 			checkArticlesContainsLiteralsDesktop(menu.getArticlesSubMenu());
 		}
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	@Validation (description="Son visibles los submenus <b>#{menu.getSubMenus()}</b>")
@@ -273,12 +270,11 @@ public class MenuSteps extends StepBase {
 	}
 	
 	private void validaSelecLinea(LineaWeb lineaWeb) {
-		//validateIsLineaSelected(lineaWeb);
 		Linea linea = Linea.getLinea(lineaWeb.getLinea(), dataTest.getPais());
 		checkContentGaleriaAfterClickLinea(linea);
 
-		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(GenericCheck.IMGS_BROKEN)).checks();
+		checksDefault();
+		checksGeneric().imgsBroken().execute();
 	}	
 	
 	@Step (
@@ -358,8 +354,8 @@ public class MenuSteps extends StepBase {
 		Linea subLinea = linea.getSublineaNinos(lineaWeb.getSublinea());
 		checkContentGaleriaAfterClickLinea(subLinea);
 
-		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(GenericCheck.IMGS_BROKEN)).checks();
+		checksDefault();
+		checksGeneric().imgsBroken().execute();
 	}		
 	
 	@Validation (

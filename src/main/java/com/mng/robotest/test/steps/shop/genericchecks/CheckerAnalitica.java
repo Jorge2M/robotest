@@ -12,7 +12,6 @@ import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.UtilsTest;
 import com.mng.robotest.conftestmaker.AppEcom;
 
@@ -20,9 +19,14 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class CheckerAnalitica implements Checker {
 
+	private final State level;
+	
+	public CheckerAnalitica(State level) {
+		this.level = level;
+	}
+	
 	public ChecksTM check(WebDriver driver) {
 		var checks = ChecksTM.getNew();
-		
 		String commandJs = "return window.dataLayer.filter((object) => object.event === 'loadDataLayer').length";
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		try {
@@ -54,7 +58,7 @@ public class CheckerAnalitica implements Checker {
 		if (UtilsTest.todayBeforeDate("2023-11-01")) {
 			return Warn;
 		}
-		return GenericCheck.ANALITICA.getLevel();
+		return level;
 	}
 	
 	private boolean stringIs(String value, int number) {

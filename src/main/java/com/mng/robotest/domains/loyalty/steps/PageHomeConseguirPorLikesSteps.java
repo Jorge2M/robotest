@@ -5,7 +5,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeConseguirPorLikes;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class PageHomeConseguirPorLikesSteps extends StepBase {
 
@@ -23,7 +22,7 @@ public class PageHomeConseguirPorLikesSteps extends StepBase {
 	public void selectConseguirButton() {
 		pageHomeConseguirPorLikes.selectConseguirButton();
 		checkAfterConseguirButton();
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	@Validation

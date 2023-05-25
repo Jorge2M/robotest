@@ -11,7 +11,6 @@ import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -41,7 +40,7 @@ public class SecFooterSteps extends StepBase {
 	public void clickLinkFooter(FooterLink typeFooter, boolean closeAtEnd) { 
 		String windowFatherHandle = secFooter.clickLinkAndGetWindowFatherHandle(typeFooter);
 		checkPageCorrectAfterSelectLinkFooter(windowFatherHandle, typeFooter, closeAtEnd);
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	 
 	@Validation

@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.compra.steps;
 
-import java.util.Arrays;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
@@ -15,8 +13,6 @@ import com.mng.robotest.test.data.Descuento;
 import com.mng.robotest.test.data.Descuento.DiscountType;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.generic.beans.ValeDiscount;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -107,10 +103,10 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		checkAfterInputDiscountVale(valePais);
 		checkValeDiscountIsCorrect(valePais);
 		
-		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.GOOGLE_ANALYTICS,
-				GenericCheck.NET_TRAFFIC)).checks();
+		checksDefault();
+		checksGeneric()
+			.googleAnalytics()
+			.netTraffic().execute();
 	}
 	
 	@Validation

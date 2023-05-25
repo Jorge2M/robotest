@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.bolsa.steps;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -28,8 +27,6 @@ import com.mng.robotest.getdata.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa.*;
@@ -154,8 +151,8 @@ public class SecBolsaSteps extends StepBase {
 			checkIsBolsaVisibleInDesktop();
 		}
 		validaCuadranArticulosBolsa();
-		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(GenericCheck.GOOGLE_ANALYTICS)).checks();
+		checksDefault();
+		checksGeneric().googleAnalytics().execute();
 	}
 
 	@Validation(description="La bolsa está vacía")
@@ -262,7 +259,7 @@ public class SecBolsaSteps extends StepBase {
 	public void selectButtonComprar(FluxBolsaCheckout fluxMobile) {
 		selectButtonComprarBasic();
 		fluxPostSelectComprar(fluxMobile);
-		GenericChecks.checkDefault();		
+		checksDefault();		
 	}
 
 	private void fluxPostSelectComprar(FluxBolsaCheckout fluxMobile) {
@@ -340,6 +337,6 @@ public class SecBolsaSteps extends StepBase {
 
 		String refArticulo = articuloClickado.getReferencia();
 		new PageFichaSteps().checkIsFichaArtDisponible(refArticulo, 3);
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 }

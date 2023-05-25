@@ -9,14 +9,19 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.testreports.stepstore.GestorDatosHarJSON;
 import com.mng.robotest.test.exceptions.NotFoundException;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class CheckerNetTraffic implements Checker {
 
+	private final State level;
+	
+	public CheckerNetTraffic(State level) {
+		this.level = level;
+	}
+	
 	public ChecksTM check(WebDriver driver) {
 		var checks = ChecksTM.getNew();
 		GestorDatosHarJSON gestorHAR = UtilsChecker.getGestorHar(driver);
@@ -42,19 +47,19 @@ public class CheckerNetTraffic implements Checker {
 			JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
 			JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
 			if (responseJSON==null) {
-				infoWarnings+="<br><b style=\"color:" + Warn.getColorCss() + "\">Warning!</b>: hay peticiones sin respuesta, por ejemplo la <a href=\"" + (String)requestJSON.get("url") + "\">" + (String)requestJSON.get("url") + "</a>";
+				infoWarnings+="<br><b style=\"color:" + level.getColorCss() + "\">Warning!</b>: hay peticiones sin respuesta, por ejemplo la <a href=\"" + (String)requestJSON.get("url") + "\">" + (String)requestJSON.get("url") + "</a>";
 				peticionesOk = false;
 			} else {
 				long statusResponse = (long)responseJSON.get("status");
 				if (statusResponse >= 400) {
-					infoWarnings+="<br><b style=\"color:" + Warn.getColorCss() + "\">Warning!</b>: hay peticiones con status KO, por ejemplo la <a href=\"" + (String)requestJSON.get("url") + "\">" + (String)requestJSON.get("url") + "</a> ( " + statusResponse + ")";
+					infoWarnings+="<br><b style=\"color:" + level.getColorCss() + "\">Warning!</b>: hay peticiones con status KO, por ejemplo la <a href=\"" + (String)requestJSON.get("url") + "\">" + (String)requestJSON.get("url") + "</a> ( " + statusResponse + ")";
 					peticionesOk = false;
 				}
 			}
 		}
 	 	checks.add(
 			"En el tráfico de red no existe ninguna sin respuesta o con status KO" + infoWarnings,
-			peticionesOk, Warn);
+			peticionesOk, level);
 		
 	 	return checks;
 	}  

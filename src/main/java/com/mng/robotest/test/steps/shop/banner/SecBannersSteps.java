@@ -18,8 +18,6 @@ import com.mng.robotest.test.pageobject.shop.AllPages;
 import com.mng.robotest.test.pageobject.shop.bannersnew.DataBanner;
 import com.mng.robotest.test.pageobject.shop.bannersnew.ManagerBannersScreen;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
-import com.mng.robotest.test.steps.shop.genericchecks.Checker;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -86,9 +84,15 @@ public class SecBannersSteps extends StepBase {
 		}
 	}
 		
+	public void validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre) 
+			throws Exception {
+		checksGeneralesBanner(urlPagPadre, uriPagPadre, elementosPagPadre);
+		checksGeneric().imgsBroken().execute();
+	}
+	
 	@Validation
-	public ChecksTM validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre) 
-	throws Exception {
+	private ChecksTM checksGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre) 
+			throws Exception {
 		var checks = ChecksTM.getNew();
 		int seconds1 = 3;
 		int marginElements = 2;
@@ -110,10 +114,6 @@ public class SecBannersSteps extends StepBase {
 	 		"- La URL cambia o <br>" + 
 	 		"- El número de elementos DOM ha variado (en " + marginElements + " o más) con respecto al original (" + elementosPagPadre + ")",
 	 		(!urlEqual || !elemsEqual), Warn); 
-	 	
-	 	Checker checkImagesBroken = Checker.make(GenericCheck.IMGS_BROKEN);
-	 	ChecksTM checksImgs = checkImagesBroken.check(driver);
-	 	checks.add(checksImgs.get(0));
 	 	
 		String urlPagActual = driver.getCurrentUrl();
 		URI uriPagActual = new URI(urlPagActual);

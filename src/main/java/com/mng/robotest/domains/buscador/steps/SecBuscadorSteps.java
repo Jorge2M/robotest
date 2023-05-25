@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.buscador.steps;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,8 +15,6 @@ import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
 import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class SecBuscadorSteps extends StepBase {
 
@@ -66,8 +63,8 @@ public class SecBuscadorSteps extends StepBase {
 		} else {
 			areProducts(3);
 		}
-		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(GenericCheck.IMGS_BROKEN)).checks();
+		checksDefault();
+		checksGeneric().imgsBroken();
 	}
 
 	@Validation (

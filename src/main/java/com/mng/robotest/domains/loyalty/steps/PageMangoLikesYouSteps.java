@@ -9,7 +9,6 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps.ChecksResultWithNumberPoints;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.utils.UtilsTest;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -106,7 +105,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 	public void clickButtonDonarLikes() {
 		pageMangoLikesYou.clickButton(DONAR_MIS_LIKES);
 		new PageHomeDonateLikesSteps().checkIsPage(5, Arrays.asList(BUTTON_50_LIKES, BUTTON_100_LIKES));
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	public void clickConseguirPorLikesButton() {
@@ -115,7 +114,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		} else {
 			clickSaberMas();
 		}
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	@Step(

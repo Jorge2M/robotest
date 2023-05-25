@@ -22,7 +22,6 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
 import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.*;
@@ -57,7 +56,7 @@ public class SecMenusUserSteps extends StepBase {
 		} else {
 			new PageRegistroInitialShopSteps().checkIsPage(5);
 		}
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 
 	@Step (
@@ -133,7 +132,7 @@ public class SecMenusUserSteps extends StepBase {
 	public void clickMenuMiCuenta() {
 		clickUserMenu(MI_CUENTA);
 		new PageMiCuentaSteps().validateIsPage(2);
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	@Step (
@@ -155,7 +154,7 @@ public class SecMenusUserSteps extends StepBase {
 	public int clickMenuMangoLikesYou() {
 		clickUserMenu(MANGO_LIKES_YOU);
 		int numberPoints = new PageMangoLikesYouSteps().checkIsPageOk().getNumberPoints();
-		GenericChecks.checkDefault();
+		checksDefault();
 		
 		StepTM step = TestMaker.getCurrentStepInExecution();
 		step.replaceInDescription(TAG_POINTS, String.valueOf(numberPoints));

@@ -15,21 +15,35 @@ public class Gpo005 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		accessAndLogin();
+		clickMenu();
+		if (!channel.isDevice()) {
+			selectPricesInterval();
+		}
+		if (app!=AppEcom.outlet && !channel.isDevice()) {
+			checkCrossSelling();
+		}	
+		clickSubmenu();
+	}
+
+	private void clickMenu() {
 		if (app==AppEcom.outlet || channel.isDevice()) {
 			clickMenu(CARDIGANS_Y_JERSEIS_SHE);
 		} else {
 			clickGroup(NEW_NOW);
 			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);
 		}
-		
-		if (!channel.isDevice()) {
-			pageGaleriaSteps.getSecSelectorPreciosSteps().seleccionaIntervalo();
-		}
-
-		if (app!=AppEcom.outlet && !channel.isDevice()) {
-			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);
-		}	
-		
+		checksGeneric().accesibility().execute();
+	}
+	
+	private void selectPricesInterval() throws Exception {
+		pageGaleriaSteps.getSecSelectorPreciosSteps().seleccionaIntervalo();
+	}
+	
+	private void checkCrossSelling() {
+		pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);
+	}
+	
+	private void clickSubmenu() {
 		clickMenu(VESTIDOS_SHE);
 		if (app==AppEcom.outlet || channel.isDevice()) {
 			clickSubMenu(CARDIGANS_Y_JERSEIS_JERSEIS_SHE);

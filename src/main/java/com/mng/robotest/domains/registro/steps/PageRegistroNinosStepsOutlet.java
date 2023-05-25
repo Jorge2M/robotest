@@ -6,7 +6,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.registro.beans.ListDataNinos;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroNinosOutlet;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class PageRegistroNinosStepsOutlet extends StepBase {
 	
@@ -32,6 +31,6 @@ public class PageRegistroNinosStepsOutlet extends StepBase {
 		pageRegistroNinos.setDataNinoIfNotExists(listaNinos, 2);
 		pageRegistroNinos.clickContinuar();
 		new PageRegistroDirecStepsOutlet().isPageFromPais();
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 }

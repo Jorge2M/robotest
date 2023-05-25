@@ -4,6 +4,7 @@ import java.util.logging.Level;
 
 import org.openqa.selenium.WebDriver;
 
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -11,10 +12,15 @@ import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMake
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.service.webdriver.utils.WebUtils;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class CheckerJSerrors implements Checker {
 
+	private final State level;
+	
+	public CheckerJSerrors(State level) {
+		this.level = level;
+	}
+	
 	public ChecksTM check(WebDriver driver) {
 		var checks = ChecksTM.getNew();
 		
@@ -30,7 +36,7 @@ public class CheckerJSerrors implements Checker {
 			checks.add(
 				Check.make(
 				    descripValidac,
-				    resultadoOK || (resultadoLogs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES), GenericCheck.JS_ERRORS.getLevel())
+				    resultadoOK || (resultadoLogs.getResultado()==ResultadoErrores.Resultado.MAX_ERRORES), level)
 				.info(getInfoError(resultadoLogs))
 				.store(StoreType.None)
 				.build());

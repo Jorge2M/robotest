@@ -12,6 +12,5 @@ public class PagePoliticaPrivacidad extends PageBase {
 	public boolean isPageUntil(int seconds) {
 		return state(Present, XPATH_CABECERA).wait(seconds).check();
 	}
-	
 
 }

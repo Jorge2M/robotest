@@ -25,7 +25,6 @@ import com.mng.robotest.test.beans.Pago.TypePago;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.generic.UtilsMangoTest;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -102,7 +101,7 @@ public class CheckoutSteps extends StepBase {
 		} else {
 			new ModalMultidirectionSteps().checkIsVisible(2);
 		}
-		GenericChecks.checkDefault();
+		checksDefault();
 	}	
 	
 	@Validation (
@@ -240,7 +239,7 @@ public class CheckoutSteps extends StepBase {
 
 		try {
 			pageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel, app));
-			GenericChecks.checkDefault();
+			checksDefault();
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), dataTest.getPais().getNombre_pais(), e);
@@ -377,7 +376,7 @@ public class CheckoutSteps extends StepBase {
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_TARJETA, accesoEmpl.getTarjeta());
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(accesoEmpl.getTarjeta());
 		checkAfterInputTarjetaEmpleado(pais, accesoEmpl);
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	@Validation
@@ -479,7 +478,7 @@ public class CheckoutSteps extends StepBase {
 		float loyaltyPointsNoRound = pageCheckoutWrapper.applyAndGetLoyaltyPoints();
 		float loyaltyPoints = UtilsMangoTest.round(loyaltyPointsNoRound, 2);
 		validateLoyaltyPointsDiscountDesktopUntil(loyaltyPoints, subTotalInicial, 3);
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	@Validation (

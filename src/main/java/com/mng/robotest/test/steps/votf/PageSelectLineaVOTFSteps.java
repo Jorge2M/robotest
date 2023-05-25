@@ -9,7 +9,6 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.votf.PageSelectLineaVOTF;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -50,6 +49,6 @@ public class PageSelectLineaVOTFSteps extends StepBase {
 		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dataTest.getPais()));
 		new SectionBarraSupVOTFSteps().validate(accesoVOTF.getUsuario());
 		
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 }

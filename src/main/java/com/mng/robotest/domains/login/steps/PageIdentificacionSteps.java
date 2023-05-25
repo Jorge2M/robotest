@@ -4,7 +4,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.login.pageobjects.PageLogin;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class PageIdentificacionSteps extends StepBase {
 
@@ -19,6 +18,7 @@ public class PageIdentificacionSteps extends StepBase {
 	public void selectHasOlvidadoTuContrasenya() {
 		new PageLogin().clickHasOlvidadoContrasenya(); 
 		new PageRecuperaPasswdSteps().isPage();
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
+	
 }

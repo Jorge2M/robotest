@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.transversal.acceso.steps;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
@@ -27,8 +26,6 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.steps.votf.PageLoginVOTFSteps;
 import com.mng.robotest.test.steps.votf.PageSelectIdiomaVOTFSteps;
 import com.mng.robotest.test.steps.votf.PageSelectLineaVOTFSteps;
@@ -84,10 +81,10 @@ public class AccesoSteps extends StepBase {
 
 	public void validaIdentificacionEnShop() {
 		checkLinksAfterLogin();
-		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.GOOGLE_ANALYTICS, 
-				GenericCheck.NET_TRAFFIC)).checks();
+		checksDefault();
+		checksGeneric()
+			.googleAnalytics()
+			.netTraffic().execute();
 	}
 	
 	@Validation(
@@ -169,7 +166,7 @@ public class AccesoSteps extends StepBase {
 		new AccesoFlows().login(usuario, password);
 		new PageIdentificacionSteps().checkTextoCredencialesKO();
 		new SecMenusUserSteps().checkIsInvisibleLinkCerrarSesion();
-		GenericChecks.checkDefault();	
+		checksDefault();	
 	}
 	
 	@Step (
@@ -192,7 +189,7 @@ public class AccesoSteps extends StepBase {
 
 		var pageSelectLineaVOTFSteps = new PageSelectLineaVOTFSteps();
 		pageSelectLineaVOTFSteps.validateIsPage();
-		GenericChecks.checkDefault();
+		checksDefault();
 		
 		pageSelectLineaVOTFSteps.selectMenuAndLogoMango(1);
 	}

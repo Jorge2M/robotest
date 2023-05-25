@@ -7,7 +7,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroInitialShop;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class PageRegistroInitialShopSteps extends StepBase {
 
@@ -43,7 +42,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	public void clickCreateAccountButton() {
 		pageRegistroInitial.clickCreateAccountButton();
 		new PageRegistroPersonalizacionShopSteps().checkIsPageUntil(10);
-		GenericChecks.checkDefault();
+		checksDefault();
 	}	
 
 	@Step(

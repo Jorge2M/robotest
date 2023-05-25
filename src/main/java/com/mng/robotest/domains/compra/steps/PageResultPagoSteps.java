@@ -17,7 +17,6 @@ import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps.Checks
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -35,7 +34,7 @@ public class PageResultPagoSteps extends StepBase {
 	public void validateIsPageOk(DataPago dataPago) {
 		validateTextConfirmacionPago();
 		validateDataPedido(dataPago);
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	@Validation (

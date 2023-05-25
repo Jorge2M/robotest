@@ -1,14 +1,11 @@
 package com.mng.robotest.domains.compra.tests;
 
-import java.util.Arrays;
-
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class Com002 extends TestBase {
 
@@ -22,7 +19,6 @@ public class Com002 extends TestBase {
 				.emaiExists().build();
 		
 		dataPago = getDataPago(configCheckout);
-		dataTest.setGenericChecksDisabled(Arrays.asList(GenericCheck.ANALITICA));
 	}
 	
 	@Override

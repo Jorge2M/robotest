@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.base.datatest;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.getdata.usuarios.GestorUsersShop;
@@ -11,7 +10,6 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.datastored.DataBag;
 import com.mng.robotest.test.datastored.DataFavoritos;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.PaisGetter;
 
 public class DataTest implements Cloneable, Serializable {
@@ -24,7 +22,6 @@ public class DataTest implements Cloneable, Serializable {
 	private boolean userRegistered = false;
 	private String userConnected = "";
 	private String passwordUser = "";
-	private List<GenericCheck> genericChecksDisabled = null; 
 	private DataBag dataBag = new DataBag(); 
 	private DataFavoritos dataFavoritos = new DataFavoritos();
 	
@@ -127,14 +124,6 @@ public class DataTest implements Cloneable, Serializable {
 
 	public void setUserRegistered(boolean userRegistered) {
 		this.userRegistered = userRegistered;
-	}
-
-	public List<GenericCheck> getGenericChecksDisabled() {
-		return genericChecksDisabled;
-	}
-
-	public void setGenericChecksDisabled(List<GenericCheck> genericChecksDisabled) {
-		this.genericChecksDisabled = genericChecksDisabled;
 	}
 
 	public DataBag getDataBag() {

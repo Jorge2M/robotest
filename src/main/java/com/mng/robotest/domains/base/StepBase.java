@@ -25,6 +25,8 @@ import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
+import com.mng.robotest.test.steps.shop.genericchecks.ChecksMango;
+import com.mng.robotest.test.steps.shop.genericchecks.ChecksMango.BuilderChecksMango;
 import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -105,6 +107,18 @@ public abstract class StepBase extends PageBase {
 			throws Exception {
 		new ManXXX(listChecks, listPedidos).execute();
 	}	
+	
+	public static BuilderChecksMango checksGeneric() {
+		return new ChecksMango.BuilderChecksMango();
+	}
+	
+	public static void checksDefault() {
+		checksGeneric()
+			.cookiesAllowed()
+			.jsErrors()
+			.textsTraduced()
+			.analitica().execute();
+	}
 	
 	@Validation
 	protected ChecksTM checkLegalTextsVisible(PageBase page) {

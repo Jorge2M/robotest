@@ -25,10 +25,7 @@ import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -51,10 +48,10 @@ public class PageFichaSteps extends StepBase {
 
 	public void checkIsFichaAccordingTypeProduct(Article article) {
 		checkIsFichaArtDisponible(article.getArticleId(), 3);
-		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.IMGS_BROKEN,
-				GenericCheck.NET_TRAFFIC)).checks();
+		checksDefault();
+		checksGeneric()
+			.imgsBroken()
+			.netTraffic().execute();
 	}
 
 	@Validation (

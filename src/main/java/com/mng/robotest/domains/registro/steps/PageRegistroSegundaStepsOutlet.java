@@ -15,7 +15,6 @@ import com.mng.robotest.domains.registro.pageobjects.PageRegistroSegundaOutlet;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.data.Constantes.ThreeState;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -112,6 +111,6 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 			new PageRegistroDirecStepsOutlet().isPageFromPais();
 		}
 		
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 }

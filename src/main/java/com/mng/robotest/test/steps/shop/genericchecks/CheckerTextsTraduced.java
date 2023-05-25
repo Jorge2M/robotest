@@ -8,18 +8,24 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 public class CheckerTextsTraduced implements Checker {
 
+	private final State level;
+	
+	public CheckerTextsTraduced(State level) {
+		this.level = level;
+	}
+	
 	public ChecksTM check(WebDriver driver) {
 		var checks = ChecksTM.getNew();
 		List<String> listElemsWithoutTraduction = getTextsWithSostenido(driver);
 		checks.add(
 			"No hay textos sin traducir (que comiencen por \"#\")<br>" + 
 			getFormatHtmlListMessages(listElemsWithoutTraduction),
-			listElemsWithoutTraduction.size()==0, GenericCheck.TEXTS_TRADUCED.getLevel());
+			listElemsWithoutTraduction.size()==0, level);
 		
 		return checks;
 	}

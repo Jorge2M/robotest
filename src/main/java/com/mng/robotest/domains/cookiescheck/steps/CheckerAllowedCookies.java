@@ -7,16 +7,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Cookie;
 
 import com.github.jorge2m.testmaker.conf.SendType;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.cookiescheck.services.CookiesChecker;
 import com.mng.robotest.test.steps.shop.genericchecks.Checker;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class CheckerAllowedCookies implements Checker {
 
+	private final State level;
+	
+	public CheckerAllowedCookies(State level) {
+		this.level = level;
+	}
+	
 	@Override
 	public ChecksTM check(WebDriver driver) {
 		var cookiesChecker = new CookiesChecker();
@@ -25,7 +30,7 @@ public class CheckerAllowedCookies implements Checker {
 		checks.add(
 			Check.make(
 				"Se comprueba que todas las cookies existentes en la página están permitidas",
-				resultCheck.getLeft(), Info)
+				resultCheck.getLeft(), level)
 			.info(getInfoError(resultCheck))
 			.code("COOKIE_TRUST")			
 			.store(StoreType.None)

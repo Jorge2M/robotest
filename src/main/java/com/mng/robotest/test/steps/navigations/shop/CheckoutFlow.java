@@ -51,8 +51,6 @@ import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ValeDiscount;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.steps.shop.AllPagesSteps;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.mng.robotest.domains.compra.pageobjects.DataDireccion.DataDirType.*;
@@ -127,7 +125,7 @@ public class CheckoutFlow extends StepBase {
 		accessShopAndLoginOrLogoff();
 		if (dataTest.isUserRegistered()) {
 			secBolsaSteps.clear();
-			GenericChecks.checkDefault();
+			checksDefault();
 		}
 		secBolsaSteps.altaListaArticulosEnBolsa(listArticles);
 	}
@@ -171,10 +169,10 @@ public class CheckoutFlow extends StepBase {
 		}
 		
 		page2IdentCheckoutSteps.clickContinuar(dataTest.isUserRegistered());
-		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.GOOGLE_ANALYTICS, 
-				GenericCheck.NET_TRAFFIC)).checks();
+		checksDefault();
+		checksGeneric()
+			.googleAnalytics()
+			.netTraffic().execute();
 	}
 	
 	private void test1rstPageCheckout() {
@@ -308,10 +306,10 @@ public class CheckoutFlow extends StepBase {
 				
 				//Almacenamos el pedido en el contexto para la futura validación en Manto
 				pagoSteps.storePedidoForMantoAndResetData();
-				GenericChecks.checkDefault();
-				GenericChecks.from(Arrays.asList(
-						GenericCheck.GOOGLE_ANALYTICS,
-						GenericCheck.NET_TRAFFIC)).checks();
+				checksDefault();
+				checksGeneric()
+					.googleAnalytics()
+					.netTraffic().execute();
 			}
 		}
 	}

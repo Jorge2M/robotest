@@ -11,7 +11,6 @@ import com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 import static com.mng.robotest.domains.micuenta.pageobjects.PageMiCuenta.Link.*;
 
@@ -45,7 +44,7 @@ public class PageMiCuentaSteps extends StepBase {
 	private void clickLinkMisDatos(String usuarioReg) {
 		pageMiCuenta.click(MIS_DATOS);
 		new PageMisDatosSteps().validaIsPage(usuarioReg);
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	@Step(
@@ -54,7 +53,7 @@ public class PageMiCuentaSteps extends StepBase {
 	private void clickLinkMisDirecciones() {
 		pageMiCuenta.click(MIS_DIRECCIONES);
 		new PageMisDireccionesSteps().checkIsPage(3);
-		GenericChecks.checkDefault();
+		checksDefault();
 	}	
 
 	public void goToMisComprasFromMenu() {
@@ -74,7 +73,7 @@ public class PageMiCuentaSteps extends StepBase {
 		}
 
 		new PageMisComprasSteps().validateIsPage();
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
  
 	public void goToMisDatosAndValidateData(Map<String,String> dataRegistro, String codPais) {
@@ -84,7 +83,7 @@ public class PageMiCuentaSteps extends StepBase {
 		}		
 		goToMisDatos(dataRegistro.get("cfEmail"));
 		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataRegistro, codPais);
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	public void goToMisDatosAndValidateData(DataNewRegister dataNewRegister) {
 		if (dataTest.getPais().isMisdirecciones(app)) {
@@ -93,7 +92,7 @@ public class PageMiCuentaSteps extends StepBase {
 		}
 		goToMisDatos(dataNewRegister.getEmail());
 		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataNewRegister);
-		GenericChecks.checkDefault();
+		checksDefault();
 	}	
 	
 	public void goToSuscripciones() {
@@ -107,7 +106,7 @@ public class PageMiCuentaSteps extends StepBase {
 	private void clickLinkSuscripciones() {
 		pageMiCuenta.click(SUSCRIPCIONES);
 		new PageSuscripcionesSteps().validaIsPage();
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	public void goToSuscripcionesAndValidateData(Map<String,String> datosRegOk) {

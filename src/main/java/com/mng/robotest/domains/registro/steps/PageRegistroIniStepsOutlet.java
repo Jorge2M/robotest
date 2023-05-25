@@ -13,7 +13,6 @@ import com.mng.robotest.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroIniOutlet;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -113,7 +112,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			validaEmailIncorrectShown();
 			break;
 		}
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	@Validation (

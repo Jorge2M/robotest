@@ -2,10 +2,10 @@ package com.mng.robotest.test.steps.shop.modales;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.test.pageobject.shop.modales.ModalChatBot;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
-public class ModalChatBotSteps {
+public class ModalChatBotSteps extends StepBase {
 
 	private final ModalChatBot modalChatBot = new ModalChatBot();
 	
@@ -19,7 +19,7 @@ public class ModalChatBotSteps {
 		expected="Aparece la capa del webchat")
 	public boolean clickIcon() {
 		modalChatBot.clickIcon();
-		GenericChecks.checkDefault();
+		checksDefault();
 		return checkWebchatVisible(3);
 		
 	}

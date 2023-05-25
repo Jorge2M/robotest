@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.galeria.steps;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -39,8 +37,6 @@ import com.mng.robotest.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
@@ -209,15 +205,9 @@ public class PageGaleriaSteps extends StepBase {
 			checkNumArticlesInScreen(datosScroll.getArticulosTotalesPagina(), dataForScroll.getNumArticlesExpected());
 		}
 		
-		List<GenericCheck> listChecks = new ArrayList<>();
-		listChecks.add(GenericCheck.SEO); 
-		listChecks.add(GenericCheck.JS_ERRORS); 
-		listChecks.add(GenericCheck.ANALITICA);
-		listChecks.add(GenericCheck.TEXTS_TRADUCED);
-		listChecks.add(GenericCheck.NET_TRAFFIC);
-		listChecks.add(GenericCheck.GOOGLE_ANALYTICS);
+		checksDefault();
 		if (dataForScroll.isValidaImgBroken()) {
-			listChecks.add(GenericCheck.IMGS_BROKEN);
+			checksGeneric().imgsBroken().execute();
 		}
 		
 		datosScroll.setStep(TestMaker.getCurrentStepInExecution());
@@ -290,7 +280,7 @@ public class PageGaleriaSteps extends StepBase {
 		int numArticulosPant = pageGaleria.getNumArticulos() + pageGaleria.getNumArticulos();
 		checkOrderListArticles(typeOrdenacion, numArticulosPant, numArticulosValidar);
  
-		GenericChecks.checkDefault();
+		checksDefault();
 	   
 		return numArticulosPant;
 	}
@@ -485,10 +475,10 @@ public class PageGaleriaSteps extends StepBase {
 		int seconds = 3;
 		checkIsFichaArticle(nombre1erArt, precio1erArt, seconds);
 
-		GenericChecks.checkDefault();
-		GenericChecks.from(Arrays.asList(
-				GenericCheck.GOOGLE_ANALYTICS, 
-				GenericCheck.NET_TRAFFIC)).checks();	   
+		checksDefault();
+		checksGeneric()
+			.googleAnalytics()
+			.netTraffic().execute();
 	}
 
 	@Validation

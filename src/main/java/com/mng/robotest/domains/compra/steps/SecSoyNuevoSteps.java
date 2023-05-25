@@ -3,7 +3,6 @@ package com.mng.robotest.domains.compra.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.secsoynuevo.SecSoyNuevo;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 import static com.mng.robotest.test.data.PaisShop.*;
 import static com.mng.robotest.domains.compra.pageobjects.secsoynuevo.SecSoyNuevo.RadioState.*;
@@ -31,7 +30,7 @@ public class SecSoyNuevoSteps extends StepBase {
 		secSoyNuevo.clickContinue();
 		new Page2IdentCheckoutSteps().validateIsPage(emailExistsYet, 2);
 		
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 
 }

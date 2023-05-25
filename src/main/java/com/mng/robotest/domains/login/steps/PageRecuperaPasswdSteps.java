@@ -5,7 +5,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.login.pageobjects.PageRecuperaPasswd;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks;
 
 public class PageRecuperaPasswdSteps extends StepBase {
 	
@@ -33,7 +32,7 @@ public class PageRecuperaPasswdSteps extends StepBase {
 		pageRecuperaPasswd.inputEmail(email);
 		pageRecuperaPasswd.clickEnviar();
 		isPageCambioPassword();
-		GenericChecks.checkDefault();
+		checksDefault();
 	}
 	
 	@Validation

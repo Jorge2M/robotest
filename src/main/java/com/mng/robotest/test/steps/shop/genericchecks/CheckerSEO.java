@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -16,12 +17,17 @@ import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.test.pageobject.shop.AllPages;
 import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
-import com.mng.robotest.test.steps.shop.genericchecks.GenericChecks.GenericCheck;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class CheckerSEO extends PageBase implements Checker {
 
+	private final State level;
+	
+	public CheckerSEO(State level) {
+		this.level = level;
+	}
+	
 	public ChecksTM check(WebDriver driver) {
 		var checks = ChecksTM.getNew();
 		
@@ -33,7 +39,7 @@ public class CheckerSEO extends PageBase implements Checker {
 		checks.add(
 			Check.make(
 			    descripValidac,
-			    resValidac.isOK(), GenericCheck.SEO.getLevel())
+			    resValidac.isOK(), level)
 			.store(StoreType.None).build());
 		
 		return checks;
