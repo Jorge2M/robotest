@@ -104,8 +104,6 @@ public class Pago implements Serializable {
 	
 	public TypePago getTypePago() {
 		switch (this.type) {
-		case "TRJintegrada":
-			return TypePago.TARJETA_INTEGRADA;
 		case "TMango":
 			return TypePago.TARJETA_MANGO;			
 		case "KrediKarti": 
@@ -164,6 +162,7 @@ public class Pago implements Serializable {
 			return TypePago.PROCESS_OUT;
 		case "tpvvotf":
 			return TypePago.TPV_VOTF;
+		case "TRJintegrada":
 		default:
 			return TypePago.TARJETA_INTEGRADA;
 		}

@@ -131,8 +131,6 @@ public class MenusUserWrapper extends PageBase {
 		for (int i=0; i<seconds; i++) {
 			var blockLoyalty = getElementVisible(driver, byLoyaltyUserMenu);
 			if (blockLoyalty!=null) {
-				//if (WebdrvWrapp.isElementPresent(driver, byLoyaltyUserMenu)) {
-				//WebElement shadowHost = driver.findElement(byLoyaltyUserMenu);
 				Object shadowLoyaltyPoints = ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot", blockLoyalty);
 				//TODO pendiente el grupo de Loyalty nos proporcione un id
 				String innerHTML;

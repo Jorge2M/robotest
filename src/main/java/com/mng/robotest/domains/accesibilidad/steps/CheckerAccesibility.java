@@ -27,7 +27,7 @@ public class CheckerAccesibility implements Checker {
 	public ChecksTM check(WebDriver driver) {
 		var checks = ChecksTM.getNew();
 		
-		var results = getViolations(driver);
+		var results = analyze(driver);
 		checks.add(
 			Check.make(
 				"Checks accesibility",
@@ -38,6 +38,12 @@ public class CheckerAccesibility implements Checker {
 		return checks;
 	}
 	
+	private Results analyze(WebDriver driver) { 
+		return new AxeBuilder()
+				.withTags(tags)
+				.analyze(driver);
+	}	
+	
 	private String getDescription(Results results) {
 		var description = new StringJoiner("<br>");
 		description.add(results.getViolations().size() + " accesibility violations found");
@@ -46,17 +52,6 @@ public class CheckerAccesibility implements Checker {
 				.forEach(v -> description.add(v.toString()));
 		}
 		return description.toString();
-	}
-	
-	private Results getViolations(WebDriver driver) {
-		var results = analyze(driver);
-		return results;
-	}
-	
-	private Results analyze(WebDriver driver) { 
-		return new AxeBuilder()
-				.withTags(tags)
-				.analyze(driver);
 	}
 	
 }

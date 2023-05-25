@@ -64,10 +64,6 @@ public class PedidoNavigations extends StepMantoBase {
 				anularPedidoSteps(dataPedido);
 			}
 		}
-		
-		if (listChecks.contains(CheckPedido.CONSULTAR_BOLSA)) {
-			
-		}
 	}
 	
 	private void consultarBolsaSteps(DataPedido dataPedido) {

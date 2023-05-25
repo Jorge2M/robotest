@@ -251,7 +251,7 @@ public class CheckerImgsBroken implements Checker {
 			HttpGet request = new HttpGet(getImageSrc(imgElement));
 			try (CloseableHttpResponse response = client.execute(request)) {
 				// verifying response code he HttpStatus should be 2xx if not, increment as invalid images count
-				if (String.valueOf(response.getStatusLine().getStatusCode()).matches("[2]\\d\\d")) {
+				if (String.valueOf(response.getStatusLine().getStatusCode()).matches("2\\d\\d")) {
 					imgActive = true;
 				}
 			}

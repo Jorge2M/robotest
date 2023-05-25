@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.test.beans.Linea;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -77,8 +78,8 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	}
 	private List<LineaType> getAllLineasCountry() {
 		return dataTest.getPais().getShoponline().getLineasToTest(app).stream()
-				.map(s -> s.getType())
-				.filter(s -> ALL_LINEAS.contains(s))
+				.map(Linea::getType)
+				.filter(ALL_LINEAS::contains)
 				.toList();
 	}
 	private void unselectLinea(LineaType linea) {

@@ -81,7 +81,7 @@ public abstract class PageGaleria extends PageBase {
 	public abstract ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception;
 	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
 
-	public static final List<LabelArticle> listLabelsNew = Arrays.asList(
+	private static final List<LabelArticle> LIST_LABELS_NEW = Arrays.asList(
 			LabelArticle.COMING_SOON,
 			LabelArticle.NEW_NOW,
 			LabelArticle.NEW_COLLECTION);
@@ -104,8 +104,7 @@ public abstract class PageGaleria extends PageBase {
 		switch (channel) {
 			case desktop:
 				return new PageGaleriaDesktop(from);
-			case mobile:
-			case tablet:
+			case mobile, tablet:
 			default:
 				return new PageGaleriaDevice(from);
 		}
@@ -686,7 +685,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	private static boolean isArticleNew(String nameAndLabelArticle) {
-		for (LabelArticle label : listLabelsNew) {
+		for (LabelArticle label : LIST_LABELS_NEW) {
 			for (String labelNew : label.getListTraducciones()) {
 				if (nameAndLabelArticle.contains(labelNew) || nameAndLabelArticle.contains(labelNew.toUpperCase())) {
 					return true;
@@ -718,7 +717,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public static List<LabelArticle> getListlabelsnew() {
-		return listLabelsNew;
+		return LIST_LABELS_NEW;
 	}
 	
 	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {

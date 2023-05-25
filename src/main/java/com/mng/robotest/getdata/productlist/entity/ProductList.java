@@ -42,7 +42,7 @@ public class ProductList {
 	}
 
 	public String getStockId() {
-		Pattern pattern = Pattern.compile("([0-9]{3}.\\w{2}.[0-9]{1}.(true|false).(true|false).v[0-9])");
+		Pattern pattern = Pattern.compile("(\\d{3}.\\w{2}.\\d.(true|false).(true|false).v\\d)");
 		Matcher matcher = pattern.matcher(getCacheId());
 		if (matcher.find()) {
 			String stockId = matcher.group(0);

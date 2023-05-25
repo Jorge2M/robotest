@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.test.pageobject.shop.modales.ModalsSubscriptions.InitialModal;
 
 public class ModalsSubscriptions extends PageBase {
 
