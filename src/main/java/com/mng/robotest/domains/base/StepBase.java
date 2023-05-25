@@ -11,6 +11,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.legal.legaltexts.LegalTextsPage;
 import com.mng.robotest.domains.manto.tests.ManXXX;
 import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
+import com.mng.robotest.domains.transversal.genericchecks.ChecksMango;
+import com.mng.robotest.domains.transversal.genericchecks.ChecksMango.BuilderChecksMango;
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb;
@@ -25,8 +27,6 @@ import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.steps.shop.SecFiltrosSteps;
-import com.mng.robotest.test.steps.shop.genericchecks.ChecksMango;
-import com.mng.robotest.test.steps.shop.genericchecks.ChecksMango.BuilderChecksMango;
 import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;

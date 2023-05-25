@@ -113,13 +113,9 @@ public class PageLanding extends PageBase {
 		if (pageFicha.isPageUntil(0)) {
 			return true;
 		}
-		
 		BannerObject banners = BannerObjectFactory.make(BannerType.STANDAR);
-		if (banners.isVisibleAnyBanner()) {
-			return true;
-		}
 		
-		return false;
+		return banners.isVisibleAnyBanner();
 	}
 	
 	public boolean isSomeElementVisibleInPage(

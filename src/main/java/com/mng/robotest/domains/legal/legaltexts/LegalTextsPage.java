@@ -18,7 +18,7 @@ public abstract class LegalTextsPage extends PageBase {
 	
 	private final LegalTextGroup legalTexts;
 	
-	public LegalTextsPage() {
+	protected LegalTextsPage() {
 		this.legalTexts = getLegalTexts(dataTest.getPais());
 	}
 	

@@ -23,8 +23,7 @@ import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
 
 public class PedidoNavigations extends StepMantoBase {
 
-	public void testPedidosShopEnManto(DataCheckPedidos dataCheckPedidos) 
-			throws Exception {
+	public void testPedidosShopEnManto(DataCheckPedidos dataCheckPedidos) {
 		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
 		if (app!=AppEcom.votf) {  
 			if (dataCheckPedidos.areChecksToExecute() && 

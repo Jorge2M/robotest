@@ -13,8 +13,6 @@ import com.mng.robotest.test.steps.navigations.manto.PedidoNavigations;
 
 public class CompraSteps extends StepBase {
 
-	public CompraSteps() {}
-	
 	public void startPayment(DataPago dataPago, boolean executePayment) throws Exception {
 		if (dataPago.getPago()==null) {
 			dataPago.setPago(dataTest.getPais().getPago("VISA"));

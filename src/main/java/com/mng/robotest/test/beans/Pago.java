@@ -609,10 +609,9 @@ public class Pago implements Serializable {
 	}
 
 	public boolean validoAlmacenMontcada() {
-		if (this.almacenmontcada==null || this.almacenmontcada.compareTo("s")==0) {
-			return true;
-		}
-		return false;
+		return 
+			this.almacenmontcada==null || 
+			this.almacenmontcada.compareTo("s")==0;
 	}
 	
 	public String getNumPerKlarna() {

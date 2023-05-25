@@ -19,7 +19,7 @@ public abstract class BannerObject extends PageBase {
 	public BannerType bannerType;
 	public String xpathBanner;
 	
-	public BannerObject(BannerType bannerType, String xpathBanner) {
+	protected BannerObject(BannerType bannerType, String xpathBanner) {
 		this.bannerType = bannerType;
 		this.xpathBanner = xpathBanner;
 	}

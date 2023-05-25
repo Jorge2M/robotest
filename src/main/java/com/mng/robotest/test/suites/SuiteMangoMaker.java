@@ -17,7 +17,7 @@ public abstract class SuiteMangoMaker extends SuiteMaker {
 
 	abstract List<Class<?>> getClasses();
 	
-	public SuiteMangoMaker(InputParamsMango inputParams) {
+	protected SuiteMangoMaker(InputParamsMango inputParams) {
 		super(inputParams);
 		setParameters(getParametersSuiteShop(inputParams));
 		TestRunMaker testRun = TestRunMaker.from(

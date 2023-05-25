@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.shop.genericchecks;
+package com.mng.robotest.domains.transversal.genericchecks;
 
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.genericchecks.Checker;
@@ -55,6 +55,9 @@ public class ChecksMango extends PageBase {
 		if (googleAnalytics!=null) {
 			executeCheck(new CheckerGoogleAnalytics(googleAnalytics));
 		}
+		if (imgsBroken!=null) {
+			executeCheck(new CheckerImgsBroken(imgsBroken));
+		}		
 	}
 	
 	private void executeCheck(Checker chequer) {
@@ -64,10 +67,7 @@ public class ChecksMango extends PageBase {
 	}
 	
 	private boolean checkEnabled(Checker chequer) {
-		if (chequer instanceof CheckerTextsTraduced) {
-			return false;
-		}
-		return true;
+		return !(chequer instanceof CheckerTextsTraduced);
 	}	
 
 	

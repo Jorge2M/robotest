@@ -20,7 +20,7 @@ public class Leg009 extends TestBase {
 		checkTextoLegal();
 	}
 	
-	private void goToChequeRegalo() throws Exception {
+	private void goToChequeRegalo() {
 		new SecFooterSteps().clickLinkFooter(CHEQUE_REGALO);
 	}	
 	

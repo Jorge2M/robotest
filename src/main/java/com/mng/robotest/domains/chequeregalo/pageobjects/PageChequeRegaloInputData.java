@@ -38,11 +38,11 @@ public abstract class PageChequeRegaloInputData extends PageBase {
 		return new PageChequeRegaloInputDataOld();
 	}
 	
-	public PageChequeRegaloInputData() {
+	protected PageChequeRegaloInputData() {
 		super();
 	} 
 	
-	public PageChequeRegaloInputData(PageLegalTexts legalTexts) {
+	protected PageChequeRegaloInputData(PageLegalTexts legalTexts) {
 		super(legalTexts);
 	}
 	

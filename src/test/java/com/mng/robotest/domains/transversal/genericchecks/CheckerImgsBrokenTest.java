@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.shop.genericchecks;
+package com.mng.robotest.domains.transversal.genericchecks;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +13,6 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores.Resultado;
-import com.mng.robotest.test.steps.shop.genericchecks.CheckerImgsBroken;
 
 import static org.junit.Assert.*;
 

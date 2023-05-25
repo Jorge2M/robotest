@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.shop.genericchecks;
+package com.mng.robotest.domains.transversal.genericchecks;
 
 import java.util.ArrayList;
 import java.util.List;

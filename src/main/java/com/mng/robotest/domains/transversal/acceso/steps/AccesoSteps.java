@@ -52,7 +52,7 @@ public class AccesoSteps extends StepBase {
 			TAG_REGISTRO, 
 		expected="Se accede correctamente",
 		saveNettraffic=SaveWhen.Always)
-	private void oneStepAccess(boolean clearArticulos) throws Exception {
+	private void oneStepAccess(boolean clearArticulos) {
 		String registro = "";
 		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
 			registro = "Identificarse con el usuario <b>" + dataTest.getUserConnected() + "</b><br>"; 

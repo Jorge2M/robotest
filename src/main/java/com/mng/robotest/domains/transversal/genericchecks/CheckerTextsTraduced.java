@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.shop.genericchecks;
+package com.mng.robotest.domains.transversal.genericchecks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,12 +46,9 @@ public class CheckerTextsTraduced implements Checker {
 	}
 	
 	private boolean isLiteralWithoutTraduction(String literal) {
-		if (literal!=null && literal.length() > 0 &&
-			literal.charAt(0) == '#' && 
-			(literal.contains(".") || StringUtils.countMatches(literal, "#") > 1)) {
-			return true;
-		}
-		return false;
+		return 
+			(literal!=null && literal.length() > 0 && literal.charAt(0) == '#' && 
+			(literal.contains(".") || StringUtils.countMatches(literal, "#") > 1));
 	}
 	
 	private String getFormatHtmlListMessages(List<String> listElemsWithoutTraduction) {

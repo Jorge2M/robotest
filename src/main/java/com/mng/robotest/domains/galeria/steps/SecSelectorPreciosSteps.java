@@ -81,5 +81,4 @@ class DataFilterPrecios {
 	public int maximoOrig = 0;
 	public int minimoFinal = 0;
 	public int maximoFinal = 0;
-	public DataFilterPrecios() {}
 }

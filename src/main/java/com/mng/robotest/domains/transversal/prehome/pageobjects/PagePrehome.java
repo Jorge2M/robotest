@@ -141,7 +141,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		}
 	}	
 	
-	public void accesoShopViaPrehome() throws Exception {
+	public void accesoShopViaPrehome() {
 		selecPaisIdiomaYAccede();
 		new ModalLoyaltyAfterAccess().closeModalIfVisible();
 		if (channel.isDevice()) {
