@@ -109,12 +109,23 @@ public class Pais implements Serializable {
 	}
 
 	public List<IdiomaPais> getListIdiomas() {
-		var inputParams = (InputParamsMango)TestMaker.getInputParamsSuite();
-		if (inputParams!=null) {
-			return getListIdiomas((AppEcom)inputParams.getApp());
+		var appOpt = getApp();
+		if (appOpt.isPresent()) {
+			return getListIdiomas(appOpt.get());
 		}
 		return this.listIdiomas;
 	}	
+	private Optional<AppEcom> getApp() {
+		try {
+			var inputParams = (InputParamsMango)TestMaker.getInputParamsSuite();
+			if (inputParams!=null) {
+				return Optional.of((AppEcom)inputParams.getApp());
+			}
+		} catch (Exception e) {
+			return Optional.empty();
+		}
+		return Optional.empty();
+	}
 	public List<IdiomaPais> getListIdiomas(AppEcom app) {
 		return listIdiomas.stream()
 				.filter(i -> i.getTiendasList().contains(app)).toList();
