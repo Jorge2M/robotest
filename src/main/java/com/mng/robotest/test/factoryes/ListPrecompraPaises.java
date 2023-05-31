@@ -29,9 +29,9 @@ public class ListPrecompraPaises {
 			VersionPagosSuite version = VersionPagosSuite.valueOf(inputData.getVersion());
 			List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrys);
 			int prioridad=0;
+			AppEcom app = (AppEcom)inputData.getApp();
 			for (Pais pais : listCountrys) {
-				IdiomaPais primerIdioma = pais.getListIdiomas().get(0);
-				AppEcom app = (AppEcom)inputData.getApp();
+				IdiomaPais primerIdioma = pais.getListIdiomas(app).get(0);
 				Channel channel = inputData.getChannel();
 				if (UtilsTest.paisConCompra(pais, app)) {
 					listTests.add(new PaisAplicaVale(version, pais, primerIdioma, prioridad));
@@ -40,7 +40,7 @@ public class ListPrecompraPaises {
 						"Creado Test con datos: " +
 						",Pais=" + pais.getNombre_pais() +
 						",Idioma=" + primerIdioma.getCodigo().getLiteral() +
-						",Num Idiomas=" + pais.getListIdiomas().size());
+						",Num Idiomas=" + pais.getListIdiomas(app).size());
 				}
 			}
 		}

@@ -27,7 +27,7 @@ public class LineasBannersFactory {
 			List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrysStr);
 			int prioridad=0;
 			for (Pais pais : listCountrys) {
-				Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas().iterator();
+				Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas(app).iterator();
 				while (itIdiomas.hasNext()) {
 					IdiomaPais idioma = itIdiomas.next();
 					if (paisToTest(pais, app)) {
@@ -38,7 +38,7 @@ public class LineasBannersFactory {
 							"Creado Test \"PaisIdioma\" con datos: " + 
 							",Pais=" + pais.getNombre_pais() +
 							",Idioma=" + idioma.getCodigo().getLiteral() +
-							",Num Idiomas=" + pais.getListIdiomas().size());
+							",Num Idiomas=" + pais.getListIdiomas(app).size());
 
 						prioridad+=1;
 					}

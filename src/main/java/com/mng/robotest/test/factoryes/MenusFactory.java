@@ -19,12 +19,12 @@ public class MenusFactory {
 	public Object[] createInstances(String countrysStr, String lineas, ITestContext ctxTestRun) {
 		List<PaisIdioma> listTests = new ArrayList<>();
 		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
-		AppEcom app = (AppEcom)inputData.getApp();
+		var app = (AppEcom)inputData.getApp();
 		VersionMenusPais version = VersionMenusPais.valueOf(inputData.getVersion());
 		List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrysStr);
 		int prioridad=0;
 		for (Pais pais : listCountrys) {
-			Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas().iterator();
+			Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas(app).iterator();
 			IdiomaPais idioma = itIdiomas.next();
 			if (pais.getTiendasOnlineList().contains(app)) {
 				Iterator<Linea> itLineas = Utilidades.getLinesToTest(pais, app, lineas).iterator();
@@ -40,7 +40,7 @@ public class MenusFactory {
 							",Pais=" + pais.getNombre_pais() +
 							",Idioma=" + idioma.getCodigo().getLiteral() +
 							",Linea=" + linea.getType() + 
-							",Num Idiomas=" + pais.getListIdiomas().size());
+							",Num Idiomas=" + pais.getListIdiomas(app).size());
 					}
 				}
 			}

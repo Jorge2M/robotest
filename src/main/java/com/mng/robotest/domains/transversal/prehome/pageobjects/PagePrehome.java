@@ -118,7 +118,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	}
 	
 	public void selecionIdiomaAndEnter() { 
-		if (pais.getListIdiomas().size() > 1) {
+		if (pais.getListIdiomas(app).size() > 1) {
 			seleccionaIdioma(idioma.getCodigo().getLiteral());
 		} 
 		selectButtonForEnter();

@@ -25,8 +25,9 @@ public class GenericFactory {
 			Suites suite = (Suites)TestMaker.getInputParamsSuite(ctxTestRun).getSuite();
 			List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(listaPaisesStr);
 			int prioridad=0;
+			var app = (AppEcom)TestMaker.getInputParamsSuite(ctxTestRun).getApp();
 			for (Pais pais : listCountrys) {
-				IdiomaPais primerIdioma = pais.getListIdiomas().get(0);
+				IdiomaPais primerIdioma = pais.getListIdiomas(app).get(0);
 				if (paisToTest(pais, AppEcom.shop)) {
 					addTestToList(listTests, suite, pais, primerIdioma, prioridad);
 					prioridad+=1;

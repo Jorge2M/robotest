@@ -18,12 +18,12 @@ public class ListRegistrosXPais {
 	@Parameters({"countrys", "lineas"})
 	public Object[] createInstances(String listaPaisesStr, String lineas, ITestContext ctxTestRun) {
 		List<Object> listTests = new ArrayList<>();
-		AppEcom appE = (AppEcom)TestMaker.getInputParamsSuite(ctxTestRun).getApp();
+		var appE = (AppEcom)TestMaker.getInputParamsSuite(ctxTestRun).getApp();
 		try {
 			List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(listaPaisesStr);
 			int prioridad=0;
 			for (Pais pais : listCountrys) {
-				Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas().iterator();
+				Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas(appE).iterator();
 				while (itIdiomas.hasNext()) {
 					IdiomaPais idioma = itIdiomas.next();
 					listTests.add(new Registro(pais, idioma, prioridad));

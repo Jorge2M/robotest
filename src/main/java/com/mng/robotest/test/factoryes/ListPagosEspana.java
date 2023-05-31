@@ -8,7 +8,6 @@ import org.testng.annotations.*;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.compra.factories.CompraFact;
 import com.mng.robotest.test.beans.*;
@@ -43,11 +42,11 @@ public class ListPagosEspana implements Serializable {
 //			"variando los flags de usuario registrado, empleado y métodos de envío")
 	public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
 		List<Object> listTests = new ArrayList<>(); 
-		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctx);
+		var inputData = TestMaker.getInputParamsSuite(ctx);
 		AppEcom appE = (AppEcom)inputData.getApp();
 		Channel channel = inputData.getChannel();
 		try {
-			getDataCountrys();
+			getDataCountrys(appE);
 			if (appE!=AppEcom.votf) {
 				createTestPagosEspana(listTests, appE, channel, ctx);
 				createTestPagosFrancia(listTests, appE, channel, ctx);
@@ -62,11 +61,11 @@ public class ListPagosEspana implements Serializable {
 		return (listTests.toArray(new Object[listTests.size()]));
 	}
 	
-	private void getDataCountrys() {
+	private void getDataCountrys(AppEcom app) {
 		this.espana = ESPANA.getPais();
 		this.francia = FRANCE.getPais();
-		this.castellano = espana.getListIdiomas().get(0);
-		this.frances = francia.getListIdiomas().get(0);
+		this.castellano = espana.getListIdiomas(app).get(0);
+		this.frances = francia.getListIdiomas(app).get(0);
 	}
 	
 	private void createTestPagosEspana(List<Object> listTests, AppEcom app, Channel channel, ITestContext ctx) {

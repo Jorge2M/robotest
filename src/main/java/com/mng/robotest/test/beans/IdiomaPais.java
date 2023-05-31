@@ -2,17 +2,21 @@ package com.mng.robotest.test.beans;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import javax.xml.bind.annotation.*;
 
+import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.test.data.CodIdioma;
-
 
 public class IdiomaPais implements Serializable {
 
 	private static final long serialVersionUID = 8191808970314215622L;
 	
 	String acceso;
+	String tiendas;
 	CodIdioma codigo;
 	
 	public String getAcceso() {
@@ -23,6 +27,27 @@ public class IdiomaPais implements Serializable {
 	public void setAcceso(String acceso) {
 		this.acceso = acceso;
 	}
+	
+	@XmlAttribute(name="tiendas", required=false)
+	public void setTiendas(String tiendas) {
+		this.tiendas = tiendas;
+	}		
+	
+	public String getTiendas() {
+		return this.tiendas;
+	}
+	
+	List<AppEcom> getTiendasList() {
+		if (tiendas==null) {
+			return Arrays.asList(AppEcom.values());
+		}
+		if ("".compareTo(tiendas)==0) {
+			return Arrays.asList();
+		}
+		return Stream.of(tiendas.split(","))
+				.map(a -> AppEcom.valueOf(a)).toList();
+	}
+
 	
 	public CodIdioma getCodigo() {
 		return this.codigo;

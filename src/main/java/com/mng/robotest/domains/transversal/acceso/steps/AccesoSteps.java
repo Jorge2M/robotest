@@ -180,7 +180,7 @@ public class AccesoSteps extends StepBase {
 	
 	public void accesoVOTFtoHOME() throws Exception {
 		String urlAcceso = inputParamsSuite.getUrlBase();
-		int numIdiomas = dataTest.getPais().getListIdiomas().size();
+		int numIdiomas = dataTest.getPais().getListIdiomas(app).size();
 		
 		new PageLoginVOTFSteps().goToAndLogin(urlAcceso);
 		if (numIdiomas > 1) {
@@ -242,11 +242,12 @@ public class AccesoSteps extends StepBase {
 	@Step (
 		description="Acceder a la shop vía la URL <b>" + TAG_URL_ACCESO_PAIS_NO_IP + "</b> (#{paisAccesoNoIP.getNombre_pais()} / " + TAG_LITERAL_IDIOMA_ORIGEN + ")", 
 		expected="Aparece un modal solicitando confirmación del país")
-	public static Pais accesoConURLPaisNoIP(String urlBaseTest, Pais paisAccesoNoIP, Pais paisAccesoPrevio, Pais paisPrevConf, 
-											int vecesPaisConfPrev, List<Pais> listPaisAsocIP, WebDriver driver) throws Exception {
+	public Pais accesoConURLPaisNoIP(
+			String urlBaseTest, Pais paisAccesoNoIP, Pais paisAccesoPrevio, Pais paisPrevConf, int vecesPaisConfPrev, List<Pais> listPaisAsocIP) 
+			throws Exception {
 		Pais paisAsocIP = null;
 		String urlAccesoPaisNoIp = paisAccesoNoIP.getUrlPaisEstandar(urlBaseTest);
-		IdiomaPais idiomaOrigen = paisAccesoNoIP.getListIdiomas().get(0);
+		IdiomaPais idiomaOrigen = paisAccesoNoIP.getListIdiomas(app).get(0);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_ACCESO_PAIS_NO_IP, urlAccesoPaisNoIp);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_LITERAL_IDIOMA_ORIGEN, idiomaOrigen.getLiteral());
 		

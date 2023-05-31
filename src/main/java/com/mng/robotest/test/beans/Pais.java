@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
+import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.beans.Pago.TypePago;
@@ -107,8 +109,16 @@ public class Pais implements Serializable {
 	}
 
 	public List<IdiomaPais> getListIdiomas() {
+		var inputParams = (InputParamsMango)TestMaker.getInputParamsSuite();
+		if (inputParams!=null) {
+			return getListIdiomas((AppEcom)inputParams.getApp());
+		}
 		return this.listIdiomas;
 	}	
+	public List<IdiomaPais> getListIdiomas(AppEcom app) {
+		return listIdiomas.stream()
+				.filter(i -> i.getTiendasList().contains(app)).toList();
+	}
 
 	public String getPaistop() {
 		return this.paistop;
@@ -192,7 +202,7 @@ public class Pais implements Serializable {
 	public List<AppEcom> getTiendasOnlineList() {
 		List<AppEcom> listApps = new ArrayList<>();
 		if (getTiendas_online()!=null && getTiendas_online().length()>0) {
-			List<String> listAppsStr = Arrays.asList(getTiendas_online().split(","));
+			var listAppsStr = Arrays.asList(getTiendas_online().split(","));
 			for (String app : listAppsStr) {
 				listApps.add(AppEcom.valueOf(app));
 			}

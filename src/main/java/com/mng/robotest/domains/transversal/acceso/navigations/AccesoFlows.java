@@ -109,7 +109,7 @@ public class AccesoFlows extends StepBase {
 		pageLoginVOTF.inputUsuario(accesoVOTF.getUsuario());
 		pageLoginVOTF.inputPassword(accesoVOTF.getPassword());
 		pageLoginVOTF.clickButtonContinue();
-		if (pais.getListIdiomas().size() > 1) {
+		if (pais.getListIdiomas(app).size() > 1) {
 			PageSelectIdiomaVOTF pageSelectIdiomaVOTF = new PageSelectIdiomaVOTF();
 			pageSelectIdiomaVOTF.selectIdioma(idioma.getCodigo());
 			pageSelectIdiomaVOTF.clickButtonAceptar();
