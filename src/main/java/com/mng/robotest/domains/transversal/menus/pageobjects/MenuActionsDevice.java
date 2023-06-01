@@ -28,7 +28,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 		String nameMenu = menu.getMenu().toLowerCase();
 		String xpath =  
 				"//ul/li//a[@data-testid='" + dataTestid + "." + 
-			nameMenu + "_" + idLinea + sufix + "'";
+			nameMenu + "_" + idLinea + sufix + "' or text()='" + menu.getMenu() + "'";
 		
 		if (nameMenu.contains(" ")) {
 			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));

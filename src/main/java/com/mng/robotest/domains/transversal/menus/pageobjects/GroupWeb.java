@@ -39,7 +39,7 @@ public class GroupWeb extends PageBase {
 		PROMOCION("promocionado", MENUS, ALL_LINES), 
 		INTIMISSIMI("intimissimi", MENUS, SHE_LINE), 
 		RITUALS("rituals", MENUS, SHE_LINE),
-		COLECCIONES("colecciones", MORE, ALL_EXCEPT_HOME),
+		COLECCIONES("colecciones", MORE, ALL_EXCEPT_HOME),		
 		DESTACADOS("destacados", MORE, ALL_LINES);
 	
 		private final String id; 
