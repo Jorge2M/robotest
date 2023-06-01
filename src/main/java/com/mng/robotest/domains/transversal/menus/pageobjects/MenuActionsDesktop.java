@@ -15,31 +15,7 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 			"(" + getXPathMenuAlternative() + ")";
 	}
 	
-	//TODO eliminar la parte Old cuando los nuevos data-testids suban a PRO (03-05-23)
 	private String getXPathMenuStandard() {
-		return "(" + getXPathMenuStandardOld() + " | " + getXPathMenuStandardNew() + ")";
-	}
-	
-	private String getXPathMenuStandardOld() {
-		String idLinea = menu.getLinea().name().toLowerCase();
-		if (menu.getSublinea()!=null) {
-			idLinea = menu.getSublinea().getId(app);
-		}
-			
-		String nameMenu = menu.getMenu().toLowerCase();
-		String xpath =  
-			"//ul/li//a[@data-testid='header.section.link." + 
-			nameMenu + "_" + idLinea + "'";
-		
-		if (nameMenu.contains(" ")) {
-			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
-			xpath+=" or @data-testid='header.section.link." + menuIni + "_" + idLinea + "'"; 
-		}
-		xpath+="]";
-		return xpath;
-	}
-	
-	private String getXPathMenuStandardNew() {
 		String idLinea = menu.getLinea().name().toLowerCase();
 		if (menu.getSublinea()!=null) {
 			idLinea = menu.getSublinea().getId(app);
@@ -58,19 +34,11 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 		return xpath;
 	}	
 	
-	//TODO eliminar la parte Old cuando los nuevos data-testids suban a PRO (03-05-23)
 	private String getXPathMenuAlternative() {
-		return "(" + getXPathMenuAlternativeOld() + " | " + getXPathMenuAlternativeNew() + ")";
-	}
-	private String getXPathMenuAlternativeOld() {
-		return "//ul/li//a[" + 
-				"@data-testid[contains(.,'header.section.link.')]]" +
-			    "//self::*[text()[contains(.,'" + menu.getMenu() + "')]]";
-	}
-	private String getXPathMenuAlternativeNew() {
-		return "//ul/li//a[" + 
-				"@data-testid[contains(.,'menu.family.')]]" +
-			    "//self::*[text()[contains(.,'" + menu.getMenu() + "')]]";
+		return 
+			"//ul/li//a[" + 
+			"@data-testid[contains(.,'menu.family.')]]" +
+		    "//self::*[text()[contains(.,'" + menu.getMenu() + "')]]";
 	}	
 	
 	public MenuActionsDesktop(MenuWeb menu) {

@@ -28,24 +28,31 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 		this.lineaType = lineaWeb.getLinea();
 		this.sublineaType = lineaWeb.getSublinea();
 	}
-	
+
+	//TODO eliminar el OLD ("header.menuItem") cuando suba la nueva versión a PRO (31-05-2023)
 	private String getXPathLineaLink() throws IllegalArgumentException {
+		return "(" + 
+				getXPathLineaLink("header.menuItem") + " | " + 
+				getXPathLineaLink("menu.brand") + ")";
+	}
+	
+	private String getXPathLineaLink(String dataTestid) throws IllegalArgumentException {
 		switch (lineaType) {
 		case SHE: 
 		case HE:
 		case TEEN:
 		case HOME:
 			if (app==AppEcom.outlet) {
-				return "//*[@data-testid='header.menuItem." + lineaType.getSufixOutlet(channel).trim() + "']";
+				return "//*[@data-testid='" + dataTestid + "." + lineaType.getSufixOutlet(channel).trim() + "']";
 			}
-			return "//*[@data-testid='header.menuItem." + lineaType.getId2() + "']";
+			return "//*[@data-testid='" + dataTestid + "." + lineaType.getId2() + "']";
 		case NINA:
 		case NINO:
 			if (app==AppEcom.outlet) {
-				return "//*[@data-testid='header.menuItem." + lineaType.getSufixOutlet(channel) + "']";
+				return "//*[@data-testid='" + dataTestid + "." + lineaType.getSufixOutlet(channel) + "']";
 			}
 		case KIDS:			
-			return "//*[@data-testid='header.menuItem.kids']";
+			return "//*[@data-testid='" + dataTestid + ".kids']";
 		default:
 			throw new IllegalArgumentException("The line " + lineaType + " is not present in the movil channel");
 		}
@@ -146,36 +153,5 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	public boolean isSublineaPresent(int seconds) {
 		return state(Visible, getXPathSublineaLink()).wait(seconds).check();
 	}	
-//	
-//	public boolean isLineaPresent() {
-//		return state(Present, getXPathLineaLink()).check();
-//	}
-//	
-
-//	
-//	public boolean isVisibleBlockSublineas(LineaType lineaNinosType) {
-//		String xpathBlockSublineas = "";
-//		switch (lineaNinosType) {
-//		case nina: 
-//			xpathBlockSublineas = getXPathBlockSublineas(SublineaType.nina_nina);
-//			break;
-//		case teen:
-//			xpathBlockSublineas = getXPathBlockSublineas(SublineaType.teen_nina);
-//			break;
-//		default:
-//		case nino:
-//			xpathBlockSublineas = getXPathBlockSublineas(SublineaType.nino_nino);
-//			break;
-//		}
-//		return state(Visible, xpathBlockSublineas).check();
-//	}
-//	
-//	private String getXPathLiSublinea(SublineaType sublineaType) {
-//		return getXPathSublineaNinosLink(sublineaType) + "/..";		
-//	}
-//	
-//	private String getXPathBlockSublineas(SublineaType sublineaType) {
-//		return getXPathLiSublinea(sublineaType) + "/..";		
-//	}
 	
 }

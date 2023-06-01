@@ -12,7 +12,14 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 
 	private final MenuWeb menu;
 	
+	//TODO eliminar el OLD cuando suba la nueva versión a PRO (31-05-2023)
 	private String getXPathMenu() {
+		return "(" + 
+				getXPathMenu("header.subMenu.item", "") + " | " + 
+				getXPathMenu("menu.family", ".link") + ")";
+	}
+	
+	private String getXPathMenu(String dataTestid, String sufix) {
 		String idLinea = menu.getLinea().name().toLowerCase();
 		if (menu.getSublinea()!=null) {
 			idLinea = menu.getSublinea().getId(app);
@@ -20,12 +27,12 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 		
 		String nameMenu = menu.getMenu().toLowerCase();
 		String xpath =  
-				"//ul/li//a[@data-testid='header.subMenu.item." + 
-			nameMenu + "_" + idLinea + "'";
+				"//ul/li//a[@data-testid='" + dataTestid + "." + 
+			nameMenu + "_" + idLinea + sufix + "'";
 		
 		if (nameMenu.contains(" ")) {
 			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
-			xpath+=" or @data-testid='header.subMenu.item." + menuIni + "_" + idLinea + "'"; 
+			xpath+=" or @data-testid='" + dataTestid + "." + menuIni + "_" + idLinea + sufix + "'"; 
 		}
 		xpath+="]";
 		

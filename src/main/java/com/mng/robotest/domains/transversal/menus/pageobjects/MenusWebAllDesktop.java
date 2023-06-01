@@ -15,18 +15,9 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 
 	private static final String XPATH_WRAPPER_MENU = "//div[@id[contains(.,'subMenu')]]";
 	
-	//TODO eliminar la parte Old cuando los nuevos data-testids suban a PRO (03-05-23)
-	private static final String XPATH_MENU_ITEM_OLD = 
-			"//li[@data-testid[contains(.,'header.section.link')] and " + 
-			     "string-length(normalize-space(@class))>0]";
-	
-	private static final String XPATH_MENU_ITEM_NEW = 
+	private static final String XPATH_MENU_ITEM = 
 			"//li[@data-testid[contains(.,'menu.family.')] and " + 
 			     "string-length(normalize-space(@class))>0]/a[@data-testid[contains(.,'.link')]]/..";	
-	
-	private String getXPathMenuItem() {
-		return "(" + XPATH_MENU_ITEM_OLD + " | " + XPATH_MENU_ITEM_NEW + ")";
-	}
 	
 	@Override
 	public boolean isMenuInState(boolean open, int seconds) {
@@ -37,7 +28,7 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 	}
 	
 	private String getXPathMenuItem(LineaType linea) {
-		return getXPathMenuItem() + "/*[@data-testid[contains(.,'_" + linea.toString().toLowerCase() + "')]]/.."; 
+		return XPATH_MENU_ITEM + "/*[@data-testid[contains(.,'_" + linea.toString().toLowerCase() + "')]]/.."; 
 	}
 	
 	@Override

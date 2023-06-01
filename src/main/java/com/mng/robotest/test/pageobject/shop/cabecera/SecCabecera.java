@@ -23,6 +23,14 @@ public abstract class SecCabecera extends PageBase {
 			"//a[@class='logo-link' or " + 
 			"@class[contains(.,'logo_')] or" + 
 			"@title[contains(.,'MANGO Shop Online')]]";
+	
+	//TODO eliminar el OLD cuando suba la nueva versión a PRO (31-05-2023)
+	private static final String XPATH_HAMBURGUESA_ICON_OLD = "//*[@data-testid='header.burger']";
+	private static final String XPATH_HAMBURGUESA_ICON_NEW = "//*[@data-testid='menu.burger']";
+	private String getXPathHamburguesaIcon() {
+		return "(" + XPATH_HAMBURGUESA_ICON_OLD + " | " + XPATH_HAMBURGUESA_ICON_NEW + ")";
+	}
+	
 
 	abstract String getXPathNumberArtIcono();
 	public abstract boolean isInStateIconoBolsa(State state, int seconds);
@@ -109,22 +117,20 @@ public abstract class SecCabecera extends PageBase {
 		}
 	}
 
-	private static final String XPATH_HAMBURGUESA_ICON = "//*[@data-testid='header.burger']";
-	
 	/**
 	 * Función que abre/cierra el menú lateral de móvil según le indiquemos en el parámetro 'open'
 	 * @param open: 'true'  queremos que el menú lateral de móvil se abra
 	 *			  'false' queremos que el menú lateral de móvil se cierre
 	 */
 	public void clickIconoMenuHamburguerMobil(boolean toOpenMenus) {
-		MenusWebAll secMenus = MenusWebAll.make(channel);
+		var secMenus = MenusWebAll.make(channel);
 		boolean menuVisible = secMenus.isMenuInState(toOpenMenus, 1);
 		int i=0;
-		TypeClick typeClick = TypeClick.webdriver;
+		var typeClick = TypeClick.webdriver;
 		while ((menuVisible!=toOpenMenus) && i<5) {
 			try {
-				state(Visible, XPATH_HAMBURGUESA_ICON).wait(5).check();
-				click(XPATH_HAMBURGUESA_ICON).type(typeClick).exec();
+				state(Visible, getXPathHamburguesaIcon()).wait(5).check();
+				click(getXPathHamburguesaIcon()).type(typeClick).exec();
 				typeClick = TypeClick.next(typeClick);
 				menuVisible = secMenus.isMenuInState(toOpenMenus, 2);
 			}

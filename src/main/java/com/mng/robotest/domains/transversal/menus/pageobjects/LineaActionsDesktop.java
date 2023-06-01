@@ -13,12 +13,7 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	private final SublineaType sublineaType;
 	
 	private static final String TAG_ID_LINEA = "@LineaId";
-//	private static final String XPATH_LINEA = "//li[@data-testid[contains(.,'header.menuItem')]]";
-//	private static final String XPATH_LINEA_WITH_TAG = XPATH_LINEA + "//self::*[@data-testid[contains(.,'Item." + TAG_ID_LINEA + "')]]";
-	
-	private static final String XPATH_LINEA_WITH_TAG_OLD = "//li[@data-testid[contains(.,'header.menuItem." + TAG_ID_LINEA + "')]]";
-	private static final String XPATH_LINEA_WITH_TAG_NEW = "//li[@data-testid[contains(.,'menu.brand." + TAG_ID_LINEA + "')]]";
-	
+	private static final String XPATH_LINEA_WITH_TAG = "//li[@data-testid[contains(.,'menu.brand." + TAG_ID_LINEA + "')]]";
 	private static final String TAG_ID_SUBLINEA = "@SublineaId";
 	private static final String TAG_ID_SUBLINEA2 = "@2SublineaId";
 	private static final String XPATH_SUBLINEA_WITH_2TAG = "//li[(@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] or @id[contains(.,'" + TAG_ID_SUBLINEA2 + "')]) and @data-testid[contains(.,'section')]]";
@@ -28,15 +23,8 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 		this.sublineaType = lineaWeb.getSublinea();
 	}
 
-	//TODO eliminar la parte Old cuando los nuevos data-testids suban a PRO (03-05-23)
 	private String getXPathLinea() {
-		return "(" + getXPathLineaOld() + " | " + getXPathLineaNew() + ")";
-	}
-	private String getXPathLineaOld() {
-		return XPATH_LINEA_WITH_TAG_OLD.replace(TAG_ID_LINEA, getIdLineaEnDOM());
-	}	
-	private String getXPathLineaNew() {
-		return XPATH_LINEA_WITH_TAG_NEW.replace(TAG_ID_LINEA, getIdLineaEnDOM());
+		return XPATH_LINEA_WITH_TAG.replace(TAG_ID_LINEA, getIdLineaEnDOM());
 	}
 	
 	public String getIdLineaEnDOM() {

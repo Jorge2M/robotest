@@ -407,9 +407,8 @@ public class MenuSteps extends StepBase {
 	}	
 	
 	public void clickAllMenus(LineaWeb lineaWeb) {
-		List<GroupType> listGroups = GroupType.getGroups(lineaWeb.getLinea());
-		//listGroups=Arrays.asList(GroupType.PROMOCION); //TODO eliminar
-		for (GroupType group : listGroups) {
+		var listGroups = GroupType.getGroups(lineaWeb.getLinea());
+		for (var group : listGroups) {
 			if (group.getGroupResponse()==GroupResponse.ARTICLES) {
 				//TODO pending
 			} else {
@@ -419,11 +418,11 @@ public class MenuSteps extends StepBase {
 	}
 	
 	public void clickAllMenus(GroupWeb groupWeb) {
-		MenusWebAll menusWebAll = MenusWebAll.make(channel);
+		var menusWebAll = MenusWebAll.make(channel);
 		if (groupWeb.isPresent()) {
 			clickGroup(groupWeb);
-			List<MenuWeb> listMenus = menusWebAll.getMenus(groupWeb);
-			for (MenuWeb menuWeb : listMenus) {
+			var listMenus = menusWebAll.getMenus(groupWeb);
+			for (var menuWeb : listMenus) {
 				clickMenu(menuWeb);
 			}
 		}

@@ -10,7 +10,13 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 
 public class MenusWebAllDevice extends PageBase implements MenusWebAll {
 
-	private static final String XPATH_MENU_ITEM = "//a[@data-testid[contains(.,'header.subMenu.item')]]";
+	//TODO eliminar el OLD cuando suba la nueva versión a PRO (31-05-2023)
+	private static final String XPATH_MENU_ITEM_OLD = "//a[@data-testid[contains(.,'header.subMenu.item')]]";
+	private static final String XPATH_MENU_ITEM_NEW = "//li[@data-testid]/a[@data-testid[contains(.,'menu.family.')]]";
+	
+	private String getXPathMenuItem() {
+		return "(" + XPATH_MENU_ITEM_OLD + " | " + XPATH_MENU_ITEM_NEW + ")";
+	}
 	
 	@Override
 	public boolean isMenuInState(boolean open, int seconds) {
@@ -28,7 +34,7 @@ public class MenusWebAllDevice extends PageBase implements MenusWebAll {
 	
 	private List<MenuWeb> getVisibleMenus(GroupWeb groupWeb) {
 		List<MenuWeb> menus = new ArrayList<>();
-		List<WebElement> menuElements = getElements(XPATH_MENU_ITEM);
+		var menuElements = getElements(getXPathMenuItem());
 		for (WebElement menuElement : menuElements) {
 			menus.add(new MenuWeb
 					.Builder(menuElement.getText())
