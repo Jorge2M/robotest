@@ -166,7 +166,7 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private void clickGroup() {
-		state(Visible, getXPathGroup()).wait(1).check();
+		state(Visible, getXPathGroup()).wait(2).check();
 		click(getXPathGroup()).state(Visible).exec(); 
 		if (!isVisibleSubMenus() && group.getGroupResponse()==GroupResponse.MENUS) {
 			waitMillis(1000);

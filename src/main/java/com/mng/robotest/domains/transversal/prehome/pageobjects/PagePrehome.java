@@ -202,6 +202,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		//del modal en la página de portada (es aleatorio y aparece en un intervalo de 0 a 5 segundos)
 		var localStorage = new LocalStorage(driver);
 		localStorage.setItemInLocalStorage("modalRegistroNewsletter", "0");
+		localStorage.setItemInLocalStorage("modalRegistroNewsletterImpacts", "0");
 		localStorage.setItemInLocalStorage("modalAdhesionLoyalty", "true");
 		localStorage.setItemInLocalStorage("modalSPShown", "1");
 		localStorage.setItemInLocalStorage("MangoShopModalIPConfirmed", "ES-es__2");
