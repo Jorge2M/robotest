@@ -1,5 +1,6 @@
 package com.mng.robotest.domains.cookiescheck.services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.domains.cookiescheck.entities.Cookie;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public class CookiesChecker {
 
@@ -20,12 +22,20 @@ public class CookiesChecker {
 	public CookiesChecker() {
 		allowedCookies = new CookiesFinder().getAllowedCookies();
 		whiteList = Optional.of(
+			new ArrayList<>(
 				Arrays.asList(
 						Pattern.compile("_ga_.*"),
 						Pattern.compile("MangoHQ"),
 						Pattern.compile("_dc_gtm_.*"),
 						Pattern.compile("JSESSIONID"),
-						Pattern.compile("JSESSIONIDPRE")));
+						Pattern.compile("JSESSIONIDPRE"))));
+		
+		//TODO todavía no han corregido estas cookies, esperemos que estén listas el 15-junio
+		if (!UtilsTest.todayBeforeDate("2023-06-15")) {
+			whiteList.get().add(Pattern.compile("_hjIncludedInSessionSample_1003639"));
+			whiteList.get().add(Pattern.compile("_hjSessionUser_1003639"));
+			whiteList.get().add(Pattern.compile("_hjSession_1003639"));
+		}
 	}
 	
 	//For UnitTest purposes
