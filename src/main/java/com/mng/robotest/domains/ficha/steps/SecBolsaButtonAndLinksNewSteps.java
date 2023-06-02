@@ -8,12 +8,12 @@ import com.mng.robotest.domains.ficha.pageobjects.ModCompartirNew;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew;
 import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct;
 import com.mng.robotest.domains.ficha.pageobjects.ModCompartirNew.IconSocial;
-import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.LinksAfterBolsa;
-import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb;
 import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.LinksAfterBolsa.*;
+import static com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb.*;
 
 public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 
@@ -24,15 +24,15 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		description="Seleccionar el link <b>Envío gratis a tienda</b>",
 		expected="Aparece el modal con los datos a nivel de envío y devolución")
 	public void selectEnvioYDevoluciones() {
-		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.ENVIO_GRATIS_TIENDA);
-		new ModEnvioYdevolNewSteps().checkIsVisible();
+		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(ENVIO_GRATIS_TIENDA);
+		new ModEnvioYdevolNewSteps().checkIsVisible(2);
 	}
 
 	@Step (
 		description="Seleccionar el link <b>Detalle del producto</b>",
 		expected="Se scrolla hasta el apartado de \"Descripción\"")
 	public void selectDetalleDelProducto(LineaType lineaType) {
-		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.DETALLE_PRODUCTO);
+		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(DETALLE_PRODUCTO);
 		checkScrollToDescription();
 		checkBreadCrumbs();
 		if (TypePanel.KC_SAFETY.getListApps().contains(app) &&
@@ -54,16 +54,16 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 			secDetalleProductNew.isVisibleBreadcrumbs(0), Warn);
 	 	
 	 	checks.add(
-			"Es visible el item " + ItemBreadcrumb.LINEA,
-			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.LINEA), Warn);
+			"Es visible el item " + LINEA,
+			secDetalleProductNew.isVisibleItemBreadCrumb(LINEA), Warn);
 	 	
 	 	checks.add(
-			"Es visible el item " + ItemBreadcrumb.SUBGALERIA,
-			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.SUBGALERIA), Warn);
+			"Es visible el item " + SUBGALERIA,
+			secDetalleProductNew.isVisibleItemBreadCrumb(SUBGALERIA), Warn);
 	 	
 	 	checks.add(
-			"Es visible el item " + ItemBreadcrumb.GALERIA,
-			secDetalleProductNew.isVisibleItemBreadCrumb(ItemBreadcrumb.GALERIA), Warn);
+			"Es visible el item " + GALERIA,
+			secDetalleProductNew.isVisibleItemBreadCrumb(GALERIA), Warn);
 	 	
 	 	return checks;
 	}
@@ -77,7 +77,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		description="Seleccionar el link <b>Compartir</b>",
 		expected="Aparece el modal para compartir el enlace")
 	public void selectLinkCompartir(String codigoPais) {
-		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(LinksAfterBolsa.COMPARTIR);
+		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(COMPARTIR);
 		checkAppearsModalShareSocial(codigoPais);
 	}
 	

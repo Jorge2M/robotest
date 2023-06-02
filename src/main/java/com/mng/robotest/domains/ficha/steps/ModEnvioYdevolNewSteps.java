@@ -11,9 +11,10 @@ public class ModEnvioYdevolNewSteps extends StepBase {
 
 	private final ModEnvioYdevolNew modEnvioYdev = new ModEnvioYdevolNew();
 	
-	@Validation (description="Aparece el modal con los datos a nivel de envío y devolución")
-	public boolean checkIsVisible() {
-		return modEnvioYdev.isVisibleUntil(1);
+	@Validation (
+		description="Aparece el modal con los datos a nivel de envío y devolución (lo esperamos hasta #{seconds} segundos)")
+	public boolean checkIsVisible(int seconds) {
+		return modEnvioYdev.isVisible(seconds);
 	}
 
 	@Step (
@@ -28,6 +29,6 @@ public class ModEnvioYdevolNewSteps extends StepBase {
 		description="No es visible el modal con los datos a nivel de envío y devolución",
 		level=Warn)
 	private boolean checkIsVisibleModalDatosEnvio() {
-		return !modEnvioYdev.isVisibleUntil(1);
+		return !modEnvioYdev.isVisible(1);
 	}
 }

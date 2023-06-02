@@ -13,7 +13,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageFichaDevice extends PageFicha {
 
 	private final SecProductDescrOld secProductDescr = new SecProductDescrOld();
-	private final SecSlidersOld secSliders = new SecSlidersOld();
 
 	private static final String XPATH_CONTAINER_FICHA = "//*[@class='product-detail']";
 
@@ -129,16 +128,6 @@ public class PageFichaDevice extends PageFicha {
 	@Override
 	public void selectBuscarEnTiendaLink() {
 		click(XPATH_BUSCAR_ENN_TIENDA_BUTTON).exec();
-	}
-
-	@Override
-	public boolean isVisibleSlider(Slider typeSlider) {
-		return secSliders.isVisible(typeSlider);
-	}
-
-	@Override
-	public int getNumArtVisiblesSlider(Slider typeSlider) {
-		return secSliders.getNumVisibleArticles(typeSlider);
 	}
 
 	@Override

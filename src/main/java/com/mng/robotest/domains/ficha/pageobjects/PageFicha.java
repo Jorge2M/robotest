@@ -2,6 +2,7 @@ package com.mng.robotest.domains.ficha.pageobjects;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.ficha.pageobjects.SecSliders.Slider;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
@@ -19,12 +20,11 @@ public abstract class PageFicha extends PageBase {
 	public abstract String getNameLinkBuscarEnTienda();
 	public abstract void selectBuscarEnTiendaLink();
 	public abstract boolean isVisibleBuscarEnTiendaLink();
-	public abstract boolean isVisibleSlider(Slider typeSlider);
-	public abstract int getNumArtVisiblesSlider(Slider typeSlider);
 	public abstract boolean isModalNoStockVisible(int seconds);
 
 	protected final SecDataProduct secDataProduct = new SecDataProduct(); //Name, color, talla section
 	protected final SecFitFinder secFitFinder = new SecFitFinder(); //Guía de tallas v.Fit Finder
+	protected final SecSliders secSliders = new SecSliders();
 
 	public SecDataProduct getSecDataProduct() {
 		return secDataProduct;
@@ -89,4 +89,12 @@ public abstract class PageFicha extends PageBase {
 	public int getNumColors() {
 		return secDataProduct.getNumColors();
 	}
+	
+	public boolean isVisibleSlider(Slider slider) {
+		return secSliders.isVisible(slider);
+	}
+	public int getNumArtVisiblesSlider(Slider slider) {
+		return secSliders.getNumVisibleArticles(slider);
+	}
+	
 }

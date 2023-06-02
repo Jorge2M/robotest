@@ -13,7 +13,6 @@ public class PageFichaDesktop extends PageFicha {
 	public final ModEnvioYdevolNew modEnvioYdevolNew;
 	public final SecFotosNew secFotos;
 	public final SecDetalleProduct secProductInfo;
-	public final SecSlidersNew secSliders;
 
 	public SecModalPersonalizacion secModalPersonalizacion;
 	public ModNoStock modNoStock;
@@ -25,7 +24,6 @@ public class PageFichaDesktop extends PageFicha {
 		this.modEnvioYdevolNew = new ModEnvioYdevolNew();
 		this.secFotos = new SecFotosNew();
 		this.secProductInfo = new SecDetalleProduct();
-		this.secSliders = new SecSlidersNew();
 	}
 
 	private String getXPathIsPage(String referencia) {
@@ -93,16 +91,6 @@ public class PageFichaDesktop extends PageFicha {
 	@Override
 	public void selectBuscarEnTiendaLink() {
 		secBolsaButtonAndLinks.clickLinkAndWaitLoad(LinksAfterBolsa.DISPONIBILIDAD_TIENDA);
-	}
-
-	@Override
-	public boolean isVisibleSlider(Slider typeSlider) {
-		return (secSliders.isVisible(typeSlider));
-	}
-
-	@Override
-	public int getNumArtVisiblesSlider(Slider typeSlider) {
-		return (secSliders.getNumVisibleArticles(typeSlider));
 	}
 
 	@Override

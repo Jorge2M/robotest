@@ -8,11 +8,10 @@ import com.mng.robotest.domains.base.PageBase;
 
 public class ModEnvioYdevolNew extends PageBase {
 
-	private static final String XPATH_WRAPPER = "//div[@class='handling-modal-wrapper']";
-	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_WRAPPER + "//span[@class[contains(.,'modal-close')]]";
+	private static final String XPATH_ASPA_FOR_CLOSE = "//div[@role='document']//*[@data-testid='modal.close.button']";
 	
-	public boolean isVisibleUntil(int seconds) {
-		return (state(Visible, XPATH_WRAPPER).wait(seconds).check());
+	public boolean isVisible(int seconds) {
+		return state(Present, XPATH_ASPA_FOR_CLOSE).wait(seconds).check();
 	}
 
 	public void clickAspaForClose() {

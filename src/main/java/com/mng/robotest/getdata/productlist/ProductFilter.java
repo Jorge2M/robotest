@@ -59,8 +59,8 @@ public class ProductFilter {
 	}
 	
 	public List<GarmentCatalog> getListFiltered(List<FilterType> filters, SortBy sortBy) throws Exception {
-		List<GarmentCatalog> listFiltered = getAll(sortBy);
-		for (FilterType filterType : filters) {
+		var listFiltered = getAll(sortBy);
+		for (var filterType : filters) {
 			Filter filter = factoryFilter(filterType);
 			listFiltered = filter.filter(listFiltered);
 			if (listFiltered==null || listFiltered.isEmpty()) {

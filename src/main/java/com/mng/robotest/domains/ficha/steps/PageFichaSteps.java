@@ -16,8 +16,8 @@ import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct;
 import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb;
+import com.mng.robotest.domains.ficha.pageobjects.SecSliders.Slider;
 import com.mng.robotest.domains.galeria.steps.LocationArticle;
-import com.mng.robotest.domains.ficha.pageobjects.Slider;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ColorType;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ProductNav;
@@ -40,7 +40,6 @@ public class PageFichaSteps extends StepBase {
 	private final SecBolsaButtonAndLinksNewSteps secBolsaButtonAndLinksNewSteps = new SecBolsaButtonAndLinksNewSteps();
 	private final SecFotosNewSteps secFotosNewSteps = new SecFotosNewSteps();
 	private final SecFitFinderSteps secFitFinderSteps = new SecFitFinderSteps();
-	private final SecTotalLookSteps secTotalLookSteps = new SecTotalLookSteps();
 
 	public PageFicha getFicha() {
 		return this.pageFicha;
@@ -362,19 +361,18 @@ public class PageFichaSteps extends StepBase {
 		}
 	}
 
-	public void validateSliderIfExists(Slider typeSlider) {
-		boolean isVisibleSlider = checkSliderVisible(typeSlider);
-		if (isVisibleSlider) {
-			checkNumArticlesSlider(0, typeSlider);
+	public void validateSliderIfExists(Slider slider) {
+		if (checkSliderVisible(slider)) {
+			checkNumArticlesSlider(0, slider);
 		}
 	}
 
 	@Validation (
-		description="Es visible el slider de artículos de tipo <b>#{typeSlider}</b>",
+		description="Es visible el slider de artículos de tipo <b>#{slider}</b>",
 		level=Info,
 		store=StoreType.None)
-	public boolean checkSliderVisible(Slider typeSlider) {
-		return (pageFicha.isVisibleSlider(typeSlider));
+	public boolean checkSliderVisible(Slider slider) {
+		return pageFicha.isVisibleSlider(slider);
 	}
 
 	@Validation (
@@ -513,10 +511,6 @@ public class PageFichaSteps extends StepBase {
 
 	public SecFitFinderSteps getSecFitFinderSteps() {
 		return secFitFinderSteps;
-	}
-
-	public SecTotalLookSteps getSecTotalLookSteps() {
-		return secTotalLookSteps;
 	}
 
 	public ModEnvioYdevolNewSteps getModEnvioYdevolSteps() {

@@ -73,6 +73,7 @@ public class SecBolsaButtonAndLinksNew extends PageBase {
 	}
 
 	public void clickLinkAndWaitLoad(LinksAfterBolsa linkType) {
+		moveToElement(getXPathLink(linkType));
 		click(getXPathLink(linkType)).exec();
 	}
 	
