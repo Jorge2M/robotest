@@ -88,16 +88,13 @@ public class GroupWeb extends PageBase {
 		this.sublinea = sublinea;
 		this.group = group;
 	}
-	
-//	private static final String XPATH_GROUP_DEVICE = 
-//			"//*[@data-testid[contains(.,'header.tabButton')] or " + 
-//				"@data-testid[contains(.,'header.tabLink')] or " + 
-//				"@data-testid[contains(.,'header.subMenu')]]";
-	
+
 	//TODO eliminar el OLD (header.subMenu) cuando suba la nueva versión a PRO (31-05-2023)
 	private static final String XPATH_GROUP_DEVICE = 
-			"//*[@data-testid[contains(.,'header.subMenu')] or " +  
-			   "@data-testid[contains(.,'menu.section')]]";	
+			"//*[@data-testid[contains(.,'header.tabButton')] or " + 
+				"@data-testid[contains(.,'header.tabLink')] or " + 
+				"@data-testid[contains(.,'header.subMenu')] or " +
+				"@data-testid[contains(.,'menu.section')]]";
 	
 	private static final String XPATH_GROUP_VIEW_MORE_DEVICE = "//button[@data-testid[contains(.,'viewMore')]]";
 	private static final String XPATH_GROUP_DESKTOP = "//li[@data-testid[contains(.,'menu.section')]]";
