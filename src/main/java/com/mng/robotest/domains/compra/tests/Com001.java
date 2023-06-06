@@ -15,7 +15,6 @@ import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
-import com.mng.robotest.test.utils.UtilsTest;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
@@ -70,17 +69,7 @@ public class Com001 extends TestBase {
 			throw new NotFoundException("Home Garment Not Found");
 		}
 		
-		//TODO actualmente no funciona el buscador por referencia de productos Intimissimi (CFIT-1265)
-		//confiamos que esté listo el 1-Junio-2023
-		if (!UtilsTest.todayBeforeDate("2023-06-01")) {
-			var articlesIntimissimiOpt = getArticlesIntimissimi();
-			if (!articlesIntimissimiOpt.isPresent()) {
-				throw new NotFoundException("Home Garment Not Found");
-			}
-			return Arrays.asList(articlesHomeOpt.get().get(0), articlesIntimissimiOpt.get().get(0));
-		} else {
-			return Arrays.asList(articlesHomeOpt.get().get(0), articlesHomeOpt.get().get(1));
-		}
+		return Arrays.asList(articlesHomeOpt.get().get(0), articlesHomeOpt.get().get(1));
 	}
 	
 	private Optional<List<Article>> getArticlesHome() throws Exception {
@@ -100,21 +89,4 @@ public class Com001 extends TestBase {
 		return Optional.of(Article.getArticlesCandidateForTest(getterProducts.getAll()));
 	}
 	
-	private Optional<List<Article>> getArticlesIntimissimi() throws Exception {
-		if (app==AppEcom.outlet) {
-			return Optional.empty();
-		}
-		
-		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
-			.linea(SHE)
-			.menusCandidates(Arrays.asList(
-					Menu.SUJETADORES, 
-					Menu.BRAGUITAS, 
-					Menu.LENCERIA))
-			.filter(FilterType.STOCK)
-			.build();
-		
-		return Optional.of(Article.getArticlesCandidateForTest(getterProducts.getAll()));
-	}
-
 }
