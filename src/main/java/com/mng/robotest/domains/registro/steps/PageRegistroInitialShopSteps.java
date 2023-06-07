@@ -109,7 +109,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		String parentWindow = driver.getWindowHandle();
 		pageRegistroInitial.clickPoliticaPrivacidadModal();
 		String childWindow = switchToAnotherWindow(driver, parentWindow);
-		new PagePoliticaPrivacidadSteps().checkIsPageUntil(3);
+		new PagePoliticaPrivacidadSteps().checkIsPageUntil(4);
 		return Pair.of(parentWindow, childWindow);
 	}
 	

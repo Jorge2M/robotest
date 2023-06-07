@@ -36,6 +36,7 @@ public class ModCompartirNew extends PageBase {
 	}
 	
 	public boolean isVisibleUntil(int seconds) {
+		moveToElement(XPATH_WRAPPER);
 		return state(Visible, XPATH_WRAPPER).wait(seconds).check();
 	}
 	

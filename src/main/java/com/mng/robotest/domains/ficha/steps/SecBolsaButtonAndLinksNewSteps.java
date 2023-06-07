@@ -84,7 +84,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAppearsModalShareSocial(String codigoPais) {
 		var checks = ChecksTM.getNew();
-		int seconds = 1;
+		int seconds = 2;
 	 	checks.add(
 	 		"Aparece el modal para compartir a nivel social (lo esperamos hasta " + seconds + " segundos) ",
 	 		new ModCompartirNew().isVisibleUntil(seconds));

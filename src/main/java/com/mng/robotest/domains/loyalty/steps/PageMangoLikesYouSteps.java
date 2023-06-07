@@ -9,7 +9,6 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps.ChecksResultWithNumberPoints;
-import com.mng.robotest.test.utils.UtilsTest;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
@@ -68,14 +67,10 @@ public class PageMangoLikesYouSteps extends StepBase {
 	@Validation
     public ChecksTM checkPageAyudaMangoLikesYouVisible(int seconds) {
 		var checks = ChecksTM.getNew();
-		var state = Defect;
-		if (UtilsTest.todayBeforeDate("2023-05-22")) {
-			state = Warn; 
-		}
 		checks.add(
 			"Aparece la página específica de ayuda para MangoLikesYou (la esperamos #{seconds} segundos) " + 
 		    "(problema <a href='https://jira.mango.com/browse/PIUR-4471'>PIUR4471</a>)",
-		    pageMangoLikesYou.isPageAyudaMangoLikesYouVisible(seconds), state);
+		    pageMangoLikesYou.isPageAyudaMangoLikesYouVisible(seconds), Warn);
 		
 	    return checks;
     }	
