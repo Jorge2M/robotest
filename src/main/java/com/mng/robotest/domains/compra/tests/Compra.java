@@ -8,8 +8,8 @@ public class Compra {
 
 	@Test (
 		groups={"Compra", "Checkout", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, priority=2, 
-		description="[Usuario registrado][Tarjeta guardada][Productos Home e Intimissimi (Shop)][No aceptación cookies] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
-	public void COM001_Compra_Home_Intimissimi_TrjSaved_Empl() throws Exception {
+		description="[Usuario registrado][Tarjeta guardada][Productos Home (Shop)][No aceptación cookies] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
+	public void COM001_Compra_Home_TrjSaved_Empl() throws Exception {
 		new Com001().execute();
 	}
 	

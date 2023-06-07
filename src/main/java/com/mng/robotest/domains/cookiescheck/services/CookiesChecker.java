@@ -31,7 +31,7 @@ public class CookiesChecker {
 						Pattern.compile("JSESSIONIDPRE"))));
 		
 		//TODO todavía no han corregido estas cookies, esperemos que estén listas el 15-junio
-		if (!UtilsTest.todayBeforeDate("2023-06-15")) {
+		if (UtilsTest.todayBeforeDate("2023-06-15")) {
 			whiteList.get().add(Pattern.compile("_hjIncludedInSessionSample_1003639"));
 			whiteList.get().add(Pattern.compile("_hjSessionUser_1003639"));
 			whiteList.get().add(Pattern.compile("_hjSession_1003639"));
