@@ -1,4 +1,4 @@
-[![Build Status](https://cicd-eks.sys.mango/jenkins/buildStatus/icon?job=robotest/develop)](https://cicd-eks.sys.mango/jenkins/view/Robotest/job/robotest/job/develop/)
+[![Build Status](https://cicd-eks.sys.mango/jenkins/buildStatus/icon?job=robotest/develop)](https://cicd-eks.sys.mango/jenkins/view/QA/job/robotest/job/master/)
 
 
 # Robotest
