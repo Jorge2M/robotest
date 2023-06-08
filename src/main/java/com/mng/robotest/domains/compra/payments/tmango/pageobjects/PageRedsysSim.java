@@ -1,21 +1,23 @@
 package com.mng.robotest.domains.compra.payments.tmango.pageobjects;
 
 import com.mng.robotest.domains.base.PageBase;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.domains.compra.payments.tmango.pageobjects.PageRedsysSim.OptionRedSys.*;
 
 public class PageRedsysSim extends PageBase {
 
 	public enum OptionRedSys {
-		AUTENTICACION_CON_EXITO("AUTENTICADA"),
-		DENEGAR_AUTENTICACION("NO_AUTENTICADA"),
-		TARJETA_NO_REGISTRADA_FINANET("NO_FINANET");
+		AUTENTICACION_CON_EXITO("Y"),
+		DENEGAR_AUTENTICACION("N"),
+		ATTEMPT("A");
 		
 		private String value;
 		private OptionRedSys(String value) {
 			this.value = value;
 		}
-		public String getValue() {
-			return value;
+		public String getXPath() {
+			return "//input[@value='" + value + "']";
 		}
 		public String getNombre() {
 			return name().replace("_", "");
@@ -24,17 +26,12 @@ public class PageRedsysSim extends PageBase {
 	
 	private static final String XPATH_BUTTON_ENVIAR = "//input[@id='boton']";
 	
-	private String getXPathOption(OptionRedSys option) {
-		return "//input[@value='" + option.getValue() + "']";
-	}
-	
 	public boolean isPage() {
-		String xpathOption = getXPathOption(OptionRedSys.AUTENTICACION_CON_EXITO);
-		return state(Present, xpathOption).check();
+		return state(Present, AUTENTICACION_CON_EXITO.getXPath()).check();
 	}
 	
 	public void selectOption(OptionRedSys option) {
-		click(getXPathOption(option)).exec();
+		click(option.getXPath()).exec();
 	}
 	
 	public void clickEnviar() {

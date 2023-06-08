@@ -199,8 +199,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 	@Override
 	public WebElement getImagenElementArticulo(WebElement articulo) {
 		moveToElement(articulo);
-		By byImg = By.xpath(getXPathImgArticulo(articulo));			
-		if (state(Visible, articulo).by(byImg).check()) {
+		By byImg = By.xpath(getXPathImgArticulo(articulo));
+		if (state(Visible, articulo).by(byImg).wait(1).check()) {
 			return getElement(byImg);
 		}
 		return null;
@@ -216,7 +216,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		Pattern pattern = Pattern.compile("product-key-id-(.*)");
 		Matcher matcher = pattern.matcher(id);
 		if (matcher.find()) {
-			return ".//img[@id='product-" + matcher.group(1) + "']" ;
+			return ".//img[@id='product-" + matcher.group(1) + "' or @src[contains(.,'/" + matcher.group(1) + "')]]" ;
 		}
 		return ".//img[contains(.,'product-')]";
 	}
@@ -512,8 +512,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 		
 		String xpathTalla = secTallas.getXPathArticleTallaAvailable(posArticulo, posTalla);
 		if (state(Visible, xpathTalla).check()) {
-			WebElement tallaToSelect = getElement(xpathTalla);
-			ArticuloScreen articulo = getArticuloObject(posArticulo);
+			var tallaToSelect = getElement(xpathTalla);
+			var articulo = getArticuloObject(posArticulo);
 			articulo.setTalla(Talla.fromLabel(tallaToSelect.getText()));
 			tallaToSelect.click();
 			return articulo;
@@ -627,7 +627,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	//Equivalent to Mobil
 	@Override
 	public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
-		WebElement artWElem = getElements(xpathArticuloBase).get(numArticulo-1);
+		var artWElem = getElements(xpathArticuloBase).get(numArticulo-1);
 		moveToElement(artWElem);
 		var articulo = new ArticuloScreen();
 		articulo.setReferencia(getRefArticulo(artWElem));

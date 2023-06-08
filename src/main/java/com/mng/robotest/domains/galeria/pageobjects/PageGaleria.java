@@ -3,6 +3,7 @@ package com.mng.robotest.domains.galeria.pageobjects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -29,10 +30,12 @@ import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.domains.galeria.pageobjects.PageGaleria.AttributeArticle.*;
 
 public abstract class PageGaleria extends PageBase {
 
-	public enum From {MENU, BUSCADOR}
+	public enum From { MENU, BUSCADOR }
+	enum AttributeArticle { NOMBRE, REFERENCIA, IMAGEN }
 
 	public static final int MAX_PAGE_TO_SCROLL = 20;
 
@@ -372,28 +375,19 @@ public abstract class PageGaleria extends PageBase {
 		return false;
 	}
 
-	private enum AttributeArticle { NOMBRE, REFERENCIA, IMAGEN }
-
 	public List<DataArticleGalery> searchArticleRepeatedInGallery() {
-		ListDataArticleGalery list = getListArticles(Arrays.asList(
-				AttributeArticle.NOMBRE,
-				AttributeArticle.REFERENCIA));
-
+		var list = getListArticles(Arrays.asList(NOMBRE, REFERENCIA));
 		if (!list.getArticlesRepeated().isEmpty()) {
 			//Obtener la imagen de cada artículo es muy costoso así que sólo lo hacemos en este caso
-			list = getListArticles(list.getArticlesRepeated(),
-					Arrays.asList(
-							AttributeArticle.NOMBRE,
-							AttributeArticle.REFERENCIA,
-							AttributeArticle.IMAGEN));
+			list = getListArticles(
+					list.getArticlesRepeated(),
+					Arrays.asList(NOMBRE, REFERENCIA, IMAGEN));
 		}
-		return (list.getArticlesRepeated());
+		return list.getArticlesRepeated();
 	}
 
 	public ListDataArticleGalery getListDataArticles() {
-		return getListArticles(Arrays.asList(
-				AttributeArticle.NOMBRE,
-				AttributeArticle.REFERENCIA));
+		return getListArticles(Arrays.asList(NOMBRE, REFERENCIA));
 	}
 
 	private ListDataArticleGalery getListArticles(List<AttributeArticle> attributes) {
@@ -403,7 +397,7 @@ public abstract class PageGaleria extends PageBase {
 	private ListDataArticleGalery getListArticles(
 			List<DataArticleGalery> filter, List<AttributeArticle> attributes) {
 		var listReturn = new ListDataArticleGalery();
-		for (WebElement articulo : getListaArticulos()) {
+		for (var articulo : getListaArticulos()) {
 			String refColor = getRefColorArticulo(articulo);
 			if (filter==null ||	isPresentArticleWithReferencia(filter, refColor)) {
 				listReturn.add(getDataArticulo(articulo, attributes));
@@ -476,7 +470,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public String getNombreArticuloWithText(String literal, int secondsWait) {
-		WebElement articulo = getArticleThatContainsLitUntil(literal, secondsWait);
+		var articulo = getArticleThatContainsLitUntil(literal, secondsWait);
 		if (articulo!=null) {
 			return getNombreArticulo(articulo);
 		}
@@ -551,8 +545,8 @@ public abstract class PageGaleria extends PageBase {
 		}
 	}
 
-	private void updateDataNumArticles(List<Integer> numArticlesXpage, List<Integer> numArticlesDoubleXpage,
-									   int lastPage) {
+	private void updateDataNumArticles(
+			List<Integer> numArticlesXpage, List<Integer> numArticlesDoubleXpage, int lastPage) {
 		int page = lastPage;
 		while (page>0) {
 			if (isPresentPagina(page)) {
@@ -567,7 +561,6 @@ public abstract class PageGaleria extends PageBase {
 					numArticlesXpage.set(page, numArticlesPage);
 				}
 			}
-
 			page-=1;
 		}
 	}
@@ -623,7 +616,6 @@ public abstract class PageGaleria extends PageBase {
 			}
 			lastPageWatched=pageToReview;
 		}
-
 		return 0;
 	}
 
@@ -696,24 +688,33 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public String getImagenArticulo(WebElement articulo) {
+		var imgOpt = getImagenArticuloUnit(articulo);
+		if (imgOpt.isEmpty() || "".compareTo(imgOpt.get())==0) {
+			waitMillis(200);
+			imgOpt = getImagenArticuloUnit(articulo);
+		}
+		return imgOpt.get();
+	}
+	
+	private Optional<String> getImagenArticuloUnit(WebElement articulo) {
 		waitLoadPage();
-		WebElement imagen = getImagenElementArticulo(articulo);
+		var imagen = getImagenElementArticulo(articulo);
 		if (imagen!=null) {
 			try {
-				if (app==AppEcom.outlet) {
-					return imagen.getAttribute("src");
-				}
-				//TODO Test AB nueva variante. Si se mantiene la original igualar con Outlet
-				return imagen.getAttribute("original");
+//				if (app==AppEcom.outlet) {
+					return Optional.of(imagen.getAttribute("src"));
+//				}
+//				//TODO Test AB nueva variante. Si se mantiene la original igualar con Outlet
+//				return Optional.of(imagen.getAttribute("original"));
 			}
 			catch (StaleElementReferenceException e) {
 				imagen = getImagenElementArticulo(articulo);
 				if (imagen!=null) {
-					return imagen.getAttribute("src");
+					return Optional.of(imagen.getAttribute("src"));
 				}
 			}
 		}
-		return "";
+		return Optional.empty();
 	}
 
 	public static List<LabelArticle> getListlabelsnew() {

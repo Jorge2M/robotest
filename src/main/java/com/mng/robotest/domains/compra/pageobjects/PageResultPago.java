@@ -76,6 +76,6 @@ public class PageResultPago extends PageBase {
 	}
 	
 	public void clickLinkDescuentosExperiencias() {
-		click(XPATH_LINK_DESCUENTOS_Y_EXPERIENCIAS).exec();
+		click(XPATH_LINK_DESCUENTOS_Y_EXPERIENCIAS).waitLink(1).exec();
 	}
 }

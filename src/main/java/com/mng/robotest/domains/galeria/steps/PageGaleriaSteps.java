@@ -138,10 +138,9 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Step (
 		description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla disponible", 
-		expected="Se da de alta correctamente el artículo en la bolsa",
-		saveHtmlPage=SaveWhen.Always)
+		expected="Se da de alta correctamente el artículo en la bolsa")
 	public boolean selectTallaAvailableArticulo(int posArticulo, int posTalla) throws Exception {
-		ArticuloScreen articulo = pageGaleria.selectTallaAvailableArticle(posArticulo, posTalla);
+		var articulo = pageGaleria.selectTallaAvailableArticle(posArticulo, posTalla);
 		boolean tallaVisible = (articulo!=null);
 		if (tallaVisible) {
 			dataTest.getDataBag().addArticulo(articulo);
@@ -238,7 +237,7 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation
 	private ChecksTM checkNotRepeatedArticles() {
 		var checks = ChecksTM.getNew();
-		List<DataArticleGalery> productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
+		var productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
 		String producRepeatedWarning = "";
 		if (productsRepeated!=null && !productsRepeated.isEmpty()) {
 			producRepeatedWarning+=
