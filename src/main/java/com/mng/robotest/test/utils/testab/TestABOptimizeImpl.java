@@ -8,6 +8,9 @@ import com.github.jorge2m.testmaker.service.testab.TestABOptimize;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.github.jorge2m.testmaker.conf.Channel;
 
+import static com.mng.robotest.conftestmaker.AppEcom.*;
+import static com.github.jorge2m.testmaker.conf.Channel.*;
+
 public enum TestABOptimizeImpl implements TestABOptimize {
 
 	//El id está en el campo "ID d experimento" del detalle en Google Optimize
@@ -20,8 +23,8 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"V0-Original", 
 			"V1-Variante1"),
-		Arrays.asList(Channel.mobile),
-		Arrays.asList(AppEcom.shop)
+		Arrays.asList(mobile),
+		Arrays.asList(shop)
 	),	
 	NUEVO_GUEST_CHECKOUT_PRO (
 		"Kiritaki - Nuevo Guest Checkout (PRO)",
@@ -30,8 +33,8 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"V0-Original", 
 			"V1-Variante1"),
-		Arrays.asList(Channel.mobile),
-		Arrays.asList(AppEcom.shop)
+		Arrays.asList(mobile),
+		Arrays.asList(shop)
 	),
 	PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_SHOP_PRE (
 		"[PLP][MOBILE] Selector Listado Mobile 1 columna",
@@ -40,8 +43,8 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"V0-Original", 
 			"V1-Variante1"),
-		Arrays.asList(Channel.mobile),
-		Arrays.asList(AppEcom.shop)
+		Arrays.asList(mobile),
+		Arrays.asList(shop)
 	),	
 	PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_SHOP_PRO (
 		"[PLP][MOBILE] Selector Listado Mobile 1 columna",
@@ -50,8 +53,8 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"V0-Original", 
 			"V1-Variante1"),
-		Arrays.asList(Channel.mobile),
-		Arrays.asList(AppEcom.shop)
+		Arrays.asList(mobile),
+		Arrays.asList(shop)
 	),	
 	
 	PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_OUTLET_PRO (
@@ -61,8 +64,8 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"V0-Original", 
 			"V1-Variante1"),
-		Arrays.asList(Channel.mobile),
-		Arrays.asList(AppEcom.outlet)
+		Arrays.asList(mobile),
+		Arrays.asList(outlet)
 	),	
 	PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_OUTLET_PRE (
 		"[PLP][MOBILE] Selector Listado Mobile 1 columna",
@@ -71,8 +74,8 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"V0-Original", 
 			"V1-Variante1"),
-		Arrays.asList(Channel.mobile),
-		Arrays.asList(AppEcom.outlet)
+		Arrays.asList(mobile),
+		Arrays.asList(outlet)
 	),	
 	
 	
@@ -83,8 +86,8 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"V0-Original", 
 			"V1-New Menu"),
-		Arrays.asList(Channel.mobile),
-		Arrays.asList(AppEcom.shop)
+		Arrays.asList(mobile),
+		Arrays.asList(shop)
 	),
 
 	GPS_NEW_MENU_MOBILE_PRO(
@@ -94,8 +97,8 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"V0-Original", 
 			"V1-New Menu"),
-		Arrays.asList(Channel.mobile),
-		Arrays.asList(AppEcom.shop)
+		Arrays.asList(mobile),
+		Arrays.asList(shop)
 	),	
 	
 	PLP_DESKTOP_ESCONDER_MENU_LATERAL_PRE(
@@ -105,8 +108,8 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"Variante 0 - Original",
 			"Variante 1 - Sin menú lateral"),
-		Arrays.asList(Channel.desktop),
-		Arrays.asList(AppEcom.shop)
+		Arrays.asList(desktop),
+		Arrays.asList(shop)
 	);
 
 	private String idExperiment;

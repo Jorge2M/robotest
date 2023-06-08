@@ -16,10 +16,10 @@ import com.mng.robotest.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.domains.ficha.pageobjects.SecSliders.Slider;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.getdata.productlist.GetterProducts;
-import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.repository.productlist.GetterProducts;
+import com.mng.robotest.repository.productlist.ProductFilter.FilterType;
+import com.mng.robotest.repository.productlist.entity.GarmentCatalog;
+import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
 
 import static com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel.*;
 

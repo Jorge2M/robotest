@@ -2,9 +2,9 @@ package com.mng.robotest.domains.buscador.tests;
 
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
-import com.mng.robotest.getdata.productlist.GetterProducts;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.repository.productlist.GetterProducts;
+import com.mng.robotest.repository.productlist.entity.GarmentCatalog;
+import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.steps.shop.home.PageHomeMarcasSteps;
 
 public class Bus001 extends TestBase {

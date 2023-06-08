@@ -3,8 +3,8 @@ package com.mng.robotest.domains.base.datatest;
 import java.io.Serializable;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.getdata.usuarios.GestorUsersShop;
-import com.mng.robotest.getdata.usuarios.UserShop;
+import com.mng.robotest.repository.usuarios.GestorUsersShop;
+import com.mng.robotest.repository.usuarios.UserShop;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;

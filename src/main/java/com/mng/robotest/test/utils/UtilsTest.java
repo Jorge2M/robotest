@@ -11,11 +11,11 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.getdata.productlist.GetterProducts;
-import com.mng.robotest.getdata.productlist.ProductFilter.FilterType;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
-import com.mng.robotest.getdata.productlist.sort.SortFactory.SortBy;
+import com.mng.robotest.repository.productlist.GetterProducts;
+import com.mng.robotest.repository.productlist.ProductFilter.FilterType;
+import com.mng.robotest.repository.productlist.entity.GarmentCatalog;
+import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.repository.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.github.jorge2m.testmaker.conf.Log4jTM;

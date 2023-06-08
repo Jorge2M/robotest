@@ -3,8 +3,8 @@ package com.mng.robotest.test.generic.beans;
 import java.util.List;
 import java.util.Optional;
 
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog;
-import com.mng.robotest.getdata.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.repository.productlist.entity.GarmentCatalog;
+import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.utils.ImporteScreen;
 
