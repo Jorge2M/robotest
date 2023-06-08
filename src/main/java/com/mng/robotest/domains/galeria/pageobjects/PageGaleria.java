@@ -689,11 +689,14 @@ public abstract class PageGaleria extends PageBase {
 
 	public String getImagenArticulo(WebElement articulo) {
 		var imgOpt = getImagenArticuloUnit(articulo);
-		if (!imgOpt.isPresent() || "".compareTo(imgOpt.get())==0) {
+		if (imgOpt.isEmpty() || "".compareTo(imgOpt.get())==0) {
 			waitMillis(200);
 			imgOpt = getImagenArticuloUnit(articulo);
 		}
-		return imgOpt.get();
+		if (!imgOpt.isEmpty()) {
+			return imgOpt.get();
+		}
+		return null;
 	}
 	
 	private Optional<String> getImagenArticuloUnit(WebElement articulo) {
