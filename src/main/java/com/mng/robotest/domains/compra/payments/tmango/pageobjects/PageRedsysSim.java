@@ -26,8 +26,8 @@ public class PageRedsysSim extends PageBase {
 	
 	private static final String XPATH_BUTTON_ENVIAR = "//input[@id='boton']";
 	
-	public boolean isPage() {
-		return state(Present, AUTENTICACION_CON_EXITO.getXPath()).check();
+	public boolean isPage(int seconds) {
+		return state(Present, AUTENTICACION_CON_EXITO.getXPath()).wait(seconds).check();
 	}
 	
 	public void selectOption(OptionRedSys option) {

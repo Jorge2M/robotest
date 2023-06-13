@@ -183,7 +183,7 @@ public class GroupWeb extends PageBase {
 	private boolean isGroupSelected() {
 		waitMillis(200);
 		String fontWeight = getElement(getXPathGroup()).getCssValue("font-weight");
-		return (Integer.valueOf(fontWeight)>500);
+		return (Float.valueOf(fontWeight)>500);
 	}
 	
 	private void hoverLinea() {

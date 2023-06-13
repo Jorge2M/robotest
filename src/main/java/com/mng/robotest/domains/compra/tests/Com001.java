@@ -48,16 +48,16 @@ public class Com001 extends TestBase {
 	}
 
 	private void checkout() throws Exception {
+		var pagoVisa = dataTest.getPais().getPago("VISA");
 		if (app==AppEcom.outlet) {
 			new BuilderCheckout(dataPago)
-					.pago(dataTest.getPais().getPago("VISA"))
+					.pago(pagoVisa)
 					.build()
 					.checkout(From.PREHOME);
 		} else {
-			List<Article> articlesShop = getArticlesShop();
 			new BuilderCheckout(dataPago)
-					.pago(dataTest.getPais().getPago("VISA"))
-					.listArticles(articlesShop)
+					.pago(pagoVisa)
+					.listArticles(getArticlesShop())
 					.build()
 					.checkout(From.PREHOME);
 		}

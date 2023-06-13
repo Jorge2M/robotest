@@ -11,8 +11,8 @@ public class PageRedsysSimSteps extends StepBase {
 	
 	@Validation(
 		description="Aparece la página de Simulador Pago RedSys")
-	public boolean checkPage() {
-		return pageRedsysSim.isPage();
+	public boolean checkPage(int seconds) {
+		return pageRedsysSim.isPage(seconds);
 	}
 	
 	@Step (

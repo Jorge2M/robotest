@@ -48,7 +48,7 @@ public class PageAmexInputTarjetaSteps extends StepBase {
 		pageAmexInputTarjeta.clickPagarButton();
 		
 		var pageRedsysSimSteps = new PageRedsysSimSteps();
-		pageRedsysSimSteps.checkPage();
+		pageRedsysSimSteps.checkPage(1);
 		return pageRedsysSimSteps;
 	}
 }

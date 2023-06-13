@@ -23,6 +23,7 @@ import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
+import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.domains.compra.pageobjects.DataDireccion;
@@ -69,6 +70,8 @@ public class CheckoutFlow extends StepBase {
 	private final ValeDiscount valeTest = new ValeDiscount("TEST", 10, "EXTRA SOBRE LOS ARTÍCULOS");
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 	private final CheckoutSteps pageCheckoutWrapperSteps = new CheckoutSteps();
+	
+	private static final String TAG_LOGIN_OR_LOGOFF = "@TagLoginOfLogoff";
 	
 	private CheckoutFlow (
 			DataPago dataPago, 
@@ -435,25 +438,33 @@ public class CheckoutFlow extends StepBase {
 		);
 	}
 	
-	private static final String TAG_LOGIN_OR_LOGOFF = "@TagLoginOfLogoff";
 	@Step (
 		description="Acceder a Mango " + TAG_LOGIN_OR_LOGOFF, 
 		expected="Se accede a Mango",
 		saveNettraffic=SaveWhen.Always,
 		saveErrorData=SaveWhen.Always)
 	private void accessShopAndLoginOrLogoff() throws Exception {
-		StepTM stepTestMaker = TestMaker.getCurrentStepInExecution();		
+		var stepTM = TestMaker.getCurrentStepInExecution();		
 		if (dataTest.isUserRegistered()) {
-			stepTestMaker.replaceInDescription(
+			accessShopAndLogin(stepTM);
+		} else {
+			accessShopAndLogoff(stepTM);
+		}
+	}
+	
+	private void accessShopAndLogin(StepTM stepTM) throws Exception {
+		stepTM.replaceInDescription(
 				TAG_LOGIN_OR_LOGOFF, "e Identificarse con el usuario <b>" + dataTest.getUserConnected() + "</b>");
 			new AccesoFlows().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
-			new AccesoFlows().login(dataTest.getUserConnected(), dataTest.getPasswordUser());
-		} else {
-			stepTestMaker.replaceInDescription(
+			new AccesoFlows().login(dataTest.getUserConnected(), dataTest.getPasswordUser());	
+			new SecBolsa().clearArticulos();
+	}
+	
+	private void accessShopAndLogoff(StepTM stepTM) throws Exception {
+		stepTM.replaceInDescription(
 				TAG_LOGIN_OR_LOGOFF, "(si estamos logados cerramos sesión)");
 			new AccesoFlows().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
-			new PageLogin().logoff();
-		}
+			new PageLogin().logoff();		
 	}
 	
 	public static class BuilderCheckout {
