@@ -178,7 +178,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	//----
 	
 	public static String getXPathRadioImporte(Importe importe) {
-		return ("//span[@class='gc-text' and text()[contains(.,'" + importe.getImporte() + "')]]");
+		return ("//span[@class='gc-text' and text()[contains(.,'" + importe.getAmmount() + "')]]");
 	}
 
 	@Override

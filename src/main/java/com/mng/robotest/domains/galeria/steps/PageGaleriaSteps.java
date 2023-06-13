@@ -247,7 +247,7 @@ public class PageGaleriaSteps extends StepBase {
 		}
 	  	checks.add(
 			"No aparece ningún artículo repetido" + producRepeatedWarning,
-			productsRepeated==null || productsRepeated.size()==0);
+			productsRepeated==null || productsRepeated.isEmpty());
 	  	
 	  	return checks;
 	}
@@ -683,19 +683,19 @@ public class PageGaleriaSteps extends StepBase {
 		String infoWarning = "";
 		if (!listArtWrong.isEmpty()) {
 			infoWarning+=
-					"<br><lin style=\"color:" + Warn.getColorCss() + ";\"><b>Warning!</b>: " +
-							"hay " + listArtWrong.size() + " artículos que no pertenecen a las temporadas " + listTemporadas + ":<br>";
+				"<br><lin style=\"color:" + Warn.getColorCss() + ";\"><b>Warning!</b>: " +
+				"hay " + listArtWrong.size() + " artículos que no pertenecen a las temporadas " + listTemporadas + ":<br>";
 			for (String nameWrong : listArtWrong) {
 				infoWarning+=(nameWrong + "<br>");
 			}
 			infoWarning+="</lin>";
 		}
 		checks.add(
-				Check.make(
-								"<b style=\"color:blue\">Rebajas</b></br>" +
-										"Todos los artículos pertenecen a las temporadas <b>" + listTemporadas.toString() + "</b>" + validaNotNewArticlesStr + infoWarning,
-								listArtWrong.size()==0, levelError)
-						.store(store).build());
+			Check.make(
+				"<b style=\"color:blue\">Rebajas</b></br>" +
+				"Todos los artículos pertenecen a las temporadas <b>" + listTemporadas.toString() + "</b>" + validaNotNewArticlesStr + infoWarning,
+				listArtWrong.isEmpty(), levelError)
+			.store(store).build());
 
 		return checks;
 	}
@@ -706,11 +706,11 @@ public class PageGaleriaSteps extends StepBase {
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		List<String> listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
 		checks.add(
-				Check.make(
-								"<b style=\"color:blue\">Rebajas</b></br>" +
-										"No hay ningún artículo del tipo <b>" + typeArticle + "</b>",
-								listArtWrong.size()==0, levelError)
-						.store(store).build());
+			Check.make(
+				"<b style=\"color:blue\">Rebajas</b></br>" +
+				"No hay ningún artículo del tipo <b>" + typeArticle + "</b>",
+				listArtWrong.isEmpty(), levelError)
+			.store(store).build());
 
 		if (!listArtWrong.isEmpty()) {
 			addInfoArtWrongToDescription(listArtWrong, typeArticle, checks.get(0));

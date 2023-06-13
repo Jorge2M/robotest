@@ -2,6 +2,7 @@ package com.mng.robotest.domains.compra.pageobjects.envio;
 
 import org.openqa.selenium.By;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -15,14 +16,10 @@ public class SecConfirmDatos extends PageBase {
 	private static final String XPATH_INPUT_POST_NUMBER_ID_DEUTSCHLAND = "//input[@placeholder[contains(.,'Post Number ID')]]";
 	
 	private String getXPathDivGeneral() {
-		switch (channel) {
-		case desktop:
-		case tablet:
+		if (channel==Channel.desktop || channel==Channel.tablet) {
 			return XPATH_DIV_GENERAL_DESKTOP;
-		case mobile:
-		default:
-			return XPATH_DIV_GENERAL_MOVIL;
 		}
+		return XPATH_DIV_GENERAL_MOVIL;
 	}
 	
 	public boolean isVisibleUntil(int seconds) {

@@ -43,6 +43,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class MenuSteps extends StepBase {
 
+	@Override
 	public void clickMenu(String menuLabel) {
 		click(MenuWeb.of(menuLabel));
 	}
@@ -60,7 +61,8 @@ public class MenuSteps extends StepBase {
 			"Selección del menú <b>#{menu.getLinea()} / #{menu.getGroup()} / </b>" + 
 		    "<b style=\"color:blue;\">#{menu.getMenu()}</b>", 
 		expected=
-			"La selección es correcta")	
+			"La selección es correcta")
+	@Override
 	public void clickMenu(MenuWeb menu) {
 		menuClick(menu);
 	}
@@ -128,6 +130,7 @@ public class MenuSteps extends StepBase {
 		checkSelecMenu(menu);
 	}
 	
+	@Override
 	public void clickSubMenu(MenuWeb menu) {
 		click(menu);
 		if (menu.getSublinea()==null) {
@@ -229,10 +232,12 @@ public class MenuSteps extends StepBase {
 		return checks;
 	}	
 	
+	@Override
 	public void clickLinea(LineaType lineaType) {
 		clickLinea(new LineaWeb(lineaType));
 	}
 	
+	@Override
 	public void clickLinea(LineaType lineaType, SublineaType sublineaType) {
 		if (sublineaType==null) {
 			clickLinea(new LineaWeb(lineaType));

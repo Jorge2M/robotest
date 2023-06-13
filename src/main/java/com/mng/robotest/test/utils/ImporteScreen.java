@@ -153,8 +153,7 @@ public class ImporteScreen {
 				listOfImports.add(importe.substring(0, importeSize-1)); //En ocasiones, cuando el 2o es 0, aparece 1 solo decimal
 			}
 			break;
-		case "061"/*Czech Repúblic*/:
-		case "720"/*China*/:
+		case "061"/*Czech Repúblic*/, "720"/*China*/:
 			listOfImports.add(insertCharInMiles(importe, ',') + ".00"); //En República Checa y China aparece un importe del tipo 1,598.00
 			break;
 		default:

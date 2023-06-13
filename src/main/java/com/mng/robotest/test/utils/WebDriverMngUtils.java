@@ -24,8 +24,6 @@ public class WebDriverMngUtils {
 		
 		try {
 			nodo = driver.findElement(By.xpath("//h2[text()[contains(.,'IP :')]]/following::p")).getText();
-		} catch (Exception e) {
-			throw e;
 		} finally {
 			// Cerramos la pestaña
 			JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -71,8 +69,6 @@ public class WebDriverMngUtils {
 		
 		try {
 			stackTrace = driver.findElement(By.xpath("//h2[text()[contains(.,'Stack Trace :')]]/following::p")).getText();
-		} catch (Exception e) {
-			throw e;
 		} finally {
 			// Cerramos la pestaña
 			JavascriptExecutor js = (JavascriptExecutor)driver;
@@ -85,7 +81,4 @@ public class WebDriverMngUtils {
 		return stackTrace;
 	}
    
-
-	
-
 }

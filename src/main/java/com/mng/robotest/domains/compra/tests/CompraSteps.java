@@ -21,6 +21,7 @@ public class CompraSteps extends StepBase {
 		pagoSteps.startPayment(executePayment);
 	}
 	
+	@Override
 	public void checkPedidosManto(List<DataPedido> listPedidos) throws Exception {
 		List<CheckPedido> listChecks = Arrays.asList(
 			CheckPedido.CONSULTAR_BOLSA, 
@@ -29,6 +30,7 @@ public class CompraSteps extends StepBase {
 		checkPedidosManto(listChecks, listPedidos);
 	}
 	
+	@Override
 	public void checkPedidosManto(List<CheckPedido> listChecks, List<DataPedido> listPedidos) 
 			throws Exception {
 		DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(listPedidos, listChecks);

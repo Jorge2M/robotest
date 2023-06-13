@@ -22,12 +22,12 @@ public abstract class PageChequeRegaloInputData extends PageBase {
 		EURO_200(200), 
 		EURO_250(250);
 		
-		int importe;
-		private Importe(int importe) {
-			this.importe = importe;
+		int ammount;
+		private Importe(int ammount) {
+			this.ammount = ammount;
 		}
-		public int getImporte() {
-			return importe;
+		public int getAmmount() {
+			return ammount;
 		}
 	}
 

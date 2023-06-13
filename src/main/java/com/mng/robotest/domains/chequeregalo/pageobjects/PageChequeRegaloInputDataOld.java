@@ -24,7 +24,7 @@ public class PageChequeRegaloInputDataOld extends PageChequeRegaloInputData impl
 	}
 	
 	private String getXPathRadio(Importe importe) {
-		return "//input[@name='cantidadCheque' and @value='" + importe.getImporte() + "']";
+		return "//input[@name='cantidadCheque' and @value='" + importe.getAmmount() + "']";
 	}
 	
 	@Override

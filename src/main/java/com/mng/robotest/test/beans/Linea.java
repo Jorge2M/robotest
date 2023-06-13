@@ -137,14 +137,10 @@ public class Linea implements Serializable {
 	}
 	
 	public boolean isActiveIn(AppEcom app) {
-		switch (app) {
-		case outlet:
+		if (app==AppEcom.outlet) {
 			return "s".compareTo(getOutlet())==0;
-		case shop:
-		case votf:
-		default:
-			return "s".compareTo(getShop())==0;
 		}
+		return "s".compareTo(getShop())==0;
 	}
 		
 	@XmlElement(name="sublinea") 

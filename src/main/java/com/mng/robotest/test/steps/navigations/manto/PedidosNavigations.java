@@ -58,7 +58,7 @@ public class PedidosNavigations extends StepBase {
 		}
 
 		//Si existen pedidos que validar y no se trata de un acceso desde la línea de comandos (típicamente .bat)
-		if (listPedidos!=null && listPedidos.size()>0) {
+		if (listPedidos!=null && !listPedidos.isEmpty()) {
 			new PageLoginMantoSteps().login();
 			new PedidosNavigations().validacionListaPagosStepss(listPedidos);
 		}

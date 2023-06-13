@@ -43,19 +43,15 @@ public class ListPagosEspana implements Serializable {
 	public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
 		List<Object> listTests = new ArrayList<>(); 
 		var inputData = TestMaker.getInputParamsSuite(ctx);
-		AppEcom appE = (AppEcom)inputData.getApp();
-		Channel channel = inputData.getChannel();
-		try {
-			getDataCountrys(appE);
-			if (appE!=AppEcom.votf) {
-				createTestPagosEspana(listTests, appE, channel, ctx);
-				createTestPagosFrancia(listTests, appE, channel, ctx);
-			} else {
-				createTestPagosVotf(listTests, appE, channel, ctx);
-			}
-		}
-		catch (Exception e) {
-			throw e;
+		var appE = (AppEcom)inputData.getApp();
+		var channel = inputData.getChannel();
+		
+		getDataCountrys(appE);
+		if (appE!=AppEcom.votf) {
+			createTestPagosEspana(listTests, appE, channel, ctx);
+			createTestPagosFrancia(listTests, appE, channel, ctx);
+		} else {
+			createTestPagosVotf(listTests, appE, channel, ctx);
 		}
 	
 		return (listTests.toArray(new Object[listTests.size()]));

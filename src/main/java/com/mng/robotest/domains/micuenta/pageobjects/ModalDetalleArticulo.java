@@ -19,8 +19,7 @@ public abstract class ModalDetalleArticulo extends PageBase {
 		switch (channel) {
 		case desktop:
 			return new ModalDetalleArticuloDesktop();
-		case mobile:
-		case tablet:
+		case mobile, tablet:
 			return new ModalDetalleArticuloMobile();
 		}
 		return null;

@@ -26,7 +26,7 @@ public class CheckerTextsTraduced implements Checker {
 		checks.add(
 			"No hay textos sin traducir (que comiencen por \"#\")<br>" + 
 			getFormatHtmlListMessages(listElemsWithoutTraduction),
-			listElemsWithoutTraduction.size()==0, level);
+			listElemsWithoutTraduction.isEmpty(), level);
 		
 		return checks;
 	}
@@ -52,12 +52,12 @@ public class CheckerTextsTraduced implements Checker {
 	}
 	
 	private String getFormatHtmlListMessages(List<String> listElemsWithoutTraduction) {
-		if (listElemsWithoutTraduction.size()==0) {
+		if (listElemsWithoutTraduction.isEmpty()) {
 			return "";
 		}
 		return 
-				"Se han detectado los siguientes elementos con #:<br>" +
-				String.join("<br>", listElemsWithoutTraduction);
+			"Se han detectado los siguientes elementos con #:<br>" +
+			String.join("<br>", listElemsWithoutTraduction);
 	}
 	
 }

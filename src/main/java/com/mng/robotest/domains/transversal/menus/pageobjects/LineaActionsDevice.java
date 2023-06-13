@@ -38,16 +38,12 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	
 	private String getXPathLineaLink(String dataTestid) throws IllegalArgumentException {
 		switch (lineaType) {
-		case SHE: 
-		case HE:
-		case TEEN:
-		case HOME:
+		case SHE, HE, TEEN, HOME:
 			if (app==AppEcom.outlet) {
 				return "//*[@data-testid='" + dataTestid + "." + lineaType.getSufixOutlet(channel).trim() + "']";
 			}
 			return "//*[@data-testid='" + dataTestid + "." + lineaType.getId2() + "']";
-		case NINA:
-		case NINO:
+		case NINA, NINO:
 			if (app==AppEcom.outlet) {
 				return "//*[@data-testid='" + dataTestid + "." + lineaType.getSufixOutlet(channel) + "']";
 			}

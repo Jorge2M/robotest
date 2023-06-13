@@ -18,16 +18,11 @@ public class MenusMantoFact {
 	public Object[] MAN900_MenusManto(ITestContext ctxTestRun) throws Exception {
 		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
 		var listTests = new ArrayList<MenusFact>();
-		try {
-			int prioridad=0;
-			for (Section section : Section.values()) {
-				System.out.println("Creado Test con datos: URL=" + inputData.getUrlBase() + ", cabeceraMenuName=" + section.getCabecera());
-				listTests.add(new MenusFact(section, prioridad));
-				prioridad+=1;
-			}
-		}
-		catch (Exception e) {
-			throw e;
+		int prioridad=0;
+		for (Section section : Section.values()) {
+			System.out.println("Creado Test con datos: URL=" + inputData.getUrlBase() + ", cabeceraMenuName=" + section.getCabecera());
+			listTests.add(new MenusFact(section, prioridad));
+			prioridad+=1;
 		}
 	
 		return listTests.toArray(new Object[listTests.size()]);

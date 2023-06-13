@@ -23,8 +23,7 @@ public class FactoryPageFromFooter {
 			return (new ModalBuscadorTiendas());
 		case MANGO_CARD:
 			return (new PageMangoCard());
-		case CHEQUE_REGALO:
-		case CHEQUE_REGALO_OLD:			
+		case CHEQUE_REGALO, CHEQUE_REGALO_OLD:			
 			return (new PageChequeRegaloInputDataNew());
 		case APPS:
 			return (new PageMangoShoppingApp());

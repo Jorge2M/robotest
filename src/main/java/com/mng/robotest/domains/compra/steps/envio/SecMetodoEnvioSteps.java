@@ -96,12 +96,9 @@ public class SecMetodoEnvioSteps extends StepBase {
 	}
 	
 	public void selectFranjaHorariaUrgente() {
-		switch (channel) {
-		case desktop:
-		case tablet:
+		if (channel==Channel.desktop || channel==Channel.tablet) {
 			selectFranjaHorariaUrgente(1);
-			break;
-		case mobile:
+		} else {
 			new Page1EnvioCheckoutMobilSteps().selectFranjaHorariaUrgente(1);
 		}	
 	}

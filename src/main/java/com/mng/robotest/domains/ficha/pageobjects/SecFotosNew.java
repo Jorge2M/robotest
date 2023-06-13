@@ -33,7 +33,7 @@ public class SecFotosNew extends PageBase {
 	public DataFoto getDataFoto(int line, int position) {
 		String xpathFoto = getXPathFoto(line, position);
 		List<WebElement> listFotos = getElements(xpathFoto);
-		if (listFotos.size() < 1) {
+		if (listFotos.isEmpty()) {
 			return null;
 		}
 		return (new DataFoto(listFotos.get(0).getAttribute("src")));

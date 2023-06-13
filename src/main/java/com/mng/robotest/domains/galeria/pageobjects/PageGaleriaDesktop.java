@@ -463,12 +463,12 @@ public class PageGaleriaDesktop extends PageGaleria {
 																	   LabelArticle label2) {
 		List<String> listResult = new ArrayList<>();
 		List<String> listArticles1 = getArticlesTemporadaXWithLiteralInLabel(temporadasX, Arrays.asList(label1));
-		if (listArticles1.size()==0) {
+		if (listArticles1.isEmpty()) {
 			return listResult;
 		}
 		
 		List<String> listArticles2 = getArticlesTemporadaXWithLiteralInLabel(temporadasX, Arrays.asList(label2));
-		if (listArticles2.size()==0) {
+		if (listArticles2.isEmpty()) {
 			return listResult;
 		}
 			

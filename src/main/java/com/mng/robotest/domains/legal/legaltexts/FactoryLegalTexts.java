@@ -28,8 +28,7 @@ public class FactoryLegalTexts {
 			return new LTPageRegistroInitialShop();
 		case GUEST_CHECKOUT_PASO_2_LEGAL_TEXTS:
 			return new LTPage2IdentCheckout();
-		case SUSCRIPCION_LEGAL_TEXTS:
-		case SUSCRIPCION_EN_FOOTER_Y_NON_MODAL_LEGAL_TEXTS:
+		case SUSCRIPCION_LEGAL_TEXTS, SUSCRIPCION_EN_FOOTER_Y_NON_MODAL_LEGAL_TEXTS:
 			return new LTSecFooter();
 		case AVISAME_Y_SUSCRIPCION_LEGAL_TEXTS:
 			return new LTModalArticleNotAvailable();
