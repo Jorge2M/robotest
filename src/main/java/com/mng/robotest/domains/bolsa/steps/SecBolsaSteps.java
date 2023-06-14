@@ -21,7 +21,6 @@ import com.mng.robotest.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBol
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.repository.productlist.GetterProducts;
 import com.mng.robotest.repository.productlist.ProductFilter.FilterType;
-import com.mng.robotest.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.repository.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.test.generic.UtilsMangoTest;
@@ -93,7 +92,7 @@ public class SecBolsaSteps extends StepBase {
 				.sortBy(SortBy.STOCK_DESCENDENT)
 				.build();
 		
-		List<GarmentCatalog> garments = getterProducts.getAll().subList(0, numArticulos);
+		var garments = getterProducts.getAll().subList(0, numArticulos);
 		altaListaArticulosEnBolsa(Article.getArticlesCandidateForTest(garments));
 	}
 
