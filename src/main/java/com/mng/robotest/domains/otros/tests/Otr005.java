@@ -19,7 +19,7 @@ public class Otr005 extends TestBase {
 		dataTest.setPais(JAPAN);
 		dataTest.setIdioma(JAPONES);
 		var pagePrehomeSteps = new PagePrehomeSteps();
-		new PagePrehome().previousAccessShopSteps(true);
+		new PagePrehome().previousAccessShopSteps();
 		pagePrehomeSteps.seleccionPaisIdioma();
 		pagePrehomeSteps.entradaShopGivenPaisSeleccionado();
 		new PageIniShopJaponSteps().validaPageIniJapon(2);		

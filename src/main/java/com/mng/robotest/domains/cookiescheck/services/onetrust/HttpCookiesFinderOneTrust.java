@@ -1,4 +1,4 @@
-package com.mng.robotest.domains.cookiescheck.services;
+package com.mng.robotest.domains.cookiescheck.services.onetrust;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -20,10 +20,11 @@ import com.mng.robotest.domains.cookiescheck.exceptions.UnparseableCookies;
 import com.mng.robotest.domains.cookiescheck.idp.IDPClientService;
 import com.mng.robotest.domains.cookiescheck.idp.IdentityToken;
 import com.mng.robotest.domains.cookiescheck.idp.IdpCredentials;
+import com.mng.robotest.domains.cookiescheck.services.CookiesRepository;
 
 import static org.apache.http.impl.client.HttpClients.createDefault;
 
-public class HttpCookiesFinder implements CookiesRepository {
+public class HttpCookiesFinderOneTrust implements CookiesRepository {
 
 	private static final Logger logger = Log4jTM.getLogger();
 	
@@ -31,7 +32,7 @@ public class HttpCookiesFinder implements CookiesRepository {
     private final HttpClient httpClient;
     private final String url = "https://mango.my.onetrust.com/api/cookiemanager/v2/cookie-reports/search?language=en";
 	
-    public HttpCookiesFinder() throws Exception {
+    public HttpCookiesFinderOneTrust() throws Exception {
         this.identityToken = getIdentityToken();
         this.httpClient = createDefault();
     }

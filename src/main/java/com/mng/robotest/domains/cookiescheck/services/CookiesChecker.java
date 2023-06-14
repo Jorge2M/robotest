@@ -9,31 +9,34 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.openqa.selenium.WebDriver;
 
+import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.cookiescheck.entities.Cookie;
-import com.mng.robotest.test.utils.UtilsTest;
+import com.mng.robotest.domains.cookiescheck.services.mangoauditor.CookiesFinderMangoAuditor;
 
-public class CookiesChecker {
+public class CookiesChecker extends PageBase {
 
 	private final Optional<List<Cookie>> allowedCookies;
 	private final Optional<List<Pattern>> whiteList; 
 	
 	public CookiesChecker() {
-		allowedCookies = new CookiesFinder().getAllowedCookies();
+		allowedCookies = new CookiesFinderMangoAuditor(inputParamsSuite.getUrlBase(), app)
+				.getAllowedCookies();
+		
 		whiteList = Optional.of(
 			new ArrayList<>(
 				Arrays.asList(
 						Pattern.compile("_ga_.*"),
 						Pattern.compile("MangoHQ"),
 						Pattern.compile("_dc_gtm_.*"),
+						Pattern.compile("cloudtest-name"),						
 						Pattern.compile("JSESSIONID"),
+						Pattern.compile("JSESSIONID2"),
 						Pattern.compile("JSESSIONIDPRE"))));
 		
-		//TODO todavía no han corregido estas cookies, esperemos que estén listas más adelante
-		if (UtilsTest.todayBeforeDate("2023-06-20")) {
-			whiteList.get().add(Pattern.compile("_screload"));
-		}
+//		if (UtilsTest.todayBeforeDate("2023-06-20")) {
+//			whiteList.get().add(Pattern.compile("_screload"));
+//		}
 	}
 	
 	//For UnitTest purposes
@@ -42,9 +45,9 @@ public class CookiesChecker {
 		this.whiteList = Optional.of(whiteList);
 	}
 	
-	public Pair<Boolean, List<org.openqa.selenium.Cookie>> check(WebDriver driver) {
-		Set<org.openqa.selenium.Cookie> pageCookies = driver.manage().getCookies();
-		List<org.openqa.selenium.Cookie> listNotAllowedCookies = getNotAllowedCookies(pageCookies);
+	public Pair<Boolean, List<org.openqa.selenium.Cookie>> check() {
+		var pageCookies = driver.manage().getCookies();
+		var listNotAllowedCookies = getNotAllowedCookies(pageCookies);
 		return Pair.of(listNotAllowedCookies.isEmpty(), listNotAllowedCookies);
 	}
 	
