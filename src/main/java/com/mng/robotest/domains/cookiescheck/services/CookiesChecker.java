@@ -32,7 +32,7 @@ public class CookiesChecker {
 		
 		//TODO todavía no han corregido estas cookies, esperemos que estén listas más adelante
 		if (UtilsTest.todayBeforeDate("2023-06-20")) {
-			whiteList.get().add(Pattern.compile("_screeload"));
+			whiteList.get().add(Pattern.compile("_screload"));
 		}
 	}
 	
