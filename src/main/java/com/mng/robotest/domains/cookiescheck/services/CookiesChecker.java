@@ -13,6 +13,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.cookiescheck.entities.Cookie;
 import com.mng.robotest.domains.cookiescheck.services.mangoauditor.CookiesFinderMangoAuditor;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public class CookiesChecker extends PageBase {
 
@@ -34,9 +35,9 @@ public class CookiesChecker extends PageBase {
 						Pattern.compile("JSESSIONID2"),
 						Pattern.compile("JSESSIONIDPRE"))));
 		
-//		if (UtilsTest.todayBeforeDate("2023-06-20")) {
-//			whiteList.get().add(Pattern.compile("_screload"));
-//		}
+		if (UtilsTest.todayBeforeDate("2023-06-20")) {
+			whiteList.get().add(Pattern.compile("consentCookie"));
+		}
 	}
 	
 	//For UnitTest purposes
