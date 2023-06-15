@@ -141,7 +141,7 @@ public class AccesoSteps extends StepBase {
 		if (app==AppEcom.votf && !dataTest.isUserRegistered()) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
 			accesoVOTFtoHOME();					
 		} else {
-			new PagePrehomeSteps().seleccionPaisIdiomaAndEnter(false);
+			new PagePrehomeSteps().seleccionPaisIdiomaAndEnter(false, true);
 			if (dataTest.isUserRegistered()) {
 				identificacionEnMango();
 				new SecBolsaSteps().clear();

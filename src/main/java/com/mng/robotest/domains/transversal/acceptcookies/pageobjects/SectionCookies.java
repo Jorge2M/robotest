@@ -5,8 +5,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SectionCookies extends PageBase {
 
-	private static final String XPATH_ACCEPT_BUTTON = "//button[@id[contains(.,'accept-btn')]]";
-	private static final String XPATH_SET_COOKIES_BUTTON = "//button[@id[contains(.,'pc-btn')]]";
+	private static final String XPATH_MICROFRONTEND = "//micro-frontend[@id='cookies']";
+	private static final String XPATH_SET_COOKIES_BUTTON = XPATH_MICROFRONTEND + "//button[1]";
+	private static final String XPATH_ACCEPT_BUTTON = XPATH_MICROFRONTEND + "//button[2]";
 	
 	public boolean isVisible(int seconds) {
 		return state(Visible, XPATH_ACCEPT_BUTTON).wait(seconds).check();

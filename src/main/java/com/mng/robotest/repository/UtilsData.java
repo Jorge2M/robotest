@@ -1,5 +1,6 @@
 package com.mng.robotest.repository;
 
+import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,5 +33,15 @@ public class UtilsData {
 			return url;
 		}
 		return "";
+	}
+	
+	public static String getUrlBase(String initialURL) throws Exception {
+		URI uri = new URI(initialURL);
+		String urlTmp = (uri.getScheme() + "://" + uri.getHost());
+		if (urlTmp.charAt(urlTmp.length()-1)=='/') {
+			return urlTmp;
+		} else {
+			return urlTmp + "/";
+		}
 	}
 }

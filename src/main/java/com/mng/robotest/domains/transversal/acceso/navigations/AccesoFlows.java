@@ -15,6 +15,7 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PageJCAS;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PagePrehome;
+import com.mng.robotest.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
@@ -54,10 +55,10 @@ public class AccesoFlows extends StepBase {
 		if (app==AppEcom.votf) {
 			accesoVOTF();
 			goFromLineasToMultimarcaVOTF();
-			pagePrehome.previousAccessShopSteps(acceptCookies);
+			pagePrehome.previousAccessShopSteps();
+			pagePrehome.manageCookies(acceptCookies);			
 		} else {
-			pagePrehome.previousAccessShopSteps(acceptCookies);
-			pagePrehome.accesoShopViaPrehome();
+			new PagePrehomeSteps().seleccionPaisIdiomaAndEnter(false, acceptCookies);
 		}
 	}
 	

@@ -10,7 +10,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.domains.transversal.acceptcookies.pageobjects.SectionCookies;
-import com.mng.robotest.domains.transversal.acceptcookies.pageobjects.ModalSetCookies.SectionConfCookies;
 import com.mng.robotest.domains.transversal.acceptcookies.steps.SectionCookiesSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
@@ -18,6 +17,8 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.test.pageobject.utils.LocalStorage;
 import com.mng.robotest.test.utils.testab.TestABactive;
+
+import static com.mng.robotest.domains.transversal.acceptcookies.pageobjects.ModalSetCookies.SectionConfCookies.*;
 
 public class PagePrehome extends PageBase implements PageFromFooter {
 
@@ -149,11 +150,10 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		}
 	}
 	
-	public void previousAccessShopSteps(boolean acceptCookies) throws Exception {
+	public void previousAccessShopSteps() throws Exception {
 		reloadIfServiceUnavailable();
 		new PageJCAS().identJCASifExists();
 		TestABactive.currentTestABsToActivate(channel, app, driver);
-		manageCookies(acceptCookies);
 	}
 	
 	public void selecPaisIdiomaYAccede() {
@@ -173,7 +173,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		}
 	}
 	
-	private void manageCookies(boolean acceptCookies) {
+	public void manageCookies(boolean acceptCookies) {
 		var sectionCookiesSteps = new SectionCookiesSteps();
 		if (acceptCookies) {
 			if (new SectionCookies().isVisible(5)) {
@@ -181,18 +181,18 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 			}
 		} else {
 			//Enable Only performance cookies for suport to TestABs
-			changeCookieOptanonConsent();
+//			changeCookieOptanonConsent();
 			enablePerformanceCookies();
 		}
 	}
 	
-	private void changeCookieOptanonConsent() {
-		new SectionCookiesSteps().changeCookie_OptanonConsent();
-	}
+//	private void changeCookieOptanonConsent() {
+//		new SectionCookiesSteps().changeCookie_OptanonConsent();
+//	}
 	
 	private void enablePerformanceCookies() {
 		var modalSetCookiesSteps = new SectionCookiesSteps().setCookies();
-		modalSetCookiesSteps.select(SectionConfCookies.COOKIES_DE_RENDIMIENTO);
+		modalSetCookiesSteps.select(COOKIES_DE_RENDIMIENTO);
 		modalSetCookiesSteps.enableSwitchCookies();
 		modalSetCookiesSteps.saveConfiguration();
 	}	

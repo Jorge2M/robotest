@@ -11,8 +11,6 @@ import java.util.Optional;
 import org.junit.Test;
 
 import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.repository.productlist.GetterProducts;
-import com.mng.robotest.repository.productlist.Menu;
 import com.mng.robotest.repository.productlist.GetterProducts.Builder;
 import com.mng.robotest.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog;

@@ -1,6 +1,5 @@
 package com.mng.robotest.repository.productlist;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -81,7 +80,7 @@ public class GetterProducts {
 			WebDriver driver) throws Exception {
 		
 		urlForJavaCall = getUrlForJavaCall(url);
-		urlForBrowserCall = getUrlBase(url);
+		urlForBrowserCall = UtilsData.getUrlBase(url);
 		nameCloudTest = UtilsData.getNameCloudTest(url);
 		if (app==AppEcom.votf) {
 			this.saleType = "V";
@@ -139,17 +138,7 @@ public class GetterProducts {
 	}
 	
 	private String getUrlForJavaCall(String initialURL) throws Exception {
-		return getUrlBase(initialURL);
-	}
-	
-	private String getUrlBase(String initialURL) throws Exception {
-		URI uri = new URI(initialURL);
-		String urlTmp = (uri.getScheme() + "://" + uri.getHost());
-		if (urlTmp.charAt(urlTmp.length()-1)=='/') {
-			return urlTmp;
-		} else {
-			return urlTmp + "/";
-		}
+		return UtilsData.getUrlBase(initialURL);
 	}
 	
 	public ProductList getProductList() throws Exception {

@@ -8,12 +8,13 @@ import java.util.Optional;
 import org.junit.Test;
 
 import com.mng.robotest.domains.cookiescheck.entities.Cookie;
+import com.mng.robotest.domains.cookiescheck.services.onetrust.CookiesFinderOneTrust;
 
 public class CookiesFinderIT {
 
 	@Test
 	public void testGetCookies() throws Exception {
-		CookiesFinder cookieFinder = new CookiesFinder();
+		CookiesFinderOneTrust cookieFinder = new CookiesFinderOneTrust();
 		Optional<List<Cookie>> cookies = cookieFinder.getAllowedCookies();
 		
 		assertTrue(cookies.isPresent() && cookies.get().size()>0);

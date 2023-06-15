@@ -1,42 +1,35 @@
 package com.mng.robotest.domains.transversal.acceptcookies.pageobjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import com.mng.robotest.domains.base.PageBase;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class ModalSetCookies extends PageBase {
+
+	private static final String XPATH_MICROFRONTEND = "//micro-frontend[@id='cookies']";
 	
 	public enum SectionConfCookies {
-		TU_PRIVACIDAD("ot-pvcy-txt"),
-		COOKIES_ESTRICTAMENTE_NECESARIAS("ot-header-id-C0001"),
-		COOKIES_FUNCIONOALES("ot-header-id-C0003"),
-		COOKIES_DE_RENDIMIENTO("ot-header-id-C0002"),
-		COOKIES_DIRIGIDAS("ot-header-id-C0004"),
-		COOKIES_DE_REDES_SOCIALES("ot-header-id-C0005");
+		TU_PRIVACIDAD(1),
+		COOKIES_ESTRICTAMENTE_NECESARIAS(2),
+		COOKIES_FUNCIONOALES(3),
+		COOKIES_DE_RENDIMIENTO(4),
+		COOKIES_DIRIGIDAS(5),
+		COOKIES_DE_REDES_SOCIALES(6);
 		
-		private String id;
-		private SectionConfCookies(String id) {
-			this.id = id;
+		private int position;
+		private SectionConfCookies(int position) {
+			this.position = position;
 		}
-		public String getId() {
-			return id;
+		public String getXPathOption() {
+			return XPATH_MICROFRONTEND + "//*[@role='listitem'][" + position + "]//button";
 		}
-		public String getNombre() {
-			return this.name().replace("_", " ");
+		public String getXPathHeader() {
+			return XPATH_MICROFRONTEND + "//h2";
 		}
 	}
 	
-	private static final String XPATH_SAVE_CONF_BUTTON = "//button[@class[contains(.,'save-preference')]]";
-	private static final String XPATH_WRAPPER_SWITCH = "//div[@class='ot-tgl']";
-	private static final String XPATH_INPUT_SWITCH_HANDLER = ".//input[@class='category-switch-handler']";
-	private static final String XPATH_SWITCH_COOKIES = "//span[@class='ot-switch-nob']";
-	
-	private String getXPathMenuSection(SectionConfCookies section) {
-		return "//*[@id='" + section.getId() + "']/..";
-	}
-	
+	private static final String XPATH_SAVE_CONF_BUTTON = XPATH_MICROFRONTEND + "/div/div/div/button[1]";
+	private static final String XPATH_CHECKBOX_INACTIVE = XPATH_MICROFRONTEND + "//input[@type='checkbox']";
+			
 	public boolean isVisible(int seconds) {
 		return state(Visible, XPATH_SAVE_CONF_BUTTON).wait(seconds).check();
 	}
@@ -50,15 +43,20 @@ public class ModalSetCookies extends PageBase {
 	}
 	
 	public void clickSection(SectionConfCookies section) {
-		click(By.id(section.getId())).exec();
+		state(Visible, section.getXPathOption()).wait(1).check();
+		click(section.getXPathOption()).exec();
 	}
 	
 	public boolean isSectionUnfold(SectionConfCookies section) {
-		String xpathMenu = getXPathMenuSection(section);
-		WebElement menuSection = getElementWeb(xpathMenu);
-		return (
-			menuSection!=null && 
-			menuSection.getAttribute("aria-selected").compareTo("true")==0);
+		var optionSection = getElementWeb(section.getXPathOption());
+		if (optionSection==null) {
+			return false;
+		}
+		var headerSection = getElementWeb(section.getXPathHeader());
+		if (headerSection==null) {
+			return false;
+		}
+		return optionSection.getText().compareTo(headerSection.getText())==0;
 	}
 	
 	public void enableSwitchCookies() {
@@ -74,12 +72,10 @@ public class ModalSetCookies extends PageBase {
 	}
 	
 	public boolean isSwitchEnabled() {
-		var wrapperSwitch = getElementVisible(XPATH_WRAPPER_SWITCH);
-		return state(Present, wrapperSwitch).by(By.xpath(XPATH_INPUT_SWITCH_HANDLER + "//self::*[@checked]")).check();
+		return getElementVisible(XPATH_CHECKBOX_INACTIVE).isEnabled();
 	}
 	
 	public void clickSwitchCookies() {
-		var switchElem = getElementVisible(XPATH_SWITCH_COOKIES);
-		click(switchElem).exec();
+		click(getElementVisible(XPATH_CHECKBOX_INACTIVE)).exec();
 	}
 }
