@@ -36,6 +36,36 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(mobile),
 		Arrays.asList(shop)
 	),
+	KIRITAKI_FASE5_REDISENO_AVISAME_PRE (
+		"KIRITAKI - Fase 5 Rediseño Avísame - PRE SHOP",
+		"eXLa9VWYTRCsYcx-04lJFA",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Variante1"),
+		Arrays.asList(desktop,mobile),
+		Arrays.asList(shop,outlet)
+	),	
+	KIRITAKI_FASE5_REDISENO_AVISAME_DESKTOP_PRO (
+		"KIRITAKI - Fase 5 Rediseño Avísame - Desktop - PRO",
+		"RuCkF7OlTUy4mWQ3_LNuvw",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Variante1"),
+		Arrays.asList(desktop),
+		Arrays.asList(shop,outlet)
+	),	
+	KIRITAKI_FASE5_REDISENO_AVISAME_MOBILE_PRO (
+		"KIRITAKI - Fase 5 Rediseño Avísame - Mobile - PRO",
+		"G9L4uBG1Sf2Cb004fxWQ-w",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Variante1"),
+		Arrays.asList(desktop),
+		Arrays.asList(shop,outlet)
+	),	
 	PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_SHOP_PRE (
 		"[PLP][MOBILE] Selector Listado Mobile 1 columna",
 		"LDNtdfrQS5K13P4o7I1SvQ",
