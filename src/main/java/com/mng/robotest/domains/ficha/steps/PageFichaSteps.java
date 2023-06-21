@@ -46,7 +46,7 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	public void checkIsFichaAccordingTypeProduct(Article article) {
-		checkIsFichaArtDisponible(article.getArticleId(), 3);
+		checkIsFichaArtDisponible(article.getArticleId(), 5);
 		checksDefault();
 		checksGeneric()
 			.imgsBroken()

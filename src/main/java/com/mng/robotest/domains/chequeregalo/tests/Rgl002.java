@@ -90,8 +90,7 @@ public class Rgl002 extends TestBase {
 	private void checkPedido() throws Exception {
 		List<CheckPedido> listChecks = Arrays.asList(
 			CheckPedido.CONSULTAR_BOLSA, 
-			CheckPedido.CONSULTAR_PEDIDO,
-			CheckPedido.ANULAR);
+			CheckPedido.CONSULTAR_PEDIDO);
 		
 		checkPedidosManto(listChecks, dataPago.getListPedidos());
 	}

@@ -47,7 +47,7 @@ public class ModalChatBotSteps extends StepBase {
 		return modalChatBot.isResponseVisible(respuesta, seconds);
 	}
 	
-	@Validation (description="Aparece el botón #{respuesta} (lo esperamos hasta #{seconds} segundos)")
+	@Validation (description="Aparece el botón #{button} (lo esperamos hasta #{seconds} segundos)")
 	public boolean isVisibleButton(String button, int seconds) {
 		return modalChatBot.isButtonVisible(button, seconds);
 	}
