@@ -15,7 +15,8 @@ public class TestABactive {
 
 	private TestABactive() {}
 	
-	public static void currentTestABsToActivate(Channel channel, AppEcom app, WebDriver driver) throws Exception {
+	public static void currentTestABsToActivate(Channel channel, AppEcom app, WebDriver driver) 
+			throws Exception {
 		var testABs = Arrays.asList(
 			TestABactData.getNew(NUEVO_GUEST_CHECKOUT_PRE, 1),
 			TestABactData.getNew(NUEVO_GUEST_CHECKOUT_PRO, 1),

@@ -35,7 +35,7 @@ public class CookiesChecker extends PageBase {
 						Pattern.compile("JSESSIONID2"),
 						Pattern.compile("JSESSIONIDPRE"))));
 		
-		if (UtilsTest.todayBeforeDate("2023-06-20")) {
+		if (UtilsTest.todayBeforeDate("2023-07-01")) {
 			whiteList.get().add(Pattern.compile("_hjIncludedInSessionSample_*"));
 			whiteList.get().add(Pattern.compile("_hjSessionUser_*"));
 			whiteList.get().add(Pattern.compile("_hjSession_*"));
