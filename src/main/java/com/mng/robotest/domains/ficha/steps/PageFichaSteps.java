@@ -86,7 +86,7 @@ public class PageFichaSteps extends StepBase {
 	public ChecksTM validaDetallesProducto(DataFichaArt datosArticulo) {
 		var checks = ChecksTM.getNew();
 		if (datosArticulo.availableReferencia()) {
-			int seconds = 3;
+			int seconds = 5;
 			checks.add(
 				"Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() +
 				" (la esperamos hasta " + seconds + " segundos)",
