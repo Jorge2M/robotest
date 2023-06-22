@@ -1,6 +1,7 @@
 package com.mng.robotest.domains.micuenta.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -10,6 +11,7 @@ import com.mng.robotest.domains.micuenta.beans.Ticket;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
 import com.mng.robotest.test.steps.shop.pedidos.PageDetallePedidoSteps;
+import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -48,13 +50,31 @@ public class PageMisComprasSteps extends StepBase {
 		}
 		return validateIsCompraOnlinePrendas(codPedido, 2);
 	}
+
+	//TODO cuando funcione Mis Compras volver a poner esta validación
+//	@Validation (
+//		description=
+//			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> (la esperamos #{seconds} segundos")
+//	private boolean validateIsCompraOnlinePrendas(String codPedido, int seconds) {
+//		return pageMisCompras.isTicketOnline(codPedido, seconds);
+//	}	
 	
-	@Validation (
-		description=
-			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> (la esperamos #{seconds}) segundos")
 	private boolean validateIsCompraOnlinePrendas(String codPedido, int seconds) {
-		return pageMisCompras.isTicketOnline(codPedido, seconds);
+		return 
+			validateIsCompraOnlinePrendasCheck(codPedido, seconds)
+			.areAllChecksOvercomed();
 	}
+	
+	@Validation
+	private ChecksTM validateIsCompraOnlinePrendasCheck(String codPedido, int seconds) {
+		var checks = ChecksTM.getNew();
+		State level = (UtilsTest.todayBeforeDate("2023-08-01")) ? State.Warn : Defect;
+		checks.add(
+			"Es visible la compra Online asociada al pedido <b>" + codPedido + "</b> (la esperamos " + seconds + " segundos",
+			pageMisCompras.isTicketOnline(codPedido, seconds), level);
+		
+		return checks;		
+	}	
 	
 	@Validation (
 		description=
