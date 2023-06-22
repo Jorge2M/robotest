@@ -102,16 +102,11 @@ public class SecBolsa extends SecBolsaCommon {
 
 	@Override
 	public void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected) {
-		for (int i=0; i<3; i++) {
-			if (!isInStateUntil(stateBolsaExpected, i)) {
-				if (channel==Channel.mobile) {
-					setBolsaMobileToState(stateBolsaExpected);
-				} else {
-					setBolsaDesktopToState(stateBolsaExpected);
-				}
-			}
-			else {
-				break;
+		if (!isInStateUntil(stateBolsaExpected, 1)) {
+			if (channel==Channel.mobile) {
+				setBolsaMobileToState(stateBolsaExpected);
+			} else {
+				setBolsaDesktopToState(stateBolsaExpected);
 			}
 		}
 	}

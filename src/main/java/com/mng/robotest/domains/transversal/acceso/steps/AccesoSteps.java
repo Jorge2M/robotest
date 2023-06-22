@@ -51,10 +51,10 @@ public class AccesoSteps extends StepBase {
 		saveNettraffic=SaveWhen.Always)
 	private void login(DataTest dataTest, boolean clearArticulos) {
 		new AccesoFlows().login(dataTest.getUserConnected(), dataTest.getPasswordUser());
+		validaIdentificacionEnShop();
 		if (clearArticulos) {
 			new SecBolsa().clearArticulos();
 		}
-		validaIdentificacionEnShop();
 	}
 
 	public void validaIdentificacionEnShop() {
