@@ -15,6 +15,7 @@ import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa.*;
 
 public abstract class SecBolsaCommon extends PageBase {
 
@@ -33,7 +34,7 @@ public abstract class SecBolsaCommon extends PageBase {
 	
 	public boolean isInStateUntil(StateBolsa stateBolsaExpected, int seconds) {
 		String xpath = getXPathPanelBolsa();
-		if (stateBolsaExpected==StateBolsa.OPEN) {
+		if (stateBolsaExpected==OPEN) {
 			return state(Visible, xpath).wait(seconds).check();
 		}
 		return state(Invisible, xpath).wait(seconds).check();
@@ -102,7 +103,7 @@ public abstract class SecBolsaCommon extends PageBase {
 	}
 
 	public void clearArticulos() {
-		setBolsaToStateIfNotYet(StateBolsa.OPEN);
+		setBolsaToStateIfNotYet(OPEN);
 		int ii = 0;
 		do {
 			int numArticulos = getLineasArtBolsa().getNumLinesArticles();
@@ -132,7 +133,7 @@ public abstract class SecBolsaCommon extends PageBase {
 		}
 		while (!numberItemsIsUntil("0", 0) && ii<10);
 
-		setBolsaToStateIfNotYet(StateBolsa.CLOSED);
+		setBolsaToStateIfNotYet(CLOSED);
 	}
 	
 	public void click1erArticuloBolsa() {
@@ -144,7 +145,7 @@ public abstract class SecBolsaCommon extends PageBase {
 		if (app==AppEcom.outlet) {
 			click(XPATH_ASPA).exec();
 		} else {
-			setBolsaToStateIfNotYet(StateBolsa.CLOSED);
+			setBolsaToStateIfNotYet(CLOSED);
 		}
 	}
 	

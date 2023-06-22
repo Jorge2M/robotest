@@ -22,8 +22,10 @@ public class PagePrehomeSteps extends StepBase {
 	
 	private final Pais pais = dataTest.getPais();
 	private final IdiomaPais idioma = dataTest.getIdioma();
-	
 	private final PagePrehome pagePrehome = new PagePrehome();
+	
+	private static final String TAG_PAIS= "@TAGPAIS";
+	private static final String TAG_IDIOMA = "@TAGIDIOMA";
 	
 	@Step (
 		description="Acceder a la página de inicio y seleccionar el país <b>#{dataTest.getNombrePais()}</b>",
@@ -77,18 +79,17 @@ public class PagePrehomeSteps extends StepBase {
 	public void seleccionPaisIdiomaAndEnter(boolean execValidacs, boolean acceptCookies) 
 			throws Exception {
 		pagePrehome.previousAccessShopSteps();
-		accesoShopViaPrehome(execValidacs, acceptCookies);
+		accesoShopViaPrehome(pais, idioma, execValidacs, acceptCookies);
 	}
-	
-	private final String TagPais = "@TAGPAIS";
-	private final String TagIdioma = "@TAGIDIOMA";
+
 	@Step (
-		description="Acceder a la página de inicio y seleccionar el país <b>" + TagPais + "</b>, el idioma <b>" + TagIdioma + "</b> y acceder",
+		description=
+			"Acceso <b style=\"color:brown;\">#{pais.getNombre_pais()} / #{idioma.getLiteral()}</b> desde la PreHome",
 		expected="Se accede correctamente al pais / idioma seleccionados",
 		saveNettraffic=SaveWhen.Always)
-	private void accesoShopViaPrehome(boolean execValidacs, boolean acceptCookies) throws Exception {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TagPais, pais.getNombre_pais());
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TagIdioma, idioma.getLiteral());
+	private void accesoShopViaPrehome(Pais pais, IdiomaPais idioma, boolean execValidacs, boolean acceptCookies) throws Exception {
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_PAIS, pais.getNombre_pais());
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_IDIOMA, idioma.getLiteral());
 		
 		pagePrehome.accesoShopViaPrehome();
 		pagePrehome.manageCookies(acceptCookies);

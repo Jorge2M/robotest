@@ -36,47 +36,25 @@ import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.
 
 public class AccesoSteps extends StepBase {
 
-	private static final String TAG_PAIS = "@TagNombrePais";
-	private static final String TAG_IDIOMA = "@TagLiteralIdioma";
-	private static final String TAG_REGISTRO = "@TagRegistro";
-	
 	public void oneStep(boolean clearArticulos) throws Exception {
 		new AccesoFlows().accesoHomeAppWeb();
-		oneStepAccess(clearArticulos);
+		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
+			login(dataTest, clearArticulos);
+		}
 	}
 	
 	@Step (
-		description=
-			"Acceder a Mango " + 
-			"(<b style=\"color:brown;\">" + TAG_PAIS + " / " + TAG_IDIOMA + "</b>)<br>" + 
-			TAG_REGISTRO, 
-		expected="Se accede correctamente",
+		description= 
+			"Identificarse con el usuario <b style=\"color:blue;\">#{dataTest.getUserConnected()}</b> " + 
+			"(borrar artículos bolsa: <b>#{clearArticulos}</b>)",
+		expected="el login es correcto",
 		saveNettraffic=SaveWhen.Always)
-	private void oneStepAccess(boolean clearArticulos) {
-		String registro = "";
-		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
-			registro = "Identificarse con el usuario <b>" + dataTest.getUserConnected() + "</b><br>"; 
-		}
-		if (clearArticulos) {
-			registro+= "Borrar la Bolsa<br>";
-		}
-
-		StepTM stepTestMaker = TestMaker.getCurrentStepInExecution();
-		stepTestMaker.replaceInDescription(TAG_PAIS, dataTest.getPais().getNombre_pais());
-		stepTestMaker.replaceInDescription(TAG_IDIOMA, dataTest.getIdioma().getCodigo().getLiteral());
-		stepTestMaker.replaceInDescription(TAG_REGISTRO, registro);
-
-		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
-			new AccesoFlows().login(dataTest.getUserConnected(), dataTest.getPasswordUser());
-		}
-
+	private void login(DataTest dataTest, boolean clearArticulos) {
+		new AccesoFlows().login(dataTest.getUserConnected(), dataTest.getPasswordUser());
 		if (clearArticulos) {
 			new SecBolsa().clearArticulos();
 		}
-
-		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
-			validaIdentificacionEnShop();
-		}
+		validaIdentificacionEnShop();
 	}
 
 	public void validaIdentificacionEnShop() {

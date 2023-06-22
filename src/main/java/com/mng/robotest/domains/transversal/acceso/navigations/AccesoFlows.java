@@ -51,10 +51,10 @@ public class AccesoFlows extends StepBase {
 	}
 	
 	public void accesoHomeAppWeb(boolean acceptCookies) throws Exception {
-		var pagePrehome = new PagePrehome();
 		if (app==AppEcom.votf) {
 			accesoVOTF();
 			goFromLineasToMultimarcaVOTF();
+			var pagePrehome = new PagePrehome();
 			pagePrehome.previousAccessShopSteps();
 			pagePrehome.manageCookies(acceptCookies);			
 		} else {
