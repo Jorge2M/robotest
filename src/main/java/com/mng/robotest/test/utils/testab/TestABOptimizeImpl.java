@@ -65,7 +65,17 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 			"V1-Variante1"),
 		Arrays.asList(desktop),
 		Arrays.asList(shop,outlet)
-	),	
+	),
+	AHORRO_EN_BOLSA_MOBILE_PRE (
+		"[BOLSA][MOBILE] Ahorro en bolsa - PRE",
+		"Fa9wRNgvRuCQibSCb90DiA",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Variante1"),
+		Arrays.asList(mobile),
+		Arrays.asList(shop,outlet)
+	),			
 	PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_SHOP_PRE (
 		"[PLP][MOBILE] Selector Listado Mobile 1 columna",
 		"LDNtdfrQS5K13P4o7I1SvQ",
