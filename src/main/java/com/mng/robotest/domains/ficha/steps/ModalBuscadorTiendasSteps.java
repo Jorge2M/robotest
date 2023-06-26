@@ -20,7 +20,7 @@ public class ModalBuscadorTiendasSteps extends StepBase {
 			"La capa de búsqueda es visible<br> (la esperamos hasta " + seconds + "segundos",
 			modalBuscadorTiendas.isVisible(seconds), Warn);
 	 	
-	 	var state = (isPRO())?Defect:Warn;
+	 	var state = isPRO()? Defect:Warn;
 	 	checks.add(
 			"Se ha localizado alguna tienda (la esperamos hasta " + seconds + " segundos)",
 			modalBuscadorTiendas.isPresentAnyTiendaUntil(seconds), state);

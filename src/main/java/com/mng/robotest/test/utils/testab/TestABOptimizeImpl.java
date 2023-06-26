@@ -36,7 +36,7 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(mobile),
 		Arrays.asList(shop)
 	),
-	KIRITAKI_FASE5_REDISENO_AVISAME_PRE (
+	KIRITAKI_FASE5_REDISENO_AVISAME_SHOP_PRE (
 		"KIRITAKI - Fase 5 Rediseño Avísame - PRE SHOP",
 		"eXLa9VWYTRCsYcx-04lJFA",
 		Arrays.asList(0,1),
@@ -66,6 +66,26 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(desktop),
 		Arrays.asList(shop,outlet)
 	),
+	KIRITAKI_FASE5_REDISENO_AVISAME_DESKTOP_OUTLET_PRO (
+		"KIRITAKI - Fase 5 Rediseño Avísame - Desktop - Outlet - PRO",
+		"nTzvJz5LR8Sgenw7sjmR3w",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Variante1"),
+		Arrays.asList(desktop),
+		Arrays.asList(shop,outlet)
+	),	
+	KIRITAKI_FASE5_REDISENO_AVISAME_MOBILE_OUTLET_PRO (
+		"KIRITAKI - Fase 5 Rediseño Avísame - Mobile - Outlet - PRO",
+		"wXfT4XZXRXS89R0J8OK5_A",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"V0-Original", 
+			"V1-Variante1"),
+		Arrays.asList(desktop),
+		Arrays.asList(shop,outlet)
+	),	
 	AHORRO_EN_BOLSA_MOBILE_PRE (
 		"[BOLSA][MOBILE] Ahorro en bolsa - PRE",
 		"Fa9wRNgvRuCQibSCb90DiA",
