@@ -12,9 +12,9 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	private static final String XPATH_CAPA_TALLAS = "//div[@id='sizesContainer']"; 
 	private static final String XPATH_SELECTOR_TALLAS = XPATH_CAPA_TALLAS + "//ul";
 	private static final String XPATH_LIST_TALLAS_FOR_SELECT = XPATH_CAPA_TALLAS + "//ul";	
-	private static final String XPATH_TALLA_ITEM = XPATH_CAPA_TALLAS + "//span[@data-available]";
-	private static final String XPATH_TALLA_AVAILABLE = XPATH_TALLA_ITEM + "//self::*[@data-available='true']";
-	private static final String XPATH_TALLA_UNAVAILABLE = XPATH_TALLA_ITEM + "//self::*[@data-available='false']";
+	private static final String XPATH_TALLA_ITEM = XPATH_CAPA_TALLAS + "//*[@data-testid[contains(.,'sizeSelector.size')]]";
+	private static final String XPATH_TALLA_AVAILABLE = XPATH_TALLA_ITEM + "//self::*[@data-testid[contains(.,'.available')]]";
+	private static final String XPATH_TALLA_UNAVAILABLE = XPATH_TALLA_ITEM + "//self::*[@data-testid[contains(.,'.unavailable')]]";
 	private static final String XPATH_ICON_DESPLEGABLE_TALLAS = "//i[@class[contains(.,'icon-outline-down')]]";
 	private static final String XPATH_TALLA_SELECTED = XPATH_ICON_DESPLEGABLE_TALLAS + "/../span";
 	private static final String XPATH_MSG_AVISO_TALLA = XPATH_CAPA_TALLAS + "//span";

@@ -5,7 +5,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.footer.pageobjects.FactoryPageFromFooter;
-import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.test.beans.IdiomaPais;
@@ -46,7 +45,7 @@ public class SecFooterSteps extends StepBase {
 	@Validation
 	private ChecksTM checkPageCorrectAfterSelectLinkFooter(String windowFatherHandle, FooterLink typeFooter, boolean closeAtEnd) {
 		var checks = ChecksTM.getNew();
-		PageFromFooter pageObject = FactoryPageFromFooter.make(typeFooter);
+		var pageObject = FactoryPageFromFooter.make(typeFooter);
 		String windowActualHandle = driver.getWindowHandle();
 		boolean newWindowInNewTab = (windowActualHandle.compareTo(windowFatherHandle)!=0);
 		int seconds = 5;

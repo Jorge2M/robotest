@@ -30,7 +30,7 @@ public class Com010 extends TestBase {
 		dataTest.setIdioma(idioma);
 		dataTest.setUserRegistered(usrRegistrado);
 		this.pago = pago;
-		this.testVale = testVale(testVale);
+		this.testVale = testVale;
 		this.manyArticles = manyArticles;
 		this.empleado = empleado;
 //		this.checkAnulaPedido = checkAnulaPedido;
@@ -50,8 +50,7 @@ public class Com010 extends TestBase {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkPagos()
 				.checkMisCompras()
-				//TODO lo activamos temporalmente
-				.checkManto(!channel.isDevice())
+//				.checkManto(!channel.isDevice())
 				.emaiExists()
 				.checkPromotionalCode(testVale || empleado)
 				.userIsEmployee(empleado).build();
@@ -72,11 +71,5 @@ public class Com010 extends TestBase {
 //			checkPedidosManto(listChecks, dataPago.getListPedidos());
 //		}
 	}
-	
-	private boolean testVale(boolean testVale) {
-		return (
-			testVale && 
-			!isPRO());
-	}	
 
 }

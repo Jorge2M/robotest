@@ -56,7 +56,7 @@ public class ModalDirecFacturaSteps extends StepBase {
 	 	
 	 	int seconds = 2;
 	 	checks.add(
-	 		"Desaparece la capa de Loading (lo esperamos hasta " + seconds + "segundos", 
+	 		"Desaparece la capa de Loading (lo esperamos hasta " + seconds + " segundos", 
 	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
 	 	
 	 	return checks;

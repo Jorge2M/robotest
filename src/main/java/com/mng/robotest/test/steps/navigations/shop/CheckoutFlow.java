@@ -184,7 +184,7 @@ public class CheckoutFlow extends StepBase {
 			if (dataPago.getFTCkout().userIsEmployee && ESPANA.isEquals(pais)) {
 				testInputCodPromoEmplSpain();
 			} else {
-				if (dataPago.getFTCkout().chequeRegalo) {
+				if (dataPago.getFTCkout().checkPromotionalCode) {
 					if (isMobile()) {
 						new Page1EnvioCheckoutMobil().inputCodigoPromo(valeTest.getCodigoVale());
 					} else {
@@ -275,9 +275,6 @@ public class CheckoutFlow extends StepBase {
 	
 	private void testValeDescuento() {
 		var page1 = new Page1DktopCheckoutSteps();
-		if ("".compareTo(valeTest.getTextoCheckout())!=0) {
-			page1.checkIsVisibleTextVale(valeTest);
-		}
 		page1.inputValeDescuento(valeTest);
 	}
 	

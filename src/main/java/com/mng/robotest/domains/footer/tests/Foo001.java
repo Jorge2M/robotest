@@ -23,7 +23,7 @@ public class Foo001 extends TestBase {
 	private void checkLinksSelection() {
 		String urlInitialPage = driver.getCurrentUrl();
 		List<FooterLink> listFooterLinksToValidate = FooterLink.getFooterLinksFiltered(app, channel);
-		for (FooterLink footerLinkToValidate : listFooterLinksToValidate) {
+		for (var footerLinkToValidate : listFooterLinksToValidate) {
 			if (footerLinkToValidate == MANGO_CARD) { 
 				secFooterSteps.clickLinkFooter(footerLinkToValidate, false);
 				new TarjetaMangoSteps().checkSolicitarTarjeta();

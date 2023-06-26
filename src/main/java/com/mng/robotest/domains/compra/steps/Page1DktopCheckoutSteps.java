@@ -80,18 +80,6 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	 	return checks;
 	}
 	
-	@Validation (
-		description="<b>Sí</b> aparece el texto del vale <b>#{valePais.getCodigoVale()}</b> (\"#{valePais.getTextoCheckout()}\")")
-	public boolean checkIsVisibleTextVale(ValeDiscount valePais) {
-		return (page1DktopCheckout.checkTextValeCampaingIs(valePais.getTextoCheckout()));
-	}
-	
-	@Validation (
-		description="<b>No</b> aparece el texto del vale <b>#{valePais.getCodigoVale()}</b> (\"#{valePais.getTextoCheckout()}\")")
-	public boolean checkIsNotVisibleTextVale(ValeDiscount valePais) {
-		return (!page1DktopCheckout.checkTextValeCampaingIs(valePais.getTextoCheckout()));
-	}
-	
 	@Step (
 		description="Introducir el vale <b style=\"color:blue;\">#{valePais.getCodigoVale()}</b> y pulsar el botón \"CONFIRMAR\"", 
 		expected="Aparece la página de resumen de artículos con los descuentos correctamente aplicados",
@@ -99,9 +87,13 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	public void inputValeDescuento(ValeDiscount valePais) { 
 		var pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
-		dataTest.getDataBag().setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen(true));	
-		checkAfterInputDiscountVale(valePais);
-		checkValeDiscountIsCorrect(valePais);
+		dataTest.getDataBag().setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen(true));
+		if (!isPRO()) {
+			checkRedMessageInputValeInvisible(valePais);
+			checkValeDiscountIsCorrect(valePais);
+		} else {
+			checkRedMessageInputValeVisible(valePais);
+		}
 		
 		checksDefault();
 		checksGeneric()
@@ -109,17 +101,16 @@ public class Page1DktopCheckoutSteps extends StepBase {
 			.netTraffic().execute();
 	}
 	
-	@Validation
-	private ChecksTM checkAfterInputDiscountVale(ValeDiscount valePais) {
-		var checks = ChecksTM.getNew();
-		int seconds = 1;
-		boolean isVisibleError = page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(seconds);
-	 	checks.add(
-			"<b>No</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"",
-			!isVisibleError);
-		
-		return checks;
+	@Validation(
+		description="<b>No</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"")
+	private boolean checkRedMessageInputValeInvisible(ValeDiscount valePais) {
+		return !page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(1);
 	}
+	@Validation(
+		description="<b>Sí</b> aparece mensaje de error en rojo (rgba(255, 0, 0, 1) en el bloque correspondiente al \"Código promocional\"")
+	private boolean checkRedMessageInputValeVisible(ValeDiscount valePais) {
+		return page1DktopCheckout.isVisibleErrorRojoInputPromoUntil(1);
+	}	
 	
 	@Validation
 	private ChecksTM checkValeDiscountIsCorrect(ValeDiscount valePais) {
