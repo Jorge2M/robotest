@@ -57,7 +57,7 @@ public class PageMisCompras extends PageBase {
 	
 	
 	public List<Ticket> getTickets(TypeTicket typeCompra) {
-		if (listTickets==null) {
+		if (listTickets==null || listTickets.isEmpty()) {
 			listTickets = getTickets().stream()
 				.filter(ticket -> ticket.getType()==typeCompra)
 				.toList();
