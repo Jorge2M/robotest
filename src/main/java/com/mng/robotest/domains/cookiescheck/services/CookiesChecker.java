@@ -35,7 +35,7 @@ public class CookiesChecker extends PageBase {
 						Pattern.compile("JSESSIONID2"),
 						Pattern.compile("JSESSIONIDPRE"))));
 		
-		if (UtilsTest.todayBeforeDate("2023-07-01")) {
+		if (UtilsTest.todayBeforeDate("2023-01-01")) {
 			whiteList.get().add(Pattern.compile("_hjIncludedInSessionSample_.*"));
 			whiteList.get().add(Pattern.compile("_hjSessionUser_.*"));
 			whiteList.get().add(Pattern.compile("_hjSession_.*"));
@@ -73,15 +73,21 @@ public class CookiesChecker extends PageBase {
 	
 	private boolean isCookieInWhiteList(org.openqa.selenium.Cookie cookie) {
 		return whiteList.get().stream()
-				.anyMatch(w -> cookieInPattern(cookie, w));
+				.anyMatch(w -> isCookieInPattern(cookie, w));
 	}
 	
 	private boolean isCookieInListAllowed(org.openqa.selenium.Cookie cookie) {
 		return allowedCookies.get().stream()
-		        .anyMatch(c -> c.getCookieName().compareTo(cookie.getName())==0);		
+				.anyMatch(c -> 
+					isSameCookie(cookie, c) || 
+					isCookieInPattern(cookie, Pattern.compile(c.getCookieName().replace("*", ".*"))));		
 	}
 	
-	private boolean cookieInPattern(org.openqa.selenium.Cookie cookie, Pattern whiteItem) {
+	private boolean isSameCookie(org.openqa.selenium.Cookie cookie, Cookie cookieAllowed) {
+		return cookie.getName().compareTo(cookieAllowed.getCookieName())==0;
+	}
+	
+	private boolean isCookieInPattern(org.openqa.selenium.Cookie cookie, Pattern whiteItem) {
 		Matcher matcher = whiteItem.matcher(cookie.getName());
 		return matcher.matches();
 	}

@@ -78,7 +78,7 @@ public class SecBannersSteps extends StepBase {
 				break;
 			default:				
 			case OTROS:
-				validacionesBannerEstandar(2, channel);
+				validacionesBannerEstandar(3, channel);
 				break;
 			}
 		}

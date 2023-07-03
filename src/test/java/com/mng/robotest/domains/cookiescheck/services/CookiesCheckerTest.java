@@ -67,6 +67,19 @@ public class CookiesCheckerTest {
 		assertEquals(0, notAllowedCookies.size());
 	}
 	
+	@Test
+	public void testCookiesByPattern() {
+		var allowedCookies = mockAllowedCookies(Arrays.asList(
+				"_hjSession_*"));
+		var pageCookies = mockPageCookies(Arrays.asList(
+				"_hjSession_1003639"));
+		
+		var checker = new CookiesChecker(allowedCookies, new ArrayList<Pattern>());
+		var notAllowedCookies = checker.getNotAllowedCookies(pageCookies);
+		
+		assertEquals(0, notAllowedCookies.size());
+	}	
+	
 	private List<Cookie> mockAllowedCookies(List<String> cookies) {
 		return cookies.stream()
 		        .flatMap(c -> Stream.of(Cookie.from(c)))
