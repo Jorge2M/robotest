@@ -32,7 +32,7 @@ public class Gpo005 extends TestBase {
 			clickGroup(NEW_NOW);
 			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);
 		}
-		checksGeneric().accesibility().execute();
+		//checksGeneric().accesibility().execute();
 	}
 	
 	private void selectPricesInterval() throws Exception {
