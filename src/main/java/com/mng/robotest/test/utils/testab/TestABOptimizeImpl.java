@@ -83,7 +83,7 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"V0-Original", 
 			"V1-Variante1"),
-		Arrays.asList(desktop),
+		Arrays.asList(mobile),
 		Arrays.asList(shop,outlet)
 	),	
 	AHORRO_EN_BOLSA_MOBILE_PRE (
