@@ -25,4 +25,5 @@ public class PageRecogidaDomicSteps extends StepBase {
 
 		return checks;
 	}
+	
 }

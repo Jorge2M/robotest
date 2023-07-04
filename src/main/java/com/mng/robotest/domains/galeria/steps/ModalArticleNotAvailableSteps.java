@@ -54,10 +54,9 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	}
 	
 	@Step (
-		description="Introducimos el mail #{mail} y pulsamos el botón <b>Recibir Aviso</b>", 
+		description="Pulsamos el botón <b>Recibir Aviso</b>", 
 		expected="Aparece el modal de Petición confirmada")
-	public void inputMailAndClickRecibirAviso(String mail) {
-		modalArticleNotAvailable.inputMail(mail);
+	public void clickRecibirAviso() {
 		modalArticleNotAvailable.clickRecibirAviso();
 		checkModalAvisoOkVisible(2);
 	}
