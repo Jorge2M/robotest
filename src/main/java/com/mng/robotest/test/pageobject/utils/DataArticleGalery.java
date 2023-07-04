@@ -38,6 +38,9 @@ public class DataArticleGalery {
 	
 	@Override
 	public boolean equals(Object o) {
+		if (o == null) {
+			return false;
+		}
 		if (!(o instanceof DataArticleGalery)) {
 			return false;
 		}

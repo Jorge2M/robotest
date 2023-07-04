@@ -63,7 +63,7 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 		Arrays.asList(
 			"V0-Original", 
 			"V1-Variante1"),
-		Arrays.asList(desktop),
+		Arrays.asList(mobile),
 		Arrays.asList(shop,outlet)
 	),
 	KIRITAKI_FASE5_REDISENO_AVISAME_DESKTOP_OUTLET_PRO (

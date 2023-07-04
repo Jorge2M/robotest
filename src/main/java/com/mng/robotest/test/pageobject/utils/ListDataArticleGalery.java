@@ -37,7 +37,7 @@ public class ListDataArticleGalery {
 		List<DataArticleGalery> duplicates = new ArrayList<>();
 		var nombreYRefSet = new TreeSet<>(new NombreYRefComparator());
 		for(DataArticleGalery nombreYRef : this.listNombreYRef) {
-			if(!nombreYRefSet.add(nombreYRef)) {
+			if(nombreYRef!=null && !nombreYRefSet.add(nombreYRef)) {
 				duplicates.add(nombreYRef);
 			}
 		}
