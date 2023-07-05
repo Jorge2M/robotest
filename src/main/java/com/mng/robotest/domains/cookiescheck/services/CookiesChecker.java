@@ -30,7 +30,8 @@ public class CookiesChecker extends PageBase {
 						Pattern.compile("_ga_.*"),
 						Pattern.compile("MangoHQ"),
 						Pattern.compile("_dc_gtm_.*"),
-						Pattern.compile("cloudtest-name"),						
+						Pattern.compile("cloudtest-name"),
+						Pattern.compile("client_id"),
 						Pattern.compile("JSESSIONID"),
 						Pattern.compile("JSESSIONID2"),
 						Pattern.compile("JSESSIONIDPRE"))));
