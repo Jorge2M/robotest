@@ -41,7 +41,7 @@ public class ChecksMango extends PageBase {
 			executeCheck(new CheckerAccesibility(accesibility));
 		}
 		if (cookiesAllowed!=null) {
-			executeCheck(new CheckerAllowedCookies(cookiesAllowed));
+			executeCheck(new CheckerAllowedCookies(cookiesAllowed, app));
 		}
 		if (seo!=null) {
 			executeCheck(new CheckerSEO(seo));
