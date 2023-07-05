@@ -35,10 +35,14 @@ public class CookiesChecker extends PageBase {
 						Pattern.compile("JSESSIONID2"),
 						Pattern.compile("JSESSIONIDPRE"))));
 		
+		replaceAllowedCookies("_hjIncludedInSessionSample", "_hjIncludedInSessionSample*");
+		replaceAllowedCookies("_hjSessionUser", "_hjSessionUser*");
+		replaceAllowedCookies("_hjSession", "_hjSession*");
+		
 		if (UtilsTest.todayBeforeDate("2023-01-01")) {
-			whiteList.get().add(Pattern.compile("_hjIncludedInSessionSample_.*"));
-			whiteList.get().add(Pattern.compile("_hjSessionUser_.*"));
-			whiteList.get().add(Pattern.compile("_hjSession_.*"));
+//			whiteList.get().add(Pattern.compile("_hjIncludedInSessionSample_.*"));
+//			whiteList.get().add(Pattern.compile("_hjSessionUser_.*"));
+//			whiteList.get().add(Pattern.compile("_hjSession_.*"));
 		}
 	}
 	
@@ -90,5 +94,13 @@ public class CookiesChecker extends PageBase {
 	private boolean isCookieInPattern(org.openqa.selenium.Cookie cookie, Pattern whiteItem) {
 		Matcher matcher = whiteItem.matcher(cookie.getName());
 		return matcher.matches();
+	}
+	
+	private void replaceAllowedCookies(String oldName, String newName) {
+		if (allowedCookies.isPresent()) {
+			allowedCookies.get().stream()
+				.filter(c -> c.getCookieName().compareTo(oldName)==0)
+				.forEach(c -> c.setCookieName(newName));
+		}
 	}
 }
