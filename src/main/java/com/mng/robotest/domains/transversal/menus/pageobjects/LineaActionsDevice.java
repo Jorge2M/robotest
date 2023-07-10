@@ -17,12 +17,12 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	private final LineaType lineaType;
 	private final SublineaType sublineaType;
 	
-	private static final String XPATH_LINK_SUBLINEA_NINA = "//*[@data-testid[contains(.,'header.tabButton.sections_nina')]]";
-	private static final String XPATH_LINK_SUBLINEA_BEBE_NINA = "//*[@data-testid[contains(.,'header.tabButton.sections_babyNina')]]";
-	private static final String XPATH_LINK_SUBLINEA_TEEN_NINA = "//*[@data-testid[contains(.,'header.tabButton.sections_teenQ')]]";
-	private static final String XPATH_LINK_SUBLINEA_NINO = "//*[@data-testid[contains(.,'header.tabButton.sections_nino')]]";
-	private static final String XPATH_LINK_SUBLINEA_BEBE_NINO = "//*[@data-testid[contains(.,'header.tabButton.sections_babyNino')]]";
-	private static final String XPATH_LINK_SUBLINEA_TEEN_NINO = "//*[@data-testid[contains(.,'header.tabButton.sections_teenP')]]";
+	private static final String XPATH_LINK_SUBLINEA_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_nina')]]";
+	private static final String XPATH_LINK_SUBLINEA_BEBE_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_babyNina')]]";
+	private static final String XPATH_LINK_SUBLINEA_TEEN_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenQ')]]";
+	private static final String XPATH_LINK_SUBLINEA_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_nino')]]";
+	private static final String XPATH_LINK_SUBLINEA_BEBE_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_babyNino')]]";
+	private static final String XPATH_LINK_SUBLINEA_TEEN_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenP')]]";
 	
 	public LineaActionsDevice(LineaWeb lineaWeb) {
 		this.lineaType = lineaWeb.getLinea();
