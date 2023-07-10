@@ -21,7 +21,7 @@ public abstract class PageIdentificacion extends PageBase {
 	
 	public void clickTabRegistrate() {
 		state(Clickable, XPATH_TAB_REGISTRATE).wait(5).check();
-		click(XPATH_TAB_REGISTRATE).setX(0).setY(15).exec();
+		click(XPATH_TAB_REGISTRATE).setX(0).setY(10).exec();
 	}
 	
 	public void logoff() {

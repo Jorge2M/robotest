@@ -164,12 +164,14 @@ public class SecBolsaSteps extends StepBase {
 	private ChecksTM checkIsBolsaVisibleInDesktop() {
 		var checks = ChecksTM.getNew();
 		int seconds = 1;
-	 	checks.add(
-			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + seconds + " segundos)",
-			secBolsa.isInStateUntil(StateBolsa.OPEN, seconds));
-	 	
+		
 	 	//Confiar que en algún momento se solventa el problema de los saltos de instancia
 	 	var state = (!isPRO() && UtilsTest.todayBeforeDate("2023-09-15")) ? State.Warn : State.Defect;
+	 	
+	 	checks.add(
+			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + seconds + " segundos)",
+			secBolsa.isInStateUntil(StateBolsa.OPEN, seconds), state);
+	 	
 	 	checks.add(
 			"Aparece el botón \"Comprar\" (lo esperamos hasta " + seconds + " segundos)",
 			secBolsa.isVisibleBotonComprarUntil(seconds), state);

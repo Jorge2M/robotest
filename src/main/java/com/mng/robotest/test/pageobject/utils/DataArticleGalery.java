@@ -45,7 +45,7 @@ public class DataArticleGalery {
 			return false;
 		}
 		
-		DataArticleGalery otherObject = (DataArticleGalery)o;
+		var otherObject = (DataArticleGalery)o;
 		return (
 			(this.nombre==otherObject.nombre || this.nombre.compareTo(otherObject.getNombre())==0) &&
 			(this.referencia==otherObject.referencia || this.referencia.compareTo(otherObject.getReferencia())==0) &&
