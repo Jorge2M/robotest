@@ -84,7 +84,7 @@ public class PageGestionarClientesSteps extends StepMantoBase {
 			"Aparece el mensaje <b>" + typeButton.literal() + "</b> (lo esperamos %s segundos)", seconds),
 			pageGestionarClientes.isVisibleMensajeClickThirdButton(typeButton, seconds));
 	 	
-		TypeThirdButton buttonExpected = typeButton.buttonExpectedAfterClick();
+		var buttonExpected = typeButton.buttonExpectedAfterClick();
 	 	checks.add(String.format(
 			"Aparece el botón \"Alta\" (lo esperamos %s segundos)", seconds),
 			pageGestionarClientes.isVisibleThirdButton(buttonExpected, seconds));

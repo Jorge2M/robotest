@@ -16,12 +16,12 @@ public abstract class PageIdentificacion extends PageBase {
 	public abstract void inputUserPassword(String usuario, String password);
 	public abstract void clickButtonEntrar();
 	public abstract void clickHasOlvidadoContrasenya();	
-	
-	private static final String XPATH_TAB_REGISTRATE = "//p[@class[contains(.,'registerTab')]]";
+
+	private static final String XPATH_TAB_REGISTRATE = "//*[@data-testid[contains(.,'registerTab.goToRegister')]]";
 	
 	public void clickTabRegistrate() {
 		state(Clickable, XPATH_TAB_REGISTRATE).wait(5).check();
-		click(XPATH_TAB_REGISTRATE).exec();
+		click(XPATH_TAB_REGISTRATE).setX(0).setY(15).exec();
 	}
 	
 	public void logoff() {
