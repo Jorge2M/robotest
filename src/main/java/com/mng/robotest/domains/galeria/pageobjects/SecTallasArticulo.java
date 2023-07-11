@@ -43,9 +43,9 @@ public class SecTallasArticulo extends PageBase {
 		return xpathCapaAdd + "//self::div[not(" + classCapaActive + ")]"; 
 	}
 
-	public String getXPathArticleTallaAvailable(int posArticulo, int posTalla) {
+	public String getXPathArticleTallaAvailable(int posArticulo) {
 		String xpathCapaTallas = getXPathCapaTallas(posArticulo, true);
-		return "(" + xpathCapaTallas + XPATH_TALLA_AVAILABLE + ")[" + posTalla + "]";
+		return xpathCapaTallas + XPATH_TALLA_AVAILABLE;
 	}
 
 	public String getXPathArticleTallaNotAvailable() {

@@ -16,7 +16,7 @@ public class GenericFactorySuite extends SuiteMaker {
 	public GenericFactorySuite(InputParamsMango inputParams) {
 		super(inputParams);
 		setParameters(getParametersSuiteShop(inputParams));
-		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), GenericFactory.class);
+		var testRun = TestRunMaker.from(inputParams.getSuiteName(), GenericFactory.class);
 		testRun.setStorerErrorStep(new ErrorStorer());
 		addTestRun(testRun);
 		setParallelMode(ParallelMode.METHODS);

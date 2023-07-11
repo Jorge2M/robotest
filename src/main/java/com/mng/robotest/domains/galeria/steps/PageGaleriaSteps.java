@@ -137,10 +137,10 @@ public class PageGaleriaSteps extends StepBase {
 	}
 
 	@Step (
-		description="Del #{posArticulo}o artículo, seleccionamos la #{posTalla}a talla disponible", 
+		description="Del #{posArticulo}o artículo, seleccionamos la 1a talla disponible", 
 		expected="Se da de alta correctamente el artículo en la bolsa")
-	public boolean selectTallaAvailableArticulo(int posArticulo, int posTalla) throws Exception {
-		var articulo = pageGaleria.selectTallaAvailableArticle(posArticulo, posTalla);
+	public boolean selectTallaAvailableArticulo(int posArticulo) throws Exception {
+		var articulo = pageGaleria.selectTallaAvailableArticle(posArticulo);
 		boolean tallaVisible = (articulo!=null);
 		if (tallaVisible) {
 			dataTest.getDataBag().addArticulo(articulo);

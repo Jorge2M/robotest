@@ -503,14 +503,14 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	@Override
-	public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception {
+	public ArticuloScreen selectTallaAvailableArticle(int posArticulo) throws Exception {
 		//Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
 		waitLoadPage();
 		//if (!isVisibleArticleCapaTallasUntil(posArticulo, 1)) {
 			showTallasArticulo(posArticulo);
 		//}
 		
-		String xpathTalla = secTallas.getXPathArticleTallaAvailable(posArticulo, posTalla);
+		String xpathTalla = secTallas.getXPathArticleTallaAvailable(posArticulo);
 		if (state(Visible, xpathTalla).check()) {
 			var tallaToSelect = getElement(xpathTalla);
 			var articulo = getArticuloObject(posArticulo);

@@ -39,7 +39,8 @@ public class CookiesChecker extends PageBase {
 		replaceAllowedCookies("_hjSessionUser", "_hjSessionUser*");
 		replaceAllowedCookies("_hjSession", "_hjSession*");
 		
-		if (UtilsTest.todayBeforeDate("2023-01-01")) {
+		if (UtilsTest.todayBeforeDate("2023-07-30")) {
+			whiteList.get().add(Pattern.compile("client_id"));
 //			whiteList.get().add(Pattern.compile("_hjIncludedInSessionSample_.*"));
 //			whiteList.get().add(Pattern.compile("_hjSessionUser_.*"));
 //			whiteList.get().add(Pattern.compile("_hjSession_.*"));

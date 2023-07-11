@@ -11,7 +11,7 @@ public class Gpo007 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {
-		accessAndLogin();
+		accessAndLogin(true);
 		clickMenu(CAMISAS_SHE);
 		checkAvisame();		
 		selectTallaArticle();
@@ -26,7 +26,7 @@ public class Gpo007 extends TestBase {
 	}
 	
 	private void selectTallaArticle() throws Exception {
-		new GaleriaSteps().selectTalla();
+		new GaleriaSteps().selectTallaAvailable();
 	}
 
 }

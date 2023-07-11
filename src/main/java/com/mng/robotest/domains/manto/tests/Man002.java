@@ -21,9 +21,7 @@ public class Man002 extends TestMantoBase {
 	private void consultaCliente(String dni) {
 		var pageGestionarClientesSteps = new PageGestionarClientesSteps();
 		pageGestionarClientesSteps.inputDniAndClickBuscar(dni);
-		pageGestionarClientesSteps.clickThirdButton();
-		pageGestionarClientesSteps.clickThirdButton();
-		pageGestionarClientesSteps.clickDetallesButton(dni);
+		pageGestionarClientesSteps.clickDetallesButton(dni);		
 	}
 
 }

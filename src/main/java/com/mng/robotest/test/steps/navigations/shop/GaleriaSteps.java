@@ -6,18 +6,17 @@ import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 
 public class GaleriaSteps extends StepBase {
 	
-	public void selectTalla() throws Exception {
+	public void selectTallaAvailable() throws Exception {
 		int posArticulo=1;
 		boolean articleAvailable = false;
 		var pageGaleriaSteps = new PageGaleriaSteps();
 		while (!articleAvailable && posArticulo<5) {
 			pageGaleriaSteps.showTallasArticulo(posArticulo);
-			int tallaToSelect = 1;
 			try {
-				articleAvailable = pageGaleriaSteps.selectTallaAvailableArticulo(posArticulo, tallaToSelect);
+				articleAvailable = pageGaleriaSteps.selectTallaAvailableArticulo(posArticulo);
 			}
 			catch (Exception e) {
-				Log4jTM.getLogger().warn("Problem selecting talla " + tallaToSelect + " from article " + posArticulo, e);
+				Log4jTM.getLogger().warn("Problem selecting first talla available from article " + posArticulo, e);
 			}
 			if (!articleAvailable) {
 				posArticulo+=1;

@@ -10,6 +10,7 @@ import com.mng.robotest.conftestmaker.Suites;
 import com.mng.robotest.domains.compra.tests.CompraMultiAddress;
 import com.mng.robotest.domains.favoritos.tests.Favoritos;
 import com.mng.robotest.domains.micuenta.tests.MiCuenta;
+import com.mng.robotest.domains.temporal.tests.Temporal;
 import com.mng.robotest.test.beans.*;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -51,6 +52,9 @@ public class GenericFactory {
 			break;
 		case ListMiCuenta:
 			listTests.add(new MiCuenta(pais, idioma, prioridad));
+			break;
+		case ModalPortada:
+			listTests.add(new Temporal(pais, idioma, prioridad));
 			break;
 		default:
 		}

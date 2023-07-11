@@ -81,7 +81,8 @@ public abstract class PageGaleria extends PageBase {
 	public abstract boolean isHeaderArticlesVisible(String textHeader);
 	public abstract void showTallasArticulo(int posArticulo);
 	public abstract boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds);
-	public abstract ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception;
+	public abstract ArticuloScreen selectTallaAvailableArticle(int posArticulo) throws Exception;
+	public abstract void selectTallaArticleNotAvalaible();
 	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
 
 	private static final List<LabelArticle> LIST_LABELS_NEW = Arrays.asList(
@@ -128,7 +129,7 @@ public abstract class PageGaleria extends PageBase {
 	static final String XPATH_ARTICULO_DESKTOP = "//li[@id[contains(.,'product-key-id')]]";
 
 	//TODO adaptar React (pendiente petición a Jesús Bermúdez 3-Marzo-2021)
-	private static final String XPATH_ARTICULO_DEVICE = "//li[@class='product']";
+	private static final String XPATH_ARTICULO_DEVICE = "//li[@data-testid[contains(.,'plp.product')]]";
 	private static final String XPATH_ARTICULO_TABLET_OUTLET = XPATH_ARTICULO_DESKTOP;
 	private String getXPathArticulo() {
 		if (channel==Channel.desktop) {
@@ -136,7 +137,7 @@ public abstract class PageGaleria extends PageBase {
 		}
 		else {
 			if (channel==Channel.tablet &&
-					(app==AppEcom.outlet || from==From.BUSCADOR)) {
+				(app==AppEcom.outlet || from==From.BUSCADOR)) {
 				return XPATH_ARTICULO_TABLET_OUTLET;
 			}
 			return XPATH_ARTICULO_DEVICE;
@@ -234,11 +235,6 @@ public abstract class PageGaleria extends PageBase {
 		moveToElement(getXPathLinkArticulo(posArticulo) + "/..");
 	}
 	
-	public void selectTallaArticleNotAvalaible() {
-		String xpathTallaNoDipo = secTallas.getXPathArticleTallaNotAvailable();
-		click(xpathTallaNoDipo).exec();
-	}
-
 	/**
 	 * Indica si los artículos de la galería realmente están ordenados por precio ascendente o descendente
 	 */

@@ -15,7 +15,7 @@ public class PageLoginVOTF extends PageBase {
 	}
 	
 	private void activateTestsABs() throws Exception {
-		TestABactive.currentTestABsToActivate(channel, app, driver);
+		new TestABactive().currentTestABsToActivate();
 		driver.navigate().refresh();
 	}
 	

@@ -33,7 +33,11 @@ public class PageGaleriaDevice extends PageGaleria {
 		"//*[@class[contains(.,'color-container')] and @id='" + TAG_ID_COLOR + "']/img";
 	
 	private static final String XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-actions')]]/button";
-	private static final String XPATH_CAPA_TALLAS_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-sizes-container')]]";
+	
+	//TODO mantener sólo una versión una vez se resuelva el TestAB
+	private static final String XPATH_CAPA_TALLAS_RELATIVE_ARTICLE_OLD = "//div[@class[contains(.,'product-sizes-container')]]";
+	private static final String XPATH_CAPA_TALLAS_NEW = "//ul[@data-testid='plp.sizesSelector.list']";
+	
 	private static final String XPATH_ICONO_GALERY_MOBILE = "//div[@class[contains(.,'scroll-container--visible')]]";
 	private static final String XPATH_ICONO_UP_GALERY_TABLET = "//div[@class='scroll-top-step']";
 	private static final String TAG_NUM_PAGINA = "@tagNumPagina";
@@ -109,9 +113,17 @@ public class PageGaleriaDevice extends PageGaleria {
 		return (xpathArticulo + XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE);
 	}
 	
+	//TODO mantener una sola variante cuando se resuelva el TestAB
 	String getXPathArticleCapaTallas(int posArticulo) {
+		return "(" + getXPathArticleCapaTallasOld(posArticulo) + " | " + getXPathArticleCapaTallasNew() + ")"; 
+	}
+	
+	String getXPathArticleCapaTallasOld(int posArticulo) {
 		String xpathArticulo = "(" + xpathArticuloBase + ")[" + posArticulo + "]";
-		return (xpathArticulo + XPATH_CAPA_TALLAS_RELATIVE_ARTICLE);
+		return (xpathArticulo + XPATH_CAPA_TALLAS_RELATIVE_ARTICLE_OLD);
+	}
+	String getXPathArticleCapaTallasNew() {
+		return XPATH_CAPA_TALLAS_NEW;
 	}
 	
 	String getXPathPagina(int pagina) {
@@ -290,24 +302,35 @@ public class PageGaleriaDevice extends PageGaleria {
 		return state(Visible, xpathCapa).wait(seconds).check();
 	}
 	
-	private String getXPathTallaAvailableArticle(int posArticulo, int posTalla) {
+	private String getXPathTallaAvailableArticle(int posArticulo) {
 		String xpathCapa = getXPathArticleCapaTallas(posArticulo);
-		return "(" + xpathCapa + "//button[@class='product-size']" + ")[" + posTalla + "]";
+		return xpathCapa + "//*[@data-testid[contains(.,'size.available')]]";
 	}
 	
 	@Override
-	public ArticuloScreen selectTallaAvailableArticle(int posArticulo, int posTalla) throws Exception {
+	public ArticuloScreen selectTallaAvailableArticle(int posArticulo) throws Exception {
 		//Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
-		if (!isVisibleArticleCapaTallasUntil(posArticulo, 0/*secondsToWait*/)) {
+		if (!isVisibleArticleCapaTallasUntil(posArticulo, 0)) {
 			showTallasArticulo(posArticulo);
 		}
 		
-		String xpathTalla = getXPathTallaAvailableArticle(posArticulo, posTalla);
-		WebElement tallaToSelect = getElement(xpathTalla);
-		ArticuloScreen articulo = getArticuloObject(posArticulo);
+		var xpathTalla = getXPathTallaAvailableArticle(posArticulo);
+		var tallaToSelect = getElement(xpathTalla);
+		var articulo = getArticuloObject(posArticulo);
 		articulo.setTalla(Talla.fromLabel(tallaToSelect.getText()));
 		tallaToSelect.click();
 		return articulo;
+	}
+	
+	public void selectTallaArticleNotAvalaible() {
+		for (int i=1; i<6; i++) {
+			showTallasArticulo(i);
+			String xpathTallaNoDispo = secTallas.getXPathArticleTallaNotAvailable();
+			if (state(Visible, xpathTallaNoDispo).check()) {
+				click(xpathTallaNoDispo).exec();
+				break;
+			}
+		}
 	}
 
 //	@Override

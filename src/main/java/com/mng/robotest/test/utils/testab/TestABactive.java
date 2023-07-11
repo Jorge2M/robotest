@@ -1,22 +1,24 @@
 package com.mng.robotest.test.utils.testab;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.Cookie;
 
 import com.github.jorge2m.testmaker.service.testab.TestABactData;
 import com.github.jorge2m.testmaker.service.testab.manager.TestABmanager;
-import com.mng.robotest.conftestmaker.AppEcom;
-import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.domains.base.PageBase;
 
 import static com.mng.robotest.test.utils.testab.TestABOptimizeImpl.*;
 
-public class TestABactive {
+public class TestABactive extends PageBase {
 
-	private TestABactive() {}
+	public void currentTestABsToActivate() throws Exception {
+		activateOptimize();
+		activateOptimizelly();
+	}
 	
-	public static void currentTestABsToActivate(Channel channel, AppEcom app, WebDriver driver) 
-			throws Exception {
+	private void activateOptimize() throws Exception {
 		var testABs = Arrays.asList(
 			TestABactData.getNew(NUEVO_GUEST_CHECKOUT_PRE, 1),
 			TestABactData.getNew(NUEVO_GUEST_CHECKOUT_PRO, 1),
@@ -29,4 +31,23 @@ public class TestABactive {
 		
 		TestABmanager.activateTestsAB(testABs, channel, app, driver);
 	}
+	
+	private void activateOptimizelly() throws Exception {
+		//Force TestABs to original variant 
+		var cookieClientId = new Cookie("client_id", "robotest");
+		driver.manage().addCookie(cookieClientId);
+		
+		//Si no existe darla de alta con dominio tipo .mango.com
+		var pattern = Pattern.compile(".*(\\..+\\..+)");
+		var matcher = pattern.matcher(inputParamsSuite.getDnsUrlAcceso());
+		if (matcher.find()) {
+			var cookieClientId2 = new Cookie(
+					"client_id",
+					"robotest",
+					matcher.group(1),
+					"/", null, false, false);
+			driver.manage().addCookie(cookieClientId2);
+		}
+	}
+	
 }

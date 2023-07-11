@@ -43,7 +43,7 @@ public class Loy001 extends TestBase {
 	
 	private void addBagArticleNoRebajadoAndClickComprar() throws Exception {
 		clickGroup(NEW_NOW);
-		new GaleriaSteps().selectTalla();
+		new GaleriaSteps().selectTallaAvailable();
         new SecBolsaSteps().selectButtonComprar();
 	}
 	

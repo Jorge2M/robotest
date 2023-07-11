@@ -52,7 +52,7 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 				return new MenusPaisSuite(inputParamsMango);
 			case ConsolaVotf:
 				return new ConsolaVotfSuite(inputParamsMango);
-			case ListFavoritos, ListMiCuenta, CheckoutMultiAddress:
+			case ListFavoritos, ListMiCuenta, CheckoutMultiAddress, ModalPortada:
 				return new GenericFactorySuite(inputParamsMango);
 			case RegistrosPaises:
 				return new RegistrosSuite(inputParamsMango);

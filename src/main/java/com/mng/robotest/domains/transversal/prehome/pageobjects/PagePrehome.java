@@ -153,7 +153,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	public void previousAccessShopSteps() throws Exception {
 		reloadIfServiceUnavailable();
 		new PageJCAS().identJCASifExists();
-		TestABactive.currentTestABsToActivate(channel, app, driver);
+		new TestABactive().currentTestABsToActivate();
 	}
 	
 	public void selecPaisIdiomaYAccede() {
