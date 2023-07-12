@@ -49,7 +49,7 @@ public class DataArticleGalery {
 		return (
 			(this.nombre==otherObject.nombre || this.nombre.compareTo(otherObject.getNombre())==0) &&
 			(this.referencia==otherObject.referencia || this.referencia.compareTo(otherObject.getReferencia())==0) &&
-			(this.imagen==otherObject.imagen || this.imagen.compareTo(otherObject.imagen)==0));   
+			(this.imagen!=null && (this.imagen==otherObject.imagen || this.imagen.compareTo(otherObject.imagen)==0)));   
 	}
 	
 	@Override
