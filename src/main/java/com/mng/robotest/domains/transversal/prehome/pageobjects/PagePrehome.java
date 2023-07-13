@@ -75,7 +75,8 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	
 	public void selecionPais() {
 		state(Present, XPATH_SELECTOR_PAISES).wait(5).check();
-		setInitialModalsOff();
+		//TODO descomentar
+		//setInitialModalsOff();
 		if (!isPaisSelected()) {
 			unfoldCountrys();
 			inputAndSelectCountry();
