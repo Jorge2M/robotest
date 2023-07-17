@@ -200,7 +200,7 @@ public class GetterProducts {
 	}
 	
 	private ProductList getProductList(MenuProduct menu) throws Exception {
-		ProductList productListUrl = getProductListFromUrl(menu);
+		var productListUrl = getProductListFromUrl(menu);
 		if (productListUrl==null && retryPro) {
 			productListUrl = getProductListFromPro();
 		}

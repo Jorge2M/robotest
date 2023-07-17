@@ -240,7 +240,7 @@ public class CheckoutFlow extends StepBase {
 						dataDirFactura.put(APELLIDOS, "Rancaño Pérez");
 						dataDirFactura.put(CODPOSTAL, "08720");
 						dataDirFactura.put(DIRECCION, "c./ mossen trens nº6 5º1ª");
-						dataDirFactura.put(EMAIL, "crp1974@hotmail.com");
+						dataDirFactura.put(EMAIL, "voyadominarelmundo@gmail.com");
 						dataDirFactura.put(TELEFONO, "665015122");
 						dataDirFactura.put(POBLACION, "PEREPAU");
 						new CheckoutSteps().getModalDirecFacturaSteps()
