@@ -292,8 +292,10 @@ public class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public void showTallasArticulo(int posArticulo) {
 		moveToArticleAndGetObject(posArticulo);
-		String xpathButtonAnyadir = getXPathButtonAnyadirArticle(posArticulo);
-		click(xpathButtonAnyadir).exec();
+		if (!isVisibleArticleCapaTallasUntil(posArticulo, 0)) {
+			String xpathButtonAnyadir = getXPathButtonAnyadirArticle(posArticulo);
+			click(xpathButtonAnyadir).exec();
+		}
 	}
 	
 	@Override
