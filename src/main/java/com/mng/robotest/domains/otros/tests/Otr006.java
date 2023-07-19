@@ -27,7 +27,7 @@ public class Otr006 extends TestBase {
 		chatBotSteps.selectOption(option2);
 		
 		chatBotSteps.checkResponseVisible("Si quieres saber el horario, el teléfono o las colecciones disponibles de alguna tienda", 3);
-		chatBotSteps.isVisibleButton("¡Sí, gracias!", 3);		
+		chatBotSteps.isVisibleButton("¡Sí, gracias!", 5);		
 	}
 	
 }

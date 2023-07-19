@@ -32,7 +32,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	private static final String XPATH_IMG_COD_COLOR_WITH_TAG_COLOR = 
 		"//*[@class[contains(.,'color-container')] and @id='" + TAG_ID_COLOR + "']/img";
 	
-	private static final String XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//div[@class[contains(.,'product-actions')]]/button";
+	private static final String XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//*[@data-testid[contains(.,'addToCart')]]";
 	
 	//TODO mantener sólo una versión una vez se resuelva el TestAB
 	private static final String XPATH_CAPA_TALLAS_RELATIVE_ARTICLE_OLD = "//div[@class[contains(.,'product-sizes-container')]]";
