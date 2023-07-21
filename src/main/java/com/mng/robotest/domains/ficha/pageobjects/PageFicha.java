@@ -67,20 +67,23 @@ public abstract class PageFicha extends PageBase {
 	}
 
 	public String getTallaAlf(int posicion) {
-		return (secDataProduct.getSecSelTallas().getTallaAlf(posicion));
+		return secDataProduct.getSecSelTallas().getTallaAlf(posicion);
 	}
 
 	public String getTallaCodNum(int posicion) {
-		return (secDataProduct.getSecSelTallas().getTallaCodNum(posicion));
+		return secDataProduct.getSecSelTallas().getTallaCodNum(posicion);
 	}
 
 	public int getNumOptionsTallasNoDisponibles() {
-		return (secDataProduct.getSecSelTallas().getNumOptionsTallasNoDisponibles());
+		return secDataProduct.getSecSelTallas().getNumOptionsTallasNoDisponibles();
 	}
 
 	public int getNumOptionsTallas() {
-		return (secDataProduct.getSecSelTallas().getNumOptionsTallas());
+		return secDataProduct.getSecSelTallas().getNumOptionsTallas();
 	}
+	public void closeTallas() {
+		secDataProduct.getSecSelTallas().closeTallas();
+	}	
 
 	public boolean isFichaAccesorio() {
 		return (this.driver.getCurrentUrl().contains("accesorio"));
@@ -96,5 +99,5 @@ public abstract class PageFicha extends PageBase {
 	public int getNumArtVisiblesSlider(Slider slider) {
 		return secSliders.getNumVisibleArticles(slider);
 	}
-	
+
 }

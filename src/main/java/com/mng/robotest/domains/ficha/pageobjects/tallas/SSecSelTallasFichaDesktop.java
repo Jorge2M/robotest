@@ -148,4 +148,9 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	public boolean isVisibleAvisoSeleccionTalla() {
 		return state(Visible, XPATH_MSG_AVISO_TALLA).check();
 	}
+	
+	@Override
+	public void closeTallas() {
+		selectFirstTallaAvailable();
+	}
 }

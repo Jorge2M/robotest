@@ -19,6 +19,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	private static final String XPATH_TALLA_SELECTED = XPATH_SELECTOR_BUTTON + "//span[@class[contains(.,'size-text')]]";
 	private static final String XPATH_OPTION_TALLA_UNICA = "//button[@id='productFormSelect']//span[@class='one-size-text']";
 	private static final String XPATH_MSG_AVISO_TALLA = "//p[@class[contains(.,'sizes-notify-error')]]";
+	private static final String XPATH_DIV_CLOSE = "//div[@data-testid='sheet.overlay' or @aria-label='close']";
 	
 	public SSecSelTallasFichaDevice(Channel channel, AppEcom app) {
 		super(channel, app);
@@ -96,6 +97,11 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	@Override
 	public boolean isVisibleListTallasForSelectUntil(int seconds) {
 		return state(Visible, XPATH_OPTION_TALLA).wait(seconds).check();
+	}
+	
+	@Override
+	public void closeTallas() {
+		click(XPATH_DIV_CLOSE).exec();
 	}
 	
 	private void despliegaSelectTallas() {

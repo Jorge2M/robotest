@@ -130,11 +130,19 @@ public class GetterProducts {
 	}
 	
 	public List<GarmentCatalog> getAll(List<FilterType> filters) throws Exception {
-		return productFilter.getListFiltered(filters, sortBy);
+		List<FilterType> filtersNew = new ArrayList<>(filters);
+		if (this.filters!=null) {
+	        filtersNew.addAll(this.filters);
+		}
+		return productFilter.getListFiltered(filtersNew, sortBy);
 	}
 	
 	public Optional<GarmentCatalog> getOne(List<FilterType> filters) throws Exception {
-		return productFilter.getOneFiltered(filters, sortBy);
+		List<FilterType> filtersNew = new ArrayList<>(filters);
+		if (this.filters!=null) {
+	        filtersNew.addAll(this.filters);
+		}
+		return productFilter.getOneFiltered(filtersNew, sortBy);
 	}
 	
 	private String getUrlForJavaCall(String initialURL) throws Exception {

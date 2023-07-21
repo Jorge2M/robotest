@@ -24,6 +24,7 @@ public interface SSecSelTallasFicha {
 	public boolean isVisibleSelectorTallasUntil(int seconds);
 	public boolean isVisibleListTallasForSelectUntil(int seconds);
 	public boolean isVisibleAvisoSeleccionTalla();
+	public void closeTallas();
 	
 	public static SSecSelTallasFicha make(Channel channel, AppEcom app) {
 		if (channel.isDevice()) {

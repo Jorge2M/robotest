@@ -48,8 +48,7 @@ public class SecBuscadorSteps extends StepBase {
 	private void searchArticuloCommon(Article article) {
 		new ArticuloNavigations().buscarArticulo(article);
 		PageObjTM.waitForPageLoaded(driver);  
-		var pageFichaSteps = new PageFichaSteps();
-		pageFichaSteps.checkIsFichaAccordingTypeProduct(article);
+		new PageFichaSteps().checkIsFichaAccordingTypeProduct(article);
 	}
 
 	@Step (

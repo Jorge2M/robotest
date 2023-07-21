@@ -56,9 +56,13 @@ public class Fic001 extends TestBase {
 	}
 	
 	private void articleNoOnlineTest() throws Exception {
-		Article articleNoOnlineWithColors = Article.getArticleCandidateForTest(produtNoOnlineWithColors.get());
+		var articleNoOnlineWithColors = Article.getArticleCandidateForTest(produtNoOnlineWithColors.get());
 		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
 		boolean isTallaUnica = pageFichaSteps.selectAnadirALaBolsaTallaPrevNoSelected();
+		if (channel.isDevice()) {
+			pageFichaSteps.closeTallas();
+		}
+
 		var articulo = new ArticuloScreen(produtNoOnlineWithColors.get());
 		pageFichaSteps.selectColorAndSaveData(articulo);
 		pageFichaSteps.selectTallaAndSaveData(articulo);

@@ -115,7 +115,6 @@ public class PageFichaSteps extends StepBase {
 		if (pageFicha.getSecDataProduct().isClickableColor(codigoColor)) {
 			pageFicha.getSecDataProduct().selectColorWaitingForAvailability(codigoColor);
 		}
-
 		checkIsSelectedColor(codigoColor);
 	}
 
@@ -205,8 +204,14 @@ public class PageFichaSteps extends StepBase {
 		} else {
 			checkAvisoTallaUnica(isTallaUnica);
 		}
-
 		return isTallaUnica;
+	}
+	
+	@Step (
+		description="Cerrar el desplegable de tallas",
+		expected="Desaparece el desplegable de tallas")
+	public void closeTallas() {
+		pageFicha.closeTallas();
 	}
 
 	@Validation
