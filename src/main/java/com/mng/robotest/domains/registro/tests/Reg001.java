@@ -8,7 +8,6 @@ import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroPersonalizacionShop.GenderOption;
 import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.domains.registro.steps.PageRegistroPersonalizacionShopSteps;
-import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
@@ -16,6 +15,8 @@ import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
+
+import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 
 public class Reg001 extends TestBase {
 
@@ -39,9 +40,9 @@ public class Reg001 extends TestBase {
 				true,
 				"Jorge",
 				pais.getCodpos(),
-				"04/23/1974",
+				"23/04/1974",
 				GenderOption.MASCULINO,
-				Arrays.asList(LineaType.SHE, LineaType.HE, LineaType.KIDS));
+				Arrays.asList(SHE, HE, KIDS));
 	}
 	
 	@Override

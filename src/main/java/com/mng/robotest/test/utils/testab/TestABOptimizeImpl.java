@@ -120,8 +120,30 @@ public enum TestABOptimizeImpl implements TestABOptimize {
 			"Variante 1 - Sin menú lateral"),
 		Arrays.asList(desktop),
 		Arrays.asList(shop)
-	);
+	),
+	
+	LOGIN_REGISTRI_PAGE_WITHOUT_TABS_SHOP_PRE(
+		"Kiritaki - Login/registry page without tabs",
+		"j-GC587dTDmww4MOZsy0hg",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1 - Sin menú lateral"),
+		Arrays.asList(desktop, mobile),
+		Arrays.asList(shop)
+	),
 
+	LOGIN_REGISTRI_PAGE_WITHOUT_TABS_OUTLET_PRE(
+		"Kiritaki - Login/registry page without tabs",
+		"tlT3dWCeR6ealFvkLjJqhg",
+		Arrays.asList(0,1),
+		Arrays.asList(
+			"Variante 0 - Original",
+			"Variante 1 - Sin menú lateral"),
+		Arrays.asList(desktop, mobile),
+		Arrays.asList(outlet)
+	);		
+	
 	private String idExperiment;
 	private List<Integer> variantesInt;
 	private List<Channel> channels;

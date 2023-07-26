@@ -26,7 +26,9 @@ public class TestABactive extends PageBase {
 			TestABactData.getNew(PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_SHOP_PRE, 0),
 			TestABactData.getNew(PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_SHOP_PRO, 0),
 			TestABactData.getNew(PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_OUTLET_PRE, 0),
-			TestABactData.getNew(PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_OUTLET_PRO, 0)
+			TestABactData.getNew(PLP_SELECTOR_LISTADO_MOBILE_1_COLUMNA_OUTLET_PRO, 0),
+			TestABactData.getNew(LOGIN_REGISTRI_PAGE_WITHOUT_TABS_SHOP_PRE, 0),
+			TestABactData.getNew(LOGIN_REGISTRI_PAGE_WITHOUT_TABS_OUTLET_PRE, 0)
 		);
 		
 		TestABmanager.activateTestsAB(testABs, channel, app, driver);

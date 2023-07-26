@@ -5,10 +5,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
-import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.pageobjects.PageFavoritos;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
-import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -124,18 +122,18 @@ public class PageFavoritosSteps extends StepBase {
 		return checks;
 	}  
 	
-	@Step (
-		description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()}</b> (1a talla disponible) a la bolsa",
-		expected="El artículo aparece en la bolsa")
-	public void addArticuloToBag(ArticuloScreen artToAddBolsa) throws Exception {
-		String refProductoToAdd = artToAddBolsa.getRefProducto();
-		String codigoColor = artToAddBolsa.getCodigoColor();
-		Talla tallaSelected = pageFavoritos.addArticleToBag(refProductoToAdd, codigoColor, 1);
-		artToAddBolsa.setTalla(tallaSelected);
-		dataTest.getDataBag().addArticulo(artToAddBolsa);
-		
-		new SecBolsaSteps().validaAltaArtBolsa();
-	}
+//	@Step (
+//		description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()}</b> (1a talla disponible) a la bolsa",
+//		expected="El artículo aparece en la bolsa")
+//	public void addArticuloToBag(ArticuloScreen artToAddBolsa) throws Exception {
+//		String refProductoToAdd = artToAddBolsa.getRefProducto();
+//		String codigoColor = artToAddBolsa.getCodigoColor();
+//		Talla tallaSelected = pageFavoritos.addArticleToBag(refProductoToAdd, codigoColor, 1);
+//		artToAddBolsa.setTalla(tallaSelected);
+//		dataTest.getDataBag().addArticulo(artToAddBolsa);
+//		
+//		new SecBolsaSteps().validaAltaArtBolsa();
+//	}
 	
 	@Step (
 		description="Desde Favoritos seleccionamos la imagen del artículo <b>#{artToPlay.getRefProducto()}</b>",

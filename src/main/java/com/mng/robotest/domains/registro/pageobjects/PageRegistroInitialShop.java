@@ -23,7 +23,7 @@ public class PageRegistroInitialShop extends PageBase {
 	
 	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = XPATH_MODAL_CONTENT + "/div/div/p/*[@data-testid='mng-link']";
 	private static final String XPATH_MODAL_POLITICA_PRIVACIDAD = 
-			"//*[text()[contains(.,'¿Cómo tratamos y protegemos tus datos?')]]" + 
+			"//*[text()[contains(.,'Información básica sobre protección de datos')]]" + 
 			"/following-sibling::p";
 
 	private static final String XPATH_LINK_POLITICA_PRIVACIDAD_MODAL = XPATH_MODAL_POLITICA_PRIVACIDAD + "//*[@data-testid='mng-link']";

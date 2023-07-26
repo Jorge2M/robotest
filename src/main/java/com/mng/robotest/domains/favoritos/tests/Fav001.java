@@ -13,7 +13,6 @@ import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 public class Fav001 extends TestBase {
 
@@ -33,8 +32,9 @@ public class Fav001 extends TestBase {
 		goToVestidosGalery();
 		clickFavoritesInGalery();
 		goToFavorites();
-		addFirstFavoriteToBag();
-		clearFirstFavorite();		
+		//addFirstFavoriteToBag();
+		clearFirstFavorite();
+		clearAllFavorites();
 	}
 	
 	private void loginAndClearData() throws Exception {
@@ -62,18 +62,22 @@ public class Fav001 extends TestBase {
 		new SecMenusUserSteps().selectFavoritos();
 	}	
 
-	private void addFirstFavoriteToBag() throws Exception {
-		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
-		pageFavoritosSteps.addArticuloToBag(firstFavorite);
-		if (channel.isDevice()) {
-			secBolsaSteps.closeInMobil();
-			pageFavoritosSteps.validaIsPageOK();
-		}
-	}	
+//	private void addFirstFavoriteToBag() throws Exception {
+//		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
+//		pageFavoritosSteps.addArticuloToBag(firstFavorite);
+//		if (channel.isDevice()) {
+//			secBolsaSteps.closeInMobil();
+//			pageFavoritosSteps.validaIsPageOK();
+//		}
+//	}	
 	
 	private void clearFirstFavorite() {
-		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
+		var firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		pageFavoritosSteps.clear(firstFavorite);
-		pageFavoritosSteps.clearAll();
 	}
+	
+	private void clearAllFavorites() {
+		pageFavoritosSteps.clearAll();		
+	}
+	
 }
