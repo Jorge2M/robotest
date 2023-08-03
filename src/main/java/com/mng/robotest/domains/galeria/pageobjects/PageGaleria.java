@@ -209,13 +209,10 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public boolean waitArticleAndGoTo(int numArticulo, int seconds) {
-		//String xpathUltArticulo = getXPathLinkArticulo(numArticulo);
 		if (isVisibleArticleUntil(numArticulo, seconds)) {
-			//((Locatable)getElement(xpathUltArticulo)).getCoordinates().inViewPort();
 			moveToArticle(numArticulo);
 			return true;
 		}
-
 		return false;
 	}
 
@@ -225,8 +222,14 @@ public abstract class PageGaleria extends PageBase {
 	}
 	public void moveToArticle(int numArticulo) {
 		String xpathArtGaleria = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
-		((Locatable)getElement(xpathArtGaleria)).getCoordinates().inViewPort();
+		moveToArticle(getElement(xpathArtGaleria));
 	}
+	public void moveToArticle(String xpathArticle) {
+		moveToArticle(getElement(xpathArticle));
+	}
+	public void moveToArticle(WebElement article) {
+		((Locatable)article).getCoordinates().inViewPort();
+	}	
 
 	public boolean isFirstArticleOfType(LineaType lineaType) {
 		List<WebElement> listaArticulos = getElements(xpathArticuloBase);
@@ -412,9 +415,8 @@ public abstract class PageGaleria extends PageBase {
 				.anyMatch(a -> a.getReferencia().compareTo(referencia)==0);
 	}
 
-	private DataArticleGalery getDataArticulo(
-			WebElement articulo, List<AttributeArticle> attributes) {
-		
+	private DataArticleGalery getDataArticulo(WebElement articulo, List<AttributeArticle> attributes) {
+		moveToArticle(articulo);
 		var dataArticle = new DataArticleGalery();
 		for (AttributeArticle attribute : attributes) {
 			switch (attribute) {

@@ -297,7 +297,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 		if (state(Visible, articulo).by(By.xpath(xpathNameArticle)).check()) {
 			return articulo.findElement(By.xpath(xpathNameArticle)).getText();
 		} else {
-			return "Not Found";
+			return "Not Found"; 
 		}
 	}
 
