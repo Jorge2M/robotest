@@ -33,7 +33,9 @@ public class CookiesChecker extends PageBase {
 						Pattern.compile("cloudtest-name"),
 						Pattern.compile("JSESSIONID"),
 						Pattern.compile("JSESSIONID2"),
-						Pattern.compile("JSESSIONIDPRE"))));
+						Pattern.compile("JSESSIONIDPRE"),
+						Pattern.compile("disable-s3-microfrontend") //Sólo aparece en Cloud con development=enabled
+				)));
 		
 		replaceAllowedCookies("_hjIncludedInSessionSample", "_hjIncludedInSessionSample*");
 		replaceAllowedCookies("_hjSessionUser", "_hjSessionUser*");
