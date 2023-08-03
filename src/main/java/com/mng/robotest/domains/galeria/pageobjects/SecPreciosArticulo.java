@@ -49,7 +49,7 @@ public class SecPreciosArticulo extends PageBase {
 		return getPrecioElem(articulo, TipoPrecio.PRECIO_NO_REBAJADO_DEFINITIVO);
 	}
 	public WebElement getPrecioElem(WebElement articulo, TipoPrecio tipoPrecio) {
-		return getElement(tipoPrecio.getXPath());
+		return getElement(articulo, tipoPrecio.getXPath()); 
 	}
 	
 	public boolean isArticleRebajado(WebElement articulo) {
@@ -60,9 +60,9 @@ public class SecPreciosArticulo extends PageBase {
 	public List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) {
 		List<WebElement> listPrecios = new ArrayList<>();
 		waitLoadPage();
-		for (WebElement articulo : listArticles) {
+		for (var articulo : listArticles) {
 			//WebElement precio = getElementVisible(articulo, By.xpath("." + XPathPrecioDefinitivoRelativeArticle));
-			WebElement precio = getPrecioDefinitivoElem(articulo);
+			var precio = getPrecioDefinitivoElem(articulo);
 			if (precio!=null) {
 				listPrecios.add(precio);
 			}

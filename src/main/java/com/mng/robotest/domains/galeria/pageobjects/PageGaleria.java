@@ -143,6 +143,10 @@ public abstract class PageGaleria extends PageBase {
 			return XPATH_ARTICULO_DEVICE;
 		}
 	}
+	
+	private String getXPathArticulo(int numArticulo) {
+		return "(" + xpathArticuloBase + ")[" + numArticulo + "]";
+	}	
 
 	String getXPathArticleHearthIcon(int posArticulo) {
 		String xpathArticulo = "(" + xpathArticuloBase + ")[" + posArticulo + "]";
@@ -170,7 +174,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	String getXPathLinkArticulo(int numArticulo) {
-		return ("(" + xpathArticuloBase + ")[" + numArticulo + "]//a");
+		return (getXPathArticulo(numArticulo) + "//a");
 	}
 
 	public boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
@@ -217,12 +221,10 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
-		String xpathArtGaleria = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
-		return state(Visible, xpathArtGaleria).wait(seconds).check();
+		return state(Visible, getXPathArticulo(numArticulo)).wait(seconds).check();
 	}
 	public void moveToArticle(int numArticulo) {
-		String xpathArtGaleria = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
-		moveToArticle(getElement(xpathArtGaleria));
+		moveToArticle(getElement(getXPathArticulo(numArticulo)));
 	}
 	public void moveToArticle(String xpathArticle) {
 		moveToArticle(getElement(xpathArticle));
@@ -644,8 +646,13 @@ public abstract class PageGaleria extends PageBase {
 		}
 	}
 	
-	private boolean isVisibleImageArticle(WebElement articulo, int maxSeconds) {
-		for (int i=0; i<maxSeconds; i++) {
+	public boolean isVisibleImageArticle(int numArticulo, int seconds) {
+		var articulo = getElement(getXPathArticulo(numArticulo));
+		return isVisibleImageArticle(articulo, seconds);
+	}
+	
+	private boolean isVisibleImageArticle(WebElement articulo, int seconds) {
+		for (int i=0; i<seconds; i++) {
 			if (getImagenElementArticulo(articulo)!=null) {
 				return true;
 			}

@@ -127,9 +127,14 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 			click(XPATH_LINK_FILTRAR).exec();
 		}
 	}
+	
 	public void acceptFilters() {
 		click(XPATH_BUTTON_FILTRAR).exec();
+		waitMillis(1000);
+		waitForPageLoaded(driver);
+		pageGaleria.isVisibleImageArticle(1, 2);
 	}
+	
 	private boolean isFiltersShopVisible(int seconds) {
 		return state(Visible, XPATH_CAPA_FILTERS).wait(seconds).check();
 	}

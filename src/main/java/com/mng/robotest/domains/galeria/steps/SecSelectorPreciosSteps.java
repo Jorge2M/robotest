@@ -46,7 +46,6 @@ public class SecSelectorPreciosSteps extends StepBase {
 		dataFilter.maximoFinal = selectorPreciosDesktop.getImporteMaximo();
 		if (channel==Channel.desktop) {
 			secFiltrosDesktop.acceptFilters();
-			//secFiltrosDesktop.hideFilters();
 		}
 		
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_MINIMO, String.valueOf(dataFilter.minimoFinal));
