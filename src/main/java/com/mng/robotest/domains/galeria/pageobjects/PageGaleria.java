@@ -209,9 +209,10 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public boolean waitArticleAndGoTo(int numArticulo, int seconds) {
-		String xpathUltArticulo = getXPathLinkArticulo(numArticulo);
+		//String xpathUltArticulo = getXPathLinkArticulo(numArticulo);
 		if (isVisibleArticleUntil(numArticulo, seconds)) {
-			((Locatable)getElement(xpathUltArticulo)).getCoordinates().inViewPort();
+			//((Locatable)getElement(xpathUltArticulo)).getCoordinates().inViewPort();
+			moveToArticle(numArticulo);
 			return true;
 		}
 
@@ -221,6 +222,10 @@ public abstract class PageGaleria extends PageBase {
 	public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
 		String xpathArtGaleria = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
 		return state(Visible, xpathArtGaleria).wait(seconds).check();
+	}
+	public void moveToArticle(int numArticulo) {
+		String xpathArtGaleria = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
+		((Locatable)getElement(xpathArtGaleria)).getCoordinates().inViewPort();
 	}
 
 	public boolean isFirstArticleOfType(LineaType lineaType) {
