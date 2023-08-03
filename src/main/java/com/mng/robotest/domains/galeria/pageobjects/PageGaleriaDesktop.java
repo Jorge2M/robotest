@@ -293,7 +293,12 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	@Override
 	public String getNombreArticulo(WebElement articulo) {
-		return (articulo.findElement(By.xpath("." + XPATH_NOMBRE_RELATIVE_TO_ARTICLE)).getText());
+		String xpathNameArticle = "." + XPATH_NOMBRE_RELATIVE_TO_ARTICLE;
+		if (state(Visible, articulo).by(By.xpath(xpathNameArticle)).check()) {
+			return articulo.findElement(By.xpath(xpathNameArticle)).getText();
+		} else {
+			return "Not Found";
+		}
 	}
 
 	@Override
