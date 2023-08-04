@@ -275,39 +275,44 @@ public abstract class PageGaleria extends PageBase {
 		return inInterval;
 	}
 
-
-	public String getAnyRefNotInOrderTemporada(FilterOrdenacion typeOrden) {
+	private String getAnyRefNotInOrderTemporada(FilterOrdenacion typeOrden) {
 		List<String> listaReferencias = getListaReferenciasPrendas();
 		String refAnterior="";
 		for (String refActual : listaReferencias) {
-			String tempActual = refActual.substring(0,1);
 			if ("".compareTo(refAnterior)!=0) {
-				String tempAnterior = refAnterior.substring(0,1);
-				int tempActualInt = Integer.parseInt(tempActual);
-				int tempAnteriorInt = Integer.parseInt(tempAnterior);
-				switch (typeOrden) {
-					case TEMPORADA_DESC:
-						if (tempActualInt > tempAnteriorInt) {
-							return (refAnterior + "->" + refActual);
-						}
-						break;
-					case TEMPORADA_ASC:
-						if (tempActualInt < tempAnteriorInt) {
-							return (refAnterior + "->" + refActual);
-						}
-						break;
-					default:
-						if (tempActualInt==3 && (tempAnteriorInt==1 || tempAnteriorInt==2)) {
-							return (refAnterior + "->" + refActual);
-						}
-						break;
+				var caseUnordered = checkOrder(typeOrden, refAnterior, refActual);
+				if (caseUnordered.isPresent()) {
+					return caseUnordered.get();
 				}
 			}
-
 			refAnterior = refActual;
 		}
-
 		return "";
+	}
+
+	private Optional<String> checkOrder(FilterOrdenacion typeOrden, String refAnterior, String refActual) {
+		String tempAnterior = refAnterior.substring(0,1);
+		String tempActual = refActual.substring(0,1);
+		int tempActualInt = Integer.parseInt(tempActual);
+		int tempAnteriorInt = Integer.parseInt(tempAnterior);
+		switch (typeOrden) {
+			case TEMPORADA_DESC:
+				if (tempActualInt > tempAnteriorInt) {
+					return Optional.of(refAnterior + "->" + refActual);
+				}
+				break;
+			case TEMPORADA_ASC:
+				if (tempActualInt < tempAnteriorInt) {
+					return Optional.of(refAnterior + "->" + refActual);
+				}
+				break;
+			default:
+				if (tempActualInt==3 && (tempAnteriorInt==1 || tempAnteriorInt==2)) {
+					return Optional.of(refAnterior + "->" + refActual);
+				}
+				break;
+		}
+		return Optional.empty();
 	}
 
 	/**

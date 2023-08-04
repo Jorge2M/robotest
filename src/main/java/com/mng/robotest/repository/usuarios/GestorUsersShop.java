@@ -70,7 +70,7 @@ public class GestorUsersShop {
 		return userBusyOldest;
 	}
 	
-	synchronized private static void storeTestPerformanceUsers() {
+	private static synchronized void storeTestPerformanceUsers() {
 		String PASSWORD_TEST_PERFORMANCE = 
 				GetterSecrets.factory()
 					.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
