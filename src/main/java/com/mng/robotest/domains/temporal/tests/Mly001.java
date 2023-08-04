@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
@@ -158,9 +159,14 @@ public class Mly001 extends TestBase {
 	
 	private Calendar getDateFinish() throws Exception {
 		String country = dataTest.getCodigoPais();
-		return LIST_COUNTRY_MODAL.stream()
+		Optional<CountryModal> countryModal = LIST_COUNTRY_MODAL.stream()
 			.filter(c -> c.getCountry().compareTo(country)==0)
-			.findFirst().get().getTimeFinish(country);
+			.findFirst();
+		
+		if (countryModal.isPresent()) {
+			return countryModal.get().getTimeFinish(country);
+		}
+		return null;
 	}
 	
 	private static final String XPATH_MODAL = "//micro-frontend[@id[contains(.,'newsletterSubscriptionModal')]]"; 

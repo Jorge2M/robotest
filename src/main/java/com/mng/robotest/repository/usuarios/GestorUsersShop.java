@@ -117,7 +117,7 @@ public class GestorUsersShop {
 	}
 	
 	//For UnitTest purposes
-	void reset() {
+	synchronized static void reset() {
 		listTestPerformanceUsers = null;
 	}
 }

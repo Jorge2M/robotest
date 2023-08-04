@@ -96,6 +96,7 @@ public class ValidatorContentBolsa extends PageBase {
 			}
 			break;
 		case PRECIO_TOTAL:
+		default:
 			float precioArticulosExpected = articleExpected.getPrecioDescontado() * articleExpected.getNumero();
 			if (precioArticulosExpected!=articuloScreen.getPrecio()) {
 				return false;

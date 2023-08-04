@@ -15,14 +15,18 @@ public abstract class CookiesFinder {
 	protected abstract Optional<List<Cookie>> obtainAllowedCookies();
 	
 	public Optional<List<Cookie>> getAllowedCookies() {
+		updateAllowedCookiesIfNeeded();
+		return listCookies;
+	}
+	
+	private synchronized void updateAllowedCookiesIfNeeded() {
 		if (isNeededRefreshDataCookies(SECONDS_PERSISTENCE)) {
 			listCookies = obtainAllowedCookies();
 			timeCapturedCookies = LocalDateTime.now();
 		}
-		return listCookies;
 	}
 	
-    protected boolean isNeededRefreshDataCookies(int secondsPersistence) {
+    protected static boolean isNeededRefreshDataCookies(int secondsPersistence) {
     	if (listCookies.isEmpty()) {
     		return true;
     	}
