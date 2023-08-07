@@ -51,7 +51,6 @@ public class Mic002 extends TestBase {
 		pageMisComprasSteps.validateIsCompraOfType(TypeTicket.Online, 5);
 		pageMisComprasSteps.selectCompraOnline(1, dataTest.getCodigoPais());
 		pageMisComprasSteps.clickDetalleArticulo(1);
-		pageMisComprasSteps.gotoMisComprasFromDetalleCompra();
 	}
 	
 	private void compraTienda() throws Exception {

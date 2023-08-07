@@ -480,6 +480,6 @@ public class MenuSteps extends StepBase {
 		driver.navigate().to(urlAccesoCorreo);
 
 		var datosArticulo = new DataFichaArt(article.getGarmentId(), "");
-		new PageFichaSteps().validaDetallesProducto(datosArticulo);
+		new PageFichaSteps().checkDetallesProducto(datosArticulo);
 	}	
 }

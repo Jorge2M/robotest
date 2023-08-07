@@ -69,7 +69,7 @@ public class PageGaleriaSteps extends StepBase {
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
 		String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo);
-		new PageFichaSteps().validaDetallesProducto(datosArticulo);
+		new PageFichaSteps().checkDetallesProducto(datosArticulo);
 
 		if (detailWindowHandle.compareTo(galeryWindowHandle)!=0) {
 			//Cerramos la pestaña y cambiamos a la ventana padre
@@ -93,7 +93,7 @@ public class PageGaleriaSteps extends StepBase {
 
 		pageGaleria.clickArticulo(articulo);
 		var pageFichaSteps = new PageFichaSteps();
-		pageFichaSteps.validaDetallesProducto(datosArticulo);
+		pageFichaSteps.checkDetallesProducto(datosArticulo);
 		pageFichaSteps.validaPrevNext(locationArt);
 
 		pageFichaSteps.validaBreadCrumbFicha(urlGaleria);

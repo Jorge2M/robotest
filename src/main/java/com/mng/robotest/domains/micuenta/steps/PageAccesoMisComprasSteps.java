@@ -8,7 +8,6 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras;
 import com.mng.robotest.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.steps.shop.pedidos.PageDetallePedidoSteps;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -74,6 +73,6 @@ public class PageAccesoMisComprasSteps extends StepBase {
 		pageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido()); 
 		pageAccesoMisCompras.clickBuscarPedidoBlockNo(); 
 
-		new PageDetallePedidoSteps(channel).validateIsPageOk(dataPedido);
+		new PageDetallePedidoSteps().validateIsPageOk(dataPedido);
 	}
 }

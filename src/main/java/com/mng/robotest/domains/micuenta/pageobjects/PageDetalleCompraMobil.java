@@ -1,8 +1,5 @@
 package com.mng.robotest.domains.micuenta.pageobjects;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.domains.footer.pageobjects.SecFooter;
-import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -13,13 +10,12 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	
 	private static final String XPATH_ID_TICKET = "//*[@data-testid[contains(.,'purchaseDetail.purchaseNumber')]]";
 	private static final String XPATH_LINEA_IMPORTE = "//div[@class[contains(.,'text-body-s')]]//*[@data-testid='myPurchases.price']";
-	
 	private static final String XPATH_DESPLEGABLE_DATOS_ENVIO = "//button[@id='accordion-purchase-0-title']";
 	private static final String XPATH_DATOS_ENVIO = "//dd[@id='accordion-purchase-0']/div";
 	
 	@Override
-	public boolean isPage() {
-		return isVisibleDataTicket(2);
+	public boolean isPage(int seconds) {
+		return isVisibleDataTicket(seconds);
 	}
 	@Override
 	public boolean isPresentImporteTotal(String importeTotal, String codPais) {
@@ -29,10 +25,6 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	@Override
 	public boolean isVisiblePrendaUntil(int seconds) {
 		return getNumPrendas()>0;
-	}
-	@Override
-	public void clickBackButton(Channel channel) {
-		gotoListaMisCompras();
 	}
 	@Override
 	public int getNumPrendas() {
@@ -75,10 +67,6 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	@Override
 	public void selectArticulo(int posArticulo) {
 		sectionPrendas.selectArticulo(posArticulo);
-	}
-	@Override
-	public void gotoListaMisCompras() {
-		new SecFooter().clickLink(FooterLink.MIS_COMPRAS);
 	}
 	
 	private void makeVisibleDatosEnvio() {

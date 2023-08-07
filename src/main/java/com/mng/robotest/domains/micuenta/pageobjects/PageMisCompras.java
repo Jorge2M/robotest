@@ -169,7 +169,7 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
-		if (state(Visible, XPATH_ITEMS_RELATIVE_TICKET).check()) {
+		if (!state(Visible, XPATH_ITEMS_RELATIVE_TICKET).check()) {
 			return 0;
 		}
 		String textLinea = "0" + getElement(boxDataTicket, XPATH_ITEMS_RELATIVE_TICKET).getText();

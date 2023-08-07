@@ -6,10 +6,12 @@ import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 
-public abstract class PageDetalleCompra extends PageBase implements PageDetallePedido {
+public abstract class PageDetalleCompra extends PageBase {
 
-	private final ModalDetalleArticulo modalDetalleArticulo;
-	
+	public abstract boolean isPage(int seconds);
+	public abstract boolean isVisiblePrendaUntil(int seconds);
+	public abstract boolean isPresentImporteTotal(String importeTotal, String codPais);
+	public abstract int getNumPrendas();
 	public abstract boolean isVisibleDataTicket(int seconds);
 	public abstract boolean isVisibleIdTicket(int seconds);
 	public abstract String getIdTicket(TypeTicket typeTicket);
@@ -19,7 +21,6 @@ public abstract class PageDetalleCompra extends PageBase implements PageDetalleP
 	public abstract String getNombreArticulo(int posArticulo);
 	public abstract String getPrecioArticulo(int posArticulo);
 	public abstract void selectArticulo(int posArticulo);
-	public abstract void gotoListaMisCompras();
 	
 	public static PageDetalleCompra make(Channel channel) {
 		if (channel==Channel.desktop) {
@@ -28,19 +29,6 @@ public abstract class PageDetalleCompra extends PageBase implements PageDetalleP
 		return new PageDetalleCompraMobil();
 	}
 	
-	protected PageDetalleCompra() {
-		modalDetalleArticulo = ModalDetalleArticulo.make(channel);
-	}
-	
-	public ModalDetalleArticulo getModalDetalleArticulo() {
-		return modalDetalleArticulo;
-	}
-	
-	@Override
-	public DetallePedido getTypeDetalle() {
-		return DetallePedido.NEW;
-	}
-
 	public ArticuloScreen getDataArticulo(int posArticulo) {
 		//Sólo informamos algunos datos relevantes del artículo
 		var articulo = new ArticuloScreen();

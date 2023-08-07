@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.micuenta.pageobjects;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -14,11 +13,10 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	
 	//TODO necesitaría un data-testid
 	private static final String XPATH_DIRECCION_ENVIO_ONLINE = XPATH_ID_TICKET + "/../..//h2[@class[contains(.,'text-title-l')]]/..";
-	private static final String XPATH_LINK_TO_MIS_COMPRAS = "//*[@data-testid[contains(.,'detail.goBack')]]";
 	
 	@Override
-	public boolean isPage() {
-		return isVisibleDataTicket(2);
+	public boolean isPage(int seconds) {
+		return isVisibleDataTicket(seconds);
 	}
 	@Override
 	public boolean isPresentImporteTotal(String importeTotal, String codPais) {
@@ -28,10 +26,6 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	@Override
 	public boolean isVisiblePrendaUntil(int seconds) {
 		return getNumPrendas()>0;
-	}
-	@Override
-	public void clickBackButton(Channel channel) {
-		gotoListaMisCompras();
 	}
 	@Override
 	public int getNumPrendas() {
@@ -75,15 +69,6 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	@Override
 	public void selectArticulo(int posArticulo) {
 		sectionPrendas.selectArticulo(posArticulo);
-	}
-	@Override
-	public void gotoListaMisCompras() {
-		var modalArticulo = new ModalDetalleArticuloDesktop();
-		if (modalArticulo.isVisible(0)) {
-			modalArticulo.clickAspaForClose();
-			modalArticulo.isInvisible(2);
-		}
-		click(XPATH_LINK_TO_MIS_COMPRAS).exec();
 	}
 	
 	private String getXPathTicket() {

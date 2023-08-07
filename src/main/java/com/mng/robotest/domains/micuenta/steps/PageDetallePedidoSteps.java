@@ -1,41 +1,17 @@
-package com.mng.robotest.test.steps.shop.pedidos;
+package com.mng.robotest.domains.micuenta.steps;
 
-import org.openqa.selenium.WebDriver;
-
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.beans.Ticket;
-import com.mng.robotest.domains.micuenta.pageobjects.PageDetallePedido;
-import com.mng.robotest.domains.micuenta.pageobjects.PageDetallePedido.DetallePedido;
+import com.mng.robotest.domains.micuenta.pageobjects.PageDetalleCompra;
 import com.mng.robotest.test.datastored.DataPedido;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
-public class PageDetallePedidoSteps {
+public class PageDetallePedidoSteps extends StepBase {
 	
-	private final PageDetallePedido pageDetalle;
-	private final WebDriver driver = TestMaker.getDriverTestCase();
-	
-	public PageDetallePedidoSteps(Channel channel) {
-		var pageDetallePedido = DetallePedido.NEW.getPageObject(channel);
-		if (pageDetallePedido.isPage()) {
-			this.pageDetalle = pageDetallePedido;
-		} else {
-			pageDetallePedido = DetallePedido.OLD.getPageObject(channel);
-			if (pageDetallePedido.isPage()) {
-				this.pageDetalle = pageDetallePedido;
-			} else {
-				this.pageDetalle = DetallePedido.OLD_OLD.getPageObject(channel);
-			}
-		}
-	}
-	
-	public PageDetallePedido getPageDetalle() {
-		return this.pageDetalle;
-	}
+	private final PageDetalleCompra pageDetalleCompra = PageDetalleCompra.make(channel);
 	
 	public void validateIsPageOk(Ticket compra, String codPais) {
 		String importeTotal = compra.getPrecio().replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
@@ -49,10 +25,12 @@ public class PageDetallePedidoSteps {
 		int seconds = 2;
 	  	checks.add(
 	  		"Es visible alguna prenda (la esperamos hasta " + seconds + " segundos)",
-	  		pageDetalle.isVisiblePrendaUntil(seconds), Info);	
+	  		pageDetalleCompra.isVisiblePrendaUntil(seconds), Info);
+	  	
 	  	checks.add(
 	  		"Aparecen " + numPrendasCompraOnline + " prendas",
-	  		pageDetalle.getNumPrendas()==numPrendasCompraOnline, Warn);	
+	  		pageDetalleCompra.getNumPrendas()==numPrendasCompraOnline, Warn);
+	  	
 		return checks;
 	}
 	
@@ -70,22 +48,20 @@ public class PageDetallePedidoSteps {
 	@Validation
 	private ChecksTM validateIsPageOk(String codPedido, String importeTotalWithoutCurrency, String codPais) {
 		var checks = ChecksTM.getNew();
+		int seconds = 5;
 	  	checks.add(
-	  		"Aparece la página de detalle del pedido",
-	  		pageDetalle.isPage(), Warn);	   
+	  		"Aparece la página de detalle del pedido (la esperamos hasta " + seconds + " segundos)",
+	  		pageDetalleCompra.isPage(seconds), Warn);	   
+	  	
 	  	checks.add(
 	  		"En la página figura el Nº de pedido: " + codPedido,
 	  		driver.getPageSource().contains(codPedido), Info);	
+	  	
 	  	checks.add(
 	  		"Como total figura el importe: " + importeTotalWithoutCurrency,
-	  		pageDetalle.isPresentImporteTotal(importeTotalWithoutCurrency, codPais), Info);
+	  		pageDetalleCompra.isPresentImporteTotal(importeTotalWithoutCurrency, codPais), Info);
+	  	
 	  	return checks;
 	}
 	
-	@Step (
-		description="Seleccionar el link necesario para volver a la página inicial de \"Mis Compras\"",
-		expected="Se vuelve a la página inicial de \"Mis Compras\"")
-	public void clickBackButton(Channel channel) {
-		pageDetalle.clickBackButton(channel);
-	}
 }

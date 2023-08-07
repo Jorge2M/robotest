@@ -74,7 +74,7 @@ public class SecBannersSteps extends StepBase {
 			validacionesGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal);
 			switch (dataBanner.getDestinoType()) {
 			case FICHA:
-				new PageFichaSteps().validateIsFichaCualquierArticulo();
+				new PageFichaSteps().checkIsFicha();
 				break;
 			default:				
 			case OTROS:

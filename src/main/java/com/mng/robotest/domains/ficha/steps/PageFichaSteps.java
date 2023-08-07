@@ -78,12 +78,12 @@ public class PageFichaSteps extends StepBase {
 	@Validation (
 		description="Aparece la página de Ficha",
 		level=Warn)
-	public boolean validateIsFichaCualquierArticulo() {
+	public boolean checkIsFicha() {
 		return (pageFicha.isPageUntil(0));
 	}
 
 	@Validation
-	public ChecksTM validaDetallesProducto(DataFichaArt datosArticulo) {
+	public ChecksTM checkDetallesProducto(DataFichaArt datosArticulo) {
 		var checks = ChecksTM.getNew();
 		if (datosArticulo.availableReferencia()) {
 			int seconds = 5;

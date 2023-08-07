@@ -5,22 +5,17 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.domains.base.StepBase;
+import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.micuenta.beans.Ticket;
-import com.mng.robotest.domains.micuenta.pageobjects.ModalDetalleArticulo;
 import com.mng.robotest.domains.micuenta.pageobjects.PageDetalleCompra;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
+import com.mng.robotest.test.pageobject.utils.DataFichaArt;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalDetalleCompraSteps extends StepBase {
 	
 	private final PageDetalleCompra pageDetalleCompra = PageDetalleCompra.make(channel);
-	private final ModalDetalleArticulo modalDetalleArticulo = pageDetalleCompra.getModalDetalleArticulo();
-	private final ModalDetalleArticuloSteps modalDetalleArticuloSteps = ModalDetalleArticuloSteps.getNew(modalDetalleArticulo);
-	
-	public ModalDetalleArticuloSteps getModalDetalleArticulo() {
-		return modalDetalleArticuloSteps;
-	}
 	
 	public void validateIsOk(Ticket compraTienda) {
 		ChecksTM checks = checkIsDataVisible();
@@ -70,22 +65,12 @@ public class ModalDetalleCompraSteps extends StepBase {
 	
 	@Step (
 		description="Seleccionar el #{posArticulo}o artículo de la Compra", 
-		expected="Aparece la sección correspondiente al \"QuickView\" del artículo")
+		expected="Aparece la ficha del artículo")
 	public void selectArticulo(int posArticulo) {
 		ArticuloScreen articulo = pageDetalleCompra.getDataArticulo(posArticulo);
 		pageDetalleCompra.selectArticulo(posArticulo);
-		modalDetalleArticuloSteps.validateIsOk(articulo);
-	}
-	
-	@Step (
-		description="Clickamos el link para volver a la lista de \"Mis compras\"",
-		expected="Volvemos a la página de Mis Compras")
-	public void gotoListaMisCompras() {
-		if (modalDetalleArticulo.isVisible(0)) {
-			modalDetalleArticulo.clickAspaForClose();
-			modalDetalleArticulo.isInvisible(2);
-		}
-		pageDetalleCompra.gotoListaMisCompras();
+		var dataFichaArt = new DataFichaArt(articulo.getReferencia(), articulo.getNombre());
+		new PageFichaSteps().checkDetallesProducto(dataFichaArt);
 	}
 	
 	@Validation (description="Es visible la dirección <b>#{address}</b>")

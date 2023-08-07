@@ -10,7 +10,6 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.micuenta.beans.Ticket;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras;
 import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
-import com.mng.robotest.test.steps.shop.pedidos.PageDetallePedidoSteps;
 import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -97,7 +96,7 @@ public class PageMisComprasSteps extends StepBase {
 		saveHtmlPage=SaveWhen.IfProblem)
 	public void selectCompraOnline(int posInLista, String codPais) {
 		Ticket ticket = pageMisCompras.selectTicket(TypeTicket.Online, posInLista);	   
-		new PageDetallePedidoSteps(channel).validateIsPageOk(ticket, codPais);	   
+		new PageDetallePedidoSteps().validateIsPageOk(ticket, codPais);	   
 	}
 
 	@Step (
@@ -120,8 +119,4 @@ public class PageMisComprasSteps extends StepBase {
 		modalDetalleCompraSteps.selectArticulo(posArticulo);
 	}
 	
-	public void gotoMisComprasFromDetalleCompra() {
-		modalDetalleCompraSteps.gotoListaMisCompras();
-	}
- 
 }

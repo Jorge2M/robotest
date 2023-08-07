@@ -1,4 +1,4 @@
-package com.mng.robotest.test.steps.shop.pedidos;
+package com.mng.robotest.domains.micuenta.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -30,6 +30,6 @@ public class PageInputPedidoSteps extends StepBase {
 		pageInputPedido.inputEmailUsr(usuarioAcceso);
 		pageInputPedido.inputPedido(codPedido);
 		pageInputPedido.clickRecuperarDatos();
-		new PageDetallePedidoSteps(channel).validateIsPageOk(dataPedido);
+		new PageDetallePedidoSteps().validateIsPageOk(dataPedido);
 	}
 }
