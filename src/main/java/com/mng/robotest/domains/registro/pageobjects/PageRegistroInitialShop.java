@@ -21,7 +21,7 @@ public class PageRegistroInitialShop extends PageBase {
 
 	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//div[@class='mng-form-buttons']/button[@type='submit']";	
 	
-	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = XPATH_MODAL_CONTENT + "/div/div/p/*[@data-testid='mng-link' and @href='/#']";
+	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = XPATH_MODAL_CONTENT + "/div/div/p/*[@data-testid='mng-link']";
 	private static final String XPATH_LINK_CONDICIONES_VENTA = XPATH_MODAL_CONTENT + "//*[@data-testid='mng-link' and @href[contains(.,'terms-and-conditions')]]";
 	private static final String XPATH_MODAL_POLITICA_PRIVACIDAD = 
 			"//*[text()[contains(.,'Información básica sobre protección de datos')]]" + 

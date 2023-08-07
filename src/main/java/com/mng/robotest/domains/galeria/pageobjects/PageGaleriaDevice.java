@@ -16,7 +16,6 @@ import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
 public class PageGaleriaDevice extends PageGaleria {
 	
 	private static final String TAG_ID_COLOR = "@TagIdColor";
@@ -247,25 +246,24 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public void clickHearhIcon(int posArticle) throws Exception {
-		//Nos posicionamos en el icono del Hearth 
-		String xpathIcon = getXPathArticleHearthIcon(posArticle);
-		WebElement hearthIcon = getElement(xpathIcon);
-		moveToElement(hearthIcon);
-		
-		//Clicamos y esperamos a que el icono cambie de estado
-		StateFavorito estadoInicial = getStateHearthIcon(hearthIcon);
-		clickHearthIconPreventingOverlapping(hearthIcon);
-		switch (estadoInicial) {
-		case MARCADO:
-			waitToHearthIconInState(hearthIcon, StateFavorito.DESMARCADO, 2);
-			break;
-		case DESMARCADO:
-			waitToHearthIconInState(hearthIcon, StateFavorito.MARCADO, 2);
-			break;
-		default:
-			break;
-		}		
+		var hearthIcon = moveToHearthIcon(posArticle);
+		clickHearthIconAndWait(hearthIcon);
 	}
+	
+	private WebElement moveToHearthIcon(int posArticle) {
+		moveToArticle(posArticle);
+		String xpathIcon = getXPathArticleHearthIcon(posArticle);
+		state(Visible, getElement(xpathIcon)).wait(1).check();
+		var hearthIcon = getElement(xpathIcon);
+		moveToElement(getElement(xpathIcon));
+		return hearthIcon;
+	}
+	
+	private void clickHearthIconAndWait(WebElement hearthIcon) throws Exception {
+		var estadoInicial = getStateHearthIcon(hearthIcon);
+		clickHearthIconPreventingOverlapping(hearthIcon);
+		waitToHearthIconInState(hearthIcon, estadoInicial.getOpposite(), 2);
+	}	
 	
 	@Override
 	public int getNumArticulosFromPagina(int pagina, TypeArticleDesktop sizeArticle) {

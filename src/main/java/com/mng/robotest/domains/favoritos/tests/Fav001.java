@@ -51,7 +51,7 @@ public class Fav001 extends TestBase {
 	}	
 	
 	private void clickFavoritesInGalery() throws Exception {
-		List<Integer> iconsToMark = Arrays.asList(2, 3, 5);  
+		List<Integer> iconsToMark = Arrays.asList(2, 3, 4);  
 		pageGaleriaSteps.clickArticlesHearthIcons(iconsToMark, TypeActionFav.MARCAR);
 
 		List<Integer> iconsToUnmark = Arrays.asList(3);

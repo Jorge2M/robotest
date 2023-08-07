@@ -85,6 +85,18 @@ public abstract class PageGaleria extends PageBase {
 	public abstract void selectTallaArticleNotAvalaible();
 	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
 
+	public enum StateFavorito { 
+		MARCADO, 
+		DESMARCADO;
+		
+		public StateFavorito getOpposite() {
+			if (this==MARCADO) {
+				return DESMARCADO;
+			}
+			return MARCADO;
+		}
+	}
+	
 	private static final List<LabelArticle> LIST_LABELS_NEW = Arrays.asList(
 			LabelArticle.COMING_SOON,
 			LabelArticle.NEW_NOW,
@@ -441,7 +453,6 @@ public abstract class PageGaleria extends PageBase {
 		return dataArticle;
 	}
 
-	public enum StateFavorito { MARCADO, DESMARCADO }
 	public boolean iconsInCorrectState(List<Integer> posIconosFav, TypeActionFav typeAction) {
 		for (int posIcon : posIconosFav) {
 			String xPathIcon = getXPathArticleHearthIcon(posIcon);

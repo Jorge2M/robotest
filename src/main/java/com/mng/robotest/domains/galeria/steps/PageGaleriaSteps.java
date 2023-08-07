@@ -28,7 +28,6 @@ import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArtic
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeSlider;
 import com.mng.robotest.domains.galeria.pageobjects.SecBannerHeadGallery.TypeLinkInfo;
-import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test.pageobject.shop.filtros.SecFiltros;
@@ -526,7 +525,7 @@ public class PageGaleriaSteps extends StepBase {
 		expected="Los \"Hearth Icons\" quedan " + TAG_ESTADO_FINAL)
 	public void clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav) 
 			throws Exception {
-		List<ArticuloScreen> listAddFav = pageGaleria.clickArticleHearthIcons(posIconsToClick);
+		var listAddFav = pageGaleria.clickArticleHearthIcons(posIconsToClick);
 		String estadoFinal = "";
 		switch (actionFav) {
 			case MARCAR:
