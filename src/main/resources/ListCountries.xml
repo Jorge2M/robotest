@@ -706,7 +706,7 @@
 </shoponline>
 <pago 
 	type="Klarna" tiendas="shop,outlet"
-	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna="0801363945">&TPV-208;</pago>
+	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna="0801363945">&TPV-208;</pago>
 <!-- 
 <pago 
 	type="Klarna" tiendas="shop,outlet" empleado="n"
@@ -821,7 +821,7 @@
 </shoponline>
 <pago 
 	type="Klarna" tiendas="shop,outlet"
-	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna="190122-829F">&TPV-208;</pago>
+	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna="190122-829F">&TPV-208;</pago>
 <!-- 
 <pago 
 	type="Klarna" tiendas="shop,outlet" empleado="n"
@@ -936,7 +936,7 @@
 </shoponline>
 <pago 
 	type="Klarna" tiendas="shop,outlet"
-	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna='23.04.1974'>&TPV-208;</pago>
+	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna='23.04.1974'>&TPV-208;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-549;</pago>
@@ -1720,7 +1720,7 @@
 </shoponline>
 <pago 
 	type="Klarna" tiendas="shop,outlet"
-	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna="01121579533">&TPV-208;</pago>
+	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna="01121579533">&TPV-208;</pago>
 <!-- 
 <pago 
 	type="Klarna" tiendas="shop,outlet"
@@ -2410,7 +2410,7 @@ where
 </shoponline>
 <pago 
 	type="Klarna" tiendas="shop,outlet"
-	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna="19410321-9202">&TPV-208;</pago>
+	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna="19410321-9202">&TPV-208;</pago>
 <!-- 
 <pago 
 	type="Klarna" tiendas="shop,outlet" empleado="n" 
@@ -2481,7 +2481,7 @@ where
 	nombre="Rechnung" testpasarela='s' testpago='s'>&TPV-202;</pago>--> <!-- Billpay: cuidado que si se confirma el pago se realiza la compra -->
 <pago 
 	type="Klarna" tiendas="shop,outlet"
-	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna="19410321-9202">&TPV-208;</pago>	
+	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna="19410321-9202">&TPV-208;</pago>	
 <pago 
 	type="Postfinance" tiendas="shop,outlet"
 	nombre="PostFinance e-finance" testpasarela='s' testpago='s'>&TPV-303;</pago>
@@ -3183,7 +3183,7 @@ where
 	nombre="DINERS" testpasarela='s'>&TPV-093;</pago>
 <pago 
 	type="KlarnaUK" tiendas="shop,outlet"
-	nombre="KLARNA" testpasarela='s' testpago='s' numperklarna='23.04.1974'>&TPV-208;</pago>
+	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna='23.04.1974'>&TPV-208;</pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="DISCOVER" testpasarela='s'>&TPV-093;</pago>
