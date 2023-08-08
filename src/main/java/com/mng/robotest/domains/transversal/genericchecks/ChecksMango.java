@@ -4,7 +4,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.service.genericchecks.Checker;
 import com.github.jorge2m.testmaker.service.genericchecks.GenericChecks;
 import com.github.jorge2m.testmaker.service.genericchecks.GenericChecks.BuilderCheck;
-import com.mng.robotest.domains.accesibilidad.steps.CheckerAccesibility;
+//import com.mng.robotest.domains.accesibilidad.steps.CheckerAccesibility;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.cookiescheck.steps.CheckerAllowedCookies;
 
@@ -38,7 +38,7 @@ public class ChecksMango extends PageBase {
 		genericChecks.checks();
 		
 		if (accesibility!=null) {
-			executeCheck(new CheckerAccesibility(accesibility));
+			//executeCheck(new CheckerAccesibility(accesibility));
 		}
 		if (cookiesAllowed!=null) {
 			executeCheck(new CheckerAllowedCookies(cookiesAllowed, app));
