@@ -10,6 +10,7 @@ import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.test.utils.UtilsTest;
 
 public class Mic002 extends TestBase {
 	
@@ -50,7 +51,11 @@ public class Mic002 extends TestBase {
 		var pageMisComprasSteps = new PageMisComprasSteps();
 		pageMisComprasSteps.validateIsCompraOfType(TypeTicket.Online, 5);
 		pageMisComprasSteps.selectCompraOnline(1, dataTest.getCodigoPais());
-		pageMisComprasSteps.clickDetalleArticulo(1);
+		
+		//TODO TestAB (quickview o ficha) que en pro va por la variante-0 y en pre por la 1
+		if (!(isPRO() && UtilsTest.todayBeforeDate("2023-09-15"))) {		
+			pageMisComprasSteps.clickDetalleArticulo(1);
+		}
 	}
 	
 	private void compraTienda() throws Exception {
