@@ -21,6 +21,7 @@ public class InputParamsMango extends InputParamsTM {
 	private static final String PAYMENTS_NAME_PARAM = "payments";
 	private static final String CATALOGS_NAME_PARAM = "catalogs";
 	private static final String URL_MANTO_PARAM = "urlmanto";
+	private static final String GENERIC_CHECKS_PARAM = "genericchecks";
 
 	@FormParam(COUNTRYS_NAME_PARAM)
 	String listCountrysCommaSeparated;
@@ -36,6 +37,9 @@ public class InputParamsMango extends InputParamsTM {
 	
 	@FormParam(URL_MANTO_PARAM)
 	String urlManto;
+	
+	@FormParam(GENERIC_CHECKS_PARAM)
+	String genericChecks;
 	
 	private static String lineSeparator = System.getProperty("line.separator");
 
@@ -90,6 +94,13 @@ public class InputParamsMango extends InputParamsTM {
 			.desc("URL of the Backoffice of mangoshop (Manto application)")
 			.build());	
 
+		options.add(OptionTMaker.builder(InputParamsMango.GENERIC_CHECKS_PARAM)
+			.required(false)
+			.hasArgs()
+			.possibleValues(Arrays.asList("true", "false"))
+			.desc("Execute generic checks (default false)")
+			.build());		
+
 		return options;
 	}
 
@@ -100,6 +111,7 @@ public class InputParamsMango extends InputParamsTM {
 		setListaPayments(cmdLineData.getOptionValues(PAYMENTS_NAME_PARAM));
 		setListaCatalogs(cmdLineData.getOptionValues(CATALOGS_NAME_PARAM));
 		setUrlManto(cmdLineData.getOptionValue(URL_MANTO_PARAM));
+		setGenericChecks(cmdLineData.getOptionValue(GENERIC_CHECKS_PARAM));
 	}
 
 	private enum ParamMango {
@@ -107,7 +119,8 @@ public class InputParamsMango extends InputParamsTM {
 		LINEAS(LINEAS_NAME_PARAM),
 		PAYMENTS(PAYMENTS_NAME_PARAM),
 		CATALOGS(CATALOGS_NAME_PARAM),
-		URL_MANTO(URL_MANTO_PARAM);
+		URL_MANTO(URL_MANTO_PARAM),
+		GENERIC_CHECKS(GENERIC_CHECKS_PARAM);
 		
 		public final String nameParam;
 		private ParamMango(String nameParam) {
@@ -137,6 +150,8 @@ public class InputParamsMango extends InputParamsTM {
 			return listPaymentsCommaSeparated;
 		case CATALOGS:
 			return listCatalogsCommaSeparated;
+		case GENERIC_CHECKS:
+			return genericChecks;
 		case URL_MANTO:
 			return getUrlManto();
 		}
@@ -249,6 +264,16 @@ public class InputParamsMango extends InputParamsTM {
 		}
 	}
 
+	public boolean getGenericChecks() {
+		if (genericChecks!=null) {
+	    	return ("true".compareTo(genericChecks)==0);
+		}
+		return false;
+	}
+	public void setGenericChecks(String genericChecks) {
+		this.genericChecks = genericChecks;
+	}	
+	
 	public String getUrlManto() {
 		return this.urlManto;
 	}

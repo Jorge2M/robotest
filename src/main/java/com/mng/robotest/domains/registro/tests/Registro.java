@@ -84,8 +84,8 @@ public class Registro implements Serializable {
 		if (isPro()) {
 			return;
 		}
-		Pais corea = COREA_DEL_SUR.getPais();
-		IdiomaPais ingles = corea.getListIdiomas().get(1);
+		var corea = COREA_DEL_SUR.getPais();
+		var ingles = corea.getListIdiomas().get(1);
 		new Reg001(corea, ingles).execute();
 	}	
 	

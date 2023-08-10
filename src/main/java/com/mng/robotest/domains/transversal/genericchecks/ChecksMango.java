@@ -35,6 +35,11 @@ public class ChecksMango extends PageBase {
 	}
 	
 	public void checks() {
+		if (inputParamsSuite.getGenericChecks()) {
+			execChecks();
+		}
+	}
+	private void execChecks() {
 		genericChecks.checks();
 		
 		if (accesibility!=null) {
