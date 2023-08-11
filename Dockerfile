@@ -16,4 +16,3 @@ WORKDIR /robotest
 
 EXPOSE 8080
 ENTRYPOINT ["bash","/robotest/docker-entrypoint.sh","1920x1080x24"]
-#CMD echo "none /dev/shm tmpfs defaults,size=2g 0 0" >> /etc/fstab ; mount -o remount /dev/shm ; xvfb-run -s "-screen 0 1024x768x24" java -cp robotest.jar com.mng.robotest.access.rest.ServerRest -port 80 -secureport 443

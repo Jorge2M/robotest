@@ -1,0 +1,1 @@
+java -Xdebug -Xrunjdwp:transport=dt_socket,address=0.0.0.0:8000,server=y,suspend=y -cp robotest.jar com.mng.robotest.access.rest.ServerRest -port 8080
