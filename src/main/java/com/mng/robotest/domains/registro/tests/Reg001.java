@@ -41,7 +41,7 @@ public class Reg001 extends TestBase {
 				true,
 				"Jorge",
 				pais.getCodpos(),
-				"23/04/1974",
+				"04/02/1974",
 				GenderOption.MASCULINO,
 				Arrays.asList(SHE, HE, KIDS));
 	}
@@ -49,9 +49,7 @@ public class Reg001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		accesoAndClickRegistrate();
-		if (isCorea()) {
-			inputBirthDateAndConsentPersonalInfo();			
-		} else {
+		if (!isCorea()) {
 			selectLinkPoliticaPrivacidad();
 		}
 		inputInitialDataAndClickCreate();
@@ -82,6 +80,9 @@ public class Reg001 extends TestBase {
 	
 	private void inputInitialDataAndClickCreate() {
 		pageRegistroInitialSteps.inputData(dataNewRegister);
+		if (isCorea()) {
+			inputBirthDateAndConsentPersonalInfo();	
+		}
 		pageRegistroInitialSteps.clickCreateAccountButton();
 	}
 

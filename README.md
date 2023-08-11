@@ -65,6 +65,24 @@ Covers the web channels: desktop, mobile, tablet
 	Launch execution is analog to the previous case
 	
 	The html report can be viewed using the "idExecSuite" field returned by the previous POST call and executing the follow url in the browser: localhost/suiterun/{id_testrun}/report
+	
+### How execute locally with Docker and visualize Browser's Executions
+
+	install RealVNC Viewer if not yet
+
+	replace file Dockerfile by Dcokerfile_debug
+	
+	docker build -t jorge2m/robotest:latest .
+	
+	docker run -d -p 80:8080 -p 5900:5900 -p 8000:8000 --privileged jorge2m/robotest:latest
+	
+	Open RealVNC Viewer anc connecto to localhost:5900 (password 1234)
+	
+	Execute the following command in the RealVNC session: java -cp robotest.jar com.mng.robotest.access.rest.ServerRest -port 8080
+	
+	Launch execution is analog to the previous case
+	
+	The html report can be viewed using the "idExecSuite" field returned by the previous POST call and executing the follow url in the browser: localhost/suiterun/{id_testrun}/report	
     
 ### Run integration tests 
   
