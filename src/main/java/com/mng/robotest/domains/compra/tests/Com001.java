@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.repository.productlist.GetterProducts;

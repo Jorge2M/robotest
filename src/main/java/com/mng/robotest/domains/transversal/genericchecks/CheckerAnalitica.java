@@ -13,8 +13,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.genericchecks.Checker;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.test.utils.UtilsTest;
-import com.mng.robotest.conftestmaker.AppEcom;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 

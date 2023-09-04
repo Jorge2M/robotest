@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;

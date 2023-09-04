@@ -3,10 +3,10 @@ package com.mng.robotest.test.appshop.paisaplicavale;
 import java.io.Serializable;
 import org.testng.annotations.*;
 
+import com.mng.robotest.conf.suites.PagosPaisesSuite.VersionPagosSuite;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.suites.PagosPaisesSuite.VersionPagosSuite;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 
 public class PaisAplicaVale implements Serializable {

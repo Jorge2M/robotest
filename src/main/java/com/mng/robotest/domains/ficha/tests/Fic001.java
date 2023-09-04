@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;

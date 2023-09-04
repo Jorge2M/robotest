@@ -2,7 +2,7 @@ package com.mng.robotest.test.steps.navigations.manto;
 
 import java.util.List;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.manto.pageobjects.PageDetallePedido;
 import com.mng.robotest.domains.manto.pageobjects.PagePedidos.TypeDetalle;

@@ -30,13 +30,6 @@ public class Otras {
 		description="Acceso al país Japón desde la preHome y comprobación de que redirige a la shop específica de este país")
 	public void OTR005_accesoJapon() throws Exception {
 		new Otr005().execute();
-	}	
-	
-	//TODO cuando lo activen en Tablet añadir ese canal
-	@Test (
-		groups={"Chatbot", "Canal:desktop,mobile_App:shop"}, 
-		description="Chequear el ChatBot")
-	public void OTR006_chatBot() throws Exception {
-		new Otr006().execute();
 	}
+	
 }

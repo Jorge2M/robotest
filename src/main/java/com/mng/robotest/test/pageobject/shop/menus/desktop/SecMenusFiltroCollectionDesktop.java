@@ -1,7 +1,7 @@
 package com.mng.robotest.test.pageobject.shop.menus.desktop;
 
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
+import com.mng.robotest.domains.galeria.pageobjects.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusFiltroCollection;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

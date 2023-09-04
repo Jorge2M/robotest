@@ -13,7 +13,7 @@ import org.openqa.selenium.interactions.Locatable;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
@@ -23,7 +23,6 @@ import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
 import com.mng.robotest.test.pageobject.utils.ListDataArticleGalery;

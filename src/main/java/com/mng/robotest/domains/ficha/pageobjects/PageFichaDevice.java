@@ -12,12 +12,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageFichaDevice extends PageFicha {
 
-	private final SecProductDescrOld secProductDescr = new SecProductDescrOld();
-
 	private static final String XPATH_CONTAINER_FICHA = "//*[@class='product-detail']";
-
 	private static final String XPATH_ALTA_BOLSA_BUTTON ="//*[@id='productFormAdd']";
-
 	private static final String XPATH_BUTTON_FAVORITOS = "//*[@data-testid='button-icon']";
 	private static final String XPATH_BUTTON_FAVORITOS_FOR_ADD = XPATH_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'outline')]]";
 	private static final String XPATH_BUTTON_FAVORITOS_FOR_REMOVE = XPATH_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'fill')]]";

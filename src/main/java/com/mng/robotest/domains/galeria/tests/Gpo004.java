@@ -2,16 +2,15 @@ package com.mng.robotest.domains.galeria.tests;
 
 import java.util.ArrayList;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.TestBase;
+import com.mng.robotest.domains.galeria.pageobjects.FilterOrdenacion;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.steps.DataForScrollStep;
 import com.mng.robotest.domains.galeria.steps.LocationArticle;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.test.data.Color;
-import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
-import com.mng.robotest.test.steps.shop.AllPagesSteps;
 
 import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 
@@ -79,7 +78,7 @@ public class Gpo004 extends TestBase {
 	}
 
 	private void goBackToGalery() {
-		new AllPagesSteps().backNagegador();
+		back();
 	}
 
 	private void scrollToLastAndCheck(int articulosTotalesPagina) throws Exception {

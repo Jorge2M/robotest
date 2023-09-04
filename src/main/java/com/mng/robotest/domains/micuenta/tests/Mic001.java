@@ -3,7 +3,7 @@ package com.mng.robotest.domains.micuenta.tests;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.micuenta.pageobjects.PageSuscripciones.NewsLetter;
 import com.mng.robotest.domains.micuenta.steps.PageDevolucionesSteps;

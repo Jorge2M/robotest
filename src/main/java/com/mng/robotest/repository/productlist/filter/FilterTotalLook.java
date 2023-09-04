@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.repository.UtilsData;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.repository.productlist.entity.GarmentDetails;

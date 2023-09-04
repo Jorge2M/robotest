@@ -6,8 +6,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
-
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
@@ -36,7 +35,7 @@ public class PageFichaSteps extends StepBase {
 	private final PageFicha pageFicha = PageFicha.of(channel);
 	private final SecBolsa secBolsa = new SecBolsa();
 	private final ModEnvioYdevolNewSteps modEnvioYdevolSteps = new ModEnvioYdevolNewSteps();
-	private final SecProductDescrOldSteps secProductDescOldSteps = new SecProductDescrOldSteps();
+	private final SecProductDescrDeviceSteps secProductDescOldSteps = new SecProductDescrDeviceSteps();
 	private final SecBolsaButtonAndLinksNewSteps secBolsaButtonAndLinksNewSteps = new SecBolsaButtonAndLinksNewSteps();
 	private final SecFotosNewSteps secFotosNewSteps = new SecFotosNewSteps();
 	private final SecFitFinderSteps secFitFinderSteps = new SecFitFinderSteps();
@@ -502,7 +501,7 @@ public class PageFichaSteps extends StepBase {
 		return checks;
 	}
 
-	public SecProductDescrOldSteps getSecProductDescOldSteps() {
+	public SecProductDescrDeviceSteps getSecProductDescDeviceSteps() {
 		return secProductDescOldSteps;
 	}
 

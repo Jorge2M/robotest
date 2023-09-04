@@ -1,9 +1,8 @@
 package com.mng.robotest.test.steps.navigations.shop;
 
 import com.mng.robotest.domains.base.StepBase;
-import com.mng.robotest.test.steps.shop.AllPagesSteps;
-import com.mng.robotest.test.steps.shop.SecCabeceraSteps;
-import com.mng.robotest.test.steps.shop.landing.PageLandingSteps;
+import com.mng.robotest.domains.transversal.cabecera.steps.SecCabeceraSteps;
+import com.mng.robotest.domains.transversal.home.steps.PageLandingSteps;
 
 public class NavigationsSteps extends StepBase {
 
@@ -11,7 +10,7 @@ public class NavigationsSteps extends StepBase {
 		var secCabeceraSteps =	new SecCabeceraSteps();
 		int i=0;
 		while (!secCabeceraSteps.getSecCabecera().isPresentLogoMango(1) && i<5) {
-			new AllPagesSteps().backNagegador();
+			back();
 			i+=1;
 		}
 		

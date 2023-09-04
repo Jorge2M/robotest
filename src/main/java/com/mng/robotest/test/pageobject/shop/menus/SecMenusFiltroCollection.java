@@ -1,8 +1,8 @@
 package com.mng.robotest.test.pageobject.shop.menus;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
+import com.mng.robotest.conf.AppEcom;
+import com.mng.robotest.domains.galeria.pageobjects.FilterCollection;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.SecMenusFiltroCollectionDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusFiltroCollectionMobil;
 

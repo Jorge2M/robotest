@@ -10,7 +10,7 @@ import java.text.ParseException;
 import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.WebDriver;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.repository.productlist.GetterProducts;
 import com.mng.robotest.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog;

@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.galeria.pageobjects;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 
 public class SecColoresArticuloDesktop extends PageBase {

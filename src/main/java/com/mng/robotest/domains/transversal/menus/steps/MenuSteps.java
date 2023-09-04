@@ -15,12 +15,13 @@ import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.domains.transversal.banners.steps.SecBannersSteps;
 import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupResponse;
@@ -35,9 +36,7 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenusWebAll;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.data.Constantes.ThreeState;
-import com.mng.robotest.test.pageobject.shop.AllPages;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
-import com.mng.robotest.test.steps.shop.banner.SecBannersSteps;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -183,7 +182,7 @@ public class MenuSteps extends StepBase {
 	@Validation
 	private ChecksTM isTitleAssociatedMenu(String nameMenu) {
 		var checks = ChecksTM.getNew();
-		boolean isTitleAccording = new AllPages().isTitleAssociatedToMenu(nameMenu);
+		boolean isTitleAccording = isTitleAssociatedToMenu(nameMenu);
 	 	checks.add(
 	 		Check.make(
 	 				"El title de la página es el asociado al menú <b>" + nameMenu + "</b>",

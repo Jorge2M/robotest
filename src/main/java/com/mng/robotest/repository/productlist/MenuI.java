@@ -1,6 +1,6 @@
 package com.mng.robotest.repository.productlist;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 
 public interface MenuI {
 

@@ -11,7 +11,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.base.datatest.DataMantoTest;
 import com.mng.robotest.domains.manto.pageobjects.PageDetallePedido;

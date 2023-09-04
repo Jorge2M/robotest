@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.compra.payments.billpay.pageobjects.SecBillpay;
 import com.mng.robotest.domains.compra.payments.eps.pageobjects.SecEps;

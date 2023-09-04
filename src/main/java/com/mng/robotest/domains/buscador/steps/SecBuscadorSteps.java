@@ -11,9 +11,9 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria.From;
+import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 
 public class SecBuscadorSteps extends StepBase {

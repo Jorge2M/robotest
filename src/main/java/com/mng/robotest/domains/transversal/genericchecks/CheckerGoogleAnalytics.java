@@ -13,7 +13,7 @@ import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.github.jorge2m.testmaker.service.genericchecks.Checker;
 import com.github.jorge2m.testmaker.service.genericchecks.UtilsChecker;
 import com.github.jorge2m.testmaker.testreports.stepstore.GestorDatosHarJSON;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 
 public class CheckerGoogleAnalytics extends PageBase implements Checker {

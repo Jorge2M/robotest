@@ -3,7 +3,7 @@ package com.mng.robotest.repository.productlist;
 import java.util.List;
 import java.util.Optional;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.repository.productlist.entity.ProductList;
 import com.mng.robotest.repository.productlist.filter.Filter;

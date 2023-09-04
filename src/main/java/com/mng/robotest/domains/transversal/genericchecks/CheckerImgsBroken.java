@@ -112,7 +112,7 @@ public class CheckerImgsBroken implements Checker {
 		ResultadoErrores resultado = new ResultadoErrores();
 		resultado.setResultado(ResultadoErrores.Resultado.OK);
 		ArrayList<String> listaImgBroken = new ArrayList<>();
-		EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(driver);
+		var eventFiringWebDriver = new EventFiringWebDriver(driver);
 
 		// Storing all the image elemt in the variable allImages
 		List<WebElement> allImages = eventFiringWebDriver.findElements(By.xpath("//img[@src and not(@src=\"\")]"));

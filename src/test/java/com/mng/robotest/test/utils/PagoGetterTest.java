@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 
 
 public class PagoGetterTest {

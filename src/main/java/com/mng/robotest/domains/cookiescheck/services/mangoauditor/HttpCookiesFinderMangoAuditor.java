@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.cookiescheck.entities.Cookie;
 import com.mng.robotest.domains.cookiescheck.exceptions.IrretrievableCookies;
 import com.mng.robotest.domains.cookiescheck.exceptions.UnparseableCookies;

@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.github.jorge2m.testmaker.conf.Channel;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

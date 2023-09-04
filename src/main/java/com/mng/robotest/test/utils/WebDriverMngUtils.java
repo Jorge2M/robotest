@@ -6,7 +6,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 
-import com.mng.robotest.conftestmaker.ErrorStorer;
+import com.mng.robotest.conf.ErrorStorer;
 import com.mng.robotest.test.generic.StackTrace;
 
 public class WebDriverMngUtils {

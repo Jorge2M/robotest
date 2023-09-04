@@ -1,5 +1,7 @@
 package com.mng.robotest.domains.base;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -21,7 +23,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.ClickElement.Bu
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.BuilderSelect;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.BuilderState;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.datatest.DataMantoTest;
 import com.mng.robotest.domains.base.datatest.DataTest;
 import com.mng.robotest.domains.legal.legaltexts.FactoryLegalTexts;
@@ -238,5 +240,29 @@ public class PageBase extends PageObjTM {
 	protected void refreshPage() {
 		driver.navigate().refresh();
 	}
+	
+	protected void backPage() {
+		driver.navigate().back();
+		waitForPageLoaded(driver, 10);
+	}
+	
+	public boolean isPresentElementWithText(String text, int seconds) {
+		String xpath = "//*[text()[contains(.,'" + text + "')]]";
+		return state(Present, xpath).wait(seconds).check();
+	}
+	
+	public boolean isTitleAssociatedToMenu(String menuName) {
+		String titlePage = driver.getTitle().toLowerCase();
+		if (titlePage.contains(menuName.toLowerCase())) {
+			return true;
+		}
+		if (menuName.contains(" ")) {
+			return Arrays.stream(titlePage.split(" "))
+				.filter(s -> !titlePage.contains(s))
+				.findAny()
+				.isEmpty();
+		}
+		return false;
+	}	
 
 }

@@ -2,7 +2,7 @@ package com.mng.robotest.domains.ficha.tests;
 
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.ficha.pageobjects.SecDataProduct.ProductNav;
-import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
+import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrDevice.TypePanel;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.galeria.steps.LocationArticle;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
@@ -49,7 +49,7 @@ public class Fic003 extends TestBase {
 	private void kcSafetyTest() {
 		if (channel.isDevice()) {
 			if (TypePanel.KC_SAFETY.getListApps().contains(app)) {
-				pageFichaSteps.getSecProductDescOldSteps().selectPanel(TypePanel.KC_SAFETY);
+				pageFichaSteps.getSecProductDescDeviceSteps().selectPanel(TypePanel.KC_SAFETY);
 			}
 		} else {
 			if (TypePanel.KC_SAFETY.getListApps().contains(app)) {

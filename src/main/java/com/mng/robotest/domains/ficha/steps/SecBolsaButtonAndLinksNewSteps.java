@@ -8,7 +8,7 @@ import com.mng.robotest.domains.ficha.pageobjects.ModCompartirNew;
 import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew;
 import com.mng.robotest.domains.ficha.pageobjects.SecDetalleProduct;
 import com.mng.robotest.domains.ficha.pageobjects.ModCompartirNew.IconSocial;
-import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel;
+import com.mng.robotest.domains.ficha.pageobjects.SecProductDescrDevice.TypePanel;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 import static com.github.jorge2m.testmaker.conf.State.*;

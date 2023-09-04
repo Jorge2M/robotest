@@ -1,7 +1,6 @@
 package com.mng.robotest.domains.login.pageobjects;
 
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.test.pageobject.shop.AllPages;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -13,7 +12,7 @@ public class PageRecuperaPasswd extends PageBase {
 	private static final String XPATH_BUTTON_IR_DE_SHOPPING = "//div[@id[contains(.,'IrShopping')]]/a";
 	
 	public boolean isPageUntil(int seconds) {
-		return new AllPages().isPresentElementWithTextUntil("RECUPERA TU CONTRASEÑA", seconds);
+		return isPresentElementWithText("RECUPERA TU CONTRASEÑA", seconds);
 	}
 	
 	public boolean isPresentInputCorreo() {

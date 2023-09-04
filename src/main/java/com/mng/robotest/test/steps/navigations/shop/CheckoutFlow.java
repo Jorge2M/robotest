@@ -21,7 +21,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
+import com.mng.robotest.conf.factories.entities.EgyptCity;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
@@ -47,11 +48,9 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Pago.TypePago;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
-import com.mng.robotest.test.factoryes.entities.EgyptCity;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ValeDiscount;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
-import com.mng.robotest.test.steps.shop.AllPagesSteps;
 import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.mng.robotest.domains.compra.pageobjects.DataDireccion.DataDirType.*;
@@ -157,7 +156,7 @@ public class CheckoutFlow extends StepBase {
 		boolean emailOk = page2IdentCheckoutSteps.checkEmail(emailCheckout);
 		if (!emailOk) {
 			//Existe un problema según el cual en ocasiones no se propaga el email desde la página de identificación
-			new AllPagesSteps().backNagegador();
+			back();
 			page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dataPago.getFTCkout().emailExists);
 		}
 		

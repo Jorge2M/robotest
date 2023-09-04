@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.galeria.steps;
 
-import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
+import com.mng.robotest.domains.galeria.pageobjects.FilterOrdenacion;
 
 public class DataForScrollStep {
 	private int numPageToScroll;

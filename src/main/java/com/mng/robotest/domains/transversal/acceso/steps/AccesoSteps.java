@@ -12,7 +12,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.base.datatest.DataTest;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
@@ -26,9 +26,6 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
-import com.mng.robotest.test.steps.votf.PageLoginVOTFSteps;
-import com.mng.robotest.test.steps.votf.PageSelectIdiomaVOTFSteps;
-import com.mng.robotest.test.steps.votf.PageSelectLineaVOTFSteps;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 

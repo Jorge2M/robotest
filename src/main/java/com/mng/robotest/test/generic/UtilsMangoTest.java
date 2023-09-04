@@ -19,13 +19,13 @@ import org.testng.ITestContext;
 
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
+import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 import com.mng.robotest.test.pageobject.shop.navigations.ArticuloNavigations;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;

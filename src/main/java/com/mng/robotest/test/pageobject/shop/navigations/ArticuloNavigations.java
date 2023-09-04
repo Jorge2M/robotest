@@ -4,10 +4,10 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
+import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
 
 public class ArticuloNavigations extends StepBase {
 

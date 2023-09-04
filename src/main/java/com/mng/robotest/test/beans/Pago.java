@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.*;
 
 import org.testng.ITestContext;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.test.data.Constantes;
 import com.github.jorge2m.testmaker.conf.Channel;

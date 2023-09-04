@@ -2,6 +2,7 @@ package com.mng.robotest.test.appshop.paisidioma;
 
 import java.util.List;
 
+import com.mng.robotest.conf.suites.FlagsNaviationLineas;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
@@ -13,14 +14,13 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Linea;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.beans.Sublinea;
+import com.mng.robotest.domains.transversal.banners.steps.SecBannersSteps;
+import com.mng.robotest.domains.transversal.home.steps.PageLandingSteps;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.beans.Linea.TypeContentDesk;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.test.generic.UtilsMangoTest;
-import com.mng.robotest.test.steps.shop.banner.SecBannersSteps;
-import com.mng.robotest.test.steps.shop.home.PageHomeMarcasSteps;
-import com.mng.robotest.test.suites.FlagsNaviationLineas;
 import com.mng.robotest.test.utils.LevelPais;
 
 public class Par001 extends TestBase {
@@ -41,7 +41,7 @@ public class Par001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		new PagePrehomeSteps().seleccionPaisIdiomaAndEnter();
-		new PageHomeMarcasSteps().validateIsPageWithCorrectLineas();
+		new PageLandingSteps().validateIsPageWithCorrectLineas();
 		for (Linea linea : linesToTest) {
 			if (new UtilsMangoTest().validarLinea(linea)) {
 				validaLinea(linea, null);
@@ -116,7 +116,7 @@ public class Par001 extends TestBase {
 		if (testBanners(linea)) {
 			int maxBannersToTest = getMaxBannersToTest(linea.getType());
 			new SecBannersSteps(maxBannersToTest)
-				.testPageBanners(maxBannersToTest);
+				.checkPageBanners(maxBannersToTest);
 		}
 	}
 	

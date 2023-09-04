@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.*;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.test.beans.Pago.TypePago;
 import com.mng.robotest.test.utils.LevelPais;

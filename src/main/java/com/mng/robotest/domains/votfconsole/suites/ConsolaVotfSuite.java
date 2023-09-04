@@ -1,6 +1,6 @@
 package com.mng.robotest.domains.votfconsole.suites;
 
-import static com.mng.robotest.test.suites.SuiteMakerResources.getParametersSuiteShop;
+import static com.mng.robotest.conf.suites.SuiteMakerResources.getParametersSuiteShop;
 
 import org.testng.xml.XmlSuite.ParallelMode;
 

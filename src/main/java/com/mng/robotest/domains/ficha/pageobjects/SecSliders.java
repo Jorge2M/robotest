@@ -1,14 +1,13 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.conf.AppEcom.*;
 
 import java.util.Arrays;
 import java.util.List;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
-
-import static com.mng.robotest.conftestmaker.AppEcom.*;
 
 public class SecSliders extends PageBase {
 

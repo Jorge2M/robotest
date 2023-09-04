@@ -1,8 +1,8 @@
 package com.mng.robotest.access.rest;
 
 import com.mng.robotest.access.CreatorSuiteRunMango;
-import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.conftestmaker.Suites;
+import com.mng.robotest.conf.AppEcom;
+import com.mng.robotest.conf.Suites;
 import com.github.jorge2m.testmaker.boundary.access.ServerCmdLine;
 import com.github.jorge2m.testmaker.boundary.access.ServerCmdLine.ResultCmdServer;
 import com.github.jorge2m.testmaker.restcontroller.ServerRestTM;

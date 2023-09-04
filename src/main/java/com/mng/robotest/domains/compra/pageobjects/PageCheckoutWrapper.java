@@ -21,7 +21,6 @@ public class PageCheckoutWrapper extends PageBase {
 	private final Page1DktopCheckout page1DktopCheckout = new Page1DktopCheckout();
 	private final Page1EnvioCheckoutMobil page1MobilCheckout = new Page1EnvioCheckoutMobil();
 	private final Page2DatosPagoCheckoutMobil page2MobilCheckout = new Page2DatosPagoCheckoutMobil();
-	private final ModalAvisoCambioPais modalAvisoCambioPais = new ModalAvisoCambioPais();
 	private final SecTarjetaPci secTarjetaPci = SecTarjetaPci.makeSecTarjetaPci(channel);
 	
 	//Abarca cualquier div de loading

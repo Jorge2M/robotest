@@ -1,6 +1,6 @@
 package com.mng.robotest.test.data;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 
 public class Descuento {
 	

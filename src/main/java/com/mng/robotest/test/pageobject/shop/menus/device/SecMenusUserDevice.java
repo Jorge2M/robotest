@@ -5,8 +5,8 @@ import org.openqa.selenium.By;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
+import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabecera;
+import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 public class SecMenusUserDevice extends PageBase {

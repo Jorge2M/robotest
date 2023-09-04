@@ -8,7 +8,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.NoSuchElementException;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
@@ -21,7 +21,7 @@ import com.mng.robotest.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
 
-import static com.mng.robotest.domains.ficha.pageobjects.SecProductDescrOld.TypePanel.*;
+import static com.mng.robotest.domains.ficha.pageobjects.SecProductDescrDevice.TypePanel.*;
 
 public class Fic002 extends TestBase {
 
@@ -91,7 +91,7 @@ public class Fic002 extends TestBase {
 		if (app==AppEcom.outlet && channel!=Channel.mobile) {
 			pageFichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}
-		pageFichaSteps.getSecProductDescOldSteps().validateAreInStateInitial(app);
+		pageFichaSteps.getSecProductDescDeviceSteps().validateAreInStateInitial(app);
 		PageFicha pageFicha = PageFicha.of(channel);
 		if (((PageFichaDevice)pageFicha).getNumImgsCarruselIzq() > 2) {
 			pageFichaSteps.selectImgCarruselIzqFichaOld(2);
@@ -105,17 +105,17 @@ public class Fic002 extends TestBase {
 		}
 		if (DESCRIPTION.getListApps().contains(app) &&
 			!channel.isDevice()) {
-			pageFichaSteps.getSecProductDescOldSteps().selectPanel(DESCRIPTION);
+			pageFichaSteps.getSecProductDescDeviceSteps().selectPanel(DESCRIPTION);
 		}
 		if (COMPOSITION.getListApps().contains(app)) {
-			pageFichaSteps.getSecProductDescOldSteps().selectPanel(COMPOSITION);
+			pageFichaSteps.getSecProductDescDeviceSteps().selectPanel(COMPOSITION);
 		}
 		if (RETURNS.getListApps().contains(app)) {
-			pageFichaSteps.getSecProductDescOldSteps().selectPanel(RETURNS);
+			pageFichaSteps.getSecProductDescDeviceSteps().selectPanel(RETURNS);
 		}
 		if (SHIPMENT.getListApps().contains(app) &&
 			!channel.isDevice()) {
-			pageFichaSteps.getSecProductDescOldSteps().selectPanel(SHIPMENT);  
+			pageFichaSteps.getSecProductDescDeviceSteps().selectPanel(SHIPMENT);  
 		}
 	}
 	

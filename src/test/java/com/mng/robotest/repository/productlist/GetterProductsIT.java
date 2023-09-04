@@ -10,7 +10,7 @@ import java.util.Optional;
 
 import org.junit.Test;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.repository.productlist.GetterProducts.Builder;
 import com.mng.robotest.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog;

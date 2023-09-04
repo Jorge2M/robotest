@@ -5,8 +5,8 @@ import java.util.Arrays;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.test.pageobject.shop.filtros.FiltroMobil;
-import com.mng.robotest.test.pageobject.shop.filtros.SecMultiFiltrosDevice;
+import com.mng.robotest.domains.galeria.pageobjects.FiltroMobil;
+import com.mng.robotest.domains.galeria.pageobjects.SecMultiFiltrosDevice;
 
 public class MenuActionsDevice extends PageBase implements MenuActions {
 

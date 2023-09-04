@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.service.testab.TestABGoogleExp;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.github.jorge2m.testmaker.conf.Channel;
 
 public enum TestABGoogleExpImpl implements TestABGoogleExp {

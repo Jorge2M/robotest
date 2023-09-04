@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.favoritos.tests;
 
-import com.mng.robotest.conftestmaker.AppEcom;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
@@ -15,6 +14,9 @@ import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 
 import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
+
+import com.mng.robotest.conf.AppEcom;
+
 import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
 
 public class Fav002 extends TestBase {

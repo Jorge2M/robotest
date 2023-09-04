@@ -2,7 +2,7 @@ package com.mng.robotest.domains.compra.beans;
 
 import java.io.Serializable;
 
-import com.mng.robotest.test.suites.PagosPaisesSuite.VersionPagosSuite;
+import com.mng.robotest.conf.suites.PagosPaisesSuite.VersionPagosSuite;
 
 public class ConfigCheckout implements Cloneable, Serializable {
 	

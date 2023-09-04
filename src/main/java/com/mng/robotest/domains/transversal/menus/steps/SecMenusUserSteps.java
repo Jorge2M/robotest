@@ -9,7 +9,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.login.pageobjects.PageLogin;
@@ -18,11 +18,11 @@ import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.domains.registro.steps.PageRegistroIniStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
+import com.mng.robotest.domains.transversal.modales.pageobject.ModalCambioPaisSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
-import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
 import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.*;
 import static com.github.jorge2m.testmaker.conf.State.*;

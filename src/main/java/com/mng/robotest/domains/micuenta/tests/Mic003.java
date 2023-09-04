@@ -6,9 +6,9 @@ import com.mng.robotest.domains.micuenta.steps.PageMisDatosSteps;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
+import com.mng.robotest.domains.transversal.cabecera.steps.SecCabeceraSteps;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.data.DataMango;
-import com.mng.robotest.test.steps.shop.SecCabeceraSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 

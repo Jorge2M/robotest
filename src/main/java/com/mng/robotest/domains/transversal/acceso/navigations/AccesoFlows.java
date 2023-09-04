@@ -5,12 +5,19 @@ import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.
 import static com.mng.robotest.test.pageobject.shop.menus.MenuUserItem.UserMenu.INICIAR_SESION;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.test.beans.AccesoVOTF;
 import com.mng.robotest.test.beans.IdiomaPais;
+import com.mng.robotest.domains.transversal.acceso.pageobjects.PageAlertaVOTF;
+import com.mng.robotest.domains.transversal.acceso.pageobjects.PageLoginVOTF;
+import com.mng.robotest.domains.transversal.acceso.pageobjects.PageSelectIdiomaVOTF;
+import com.mng.robotest.domains.transversal.acceso.pageobjects.PageSelectLineaVOTF;
+import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabecera;
+import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
+import com.mng.robotest.domains.transversal.home.pageobjects.PageLanding;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PageJCAS;
@@ -18,17 +25,10 @@ import com.mng.robotest.domains.transversal.prehome.pageobjects.PagePrehome;
 import com.mng.robotest.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
-import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.modales.ModalActPoliticaPrivacidad;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterLogin;
-import com.mng.robotest.test.pageobject.votf.PageAlertaVOTF;
-import com.mng.robotest.test.pageobject.votf.PageLoginVOTF;
-import com.mng.robotest.test.pageobject.votf.PageSelectIdiomaVOTF;
-import com.mng.robotest.test.pageobject.votf.PageSelectLineaVOTF;
 
 public class AccesoFlows extends StepBase {
 
@@ -65,7 +65,12 @@ public class AccesoFlows extends StepBase {
 	public void login(String user, String password) {
 		clickIniciarSesionAndWait();
 		var pageLogin = new PageLogin();
-		pageLogin.isPage(5);
+		if (isPRO()) {
+			pageLogin.isPage(5);
+		} else {
+			//TODO hay un problema de rendimiento en PRE desde la release 65 (agosto-2023)
+			pageLogin.isPage(10);
+		}
 		pageLogin.inputUserPassword(user, password);
 		pageLogin.clickButtonEntrar();
 		new ModalCambioPais().closeModalIfVisible();

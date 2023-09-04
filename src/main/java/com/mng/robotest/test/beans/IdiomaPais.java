@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import javax.xml.bind.annotation.*;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.test.data.CodIdioma;
 
 public class IdiomaPais implements Serializable {

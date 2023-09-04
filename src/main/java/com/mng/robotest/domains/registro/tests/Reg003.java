@@ -3,6 +3,7 @@ package com.mng.robotest.domains.registro.tests;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mng.robotest.conf.suites.RegistrosSuite.VersionRegistroSuite;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.domains.micuenta.steps.PageMiCuentaSteps;
@@ -16,13 +17,12 @@ import com.mng.robotest.domains.registro.steps.PageRegistroNinosStepsOutlet;
 import com.mng.robotest.domains.registro.steps.PageRegistroSegundaStepsOutlet;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.domains.transversal.cabecera.steps.SecCabeceraSteps;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.domains.transversal.modales.pageobject.ModalSuscripcionSteps;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.data.Constantes.ThreeState;
-import com.mng.robotest.test.steps.shop.SecCabeceraSteps;
-import com.mng.robotest.test.steps.shop.modales.ModalSuscripcionSteps;
-import com.mng.robotest.test.suites.RegistrosSuite.VersionRegistroSuite;
 
 public class Reg003 extends TestBase {
 

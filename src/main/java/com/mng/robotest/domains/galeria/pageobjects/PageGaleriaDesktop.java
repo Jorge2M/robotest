@@ -11,13 +11,12 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabecera;
+import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.data.Constantes;
 import com.mng.robotest.test.data.Talla;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabecera;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
-import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;

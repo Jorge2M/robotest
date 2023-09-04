@@ -14,23 +14,23 @@ import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
+import com.mng.robotest.domains.galeria.pageobjects.FilterCollection;
+import com.mng.robotest.domains.galeria.pageobjects.FilterOrdenacion;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
+import com.mng.robotest.domains.galeria.pageobjects.SecFiltros;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.ControlTemporada;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.NumColumnas;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticle;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeSlider;
 import com.mng.robotest.domains.galeria.pageobjects.SecBannerHeadGallery.TypeLinkInfo;
-import com.mng.robotest.test.pageobject.shop.filtros.FilterCollection;
-import com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion;
-import com.mng.robotest.test.pageobject.shop.filtros.SecFiltros;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusFiltroCollection;
 import com.mng.robotest.test.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.test.pageobject.utils.DataFichaArt;
@@ -40,7 +40,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
-import static com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion.*;
+import static com.mng.robotest.domains.galeria.pageobjects.FilterOrdenacion.*;
 
 public class PageGaleriaSteps extends StepBase {
 

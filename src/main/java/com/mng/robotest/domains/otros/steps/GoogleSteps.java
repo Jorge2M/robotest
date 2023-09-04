@@ -6,8 +6,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.otros.pageobjects.PageGoogle;
+import com.mng.robotest.domains.transversal.home.pageobjects.PageLanding;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PagePrehome;
-import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 

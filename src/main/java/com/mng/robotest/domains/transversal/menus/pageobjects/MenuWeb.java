@@ -2,7 +2,7 @@ package com.mng.robotest.domains.transversal.menus.pageobjects;
 
 import java.util.List;
 
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;

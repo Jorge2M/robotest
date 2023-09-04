@@ -2,10 +2,10 @@ package com.mng.robotest.domains.buscador.tests;
 
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.buscador.steps.SecBuscadorSteps;
+import com.mng.robotest.domains.transversal.home.steps.PageLandingSteps;
 import com.mng.robotest.repository.productlist.GetterProducts;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
-import com.mng.robotest.test.steps.shop.home.PageHomeMarcasSteps;
 
 public class Bus001 extends TestBase {
 		
@@ -13,7 +13,7 @@ public class Bus001 extends TestBase {
 	private final String catProdInexistente;
 	
 	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	private final PageHomeMarcasSteps pageHomeMarcasSteps = new PageHomeMarcasSteps();
+	private final PageLandingSteps pageLandingSteps = new PageLandingSteps();
 	
 	public Bus001(String categoriaProdExistente, String catProdInexistente) {
 		super();
@@ -24,7 +24,7 @@ public class Bus001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access();
-		pageHomeMarcasSteps.validateIsPageWithCorrectLineas();
+		pageLandingSteps.validateIsPageWithCorrectLineas();
 		GarmentCatalog product = getProduct();
 		
 		secBuscadorSteps.searchArticulo(Article.getArticleCandidateForTest(product));

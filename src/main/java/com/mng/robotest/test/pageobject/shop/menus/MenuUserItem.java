@@ -1,16 +1,16 @@
 package com.mng.robotest.test.pageobject.shop.menus;
 
-import static com.mng.robotest.conftestmaker.AppEcom.outlet;
-import static com.mng.robotest.conftestmaker.AppEcom.shop;
-import static com.mng.robotest.conftestmaker.AppEcom.votf;
+import static com.mng.robotest.conf.AppEcom.outlet;
+import static com.mng.robotest.conf.AppEcom.shop;
+import static com.mng.robotest.conf.AppEcom.votf;
 
 import java.util.Arrays;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent.IconoCabecera;
+import com.mng.robotest.conf.AppEcom;
+import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent.IconoCabecera;
 import com.mng.robotest.test.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
 import com.mng.robotest.test.pageobject.shop.menus.device.SecMenusUserDevice.MenuUserDevice;
 

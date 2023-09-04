@@ -7,8 +7,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.domains.galeria.pageobjects.SecFiltrosDesktop;
 import com.mng.robotest.domains.galeria.pageobjects.SecSelectorPreciosDesktop;
-import com.mng.robotest.test.pageobject.shop.filtros.SecFiltrosDesktop;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 

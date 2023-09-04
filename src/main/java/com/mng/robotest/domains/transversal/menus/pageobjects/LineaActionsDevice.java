@@ -5,12 +5,12 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.javascript;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.test.beans.Linea;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
 
 public class LineaActionsDevice extends PageBase implements LineaActions {
 

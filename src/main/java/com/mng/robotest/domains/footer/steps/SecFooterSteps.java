@@ -7,10 +7,10 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.footer.pageobjects.FactoryPageFromFooter;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink;
+import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
+import com.mng.robotest.domains.transversal.modales.pageobject.ModalCambioPaisSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.pageobject.shop.cabecera.SecCabeceraMostFrequent;
-import com.mng.robotest.test.steps.shop.modales.ModalCambioPaisSteps;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 

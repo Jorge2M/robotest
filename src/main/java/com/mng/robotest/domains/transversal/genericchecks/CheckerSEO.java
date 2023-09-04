@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
@@ -16,13 +17,16 @@ import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
-import com.mng.robotest.test.pageobject.shop.AllPages;
-import com.mng.robotest.test.pageobject.shop.landing.PageLanding;
+import com.mng.robotest.domains.transversal.home.pageobjects.PageLanding;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
 
 public class CheckerSEO extends PageBase implements Checker {
 
+	public static final String XPATH_TAG_CANONICAL = "//link[@rel='canonical']";
+	public static final String XPATH_TAG_ROBOTS = "//meta[@name='robots' and @content[contains(.,'noindex')]]";
+	
 	private final State level;
 	
 	public CheckerSEO(State level) {
@@ -91,7 +95,7 @@ public class CheckerSEO extends PageBase implements Checker {
 	
 	private List<String> validaCanonical(WebDriver driver) {
 		List<String> listaErrorsInHtmlFormat = new ArrayList<>();
-		if (!new AllPages().isPresentTagCanonical()) {
+		if (!isPresentTagCanonical()) {
 			//El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
 			PageFicha pageFicha = PageFicha.of(channel);
 			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop);
@@ -113,7 +117,7 @@ public class CheckerSEO extends PageBase implements Checker {
 		List<String> listaErrorsInHtmlFormat = new ArrayList<>();
 		
 		//Buscamos el robots
-		boolean robotNoindex = new AllPages().isPresentTagRobots();
+		boolean robotNoindex = isPresentTagRobots();
 		String operativaRobots = "";
 		String currentURL = driver.getCurrentUrl();
 		
@@ -155,15 +159,34 @@ public class CheckerSEO extends PageBase implements Checker {
 		}
 		
 		//Si existe el tag canonical (apuntando a la propia página) no ha de exitir el tag robot/noindex
-		AllPages allPages = new AllPages();
-		if (allPages.isPresentTagCanonical()) {
-			String urlTagCanonical = allPages.getURLTagCanonical();
+		if (isPresentTagCanonical()) {
+			String urlTagCanonical = getURLTagCanonical();
 			if (robotNoindex && urlTagCanonical.compareTo(driver.getCurrentUrl())!=0) {
 				listaErrorsInHtmlFormat.add("<br><b style=\"color:" + Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Existe el tag robot/noindex junto el canonical apuntando a URL de otra página (" + urlTagCanonical + ")</c>");
 			}
 		}
 		
 		return listaErrorsInHtmlFormat;
+	}
+	
+	private boolean isPresentTagCanonical() {
+		return state(Present, XPATH_TAG_CANONICAL).check();
+	}
+
+	private boolean isPresentTagRobots() {
+		return state(Present, XPATH_TAG_ROBOTS).check();
+	}
+
+	private WebElement getTagCanonincal() {
+		return getElement(XPATH_TAG_CANONICAL);
+	}
+	
+	private String getURLTagCanonical() {
+		String urlTagCanonical = "";
+		if (isPresentTagCanonical()) {
+			urlTagCanonical = getTagCanonincal().getAttribute("href");
+		}
+		return urlTagCanonical;
 	}
 	
 }

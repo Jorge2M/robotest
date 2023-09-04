@@ -2,16 +2,16 @@ package com.mng.robotest.access;
 
 import java.util.Arrays;
 
-import com.mng.robotest.conftestmaker.Suites;
+import com.mng.robotest.conf.Suites;
+import com.mng.robotest.conf.suites.GenericFactorySuite;
+import com.mng.robotest.conf.suites.MenusPaisSuite;
+import com.mng.robotest.conf.suites.PagosPaisesSuite;
+import com.mng.robotest.conf.suites.PaisIdiomaSuite;
+import com.mng.robotest.conf.suites.RegistrosSuite;
+import com.mng.robotest.conf.suites.SmokeMantoSuite;
+import com.mng.robotest.conf.suites.SmokeTestSuite;
+import com.mng.robotest.conf.suites.TextosLegalesSuite;
 import com.mng.robotest.domains.votfconsole.suites.ConsolaVotfSuite;
-import com.mng.robotest.test.suites.GenericFactorySuite;
-import com.mng.robotest.test.suites.MenusPaisSuite;
-import com.mng.robotest.test.suites.PagosPaisesSuite;
-import com.mng.robotest.test.suites.PaisIdiomaSuite;
-import com.mng.robotest.test.suites.RegistrosSuite;
-import com.mng.robotest.test.suites.SmokeMantoSuite;
-import com.mng.robotest.test.suites.SmokeTestSuite;
-import com.mng.robotest.test.suites.TextosLegalesSuite;
 import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
 import com.github.jorge2m.testmaker.domain.SuiteMaker;
 //import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;

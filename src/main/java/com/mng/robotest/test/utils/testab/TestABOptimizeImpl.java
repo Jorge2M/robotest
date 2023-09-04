@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.service.testab.TestABOptimize;
-import com.mng.robotest.conftestmaker.AppEcom;
+import com.mng.robotest.conf.AppEcom;
 import com.github.jorge2m.testmaker.conf.Channel;
 
-import static com.mng.robotest.conftestmaker.AppEcom.*;
 import static com.github.jorge2m.testmaker.conf.Channel.*;
+import static com.mng.robotest.conf.AppEcom.*;
 
 public enum TestABOptimizeImpl implements TestABOptimize {
 

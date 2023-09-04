@@ -3,8 +3,8 @@ package com.mng.robotest.access;
 import com.github.jorge2m.testmaker.boundary.access.CmdLineMaker;
 import com.github.jorge2m.testmaker.domain.CreatorSuiteRun;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.conftestmaker.AppEcom;
-import com.mng.robotest.conftestmaker.Suites;
+import com.mng.robotest.conf.AppEcom;
+import com.mng.robotest.conf.Suites;
 
 public class CmdRunTests {  
 	

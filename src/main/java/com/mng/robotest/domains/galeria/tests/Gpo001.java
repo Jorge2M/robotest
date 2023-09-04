@@ -11,7 +11,7 @@ import com.mng.robotest.domains.transversal.menus.beans.FactoryMenus;
 import com.mng.robotest.test.data.Color;
 
 import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
-import static com.mng.robotest.test.pageobject.shop.filtros.FilterOrdenacion.*;
+import static com.mng.robotest.domains.galeria.pageobjects.FilterOrdenacion.*;
 import static com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.NumColumnas.*;
 
 public class Gpo001 extends TestBase {

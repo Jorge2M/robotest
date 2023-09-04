@@ -3,9 +3,9 @@ package com.mng.robotest.test.appshop.paisidioma;
 import org.testng.annotations.*;
 
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.mng.robotest.conf.suites.FlagsNaviationLineas;
+import com.mng.robotest.conf.suites.PaisIdiomaSuite.VersionPaisSuite;
 import com.mng.robotest.test.beans.*;
-import com.mng.robotest.test.suites.FlagsNaviationLineas;
-import com.mng.robotest.test.suites.PaisIdiomaSuite.VersionPaisSuite;
 
 import static com.mng.robotest.test.data.PaisShop.*;
 
