@@ -7,20 +7,22 @@ import java.util.Optional;
 
 import org.junit.Test;
 
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.cookiescheck.entities.Cookie;
-import com.mng.robotest.domains.cookiescheck.services.onetrust.CookiesFinderOneTrust;
+import com.mng.robotest.domains.cookiescheck.services.mangoauditor.CookiesFinderMangoAuditor;
 
 public class CookiesFinderIT {
 
 	@Test
 	public void testGetCookies() throws Exception {
-		CookiesFinderOneTrust cookieFinder = new CookiesFinderOneTrust();
+		CookiesFinderMangoAuditor cookieFinder = new CookiesFinderMangoAuditor(
+				"https://shop.mango.com", AppEcom.shop);
 		Optional<List<Cookie>> cookies = cookieFinder.getAllowedCookies();
 		
 		assertTrue(cookies.isPresent() && cookies.get().size()>0);
-		assertTrue(!cookieFinder.isNeededRefreshDataCookies(5));
+		assertTrue(!CookiesFinderMangoAuditor.isNeededRefreshDataCookies(5));
 		Thread.sleep(1001);
-		assertTrue(cookieFinder.isNeededRefreshDataCookies(1));
+		assertTrue(CookiesFinderMangoAuditor.isNeededRefreshDataCookies(1));
 	}
 
 }
