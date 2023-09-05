@@ -29,7 +29,6 @@ import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.modales.ModalActPoliticaPrivacidad;
 import com.mng.robotest.test.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterLogin;
-import com.mng.robotest.test.utils.UtilsTest;
 
 public class AccesoFlows extends StepBase {
 
@@ -66,12 +65,7 @@ public class AccesoFlows extends StepBase {
 	public void login(String user, String password) {
 		clickIniciarSesionAndWait();
 		var pageLogin = new PageLogin();
-		if (isPRO() && !UtilsTest.todayBeforeDate("2023-09-15")) {
-			pageLogin.isPage(5);
-		} else {
-			//TODO hay un problema de rendimiento en PRE desde la release 65 (agosto-2023)
-			pageLogin.isPage(10);
-		}
+		pageLogin.isPage(5);
 		pageLogin.inputUserPassword(user, password);
 		pageLogin.clickButtonEntrar();
 		new ModalCambioPais().closeModalIfVisible();
