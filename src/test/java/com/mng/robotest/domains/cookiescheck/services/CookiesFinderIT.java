@@ -20,9 +20,9 @@ public class CookiesFinderIT {
 		Optional<List<Cookie>> cookies = cookieFinder.getAllowedCookies();
 		
 		assertTrue(cookies.isPresent() && cookies.get().size()>0);
-		assertTrue(!CookiesFinderMangoAuditor.isNeededRefreshDataCookies(5));
+		assertTrue(!CookiesFinder.isNeededRefreshDataCookies(5));
 		Thread.sleep(1001);
-		assertTrue(CookiesFinderMangoAuditor.isNeededRefreshDataCookies(1));
+		assertTrue(CookiesFinder.isNeededRefreshDataCookies(1));
 	}
 
 }
