@@ -25,6 +25,7 @@ public class SectionCookies extends PageBase {
 	}
 	
 	public void setCookies() {
+		state(Present, XPATH_SET_COOKIES_BUTTON).wait(1).check();
 		click(XPATH_SET_COOKIES_BUTTON).exec();
 	}
 }
