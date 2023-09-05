@@ -45,7 +45,8 @@ public class SectionCookiesSteps extends StepBase {
 	
 	@Step (
 		description="Seleccionamos el botón \"Configurar cookies\" de la sección inferior de configuración de cookies",
-		expected="Aparece el modal para la configuración de las cookies")
+		expected="Aparece el modal para la configuración de las cookies",
+		saveHtmlPage=SaveWhen.IfProblem)
 	public ModalSetCookiesSteps setCookies() {
 		sectionCookies.setCookies();
 		modalSetCookiesSteps.isVisible(2);

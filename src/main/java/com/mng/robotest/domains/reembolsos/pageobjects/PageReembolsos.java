@@ -11,12 +11,12 @@ public class PageReembolsos extends PageBase {
 	
 	public enum TypeReembolso {TRANSFERENCIA, STORE_CREDIT}
 
-	private static final String XPATH_REFUNDS_PANEL = "//div[@id[contains(.,'refunds-panel')]]";
-	private static final String XPATH_INPUT_BANCO = "//input[@id[contains(.,'bankName')] and @type='text']";
+	private static final String XPATH_REFUNDS_PANEL = "//html[@class[contains(.,'refunds')]]";//
+	private static final String XPATH_INPUT_BANCO = "//*[@data-testid='myRefunds.bankDetails.form.banco']";//
 	private static final String XPATH_TEXT_BANCO_AFTER_SAVE = "//div[@id='btBankDetails']//strong[1]";
-	private static final String XPATH_INPUT_TITULAR = "//input[@id[contains(.,'accountHolder')] and @type='text']";
+	private static final String XPATH_INPUT_TITULAR = "//*[@data-testid='myRefunds.bankDetails.form.titular']"; //
 	private static final String XPATH_TITULAR_AFTER_SAVE = "//div[@id='btBankDetails']//strong[2]";
-	private static final String XPATH_INPUT_IBAN = "//input[@id[contains(.,'completeAccount')] and @type='text']";
+	private static final String XPATH_INPUT_IBAN = "//*[@data-testid='myRefunds.bankDetails.form.cuentaCompleta']"; //
 	private static final String XPATH_INPUT_PASSPORT = "//input[@id[contains(.,'passport')] and @type='text']";
 	private static final String XPATH_BIRTHDAY_DAY_BLOCK = "//div[@class='birthdayDay']";
 	private static final String XPATH_SELECT_DAY_BIRTH = "//select[@id[contains(.,'dateOfBirth-day')]]";

@@ -12,7 +12,7 @@ public class PageReembolsosSteps extends StepBase {
 	private final PageReembolsos pageReembolsos = new PageReembolsos();
 	
 	@Validation
-	public ChecksTM validateIsPage () {
+	public ChecksTM checkIsPage () {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de Reembolsos",

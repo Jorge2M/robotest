@@ -141,6 +141,6 @@ public class PageMiCuentaSteps extends StepBase {
 		expected = "Aparece la página de \"Reembolsos\"")
 	private void clickLinkReembolsos() {
 		pageMiCuenta.click(REEMBOLSOS);
-		new PageReembolsosSteps().validateIsPage();
+		new PageReembolsosSteps().checkIsPage();
 	}
 }
