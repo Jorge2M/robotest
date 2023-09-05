@@ -5,7 +5,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalChatBot extends PageBase {
 
-	private static final String XPATH_ICON = "//div[@id='iris-button']";
+	private static final String XPATH_ICON = "//*[@data-testid='chatbot.button.open']";
 	private static final String XPATH_WEBCHAT = "//div[@id='snack-bubble']";
 	
 	private String getXPathOption(String text) {
