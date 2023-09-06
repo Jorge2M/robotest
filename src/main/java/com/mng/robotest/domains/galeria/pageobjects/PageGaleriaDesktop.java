@@ -11,7 +11,6 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.data.Constantes;
@@ -22,8 +21,7 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
-public class PageGaleriaDesktop extends PageGaleria {
+public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	private final SecColoresArticuloDesktop secColores = new SecColoresArticuloDesktop();
 	private final SecSubmenusGallery secSubmenusGallery = new SecSubmenusGallery();
@@ -67,7 +65,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	
 	private String getXPathDataArticuloOfType(TypeArticle typeArticle) {
 		String xpathPrecio = secPrecios.getXPathPrecioArticulo(typeArticle);
-		return (xpathArticuloBase + xpathPrecio + XPATH_ANCESTOR_ARTICLE);
+		return (getXPathArticulo() + xpathPrecio + XPATH_ANCESTOR_ARTICLE);
 	}
 	
 	private String getXPathArticuloConColores() {
@@ -120,7 +118,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	public enum ControlTemporada {ARTICLES_FROM, ARTICLES_FROM_OTHER}
 	
 	String getXPathArticuloTemporadasX(ControlTemporada controlTemp, List<Integer> listTemporadas) {
-		String xpathResult = xpathArticuloBase + "/self::*[@id and ";
+		String xpathResult = getXPathArticulo() + "/self::*[@id and ";
 		for (int i=0; i<listTemporadas.size(); i++) {
 			int temporada = listTemporadas.get(i);
 			if (controlTemp == ControlTemporada.ARTICLES_FROM) {
@@ -141,7 +139,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	String getXPathArticulo(TypeArticleDesktop sizeArticle) {
-		return (xpathArticuloBase + sizeArticle.getXPathRelativeArticle());
+		return (getXPathArticulo() + sizeArticle.getXPathRelativeArticle());
 	}
 
 	private static final String INI_XPATH_PAGINA_GALERIA = "//*[@id='page";
@@ -236,7 +234,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	public String getXPathNombreArticuloWithString(String string) {
-		return (xpathArticuloBase + "//*[(" + classProductName + "]) and text()[contains(.,'" + string + "')]]");
+		return (getXPathArticulo() + "//*[(" + classProductName + "]) and text()[contains(.,'" + string + "')]]");
 	}
 	
 	public String getXPathLinkNumColumnas(NumColumnas numColumnas) {
@@ -262,13 +260,6 @@ public class PageGaleriaDesktop extends PageGaleria {
 		return getElements(xpathHearthIcon).size();
 	}
 
-	@Override
-	public boolean eachArticlesHasOneFavoriteIcon() {  
-		int numArticles = getNumArticulos(); 
-		int numIcons = getNumFavoritoIcons();
-		return (numArticles == numIcons);
-	}
- 
 	public boolean isArticuloWithStringInName(String string) {
 		String xpathArtWithString = getXPathNombreArticuloWithString(string);
 		return state(Present, xpathArtWithString).check();
@@ -532,7 +523,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	public boolean isVisibleAnyArticle() {
-		return (state(Visible, xpathArticuloBase).check());
+		return (state(Visible, getXPathArticulo()).check());
 	}
 
 	public void clickArticulo(int numArticulo) {
@@ -580,7 +571,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	public String getNombreArticulo(int numArticulo) {
-		return getElement("(" + xpathArticuloBase + ")[" + numArticulo + "]//span[" + classProductName + "]").getText().trim();
+		return getElement("(" + getXPathArticulo() + ")[" + numArticulo + "]//span[" + classProductName + "]").getText().trim();
 	}
 
 	/**
@@ -593,7 +584,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	 */
 	public List<String> getArticlesNoValid(List<String> articleNames) {
 		//Obtenemos el xpath de los artículos eliminando el último carácter (]) pues hemos de insertar condiciones en el XPATH
-		String xpathLitArticulos = xpathArticuloBase + "//*[" + classProductName + "]";
+		String xpathLitArticulos = getXPathArticulo() + "//*[" + classProductName + "]";
 		xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
 		for (String article : articleNames) {
 			xpathLitArticulos +=  
@@ -612,7 +603,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 					List<WebElement> listTextosArticulosNoValidos = getElements(xpathLitArticulos);
 					for (WebElement textoArticuloNoValido : listTextosArticulosNoValidos) {
 						String nombre = textoArticuloNoValido.getText();
-						String xpathArtWithoutDoubleSlash = this.xpathArticuloBase.substring(2);
+						String xpathArtWithoutDoubleSlash = getXPathArticulo().substring(2);
 						//String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::*[@class[contains(.,'product-list-item')]]")).getAttribute("id");
 						String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::" + xpathArtWithoutDoubleSlash)).getAttribute("id");
 						listTxtArtNoValidos.add(nombre + " (" + referencia + ")");
@@ -631,7 +622,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	//Equivalent to Mobil
 	@Override
 	public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
-		var artWElem = getElements(xpathArticuloBase).get(numArticulo-1);
+		var artWElem = getElements(getXPathArticulo()).get(numArticulo-1);
 		moveToElement(artWElem);
 		var articulo = new ArticuloScreen();
 		articulo.setReferencia(getRefArticulo(artWElem));
@@ -647,7 +638,7 @@ public class PageGaleriaDesktop extends PageGaleria {
 	//Equivalent to Mobil
 	@Override
 	public String getCodColorArticulo(int numArticulo) throws Exception {
-		String xpathArticulo = "(" + xpathArticuloBase + ")[" + numArticulo + "]";
+		String xpathArticulo = "(" + getXPathArticulo() + ")[" + numArticulo + "]";
 		String image = getImagenArticulo(getElement(xpathArticulo));
 		return (UtilsPageGaleria.getCodColorFromSrcImg(image));
 	}
@@ -688,8 +679,8 @@ public class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) {
-		SecCabecera secCabecera = new SecCabeceraMostFrequent();
-		SecFiltrosDesktop secFiltros = SecFiltrosDesktop.getInstance(channel);
+		var secCabecera = new SecCabeceraMostFrequent();
+		var secFiltros = new SecFiltrosDesktop();
 		secCabecera.bring(BringTo.BACKGROUND);
 		secFiltros.bring(BringTo.BACKGROUND);
 		hearthIcon.click();

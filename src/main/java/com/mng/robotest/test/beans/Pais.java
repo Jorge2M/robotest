@@ -52,6 +52,7 @@ public class Pais implements Serializable {
 	List<Pago> listPagos = new LinkedList<>();
 	
 	String multidireccion;
+	String galeriakondo;
 	String emailuser;
 	String passuser;
 	String mobiluser;
@@ -280,6 +281,20 @@ public class Pais implements Serializable {
 	@XmlElement
 	public void setMultidireccion(String multidireccion) {
 		this.multidireccion = multidireccion;
+	}
+	
+	public String getGaleriakondo() {
+		return this.galeriakondo;
+	}
+
+	@XmlElement
+	public void setGaleriakondo(String galeriakondo) {
+		this.galeriakondo = galeriakondo;
+	}	
+	
+	public boolean isGaleriaKondo() {
+		return (getGaleriakondo()!=null && 
+				"S".compareTo(getGaleriakondo())==0);
 	}
 	
 	public String getEmailuser() {

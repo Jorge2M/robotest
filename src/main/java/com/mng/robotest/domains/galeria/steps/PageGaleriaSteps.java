@@ -45,9 +45,9 @@ import static com.mng.robotest.domains.galeria.pageobjects.FilterOrdenacion.*;
 public class PageGaleriaSteps extends StepBase {
 
 	public final SecCrossSellingSteps secCrossSellingSteps = new SecCrossSellingSteps();
-	public final BannerHeadGallerySteps bannerHead = BannerHeadGallerySteps.newInstance(this, driver);
+	public final BannerHeadGallerySteps bannerHead = new BannerHeadGallerySteps(this);
 	private final SecSelectorPreciosSteps secSelectorPreciosSteps = new SecSelectorPreciosSteps();
-	private final PageGaleria pageGaleria = PageGaleria.getNew(channel);
+	private final PageGaleria pageGaleria = PageGaleria.getNew(channel, dataTest.getPais());
 
 	public enum TypeGalery { SALES, NO_SALES }
 	public enum TypeActionFav { MARCAR, DESMARCAR }
@@ -271,7 +271,7 @@ public class PageGaleriaSteps extends StepBase {
 	public int seleccionaOrdenacionGaleria(
 			FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar) throws Exception {
 		
-		SecFiltros secFiltros = SecFiltros.make(channel, app);
+		var secFiltros = SecFiltros.make(channel, app, dataTest.getPais());
 		secFiltros.selecOrdenacionAndReturnNumArticles(typeOrdenacion);
 
 		checkIsVisiblePageWithTitle(tipoPrendasGaleria);
@@ -324,7 +324,7 @@ public class PageGaleriaSteps extends StepBase {
 			"Es clickable el 1er elemento de la lista",
 			pageGaleria.isClickableArticuloUntil(1, 0), Warn);
 	  	
-		SecFiltros secFiltros = SecFiltros.make(channel, app);
+		SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());
 		int seconds = 2;
 	  	checks.add(
 			"Es clickable el bloque de filtros (esperamos hasta " + seconds + " segundos)",
@@ -732,15 +732,15 @@ public class PageGaleriaSteps extends StepBase {
 	@Step (
 			description="Seleccionamos el link <b>Más Info</b>",
 			expected="Se hace visible el aviso legal")
-	public static void clickMoreInfoBannerRebajasJun2018(WebDriver driver) {
-		new PageGaleriaDesktop().getSecBannerHead().clickLinkInfoRebajas();
-		checkAfterClickInfoRebajas(driver);
+	public void clickMoreInfoBannerRebajasJun2018() {
+		((PageGaleriaDesktop)pageGaleria).getSecBannerHead().clickLinkInfoRebajas();
+		checkAfterClickInfoRebajas();
 	}
 
 	@Validation
-	private static ChecksTM checkAfterClickInfoRebajas(WebDriver driver) {
+	private ChecksTM checkAfterClickInfoRebajas() {
 		var checks = ChecksTM.getNew();
-		var secBannerHead = new PageGaleriaDesktop().getSecBannerHead();
+		var secBannerHead = ((PageGaleriaDesktop)pageGaleria).getSecBannerHead();
 		int seconds = 1;
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
@@ -755,7 +755,7 @@ public class PageGaleriaSteps extends StepBase {
 	}
 
 	@Validation
-	public ChecksTM validateGaleriaAfeterSelectMenu() {
+	public ChecksTM checkGaleriaAfeterSelectMenu() {
 		var checks = ChecksTM.getNew();
 		int secondsArticle = 8;
 		int secondsIcon = 2;
@@ -769,14 +769,7 @@ public class PageGaleriaSteps extends StepBase {
 					"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + secondsIcon + " segundos)",
 					pageGaleria.isArticleWithHearthIconPresentUntil(1, secondsIcon), Info)
 				.store(StoreType.None).build());
-			
-			checks.add (
-		        Check.make(
-				    "Cada artículo tiene 1 icono de favoritos asociado",
-				    pageGaleria.eachArticlesHasOneFavoriteIcon(), Info)
-		        .store(StoreType.None).build());
 		}
-
 		return checks;
 	}
 

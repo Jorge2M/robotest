@@ -20,6 +20,9 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	private static final String TAG_ID_COLOR = "@TagIdColor";
 	private static final String TAG_FLAG_SELECTED = "@TagFlagSelected";
+	
+	//TODO adaptar React (pendiente petición a Jesús Bermúdez 3-Marzo-2021)
+	private static final String XPATH_ARTICULO = "//li[@data-testid[contains(.,'plp.product')]]";
 
 	private static final String XPATH_IMG_RELATIVE_ARTICLE = 
 		"//img[@src and " + 
@@ -46,6 +49,11 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	private static final String XPATH_COLORES_ARTICULO = "//div[@class[contains(.,'product-colors')]]";
 	private static final String XPATH_COLORES_ARTICULO_OUTLET_TABLET = "//div[@class[contains(.,'product-list-colors')]]";
+	
+	@Override
+	protected String getXPathArticulo() {
+		return XPATH_ARTICULO;
+	}
 	
 	String getXPathColoresArticle() {
 		if (channel==Channel.tablet && app==AppEcom.outlet) {
@@ -108,7 +116,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	String getXPathButtonAnyadirArticle(int posArticulo) {
-		String xpathArticulo = "(" + xpathArticuloBase + ")[" + posArticulo + "]";
+		String xpathArticulo = "(" + getXPathArticulo() + ")[" + posArticulo + "]";
 		return (xpathArticulo + XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE);
 	}
 	
@@ -118,7 +126,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	String getXPathArticleCapaTallasOld(int posArticulo) {
-		String xpathArticulo = "(" + xpathArticuloBase + ")[" + posArticulo + "]";
+		String xpathArticulo = "(" + getXPathArticulo() + ")[" + posArticulo + "]";
 		return (xpathArticulo + XPATH_CAPA_TALLAS_RELATIVE_ARTICLE_OLD);
 	}
 	String getXPathArticleCapaTallasNew() {
@@ -162,20 +170,13 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 		
 	@Override
-	public boolean eachArticlesHasOneFavoriteIcon() {  
-		int numArticles = getNumArticulos(); 
-		int numIcons = getNumFavoritoIcons();
-		return (numArticles == numIcons);
-	}
-	
-	@Override
 	public int getLayoutNumColumnas() {
 		return 1;
 	}		 
 	
 	@Override
 	public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
-		WebElement artWElem = getElements(xpathArticuloBase).get(numArticulo-1);
+		var artWElem = getElements(getXPathArticulo()).get(numArticulo-1);
 		var articulo = new ArticuloScreen();
 		articulo.setReferencia(getRefArticulo(artWElem));
 		articulo.setNombre(getNombreArticulo(artWElem));
@@ -209,7 +210,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public String getCodColorArticulo(int numArticulo) throws Exception {
-		String xpathArticulo = xpathArticuloBase + "//self::*[@data-testid[contains(.,'product-" + (numArticulo-1) + "')]]";
+		String xpathArticulo = getXPathArticulo() + "//self::*[@data-testid[contains(.,'product-" + (numArticulo-1) + "')]]";
 		moveToElement(By.xpath(xpathArticulo));
 		String image = getImagenArticulo(getElement(xpathArticulo));
 		return UtilsPageGaleria.getCodColorFromSrcImg(image);
@@ -355,7 +356,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	private String getXPathArticuloFromPagina(int pagina) {
 		String xpathPagina = getXPathPagina(pagina);
-		return  (xpathPagina + xpathArticuloBase);
+		return  (xpathPagina + getXPathArticulo());
 	}
 	
 	private void moveToPagina(int numPagina) {

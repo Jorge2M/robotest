@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Color;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -21,8 +22,8 @@ public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 		this.pageGaleria = pageGaleria;
 	}
 	
-	public static SecFiltrosTabletOutlet getInstance() {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.tablet);
+	public static SecFiltrosTabletOutlet getInstance(Pais pais) {
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.tablet, pais);
 		return (new SecFiltrosTabletOutlet(pageGaleria));
 	}
 	

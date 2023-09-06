@@ -15,6 +15,7 @@ public enum Suites implements SuiteTest {
 	ListMiCuenta(10),
 	ModalPortada(10),
 	RegistrosPaises(10),
+	RegistrosNewPaises(10),
 	TextosLegales(8),
 	RebajasPaises(10);
 	

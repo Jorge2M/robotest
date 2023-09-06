@@ -30,7 +30,7 @@ public class Gpo001 extends TestBase {
 	}
 
 	private void changeTwoToFourColumns() {
-		var pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.MENU, channel);
+		var pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.MENU, channel, dataTest.getPais());
 		var listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
 		listArticlesGaleria2Cols = pageGaleriaSteps.selectListadoXColumnasDesktop(CUATRO, listArticlesGaleria2Cols);
 		pageGaleriaSteps.selectListadoXColumnasDesktop(DOS, listArticlesGaleria2Cols);

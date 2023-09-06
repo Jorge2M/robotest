@@ -1,20 +1,13 @@
 package com.mng.robotest.test.pageobject.shop.menus.device;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.galeria.pageobjects.FilterCollection;
 import com.mng.robotest.domains.galeria.pageobjects.SecFiltros;
 import com.mng.robotest.test.pageobject.shop.menus.SecMenusFiltroCollection;
 
-
 public class SecMenusFiltroCollectionMobil extends PageBase implements SecMenusFiltroCollection {
 
-	private final SecFiltros secFiltros;
-	
-	public SecMenusFiltroCollectionMobil(AppEcom app) {
-		this.secFiltros = SecFiltros.make(Channel.mobile, app);
-	}
+	private final SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());
 	
 	@Override
 	public boolean isVisible() {

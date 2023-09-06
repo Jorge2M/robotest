@@ -21,6 +21,7 @@ import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArtic
 import com.mng.robotest.domains.galeria.steps.LocationArticle;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.generic.UtilsMangoTest;
 import com.mng.robotest.test.generic.beans.ArticuloScreen;
 import com.mng.robotest.test.pageobject.utils.DataArticleGalery;
@@ -39,24 +40,23 @@ public abstract class PageGaleria extends PageBase {
 	public static final int MAX_PAGE_TO_SCROLL = 20;
 
 	protected final From from;
-	protected final String xpathArticuloBase;
 	protected final SecPreciosArticulo secPrecios = new SecPreciosArticulo();
 	protected final SecTallasArticulo secTallas;
 
 	protected PageGaleria() {
 		super();
 		this.from = From.MENU;
-		this.xpathArticuloBase = getXPathArticulo();
-		this.secTallas = new SecTallasArticulo(xpathArticuloBase);
+		this.secTallas = new SecTallasArticulo(getXPathArticulo());
 	}
 
 	protected PageGaleria(From from) {
 		this.from = from;
-		this.xpathArticuloBase = getXPathArticulo();
-		this.secTallas = new SecTallasArticulo(xpathArticuloBase);
+		this.secTallas = new SecTallasArticulo(getXPathArticulo());
 	}
 
-	public abstract String getXPathLinkRelativeToArticle();
+	protected abstract String getXPathArticulo(); 
+	protected abstract String getXPathLinkRelativeToArticle();
+	
 	public abstract int getLayoutNumColumnas();
 	public abstract WebElement getArticuloConVariedadColoresAndHover(int numArticulo);
 	public abstract WebElement getImagenElementArticulo(WebElement articulo);
@@ -68,7 +68,6 @@ public abstract class PageGaleria extends PageBase {
 	public abstract String getCodColorArticulo(int numArticulo) throws Exception;
 	public abstract String getNameColorFromCodigo(String codigoColor);
 	public abstract int getNumFavoritoIcons();
-	public abstract boolean eachArticlesHasOneFavoriteIcon();
 	public abstract List<ArticuloScreen> clickArticleHearthIcons(List<Integer> posIconsToClick) throws Exception;
 	public abstract boolean isArticleWithHearthIconPresentUntil(int posArticle, int seconds);
 	public abstract void clickHearhIcon(int posArticle) throws Exception;
@@ -112,13 +111,16 @@ public abstract class PageGaleria extends PageBase {
 	protected static final String XPATH_LINK_RELATIVE_TO_ARTICLE = ".//a[@class='product-link']";
 	protected static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE = "//*[@data-testid='button-icon']";
 
-	public static PageGaleria getNew(Channel channel) {
-		return getNew(From.MENU, channel);
+	public static PageGaleria getNew(Channel channel, Pais pais) {
+		return getNew(From.MENU, channel, pais);
 	}
-	public static PageGaleria getNew(From from, Channel channel) {
+	public static PageGaleria getNew(From from, Channel channel, Pais pais) {
 		switch (channel) {
 			case desktop:
-				return new PageGaleriaDesktop(from);
+				if (pais.isGaleriaKondo()) {
+					return new PageGaleriaDesktopKondo(from);
+				}
+				return new PageGaleriaDesktopNormal(from);
 			case mobile, tablet:
 			default:
 				return new PageGaleriaDevice(from);
@@ -137,41 +139,22 @@ public abstract class PageGaleria extends PageBase {
 		return secPrecios;
 	}
 
-	static final String XPATH_ARTICULO_DESKTOP = "//li[@id[contains(.,'product-key-id')]]";
-
-	//TODO adaptar React (pendiente petición a Jesús Bermúdez 3-Marzo-2021)
-	private static final String XPATH_ARTICULO_DEVICE = "//li[@data-testid[contains(.,'plp.product')]]";
-	private static final String XPATH_ARTICULO_TABLET_OUTLET = XPATH_ARTICULO_DESKTOP;
-	private String getXPathArticulo() {
-		if (channel==Channel.desktop) {
-			return XPATH_ARTICULO_DESKTOP;
-		}
-		else {
-			if (channel==Channel.tablet &&
-				(app==AppEcom.outlet || from==From.BUSCADOR)) {
-				return XPATH_ARTICULO_TABLET_OUTLET;
-			}
-			return XPATH_ARTICULO_DEVICE;
-		}
-	}
-	
 	private String getXPathArticulo(int numArticulo) {
-		return "(" + xpathArticuloBase + ")[" + numArticulo + "]";
+		return "(" + getXPathArticulo() + ")[" + numArticulo + "]";
 	}	
 
 	String getXPathArticleHearthIcon(int posArticulo) {
-		String xpathArticulo = "(" + xpathArticuloBase + ")[" + posArticulo + "]";
+		String xpathArticulo = "(" + getXPathArticulo() + ")[" + posArticulo + "]";
 		return (xpathArticulo + XPATH_HEARTH_ICON_RELATIVE_ARTICLE);
 	}
 
 	String getXPathArticuloNoDoble() {
-		return (
-				xpathArticuloBase +
-						"//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]");
+		return (getXPathArticulo() +
+				"//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]");
 	}
 
 	String getXPathAncestorArticulo() {
-		return (xpathArticuloBase.replaceFirst("//", "ancestor::"));
+		return (getXPathArticulo().replaceFirst("//", "ancestor::"));
 	}
 
 	static String classProductName =
@@ -189,17 +172,17 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
-		String xpathArticulo = xpathArticuloBase + "[" + numArticulo + "]";
+		String xpathArticulo = getXPathArticulo() + "[" + numArticulo + "]";
 		return state(Visible, xpathArticulo).wait(seconds).check();
 	}
 
 	public boolean isClickableArticuloUntil(int numArticulo, int seconds) {
-		String xpathArticulo = xpathArticuloBase + "[" + numArticulo + "]";
+		String xpathArticulo = getXPathArticulo() + "[" + numArticulo + "]";
 		return state(Clickable, xpathArticulo).wait(seconds).check();
 	}
 
 	public List<WebElement> getListaArticulos() {
-		return getElements(xpathArticuloBase);
+		return getElements(getXPathArticulo());
 	}
 
 	public boolean articlesInOrder(FilterOrdenacion typeOrden) throws Exception {
@@ -214,7 +197,7 @@ public abstract class PageGaleria extends PageBase {
 	 * @return número de artículos de la galería
 	 */
 	public int getNumArticulos() {
-		return getElements(xpathArticuloBase).size();
+		return getElements(getXPathArticulo()).size();
 	}
 
 	public int waitForArticleVisibleAndGetNumberOfThem(int seconds) {
@@ -245,11 +228,10 @@ public abstract class PageGaleria extends PageBase {
 	}	
 
 	public boolean isFirstArticleOfType(LineaType lineaType) {
-		List<WebElement> listaArticulos = getElements(xpathArticuloBase);
-		return (
-				!listaArticulos.isEmpty() &&
-						state(Present, listaArticulos.get(0))
-								.by(By.xpath("//a[@href[contains(.,'" + lineaType + "')]]")).check());
+		List<WebElement> listaArticulos = getElements(getXPathArticulo());
+		return (!listaArticulos.isEmpty() &&
+				state(Present, listaArticulos.get(0))
+					.by(By.xpath("//a[@href[contains(.,'" + lineaType + "')]]")).check());
 	}
 
 	public void moveToArticleAndGetObject(int posArticulo) {
@@ -346,7 +328,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public List<WebElement> getArticulos() {
-		return getElements(xpathArticuloBase);
+		return getElements(getXPathArticulo());
 	}
 
 	public WebElement getArticulo(LocationArticle locationArt) {
@@ -499,11 +481,11 @@ public abstract class PageGaleria extends PageBase {
 
 	public WebElement getArticleThatContainsLitUntil(String literal, int seconds) {
 		By byArticleName = By.xpath(
-				xpathArticuloBase +
+				getXPathArticulo() +
 						XPATH_NOMBRE_RELATIVE_TO_ARTICLE +
 						"//self::*[text()[contains(.,'" + literal + "')]]");
 		if (state(Present, byArticleName).wait(seconds).check()) {
-			return getElement(xpathArticuloBase);
+			return getElement(getXPathArticulo());
 		}
 		return null;
 	}

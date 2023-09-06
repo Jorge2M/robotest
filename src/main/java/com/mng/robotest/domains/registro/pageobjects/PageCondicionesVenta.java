@@ -6,11 +6,10 @@ import com.mng.robotest.domains.base.PageBase;
 
 public class PageCondicionesVenta extends PageBase {
 
-	private static final String XPATH_CABECERA = 
-			"//*[text()[contains(.,'Condiciones de venta')] or text()[contains(.,'Terms of sale')]]";
+	private static final String XPATH_MICRO = "//micro-frontend[@id='legalConditions']";
 	
 	public boolean isPageUntil(int seconds) {
-		return state(Present, XPATH_CABECERA).wait(seconds).check();
+		return state(Present, XPATH_MICRO).wait(seconds).check();
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.mng.robotest.conf.suites.FlagsNaviationLineas;
 import com.mng.robotest.domains.base.TestBase;
-import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktopKondo;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType;
@@ -71,7 +71,7 @@ public class Par001 extends TestBase {
 			if (canClickMenuArticles(dataTest.getPais(), linea, sublinea)) {
 				clickMenuDependingLine(lineaType, sublineaType);
 				if (flagsNavigation.testMenus()) {
-					boolean bannerIsLincable = new PageGaleriaDesktop().getSecBannerHead().isLinkable();
+					boolean bannerIsLincable = new PageGaleriaDesktopKondo().getSecBannerHead().isLinkable();
 					if (bannerIsLincable) {
 						new PageGaleriaSteps().bannerHead.clickBannerSuperiorIfLinkableDesktop();
 					}

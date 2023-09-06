@@ -101,7 +101,7 @@ public class MenuSteps extends StepBase {
 	 
 	private void checkSelecGroup(GroupWeb groupWeb) {
 		if (groupWeb.getGroup().getGroupResponse()==GroupResponse.ARTICLES) {
-			new PageGaleriaSteps().validateGaleriaAfeterSelectMenu();
+			new PageGaleriaSteps().checkGaleriaAfeterSelectMenu();
 		} else {
 			checkGroupSubMenuVisible(groupWeb);
 		}
@@ -164,7 +164,7 @@ public class MenuSteps extends StepBase {
 	
 	public void checkSelecMenu(MenuWeb menu) {
 		isTitleAssociatedMenu(menu.getNameScreen());
-		new PageGaleriaSteps().validateGaleriaAfeterSelectMenu();
+		new PageGaleriaSteps().checkGaleriaAfeterSelectMenu();
 		if (menu.getSubMenus()!=null && !menu.getSubMenus().isEmpty()) {
 			checkVisibilitySubmenus(menu);
 		}
@@ -194,14 +194,14 @@ public class MenuSteps extends StepBase {
 		 	    Check.make(
 				    "El título no coincide -> Validamos que exista el header <b>" + 
 		 	        nameMenu + "</b> en el inicio de la galería",
-		 	       PageGaleria.getNew(channel).isHeaderArticlesVisible(nameMenu), Warn)
+		 	       PageGaleria.getNew(channel, dataTest.getPais()).isHeaderArticlesVisible(nameMenu), Warn)
 		 	    .store(StoreType.Evidences).build());
 	 	}
 	 	return checks;
 	}
 	
 	private void checkSelectSubMenu(MenuWeb menu) {
-		new PageGaleriaSteps().validateGaleriaAfeterSelectMenu();
+		new PageGaleriaSteps().checkGaleriaAfeterSelectMenu();
 		if (channel==Channel.desktop &&
 			menu.getArticlesSubMenu()!=null && !menu.getArticlesSubMenu().isEmpty()) {
 			checkArticlesContainsLiteralsDesktop(menu.getArticlesSubMenu());
@@ -216,7 +216,7 @@ public class MenuSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkArticlesContainsLiteralsDesktop(List<String> articles) {
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel);
+		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, dataTest.getPais());
 		List<String> articlesNoValid = pageGaleriaDesktop.getArticlesNoValid(articles);
 		State stateVal = (articlesNoValid.size()<10) ? Warn : Defect;
 		

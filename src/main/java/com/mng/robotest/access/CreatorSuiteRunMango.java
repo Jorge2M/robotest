@@ -7,6 +7,7 @@ import com.mng.robotest.conf.suites.GenericFactorySuite;
 import com.mng.robotest.conf.suites.MenusPaisSuite;
 import com.mng.robotest.conf.suites.PagosPaisesSuite;
 import com.mng.robotest.conf.suites.PaisIdiomaSuite;
+import com.mng.robotest.conf.suites.RegistrosNewSuite;
 import com.mng.robotest.conf.suites.RegistrosSuite;
 import com.mng.robotest.conf.suites.SmokeMantoSuite;
 import com.mng.robotest.conf.suites.SmokeTestSuite;
@@ -56,6 +57,8 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 				return new GenericFactorySuite(inputParamsMango);
 			case RegistrosPaises:
 				return new RegistrosSuite(inputParamsMango);
+			case RegistrosNewPaises:
+				return new RegistrosNewSuite(inputParamsMango);				
 			case TextosLegales:
 				return new TextosLegalesSuite(inputParamsMango);
 			default:

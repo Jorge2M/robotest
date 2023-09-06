@@ -10,9 +10,9 @@ import com.github.jorge2m.testmaker.domain.SuiteMaker;
 import com.github.jorge2m.testmaker.domain.TestRunMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conf.ErrorStorer;
-import com.mng.robotest.conf.factories.ListRegistrosXPais;
+import com.mng.robotest.conf.factories.ListRegistrosNewXPais;
 
-public class RegistrosSuite extends SuiteMaker {
+public class RegistrosNewSuite extends SuiteMaker {
 	
 	public enum VersionRegistroSuite {
 		V1(false, false),
@@ -30,10 +30,10 @@ public class RegistrosSuite extends SuiteMaker {
 		public boolean loginAfterRegister() {return loginAfterRegister;}
 	}
 	
-	public RegistrosSuite(InputParamsMango inputParams) {
+	public RegistrosNewSuite(InputParamsMango inputParams) {
 		super(inputParams);
 		setParameters(getParametersSuiteShop(inputParams));
-		var testRun = TestRunMaker.from(inputParams.getSuiteName(), ListRegistrosXPais.class);
+		var testRun = TestRunMaker.from(inputParams.getSuiteName(), ListRegistrosNewXPais.class);
 		testRun.setStorerErrorStep(new ErrorStorer());
 		testRun.addGroups(getSpecificGroups());
 		addTestRun(testRun);

@@ -2,13 +2,13 @@ package com.mng.robotest.domains.galeria.steps;
 
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.base.StepBase;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.domains.galeria.pageobjects.SecBannerHeadGallery;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps.TypeGalery;
@@ -18,20 +18,14 @@ import com.mng.robotest.test.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
-public class BannerHeadGallerySteps {
+public class BannerHeadGallerySteps extends StepBase {
 
-	final PageGaleriaSteps pageGaleriaParent;
-	final SecBannerHeadGallery secBannerHeadDesktop;
-	final WebDriver driver;
+	private final PageGaleriaSteps pageGaleriaParent;
+	private final SecBannerHeadGallery secBannerHeadDesktop;
 
-	private BannerHeadGallerySteps(PageGaleriaSteps pageGaleriaParent, WebDriver driver) {
+	public BannerHeadGallerySteps(PageGaleriaSteps pageGaleriaParent) {
 		this.pageGaleriaParent = pageGaleriaParent;
-		this.secBannerHeadDesktop = new PageGaleriaDesktop().getSecBannerHead();
-		this.driver = driver;
-	}
-
-	public static BannerHeadGallerySteps newInstance (PageGaleriaSteps pageGaleriaParent, WebDriver driver) {
-		return (new BannerHeadGallerySteps(pageGaleriaParent, driver));
+		this.secBannerHeadDesktop = ((PageGaleriaDesktop)PageGaleria.getNew(channel, dataTest.getPais())).getSecBannerHead();
 	}
 
 	public void validateBannerSuperiorIfExistsDesktop() {
@@ -120,7 +114,6 @@ public class BannerHeadGallerySteps {
 				return true;
 			}
 		}
-
 		return false;
 	}
 }

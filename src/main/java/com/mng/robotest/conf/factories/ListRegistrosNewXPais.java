@@ -6,12 +6,12 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.conf.AppEcom;
-import com.mng.robotest.domains.registro.tests.Registro;
+import com.mng.robotest.domains.registro.tests.RegistroNew;
 import com.mng.robotest.test.beans.*;
 import com.mng.robotest.test.utils.PaisGetter;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
-public class ListRegistrosXPais {
+public class ListRegistrosNewXPais {
 
 	@Factory
 	@Parameters({"countrys"})
@@ -35,7 +35,7 @@ public class ListRegistrosXPais {
 			var itIdiomas = pais.getListIdiomas(appE).iterator();
 			while (itIdiomas.hasNext()) {
 				var idioma = itIdiomas.next();
-				listTests.add(new Registro(pais, idioma, prioridad));
+				listTests.add(new RegistroNew(pais, idioma, prioridad));
 				prioridad+=1;
 				printTestCreation(pais, idioma);
 			}

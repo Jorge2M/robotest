@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conf.AppEcom;
+import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.Color;
-
 
 public interface SecFiltros {
 	
@@ -22,13 +22,13 @@ public interface SecFiltros {
 	public boolean isClickableFiltroUntil(int seconds);
 	public boolean isCollectionFilterPresent() throws Exception;
 	
-	public static SecFiltros make(Channel channel, AppEcom app) {
+	public static SecFiltros make(Channel channel, AppEcom app, Pais pais) {
 		switch (channel) {
 		case desktop:
-			return SecFiltrosDesktop.getInstance(channel);
+			return new SecFiltrosDesktop();
 		case mobile, tablet:
 			if (app==AppEcom.outlet && channel==Channel.tablet) {
-				return SecFiltrosDesktop.getInstance(channel);
+				return new SecFiltrosDesktop();
 			}
 			return new SecMultiFiltrosDevice();
 		default:

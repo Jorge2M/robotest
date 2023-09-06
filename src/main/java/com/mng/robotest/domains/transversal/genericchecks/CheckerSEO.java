@@ -6,7 +6,6 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
@@ -21,6 +20,7 @@ import com.mng.robotest.domains.transversal.home.pageobjects.PageLanding;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+import static com.github.jorge2m.testmaker.conf.Channel.*;
 
 public class CheckerSEO extends PageBase implements Checker {
 
@@ -98,7 +98,7 @@ public class CheckerSEO extends PageBase implements Checker {
 		if (!isPresentTagCanonical()) {
 			//El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
 			PageFicha pageFicha = PageFicha.of(channel);
-			PageGaleria pageGaleria = PageGaleria.getNew(Channel.desktop);
+			PageGaleria pageGaleria = PageGaleria.getNew(desktop, dataTest.getPais());
 			if ((new PageLanding()).isPage() || 
 				((PageGaleriaDesktop)pageGaleria).isPage() || 
 				pageFicha.isPageUntil(0)) {

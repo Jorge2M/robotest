@@ -15,7 +15,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecFiltrosSteps extends StepBase {
 
-	private final SecFiltros secFiltros = SecFiltros.make(channel, app);
+	private final SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());
 	
 	private static final String TAG_LIT_COLORS_TO_SELECT = "@TagLitColorsToSelect";
 

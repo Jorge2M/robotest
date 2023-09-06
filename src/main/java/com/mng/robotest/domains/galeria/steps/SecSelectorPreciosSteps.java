@@ -15,7 +15,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 public class SecSelectorPreciosSteps extends StepBase {
 
 	private final SecSelectorPreciosDesktop selectorPreciosDesktop = new SecSelectorPreciosDesktop();
-	private final SecFiltrosDesktop secFiltrosDesktop = SecFiltrosDesktop.getInstance(channel);
+	private final SecFiltrosDesktop secFiltrosDesktop = new SecFiltrosDesktop();
 
 	@Validation (
 		description="Es visible el selector de precios",
@@ -66,7 +66,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 			"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.maximoOrig + "</b> y ahora es <b>" + dataFilter.maximoFinal + "</b>",
 			dataFilter.maximoFinal < dataFilter.maximoOrig, Warn);
 		
-		PageGaleria pageGaleria = PageGaleria.getNew(channel);
+		PageGaleria pageGaleria = PageGaleria.getNew(channel, dataTest.getPais());
 		checks.add(
 			"Todos los precios están en el intervalo [" + dataFilter.minimoFinal + ", " + dataFilter.maximoFinal + "]",
 			pageGaleria.preciosInIntervalo(dataFilter.minimoFinal, dataFilter.maximoFinal), Warn);
