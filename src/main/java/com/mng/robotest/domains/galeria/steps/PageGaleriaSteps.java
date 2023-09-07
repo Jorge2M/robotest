@@ -773,15 +773,4 @@ public class PageGaleriaSteps extends StepBase {
 		return checks;
 	}
 
-//	@Validation
-//	public ChecksTM checkVisibilitySubmenus(List<Menu2onLevel> menus2onLevel) {
-//		var checks = ChecksTM.getNew();
-//		for (Menu2onLevel menu2oNivelTmp : menus2onLevel) {
-//			checks.add(
-//				"Aparece el submenú <b>" + menu2oNivelTmp.getNombre() + "</b>",
-//				((PageGaleriaDesktop)pageGaleria).getSecSubmenusGallery().isVisibleSubmenu(menu2oNivelTmp.getNombre()), 
-//				Warn);
-//		}
-//		return checks;
-//	}
 }

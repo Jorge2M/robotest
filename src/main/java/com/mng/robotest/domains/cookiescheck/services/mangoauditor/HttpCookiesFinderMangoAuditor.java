@@ -65,10 +65,10 @@ public class HttpCookiesFinderMangoAuditor implements CookiesRepository {
             
             return getCookiesData(cookiesMangoAuditor); 
         } catch (IOException io) {
-            logger.error("Error parsing the cookies information: {}", io);
+            logger.error("Error parsing the cookies information", io);
             throw new UnparseableCookies(io);
         } catch (Exception e) {
-            logger.error("Error retrieving the cookies information: {}", e);
+            logger.error("Error retrieving the cookies information", e);
             throw new IrretrievableCookies(e);
         }
     }

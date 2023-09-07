@@ -5,7 +5,6 @@ import com.mng.robotest.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
 public class Ticket {
 	
 	private String id;
-	//private String idMango;
 	private TypeTicket type;
 	private String precio;
 	private String fecha;
@@ -17,12 +16,6 @@ public class Ticket {
 	public void setId(String id) {
 		this.id = id;
 	}
-//	public String getIdMango() {
-//		return idMango;
-//	}
-//	public void setIdMango(String idMango) {
-//		this.idMango = idMango;
-//	}
 	public TypeTicket getType() {
 		return type;
 	}

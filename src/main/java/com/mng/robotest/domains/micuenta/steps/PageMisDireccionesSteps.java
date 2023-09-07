@@ -54,17 +54,6 @@ public class PageMisDireccionesSteps extends StepBase {
 		return isPostalCode("");
 	}
 	
-//	@Validation
-//	private ChecksTM checkIsData(DataNewRegister dataNewRegister) {
-//		
-//		var checks = ChecksTM.getNew();
-//		checks.add(
-//			"Aparece el código postal <b>" + dataNewRegister.getPostalCode() + "</b>",
-//			isPostalCode(dataNewRegister.getPostalCode()));
-//		
-//		return checks;
-//	}
-	
 	@Validation
 	private ChecksTM checkIsData(Map<String,String> dataOldRegister) {
 		String codpostal = dataOldRegister.get("cfCp");

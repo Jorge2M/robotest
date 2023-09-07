@@ -40,7 +40,7 @@ public class CheckerAnalitica implements Checker {
 				.store(StoreType.None).build());
 		}
 		catch (JavascriptException e) {
-			Log4jTM.getLogger().warn("Problema executing JavaScript for check Analitics", e.getMessage());
+			Log4jTM.getLogger().warn("Problema executing JavaScript for check Analitics {}", e.getMessage());
 		}
 		
 		return checks;

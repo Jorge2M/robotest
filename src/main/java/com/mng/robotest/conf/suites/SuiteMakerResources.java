@@ -30,7 +30,6 @@ public class SuiteMakerResources {
 		if (params.getUrlManto()!=null) {
 			parametersReturn.put(Constantes.PARAM_URL_MANTO, params.getUrlManto());
 		} else {
-			//parametersSuite.put(Constantes.paramUrlmanto, "https://ogiol-zfs-manto.dev.mango.com");
 			parametersReturn.put(Constantes.PARAM_URL_MANTO, "http://manto.pre.mango.com");
 		}
 		
@@ -71,16 +70,6 @@ public class SuiteMakerResources {
 					.getPassword();
 		parametersReturn.put("userConDevolucionPeroSoloEnPRO", "robot.test@mango.com");
 		parametersReturn.put("passwordUserConDevolucion", PASSWORD_ROBOT);
-		
-//		CallBack callBack = params.getCallBack();
-//		if (params.getCallBack()!=null) {
-//			parametersReturn.put(Constantes.paramCallBackMethod, callBack.getCallBackMethod());
-//			parametersReturn.put(Constantes.paramCallBackResource, callBack.getCallBackResource());
-//			parametersReturn.put(Constantes.paramCallBackSchema, callBack.getCallBackSchema());  
-//			parametersReturn.put(Constantes.paramCallBackParams, callBack.getCallBackParams());
-//			parametersReturn.put(Constantes.paramCallBackUser, callBack.getCallBackUser());
-//			parametersReturn.put(Constantes.paramCallBackPassword, callBack.getCallBackPassword());
-//		}
 		
 		return parametersReturn;
 	}

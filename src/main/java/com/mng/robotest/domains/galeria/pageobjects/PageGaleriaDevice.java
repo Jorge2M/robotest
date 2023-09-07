@@ -334,14 +334,6 @@ public class PageGaleriaDevice extends PageGaleria {
 		}
 	}
 
-//	@Override
-//	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {
-//		if (hearthIcon.getAttribute("class").contains("favorite--active")) {
-//			return StateFavorito.MARCADO;
-//		}
-//		return StateFavorito.DESMARCADO;
-//	}
-//
 	@Override
 	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
 		moveToElement(hearthIcon);

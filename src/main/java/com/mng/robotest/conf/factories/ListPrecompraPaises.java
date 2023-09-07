@@ -17,8 +17,6 @@ import com.mng.robotest.test.utils.UtilsTest;
 
 public class ListPrecompraPaises {
 	
-	Collection<Integer> Pais5SHOPDAY = new ArrayList<>();
-	
 	@SuppressWarnings("unused")
 	@Parameters({"countrys"})
 	@Factory

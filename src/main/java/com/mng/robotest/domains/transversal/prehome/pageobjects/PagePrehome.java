@@ -181,14 +181,9 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 			}
 		} else {
 			//Enable Only performance cookies for suport to TestABs
-//			changeCookieOptanonConsent();
 			enablePerformanceCookies();
 		}
 	}
-	
-//	private void changeCookieOptanonConsent() {
-//		new SectionCookiesSteps().changeCookie_OptanonConsent();
-//	}
 	
 	private void enablePerformanceCookies() {
 		var modalSetCookiesSteps = new SectionCookiesSteps().setCookies();

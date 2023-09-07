@@ -10,19 +10,19 @@ import com.mng.robotest.domains.base.PageBase;
 
 public class SecTallasArticulo extends PageBase {
 	
-	private final String XPATH_ARTICULO;
-	private final String XPATH_CAPA_TALLAS_ARTICULO_SHOP = "//div[@class[contains(.,'sizes-container')]]";
+	private final String xpathArticulo;
+	private final String xpathCapaTallasArticuloShop = "//div[@class[contains(.,'sizes-container')]]";
 	private static final String XPATH_TALLA_AVAILABLE = "//button[@data-testid[contains(.,'size.available')]]";
 	private static final String XPATH_TALLA_UNAVAILABLE =	"//button[@data-testid[contains(.,'size.unavailable')]]";
 	private static final String CLASS_CAPA_ACTIVE_SHOP = "@class[contains(.,'active')]";
 	
 	public SecTallasArticulo(String xpathArticulo) {
-		this.XPATH_ARTICULO = xpathArticulo;
+		this.xpathArticulo = xpathArticulo;
 	}
 	
 	private String getXPathArticleCapaInferiorDesktop(int posArticulo) {
-		String xpathArticuloX = "(" + XPATH_ARTICULO + ")[" + posArticulo + "]";
-		return xpathArticuloX + XPATH_CAPA_TALLAS_ARTICULO_SHOP;
+		String xpathArticuloX = "(" + xpathArticulo + ")[" + posArticulo + "]";
+		return xpathArticuloX + xpathCapaTallasArticuloShop;
 	}
 
 	public String getXPathFirstCapaAnadirOutlet(int posArticulo, boolean capaVisible) {
@@ -63,7 +63,7 @@ public class SecTallasArticulo extends PageBase {
 	}
 	
 	public void bringSizesBack(WebElement articulo) {
-		WebElement sizes = articulo.findElement(By.xpath("." + XPATH_CAPA_TALLAS_ARTICULO_SHOP));
+		WebElement sizes = articulo.findElement(By.xpath("." + xpathCapaTallasArticuloShop));
 		bringElement(sizes, BringTo.BACKGROUND);
 	}
 }

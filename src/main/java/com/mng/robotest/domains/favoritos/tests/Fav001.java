@@ -62,15 +62,6 @@ public class Fav001 extends TestBase {
 		new SecMenusUserSteps().selectFavoritos();
 	}	
 
-//	private void addFirstFavoriteToBag() throws Exception {
-//		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
-//		pageFavoritosSteps.addArticuloToBag(firstFavorite);
-//		if (channel.isDevice()) {
-//			secBolsaSteps.closeInMobil();
-//			pageFavoritosSteps.validaIsPageOK();
-//		}
-//	}	
-	
 	private void clearFirstFavorite() {
 		var firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		pageFavoritosSteps.clear(firstFavorite);

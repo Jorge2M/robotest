@@ -82,7 +82,7 @@ public class Fic005 extends TestBase {
 				.getOne();
 		
 		if (!articlePers.isPresent()) {
-			Log4jTM.getLogger().info("Not found article with filter " + PERSONALIZABLE);
+			Log4jTM.getLogger().info("Not found article with filter {}", PERSONALIZABLE);
 			return Optional.empty();
 		}
 		return Optional.of(Article.getArticleCandidateForTest(articlePers.get()));
