@@ -80,7 +80,6 @@ public class Com001 extends TestBase {
 		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 			.linea(HOME)
 			.menusCandidates(Arrays.asList(
-					Menu.ALBORNOCES, 
 					Menu.TOALLAS, 
 					Menu.ALFOMBRAS))
 			.filter(FilterType.STOCK)

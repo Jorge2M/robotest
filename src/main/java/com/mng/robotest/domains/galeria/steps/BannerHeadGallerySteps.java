@@ -8,8 +8,7 @@ import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
-import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop;
+import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktopNormal;
 import com.mng.robotest.domains.galeria.pageobjects.SecBannerHeadGallery;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps.TypeGalery;
 import com.mng.robotest.test.beans.IdiomaPais;
@@ -25,7 +24,7 @@ public class BannerHeadGallerySteps extends StepBase {
 
 	public BannerHeadGallerySteps(PageGaleriaSteps pageGaleriaParent) {
 		this.pageGaleriaParent = pageGaleriaParent;
-		this.secBannerHeadDesktop = ((PageGaleriaDesktop)PageGaleria.getNew(channel, dataTest.getPais())).getSecBannerHead();
+		this.secBannerHeadDesktop = new PageGaleriaDesktopNormal().getSecBannerHead();
 	}
 
 	public void validateBannerSuperiorIfExistsDesktop() {

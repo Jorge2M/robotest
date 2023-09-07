@@ -377,9 +377,9 @@ public class GetterProducts {
 		productsJson = productsJson.replace("\"garments\":{", "\"garments\":[");
 		productsJson = productsJson.replace("}}}]", "}]}]");
 		productsJson = productsJson.replace("}}},", "}]},");
-		productsJson = productsJson.replaceAll("\"g[0-9]{8}(..){0,1}\":", "");
-		productsJson = productsJson.replaceAll("\"g[0-9]{10}(..){0,1}\":", "");
-		productsJson = productsJson.replaceAll("\"g[0-9]{8}(..)(..){0,1}\":", "");
+		productsJson = productsJson.replaceAll("\"g[0-9]{8}(..)?\":", "");
+		productsJson = productsJson.replaceAll("\"g[0-9]{10}(..)?\":", "");
+		productsJson = productsJson.replaceAll("\"g[0-9]{8}(..)(..)?\":", "");
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
