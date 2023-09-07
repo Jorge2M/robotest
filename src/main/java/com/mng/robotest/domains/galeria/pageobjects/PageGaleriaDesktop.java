@@ -163,8 +163,9 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		var articulo = getArticuloConVariedadColores(numArticulo);
 		if (articulo.isPresent()) {
 			hoverArticle(articulo.get());
+			return articulo.get();
 		}
-		return articulo.get();
+		return null;
 	}
 	private Optional<WebElement> getArticuloConVariedadColores(int numArticulo) {
 		String xpathArticulo = getXPathArticuloConVariedadColores(numArticulo);
