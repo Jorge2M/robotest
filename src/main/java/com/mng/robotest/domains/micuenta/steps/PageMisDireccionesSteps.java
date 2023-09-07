@@ -26,11 +26,11 @@ public class PageMisDireccionesSteps extends StepBase {
 	public void checkData(Map<String,String> dataRegister) {
 		clickLinkEditarIfExists();
 		checkIsData(dataRegister);
-		driver.navigate().back();
+		back();
 	}
 
 	private void clickLinkEditarIfExists() {
-		if (pageMisDirecciones.isLinkEditarVisible()) {
+		if (pageMisDirecciones.isLinkEditarVisible(1)) {
 			clickLinkEditar();
 		}
 	}

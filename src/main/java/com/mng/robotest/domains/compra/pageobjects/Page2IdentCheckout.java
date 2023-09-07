@@ -97,7 +97,7 @@ public class Page2IdentCheckout extends PageBase {
 	private boolean setInputIfVisible(String xpathInput, String valueToSet) {
 		boolean datoSeteado = false;
 		try {
-			List<WebElement> cfElementList = getElementsVisible(xpathInput);			
+			var cfElementList = getElementsVisible(xpathInput);			
 			if (!cfElementList.isEmpty()) {
 				String cfElementReadonly = cfElementList.get(0).getAttribute("readonly");
 				if (cfElementReadonly == null || cfElementReadonly.compareTo("true")!=0) {
@@ -106,7 +106,6 @@ public class Page2IdentCheckout extends PageBase {
 						cfElementList.get(0).sendKeys(valueToSet);
 						cfElementList.get(0).sendKeys(Keys.TAB);
 					}
-					
 					datoSeteado = true;
 				}	
 			}
@@ -626,7 +625,7 @@ public class Page2IdentCheckout extends PageBase {
 			direccion1 = pais.getDireccharnolatinos().getText();
 		}
 		String direccion2 = "6";
-		String cfCity = "VILAFRANCA";
+		String cfCity = "VILAFRANCA DEL PENEDES";
 		String codPostalPais = pais.getCodpos();
 		String cfState = "BARCELONA";		
 		String movil = pais.getTelefono();

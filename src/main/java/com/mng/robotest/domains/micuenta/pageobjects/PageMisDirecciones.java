@@ -10,8 +10,8 @@ public class PageMisDirecciones extends PageBase {
 	private static final String XPATH_MICROFRONTEND = "//micro-frontend[@id='myAddresses']"; 
 	private static final String XPATH_LINK_EDITAR = "//*[@data-testid[contains(.,'addressCard')]]//a";
 	private static final String XPATH_INPUT_CODPOSTAL = "//input[@data-testid[contains(.,'.postalCode')]]";
-	private static final String XPATH_INPUT_POBLACION_DESKTOP = "//div[@id='city.listbox']/div[@aria-selected='true']";
-	private static final String XPATH_INPUT_POBLACION_MOBILE = "//select[@data-testid='addressForm.city']";
+	private static final String XPATH_INPUT_POBLACION_DESKTOP = "//div[@aria-labelledby='city.label']//p";
+	private static final String XPATH_INPUT_POBLACION_MOBILE = "//select[@id='city']";
 	private static final String XPATH_INPUT_DIRECCION = "//input[@data-testid[contains(.,'.address')]]";
 	private static final String XPATH_BOTON_GUARDAR = "//*[@data-testid='deliveryAddress.form.button.submit']";
 	
@@ -26,8 +26,8 @@ public class PageMisDirecciones extends PageBase {
 		return state(Visible, XPATH_MICROFRONTEND).wait(seconds).check();
 	}
 	
-	public boolean isLinkEditarVisible() {
-		return state(Visible, XPATH_LINK_EDITAR).check(); 
+	public boolean isLinkEditarVisible(int seconds) {
+		return state(Visible, XPATH_LINK_EDITAR).wait(seconds).check(); 
 	}
 	
 	public void clickLinkEditar() {
@@ -41,7 +41,11 @@ public class PageMisDirecciones extends PageBase {
 		return getElement(XPATH_INPUT_CODPOSTAL).getAttribute("value");
 	}
 	public String getPoblacion() {
-		return getElement(getXPathInputPoblacion()).getAttribute("value");
+		var inputPoblacion = getElement(getXPathInputPoblacion());
+		if (channel.isDevice()) {
+			return inputPoblacion.getAttribute("value");
+		}
+		return inputPoblacion.getText();
 	}	
 	public String getDireccion() {
 		return getElement(XPATH_INPUT_DIRECCION).getAttribute("value");
