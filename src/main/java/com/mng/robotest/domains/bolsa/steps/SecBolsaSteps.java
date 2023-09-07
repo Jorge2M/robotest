@@ -10,6 +10,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.domains.bolsa.pageobjects.ValidatorContentBolsa;
@@ -281,21 +282,21 @@ public class SecBolsaSteps extends StepBase {
 	//(y crear página específica PageContinuarComoInvitadoMobile
 	private void fluxPostSelectComprarUserNotIdentifiedMobile(FluxBolsaCheckout flux) {
 		//TODO 17-07-23 reactivar si en algún momento se implementa de nuevo el flujo guest-checkout
-//		if (app==AppEcom.shop && 				
-//			!dataTest.getTestCode().contains("COM002")) {
-//			//TODO el COM002 va sin cookies con lo que vamos por la variante-0 del TestAB
-//			//quitar cuando se desactive el TestAB
-//			checkVisibleContinuarSinCuentaButtonDevice(2);
-//			if (flux==INICIAR_SESION) {
-//				clickIniciarSesionMobile();
-//				new PageIniciarSesionBolsaMobileSteps().checkIsPage(3);
-//			} else {
-//				clickContinuarSinCuentaMobile();
-//				new Page1IdentCheckoutSteps().checkIsPage(5);
-//			}
-//		} else {
+		if (app==AppEcom.shop && 				
+			!dataTest.getTestCode().contains("COM002")) {
+			//TODO el COM002 va sin cookies con lo que vamos por la variante-0 del TestAB
+			//quitar cuando se desactive el TestAB
+			checkVisibleContinuarSinCuentaButtonDevice(2);
+			if (flux==INICIAR_SESION) {
+				clickIniciarSesionMobile();
+				new PageIniciarSesionBolsaMobileSteps().checkIsPage(3);
+			} else {
+				clickContinuarSinCuentaMobile();
+				new Page1IdentCheckoutSteps().checkIsPage(5);
+			}
+		} else {
 			new Page1IdentCheckoutSteps().checkIsPage(5);
-//		}
+		}
 	}
 	
 	@Step (

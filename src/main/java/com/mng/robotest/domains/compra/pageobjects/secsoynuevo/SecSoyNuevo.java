@@ -26,19 +26,23 @@ public abstract class SecSoyNuevo extends PageBase {
 		}
 		
 		//TODO 17-07-23 reactivar si en algún momento se implementa de nuevo el flujo guest-checkout		
-//		if (app==AppEcom.shop &&
-//			!dataTest.getTestCode().contains("COM002")) {
-//			//TODO el COM002 va sin cookies con lo que vamos por la variante-0 del TestAB
-//			//quitar cuando se desactive el TestAB) {
-//			return new SecSoyNuevoMobileNew();
-//		}
+		if (app==AppEcom.shop &&
+			!dataTest.getTestCode().contains("COM002")) {
+			//TODO el COM002 va sin cookies con lo que vamos por la variante-0 del TestAB
+			//quitar cuando se desactive el TestAB) {
+			return new SecSoyNuevoMobileNew();
+		}
 		return new SecSoyNuevoMobileOld();
 	}
 	
 	public boolean isFormIdentUntil(int seconds) { 
 		return state(Present, getXPathFormIdent()).wait(seconds).check();
 	}
-
+	
+	public boolean isInputEmailUntil(int seconds) { 
+		return state(Present, getXPathInputEmail()).wait(seconds).check();
+	}
+	
 	public void inputEmail(String email) {
 		inputEmailOneTime(email);
 		if (!isInputWithText(email)) {
