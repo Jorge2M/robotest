@@ -3,6 +3,7 @@ package com.mng.robotest.domains.galeria.pageobjects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -159,10 +160,22 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 
 	@Override
 	public WebElement getArticuloConVariedadColoresAndHover(int numArticulo) {
+		var articulo = getArticuloConVariedadColores(numArticulo);
+		if (articulo.isPresent()) {
+			hoverArticle(articulo.get());
+		}
+		return articulo.get();
+	}
+	private Optional<WebElement> getArticuloConVariedadColores(int numArticulo) {
 		String xpathArticulo = getXPathArticuloConVariedadColores(numArticulo);
-		WebElement articulo = getElement(xpathArticulo); 
-		hoverArticle(articulo);
-		return articulo;
+		for (int i=0; i<8; i++) {
+			if (state(Present, xpathArticulo).check()) {
+				return Optional.of(getElement(xpathArticulo));
+			}
+			scrollVertical(1000);
+			waitMillis(1000);
+		}
+		return Optional.empty();
 	}
 
 	public boolean isArticleFromLinea(int numArticle, LineaType lineaType) {
