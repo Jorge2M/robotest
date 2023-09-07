@@ -78,7 +78,7 @@ public class Fav002 extends TestBase {
 	}	
 	
 	private void selectFirstFavoriteAndAddBolsa() {
-		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
+		var firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		pageFavoritosSteps.clickArticuloImg(firstFavorite);
 		
 		var pageFichaSteps = new PageFichaSteps();

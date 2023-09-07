@@ -137,6 +137,7 @@ public class PageFichaSteps extends StepBase {
 
 	public void selectFirstTallaAvailable() {
 		pageFicha.selectFirstTallaAvailable();
+		waitLoadPage();
 	}
 
 	@Step (
