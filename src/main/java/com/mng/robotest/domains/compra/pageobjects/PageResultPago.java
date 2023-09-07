@@ -13,7 +13,7 @@ public class PageResultPago extends PageBase {
 	public static final String XPATH_CODIGO_PEDIDO_ESTANDAR = XPATH_DATA_PEDIDO + "//*[@data-testid[contains(.,'.orderId')]]";
 	public static final String XPATH_CODIGO_PEDIDO_CONTRAREEMBOLSO_DESKTOP = "//div[@class='labels']//*[@class[contains(.,'data')] and string-length(text())=6]";
 	public static final String XPATH_CODIGO_PEDIDO_CONTRAREEMBOLSO_MOBIL = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
-	public static final String XPATH_BUTTON_MIS_COMPRAS = "//button[@data-testid[contains(.,'goToMyPurchases')]]";
+	public static final String XPATH_BUTTON_MIS_COMPRAS = "//button[@data-testid[contains(.,'goToMyPurchases')] or @data-testid[contains(.,'goToMyOrders')]]";
 	public static final String XPATH_MICROFRONTEND_LOYALTY = "//micro-frontend[@name='purchaseConfirmation']";
 	public static final String XPATH_BLOCK_NEW_LOYALTY_POINTS = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
 	public static final String XPATH_LINK_DESCUENTOS_Y_EXPERIENCIAS = "//*[@data-testid='mng-link']";

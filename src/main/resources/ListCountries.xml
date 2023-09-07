@@ -260,7 +260,6 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-559;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -308,7 +307,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -374,7 +372,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -391,7 +388,6 @@
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -449,7 +445,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -487,7 +482,6 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-526;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -533,7 +527,6 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="НАЛОЖЕН ПЛАТЕЖ" testpasarela='s' testpago='s'>&TPV-183;</pago><!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -575,7 +568,6 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-514;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -624,7 +616,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -676,7 +667,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 <pais nombre_pais="Denmark" codigo="008">
@@ -734,7 +724,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-606;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <mobiluser>20123456</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
 </pais>
@@ -790,7 +779,6 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-185;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -853,7 +841,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 <mobiluser>0401234567</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
@@ -906,7 +893,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -983,7 +969,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -1004,7 +989,6 @@
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1061,7 +1045,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -1111,7 +1094,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1157,7 +1139,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago> 
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -1205,7 +1186,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1259,7 +1239,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -1279,7 +1258,6 @@
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1326,7 +1304,6 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-186;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -1367,7 +1344,6 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-558;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -1418,7 +1394,6 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-184;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -1470,7 +1445,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -1490,7 +1464,6 @@
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1536,7 +1509,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -1556,7 +1528,6 @@
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1602,7 +1573,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='n' testpago='n' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago> <!-- Desactivada la validación de la pasarela porque no acepta mail asociado a otro país -->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -1622,7 +1592,6 @@
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1677,7 +1646,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -1698,7 +1666,6 @@
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1760,7 +1727,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1814,7 +1780,6 @@
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -1865,7 +1830,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -1909,7 +1873,6 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" 
 	nombre="PLATA PRIN RAMBURS" nombremovil="Plata Prin Ramburs" testpasarela='s' testpago='s'>&TPV-178;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -1969,7 +1932,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="tpvvotf" tiendas="votf" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-196;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -2007,7 +1969,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-532;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -2061,7 +2022,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n" 
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-181;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -2115,7 +2075,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-182;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -2189,7 +2148,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <transporte nombre="Estándar"           importe="2,95"     gratuito="30"/>
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
 <transporte nombre="Urgente 24 h"       importe="7,95"     gratuito="99999"/>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 <!-- select * from MNGBD.tarjeta_empleados where codigo_carnet = '8000000002266'; -->
 <accesoempl tarjeta="8000007330287" nif="32070858A" nombre="OCA MUÑOZ, ADRIAN"/>
@@ -2267,7 +2225,6 @@ where
 <transporte nombre="Estándar"           importe="2,95"     gratuito="30"/>
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
 <transporte nombre="Urgente 24 h"       importe="7,95"     gratuito="99999"/>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -2326,7 +2283,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -2389,7 +2345,6 @@ where
 <transporte nombre="Estándar"           importe="2,95"     gratuito="30"/>
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
 <transporte nombre="Urgente 24 h"       importe="7,95"     gratuito="99999"/>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -2449,7 +2404,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <mobiluser>0765-260000</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
 </pais>
@@ -2522,7 +2476,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 <emailuser>jorge.munoz@mango.com</emailuser> <!-- Utilizaremos un email con timestamp para superar el control de fraude de "Rechnung" -->
 </pais>
@@ -2564,7 +2517,6 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-187;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -2623,7 +2575,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-065;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -2673,7 +2624,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-607;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -2713,7 +2663,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-525;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>	
 </pais>
@@ -2722,19 +2671,71 @@ where
 <codigo_pais>413</codigo_pais>
 <codigo_alf>BM</codigo_alf>
 <idioma acceso="bm">IN</idioma>
-<codpos>08720</codpos>
-<telefono>665015122</telefono>
-<dni>34763592N</dni>
-<tiendas_online></tiendas_online>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>8649</codpos>
+<telefono>4412346526</telefono>
+<tiendas_online>shop</tiendas_online>
 <newregister>N</newregister>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
 </shoponline>
-<micuenta>N</micuenta>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-551;</pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-551;</pago>
+<pago 
+	type="Paypal" tiendas="shop,outlet" empleado="n"
+	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>	
 <multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
+</pais>
+
+<pais nombre_pais="Haiti" codigo="452">
+<codigo_pais>452</codigo_pais>
+<codigo_alf>HT</codigo_alf>
+<idioma acceso="ht">FR</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>HT6130</codpos>
+<telefono>48331575</telefono>
+<tiendas_online>shop</tiendas_online>
+<newregister>N</newregister>
+<shoponline>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+</shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-551;</pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-551;</pago>
+<multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
 </pais>
 
 <pais nombre_pais="Canada" codigo="404">
@@ -2775,7 +2776,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-613;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -2813,7 +2813,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-527;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>	
 <galeriakondo>S</galeriakondo>	
 </pais>
@@ -2833,27 +2832,45 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
-<pais nombre_pais="República Dominicana" codigo="456">
+<pais nombre_pais="Dominican Republic" codigo="456">
 <codigo_pais>456</codigo_pais>
 <codigo_alf>DO</codigo_alf>
 <idioma acceso="do">ES</idioma>
-<codpos>08720</codpos>
-<telefono>665015122</telefono>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>10410</codpos>
+<telefono>8095903838</telefono>
 <dni>34763592N</dni>
-<tiendas_online></tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <newregister>N</newregister>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="NINA"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="NINO"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
 </shoponline>
-<micuenta>N</micuenta>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-551;</pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-551;</pago>
+<pago 
+	type="Paypal" tiendas="shop,outlet"
+	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-604;</pago>	
 <multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
 </pais>
 
 <pais nombre_pais="El Salvador" codigo="428">
@@ -2893,7 +2910,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-604;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -2925,7 +2941,6 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -2970,7 +2985,6 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -3011,7 +3025,6 @@ where
 </linea>
 <linea 		  id="edits"     shop="s" outlet="n" menus="s" menusart="n" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -3077,7 +3090,6 @@ where
 	type="Mercadopago" shop="s" outlet="s" 
 	nombre="mercadopago_transferencia" testpasarela='n' testpago='n'>&TPV-222;</pago>
 -->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <!-- <emailuser>test_user_722183@testuser.com</emailuser>--> <!-- Es preciso probar con este email para que se pinte el pago 'mercadopago' -->
 </pais>
@@ -3119,7 +3131,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-528;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>	
 </pais>
@@ -3161,7 +3172,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-059;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>		
 </pais>
@@ -3219,7 +3229,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-197;</pago>
-<micuenta>N</micuenta>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -3240,7 +3249,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3258,7 +3266,6 @@ where
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3278,7 +3285,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3296,7 +3302,6 @@ where
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3325,7 +3330,6 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -3365,7 +3369,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3411,7 +3414,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>	
 </pais>
@@ -3458,7 +3460,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>	
 </pais>
@@ -3500,7 +3501,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-604;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>	
 <galeriakondo>S</galeriakondo>	
 </pais>
@@ -3519,7 +3519,6 @@ where
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3537,7 +3536,6 @@ where
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3555,7 +3553,6 @@ where
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="KIDS"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3574,7 +3571,6 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3593,7 +3589,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3622,7 +3617,6 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -3656,7 +3650,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3678,7 +3671,6 @@ where
 <linea id="NINA"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3708,7 +3700,6 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3753,7 +3744,6 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-163;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <!-- <emailuser>bahrein.test@mango.com</emailuser>--> <!-- Es preciso probar con este email si queremos certificar el tema de storec -->
 <!-- <passuser>mango123</passuser>-->
@@ -3762,30 +3752,35 @@ where
 <pais nombre_pais="Cambodia" codigo="696">
 <codigo_pais>696</codigo_pais>
 <codigo_alf>KH</codigo_alf>
-<idioma acceso="kh">IN</idioma>
-<codpos>08720</codpos>
-<telefono>665015122</telefono>
-<dni>34763592N</dni>
-<tiendas_online></tiendas_online>
+<idioma acceso="lk">IN</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>120101</codpos>
+<telefono>86232004</telefono>
+<tiendas_online>shop</tiendas_online>
 <newregister>N</newregister>
 <shoponline>
-<linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
-	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="NINA_BEBE" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-</linea>
-<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
-	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-	<sublinea id="NINO_BEBE" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
-</linea>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
 </shoponline>
-<micuenta>N</micuenta>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-551;</pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-551;</pago>
 <multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
 </pais>
 
 <pais nombre_pais="中国" codigo="720"> <!-- China -->
@@ -3867,7 +3862,6 @@ where
 <pago
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-195;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3896,7 +3890,6 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3941,7 +3934,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -3984,7 +3976,6 @@ where
 <pago 
 	type="offline" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-162;</pago>--> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4022,7 +4013,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-533;</pago>-->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4041,7 +4031,6 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4060,7 +4049,6 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4078,7 +4066,6 @@ where
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4119,7 +4106,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4138,7 +4124,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4157,7 +4142,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4196,7 +4180,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-562;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4236,7 +4219,6 @@ where
 <pago 
 	type="Assist" tiendas="shop,outlet"
 	nombre="JCB" testpasarela='s'>&TPV-036;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4281,7 +4263,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4300,7 +4281,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4346,7 +4326,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4374,7 +4353,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-566;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -4416,7 +4394,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -4458,7 +4435,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-614;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <entregadomic>N</entregadomic>
 <galeriakondo>S</galeriakondo>
@@ -4479,7 +4455,6 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4524,7 +4499,6 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-166;</pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <!--<emailuser>oman.test.saldo@mango.com</emailuser>--> <!-- Es preciso probar con este email si queremos certificar el tema de storec -->
 <!--<passuser>mango123</passuser>-->
@@ -4555,7 +4529,6 @@ where
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4599,7 +4572,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4644,7 +4616,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago> 
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4690,7 +4661,6 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'>&TPV-161;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <!-- <emailuser>arabia.test@mango.com</emailuser>--> <!-- Es preciso probar con este email si queremos certificar el tema de storec -->
 <!-- <passuser>mango123</passuser>-->
@@ -4733,7 +4703,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4774,7 +4743,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4782,19 +4750,37 @@ where
 <codigo_pais>669</codigo_pais>
 <codigo_alf>LK</codigo_alf>
 <idioma acceso="lk">IN</idioma>
-<codpos>08720</codpos>
-<telefono>665015122</telefono>
-<dni>34763592N</dni>
-<tiendas_online></tiendas_online>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>10120</codpos>
+<telefono>777306509</telefono>
+<tiendas_online>shop</tiendas_online>
 <newregister>N</newregister>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
-<linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
 </shoponline>
-<micuenta>N</micuenta>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-551;</pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-551;</pago>
+<pago 
+	type="Paypal" tiendas="shop,outlet"
+	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-604;</pago>	
 <multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
 </pais>
 
 <pais nombre_pais="Syria " codigo="608">
@@ -4812,7 +4798,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4841,7 +4826,6 @@ where
 	<sublinea id="TEEN_NINO" shop="n" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4864,7 +4848,6 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="2c2p" namefilter="Tailandia_Contra_Reembolso" testpasarela='s' testpago='s'>&TPV-148;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4910,7 +4893,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-198;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4958,7 +4940,6 @@ where
 <pago 
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'>&TPV-199;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4996,7 +4977,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'>&TPV-560;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -5016,7 +4996,6 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 </continente>
@@ -5038,7 +5017,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 -->
@@ -5058,7 +5036,6 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -5077,7 +5054,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -5096,7 +5072,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -5131,7 +5106,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-551;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -5144,6 +5118,7 @@ where
 <loyalty>N</loyalty>
 <codpos>7948</codpos>
 <telefono>012345678</telefono>
+<dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
 <newregister>N</newregister>
 <shoponline>
@@ -5166,7 +5141,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-551;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -5186,7 +5160,6 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -5226,7 +5199,6 @@ where
 <pago 
 	type="externa" tiendas="shop,outlet"
 	nombre="cashu" testpasarela='s' testpago='s'>&TPV-550;</pago>-->
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -5247,7 +5219,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -5259,6 +5230,7 @@ where
 <loyalty>N</loyalty>
 <codpos>AE</codpos>
 <telefono>232345671</telefono>
+<dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
 <newregister>N</newregister>
 <shoponline>
@@ -5281,7 +5253,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-551;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -5290,19 +5261,38 @@ where
 <codigo_pais>346</codigo_pais>
 <codigo_alf>KE</codigo_alf>
 <idioma acceso="ke">IN</idioma>
-<codpos>08720</codpos>
-<telefono>665015122</telefono>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>00100</codpos>
+<telefono>704400831</telefono>
 <dni>34763592N</dni>
-<tiendas_online></tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <newregister>N</newregister>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
 </shoponline>
-<micuenta>N</micuenta>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737">&TPV-551;</pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-551;</pago>
+<pago 
+	type="Paypal" tiendas="shop,outlet" empleado="n"
+	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>	
 <multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
 </pais>
 
 <pais nombre_pais="Libya" codigo="216">
@@ -5320,7 +5310,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -5340,7 +5329,6 @@ where
 <linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -5361,7 +5349,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -5380,7 +5367,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -5419,7 +5405,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'>&TPV-600;</pago>	
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 <galeriakondo>S</galeriakondo>
 </pais>
@@ -5445,7 +5430,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password">&TPV-548;</pago>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -5466,7 +5450,6 @@ where
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
-<micuenta>N</micuenta>
 <multidireccion>N</multidireccion>
 </pais>
 </continente>

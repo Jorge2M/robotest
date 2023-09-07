@@ -56,7 +56,6 @@ public class Pais implements Serializable {
 	String emailuser;
 	String passuser;
 	String mobiluser;
-	String micuenta;
 	
 	@XmlElement(name="metodopago") 
 	List<String> listMetodopagos = new LinkedList<>();
@@ -335,15 +334,6 @@ public class Pais implements Serializable {
 		this.mobiluser = mobiluser;
 	}
 	
-	public String getMicuenta() {
-		return this.micuenta;
-	}
-
-	@XmlElement
-	public void setMicuenta(String micuenta) {
-		this.micuenta = micuenta;
-	}
-
 	public boolean isPaisTop() {
 		return ("s".compareTo(this.paistop.toLowerCase())==0);
 	}
@@ -493,7 +483,7 @@ public class Pais implements Serializable {
 	@Override
 	public String toString() {
 		return "Pais [nombre_pais="+ this.nombre_pais + ", codigo_pais=" + this.codigo_pais + ", listIdiomas=" + this.listIdiomas + ", codpos=" + this.codpos + ", telefono=" + this.telefono + ", dni=" + this.dni +
-				", shop_online=" + ", " + this.tienda + ", " + this.shoponline + ", micuenta=" + this.micuenta + 
+				", shop_online=" + ", " + this.tienda + ", " + this.shoponline + 
 				", toString()=" + super.toString() + "]";
 	}
 }
