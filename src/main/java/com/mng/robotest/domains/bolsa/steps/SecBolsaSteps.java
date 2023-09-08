@@ -282,7 +282,8 @@ public class SecBolsaSteps extends StepBase {
 	//(y crear página específica PageContinuarComoInvitadoMobile
 	private void fluxPostSelectComprarUserNotIdentifiedMobile(FluxBolsaCheckout flux) {
 		//TODO 17-07-23 reactivar si en algún momento se implementa de nuevo el flujo guest-checkout
-		if (app==AppEcom.shop && 				
+		if (app==AppEcom.shop &&
+			!isPRO() &&
 			!dataTest.getTestCode().contains("COM002")) {
 			//TODO el COM002 va sin cookies con lo que vamos por la variante-0 del TestAB
 			//quitar cuando se desactive el TestAB
