@@ -6,13 +6,9 @@ import org.openqa.selenium.WebDriver;
 
 import com.mng.robotest.domains.votfconsole.steps.ConsolaVotfSteps;
 import com.mng.robotest.repository.productlist.GetterProducts;
-import com.mng.robotest.repository.productlist.Menu;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.TestBase;
-import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
-
-import static com.mng.robotest.test.data.PaisShop.*;
 
 public class Vtf001 extends TestBase {
 
@@ -49,12 +45,15 @@ public class Vtf001 extends TestBase {
 	}
 
 	private List<Article> getArticlesAvailable(int numProductsMax, WebDriver driver) throws Exception {
-		var getterProducts = new GetterProducts.Builder("https://shop.mango.com/", ESPANA.getPais().getCodigo_alf(), AppEcom.votf, driver).
-				linea(LineaType.SHE).
-				menu(Menu.SHORTS).
-				numProducts(numProductsMax).
-				pagina(1).
-				build();
+//		var getterProducts = new GetterProducts.Builder("https://shop.mango.com/", ESPANA.getPais().getCodigo_alf(), AppEcom.votf, driver).
+//				linea(LineaType.SHE).
+//				menu(Menu.SHORTS).
+//				numProducts(numProductsMax).
+//				pagina(1).
+//				build();
+		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), AppEcom.votf, driver)
+				.numProducts(numProductsMax)
+				.build();		
 		
 		return Article.getArticlesCandidateForTest(getterProducts.getAll());
 	}
