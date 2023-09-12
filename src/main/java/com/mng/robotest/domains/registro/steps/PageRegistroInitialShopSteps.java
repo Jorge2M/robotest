@@ -85,17 +85,17 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	public void clickPoliticaPrivacidad() {
 		pageRegistroInitial.clickPoliticaPrivacidad();
 		//if (dataTest.getPais().loyalty()) {
-			if (pageRegistroInitial.isModalPoliticaPrivacidadInvisible(0)) {
-				waitMillis(500);
+			pageRegistroInitial.keyDown(5);
+			if (!pageRegistroInitial.isModalPoliticaPrivacidadVisible(1)) {
 				pageRegistroInitial.clickPoliticaPrivacidad();
 			}
-			checkIsModalPoliticaPrivacidadVisible();
+			pageRegistroInitial.keyDown(5);
+			checkIsModalPoliticaPrivacidadVisible(1);
 		//}
-		keyDown(5);
 	}
-	@Validation (description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"")
-	public boolean checkIsModalPoliticaPrivacidadVisible() {
-		return pageRegistroInitial.isModalPoliticaPrivacidadVisible();
+	@Validation (description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\" (lo esperamos hasta #{seconds} segundos)")
+	public boolean checkIsModalPoliticaPrivacidadVisible(int seconds) {
+		return pageRegistroInitial.isModalPoliticaPrivacidadVisible(seconds);
 	}	
 	
 	public void clickPoliticaPrivacidadModal() {
@@ -111,7 +111,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	@Step (
 		description="Pulsar el link <b>Política de privacidad</b> del modal",
 		expected="Aparece una nueva página con la política de privacidad y cookies")
-	private Pair<String, String> clickPoliticaPrivacidadModalStep() {
+	private synchronized Pair<String, String> clickPoliticaPrivacidadModalStep() {
 		String parentWindow = driver.getWindowHandle();
 		pageRegistroInitial.clickPoliticaPrivacidadModal();
 		String childWindow = switchToAnotherWindow(driver, parentWindow);

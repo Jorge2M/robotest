@@ -231,9 +231,16 @@ public class PageBase extends PageObjTM {
 	}
 	
 	protected void keyDown(int times) {
+		pushKey(Keys.ARROW_DOWN, times);
+	}
+	protected void keyUp(int times) {
+		pushKey(Keys.ARROW_UP, times);
+	}	
+	private void pushKey(Keys key, int times) {
 		var actions = new Actions(driver);
 		for (int i=0; i<times; i++) {
-			actions.keyDown(Keys.ARROW_DOWN).perform();
+			actions.keyDown(key).perform();
+			waitMillis(100);
 		}
 	}
 	

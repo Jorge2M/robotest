@@ -4,7 +4,6 @@ import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 public class PageRegistroInitialShop extends PageBase {
 
@@ -110,8 +109,17 @@ public class PageRegistroInitialShop extends PageBase {
 	}
 
 	public void inputMovil(String number) {
+		moveToInputMovil();
 		getElement(XPATH_INPUT_MOVIL).sendKeys(number);
-	}	
+	}
+	private void moveToInputMovil() {
+		for (int i=0; i<3; i++) {
+			if (state(Visible, XPATH_INPUT_MOVIL).check()) {
+				return;
+			}
+			keyUp(5);
+		}
+	}
 	
 	public void inputBirthDate(String birthdate) {
 		getElement(XPATH_INPUT_BIRTHDATE).sendKeys(birthdate);
@@ -140,16 +148,27 @@ public class PageRegistroInitialShop extends PageBase {
 	public void clickPoliticaPrivacidad() {
 		click(XPATH_LINK_POLITICA_PRIVACIDAD).exec();
 	}
-	public boolean isModalPoliticaPrivacidadVisible() {
-		return state(Visible, getXPathModalPoliticaPrivacidad()).check();
+	public boolean isModalPoliticaPrivacidadVisible(int seconds) {
+		return state(Visible, getXPathModalPoliticaPrivacidad()).wait(seconds).check();
 	}
 	public boolean isModalPoliticaPrivacidadInvisible(int seconds) {
 		return state(Invisible, getXPathModalPoliticaPrivacidad()).wait(seconds).check();
 	}	
 	public void clickPoliticaPrivacidadModal() {
-		click(getXPathLinkPoliticaPrivacidad()).type(javascript).exec();
+		click(getXPathLinkPoliticaPrivacidad()).exec();
 	}
 	public void clickCondicionesVenta() {
 		click(XPATH_LINK_CONDICIONES_VENTA).exec();
+	}
+	public void keyDown(int times) {
+		clickModalContentCorner();
+		super.keyDown(times);
+	}
+	public void keyUp(int times) {
+		clickModalContentCorner();
+		super.keyUp(times);
+	}
+	private void clickModalContentCorner() {
+		click(XPATH_MODAL_CONTENT).setX(1).setY(1).exec();
 	}
 }
