@@ -84,13 +84,14 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		expected="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"")	
 	public void clickPoliticaPrivacidad() {
 		pageRegistroInitial.clickPoliticaPrivacidad();
-		if (dataTest.getPais().loyalty()) {
+		//if (dataTest.getPais().loyalty()) {
 			if (pageRegistroInitial.isModalPoliticaPrivacidadInvisible(0)) {
+				waitMillis(500);
 				pageRegistroInitial.clickPoliticaPrivacidad();
 			}
 			checkIsModalPoliticaPrivacidadVisible();
-		}
-		keyDown(2);
+		//}
+		keyDown(5);
 	}
 	@Validation (description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"")
 	public boolean checkIsModalPoliticaPrivacidadVisible() {

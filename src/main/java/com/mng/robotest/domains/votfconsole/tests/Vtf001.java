@@ -34,7 +34,7 @@ public class Vtf001 extends TestBase {
 	
 	private String searchForArticleAvailable(int numProdsMax, ConsolaVotfSteps consolaVotfSteps, WebDriver driver) 
 			throws Exception {
-		List<Article> listArticles = getArticlesAvailable(numProdsMax, driver);
+		var listArticles = getArticlesAvailable(numProdsMax, driver);
 		String idArticle = listArticles.get(0).getArticleId();
 		consolaVotfSteps.inputArticleAndTiendaDisp(idArticle, "00011459");
 		consolaVotfSteps.consultarTiposEnvio();

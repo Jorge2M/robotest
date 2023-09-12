@@ -19,13 +19,17 @@ public class PageMisDatosSteps extends StepBase {
 	public ChecksTM validaIsPage (String usuarioReg) {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
+		boolean isPage = pageMisDatos.isPage(seconds);
 		checks.add(
 			"Aparece una página con el la cabecera \"Mis datos\" (esperamos hasta " + seconds + " segundos)",
-			pageMisDatos.isPage(seconds), Warn);
+			isPage, Warn);
 		
-		checks.add(
-			"El campo de email contiene " + usuarioReg,
-			pageMisDatos.getValueEmailInput().toUpperCase().compareTo(usuarioReg.toUpperCase())==0, Warn);
+		if (isPage) {
+			checks.add(
+				"El campo de email contiene " + usuarioReg,
+				pageMisDatos.getValueEmailInput().toUpperCase().compareTo(usuarioReg.toUpperCase())==0, 
+				Warn);
+		}
 
 		return checks;
 	}

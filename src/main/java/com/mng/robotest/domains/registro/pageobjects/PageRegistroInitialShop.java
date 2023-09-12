@@ -4,6 +4,7 @@ import com.mng.robotest.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 public class PageRegistroInitialShop extends PageBase {
 
@@ -146,7 +147,7 @@ public class PageRegistroInitialShop extends PageBase {
 		return state(Invisible, getXPathModalPoliticaPrivacidad()).wait(seconds).check();
 	}	
 	public void clickPoliticaPrivacidadModal() {
-		click(getXPathLinkPoliticaPrivacidad()).exec();
+		click(getXPathLinkPoliticaPrivacidad()).type(javascript).exec();
 	}
 	public void clickCondicionesVenta() {
 		click(XPATH_LINK_CONDICIONES_VENTA).exec();
