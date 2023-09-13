@@ -53,4 +53,17 @@ public class PageLandingSteps extends StepBase {
 			!state(Present, By.xpath("//error"), driver).check(), Warn);
 		return checks;
 	}	
+	
+	@Validation (
+		description="No es visible el comms header banner de Loyalty")
+	public boolean isInvisibleCommsHeaderBannerLoyalty(int seconds) {
+		return !pageLanding.isVisibleCommsHeaderBannerLoyalty(seconds);
+	}	
+
+	@Validation (
+		description="No es visible ningún elemento de Loyalty")
+	public boolean isInvisibleAnyElementLoyalty() {
+		return !pageLanding.isVisibleAnyElementLoyalty();
+	}	
+
 }

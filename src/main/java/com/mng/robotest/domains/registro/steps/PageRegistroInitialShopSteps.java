@@ -28,7 +28,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	private ChecksTM checkRadioPubli() {
 		var checks = ChecksTM.getNew();
 		boolean isSelectedPubli = pageRegistroInitial.isSelectedCheckboxGivePromotions();
-		if (dataTest.getPais().getRegister().ispubli()) {
+		if (dataTest.getPais().getRegister().isPubli()) {
 		  	checks.add(
 				"Sí está seleccionado el radiobox de publicidad",
 				isSelectedPubli);

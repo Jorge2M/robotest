@@ -32,6 +32,14 @@ public class Loyalty {
 	public void LOY004_History_Help() throws Exception {
 		new Loy004().execute();
 	}	
+	
+	@Test (
+		groups={"Loyalty", "Canal:desktop,mobile_App:outlet"},
+		description="Acceso a la Landing y comprobación de que no existen referencias a Loyalty")
+	public void LOY006_Outlet_without_Loyalty() throws Exception {
+		new Loy006().execute();
+	}	
+	
 
 //  Se ha desactivado la operativa de transferencia de Likes
 //	@Test (

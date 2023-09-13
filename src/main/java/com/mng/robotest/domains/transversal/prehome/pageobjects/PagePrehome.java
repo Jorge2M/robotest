@@ -11,11 +11,11 @@ import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.domains.transversal.acceptcookies.pageobjects.SectionCookies;
 import com.mng.robotest.domains.transversal.acceptcookies.steps.SectionCookiesSteps;
+import com.mng.robotest.domains.transversal.browser.LocalStorageMango;
 import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
-import com.mng.robotest.test.pageobject.utils.LocalStorage;
 import com.mng.robotest.test.utils.testab.TestABactive;
 
 import static com.mng.robotest.domains.transversal.acceptcookies.pageobjects.ModalSetCookies.SectionConfCookies.*;
@@ -75,7 +75,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	
 	public void selecionPais() {
 		state(Present, XPATH_SELECTOR_PAISES).wait(5).check();
-		setInitialModalsOff();
+		new LocalStorageMango().setInitialModalsOff();
 		if (!isPaisSelected()) {
 			unfoldCountrys();
 			inputAndSelectCountry();
@@ -192,15 +192,6 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		modalSetCookiesSteps.saveConfiguration();
 	}	
 	
-	protected void setInitialModalsOff() {
-		//Damos de alta la cookie de newsLetter porque no podemos gestionar correctamente el cierre 
-		//del modal en la página de portada (es aleatorio y aparece en un intervalo de 0 a 5 segundos)
-		var localStorage = new LocalStorage(driver);
-		localStorage.setItemInLocalStorage("modalRegistroNewsletter", "0");
-		localStorage.setItemInLocalStorage("modalRegistroNewsletterImpacts", "0");
-		localStorage.setItemInLocalStorage("modalAdhesionLoyalty", "true");
-		localStorage.setItemInLocalStorage("modalSPShown", "1");
-		localStorage.setItemInLocalStorage("MangoShopModalIPConfirmed", "ES-es__2");
-	}
+	
 
 }

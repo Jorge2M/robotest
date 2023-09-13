@@ -25,6 +25,9 @@ public class PageLanding extends PageBase {
 	private static final String XPATH_EDIT_ITEM = "//div[@class[contains(.,'item-edit')] and @data-id]";
 	private static final String XPATH_MAP_T1 = "//map[@name[contains(.,'item_')]]/..";
 	private static final String XPATH_MAP_T2 = "//img[@class[contains(.,'responsive')] and @hidefocus='true']";
+	private static final String XPATH_LOYALTY_ELEMENT = "//*[@data-testid[contains(.,'Likes')] or @id[contains(.,'Likes')]]";
+		
+	private CommsHeaderBanner commsHeaderBanner = new CommsHeaderBanner();
 
 	public boolean isPage() {
 		return isPageUntil(0);
@@ -185,4 +188,12 @@ public class PageLanding extends PageBase {
 		return state(Present, xpathMainContent).check();
 	}
 	
+	public boolean isVisibleCommsHeaderBannerLoyalty(int seconds) {
+		return commsHeaderBanner.isHeaderBannerMangoLikesYou(seconds);
+	}
+	
+	public boolean isVisibleAnyElementLoyalty() {
+		return state(Visible, XPATH_LOYALTY_ELEMENT).check();
+	}
+
 }

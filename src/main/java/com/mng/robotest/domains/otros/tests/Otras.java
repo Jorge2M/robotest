@@ -24,7 +24,7 @@ public class Otras {
 	public void OTR003_cambioPais() throws Exception {
 		new Otr003().execute();
 	}
-
+	
 	@Test (
 		groups={"Acceso_Japon", "Canal:desktop_App:shop"}, 
 		description="Acceso al país Japón desde la preHome y comprobación de que redirige a la shop específica de este país")
