@@ -45,7 +45,7 @@ import com.mng.robotest.repository.usuarios.UserShop;
 import com.mng.robotest.test.beans.AccesoEmpl;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.beans.Pago.TypePago;
+import com.mng.robotest.test.beans.TypePago;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.datastored.DataPedido;
 import com.mng.robotest.test.generic.UtilsMangoTest;

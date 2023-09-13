@@ -7,7 +7,7 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.domains.compra.pageobjects.pci.SecTarjetaPci;
 import com.mng.robotest.test.beans.Pago;
-import com.mng.robotest.test.beans.Pago.TypePago;
+import com.mng.robotest.test.beans.TypePago;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 

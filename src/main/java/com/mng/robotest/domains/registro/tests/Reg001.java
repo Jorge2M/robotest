@@ -13,7 +13,6 @@ import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.data.DataMango;
 import com.mng.robotest.test.data.PaisShop;
-import com.mng.robotest.test.utils.UtilsTest;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
@@ -71,11 +70,7 @@ public class Reg001 extends TestBase {
 	private void selectLinkPoliticaPrivacidad() {
 		pageRegistroInitialSteps.clickPoliticaPrivacidad();
 		pageRegistroInitialSteps.clickPoliticaPrivacidadModal();
-		
-		//TODO a fecha 03-08-2023 todavía está en CloudTest
-		if (!UtilsTest.todayBeforeDate("2023-08-22")) { 
-			pageRegistroInitialSteps.clickCondicionesVenta();
-		}
+		pageRegistroInitialSteps.clickCondicionesVenta();
 	}
 	
 	private void inputInitialDataAndClickCreate() {

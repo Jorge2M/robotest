@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.domains.registro.pageobjects.PageRegistroInitialShop;
@@ -12,12 +13,33 @@ public class PageRegistroInitialShopSteps extends StepBase {
 
 	private final PageRegistroInitialShop pageRegistroInitial = new PageRegistroInitialShop();
 	
+	public void checkPage(int seconds) {
+		checkIsPage(seconds);
+		checkRadioPubli();
+	}
+	
 	@Validation (
 		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)")
 	public boolean checkIsPage(int seconds) {
 		return pageRegistroInitial.isPage(seconds);
 	}
 
+	@Validation
+	private ChecksTM checkRadioPubli() {
+		var checks = ChecksTM.getNew();
+		boolean isSelectedPubli = pageRegistroInitial.isSelectedCheckboxGivePromotions();
+		if (dataTest.getPais().getRegister().ispubli()) {
+		  	checks.add(
+				"Sí está seleccionado el radiobox de publicidad",
+				isSelectedPubli);
+		} else {
+		  	checks.add(
+				"No está seleccionado el radiobox de publicidad",
+				!isSelectedPubli);
+		}
+		return checks;
+	}		
+	
 	@Step (
 		description=
 			"Introducir los datos:<br>" + 
@@ -32,7 +54,9 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		pageRegistroInitial.inputPassword(data.getPassword());
 		pageRegistroInitial.inputEmail(data.getEmail());
 		if (data.isCheckPromotions()) {
-			pageRegistroInitial.clickRadioGivePromotions();
+			pageRegistroInitial.enableCheckBoxGivePromotions();
+		} else {
+			pageRegistroInitial.disableCheckBoxGivePromotions();
 		}
 	}
 	
@@ -41,7 +65,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		expected="Aparece la página de personalización del registro")
 	public void clickCreateAccountButton() {
 		pageRegistroInitial.clickCreateAccountButton();
-		new PageRegistroPersonalizacionShopSteps().checkIsPageUntil(10);
+		new PageRegistroPersonalizacionShopSteps().checkPage(10);
 		checksDefault();
 	}	
 

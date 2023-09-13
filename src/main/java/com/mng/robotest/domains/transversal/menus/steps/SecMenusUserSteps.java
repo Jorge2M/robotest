@@ -49,12 +49,12 @@ public class SecMenusUserSteps extends StepBase {
 		if (channel.isDevice()) {
 			new PageLogin().clickTabRegistrate();
 		}
-		if (!dataTest.getPais().newregister()) {
+		if (!dataTest.getPais().isNewRegister()) {
 			var pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
-			pageRegistroIniSteps.validaIsPageUntil(5);
+			pageRegistroIniSteps.checkIsPage(5);
 			pageRegistroIniSteps.validaIsRGPDVisible();
 		} else {
-			new PageRegistroInitialShopSteps().checkIsPage(5);
+			new PageRegistroInitialShopSteps().checkPage(5);
 		}
 		checksDefault();
 	}

@@ -24,10 +24,10 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	
 	@Validation (
 		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)")
-	public boolean validaIsPageUntil(int seconds) {
+	public boolean checkIsPage(int seconds) {
 		return pageRegistroIni.isPageUntil(seconds);
 	}
-
+	
 	@Step (
 		description=
 			"Introducir:<br>" + 

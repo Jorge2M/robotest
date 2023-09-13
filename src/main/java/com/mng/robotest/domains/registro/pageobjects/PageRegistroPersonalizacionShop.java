@@ -4,10 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.test.beans.Linea;
+import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 
 public class PageRegistroPersonalizacionShop extends PageBase {
 
@@ -23,8 +24,7 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 		}
 	}
 	
-	public static final List<LineaType> ALL_LINEAS = Arrays.asList(
-			LineaType.SHE, LineaType.HE, LineaType.KIDS, LineaType.HOME); 
+	public static final List<LineaType> ALL_LINEAS = Arrays.asList(SHE, HE, KIDS, HOME); 
 	
 	private static final String XPATH_MODAL_CONTENT = "//div[@id[contains(.,'registerModal')]]";
 	private static final String XPATH_INPUT_NOMBRE = "//input[@id='name']";
@@ -51,13 +51,16 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	public boolean isPageUntil(int seconds) {
 		return state(Present, XPATH_INPUT_NOMBRE).wait(seconds).check(); 
 	}
+	public boolean isPostalCodeVisible() {
+		return state(Present, XPATH_INPUT_POSTALCODE).check();
+	}
 	
 	public void inputName(String name) {
 		getElement(XPATH_INPUT_NOMBRE).sendKeys(name);
 	}
 	
 	public void inputPostalCode(String postalCode) {
-		state(Visible, XPATH_INPUT_POSTALCODE).wait(2).check();
+		state(Present, XPATH_INPUT_POSTALCODE).wait(2).check();
 		getElement(XPATH_INPUT_POSTALCODE).sendKeys(postalCode);
 	}
 	

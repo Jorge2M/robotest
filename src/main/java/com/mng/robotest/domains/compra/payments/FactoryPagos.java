@@ -29,7 +29,7 @@ import com.mng.robotest.domains.compra.payments.tmango.PagoTMango;
 import com.mng.robotest.domains.compra.payments.trustpay.PagoTrustpay;
 import com.mng.robotest.domains.compra.payments.votftpv.PagoTpvVotf;
 import com.mng.robotest.domains.compra.payments.yandex.PagoYandex;
-import com.mng.robotest.test.beans.Pago.TypePago;
+import com.mng.robotest.test.beans.TypePago;
 import com.mng.robotest.test.datastored.DataPago;
 
 public class FactoryPagos {

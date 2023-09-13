@@ -186,7 +186,7 @@ public class LTPageRegistroInitialShop extends LegalTextsPage {
 		if (pais==TURQUIA.getPais()) {
 			return TURQUIA_OLDREGISTER;
 		}		
-		if (pais.newregister()) {
+		if (pais.isNewRegister()) {
 			if (pais.loyalty()) {
 				return LOYALTY_NEWREGISTER;
 			}

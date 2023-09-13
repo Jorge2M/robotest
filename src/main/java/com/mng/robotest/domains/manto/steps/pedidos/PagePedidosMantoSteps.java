@@ -9,7 +9,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.compra.steps.envio.DataDeliveryPoint;
 import com.mng.robotest.domains.manto.pageobjects.PageDetalleCliente;
@@ -47,13 +46,6 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 			"Aparece un solo pedido",
 			pagePedidos.getNumLineas()==1, Warn);
 		
-		if (app!=AppEcom.outlet) {
-		 	checks.add(
-				"En la columna " + TPV.getTextoColumna() + " Aparece el Tpv asociado: " + dataPedido.getPago().getTpv().getId(),
-				pagePedidos.isPresentDataInPedido(TPV, dataPedido.getPago().getTpv().getId(), TypeDetalle.PEDIDO, 0), 
-				Warn);
-		}
-
 	 	checks.add(
 			"En la columna " + EMAIL.getTextoColumna() + " aparece el email asociado: " + dataPedido.getEmailCheckout(),
 			pagePedidos.isPresentDataInPedido(EMAIL, dataPedido.getEmailCheckout(), TypeDetalle.PEDIDO, 0), 

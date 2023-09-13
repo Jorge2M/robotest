@@ -6,7 +6,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
-import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepMantoBase;
 import com.mng.robotest.domains.compra.steps.envio.DataDeliveryPoint;
 import com.mng.robotest.domains.manto.pageobjects.PageDetalleCliente;
@@ -44,13 +43,6 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	 	checks.add(
 			"Aparece un solo pedido",
 			pagePedidos.getNumLineas()==1, Warn);
-		
-	 	//En el caso de Outlet no tenemos la información del TPV que toca
-	 	if (app!=AppEcom.outlet) {
-		 	checks.add(String.format(
-		 		"En la columna %s Aparece el Tpv asociado: %s", TPV.getTextoColumna(), dataPedido.getPago().getTpv().getId()),
-				pagePedidos.isPresentDataInPedido(TPV, dataPedido.getPago().getTpv().getId(), PEDIDO, 0), Warn);
-	 	}
 		
 	 	checks.add(String.format(
 	 		"En la columna %s aparece el email asociado: %s", EMAIL.getTextoColumna(), dataPedido.getEmailCheckout()),

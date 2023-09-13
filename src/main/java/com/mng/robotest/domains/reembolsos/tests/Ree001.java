@@ -32,9 +32,9 @@ public class Ree001 extends TestBase {
 				.getCredentials(SecretType.SHOP_STANDARD_USER)
 				.getPassword());
 
-		if (dataTest.getPais().getEmailuser()!=null && dataTest.getPais().getPassuser()!=null) {
+		if (dataTest.getPais().getEmailuser()!=null /*&& dataTest.getPais().getPassuser()!=null*/) {
 			dataTest.setUserConnected(dataTest.getPais().getEmailuser());
-			dataTest.setPasswordUser(dataTest.getPais().getPassuser());
+			//dataTest.setPasswordUser(dataTest.getPais().getPassuser());
 		}
 			
 		accessAndLogin();

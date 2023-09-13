@@ -2,7 +2,6 @@ package com.mng.robotest.domains.manto.pageobjects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -95,17 +94,14 @@ public class PageDetallePedido extends PageBase {
 		return (estado.contains("-1 - NULL"));
 	}
 	
-	public boolean isStateInTpvStates(DataPedido dataPedido) {
-		boolean estadoEncontrado = false;
-		var st = new StringTokenizer(dataPedido.getPago().getTpv().getEstado(), ";");
+	public boolean isCorrectState(DataPedido dataPedido) {
 		String estadoPant = getEstadoPedido();
-		while(st.hasMoreTokens()) {
-			String estado = st.nextToken();
+		for (Integer estado : dataPedido.getPago().getEstados()) {
 			if (estadoPant.contains(estado + " -")) {
-				estadoEncontrado = true;
+				return true;
 			}
 		}
-		return estadoEncontrado;
+		return false;
 	}
 
 	public void gotoListaPedidos() {

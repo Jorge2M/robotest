@@ -21,7 +21,7 @@ import com.mng.robotest.domains.compra.steps.envio.SecMetodoEnvioSteps;
 import com.mng.robotest.test.beans.AccesoEmpl;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.beans.Pago.TypePago;
+import com.mng.robotest.test.beans.TypePago;
 import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.generic.ChequeRegalo;
 import com.mng.robotest.test.generic.UtilsMangoTest;
@@ -203,7 +203,7 @@ public class CheckoutSteps extends StepBase {
 	@Step (
 		description="<b>#{nombrePagoTpvVOTF}</b>: no clickamos el icono pues no existe", 
 		expected="No aplica")
-	public void noClickIconoVotf(@SuppressWarnings("unused") String nombrePagoTpvVOTF) throws Exception {		
+	public void noClickIconoVotf(String nombrePagoTpvVOTF) throws Exception {		
 		//No hacemos nada pues el pago con TPV en VOTF no tiene icono ni pasarelas asociadas
 	}
 	
@@ -271,7 +271,7 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation (
 		description="Se hace visible el texto bajo el método de pago: #{nombrePago} (lo esperamos hasta #{seconds} segundos)")
-	private boolean checkIsVisibleTextUnderPayment(@SuppressWarnings("unused") String nombrePago, Pago pago, int seconds) {
+	private boolean checkIsVisibleTextUnderPayment(String nombrePago, Pago pago, int seconds) {
 		return (pageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, seconds));
 	}
 	

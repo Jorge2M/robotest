@@ -34,7 +34,6 @@ public class Shoponline implements Serializable {
 				lineasToTest.add(linea);
 			}
 		}
-		
 		return lineasToTest;
 	}
 	

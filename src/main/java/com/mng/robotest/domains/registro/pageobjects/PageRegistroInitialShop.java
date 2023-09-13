@@ -12,13 +12,13 @@ public class PageRegistroInitialShop extends PageBase {
 	private static final String XPATH_INPUT_EMAIL = XPATH_MODAL_CONTENT + "//input[@data-testid[contains(.,'emailInput')]]";
 	private static final String XPATH_INPUT_PASSWORD = XPATH_MODAL_CONTENT + "//input[@data-testid[contains(.,'passInput')]]";
 	private static final String XPATH_INPUT_BIRTHDATE = "//input[@id='birthdate']";
-	private static final String XPATH_INPUT_MOVIL = XPATH_MODAL_CONTENT + "//input[@id='mobile-number']";
-	private static final String XPATH_RADIO_GIVE_PROMOTIONS = XPATH_MODAL_CONTENT + "//input[@id='newsletter']";
-	private static final String XPATH_LINK_GIVE_PROMOTIONS = XPATH_RADIO_GIVE_PROMOTIONS + "/..//*[@data-testid='mng-link']";	
+	private static final String XPATH_INPUT_MOVIL = XPATH_MODAL_CONTENT + "//input[@data-testid[contains(.,'phoneInput')]]";
+	private static final String XPATH_CHECKBOX_GIVE_PROMOTIONS = XPATH_MODAL_CONTENT + "//input[@data-testid[contains(.,'subscribeCheckbox.subscribeToNewsletter')]]";
+	private static final String XPATH_LINK_GIVE_PROMOTIONS = XPATH_CHECKBOX_GIVE_PROMOTIONS + "/..//*[@data-testid='mng-link']";	
 	private static final String XPATH_RADIO_CONSENT_PERSONAL_INFORMATION = "//input[@id='createAccountLegal']";
 	private static final String XPATH_LINK_CONSENT_PERSONAL_INFORMATION = XPATH_RADIO_CONSENT_PERSONAL_INFORMATION + "/..//*[@data-testid='mng-link']";
 	private static final String XPATH_PERSONAL_INFORMATION_INFO = "//div[@id='createAccountLegal_description']";	
-	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//div[@class='mng-form-buttons']/button[@type='submit']";	
+	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//button[@data-testid[contains(.,'submitButton.submit')]]";	
 	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = XPATH_MODAL_CONTENT + "/div/div/p/*[@data-testid='mng-link']";
 	private static final String XPATH_LINK_CONDICIONES_VENTA = XPATH_MODAL_CONTENT + "//*[@data-testid='mng-link' and @href[contains(.,'terms-and-conditions')]]";
 
@@ -124,10 +124,24 @@ public class PageRegistroInitialShop extends PageBase {
 	public void inputBirthDate(String birthdate) {
 		getElement(XPATH_INPUT_BIRTHDATE).sendKeys(birthdate);
 	}
-	
-	public void clickRadioGivePromotions() {
-		click(XPATH_RADIO_GIVE_PROMOTIONS).exec();
+
+	public void enableCheckBoxGivePromotions() {
+		if (!isSelectedCheckboxGivePromotions()) {
+			clickCheckBoxGivePromotions();
+		}
 	}
+	public void disableCheckBoxGivePromotions() {
+		if (isSelectedCheckboxGivePromotions()) {
+			clickCheckBoxGivePromotions();
+		}		
+	}	
+	private void clickCheckBoxGivePromotions() {
+		click(XPATH_CHECKBOX_GIVE_PROMOTIONS).exec();
+	}
+	public boolean isSelectedCheckboxGivePromotions() {
+		return getElement(XPATH_CHECKBOX_GIVE_PROMOTIONS).isSelected();
+	}
+	
 	public void clickLinkGivePromotions() {
 		click(XPATH_LINK_GIVE_PROMOTIONS).exec();
 	}

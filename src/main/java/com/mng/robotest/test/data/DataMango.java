@@ -2,12 +2,15 @@ package com.mng.robotest.test.data;
 
 import java.sql.Timestamp;
 
+import com.mng.robotest.domains.base.PageBase;
+
 
 public class DataMango {
 	
 	private DataMango() {}
 	
 	public synchronized static String getEmailNonExistentTimestamp() {
+		PageBase.waitMillis(1);
 		java.util.Date date = new java.util.Date();
 		String timestamp =  new Timestamp(date.getTime()).toString().trim()
 				.replace(":", "")

@@ -7,7 +7,7 @@ import java.util.List;
 import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.beans.Pago.TypePago;
+import com.mng.robotest.test.beans.TypePago;
 import com.github.jorge2m.testmaker.conf.Channel;
 
 public class PagoGetter {

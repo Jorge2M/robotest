@@ -65,7 +65,7 @@ public class PaisGetter {
 		if (charactersAllCountries.contains(countries)) {
 			return getAllCountries();
 		}
-		List<String> listCountries = Arrays.asList(countries.split(","));
+		var listCountries = Arrays.asList(countries.split(","));
 		return (from(listCountries));
 	}
 	
@@ -96,12 +96,10 @@ public class PaisGetter {
 	}
 
 	private static Response getXmlFilteredByCountries() throws JAXBException {
-		Response response;
 		JAXBContext jaxbContext = JAXBContext.newInstance(Response.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 		InputStream countriesXmlStream = PaisGetter.class.getResourceAsStream("/" + NAME_FILE_COUNTRIES_XML);
-		response = (Response)jaxbUnmarshaller.unmarshal(countriesXmlStream);
-		return response;
+		return (Response)jaxbUnmarshaller.unmarshal(countriesXmlStream);
 	}
 
 }

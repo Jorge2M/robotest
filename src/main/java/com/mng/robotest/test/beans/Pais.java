@@ -10,7 +10,6 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.test.beans.Pago.TypePago;
 import com.mng.robotest.test.utils.LevelPais;
 import com.mng.robotest.test.utils.PagoGetter;
 import com.mng.robotest.test.utils.UtilsTest;
@@ -43,9 +42,8 @@ public class Pais implements Serializable {
 	String telefono;
 	String dni;
 	String tiendas_online;
-	String newregister="";
 	
-	Tienda tienda = new Tienda();
+	Register register = new Register();
 	Shoponline shoponline = new Shoponline();
 	
 	@XmlElement(name="pago") 
@@ -54,7 +52,6 @@ public class Pais implements Serializable {
 	String multidireccion;
 	String galeriakondo;
 	String emailuser;
-	String passuser;
 	String mobiluser;
 	
 	@XmlElement(name="metodopago") 
@@ -221,15 +218,6 @@ public class Pais implements Serializable {
 		return listApps;
 	}   
 
-	public boolean newregister() {
-		return this.newregister.compareTo("S")==0;
-	}
-
-	@XmlElement(name="newregister")
-	public void setNewRegister(String newregister) {
-		this.newregister = newregister;
-	}
-
 	public boolean isMisdirecciones(AppEcom app) {
 		if (app!=AppEcom.shop) {
 			return false;
@@ -251,14 +239,14 @@ public class Pais implements Serializable {
 		this.direccharnolatinos = direccharnolatinos;
 	}
 	
-	public Tienda getTienda() {
-		return this.tienda;
+	public Register getRegister() {
+		return this.register;
 	}
 
-	@XmlElement(name="tienda")
-	public void setTienda(Tienda tienda) {
-		this.tienda = tienda;
-	}		
+	@XmlElement(name="register")
+	public void setRegister(Register register) {
+		this.register = register;
+	}	
  
 	public Shoponline getShoponline() {
 		return this.shoponline;
@@ -316,15 +304,6 @@ public class Pais implements Serializable {
 		this.emailuser = emailUserReturn;
 	}
 	
-	public String getPassuser() {
-		return this.passuser;
-	}
-	
-	@XmlElement
-	public void setPassuser(String passuser) {
-		this.passuser = passuser;
-	}
-	
 	public String getMobiluser() {
 		return this.mobiluser;
 	}
@@ -336,6 +315,10 @@ public class Pais implements Serializable {
 	
 	public boolean isPaisTop() {
 		return ("s".compareTo(this.paistop.toLowerCase())==0);
+	}
+	
+	public boolean isNewRegister() {
+		return register.isNewRegister();
 	}
 
 	public boolean isVentaOnline() {
@@ -483,7 +466,6 @@ public class Pais implements Serializable {
 	@Override
 	public String toString() {
 		return "Pais [nombre_pais="+ this.nombre_pais + ", codigo_pais=" + this.codigo_pais + ", listIdiomas=" + this.listIdiomas + ", codpos=" + this.codpos + ", telefono=" + this.telefono + ", dni=" + this.dni +
-				", shop_online=" + ", " + this.tienda + ", " + this.shoponline + 
-				", toString()=" + super.toString() + "]";
+				", " + this.shoponline + ", toString()=" + super.toString() + "]";
 	}
 }

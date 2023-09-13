@@ -19,39 +19,6 @@ public class Pago implements Serializable {
 	
 	private static final long serialVersionUID = -2329928763754362241L;
 
-	public enum TypePago {
-		TARJETA_INTEGRADA, 
-		TARJETA_MANGO, 
-		KREDI_KARTI, 
-		BILLPAY, 
-		PAYPAL, 
-		MERCADOPAGO, 
-		AMAZON, 
-		POSTFINANCE, 
-		TRUSTPAY, 
-		MULTIBANCO, 
-		PAYTRAIL, 
-		DOTPAY, 
-		IDEAL, 
-		EPS,
-		SEPA, 
-		GIROPAY, 
-		SOFORT, 
-		KLARNA,
-		KLARNA_UK,
-		PAYSECURE_QIWI, 
-		ASSIST, 
-		PASARELA_OTRAS, 
-		KCP,
-		CONTRA_REEMBOLSO,
-		BANCONTACT,
-		PROCESS_OUT,
-		YANDEX,
-		PAYMAYA,
-		STORE_CREDIT, 
-		TPV_VOTF
-	}
-	
 	public enum TypeTarj {
 		VISAESTANDAR,
 		VISAD3D,
@@ -100,72 +67,9 @@ public class Pago implements Serializable {
 	String nombre;
 	String namefilter="";
 	String nombremovil="";
-	Tpv tpv = new Tpv();
 	
 	public TypePago getTypePago() {
-		switch (this.type) {
-		case "TMango":
-			return TypePago.TARJETA_MANGO;			
-		case "KrediKarti": 
-			return TypePago.KREDI_KARTI;
-		case "Billpay":
-			return TypePago.BILLPAY;
-		case "Paypal":
-			return TypePago.PAYPAL;			
-		case "Mercadopago":
-			return TypePago.MERCADOPAGO;				
-		case "Amazon":
-			return TypePago.AMAZON;				
-		case "Postfinance":
-			return TypePago.POSTFINANCE;				
-		case "Trustpay":
-			return TypePago.TRUSTPAY;				
-		case "Multibanco":
-			return TypePago.MULTIBANCO;				
-		case "Paytrail":
-			return TypePago.PAYTRAIL;				
-		case "Dotpay":
-			return TypePago.DOTPAY;				
-		case "Ideal":
-			return TypePago.IDEAL;	  
-		case "Eps":
-			return TypePago.EPS;
-		case "Sepa":
-			return TypePago.SEPA;				
-		case "Giropay":
-			return TypePago.GIROPAY;				
-		case "Sofort":
-			return TypePago.SOFORT;	 
-		case "Paymaya":
-			return TypePago.PAYMAYA;
-		case "Klarna":
-			return TypePago.KLARNA;		  
-		case "KlarnaUK":
-			return TypePago.KLARNA_UK;	
-		case "PaysecureQiwi":
-			return TypePago.PAYSECURE_QIWI;				
-		case "Assist":
-			return TypePago.ASSIST;				
-		case "PasarelaOtras":
-			return TypePago.PASARELA_OTRAS;
-		case "KCP":
-			return TypePago.KCP;
-		case "ContraReembolso":
-			return TypePago.CONTRA_REEMBOLSO;
-		case "Bancontact":
-			return TypePago.BANCONTACT;			
-		case "Yandex":
-			return TypePago.YANDEX;				
-		case "storecredit":
-			return TypePago.STORE_CREDIT;
-		case "ProcessOut":
-			return TypePago.PROCESS_OUT;
-		case "tpvvotf":
-			return TypePago.TPV_VOTF;
-		case "TRJintegrada":
-		default:
-			return TypePago.TARJETA_INTEGRADA;
-		}
+		return TypePago.getTypePago(this.type);
 	}
 	
 	@XmlAttribute(name="type")
@@ -259,7 +163,6 @@ public class Pago implements Serializable {
 				}
 			}
 		}
-		
 		return false;
 	}
 	
@@ -599,15 +502,6 @@ public class Pago implements Serializable {
 		this.bankidgiropay = bankidgiropay;
 	}		
 
-	public Tpv getTpv() {
-		return this.tpv;
-	}
-
-	@XmlElement(name="tpv")
-	public void setTpv(Tpv tpv) {
-		this.tpv = tpv;
-	}
-
 	public boolean validoAlmacenMontcada() {
 		return 
 			this.almacenmontcada==null || 
@@ -632,6 +526,10 @@ public class Pago implements Serializable {
 		this.telefqiwi = telefqiwi;
 	}
 	
+	public List<Integer> getEstados() {
+		return getTypePago().getEstados();
+	}
+	
 	public String getNombre(Channel channel, AppEcom app) {
 		if (channel.isDevice() && !(channel==Channel.tablet && app==AppEcom.outlet) && 
 			getNombremovil()!=null && "".compareTo(getNombremovil())!=0) {
@@ -647,11 +545,6 @@ public class Pago implements Serializable {
 		}
 		return nombrePago;
 	}
-	
-//	private boolean isAdyen() {
-//		String numtarj = getNumtarj();
-//		return (numtarj!=null && "".compareTo(numtarj)!=0);
-//	}
 	
 	@Override
 	public String toString() {

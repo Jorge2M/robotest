@@ -75,16 +75,14 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 			pageDetallePedido.isCodPaisPedido(dataPedido.getCodigoPais()), Warn);
 	 	
 		Pago pago = dataPedido.getPago();
-	 	if (pago.getTpv().getEstado()!=null &&
-			pago.getTpv().getEstado().compareTo("")!=0 &&
-			app!=AppEcom.votf) {
+	 	if (!pago.getEstados().isEmpty() && app!=AppEcom.votf) {
 	 		State stateVal = Warn;
 	 		if (pageDetallePedido.isPedidoInStateMenos1NULL()) {
 				stateVal = Defect;
 			}
 		 	checks.add(
-				"Aparece uno de los resultados posibles según el TPV: " + pago.getTpv().getEstado(),
-				pageDetallePedido.isStateInTpvStates(dataPedido), stateVal);
+				"Aparece uno de los resultados posibles del pago: " + pago.getEstados(),
+				pageDetallePedido.isCorrectState(dataPedido), stateVal);
 	 	}
 	 	return checks;
 	}
