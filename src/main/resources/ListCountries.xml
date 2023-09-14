@@ -1494,9 +1494,10 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
+<!-- 	
 <pago 
 	type="Dotpay" tiendas="shop,outlet" empleado="n"
-	nombre="DOTPAY" testpasarela='s' testpago='s'></pago>
+	nombre="DOTPAY" testpasarela='s' testpago='s'></pago>-->
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
@@ -3613,10 +3614,9 @@ where
 <telefono>62836675</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<register nuevo="N" cpost="N" publi="S"/>
+<register nuevo="S" cpost="N" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea 		  id="HE"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
 	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
 </linea>
@@ -4753,18 +4753,35 @@ where
 <codigo_pais>284</codigo_pais>
 <codigo_alf>BJ</codigo_alf>
 <idioma acceso="bj">FR</idioma>
-<codpos>08720</codpos>
-<telefono>665015122</telefono>
-<dni>34763592N</dni>
-<tiendas_online></tiendas_online>
+<idioma acceso="bj-en">IN</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>204</codpos>
+<telefono>67844110</telefono>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="N" cpost="S" publi="N"/>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2" extended='s'/>
-<linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
-<linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
 </pais>
 
 <pais nombre_pais="Burkina" codigo="236">
@@ -4794,6 +4811,41 @@ where
 <loyalty>N</loyalty>
 <codpos>00000</codpos>
 <telefono>651234567</telefono>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="N" cpost="S" publi="N"/>
+<shoponline>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+</shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
+</pais>
+
+<pais nombre_pais="Chad" codigo="244">
+<codigo_pais>244</codigo_pais>
+<codigo_alf>TD</codigo_alf>
+<idioma acceso="td">FR</idioma>
+<idioma acceso="td-en">IN</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>109</codpos>
+<telefono>63221967</telefono>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="N" cpost="S" publi="N"/>
 <shoponline>
@@ -4912,6 +4964,40 @@ where
 <multidireccion>N</multidireccion>
 </pais>
 
+<pais nombre_pais="Ethiopia" codigo="334">
+<codigo_pais>334</codigo_pais>
+<codigo_alf>ET</codigo_alf>
+<idioma acceso="et">IN</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>1000</codpos>
+<telefono>911234567</telefono>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="N" cpost="S" publi="N"/>
+<shoponline>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+</shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
+</pais>
+
 <pais nombre_pais="France (La Réunion)" codigo="372">
 <codigo_pais>372</codigo_pais>
 <codigo_alf>RE</codigo_alf>
@@ -5023,6 +5109,113 @@ where
 <multidireccion>N</multidireccion>
 </pais>
 
+<pais nombre_pais="Madagascar" codigo="370">
+<codigo_pais>370</codigo_pais>
+<codigo_alf>MG</codigo_alf>
+<idioma acceso="mg">IN</idioma>
+<idioma acceso="mg-fr">FR</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>105</codpos>
+<telefono>342031030</telefono>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="N" cpost="S" publi="N"/>
+<shoponline>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+</shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
+</pais>
+
+<pais nombre_pais="Malawi" codigo="386">
+<codigo_pais>386</codigo_pais>
+<codigo_alf>MW</codigo_alf>
+<idioma acceso="mw">IN</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>101100</codpos>
+<telefono>996705984</telefono>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="N" cpost="S" publi="N"/>
+<shoponline>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+</shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="Paypal" tiendas="shop,outlet" empleado="n"
+	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
+<multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
+</pais>
+
+<pais nombre_pais="Mali" codigo="232">
+<codigo_pais>232</codigo_pais>
+<codigo_alf>ML</codigo_alf>
+<idioma acceso="ml">FR</idioma>
+<idioma acceso="ml-en">IN</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>376</codpos>
+<telefono>74442222</telefono>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="N" cpost="S" publi="N"/>
+<shoponline>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+</shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
+</pais>
+
 <pais nombre_pais="Maurice" codigo="373">
 <codigo_pais>373</codigo_pais>
 <codigo_alf>MU</codigo_alf>
@@ -5062,6 +5255,44 @@ where
 <multidireccion>N</multidireccion>
 </pais>
 
+<pais nombre_pais="Mozambique" codigo="366">
+<codigo_pais>366</codigo_pais>
+<codigo_alf>MZ</codigo_alf>
+<idioma acceso="mz">PO</idioma>
+<idioma acceso="mz-en">IN</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>1100</codpos>
+<telefono>843339993</telefono>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="N" cpost="S" publi="N"/>
+<shoponline>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+</shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="Paypal" tiendas="shop,outlet" empleado="n"
+	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
+<multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
+</pais>
+
 <pais nombre_pais="Nigeria" codigo="288">
 <codigo_pais>288</codigo_pais>
 <codigo_alf>NG</codigo_alf>
@@ -5078,6 +5309,41 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+</pais>
+
+<pais nombre_pais="Rwanda" codigo="324">
+<codigo_pais>324</codigo_pais>
+<codigo_alf>RW</codigo_alf>
+<idioma acceso="rw">IN</idioma>
+<idioma acceso="rw-fr">FR</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>672</codpos>
+<telefono>788301021</telefono>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="N" cpost="S" publi="N"/>
+<shoponline>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+</shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
 </pais>
 
 <pais nombre_pais="Sénégal" codigo="248">
@@ -5143,6 +5409,40 @@ where
 <multidireccion>N</multidireccion>
 </pais>
 
+<pais nombre_pais="Tanzania" codigo="352">
+<codigo_pais>352</codigo_pais>
+<codigo_alf>TZ</codigo_alf>
+<idioma acceso="tz">IN</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>0255</codpos>
+<telefono>752848220</telefono>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="N" cpost="S" publi="N"/>
+<shoponline>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+</shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
+</pais>
+
 <!-- <pais nombre_pais="Tunisia" codigo="212">-->
 <pais nombre_pais="Tunisie" codigo="212">
 <codigo_pais>212</codigo_pais>
@@ -5162,5 +5462,108 @@ where
 </shoponline>
 <multidireccion>N</multidireccion>
 </pais>
+
+<pais nombre_pais="Uganda" codigo="350">
+<codigo_pais>350</codigo_pais>
+<codigo_alf>UG</codigo_alf>
+<idioma acceso="ug">IN</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>1595</codpos>
+<telefono>774699282</telefono>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="N" cpost="S" publi="N"/>
+<shoponline>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+</shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
+</pais>
+
+<pais nombre_pais="Zambia" codigo="378">
+<codigo_pais>378</codigo_pais>
+<codigo_alf>ZM</codigo_alf>
+<idioma acceso="zm">IN</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>10101</codpos>
+<telefono>761990075</telefono>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="N" cpost="S" publi="N"/>
+<shoponline>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+</shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
+</pais>
+
+<pais nombre_pais="Zimbabwe" codigo="382">
+<codigo_pais>382</codigo_pais>
+<codigo_alf>ZW</codigo_alf>
+<idioma acceso="zw">IN</idioma>
+<paistop>N</paistop>
+<loyalty>N</loyalty>
+<codpos>08720</codpos>
+<telefono>773443049</telefono>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="N" cpost="S" publi="N"/>
+<shoponline>
+<linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="banners"   contentMovil="sublineas">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="vacio"     contentMovil="menus2"/>
+</linea>
+</shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
+</pais>
+
 </continente>
 </Response>

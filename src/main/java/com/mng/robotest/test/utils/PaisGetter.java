@@ -91,7 +91,6 @@ public class PaisGetter {
 				listCountrysToReturn.add(itPaises.next());
 			}
 		}
-
 		return listCountrysToReturn;
 	}
 

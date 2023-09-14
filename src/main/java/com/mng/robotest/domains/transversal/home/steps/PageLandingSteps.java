@@ -11,6 +11,7 @@ import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.transversal.home.pageobjects.PageLanding;
 import com.mng.robotest.domains.transversal.menus.steps.MenuSteps;
+import com.mng.robotest.test.beans.Pais;
 
 public class PageLandingSteps extends StepBase {
 
@@ -26,7 +27,7 @@ public class PageLandingSteps extends StepBase {
 	}
 	
 	public void validateIsPageWithCorrectLineas() {
-		checkMainContentPais();
+		checkMainContentPais(dataTest.getPais());
 		validateIsPageOk();
 		if (!channel.isDevice()) {
 			new MenuSteps().checkLineasCountry();
@@ -36,7 +37,7 @@ public class PageLandingSteps extends StepBase {
 	@Validation (
 		description="Aparece el div de contenido asociado al país #{pais.getNombre_pais()} (#{pais.getCodigo_pais()})",
 		level=Warn)
-	public boolean checkMainContentPais() {
+	public boolean checkMainContentPais(Pais pais) {
 		return pageLanding.isPresentMainContent();
 	}
 	

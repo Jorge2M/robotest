@@ -19,7 +19,7 @@ public enum CodIdioma {
 	NL("Nederlands"),
 	NO("Norsk"),
 	PL("Polski"),
-	PO("Português"),
+	PO("Portugues"),
 	RO("Româna"),
 	RU("Русский"),
 	SE("Svenska"),

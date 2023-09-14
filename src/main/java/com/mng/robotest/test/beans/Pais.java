@@ -190,6 +190,9 @@ public class Pais implements Serializable {
 	}		
 	
 	public String getDni() {
+		if (this.dni==null) {
+			return "";
+		}
 		return this.dni;
 	}
 

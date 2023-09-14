@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.testng.ITestContext;
@@ -160,7 +159,7 @@ public class CheckoutFlow extends StepBase {
 			page1IdentCheckoutSteps.inputEmailAndContinue(emailCheckout, dataPago.getFTCkout().emailExists);
 		}
 		
-		Map<String, String> datosRegistro =
+		var datosRegistro =
 				page2IdentCheckoutSteps.inputDataPorDefecto(emailCheckout, validaCharNoLatinos);
 		
 		dataPago.setDatosRegistro(datosRegistro);

@@ -24,6 +24,7 @@ public enum PaisShop {
 	BENIN("284", "Bénin"),
 	CAMBODIA("696"),
 	CAMEROUN("302"),
+	CONGO("318"),
 	CANADA("404"),
 	CHILE("512"),
 	COLOMBIA("480"),
@@ -45,6 +46,7 @@ public enum PaisShop {
 	ESPANA("001", "España (Península y Baleares)"),
 	ESTONIA("053"),
 	FINLAND("032"),
+	HAITI("452"),
 	GUADELOUPE("458", "France (Guadeloupe)"),
 	GUYANE_FRANCAISE("496", "France (Guyane Française)"),
 	LA_REUNION("372", "France (La Réunion)"),
@@ -140,6 +142,17 @@ public enum PaisShop {
 	CHINA("720", "中国"),
 	JAPON("732", "日本"),
 	COREA_DEL_SUR("728", "대한민국"),
+	MALI("232"),
+	CHAD("244"),
+	RWANDA("324"),
+	ETHIOPIA("344"),
+	UGANDA("350"),
+	TANZANIA("352"),
+	MOZAMBIQUE("366"),
+	MADAGASCAR("370"),
+	ZAMBIA("378"),
+	ZIMBABWE("382"),
+	MALAWI("386"),
 	FAKE_COUNTRY("999", "Country Inexistent");
 	
 	String codigoPais;
