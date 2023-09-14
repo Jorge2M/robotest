@@ -6,10 +6,12 @@ import com.mng.robotest.domains.loyalty.beans.User;
 import com.mng.robotest.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.domains.loyalty.steps.PageHistorialLikesSteps;
 import com.mng.robotest.domains.loyalty.steps.PageMangoLikesYouSteps;
+import com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb;
 import com.mng.robotest.test.steps.navigations.shop.GaleriaSteps;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets;
 import com.mng.robotest.test.utils.awssecrets.GetterSecrets.SecretType;
 
+import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.CARDIGANS_Y_JERSEIS_SHE;
 import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
 
 import com.mng.robotest.domains.base.PageBase;
@@ -42,10 +44,18 @@ public class Loy001 extends TestBase {
 	}
 	
 	private void addBagArticleNoRebajadoAndClickComprar() throws Exception {
-		clickGroup(NEW_NOW);
+		if (isGroupNewNowSelectable()) {
+			clickGroup(NEW_NOW);
+		} else {
+			clickMenu(CARDIGANS_Y_JERSEIS_SHE);
+		}
 		new GaleriaSteps().selectTallaAvailable();
         new SecBolsaSteps().selectButtonComprar();
 	}
+	
+	private boolean isGroupNewNowSelectable() {
+		return new GroupWeb(NEW_NOW).isPresent();
+	}	
 	
 	private void inputLoyaltyPoints() {
 		var checkoutSteps = new CheckoutSteps();
