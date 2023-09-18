@@ -50,6 +50,8 @@ public class PageGaleriaDevice extends PageGaleria {
 	private static final String XPATH_COLORES_ARTICULO = "//div[@class[contains(.,'product-colors')]]";
 	private static final String XPATH_COLORES_ARTICULO_OUTLET_TABLET = "//div[@class[contains(.,'product-list-colors')]]";
 	
+	private static final String XPATH_BUTTON_FOR_CLOSE_TALLAS = "//button[@data-testid='sheet.overlay']";
+	
 	@Override
 	protected String getXPathArticulo() {
 		return XPATH_ARTICULO;
@@ -296,6 +298,9 @@ public class PageGaleriaDevice extends PageGaleria {
 			click(xpathButtonAnyadir).exec();
 		}
 	}
+	public void unshowTallasArticulo() {
+		click(XPATH_BUTTON_FOR_CLOSE_TALLAS).exec();
+	}
 	
 	@Override
 	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
@@ -324,13 +329,14 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	public void selectTallaArticleNotAvalaible() {
-		for (int i=1; i<6; i++) {
+		for (int i=1; i<20; i++) {
 			showTallasArticulo(i);
 			String xpathTallaNoDispo = secTallas.getXPathArticleTallaNotAvailable();
 			if (state(Visible, xpathTallaNoDispo).check()) {
 				click(xpathTallaNoDispo).exec();
 				break;
 			}
+			unshowTallasArticulo();
 		}
 	}
 

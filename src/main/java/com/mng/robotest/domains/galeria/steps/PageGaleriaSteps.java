@@ -157,7 +157,7 @@ public class PageGaleriaSteps extends StepBase {
 	}
 	
 	public DataScroll scrollFromFirstPage() throws Exception {
-		DataForScrollStep data = new DataForScrollStep();
+		var data = new DataForScrollStep();
 		data.setNumPageToScroll(99);
 		data.setOrdenacionExpected(NO_ORDENADO);
 		return scrollFromFirstPage(data);

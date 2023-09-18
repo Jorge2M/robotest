@@ -30,7 +30,7 @@ public abstract class CookiesFinder {
     	if (listCookies.isEmpty()) {
     		return true;
     	}
-    	LocalDateTime timeToCaptureCookies = timeCapturedCookies.plusSeconds(secondsPersistence);
+    	var timeToCaptureCookies = timeCapturedCookies.plusSeconds(secondsPersistence);
     	return (LocalDateTime.now().compareTo(timeToCaptureCookies)>0);
     }
 	

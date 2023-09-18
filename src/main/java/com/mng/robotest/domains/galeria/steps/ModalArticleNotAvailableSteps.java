@@ -58,7 +58,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 		expected="Aparece el modal de Petición confirmada")
 	public void clickRecibirAviso() {
 		modalArticleNotAvailable.clickRecibirAviso();
-		checkModalAvisoOkVisible(2);
+		checkModalAvisoOkVisible(3);
 	}
 	
 	@Validation (
