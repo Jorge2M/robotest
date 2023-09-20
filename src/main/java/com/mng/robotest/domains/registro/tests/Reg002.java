@@ -73,7 +73,7 @@ public class Reg002 extends TestBase {
 		dataToSend.add(DataRegType.PASSWORD, secret.getPassword(), true);
 		
 		dataToSend.add(DataRegType.TELEFONO, "665015122", true);
-		dataToSend.add(DataRegType.CODPOSTAL, "08720", true);
+		dataToSend.add(DataRegType.CODPOSTAL, "08013", true);
 		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.PAGEINICIAL);
 		
 		pageRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);

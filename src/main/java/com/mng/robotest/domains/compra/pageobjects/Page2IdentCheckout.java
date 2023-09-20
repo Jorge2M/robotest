@@ -369,7 +369,7 @@ public class Page2IdentCheckout extends PageBase {
 		//Tenemos problemas aleatorios de StaleElementReferenceException con este elemento
 		//Probamos hasta 3 veces mientras que obtengamos la Excepción
 		while (staleElement && i<3 && "".compareTo(datoSeteado)==0) {
-			List<WebElement> localidadesList = getElementsVisible(XPATH_SELECT_LOCALIDADES);
+			var localidadesList = getElementsVisible(XPATH_SELECT_LOCALIDADES);
 			if (!localidadesList.isEmpty()) {
 				try {
 					new Select(localidadesList.get(0)).selectByIndex(posInSelect);
@@ -381,7 +381,6 @@ public class Page2IdentCheckout extends PageBase {
 					Log4jTM.getLogger().warn("Exception setting localidad from select", e);
 				}
 			}
-			
 			i+=1;
 		}
 

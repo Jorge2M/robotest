@@ -24,4 +24,11 @@ public class Login {
 	public void LOG003_Bolsa_Identificacion() throws Exception {
 		new Log003().execute();
 	}	
+	
+//	@Test (
+//		groups={"SoftLogin", "Canal:desktop_App:shop"}, 
+//		description="Forzar estado SoftLogin para usuario y chequear funcionalidades")
+//	public void LOG004_softLogin() throws Exception {
+//		new Log004().execute();
+//	}	
 }
