@@ -8,9 +8,6 @@ import static com.mng.robotest.domains.footer.pageobjects.SecFooter.FooterLink.*
 
 public class Ayu001 extends TestBase {
 
-	private final AyudaSteps ayudaSteps = new AyudaSteps();
-	private final SecFooterSteps secFooterSteps = new SecFooterSteps();
-	
 	@Override
 	public void execute() throws Exception {
 		access();
@@ -18,12 +15,14 @@ public class Ayu001 extends TestBase {
 	}
 	
 	private void checkAyuda() {
-		secFooterSteps.clickLinkFooter(AYUDA, false);
+		var ayudaSteps = new AyudaSteps();
+		
+		new SecFooterSteps().clickLinkFooter(AYUDA, false);
 		ayudaSteps.clickIcon("Devoluciones, cambios y reembolsos");
-		String question = "¿Cómo puedo cambiar o devolver una compra online de artículos Mango?";
+		String question = "¿Cómo puedo cambiar o devolver una compra online?";
 		ayudaSteps.checkIsQuestionVisible(question);
 		ayudaSteps.clickQuestion(question);
-		ayudaSteps.checkIsTextVisible("Elige el tipo de devolución que mejor se adapte a tus necesidades");		
+		ayudaSteps.checkIsTextVisible("Devolución gratuita en tienda");		
 	}
 
 }
