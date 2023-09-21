@@ -85,7 +85,6 @@ public class PageRegistroInitialShop extends PageBase {
 		case IN: //"English"
 		default:
 			return "Basic information on data protection";
-			
 		}
 	}
 	

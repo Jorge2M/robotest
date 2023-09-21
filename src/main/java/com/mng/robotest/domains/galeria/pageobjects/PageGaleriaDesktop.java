@@ -270,8 +270,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 
 	@Override
 	public int getNumFavoritoIcons() {
-		String xpathHearthIcon = XPATH_HEARTH_ICON_RELATIVE_ARTICLE;
-		return getElements(xpathHearthIcon).size();
+		return getElements(XPATH_HEARTH_ICON_RELATIVE_ARTICLE).size();
 	}
 
 	public boolean isArticuloWithStringInName(String string) {
@@ -285,7 +284,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}	
 	
 	private int getLayoutNumColumnasShop() {
-		WebElement listArt = getElement(XPATH_LIST_ARTICLES );
+		var listArt = getElement(XPATH_LIST_ARTICLES );
 		if (listArt.getAttribute("class").contains("columns3")) {
 			return 3;
 		}
@@ -343,7 +342,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	@Override
 	public WebElement getArticleFromPagina(int numPagina, int numArticle) {
-		List<WebElement> listArticles = getListArticulosFromPagina(numPagina);
+		var listArticles = getListArticulosFromPagina(numPagina);
 		if (listArticles.size()>=numArticle) {
 			return listArticles.get(numArticle-1);
 		}
@@ -364,9 +363,8 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	 * @return la lista de referencia+color de los artículos incorrectos (size div != attr width de la imagen)
 	 */
 	public ListSizesArticle getArticlesWithWrongSize(int numPagina, double marginPercError) {	
-		ListSizesArticle listSizesArtWrong = ListSizesArticle.getInstance();
-		List<WebElement> listArticles = getListArticulosFromPagina(numPagina);
-		for (WebElement article : listArticles) {
+		var listSizesArtWrong = ListSizesArticle.getInstance();
+		for (var article : getListArticulosFromPagina(numPagina)) {
 			int attrWidthImg = getWidthFromAtricleSrcImg(article);
 			int widthArticle = getWidthArticle(article);
 			int numPixelsDiff = Math.abs(attrWidthImg-widthArticle);
@@ -384,7 +382,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		int widthImg = 0;
 		By byImgArticle = By.xpath(getXPathImgArticulo(article));
 		if (state(Present, article).by(byImgArticle).check()) {
-			WebElement imgArticle = article.findElement(byImgArticle);
+			var imgArticle = article.findElement(byImgArticle);
 			String srcImgArticle;
 		    srcImgArticle = imgArticle.getAttribute("original");
 			if (srcImgArticle!=null) {
@@ -395,17 +393,16 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 				}
 			}
 		}
-		
 		return widthImg;
 	}
 	
 	private int getWidthArticle(WebElement article) {
-		return (article.getSize().getWidth());
+		return article.getSize().getWidth();
 	}
 	
 	public List<String> getArticlesRebajadosWithLiteralInLabel(List<LabelArticle> listLabels) {
 		List<String> dataTextArticles = new ArrayList<>();
-		for (LabelArticle label : listLabels) {
+		for (var label : listLabels) {
 			String xpathLit = getXPathDataArticuloRebajadoWithLabel(label);
 			dataTextArticles.addAll(getDataFromArticlesLiteral(xpathLit));
 		}
@@ -413,7 +410,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	public List<String> getArticlesTemporadaxRebajadosWithLiteralInLabel(List<Integer> listTemporadas, List<LabelArticle> listLabels) {
-		List<String> listArtSaleWithLabel = getArticlesRebajadosWithLiteralInLabel(listLabels);
+		var listArtSaleWithLabel = getArticlesRebajadosWithLiteralInLabel(listLabels);
 		if (listArtSaleWithLabel.isEmpty()) {
 			return listArtSaleWithLabel;
 		}
@@ -425,14 +422,13 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	public List<String> getArticles(TypeArticle typeArticle, List<Integer> listTemporadas) {
-		List<String> listArtOfType = getArticlesOfType(typeArticle);
+		var listArtOfType = getArticlesOfType(typeArticle);
 		if (!listArtOfType.isEmpty()) {
-			List<String> listArtTempX = getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM, listTemporadas);
+			var listArtTempX = getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM, listTemporadas);
 			List<String> common = new ArrayList<>(listArtTempX);
 			common.retainAll(listArtOfType);
 			return common;
 		}
-		
 		return listArtOfType;
 	}
 	
@@ -448,7 +444,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	public List<String> getArticlesTemporadaXWithLiteralInLabel(List<Integer> temporadasX, List<LabelArticle> listLabels) {
 		List<String> dataTextArticles = new ArrayList<>();
-	   	for (LabelArticle label : listLabels) {
+	   	for (var label : listLabels) {
 	   		String xpathLit = getXPathDataArticuloTemporadaXWithLabel(temporadasX, label);
 			dataTextArticles.addAll(getDataFromArticlesLiteral(xpathLit));
 		}
@@ -457,7 +453,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	private List<String> getDataFromArticlesLiteral(String xpathLiteralArticle) {
 		List<String> dataTextArticles = new ArrayList<>();
-		for (WebElement litWebEl : getElements(xpathLiteralArticle)) {
+		for (var litWebEl : getElements(xpathLiteralArticle)) {
 			String referencia = litWebEl.getAttribute("id").replace("_info", "");
 			dataTextArticles.add(litWebEl.getText() + " (" + referencia + ")");
 		}
@@ -468,15 +464,15 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	/**
 	 * @return lista de artículos que tienen ambas etiquetas
 	 */
-	public List<String> getArticlesTemporadaXWithLiteralInLabel(List<Integer> temporadasX, LabelArticle label1, 
-																	   LabelArticle label2) {
+	public List<String> getArticlesTemporadaXWithLiteralInLabel(
+			List<Integer> temporadasX, LabelArticle label1, LabelArticle label2) {
 		List<String> listResult = new ArrayList<>();
-		List<String> listArticles1 = getArticlesTemporadaXWithLiteralInLabel(temporadasX, Arrays.asList(label1));
+		var listArticles1 = getArticlesTemporadaXWithLiteralInLabel(temporadasX, Arrays.asList(label1));
 		if (listArticles1.isEmpty()) {
 			return listResult;
 		}
 		
-		List<String> listArticles2 = getArticlesTemporadaXWithLiteralInLabel(temporadasX, Arrays.asList(label2));
+		var listArticles2 = getArticlesTemporadaXWithLiteralInLabel(temporadasX, Arrays.asList(label2));
 		if (listArticles2.isEmpty()) {
 			return listResult;
 		}
@@ -675,8 +671,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		List<ArticuloScreen> listArtFav = new ArrayList<>();
 		for (int posIcon : posIconsToClick) {
 			clickHearhIcon(posIcon);
-			ArticuloScreen articulo = getArticuloObject(posIcon);
-			listArtFav.add(articulo);
+			listArtFav.add(getArticuloObject(posIcon));
 		}
 		return listArtFav;
 	}
@@ -714,7 +709,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		//Nos posicionamos en el icono del Hearth 
 		String xpathIcon = getXPathArticleHearthIcon(posArticle);
 		state(Visible, xpathIcon).wait(1).check();
-		WebElement hearthIcon = getElement(xpathIcon);
+		var hearthIcon = getElement(xpathIcon);
 		moveToElement(hearthIcon);
 		
 		//Clicamos y esperamos a que el icono cambie de estado

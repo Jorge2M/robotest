@@ -546,9 +546,8 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation (
 		description="Quedan #{estadoFinal} los iconos asociados a los artículos con posiciones <b>#{posIconsSelected.toString()}</b>",
 		level=Warn)
-	private boolean checkIconosInCorrectState(TypeActionFav actionFav, @SuppressWarnings("unused") String estadoFinal, 
-											  List<Integer> posIconsSelected) {
-		return (pageGaleria.iconsInCorrectState(posIconsSelected, actionFav));
+	private boolean checkIconosInCorrectState(TypeActionFav actionFav, String estadoFinal, List<Integer> posIconsSelected) {
+		return pageGaleria.iconsInCorrectState(posIconsSelected, actionFav);
 	}
 
 	public ListDataArticleGalery selectListadoXColumnasDesktop(

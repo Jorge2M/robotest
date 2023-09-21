@@ -21,6 +21,7 @@ import com.mng.robotest.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.domains.transversal.modales.pageobject.ModalCambioPaisSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
+import com.mng.robotest.test.data.PaisShop;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.test.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
 
@@ -49,7 +50,8 @@ public class SecMenusUserSteps extends StepBase {
 		if (channel.isDevice()) {
 			new PageLogin().clickTabRegistrate();
 		}
-		if (!dataTest.getPais().isNewRegister()) {
+		if (!dataTest.getPais().isNewRegister() || 
+			(app==AppEcom.outlet && dataTest.getPais()==PaisShop.ESPANA.getPais())) {
 			var pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
 			pageRegistroIniSteps.checkIsPage(5);
 			pageRegistroIniSteps.validaIsRGPDVisible();
