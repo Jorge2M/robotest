@@ -47,7 +47,7 @@ public class PageMisComprasSteps extends StepBase {
 		if (isChequeRegalo) {
 			return validateIsCompraOnlineChequeRegalo(codPedido, 2);
 		}
-		return validateIsCompraOnlinePrendas(codPedido, 2);
+		return checkIsCompraOnlinePrendas(codPedido, 2);
 	}
 
 	//TODO cuando funcione Mis Compras volver a poner esta validación
@@ -58,22 +58,28 @@ public class PageMisComprasSteps extends StepBase {
 //		return pageMisCompras.isTicketOnline(codPedido, seconds);
 //	}	
 	
-	private boolean validateIsCompraOnlinePrendas(String codPedido, int seconds) {
+	private boolean checkIsCompraOnlinePrendas(String codPedido, int seconds) {
 		return 
-			validateIsCompraOnlinePrendasCheck(codPedido, seconds)
+			checkIsCompraOnlinePrendasCheck(codPedido, seconds)
 			.areAllChecksOvercomed();
 	}
 	
 	@Validation
-	private ChecksTM validateIsCompraOnlinePrendasCheck(String codPedido, int seconds) {
+	private ChecksTM checkIsCompraOnlinePrendasCheck(String codPedido, int seconds) {
 		var checks = ChecksTM.getNew();
-		State level = (UtilsTest.todayBeforeDate("2023-08-01")) ? State.Warn : Defect;
 		checks.add(
 			"Es visible la compra Online asociada al pedido <b>" + codPedido + "</b> (la esperamos " + seconds + " segundos",
-			pageMisCompras.isTicketOnline(codPedido, seconds), level);
+			pageMisCompras.isTicketOnline(codPedido, seconds), getLevel());
 		
 		return checks;		
 	}	
+	private State getLevel() {
+		if (dataTest.isUserRegistered()) { 
+			return (UtilsTest.todayBeforeDate("2023-10-01")) ? State.Warn : Defect;
+		}
+		return State.Defect;
+	}
+	
 	
 	@Validation (
 		description=
