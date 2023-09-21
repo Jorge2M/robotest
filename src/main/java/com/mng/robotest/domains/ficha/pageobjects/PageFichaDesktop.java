@@ -1,11 +1,9 @@
 package com.mng.robotest.domains.ficha.pageobjects;
 
 
-import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
-import com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.LinksAfterBolsa;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
+import static com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton.*;
+import static com.mng.robotest.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.LinksAfterBolsa.*;
 
 public class PageFichaDesktop extends PageFicha {
 
@@ -50,12 +48,12 @@ public class PageFichaDesktop extends PageFicha {
 
 	@Override
 	public void selectAnadirAFavoritosButton() {
-		secBolsaButtonAndLinks.selectFavoritosButton(ActionFavButton.ADD);
+		secBolsaButtonAndLinks.selectFavoritosButton(ADD);
 	}
 
 	@Override
 	public void selectRemoveFromFavoritosButton() {
-		secBolsaButtonAndLinks.selectFavoritosButton(ActionFavButton.REMOVE);
+		secBolsaButtonAndLinks.selectFavoritosButton(REMOVE);
 	}
 
 	@Override
@@ -70,12 +68,12 @@ public class PageFichaDesktop extends PageFicha {
 
 	@Override
 	public boolean isVisibleButtonElimFavoritos(int seconds) {
-		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(ActionFavButton.REMOVE, seconds));
+		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(REMOVE, seconds));
 	}
 
 	@Override
 	public boolean isVisibleButtonAnadirFavoritos(int seconds) {
-		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(ActionFavButton.ADD, seconds));
+		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(ADD, seconds));
 	}
 
 	@Override
@@ -85,12 +83,12 @@ public class PageFichaDesktop extends PageFicha {
 
 	@Override
 	public boolean isVisibleBuscarEnTiendaLink() {
-		return secBolsaButtonAndLinks.checkLinkInState(LinksAfterBolsa.DISPONIBILIDAD_TIENDA, Visible);
+		return secBolsaButtonAndLinks.checkLinkInState(DISPONIBILIDAD_TIENDA, Visible);
 	}
 
 	@Override
 	public void selectBuscarEnTiendaLink() {
-		secBolsaButtonAndLinks.clickLinkAndWaitLoad(LinksAfterBolsa.DISPONIBILIDAD_TIENDA);
+		secBolsaButtonAndLinks.clickLinkAndWaitLoad(DISPONIBILIDAD_TIENDA);
 	}
 
 	@Override

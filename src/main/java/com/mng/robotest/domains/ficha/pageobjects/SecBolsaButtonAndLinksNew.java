@@ -47,6 +47,7 @@ public class SecBolsaButtonAndLinksNew extends PageBase {
 	}
 	
 	public void clickAnadirBolsaButtonAndWait() {
+		state(Visible, XPATH_BUTTON_ADD_BOLSA).wait(2).check();
 		click(XPATH_BUTTON_ADD_BOLSA).type(javascript).exec();
 	}
 
