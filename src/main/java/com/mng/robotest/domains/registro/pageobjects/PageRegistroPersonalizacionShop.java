@@ -69,8 +69,8 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	}
 	
 	public void selectGender(GenderOption gender) {
-		click(getXPathCheckboxGender(gender))
-			.waitLink(1).exec();
+		state(Visible, getXPathCheckboxGender(gender)).wait(2).check();
+		click(getXPathCheckboxGender(gender)).exec();
 	}
 	
 	public void selectLineas(List<LineaType> lineasToSelect) {

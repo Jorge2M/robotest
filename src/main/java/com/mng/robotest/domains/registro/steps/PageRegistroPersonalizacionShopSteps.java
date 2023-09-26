@@ -59,7 +59,9 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 			"  - Género: <b>#{data.getGender()}</b><br>" +
 			"  - Líneas: <b>#{data.getLineas()}</b>",
 		expected=
-			"La introducción de datos es correcta")
+			"La introducción de datos es correcta",
+		saveHtmlPage=SaveWhen.Always
+		)
 	private void inputDataWithouBirthDate(DataNewRegister data) {
 		pageRegistroPersonalizacion.inputPostalCode(data.getPostalCode());
 		pageRegistroPersonalizacion.inputName(data.getName());
