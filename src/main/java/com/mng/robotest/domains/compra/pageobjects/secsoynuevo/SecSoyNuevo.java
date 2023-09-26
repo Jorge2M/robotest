@@ -25,12 +25,7 @@ public abstract class SecSoyNuevo extends PageBase {
 			return new SecSoyNuevoDesktop();
 		}
 		
-		//TODO 17-07-23 reactivar si en algún momento se implementa de nuevo el flujo guest-checkout		
-		if (app==AppEcom.shop &&
-			!new PageBase().isPRO() &&
-			!dataTest.getTestCode().contains("COM002")) {
-			//TODO el COM002 va sin cookies con lo que vamos por la variante-0 del TestAB
-			//quitar cuando se desactive el TestAB) {
+		if (app==AppEcom.shop && !new PageBase().isPRO()) {
 			return new SecSoyNuevoMobileNew();
 		}
 		return new SecSoyNuevoMobileOld();

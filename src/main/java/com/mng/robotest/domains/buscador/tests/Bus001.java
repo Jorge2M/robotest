@@ -25,8 +25,8 @@ public class Bus001 extends TestBase {
 	public void execute() throws Exception {
 		access();
 		pageLandingSteps.validateIsPageWithCorrectLineas();
-		GarmentCatalog product = getProduct();
 		
+		GarmentCatalog product = getProduct();
 		secBuscadorSteps.searchArticulo(Article.getArticleCandidateForTest(product));
 		secBuscadorSteps.busquedaCategoriaProducto(categoriaProdExistente, true);
 		secBuscadorSteps.busquedaCategoriaProducto(catProdInexistente, false);			

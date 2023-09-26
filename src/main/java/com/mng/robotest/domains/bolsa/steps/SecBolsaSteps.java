@@ -263,7 +263,7 @@ public class SecBolsaSteps extends StepBase {
 	public void selectButtonComprar(FluxBolsaCheckout fluxMobile) {
 		selectButtonComprarBasic();
 		fluxPostSelectComprar(fluxMobile);
-		checksDefault();		
+		checksDefault();
 	}
 
 	private void fluxPostSelectComprar(FluxBolsaCheckout fluxMobile) {
@@ -281,12 +281,7 @@ public class SecBolsaSteps extends StepBase {
 	//TODO simplificar cuando en Outlet suba el flujo nuevo
 	//(y crear página específica PageContinuarComoInvitadoMobile
 	private void fluxPostSelectComprarUserNotIdentifiedMobile(FluxBolsaCheckout flux) {
-		//TODO 17-07-23 reactivar si en algún momento se implementa de nuevo el flujo guest-checkout
-		if (app==AppEcom.shop &&
-			!isPRO() &&
-			!dataTest.getTestCode().contains("COM002")) {
-			//TODO el COM002 va sin cookies con lo que vamos por la variante-0 del TestAB
-			//quitar cuando se desactive el TestAB
+		if (app==AppEcom.shop && !isPRO()) {
 			checkVisibleContinuarSinCuentaButtonDevice(2);
 			if (flux==INICIAR_SESION) {
 				clickIniciarSesionMobile();

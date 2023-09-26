@@ -12,7 +12,7 @@ public class Com002 extends TestBase {
 	private final DataPago dataPago;
 	
 	public Com002() throws Exception {
-		ConfigCheckout configCheckout = ConfigCheckout.config()
+		var configCheckout = ConfigCheckout.config()
 				.acceptCookies(false)
 				.checkPagos()
 				.checkMisCompras()

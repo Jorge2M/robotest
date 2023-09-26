@@ -3,11 +3,12 @@ package com.mng.robotest.domains.transversal.menus.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.StepBase;
@@ -35,7 +36,7 @@ public class SecMenusUserSteps extends StepBase {
 	@Step (
 		description="Seleccionar el menú de usuario \"Favoritos\"", 
 		expected="Aparece la página de gestión de favoritos con los artículos correctos",
-		saveHtmlPage=SaveWhen.IfProblem)
+		saveHtmlPage=IfProblem)
 	public void selectFavoritos() {
 		clickUserMenu(FAVORITOS);
 		new PageFavoritosSteps().validaIsPageOK();
@@ -44,7 +45,7 @@ public class SecMenusUserSteps extends StepBase {
 	@Step (
 		description="Seleccionar el menú de usuario <b>Regístrate</b>", 
 		expected="Aparece al página inicial del registro",
-		saveHtmlPage=SaveWhen.Always)
+		saveHtmlPage=Always)
 	public void selectRegistrate() {
 		clickUserMenu(REGISTRATE);
 		if (channel.isDevice()) {
@@ -236,4 +237,5 @@ public class SecMenusUserSteps extends StepBase {
 			this.numberPoints = numberPoints;
 		}
 	}
+	
 }
