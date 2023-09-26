@@ -236,7 +236,7 @@ public class CheckoutFlow extends StepBase {
 						dataDirFactura.put(NIF, "76367949Z");
 						dataDirFactura.put(NAME, "Carolina");
 						dataDirFactura.put(APELLIDOS, "Rancaño Pérez");
-						dataDirFactura.put(CODPOSTAL, "08013");
+						dataDirFactura.put(CODPOSTAL, "08720");
 						dataDirFactura.put(DIRECCION, "c./ mossen trens nº6 5º1ª");
 						dataDirFactura.put(EMAIL, "voyadominarelmundo@gmail.com");
 						dataDirFactura.put(TELEFONO, "665015122");

@@ -1806,7 +1806,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <loyalty>S</loyalty>
 <paistop>S</paistop>
 <rgpd>S</rgpd>
-<codpos>08013</codpos>
+<codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>

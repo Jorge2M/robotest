@@ -65,7 +65,7 @@ public class PageMisDireccionesSteps extends StepBase {
 			"Aparece el código postal <b>" + codpostal + "</b>",
 			isPostalCode(codpostal));
 
-		if (poblacion!=null) {
+		if (poblacion!=null && "0".compareTo(poblacion)!=0) {
 			checks.add(
 				"Aparece la población <b>" + poblacion + "</b>",
 				isPoblacion(poblacion));

@@ -67,13 +67,12 @@ public class Reg002 extends TestBase {
 		var dataToSend = new ListDataRegistro(); 
 		dataToSend.add(DataRegType.NAME, "Jorge", true);
 		dataToSend.add(DataRegType.APELLIDOS, "Muñoz Martínez", true);
-		
 		Secret secret = GetterSecrets.factory().getCredentials(SecretType.SHOP_ROBOT_USER);
 		dataToSend.add(DataRegType.EMAIL, secret.getUser(), true);
 		dataToSend.add(DataRegType.PASSWORD, secret.getPassword(), true);
 		
 		dataToSend.add(DataRegType.TELEFONO, "665015122", true);
-		dataToSend.add(DataRegType.CODPOSTAL, "08013", true);
+		dataToSend.add(DataRegType.CODPOSTAL, "08720", true);
 		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PageData.PAGEINICIAL);
 		
 		pageRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);

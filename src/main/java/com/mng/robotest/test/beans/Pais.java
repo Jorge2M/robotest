@@ -158,7 +158,7 @@ public class Pais implements Serializable {
 	
 	public String getCodpos() {
 		if (codpos==null || codpos.compareTo("")==0) {
-			return "08013";
+			return "08720";
 		}
 		return codpos;
 	}
