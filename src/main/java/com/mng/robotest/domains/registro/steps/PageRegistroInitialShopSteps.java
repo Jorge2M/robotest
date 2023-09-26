@@ -108,14 +108,12 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		expected="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"")	
 	public void clickPoliticaPrivacidad() {
 		pageRegistroInitial.clickPoliticaPrivacidad();
-		//if (dataTest.getPais().loyalty()) {
-			pageRegistroInitial.keyDown(5);
-			if (!pageRegistroInitial.isModalPoliticaPrivacidadVisible(1)) {
-				pageRegistroInitial.clickPoliticaPrivacidad();
-			}
-			pageRegistroInitial.keyDown(5);
-			checkIsModalPoliticaPrivacidadVisible(1);
-		//}
+		pageRegistroInitial.keyDown(5);
+		if (!pageRegistroInitial.isModalPoliticaPrivacidadVisible(1)) {
+			pageRegistroInitial.clickPoliticaPrivacidad();
+		}
+		pageRegistroInitial.keyDown(5);
+		checkIsModalPoliticaPrivacidadVisible(1);
 	}
 	@Validation (description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\" (lo esperamos hasta #{seconds} segundos)")
 	public boolean checkIsModalPoliticaPrivacidadVisible(int seconds) {
