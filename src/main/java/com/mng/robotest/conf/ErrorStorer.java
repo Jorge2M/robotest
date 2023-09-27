@@ -1,7 +1,9 @@
 package com.mng.robotest.conf;
 
 import java.net.URI;
+import java.util.Optional;
 
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
@@ -22,14 +24,14 @@ public class ErrorStorer extends EvidenceStorer {
 	
 	@Override
 	protected String captureContent(StepTM step) {
-		String content = "";
 		try {
-			content = capturaErrorPage();
+			String contentErrorPage = capturaErrorPage();
+			return addCookieValueToContent(contentErrorPage);
 		}
 		catch (Exception e) {
 			step.getSuiteParent().getLogger().warn("Exception capturing error", e);
 		}
-		return content;
+		return "";
 	}
 	
 	public String capturaErrorPage() throws Exception {
@@ -52,6 +54,26 @@ public class ErrorStorer extends EvidenceStorer {
 		return (driverId.compareTo(EmbeddedDriver.browserstack.name())==0);
 	}
 
+	private String addCookieValueToContent(String contentErrorPage) {
+		var jsessionPreCookieValue = getJssesionIdPreValue();
+		if (jsessionPreCookieValue.isPresent()) {
+			return 
+					contentErrorPage +
+					"<h2>JSESSIONIDPRE VALUE: </h2>" +
+					"<p>" + jsessionPreCookieValue.get() + "</p>";
+		}
+		return contentErrorPage;
+	}
+	
+	private Optional<String> getJssesionIdPreValue() {
+		var driver = TestMaker.getDriverTestCase();
+		Cookie jsessionCookie = driver.manage().getCookieNamed("JSESSIONIDPRE");
+		if (jsessionCookie==null) {
+			return Optional.empty();
+		}
+		return Optional.of(jsessionCookie.getValue());
+	}
+	
 	/**
 	 * Loads the errorPage.faces in other tab
 	 * @return windowHandle of the screen pather
