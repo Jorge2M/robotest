@@ -1,4 +1,4 @@
-package com.mng.robotest.test.utils.testab;
+package com.mng.robotest.conf.testab;
 
 import java.util.ArrayList;
 import java.util.Arrays;

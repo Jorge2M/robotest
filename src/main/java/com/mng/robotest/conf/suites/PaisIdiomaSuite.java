@@ -1,14 +1,13 @@
 package com.mng.robotest.conf.suites;
 
-import static com.mng.robotest.conf.suites.SuiteMakerResources.getParametersSuiteShop;
-
-import org.testng.xml.XmlSuite.ParallelMode;
-
 import com.github.jorge2m.testmaker.domain.SuiteMaker;
 import com.github.jorge2m.testmaker.domain.TestRunMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.conf.ErrorStorer;
 import com.mng.robotest.conf.factories.LineasBannersFactory;
+
+import static com.mng.robotest.conf.suites.SuiteMakerResources.getParametersSuiteShop;
+import static org.testng.xml.XmlSuite.ParallelMode.METHODS;
 
 public class PaisIdiomaSuite extends SuiteMaker {
 
@@ -40,10 +39,10 @@ public class PaisIdiomaSuite extends SuiteMaker {
 	public PaisIdiomaSuite(InputParamsMango inputParams) {
 		super(inputParams);
 		setParameters(getParametersSuiteShop(inputParams));
-		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), LineasBannersFactory.class);
+		var testRun = TestRunMaker.from(inputParams.getSuiteName(), LineasBannersFactory.class);
 		testRun.setStorerErrorStep(new ErrorStorer());
 		addTestRun(testRun);
-		setParallelMode(ParallelMode.METHODS);
-		setThreadCount(3);
+		setParallelMode(METHODS);
+		setThreadCount(4);
 	}
 }

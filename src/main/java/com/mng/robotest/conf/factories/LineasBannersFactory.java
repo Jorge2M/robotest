@@ -15,50 +15,80 @@ import com.mng.robotest.test.utils.PaisGetter;
 
 public class LineasBannersFactory {
 	
+	private InputParamsTM inputParams;
+	
 	@Factory
 	@Parameters({"countrys", "lineas"})
 	public Object[] createInstances(String countrysStr, String lineas, ITestContext ctxTestRun) {
 		List<PaisIdioma> listTests = new ArrayList<>();
-		List<String> listaPaises = new ArrayList<>();
+		inputParams = getInputParams(ctxTestRun);
 		try {
-			InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
-			AppEcom app = (AppEcom)inputData.getApp();
-			VersionPaisSuite version = VersionPaisSuite.valueOf(inputData.getVersion());
-			List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrysStr);
-			int prioridad=0;
-			for (Pais pais : listCountrys) {
-				Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas(app).iterator();
-				while (itIdiomas.hasNext()) {
-					IdiomaPais idioma = itIdiomas.next();
-					if (paisToTest(pais, app)) {
-						listaPaises.add(pais.getNombre_pais().trim());
-						List<Linea> lineasAprobar = Utilidades.getLinesToTest(pais, app, lineas);
-						listTests.add(new PaisIdioma(version, pais, idioma, lineasAprobar, prioridad));
-						System.out.println(
-							"Creado Test \"PaisIdioma\" con datos: " + 
-							",Pais=" + pais.getNombre_pais() +
-							",Idioma=" + idioma.getCodigo().getLiteral() +
-							",Num Idiomas=" + pais.getListIdiomas(app).size());
-
-						prioridad+=1;
-					}
-				}
-			}
+			listTests = getListTests(countrysStr, lineas);
 		}
 		catch (Throwable e) {
 			throw e;
 		}		
-		
 		return listTests.toArray(new Object[listTests.size()]);
 	}
-	
-	/**
-	 * @return si se ha de crear un test para un país concreto
-	 */
-	protected boolean paisToTest(Pais pais, AppEcom app) {
-		return (
-			"n".compareTo(pais.getExists())!=0 &&
-			pais.isVentaOnline() &&
-			pais.getTiendasOnlineList().contains(app));
+
+	private List<PaisIdioma> getListTests(String countrysStr, String lineas) {
+		List<PaisIdioma> listTests = new ArrayList<>();
+		for (var pais : getListCountries(countrysStr)) {
+			if (isPaisToTest(pais, countrysStr)) {
+				for (var idioma : pais.getListIdiomas(getApp())) {
+					listTests.add(createTestCase(lineas, pais, idioma));
+				}
+			}
+		}
+		return listTests;
 	}
+	
+	private PaisIdioma createTestCase(String lineas, Pais pais, IdiomaPais idioma) {
+		var lineasAprobar = Utilidades.getLinesToTest(pais, getApp(), lineas);
+		printTestCreation(pais, idioma);
+		return new PaisIdioma(getVersion(), pais, idioma, lineasAprobar); 
+	}
+	
+	private void printTestCreation(Pais pais, IdiomaPais idioma) {
+		System.out.println(
+				"Creado Test \"PaisIdioma\" con datos: " + 
+				",Pais=" + pais.getNombre_pais() +
+				",Idioma=" + idioma.getCodigo().getLiteral() +
+				",Num Idiomas=" + pais.getListIdiomas(getApp()).size());
+	}
+	
+	protected boolean isPaisToTest(Pais pais, String countrysStr) {
+		boolean isCountryTestable = isCountryTestable(pais);
+		if (!isAllCountrysToTest(countrysStr)) {
+			return isCountryTestable;
+		}
+		return isCountryTestable && pais.isVentaOnline(); 
+
+	}
+	private boolean isCountryTestable(Pais pais) {
+		return
+			"n".compareTo(pais.getExists())!=0 && //Japan
+			pais.getTiendasOnlineList().contains(getApp());		
+	}
+	
+	private boolean isAllCountrysToTest(String countrysStr) {
+		return 
+			countrysStr==null || 
+			"".compareTo(countrysStr)==0 ||
+			"*".compareTo(countrysStr)==0 ;
+	}
+	
+	private AppEcom getApp() {
+		return (AppEcom)inputParams.getApp();
+	}
+	private InputParamsTM getInputParams(ITestContext ctxTestRun) {
+		return TestMaker.getInputParamsSuite(ctxTestRun);
+	}
+	private VersionPaisSuite getVersion() {
+		return VersionPaisSuite.valueOf(inputParams.getVersion());
+	}
+	private List<Pais> getListCountries(String countrysStr) {
+		return PaisGetter.getFromCommaSeparatedCountries(countrysStr);
+	}
+	
 }

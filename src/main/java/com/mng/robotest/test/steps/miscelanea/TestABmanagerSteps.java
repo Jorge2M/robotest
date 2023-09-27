@@ -3,8 +3,8 @@ package com.mng.robotest.test.steps.miscelanea;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.service.testab.TestABactData;
 import com.github.jorge2m.testmaker.service.testab.manager.TestABmanager;
+import com.mng.robotest.conf.testab.TestABGoogleExpImpl;
 import com.mng.robotest.domains.base.StepBase;
-import com.mng.robotest.test.utils.testab.TestABGoogleExpImpl;
 
 public class TestABmanagerSteps extends StepBase {
 

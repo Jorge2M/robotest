@@ -17,7 +17,6 @@ public class PaisIdioma implements Serializable {
 	private static final long serialVersionUID = 7000361927887748996L;
 	
 	private String indexFact = "";
-	public int prioridad;
 	private FlagsNaviationLineas flagsNavigation = VersionPaisSuite.V1;
 	private Pais pais = ESPANA.getPais();
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
@@ -29,7 +28,7 @@ public class PaisIdioma implements Serializable {
 	}
 
 	//From @Factory
-	public PaisIdioma(FlagsNaviationLineas flagsNavigation, Pais pais, IdiomaPais idioma, List<Linea> linesToTest, int prioridad) {
+	public PaisIdioma(FlagsNaviationLineas flagsNavigation, Pais pais, IdiomaPais idioma, List<Linea> linesToTest) {
 		this.flagsNavigation = flagsNavigation;
 		String lineaStr = "";
 		if (linesToTest.size()==1) {
@@ -39,7 +38,6 @@ public class PaisIdioma implements Serializable {
 		this.pais = pais;
 		this.idioma = idioma;
 		this.linesToTest = linesToTest;
-		this.prioridad = prioridad;
 	}
 	  
 	@Test (

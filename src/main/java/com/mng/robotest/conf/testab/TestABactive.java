@@ -1,4 +1,6 @@
-package com.mng.robotest.test.utils.testab;
+package com.mng.robotest.conf.testab;
+
+import static com.mng.robotest.conf.testab.TestABOptimizeImpl.*;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -8,8 +10,6 @@ import org.openqa.selenium.Cookie;
 import com.github.jorge2m.testmaker.service.testab.TestABactData;
 import com.github.jorge2m.testmaker.service.testab.manager.TestABmanager;
 import com.mng.robotest.domains.base.PageBase;
-
-import static com.mng.robotest.test.utils.testab.TestABOptimizeImpl.*;
 
 public class TestABactive extends PageBase {
 

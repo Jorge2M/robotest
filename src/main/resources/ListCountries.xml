@@ -2199,11 +2199,14 @@ where
 <codigo_alf>UA</codigo_alf>
 <idioma acceso="ua">IN</idioma>
 <idioma acceso="ua-ru">RU</idioma>
+<!-- 
+<idioma acceso="ua">UA</idioma>
+<idioma acceso="ua-en">IN</idioma>-->
+
 <codpos>01001</codpos>
 <telefono>0501111111</telefono>
 <dni>34763592N</dni>
-<!-- Reactivar cuando se reactive la compra -->
-<tiendas_online><!-- shop,votf--></tiendas_online>
+<tiendas_online>shop,votf</tiendas_online>
 <register nuevo="N" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>

@@ -7,6 +7,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import com.mng.robotest.conf.testab.TestABactive;
 import com.mng.robotest.domains.base.PageBase;
 import com.mng.robotest.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.domains.transversal.acceptcookies.pageobjects.SectionCookies;
@@ -16,7 +17,6 @@ import com.mng.robotest.domains.transversal.cabecera.pageobjects.SecCabeceraMost
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
 import com.mng.robotest.test.pageobject.shop.modales.ModalLoyaltyAfterAccess;
-import com.mng.robotest.test.utils.testab.TestABactive;
 
 import static com.mng.robotest.domains.transversal.acceptcookies.pageobjects.ModalSetCookies.SectionConfCookies.*;
 

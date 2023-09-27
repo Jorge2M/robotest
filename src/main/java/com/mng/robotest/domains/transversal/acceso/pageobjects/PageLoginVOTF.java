@@ -1,7 +1,7 @@
 package com.mng.robotest.domains.transversal.acceso.pageobjects;
 
+import com.mng.robotest.conf.testab.TestABactive;
 import com.mng.robotest.domains.base.PageBase;
-import com.mng.robotest.test.utils.testab.TestABactive;
 
 public class PageLoginVOTF extends PageBase {
 

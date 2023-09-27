@@ -5,7 +5,6 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.conf.suites.MenusPaisSuite.VersionMenusPais;
 import com.mng.robotest.test.appshop.paisidioma.PaisIdioma;
@@ -18,11 +17,10 @@ public class MenusFactory {
 	@Parameters({"countrys", "lineas"})
 	public Object[] createInstances(String countrysStr, String lineas, ITestContext ctxTestRun) {
 		List<PaisIdioma> listTests = new ArrayList<>();
-		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
+		var inputData = TestMaker.getInputParamsSuite(ctxTestRun);
 		var app = (AppEcom)inputData.getApp();
-		VersionMenusPais version = VersionMenusPais.valueOf(inputData.getVersion());
-		List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrysStr);
-		int prioridad=0;
+		var version = VersionMenusPais.valueOf(inputData.getVersion());
+		var listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrysStr);
 		for (Pais pais : listCountrys) {
 			Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas(app).iterator();
 			IdiomaPais idioma = itIdiomas.next();
@@ -33,8 +31,7 @@ public class MenusFactory {
 					if (Utilidades.lineaToTest(linea, app)) {
 						List<Linea> lineasAprobar = new ArrayList<>();
 						lineasAprobar.add(linea);
-						listTests.add(new PaisIdioma(version, pais, idioma, lineasAprobar, prioridad));
-						prioridad+=1;					
+						listTests.add(new PaisIdioma(version, pais, idioma, lineasAprobar));
 						System.out.println(
 							"Creado Test \"PaisIdioma\" con datos: " +
 							",Pais=" + pais.getNombre_pais() +
