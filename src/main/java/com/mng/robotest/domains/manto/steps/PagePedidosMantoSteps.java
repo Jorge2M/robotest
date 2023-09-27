@@ -30,7 +30,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		
 		int seconds = 30;
 	 	checks.add(String.format(
-	 		"Desaparece la capa de Loading de \"Consultando\" (lo esperamos hasta %s segundos)", seconds),
+	 		"Desaparece la capa de Loading de \"Consultando\"" + getLitSecondsWait(seconds) ),
 			pagePedidos.isInvisibleCapaLoadingUntil(seconds), Warn);
 	 	
 		checks.setExistsLinkCodPed(

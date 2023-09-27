@@ -32,9 +32,9 @@ public class PageChequeRegaloInputDataSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Aparece el cuadro de introduccion de datos determinado (lo esperamos hasta #{maxSegundos} segundos)")
-	private boolean checkInputDataTarjeta(int maxSegundos) {
-		return ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).isInputTarjetaVisible(maxSegundos);
+		description="Aparece el cuadro de introduccion de datos determinado " + SECONDS_WAIT)
+	private boolean checkInputDataTarjeta(int seconds) {
+		return ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).isInputTarjetaVisible(seconds);
 	}
 	
 	@Step (

@@ -49,7 +49,7 @@ public class PageResultPagoSteps extends StepBase {
 		int seconds1 = 10;
 		boolean isVisibleTextConfirmacion = pageResultPago.isVisibleTextoConfirmacionPago(seconds1);
 		checks.add(
-			"Aparece un texto de confirmación del pago (lo esperamos hasta " + seconds1 + " segundos)",
+			"Aparece un texto de confirmación del pago " + getLitSecondsWait(seconds1),
 			isVisibleTextConfirmacion, Warn);
 		if (!isVisibleTextConfirmacion) {
 			int seconds2 = 20;

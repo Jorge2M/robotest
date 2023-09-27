@@ -25,11 +25,11 @@ public class PageFavoritosSteps extends StepBase {
 		int secondsCapa = 3;
 		int secondsArticles = 2;
 		checks.add(
-			"Está visible la capa de favoritos con artículos (la esperamos hasta " + secondsCapa + " segundos)",
+			"Está visible la capa de favoritos con artículos " + getLitSecondsWait(secondsCapa),
 			pageFavoritos.isSectionArticlesVisibleUntil(secondsCapa));
 		
 		checks.add(
-			"Aparecen los artículos (los esperamos hasta " + secondsArticles + " segundos): <br>" + dataTest.getDataFavoritos().getListArtDescHTML(),
+			"Aparecen los artículos " + getLitSecondsWait(secondsArticles) + ": <br>" + dataTest.getDataFavoritos().getListArtDescHTML(),
 			pageFavoritos.areVisibleArticlesUntil(secondsArticles));
 		
 		return checks;

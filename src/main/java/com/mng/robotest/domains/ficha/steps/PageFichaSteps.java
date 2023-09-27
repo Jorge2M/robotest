@@ -298,12 +298,12 @@ public class PageFichaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds1 = 3;
 		checks.add(
-				"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" (lo esperamos hasta " + seconds1 + " segundos)",
+				"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" " + getLitSecondsWait(seconds1),
 				pageFicha.isVisibleDivAnadiendoAFavoritosUntil(seconds1), Info);
 
 		int seconds2 = 3;
 		checks.add(
-				"La capa superior acaba desapareciendo (lo esperamos hasta " + seconds2 + " segundos)",
+				"La capa superior acaba desapareciendo " + getLitSecondsWait(seconds2),
 				pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(seconds2), Warn);
 
 		return checks;

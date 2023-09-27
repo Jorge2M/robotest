@@ -759,13 +759,13 @@ public class PageGaleriaSteps extends StepBase {
 		int secondsArticle = 8;
 		int secondsIcon = 2;
 		checks.add (
-			"Como mínimo se obtiene un artículo (lo esperamos hasta " + secondsArticle + " segundos)",
+			"Como mínimo se obtiene un artículo " + getLitSecondsWait(secondsArticle),
 			pageGaleria.isVisibleArticleUntil(1, secondsArticle), Warn);
 		
 		if (app==AppEcom.shop) {
 			checks.add (
 				Check.make(
-					"El 1er artículo tiene 1 icono de favorito asociado (lo esperamos hasta " + secondsIcon + " segundos)",
+					"El 1er artículo tiene 1 icono de favorito asociado " + getLitSecondsWait(secondsIcon),
 					pageGaleria.isArticleWithHearthIconPresentUntil(1, secondsIcon), Info)
 				.store(StoreType.None).build());
 		}

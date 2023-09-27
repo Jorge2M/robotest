@@ -98,7 +98,7 @@ public class SecBannersSteps extends StepBase {
 		int seconds2 = 1;
 
 	 	checks.add(
-	 		"La URL de la página cambia (lo esperamos hasta un máximo de " + seconds1 + " segundos)",
+	 		"La URL de la página cambia " + getLitSecondsWait(seconds1),
 	 		managerBannersScreen.checkUrlNotMatchUntil(urlPagPadre, seconds1));  
 	 	
 	 	boolean urlEqual = false;
