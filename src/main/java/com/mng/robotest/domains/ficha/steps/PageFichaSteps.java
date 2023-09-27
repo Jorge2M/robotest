@@ -54,8 +54,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description=
-			"Aparece la página correspondiente a la ficha del artículo #{refArticulo}" +
-			" (La esperamos hasta #{seconds} segundos)")
+			"Aparece la página correspondiente a la ficha del artículo #{refArticulo}" + SECONDS_WAIT)
 	public boolean checkIsFichaArtDisponible(String refArticulo, int seconds) {
 		return pageFicha.isFichaArticuloUntil(refArticulo, seconds);
 	}
@@ -150,7 +149,7 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Queda seleccionada la talla <b>#{talla.name()}</b> (esperamos hasta #{seconds} segundos)")
+		description="Queda seleccionada la talla <b>#{talla.name()}</b> " + SECONDS_WAIT)
 	private boolean checkTallaSelected(Talla talla, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			Talla tallaSelected = pageFicha.getTallaSelected();

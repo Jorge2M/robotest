@@ -22,7 +22,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	private final Pais pais = dataTest.getPais();
 	
 	@Validation (
-		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la página inicial del proceso de registro " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
 		return pageRegistroIni.isPageUntil(seconds);
 	}
@@ -115,14 +115,14 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece la capa de loading (lo esperamos hasta #{seconds} segundos)",
+		description="Desaparece la capa de loading " + SECONDS_WAIT,
 		level=Warn)
 	public boolean validaIsInvisibleCapaLoading(int seconds) {
 		return (pageRegistroIni.isCapaLoadingInvisibleUntil(seconds));
 	}
 	
 	@Validation (
-		description="Aparece un error <b>Email ya registrado</b> (lo esperamos hasta #{seconds} segundos)")
+		description="Aparece un error <b>Email ya registrado</b> " + SECONDS_WAIT)
 	private boolean validaEmailYaRegistradoShown(int seconds) {
 		return(pageRegistroIni.isVisibleErrorUsrDuplicadoUntil(seconds));
 	}

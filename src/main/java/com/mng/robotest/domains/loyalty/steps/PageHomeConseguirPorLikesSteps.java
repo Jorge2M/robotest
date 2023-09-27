@@ -11,7 +11,7 @@ public class PageHomeConseguirPorLikesSteps extends StepBase {
 	private final PageHomeConseguirPorLikes pageHomeConseguirPorLikes = new PageHomeConseguirPorLikes();
 	
 	@Validation (
-		description="Aparece el botón de \"Conseguir por Likes\" (esperamos hasta #{seconds} segundos)")
+		description="Aparece el botón de \"Conseguir por Likes\" " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
 		return pageHomeConseguirPorLikes.isPage(seconds);
 	}

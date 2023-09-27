@@ -116,7 +116,7 @@ public class PageMisDatosSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece un mensaje de cuenta cancelada correctamente (lo esperamos #{seconds} segundos)")
+		description="Aparece un mensaje de cuenta cancelada correctamente " + SECONDS_WAIT)
 	private boolean checkCuentaCanceladaOk(int seconds) {
 		return pageMisDatos.isMessageCuentaCanceladaOkVisible(seconds);
 	}

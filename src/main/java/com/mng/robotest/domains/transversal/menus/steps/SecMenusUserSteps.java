@@ -71,7 +71,7 @@ public class SecMenusUserSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el link superior de \"Iniciar sesión\" (lo esperamos hasta #{seconds} segundos)")
+		description="Aparece el link superior de \"Iniciar sesión\" " + SECONDS_WAIT)
 	private boolean checkIsVisibleIniciarSesionLink(int seconds) {
 		return (userMenus.isMenuInStateUntil(INICIAR_SESION, Present, seconds));
 	}
@@ -93,8 +93,7 @@ public class SecMenusUserSteps extends StepBase {
 	
 	@Validation (
 		description=
-			"Aparece el link superior de \"Cerrar Sesión\" (estamos loginados). " + 
-			"Lo esperamos hasta #{seconds} segundos")	
+			"Aparece el link superior de \"Cerrar Sesión\" (estamos loginados) " + SECONDS_WAIT)	
 	public boolean checkIsVisibleLinkCerrarSesionUntil(int seconds) {
 		if (isVisibleLinkCerrarSesionExceptionSafe()) {
 			return true;

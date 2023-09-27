@@ -223,14 +223,14 @@ public class ConsolaVotfSteps extends StepBase {
 	}
 	
 	@Validation (
-		description = "En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Pedidos\" (la esperamos hasta #{seconds} segundos)",
+		description = "En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Pedidos\" " + SECONDS_WAIT,
 		level=Warn)
 	private boolean checkIsLineaPedidos(int seconds) {
 		return iframeResult.isPresentListaPedidosUntil(seconds);
 	}
 	
 	@Validation (
-		description = "En la lista de pedidos aparece el generado anteriormente: #{codigoPedido} (lo esperamos hasta #{seconds} segundos)")
+		description = "En la lista de pedidos aparece el generado anteriormente: #{codigoPedido} " + SECONDS_WAIT)
 	private boolean checkIsPresentPedidoInList(String codigoPedido, int seconds) {
 		String codigoPedidoFull = iframeResult.getPedidoFromListaPedidosUntil(codigoPedido, seconds);
 	 	return "".compareTo(codigoPedidoFull)!=0;

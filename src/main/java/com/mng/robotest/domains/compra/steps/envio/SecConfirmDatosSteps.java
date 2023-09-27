@@ -19,7 +19,7 @@ public class SecConfirmDatosSteps extends StepBase {
 	private final SecConfirmDatos secConfirmDatos = modalDroppoints.getSecConfirmDatos();
 	
 	@Validation (
-		description="Es visible la capa de confirmación de los datos (la esperamos hasta #{seconds} segundos)")
+		description="Es visible la capa de confirmación de los datos " + SECONDS_WAIT)
 	public boolean validateIsVisible(int seconds) {
 		return (secConfirmDatos.isVisibleUntil(seconds));
 	}

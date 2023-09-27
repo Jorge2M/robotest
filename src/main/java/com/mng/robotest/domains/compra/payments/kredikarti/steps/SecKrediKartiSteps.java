@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.compra.payments.kredikarti.steps;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.kredikarti.pageobjects.SecKrediKarti;
@@ -17,13 +15,13 @@ public class SecKrediKartiSteps extends StepBase {
 		expected="Aparece la capa correspondiente a las opciones a plazo")
 	public void inputNumTarjeta(String numTarjeta) {
 		secKrediKarti.inputCardNumberAndTab(numTarjeta);
-		isVisibleCapaPagoAplazo(channel, 5, driver);
+		isVisibleCapaPagoAplazo(channel, 5);
 	}
 	
 	@Validation (
-		description="Se carga la capa correspondiente al pago a plazos (en menos de #{seconds} segundos)")
-	private boolean isVisibleCapaPagoAplazo(Channel channel, int seconds, WebDriver driver) {
-		return (secKrediKarti.isVisiblePagoAPlazoUntil(seconds));
+		description="Se carga la capa correspondiente al pago a plazos " + SECONDS_WAIT)
+	private boolean isVisibleCapaPagoAplazo(Channel channel, int seconds) {
+		return secKrediKarti.isVisiblePagoAPlazoUntil(seconds);
 	}
 	
 	@Step (

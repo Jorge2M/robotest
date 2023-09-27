@@ -17,7 +17,7 @@ public class ModalPreloaderSppinerSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el icono del candado de \"Cargando\" (lo esperamos un máximo de #{seconds})",
+		description="Aparece el icono del candado de \"Cargando\" " + SECONDS_WAIT,
 		level=Info,
 		store=StoreType.None)
 	public boolean validateIsVisible(int seconds) {
@@ -25,7 +25,7 @@ public class ModalPreloaderSppinerSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece el icono del candado de \"Cargando\" (lo esperamos un máximo de #{seconds})",
+		description="Desaparece el icono del candado de \"Cargando\" " + SECONDS_WAIT,
 		level=Info,
 		store=StoreType.None)
 	public boolean validateIsVanished(int seconds) {

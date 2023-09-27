@@ -16,7 +16,7 @@ public class ModalCambioPaisSteps extends StepBase {
 	private final ModalCambioPais modalCambioPais = new ModalCambioPais();
 	
 	@Validation (
-		description="Aparece el modal de selección de país (lo esperamos hasta #{seconds} segundos)")
+		description="Aparece el modal de selección de país " + SECONDS_WAIT)
 	public boolean validateIsVisible(int seconds) {
 		return modalCambioPais.isVisibleModalUntil(seconds);
 	}

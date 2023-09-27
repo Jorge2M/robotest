@@ -15,7 +15,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 	private final PageRegistroFinOutlet pageRegistroFin = new PageRegistroFinOutlet();
 	
 	@Validation(
-		description="Aparece la página final del proceso de registro (la esperamos hasta #{seconds} segundos)",
+		description="Aparece la página final del proceso de registro " + SECONDS_WAIT,
 		level=Warn)
 	public boolean isPageUntil(int seconds) {
 		return pageRegistroFin.isPageUntil(seconds);

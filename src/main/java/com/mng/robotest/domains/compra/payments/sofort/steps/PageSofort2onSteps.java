@@ -11,7 +11,7 @@ public class PageSofort2onSteps extends StepBase {
 	private final PageSofort2on pageSofort2on = new PageSofort2on();
 	
 	@Validation (
-		description="Aparece la página de selección del país/banco (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la página de selección del país/banco " + SECONDS_WAIT)
 	public boolean validaIsPageUntil(int seconds) {
 		return pageSofort2on.isPageUntil(seconds);
 	}

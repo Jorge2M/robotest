@@ -20,7 +20,7 @@ public class ModalDirecEnvioOldSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
-			"Es visible el formulario para la introducción de la \"Dirección de envío\" (lo esperamos hasta #{seconds} seconds)",
+			"Es visible el formulario para la introducción de la \"Dirección de envío\" " + SECONDS_WAIT,
 			modalDirecEnvio.isVisibleFormUntil(seconds));
 	 	
 	 	checks.add(

@@ -98,7 +98,7 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 	}
 	
 	@Validation (
-		description="Se muestra la tabla de información (la esperamos un máximo de #{seconds} segundos)")
+		description="Se muestra la tabla de información " + SECONDS_WAIT)
 	private boolean checkIsTableTrackingsInformation(int seconds) {
 		return pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds);
 	}

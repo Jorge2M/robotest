@@ -139,7 +139,7 @@ public class PageOrdenacionDePrendasSteps extends StepMantoBase {
 	}	
 	
 	@Validation(
-        description="Es visible el botón \"Aplicar Orden\" (lo esperamos #{seconds} segundos)",
+        description="Es visible el botón \"Aplicar Orden\" " + SECONDS_WAIT,
         level=Warn)
 	private boolean checkButtonAplicarOrdenVisible(int seconds) {
         return state(Visible, APLICAR_ORDEN.getBy()).wait(seconds).check();

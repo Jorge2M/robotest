@@ -79,7 +79,7 @@ public class PageFavoritosSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece el modal de favoritos compartidos (lo esperamos hasta #{seconds} segundos)",
+		description="Desaparece el modal de favoritos compartidos " + SECONDS_WAIT,
 		level=Warn)
 	public boolean checkShareIsClosedUntil(int seconds) {
 		return (pageFavoritos.checkShareModalInvisible(seconds));
@@ -94,7 +94,7 @@ public class PageFavoritosSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece de Favoritos el artículo con referencia <b>#{refArticle}</b> y código de color <b>#{codColor}</b> (lo esperamos hasta #{seconds} segundos)")
+		description="Desaparece de Favoritos el artículo con referencia <b>#{refArticle}</b> y código de color <b>#{codColor}</b> " + SECONDS_WAIT)
 	public boolean checkArticleDisappearsFromFavoritesUntil(String refArticle, String codColor, int seconds) {
 		return (pageFavoritos.isInvisibleArticleUntil(refArticle, codColor, seconds));
 	}

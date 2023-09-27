@@ -7,7 +7,7 @@ import com.mng.robotest.domains.registro.pageobjects.PageCondicionesVenta;
 public class PageCondicionesVentaSteps extends StepBase {
 
 	@Validation (
-		description="Aparece la página con las condiciones de venta (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la página con las condiciones de venta " + SECONDS_WAIT)
 	public boolean checkIsPageUntil(int seconds) {
 		return new PageCondicionesVenta().isPageUntil(seconds);
 	}

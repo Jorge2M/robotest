@@ -53,7 +53,7 @@ public class PageMisComprasSteps extends StepBase {
 	//TODO cuando funcione Mis Compras volver a poner esta validación
 //	@Validation (
 //		description=
-//			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> (la esperamos #{seconds} segundos")
+//			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> " + SECONDS_WAIT)
 //	private boolean validateIsCompraOnlinePrendas(String codPedido, int seconds) {
 //		return pageMisCompras.isTicketOnline(codPedido, seconds);
 //	}	
@@ -83,7 +83,7 @@ public class PageMisComprasSteps extends StepBase {
 	
 	@Validation (
 		description=
-			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> (la esperamos #{seconds}) segundos",
+			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> " + SECONDS_WAIT,
 		level=Info,
 		store=StoreType.None)
 	private boolean validateIsCompraOnlineChequeRegalo(String codPedido, int seconds) {
@@ -91,7 +91,7 @@ public class PageMisComprasSteps extends StepBase {
 	}	
 	
 	@Validation (
-		description="Es visible una compra de tipo #{typeTicket} (la esperamos hasta #{seconds} segundos)")
+		description="Es visible una compra de tipo #{typeTicket} " + SECONDS_WAIT)
 	public boolean validateIsCompraOfType(TypeTicket typeTicket, int seconds) {
 		return pageMisCompras.isTicket(typeTicket, seconds);
 	}

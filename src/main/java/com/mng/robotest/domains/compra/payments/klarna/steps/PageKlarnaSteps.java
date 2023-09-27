@@ -13,7 +13,7 @@ public class PageKlarnaSteps extends StepBase {
 	private final PageKlarna pageKlarna = new PageKlarna();
 	
 	@Validation (
-		description="Aparece la página inicial de Klarna (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la página inicial de Klarna " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) { 
 		return pageKlarna.isPage(seconds);
 	}
@@ -30,7 +30,7 @@ public class PageKlarnaSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el modal de introducción de los datos del usuario (lo esperamos hasta #{seconds} segundos)")
+		description="Aparece el modal de introducción de los datos del usuario " + SECONDS_WAIT)
 	public boolean checkIsModalInputUserData(int seconds) { 
 		return pageKlarna.isVisibleModalInputUserData(seconds);
 	}
@@ -50,14 +50,14 @@ public class PageKlarnaSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Es visible el modal para la introducción del número personal (lo esperamos hasta #{seconds} segundos)",
+		description="Es visible el modal para la introducción del número personal " + SECONDS_WAIT,
 		level=Info)
 	public boolean checkModalInputPersonNumber(int seconds) { 
 		return pageKlarna.isVisibleModalPersonNumber(seconds);
 	}
 	
 	@Validation (
-		description="Es visible el modal para la introducción del phone number (lo esperamos hasta #{seconds} segundos)",
+		description="Es visible el modal para la introducción del phone number " + SECONDS_WAIT,
 		level=Info)
 	public boolean checkModalInputPhoneNumber(int seconds) { 
 		return pageKlarna.isVisibleModalInputPhone(seconds);

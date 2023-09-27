@@ -105,7 +105,7 @@ public class CheckoutSteps extends StepBase {
 	}	
 	
 	@Validation (
-		description="Acaba desapareciendo la capa de \"Cargando...\" (lo esperamos hasta #{seconds} segundos)",
+		description="Acaba desapareciendo la capa de \"Cargando...\" " + SECONDS_WAIT,
 		level=Warn)
 	public boolean validateLoadingDisappears(int seconds) {
 		waitMillis(200); //Damos tiempo a que aparezca la capa de "Cargando"
@@ -270,7 +270,7 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Se hace visible el texto bajo el método de pago: #{nombrePago} (lo esperamos hasta #{seconds} segundos)")
+		description="Se hace visible el texto bajo el método de pago: #{nombrePago} " + SECONDS_WAIT)
 	private boolean checkIsVisibleTextUnderPayment(String nombrePago, Pago pago, int seconds) {
 		return (pageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, seconds));
 	}
@@ -346,7 +346,7 @@ public class CheckoutSteps extends StepBase {
 	}	  
 	
 	@Validation (
-		description="Aparece el botón de \"Confirmar Pago\" (esperamos hasta #{seconds} segundos)",
+		description="Aparece el botón de \"Confirmar Pago\" " + SECONDS_WAIT,
 		level=Warn)
 	private boolean checkAfterClickVerResumen(int seconds) {
 		return (pageCheckoutWrapper.getPage2MobilCheckout().isClickableButtonFinalizarCompraUntil(seconds));
@@ -484,7 +484,7 @@ public class CheckoutSteps extends StepBase {
 	@Validation (
 		description=
 			"Se aplica el descuento de <b>#{descuento}</b> al subtotal inicial de #{subtotalInicial} " + 
-			"(lo esperamos hasta #{seconds})")
+			SECONDS_WAIT)
 	public boolean validateLoyaltyPointsDiscountDesktopUntil(
 			float descuento, float subtotalInicial, int seconds) {
 		
@@ -507,7 +507,7 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece un descuento aplicado de #{descuento} (lo esperamos hasta #{seconds})")
+		description="Aparece un descuento aplicado de #{descuento} " + SECONDS_WAIT)
 	public boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			float discountApplied = UtilsMangoTest.round(pageCheckoutWrapper.getDiscountLoyaltyAppliedMobil(), 2);

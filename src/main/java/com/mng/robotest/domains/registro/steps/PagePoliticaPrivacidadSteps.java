@@ -7,7 +7,7 @@ import com.mng.robotest.domains.registro.pageobjects.PagePoliticaPrivacidad;
 public class PagePoliticaPrivacidadSteps extends StepBase {
 
 	@Validation (
-		description="Aparece la página con la política de privacidad (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la página con la política de privacidad " + SECONDS_WAIT)
 	public boolean checkIsPageUntil(int seconds) {
 		return new PagePoliticaPrivacidad().isPageUntil(seconds);
 	}

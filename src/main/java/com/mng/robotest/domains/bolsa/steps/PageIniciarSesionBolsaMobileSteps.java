@@ -10,7 +10,7 @@ public class PageIniciarSesionBolsaMobileSteps extends StepBase {
 
 	private final PageIniciarSesionBolsaMobile pageIdentificacionBolsa = new PageIniciarSesionBolsaMobile();
 	
-	@Validation(description="Se carga la página de identificación desde la bolsa (la esperamos hasta #{seconds} segundos)")
+	@Validation(description="Se carga la página de identificación desde la bolsa " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
 		return pageIdentificacionBolsa.isPage(seconds);
 	}

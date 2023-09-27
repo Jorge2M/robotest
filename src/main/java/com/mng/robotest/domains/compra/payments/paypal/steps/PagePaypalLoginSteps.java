@@ -10,7 +10,7 @@ public class PagePaypalLoginSteps extends StepBase {
 	private final PagePaypalLogin pagePaypalLogin = new PagePaypalLogin();
 	
 	@Validation (
-		description="Aparece la página de login (la esperamos hasta un máximo de #{seconds} segundos)")
+		description="Aparece la página de login " + SECONDS_WAIT)
 	public boolean validateIsPageUntil(int seconds) {
 		return pagePaypalLogin.isPageUntil(seconds);
 	}

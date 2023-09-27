@@ -10,7 +10,7 @@ public class Page1IdentCheckoutSteps extends StepBase {
 	
 
 	@Validation (
-		description="Aparece el formulario correspondiente a la continuación como invitado (lo esperamos hasta #{seconds} segs)")
+		description="Aparece el formulario correspondiente a la continuación como invitado " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
 		return page1IdentCheckout.getSecSoyNuevo().isInputEmailUntil(seconds);
 	}

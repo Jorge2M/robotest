@@ -19,7 +19,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece la página inicial del proceso de registro (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la página inicial del proceso de registro " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
 		return pageRegistroInitial.isPage(seconds);
 	}
@@ -115,7 +115,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		pageRegistroInitial.keyDown(5);
 		checkIsModalPoliticaPrivacidadVisible(1);
 	}
-	@Validation (description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\" (lo esperamos hasta #{seconds} segundos)")
+	@Validation (description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\" " + SECONDS_WAIT)
 	public boolean checkIsModalPoliticaPrivacidadVisible(int seconds) {
 		return pageRegistroInitial.isModalPoliticaPrivacidadVisible(seconds);
 	}	

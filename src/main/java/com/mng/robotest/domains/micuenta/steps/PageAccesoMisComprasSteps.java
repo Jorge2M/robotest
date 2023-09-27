@@ -44,7 +44,7 @@ public class PageAccesoMisComprasSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Se hace visible el bloque de \"#{typeBlock}\" (lo esperamos hasta #{seconds} segundos)",
+		description="Se hace visible el bloque de \"#{typeBlock}\" " + SECONDS_WAIT,
 		level=Warn)
 	private boolean checkIsVisibleBlock(TypeBlock typeBlock, int seconds) {
 		return (pageAccesoMisCompras.isVisibleBlockUntil(typeBlock, seconds));

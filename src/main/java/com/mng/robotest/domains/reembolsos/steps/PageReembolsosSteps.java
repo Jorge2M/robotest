@@ -148,7 +148,7 @@ public class PageReembolsosSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece el botón \"Save\" de Store Credit (lo esperamos hasta #{seconds} segundos)",
+		description="Desaparece el botón \"Save\" de Store Credit " + SECONDS_WAIT,
 		level=Warn)
 	private boolean checkButtonSaveDisappears(int seconds) {
 		return !pageReembolsos.isVisibleSaveButtonStoreCreditUntil(seconds);

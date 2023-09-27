@@ -35,7 +35,7 @@ public class PageDotpayPaymentChannelSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Es visible el bloque de introducción del nombre (lo esperamos hasta #{seconds} segundos)",
+		description="Es visible el bloque de introducción del nombre " + SECONDS_WAIT,
 		level=Warn)
 	private boolean isVisibleBlockInputNombre(int seconds) {
 		return pageDotpayPaymentChannel.isVisibleBlockInputDataUntil(seconds);

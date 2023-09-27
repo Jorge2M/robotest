@@ -129,7 +129,7 @@ public class PageGaleriaSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece la capa con la información de las tallas (la esperamos hasta #{seconds} segundos",
+		description="Aparece la capa con la información de las tallas " + SECONDS_WAIT,
 		level=Warn)
 	private boolean checkIsVisibleCapaInfoTallas(int posArticulo, int seconds) {
 		return pageGaleria.isVisibleArticleCapaTallasUntil(posArticulo, seconds);
@@ -512,7 +512,7 @@ public class PageGaleriaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Aparece una página con artículos (la esperamos #{seconds} segundos)",
+		description="Aparece una página con artículos " + SECONDS_WAIT,
 		level=Warn)
 	public boolean validaArtEnContenido(int seconds) {
 		return (pageGaleria.isVisibleArticleUntil(1, seconds));

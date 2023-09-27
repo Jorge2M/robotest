@@ -19,7 +19,7 @@ public class PageMiCuentaSteps extends StepBase {
 	private final PageMiCuenta pageMiCuenta = new PageMiCuenta();
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	
-	@Validation(description="Aparece la página de \"Mi cuenta\" (la esperamos hasta #{seconds} segundos)")
+	@Validation(description="Aparece la página de \"Mi cuenta\" " + SECONDS_WAIT)
 	public boolean validateIsPage (int seconds) {
 		return pageMiCuenta.isPageUntil(seconds);
 	}

@@ -59,7 +59,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Se hace clickable el botón \"Continuar\" (lo esperamos hasta #{seconds})")
+		description="Se hace clickable el botón \"Continuar\" " + SECONDS_WAIT)
 	private boolean checkIsVisibleContiueButton(int seconds) {
 		return (page2IdentCheckout.isContinuarClickableUntil(seconds));
 	}

@@ -12,7 +12,7 @@ public class PageMercpago1rstSteps extends StepBase {
 	private final PageMercpago1rst pageMercpago1rst = new PageMercpago1rst();
 	
 	@Validation (
-		description="Aparece la página inicial de Mercado para la introducción de datos (la esperamos hasta #{seconds} segundos)",
+		description="Aparece la página inicial de Mercado para la introducción de datos " + SECONDS_WAIT,
 		level=Warn)
 	public boolean validateIsPageUntil(int seconds) {
 	   return pageMercpago1rst.isPageUntil(seconds);

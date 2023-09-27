@@ -20,7 +20,7 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece la página de personalización del registro (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la página de personalización del registro " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
 		return pageRegistroPersonalizacion.isPageUntil(seconds);
 	}

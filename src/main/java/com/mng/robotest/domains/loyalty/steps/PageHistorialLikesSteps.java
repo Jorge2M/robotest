@@ -10,7 +10,7 @@ public class PageHistorialLikesSteps extends StepBase {
 	private final PageHistorialLikes pageHistorialLikes = new PageHistorialLikes();
 	
 	@Validation (
-		description="Aparece el historial de movimientos de Loyalty (lo esperamos #{seconds} segundos)")
+		description="Aparece el historial de movimientos de Loyalty " + SECONDS_WAIT)
 	public boolean checkHistorialVisible(int seconds) {
 		return pageHistorialLikes.isMovimientoVisible(seconds);
 	}

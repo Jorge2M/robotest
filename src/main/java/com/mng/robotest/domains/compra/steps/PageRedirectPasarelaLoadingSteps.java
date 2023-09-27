@@ -9,7 +9,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 public class PageRedirectPasarelaLoadingSteps extends StepBase {
 	
 	@Validation (
-		description="Acaba desapareciendo la página de \"Por favor espere. Este proceso puede tardar...\" (esperamos hasta #{seconds} segundos)",
+		description="Acaba desapareciendo la página de \"Por favor espere. Este proceso puede tardar...\" " + SECONDS_WAIT,
 		level=Warn)
 	public boolean validateDisappeared(int seconds) { 
 		return new PageRedirectPasarelaLoading().isPageNotVisibleUntil(seconds);

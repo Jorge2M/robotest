@@ -88,7 +88,7 @@ public class PageSuscripcionesSteps extends StepBase {
 	}
 
 	@Validation(
-		description="Aparece una pantalla de resultado OK (la esperamos hasta #{seconds} segundos)")
+		description="Aparece una pantalla de resultado OK " + SECONDS_WAIT)
 	private boolean validateIsPageResult (int seconds) {
 		return pageSuscripciones.isPageResOKUntil(seconds);
 	}

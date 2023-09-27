@@ -21,7 +21,7 @@ public class PageLandingSteps extends StepBase {
 		pageLanding = new PageLanding();
 	}
 	
-	@Validation (description="Aparece la página de Landing (la esperamos hasta #{seconds} segundos)")
+	@Validation (description="Aparece la página de Landing " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
 		return (pageLanding.isPageUntil(seconds));
 	}

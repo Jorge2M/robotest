@@ -14,6 +14,7 @@ import com.mng.robotest.test.datastored.DataPedido;
 
 public abstract class StepMantoBase extends PageBase {
 
+	protected static final String SECONDS_WAIT = "(esperamos hasta #{seconds} segundos)";
 	protected static final String CODIGO_ESPANYA = "001";
 	protected static final String ALMACEN_ESPANYA = "001";
 	

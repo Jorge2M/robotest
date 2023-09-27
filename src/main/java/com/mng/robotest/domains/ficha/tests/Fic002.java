@@ -91,8 +91,8 @@ public class Fic002 extends TestBase {
 		if (app==AppEcom.outlet && channel!=Channel.mobile) {
 			pageFichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}
-		pageFichaSteps.getSecProductDescDeviceSteps().validateAreInStateInitial(app);
-		PageFicha pageFicha = PageFicha.of(channel);
+		pageFichaSteps.getSecProductDescDeviceSteps().validateAreInStateInitial();
+		var pageFicha = PageFicha.of(channel);
 		if (((PageFichaDevice)pageFicha).getNumImgsCarruselIzq() > 2) {
 			pageFichaSteps.selectImgCarruselIzqFichaOld(2);
 		}

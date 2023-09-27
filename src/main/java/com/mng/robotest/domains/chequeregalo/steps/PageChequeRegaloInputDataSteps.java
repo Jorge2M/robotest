@@ -4,7 +4,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.conf.AppEcom;
-import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.chequeregalo.pageobjects.PageChequeRegaloInputData;
 import com.mng.robotest.domains.chequeregalo.pageobjects.PageChequeRegaloInputDataNew;
 import com.mng.robotest.domains.chequeregalo.pageobjects.PageChequeRegaloInputData.*;
@@ -13,7 +13,7 @@ import com.mng.robotest.test.generic.ChequeRegalo;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
-public class PageChequeRegaloInputDataSteps extends PageBase {
+public class PageChequeRegaloInputDataSteps extends StepBase {
 
 	private final PageChequeRegaloInputData pageChequeRegaloInputData = PageChequeRegaloInputData.make(dataTest.getPais());
 	
@@ -48,7 +48,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	}
 	
 	@Validation (
-		description="Es visible el campo de <b>cvv</b> (lo esperamos hasta #{seconds} segundos)</br>")
+		description="Es visible el campo de <b>cvv</b> " + SECONDS_WAIT + "</br>")
 	private boolean checkInputOtherData(int seconds) {
 		var pageNew = ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData);
 		return pageNew.isVisibleCvv(seconds);
@@ -84,7 +84,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 		checkIsInitPage(2);
 	}
 
-	@Validation (description="Estamos en la página inicial (la esperamos hasta #{seconds} segundos)")
+	@Validation (description="Estamos en la página inicial " + SECONDS_WAIT)
 	private boolean checkIsInitPage(int seconds) {
 		return ((PageChequeRegaloInputDataNew)pageChequeRegaloInputData).isPageCorrectUntil(seconds);
 	}
@@ -105,7 +105,7 @@ public class PageChequeRegaloInputDataSteps extends PageBase {
 	}
 	
 	@Validation (
-		description="Aparece la capa para introducir los datos del cheque regalo (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la capa para introducir los datos del cheque regalo " + SECONDS_WAIT)
 	private boolean checkIsVisibleCapaInputCheque(int seconds) {
 		return pageChequeRegaloInputData.isVisibleDataInput(seconds);
 	}

@@ -14,7 +14,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	private final ModalArticleNotAvailable modalArticleNotAvailable = new ModalArticleNotAvailable();
 	
 	@Validation (
-		description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} (lo esperamos #{seconds} segundos)",
+		description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} " + SECONDS_WAIT,
 		level=Info)
 	public boolean validateState(int seconds, StateModal stateModal) {
 		return modalArticleNotAvailable.inStateUntil(stateModal, seconds);
@@ -62,7 +62,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el modal de petición confirmada OK (lo esperamos #{seconds} segundos)")
+		description="Aparece el modal de petición confirmada OK " + SECONDS_WAIT)
 	public boolean checkModalAvisoOkVisible(int seconds) {
 		return modalArticleNotAvailable.isModalAvisoOkVisible(seconds);
 	}
@@ -76,7 +76,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Desaparece el modal de petición confirmada OK (lo esperamos #{seconds} segundos)")	
+		description="Desaparece el modal de petición confirmada OK " + SECONDS_WAIT)	
 	public boolean checkModalAvisoOkInvisible(int seconds) {
 		return modalArticleNotAvailable.isModalAvisoOkInvisible(seconds);
 	}	

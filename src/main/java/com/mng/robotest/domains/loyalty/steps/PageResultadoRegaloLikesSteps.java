@@ -9,7 +9,7 @@ public class PageResultadoRegaloLikesSteps extends StepBase {
 	private final PageResultadoRegaloLikes pageResultado = new PageResultadoRegaloLikes();
 	
 	@Validation (
-		description="Aparece la página de resultado Ok del envío de Likes (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la página de resultado Ok del envío de Likes " + SECONDS_WAIT)
 	public boolean checkIsEnvioLikesOk(int seconds) {
 		return pageResultado.isEnvioOk(seconds);
 	}

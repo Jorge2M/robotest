@@ -9,13 +9,13 @@ public class PageKcpMainSteps extends StepBase {
 	private final PageKcpMain pageKcpMain = new PageKcpMain();
 	
 	@Validation (
-		description="Aparece la página inicial de KCP (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la página inicial de KCP " + SECONDS_WAIT)
 	public boolean isPage(int seconds) { 
 		return (pageKcpMain.isPage(seconds));
 	}
 	
 	@Validation (
-		description="Aparece el radiobutton para aceptar los términos y condiciones (lo esperamos hasta #{seconds} segundos)")
+		description="Aparece el radiobutton para aceptar los términos y condiciones " + SECONDS_WAIT)
 	public boolean isPresentTermAndConditions(int seconds) { 
 		return (pageKcpMain.isVisibleTermAndConditions(seconds));
 	}	

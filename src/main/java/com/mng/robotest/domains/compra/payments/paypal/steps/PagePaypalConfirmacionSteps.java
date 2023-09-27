@@ -10,7 +10,7 @@ public class PagePaypalConfirmacionSteps extends StepBase {
 	private final PagePaypalConfirmacion pagePaypalConfirmacion = new PagePaypalConfirmacion();
 	
 	@Validation (
-		description="Aparece la página de Confirmación (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la página de Confirmación " + SECONDS_WAIT)
 	public boolean validateIsPageUntil(int seconds) {
 		return (pagePaypalConfirmacion.isPageUntil(seconds));
 	}

@@ -69,7 +69,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Desaparece la bolsa (lo esperamos hasta #{seconds} segundos)")
+		description="Desaparece la bolsa " + SECONDS_WAIT)
 	private boolean checkBolsaDisappears(int seconds) {
 		return (secBolsa.isInStateUntil(StateBolsa.CLOSED, seconds));
 	}
@@ -82,8 +82,7 @@ public class SecBolsaSteps extends StepBase {
 		validateBolsaInState(stateBolsaExpected, 1);
 	}
 
-	@Validation (
-		description="La bolsa queda en estado #{stateBolsaExpected} (lo esperamos hasta #{seconds} segundos)")
+	@Validation(description="La bolsa queda en estado #{stateBolsaExpected} " + SECONDS_WAIT)
 	private boolean validateBolsaInState(StateBolsa stateBolsaExpected, int seconds) {
 		return (secBolsa.isInStateUntil(stateBolsaExpected, seconds));
 	}
@@ -251,7 +250,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="El importe total se acaba modificando (lo esperamos hasta #{seconds} segundos)",
+		description="El importe total se acaba modificando " + SECONDS_WAIT,
 		level=Warn)
 	private boolean checkImporteIsModified(String importeTotalOrig, int seconds) {
 		return (secBolsa.isNotThisImporteTotalUntil(importeTotalOrig, seconds));
@@ -319,7 +318,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Es visible el botón \"Continuar sin cuenta\" (lo esperamos ahsta #{seconds} segundos)",
+		description="Es visible el botón \"Continuar sin cuenta\" " + SECONDS_WAIT,
 		level=State.Defect)
 	private boolean checkVisibleContinuarSinCuentaButtonDevice(int seconds) {
 		return secBolsa.isVisibleContinuarSinCuentaButtonMobile(seconds);

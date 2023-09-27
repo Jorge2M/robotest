@@ -43,7 +43,7 @@ public class PageLoginMantoSteps extends StepMantoBase {
 	}
 
 	@Validation (
-		description="Aparece la página de selección de la tienda (la esperamos hasta #{seconds} segundos)",
+		description="Aparece la página de selección de la tienda " + SECONDS_WAIT,
 		level=Warn)
 	private boolean checkIsPageSelectTienda(int seconds) {
 		return (new PageSelTda().isPage(seconds));

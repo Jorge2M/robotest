@@ -2,20 +2,21 @@ package com.mng.robotest.domains.compra.payments.postfinance.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.postfinance.pageobjects.PagePostfSelectChannel;
 import com.mng.robotest.domains.compra.payments.postfinance.pageobjects.PagePostfSelectChannel.ChannelPF;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
-public class PagePostfSelectChannelSteps {
+public class PagePostfSelectChannelSteps extends StepBase {
 
 	private final PagePostfSelectChannel pageObj = new PagePostfSelectChannel();
 	
 	@Validation (
-		description="Aparece la página de selección del canal (lo esperamos un máximo de #{seconds})",
+		description="Aparece la página de selección del canal " + SECONDS_WAIT,
 		level=Warn)
 	public boolean checkIsPage(int seconds) {
-		return (pageObj.isPage(seconds));
+		return pageObj.isPage(seconds);
 	}
 	
 	@Step(

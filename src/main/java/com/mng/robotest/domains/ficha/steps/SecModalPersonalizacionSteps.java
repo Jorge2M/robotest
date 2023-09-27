@@ -210,7 +210,7 @@ public class SecModalPersonalizacionSteps extends StepBase {
 	}
 
 	@Validation(
-		description="En la bolsa aparece el apartado correspondiente a la personalización (lo esperamos hasta #{seconds} segundos)")
+		description="En la bolsa aparece el apartado correspondiente a la personalización " + SECONDS_WAIT)
 	private boolean validateCustomizationProof(int seconds) {
 		return (state(Visible, ModalElement.BOLSA_PROOF.getBy(channel)).wait(seconds).check());
 	}

@@ -23,7 +23,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Estamos en la página de introducción de los datos de la tarjeta (la esperamos hasta #{seconds} segundos)")
+		description="Estamos en la página de introducción de los datos de la tarjeta " + SECONDS_WAIT)
 	public boolean validaIsPage(int seconds) {
 		return (pageMercpagoDatosTrj.isPageUntil(seconds));
 	}	
@@ -49,7 +49,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa (lo esperamos hasta #{seconds} segundos)",
+		description="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa " + SECONDS_WAIT,
 		level=Warn)
 	private boolean isWrapperTarjetaVisibleVisaDataMobil(int seconds) {
 		 return (((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).isActiveWrapperVisaUntil(seconds));
@@ -64,7 +64,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el icono de Visa a la derecha de la tarjeta (lo esperamos hasta #{seconds} segundos)",
+		description="Aparece el icono de Visa a la derecha de la tarjeta " + SECONDS_WAIT,
 		level=Warn)
 	private boolean isVisaIconAtRightTrjDesktop(int seconds) {
 		return (((PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj).isVisibleVisaIconUntil(seconds));
@@ -127,7 +127,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece activado el botón \"Next\" para continuar con el pago (lo esperamos hasta #{seconds} segundos)",
+		description="Aparece activado el botón \"Next\" para continuar con el pago " + SECONDS_WAIT,
 		level=Warn)
 	private boolean isEnabledButtonNextMobil(int seconds) {
 		return (((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).isClickableButtonNextPayUntil(seconds));

@@ -26,7 +26,7 @@ public class PageResultPagoSteps extends StepBase {
 	private final PageResultPago pageResultPago = new PageResultPago();
 	
 	@Validation (
-		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" (la esperamos hasta #{seconds} segundos)")
+		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" " + SECONDS_WAIT)
 	public boolean validaIsPageUntil(int seconds) {
 		return (pageResultPago.isVisibleTextoConfirmacionPago(seconds));
 	}
@@ -38,7 +38,7 @@ public class PageResultPagoSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece la URL correspondiente a la página de resultado OK (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la URL correspondiente a la página de resultado OK " + SECONDS_WAIT)
 	public boolean checkUrl(int seconds) {
 		return (pageResultPago.checkUrl(seconds));
 	}

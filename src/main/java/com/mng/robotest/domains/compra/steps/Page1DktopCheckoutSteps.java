@@ -133,7 +133,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece el input para la introducción del vale (lo esperamos hasta #{seconds} segundos)",
+		description="Aparece el input para la introducción del vale " + SECONDS_WAIT,
 		level=Warn)
 	private boolean checkIsVisibleInputVale(int seconds) {
 		return (page1DktopCheckout.isVisibleInputCodigoPromoUntil(seconds));

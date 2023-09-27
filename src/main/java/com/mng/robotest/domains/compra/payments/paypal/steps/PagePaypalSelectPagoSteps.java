@@ -10,7 +10,7 @@ public class PagePaypalSelectPagoSteps extends StepBase {
 	private final PagePaypalSelectPago pagePaypalSelectPago = new PagePaypalSelectPago();
 	
 	@Validation (
-		description="Aparece la página de Selección del Pago (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la página de Selección del Pago " + SECONDS_WAIT)
 	public boolean validateIsPageUntil(int seconds) {
 		return pagePaypalSelectPago.isPageUntil(seconds);
 	}

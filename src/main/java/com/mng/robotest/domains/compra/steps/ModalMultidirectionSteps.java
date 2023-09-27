@@ -16,7 +16,7 @@ public class ModalMultidirectionSteps extends StepBase {
 	private final ModalMultidirection modalMultidirection = new ModalMultidirection();
 	
 	@Validation(
-		description = "Es visible el modal de multidirecciones (lo esperamos hasta #{seconds} segundos)")
+		description = "Es visible el modal de multidirecciones " + SECONDS_WAIT)
 	public boolean checkIsVisible(int seconds) {
 		return modalMultidirection.isVisible(seconds);
 	}	
@@ -97,7 +97,7 @@ public class ModalMultidirectionSteps extends StepBase {
 	}
 
 	@Validation(
-		description = "El modal de confirmación de eliminación no es visible (esperamos #{seconds} segundos)")
+		description = "El modal de confirmación de eliminación no es visible " + SECONDS_WAIT)
 	public boolean checkModalInvisible(int seconds) {
 		return modalMultidirection.isModalInvisible(seconds);
 	}

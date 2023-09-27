@@ -68,7 +68,7 @@ public class PageMangoLikesYouSteps extends StepBase {
     public ChecksTM checkPageAyudaMangoLikesYouVisible(int seconds) {
 		var checks = ChecksTM.getNew();
 		checks.add(
-			"Aparece la página específica de ayuda para MangoLikesYou (la esperamos #{seconds} segundos) " + 
+			"Aparece la página específica de ayuda para MangoLikesYou "  + SECONDS_WAIT + 
 		    "(problema <a href='https://jira.mango.com/browse/PIUR-4471'>PIUR4471</a>)",
 		    pageMangoLikesYou.isPageAyudaMangoLikesYouVisible(seconds), Warn);
 		

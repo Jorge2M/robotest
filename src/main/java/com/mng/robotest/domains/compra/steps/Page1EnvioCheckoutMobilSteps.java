@@ -61,7 +61,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> (lo esperamos hasta #{seconds} segundos)",
+		description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> " + SECONDS_WAIT,
 		level=Warn)
 	public boolean validaBlockSelected(TipoTransporte tipoTransporte, int seconds) {
 		return (page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, seconds));

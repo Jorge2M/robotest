@@ -63,7 +63,7 @@ public class AccesoSteps extends StepBase {
 	}
 	
 	@Validation(
-		description="Aparece el link \"Mi cuenta\" (usuario loginado) (lo esperamos hasta #{seconds} segundos)")
+		description="Aparece el link \"Mi cuenta\" (usuario loginado) " + SECONDS_WAIT)
 	public boolean checkIsLogged(int seconds) {
 		return new MenusUserWrapper()
 				.isMenuInStateUntil(MI_CUENTA, Present, seconds);

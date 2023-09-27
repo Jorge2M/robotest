@@ -24,12 +24,12 @@ public class ModalChatBotSteps extends StepBase {
 		
 	}
 	
-	@Validation (description="Aparece la capa del WebChat (la esperamos hasta #{seconds} segundos)")
+	@Validation (description="Aparece la capa del WebChat " + SECONDS_WAIT)
 	private boolean checkWebchatVisible(int seconds) {
 		return modalChatBot.checkWebchatVisible(seconds);
 	}
 	
-	@Validation (description="Es visible la opción #{option} (la esperamos hasta #{seconds} segundos)")
+	@Validation (description="Es visible la opción #{option} " + SECONDS_WAIT)
 	public boolean isVisibleOption(String option, int seconds) {
 		return modalChatBot.isOptionVisible(option, seconds);
 	}
@@ -42,12 +42,12 @@ public class ModalChatBotSteps extends StepBase {
 	}
 	
 	@Validation (
-		description="Aparece una respuesta con el texto #{respuesta} (la esperamos hasta #{seconds} segundos)")
+		description="Aparece una respuesta con el texto #{respuesta} " + SECONDS_WAIT)
 	public boolean checkResponseVisible(String respuesta, int seconds) {
 		return modalChatBot.isResponseVisible(respuesta, seconds);
 	}
 	
-	@Validation (description="Aparece el botón #{button} (lo esperamos hasta #{seconds} segundos)")
+	@Validation (description="Aparece el botón #{button} " + SECONDS_WAIT)
 	public boolean isVisibleButton(String button, int seconds) {
 		return modalChatBot.isButtonVisible(button, seconds);
 	}

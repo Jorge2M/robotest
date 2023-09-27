@@ -13,7 +13,7 @@ public class PageMisDireccionesSteps extends StepBase {
 	private final PageMisDirecciones pageMisDirecciones = new PageMisDirecciones();
 	
 	@Validation(
-		description="Aparece la página de \"Mis direcciones\" (la esperamos hasta #{seconds} segundos)")
+		description="Aparece la página de \"Mis direcciones\" " + SECONDS_WAIT)
 	public boolean checkIsPage (int seconds) {
 		return pageMisDirecciones.isPage(seconds);
 	}
@@ -44,7 +44,7 @@ public class PageMisDireccionesSteps extends StepBase {
 	}
 	
 	@Validation(
-		description="Aparece el formulario con los datos del usuario (lo esperamos #{seconds} segundos)")
+		description="Aparece el formulario con los datos del usuario " + SECONDS_WAIT)
 	public boolean checkIsFormularioUsuario(int seconds) {
 		return pageMisDirecciones.isFormularioUsuario(seconds);
 	}	

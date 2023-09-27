@@ -12,7 +12,7 @@ public class ModEnvioYdevolNewSteps extends StepBase {
 	private final ModEnvioYdevolNew modEnvioYdev = new ModEnvioYdevolNew();
 	
 	@Validation (
-		description="Aparece el modal con los datos a nivel de envío y devolución (lo esperamos hasta #{seconds} segundos)")
+		description="Aparece el modal con los datos a nivel de envío y devolución " + SECONDS_WAIT)
 	public boolean checkIsVisible(int seconds) {
 		return modEnvioYdev.isVisible(seconds);
 	}
