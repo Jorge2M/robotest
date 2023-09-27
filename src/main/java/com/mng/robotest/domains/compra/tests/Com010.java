@@ -1,16 +1,13 @@
 package com.mng.robotest.domains.compra.tests;
 
 import java.util.Arrays;
-import java.util.List;
 
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
-import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pago;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 import com.mng.robotest.test.utils.UtilsTest;
@@ -39,7 +36,7 @@ public class Com010 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access(dataTest.isUserRegistered());
-		List<Article> listArticles = UtilsTest.getArticlesForTest(dataTest.getPais(), app, 3, driver);
+		var listArticles = UtilsTest.getArticlesForTest(dataTest.getPais(), app, 3, driver);
 		if (!manyArticles) {
 			listArticles = Arrays.asList(listArticles.get(0));
 		}
@@ -47,7 +44,7 @@ public class Com010 extends TestBase {
 		new SecBolsaSteps().altaListaArticulosEnBolsa(listArticles);
 
 		//Hasta página Checkout
-		ConfigCheckout configCheckout = ConfigCheckout.config()
+		var configCheckout = ConfigCheckout.config()
 				.checkPagos()
 				.checkMisCompras()
 //				.checkManto(!channel.isDevice())
@@ -55,8 +52,7 @@ public class Com010 extends TestBase {
 				.checkPromotionalCode(testVale || empleado)
 				.userIsEmployee(empleado).build();
 		
-		DataPago dataPago = getDataPago(configCheckout);
-		dataPago = new BuilderCheckout(dataPago)
+		new BuilderCheckout(getDataPago(configCheckout))
 			.pago(this.pago)
 			.build()
 			.checkout(From.BOLSA);

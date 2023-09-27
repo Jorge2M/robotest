@@ -1,6 +1,5 @@
 package com.mng.robotest.domains.registro.steps;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.github.jorge2m.testmaker.conf.StoreType;
@@ -38,8 +37,8 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		expected=
 			"No aparece ningún mensaje de dato incorrecto")
 	public Map<String,String> sendDataAccordingCountryToInputs(String emailNonExistent, boolean clickPubli) {
-		Map<String,String> dataSended = new HashMap<>();
-		dataSended = pageRegistroIni.sendDataAccordingCountryToInputs(emailNonExistent, clickPubli, channel);
+		Map<String,String> dataSended = 
+				pageRegistroIni.sendDataAccordingCountryToInputs(emailNonExistent, clickPubli, channel);
 		validateNotAreErrorMessageInCorrectFields();
 		return dataSended;
 	}

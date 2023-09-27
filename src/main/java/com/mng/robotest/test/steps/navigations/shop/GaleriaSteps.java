@@ -18,9 +18,7 @@ public class GaleriaSteps extends StepBase {
 			catch (Exception e) {
 				Log4jTM.getLogger().warn("Problem selecting first talla available from article " + posArticulo, e);
 			}
-			if (!articleAvailable) {
-				posArticulo+=1;
-			}
+			posArticulo+=1;
 		}
 	}
 }

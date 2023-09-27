@@ -11,12 +11,9 @@ import com.mng.robotest.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
-import com.mng.robotest.test.generic.beans.ArticuloScreen;
-
-import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
-
 import com.mng.robotest.conf.AppEcom;
 
+import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 import static com.mng.robotest.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
 
 public class Fav002 extends TestBase {
@@ -58,7 +55,7 @@ public class Fav002 extends TestBase {
 					.linea(HOME)
 					.group(BANO).build());
 		}
-		LocationArticle article1 = LocationArticle.getInstanceInCatalog(1);
+		var article1 = LocationArticle.getInstanceInCatalog(1);
 		pageGaleriaSteps.selectArticulo(article1);
 	}	
 
@@ -87,7 +84,7 @@ public class Fav002 extends TestBase {
 	}
 
 	private void clearFirstFavoriteFromFavorites() {
-		ArticuloScreen firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
+		var firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		new SecMenusUserSteps().selectFavoritos();
 		pageFavoritosSteps.clear(firstFavorite);
 	}	

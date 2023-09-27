@@ -16,8 +16,7 @@ public class Com003 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		DataPago dataPago = getDataPago(configCheckout);
-		dataPago = new BuilderCheckout(dataPago)
+		new BuilderCheckout(getDataPago(configCheckout))
 			.finalCountrys(Arrays.asList(FRANCE.getPais()))
 			.build()
 			.checkout(From.PREHOME);		

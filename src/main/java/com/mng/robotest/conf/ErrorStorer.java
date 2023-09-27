@@ -2,11 +2,9 @@ package com.mng.robotest.conf;
 
 import java.net.URI;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import com.github.jorge2m.testmaker.domain.InputParamsTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
@@ -34,43 +32,56 @@ public class ErrorStorer extends EvidenceStorer {
 		return content;
 	}
 	
-	/**
-	 * Se realiza una captura de ./errorPage.faces pues allí se pueden encontrar los datos de la instancia
-	 */
-	private String capturaErrorPage() throws Exception {
-		String htmlPageError = "";
-		InputParamsTM inputParams = TestMaker.getInputParamsSuite();
-		String driverId = inputParams.getDriver();
-		if (driverId.compareTo(EmbeddedDriver.browserstack.name())!=0) {
-			//Cargamos la página errorPage en una pestaña aparte y nos posicionamos en ella
-			//BrowserStack parece que no soporta abrir ventanas aparte
-			String windowHandle = loadErrorPage();
-			WebDriver driver = TestMaker.getDriverTestCase();
-			htmlPageError = driver.getPageSource();
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("window.close('" + Thread.currentThread().getName() + "');");
-			driver.switchTo().window(windowHandle);
-			driver.switchTo().window(windowHandle);
+	public String capturaErrorPage() throws Exception {
+		if (isBrowserStack()) {
+			//BrowserStack doesn't allow create other Tab
+			return "";
 		}
-		return htmlPageError;
+
+		var driver = TestMaker.getDriverTestCase();
+		String windowHandler = loadErrorPageAndWait(driver);
+		String htmlErrorPage = driver.getPageSource();
+		closeErrorPage(windowHandler, driver);
+		
+		return htmlErrorPage;
+	}
+	
+	private boolean isBrowserStack() {
+		var inputParams = TestMaker.getInputParamsSuite();
+		String driverId = inputParams.getDriver();
+		return (driverId.compareTo(EmbeddedDriver.browserstack.name())==0);
 	}
 
 	/**
-	 * Carga la página errorPage.faces en una pestaña aparte y nos devuelve el windowHandle de la pantalla padre
+	 * Loads the errorPage.faces in other tab
+	 * @return windowHandle of the screen pather
+	 * @throws Exception
 	 */
-	public String loadErrorPage() throws Exception {
-		WebDriver driver = TestMaker.getDriverTestCase();
-		String currentURL = driver.getCurrentUrl();
-		URI uri = new URI(currentURL);
+	private String loadErrorPageAndWait(WebDriver driver) throws Exception {
 		String windowHandle = driver.getWindowHandle();
-
-		// Abrimos una nueva pestaña en la que cargamos la página de errorPage (sólo con JS es compatible con todos los navegadores)
-		String titlePant = Thread.currentThread().getName();
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("window.open('" + uri.getScheme() + "://" + uri.getHost() + "/errorPage.faces" + "', '" + titlePant + "');");
-		driver.switchTo().window(titlePant);
-		new PageBase(driver).state(Present, By.xpath("//*[@class='stackTrace']")).wait(5).check();
-		driver.getPageSource();
+		var jsExecutor = (JavascriptExecutor)driver;
+		
+		URI uri = new URI(driver.getCurrentUrl());
+		jsExecutor.executeScript("window.open('" + uri.getScheme() + "://" + uri.getHost() + "/errorPage.faces" + "', '" + getTabName() + "');");
+		driver.switchTo().window(getTabName());
+		waitForErrorPage(driver);
+		
 		return windowHandle;
 	}
+	
+	private void closeErrorPage(String windowHandle, WebDriver driver) {
+		var jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("window.close('" + getTabName() + "');");
+		driver.switchTo().window(windowHandle);
+		driver.switchTo().window(windowHandle);
+	}
+
+	private void waitForErrorPage(WebDriver driver) {
+		new PageBase(driver).state(Present, "//*[@class='stackTrace']").wait(5).check();
+	}
+	
+	private String getTabName() {
+		return Thread.currentThread().getName();
+	}
+	
 }

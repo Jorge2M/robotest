@@ -57,7 +57,7 @@ public class CheckerGoogleAnalytics extends PageBase implements Checker {
 				if (app==AppEcom.outlet) {
 					valueTid1 = "UA-855910-5";
 					valueTid2 = "UA-855910-5";
-					valueTid2 = "UA-855910-5";
+					valueTid3 = "UA-855910-5";
 				}
 			 	checks.add(
 					"En la petición figura el parámetro <b>\"tid=" + valueTid1 + "\" o \"tid=" + valueTid2 + "\" o o \"tid=" + valueTid3 + "\"</b>",

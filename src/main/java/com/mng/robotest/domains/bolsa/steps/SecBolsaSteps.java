@@ -34,6 +34,8 @@ import static com.mng.robotest.domains.bolsa.steps.SecBolsaSteps.FluxBolsaChecko
 
 public class SecBolsaSteps extends StepBase {
 
+	private static final String TAG_LISTA_ART = "@TagListaArt";
+	
 	public enum FluxBolsaCheckout {
 		INICIAR_SESION,
 		CONTINUAR_SIN_CUENTA 
@@ -107,7 +109,6 @@ public class SecBolsaSteps extends StepBase {
 		dataTest.getDataBag().setImporteTransp(secBolsa.getPrecioTransporte());
 	}
 
-	private static final String TAG_LISTA_ART = "@TagListaArt";
 	@Step (
 		description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + TAG_LISTA_ART,
 		expected="Los productos se dan de alta en la bolsa correctamente",
