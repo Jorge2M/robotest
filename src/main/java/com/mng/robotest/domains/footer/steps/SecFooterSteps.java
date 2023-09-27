@@ -51,7 +51,7 @@ public class SecFooterSteps extends StepBase {
 		int seconds = 5;
 		try {
 			checks.add(
-				"Aparece la página <b>" + pageObject.getName() + "</b> (la esperamos hasta " + seconds + " segundos)",
+				"Aparece la página <b>" + pageObject.getName() + "</b> " + getLitSecondsWait(seconds),
 				pageObject.isPageCorrectUntil(seconds), Warn);
 			if (typeFooter.pageInNewTab()) {
 				checks.add(

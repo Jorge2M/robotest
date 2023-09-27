@@ -25,7 +25,7 @@ public class ModalAvisoCambioPaisSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 10;
 	 	checks.add(
-			"Desaparece el modal de aviso de cambio de país (lo esperamos hasta " + seconds + " segundos)",
+			"Desaparece el modal de aviso de cambio de país " + getLitSecondsWait(seconds),
 			modalAvisoCambioPais.isInvisibleUntil(seconds));		
 	 	
 	 	checks.add(

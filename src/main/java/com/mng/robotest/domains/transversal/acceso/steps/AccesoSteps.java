@@ -75,7 +75,7 @@ public class AccesoSteps extends StepBase {
 		int seconds = 7;
 		var userMenus = new MenusUserWrapper();
 		checks.add(
-			"Aparece el link \"Mi cuenta\" (lo esperamos hasta " + seconds + " segundos)",
+			"Aparece el link \"Mi cuenta\" " + getLitSecondsWait(seconds),
 			userMenus.isMenuInStateUntil(MI_CUENTA, Present, seconds));
 		
 		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(FAVORITOS, Present, 0);

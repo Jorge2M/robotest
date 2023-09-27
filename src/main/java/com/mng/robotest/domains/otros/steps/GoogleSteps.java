@@ -4,14 +4,14 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.domains.base.PageBase;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.otros.pageobjects.PageGoogle;
 import com.mng.robotest.domains.transversal.home.pageobjects.PageLanding;
 import com.mng.robotest.domains.transversal.prehome.pageobjects.PagePrehome;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
-public class GoogleSteps extends PageBase {
+public class GoogleSteps extends StepBase {
 
 	private final PageGoogle pageGoogle = new PageGoogle();
 	
@@ -31,7 +31,7 @@ public class GoogleSteps extends PageBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 3;
 		checks.add(
-			"El 1er link no-anuncio contiene \"MANGO\" (lo esperamos " + seconds + " segundos)",
+			"El 1er link no-anuncio contiene \"MANGO\" " + getLitSecondsWait(seconds),
 			pageGoogle.validaFirstLinkContainsUntil("Mango", seconds));	
 		
 		checks.add(

@@ -16,7 +16,7 @@ public class PageRecogidaDomicSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
-			"Aparece la página de Recogida a Domicilio (la esperamos hasta " + seconds + " segundos)",
+			"Aparece la página de Recogida a Domicilio " + getLitSecondsWait(seconds),
 			pageRecADomic.isPage(seconds));
 		
 		checks.add(

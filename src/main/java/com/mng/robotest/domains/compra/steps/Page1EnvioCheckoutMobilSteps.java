@@ -24,7 +24,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
-			"Aparece la página correspondiente al paso-1 (la esperamos " + seconds + " segundos)",
+			"Aparece la página correspondiente al paso-1 " + getLitSecondsWait(seconds),
 			page1EnvioCheckoutMobil.isPageUntil(seconds), Warn);
 		
 		checks.add(
@@ -92,7 +92,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 	 	checks.add(
-			"Aparece el descuento total aplicado al empleado (en menos de " + seconds + " segundos)",
+			"Aparece el descuento total aplicado al empleado " + getLitSecondsWait(seconds),
 			page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(seconds), Warn);
 	 	
 	 	checks.add(

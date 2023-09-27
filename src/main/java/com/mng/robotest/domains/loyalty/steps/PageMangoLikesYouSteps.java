@@ -25,7 +25,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		var checks = new ChecksResultWithNumberPoints();
 		int seconds = 5;
 		checks.add(
-			"Aparece la página de <b>Mango likes you</b> (esperamos hasta " + seconds + " segundos)",
+			"Aparece la página de <b>Mango likes you</b> " + getLitSecondsWait(seconds),
 			pageMangoLikesYou.checkIsPageUntil(4));
 		
 		int secondsButton = 10;

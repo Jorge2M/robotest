@@ -45,11 +45,11 @@ public class ModalDirecEnvioOldSteps extends StepBase {
 		var page1DktopCheckout = new Page1DktopCheckout();
 		int seconds = 2; 
 		checks.add(
-			"Aparece un modal de alerta alertando de un posible cambio de precios (lo esperamos hasta " + seconds + " segundos)",
+			"Aparece un modal de alerta alertando de un posible cambio de precios " + getLitSecondsWait(seconds),
 			page1DktopCheckout.getModalAvisoCambioPais().isVisibleUntil(seconds), Warn);
 		
 		checks.add(
-			"Desaparece la capa de Loading (lo esperamos hasta " + seconds + "segundos", 
+			"Desaparece la capa de Loading " + getLitSecondsWait(seconds), 
 			new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
 		
 		return checks;

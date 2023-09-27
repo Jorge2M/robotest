@@ -327,7 +327,7 @@ public class PageGaleriaSteps extends StepBase {
 		SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());
 		int seconds = 2;
 	  	checks.add(
-			"Es clickable el bloque de filtros (esperamos hasta " + seconds + " segundos)",
+			"Es clickable el bloque de filtros " + getLitSecondsWait(seconds),
 			secFiltros.isClickableFiltroUntil(seconds), Warn);
 	  	
 	  	return checks;
@@ -485,7 +485,7 @@ public class PageGaleriaSteps extends StepBase {
 
 		PageFicha pageFicha = PageFicha.of(channel);
 	  	checks.add(
-			"Aparece la página de ficha (la esperamos hasta " + seconds + " segundos)",
+			"Aparece la página de ficha " + getLitSecondsWait(seconds),
 			pageFicha.isPageUntil(seconds), Warn);
 	  	
 		String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt();
@@ -743,7 +743,7 @@ public class PageGaleriaSteps extends StepBase {
 		int seconds = 1;
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
-			"Se despliega la información relativa a las rebajas (lo esperamos hasta " + seconds + " segundos)",
+			"Se despliega la información relativa a las rebajas " + getLitSecondsWait(seconds),
 			secBannerHead.isVisibleInfoRebajasUntil(seconds), Warn);
 		
 		checks.add(

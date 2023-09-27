@@ -21,7 +21,7 @@ public class PageBolsasMantoSteps extends StepMantoBase {
 	 	}
 		checks.setExistsLinkCodPed(isPresentLinkPedido);
 	 	checks.add(
-			"En la columna 1 aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + " (lo esperamos hasta " + seconds + " segundos)",
+			"En la columna 1 aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + " " + getLitSecondsWait(seconds),
 			isPresentLinkPedido, Warn);
 	 	
 	 	checks.add(

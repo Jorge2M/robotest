@@ -14,9 +14,13 @@ import com.mng.robotest.test.datastored.DataPedido;
 
 public abstract class StepMantoBase extends PageBase {
 
-	protected static final String SECONDS_WAIT = "(esperamos hasta #{seconds} segundos)";
 	protected static final String CODIGO_ESPANYA = "001";
 	protected static final String ALMACEN_ESPANYA = "001";
+	protected static final String SECONDS_WAIT = "(esperamos hasta #{seconds} segundos)";
+	
+	protected String getLitSecondsWait(int seconds) {
+		return "(esperamos hasta " + seconds + " segundos)";
+	}
 	
 	protected static final Pais ESPANYA = new Pais();
 	static {

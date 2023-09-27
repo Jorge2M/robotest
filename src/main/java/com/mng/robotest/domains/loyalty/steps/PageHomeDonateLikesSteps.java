@@ -21,7 +21,7 @@ public class PageHomeDonateLikesSteps extends StepBase {
 			pageHomeDonateLikes.checkIsPage(0));
 
 		checks.add(
-			"Aparece alguno de los botones para donar " +  listButtons + " Likes (esperamos hasta " + seconds + " segundos)",
+			"Aparece alguno de los botones para donar " +  listButtons + " Likes " + getLitSecondsWait(seconds),
 			pageHomeDonateLikes.isVisibleAny(listButtons, seconds));
 		
 		return checks;
@@ -52,7 +52,7 @@ public class PageHomeDonateLikesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
-			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + seconds + " segundos)",
+			"Aparece el icono correspondiente a la operación realizada " + getLitSecondsWait(seconds),
 			pageHomeDonateLikes.isVisibleIconOperationDoneUntil(seconds));
 
 		return checks;

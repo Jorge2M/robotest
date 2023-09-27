@@ -13,7 +13,7 @@ public class PageIniShopJaponSteps extends StepBase {
 	public ChecksTM validaPageIniJapon(int seconds) {
 		var checks = ChecksTM.getNew();
 		checks.add(
-			"Estamos en la página inicial de la shop de Japón (la esperamos hasta " + seconds + " segundos):<br>" +
+			"Estamos en la página inicial de la shop de Japón " + getLitSecondsWait(seconds) + ":<br>" +
 			"   - El título es \"" + PageIniShopJapon.TITLE + "\"<br>" +		
 			"   - La URL contiene \"" + PageIniShopJapon.URL + "\"",
 			new PageIniShopJapon().isPageUntil(seconds), Warn);

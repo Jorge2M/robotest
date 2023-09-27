@@ -53,7 +53,7 @@ public class SecConfirmDatosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
-			"Desaparece la capa de Droppoints (lo esperamos hasta " + seconds + " segundos)",
+			"Desaparece la capa de Droppoints " + getLitSecondsWait(seconds),
 			modalDroppoints.isInvisibleUntil(seconds), Warn);
 		
 		DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();

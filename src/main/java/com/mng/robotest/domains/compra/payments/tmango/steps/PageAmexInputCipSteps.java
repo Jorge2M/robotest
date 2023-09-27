@@ -18,7 +18,7 @@ public class PageAmexInputCipSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
-			"Aparece la página de introducción del CIP (la esperamos hasta " + seconds + " segundos)",
+			"Aparece la página de introducción del CIP " + getLitSecondsWait(seconds),
 			pageAmexInputCip.isPageUntil(seconds));
 	 	
 	 	checks.add(

@@ -20,12 +20,12 @@ public class PageAccesoMisComprasSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
-			"Aparece la página de \"Acceso a Mis Compras\" (la esperamos hasta " + seconds + " segundos)",
+			"Aparece la página de \"Acceso a Mis Compras\" " + getLitSecondsWait(seconds),
 			pageAccesoMisCompras.isPage(seconds), Warn);
 		
 		seconds = 3;
 		checks.add(
-			"Aparece el bloque \"Ya estoy registrado\" (lo esperamos hasta " + seconds + "segundos)",
+			"Aparece el bloque \"Ya estoy registrado\" " + getLitSecondsWait(seconds),
 			pageAccesoMisCompras.isPresentBlock(TypeBlock.SI_REGISTRADO, seconds), Warn);
 		
 		checks.add(

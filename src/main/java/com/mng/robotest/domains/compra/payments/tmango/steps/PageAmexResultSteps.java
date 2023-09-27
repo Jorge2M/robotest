@@ -19,7 +19,7 @@ public class PageAmexResultSteps extends StepBase {
 		String codigoPais = dataTest.getCodigoPais();
 		int seconds = 2;
 	 	checks.add(
-			"Aparece una página con un mensaje de OK (lo esperamos hasta " + seconds + " segundos)",
+			"Aparece una página con un mensaje de OK " + getLitSecondsWait(seconds),
 			pageAmexResult.isResultOkUntil(seconds));
 	 	
 	 	checks.add(

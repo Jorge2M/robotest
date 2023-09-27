@@ -30,7 +30,7 @@ public class PageHomeConseguirPorLikesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
-			"Aparece el icono correspondiente a la operación realizada (lo esperamos hasta " + seconds + " segundos)",
+			"Aparece el icono correspondiente a la operación realizada " + getLitSecondsWait(seconds),
 			pageHomeConseguirPorLikes.isVisibleIconOperationDoneUntil(seconds));
 
 		return checks;

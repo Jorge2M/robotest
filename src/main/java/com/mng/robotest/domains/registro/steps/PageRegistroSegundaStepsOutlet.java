@@ -53,7 +53,7 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 		dataRegistro.put("lineascomaseparated", lineasComaSeparated);
 		int seconds = 5;
 		checks.add(
-			"Aparece la 2ª página de introducción de datos (la esperamos hasta " + seconds + " segs)",
+			"Aparece la 2ª página de introducción de datos " + getLitSecondsWait(seconds),
 			pageRegistroSegunda.isPageUntil(seconds), Warn);
 		checks.add(
 			Check.make(

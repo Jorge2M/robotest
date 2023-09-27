@@ -20,7 +20,7 @@ public class ModalDirecFacturaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
-			"Es visible el formulario para la introducción de la \"Dirección de facturación\" (lo esperamos hasta " + seconds + " seconds)",
+			"Es visible el formulario para la introducción de la \"Dirección de facturación\" " + getLitSecondsWait(seconds),
 			modalDirecFactura.isVisibleFormUntil(seconds));	
 	 	
 	 	checks.add(
@@ -29,7 +29,7 @@ public class ModalDirecFacturaSteps extends StepBase {
 	 	
 	 	seconds = 2;
 	 	checks.add(
-	 		"Desaparece la capa de Loading (lo esperamos hasta " + seconds + "segundos", 
+	 		"Desaparece la capa de Loading " + getLitSecondsWait(seconds), 
 	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
 		return checks;
 	}
@@ -56,7 +56,7 @@ public class ModalDirecFacturaSteps extends StepBase {
 	 	
 	 	int seconds = 2;
 	 	checks.add(
-	 		"Desaparece la capa de Loading (lo esperamos hasta " + seconds + " segundos", 
+	 		"Desaparece la capa de Loading " + getLitSecondsWait(seconds), 
 	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
 	 	
 	 	return checks;

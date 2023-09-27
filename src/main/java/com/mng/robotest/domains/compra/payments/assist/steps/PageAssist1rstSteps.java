@@ -60,7 +60,7 @@ public class PageAssist1rstSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 10;
 	 	checks.add(
-			"Desaparece la página con el botón de pago (lo esperamos hasta " + seconds + " segundos)",
+			"Desaparece la página con el botón de pago " + getLitSecondsWait(seconds),
 			pageAssist1rst.invisibilityBotonPagoUntil(seconds), Warn);
 	 	
 	 	checks.add(

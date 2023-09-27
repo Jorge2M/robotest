@@ -74,7 +74,7 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
-			"Se muestra la tabla de información (la esperamos un máximo de " + seconds + " segundos)",
+			"Se muestra la tabla de información " + getLitSecondsWait(seconds),
 			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds));
 		
 		checks.add(
@@ -117,7 +117,7 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
-			"Se muestra la tabla de información (la esperamos un máximo de " + seconds + " segundos)",
+			"Se muestra la tabla de información " + getLitSecondsWait(seconds),
 			pageConsultaIdEans.isVisibleTablaInformacionUntil(seconds));
 		
 		checks.add(

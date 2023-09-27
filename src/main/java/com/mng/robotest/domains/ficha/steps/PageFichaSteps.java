@@ -87,7 +87,7 @@ public class PageFichaSteps extends StepBase {
 			int seconds = 5;
 			checks.add(
 				"Aparece la página con los datos de la ficha del producto " + datosArticulo.getReferencia() +
-				" (la esperamos hasta " + seconds + " segundos)",
+				getLitSecondsWait(seconds),
 				pageFicha.isFichaArticuloUntil(datosArticulo.getReferencia(), seconds));
 		}
 
@@ -393,11 +393,11 @@ public class PageFichaSteps extends StepBase {
 		boolean isVisiblePrevLink = pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.PREV, seconds);
 		if (locationArt.isFirstInGalery()) {
 			checks.add(
-					"No es visible el link <b>Prev</b> (lo esperamos hasta " + seconds + " segundos)",
+					"No es visible el link <b>Prev</b> " + getLitSecondsWait(seconds),
 					!isVisiblePrevLink, Warn);
 		} else {
 			checks.add(
-					"Sí es visible el link <b>Prev</b> (lo esperamos hasta " + seconds + " segundos)",
+					"Sí es visible el link <b>Prev</b> " + getLitSecondsWait(seconds),
 					isVisiblePrevLink, Warn);
 		}
 		if (app==AppEcom.outlet || channel==Channel.desktop) {

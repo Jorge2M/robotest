@@ -169,11 +169,11 @@ public class SecBolsaSteps extends StepBase {
 	 	var state = (!isPRO() && UtilsTest.todayBeforeDate("2023-09-15")) ? State.Warn : State.Defect;
 	 	
 	 	checks.add(
-			"Es visible la capa/página correspondiente a la bolsa (la esperamos hasta " + seconds + " segundos)",
+			"Es visible la capa/página correspondiente a la bolsa " + getLitSecondsWait(seconds),
 			secBolsa.isInStateUntil(StateBolsa.OPEN, seconds), state);
 	 	
 	 	checks.add(
-			"Aparece el botón \"Comprar\" (lo esperamos hasta " + seconds + " segundos)",
+			"Aparece el botón \"Comprar\" " + getLitSecondsWait(seconds),
 			secBolsa.isVisibleBotonComprarUntil(seconds), state);
 	 	
 		return checks;
@@ -185,7 +185,7 @@ public class SecBolsaSteps extends StepBase {
 		int seconds = 3;
 		String itemsSaved = String.valueOf(dataTest.getDataBag().getListArticulos().size());
 	 	checks.add(
-			"Existen " + dataTest.getDataBag().getListArticulos().size() + " elementos dados de alta en la bolsa (los esperamos hasta " + seconds + " segundos)",
+			"Existen " + dataTest.getDataBag().getListArticulos().size() + " elementos dados de alta en la bolsa " + getLitSecondsWait(seconds),
 			secBolsa.numberItemsIsUntil(itemsSaved, seconds), Warn);
 	 	
 	 	return checks;

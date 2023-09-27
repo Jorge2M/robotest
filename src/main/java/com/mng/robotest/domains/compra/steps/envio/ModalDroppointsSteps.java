@@ -21,11 +21,11 @@ public class ModalDroppointsSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 3;
 	  	checks.add(
-			"Desaparece el mensaje de \"Cargando...\" (lo esperamos hasta " + seconds + " segundos)",
+			"Desaparece el mensaje de \"Cargando...\" " + getLitSecondsWait(seconds),
 			modalDroppoints.isInvisibleCargandoMsgUntil(seconds), Warn);
 	  	
 	  	checks.add(
-			"Aparece un 1er Droppoint visible (lo esperamos hasta " + seconds + " segundos)",
+			"Aparece un 1er Droppoint visible " + getLitSecondsWait(seconds),
 			modalDroppoints.isDroppointVisibleUntil(1, seconds), Info);
 	  	
 	  	checks.add(

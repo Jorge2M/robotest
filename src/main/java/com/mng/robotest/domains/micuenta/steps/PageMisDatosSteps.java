@@ -21,7 +21,7 @@ public class PageMisDatosSteps extends StepBase {
 		int seconds = 2;
 		boolean isPage = pageMisDatos.isPage(seconds);
 		checks.add(
-			"Aparece una página con el la cabecera \"Mis datos\" (esperamos hasta " + seconds + " segundos)",
+			"Aparece una página con el la cabecera \"Mis datos\" " + getLitSecondsWait(seconds),
 			isPage, Warn);
 		
 		if (isPage) {

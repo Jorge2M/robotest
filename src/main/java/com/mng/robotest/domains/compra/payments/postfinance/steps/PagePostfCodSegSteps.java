@@ -49,7 +49,7 @@ public class PagePostfCodSegSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
-			"Aparece la pasarela de pagos de PostFinance E-Payment (la esperamos hasta " + seconds + " segundos)",
+			"Aparece la pasarela de pagos de PostFinance E-Payment " + getLitSecondsWait(seconds),
 			pagePostfCodSeg.isPasarelaPostfinanceProUntil(seconds));
 		
 		String codPais = dataTest.getCodigoPais();

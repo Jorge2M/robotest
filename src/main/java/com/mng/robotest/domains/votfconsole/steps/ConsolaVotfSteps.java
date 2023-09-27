@@ -177,7 +177,7 @@ public class ConsolaVotfSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Código de pedido\"" + 
-			"(la esperamos hasta " + seconds + " segundos)",
+			getLitSecondsWait(seconds),
 			iframeResult.isPresentCodigoPedido(seconds), Warn);
 		
 		String codigoPedido = iframeResult.getCodigoPedido();

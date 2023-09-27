@@ -85,7 +85,7 @@ public class TarjetaMangoSteps extends StepBase {
 	 	
 		int seconds = 3;
 	 	checks.add(
-	 		"Aparece un modal de aviso de trámite de la solicitud con un botón \"Continuar\" (la esperamos hasta " + seconds + " segundos)",
+	 		"Aparece un modal de aviso de trámite de la solicitud con un botón \"Continuar\" " + getLitSecondsWait(seconds),
 	 		new PageInputDataSolMangoCard().isPresentBotonContinuarModalUntil(seconds), Warn);
 	 	
 		return checks;

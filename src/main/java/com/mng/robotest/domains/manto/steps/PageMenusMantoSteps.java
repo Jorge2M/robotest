@@ -38,7 +38,7 @@ public class PageMenusMantoSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 	 	checks.add(
-			"Aparece la página asociada al menú <b>" + subMenu + "</b> (la esperamos hasta " + seconds + " segundos)",
+			"Aparece la página asociada al menú <b>" + subMenu + "</b> " + getLitSecondsWait(seconds),
 			pageMenusManto.validateIsPage(subMenu, seconds));
 	 	
 	 	checks.add(

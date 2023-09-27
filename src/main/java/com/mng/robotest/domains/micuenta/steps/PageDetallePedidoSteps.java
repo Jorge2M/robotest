@@ -24,7 +24,7 @@ public class PageDetallePedidoSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 	  	checks.add(
-	  		"Es visible alguna prenda (la esperamos hasta " + seconds + " segundos)",
+	  		"Es visible alguna prenda " + getLitSecondsWait(seconds),
 	  		pageDetalleCompra.isVisiblePrendaUntil(seconds), Info);
 	  	
 	  	checks.add(
@@ -50,7 +50,7 @@ public class PageDetallePedidoSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	  	checks.add(
-	  		"Aparece la página de detalle del pedido (la esperamos hasta " + seconds + " segundos)",
+	  		"Aparece la página de detalle del pedido " + getLitSecondsWait(seconds),
 	  		pageDetalleCompra.isPage(seconds), Warn);	   
 	  	
 	  	checks.add(

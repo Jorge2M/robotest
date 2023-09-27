@@ -19,7 +19,7 @@ public class PageAmexInputTarjetaSteps extends StepBase {
 		String codPais = dataTest.getCodigoPais();
 		int seconds = 5;
 	 	checks.add(
-			"Aparece la pasarela de pagos de RedSys (la esperamos hasta " + seconds + " segundos)",
+			"Aparece la pasarela de pagos de RedSys " + getLitSecondsWait(seconds),
 			pageAmexInputTarjeta.isPasarelaRedSysUntil(seconds)); 
 	 	
 	 	checks.add(

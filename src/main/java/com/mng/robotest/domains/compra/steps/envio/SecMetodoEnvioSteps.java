@@ -47,7 +47,7 @@ public class SecMetodoEnvioSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	  	checks.add(
-			"Desaparece la capa de Loading  (lo esperamos hasta " + seconds + " segundos)",
+			"Desaparece la capa de Loading " + getLitSecondsWait(seconds),
 			new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
 	  	
 	  	checks.add(

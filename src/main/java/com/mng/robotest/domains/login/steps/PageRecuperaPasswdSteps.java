@@ -15,7 +15,7 @@ public class PageRecuperaPasswdSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
-			"Aparece la pantalla de recuperación de la contraseña (la esperamos hasta " + seconds + " segundos)",
+			"Aparece la pantalla de recuperación de la contraseña " + getLitSecondsWait(seconds),
 			pageRecuperaPasswd.isPageUntil(seconds));
 		
 		checks.add(
@@ -40,7 +40,7 @@ public class PageRecuperaPasswdSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(
-			"Aparece el mensaje de \"Revisa tu email\" (lo esperamos hasta " + seconds + " segundos)",
+			"Aparece el mensaje de \"Revisa tu email\" " + getLitSecondsWait(seconds),
 			pageRecuperaPasswd.isVisibleRevisaTuEmailUntil(seconds));
 		
 		checks.add(

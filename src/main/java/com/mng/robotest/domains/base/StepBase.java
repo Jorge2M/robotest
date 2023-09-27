@@ -35,6 +35,10 @@ public abstract class StepBase extends PageBase {
 
 	protected static final String SECONDS_WAIT = "(esperamos hasta #{seconds} segundos)";
 	
+	protected String getLitSecondsWait(int seconds) {
+		return "(esperamos hasta " + seconds + " segundos)";
+	}
+	
 	protected void access(boolean clearData) throws Exception {
 		if (clearData) {
 			accessAndClearData();

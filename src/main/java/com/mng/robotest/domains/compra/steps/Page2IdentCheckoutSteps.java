@@ -30,7 +30,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 	public ChecksTM validateIsPage(boolean emailYetExists, int seconds) {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
-			"Aparece la página-2 de introducción de datos de la dirección del cliente (la esperamos hasta " + seconds + " segundos)",
+			"Aparece la página-2 de introducción de datos de la dirección del cliente " + getLitSecondsWait(seconds),
 			page2IdentCheckout.isPageUntil(seconds));
 	 	checks.add(
 			"Es <b>" + !emailYetExists + "</b> que aparece el input para la introducción de la contraseña",

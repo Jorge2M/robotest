@@ -86,7 +86,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 	 	checks.add(
-	 		"Aparece el modal para compartir a nivel social (lo esperamos hasta " + seconds + " segundos) ",
+	 		"Aparece el modal para compartir a nivel social " + getLitSecondsWait(seconds),
 	 		new ModCompartirNew().isVisibleUntil(seconds));
 		
 		boolean isPaisChina = (codigoPais.compareTo("720")==0);

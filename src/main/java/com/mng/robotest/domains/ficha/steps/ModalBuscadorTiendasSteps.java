@@ -17,12 +17,12 @@ public class ModalBuscadorTiendasSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 3;
 	 	checks.add(
-			"La capa de búsqueda es visible<br> (la esperamos hasta " + seconds + "segundos",
+			"La capa de búsqueda es visible<br> " + getLitSecondsWait(seconds),
 			modalBuscadorTiendas.isVisible(seconds), Warn);
 	 	
 	 	var state = isPRO()? Defect:Warn;
 	 	checks.add(
-			"Se ha localizado alguna tienda (la esperamos hasta " + seconds + " segundos)",
+			"Se ha localizado alguna tienda " + getLitSecondsWait(seconds),
 			modalBuscadorTiendas.isPresentAnyTiendaUntil(seconds), state);
 	 	
 		return checks;

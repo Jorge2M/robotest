@@ -23,7 +23,7 @@ public class SecTarjetaPciSteps extends StepBase {
 			int seconds = 5;
 		 	checks.add(
 				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel, app) + 
-				" (lo esperamos hasta " + seconds + " segundo)",
+				getLitSecondsWait(seconds),
 				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel, app), seconds), Warn);	
 		}
 		

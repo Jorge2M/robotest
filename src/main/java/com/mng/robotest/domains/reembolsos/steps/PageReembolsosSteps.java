@@ -105,7 +105,7 @@ public class PageReembolsosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 15;
 		checks.add(
-			"Aparecen establecidos los datos de banco, titular e IBAN (lo esperamos hasta " + seconds + " segundos)",
+			"Aparecen establecidos los datos de banco, titular e IBAN " + getLitSecondsWait(seconds),
 			pageReembolsos.isVisibleTextBancoUntil(seconds) &&
 			pageReembolsos.isVisibleTextTitular() &&
 			pageReembolsos.isVisibleTextIBAN());

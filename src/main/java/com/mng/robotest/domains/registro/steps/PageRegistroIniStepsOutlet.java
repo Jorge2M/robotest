@@ -187,7 +187,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		
 		checks.add(
 			"<b>SI</b> está presente el checkbox para recibir promociones e información personalizada para el pais" +
-			codigoPais + " (lo esperamos hasta " + seconds + " segundos)",
+			codigoPais + getLitSecondsWait(seconds),
 			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds));
 		
 		return checks;
@@ -207,7 +207,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		
 		checks.add(
 			"<b>SI</b> está presente el checkbox para recibir promociones e información personalizada" +
-			" (lo esperamos hasta " + seconds + " segundos)",
+			getLitSecondsWait(seconds),
 			pageRegistroIni.isCheckboxRecibirInfoPresentUntil(seconds));
 		
 		return checks;

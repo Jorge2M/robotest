@@ -46,7 +46,7 @@ public class SecSelectDPointSteps extends StepBase {
 		}
 	 	checks.add(
 			"La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.getData() + 
-			"</b> (lo esperamos hasta " + seconds + " segundos)",
+			"</b> " + getLitSecondsWait(seconds),
 			modalDroppoints.deliveryPointSelectedContainsPoblacionUntil(dataSearchDp, seconds), stateVal);
 	 	
 		return checks;
@@ -57,7 +57,7 @@ public class SecSelectDPointSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 3;
 	 	checks.add(
-			"Es visible el 1er delivery point de la lista (lo esperamos hasta " + seconds + " segundos)",
+			"Es visible el 1er delivery point de la lista " + getLitSecondsWait(seconds),
 			modalDroppoints.isDroppointVisibleUntil(1, seconds));
 	 	
 	 	checks.add(

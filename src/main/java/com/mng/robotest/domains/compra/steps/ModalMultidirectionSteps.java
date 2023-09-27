@@ -27,7 +27,7 @@ public class ModalMultidirectionSteps extends StepBase {
 		int seconds = 3;
 		Optional<Direction> mainDirectionOpt = modalMultidirection.getPrincipalDirection(seconds);
 	 	checks.add(
-			"Aparece una dirección principal (la esperamos hasta " + seconds + " segundos)",
+			"Aparece una dirección principal " + getLitSecondsWait(seconds),
 			mainDirectionOpt.isPresent());
 
 	 	if (mainDirectionOpt.isPresent()) {
@@ -58,7 +58,7 @@ public class ModalMultidirectionSteps extends StepBase {
 		int seconds = 5;
 		Optional<Direction> directionOpt = modalMultidirection.getDirection(address, seconds);
 	 	checks.add(
-			"Aparece la dirección con address <b>" + address + "</b> (la esperamos " + seconds + " segundos)",
+			"Aparece la dirección con address <b>" + address + "</b> " + getLitSecondsWait(seconds),
 			directionOpt.isPresent());
 
 	 	if (directionOpt.isPresent()) {

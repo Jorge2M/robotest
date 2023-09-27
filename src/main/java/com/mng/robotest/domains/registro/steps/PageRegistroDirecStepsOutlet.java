@@ -22,7 +22,7 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 3;
 		checks.add(
-			"Aparece la página de introducción de datos de la dirección (la esperamos un máximo de " + seconds + " segundos)",
+			"Aparece la página de introducción de datos de la dirección " + getLitSecondsWait(seconds),
 			pageRegistroAddressData.isPageUntil(seconds), Warn);
 		
 		checks.add(

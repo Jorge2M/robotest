@@ -57,12 +57,12 @@ public class SecModalPersonalizacionSteps extends StepBase {
 		int seconds = 3;
 		var checks = ChecksTM.getNew();
 		checks.add(
-			"Aparece el modal de personalización con el botón <b>Siguiente</b> (lo esperamos hasta " + seconds + " segundos)",
+			"Aparece el modal de personalización con el botón <b>Siguiente</b> " + getLitSecondsWait(seconds),
 			isBotonSiguienteVisible(seconds), 
 			Warn);
 		
 		checks.add(
-			"Aparece la opción <b>Un icono</b> (la esperamos hasta " + seconds + " segundos)",
+			"Aparece la opción <b>Un icono</b> " + getLitSecondsWait(seconds),
 			state(Visible, ModalElement.BUTTON_UN_ICONO.getBy(channel)).wait(seconds).check(), 
 			Warn);
 	

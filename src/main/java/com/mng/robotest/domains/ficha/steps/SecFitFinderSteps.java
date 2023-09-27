@@ -16,7 +16,7 @@ public class SecFitFinderSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 	  	checks.add(
-			"Es visible el Wrapper con la guía de tallas (lo esperamos hasta " + seconds + " seconds)",
+			"Es visible el Wrapper con la guía de tallas " + getLitSecondsWait(seconds),
 			secFitFinder.isVisibleUntil(seconds));
 	  	checks.add(
 			"Es visible el input para la introducción de la altura",

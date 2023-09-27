@@ -76,7 +76,7 @@ public class PageResultPagoSteps extends StepBase {
 		if (channel==Channel.desktop) {
 			int seconds = 1;
 			checks.add(
-		  		"Aparece el link hacia las compras (lo esperamos " + seconds + " segundos)",
+		  		"Aparece el link hacia las compras " + getLitSecondsWait(seconds),
 		  		pageResultPago.isButtonMisCompras(seconds), Warn);
 		}
 		
@@ -84,7 +84,7 @@ public class PageResultPagoSteps extends StepBase {
 		String codigoPed = pageResultPago.getCodigoPedido(seconds);
 		boolean isCodPedidoVisible = "".compareTo(codigoPed)!=0;
 		checks.add(
-	  		"Aparece el código de pedido (" + codigoPed + ") (lo esperamos hasta " + seconds + " segundos)",
+	  		"Aparece el código de pedido (" + codigoPed + ") " + getLitSecondsWait(seconds),
 	  		isCodPedidoVisible);
 		
 		DataPedido dataPedido = dataPago.getDataPedido();

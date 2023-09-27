@@ -2,9 +2,10 @@ package com.mng.robotest.domains.compra.payments.postfinance.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.compra.payments.postfinance.pageobjects.PagePostfRedirect;
 
-public class PagePostfRedirectSteps {
+public class PagePostfRedirectSteps extends StepBase {
 
 	private PagePostfRedirect pagePostfRedirect = new PagePostfRedirect();
 	
@@ -17,7 +18,7 @@ public class PagePostfRedirectSteps {
 			pagePostfRedirect.isPresentButtonOk());
 		
 		checks.add(
-			"La página de redirección acaba desapareciendo (esperamos hasta " + seconds + " segundos)",
+			"La página de redirección acaba desapareciendo " + getLitSecondsWait(seconds),
 			pagePostfRedirect.isInvisibleButtonOkUntil(seconds));
 		
 		return checks;

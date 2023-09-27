@@ -193,7 +193,7 @@ public class SecMenusUserSteps extends StepBase {
 		LoyaltyData loyaltyData = userMenus.checkAndGetLoyaltyPointsUntil(seconds);
 		checks.setNumberPoints(loyaltyData.numberPoints);
 	 	checks.add(
-			"Aparecen Loyalty Points en el menú de usuario (lo esperamos hasta " + seconds + " segundos)",
+			"Aparecen Loyalty Points en el menú de usuario " + getLitSecondsWait(seconds),
 			loyaltyData.isPresent);
 	 	
 		return checks;

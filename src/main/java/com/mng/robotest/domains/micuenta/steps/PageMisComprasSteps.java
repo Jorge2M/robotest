@@ -24,7 +24,7 @@ public class PageMisComprasSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
-			"Aparece la página de \"Mis Compras\" (la esperamos hasta " + seconds + " segundos)",
+			"Aparece la página de \"Mis Compras\" " + getLitSecondsWait(seconds),
 			pageMisCompras.isPageUntil(seconds), Warn);
 		
 		return checks;
@@ -68,7 +68,7 @@ public class PageMisComprasSteps extends StepBase {
 	private ChecksTM checkIsCompraOnlinePrendasCheck(String codPedido, int seconds) {
 		var checks = ChecksTM.getNew();
 		checks.add(
-			"Es visible la compra Online asociada al pedido <b>" + codPedido + "</b> (la esperamos " + seconds + " segundos",
+			"Es visible la compra Online asociada al pedido <b>" + codPedido + "</b> " + getLitSecondsWait(seconds),
 			pageMisCompras.isTicketOnline(codPedido, seconds), getLevel());
 		
 		return checks;		

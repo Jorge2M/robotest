@@ -35,7 +35,7 @@ public class PagePaytrail1rstSteps extends StepBase {
 		
 		if (channel==Channel.desktop) {
 			checks.add(
-				"Es visible el desplegable de bancos (lo esperamos hasta " + seconds + " seconds)",
+				"Es visible el desplegable de bancos " + getLitSecondsWait(seconds),
 				pagePaytrail1rst.isVisibleSelectBancosUntil(seconds), Warn);
 			
 			checks.add(

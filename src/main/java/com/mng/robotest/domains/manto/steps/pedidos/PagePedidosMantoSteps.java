@@ -33,7 +33,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		
 		int seconds = 30;
 	 	checks.add(
-			"Desaparece la capa de Loading de \"Consultando\"" + " (lo esperamos hasta " + seconds + " segundos)",
+			"Desaparece la capa de Loading de \"Consultando\" " + getLitSecondsWait(seconds),
 			pagePedidos.isInvisibleCapaLoadingUntil(seconds));
 	 	
 	 	checks.setExistsLinkCodPed(pagePedidos.isPresentDataInPedido(IDPEDIDO, dataPedido.getCodigoPedidoManto(), TypeDetalle.PEDIDO, 0));

@@ -29,20 +29,20 @@ public class ModalDetalleCompraSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 3;
 		checks.add(
-			"Es visible la capa correspondiente al detalle del tícket de compra (la esperamos hasta " + seconds + " segundos)",
+			"Es visible la capa correspondiente al detalle del tícket de compra " + getLitSecondsWait(seconds),
 			pageDetalleCompra.isVisibleDataTicket(seconds), Warn);
 		
 		seconds = 2;
 		checks.add(
-			"Son visibles los datos del tícket (los esperamos hasta " + seconds + " segundos)",
+			"Son visibles los datos del tícket " + getLitSecondsWait(seconds),
 			pageDetalleCompra.isVisibleDataTicket(seconds));
 		
 		checks.add(
-			"Figura un id de tícket (lo esperamos hasta " + seconds + " segundos)",
+			"Figura un id de tícket " + getLitSecondsWait(seconds),
 			pageDetalleCompra.isVisibleIdTicket(seconds));
 		
 		checks.add(
-			"Figura alguna prenda (la esperamos hasta " + seconds + " segundos)",
+			"Figura alguna prenda " + getLitSecondsWait(seconds),
 			pageDetalleCompra.isVisiblePrendaUntil(seconds), Warn);
 		
 		return checks;

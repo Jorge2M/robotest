@@ -16,7 +16,7 @@ public class PageRegistroNinosStepsOutlet extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
-			"Aparece la página de introducción de datos del niño (la esperamos un máximo de " + seconds + " segundos)",
+			"Aparece la página de introducción de datos del niño " + getLitSecondsWait(seconds),
 			pageRegistroNinos.isPageUntil(seconds));
 		checks.add(
 			"Aparecen inputs para introducir <b>" + numNinos + "</b>",

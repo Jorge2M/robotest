@@ -384,7 +384,7 @@ public class CheckoutSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
-			"Aparece el campo de introducción del primer apellido (lo esperamos hasta " + seconds + " segundos)",
+			"Aparece el campo de introducción del primer apellido " + getLitSecondsWait(seconds),
 			pageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(seconds));
 		
 		boolean isPresentInputDni = pageCheckoutWrapper.isPresentInputDNIPromoEmpl();

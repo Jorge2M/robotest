@@ -27,7 +27,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		boolean isPageInitCheckout = page1DktopCheckout.isPageUntil(seconds);
 	 	checks.add(
 	 		Check.make(
-			    "Aparece la página inicial del Checkout (la esperamos un máximo de " + seconds + " segundos)",
+			    "Aparece la página inicial del Checkout " + getLitSecondsWait(seconds),
 			    isPageInitCheckout, Warn)
 	 		.store(StoreType.None).build());
 	 	
@@ -48,7 +48,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(
-			"Aparece la página inicial del Checkout (la esperamos un máximo de " + seconds + " segundos)<br>",
+			"Aparece la página inicial del Checkout " + getLitSecondsWait(seconds) + "<br>",
 			page1DktopCheckout.isPageUntil(seconds));
 		
 		checks.add(
@@ -68,7 +68,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 	 	checks.add(
-			"Aparece el descuento total aplicado al empleado (lo experamos hasta " + seconds + " segundos)",
+			"Aparece el descuento total aplicado al empleado " + getLitSecondsWait(seconds),
 			page1DktopCheckout.isVisibleDescuentoEmpleadoUntil(seconds));
 	 	
 		var descuento = new Descuento(app, DiscountType.EMPLEADO);
@@ -153,7 +153,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		int seconds = 3;
 		var checks = ChecksTM.getNew();
 	 	checks.add(
-			"Desaparece el campo de Input del código de vendedor (lo esperamos hasta " + seconds + " segundos)",
+			"Desaparece el campo de Input del código de vendedor " + getLitSecondsWait(seconds),
 			!page1DktopCheckout.isVisibleInputVendedorVOTF(seconds));
 	 	
 	 	checks.add(
