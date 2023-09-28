@@ -228,7 +228,7 @@ public abstract class PageGaleria extends PageBase {
 	}	
 
 	public boolean isFirstArticleOfType(LineaType lineaType) {
-		List<WebElement> listaArticulos = getElements(getXPathArticulo());
+		var listaArticulos = getElements(getXPathArticulo());
 		return (!listaArticulos.isEmpty() &&
 				state(Present, listaArticulos.get(0))
 					.by(By.xpath("//a[@href[contains(.,'" + lineaType + "')]]")).check());
@@ -313,10 +313,9 @@ public abstract class PageGaleria extends PageBase {
 	 */
 	public List<String> getListaReferenciasPrendas() {
 		List<String> listaReferencias = new ArrayList<>();
-		List<WebElement> listaArticulos = getArticulos();
-		for (WebElement articulo : listaArticulos)
+		for (WebElement articulo : getArticulos()) {
 			listaReferencias.add(getRefArticulo(articulo));
-
+		}
 		return listaReferencias;
 	}
 
@@ -418,7 +417,7 @@ public abstract class PageGaleria extends PageBase {
 	private DataArticleGalery getDataArticulo(WebElement articulo, List<AttributeArticle> attributes) {
 		moveToArticle(articulo);
 		var dataArticle = new DataArticleGalery();
-		for (AttributeArticle attribute : attributes) {
+		for (var attribute : attributes) {
 			switch (attribute) {
 				case NOMBRE:
 					dataArticle.setNombre(getNombreArticulo(articulo));
@@ -437,7 +436,7 @@ public abstract class PageGaleria extends PageBase {
 	public boolean iconsInCorrectState(List<Integer> posIconosFav, TypeActionFav typeAction) {
 		for (int posIcon : posIconosFav) {
 			String xPathIcon = getXPathArticleHearthIcon(posIcon);
-			WebElement hearthIcon = getElement(xPathIcon);
+			var hearthIcon = getElement(xPathIcon);
 			switch (typeAction) {
 				case MARCAR:
 					if (getStateHearthIcon(hearthIcon)!=StateFavorito.MARCADO) {
@@ -482,8 +481,9 @@ public abstract class PageGaleria extends PageBase {
 	public WebElement getArticleThatContainsLitUntil(String literal, int seconds) {
 		By byArticleName = By.xpath(
 				getXPathArticulo() +
-						XPATH_NOMBRE_RELATIVE_TO_ARTICLE +
-						"//self::*[text()[contains(.,'" + literal + "')]]");
+				XPATH_NOMBRE_RELATIVE_TO_ARTICLE +
+				"//self::*[text()[contains(.,'" + literal + "')]]");
+		
 		if (state(Present, byArticleName).wait(seconds).check()) {
 			return getElement(getXPathArticulo());
 		}
@@ -679,12 +679,11 @@ public abstract class PageGaleria extends PageBase {
 				listArtToReturn.add(nameAndLabelArticle);
 			}
 		}
-
 		return listArtToReturn;
 	}
 
 	private static boolean isArticleNew(String nameAndLabelArticle) {
-		for (LabelArticle label : LIST_LABELS_NEW) {
+		for (var label : LIST_LABELS_NEW) {
 			for (String labelNew : label.getListTraducciones()) {
 				if (nameAndLabelArticle.contains(labelNew) || nameAndLabelArticle.contains(labelNew.toUpperCase())) {
 					return true;

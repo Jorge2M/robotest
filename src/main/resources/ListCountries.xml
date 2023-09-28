@@ -211,6 +211,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
+<galeriakondo>S</galeriakondo>
 </pais>
 
 <pais nombre_pais="Bosnia and Herzegovina " codigo="093">
@@ -2202,7 +2203,6 @@ where
 <!-- 
 <idioma acceso="ua">UA</idioma>
 <idioma acceso="ua-en">IN</idioma>-->
-
 <codpos>01001</codpos>
 <telefono>0501111111</telefono>
 <dni>34763592N</dni>
@@ -2234,6 +2234,7 @@ where
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<galeriakondo>S</galeriakondo>
 </pais>
 
 <pais nombre_pais="United Kingdom" codigo="006">
