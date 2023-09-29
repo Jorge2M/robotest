@@ -68,7 +68,7 @@ public abstract class PageGaleria extends PageBase {
 	public abstract String getCodColorArticulo(int numArticulo) throws Exception;
 	public abstract String getNameColorFromCodigo(String codigoColor);
 	public abstract int getNumFavoritoIcons();
-	public abstract List<ArticuloScreen> clickArticleHearthIcons(List<Integer> posIconsToClick) throws Exception;
+	public abstract List<ArticuloScreen> clickArticleHearthIcons(Integer... posIconsToClick) throws Exception;
 	public abstract boolean isArticleWithHearthIconPresentUntil(int posArticle, int seconds);
 	public abstract void clickHearhIcon(int posArticle) throws Exception;
 	public abstract String getRefColorArticulo(WebElement articulo);
@@ -433,7 +433,7 @@ public abstract class PageGaleria extends PageBase {
 		return dataArticle;
 	}
 
-	public boolean iconsInCorrectState(List<Integer> posIconosFav, TypeActionFav typeAction) {
+	public boolean iconsInCorrectState(TypeActionFav typeAction, Integer... posIconosFav) {
 		for (int posIcon : posIconosFav) {
 			String xPathIcon = getXPathArticleHearthIcon(posIcon);
 			var hearthIcon = getElement(xPathIcon);

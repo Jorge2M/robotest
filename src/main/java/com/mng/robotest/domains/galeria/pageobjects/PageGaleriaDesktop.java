@@ -667,7 +667,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	//Equivalent to Mobil
 	@Override
-	public List<ArticuloScreen> clickArticleHearthIcons(List<Integer> posIconsToClick) throws Exception {
+	public List<ArticuloScreen> clickArticleHearthIcons(Integer... posIconsToClick) throws Exception {
 		List<ArticuloScreen> listArtFav = new ArrayList<>();
 		for (int posIcon : posIconsToClick) {
 			clickHearhIcon(posIcon);

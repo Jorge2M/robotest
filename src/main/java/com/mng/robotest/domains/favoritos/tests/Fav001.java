@@ -1,18 +1,16 @@
 package com.mng.robotest.domains.favoritos.tests;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.NumColumnas;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
-import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.test.beans.IdiomaPais;
 import com.mng.robotest.test.beans.Pais;
+
+import static com.mng.robotest.domains.galeria.steps.PageGaleriaSteps.TypeActionFav.*;
 
 public class Fav001 extends TestBase {
 
@@ -51,11 +49,8 @@ public class Fav001 extends TestBase {
 	}	
 	
 	private void clickFavoritesInGalery() throws Exception {
-		List<Integer> iconsToMark = Arrays.asList(2, 3, 4);  
-		pageGaleriaSteps.clickArticlesHearthIcons(iconsToMark, TypeActionFav.MARCAR);
-
-		List<Integer> iconsToUnmark = Arrays.asList(3);
-		pageGaleriaSteps.clickArticlesHearthIcons(iconsToUnmark, TypeActionFav.DESMARCAR);
+		pageGaleriaSteps.clickArticlesHearthIcons(MARCAR, 2, 3, 4);
+		pageGaleriaSteps.clickArticlesHearthIcons(DESMARCAR, 3);
 	}	
 
 	private void goToFavorites() {

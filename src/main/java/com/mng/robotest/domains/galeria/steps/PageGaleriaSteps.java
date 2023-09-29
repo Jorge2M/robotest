@@ -87,7 +87,7 @@ public class PageGaleriaSteps extends StepBase {
 		String urlGaleria = driver.getCurrentUrl();
 		
 		//Almacenamos el nombre del artículo y su referencia
-		WebElement articulo = pageGaleria.getArticulo(locationArt);
+		var articulo = pageGaleria.getArticulo(locationArt);
 		datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
@@ -523,22 +523,18 @@ public class PageGaleriaSteps extends StepBase {
 	@Step (
 		description="Seleccionamos (para <b>#{actionFav}</b>) los \"Hearth Icons\" asociados a los artículos con posiciones <b>#{posIconsToClick}</b>", 
 		expected="Los \"Hearth Icons\" quedan " + TAG_ESTADO_FINAL)
-	public void clickArticlesHearthIcons(List<Integer> posIconsToClick, TypeActionFav actionFav) 
+	public void clickArticlesHearthIcons(TypeActionFav actionFav, Integer... posIconsToClick) 
 			throws Exception {
 		var listAddFav = pageGaleria.clickArticleHearthIcons(posIconsToClick);
 		String estadoFinal = "";
-		switch (actionFav) {
-			case MARCAR:
+		if (actionFav==TypeActionFav.MARCAR) {
 				estadoFinal = "Marcados";
 				dataTest.getDataFavoritos().addToLista(listAddFav);
-				break;
-			case DESMARCAR:
+		} else {
 				estadoFinal = "Desmarcados";
 				dataTest.getDataFavoritos().removeFromLista(listAddFav);
-				break;
-			default:
-				break;
 		}
+		
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_ESTADO_FINAL, estadoFinal);
 		checkIconosInCorrectState(actionFav, estadoFinal, posIconsToClick);
 	}
@@ -546,8 +542,8 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation (
 		description="Quedan #{estadoFinal} los iconos asociados a los artículos con posiciones <b>#{posIconsSelected.toString()}</b>",
 		level=Warn)
-	private boolean checkIconosInCorrectState(TypeActionFav actionFav, String estadoFinal, List<Integer> posIconsSelected) {
-		return pageGaleria.iconsInCorrectState(posIconsSelected, actionFav);
+	private boolean checkIconosInCorrectState(TypeActionFav actionFav, String estadoFinal, Integer... posIconsSelected) {
+		return pageGaleria.iconsInCorrectState(actionFav, posIconsSelected);
 	}
 
 	public ListDataArticleGalery selectListadoXColumnasDesktop(
