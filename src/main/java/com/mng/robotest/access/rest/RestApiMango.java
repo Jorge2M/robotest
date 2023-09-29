@@ -16,8 +16,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.conf.AppEcom;
-import com.mng.robotest.test.utils.PagoGetter;
+import com.mng.robotest.tests.conf.AppEcom;
+import com.mng.robotest.testslegacy.utils.PagoGetter;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.InputParamsBasic;
 import com.github.jorge2m.testmaker.domain.testfilter.TestMethodData;
