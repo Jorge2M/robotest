@@ -15,13 +15,13 @@ import com.mng.robotest.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.domains.ficha.pageobjects.SecSliders.Slider;
 import com.mng.robotest.domains.ficha.steps.PageFichaSteps;
-import com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.repository.productlist.GetterProducts;
-import com.mng.robotest.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.repository.productlist.entity.GarmentCatalog.Article;
 
 import static com.mng.robotest.domains.ficha.pageobjects.SecProductDescrDevice.TypePanel.*;
+import static com.mng.robotest.repository.productlist.ProductFilter.FilterType.*;
+import static com.mng.robotest.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 
 public class Fic002 extends TestBase {
 
@@ -29,7 +29,7 @@ public class Fic002 extends TestBase {
 	private final boolean isTotalLook;
 
 	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	private final PageFichaSteps pageFichaSteps = new PageFichaSteps();
+	private final PageFichaSteps pFichaSteps = new PageFichaSteps();
 
 	public Fic002() throws Exception {
 		super();
@@ -61,13 +61,13 @@ public class Fic002 extends TestBase {
 	}
 	
 	private void checkGuiaDeTallas() {
-		pageFichaSteps.selectGuiaDeTallas(app);		
+		pFichaSteps.selectGuiaDeTallas(app);		
 	}
 	
 	private void checkSliders() {
 		Stream.of(Slider.values())
 			.filter(s -> isSliderChequeable(s))
-			.forEach(s -> pageFichaSteps.validateSliderIfExists(s));
+			.forEach(s -> pFichaSteps.validateSliderIfExists(s));
 	}
 	private boolean isSliderChequeable(Slider slider) {
 		return 
@@ -76,72 +76,73 @@ public class Fic002 extends TestBase {
 	}
 
 	private void pageFichaDesktopTest() {
-		boolean isFichaAccesorio = pageFichaSteps.getFicha().isFichaAccesorio();
-		pageFichaSteps.getSecFotosNewSteps().validaLayoutFotosNew(isFichaAccesorio);
+		boolean isFichaAccesorio = pFichaSteps.getFicha().isFichaAccesorio();
+		pFichaSteps.getSecFotosNewSteps().validaLayoutFotosNew(isFichaAccesorio);
 		if (app==AppEcom.shop) {
-			pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectEnvioYDevoluciones();
-			pageFichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
+			pFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectEnvioYDevoluciones();
+			pFichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
 		}
 
-		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(LineaType.SHE);
-		pageFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.getCodigoPais());
+		pFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(SHE);
+		pFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.getCodigoPais());
 	}
 
 	private void pageFichaDeviceTest() {
 		if (app==AppEcom.outlet && channel!=Channel.mobile) {
-			pageFichaSteps.validaExistsImgsCarruselIzqFichaOld();
+			pFichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}
-		pageFichaSteps.getSecProductDescDeviceSteps().validateAreInStateInitial();
+		pFichaSteps.getSecProductDescDeviceSteps().validateAreInStateInitial();
 		var pageFicha = PageFicha.of(channel);
 		if (((PageFichaDevice)pageFicha).getNumImgsCarruselIzq() > 2) {
-			pageFichaSteps.selectImgCarruselIzqFichaOld(2);
+			pFichaSteps.selectImgCarruselIzqFichaOld(2);
 		}
 
 		if (channel!=Channel.tablet) {
-			pageFichaSteps.selectImagenCentralFichaOld();
+			pFichaSteps.selectImagenCentralFichaOld();
 			if (channel.isDevice()) {
-				pageFichaSteps.closeZoomImageCentralDevice();
+				pFichaSteps.closeZoomImageCentralDevice();
 			}
 		}
 		if (DESCRIPTION.getListApps().contains(app) &&
 			!channel.isDevice()) {
-			pageFichaSteps.getSecProductDescDeviceSteps().selectPanel(DESCRIPTION);
+			pFichaSteps.getSecProductDescDeviceSteps().selectPanel(DESCRIPTION);
 		}
 		if (COMPOSITION.getListApps().contains(app)) {
-			pageFichaSteps.getSecProductDescDeviceSteps().selectPanel(COMPOSITION);
+			pFichaSteps.getSecProductDescDeviceSteps().selectPanel(COMPOSITION);
 		}
 		if (RETURNS.getListApps().contains(app)) {
-			pageFichaSteps.getSecProductDescDeviceSteps().selectPanel(RETURNS);
+			pFichaSteps.getSecProductDescDeviceSteps().selectPanel(RETURNS);
 		}
 		if (SHIPMENT.getListApps().contains(app) &&
 			!channel.isDevice()) {
-			pageFichaSteps.getSecProductDescDeviceSteps().selectPanel(SHIPMENT);  
+			pFichaSteps.getSecProductDescDeviceSteps().selectPanel(SHIPMENT);  
 		}
 	}
 	
 	private Pair<Article, Boolean> getArticle() throws Exception {
+		var articlePair = getArticleTLook();
+		boolean isTLook = articlePair.getRight();
+		var garmentOpt = articlePair.getLeft(); 
+		if (garmentOpt.isEmpty()) {
+			throw new NoSuchElementException("Article not retrieved from GetterProducts service");
+		}
+		
+		return Pair.of(
+				Article.getArticleForTest(garmentOpt.get()), 
+				isTLook);
+	}
+	
+	private Pair<Optional<GarmentCatalog>, Boolean> getArticleTLook() 
+			throws Exception {
 		var getterProducts = new GetterProducts
 				.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
 				.build();
-
-		var articleWithTotalLook = getterProducts
-				.getOne(Arrays.asList(FilterType.TOTAL_LOOK));
-		
-		GarmentCatalog garment;
-		boolean isTotalLook;
-		if (articleWithTotalLook.isPresent()) {
-			isTotalLook = true;
-			garment = articleWithTotalLook.get();
-		} else {
-			isTotalLook = false;
-			Optional<GarmentCatalog> garmentOpt = 	getterProducts.getOne();
-			if (garmentOpt.isPresent()) {
-				garment = garmentOpt.get();
-			} else {
-				throw new NoSuchElementException("Article not retrieved from GetterProducts service");
-			}
+	
+		var article = getterProducts.getOne(Arrays.asList(TOTAL_LOOK));
+		if (article.isPresent()) {
+			return Pair.of(article, true);
 		}
-		return Pair.of(Article.getArticleCandidateForTest(garment), isTotalLook);
+		return Pair.of(getterProducts.getOne(), false);
 	}
 
 }

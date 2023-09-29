@@ -36,8 +36,8 @@ public class BannerHeadGallerySteps extends StepBase {
 	}
 
 	@Validation (
-			description="El Banner de Cabecera contiene algún texto",
-			level=Warn)
+		description="El Banner de Cabecera contiene algún texto",
+		level=Warn)
 	public boolean checkBannerContainsSomeText() {
 		String textBanner = secBannerHeadDesktop.getText();
 		return ("".compareTo(textBanner)!=0);
@@ -65,33 +65,33 @@ public class BannerHeadGallerySteps extends StepBase {
 	public ChecksTM checkBannerSalesHead(TypeGalery typeGalery, Pais pais, IdiomaPais idioma) {
 		var checks = ChecksTM.getNew();
 		checks.add(
-				"<b style=\"color:blue\">Rebajas</b></br>" +
-						"Es visible el banner de cabecera",
-				secBannerHeadDesktop.isVisible());
+			"<b style=\"color:blue\">Rebajas</b>" + 
+			"</br>Es visible el banner de cabecera",
+			secBannerHeadDesktop.isVisible());
 
 		String saleTraduction = UtilsTest.getSaleTraduction(idioma);
 		String textBanner = secBannerHeadDesktop.getText();
 		checks.add(
-				"El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o " + saleTraduction + ")",
-				UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction));
+			"El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o " + saleTraduction + ")",
+			UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction));
+		
 		checks.add(
-				"El banner de cabecera contiene un link de \"Más info\"",
-				secBannerHeadDesktop.isVisibleLinkInfoRebajas(), Warn);
+			"El banner de cabecera contiene un link de \"Más info\"",
+			secBannerHeadDesktop.isVisibleLinkInfoRebajas(), Warn);
 
 		boolean bannerLincable = secBannerHeadDesktop.isLinkable();
 		if (typeGalery==TypeGalery.SALES || !pais.isVentaOnline()) {
 			checks.add(
-					Check.make(
-									"El banner de cabecera no es lincable",
-									!bannerLincable, Info)
-							.store(StoreType.None).build());
+				Check.make(
+					"El banner de cabecera no es lincable",
+					!bannerLincable, Info)
+				.store(StoreType.None).build());
 		}
 		else {
 			checks.add(
-					"El banner de cabecera sí es lincable",
-					bannerLincable, Warn);
+				"El banner de cabecera sí es lincable",
+				bannerLincable, Warn);
 		}
-
 		return checks;
 	}
 
@@ -100,9 +100,9 @@ public class BannerHeadGallerySteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		String saleTraduction = UtilsTest.getSaleTraduction(idioma);
 		checks.add(
-				"<b style=\"color:blue\">Rebajas</b></br>" +
-						"El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")",
-				!secBannerHeadDesktop.isSalesBanner(idioma));
+			"<b style=\"color:blue\">Rebajas</b></br>" +
+			"El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")",
+			!secBannerHeadDesktop.isSalesBanner(idioma));
 
 		return checks;
 	}

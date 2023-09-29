@@ -27,7 +27,7 @@ public class Bus001 extends TestBase {
 		pageLandingSteps.validateIsPageWithCorrectLineas();
 		
 		GarmentCatalog product = getProduct();
-		secBuscadorSteps.searchArticulo(Article.getArticleCandidateForTest(product));
+		secBuscadorSteps.searchArticulo(Article.getArticleForTest(product));
 		secBuscadorSteps.busquedaCategoriaProducto(categoriaProdExistente, true);
 		secBuscadorSteps.busquedaCategoriaProducto(catProdInexistente, false);			
 	}

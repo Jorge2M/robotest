@@ -85,7 +85,7 @@ public class Com001 extends TestBase {
 			.filter(FilterType.STOCK)
 			.build();
 		
-		return Optional.of(Article.getArticlesCandidateForTest(getterProducts.getAll()));
+		return Optional.of(Article.getArticlesForTest(getterProducts.getAll()));
 	}
 	
 }

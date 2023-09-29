@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.loyalty.steps;
 
-import java.util.Arrays;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -99,7 +97,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		expected="Aparece una página para donar mis Likes")
 	public void clickButtonDonarLikes() {
 		pageMangoLikesYou.clickButton(DONAR_MIS_LIKES);
-		new PageHomeDonateLikesSteps().checkIsPage(5, Arrays.asList(BUTTON_50_LIKES, BUTTON_100_LIKES));
+		new PageHomeDonateLikesSteps().checkIsPage(5, BUTTON_50_LIKES, BUTTON_100_LIKES);
 		checksDefault();
 	}
 	

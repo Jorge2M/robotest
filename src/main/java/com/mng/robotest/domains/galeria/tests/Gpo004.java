@@ -2,9 +2,7 @@ package com.mng.robotest.domains.galeria.tests;
 
 import java.util.ArrayList;
 
-import com.mng.robotest.conf.AppEcom;
 import com.mng.robotest.domains.base.TestBase;
-import com.mng.robotest.domains.galeria.pageobjects.FilterOrdenacion;
 import com.mng.robotest.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.domains.galeria.steps.DataForScrollStep;
 import com.mng.robotest.domains.galeria.steps.LocationArticle;
@@ -13,6 +11,9 @@ import com.mng.robotest.test.data.Color;
 import com.mng.robotest.test.pageobject.utils.DataScroll;
 
 import static com.mng.robotest.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
+import static com.mng.robotest.test.data.Color.*;
+import static com.mng.robotest.domains.galeria.pageobjects.FilterOrdenacion.*;
+import static com.mng.robotest.conf.AppEcom.*;
 
 public class Gpo004 extends TestBase {
 
@@ -20,7 +21,7 @@ public class Gpo004 extends TestBase {
 	private final DataForScrollStep dataScroll = new DataForScrollStep();
 	
 	public Gpo004() {
-		dataScroll.setOrdenacionExpected(FilterOrdenacion.NO_ORDENADO);
+		dataScroll.setOrdenacionExpected(NO_ORDENADO);
 		dataScroll.setValidateArticlesExpected(false);
 		dataScroll.setValidaImgBroken(true);
 	}
@@ -40,21 +41,21 @@ public class Gpo004 extends TestBase {
 	}
 
 	private void selectGaleryAndFilterByColor() {
-		if (app==AppEcom.shop) {
+		if (app==shop) {
 			clickMenu(CAMISAS_SHE);
 		} else {
 			clickMenu(ABRIGOS_SHE);
 		}
 
 		var colorsToFilter = new ArrayList<Color>();
-		colorsToFilter.add(Color.BLANCO);
-		colorsToFilter.add(Color.NEGRO);
-		colorsToFilter.add(Color.AZUL);			
-		if (app==AppEcom.shop) {
+		colorsToFilter.add(BLANCO);
+		colorsToFilter.add(NEGRO);
+		colorsToFilter.add(AZUL);			
+		if (app==shop) {
 			filterGaleryByColors(CAMISAS_SHE, colorsToFilter);
 		} else {
-			colorsToFilter.add(Color.MARRON);
-			colorsToFilter.add(Color.BEIGE);
+			colorsToFilter.add(MARRON);
+			colorsToFilter.add(BEIGE);
 			filterGaleryByColors(ABRIGOS_SHE, colorsToFilter);
 		}
 	}

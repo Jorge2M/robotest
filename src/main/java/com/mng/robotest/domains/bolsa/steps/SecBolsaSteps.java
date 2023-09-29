@@ -95,7 +95,7 @@ public class SecBolsaSteps extends StepBase {
 				.build();
 		
 		var garments = getterProducts.getAll().subList(0, numArticulos);
-		altaListaArticulosEnBolsa(Article.getArticlesCandidateForTest(garments));
+		altaListaArticulosEnBolsa(Article.getArticlesForTest(garments));
 	}
 
 	public void altaListaArticulosEnBolsa(List<Article> listArticlesForAdd) 

@@ -379,9 +379,9 @@ public class PageGaleriaSteps extends StepBase {
 	/**
 	 * @return src de la imagen obtenida al ejecutar los clicks
 	 */
-	public String clicksSliderArticuloConColores(int numArtConColores, List<TypeSlider> typeSliderList)
+	public String clicksSliderArticuloConColores(int numArtConColores, TypeSlider... typeSliderList)
 			throws Exception {
-		return (clicksSliderArticuloConColores(numArtConColores, typeSliderList, ""));
+		return clicksSliderArticuloConColores(numArtConColores, "", typeSliderList);
 	}
    
 	/**
@@ -395,7 +395,7 @@ public class PageGaleriaSteps extends StepBase {
 			"Clickar la siguiente secuencia de sliders: <b>" + TAG_SLIDER_LIST + "</b> del #{numArtConColores}o " + 
 			" artículo con variedad de colores (" + TAG_NOMBRE_ART + "). Previamente realizamos un \"Hover\" sobre dicho artículo", 
 		expected="Aparece el artículo original(" + TAG_NOMBRE_ART + ")")
-	public String clicksSliderArticuloConColores(int numArtConColores, List<TypeSlider> typeSliderList, String srcImageExpected) 
+	public String clicksSliderArticuloConColores(int numArtConColores, String srcImageExpected, TypeSlider... typeSliderList) 
 			throws Exception {
 		if (channel!=Channel.desktop) {
 			throw new RuntimeException("Method clickSliderArticuloConColores doesn't support channel " + channel);
@@ -408,15 +408,15 @@ public class PageGaleriaSteps extends StepBase {
 		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax.
 		//En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
 		PageObjTM.waitForPageLoaded(driver, 2);
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-		WebElement articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHover(numArtConColores);
+		var pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+		var articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHover(numArtConColores);
 		stepTM.replaceInDescription(TAG_NOMBRE_ART, pageGaleria.getNombreArticulo(articuloColores));
 		stepTM.replaceInExpected(TAG_NOMBRE_ART, pageGaleria.getNombreArticulo(articuloColores));
 		String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores);
 		pageGaleriaDesktop.clickSliders(articuloColores, typeSliderList);
 
 		String srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores);
-		checkImageSliderArticleHasChanged(srcImg1erSlider, srcImg2oSlider, typeSliderList.size());
+		checkImageSliderArticleHasChanged(srcImg1erSlider, srcImg2oSlider, typeSliderList.length);
 		if ("".compareTo(srcImageExpected)!=0) {
 			checkActualImgSliderIsTheExpected(srcImg2oSlider, srcImageExpected);
 		}
@@ -444,7 +444,7 @@ public class PageGaleriaSteps extends StepBase {
 	   return (srcImgActual.compareTo(srcImgOriginalExpected)==0);
    }
 	
-   private static String getStringSliderList(List<TypeSlider> typeSliderList) {
+   private static String getStringSliderList(TypeSlider... typeSliderList) {
 	   String listStr = "";
 	   for (TypeSlider typeSlider : typeSliderList) {
 		   listStr+=(typeSlider + ", ");

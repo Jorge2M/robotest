@@ -14,8 +14,8 @@ import static com.mng.robotest.domains.galeria.steps.PageGaleriaSteps.TypeAction
 
 public class Fav001 extends TestBase {
 
-	private final PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
-	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
+	private final PageFavoritosSteps pFavoritosSteps = new PageFavoritosSteps();
+	private final PageGaleriaSteps pGaleriaSteps = new PageGaleriaSteps();
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 	
 	public Fav001(Pais pais, IdiomaPais idioma) {
@@ -38,19 +38,19 @@ public class Fav001 extends TestBase {
 	private void loginAndClearData() throws Exception {
 		accessAndLogin();
 		secBolsaSteps.clear();
-		pageFavoritosSteps.clearAll();
+		pFavoritosSteps.clearAll();
 	}	
 	
 	private void goToVestidosGalery() {
 		clickMenu("Vestidos");
 		if (channel==Channel.desktop) {
-			pageGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO);
+			pGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO);
 		}
 	}	
 	
 	private void clickFavoritesInGalery() throws Exception {
-		pageGaleriaSteps.clickArticlesHearthIcons(MARCAR, 2, 3, 4);
-		pageGaleriaSteps.clickArticlesHearthIcons(DESMARCAR, 3);
+		pGaleriaSteps.clickArticlesHearthIcons(MARCAR, 2, 3, 4);
+		pGaleriaSteps.clickArticlesHearthIcons(DESMARCAR, 3);
 	}	
 
 	private void goToFavorites() {
@@ -59,11 +59,11 @@ public class Fav001 extends TestBase {
 
 	private void clearFirstFavorite() {
 		var firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
-		pageFavoritosSteps.clear(firstFavorite);
+		pFavoritosSteps.clear(firstFavorite);
 	}
 	
 	private void clearAllFavorites() {
-		pageFavoritosSteps.clearAll();		
+		pFavoritosSteps.clearAll();		
 	}
 	
 }

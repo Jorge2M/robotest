@@ -1,7 +1,5 @@
 package com.mng.robotest.domains.galeria.tests;
 
-import java.util.Arrays;
-
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.galeria.steps.PageGaleriaSteps;
 
@@ -10,7 +8,7 @@ import static com.mng.robotest.domains.galeria.pageobjects.PageGaleriaDesktop.Ty
 
 public class Gpo006 extends TestBase {
 
-	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
+	private final PageGaleriaSteps pGaleriaSteps = new PageGaleriaSteps();
 	
 	@Override
 	public void execute() throws Exception {
@@ -20,12 +18,12 @@ public class Gpo006 extends TestBase {
 	}
 
 	private void checkSliders() throws Exception {
-		String src2onImage = pageGaleriaSteps.clicksSliderArticuloConColores(1, Arrays.asList(NEXT));
-		pageGaleriaSteps.clicksSliderArticuloConColores(1, Arrays.asList(PREV));
-		pageGaleriaSteps.clicksSliderArticuloConColores(1, Arrays.asList(NEXT), src2onImage);
-		String srcImgAfterClickColor = pageGaleriaSteps.selecColorFromArtGaleriaStep(1, 2);
-		pageGaleriaSteps.clicksSliderArticuloConColores(1, Arrays.asList(NEXT, NEXT));
-		pageGaleriaSteps.clicksSliderArticuloConColores(1, Arrays.asList(PREV, PREV), srcImgAfterClickColor);
+		String src2onImage = pGaleriaSteps.clicksSliderArticuloConColores(1, NEXT);
+		pGaleriaSteps.clicksSliderArticuloConColores(1, PREV);
+		pGaleriaSteps.clicksSliderArticuloConColores(1, src2onImage, NEXT);
+		String srcImgAfterClickColor = pGaleriaSteps.selecColorFromArtGaleriaStep(1, 2);
+		pGaleriaSteps.clicksSliderArticuloConColores(1, NEXT, NEXT);
+		pGaleriaSteps.clicksSliderArticuloConColores(1, srcImgAfterClickColor, PREV, PREV);
 	}
 
 }

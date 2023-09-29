@@ -2,15 +2,9 @@ package com.mng.robotest.domains.loyalty.pageobjects;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.domains.base.PageBase;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
-import java.util.List;
-
 import org.openqa.selenium.By;
 
-
-
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageHomeDonateLikes extends PageBase {
 
@@ -43,12 +37,12 @@ public class PageHomeDonateLikes extends PageBase {
 		return state(Visible, XPATH_PAGE).wait(seconds).check();
 	}
 	
-	public boolean isVisibleAny(List<ButtonLikes> listButtons, int seconds) {
-		if (isVisible(listButtons.get(0), seconds)) {
+	public boolean isVisibleAny(int seconds, ButtonLikes... listButtons) {
+		if (isVisible(listButtons[0], seconds)) {
 			return true;
 		}
-		for (int i=1; i<listButtons.size(); i++) {
-			if (isVisible(listButtons.get(i), 0)) {
+		for (int i=1; i<listButtons.length; i++) {
+			if (isVisible(listButtons[i], 0)) {
 				return true;
 			}
 		}

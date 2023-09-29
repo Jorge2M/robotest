@@ -149,7 +149,7 @@ public class UtilsTest {
 				.build();
 
 		List<GarmentCatalog> listProducts = getterProducts.getAll();
-		List<Article> listArticles = Article.getArticlesCandidateForTest(listProducts);
+		List<Article> listArticles = Article.getArticlesForTest(listProducts);
 		if (listArticles.size() > maxArticlesAwayVale) {
 			return (listArticles.subList(0, maxArticlesAwayVale));
 		}
@@ -178,8 +178,8 @@ public class UtilsTest {
 		}
 		
 		return Pair.of(
-				Article.getArticleCandidateForTest(garment1), 
-				Article.getArticleCandidateForTest(garment2));
+				Article.getArticleForTest(garment1), 
+				Article.getArticleForTest(garment2));
 	}	
 	
 	private static List<GarmentCatalog> getProductFromApi(Pais pais, AppEcom app) throws Exception {

@@ -79,7 +79,7 @@ public class FilterTotalLook implements Filter {
 	}
 	
 	private WebTarget getWebTargetTotalLookGarment(GarmentCatalog product) {
-		Article article = Article.getArticleCandidateForTest(product);
+		Article article = Article.getArticleForTest(product);
 		Client client = ClientBuilder.newClient();
 		return ( 
 			client

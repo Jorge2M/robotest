@@ -138,10 +138,10 @@ public class GarmentCatalog {
 		String urlFicha;
 		String wareHouse;
 		
-		public static Article getArticleCandidateForTest(GarmentCatalog garment) { 		
+		public static Article getArticleForTest(GarmentCatalog garment) { 		
 			return garment.getArticleWithMoreStock();
 		}
-		public static List<Article> getArticlesCandidateForTest(List<GarmentCatalog> garments) {
+		public static List<Article> getArticlesForTest(List<GarmentCatalog> garments) {
 			return garments.stream()
 					.map(GarmentCatalog::getArticleWithMoreStock)
 					.toList();

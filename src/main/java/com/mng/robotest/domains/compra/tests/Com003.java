@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 import com.mng.robotest.domains.base.TestBase;
 import com.mng.robotest.domains.compra.beans.ConfigCheckout;
-import com.mng.robotest.test.datastored.DataPago;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.test.steps.navigations.shop.CheckoutFlow.From;
 

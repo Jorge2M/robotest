@@ -552,10 +552,9 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		}
 	}
 	
-	public void clickSliders(WebElement articulo, List<TypeSlider> typeSliderList) {
-		for (TypeSlider typeSlider : typeSliderList) {
-			clickSlider(articulo, typeSlider);
-		}
+	public void clickSliders(WebElement articulo, TypeSlider... typeSliderList) {
+		Arrays.stream(typeSliderList)
+			.forEach(s -> clickSlider(articulo, s));
 	}
 	
 	public void clickSlider(WebElement articulo, TypeSlider typeSlider) {

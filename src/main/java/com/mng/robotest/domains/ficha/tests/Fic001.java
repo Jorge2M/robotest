@@ -50,13 +50,13 @@ public class Fic001 extends TestBase {
 	}
 
 	private void articleOnlineTest() {
-		Article articleOnline = Article.getArticleCandidateForTest(productOnline.get());
+		Article articleOnline = Article.getArticleForTest(productOnline.get());
 		new SecBuscadorSteps().searchArticulo(articleOnline, filterOnline);
 		pageFichaSteps.checkLinkDispTiendaInvisible();
 	}
 	
 	private void articleNoOnlineTest() throws Exception {
-		var articleNoOnlineWithColors = Article.getArticleCandidateForTest(produtNoOnlineWithColors.get());
+		var articleNoOnlineWithColors = Article.getArticleForTest(produtNoOnlineWithColors.get());
 		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
 		boolean isTallaUnica = pageFichaSteps.selectAnadirALaBolsaTallaPrevNoSelected();
 		if (channel.isDevice()) {
@@ -82,7 +82,7 @@ public class Fic001 extends TestBase {
 
 	private void stopIfNoPresentArticleNoOnlineWithColors() throws NotFoundException {
 		if (!produtNoOnlineWithColors.isPresent()) {
-			List<String> filtersLabels = 
+			var filtersLabels = 
 				filterNoOnlineWithColors
 					.stream()
 					.map(Object::toString)

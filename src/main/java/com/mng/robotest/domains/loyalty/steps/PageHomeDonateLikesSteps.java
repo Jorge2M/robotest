@@ -7,14 +7,12 @@ import com.mng.robotest.domains.base.StepBase;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes;
 import com.mng.robotest.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes;
 
-import java.util.List;
-
 public class PageHomeDonateLikesSteps extends StepBase {
 	
 	private final PageHomeDonateLikes pageHomeDonateLikes = new PageHomeDonateLikes();
 	
 	@Validation
-	public ChecksTM checkIsPage(int seconds, List<ButtonLikes> listButtons) {
+	public ChecksTM checkIsPage(int seconds, ButtonLikes... listButtons) {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la pagina de <b>Donar Likes</b>",
@@ -22,14 +20,14 @@ public class PageHomeDonateLikesSteps extends StepBase {
 
 		checks.add(
 			"Aparece alguno de los botones para donar " +  listButtons + " Likes " + getLitSecondsWait(seconds),
-			pageHomeDonateLikes.isVisibleAny(listButtons, seconds));
+			pageHomeDonateLikes.isVisibleAny(seconds, listButtons));
 		
 		return checks;
 	}
 	
-	public int selectDonateButton(List<ButtonLikes> buttonLikesList) {
-		for (int i=0; i<buttonLikesList.size(); i++) {
-			var buttonLikes = buttonLikesList.get(i);
+	public int selectDonateButton(ButtonLikes... buttonLikesList) {
+		for (int i=0; i<buttonLikesList.length; i++) {
+			var buttonLikes = buttonLikesList[i];
 			if (pageHomeDonateLikes.isVisible(buttonLikes, 0)) {
 				selectDonateButton(buttonLikes);
 				return buttonLikes.getNumLikes();

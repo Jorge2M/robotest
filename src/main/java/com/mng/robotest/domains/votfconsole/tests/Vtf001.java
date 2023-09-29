@@ -55,7 +55,7 @@ public class Vtf001 extends TestBase {
 				.numProducts(numProductsMax)
 				.build();		
 		
-		return Article.getArticlesCandidateForTest(getterProducts.getAll());
+		return Article.getArticlesForTest(getterProducts.getAll());
 	}
 
 }
