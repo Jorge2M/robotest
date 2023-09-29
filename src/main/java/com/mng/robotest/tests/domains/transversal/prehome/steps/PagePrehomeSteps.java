@@ -43,7 +43,7 @@ public class PagePrehomeSteps extends StepBase {
 		if (channel==Channel.desktop) {
 			checks.add(
 			    Check.make(
-				    "Queda seleccionado el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")",
+				    "Queda seleccionado el país con código " + pais.getCodigoPais() + " (" + pais.getNombrePais() + ")",
 				    pagePrehome.isPaisSelected(), Warn)
 			    .store(StoreType.None).build());
 		}
@@ -84,11 +84,11 @@ public class PagePrehomeSteps extends StepBase {
 
 	@Step (
 		description=
-			"Acceso <b style=\"color:brown;\">#{pais.getNombre_pais()} / #{idioma.getLiteral()}</b> desde la PreHome",
+			"Acceso <b style=\"color:brown;\">#{pais.getNombrePais()} / #{idioma.getLiteral()}</b> desde la PreHome",
 		expected="Se accede correctamente al pais / idioma seleccionados",
 		saveNettraffic=SaveWhen.Always)
 	private void accesoShopViaPrehome(Pais pais, IdiomaPais idioma, boolean execValidacs, boolean acceptCookies) throws Exception {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_PAIS, pais.getNombre_pais());
+		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_PAIS, pais.getNombrePais());
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_IDIOMA, idioma.getLiteral());
 		
 		pagePrehome.accesoShopViaPrehome();

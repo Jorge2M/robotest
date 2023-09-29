@@ -455,11 +455,11 @@ public class MenuSteps extends StepBase {
 	@Step (
 		description=
 			"Cargar la siguiente URL de redirect a la ficha del producto <b>" + TAG_REF_ARTICLE + 
-			" (#{pais.getNombre_pais()})</b>:<br>" + TAG_URL_ACCESO,
+			" (#{pais.getNombrePais()})</b>:<br>" + TAG_URL_ACCESO,
 		expected=
 			"Aparece la ficha del producto " + TAG_REF_ARTICLE)
 	public void checkURLRedirectFicha() throws Exception {
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver).build();
+		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), app, driver).build();
 		GarmentCatalog product = getterProducts.getAll().get(0);
 		Article article = Article.getArticleForTest(product);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_REF_ARTICLE, article.getGarmentId());

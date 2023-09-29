@@ -49,7 +49,7 @@ public class CompraFact implements Serializable {
 	private String getIndexFactoria(Pais pais, Pago pago, AppEcom app, Channel channel) {
 		String index =
 			" " + 
-			pais.getNombre_pais().replace(" (Península y Baleares)", "") + 
+			pais.getNombrePais().replace(" (Península y Baleares)", "") + 
 			"-" + 
 			pago.getNameFilter(channel, app) +
 			"-" +

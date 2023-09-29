@@ -84,7 +84,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	public boolean isPaisSelected() {
 		state(Visible, XPATH_PAIS_SELECCIONADO).wait(1).check();
 		return getElement(XPATH_PAIS_SELECCIONADO).getAttribute("value")
-				.contains(pais.getNombre_pais());
+				.contains(pais.getNombrePais());
 	}
 	
 	private void unfoldCountrys() {
@@ -99,7 +99,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	}
 
 	private String getNameCountry() {
-		String xpathCountryOption = getXPathCountryItemFromCodigo(pais.getCodigo_prehome());
+		String xpathCountryOption = getXPathCountryItemFromCodigo(pais.getCodigoPrehome());
 		return getElement(xpathCountryOption + "//p").getText();
 	}
 	

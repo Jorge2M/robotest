@@ -176,11 +176,11 @@ public enum PaisShop {
 	}
 	
 	public boolean isEquals(Pais pais) {
-		return this==from(pais.getCodigo_pais());
+		return this==from(pais.getCodigoPais());
 	}
 	
 	public static PaisShop getPais(Pais pais) {
-		return from(pais.getCodigo_pais());
+		return from(pais.getCodigoPais());
 	}
 	
 	public static PaisShop from(String codigoPais) {

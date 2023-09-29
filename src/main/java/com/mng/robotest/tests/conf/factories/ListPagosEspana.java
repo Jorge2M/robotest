@@ -115,7 +115,7 @@ public class ListPagosEspana implements Serializable {
 		listTests.add(new CompraFact(pais, idioma, pago, app, channel, usrRegistrado, empleado, testVale, manyArticles, anulPedido, prioridad));
 		System.out.println(
 			"Creado Test COM010: " +
-			"Pais=" + pais.getNombre_pais() +
+			"Pais=" + pais.getNombrePais() +
 			",Pago=" + pago.getNameFilter(channel, app) + 
 			",Envio=" + pago.getTipoEnvioType(app) +
 			",UserReg=" + usrRegistrado + 

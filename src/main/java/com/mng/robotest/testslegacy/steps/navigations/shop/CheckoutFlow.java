@@ -248,7 +248,7 @@ public class CheckoutFlow extends StepBase {
 						//Test funcionalidad "Cambio dirección de envío"
 						pageCheckoutWrapperSteps.clickEditarDirecEnvio();
 						var dataDirEnvio = new DataDireccion();
-						dataDirEnvio.put(CODIGOPAIS, paisChange.getCodigo_pais());
+						dataDirEnvio.put(CODIGOPAIS, paisChange.getCodigoPais());
 						dataDirEnvio.put(CODPOSTAL, paisChange.getCodpos());					
 						dataDirEnvio.put(NAME, "Jorge");
 						dataDirEnvio.put(APELLIDOS, "Muñoz Martínez");
@@ -265,7 +265,7 @@ public class CheckoutFlow extends StepBase {
 			}
 		}
 		catch (Exception e) {
-			Log4jTM.getLogger().warn("Problem validating Payments methods of country {} ",  dataTest.getPais().getNombre_pais(), e);
+			Log4jTM.getLogger().warn("Problem validating Payments methods of country {} ",  dataTest.getPais().getNombrePais(), e);
 			throw e; 
 		}
 	}
@@ -382,7 +382,7 @@ public class CheckoutFlow extends StepBase {
 			updateInfoExecutionSuite(dataPedido.getCodpedido());
 		}
 		catch (Exception e) {
-			Log4jTM.getLogger().warn("Problem checking Payment {} from country {}", pagoPais.getNombre(), pais.getNombre_pais(), e);
+			Log4jTM.getLogger().warn("Problem checking Payment {} from country {}", pagoPais.getNombre(), pais.getNombrePais(), e);
 		}
 	}
 	

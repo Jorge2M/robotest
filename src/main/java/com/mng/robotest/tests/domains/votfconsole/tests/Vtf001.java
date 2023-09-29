@@ -45,13 +45,7 @@ public class Vtf001 extends TestBase {
 	}
 
 	private List<Article> getArticlesAvailable(int numProductsMax, WebDriver driver) throws Exception {
-//		var getterProducts = new GetterProducts.Builder("https://shop.mango.com/", ESPANA.getPais().getCodigo_alf(), AppEcom.votf, driver).
-//				linea(LineaType.SHE).
-//				menu(Menu.SHORTS).
-//				numProducts(numProductsMax).
-//				pagina(1).
-//				build();
-		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), AppEcom.votf, driver)
+		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), AppEcom.votf, driver)
 				.numProducts(numProductsMax)
 				.build();		
 		

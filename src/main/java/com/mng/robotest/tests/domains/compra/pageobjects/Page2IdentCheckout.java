@@ -260,7 +260,7 @@ public class Page2IdentCheckout extends PageBase {
 		if (!paisCf.isEmpty()) {
 			String xpathSelectedPais = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + pais.getAddress() + "']";
 			if (state(Present, xpathSelectedPais).check()) {
-				new Select(paisCf.get(0)).selectByValue(pais.getCodigo_pais());
+				new Select(paisCf.get(0)).selectByValue(pais.getCodigoPais());
 				datoSeteado = true;
 			}
 		}
@@ -271,7 +271,7 @@ public class Page2IdentCheckout extends PageBase {
 	public void setPaisIfVisibleAndNotSelected(Map<String,String> datosRegistro) {
 		boolean datoSeteado = setPaisIfVisibleAndNotSelected();
 		if (datoSeteado) {
-			datosRegistro.put(":pais", pais.getCodigo_pais());
+			datosRegistro.put(":pais", pais.getCodigoPais());
 		}
 	}	
 	
@@ -465,7 +465,7 @@ public class Page2IdentCheckout extends PageBase {
 	
 	public void setSelectEstadosPaisIfVisible(Map<String,String> datosRegistro) {
 	   	String datoSeteado = "";
-		if ("001".compareTo(pais.getCodigo_pais())==0) {
+		if ("001".compareTo(pais.getCodigoPais())==0) {
 			datoSeteado = setSeletEstadoEspanya("Barcelona");
 		} else {
 			datoSeteado = setSelectEstados1PaisIfVisible();

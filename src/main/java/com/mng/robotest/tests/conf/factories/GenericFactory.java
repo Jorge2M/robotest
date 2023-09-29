@@ -61,7 +61,7 @@ public class GenericFactory {
 		
 		System.out.println (
 			"Creados test de la Suite " + suite + " con datos: " +
-			",Pais=" + pais.getNombre_pais() +
+			",Pais=" + pais.getNombrePais() +
 			",Idioma=" + idioma.getCodigo().getLiteral()
 		);
 	}

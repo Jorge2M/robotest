@@ -219,7 +219,7 @@ public class CheckoutSteps extends StepBase {
 		if (!methodSelectedOK) {
 			//En caso de no conseguir seleccionar correctamente el pago no nos podemos arriesgar a continuar con el pago
 			//porque quizás esté seleccionado otro método de pago del tipo Contrareembolso y un "Confirmar Pago" desencadenaría la compra en PRO
-			throw new RuntimeException("Problem selecting payment method " + dataPago.getDataPedido().getPago().getNombre() + " in country " + dataTest.getPais().getNombre_pais());
+			throw new RuntimeException("Problem selecting payment method " + dataPago.getDataPedido().getPago().getNombre() + " in country " + dataTest.getPais().getNombrePais());
 		}
 	}
 	
@@ -242,7 +242,7 @@ public class CheckoutSteps extends StepBase {
 			checksDefault();
 		}
 		catch (Exception e) {
-			Log4jTM.getLogger().warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), dataTest.getPais().getNombre_pais(), e);
+			Log4jTM.getLogger().warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), dataTest.getPais().getNombrePais(), e);
 		}
 
 		if (pago.getTypePago()==TypePago.TARJETA_INTEGRADA || 

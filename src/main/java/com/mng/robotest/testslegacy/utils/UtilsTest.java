@@ -143,7 +143,7 @@ public class UtilsTest {
 			Pais pais, AppEcom app, int maxArticlesAwayVale, WebDriver driver) throws Exception {
 		
 		var getterProducts = new GetterProducts
-				.Builder(pais.getCodigo_alf(), app, driver)
+				.Builder(pais.getCodigoAlf(), app, driver)
 				.filter(FilterType.STOCK)
 				.sortBy(SortBy.STOCK_DESCENDENT)
 				.build();
@@ -183,8 +183,7 @@ public class UtilsTest {
 	}	
 	
 	private static List<GarmentCatalog> getProductFromApi(Pais pais, AppEcom app) throws Exception {
-		//GetterProducts getterProducts = new GetterProducts.Builder("https://shop.mango.com/", deutschland.getCodigo_alf(), AppEcom.shop, null)
-		var getterProducts = new GetterProducts.Builder(pais	.getCodigo_alf(), app, null)
+		var getterProducts = new GetterProducts.Builder(pais.getCodigoAlf(), app, null)
 			.sortBy(SortBy.STOCK_DESCENDENT)
 			.extraCanonicalInfo(true)
 			.build();

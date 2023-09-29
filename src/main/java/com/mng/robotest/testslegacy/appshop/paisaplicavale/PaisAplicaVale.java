@@ -29,7 +29,7 @@ public class PaisAplicaVale implements Serializable {
 				.version(version).build();
 		
 		this.indexFact = 
-			pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + " - " + 
+			pais.getNombrePais() + " (" + pais.getCodigoPais() + ") " + " - " + 
 			idioma.getCodigo().getLiteral();
 	}
 	

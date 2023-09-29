@@ -144,8 +144,8 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			(numInputsObligatoriosNoInf + numInputsTypePassrod) >= numErrCampObligatorio, Warn);
 		if (pageRegistroIni.isVisibleSelectPais()) {
 			checks.add(
-				"Existe desplegable país -> aparece seleccionado el país con código " + pais.getCodigo_pais() + " (" + pais.getNombre_pais() + ")",
-				pageRegistroIni.isSelectedOptionPais(pais.getCodigo_pais()), Warn);
+				"Existe desplegable país -> aparece seleccionado el país con código " + pais.getCodigoPais() + " (" + pais.getNombrePais() + ")",
+				pageRegistroIni.isSelectedOptionPais(pais.getCodigoPais()), Warn);
 		}
 		
 		return checks;
@@ -168,7 +168,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 			return;
 		}
 		if (pais.getRgpd().equals("S")) {
-			validateRGPDInCountryWithRgpd(pais.getCodigo_alf());
+			validateRGPDInCountryWithRgpd(pais.getCodigoAlf());
 			return;
 		}
 	}

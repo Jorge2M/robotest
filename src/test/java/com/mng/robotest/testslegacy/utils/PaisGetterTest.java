@@ -19,7 +19,7 @@ public class PaisGetterTest {
 		Pais pais = PaisGetter.from(PaisShop.ESPANA);
 		
 		//Then
-		assertEquals(PaisShop.ESPANA.getCodigoPais(), pais.getCodigo_pais());
+		assertEquals(PaisShop.ESPANA.getCodigoPais(), pais.getCodigoPais());
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class PaisGetterTest {
 	
 	private boolean checkListContainsCodPais(List<Pais> listCountries, String codPais) {
 		for (Pais pais : listCountries) {
-			if (pais.getCodigo_pais().compareTo(codPais)==0) {
+			if (pais.getCodigoPais().compareTo(codPais)==0) {
 				return true;
 			}
 		}

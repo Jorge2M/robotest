@@ -177,13 +177,13 @@ public class AccesoSteps extends StepBase {
 		description=
 			"Datos del cambio de país <br>" + 
 			"<b>" + TAG_NOMBRE_PAIS_ORIGEN + "</b> (" + TAG_CODIGO_PAIS_ORIGEN + "), <b>idioma " + TAG_NOMBRE_IDIOMA_ORIGEN + "</b><br>" +  
-			"<b>#{paisDestino.getNombre_pais()}</b> (#{paisDestino.getCodigo_pais()}), <b>idioma #{idiomaDestino.getLiteral()}</b>",
+			"<b>#{paisDestino.getNombrePais()}</b> (#{paisDestino.getCodigoPais()}), <b>idioma #{idiomaDestino.getLiteral()}</b>",
 		expected=
-			"Se accede a la shop de #{paisDestino.getNombre_pais()} en #{idiomaDestino.getLiteral()}",
+			"Se accede a la shop de #{paisDestino.getNombrePais()} en #{idiomaDestino.getLiteral()}",
 		saveHtmlPage=SaveWhen.Always)
 	public void accesoPRYCambioPais(Pais paisDestino, IdiomaPais idiomaDestino) throws Exception {
 		StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
-		StepTestMaker.replaceInDescription(TAG_NOMBRE_PAIS_ORIGEN, dataTest.getPais().getNombre_pais());
+		StepTestMaker.replaceInDescription(TAG_NOMBRE_PAIS_ORIGEN, dataTest.getPais().getNombrePais());
 		StepTestMaker.replaceInDescription(TAG_CODIGO_PAIS_ORIGEN, dataTest.getCodigoPais());
 		StepTestMaker.replaceInDescription(TAG_NOMBRE_IDIOMA_ORIGEN, dataTest.getIdioma().getLiteral());
 	
@@ -214,7 +214,7 @@ public class AccesoSteps extends StepBase {
 	private static final String TAG_LITERAL_IDIOMA_ORIGEN = "@TagLiteralIdiomaOrigen";
 	
 	@Step (
-		description="Acceder a la shop vía la URL <b>" + TAG_URL_ACCESO_PAIS_NO_IP + "</b> (#{paisAccesoNoIP.getNombre_pais()} / " + TAG_LITERAL_IDIOMA_ORIGEN + ")", 
+		description="Acceder a la shop vía la URL <b>" + TAG_URL_ACCESO_PAIS_NO_IP + "</b> (#{paisAccesoNoIP.getNombrePais()} / " + TAG_LITERAL_IDIOMA_ORIGEN + ")", 
 		expected="Aparece un modal solicitando confirmación del país")
 	public Pais accesoConURLPaisNoIP(
 			String urlBaseTest, Pais paisAccesoNoIP, Pais paisAccesoPrevio, Pais paisPrevConf, int vecesPaisConfPrev, List<Pais> listPaisAsocIP) 
@@ -257,27 +257,27 @@ public class AccesoSteps extends StepBase {
 		
 		if (paisAccesoPrevio==null) {
 			checks.add(
-				"En el modal <b>No</b> aparece un link con la opción de confirmar el país " + paisAccesoNoIP.getNombre_pais() + 
-				" (" + paisAccesoNoIP.getCodigo_pais() + ")",
-				!modalCambioPais.isLinkToConfirmPais(paisAccesoNoIP.getNombre_pais()));
+				"En el modal <b>No</b> aparece un link con la opción de confirmar el país " + paisAccesoNoIP.getNombrePais() + 
+				" (" + paisAccesoNoIP.getCodigoPais() + ")",
+				!modalCambioPais.isLinkToConfirmPais(paisAccesoNoIP.getNombrePais()));
 		} else {
 			if (paisConfirmado==null) {
 				checks.add(
 					"En el modal <b>Sí</b> aparece un link con la opción de confirmar el acceso al país por el que previsamente se ha accedido vía URL: " + 
-					paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")",
+					paisAccesoPrevio.getNombrePais() + " (" + paisAccesoPrevio.getCodigoPais() + ")",
 					modalCambioPais.isLinkToConfirmPais(paisAccesoPrevio.getUrlPaisEstandar(urlBaseTest)));
 			} else {
 				checks.add(
 					"En el modal <b>No</b> aparece un link con la opción de confirmar el acceso al país por el que previsamente se ha accedido vía URL: " + 
-					paisAccesoPrevio.getNombre_pais() + " (" + paisAccesoPrevio.getCodigo_pais() + ")",
-					!modalCambioPais.isLinkToConfirmPais(paisAccesoPrevio.getNombre_pais()));
+					paisAccesoPrevio.getNombrePais() + " (" + paisAccesoPrevio.getCodigoPais() + ")",
+					!modalCambioPais.isLinkToConfirmPais(paisAccesoPrevio.getNombrePais()));
 			}
 		}
 		
 		String paisesAsocIP = "";
 		Iterator<Pais> it = listPaisAsocIP.iterator();
 		while (it.hasNext()) {
-			paisesAsocIP = paisesAsocIP + ", " + it.next().getNombre_pais();
+			paisesAsocIP = paisesAsocIP + ", " + it.next().getNombrePais();
 		}
 		Pais paisButtonAssociated = modalCambioPais.getPaisOfButtonForChangePais(listPaisAsocIP, urlBaseTest);
 		checks.add(
@@ -301,7 +301,7 @@ public class AccesoSteps extends StepBase {
 			"No aparece un modal solicitando confirmación de país",
 			!new ModalCambioPais().isVisibleModalUntil(0));
 		
-		String nombrePaisPrevConf = paisPrevConf.getNombre_pais();
+		String nombrePaisPrevConf = paisPrevConf.getNombrePais();
 		String hrefPaisPrevConf = paisPrevConf.getUrlPaisEstandar(urlBaseTest);
 		checks.add(
 			"Se ha redirigido a la URL del país confirmado previamente <b>" + nombrePaisPrevConf + "</b> (" + hrefPaisPrevConf + ")",

@@ -34,7 +34,7 @@ public class MenusFactory {
 						listTests.add(new PaisIdioma(version, pais, idioma, lineasAprobar));
 						System.out.println(
 							"Creado Test \"PaisIdioma\" con datos: " +
-							",Pais=" + pais.getNombre_pais() +
+							",Pais=" + pais.getNombrePais() +
 							",Idioma=" + idioma.getCodigo().getLiteral() +
 							",Linea=" + linea.getType() + 
 							",Num Idiomas=" + pais.getListIdiomas(app).size());

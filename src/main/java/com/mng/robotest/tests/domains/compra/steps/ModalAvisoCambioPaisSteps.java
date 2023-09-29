@@ -29,8 +29,8 @@ public class ModalAvisoCambioPaisSteps extends StepBase {
 			modalAvisoCambioPais.isInvisibleUntil(seconds));		
 	 	
 	 	checks.add(
-			"En la dirección de envió aparece el país " + paisEnvio.getNombre_pais(),
-			new PageCheckoutWrapper().direcEnvioContainsPais(paisEnvio.getNombre_pais()));
+			"En la dirección de envió aparece el país " + paisEnvio.getNombrePais(),
+			new PageCheckoutWrapper().direcEnvioContainsPais(paisEnvio.getNombrePais()));
 	 	
 		return checks;
 	}

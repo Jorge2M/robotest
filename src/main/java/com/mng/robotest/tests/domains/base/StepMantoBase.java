@@ -24,8 +24,8 @@ public abstract class StepMantoBase extends PageBase {
 	
 	protected static final Pais ESPANYA = new Pais();
 	static {
-		ESPANYA.setCodigo_pais(CODIGO_ESPANYA);
-		ESPANYA.setNombre_pais("España");
+		ESPANYA.setCodigoPais(CODIGO_ESPANYA);
+		ESPANYA.setNombrePais("España");
 	}
 	
 	protected void accesoAlmacenEspanya() {

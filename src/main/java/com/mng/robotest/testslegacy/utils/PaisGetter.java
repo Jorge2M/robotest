@@ -31,7 +31,7 @@ public class PaisGetter {
 	
 	public static Pais from(String codPais) throws NoSuchElementException {
 		for (Pais pais : listAllCountries) {
-			if (codPais.compareTo(pais.getCodigo_pais())==0) {
+			if (codPais.compareTo(pais.getCodigoPais())==0) {
 				return pais;
 			}
 		}
@@ -40,7 +40,7 @@ public class PaisGetter {
 	
 	public static Pais fromCodAlf(String codPaisAlf) throws NoSuchElementException {
 		for (Pais pais : listAllCountries) {
-			if (codPaisAlf.compareTo(pais.getCodigo_alf())==0) {
+			if (codPaisAlf.compareTo(pais.getCodigoAlf())==0) {
 				return pais;
 			}
 		}
@@ -50,7 +50,7 @@ public class PaisGetter {
 	public static List<Pais> from(List<String> listCodCountries) {
 		List<Pais> listToReturn = new ArrayList<>();
 		for (Pais pais : listAllCountries) {
-			if (listCodCountries.contains(pais.getCodigo_pais())) {
+			if (listCodCountries.contains(pais.getCodigoPais())) {
 				listToReturn.add(pais);
 			}
 		}

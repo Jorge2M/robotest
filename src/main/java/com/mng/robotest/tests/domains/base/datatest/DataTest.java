@@ -67,7 +67,7 @@ public class DataTest implements Cloneable, Serializable {
 	}
 	
 	public String getNombrePais() {
-		return pais.getNombre_pais();
+		return pais.getNombrePais();
 	}
 	
 	public String getLiteralIdioma() {
@@ -107,7 +107,7 @@ public class DataTest implements Cloneable, Serializable {
 	}
 	
 	public String getCodigoPais() {
-		return pais.getCodigo_pais();
+		return pais.getCodigoPais();
 	}
 
 	public IdiomaPais getIdioma() {

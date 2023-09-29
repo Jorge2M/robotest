@@ -30,9 +30,9 @@ public class ModalCambioPaisSteps extends StepBase {
 		expected="Se accede a la shop de " + TAG_NOMBRE_PAIS + " en " + TAG_LITERAL_IDIOMA)
 	public void cambioPais(Pais newPais, IdiomaPais newIdioma) {
 		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(TAG_NOMBRE_PAIS, newPais.getNombre_pais());
-		step.replaceInExpected(TAG_NOMBRE_PAIS, newPais.getNombre_pais());
-		step.replaceInDescription(TAG_CODIGO_PAIS, newPais.getCodigo_pais());
+		step.replaceInDescription(TAG_NOMBRE_PAIS, newPais.getNombrePais());
+		step.replaceInExpected(TAG_NOMBRE_PAIS, newPais.getNombrePais());
+		step.replaceInDescription(TAG_CODIGO_PAIS, newPais.getCodigoPais());
 		step.replaceInDescription(TAG_LITERAL_IDIOMA, newIdioma.getCodigo().getLiteral());
 		step.replaceInExpected(TAG_LITERAL_IDIOMA, newIdioma.getCodigo().getLiteral());
 		

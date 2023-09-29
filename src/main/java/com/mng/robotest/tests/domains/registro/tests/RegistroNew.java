@@ -26,7 +26,7 @@ public class RegistroNew implements Serializable {
 	public RegistroNew(Pais pais, IdiomaPais idioma, int prioridad) {
 		this.pais = pais;
 		this.idioma = idioma;
-		this.indexFact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral();
+		this.indexFact = pais.getNombrePais() + " (" + pais.getCodigoPais() + ") " + "-" + idioma.getCodigo().getLiteral();
 		this.prioridad = prioridad;
 	}
 	

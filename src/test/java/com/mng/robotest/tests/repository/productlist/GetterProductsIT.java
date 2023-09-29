@@ -29,7 +29,7 @@ public class GetterProductsIT {
 	private static final int numProducts = 15;
 	private static final Pais espana = PaisGetter.from(PaisShop.ESPANA);	
 	
-	private static final Builder getterProductsBuilder = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigo_alf(), AppEcom.shop, null)
+	private static final Builder getterProductsBuilder = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigoAlf(), AppEcom.shop, null)
 			.linea(SHE)
 			.menu(Menu.CAMISAS)
 			.numProducts(numProducts)

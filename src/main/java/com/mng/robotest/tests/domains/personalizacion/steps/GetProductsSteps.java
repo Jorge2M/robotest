@@ -14,7 +14,7 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 public class GetProductsSteps extends StepBase {
 
 	public void callProductListService(LineaType linea, String seccion, String galeria, String familia) throws Exception {
-		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
+		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), app, driver)
 				.method(MethodGetter.WEBDRIVER)
 				.linea(LineaType.SHE)
 				.menu(Menu.VAQUEROS)

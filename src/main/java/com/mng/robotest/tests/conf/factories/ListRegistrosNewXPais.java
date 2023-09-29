@@ -46,7 +46,7 @@ public class ListRegistrosNewXPais {
 	private void printTestCreation(Pais pais, IdiomaPais idioma) {
 		System.out.println(
 			"Creado Test con datos: " + 
-			",Pais=" + pais.getNombre_pais() +
+			",Pais=" + pais.getNombrePais() +
 			",Idioma=" + idioma.getCodigo().getLiteral() 
 		);
 	}	

@@ -22,13 +22,13 @@ public class Pais implements Serializable {
 
 	public static final int MAX_PAGOS = 25;
 	
-	String nombre_pais;
-	String codigo_pais;
+	String nombrePais;
+	String codigoPais;
 		
 	//Indica si el país existe en la Shop (sólo es 'n' para el caso de Japón que sólo aparece a nivel de la preHome)
 	String exists = "s";
-	String codigo_alf;
-	String codigo_prehome;
+	String codigoAlf;
+	String codigoPrehome;
 		
 	@XmlElement(name="idioma") 
 	List<IdiomaPais> listIdiomas = new LinkedList<>();
@@ -41,7 +41,7 @@ public class Pais implements Serializable {
 	String address;
 	String telefono;
 	String dni;
-	String tiendas_online;
+	String tiendasOnline;
 	
 	Register register = new Register();
 	Shoponline shoponline = new Shoponline();
@@ -54,21 +54,26 @@ public class Pais implements Serializable {
 	String emailuser;
 	String mobiluser;
 	
-	@XmlElement(name="metodopago") 
+	@XmlElement 
 	List<String> listMetodopagos = new LinkedList<>();
 	
-	public String getNombre_pais() {
-		return this.nombre_pais;
+	public String getNombrePais() {
+		return this.nombrePais;
 	}
 
 	@XmlAttribute(name="nombre_pais")
-	public void setNombre_pais(String nombre_pais) {
-		this.nombre_pais = nombre_pais;
+	public void setNombrePais(String nombrePais) {
+		this.nombrePais = nombrePais;
 	}		
 	
-	public String getCodigo_pais() {
-		return this.codigo_pais;
+	public String getCodigoPais() {
+		return this.codigoPais;
 	}
+	
+	@XmlElement(name="codigo_pais")
+	public void setCodigoPais(String codigoPais) {
+		this.codigoPais = codigoPais;
+	}	
 	
 	@XmlAttribute(name="exists")
 	public void setExists(String exists) {
@@ -78,31 +83,26 @@ public class Pais implements Serializable {
 	public String getExists() {
 		return this.exists;
 	}		
-	
-	@XmlElement
-	public void setCodigo_pais(String codigo_pais) {
-		this.codigo_pais = codigo_pais;
-	}
-	
-	public String getCodigo_alf() {
-		return this.codigo_alf;
+
+	public String getCodigoAlf() {
+		return this.codigoAlf;
 	}
 
-	@XmlElement
-	public void setCodigo_alf(String codigo_alf) {
-		this.codigo_alf = codigo_alf;
+	@XmlElement(name="codigo_alf")
+	public void setCodigoAlf(String codigoAlf) {
+		this.codigoAlf = codigoAlf;
 	}
 	
-	@XmlElement
-	public void setCodigo_prehome(String codigo_prehome) {
-		this.codigo_prehome = codigo_prehome;
+	@XmlElement(name="codigo_prehome")
+	public void setCodigoPrehome(String codigoPrehome) {
+		this.codigoPrehome = codigoPrehome;
 	}
 	
-	public String getCodigo_prehome() {
-		if (codigo_prehome==null) {
-			return codigo_alf;
+	public String getCodigoPrehome() {
+		if (codigoPrehome==null) {
+			return codigoAlf;
 		}
-		return codigo_prehome;
+		return codigoPrehome;
 	}
 
 	public List<IdiomaPais> getListIdiomas() {
@@ -201,13 +201,13 @@ public class Pais implements Serializable {
 		this.dni = dni;
 	}
 	
-	@XmlElement
-	public void setTiendas_online(String tiendas_online) {
-		this.tiendas_online = tiendas_online;
+	@XmlElement(name="tiendas_online")
+	public void setTiendasOnline(String tiendasOnline) {
+		this.tiendasOnline = tiendasOnline;
 	}
 	
 	public String getTiendas_online() {
-		return this.tiendas_online;
+		return this.tiendasOnline;
 	}
 	
 	public List<AppEcom> getTiendasOnlineList() {
@@ -336,7 +336,7 @@ public class Pais implements Serializable {
 	}
 
 	public boolean isEspanya() {
-		return ("001".compareTo(getCodigo_pais())==0);
+		return ("001".compareTo(getCodigoPais())==0);
 	}
 
 	/**
@@ -344,7 +344,7 @@ public class Pais implements Serializable {
 	 * (como se encuentran en el XML pero dando prioridad a los que tienen no tienen testpago='s')
 	 */
 	public List<Pago> getListPagosForTest(AppEcom app, boolean isEmpleado) {
-		List<PaymentCountry> listPayments = PagoGetter.getListPayments(this.getCodigo_pais(), app, isEmpleado);
+		List<PaymentCountry> listPayments = PagoGetter.getListPayments(this.getCodigoPais(), app, isEmpleado);
 		List<Pago> listPagosFirst =  new ArrayList<>();
 		List<Pago> listPagosLast = new ArrayList<>();
 		for (PaymentCountry payment : listPayments) {
@@ -468,7 +468,7 @@ public class Pais implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Pais [nombre_pais="+ this.nombre_pais + ", codigo_pais=" + this.codigo_pais + ", listIdiomas=" + this.listIdiomas + ", codpos=" + this.codpos + ", telefono=" + this.telefono + ", dni=" + this.dni +
+		return "Pais [nombre_pais="+ this.nombrePais + ", codigo_pais=" + this.codigoPais + ", listIdiomas=" + this.listIdiomas + ", codpos=" + this.codpos + ", telefono=" + this.telefono + ", dni=" + this.dni +
 				", " + this.shoponline + ", toString()=" + super.toString() + "]";
 	}
 }

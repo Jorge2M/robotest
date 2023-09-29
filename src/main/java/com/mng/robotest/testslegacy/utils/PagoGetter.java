@@ -60,7 +60,7 @@ public class PagoGetter {
 						//El storecredito lo mantenemos al margen de la lista pues no aparece como un icono
 						(pago.getTypePago()!=TypePago.STORE_CREDIT) && 
 						pago.getTiendasList().contains(app)) {
-						var paymentCountry = new PaymentCountry(pais.getCodigo_pais(), pago);
+						var paymentCountry = new PaymentCountry(pais.getCodigoPais(), pago);
 						listPaymentsToReturn.add(paymentCountry);
 					}
 				}

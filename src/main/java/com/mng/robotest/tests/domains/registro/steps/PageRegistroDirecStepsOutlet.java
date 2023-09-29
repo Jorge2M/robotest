@@ -26,7 +26,7 @@ public class PageRegistroDirecStepsOutlet extends StepBase {
 			pageRegistroAddressData.isPageUntil(seconds), Warn);
 		
 		checks.add(
-			"Si existe el desplebagle de países, en él aparece el país con código " + dataTest.getCodigoPais() + " (" + dataTest.getPais().getNombre_pais() + ")",
+			"Si existe el desplebagle de países, en él aparece el país con código " + dataTest.getCodigoPais() + " (" + dataTest.getPais().getNombrePais() + ")",
 			!pageRegistroAddressData.existsDesplegablePaises() || 
 			pageRegistroAddressData.isOptionPaisSelected(dataTest.getCodigoPais()), Warn);
 		

@@ -29,7 +29,7 @@ public class Fic005 extends TestBase {
 	
 	public Fic005() throws Exception {
 		super();
-		articlePersonalizable = getArticlePersonalizable(dataTest.getPais().getCodigo_alf(), app, driver);
+		articlePersonalizable = getArticlePersonalizable(dataTest.getPais().getCodigoAlf(), app, driver);
 	}
 	
 	@Override

@@ -35,7 +35,7 @@ public class ListPrecompraPaises {
 					prioridad+=1;
 					System.out.println(
 						"Creado Test con datos: " +
-						",Pais=" + pais.getNombre_pais() +
+						",Pais=" + pais.getNombrePais() +
 						",Idioma=" + primerIdioma.getCodigo().getLiteral() +
 						",Num Idiomas=" + pais.getListIdiomas(app).size());
 				}

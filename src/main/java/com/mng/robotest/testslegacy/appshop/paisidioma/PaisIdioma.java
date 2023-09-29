@@ -34,7 +34,7 @@ public class PaisIdioma implements Serializable {
 		if (linesToTest.size()==1) {
 			lineaStr = "-" + linesToTest.get(0).getType();
 		}
-		this.indexFact = pais.getNombre_pais() + " (" + pais.getCodigo_pais() + ") " + "-" + idioma.getCodigo().getLiteral() + lineaStr;
+		this.indexFact = pais.getNombrePais() + " (" + pais.getCodigoPais() + ") " + "-" + idioma.getCodigo().getLiteral() + lineaStr;
 		this.pais = pais;
 		this.idioma = idioma;
 		this.linesToTest = linesToTest;

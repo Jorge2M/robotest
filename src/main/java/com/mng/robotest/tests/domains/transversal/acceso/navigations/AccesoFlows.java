@@ -124,7 +124,7 @@ public class AccesoFlows extends StepBase {
 	
 	public void cambioPaisFromHomeIfNeeded(Pais newPais, IdiomaPais newIdioma) {
 		String codigoPaisActual = (new PageLanding()).getCodigoPais();
-		if (newPais.getCodigo_pais().compareTo(codigoPaisActual)!=0) {
+		if (newPais.getCodigoPais().compareTo(codigoPaisActual)!=0) {
 			cambioPais(newPais, newIdioma);
 		}
 	}

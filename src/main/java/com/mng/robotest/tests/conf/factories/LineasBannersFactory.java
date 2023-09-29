@@ -52,7 +52,7 @@ public class LineasBannersFactory {
 	private void printTestCreation(Pais pais, IdiomaPais idioma) {
 		System.out.println(
 				"Creado Test \"PaisIdioma\" con datos: " + 
-				",Pais=" + pais.getNombre_pais() +
+				",Pais=" + pais.getNombrePais() +
 				",Idioma=" + idioma.getCodigo().getLiteral() +
 				",Num Idiomas=" + pais.getListIdiomas(getApp()).size());
 	}

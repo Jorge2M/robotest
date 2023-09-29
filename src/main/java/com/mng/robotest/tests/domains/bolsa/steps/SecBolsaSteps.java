@@ -89,7 +89,7 @@ public class SecBolsaSteps extends StepBase {
 
 	public void altaArticlosConColores(int numArticulos) throws Exception {
 		var getterProducts = new GetterProducts.Builder(dataTest.getPais()
-				.getCodigo_alf(), app, driver)
+				.getCodigoAlf(), app, driver)
 				.filter(FilterType.MANY_COLORS)
 				.sortBy(SortBy.STOCK_DESCENDENT)
 				.build();

@@ -25,8 +25,8 @@ public class DataPedido {
 	private DataDeliveryPoint dataDeliveryPoint = null;
 	
 	public DataPedido(Pais pais, DataBag dataBag) {
-		setCodigopais(pais.getCodigo_pais());
-		setNombrepais(pais.getNombre_pais());
+		setCodigopais(pais.getCodigoPais());
+		setNombrepais(pais.getNombrePais());
 		this.dataBag = dataBag;
 	}
 	

@@ -26,7 +26,7 @@ public class PageLoginVOTFSteps extends StepBase {
 		String passwordVOTF = accesoVOTF.getPassword();
 		
 		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(TAG_NOMBRE_PAIS, dataTest.getPais().getNombre_pais());
+		step.replaceInDescription(TAG_NOMBRE_PAIS, dataTest.getPais().getNombrePais());
 		step.replaceInDescription(TAG_USUARIO_VOTF, usuarioVOTF);
 		step.replaceInDescription(TAG_PASSWORD_VOTF, TAG_PASSWORD_VOTF);
 

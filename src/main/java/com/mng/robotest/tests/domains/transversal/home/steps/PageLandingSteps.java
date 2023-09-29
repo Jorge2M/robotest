@@ -35,7 +35,7 @@ public class PageLandingSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Aparece el div de contenido asociado al país #{pais.getNombre_pais()} (#{pais.getCodigo_pais()})",
+		description="Aparece el div de contenido asociado al país #{pais.getNombrePais()} (#{pais.getCodigoPais()})",
 		level=Warn)
 	public boolean checkMainContentPais(Pais pais) {
 		return pageLanding.isPresentMainContent();

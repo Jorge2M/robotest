@@ -135,7 +135,7 @@ public class Fic002 extends TestBase {
 	private Pair<Optional<GarmentCatalog>, Boolean> getArticleTLook() 
 			throws Exception {
 		var getterProducts = new GetterProducts
-				.Builder(dataTest.getPais().getCodigo_alf(), app, driver)
+				.Builder(dataTest.getPais().getCodigoAlf(), app, driver)
 				.build();
 	
 		var article = getterProducts.getOne(Arrays.asList(TOTAL_LOOK));
