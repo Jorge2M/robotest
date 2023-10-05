@@ -15,6 +15,7 @@ import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent.IconoCabecera.*;
 
 public class SecCabeceraMostFrequent extends SecCabecera {
 	
@@ -91,22 +92,22 @@ public class SecCabeceraMostFrequent extends SecCabecera {
 	
 	@Override
 	public void hoverIconoBolsa() {
-		hoverIcono(IconoCabecera.BOLSA);
+		hoverIcono(BOLSA);
 	}
 	
 	@Override
 	public boolean isInStateIconoBolsa(State state, int seconds) {
-		return (isIconoInState(IconoCabecera.BOLSA, state, seconds));
+		return (isIconoInState(BOLSA, state, seconds));
 	}
 	
 	@Override
 	public void clickIconoBolsa() {
-		clickIconoAndWait(IconoCabecera.BOLSA);
+		clickIconoAndWait(BOLSA);
 	}
 
 	@Override
 	public void clickIconoBolsaWhenDisp(int seconds) {
-		boolean isIconoClickable = state(Clickable, IconoCabecera.BOLSA.getBy(channel)).wait(seconds).check();
+		boolean isIconoClickable = state(Clickable, BOLSA.getBy(channel)).wait(seconds).check();
 		if (isIconoClickable) {
 			clickIconoBolsa(); 
 		}
@@ -155,10 +156,10 @@ public class SecCabeceraMostFrequent extends SecCabecera {
 
 	private void hoverVisibleUserIcon() {
 		try {
-			if (isIconoInState(IconoCabecera.INICIAR_SESION, Visible)) {
-				hoverIcono(IconoCabecera.INICIAR_SESION); 
+			if (isIconoInState(INICIAR_SESION, Visible)) {
+				hoverIcono(INICIAR_SESION); 
 			} else {
-				hoverIcono(IconoCabecera.MICUENTA);
+				hoverIcono(MICUENTA);
 			}
 		}
 		catch (NoSuchElementException e) {

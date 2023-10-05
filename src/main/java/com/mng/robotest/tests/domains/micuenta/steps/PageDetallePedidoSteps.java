@@ -13,9 +13,9 @@ public class PageDetallePedidoSteps extends StepBase {
 	
 	private final PageDetalleCompra pageDetalleCompra = PageDetalleCompra.make(channel);
 	
-	public void validateIsPageOk(Ticket compra, String codPais) {
+	public void validateIsPageOk(Ticket compra) {
 		String importeTotal = compra.getPrecio().replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
-		validateIsPageOk(compra.getId(), importeTotal, codPais);
+		validateIsPageOk(compra.getId(), importeTotal, dataTest.getCodigoPais());
 		areOkPrendasOnline(compra.getNumItems());
 	}
 	

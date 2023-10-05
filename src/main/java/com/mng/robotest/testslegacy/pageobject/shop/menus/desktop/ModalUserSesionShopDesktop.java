@@ -22,7 +22,7 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		//Pedir React ID
 		REGISTRATE (XPATH_CAPA_MENUS + "//span[@class='login-register-link' or @class[contains(.,'register-link')] or text()='Regístrate' or @class[contains(.,'RuqlF')]]"),
 		MI_CUENTA (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'mi_cuenta')]]"),
-		MIS_COMPRAS (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'mis_compras')]]"),	 
+		MIS_COMPRAS (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'mis_compras')] or @data-testid[contains(.,'my_purchases')]]"),	 
 		MANGO_LIKES_YOU (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'mango_likes_you')]]"),
 		AYUDA (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'ayuda')]]"),   
 		CERRAR_SESION(XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'logout')] or @class[contains(.,'logout')]]");

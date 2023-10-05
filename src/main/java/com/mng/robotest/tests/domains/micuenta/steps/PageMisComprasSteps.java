@@ -100,16 +100,16 @@ public class PageMisComprasSteps extends StepBase {
 		description="Seleccionamos la #{posInLista}a compra (tipo Online) de la lista", 
 		expected="Aparece la página con los detalles del pedido",
 		saveHtmlPage=SaveWhen.IfProblem)
-	public void selectCompraOnline(int posInLista, String codPais) {
-		Ticket ticket = pageMisCompras.selectTicket(TypeTicket.Online, posInLista);	   
-		new PageDetallePedidoSteps().validateIsPageOk(ticket, codPais);	   
+	public void selectCompraOnline(int posInLista) {
+		Ticket ticket = pageMisCompras.selectTicket(TypeTicket.ONLINE, posInLista);	   
+		new PageDetallePedidoSteps().validateIsPageOk(ticket);	   
 	}
 
 	@Step (
 		description="Seleccionamos la #{posInLista}a compra (tipo Tienda) de la lista", 
 		expected="Aparece una sección con los detalles de la Compra")
 	public void selectCompraTienda(int posInLista) {
-		Ticket ticket = pageMisCompras.selectTicket(TypeTicket.Tienda, posInLista);	 
+		Ticket ticket = pageMisCompras.selectTicket(TypeTicket.TIENDA, posInLista);	 
 		modalDetalleCompraSteps.validateIsOk(ticket);	  
 	}
 	

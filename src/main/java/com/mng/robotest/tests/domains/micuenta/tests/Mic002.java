@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.micuenta.tests;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMisCompras.TypeTicket;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
@@ -11,6 +10,9 @@ import com.mng.robotest.tests.domains.transversal.prehome.steps.PagePrehomeSteps
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
+
+import static com.mng.robotest.tests.domains.micuenta.pageobjects.PageMisCompras.TypeTicket.*;
+import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.*;
 
 public class Mic002 extends TestBase {
 	
@@ -25,6 +27,7 @@ public class Mic002 extends TestBase {
 			String passUserWithOnlinePurchases, String passUserWithStorePurchases) {
 		dataTest.setPais(pais);
 		dataTest.setIdioma(idioma);
+		
 		this.userWithOnlinePurchases = userWithOnlinePurchases;  
 		this.userWithStorePurchases = userWithStorePurchases; 
 		this.passUserWithOnlinePurchases = passUserWithOnlinePurchases; 
@@ -40,6 +43,13 @@ public class Mic002 extends TestBase {
 		//compraTienda();		
 	}
 
+	//TODO activar cuando suba a PRE el tícket https://jira.mango.com/browse/PIUR-5086
+	private void compraOnline_PostPIUR5086() throws Exception {
+		accessAndClickMisCompras();
+		login();
+		checkCompraOnline();
+	}
+	
 	private void compraOnline() throws Exception {
 		dataTest.setUserConnected(userWithOnlinePurchases);
 		dataTest.setPasswordUser(passUserWithOnlinePurchases);
@@ -49,11 +59,34 @@ public class Mic002 extends TestBase {
 		
 		new PageMiCuentaSteps().goToMisComprasFromMenu();
 		var pageMisComprasSteps = new PageMisComprasSteps();
-		pageMisComprasSteps.validateIsCompraOfType(TypeTicket.Online, 5);
-		pageMisComprasSteps.selectCompraOnline(1, dataTest.getCodigoPais());
+		pageMisComprasSteps.validateIsCompraOfType(ONLINE, 5);
+		pageMisComprasSteps.selectCompraOnline(1);
 		
 		//TODO TestAB (quickview o ficha) que en pro va por la variante-0 y en pre por la 1
 		if (!(isPRO() && UtilsTest.todayBeforeDate("2023-09-15"))) {		
+			pageMisComprasSteps.clickDetalleArticulo(1);
+		}
+	}	
+	
+	private void accessAndClickMisCompras() throws Exception {
+		access();
+		clickUserMenu(MIS_COMPRAS);
+	}
+	
+	private void login() {
+		dataTest.setUserConnected(userWithOnlinePurchases);
+		dataTest.setPasswordUser(passUserWithOnlinePurchases);
+		dataTest.setUserRegistered(true);
+		new AccesoSteps().login();
+	}
+	
+	private void checkCompraOnline() {
+		var pageMisComprasSteps = new PageMisComprasSteps();
+		pageMisComprasSteps.validateIsCompraOfType(ONLINE, 5);
+		pageMisComprasSteps.selectCompraOnline(1);
+		
+		//TODO TestAB (quickview o ficha) que en pro va por la variante-0 y en pre por la 1
+		if (!(isPRO() && UtilsTest.todayBeforeDate("2023-11-01"))) {		
 			pageMisComprasSteps.clickDetalleArticulo(1);
 		}
 	}
@@ -71,7 +104,7 @@ public class Mic002 extends TestBase {
 		
 		new PageMiCuentaSteps().goToMisComprasFromMenu();
 		var pageMisComprasSteps = new PageMisComprasSteps();
-		pageMisComprasSteps.validateIsCompraOfType(TypeTicket.Tienda, 5);
+		pageMisComprasSteps.validateIsCompraOfType(TIENDA, 5);
 		pageMisComprasSteps.selectCompraTienda(1);
 		pageMisComprasSteps.clickDetalleArticulo(1);
 	}	

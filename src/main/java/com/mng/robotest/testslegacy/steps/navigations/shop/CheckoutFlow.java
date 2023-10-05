@@ -450,7 +450,7 @@ public class CheckoutFlow extends StepBase {
 		stepTM.replaceInDescription(
 				TAG_LOGIN_OR_LOGOFF, "e Identificarse con el usuario <b>" + dataTest.getUserConnected() + "</b>");
 			new AccesoFlows().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
-			new AccesoFlows().login(dataTest.getUserConnected(), dataTest.getPasswordUser());	
+			new AccesoFlows().identification(dataTest.getUserConnected(), dataTest.getPasswordUser());	
 			new SecBolsa().clearArticulos();
 	}
 	

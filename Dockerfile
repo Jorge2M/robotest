@@ -6,6 +6,12 @@ FROM jorge2m/chrome-firefox-openjdk17-maven:1695752079
 
 COPY target/robotest.zip robotest.zip
 RUN unzip robotest.zip
+
+#WORKAROUND UNTIL SYSOPS WILL FIX COMMUNICATION PROBLEM IN K8S-TOOLS
+#COPY chromedriver-linux64.zip chromedriver.zip
+#RUN unzip chromedriver.zip && \
+#	mkdir -p /root/.cache/selenium/chromedriver/linux64/117.0.5938.149/ && \
+#	mv chromedriver/chromedriver /root/.cache/selenium/chromedriver/linux64/117.0.5938.149/
 	
 COPY docker-entrypoint.sh /robotest/docker-entrypoint.sh
 

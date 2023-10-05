@@ -35,18 +35,18 @@ public class AccesoSteps extends StepBase {
 	public void oneStep(boolean clearArticulos) throws Exception {
 		new AccesoFlows().accesoHomeAppWeb();
 		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
-			login(dataTest, clearArticulos);
+			identification(dataTest, clearArticulos);
 		}
 	}
 	
 	@Step (
 		description= 
-			"Identificarse con el usuario <b style=\"color:blue;\">#{dataTest.getUserConnected()}</b> " + 
+			"Seleccionar \"Iniciar sesión\" e identificarse con el usuario <b style=\"color:blue;\">#{dataTest.getUserConnected()}</b> " + 
 			"(borrar artículos bolsa: <b>#{clearArticulos}</b>)",
 		expected="el login es correcto",
 		saveNettraffic=SaveWhen.Always)
-	private void login(DataTest dataTest, boolean clearArticulos) {
-		new AccesoFlows().login(dataTest.getUserConnected(), dataTest.getPasswordUser());
+	public void identification(DataTest dataTest, boolean clearArticulos) {
+		new AccesoFlows().identification(dataTest.getUserConnected(), dataTest.getPasswordUser());
 		validaIdentificacionEnShop();
 		if (clearArticulos) {
 			new SecBolsa().clearArticulos();
@@ -137,20 +137,33 @@ public class AccesoSteps extends StepBase {
 		description="Seleccionar \"Iniciar Sesión\" e introducir credenciales incorrectas: <b>#{usuario}, #{password}</b>",
 		expected="Aparece el correspondiente mensaje de error")
 	public void inicioSesionDatosKO(String usuario, String password) {
-		new AccesoFlows().login(usuario, password);
+		new AccesoFlows().identification(usuario, password);
 		new PageIdentificacionSteps().checkTextoCredencialesKO();
 		new SecMenusUserSteps().checkIsInvisibleLinkCerrarSesion();
 		checksDefault();	
 	}
 	
 	@Step (
-		description="Seleccionar <b>Iniciar Sesión</b> e identificarse con el usuario <b>#{userConnect}</b>", 
+		description="Seleccionar <b>Iniciar Sesión</b> y logarse con el usuario <b>#{userConnect}</b>", 
 		expected="La identificación es correcta",
 		saveNettraffic=SaveWhen.Always)
 	public void identification(String userConnect, String userPassword) {
-		new AccesoFlows().login(userConnect, userPassword);
+		new AccesoFlows().identification(userConnect, userPassword);
 		validaIdentificacionEnShop();
 	}
+	
+	public void login() {
+		login(dataTest.getUserConnected(), dataTest.getPasswordUser());
+	}
+	
+	@Step (
+		description="Logarse con el usuario <b>#{userConnect}</b>", 
+		expected="El login es correcto",
+		saveNettraffic=SaveWhen.Always)
+	private void login(String userConnect, String userPassword) {
+		new AccesoFlows().login(userConnect, userPassword);
+		validaIdentificacionEnShop();
+	}	
 	
 	public void accesoVOTFtoHOME() throws Exception {
 		String urlAcceso = inputParamsSuite.getUrlBase();

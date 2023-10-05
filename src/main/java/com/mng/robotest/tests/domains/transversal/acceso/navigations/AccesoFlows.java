@@ -62,16 +62,23 @@ public class AccesoFlows extends StepBase {
 		}
 	}
 	
-	public void login(String user, String password) {
+	public void identification(String user, String password) {
 		clickIniciarSesionAndWait();
+		login(user, password);
+		closeModalsPostLogin();
+	}
+	
+	public void login(String user, String password) {
 		var pageLogin = new PageLogin();
 		pageLogin.isPage(5);
 		pageLogin.inputUserPassword(user, password);
 		pageLogin.clickButtonEntrar();
+	}
+	private void closeModalsPostLogin() {
 		new ModalCambioPais().closeModalIfVisible();
 		new ModalActPoliticaPrivacidad().clickOkIfVisible();
 		new ModalLoyaltyAfterLogin().closeModalIfVisible();
-	}	
+	}
 	
 	private void clickIniciarSesionAndWait() {
 		if (channel.isDevice()) {

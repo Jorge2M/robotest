@@ -2898,6 +2898,8 @@ where
 <codigo_alf>US</codigo_alf>
 <idioma acceso="us">US</idioma>
 <idioma acceso="us-es" tiendas="shop">ES</idioma>
+<!-- Para cuando se active Español en outlet -->
+<!-- <idioma acceso="us-es" tiendas="shop,outlet">ES</idioma>-->
 <paistop>S</paistop>
 <codpos>11231</codpos>
 <telefono>2014920975</telefono>

@@ -18,7 +18,7 @@ import com.mng.robotest.tests.domains.micuenta.beans.Ticket;
 
 public class PageMisCompras extends PageBase {
 
-	public enum TypeTicket {Tienda, Online, Undefined}
+	public enum TypeTicket { TIENDA, ONLINE, UNDEFINED }
 	private List<Ticket> listTickets = null;
 	
 	private static final String XPATH_CAPA_CONTENEDORA_DESKTOP = "//micro-frontend[@id='myPurchasesDesktop']";
@@ -142,12 +142,12 @@ public class PageMisCompras extends PageBase {
 	private TypeTicket getTypeTicketPage(WebElement boxDataTicket) {
 		String idMangoTicket = getIdTicketPage(boxDataTicket);
 		if ("".compareTo(idMangoTicket)==0) {
-			return TypeTicket.Undefined;
+			return TypeTicket.UNDEFINED;
 		}
 		if (StringUtils.isNumeric(idMangoTicket)) {
-			return TypeTicket.Tienda;
+			return TypeTicket.TIENDA;
 		}
-		return TypeTicket.Online;
+		return TypeTicket.ONLINE;
 	}
 	
 	private String getIdTicketPage(WebElement boxDataTicket) {

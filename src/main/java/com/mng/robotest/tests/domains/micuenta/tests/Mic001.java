@@ -27,7 +27,7 @@ public class Mic001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		accessAndIdentification();
+		access();
 		checkMisDatos();
 		checkMisCompras();
 		checkSuscripciones();
@@ -62,11 +62,6 @@ public class Mic001 extends TestBase {
 		String nombreActual = pageMisDatosSteps.modificaNombreYGuarda("Jorge", "George");
 		pageMiCuentaSteps.goToMisDatos(dataTest.getUserConnected());
 		pageMisDatosSteps.validaContenidoNombre(nombreActual);
-	}
-
-	private void accessAndIdentification() throws Exception {
-		new PagePrehomeSteps().seleccionPaisIdiomaAndEnter();
-		new AccesoSteps().identificacionEnMango();
 	}
 
 }
