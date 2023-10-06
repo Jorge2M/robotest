@@ -11,7 +11,7 @@ import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.pageobject.utils.DataScroll;
 
 import static com.mng.robotest.tests.conf.AppEcom.*;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.FilterOrdenacion.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion.*;
 import static com.mng.robotest.tests.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 import static com.mng.robotest.testslegacy.data.Color.*;
 
@@ -21,7 +21,7 @@ public class Gpo004 extends TestBase {
 	private final DataForScrollStep dataScroll = new DataForScrollStep();
 	
 	public Gpo004() {
-		dataScroll.setOrdenacionExpected(NO_ORDENADO);
+		dataScroll.setOrdenacionExpected(RECOMENDADOS);
 		dataScroll.setValidateArticlesExpected(false);
 		dataScroll.setValidaImgBroken(true);
 	}

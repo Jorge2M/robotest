@@ -1,8 +1,8 @@
 package com.mng.robotest.testslegacy.pageobject.shop.menus.device;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.FilterCollection;
-import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterCollection;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.SecMenusFiltroCollection;
 
 public class SecMenusFiltroCollectionMobil extends PageBase implements SecMenusFiltroCollection {

@@ -8,8 +8,8 @@ import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktopNormal;
-import com.mng.robotest.tests.domains.galeria.pageobjects.SecBannerHeadGallery;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps.TypeGalery;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -19,18 +19,17 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class BannerHeadGallerySteps extends StepBase {
 
-	private final PageGaleriaSteps pageGaleriaParent;
-	private final SecBannerHeadGallery secBannerHeadDesktop;
+	private final PageGaleriaSteps pageGaleriaParentSteps;
+	private final PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(channel, app, dataTest.getPais());
 
-	public BannerHeadGallerySteps(PageGaleriaSteps pageGaleriaParent) {
-		this.pageGaleriaParent = pageGaleriaParent;
-		this.secBannerHeadDesktop = new PageGaleriaDesktopNormal().getSecBannerHead();
+	public BannerHeadGallerySteps(PageGaleriaSteps pageGaleriaParentSteps) {
+		this.pageGaleriaParentSteps = pageGaleriaParentSteps;
 	}
 
-	public void validateBannerSuperiorIfExistsDesktop() {
-		boolean bannerIsVisible = secBannerHeadDesktop.isVisible();
+	public void checkBannerSuperiorIfExistsDesktop() {
+		boolean bannerIsVisible = pageGaleriaDesktop.isVisibleBannerHead();
 		if (bannerIsVisible &&
-			!secBannerHeadDesktop.isBannerWithoutTextAccesible()) {
+			!pageGaleriaDesktop.isBannerHeadWithoutTextAccesible()) {
 			checkBannerContainsSomeText();
 		}
 	}
@@ -39,17 +38,18 @@ public class BannerHeadGallerySteps extends StepBase {
 		description="El Banner de Cabecera contiene algún texto",
 		level=Warn)
 	public boolean checkBannerContainsSomeText() {
-		String textBanner = secBannerHeadDesktop.getText();
+		String textBanner = pageGaleriaDesktop.getTextBannerHead();
 		return ("".compareTo(textBanner)!=0);
 	}
 
 	@Validation
 	public ChecksTM checkBannerContainsText(List<String> possibleTexts) {
 		var checks = ChecksTM.getNew();
-		String textBanner = secBannerHeadDesktop.getText();
+		String textBanner = pageGaleriaDesktop.getTextBannerHead();
 		checks.add(
-				"El banner de cabecera contiene el texto <b>" + possibleTexts.get(0) + "</b>",
-				textBannersContainsPossibleText(textBanner, possibleTexts));
+			"El banner de cabecera contiene el texto <b>" + possibleTexts.get(0) + "</b>",
+			textBannersContainsPossibleText(textBanner, possibleTexts));
+		
 		return checks;
 	}
 
@@ -57,8 +57,8 @@ public class BannerHeadGallerySteps extends StepBase {
 			description="Seleccionar el banner superior de la Galería",
 			expected="Aparece una galería de artículos")
 	public void clickBannerSuperiorIfLinkableDesktop() {
-		secBannerHeadDesktop.clickBannerIfClickable();
-		pageGaleriaParent.validaArtEnContenido(3);
+		pageGaleriaDesktop.clickBannerHeadIfClickable();
+		pageGaleriaParentSteps.validaArtEnContenido(3);
 	}
 
 	@Validation
@@ -67,19 +67,19 @@ public class BannerHeadGallerySteps extends StepBase {
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b>" + 
 			"</br>Es visible el banner de cabecera",
-			secBannerHeadDesktop.isVisible());
+			pageGaleriaDesktop.isVisibleBannerHead());
 
 		String saleTraduction = UtilsTest.getSaleTraduction(idioma);
-		String textBanner = secBannerHeadDesktop.getText();
+		String textBanner = pageGaleriaDesktop.getTextBannerHead();
 		checks.add(
 			"El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o " + saleTraduction + ")",
 			UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction));
 		
 		checks.add(
 			"El banner de cabecera contiene un link de \"Más info\"",
-			secBannerHeadDesktop.isVisibleLinkInfoRebajas(), Warn);
+			pageGaleriaDesktop.isVisibleLinkInfoRebajasBannerHead(), Warn);
 
-		boolean bannerLincable = secBannerHeadDesktop.isLinkable();
+		boolean bannerLincable = pageGaleriaDesktop.isBannerHeadLinkable();
 		if (typeGalery==TypeGalery.SALES || !pais.isVentaOnline()) {
 			checks.add(
 				Check.make(
@@ -102,7 +102,7 @@ public class BannerHeadGallerySteps extends StepBase {
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
 			"El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")",
-			!secBannerHeadDesktop.isSalesBanner(idioma));
+			!pageGaleriaDesktop.isBannerHeadSalesBanner(idioma));
 
 		return checks;
 	}

@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.galeria.tests;
 
-import static com.mng.robotest.tests.domains.galeria.pageobjects.FilterOrdenacion.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.NumColumnas.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion.*;
 import static com.mng.robotest.tests.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -30,7 +30,7 @@ public class Gpo001 extends TestBase {
 	}
 
 	private void changeTwoToFourColumns() {
-		var pageGaleria = (PageGaleriaDesktop)PageGaleria.getNew(From.MENU, channel, app, dataTest.getPais());
+		var pageGaleria = (PageGaleriaDesktop)PageGaleria.make(From.MENU, channel, app, dataTest.getPais());
 		var listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
 		listArticlesGaleria2Cols = pageGaleriaSteps.selectListadoXColumnasDesktop(CUATRO, listArticlesGaleria2Cols);
 		pageGaleriaSteps.selectListadoXColumnasDesktop(DOS, listArticlesGaleria2Cols);
@@ -40,7 +40,7 @@ public class Gpo001 extends TestBase {
 		String nameMenuCamisas = FactoryMenus.get(CAMISAS_SHE).getMenu();
 		var dataScroll = new DataForScrollStep();
 		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
-		dataScroll.setOrdenacionExpected(NO_ORDENADO);
+		dataScroll.setOrdenacionExpected(RECOMENDADOS);
 		dataScroll.setValidateArticlesExpected(false);
 		dataScroll.setValidaImgBroken(true);
 		var datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);

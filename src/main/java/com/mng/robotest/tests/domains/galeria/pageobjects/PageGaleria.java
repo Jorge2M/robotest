@@ -18,6 +18,10 @@ import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
+import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArticulo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.steps.LocationArticle;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -111,10 +115,10 @@ public abstract class PageGaleria extends PageBase {
 	protected static final String XPATH_LINK_RELATIVE_TO_ARTICLE = ".//a[@class='product-link']";
 	protected static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE = "//*[@data-testid='button-icon']";
 
-	public static PageGaleria getNew(Channel channel, AppEcom app, Pais pais) {
-		return getNew(From.MENU, channel, app, pais);
+	public static PageGaleria make(Channel channel, AppEcom app, Pais pais) {
+		return make(From.MENU, channel, app, pais);
 	}
-	public static PageGaleria getNew(From from, Channel channel, AppEcom app, Pais pais) {
+	public static PageGaleria make(From from, Channel channel, AppEcom app, Pais pais) {
 		switch (channel) {
 			case desktop:
 				if (pais.isGaleriaKondo(app)) {
@@ -243,12 +247,10 @@ public abstract class PageGaleria extends PageBase {
 	 */
 	public String getAnyArticleNotInOrder(FilterOrdenacion typeOrden) throws Exception {
 		switch (typeOrden) {
-			case NO_ORDENADO:
+			case RECOMENDADOS:
 				return "";
 			case PRECIO_ASC, PRECIO_DESC:
 				return secPrecios.getAnyPrecioNotInOrder(typeOrden, getListaArticulos());
-			case TEMPORADA_DESC, TEMPORADA_ASC:
-				return getAnyRefNotInOrderTemporada(typeOrden);
 			default:
 				return "";
 		}
@@ -266,46 +268,6 @@ public abstract class PageGaleria extends PageBase {
 			}
 		}
 		return inInterval;
-	}
-
-	private String getAnyRefNotInOrderTemporada(FilterOrdenacion typeOrden) {
-		List<String> listaReferencias = getListaReferenciasPrendas();
-		String refAnterior="";
-		for (String refActual : listaReferencias) {
-			if ("".compareTo(refAnterior)!=0) {
-				var caseUnordered = checkOrder(typeOrden, refAnterior, refActual);
-				if (caseUnordered.isPresent()) {
-					return caseUnordered.get();
-				}
-			}
-			refAnterior = refActual;
-		}
-		return "";
-	}
-
-	private Optional<String> checkOrder(FilterOrdenacion typeOrden, String refAnterior, String refActual) {
-		String tempAnterior = refAnterior.substring(0,1);
-		String tempActual = refActual.substring(0,1);
-		int tempActualInt = Integer.parseInt(tempActual);
-		int tempAnteriorInt = Integer.parseInt(tempAnterior);
-		switch (typeOrden) {
-			case TEMPORADA_DESC:
-				if (tempActualInt > tempAnteriorInt) {
-					return Optional.of(refAnterior + "->" + refActual);
-				}
-				break;
-			case TEMPORADA_ASC:
-				if (tempActualInt < tempAnteriorInt) {
-					return Optional.of(refAnterior + "->" + refActual);
-				}
-				break;
-			default:
-				if (tempActualInt==3 && (tempAnteriorInt==1 || tempAnteriorInt==2)) {
-					return Optional.of(refAnterior + "->" + refActual);
-				}
-				break;
-		}
-		return Optional.empty();
 	}
 
 	/**
@@ -341,7 +303,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public WebElement getArticulo(int numArticulo) {
-		List<WebElement> listArticulos = getArticulos();
+		var listArticulos = getArticulos();
 		if (listArticulos.size()>=numArticulo) {
 			return (listArticulos.get(numArticulo-1));
 		}
@@ -597,9 +559,8 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	private void waitAndGotoLastArticle() {
-		List<WebElement> listaArticulos = getListaArticulos();
 		int seconds = 5;
-		waitArticleAndGoTo(listaArticulos.size(), seconds);
+		waitArticleAndGoTo(getListaArticulos().size(), seconds);
 	}
 
 	public int getNumLastPage() {
@@ -710,11 +671,7 @@ public abstract class PageGaleria extends PageBase {
 		var imagen = getImagenElementArticulo(articulo);
 		if (imagen!=null) {
 			try {
-//				if (app==AppEcom.outlet) {
-					return Optional.of(imagen.getAttribute("src"));
-//				}
-//				//TODO Test AB nueva variante. Si se mantiene la original igualar con Outlet
-//				return Optional.of(imagen.getAttribute("original"));
+				return Optional.of(imagen.getAttribute("src"));
 			}
 			catch (StaleElementReferenceException e) {
 				imagen = getImagenElementArticulo(articulo);

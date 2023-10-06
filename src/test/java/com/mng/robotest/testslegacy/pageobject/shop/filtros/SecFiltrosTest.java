@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
 import com.mng.robotest.testslegacy.data.Color;
 
 public class SecFiltrosTest {

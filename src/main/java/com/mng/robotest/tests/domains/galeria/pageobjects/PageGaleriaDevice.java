@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.SecPreciosArticulo.TipoPrecio;
+import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArticulo.TipoPrecio;
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;

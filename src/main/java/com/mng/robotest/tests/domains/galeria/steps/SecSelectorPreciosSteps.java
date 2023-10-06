@@ -7,45 +7,40 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltrosDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.SecSelectorPreciosDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecSelectorPreciosSteps extends StepBase {
 
-	private final SecSelectorPreciosDesktop selectorPreciosDesktop = new SecSelectorPreciosDesktop();
-	private final SecFiltrosDesktop secFiltrosDesktop = new SecFiltrosDesktop();
-
+	private final PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(channel, app, dataTest.getPais());
+	
+	private static final String TAG_MINIMO = "[MINIMO]";
+	private static final String TAG_MAXIMO = "[MAXIMO]";
+	
 	@Validation (
 		description="Es visible el selector de precios",
 		level=Warn)
 	public boolean validaIsSelector() {
-		return (selectorPreciosDesktop.isVisible());
+		return pageGaleriaDesktop.isVisibleSelectorPrecios();
 	}
 
-	/**
-	 * Selecciona un intervalo de precio mínimo/precio máximo. 
-	 * No es posible pasar como parámetro el mínimo/máximo pues lo único que podemos hacer es 'click por la derecha' + 'click por la izquierda'
-	 */
-	private static final String TAG_MINIMO = "[MINIMO]";
-	private static final String TAG_MAXIMO = "[MAXIMO]";
 	@Step (
 		description="Utilizar el selector de precio: Mínimo=" + TAG_MINIMO + " Máximo=" + TAG_MAXIMO, 
 		expected="Aparecen artículos con precio en el intervalo seleccionado")
 	public void seleccionaIntervalo() throws Exception {
 		var dataFilter = new DataFilterPrecios();
 		if (channel==Channel.desktop) {
-			secFiltrosDesktop.showFilters();
+			pageGaleriaDesktop.showFilters();
 		}
-		dataFilter.minimoOrig = selectorPreciosDesktop.getImporteMinimo();
-		dataFilter.maximoOrig = selectorPreciosDesktop.getImporteMaximo();
+		dataFilter.minimoOrig = pageGaleriaDesktop.getMinImportFilter();
+		dataFilter.maximoOrig = pageGaleriaDesktop.getMaxImportFilter();
 
-		selectorPreciosDesktop.clickMinAndMax(30, 30);
-		dataFilter.minimoFinal = selectorPreciosDesktop.getImporteMinimo();
-		dataFilter.maximoFinal = selectorPreciosDesktop.getImporteMaximo();
+		pageGaleriaDesktop.clickIntervalImportFilter(30, 30);
+		dataFilter.minimoFinal = pageGaleriaDesktop.getMinImportFilter();
+		dataFilter.maximoFinal = pageGaleriaDesktop.getMaxImportFilter();
 		if (channel==Channel.desktop) {
-			secFiltrosDesktop.acceptFilters();
+			pageGaleriaDesktop.acceptFilters();
 		}
 		
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_MINIMO, String.valueOf(dataFilter.minimoFinal));
@@ -66,7 +61,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 			"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.maximoOrig + "</b> y ahora es <b>" + dataFilter.maximoFinal + "</b>",
 			dataFilter.maximoFinal < dataFilter.maximoOrig, Warn);
 		
-		PageGaleria pageGaleria = PageGaleria.getNew(channel, app, dataTest.getPais());
+		var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 		checks.add(
 			"Todos los precios están en el intervalo [" + dataFilter.minimoFinal + ", " + dataFilter.maximoFinal + "]",
 			pageGaleria.preciosInIntervalo(dataFilter.minimoFinal, dataFilter.maximoFinal), Warn);

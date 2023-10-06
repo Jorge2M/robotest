@@ -21,17 +21,16 @@ import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
-import com.mng.robotest.tests.domains.galeria.pageobjects.FilterCollection;
-import com.mng.robotest.tests.domains.galeria.pageobjects.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.ControlTemporada;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.SecBannerHeadGallery.TypeLinkInfo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterCollection;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.SecMenusFiltroCollection;
 import com.mng.robotest.testslegacy.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
@@ -41,14 +40,15 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.FilterOrdenacion.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery.TypeLinkInfo.*;
 
 public class PageGaleriaSteps extends StepBase {
 
 	public final SecCrossSellingSteps secCrossSellingSteps = new SecCrossSellingSteps();
 	public final BannerHeadGallerySteps bannerHead = new BannerHeadGallerySteps(this);
 	private final SecSelectorPreciosSteps secSelectorPreciosSteps = new SecSelectorPreciosSteps();
-	private final PageGaleria pageGaleria = PageGaleria.getNew(channel, app, dataTest.getPais());
+	private final PageGaleria pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 
 	public enum TypeGalery { SALES, NO_SALES }
 	public enum TypeActionFav { MARCAR, DESMARCAR }
@@ -175,7 +175,7 @@ public class PageGaleriaSteps extends StepBase {
 	public DataScroll scrollFromFirstPage() throws Exception {
 		var data = new DataForScrollStep();
 		data.setNumPageToScroll(99);
-		data.setOrdenacionExpected(NO_ORDENADO);
+		data.setOrdenacionExpected(RECOMENDADOS);
 		return scrollFromFirstPage(data);
 	}
 	
@@ -211,7 +211,7 @@ public class PageGaleriaSteps extends StepBase {
 		if (pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
 			checkAreMoreArticlesThatInitially(datosScroll.getArticulosMostrados(), numArticulosInicio);
 		}
-		if (dataForScroll.getOrdenacionExpected()!=NO_ORDENADO) {
+		if (dataForScroll.getOrdenacionExpected()!=RECOMENDADOS) {
 			checkArticlesOrdered(dataForScroll.getOrdenacionExpected());
 		}
 		checkNotRepeatedArticles();
@@ -746,23 +746,23 @@ public class PageGaleriaSteps extends StepBase {
 			description="Seleccionamos el link <b>Más Info</b>",
 			expected="Se hace visible el aviso legal")
 	public void clickMoreInfoBannerRebajasJun2018() {
-		((PageGaleriaDesktop)pageGaleria).getSecBannerHead().clickLinkInfoRebajas();
+		((PageGaleriaDesktop)pageGaleria).clickRebajasBannerHead();
 		checkAfterClickInfoRebajas();
 	}
 
 	@Validation
 	private ChecksTM checkAfterClickInfoRebajas() {
 		var checks = ChecksTM.getNew();
-		var secBannerHead = ((PageGaleriaDesktop)pageGaleria).getSecBannerHead();
+		var pageGaleriaDesktop = ((PageGaleriaDesktop)pageGaleria);
 		int seconds = 1;
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
 			"Se despliega la información relativa a las rebajas " + getLitSecondsWait(seconds),
-			secBannerHead.isVisibleInfoRebajasUntil(seconds), Warn);
+			pageGaleriaDesktop.isVisibleInfoRebajasBannerHead(seconds), Warn);
 		
 		checks.add(
 			"Aparece el link de <b>Menos info</b>",
-			secBannerHead.isVisibleLinkTextInfoRebajas(TypeLinkInfo.LESS), Warn);
+			pageGaleriaDesktop.isVisibleLinkInfoRebajasBannerHead(LESS), Warn);
 		
 		return checks;
 	}

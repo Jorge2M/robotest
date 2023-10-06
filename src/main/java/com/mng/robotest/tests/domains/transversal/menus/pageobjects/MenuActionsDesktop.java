@@ -3,11 +3,17 @@ package com.mng.robotest.tests.domains.transversal.menus.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.SecSubmenusGallery;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
 
 public class MenuActionsDesktop extends PageBase implements MenuActions {
 
 	private final MenuWeb menu;
+	private final PageGaleriaDesktop pageGaleria = ((PageGaleriaDesktop)PageGaleria.make(channel, app, dataTest.getPais()));
+
+	public MenuActionsDesktop(MenuWeb menu) {
+		this.menu = menu;
+	}
 	
 	private String getXPathMenu() {
 		return 
@@ -41,10 +47,6 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 		    "//self::*[text()[contains(.,'" + menu.getMenu() + "')]]";
 	}	
 	
-	public MenuActionsDesktop(MenuWeb menu) {
-		this.menu = menu;
-	}
-	
 	@Override
 	public String click() {
 		hoverGroup();
@@ -52,7 +54,7 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}
 	@Override
 	public void clickSubMenu() {
-		new SecSubmenusGallery().clickSubmenu(menu.getSubMenu());
+		pageGaleria.clickSubMenu(menu.getSubMenu());
 	}
 	@Override
 	public boolean isVisibleMenu() {
@@ -60,9 +62,8 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}
 	@Override
 	public boolean isVisibleSubMenus() {
-		var secSubmenusGallery = new SecSubmenusGallery();
 		for (String subMenu : menu.getSubMenus()) {
-			if (!secSubmenusGallery.isVisibleSubmenu(subMenu)) {
+			if (!pageGaleria.isVisibleSubMenu(subMenu)) {
 				return false;
 			}
 		}

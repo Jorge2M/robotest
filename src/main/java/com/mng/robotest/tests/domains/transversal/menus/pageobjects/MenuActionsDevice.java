@@ -3,8 +3,8 @@ package com.mng.robotest.tests.domains.transversal.menus.pageobjects;
 import java.util.Arrays;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.FiltroMobil;
-import com.mng.robotest.tests.domains.galeria.pageobjects.SecMultiFiltrosDevice;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FiltroMobil;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecMultiFiltrosDevice;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

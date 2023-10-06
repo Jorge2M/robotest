@@ -12,8 +12,18 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
+import com.mng.robotest.tests.domains.galeria.pageobjects.article.ListSizesArticle;
+import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecColoresArticuloDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktopKondo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery;
+import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecCrossSelling;
+import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecSubMenusGallery;
+import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
@@ -24,11 +34,18 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public abstract class PageGaleriaDesktop extends PageGaleria {
 	
+	private final SecSubMenusGallery secSubMenusGallery = SecSubMenusGallery.make(app, dataTest.getPais());
 	private final SecColoresArticuloDesktop secColores = new SecColoresArticuloDesktop();
-	private final SecSubmenusGallery secSubmenusGallery = new SecSubmenusGallery();
 	private final SecBannerHeadGallery secBannerHead = new SecBannerHeadGallery();
 	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
-	private final SecSelectorPreciosDesktop secSelectorPreciosDesktop = new SecSelectorPreciosDesktop();
+	private final SecFiltrosDesktop secFiltrosDesktop = SecFiltrosDesktop.make(app, dataTest.getPais());
+	
+	public void clickSubMenu(String submenu) {
+		secSubMenusGallery.clickSubMenu(submenu);
+	}
+	public boolean isVisibleSubMenu(String submenu) {
+		return secSubMenusGallery.isVisibleSubMenu(submenu);
+	}
 	
 	public enum NumColumnas { DOS, TRES, CUATRO }
 	public enum TypeSlider { PREV, NEXT }
@@ -688,7 +705,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) {
 		var secCabecera = new SecCabeceraMostFrequent();
-		var secFiltros = new SecFiltrosDesktop();
+		var secFiltros = new SecFiltrosDesktopKondo();
 		secCabecera.bring(BringTo.BACKGROUND);
 		secFiltros.bring(BringTo.BACKGROUND);
 		hearthIcon.click();
@@ -755,19 +772,54 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return state(Present, xpathVideo).check();
 	}
 
-	public SecSubmenusGallery getSecSubmenusGallery() {
-		return secSubmenusGallery;
+	public boolean isVisibleSelectorPrecios() {
+		return secFiltrosDesktop.isVisibleSelectorPrecios();
 	}
-
-	public SecBannerHeadGallery getSecBannerHead() {
-		return secBannerHead;
+	public int getMinImportFilter() {
+		return secFiltrosDesktop.getMinImportFilter(); 
 	}
-
-	public SecCrossSelling getSecCrossSelling() {
-		return secCrossSelling;
+	public int getMaxImportFilter() {
+		return secFiltrosDesktop.getMaxImportFilter(); 
+	}	
+	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
+		secFiltrosDesktop.clickIntervalImportFilter(margenPixelsLeft, margenPixelsRight);
 	}
-
-	public SecSelectorPreciosDesktop getSecSelectorPreciosDesktop() {
-		return secSelectorPreciosDesktop;
+	
+	public void showFilters() {
+		secFiltrosDesktop.showFilters();
 	}
+	public void acceptFilters() { 
+		secFiltrosDesktop.acceptFilters();
+	}
+	
+	public void clickRebajasBannerHead() {
+		secBannerHead.clickLinkInfoRebajas();
+	}
+    public boolean isVisibleInfoRebajasBannerHead(int seconds) {
+    	return secBannerHead.isVisibleInfoRebajasUntil(seconds);
+    }
+    public boolean isVisibleLinkInfoRebajasBannerHead() {
+    	return secBannerHead.isVisibleLinkInfoRebajas();
+    }
+    public boolean isVisibleLinkInfoRebajasBannerHead(TypeLinkInfo typeLinkInfo) {
+    	return secBannerHead.isVisibleLinkTextInfoRebajas(typeLinkInfo);
+    }
+    public boolean isVisibleBannerHead() {
+    	return secBannerHead.isVisible();
+    }
+    public boolean isBannerHeadLinkable() {
+    	return secBannerHead.isLinkable();
+    }
+    public void clickBannerHeadIfClickable() { 
+    	secBannerHead.clickBannerIfClickable();
+    }
+    public boolean isBannerHeadWithoutTextAccesible() {
+    	return secBannerHead.isBannerWithoutTextAccesible();
+    }
+    public String getTextBannerHead() {
+    	return secBannerHead.getText();
+    }    
+    public boolean isBannerHeadSalesBanner(IdiomaPais idioma) { 
+    	return secBannerHead.isSalesBanner(idioma);
+    }
 }

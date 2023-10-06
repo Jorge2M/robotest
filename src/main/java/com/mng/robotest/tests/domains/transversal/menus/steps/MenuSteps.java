@@ -191,7 +191,7 @@ public class MenuSteps extends StepBase {
 		 	    Check.make(
 				    "El título no coincide -> Validamos que exista el header <b>" + 
 		 	        nameMenu + "</b> en el inicio de la galería",
-		 	       PageGaleria.getNew(channel, app, dataTest.getPais()).isHeaderArticlesVisible(nameMenu), Warn)
+		 	       PageGaleria.make(channel, app, dataTest.getPais()).isHeaderArticlesVisible(nameMenu), Warn)
 		 	    .store(StoreType.Evidences).build());
 	 	}
 	 	return checks;
@@ -213,7 +213,7 @@ public class MenuSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkArticlesContainsLiteralsDesktop(List<String> articles) {
-		var pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app, dataTest.getPais());
+		var pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(channel, app, dataTest.getPais());
 		var articlesNoValid = pageGaleriaDesktop.getArticlesNoValid(articles);
 		var stateVal = (articlesNoValid.size()<10) ? Warn : Defect;
 		

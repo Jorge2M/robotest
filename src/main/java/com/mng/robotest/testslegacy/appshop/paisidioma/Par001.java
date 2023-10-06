@@ -71,7 +71,7 @@ public class Par001 extends TestBase {
 			if (canClickMenuArticles(dataTest.getPais(), linea, sublinea)) {
 				clickMenuDependingLine(lineaType, sublineaType);
 				if (flagsNavigation.testMenus()) {
-					boolean bannerIsLincable = new PageGaleriaDesktopKondo().getSecBannerHead().isLinkable();
+					boolean bannerIsLincable = new PageGaleriaDesktopKondo().isBannerHeadLinkable();
 					if (bannerIsLincable) {
 						new PageGaleriaSteps().bannerHead.clickBannerSuperiorIfLinkableDesktop();
 					}

@@ -1,7 +1,7 @@
 package com.mng.robotest.testslegacy.pageobject.shop.menus;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.tests.domains.galeria.pageobjects.FilterCollection;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterCollection;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.desktop.SecMenusFiltroCollectionDesktop;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.device.SecMenusFiltroCollectionMobil;
 
