@@ -219,8 +219,8 @@ public class Pais implements Serializable {
 			}
 		}
 		return listApps;
-	}   
-
+	}  
+	
 	public boolean isMisdirecciones(AppEcom app) {
 		if (app!=AppEcom.shop) {
 			return false;
@@ -280,12 +280,22 @@ public class Pais implements Serializable {
 	@XmlElement
 	public void setGaleriakondo(String galeriakondo) {
 		this.galeriakondo = galeriakondo;
-	}	
-	
-	public boolean isGaleriaKondo() {
-		return (getGaleriakondo()!=null && 
-				"S".compareTo(getGaleriakondo())==0);
 	}
+	
+	public boolean isGaleriaKondo(AppEcom app) {
+		return getTiendasGaleriaKondo().contains(app);
+	}
+	
+	private List<AppEcom> getTiendasGaleriaKondo() {
+		List<AppEcom> listApps = new ArrayList<>();
+		if (getGaleriakondo()!=null && getGaleriakondo().length()>0) {
+			var listAppsStr = Arrays.asList(getGaleriakondo().split(","));
+			for (String app : listAppsStr) {
+				listApps.add(AppEcom.valueOf(app));
+			}
+		}
+		return listApps;
+	}	
 	
 	public String getEmailuser() {
 		return this.emailuser;

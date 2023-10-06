@@ -117,7 +117,7 @@ public abstract class PageGaleria extends PageBase {
 	public static PageGaleria getNew(From from, Channel channel, AppEcom app, Pais pais) {
 		switch (channel) {
 			case desktop:
-				if (pais.isGaleriaKondo() || app==AppEcom.outlet) {
+				if (pais.isGaleriaKondo(app)) {
 					return new PageGaleriaDesktopKondo(from);
 				}
 				return new PageGaleriaDesktopNormal(from);

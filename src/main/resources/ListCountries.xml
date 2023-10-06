@@ -37,7 +37,7 @@
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Andorra" codigo="043">
@@ -84,7 +84,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Österreich" codigo="038">
@@ -138,6 +138,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Беларусь" codigo="073">
@@ -154,6 +155,7 @@
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Belgique" codigo="017">
@@ -211,7 +213,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Bosnia and Herzegovina " codigo="093">
@@ -249,7 +251,7 @@
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Bulgaria" codigo="068">
@@ -294,6 +296,7 @@
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="НАЛОЖЕН ПЛАТЕЖ" testpasarela='s' testpago='s'></pago><!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Croatia" codigo="092">
@@ -335,6 +338,7 @@
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Cyprus (Euros)" codigo="600">
@@ -383,7 +387,7 @@
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Czech Republic" codigo="061">
@@ -484,6 +488,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <mobiluser>20123456</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Estonia" codigo="053">
@@ -534,7 +539,7 @@
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Finland" codigo="032">
@@ -592,7 +597,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 <mobiluser>0401234567</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
 </pais>
 
@@ -644,6 +649,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Deutschland" codigo="004">
@@ -701,6 +707,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Gibraltar" codigo="044">
@@ -721,6 +728,7 @@
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Greece" codigo="009">
@@ -773,6 +781,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Hungary" codigo="064">
@@ -867,7 +876,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago> 
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Ireland" codigo="007">
@@ -967,6 +976,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Kosovo" codigo="095">
@@ -986,6 +996,7 @@
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Latvia" codigo="054">
@@ -1032,7 +1043,7 @@
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Liechtenstein" codigo="037">
@@ -1072,7 +1083,7 @@
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Lithuania" codigo="055">
@@ -1122,7 +1133,7 @@
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Luxemburg" codigo="018">
@@ -1173,7 +1184,7 @@
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Macedonia " codigo="096">
@@ -1192,6 +1203,7 @@
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Malta" codigo="046">
@@ -1237,7 +1249,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Moldova" codigo="074">
@@ -1256,6 +1268,7 @@
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Monaco" codigo="015">
@@ -1301,7 +1314,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='n' testpago='n' useremail='Test.mango@mango.com' passwordemail='mango123'></pago> <!-- Desactivada la validación de la pasarela porque no acepta mail asociado a otro país -->
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Montenegro" codigo="090">
@@ -1320,6 +1333,7 @@
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Nederland" codigo="003">
@@ -1374,6 +1388,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Kuzey Kıbrıs (Türk Lirasi)" codigo="602"> <!-- Chipre del norte -->
@@ -1509,6 +1524,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Portugal" codigo="010">
@@ -1559,6 +1575,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Romania" codigo="066">
@@ -1602,6 +1619,7 @@
 	type="ContraReembolso" tiendas="shop,outlet" 
 	nombre="PLATA PRIN RAMBURS" nombremovil="Plata Prin Ramburs" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>S</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Россия (Российская Федерация)" codigo="075"> <!-- Russia -->
@@ -1661,6 +1679,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="tpvvotf" tiendas="votf" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Serbia" codigo="094">
@@ -1743,7 +1762,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n" 
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Slovenia" codigo="091">
@@ -1796,7 +1815,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="España (Península y Baleares)" codigo="001">
@@ -1877,6 +1896,8 @@ where
     t3.bloqueo_votf = 'N' and
     t3.baja_shop is null-->
 <accesovotf usuario="tda00003" password="mng00003"/>
+<!-- https://confluence.mango.com/pages/viewpage.action?pageId=230916541-->
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="España (Ceuta)" codigo="022">
@@ -1939,6 +1960,7 @@ where
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
 <transporte nombre="Urgente 24 h"       importe="7,95"     gratuito="99999"/>
 <multidireccion>N</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="España (Islas Canarias)" codigo="021">
@@ -1997,6 +2019,7 @@ where
 	type="tpvvotf" tiendas="votf" empleado="n" 
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="España (Melilla)" codigo="023">
@@ -2059,6 +2082,7 @@ where
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
 <transporte nombre="Urgente 24 h"       importe="7,95"     gratuito="99999"/>
 <multidireccion>N</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Sweden" codigo="030">
@@ -2192,6 +2216,7 @@ where
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 <emailuser>jorge.munoz@mango.com</emailuser> <!-- Utilizaremos un email con timestamp para superar el control de fraude de "Rechnung" -->
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <!-- CUANDO SE ACTIVE LA COMPRA ONLINE HABRÍA QUE INCLUIR EL MÉTODO DE ENVÍO MEEST -->
@@ -2234,7 +2259,7 @@ where
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="United Kingdom" codigo="006">
@@ -2293,6 +2318,7 @@ where
 	type="Paypal" tiendas="shop,outlet" empleado="n" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="United Kingdom (Channel Islands)" codigo="019">
@@ -2342,6 +2368,7 @@ where
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 </continente>
@@ -2381,7 +2408,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>	
+<galeriakondo>shop</galeriakondo>	
 </pais>
 
 <pais nombre_pais="Bermuda " codigo="413">
@@ -2418,7 +2445,7 @@ where
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Haiti" codigo="452">
@@ -2452,7 +2479,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Canada" codigo="404">
@@ -2531,7 +2558,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>	
-<galeriakondo>S</galeriakondo>	
+<galeriakondo>shop</galeriakondo>	
 </pais>
 
 <pais nombre_pais="Cuba" codigo="448">
@@ -2550,6 +2577,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Dominican Republic" codigo="456">
@@ -2587,7 +2615,7 @@ where
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="El Salvador" codigo="428">
@@ -2628,7 +2656,7 @@ where
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="France (Guadeloupe)" codigo="458">
@@ -2674,7 +2702,7 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<galeriakondo>S</galeriakondo>	
+<galeriakondo>shop</galeriakondo>	
 </pais>
 
 <pais nombre_pais="Guatemala" codigo="416">
@@ -2712,7 +2740,7 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
-<galeriakondo>S</galeriakondo>	
+<galeriakondo>shop</galeriakondo>	
 </pais>
 
 <!-- 
@@ -2849,7 +2877,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>	
+<galeriakondo>shop</galeriakondo>	
 </pais>
 
 <pais nombre_pais="Panamá" codigo="442">
@@ -2890,7 +2918,7 @@ where
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>		
+<galeriakondo>shop</galeriakondo>		
 </pais>
 
 <pais nombre_pais="USA" codigo="400">
@@ -2949,6 +2977,7 @@ where
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 </continente>
@@ -2969,6 +2998,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Bolivia" codigo="516">
@@ -2986,6 +3016,7 @@ where
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Brazil " codigo="508">
@@ -3005,6 +3036,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Chile" codigo="512">
@@ -3089,6 +3121,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="France (Martinique)" codigo="475">
@@ -3134,7 +3167,7 @@ where
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>	
+<galeriakondo>shop</galeriakondo>	
 </pais>
 
 <pais nombre_pais="France (Guyane Française)" codigo="496">
@@ -3180,7 +3213,7 @@ where
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>	
+<galeriakondo>shop</galeriakondo>	
 </pais>
 
 <pais nombre_pais="Nicaragua" codigo="432">
@@ -3221,7 +3254,7 @@ where
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>	
-<galeriakondo>S</galeriakondo>	
+<galeriakondo>shop</galeriakondo>	
 </pais>
 
 <pais nombre_pais="Paraguay" codigo="520">
@@ -3239,6 +3272,7 @@ where
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Perú" codigo="504">
@@ -3291,6 +3325,7 @@ where
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Venezuela" codigo="484">
@@ -3309,6 +3344,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 </continente>
@@ -3370,6 +3406,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 </continente>
@@ -3391,6 +3428,7 @@ where
 <linea id="NINO"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Azerbaijan" codigo="078">
@@ -3420,6 +3458,7 @@ where
 </linea>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Bahrain" codigo="640">
@@ -3499,7 +3538,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="中国" codigo="720"> <!-- China -->
@@ -3610,6 +3649,7 @@ where
 </linea>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Hong Kong" codigo="740">
@@ -3653,7 +3693,7 @@ where
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="India" codigo="664">
@@ -3750,6 +3790,7 @@ where
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Iraq" codigo="612">
@@ -3768,6 +3809,7 @@ where
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Israel" codigo="624">
@@ -3785,6 +3827,7 @@ where
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="日本" codigo="732" exists="n"> <!-- Japón (sólo existe a nivel de la prehome, al seleccionarlo se dirige a otra shop)-->
@@ -3843,6 +3886,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Laos" codigo="684">
@@ -3861,6 +3905,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Jordan" codigo="628">
@@ -3938,6 +3983,7 @@ where
 	type="Assist" tiendas="shop,outlet"
 	nombre="JCB" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Kuwait" codigo="636">
@@ -4000,6 +4046,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Lebanon" codigo="604">
@@ -4072,7 +4119,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Malaysia" codigo="701">
@@ -4113,7 +4160,7 @@ where
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Maldives" codigo="667">
@@ -4155,7 +4202,7 @@ where
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <entregadomic>N</entregadomic>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Mongolia" codigo="716">
@@ -4174,6 +4221,7 @@ where
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Oman" codigo="649">
@@ -4247,6 +4295,7 @@ where
 </linea>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Philippines" codigo="708">
@@ -4496,7 +4545,7 @@ where
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Syria " codigo="608">
@@ -4515,6 +4564,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Taiwan" codigo="736">
@@ -4543,6 +4593,7 @@ where
 </linea>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Tailandia" codigo="680">
@@ -4694,7 +4745,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Vietnam " codigo="690">
@@ -4713,7 +4764,9 @@ where
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
+
 </continente>
 
 <continente nombre_continente="Africa">
@@ -4753,6 +4806,7 @@ where
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Bénin" codigo="284">
@@ -4787,7 +4841,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Burkina" codigo="236">
@@ -4806,6 +4860,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Cameroon" codigo="302">
@@ -4840,7 +4895,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Chad" codigo="244">
@@ -4875,7 +4930,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Democratic Republic of the Congo" codigo="318">
@@ -4910,7 +4965,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Côte d" codigo="272">
@@ -4929,6 +4984,7 @@ where
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Egypt" codigo="220">
@@ -5001,7 +5057,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="France (La Réunion)" codigo="372">
@@ -5022,6 +5078,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Ghana" codigo="276">
@@ -5056,7 +5113,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Kenya" codigo="346">
@@ -5094,7 +5151,7 @@ where
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Libya" codigo="216">
@@ -5113,6 +5170,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Madagascar" codigo="370">
@@ -5147,7 +5205,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Malawi" codigo="386">
@@ -5184,7 +5242,7 @@ where
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Mali" codigo="232">
@@ -5219,7 +5277,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Maurice" codigo="373">
@@ -5239,6 +5297,7 @@ where
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <!-- <pais nombre_pais="Morocco" codigo="204">-->
@@ -5259,6 +5318,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Mozambique" codigo="366">
@@ -5296,7 +5356,7 @@ where
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Nigeria" codigo="288">
@@ -5315,6 +5375,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Rwanda" codigo="324">
@@ -5349,7 +5410,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Sénégal" codigo="248">
@@ -5388,7 +5449,7 @@ where
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="South Africa" codigo="388">
@@ -5446,7 +5507,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <!-- <pais nombre_pais="Tunisia" codigo="212">-->
@@ -5467,6 +5528,7 @@ where
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Uganda" codigo="350">
@@ -5500,7 +5562,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Zambia" codigo="378">
@@ -5534,7 +5596,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Zimbabwe" codigo="382">
@@ -5568,7 +5630,7 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
-<galeriakondo>S</galeriakondo>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 </continente>

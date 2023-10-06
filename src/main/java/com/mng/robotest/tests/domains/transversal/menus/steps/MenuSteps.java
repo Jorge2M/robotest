@@ -29,7 +29,6 @@ import com.mng.robotest.tests.domains.transversal.menus.pageobjects.GroupWeb.Gro
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
-import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.testslegacy.beans.Linea;
 import com.mng.robotest.testslegacy.data.Constantes.ThreeState;
@@ -458,9 +457,9 @@ public class MenuSteps extends StepBase {
 		expected=
 			"Aparece la ficha del producto " + TAG_REF_ARTICLE)
 	public void checkURLRedirectFicha() throws Exception {
-		GetterProducts getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), app, driver).build();
-		GarmentCatalog product = getterProducts.getAll().get(0);
-		Article article = Article.getArticleForTest(product);
+		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), app, driver).build();
+		var product = getterProducts.getAll().get(0);
+		var article = Article.getArticleForTest(product);
 		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_REF_ARTICLE, article.getGarmentId());
 		TestMaker.getCurrentStepInExecution().replaceInExpected(TAG_REF_ARTICLE, article.getGarmentId());
 		
