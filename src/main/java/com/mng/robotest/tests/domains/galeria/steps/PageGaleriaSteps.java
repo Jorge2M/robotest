@@ -677,19 +677,20 @@ public class PageGaleriaSteps extends StepBase {
 	}
 
 	@Validation
-	public ChecksTM validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles,
-											   State levelError, StoreType store) {
+	public ChecksTM validaArticlesOfTemporadas(
+			List<Integer> listTemporadas, boolean validaNotNewArticles, State levelError, StoreType store) {
 		var checks = ChecksTM.getNew();
-
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-		List<String> listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM_OTHER, listTemporadas);
+		var pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+		var listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM_OTHER, listTemporadas);
 		if (validaNotNewArticles) {
 			listArtWrong = PageGaleria.getNotNewArticlesFrom(listArtWrong);
 		}
+		
 		String validaNotNewArticlesStr = "";
 		if (validaNotNewArticles) {
 			validaNotNewArticlesStr = " y no contienen alguna de las etiquetas de artículo nuevo (" + PageGaleria.getListlabelsnew() + ")";
 		}
+		
 		String infoWarning = "";
 		if (!listArtWrong.isEmpty()) {
 			infoWarning+=
@@ -700,6 +701,7 @@ public class PageGaleriaSteps extends StepBase {
 			}
 			infoWarning+="</lin>";
 		}
+		
 		checks.add(
 			Check.make(
 				"<b style=\"color:blue\">Rebajas</b></br>" +

@@ -281,7 +281,7 @@ public class SecBolsaSteps extends StepBase {
 	//TODO simplificar cuando en Outlet suba el flujo nuevo
 	//(y crear página específica PageContinuarComoInvitadoMobile
 	private void fluxPostSelectComprarUserNotIdentifiedMobile(FluxBolsaCheckout flux) {
-		if (app==AppEcom.shop && !isPRO()) {
+		if (app==AppEcom.shop) {
 			checkVisibleContinuarSinCuentaButtonDevice(2);
 			if (flux==INICIAR_SESION) {
 				clickIniciarSesionMobile();
