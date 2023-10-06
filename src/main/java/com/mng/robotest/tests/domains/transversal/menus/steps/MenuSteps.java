@@ -8,7 +8,6 @@ import org.openqa.selenium.NoSuchElementException;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -193,7 +192,7 @@ public class MenuSteps extends StepBase {
 		 	    Check.make(
 				    "El título no coincide -> Validamos que exista el header <b>" + 
 		 	        nameMenu + "</b> en el inicio de la galería",
-		 	       PageGaleria.getNew(channel, dataTest.getPais()).isHeaderArticlesVisible(nameMenu), Warn)
+		 	       PageGaleria.getNew(channel, app, dataTest.getPais()).isHeaderArticlesVisible(nameMenu), Warn)
 		 	    .store(StoreType.Evidences).build());
 	 	}
 	 	return checks;
@@ -215,9 +214,9 @@ public class MenuSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkArticlesContainsLiteralsDesktop(List<String> articles) {
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, dataTest.getPais());
-		List<String> articlesNoValid = pageGaleriaDesktop.getArticlesNoValid(articles);
-		State stateVal = (articlesNoValid.size()<10) ? Warn : Defect;
+		var pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.getNew(channel, app, dataTest.getPais());
+		var articlesNoValid = pageGaleriaDesktop.getArticlesNoValid(articles);
+		var stateVal = (articlesNoValid.size()<10) ? Warn : Defect;
 		
 		var checks = ChecksTM.getNew();
 		checks.add(

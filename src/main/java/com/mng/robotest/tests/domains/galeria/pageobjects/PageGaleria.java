@@ -111,13 +111,13 @@ public abstract class PageGaleria extends PageBase {
 	protected static final String XPATH_LINK_RELATIVE_TO_ARTICLE = ".//a[@class='product-link']";
 	protected static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE = "//*[@data-testid='button-icon']";
 
-	public static PageGaleria getNew(Channel channel, Pais pais) {
-		return getNew(From.MENU, channel, pais);
+	public static PageGaleria getNew(Channel channel, AppEcom app, Pais pais) {
+		return getNew(From.MENU, channel, app, pais);
 	}
-	public static PageGaleria getNew(From from, Channel channel, Pais pais) {
+	public static PageGaleria getNew(From from, Channel channel, AppEcom app, Pais pais) {
 		switch (channel) {
 			case desktop:
-				if (pais.isGaleriaKondo()) {
+				if (pais.isGaleriaKondo() || app==AppEcom.outlet) {
 					return new PageGaleriaDesktopKondo(from);
 				}
 				return new PageGaleriaDesktopNormal(from);

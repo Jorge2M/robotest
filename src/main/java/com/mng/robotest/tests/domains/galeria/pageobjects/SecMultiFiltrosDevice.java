@@ -21,7 +21,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	private static final String XPATH_BUTTON_APLICAR_FILTROS = "//button[@class[contains(.,'filters-apply')]]";
 	private static final String XPATH_BUTTON_CLOSE = "//div[@class='orders-filters-close' and @role='button']";
 	
-	private final PageGaleria pageGaleria = PageGaleria.getNew(channel, dataTest.getPais());
+	private final PageGaleria pageGaleria = PageGaleria.getNew(channel, app, dataTest.getPais());
 	
 	@Override
 	public void selectOrdenacion(FilterOrdenacion ordenacion) throws Exception {

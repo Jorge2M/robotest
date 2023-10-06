@@ -125,7 +125,7 @@ public class PageLanding extends PageBase {
 	}
 
 	public boolean haySecc_Art_Banners() {
-		var pageGaleria = PageGaleria.getNew(channel, dataTest.getPais());
+		var pageGaleria = PageGaleria.getNew(channel, app, dataTest.getPais());
 		if (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle()) {
 			return true;
 		}
@@ -155,7 +155,7 @@ public class PageLanding extends PageBase {
 			boolean elementContained = false;
 			switch (element) {
 			case article:
-				var pageGaleria = PageGaleria.getNew(channel, dataTest.getPais());
+				var pageGaleria = PageGaleria.getNew(channel, app, dataTest.getPais());
 				elementContained = pageGaleria.isVisibleArticleUntil(1, 3);
 				break;
 			case campaign:

@@ -3,6 +3,7 @@ package com.mng.robotest.tests.domains.galeria.pageobjects;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Color;
@@ -23,7 +24,7 @@ public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 	}
 	
 	public static SecFiltrosTabletOutlet getInstance(Pais pais) {
-		PageGaleria pageGaleria = PageGaleria.getNew(Channel.tablet, pais);
+		PageGaleria pageGaleria = PageGaleria.getNew(Channel.tablet, AppEcom.outlet, pais);
 		return (new SecFiltrosTabletOutlet(pageGaleria));
 	}
 	

@@ -19,7 +19,7 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	private static final String XPATH_LINK_COLOR_WITH_TAG_SHOP = "//label[(@for[contains(.,'filtercolor')] or @for[contains(.,'multiSelectfilter_GroupsColors')]) and text()[contains(.,'" + TAG_COLOR + "')]]";
 	private static final String XPATH_LINK_COLOR_WITH_TAG_TABLET_OUTLET	 = "//label[@for[contains(.,'color_" + TAG_COLOR + "')]]";
 	
-	private final PageGaleria pageGaleria = PageGaleria.getNew(channel, dataTest.getPais());
+	private final PageGaleria pageGaleria = PageGaleria.getNew(channel, app, dataTest.getPais());
 	
 	private String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) {
 		return (XPATH_LINK_ORDEN_WITH_TAG.replace(TAG_ORDENACION, ordenacion.getValueForDesktop()));
