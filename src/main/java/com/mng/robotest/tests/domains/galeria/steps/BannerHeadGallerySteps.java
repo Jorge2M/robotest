@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -20,7 +21,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 public class BannerHeadGallerySteps extends StepBase {
 
 	private final PageGaleriaSteps pageGaleriaParentSteps;
-	private final PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(channel, app, dataTest.getPais());
+	private final PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(Channel.desktop, app, dataTest.getPais());
 
 	public BannerHeadGallerySteps(PageGaleriaSteps pageGaleriaParentSteps) {
 		this.pageGaleriaParentSteps = pageGaleriaParentSteps;

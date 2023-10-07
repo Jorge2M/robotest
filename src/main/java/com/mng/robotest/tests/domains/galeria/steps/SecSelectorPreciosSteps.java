@@ -13,7 +13,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecSelectorPreciosSteps extends StepBase {
 
-	private final PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(channel, app, dataTest.getPais());
+	private final PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(Channel.desktop, app, dataTest.getPais());
 	
 	private static final String TAG_MINIMO = "[MINIMO]";
 	private static final String TAG_MAXIMO = "[MAXIMO]";
