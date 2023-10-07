@@ -25,7 +25,7 @@ public abstract class SecSoyNuevo extends PageBase {
 			return new SecSoyNuevoDesktop();
 		}
 		
-		if (app==AppEcom.shop && !new PageBase().isPRO()) {
+		if (app==AppEcom.shop) {
 			return new SecSoyNuevoMobileNew();
 		}
 		return new SecSoyNuevoMobileOld();
