@@ -11,7 +11,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
@@ -443,7 +442,7 @@ public class MenuSteps extends StepBase {
 			uri.getScheme() + "://" + 
 			uri.getHost() + 
 			"/redirect.faces?op=conta&seccion=prendas_he.abrigos_he&menu_abrigos106=Parkas&tiendaid=" + tiendaId;
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_ACCESO, urlAccesoCorreo);
+		replaceStepDescription(TAG_URL_ACCESO, urlAccesoCorreo);
 
 		driver.navigate().to(urlAccesoCorreo);
 		new MenuSteps().checkSelecMenu(FactoryMenus.get(ABRIGOS_HE));
@@ -460,8 +459,8 @@ public class MenuSteps extends StepBase {
 		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), app, driver).build();
 		var product = getterProducts.getAll().get(0);
 		var article = Article.getArticleForTest(product);
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_REF_ARTICLE, article.getGarmentId());
-		TestMaker.getCurrentStepInExecution().replaceInExpected(TAG_REF_ARTICLE, article.getGarmentId());
+		replaceStepDescription(TAG_REF_ARTICLE, article.getGarmentId());
+		replaceStepExpected(TAG_REF_ARTICLE, article.getGarmentId());
 		
 		URI uri = new URI(driver.getCurrentUrl());
 		String tiendaId = "she";
@@ -472,7 +471,7 @@ public class MenuSteps extends StepBase {
 		String urlAccesoCorreo = 
 			uri.getScheme() + "://" + uri.getHost() + "/redirect.faces?op=conta&tiendaid=" + tiendaId + "&pais=" + dataTest.getCodigoPais() + 
 			"&producto=" + article.getGarmentId() + "&color=" + article.getColor().getId() ;
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_ACCESO, urlAccesoCorreo);
+		replaceStepDescription(TAG_URL_ACCESO, urlAccesoCorreo);
 		driver.navigate().to(urlAccesoCorreo);
 
 		var datosArticulo = new DataFichaArt(article.getGarmentId(), "");

@@ -9,7 +9,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.*;
 
@@ -27,8 +27,6 @@ import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalCambioPais;
-import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 public class AccesoSteps extends StepBase {
 
@@ -195,10 +193,9 @@ public class AccesoSteps extends StepBase {
 			"Se accede a la shop de #{paisDestino.getNombrePais()} en #{idiomaDestino.getLiteral()}",
 		saveHtmlPage=SaveWhen.Always)
 	public void accesoPRYCambioPais(Pais paisDestino, IdiomaPais idiomaDestino) throws Exception {
-		StepTM StepTestMaker = TestMaker.getCurrentStepInExecution();
-		StepTestMaker.replaceInDescription(TAG_NOMBRE_PAIS_ORIGEN, dataTest.getPais().getNombrePais());
-		StepTestMaker.replaceInDescription(TAG_CODIGO_PAIS_ORIGEN, dataTest.getCodigoPais());
-		StepTestMaker.replaceInDescription(TAG_NOMBRE_IDIOMA_ORIGEN, dataTest.getIdioma().getLiteral());
+		replaceStepDescription(TAG_NOMBRE_PAIS_ORIGEN, dataTest.getPais().getNombrePais());
+		replaceStepDescription(TAG_CODIGO_PAIS_ORIGEN, dataTest.getCodigoPais());
+		replaceStepDescription(TAG_NOMBRE_IDIOMA_ORIGEN, dataTest.getIdioma().getLiteral());
 	
 		manySteps();
 
@@ -234,15 +231,15 @@ public class AccesoSteps extends StepBase {
 			throws Exception {
 		Pais paisAsocIP = null;
 		String urlAccesoPaisNoIp = paisAccesoNoIP.getUrlPaisEstandar(urlBaseTest);
-		IdiomaPais idiomaOrigen = paisAccesoNoIP.getListIdiomas(app).get(0);
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_ACCESO_PAIS_NO_IP, urlAccesoPaisNoIp);
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_LITERAL_IDIOMA_ORIGEN, idiomaOrigen.getLiteral());
+		var idiomaOrigen = paisAccesoNoIP.getListIdiomas(app).get(0);
+		replaceStepDescription(TAG_URL_ACCESO_PAIS_NO_IP, urlAccesoPaisNoIp);
+		replaceStepDescription(TAG_LITERAL_IDIOMA_ORIGEN, idiomaOrigen.getLiteral());
 		
 		driver.get(urlAccesoPaisNoIp);
-		PageObjTM.waitForPageLoaded(driver);
+		waitForPageLoaded(driver);
 		if (vecesPaisConfPrev < 2) {
 			//Si se ha confirmado el país < 2 veces debería aparecer el modal del cambio de país
-			ResultValWithPais resultVal = validacAccesoSiApareceModal(urlBaseTest, paisAccesoNoIP, paisAccesoPrevio, paisPrevConf, listPaisAsocIP, driver);
+			var resultVal = validacAccesoSiApareceModal(urlBaseTest, paisAccesoNoIP, paisAccesoPrevio, paisPrevConf, listPaisAsocIP, driver);
 			paisAsocIP = resultVal.getPais();
 		} else {
 			//Si el país se ha confirmado > 1 vez no debería aparecer el modal de cambio de país
@@ -329,12 +326,12 @@ public class AccesoSteps extends StepBase {
 	@Step (
 		description="Confirmamos la propuesta de país del modal <b>" + TAG_PAIS_BOTON_CAMBIO + "</b>", 
 		expected="Se redirige a la URL " + TAG_HREF_BOTON_CAMBIO)
-	public static void selectConfirmPaisModal(WebDriver driver) {
+	public void selectConfirmPaisModal() {
 		var modalCambioPais = new ModalCambioPais();
 		String paisBotonCambio = modalCambioPais.getTextPaisButtonChagePais();
 		String hrefBotonCambioPais = modalCambioPais.getHRefPaisButtonChagePais();
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_PAIS_BOTON_CAMBIO, paisBotonCambio);
-		TestMaker.getCurrentStepInExecution().replaceInExpected(TAG_HREF_BOTON_CAMBIO, hrefBotonCambioPais);
+		replaceStepDescription(TAG_PAIS_BOTON_CAMBIO, paisBotonCambio);
+		replaceStepExpected(TAG_HREF_BOTON_CAMBIO, hrefBotonCambioPais);
 		
 		modalCambioPais.clickButtonChangePais();
 		checkIsDoneRedirectToCountry(paisBotonCambio, hrefBotonCambioPais, driver);

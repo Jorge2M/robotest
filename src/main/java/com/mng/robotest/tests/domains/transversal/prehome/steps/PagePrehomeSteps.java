@@ -7,7 +7,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
@@ -88,8 +87,8 @@ public class PagePrehomeSteps extends StepBase {
 		expected="Se accede correctamente al pais / idioma seleccionados",
 		saveNettraffic=SaveWhen.Always)
 	private void accesoShopViaPrehome(Pais pais, IdiomaPais idioma, boolean execValidacs, boolean acceptCookies) throws Exception {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_PAIS, pais.getNombrePais());
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_IDIOMA, idioma.getLiteral());
+		replaceStepDescription(TAG_PAIS, pais.getNombrePais());
+		replaceStepDescription(TAG_IDIOMA, idioma.getLiteral());
 		
 		pagePrehome.accesoShopViaPrehome();
 		pagePrehome.manageCookies(acceptCookies);

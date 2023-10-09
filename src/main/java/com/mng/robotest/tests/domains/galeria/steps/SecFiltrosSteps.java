@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
@@ -24,7 +23,10 @@ public class SecFiltrosSteps extends StepBase {
 		expected="Aparece la galería de imágenes",
 		saveNettraffic=SaveWhen.Always)
 	public int selectFiltroColores(List<Color> colorsToSelect, String litMenu) {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_LIT_COLORS_TO_SELECT, Color.getListNamesFiltros(colorsToSelect).toString());
+		replaceStepDescription(
+				TAG_LIT_COLORS_TO_SELECT, 
+				Color.getListNamesFiltros(colorsToSelect).toString());
+		
 		int numArticulos1page = secFiltros.selecFiltroColoresAndReturnNumArticles(colorsToSelect);			
 		checkAfterSelectFiltroColores(colorsToSelect, litMenu, numArticulos1page);
 		return numArticulos1page;

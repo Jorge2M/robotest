@@ -3,11 +3,11 @@ package com.mng.robotest.tests.domains.compra.payments.tmango.steps;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.payments.tmango.pageobjects.SecTMango;
 import com.mng.robotest.tests.domains.compra.payments.tmango.pageobjects.SecTMango.TipoPago;
 
-public class SecTMangoSteps {
+public class SecTMangoSteps extends StepBase {
 
 	private final SecTMango secTMango = new SecTMango();
 	
@@ -33,7 +33,7 @@ public class SecTMangoSteps {
 		description="Seleccionar la forma de pago \"" + TAG_DESCR_PAGO + "\"", 
 		expected="El resultado es correcto")
 	public void clickTipoPago(TipoPago tipoPago) {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_DESCR_PAGO, secTMango.getDescripcionTipoPago(tipoPago));
+		replaceStepDescription(TAG_DESCR_PAGO, secTMango.getDescripcionTipoPago(tipoPago));
 		secTMango.clickModalidad(tipoPago);
 	}
 }

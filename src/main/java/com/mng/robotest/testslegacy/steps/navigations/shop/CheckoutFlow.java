@@ -13,7 +13,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
@@ -438,27 +437,26 @@ public class CheckoutFlow extends StepBase {
 		saveNettraffic=SaveWhen.Always,
 		saveErrorData=SaveWhen.Always)
 	private void accessShopAndLoginOrLogoff() throws Exception {
-		var stepTM = TestMaker.getCurrentStepInExecution();		
 		if (dataTest.isUserRegistered()) {
-			accessShopAndLogin(stepTM);
+			accessShopAndLogin();
 		} else {
-			accessShopAndLogoff(stepTM);
+			accessShopAndLogoff();
 		}
 	}
 	
-	private void accessShopAndLogin(StepTM stepTM) throws Exception {
-		stepTM.replaceInDescription(
+	private void accessShopAndLogin() throws Exception {
+		replaceStepDescription(
 				TAG_LOGIN_OR_LOGOFF, "e Identificarse con el usuario <b>" + dataTest.getUserConnected() + "</b>");
-			new AccesoFlows().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
-			new AccesoFlows().identification(dataTest.getUserConnected(), dataTest.getPasswordUser());	
-			new SecBolsa().clearArticulos();
+		new AccesoFlows().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
+		new AccesoFlows().identification(dataTest.getUserConnected(), dataTest.getPasswordUser());	
+		new SecBolsa().clearArticulos();
 	}
 	
-	private void accessShopAndLogoff(StepTM stepTM) throws Exception {
-		stepTM.replaceInDescription(
+	private void accessShopAndLogoff() throws Exception {
+		replaceStepDescription(
 				TAG_LOGIN_OR_LOGOFF, "(si estamos logados cerramos sesión)");
-			new AccesoFlows().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
-			new PageLogin().logoff();		
+		new AccesoFlows().accesoHomeAppWeb(dataPago.getFTCkout().acceptCookies);
+		new PageLogin().logoff();		
 	}
 	
 	public static class BuilderCheckout {

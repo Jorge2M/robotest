@@ -4,8 +4,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.ModalDroppoints;
@@ -24,9 +22,8 @@ public class SecSelectDPointSteps extends StepBase {
 		description="Introducimos la provincia <b>" + TAG_SEARCH_DP + "</b> + Return", 
 		expected="Aparecen puntos de recogida de " + TAG_SEARCH_DP)
 	public void searchPoblacion(DataSearchDeliveryPoint dataSearchDp) {
-		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(TAG_SEARCH_DP, dataSearchDp.getData());
-		step.replaceInExpected(TAG_SEARCH_DP, dataSearchDp.getData());
+		replaceStepDescription(TAG_SEARCH_DP, dataSearchDp.getData());
+		replaceStepExpected(TAG_SEARCH_DP, dataSearchDp.getData());
 		
 		TypeDeliveryPoint typeDp = dataSearchDp.getTipoTransporte().getTypeDeliveryPoint();
 		modalDroppoints.sendProvincia(dataSearchDp.getData());

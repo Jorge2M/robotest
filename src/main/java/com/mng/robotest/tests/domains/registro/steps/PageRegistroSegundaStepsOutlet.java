@@ -7,8 +7,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroSegundaOutlet;
@@ -91,13 +89,10 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 			"  3) Seleccionar el número de niños: <b>" + numNinos + "</b>";
 		}
 		
-		//Rewrite description step
-		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.setDescripcion(stepDescription);
-
+		setStepDescription(stepDescription);
 		pageRegistroSegunda.setFechaNacimiento(fechaNacimiento);
 		String lineasDesmarcadas = pageRegistroSegunda.desmarcarLineasRandom(dataRegistroOK.get("lineascomaseparated"));
-		step.setDescripcion(step.getDescripcion().replace(tagListaRandom, lineasDesmarcadas));
+		replaceStepDescription(tagListaRandom, lineasDesmarcadas);
 		dataRegistroOK.put("clicklineas", lineasDesmarcadas);
 		if (paisConNinos) {
 			pageRegistroSegunda.setNumeroNinos(numNinos);

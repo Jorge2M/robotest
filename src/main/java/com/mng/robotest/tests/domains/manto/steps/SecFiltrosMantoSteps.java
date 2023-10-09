@@ -3,8 +3,6 @@ package com.mng.robotest.tests.domains.manto.steps;
 import java.time.LocalDate;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.tests.domains.base.StepMantoBase;
 import com.mng.robotest.tests.domains.manto.pageobjects.SecCabecera;
@@ -38,9 +36,8 @@ public class SecFiltrosMantoSteps extends StepMantoBase {
 		saveErrorData=SaveWhen.Never)
 	public void setFiltrosYbuscar(
 			DataPedido dataPedido, TypeSearch typeSearch, LocalDate fechaDesde, LocalDate fechaHasta) {
-		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(TAG_NOMBRE_PAGO, dataPedido.getPago().getNombre());
-		step.replaceInDescription(TAG_LIT_TIENDA, new SecCabecera().getLitTienda());
+		replaceStepDescription(TAG_NOMBRE_PAGO, dataPedido.getPago().getNombre());
+		replaceStepDescription(TAG_LIT_TIENDA, new SecCabecera().getLitTienda());
 		
 		if (dataPedido.getCodigoPedidoManto()!=null) {
 			secFiltros.setFiltroCodPedido(dataPedido.getCodigoPedidoManto());

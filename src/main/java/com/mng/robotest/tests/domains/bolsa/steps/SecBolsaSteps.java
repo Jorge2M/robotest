@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
@@ -142,7 +141,7 @@ public class SecBolsaSteps extends StepBase {
 			str.append("</li>");
 		}
 		str.append("</ul>");
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_LISTA_ART, str.toString());
+		replaceStepDescription(TAG_LISTA_ART, str.toString());
 	}
 
 	public void validaAltaArtBolsa() throws Exception {

@@ -3,8 +3,6 @@ package com.mng.robotest.tests.domains.ficha.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecProductDescrDevice;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecProductDescrDevice.TypePanel;
@@ -35,15 +33,13 @@ public class SecProductDescrDeviceSteps extends StepBase {
 		description="Seleccionar el panel <b>#{typePanel}</b> (en estado inicial: " + TAG_INIT_STATE_PANEL + ")",
 		expected="La pestaña queda en estado " + TAG_FINAL_STATE_EXPECTED)
 	public void selectPanel(TypePanel typePanel) {
-		TypeStatePanel statePanelIni = secProductDescr.getStatePanel(typePanel);
-		TypeStatePanel stateExpectedAfterClick = secProductDescr.getStatePanelAfterClick(statePanelIni);
-		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(TAG_INIT_STATE_PANEL, statePanelIni.toString());
-		step.replaceInExpected(TAG_FINAL_STATE_EXPECTED, stateExpectedAfterClick.toString());
+		var statePanelIni = secProductDescr.getStatePanel(typePanel);
+		var stateExpectedAfterClick = secProductDescr.getStatePanelAfterClick(statePanelIni);
+		replaceStepDescription(TAG_INIT_STATE_PANEL, statePanelIni.toString());
+		replaceStepExpected(TAG_FINAL_STATE_EXPECTED, stateExpectedAfterClick.toString());
 		
 		secProductDescr.clickPanel(typePanel);
-		int seconds = 1;
-		checkPanelInState(typePanel, stateExpectedAfterClick, seconds);
+		checkPanelInState(typePanel, stateExpectedAfterClick, 1);
 	}
 	
 	@Validation (

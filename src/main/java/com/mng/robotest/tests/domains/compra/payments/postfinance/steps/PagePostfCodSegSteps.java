@@ -3,8 +3,6 @@ package com.mng.robotest.tests.domains.compra.payments.postfinance.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.payments.postfinance.pageobjects.PagePostfCodSeg;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
@@ -71,8 +69,7 @@ public class PagePostfCodSegSteps extends StepBase {
 		try {
 			if (isPostfinanceEcard(nombreMetodo)) {
 				//El código de seguridad sólo lo pide en el caso de "PostFinance Card" no en el de "PostFinance e-finance"
-				StepTM step = TestMaker.getCurrentStepInExecution();
-				step.setDescripcion("Introducir el código de seguridad " + codSeguridad + ". " + step.getDescripcion());
+				setStepDescription("Introducir el código de seguridad " + codSeguridad + ". Seleccionar el botón Aceptar");
 				pagePostfCodSeg.inputCodigoSeguridad(codSeguridad);
 			}
 				  

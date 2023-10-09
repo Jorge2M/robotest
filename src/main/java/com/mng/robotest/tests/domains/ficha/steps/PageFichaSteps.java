@@ -5,7 +5,6 @@ import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
@@ -343,7 +342,7 @@ public class PageFichaSteps extends StepBase {
 		description="Seleccionar <b>" + TAG_NAME_LINK + "</b>",
 		expected="Aparece un resultado de la búsqueda correcta")
 	public void selectBuscarEnTiendaButton() {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_NAME_LINK, pageFicha.getNameLinkBuscarEnTienda());
+		replaceStepDescription(TAG_NAME_LINK, pageFicha.getNameLinkBuscarEnTienda());
 		pageFicha.selectBuscarEnTiendaLink();
 		new ModalBuscadorTiendasSteps().validaBusquedaConResultados();
 	}

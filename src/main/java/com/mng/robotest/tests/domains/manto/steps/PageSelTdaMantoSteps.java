@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.manto.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.tests.domains.base.StepMantoBase;
 import com.mng.robotest.tests.domains.manto.pageobjects.PageMenusManto;
@@ -19,8 +18,8 @@ public class PageSelTdaMantoSteps extends StepMantoBase {
 		expected="Aparece la página de Menús",
 		saveErrorData=SaveWhen.Never)
 	public void selectTienda(String codigoAlmacen, String codigoPais) {
-		TiendaManto tienda = TiendaManto.getTienda(codigoAlmacen, codigoPais, app);
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_TIENDA, tienda.name());
+		var tienda = TiendaManto.getTienda(codigoAlmacen, codigoPais, app);
+		replaceStepDescription(TAG_TIENDA, tienda.name());
 		
 		var pageSelTda = new PageSelTda();
 		if (!pageSelTda.isPage()) {

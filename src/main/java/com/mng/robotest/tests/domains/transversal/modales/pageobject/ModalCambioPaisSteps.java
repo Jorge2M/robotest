@@ -2,8 +2,6 @@ package com.mng.robotest.tests.domains.transversal.modales.pageobject;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.transversal.home.steps.PageLandingSteps;
 import com.mng.robotest.tests.domains.transversal.prehome.pageobjects.PagePrehome;
@@ -29,12 +27,11 @@ public class ModalCambioPaisSteps extends StepBase {
 		description="Cambiamos al país <b>" + TAG_NOMBRE_PAIS + "</b> (" + TAG_CODIGO_PAIS + "), idioma <b>" + TAG_LITERAL_IDIOMA + "</b>", 
 		expected="Se accede a la shop de " + TAG_NOMBRE_PAIS + " en " + TAG_LITERAL_IDIOMA)
 	public void cambioPais(Pais newPais, IdiomaPais newIdioma) {
-		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(TAG_NOMBRE_PAIS, newPais.getNombrePais());
-		step.replaceInExpected(TAG_NOMBRE_PAIS, newPais.getNombrePais());
-		step.replaceInDescription(TAG_CODIGO_PAIS, newPais.getCodigoPais());
-		step.replaceInDescription(TAG_LITERAL_IDIOMA, newIdioma.getCodigo().getLiteral());
-		step.replaceInExpected(TAG_LITERAL_IDIOMA, newIdioma.getCodigo().getLiteral());
+		replaceStepDescription(TAG_NOMBRE_PAIS, newPais.getNombrePais());
+		replaceStepExpected(TAG_NOMBRE_PAIS, newPais.getNombrePais());
+		replaceStepDescription(TAG_CODIGO_PAIS, newPais.getCodigoPais());
+		replaceStepDescription(TAG_LITERAL_IDIOMA, newIdioma.getCodigo().getLiteral());
+		replaceStepExpected(TAG_LITERAL_IDIOMA, newIdioma.getCodigo().getLiteral());
 		
 		dataTest.setPais(newPais);
 		dataTest.setIdioma(newIdioma);

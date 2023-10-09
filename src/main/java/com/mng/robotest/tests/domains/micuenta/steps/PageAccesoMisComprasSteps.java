@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.micuenta.steps;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageAccesoMisCompras;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBlock;
@@ -68,7 +67,7 @@ public class PageAccesoMisComprasSteps extends StepBase {
 		expected="Aparece la página de detalle del pedido")
 	public void buscarPedidoForNoRegistrado(DataPedido dataPedido) {
 		String usuario = dataPedido.getEmailCheckout();
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_USUARIO, usuario);
+		replaceStepDescription(TAG_USUARIO, usuario);
 
 		pageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido()); 
 		pageAccesoMisCompras.clickBuscarPedidoBlockNo(); 

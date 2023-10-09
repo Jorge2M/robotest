@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.compra.payments.yandex.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.payments.yandex.pageobjects.PageYandexMoney;
 
@@ -19,7 +18,7 @@ public class PageYandexMoneySteps extends StepBase {
 		description="Accedemos a la URL de <b>YandexMoney</b>: " + TAG_URL_YANDEX, 
 		expected="Aparece la página de YandexMoney")
 	public void accessInNewTab(String tabTitle) throws Exception {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_YANDEX, PageYandexMoney.URL_ACCESS);
+		replaceStepDescription(TAG_URL_YANDEX, PageYandexMoney.URL_ACCESS);
 		pageYandexMoney.goToPageInNewTabV(tabTitle);
 		checkIsPage();
 	}

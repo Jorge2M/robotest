@@ -2,6 +2,8 @@ package com.mng.robotest.tests.domains.base;
 
 import java.time.LocalDate;
 
+import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.manto.steps.PageLoginMantoSteps;
 import com.mng.robotest.tests.domains.manto.steps.PageMenusMantoSteps;
 import com.mng.robotest.tests.domains.manto.steps.PagePedidosMantoSteps;
@@ -66,6 +68,22 @@ public abstract class StepMantoBase extends PageBase {
 		pagePedidosMantoSteps.setDataPedidoStep(pedidoData);
 		pagePedidosMantoSteps.setDataCliente(pedidoData);
 		pagePedidosMantoSteps.setTiendaFisicaListaPedidos(pedidoData);
+	}
+	
+	protected StepTM getCurrentStep() {
+		return TestMaker.getCurrentStepInExecution();
+	}
+	protected String getStepDescription() {
+		return getCurrentStep().getDescripcion();
+	}
+	protected void setStepDescription(String description) {
+		getCurrentStep().setDescripcion(description);
+	}
+	protected void replaceStepDescription(String oldChar, String newChar) {
+		getCurrentStep().replaceInDescription(oldChar, newChar);
+	}
+	protected void replaceStepExpected(String oldChar, String newChar) {
+		getCurrentStep().replaceInExpected(oldChar, newChar);
 	}
 	
 }

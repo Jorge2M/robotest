@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.buscador.steps;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -41,7 +40,7 @@ public class SecBuscadorSteps extends StepBase {
 		expected="Aparece la ficha del producto")
 	public void searchArticulo(Article article, List<FilterType> infoFilters) {
 		String filterValues = infoFilters.stream().map(FilterType::name).collect(Collectors.joining(","));
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_VALUES_FILTERS, filterValues);
+		replaceStepDescription(TAG_VALUES_FILTERS, filterValues);
 		searchArticuloCommon(article);
 	}
 	

@@ -1,8 +1,6 @@
 package com.mng.robotest.tests.domains.transversal.acceso.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageLoginVOTF;
 import com.mng.robotest.testslegacy.beans.AccesoVOTF;
@@ -25,16 +23,15 @@ public class PageLoginVOTFSteps extends StepBase {
 		String usuarioVOTF = accesoVOTF.getUsuario();
 		String passwordVOTF = accesoVOTF.getPassword();
 		
-		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(TAG_NOMBRE_PAIS, dataTest.getPais().getNombrePais());
-		step.replaceInDescription(TAG_USUARIO_VOTF, usuarioVOTF);
-		step.replaceInDescription(TAG_PASSWORD_VOTF, TAG_PASSWORD_VOTF);
+		replaceStepDescription(TAG_NOMBRE_PAIS, dataTest.getPais().getNombrePais());
+		replaceStepDescription(TAG_USUARIO_VOTF, usuarioVOTF);
+		replaceStepDescription(TAG_PASSWORD_VOTF, TAG_PASSWORD_VOTF);
 
 		int numIdiomas = dataTest.getPais().getListIdiomas().size();
 		if (numIdiomas > 1) {
-			step.setResExpected("Aparece la página de selección del idioma");
+			setStepExpected("Aparece la página de selección del idioma");
 		} else {
-			step.setResExpected("Aparece la página de selección de la línea");
+			setStepExpected("Aparece la página de selección de la línea");
 		}
 		
 		pageLoginVOTF.goToFromUrlAndSetTestABs();

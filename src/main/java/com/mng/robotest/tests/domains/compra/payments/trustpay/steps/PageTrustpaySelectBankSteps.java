@@ -9,7 +9,6 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.payments.trustpay.pageobjects.PageTrustpaySelectBank;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
@@ -60,7 +59,7 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 	public void selectTestBankAndPay(String importeTotal) {
 		List<String> listOfPosibleValues = new ArrayList<>();
 		listOfPosibleValues.addAll(Arrays.asList("TestPay", "Fio banka"));
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_POSSIBLE_BANKS, String.join(",", listOfPosibleValues));
+		replaceStepDescription(TAG_POSSIBLE_BANKS, String.join(",", listOfPosibleValues));
 
 		pageTrustpaySelectBank.selectBankThatContains(listOfPosibleValues);
 		pageTrustpaySelectBank.clickButtonToContinuePay();

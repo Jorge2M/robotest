@@ -4,7 +4,6 @@ import java.util.Map;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.conf.factories.entities.EgyptCity;
@@ -50,10 +49,10 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		expected="Se hace clickable el botón \"Continuar\"",
 		saveImagePage=SaveWhen.Always)
 	public Map<String, String> inputDataPorDefecto(String emailUsr, boolean inputDireccCharNoLatinos) {
-		Map<String, String> datosRegistro = 
+		var datosRegistro = 
 			page2IdentCheckout.inputDataPorDefectoSegunPais(emailUsr, inputDireccCharNoLatinos, false, channel);
 		
-		TestMaker.getCurrentStepInExecution().addDescriptionText(". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro)); 
+		setStepDescription(getStepDescription() + ". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro)); 
 		checkIsVisibleContiueButton(5);
 		return datosRegistro;
 	}

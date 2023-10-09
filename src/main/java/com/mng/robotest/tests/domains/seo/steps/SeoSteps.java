@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.seo.beans.Sitemapindex;
@@ -28,7 +27,7 @@ public class SeoSteps extends StepBase {
 	public void inputRobotsURLandValidate(String urlBaseTest) throws Exception {
 		URI uriBase = new URI(urlBaseTest);
 		String urlRobots = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "robots.txt";
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_URL_ROBOTS, urlRobots);
+		replaceStepDescription(TAG_URL_ROBOTS, urlRobots);
 		String urlSitemap = urlBaseTest.replace(uriBase.getPath(), "") + "/" + "sitemap.xml";
 
 		driver.get(urlRobots);

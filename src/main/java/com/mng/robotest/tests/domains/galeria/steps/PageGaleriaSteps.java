@@ -1,5 +1,6 @@
 package com.mng.robotest.tests.domains.galeria.steps;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,6 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
@@ -36,7 +36,6 @@ import com.mng.robotest.testslegacy.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 import com.mng.robotest.testslegacy.pageobject.utils.DataScroll;
 import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -201,7 +200,7 @@ public class PageGaleriaSteps extends StepBase {
 		if (pageToScroll>=PageGaleria.MAX_PAGE_TO_SCROLL) {
 			idPage = "última";
 		}
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_ID_PAGE, idPage);
+		replaceStepDescription(TAG_ID_PAGE, idPage);
 		int numArticulosInicio = pageGaleria.getNumArticulos();
 		datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll);
 
@@ -224,7 +223,7 @@ public class PageGaleriaSteps extends StepBase {
 			checksGeneric().imgsBroken().execute();
 		}
 		
-		datosScroll.setStep(TestMaker.getCurrentStepInExecution());
+		datosScroll.setStep(getCurrentStep());
 		return datosScroll;
 	}
 
@@ -366,17 +365,16 @@ public class PageGaleriaSteps extends StepBase {
 		expected="Se selecciona el color")
 	public String selecColorFromArtGaleriaStep(int numArtConColores, int posColor) {
 		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
-		PageObjTM.waitForPageLoaded(driver, 2);
+		waitForPageLoaded(driver, 2);
 
-		StepTM step = TestMaker.getCurrentStepInExecution();
-		WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
-		step.replaceInDescription(TAG_NOMBRE_1ER_ARTIC, pageGaleria.getNombreArticulo(articuloColores));
+		var articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
+		replaceStepExpected(TAG_NOMBRE_1ER_ARTIC, pageGaleria.getNombreArticulo(articuloColores));
 	   
-		WebElement colorToClick = pageGaleria.getColorArticulo(articuloColores, false/*selected*/, posColor);
-		step.replaceInDescription(TAG_PRECIO_1ER_ARTIC, pageGaleria.getPrecioArticulo(articuloColores));
+		var colorToClick = pageGaleria.getColorArticulo(articuloColores, false, posColor);
+		replaceStepExpected(TAG_PRECIO_1ER_ARTIC, pageGaleria.getPrecioArticulo(articuloColores));
 	   
 		String srcImg1erArt = pageGaleria.getImagenArticulo(articuloColores);
-		step.replaceInDescription(TAG_SRC_PNG_2O_COLOR, colorToClick.getAttribute("src"));
+		replaceStepDescription(TAG_SRC_PNG_2O_COLOR, colorToClick.getAttribute("src"));
 	   
 		click(colorToClick).exec();
 		waitMillis(100);
@@ -418,16 +416,17 @@ public class PageGaleriaSteps extends StepBase {
 		}
 
 		String slidersListStr = getStringSliderList(typeSliderList);
-		StepTM stepTM = TestMaker.getCurrentStepInExecution();
-		stepTM.replaceInDescription(TAG_SLIDER_LIST, slidersListStr);
+		replaceStepDescription(TAG_SLIDER_LIST, slidersListStr);
 
 		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax.
 		//En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
 		PageObjTM.waitForPageLoaded(driver, 2);
 		var pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		var articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHover(numArtConColores);
-		stepTM.replaceInDescription(TAG_NOMBRE_ART, pageGaleria.getNombreArticulo(articuloColores));
-		stepTM.replaceInExpected(TAG_NOMBRE_ART, pageGaleria.getNombreArticulo(articuloColores));
+		
+		replaceStepDescription(TAG_NOMBRE_ART, pageGaleria.getNombreArticulo(articuloColores));
+		replaceStepExpected(TAG_NOMBRE_ART, pageGaleria.getNombreArticulo(articuloColores));
+		
 		String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores);
 		pageGaleriaDesktop.clickSliders(articuloColores, typeSliderList);
 
@@ -480,10 +479,11 @@ public class PageGaleriaSteps extends StepBase {
 		WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
 		String nombre1erArt = pageGaleria.getNombreArticulo(articuloColores);
 		String precio1erArt = pageGaleria.getPrecioArticulo(articuloColores);
-		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(TAG_NUM_ART_CON_COLORES, String.valueOf(numArtConColores));
-		step.replaceInDescription(TAG_NOMBRE_1ER_ART, nombre1erArt);
-		step.replaceInDescription(TAG_PRECIO_1ER_ART, precio1erArt);
+		replaceStepDescription(TAG_NUM_ART_CON_COLORES, String.valueOf(numArtConColores));
+		replaceStepDescription(TAG_NOMBRE_1ER_ART, nombre1erArt);
+		replaceStepDescription(TAG_PRECIO_1ER_ART, precio1erArt);
+		replaceStepExpected(TAG_NOMBRE_1ER_ART, nombre1erArt);
+		replaceStepExpected(TAG_PRECIO_1ER_ART, precio1erArt);
 
 		pageGaleria.clickArticulo(articuloColores);
 		int seconds = 3;
@@ -534,13 +534,15 @@ public class PageGaleriaSteps extends StepBase {
 		return (pageGaleria.isVisibleArticleUntil(1, seconds));
 	}
 
+	private static final String TAG_POS_ICONS = "@TagPosIcons";
 	private static final String TAG_ESTADO_FINAL = "@TagEstadoFinal";
-	
 	@Step (
-		description="Seleccionamos (para <b>#{actionFav}</b>) los \"Hearth Icons\" asociados a los artículos con posiciones <b>#{posIconsToClick}</b>", 
+		description="Seleccionamos (para <b>#{actionFav}</b>) los \"Hearth Icons\" asociados a los artículos <b>" + TAG_POS_ICONS + "</b>", 
 		expected="Los \"Hearth Icons\" quedan " + TAG_ESTADO_FINAL)
 	public void clickArticlesHearthIcons(TypeActionFav actionFav, Integer... posIconsToClick) 
 			throws Exception {
+		replaceStepDescription(TAG_POS_ICONS, Arrays.toString(posIconsToClick));
+		
 		var listAddFav = pageGaleria.clickArticleHearthIcons(posIconsToClick);
 		String estadoFinal = "";
 		if (actionFav==TypeActionFav.MARCAR) {
@@ -551,26 +553,27 @@ public class PageGaleriaSteps extends StepBase {
 				dataTest.getDataFavoritos().removeFromLista(listAddFav);
 		}
 		
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_ESTADO_FINAL, estadoFinal);
+		replaceStepExpected(TAG_ESTADO_FINAL, estadoFinal);
 		checkIconosInCorrectState(actionFav, estadoFinal, posIconsToClick);
 	}
 
-	@Validation (
-		description="Quedan #{estadoFinal} los iconos asociados a los artículos con posiciones <b>#{posIconsSelected.toString()}</b>",
-		level=Warn)
-	private boolean checkIconosInCorrectState(TypeActionFav actionFav, String estadoFinal, Integer... posIconsSelected) {
-		return pageGaleria.iconsInCorrectState(actionFav, posIconsSelected);
+	@Validation
+	private ChecksTM checkIconosInCorrectState(TypeActionFav actionFav, String estadoFinal, Integer... posIconsSelected) {
+		var checks = ChecksTM.getNew();
+   		checks.add(
+			"Quedan " + estadoFinal + " los iconos asociados a los artículos con posiciones <b>" + Arrays.toString(posIconsSelected) + "</b>",
+   	   		pageGaleria.iconsInCorrectState(actionFav, posIconsSelected), Warn);
+		return checks;
 	}
 
 	public ListDataArticleGalery selectListadoXColumnasDesktop(
 			NumColumnas numColumnas, ListDataArticleGalery listArticlesGaleriaAnt){
 		selectListadoXColumnasDesktop(numColumnas);
-		ListDataArticleGalery listArticlesGaleriaAct = pageGaleria.getListDataArticles();
+		var listArticlesGaleriaAct = pageGaleria.getListDataArticles();
 		if (listArticlesGaleriaAnt!=null) {
 			int articulosComprobar = 20;
 			checkArticlesEqualsToPreviousGalery(articulosComprobar, listArticlesGaleriaAnt, listArticlesGaleriaAct, numColumnas);
 		}
-
 		return listArticlesGaleriaAct;
 	}
 

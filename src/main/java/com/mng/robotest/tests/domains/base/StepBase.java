@@ -8,6 +8,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.galeria.steps.SecFiltrosSteps;
 import com.mng.robotest.tests.domains.legal.legaltexts.LegalTextsPage;
 import com.mng.robotest.tests.domains.manto.tests.ManXXX;
@@ -112,6 +114,25 @@ public abstract class StepBase extends PageBase {
 	protected void checkPedidosManto(List<CheckPedido> listChecks, List<DataPedido> listPedidos) 
 			throws Exception {
 		new ManXXX(listChecks, listPedidos).execute();
+	}
+	
+	protected StepTM getCurrentStep() {
+		return TestMaker.getCurrentStepInExecution();
+	}
+	protected String getStepDescription() {
+		return getCurrentStep().getDescripcion();
+	}
+	protected void setStepDescription(String description) {
+		getCurrentStep().setDescripcion(description);
+	}
+	protected void setStepExpected(String expected) {
+		getCurrentStep().setResExpected(expected);
+	}	
+	protected void replaceStepDescription(String oldChar, String newChar) {
+		getCurrentStep().replaceInDescription(oldChar, newChar);
+	}
+	protected void replaceStepExpected(String oldChar, String newChar) {
+		getCurrentStep().replaceInExpected(oldChar, newChar);
 	}	
 	
 	public static BuilderChecksMango checksGeneric() {

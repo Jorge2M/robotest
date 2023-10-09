@@ -4,7 +4,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
@@ -43,10 +42,10 @@ public class SecSelectorPreciosSteps extends StepBase {
 			pageGaleriaDesktop.acceptFilters();
 		}
 		
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_MINIMO, String.valueOf(dataFilter.minimoFinal));
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_MAXIMO, String.valueOf(dataFilter.maximoFinal));	
+		replaceStepDescription(TAG_MINIMO, String.valueOf(dataFilter.minimoFinal));
+		replaceStepDescription(TAG_MAXIMO, String.valueOf(dataFilter.maximoFinal));
+		
 		checkResultSelectFiltro(dataFilter);
-
 		checksDefault();
 	}
 	

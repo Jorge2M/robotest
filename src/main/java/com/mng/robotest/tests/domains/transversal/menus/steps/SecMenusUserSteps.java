@@ -2,10 +2,8 @@ package com.mng.robotest.tests.domains.transversal.menus.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.*;
@@ -158,8 +156,7 @@ public class SecMenusUserSteps extends StepBase {
 		int numberPoints = new PageMangoLikesYouSteps().checkIsPageOk().getNumberPoints();
 		checksDefault();
 		
-		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(TAG_POINTS, String.valueOf(numberPoints));
+		replaceStepDescription(TAG_POINTS, String.valueOf(numberPoints));
 		return (numberPoints);
 	}
 

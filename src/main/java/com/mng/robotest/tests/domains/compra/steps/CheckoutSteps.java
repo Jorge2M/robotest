@@ -5,12 +5,10 @@ import java.util.StringTokenizer;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.chequeregalo.beans.ChequeRegalo;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
@@ -161,7 +159,7 @@ public class CheckoutSteps extends StepBase {
 		description="Si existen y están plegados, desplegamos el bloque con los métodos de pago", 
 		expected="Aparecen los métodos de pagos asociados al país")
 	public void despliegaYValidaMetodosPago(boolean isEmpl) {
-		TestMaker.getCurrentStepInExecution().addExpectedText(": " + dataTest.getPais().getStringPagosTest(app, isEmpl));
+		setStepDescription(getStepDescription() + ": " + dataTest.getPais().getStringPagosTest(app, isEmpl));
 		pageCheckoutWrapper.despliegaMetodosPago();
 		validaMetodosPagoDisponibles(isEmpl);
 	}
@@ -232,9 +230,7 @@ public class CheckoutSteps extends StepBase {
 	public boolean forceClickIconoPagoAndWait(Pago pago, boolean pintaNombrePago) {
 		if (pintaNombrePago) {
 			String pintaPago = "<b style=\"color:blue;\">" + pago.getNombre(channel, app) + "</b>:"; 
-			StepTM step = TestMaker.getCurrentStepInExecution();
-			String newDescription = pintaPago + step.getDescripcion();
-			step.setDescripcion(newDescription);
+			setStepDescription(pintaPago + getStepDescription());
 		}
 
 		try {
@@ -287,9 +283,8 @@ public class CheckoutSteps extends StepBase {
 		expected="Aparece la página de resultado OK")
 	public void inputDataTrjAndConfirmPago(DataPago dataPago) {
 		Pago pago = dataPago.getDataPedido().getPago();
-		StepTM step = TestMaker.getCurrentStepInExecution();
-		step.replaceInDescription(TAG_TIPO_TARJ, pago.getTipotarj());
-		step.replaceInDescription(TAG_NUM_TARJ, pago.getNumtarj());
+		replaceStepDescription(TAG_TIPO_TARJ, pago.getTipotarj());
+		replaceStepDescription(TAG_NUM_TARJ, pago.getNumtarj());
 	   
 		if (pago.getNumtarj()!=null && "".compareTo(pago.getNumtarj())!=0) {
 			pageCheckoutWrapper.inputNumberPci(pago.getNumtarj());
@@ -373,7 +368,7 @@ public class CheckoutSteps extends StepBase {
 		description="Introducir la tarjeta de empleado " + TAG_TARJETA + " y pulsar el botón \"Aplicar\"", 
 		expected="Aparecen los datos para la introducción del 1er apellido y el nif")
 	public void inputTarjetaEmplEnCodPromo(Pais pais, AccesoEmpl accesoEmpl) {
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_TARJETA, accesoEmpl.getTarjeta());
+		replaceStepDescription(TAG_TARJETA, accesoEmpl.getTarjeta());
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(accesoEmpl.getTarjeta());
 		checkAfterInputTarjetaEmpleado(pais, accesoEmpl);
 		checksDefault();
@@ -411,12 +406,11 @@ public class CheckoutSteps extends StepBase {
 		description="Introducir el primer apellido " + TAG_1ER_APELLIDO + " y pulsar el botón \"Guardar\"", 
 		expected="Se aplican los descuentos correctamente")
 	public void inputDataEmplEnPromoAndAccept(AccesoEmpl accesoEmpl) {
-		StepTM step = TestMaker.getCurrentStepInExecution();
 		String primerApellido = (new StringTokenizer(accesoEmpl.getNombre(), " ")).nextToken();
-		step.replaceInDescription(TAG_1ER_APELLIDO, primerApellido);
+		replaceStepDescription(TAG_1ER_APELLIDO, primerApellido);
 		
 		if (accesoEmpl.getNif()!=null) {
-			step.addRightDescriptionText("Introducir el NIF del usuario " + accesoEmpl.getNif() + ". ");
+			getCurrentStep().addRightDescriptionText("Introducir el NIF del usuario " + accesoEmpl.getNif() + ". ");
 			pageCheckoutWrapper.inputDNIPromoEmpl(accesoEmpl.getNif());
 		}
 		pageCheckoutWrapper.inputApellidoPromoEmpl(primerApellido);
@@ -446,7 +440,7 @@ public class CheckoutSteps extends StepBase {
 		if (!isPRO()) {
 			nombreBanco = "Test Issuer";
 		}
-		TestMaker.getCurrentStepInExecution().replaceInDescription(TAG_NOMBRE_BANCO, nombreBanco);
+		replaceStepDescription(TAG_NOMBRE_BANCO, nombreBanco);
 			
 		pageCheckoutWrapper.selectBancoEPS(nombreBanco);
 		checkIsVisibleBank(nombreBanco);
