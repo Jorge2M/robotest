@@ -15,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.ListSizesArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecColoresArticuloDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktopKondo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery;
@@ -35,6 +36,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	private final SecSubMenusGallery secSubMenusGallery = SecSubMenusGallery.make(app, dataTest.getPais());
+	private final SecTallasArticulo secTallas = SecTallasArticulo.make(app, dataTest.getPais(), getXPathArticulo());
 	private final SecColoresArticuloDesktop secColores = new SecColoresArticuloDesktop();
 	private final SecBannerHeadGallery secBannerHead = new SecBannerHeadGallery();
 	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
@@ -526,27 +528,17 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	@Override
 	public ArticuloScreen selectTallaAvailableArticle(int posArticulo) throws Exception {
-		//Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
 		waitLoadPage();
-		//if (!isVisibleArticleCapaTallasUntil(posArticulo, 1)) {
-			showTallasArticulo(posArticulo);
-		//}
-		
-		String xpathTalla = secTallas.getXPathArticleTallaAvailable(posArticulo);
-		if (state(Visible, xpathTalla).check()) {
-			var tallaToSelect = getElement(xpathTalla);
-			var articulo = getArticuloObject(posArticulo);
-			articulo.setTalla(Talla.fromLabel(tallaToSelect.getText()));
-			tallaToSelect.click();
-			return articulo;
-		}
-		return null;
+		showTallasArticulo(posArticulo);
+		Talla talla = secTallas.selectTallaAvailableArticle(posArticulo);
+		var articulo = getArticuloObject(posArticulo);
+		articulo.setTalla(talla);
+		return articulo;
 	}
 
 	@Override
 	public void selectTallaArticleNotAvalaible() {
-		String xpathTallaNoDipo = secTallas.getXPathArticleTallaNotAvailable();
-		click(xpathTallaNoDipo).exec();
+		secTallas.selectTallaArticleNotAvalaible();
 	}
 
 	public boolean isVisibleAnyArticle() {

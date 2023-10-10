@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArticulo.TipoPrecio;
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.data.Talla;
@@ -17,6 +18,8 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageGaleriaDevice extends PageGaleria {
+	
+	private final SecTallasArticulo secTallas = SecTallasArticulo.make(app, dataTest.getPais(), getXPathArticulo());
 	
 	private static final String TAG_ID_COLOR = "@TagIdColor";
 	private static final String TAG_FLAG_SELECTED = "@TagFlagSelected";
@@ -330,9 +333,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	public void selectTallaArticleNotAvalaible() {
 		for (int i=1; i<20; i++) {
 			showTallasArticulo(i);
-			String xpathTallaNoDispo = secTallas.getXPathArticleTallaNotAvailable();
-			if (state(Visible, xpathTallaNoDispo).check()) {
-				click(xpathTallaNoDispo).exec();
+			if (secTallas.selectTallaNotAvailableIfVisible()) {
 				break;
 			}
 			unshowTallasArticulo();

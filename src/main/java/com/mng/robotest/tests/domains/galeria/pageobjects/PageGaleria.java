@@ -20,7 +20,6 @@ import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArticulo;
-import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.steps.LocationArticle;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
@@ -45,17 +44,14 @@ public abstract class PageGaleria extends PageBase {
 
 	protected final From from;
 	protected final SecPreciosArticulo secPrecios = new SecPreciosArticulo();
-	protected final SecTallasArticulo secTallas;
 
 	protected PageGaleria() {
 		super();
 		this.from = From.MENU;
-		this.secTallas = new SecTallasArticulo(getXPathArticulo());
 	}
 
 	protected PageGaleria(From from) {
 		this.from = from;
-		this.secTallas = new SecTallasArticulo(getXPathArticulo());
 	}
 
 	protected abstract String getXPathArticulo(); 

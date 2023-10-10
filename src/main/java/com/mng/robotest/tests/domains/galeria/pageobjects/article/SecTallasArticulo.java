@@ -1,69 +1,43 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.article;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.testslegacy.beans.Pais;
+import com.mng.robotest.testslegacy.data.Talla;
 
+public abstract class SecTallasArticulo extends PageBase {
 
-public class SecTallasArticulo extends PageBase {
+	public abstract boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds);
+	public abstract Talla selectTallaAvailableArticle(int posArticulo) throws Exception;
+	public abstract boolean isVisibleTallaNotAvailable();
+	public abstract void selectTallaArticleNotAvalaible();
+	public abstract void bringSizesBack(WebElement articulo);
 	
-	private final String xpathArticulo;
-	private final String xpathCapaTallasArticuloShop = "//div[@class[contains(.,'sizes-container')]]";
-	private static final String XPATH_TALLA_AVAILABLE = "//button[@data-testid[contains(.,'size.available')]]";
-	private static final String XPATH_TALLA_UNAVAILABLE =	"//button[@data-testid[contains(.,'size.unavailable')]]";
-	private static final String CLASS_CAPA_ACTIVE_SHOP = "@class[contains(.,'active')]";
+	protected final String xpathArticulo;
+	
+	public static SecTallasArticulo make(AppEcom app, Pais pais, String xpathArticulo) {
+		if (pais.isGaleriaKondo(app)) {
+			return new SecTallasArticuloKondo(xpathArticulo);
+		}
+		return new SecTallasArticuloNormal(xpathArticulo);
+	}
 	
 	public SecTallasArticulo(String xpathArticulo) {
 		this.xpathArticulo = xpathArticulo;
 	}
 	
-	private String getXPathArticleCapaInferiorDesktop(int posArticulo) {
-		String xpathArticuloX = "(" + xpathArticulo + ")[" + posArticulo + "]";
-		return xpathArticuloX + xpathCapaTallasArticuloShop;
+	protected String getXPathArticulo(int position) {
+		return "(" + xpathArticulo + ")[" + position + "]";
 	}
-
-	public String getXPathFirstCapaAnadirOutlet(int posArticulo, boolean capaVisible) {
-		String xpathCapaAdd = getXPathArticleCapaInferiorDesktop(posArticulo);
-		String classSegunVisible = "not(@class[contains(.,'active')])";
-		if (capaVisible) {
-			classSegunVisible = "@class[contains(.,'active')]";
+	
+	public boolean selectTallaNotAvailableIfVisible() {
+		if (isVisibleTallaNotAvailable()) {
+			selectTallaArticleNotAvalaible();
+			return true;
 		}
-		return (xpathCapaAdd + "//p[@class[contains(.,'first-step')] and " + classSegunVisible + "]");
-	}
-	
-	public String getXPathCapaTallas(int posArticulo, boolean capaVisible) {
-		String xpathCapaAdd = getXPathArticleCapaInferiorDesktop(posArticulo);
-		String classCapaActive = CLASS_CAPA_ACTIVE_SHOP;
-		if (capaVisible) {
-			return xpathCapaAdd + "//self::div[" + classCapaActive + "]";
-		}
-		return xpathCapaAdd + "//self::div[not(" + classCapaActive + ")]"; 
+		return false;
 	}
 
-	public String getXPathArticleTallaAvailable(int posArticulo) {
-		String xpathCapaTallas = getXPathCapaTallas(posArticulo, true);
-		return xpathCapaTallas + XPATH_TALLA_AVAILABLE;
-	}
-
-	public String getXPathArticleTallaNotAvailable() {
-		return XPATH_TALLA_UNAVAILABLE;
-	}
-	
-	public String getXPathArticleTallaNotAvailable(int posArticulo, int posTalla) {
-		String xpathCapaTallas = getXPathCapaTallas(posArticulo, true);
-		return "(" + xpathCapaTallas + XPATH_TALLA_UNAVAILABLE + ")[" + posTalla + "]";
-	}	
-
-	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
-		String xpathCapa = getXPathCapaTallas(posArticulo, true);
-		return (state(Visible, xpathCapa).wait(seconds).check());
-	}
-	
-	public void bringSizesBack(WebElement articulo) {
-		WebElement sizes = articulo.findElement(By.xpath("." + xpathCapaTallasArticuloShop));
-		bringElement(sizes, BringTo.BACKGROUND);
-	}
 }
