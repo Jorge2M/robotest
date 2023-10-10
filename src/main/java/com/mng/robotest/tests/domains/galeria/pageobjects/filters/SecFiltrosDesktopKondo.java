@@ -38,15 +38,15 @@ public class SecFiltrosDesktopKondo extends SecFiltrosDesktop {
 	@Override
 	String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) {
 		return 
-				"//*[@data-testid='plp.filter-group.order.nav']" + 
-				"//input[@id='" + ordenacion.getValue() + "']";
+			"//*[@data-testid='plp.filter-group.order.nav']" + 
+			"//input[@id='" + ordenacion.getValue() + "']";
 	}
 	
 	@Override
 	String getXPathLinkColor(Color color) {
 		return 
-				"//label[@for[contains(.,'multiSelectfilter_GroupsColors']) and " + 
-				"text()[contains(.,'" + color.getNameFiltro() + "')]]";
+			"//label[@for[contains(.,'colorGroups')]]" + 
+			"//span[text()[contains(.,'" + color.getNameFiltro() + "')]]";
 	}
 
 }

@@ -25,10 +25,7 @@ public interface SecFiltros {
 	public static SecFiltros make(Channel channel, AppEcom app, Pais pais) {
 		switch (channel) {
 		case desktop:
-			if (pais.isGaleriaKondo(app)) {
-				return new SecFiltrosDesktopNormal();
-			}
-			return new SecFiltrosDesktopNormal();
+			return SecFiltrosDesktop.make(app, pais);
 		case mobile, tablet:
 			if (app==AppEcom.outlet && channel==Channel.tablet) {
 				return new SecFiltrosDesktopKondo();
