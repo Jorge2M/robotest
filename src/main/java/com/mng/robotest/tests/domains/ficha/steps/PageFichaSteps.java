@@ -18,7 +18,6 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.SecDataProduct.ColorType
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecSliders.Slider;
-import com.mng.robotest.tests.domains.galeria.steps.LocationArticle;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
@@ -386,11 +385,11 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation
-	public ChecksTM validaPrevNext(LocationArticle locationArt) {
+	public ChecksTM validaPrevNext(int position) {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		boolean isVisiblePrevLink = pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.PREV, seconds);
-		if (locationArt.isFirstInGalery()) {
+		if (position==1) {
 			checks.add(
 					"No es visible el link <b>Prev</b> " + getLitSecondsWait(seconds),
 					!isVisiblePrevLink, Warn);
@@ -410,15 +409,14 @@ public class PageFichaSteps extends StepBase {
 	@Step (
 		description="Seleccionamos el link #{productNav}</b>",
 		expected="Aparece una página de ficha correcta")
-	public void selectLinkNavigation(ProductNav productNav, String refProductOrigin) {
+	public void selectLinkNavigation(ProductNav productNav, String refProductOrigin, int position) {
 		pageFicha.getSecDataProduct().selectLinkNavigation(productNav);
 		if (productNav==ProductNav.PREV) {
 			checkIsFichaArtDisponible(refProductOrigin, 3);
 		}
 
 		if (productNav==ProductNav.NEXT) {
-			LocationArticle location2onArticle = LocationArticle.getInstanceInCatalog(2);
-			validaPrevNext(location2onArticle);
+			validaPrevNext(position + 1);
 		}
 	}
 

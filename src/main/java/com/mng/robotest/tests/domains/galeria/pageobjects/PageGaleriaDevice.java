@@ -14,6 +14,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArti
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 import com.github.jorge2m.testmaker.conf.Channel;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -26,6 +27,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	//TODO adaptar React (pendiente petición a Jesús Bermúdez 3-Marzo-2021)
 	private static final String XPATH_ARTICULO = "//li[@data-testid[contains(.,'plp.product')]]";
+	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
 
 	private static final String XPATH_IMG_RELATIVE_ARTICLE = 
 		"//img[@src and " + 
@@ -60,6 +62,11 @@ public class PageGaleriaDevice extends PageGaleria {
 		return XPATH_ARTICULO;
 	}
 	
+	@Override
+	protected String getXPathNombreRelativeToArticle() {
+		return XPATH_NOMBRE_RELATIVE_TO_ARTICLE;
+	}	
+	
 	String getXPathColoresArticle() {
 		if (channel==Channel.tablet && app==AppEcom.outlet) {
 			return XPATH_COLORES_ARTICULO_OUTLET_TABLET;
@@ -85,11 +92,6 @@ public class PageGaleriaDevice extends PageGaleria {
 		return (
 			getXPathColoresArticle() + 
 			"//self::*[@class[contains(.,'" + TAG_FLAG_SELECTED + "')]]//img");
-	}
-	
-	@Override
-	public String getXPathLinkRelativeToArticle() {
-		return "//a";
 	}
 	
 	@Override
@@ -195,7 +197,8 @@ public class PageGaleriaDevice extends PageGaleria {
 
 	@Override
 	public String getNombreArticulo(WebElement articulo) {
-		return (articulo.findElement(By.xpath("." + XPATH_NOMBRE_RELATIVE_TO_ARTICLE)).getText());
+		String xpath = getXPathNombreRelativeToArticle();
+		return articulo.findElement(By.xpath("." + xpath)).getText();
 	}
  
 	@Override
@@ -346,6 +349,27 @@ public class PageGaleriaDevice extends PageGaleria {
 		state(Clickable, hearthIcon).wait(1).check();
 		hearthIcon.click();
 	}
+	
+	@Override
+	public String getRefArticulo(WebElement articulo) {
+		int lengthReferencia = 8;
+		String id = getRefFromId(articulo);
+		if ("".compareTo(id)!=0) {
+			if (id.length()>lengthReferencia) {
+				return (id.substring(0, lengthReferencia));
+			}
+			return id;
+		}
+
+		//Para el caso TestAB-1 se ejecutará este caso para conseguir los atributos del artículo
+		String href = articulo.findElement(By.xpath(XPATH_LINK_RELATIVE_TO_ARTICLE)).getAttribute("href");
+		return UtilsTest.getReferenciaFromHref(href);
+	}	
+	
+	private String getRefFromId(WebElement articulo) {
+		String id = articulo.getAttribute("id");
+		return (id.replace("product-key-id-", ""));
+	}	
 	
 	private List<WebElement> getListArticulosFromPagina(int numPagina) {
 		moveToPagina(numPagina);

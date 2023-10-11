@@ -47,7 +47,7 @@ public interface SecFiltros {
 			return false;
 		}
 			
-		List<String> listCodColorsInUrl = getCodColoresFromListCommaSeparated(matcher.group(1));
+		var listCodColorsInUrl = getCodColoresFromListCommaSeparated(matcher.group(1));
 		for (Color color : listColorsToValidate) {
 			if (!listCodColorsInUrl.contains(color.getCodigoColor())) {
 				return false;

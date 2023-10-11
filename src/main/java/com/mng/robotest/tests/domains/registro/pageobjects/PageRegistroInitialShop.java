@@ -96,7 +96,7 @@ public class PageRegistroInitialShop extends PageBase {
 		return isPage(0);
 	}
 	public boolean isPage(int seconds) {
-		return state(Present, XPATH_INPUT_EMAIL).wait(seconds).check();
+		return state(Visible, XPATH_CHECKBOX_GIVE_PROMOTIONS).wait(seconds).check();
 	}
 	
 	public void inputEmail(String email) {

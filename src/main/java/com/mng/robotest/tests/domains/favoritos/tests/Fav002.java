@@ -4,7 +4,6 @@ import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
-import com.mng.robotest.tests.domains.galeria.steps.LocationArticle;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.MenuWeb;
@@ -56,8 +55,7 @@ public class Fav002 extends TestBase {
 					.linea(HOME)
 					.group(BANO).build());
 		}
-		var article1 = LocationArticle.getInstanceInCatalog(1);
-		pageGaleriaSteps.selectArticulo(article1);
+		pageGaleriaSteps.selectArticulo(1);
 	}	
 
 	private void clickFavoritesInFicha() {

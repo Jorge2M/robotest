@@ -51,4 +51,9 @@ public class SecFiltrosDesktopNormal extends SecFiltrosDesktop {
 			"text()[contains(.,'" + color.getNameFiltro() + "')]]";		
 	}	
 	
+	@Override
+	String getXPathLabel(String label) {
+		//Pending
+		return "";
+	}	
 }

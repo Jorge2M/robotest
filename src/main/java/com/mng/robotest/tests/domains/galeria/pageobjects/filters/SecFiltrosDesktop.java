@@ -22,6 +22,7 @@ public abstract class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	abstract String getXPathLinkCollection();
 	abstract String getXPathCapaFilters();
 	abstract String getXPathMostrarArticulos();
+	abstract String getXPathLabel(String label);
 	
 	public static SecFiltrosDesktop make(AppEcom app, Pais pais) {
 		if (pais.isGaleriaKondo(app)) {
@@ -133,6 +134,10 @@ public abstract class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
 		secSelectorPreciosDesktop.clickMinAndMax(margenPixelsLeft, margenPixelsRight);
 	}
+
+	public boolean isVisibleLabel(String label) {
+		return state(Visible, getXPathLabel(label)).check();
+	}	
 	
 	private boolean isFiltersShopVisible(int seconds) {
 		return state(Visible, getXPathCapaFilters()).wait(seconds).check();

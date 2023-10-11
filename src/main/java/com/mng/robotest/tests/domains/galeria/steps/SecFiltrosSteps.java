@@ -4,10 +4,12 @@ import java.util.List;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktopKondo;
 import com.mng.robotest.testslegacy.data.Color;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -24,8 +26,8 @@ public class SecFiltrosSteps extends StepBase {
 		saveNettraffic=SaveWhen.Always)
 	public int selectFiltroColores(List<Color> colorsToSelect, String litMenu) {
 		replaceStepDescription(
-				TAG_LIT_COLORS_TO_SELECT, 
-				Color.getListNamesFiltros(colorsToSelect).toString());
+			TAG_LIT_COLORS_TO_SELECT, 
+			Color.getListNamesFiltros(colorsToSelect).toString());
 		
 		int numArticulos1page = secFiltros.selecFiltroColoresAndReturnNumArticles(colorsToSelect);			
 		checkAfterSelectFiltroColores(colorsToSelect, litMenu, numArticulos1page);
@@ -37,12 +39,19 @@ public class SecFiltrosSteps extends StepBase {
 			List<Color> colorsSelected, String litMenu, int numArticulos1page) {
 		
 		var checks = ChecksTM.getNew();
-		List<String> listCodColors = Color.getListCodigosColor(colorsSelected);
-		String currentUrl = driver.getCurrentUrl();
-	 	checks.add(
-			"En la URL (*) aparece el parámetro c= que contiene los códigos de color <b>" + 
-			listCodColors.toString() + "</b> (*) " + currentUrl + "<br>",
-			SecFiltros.checkUrlAfterFilterContainsColors(colorsSelected, currentUrl), Warn);		
+		if (dataTest.getPais().isGaleriaKondo(app) && 
+			channel==Channel.desktop) {
+		 	checks.add(
+				"Aparecen los tags de color <b>" + colorsSelected.toString() + "</b>",
+				((SecFiltrosDesktopKondo)secFiltros).isVisibleColorTags(colorsSelected), Defect);			
+		} else {
+			String currentUrl = driver.getCurrentUrl();
+			var listCodColors = Color.getListCodigosColor(colorsSelected);
+		 	checks.add(
+				"En la URL (*) aparece el parámetro c= que contiene los códigos de color <b>" + 
+				listCodColors.toString() + "</b> (*) " + currentUrl + "<br>",
+				SecFiltros.checkUrlAfterFilterContainsColors(colorsSelected, currentUrl), Warn);		
+		}
 		
 	 	checks.add(
 			"Aparece una pantalla en la que el title contiene \"" + litMenu.toUpperCase(),

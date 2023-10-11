@@ -97,11 +97,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	private static final String XPATH_ICONO_UP_GALERY = "//div[@id='scroll-top-step' or @id='iconFillUp']";
 	private static final String XPATH_HEADER_ARTICLES = "//div[@id[contains(.,'title')]]/h1";
 
-	@Override
-	public String getXPathLinkRelativeToArticle() {
-		return XPATH_NOMBRE_RELATIVE_TO_ARTICLE;
-	}
-
 	public boolean isPage() {
 		String xpath = "//div[@class[contains(.,'container-fluid catalog')]]";
 		return state(Present, xpath).check();
@@ -314,16 +309,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	@Override
-	public String getNombreArticulo(WebElement articulo) {
-		String xpathNameArticle = "." + XPATH_NOMBRE_RELATIVE_TO_ARTICLE;
-		if (state(Visible, articulo).by(By.xpath(xpathNameArticle)).check()) {
-			return articulo.findElement(By.xpath(xpathNameArticle)).getText();
-		} else {
-			return "Not Found"; 
-		}
-	}
-
-	@Override
 	public boolean isArticleRebajado(WebElement articulo) {
 		return (secPrecios.isArticleRebajado(articulo));
 	}
@@ -333,19 +318,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return (secPrecios.getPrecioDefinitivo(articulo));
 	}	
 	
-	/**
-	 * @param numArticulo: posición en la galería del artículo
-	 * @return la referencia de un artículo
-	 */
-	@Override
-	public String getRefColorArticulo(WebElement articulo) {
-		int lengthReferencia = 10;
-		String id = getRefFromId(articulo);
-		if (id.length()>lengthReferencia) {
-			return (id.substring(0, lengthReferencia));
-		}
-		return id;
-	}
+
 	
 	/**
 	 * @return número de doble tamaño de la galería

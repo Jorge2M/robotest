@@ -57,14 +57,14 @@ public class PageGaleriaSteps extends StepBase {
 	}
 
 	@Step (
-		description="Seleccionamos el artículo #{locationArt} en una pestaña aparte", 
+		description="Seleccionamos el artículo #{position} en una pestaña aparte", 
 		expected="Aparece la ficha del artículo seleccionado en una pestaña aparte")
-	public void selectArticuloEnPestanyaAndBack(LocationArticle locationArt) {
+	public void selectArticuloEnPestanyaAndBack(int position) {
 		String galeryWindowHandle = driver.getWindowHandle();
 		var datosArticulo = new DataFichaArt();
 
 		//Almacenamos el nombre del artículo y su referencia
-		WebElement articulo = pageGaleria.getArticulo(locationArt);
+		var articulo = pageGaleria.getArticulo(position);
 		datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
@@ -80,21 +80,21 @@ public class PageGaleriaSteps extends StepBase {
 	}
 
 	@Step (
-		description="Seleccionar el artículo #{locationArt}", 
+		description="Seleccionar el artículo #{position}", 
 		expected="Aparece la ficha del artículo seleccionado")
-	public DataFichaArt selectArticulo(LocationArticle locationArt) {
+	public DataFichaArt selectArticulo(int position) {
 		var datosArticulo = new DataFichaArt();
 		String urlGaleria = driver.getCurrentUrl();
 		
 		//Almacenamos el nombre del artículo y su referencia
-		var articulo = pageGaleria.getArticulo(locationArt);
+		var articulo = pageGaleria.getArticulo(position);
 		datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
 		pageGaleria.clickArticulo(articulo);
 		var pageFichaSteps = new PageFichaSteps();
 		pageFichaSteps.checkDetallesProducto(datosArticulo);
-		pageFichaSteps.validaPrevNext(locationArt);
+		pageFichaSteps.validaPrevNext(position);
 
 		pageFichaSteps.validaBreadCrumbFicha(urlGaleria);
 		
@@ -207,8 +207,10 @@ public class PageGaleriaSteps extends StepBase {
 		if (pageToScroll>=PageGaleria.MAX_PAGE_TO_SCROLL) {
 			checkVisibilityFooter(pageToScroll, app);
 		}
-		if (pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
-			checkAreMoreArticlesThatInitially(datosScroll.getArticulosMostrados(), numArticulosInicio);
+		if (!dataTest.getPais().isGaleriaKondo(app)) {
+			if (pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
+				checkAreMoreArticlesThatInitially(datosScroll.getArticulosMostrados(), numArticulosInicio);
+			}
 		}
 		if (dataForScroll.getOrdenacionExpected()!=RECOMENDADOS) {
 			checkArticlesOrdered(dataForScroll.getOrdenacionExpected());

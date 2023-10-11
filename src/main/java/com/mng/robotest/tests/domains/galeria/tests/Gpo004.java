@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.steps.DataForScrollStep;
-import com.mng.robotest.tests.domains.galeria.steps.LocationArticle;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.pageobject.utils.DataScroll;
@@ -56,6 +55,8 @@ public class Gpo004 extends TestBase {
 		} else {
 			colorsToFilter.add(MARRON);
 			colorsToFilter.add(BEIGE);
+			colorsToFilter.add(VERDE);
+			colorsToFilter.add(ROSA);
 			filterGaleryByColors(ABRIGOS_SHE, colorsToFilter);
 		}
 	}
@@ -66,15 +67,13 @@ public class Gpo004 extends TestBase {
 	}
 
 	private void selectArticleInOtherLabel() {
-		LocationArticle loc1rsArticle1rstPage = LocationArticle.getInstanceInPage(2, 1);
-		pageGaleriaSteps.selectArticuloEnPestanyaAndBack(loc1rsArticle1rstPage);
+		pageGaleriaSteps.selectArticuloEnPestanyaAndBack(40);
 	}
 
 	private int scrollToLastAndSelectArticle() throws Exception {
 		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
 		DataScroll datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
-		LocationArticle loc1rsArticleLastPage = LocationArticle.getInstanceInPage(datosScrollFinalGaleria.getPaginaFinal(), 1);
-		pageGaleriaSteps.selectArticulo(loc1rsArticleLastPage);
+		pageGaleriaSteps.selectArticulo(121);
 		return datosScrollFinalGaleria.getArticulosTotalesPagina();
 	}
 

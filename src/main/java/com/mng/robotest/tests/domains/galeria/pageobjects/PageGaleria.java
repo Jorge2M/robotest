@@ -21,7 +21,6 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.Typ
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
-import com.mng.robotest.tests.domains.galeria.steps.LocationArticle;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -30,7 +29,6 @@ import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.testslegacy.pageobject.utils.DataScroll;
 import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
-import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.AttributeArticle.*;
@@ -54,8 +52,8 @@ public abstract class PageGaleria extends PageBase {
 		this.from = from;
 	}
 
-	protected abstract String getXPathArticulo(); 
-	protected abstract String getXPathLinkRelativeToArticle();
+	protected abstract String getXPathArticulo();
+	protected abstract String getXPathNombreRelativeToArticle();
 	
 	public abstract int getLayoutNumColumnas();
 	public abstract WebElement getArticuloConVariedadColoresAndHover(int numArticulo);
@@ -71,6 +69,7 @@ public abstract class PageGaleria extends PageBase {
 	public abstract List<ArticuloScreen> clickArticleHearthIcons(Integer... posIconsToClick) throws Exception;
 	public abstract boolean isArticleWithHearthIconPresentUntil(int posArticle, int seconds);
 	public abstract void clickHearhIcon(int posArticle) throws Exception;
+	public abstract String getRefArticulo(WebElement articulo);
 	public abstract String getRefColorArticulo(WebElement articulo);
 	public abstract boolean backTo1erArticulo() throws InterruptedException;
 	abstract String getXPathPagina(int pagina);
@@ -100,14 +99,6 @@ public abstract class PageGaleria extends PageBase {
 			LabelArticle.NEW_NOW,
 			LabelArticle.NEW_COLLECTION);
 
-	static final String CLASS_PRODUCT_ITEM =
-			"@class[contains(.,'productList__name')] or " +
-					"@class[contains(.,'product-list-name')] or " +
-					"@class='product-list-info-name' or " +
-					"@class[contains(.,'_1P8s4')] or " + //TODO (Outlet) a la espera que Sergio Campillo proporcione un identificador válido
-					"@class[contains(.,'product-name')]";
-	
-	protected static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[" + CLASS_PRODUCT_ITEM + "]";
 	protected static final String XPATH_LINK_RELATIVE_TO_ARTICLE = ".//a[@class='product-link']";
 	protected static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE = "//*[@data-testid='button-icon']";
 
@@ -288,42 +279,12 @@ public abstract class PageGaleria extends PageBase {
 		return getElements(getXPathArticulo());
 	}
 
-	public WebElement getArticulo(LocationArticle locationArt) {
-		switch (locationArt.accessFrom) {
-			case INIT_CATALOG:
-				return (getArticulo(locationArt.numArticle));
-			case INIT_PAGE:
-			default:
-				return (getArticleFromPagina(locationArt.numPage, locationArt.numArticle));
-		}
-	}
-
 	public WebElement getArticulo(int numArticulo) {
 		var listArticulos = getArticulos();
 		if (listArticulos.size()>=numArticulo) {
 			return (listArticulos.get(numArticulo-1));
 		}
 		return null;
-	}
-
-	public String getRefFromId(WebElement articulo) {
-		String id = articulo.getAttribute("id");
-		return (id.replace("product-key-id-", ""));
-	}
-
-	public String getRefArticulo(WebElement articulo) {
-		int lengthReferencia = 8;
-		String id = getRefFromId(articulo);
-		if ("".compareTo(id)!=0) {
-			if (id.length()>lengthReferencia) {
-				return (id.substring(0, lengthReferencia));
-			}
-			return id;
-		}
-
-		//Para el caso TestAB-1 se ejecutará este caso para conseguir los atributos del artículo
-		String href = articulo.findElement(By.xpath(XPATH_LINK_RELATIVE_TO_ARTICLE)).getAttribute("href");
-		return UtilsTest.getReferenciaFromHref(href);
 	}
 
 	public boolean waitToHearthIconInState(WebElement hearthIcon, StateFavorito stateIcon, int seconds) {
@@ -439,7 +400,7 @@ public abstract class PageGaleria extends PageBase {
 	public WebElement getArticleThatContainsLitUntil(String literal, int seconds) {
 		By byArticleName = By.xpath(
 				getXPathArticulo() +
-				XPATH_NOMBRE_RELATIVE_TO_ARTICLE +
+				getXPathNombreRelativeToArticle() +
 				"//self::*[text()[contains(.,'" + literal + "')]]");
 		
 		if (state(Present, byArticleName).wait(seconds).check()) {

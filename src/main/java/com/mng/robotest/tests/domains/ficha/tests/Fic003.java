@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.ficha.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
-import com.mng.robotest.tests.domains.galeria.steps.LocationArticle;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -37,13 +36,12 @@ public class Fic003 extends TestBase {
 		DataFichaArt dataArtOrigin = selectFirstArticleInGalery();
 
 		kcSafetyTest();
-		pFichaSteps.selectLinkNavigation(NEXT, dataArtOrigin.getReferencia());
-		pFichaSteps.selectLinkNavigation(PREV, dataArtOrigin.getReferencia());
+		pFichaSteps.selectLinkNavigation(NEXT, dataArtOrigin.getReferencia(), 1);
+		pFichaSteps.selectLinkNavigation(PREV, dataArtOrigin.getReferencia(), 2);
 	}
 
 	private DataFichaArt selectFirstArticleInGalery() {
-		var location1rstArticle = LocationArticle.getInstanceInCatalog(1);
-		return pGaleriaSteps.selectArticulo(location1rstArticle);
+		return pGaleriaSteps.selectArticulo(1);
 	}
 
 	private void kcSafetyTest() {
