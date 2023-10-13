@@ -33,7 +33,7 @@ public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
 	
 	@Override
 	public String getRefArticulo(WebElement articulo) {
-		return getReference().substring(0, 8); 
+		return getReference(articulo).substring(0, 8); 
 	}	
 	
 	@Override
@@ -48,11 +48,11 @@ public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
 	
 	@Override
 	public String getRefColorArticulo(WebElement articulo) {
-		return getReference().replace(":", "");
+		return getReference(articulo).replace(":", "");
 	}	
 	
-	private String getReference() {
-		return getElement(XPATH_CAPA_ARTICULO).getAttribute("reference");
+	private String getReference(WebElement articulo) {
+		return getElement(articulo, "." + XPATH_CAPA_ARTICULO).getAttribute("reference");
 	}
 	
 }

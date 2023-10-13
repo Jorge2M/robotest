@@ -71,11 +71,9 @@ public class PageFichaSteps extends StepBase {
 		return checks;
 	}
 
-	@Validation (
-		description="Aparece la página de Ficha",
-		level=Warn)
+	@Validation (description="Aparece la página de Ficha", level=Warn)
 	public boolean checkIsFicha() {
-		return (pageFicha.isPageUntil(0));
+		return pageFicha.isPageUntil(0);
 	}
 
 	@Validation
@@ -124,7 +122,7 @@ public class PageFichaSteps extends StepBase {
 	@Validation (description="Está seleccionado el color con código <b>#{codigoColor}<b>")
 	private boolean checkIsSelectedColor(String codigoColor) {
 		String codigoColorPage = pageFicha.getSecDataProduct().getCodeColor(ColorType.SELECTED);
-		return (codigoColorPage.contains(codigoColor));
+		return codigoColorPage.contains(codigoColor);
 	}
 
 	public void selectTallaAndSaveData(ArticuloScreen articulo) {
@@ -146,12 +144,10 @@ public class PageFichaSteps extends StepBase {
 		checkTallaSelected(talla, 2);
 	}
 
-	@Validation (
-		description="Queda seleccionada la talla <b>#{talla.name()}</b> " + SECONDS_WAIT)
+	@Validation (description="Queda seleccionada la talla <b>#{talla.name()}</b> " + SECONDS_WAIT)
 	private boolean checkTallaSelected(Talla talla, int seconds) {
 		for (int i=0; i<seconds; i++) {
-			Talla tallaSelected = pageFicha.getTallaSelected();
-			if (tallaSelected==talla) {
+			if (pageFicha.getTallaSelected()==talla) {
 				return true;
 			}
 			waitMillis(1000);
@@ -171,13 +167,13 @@ public class PageFichaSteps extends StepBase {
 	public ChecksTM checkAppearsCapaAvisame() {
 		var checks = ChecksTM.getNew();
 		checks.add(
-				"No aparece el botón \"COMPRAR\"",
-				!secBolsa.isVisibleBotonComprar());
+			"No aparece el botón \"COMPRAR\"",
+			!secBolsa.isVisibleBotonComprar());
 
 		boolean isVisibleAvisame = pageFicha.getSecDataProduct().isVisibleCapaAvisame();
 		checks.add(
-				"Aparece la capa de introducción de avísame",
-				isVisibleAvisame);
+			"Aparece la capa de introducción de avísame",
+			isVisibleAvisame);
 
 		return checks;
 	}
@@ -219,19 +215,17 @@ public class PageFichaSteps extends StepBase {
 		
 		if (isTallaUnica) {
 			checks.add(
-					"NO aparece un aviso indicando que hay que seleccionar la talla",
-					!isVisibleAviso);
+				"NO aparece un aviso indicando que hay que seleccionar la talla",
+				!isVisibleAviso);
 		} else {
 			checks.add(
-					"SÍ aparece un aviso indicando que hay que seleccionar la talla",
-					isVisibleAviso);
+				"SÍ aparece un aviso indicando que hay que seleccionar la talla",
+				isVisibleAviso);
 		}
 		return checks;
 	}
 
-	@Validation (
-		description="Se hace visible la lista de tallas",
-		level=Warn)
+	@Validation (description="Se hace visible la lista de tallas", level=Warn)
 	public boolean checkListaTallasVisible() {
 		return (pageFicha.getSecDataProduct().getSecSelTallas().isVisibleListTallasForSelectUntil(0));
 	}

@@ -65,6 +65,7 @@ public class PageGaleriaSteps extends StepBase {
 
 		//Almacenamos el nombre del artículo y su referencia
 		var articulo = pageGaleria.getArticulo(position);
+		moveToElement(articulo);
 		datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
 		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
 
@@ -229,9 +230,7 @@ public class PageGaleriaSteps extends StepBase {
 		return datosScroll;
 	}
 
-	@Validation (
-		description="Sí aparece el footer",
-		level=Warn)
+	@Validation (description="Sí aparece el footer", level=Warn)
 	private boolean checkVisibilityFooter(int pageToScroll, AppEcom app) {
 		return (new SecFooter()).isVisible();
 	}
@@ -521,17 +520,14 @@ public class PageGaleriaSteps extends StepBase {
 	  	return checks;
 	}
 
-	@Validation (
-		description="Existe algún vídeo en la galería",
-		level=Warn)
+	@Validation (description="Existe algún vídeo en la galería", level=Warn)
 	public boolean validaHayVideoEnGaleria() {
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		return (pageGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.VIDEO));
 	}
 
 	@Validation (
-		description="Aparece una página con artículos " + SECONDS_WAIT,
-		level=Warn)
+		description="Aparece una página con artículos " + SECONDS_WAIT,	level=Warn)
 	public boolean validaArtEnContenido(int seconds) {
 		return (pageGaleria.isVisibleArticleUntil(1, seconds));
 	}
@@ -615,9 +611,7 @@ public class PageGaleriaSteps extends StepBase {
 		return (pageGaleria.getLayoutNumColumnas()==((PageGaleriaDesktop)pageGaleria).getNumColumnas(numColumnas));
 	}
 
-	@Validation (
-		description="Estamos en la página de Galería",
-		level=Warn)
+	@Validation (description="Estamos en la página de Galería",	level=Warn)
 	private boolean checkIsPageGaleria(WebDriver driver) {
 		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		return (pageGaleriaDesktop.isPage());
@@ -666,7 +660,7 @@ public class PageGaleriaSteps extends StepBase {
 			"No aparece el filtro para las ofertas <b>Sale</b>",
 		level=Warn)
 	private boolean checkFiltrosSalesOff(SecMenusFiltroCollection filtrosCollection) {
-		return (!filtrosCollection.isVisibleMenu(FilterCollection.sale));
+		return !filtrosCollection.isVisibleMenu(FilterCollection.sale);
 	}
 
 	public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError, StoreType store) {
