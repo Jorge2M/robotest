@@ -2,6 +2,9 @@ package com.mng.robotest.tests.domains.galeria.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -30,6 +33,16 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 		return XPATH_NOMBRE_RELATIVE_TO_ARTICLE;
 	}
 	
+	private String getXPathImgArticulo(WebElement article) {
+		String id = article.getAttribute("id");
+		Pattern pattern = Pattern.compile("product-key-id-(.*)");
+		Matcher matcher = pattern.matcher(id);
+		if (matcher.find()) {
+			return ".//img[@id='product-" + matcher.group(1) + "' or @src[contains(.,'/" + matcher.group(1) + "')]]" ;
+		}
+		return ".//img[contains(.,'product-')]";
+	}	
+
 	@Override
 	public String getRefArticulo(WebElement articulo) {
 		int lengthReferencia = 8;
@@ -64,6 +77,16 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 			return (id.substring(0, lengthReferencia));
 		}
 		return id;
+	}
+	
+	@Override
+	public WebElement getImagenElementArticulo(WebElement articulo) {
+		moveToElement(articulo);
+		By byImg = By.xpath(getXPathImgArticulo(articulo));
+		if (state(Visible, articulo).by(byImg).wait(1).check()) {
+			return getElement(byImg);
+		}
+		return null;
 	}
 	
 	private String getRefFromId(WebElement articulo) {

@@ -55,14 +55,12 @@ public class SecTallasArticuloNormal extends SecTallasArticulo {
 	
 	@Override
 	public boolean isVisibleTallaNotAvailable() {
-		String xpathTallaNoDipo = XPATH_TALLA_UNAVAILABLE;
-		return state(Visible, xpathTallaNoDipo).check();
+		return state(Visible, XPATH_TALLA_UNAVAILABLE).check();
 	}
 	
 	@Override
 	public void selectTallaArticleNotAvalaible() {
-		String xpathTallaNoDipo = XPATH_TALLA_UNAVAILABLE;
-		click(xpathTallaNoDipo).exec();
+		click(XPATH_TALLA_UNAVAILABLE).exec();
 	}	
 	
 	@Override

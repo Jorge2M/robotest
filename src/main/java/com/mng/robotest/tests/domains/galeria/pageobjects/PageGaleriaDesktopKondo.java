@@ -51,6 +51,21 @@ public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
 		return getReference(articulo).replace(":", "");
 	}	
 	
+	@Override
+	public WebElement getImagenElementArticulo(WebElement articulo) {
+		moveToElement(articulo);
+		By byImg = By.xpath(getXPathImgArticulo(articulo));
+		if (state(Visible, articulo).by(byImg).wait(1).check()) {
+			return getElement(byImg);
+		}
+		return null;
+	}
+	
+	//TODO Galería Kondo React (13-10)
+	private String getXPathImgArticulo(WebElement article) {
+		return "//img[@class[contains(.,'xGkIb')]]";
+	}	
+	
 	private String getReference(WebElement articulo) {
 		return getElement(articulo, "." + XPATH_CAPA_ARTICULO).getAttribute("reference");
 	}

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -13,7 +11,6 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
-import com.mng.robotest.tests.domains.galeria.pageobjects.article.ListSizesArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecColoresArticuloDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktop;
@@ -222,31 +219,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	@Override
-	public WebElement getImagenElementArticulo(WebElement articulo) {
-		moveToElement(articulo);
-		By byImg = By.xpath(getXPathImgArticulo(articulo));
-		if (state(Visible, articulo).by(byImg).wait(1).check()) {
-			return getElement(byImg);
-		}
-		return null;
-	}
-	
-	private String getXPathImgArticulo(WebElement article) {
-		return getXPathImgArticuloShop(article);
-	}
-	
-	//TODO Test AB nueva variante. Si se mantiene la original igualar con Outlet
-	private String getXPathImgArticuloShop(WebElement article) {
-		String id = article.getAttribute("id");
-		Pattern pattern = Pattern.compile("product-key-id-(.*)");
-		Matcher matcher = pattern.matcher(id);
-		if (matcher.find()) {
-			return ".//img[@id='product-" + matcher.group(1) + "' or @src[contains(.,'/" + matcher.group(1) + "')]]" ;
-		}
-		return ".//img[contains(.,'product-')]";
-	}
-	
-	@Override
 	public WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor) {
 		String xpathImgColorRelArticle = secColores.getXPathImgColorRelativeArticle(selected);
 		return (articulo.findElements(By.xpath("." + xpathImgColorRelArticle)).get(numColor-1));
@@ -349,47 +321,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	@Override
 	public boolean backTo1erArticulo() throws InterruptedException {
 		return backTo1erArticulo(XPATH_ICONO_UP_GALERY);
-	}
-	
-	/**
-	 * @return la lista de referencia+color de los artículos incorrectos (size div != attr width de la imagen)
-	 */
-	public ListSizesArticle getArticlesWithWrongSize(int numPagina, double marginPercError) {	
-		var listSizesArtWrong = ListSizesArticle.getInstance();
-		for (var article : getListArticulosFromPagina(numPagina)) {
-			int attrWidthImg = getWidthFromAtricleSrcImg(article);
-			int widthArticle = getWidthArticle(article);
-			int numPixelsDiff = Math.abs(attrWidthImg-widthArticle);
-			if (attrWidthImg!=0) {
-				double diffPercentage = (numPixelsDiff / Double.valueOf(attrWidthImg)) * 100;
-				if (diffPercentage > marginPercError) {
-					listSizesArtWrong.addData(getRefColorArticulo(article), attrWidthImg, widthArticle);
-				}
-			}
-		}
-		return listSizesArtWrong;
-	}
-	
-	private int getWidthFromAtricleSrcImg(WebElement article) {
-		int widthImg = 0;
-		By byImgArticle = By.xpath(getXPathImgArticulo(article));
-		if (state(Present, article).by(byImgArticle).check()) {
-			var imgArticle = article.findElement(byImgArticle);
-			String srcImgArticle;
-		    srcImgArticle = imgArticle.getAttribute("original");
-			if (srcImgArticle!=null) {
-				Pattern pattern = Pattern.compile("(.*?)width=(.*?)&(.*?)");
-				Matcher matcher = pattern.matcher(srcImgArticle);
-				if (matcher.find()) {
-					 widthImg = Integer.valueOf(matcher.group(2));
-				}
-			}
-		}
-		return widthImg;
-	}
-	
-	private int getWidthArticle(WebElement article) {
-		return article.getSize().getWidth();
 	}
 	
 	public List<String> getArticlesRebajadosWithLiteralInLabel(List<LabelArticle> listLabels) {
@@ -631,7 +562,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	public String getCodColorArticulo(int numArticulo) throws Exception {
 		String xpathArticulo = "(" + getXPathArticulo() + ")[" + numArticulo + "]";
 		String image = getImagenArticulo(getElement(xpathArticulo));
-		return (UtilsPageGaleria.getCodColorFromSrcImg(image));
+		return UtilsPageGaleria.getCodColorFromSrcImg(image);
 	}
 	
 	//Equivalent to Mobil

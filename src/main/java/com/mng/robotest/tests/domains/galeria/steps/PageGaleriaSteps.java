@@ -769,13 +769,19 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation
 	public ChecksTM checkGaleriaAfeterSelectMenu() {
 		var checks = ChecksTM.getNew();
+		
 		int secondsArticle = 8;
-		int secondsIcon = 2;
 		checks.add (
 			"Como mínimo se obtiene un artículo " + getLitSecondsWait(secondsArticle),
 			pageGaleria.isVisibleArticleUntil(1, secondsArticle), Warn);
 		
+		int secondsImage = 5;
+		checks.add (
+			"Aparece la imagen del 1er artículo  " + getLitSecondsWait(secondsImage),
+			pageGaleria.isVisibleArticleUntil(1, secondsImage), Warn);
+		
 		if (app==AppEcom.shop) {
+			int secondsIcon = 2;
 			checks.add (
 				Check.make(
 					"El 1er artículo tiene 1 icono de favorito asociado " + getLitSecondsWait(secondsIcon),

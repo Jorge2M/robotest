@@ -13,6 +13,7 @@ public class ModalArticleNotAvailable extends PageBase {
 	private static final String XPATH_INPUT_MAIL = XPATH_MODAL + "//input[@data-testid[contains(.,'emailInput')]]";
 	private static final String XPATH_RECIBIR_AVISO_BUTTON = "//button[@data-testid='listado.backInStock.button.submit']";
 	private static final String XPATH_BUTTON_ENTENDIDO = "//button[@data-testid='listado.backInStock.feedbackButton.closeDialog']";
+	private static final String XPATH_SNACKVAR_AVISAME_OK = "//*[@data-testid[contains(.,'feedback-snackbar')]]";
 	private static final String XPATH_POLITICA_PRIVACIDAD = XPATH_MODAL + "//span[@data-testid='mng-link']";
 	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_MODAL + "//button[@data-testid='modal.close.button']";
 	
@@ -54,6 +55,9 @@ public class ModalArticleNotAvailable extends PageBase {
 	public boolean isModalAvisoOkVisible(int seconds) {
 		return state(Visible, XPATH_BUTTON_ENTENDIDO).wait(seconds).check();
 	}
+	public boolean isSnackvarAvisoOkVisible(int seconds) {
+		return state(Visible, XPATH_SNACKVAR_AVISAME_OK).wait(seconds).check();
+	}	
 	public boolean isModalAvisoOkInvisible(int seconds) {
 		return state(Invisible, XPATH_BUTTON_ENTENDIDO).wait(seconds).check();
 	}	
