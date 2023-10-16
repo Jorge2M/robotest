@@ -95,7 +95,7 @@ public class PageMisDatosSteps extends StepBase {
 		return newName;
 	}
 
-	@Validation(description = "Aparece una pantalla de resultado Ok de la suscripción")
+	@Validation (description = "Aparece una pantalla de resultado Ok de la suscripción")
 	private boolean validateModificationOfData() {
 		return pageMisDatos.pageResOK();
 	}

@@ -68,8 +68,7 @@ public class PageAccesoMisCompras extends PageBase implements PageFromFooter {
 	}
 	
 	public void clickBlock(TypeBlock typeBlock) {
-		String xpathBlock = getXPathLinkBlock(typeBlock);
-		getElement(xpathBlock).click();
+		getElement(getXPathLinkBlock(typeBlock)).click();
 	}
 	
 	public void inputUserBlockSi(String usuario) {

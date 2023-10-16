@@ -20,6 +20,7 @@ import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArticulo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -41,6 +42,7 @@ public abstract class PageGaleria extends PageBase {
 	public static final int MAX_PAGE_TO_SCROLL = 20;
 
 	protected final From from;
+	protected final SecTallasArticulo secTallas = SecTallasArticulo.make(channel, app, dataTest.getPais());
 	protected final SecPreciosArticulo secPrecios = new SecPreciosArticulo();
 
 	protected PageGaleria() {
@@ -58,13 +60,13 @@ public abstract class PageGaleria extends PageBase {
 	public abstract int getLayoutNumColumnas();
 	public abstract WebElement getArticuloConVariedadColoresAndHover(int numArticulo);
 	public abstract WebElement getImagenElementArticulo(WebElement articulo);
-	public abstract WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor);
 	public abstract ArticuloScreen getArticuloObject(int numArticulo) throws Exception;
 	public abstract String getNombreArticulo(WebElement articulo);
 	public abstract String getPrecioArticulo(WebElement articulo);
 	public abstract boolean isArticleRebajado(WebElement articulo);
 	public abstract String getCodColorArticulo(int numArticulo) throws Exception;
 	public abstract String getNameColorFromCodigo(String codigoColor);
+	public abstract void clickColorArticulo(WebElement articulo, int posColor);
 	public abstract int getNumFavoritoIcons();
 	public abstract List<ArticuloScreen> clickArticleHearthIcons(Integer... posIconsToClick) throws Exception;
 	public abstract boolean isArticleWithHearthIconPresentUntil(int posArticle, int seconds);
@@ -108,10 +110,10 @@ public abstract class PageGaleria extends PageBase {
 	public static PageGaleria make(From from, Channel channel, AppEcom app, Pais pais) {
 		switch (channel) {
 			case desktop:
-				if (pais.isGaleriaKondo(app)) {
-					return new PageGaleriaDesktopKondo(from);
+				if (!pais.isGaleriaKondo(app) || from==From.BUSCADOR) {
+					return new PageGaleriaDesktopNormal(from);
 				}
-				return new PageGaleriaDesktopNormal(from);
+				return new PageGaleriaDesktopKondo(from);
 			case mobile, tablet:
 			default:
 				return new PageGaleriaDevice(from);
@@ -144,10 +146,6 @@ public abstract class PageGaleria extends PageBase {
 				"//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]");
 	}
 
-	String getXPathAncestorArticulo() {
-		return (getXPathArticulo().replaceFirst("//", "ancestor::"));
-	}
-
 	static String classProductName =
 			"(@class[contains(.,'productList__name')] or " +
 					"@class[contains(.,'product-list-name')] or " +
@@ -155,11 +153,11 @@ public abstract class PageGaleria extends PageBase {
 					"@class[contains(.,'product-name')])";
 
 	public String getXPathCabeceraBusquedaProd() {
-		return ("//*[@id='buscador_cabecera2']");
+		return "//*[@id='buscador_cabecera2']";
 	}
 
 	String getXPathLinkArticulo(int numArticulo) {
-		return (getXPathArticulo(numArticulo) + "//a");
+		return getXPathArticulo(numArticulo) + "//a";
 	}
 
 	public boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
@@ -262,7 +260,7 @@ public abstract class PageGaleria extends PageBase {
 	 */
 	public List<String> getListaReferenciasPrendas() {
 		List<String> listaReferencias = new ArrayList<>();
-		for (WebElement articulo : getArticulos()) {
+		for (var articulo : getArticulos()) {
 			listaReferencias.add(getRefArticulo(articulo));
 		}
 		return listaReferencias;
@@ -628,16 +626,23 @@ public abstract class PageGaleria extends PageBase {
 		var imagen = getImagenElementArticulo(articulo);
 		if (imagen!=null) {
 			try {
-				return Optional.of(imagen.getAttribute("src"));
+				return Optional.of(getSrcImage(imagen));
 			}
 			catch (StaleElementReferenceException e) {
 				imagen = getImagenElementArticulo(articulo);
 				if (imagen!=null) {
-					return Optional.of(imagen.getAttribute("src"));
+					return Optional.of(getSrcImage(imagen));
 				}
 			}
 		}
 		return Optional.empty();
+	}
+	
+	private String getSrcImage(WebElement image) {
+		if (image.getAttribute("original")!=null) {
+			return image.getAttribute("original");
+		}
+		return image.getAttribute("src");
 	}
 
 	public static List<LabelArticle> getListlabelsnew() {

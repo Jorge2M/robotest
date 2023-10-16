@@ -1,18 +1,14 @@
 package com.mng.robotest.testslegacy.utils;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.testslegacy.beans.Continente;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.beans.Response;
 import com.mng.robotest.testslegacy.data.PaisShop;
@@ -30,7 +26,7 @@ public class PaisGetter {
 	}
 	
 	public static Pais from(String codPais) throws NoSuchElementException {
-		for (Pais pais : listAllCountries) {
+		for (var pais : listAllCountries) {
 			if (codPais.compareTo(pais.getCodigoPais())==0) {
 				return pais;
 			}
@@ -39,7 +35,7 @@ public class PaisGetter {
 	}
 	
 	public static Pais fromCodAlf(String codPaisAlf) throws NoSuchElementException {
-		for (Pais pais : listAllCountries) {
+		for (var pais : listAllCountries) {
 			if (codPaisAlf.compareTo(pais.getCodigoAlf())==0) {
 				return pais;
 			}
@@ -49,7 +45,7 @@ public class PaisGetter {
 	
 	public static List<Pais> from(List<String> listCodCountries) {
 		List<Pais> listToReturn = new ArrayList<>();
-		for (Pais pais : listAllCountries) {
+		for (var pais : listAllCountries) {
 			if (listCodCountries.contains(pais.getCodigoPais())) {
 				listToReturn.add(pais);
 			}
@@ -83,10 +79,10 @@ public class PaisGetter {
 			Log4jTM.getLogger().error(e);
 			return new ArrayList<>();
 		}
-		Iterator<Continente> itContinentes = xmlFiltered.getResponse().iterator();
+		var itContinentes = xmlFiltered.getResponse().iterator();
 		while (itContinentes.hasNext()) {
-			Continente continente = itContinentes.next();
-			Iterator<Pais> itPaises = continente.getPaises().iterator();
+			var continente = itContinentes.next();
+			var itPaises = continente.getPaises().iterator();
 			while (itPaises.hasNext()) {
 				listCountrysToReturn.add(itPaises.next());
 			}
@@ -95,9 +91,9 @@ public class PaisGetter {
 	}
 
 	private static Response getXmlFilteredByCountries() throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext.newInstance(Response.class);
-		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		InputStream countriesXmlStream = PaisGetter.class.getResourceAsStream("/" + NAME_FILE_COUNTRIES_XML);
+		var jaxbContext = JAXBContext.newInstance(Response.class);
+		var jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		var countriesXmlStream = PaisGetter.class.getResourceAsStream("/" + NAME_FILE_COUNTRIES_XML);
 		return (Response)jaxbUnmarshaller.unmarshal(countriesXmlStream);
 	}
 

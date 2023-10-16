@@ -113,12 +113,12 @@ public class AccesoFlows extends StepBase {
 		var pageLoginVOTF = new PageLoginVOTF();
 		pageLoginVOTF.goToFromUrlAndSetTestABs();
 		new PageJCAS().identJCASifExists();
-		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(pais));
+		var accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(pais));
 		pageLoginVOTF.inputUsuario(accesoVOTF.getUsuario());
 		pageLoginVOTF.inputPassword(accesoVOTF.getPassword());
 		pageLoginVOTF.clickButtonContinue();
 		if (pais.getListIdiomas(app).size() > 1) {
-			PageSelectIdiomaVOTF pageSelectIdiomaVOTF = new PageSelectIdiomaVOTF();
+			var pageSelectIdiomaVOTF = new PageSelectIdiomaVOTF();
 			pageSelectIdiomaVOTF.selectIdioma(idioma.getCodigo());
 			pageSelectIdiomaVOTF.clickButtonAceptar();
 		}

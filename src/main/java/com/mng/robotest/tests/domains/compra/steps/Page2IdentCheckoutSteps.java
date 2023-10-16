@@ -37,9 +37,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 	 	return checks;
 	}
 	
-	@Validation (
-		description="Figura el email <b>#{email}</b>",
-		level=Warn)
+	@Validation (description="Figura el email <b>#{email}</b>",	level=Warn)
 	public boolean checkEmail(String email) {
 		return page2IdentCheckout.checkEmail(email);
 	}
@@ -57,8 +55,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		return datosRegistro;
 	}
 	
-	@Validation (
-		description="Se hace clickable el botón \"Continuar\" " + SECONDS_WAIT)
+	@Validation (description="Se hace clickable el botón \"Continuar\" " + SECONDS_WAIT)
 	private boolean checkIsVisibleContiueButton(int seconds) {
 		return (page2IdentCheckout.isContinuarClickableUntil(seconds));
 	}

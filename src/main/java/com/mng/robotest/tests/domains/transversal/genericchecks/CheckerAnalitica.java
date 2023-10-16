@@ -29,7 +29,7 @@ public class CheckerAnalitica implements Checker {
 	public ChecksTM check(WebDriver driver) {
 		var checks = ChecksTM.getNew();
 		String commandJs = "return window.dataLayer.filter((object) => object.event === 'loadDataLayer').length";
-		JavascriptExecutor js = (JavascriptExecutor)driver;
+		var js = (JavascriptExecutor)driver;
 		try {
 			Long resultLong = (Long)js.executeScript(commandJs);
 			String result = String.valueOf(resultLong);
@@ -47,7 +47,7 @@ public class CheckerAnalitica implements Checker {
 	}
 	
 	private State getLevel() {
-		InputParamsTM inputParamsSuite = TestMaker.getInputParamsSuite();
+		var inputParamsSuite = TestMaker.getInputParamsSuite();
 		if (inputParamsSuite!=null && 
 			inputParamsSuite.getApp()!=null &&
 			inputParamsSuite.getApp()==AppEcom.votf) {

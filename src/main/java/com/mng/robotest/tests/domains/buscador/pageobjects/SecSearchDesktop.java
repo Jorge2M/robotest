@@ -4,10 +4,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-
 
 public class SecSearchDesktop extends PageBase implements SecSearch {
 	
@@ -26,7 +24,7 @@ public class SecSearchDesktop extends PageBase implements SecSearch {
 	}
 
 	private void setTextAndReturn(String referencia) {
-		WebElement input = getElementVisible(driver, By.xpath(XPATH_INPUT_BUSCADOR));
+		var input = getElementVisible(driver, By.xpath(XPATH_INPUT_BUSCADOR));
 		sendKeysWithRetry(5, input, referencia); 
 		input.sendKeys(Keys.RETURN);
 		waitLoadPage();

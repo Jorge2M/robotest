@@ -19,9 +19,7 @@ public class PageSuscripcionesSteps extends StepBase {
 
 	private final PageSuscripciones pageSuscripciones = new PageSuscripciones();
 	
-	@Validation(
-		description="1) Aparece la página de \"Suscripciones\"",
-		level=Warn)
+	@Validation (description="1) Aparece la página de \"Suscripciones\"", level=Warn)
 	public boolean validaIsPage () {
 		return pageSuscripciones.isPage();
 	}
@@ -79,16 +77,14 @@ public class PageSuscripcionesSteps extends StepBase {
 		description = "Seleccionar los checkbox de las Newsletter <b>#{listNewsletters.toString()}</b> + Botón \"Guardar Cambios\"",
 		expected = "parece la confirmación que los datos se han modificado")
 	public void selectNewslettersAndGuarda(List<NewsLetter> listNewsletters) {
-		for (NewsLetter idNewsletter : listNewsletters) {
+		for (var idNewsletter : listNewsletters) {
 			pageSuscripciones.selectRadioNewsletter(idNewsletter);
 		}
-
 		pageSuscripciones.clickGuardarCambios();
 		validateIsPageResult(5);
 	}
 
-	@Validation(
-		description="Aparece una pantalla de resultado OK " + SECONDS_WAIT)
+	@Validation (description="Aparece una pantalla de resultado OK " + SECONDS_WAIT)
 	private boolean validateIsPageResult (int seconds) {
 		return pageSuscripciones.isPageResOKUntil(seconds);
 	}

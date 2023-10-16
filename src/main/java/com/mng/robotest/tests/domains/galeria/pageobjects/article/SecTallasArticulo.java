@@ -2,6 +2,7 @@ package com.mng.robotest.tests.domains.galeria.pageobjects.article;
 
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -17,11 +18,11 @@ public abstract class SecTallasArticulo extends PageBase {
 	
 	protected final String xpathArticulo;
 	
-	public static SecTallasArticulo make(AppEcom app, Pais pais, String xpathArticulo) {
+	public static SecTallasArticulo make(Channel channel, AppEcom app, Pais pais) {
 		if (pais.isGaleriaKondo(app)) {
-			return new SecTallasArticuloKondo(xpathArticulo);
+			return new SecTallasArticuloKondo(channel);
 		}
-		return new SecTallasArticuloNormal(xpathArticulo);
+		return new SecTallasArticuloNormal();
 	}
 	
 	public SecTallasArticulo(String xpathArticulo) {

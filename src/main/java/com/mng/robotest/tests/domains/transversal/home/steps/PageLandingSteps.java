@@ -23,7 +23,7 @@ public class PageLandingSteps extends StepBase {
 	
 	@Validation (description="Aparece la página de Landing " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
-		return (pageLanding.isPageUntil(seconds));
+		return pageLanding.isPageUntil(seconds);
 	}
 	
 	public void validateIsPageWithCorrectLineas() {
@@ -52,17 +52,16 @@ public class PageLandingSteps extends StepBase {
 		checks.add(
 			"No aparece ningún tag de error",
 			!state(Present, By.xpath("//error"), driver).check(), Warn);
+		
 		return checks;
 	}	
 	
-	@Validation (
-		description="No es visible el comms header banner de Loyalty")
+	@Validation (description="No es visible el comms header banner de Loyalty")
 	public boolean isInvisibleCommsHeaderBannerLoyalty(int seconds) {
 		return !pageLanding.isVisibleCommsHeaderBannerLoyalty(seconds);
 	}	
 
-	@Validation (
-		description="No es visible ningún elemento de Loyalty")
+	@Validation (description="No es visible ningún elemento de Loyalty")
 	public boolean isInvisibleAnyElementLoyalty() {
 		return !pageLanding.isVisibleAnyElementLoyalty();
 	}	

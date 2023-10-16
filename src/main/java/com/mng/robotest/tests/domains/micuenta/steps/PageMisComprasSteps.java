@@ -90,8 +90,7 @@ public class PageMisComprasSteps extends StepBase {
 		return pageMisCompras.isTicketOnline(codPedido, seconds);
 	}	
 	
-	@Validation (
-		description="Es visible una compra de tipo #{typeTicket} " + SECONDS_WAIT)
+	@Validation (description="Es visible una compra de tipo #{typeTicket} " + SECONDS_WAIT)
 	public boolean validateIsCompraOfType(TypeTicket typeTicket, int seconds) {
 		return pageMisCompras.isTicket(typeTicket, seconds);
 	}

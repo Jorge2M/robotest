@@ -6,8 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import org.testng.ITestContext;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.conf.Channel;
@@ -197,14 +195,14 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	public void testInputCodPromoEmplSpain() {
-		AccesoEmpl accesoEmpl = AccesoEmpl.forSpain(); 
+		var accesoEmpl = AccesoEmpl.forSpain(); 
 		pageCheckoutWrapperSteps.inputTarjetaEmplEnCodPromo(pais, accesoEmpl);
 		pageCheckoutWrapperSteps.inputDataEmplEnPromoAndAccept(accesoEmpl);
 	}
 	
 	private void checkMetodosPagos(List<Pais> paisesDestino) throws Exception {
 		try {
-			DataPedido dataPedido = dataPago.getDataPedido();
+			var dataPedido = dataPago.getDataPedido();
 			if (!isMobile()) {
 				pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 			}
@@ -224,7 +222,7 @@ public class CheckoutFlow extends StepBase {
 			//En el caso de españa, después de validar todos los países probamos el botón "CHANGE DETAILS" sobre los países indicados en la lista
 			if (dataTest.getCodigoPais().compareTo("001")==0 /*España*/ && paisesDestino!=null && !paisesDestino.isEmpty()) {
 				Pais paisChange = null;
-				Iterator<Pais> itPaises = paisesDestino.iterator();
+				var itPaises = paisesDestino.iterator();
 				while (itPaises.hasNext()) {
 					paisChange = itPaises.next();
 					if (app==AppEcom.shop) {
@@ -275,11 +273,11 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	private void testPagoFromCheckoutToEnd(Pago pagoToTest) throws Exception {
-		DataPedido dataPedido = dataPago.getDataPedido();
+		var dataPedido = dataPago.getDataPedido();
 		dataPedido.setPago(pagoToTest);
 		dataPedido.setResejecucion(com.github.jorge2m.testmaker.conf.State.Nok);
 		
-		PagoSteps pagoSteps = FactoryPagos.makePagoSteps(dataPago);
+		var pagoSteps = FactoryPagos.makePagoSteps(dataPago);
 		boolean execPay = iCanExecPago(pagoSteps);
 		pagoSteps.startPayment(execPay);
 		dataPedido = dataPago.getDataPedido();
@@ -334,7 +332,7 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	private void validaPasarelasPagoPais() throws Exception {
-		List<Pago> listPagosToTest = getListPagosToTest(dataPago.getFTCkout().userIsEmployee);
+		var listPagosToTest = getListPagosToTest(dataPago.getFTCkout().userIsEmployee);
 		for (Iterator<Pago> it = listPagosToTest.iterator(); it.hasNext(); ) {
 			Pago pagoToTest = it.next();
 			dataPago.setPago(pagoToTest);
@@ -352,8 +350,8 @@ public class CheckoutFlow extends StepBase {
 	
 	private List<Pago> getListPagosToTest(boolean isEmpl) {
 		List<Pago> listPagosToTest = new ArrayList<>();
-		ITestContext ctx = getTestCase().getTestRunContext();
-		List<Pago> listPagosPais = pais.getListPagosForTest(app, isEmpl);
+		var ctx = getTestCase().getTestRunContext();
+		var listPagosPais = pais.getListPagosForTest(app, isEmpl);
 		for (Pago pagoPais : listPagosPais) {
 			if (pagoPais.isNeededTestPasarelaDependingFilter(channel, app, ctx)) {
 				listPagosToTest.add(pagoPais);

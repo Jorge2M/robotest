@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.buscador.steps;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
@@ -46,7 +45,7 @@ public class SecBuscadorSteps extends StepBase {
 	
 	private void searchArticuloCommon(Article article) {
 		new ArticuloNavigations().buscarArticulo(article);
-		PageObjTM.waitForPageLoaded(driver);  
+		waitLoadPage();  
 		new PageFichaSteps().checkIsFichaAccordingTypeProduct(article);
 	}
 
@@ -55,7 +54,7 @@ public class SecBuscadorSteps extends StepBase {
 		expected="El resultado de la búsqueda es el correcto :-)")
 	public void busquedaCategoriaProducto(String categoriaABuscar, boolean categoriaExiste) {
 		SecCabecera.buscarTexto(categoriaABuscar, channel);
-		PageObjTM.waitForPageLoaded(driver);	
+		waitLoadPage();	
 		if (categoriaExiste) { 
 			areProducts(categoriaABuscar, 3);
 		} else {
@@ -72,8 +71,7 @@ public class SecBuscadorSteps extends StepBase {
 		return "".compareTo(pageGaleria.getNombreArticuloWithText(producSin1erCaracter, seconds))!=0;
 	}
 	
-	@Validation (
-		description="Aparece algún producto " + SECONDS_WAIT)
+	@Validation (description="Aparece algún producto " + SECONDS_WAIT)
 	private boolean areProducts(int seconds) {
 		return pageGaleria.isVisibleArticleUntil(1, seconds);
 	}

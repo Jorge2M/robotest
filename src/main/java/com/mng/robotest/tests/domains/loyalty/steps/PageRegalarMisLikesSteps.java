@@ -11,8 +11,7 @@ public class PageRegalarMisLikesSteps extends StepBase {
 
 	private final PageRegalarMisLikes pageRegalarMisLikes = new PageRegalarMisLikes();
 
-	@Validation (
-		description="Estamos en la página de \"Regalar Likes\"")
+	@Validation (description="Estamos en la página de \"Regalar Likes\"")
 	public boolean checkIsPage() {
 		return (pageRegalarMisLikes.checkIsPage());
 	}

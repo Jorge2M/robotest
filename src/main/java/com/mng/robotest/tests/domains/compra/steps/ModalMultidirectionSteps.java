@@ -15,8 +15,7 @@ public class ModalMultidirectionSteps extends StepBase {
 
 	private final ModalMultidirection modalMultidirection = new ModalMultidirection();
 	
-	@Validation(
-		description = "Es visible el modal de multidirecciones " + SECONDS_WAIT)
+	@Validation (description="Es visible el modal de multidirecciones " + SECONDS_WAIT)
 	public boolean checkIsVisible(int seconds) {
 		return modalMultidirection.isVisible(seconds);
 	}	
@@ -37,7 +36,6 @@ public class ModalMultidirectionSteps extends StepBase {
 				"La dirección del checkout contiene la direccion principal <b>" + mainDirection.getAddress() + "</b>",
 				direccionCheckout.contains(mainDirectionOpt.get().getAddress()));
 	 	}
-	 	
 	 	return checks;
 	}
 	
@@ -83,7 +81,7 @@ public class ModalMultidirectionSteps extends StepBase {
 		new ModalDirecEnvioNewSteps().checkIsVisible(3);
 	}
 	
-	@Validation(description = "No existe la dirección #{address}")
+	@Validation (description = "No existe la dirección #{address}")
 	public boolean checkAddressNotExists(String address) {
 		return modalMultidirection.getDirection(address).isEmpty();
 	}	
@@ -101,7 +99,5 @@ public class ModalMultidirectionSteps extends StepBase {
 	public boolean checkModalInvisible(int seconds) {
 		return modalMultidirection.isModalInvisible(seconds);
 	}
-	
-	
 	
 }

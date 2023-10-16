@@ -370,14 +370,11 @@ public class PageGaleriaSteps extends StepBase {
 
 		var articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
 		replaceStepExpected(TAG_NOMBRE_1ER_ARTIC, pageGaleria.getNombreArticulo(articuloColores));
-	   
-		var colorToClick = pageGaleria.getColorArticulo(articuloColores, false, posColor);
 		replaceStepExpected(TAG_PRECIO_1ER_ARTIC, pageGaleria.getPrecioArticulo(articuloColores));
-	   
 		String srcImg1erArt = pageGaleria.getImagenArticulo(articuloColores);
-		replaceStepDescription(TAG_SRC_PNG_2O_COLOR, colorToClick.getAttribute("src"));
-	   
-		click(colorToClick).exec();
+		replaceStepDescription(TAG_SRC_PNG_2O_COLOR, srcImg1erArt);
+		
+		pageGaleria.clickColorArticulo(articuloColores, posColor);
 		waitMillis(100);
 		
 		String srcImgAfterClickColor = pageGaleria.getImagenArticulo(articuloColores);

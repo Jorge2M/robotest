@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.favoritos.pageobjects;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -144,7 +143,7 @@ public class PageFavoritos extends PageBase {
 			return (!hayArticulos());
 		}
 		
-		Iterator<ArticuloScreen> itArticulos = dataTest.getDataFavoritos().getListArticulos().iterator();
+		var itArticulos = dataTest.getDataFavoritos().getListArticulos().iterator();
 		while (itArticulos.hasNext()) {
 			ArticuloScreen articulo = itArticulos.next();
 			if (!isVisibleArticleUntil(articulo.getRefProducto(), articulo.getCodigoColor(), seconds)) {

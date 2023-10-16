@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
 
 	private static final String XPATH_CAPA_ARTICULO = "//div[@data-testid='plp.product.figure']";
-	private static final String XPATH_ARTICULO = XPATH_CAPA_ARTICULO + "/..";
+	public static final String XPATH_ARTICULO = XPATH_CAPA_ARTICULO + "/..";
 	
 	//TODO Galería Kondo -> Solicitar React (11-10-2023)
 	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//div[@class[contains(.,'md12')]]";
@@ -54,7 +54,7 @@ public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
 	@Override
 	public WebElement getImagenElementArticulo(WebElement articulo) {
 		moveToElement(articulo);
-		By byImg = By.xpath(getXPathImgArticulo(articulo));
+		By byImg = By.xpath(getXPathImgArticulo());
 		if (state(Visible, articulo).by(byImg).wait(1).check()) {
 			return getElement(byImg);
 		}
@@ -62,7 +62,7 @@ public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
 	}
 	
 	//TODO Galería Kondo React (13-10)
-	private String getXPathImgArticulo(WebElement article) {
+	private String getXPathImgArticulo() {
 		return "//img[@class[contains(.,'xGkIb')]]";
 	}	
 	

@@ -1,36 +1,24 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.article;
 
+import java.util.Optional;
+
+import org.openqa.selenium.WebElement;
+
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.testslegacy.beans.Pais;
 
-public class SecColoresArticuloDesktop extends PageBase {
+public abstract class SecColoresArticuloDesktop extends PageBase {
 
-	private static final String XPATH_COLORS_ARTICLE_SHOP = 
-			"//div[" + 
-				"@class[contains(.,'product-colors')] or " + 
-				"@class[contains(.,'_1nxc_')]" + //TODO (Outlet) A la espera que Sergio Campillo haga el cambio
-			"]";
+	public abstract String getNameColorFromCodigo(String codigoColor);
+	public abstract Optional<WebElement> getArticuloConVariedadColores(int numArticulo);
+	public abstract void clickColorArticulo(WebElement articulo, int posColor);
 	
-	private static final String TAG_ID_COLOR = "@TagIdColor";
-	private static final String XPATH_IMG_COD_COLOR_WITH_TAG_COLOR = "//img[@class[contains(.,'other-color')] and @data-id='" + TAG_ID_COLOR + "']";
-	
-	public String getXPathColorArticle() {
-		return XPATH_COLORS_ARTICLE_SHOP;
-	}
-	
-	public String getXPathImgColorRelativeArticle(boolean selected) {
-		String xpathColor = getXPathColorArticle();
-		if (!selected) {
-			return xpathColor + "//img";
+	public static SecColoresArticuloDesktop make(AppEcom app, Pais pais) {
+		if (pais.isGaleriaKondo(app)) {
+			return new SecColoresArticuloDesktopKondo();
 		}
-		if (app==AppEcom.outlet) {
-			return xpathColor + "//self[@class[contains(.,'--selected')]]//img";
-		} else {
-			return xpathColor + "//button[@class[contains(.,'_3JgrI')]]/img";
-		}
+		return new SecColoresArticuloDesktopNormal();
 	}
 
-	public String getXPathImgCodigoColor(String codigoColor) {
-		return XPATH_IMG_COD_COLOR_WITH_TAG_COLOR.replace(TAG_ID_COLOR, codigoColor);
-	}
 }

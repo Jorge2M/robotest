@@ -50,7 +50,7 @@ public abstract class SecCabecera extends PageBase {
 		var menusUser = new MenusUserWrapper();
 		menusUser.isMenuInStateUntil(UserMenu.LUPA, Visible, 1);
 		menusUser.clickMenuAndWait(UserMenu.LUPA);
-		SecSearch secSearch = SecSearch.getNew(channel);
+		var secSearch = SecSearch.getNew(channel);
 		secSearch.search(referencia);
 	}
 	

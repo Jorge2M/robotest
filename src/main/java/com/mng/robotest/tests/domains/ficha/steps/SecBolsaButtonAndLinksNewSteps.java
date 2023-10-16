@@ -70,7 +70,7 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 	
 	@Validation (description="Aparece el bloque de \"KcSafety\"")
 	private boolean checkKcSafety() {
-		return (secDetalleProductNew.isVisibleBlockKcSafety());
+		return secDetalleProductNew.isVisibleBlockKcSafety();
 	}
 
 	@Step (

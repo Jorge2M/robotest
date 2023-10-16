@@ -6,7 +6,6 @@ import java.io.StringReader;
 import java.util.Optional;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.seo.beans.Sitemapindex;
@@ -19,8 +18,8 @@ public class PageSitemap extends PageBase {
 	
 	public Optional<Sitemapindex> getSiteMap() {
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(Sitemapindex.class);
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			var jaxbContext = JAXBContext.newInstance(Sitemapindex.class);
+			var jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			String contentSitemap = getPageSource();
 			var reader = new StringReader(contentSitemap);
 			return Optional.of((Sitemapindex)jaxbUnmarshaller.unmarshal(reader));
@@ -38,5 +37,4 @@ public class PageSitemap extends PageBase {
 		return driver.getPageSource();
 	}
 
-	
 }

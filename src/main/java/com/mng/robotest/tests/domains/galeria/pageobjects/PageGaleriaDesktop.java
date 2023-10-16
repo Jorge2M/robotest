@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.galeria.pageobjects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -12,7 +11,6 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecColoresArticuloDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktopKondo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery;
@@ -22,7 +20,6 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHead
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
-import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
@@ -33,8 +30,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	private final SecSubMenusGallery secSubMenusGallery = SecSubMenusGallery.make(app, dataTest.getPais());
-	private final SecTallasArticulo secTallas = SecTallasArticulo.make(app, dataTest.getPais(), getXPathArticulo());
-	private final SecColoresArticuloDesktop secColores = new SecColoresArticuloDesktop();
+	private final SecColoresArticuloDesktop secColores = SecColoresArticuloDesktop.make(app, dataTest.getPais());
 	private final SecBannerHeadGallery secBannerHead = new SecBannerHeadGallery();
 	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
 	private final SecFiltrosDesktop secFiltrosDesktop = SecFiltrosDesktop.make(app, dataTest.getPais());
@@ -78,6 +74,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	public enum TypeArticle { REBAJADO, NO_REBAJADO }
+	
 	private static final String XPATH_ANCESTOR_ARTICLE = "//ancestor::div[@class[contains(.,'product-list-info')]]";
 	
 	private String getXPathDataArticuloOfType(TypeArticle typeArticle) {
@@ -85,12 +82,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return (getXPathArticulo() + xpathPrecio + XPATH_ANCESTOR_ARTICLE);
 	}
 	
-	private String getXPathArticuloConColores() {
-		return (
-			secColores.getXPathColorArticle() + "/" + 
-			getXPathAncestorArticulo());
-	}
-
 	private static final String XPATH_ICONO_UP_GALERY = "//div[@id='scroll-top-step' or @id='iconFillUp']";
 	private static final String XPATH_HEADER_ARTICLES = "//div[@id[contains(.,'title')]]/h1";
 
@@ -165,29 +156,19 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return ("//*[@data-testid='." + typeSlider.name().toLowerCase() + "']");
 	}
 
-	private String getXPathArticuloConVariedadColores(int numArticulo) {
-		return ("(" + getXPathArticuloConColores() + ")" + "[" + numArticulo + "]");
+	@Override
+	public void clickColorArticulo(WebElement articulo, int posColor) {
+		secColores.clickColorArticulo(articulo, posColor);
 	}
-
+	
 	@Override
 	public WebElement getArticuloConVariedadColoresAndHover(int numArticulo) {
-		var articulo = getArticuloConVariedadColores(numArticulo);
+		var articulo = secColores.getArticuloConVariedadColores(numArticulo);
 		if (articulo.isPresent()) {
 			hoverArticle(articulo.get());
 			return articulo.get();
 		}
 		return null;
-	}
-	private Optional<WebElement> getArticuloConVariedadColores(int numArticulo) {
-		String xpathArticulo = getXPathArticuloConVariedadColores(numArticulo);
-		for (int i=0; i<8; i++) {
-			if (state(Present, xpathArticulo).check()) {
-				return Optional.of(getElement(xpathArticulo));
-			}
-			scrollVertical(1000);
-			waitMillis(1000);
-		}
-		return Optional.empty();
 	}
 
 	public boolean isArticleFromLinea(int numArticle, LineaType lineaType) {
@@ -218,12 +199,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		    (state(Present, ".//a[@href[contains(.,'" + lineaType.getId2() + "')]]").check()));
 	}
 	
-	@Override
-	public WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor) {
-		String xpathImgColorRelArticle = secColores.getXPathImgColorRelativeArticle(selected);
-		return (articulo.findElements(By.xpath("." + xpathImgColorRelArticle)).get(numColor-1));
-	}
-
 	/**
 	 * @param categoriaProducto categoría de producto (p.e. "BOLSOS")
 	 * @return el xpath correspondiente a la cabecera de resultado de una búsqueda de una determinada categoría de producto
@@ -568,13 +543,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	//Equivalent to Mobil
 	@Override
 	public String getNameColorFromCodigo(String codigoColor) {
-		String xpathImgColor = secColores.getXPathImgCodigoColor(codigoColor);
-		if (!state(Present, xpathImgColor).check()) {
-			return Constantes.COLOR_DESCONOCIDO;
-		}
-		
-		WebElement imgColorWeb = getElement(xpathImgColor);
-		return (imgColorWeb.getAttribute("data-variant"));
+		return secColores.getNameColorFromCodigo(codigoColor);
 	}
 	
 	//Equivalent to Mobil

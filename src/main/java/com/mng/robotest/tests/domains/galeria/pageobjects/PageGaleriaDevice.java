@@ -20,13 +20,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageGaleriaDevice extends PageGaleria {
 	
-	private final SecTallasArticulo secTallas = SecTallasArticulo.make(app, dataTest.getPais(), getXPathArticulo());
+	private final SecTallasArticulo secTallas = SecTallasArticulo.make(channel, app, dataTest.getPais());
 	
 	private static final String TAG_ID_COLOR = "@TagIdColor";
-	private static final String TAG_FLAG_SELECTED = "@TagFlagSelected";
 	
 	//TODO adaptar React (pendiente petición a Jesús Bermúdez 3-Marzo-2021)
-	private static final String XPATH_ARTICULO = "//li[@data-testid[contains(.,'plp.product')]]";
+	public static final String XPATH_ARTICULO = "//li[@data-testid[contains(.,'plp.product')]]";
+	private static final String XPATH_ANCESTOR_ARTICLE = "//ancestor::div[@class[contains(.,'product-list-info')]]";
 	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
 
 	private static final String XPATH_IMG_RELATIVE_ARTICLE = 
@@ -75,7 +75,7 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 
 	String getXPathArticuloConColores() {
-		return getXPathColoresArticle() + "//" + getXPathAncestorArticulo();
+		return getXPathColoresArticle() + "//" + XPATH_ANCESTOR_ARTICLE;
 	}
 	
 	String getXPpathIconoUpGalery() {
@@ -86,12 +86,6 @@ public class PageGaleriaDevice extends PageGaleria {
 		default:
 			return XPATH_ICONO_UP_GALERY_TABLET;
 		}
-	}
-	
-	String getXPathImgColorRelativeArticleWithTagSelected() {
-		return (
-			getXPathColoresArticle() + 
-			"//self::*[@class[contains(.,'" + TAG_FLAG_SELECTED + "')]]//img");
 	}
 	
 	@Override
@@ -112,14 +106,6 @@ public class PageGaleriaDevice extends PageGaleria {
 	
 	String getXPathImgCodigoColor(String codigoColor) {
 		return XPATH_IMG_COD_COLOR_WITH_TAG_COLOR.replace(TAG_ID_COLOR, codigoColor);
-	}
-	
-	String getXPathImgColorRelativeArticle(boolean selected) {
-		String selectedStr = "";
-		if (selected) {
-			selectedStr = "selected";
-		}
-		return (getXPathImgColorRelativeArticleWithTagSelected().replace(TAG_FLAG_SELECTED, selectedStr));
 	}
 	
 	String getXPathButtonAnyadirArticle(int posArticulo) {
@@ -166,9 +152,14 @@ public class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	@Override
-	public WebElement getColorArticulo(WebElement articulo, boolean selected, int numColor) {
-		String xpathImgColorRelArticle = getXPathImgColorRelativeArticle(selected);
-		return getElements("." + xpathImgColorRelArticle).get(numColor-1);
+	public void clickColorArticulo(WebElement articulo, int posColor) {
+		var color = getColorArticulo(articulo, posColor);
+		color.click();
+	}
+	
+	private WebElement getColorArticulo(WebElement articulo, int posColor) {
+		String xpathImgColorRelArticle = getXPathColoresArticle();
+		return getElements("." + xpathImgColorRelArticle).get(posColor-1);
 	}
 
 	@Override

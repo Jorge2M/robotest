@@ -4,7 +4,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
@@ -24,8 +23,8 @@ public class SecModalPersonalizacionSteps extends StepBase {
 	}
 	
 	public boolean checkArticleCustomizable(State levelError) {
-		ChecksTM checks = checkAreArticleCustomizable(levelError);
-		for (Check check : checks.getListChecks()) {
+		var checks = checkAreArticleCustomizable(levelError);
+		for (var check : checks.getListChecks()) {
 			if (!check.isOvercomed()) {
 				return false;
 			}
@@ -191,9 +190,7 @@ public class SecModalPersonalizacionSteps extends StepBase {
 		validateAddBag(2);
 	}
 
-	@Validation(
-		description="1) Aparece el botón para añadir a la bolsa",
-		level=Warn)
+	@Validation (description="1) Aparece el botón para añadir a la bolsa", level=Warn)
 	private boolean validateAddBag(int seconds) {
 		return isBotonSiguienteVisible(seconds);
 	}

@@ -46,7 +46,7 @@ public class PageSelectLineaVOTFSteps extends StepBase {
 		pageSelectLineaVOTF.clickMenu(LineaType.SHE, numMenu);
 		
 		new SecCabeceraMostFrequent().clickLogoMango();
-		AccesoVOTF accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dataTest.getPais()));
+		var accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(dataTest.getPais()));
 		new SectionBarraSupVOTFSteps().validate(accesoVOTF.getUsuario());
 		
 		checksDefault();

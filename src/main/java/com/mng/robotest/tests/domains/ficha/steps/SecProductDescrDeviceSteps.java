@@ -15,8 +15,8 @@ public class SecProductDescrDeviceSteps extends StepBase {
 	@Validation
 	public ChecksTM validateAreInStateInitial() {
 		var checks = ChecksTM.getNew();
-		for (TypePanel typePanel : TypePanel.values()) {
-			TypeStatePanel stateExpected = TypeStatePanel.MISSING;
+		for (var typePanel : TypePanel.values()) {
+			var stateExpected = TypeStatePanel.MISSING;
 			if (typePanel.getListApps().contains(app)) {
 				stateExpected = typePanel.getStateInitial();
 			}

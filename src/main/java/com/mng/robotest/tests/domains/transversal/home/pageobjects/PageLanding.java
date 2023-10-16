@@ -9,7 +9,6 @@ import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
-import com.mng.robotest.tests.domains.transversal.banners.pageobjects.BannerObject;
 import com.mng.robotest.tests.domains.transversal.banners.pageobjects.BannerObjectFactory;
 import com.mng.robotest.tests.domains.transversal.banners.pageobjects.BannerType;
 import com.mng.robotest.tests.domains.transversal.banners.pageobjects.ManagerBannersScreen;
@@ -67,12 +66,12 @@ public class PageLanding extends PageBase {
 	}
 	
 	public boolean hayMaps() {
-		List<WebElement> listaMaps = getListaMaps();
+		var listaMaps = getListaMaps();
 		return (listaMaps!=null && !listaMaps.isEmpty());
 	}
 	
 	public boolean hayItemsEdits() {
-		List<WebElement> listaItemsEdits = getListaItemsEdit();
+		var listaItemsEdits = getListaItemsEdit();
 		return (listaItemsEdits!=null && !listaItemsEdits.isEmpty());
 	}
 	
@@ -130,12 +129,11 @@ public class PageLanding extends PageBase {
 			return true;
 		}
 
-		PageFicha pageFicha = PageFicha.of(Channel.desktop);
+		var pageFicha = PageFicha.of(Channel.desktop);
 		if (pageFicha.isPageUntil(0)) {
 			return true;
 		}
-		BannerObject banners = BannerObjectFactory.make(BannerType.STANDAR);
-		
+		var banners = BannerObjectFactory.make(BannerType.STANDAR);
 		return banners.isVisibleAnyBanner();
 	}
 	
@@ -151,7 +149,7 @@ public class PageLanding extends PageBase {
 	}
 		
 	private boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, Channel channel) {
-		for (Element element : elementsCanBeContained) {
+		for (var element : elementsCanBeContained) {
 			boolean elementContained = false;
 			switch (element) {
 			case article:
@@ -184,8 +182,7 @@ public class PageLanding extends PageBase {
 	}
 
 	public boolean isPresentMainContent() {
-		String xpathMainContent = getXPathMainContent();
-		return state(Present, xpathMainContent).check();
+		return state(Present, getXPathMainContent()).check();
 	}
 	
 	public boolean isVisibleCommsHeaderBannerLoyalty(int seconds) {

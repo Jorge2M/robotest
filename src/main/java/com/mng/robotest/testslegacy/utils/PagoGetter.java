@@ -15,28 +15,28 @@ public class PagoGetter {
 	private PagoGetter() {}
 	
 	public static List<PaymentCountry> getListPayments(String codCountry, AppEcom app, boolean isEmpleado) {
-		List<Pais> listCountries = PaisGetter.from(Arrays.asList(codCountry));
+		var listCountries = PaisGetter.from(Arrays.asList(codCountry));
 		return getListPaymentsFromCountries(listCountries, app, isEmpleado);
 	}
 	
 	public static List<PaymentCountry> getListPayments(List<String> listCodCountries, AppEcom app, boolean isEmpleado) {
-		List<Pais> listCountries = PaisGetter.from(listCodCountries);
+		var listCountries = PaisGetter.from(listCodCountries);
 		return getListPaymentsFromCountries(listCountries, app, isEmpleado);
 	}
 	
 	public static List<PaymentCountry> getListPayments(AppEcom app, boolean isEmpleado) {
-		List<Pais> listCountries = PaisGetter.getAllCountries();
+		var listCountries = PaisGetter.getAllCountries();
 		return getListPaymentsFromCountries(listCountries, app, isEmpleado);
 	}
 
 	public static List<String> getLabelsPaymentsAlphabetically(Channel channel, AppEcom app, boolean isEmpleado) {
-		List<PaymentCountry> listPayments = getListPayments(app, isEmpleado);
+		var listPayments = getListPayments(app, isEmpleado);
 		return getLabelsPaymentsFromCountries(listPayments, channel, app); 	
 	}
 	
 	public static List<String> getLabelsPaymentsAlphabetically(
 			List<String> listCodCountries, Channel channel, AppEcom app, boolean isEmpleado) {
-		List<PaymentCountry> listPayments = getListPayments(listCodCountries, app, isEmpleado);
+		var listPayments = getListPayments(listCodCountries, app, isEmpleado);
 		return getLabelsPaymentsFromCountries(listPayments, channel, app); 
 	}
 	
@@ -53,9 +53,9 @@ public class PagoGetter {
 	
 	private static List<PaymentCountry> getListPaymentsFromCountries(List<Pais> listCountries, AppEcom app, boolean isEmpleado) {
 		List<PaymentCountry> listPaymentsToReturn = new ArrayList<>();
-		for (Pais pais : listCountries) {
+		for (var pais : listCountries) {
 			if (!pais.getTiendasOnlineList().isEmpty() && pais.getTiendasOnlineList().contains(app)) {
-				for (Pago pago : pais.getListPagos()) {
+				for (var pago : pais.getListPagos()) {
 					if ((!isEmpleado || (isEmpleado && pago.isForEmpleado())) &&
 						//El storecredito lo mantenemos al margen de la lista pues no aparece como un icono
 						(pago.getTypePago()!=TypePago.STORE_CREDIT) && 

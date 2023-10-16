@@ -50,9 +50,8 @@ public class PageFichaSteps extends StepBase {
 			.netTraffic().execute();
 	}
 
-	@Validation (
-		description=
-			"Aparece la página correspondiente a la ficha del artículo #{refArticulo}" + SECONDS_WAIT)
+	@Validation (description=
+		"Aparece la página correspondiente a la ficha del artículo #{refArticulo}" + SECONDS_WAIT)
 	public boolean checkIsFichaArtDisponible(String refArticulo, int seconds) {
 		return pageFicha.isFichaArticuloUntil(refArticulo, seconds);
 	}

@@ -67,8 +67,7 @@ public class SecBolsaSteps extends StepBase {
 		checkBolsaDisappears(3);
 	}
 
-	@Validation (
-		description="Desaparece la bolsa " + SECONDS_WAIT)
+	@Validation (description="Desaparece la bolsa " + SECONDS_WAIT)
 	private boolean checkBolsaDisappears(int seconds) {
 		return (secBolsa.isInStateUntil(StateBolsa.CLOSED, seconds));
 	}
@@ -233,7 +232,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	public void clear1erArticuloBolsa() throws Exception {
-		ArticuloScreen artToClear = dataTest.getDataBag().getArticulo(0);
+		var artToClear = dataTest.getDataBag().getArticulo(0);
 		clearArticuloBolsa(artToClear);
 	}
 

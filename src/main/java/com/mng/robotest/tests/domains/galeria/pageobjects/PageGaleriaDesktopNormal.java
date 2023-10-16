@@ -12,7 +12,7 @@ import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 
-	private static final String XPATH_ARTICULO = "//li[@id[contains(.,'product-key-id')]]";
+	public static final String XPATH_ARTICULO = "//li[@id[contains(.,'product-key-id')]]";
 	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
 	
 	public PageGaleriaDesktopNormal() {
