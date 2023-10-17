@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.galeria.tests;
 
-import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeSlider.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider.*;
 import static com.mng.robotest.tests.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
@@ -19,11 +19,11 @@ public class Gpo006 extends TestBase {
 
 	private void checkSliders() throws Exception {
 		String src2onImage = pGaleriaSteps.clicksSliderArticuloConColores(1, NEXT);
-		pGaleriaSteps.clicksSliderArticuloConColores(1, PREV);
+		pGaleriaSteps.clicksSliderArticuloConColores(1, PREVIOUS);
 		pGaleriaSteps.clicksSliderArticuloConColores(1, src2onImage, NEXT);
 		String srcImgAfterClickColor = pGaleriaSteps.selecColorFromArtGaleriaStep(1, 2);
 		pGaleriaSteps.clicksSliderArticuloConColores(1, NEXT, NEXT);
-		pGaleriaSteps.clicksSliderArticuloConColores(1, srcImgAfterClickColor, PREV, PREV);
+		pGaleriaSteps.clicksSliderArticuloConColores(1, srcImgAfterClickColor, PREVIOUS, PREVIOUS);
 	}
 
 }

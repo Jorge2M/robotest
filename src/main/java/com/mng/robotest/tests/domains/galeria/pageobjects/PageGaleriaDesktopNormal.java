@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
@@ -21,6 +22,10 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 	
 	public PageGaleriaDesktopNormal(From from) {
 		super(from);
+	}
+	
+	private String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
+		return "//*[@data-testid='" + typeSlider.getNormal() + "']";
 	}
 	
 	@Override
@@ -88,6 +93,13 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 		}
 		return null;
 	}
+	
+	@Override
+	public void clickSlider(WebElement articulo, TypeSlider typeSlider) {
+		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
+		waitMillis(500);
+		click(articulo).by(By.xpath(xpathSlider)).exec();		
+	}	
 	
 	private String getRefFromId(WebElement articulo) {
 		String id = articulo.getAttribute("id");

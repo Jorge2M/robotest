@@ -27,7 +27,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.Con
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeSlider;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterCollection;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
@@ -36,7 +36,6 @@ import com.mng.robotest.testslegacy.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 import com.mng.robotest.testslegacy.pageobject.utils.DataScroll;
 import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion.*;
@@ -361,7 +360,7 @@ public class PageGaleriaSteps extends StepBase {
 	
 	@Step (
 		description=
-			"Seleccionar el #{posColor}o color (" + TAG_SRC_PNG_2O_COLOR +") no seleccionado del #{numArtConColores}o " + 
+			"Seleccionar el #{posColor}o color (" + TAG_SRC_PNG_2O_COLOR +") del #{numArtConColores}o " + 
 			"artículo con variedad de colores (" + TAG_NOMBRE_1ER_ARTIC + ", " + TAG_PRECIO_1ER_ARTIC +")", 
 		expected="Se selecciona el color")
 	public String selecColorFromArtGaleriaStep(int numArtConColores, int posColor) {
@@ -369,8 +368,8 @@ public class PageGaleriaSteps extends StepBase {
 		waitForPageLoaded(driver, 2);
 
 		var articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
-		replaceStepExpected(TAG_NOMBRE_1ER_ARTIC, pageGaleria.getNombreArticulo(articuloColores));
-		replaceStepExpected(TAG_PRECIO_1ER_ARTIC, pageGaleria.getPrecioArticulo(articuloColores));
+		replaceStepDescription(TAG_NOMBRE_1ER_ARTIC, pageGaleria.getNombreArticulo(articuloColores));
+		replaceStepDescription(TAG_PRECIO_1ER_ARTIC, pageGaleria.getPrecioArticulo(articuloColores));
 		String srcImg1erArt = pageGaleria.getImagenArticulo(articuloColores);
 		replaceStepDescription(TAG_SRC_PNG_2O_COLOR, srcImg1erArt);
 		
@@ -418,7 +417,7 @@ public class PageGaleriaSteps extends StepBase {
 
 		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax.
 		//En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
-		PageObjTM.waitForPageLoaded(driver, 2);
+		waitForPageLoaded(driver, 2);
 		var pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		var articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHover(numArtConColores);
 		

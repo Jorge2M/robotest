@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecColoresArticuloDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktopKondo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery;
@@ -35,6 +36,8 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
 	private final SecFiltrosDesktop secFiltrosDesktop = SecFiltrosDesktop.make(app, dataTest.getPais());
 	
+	public abstract void clickSlider(WebElement articulo, TypeSlider typeSlider);
+	
 	public void clickSubMenu(String submenu) {
 		secSubMenusGallery.clickSubMenu(submenu);
 	}
@@ -43,8 +46,8 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	public enum NumColumnas { DOS, TRES, CUATRO }
-	public enum TypeSlider { PREV, NEXT }
 	public enum TypeColor { CODIGO, NOMBRE }
+	
 	public enum TypeArticleDesktop {
 		SIMPLE (
 			"//self::*[@data-imgsize='A1' or @class[contains(.,'_2zQ2a')]]"), //TODO (Outlet) a la espera de los cambios de Sergio Campillo
@@ -150,10 +153,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	@Override
 	String getXPathPagina(int pagina) {
 		return (INI_XPATH_PAGINA_GALERIA + pagina + "']");
-	}
-
-	private static String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
-		return ("//*[@data-testid='." + typeSlider.name().toLowerCase() + "']");
 	}
 
 	@Override
@@ -442,31 +441,14 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	public void clickSliders(WebElement articulo, TypeSlider... typeSliderList) {
 		Arrays.stream(typeSliderList)
-			.forEach(s -> clickSlider(articulo, s));
+			.forEach(s -> hoverArticleAndclickSlider(articulo, s));
 	}
 	
-	public void clickSlider(WebElement articulo, TypeSlider typeSlider) {
+	public void hoverArticleAndclickSlider(WebElement articulo, TypeSlider typeSlider) {
 		hoverArticle(articulo);
-		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
-		waitMillis(500);
-		click(articulo).by(By.xpath(xpathSlider)).exec();
+		clickSlider(articulo, typeSlider);
 	}
 
-	public boolean isPresentSliderInArticleUntil(TypeSlider typeSlider, WebElement article, int seconds) {
-		for (int i=0; i<seconds; i++) {
-			if (isPresentSliderInArticle(typeSlider, article)) {
-				return true;
-			}
-			waitMillis(1000);
-		}
-		return false;
-	}
-	
-	public boolean isPresentSliderInArticle(TypeSlider typeSlider, WebElement article) {
-		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
-		return (state(Present, article).by(By.xpath("." + xpathSlider)).check());
-	}
-	
 	public String getNombreArticulo(int numArticulo) {
 		return getElement("(" + getXPathArticulo() + ")[" + numArticulo + "]//span[" + classProductName + "]").getText().trim();
 	}
@@ -687,4 +669,5 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
     public boolean isBannerHeadSalesBanner(IdiomaPais idioma) { 
     	return secBannerHead.isSalesBanner(idioma);
     }
+    
 }
