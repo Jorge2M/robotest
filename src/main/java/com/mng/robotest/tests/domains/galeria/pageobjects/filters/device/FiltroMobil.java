@@ -13,11 +13,11 @@ public enum FiltroMobil {
 	COLORES(
 		"//nav[@data-testid[contains(.,'group.color')]]//button",
 		"//button[@id[contains(.,'Colores')]]",
-		"//label[@for[contains(.,'colorGroups')]"), 
+		"//label[@for[contains(.,'colorGroups')]]"), 
 	TALLAS(
 		"//nav[@data-testid[contains(.,'group.talla')]]//button",
 		"//button[@id[contains(.,'Tallas')]]",
-		"//label[@for[contains(.,'sizes')]"),
+		"//label[@for[contains(.,'sizes')]]"),
 	PRECIOS(
 		"Inexistent",
 		"//button[@id[contains(.,'Precio')]]",

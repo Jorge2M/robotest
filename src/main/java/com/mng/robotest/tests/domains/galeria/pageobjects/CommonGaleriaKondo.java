@@ -14,14 +14,18 @@ public class CommonGaleriaKondo extends PageBase {
 	public static final String XPATH_ARTICULO = XPATH_CAPA_ARTICULO + "/..";
 	
 	//TODO Galería Kondo -> Solicitar React (11-10-2023)
-	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//div[@class[contains(.,'md12')]]";
+	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE_DESKTOP = "//div[@class[contains(.,'md12')]]";
+	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE_DEVICE = "//p[@class[contains(.,'hYlwk')]]/span[2]";
 
 	public String getXPathArticulo() {
 		return XPATH_ARTICULO;
 	}
 	
 	public String getXPathNombreRelativeToArticle() {
-		return XPATH_NOMBRE_RELATIVE_TO_ARTICLE;
+		if (channel.isDevice()) {
+			return XPATH_NOMBRE_RELATIVE_TO_ARTICLE_DEVICE;
+		}
+		return XPATH_NOMBRE_RELATIVE_TO_ARTICLE_DESKTOP;
 	}
 	
 	private String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
@@ -35,7 +39,7 @@ public class CommonGaleriaKondo extends PageBase {
 	public String getNombreArticulo(WebElement articulo) {
 		String xpathNameArticle = "." + getXPathNombreRelativeToArticle();
 		if (state(Visible, articulo).by(By.xpath(xpathNameArticle)).check()) {
-			return articulo.findElement(By.xpath(xpathNameArticle)).getText();
+			return getElement(articulo, xpathNameArticle).getText();
 		} else {
 			return "Not Found"; 
 		}

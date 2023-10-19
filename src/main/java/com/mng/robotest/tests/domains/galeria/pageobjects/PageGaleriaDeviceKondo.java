@@ -1,7 +1,11 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects;
 
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.device.SecMultiFiltrosDeviceKondo;
+import com.mng.robotest.testslegacy.data.Color;
 
 public class PageGaleriaDeviceKondo extends PageGaleriaDevice {
 
@@ -50,4 +54,7 @@ public class PageGaleriaDeviceKondo extends PageGaleriaDevice {
 		commonKondo.clickSlider(articulo, typeSlider);
 	}
 	
+	public boolean isVisibleColorTags(List<Color> colors) {
+		return new SecMultiFiltrosDeviceKondo().isVisibleColorTags(colors);
+	}
 }

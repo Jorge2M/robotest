@@ -40,11 +40,12 @@ public class SecFiltrosSteps extends StepBase {
 			List<Color> colorsSelected, String litMenu, int numArticulos1page) {
 		
 		var checks = ChecksTM.getNew();
-		if (dataTest.getPais().isGaleriaKondo(app) && 
-			channel==Channel.desktop) {
-		 	checks.add(
-				"Aparecen los tags de color <b>" + colorsSelected.toString() + "</b>",
-				((PageGaleriaDesktopKondo)pageGaleria).isVisibleColorTags(colorsSelected), Defect);			
+		if (dataTest.getPais().isGaleriaKondo(app)) {
+			if (channel==Channel.desktop ) {
+			 	checks.add(
+					"Aparecen los tags de color <b>" + colorsSelected.toString() + "</b>",
+					((PageGaleriaDesktopKondo)pageGaleria).isVisibleColorTags(colorsSelected), Defect);
+			}
 		} else {
 			String currentUrl = driver.getCurrentUrl();
 			var listCodColors = Color.getListCodigosColor(colorsSelected);

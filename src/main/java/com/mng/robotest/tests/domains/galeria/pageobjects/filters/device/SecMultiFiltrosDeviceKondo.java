@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.filters.device;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Clickable;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.device.FiltroMobil.*;
 
 import java.util.Arrays;
@@ -15,25 +14,23 @@ import com.mng.robotest.testslegacy.data.Color;
 
 public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 
-	//
 	private static final String XPATH_FILTRAR_Y_ORDENAR_BUTTON = "//*[@data-testid='plp.filters.mobile.button']";
-	
-	//
 	public static final String XPATH_FILTER_PANEL = "//*[@data-testid='plp.filters.mobile.panel']";
 	
 	//TODO Galería Kondo (19-10-23)
 	private static final String XPATH_BUTTON_MOSTRAR_ARTICULOS = "//button/span[text()[contains(.,'Mostrar artículos')]]";
-	
-	//
 	private static final String XPATH_BUTTON_CLOSE = XPATH_FILTER_PANEL + "//button[@aria-label='close']";
 
-	//
 	private String getXPathFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
 		String textXPath = 
 			"text()[contains(.,'" + textFiltro + "')] or " +
 			"text()[contains(.,'" + upperCaseFirst(textFiltro) + "')]";
 
 		return typeFiltro.getXPathOptionKondo() + "//self::*[" + textXPath+ "]";
+	}
+	
+	private String getXPathFiltroTag(FiltroMobil typeFiltro, String name) {
+		return typeFiltro.getXPathKondo() + "/../div[text()='" + name + "']"; 
 	}
 	
 	@Override
@@ -50,11 +47,12 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 	public boolean isClickableFiltroUntil(int seconds) {
 		return state(Clickable, XPATH_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
 	}	
-	//..
+
 	@Override
 	public void selectMenu2onLevel(List<String> listMenus) {
 		selectFiltrosAndWaitLoad(FAMILIA, listMenus);
 	}
+	
 	@Override
 	public void selectMenu2onLevel(String menuLabel) {
 		selectFiltrosAndWaitLoad(FAMILIA, Arrays.asList(menuLabel));
@@ -65,7 +63,6 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 		selectFiltrosAndWaitLoad(typeFiltro, listTextFiltros);
 	}
 	
-	//
 	@Override
 	public boolean isAvailableFiltros(FiltroMobil typeFiltro, List<String> listTextFiltros) {
 		if (!goAndClickFiltroButton()) {
@@ -81,15 +78,24 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 		close();
 		return true;
 	}
-	//
+	
+	public boolean isVisibleColorTags(List<Color> colors) {
+		return colors.stream()
+			.map(color -> getXPathFiltroTag(FiltroMobil.COLORES, color.getNameFiltro()))
+			.filter(xpath -> !state(Present, xpath).check())
+			.findAny().isEmpty();
+	}
+
 	private void selectFiltrosAndWaitLoad(FiltroMobil typeFiltro, List<String> listTextFiltros) {
 		goAndClickFiltroButton();
+		getElement(typeFiltro.getXPathKondo()).click();
+		waitLoadPage();
 		for (String textFiltro : listTextFiltros) {
 			clickFiltroOption(typeFiltro, textFiltro);
 		}
 		clickMostrarArticulosButton();
 	}
-	//
+
 	private void clickFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
 		try {
 			clickFiltroOptionStaleNotSafe(typeFiltro, textFiltro);
@@ -99,21 +105,18 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 			clickFiltroOptionStaleNotSafe(typeFiltro, textFiltro);
 		}
 	}
-	//
+
 	private void clickFiltroOptionStaleNotSafe(FiltroMobil typeFiltro, String textFiltro) {
 		var filtroLinea = getElement(typeFiltro.getXPathKondo());
-		filtroLinea.click();
-		waitLoadPage();
 		By byFiltroOption = By.xpath(getXPathFiltroOption(typeFiltro, textFiltro));
 		click(filtroLinea).by(byFiltroOption).waitLink(1).exec();
 		waitLoadPage();
 	}
-	//
+
 	private void clickMostrarArticulosButton() {
 		click(XPATH_BUTTON_MOSTRAR_ARTICULOS).exec();
 	}
 	
-	//
 	private boolean goAndClickFiltroButton() {
 		if (!isOpenFiltrosUntil(0)) {
 			if (state(Clickable, XPATH_FILTRAR_Y_ORDENAR_BUTTON).wait(2).check()) {
@@ -124,7 +127,6 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 		return false;
 	}
 	
-	//
 	private boolean isOpenFiltrosUntil(int seconds) {
 		return state(Visible, ORDENAR.getXPathKondo()).wait(seconds).check();
 	}
@@ -138,7 +140,6 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 		return false;
 	}
 	
-	//
 	private void close() {
 		click(XPATH_BUTTON_CLOSE).exec();
 		isCloseFiltrosUntil(1);

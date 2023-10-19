@@ -32,17 +32,17 @@ public enum Color {
 
 	public static List<String> getListCodigosColor(List<Color> listColors) {
 		List<String> listCodColors = new ArrayList<>();
-		for (Color color : listColors)
+		for (Color color : listColors) {
 			listCodColors.add(color.getCodigoColor());
-	
+		}
 		return listCodColors;
 	}
 	
 	public static List<String> getListNamesFiltros(List<Color> listColors) {
 		List<String> listCodColors = new ArrayList<>();
-		for (Color color : listColors)
+		for (Color color : listColors) {
 			listCodColors.add(color.getNameFiltro());
-	
+		}
 		return listCodColors;
 	}
 }
