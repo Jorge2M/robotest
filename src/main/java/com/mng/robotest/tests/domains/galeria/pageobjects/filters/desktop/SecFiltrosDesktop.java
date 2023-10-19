@@ -1,10 +1,12 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.filters;
+package com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop;
 
 import java.util.List;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.desktop.SecMenuLateralDesktop;
@@ -31,35 +33,21 @@ public abstract class SecFiltrosDesktop extends PageBase implements SecFiltros {
 		return new SecFiltrosDesktopNormal();
 	}
 	
-	@Override
-	public void selectCollection(FilterCollection collection) {
-		//TODO
-	}
-	
-	@Override
-	public boolean isCollectionFilterPresent() throws Exception {
-		//TODO
-		return false;
-	}
-	
-	@Override
-	public void selectOrdenacion(FilterOrdenacion ordenacion) {
+	private void selectOrdenacion(FilterOrdenacion ordenacion) {
 		String xpathLink = getXPathLinkOrdenacion(ordenacion);
 		click(xpathLink).exec();
 	}
 	
 	@Override
-	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
+	public void selecOrdenacion(FilterOrdenacion typeOrden) throws Exception {
 		selectOrdenacion(typeOrden);
-		var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
-		return pageGaleria.waitForArticleVisibleAndGetNumberOfThem(10);
 	}
 	
 	/** 
 	 * @return el número de artículos que aparecen en la galería después de seleccionar el filtro
 	 */
 	@Override
-	public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect) {
+	public void selecFiltroColores(List<Color> colorsToSelect) {
 		showFilters();
 		for (Color color : colorsToSelect) {
 			String xpathLinkColor = getXPathLinkColor(color);
@@ -67,8 +55,6 @@ public abstract class SecFiltrosDesktop extends PageBase implements SecFiltros {
 			click(xpathLinkColor).exec();
 		}
 		acceptFilters();
-		var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
-		return pageGaleria.waitForArticleVisibleAndGetNumberOfThem(10);
 	}
 	
 	@Override

@@ -1,5 +1,6 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.filters;
+package com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop;
 
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
 import com.mng.robotest.testslegacy.data.Color;
 
 public class SecFiltrosDesktopNormal extends SecFiltrosDesktop {

@@ -21,10 +21,13 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.Typ
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.testslegacy.beans.Pais;
+import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.pageobject.utils.DataArticleGalery;
@@ -44,6 +47,7 @@ public abstract class PageGaleria extends PageBase {
 	protected final From from;
 	protected final SecTallasArticulo secTallas = SecTallasArticulo.make(channel, app, dataTest.getPais());
 	protected final SecPreciosArticulo secPrecios = new SecPreciosArticulo();
+	protected final SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());
 
 	protected PageGaleria() {
 		super();
@@ -79,10 +83,11 @@ public abstract class PageGaleria extends PageBase {
 	public abstract WebElement getArticleFromPagina(int numPagina, int numArticle);
 	public abstract boolean isHeaderArticlesVisible(String textHeader);
 	public abstract void showTallasArticulo(int posArticulo);
-	public abstract boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds);
+//	public abstract boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds);
 	public abstract ArticuloScreen selectTallaAvailableArticle(int posArticulo) throws Exception;
 	public abstract void selectTallaArticleNotAvalaible();
 	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
+	public abstract void clickSlider(WebElement articulo, TypeSlider typeSlider);
 
 	public enum StateFavorito { 
 		MARCADO, 
@@ -116,7 +121,10 @@ public abstract class PageGaleria extends PageBase {
 				return new PageGaleriaDesktopKondo(from);
 			case mobile, tablet:
 			default:
-				return new PageGaleriaDevice(from);
+				if (!pais.isGaleriaKondo(app) || from==From.BUSCADOR) {
+					return new PageGaleriaDeviceNormal(from);
+				}
+				return new PageGaleriaDeviceKondo(from);
 		}
 	}
 
@@ -655,4 +663,21 @@ public abstract class PageGaleria extends PageBase {
 		}
 		return StateFavorito.DESMARCADO;
 	}
+	public int selectColoresAndReturnNumArticles(List<Color> colorsToSelect) {
+		secFiltros.selecFiltroColores(colorsToSelect);
+		return waitForArticleVisibleAndGetNumberOfThem(10);
+	}
+	
+	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
+		secFiltros.selecOrdenacion(typeOrden);
+		return waitForArticleVisibleAndGetNumberOfThem(10);
+	}
+	public boolean isClickableFiltroUntil(int seconds) {
+		return secFiltros.isClickableFiltroUntil(seconds);
+	}
+	
+	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
+		return secTallas.isVisibleArticleCapaTallasUntil(posArticulo, seconds);
+	}
+	
 }

@@ -10,7 +10,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.tests.domains.galeria.steps.SecFiltrosSteps;
+import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.tests.domains.legal.legaltexts.LegalTextsPage;
 import com.mng.robotest.tests.domains.manto.tests.ManXXX;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
@@ -97,7 +97,7 @@ public abstract class StepBase extends PageBase {
 		filterGaleryByColors(menu, Arrays.asList(color));
 	}
 	protected void filterGaleryByColors(MenuItem menu, List<Color> colors) {
-		new SecFiltrosSteps().selectFiltroColores(colors, FactoryMenus.get(menu).getMenu());
+		new PageGaleriaSteps().selectFiltroColores(colors, FactoryMenus.get(menu).getMenu());
 	}	
 	
 	protected List<Article> getArticles(int numArticles) throws Exception {

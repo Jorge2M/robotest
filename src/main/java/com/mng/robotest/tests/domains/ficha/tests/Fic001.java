@@ -50,7 +50,7 @@ public class Fic001 extends TestBase {
 	}
 
 	private void articleOnlineTest() {
-		Article articleOnline = Article.getArticleForTest(productOnline.get());
+		var articleOnline = Article.getArticleForTest(productOnline.get());
 		new SecBuscadorSteps().searchArticulo(articleOnline, filterOnline);
 		pageFichaSteps.checkLinkDispTiendaInvisible();
 	}
@@ -96,7 +96,7 @@ public class Fic001 extends TestBase {
 		//Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
 		//-> Lo damos de baja
 		if (isTallaUnica) {
-			 new SecBolsaSteps().clear();
+			new SecBolsaSteps().clear();
 		}
 	}
 

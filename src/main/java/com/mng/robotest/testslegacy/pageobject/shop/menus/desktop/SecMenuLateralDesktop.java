@@ -6,7 +6,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktopKondo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktopKondo;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuLateralDesktop;
 
 public class SecMenuLateralDesktop extends PageBase {

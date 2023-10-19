@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.filters;
+package com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;

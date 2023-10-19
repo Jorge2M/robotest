@@ -22,8 +22,6 @@ import com.mng.robotest.testslegacy.pageobject.shop.menus.device.SecMenusUserDev
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 public class MenusUserWrapper extends PageBase {
 	
 	private final SecCabecera secCabecera = new SecCabeceraMostFrequent();

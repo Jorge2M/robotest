@@ -1,22 +1,17 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects;
 
-import java.util.List;
-
 import org.openqa.selenium.WebElement;
-
 import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktopKondo;
-import com.mng.robotest.testslegacy.data.Color;
 
-public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
+public class PageGaleriaDeviceKondo extends PageGaleriaDevice {
 
 	private final CommonGaleriaKondo commonKondo = new CommonGaleriaKondo();
 	
-	public PageGaleriaDesktopKondo() {
+	public PageGaleriaDeviceKondo() {
 		super();
 	}
 	
-	public PageGaleriaDesktopKondo(From from) {
+	public PageGaleriaDeviceKondo(From from) {
 		super(from);
 	}
 
@@ -53,10 +48,6 @@ public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
 	@Override
 	public void clickSlider(WebElement articulo, TypeSlider typeSlider) {
 		commonKondo.clickSlider(articulo, typeSlider);
-	}	
-	
-	public boolean isVisibleColorTags(List<Color> colors) {
-		return new SecFiltrosDesktopKondo().isVisibleColorTags(colors);
 	}
 	
 }

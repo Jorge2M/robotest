@@ -8,18 +8,19 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktopKondo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktopKondo;
 import com.mng.robotest.testslegacy.data.Color;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecFiltrosSteps extends StepBase {
 
-	private final SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());
+	private final PageGaleria pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 	
 	private static final String TAG_LIT_COLORS_TO_SELECT = "@TagLitColorsToSelect";
-
+	
 	@Step (
 		description="Seleccionar los colores <b>" + TAG_LIT_COLORS_TO_SELECT + "</b>", 
 		expected="Aparece la galería de imágenes",
@@ -29,7 +30,7 @@ public class SecFiltrosSteps extends StepBase {
 			TAG_LIT_COLORS_TO_SELECT, 
 			Color.getListNamesFiltros(colorsToSelect).toString());
 		
-		int numArticulos1page = secFiltros.selecFiltroColoresAndReturnNumArticles(colorsToSelect);			
+		int numArticulos1page = pageGaleria.selectColoresAndReturnNumArticles(colorsToSelect);			
 		checkAfterSelectFiltroColores(colorsToSelect, litMenu, numArticulos1page);
 		return numArticulos1page;
 	}
@@ -43,7 +44,7 @@ public class SecFiltrosSteps extends StepBase {
 			channel==Channel.desktop) {
 		 	checks.add(
 				"Aparecen los tags de color <b>" + colorsSelected.toString() + "</b>",
-				((SecFiltrosDesktopKondo)secFiltros).isVisibleColorTags(colorsSelected), Defect);			
+				((PageGaleriaDesktopKondo)pageGaleria).isVisibleColorTags(colorsSelected), Defect);			
 		} else {
 			String currentUrl = driver.getCurrentUrl();
 			var listCodColors = Color.getListCodigosColor(colorsSelected);

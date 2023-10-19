@@ -12,8 +12,8 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecColoresArticuloDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltrosDesktopKondo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktopKondo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecCrossSelling;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecSubMenusGallery;
@@ -34,9 +34,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	private final SecColoresArticuloDesktop secColores = SecColoresArticuloDesktop.make(app, dataTest.getPais());
 	private final SecBannerHeadGallery secBannerHead = new SecBannerHeadGallery();
 	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
-	private final SecFiltrosDesktop secFiltrosDesktop = SecFiltrosDesktop.make(app, dataTest.getPais());
-	
-	public abstract void clickSlider(WebElement articulo, TypeSlider typeSlider);
 	
 	public void clickSubMenu(String submenu) {
 		secSubMenusGallery.clickSubMenu(submenu);
@@ -399,11 +396,11 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		moveToArticleAndGetObject(posArticulo);
 	}
 
-	@Override
-	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
-		return secTallas.isVisibleArticleCapaTallasUntil(posArticulo, seconds);
-	}
-	
+//	@Override
+//	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
+//		return secTallas.isVisibleArticleCapaTallasUntil(posArticulo, seconds);
+//	}
+//	
 	@Override
 	public ArticuloScreen selectTallaAvailableArticle(int posArticulo) throws Exception {
 		waitLoadPage();
@@ -620,23 +617,22 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	public boolean isVisibleSelectorPrecios() {
-		return secFiltrosDesktop.isVisibleSelectorPrecios();
+		return ((SecFiltrosDesktop)secFiltros).isVisibleSelectorPrecios();
 	}
 	public int getMinImportFilter() {
-		return secFiltrosDesktop.getMinImportFilter(); 
+		return ((SecFiltrosDesktop)secFiltros).getMinImportFilter(); 
 	}
 	public int getMaxImportFilter() {
-		return secFiltrosDesktop.getMaxImportFilter(); 
+		return ((SecFiltrosDesktop)secFiltros).getMaxImportFilter(); 
 	}	
 	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
-		secFiltrosDesktop.clickIntervalImportFilter(margenPixelsLeft, margenPixelsRight);
+		((SecFiltrosDesktop)secFiltros).clickIntervalImportFilter(margenPixelsLeft, margenPixelsRight);
 	}
-	
 	public void showFilters() {
-		secFiltrosDesktop.showFilters();
+		((SecFiltrosDesktop)secFiltros).showFilters();
 	}
 	public void acceptFilters() { 
-		secFiltrosDesktop.acceptFilters();
+		((SecFiltrosDesktop)secFiltros).acceptFilters();
 	}
 	
 	public void clickRebajasBannerHead() {

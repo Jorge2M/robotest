@@ -1,7 +1,7 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.filters;
+package com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop;
 
-import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecSelectorPreciosDesktop.TypeClick.LEFT;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecSelectorPreciosDesktop.TypeClick.RIGHT;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecSelectorPreciosDesktop.TypeClick.LEFT;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecSelectorPreciosDesktop.TypeClick.RIGHT;
 
 import org.openqa.selenium.interactions.Actions;
 

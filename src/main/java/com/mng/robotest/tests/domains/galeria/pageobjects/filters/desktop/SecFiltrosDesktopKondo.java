@@ -1,7 +1,8 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.filters;
+package com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop;
 
 import java.util.List;
 
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
 import com.mng.robotest.testslegacy.data.Color;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

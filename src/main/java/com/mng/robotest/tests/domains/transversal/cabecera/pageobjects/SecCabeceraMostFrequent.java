@@ -11,7 +11,6 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 import javax.ws.rs.NotAllowedException;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -22,7 +21,6 @@ public class SecCabeceraMostFrequent extends SecCabecera {
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop = new ModalUserSesionShopDesktop(); 
 	
 	private static final String XPATH_DIV_NAV_TOOLS = "//div[@id='navTools']";
-	private static final String XPATH_NUM_ARTICLES_MOBIL_OUTLET = "//*[@class='icon-button-items']";
 	private static final String XPATH_NUM_ARTICLES_MANY_LOCATIONS = "//span[@data-testid[contains(.,'numItems')] or @data-testid[contains(.,'totalItems')]]";
 	
 	public enum IconoCabecera implements ElementPage {
@@ -84,10 +82,7 @@ public class SecCabeceraMostFrequent extends SecCabecera {
 
 	@Override
 	public String getXPathNumberArtIcono() {
-		if (channel==Channel.desktop || app==AppEcom.shop) {
-			return XPATH_NUM_ARTICLES_MANY_LOCATIONS;
-		}
-		return XPATH_NUM_ARTICLES_MOBIL_OUTLET;
+		return XPATH_NUM_ARTICLES_MANY_LOCATIONS;
 	}
 	
 	@Override

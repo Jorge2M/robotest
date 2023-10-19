@@ -6,12 +6,12 @@ import java.util.Optional;
 
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktopKondo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.CommonGaleriaKondo;
 import com.mng.robotest.testslegacy.data.Constantes;
 
 public class SecColoresArticuloDesktopKondo extends SecColoresArticuloDesktop {
 
-	private static final String XPATH_ARTICULO = PageGaleriaDesktopKondo.XPATH_ARTICULO;
+	private static final String XPATH_ARTICULO = CommonGaleriaKondo.XPATH_ARTICULO;
 	private static final String XPATH_ARTICULO_ANCESTOR = XPATH_ARTICULO.replaceFirst("//", "ancestor::");
 	private static final String XPATH_COLORS_ARTICLE = "//div/p[@id[contains(.,'color-selector')]]/..";
 	private static final String XPATH_COLOR_ICON = XPATH_COLORS_ARTICLE + "//img[@id[contains(.,'Color')]]"; 

@@ -1,6 +1,10 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.filters;
+package com.mng.robotest.tests.domains.galeria.pageobjects.filters.device;
 
-import java.text.Normalizer;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Clickable;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.javascript;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.device.FiltroMobil.*;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,45 +12,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
-
-import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
 import com.mng.robotest.testslegacy.data.Color;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 
-public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
-	
 	private static final String XPATH_FILTRAR_Y_ORDENAR_BUTTON = "//button[@data-testid[contains(.,'filter-sort')]]";
 	private static final String XPATH_BUTTON_APLICAR_FILTROS = "//button[@class[contains(.,'filters-apply')]]";
 	private static final String XPATH_BUTTON_CLOSE = "//div[@class='orders-filters-close' and @role='button']";
-	
-	private final PageGaleria pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
-	
-	@Override
-	public void selectOrdenacion(FilterOrdenacion ordenacion) throws Exception {
-		selectFiltroAndWaitLoad(FiltroMobil.ORDENAR, ordenacion.getValue());
-	}
-	
-	@Override
-	public void selectCollection(FilterCollection collection) {
-		selectFiltroAndWaitLoad(FiltroMobil.COLECCION, collection.getValueMobil());
-	}
-	
-	@Override
-	public boolean isCollectionFilterPresent() throws Exception {
-		String xpath = FiltroMobil.COLECCION.getXPathLineaFiltro();
-		return state(Present, xpath).check();
-	}
 	
 	/** 
 	 * Seleccionamos una ordenación ascendente/descendente
 	 */
 	@Override
-	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
-		selectOrdenacion(typeOrden);
-		return pageGaleria.waitForArticleVisibleAndGetNumberOfThem(10);
+	public void selecOrdenacion(FilterOrdenacion typeOrden) throws Exception {
+		selectFiltroAndWaitLoad(ORDENAR, typeOrden.getValue());
 	}
 
 	/** 
@@ -55,9 +35,8 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	 * @return el número de artículos que aparecen en la galería después de seleccionar el filtro
 	 */
 	@Override
-	public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToFilter) {
-		selectFiltrosAndWaitLoad(FiltroMobil.COLORES, Color.getListNamesFiltros(colorsToFilter));
-		return pageGaleria.waitForArticleVisibleAndGetNumberOfThem(10);
+	public void selecFiltroColores(List<Color> colorsToFilter) {
+		selectFiltrosAndWaitLoad(COLORES, Color.getListNamesFiltros(colorsToFilter));
 	}
 	
 	@Override
@@ -67,11 +46,11 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	
 	@Override
 	public void selectMenu2onLevel(List<String> listMenus) {
-		selectFiltrosAndWaitLoad(FiltroMobil.FAMILIA, listMenus);
+		selectFiltrosAndWaitLoad(FAMILIA, listMenus);
 	}
 	@Override
 	public void selectMenu2onLevel(String menuLabel) {
-		selectFiltrosAndWaitLoad(FiltroMobil.FAMILIA, Arrays.asList(menuLabel));
+		selectFiltrosAndWaitLoad(FAMILIA, Arrays.asList(menuLabel));
 	}
 	
 	/**
@@ -79,15 +58,16 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	 * @param valor atributo 'value' a nivel de la option del filtro (select)
 	 */
 	private void selectFiltroAndWaitLoad(FiltroMobil typeFiltro, String textFiltro) {
-		List<String> listTextFiltros = Arrays.asList(textFiltro);
+		var listTextFiltros = Arrays.asList(textFiltro);
 		selectFiltrosAndWaitLoad(typeFiltro, listTextFiltros);
 	}
 	
+	@Override
 	public boolean isAvailableFiltros(FiltroMobil typeFiltro, List<String> listTextFiltros) {
 		if (!goAndClickFiltroButton()) {
 			return false;
 		}
-		WebElement filtroLinea = getElement(typeFiltro.getXPathLineaFiltro());
+		var filtroLinea = getElement(typeFiltro.getXPathNormal());
 		filtroLinea.click();
 		waitLoadPage();
 		for (String textFiltro : listTextFiltros) {
@@ -107,7 +87,6 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 			clickFiltroOption(typeFiltro, textFiltro);
 		}
 		clickApplicarFiltrosButton();
-		pageGaleria.isVisibleArticuloUntil(1, 2);
 	}
 
 	private void clickFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
@@ -121,7 +100,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	}
 	
 	private void clickFiltroOptionStaleNotSafe(FiltroMobil typeFiltro, String textFiltro) {
-		WebElement filtroLinea = getElement(typeFiltro.getXPathLineaFiltro());
+		WebElement filtroLinea = getElement(typeFiltro.getXPathNormal());
 		filtroLinea.click();
 		waitLoadPage();
 		By byFiltroOption = By.xpath(getXPathFiltroOption(textFiltro));
@@ -132,11 +111,6 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		return "//a[@class='filter-option' or @class='order-option']//span[" + 
 					"text()[contains(.,'" + textFiltro + "')] or " +
 					"text()[contains(.,'" + upperCaseFirst(textFiltro) + "')]]/..";
-	}
-	
-	public static String stripAccents(String text) {
-	    String s = Normalizer.normalize(text, Normalizer.Form.NFD);
-	    return s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
 	}
 	
 	private void clickApplicarFiltrosButton() {
@@ -164,7 +138,7 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 	}
 	
 	private boolean isOpenFiltrosUntil(int seconds) {
-		String xpathLineaOrdenar = FiltroMobil.ORDENAR.getXPathLineaFiltro();
+		String xpathLineaOrdenar = ORDENAR.getXPathNormal();
 		return state(Visible, xpathLineaOrdenar).wait(seconds).check();
 	}
 	private boolean isCloseFiltrosUntil(int seconds) {
@@ -187,4 +161,5 @@ public class SecMultiFiltrosDevice extends PageBase implements SecFiltros {
 		arr[0] = Character.toUpperCase(arr[0]);
 		return new String(arr);
 	}
+
 }

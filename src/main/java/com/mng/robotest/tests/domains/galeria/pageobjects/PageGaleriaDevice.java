@@ -12,39 +12,22 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.Typ
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArticulo.TipoPrecio;
 import com.mng.robotest.testslegacy.data.Constantes;
-import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
-import com.mng.robotest.testslegacy.utils.UtilsTest;
 import com.github.jorge2m.testmaker.conf.Channel;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageGaleriaDevice extends PageGaleria {
+public abstract class PageGaleriaDevice extends PageGaleria {
 	
 	private final SecTallasArticulo secTallas = SecTallasArticulo.make(channel, app, dataTest.getPais());
 	
 	private static final String TAG_ID_COLOR = "@TagIdColor";
 	
-	//TODO adaptar React (pendiente petición a Jesús Bermúdez 3-Marzo-2021)
-	public static final String XPATH_ARTICULO = "//li[@data-testid[contains(.,'plp.product')]]";
 	private static final String XPATH_ANCESTOR_ARTICLE = "//ancestor::div[@class[contains(.,'product-list-info')]]";
-	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
 
-	private static final String XPATH_IMG_RELATIVE_ARTICLE = 
-		"//img[@src and " + 
-			 "(@class[contains(.,'productListImg')] or " + 
-			  "@class[contains(.,'product-list-image')] or " + 
-			  "@class[contains(.,'product-list-img')] or " +
-			  "@class[contains(.,'product-image')] or " +
-			  "@id[contains(.,'product-image')])]";
 	private static final String XPATH_IMG_COD_COLOR_WITH_TAG_COLOR = 
 		"//*[@class[contains(.,'color-container')] and @id='" + TAG_ID_COLOR + "']/img";
 	
 	private static final String XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//*[@data-testid[contains(.,'addToCart')]]";
-	
-	//TODO mantener sólo una versión una vez se resuelva el TestAB
-	private static final String XPATH_CAPA_TALLAS_RELATIVE_ARTICLE_OLD = "//div[@class[contains(.,'product-sizes-container')]]";
-	private static final String XPATH_CAPA_TALLAS_NEW = "//ul[@data-testid='plp.sizesSelector.list']";
-	
 	private static final String XPATH_ICONO_GALERY_MOBILE = "//div[@class[contains(.,'scroll-container--visible')]]";
 	private static final String XPATH_ICONO_UP_GALERY_TABLET = "//div[@class='scroll-top-step']";
 	private static final String TAG_NUM_PAGINA = "@tagNumPagina";
@@ -56,16 +39,6 @@ public class PageGaleriaDevice extends PageGaleria {
 	private static final String XPATH_COLORES_ARTICULO_OUTLET_TABLET = "//div[@class[contains(.,'product-list-colors')]]";
 	
 	private static final String XPATH_BUTTON_FOR_CLOSE_TALLAS = "//button[@data-testid='sheet.overlay']";
-	
-	@Override
-	protected String getXPathArticulo() {
-		return XPATH_ARTICULO;
-	}
-	
-	@Override
-	protected String getXPathNombreRelativeToArticle() {
-		return XPATH_NOMBRE_RELATIVE_TO_ARTICLE;
-	}	
 	
 	String getXPathColoresArticle() {
 		if (channel==Channel.tablet && app==AppEcom.outlet) {
@@ -96,6 +69,10 @@ public class PageGaleriaDevice extends PageGaleria {
 	//Número de páginas a partir del que consideramos que se requiere un scroll hasta el final de la galería
 	public static final int SCROLL_TO_LAST = 20; 
 	
+	public PageGaleriaDevice() {
+		super();
+	}
+	
 	public PageGaleriaDevice(From from) {
 		super(from);
 	}
@@ -113,19 +90,6 @@ public class PageGaleriaDevice extends PageGaleria {
 		return (xpathArticulo + XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE);
 	}
 	
-	//TODO mantener una sola variante cuando se resuelva el TestAB
-	String getXPathArticleCapaTallas(int posArticulo) {
-		return "(" + getXPathArticleCapaTallasOld(posArticulo) + " | " + getXPathArticleCapaTallasNew() + ")"; 
-	}
-	
-	String getXPathArticleCapaTallasOld(int posArticulo) {
-		String xpathArticulo = "(" + getXPathArticulo() + ")[" + posArticulo + "]";
-		return (xpathArticulo + XPATH_CAPA_TALLAS_RELATIVE_ARTICLE_OLD);
-	}
-	String getXPathArticleCapaTallasNew() {
-		return XPATH_CAPA_TALLAS_NEW;
-	}
-	
 	String getXPathPagina(int pagina) {
 		if (channel==Channel.tablet && app==AppEcom.outlet ) {
 			return (XPATH_PAGINA_TABLET_OUTLET_WITH_TAG.replace(TAG_NUM_PAGINA, String.valueOf(pagina)));
@@ -139,16 +103,6 @@ public class PageGaleriaDevice extends PageGaleria {
 		WebElement articulo = getElement(xpathArticulo); 
 		hoverArticle(articulo);
 		return articulo;
-	}
-	
-	@Override
-	public WebElement getImagenElementArticulo(WebElement articulo) {
-		moveToElement(articulo);
-		By byImg = By.xpath("." + XPATH_IMG_RELATIVE_ARTICLE);
-		if (state(Present, articulo).by(byImg).wait(3).check()) {
-			return getElement(articulo, "." + XPATH_IMG_RELATIVE_ARTICLE);
-		}
-		return null;
 	}
 	
 	@Override
@@ -186,12 +140,6 @@ public class PageGaleriaDevice extends PageGaleria {
 		return articulo;
 	}
 
-	@Override
-	public String getNombreArticulo(WebElement articulo) {
-		String xpath = getXPathNombreRelativeToArticle();
-		return articulo.findElement(By.xpath("." + xpath)).getText();
-	}
- 
 	@Override
 	public String getPrecioArticulo(WebElement articulo) {
 		if (isArticleRebajado(articulo)) {
@@ -289,38 +237,27 @@ public class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public void showTallasArticulo(int posArticulo) {
 		moveToArticleAndGetObject(posArticulo);
-		if (!isVisibleArticleCapaTallasUntil(posArticulo, 0)) {
+		if (!secTallas.isVisibleArticleCapaTallasUntil(posArticulo, 0)) {
 			String xpathButtonAnyadir = getXPathButtonAnyadirArticle(posArticulo);
+			state(Visible, xpathButtonAnyadir).wait(3).check();
 			click(xpathButtonAnyadir).exec();
 		}
 	}
 	public void unshowTallasArticulo() {
-		click(XPATH_BUTTON_FOR_CLOSE_TALLAS).exec();
-	}
-	
-	@Override
-	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
-		String xpathCapa = getXPathArticleCapaTallas(posArticulo);
-		return state(Visible, xpathCapa).wait(seconds).check();
-	}
-	
-	private String getXPathTallaAvailableArticle(int posArticulo) {
-		String xpathCapa = getXPathArticleCapaTallas(posArticulo);
-		return xpathCapa + "//*[@data-testid[contains(.,'size.available')]]";
+		if (state(Present, XPATH_BUTTON_FOR_CLOSE_TALLAS).check()) {
+			click(XPATH_BUTTON_FOR_CLOSE_TALLAS).exec();
+		}
 	}
 	
 	@Override
 	public ArticuloScreen selectTallaAvailableArticle(int posArticulo) throws Exception {
 		//Si no está visible la capa de tallas ejecutamos los pasos necesarios para hacer la visible 
-		if (!isVisibleArticleCapaTallasUntil(posArticulo, 0)) {
+		if (!secTallas.isVisibleArticleCapaTallasUntil(posArticulo, 0)) {
 			showTallasArticulo(posArticulo);
 		}
-		
-		var xpathTalla = getXPathTallaAvailableArticle(posArticulo);
-		var tallaToSelect = getElement(xpathTalla);
+		var tallaSelected = secTallas.selectTallaAvailableArticle(posArticulo);
 		var articulo = getArticuloObject(posArticulo);
-		articulo.setTalla(Talla.fromLabel(tallaToSelect.getText()));
-		tallaToSelect.click();
+		articulo.setTalla(tallaSelected);
 		return articulo;
 	}
 	
@@ -340,27 +277,6 @@ public class PageGaleriaDevice extends PageGaleria {
 		state(Clickable, hearthIcon).wait(1).check();
 		hearthIcon.click();
 	}
-	
-	@Override
-	public String getRefArticulo(WebElement articulo) {
-		int lengthReferencia = 8;
-		String id = getRefFromId(articulo);
-		if ("".compareTo(id)!=0) {
-			if (id.length()>lengthReferencia) {
-				return (id.substring(0, lengthReferencia));
-			}
-			return id;
-		}
-
-		//Para el caso TestAB-1 se ejecutará este caso para conseguir los atributos del artículo
-		String href = articulo.findElement(By.xpath(XPATH_LINK_RELATIVE_TO_ARTICLE)).getAttribute("href");
-		return UtilsTest.getReferenciaFromHref(href);
-	}	
-	
-	private String getRefFromId(WebElement articulo) {
-		String id = articulo.getAttribute("id");
-		return (id.replace("product-key-id-", ""));
-	}	
 	
 	private List<WebElement> getListArticulosFromPagina(int numPagina) {
 		moveToPagina(numPagina);
@@ -398,38 +314,4 @@ public class PageGaleriaDevice extends PageGaleria {
 		return backTo1erArticulo(xpathIconoUp);
 	}
 	
-	/**
-	 * @param numArticulo: posición en la galería del artículo
-	 * @return la referencia de un artículo
-	 */
-	@Override
-	public String getRefColorArticulo(WebElement articulo) {
-		int lengthReferencia = 11;
-		String refWithColor = getRefColorArticuloMethod1(articulo);
-		if ("".compareTo(refWithColor)==0) {
-			refWithColor = getRefColorArticuloMethod2(articulo);
-		}
-			
-		if (refWithColor.length()>lengthReferencia) {
-			return (refWithColor.substring(0, lengthReferencia));
-		}
-		return refWithColor;
-	}
-	
-	private String getRefColorArticuloMethod1(WebElement articulo) {
-		String xpathDivRelativeArticle = "//div[@id and @class='product-container-image']";
-		if (state(Present, articulo).by(By.xpath("." + xpathDivRelativeArticle)).check()) {
-			return (articulo.findElement(By.xpath("." + xpathDivRelativeArticle)).getAttribute("id"));
-		}
-		return "";
-	}
-
-	private String getRefColorArticuloMethod2(WebElement articulo) {
-		WebElement ancorArticle = getElementVisible(articulo, By.xpath(".//a"));
-		if (ancorArticle!=null) {
-			String hrefArticle = ancorArticle.getAttribute("href");
-			return (UtilsPageGaleria.getReferenciaAndCodColorFromURLficha(hrefArticle));
-		}
-		return "";
-	}
 }

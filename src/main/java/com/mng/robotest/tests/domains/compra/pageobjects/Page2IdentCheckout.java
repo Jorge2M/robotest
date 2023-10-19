@@ -477,7 +477,7 @@ public class Page2IdentCheckout extends PageBase {
 	
 	public String setSeletEstadoEspanya(String provincia) {
 		waitLoadPage();
-		WebElement provinciaPais = getElementPriorizingDisplayed(XPATH_SELECT_ESTADOS_PAIS);
+		var provinciaPais = getElementPriorizingDisplayed(XPATH_SELECT_ESTADOS_PAIS);
 		if (provinciaPais!=null) {
 			String selected = new Select(provinciaPais).getFirstSelectedOption().getText();
 			if (selected.compareTo(provincia)!=0) {

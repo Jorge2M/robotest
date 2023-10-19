@@ -28,10 +28,8 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.Num
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterCollection;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
-import com.mng.robotest.testslegacy.pageobject.shop.menus.SecMenusFiltroCollection;
+import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 import com.mng.robotest.testslegacy.pageobject.utils.DataScroll;
@@ -46,6 +44,8 @@ public class PageGaleriaSteps extends StepBase {
 	public final SecCrossSellingSteps secCrossSellingSteps = new SecCrossSellingSteps();
 	public final BannerHeadGallerySteps bannerHead = new BannerHeadGallerySteps(this);
 	private final SecSelectorPreciosSteps secSelectorPreciosSteps = new SecSelectorPreciosSteps();
+	private final SecFiltrosSteps secFiltrosSteps = new SecFiltrosSteps();
+	
 	private final PageGaleria pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 
 	public enum TypeGalery { SALES, NO_SALES }
@@ -286,8 +286,7 @@ public class PageGaleriaSteps extends StepBase {
 	public int seleccionaOrdenacionGaleria(
 			FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar) throws Exception {
 		
-		var secFiltros = SecFiltros.make(channel, app, dataTest.getPais());
-		secFiltros.selecOrdenacionAndReturnNumArticles(typeOrdenacion);
+		pageGaleria.selecOrdenacionAndReturnNumArticles(typeOrdenacion);
 
 		checkIsVisiblePageWithTitle(tipoPrendasGaleria);
 		int numArticulosPant = pageGaleria.getNumArticulos() + pageGaleria.getNumArticulos();
@@ -339,11 +338,10 @@ public class PageGaleriaSteps extends StepBase {
 			"Es clickable el 1er elemento de la lista",
 			pageGaleria.isClickableArticuloUntil(1, 0), Warn);
 	  	
-		SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());
 		int seconds = 2;
 	  	checks.add(
 			"Es clickable el bloque de filtros " + getLitSecondsWait(seconds),
-			secFiltros.isClickableFiltroUntil(seconds), Warn);
+			pageGaleria.isClickableFiltroUntil(seconds), Warn);
 	  	
 	  	return checks;
 	}
@@ -613,52 +611,6 @@ public class PageGaleriaSteps extends StepBase {
 		return (pageGaleriaDesktop.isPage());
 	}
 
-	@Validation
-	private ChecksTM checkFiltrosSalesOnInGalerySale(SecMenusFiltroCollection filtrosCollection) {
-		var checks = ChecksTM.getNew();
-	 	checks.add(
-	 		"<b style=\"color:blue\">Rebajas</b></br>" +
-	 		"Son visibles los menús laterales de filtro a nivel detemporadas (Collection)",
-	 		filtrosCollection.isVisible());
-	 	
-	 	checks.add(
-	 		"Aparece el filtro para todas las temporadas <b>All</b>)",
-	 		filtrosCollection.isVisibleMenu(FilterCollection.all), Warn);
-	 	
-	 	checks.add(
-	 		"Aparece el filtro para las ofertas <b>Sale</b>",
-	 		filtrosCollection.isVisibleMenu(FilterCollection.sale), Warn);
-	 	
-	 	checks.add(
-	 		"Aparece el filtro para las ofertas <b>Sale</b>",
-	 		filtrosCollection.isVisibleMenu(FilterCollection.sale), Warn);
-	 	
-	 	checks.add(
-	 	    Check.make(
-	 		    "Aparece el filtro para la nueva temporada <b>Next season preview</b>",
-	 		    filtrosCollection.isVisibleMenu(FilterCollection.nextSeason), Info)
-	 	    .store(StoreType.None).build());
-	 	
-	 	return checks;
-	}
-
-	@Validation (
-		description=
-			"<b style=\"color:blue\">Rebajas</b></br>" +
-			"No son visibles los menús laterales de filtro a nivel detemporadas (Collection)<b>")
-	private boolean checkFiltrosSaleInGaleryNoSale(SecMenusFiltroCollection filtrosCollection) {
-		return (!filtrosCollection.isVisible());
-	}
-
-	@Validation (
-		description=
-			"<b style=\"color:blue\">Rebajas</b></br>" +
-			"No aparece el filtro para las ofertas <b>Sale</b>",
-		level=Warn)
-	private boolean checkFiltrosSalesOff(SecMenusFiltroCollection filtrosCollection) {
-		return !filtrosCollection.isVisibleMenu(FilterCollection.sale);
-	}
-
 	public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError, StoreType store) {
 		validaArticlesOfTemporadas(listTemporadas, false, levelError, store);
 	}
@@ -785,6 +737,10 @@ public class PageGaleriaSteps extends StepBase {
 				.store(StoreType.None).build());
 		}
 		return checks;
+	}
+	
+	public int selectFiltroColores(List<Color> colorsToSelect, String litMenu) {
+		return secFiltrosSteps.selectFiltroColores(colorsToSelect, litMenu);
 	}
 
 }

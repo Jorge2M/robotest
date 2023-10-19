@@ -8,19 +8,19 @@ import java.util.regex.Pattern;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktopKondo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.device.SecMultiFiltrosDevice;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Color;
 
 public interface SecFiltros {
 	
-	public void selectOrdenacion(FilterOrdenacion ordenacion) throws Exception;
-	public void selectCollection(FilterCollection coleccion);
-	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception;
-	public int selecFiltroColoresAndReturnNumArticles(List<Color> colorsToSelect);
+	public void selecOrdenacion(FilterOrdenacion typeOrden) throws Exception;
+	public void selecFiltroColores(List<Color> colorsToSelect);
 	public void selectMenu2onLevel(List<String> listMenus);
 	public void selectMenu2onLevel(String menuLabel);
 	public boolean isClickableFiltroUntil(int seconds);
-	public boolean isCollectionFilterPresent() throws Exception;
 	
 	public static SecFiltros make(Channel channel, AppEcom app, Pais pais) {
 		switch (channel) {
@@ -30,9 +30,9 @@ public interface SecFiltros {
 			if (app==AppEcom.outlet && channel==Channel.tablet) {
 				return new SecFiltrosDesktopKondo();
 			}
-			return new SecMultiFiltrosDevice();
+			return SecMultiFiltrosDevice.make(app, pais);
 		default:
-			return new SecMultiFiltrosDevice();
+			return SecMultiFiltrosDevice.make(app, pais);
 		}
 	}
 	
