@@ -66,13 +66,6 @@ public class TextosLegales {
 	
 	@Test(
 		groups={"Legal", "Canal:mobile_App:shop"}, 
-		description="Chequeo textos legales: Mango Card")
-	public void LEG007_TextosLegalesMangoCasrd() throws Exception {
-		new Leg007().execute();
-	}	
-	
-	@Test(
-		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Formulario de ayuda (Genki)")
 	public void LEG008_TextosLegalesFormularioAyuda() throws Exception {
 		new Leg008().execute();

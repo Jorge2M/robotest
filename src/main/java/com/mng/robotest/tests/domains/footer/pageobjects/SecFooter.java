@@ -31,7 +31,6 @@ public class SecFooter extends PageBase {
 		MIS_COMPRAS(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='miscompras']", false), 
 		DEVOLUCIONES(FOOTER_ALL, CHANNEL_ALL, "//a[@data-ga-label='devoluciones' and text()[contains(.,'Devoluciones')]]", false), 
 		TIENDAS(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='buscarTiendas']", false),
-		MANGO_CARD(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='tarjetaMango' and text()[contains(.,'Mango Card')]]", false),
 		CHEQUE_REGALO(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='cheques' and text()[contains(.,'egalo')]]", false),
 		CHEQUE_REGALO_OLD(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='cheques']", false),
 		APPS(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='apps' and text()[contains(.,'Apps')]]", false), 
