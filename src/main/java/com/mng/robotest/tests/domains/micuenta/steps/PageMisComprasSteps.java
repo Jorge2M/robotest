@@ -75,7 +75,7 @@ public class PageMisComprasSteps extends StepBase {
 	}	
 	private State getLevel() {
 		if (dataTest.isUserRegistered()) { 
-			return (UtilsTest.todayBeforeDate("2023-10-01")) ? State.Warn : Defect;
+			return (UtilsTest.todayBeforeDate("2024-01-31")) ? State.Warn : Defect;
 		}
 		return State.Defect;
 	}
