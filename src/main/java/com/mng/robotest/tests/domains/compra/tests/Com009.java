@@ -103,9 +103,10 @@ public class Com009 extends TestBase {
 		new PageResultPagoSteps().selectMisCompras();
 		
 		var pageMisComprasSteps = new PageMisComprasSteps();
-		pageMisComprasSteps.validateIsCompraOnline(codigoPedido);
-		pageMisComprasSteps.selectCompra(codigoPedido);
-		new ModalDetalleCompraSteps().checkIsVisibleDirection(address);
+		if (pageMisComprasSteps.checkIsCompraOnline(codigoPedido)) {
+			pageMisComprasSteps.selectCompra(codigoPedido);
+			new ModalDetalleCompraSteps().checkIsVisibleDirection(address);
+		}
 	}    
     
     private DirectionData makeDireccionSecundaria() {

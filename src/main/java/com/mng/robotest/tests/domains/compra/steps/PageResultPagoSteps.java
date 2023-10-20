@@ -148,7 +148,7 @@ public class PageResultPagoSteps extends StepBase {
 		selectMisCompras();
 		DataPedido dataPedido = dataPago.getDataPedido();
 		if (dataTest.isUserRegistered()) {
-			new PageMisComprasSteps().validateIsCompraOnline(
+			new PageMisComprasSteps().checkIsCompraOnline(
 					dataPedido.getCodpedido(), dataPago.getFTCkout().chequeRegalo);
 		} else {
 			var pageAccesoMisComprasSteps = new PageAccesoMisComprasSteps();

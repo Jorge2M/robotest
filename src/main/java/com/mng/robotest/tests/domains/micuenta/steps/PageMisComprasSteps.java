@@ -39,11 +39,11 @@ public class PageMisComprasSteps extends StepBase {
 	  	return checks;
 	}
 	
-	public boolean validateIsCompraOnline(String codPedido) {
-		return validateIsCompraOnline(codPedido, false);
+	public boolean checkIsCompraOnline(String codPedido) {
+		return checkIsCompraOnline(codPedido, false);
 	}
 	
-	public boolean validateIsCompraOnline(String codPedido, boolean isChequeRegalo) {
+	public boolean checkIsCompraOnline(String codPedido, boolean isChequeRegalo) {
 		if (isChequeRegalo) {
 			return validateIsCompraOnlineChequeRegalo(codPedido, 2);
 		}

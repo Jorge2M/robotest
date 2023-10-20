@@ -11,9 +11,8 @@ import com.mng.robotest.testslegacy.data.Talla;
 public class SecTallasArticuloNormal extends SecTallasArticulo {
 
 	private static final String XPATH_ARTICULO = PageGaleriaDesktopNormal.XPATH_ARTICULO;
-	
-	private static final String XPATH_CAPA_TALLAS_ARTICULO_SHOP = "//div[@class[contains(.,'sizes-container')]]";
-	private static final String CLASS_CAPA_ACTIVE_SHOP = "@class[contains(.,'active')]";
+	private static final String XPATH_CAPA_TALLAS_DESKTOP = "//div[@class[contains(.,'sizes-container')]]";
+	private static final String XPATH_CAPA_TALLAS_DEVICE = "//ul[@data-testid='plp.sizesSelector.list']";
 	private static final String XPATH_TALLA_AVAILABLE = "//button[@data-testid[contains(.,'size.available')]]";
 	private static final String XPATH_TALLA_UNAVAILABLE = "//button[@data-testid[contains(.,'size.unavailable')]]";	
 	
@@ -21,27 +20,28 @@ public class SecTallasArticuloNormal extends SecTallasArticulo {
 		super(XPATH_ARTICULO);
 	}
 	
-	private String getXPathCapaTallas(int posArticulo, boolean capaVisible) {
-		String xpathCapaAdd = getXPathArticleCapaInferiorDesktop(posArticulo);
-		String classCapaActive = CLASS_CAPA_ACTIVE_SHOP;
-		if (capaVisible) {
-			return xpathCapaAdd + "//self::div[" + classCapaActive + "]";
+	private String getXPathCapaTallas() {
+		if (channel.isDevice()) {
+			return XPATH_CAPA_TALLAS_DEVICE;
 		}
-		return xpathCapaAdd + "//self::div[not(" + classCapaActive + ")]"; 
+		return XPATH_CAPA_TALLAS_DESKTOP;
+	}
+	
+	private String getXPathCapaTallas(int position) {
+		if (channel.isDevice()) {
+			return getXPathCapaTallas();
+		}
+		return getXPathArticulo(position) + getXPathCapaTallas();
 	}
 
 	private String getXPathArticleTallaAvailable(int posArticulo) {
-		String xpathCapaTallas = getXPathCapaTallas(posArticulo, true);
+		String xpathCapaTallas = getXPathCapaTallas(posArticulo);
 		return xpathCapaTallas + XPATH_TALLA_AVAILABLE;
 	}
 	
-	private String getXPathArticleCapaInferiorDesktop(int position) {
-		return getXPathArticulo(position) + XPATH_CAPA_TALLAS_ARTICULO_SHOP;
-	}
-
 	@Override
 	public boolean isVisibleArticleCapaTallasUntil(int position, int seconds) {
-		String xpathCapa = getXPathCapaTallas(position, true);
+		String xpathCapa = getXPathCapaTallas(position);
 		return state(Visible, xpathCapa).wait(seconds).check();
 	}
 	
@@ -68,7 +68,7 @@ public class SecTallasArticuloNormal extends SecTallasArticulo {
 	
 	@Override
 	public void bringSizesBack(WebElement articulo) {
-		var sizes = articulo.findElement(By.xpath("." + XPATH_CAPA_TALLAS_ARTICULO_SHOP));
+		var sizes = articulo.findElement(By.xpath("." + getXPathCapaTallas()));
 		bringElement(sizes, BringTo.BACKGROUND);
 	}	
 	

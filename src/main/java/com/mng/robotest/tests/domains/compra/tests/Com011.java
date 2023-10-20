@@ -46,7 +46,7 @@ public class Com011 extends TestBase {
 		new PageResultPagoSteps().selectMisCompras();
 		
 		var pageMisComprasSteps = new PageMisComprasSteps();
-		if (pageMisComprasSteps.validateIsCompraOnline(codigoPedido)) {
+		if (pageMisComprasSteps.checkIsCompraOnline(codigoPedido)) {
 			pageMisComprasSteps.selectCompra(codigoPedido);
 			new ModalDetalleCompraSteps().checkIsDataVisible();
 		}

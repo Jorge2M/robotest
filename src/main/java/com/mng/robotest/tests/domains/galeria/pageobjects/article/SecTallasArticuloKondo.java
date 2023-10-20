@@ -59,7 +59,10 @@ public class SecTallasArticuloKondo extends SecTallasArticulo {
 	}	
 	
 	private String getXPathArticleTallaAvailable(int position) {
-		return /*getXPathArticulo(position) + */getXPathTallaAvailable();
+		if (channel.isDevice()) {
+			return getXPathTallaAvailable();
+		}
+		return getXPathArticulo(position) + getXPathTallaAvailable();
 	}
 	
 	@Override
