@@ -91,15 +91,15 @@ public class Registro implements Serializable {
 	
 	@Test (
 		groups={"Registro", "Canal:all_App:shop"},
-		description="Alta/Registro antiguo de un usuario en Islandia y (seleccionando link de publicidad) posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
+		description="Alta/Registro antiguo de un usuario en Macedonia y (seleccionando link de publicidad) posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG006_OldRegisterIslandia() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {
 			return;
 		}
-		Pais islandia = ICELAND.getPais();
-		IdiomaPais ingles = islandia.getListIdiomas().get(0);
-		new Reg003(islandia, ingles, false).execute();
+		Pais norway = MACEDONIA.getPais();
+		IdiomaPais ingles = norway.getListIdiomas().get(0);
+		new Reg003(norway, ingles, false).execute();
 	}	
 
 	private boolean isPro() {

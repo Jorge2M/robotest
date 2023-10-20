@@ -41,7 +41,7 @@ public class Page2IdentCheckout extends PageBase {
 	private static final String XPATH_INPUT_TELEFONO = "//input[@id[contains(.,':cfTelf')]]";
 	private static final String XPATH_INPUT_DIRECCION1 = "//input[@id[contains(.,':cfDir1')]]";
 	private static final String XPATH_INPUT_DIRECCION2 = "//input[@id[contains(.,':cfDir2')]]";
-	private static final String XPATH_CHECK_PUBLICIDAD = "//input[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]/..";
+	private static final String XPATH_CHECK_PUBLICIDAD = "//input[@id[contains(.,':cfPubli')] or @id[contains(.,'_cfPubli')]]";
 	private static final String XPATH_CHECK_OVER18YEARS = "//input[@data-component-id[contains(.,'cfPriv18')]]";
 	private static final String XPATH_CHECK_READCONSENT = "//input[@data-component-id[contains(.,'cfPriv')] and not(@data-component-id[contains(.,'cfPriv18')])]";	
 	private static final String XPATH_INPUT_EMAIL = "//input[@id[contains(.,':cfEmail')]]";
@@ -325,8 +325,9 @@ public class Page2IdentCheckout extends PageBase {
 		return "";
 	}
 
-	public void clickPublicidadIfVisible(Map<String,String> datosRegistro) {
-		if (state(Present, XPATH_CHECK_PUBLICIDAD).check()) {
+	public void selectReceiveNewsletterRadio(Map<String,String> datosRegistro) {
+		if (state(Present, XPATH_CHECK_PUBLICIDAD).check() && 
+			!getElement(XPATH_CHECK_PUBLICIDAD).isSelected()) {
 			moveToElement(XPATH_CHECK_PUBLICIDAD);
 			if (state(Visible, XPATH_CHECK_PUBLICIDAD).check()) {
 				getElement(XPATH_CHECK_PUBLICIDAD).click();
@@ -658,7 +659,7 @@ public class Page2IdentCheckout extends PageBase {
 			setSelectEstadosPaisIfVisible(datosSeteados);
 			if (i==0) {
 				if (clickPubli) {
-					clickPublicidadIfVisible(datosSeteados);
+					selectReceiveNewsletterRadio(datosSeteados);
 					setCheckHombreIfVisible(datosSeteados);
 				}
 				clickOver18YearsIfVisible(datosSeteados);

@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.article;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -40,6 +40,9 @@ public class SecTallasArticuloKondo extends SecTallasArticulo {
 		} else {
 			return XPATH_CAPA_TALLAS_ARTICULO_DESKTOP;
 		}
+	}
+	private String getXPathCapaTallasArticulo(int position) {
+		return "(" + getXPathCapaTallasArticulo() + ")[" + position + "]";
 	}
 	
 	private String getXPathTallaAvailable() {
@@ -83,8 +86,20 @@ public class SecTallasArticuloKondo extends SecTallasArticulo {
 	
 	@Override
 	public void selectTallaArticleNotAvalaible() {
-		click(getXPathTallaUnavailable()).exec();
+		for (int i=1; i<10; i++) {
+			if (isUnavailableSizeInArticle(i)) {
+				click(getXPathTallaUnavailable()).exec();
+				return;
+			}
+		}
 	}	
+	
+	private boolean isUnavailableSizeInArticle(int position) {
+		moveToElement(getXPathArticulo(position));
+		moveToElement(getXPathCapaTallasArticulo(position));
+		keyDown(2); //Without this fails (real problem in production) (20-10-23)
+		return state(Visible, getXPathTallaUnavailable()).wait(1).check();
+	}
 	
 	@Override
 	public void bringSizesBack(WebElement articulo) {

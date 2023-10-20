@@ -1191,8 +1191,8 @@
 <codigo_pais>096</codigo_pais>
 <codigo_alf>MK</codigo_alf>
 <idioma acceso="mk">IN</idioma>
-<codpos>08720</codpos>
-<telefono>665015122</telefono>
+<codpos>1000</codpos>
+<telefono>78343630</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="N" cpost="S" publi="N"/>
@@ -1423,7 +1423,7 @@
 <telefono>40123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>

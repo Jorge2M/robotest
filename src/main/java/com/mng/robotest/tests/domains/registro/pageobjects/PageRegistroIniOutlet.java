@@ -215,7 +215,7 @@ public class PageRegistroIniOutlet extends PageBase {
 
 	public boolean isTextoRGPDVisible() {
 		//TODO dejar sólo la versión de Loyalty cuando esta operativa suba a producción
-		WebElement textoElem = getElementWithSizeNot0(driver, By.xpath(XPATH_TEXT_RGPD));
+		var textoElem = getElementWithSizeNot0(driver, By.xpath(XPATH_TEXT_RGPD));
 		if (textoElem==null) {
 			textoElem = getElementWithSizeNot0(driver, By.xpath(XPATH_TEXT_RGPD_LOYALTY));
 		}
@@ -225,7 +225,7 @@ public class PageRegistroIniOutlet extends PageBase {
 
 	public boolean isTextoLegalRGPDVisible() {
 		//TODO dejar sólo la versión de Loyalty cuando esta operativa suba a producción
-		WebElement textoElem = getElementWithSizeNot0(driver, By.xpath(XPATH_LEGAL_RGPD));
+		var textoElem = getElementWithSizeNot0(driver, By.xpath(XPATH_LEGAL_RGPD));
 		if (textoElem==null) {
 			textoElem = getElementWithSizeNot0(driver, By.xpath(XPATH_LEGAL_RGPD_LOYALTY));
 		}
