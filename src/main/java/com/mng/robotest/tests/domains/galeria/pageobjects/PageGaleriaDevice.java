@@ -10,11 +10,12 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
-import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArticulo.TipoPrecio;
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.github.jorge2m.testmaker.conf.Channel;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArticulo.TipoPrecio.*;
 
 public abstract class PageGaleriaDevice extends PageGaleria {
 	
@@ -22,8 +23,6 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	
 	private static final String TAG_ID_COLOR = "@TagIdColor";
 	
-	private static final String XPATH_ANCESTOR_ARTICLE = "//ancestor::div[@class[contains(.,'product-list-info')]]";
-
 	private static final String XPATH_IMG_COD_COLOR_WITH_TAG_COLOR = 
 		"//*[@class[contains(.,'color-container')] and @id='" + TAG_ID_COLOR + "']/img";
 	
@@ -35,20 +34,23 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	private static final String XPATH_PAGINA_TABLET_OUTLET_WITH_TAG = "//div[@id='page" + TAG_NUM_PAGINA + "Height']";
 	private static final String XPATH_HEADER_ARTICLES = "//h1[@class='catalog-title']";
 	
-	private static final String XPATH_COLORES_ARTICULO = "//div[@class[contains(.,'product-colors')]]";
-	private static final String XPATH_COLORES_ARTICULO_OUTLET_TABLET = "//div[@class[contains(.,'product-list-colors')]]";
+	private static final String XPATH_COLORES_ARTICULO_KONDO = "//button[@data-testid='plp.color.selector']";
+	private static final String XPATH_COLORES_ARTICULO_NORMAL = "//button[@class='product-color']";
 	
 	private static final String XPATH_BUTTON_FOR_CLOSE_TALLAS = "//button[@data-testid='sheet.overlay']";
 	
+	protected abstract String getXPathArticuloAncestor();
+	protected abstract void showColors(WebElement articulo);
+	
 	String getXPathColoresArticle() {
-		if (channel==Channel.tablet && app==AppEcom.outlet) {
-			return XPATH_COLORES_ARTICULO_OUTLET_TABLET;
+		if (dataTest.getPais().isGaleriaKondo(app)) {
+			return XPATH_COLORES_ARTICULO_KONDO;
 		}
-		return XPATH_COLORES_ARTICULO;
+		return XPATH_COLORES_ARTICULO_NORMAL;
 	}
 
 	String getXPathArticuloConColores() {
-		return getXPathColoresArticle() + "//" + XPATH_ANCESTOR_ARTICLE;
+		return getXPathColoresArticle() + getXPathArticuloAncestor();
 	}
 	
 	String getXPpathIconoUpGalery() {
@@ -100,15 +102,16 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public WebElement getArticuloConVariedadColoresAndHover(int numArticulo) {
 		String xpathArticulo = getXPathArticuloConVariedadColores(numArticulo);
-		WebElement articulo = getElement(xpathArticulo); 
+		var articulo = getElement(xpathArticulo); 
 		hoverArticle(articulo);
 		return articulo;
 	}
 	
 	@Override
 	public void clickColorArticulo(WebElement articulo, int posColor) {
+		showColors(articulo);
 		var color = getColorArticulo(articulo, posColor);
-		color.click();
+		color.click(); 
 	}
 	
 	private WebElement getColorArticulo(WebElement articulo, int posColor) {
@@ -144,15 +147,15 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	public String getPrecioArticulo(WebElement articulo) {
 		if (isArticleRebajado(articulo)) {
 			//return (articulo.findElement(By.xpath("." + XPATH_PRECIO_REBAJADO_RELATIVE_ARTICLE)).getText());
-			return articulo.findElement(By.xpath("." + TipoPrecio.PRECIO_REBAJADO_DEFINITIVO.getXPath())).getText();
+			return articulo.findElement(By.xpath("." + PRECIO_REBAJADO_DEFINITIVO.getXPath())).getText();
 		}
-		return articulo.findElement(By.xpath("." + TipoPrecio.PRECIO_NO_REBAJADO_DEFINITIVO.getXPath())).getText();
+		return articulo.findElement(By.xpath("." + PRECIO_NO_REBAJADO_DEFINITIVO.getXPath())).getText();
 	}	
 	
 	@Override
 	public boolean isArticleRebajado(WebElement articulo) {
 		return state(Present, articulo)
-				.by(By.xpath("." + TipoPrecio.PRECIO_INICIAL_TACHADO.getXPath())).check();
+				.by(By.xpath("." + PRECIO_INICIAL_TACHADO.getXPath())).check();
 	}
 	
 	@Override

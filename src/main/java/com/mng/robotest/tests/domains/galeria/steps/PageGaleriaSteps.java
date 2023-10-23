@@ -301,7 +301,8 @@ public class PageGaleriaSteps extends StepBase {
 		description="Aparece una pantalla en la que el title contiene <b>#{tipoPrendasGaleria}",
 		level=Warn)
 	private boolean checkIsVisiblePageWithTitle(String tipoPrendasGaleria) {
-		return (driver.getTitle().toLowerCase().contains(tipoPrendasGaleria));
+		return driver.getTitle().toLowerCase()
+				.contains(tipoPrendasGaleria.toLowerCase());
 	}
 	
 	@Validation

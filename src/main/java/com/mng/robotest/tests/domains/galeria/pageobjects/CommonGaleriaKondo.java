@@ -12,6 +12,7 @@ public class CommonGaleriaKondo extends PageBase {
 
 	private static final String XPATH_CAPA_ARTICULO = "//div[@data-testid='plp.product.figure']";
 	public static final String XPATH_ARTICULO = XPATH_CAPA_ARTICULO + "/..";
+	private static final String XPATH_ANCESTOR_ARTICLE = "//ancestor::div[@data-testid='plp.product.figure']/..";
 	
 	//TODO Galería Kondo -> Solicitar React (11-10-2023)
 	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE_DESKTOP = "//div[@class[contains(.,'md12')]]";
@@ -20,6 +21,10 @@ public class CommonGaleriaKondo extends PageBase {
 	public String getXPathArticulo() {
 		return XPATH_ARTICULO;
 	}
+	
+	public String getXPathArticuloAncestor() {
+		return XPATH_ANCESTOR_ARTICLE;
+	}	
 	
 	public String getXPathNombreRelativeToArticle() {
 		if (channel.isDevice()) {

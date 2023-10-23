@@ -11,8 +11,11 @@ import com.mng.robotest.testslegacy.utils.UtilsTest;
 public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 
 	//TODO adaptar React (pendiente petición a Jesús Bermúdez 3-Marzo-2021)
-	private static final String XPATH_ARTICULO = "//li[@data-testid[contains(.,'plp.product')]]";
+	private static final String ARTICULO_ELEMENT = "li[@data-testid[contains(.,'plp.product')]]";
+	private static final String XPATH_ARTICULO = "//" + ARTICULO_ELEMENT;
+	private static final String XPATH_ANCESTOR_ARTICLE = "//ancestor::" + ARTICULO_ELEMENT;
 	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
+	private static final String XPATH_COLOR_ARTICLE_BUTTON = "//div[@class[contains(.,'product-colors')]]/button";
 	
 	private static final String XPATH_IMG_RELATIVE_ARTICLE = 
 		"//img[@src and " + 
@@ -33,6 +36,11 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 	@Override
 	protected String getXPathArticulo() {
 		return XPATH_ARTICULO;
+	}
+	
+	@Override
+	protected String getXPathArticuloAncestor() {
+		return XPATH_ANCESTOR_ARTICLE;
 	}
 	
 	@Override
@@ -69,6 +77,12 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 	public String getNombreArticulo(WebElement articulo) {
 		String xpath = getXPathNombreRelativeToArticle();
 		return articulo.findElement(By.xpath("." + xpath)).getText();
+	}
+	
+	@Override
+	public void showColors(WebElement articulo) {
+		By byColorButton = By.xpath("." + XPATH_COLOR_ARTICLE_BUTTON);
+		click(articulo).by(byColorButton).exec();
 	}
 	
 	/**
