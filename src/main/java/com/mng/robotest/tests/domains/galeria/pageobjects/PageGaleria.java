@@ -169,12 +169,12 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
-		String xpathArticulo = getXPathArticulo() + "[" + numArticulo + "]";
+		String xpathArticulo = "(" + getXPathArticulo() + ")[" + numArticulo + "]";
 		return state(Visible, xpathArticulo).wait(seconds).check();
 	}
 
 	public boolean isClickableArticuloUntil(int numArticulo, int seconds) {
-		String xpathArticulo = getXPathArticulo() + "[" + numArticulo + "]";
+		String xpathArticulo = "(" + getXPathArticulo() + ")[" + numArticulo + "]";
 		return state(Clickable, xpathArticulo).wait(seconds).check();
 	}
 

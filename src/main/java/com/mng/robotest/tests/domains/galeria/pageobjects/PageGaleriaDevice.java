@@ -27,41 +27,16 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 		"//*[@class[contains(.,'color-container')] and @id='" + TAG_ID_COLOR + "']/img";
 	
 	private static final String XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//*[@data-testid[contains(.,'addToCart')]]";
-	private static final String XPATH_ICONO_GALERY_MOBILE = "//div[@class[contains(.,'scroll-container--visible')]]";
-	private static final String XPATH_ICONO_UP_GALERY_TABLET = "//div[@class='scroll-top-step']";
 	private static final String TAG_NUM_PAGINA = "@tagNumPagina";
 	private static final String XPATH_PAGINA_WITH_TAG = "//div[@id='page" + TAG_NUM_PAGINA + "']";
 	private static final String XPATH_PAGINA_TABLET_OUTLET_WITH_TAG = "//div[@id='page" + TAG_NUM_PAGINA + "Height']";
 	private static final String XPATH_HEADER_ARTICLES = "//h1[@class='catalog-title']";
-	
-	private static final String XPATH_COLORES_ARTICULO_KONDO = "//button[@data-testid='plp.color.selector']";
-	private static final String XPATH_COLORES_ARTICULO_NORMAL = "//button[@class='product-color']";
-	
 	private static final String XPATH_BUTTON_FOR_CLOSE_TALLAS = "//button[@data-testid='sheet.overlay']";
 	
 	protected abstract String getXPathArticuloAncestor();
+	protected abstract String getXPathArticuloConColores();
+	protected abstract String getXPathColorArticleOption();
 	protected abstract void showColors(WebElement articulo);
-	
-	String getXPathColoresArticle() {
-		if (dataTest.getPais().isGaleriaKondo(app)) {
-			return XPATH_COLORES_ARTICULO_KONDO;
-		}
-		return XPATH_COLORES_ARTICULO_NORMAL;
-	}
-
-	String getXPathArticuloConColores() {
-		return getXPathColoresArticle() + getXPathArticuloAncestor();
-	}
-	
-	String getXPpathIconoUpGalery() {
-		switch (channel) {
-		case mobile:
-			return XPATH_ICONO_GALERY_MOBILE;
-		case tablet:
-		default:
-			return XPATH_ICONO_UP_GALERY_TABLET;
-		}
-	}
 	
 	@Override
 	public String getXPathCabeceraBusquedaProd() {
@@ -115,8 +90,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	private WebElement getColorArticulo(WebElement articulo, int posColor) {
-		String xpathImgColorRelArticle = getXPathColoresArticle();
-		return getElements("." + xpathImgColorRelArticle).get(posColor-1);
+		return getElements("." + getXPathColorArticleOption()).get(posColor-1);
 	}
 
 	@Override
@@ -146,7 +120,6 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public String getPrecioArticulo(WebElement articulo) {
 		if (isArticleRebajado(articulo)) {
-			//return (articulo.findElement(By.xpath("." + XPATH_PRECIO_REBAJADO_RELATIVE_ARTICLE)).getText());
 			return articulo.findElement(By.xpath("." + PRECIO_REBAJADO_DEFINITIVO.getXPath())).getText();
 		}
 		return articulo.findElement(By.xpath("." + PRECIO_NO_REBAJADO_DEFINITIVO.getXPath())).getText();
@@ -309,12 +282,6 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 		hideHtmlComponent(HtmlLocator.ClassName, "orders-filters", driver);
 		hideHtmlComponent(HtmlLocator.ClassName, "order-filters", driver);
 		hideHtmlComponent(HtmlLocator.TagName, "header", driver);
-	}
-	
-	@Override
-	public boolean backTo1erArticulo() throws InterruptedException {
-		String xpathIconoUp = getXPpathIconoUpGalery();
-		return backTo1erArticulo(xpathIconoUp);
 	}
 	
 }

@@ -16,6 +16,9 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 	private static final String XPATH_ANCESTOR_ARTICLE = "//ancestor::" + ARTICULO_ELEMENT;
 	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
 	private static final String XPATH_COLOR_ARTICLE_BUTTON = "//div[@class[contains(.,'product-colors')]]/button";
+	private static final String XPATH_COLOR_ARTICLE_OPTION = "//button[@class='product-color']";	
+	private static final String XPATH_ICONO_GALERY_MOBILE = "//div[@class[contains(.,'scroll-container--visible')]]";
+	private static final String XPATH_ICONO_UP_GALERY_TABLET = "//div[@class='scroll-top-step']";
 	
 	private static final String XPATH_IMG_RELATIVE_ARTICLE = 
 		"//img[@src and " + 
@@ -44,6 +47,16 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 	}
 	
 	@Override
+	protected String getXPathArticuloConColores() {
+		return XPATH_COLOR_ARTICLE_BUTTON + getXPathArticuloAncestor();
+	}
+	
+	@Override
+	protected String getXPathColorArticleOption() {
+		return XPATH_COLOR_ARTICLE_OPTION;
+	}	
+	
+	@Override
 	protected String getXPathNombreRelativeToArticle() {
 		return XPATH_NOMBRE_RELATIVE_TO_ARTICLE;
 	}
@@ -51,6 +64,16 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 	private String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
 		return "//button[@aria-label='" + typeSlider.getKondo() + "']";
 	}	
+
+	private String getXPpathIconoUpGalery() {
+		switch (channel) {
+		case mobile:
+			return XPATH_ICONO_GALERY_MOBILE;
+		case tablet:
+		default:
+			return XPATH_ICONO_UP_GALERY_TABLET;
+		}
+	}
 	
 	@Override
 	public String getRefArticulo(WebElement articulo) {
@@ -135,6 +158,12 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
 		waitMillis(500);
 		click(articulo).by(By.xpath("." + xpathSlider)).exec();		
+	}
+
+	@Override
+	public boolean backTo1erArticulo() throws InterruptedException {
+		return backTo1erArticulo(getXPpathIconoUpGalery());
 	}	
+	
 	
 }

@@ -38,7 +38,7 @@ public enum FiltroMobil {
 		return XPATH_FILTRO_MULTI_NORMAL + xpathNormal;
 	}
 	public String getXPathKondo() {
-		return XPATH_FILTRO_MULTI_KONDO + xpathKondo;
+		return XPATH_FILTRO_MULTI_KONDO + xpathKondo + "/../..";
 	}
 	public String getXPathOptionKondo() {
 		return XPATH_FILTRO_MULTI_KONDO + xpathOptionKondo;

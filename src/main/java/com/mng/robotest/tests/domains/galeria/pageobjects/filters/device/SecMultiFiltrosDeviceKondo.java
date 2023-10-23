@@ -88,6 +88,7 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 
 	private void selectFiltrosAndWaitLoad(FiltroMobil typeFiltro, List<String> listTextFiltros) {
 		goAndClickFiltroButton();
+		state(Visible, typeFiltro.getXPathKondo()).wait(2).check();
 		getElement(typeFiltro.getXPathKondo()).click();
 		waitLoadPage();
 		for (String textFiltro : listTextFiltros) {
@@ -109,7 +110,8 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 	private void clickFiltroOptionStaleNotSafe(FiltroMobil typeFiltro, String textFiltro) {
 		var filtroLinea = getElement(typeFiltro.getXPathKondo());
 		By byFiltroOption = By.xpath(getXPathFiltroOption(typeFiltro, textFiltro));
-		click(filtroLinea).by(byFiltroOption).waitLink(1).exec();
+		state(Clickable, byFiltroOption).wait(2).check();
+		click(filtroLinea).by(byFiltroOption).exec();
 		waitLoadPage();
 	}
 
