@@ -1,5 +1,6 @@
 package com.mng.robotest.tests.domains.transversal.acceso.steps;
 
+import java.net.URISyntaxException;
 import java.util.Iterator;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
+import com.github.jorge2m.testmaker.service.TestMaker;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.*;
@@ -22,6 +24,7 @@ import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.tests.domains.login.steps.PageIdentificacionSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
 import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.transversal.prehome.pageobjects.PagePrehome;
 import com.mng.robotest.tests.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -152,6 +155,15 @@ public class AccesoSteps extends StepBase {
 	
 	public void login() {
 		login(dataTest.getUserConnected(), dataTest.getPasswordUser());
+	}
+	
+	@Step (
+		description="Renovar el browser, introducir la URL \"/es/account/baja\" y aceptar las cookies", 
+		expected="El login es correcto")			
+	public void inputUrlAccountBajaAndAcceptCookiesInNewBrowser() throws URISyntaxException { 
+		TestMaker.renewDriverTestCase()
+			.get(inputParamsSuite.getDnsUrlAcceso() + "/es/account/baja");
+		new PagePrehome().manageCookies(true);
 	}
 	
 	@Step (

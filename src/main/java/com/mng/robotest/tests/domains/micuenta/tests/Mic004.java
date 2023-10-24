@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.micuenta.tests;
 
 import java.net.URISyntaxException;
 
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisDatosSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
@@ -54,8 +53,7 @@ public class Mic004 extends TestBase {
 	}
 	
 	private void openUrlAccountBajaInNewBrowser() throws URISyntaxException {
-		TestMaker.renewDriverTestCase()
-			.get(inputParamsSuite.getDnsUrlAcceso() + "/es/account/baja");
+		new AccesoSteps().inputUrlAccountBajaAndAcceptCookiesInNewBrowser();
 	}
 	
 	private void loginRemoveAccountAndCheck() {
