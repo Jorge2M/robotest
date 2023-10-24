@@ -108,12 +108,21 @@ public class PageMisDatosSteps extends StepBase {
 	}
 
 	@Step(
-		description = "Seleccionar el link Cancelar cuenta",
+		description = "Seleccionar el link Cancelar cuenta + confirmar cancelación",
 		expected = "Aparece la página de resultado de cancelación de la cuenta ok")
 	public void cancelarCuenta() {
 		pageMisDatos.cancelarCuenta();
 		checkCuentaCanceladaOk(3);
 	}
+	
+	@Step(
+		description = "Confirmar la cancelación de la cuenta",
+		expected = "Aparece la página de resultado de cancelación de la cuenta ok")
+	public void confirmCancelarCuenta() {
+		pageMisDatos.confirmEliminarCuenta();
+		checkCuentaCanceladaOk(3);
+	}	
+	
 	
 	@Validation (
 		description="Aparece un mensaje de cuenta cancelada correctamente " + SECONDS_WAIT)

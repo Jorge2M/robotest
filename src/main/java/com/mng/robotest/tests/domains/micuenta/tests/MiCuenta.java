@@ -55,9 +55,15 @@ public class MiCuenta implements Serializable {
 	@Test (
 		groups={"Micuenta", "Canal:desktop,mobile_App:shop"}, 
 		description="Registro y cancelación de la cuenta creada")
-	public void MIC003_CancelacionCuenta() 
-			throws Exception {
+	public void MIC003_CancelacionCuenta() throws Exception {
 		new Mic003().execute();
-	}	
+	}
+	
+	@Test (
+		groups={"Micuenta", "Canal:desktop_App:shop"}, 
+		description="Cancelación de cuenta mediante endpoint de PlayStore")
+	public void MIC004_CancelacionCuenta() throws Exception {
+		new Mic004().execute();
+	}
 	
 }

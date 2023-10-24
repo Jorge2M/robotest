@@ -155,10 +155,10 @@ public class AccesoSteps extends StepBase {
 	}
 	
 	@Step (
-		description="Logarse con el usuario <b>#{userConnect}</b>", 
+		description="Logarse con el usuario <b>#{userConnect} / #{userPassword}</b>", 
 		expected="El login es correcto",
 		saveNettraffic=SaveWhen.Always)
-	private void login(String userConnect, String userPassword) {
+	public void login(String userConnect, String userPassword) {
 		new AccesoFlows().login(userConnect, userPassword);
 		validaIdentificacionEnShop();
 	}	

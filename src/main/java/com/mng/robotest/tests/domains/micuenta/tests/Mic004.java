@@ -1,7 +1,9 @@
 package com.mng.robotest.tests.domains.micuenta.tests;
 
+import java.net.URISyntaxException;
+
+import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisDatosSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
@@ -12,18 +14,14 @@ import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 import com.mng.robotest.testslegacy.data.DataMango;
 
-public class Mic003 extends TestBase {
+public class Mic004 extends TestBase {
 
-	private final PageRegistroInitialShopSteps pageRegistroInitialSteps = new PageRegistroInitialShopSteps();
-	
 	private final String emailNotExistent = DataMango.getEmailNonExistentTimestamp();
 	private final String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_ROBOT_USER).getPassword();
-	
 	private final DataNewRegister dataNewRegister;
 
-	public Mic003() {
+	public Mic004() {
 		super();
-
 		dataNewRegister = new DataNewRegister(
 				emailNotExistent, 
 				passStandard, 
@@ -34,8 +32,9 @@ public class Mic003 extends TestBase {
 	public void execute() throws Exception {
 		accesoAndClickRegistrate();
 		inputInitialDataAndClickCreate();
-		clickLogoMango();
-		cancelarCuentaAndCheckLoginKO();
+		clickLogoMangoAndLogoff();
+		openUrlAccountBajaInNewBrowser();
+		loginRemoveAccountAndCheck();
 	}
 
 	private void accesoAndClickRegistrate() throws Exception {
@@ -44,20 +43,29 @@ public class Mic003 extends TestBase {
 	}	
 	
 	private void inputInitialDataAndClickCreate() {
+		var pageRegistroInitialSteps = new PageRegistroInitialShopSteps();
 		pageRegistroInitialSteps.inputData(dataNewRegister);
 		pageRegistroInitialSteps.clickCreateAccountButton();
 	}
 	
-	private void clickLogoMango() {
+	private void clickLogoMangoAndLogoff() {
 		new SecCabeceraSteps().selecLogo();
+		new SecMenusUserSteps().logoff();
 	}
 	
-	private void cancelarCuentaAndCheckLoginKO() {
-		new PageMiCuentaSteps().goToMisDatosAndValidateData(dataNewRegister);
-		new PageMisDatosSteps().cancelarCuenta();
+	private void openUrlAccountBajaInNewBrowser() throws URISyntaxException {
+		TestMaker.renewDriverTestCase()
+			.get(inputParamsSuite.getDnsUrlAcceso() + "/es/account/baja");
+	}
+	
+	private void loginRemoveAccountAndCheck() {
+		String user = dataNewRegister.getEmail();
+		String password = dataNewRegister.getPassword();
+		
+		new AccesoSteps().login(user, password);		
+		new PageMisDatosSteps().confirmCancelarCuenta();		
 		new SecMenusUserSteps().logoff();
-		new AccesoSteps().inicioSesionDatosKO(
-				dataNewRegister.getEmail(), dataNewRegister.getPassword());
+		new AccesoSteps().inicioSesionDatosKO(user, password);
 	}	
 
 }
