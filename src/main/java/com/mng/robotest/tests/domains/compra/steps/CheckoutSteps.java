@@ -13,7 +13,6 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.chequeregalo.beans.ChequeRegalo;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.tests.domains.compra.payments.billpay.steps.SecBillpaySteps;
-import com.mng.robotest.tests.domains.compra.payments.ideal.steps.SecIdealSteps;
 import com.mng.robotest.tests.domains.compra.payments.kredikarti.steps.SecKrediKartiSteps;
 import com.mng.robotest.tests.domains.compra.payments.tmango.steps.SecTMangoSteps;
 import com.mng.robotest.tests.domains.compra.steps.envio.SecMetodoEnvioSteps;
@@ -38,7 +37,6 @@ public class CheckoutSteps extends StepBase {
 	private final ModalAvisoCambioPaisSteps modalAvisoCambioPaisSteps = new ModalAvisoCambioPaisSteps();
 	private final Page1DktopCheckoutSteps page1DktopCheckSteps = new Page1DktopCheckoutSteps();
 	private final Page1EnvioCheckoutMobilSteps page1MobilCheckSteps = new Page1EnvioCheckoutMobilSteps();
-	private final SecIdealSteps secIdealSteps = new SecIdealSteps();
 	private final SecTarjetaPciSteps secTarjetaPciSteps = new SecTarjetaPciSteps();
 	private final PageRedirectPasarelaLoadingSteps pageRedirectPasarelaLoadingSteps = new PageRedirectPasarelaLoadingSteps();
 	
@@ -52,9 +50,7 @@ public class CheckoutSteps extends StepBase {
 	public ModalDirecEnvioOldSteps getModalDirecEnvioSteps() {
 		return modalDirecEnvioSteps;
 	}
-	public SecIdealSteps getSecIdealSteps() {
-		return secIdealSteps;
-	}
+
 	public SecBillpaySteps getSecBillpaySteps() {
 		return secBillpaySteps;
 	}

@@ -12,6 +12,10 @@ public class PageSofort2on extends PageBase {
 	private static final String XPATH_SELECT_PAISES = "//select[@id[contains(.,'Country')]]";
 	private static final String XPATH_INPUT_BANK_CODE = "//input[@id[contains(.,'BankCodeSearch')]]";
 	private static final String XPATH_SUBMIT_BUTTON = "//form//button[@class[contains(.,'primary')]]";
+
+	private String getXPathBankOption(String bank) {
+		return "//input[@data-label='" + bank + "']";
+	}
 	
 	public boolean isPageUntil(int seconds) {
 		return state(Present, XPATH_SELECT_PAISES).wait(seconds).check();
@@ -29,6 +33,10 @@ public class PageSofort2on extends PageBase {
 	
 	public void inputBankcode(String bankCode) {
 		getElement(XPATH_INPUT_BANK_CODE).sendKeys(bankCode);
+	}
+	
+	public void selectBank(String bank) {
+		click(getXPathBankOption(bank)).exec();
 	}
 
 	public void clickSubmitButtonPage3() {

@@ -28,9 +28,10 @@ public class PageSofort2onSteps extends StepBase {
 		expected="Aparece la página de indentificación en SOFORT")
 	public void selectPaisYBanco(String paisSofort, String bankCode) {
 		pageSofort2on.selectPais(paisSofort);
-		pageSofort2on.inputBankcode(bankCode);
+		//pageSofort2on.inputBankcode(bankCode);
+		pageSofort2on.selectBank("Demo Bank");
 		PageObjTM.waitForPageLoaded(driver, 5);
-		pageSofort2on.clickSubmitButtonPage3();
-		new PageSofort4thSteps().validaIsPage();
+		//pageSofort2on.clickSubmitButtonPage3();
+		new PageSofort4thSteps().checkIsPage();
 	}
 }

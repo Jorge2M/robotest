@@ -1,12 +1,15 @@
 package com.mng.robotest.tests.domains.compra.payments.ideal;
 
 import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
-import com.mng.robotest.tests.domains.compra.payments.ideal.pageobjects.SecIdeal.BancoSeleccionado;
+import com.mng.robotest.tests.domains.compra.payments.ideal.pageobjects.SecIdealCheckout.BancoSeleccionado;
 import com.mng.robotest.tests.domains.compra.payments.ideal.steps.PageIdealSimuladorSteps;
+import com.mng.robotest.tests.domains.compra.payments.ideal.steps.SecIdealCheckoutSteps;
 import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoIdeal extends PagoSteps {
+	
+	private final SecIdealCheckoutSteps secIdealCheckoutSteps = new SecIdealCheckoutSteps();
 	
 	public PagoIdeal(DataPago dataPago) {
 		super(dataPago);
@@ -16,10 +19,9 @@ public class PagoIdeal extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
-		pageCheckoutWrapperSteps.getSecIdealSteps().validateIsSectionOk();
-		
+		secIdealCheckoutSteps.checkIsSectionOk();
 		if (execPay) {
-			pageCheckoutWrapperSteps.getSecIdealSteps().clickBanco(BancoSeleccionado.TEST_ISSUER);
+			secIdealCheckoutSteps.clickBanco(BancoSeleccionado.TEST_ISSUER);
 			dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 			
 			var pageIdealSimuladorSteps = new PageIdealSimuladorSteps();
@@ -27,4 +29,5 @@ public class PagoIdeal extends PagoSteps {
 			pageIdealSimuladorSteps.clickContinueButton();
 		}
 	}
+	
 }

@@ -14,7 +14,7 @@ public class PageSofort4thSteps extends StepBase {
 	@Validation (
 		description="Aparece la página de introducción del Usuario/Password de \"SOFORT\"",
 		level=Warn)
-	public boolean validaIsPage() { 
+	public boolean checkIsPage() { 
 		return pageSofort4th.isPage();
 	}
 	
@@ -24,13 +24,13 @@ public class PageSofort4thSteps extends StepBase {
 	public void inputCredencialesUsr(String usrSofort, String passSofort) {
 		pageSofort4th.inputUserPass(usrSofort, passSofort);
 		pageSofort4th.clickSubmitButton();
-		validateAppearsCtaForm();
+		checkAppearsCtaForm();
 	}
 	
 	@Validation (
 		description="Aparece un formulario para la selección de la cuenta",
 		level=Warn)
-	public boolean validateAppearsCtaForm() {
+	public boolean checkAppearsCtaForm() {
 		return pageSofort4th.isVisibleFormSelCta();
 	}
 	
@@ -47,7 +47,7 @@ public class PageSofort4thSteps extends StepBase {
 		description="Aparece un campo para la introducción del TAN",
 		level=Warn)
 	public boolean validateAppearsInputTAN() {
-		return (pageSofort4th.isVisibleInputTAN());
+		return pageSofort4th.isVisibleInputTAN();
 	}
 
 	@Step (
@@ -57,4 +57,5 @@ public class PageSofort4thSteps extends StepBase {
 		pageSofort4th.inputTAN(tanSofort);
 		pageSofort4th.clickSubmitButton();
 	}
+	
 }
