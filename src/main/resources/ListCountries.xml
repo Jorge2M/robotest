@@ -2224,11 +2224,12 @@ where
 <pais nombre_pais="Ukraine" codigo="072">
 <codigo_pais>072</codigo_pais>
 <codigo_alf>UA</codigo_alf>
+<!-- 
 <idioma acceso="ua">IN</idioma>
 <idioma acceso="ua-ru">RU</idioma>
-<!-- 
+-->
 <idioma acceso="ua">UA</idioma>
-<idioma acceso="ua-en">IN</idioma>-->
+<idioma acceso="ua-en">IN</idioma>
 <codpos>01001</codpos>
 <telefono>0501111111</telefono>
 <dni>34763592N</dni>
