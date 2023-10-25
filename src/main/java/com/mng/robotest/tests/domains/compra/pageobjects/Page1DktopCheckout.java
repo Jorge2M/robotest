@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.compra.pageobjects;
 
-import java.util.List;
 import java.util.ListIterator;
 import java.util.StringTokenizer;
 import org.openqa.selenium.By;
@@ -90,11 +89,11 @@ public class Page1DktopCheckout extends PageBase {
 	private static final String XPATH_PRECIO_CHEQUE_REGALO = XPATH_CONTENT_CHEQUE_REGALO + "//div[@class='span2']";
 	private static final String XPATH_MENSAJE_CHEQUE_REGALO = XPATH_CONTENT_CHEQUE_REGALO + "//div[@class='span4']";
 	
-	private static final String XPATH_RADIO_PAGO_WITH_TAG = "//*[@class[contains(.,'cuadroPago')]]/input[@value='" + TAG_METODO_PAGO + "']/../input[@type='radio']";
+	private static final String XPATH_RADIO_PAGO_WITH_TAG = "//*[@class[contains(.,'cuadroPago')]]//input[@value='" + TAG_METODO_PAGO + "']/../input[@type='radio']";
 	private static final String TEXT_KREDI_KARTI = "KREDİ KARTI";
 	private static final String XPATH_PESTANYA_KREDI_KARTI = "//div[@class[contains(.,'pmGroupTitle')]]/span[text()='" + TEXT_KREDI_KARTI + "']";
 	
-	private static final String XPATH_METODO_PAGO = "//*[@class[contains(.,'cardBox')]]/label";
+	private static final String XPATH_METODO_PAGO = "//*[@class[contains(.,'cardBox')]]";
 	
 	private static final String TAG_REFERENCIA = "@TagRef";
 	private static final String XPATH_LINEA_ARTICULO_WITH_TAG = 
@@ -426,7 +425,7 @@ public class Page1DktopCheckout extends PageBase {
 	
 	public boolean validateArticlesAndDiscount(Descuento descuento) {
 		for (ArticuloScreen articulo : dataTest.getDataBag().getListArticlesTypeViewInBolsa()) {
-			WebElement lineaArticulo = getLineaArticle(articulo.getReferencia());
+			var lineaArticulo = getLineaArticle(articulo.getReferencia());
 			if (lineaArticulo==null) {
 				return false;
 			}
@@ -454,10 +453,10 @@ public class Page1DktopCheckout extends PageBase {
 	
 	private PreciosArticulo getPreciosArticuloResumen(WebElement articuloWeb) {
 		var precios = new PreciosArticulo();
-		List<WebElement> preciosNoTachados= articuloWeb.findElements(By.xpath("." + XPATH_PRECIO_NO_TACHADO_REL_ARTICLE));
-		List<WebElement> preciosSiTachados= articuloWeb.findElements(By.xpath("." + XPATH_PRECIOO_SI_TACHADO_REL_ARTICLE));
+		var preciosNoTachados= articuloWeb.findElements(By.xpath("." + XPATH_PRECIO_NO_TACHADO_REL_ARTICLE));
+		var preciosSiTachados= articuloWeb.findElements(By.xpath("." + XPATH_PRECIOO_SI_TACHADO_REL_ARTICLE));
 		int cantidad = Integer.parseInt(articuloWeb.findElement(By.xpath("." + XPATH_CANTIDAD_ARTICULOS)).getText());
-		for (WebElement precioNoTachado : preciosNoTachados) {
+		for (var precioNoTachado : preciosNoTachados) {
 			precios.definitivo = getFloatFromImporteScreen(precioNoTachado) / cantidad; 
 			if (precios.definitivo!=0) {
 				precios.original = precios.definitivo;
@@ -465,7 +464,7 @@ public class Page1DktopCheckout extends PageBase {
 			}
 		}
 		
-		for (WebElement precioSiTachado : preciosSiTachados) {
+		for (var precioSiTachado : preciosSiTachados) {
 			float precio = getFloatFromImporteScreen(precioSiTachado) / cantidad; 
 			if (precio!=0) {
 				precios.ultimaRebaja = precio;

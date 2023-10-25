@@ -148,8 +148,8 @@ public class UtilsTest {
 				.sortBy(SortBy.STOCK_DESCENDENT)
 				.build();
 
-		List<GarmentCatalog> listProducts = getterProducts.getAll();
-		List<Article> listArticles = Article.getArticlesForTest(listProducts);
+		var listProducts = getterProducts.getAll();
+		var listArticles = Article.getArticlesForTest(listProducts);
 		if (listArticles.size() > maxArticlesAwayVale) {
 			return (listArticles.subList(0, maxArticlesAwayVale));
 		}
@@ -157,13 +157,12 @@ public class UtilsTest {
 	}
 	
 	public static Pair<Article, Article> getTwoArticlesFromDistinctWarehouses(Pais pais, AppEcom app) throws Exception {
-		List<GarmentCatalog> listGarments = getProductFromApi(pais, app);
-		
-		GarmentCatalog garment1 = listGarments.get(0);
+		var listGarments = getProductFromApi(pais, app);
+		var garment1 = listGarments.get(0);
 		garment1.removeArticlesWithoutMaxStock();
 		String almacen1 = garment1.getAlmacenFirstArticle();
 		GarmentCatalog garment2 = null;
-		for (GarmentCatalog garment : listGarments) {
+		for (var garment : listGarments) {
 			if (garment!=garment1) {
 				garment.removeArticlesAlmacen(almacen1);
 				if (!garment.getColors().isEmpty() && garment.isAnyArticleWithStock()) {
@@ -189,6 +188,5 @@ public class UtilsTest {
 			.build();
 		return getterProducts.getAll();
 	}	
-	
 	
 }

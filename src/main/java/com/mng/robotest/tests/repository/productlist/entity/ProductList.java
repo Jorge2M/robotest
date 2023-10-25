@@ -56,7 +56,7 @@ public class ProductList {
 	}
 	
 	public List<GarmentCatalog> getAllGarments(SortBy sortBy) {
-		List<GarmentCatalog> allGarments = getAllGarments();
+		var allGarments = getAllGarments();
 		if (sortBy!=null) {
 			return allGarments.stream()
 					.sorted(SortFactory.get(sortBy))
@@ -70,6 +70,8 @@ public class ProductList {
 				.map(Group::getGarments)
 				.toList().stream()
 				.flatMap(Collection::stream)
+				.distinct()
 				.toList();
 	}
+
 }

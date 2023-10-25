@@ -358,4 +358,25 @@ public class GarmentCatalog {
 		this.numberOfColors = numberOfColors;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof GarmentCatalog)) {
+            return false;
+        }
+        
+        var g = (GarmentCatalog) o; 
+        if (g.getGarmentId().compareTo(this.getGarmentId())==0) {
+        	return true;
+        }
+        return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.getGarmentId().hashCode();
+	}	
+	
 }

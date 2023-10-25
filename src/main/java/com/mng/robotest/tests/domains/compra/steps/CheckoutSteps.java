@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.compra.steps;
 
-import java.util.List;
 import java.util.StringTokenizer;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -19,10 +18,10 @@ import com.mng.robotest.tests.domains.compra.steps.envio.SecMetodoEnvioSteps;
 import com.mng.robotest.testslegacy.beans.AccesoEmpl;
 import com.mng.robotest.testslegacy.beans.Pago;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.beans.TypePago;
 import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 
+import static com.mng.robotest.testslegacy.beans.TypePago.*;
 import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class CheckoutSteps extends StepBase {
@@ -178,19 +177,18 @@ public class CheckoutSteps extends StepBase {
 	@Validation
 	private ChecksTM checkLogosPagos(boolean isEmpl) { 
 		var checks = ChecksTM.getNew();
-		List<Pago> listPagos = dataTest.getPais().getListPagosForTest(app, isEmpl);
+		var listPagos = dataTest.getPais().getListPagosForTest(app, isEmpl);
 		if (listPagos.size()==1 && channel.isDevice()) {
 			return checks;
 		}
 		for (int i=0; i<listPagos.size(); i++) {
-			if (listPagos.get(i).getTypePago()!=TypePago.TPV_VOTF) {
+			if (listPagos.get(i).getTypePago()!=TPV_VOTF) {
 				String pagoNameExpected = listPagos.get(i).getNombre(channel, app);
 			 	checks.add(
 					"Aparece el logo/pestaña asociado al pago <b>" + pagoNameExpected + "</b>",
 					pageCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected));	
 			}
 		}   
-		
 		return checks;
 	}
 	
@@ -237,9 +235,9 @@ public class CheckoutSteps extends StepBase {
 			Log4jTM.getLogger().warn("Problem clicking icono pago for payment {} in country {}", pago.getNombre(), dataTest.getPais().getNombrePais(), e);
 		}
 
-		if (pago.getTypePago()==TypePago.TARJETA_INTEGRADA || 
-			pago.getTypePago()==TypePago.KREDI_KARTI ||
-			pago.getTypePago()==TypePago.BANCONTACT) {
+		if (pago.getTypePago()==TARJETA_INTEGRADA || 
+			pago.getTypePago()==KREDI_KARTI ||
+			pago.getTypePago()==BANCONTACT) {
 			validateSelectPagoTRJintegrada(pago);
 			return true;
 		} else {
@@ -264,12 +262,12 @@ public class CheckoutSteps extends StepBase {
 	@Validation (
 		description="Se hace visible el texto bajo el método de pago: #{nombrePago} " + SECONDS_WAIT)
 	private boolean checkIsVisibleTextUnderPayment(String nombrePago, Pago pago, int seconds) {
-		return (pageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, seconds));
+		return pageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, seconds);
 	}
 	
 	@Validation (description="Aparece el botón de \"Confirmar Compra\"")
 	public boolean validateIsPresentButtonCompraDesktop() {
-		return (pageCheckoutWrapper.getPage1DktopCheckout().isPresentButtonConfPago());
+		return pageCheckoutWrapper.getPage1DktopCheckout().isPresentButtonConfPago();
 	}
 	
 	private static final String TAG_TIPO_TARJ = "@TagTipoTarj";
@@ -354,7 +352,6 @@ public class CheckoutSteps extends StepBase {
 		catch (Exception e) {
 			Log4jTM.getLogger().warn("Problem in click Confirm payment button", e);
 		}
-							
 		pageRedirectPasarelaLoadingSteps.validateDisappeared(5);
 	}	
 	
@@ -444,12 +441,12 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation (description="Aparece el banco \"#{ombreBanco}\" en el cuadro de selección")
 	private boolean checkIsVisibleBank(String nombreBanco) {
-		return (pageCheckoutWrapper.isBancoSeleccionado(nombreBanco));
+		return pageCheckoutWrapper.isBancoSeleccionado(nombreBanco);
 	}
 
 	@Validation (description="Aparece el botón que permite aplicar los Loyalty Points")
 	public boolean validateBlockLoyalty() {
-		return (pageCheckoutWrapper.isVisibleButtonForApplyLoyaltyPoints());
+		return pageCheckoutWrapper.isVisibleButtonForApplyLoyaltyPoints();
 	}
 	
 	@Step (
@@ -486,7 +483,6 @@ public class CheckoutSteps extends StepBase {
 			}
 			waitMillis(1000);
 		}
-		
 		return false;
 	}
 	
@@ -506,7 +502,6 @@ public class CheckoutSteps extends StepBase {
 			}
 			waitMillis(1000);
 		}
-		
 		return false;
 	}
 	

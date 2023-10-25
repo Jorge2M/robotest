@@ -5,9 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -23,7 +21,6 @@ import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.repository.UtilsData;
 import com.mng.robotest.tests.repository.canonicalproduct.GetterProductApiCanonical;
-import com.mng.robotest.tests.repository.canonicalproduct.entity.EntityProduct;
 import com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.tests.repository.productlist.entity.ProductList;
@@ -125,7 +122,7 @@ public class GetterProducts {
 		if (filters!=null && !filters.isEmpty()) {
 			return getOne(filters);
 		}
-		List<GarmentCatalog> allGarments = productList.getAllGarments(sortBy);
+		var allGarments = productList.getAllGarments(sortBy);
 		return Optional.of(allGarments.get(0));
 	}
 	
@@ -157,7 +154,7 @@ public class GetterProducts {
 		int sizeMenus = menusCandidates.size();
 		for (int i=0; i<sizeMenus; i++) {
 			boolean lastMenu = (i+1) == sizeMenus;
-			Optional<ProductList> productListMenu = getProductsFromMenu(menusCandidates.get(i), !lastMenu);
+			var productListMenu = getProductsFromMenu(menusCandidates.get(i), !lastMenu);
 			if (productListMenu.isPresent()) {
 				if (productListReturn==null) {
 					productListReturn = productListMenu.get();
@@ -181,8 +178,8 @@ public class GetterProducts {
 	private void addCanonicalInfo(ProductList productList) throws Exception {
 		Pais pais = PaisGetter.fromCodAlf(codigoPaisAlf);
 		var getterProductApiCanonical = new GetterProductApiCanonical(codigoPaisAlf, pais.getCodigoAlf(), app.name());
-		for (GarmentCatalog garmentCatalog : productList.getAllGarments()) {
-			Optional<EntityProduct> canonicalProduct = getterProductApiCanonical.getProduct(garmentCatalog.getGarmentId());
+		for (var garmentCatalog : productList.getAllGarments()) {
+			var canonicalProduct = getterProductApiCanonical.getProduct(garmentCatalog.getGarmentId());
 			if (canonicalProduct.isPresent()) {
 				garmentCatalog.setCanonicalProduct(canonicalProduct.get());
 			}
@@ -191,7 +188,7 @@ public class GetterProducts {
 
 	private Optional<ProductList> getProductsFromMenu(MenuProduct menuCandidate, boolean withStock) {
 		try {
-			ProductList productListMenu = getProductList(menuCandidate);
+			var productListMenu = getProductList(menuCandidate);
 			if (productListMenu!=null && 
 			   (hasProductsWithStock(productListMenu) || !withStock)) {
 				return Optional.of(productListMenu);
@@ -222,7 +219,7 @@ public class GetterProducts {
 		case WEBDRIVER:
 			return getProductsFromWebDriver(menu);
 		default:
-			ProductList productListApi = getProductsFromApiRest(menu);
+			var productListApi = getProductsFromApiRest(menu);
 			if (productListApi==null && driver!=null) {
 				return getProductsFromWebDriver(menu);
 			}
@@ -258,8 +255,8 @@ public class GetterProducts {
 	}
 	
 	private WebTarget getWebTargetProductlistStandard(String urlBase, MenuProduct menu) {
-		Client client = ClientBuilder.newBuilder().build();
-		WebTarget webTarget = 
+		var client = ClientBuilder.newBuilder().build();
+		var webTarget = 
 			client
 				.target(urlBase.replace("http:", "https:") + "services/productlist/products")
 				.path(getPathPaisIdioma())
@@ -305,8 +302,8 @@ public class GetterProducts {
 	}
 	
 	private WebTarget getWebTargetProductlistIntimissimi(String urlBase, MenuProduct menu) {
-		Client client = ClientBuilder.newBuilder().build();
-		WebTarget webTarget = 
+		var client = ClientBuilder.newBuilder().build();
+		var webTarget = 
 			client
 				.target(urlBase.replace("http:", "https:") + "ws-catalog-aggregator/desktop/product-list/products/v1")
 				.path(codigoPaisAlf)
@@ -326,15 +323,13 @@ public class GetterProducts {
 	}
 	
 	private ProductList getProductsFromApiRest(MenuProduct menu) throws Exception {
-		WebTarget webTarget = getWebTargetProductlist(urlForJavaCall, menu);
-		Invocation.Builder builder = webTarget
-				.request(MediaType.APPLICATION_JSON);
+		var webTarget = getWebTargetProductlist(urlForJavaCall, menu);
+		var builder = webTarget.request(MediaType.APPLICATION_JSON);
 		
 		if ("".compareTo(nameCloudTest)!=0) {
 			builder = builder.cookie("cloudtest-name", nameCloudTest);
 		}
-		Response response = builder.get();
-		
+		var response = builder.get();
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
 			String productsJson = response.readEntity(String.class);
 			if (productsJson!=null && productsJson.contains("garments")) {
@@ -345,7 +340,7 @@ public class GetterProducts {
 	}
 	
 	private ProductList getProductsFromWebDriver(MenuProduct menu) throws Exception {
-		WebTarget webTarget = getWebTargetProductlist(urlForBrowserCall, menu);
+		var webTarget = getWebTargetProductlist(urlForBrowserCall, menu);
 		String urlGetProducts = webTarget.getUri().toURL().toString();
 		
 		String nameTab = "GetProducts";
