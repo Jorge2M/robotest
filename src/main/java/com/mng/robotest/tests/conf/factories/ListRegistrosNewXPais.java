@@ -8,18 +8,16 @@ import org.testng.annotations.*;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.registro.tests.RegistroNew;
 import com.mng.robotest.testslegacy.beans.*;
-import com.mng.robotest.testslegacy.utils.PaisGetter;
-import com.github.jorge2m.testmaker.service.TestMaker;
 
-public class ListRegistrosNewXPais {
+public class ListRegistrosNewXPais extends FactoryBase {
 
 	@Factory
 	@Parameters({"countrys"})
-	public Object[] createInstances(String listaPaisesStr, ITestContext ctxTestRun) {
+	public Object[] createInstances(String listaPaisesStr, ITestContext ctx) {
+		inputParams = getInputParams(ctx);
 		List<Object> listTests;
-		var appE = (AppEcom)TestMaker.getInputParamsSuite(ctxTestRun).getApp();
 		try {
-			listTests = createTests(listaPaisesStr, appE);
+			listTests = createTests(listaPaisesStr, getApp());
 		}
 		catch (Throwable e) {
 			throw e;
@@ -29,14 +27,11 @@ public class ListRegistrosNewXPais {
 
 	private List<Object> createTests(String listaPaisesStr, AppEcom appE) {
 		List<Object> listTests = new ArrayList<>();
-		var listCountrys = PaisGetter.getFromCommaSeparatedCountries(listaPaisesStr);
-		int prioridad=0;
-		for (Pais pais : listCountrys) {
+		for (var pais : getListCountries(listaPaisesStr)) {
 			var itIdiomas = pais.getListIdiomas(appE).iterator();
 			while (itIdiomas.hasNext()) {
 				var idioma = itIdiomas.next();
-				listTests.add(new RegistroNew(pais, idioma, prioridad));
-				prioridad+=1;
+				listTests.add(new RegistroNew(pais, idioma, 1));
 				printTestCreation(pais, idioma);
 			}
 		}

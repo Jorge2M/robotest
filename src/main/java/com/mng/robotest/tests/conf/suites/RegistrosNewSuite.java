@@ -1,18 +1,16 @@
 package com.mng.robotest.tests.conf.suites;
 
 import static com.mng.robotest.tests.conf.suites.SuiteMakerResources.getParametersSuiteShop;
+import static org.testng.xml.XmlSuite.ParallelMode.METHODS;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.github.jorge2m.testmaker.domain.SuiteMaker;
 import com.github.jorge2m.testmaker.domain.TestRunMaker;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.tests.conf.ErrorStorer;
 import com.mng.robotest.tests.conf.factories.ListRegistrosNewXPais;
 
-public class RegistrosNewSuite extends SuiteMaker {
+public class RegistrosNewSuite extends SuiteMakerMango {
 	
 	public enum VersionRegistroSuite {
 		V1(false, false),
@@ -34,10 +32,9 @@ public class RegistrosNewSuite extends SuiteMaker {
 		super(inputParams);
 		setParameters(getParametersSuiteShop(inputParams));
 		var testRun = TestRunMaker.from(inputParams.getSuiteName(), ListRegistrosNewXPais.class);
-		testRun.setStorerErrorStep(new ErrorStorer());
 		testRun.addGroups(getSpecificGroups());
-		addTestRun(testRun);
-		setParallelMode(ParallelMode.METHODS);
+		addTestRunMango(testRun);
+		setParallelMode(METHODS);
 		setThreadCount(5);
 	}
 	

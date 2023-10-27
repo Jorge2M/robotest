@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
-import com.mng.robotest.tests.repository.productlist.entity.ProductLabel;
 
 public class FilterPersonalizable implements Filter {
 	
 	@Override
 	public List<GarmentCatalog> filter(List<GarmentCatalog> garments) throws Exception {
 		List<GarmentCatalog> listGarmentsPersonalizable = new ArrayList<>();
-		for (GarmentCatalog garment : garments) {
+		for (var garment : garments) {
 			if (isGarmentOnline(garment)) {
 				listGarmentsPersonalizable.add(garment);
 			}
@@ -20,11 +19,12 @@ public class FilterPersonalizable implements Filter {
 	}	
 	
 	private boolean isGarmentOnline(GarmentCatalog garment) {
-		for (ProductLabel productLabel : garment.getLabels().getProductLabels()) {
+		for (var productLabel : garment.getLabels().getProductLabels()) {
 			if (productLabel!=null && "personalizable".compareTo(productLabel.getKey())==0) {
 				return true;
 			}
 		}
 		return false;
 	}
+	
 }

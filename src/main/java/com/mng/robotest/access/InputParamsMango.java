@@ -131,7 +131,7 @@ public class InputParamsMango extends InputParamsTM {
 	@Override
 	public Map<String,String> getSpecificParamsValues() {
 		Map<String,String> pairsParamValue = new HashMap<>(); 
-		for (ParamMango paramTM : ParamMango.values()) {
+		for (var paramTM : ParamMango.values()) {
 			String valueParam = getValueParam(paramTM);
 			if (valueParam!=null && "".compareTo(valueParam)!=0) {
 				pairsParamValue.put(paramTM.nameParam, valueParam);
@@ -160,20 +160,20 @@ public class InputParamsMango extends InputParamsTM {
 
 	@Override
 	public String getMoreInfo() {
-		StringBuilder moreInfo = new StringBuilder();
-		List<String> listCountrys = getListaPaises();
+		var moreInfo = new StringBuilder();
+		var listCountrys = getListaPaises();
 		if (!listCountrys.isEmpty()) {
 			moreInfo.append("List Countrys : " + "<br>");
 		}
-		List<String> listLineas = getListaLineas();
+		var listLineas = getListaLineas();
 		if (!listLineas.isEmpty()) {
 			moreInfo.append("List Lines: " + "<br>");
 		}
-		List<String> listPayments = getListaPayments();
+		var listPayments = getListaPayments();
 		if (!listPayments.isEmpty()) {
 			moreInfo.append("List Payments: " + listPayments);
 		}
-		List<String> listCatalogs = getListaCatalogs();
+		var listCatalogs = getListaCatalogs();
 		if (!listCatalogs.isEmpty()) {
 			moreInfo.append("List Catalogs: " + listCatalogs);
 		}

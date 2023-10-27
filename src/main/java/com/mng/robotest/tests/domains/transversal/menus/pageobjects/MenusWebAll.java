@@ -15,4 +15,5 @@ public interface MenusWebAll {
 		}
 		return new MenusWebAllDesktop();
 	}
+	
 }

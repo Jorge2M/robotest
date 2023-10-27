@@ -10,7 +10,7 @@ public class FilterStock implements Filter {
 	@Override
 	public List<GarmentCatalog> filter(List<GarmentCatalog> garments) throws Exception {
 		List<GarmentCatalog> listGarmentsWithStock = new ArrayList<>();
-		for (GarmentCatalog garment : garments) {
+		for (var garment : garments) {
 			if (garment.getStock() > 0) {
 				listGarmentsWithStock.add(garment);
 			}

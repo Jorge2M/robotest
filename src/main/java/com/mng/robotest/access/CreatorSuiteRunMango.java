@@ -38,7 +38,7 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 //		//Realmente no es necesario porque robotest carga automáticamente el driver asociado al navegador que arranca
 //		//pero puede ser necesario si en algún momento puntual se produce alguna incompatibilidad entre el navegador/driver
 		//setWebDriverVersion();
-		InputParamsMango inputParamsMango = (InputParamsMango)inputParams;
+		var inputParamsMango = (InputParamsMango)inputParams;
 		try {
 			switch ((Suites)inputParams.getSuite()) {
 			case SmokeTest:
@@ -53,8 +53,6 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 				return new MenusPaisSuite(inputParamsMango);
 			case ConsolaVotf:
 				return new ConsolaVotfSuite(inputParamsMango);
-			case ListFavoritos, ListMiCuenta, CheckoutMultiAddress, ModalPortada:
-				return new GenericFactorySuite(inputParamsMango);
 			case RegistrosPaises:
 				return new RegistrosSuite(inputParamsMango);
 			case RegistrosNewPaises:
@@ -62,6 +60,7 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 			case TextosLegales:
 				return new TextosLegalesSuite(inputParamsMango);
 			default:
+				return new GenericFactorySuite(inputParamsMango);
 			}
 		}
 		catch (IllegalArgumentException e) {

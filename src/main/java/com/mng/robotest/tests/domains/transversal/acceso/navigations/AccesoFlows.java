@@ -1,26 +1,29 @@
 package com.mng.robotest.tests.domains.transversal.acceso.navigations;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Clickable;
+import static com.mng.robotest.tests.domains.transversal.acceptcookies.pageobjects.ModalSetCookies.SectionConfCookies.COOKIES_DE_RENDIMIENTO;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.CERRAR_SESION;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.INICIAR_SESION;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.conf.AppEcom;
+import com.mng.robotest.tests.conf.testab.TestABactive;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
+import com.mng.robotest.tests.domains.transversal.acceptcookies.pageobjects.SectionCookies;
+import com.mng.robotest.tests.domains.transversal.acceptcookies.steps.SectionCookiesSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageAlertaVOTF;
 import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageLoginVOTF;
 import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageSelectIdiomaVOTF;
 import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageSelectLineaVOTF;
+import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.transversal.prehome.pageobjects.PageJCAS;
-import com.mng.robotest.tests.domains.transversal.prehome.pageobjects.PagePrehome;
-import com.mng.robotest.tests.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.testslegacy.beans.AccesoVOTF;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -54,11 +57,41 @@ public class AccesoFlows extends StepBase {
 		if (app==AppEcom.votf) {
 			accesoVOTF();
 			goFromLineasToMultimarcaVOTF();
-			var pagePrehome = new PagePrehome();
-			pagePrehome.previousAccessShopSteps();
-			pagePrehome.manageCookies(acceptCookies);			
+			previousAccessShopSteps();
+			manageCookies(acceptCookies);			
 		} else {
-			new PagePrehomeSteps().seleccionPaisIdiomaAndEnter(false, acceptCookies);
+			new AccesoSteps().accessFromPreHome(false, acceptCookies);
+		}
+	}
+	
+	public void previousAccessShopSteps() throws Exception {
+		reloadIfServiceUnavailable();
+		new PageJCAS().identJCASifExists();
+		new TestABactive().currentTestABsToActivate();
+	}
+	
+	public void manageCookies(boolean acceptCookies) {
+		var sectionCookiesSteps = new SectionCookiesSteps();
+		if (acceptCookies) {
+			if (new SectionCookies().isVisible(5)) {
+				sectionCookiesSteps.accept();
+			}
+		} else {
+			//Enable Only performance cookies for suport to TestABs
+			enablePerformanceCookies();
+		}
+	}	
+	
+	private void enablePerformanceCookies() {
+		var modalSetCookiesSteps = new SectionCookiesSteps().setCookies();
+		modalSetCookiesSteps.select(COOKIES_DE_RENDIMIENTO);
+		modalSetCookiesSteps.enableSwitchCookies();
+		modalSetCookiesSteps.saveConfiguration();
+	}	
+	
+	private void reloadIfServiceUnavailable() {
+		if (driver.getPageSource().contains("Service Unavailable")) {
+			driver.navigate().refresh();
 		}
 	}
 	

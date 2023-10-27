@@ -15,18 +15,16 @@ public class Temporal implements Serializable {
 	private static final long serialVersionUID = -3932978752450813757L;
 	
 	private String indexFact = "";
-	public int prioridad;
 	private Pais pais = ESPANA.getPais();
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
 
 	public Temporal() {}
 
 	//From @Factory
-	public Temporal(Pais pais, IdiomaPais idioma, int prioridad) {
+	public Temporal(Pais pais, IdiomaPais idioma) {
 		this.pais = pais;
 		this.idioma = idioma;
 		this.indexFact = pais.getNombrePais() + " (" + pais.getCodigoPais() + ") " + "-" + idioma.getCodigo().getLiteral();
-		this.prioridad = prioridad;
 	} 
 
 	@Test(

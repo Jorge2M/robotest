@@ -8,15 +8,9 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
-public class MenusWebAllDevice extends PageBase implements MenusWebAll {
+public class MenuWebAllGenesis extends PageBase implements MenusWebAll {
 
-	//TODO eliminar el OLD cuando suba la nueva versión a PRO (31-05-2023)
-	private static final String XPATH_MENU_ITEM_OLD = "//a[@data-testid[contains(.,'header.subMenu.item')]]";
-	private static final String XPATH_MENU_ITEM_NEW = "//li[@data-testid]/a[@data-testid[contains(.,'menu.family.')]]";
-	
-	private String getXPathMenuItem() {
-		return "(" + XPATH_MENU_ITEM_OLD + " | " + XPATH_MENU_ITEM_NEW + ")";
-	}
+	private static final String XPATH_MENU_ITEM = "//li/a[@data-testid[contains(.,'menu.family')]]";
 	
 	@Override
 	public boolean isMenuInState(boolean open, int seconds) {
@@ -34,7 +28,7 @@ public class MenusWebAllDevice extends PageBase implements MenusWebAll {
 	
 	private List<MenuWeb> getVisibleMenus(GroupWeb groupWeb) {
 		List<MenuWeb> menus = new ArrayList<>();
-		var menuElements = getElements(getXPathMenuItem());
+		var menuElements = getElements(XPATH_MENU_ITEM);
 		for (WebElement menuElement : menuElements) {
 			menus.add(new MenuWeb
 					.Builder(menuElement.getText())
@@ -57,5 +51,5 @@ public class MenusWebAllDevice extends PageBase implements MenusWebAll {
 		}
 		return false;
 	}
-	
+
 }

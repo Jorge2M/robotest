@@ -12,8 +12,8 @@ public class CmdRunTests {
 	public enum TypeCallBackMethod {POST, GET}	
 
 	public static void main(String[] args) throws Exception { 
-		InputParamsMango inputParamsMango = new InputParamsMango(Suites.class, AppEcom.class);
-		CmdLineMaker cmdLineAccess = CmdLineMaker.from(args, inputParamsMango);
+		var inputParamsMango = new InputParamsMango(Suites.class, AppEcom.class);
+		var cmdLineAccess = CmdLineMaker.from(args, inputParamsMango);
 		if (cmdLineAccess.checkOptionsValue().isOk()) {
 			execSuite(inputParamsMango);
 		}
@@ -23,10 +23,11 @@ public class CmdRunTests {
 	 * Indirect access from Command Line, direct access from Online
 	 */
 	public static void execSuite(InputParamsMango inputParams) throws Exception {
-		CreatorSuiteRun executor = CreatorSuiteRunMango.getNew(inputParams);
+		var executor = CreatorSuiteRunMango.getNew(inputParams);
 		execSuite(executor);
 	}
 	public static void execSuite(CreatorSuiteRun executor) throws Exception {
 		TestMaker.execSuite(executor, false);
 	}
+	
 }

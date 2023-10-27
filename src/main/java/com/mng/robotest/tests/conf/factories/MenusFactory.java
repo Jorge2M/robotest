@@ -4,31 +4,26 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.conf.suites.MenusPaisSuite.VersionMenusPais;
 import com.mng.robotest.testslegacy.appshop.paisidioma.PaisIdioma;
 import com.mng.robotest.testslegacy.beans.*;
-import com.mng.robotest.testslegacy.utils.PaisGetter;
 
-public class MenusFactory {
+public class MenusFactory extends FactoryBase {
 	
 	@Factory
 	@Parameters({"countrys", "lineas"})
-	public Object[] createInstances(String countrysStr, String lineas, ITestContext ctxTestRun) {
+	public Object[] createInstances(String countrysStr, String lineas, ITestContext ctx) {
+		inputParams = getInputParams(ctx);
 		List<PaisIdioma> listTests = new ArrayList<>();
-		var inputData = TestMaker.getInputParamsSuite(ctxTestRun);
-		var app = (AppEcom)inputData.getApp();
-		var version = VersionMenusPais.valueOf(inputData.getVersion());
-		var listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrysStr);
-		for (Pais pais : listCountrys) {
-			Iterator<IdiomaPais> itIdiomas = pais.getListIdiomas(app).iterator();
-			IdiomaPais idioma = itIdiomas.next();
-			if (pais.getTiendasOnlineList().contains(app)) {
-				Iterator<Linea> itLineas = Utilidades.getLinesToTest(pais, app, lineas).iterator();
+		var version = VersionMenusPais.valueOf(inputParams.getVersion());
+		for (Pais pais : getListCountries(countrysStr)) {
+			var itIdiomas = pais.getListIdiomas(getApp()).iterator();
+			var idioma = itIdiomas.next();
+			if (pais.getTiendasOnlineList().contains(getApp())) {
+				var itLineas = Utilidades.getLinesToTest(pais, getApp(), lineas).iterator();
 				while (itLineas.hasNext()) {
 					Linea linea = itLineas.next();
-					if (Utilidades.lineaToTest(linea, app)) {
+					if (Utilidades.lineaToTest(linea, getApp())) {
 						List<Linea> lineasAprobar = new ArrayList<>();
 						lineasAprobar.add(linea);
 						listTests.add(new PaisIdioma(version, pais, idioma, lineasAprobar));
@@ -37,7 +32,7 @@ public class MenusFactory {
 							",Pais=" + pais.getNombrePais() +
 							",Idioma=" + idioma.getCodigo().getLiteral() +
 							",Linea=" + linea.getType() + 
-							",Num Idiomas=" + pais.getListIdiomas(app).size());
+							",Num Idiomas=" + pais.getListIdiomas(getApp()).size());
 					}
 				}
 			}

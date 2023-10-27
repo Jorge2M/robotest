@@ -1,15 +1,13 @@
 package com.mng.robotest.tests.conf.suites;
 
-import com.github.jorge2m.testmaker.domain.SuiteMaker;
 import com.github.jorge2m.testmaker.domain.TestRunMaker;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.tests.conf.ErrorStorer;
 import com.mng.robotest.tests.conf.factories.LineasBannersFactory;
 
 import static com.mng.robotest.tests.conf.suites.SuiteMakerResources.getParametersSuiteShop;
 import static org.testng.xml.XmlSuite.ParallelMode.METHODS;
 
-public class PaisIdiomaSuite extends SuiteMaker {
+public class PaisIdiomaSuite extends SuiteMakerMango {
 
 	public enum VersionPaisSuite implements FlagsNaviationLineas {
 		V1(true, false, false, false),
@@ -39,9 +37,9 @@ public class PaisIdiomaSuite extends SuiteMaker {
 	public PaisIdiomaSuite(InputParamsMango inputParams) {
 		super(inputParams);
 		setParameters(getParametersSuiteShop(inputParams));
-		var testRun = TestRunMaker.from(inputParams.getSuiteName(), LineasBannersFactory.class);
-		testRun.setStorerErrorStep(new ErrorStorer());
-		addTestRun(testRun);
+		var testRun = TestRunMaker.from(inputParams.getSuiteName(), 
+				LineasBannersFactory.class);
+		addTestRunMango(testRun);
 		setParallelMode(METHODS);
 		setThreadCount(4);
 	}

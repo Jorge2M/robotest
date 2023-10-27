@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -33,7 +31,7 @@ public class FilterTotalLook implements Filter {
 	@Override
 	public List<GarmentCatalog> filter(List<GarmentCatalog> garments) throws Exception {
 		List<GarmentCatalog> listFiltered = new ArrayList<>();
-		for (GarmentCatalog garment : garments) {
+		for (var garment : garments) {
 			if (getTotalLookGarment(garment)!=null) {
 				listFiltered.add(garment);
 			}
@@ -43,7 +41,7 @@ public class FilterTotalLook implements Filter {
 	
 	@Override
 	public Optional<GarmentCatalog> getOne(List<GarmentCatalog> garments) throws Exception {
-		for (GarmentCatalog garment : garments) {
+		for (var garment : garments) {
 			if (getTotalLookGarment(garment)!=null) {
 				return Optional.of(garment);
 			}
@@ -52,8 +50,8 @@ public class FilterTotalLook implements Filter {
 	}
 	
 	private GarmentDetails getTotalLookGarment(GarmentCatalog product) {
-		WebTarget webTarget = getWebTargetTotalLookGarment(product);
-		Builder builder = webTarget
+		var webTarget = getWebTargetTotalLookGarment(product);
+		var builder = webTarget
 				.request(MediaType.APPLICATION_JSON)
 				.header("stock-id", stockId);
 		
@@ -61,8 +59,7 @@ public class FilterTotalLook implements Filter {
 		if ("".compareTo(nameCloudTest)!=0) {
 			builder = builder.cookie("cloudtest-name", nameCloudTest);
 		}
-		Response response = builder.get();
-
+		var response = builder.get();
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
 			try {
 				return response.readEntity(GarmentDetails.class);
@@ -79,8 +76,8 @@ public class FilterTotalLook implements Filter {
 	}
 	
 	private WebTarget getWebTargetTotalLookGarment(GarmentCatalog product) {
-		Article article = Article.getArticleForTest(product);
-		Client client = ClientBuilder.newClient();
+		var article = Article.getArticleForTest(product);
+		var client = ClientBuilder.newClient();
 		return ( 
 			client
 				.target(urlForJavaCall.replace("http:", "https:") + "services/garments")
@@ -98,4 +95,5 @@ public class FilterTotalLook implements Filter {
 		}
 		return stockId;
 	}
+	
 }

@@ -15,18 +15,16 @@ public class Favoritos implements Serializable {
 	private static final long serialVersionUID = -3932978752450813757L;
 	
 	private String indexFact = "";
-	public int prioridad;
 	private Pais pais = ESPANA.getPais();
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
 
 	public Favoritos() {}
 
 	//From @Factory
-	public Favoritos(Pais pais, IdiomaPais idioma, int prioridad) {
+	public Favoritos(Pais pais, IdiomaPais idioma) {
 		this.pais = pais;
 		this.idioma = idioma;
 		this.indexFact = pais.getNombrePais() + " (" + pais.getCodigoPais() + ") " + "-" + idioma.getCodigo().getLiteral();
-		this.prioridad = prioridad;
 	} 
 
 	@Test(

@@ -4,7 +4,6 @@ import java.net.URI;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -15,7 +14,6 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.tests.repository.UtilsData;
 import com.mng.robotest.tests.repository.garment.entity.GarmentFicha;
-
 
 public class GetterGarment {
 
@@ -34,16 +32,15 @@ public class GetterGarment {
 	}
 	
 	public GarmentFicha getGarment(String idGarment) {
-		WebTarget webTarget = getWebTargetGarment(idGarment);
-		Builder builder = webTarget
+		var webTarget = getWebTargetGarment(idGarment);
+		var builder = webTarget
 				.request(MediaType.APPLICATION_JSON)
 				.header("stock-id", stockId);
 		
 		if ("".compareTo(nameCloudTest)!=0) {
 			builder = builder.cookie("cloudtest-name", nameCloudTest);
 		}
-		Response response = builder.get();
-		
+		var response = builder.get();
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
 			return response.readEntity(GarmentFicha.class);
 		}

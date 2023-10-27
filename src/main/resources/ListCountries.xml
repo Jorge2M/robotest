@@ -138,7 +138,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Беларусь" codigo="073">
@@ -488,7 +488,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <mobiluser>20123456</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Estonia" codigo="053">
@@ -2217,7 +2217,7 @@ where
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 <emailuser>jorge.munoz@mango.com</emailuser> <!-- Utilizaremos un email con timestamp para superar el control de fraude de "Rechnung" -->
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <!-- CUANDO SE ACTIVE LA COMPRA ONLINE HABRÍA QUE INCLUIR EL MÉTODO DE ENVÍO MEEST -->

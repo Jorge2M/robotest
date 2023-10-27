@@ -99,7 +99,7 @@ public class GroupWeb extends PageBase {
 	private static final String XPATH_GROUP_DESKTOP = "//li[@data-testid[contains(.,'menu.section')]]";
 	private static final String TAG_GROUP = "@tag_group";
 	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP = 
-			"//ul[@data-testid[contains(.,'subfamily')]]/li/*[@data-testid[contains(.,'" + TAG_GROUP + "')]]/..";
+			"//ul[@data-testid[contains(.,'menu.section')]]/li/*[@data-testid[contains(.,'" + TAG_GROUP + "')]]/..";
 
 	//TODO eliminar el OLD cuando suba la nueva versión a PRO (31-05-2023)
 	private static final String XPATH_SUBMENU_DEVICE_OLD = "//div[@data-testid='header.subMenu']";
@@ -108,13 +108,18 @@ public class GroupWeb extends PageBase {
 	private String getSubmenuDevice() {
 		return "(" + XPATH_SUBMENU_DEVICE_OLD + " | " + XPATH_SUBMENU_DEVICE_NEW + ")";
 	}
+
 	
+	private String getXPathGroupSelected() {
+		return getXPathGroup() + "//self::*[@aria-expanded='true']";
+	}
 	private String getXPathGroup() {
 		if (channel.isDevice()) {
 			return getXPathGroupDevice();
 		}
 		return getXPathGroupDesktop();
 	}
+	
 	private String getXPathGroupDevice() {
 		String xpath = XPATH_GROUP_DEVICE;
 		if (group.getGroupResponse()==MORE) {
@@ -180,9 +185,7 @@ public class GroupWeb extends PageBase {
 			   (group.getGroupResponse()!=GroupResponse.MENUS || isVisibleSubMenus()));
 	}
 	private boolean isGroupSelected() {
-		waitMillis(200);
-		String fontWeight = getElement(getXPathGroup()).getCssValue("font-weight");
-		return (Float.valueOf(fontWeight)>500);
+		return state(Visible, getXPathGroupSelected()).wait(1).check();
 	}
 	
 	private void hoverLinea() {

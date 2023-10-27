@@ -1,14 +1,9 @@
 package com.mng.robotest.tests.domains.loyalty.pageobjects;
 
-
-import org.openqa.selenium.WebElement;
-
 import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class PageRegalarMisLikes extends PageBase {
 	
@@ -26,12 +21,12 @@ public class PageRegalarMisLikes extends PageBase {
 	}
 	
 	public void inputMensaje(String mensaje) {
-		WebElement input = getElement(XPATH_INPUT_MESSAGE);
+		var input = getElement(XPATH_INPUT_MESSAGE);
 		input.clear();
 		input.sendKeys(mensaje);
 	}
 	public void inputEmailReceptor(String emailReceptor) {
-		WebElement input = getElement(XPATH_INPUT_EMAIL_RECEPTOR);
+		var input = getElement(XPATH_INPUT_EMAIL_RECEPTOR);
 		input.clear();
 		input.sendKeys(emailReceptor);
 	}
@@ -45,7 +40,7 @@ public class PageRegalarMisLikes extends PageBase {
 	
 	public void inputLikesToRegalar(int numLikesToRegalar) {
 		click(XPATH_RADIO_INPUT_NUM_LIKES).type(javascript).exec();
-		WebElement input = getElement(XPATH_INPUT_NUM_LIKES);
+		var input = getElement(XPATH_INPUT_NUM_LIKES);
 		input.clear();
 		input.sendKeys(String.valueOf(numLikesToRegalar));
 	}
@@ -53,4 +48,5 @@ public class PageRegalarMisLikes extends PageBase {
 	public void clickEnviarRegalo() {
 		click(XPATH_BOTON_ENVIAR_REGALO).exec();
 	}
+	
 }

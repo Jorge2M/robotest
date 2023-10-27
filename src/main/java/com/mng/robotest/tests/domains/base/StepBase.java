@@ -13,6 +13,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.tests.domains.legal.legaltexts.LegalTextsPage;
 import com.mng.robotest.tests.domains.manto.tests.ManXXX;
+import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.tests.domains.transversal.genericchecks.ChecksMango;
 import com.mng.robotest.tests.domains.transversal.genericchecks.ChecksMango.BuilderChecksMango;
@@ -59,6 +60,13 @@ public abstract class StepBase extends PageBase {
 	
 	protected void access() throws Exception {
 		new AccesoSteps().oneStep(false);
+	}
+	
+	protected void quickAccess() throws Exception {
+		var accesoFlows = new AccesoFlows();
+		accesoFlows.previousAccessShopSteps();
+		new AccesoSteps().quickAccessCountry();
+		accesoFlows.manageCookies(true);
 	}
 	
 	protected void accessAndClearData() throws Exception {

@@ -7,9 +7,7 @@ import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMake
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
-import com.mng.robotest.tests.repository.secrets.entity.Secret;
 import com.mng.robotest.testslegacy.data.Constantes;
-
 
 public class SuiteMakerResources {
 	
@@ -24,7 +22,7 @@ public class SuiteMakerResources {
 		parametersReturn.put(Constantes.PARAM_CATALOGS, params.getListaCatalogsCommaSeparated());
 
 		//Credenciales acceso a Manto
-		Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
+		var secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
 		parametersReturn.put(Constantes.PARAM_USR_MANTO, secret.getUser());
 		parametersReturn.put(Constantes.PARAM_PAS_MANTO, secret.getPassword());
 		if (params.getUrlManto()!=null) {

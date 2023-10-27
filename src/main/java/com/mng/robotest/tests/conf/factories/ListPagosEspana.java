@@ -8,13 +8,12 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.compra.factories.CompraFact;
 import com.mng.robotest.testslegacy.beans.*;
 
-public class ListPagosEspana implements Serializable {
+public class ListPagosEspana extends FactoryBase implements Serializable {
 	
 	private static final long serialVersionUID = 6058455886676687127L;
 	
@@ -35,23 +34,15 @@ public class ListPagosEspana implements Serializable {
 		  description=
 	  		"Factoría que incluye varios tests por cada uno de los pagos de España " + 
 	  		"variando los flags de usuario registrado, empleado y métodos de envío")
-//	@Test (
-//		groups={"Compra", "Canal:desktop,mobile_App:all"}, alwaysRun=true, priority=1, 
-//		description=
-//			"Factoría que incluye varios tests por cada uno de los pagos de España " + 
-//			"variando los flags de usuario registrado, empleado y métodos de envío")
 	public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
+		inputParams = getInputParams(ctx);
 		List<Object> listTests = new ArrayList<>(); 
-		var inputData = TestMaker.getInputParamsSuite(ctx);
-		var appE = (AppEcom)inputData.getApp();
-		var channel = inputData.getChannel();
-		
-		getDataCountrys(appE);
-		if (appE!=AppEcom.votf) {
-			createTestPagosEspana(listTests, appE, channel, ctx);
-			createTestPagosFrancia(listTests, appE, channel, ctx);
+		getDataCountrys(getApp());
+		if (getApp()!=AppEcom.votf) {
+			createTestPagosEspana(listTests, getApp(), getChannel(), ctx);
+			createTestPagosFrancia(listTests, getApp(), getChannel(), ctx);
 		} else {
-			createTestPagosVotf(listTests, appE, channel, ctx);
+			createTestPagosVotf(listTests, getApp(), getChannel(), ctx);
 		}
 	
 		return (listTests.toArray(new Object[listTests.size()]));

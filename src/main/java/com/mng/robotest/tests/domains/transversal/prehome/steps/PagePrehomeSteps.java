@@ -20,7 +20,6 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 public class PagePrehomeSteps extends StepBase {
 	
 	private final Pais pais = dataTest.getPais();
-	private final IdiomaPais idioma = dataTest.getIdioma();
 	private final PagePrehome pagePrehome = new PagePrehome();
 	
 	private static final String TAG_PAIS= "@TAGPAIS";
@@ -71,27 +70,20 @@ public class PagePrehomeSteps extends StepBase {
 		pagePrehome.selecionIdiomaAndEnter();
 	}
 
-	public void seleccionPaisIdiomaAndEnter() throws Exception {
-		seleccionPaisIdiomaAndEnter(false, true);
+	public void accessShopVisPreHome(boolean execValidacs, boolean acceptCookies) throws Exception {
+		accessShopVisPreHome(dataTest.getPais(), dataTest.getIdioma(), execValidacs, acceptCookies);
 	}
 	
-	public void seleccionPaisIdiomaAndEnter(boolean execValidacs, boolean acceptCookies) 
-			throws Exception {
-		pagePrehome.previousAccessShopSteps();
-		accesoShopViaPrehome(pais, idioma, execValidacs, acceptCookies);
-	}
-
 	@Step (
 		description=
 			"Acceso <b style=\"color:brown;\">#{pais.getNombrePais()} / #{idioma.getLiteral()}</b> desde la PreHome",
 		expected="Se accede correctamente al pais / idioma seleccionados",
 		saveNettraffic=SaveWhen.Always)
-	private void accesoShopViaPrehome(Pais pais, IdiomaPais idioma, boolean execValidacs, boolean acceptCookies) throws Exception {
+	private void accessShopVisPreHome(Pais pais, IdiomaPais idioma, boolean execValidacs, boolean acceptCookies) throws Exception {
 		replaceStepDescription(TAG_PAIS, pais.getNombrePais());
 		replaceStepDescription(TAG_IDIOMA, idioma.getLiteral());
 		
 		pagePrehome.accesoShopViaPrehome();
-		pagePrehome.manageCookies(acceptCookies);
 		
 		checksDefault();
 		checksGeneric()

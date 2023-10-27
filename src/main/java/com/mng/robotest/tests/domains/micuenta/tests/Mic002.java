@@ -6,7 +6,6 @@ import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
-import com.mng.robotest.tests.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
@@ -54,8 +53,10 @@ public class Mic002 extends TestBase {
 		dataTest.setUserConnected(userWithOnlinePurchases);
 		dataTest.setPasswordUser(passUserWithOnlinePurchases);
 		dataTest.setUserRegistered(true);
-		new PagePrehomeSteps().seleccionPaisIdiomaAndEnter();
-		new AccesoSteps().identificacionEnMango();
+		
+		var accesoSteps = new AccesoSteps(); 
+		accesoSteps.accessFromPreHome();
+		accesoSteps.identificacionEnMango();
 		
 		new PageMiCuentaSteps().goToMisComprasFromMenu();
 		var pageMisComprasSteps = new PageMisComprasSteps();
@@ -99,8 +100,9 @@ public class Mic002 extends TestBase {
 		//Existe un problema en por el cual si te vuelves a loginar manteniendo el navegador
 		//se muestran las compras del anterior usuario
 		TestMaker.renewDriverTestCase();
-		new PagePrehomeSteps().seleccionPaisIdiomaAndEnter();
-		new AccesoSteps().identificacionEnMango();
+		var accesoSteps = new AccesoSteps();
+		accesoSteps.accessFromPreHome();
+		accesoSteps.identificacionEnMango();
 		
 		new PageMiCuentaSteps().goToMisComprasFromMenu();
 		var pageMisComprasSteps = new PageMisComprasSteps();

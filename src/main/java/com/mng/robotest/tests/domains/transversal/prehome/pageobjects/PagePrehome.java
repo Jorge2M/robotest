@@ -3,16 +3,12 @@ package com.mng.robotest.tests.domains.transversal.prehome.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Invisible;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
-import static com.mng.robotest.tests.domains.transversal.acceptcookies.pageobjects.ModalSetCookies.SectionConfCookies.*;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.mng.robotest.tests.conf.testab.TestABactive;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.footer.pageobjects.PageFromFooter;
-import com.mng.robotest.tests.domains.transversal.acceptcookies.pageobjects.SectionCookies;
-import com.mng.robotest.tests.domains.transversal.acceptcookies.steps.SectionCookiesSteps;
 import com.mng.robotest.tests.domains.transversal.browser.LocalStorageMango;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
@@ -149,12 +145,6 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		}
 	}
 	
-	public void previousAccessShopSteps() throws Exception {
-		reloadIfServiceUnavailable();
-		new PageJCAS().identJCASifExists();
-		new TestABactive().currentTestABsToActivate();
-	}
-	
 	public void selecPaisIdiomaYAccede() {
 		//TODO eliminar try-catch
 		try {
@@ -165,32 +155,5 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 			Log4jTM.getLogger().error("Problem accessing prehome. {}. {}", e.getClass().getName(), e.getMessage());
 		}		
 	}
-	
-	private void reloadIfServiceUnavailable() {
-		if (driver.getPageSource().contains("Service Unavailable")) {
-			driver.navigate().refresh();
-		}
-	}
-	
-	public void manageCookies(boolean acceptCookies) {
-		var sectionCookiesSteps = new SectionCookiesSteps();
-		if (acceptCookies) {
-			if (new SectionCookies().isVisible(5)) {
-				sectionCookiesSteps.accept();
-			}
-		} else {
-			//Enable Only performance cookies for suport to TestABs
-			enablePerformanceCookies();
-		}
-	}
-	
-	private void enablePerformanceCookies() {
-		var modalSetCookiesSteps = new SectionCookiesSteps().setCookies();
-		modalSetCookiesSteps.select(COOKIES_DE_RENDIMIENTO);
-		modalSetCookiesSteps.enableSwitchCookies();
-		modalSetCookiesSteps.saveConfiguration();
-	}	
-	
-	
 
 }

@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
-import com.mng.robotest.tests.repository.secrets.entity.Secret;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -25,7 +24,7 @@ public class PageJCAS extends PageBase {
 	public void identJCASifExists() {
 		waitLoadPage();
 		if (thisPageIsShown()) {
-			Secret secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
+			var secret = GetterSecrets.factory().getCredentials(SecretType.MANTO_USER);
 			identication(secret.getUser(), secret.getPassword());
 		}
 	}  
@@ -58,4 +57,5 @@ public class PageJCAS extends PageBase {
 	public void clickButtonLogin() {
 		click(XPATH_BUTTON_LOGIN).exec();
 	}
+	
 }

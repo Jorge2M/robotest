@@ -51,7 +51,7 @@ public class GestorUsersShop {
 		UserShop userBusyOldest = null;
 		Integer[] listRandomInts = getRandomListNotRepeated(listTestPerformanceUsers.size());
 		for (Integer index : listRandomInts) {
-			UserShop user = listTestPerformanceUsers.get(index.intValue());
+			var user = listTestPerformanceUsers.get(index.intValue());
 			if (user.stateUser==StateUser.FREE) {
 				user.stateUser = StateUser.BUSY;
 				user.dateLastCheckout = Calendar.getInstance();
@@ -87,10 +87,10 @@ public class GestorUsersShop {
 	}
 	
 	private void releaseTestPerformanceUsedUsers() {
-		Calendar hoy = Calendar.getInstance();
-		for (UserShop user : listTestPerformanceUsers) {
+		var hoy = Calendar.getInstance();
+		for (var user : listTestPerformanceUsers) {
 			if (user.stateUser==StateUser.BUSY) {
-				Calendar dateToLiberateUser = (Calendar)user.dateLastCheckout.clone();
+				var dateToLiberateUser = (Calendar)user.dateLastCheckout.clone();
 				dateToLiberateUser.add(Calendar.MINUTE, MINUTES_FOR_USER_LIBERATION);
 				if (hoy.after(dateToLiberateUser)) {
 					user.stateUser=StateUser.FREE;

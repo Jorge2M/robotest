@@ -14,7 +14,7 @@ public class ConsolaVotfSuite extends SuiteMaker {
 	public ConsolaVotfSuite(InputParamsMango inputParams) {
 		super(inputParams);
 		setParameters(getParametersSuiteShop(inputParams));
-		TestRunMaker testRun = TestRunMaker.from(inputParams.getSuiteName(), ConsolaVotf.class);
+		var testRun = TestRunMaker.from(inputParams.getSuiteName(), ConsolaVotf.class);
 		addTestRun(testRun);
 		setParallelMode(ParallelMode.METHODS);
 		setThreadCount(1);

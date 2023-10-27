@@ -26,7 +26,6 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.tests.repository.productlist.entity.ProductList;
 import com.mng.robotest.tests.repository.productlist.filter.FilterStock;
 import com.mng.robotest.tests.repository.productlist.sort.SortFactory.SortBy;
-import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.utils.PaisGetter;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -176,7 +175,7 @@ public class GetterProducts {
 	}
 	
 	private void addCanonicalInfo(ProductList productList) throws Exception {
-		Pais pais = PaisGetter.fromCodAlf(codigoPaisAlf);
+		var pais = PaisGetter.fromCodAlf(codigoPaisAlf);
 		var getterProductApiCanonical = new GetterProductApiCanonical(codigoPaisAlf, pais.getCodigoAlf(), app.name());
 		for (var garmentCatalog : productList.getAllGarments()) {
 			var canonicalProduct = getterProductApiCanonical.getProduct(garmentCatalog.getGarmentId());

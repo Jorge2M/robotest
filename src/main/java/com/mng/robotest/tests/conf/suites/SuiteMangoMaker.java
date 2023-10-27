@@ -2,37 +2,30 @@ package com.mng.robotest.tests.conf.suites;
 
 import static com.mng.robotest.tests.conf.suites.SuiteMakerResources.getParametersSuiteShop;
 import static com.mng.robotest.tests.conf.suites.SuiteMakerResources.isBrowserStack;
+import static org.testng.xml.XmlSuite.ParallelMode.METHODS;
+import static com.mng.robotest.testslegacy.data.Constantes.BSTACK_PARALLEL;
 
 import java.util.List;
-
-import org.testng.xml.XmlSuite.ParallelMode;
-
-import com.github.jorge2m.testmaker.domain.SuiteMaker;
 import com.github.jorge2m.testmaker.domain.TestRunMaker;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.tests.conf.ErrorStorer;
-import com.mng.robotest.testslegacy.data.Constantes;
 
-public abstract class SuiteMangoMaker extends SuiteMaker {
+public abstract class SuiteMangoMaker extends SuiteMakerMango {
 
 	abstract List<Class<?>> getClasses();
 	
 	protected SuiteMangoMaker(InputParamsMango inputParams) {
 		super(inputParams);
 		setParameters(getParametersSuiteShop(inputParams));
-		TestRunMaker testRun = TestRunMaker.from(
-				inputParams.getSuiteName(), 
-				getClasses());
+		var testRun = TestRunMaker.from(inputParams.getSuiteName(),	getClasses());
 		
-		testRun.setStorerErrorStep(new ErrorStorer());
 		//testRun.setDriverMaker(new MyDriverMaker());
-		addTestRun(testRun);
+		addTestRunMango(testRun);
 		
-		setParallelMode(ParallelMode.METHODS);
+		setParallelMode(METHODS);
 		if (!isBrowserStack(inputParams.getDriver())) {
 			setThreadCount(4); 
 		} else {
-			setThreadCount(Constantes.BSTACK_PARALLEL);
+			setThreadCount(BSTACK_PARALLEL);
 		}
 	}
 	

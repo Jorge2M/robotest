@@ -13,7 +13,6 @@ public class MiCuenta implements Serializable {
 	
 	private static final long serialVersionUID = 2188911402476562105L;
 	
-	public int prioridad;
 	private String indexFact = "";
 	private Pais pais = ESPANA.getPais();
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
@@ -21,11 +20,10 @@ public class MiCuenta implements Serializable {
 	public MiCuenta() {}
 	
 	//From @Factory
-	public MiCuenta(Pais pais, IdiomaPais idioma, int prioridad) {
+	public MiCuenta(Pais pais, IdiomaPais idioma) {
 		this.pais = pais;
 		this.idioma = idioma;
 		this.indexFact = pais.getNombrePais() + " (" + pais.getCodigoPais() + ") " + "-" + idioma.getCodigo().getLiteral();
-		this.prioridad = prioridad;
 	}	
 	
 	@Test (

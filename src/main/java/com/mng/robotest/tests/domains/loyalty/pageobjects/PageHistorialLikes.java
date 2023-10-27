@@ -4,8 +4,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import java.util.Optional;
 
-import org.openqa.selenium.WebElement;
-
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.loyalty.beans.LoyaltyMovement;
 
@@ -44,7 +42,7 @@ public class PageHistorialLikes extends PageBase {
 		return getElement(getXPathConcepto(position)).getText();
 	}
 	private int getPoints(int position) {
-		WebElement pointsElem = getElement(getXPathPoints(position));
+		var pointsElem = getElement(getXPathPoints(position));
 		if (pointsElem!=null) {
 			return Integer.valueOf(pointsElem.getText().replaceAll("[^\\d.,]", "")); 
 		}

@@ -454,7 +454,7 @@ public class Pais implements Serializable {
 	/**
 	 * Retorna la URL de acceso al país sin el -xx donde xx es el código de idioma
 	 */
-	public String getUrlPaisEstandar(String urlBase) throws Exception {
+	public String getUrlAccess(String urlBase) throws Exception {
 		String urlRes = this.listIdiomas.get(0).getUrlIdioma(urlBase);
 		URI url = new URI(urlRes);
 		String path = url.getPath();

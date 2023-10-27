@@ -3,12 +3,10 @@ package com.mng.robotest.tests.repository.secrets;
 import java.io.InputStream;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.tests.repository.secrets.entity.Secret;
 import com.mng.robotest.tests.repository.secrets.entity.Secrets;
-
 
 public abstract class GetterSecretsFromInputStream implements GetterSecrets {
 	
@@ -26,14 +24,14 @@ public abstract class GetterSecretsFromInputStream implements GetterSecrets {
 	}
 	
 	private Secret getCredentials_WithException(SecretType secretType) throws Exception {
-		JAXBContext jaxbContext = JAXBContext.newInstance( Secrets.class );
-		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		Secrets secrets = (Secrets) jaxbUnmarshaller.unmarshal(getInputStreamSecrets());
+		var jaxbContext = JAXBContext.newInstance( Secrets.class );
+		var jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		var secrets = (Secrets) jaxbUnmarshaller.unmarshal(getInputStreamSecrets());
 		return getSecret(secrets, secretType);
 	}
 	
 	private Secret getSecret(Secrets secrets, SecretType secretType) {
-		for (Secret secret : secrets.getSecrets()) {
+		for (var secret : secrets.getSecrets()) {
 			if (secret.getType().compareTo(secretType.getSecretName())==0) {
 				secret.setType(secretType);
 				return secret;

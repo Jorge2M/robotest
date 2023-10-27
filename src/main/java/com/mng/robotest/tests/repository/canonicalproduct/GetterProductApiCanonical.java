@@ -2,7 +2,6 @@ package com.mng.robotest.tests.repository.canonicalproduct;
 
 import java.util.Optional;
 
-import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
@@ -10,7 +9,6 @@ import javax.ws.rs.core.Response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.tests.repository.canonicalproduct.entity.EntityProduct;
-
 
 public class GetterProductApiCanonical {
 
@@ -26,19 +24,19 @@ public class GetterProductApiCanonical {
 	}
 	
 	public Optional<EntityProduct> getProduct(String idProducto) throws Exception {
-		WebTarget webTarget = getWebTarget(idProducto);
-		Response response = webTarget.request(MediaType.APPLICATION_JSON).get();
+		var webTarget = getWebTarget(idProducto);
+		var response = webTarget.request(MediaType.APPLICATION_JSON).get();
 		if (response.getStatus()==Response.Status.OK.getStatusCode()) {
 			String responseBody = response.readEntity(String.class);
-			EntityProduct productRedis = new ObjectMapper()
-					.readValue(responseBody, EntityProduct.class);
+			var productRedis = new ObjectMapper().readValue(
+					responseBody, EntityProduct.class);
 			return Optional.of(productRedis);
 		}
 		return Optional.empty();
 	}
 	
 	private WebTarget getWebTarget(String idProducto) {
-		Client client = ClientBuilder.newBuilder().build();
+		var client = ClientBuilder.newBuilder().build();
 		return 
 			client
 				.target(TARGET)

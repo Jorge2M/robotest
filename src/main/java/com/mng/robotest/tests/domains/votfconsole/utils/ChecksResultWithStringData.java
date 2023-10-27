@@ -8,7 +8,7 @@ public class ChecksResultWithStringData extends ChecksTM {
 		super();
 	}
 	public static ChecksResultWithStringData getNew() {
-		return (new ChecksResultWithStringData());
+		return new ChecksResultWithStringData();
 	}
 	
 	public String getData() {

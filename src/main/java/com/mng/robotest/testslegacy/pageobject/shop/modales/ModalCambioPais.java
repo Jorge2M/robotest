@@ -40,7 +40,7 @@ public class ModalCambioPais extends PageBase {
 		Iterator<Pais> it = listPaisesCandidatos.iterator();
 		while (it.hasNext()) {
 			Pais paisCandidato = it.next();
-			String urlAccesoPais = paisCandidato.getUrlPaisEstandar(urlBaseTest);
+			String urlAccesoPais = paisCandidato.getUrlAccess(urlBaseTest);
 			if (new ModalCambioPais().isButtonToChangePais(urlAccesoPais)) {
 				return (paisCandidato);
 			}

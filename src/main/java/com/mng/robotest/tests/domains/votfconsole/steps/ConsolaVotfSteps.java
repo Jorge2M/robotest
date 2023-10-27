@@ -166,14 +166,14 @@ public class ConsolaVotfSteps extends StepBase {
 	private String switchToIframeAndCheckAfterSolicitudAdomicilio() {
 		String paginaPadre = pageConsola.driver.getWindowHandle();
 		pageConsola.switchToResultIFrame();
-		ChecksResultWithStringData checks = checkAfterSolicitudAdomicilioInIframe();
+		var checks = checkAfterSolicitudAdomicilioInIframe();
 		pageConsola.driver.switchTo().window(paginaPadre);
 		return checks.getData();
 	}
 	
 	@Validation
 	private ChecksResultWithStringData checkAfterSolicitudAdomicilioInIframe() {
-		ChecksResultWithStringData checks = ChecksResultWithStringData.getNew();
+		var checks = ChecksResultWithStringData.getNew();
 		int seconds = 5;
 		checks.add(
 			"En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Código de pedido\"" + 

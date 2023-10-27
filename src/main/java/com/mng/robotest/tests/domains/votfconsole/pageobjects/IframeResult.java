@@ -1,15 +1,8 @@
 package com.mng.robotest.tests.domains.votfconsole.pageobjects;
 
-import java.util.Iterator;
-import java.util.List;
-
-
-import org.openqa.selenium.WebElement;
-
 import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 
 public class IframeResult extends PageBase {
 	
@@ -91,12 +84,12 @@ public class IframeResult extends PageBase {
 	private String getPedidoFromListaPedidos(String codPedidoShort) {
 		String pedidoFull = "";
 		waitLoadPage();
-		List<WebElement> listPedidos = getElements(XPATH_BLOCK_LISTA_PEDIDOS_FULL);
+		var listPedidos = getElements(XPATH_BLOCK_LISTA_PEDIDOS_FULL);
 
 		//En cada elemento buscamos el pedido en formato corto
-		Iterator<WebElement> it = listPedidos.iterator();
+		var it = listPedidos.iterator();
 		while (it.hasNext()) {
-			WebElement pedido = it.next();
+			var pedido = it.next();
 			if (pedido.getText().contains(codPedidoShort)) {
 				pedidoFull = pedido.getText();
 			}

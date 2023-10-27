@@ -2,19 +2,17 @@ package com.mng.robotest.tests.conf.suites;
 
 import static com.mng.robotest.tests.conf.suites.SuiteMakerResources.getParametersSuiteShop;
 import static com.mng.robotest.tests.conf.suites.SuiteMakerResources.isBrowserStack;
+import static org.testng.xml.XmlSuite.ParallelMode.*;
 
 import java.util.Arrays;
 import java.util.List;
-import org.testng.xml.XmlSuite.ParallelMode;
 
-import com.github.jorge2m.testmaker.domain.SuiteMaker;
 import com.github.jorge2m.testmaker.domain.TestRunMaker;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.tests.conf.ErrorStorer;
 import com.mng.robotest.tests.conf.factories.ListPrecompraPaises;
 import com.mng.robotest.testslegacy.data.Constantes;
 
-public class PagosPaisesSuite extends SuiteMaker {
+public class PagosPaisesSuite extends SuiteMakerMango {
 	
 	public enum VersionPagosSuite {
 		//TODO eliminar las que ya no son necesrias después de la elminia
@@ -52,16 +50,14 @@ public class PagosPaisesSuite extends SuiteMaker {
 		super(inputParams);
 		setParameters(getParametersSuiteShop(inputParams));
 		List<Class<?>> listTestClasses = Arrays.asList(ListPrecompraPaises.class);
-		TestRunMaker testRun = TestRunMaker.from(
-				inputParams.getSuiteName(), 
-				listTestClasses);
-		testRun.setStorerErrorStep(new ErrorStorer());
-		addTestRun(testRun);
-		setParallelMode(ParallelMode.METHODS);
+		var testRun = TestRunMaker.from(inputParams.getSuiteName(), listTestClasses);
+		addTestRunMango(testRun);
+		setParallelMode(METHODS);
 		if (!isBrowserStack(inputParams.getDriver())) {
 			setThreadCount(4);
 		} else {
 			setThreadCount(Constantes.BSTACK_PARALLEL);
 		}
 	}
+	
 }

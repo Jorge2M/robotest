@@ -6,6 +6,7 @@ import com.mng.robotest.tests.conf.suites.FlagsNaviationLineas;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktopKondo;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.tests.domains.transversal.banners.steps.SecBannersSteps;
 import com.mng.robotest.tests.domains.transversal.home.steps.PageLandingSteps;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb;
@@ -14,7 +15,6 @@ import com.mng.robotest.tests.domains.transversal.menus.pageobjects.GroupWeb.Gro
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.tests.domains.transversal.menus.steps.MenuSteps;
-import com.mng.robotest.tests.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Linea;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -40,10 +40,10 @@ public class Par001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		new PagePrehomeSteps().seleccionPaisIdiomaAndEnter();
+		new AccesoSteps().accessFromPreHome();
 		new PageLandingSteps().validateIsPageWithCorrectLineas();
 		for (Linea linea : linesToTest) {
-			if (new UtilsMangoTest().validarLinea(linea)) {
+			if (new UtilsMangoTest().isLineActive(linea)) {
 				validaLinea(linea, null);
 				for (Sublinea sublinea : linea.getListSublineas(app)) {
 					validaLinea(linea, sublinea);
@@ -53,7 +53,7 @@ public class Par001 extends TestBase {
 	}
 	
 	private void validaLinea(Linea linea, Sublinea sublinea) throws Exception {
-		LineaType lineaType = linea.getType();
+		var lineaType = linea.getType();
 		SublineaType sublineaType = null;
 		if (sublinea!=null) {
 			sublineaType = sublinea.getTypeSublinea();
@@ -133,7 +133,6 @@ public class Par001 extends TestBase {
 			}
 			return sublinea.getMenus().compareTo("s")==0;
 		}
-		
 		return false;
 	}
 	

@@ -9,7 +9,6 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
@@ -35,8 +34,7 @@ public class ClientApiLoyaltyPointsDev {
 		//En los servidores de Robotest la llamada a consumer devuelve un 401
 		//String idConsumer = getContactIdConsumer(emailConsumer);
 		//String countryConsumer = getCountryConsumer(userTest.getEmail());
-		return (
-			addLoyaltyPoints(loyaltyPoints, user));
+		return addLoyaltyPoints(loyaltyPoints, user);
 	}
 	
 	public String getContactIdConsumer(String emailConsumer) throws Exception {
@@ -53,7 +51,7 @@ public class ClientApiLoyaltyPointsDev {
 	}
 	
 	public ListConsumers getDataConsumer(String emailConsumer) throws Exception {
-		ListConsumers listConsumers = getDataConsumerFromCache(emailConsumer);
+		var listConsumers = getDataConsumerFromCache(emailConsumer);
 		if (listConsumers==null) {
 			listConsumers = getDataConsumerFromRest(emailConsumer);
 			storeDataConsumerInCache(emailConsumer, listConsumers);
@@ -72,10 +70,10 @@ public class ClientApiLoyaltyPointsDev {
 			.setParameter("page", "1")
 			.setParameter("pageSize", "10");
 		
-		HttpGet get = new HttpGet(builder.build());
+		var get = new HttpGet(builder.build());
 	    get.addHeader("Content-Type", MediaType.APPLICATION_JSON);
 	    
-	    HttpResponse response = httpClient.execute(get);
+	    var response = httpClient.execute(get);
 	    int status = response.getStatusLine().getStatusCode();
 	    if (status!=200) {
         	String message = String.format("Error %s calling %s", response.getStatusLine().getStatusCode(), url); 
@@ -110,4 +108,5 @@ public class ClientApiLoyaltyPointsDev {
 				.header("Authorization", "Basic dmljdG9yLnBhcmVyYStwcmVAbWFuZ28uY29tOmVjOWU0NmQ5NzIwMWNjN2U0Nzg0NTgxM2FkZWU1MTE4")
 				.post(Entity.json(transferPoints), ResultAddPoints.class);
 	}
+	
 }

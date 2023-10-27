@@ -5,39 +5,32 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.github.jorge2m.testmaker.service.TestMaker;
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.conf.suites.PagosPaisesSuite.VersionPagosSuite;
 import com.mng.robotest.testslegacy.appshop.paisaplicavale.PaisAplicaVale;
 import com.mng.robotest.testslegacy.beans.*;
-import com.mng.robotest.testslegacy.utils.PaisGetter;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
-public class ListPrecompraPaises {
+public class ListPrecompraPaises extends FactoryBase {
 	
-	@SuppressWarnings("unused")
 	@Parameters({"countrys"})
 	@Factory
-	public Object[] createInstances(String countrys, ITestContext ctxTestRun) {
+	public Object[] createInstances(String countrys, ITestContext ctx) {
+		inputParams = getInputParams(ctx);
 		List<Object> listTests = new ArrayList<>();
 		try {
-			var inputData = TestMaker.getInputParamsSuite(ctxTestRun);
-			var version = VersionPagosSuite.valueOf(inputData.getVersion());
-			var listCountrys = PaisGetter.getFromCommaSeparatedCountries(countrys);
+			var version = VersionPagosSuite.valueOf(inputParams.getVersion());
+			var listCountrys = getListCountries(countrys);
 			int prioridad=0;
-			var app = (AppEcom)inputData.getApp();
 			for (Pais pais : listCountrys) {
-				IdiomaPais primerIdioma = pais.getListIdiomas(app).get(0);
-				Channel channel = inputData.getChannel();
-				if (UtilsTest.paisConCompra(pais, app)) {
+				var primerIdioma = pais.getListIdiomas(getApp()).get(0);
+				if (UtilsTest.paisConCompra(pais, getApp())) {
 					listTests.add(new PaisAplicaVale(version, pais, primerIdioma, prioridad));
 					prioridad+=1;
 					System.out.println(
 						"Creado Test con datos: " +
 						",Pais=" + pais.getNombrePais() +
 						",Idioma=" + primerIdioma.getCodigo().getLiteral() +
-						",Num Idiomas=" + pais.getListIdiomas(app).size());
+						",Num Idiomas=" + pais.getListIdiomas(getApp()).size());
 				}
 			}
 		}

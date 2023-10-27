@@ -23,6 +23,10 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 		this.sublineaType = lineaWeb.getSublinea();
 	}
 
+	private String getXPathLinkLinea() {
+		return getXPathLinea() + "/a";
+	}
+	
 	private String getXPathLinea() {
 		return XPATH_LINEA_WITH_TAG.replace(TAG_ID_LINEA, getIdLineaEnDOM());
 	}
@@ -49,9 +53,6 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 				"//button";
 	}
 	
-	private String getXPathLineaSelected() {
-		return getXPathLinea() + "//a[@aria-expanded='true']";
-	}
 	private String getXPathSublineaSelected() {
 		return getXPathSublinea() + "//self::*[@aria-expanded='true']";
 	}
@@ -77,8 +78,15 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	}
 	@Override
 	public boolean isLineaSelected(int seconds) {
-		return state(Present, getXPathLineaSelected()).wait(seconds).check();
+		for (int i=0; i<seconds; i++) {
+			String textDecoration = getElement(getXPathLinkLinea()).getCssValue("text-decoration");
+			if (textDecoration.contains("underline")) {
+				return true;
+			}
+		}
+		return false;
 	}
+	
 	@Override
 	public boolean isSublineaSelected(int seconds) {
 		return state(Visible, getXPathSublineaSelected()).wait(seconds).check();

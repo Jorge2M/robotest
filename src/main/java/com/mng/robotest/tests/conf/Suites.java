@@ -11,6 +11,7 @@ public enum Suites implements SuiteTest {
 	MenusPais(10), 
 	ConsolaVotf(10), 
 	ListFavoritos(10),
+	AvailabilityShop(10),
 	CheckoutMultiAddress(10),
 	ListMiCuenta(10),
 	ModalPortada(10),

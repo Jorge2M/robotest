@@ -76,7 +76,7 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}	
 	
 	private String clickMenuSuperior() {
-		waitMillis(200);
+		state(Visible, getXPathMenu()).wait(1).check();
 		String nameMenu = getElement(getXPathMenu()).getText(); 
 		click(getXPathMenu()).exec();
 		return nameMenu;

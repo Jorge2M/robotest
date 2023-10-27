@@ -7,31 +7,26 @@ import org.testng.annotations.*;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.conf.Suites;
+import com.mng.robotest.tests.domains.availability.tests.AvailabilityShop;
 import com.mng.robotest.tests.domains.compra.tests.CompraMultiAddress;
 import com.mng.robotest.tests.domains.favoritos.tests.Favoritos;
 import com.mng.robotest.tests.domains.micuenta.tests.MiCuenta;
 import com.mng.robotest.tests.domains.temporal.tests.Temporal;
 import com.mng.robotest.testslegacy.beans.*;
-import com.mng.robotest.testslegacy.utils.PaisGetter;
-import com.github.jorge2m.testmaker.service.TestMaker;
 
-
-public class GenericFactory {
+public class GenericFactory extends FactoryBase {
 	
 	@Factory
 	@Parameters({"countrys"})
-	public Object[] createInstances(String listaPaisesStr, ITestContext ctxTestRun) {
+	public Object[] createInstances(String listaPaisesStr, ITestContext ctx) {
+		inputParams = getInputParams(ctx);
 		List<Object> listTests = new ArrayList<>();
 		try {
-			Suites suite = (Suites)TestMaker.getInputParamsSuite(ctxTestRun).getSuite();
-			List<Pais> listCountrys = PaisGetter.getFromCommaSeparatedCountries(listaPaisesStr);
-			int prioridad=0;
-			var app = (AppEcom)TestMaker.getInputParamsSuite(ctxTestRun).getApp();
-			for (Pais pais : listCountrys) {
-				IdiomaPais primerIdioma = pais.getListIdiomas(app).get(0);
+			var listCountrys = getListCountries(listaPaisesStr);
+			for (var pais : listCountrys) {
+				var primerIdioma = pais.getListIdiomas(getApp()).get(0);
 				if (paisToTest(pais, AppEcom.shop)) {
-					addTestToList(listTests, suite, pais, primerIdioma, prioridad);
-					prioridad+=1;
+					addTestToList(listTests, getSuite(), pais, primerIdioma);
 				}
 			}
 		}
@@ -42,20 +37,23 @@ public class GenericFactory {
 		return (listTests.toArray(new Object[listTests.size()]));
 	}	
 	
-	public void addTestToList(List<Object> listTests, Suites suite, Pais pais, IdiomaPais idioma, int prioridad) {
+	public void addTestToList(List<Object> listTests, Suites suite, Pais pais, IdiomaPais idioma) {
 		switch (suite) {
 		case CheckoutMultiAddress:
 			listTests.add(new CompraMultiAddress(pais, idioma));
 			break;
 		case ListFavoritos:
-			listTests.add(new Favoritos(pais, idioma, prioridad));
+			listTests.add(new Favoritos(pais, idioma));
 			break;
 		case ListMiCuenta:
-			listTests.add(new MiCuenta(pais, idioma, prioridad));
+			listTests.add(new MiCuenta(pais, idioma));
 			break;
 		case ModalPortada:
-			listTests.add(new Temporal(pais, idioma, prioridad));
+			listTests.add(new Temporal(pais, idioma));
 			break;
+		case AvailabilityShop:
+			listTests.add(new AvailabilityShop(pais, idioma));
+			break;			
 		default:
 		}
 		
@@ -66,10 +64,4 @@ public class GenericFactory {
 		);
 	}
 	
-	protected boolean paisToTest(Pais pais, AppEcom app) {
-		return (
-			"n".compareTo(pais.getExists())!=0 &&
-			pais.isVentaOnline() &&
-			pais.getTiendasOnlineList().contains(app));
-	}
 }
