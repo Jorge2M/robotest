@@ -5,6 +5,7 @@ import com.mng.robotest.tests.domains.transversal.home.steps.PageLandingSteps;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.MenuWeb;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.GroupWeb.GroupType;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Linea;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -40,15 +41,23 @@ public class Ava001 extends TestBase {
 	private void checkLines() throws Exception {
 		for (Linea linea : dataTest.getLineas()) {
 			if (isCheckLine(linea)) {
-				checkLine(linea);
+				var sublineaOpt = getFirstSublinea(linea);
+				checkLine(linea, sublineaOpt);
 			}
 		}		
 	}
 	
-	private void checkLine(Linea linea) throws Exception {
-		var lineaType = linea.getType();
-		clickLinea(lineaType);
-		clickMenu(lineaType);
+	private SublineaType getFirstSublinea(Linea linea) {
+		var listLineas = linea.getListSublineas(app);
+		if (listLineas==null || listLineas.isEmpty()) {
+			return null;
+		}
+		return listLineas.get(0).getTypeSublinea();
+	}
+	
+	private void checkLine(Linea linea, SublineaType sublinea) throws Exception {
+		clickLinea(linea.getType(), sublinea);
+		clickMenu(linea.getType(), sublinea);
 	}
 	
 	private boolean isCheckLine(Linea line) {
@@ -57,19 +66,21 @@ public class Ava001 extends TestBase {
 			new UtilsMangoTest().isLineActive(line);
 	}
 	
-	private void clickMenu(LineaType lineaType) {
+	private void clickMenu(LineaType lineaType, SublineaType sublineaType) {
 		var groupType = GroupType.PRENDAS;
 		String menu = "pantalones";
 		if (lineaType==NINA || lineaType==NINO) {
 			menu = "camisas";
 		}
 		if (lineaType==HOME) {
+			groupType = GroupType.DORMITORIO;
 			menu = "mantas_dormitorio";
 		}
 		
 		clickMenu(new MenuWeb
 			.Builder(menu)
 			.linea(lineaType)
+			.sublinea(sublineaType)
 			.group(groupType)
 			.build());
 	}	
