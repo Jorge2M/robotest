@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.galeria.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.ModalArticleNotAvailable;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.ModalArticleNotAvailable.StateModal;
@@ -57,40 +56,16 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 	
 	@Step (
 		description="Pulsamos el botón <b>Recibir Aviso</b>", 
-		expected="Aparece el modal de Petición confirmada")
+		expected="Aparece el snackbar de Petición confirmada")
 	public void clickRecibirAviso() {
 		modalArticleNotAvailable.clickRecibirAviso();
-		if (app==AppEcom.outlet) {
-			checkSnackvarAvisoOkVisible(3);
-		} else {
-			checkModalAvisoOkVisible(3);
-		}
-	}
-	
-	@Validation (
-		description="Aparece el modal de petición confirmada OK " + SECONDS_WAIT)
-	public boolean checkModalAvisoOkVisible(int seconds) {
-		return modalArticleNotAvailable.isModalAvisoOkVisible(seconds);
+		checkSnackvarAvisoOkVisible(3);
 	}
 	
 	@Validation (
 		description="Aparece el snackvar de petición confirmada OK " + SECONDS_WAIT)
 	public boolean checkSnackvarAvisoOkVisible(int seconds) {
 		return modalArticleNotAvailable.isSnackvarAvisoOkVisible(seconds);
-	}	
-	
-	@Step (
-		description="Seleccionamos el botón <b>Entendido</b>", 
-		expected="Desaparece el modal de petición confirmada OK")
-	public void clickButtonEntendido() {
-		modalArticleNotAvailable.clickButtonEntendido();
-		checkModalAvisoOkInvisible(1);
-	}
-	
-	@Validation (
-		description="Desaparece el modal de petición confirmada OK " + SECONDS_WAIT)	
-	public boolean checkModalAvisoOkInvisible(int seconds) {
-		return modalArticleNotAvailable.isModalAvisoOkInvisible(seconds);
 	}	
 	
 }

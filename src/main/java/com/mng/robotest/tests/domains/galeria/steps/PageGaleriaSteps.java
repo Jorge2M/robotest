@@ -722,7 +722,7 @@ public class PageGaleriaSteps extends StepBase {
 		int secondsArticle = 8;
 		checks.add (
 			"Como mínimo se obtiene un artículo " + getLitSecondsWait(secondsArticle),
-			pageGaleria.isVisibleArticleUntil(1, secondsArticle), Warn);
+			pageGaleria.isVisibleArticleUntil(1, secondsArticle));
 		
 		int secondsImage = 5;
 		checks.add (

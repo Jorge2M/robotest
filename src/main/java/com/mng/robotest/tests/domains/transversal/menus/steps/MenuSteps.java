@@ -311,7 +311,7 @@ public class MenuSteps extends StepBase {
 			break;
 		case banners:
 			if (!channel.isDevice()) {
-				new SecBannersSteps(1).validaBannEnContenido();
+				new SecBannersSteps(1).checkBannersInContent();
 			}
 			break;
 		case vacio:

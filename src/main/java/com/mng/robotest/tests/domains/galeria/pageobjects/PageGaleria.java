@@ -83,7 +83,6 @@ public abstract class PageGaleria extends PageBase {
 	public abstract WebElement getArticleFromPagina(int numPagina, int numArticle);
 	public abstract boolean isHeaderArticlesVisible(String textHeader);
 	public abstract void showTallasArticulo(int posArticulo);
-//	public abstract boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds);
 	public abstract ArticuloScreen selectTallaAvailableArticle(int posArticulo) throws Exception;
 	public abstract void selectTallaArticleNotAvalaible();
 	public abstract void clickHearthIcon(WebElement hearthIcon) throws Exception;
@@ -460,7 +459,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public void goToInitPageAndWaitForArticle() {
-		//TODO en estos momentos algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
+		//Algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
 		driver.navigate().refresh();
 		isVisibleArticleUntil(1, 10);
 	}

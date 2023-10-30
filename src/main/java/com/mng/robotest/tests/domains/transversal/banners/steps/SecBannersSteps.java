@@ -151,9 +151,8 @@ public class SecBannersSteps extends StepBase {
 	}
 
 	@Validation (
-		description="El bloque de contenido (homeContent o bannerHome) existe y tiene >= 1 banner o >=1 map o >=1 items-edit",
-		level=Warn)
-	public boolean validaBannEnContenido() {
+		description="El bloque de contenido (homeContent o bannerHome) existe y tiene >= 1 banner o >=1 map o >=1 items-edit")
+	public boolean checkBannersInContent() {
 		boolean existBanners = managerBannersScreen.existBanners();
 		boolean existsMaps = pageLanding.hayMaps();
 		boolean existsEditItems = pageLanding.hayItemsEdits();
