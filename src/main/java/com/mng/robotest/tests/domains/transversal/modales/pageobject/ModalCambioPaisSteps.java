@@ -36,6 +36,6 @@ public class ModalCambioPaisSteps extends StepBase {
 		dataTest.setPais(newPais);
 		dataTest.setIdioma(newIdioma);
 		new PagePrehome().selecPaisIdiomaYAccede();
-		new PageLandingSteps().validateIsPageWithCorrectLineas();
+		new PageLandingSteps().checkIsPageWithCorrectLineas();
 	}
 }

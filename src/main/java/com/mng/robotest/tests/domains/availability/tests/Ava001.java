@@ -16,6 +16,8 @@ import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.Linea
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 public class Ava001 extends TestBase {
 	
 	private List<LineaType> linesToCheck = Arrays.asList(SHE, HE, NINA, TEEN, HOME);
@@ -35,14 +37,14 @@ public class Ava001 extends TestBase {
 	private void checkLanding() {
 		var pageLandingSteps = new PageLandingSteps();
 		pageLandingSteps.checkIsPage(5);
-		pageLandingSteps.validateIsPageWithCorrectLineas();
+		pageLandingSteps.checkIsPageWithCorrectLineas();
 	}
 	
 	private void checkLines() throws Exception {
-		for (Linea linea : dataTest.getLineas()) {
-			if (isCheckLine(linea)) {
-				var sublineaOpt = getFirstSublinea(linea);
-				checkLine(linea, sublineaOpt);
+		for (var linea : dataTest.getLineas()) {
+			if (mustBeChecked(linea)) {
+				var firstSublinea = getFirstSublinea(linea);
+				checkLine(linea, firstSublinea);
 			}
 		}		
 	}
@@ -55,18 +57,28 @@ public class Ava001 extends TestBase {
 		return listLineas.get(0).getTypeSublinea();
 	}
 	
-	private void checkLine(Linea linea, SublineaType sublinea) throws Exception {
+	private void checkLine(Linea linea, SublineaType sublinea) {
 		clickLinea(linea.getType(), sublinea);
 		clickMenu(linea.getType(), sublinea);
 	}
 	
-	private boolean isCheckLine(Linea line) {
+	private boolean mustBeChecked(Linea line) {
 		return 
 			linesToCheck.contains(line.getType()) &&
 			new UtilsMangoTest().isLineActive(line);
 	}
 	
 	private void clickMenu(LineaType lineaType, SublineaType sublineaType) {
+		var menu = getMenuToTest(lineaType); 
+		clickMenu(new MenuWeb
+			.Builder(menu.getRight())
+			.linea(lineaType)
+			.sublinea(sublineaType)
+			.group(menu.getLeft())
+			.build());
+	}	
+	
+	private Pair<GroupType, String> getMenuToTest(LineaType lineaType) {
 		var groupType = GroupType.PRENDAS;
 		String menu = "pantalones";
 		if (lineaType==NINA || lineaType==NINO) {
@@ -76,13 +88,7 @@ public class Ava001 extends TestBase {
 			groupType = GroupType.DORMITORIO;
 			menu = "mantas_dormitorio";
 		}
-		
-		clickMenu(new MenuWeb
-			.Builder(menu)
-			.linea(lineaType)
-			.sublinea(sublineaType)
-			.group(groupType)
-			.build());
-	}	
+		return Pair.of(groupType, menu);
+	}
 	
 }

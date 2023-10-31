@@ -26,9 +26,9 @@ public class PageLandingSteps extends StepBase {
 		return pageLanding.isPageUntil(seconds);
 	}
 	
-	public void validateIsPageWithCorrectLineas() {
+	public void checkIsPageWithCorrectLineas() {
 		checkMainContentPais(dataTest.getPais());
-		validateIsPageOk();
+		checkIsPageOk();
 		if (!channel.isDevice()) {
 			new MenuSteps().checkLineasCountry();
 		}
@@ -42,7 +42,7 @@ public class PageLandingSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validateIsPageOk() {
+	public ChecksTM checkIsPageOk() {
 		var checks = ChecksTM.getNew();
 		if (app!=AppEcom.outlet) {
 			checks.add(

@@ -41,7 +41,7 @@ public class Par001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		new AccesoSteps().accessFromPreHome();
-		new PageLandingSteps().validateIsPageWithCorrectLineas();
+		new PageLandingSteps().checkIsPageWithCorrectLineas();
 		for (Linea linea : linesToTest) {
 			if (new UtilsMangoTest().isLineActive(linea)) {
 				validaLinea(linea, null);
