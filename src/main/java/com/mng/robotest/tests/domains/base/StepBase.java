@@ -30,6 +30,7 @@ import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
+import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -66,6 +67,7 @@ public abstract class StepBase extends PageBase {
 		var accesoFlows = new AccesoFlows();
 		new AccesoSteps().quickAccessCountry();
 		accesoFlows.previousAccessShopSteps();
+		new ModalCambioPais().closeModalIfVisible();
 		accesoFlows.manageCookies(true);
 	}
 	

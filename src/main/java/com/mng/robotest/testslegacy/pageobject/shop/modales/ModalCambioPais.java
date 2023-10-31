@@ -14,11 +14,11 @@ public class ModalCambioPais extends PageBase {
 	private static final String XPATH_MODAL_SELECT_PROVINCIA = "//div[@class='wrapper-cell']/div[@id='seleccionProvincia']";
 	private static final String XPATH_ASPA_CLOSE = "//div[@data-ga-category='modal-deteccion-ip' and @class[contains(.,'closeModal')]]";
 	
-	public String getXPath_linkToConfirmPais(String hrefPais) {
+	private String getXPathLinkToConfirmPais(String hrefPais) {
 		return "//div[@class='navOtherCountry']//a[@href[contains(.,'" + hrefPais + "')]]";
 	}
 	
-	public String getXPathButtonToChangePais(String urlAccesoPais) {
+	private String getXPathButtonToChangePais(String urlAccesoPais) {
 		return (XPATH_MODAL + "//div[@class[contains(.,'modalConfirmacionPais')]]//a[@class[contains(.,'_langBtn')] and @href[contains(.,'" + urlAccesoPais + "')]]");
 	}
 	
@@ -31,7 +31,7 @@ public class ModalCambioPais extends PageBase {
 	}
 	
 	public boolean isLinkToConfirmPais(String hrefPais) {
-		String xpath = getXPath_linkToConfirmPais(hrefPais);
+		String xpath = getXPathLinkToConfirmPais(hrefPais);
 		return state(Present, xpath).check();
 	}
 	
