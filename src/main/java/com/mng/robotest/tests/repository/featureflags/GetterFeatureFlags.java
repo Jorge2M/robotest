@@ -13,6 +13,8 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class GetterFeatureFlags {
 
+	private GetterFeatureFlags() {}
+	
 	private static final MngFeatureFlag mngFeatureFlag = new MngFeatureFlagBuilder()
             .withEnvironment(getEnvironment())
             .withApplicationName("shop")
