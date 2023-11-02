@@ -44,7 +44,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		description=
 			"Introducir los datos:<br>" + 
 			"  - Email: <b>#{data.getEmail()}</b><br>" +
-			"  - Contraseña: <b>*****</br>" + 
+			"  - Contraseña: <b>#{data.getPassword()}</br>" + 
 			"  - Mobil: <b>#{data.getMovil()}</b><br>" +
 			"  - Check promociones: <b>#{data.isCheckPromotions()}</b>",
 		expected=

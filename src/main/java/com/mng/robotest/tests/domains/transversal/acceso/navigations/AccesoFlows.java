@@ -98,7 +98,6 @@ public class AccesoFlows extends StepBase {
 	public void identification(String user, String password) {
 		clickIniciarSesionAndWait();
 		login(user, password);
-		closeModalsPostLogin();
 	}
 	
 	public void login(String user, String password) {
@@ -106,6 +105,7 @@ public class AccesoFlows extends StepBase {
 		pageLogin.isPage(5);
 		pageLogin.inputUserPassword(user, password);
 		pageLogin.clickButtonEntrar();
+		closeModalsPostLogin();
 	}
 	private void closeModalsPostLogin() {
 		new ModalCambioPais().closeModalIfVisible();
