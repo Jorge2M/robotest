@@ -4060,7 +4060,7 @@ where
 <telefono>3123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<register nuevo="S" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
@@ -4352,7 +4352,7 @@ where
 <telefono>33123456</telefono>
 <dni>27612405934</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<register nuevo="S" cpost="N" publi="N"/>
+<register nuevo="S" cpost="N" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 <linea 	 	  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>

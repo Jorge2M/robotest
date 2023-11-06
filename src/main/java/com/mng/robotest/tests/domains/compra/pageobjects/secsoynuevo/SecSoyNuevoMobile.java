@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.compra.pageobjects.secsoynuevo;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecSoyNuevoMobileNew extends SecSoyNuevo {
+public class SecSoyNuevoMobile extends SecSoyNuevo {
 	
 	private static final String XPATH_FORM_IDENT = "//form[@id='guestContinueForm']";
 	private static final String XPATH_INPUT_EMAIL = XPATH_FORM_IDENT + "//input[@data-testid='checkout.guestContinue.emailInput']";

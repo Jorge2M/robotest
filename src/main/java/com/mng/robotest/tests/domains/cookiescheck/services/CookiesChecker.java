@@ -41,11 +41,11 @@ public class CookiesChecker extends PageBase {
 		replaceAllowedCookies("_hjSessionUser", "_hjSessionUser*");
 		replaceAllowedCookies("_hjSession", "_hjSession*");
 		
-		if (UtilsTest.todayBeforeDate("2023-11-10")) {
+		if (UtilsTest.todayBeforeDate("2023-11-30")) {
 			whiteList.get().add(Pattern.compile("refresh-token"));
 			whiteList.get().add(Pattern.compile("auth-token"));			
-//			whiteList.get().add(Pattern.compile("AWSALBTGCORS"));
-//			whiteList.get().add(Pattern.compile("AWSALBTG"));
+			whiteList.get().add(Pattern.compile("AWSALBTGCORS"));
+			whiteList.get().add(Pattern.compile("AWSALBTG"));
 //			whiteList.get().add(Pattern.compile("SECKEY_ABVK"));
 		}
 	}

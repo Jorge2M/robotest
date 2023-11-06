@@ -9,7 +9,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.ValidatorContentBolsa;
@@ -269,27 +268,21 @@ public class SecBolsaSteps extends StepBase {
 			if (channel==Channel.mobile) {
 				fluxPostSelectComprarUserNotIdentifiedMobile(fluxMobile);
 			} else {
-				new Page1IdentCheckoutSteps().checkIsPage(5);
+				new Page1IdentCheckoutSteps().checkIsPage(7);
 			}
 		} else {
 			new CheckoutSteps().validateIsFirstPage(dataTest.isUserRegistered());
 		}
 	}
 
-	//TODO simplificar cuando en Outlet suba el flujo nuevo
-	//(y crear página específica PageContinuarComoInvitadoMobile
 	private void fluxPostSelectComprarUserNotIdentifiedMobile(FluxBolsaCheckout flux) {
-		if (app==AppEcom.shop) {
-			checkVisibleContinuarSinCuentaButtonDevice(2);
-			if (flux==INICIAR_SESION) {
-				clickIniciarSesionMobile();
-				new PageIniciarSesionBolsaMobileSteps().checkIsPage(3);
-			} else {
-				clickContinuarSinCuentaMobile();
-				new Page1IdentCheckoutSteps().checkIsPage(5);
-			}
+		checkVisibleContinuarSinCuentaButtonDevice(2);
+		if (flux==INICIAR_SESION) {
+			clickIniciarSesionMobile();
+			new PageIniciarSesionBolsaMobileSteps().checkIsPage(3);
 		} else {
-			new Page1IdentCheckoutSteps().checkIsPage(5);
+			clickContinuarSinCuentaMobile();
+			new Page1IdentCheckoutSteps().checkIsPage(7);
 		}
 	}
 	

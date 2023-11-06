@@ -17,23 +17,21 @@ public class Registro implements Serializable {
 	
 	private String indexFact = "";
 	private boolean accessFromFactory = false;
-	public int prioridad;
 	private Pais pais = ESPANA.getPais();
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
 	
 	public Registro() {	}
 	
 	//From @Factory
-	public Registro(Pais pais, IdiomaPais idioma, int prioridad) {
+	public Registro(Pais pais, IdiomaPais idioma) {
 		this.pais = pais;
 		this.idioma = idioma;
 		this.indexFact = pais.getNombrePais() + " (" + pais.getCodigoPais() + ") " + "-" + idioma.getCodigo().getLiteral();
-		this.prioridad = prioridad;
 		this.accessFromFactory = true;
 	}
 	
 	@Test (
-		groups={"Registro", "Canal:all_App:shop", "SupportsFactoryCountrys"},
+		groups={"Registro", "Canal:all_App:shop,outlet", "SupportsFactoryCountrys"},
 		description="Registro nuevo de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG001_NewRegisterOK() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
@@ -43,7 +41,9 @@ public class Registro implements Serializable {
 		new Reg001(pais, idioma).execute();
 	}
 	
+	//TODO eliminar REG002,REG003,REG004
 	@Test (
+		enabled=false,
 		groups={"Registro", "Canal:all_App:outlet"},
 		description="Registro antiguo con errores en la introducción de los datos")
 	public void REG002_RegistroNOK() throws Exception {
@@ -55,6 +55,7 @@ public class Registro implements Serializable {
 	}
 
 	@Test (
+		enabled=false,
 		groups={"Registro", "Canal:all_App:outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="Registro antiguo de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG003_RegistroOK_publi() throws Exception {
@@ -66,6 +67,7 @@ public class Registro implements Serializable {
 	}
 	
 	@Test (
+		enabled=false,
 		groups={"Registro", "Canal:desktop_App:outlet"}, alwaysRun=true, 
 		description="Registro antiguo de un usuario (sin seleccionar el link de publicidad)")
 	public void REG004_RegistroOK_NoPubli() throws Exception {
@@ -105,6 +107,5 @@ public class Registro implements Serializable {
 	private boolean isPro() {
 		return PageBase.isEnvPRO();
 	}
-
 		
 }

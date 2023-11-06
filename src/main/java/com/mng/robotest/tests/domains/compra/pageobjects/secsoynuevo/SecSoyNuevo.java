@@ -24,11 +24,7 @@ public abstract class SecSoyNuevo extends PageBase {
 		if (channel!=Channel.mobile) {
 			return new SecSoyNuevoDesktop();
 		}
-		
-		if (app==AppEcom.shop) {
-			return new SecSoyNuevoMobileNew();
-		}
-		return new SecSoyNuevoMobileOld();
+		return new SecSoyNuevoMobile();
 	}
 	
 	public boolean isFormIdentUntil(int seconds) { 
