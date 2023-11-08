@@ -197,20 +197,14 @@ public class PageGaleriaSteps extends StepBase {
 		expected="Se escrolla correctamente",
 		saveNettraffic=SaveWhen.Always)
 	public DataScroll scrollFromFirstPage(DataForScrollStep dataForScroll) throws Exception {
-
-		DataScroll datosScroll = null;
 		int pageToScroll = dataForScroll.getNumPageToScroll();
-		if (channel.isDevice()) {
-			pageToScroll = 3;
-		}
-		
 		String idPage = pageToScroll + "a";
 		if (pageToScroll>=PageGaleria.MAX_PAGE_TO_SCROLL) {
 			idPage = "última";
 		}
 		replaceStepDescription(TAG_ID_PAGE, idPage);
 		int numArticulosInicio = pageGaleria.getNumArticulos();
-		datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll);
+		var datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll);
 
 		if (pageToScroll>=PageGaleria.MAX_PAGE_TO_SCROLL) {
 			checkVisibilityFooter(pageToScroll, app);
@@ -238,7 +232,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation (description="Sí aparece el footer", level=Warn)
 	private boolean checkVisibilityFooter(int pageToScroll, AppEcom app) {
-		return (new SecFooter()).isVisible();
+		return new SecFooter().isVisible();
 	}
 
 	@Validation (

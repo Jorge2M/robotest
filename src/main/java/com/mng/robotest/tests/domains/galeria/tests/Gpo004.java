@@ -29,7 +29,7 @@ public class Gpo004 extends TestBase {
 	public void execute() throws Exception {
 		access();
 		selectGaleryAndFilterByColor();
-		scrollToThirdPage();
+		scrollToSecondPage();
 		if (!channel.isDevice()) {
 			selectArticleInOtherLabel();
 		}
@@ -53,16 +53,12 @@ public class Gpo004 extends TestBase {
 		if (app==shop) {
 			filterGaleryByColors(CAMISAS_SHE, colorsToFilter);
 		} else {
-			colorsToFilter.add(MARRON);
-			colorsToFilter.add(BEIGE);
-			colorsToFilter.add(VERDE);
-			colorsToFilter.add(ROSA);
 			filterGaleryByColors(ABRIGOS_SHE, colorsToFilter);
 		}
 	}
 
-	private void scrollToThirdPage() throws Exception {
-		dataScroll.setNumPageToScroll(3);
+	private void scrollToSecondPage() throws Exception {
+		dataScroll.setNumPageToScroll(2);
 		pageGaleriaSteps.scrollFromFirstPage(dataScroll);
 	}
 
@@ -73,7 +69,7 @@ public class Gpo004 extends TestBase {
 	private int scrollToLastAndSelectArticle() throws Exception {
 		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
 		DataScroll datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
-		pageGaleriaSteps.selectArticulo(121);
+		pageGaleriaSteps.selectArticulo(80);
 		return datosScrollFinalGaleria.getArticulosTotalesPagina();
 	}
 

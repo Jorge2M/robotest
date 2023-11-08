@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.availability.tests;
 
-import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import com.mng.robotest.tests.domains.base.TestBase;
@@ -85,16 +84,11 @@ public class Ava001 extends TestBase {
             .uri(URI.create(baseUrl + "/services/menu/v1.0/shop/desktop/" + countryId + "/" + lang + "?isMobile=" + channel.isDevice()))
             .build();
 
-        try {
-            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            var json = JsonParser.parseString(response.body()).getAsJsonObject().get("menus").getAsJsonArray();
-            List<String> allLinks = new ArrayList<>();
-            collectLinks(json, true, allLinks);
-            return allLinks.subList(0, MAX_CATALOGS);
-        } catch (Exception e) {
-			Log4jTM.getLogger().error("Problem getting url catalogs {}", e.getMessage());
-            return new ArrayList<>();
-        }
+        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        var json = JsonParser.parseString(response.body()).getAsJsonObject().get("menus").getAsJsonArray();
+        List<String> allLinks = new ArrayList<>();
+        collectLinks(json, true, allLinks);
+        return allLinks.subList(0, MAX_CATALOGS);
     }    
 
     private List<String> getRandomUrlProductsPage() throws Exception {
