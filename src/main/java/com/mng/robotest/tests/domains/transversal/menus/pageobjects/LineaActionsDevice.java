@@ -7,7 +7,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.testslegacy.beans.Linea;
@@ -75,7 +75,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	@Override
 	public void clickLinea() {
 		boolean toOpenMenus = true;
-		var secCabecera = new SecCabeceraMostFrequent();
+		var secCabecera = SecCabecera.make();
 		secCabecera.clickIconoMenuHamburguerMobil(toOpenMenus);
 		Linea linea = Linea.getLinea(lineaType, dataTest.getPais());
 		if ("n".compareTo(linea.getExtended())==0) {

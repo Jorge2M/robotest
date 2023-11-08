@@ -12,7 +12,7 @@ public class SecBolsaButtonAndLinksNew extends PageBase {
 	public enum ActionFavButton { ADD, REMOVE }
 
 	private static final String XPATH_WRAPPER = "//div[@class='product-actions']";
-	private static final String XPATH_BUTTON_ADD_BOLSA = "//div[@id='addCartContainer']//button[@id='productFormAdd']";
+	private static final String XPATH_BUTTON_ADD_BOLSA = "//*[@data-testid='pdp.form.addToCart']";
 	private static final String XPATH_BUTTON_FAVORITOS = XPATH_WRAPPER + "//*[@data-testid='button-icon']";
 	private static final String XPATH_BUTTON_FAVORITOS_FOR_ADD = XPATH_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'outline')]]";
 	private static final String XPATH_BUTTON_FAVORITOS_FOR_REMOVE = XPATH_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'fill')]]";
@@ -44,6 +44,10 @@ public class SecBolsaButtonAndLinksNew extends PageBase {
 		default:
 			return XPATH_LINK_COMPARTIR;
 		}
+	}
+	
+	public boolean isVisibleBolsaButton(int seconds) {
+		return state(Visible, XPATH_BUTTON_ADD_BOLSA).wait(seconds).check();
 	}
 	
 	public void clickAnadirBolsaButtonAndWait() {

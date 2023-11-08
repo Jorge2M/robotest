@@ -3,15 +3,15 @@ package com.mng.robotest.tests.domains.transversal.cabecera.steps;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecCabeceraSteps extends StepBase {
 
-	private final SecCabecera secCabecera = new SecCabeceraMostFrequent();
+	private final SecCabecera secCabecera = SecCabecera.make();
 	
 	public SecCabecera getSecCabecera() {
 		return secCabecera;

@@ -6,9 +6,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -19,7 +17,7 @@ import org.testng.ITestContext;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.testslegacy.beans.Linea;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -37,7 +35,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class UtilsMangoTest extends PageBase {
 
 	public void goToPaginaInicio() throws Exception {
-		boolean existeLogo = new SecCabeceraMostFrequent().clickLogoMango();
+		boolean existeLogo = SecCabecera.make().clickLogoMango();
 		if (!existeLogo) {
 			ITestContext ctx = getTestCase().getTestRunParent().getTestNgContext();
 			String urlPaginaPostAcceso = (String)ctx.getAttribute(Constantes.ATTR_URL_PAG_POST_ACCESO); 
@@ -53,7 +51,7 @@ public class UtilsMangoTest extends PageBase {
 	}	
 	
 	private TestCaseTM getTestCase() throws NotFoundException {
-		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
+		var testCaseOpt = TestMaker.getTestCase();
 		if (!testCaseOpt.isPresent()) {
 		  throw new NotFoundException("Not found TestCase");
 		}
@@ -96,13 +94,12 @@ public class UtilsMangoTest extends PageBase {
 		return enIntervalo;
 	}
 
-	
 	/**
 	 * Funciona que coge los datos de una hashmap y los formatea para mostrarlos en el report HTML
 	 */
 	public static String listaCamposHTML(final Map<String, String> datosRegistro) {
 		String resultado = "";
-		Iterator<Map.Entry<String, String>> it = datosRegistro.entrySet().iterator();
+		var it = datosRegistro.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<String, String> dupla = it.next();
 			resultado = resultado + "<br><b>" + dupla.getKey() + "</b>: " + dupla.getValue();

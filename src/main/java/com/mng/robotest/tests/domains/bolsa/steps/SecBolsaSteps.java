@@ -17,7 +17,7 @@ import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBols
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
@@ -45,7 +45,7 @@ public class SecBolsaSteps extends StepBase {
 		description="Eliminamos los posibles artículos existentes en la Bolsa",
 		expected="La bolsa queda vacía")
 	public void clear() throws Exception {
-		if (new SecCabeceraMostFrequent().hayArticulosBolsa()) {
+		if (SecCabecera.make().hayArticulosBolsa()) {
 			secBolsa.clearArticulos();
 		}
 	}

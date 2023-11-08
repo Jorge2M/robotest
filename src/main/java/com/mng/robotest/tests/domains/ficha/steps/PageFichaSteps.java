@@ -51,30 +51,54 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (description=
-		"Aparece la página correspondiente a la ficha del artículo #{refArticulo}" + SECONDS_WAIT)
+		"Aparece la página correspondiente a la ficha del artículo #{refArticulo} " + SECONDS_WAIT)
 	public boolean checkIsFichaArtDisponible(String refArticulo, int seconds) {
 		return pageFicha.isFichaArticuloUntil(refArticulo, seconds);
 	}
 
 	@Validation
-	public ChecksTM validateIsFichaArtAlgunoColorNoDisponible(String refArticulo) {
+	public ChecksTM checkIsFichaArtAlgunoColorNoDisponible(String refArticulo) {
 		var checks = ChecksTM.getNew();
 		checks.add(
-				"Aparece la página correspondiente a la ficha del artículo " + refArticulo,
-				pageFicha.isFichaArticuloUntil(refArticulo, 0));
+			"Aparece la página correspondiente a la ficha del artículo " + refArticulo,
+			pageFicha.isFichaArticuloUntil(refArticulo, 0));
 
 		checks.add(
-				"Aparece algún color no disponible",
-				state(Present, ColorType.UNAVAILABLE.getBy(), driver).check());
+			"Aparece algún color no disponible",
+			state(Present, ColorType.UNAVAILABLE.getBy(), driver).check());
 
 		return checks;
 	}
 
-	@Validation (description="Aparece la página de Ficha", level=Warn)
-	public boolean checkIsFicha() {
-		return pageFicha.isPageUntil(0);
+    @Step(
+    	description="Cargamos la <b>Ficha</b> <a href='#{urlFicha}'>#{urlFicha}</a>", 
+    	expected="Aparece un catálogo con artículos")    		
+    public void loadFicha(String urlFicha) {
+    	driver.get(urlFicha);
+    	checkIsFicha(3);
+    	checkFichaButtons();
+    }	
+	
+	@Validation (description="Aparece la página de Ficha " + SECONDS_WAIT)
+	public boolean checkIsFicha(int seconds) {
+		return pageFicha.isPageUntil(seconds);
 	}
 
+    @Validation
+    private ChecksTM checkFichaButtons() {
+    	var checks = ChecksTM.getNew();
+    	int seconds = 2;
+		checks.add(
+			"Aparece el botón de <b>Añadir a la bolsa</b> " + getLitSecondsWait(seconds),
+			pageFicha.isVisibleBolsaButton(seconds));
+
+		checks.add(
+			"Aparece el botón de <b>❤</b> para añadir a favoritos",
+			pageFicha.isVisibleButtonAnadirFavoritos(0));
+		
+    	return checks;
+    }
+	
 	@Validation
 	public ChecksTM checkDetallesProducto(DataFichaArt datosArticulo) {
 		var checks = ChecksTM.getNew();
@@ -246,15 +270,15 @@ public class PageFichaSteps extends StepBase {
 		ArticuloScreen articulo = pageFicha.getArticuloObject();
 		dataTest.getDataFavoritos().addArticulo(articulo);
 		checkCapaAltaFavoritos();
-		validateVisibleButtonFavoritos(ActionFavButton.REMOVE);
+		checkVisibleButtonFavoritos(ActionFavButton.REMOVE);
 	}
 
 	@Step (
 		description="Cambiar de color dentro de la misma ficha volviendo al color/talla originales",
 		expected="El articulo es cambiado de color.")
 	public void changeColorGarment() {
-		ArticuloScreen articulo = pageFicha.getArticuloObject();
-		List<String> colors = pageFicha.getSecDataProduct().getColorsGarment();
+		var articulo = pageFicha.getArticuloObject();
+		var colors = pageFicha.getSecDataProduct().getColorsGarment();
 		String codeColor = getColorNotSelected(colors, articulo);
 		pageFicha.getSecDataProduct().selectColor(codeColor);
 
@@ -305,11 +329,11 @@ public class PageFichaSteps extends StepBase {
 		expected="El artículo se elimina de Favoritos")
 	public void selectRemoveFromFavoritos() {
 		pageFicha.selectRemoveFromFavoritosButton();
-		validateVisibleButtonFavoritos(ActionFavButton.ADD);
+		checkVisibleButtonFavoritos(ActionFavButton.ADD);
 	}
 
 	@Validation (description="Aparece el botón de #{buttonType} a Favoritos")
-	public boolean validateVisibleButtonFavoritos(ActionFavButton buttonType) {
+	public boolean checkVisibleButtonFavoritos(ActionFavButton buttonType) {
 		switch (buttonType) {
 			case REMOVE:
 				return (pageFicha.isVisibleButtonElimFavoritos(1));
@@ -356,7 +380,7 @@ public class PageFichaSteps extends StepBase {
 		}
 	}
 
-	public void validateSliderIfExists(Slider slider) {
+	public void checkSliderIfExists(Slider slider) {
 		if (checkSliderVisible(slider)) {
 			checkNumArticlesSlider(0, slider);
 		}
@@ -378,7 +402,7 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation
-	public ChecksTM validaPrevNext(int position) {
+	public ChecksTM checkPrevNext(int position) {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		boolean isVisiblePrevLink = pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.PREV, seconds);
@@ -409,7 +433,7 @@ public class PageFichaSteps extends StepBase {
 		}
 
 		if (productNav==ProductNav.NEXT) {
-			validaPrevNext(position + 1);
+			checkPrevNext(position + 1);
 		}
 	}
 
@@ -429,8 +453,6 @@ public class PageFichaSteps extends StepBase {
 	public void selectImgCarruselIzqFichaOld(int numImagen) {
 		String pngImagenCarrusel = ((PageFichaDevice)pageFicha).getSrcImgCarruselIzq(numImagen);
 		((PageFichaDevice)pageFicha).clickImgCarruselIzq(numImagen);
-
-		//Validaciones
 		checkImgCentralIsAssociatedToCarruselSelect(pngImagenCarrusel);
 	}
 

@@ -14,9 +14,9 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent.IconoCabecera.*;
+import static com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraCommon.IconoCabecera.*;
 
-public class SecCabeceraMostFrequent extends SecCabecera {
+public class SecCabeceraCommon extends SecCabecera {
 	
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop = new ModalUserSesionShopDesktop(); 
 	
@@ -54,7 +54,7 @@ public class SecCabeceraMostFrequent extends SecCabecera {
 			this.xpathDesktop = xPathDesktop;
 			this.byDesktop = By.xpath(xPathDesktop);
 		}
-
+		
 		@Override
 		public By getBy(Channel channel) {
 			if (channel.isDevice()) {

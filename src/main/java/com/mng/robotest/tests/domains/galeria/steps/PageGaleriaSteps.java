@@ -55,6 +55,14 @@ public class PageGaleriaSteps extends StepBase {
 		return secSelectorPreciosSteps;
 	}
 
+    @Step(
+    	description="Cargamos el <b>Catálogo</b> <a href='#{urlCatalog}'>#{urlCatalog}</a>", 
+    	expected="Aparece un catálogo con artículos")    		
+    public void loadCatalog(String urlCatalog) {
+    	driver.get(urlCatalog);
+    	checkGaleriaAfeterSelectMenu();
+    }
+	
 	@Step (
 		description="Seleccionamos el artículo #{position} en una pestaña aparte", 
 		expected="Aparece la ficha del artículo seleccionado en una pestaña aparte")
@@ -94,7 +102,7 @@ public class PageGaleriaSteps extends StepBase {
 		pageGaleria.clickArticulo(articulo);
 		var pageFichaSteps = new PageFichaSteps();
 		pageFichaSteps.checkDetallesProducto(datosArticulo);
-		pageFichaSteps.validaPrevNext(position);
+		pageFichaSteps.checkPrevNext(position);
 
 		pageFichaSteps.validaBreadCrumbFicha(urlGaleria);
 		
@@ -207,10 +215,9 @@ public class PageGaleriaSteps extends StepBase {
 		if (pageToScroll>=PageGaleria.MAX_PAGE_TO_SCROLL) {
 			checkVisibilityFooter(pageToScroll, app);
 		}
-		if (!dataTest.getPais().isGaleriaKondo(app)) {
-			if (pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
-				checkAreMoreArticlesThatInitially(datosScroll.getArticulosMostrados(), numArticulosInicio);
-			}
+		if (!dataTest.getPais().isGaleriaKondo(app) &&
+			pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
+			checkAreMoreArticlesThatInitially(datosScroll.getArticulosMostrados(), numArticulosInicio);
 		}
 		if (dataForScroll.getOrdenacionExpected()!=RECOMENDADOS) {
 			checkArticlesOrdered(dataForScroll.getOrdenacionExpected());
@@ -608,7 +615,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation (description="Estamos en la página de Galería",	level=Warn)
 	private boolean checkIsPageGaleria(WebDriver driver) {
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+		var pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
 		return (pageGaleriaDesktop.isPage());
 	}
 

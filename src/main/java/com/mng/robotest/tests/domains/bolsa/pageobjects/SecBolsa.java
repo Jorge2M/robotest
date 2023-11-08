@@ -1,13 +1,10 @@
 package com.mng.robotest.tests.domains.bolsa.pageobjects;
 
-import java.util.ListIterator;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -59,14 +56,12 @@ public class SecBolsa extends SecBolsaCommon {
 	@Override
 	public String getPrecioSubTotal() {
 		String precioTotal = "";
-		ListIterator<WebElement> itTotalEntero = null;
-		ListIterator<WebElement> itTotalDecimal = null;
 		String xpathCapaBolsa = getXPathPanelBolsa();
 		String xpathSubtotal = getXPathPrecioSubTotal();
 		By byTotalEntero = By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_big']");
 		By byTotalDecimal = By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_small']");
-		itTotalEntero = getElements(byTotalEntero).listIterator();
-		itTotalDecimal = getElements(byTotalDecimal).listIterator();
+		var itTotalEntero = getElements(byTotalEntero).listIterator();
+		var itTotalDecimal = getElements(byTotalDecimal).listIterator();
 		
 		while (itTotalEntero != null && itTotalEntero.hasNext()) {
 			precioTotal += itTotalEntero.next().getText();
@@ -85,8 +80,8 @@ public class SecBolsa extends SecBolsaCommon {
 		if (state(Present, xpathImpTransp).check()) {
 			String xpathTotalEntero = xpathImpTransp + "//*[@class='bolsa_price_big']";
 			String xpathTotalDecimal = xpathImpTransp + "//*[@class='bolsa_price_small']";
-			ListIterator<WebElement> itTotalEntero = getElements(xpathTotalEntero).listIterator();
-			ListIterator<WebElement> itTotalDecimal = getElements(xpathTotalDecimal).listIterator();
+			var itTotalEntero = getElements(xpathTotalEntero).listIterator();
+			var itTotalDecimal = getElements(xpathTotalDecimal).listIterator();
 
 			while (itTotalEntero != null && itTotalEntero.hasNext()) {
 				precioTotal += itTotalEntero.next().getText();
@@ -124,14 +119,13 @@ public class SecBolsa extends SecBolsaCommon {
 	}
 
 	private void setBolsaDesktopToState(StateBolsa stateBolsaExpected) {
-		var secCabecera = new SecCabeceraMostFrequent();
-		secCabecera.clickIconoBolsaWhenDisp(2);
+		SecCabecera.make().clickIconoBolsaWhenDisp(2);
 		isInStateUntil(stateBolsaExpected, 2);
 	}
 	
 	private void setBolsaMobileToState(StateBolsa stateBolsaExpected) {
 		if (stateBolsaExpected==StateBolsa.OPEN) {
-			new SecCabeceraMostFrequent().clickIconoBolsaWhenDisp(2);
+			SecCabecera.make().clickIconoBolsaWhenDisp(2);
 		} else {
 			if (app==AppEcom.outlet) {
 				clickIconoCloseMobile();

@@ -7,26 +7,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.Test;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.repository.productlist.GetterProducts.Builder;
-import com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
-import com.mng.robotest.tests.repository.productlist.entity.ProductLabel;
 import com.mng.robotest.tests.repository.productlist.sort.SortFactory;
 import com.mng.robotest.tests.repository.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.utils.PaisGetter;
 
+import static com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType.*;
+
 public class GetterProductsIT {
 	
 	private static GetterProducts getterProducts;
 	private static GetterProducts getterProductsAndCanonicalData;
-	private static final int numProducts = 9;
+	private static final int numProducts = 8;
 	private static final Pais espana = PaisGetter.from(PaisShop.ESPANA);	
 	
 	private static final Builder getterProductsBuilder = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigoAlf(), AppEcom.shop, null)
@@ -49,7 +48,7 @@ public class GetterProductsIT {
 	@Test
 	public void testGetProducts() throws Exception {
 		//When
-		List<GarmentCatalog> listProducts = getterProducts.getAll();
+		var listProducts = getterProducts.getAll();
 		
 		//Then
 		assertEquals(numProducts, listProducts.size());
@@ -69,7 +68,7 @@ public class GetterProductsIT {
 	@Test
 	public void testGetProductsManyColors() throws Exception {
 		//When
-		List<GarmentCatalog> listProducts = getterProducts.getAll(Arrays.asList(FilterType.MANY_COLORS));
+		var listProducts = getterProducts.getAll(Arrays.asList(MANY_COLORS));
 		
 		//Then
 		assertTrue(listProducts.size()>0);
@@ -79,7 +78,7 @@ public class GetterProductsIT {
 	@Test
 	public void testGetProductCompletaTuLook() throws Exception {
 		//When
-		Optional<GarmentCatalog> product = getterProducts.getOne(Arrays.asList(FilterType.TOTAL_LOOK));
+		var product = getterProducts.getOne(Arrays.asList(TOTAL_LOOK));
 		
 		//Then
 		assertTrue(product.isPresent());
@@ -88,8 +87,8 @@ public class GetterProductsIT {
 	@Test
 	public void testGetProductNoOnline() throws Exception {
 		//When
-		List<GarmentCatalog> products = getterProducts.getAll(Arrays.asList(FilterType.NO_ONLINE));
-		GarmentCatalog garmentOnline = getGarmentOnline(products);
+		var products = getterProducts.getAll(Arrays.asList(NO_ONLINE));
+		var garmentOnline = getGarmentOnline(products);
 		
 		//Then
 		assertNull(garmentOnline);
@@ -98,8 +97,8 @@ public class GetterProductsIT {
 	@Test
 	public void testGetProductOnline() throws Exception {
 		//When
-		List<GarmentCatalog> products = getterProducts.getAll(Arrays.asList(FilterType.ONLINE));
-		GarmentCatalog garmentNoOnline = getGarmentNoOnline(products);
+		var products = getterProducts.getAll(Arrays.asList(ONLINE));
+		var garmentNoOnline = getGarmentNoOnline(products);
 		
 		//Then
 		assertNull(garmentNoOnline);
@@ -108,7 +107,7 @@ public class GetterProductsIT {
 	@Test
 	public void testGetProductWithCanonicalData() throws Exception {
 		//When
-		List<GarmentCatalog> listProducts = getterProductsAndCanonicalData.getAll();
+		var listProducts = getterProductsAndCanonicalData.getAll();
 		
 		//Then
 		assertNotNull(listProducts.get(0).getCanonicalProduct());
@@ -118,7 +117,7 @@ public class GetterProductsIT {
 	}
 	
 	private GarmentCatalog getGarmentOnline(List<GarmentCatalog> garments) {
-		for (GarmentCatalog garment: garments) {
+		for (var garment: garments) {
 			if (isGarmentOnline(garment)) {
 				return garment;
 			}
@@ -127,7 +126,7 @@ public class GetterProductsIT {
 	}
 	
 	private GarmentCatalog getGarmentNoOnline(List<GarmentCatalog> garments) {
-		for (GarmentCatalog garment: garments) {
+		for (var garment: garments) {
 			if (!isGarmentOnline(garment)) {
 				return garment;
 			}
@@ -136,11 +135,12 @@ public class GetterProductsIT {
 	}
 	
 	private boolean isGarmentOnline(GarmentCatalog garment) {
-		for (ProductLabel productLabel : garment.getLabels().getProductLabels()) {
+		for (var productLabel : garment.getLabels().getProductLabels()) {
 			if (productLabel!=null && "exclusivo_online".compareTo(productLabel.getKey())==0) {
 				return true;
 			}
 		}
 		return false;
 	}
+	
 }

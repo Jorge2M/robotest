@@ -13,7 +13,7 @@ import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.tests.domains.micuenta.steps.PageAccesoMisComprasSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps.ChecksResultWithNumberPoints;
 import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
@@ -140,13 +140,13 @@ public class PageResultPagoSteps extends StepBase {
 		if (pageResultPago.isVisibleDescubrirLoUltimo()) {
 			pageResultPago.clickDescubrirLoUltimo();
 		} else {
-			new SecCabeceraMostFrequent().clickLogoMango();
+			SecCabecera.make().clickLogoMango();
 		}
 	}
 	
 	public void selectLinkMisComprasAndValidateCompra(DataPago dataPago) {		
 		selectMisCompras();
-		DataPedido dataPedido = dataPago.getDataPedido();
+		var dataPedido = dataPago.getDataPedido();
 		if (dataTest.isUserRegistered()) {
 			new PageMisComprasSteps().checkIsCompraOnline(
 					dataPedido.getCodpedido(), dataPago.getFTCkout().chequeRegalo);
@@ -156,4 +156,5 @@ public class PageResultPagoSteps extends StepBase {
 			pageAccesoMisComprasSteps.buscarPedidoForNoRegistrado(dataPago.getDataPedido());
 		}
 	}
+	
 }

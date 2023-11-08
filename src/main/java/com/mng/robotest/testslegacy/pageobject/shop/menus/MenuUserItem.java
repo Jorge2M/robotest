@@ -10,7 +10,7 @@ import java.util.List;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.tests.conf.AppEcom;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent.IconoCabecera;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraCommon.IconoCabecera;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.device.SecMenusUserDevice.MenuUserDevice;
 

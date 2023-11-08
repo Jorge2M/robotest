@@ -7,11 +7,10 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 
 public class SecMenusUserDevice extends PageBase {
 
-	private final SecCabecera secCabecera = new SecCabeceraMostFrequent();
+	private final SecCabecera secCabecera = SecCabecera.make();
 	
 	public enum MenuUserDevice implements ElementPage {
 		AYUDA(

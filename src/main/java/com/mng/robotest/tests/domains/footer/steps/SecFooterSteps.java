@@ -7,7 +7,7 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.footer.pageobjects.FactoryPageFromFooter;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.FooterLink;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.transversal.modales.pageobject.ModalCambioPaisSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -91,9 +91,9 @@ public class SecFooterSteps extends StepBase {
 	 @Step (
 		description="Hacer click en el cuadro de suscripción del footer",
 		expected="Aparecen los textos legales de RGPD")
-	public void clickFooterSubscriptionInput(Boolean clickRegister) {
+	public void clickFooterSubscriptionInput(boolean clickRegister) {
 		if (!clickRegister) {
-			new SecCabeceraMostFrequent().clickLogoMango();
+			SecCabecera.make().clickLogoMango();
 		}
 		secFooter.clickFooterSuscripcion();
 	}

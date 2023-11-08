@@ -5,7 +5,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroFinOutlet;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -26,7 +26,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 		expected="Se accede a la shop correctamente")
 	public void clickIrDeShoppingButton() {
 		pageRegistroFin.clickIrDeShopping();
-		new SecCabeceraMostFrequent().clickLogoMango();
+		SecCabecera.make().clickLogoMango();
 		validateWeAreLogged();
 	}
 	
@@ -40,7 +40,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"El logo de Mango redirige al país/idioma origen: " + dataTest.getIdioma().getAcceso(),
-			new SecCabeceraMostFrequent()
+			SecCabecera.make()
 				.validaLogoMangoGoesToIdioma(dataTest.getIdioma()), Warn);
 		return checks;		
 	}

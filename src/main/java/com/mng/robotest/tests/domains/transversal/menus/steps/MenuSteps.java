@@ -18,6 +18,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.tests.domains.transversal.banners.steps.SecBannersSteps;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.transversal.menus.beans.FactoryMenus;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.GroupWeb;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb;
@@ -369,15 +370,16 @@ public class MenuSteps extends StepBase {
 	@Validation
 	public ChecksTM checkLineasCountry() {
 		var checks = ChecksTM.getNew();
-		LineaType[] lineasToTest = LineaType.values();
-		for (LineaType lineaType : lineasToTest) {
-			ThreeState apareceLinea = dataTest.getPais().getShoponline().stateLinea(lineaType, app);
+		var lineasToTest = LineaType.values();
+		showMenuIfDevice();
+		for (var lineaType : lineasToTest) {
+			var apareceLinea = dataTest.getPais().getShoponline().stateLinea(lineaType, app);
 			if (checkLinea(lineaType, apareceLinea)) {
 				boolean isLineaPresent = new LineaWeb(lineaType).isLineaPresent(0);
 				if (apareceLinea==ThreeState.TRUE) {
 					checks.add (
 						"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
-						isLineaPresent, Warn);
+						isLineaPresent, Defect);
 				} else {
 					checks.add (
 						"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
@@ -385,7 +387,19 @@ public class MenuSteps extends StepBase {
 				}
 			}
 		}
+		unshowMenuIfDevice();
 		return checks;
+	}
+	
+	private void showMenuIfDevice() {
+		if (channel.isDevice()) {
+			SecCabecera.make().clickIconoMenuHamburguerMobil(true);
+		}
+	}
+	private void unshowMenuIfDevice() {
+		if (channel.isDevice()) {
+			SecCabecera.make().clickIconoMenuHamburguerMobil(true);
+		}
 	}
 	
 	private boolean checkLinea(LineaType lineaType, ThreeState stateLinea) {

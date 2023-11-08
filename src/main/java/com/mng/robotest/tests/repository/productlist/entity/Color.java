@@ -6,6 +6,7 @@ public class Color {
 
 	private String id;
 	private String label;
+	private String linkAnchor;
 	private boolean defaultColor;
 	private int stock;
 	private List<Size> sizes;
@@ -36,6 +37,12 @@ public class Color {
 	public void setLabel(String label) {
 		this.label = label;
 	}
+	public String getLinkAnchor() {
+		return linkAnchor;
+	}
+	public void setLinkAnchor(String linkAnchor) {
+		this.linkAnchor = linkAnchor;
+	}	
 	public boolean isDefaultColor() {
 		return defaultColor;
 	}

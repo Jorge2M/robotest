@@ -19,7 +19,6 @@ import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageSelectI
 import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageSelectLineaVOTF;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
 import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
@@ -116,7 +115,7 @@ public class AccesoFlows extends StepBase {
 	private void clickIniciarSesionAndWait() {
 		if (channel.isDevice()) {
 			//En el caso de mobile nos tenemos que asegurar que están desplegados los menús
-			SecCabecera secCabeceraDevice = new SecCabeceraMostFrequent();
+			SecCabecera secCabeceraDevice = SecCabecera.make();
 			boolean toOpen = true;
 			secCabeceraDevice.clickIconoMenuHamburguerMobil(toOpen);
 			
@@ -139,7 +138,7 @@ public class AccesoFlows extends StepBase {
 		pageSelectLineaVOTF.clickMenu(LineaType.SHE, 1);
 		
 		//Cuando se selecciona el icono de Mango deja de tener efecto el forzado del TestAB de la cabecera que habíamos ejecutado previamente
-		new SecCabeceraMostFrequent().clickLogoMango();
+		SecCabecera.make().clickLogoMango();
 	}
 	
 	public void accesoVOTF() throws Exception {

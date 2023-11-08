@@ -69,11 +69,10 @@ public class SecBannersSteps extends StepBase {
 		managerBannersScreen.clickBannerAndWaitLoad(dataBanner);
 		dataBanner.setUrlDestino(driver.getCurrentUrl());
 		if (validaciones) {
-			//Validaciones
 			validacionesGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal);
 			switch (dataBanner.getDestinoType()) {
 			case FICHA:
-				new PageFichaSteps().checkIsFicha();
+				new PageFichaSteps().checkIsFicha(2);
 				break;
 			default:				
 			case OTROS:

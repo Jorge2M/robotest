@@ -13,8 +13,8 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent.IconoCabecera;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraCommon;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraCommon.IconoCabecera;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop.MenuUserDesktop;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.device.SecMenusUserDevice;
@@ -24,7 +24,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.St
 
 public class MenusUserWrapper extends PageBase {
 	
-	private final SecCabecera secCabecera = new SecCabeceraMostFrequent();
+	private final SecCabeceraCommon secCabecera = SecCabecera.make();
 	
 	public boolean isMenuInState(UserMenu menu, State state) {
 		return (isMenuInStateUntil(menu, state, 0));
@@ -77,7 +77,7 @@ public class MenusUserWrapper extends PageBase {
 			throw new IllegalArgumentException(
 				"This function doesn't support the channel " + channel + " and the application " + app);
 		}
-		secCabecera.getShop_DesktopMobile().hoverIconForShowUserMenuDesktop();
+		secCabecera.hoverIconForShowUserMenuDesktop();
 	}
 	
 	private void checkAppSupported(AppEcom app, UserMenu userMenu) {
@@ -90,9 +90,9 @@ public class MenusUserWrapper extends PageBase {
 		ElementPage menuLink = menu.getLink();
 		switch (menu.getType()) {
 			case ICONO_CABECERA_SHOP_DESKTOP_MOBILE:
-				return (secCabecera.getShop_DesktopMobile().isIconoInStateUntil((IconoCabecera)menuLink, state, seconds));
+				return (secCabecera.isIconoInStateUntil((IconoCabecera)menuLink, state, seconds));
 			case MENU_USER_DESKTOP:
-				return (secCabecera.getShop_DesktopMobile().getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menuLink, state, seconds));
+				return (secCabecera.getModalUserSesionDesktop().isMenuInStateUntil((MenuUserDesktop)menuLink, state, seconds));
 			case MENU_USER_DEVICE:
 				return (new SecMenusUserDevice().isMenuInStateUntil((MenuUserDevice)menuLink, state, seconds));
 			default:
@@ -101,14 +101,14 @@ public class MenusUserWrapper extends PageBase {
 	}
 	
 	private void clickMenuAndWait(MenuUserItem menu) {
-		ElementPage menuLink = menu.getLink();
+		var menuLink = menu.getLink();
 		switch (menu.getType()) {
 			case ICONO_CABECERA_SHOP_DESKTOP_MOBILE:
-				secCabecera.getShop_DesktopMobile().clickIconoAndWait((IconoCabecera)menuLink);
+				secCabecera.clickIconoAndWait((IconoCabecera)menuLink);
 				break;
 			case MENU_USER_DESKTOP:
-				secCabecera.getShop_DesktopMobile().hoverIconForShowUserMenuDesktop();
-				secCabecera.getShop_DesktopMobile().getModalUserSesionDesktop().wait1sForItAndclickMenu((MenuUserDesktop)menuLink);
+				secCabecera.hoverIconForShowUserMenuDesktop();
+				secCabecera.getModalUserSesionDesktop().wait1sForItAndclickMenu((MenuUserDesktop)menuLink);
 				break;
 			case MENU_USER_DEVICE:
 				new SecMenusUserDevice().clickMenu((MenuUserDevice)menuLink);

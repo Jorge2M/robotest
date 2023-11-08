@@ -11,7 +11,7 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -57,9 +57,8 @@ public abstract class SecBolsaCommon extends PageBase {
 	}
 	
 	public String getNumberArtIcono() {
-		return (new SecCabeceraMostFrequent().getNumberArtIcono());
+		return SecCabecera.make().getNumberArtIcono();
 	}
-	
 	
 	public boolean numberItemsIs(String items) {
 		return numberItemsIsUntil(items, 0);

@@ -10,7 +10,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.tests.domains.transversal.browser.LocalStorageMango;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterAccess;
@@ -141,7 +141,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		selecPaisIdiomaYAccede();
 		new ModalLoyaltyAfterAccess().closeModalIfVisible();
 		if (channel.isDevice()) {
-			new SecCabeceraMostFrequent().closeSmartBannerIfExistsMobil();
+			SecCabecera.make().closeSmartBannerIfExistsMobil();
 		}
 	}
 	

@@ -24,22 +24,16 @@ public abstract class SecCabecera extends PageBase {
 			"@class[contains(.,'logo_')] or" + 
 			"@title[contains(.,'MANGO Shop Online')]]";
 	
-	//TODO eliminar el OLD cuando suba la nueva versión a PRO (31-05-2023)
-	private static final String XPATH_HAMBURGUESA_ICON_OLD = "//*[@data-testid='header.burger']";
-	private static final String XPATH_HAMBURGUESA_ICON_NEW = "//*[@data-testid='menu.burger']";
-	private String getXPathHamburguesaIcon() {
-		return "(" + XPATH_HAMBURGUESA_ICON_OLD + " | " + XPATH_HAMBURGUESA_ICON_NEW + ")";
-	}
-	
+	private static final String XPATH_HAMBURGUER_DEVICE_ICON = "//*[@data-testid='menu.burger']";
 
 	abstract String getXPathNumberArtIcono();
 	public abstract boolean isInStateIconoBolsa(State state, int seconds);
 	public abstract void clickIconoBolsa();
 	public abstract void clickIconoBolsaWhenDisp(int seconds);
 	public abstract void hoverIconoBolsa();
-	
-	public SecCabeceraMostFrequent getShop_DesktopMobile() {
-		return (SecCabeceraMostFrequent)this;
+
+	public static SecCabeceraCommon make() {
+		return new SecCabeceraCommon();
 	}
 	
 	public void bring(BringTo bringTo) {
@@ -105,7 +99,6 @@ public abstract class SecCabecera extends PageBase {
 
 	private static final String XPATH_SMART_BANNER = XPATH_HEADER + "/div[@id='smartbanner']";
 	private static final String XPATH_LINK_CLOSE_SMART_BANNER = XPATH_SMART_BANNER + "//a[@class='sb-close']";	
-//	private static final String XPATH_ICONO_MENU_HAMBURGUESA = XPATH_HEADER + "//div[@class[contains(.,'menu-open-button')]]";
 
 	
 	/**
@@ -129,8 +122,8 @@ public abstract class SecCabecera extends PageBase {
 		var typeClick = TypeClick.webdriver;
 		while ((menuVisible!=toOpenMenus) && i<5) {
 			try {
-				state(Visible, getXPathHamburguesaIcon()).wait(5).check();
-				click(getXPathHamburguesaIcon()).type(typeClick).exec();
+				state(Visible, XPATH_HAMBURGUER_DEVICE_ICON).wait(5).check();
+				click(XPATH_HAMBURGUER_DEVICE_ICON).type(typeClick).exec();
 				typeClick = TypeClick.next(typeClick);
 				menuVisible = secMenus.isMenuInState(toOpenMenus, 2);
 			}

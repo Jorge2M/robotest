@@ -67,7 +67,7 @@ public class Fic002 extends TestBase {
 	private void checkSliders() {
 		Stream.of(Slider.values())
 			.filter(s -> isSliderChequeable(s))
-			.forEach(s -> pFichaSteps.validateSliderIfExists(s));
+			.forEach(s -> pFichaSteps.checkSliderIfExists(s));
 	}
 	private boolean isSliderChequeable(Slider slider) {
 		return 

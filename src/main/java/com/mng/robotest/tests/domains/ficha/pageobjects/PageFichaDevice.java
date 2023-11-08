@@ -13,7 +13,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageFichaDevice extends PageFicha {
 
 	private static final String XPATH_CONTAINER_FICHA = "//*[@class='product-detail']";
-	private static final String XPATH_ALTA_BOLSA_BUTTON ="//*[@id='productFormAdd']";
+	private static final String XPATH_ALTA_BOLSA_BUTTON ="//*[@data-testid='pdp.form.addToCart']";;
 	private static final String XPATH_BUTTON_FAVORITOS = "//*[@data-testid='button-icon']";
 	private static final String XPATH_BUTTON_FAVORITOS_FOR_ADD = XPATH_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'outline')]]";
 	private static final String XPATH_BUTTON_FAVORITOS_FOR_REMOVE = XPATH_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'fill')]]";
@@ -76,6 +76,11 @@ public class PageFichaDevice extends PageFicha {
 		return state(Present, xpathFichaRef).wait(seconds).check();
 	}
 
+	@Override
+	public boolean isVisibleBolsaButton(int seconds) {
+		return state(Visible, XPATH_ALTA_BOLSA_BUTTON).wait(seconds).check();
+	}
+	
 	@Override
 	public void clickAnadirBolsaButtonAndWait() {
 		click(XPATH_ALTA_BOLSA_BUTTON).waitLink(2).type(javascript).exec();

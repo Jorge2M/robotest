@@ -42,6 +42,11 @@ public class PageFichaDesktop extends PageFicha {
 	}
 
 	@Override
+	public boolean isVisibleBolsaButton(int seconds) {
+		return secBolsaButtonAndLinks.isVisibleBolsaButton(seconds);
+	}
+	
+	@Override
 	public void clickAnadirBolsaButtonAndWait() {
 		secBolsaButtonAndLinks.clickAnadirBolsaButtonAndWait();
 	}

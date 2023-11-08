@@ -18,7 +18,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHead
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecCrossSelling;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecSubMenusGallery;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery.TypeLinkInfo;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraMostFrequent;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.data.Talla;
@@ -548,7 +548,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) {
-		var secCabecera = new SecCabeceraMostFrequent();
+		var secCabecera = SecCabecera.make();
 		var secFiltros = new SecFiltrosDesktopKondo();
 		secCabecera.bring(BringTo.BACKGROUND);
 		secFiltros.bring(BringTo.BACKGROUND);
