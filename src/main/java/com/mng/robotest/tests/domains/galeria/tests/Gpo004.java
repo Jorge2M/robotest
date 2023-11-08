@@ -7,7 +7,6 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.steps.DataForScrollStep;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.testslegacy.data.Color;
-import com.mng.robotest.testslegacy.pageobject.utils.DataScroll;
 
 import static com.mng.robotest.tests.conf.AppEcom.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion.*;
@@ -68,7 +67,7 @@ public class Gpo004 extends TestBase {
 
 	private int scrollToLastAndSelectArticle() throws Exception {
 		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
-		DataScroll datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
+		var datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
 		pageGaleriaSteps.selectArticulo(80);
 		return datosScrollFinalGaleria.getArticulosTotalesPagina();
 	}

@@ -33,7 +33,7 @@ public class Ava001 extends TestBase {
 		this.dataTest.setPais(pais);
 		this.dataTest.setIdioma(idioma);
 		this.countryId = pais.getCodigoAlf();
-		this.lang = idioma.getAcceso();
+		this.lang = idioma.getCodigo().name();
 	}
 
 	@Override
