@@ -71,10 +71,11 @@ public class Ava001 extends TestBase {
     }	
     
     private List<String> getRandomUrlProductsPage() throws Exception {
+    	String baseUrl = inputParamsSuite.getDnsUrlAcceso(); 
 		var getterProducts = new GetterProducts.Builder(countryId, app, driver).build();
 		var products = getterProducts.getAll().stream()
 			.map(GarmentCatalog::getColors).flatMap(List::stream)
-			.map(c ->  "https://shop.mango.com" + c.getLinkAnchor())
+			.map(c -> baseUrl + c.getLinkAnchor())
 			.toList();
 		
 		var productsRandom = new ArrayList<>(products);
@@ -82,17 +83,18 @@ public class Ava001 extends TestBase {
 		return productsRandom.subList(0, MAX_FICHAS);
     }
     
-    private void checkCatalogsAvailable() {
+    private void checkCatalogsAvailable() throws Exception {
     	var pageGaleriaSteps = new PageGaleriaSteps();
         for (var urlCatalog : retrieveRandomUrlCatalogsFromMenu()) {
            	pageGaleriaSteps.loadCatalog(urlCatalog);
         }
     }    
     
-    private List<String> retrieveRandomUrlCatalogsFromMenu() {
+    private List<String> retrieveRandomUrlCatalogsFromMenu() throws Exception {
+    	String baseUrl = inputParamsSuite.getDnsUrlAcceso(); 
         var client = HttpClient.newBuilder().build();
         var request = HttpRequest.newBuilder()
-            .uri(URI.create("https://shop.mango.com/services/menu/v1.0/shop/desktop/" + countryId + "/" + lang + "?isMobile=" + channel.isDevice()))
+            .uri(URI.create(baseUrl + "/services/menu/v1.0/shop/desktop/" + countryId + "/" + lang + "?isMobile=" + channel.isDevice()))
             .build();
 
         try {
@@ -107,7 +109,9 @@ public class Ava001 extends TestBase {
         }
     }    
 	
-    private void collectLinks(JsonArray jsonArray, boolean first, List<String> allLinks) {
+    private void collectLinks(JsonArray jsonArray, boolean first, List<String> allLinks) 
+    		throws Exception {
+    	String baseUrl = inputParamsSuite.getDnsUrlAcceso(); 
         for (int i = 0; i < jsonArray.size(); i++) {
             var jsonObject = jsonArray.get(i).getAsJsonObject();
             if (!first) {
@@ -115,7 +119,7 @@ public class Ava001 extends TestBase {
             	if (jsonLink!=null && !jsonLink.isJsonNull() &&
             		!jsonLink.getAsString().contains("edit") && 
             		!jsonLink.getAsString().contains("live-shopping")) {
-                    allLinks.add("https://shop.mango.com" + jsonLink.getAsString());
+                    allLinks.add(baseUrl + jsonLink.getAsString());
             	}
             }
             if (jsonObject.has("menus")) {

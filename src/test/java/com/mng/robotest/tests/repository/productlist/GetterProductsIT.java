@@ -25,7 +25,7 @@ public class GetterProductsIT {
 	
 	private static GetterProducts getterProducts;
 	private static GetterProducts getterProductsAndCanonicalData;
-	private static final int numProducts = 8;
+	private static final int numProducts = 7;
 	private static final Pais espana = PaisGetter.from(PaisShop.ESPANA);	
 	
 	private static final Builder getterProductsBuilder = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigoAlf(), AppEcom.shop, null)
