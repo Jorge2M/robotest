@@ -75,7 +75,7 @@ public class PageFichaSteps extends StepBase {
     	expected="Aparece un catálogo con artículos")    		
     public void loadFicha(String urlFicha) {
     	driver.get(urlFicha);
-    	checkIsFicha(3);
+    	checkIsFicha(5);
     	checkFichaButtons();
     }	
 	
@@ -94,7 +94,7 @@ public class PageFichaSteps extends StepBase {
 
 		checks.add(
 			"Aparece el botón de <b>❤</b> para añadir a favoritos",
-			pageFicha.isVisibleButtonAnadirFavoritos(0));
+			pageFicha.isVisibleButtonAnadirFavoritos(seconds));
 		
     	return checks;
     }
