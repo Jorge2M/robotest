@@ -1,5 +1,6 @@
 package com.mng.robotest.tests.domains.availability.tests;
 
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import com.mng.robotest.tests.domains.base.TestBase;
@@ -70,19 +71,6 @@ public class Ava001 extends TestBase {
         }
     }	
     
-    private List<String> getRandomUrlProductsPage() throws Exception {
-    	String baseUrl = inputParamsSuite.getDnsUrlAcceso(); 
-		var getterProducts = new GetterProducts.Builder(countryId, app, driver).build();
-		var products = getterProducts.getAll().stream()
-			.map(GarmentCatalog::getColors).flatMap(List::stream)
-			.map(c -> baseUrl + c.getLinkAnchor())
-			.toList();
-		
-		var productsRandom = new ArrayList<>(products);
-		Collections.shuffle(productsRandom);
-		return productsRandom.subList(0, MAX_FICHAS);
-    }
-    
     private void checkCatalogsAvailable() throws Exception {
     	var pageGaleriaSteps = new PageGaleriaSteps();
         for (var urlCatalog : retrieveRandomUrlCatalogsFromMenu()) {
@@ -104,11 +92,24 @@ public class Ava001 extends TestBase {
             collectLinks(json, true, allLinks);
             return allLinks.subList(0, MAX_CATALOGS);
         } catch (Exception e) {
-            e.printStackTrace();
+			Log4jTM.getLogger().error("Problem getting url catalogs {}", e.getMessage());
             return new ArrayList<>();
         }
     }    
-	
+
+    private List<String> getRandomUrlProductsPage() throws Exception {
+    	String baseUrl = inputParamsSuite.getDnsUrlAcceso(); 
+		var getterProducts = new GetterProducts.Builder(countryId, app, driver).build();
+		var products = getterProducts.getAll().stream()
+			.map(GarmentCatalog::getColors).flatMap(List::stream)
+			.map(c -> baseUrl + c.getLinkAnchor())
+			.toList();
+		
+		var productsRandom = new ArrayList<>(products);
+		Collections.shuffle(productsRandom);
+		return productsRandom.subList(0, MAX_FICHAS);
+    }
+    
     private void collectLinks(JsonArray jsonArray, boolean first, List<String> allLinks) 
     		throws Exception {
     	String baseUrl = inputParamsSuite.getDnsUrlAcceso(); 
@@ -127,7 +128,6 @@ public class Ava001 extends TestBase {
             }
         }
     }
-
 	
 //	private void checkLines() throws Exception {
 //		for (var linea : dataTest.getLineas()) {

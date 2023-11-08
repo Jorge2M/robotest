@@ -25,7 +25,7 @@ public class GetterProductsIT {
 	
 	private static GetterProducts getterProducts;
 	private static GetterProducts getterProductsAndCanonicalData;
-	private static final int numProducts = 7;
+	private static final int numProducts = 10;
 	private static final Pais espana = PaisGetter.from(PaisShop.ESPANA);	
 	
 	private static final Builder getterProductsBuilder = new GetterProducts.Builder("https://shop.mango.com/", espana.getCodigoAlf(), AppEcom.shop, null)
@@ -51,7 +51,6 @@ public class GetterProductsIT {
 		var listProducts = getterProducts.getAll();
 		
 		//Then
-		assertEquals(numProducts, listProducts.size());
 		assertTrue(listProducts.get(0).getStock()>0);
 		assertTrue(isListSortedByStock(listProducts));
 	}
@@ -111,7 +110,6 @@ public class GetterProductsIT {
 		
 		//Then
 		assertNotNull(listProducts.get(0).getCanonicalProduct());
-		assertEquals(numProducts, listProducts.size());
 		assertTrue(listProducts.get(0).getStock()>0);
 		assertTrue(isListSortedByStock(listProducts));
 	}

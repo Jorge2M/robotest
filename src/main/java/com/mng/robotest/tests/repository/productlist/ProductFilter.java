@@ -43,10 +43,10 @@ public class ProductFilter {
 	
 	public Optional<GarmentCatalog> getOneFiltered(List<FilterType> filters, SortBy sortBy) 
 			throws Exception {
-		List<GarmentCatalog> listFiltered = getAll(sortBy);
+		var listFiltered = getAll(sortBy);
 		for (int i=0; i<filters.size(); i++) {
-			FilterType filterType = filters.get(i);
-			Filter filter = factoryFilter(filterType);
+			var filterType = filters.get(i);
+			var filter = factoryFilter(filterType);
 			if (i==filters.size()-1) { //Último filtro
 				return filter.getOne(listFiltered);
 			}
@@ -61,7 +61,7 @@ public class ProductFilter {
 	public List<GarmentCatalog> getListFiltered(List<FilterType> filters, SortBy sortBy) throws Exception {
 		var listFiltered = getAll(sortBy);
 		for (var filterType : filters) {
-			Filter filter = factoryFilter(filterType);
+			var filter = factoryFilter(filterType);
 			listFiltered = filter.filter(listFiltered);
 			if (listFiltered==null || listFiltered.isEmpty()) {
 				return listFiltered;

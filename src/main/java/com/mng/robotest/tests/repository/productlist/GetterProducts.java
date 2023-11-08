@@ -483,10 +483,9 @@ public class GetterProducts {
 			return this;
 		}
 		public GetterProducts build() throws Exception {
-			//TODO eliminar cuando esos 2 productos funcionen correctamente
-	        List<FilterType> filtersNew = new ArrayList<>(filters);
-	        filtersNew.add(FilterType.BLACK_LIST);
-	        filters = filtersNew;
+//	        List<FilterType> filtersNew = new ArrayList<>(filters);
+//	        filtersNew.add(FilterType.BLACK_LIST);
+//	        filters = filtersNew;
 			
 			return (
 				new GetterProducts(
