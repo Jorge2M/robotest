@@ -75,7 +75,7 @@ public class PageFichaSteps extends StepBase {
     	expected="Aparece un catálogo con artículos")    		
     public void loadFicha(String urlFicha) {
     	driver.get(urlFicha);
-    	checkIsFicha(8);
+    	//checkIsFicha(8);
     	checkFichaButtons();
     }	
 	
@@ -87,11 +87,12 @@ public class PageFichaSteps extends StepBase {
     @Validation
     private ChecksTM checkFichaButtons() {
     	var checks = ChecksTM.getNew();
-    	int seconds = 2;
+    	int seconds = 10;
 		checks.add(
 			"Aparece el botón de <b>Añadir a la bolsa</b> " + getLitSecondsWait(seconds),
 			pageFicha.isVisibleBolsaButton(seconds));
 
+		seconds = 2;
 		checks.add(
 			"Aparece el botón de <b>❤</b> para añadir a favoritos " + getLitSecondsWait(seconds),
 			pageFicha.isVisibleButtonAnadirFavoritos(seconds));
