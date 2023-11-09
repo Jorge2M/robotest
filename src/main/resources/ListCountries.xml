@@ -2089,7 +2089,7 @@ where
 <pais nombre_pais="Sweden" codigo="030">
 <codigo_pais>030</codigo_pais>
 <codigo_alf>SE</codigo_alf>
-<idioma acceso="se">SE</idioma>
+<idioma acceso="se">SV</idioma>
 <idioma acceso="se-en">IN</idioma>
 <rgpd>S</rgpd>
 <loyalty>N</loyalty>
@@ -4476,7 +4476,7 @@ where
 <pais nombre_pais="대한민국" codigo="728"> <!-- Corea del Sur -->
 <codigo_pais>728</codigo_pais>
 <codigo_alf>KR</codigo_alf>
-<idioma acceso="kr-ko">KR</idioma>
+<idioma acceso="kr">KO</idioma>
 <idioma acceso="kr-en">IN</idioma>
 <paistop>S</paistop>
 <!-- No es posible checkear la dirección con carácteres no-latinos porque en este país funciona mediante "Find Address" -->

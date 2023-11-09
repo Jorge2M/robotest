@@ -56,7 +56,7 @@ public class PageRegistroInitialShop extends PageBase {
 			return "Osnovne informacije o zaštiti podataka";
 		case JA: //"日本"
 			return "データ保護に関する基本情報";
-		case KR: //"한국어"
+		case KO: //"한국어"
 			return "데이터 보호에 대한 기본 정보";
 		case EL: //"Ελληνικά" (Griego)
 			return "Βασικές πληροφορίες περί προστασίας δεδομένων";
@@ -71,7 +71,7 @@ public class PageRegistroInitialShop extends PageBase {
 		case RO: //"Româna"
 			return "Informații de bază privind protecția datelor personale";
 		case RU: //"Русский"
-		case SE: //"Svenska" (Sueco)
+		case SV: //"Svenska" (Sueco)
 			return "Grundläggande information om uppgiftsskydd";
 		case TH: //"ไทย" (Tailandés)
 			return "??????";
