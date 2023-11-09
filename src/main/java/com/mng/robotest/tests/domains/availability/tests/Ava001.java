@@ -23,6 +23,7 @@ import java.util.List;
 public class Ava001 extends TestBase {
 	
 //	private static final List<LineaType> LINES_TO_CHECK = Arrays.asList(SHE, HE, NINA, TEEN, HOME);
+	//TODO 
 	private static final int MAX_CATALOGS = 10;
 	private static final int MAX_FICHAS = 4;
 	
