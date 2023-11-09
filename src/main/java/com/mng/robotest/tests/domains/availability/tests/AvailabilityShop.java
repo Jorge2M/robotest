@@ -27,7 +27,7 @@ public class AvailabilityShop implements Serializable {
 	
 	@Test (
 		groups={"Availability", "Canal:all_App:shop,outlet"}, 
-		description="Acceso al país y chequeo de la disponibilidad de galerías")
+		description="Acceso al país y chequeo disponibilidad galerías y fichas")
 	public void AVA001() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
 		new Ava001(pais, idioma).execute();
