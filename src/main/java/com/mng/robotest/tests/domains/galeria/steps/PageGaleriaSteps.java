@@ -60,7 +60,7 @@ public class PageGaleriaSteps extends StepBase {
     	expected="Aparece un catálogo con artículos")    		
     public void loadCatalog(String urlCatalog) {
     	driver.get(urlCatalog);
-    	checkGaleriaAfeterSelectMenu();
+    	checkArticleGaleriaLoaded();
     }
 	
 	@Step (
@@ -716,10 +716,14 @@ public class PageGaleriaSteps extends StepBase {
 		return checks;
 	}
 
+	public void checkGaleriaAfeterSelectMenu() {
+		checkArticleGaleriaLoaded();
+		checkHearthIconVisible();
+	}
+	
 	@Validation
-	public ChecksTM checkGaleriaAfeterSelectMenu() {
+	public ChecksTM checkArticleGaleriaLoaded() {
 		var checks = ChecksTM.getNew();
-		
 		int secondsArticle = 8;
 		checks.add (
 			"Como mínimo se obtiene un artículo " + getLitSecondsWait(secondsArticle),
@@ -730,6 +734,13 @@ public class PageGaleriaSteps extends StepBase {
 			"Aparece la imagen del 1er artículo  " + getLitSecondsWait(secondsImage),
 			pageGaleria.isVisibleArticleUntil(1, secondsImage), Warn);
 		
+		return checks;
+	}
+	
+	
+	@Validation
+	public ChecksTM checkHearthIconVisible() {
+		var checks = ChecksTM.getNew();
 		if (app==AppEcom.shop) {
 			int secondsIcon = 2;
 			checks.add (
