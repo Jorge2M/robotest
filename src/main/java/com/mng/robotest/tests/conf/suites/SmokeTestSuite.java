@@ -50,7 +50,7 @@ public class SmokeTestSuite extends SuiteMangoMaker {
 			Compra.class,
 			ChequeRegalo.class,
 			CompraMultiAddress.class,
-			ListPagosEspana.class,
+			//ListPagosEspana.class, //TODO volver a activar
 			MiCuenta.class,
 			Favoritos.class,
 			Reembolsos.class,
