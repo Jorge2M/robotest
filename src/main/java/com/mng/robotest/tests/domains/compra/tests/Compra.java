@@ -22,7 +22,8 @@ public class Compra {
 
 	@Test (
 		groups={"Compra", "Checkout", "Multidireccion", "Canal:desktop_App:shop,outlet"}, alwaysRun=true,
-		description="[Usuario no registrado] Compra con cambio datos en dirección de envío y facturación en checkout")
+		description="[Usuario no registrado] Compra con cambio datos en dirección de envío y facturación en checkout",
+		retry=false)
 	public void COM003_Compra_y_CambioPais_Noreg_emailExist() throws Exception {
 		if (!new PageBase().isPRO()) {
 			new Com003().execute();

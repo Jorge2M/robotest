@@ -36,7 +36,8 @@ public class Galeria {
 
 	@Test (
 		groups={"Galeria", "Avisame", "Canal:desktop,mobile_App:shop,outlet"},
-		description="[Usuario registrado] Acceder a galería camisas. Forzar caso avisame en listado")
+		description="[Usuario registrado] Acceder a galería camisas. Forzar caso avisame en listado",
+		retry=false)
 	public void GPO007_Galeria_Camisas() throws Exception {
 		new Gpo007().execute();
 	}
