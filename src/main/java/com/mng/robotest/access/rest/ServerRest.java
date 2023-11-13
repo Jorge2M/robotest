@@ -67,7 +67,7 @@ public class ServerRest {
 		ResultCmdServer result = ServerCmdLine.parse(args);
 		if (result!=null && result.isOk()) {
 			var creatorSuiteRun = CreatorSuiteRunMango.getNew();
-			ServerRestTM serverRest = new ServerRestTM.Builder(creatorSuiteRun, Suites.class, AppEcom.class)
+			var serverRest = new ServerRestTM.Builder(creatorSuiteRun, Suites.class, AppEcom.class)
 				.restApi(RestApiMango.class)
 				.setWithParams(result)
 //				.portHttp(result.getPort())
