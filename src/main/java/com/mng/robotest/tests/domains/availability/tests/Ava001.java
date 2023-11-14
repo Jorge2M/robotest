@@ -65,8 +65,13 @@ public class Ava001 extends TestBase {
     private void checkFichasAvailable() throws Exception {
         var randomGarmentIds = getRandomUrlProductsPage();
         var pageFichaSteps = new PageFichaSteps();
-        for (String urlFicha : randomGarmentIds) {
-        	pageFichaSteps.loadFicha(urlFicha);
+        for (int i=0; i<randomGarmentIds.size(); i++) {
+        	String urlFicha = randomGarmentIds.get(i);
+        	if (i==0) {
+        		pageFichaSteps.loadFichaWithRetry(urlFicha);
+        	} else {
+        		pageFichaSteps.loadFicha(urlFicha);
+        	}
         }
     }	
     

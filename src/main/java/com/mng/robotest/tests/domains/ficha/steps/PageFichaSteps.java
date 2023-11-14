@@ -1,6 +1,7 @@
 package com.mng.robotest.tests.domains.ficha.steps;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -70,12 +71,23 @@ public class PageFichaSteps extends StepBase {
 		return checks;
 	}
 
+	public void loadFichaWithRetry(String urlFicha) {
+		boolean checkOk = loadFicha(urlFicha, State.Warn);
+		if (!checkOk) {
+			loadFicha(urlFicha, State.Defect);
+		}
+	}
+	
+	public void loadFicha(String urlFicha) {
+		loadFicha(urlFicha, State.Defect);
+	}
+	
     @Step(
     	description="Cargamos la <b>Ficha</b> <a href='#{urlFicha}'>#{urlFicha}</a>", 
     	expected="Aparece un catálogo con artículos")    		
-    public void loadFicha(String urlFicha) {
+    private boolean loadFicha(String urlFicha, State state) {
     	driver.get(urlFicha);
-    	checkFichaButtons(10);
+    	return checkFichaButtons(10, state).areAllChecksOvercomed();
     }	
 	
 	@Validation (description="Aparece la página de Ficha " + SECONDS_WAIT)
@@ -83,12 +95,14 @@ public class PageFichaSteps extends StepBase {
 		return pageFicha.isPageUntil(seconds);
 	}
 
-    @Validation(
-        description="Aparece el botón <b>Añadir a la bolsa</b> o el <b>❤</b> " + SECONDS_WAIT) 
-    private boolean checkFichaButtons(int seconds) {
-		return 
-			pageFicha.isVisibleBolsaButton(seconds) || 
-			pageFicha.isVisibleButtonAnadirFavoritos(seconds);
+    @Validation 
+    private ChecksTM checkFichaButtons(int seconds, State state) {
+    	var checks = ChecksTM.getNew();
+		checks.add(
+			"Aparece el botón <b>Añadir a la bolsa</b> o el <b>❤</b> " + getLitSecondsWait(seconds),				
+			pageFicha.isVisibleBolsaButton(seconds) || pageFicha.isVisibleButtonAnadirFavoritos(seconds),
+			state);
+		return checks;
     }
 	
 	@Validation
