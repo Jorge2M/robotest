@@ -13,7 +13,6 @@ import com.mng.robotest.tests.domains.transversal.browser.LocalStorageMango;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 
 public class PagePrehome extends PageBase implements PageFromFooter {
 
@@ -139,7 +138,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	
 	public void accesoShopViaPrehome() {
 		selecPaisIdiomaYAccede();
-		new ModalLoyaltyAfterAccess().closeModalIfVisible();
+//		new ModalLoyaltyAfterAccess().closeModalIfVisible();
 		if (channel.isDevice()) {
 			SecCabecera.make().closeSmartBannerIfExistsMobil();
 		}

@@ -88,30 +88,29 @@ public class GroupWeb extends PageBase {
 		this.group = group;
 	}
 
-	//TODO eliminar el OLD (header.subMenu) cuando suba la nueva versión a PRO (31-05-2023)
 	private static final String XPATH_GROUP_DEVICE = 
 			"//*[@data-testid[contains(.,'header.tabButton')] or " + 
 				"@data-testid[contains(.,'header.tabLink')] or " + 
-				"@data-testid[contains(.,'header.subMenu')] or " +
 				"@data-testid[contains(.,'menu.section')]]";
 	
 	private static final String XPATH_GROUP_VIEW_MORE_DEVICE = "//button[@data-testid[contains(.,'viewMore')]]";
 	private static final String XPATH_GROUP_DESKTOP = "//li[@data-testid[contains(.,'menu.section')]]";
 	private static final String TAG_GROUP = "@tag_group";
-	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP = 
-			"//ul[@data-testid[contains(.,'menu.section')]]/li/*[@data-testid[contains(.,'" + TAG_GROUP + "')]]/..";
-
-	//TODO eliminar el OLD cuando suba la nueva versión a PRO (31-05-2023)
-	private static final String XPATH_SUBMENU_DEVICE_OLD = "//div[@data-testid='header.subMenu']";
-	private static final String XPATH_SUBMENU_DEVICE_NEW = "//div[@data-testid='menu.subMenu']";
-
-	private String getSubmenuDevice() {
-		return "(" + XPATH_SUBMENU_DEVICE_OLD + " | " + XPATH_SUBMENU_DEVICE_NEW + ")";
-	}
-
 	
+	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP = 
+			"//ul[@data-testid[contains(.,'menu.section')]]" + 
+			"/li/*[@data-testid[contains(.,'" + TAG_GROUP + "')]]/..";
+	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP_GENESIS = //Génesis 14-11-23
+			"//li[@data-testid[contains(.,'" + TAG_GROUP + "')]]" + 
+			"/ul[@id[contains(.,'subMenuColumn3')]]" +  
+			"/li[@data-testid[contains(.,'" + TAG_GROUP + "')]]";
+	
+	private static final String XPATH_SUBMENU_DEVICE = "//div[@data-testid='menu.subMenu']";
+
 	private String getXPathGroupSelected() {
-		return getXPathGroup() + "//self::*[@aria-expanded='true']";
+		String groupOld = getXPathGroup() + "//self::*[@aria-expanded='true']";
+		String groupGenesis = getXPathGroup() + "/../self::*[@class[contains(.,'Submenu_selected')]]/button"; //Génesis (14-11-23)
+		return "(" + groupOld + " | " + groupGenesis + ")";
 	}
 	private String getXPathGroup() {
 		if (channel.isDevice()) {
@@ -139,13 +138,15 @@ public class GroupWeb extends PageBase {
 
 	private String getXPathSubmenu() {
 		if (channel.isDevice()) {
-			return getSubmenuDevice();
+			return XPATH_SUBMENU_DEVICE;
 		}
 		return getXPathSubmenuDesktop(); 
 	}
 	
 	private String getXPathSubmenuDesktop() {
-		return XPATH_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
+		String xpathSubmenu = XPATH_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
+		String xpathSubmenuGenesis = XPATH_SUBMENU_WITH_TAG_DESKTOP_GENESIS.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
+		return "(" + xpathSubmenu + " | " + xpathSubmenuGenesis + ")";
 	}
 	
 	public void click() {

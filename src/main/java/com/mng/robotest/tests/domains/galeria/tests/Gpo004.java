@@ -26,7 +26,7 @@ public class Gpo004 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		access();
+		quickAccess();
 		selectGaleryAndFilterByColor();
 		scrollToSecondPage();
 		if (!channel.isDevice()) {
@@ -68,7 +68,7 @@ public class Gpo004 extends TestBase {
 	private int scrollToLastAndSelectArticle() throws Exception {
 		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
 		var datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
-		pageGaleriaSteps.selectArticulo(80);
+		pageGaleriaSteps.selectArticulo(60);
 		return datosScrollFinalGaleria.getArticulosTotalesPagina();
 	}
 

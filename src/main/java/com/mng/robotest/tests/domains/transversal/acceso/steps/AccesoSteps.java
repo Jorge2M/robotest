@@ -38,13 +38,13 @@ public class AccesoSteps extends StepBase {
 	public void quickAccessCountry() throws Exception {
 		String urlBase = inputParamsSuite.getUrlBase();
 		String urlAccess = dataTest.getPais().getUrlAccess(urlBase);
-		quickAccess(urlAccess, dataTest.getPais());
+		quickAccess(urlAccess, dataTest.getPais(), dataTest.getIdioma());
 	}
 	
 	@Step (
-		description="Acceso a <b>#{pais.getNombrePais()}</b> a través de la URL <a href='#{urlAccess}'>#{urlAccess}</a>",
+		description="Acceso a <b style=\"color:brown;\">#{pais.getNombrePais() / #{idioma.getLiteral()}</b> a través de la URL <a href='#{urlAccess}'>#{urlAccess}</a>",
 		expected="el acceso es correcto")
-	private void quickAccess(String urlAccess, Pais pais) {
+	private void quickAccess(String urlAccess, Pais pais, IdiomaPais idioma) {
 		driver.get(urlAccess);
 	}
 	
@@ -139,8 +139,8 @@ public class AccesoSteps extends StepBase {
 	public void accessFromPreHome(boolean execValidacs, boolean acceptCookies) throws Exception {
 		var accesoFlows = new AccesoFlows();
 		accesoFlows.previousAccessShopSteps();
-		new PagePrehomeSteps().accessShopVisPreHome(execValidacs, acceptCookies);
-		accesoFlows.manageCookies(acceptCookies);
+		new PagePrehomeSteps().accessShopViaPreHome(execValidacs, acceptCookies);
+		accesoFlows.closeModalsPostAccessAndManageCookies(acceptCookies);
 	}
 
 	public void identificacionEnMango() {
@@ -182,7 +182,7 @@ public class AccesoSteps extends StepBase {
 	public void inputUrlAccountBajaAndAcceptCookiesInNewBrowser() throws URISyntaxException { 
 		TestMaker.renewDriverTestCase()
 			.get(inputParamsSuite.getDnsUrlAcceso() + "/es/account/baja");
-		new AccesoFlows().manageCookies(true);
+		new AccesoFlows().closeModalsPostAccessAndManageCookies(true);
 	}
 	
 	@Step (

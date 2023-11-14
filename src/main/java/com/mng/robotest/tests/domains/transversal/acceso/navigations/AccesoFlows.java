@@ -30,7 +30,9 @@ import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalActPoliticaPrivacidad;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalCambioPais;
+import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterLogin;
+import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalNewsLetterAfterAccess;
 
 public class AccesoFlows extends StepBase {
 
@@ -110,6 +112,12 @@ public class AccesoFlows extends StepBase {
 		new ModalCambioPais().closeModalIfVisible();
 		new ModalActPoliticaPrivacidad().clickOkIfVisible();
 		new ModalLoyaltyAfterLogin().closeModalIfVisible();
+	}
+	public void closeModalsPostAccessAndManageCookies(boolean acceptCookies) {
+		new ModalLoyaltyAfterAccess().closeModalIfVisible();
+		new ModalNewsLetterAfterAccess().closeModalIfVisible();
+		new ModalCambioPais().closeModalIfVisible();
+		manageCookies(acceptCookies);
 	}
 	
 	private void clickIniciarSesionAndWait() {

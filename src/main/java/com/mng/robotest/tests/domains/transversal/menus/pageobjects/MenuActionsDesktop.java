@@ -22,6 +22,17 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}
 	
 	private String getXPathMenuStandard() {
+		String xpathMenuActual = getXPathMenuStandardActual();
+		String xpathMenuGenesis = getXPathMenuStandardGenesis();
+		return "(" + xpathMenuActual + " | " +xpathMenuGenesis + ")";
+	}
+	private String getXPathMenuAlternative() {
+		String xpathMenuActual = getXPathMenuAlternativeActual();
+		String xpathMenuGenesis = getXPathMenuAlternativeGenesis();
+		return "(" + xpathMenuActual + " | " +xpathMenuGenesis + ")";
+	}
+	
+	private String getXPathMenuStandardGenesis() {
 		String idLinea = menu.getLinea().name().toLowerCase();
 		if (menu.getSublinea()!=null) {
 			idLinea = menu.getSublinea().getId(app);
@@ -29,7 +40,27 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 			
 		String nameMenu = menu.getMenu().toLowerCase();
 		String xpath =  
-			"//ul/li//a[@data-testid='menu.family." + 
+			"//ul/li[@class[contains(.,'Submenu_selected')]]" + 
+			"//a[@data-testid='menu.family." + 
+			nameMenu + "_" + idLinea + ".link'";
+		
+		if (nameMenu.contains(" ")) {
+			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
+			xpath+=" or @data-testid='menu.family." + menuIni + "_" + idLinea + ".link'"; 
+		}
+		xpath+="]";
+		return xpath;		
+	}
+	
+	private String getXPathMenuStandardActual() {
+		String idLinea = menu.getLinea().name().toLowerCase();
+		if (menu.getSublinea()!=null) {
+			idLinea = menu.getSublinea().getId(app);
+		}
+			
+		String nameMenu = menu.getMenu().toLowerCase();
+		String xpath =  
+			"//ul[@data-family]/li//a[@data-testid='menu.family." + 
 			nameMenu + "_" + idLinea + ".link'";
 		
 		if (nameMenu.contains(" ")) {
@@ -40,9 +71,15 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 		return xpath;
 	}	
 	
-	private String getXPathMenuAlternative() {
+	private String getXPathMenuAlternativeGenesis() {
 		return 
-			"//ul/li//a[" + 
+			"//ul/li[@class[contains(.,'Submenu_selected')]]" + 
+			"//a[@data-testid[contains(.,'menu.family.')]]" +
+			"//self::*[text()[contains(.,'" + menu.getMenu() + "')]]";		
+	}
+	private String getXPathMenuAlternativeActual() {
+		return 
+			"//ul[@data-family]/li//a[" + 
 			"@data-testid[contains(.,'menu.family.')]]" +
 		    "//self::*[text()[contains(.,'" + menu.getMenu() + "')]]";
 	}	

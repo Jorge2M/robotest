@@ -70,8 +70,8 @@ public class PagePrehomeSteps extends StepBase {
 		pagePrehome.selecionIdiomaAndEnter();
 	}
 
-	public void accessShopVisPreHome(boolean execValidacs, boolean acceptCookies) throws Exception {
-		accessShopVisPreHome(dataTest.getPais(), dataTest.getIdioma(), execValidacs, acceptCookies);
+	public void accessShopViaPreHome(boolean execValidacs, boolean acceptCookies) throws Exception {
+		accessShopViaPreHome(dataTest.getPais(), dataTest.getIdioma(), execValidacs, acceptCookies);
 	}
 	
 	@Step (
@@ -79,7 +79,7 @@ public class PagePrehomeSteps extends StepBase {
 			"Acceso <b style=\"color:brown;\">#{pais.getNombrePais()} / #{idioma.getLiteral()}</b> desde la PreHome",
 		expected="Se accede correctamente al pais / idioma seleccionados",
 		saveNettraffic=SaveWhen.Always)
-	private void accessShopVisPreHome(Pais pais, IdiomaPais idioma, boolean execValidacs, boolean acceptCookies) throws Exception {
+	private void accessShopViaPreHome(Pais pais, IdiomaPais idioma, boolean execValidacs, boolean acceptCookies) throws Exception {
 		replaceStepDescription(TAG_PAIS, pais.getNombrePais());
 		replaceStepDescription(TAG_IDIOMA, idioma.getLiteral());
 		
