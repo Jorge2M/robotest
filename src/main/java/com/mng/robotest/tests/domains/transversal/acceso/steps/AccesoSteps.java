@@ -42,7 +42,7 @@ public class AccesoSteps extends StepBase {
 	}
 	
 	@Step (
-		description="Acceso a <b style=\"color:brown;\">#{pais.getNombrePais() / #{idioma.getLiteral()}</b> a través de la URL <a href='#{urlAccess}'>#{urlAccess}</a>",
+		description="Acceso <b style=\"color:brown;\">#{pais.getNombrePais()} / #{idioma.getLiteral()}</b> a través de la URL <a href='#{urlAccess}'>#{urlAccess}</a>",
 		expected="el acceso es correcto")
 	private void quickAccess(String urlAccess, Pais pais, IdiomaPais idioma) {
 		driver.get(urlAccess);
