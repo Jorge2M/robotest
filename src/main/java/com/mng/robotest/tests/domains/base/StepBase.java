@@ -64,7 +64,7 @@ public abstract class StepBase extends PageBase {
 	
 	protected void quickAccess() throws Exception {
 		var accesoFlows = new AccesoFlows();
-		//new AccesoSteps().quickAccessCountry(); //TODO reactivar!!!
+		new AccesoSteps().quickAccessCountry();
 		accesoFlows.previousAccessShopSteps();
 		accesoFlows.closeModalsPostAccessAndManageCookies(true);
 	}

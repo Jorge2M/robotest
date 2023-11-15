@@ -105,7 +105,8 @@ public class GroupWeb extends PageBase {
 			"/ul[@id[contains(.,'subMenuColumn3')]]" +  
 			"/li[@data-testid[contains(.,'" + TAG_GROUP + "')]]";
 	
-	private static final String XPATH_SUBMENU_DEVICE = "//div[@data-testid='menu.subMenu']";
+	private static final String XPATH_SUBMENU_DEVICE = "//div[@id='subMenuPortalContainer']//div[@data-testid='menu.subMenu']";
+	private static final String XPATH_SUBMENU_DEVICE_GENESIS = "//li[@class[contains(.,'Submenu_selected')]]//div[@data-testid='menu.subMenu']";
 
 	private String getXPathGroupSelected() {
 		String groupOld = getXPathGroup() + "//self::*[@aria-expanded='true']";
@@ -138,9 +139,15 @@ public class GroupWeb extends PageBase {
 
 	private String getXPathSubmenu() {
 		if (channel.isDevice()) {
-			return XPATH_SUBMENU_DEVICE;
+			return getXPathSubmenuDevice();
 		}
 		return getXPathSubmenuDesktop(); 
+	}
+	
+	private String getXPathSubmenuDevice() {
+		String xpathSubmenu = XPATH_SUBMENU_DEVICE;
+		String xpathSubmenuGenesis = XPATH_SUBMENU_DEVICE_GENESIS; 
+		return "(" + xpathSubmenu + " | " + xpathSubmenuGenesis + ")";
 	}
 	
 	private String getXPathSubmenuDesktop() {

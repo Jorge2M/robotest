@@ -12,14 +12,19 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 
 	private final MenuWeb menu;
 	
-	//TODO eliminar el OLD cuando suba la nueva versión a PRO (31-05-2023)
-	private String getXPathMenu() {
-		return "(" + 
-				getXPathMenu("header.subMenu.item", "") + " | " + 
-				getXPathMenu("menu.family", ".link") + ")";
+	public String getXPathMenu() {
+		return "(" + getXPathMenuActual() + " | " + getXPathMenuGenesis() + ")";
+	}
+	private String getXPathMenuActual() {
+		return "//div[@id='subMenuPortalContainer']" +  getXPathMenuBase();
+	}
+	private String getXPathMenuGenesis() {
+		return "//li[@class[contains(.,'Submenu_selected')]]" + getXPathMenuBase();
 	}
 	
-	private String getXPathMenu(String dataTestid, String sufix) {
+	private String getXPathMenuBase() {
+		String dataTestid = "menu.family";
+		String sufix = "link";
 		String idLinea = menu.getLinea().name().toLowerCase();
 		if (menu.getSublinea()!=null) {
 			idLinea = menu.getSublinea().getId(app);
