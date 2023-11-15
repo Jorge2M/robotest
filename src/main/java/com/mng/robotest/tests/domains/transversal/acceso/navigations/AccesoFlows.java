@@ -114,10 +114,10 @@ public class AccesoFlows extends StepBase {
 		new ModalLoyaltyAfterLogin().closeModalIfVisible();
 	}
 	public void closeModalsPostAccessAndManageCookies(boolean acceptCookies) {
+		manageCookies(acceptCookies);
 		new ModalLoyaltyAfterAccess().closeModalIfVisible();
 		new ModalNewsLetterAfterAccess().closeModalIfVisible();
 		new ModalCambioPais().closeModalIfVisible();
-		manageCookies(acceptCookies);
 	}
 	
 	private void clickIniciarSesionAndWait() {

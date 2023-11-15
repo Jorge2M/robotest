@@ -160,10 +160,17 @@ public class LineaWeb extends PageBase implements LineaActions {
 	@Override
 	public void hoverLinea() {
 		lineaActions.hoverLinea();
-		if (!lineaActions.isLineaSelected(1)) {
+		if (!isLineaAvailable(1)) {
 			lineaActions.hoverLinea();
 		}
 	}
+	private boolean isLineaAvailable(int seconds) {
+		if (channel.isDevice()) {
+			return lineaActions.isLineaPresent(seconds);
+		}
+		return lineaActions.isLineaSelected(seconds);
+	}
+	
 	@Override
 	public void hoverSublinea() {
 		for (int i=0; i<3; i++) {
