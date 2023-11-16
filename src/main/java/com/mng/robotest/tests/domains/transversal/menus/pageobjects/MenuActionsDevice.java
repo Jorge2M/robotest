@@ -24,7 +24,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	
 	private String getXPathMenuBase() {
 		String dataTestid = "menu.family";
-		String sufix = "link";
+		String sufix = ".link";
 		String idLinea = menu.getLinea().name().toLowerCase();
 		if (menu.getSublinea()!=null) {
 			idLinea = menu.getSublinea().getId(app);
