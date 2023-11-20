@@ -128,9 +128,9 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373"></pago>
-<pago 
+<!-- <pago 
 	type="Sofort" tiendas="shop,outlet" empleado="n"
-	nombre="SOFORTÜBERWEISUNG" namefilter="SOFORT" testpasarela='s' testpago='s' paissofort='AT' bankcode='00000' usrsofort='88888888' passsofort='88888888' tansofort='12345'></pago>
+	nombre="SOFORTÜBERWEISUNG" namefilter="SOFORT" testpasarela='s' testpago='s' paissofort='AT' bankcode='00000' usrsofort='88888888' passsofort='88888888' tansofort='12345'></pago>-->
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
@@ -697,9 +697,9 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373"></pago>
-<pago 
+<!-- <pago 
 	type="Sofort" tiendas="shop,outlet" empleado="n"
-	nombre="SOFORTÜBERWEISUNG" namefilter="SOFORT" testpasarela='s' testpago='s' paissofort='DE' bankcode='88888888' usrsofort='88888888' passsofort='88888888' tansofort='12345'></pago>
+	nombre="SOFORTÜBERWEISUNG" namefilter="SOFORT" testpasarela='s' testpago='s' paissofort='DE' bankcode='88888888' usrsofort='88888888' passsofort='88888888' tansofort='12345'></pago>-->
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
@@ -1565,9 +1565,9 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
-<pago 
+<!-- <pago 
 	type="Multibanco" tiendas="shop,outlet" empleado="n"
-	nombre="MULTIBANCO" testpasarela='s' testpago='s'></pago>
+	nombre="MULTIBANCO" testpasarela='s' testpago='s'></pago>-->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002" mescad="03" anycad="2030" cvc="7373"></pago>
@@ -2962,9 +2962,9 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="DINERS" testpasarela='s'></pago>
-<pago 
+<!-- <pago 
 	type="KlarnaUK" tiendas="shop,outlet"
-	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna='23.04.1974'></pago>
+	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna='23.04.1974'></pago>-->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="DISCOVER" testpasarela='s'></pago>

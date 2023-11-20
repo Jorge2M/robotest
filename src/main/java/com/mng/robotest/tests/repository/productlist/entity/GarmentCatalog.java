@@ -269,8 +269,8 @@ public class GarmentCatalog {
 		if (canonicalProduct==null) {
 			return listArticles;
 		}
-		for (EntityColor color : canonicalProduct.getColors()) {
-			for (EntitySize size : color.getSizes()) {
+		for (var color : canonicalProduct.getColors()) {
+			for (var size : color.getSizes()) {
 				var stockDetails = size.getStockDetails();
 				if (stockDetails!=null && 
 					almacen.compareTo(stockDetails.get(0).getWarehouse())==0) { 
@@ -310,12 +310,12 @@ public class GarmentCatalog {
 		Color colorMaintain = articleMaintain.getColor();
 		Size sizeMaintain = colorMaintain.getSizeWithMoreStock();
 
-		List<EntityColor> listFiltered = canonicalProduct.getColors().stream()
+		var listFiltered = canonicalProduct.getColors().stream()
 				.filter(c -> c.getId().compareTo(colorMaintain.getId())==0)
 				.toList();
 		canonicalProduct.setColors(listFiltered);
 		
-		EntityColor color = canonicalProduct.getColors().get(0);
+		var color = canonicalProduct.getColors().get(0);
 		color.setSizes(color.getSizes().stream()
 				.filter(s -> s.getId().compareTo(String.valueOf(sizeMaintain.getId()))==0)
 				.toList());

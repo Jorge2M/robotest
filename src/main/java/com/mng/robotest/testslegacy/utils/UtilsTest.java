@@ -1,6 +1,7 @@
 package com.mng.robotest.testslegacy.utils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.text.SimpleDateFormat;
@@ -158,28 +159,41 @@ public class UtilsTest {
 	
 	public static Pair<Article, Article> getTwoArticlesFromDistinctWarehouses(Pais pais, AppEcom app) throws Exception {
 		var listGarments = getProductFromApi(pais, app);
-		var garment1 = listGarments.get(0);
-		garment1.removeArticlesWithoutMaxStock();
-		String almacen1 = garment1.getAlmacenFirstArticle();
+		var garment1Opt = getGarmentAlmacenFirstArticleNotNull(listGarments);
 		GarmentCatalog garment2 = null;
-		for (var garment : listGarments) {
-			if (garment!=garment1) {
-				garment.removeArticlesAlmacen(almacen1);
-				if (!garment.getColors().isEmpty() && garment.isAnyArticleWithStock()) {
-					garment2 = garment;
-					break;
+		if (garment1Opt.isPresent()) {
+			String almacen1 = "";
+			for (var garment : listGarments) {
+				if (garment!=garment1Opt.get()) {
+					almacen1 = garment.getAlmacenFirstArticle();
+					garment.removeArticlesAlmacen(almacen1);
+					if (!garment.getColors().isEmpty() && garment.isAnyArticleWithStock()) {
+						garment2 = garment;
+						break;
+					}
 				}
 			}
-		}
-		
-		if (garment2==null) {
-			throw new NotFoundException("Not found article of warehouse <> " + almacen1);
+			if (garment2==null) {
+				throw new NotFoundException("Not found article of warehouse <> " + almacen1);
+			}
+		} else {
+			throw new NotFoundException("Not found article of warehouse with stock not null");
 		}
 		
 		return Pair.of(
-				Article.getArticleForTest(garment1), 
+				Article.getArticleForTest(garment1Opt.get()), 
 				Article.getArticleForTest(garment2));
 	}	
+	
+	private static Optional<GarmentCatalog> getGarmentAlmacenFirstArticleNotNull(List<GarmentCatalog> listGarments) {
+		for (var garment : listGarments) {
+			garment.removeArticlesWithoutMaxStock();
+			if (garment.getAlmacenFirstArticle()!=null) {
+				return Optional.of(garment);
+			}
+		}
+		return Optional.empty();
+	}
 	
 	private static List<GarmentCatalog> getProductFromApi(Pais pais, AppEcom app) throws Exception {
 		var getterProducts = new GetterProducts.Builder(pais.getCodigoAlf(), app, null)
