@@ -51,9 +51,9 @@ public class Fav002 extends TestBase {
 			clickMenu("Vestidos");
 		} else {
 			clickMenu(new MenuWeb
-					.Builder("Toallas")
-					.linea(HOME)
-					.group(BANO).build());
+				.Builder("Toallas")
+				.linea(HOME)
+				.group(BANO).build());
 		}
 		pageGaleriaSteps.selectArticulo(1);
 	}	

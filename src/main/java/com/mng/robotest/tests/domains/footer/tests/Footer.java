@@ -10,4 +10,5 @@ public class Footer {
 	public void FOO001_Menu() throws Exception {
 		new Foo001().execute();
 	}
+
 }

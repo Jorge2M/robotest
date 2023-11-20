@@ -7,8 +7,8 @@ import com.mng.robotest.tests.domains.base.PageBase;
 public class SectionCookies extends PageBase {
 
 	private static final String XPATH_WRAPPER = "//micro-frontend[@id='cookies']";
-	private static final String XPATH_SET_COOKIES_BUTTON = XPATH_WRAPPER + "//button[1]";
-	private static final String XPATH_ACCEPT_BUTTON = XPATH_WRAPPER + "//button[2]";
+	private static final String XPATH_SET_COOKIES_BUTTON = XPATH_WRAPPER + "//button/span/../../button[1]";
+	private static final String XPATH_ACCEPT_BUTTON = XPATH_WRAPPER + "//button/span/../../button[2]";
 	
 	//Currently (14-11-23) only associated with the new menus in Genesis (https://www.pre.mangooutlet.com/es/es)
 	//TODO si con Genesis podemos aprovechar los class habrá que cambiar esto

@@ -214,17 +214,16 @@ public class PageFavoritos extends PageBase {
 	}
 	
 	public Talla selectTallaAvailableAndWait(String refProducto, String codigoColor, int posicionTalla) {
-		//Filtramos y nos quedamos sólo con las tallas disponibles
-		List<WebElement> listTallas = getListaTallas(refProducto, codigoColor);
+		var listTallas = getListaTallas(refProducto, codigoColor);
 		List<WebElement> listTallasAvailable = new ArrayList<>();
-		for (WebElement talla : listTallas) {
+		for (var talla : listTallas) {
 			if (!state(Present, talla).by(By.xpath("./span")).check()) {
 				listTallasAvailable.add(talla);
 			}
 		}
 	   
-		WebElement tallaDisponible = listTallasAvailable.get(posicionTalla - 1); 
-		Talla talla = Talla.fromLabel(tallaDisponible.getText());
+		var tallaDisponible = listTallasAvailable.get(posicionTalla - 1); 
+		var talla = Talla.fromLabel(tallaDisponible.getText());
 		tallaDisponible.click();
 		String xpathCapaTallas = getXPathCapaTallas(refProducto, codigoColor);
 		state(Invisible, xpathCapaTallas).wait(1).build();

@@ -33,6 +33,5 @@ public class PageFormularioAyuda extends PageBase {
 		state(Visible, xpathSelector).wait(1).check();
 		new Select(getElement(xpathSelector)).selectByVisibleText(inputData);
 	}
-	
 
 }

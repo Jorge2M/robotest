@@ -30,8 +30,9 @@ public class PageFichaDesktop extends PageFicha {
 
 	@Override
 	public boolean isPageUntil(int seconds) {
-		return (state(Present, XPATH_HTML_FICHA).wait(seconds).check() &&
-				secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(seconds));
+		return 
+			state(Present, XPATH_HTML_FICHA).wait(seconds).check() &&
+			secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(seconds);
 	}
 
 	@Override

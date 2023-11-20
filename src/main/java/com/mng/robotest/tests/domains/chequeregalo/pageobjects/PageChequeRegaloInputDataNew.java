@@ -115,7 +115,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	}
 	
 	public void introducirCvc(String cvvNumber) {
-		WebElement cvvTarjeta = driver.findElement(ConsultaSaldo.CVV_TARJETA.getBy());
+		var cvvTarjeta = driver.findElement(ConsultaSaldo.CVV_TARJETA.getBy());
 		cvvTarjeta.clear();
 		cvvTarjeta.sendKeys(cvvNumber);
 		click(ConsultaSaldo.VALIDAR.getBy()).waitLoadPage(3).exec();

@@ -9,7 +9,7 @@ public class ModNoStock extends PageBase {
 	private static final String XPATH_MODAL_NO_STOCK = "//div[@class='modalNoStock show']";
 	
 	public boolean isModalNoStockVisibleFichaNew(int seconds) {
-		return (state(Visible, XPATH_MODAL_NO_STOCK).wait(seconds).check());
+		return state(Visible, XPATH_MODAL_NO_STOCK).wait(seconds).check();
 	}
 	
 }

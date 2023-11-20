@@ -165,5 +165,4 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 		return backTo1erArticulo(getXPpathIconoUpGalery());
 	}	
 	
-	
 }
