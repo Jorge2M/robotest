@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.chequeregalo.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
@@ -100,7 +99,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	}
 	
 	public void introducirTarjetaConsultaSaldo(String numTarjeta) {
-		WebElement inputNumTarjeta = driver.findElement(ConsultaSaldo.NUMERO_TARJETA.getBy());
+		var inputNumTarjeta = driver.findElement(ConsultaSaldo.NUMERO_TARJETA.getBy());
 		inputNumTarjeta.clear();
 		inputNumTarjeta.sendKeys(numTarjeta);
 		click(ConsultaSaldo.VALIDAR.getBy()).exec();

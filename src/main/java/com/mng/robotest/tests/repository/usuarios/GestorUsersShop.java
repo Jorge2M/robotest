@@ -7,11 +7,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
-import com.mng.robotest.tests.repository.usuarios.UserShop.StateUser;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.utils.PaisGetter;
 
+import static com.mng.robotest.tests.repository.usuarios.UserShop.StateUser.*;
+import static com.mng.robotest.testslegacy.data.PaisShop.ESPANA;
 
 public class GestorUsersShop {
 
@@ -26,7 +27,7 @@ public class GestorUsersShop {
 	}
 	
 	public static UserShop getUser() {
-		return getUser(PaisShop.ESPANA);
+		return getUser(ESPANA);
 	}
 	
 	public static UserShop getUser(PaisShop paisShop) {
@@ -34,7 +35,7 @@ public class GestorUsersShop {
 	}
 	
 	public UserShop getUserMaked(PaisShop paisShop) {
-		if (paisShop==PaisShop.ESPANA) {
+		if (paisShop==ESPANA) {
 			return getTestPerformanceUser();
 		} else {
 			return getCountryMakedUser(paisShop);
@@ -52,26 +53,26 @@ public class GestorUsersShop {
 		Integer[] listRandomInts = getRandomListNotRepeated(listTestPerformanceUsers.size());
 		for (Integer index : listRandomInts) {
 			var user = listTestPerformanceUsers.get(index.intValue());
-			if (user.stateUser==StateUser.FREE) {
-				user.stateUser = StateUser.BUSY;
-				user.dateLastCheckout = Calendar.getInstance();
+			if (user.getStateUser()==FREE) {
+				user.setStateUser(BUSY);
+				user.setDateLastCheckout(Calendar.getInstance());
 				return user;
 			}
 			
-			if (userBusyOldest==null || user.dateLastCheckout.before(userBusyOldest.dateLastCheckout)) {
+			if (userBusyOldest==null || user.before(userBusyOldest)) {
 				userBusyOldest = user;
 			}
 		}
 		
 		if (userBusyOldest!=null) {
-			userBusyOldest.dateLastCheckout = Calendar.getInstance();
+			userBusyOldest.setDateLastCheckout(Calendar.getInstance());
 		}
 		
 		return userBusyOldest;
 	}
 	
 	private static synchronized void storeTestPerformanceUsers() {
-		String PASSWORD_TEST_PERFORMANCE = 
+		String passwordTestPerformance = 
 				GetterSecrets.factory()
 					.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
 					.getPassword();
@@ -82,18 +83,18 @@ public class GestorUsersShop {
 			if (i<10) {
 				number = "0" + number;
 			}
-			listTestPerformanceUsers.add(new UserShop("test.performance" + number + "@mango.com", PASSWORD_TEST_PERFORMANCE));
+			listTestPerformanceUsers.add(new UserShop("test.performance" + number + "@mango.com", passwordTestPerformance));
 		}
 	}
 	
 	private void releaseTestPerformanceUsedUsers() {
 		var hoy = Calendar.getInstance();
 		for (var user : listTestPerformanceUsers) {
-			if (user.stateUser==StateUser.BUSY) {
-				var dateToLiberateUser = (Calendar)user.dateLastCheckout.clone();
+			if (user.getStateUser()==BUSY) {
+				var dateToLiberateUser = (Calendar)user.getDateLastCheckout().clone();
 				dateToLiberateUser.add(Calendar.MINUTE, MINUTES_FOR_USER_LIBERATION);
 				if (hoy.after(dateToLiberateUser)) {
-					user.stateUser=StateUser.FREE;
+					user.setStateUser(FREE);
 				}
 			}
 		}
@@ -109,7 +110,7 @@ public class GestorUsersShop {
 	}
 	
 	//For UnitTest purposes
-	synchronized static void addUserShop(UserShop userShop) {
+	static synchronized void addUserShop(UserShop userShop) {
 		if (listTestPerformanceUsers==null) {
 			listTestPerformanceUsers = new CopyOnWriteArrayList<>();
 		}
@@ -117,7 +118,8 @@ public class GestorUsersShop {
 	}
 	
 	//For UnitTest purposes
-	synchronized static void reset() {
+	static synchronized void reset() {
 		listTestPerformanceUsers = null;
 	}
+	
 }

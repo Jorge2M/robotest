@@ -35,7 +35,6 @@ import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.tests.repository.usuarios.GestorUsersShop;
-import com.mng.robotest.tests.repository.usuarios.UserShop;
 import com.mng.robotest.testslegacy.beans.AccesoEmpl;
 import com.mng.robotest.testslegacy.beans.Pago;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -250,8 +249,8 @@ public class CheckoutFlow extends StepBase {
 						dataDirEnvio.put(NAME, "Jorge");
 						dataDirEnvio.put(APELLIDOS, "Muñoz Martínez");
 						dataDirEnvio.put(DIRECCION, "c./ mossen trens nº6 5º1ª");
-						UserShop userShop = GestorUsersShop.getUser();
-						dataDirEnvio.put(EMAIL, userShop.user);
+						var userShop = GestorUsersShop.getUser();
+						dataDirEnvio.put(EMAIL, userShop.getUser());
 						dataDirEnvio.put(TELEFONO, "665015122");
 						pageCheckoutWrapperSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
 						pageCheckoutWrapperSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);

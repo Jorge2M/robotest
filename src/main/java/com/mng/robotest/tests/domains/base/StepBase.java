@@ -36,10 +36,10 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public abstract class StepBase extends PageBase {
 
-	protected static final String SECONDS_WAIT = "(esperamos hasta #{seconds} segundos)";
+	protected static final String SECONDS_WAIT = "(esperamos hasta #{seconds}s)";
 	
 	protected String getLitSecondsWait(int seconds) {
-		return "(esperamos hasta " + seconds + " segundos)";
+		return "(esperamos hasta " + seconds + "s)";
 	}
 	
 	protected void access(boolean clearData) throws Exception {

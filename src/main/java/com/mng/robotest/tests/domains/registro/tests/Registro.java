@@ -41,6 +41,17 @@ public class Registro implements Serializable {
 		new Reg001(pais, idioma).execute();
 	}
 	
+	@Test (
+		groups={"Registro", "Canal:all_App:all"},
+		description="Registro con errores en la introducción de los datos (España)")
+	public void REG007_NewRegisterNOK() throws Exception {
+		TestCaseTM.addNameSufix(this.indexFact);
+		if (isPro()) {
+			return;
+		}
+		new Reg007().execute();
+	}	
+	
 	//TODO eliminar REG002,REG003,REG004
 	@Test (
 		enabled=false,

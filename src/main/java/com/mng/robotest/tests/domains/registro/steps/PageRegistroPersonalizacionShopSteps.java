@@ -99,8 +99,23 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 		checkWeAreLogged();
 	}		
 	
+	@Step (
+		description="Pulsar el botón <b>Guardar</b>",
+		expected="",
+		saveImagePage=SaveWhen.Always)
+	public void clickGuardarNoChecks() {
+		pageRegistroPersonalizacion.clickGuardar();
+	}		
+	
+	
 	public void checkWeAreLogged() {
 		new AccesoSteps().checkIsLogged(7);
 	}	
+	
+	@Validation(
+	    description="Aparece un error de código postal incorrecto " + SECONDS_WAIT)
+	public boolean checkCodPostalInvalidMessage(int seconds) {
+		return pageRegistroPersonalizacion.checkMessageErrorMovil(seconds);
+	}
 	
 }

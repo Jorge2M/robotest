@@ -1,7 +1,5 @@
 package com.mng.robotest.tests.domains.compra.pageobjects;
 
-import org.openqa.selenium.Keys;
-
 import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -101,7 +99,7 @@ public class ModalDirecEnvioNew extends PageBase {
 		if (isPresent(inputType)) {
 			//clear doesn't works in that case -> workaround
 			//getElement(inputType.getXPath()).clear();
-			getElement(inputType.getXPath()).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+			getElement(inputType.getXPath()).sendKeys(KEYS_CLEAR_INPUT);
 			getElement(inputType.getXPath()).sendKeys(data);
 		}
 	}

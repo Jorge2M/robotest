@@ -41,6 +41,7 @@ public class PageBase extends PageObjTM {
 	protected DataTest dataTest = TestBase.DATA_TEST.get();
 	protected DataMantoTest dataMantoTest = TestMantoBase.DATA_MANTO_TEST.get();
 	protected LegalTextsPage legalTexts;
+	protected static final String KEYS_CLEAR_INPUT = Keys.chord(Keys.CONTROL,"a", Keys.DELETE);
 	
 	public PageBase() {
 		super();

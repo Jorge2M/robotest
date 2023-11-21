@@ -8,16 +8,16 @@ import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.Lin
 
 public class DataNewRegister {
 
-	private final String email;
-	private final String password;
-	private final String movil;
-	private final boolean checkPromotions;
+	private String email;
+	private String password;
+	private String movil;
+	private boolean checkPromotions;
 	
-	private final String name;
-	private final String postalCode;
-	private final String dateOfBirth;
-	private final GenderOption gender;
-	private final List<LineaType> lineas;
+	private String name;
+	private String postalCode;
+	private String dateOfBirth;
+	private GenderOption gender;
+	private List<LineaType> lineas;
 	
 	public DataNewRegister(
 			String email, String password, String movil, boolean checkPromotions,
@@ -50,11 +50,20 @@ public class DataNewRegister {
 	public String getEmail() {
 		return email;
 	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getPassword() {
 		return password;
 	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getMovil() {
 		return movil;
+	}
+	public void setMovil(String movil) {
+		this.movil = movil;
 	}
 	public boolean isCheckPromotions() {
 		return checkPromotions;
@@ -66,6 +75,9 @@ public class DataNewRegister {
 
 	public String getPostalCode() {
 		return postalCode;
+	}
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
 	}
 	public boolean isPostalCode() {
 		return (postalCode!=null && "".compareTo(postalCode)!=0);

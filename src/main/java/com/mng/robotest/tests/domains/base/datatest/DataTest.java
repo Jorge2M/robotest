@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.repository.usuarios.GestorUsersShop;
-import com.mng.robotest.tests.repository.usuarios.UserShop;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Linea;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -91,12 +90,12 @@ public class DataTest implements Cloneable, Serializable {
 	}
 	
 	private void storeNewUser() {
-		UserShop userShop = GestorUsersShop.getUser(PaisShop.ESPANA);
+		var userShop = GestorUsersShop.getUser(PaisShop.ESPANA);
 		if (pais!=null) {
 			userShop = GestorUsersShop.getUser(PaisShop.getPais(pais));
 		}
-		setUserConnected(userShop.user);
-		setPasswordUser(userShop.password);
+		setUserConnected(userShop.getUser());
+		setPasswordUser(userShop.getPassword());
 		setUserRegistered(true);
 	}
 

@@ -44,7 +44,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		description=
 			"Introducir los datos:<br>" + 
 			"  - Email: <b>#{data.getEmail()}</b><br>" +
-			"  - Contraseña: <b>#{data.getPassword()}</br>" + 
+			"  - Contraseña: <b>#{data.getPassword()}</b></br>" + 
 			"  - Mobil: <b>#{data.getMovil()}</b><br>" +
 			"  - Check promociones: <b>#{data.isCheckPromotions()}</b>",
 		expected=
@@ -68,6 +68,32 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		new PageRegistroPersonalizacionShopSteps().checkPage(10);
 		checksDefault();
 	}	
+	
+	@Step (
+		description="Pulsar el botón <b>Crear cuenta</b>",
+		expected="")
+	public void clickCreateAccountButtonWithoutCheck() {
+		pageRegistroInitial.clickCreateAccountButton();
+	}	
+	
+	@Validation(
+	    description="Aparece un modal de error con el texto \"¿ya tienes cuenta?\" " + SECONDS_WAIT)
+	public boolean checkUserExistsMessage(int seconds) {
+		return pageRegistroInitial.checkUserExistsModalMessage(seconds);
+	}
+
+	@Validation(
+	    description="Aparece un error de móvil incorrecto " + SECONDS_WAIT)	
+	public boolean checkPhoneInvalidMessage(int seconds) {
+		return pageRegistroInitial.checkMessageErrorMovil(seconds);
+	}
+	
+	@Step (
+		description="Cerrar el modal con el mensaje de error",
+		expected="Desaparece el modal")
+	public void closeModalError() {
+		pageRegistroInitial.closeModalMessageError();
+	}
 
 	@Step(
 		description="Introducir la fecha de nacimiento <b>#{birthdate}</b>",

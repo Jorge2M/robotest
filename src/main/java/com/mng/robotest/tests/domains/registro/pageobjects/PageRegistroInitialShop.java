@@ -21,6 +21,11 @@ public class PageRegistroInitialShop extends PageBase {
 	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//button[@data-testid[contains(.,'submitButton.submit')]]";	
 	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = XPATH_MODAL_CONTENT + "/div/div/p/*[@data-testid='mng-link']";
 	private static final String XPATH_LINK_CONDICIONES_VENTA = XPATH_MODAL_CONTENT + "//*[@data-testid='mng-link' and @href[contains(.,'terms-and-conditions')]]";
+	
+	private static final String XPATH_MODAL_MESSAGE_ERROR = "//*[@aria-describedby[contains(.,'genericErrorModal')]]";
+	private static final String XPATH_MODAL_MESSAGE_USER_EXISTS = XPATH_MODAL_MESSAGE_ERROR + "//p[text()[contains(.,'¿Ya tienes cuenta?')]]";
+	private static final String XPATH_CLOSE_MODAL_MESSAGE_ERROR = XPATH_MODAL_MESSAGE_ERROR + "//*[@data-testid='modal.close.button']";
+	private static final String XPATH_MESSAGE_ERROR_MOVIL = "//*[@id='mobile-number-error']";
 
 	private String getXPathModalPoliticaPrivacidad() {
 		return
@@ -100,15 +105,18 @@ public class PageRegistroInitialShop extends PageBase {
 	}
 	
 	public void inputEmail(String email) {
+		getElement(XPATH_INPUT_EMAIL).sendKeys(KEYS_CLEAR_INPUT);
 		getElement(XPATH_INPUT_EMAIL).sendKeys(email);
 	}
 	
 	public void inputPassword(String password) {
+		getElement(XPATH_INPUT_PASSWORD).sendKeys(KEYS_CLEAR_INPUT);
 		getElement(XPATH_INPUT_PASSWORD).sendKeys(password);
 	}
 
 	public void inputMovil(String number) {
 		moveToInputMovil();
+		getElement(XPATH_INPUT_MOVIL).sendKeys(KEYS_CLEAR_INPUT);
 		getElement(XPATH_INPUT_MOVIL).sendKeys(number);
 	}
 	private void moveToInputMovil() {
@@ -156,6 +164,17 @@ public class PageRegistroInitialShop extends PageBase {
 	
 	public void clickCreateAccountButton() {
 		click(XPATH_CREATE_ACCOUNT_BUTTON).exec();
+	}
+	
+	public boolean checkUserExistsModalMessage(int seconds) {
+		return state(Visible, XPATH_MODAL_MESSAGE_USER_EXISTS).wait(seconds).check();
+	}
+	public boolean checkMessageErrorMovil(int seconds) {
+		return state(Visible, XPATH_MESSAGE_ERROR_MOVIL).wait(seconds).check();
+	}
+	
+	public void closeModalMessageError() {
+		click(XPATH_CLOSE_MODAL_MESSAGE_ERROR).exec();
 	}
 	
 	public void clickPoliticaPrivacidad() {

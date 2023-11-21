@@ -31,6 +31,7 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	private static final String XPATH_INPUT_POSTALCODE = "//input[@id='postalCode']";
 	private static final String XPATH_INPUT_DATE_BIRTH = "//input[@id='birthDate']";
 	private static final String XPATH_SAVE_BUTTON = XPATH_MODAL_CONTENT + "//button[@type='submit']";
+	private static final String XPATH_MESSAGE_ERROR_CODPOSTAL = "//p[@id='postalCode-error']";
 	
 	private static final String TAG_GENDER = "@TagGender";
 	private static final String XPATH_CHECKBOX_GENEDER_WITH_TAG = "//label[@for='gender-" + TAG_GENDER + "']";
@@ -92,5 +93,9 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	
 	public void clickGuardar() {
 		click(XPATH_SAVE_BUTTON).exec();
+	}
+	
+	public boolean checkMessageErrorMovil(int seconds) {
+		return state(Visible, XPATH_MESSAGE_ERROR_CODPOSTAL).wait(seconds).check();
 	}
 }
