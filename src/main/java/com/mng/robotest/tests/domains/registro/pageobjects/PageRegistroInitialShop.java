@@ -7,7 +7,6 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageRegistroInitialShop extends PageBase {
 
-	//private static final String XPATH_MODAL_CONTENT = "//div[@id[contains(.,'registerModal')]]";
 	private static final String XPATH_MODAL_CONTENT = "//micro-frontend[@id='registry']";
 	private static final String XPATH_INPUT_EMAIL = XPATH_MODAL_CONTENT + "//input[@data-testid[contains(.,'emailInput')]]";
 	private static final String XPATH_INPUT_PASSWORD = XPATH_MODAL_CONTENT + "//input[@data-testid[contains(.,'passInput')]]";
@@ -21,11 +20,14 @@ public class PageRegistroInitialShop extends PageBase {
 	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//button[@data-testid[contains(.,'submitButton.submit')]]";	
 	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = XPATH_MODAL_CONTENT + "/div/div/p/*[@data-testid='mng-link']";
 	private static final String XPATH_LINK_CONDICIONES_VENTA = XPATH_MODAL_CONTENT + "//*[@data-testid='mng-link' and @href[contains(.,'terms-and-conditions')]]";
+	private static final String XPATH_MESSAGE_ERROR_MOVIL = "//*[@id='mobile-number-error']";	
 	
-	private static final String XPATH_MODAL_MESSAGE_ERROR = "//*[@aria-describedby[contains(.,'genericErrorModal')]]";
-	private static final String XPATH_MODAL_MESSAGE_USER_EXISTS = XPATH_MODAL_MESSAGE_ERROR + "//p[text()[contains(.,'¿Ya tienes cuenta?')]]";
-	private static final String XPATH_CLOSE_MODAL_MESSAGE_ERROR = XPATH_MODAL_MESSAGE_ERROR + "//*[@data-testid='modal.close.button']";
-	private static final String XPATH_MESSAGE_ERROR_MOVIL = "//*[@id='mobile-number-error']";
+	private static final String XPATH_MODAL_MESSAGE_ERROR_DESKTOP = "//*[@aria-describedby[contains(.,'genericErrorModal')]]";
+	private static final String XPATH_MODAL_MESSAGE_USER_EXISTS_DESKTOP = XPATH_MODAL_MESSAGE_ERROR_DESKTOP + "//p[text()[contains(.,'¿Ya tienes cuenta?')]]";
+	private static final String XPATH_CLOSE_MODAL_MESSAGE_ERROR_DESKTOP = XPATH_MODAL_MESSAGE_ERROR_DESKTOP + "//*[@data-testid='modal.close.button']";
+	private static final String XPATH_MODAL_MESSAGE_ERROR_MOVIL = "//*[@data-testid='sheet.draggable.dialog']";
+	private static final String XPATH_MODAL_MESSAGE_USER_EXISTS_MOVIL = XPATH_MODAL_MESSAGE_ERROR_MOVIL + "//p[text()[contains(.,'¿Ya tienes cuenta?')]]";
+	private static final String XPATH_CLOSE_MODAL_MESSAGE_ERROR_MOVIL = XPATH_MODAL_MESSAGE_ERROR_MOVIL + "//button/span[text()='Cancelar']";
 
 	private String getXPathModalPoliticaPrivacidad() {
 		return
@@ -75,8 +77,7 @@ public class PageRegistroInitialShop extends PageBase {
 			return "Informação básica sobre proteção de dados";
 		case RO: //"Româna"
 			return "Informații de bază privind protecția datelor personale";
-		case RU: //"Русский"
-		case SV: //"Svenska" (Sueco)
+		case RU,SV: //"Русский", "Svenska" (Sueco)
 			return "Grundläggande information om uppgiftsskydd";
 		case TH: //"ไทย" (Tailandés)
 			return "??????";
@@ -86,8 +87,7 @@ public class PageRegistroInitialShop extends PageBase {
 			return "数据保护基本信息";
 		case AR: //"العربية"
 			return "معلومات أساسية عن حماية البيانات";
-		case US: //"English (USA)"			
-		case IN: //"English"
+		case US,IN: //"English (USA)", "English"			
 		default:
 			return "Basic information on data protection";
 		}
@@ -96,6 +96,21 @@ public class PageRegistroInitialShop extends PageBase {
 	public PageRegistroInitialShop() {
 		super(NUEVO_REGISTRO_LEGAL_TEXTS);
 	}
+	
+	private String getXPathModalMessageUserExists() {
+		if (channel.isDevice()) {
+			return XPATH_MODAL_MESSAGE_USER_EXISTS_MOVIL;
+		}
+		return XPATH_MODAL_MESSAGE_USER_EXISTS_DESKTOP;
+	}
+	
+	private String getXPathCloseModalMessageError() {
+		if (channel.isDevice()) {
+			return XPATH_CLOSE_MODAL_MESSAGE_ERROR_MOVIL;
+		}
+		return XPATH_CLOSE_MODAL_MESSAGE_ERROR_DESKTOP;
+	}	
+	
 	
 	public boolean isPage() {
 		return isPage(0);
@@ -167,14 +182,14 @@ public class PageRegistroInitialShop extends PageBase {
 	}
 	
 	public boolean checkUserExistsModalMessage(int seconds) {
-		return state(Visible, XPATH_MODAL_MESSAGE_USER_EXISTS).wait(seconds).check();
+		return state(Visible, getXPathModalMessageUserExists()).wait(seconds).check();
 	}
 	public boolean checkMessageErrorMovil(int seconds) {
 		return state(Visible, XPATH_MESSAGE_ERROR_MOVIL).wait(seconds).check();
 	}
 	
 	public void closeModalMessageError() {
-		click(XPATH_CLOSE_MODAL_MESSAGE_ERROR).exec();
+		click(getXPathCloseModalMessageError()).exec();
 	}
 	
 	public void clickPoliticaPrivacidad() {
@@ -192,10 +207,14 @@ public class PageRegistroInitialShop extends PageBase {
 	public void clickCondicionesVenta() {
 		click(XPATH_LINK_CONDICIONES_VENTA).exec();
 	}
+	
+	@Override
 	public void keyDown(int times) {
 		clickModalContentCorner();
 		super.keyDown(times);
 	}
+	
+	@Override
 	public void keyUp(int times) {
 		clickModalContentCorner();
 		super.keyUp(times);
