@@ -2217,7 +2217,7 @@ where
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 <emailuser>jorge.munoz@mango.com</emailuser> <!-- Utilizaremos un email con timestamp para superar el control de fraude de "Rechnung" -->
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <!-- CUANDO SE ACTIVE LA COMPRA ONLINE HABRÍA QUE INCLUIR EL MÉTODO DE ENVÍO MEEST -->
