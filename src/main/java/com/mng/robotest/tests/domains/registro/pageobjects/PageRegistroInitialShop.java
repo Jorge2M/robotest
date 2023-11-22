@@ -222,4 +222,5 @@ public class PageRegistroInitialShop extends PageBase {
 	private void clickModalContentCorner() {
 		click(XPATH_MODAL_CONTENT).setX(1).setY(1).exec();
 	}
+	
 }

@@ -74,4 +74,5 @@ public class ModalCambioPais extends PageBase {
 			state(Invisible, XPATH_MODAL).wait(1).check();
 		}
 	}
+	
 }

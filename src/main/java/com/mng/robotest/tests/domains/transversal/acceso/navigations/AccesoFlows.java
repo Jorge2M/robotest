@@ -5,6 +5,7 @@ import static com.mng.robotest.tests.domains.transversal.acceptcookies.pageobjec
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.CERRAR_SESION;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.INICIAR_SESION;
 
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.conf.testab.TestABactive;
@@ -115,9 +116,18 @@ public class AccesoFlows extends StepBase {
 	}
 	public void closeModalsPostAccessAndManageCookies(boolean acceptCookies) {
 		manageCookies(acceptCookies);
-		new ModalLoyaltyAfterAccess().closeModalIfVisible();
-		new ModalNewsLetterAfterAccess().closeModalIfVisible();
-		new ModalCambioPais().closeModalIfVisible();
+		closeInitialModals();
+	}
+	
+	private void closeInitialModals() {
+		try {
+			new ModalLoyaltyAfterAccess().closeModalIfVisible();
+			new ModalNewsLetterAfterAccess().closeModalIfVisible();
+			new ModalCambioPais().closeModalIfVisible();
+		} 
+		catch (Exception e) {
+			Log4jTM.getLogger().warn("Problem closing modals", e);
+		}
 	}
 	
 	private void clickIniciarSesionAndWait() {
