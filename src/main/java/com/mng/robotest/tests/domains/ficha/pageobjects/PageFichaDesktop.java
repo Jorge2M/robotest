@@ -101,4 +101,5 @@ public class PageFichaDesktop extends PageFicha {
 	public boolean isModalNoStockVisible(int seconds) {
 		return modNoStock.isModalNoStockVisibleFichaNew(seconds);
 	}
+	
 }
