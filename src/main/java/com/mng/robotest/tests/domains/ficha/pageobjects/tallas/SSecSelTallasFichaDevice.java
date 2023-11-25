@@ -13,23 +13,23 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasFicha {
 	
-	private static final String XPATH_SELECTOR_BUTTON = "//*[@data-testid='sizeSelectorButton']";
-	private static final String XPATH_CAPA_TALLAS = "//div[@id='sizesContainerId']";
-	private static final String XPATH_OPTION_TALLA = XPATH_CAPA_TALLAS + "//div[@data-testid[contains(.,'sizeSelector.size')]]";
-	private static final String XPATH_TALLA_SELECTED = XPATH_SELECTOR_BUTTON + "//span[@class[contains(.,'size-text')]]";
-	private static final String XPATH_OPTION_TALLA_UNICA = "//button[@id='productFormSelect']//span[@class='one-size-text']";
-	private static final String XPATH_MSG_AVISO_TALLA = "//p[@class[contains(.,'sizes-notify-error')]]";
-	private static final String XPATH_DIV_CLOSE = "//div[@data-testid='sheet.overlay' or @aria-label='close']";
+	private static final String XP_SELECTOR_BUTTON = "//*[@data-testid='sizeSelectorButton']";
+	private static final String XP_CAPA_TALLAS = "//div[@id='sizesContainerId']";
+	private static final String XP_OPTION_TALLA = XP_CAPA_TALLAS + "//div[@data-testid[contains(.,'sizeSelector.size')]]";
+	private static final String XP_TALLA_SELECTED = XP_SELECTOR_BUTTON + "//span[@class[contains(.,'size-text')]]";
+	private static final String XP_OPTION_TALLA_UNICA = "//button[@id='productFormSelect']//span[@class='one-size-text']";
+	private static final String XP_MSG_AVISO_TALLA = "//p[@class[contains(.,'sizes-notify-error')]]";
+	private static final String XP_DIV_CLOSE = "//div[@data-testid='sheet.overlay' or @aria-label='close']";
 	
 	public SSecSelTallasFichaDevice(Channel channel, AppEcom app) {
 		super(channel, app);
 	}
 	
 	private String getXPathOptionTallaDisponible() {
-		return XPATH_OPTION_TALLA + "//self::*[@data-testid[contains(.,'size.available')]]";
+		return XP_OPTION_TALLA + "//self::*[@data-testid[contains(.,'size.available')]]";
 	}
 	private String getXPathOptionTallaNoDisponible() {
-		return XPATH_OPTION_TALLA + "//self::*[@data-testid[contains(.,'size.unavailable')]]";
+		return XP_OPTION_TALLA + "//self::*[@data-testid[contains(.,'size.unavailable')]]";
 	}
 	
 	private String getXPathOptionTallaDisponible(String talla) {
@@ -48,7 +48,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 				"starts-with(text(),'" + s + "cm" + "')")
 			.collect(Collectors.joining(" or "));
 		
-		return XPATH_OPTION_TALLA + "//self::*[" + coreXPath + "]"; 
+		return XP_OPTION_TALLA + "//self::*[" + coreXPath + "]"; 
 	}
 	
 	@Override
@@ -67,16 +67,16 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	@Override
 	public boolean isVisibleSelectorTallasUntil(int seconds) {
-		return state(Visible, XPATH_CAPA_TALLAS).wait(seconds).check();
+		return state(Visible, XP_CAPA_TALLAS).wait(seconds).check();
 	}
 	
 	public boolean isVisibleSelectorButtonUntil(int seconds) {
-		return state(Visible, XPATH_SELECTOR_BUTTON).wait(seconds).check();
+		return state(Visible, XP_SELECTOR_BUTTON).wait(seconds).check();
 	}
 	
 	@Override
 	public int getNumOptionsTallas() {
-		return getElements(XPATH_OPTION_TALLA).size();
+		return getElements(XP_OPTION_TALLA).size();
 	}
 	
 	@Override
@@ -91,17 +91,17 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	@Override
 	public boolean isTallaUnica() {
-		return state(Present, XPATH_OPTION_TALLA_UNICA).check();
+		return state(Present, XP_OPTION_TALLA_UNICA).check();
 	}
 	
 	@Override
 	public boolean isVisibleListTallasForSelectUntil(int seconds) {
-		return state(Visible, XPATH_OPTION_TALLA).wait(seconds).check();
+		return state(Visible, XP_OPTION_TALLA).wait(seconds).check();
 	}
 	
 	@Override
 	public void closeTallas() {
-		click(XPATH_DIV_CLOSE).exec();
+		click(XP_DIV_CLOSE).exec();
 	}
 	
 	private void despliegaSelectTallas() {
@@ -122,8 +122,8 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	private void despliegaSelectTallasExec() {
 		for (int i=0; i<3; i++) {
-			state(Visible, XPATH_SELECTOR_BUTTON).wait(2).check();
-			click(XPATH_SELECTOR_BUTTON).exec();
+			state(Visible, XP_SELECTOR_BUTTON).wait(2).check();
+			click(XP_SELECTOR_BUTTON).exec();
 			if (isVisibleSelectorTallasUntil(1)) {
 				break;
 			}
@@ -160,7 +160,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 			return;
 		}
 		despliegaSelectTallas();
-		click("(" + XPATH_OPTION_TALLA + ")[" + posicionEnDesplegable + "]").exec();
+		click("(" + XP_OPTION_TALLA + ")[" + posicionEnDesplegable + "]").exec();
 	}
 
 	@Override
@@ -177,7 +177,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	 */
 	@Override
 	public String getTallaAlfSelected(AppEcom app) {
-		String tallaVisible = getElement(XPATH_TALLA_SELECTED).getText();
+		String tallaVisible = getElement(XP_TALLA_SELECTED).getText();
 		tallaVisible = removeAlmacenFromTalla(tallaVisible);
 		
 		//Tratamos el caso relacionado con los entornos de test y eliminamos la parte a partir de " - " para contemplar casos como el de 'S - Delivery in 4-7 business day')
@@ -190,7 +190,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	@Override
 	public String getTallaAlf(int posicion) {
-		String xpathTalla = "(" + XPATH_OPTION_TALLA + ")[" + posicion + "]";
+		String xpathTalla = "(" + XP_OPTION_TALLA + ")[" + posicion + "]";
 		if (state(Present, xpathTalla).check()) {
 			return getElement(xpathTalla).getText();
 		}
@@ -199,7 +199,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	@Override
 	public String getTallaCodNum(int posicion) {
-		String xpathTalla = "(" + XPATH_OPTION_TALLA + ")[" + posicion + "]";
+		String xpathTalla = "(" + XP_OPTION_TALLA + ")[" + posicion + "]";
 		if (state(Present, xpathTalla).check()) {
 			return getElement(xpathTalla).getAttribute("value");
 		}
@@ -208,6 +208,6 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	@Override
 	public boolean isVisibleAvisoSeleccionTalla() {
-		return state(Visible, XPATH_MSG_AVISO_TALLA).check();
+		return state(Visible, XP_MSG_AVISO_TALLA).check();
 	}	
 }

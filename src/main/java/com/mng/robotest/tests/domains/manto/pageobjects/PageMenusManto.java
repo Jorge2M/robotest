@@ -19,10 +19,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageMenusManto extends PageBase {
 
-	private static final String XPATH_TITULO = "//td[@class='txt11B'] | //form[@id='formTempl']";
-	private static final String XPATH_CELDA_TEXT_MENU_PRINCIPAL = "//td[text()[contains(.,'Menú principal')]]";
-	private static final String XPATH_CABECERA_MENU = "//table//td[@bgcolor='#505050']/span";
-	private static final String XPATH_LINK_MENU = "//table//a[@onclick]";
+	private static final String XP_TITULO = "//td[@class='txt11B'] | //form[@id='formTempl']";
+	private static final String XP_CELDA_TEXT_MENU_PRINCIPAL = "//td[text()[contains(.,'Menú principal')]]";
+	private static final String XP_CABECERA_MENU = "//table//td[@bgcolor='#505050']/span";
+	private static final String XP_LINK_MENU = "//table//a[@onclick]";
 	
 	private static final List<Pair<Section, String>> BLACK_LIST_MENUS = Arrays.asList(
 			Pair.of(Section.MARKETPLACES, "· Zalando Shapes"),
@@ -36,11 +36,11 @@ public class PageMenusManto extends PageBase {
 	}
 	
 	private String getTextMenuTitulo() {
-		return getElement(XPATH_TITULO).getText();
+		return getElement(XP_TITULO).getText();
 	}
 
 	public boolean isPage() {
-		return state(Present, XPATH_CELDA_TEXT_MENU_PRINCIPAL).check();
+		return state(Present, XP_CELDA_TEXT_MENU_PRINCIPAL).check();
 	}
 	
 	public boolean validateIsPage(String subMenu, int seconds) {
@@ -68,7 +68,7 @@ public class PageMenusManto extends PageBase {
 	}
 
 	public boolean isMenuHeaderVisible() {
-		return state(Present, XPATH_TITULO).check();
+		return state(Present, XP_TITULO).check();
 	}
 
 	public String clickMenuAndAcceptAlertIfExists(String textoMenu) {
@@ -99,7 +99,7 @@ public class PageMenusManto extends PageBase {
 				.type(TypeClick.javascript).exec();
 		}
 		
-		while (!state(Present, XPATH_TITULO).check() && 
+		while (!state(Present, XP_TITULO).check() && 
 				timeWaited != maxTimeToWait) {
 			waitMillis(1000);
 			timeWaited++;
@@ -109,7 +109,7 @@ public class PageMenusManto extends PageBase {
 	}
 
 	public List<WebElement> getListLinksMenus() {
-		return getElements(XPATH_LINK_MENU);
+		return getElements(XP_LINK_MENU);
 	}
 	
 	public List<String> getListMenuNames() {
@@ -122,7 +122,7 @@ public class PageMenusManto extends PageBase {
 	}
 	
 	public List<WebElement> getListCabecerasMenus() {
-		return getElements(XPATH_CABECERA_MENU);
+		return getElements(XP_CABECERA_MENU);
 	}
 	
 	public List<String> getListCabecerasMenusName() {

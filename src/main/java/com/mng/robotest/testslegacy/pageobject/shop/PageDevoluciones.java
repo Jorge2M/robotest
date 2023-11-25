@@ -54,18 +54,18 @@ public class PageDevoluciones extends PageBase {
 		}
 	}
 	
-	private static final String XPATH_IS_PAGE_DEVOLUCIONES = "//div[@class='devoluciones']";
-	private static final String XPATH_BUTTON_SOLICITAR_RECOGIDA = "//div[@class[contains(.,'devoluciones_button_container')]]/*";
+	private static final String XP_IS_PAGE_DEVOLUCIONES = "//div[@class='devoluciones']";
+	private static final String XP_BUTTON_SOLICITAR_RECOGIDA = "//div[@class[contains(.,'devoluciones_button_container')]]/*";
 
 	public boolean isPage() {
-		return state(Present, XPATH_IS_PAGE_DEVOLUCIONES).check();
+		return state(Present, XP_IS_PAGE_DEVOLUCIONES).check();
 	}
 
 	public void clickSolicitarRecogida() {
-		click(XPATH_BUTTON_SOLICITAR_RECOGIDA).waitLink(1).exec();
+		click(XP_BUTTON_SOLICITAR_RECOGIDA).waitLink(1).exec();
 	}
 
 	public boolean isVisibleSolicitarRecogidaButton() {
-		return state(Visible, XPATH_BUTTON_SOLICITAR_RECOGIDA).check();
+		return state(Visible, XP_BUTTON_SOLICITAR_RECOGIDA).check();
 	}
 }

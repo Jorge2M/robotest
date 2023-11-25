@@ -10,7 +10,7 @@ import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.Lin
 
 public class MenuWebAllGenesis extends PageBase implements MenusWebAll {
 
-	private static final String XPATH_MENU_ITEM = "//li/a[@data-testid[contains(.,'menu.family')]]";
+	private static final String XP_MENU_ITEM = "//li/a[@data-testid[contains(.,'menu.family')]]";
 	
 	@Override
 	public boolean isMenuInState(boolean open, int seconds) {
@@ -28,7 +28,7 @@ public class MenuWebAllGenesis extends PageBase implements MenusWebAll {
 	
 	private List<MenuWeb> getVisibleMenus(GroupWeb groupWeb) {
 		List<MenuWeb> menus = new ArrayList<>();
-		var menuElements = getElements(XPATH_MENU_ITEM);
+		var menuElements = getElements(XP_MENU_ITEM);
 		for (WebElement menuElement : menuElements) {
 			menus.add(new MenuWeb
 					.Builder(menuElement.getText())

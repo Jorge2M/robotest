@@ -12,37 +12,37 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageFichaDevice extends PageFicha {
 
-	private static final String XPATH_CONTAINER_FICHA = "//*[@class='product-detail']";
-	private static final String XPATH_ALTA_BOLSA_BUTTON ="//*[@data-testid='pdp.form.addToCart']";;
-	private static final String XPATH_BUTTON_FAVORITOS = "//*[@data-testid='button-icon']";
-	private static final String XPATH_BUTTON_FAVORITOS_FOR_ADD = XPATH_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'outline')]]";
-	private static final String XPATH_BUTTON_FAVORITOS_FOR_REMOVE = XPATH_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'fill')]]";
-	private static final String XPATH_DIV_ANADIENDO_FAVORITOS = "//div[@class[contains(.,'product-banner')]]";
+	private static final String XP_CONTAINER_FICHA = "//*[@class='product-detail']";
+	private static final String XP_ALTA_BOLSA_BUTTON ="//*[@data-testid='pdp.form.addToCart']";;
+	private static final String XP_BUTTON_FAVORITOS = "//*[@data-testid='button-icon']";
+	private static final String XP_BUTTON_FAVORITOS_FOR_ADD = XP_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'outline')]]";
+	private static final String XP_BUTTON_FAVORITOS_FOR_REMOVE = XP_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'fill')]]";
+	private static final String XP_DIV_ANADIENDO_FAVORITOS = "//div[@class[contains(.,'product-banner')]]";
 
-	private static final String XPATH_BUSCAR_ENN_TIENDA_BUTTON = "//button[@class[contains(.,'garment-finder')]]";
-	private static final String XPATH_GUIA_DE_TALLAS_LINK = "//span[@id='productFormSizesGuide']";
+	private static final String XP_BUSCAR_ENN_TIENDA_BUTTON = "//button[@class[contains(.,'garment-finder')]]";
+	private static final String XP_GUIA_DE_TALLAS_LINK = "//span[@id='productFormSizesGuide']";
 
-	private static final String XPATH_DIV_IMG_CENTRAL_DIV_DESKTOP = "//div[@class='main-img']";
-	private static final String XPATH_DIV_IMG_CENTRAL_DIV_DEVICE =
+	private static final String XP_DIV_IMG_CENTRAL_DIV_DESKTOP = "//div[@class='main-img']";
+	private static final String XP_DIV_IMG_CENTRAL_DIV_DEVICE =
 			"//div[@class[contains(.,'product-img-container')] and @class[contains(.,'slide-active')]]";
-	private static final String XPATH_ASPA_ZOOM_IMAGE_CENTRAL = "//div[@class='zoom-image-close']";
+	private static final String XP_ASPA_ZOOM_IMAGE_CENTRAL = "//div[@class='zoom-image-close']";
 
-	private static final String XPATH_FICHA_CON_ZOOM_DESKTOP = "//div[@class[contains(.,'zoom-out')]]";
-	private static final String XPATH_FICHA_CON_ZOOM_DEVICE = "//div[@class[contains(.,'zoom-image-container')]]";
+	private static final String XP_FICHA_CON_ZOOM_DESKTOP = "//div[@class[contains(.,'zoom-out')]]";
+	private static final String XP_FICHA_CON_ZOOM_DEVICE = "//div[@class[contains(.,'zoom-image-container')]]";
 
-	private static final String XPATH_ULTIMOS_PRODUCTOS_SECTION = "//*[@id='ultimos_productos']";
-	private static final String XPATH_MODAL_NO_STOCK = "//div[@class='modalNoStock show']";
-	private static final String XPATH_IMAGEN_CARRUSEL_IZQ = "//div[@class='carousel-img-container']//img[@class[contains(.,'carousel-img')]]";
+	private static final String XP_ULTIMOS_PRODUCTOS_SECTION = "//*[@id='ultimos_productos']";
+	private static final String XP_MODAL_NO_STOCK = "//div[@class='modalNoStock show']";
+	private static final String XP_IMAGEN_CARRUSEL_IZQ = "//div[@class='carousel-img-container']//img[@class[contains(.,'carousel-img')]]";
 
 	private String getXPathIsPage(String referencia) {
-		return XPATH_CONTAINER_FICHA + secDataProduct.getXPathLinReferencia(referencia);
+		return XP_CONTAINER_FICHA + secDataProduct.getXPathLinReferencia(referencia);
 	}
 
 	private String getXPathDivImgCentralDiv() {
 		if (channel==Channel.mobile) {
-			return XPATH_DIV_IMG_CENTRAL_DIV_DEVICE;
+			return XP_DIV_IMG_CENTRAL_DIV_DEVICE;
 		}
-		return XPATH_DIV_IMG_CENTRAL_DIV_DESKTOP;
+		return XP_DIV_IMG_CENTRAL_DIV_DESKTOP;
 	}
 	private String getXPathImagenCentral() {
 		String xpathDiv = getXPathDivImgCentralDiv();
@@ -51,9 +51,9 @@ public class PageFichaDevice extends PageFicha {
 
 	private String getXPathFichaConZoom() {
 		if (channel.isDevice()) {
-			return XPATH_FICHA_CON_ZOOM_DEVICE;
+			return XP_FICHA_CON_ZOOM_DEVICE;
 		}
-		return XPATH_FICHA_CON_ZOOM_DESKTOP;
+		return XP_FICHA_CON_ZOOM_DESKTOP;
 	}
 	private String getXPathImagenCentralConZoom() {
 		String xpathDiv = getXPathFichaConZoom();
@@ -63,7 +63,7 @@ public class PageFichaDevice extends PageFicha {
 	@Override
 	public boolean isPageUntil(int seconds) {
 		return (
-				state(Present, XPATH_CONTAINER_FICHA).wait(seconds).check() &&
+				state(Present, XP_CONTAINER_FICHA).wait(seconds).check() &&
 						//secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(seconds)
 						secDataProduct.getSecSelTallas().isSectionUntil(seconds)
 		);
@@ -78,42 +78,42 @@ public class PageFichaDevice extends PageFicha {
 
 	@Override
 	public boolean isVisibleBolsaButton(int seconds) {
-		return state(Visible, XPATH_ALTA_BOLSA_BUTTON).wait(seconds).check();
+		return state(Visible, XP_ALTA_BOLSA_BUTTON).wait(seconds).check();
 	}
 	
 	@Override
 	public void clickAnadirBolsaButtonAndWait() {
-		click(XPATH_ALTA_BOLSA_BUTTON).waitLink(2).type(javascript).exec();
+		click(XP_ALTA_BOLSA_BUTTON).waitLink(2).type(javascript).exec();
 	}
 
 	@Override
 	public void selectAnadirAFavoritosButton() {
-		click(XPATH_BUTTON_FAVORITOS_FOR_ADD).exec();
+		click(XP_BUTTON_FAVORITOS_FOR_ADD).exec();
 	}
 
 	@Override
 	public void selectRemoveFromFavoritosButton() {
-		click(XPATH_BUTTON_FAVORITOS_FOR_REMOVE).waitLink(2).exec();
+		click(XP_BUTTON_FAVORITOS_FOR_REMOVE).waitLink(2).exec();
 	}
 
 	@Override
 	public boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		return state(Visible, XPATH_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
+		return state(Visible, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
 	}
 
 	@Override
 	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		return state(Invisible, XPATH_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
+		return state(Invisible, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
 	}
 
 	@Override
 	public boolean isVisibleButtonElimFavoritos(int seconds) {
-		return state(Visible, XPATH_BUTTON_FAVORITOS_FOR_REMOVE).wait(seconds).check();
+		return state(Visible, XP_BUTTON_FAVORITOS_FOR_REMOVE).wait(seconds).check();
 	}
 
 	@Override
 	public boolean isVisibleButtonAnadirFavoritos(int seconds) {
-		return state(Visible, XPATH_BUTTON_FAVORITOS_FOR_ADD).wait(seconds).check();
+		return state(Visible, XP_BUTTON_FAVORITOS_FOR_ADD).wait(seconds).check();
 	}
 
 	@Override
@@ -123,21 +123,21 @@ public class PageFichaDevice extends PageFicha {
 
 	@Override
 	public boolean isVisibleBuscarEnTiendaLink() {
-		return state(Visible, XPATH_BUSCAR_ENN_TIENDA_BUTTON).check();
+		return state(Visible, XP_BUSCAR_ENN_TIENDA_BUTTON).check();
 	}
 
 	@Override
 	public void selectBuscarEnTiendaLink() {
-		click(XPATH_BUSCAR_ENN_TIENDA_BUTTON).exec();
+		click(XP_BUSCAR_ENN_TIENDA_BUTTON).exec();
 	}
 
 	@Override
 	public boolean isModalNoStockVisible(int seconds) {
-		return state(Visible, XPATH_MODAL_NO_STOCK).wait(seconds).check();
+		return state(Visible, XP_MODAL_NO_STOCK).wait(seconds).check();
 	}
 
 	public boolean isVisibleUltimosProductosSection() {
-		return state(Visible, XPATH_ULTIMOS_PRODUCTOS_SECTION).check();
+		return state(Visible, XP_ULTIMOS_PRODUCTOS_SECTION).check();
 	}
 
 	public void clickImagenFichaCentral() {
@@ -145,16 +145,16 @@ public class PageFichaDevice extends PageFicha {
 	}
 
 	public void closeZoomImageCentralDevice() {
-		click(XPATH_ASPA_ZOOM_IMAGE_CENTRAL).exec();
+		click(XP_ASPA_ZOOM_IMAGE_CENTRAL).exec();
 	}
 
 	public int getNumImgsCarruselIzq() {
-		return getElements(XPATH_IMAGEN_CARRUSEL_IZQ).size();
+		return getElements(XP_IMAGEN_CARRUSEL_IZQ).size();
 	}
 
 	public String getSrcImgCarruselIzq(int numImagen) {
 		String srcImagen = "";
-		String xpathImagenX = "(" + XPATH_IMAGEN_CARRUSEL_IZQ + ")[" + numImagen + "]";
+		String xpathImagenX = "(" + XP_IMAGEN_CARRUSEL_IZQ + ")[" + numImagen + "]";
 		if (state(Present, xpathImagenX).check()) {
 			String srcImagenO = getElement(xpathImagenX).getAttribute("src");
 			srcImagen = srcImagenO.substring(srcImagenO.lastIndexOf("/"));
@@ -181,7 +181,7 @@ public class PageFichaDevice extends PageFicha {
 	}
 
 	public void clickImgCarruselIzq(int numImagen) {
-		String xpathImagenX = "(" + XPATH_IMAGEN_CARRUSEL_IZQ + ")[" + numImagen + "]";
+		String xpathImagenX = "(" + XP_IMAGEN_CARRUSEL_IZQ + ")[" + numImagen + "]";
 		moveToElement(xpathImagenX);
 		click(xpathImagenX).exec();
 	}
@@ -218,10 +218,10 @@ public class PageFichaDevice extends PageFicha {
 	}
 
 	public void selectGuiaDeTallasLink() {
-		click(XPATH_GUIA_DE_TALLAS_LINK).exec();
+		click(XP_GUIA_DE_TALLAS_LINK).exec();
 	}
 
 	public boolean isPresentPageUntil(int seconds) {
-		return (state(Present, XPATH_CONTAINER_FICHA).wait(seconds).check());
+		return (state(Present, XP_CONTAINER_FICHA).wait(seconds).check());
 	}
 }

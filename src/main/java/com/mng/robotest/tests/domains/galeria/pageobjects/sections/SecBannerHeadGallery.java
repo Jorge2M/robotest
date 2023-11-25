@@ -17,35 +17,35 @@ public class SecBannerHeadGallery extends PageBase {
 	
 	public enum TypeLinkInfo { MORE, LESS }
 	
-	private static final String XPATH_BANNER = "//div[@class='bannerHead' or @class='firstBanner' or @class='innerBanner' or @class='_2mOAS']"; //React
-	private static final String XPATH_BANNER_WITH_VIDEO = XPATH_BANNER + "//div[@data-video]";
-	private static final String XPATH_BANNER_WITH_BACKGROUND_IMAGE = XPATH_BANNER + "//div[@style[contains(.,'background-image')]]";
+	private static final String XP_BANNER = "//div[@class='bannerHead' or @class='firstBanner' or @class='innerBanner' or @class='_2mOAS']"; //React
+	private static final String XP_BANNER_WITH_VIDEO = XP_BANNER + "//div[@data-video]";
+	private static final String XP_BANNER_WITH_BACKGROUND_IMAGE = XP_BANNER + "//div[@style[contains(.,'background-image')]]";
 	
-	private static final String XPATH_TEXT = XPATH_BANNER +	"//*[" + 
+	private static final String XP_TEXT = XP_BANNER +	"//*[" + 
 			"@class[contains(.,'textinfo')] or " + 
 			"@class[contains(.,'vsv-text')] or " + 
 			"@class='vsv-content-text' or " +
 			"@class[contains(.,'vsv-display')] or " +
 			"@class[contains(.,'text-subtitle')]]";
 	
-	private static final String XPATH_TEXT_LINK_INFO_REBAJAS = XPATH_BANNER + "//div[@class[contains(.,'infotext')]]";
-	private static final String XPATH_TEXT_LINK_MORE_INFO_REBAJAS = XPATH_TEXT_LINK_INFO_REBAJAS + "//self::*[@class[contains(.,'max')]]";
-	private static final String XPATH_TEXT_LINK_LESS_INFO_REBAJAS = XPATH_TEXT_LINK_INFO_REBAJAS + "//self::*[@class[contains(.,'min')]]";
-	private static final String XPATH_TEXT_INFO_REBAJAS = XPATH_BANNER + "//div[@class[contains(.,'text3')]]";
+	private static final String XP_TEXT_LINK_INFO_REBAJAS = XP_BANNER + "//div[@class[contains(.,'infotext')]]";
+	private static final String XP_TEXT_LINK_MORE_INFO_REBAJAS = XP_TEXT_LINK_INFO_REBAJAS + "//self::*[@class[contains(.,'max')]]";
+	private static final String XP_TEXT_LINK_LESS_INFO_REBAJAS = XP_TEXT_LINK_INFO_REBAJAS + "//self::*[@class[contains(.,'min')]]";
+	private static final String XP_TEXT_INFO_REBAJAS = XP_BANNER + "//div[@class[contains(.,'text3')]]";
 	
 	private static String getXPathTextInfoRebajas(TypeLinkInfo typeLink) {
 		switch (typeLink) {
 		case MORE:
-			return XPATH_TEXT_LINK_MORE_INFO_REBAJAS;
+			return XP_TEXT_LINK_MORE_INFO_REBAJAS;
 		case LESS:
 		default:
-			return XPATH_TEXT_LINK_LESS_INFO_REBAJAS;
+			return XP_TEXT_LINK_LESS_INFO_REBAJAS;
 		}
 	}
 	
 	public boolean isVisible() {
-		if (state(Visible, XPATH_BANNER).check()) {
-			Dimension bannerSize = getElement(XPATH_BANNER).getSize(); 
+		if (state(Visible, XP_BANNER).check()) {
+			Dimension bannerSize = getElement(XP_BANNER).getSize(); 
 			if (bannerSize.height>0 && bannerSize.width>0) {
 				return true;
 			}
@@ -67,13 +67,13 @@ public class SecBannerHeadGallery extends PageBase {
 	}
 	
 	public boolean isBannerWithoutTextAccesible() {
-		String xpath = XPATH_BANNER_WITH_VIDEO + " | " + XPATH_BANNER_WITH_BACKGROUND_IMAGE;
+		String xpath = XP_BANNER_WITH_VIDEO + " | " + XP_BANNER_WITH_BACKGROUND_IMAGE;
 		return state(Visible, xpath).check();
 	}
 	
 	public boolean isLinkable() {
-		if (state(Present, XPATH_BANNER).check()) {
-			WebElement banner = getElement(XPATH_BANNER);
+		if (state(Present, XP_BANNER).check()) {
+			WebElement banner = getElement(XP_BANNER);
 			return state(Clickable, banner).by(By.xpath(".//a[@href]")).check();
 		}
 		return false;
@@ -81,23 +81,23 @@ public class SecBannerHeadGallery extends PageBase {
 	
 	public void clickBannerIfClickable() {
 		if (isLinkable()) {
-			click(XPATH_BANNER).exec();
+			click(XP_BANNER).exec();
 		}
 	}
 	
 	public String getText() {
-		if (state(Present, XPATH_TEXT).check()) {
-			return getElement(XPATH_BANNER).getText();
+		if (state(Present, XP_TEXT).check()) {
+			return getElement(XP_BANNER).getText();
 		}
 		return "";
 	}
 	
 	public boolean isVisibleLinkInfoRebajas() {
-		return state(Visible, XPATH_TEXT_LINK_INFO_REBAJAS).check();
+		return state(Visible, XP_TEXT_LINK_INFO_REBAJAS).check();
 	}
 
 	public void clickLinkInfoRebajas() {
-		click(XPATH_TEXT_LINK_INFO_REBAJAS).type(javascript).exec();
+		click(XP_TEXT_LINK_INFO_REBAJAS).type(javascript).exec();
 	}
 
 	public boolean isVisibleLinkTextInfoRebajas(TypeLinkInfo typeLink) {
@@ -106,6 +106,6 @@ public class SecBannerHeadGallery extends PageBase {
 	}
 	
 	public boolean isVisibleInfoRebajasUntil(int seconds) {
-		return state(Visible, XPATH_TEXT_INFO_REBAJAS).wait(seconds).check();
+		return state(Visible, XP_TEXT_INFO_REBAJAS).wait(seconds).check();
 	}
 }

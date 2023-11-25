@@ -28,42 +28,42 @@ public class Page1DktopCheckout extends PageBase {
 	private final SecEps secEps = new SecEps();
 	private final ModalAvisoCambioPais modalAvisoCambioPais = new ModalAvisoCambioPais();
 	
-	private static final String XPATH_CONF_PAGO_BUTTON_DESKTOP = "//*[@id[contains(.,'btnCheckout')]]";
-	private static final String XPATH_ALMACEN_IN_NO_PRO_ENTORNOS = "//span[@class='labelTestShowAlmacenStrong']";
-	private static final String XPATH_BLOCK_CODIGO_PROMO = "//div[@class[contains(.,'contenidoPromoCode')]]";
-	private static final String XPATH_ERROR_PROMO = "//*[@class='labelIntroduceError']";
-	private static final String XPATH_LINK_TO_VIEW_BLOCK_PROMO = "SVBody:SVResumenPromociones:FExpandirVales";
-	private static final String XPATH_INPUT_PROMO = "//input[@class[contains(.,'inputVale')]]";
-	private static final String XPATH_BUTTON_APLICAR_PROMO = "//input[@id[contains(.,'PromocionesVales')] and @type='submit']";
-	private static final String XPATH_LINK_ELIMINAR_PROMO = "//span[@class[contains(.,'promoCodeConfirmar')]]";
-	private static final String XPATH_BOTONERA_EMPL_PROMO = "//div[@class='botoneraEmpleado']";
-	private static final String XPATH_BUTTON_GUARDAR_PROMO = XPATH_BOTONERA_EMPL_PROMO + "//span[@class='botonNew']";
-	private static final String XPATH_INPUT_APELLIDO_PROMO_EMPL = "//input[@id[contains(.,'primerApellido')]]";
-	private static final String XPATH_INPUT_DNI_PROMO_EMPL = "//input[@id[contains(.,'dniEmpleado')]]";
-	private static final String XPATH_DIA_NACI_PROMO_EMPL = "//select[@id[contains(.,'naciDia')]]";
-	private static final String XPATH_MES_NACI_PROMO_EMPL = "//select[@id[contains(.,'naciMes')]]";
-	private static final String XPATH_ANY_NACI_PROMO_EMPL = "//select[@id[contains(.,'naciAny')]]";
-	private static final String XPATH_DESCUENTO_EMPLEADO = "//p[@class[contains(.,'descuento-aplicado')]]//span[@class='price-format']";
+	private static final String XP_CONF_PAGO_BUTTON_DESKTOP = "//*[@id[contains(.,'btnCheckout')]]";
+	private static final String XP_ALMACEN_IN_NO_PRO_ENTORNOS = "//span[@class='labelTestShowAlmacenStrong']";
+	private static final String XP_BLOCK_CODIGO_PROMO = "//div[@class[contains(.,'contenidoPromoCode')]]";
+	private static final String XP_ERROR_PROMO = "//*[@class='labelIntroduceError']";
+	private static final String XP_LINK_TO_VIEW_BLOCK_PROMO = "SVBody:SVResumenPromociones:FExpandirVales";
+	private static final String XP_INPUT_PROMO = "//input[@class[contains(.,'inputVale')]]";
+	private static final String XP_BUTTON_APLICAR_PROMO = "//input[@id[contains(.,'PromocionesVales')] and @type='submit']";
+	private static final String XP_LINK_ELIMINAR_PROMO = "//span[@class[contains(.,'promoCodeConfirmar')]]";
+	private static final String XP_BOTONERA_EMPL_PROMO = "//div[@class='botoneraEmpleado']";
+	private static final String XP_BUTTON_GUARDAR_PROMO = XP_BOTONERA_EMPL_PROMO + "//span[@class='botonNew']";
+	private static final String XP_INPUT_APELLIDO_PROMO_EMPL = "//input[@id[contains(.,'primerApellido')]]";
+	private static final String XP_INPUT_DNI_PROMO_EMPL = "//input[@id[contains(.,'dniEmpleado')]]";
+	private static final String XP_DIA_NACI_PROMO_EMPL = "//select[@id[contains(.,'naciDia')]]";
+	private static final String XP_MES_NACI_PROMO_EMPL = "//select[@id[contains(.,'naciMes')]]";
+	private static final String XP_ANY_NACI_PROMO_EMPL = "//select[@id[contains(.,'naciAny')]]";
+	private static final String XP_DESCUENTO_EMPLEADO = "//p[@class[contains(.,'descuento-aplicado')]]//span[@class='price-format']";
 
-	private static final String XPATH_PRECIO_REL_ARTICLE = "//div[@class[contains(.,'precioNormal')]]";
-	private static final String XPATH_PRECIO_NO_TACHADO_REL_ARTICLE = XPATH_PRECIO_REL_ARTICLE + "//self::div[not(@class[contains(.,'tachado')])]";
-	private static final String XPATH_PRECIOO_SI_TACHADO_REL_ARTICLE = XPATH_PRECIO_REL_ARTICLE + "//self::div[@class[contains(.,'tachado')]]";
-	private static final String XPATH_CANTIDAD_ARTICULOS = "//div[@class[contains(.,'cantidadRes')]]";
-	private static final String XPATH_IMPORTE_TOTAL = "//*[@id='SVBody:SVResumenDesgloseImporteTotal:importeTotal']";
-	private static final String XPATH_CLICK_DESPLIEGA_PAGOS = "//p[@class[contains(.,'anadirPago')]]";
-	private static final String XPATH_IMPORTE_TOTAL_COMPRA = "//*[@id[contains(.,'importeTotalComprar')]]";
-	private static final String XPATH_OTRAS_FORMAS_PAGO = "//div[@class[contains(.,'formasPago')]]";
-	private static final String XPATH_RED_ERROR = "//div[@class[contains(.,'errorbocatapago')]]";
+	private static final String XP_PRECIO_REL_ARTICLE = "//div[@class[contains(.,'precioNormal')]]";
+	private static final String XP_PRECIO_NO_TACHADO_REL_ARTICLE = XP_PRECIO_REL_ARTICLE + "//self::div[not(@class[contains(.,'tachado')])]";
+	private static final String XP_PRECIOO_SI_TACHADO_REL_ARTICLE = XP_PRECIO_REL_ARTICLE + "//self::div[@class[contains(.,'tachado')]]";
+	private static final String XP_CANTIDAD_ARTICULOS = "//div[@class[contains(.,'cantidadRes')]]";
+	private static final String XP_IMPORTE_TOTAL = "//*[@id='SVBody:SVResumenDesgloseImporteTotal:importeTotal']";
+	private static final String XP_CLICK_DESPLIEGA_PAGOS = "//p[@class[contains(.,'anadirPago')]]";
+	private static final String XP_IMPORTE_TOTAL_COMPRA = "//*[@id[contains(.,'importeTotalComprar')]]";
+	private static final String XP_OTRAS_FORMAS_PAGO = "//div[@class[contains(.,'formasPago')]]";
+	private static final String XP_RED_ERROR = "//div[@class[contains(.,'errorbocatapago')]]";
 	
-	private static final String XPATH_DIRECCION_FACTURACION = "//*[@id[contains(.,'datosCliente')]]";
+	private static final String XP_DIRECCION_FACTURACION = "//*[@id[contains(.,'datosCliente')]]";
 	//TODO React solicitar data-testid
-	private static final String XPATH_LINK_DESCARTAR_FACTURA = XPATH_DIRECCION_FACTURACION + "//*[text()='Descartar factura']"; 
+	private static final String XP_LINK_DESCARTAR_FACTURA = XP_DIRECCION_FACTURACION + "//*[text()='Descartar factura']"; 
 	
-	private static final String XPATH_PRECIO_SUBTOTAL = "//*[@data-testid='subTotalOrder.price']";
-	private static final String XPATH_PRECIO_TOTAL = "//*[@data-testid='totalPromotions.price']";
-	private static final String XPATH_PRECIO_TOTAL_CROATIA_EUROS = "//*[@data-testid='subTotalOrder.additionalPrice.1']";
+	private static final String XP_PRECIO_SUBTOTAL = "//*[@data-testid='subTotalOrder.price']";
+	private static final String XP_PRECIO_TOTAL = "//*[@data-testid='totalPromotions.price']";
+	private static final String XP_PRECIO_TOTAL_CROATIA_EUROS = "//*[@data-testid='subTotalOrder.additionalPrice.1']";
 	
-	private static final String XPATH_BLOQUES_PAGO_POSIBLES = 
+	private static final String XP_BLOQUES_PAGO_POSIBLES = 
 		"//div[@id='textoCondicionesTarjeta']//*[@id='CardName'] | " + 
 		"//div[@id='textoCondicionesTarjeta' and @class='paypalInfo'] | " +
 		"//div[@id='textoCondicionesTarjeta']//*[@id[contains(.,'yandex')]] | " +
@@ -72,36 +72,36 @@ public class Page1DktopCheckout extends PageBase {
 		"//div[@class='mensajesContrarembolso'] | " +
 		"//div[@class[contains(.,'cardContainerNotIntegrated')]] | " +
 		"//div[@class[contains(.,'falconFormularioTarjeta')]] | " + 
-		XPATH_OTRAS_FORMAS_PAGO; 
+		XP_OTRAS_FORMAS_PAGO; 
 	
 	private static final String TAG_METODO_PAGO = "@TagMetodoPago";
-	private static final String XPATH_BLOCK_TARJETA_GUARDADA_PAGO_WITH_TAG = "//div[@class[contains(.,'tarjetaGuardada')] and @data-analytics-value='" + TAG_METODO_PAGO + "']";
-	private static final String XPATH_RADIO_TRJ_GUARDADA = "//input[@class[contains(.,'guardadaInput')]]";
-	private static final String XPATH_CVC_TRJ_GUARDADA = "//div[@class='storedCardForm']//input[@id='cvc']";
+	private static final String XP_BLOCK_TARJETA_GUARDADA_PAGO_WITH_TAG = "//div[@class[contains(.,'tarjetaGuardada')] and @data-analytics-value='" + TAG_METODO_PAGO + "']";
+	private static final String XP_RADIO_TRJ_GUARDADA = "//input[@class[contains(.,'guardadaInput')]]";
+	private static final String XP_CVC_TRJ_GUARDADA = "//div[@class='storedCardForm']//input[@id='cvc']";
 	
-	private static final String XPATH_LINK_SOLICITAR_FACTURA = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
-	private static final String XPATH_FIRST_ARTICULO = "//div[@class[contains(.,'firstArticulo')]]";
-	private static final String XPATH_INPUT_VENDEDOR_VOTF = "//input[@class[contains(.,'codiDependenta')]]";
-	private static final String XPATH_BUTTON_ACCEPT_VENDEDOR_VOTF = "//span[@id[contains(.,'CodigoDependienta')]]";
+	private static final String XP_LINK_SOLICITAR_FACTURA = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
+	private static final String XP_FIRST_ARTICULO = "//div[@class[contains(.,'firstArticulo')]]";
+	private static final String XP_INPUT_VENDEDOR_VOTF = "//input[@class[contains(.,'codiDependenta')]]";
+	private static final String XP_BUTTON_ACCEPT_VENDEDOR_VOTF = "//span[@id[contains(.,'CodigoDependienta')]]";
 	
-	private static final String XPATH_CONTENT_CHEQUE_REGALO = "//div[@class[contains(.,'contentsChequeRegalo')]]";
-	private static final String XPATH_NOMBRE_CHEQUE_REGALO = "(" + XPATH_CONTENT_CHEQUE_REGALO + "//div[@class='span3'])[1]";
-	private static final String XPATH_PRECIO_CHEQUE_REGALO = XPATH_CONTENT_CHEQUE_REGALO + "//div[@class='span2']";
-	private static final String XPATH_MENSAJE_CHEQUE_REGALO = XPATH_CONTENT_CHEQUE_REGALO + "//div[@class='span4']";
+	private static final String XP_CONTENT_CHEQUE_REGALO = "//div[@class[contains(.,'contentsChequeRegalo')]]";
+	private static final String XP_NOMBRE_CHEQUE_REGALO = "(" + XP_CONTENT_CHEQUE_REGALO + "//div[@class='span3'])[1]";
+	private static final String XP_PRECIO_CHEQUE_REGALO = XP_CONTENT_CHEQUE_REGALO + "//div[@class='span2']";
+	private static final String XP_MENSAJE_CHEQUE_REGALO = XP_CONTENT_CHEQUE_REGALO + "//div[@class='span4']";
 	
-	private static final String XPATH_RADIO_PAGO_WITH_TAG = "//*[@class[contains(.,'cuadroPago')]]//input[@value='" + TAG_METODO_PAGO + "']/../input[@type='radio']";
+	private static final String XP_RADIO_PAGO_WITH_TAG = "//*[@class[contains(.,'cuadroPago')]]//input[@value='" + TAG_METODO_PAGO + "']/../input[@type='radio']";
 	private static final String TEXT_KREDI_KARTI = "KREDİ KARTI";
-	private static final String XPATH_PESTANYA_KREDI_KARTI = "//div[@class[contains(.,'pmGroupTitle')]]/span[text()='" + TEXT_KREDI_KARTI + "']";
+	private static final String XP_PESTANYA_KREDI_KARTI = "//div[@class[contains(.,'pmGroupTitle')]]/span[text()='" + TEXT_KREDI_KARTI + "']";
 	
-	private static final String XPATH_METODO_PAGO = "//*[@class[contains(.,'cardBox')]]";
+	private static final String XP_METODO_PAGO = "//*[@class[contains(.,'cardBox')]]";
 	
 	private static final String TAG_REFERENCIA = "@TagRef";
-	private static final String XPATH_LINEA_ARTICULO_WITH_TAG = 
+	private static final String XP_LINEA_ARTICULO_WITH_TAG = 
 		"//div[@class[contains(.,'ref')] and text()[contains(.,'" + TAG_REFERENCIA + "')]]/ancestor::div[@class[contains(.,'articuloResBody')]]";
 	
 	private static final String TAG_COD_VENDEDOR = "@TagCodVendedor";
-	private static final String XPATH_COD_VENDEDOR_VOTF_WITH_TAG = "//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + TAG_COD_VENDEDOR + "')]]";
-	private static final String XPATH_TEXT_VALE_CAMPAIGN = "//span[@class='texto_banner_promociones']";
+	private static final String XP_COD_VENDEDOR_VOTF_WITH_TAG = "//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + TAG_COD_VENDEDOR + "')]]";
+	private static final String XP_TEXT_VALE_CAMPAIGN = "//span[@class='texto_banner_promociones']";
 
 	public SecTMango getSecTMango() {
 		return secTMango;
@@ -120,16 +120,16 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	private String getXPathLinArticle(String referencia) {
-		return (XPATH_LINEA_ARTICULO_WITH_TAG.replace(TAG_REFERENCIA, referencia));
+		return (XP_LINEA_ARTICULO_WITH_TAG.replace(TAG_REFERENCIA, referencia));
 	}
 	
 	private String getXPathBlockTarjetaGuardada(String metodoPago) {
-		return (XPATH_BLOCK_TARJETA_GUARDADA_PAGO_WITH_TAG.replace(TAG_METODO_PAGO, metodoPago.toLowerCase()));
+		return (XP_BLOCK_TARJETA_GUARDADA_PAGO_WITH_TAG.replace(TAG_METODO_PAGO, metodoPago.toLowerCase()));
 	}
 	
 	private String getXPathRadioTarjetaGuardada(String metodoPago) {
 		String xpathMethod = getXPathBlockTarjetaGuardada(metodoPago);
-		return (xpathMethod + XPATH_RADIO_TRJ_GUARDADA);
+		return (xpathMethod + XP_RADIO_TRJ_GUARDADA);
 	}
 
 	public boolean isVisibleBloquePagoNoTRJIntegradaUntil(Pago pago, int seconds) {
@@ -141,21 +141,21 @@ public class Page1DktopCheckout extends PageBase {
 		default:
 			String nameExpected = pago.getNombreInCheckout(channel, app).toLowerCase();
 			return (
-				state(Visible, XPATH_BLOQUES_PAGO_POSIBLES).wait(seconds).check() &&
-				getElement(XPATH_BLOQUES_PAGO_POSIBLES).getAttribute("innerHTML").toLowerCase().contains(nameExpected));
+				state(Visible, XP_BLOQUES_PAGO_POSIBLES).wait(seconds).check() &&
+				getElement(XP_BLOQUES_PAGO_POSIBLES).getAttribute("innerHTML").toLowerCase().contains(nameExpected));
 		}
 	}
 
 	private String getXPathClickMetodoPago(String metodoPago) {
 		if (TEXT_KREDI_KARTI.compareTo(metodoPago)==0) {
-			return XPATH_PESTANYA_KREDI_KARTI;
+			return XP_PESTANYA_KREDI_KARTI;
 		}
 		String metodoPagoClick = new PageCheckoutWrapper().getMethodInputValue(metodoPago);
-		return (XPATH_RADIO_PAGO_WITH_TAG.replace(TAG_METODO_PAGO, metodoPagoClick));
+		return (XP_RADIO_PAGO_WITH_TAG.replace(TAG_METODO_PAGO, metodoPagoClick));
 	}
 
 	private String getXPathCodigoVendedorVOTF(String codigoVendedor) {
-		return (XPATH_COD_VENDEDOR_VOTF_WITH_TAG.replace(TAG_COD_VENDEDOR, codigoVendedor));
+		return (XP_COD_VENDEDOR_VOTF_WITH_TAG.replace(TAG_COD_VENDEDOR, codigoVendedor));
 	}
 	
 	public boolean isPageUntil(int secondsWait) {
@@ -163,35 +163,35 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isBloqueImporteTotal(int seconds) {
-		return state(Present, XPATH_IMPORTE_TOTAL).wait(seconds).check();
+		return state(Present, XP_IMPORTE_TOTAL).wait(seconds).check();
 	}
 
 	public boolean isPresentInputApellidoPromoEmplUntil(int seconds) {
-		return state(Present, XPATH_INPUT_APELLIDO_PROMO_EMPL).wait(seconds).check();
+		return state(Present, XP_INPUT_APELLIDO_PROMO_EMPL).wait(seconds).check();
 	}
 
 	public void inputApellidoPromoEmpl(String apellido) {
-		getElement(XPATH_INPUT_APELLIDO_PROMO_EMPL).sendKeys(apellido); 
+		getElement(XP_INPUT_APELLIDO_PROMO_EMPL).sendKeys(apellido); 
 	}
 
 	public boolean isPresentInputDNIPromoEmpl() {
-		return state(Present, XPATH_INPUT_DNI_PROMO_EMPL).check();
+		return state(Present, XP_INPUT_DNI_PROMO_EMPL).check();
 	}
 
 	public void inputDNIPromoEmpl(String dni) {
-		sendKeysWithRetry(dni, By.xpath(XPATH_INPUT_DNI_PROMO_EMPL), 2, driver);
+		sendKeysWithRetry(dni, By.xpath(XP_INPUT_DNI_PROMO_EMPL), 2, driver);
 	}
 
 	public boolean isPresentDiaNaciPromoEmpl() {
-		return state(Present, XPATH_DIA_NACI_PROMO_EMPL).check();
+		return state(Present, XP_DIA_NACI_PROMO_EMPL).check();
 	}
 
 	public boolean isPresentMesNaciPromoEmpl() {
-		return state(Present, XPATH_MES_NACI_PROMO_EMPL).check();
+		return state(Present, XP_MES_NACI_PROMO_EMPL).check();
 	}
 
 	public boolean isPresentAnyNaciPromoEmpl() {
-		return state(Present, XPATH_ANY_NACI_PROMO_EMPL).check();
+		return state(Present, XP_ANY_NACI_PROMO_EMPL).check();
 	}
 
 	/**
@@ -205,38 +205,38 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	public void selectDiaNacPromoEmpl(String value) {
-		new Select(getElement(XPATH_DIA_NACI_PROMO_EMPL)).selectByValue(value);
+		new Select(getElement(XP_DIA_NACI_PROMO_EMPL)).selectByValue(value);
 	}
 	
 	public void selectMesNacPromoEmpl(String value) {
-		new Select(getElement(XPATH_MES_NACI_PROMO_EMPL)).selectByValue(value);
+		new Select(getElement(XP_MES_NACI_PROMO_EMPL)).selectByValue(value);
 	}	
 	
 	public void selectAnyNacPromoEmpl(String value) {
-		new Select(getElement(XPATH_ANY_NACI_PROMO_EMPL)).selectByValue(value);
+		new Select(getElement(XP_ANY_NACI_PROMO_EMPL)).selectByValue(value);
 	}
 	public void clickAplicarPromo() {
-		click(XPATH_BUTTON_APLICAR_PROMO).exec();
+		click(XP_BUTTON_APLICAR_PROMO).exec();
 	}
 
 	public void clickGuardarPromo() {
-		click(XPATH_BUTTON_GUARDAR_PROMO).exec();
+		click(XP_BUTTON_GUARDAR_PROMO).exec();
 	}
 
 	public void clickConfirmarPago() {
-		click(XPATH_CONF_PAGO_BUTTON_DESKTOP).exec();
+		click(XP_CONF_PAGO_BUTTON_DESKTOP).exec();
 	}
 
 	public boolean isPresentButtonConfPago() {
-		return state(Present, XPATH_CONF_PAGO_BUTTON_DESKTOP).check();
+		return state(Present, XP_CONF_PAGO_BUTTON_DESKTOP).check();
 	}
 
 	public boolean isVisibleBlockCodigoPromoUntil(int seconds) {
-		return state(Visible, XPATH_BLOCK_CODIGO_PROMO).wait(seconds).check();
+		return state(Visible, XP_BLOCK_CODIGO_PROMO).wait(seconds).check();
 	}
 
 	public void clickLinkToViewBlockPromo() {
-		click(By.id(XPATH_LINK_TO_VIEW_BLOCK_PROMO)).exec();
+		click(By.id(XP_LINK_TO_VIEW_BLOCK_PROMO)).exec();
 	}
 
 	public void showInputCodigoPromoAndAccept(String codigoPromo) {
@@ -249,33 +249,33 @@ public class Page1DktopCheckout extends PageBase {
 		}
 	}
 	public boolean isVisibleInputCodigoPromoUntil(int seconds) {
-		return state(Visible, XPATH_INPUT_PROMO).wait(seconds).check();
+		return state(Visible, XP_INPUT_PROMO).wait(seconds).check();
 	}
 
 	public void clickEliminarValeIfExists() {
-		if (state(Visible, XPATH_LINK_ELIMINAR_PROMO).check()) {
-			click(XPATH_LINK_ELIMINAR_PROMO).exec();
+		if (state(Visible, XP_LINK_ELIMINAR_PROMO).check()) {
+			click(XP_LINK_ELIMINAR_PROMO).exec();
 		}
 	}
 
 	public void inputCodigoPromo(String codigoPromo) {
-		sendKeysWithRetry(codigoPromo, By.xpath(XPATH_INPUT_PROMO), 2, driver);
+		sendKeysWithRetry(codigoPromo, By.xpath(XP_INPUT_PROMO), 2, driver);
 	}
 
 
 	public boolean checkTextValeCampaingIs(String textoCampaingVale) {
-		if (state(Visible, XPATH_TEXT_VALE_CAMPAIGN).check()) {
-			return getElement(XPATH_TEXT_VALE_CAMPAIGN).getText().toLowerCase().contains(textoCampaingVale.toLowerCase());
+		if (state(Visible, XP_TEXT_VALE_CAMPAIGN).check()) {
+			return getElement(XP_TEXT_VALE_CAMPAIGN).getText().toLowerCase().contains(textoCampaingVale.toLowerCase());
 		}
 		return false;
 	}
 
 	public String getImporteDescuentoEmpleado() {
-		return getElement(XPATH_DESCUENTO_EMPLEADO).getText();
+		return getElement(XP_DESCUENTO_EMPLEADO).getText();
 	}
 
 	public boolean isVisibleDescuentoEmpleadoUntil(int seconds) {
-		return state(Visible, XPATH_DESCUENTO_EMPLEADO).wait(seconds).check();
+		return state(Visible, XP_DESCUENTO_EMPLEADO).wait(seconds).check();
 	}
 	
 	public void clickEditDirecEnvio() {
@@ -292,7 +292,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isNumMetodosPagoOK(boolean isEmpl) {
-		int numPagosPant = getElements(XPATH_METODO_PAGO).size();
+		int numPagosPant = getElements(XP_METODO_PAGO).size();
 		if (app!=AppEcom.votf) {
 			int numPagosPais = dataTest.getPais().getListPagosForTest(app, isEmpl).size();
 			return (numPagosPais == numPagosPant);
@@ -303,12 +303,12 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	public boolean isNumpagos(int numPagosExpected) {
-		int numPagosPant = getElements(XPATH_METODO_PAGO).size();
+		int numPagosPant = getElements(XP_METODO_PAGO).size();
 		return (numPagosPant == numPagosExpected);
 	}
 
 	public boolean isPresentMetodosPago() {
-		return state(Present, XPATH_METODO_PAGO).check();
+		return state(Present, XP_METODO_PAGO).check();
 	}
 
 	/**
@@ -325,11 +325,11 @@ public class Page1DktopCheckout extends PageBase {
 
 	
 	public void clickDesplegablePagos() {
-		getElement(XPATH_CLICK_DESPLIEGA_PAGOS).click();
+		getElement(XP_CLICK_DESPLIEGA_PAGOS).click();
 	}
 	
 	public void moveToMetodosPago() {
-		moveToElement(XPATH_IMPORTE_TOTAL_COMPRA);
+		moveToElement(XP_IMPORTE_TOTAL_COMPRA);
 	}
 	
 	public void despliegaMetodosPago() {
@@ -341,8 +341,8 @@ public class Page1DktopCheckout extends PageBase {
 
 	public boolean areMetodosPagoPlegados() {
 		return (
-			state(Present, XPATH_OTRAS_FORMAS_PAGO).check() &&
-			!state(Visible, XPATH_OTRAS_FORMAS_PAGO).check());
+			state(Present, XP_OTRAS_FORMAS_PAGO).check() &&
+			!state(Visible, XP_OTRAS_FORMAS_PAGO).check());
 	}
 
 	private void metodosPagosInStateUntil(boolean plegados, int seconds) {
@@ -366,15 +366,15 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isRedErrorVisible() {
-		return state(Visible, XPATH_RED_ERROR).check();
+		return state(Visible, XP_RED_ERROR).check();
 	}
 
 	public String getTextRedError() {
-		return getElement(XPATH_RED_ERROR).getText();
+		return getElement(XP_RED_ERROR).getText();
 	}	
 	
 	public String getPrecioTotalFromResumen(boolean normalize) {
-		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XPATH_PRECIO_TOTAL);
+		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XP_PRECIO_TOTAL);
 		if (!normalize) {
 			return precioTotal;
 		}
@@ -382,7 +382,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	public String getCroaciaPrecioTotalInEuros(boolean normalize) {
-		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XPATH_PRECIO_TOTAL_CROATIA_EUROS);
+		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XP_PRECIO_TOTAL_CROATIA_EUROS);
 		if (!normalize) {
 			return precioTotal;
 		}
@@ -390,8 +390,8 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public String getAlmacenFromNoProdEntorn() {
-		if (state(Present, XPATH_ALMACEN_IN_NO_PRO_ENTORNOS).check()) {
-			return getElement(XPATH_ALMACEN_IN_NO_PRO_ENTORNOS).getText();
+		if (state(Present, XP_ALMACEN_IN_NO_PRO_ENTORNOS).check()) {
+			return getElement(XP_ALMACEN_IN_NO_PRO_ENTORNOS).getText();
 		}
 		return "";
 	}
@@ -448,14 +448,14 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	public String getPrecioSubTotalFromResumen() {
-		return new PageCheckoutWrapper().formateaPrecioTotal(XPATH_PRECIO_SUBTOTAL);
+		return new PageCheckoutWrapper().formateaPrecioTotal(XP_PRECIO_SUBTOTAL);
 	}
 	
 	private PreciosArticulo getPreciosArticuloResumen(WebElement articuloWeb) {
 		var precios = new PreciosArticulo();
-		var preciosNoTachados= articuloWeb.findElements(By.xpath("." + XPATH_PRECIO_NO_TACHADO_REL_ARTICLE));
-		var preciosSiTachados= articuloWeb.findElements(By.xpath("." + XPATH_PRECIOO_SI_TACHADO_REL_ARTICLE));
-		int cantidad = Integer.parseInt(articuloWeb.findElement(By.xpath("." + XPATH_CANTIDAD_ARTICULOS)).getText());
+		var preciosNoTachados= articuloWeb.findElements(By.xpath("." + XP_PRECIO_NO_TACHADO_REL_ARTICLE));
+		var preciosSiTachados= articuloWeb.findElements(By.xpath("." + XP_PRECIOO_SI_TACHADO_REL_ARTICLE));
+		int cantidad = Integer.parseInt(articuloWeb.findElement(By.xpath("." + XP_CANTIDAD_ARTICULOS)).getText());
 		for (var precioNoTachado : preciosNoTachados) {
 			precios.definitivo = getFloatFromImporteScreen(precioNoTachado) / cantidad; 
 			if (precios.definitivo!=0) {
@@ -504,27 +504,27 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public void clickRadioTrjGuardada() {
-		click(XPATH_RADIO_TRJ_GUARDADA).exec();
+		click(XP_RADIO_TRJ_GUARDADA).exec();
 	}
 
 	public void inputCvcTrjGuardadaIfVisible(String cvc) {
-		if (state(Visible, XPATH_CVC_TRJ_GUARDADA).check()) {
-			var input = getElement(XPATH_CVC_TRJ_GUARDADA);
+		if (state(Visible, XP_CVC_TRJ_GUARDADA).check()) {
+			var input = getElement(XP_CVC_TRJ_GUARDADA);
 			input.clear();
 			input.sendKeys(cvc);
 		}
 	}
 
 	public void clickSolicitarFactura() {
-		getElement(XPATH_LINK_SOLICITAR_FACTURA).click();
+		getElement(XP_LINK_SOLICITAR_FACTURA).click();
 	}
 	
 	public boolean isVisibleDescartarFacturaLink() {
-		return state(Visible, XPATH_LINK_DESCARTAR_FACTURA).wait(1).check();
+		return state(Visible, XP_LINK_DESCARTAR_FACTURA).wait(1).check();
 	}
 	
 	public boolean isArticulos() {
-		return state(Present, XPATH_FIRST_ARTICULO).check();
+		return state(Present, XP_FIRST_ARTICULO).check();
 	}
 
 	/**
@@ -537,21 +537,21 @@ public class Page1DktopCheckout extends PageBase {
 
 	public boolean isVisibleErrorRojoInputPromoUntil(int seconds) {
 		return (
-			state(Visible, XPATH_ERROR_PROMO).wait(seconds).check() &&
-			getElement(XPATH_ERROR_PROMO).getAttribute("style").contains("color: red"));
+			state(Visible, XP_ERROR_PROMO).wait(seconds).check() &&
+			getElement(XP_ERROR_PROMO).getAttribute("style").contains("color: red"));
 	}
 
 	public void inputVendedorVOTF(String codigoVendedor) {
-		getElement(XPATH_INPUT_VENDEDOR_VOTF).clear();
-		getElement(XPATH_INPUT_VENDEDOR_VOTF).sendKeys(codigoVendedor);
+		getElement(XP_INPUT_VENDEDOR_VOTF).clear();
+		getElement(XP_INPUT_VENDEDOR_VOTF).sendKeys(codigoVendedor);
 	}
 
 	public void acceptInputVendedorVOTF() {
-		click(XPATH_BUTTON_ACCEPT_VENDEDOR_VOTF).exec();
+		click(XP_BUTTON_ACCEPT_VENDEDOR_VOTF).exec();
 	}
 
 	public boolean isVisibleInputVendedorVOTF(int seconds) {
-		return state(Visible, XPATH_INPUT_VENDEDOR_VOTF).wait(seconds).check();
+		return state(Visible, XP_INPUT_VENDEDOR_VOTF).wait(seconds).check();
 	}
 
 
@@ -561,10 +561,10 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isDataChequeRegalo(ChequeRegalo chequeRegalo) {
-		if (!getElement(XPATH_NOMBRE_CHEQUE_REGALO).getText().contains(chequeRegalo.getNombre()) ||
-			!getElement(XPATH_NOMBRE_CHEQUE_REGALO).getText().contains(chequeRegalo.getApellidos()) ||
-			!getElement(XPATH_PRECIO_CHEQUE_REGALO).getText().contains(chequeRegalo.getImporte().toString().replace("EURO_", "")) ||
-			!getElement(XPATH_MENSAJE_CHEQUE_REGALO).getText().contains(chequeRegalo.getMensaje())) {
+		if (!getElement(XP_NOMBRE_CHEQUE_REGALO).getText().contains(chequeRegalo.getNombre()) ||
+			!getElement(XP_NOMBRE_CHEQUE_REGALO).getText().contains(chequeRegalo.getApellidos()) ||
+			!getElement(XP_PRECIO_CHEQUE_REGALO).getText().contains(chequeRegalo.getImporte().toString().replace("EURO_", "")) ||
+			!getElement(XP_MENSAJE_CHEQUE_REGALO).getText().contains(chequeRegalo.getMensaje())) {
 			return false;
 		}
 		return true;

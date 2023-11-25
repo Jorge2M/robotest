@@ -27,9 +27,9 @@ public class CheckerGoogleAnalytics extends PageBase implements Checker {
 	public ChecksTM check(WebDriver driver) {
 		var checks = ChecksTM.getNew();
 		
-		GestorDatosHarJSON gestorHAR = UtilsChecker.getGestorHar(driver);
+		var gestorHAR = UtilsChecker.getGestorHar(driver);
 		if (gestorHAR!=null) {
-			Optional<JSONArray> listEntriesFilteredPageOpt = getListEntries(gestorHAR);
+			var listEntriesFilteredPageOpt = getListEntries(gestorHAR);
 			if (!listEntriesFilteredPageOpt.isPresent()) {
 				throw new NotFoundException("Not found entries in HAR");
 			}
@@ -40,10 +40,10 @@ public class CheckerGoogleAnalytics extends PageBase implements Checker {
 				numLineas==1, level);
 		 	
 		 	if (numLineas!=0) {
-				JSONObject entrieJSON = (JSONObject)listEntriesFilteredPageOpt.get().get(0);
-				JSONObject requestJSON = (JSONObject)entrieJSON.get("request");
-				JSONObject paramTid = gestorHAR.getParameterFromRequestQuery(requestJSON, "tid");
-				JSONObject responseJSON = (JSONObject)entrieJSON.get("response");
+				var entrieJSON = (JSONObject)listEntriesFilteredPageOpt.get().get(0);
+				var requestJSON = (JSONObject)entrieJSON.get("request");
+				var paramTid = gestorHAR.getParameterFromRequestQuery(requestJSON, "tid");
+				var responseJSON = (JSONObject)entrieJSON.get("response");
 			 	checks.add(
 					"La petición es de tipo <b>\"GET\"</b>",
 					requestJSON.get("method").toString().compareTo("GET")!=0, level);
@@ -81,4 +81,5 @@ public class CheckerGoogleAnalytics extends PageBase implements Checker {
 			return Optional.empty();
 		}
 	}
+	
 }

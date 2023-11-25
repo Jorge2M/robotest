@@ -10,21 +10,21 @@ import com.mng.robotest.testslegacy.data.Talla;
 
 public class SecTallasArticuloNormal extends SecTallasArticulo {
 
-	private static final String XPATH_ARTICULO = PageGaleriaDesktopNormal.XPATH_ARTICULO;
-	private static final String XPATH_CAPA_TALLAS_DESKTOP = "//div[@class[contains(.,'sizes-container')]]";
-	private static final String XPATH_CAPA_TALLAS_DEVICE = "//ul[@data-testid='plp.sizesSelector.list']";
-	private static final String XPATH_TALLA_AVAILABLE = "//button[@data-testid[contains(.,'size.available')]]";
-	private static final String XPATH_TALLA_UNAVAILABLE = "//button[@data-testid[contains(.,'size.unavailable')]]";	
+	private static final String XP_ARTICULO = PageGaleriaDesktopNormal.XP_ARTICULO;
+	private static final String XP_CAPA_TALLAS_DESKTOP = "//div[@class[contains(.,'sizes-container')]]";
+	private static final String XP_CAPA_TALLAS_DEVICE = "//ul[@data-testid='plp.sizesSelector.list']";
+	private static final String XP_TALLA_AVAILABLE = "//button[@data-testid[contains(.,'size.available')]]";
+	private static final String XP_TALLA_UNAVAILABLE = "//button[@data-testid[contains(.,'size.unavailable')]]";	
 	
 	public SecTallasArticuloNormal() {
-		super(XPATH_ARTICULO);
+		super(XP_ARTICULO);
 	}
 	
 	private String getXPathCapaTallas() {
 		if (channel.isDevice()) {
-			return XPATH_CAPA_TALLAS_DEVICE;
+			return XP_CAPA_TALLAS_DEVICE;
 		}
-		return XPATH_CAPA_TALLAS_DESKTOP;
+		return XP_CAPA_TALLAS_DESKTOP;
 	}
 	
 	private String getXPathCapaTallas(int position) {
@@ -36,7 +36,7 @@ public class SecTallasArticuloNormal extends SecTallasArticulo {
 
 	private String getXPathArticleTallaAvailable(int posArticulo) {
 		String xpathCapaTallas = getXPathCapaTallas(posArticulo);
-		return xpathCapaTallas + XPATH_TALLA_AVAILABLE;
+		return xpathCapaTallas + XP_TALLA_AVAILABLE;
 	}
 	
 	@Override
@@ -58,12 +58,12 @@ public class SecTallasArticuloNormal extends SecTallasArticulo {
 	
 	@Override
 	public boolean isVisibleTallaNotAvailable() {
-		return state(Visible, XPATH_TALLA_UNAVAILABLE).check();
+		return state(Visible, XP_TALLA_UNAVAILABLE).check();
 	}
 	
 	@Override
 	public void selectTallaArticleNotAvalaible() {
-		click(XPATH_TALLA_UNAVAILABLE).exec();
+		click(XP_TALLA_UNAVAILABLE).exec();
 	}	
 	
 	@Override

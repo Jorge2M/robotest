@@ -8,10 +8,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageYandex1rst extends PageBase {
 
-	private static final String XPATH_INPUT_EMAIL = "//input[@name='cps_email']";
-	private static final String XPATH_BUTTON_CONTINUE = "//div[@class[contains(.,'payment-submit')]]//button";
-	private static final String XPATH_INPUT_TELEFONO = "//input[@name[contains(.,'phone')]]";
-	private static final String XPATH_RETRY_BUTTON = "//span[@class='button__text' and text()[contains(.,'Повторить попытку')]]";
+	private static final String XP_INPUT_EMAIL = "//input[@name='cps_email']";
+	private static final String XP_BUTTON_CONTINUE = "//div[@class[contains(.,'payment-submit')]]//button";
+	private static final String XP_INPUT_TELEFONO = "//input[@name[contains(.,'phone')]]";
+	private static final String XP_RETRY_BUTTON = "//span[@class='button__text' and text()[contains(.,'Повторить попытку')]]";
 
 	public boolean isPage() {
 		return (driver.getTitle().toLowerCase().contains("yandex"));
@@ -23,23 +23,23 @@ public class PageYandex1rst extends PageBase {
 	}
 	
 	public String getValueInputEmail() {
-		return getElement(XPATH_INPUT_EMAIL).getAttribute("value");
+		return getElement(XP_INPUT_EMAIL).getAttribute("value");
 	}
 
 	public void clickContinue() {
-		click(XPATH_BUTTON_CONTINUE).exec();
+		click(XP_BUTTON_CONTINUE).exec();
 	}
 
 	public void inputTelefono(String telefono) {
-		getElement(XPATH_INPUT_TELEFONO).clear();
-		sendKeysWithRetry(telefono, By.xpath(XPATH_INPUT_TELEFONO), 2, driver);
+		getElement(XP_INPUT_TELEFONO).clear();
+		sendKeysWithRetry(telefono, By.xpath(XP_INPUT_TELEFONO), 2, driver);
 	}
 
 	public boolean retryButtonExists() {
-		return state(Present, XPATH_RETRY_BUTTON).check();
+		return state(Present, XP_RETRY_BUTTON).check();
 	}
 
 	public void clickOnRetry() {
-		click(XPATH_RETRY_BUTTON).waitLoadPage(2).exec();
+		click(XP_RETRY_BUTTON).waitLoadPage(2).exec();
 	}
 }

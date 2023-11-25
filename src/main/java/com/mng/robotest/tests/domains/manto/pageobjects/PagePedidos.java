@@ -56,22 +56,22 @@ public class PagePedidos extends PageBase {
 	}
 	
 	private static final String TAG_LIN_CABECERA = "@linCabecera";
-	private static final String XPATH_TABLA_PEDIDOS = "//table//span[text()='Tpv']/../../..";
-	private static final String XPATH_CABECERA_TABLA_PEDIDOS = XPATH_TABLA_PEDIDOS + "//tr[" + TAG_LIN_CABECERA + "]";
-	private static final String XPATH_LINEA_PEDIDO = XPATH_TABLA_PEDIDOS + "//input[@type='checkbox' and @title='Multi almacén']";
-	public static final String XPATH_IMPORTE_LINEA_PEDIDO = "//table//tr/td[22]";
-	private static final String XPATH_MAIN_FORM = "//form[@action='/pedidos.faces']";
-	private static final String XPATH_CAPA_LOADING = "//div[@id[contains(.,'oading')]]";
-	private static final String INI_XPATH_ID_REGISTRO = "//table//tr[";
-	private static final String XPATH_LINK_PAGINA_SIGUIENTE_PEDIDOS = "//a[text()='>']";
+	private static final String XP_TABLA_PEDIDOS = "//table//span[text()='Tpv']/../../..";
+	private static final String XP_CABECERA_TABLA_PEDIDOS = XP_TABLA_PEDIDOS + "//tr[" + TAG_LIN_CABECERA + "]";
+	private static final String XP_LINEA_PEDIDO = XP_TABLA_PEDIDOS + "//input[@type='checkbox' and @title='Multi almacén']";
+	public static final String XP_IMPORTE_LINEA_PEDIDO = "//table//tr/td[22]";
+	private static final String XP_MAIN_FORM = "//form[@action='/pedidos.faces']";
+	private static final String XP_CAPA_LOADING = "//div[@id[contains(.,'oading')]]";
+	private static final String INI_XP_ID_REGISTRO = "//table//tr[";
+	private static final String XP_LINK_PAGINA_SIGUIENTE_PEDIDOS = "//a[text()='>']";
 	
 	private String getXPathCabeceraTablePedidos(TypeDetalle typeDetalle) {
 		switch (typeDetalle) {
 		case BOLSA:
-			return (XPATH_CABECERA_TABLA_PEDIDOS.replace(TAG_LIN_CABECERA, "3"));
+			return (XP_CABECERA_TABLA_PEDIDOS.replace(TAG_LIN_CABECERA, "3"));
 		case PEDIDO:
 		default:
-			return (XPATH_CABECERA_TABLA_PEDIDOS.replace(TAG_LIN_CABECERA, "5"));
+			return (XP_CABECERA_TABLA_PEDIDOS.replace(TAG_LIN_CABECERA, "5"));
 		}
 	}
 	
@@ -99,7 +99,7 @@ public class PagePedidos extends PageBase {
 	}
 	
 	private String getXPathIdRegistroForLine(int linea){
-		return INI_XPATH_ID_REGISTRO + linea + "]/td[16]/span[1]";
+		return INI_XP_ID_REGISTRO + linea + "]/td[16]/span[1]";
 	}
 
 	public int getPosicionColumn(IdColumn idColumn, TypeDetalle typeDetalle) {
@@ -117,15 +117,15 @@ public class PagePedidos extends PageBase {
 	}
 
 	public boolean isPage() {
-		return state(Present, XPATH_MAIN_FORM).check();
+		return state(Present, XP_MAIN_FORM).check();
 	}
 
 	public boolean isInvisibleCapaLoadingUntil(int seconds) {
-		return state(Invisible, XPATH_CAPA_LOADING).wait(seconds).check();
+		return state(Invisible, XP_CAPA_LOADING).wait(seconds).check();
 	}
 
 	public int getNumLineas() {
-		return getElements(XPATH_LINEA_PEDIDO).size();
+		return getElements(XP_LINEA_PEDIDO).size();
 	}
 	
 	public void clickLinkPedidoInLineas(String codigoPedidoManto, TypeDetalle typeDetalle) {
@@ -163,7 +163,7 @@ public class PagePedidos extends PageBase {
 	}
 
 	public void clickPaginaSiguientePedidos() {
-		click(XPATH_LINK_PAGINA_SIGUIENTE_PEDIDOS).exec();
+		click(XP_LINK_PAGINA_SIGUIENTE_PEDIDOS).exec();
 	}
 
 	public void clickPedidoWithTypeEnvio(Envio envio) {

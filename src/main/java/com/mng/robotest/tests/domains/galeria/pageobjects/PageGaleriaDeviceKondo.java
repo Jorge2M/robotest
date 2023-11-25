@@ -12,9 +12,9 @@ public class PageGaleriaDeviceKondo extends PageGaleriaDevice {
 
 	private final CommonGaleriaKondo commonKondo = new CommonGaleriaKondo();
 	
-	private static final String XPATH_COLOR_ARTICLE_BUTTON = "//*[@data-testid='productCard.showColors.button']";
-	private static final String XPATH_COLOR_ARTICLE_OPTION = "//button[@data-testid='plp.color.selector']";
-	private static final String XPATH_UP_BUTTON = "//*[@data-testid='button-icon']";
+	private static final String XP_COLOR_ARTICLE_BUTTON = "//*[@data-testid='productCard.showColors.button']";
+	private static final String XP_COLOR_ARTICLE_OPTION = "//button[@data-testid='plp.color.selector']";
+	private static final String XP_UP_BUTTON = "//*[@data-testid='button-icon']";
 	
 	public PageGaleriaDeviceKondo() {
 		super();
@@ -36,12 +36,12 @@ public class PageGaleriaDeviceKondo extends PageGaleriaDevice {
 
 	@Override
 	protected String getXPathArticuloConColores() {
-		return XPATH_COLOR_ARTICLE_BUTTON + getXPathArticuloAncestor();
+		return XP_COLOR_ARTICLE_BUTTON + getXPathArticuloAncestor();
 	}
 
 	@Override
 	protected String getXPathColorArticleOption() {
-		return XPATH_COLOR_ARTICLE_OPTION;
+		return XP_COLOR_ARTICLE_OPTION;
 	}
 	
 	@Override
@@ -76,13 +76,13 @@ public class PageGaleriaDeviceKondo extends PageGaleriaDevice {
 	
 	@Override
 	public void showColors(WebElement articulo) {
-		By byColorButton = By.xpath("." + XPATH_COLOR_ARTICLE_BUTTON);
+		By byColorButton = By.xpath("." + XP_COLOR_ARTICLE_BUTTON);
 		click(articulo).by(byColorButton).exec();
 	}
 	
 	@Override
 	public boolean backTo1erArticulo() throws InterruptedException {
-		return backTo1erArticulo(XPATH_UP_BUTTON);
+		return backTo1erArticulo(XP_UP_BUTTON);
 	}	
 	
 	public boolean isVisibleColorTags(List<Color> colors) {

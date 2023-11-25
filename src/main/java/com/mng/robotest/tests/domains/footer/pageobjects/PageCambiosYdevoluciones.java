@@ -6,7 +6,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageCambiosYdevoluciones extends PageBase implements PageFromFooter {
 	
-	private static final String XPATH_FOR_ID_PAGE = "//*[text()[contains(.,'Devoluciones, cambios y reembolsos')]]";
+	private static final String XP_FOR_ID_PAGE = "//*[text()[contains(.,'Devoluciones, cambios y reembolsos')]]";
 	
 	@Override
 	public String getName() {
@@ -15,6 +15,6 @@ public class PageCambiosYdevoluciones extends PageBase implements PageFromFooter
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return state(Present, XPATH_FOR_ID_PAGE).wait(seconds).check();
+		return state(Present, XP_FOR_ID_PAGE).wait(seconds).check();
 	}
 }

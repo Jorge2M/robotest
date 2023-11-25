@@ -28,16 +28,16 @@ public class ModCompartirNew extends PageBase {
 		}		
 	}
 	
-	private static final String XPATH_WRAPPER = "//div[@id='productSocial']";
-	private static final String XPATH_ICON = "//a[@class='icon']";
+	private static final String XP_WRAPPER = "//div[@id='productSocial']";
+	private static final String XP_ICON = "//a[@class='icon']";
 	
 	private String getXPathIcon(IconSocial icon) {
-		return (XPATH_ICON + "//self::*[@data-ga='" + icon.name().toLowerCase() + "']");
+		return (XP_ICON + "//self::*[@data-ga='" + icon.name().toLowerCase() + "']");
 	}
 	
 	public boolean isVisibleUntil(int seconds) {
-		moveToElement(XPATH_WRAPPER);
-		return state(Visible, XPATH_WRAPPER).wait(seconds).check();
+		moveToElement(XP_WRAPPER);
+		return state(Visible, XP_WRAPPER).wait(seconds).check();
 	}
 	
 	public boolean isVisibleIcon(IconSocial icon) {

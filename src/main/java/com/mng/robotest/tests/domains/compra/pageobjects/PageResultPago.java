@@ -7,16 +7,16 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageResultPago extends PageBase {
 	
-	private static final String XPATH_TEXT_CONFIRMACION_PAGO_ESTANDAR = "//*[@data-testid[contains(.,'confirmationText')] or @data-testid='purchaseConfirmation.confirmationText']";
-	public static final String XPATH_DESCUBRIR_LO_ULTIMO_BUTTON = "//*[@data-testid[contains(.,'cta.goToMain')]]";
-	public static final String XPATH_DATA_PEDIDO = "//*[@data-testid[contains(.,'purchaseData')]]"; 
-	public static final String XPATH_CODIGO_PEDIDO_ESTANDAR = XPATH_DATA_PEDIDO + "//*[@data-testid[contains(.,'.orderId')]]";
-	public static final String XPATH_CODIGO_PEDIDO_CONTRAREEMBOLSO_DESKTOP = "//div[@class='labels']//*[@class[contains(.,'data')] and string-length(text())=6]";
-	public static final String XPATH_CODIGO_PEDIDO_CONTRAREEMBOLSO_MOBIL = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
-	public static final String XPATH_BUTTON_MIS_COMPRAS = "//button[@data-testid[contains(.,'goToMyPurchases')] or @data-testid[contains(.,'goToMyOrders')]]";
-	public static final String XPATH_MICROFRONTEND_LOYALTY = "//micro-frontend[@name='purchaseConfirmation']";
-	public static final String XPATH_BLOCK_NEW_LOYALTY_POINTS = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
-	public static final String XPATH_LINK_DESCUENTOS_Y_EXPERIENCIAS = "//*[@data-testid='mng-link']";
+	private static final String XP_TEXT_CONFIRMACION_PAGO_ESTANDAR = "//*[@data-testid[contains(.,'confirmationText')] or @data-testid='purchaseConfirmation.confirmationText']";
+	public static final String XP_DESCUBRIR_LO_ULTIMO_BUTTON = "//*[@data-testid[contains(.,'cta.goToMain')]]";
+	public static final String XP_DATA_PEDIDO = "//*[@data-testid[contains(.,'purchaseData')]]"; 
+	public static final String XP_CODIGO_PEDIDO_ESTANDAR = XP_DATA_PEDIDO + "//*[@data-testid[contains(.,'.orderId')]]";
+	public static final String XP_CODIGO_PEDIDO_CONTRAREEMBOLSO_DESKTOP = "//div[@class='labels']//*[@class[contains(.,'data')] and string-length(text())=6]";
+	public static final String XP_CODIGO_PEDIDO_CONTRAREEMBOLSO_MOBIL = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
+	public static final String XP_BUTTON_MIS_COMPRAS = "//button[@data-testid[contains(.,'goToMyPurchases')] or @data-testid[contains(.,'goToMyOrders')]]";
+	public static final String XP_MICROFRONTEND_LOYALTY = "//micro-frontend[@name='purchaseConfirmation']";
+	public static final String XP_BLOCK_NEW_LOYALTY_POINTS = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
+	public static final String XP_LINK_DESCUENTOS_Y_EXPERIENCIAS = "//*[@data-testid='mng-link']";
 
 	public boolean checkUrl(int seconds) {
 		for (int i=0; i<seconds; i++) {
@@ -35,40 +35,40 @@ public class PageResultPago extends PageBase {
 	}
 
 	public boolean isVisibleTextoConfirmacionPago(int seconds) {
-		return state(Visible, XPATH_TEXT_CONFIRMACION_PAGO_ESTANDAR).wait(seconds).check();
+		return state(Visible, XP_TEXT_CONFIRMACION_PAGO_ESTANDAR).wait(seconds).check();
 	}
 
 	public boolean isVisibleDescubrirLoUltimo() {
-		return state(Visible, XPATH_DESCUBRIR_LO_ULTIMO_BUTTON).check();
+		return state(Visible, XP_DESCUBRIR_LO_ULTIMO_BUTTON).check();
 	}
 	
 	public void clickDescubrirLoUltimo() {
-		click(XPATH_DESCUBRIR_LO_ULTIMO_BUTTON).exec();
+		click(XP_DESCUBRIR_LO_ULTIMO_BUTTON).exec();
 	}
 
 	public String getCodigoPedido(int seconds) {
-		if (state(Present, XPATH_CODIGO_PEDIDO_ESTANDAR).wait(seconds).check()) {
-			return getElement(XPATH_CODIGO_PEDIDO_ESTANDAR).getText();
+		if (state(Present, XP_CODIGO_PEDIDO_ESTANDAR).wait(seconds).check()) {
+			return getElement(XP_CODIGO_PEDIDO_ESTANDAR).getText();
 		}
 		return "";
 	}
 
 	public boolean isButtonMisCompras(int seconds) {
-		return state(Visible, XPATH_BUTTON_MIS_COMPRAS).wait(seconds).check();
+		return state(Visible, XP_BUTTON_MIS_COMPRAS).wait(seconds).check();
 	}
 
 	public void clickMisCompras() {
-		click(XPATH_BUTTON_MIS_COMPRAS).exec();
-		if (!state(Invisible, XPATH_BUTTON_MIS_COMPRAS).wait(1).check()) {
-			click(XPATH_BUTTON_MIS_COMPRAS).type(javascript).exec();
+		click(XP_BUTTON_MIS_COMPRAS).exec();
+		if (!state(Invisible, XP_BUTTON_MIS_COMPRAS).wait(1).check()) {
+			click(XP_BUTTON_MIS_COMPRAS).type(javascript).exec();
 		}
 	}
 
 	public boolean isVisibleBlockNewLoyaltyPoints() {
-		return state(Visible, XPATH_BLOCK_NEW_LOYALTY_POINTS).check();
+		return state(Visible, XP_BLOCK_NEW_LOYALTY_POINTS).check();
 	}
 	public int getLikesGenerated() {
-		var microLikes = getElement(XPATH_MICROFRONTEND_LOYALTY);
+		var microLikes = getElement(XP_MICROFRONTEND_LOYALTY);
 		if (microLikes!=null) {
 			return Integer.valueOf(microLikes.getAttribute("likes"));
 		}
@@ -76,7 +76,7 @@ public class PageResultPago extends PageBase {
 	}
 	
 	public void clickLinkDescuentosExperiencias() {
-		state(Visible, XPATH_LINK_DESCUENTOS_Y_EXPERIENCIAS).wait(2).check();
-		click(XPATH_LINK_DESCUENTOS_Y_EXPERIENCIAS).exec();
+		state(Visible, XP_LINK_DESCUENTOS_Y_EXPERIENCIAS).wait(2).check();
+		click(XP_LINK_DESCUENTOS_Y_EXPERIENCIAS).exec();
 	}
 }

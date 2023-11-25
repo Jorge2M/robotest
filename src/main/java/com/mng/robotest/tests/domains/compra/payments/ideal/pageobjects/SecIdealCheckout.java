@@ -38,20 +38,20 @@ public class SecIdealCheckout extends PageBase {
 		}
 	}
 
-	private static final String XPATH_CARD_CONDITIONS = "//div[@id='textoCondicionesTarjeta']";
-	private static final String XPATH_SELECTOR_BANK_IDEAL = "//*[@data-testid='nonPciForm.bank.selector']"; //
-	private static final String XPATH_LIST_BANK_IDEAL = "//div[@data-testid='nonPciForm.bank.selector.listbox']/div[@role='option']";
+	private static final String XP_CARD_CONDITIONS = "//div[@id='textoCondicionesTarjeta']";
+	private static final String XP_SELECTOR_BANK_IDEAL = "//*[@data-testid='nonPciForm.bank.selector']"; //
+	private static final String XP_LIST_BANK_IDEAL = "//div[@data-testid='nonPciForm.bank.selector.listbox']/div[@role='option']";
 
 	private String getXPathBankOption(BancoSeleccionado bancoSeleccionado) {
-		return XPATH_LIST_BANK_IDEAL + "//self::*[@name='" + bancoSeleccionado.getNombre() + "']";
+		return XP_LIST_BANK_IDEAL + "//self::*[@name='" + bancoSeleccionado.getNombre() + "']";
 	}
 	
 	public boolean isVisibleUntil(int seconds) {
-		return state(Visible, XPATH_CARD_CONDITIONS).wait(seconds).check();
+		return state(Visible, XP_CARD_CONDITIONS).wait(seconds).check();
 	}
 	
 	public boolean isVisibleSelectorOfBank(int seconds) {
-		return state(Present, XPATH_SELECTOR_BANK_IDEAL).wait(seconds).check();
+		return state(Present, XP_SELECTOR_BANK_IDEAL).wait(seconds).check();
 	}
 	
 	public boolean isBancoDisponible(BancoSeleccionado bancoSeleccionado) {
@@ -60,7 +60,7 @@ public class SecIdealCheckout extends PageBase {
 	}
 	
 	public void clickBancoByValue(BancoSeleccionado bancoSeleccionado) {
-		click(XPATH_SELECTOR_BANK_IDEAL).exec();
+		click(XP_SELECTOR_BANK_IDEAL).exec();
 		click(getXPathBankOption(bancoSeleccionado)).exec();
 	}
 	

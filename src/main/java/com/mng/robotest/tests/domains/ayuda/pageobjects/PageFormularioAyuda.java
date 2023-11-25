@@ -10,14 +10,14 @@ import java.util.List;
 
 public class PageFormularioAyuda extends PageBase {
 
-	private static final String XPATH_SELECTOR = "//*[@data-testid[contains(.,'contactForm.selectCategory.selector')]]";
+	private static final String XP_SELECTOR = "//*[@data-testid[contains(.,'contactForm.selectCategory.selector')]]";
 	
 	private String getXPathSelector(int level) {
-		return XPATH_SELECTOR + "//self::*[@data-testid[contains(.,'level" + level + "')]]";
+		return XP_SELECTOR + "//self::*[@data-testid[contains(.,'level" + level + "')]]";
 	}
 	
 	public boolean isPage(int seconds) {
-		return state(Visible, XPATH_SELECTOR).wait(seconds).check();
+		return state(Visible, XP_SELECTOR).wait(seconds).check();
 	}
 	
 	public void inputInSelectors(List<String> inputData) {

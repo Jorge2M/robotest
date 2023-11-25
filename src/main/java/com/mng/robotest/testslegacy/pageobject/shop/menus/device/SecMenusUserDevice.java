@@ -44,10 +44,10 @@ public class SecMenusUserDevice extends PageBase {
 			//"//*[@data-label='cambio_pais']",
 			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'preHome')]]");
 
-		private static final String XPATH_CAPA_USER_MENU = "//ul";
+		private static final String XP_CAPA_USER_MENU = "//ul";
 		private By byMenu;
 		MenuUserDevice(String xpath) {
-			byMenu = By.xpath(XPATH_CAPA_USER_MENU + xpath);
+			byMenu = By.xpath(XP_CAPA_USER_MENU + xpath);
 		}
 
 		@Override

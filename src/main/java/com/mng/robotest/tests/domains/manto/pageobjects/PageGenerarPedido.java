@@ -11,11 +11,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageGenerarPedido extends PageBase {
 
-	private static final String XPATH_ESTADO_PEDIDO_SELECT = "//span[text()[contains(.,'Estado Pedido')]]/../..//select";
-	private static final String XPATH_INPUT_PURCHORDER_NUM = "//span[text()[contains(.,'PurchorderNum')]]/../..//input";
-	private static final String XPATH_GENERAR_FICHERO_BUTTON = "//input[@value='Generar Fichero Pedido']";
-	private static final String XPATH_MESSAGE_OK_FICHERO_CREADO = "//span[text()[contains(.,'Fichero creado correctamente')]]";
-	private static final String XPATH_RADIO_INFORMA_BANCO = "//input[@id[contains(.,'devolucionBanco')]]";
+	private static final String XP_ESTADO_PEDIDO_SELECT = "//span[text()[contains(.,'Estado Pedido')]]/../..//select";
+	private static final String XP_INPUT_PURCHORDER_NUM = "//span[text()[contains(.,'PurchorderNum')]]/../..//input";
+	private static final String XP_GENERAR_FICHERO_BUTTON = "//input[@value='Generar Fichero Pedido']";
+	private static final String XP_MESSAGE_OK_FICHERO_CREADO = "//span[text()[contains(.,'Fichero creado correctamente')]]";
+	private static final String XP_RADIO_INFORMA_BANCO = "//input[@id[contains(.,'devolucionBanco')]]";
 	
 	public enum EstadoPedido {
 		OK(0),	
@@ -46,7 +46,7 @@ public class PageGenerarPedido extends PageBase {
 	}
 	
 	public boolean isPage(String idPedido) {
-		WebElement inputIdPedido = getElementWeb(XPATH_INPUT_PURCHORDER_NUM);
+		WebElement inputIdPedido = getElementWeb(XP_INPUT_PURCHORDER_NUM);
 		if (inputIdPedido!=null) {
 			String valueInput = inputIdPedido.getAttribute("value");
 			if (valueInput!=null) {
@@ -68,26 +68,26 @@ public class PageGenerarPedido extends PageBase {
 	
 	private void selectEstadoStaleUnsafe(EstadoPedido estado) {
 		String value = String.valueOf(estado.value);
-		select(XPATH_ESTADO_PEDIDO_SELECT, value)
+		select(XP_ESTADO_PEDIDO_SELECT, value)
 			.type(Value).wait(30).exec();
 	}
 	
 	public EstadoPedido getEstadoPedido() {
-		String estado = getElement(XPATH_ESTADO_PEDIDO_SELECT + "/option[@selected]")
+		String estado = getElement(XP_ESTADO_PEDIDO_SELECT + "/option[@selected]")
 				.getAttribute("value");
 		
 		return EstadoPedido.getEstado(Integer.valueOf(estado));
 	}
 	
 	public void clickGenerarFicheroPedido() {
-		click(XPATH_GENERAR_FICHERO_BUTTON).exec();
+		click(XP_GENERAR_FICHERO_BUTTON).exec();
 	}
 	
 	public boolean isVisibleMessageFileCreated() {
-		return state(Visible, XPATH_MESSAGE_OK_FICHERO_CREADO).check();
+		return state(Visible, XP_MESSAGE_OK_FICHERO_CREADO).check();
 	}
 	
 	public void clickInformarBancoEnCasoCancelacionAlGenerarPedido() {
-		click(XPATH_RADIO_INFORMA_BANCO).exec();
+		click(XP_RADIO_INFORMA_BANCO).exec();
 	}
 }

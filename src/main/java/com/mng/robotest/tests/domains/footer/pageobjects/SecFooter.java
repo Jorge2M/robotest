@@ -13,8 +13,8 @@ import static com.mng.robotest.tests.domains.legal.legaltexts.FactoryLegalTexts.
 
 public class SecFooter extends PageBase {
 
-	private static final String XPATH_CAPA_SHOP = "//div[@id='nav-footer']";
-	private static final String XPATH_CAPA_OUTLET = "//footer[@id='footerMNG']";
+	private static final String XP_CAPA_SHOP = "//div[@id='nav-footer']";
+	private static final String XP_CAPA_OUTLET = "//footer[@id='footerMNG']";
 	
 	private final SecNewsLetter secNewsLetter = new SecNewsLetter();
 	
@@ -79,8 +79,8 @@ public class SecFooter extends PageBase {
 
 	}
 	
-	private static final String XPATH_CAMBIO_PAIS_SHOP = "//div[@class[contains(.,'modalCambioPaisShow')]]";
-	private static final String XPATH_CAMBIO_PAIS_OUTLET = "//span[@class[contains(.,'countrySelector')]]";
+	private static final String XP_CAMBIO_PAIS_SHOP = "//div[@class[contains(.,'modalCambioPaisShow')]]";
+	private static final String XP_CAMBIO_PAIS_OUTLET = "//span[@class[contains(.,'countrySelector')]]";
 	
 	public SecFooter() {
 		super(SUSCRIPCION_EN_FOOTER_Y_NON_MODAL_LEGAL_TEXTS);
@@ -89,10 +89,10 @@ public class SecFooter extends PageBase {
 	private String getXPathCapaFooter() {
 		switch (app) {
 		case outlet:
-			return XPATH_CAPA_OUTLET;
+			return XP_CAPA_OUTLET;
 		case shop:
 		default:
-			return XPATH_CAPA_SHOP;
+			return XP_CAPA_SHOP;
 		}
 	}
 	
@@ -102,9 +102,9 @@ public class SecFooter extends PageBase {
 	
 	private String getXPathLinkCambioPais() {
 		if (app==AppEcom.outlet) {
-			return XPATH_CAMBIO_PAIS_OUTLET;
+			return XP_CAMBIO_PAIS_OUTLET;
 		}
-		return XPATH_CAMBIO_PAIS_SHOP;
+		return XP_CAMBIO_PAIS_SHOP;
 	}
 	
 	public boolean isPresent() {

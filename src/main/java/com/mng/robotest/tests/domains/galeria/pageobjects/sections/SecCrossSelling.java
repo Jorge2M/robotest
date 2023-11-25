@@ -11,14 +11,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecCrossSelling extends PageBase {
 	
-	private static final String XPATH_SECTION_MOVIL = "//section[@class='cross-selling']";
-	private static final String XPATH_SECTION_DESKTOP = "//section[@id='crossSelling']";
+	private static final String XP_SECTION_MOVIL = "//section[@class='cross-selling']";
+	private static final String XP_SECTION_DESKTOP = "//section[@id='crossSelling']";
 
 	private String getXPathSection() {
 		if (channel==Channel.desktop) {
-			return XPATH_SECTION_DESKTOP;
+			return XP_SECTION_DESKTOP;
 		}
-		return XPATH_SECTION_MOVIL;
+		return XP_SECTION_MOVIL;
 	}
 	
 	public String getXPath_link(int numLink) {

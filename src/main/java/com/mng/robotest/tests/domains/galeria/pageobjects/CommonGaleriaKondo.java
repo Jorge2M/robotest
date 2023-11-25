@@ -10,27 +10,27 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 
 public class CommonGaleriaKondo extends PageBase {
 
-	private static final String XPATH_CAPA_ARTICULO = "//div[@data-testid='plp.product.figure']";
-	public static final String XPATH_ARTICULO = XPATH_CAPA_ARTICULO + "/..";
-	private static final String XPATH_ANCESTOR_ARTICLE = "//ancestor::div[@data-testid='plp.product.figure']/..";
+	private static final String XP_CAPA_ARTICULO = "//div[@data-testid='plp.product.figure']";
+	public static final String XP_ARTICULO = XP_CAPA_ARTICULO + "/..";
+	private static final String XP_ANCESTOR_ARTICLE = "//ancestor::div[@data-testid='plp.product.figure']/..";
 	
 	//TODO Galería Kondo -> Solicitar React (11-10-2023)
-	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE_DESKTOP = "//div[@class[contains(.,'md12')]]";
-	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE_DEVICE = "//p[@class[contains(.,'hYlwk')]]/span[2]";
+	private static final String XP_NOMBRE_RELATIVE_TO_ARTICLE_DESKTOP = "//div[@class[contains(.,'md12')]]";
+	private static final String XP_NOMBRE_RELATIVE_TO_ARTICLE_DEVICE = "//p[@class[contains(.,'hYlwk')]]/span[2]";
 
 	public String getXPathArticulo() {
-		return XPATH_ARTICULO;
+		return XP_ARTICULO;
 	}
 	
 	public String getXPathArticuloAncestor() {
-		return XPATH_ANCESTOR_ARTICLE;
+		return XP_ANCESTOR_ARTICLE;
 	}	
 	
 	public String getXPathNombreRelativeToArticle() {
 		if (channel.isDevice()) {
-			return XPATH_NOMBRE_RELATIVE_TO_ARTICLE_DEVICE;
+			return XP_NOMBRE_RELATIVE_TO_ARTICLE_DEVICE;
 		}
-		return XPATH_NOMBRE_RELATIVE_TO_ARTICLE_DESKTOP;
+		return XP_NOMBRE_RELATIVE_TO_ARTICLE_DESKTOP;
 	}
 	
 	private String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
@@ -75,7 +75,7 @@ public class CommonGaleriaKondo extends PageBase {
 	}	
 	
 	private String getReference(WebElement articulo) {
-		return getElement(articulo, "." + XPATH_CAPA_ARTICULO).getAttribute("reference");
+		return getElement(articulo, "." + XP_CAPA_ARTICULO).getAttribute("reference");
 	}
 
 }

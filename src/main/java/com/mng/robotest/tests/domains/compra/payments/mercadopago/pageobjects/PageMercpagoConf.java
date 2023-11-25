@@ -6,16 +6,16 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageMercpagoConf extends PageBase {
 	
-	private static final String XPATH_SECTION_REVIEW_DESKTOP = "//section[@class='review-step']";
-	private static final String XPATH_BUTTON_PAGAR = "//button[@class[contains(.,'ch-btn')] and @type='submit']";
+	private static final String XP_SECTION_REVIEW_DESKTOP = "//section[@class='review-step']";
+	private static final String XP_BUTTON_PAGAR = "//button[@class[contains(.,'ch-btn')] and @type='submit']";
 	
 	public String getXPathSectionReview() {
 		switch (channel) {
 		case mobile:
-			return XPATH_BUTTON_PAGAR;
+			return XP_BUTTON_PAGAR;
 		default:
 		case desktop:
-			return XPATH_SECTION_REVIEW_DESKTOP;
+			return XP_SECTION_REVIEW_DESKTOP;
 		}
 	}
 	
@@ -24,6 +24,6 @@ public class PageMercpagoConf extends PageBase {
 	}
 
 	public void clickPagar() {
-		click(XPATH_BUTTON_PAGAR).exec();
+		click(XP_BUTTON_PAGAR).exec();
 	}
 }

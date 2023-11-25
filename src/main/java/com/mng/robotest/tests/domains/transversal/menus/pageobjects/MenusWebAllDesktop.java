@@ -13,9 +13,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 
-	private static final String XPATH_WRAPPER_MENU = "//div[@id[contains(.,'subMenu')]]";
+	private static final String XP_WRAPPER_MENU = "//div[@id[contains(.,'subMenu')]]";
 	
-	private static final String XPATH_MENU_ITEM = 
+	private static final String XP_MENU_ITEM = 
 			"//li[@data-testid[contains(.,'menu.family.')] and " + 
 			     "string-length(normalize-space(@class))>0]/a[@data-testid[contains(.,'.link')]]/..";	
 	
@@ -28,7 +28,7 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 	}
 	
 	private String getXPathMenuItem(LineaType linea) {
-		return XPATH_MENU_ITEM + "/*[@data-testid[contains(.,'_" + linea.toString().toLowerCase() + "')]]/.."; 
+		return XP_MENU_ITEM + "/*[@data-testid[contains(.,'_" + linea.toString().toLowerCase() + "')]]/.."; 
 	}
 	
 	@Override
@@ -56,7 +56,7 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 	}
 	
 	private boolean isMenuOpen(int seconds) {
-		return state(Visible, XPATH_WRAPPER_MENU).wait(seconds).check();
+		return state(Visible, XP_WRAPPER_MENU).wait(seconds).check();
 	}
 	private boolean isMenuClose(int seconds) {
 		for (int i=0; i<seconds; i++) {

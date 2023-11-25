@@ -15,7 +15,7 @@ public class GetterFeatureFlags {
 
 	private GetterFeatureFlags() {}
 	
-	private static final MngFeatureFlag mngFeatureFlag = new MngFeatureFlagBuilder()
+	private static final MngFeatureFlag MNG_FEATURE_FLAG = new MngFeatureFlagBuilder()
             .withEnvironment(getEnvironment())
             .withApplicationName("shop")
             .withPollingIntervalMinutes(10)
@@ -28,7 +28,7 @@ public class GetterFeatureFlags {
 	private static boolean isCountryInBlackList(String codeCountry) {
         HashMap<String, String> params = new HashMap<>();
         params.put("country", codeCountry);
-		return mngFeatureFlag.isEnabled("plp-personalization-blacklist", new Context(params));
+		return MNG_FEATURE_FLAG.isEnabled("plp-personalization-blacklist", new Context(params));
 	}
 	
 	private static FeatureFlagEnvironment getEnvironment () {
@@ -37,4 +37,5 @@ public class GetterFeatureFlags {
 		}
 		return FeatureFlagEnvironment.PRE;
 	}
+	
 }

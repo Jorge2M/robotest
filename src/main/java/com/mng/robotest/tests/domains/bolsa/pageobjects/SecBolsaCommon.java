@@ -30,7 +30,7 @@ public abstract class SecBolsaCommon extends PageBase {
 	public abstract void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected);
 	public abstract LineasArticuloBolsa getLineasArtBolsa();
 	
-	private static final String XPATH_ASPA = "//span[@class[contains(.,'outline-close')]]";
+	private static final String XP_ASPA = "//span[@class[contains(.,'outline-close')]]";
 	
 	public boolean isInStateUntil(StateBolsa stateBolsaExpected, int seconds) {
 		String xpath = getXPathPanelBolsa();
@@ -142,7 +142,7 @@ public abstract class SecBolsaCommon extends PageBase {
 	
 	public void closeInMobil() {
 		if (app==AppEcom.outlet) {
-			click(XPATH_ASPA).exec();
+			click(XP_ASPA).exec();
 		} else {
 			setBolsaToStateIfNotYet(CLOSED);
 		}

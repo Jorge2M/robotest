@@ -43,4 +43,5 @@ public class PageDevolucionesSteps extends StepBase {
 		new PageRecogidaDomicSteps().validaIsPageSinDevoluciones();
 		checksDefault();
 	}
+	
 }

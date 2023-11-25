@@ -6,21 +6,21 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalDirecEnvioNew extends PageBase {
 
-	private static final String XPATH_CHECK_DIRECCION_PRINCIPAL = "//*[@for='address.form-isMainAddress']";
-	private static final String XPATH_CHECK_DIRECCION_PRINCIPAL_PRE = "//*[@data-testid='addressForm.isMainAddress']";
+	private static final String XP_CHECK_DIRECCION_PRINCIPAL = "//*[@for='address.form-isMainAddress']";
+	private static final String XP_CHECK_DIRECCION_PRINCIPAL_PRE = "//*[@data-testid='addressForm.isMainAddress']";
 	
 	//TODO dejar sólo una versión cuando la operativa de PRE suba a PRO (28-marzo-2023)
-	private static final String XPATH_SAVE_BUTTON = "//*[@data-testid[contains(.,'save.button')]]";
-	private static final String XPATH_SAVE_BUTTON_PRE = "//*[@data-testid='deliveryAddress.form.button.submit']";
+	private static final String XP_SAVE_BUTTON = "//*[@data-testid[contains(.,'save.button')]]";
+	private static final String XP_SAVE_BUTTON_PRE = "//*[@data-testid='deliveryAddress.form.button.submit']";
 	
-	private static final String XPATH_REMOVE_BUTTON = "//*[@data-testid='address.form.delete.button']";
-	private static final String XPATH_REMOVE_BUTTON_PRE = "//*[@data-testid='deliveryAddress.form.button.delete']";
+	private static final String XP_REMOVE_BUTTON = "//*[@data-testid='address.form.delete.button']";
+	private static final String XP_REMOVE_BUTTON_PRE = "//*[@data-testid='deliveryAddress.form.button.delete']";
 	
-	private static final String XPATH_REMOVE_CONFIRM_BUTTON = "//button[@data-testid='address.form.modal.delete.button']";
-	private static final String XPATH_SELECTOR_PROVINCIA = "//select[@id='address.form.provinceId']";
-	private static final String XPATH_PROVINCIA_OPTIONS_PRE = "//div[@data-testid='addressForm.provinceId']";
-	private static final String XPATH_PROVINCIA_SELECTED_PRE = XPATH_PROVINCIA_OPTIONS_PRE + "//div[@aria-selected='true']";
-	private static final String XPATH_PROVINCIA_SELECT = "//label[@for='provinceId']";
+	private static final String XP_REMOVE_CONFIRM_BUTTON = "//button[@data-testid='address.form.modal.delete.button']";
+	private static final String XP_SELECTOR_PROVINCIA = "//select[@id='address.form.provinceId']";
+	private static final String XP_PROVINCIA_OPTIONS_PRE = "//div[@data-testid='addressForm.provinceId']";
+	private static final String XP_PROVINCIA_SELECTED_PRE = XP_PROVINCIA_OPTIONS_PRE + "//div[@aria-selected='true']";
+	private static final String XP_PROVINCIA_SELECT = "//label[@for='provinceId']";
 
 	public enum InputType {
 		NOMBRE("address.form.firstName", "addressForm.firstName"),
@@ -43,20 +43,20 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 	
 	private String getXPathCheckDireccionPrincipal() {
-		return "(" + XPATH_CHECK_DIRECCION_PRINCIPAL + " | " + XPATH_CHECK_DIRECCION_PRINCIPAL_PRE + ")";
+		return "(" + XP_CHECK_DIRECCION_PRINCIPAL + " | " + XP_CHECK_DIRECCION_PRINCIPAL_PRE + ")";
 	}	
 	
 	private String getXPathSaveButton() {
-		return "(" + XPATH_SAVE_BUTTON + " | " + XPATH_SAVE_BUTTON_PRE + ")";
+		return "(" + XP_SAVE_BUTTON + " | " + XP_SAVE_BUTTON_PRE + ")";
 	}
 	
 	
 	private String getXPathRemoveButton() {
-		return "(" + XPATH_REMOVE_BUTTON + " | " + XPATH_REMOVE_BUTTON_PRE + ")";
+		return "(" + XP_REMOVE_BUTTON + " | " + XP_REMOVE_BUTTON_PRE + ")";
 	}
 	
 	private String getXPathSelectorProvincia() {
-		return "(" + XPATH_SELECTOR_PROVINCIA + " | " + XPATH_PROVINCIA_OPTIONS_PRE + ")";
+		return "(" + XP_SELECTOR_PROVINCIA + " | " + XP_PROVINCIA_OPTIONS_PRE + ")";
 	}
 	
 	
@@ -116,17 +116,17 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 
 	private String getValueInitialProvincia() {
-		if (state(Visible, XPATH_SELECTOR_PROVINCIA).check()) {
-		    return getElement(XPATH_SELECTOR_PROVINCIA).getAttribute("value");
+		if (state(Visible, XP_SELECTOR_PROVINCIA).check()) {
+		    return getElement(XP_SELECTOR_PROVINCIA).getAttribute("value");
 		}
-		if (state(Visible, XPATH_PROVINCIA_SELECTED_PRE).check()) {
-			return getElement(XPATH_PROVINCIA_SELECTED_PRE).getText();
+		if (state(Visible, XP_PROVINCIA_SELECTED_PRE).check()) {
+			return getElement(XP_PROVINCIA_SELECTED_PRE).getText();
 		}
 		return "";
 	}
 	
 	private void setProvincia() {
-		if (state(Visible, XPATH_SELECTOR_PROVINCIA).check()) {
+		if (state(Visible, XP_SELECTOR_PROVINCIA).check()) {
 			setProvinciaPro();
 		} else {
 			setProvinciaPre();
@@ -134,18 +134,18 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 	
 	private void setProvinciaPre() {
-		click(XPATH_PROVINCIA_SELECT).exec();
-		click(XPATH_PROVINCIA_OPTIONS_PRE + "/div").exec();
+		click(XP_PROVINCIA_SELECT).exec();
+		click(XP_PROVINCIA_OPTIONS_PRE + "/div").exec();
 	}
 	
 	private void setProvinciaPro() {
 		//workaround because doesn't run the Select sentence (seems a Selenium Bug)
 		String allCharacters = "abcdefghijklmnopqrstuvwxyz";
 		for (int i=0; i<allCharacters.length(); i++) {
-			click(XPATH_SELECTOR_PROVINCIA).exec();
-			getElement(XPATH_SELECTOR_PROVINCIA).sendKeys(allCharacters.substring(i,i+1));
-			click(XPATH_SELECTOR_PROVINCIA).exec();
-			String valueNew = getElement(XPATH_SELECTOR_PROVINCIA).getAttribute("value");
+			click(XP_SELECTOR_PROVINCIA).exec();
+			getElement(XP_SELECTOR_PROVINCIA).sendKeys(allCharacters.substring(i,i+1));
+			click(XP_SELECTOR_PROVINCIA).exec();
+			String valueNew = getElement(XP_SELECTOR_PROVINCIA).getAttribute("value");
 			if ("".compareTo(valueNew)!=0) {
 				break;
 			}
@@ -171,10 +171,10 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 
 	public boolean isVisibleModalConfirmacionEliminar(int seconds) {
-		return state(Visible, XPATH_REMOVE_CONFIRM_BUTTON).wait(seconds).check();
+		return state(Visible, XP_REMOVE_CONFIRM_BUTTON).wait(seconds).check();
 	}
 	
 	public void clickConfirmEliminarButton() {
-		click(XPATH_REMOVE_CONFIRM_BUTTON).exec();
+		click(XP_REMOVE_CONFIRM_BUTTON).exec();
 	}
 }

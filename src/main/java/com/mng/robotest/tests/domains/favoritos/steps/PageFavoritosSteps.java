@@ -122,19 +122,6 @@ public class PageFavoritosSteps extends StepBase {
 		return checks;
 	}  
 	
-//	@Step (
-//		description="Desde Favoritos añadimos el artículo <b>#{artToAddBolsa.getRefProducto()}</b> (1a talla disponible) a la bolsa",
-//		expected="El artículo aparece en la bolsa")
-//	public void addArticuloToBag(ArticuloScreen artToAddBolsa) throws Exception {
-//		String refProductoToAdd = artToAddBolsa.getRefProducto();
-//		String codigoColor = artToAddBolsa.getCodigoColor();
-//		Talla tallaSelected = pageFavoritos.addArticleToBag(refProductoToAdd, codigoColor, 1);
-//		artToAddBolsa.setTalla(tallaSelected);
-//		dataTest.getDataBag().addArticulo(artToAddBolsa);
-//		
-//		new SecBolsaSteps().validaAltaArtBolsa();
-//	}
-	
 	@Step (
 		description="Desde Favoritos seleccionamos la imagen del artículo <b>#{artToPlay.getRefProducto()}</b>",
 		expected="Aparece el modal con la ficha del artículo")
@@ -144,4 +131,5 @@ public class PageFavoritosSteps extends StepBase {
 		pageFavoritos.clickImgProducto(refProducto, codigoColor);
 		new PageFichaSteps().checkIsFichaArtDisponible(refProducto, 2);
 	}
+	
 }

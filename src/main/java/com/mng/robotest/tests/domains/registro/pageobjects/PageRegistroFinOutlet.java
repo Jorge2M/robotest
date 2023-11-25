@@ -11,21 +11,21 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageRegistroFinOutlet extends PageBase {
 
-	private static final String XPATH_BUTTON_IR_SHOPPING = "//div[@class[contains(.,'ir-de-shopping')]]/input[@type='submit']";
+	private static final String XP_BUTTON_IR_SHOPPING = "//div[@class[contains(.,'ir-de-shopping')]]/input[@type='submit']";
 	
 	public boolean isPageUntil(int seconds) {
-		return state(Present, XPATH_BUTTON_IR_SHOPPING).wait(seconds).check();
+		return state(Present, XP_BUTTON_IR_SHOPPING).wait(seconds).check();
 	}
 	
 	public void clickIrDeShopping() {
 		waitLoadPage(); //Para evitar StaleElement Exception
-		click(XPATH_BUTTON_IR_SHOPPING).type(javascript).exec();
+		click(XP_BUTTON_IR_SHOPPING).type(javascript).exec();
 		if (isVisibleButtonIrDeShopping()) {
-			click(XPATH_BUTTON_IR_SHOPPING).exec();
+			click(XP_BUTTON_IR_SHOPPING).exec();
 		}
 	}
 	
 	public boolean isVisibleButtonIrDeShopping() {
-		return state(Visible, XPATH_BUTTON_IR_SHOPPING).check();
+		return state(Visible, XP_BUTTON_IR_SHOPPING).check();
 	}
 }

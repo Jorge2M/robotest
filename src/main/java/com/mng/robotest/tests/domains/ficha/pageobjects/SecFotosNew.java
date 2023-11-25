@@ -13,11 +13,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecFotosNew extends PageBase {
 
-	private static final String XPATH_CAPA = "//div[@class[contains(.,'product-images')]]";
-	private static final String XPATH_LINE_FOTO = XPATH_CAPA + "//*[@class[contains(.,'columns')]]";
+	private static final String XP_CAPA = "//div[@class[contains(.,'product-images')]]";
+	private static final String XP_LINE_FOTO = XP_CAPA + "//*[@class[contains(.,'columns')]]";
 	
 	private static String getXPathLineFotos(int line) {
-		return (XPATH_LINE_FOTO + "[" + line + "]");
+		return (XP_LINE_FOTO + "[" + line + "]");
 	}
 	
 	private static String getXPathFoto(int line) {
@@ -40,10 +40,10 @@ public class SecFotosNew extends PageBase {
 	}
 
 	public int getNumLinesFotos() {
-		if (!state(Present, XPATH_LINE_FOTO).check()) {
+		if (!state(Present, XP_LINE_FOTO).check()) {
 			return 0;
 		}
-		return getElements(XPATH_LINE_FOTO).size();
+		return getElements(XP_LINE_FOTO).size();
 	}
 		
 	public int getNumFotosLine(int line) {

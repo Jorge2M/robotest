@@ -6,9 +6,9 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PagePostfCodSeg extends PageBase {
 
-	private static final String XPATH_ACEPTAR_BUTTON = "//form/input[@id='btn_Accept']";
-	private static final String XPATH_INPUT_COD_SEG = "//input[@id='postfinanceCardId']";
-	private static final String XPATH_BUTTON_WEITER = "//button[@class='efinance-button' and text()[contains(.,'Weiter')]]";
+	private static final String XP_ACEPTAR_BUTTON = "//form/input[@id='btn_Accept']";
+	private static final String XP_INPUT_COD_SEG = "//input[@id='postfinanceCardId']";
+	private static final String XP_BUTTON_WEITER = "//button[@class='efinance-button' and text()[contains(.,'Weiter')]]";
 	
 	/**
 	 * @return si se trata de la pasarela de test
@@ -41,23 +41,23 @@ public class PagePostfCodSeg extends PageBase {
 	}
 	
 	public boolean isPresentButtonAceptar() {
-		return state(Present, XPATH_ACEPTAR_BUTTON).check();
+		return state(Present, XP_ACEPTAR_BUTTON).check();
 	}
 
 	public void clickAceptarButton() {
-		click(XPATH_ACEPTAR_BUTTON).exec();
+		click(XP_ACEPTAR_BUTTON).exec();
 	}
 	
 	public boolean isPresentInputCodSeg() {
-		return state(Present, XPATH_INPUT_COD_SEG).check();
+		return state(Present, XP_INPUT_COD_SEG).check();
 	}
 	
 	public boolean isPresentButtonWeiter() {
-		return state(Present, XPATH_BUTTON_WEITER).check();
+		return state(Present, XP_BUTTON_WEITER).check();
 	}
 	
 	public void inputCodigoSeguridad(String codigoSeg) {
-		getElement(XPATH_INPUT_COD_SEG).sendKeys(codigoSeg);
+		getElement(XP_INPUT_COD_SEG).sendKeys(codigoSeg);
 	}
 
 }

@@ -7,21 +7,21 @@ import com.mng.robotest.tests.domains.base.PageBase;
 public class PageTrustpayTestConfirm extends PageBase {
 	
 	public enum typeButtons { OK, ANNOUNCED, FAIL, PENDING }
-	private static final String XPATH_BUTTON_OK = "//input[@id='btnOK']";
-	private static final String XPATH_BUTTON_ANNOUNCED = "//input[@id='btnANNOUNCED']"; 
-	private static final String XPATH_BUTTON_FAIL = "//input[@id='btnFAIL']";
-	private static final String XPATH_BUTTON_PENDING = "//input[@id='btnOUT']";
+	private static final String XP_BUTTON_OK = "//input[@id='btnOK']";
+	private static final String XP_BUTTON_ANNOUNCED = "//input[@id='btnANNOUNCED']"; 
+	private static final String XP_BUTTON_FAIL = "//input[@id='btnFAIL']";
+	private static final String XP_BUTTON_PENDING = "//input[@id='btnOUT']";
 	
 	public static String getXPathButton(typeButtons typeButton) {
 		switch (typeButton) {
 		case OK:
-			return XPATH_BUTTON_OK;
+			return XP_BUTTON_OK;
 		case ANNOUNCED:
-			return XPATH_BUTTON_ANNOUNCED;
+			return XP_BUTTON_ANNOUNCED;
 		case FAIL:
-			return XPATH_BUTTON_FAIL;
+			return XP_BUTTON_FAIL;
 		case PENDING:
-			return XPATH_BUTTON_PENDING;
+			return XP_BUTTON_PENDING;
 		default:
 			return "";
 		}		

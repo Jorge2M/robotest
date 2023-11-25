@@ -11,11 +11,11 @@ import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.Lin
 public class MenusWebAllDevice extends PageBase implements MenusWebAll {
 
 	//TODO eliminar el OLD cuando suba la nueva versión a PRO (31-05-2023)
-	private static final String XPATH_MENU_ITEM_OLD = "//a[@data-testid[contains(.,'header.subMenu.item')]]";
-	private static final String XPATH_MENU_ITEM_NEW = "//li[@data-testid]/a[@data-testid[contains(.,'menu.family.')]]";
+	private static final String XP_MENU_ITEM_OLD = "//a[@data-testid[contains(.,'header.subMenu.item')]]";
+	private static final String XP_MENU_ITEM_NEW = "//li[@data-testid]/a[@data-testid[contains(.,'menu.family.')]]";
 	
 	private String getXPathMenuItem() {
-		return "(" + XPATH_MENU_ITEM_OLD + " | " + XPATH_MENU_ITEM_NEW + ")";
+		return "(" + XP_MENU_ITEM_OLD + " | " + XP_MENU_ITEM_NEW + ")";
 	}
 	
 	@Override

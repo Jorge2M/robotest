@@ -169,7 +169,7 @@ public class Mly001 extends TestBase {
 		return null;
 	}
 	
-	private static final String XPATH_MODAL = "//micro-frontend[@id[contains(.,'newsletterSubscriptionModal')]]"; 
+	private static final String XP_MODAL = "//micro-frontend[@id[contains(.,'newsletterSubscriptionModal')]]"; 
 	
 	@Validation(description="Aparece el modal de Mango Likes You")
 	private boolean checkModalMangoLikesYou() {
@@ -189,9 +189,9 @@ public class Mly001 extends TestBase {
 	}
 	
 	private boolean isModalMangoLikesYouVisible(int seconds) {
-		return state(State.Visible, XPATH_MODAL + "//a[@data-testid='newsletterSubscriptionModal.feedback.createAccount']").wait(seconds).check();
+		return state(State.Visible, XP_MODAL + "//a[@data-testid='newsletterSubscriptionModal.feedback.createAccount']").wait(seconds).check();
 	}
 	private boolean isModalDiscouNewsletterSubscriptionVisible(int seconds) {
-		return state(State.Visible, XPATH_MODAL + "//input[@data-testid='newsletterSubscriptionModal.nonModal.toggle']").wait(seconds).check();
+		return state(State.Visible, XP_MODAL + "//input[@data-testid='newsletterSubscriptionModal.nonModal.toggle']").wait(seconds).check();
 	}
 }

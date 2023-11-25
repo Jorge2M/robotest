@@ -9,15 +9,15 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecNewsLetter extends PageBase {
 
-	private static final String XPATH_CAPA_NEWS_LETTER = "//micro-frontend[@name[contains(.,'newsletterSubscriptionFooter')]]";
-	private static final String XPATH_NEWS_LETTER_MSG = XPATH_CAPA_NEWS_LETTER + "//p[@class[contains(.,'sg-text-action')]]";
-	private static final String XPATH_TEXT_AREA_MAIL_SUSCRIPTION = XPATH_CAPA_NEWS_LETTER + "//input[@name='mail' or @name='email']";
+	private static final String XP_CAPA_NEWS_LETTER = "//micro-frontend[@name[contains(.,'newsletterSubscriptionFooter')]]";
+	private static final String XP_NEWS_LETTER_MSG = XP_CAPA_NEWS_LETTER + "//p[@class[contains(.,'sg-text-action')]]";
+	private static final String XP_TEXT_AREA_MAIL_SUSCRIPTION = XP_CAPA_NEWS_LETTER + "//input[@name='mail' or @name='email']";
 	
 	public String getNewsLetterMsgText() {
 		try {
-			WebElement titleNws = getElement(XPATH_NEWS_LETTER_MSG);
+			WebElement titleNws = getElement(XP_NEWS_LETTER_MSG);
 			if (titleNws!=null) {
-				return getElement(XPATH_NEWS_LETTER_MSG).getText();
+				return getElement(XP_NEWS_LETTER_MSG).getText();
 			}
 		}
 		catch (Exception e) {
@@ -34,7 +34,7 @@ public class SecNewsLetter extends PageBase {
 		new ModalsSubscriptions().closeAllIfVisible();
 		new SecFooter().moveTo();
 		
-		String xpathLink = XPATH_TEXT_AREA_MAIL_SUSCRIPTION;
+		String xpathLink = XP_TEXT_AREA_MAIL_SUSCRIPTION;
 		state(Visible, xpathLink).wait(2).check();
 		click(xpathLink).exec();
 	}

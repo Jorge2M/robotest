@@ -8,7 +8,7 @@ public class SecMenusFiltroDiscount extends PageBase {
 	
 	public enum TypeMenuDiscount { UP_TO_50, UP_TO_60, BETWEEN_50_60, OFF_60, FROM_60, FROM_70 }
 	
-	private static final String XPATH_DIV_MENUS = "//nav[@id='descuentoFilter']";
+	private static final String XP_DIV_MENUS = "//nav[@id='descuentoFilter']";
 	
 	private static String getXPathMenu(TypeMenuDiscount typeMenu) {
 		String valuesParamTemporada1 = "";
@@ -34,11 +34,11 @@ public class SecMenusFiltroDiscount extends PageBase {
 			break;
 		}		
 		
-		return (XPATH_DIV_MENUS + "//li[@data-filter-value='" + valuesParamTemporada1 + "']");
+		return (XP_DIV_MENUS + "//li[@data-filter-value='" + valuesParamTemporada1 + "']");
 	}
 	
 	public boolean isVisible() {
-		return state(Visible, XPATH_DIV_MENUS).check();
+		return state(Visible, XP_DIV_MENUS).check();
 	}
 	
 	public boolean isVisibleMenu(String typeMenu) {

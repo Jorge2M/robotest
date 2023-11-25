@@ -13,13 +13,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageRegistroSegundaOutlet extends PageBase {
 
-	private static final String XPATH_NEWSLETTER_TITLE = "//div[@class[contains(.,'additionalData')]]//span[@class='info']";
-	private static final String XPATH_FORM_STEP2 = "//form[@class[contains(.,'customFormIdSTEP2')]]";
-	private static final String XPATH_CHECKBOX_LINEA = "//input[@type='checkbox']";
-	private static final String XPATH_SELECT_DIA_NACIM = "//select[@id[contains(.,'naciDia')]]";
-	private static final String XPATH_SELECT_MES_NACIM = "//select[@id[contains(.,'naciMes')]]";
-	private static final String XPATH_SELECT_ANY_NACIM = "//select[@id[contains(.,'naciAny')]]";
-	private static final String XPATH_BUTTON_CONTINUAR = 
+	private static final String XP_NEWSLETTER_TITLE = "//div[@class[contains(.,'additionalData')]]//span[@class='info']";
+	private static final String XP_FORM_STEP2 = "//form[@class[contains(.,'customFormIdSTEP2')]]";
+	private static final String XP_CHECKBOX_LINEA = "//input[@type='checkbox']";
+	private static final String XP_SELECT_DIA_NACIM = "//select[@id[contains(.,'naciDia')]]";
+	private static final String XP_SELECT_MES_NACIM = "//select[@id[contains(.,'naciMes')]]";
+	private static final String XP_SELECT_ANY_NACIM = "//select[@id[contains(.,'naciAny')]]";
+	private static final String XP_BUTTON_CONTINUAR = 
 		"//div[@class[contains(.,'registerStepsModal')]]//div[@class='submitContent']//input[@type='submit']";	
 	
 	private String getXPath_checkboxLinea(String linea) {
@@ -32,9 +32,9 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	
 	public String getNewsLetterTitleText() {
 		try {
-			WebElement titleNws = getElement(XPATH_NEWSLETTER_TITLE);
+			WebElement titleNws = getElement(XP_NEWSLETTER_TITLE);
 			if (titleNws!=null) {
-				return getElement(XPATH_NEWSLETTER_TITLE).getText();
+				return getElement(XP_NEWSLETTER_TITLE).getText();
 			}
 		}
 		catch (Exception e) {
@@ -53,11 +53,11 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	}
 	
 	public boolean isPageUntil(int seconds) {
-		return state(Present, XPATH_FORM_STEP2).wait(seconds).check();
+		return state(Present, XP_FORM_STEP2).wait(seconds).check();
 	}
 	
 	public int getNumColecciones() {
-		return getElements(XPATH_CHECKBOX_LINEA).size();
+		return getElements(XP_CHECKBOX_LINEA).size();
 	}
 	
 	/**
@@ -81,19 +81,19 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	}
 	
 	public boolean isPresentSelectDiaNacim() {
-		return state(Present, XPATH_SELECT_DIA_NACIM).check();
+		return state(Present, XP_SELECT_DIA_NACIM).check();
 	}
 	
 	public void selectDiaNacimByText(String dia) {
-		new Select(getElement(XPATH_SELECT_DIA_NACIM)).selectByVisibleText(dia);
+		new Select(getElement(XP_SELECT_DIA_NACIM)).selectByVisibleText(dia);
 	}
 	
 	public void selectMesNacimByText(String mes) {
-		new Select(getElement(XPATH_SELECT_MES_NACIM)).selectByValue(mes);
+		new Select(getElement(XP_SELECT_MES_NACIM)).selectByValue(mes);
 	}
 	
 	public void selectAnyNacimByText(String any) {
-		new Select(getElement(XPATH_SELECT_ANY_NACIM)).selectByVisibleText(any);
+		new Select(getElement(XP_SELECT_ANY_NACIM)).selectByVisibleText(any);
 	}
 	
 	/**
@@ -143,6 +143,6 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	}
 	
 	public void clickButtonContinuar() {
-		click(XPATH_BUTTON_CONTINUAR).exec();
+		click(XP_BUTTON_CONTINUAR).exec();
 	}
 }

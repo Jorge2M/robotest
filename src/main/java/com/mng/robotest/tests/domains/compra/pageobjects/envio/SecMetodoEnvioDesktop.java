@@ -9,8 +9,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecMetodoEnvioDesktop extends PageBase {
 	
-	private static final String XPATH_RADIO_INPUT = "//input[@id[contains(.,'Transportes')]]";
-	private static final String XPATH_SELECT_FRANJA_HORARIA_METODO_URGENTE = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
+	private static final String XP_RADIO_INPUT = "//input[@id[contains(.,'Transportes')]]";
+	private static final String XP_SELECT_FRANJA_HORARIA_METODO_URGENTE = "//select[@data-component-id='time-range-sameday_nextday_franjas']";
 	
 	private String getXPathBlockMetodo(TipoTransporte tipoTransporte) {
 		return 
@@ -24,7 +24,7 @@ public class SecMetodoEnvioDesktop extends PageBase {
 	}
 
 	private String getXPathRadioMetodo(TipoTransporte tipoTransporte) {
-		String xpath = getXPathBlockMetodo(tipoTransporte) + XPATH_RADIO_INPUT;
+		String xpath = getXPathBlockMetodo(tipoTransporte) + XP_RADIO_INPUT;
 		
 		//TODO for test intimissimi
 		if (tipoTransporte==TipoTransporte.STANDARD) {
@@ -62,7 +62,7 @@ public class SecMetodoEnvioDesktop extends PageBase {
 	}
 	
 	public void selectFranjaHorariaUrgente(int posicion) {
-		Select selectHorario = new Select(getElement(XPATH_SELECT_FRANJA_HORARIA_METODO_URGENTE));
+		Select selectHorario = new Select(getElement(XP_SELECT_FRANJA_HORARIA_METODO_URGENTE));
 		selectHorario.selectByIndex(posicion);
 	}
 }

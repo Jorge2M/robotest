@@ -9,22 +9,22 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageAmexResult extends PageBase {
 
-	private static final String XPATH_SECTION_OK = "//div[@class[contains(.,'code ok')]]";
-	private static final String XPATH_CONTINUE_BUTTON = "//input[@class[contains(.,'btn-continue')]]";
+	private static final String XP_SECTION_OK = "//div[@class[contains(.,'code ok')]]";
+	private static final String XP_CONTINUE_BUTTON = "//input[@class[contains(.,'btn-continue')]]";
 	
 	public PageAmexResult(WebDriver driver) {
 		super(driver);
 	}
 	
 	public boolean isResultOkUntil(int seconds) {
-		return state(Present, XPATH_SECTION_OK).wait(seconds).check();
+		return state(Present, XP_SECTION_OK).wait(seconds).check();
 	}
 	
 	public boolean isPresentContinueButton() {
-		return state(Present, XPATH_CONTINUE_BUTTON).check();
+		return state(Present, XP_CONTINUE_BUTTON).check();
 	}
 
 	public void clickContinuarButton() {
-		click(XPATH_CONTINUE_BUTTON).exec();
+		click(XP_CONTINUE_BUTTON).exec();
 	}
 }

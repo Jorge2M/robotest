@@ -8,7 +8,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageSelTda extends PageBase {
 
-	private static final String XPATH_CELDA_TEXT_SELECT_ENTORNO = "//td[text()[contains(.,'Seleccion de Entorno')]]";
+	private static final String XP_CELDA_TEXT_SELECT_ENTORNO = "//td[text()[contains(.,'Seleccion de Entorno')]]";
 
 	private String getXpathLinkTienda(TiendaManto tienda) {
 		return ("//a[text()[contains(.,'" + tienda.getLitPantManto() + "')]]");
@@ -18,7 +18,7 @@ public class PageSelTda extends PageBase {
 		return isPage(0);
 	}
 	public boolean isPage(int seconds) {
-		return state(Present, XPATH_CELDA_TEXT_SELECT_ENTORNO).wait(seconds).check();
+		return state(Present, XP_CELDA_TEXT_SELECT_ENTORNO).wait(seconds).check();
 	}
 
 	public void selectTienda(TiendaManto tienda) {

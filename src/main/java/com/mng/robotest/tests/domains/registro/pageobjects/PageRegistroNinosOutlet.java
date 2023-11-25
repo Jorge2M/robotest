@@ -11,11 +11,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageRegistroNinosOutlet extends PageBase {
 	
-	private static final String XPATH_INPUT_NOMBRE = "//input[@id[contains(.,'cfNameKid')]]";
-	private static final String XPATH_SELECT_DIA_NACIMIENTO = "//select[@id[contains(.,'naciDia')]]";
-	private static final String XPATH_SELECT_MES_NACIMIENTO = "//select[@id[contains(.,'naciMes')]]";
-	private static final String XPATH_SELECT_ANY_NACIMIENTO = "//select[@id[contains(.,'naciAny')]]";
-	private static final String XPATH_BOTON_CONTINUAR = 
+	private static final String XP_INPUT_NOMBRE = "//input[@id[contains(.,'cfNameKid')]]";
+	private static final String XP_SELECT_DIA_NACIMIENTO = "//select[@id[contains(.,'naciDia')]]";
+	private static final String XP_SELECT_MES_NACIMIENTO = "//select[@id[contains(.,'naciMes')]]";
+	private static final String XP_SELECT_ANY_NACIMIENTO = "//select[@id[contains(.,'naciAny')]]";
+	private static final String XP_BOTON_CONTINUAR = 
 			"//div[@class[contains(.,'registerStepsModal')]]" + 
 	        "//form[@id[contains(.,'cfKids')]]//input[@type='submit']";
 	
@@ -25,23 +25,23 @@ public class PageRegistroNinosOutlet extends PageBase {
 	}
 	
 	public int getNumInputsNameNino() {
-		return getElements(XPATH_INPUT_NOMBRE).size();
+		return getElements(XP_INPUT_NOMBRE).size();
 	}
 	
-	public String getXPath_inputNombre(int numNino) {
-		return ("(" + XPATH_INPUT_NOMBRE + ")[" + numNino + "]");
+	public String getXPathInputNombre(int numNino) {
+		return ("(" + XP_INPUT_NOMBRE + ")[" + numNino + "]");
 	}
 	
-	public String getXPath_selectDiaNac(int numNino) {
-		return ("(" + XPATH_SELECT_DIA_NACIMIENTO + ")[" + numNino + "]");
+	public String getXPathSelectDiaNac(int numNino) {
+		return ("(" + XP_SELECT_DIA_NACIMIENTO + ")[" + numNino + "]");
 	}
 	
-	public String getXPath_selectMesNac(int numNino) {
-		return ("(" + XPATH_SELECT_MES_NACIMIENTO + ")[" + numNino + "]");
+	public String getXPathSelectMesNac(int numNino) {
+		return ("(" + XP_SELECT_MES_NACIMIENTO + ")[" + numNino + "]");
 	}
 	
-	public String getXPath_selectAnyNac(int numNino) {
-		return ("(" + XPATH_SELECT_ANY_NACIMIENTO + ")[" + numNino + "]");
+	public String getXPathSelectAnyNac(int numNino) {
+		return ("(" + XP_SELECT_ANY_NACIMIENTO + ")[" + numNino + "]");
 	}
 	
 	/**
@@ -56,15 +56,15 @@ public class PageRegistroNinosOutlet extends PageBase {
 		int i=1;
 		for (DataNino dataNino : listNinos.getListNinos()) {
 			String nombreNino = dataNino.getNombre();
-			String xpathInputNombreNino = getXPath_inputNombre(i);
+			String xpathInputNombreNino = getXPathInputNombre(i);
 			if (getElement(xpathInputNombreNino).getAttribute("value").compareTo(nombreNino)!=0) {
 				getElement(xpathInputNombreNino).clear();
 				getElement(xpathInputNombreNino).sendKeys(nombreNino);
 			}
 			
-			String xpathDia = getXPath_selectDiaNac(i);
-			String xpathMes = getXPath_selectMesNac(i);
-			String xpathAny = getXPath_selectAnyNac(i);
+			String xpathDia = getXPathSelectDiaNac(i);
+			String xpathMes = getXPathSelectMesNac(i);
+			String xpathAny = getXPathSelectAnyNac(i);
 			var fechaToken = new StringTokenizer(dataNino.getFechaNacimiento(), "/");
 			new Select(getElement(xpathDia)).selectByVisibleText(fechaToken.nextToken()); //Día nacimiento
 			new Select(getElement(xpathMes)).selectByValue(fechaToken.nextToken()); //Mes de nacimiento
@@ -75,9 +75,9 @@ public class PageRegistroNinosOutlet extends PageBase {
 	}
 	
 	public void clickContinuar() {
-		click(XPATH_BOTON_CONTINUAR).exec();
-		if (!state(Invisible, XPATH_BOTON_CONTINUAR).wait(2).check()) {
-			click(XPATH_BOTON_CONTINUAR).exec();
+		click(XP_BOTON_CONTINUAR).exec();
+		if (!state(Invisible, XP_BOTON_CONTINUAR).wait(2).check()) {
+			click(XP_BOTON_CONTINUAR).exec();
 		}
 	}
 }

@@ -11,17 +11,17 @@ public class PageKlarna extends PageBase {
 	private final ModalInputPersonnumberKlarna modalInputPersonnumber = new ModalInputPersonnumberKlarna();
 	private final ModalInputPhoneKlarna modalInputPhone = new ModalInputPhoneKlarna();
 	
-	private static final String XPATH_BUY_BUTTON = "//button[@id[contains(.,'buy-button')]]";
-	private static final String XPATH_IFRMAE = "//iframe[@id[contains(.,'klarna-hpp-instance-fullscreen')]]";
+	private static final String XP_BUY_BUTTON = "//button[@id[contains(.,'buy-button')]]";
+	private static final String XP_IFRMAE = "//iframe[@id[contains(.,'klarna-hpp-instance-fullscreen')]]";
 	
 	public boolean isPage(int seconds) {
-		return state(Visible, XPATH_BUY_BUTTON).wait(seconds).check();
+		return state(Visible, XP_BUY_BUTTON).wait(seconds).check();
 	}
 	
 	public void clickBuyButton() {
-		click(XPATH_BUY_BUTTON).exec();
-		if (!state(Invisible, XPATH_BUY_BUTTON).wait(2).check()) {
-			click(XPATH_BUY_BUTTON).exec();
+		click(XP_BUY_BUTTON).exec();
+		if (!state(Invisible, XP_BUY_BUTTON).wait(2).check()) {
+			click(XP_BUY_BUTTON).exec();
 		}
 	}
 	
@@ -73,7 +73,7 @@ public class PageKlarna extends PageBase {
 	}
 	
 	private void goToIframe() {
-		driver.switchTo().frame(getElement(XPATH_IFRMAE));
+		driver.switchTo().frame(getElement(XP_IFRMAE));
 	}
 	
 	private void leaveIframe() {

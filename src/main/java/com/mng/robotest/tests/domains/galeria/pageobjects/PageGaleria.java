@@ -105,8 +105,8 @@ public abstract class PageGaleria extends PageBase {
 			LabelArticle.NEW_NOW,
 			LabelArticle.NEW_COLLECTION);
 
-	protected static final String XPATH_LINK_RELATIVE_TO_ARTICLE = ".//a[@class='product-link']";
-	protected static final String XPATH_HEARTH_ICON_RELATIVE_ARTICLE = "//*[@data-testid='button-icon']";
+	protected static final String XP_LINK_RELATIVE_TO_ARTICLE = ".//a[@class='product-link']";
+	protected static final String XP_HEARTH_ICON_RELATIVE_ARTICLE = "//*[@data-testid='button-icon']";
 
 	public static PageGaleria make(Channel channel, AppEcom app, Pais pais) {
 		return make(From.MENU, channel, app, pais);
@@ -145,7 +145,7 @@ public abstract class PageGaleria extends PageBase {
 
 	String getXPathArticleHearthIcon(int posArticulo) {
 		String xpathArticulo = "(" + getXPathArticulo() + ")[" + posArticulo + "]";
-		return (xpathArticulo + XPATH_HEARTH_ICON_RELATIVE_ARTICLE);
+		return (xpathArticulo + XP_HEARTH_ICON_RELATIVE_ARTICLE);
 	}
 
 	String getXPathArticuloNoDoble() {

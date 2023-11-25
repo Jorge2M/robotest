@@ -13,8 +13,8 @@ import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 
-	public static final String XPATH_ARTICULO = "//li[@id[contains(.,'product-key-id')]]";
-	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
+	public static final String XP_ARTICULO = "//li[@id[contains(.,'product-key-id')]]";
+	private static final String XP_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
 	
 	public PageGaleriaDesktopNormal() {
 		super();
@@ -30,12 +30,12 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 	
 	@Override
 	protected String getXPathArticulo() {
-		return XPATH_ARTICULO;
+		return XP_ARTICULO;
 	}
 	
 	@Override
 	protected String getXPathNombreRelativeToArticle() {
-		return XPATH_NOMBRE_RELATIVE_TO_ARTICLE;
+		return XP_NOMBRE_RELATIVE_TO_ARTICLE;
 	}
 	
 	private String getXPathImgArticulo(WebElement article) {
@@ -60,7 +60,7 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 		}
 
 		//Para el caso TestAB-1 se ejecutará este caso para conseguir los atributos del artículo
-		String href = articulo.findElement(By.xpath(XPATH_LINK_RELATIVE_TO_ARTICLE)).getAttribute("href");
+		String href = articulo.findElement(By.xpath(XP_LINK_RELATIVE_TO_ARTICLE)).getAttribute("href");
 		return UtilsTest.getReferenciaFromHref(href);
 	}	
 	

@@ -17,24 +17,24 @@ public class PageD3DJPTestSelectOption extends PageBase {
 		TECHNICAL_ERROR_IN_3D_SYSTEM
 	}
 	
-	private static final String XPATH_SELECT_OPTION = "//select[@id='returnCode']";
-	private static final String XPATH_BUTTON_SUBMIT = "//input[@type='submit' and @name='B2']";
-	private static final String XPATH_BUTTON_RESET = "//input[@type='submit' and @name='B3']";
+	private static final String XP_SELECT_OPTION = "//select[@id='returnCode']";
+	private static final String XP_BUTTON_SUBMIT = "//input[@type='submit' and @name='B2']";
+	private static final String XP_BUTTON_RESET = "//input[@type='submit' and @name='B3']";
 	
 	public boolean isPageUntil(int seconds) {
-		return state(Visible, XPATH_SELECT_OPTION).wait(seconds).check();
+		return state(Visible, XP_SELECT_OPTION).wait(seconds).check();
 	}
 	
 	public void selectOption(OptionD3D option) {
-		WebElement selectElement = getElement(XPATH_SELECT_OPTION);
+		WebElement selectElement = getElement(XP_SELECT_OPTION);
 		new Select(selectElement).selectByVisibleText(option.toString().replace("_", ""));
 	}
 
 	public void clickSubmitButton() {
-		click(XPATH_BUTTON_SUBMIT).exec();
+		click(XP_BUTTON_SUBMIT).exec();
 	}
 
 	public void clickResetButton() {
-		click(XPATH_BUTTON_RESET).exec();
+		click(XP_BUTTON_RESET).exec();
 	}
 }

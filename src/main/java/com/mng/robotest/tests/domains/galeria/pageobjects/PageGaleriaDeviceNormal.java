@@ -12,15 +12,15 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 
 	//TODO adaptar React (pendiente petición a Jesús Bermúdez 3-Marzo-2021)
 	private static final String ARTICULO_ELEMENT = "li[@data-testid[contains(.,'plp.product')]]";
-	private static final String XPATH_ARTICULO = "//" + ARTICULO_ELEMENT;
-	private static final String XPATH_ANCESTOR_ARTICLE = "//ancestor::" + ARTICULO_ELEMENT;
-	private static final String XPATH_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
-	private static final String XPATH_COLOR_ARTICLE_BUTTON = "//div[@class[contains(.,'product-colors')]]/button";
-	private static final String XPATH_COLOR_ARTICLE_OPTION = "//button[@class='product-color']";	
-	private static final String XPATH_ICONO_GALERY_MOBILE = "//div[@class[contains(.,'scroll-container--visible')]]";
-	private static final String XPATH_ICONO_UP_GALERY_TABLET = "//div[@class='scroll-top-step']";
+	private static final String XP_ARTICULO = "//" + ARTICULO_ELEMENT;
+	private static final String XP_ANCESTOR_ARTICLE = "//ancestor::" + ARTICULO_ELEMENT;
+	private static final String XP_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
+	private static final String XP_COLOR_ARTICLE_BUTTON = "//div[@class[contains(.,'product-colors')]]/button";
+	private static final String XP_COLOR_ARTICLE_OPTION = "//button[@class='product-color']";	
+	private static final String XP_ICONO_GALERY_MOBILE = "//div[@class[contains(.,'scroll-container--visible')]]";
+	private static final String XP_ICONO_UP_GALERY_TABLET = "//div[@class='scroll-top-step']";
 	
-	private static final String XPATH_IMG_RELATIVE_ARTICLE = 
+	private static final String XP_IMG_RELATIVE_ARTICLE = 
 		"//img[@src and " + 
 			 "(@class[contains(.,'productListImg')] or " + 
 			  "@class[contains(.,'product-list-image')] or " + 
@@ -38,27 +38,27 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 	
 	@Override
 	protected String getXPathArticulo() {
-		return XPATH_ARTICULO;
+		return XP_ARTICULO;
 	}
 	
 	@Override
 	protected String getXPathArticuloAncestor() {
-		return XPATH_ANCESTOR_ARTICLE;
+		return XP_ANCESTOR_ARTICLE;
 	}
 	
 	@Override
 	protected String getXPathArticuloConColores() {
-		return XPATH_COLOR_ARTICLE_BUTTON + getXPathArticuloAncestor();
+		return XP_COLOR_ARTICLE_BUTTON + getXPathArticuloAncestor();
 	}
 	
 	@Override
 	protected String getXPathColorArticleOption() {
-		return XPATH_COLOR_ARTICLE_OPTION;
+		return XP_COLOR_ARTICLE_OPTION;
 	}	
 	
 	@Override
 	protected String getXPathNombreRelativeToArticle() {
-		return XPATH_NOMBRE_RELATIVE_TO_ARTICLE;
+		return XP_NOMBRE_RELATIVE_TO_ARTICLE;
 	}
 	
 	private String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
@@ -68,10 +68,10 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 	private String getXPpathIconoUpGalery() {
 		switch (channel) {
 		case mobile:
-			return XPATH_ICONO_GALERY_MOBILE;
+			return XP_ICONO_GALERY_MOBILE;
 		case tablet:
 		default:
-			return XPATH_ICONO_UP_GALERY_TABLET;
+			return XP_ICONO_UP_GALERY_TABLET;
 		}
 	}
 	
@@ -87,7 +87,7 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 		}
 
 		//Para el caso TestAB-1 se ejecutará este caso para conseguir los atributos del artículo
-		String href = articulo.findElement(By.xpath(XPATH_LINK_RELATIVE_TO_ARTICLE)).getAttribute("href");
+		String href = articulo.findElement(By.xpath(XP_LINK_RELATIVE_TO_ARTICLE)).getAttribute("href");
 		return UtilsTest.getReferenciaFromHref(href);
 	}
 	
@@ -104,7 +104,7 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 	
 	@Override
 	public void showColors(WebElement articulo) {
-		By byColorButton = By.xpath("." + XPATH_COLOR_ARTICLE_BUTTON);
+		By byColorButton = By.xpath("." + XP_COLOR_ARTICLE_BUTTON);
 		click(articulo).by(byColorButton).exec();
 	}
 	
@@ -146,9 +146,9 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 	@Override
 	public WebElement getImagenElementArticulo(WebElement articulo) {
 		moveToElement(articulo);
-		By byImg = By.xpath("." + XPATH_IMG_RELATIVE_ARTICLE);
+		By byImg = By.xpath("." + XP_IMG_RELATIVE_ARTICLE);
 		if (state(Present, articulo).by(byImg).wait(3).check()) {
-			return getElement(articulo, "." + XPATH_IMG_RELATIVE_ARTICLE);
+			return getElement(articulo, "." + XP_IMG_RELATIVE_ARTICLE);
 		}
 		return null;
 	}

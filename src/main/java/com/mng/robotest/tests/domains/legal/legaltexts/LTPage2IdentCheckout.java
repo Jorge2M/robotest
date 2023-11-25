@@ -11,7 +11,7 @@ import com.mng.robotest.testslegacy.data.PaisShop;
 
 public class LTPage2IdentCheckout extends LegalTextsPage {
 
-	private static final String XPATH_BLOQUE_POLITICA = "//micro-frontend[@id='legalPolicyGuestCheckoutRegistry']";
+	private static final String XP_BLOQUE_POLITICA = "//micro-frontend[@id='legalPolicyGuestCheckoutRegistry']";
 	
 	private static final LegalTextGroup RGPD = LegalTextGroup.from(
 		"IDENT CHECKOUT (RGPD)",
@@ -19,17 +19,17 @@ public class LTPage2IdentCheckout extends LegalTextsPage {
 			new LegalText(
 				"guestCheckout.clientDetails.rgpd.legal.text",
 				"Al crear una cuenta, confirmas que has leído la Política de privacidad", 
-				XPATH_BLOQUE_POLITICA + "//p"),
+				XP_BLOQUE_POLITICA + "//p"),
 			
 			new LegalText(
 				"guestCheckout.clientDetails.rgpd.legal.modal.title",			
 				"¿Cómo tratamos y protegemos tus datos?",
-				XPATH_BLOQUE_POLITICA + "//p"),
+				XP_BLOQUE_POLITICA + "//p"),
 			
 			new LegalText(
 				"guestCheckout.clientDetails.rgpd.legal.modal.bodycopy",
 				"Responsable: Punto Fa, S.L. y/o, en su caso, la marca asociada con Mango. Finalidad: Tramitación de tu pedido. Derechos: Puedes ejercer, en cualquier momento, tus derechos de acceso, rectificación, eliminación, oposición y demás derechos legalmente establecidos a través de personaldata@mango.com",
-				XPATH_BLOQUE_POLITICA + "//p")
+				XP_BLOQUE_POLITICA + "//p")
 		)
 	);
 	

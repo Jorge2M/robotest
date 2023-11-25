@@ -5,41 +5,41 @@ import org.openqa.selenium.interactions.Actions;
 
 public class SecSelectorPreciosDesktopKondo extends SecSelectorPreciosDesktop {
 
-	private static final String XPATH_LEFT_CORNER = "//*[@data-testid='min-selector']";
-	private static final String XPATH_RIGHT_CORNER = "//*[@data-testid='max-selector']";
-	private static final String XPATH_LINEA_FILTRO = XPATH_LEFT_CORNER + "/..";
-	private static final String XPATH_FILTRO_WRAPPER = XPATH_LINEA_FILTRO;	
-	private static final String XPATH_IMPORTE_MINIMO = XPATH_LINEA_FILTRO + "/div[3]";
-	private static final String XPATH_IMPORTE_MAXIMO = XPATH_LINEA_FILTRO + "/div[4]";
+	private static final String XP_LEFT_CORNER = "//*[@data-testid='min-selector']";
+	private static final String XP_RIGHT_CORNER = "//*[@data-testid='max-selector']";
+	private static final String XP_LINEA_FILTRO = XP_LEFT_CORNER + "/..";
+	private static final String XP_FILTRO_WRAPPER = XP_LINEA_FILTRO;	
+	private static final String XP_IMPORTE_MINIMO = XP_LINEA_FILTRO + "/div[3]";
+	private static final String XP_IMPORTE_MAXIMO = XP_LINEA_FILTRO + "/div[4]";
 	
 	@Override
 	String getXPathLineaFiltro() {
-		return XPATH_LINEA_FILTRO;
+		return XP_LINEA_FILTRO;
 	}
 	
 	@Override
 	String getXPathImporteMinimo() {
-		return XPATH_IMPORTE_MINIMO;
+		return XP_IMPORTE_MINIMO;
 	}
 	
 	@Override
 	String getXPathImporteMaximo() {
-		return XPATH_IMPORTE_MAXIMO;
+		return XP_IMPORTE_MAXIMO;
 	}	
 	
 	@Override
 	String getXPathRightCorner() {
-		return XPATH_RIGHT_CORNER;
+		return XP_RIGHT_CORNER;
 	}
 	
 	@Override
 	String getXPathLeftCorner() {
-		return XPATH_LEFT_CORNER;
+		return XP_LEFT_CORNER;
 	}	
 	
 	@Override
 	String getXPathFiltroWrapper() {
-		return XPATH_FILTRO_WRAPPER;
+		return XP_FILTRO_WRAPPER;
 	}		
 	
 	@Override

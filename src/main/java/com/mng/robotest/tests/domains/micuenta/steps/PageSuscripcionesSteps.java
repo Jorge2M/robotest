@@ -53,13 +53,13 @@ public class PageSuscripcionesSteps extends StepBase {
 	public ChecksTM validaIsDataAssociatedToRegister(List<LineaType> linesMarked) {
 		var checks = ChecksTM.getNew();
 		
-		List<LineaType> linesAll = PageRegistroPersonalizacionShop.ALL_LINEAS;
-		int numLineasTotales = PageRegistroPersonalizacionShop.ALL_LINEAS.size();
+		var linesAll = PageRegistroPersonalizacionShop.getAllLineas();
+		int numLineasTotales = linesAll.size();
 		checks.add(
-				"Aparecen "  + PageRegistroPersonalizacionShop.ALL_LINEAS.size() + " Newsletter",
+				"Aparecen "  + numLineasTotales + " Newsletter",
 				pageSuscripciones.getNumNewsletters()==numLineasTotales, Warn);
 		
-		for (LineaType linea : linesAll) {
+		for (var linea : linesAll) {
 			if (linesMarked.contains(linea)) {
 				checks.add(
 				    "Aparecen marcada la suscripción de <b>" + linea + "</b>",
@@ -88,4 +88,5 @@ public class PageSuscripcionesSteps extends StepBase {
 	private boolean validateIsPageResult (int seconds) {
 		return pageSuscripciones.isPageResOKUntil(seconds);
 	}
+	
 }

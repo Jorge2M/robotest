@@ -18,13 +18,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageLanding extends PageBase {
 	
-	private static final String XPATH_MAIN_CONTENT_PAIS = "//div[@class[contains(.,'main-content')] and @data-pais]";
-	private static final String XPATH_CONTENIDO = "//div[@class[contains(.,'container-fluid home')]]";
-	private static final String XPATH_SLIDER = "//section[@class='entitieswrapper']//div[@class[contains(.,'vsv-slide')]]";
-	private static final String XPATH_EDIT_ITEM = "//div[@class[contains(.,'item-edit')] and @data-id]";
-	private static final String XPATH_MAP_T1 = "//map[@name[contains(.,'item_')]]/..";
-	private static final String XPATH_MAP_T2 = "//img[@class[contains(.,'responsive')] and @hidefocus='true']";
-	private static final String XPATH_LOYALTY_ELEMENT = "//*[@data-testid[contains(.,'Likes')] or @id[contains(.,'Likes')]]";
+	private static final String XP_MAIN_CONTENT_PAIS = "//div[@class[contains(.,'main-content')] and @data-pais]";
+	private static final String XP_CONTENIDO = "//div[@class[contains(.,'container-fluid home')]]";
+	private static final String XP_SLIDER = "//section[@class='entitieswrapper']//div[@class[contains(.,'vsv-slide')]]";
+	private static final String XP_EDIT_ITEM = "//div[@class[contains(.,'item-edit')] and @data-id]";
+	private static final String XP_MAP_T1 = "//map[@name[contains(.,'item_')]]/..";
+	private static final String XP_MAP_T2 = "//img[@class[contains(.,'responsive')] and @hidefocus='true']";
+	private static final String XP_LOYALTY_ELEMENT = "//*[@data-testid[contains(.,'Likes')] or @id[contains(.,'Likes')]]";
 		
 	private CommsHeaderBanner commsHeaderBanner = new CommsHeaderBanner();
 
@@ -33,7 +33,7 @@ public class PageLanding extends PageBase {
 	}
 	
 	public boolean isPageUntil(int seconds) {
-		return state(Present, XPATH_CONTENIDO).wait(seconds).check();
+		return state(Present, XP_CONTENIDO).wait(seconds).check();
 	}
 	
 	public boolean isPageDependingCountry() {
@@ -55,14 +55,14 @@ public class PageLanding extends PageBase {
 	}	
 	
 	public String getCodigoPais() {
-		if (state(Present, XPATH_MAIN_CONTENT_PAIS).check()) {
-			return getElement(XPATH_MAIN_CONTENT_PAIS).getAttribute("data-pais");
+		if (state(Present, XP_MAIN_CONTENT_PAIS).check()) {
+			return getElement(XP_MAIN_CONTENT_PAIS).getAttribute("data-pais");
 		}
 		return "";
 	}
 	
 	public boolean haySliders() {
-		return state(Visible, XPATH_SLIDER).check();
+		return state(Visible, XP_SLIDER).check();
 	}
 	
 	public boolean hayMaps() {
@@ -78,14 +78,14 @@ public class PageLanding extends PageBase {
 	public List<WebElement> getListaMaps() {
 		// Seleccionamos cada uno de los banners visibles
 		List<WebElement> listMaps;
-		listMaps = getElementsVisible(XPATH_MAP_T1);
-		listMaps.addAll(getElementsVisible(XPATH_MAP_T2));
+		listMaps = getElementsVisible(XP_MAP_T1);
+		listMaps.addAll(getElementsVisible(XP_MAP_T2));
 		return listMaps;
 	}
 	
 	public List<WebElement> getListaItemsEdit() {
 		List<WebElement> listItemsEdits;
-		listItemsEdits = getElementsVisible(XPATH_EDIT_ITEM);
+		listItemsEdits = getElementsVisible(XP_EDIT_ITEM);
 		return listItemsEdits;		
 	}
 	
@@ -190,7 +190,7 @@ public class PageLanding extends PageBase {
 	}
 	
 	public boolean isVisibleAnyElementLoyalty() {
-		return state(Visible, XPATH_LOYALTY_ELEMENT).check();
+		return state(Visible, XP_LOYALTY_ELEMENT).check();
 	}
 
 }

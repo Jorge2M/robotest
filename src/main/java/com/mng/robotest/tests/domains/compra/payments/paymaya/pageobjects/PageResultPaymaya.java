@@ -6,14 +6,14 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageResultPaymaya extends PageBase {
 
-	private static final String XPATH_CONFIRM_BUTTON = "//input[@id='confirm-button']";
+	private static final String XP_CONFIRM_BUTTON = "//input[@id='confirm-button']";
 	
 	public boolean isPage() {
-		return state(Visible, XPATH_CONFIRM_BUTTON).check();
+		return state(Visible, XP_CONFIRM_BUTTON).check();
 	}
 	
 	public void confirmPayment() {
-		click(XPATH_CONFIRM_BUTTON).exec();
+		click(XP_CONFIRM_BUTTON).exec();
 	}
 	
 }

@@ -11,17 +11,17 @@ import com.mng.robotest.testslegacy.data.Talla;
 
 public class SecTallasArticuloKondo extends SecTallasArticulo {
 
-	private static final String XPATH_ARTICULO_DESKTOP = CommonGaleriaKondo.XPATH_ARTICULO;
-	private static final String XPATH_ARTICULO_DEVICE = CommonGaleriaKondo.XPATH_ARTICULO;
+	private static final String XP_ARTICULO_DESKTOP = CommonGaleriaKondo.XP_ARTICULO;
+	private static final String XP_ARTICULO_DEVICE = CommonGaleriaKondo.XP_ARTICULO;
 	
-	private static final String XPATH_CAPA_TALLAS_ARTICULO_DESKTOP = "//*[@data-testid='plp.productSizeSelector.panel']/div";
-	private static final String XPATH_TALLA_AVAILABLE_DESKTOP = XPATH_CAPA_TALLAS_ARTICULO_DESKTOP + "//button[@data-testid[contains(.,'size.available')]]";
-	private static final String XPATH_TALLA_UNAVAILABLE_DESKTOP = XPATH_CAPA_TALLAS_ARTICULO_DESKTOP + "//button[@data-testid[contains(.,'size.unavailable')]]";
+	private static final String XP_CAPA_TALLAS_ARTICULO_DESKTOP = "//*[@data-testid='plp.productSizeSelector.panel']/div";
+	private static final String XP_TALLA_AVAILABLE_DESKTOP = XP_CAPA_TALLAS_ARTICULO_DESKTOP + "//button[@data-testid[contains(.,'size.available')]]";
+	private static final String XP_TALLA_UNAVAILABLE_DESKTOP = XP_CAPA_TALLAS_ARTICULO_DESKTOP + "//button[@data-testid[contains(.,'size.unavailable')]]";
 	
 	//TODO Galería Kondo (19-10-23) hay un problema en mobile, las tallas no disponibles se muestran con data-testid='plp.sizeSelector.size.available'
-	private static final String XPATH_CAPA_TALLAS_ARTICULO_DEVICE = "//*[@data-testid='productCard.sizesSelector.sheet.list']"; 
-	private static final String XPATH_TALLA_AVAILABLE_DEVICE = XPATH_CAPA_TALLAS_ARTICULO_DEVICE + "//button/span[not(@class[contains(.,'NG6pA')])]/..";
-	private static final String XPATH_TALLA_UNAVAILABLE_DEVICE = XPATH_CAPA_TALLAS_ARTICULO_DEVICE + "//button/span[@class[contains(.,'NG6pA')]]/..";
+	private static final String XP_CAPA_TALLAS_ARTICULO_DEVICE = "//*[@data-testid='productCard.sizesSelector.sheet.list']"; 
+	private static final String XP_TALLA_AVAILABLE_DEVICE = XP_CAPA_TALLAS_ARTICULO_DEVICE + "//button/span[not(@class[contains(.,'NG6pA')])]/..";
+	private static final String XP_TALLA_UNAVAILABLE_DEVICE = XP_CAPA_TALLAS_ARTICULO_DEVICE + "//button/span[@class[contains(.,'NG6pA')]]/..";
 	
 	public SecTallasArticuloKondo(Channel channel) {
 		super(getXPathArticulo(channel));
@@ -29,16 +29,16 @@ public class SecTallasArticuloKondo extends SecTallasArticulo {
 	
 	private static String getXPathArticulo(Channel channel) {
 		if (channel.isDevice()) {
-			return XPATH_ARTICULO_DEVICE;
+			return XP_ARTICULO_DEVICE;
 		}
-		return XPATH_ARTICULO_DESKTOP;
+		return XP_ARTICULO_DESKTOP;
 	}
 	
 	private String getXPathCapaTallasArticulo() {
 		if (channel.isDevice()) {
-			return XPATH_CAPA_TALLAS_ARTICULO_DEVICE;
+			return XP_CAPA_TALLAS_ARTICULO_DEVICE;
 		} else {
-			return XPATH_CAPA_TALLAS_ARTICULO_DESKTOP;
+			return XP_CAPA_TALLAS_ARTICULO_DESKTOP;
 		}
 	}
 	private String getXPathCapaTallasArticulo(int position) {
@@ -47,15 +47,15 @@ public class SecTallasArticuloKondo extends SecTallasArticulo {
 	
 	private String getXPathTallaAvailable() {
 		if (channel.isDevice()) {
-			return XPATH_TALLA_AVAILABLE_DEVICE;
+			return XP_TALLA_AVAILABLE_DEVICE;
 		}
-		return XPATH_TALLA_AVAILABLE_DESKTOP;
+		return XP_TALLA_AVAILABLE_DESKTOP;
 	}
 	private String getXPathTallaUnavailable() {
 		if (channel.isDevice()) {
-			return XPATH_TALLA_UNAVAILABLE_DEVICE;
+			return XP_TALLA_UNAVAILABLE_DEVICE;
 		}
-		return XPATH_TALLA_UNAVAILABLE_DESKTOP;
+		return XP_TALLA_UNAVAILABLE_DESKTOP;
 	}	
 	
 	private String getXPathArticleTallaAvailable(int position) {

@@ -22,16 +22,16 @@ public class PageEpsSimulador extends PageBase {
 		}
 	}
 	
-	private static final String XPATH_LOGO_EPS = "//img[@class='paymentMethodLogo' and @src[contains(.,'eps.png')]]";
-	private static final String XPATH_CONTINUE_BUTTON = "//button[@value='pendingauthorised']";
-	private static final String XPATH_SELECT_DELAY_AUTHORISED = "//select[@name='delaySelector']";
+	private static final String XP_LOGO_EPS = "//img[@class='paymentMethodLogo' and @src[contains(.,'eps.png')]]";
+	private static final String XP_CONTINUE_BUTTON = "//button[@value='pendingauthorised']";
+	private static final String XP_SELECT_DELAY_AUTHORISED = "//select[@name='delaySelector']";
 	
 	private String getXPathOptionDelayAuthorised(TypeDelay typeDelay) {
-		return (XPATH_SELECT_DELAY_AUTHORISED + "//option[text()[contains(.,'" + typeDelay.minutes + " minute')]]");
+		return (XP_SELECT_DELAY_AUTHORISED + "//option[text()[contains(.,'" + typeDelay.minutes + " minute')]]");
 	}
 	
 	public boolean isPage() {
-		return state(Visible, XPATH_LOGO_EPS).check();
+		return state(Visible, XP_LOGO_EPS).check();
 	}
 	
 	public void selectDelayAuthorised(TypeDelay typeDelay) {
@@ -40,6 +40,6 @@ public class PageEpsSimulador extends PageBase {
 	}
 
 	public void clickButtonContinue() {
-		click(XPATH_CONTINUE_BUTTON).exec();
+		click(XP_CONTINUE_BUTTON).exec();
 	}
 }

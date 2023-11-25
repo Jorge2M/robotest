@@ -6,12 +6,12 @@ import org.openqa.selenium.WebElement;
 
 public class BannerEditsObject extends BannerObject {
 
-	private static final String XPATH_BANNER_CARRUSEL = "//div[@class='heroSwiper']//div[@class='swiperImage']";
-	private static final String XPATH_BANNER_PESTANYAS = "//div[@class='masonryGrid']//div[@class='masonryItem']/a";
-	private static final String XPATH_BANNER = "(" + XPATH_BANNER_CARRUSEL + " | " + XPATH_BANNER_PESTANYAS + ")";
+	private static final String XP_BANNER_CARRUSEL = "//div[@class='heroSwiper']//div[@class='swiperImage']";
+	private static final String XP_BANNER_PESTANYAS = "//div[@class='masonryGrid']//div[@class='masonryItem']/a";
+	private static final String XP_BANNER = "(" + XP_BANNER_CARRUSEL + " | " + XP_BANNER_PESTANYAS + ")";
 	
 	public BannerEditsObject(BannerType bannerType) {
-		super(bannerType, XPATH_BANNER);
+		super(bannerType, XP_BANNER);
 	}
 	
 	@Override

@@ -7,18 +7,18 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageDotpayPaymentChannel extends PageBase {
 
-	private static final String XPATH_SECTION_PAYMENT_CHANNELS = "//section[@id='payment-channels']";
-	private static final String XPATH_BLOCK_INPUT_DATA = "//div[@id='personal-data-form']";
-	private static final String XPATH_INPUT_FIRST_NAME = XPATH_BLOCK_INPUT_DATA + "//input[@name='dp-firstname']";
-	private static final String XPATH_INPUT_LAST_NAME = XPATH_BLOCK_INPUT_DATA + "//input[@name='dp-lastname']";
-	private static final String XPATH_BUTTON_CONFIRMAR = XPATH_BLOCK_INPUT_DATA + "//button[@type='submit' and @id='payment-form-submit-dp']";
+	private static final String XP_SECTION_PAYMENT_CHANNELS = "//section[@id='payment-channels']";
+	private static final String XP_BLOCK_INPUT_DATA = "//div[@id='personal-data-form']";
+	private static final String XP_INPUT_FIRST_NAME = XP_BLOCK_INPUT_DATA + "//input[@name='dp-firstname']";
+	private static final String XP_INPUT_LAST_NAME = XP_BLOCK_INPUT_DATA + "//input[@name='dp-lastname']";
+	private static final String XP_BUTTON_CONFIRMAR = XP_BLOCK_INPUT_DATA + "//button[@type='submit' and @id='payment-form-submit-dp']";
 	
 	public String getXPathPaymentChannelLink(int numPayment) {
 		return "//img[@id='channel_image_" + numPayment + "']";
 	}
 	
 	public boolean isPage() {
-		return state(Present, XPATH_SECTION_PAYMENT_CHANNELS).check();
+		return state(Present, XP_SECTION_PAYMENT_CHANNELS).check();
 	}
 
 	public void clickPayment(int numPayment) {
@@ -26,15 +26,15 @@ public class PageDotpayPaymentChannel extends PageBase {
 	}
 
 	public void sendInputNombre(String firstName, String lastName) {
-		getElement(XPATH_INPUT_FIRST_NAME).sendKeys(firstName);
-		getElement(XPATH_INPUT_LAST_NAME).sendKeys(lastName);
+		getElement(XP_INPUT_FIRST_NAME).sendKeys(firstName);
+		getElement(XP_INPUT_LAST_NAME).sendKeys(lastName);
 	}
 
 	public void clickButtonConfirm() {
-		click(XPATH_BUTTON_CONFIRMAR).exec();
+		click(XP_BUTTON_CONFIRMAR).exec();
 	}
 
 	public boolean isVisibleBlockInputDataUntil(int seconds) {
-		return state(Visible, XPATH_BLOCK_INPUT_DATA).wait(seconds).check();
+		return state(Visible, XP_BLOCK_INPUT_DATA).wait(seconds).check();
 	}
 }

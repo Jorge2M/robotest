@@ -6,13 +6,13 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class ModalInputPersonnumberKlarna extends PageBase {
 
-	private static final String XPATH_INPUT_PERSON_NUMBER = "//input[@id='invoice_kp-purchase-approval-form-national-identification-number']";
-	private static final String XPATH_INPUT_FECHA_NACIMIENTO = "//input[@id='invoice_kp-purchase-approval-form-date-of-birth']";
-	private static final String XPATH_BUTTON_CONF = "//button[@id='invoice_kp-purchase-approval-form-continue-button']";
-	private static final String XPATH_SECOND_BUTTON_CONF = "//div[@id='identification-dialog__footer-button-wrapper']//button";
+	private static final String XP_INPUT_PERSON_NUMBER = "//input[@id='invoice_kp-purchase-approval-form-national-identification-number']";
+	private static final String XP_INPUT_FECHA_NACIMIENTO = "//input[@id='invoice_kp-purchase-approval-form-date-of-birth']";
+	private static final String XP_BUTTON_CONF = "//button[@id='invoice_kp-purchase-approval-form-continue-button']";
+	private static final String XP_SECOND_BUTTON_CONF = "//div[@id='identification-dialog__footer-button-wrapper']//button";
 	
 	private String getXPathInputPersonNumber() {
-		return XPATH_INPUT_PERSON_NUMBER + " | " + XPATH_INPUT_FECHA_NACIMIENTO;
+		return XP_INPUT_PERSON_NUMBER + " | " + XP_INPUT_FECHA_NACIMIENTO;
 	}
 	
 	public boolean isModal(int seconds) {
@@ -24,9 +24,9 @@ public class ModalInputPersonnumberKlarna extends PageBase {
 	}
 	
 	public void clickButtonConf() {
-		click(XPATH_BUTTON_CONF).exec();
-		if (state(Visible, XPATH_SECOND_BUTTON_CONF).wait(2).check()) {
-			click(XPATH_SECOND_BUTTON_CONF).exec();
+		click(XP_BUTTON_CONF).exec();
+		if (state(Visible, XP_SECOND_BUTTON_CONF).wait(2).check()) {
+			click(XP_SECOND_BUTTON_CONF).exec();
 		}
 	}
 }

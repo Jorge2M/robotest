@@ -9,22 +9,22 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class SecSearchDesktop extends PageBase implements SecSearch {
 	
-	private static final String XPATH_INPUT_BUSCADOR = "//input[@data-testid='header.search.input']";
-	private static final String XPATH_CLOSE_ASPA = "//span[@class[contains(.,'icon-outline-close')]]";
+	private static final String XP_INPUT_BUSCADOR = "//input[@data-testid='header.search.input']";
+	private static final String XP_CLOSE_ASPA = "//span[@class[contains(.,'icon-outline-close')]]";
 
 	@Override
 	public void search(String referencia) {
-		state(Visible, XPATH_INPUT_BUSCADOR).wait(2).check();
+		state(Visible, XP_INPUT_BUSCADOR).wait(2).check();
 		setTextAndReturn(referencia);
 	}
 
 	@Override
 	public void close() {
-		click(XPATH_CLOSE_ASPA).exec();
+		click(XP_CLOSE_ASPA).exec();
 	}
 
 	private void setTextAndReturn(String referencia) {
-		var input = getElementVisible(driver, By.xpath(XPATH_INPUT_BUSCADOR));
+		var input = getElementVisible(driver, By.xpath(XP_INPUT_BUSCADOR));
 		sendKeysWithRetry(5, input, referencia); 
 		input.sendKeys(Keys.RETURN);
 		waitLoadPage();

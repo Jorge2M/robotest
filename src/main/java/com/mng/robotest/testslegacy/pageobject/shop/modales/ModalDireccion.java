@@ -15,33 +15,33 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public abstract class ModalDireccion extends PageBase {
 
-	private static final String XPATH_INPUT_NIF = "//input[@id[contains(.,'cfDni')]]";
-	private static final String XPATH_INPUT_NAME = "//input[@id[contains(.,'cfName')]]";
-	private static final String XPATH_INPUT_APELLIDOS = "//input[@id[contains(.,'cfSname')]]";
-	private static final String XPATH_INPUT_DIRECCION = "//input[@id[contains(.,'cfDir1')]]";
-	private static final String XPATH_INPUT_CODPOSTAL = "//input[@id[contains(.,'cfCp')]]";
-	private static final String XPATH_INPUT_EMAIL = "//input[@id[contains(.,'cfEmail')]]";
-	private static final String XPATH_INPUT_TELEFONO = "//input[@id[contains(.,'cfTelf')]]";
-	private static final String XPATH_SELECT_POBLACION = "//select[@id[contains(.,':localidades')]]";
-	private static final String XPATH_SELECT_PROVINCIA = "//select[@id[contains(.,':estadosPais')]]";
-	private static final String XPATH_SELECT_PAIS = "//select[@id[contains(.,':pais')]]";
+	private static final String XP_INPUT_NIF = "//input[@id[contains(.,'cfDni')]]";
+	private static final String XP_INPUT_NAME = "//input[@id[contains(.,'cfName')]]";
+	private static final String XP_INPUT_APELLIDOS = "//input[@id[contains(.,'cfSname')]]";
+	private static final String XP_INPUT_DIRECCION = "//input[@id[contains(.,'cfDir1')]]";
+	private static final String XP_INPUT_CODPOSTAL = "//input[@id[contains(.,'cfCp')]]";
+	private static final String XP_INPUT_EMAIL = "//input[@id[contains(.,'cfEmail')]]";
+	private static final String XP_INPUT_TELEFONO = "//input[@id[contains(.,'cfTelf')]]";
+	private static final String XP_SELECT_POBLACION = "//select[@id[contains(.,':localidades')]]";
+	private static final String XP_SELECT_PROVINCIA = "//select[@id[contains(.,':estadosPais')]]";
+	private static final String XP_SELECT_PAIS = "//select[@id[contains(.,':pais')]]";
 	
 	private String getXPathInput(DataDirType inputType) {
 		switch (inputType) {
 		case NIF:
-			return XPATH_INPUT_NIF;
+			return XP_INPUT_NIF;
 		case NAME:
-			return XPATH_INPUT_NAME;
+			return XP_INPUT_NAME;
 		case APELLIDOS:
-			return XPATH_INPUT_APELLIDOS;
+			return XP_INPUT_APELLIDOS;
 		case DIRECCION:
-			return XPATH_INPUT_DIRECCION;
+			return XP_INPUT_DIRECCION;
 		case CODPOSTAL:
-			return XPATH_INPUT_CODPOSTAL;
+			return XP_INPUT_CODPOSTAL;
 		case EMAIL:
-			return XPATH_INPUT_EMAIL;
+			return XP_INPUT_EMAIL;
 		case TELEFONO:
-			return XPATH_INPUT_TELEFONO;
+			return XP_INPUT_TELEFONO;
 		default:
 			return "";
 		}
@@ -81,21 +81,21 @@ public abstract class ModalDireccion extends PageBase {
 	}
 	
 	public void selectPoblacion(String poblacion, String xpathFormModal) {
-		state(Visible, xpathFormModal + XPATH_SELECT_POBLACION).wait(2).check();
+		state(Visible, xpathFormModal + XP_SELECT_POBLACION).wait(2).check();
 		waitMillis(1000);
-		new Select(getElement(xpathFormModal + XPATH_SELECT_POBLACION)).selectByValue(poblacion);
+		new Select(getElement(xpathFormModal + XP_SELECT_POBLACION)).selectByValue(poblacion);
 	}
 	
 	public void selectProvincia(String provincia, String xpathFormModal) {
-		state(Visible, xpathFormModal + XPATH_SELECT_PROVINCIA).wait(2).check();
-		new Select(getElement(xpathFormModal + XPATH_SELECT_PROVINCIA)).selectByVisibleText(provincia);
+		state(Visible, xpathFormModal + XP_SELECT_PROVINCIA).wait(2).check();
+		new Select(getElement(xpathFormModal + XP_SELECT_PROVINCIA)).selectByVisibleText(provincia);
 	}	
 	
 	public void selectPais(String codigoPais, String xpathFormModal) {
-		String xpathSelectedPais = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
+		String xpathSelectedPais = XP_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
 		if (!state(Present, xpathSelectedPais).check()) {
-			state(Visible, xpathFormModal + XPATH_SELECT_PAIS).wait(2).check();
-			new Select(getElement(xpathFormModal + XPATH_SELECT_PAIS)).selectByValue(codigoPais);
+			state(Visible, xpathFormModal + XP_SELECT_PAIS).wait(2).check();
+			new Select(getElement(xpathFormModal + XP_SELECT_PAIS)).selectByValue(codigoPais);
 		}
 	}	
 	

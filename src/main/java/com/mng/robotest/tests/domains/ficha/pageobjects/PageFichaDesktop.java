@@ -15,7 +15,7 @@ public class PageFichaDesktop extends PageFicha {
 	public SecModalPersonalizacion secModalPersonalizacion;
 	public ModNoStock modNoStock;
 
-	private static final String XPATH_HTML_FICHA = "//html[@class[contains(.,'ficha')]]";
+	private static final String XP_HTML_FICHA = "//html[@class[contains(.,'ficha')]]";
 
 	public PageFichaDesktop() {
 		this.secBolsaButtonAndLinks = new SecBolsaButtonAndLinksNew();
@@ -25,13 +25,13 @@ public class PageFichaDesktop extends PageFicha {
 	}
 
 	private String getXPathIsPage(String referencia) {
-		return XPATH_HTML_FICHA + secDataProduct.getXPathLinReferencia(referencia);
+		return XP_HTML_FICHA + secDataProduct.getXPathLinReferencia(referencia);
 	}
 
 	@Override
 	public boolean isPageUntil(int seconds) {
 		return 
-			state(Present, XPATH_HTML_FICHA).wait(seconds).check() &&
+			state(Present, XP_HTML_FICHA).wait(seconds).check() &&
 			secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(seconds);
 	}
 

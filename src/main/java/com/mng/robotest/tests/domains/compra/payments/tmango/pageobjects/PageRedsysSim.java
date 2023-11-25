@@ -24,7 +24,7 @@ public class PageRedsysSim extends PageBase {
 		}
 	}
 	
-	private static final String XPATH_BUTTON_ENVIAR = "//input[@id='boton']";
+	private static final String XP_BUTTON_ENVIAR = "//input[@id='boton']";
 	
 	public boolean isPage(int seconds) {
 		return state(Present, AUTENTICACION_CON_EXITO.getXPath()).wait(seconds).check();
@@ -35,7 +35,7 @@ public class PageRedsysSim extends PageBase {
 	}
 	
 	public void clickEnviar() {
-		click(XPATH_BUTTON_ENVIAR).exec();
+		click(XP_BUTTON_ENVIAR).exec();
 	}
 	
 }

@@ -7,14 +7,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageSofort1rst extends PageBase {
 	
-	private static final String XPATH_FIGURAS_BUTTON_DESKTOP = "//input[@class[contains(.,'paySubmit')]]";
-	private static final String XPATH_ICONO_SOFORT = "//input[@name='brandName' and @type='submit']";
+	private static final String XP_FIGURAS_BUTTON_DESKTOP = "//input[@class[contains(.,'paySubmit')]]";
+	private static final String XP_ICONO_SOFORT = "//input[@name='brandName' and @type='submit']";
 	
 	private String getXPathClickToFollow(Channel channel) {
 		if (channel.isDevice()) {
-			return XPATH_ICONO_SOFORT;
+			return XP_ICONO_SOFORT;
 		} else {
-			return XPATH_FIGURAS_BUTTON_DESKTOP;
+			return XP_FIGURAS_BUTTON_DESKTOP;
 		}
 	}
 	

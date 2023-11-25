@@ -8,16 +8,16 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecKrediKartiCheckout extends PageBase {
 
-	private static final String XPATH_FORMULARIO_TARJETA = "//div[@class='msuFormularioTarjeta']";
-	private static final String XPATH_INPUT_CARD_NUMBER = XPATH_FORMULARIO_TARJETA + "//input[@id[contains(.,'cardNumber')] or @id[contains(.,'msu_cardpan')] or @id[contains(.,'number-card')]]";
-	private static final String XPATH_CAPA_PAGO_PLAZO_MOBIL = "//table[@class[contains(.,'installment-msu')]]";
-	private static final String XPATH_CAPA_PAGO_PLAZO_DESKTOP = "//div[@class[contains(.,'installmentsTable')]]";			
+	private static final String XP_FORMULARIO_TARJETA = "//div[@class='msuFormularioTarjeta']";
+	private static final String XP_INPUT_CARD_NUMBER = XP_FORMULARIO_TARJETA + "//input[@id[contains(.,'cardNumber')] or @id[contains(.,'msu_cardpan')] or @id[contains(.,'number-card')]]";
+	private static final String XP_CAPA_PAGO_PLAZO_MOBIL = "//table[@class[contains(.,'installment-msu')]]";
+	private static final String XP_CAPA_PAGO_PLAZO_DESKTOP = "//div[@class[contains(.,'installmentsTable')]]";			
 	
 	private String getXPathCapaPagoPlazo() {
 		if (channel.isDevice()) {
-			return XPATH_CAPA_PAGO_PLAZO_MOBIL;
+			return XP_CAPA_PAGO_PLAZO_MOBIL;
 		}
-		return XPATH_CAPA_PAGO_PLAZO_DESKTOP;
+		return XP_CAPA_PAGO_PLAZO_DESKTOP;
 	}
 	
 	private String getXPathCheckPlazos(int posicion) {
@@ -29,7 +29,7 @@ public class SecKrediKartiCheckout extends PageBase {
 	}
  
 	public void inputCardNumberAndTab(String numTarj) {
-		getElement(XPATH_INPUT_CARD_NUMBER).sendKeys(numTarj, Keys.TAB);
+		getElement(XP_INPUT_CARD_NUMBER).sendKeys(numTarj, Keys.TAB);
 	}
 	
 	public boolean isVisiblePagoAPlazoUntil(int seconds) {

@@ -6,16 +6,16 @@ import org.openqa.selenium.WebElement;
 
 public class BannerStandarObject extends BannerObject {
 
-	private static final String XPATH_WRAPPER_BANNER = "//div[@class[contains(.,'bannercontainer')] and @data-bannerid]";
-	private static final String XPATH_BANNER = XPATH_WRAPPER_BANNER + 
+	private static final String XP_WRAPPER_BANNER = "//div[@class[contains(.,'bannercontainer')] and @data-bannerid]";
+	private static final String XP_BANNER = XP_WRAPPER_BANNER + 
 		"//div[@data-cta and not(@data-cta='') and " + 
 			  "@data-cta[not(contains(.,'op=ayuda'))] and " + 
 			  "not(@class='link')]";
 	
-	private static final String XPATH_IMAGE_RELATIVE_BANNER = "//img[@class='img-responsive']";
+	private static final String XP_IMAGE_RELATIVE_BANNER = "//img[@class='img-responsive']";
 	
 	public BannerStandarObject(BannerType bannerType) {
-		super(bannerType, XPATH_BANNER);
+		super(bannerType, XP_BANNER);
 	}
 	
 	@Override
@@ -29,7 +29,7 @@ public class BannerStandarObject extends BannerObject {
 
 	@Override
 	protected String getSrcImageBanner(WebElement bannerScreen) {
-		List<WebElement> listImgsBanner = getElementsVisible(bannerScreen, "." + XPATH_IMAGE_RELATIVE_BANNER);
+		List<WebElement> listImgsBanner = getElementsVisible(bannerScreen, "." + XP_IMAGE_RELATIVE_BANNER);
 		if (!listImgsBanner.isEmpty()) {
 			return (listImgsBanner.get(0).getAttribute("src"));
 		}

@@ -7,13 +7,13 @@ import com.mng.robotest.tests.domains.base.PageBase;
 public class SectionBarraSupVOTF extends PageBase {
 
 	public static final String TITLE_USERNAME = "USERNAME: "; 
-	private static final String XPATH_BARRA = "//div[@class[contains(.,'barraTele')]]";
+	private static final String XP_BARRA = "//div[@class[contains(.,'barraTele')]]";
 	
 	public boolean isPresentUsuario(String usuarioVOTF) {
 		String usuarioLit = TITLE_USERNAME + usuarioVOTF;
 		return (
-			state(Present, XPATH_BARRA).check() &&
-			getElement(XPATH_BARRA).getText().toLowerCase().contains(usuarioLit.toLowerCase()));
+			state(Present, XP_BARRA).check() &&
+			getElement(XP_BARRA).getText().toLowerCase().contains(usuarioLit.toLowerCase()));
 	}
 	
 }

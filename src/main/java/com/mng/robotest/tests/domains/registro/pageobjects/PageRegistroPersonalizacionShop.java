@@ -24,49 +24,49 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 		}
 	}
 	
-	public static final List<LineaType> ALL_LINEAS = Arrays.asList(SHE, HE, KIDS, HOME); 
+	private static final List<LineaType> ALL_LINEAS = Arrays.asList(SHE, HE, KIDS, HOME); 
 	
-	private static final String XPATH_MODAL_CONTENT = "//div[@id[contains(.,'registerModal')]]";
-	private static final String XPATH_INPUT_NOMBRE = "//input[@id='name']";
-	private static final String XPATH_INPUT_POSTALCODE = "//input[@id='postalCode']";
-	private static final String XPATH_INPUT_DATE_BIRTH = "//input[@id='birthDate']";
-	private static final String XPATH_SAVE_BUTTON = XPATH_MODAL_CONTENT + "//button[@type='submit']";
-	private static final String XPATH_MESSAGE_ERROR_CODPOSTAL = "//p[@id='postalCode-error']";
+	private static final String XP_MODAL_CONTENT = "//div[@id[contains(.,'registerModal')]]";
+	private static final String XP_INPUT_NOMBRE = "//input[@id='name']";
+	private static final String XP_INPUT_POSTALCODE = "//input[@id='postalCode']";
+	private static final String XP_INPUT_DATE_BIRTH = "//input[@id='birthDate']";
+	private static final String XP_SAVE_BUTTON = XP_MODAL_CONTENT + "//button[@type='submit']";
+	private static final String XP_MESSAGE_ERROR_CODPOSTAL = "//p[@id='postalCode-error']";
 	
 	private static final String TAG_GENDER = "@TagGender";
-	private static final String XPATH_CHECKBOX_GENEDER_WITH_TAG = "//label[@for='gender-" + TAG_GENDER + "']";
+	private static final String XP_CHECKBOX_GENEDER_WITH_TAG = "//label[@for='gender-" + TAG_GENDER + "']";
 	
 	private static final String TAG_LINEA = "@TagLinea";
-	private static final String XPATH_CHECKBOX_LINEA_WITH_TAG = "//input[@id='" + TAG_LINEA + "']";
+	private static final String XP_CHECKBOX_LINEA_WITH_TAG = "//input[@id='" + TAG_LINEA + "']";
 	
 	public String getXPathCheckboxGender(GenderOption gender) {
-		return XPATH_CHECKBOX_GENEDER_WITH_TAG.replace(TAG_GENDER, String.valueOf(gender.code));
+		return XP_CHECKBOX_GENEDER_WITH_TAG.replace(TAG_GENDER, String.valueOf(gender.code));
 	}
 	public String getXPathCheckboxLinea(LineaType linea) {
-		return XPATH_CHECKBOX_LINEA_WITH_TAG.replace(TAG_LINEA, linea.name().toUpperCase());
+		return XP_CHECKBOX_LINEA_WITH_TAG.replace(TAG_LINEA, linea.name().toUpperCase());
 	}
 	
 	public boolean isPage() {
 		return isPageUntil(0);
 	}
 	public boolean isPageUntil(int seconds) {
-		return state(Present, XPATH_INPUT_NOMBRE).wait(seconds).check(); 
+		return state(Present, XP_INPUT_NOMBRE).wait(seconds).check(); 
 	}
 	public boolean isPostalCodeVisible() {
-		return state(Present, XPATH_INPUT_POSTALCODE).check();
+		return state(Present, XP_INPUT_POSTALCODE).check();
 	}
 	
 	public void inputName(String name) {
-		getElement(XPATH_INPUT_NOMBRE).sendKeys(name);
+		getElement(XP_INPUT_NOMBRE).sendKeys(name);
 	}
 	
 	public void inputPostalCode(String postalCode) {
-		state(Present, XPATH_INPUT_POSTALCODE).wait(2).check();
-		getElement(XPATH_INPUT_POSTALCODE).sendKeys(postalCode);
+		state(Present, XP_INPUT_POSTALCODE).wait(2).check();
+		getElement(XP_INPUT_POSTALCODE).sendKeys(postalCode);
 	}
 	
 	public void inputDateOfBirth(String date) {
-		getElement(XPATH_INPUT_DATE_BIRTH).sendKeys(date);
+		getElement(XP_INPUT_DATE_BIRTH).sendKeys(date);
 	}
 	
 	public void selectGender(GenderOption gender) {
@@ -80,6 +80,11 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 			.filter(s -> !lineasToSelect.contains(s))
 			.forEach(this::unselectLinea);
 	}
+	
+	public static List<LineaType> getAllLineas() {
+		return ALL_LINEAS;
+	}
+	
 	private List<LineaType> getAllLineasCountry() {
 		return dataTest.getPais().getShoponline().getLineasToTest(app).stream()
 				.map(Linea::getType)
@@ -92,10 +97,10 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	}
 	
 	public void clickGuardar() {
-		click(XPATH_SAVE_BUTTON).exec();
+		click(XP_SAVE_BUTTON).exec();
 	}
 	
 	public boolean checkMessageErrorMovil(int seconds) {
-		return state(Visible, XPATH_MESSAGE_ERROR_CODPOSTAL).wait(seconds).check();
+		return state(Visible, XP_MESSAGE_ERROR_CODPOSTAL).wait(seconds).check();
 	}
 }

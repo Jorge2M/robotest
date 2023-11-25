@@ -17,16 +17,16 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageRegistroDirecOutlet extends PageBase {
 
-	private static final String XPATH_DIV_ERROR = "//div[@class='errorValidation']";
-	private static final String XPATH_INPUT_DIREC = "//input[@id[contains(.,':cfDir1')]]";
-	private static final String XPATH_SELECT_PAIS = "//select[@id[contains(.,':pais')]]";
-	private static final String XPATH_INPUT_COD_POSTAL = "//input[@id[contains(.,':cfCp')]]";
-	private static final String XPATH_SELECT_POBLACION = "//select[@id[contains(.,':localidades')]]";
-	private static final String XPATH_SELECT_PROVINCIA = "//select[@id[contains(.,':estadosPais')]]";
-	private static final String XPATH_FINALIZAR_BUTTON = "//form[@id[contains(.,'Step')]]//input[@type='submit']";
+	private static final String XP_DIV_ERROR = "//div[@class='errorValidation']";
+	private static final String XP_INPUT_DIREC = "//input[@id[contains(.,':cfDir1')]]";
+	private static final String XP_SELECT_PAIS = "//select[@id[contains(.,':pais')]]";
+	private static final String XP_INPUT_COD_POSTAL = "//input[@id[contains(.,':cfCp')]]";
+	private static final String XP_SELECT_POBLACION = "//select[@id[contains(.,':localidades')]]";
+	private static final String XP_SELECT_PROVINCIA = "//select[@id[contains(.,':estadosPais')]]";
+	private static final String XP_FINALIZAR_BUTTON = "//form[@id[contains(.,'Step')]]//input[@type='submit']";
 	
 	public int getNumberMsgInputInvalid() {
-		return getNumElementsVisible(XPATH_DIV_ERROR);
+		return getNumElementsVisible(XP_DIV_ERROR);
 	}
 	
 	public void sendDataAccordingCountryToInputs(Map<String,String> dataRegistro) {
@@ -62,39 +62,39 @@ public class PageRegistroDirecOutlet extends PageBase {
 	}
 	
 	public void sendDataToDireccionIfNotExist(String direccion) {
-		sendKeysToInputIfNotExist(direccion, XPATH_INPUT_DIREC);
+		sendKeysToInputIfNotExist(direccion, XP_INPUT_DIREC);
 	}
 	
 	public void sendDataToPaisIfNotExist(String codigoPais) {
-		String xpathSelectedPais = XPATH_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
+		String xpathSelectedPais = XP_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
 		if (state(Present, xpathSelectedPais).check()) {
-			new Select(getElement(XPATH_SELECT_PAIS)).selectByValue(codigoPais);
+			new Select(getElement(XP_SELECT_PAIS)).selectByValue(codigoPais);
 		}
 	}	
 	
 	public void sendDataToCodPostalIfNotExist(String codPostal) {
-		sendKeysToInputIfNotExist(codPostal, XPATH_INPUT_COD_POSTAL);
+		sendKeysToInputIfNotExist(codPostal, XP_INPUT_COD_POSTAL);
 	}
 	
 	public void sendDataToPoblacion(String poblacion) {
-		new Select(getElement(XPATH_SELECT_POBLACION)).selectByValue(poblacion);
+		new Select(getElement(XP_SELECT_POBLACION)).selectByValue(poblacion);
 	}
 	
 	public void sendDataToProvincia(String provincia) {
-		String valueProvincia = getElement(XPATH_SELECT_PROVINCIA + "/option[text()='" + provincia + "']").getAttribute("value");
-		new Select(getElement(XPATH_SELECT_PROVINCIA)).selectByValue(valueProvincia);
+		String valueProvincia = getElement(XP_SELECT_PROVINCIA + "/option[text()='" + provincia + "']").getAttribute("value");
+		new Select(getElement(XP_SELECT_PROVINCIA)).selectByValue(valueProvincia);
 	}
 	
 	public boolean isVisibleFinalizarButton() {
-		return state(Visible, XPATH_FINALIZAR_BUTTON).check();
+		return state(Visible, XP_FINALIZAR_BUTTON).check();
 	}
 	
 	public void clickFinalizarButton() {
-		click(XPATH_FINALIZAR_BUTTON).exec();
+		click(XP_FINALIZAR_BUTTON).exec();
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
 		if (isVisibleFinalizarButton()) {
-			click(XPATH_FINALIZAR_BUTTON).type(javascript).exec();
+			click(XP_FINALIZAR_BUTTON).type(javascript).exec();
 		}
 	}
 	

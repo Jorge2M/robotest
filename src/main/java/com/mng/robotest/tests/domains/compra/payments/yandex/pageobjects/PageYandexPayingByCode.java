@@ -8,18 +8,18 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageYandexPayingByCode extends PageBase {
 	
-	private static final String XPATH_DIV_PAYMENT_CODE = "//div[@class[contains(.,'payment-code-wrapper')]]";
-	private static final String XPATH_PAYMENT_CODE = XPATH_DIV_PAYMENT_CODE + "//div[@class[contains(.,'payment-code-value')]]";
-	private static final String XPATH_BUTTON_BACK_TO_MANGO_DESKTOP = "//div[@class[contains(.,'backward-button')]]//a";
-	private static final String XPATH_BUTTON_BACK_TO_MANGO_MOVIL = "//div[@class[contains(.,'back-link')]]//a";
+	private static final String XP_DIV_PAYMENT_CODE = "//div[@class[contains(.,'payment-code-wrapper')]]";
+	private static final String XP_PAYMENT_CODE = XP_DIV_PAYMENT_CODE + "//div[@class[contains(.,'payment-code-value')]]";
+	private static final String XP_BUTTON_BACK_TO_MANGO_DESKTOP = "//div[@class[contains(.,'backward-button')]]//a";
+	private static final String XP_BUTTON_BACK_TO_MANGO_MOVIL = "//div[@class[contains(.,'back-link')]]//a";
 	
 	private String getXPathBackToMangoLink() {
 		switch (channel) {
 		case desktop:
-			return XPATH_BUTTON_BACK_TO_MANGO_DESKTOP;
+			return XP_BUTTON_BACK_TO_MANGO_DESKTOP;
 		default:
 		case mobile:
-			return XPATH_BUTTON_BACK_TO_MANGO_MOVIL;
+			return XP_BUTTON_BACK_TO_MANGO_MOVIL;
 		}		
 	}
 	
@@ -28,7 +28,7 @@ public class PageYandexPayingByCode extends PageBase {
 	}
 	
 	public boolean isPage() {
-		return state(Visible, XPATH_DIV_PAYMENT_CODE).check();
+		return state(Visible, XP_DIV_PAYMENT_CODE).check();
 	}
 		
 	public boolean isVisibleEmail(String emailUsr) {
@@ -46,14 +46,14 @@ public class PageYandexPayingByCode extends PageBase {
 	}
 
 	public boolean isVisiblePaymentCode() {
-		return state(Visible, XPATH_PAYMENT_CODE).check();
+		return state(Visible, XP_PAYMENT_CODE).check();
 	}
 	
 	public String getPaymentCode() {
-		WebElement paymentCode = getElement(XPATH_PAYMENT_CODE);
+		WebElement paymentCode = getElement(XP_PAYMENT_CODE);
 		if (paymentCode==null) {
 			return "";
 		}
-		return getElement(XPATH_PAYMENT_CODE).getText();
+		return getElement(XP_PAYMENT_CODE).getText();
 	}
 }

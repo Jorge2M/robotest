@@ -32,14 +32,14 @@ public class PageGestionarClientes extends PageBase {
 	
 	
 	public static final String TITULO = "Gestionar Clientes";
-	private static final String XPATH_TITULO = "//td[@class='txt11B' and text()[contains(.,'" + TITULO + "')]]";
-	private static final String XPATH_FORM_BUSCAR_CLIENTES = "//form[@id='formSelect']";
-	private static final String XPATH_FORM_TRATAR_CLIENTES = "//form[@id='formBlock']";
-	private static final String XPATH_INPUT_DNI = XPATH_FORM_BUSCAR_CLIENTES + "//span[text()='DNI']/ancestor::td/following::td//input";
-	private static final String XPATH_BUSCAR_BUTTON = XPATH_FORM_BUSCAR_CLIENTES + "//input[@value='Buscar']";
-	private static final String XPATH_FORM_TABLA = "//form[@id='formTabla']";
-	private static final String XPATH_FORM_TABLA_DETALLES_BUTTON = XPATH_FORM_TABLA + "//input[@value='Detalles']";
-	private static final String XPATH_SPAN_MENSAJE = "//span[text()[contains(.,'";
+	private static final String XP_TITULO = "//td[@class='txt11B' and text()[contains(.,'" + TITULO + "')]]";
+	private static final String XP_FORM_BUSCAR_CLIENTES = "//form[@id='formSelect']";
+	private static final String XP_FORM_TRATAR_CLIENTES = "//form[@id='formBlock']";
+	private static final String XP_INPUT_DNI = XP_FORM_BUSCAR_CLIENTES + "//span[text()='DNI']/ancestor::td/following::td//input";
+	private static final String XP_BUSCAR_BUTTON = XP_FORM_BUSCAR_CLIENTES + "//input[@value='Buscar']";
+	private static final String XP_FORM_TABLA = "//form[@id='formTabla']";
+	private static final String XP_FORM_TABLA_DETALLES_BUTTON = XP_FORM_TABLA + "//input[@value='Detalles']";
+	private static final String XP_SPAN_MENSAJE = "//span[text()[contains(.,'";
 	
 	private String getXPathIdClienteFromXPathDni(String dni){
 		String xpathDni = getXPathDniTabla(dni);
@@ -47,15 +47,15 @@ public class PageGestionarClientes extends PageBase {
 	}
 	
 	private String getXPathThirdButton(TypeThirdButton typeButton) {
-		return (XPATH_FORM_TABLA + "//input[@value='" + typeButton.literal() + "']");
+		return (XP_FORM_TABLA + "//input[@value='" + typeButton.literal() + "']");
 	}
 	
 	private String getXPathDniTabla(String dni){
-		return XPATH_FORM_TABLA + "//td[@title='" + dni + "']";
+		return XP_FORM_TABLA + "//td[@title='" + dni + "']";
 	}
 	
 	private String getXPathSpanMensajeThirdButton(String mensaje) {
-		return XPATH_SPAN_MENSAJE + mensaje + "')]]";
+		return XP_SPAN_MENSAJE + mensaje + "')]]";
 	}
 	
 	private String getXPathDetallesClienteIdCliente(String idCliente) {
@@ -67,15 +67,15 @@ public class PageGestionarClientes extends PageBase {
 	}
 
 	public boolean isPage() {
-		return state(Visible, XPATH_TITULO).check();
+		return state(Visible, XP_TITULO).check();
 	}
 
 	public boolean isVisibleFormBuscarClientes() {
-		return state(Visible, XPATH_FORM_BUSCAR_CLIENTES).check();
+		return state(Visible, XP_FORM_BUSCAR_CLIENTES).check();
 	}
 
 	public boolean isVisibleFormTratarClientes() {
-		return state(Visible, XPATH_FORM_TRATAR_CLIENTES).check();
+		return state(Visible, XP_FORM_TRATAR_CLIENTES).check();
 	}
 
 	public void inputDniAndClickBuscarButton(String dni, int waitSeconds) {
@@ -84,15 +84,15 @@ public class PageGestionarClientes extends PageBase {
 	}
 
 	public void inputDni(String dni) {
-		getElement(XPATH_INPUT_DNI).sendKeys(dni);
+		getElement(XP_INPUT_DNI).sendKeys(dni);
 	}
 	
 	public void clickBuscarButtonAndWaitSeconds(int seconds) {
-		click(XPATH_BUSCAR_BUTTON).waitLink(seconds).exec();
+		click(XP_BUSCAR_BUTTON).waitLink(seconds).exec();
 	}
 
 	public boolean isVisibleTablaInformacion() {
-		return state(Visible, XPATH_FORM_TABLA).wait(20).check();
+		return state(Visible, XP_FORM_TABLA).wait(20).check();
 	}
 
 	public boolean getDniTabla(String dni) {
@@ -120,7 +120,7 @@ public class PageGestionarClientes extends PageBase {
 	}
 	
 	public void clickDetallesButtonAndWaitSeconds(int seconds) {
-		click(XPATH_FORM_TABLA_DETALLES_BUTTON).waitLoadPage(seconds).exec();
+		click(XP_FORM_TABLA_DETALLES_BUTTON).waitLoadPage(seconds).exec();
 	}
 	
 	public boolean isVisibleMensajeClickThirdButton(TypeThirdButton typeButton, int seconds) {

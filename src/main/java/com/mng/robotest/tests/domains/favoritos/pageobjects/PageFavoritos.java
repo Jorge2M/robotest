@@ -12,7 +12,6 @@ import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.testslegacy.data.Talla;
-import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -20,19 +19,19 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageFavoritos extends PageBase {
   
-	private static final String XPATH_BLOCK_FAVORITOS = "//div[@data-pais and @class[contains(.,'favorites')]]";
-	private static final String XPATH_BLOCK_FAV_WITH_ART = XPATH_BLOCK_FAVORITOS + "//div[@class[contains(.,'content-garments')]]";
-	private static final String XPATH_ARTICULO = "//ul[@id='contentDataFavs']/li";
-	private static final String XPATH_BUTTON_EMPTY = "//a[@class='favorites-empty-btn']";
-	private static final String XPATH_SHARE_MODAL_BUTTON = "//span[@id='shareIcon']";
-	private static final String XPATH_CLOSE_SHARE_MODAL_BUTTON = "//span[@onclick[contains(.,'showCloseModalShare')]]";
-	private static final String XPATH_WHATSAPP_SHARE_BUTTON = "//span[@class='modal-share-whatsapp-icon']";
-	private static final String XPATH_TELEGRAM_SHARE_BUTTON = "//span[@class='modal-share-telegram-icon']";
-	private static final String XPATH_URL_SHARE_LABEL = "//div[@id='linkShareButton']";
+	private static final String XP_BLOCK_FAVORITOS = "//div[@data-pais and @class[contains(.,'favorites')]]";
+	private static final String XP_BLOCK_FAV_WITH_ART = XP_BLOCK_FAVORITOS + "//div[@class[contains(.,'content-garments')]]";
+	private static final String XP_ARTICULO = "//ul[@id='contentDataFavs']/li";
+	private static final String XP_BUTTON_EMPTY = "//a[@class='favorites-empty-btn']";
+	private static final String XP_SHARE_MODAL_BUTTON = "//span[@id='shareIcon']";
+	private static final String XP_CLOSE_SHARE_MODAL_BUTTON = "//span[@onclick[contains(.,'showCloseModalShare')]]";
+	private static final String XP_WHATSAPP_SHARE_BUTTON = "//span[@class='modal-share-whatsapp-icon']";
+	private static final String XP_TELEGRAM_SHARE_BUTTON = "//span[@class='modal-share-telegram-icon']";
+	private static final String XP_URL_SHARE_LABEL = "//div[@id='linkShareButton']";
 	
 	private String getXPathArticle(String refProducto, String codigoColor) {
 		String xpathNew = "@style[contains(.,'" + refProducto + "_" + codigoColor + "')]"; //div
-		return (XPATH_ARTICULO + "//*[" + xpathNew + "]/ancestor::li");
+		return (XP_ARTICULO + "//*[" + xpathNew + "]/ancestor::li");
 	}
 	
 	private String getXPathButtonAddBolsa(String refProducto, String codigoColor) {
@@ -58,56 +57,56 @@ public class PageFavoritos extends PageBase {
 	// Funcionalidad de Share Favorites (pre)
 	
 	private String getXPathWithIdItem(int numArticulo) {
-		String xpathArt = "(" + XPATH_ARTICULO + ")[" + numArticulo + "]";
+		String xpathArt = "(" + XP_ARTICULO + ")[" + numArticulo + "]";
 		String idItem = getElement(xpathArt).getAttribute("id");
-		return (XPATH_ARTICULO + "[@id='" + idItem + "']");
+		return (XP_ARTICULO + "[@id='" + idItem + "']");
 	}
 	
 	public void openShareModal() {
-		click(XPATH_SHARE_MODAL_BUTTON).exec();
+		click(XP_SHARE_MODAL_BUTTON).exec();
 	}
 
 	public void closeShareModal() {
-		click(XPATH_CLOSE_SHARE_MODAL_BUTTON).type(javascript).exec();
+		click(XP_CLOSE_SHARE_MODAL_BUTTON).type(javascript).exec();
 	}
 
 	public boolean checkShareModalUntill(int seconds) {
-		return state(Visible, XPATH_CLOSE_SHARE_MODAL_BUTTON).wait(seconds).check();
+		return state(Visible, XP_CLOSE_SHARE_MODAL_BUTTON).wait(seconds).check();
 	}
 	
 	public boolean isShareFavoritesVisible() {
-		return state(Visible, XPATH_SHARE_MODAL_BUTTON).check();
+		return state(Visible, XP_SHARE_MODAL_BUTTON).check();
 	}
 	
 	public boolean isShareWhatsappFavoritesVisible() {
-		return state(Visible, XPATH_WHATSAPP_SHARE_BUTTON).check();
+		return state(Visible, XP_WHATSAPP_SHARE_BUTTON).check();
 	}
 	
 	public boolean isShareTelegramFavoritesVisible() {
-		return state(Visible, XPATH_TELEGRAM_SHARE_BUTTON).check();
+		return state(Visible, XP_TELEGRAM_SHARE_BUTTON).check();
 	}
 	
 	public boolean isShareUrlFavoritesVisible() {
-		return state(Visible, XPATH_URL_SHARE_LABEL).check();
+		return state(Visible, XP_URL_SHARE_LABEL).check();
 	}
 	
 	public void closeSharedModal() {
-		click(XPATH_CLOSE_SHARE_MODAL_BUTTON).exec();
+		click(XP_CLOSE_SHARE_MODAL_BUTTON).exec();
 		if (!checkShareModalInvisible(1)) {
-			click(XPATH_CLOSE_SHARE_MODAL_BUTTON).exec();
+			click(XP_CLOSE_SHARE_MODAL_BUTTON).exec();
 		}
 	}
 	
 	public boolean checkShareModalInvisible(int seconds) {
-		return state(Invisible, XPATH_CLOSE_SHARE_MODAL_BUTTON).wait(seconds).check();
+		return state(Invisible, XP_CLOSE_SHARE_MODAL_BUTTON).wait(seconds).check();
 	}
 
 	public boolean isSectionVisible() {
-		return state(Visible, XPATH_BLOCK_FAVORITOS).check();
+		return state(Visible, XP_BLOCK_FAVORITOS).check();
 	}
 	
 	public boolean isSectionArticlesVisibleUntil(int seconds) {
-		return state(Visible, XPATH_BLOCK_FAV_WITH_ART).wait(seconds).check();
+		return state(Visible, XP_BLOCK_FAV_WITH_ART).wait(seconds).check();
 	}
 	
 	public void clearArticuloAndWait(String refArticulo, String codColorArticulo) {
@@ -135,7 +134,7 @@ public class PageFavoritos extends PageBase {
 	
 	public boolean hayArticulos() {
 		waitMillis(500);
-		return state(Present, XPATH_ARTICULO).check();
+		return state(Present, XP_ARTICULO).check();
 	}
 	
 	public boolean areVisibleArticlesUntil(int seconds) {
@@ -145,7 +144,7 @@ public class PageFavoritos extends PageBase {
 		
 		var itArticulos = dataTest.getDataFavoritos().getListArticulos().iterator();
 		while (itArticulos.hasNext()) {
-			ArticuloScreen articulo = itArticulos.next();
+			var articulo = itArticulos.next();
 			if (!isVisibleArticleUntil(articulo.getRefProducto(), articulo.getCodigoColor(), seconds)) {
 				return false;
 			}
@@ -205,8 +204,8 @@ public class PageFavoritos extends PageBase {
 	}
 	
 	public String selectTallaAndWait(String refProducto, String codigoColor, int posicionTalla) {
-		List<WebElement> listaTallas = getListaTallas(refProducto, codigoColor);
-		WebElement talla = listaTallas.get(posicionTalla);
+		var listaTallas = getListaTallas(refProducto, codigoColor);
+		var talla = listaTallas.get(posicionTalla);
 		String litTalla = talla.getText();
 		talla.click();
 		new SecBolsa().isInStateUntil(StateBolsa.OPEN, 2);
@@ -232,6 +231,6 @@ public class PageFavoritos extends PageBase {
 	}
 	
 	public boolean isVisibleButtonEmpty() {
-		return state(Visible, XPATH_BUTTON_EMPTY).check();
+		return state(Visible, XP_BUTTON_EMPTY).check();
 	}
 }

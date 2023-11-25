@@ -31,11 +31,11 @@ public class PageHomeDonateLikes extends PageBase {
 		}
 	}
 	
-	private static final String XPATH_PAGE = "//*[@class[contains(.,'loyalty_loyaltySpace')]]";
-	private static final String XPATH_ICON_OPERATION_DONE = "//*[@class[contains(.,'icon-outline-done')]]";
+	private static final String XP_PAGE = "//*[@class[contains(.,'loyalty_loyaltySpace')]]";
+	private static final String XP_ICON_OPERATION_DONE = "//*[@class[contains(.,'icon-outline-done')]]";
 
 	public boolean checkIsPage(int seconds) {
-		return state(Visible, XPATH_PAGE).wait(seconds).check();
+		return state(Visible, XP_PAGE).wait(seconds).check();
 	}
 	
 	public boolean isVisibleAny(int seconds, ButtonLikes... listButtons) {
@@ -58,6 +58,6 @@ public class PageHomeDonateLikes extends PageBase {
 	}
 	
 	public boolean isVisibleIconOperationDoneUntil(int seconds) {
-		return state(Visible, XPATH_ICON_OPERATION_DONE).wait(seconds).check();
+		return state(Visible, XP_ICON_OPERATION_DONE).wait(seconds).check();
 	}
 }

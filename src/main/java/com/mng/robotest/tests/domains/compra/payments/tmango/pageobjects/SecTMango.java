@@ -9,8 +9,8 @@ public class SecTMango extends PageBase {
 
 	public enum TipoPago { PAGO_HABITUAL, TRES_MESES, SEIS_MESES, PAGO_UNICO }
 	
-	private static final String XPATH_SECTION_MOBIL = "//div[@data-id='mango_card']"; 
-	private static final String XPATH_SECTION_DESKTOP = "//div[@id='mangoCardContent']"; 
+	private static final String XP_SECTION_MOBIL = "//div[@data-id='mango_card']"; 
+	private static final String XP_SECTION_DESKTOP = "//div[@id='mangoCardContent']"; 
 	
 	public String getDescripcionTipoPago(TipoPago tipoPago) {
 		switch (tipoPago) {
@@ -29,9 +29,9 @@ public class SecTMango extends PageBase {
 	
 	private String getXPathSection() {
 		if (channel==Channel.mobile) {
-			return XPATH_SECTION_MOBIL;
+			return XP_SECTION_MOBIL;
 		}
-		return XPATH_SECTION_DESKTOP;
+		return XP_SECTION_DESKTOP;
 	}
 	
 	private String getXPathLabelsCheckModalidad() {

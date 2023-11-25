@@ -6,13 +6,13 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageAssistLast extends PageBase {
 
-	private static final String XPATH_BUTTON_SUBMIT = "//button[@type='submit']";
+	private static final String XP_BUTTON_SUBMIT = "//button[@type='submit']";
 
 	public boolean isPage() {
-		return state(Present, XPATH_BUTTON_SUBMIT).check();
+		return state(Present, XP_BUTTON_SUBMIT).check();
 	}
 
 	public void clickButtonSubmit() {
-		click(XPATH_BUTTON_SUBMIT).exec();
+		click(XP_BUTTON_SUBMIT).exec();
 	}
 }

@@ -6,14 +6,14 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageEpsSelBanco extends PageBase {
 
-	private static final String XPATH_ICONO_EPS = "//div[@class='header-logo']";
-	private static final String XPATH_ICONO_BANCO = "//div[@class='loginlogo']";
+	private static final String XP_ICONO_EPS = "//div[@class='header-logo']";
+	private static final String XP_ICONO_BANCO = "//div[@class='loginlogo']";
 
 	public boolean isPresentIconoEps() {
-		return state(Present, XPATH_ICONO_EPS).check();
+		return state(Present, XP_ICONO_EPS).check();
 	}
 	
 	public boolean isVisibleIconoBanco() {
-		return state(Present, XPATH_ICONO_BANCO).check();
+		return state(Present, XP_ICONO_BANCO).check();
 	}
 }

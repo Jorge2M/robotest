@@ -13,23 +13,23 @@ public class SecMenuLateralDesktop extends PageBase {
 	
 	private static final String TAG_CONCAT_MENUS = "[@TAG_CONCAT_MENUS]";
 	
-	private static final String XPATH_LINKK_MENU_WITH_TAG = 
+	private static final String XP_LINKK_MENU_WITH_TAG = 
 		"//li[not(@class) or @class='element']" +  
 		"/a[@href[contains(.,'" + TAG_CONCAT_MENUS + "')]]";
 	
-	private static final String XPATH_SELECTED_RELATIVE_MENU_SHOP = 
+	private static final String XP_SELECTED_RELATIVE_MENU_SHOP = 
 		"//self::*[@aria-label[contains(.,'seleccionado')]]";
 
 	private String getXPathLinkMenu(MenuLateralDesktop menu) {
 		String dataGaLabel =  menu.getDataGaLabelMenuLateralDesktop();
-		return (XPATH_LINKK_MENU_WITH_TAG
+		return (XP_LINKK_MENU_WITH_TAG
 			.replace(TAG_CONCAT_MENUS, dataGaLabel
 			.replace(":", "-")
 			.replaceFirst("-", "/")));
 	}
 	
 	public String getXPathLinkMenuSelected(MenuLateralDesktop menu) {
-		return (getXPathLinkMenu(menu) + XPATH_SELECTED_RELATIVE_MENU_SHOP);
+		return (getXPathLinkMenu(menu) + XP_SELECTED_RELATIVE_MENU_SHOP);
 	}
 
 	public boolean isSelectedMenu(MenuLateralDesktop menu, int seconds) {
@@ -52,15 +52,15 @@ public class SecMenuLateralDesktop extends PageBase {
 		return state(Visible, getXPathLinkMenu(menu)).check();
 	}
 	
-	private static final String XPATH_CAPA_MENUS_SHOP = "//div[@id='sidebar']/aside[@id='navigation']";
-	private static final String XPATH_CAPA_MENUS_OUTLET = "//div[@id='sticky']/aside[@id='filters']";
+	private static final String XP_CAPA_MENUS_SHOP = "//div[@id='sidebar']/aside[@id='navigation']";
+	private static final String XP_CAPA_MENUS_OUTLET = "//div[@id='sticky']/aside[@id='filters']";
 	
 	public boolean isVisibleCapaMenus(int seconds) {
 		if (app==AppEcom.outlet) {
-			return state(Visible, XPATH_CAPA_MENUS_OUTLET).wait(seconds).check();
+			return state(Visible, XP_CAPA_MENUS_OUTLET).wait(seconds).check();
 		}
 		else {
-			return state(Visible, XPATH_CAPA_MENUS_SHOP).wait(seconds).check();
+			return state(Visible, XP_CAPA_MENUS_SHOP).wait(seconds).check();
 		}
 	}
 }

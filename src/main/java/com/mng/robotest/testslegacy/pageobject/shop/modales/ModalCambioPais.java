@@ -10,24 +10,24 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalCambioPais extends PageBase {
 	
-	private static final String XPATH_MODAL = "//div[(@id='cambioPais' or @id='seleccionPais') and @class='modalPopUp']"; 
-	private static final String XPATH_MODAL_SELECT_PROVINCIA = "//div[@class='wrapper-cell']/div[@id='seleccionProvincia']";
-	private static final String XPATH_ASPA_CLOSE = "//div[@data-ga-category='modal-deteccion-ip' and @class[contains(.,'closeModal')]]";
+	private static final String XP_MODAL = "//div[(@id='cambioPais' or @id='seleccionPais') and @class='modalPopUp']"; 
+	private static final String XP_MODAL_SELECT_PROVINCIA = "//div[@class='wrapper-cell']/div[@id='seleccionProvincia']";
+	private static final String XP_ASPA_CLOSE = "//div[@data-ga-category='modal-deteccion-ip' and @class[contains(.,'closeModal')]]";
 	
 	private String getXPathLinkToConfirmPais(String hrefPais) {
 		return "//div[@class='navOtherCountry']//a[@href[contains(.,'" + hrefPais + "')]]";
 	}
 	
 	private String getXPathButtonToChangePais(String urlAccesoPais) {
-		return (XPATH_MODAL + "//div[@class[contains(.,'modalConfirmacionPais')]]//a[@class[contains(.,'_langBtn')] and @href[contains(.,'" + urlAccesoPais + "')]]");
+		return (XP_MODAL + "//div[@class[contains(.,'modalConfirmacionPais')]]//a[@class[contains(.,'_langBtn')] and @href[contains(.,'" + urlAccesoPais + "')]]");
 	}
 	
 	public boolean isVisibleModalUntil(int seconds) {
-		return state(Visible, XPATH_MODAL).wait(seconds).check();
+		return state(Visible, XP_MODAL).wait(seconds).check();
 	}
 	
 	public boolean isVisibleModalSelecProvincia() {
-		return state(Visible, XPATH_MODAL_SELECT_PROVINCIA).check();
+		return state(Visible, XP_MODAL_SELECT_PROVINCIA).check();
 	}
 	
 	public boolean isLinkToConfirmPais(String hrefPais) {
@@ -70,8 +70,8 @@ public class ModalCambioPais extends PageBase {
 	
 	public void closeModalIfVisible() {
 		if (isVisibleModalUntil(0)) {
-			getElementVisible(XPATH_ASPA_CLOSE).click();
-			state(Invisible, XPATH_MODAL).wait(1).check();
+			getElementVisible(XP_ASPA_CLOSE).click();
+			state(Invisible, XP_MODAL).wait(1).check();
 		}
 	}
 	

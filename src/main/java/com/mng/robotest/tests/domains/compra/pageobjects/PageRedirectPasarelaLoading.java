@@ -6,13 +6,13 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageRedirectPasarelaLoading extends PageBase {
 
-	public static final String XPATH_IS_PAGE = "//div[@class[contains(.,'payment-redirect')]]/div[@class='loading' or @class='logo']";
+	public static final String XP_IS_PAGE = "//div[@class[contains(.,'payment-redirect')]]/div[@class='loading' or @class='logo']";
 
 	public boolean isPageUntil(int seconds) {
-		return state(Present, XPATH_IS_PAGE).wait(seconds).check();
+		return state(Present, XP_IS_PAGE).wait(seconds).check();
 	}
 
 	public boolean isPageNotVisibleUntil(int seconds) {
-		return state(Invisible, XPATH_IS_PAGE).wait(seconds).check();
+		return state(Invisible, XP_IS_PAGE).wait(seconds).check();
 	}
 }

@@ -8,42 +8,42 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecFiltrosDesktopKondo extends SecFiltrosDesktop {
 
-	private static final String XPATH_WRAPPER = "//div[@id='catalogMenu']"; 
-	private static final String XPATH_BUTTON_FILTRAR = "//button[@data-testid='plp.filters.desktop.button']";
-	private static final String XPATH_LABEL_FILTER = XPATH_WRAPPER + "//li";
-	private static final String XPATH_CAPA_FILTERS = "//*[@data-testid='plp.filters.desktop.panel']";
-	private static final String XPATH_LINK_COLLECTION = "//li//input[@name[contains(.,'onSale')]]";
-	private static final String XPATH_BUTTON_MOSTRAR_ARTICULOS = XPATH_CAPA_FILTERS + "/div[2]/div[4]/button";
+	private static final String XP_WRAPPER = "//div[@id='catalogMenu']"; 
+	private static final String XP_BUTTON_FILTRAR = "//button[@data-testid='plp.filters.desktop.button']";
+	private static final String XP_LABEL_FILTER = XP_WRAPPER + "//li";
+	private static final String XP_CAPA_FILTERS = "//*[@data-testid='plp.filters.desktop.panel']";
+	private static final String XP_LINK_COLLECTION = "//li//input[@name[contains(.,'onSale')]]";
+	private static final String XP_BUTTON_MOSTRAR_ARTICULOS = XP_CAPA_FILTERS + "/div[2]/div[4]/button";
 
 	private String getXPathFilterTag(String tag) {
 		return 
-			XPATH_WRAPPER + 
+			XP_WRAPPER + 
 			"//button[@aria-label[contains(.,'" + tag + "')]]";
 	}
 	
 	@Override
 	String getXPathWrapper() {
-		return XPATH_WRAPPER;
+		return XP_WRAPPER;
 	}
 	
 	@Override
 	String getXPathButtonFiltrar() {
-		return XPATH_BUTTON_FILTRAR;
+		return XP_BUTTON_FILTRAR;
 	}
 	
 	@Override
 	String getXPathMostrarArticulos() {
-		return XPATH_BUTTON_MOSTRAR_ARTICULOS;
+		return XP_BUTTON_MOSTRAR_ARTICULOS;
 	}
 
 	@Override
 	String getXPathCapaFilters() {
-		return XPATH_CAPA_FILTERS;
+		return XP_CAPA_FILTERS;
 	}
 	
 	@Override
 	String getXPathLinkCollection() {
-		return XPATH_LINK_COLLECTION;
+		return XP_LINK_COLLECTION;
 	}
 	
 	@Override
@@ -62,7 +62,7 @@ public class SecFiltrosDesktopKondo extends SecFiltrosDesktop {
 	
 	@Override
 	String getXPathLabel(String label) {
-		return XPATH_LABEL_FILTER + "//self::*[text()='" + label + "']";
+		return XP_LABEL_FILTER + "//self::*[text()='" + label + "']";
 	}
 	
 	public boolean isVisibleColorTags(List<Color> colors) {

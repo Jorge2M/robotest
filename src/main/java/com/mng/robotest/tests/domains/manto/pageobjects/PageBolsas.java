@@ -6,8 +6,8 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageBolsas extends PageBase {
 
-	private static final String XPATH_LINEA = "//table[@width='100%']/tbody/tr[5]/td/input[@class='botones']";
-	private static final String XPATH_MAIN_FORM = "//form[@action='/bolsas.faces']";
+	private static final String XP_LINEA = "//table[@width='100%']/tbody/tr[5]/td/input[@class='botones']";
+	private static final String XP_MAIN_FORM = "//form[@action='/bolsas.faces']";
 	
 	private String getXpathLinkPedidoInBolsa(String pedidoManto) {
 		return "//table//tr/td[1]/a[text()[contains(.,'" + pedidoManto + "')]]";
@@ -27,11 +27,11 @@ public class PageBolsas extends PageBase {
 	}
 
 	public boolean isPage() {
-		return (state(Present, XPATH_MAIN_FORM).check());
+		return state(Present, XP_MAIN_FORM).check();
 	}
 
 	public int getNumLineas() {
-		return getElements(XPATH_LINEA).size();
+		return getElements(XP_LINEA).size();
 	}
 	
 	public boolean presentLinkPedidoInBolsaUntil(String codigoPedido, int seconds) {
@@ -53,7 +53,7 @@ public class PageBolsas extends PageBase {
 		String xpathIdCompra = getXpathLinkIdCompraInBolsa(idPedido);
 		if (state(Present, xpathIdCompra).check()) {
 			String textIdCompra = getElement(xpathIdCompra).getText();
-			return (textIdCompra.substring(0, textIdCompra.indexOf(" ")));
+			return textIdCompra.substring(0, textIdCompra.indexOf(" "));
 		}
 		return "";
 	}

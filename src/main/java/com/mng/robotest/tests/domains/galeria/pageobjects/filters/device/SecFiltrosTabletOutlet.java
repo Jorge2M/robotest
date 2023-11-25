@@ -14,19 +14,19 @@ public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 	
 	private static final String TAG_ORDENACION = "@TagOrden";
 	private static final String TAG_COLOR = "@TagColor";
-	private static final String XPATH_LINK_ORDEN_WITH_TAG = "//a[text()[contains(.,'" + TAG_ORDENACION + "')]]";
-	private static final String XPATH_LINK_COLOR_WITH_TAG = "//label[@for='color_" + TAG_COLOR + "']/a";
+	private static final String XP_LINK_ORDEN_WITH_TAG = "//a[text()[contains(.,'" + TAG_ORDENACION + "')]]";
+	private static final String XP_LINK_COLOR_WITH_TAG = "//label[@for='color_" + TAG_COLOR + "']/a";
 	
 	public static SecFiltrosTabletOutlet make(Pais pais) {
 		return new SecFiltrosTabletOutlet();
 	}
 	
 	private String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) {
-		return (XPATH_LINK_ORDEN_WITH_TAG.replace(TAG_ORDENACION, ordenacion.getValue()));
+		return (XP_LINK_ORDEN_WITH_TAG.replace(TAG_ORDENACION, ordenacion.getValue()));
 	}
 	
 	private String getXPathLinkColor(Color color) {
-		return (XPATH_LINK_COLOR_WITH_TAG.replace(TAG_COLOR, color.getNameFiltro()));
+		return (XP_LINK_COLOR_WITH_TAG.replace(TAG_COLOR, color.getNameFiltro()));
 	}
 	
 	private void selectOrdenacion(FilterOrdenacion ordenacion) {

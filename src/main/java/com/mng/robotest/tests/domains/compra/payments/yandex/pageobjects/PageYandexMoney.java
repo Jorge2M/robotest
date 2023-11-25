@@ -9,9 +9,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageYandexMoney extends PageBase {
 
 	public static final String URL_ACCESS = "https://demomoney.yandex.ru/shop.xml?scid=50215";
-	private static final String XPATH_INPUT_PAYMENT_CODE = "//input[@id='dstAccount']";
-	private static final String XPATH_INPUT_IMPORT = "//input[@id='amount']";
-	private static final String XPATH_PAY_BUTTON = "//input[@class[contains(.,'b-form-button__input')]]";
+	private static final String XP_INPUT_PAYMENT_CODE = "//input[@id='dstAccount']";
+	private static final String XP_INPUT_IMPORT = "//input[@id='amount']";
+	private static final String XP_PAY_BUTTON = "//input[@class[contains(.,'b-form-button__input')]]";
 
 	public void goToPage() {
 		driver.get(URL_ACCESS);
@@ -26,23 +26,23 @@ public class PageYandexMoney extends PageBase {
 	}
 	
 	public void inputPaymentCode(String inputValue) {
-		sendKeysWithRetry(inputValue, By.xpath(XPATH_INPUT_PAYMENT_CODE), 2, driver);
+		sendKeysWithRetry(inputValue, By.xpath(XP_INPUT_PAYMENT_CODE), 2, driver);
 	}
 	
 	public void inputImport(String inputValue) {
-		getElement(XPATH_INPUT_IMPORT).clear();
-		sendKeysWithRetry(inputValue, By.xpath(XPATH_INPUT_IMPORT), 2, driver);
+		getElement(XP_INPUT_IMPORT).clear();
+		sendKeysWithRetry(inputValue, By.xpath(XP_INPUT_IMPORT), 2, driver);
 	}
 	
 	public boolean isVisibleInputPaymentCode() {
-		return state(Visible, XPATH_INPUT_PAYMENT_CODE).check();
+		return state(Visible, XP_INPUT_PAYMENT_CODE).check();
 	}
 	
 	public boolean isVisibleInputImport() {
-		return state(Visible, XPATH_INPUT_IMPORT).check();
+		return state(Visible, XP_INPUT_IMPORT).check();
 	}
 
 	public void clickPayButton() {
-		click(XPATH_PAY_BUTTON).exec();
+		click(XP_PAY_BUTTON).exec();
 	}
 }

@@ -6,13 +6,13 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PagePostfRedirect extends PageBase {
 
-	private static final String XPATH_BUTTON_OK = "//form/input[@type='button' and @value[contains(.,'OK')]]";
+	private static final String XP_BUTTON_OK = "//form/input[@type='button' and @value[contains(.,'OK')]]";
 	
 	public boolean isPresentButtonOk() {
-		return state(Present, XPATH_BUTTON_OK).check();
+		return state(Present, XP_BUTTON_OK).check();
 	}
 	
 	public boolean isInvisibleButtonOkUntil(int seconds) {
-		return state(Invisible, XPATH_BUTTON_OK).wait(seconds).check();
+		return state(Invisible, XP_BUTTON_OK).wait(seconds).check();
 	}
 }

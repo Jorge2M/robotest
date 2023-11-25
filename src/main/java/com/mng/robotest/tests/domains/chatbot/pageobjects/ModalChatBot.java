@@ -6,31 +6,31 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class ModalChatBot extends PageBase {
 
-	private static final String XPATH_ICON = "//*[@data-testid='chatbot.button.open']";
-	private static final String XPATH_WEBCHAT = "//div[@id='snack-bubble']";
+	private static final String XP_ICON = "//*[@data-testid='chatbot.button.open']";
+	private static final String XP_WEBCHAT = "//div[@id='snack-bubble']";
 	
 	private String getXPathOption(String text) {
-		return XPATH_WEBCHAT + "//button[text()='" + text + "']";
+		return XP_WEBCHAT + "//button[text()='" + text + "']";
 	}
 	
 	private String getXPathResponse(String text) {
-		return XPATH_WEBCHAT + "//div[text()[contains(.,'" + text + "')] and @class[contains(.,'bubble')]]";
+		return XP_WEBCHAT + "//div[text()[contains(.,'" + text + "')] and @class[contains(.,'bubble')]]";
 	}
 	
 	private String getXPathButton(String text) {
-		return XPATH_WEBCHAT + "//button[text()='" + text + "']";
+		return XP_WEBCHAT + "//button[text()='" + text + "']";
 	}
 	
 	public boolean checkIconVisible() {
-		return state(Visible, XPATH_ICON).check();
+		return state(Visible, XP_ICON).check();
 	}
 	
 	public void clickIcon() {
-		click(XPATH_ICON).exec();
+		click(XP_ICON).exec();
 	}
 	
 	public boolean checkWebchatVisible(int seconds) {
-		return state(Visible, XPATH_WEBCHAT).wait(seconds).check();
+		return state(Visible, XP_WEBCHAT).wait(seconds).check();
 	}
 
 	public boolean isOptionVisible(String text, int seconds) {

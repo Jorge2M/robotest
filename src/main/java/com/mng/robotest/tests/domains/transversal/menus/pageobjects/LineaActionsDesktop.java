@@ -13,10 +13,10 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	private final SublineaType sublineaType;
 	
 	private static final String TAG_ID_LINEA = "@LineaId";
-	private static final String XPATH_LINEA_WITH_TAG = "//li[@data-testid[contains(.,'menu.brand." + TAG_ID_LINEA + "')]]";
+	private static final String XP_LINEA_WITH_TAG = "//li[@data-testid[contains(.,'menu.brand." + TAG_ID_LINEA + "')]]";
 	private static final String TAG_ID_SUBLINEA = "@SublineaId";
 	private static final String TAG_ID_SUBLINEA2 = "@2SublineaId";
-	private static final String XPATH_SUBLINEA_WITH_2TAG = "//li[(@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] or @id[contains(.,'" + TAG_ID_SUBLINEA2 + "')]) and @data-testid[contains(.,'section')]]";
+	private static final String XP_SUBLINEA_WITH_2TAG = "//li[(@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] or @id[contains(.,'" + TAG_ID_SUBLINEA2 + "')]) and @data-testid[contains(.,'section')]]";
 	
 	public LineaActionsDesktop(LineaWeb lineaWeb) {
 		this.lineaType = lineaWeb.getLinea();
@@ -28,7 +28,7 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	}
 	
 	private String getXPathLinea() {
-		return XPATH_LINEA_WITH_TAG.replace(TAG_ID_LINEA, getIdLineaEnDOM());
+		return XP_LINEA_WITH_TAG.replace(TAG_ID_LINEA, getIdLineaEnDOM());
 	}
 	
 	public String getIdLineaEnDOM() {
@@ -41,13 +41,13 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	private String getXPathSublinea() {
 		if (sublineaType==SublineaType.TEEN_NINO) {
 			//Existe un problema en la página y a veces es TeenO y otras veces TeenP
-			return XPATH_SUBLINEA_WITH_2TAG
+			return XP_SUBLINEA_WITH_2TAG
 					.replace(TAG_ID_SUBLINEA, sublineaType.getId(app))
 					.replace(TAG_ID_SUBLINEA2, "teenP") + 
 					"//button";
 		}
 		//Existe un problema en la página y a veces es TeenA y otras veces TeenQ
-		return XPATH_SUBLINEA_WITH_2TAG
+		return XP_SUBLINEA_WITH_2TAG
 				.replace(TAG_ID_SUBLINEA, sublineaType.getId(app))
 				.replace(TAG_ID_SUBLINEA2, "teenQ") + 
 				"//button";

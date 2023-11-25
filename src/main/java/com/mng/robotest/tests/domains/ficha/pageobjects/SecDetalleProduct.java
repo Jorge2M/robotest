@@ -18,13 +18,13 @@ public class SecDetalleProduct extends PageBase {
 
 	public enum ItemBreadcrumb { LINEA, GALERIA, SUBGALERIA }
 	
-	private static final String XPATH_WRAPPER = "//div[@class='product-info-wrapper']";
-	private static final String XPATH_BREAD_CRUMBS = "//ol[@class='breadcrumbs']";
-	private static final String XPATH_BREAD_CRUMB_ITEM_LINK = XPATH_BREAD_CRUMBS + "//a[@class='breadcrumbs-link']";
-	private static final String XPATH_BLOCK_KC_SAFETY = XPATH_WRAPPER + "//div[@id='KoreaKC']";
+	private static final String XP_WRAPPER = "//div[@class='product-info-wrapper']";
+	private static final String XP_BREAD_CRUMBS = "//ol[@class='breadcrumbs']";
+	private static final String XP_BREAD_CRUMB_ITEM_LINK = XP_BREAD_CRUMBS + "//a[@class='breadcrumbs-link']";
+	private static final String XP_BLOCK_KC_SAFETY = XP_WRAPPER + "//div[@id='KoreaKC']";
 	
 	private String getXPathBreadcrumbItem(int position) {
-		return "(" + XPATH_BREAD_CRUMB_ITEM_LINK + ")[" + position + "]";
+		return "(" + XP_BREAD_CRUMB_ITEM_LINK + ")[" + position + "]";
 	}
 	
 	private String getXPathBreadcrumbItemLink(ItemBreadcrumb itemBc) {
@@ -40,11 +40,11 @@ public class SecDetalleProduct extends PageBase {
 	}
 	
 	public boolean isVisibleUntil(int seconds) {
-		return state(Visible, XPATH_WRAPPER).wait(seconds).check();
+		return state(Visible, XP_WRAPPER).wait(seconds).check();
 	}
 	
 	public boolean isVisibleBreadcrumbs(int seconds) {
-		return state(Visible, XPATH_BREAD_CRUMBS).wait(seconds).check();
+		return state(Visible, XP_BREAD_CRUMBS).wait(seconds).check();
 	}
 	
 	public boolean isVisibleItemBreadCrumb(ItemBreadcrumb itemBCrumb) {
@@ -61,7 +61,7 @@ public class SecDetalleProduct extends PageBase {
 	}	
 	
 	public boolean isVisibleBlockKcSafety() {
-		return state(Visible, XPATH_BLOCK_KC_SAFETY).check();
+		return state(Visible, XP_BLOCK_KC_SAFETY).check();
 	}
 	
 }

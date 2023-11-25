@@ -13,33 +13,33 @@ public class SecBolsa extends SecBolsaCommon {
 
 	private final LineasArticuloBolsa lineasArtBolsa = new LineasArticuloBolsa();
 	
-	private static final String XPATH_PANEL_BOLSA_DESKTOP = "//*[@data-testid='bag.opened']";
-	private static final String XPATH_PANEL_BOLSA_MOBILE = "//*[@data-testid='bagpage.container']";
-	private static final String XPATH_BOTON_COMPRAR = "//button[@data-testid[contains(.,'checkout.button')]]";
-	private static final String XPATH_PRECIO_SUBTOTAL_DESKTOP = "//*[@data-testid='bag.preview.summary.price']";
-	private static final String XPATH_PRECIO_SUBTOTAL_MOBILE = "//*[@data-testid='bag.preview.summary.price']";
-	private static final String XPATH_INICIAR_SESION_MOBILE = "//*[@data-testid[contains(.,'goToLogin')]]";
-	private static final String XPATH_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE = "//*[@data-testid[contains(.,'goToContinueAsGuest')]]";	
+	private static final String XP_PANEL_BOLSA_DESKTOP = "//*[@data-testid='bag.opened']";
+	private static final String XP_PANEL_BOLSA_MOBILE = "//*[@data-testid='bagpage.container']";
+	private static final String XP_BOTON_COMPRAR = "//button[@data-testid[contains(.,'checkout.button')]]";
+	private static final String XP_PRECIO_SUBTOTAL_DESKTOP = "//*[@data-testid='bag.preview.summary.price']";
+	private static final String XP_PRECIO_SUBTOTAL_MOBILE = "//*[@data-testid='bag.preview.summary.price']";
+	private static final String XP_INICIAR_SESION_MOBILE = "//*[@data-testid[contains(.,'goToLogin')]]";
+	private static final String XP_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE = "//*[@data-testid[contains(.,'goToContinueAsGuest')]]";	
 
 	@Override
 	String getXPathPanelBolsa() {
 		if (channel==Channel.mobile) {
-			return XPATH_PANEL_BOLSA_MOBILE;
+			return XP_PANEL_BOLSA_MOBILE;
 		}
-		return XPATH_PANEL_BOLSA_DESKTOP;
+		return XP_PANEL_BOLSA_DESKTOP;
 	}
 	
 	@Override
 	String getXPathBotonComprar() {
-		return XPATH_BOTON_COMPRAR; 
+		return XP_BOTON_COMPRAR; 
 	}
 	
 	@Override
 	String getXPathPrecioSubTotal() {
 		if (channel==Channel.mobile) {
-			return XPATH_PRECIO_SUBTOTAL_MOBILE;
+			return XP_PRECIO_SUBTOTAL_MOBILE;
 		}
-		return XPATH_PRECIO_SUBTOTAL_DESKTOP;
+		return XP_PRECIO_SUBTOTAL_DESKTOP;
 	}  
 	
 	@Override
@@ -107,15 +107,15 @@ public class SecBolsa extends SecBolsaCommon {
 	}
 
 	public void clickIniciarSesionMobile() {
-		click(XPATH_INICIAR_SESION_MOBILE).exec();
+		click(XP_INICIAR_SESION_MOBILE).exec();
 	}
 	
 	public void clickContinuarSinCuentaMobile() {
-		click(XPATH_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE).exec();
+		click(XP_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE).exec();
 	}
 	
 	public boolean isVisibleContinuarSinCuentaButtonMobile(int seconds) {
-		return state(Visible, XPATH_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE).wait(seconds).check();
+		return state(Visible, XP_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE).wait(seconds).check();
 	}
 
 	private void setBolsaDesktopToState(StateBolsa stateBolsaExpected) {

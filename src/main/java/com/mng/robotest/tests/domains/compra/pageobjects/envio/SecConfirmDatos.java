@@ -10,16 +10,16 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecConfirmDatos extends PageBase {
 
-	private static final String XPATH_DIV_GENERAL_DESKTOP = "//div[@class[contains(.,'fixedConfirm')]]";
-	private static final String XPATH_DIV_GENERAL_MOVIL = "//div[@class[contains(.,'dp-confirm-page')]]";
-	private static final String XPATH_CONFIRM_DATOS_BUTTON = "//span[@id[contains(.,'confirmButton')]]";
-	private static final String XPATH_INPUT_POST_NUMBER_ID_DEUTSCHLAND = "//input[@placeholder[contains(.,'Post Number ID')]]";
+	private static final String XP_DIV_GENERAL_DESKTOP = "//div[@class[contains(.,'fixedConfirm')]]";
+	private static final String XP_DIV_GENERAL_MOVIL = "//div[@class[contains(.,'dp-confirm-page')]]";
+	private static final String XP_CONFIRM_DATOS_BUTTON = "//span[@id[contains(.,'confirmButton')]]";
+	private static final String XP_INPUT_POST_NUMBER_ID_DEUTSCHLAND = "//input[@placeholder[contains(.,'Post Number ID')]]";
 	
 	private String getXPathDivGeneral() {
 		if (channel==Channel.desktop || channel==Channel.tablet) {
-			return XPATH_DIV_GENERAL_DESKTOP;
+			return XP_DIV_GENERAL_DESKTOP;
 		}
-		return XPATH_DIV_GENERAL_MOVIL;
+		return XP_DIV_GENERAL_MOVIL;
 	}
 	
 	public boolean isVisibleUntil(int seconds) {
@@ -28,14 +28,14 @@ public class SecConfirmDatos extends PageBase {
 	}
 	
 	public boolean isVisibleInputPostNumberIdDeutschland() {
-		return state(Visible, XPATH_INPUT_POST_NUMBER_ID_DEUTSCHLAND).check();
+		return state(Visible, XP_INPUT_POST_NUMBER_ID_DEUTSCHLAND).check();
 	}
 	
 	public void sendDataInputPostNumberIdDeutschland(String data) {
-		sendKeysWithRetry(data, By.xpath(XPATH_INPUT_POST_NUMBER_ID_DEUTSCHLAND), 2, driver);
+		sendKeysWithRetry(data, By.xpath(XP_INPUT_POST_NUMBER_ID_DEUTSCHLAND), 2, driver);
 	}
 
 	public void clickConfirmarDatosButtonAndWait(int seconds) {
-		click(XPATH_CONFIRM_DATOS_BUTTON).waitLoadPage(seconds).exec();
+		click(XP_CONFIRM_DATOS_BUTTON).waitLoadPage(seconds).exec();
 	}
 }

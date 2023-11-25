@@ -14,12 +14,12 @@ import com.mng.robotest.testslegacy.data.Color;
 
 public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 
-	private static final String XPATH_FILTRAR_Y_ORDENAR_BUTTON = "//*[@data-testid='plp.filters.mobile.button']";
-	public static final String XPATH_FILTER_PANEL = "//*[@data-testid='plp.filters.mobile.panel']";
+	private static final String XP_FILTRAR_Y_ORDENAR_BUTTON = "//*[@data-testid='plp.filters.mobile.button']";
+	public static final String XP_FILTER_PANEL = "//*[@data-testid='plp.filters.mobile.panel']";
 	
 	//TODO Galería Kondo (19-10-23)
-	private static final String XPATH_BUTTON_MOSTRAR_ARTICULOS = "//button/span[text()[contains(.,'Mostrar artículos')]]";
-	private static final String XPATH_BUTTON_CLOSE = XPATH_FILTER_PANEL + "//button[@aria-label='close']";
+	private static final String XP_BUTTON_MOSTRAR_ARTICULOS = "//button/span[text()[contains(.,'Mostrar artículos')]]";
+	private static final String XP_BUTTON_CLOSE = XP_FILTER_PANEL + "//button[@aria-label='close']";
 
 	private String getXPathFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
 		String textXPath = 
@@ -45,7 +45,7 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 	
 	@Override
 	public boolean isClickableFiltroUntil(int seconds) {
-		return state(Clickable, XPATH_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
+		return state(Clickable, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
 	}	
 
 	@Override
@@ -116,13 +116,13 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 	}
 
 	private void clickMostrarArticulosButton() {
-		click(XPATH_BUTTON_MOSTRAR_ARTICULOS).exec();
+		click(XP_BUTTON_MOSTRAR_ARTICULOS).exec();
 	}
 	
 	private boolean goAndClickFiltroButton() {
 		if (!isOpenFiltrosUntil(0)) {
-			if (state(Clickable, XPATH_FILTRAR_Y_ORDENAR_BUTTON).wait(2).check()) {
-				click(XPATH_FILTRAR_Y_ORDENAR_BUTTON).exec();
+			if (state(Clickable, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(2).check()) {
+				click(XP_FILTRAR_Y_ORDENAR_BUTTON).exec();
 				return isOpenFiltrosUntil(3);
 			}
 		}		
@@ -143,7 +143,7 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 	}
 	
 	private void close() {
-		click(XPATH_BUTTON_CLOSE).exec();
+		click(XP_BUTTON_CLOSE).exec();
 		isCloseFiltrosUntil(1);
 	}
 	

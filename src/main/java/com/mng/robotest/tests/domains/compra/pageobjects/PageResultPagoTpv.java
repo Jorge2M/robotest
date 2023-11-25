@@ -6,26 +6,26 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageResultPagoTpv extends PageBase {
 	
-	private static final String XPATH_CABECERA_CONF_COMPRA = "//div[@class[contains(.,'details')]]/h2";
-	private static final String XPATH_COD_PEDIDO = "//div[@id[contains(.,'num-pedido')]]/div[@class='valor']";
-	private static final String XPATH_GASTOS_TRANSPORTE = "//div[@id='transporte']/div[@class='valor']";
+	private static final String XP_CABECERA_CONF_COMPRA = "//div[@class[contains(.,'details')]]/h2";
+	private static final String XP_COD_PEDIDO = "//div[@id[contains(.,'num-pedido')]]/div[@class='valor']";
+	private static final String XP_GASTOS_TRANSPORTE = "//div[@id='transporte']/div[@class='valor']";
 
 	public boolean isPresentCabeceraConfCompra() {
-		return state(Present, XPATH_CABECERA_CONF_COMPRA).check();
+		return state(Present, XP_CABECERA_CONF_COMPRA).check();
 	}
 
 	public boolean isVisibleCodPedido() {
-		return state(Visible, XPATH_COD_PEDIDO).check();
+		return state(Visible, XP_COD_PEDIDO).check();
 	}
 
 	public String getCodigoPedido() {
 		if (isVisibleCodPedido()) {
-			return getElement(XPATH_COD_PEDIDO).getText();
+			return getElement(XP_COD_PEDIDO).getText();
 		}
 		return "";
 	}
 	
 	public boolean isGastoTransporteAcero() {
-		return getElement(XPATH_GASTOS_TRANSPORTE).getText().compareTo("0 €")==0;
+		return getElement(XP_GASTOS_TRANSPORTE).getText().compareTo("0 €")==0;
 	}
 }

@@ -6,7 +6,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageComoMedirme extends PageBase {
 
-	private static final String XPATH_BLOQUE_GUIA_TALLAS = "//div[@class[contains(.,'guiaTallas')]]";
+	private static final String XP_BLOQUE_GUIA_TALLAS = "//div[@class[contains(.,'guiaTallas')]]";
 	
 	public boolean goToPageInNewTabCheckAndClose() {
 		String windowFatherHandle = driver.getWindowHandle();
@@ -21,7 +21,7 @@ public class PageComoMedirme extends PageBase {
 	}
 	
 	private boolean isPage() {
-		return state(Visible, XPATH_BLOQUE_GUIA_TALLAS).check();
+		return state(Visible, XP_BLOQUE_GUIA_TALLAS).check();
 	}
 	
 	private void close(String windowFatherHandle) {

@@ -17,9 +17,9 @@ import com.mng.robotest.testslegacy.data.Color;
 
 public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 
-	private static final String XPATH_FILTRAR_Y_ORDENAR_BUTTON = "//button[@data-testid[contains(.,'filter-sort')]]";
-	private static final String XPATH_BUTTON_APLICAR_FILTROS = "//button[@class[contains(.,'filters-apply')]]";
-	private static final String XPATH_BUTTON_CLOSE = "//div[@class='orders-filters-close' and @role='button']";
+	private static final String XP_FILTRAR_Y_ORDENAR_BUTTON = "//button[@data-testid[contains(.,'filter-sort')]]";
+	private static final String XP_BUTTON_APLICAR_FILTROS = "//button[@class[contains(.,'filters-apply')]]";
+	private static final String XP_BUTTON_CLOSE = "//div[@class='orders-filters-close' and @role='button']";
 	
 	/** 
 	 * Seleccionamos una ordenación ascendente/descendente
@@ -41,7 +41,7 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 	
 	@Override
 	public boolean isClickableFiltroUntil(int seconds) {
-		return state(Clickable, XPATH_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
+		return state(Clickable, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
 	}	
 	
 	@Override
@@ -114,12 +114,12 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 	}
 	
 	private void clickApplicarFiltrosButton() {
-		click(XPATH_BUTTON_APLICAR_FILTROS).exec();
+		click(XP_BUTTON_APLICAR_FILTROS).exec();
 	}
 	
 	private boolean goAndClickFiltroButton() {
-		if (state(Visible, XPATH_FILTRAR_Y_ORDENAR_BUTTON).check()) {
-			moveToElement(XPATH_FILTRAR_Y_ORDENAR_BUTTON);
+		if (state(Visible, XP_FILTRAR_Y_ORDENAR_BUTTON).check()) {
+			moveToElement(XP_FILTRAR_Y_ORDENAR_BUTTON);
 			waitMillis(500);
 			scrollVertical(-50);
 		}
@@ -129,8 +129,8 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 	
 	private boolean waitAndClickFiltroButton(int seconds) {
 		if (!isOpenFiltrosUntil(0)) {
-			if (state(Clickable, XPATH_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check()) {
-				click(XPATH_FILTRAR_Y_ORDENAR_BUTTON).type(javascript).exec();
+			if (state(Clickable, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check()) {
+				click(XP_FILTRAR_Y_ORDENAR_BUTTON).type(javascript).exec();
 				return isOpenFiltrosUntil(seconds);
 			}
 		}		
@@ -152,7 +152,7 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 	}
 	
 	private void close() {
-		click(XPATH_BUTTON_CLOSE).exec();
+		click(XP_BUTTON_CLOSE).exec();
 		isCloseFiltrosUntil(1);
 	}
 	

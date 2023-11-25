@@ -21,20 +21,20 @@ public class PageMisCompras extends PageBase {
 	public enum TypeTicket { TIENDA, ONLINE, UNDEFINED }
 	private List<Ticket> listTickets = null;
 	
-	private static final String XPATH_CAPA_CONTENEDORA_DESKTOP = "//micro-frontend[@id='myPurchasesDesktop']";
-	private static final String XPATH_CAPA_CONTENEDORA_MOBILE = "//micro-frontend[@id='myPurchasesMobile']";
-	private static final String XPATH_ID_RELATIVE_TICKET = ".//*[@data-testid[contains(.,'purchaseNumber')]]";
+	private static final String XP_CAPA_CONTENEDORA_DESKTOP = "//micro-frontend[@id='myPurchasesDesktop']";
+	private static final String XP_CAPA_CONTENEDORA_MOBILE = "//micro-frontend[@id='myPurchasesMobile']";
+	private static final String XP_ID_RELATIVE_TICKET = ".//*[@data-testid[contains(.,'purchaseNumber')]]";
 	
 	//TODO solicitado data-testid a Carla (11-02-2022)
-	private static final String XPATH_ITEMS_RELATIVE_TICKET = ".//div[@class[contains(.,'layout-row')]]//div[@class[contains(.,'layout-placeholder')] and @class[contains(.,'md7')]]";	
+	private static final String XP_ITEMS_RELATIVE_TICKET = ".//div[@class[contains(.,'layout-row')]]//div[@class[contains(.,'layout-placeholder')] and @class[contains(.,'md7')]]";	
 	
-	private static final String XPATH_LIST_TICKETS = 
+	private static final String XP_LIST_TICKETS = 
 		"//*[@data-testid[contains(.,'activePurchases')] or " +
 			"@data-testid[contains(.,'inactivePurchases')]]";
 	
-	private static final String XPATH_TICKET = XPATH_LIST_TICKETS + "//div[@class[contains(.,'layout-content')]]";
-	private static final String XPATH_PRICE_RELATIVE_TICKET = ".//*[@data-testid='myPurchases.price']";	
-	private static final String XPATH_FECHA_RELATIVE_TICKET = ".//*[@data-testid='myPurchases.purchaseCard.date']";
+	private static final String XP_TICKET = XP_LIST_TICKETS + "//div[@class[contains(.,'layout-content')]]";
+	private static final String XP_PRICE_RELATIVE_TICKET = ".//*[@data-testid='myPurchases.price']";	
+	private static final String XP_FECHA_RELATIVE_TICKET = ".//*[@data-testid='myPurchases.purchaseCard.date']";
 	
 	public List<Ticket> getTickets() {
 		isVisibleTicket(5);
@@ -77,12 +77,12 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private List<WebElement> getTicketsPage() {
-		state(Visible, XPATH_TICKET).wait(2).check();
-		return getElements(XPATH_TICKET);
+		state(Visible, XP_TICKET).wait(2).check();
+		return getElements(XP_TICKET);
 	}
 	
 	private boolean isVisibleTicket(int seconds) {
-		return state(Visible, XPATH_TICKET).wait(seconds).check();
+		return state(Visible, XP_TICKET).wait(seconds).check();
 	}
 
 	public boolean areTickets() {
@@ -110,13 +110,13 @@ public class PageMisCompras extends PageBase {
 	
 	private String getXPathCapaContenedora() {
 		if (channel==Channel.mobile) {
-			return XPATH_CAPA_CONTENEDORA_MOBILE;
+			return XP_CAPA_CONTENEDORA_MOBILE;
 		}
-		return XPATH_CAPA_CONTENEDORA_DESKTOP;
+		return XP_CAPA_CONTENEDORA_DESKTOP;
 	}
 
 	private String getXPathTicketLink(String id) {
-		return (XPATH_TICKET + "//img[@loading='lazy' and @alt[contains(.,'" + id + "')]]/..");
+		return (XP_TICKET + "//img[@loading='lazy' and @alt[contains(.,'" + id + "')]]/..");
 	}
 	
 	public boolean isPageUntil(int seconds) {
@@ -134,7 +134,7 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	public Ticket selectTicket(TypeTicket type, int position) {
-		Ticket ticket = getTickets(type).get(position-1);
+		var ticket = getTickets(type).get(position-1);
 		click(getXPathTicketLink(ticket.getId())).exec();
 		return ticket;
 	}
@@ -151,7 +151,7 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private String getIdTicketPage(WebElement boxDataTicket) {
-		By byIdTicket = By.xpath(XPATH_ID_RELATIVE_TICKET);
+		By byIdTicket = By.xpath(XP_ID_RELATIVE_TICKET);
 		if (!state(Visible, boxDataTicket).by(byIdTicket).check()) {
 			return "";
 		}
@@ -165,18 +165,19 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private String getPrecioTicketPage(WebElement boxDataTicket) {
-		return getElement(boxDataTicket, XPATH_PRICE_RELATIVE_TICKET).getText();
+		return getElement(boxDataTicket, XP_PRICE_RELATIVE_TICKET).getText();
 	}
 	
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
-		if (!state(Visible, XPATH_ITEMS_RELATIVE_TICKET).check()) {
+		if (!state(Visible, XP_ITEMS_RELATIVE_TICKET).check()) {
 			return 0;
 		}
-		String textLinea = "0" + getElement(boxDataTicket, XPATH_ITEMS_RELATIVE_TICKET).getText();
+		String textLinea = "0" + getElement(boxDataTicket, XP_ITEMS_RELATIVE_TICKET).getText();
 		return Integer.valueOf(textLinea.replaceAll("[^0-9]", ""));
 	}
 	
 	private String getFechaTicketPage(WebElement boxDataTicket) {
-		return getElement(boxDataTicket, XPATH_FECHA_RELATIVE_TICKET).getText();
+		return getElement(boxDataTicket, XP_FECHA_RELATIVE_TICKET).getText();
 	} 
+	
 }

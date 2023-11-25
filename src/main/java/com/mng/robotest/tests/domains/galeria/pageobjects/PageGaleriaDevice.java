@@ -23,15 +23,15 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	
 	private static final String TAG_ID_COLOR = "@TagIdColor";
 	
-	private static final String XPATH_IMG_COD_COLOR_WITH_TAG_COLOR = 
+	private static final String XP_IMG_COD_COLOR_WITH_TAG_COLOR = 
 		"//*[@class[contains(.,'color-container')] and @id='" + TAG_ID_COLOR + "']/img";
 	
-	private static final String XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//*[@data-testid[contains(.,'addToCart')]]";
+	private static final String XP_BUTTON_ANYADIR_RELATIVE_ARTICLE = "//*[@data-testid[contains(.,'addToCart')]]";
 	private static final String TAG_NUM_PAGINA = "@tagNumPagina";
-	private static final String XPATH_PAGINA_WITH_TAG = "//div[@id='page" + TAG_NUM_PAGINA + "']";
-	private static final String XPATH_PAGINA_TABLET_OUTLET_WITH_TAG = "//div[@id='page" + TAG_NUM_PAGINA + "Height']";
-	private static final String XPATH_HEADER_ARTICLES = "//h1[@class='catalog-title']";
-	private static final String XPATH_BUTTON_FOR_CLOSE_TALLAS = "//button[@data-testid='sheet.overlay']";
+	private static final String XP_PAGINA_WITH_TAG = "//div[@id='page" + TAG_NUM_PAGINA + "']";
+	private static final String XP_PAGINA_TABLET_OUTLET_WITH_TAG = "//div[@id='page" + TAG_NUM_PAGINA + "Height']";
+	private static final String XP_HEADER_ARTICLES = "//h1[@class='catalog-title']";
+	private static final String XP_BUTTON_FOR_CLOSE_TALLAS = "//button[@data-testid='sheet.overlay']";
 	
 	protected abstract String getXPathArticuloAncestor();
 	protected abstract String getXPathArticuloConColores();
@@ -59,19 +59,19 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	String getXPathImgCodigoColor(String codigoColor) {
-		return XPATH_IMG_COD_COLOR_WITH_TAG_COLOR.replace(TAG_ID_COLOR, codigoColor);
+		return XP_IMG_COD_COLOR_WITH_TAG_COLOR.replace(TAG_ID_COLOR, codigoColor);
 	}
 	
 	String getXPathButtonAnyadirArticle(int posArticulo) {
 		String xpathArticulo = "(" + getXPathArticulo() + ")[" + posArticulo + "]";
-		return (xpathArticulo + XPATH_BUTTON_ANYADIR_RELATIVE_ARTICLE);
+		return (xpathArticulo + XP_BUTTON_ANYADIR_RELATIVE_ARTICLE);
 	}
 	
 	String getXPathPagina(int pagina) {
 		if (channel==Channel.tablet && app==AppEcom.outlet ) {
-			return (XPATH_PAGINA_TABLET_OUTLET_WITH_TAG.replace(TAG_NUM_PAGINA, String.valueOf(pagina)));
+			return (XP_PAGINA_TABLET_OUTLET_WITH_TAG.replace(TAG_NUM_PAGINA, String.valueOf(pagina)));
 		}
-		return (XPATH_PAGINA_WITH_TAG.replace(TAG_NUM_PAGINA, String.valueOf(pagina)));
+		return (XP_PAGINA_WITH_TAG.replace(TAG_NUM_PAGINA, String.valueOf(pagina)));
 	}
 	
 	@Override
@@ -95,7 +95,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 
 	@Override
 	public int getNumFavoritoIcons() {
-		return getElements(XPATH_HEARTH_ICON_RELATIVE_ARTICLE).size();
+		return getElements(XP_HEARTH_ICON_RELATIVE_ARTICLE).size();
 	}
 		
 	@Override
@@ -204,8 +204,8 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public boolean isHeaderArticlesVisible(String textHeader) {
-		if (state(Visible, XPATH_HEADER_ARTICLES).check()) {
-			return getElement(XPATH_HEADER_ARTICLES).getText().toLowerCase().contains(textHeader.toLowerCase());
+		if (state(Visible, XP_HEADER_ARTICLES).check()) {
+			return getElement(XP_HEADER_ARTICLES).getText().toLowerCase().contains(textHeader.toLowerCase());
 		}
 		return false;
 	}
@@ -220,8 +220,8 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 		}
 	}
 	public void unshowTallasArticulo() {
-		if (state(Present, XPATH_BUTTON_FOR_CLOSE_TALLAS).check()) {
-			click(XPATH_BUTTON_FOR_CLOSE_TALLAS).exec();
+		if (state(Present, XP_BUTTON_FOR_CLOSE_TALLAS).check()) {
+			click(XP_BUTTON_FOR_CLOSE_TALLAS).exec();
 		}
 	}
 	

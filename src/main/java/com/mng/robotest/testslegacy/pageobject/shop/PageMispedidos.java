@@ -9,14 +9,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageMispedidos extends PageBase {
 
-	private static final String XPATH_PANEL_PEDIDOS = "//div[@id[contains(.,'panelPedidos')]]";
+	private static final String XP_PANEL_PEDIDOS = "//div[@id[contains(.,'panelPedidos')]]";
 	
 	private String getXPathListaPedidosVacia() {
 		return ("//tr[last()]//td[contains(.,'digo pedido')]");
 	}
 
 	public boolean isPage() {
-		return (state(Present, By.xpath(XPATH_PANEL_PEDIDOS)).check());
+		return (state(Present, By.xpath(XP_PANEL_PEDIDOS)).check());
 	}
 
 	public boolean elementContainsText(String text) {

@@ -12,29 +12,29 @@ public class PageAccesoMisCompras extends PageBase implements PageFromFooter {
 
 	public enum TypeBlock { SI_REGISTRADO, NO_REGISTRADO }
 	
-	private static final String XPATH_CONTAINER_BLOCKS = "//*[@id='myPurchasesDesktop']"; //
-	private static final String XPATH_LINK_SI_REGISTRADO = "//button[@data-testid='login']"; //
-	private static final String XPATH_LINK_NO_REGISTRADO = "//button[@data-testid='orderForm']"; //
-	private static final String XPATH_INPUT_USER_BLOCK_SI = "//input[@data-testid='mngLogin.LoginForm.emil']";
-	private static final String XPATH_INPUT_PASSWORD_BLOCK_SI = "//input[@data-testid='mngLogin.LoginForm.password']";
-	private static final String XPATH_BUTTON_ENTRAR_BLOCK_SI = "//button[@data-testid='mngLogin.LoginForm.button']";
+	private static final String XP_CONTAINER_BLOCKS = "//*[@id='myPurchasesDesktop']"; //
+	private static final String XP_LINK_SI_REGISTRADO = "//button[@data-testid='login']"; //
+	private static final String XP_LINK_NO_REGISTRADO = "//button[@data-testid='orderForm']"; //
+	private static final String XP_INPUT_USER_BLOCK_SI = "//input[@data-testid='mngLogin.LoginForm.emil']";
+	private static final String XP_INPUT_PASSWORD_BLOCK_SI = "//input[@data-testid='mngLogin.LoginForm.password']";
+	private static final String XP_BUTTON_ENTRAR_BLOCK_SI = "//button[@data-testid='mngLogin.LoginForm.button']";
 	
-	private static final String XPATH_INPUT_USER_BLOCK_NO = "//input[@data-testid[contains(.,'login.guest.email.input')]]";
-	private static final String XPPATH_INPUT_NUM_PEDIDO_BLOCK_NO = "//input[@data-testid[contains(.,'login.guest.orderId.input')]]";
-	private static final String XPATH_BUTTON_BUSCAR_PEDIDO_BLOCK_NO = "//button[@data-testid[contains(.,'login.guest.goToDetails')]]";
+	private static final String XP_INPUT_USER_BLOCK_NO = "//input[@data-testid[contains(.,'login.guest.email.input')]]";
+	private static final String XP_INPUT_NUM_PEDIDO_BLOCK_NO = "//input[@data-testid[contains(.,'login.guest.orderId.input')]]";
+	private static final String XP_BUTTON_BUSCAR_PEDIDO_BLOCK_NO = "//button[@data-testid[contains(.,'login.guest.goToDetails')]]";
 	
 	private String getXPathLinkBlock(TypeBlock typeBlock) {
 		switch (typeBlock) {
 		case SI_REGISTRADO:
-			return XPATH_LINK_SI_REGISTRADO;
+			return XP_LINK_SI_REGISTRADO;
 		case NO_REGISTRADO:
 		default:
-			return XPATH_LINK_NO_REGISTRADO;
+			return XP_LINK_NO_REGISTRADO;
 		}
 	}	
 	
 	private String getXPathIsPage() {
-		return XPATH_CONTAINER_BLOCKS;
+		return XP_CONTAINER_BLOCKS;
 	}
 	
 	@Override
@@ -72,13 +72,13 @@ public class PageAccesoMisCompras extends PageBase implements PageFromFooter {
 	}
 	
 	public void inputUserBlockSi(String usuario) {
-		getElement(XPATH_INPUT_USER_BLOCK_SI).clear();
-		getElement(XPATH_INPUT_USER_BLOCK_SI).sendKeys(usuario);
+		getElement(XP_INPUT_USER_BLOCK_SI).clear();
+		getElement(XP_INPUT_USER_BLOCK_SI).sendKeys(usuario);
 	}
 	
 	public void inputPasswordBlockSi(String password) {
-		getElement(XPATH_INPUT_PASSWORD_BLOCK_SI).clear();
-		getElement(XPATH_INPUT_PASSWORD_BLOCK_SI).sendKeys(password);
+		getElement(XP_INPUT_PASSWORD_BLOCK_SI).clear();
+		getElement(XP_INPUT_PASSWORD_BLOCK_SI).sendKeys(password);
 	}	
 	
 	public void inputUserPasswordBlockSi(String usuario, String password) {
@@ -87,16 +87,16 @@ public class PageAccesoMisCompras extends PageBase implements PageFromFooter {
 	}
 	
 	public void clickEntrarBlockSi() {
-		click(XPATH_BUTTON_ENTRAR_BLOCK_SI).exec();
+		click(XP_BUTTON_ENTRAR_BLOCK_SI).exec();
 	}
 	
 	public void inputUserBlockNo(String usuario) {
-		sendKeysWithRetry(usuario, By.xpath(XPATH_INPUT_USER_BLOCK_NO), 2, driver);
+		sendKeysWithRetry(usuario, By.xpath(XP_INPUT_USER_BLOCK_NO), 2, driver);
 	}
 	
 	public void inputNumPedidoBlockNo(String numPedido) {
-		getElement(XPPATH_INPUT_NUM_PEDIDO_BLOCK_NO).clear();
-		getElement(XPPATH_INPUT_NUM_PEDIDO_BLOCK_NO).sendKeys(numPedido);
+		getElement(XP_INPUT_NUM_PEDIDO_BLOCK_NO).clear();
+		getElement(XP_INPUT_NUM_PEDIDO_BLOCK_NO).sendKeys(numPedido);
 	}
 	
 	public void inputUserAndNumPedidoBlockNo(String usuario, String numPedido) {
@@ -105,9 +105,9 @@ public class PageAccesoMisCompras extends PageBase implements PageFromFooter {
 	}
 	
 	public void clickBuscarPedidoBlockNo() {
-		click(XPATH_BUTTON_BUSCAR_PEDIDO_BLOCK_NO).exec();
-		if (!state(Invisible, XPATH_BUTTON_BUSCAR_PEDIDO_BLOCK_NO).wait(2).check()) {
-			click(XPATH_BUTTON_BUSCAR_PEDIDO_BLOCK_NO).exec();
+		click(XP_BUTTON_BUSCAR_PEDIDO_BLOCK_NO).exec();
+		if (!state(Invisible, XP_BUTTON_BUSCAR_PEDIDO_BLOCK_NO).wait(2).check()) {
+			click(XP_BUTTON_BUSCAR_PEDIDO_BLOCK_NO).exec();
 		}
 	}
 }

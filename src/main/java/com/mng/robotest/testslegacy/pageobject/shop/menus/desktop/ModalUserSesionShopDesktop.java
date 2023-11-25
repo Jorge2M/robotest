@@ -10,22 +10,22 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalUserSesionShopDesktop extends PageBase { 
 	
-	private static final String XPATH_WRAPPER_USER_MENU = 
+	private static final String XP_WRAPPER_USER_MENU = 
 			"//*[@data-testid[contains(.,'header.userMenu.login')] or " + 
 			"@class[contains(.,'user-icon-button')]]";
 	
-	private static final String XPATH_CAPA_MENUS = XPATH_WRAPPER_USER_MENU + "/div[@role='button']";
+	private static final String XP_CAPA_MENUS = XP_WRAPPER_USER_MENU + "/div[@role='button']";
 	
 	public enum MenuUserDesktop implements ElementPage { 
-		INICIAR_SESION (XPATH_CAPA_MENUS + "//div[@class[contains(.,'login-button')]]"),
+		INICIAR_SESION (XP_CAPA_MENUS + "//div[@class[contains(.,'login-button')]]"),
 		
 		//Pedir React ID
-		REGISTRATE (XPATH_CAPA_MENUS + "//span[@class='login-register-link' or @class[contains(.,'register-link')] or text()='Regístrate' or @class[contains(.,'RuqlF')]]"),
-		MI_CUENTA (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'mi_cuenta')]]"),
-		MIS_COMPRAS (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'mis_compras')] or @data-testid[contains(.,'my_purchases')]]"),	 
-		MANGO_LIKES_YOU (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'mango_likes_you')]]"),
-		AYUDA (XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'ayuda')]]"),   
-		CERRAR_SESION(XPATH_CAPA_MENUS + "//div[@data-testid[contains(.,'logout')] or @class[contains(.,'logout')]]");
+		REGISTRATE (XP_CAPA_MENUS + "//span[@class='login-register-link' or @class[contains(.,'register-link')] or text()='Regístrate' or @class[contains(.,'RuqlF')]]"),
+		MI_CUENTA (XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mi_cuenta')]]"),
+		MIS_COMPRAS (XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mis_compras')] or @data-testid[contains(.,'my_purchases')]]"),	 
+		MANGO_LIKES_YOU (XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mango_likes_you')]]"),
+		AYUDA (XP_CAPA_MENUS + "//div[@data-testid[contains(.,'ayuda')]]"),   
+		CERRAR_SESION(XP_CAPA_MENUS + "//div[@data-testid[contains(.,'logout')] or @class[contains(.,'logout')]]");
 		
 		By by;
 		private MenuUserDesktop(String xPath) {
@@ -42,7 +42,7 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		return isVisibleUntil(0);
 	}
 	public boolean isVisibleUntil(int seconds) {
-		return state(Visible, XPATH_CAPA_MENUS).wait(seconds).check();
+		return state(Visible, XP_CAPA_MENUS).wait(seconds).check();
 	}	
 	
 	public boolean isMenuInState(MenuUserDesktop menu, State state) {

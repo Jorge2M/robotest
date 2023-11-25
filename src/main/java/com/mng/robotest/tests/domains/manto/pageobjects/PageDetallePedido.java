@@ -15,19 +15,19 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageDetallePedido extends PageBase {
 
 	private static final String TAG_ID_PEDIDO = "@tagIdPedido";
-	public static final String XPATH_IMNPORTE_TOTAL = "//span[text()[contains(.,'TOTAL:')]]/../following-sibling::*[1]";
-	private static final String XPATH_CODIGO_POSTAL = "//table[1]/tbody/tr/td[2]//tr[11]";
-	private static final String XPATH_LINK_ENVIO_TIENDA = "//td[text()[contains(.,'ENVIO A TIENDA')]]";
-	private static final String XPATH_LABEL_ID_PEDIDO = "//td/label[text()[contains(.,'" + TAG_ID_PEDIDO + "')]]";
-	private static final String XPATH_ESTADO_PEDIDO = "//span[text()[contains(.,'res_banco')]]/../following-sibling::*[1]";
-	private static final String XPATH_TIPO_SERVICIO = "//span[text()[contains(.,'tipo servicio')]]/../following-sibling::*[1]";
-	private static final String XPATH_LINK_VOLVER_PEDIDOS = "//a[text()[contains(.,'volver a pedidos')]]";
-	private static final String XPATH_REFERENCIA_ARTICULO = "//a[@onclick[contains(.,'var div =')]]";
-	private static final String XPATH_LINK_DETALLES_CLIENTE = "//input[@value='Detalles Cliente']";
-	private static final String	XPATH_IR_A_GENERAR_BUTTON = "//input[@value='ir a Generar']";
+	public static final String XP_IMNPORTE_TOTAL = "//span[text()[contains(.,'TOTAL:')]]/../following-sibling::*[1]";
+	private static final String XP_CODIGO_POSTAL = "//table[1]/tbody/tr/td[2]//tr[11]";
+	private static final String XP_LINK_ENVIO_TIENDA = "//td[text()[contains(.,'ENVIO A TIENDA')]]";
+	private static final String XP_LABEL_ID_PEDIDO = "//td/label[text()[contains(.,'" + TAG_ID_PEDIDO + "')]]";
+	private static final String XP_ESTADO_PEDIDO = "//span[text()[contains(.,'res_banco')]]/../following-sibling::*[1]";
+	private static final String XP_TIPO_SERVICIO = "//span[text()[contains(.,'tipo servicio')]]/../following-sibling::*[1]";
+	private static final String XP_LINK_VOLVER_PEDIDOS = "//a[text()[contains(.,'volver a pedidos')]]";
+	private static final String XP_REFERENCIA_ARTICULO = "//a[@onclick[contains(.,'var div =')]]";
+	private static final String XP_LINK_DETALLES_CLIENTE = "//input[@value='Detalles Cliente']";
+	private static final String	XP_IR_A_GENERAR_BUTTON = "//input[@value='ir a Generar']";
 
 	private String getXPathLabelIdPedido(String idPedido) {
-		return (XPATH_LABEL_ID_PEDIDO.replace(TAG_ID_PEDIDO, idPedido));
+		return (XP_LABEL_ID_PEDIDO.replace(TAG_ID_PEDIDO, idPedido));
 	}
 
 	public boolean isPage() {
@@ -44,12 +44,12 @@ public class PageDetallePedido extends PageBase {
 	}
 
 	public String getCodigoPais() {
-		return getElement(XPATH_CODIGO_POSTAL).getText();
+		return getElement(XP_CODIGO_POSTAL).getText();
 	}
 
 	public String getTiendaIfExists() {
-		if (state(Present, XPATH_LINK_ENVIO_TIENDA).check()) {
-			String lineaTexto = getElement(XPATH_LINK_ENVIO_TIENDA).getText();
+		if (state(Present, XP_LINK_ENVIO_TIENDA).check()) {
+			String lineaTexto = getElement(XP_LINK_ENVIO_TIENDA).getText();
 			Pattern pattern = Pattern.compile("(.*?)ENVIO A TIENDA(.*?)(\\d+)");
 			Matcher matcher = pattern.matcher(lineaTexto);
 			if (matcher.find()) {
@@ -60,11 +60,11 @@ public class PageDetallePedido extends PageBase {
 	}
 
 	public String getEstadoPedido() {
-		return getElement(XPATH_ESTADO_PEDIDO).getText();
+		return getElement(XP_ESTADO_PEDIDO).getText();
 	}
 	
 	public String getTipoServicio() {
-		return getElement(XPATH_TIPO_SERVICIO).getText();
+		return getElement(XP_TIPO_SERVICIO).getText();
 	}
 	
 	public boolean isCodPaisPedido(String codPaisPedido) {
@@ -90,7 +90,7 @@ public class PageDetallePedido extends PageBase {
 	}
 	
 	public boolean isPedidoInStateMenos1NULL() {
-		String estado = getElement(XPATH_ESTADO_PEDIDO).getText();
+		String estado = getElement(XP_ESTADO_PEDIDO).getText();
 		return (estado.contains("-1 - NULL"));
 	}
 	
@@ -105,14 +105,14 @@ public class PageDetallePedido extends PageBase {
 	}
 
 	public void gotoListaPedidos() {
-		if (state(Present, XPATH_LINK_VOLVER_PEDIDOS).check()) {
-			click(XPATH_LINK_VOLVER_PEDIDOS).exec();
+		if (state(Present, XP_LINK_VOLVER_PEDIDOS).check()) {
+			click(XP_LINK_VOLVER_PEDIDOS).exec();
 		}
 	}
 
 	public List<String> getReferenciasArticulosDetallePedido() {
 		List <String> referenciasText = new ArrayList<>();
-		List<WebElement> referencias = getElements(XPATH_REFERENCIA_ARTICULO);
+		List<WebElement> referencias = getElements(XP_REFERENCIA_ARTICULO);
 		for (WebElement referencia : referencias){
 			referenciasText.add(referencia.getText().replace(" ", ""));
 		}
@@ -120,10 +120,10 @@ public class PageDetallePedido extends PageBase {
 	}
 
 	public void clickLinkDetallesCliente() {
-		click(XPATH_LINK_DETALLES_CLIENTE).exec();
+		click(XP_LINK_DETALLES_CLIENTE).exec();
 	}
 	
 	public void clickIrAGenerarButton() {
-		click(XPATH_IR_A_GENERAR_BUTTON).exec();
+		click(XP_IR_A_GENERAR_BUTTON).exec();
 	}
 }

@@ -21,45 +21,45 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	private final SecTMango secTMango = new SecTMango();
 	private final SecBillpay secBillpay = new SecBillpay();
 	
-	private static final String XPATH_LINK2_DATOS_PAGO = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step2']";
-	private static final String XPATH_BUTTON_FINALIZAR_COMPRA = 
+	private static final String XP_LINK2_DATOS_PAGO = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step2']";
+	private static final String XP_BUTTON_FINALIZAR_COMPRA = 
 		"//button[(@id[contains(.,'complete-step2')] or @id[contains(.,'complete-iframe-step2')]) and not(@class[contains(.,' hidden')])]";
-	private static final String XPATH_RED_ERROR = "//div[@class[contains(.,'step-error')]]/p";
+	private static final String XP_RED_ERROR = "//div[@class[contains(.,'step-error')]]/p";
 	
 	private static final String TAG_METODO_PAGO = "@TagMetodoPago";
 	private static final String TAG_METODO_PAGO_LOWER_CASE = "@LowerCaseTagMetodoPago";
-	private static final String XPATH_BLOCK_TARJETA_GUARDADA_PAGO_WITH_TAG = "//div[" + 
+	private static final String XP_BLOCK_TARJETA_GUARDADA_PAGO_WITH_TAG = "//div[" + 
 		"@data-analytics-value='" + TAG_METODO_PAGO + "' or " + 
 		"@data-analytics-value='" + TAG_METODO_PAGO_LOWER_CASE + "']";
-	private static final String XPATH_RADIO_TRJ_GUARDADA = "//div[@data-custom-radio-id[contains(.,'-saved')]]";
+	private static final String XP_RADIO_TRJ_GUARDADA = "//div[@data-custom-radio-id[contains(.,'-saved')]]";
 	
 	//Desconozco este XPath, de momento he puesto el de Desktop
-	private static final String XPATH_CVC_TRJ_GUARDADA = "//div[@class='storedCardForm']//input[@id='cvc']"; 
+	private static final String XP_CVC_TRJ_GUARDADA = "//div[@class='storedCardForm']//input[@id='cvc']"; 
 	
-	private static final String XPATH_LINK_SOLICITAR_FACTURA = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
-	private static final String XPATH_LINK_FORMAS_PAGO = "//div[@class[contains(.,'payment-method')]]//span[@class[contains(.,'others-title')]]"; 
-	private static final String XPATH_LINEA_PAGO_LAYOUT_LINEA = "//div[@class[contains(.,'payment-method')] and @data-id]";
+	private static final String XP_LINK_SOLICITAR_FACTURA = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
+	private static final String XP_LINK_FORMAS_PAGO = "//div[@class[contains(.,'payment-method')]]//span[@class[contains(.,'others-title')]]"; 
+	private static final String XP_LINEA_PAGO_LAYOUT_LINEA = "//div[@class[contains(.,'payment-method')] and @data-id]";
 	
 	//secciones de pagos (que se pueden mostrar/ocultar) disponibles en países como México
-	private static final String XPATH_SECTIONS_PAGOS_MOBIL = "//*[@class[contains(.,'group-card-js')]]";
-	private static final String XPATH_ARTICLE_BOLSA = "//div[@id[contains(.,'panelBolsa:iteradorEntrega')]]";
-	private static final String XPATH_PRECIO_TOTAL = "//*[@data-testid='summaryTotalPrice.price']";
-	private static final String XPATH_PRECIO_TOTAL_CROATIA_EUROS = "//*[@data-testid='summaryTotalPrice.additionalPrice.1']";
-	private static final String XPATH_DIRECCION_ENVIO_TEXT = "//p[@class='address']";
+	private static final String XP_SECTIONS_PAGOS_MOBIL = "//*[@class[contains(.,'group-card-js')]]";
+	private static final String XP_ARTICLE_BOLSA = "//div[@id[contains(.,'panelBolsa:iteradorEntrega')]]";
+	private static final String XP_PRECIO_TOTAL = "//*[@data-testid='summaryTotalPrice.price']";
+	private static final String XP_PRECIO_TOTAL_CROATIA_EUROS = "//*[@data-testid='summaryTotalPrice.additionalPrice.1']";
+	private static final String XP_DIRECCION_ENVIO_TEXT = "//p[@class='address']";
 	
 	private String getXPathBlockTarjetaGuardada(String metodoPago) {
-		return (XPATH_BLOCK_TARJETA_GUARDADA_PAGO_WITH_TAG
+		return (XP_BLOCK_TARJETA_GUARDADA_PAGO_WITH_TAG
 				.replace(TAG_METODO_PAGO, metodoPago)
 				.replace(TAG_METODO_PAGO_LOWER_CASE, metodoPago.toLowerCase()));
 	}
 	
 	private String getXPathRadioTarjetaGuardada(String metodoPago) {
 		String xpathMethod = getXPathBlockTarjetaGuardada(metodoPago);
-		return (xpathMethod + XPATH_RADIO_TRJ_GUARDADA);
+		return (xpathMethod + XP_RADIO_TRJ_GUARDADA);
 	}
 	
 	private String getXPathPago(String nombrePago) {
-		return (XPATH_LINEA_PAGO_LAYOUT_LINEA + "/div[@data-analytics-value='" + nombrePago.toLowerCase() + "']/..");
+		return (XP_LINEA_PAGO_LAYOUT_LINEA + "/div[@data-analytics-value='" + nombrePago.toLowerCase() + "']/..");
 	}
 	
 	private String getXPathRadioPago(String nombrePago) {
@@ -84,10 +84,10 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	private String getXPathLinkFormasPagoFor(TypeActionLinkFP actionForLink) {
 		switch (actionForLink) {
 		case PLEGAR_PAGOS:
-			return XPATH_LINK_FORMAS_PAGO + "//self::*[@class[contains(.,'selected')]]";
+			return XP_LINK_FORMAS_PAGO + "//self::*[@class[contains(.,'selected')]]";
 		case DESPLEGAR_PAGOS:
 		default:
-			return XPATH_LINK_FORMAS_PAGO + "//self::*[@class[not(contains(.,'selected'))]]";
+			return XP_LINK_FORMAS_PAGO + "//self::*[@class[not(contains(.,'selected'))]]";
 		}
 	}
 	
@@ -96,22 +96,22 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 
 	public void clickLink2DatosPagoAndWait() {
-		click(XPATH_LINK2_DATOS_PAGO).exec();
+		click(XP_LINK2_DATOS_PAGO).exec();
 		isPageUntil(2);
 	}
 
 	public void clickLink2DatosPagoIfVisible() {
-		if (state(Visible, XPATH_LINK2_DATOS_PAGO).check()) {
+		if (state(Visible, XP_LINK2_DATOS_PAGO).check()) {
 			clickLink2DatosPagoAndWait();
 		}
 	}
 
 	public void clickButtonFinalizarCompra() {
-		click(XPATH_BUTTON_FINALIZAR_COMPRA).type(javascript).exec();
+		click(XP_BUTTON_FINALIZAR_COMPRA).type(javascript).exec();
 	}
 
 	public boolean isClickableButtonFinalizarCompraUntil(int seconds) {
-		return state(Clickable, XPATH_BUTTON_FINALIZAR_COMPRA).wait(seconds).check();
+		return state(Clickable, XP_BUTTON_FINALIZAR_COMPRA).wait(seconds).check();
 	}
 
 	public void waitAndClickFinalizarCompra(int seconds) {
@@ -149,18 +149,18 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 	
 	public boolean isNumMetodosPagoOK(boolean isEmpl) {
-		int numPagosPant = getElements(XPATH_LINEA_PAGO_LAYOUT_LINEA).size();
+		int numPagosPant = getElements(XP_LINEA_PAGO_LAYOUT_LINEA).size();
 		int numPagosPais = dataTest.getPais().getListPagosForTest(app, isEmpl).size();
 		return (numPagosPais == numPagosPant);
 	}
 	
 	public boolean isNumpagos(int numPagosExpected) {
-		int numPagosPant = getElements(XPATH_LINEA_PAGO_LAYOUT_LINEA).size();
+		int numPagosPant = getElements(XP_LINEA_PAGO_LAYOUT_LINEA).size();
 		return (numPagosPant == numPagosExpected);
 	}
 
 	public boolean isPresentMetodosPago() {
-		return state(Present, XPATH_LINEA_PAGO_LAYOUT_LINEA).check();
+		return state(Present, XP_LINEA_PAGO_LAYOUT_LINEA).check();
 	}
 
 	public void goToPageFromCheckoutIfNeeded() {
@@ -196,7 +196,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 
 	public void moveToFirstMetodoPagoLine() {
-		moveToElement(XPATH_LINEA_PAGO_LAYOUT_LINEA);
+		moveToElement(XP_LINEA_PAGO_LAYOUT_LINEA);
 	}
 	
 	public void despliegaMetodosPago() {
@@ -264,7 +264,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		String xpathClickMetodoPago = getXPathPago(nombrePago);
 		boolean methodDisplayed = getElement(xpathClickMetodoPago).isDisplayed();
 		if (!methodDisplayed) {
-			List<WebElement> listSecciones = getElements(XPATH_SECTIONS_PAGOS_MOBIL);
+			List<WebElement> listSecciones = getElements(XP_SECTIONS_PAGOS_MOBIL);
 			int i=0;
 			while (!methodDisplayed && i<listSecciones.size()) {
 				listSecciones.get(i).click();
@@ -276,11 +276,11 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}	
 
 	public boolean isRedErrorVisible() {
-		return state(Visible, XPATH_RED_ERROR).check();
+		return state(Visible, XP_RED_ERROR).check();
 	}
 
 	public String getTextRedError() {
-		return getElement(XPATH_RED_ERROR).getText();
+		return getElement(XP_RED_ERROR).getText();
 	}
 
 	public boolean isVisibleRadioTrjGuardada(String metodoPago)  {
@@ -289,24 +289,24 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 
 	public void clickRadioTrjGuardada() {
-		click(XPATH_RADIO_TRJ_GUARDADA).exec();
+		click(XP_RADIO_TRJ_GUARDADA).exec();
 	}
 
 	public void inputCvcTrjGuardadaIfVisible(String cvc) {
-		if (state(Visible, XPATH_CVC_TRJ_GUARDADA).check()) {
-			WebElement input = getElement(XPATH_CVC_TRJ_GUARDADA);
+		if (state(Visible, XP_CVC_TRJ_GUARDADA).check()) {
+			WebElement input = getElement(XP_CVC_TRJ_GUARDADA);
 			input.clear();
 			input.sendKeys(cvc);
 		}
 	}
 
 	public void clickSolicitarFactura() {
-		getElement(XPATH_LINK_SOLICITAR_FACTURA).click();
+		getElement(XP_LINK_SOLICITAR_FACTURA).click();
 	}
 
 
 	public boolean isArticulos() {
-		return state(Present, XPATH_ARTICLE_BOLSA).check();
+		return state(Present, XP_ARTICLE_BOLSA).check();
 	}
 
 	public void confirmarPagoFromMetodos() {
@@ -314,7 +314,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 	
 	public boolean isMarkedQuieroFactura() {
-		WebElement radio = getElement(XPATH_LINK_SOLICITAR_FACTURA);
+		WebElement radio = getElement(XP_LINK_SOLICITAR_FACTURA);
 		return (
 			radio.getAttribute("checked")!=null &&
 			radio.getAttribute("checked").contains("true"));
@@ -335,7 +335,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 	
 	public String getPrecioTotalFromResumen(boolean normalize) {
-		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XPATH_PRECIO_TOTAL);
+		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XP_PRECIO_TOTAL);
 		if (!normalize) {
 			return precioTotal;
 		}
@@ -344,7 +344,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	
 	public String getCroaciaPrecioTotalInEuros(boolean normalize) {
 		String precioTotal = new PageCheckoutWrapper()
-				.formateaPrecioTotal(XPATH_PRECIO_TOTAL_CROATIA_EUROS);
+				.formateaPrecioTotal(XP_PRECIO_TOTAL_CROATIA_EUROS);
 		if (!normalize) {
 			return precioTotal;
 		}
@@ -352,8 +352,8 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 	
 	public String getTextDireccionEnvioCompleta() {
-		if (state(Present, XPATH_DIRECCION_ENVIO_TEXT).check()) {
-			return (getElement(XPATH_DIRECCION_ENVIO_TEXT)).getText();
+		if (state(Present, XP_DIRECCION_ENVIO_TEXT).check()) {
+			return (getElement(XP_DIRECCION_ENVIO_TEXT)).getText();
 		}
 		return "";
 	}

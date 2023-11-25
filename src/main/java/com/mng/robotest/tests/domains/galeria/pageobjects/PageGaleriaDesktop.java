@@ -63,7 +63,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		}
 	}
 	
-	private static final String XPATH_LIST_ARTICLES = "//div[@class[contains(.,'columns')] and @id='list']";
+	private static final String XP_LIST_ARTICLES = "//div[@class[contains(.,'columns')] and @id='list']";
 	
 	public PageGaleriaDesktop() {
 		super();
@@ -75,15 +75,15 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	public enum TypeArticle { REBAJADO, NO_REBAJADO }
 	
-	private static final String XPATH_ANCESTOR_ARTICLE = "//ancestor::div[@class[contains(.,'product-list-info')]]";
+	private static final String XP_ANCESTOR_ARTICLE = "//ancestor::div[@class[contains(.,'product-list-info')]]";
 	
 	private String getXPathDataArticuloOfType(TypeArticle typeArticle) {
 		String xpathPrecio = secPrecios.getXPathPrecioArticulo(typeArticle);
-		return (getXPathArticulo() + xpathPrecio + XPATH_ANCESTOR_ARTICLE);
+		return (getXPathArticulo() + xpathPrecio + XP_ANCESTOR_ARTICLE);
 	}
 	
-	private static final String XPATH_ICONO_UP_GALERY = "//div[@id='scroll-top-step' or @id='iconFillUp']";
-	private static final String XPATH_HEADER_ARTICLES = "//div[@id[contains(.,'title')]]/h1";
+	private static final String XP_ICONO_UP_GALERY = "//div[@id='scroll-top-step' or @id='iconFillUp']";
+	private static final String XP_HEADER_ARTICLES = "//div[@id[contains(.,'title')]]/h1";
 
 	public boolean isPage() {
 		String xpath = "//div[@class[contains(.,'container-fluid catalog')]]";
@@ -145,11 +145,11 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return (getXPathArticulo() + sizeArticle.getXPathRelativeArticle());
 	}
 
-	private static final String INI_XPATH_PAGINA_GALERIA = "//*[@id='page";
+	private static final String INI_XP_PAGINA_GALERIA = "//*[@id='page";
 
 	@Override
 	String getXPathPagina(int pagina) {
-		return (INI_XPATH_PAGINA_GALERIA + pagina + "']");
+		return (INI_XP_PAGINA_GALERIA + pagina + "']");
 	}
 
 	@Override
@@ -227,7 +227,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 
 	@Override
 	public int getNumFavoritoIcons() {
-		return getElements(XPATH_HEARTH_ICON_RELATIVE_ARTICLE).size();
+		return getElements(XP_HEARTH_ICON_RELATIVE_ARTICLE).size();
 	}
 
 	public boolean isArticuloWithStringInName(String string) {
@@ -241,7 +241,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}	
 	
 	private int getLayoutNumColumnasShop() {
-		var listArt = getElement(XPATH_LIST_ARTICLES );
+		var listArt = getElement(XP_LIST_ARTICLES );
 		if (listArt.getAttribute("class").contains("columns3")) {
 			return 3;
 		}
@@ -291,7 +291,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 
 	@Override
 	public boolean backTo1erArticulo() throws InterruptedException {
-		return backTo1erArticulo(XPATH_ICONO_UP_GALERY);
+		return backTo1erArticulo(XP_ICONO_UP_GALERY);
 	}
 	
 	public List<String> getArticlesRebajadosWithLiteralInLabel(List<LabelArticle> listLabels) {
@@ -594,9 +594,9 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private String getHeaderText(int seconds) {
-		if (state(Visible, XPATH_HEADER_ARTICLES).wait(1).check()) {
+		if (state(Visible, XP_HEADER_ARTICLES).wait(1).check()) {
 			for (int i=0; i<seconds; i++) {
-				String headerText = getElement(XPATH_HEADER_ARTICLES).getText();
+				String headerText = getElement(XP_HEADER_ARTICLES).getText();
 				if (headerText.compareTo("")!=0) {
 					return headerText;
 				}

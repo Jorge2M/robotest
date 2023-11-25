@@ -7,9 +7,9 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PopupFindAddress extends PageBase {
 
-	private static final String XPATH_INPUT_BUSCADOR = "//input[@id='region_name']";
-	private static final String XPATH_BUTTON_LUPA = "//button[@class='btn_search']";
-	private static final String XPATH_LINK_DIRECC = "//button[@class='link_post']";
+	private static final String XP_INPUT_BUSCADOR = "//input[@id='region_name']";
+	private static final String XP_BUTTON_LUPA = "//button[@class='btn_search']";
+	private static final String XP_LINK_DIRECC = "//button[@class='link_post']";
 	
 	public String goToPopupAndWait(String mainWindowHandle, int seconds) { 
 		String popupBuscador = switchToAnotherWindow(driver, mainWindowHandle);
@@ -27,20 +27,20 @@ public class PopupFindAddress extends PageBase {
 	}
 
 	public boolean isBuscadorClickableUntil(int seconds) {
-		return state(Clickable, XPATH_INPUT_BUSCADOR).wait(seconds).check();
+		return state(Clickable, XP_INPUT_BUSCADOR).wait(seconds).check();
 	}
 
 	public void setDataBuscador(String data) {
-		getElement(XPATH_INPUT_BUSCADOR).sendKeys(data);
+		getElement(XP_INPUT_BUSCADOR).sendKeys(data);
 	}
 
 	public void clickButtonLupa() {
-		click(XPATH_BUTTON_LUPA).exec();
+		click(XP_BUTTON_LUPA).exec();
 		waitMillis(1000); //sin este wait no funciona en modo headless
 	}
 
 	public void clickFirstDirecc() {
-		getElement(XPATH_LINK_DIRECC).click();
+		getElement(XP_LINK_DIRECC).click();
 	}
 	
 	public void switchToIFrame() {

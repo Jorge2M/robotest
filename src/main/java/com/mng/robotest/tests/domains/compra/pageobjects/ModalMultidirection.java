@@ -16,14 +16,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalMultidirection extends PageBase {
 
-	private static final String XPATH_MODAL_DIRECTIONS ="//*[@data-testid='checkout.multiAddress.modalAddresses']";
-	private static final String XPATH_LINK_ANYADIR_DIRECCION = "//*[@data-testid[contains(.,'newAddress.button')]]";
-	private static final String XPATH_CONFIRMAR_BUTTON = "//button[@data-testid[contains(.,'confirmation.button')]]";
-	private static final String XPATH_LINK_EDITAR = "//*[@data-testid[contains(.,'edit.button')]]";
-	private static final String XPATH_CLOSE_MODAL_CONFIRM_ELIMINACION = "//*[@data-testid='modal.close.button']";
+	private static final String XP_MODAL_DIRECTIONS ="//*[@data-testid='checkout.multiAddress.modalAddresses']";
+	private static final String XP_LINK_ANYADIR_DIRECCION = "//*[@data-testid[contains(.,'newAddress.button')]]";
+	private static final String XP_CONFIRMAR_BUTTON = "//button[@data-testid[contains(.,'confirmation.button')]]";
+	private static final String XP_LINK_EDITAR = "//*[@data-testid[contains(.,'edit.button')]]";
+	private static final String XP_CLOSE_MODAL_CONFIRM_ELIMINACION = "//*[@data-testid='modal.close.button']";
 	
-	private static final String XPATH_LINE_DIRECTION = "//*[@data-testid[contains(.,'modalAddresses.addressRadio')]]";
-	private static final String XPATH_TEXT_PRINCIPAL = "//*[@data-testid[contains(.,'addressExtraInfo')]]";
+	private static final String XP_LINE_DIRECTION = "//*[@data-testid[contains(.,'modalAddresses.addressRadio')]]";
+	private static final String XP_TEXT_PRINCIPAL = "//*[@data-testid[contains(.,'addressExtraInfo')]]";
 
 
 	public enum DirectionItem {
@@ -42,7 +42,7 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	public boolean isVisible(int seconds) {
-		return state(Visible, XPATH_MODAL_DIRECTIONS).wait(seconds).check();
+		return state(Visible, XP_MODAL_DIRECTIONS).wait(seconds).check();
 	}
 	
 	public Optional<Direction> getPrincipalDirection(int seconds) {
@@ -85,7 +85,7 @@ public class ModalMultidirection extends PageBase {
 	public List<Direction> getDirections() {
 		List<Direction> listDirections = new ArrayList<>();
 		waitForPageLoaded(driver);
-		for (WebElement directionElem : getElements(XPATH_LINE_DIRECTION)) {
+		for (WebElement directionElem : getElements(XP_LINE_DIRECTION)) {
 			var direction = new Direction();
 			direction.setName(getDirectionItem(directionElem, DirectionItem.NAME));
 			direction.setAddress(getDirectionItem(directionElem, DirectionItem.ADDRESS));
@@ -99,7 +99,7 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	public void clickAnyadirOtraDireccion() {
-		click(XPATH_LINK_ANYADIR_DIRECCION).exec();
+		click(XP_LINK_ANYADIR_DIRECCION).exec();
 	}
 	
 	private String getDirectionItem(WebElement lineDirection, DirectionItem item) {
@@ -110,7 +110,7 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	private boolean isPrincipal(WebElement lineDirection) {
-		return state(Visible, lineDirection).by(By.xpath("." + XPATH_TEXT_PRINCIPAL)).check();
+		return state(Visible, lineDirection).by(By.xpath("." + XP_TEXT_PRINCIPAL)).check();
 	}
 	
 	public void clickEditAddress(String address) throws NoSuchElementException {
@@ -119,19 +119,19 @@ public class ModalMultidirection extends PageBase {
 			throw new NoSuchElementException("Direction not found in multidirection modal");
 		}
 		WebElement directionElem = directionOpt.get().getElement();
-		click(directionElem).by(By.xpath(XPATH_LINK_EDITAR)).exec();
+		click(directionElem).by(By.xpath(XP_LINK_EDITAR)).exec();
 	}
 	
 	public void closeModal() {
 		if (channel.isDevice()) {
-			click(XPATH_CONFIRMAR_BUTTON).exec();
+			click(XP_CONFIRMAR_BUTTON).exec();
 		} else {
-			click(XPATH_CLOSE_MODAL_CONFIRM_ELIMINACION).exec();
+			click(XP_CLOSE_MODAL_CONFIRM_ELIMINACION).exec();
 		}
 	}
 	
 	public boolean isModalInvisible(int seconds) {
-		return state(Invisible, XPATH_MODAL_DIRECTIONS).wait(seconds).check();
+		return state(Invisible, XP_MODAL_DIRECTIONS).wait(seconds).check();
 	}
 
 }

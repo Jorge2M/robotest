@@ -6,14 +6,14 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PagePaypalSelectPago extends PageBase {
 
-	private static final String XPATH_CONTINUE_BUTTON = "//*[@data-testid='submit-button-initial']";
-	private static final String XPATH_MET_PAGOS = "//section[@data-testid='pay-with']";
+	private static final String XP_CONTINUE_BUTTON = "//*[@data-testid='submit-button-initial']";
+	private static final String XP_MET_PAGOS = "//section[@data-testid='pay-with']";
 
 	public boolean isPageUntil(int seconds) {
-		return state(Visible, XPATH_MET_PAGOS).wait(seconds).check();
+		return state(Visible, XP_MET_PAGOS).wait(seconds).check();
 	}
 
 	public void clickContinuarButton() {
-		click(XPATH_CONTINUE_BUTTON).exec();
+		click(XP_CONTINUE_BUTTON).exec();
 	}
 }

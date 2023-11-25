@@ -43,14 +43,14 @@ public class SecProductDescrDevice extends PageBase {
 			this.stateInitial = stateInitial;
 		}
 		
-		private static final String XPATH_DIV_PRODUCT_DESCRIPTION_DESKTOP = "//div[@class='product-description']";
-		private static final String XPATH_DIV_PRODUCT_DESCRIPTION_DEVICE = "//div[@class[contains(.,'product-detail')]]";
+		private static final String XP_DIV_PRODUCT_DESCRIPTION_DESKTOP = "//div[@class='product-description']";
+		private static final String XP_DIV_PRODUCT_DESCRIPTION_DEVICE = "//div[@class[contains(.,'product-detail')]]";
 		
 		public String getXPath(Channel channel, AppEcom app) {
 			if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {
-				return XPATH_DIV_PRODUCT_DESCRIPTION_DEVICE + xPathDevice;
+				return XP_DIV_PRODUCT_DESCRIPTION_DEVICE + xPathDevice;
 			}
-			return XPATH_DIV_PRODUCT_DESCRIPTION_DESKTOP + xPathDesktop;
+			return XP_DIV_PRODUCT_DESCRIPTION_DESKTOP + xPathDesktop;
 		}
 		public String getXPathLink(Channel channel, AppEcom app) {
 			if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {

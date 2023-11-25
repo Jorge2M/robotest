@@ -6,7 +6,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageFormasDePago extends PageBase implements PageFromFooter {
 	
-	private static final String XPATH_FOR_ID_PAGE = "//*[text()[contains(.,'Métodos de pago')]]";
+	private static final String XP_FOR_ID_PAGE = "//*[text()[contains(.,'Métodos de pago')]]";
 	
 	@Override
 	public String getName() {
@@ -15,6 +15,6 @@ public class PageFormasDePago extends PageBase implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return state(Present, XPATH_FOR_ID_PAGE).wait(seconds).check();
+		return state(Present, XP_FOR_ID_PAGE).wait(seconds).check();
 	}
 }

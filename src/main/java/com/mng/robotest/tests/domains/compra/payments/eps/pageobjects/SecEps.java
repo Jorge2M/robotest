@@ -6,18 +6,18 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class SecEps extends PageBase {
 
-	private static final String XPATH_INPUT_BANCO = "//div[@id='eps-bank-selector']";
-	private static final String INI_XPATH_SELECT_OPTION_BANCO = XPATH_INPUT_BANCO + "//option[text()[contains(.,'";
+	private static final String XP_INPUT_BANCO = "//div[@id='eps-bank-selector']";
+	private static final String INI_XP_SELECT_OPTION_BANCO = XP_INPUT_BANCO + "//option[text()[contains(.,'";
 	
 	private String getXPathSelectOptionBanco(String banco) {
-		return INI_XPATH_SELECT_OPTION_BANCO + banco + "')]]";
+		return INI_XP_SELECT_OPTION_BANCO + banco + "')]]";
 	}
 
 	public void selectBanco(String nombreBanco) {
 		String xpathSelectOptionBanco = getXPathSelectOptionBanco(nombreBanco);
-		getElement(XPATH_INPUT_BANCO).click();
+		getElement(XP_INPUT_BANCO).click();
 		getElement(xpathSelectOptionBanco).click();
-		getElement(XPATH_INPUT_BANCO).click();
+		getElement(XP_INPUT_BANCO).click();
 	}
 
 	public boolean isBancoSeleccionado(String nombreBanco) {

@@ -8,16 +8,16 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalNewsLetterAfterAccess extends PageBase {
 
-	private static final String XPATH_CAPA_GLOBAL = "//div[@id='listenerModal']"; 
-	private static final String XPATH_CAPA_CONTAINER = XPATH_CAPA_GLOBAL + "//div[@id='modalNewsletterSubscription']";
-	private static final String XPATH_ASPA_FOR_CLOSE = XPATH_CAPA_CONTAINER + "//button[@id='modalNewsletterSubscriptionClose']";
+	private static final String XP_CAPA_GLOBAL = "//div[@id='listenerModal']"; 
+	private static final String XP_CAPA_CONTAINER = XP_CAPA_GLOBAL + "//div[@id='modalNewsletterSubscription']";
+	private static final String XP_ASPA_FOR_CLOSE = XP_CAPA_CONTAINER + "//button[@id='modalNewsletterSubscriptionClose']";
 	
 	public boolean isModalVisibleUntil(int seconds) {
-		return state(Visible, XPATH_CAPA_CONTAINER).wait(seconds).check();
+		return state(Visible, XP_CAPA_CONTAINER).wait(seconds).check();
 	}
 	
 	public void closeModal() {
-		click(XPATH_ASPA_FOR_CLOSE).type(javascript).exec();
+		click(XP_ASPA_FOR_CLOSE).type(javascript).exec();
 	}
 	
 	public void closeModalIfVisible() {

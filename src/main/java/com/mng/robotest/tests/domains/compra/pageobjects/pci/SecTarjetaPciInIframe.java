@@ -11,18 +11,18 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	
-	private static final String XPATH_IFRAME = "//iframe[@title='credit_card_form']";
-	private static final String XPATH_BLOCK = "//div[@id='root']";
-	private static final String XPATH_INPUT_NUMBER = XPATH_BLOCK + "//input[@name[contains(.,'cardNumber')]]";
-	private static final String XPATH_INPUT_TITULAR = XPATH_BLOCK + "//input[@name[contains(.,'cardHolder')]]";
-	private static final String XPATH_SELECT_MES = XPATH_BLOCK + "//select[@name[contains(.,'expirationMonth')]]";
-	private static final String XPATH_SELECT_ANY = XPATH_BLOCK + "//select[@name[contains(.,'expirationYear')]]";
-	private static final String XPATH_INPUT_CVC = XPATH_BLOCK + "//input[@name[contains(.,'cvc')]]";
-	private static final String XPATH_INPUT_DNI = XPATH_BLOCK + "//input[@name[contains(.,'dni')]]"; //Specific for Codensa (Colombia)
+	private static final String XP_IFRAME = "//iframe[@title='credit_card_form']";
+	private static final String XP_BLOCK = "//div[@id='root']";
+	private static final String XP_INPUT_NUMBER = XP_BLOCK + "//input[@name[contains(.,'cardNumber')]]";
+	private static final String XP_INPUT_TITULAR = XP_BLOCK + "//input[@name[contains(.,'cardHolder')]]";
+	private static final String XP_SELECT_MES = XP_BLOCK + "//select[@name[contains(.,'expirationMonth')]]";
+	private static final String XP_SELECT_ANY = XP_BLOCK + "//select[@name[contains(.,'expirationYear')]]";
+	private static final String XP_INPUT_CVC = XP_BLOCK + "//input[@name[contains(.,'cvc')]]";
+	private static final String XP_INPUT_DNI = XP_BLOCK + "//input[@name[contains(.,'dni')]]"; //Specific for Codensa (Colombia)
 	
 	protected void goToIframe() {
-		state(Visible, XPATH_IFRAME).wait(2).check();
-		driver.switchTo().frame(getElement(XPATH_IFRAME));
+		state(Visible, XP_IFRAME).wait(2).check();
+		driver.switchTo().frame(getElement(XP_IFRAME));
 	}
 	
 	protected void leaveIframe() {
@@ -37,7 +37,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public boolean isPresentInputNumberUntil(int seconds) {
 		goToIframe();
-		boolean present = state(Present, XPATH_INPUT_NUMBER).wait(seconds).check();
+		boolean present = state(Present, XP_INPUT_NUMBER).wait(seconds).check();
 		leaveIframe();
 		return present;
 	}
@@ -45,7 +45,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public boolean isPresentInputTitular() {
 		goToIframe();
-		boolean present = state(Present, XPATH_INPUT_TITULAR).check();
+		boolean present = state(Present, XP_INPUT_TITULAR).check();
 		leaveIframe();
 		return present;
 	}
@@ -53,7 +53,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public boolean isPresentSelectMes() {
 		goToIframe();
-		boolean present = state(Present, XPATH_SELECT_MES).check();
+		boolean present = state(Present, XP_SELECT_MES).check();
 		leaveIframe();
 		return present;
 	}
@@ -61,7 +61,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public boolean isPresentSelectAny() {
 		goToIframe();
-		boolean present = state(Present, XPATH_SELECT_ANY).check();
+		boolean present = state(Present, XP_SELECT_ANY).check();
 		leaveIframe();
 		return present;
 	}
@@ -69,7 +69,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public boolean isPresentInputCvc() {
 		goToIframe();
-		boolean present = state(Present, XPATH_INPUT_CVC).check();
+		boolean present = state(Present, XP_INPUT_CVC).check();
 		leaveIframe();
 		return present;
 	}
@@ -77,7 +77,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public boolean isPresentInputDni() {
 		goToIframe();
-		boolean present = state(Present, XPATH_INPUT_DNI).check();
+		boolean present = state(Present, XP_INPUT_DNI).check();
 		leaveIframe();
 		return present;
 	}	
@@ -85,9 +85,9 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public void inputNumber(String number) {
 		goToIframe();
-		WebElement input = getElement(XPATH_INPUT_NUMBER);
+		WebElement input = getElement(XP_INPUT_NUMBER);
 		if (number.compareTo(input.getAttribute("value").replace(" ", ""))!=0) {
-			WebElement inputNumber = getElement(XPATH_INPUT_NUMBER);
+			WebElement inputNumber = getElement(XP_INPUT_NUMBER);
 			inputNumber.clear();
 			if (channel==Channel.tablet) {
 				for(char c : number.toCharArray()) {
@@ -103,46 +103,46 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public void inputTitular(String titular) {
 		goToIframe();
-		getElement(XPATH_INPUT_TITULAR).clear();
-		getElement(XPATH_INPUT_TITULAR).sendKeys(titular);
+		getElement(XP_INPUT_TITULAR).clear();
+		getElement(XP_INPUT_TITULAR).sendKeys(titular);
 		leaveIframe();
 	}
 	
 	@Override
 	public void inputCvc(String cvc) {
 		goToIframe();
-		getElement(XPATH_INPUT_CVC).clear();
-		getElement(XPATH_INPUT_CVC).sendKeys(cvc);
+		getElement(XP_INPUT_CVC).clear();
+		getElement(XP_INPUT_CVC).sendKeys(cvc);
 		leaveIframe();
 	}
 	
 	@Override
 	public void inputDni(String dni) {
 		goToIframe();
-		getElement(XPATH_INPUT_DNI).clear();
-		getElement(XPATH_INPUT_DNI).sendKeys(dni);
+		getElement(XP_INPUT_DNI).clear();
+		getElement(XP_INPUT_DNI).sendKeys(dni);
 		leaveIframe();
 	}	
 	
 	@Override
 	public void selectMesByVisibleText(String mes) {
 		goToIframe();
-		new Select(getElement(XPATH_SELECT_MES)).selectByVisibleText(mes);
-		new Select(getElement(XPATH_SELECT_MES)).selectByVisibleText(mes);
+		new Select(getElement(XP_SELECT_MES)).selectByVisibleText(mes);
+		new Select(getElement(XP_SELECT_MES)).selectByVisibleText(mes);
 		leaveIframe();
 	}
 	
 	@Override
 	public void selectAnyByVisibleText(String any) {
 		goToIframe();
-		new Select(getElement(XPATH_SELECT_ANY)).selectByVisibleText(any);
-		new Select(getElement(XPATH_SELECT_ANY)).selectByVisibleText(any);
+		new Select(getElement(XP_SELECT_ANY)).selectByVisibleText(any);
+		new Select(getElement(XP_SELECT_ANY)).selectByVisibleText(any);
 		leaveIframe();
 	}
 	
 	public void inputCardNumberAndTab(String numTarj) {
 		goToIframe();
-		getElement(XPATH_INPUT_NUMBER).sendKeys(numTarj, Keys.TAB);
+		getElement(XP_INPUT_NUMBER).sendKeys(numTarj, Keys.TAB);
 		leaveIframe();
 	}
 }

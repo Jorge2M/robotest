@@ -20,8 +20,8 @@ public class SecCabeceraCommon extends SecCabecera {
 	
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop = new ModalUserSesionShopDesktop(); 
 	
-	private static final String XPATH_DIV_NAV_TOOLS = "//div[@id='navTools']";
-	private static final String XPATH_NUM_ARTICLES_MANY_LOCATIONS = "//span[@data-testid[contains(.,'numItems')] or @data-testid[contains(.,'totalItems')]]";
+	private static final String XP_DIV_NAV_TOOLS = "//div[@id='navTools']";
+	private static final String XP_NUM_ARTICLES_MANY_LOCATIONS = "//span[@data-testid[contains(.,'numItems')] or @data-testid[contains(.,'totalItems')]]";
 	
 	public enum IconoCabecera implements ElementPage {
 		LUPA(
@@ -82,7 +82,7 @@ public class SecCabeceraCommon extends SecCabecera {
 
 	@Override
 	public String getXPathNumberArtIcono() {
-		return XPATH_NUM_ARTICLES_MANY_LOCATIONS;
+		return XP_NUM_ARTICLES_MANY_LOCATIONS;
 	}
 	
 	@Override
@@ -134,7 +134,7 @@ public class SecCabeceraCommon extends SecCabecera {
 	
 	public void focusAwayBolsa() {
 		//The moveElement doens't works properly for hide the Bolsa-Modal
-		click(XPATH_DIV_NAV_TOOLS).exec();
+		click(XP_DIV_NAV_TOOLS).exec();
 	}
 	
 	public void hoverIconForShowUserMenuDesktop() {

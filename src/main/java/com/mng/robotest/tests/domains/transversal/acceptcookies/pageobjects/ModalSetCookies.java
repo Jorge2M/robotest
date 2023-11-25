@@ -6,7 +6,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class ModalSetCookies extends PageBase {
 
-	private static final String XPATH_MICROFRONTEND = "//micro-frontend[@id='cookies']";
+	private static final String XP_MICROFRONTEND = "//micro-frontend[@id='cookies']";
 	
 	public enum SectionConfCookies {
 		TU_PRIVACIDAD(1),
@@ -21,26 +21,26 @@ public class ModalSetCookies extends PageBase {
 			this.position = position;
 		}
 		public String getXPathOption() {
-			return XPATH_MICROFRONTEND + "//*[@role='listitem'][" + position + "]//button";
+			return XP_MICROFRONTEND + "//*[@role='listitem'][" + position + "]//button";
 		}
 		public String getXPathHeader() {
-			return XPATH_MICROFRONTEND + "//h2";
+			return XP_MICROFRONTEND + "//h2";
 		}
 	}
 	
-	private static final String XPATH_SAVE_CONF_BUTTON = XPATH_MICROFRONTEND + "/div/div/div/button[1]";
-	private static final String XPATH_CHECKBOX_INACTIVE = XPATH_MICROFRONTEND + "//input[@type='checkbox']";
+	private static final String XP_SAVE_CONF_BUTTON = XP_MICROFRONTEND + "/div/div/div/button[1]";
+	private static final String XP_CHECKBOX_INACTIVE = XP_MICROFRONTEND + "//input[@type='checkbox']";
 			
 	public boolean isVisible(int seconds) {
-		return state(Visible, XPATH_SAVE_CONF_BUTTON).wait(seconds).check();
+		return state(Visible, XP_SAVE_CONF_BUTTON).wait(seconds).check();
 	}
 	
 	public boolean isInvisible(int seconds) {
-		return state(Invisible, XPATH_SAVE_CONF_BUTTON).wait(seconds).check();
+		return state(Invisible, XP_SAVE_CONF_BUTTON).wait(seconds).check();
 	}
 	
 	public void saveConfiguration() {
-		click(XPATH_SAVE_CONF_BUTTON).exec();
+		click(XP_SAVE_CONF_BUTTON).exec();
 	}
 	
 	public void clickSection(SectionConfCookies section) {
@@ -73,10 +73,10 @@ public class ModalSetCookies extends PageBase {
 	}
 	
 	public boolean isSwitchEnabled() {
-		return getElementVisible(XPATH_CHECKBOX_INACTIVE).isEnabled();
+		return getElementVisible(XP_CHECKBOX_INACTIVE).isEnabled();
 	}
 	
 	public void clickSwitchCookies() {
-		click(getElementVisible(XPATH_CHECKBOX_INACTIVE)).exec();
+		click(getElementVisible(XP_CHECKBOX_INACTIVE)).exec();
 	}
 }

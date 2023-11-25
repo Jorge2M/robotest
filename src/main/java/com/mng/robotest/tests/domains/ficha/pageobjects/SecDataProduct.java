@@ -25,37 +25,37 @@ public class SecDataProduct extends PageBase {
 
 	private final SSecSelTallasFicha secSelTallas = SSecSelTallasFicha.make(channel, app);
 
-	private static final String XPATH_NOMBRE_ARTICULO_DESKTOP = "//h1[@itemprop='name']";
+	private static final String XP_NOMBRE_ARTICULO_DESKTOP = "//h1[@itemprop='name']";
 
 	//Existe un Test A/B que hace que el nombre del artículo salga debajo del botón de "Añadir a la bolsa" o en la cabecera, por eso el or.
-	private static final String XPATH_NOMBRE_ARTICULO_MOBIL = "//*[@class[contains(.,'product-info-name')] or @class='headerMobile__text']";
+	private static final String XP_NOMBRE_ARTICULO_MOBIL = "//*[@class[contains(.,'product-info-name')] or @class='headerMobile__text']";
 
 	public SSecSelTallasFicha getSecSelTallas() {
 		return secSelTallas;
 	}
 
 	//xpaths asociados a los links prev/next
-	private static final String XPATH_PRODUCT_NAV_BLOCK = "//div[@class='nav-product-container' or @class='nav-product-navigation']";
-	private static final String XPATH_PREV_LINK = XPATH_PRODUCT_NAV_BLOCK + "//a[@id='prev' or text()[contains(.,'Anterior')]]";
-	private static final String XPATH_NEXT_LINK = XPATH_PRODUCT_NAV_BLOCK + "//a[@id='next' or text()[contains(.,'Siguiente')]]";
+	private static final String XP_PRODUCT_NAV_BLOCK = "//div[@class='nav-product-container' or @class='nav-product-navigation']";
+	private static final String XP_PREV_LINK = XP_PRODUCT_NAV_BLOCK + "//a[@id='prev' or text()[contains(.,'Anterior')]]";
+	private static final String XP_NEXT_LINK = XP_PRODUCT_NAV_BLOCK + "//a[@id='next' or text()[contains(.,'Siguiente')]]";
 	private String getXPathLinkProductNav(ProductNav productNav) {
 		switch (productNav) {
 			case PREV:
-				return XPATH_PREV_LINK;
+				return XP_PREV_LINK;
 			case NEXT:
 			default:
-				return XPATH_NEXT_LINK;
+				return XP_NEXT_LINK;
 		}
 	}
 
 	//xpaths asociados a los colores
-	private static final String XPATH_COLOR = "//*[@class[contains(.,'color-container')]]";
+	private static final String XP_COLOR = "//*[@class[contains(.,'color-container')]]";
 	private static final String CLASS_COLOR_NO_DISP = "@class[contains(.,'--no-stock')] or @class[contains(.,'--cross-out')]";
 	public enum ColorType implements ElementPage {
 		SELECTED("//div[@class[contains(.,'color-container--selected')]]"),
-		LAST(XPATH_COLOR + "[last()]"),
-		AVAILABLE(XPATH_COLOR + "/img[not(" + CLASS_COLOR_NO_DISP + ")]/.."),
-		UNAVAILABLE(XPATH_COLOR + "/img[" + CLASS_COLOR_NO_DISP + "]/..");
+		LAST(XP_COLOR + "[last()]"),
+		AVAILABLE(XP_COLOR + "/img[not(" + CLASS_COLOR_NO_DISP + ")]/.."),
+		UNAVAILABLE(XP_COLOR + "/img[" + CLASS_COLOR_NO_DISP + "]/..");
 
 		String xpath;
 		By by;
@@ -76,19 +76,19 @@ public class SecDataProduct extends PageBase {
 		}
 	}
 
-	private static final String XPATH_NOMBRE_COLOR_SELECTED_DESKTOP = "//*[@class='colors-info-name']";
+	private static final String XP_NOMBRE_COLOR_SELECTED_DESKTOP = "//*[@class='colors-info-name']";
 
 	//xpaths asociados al tema tallas
-	private static final String XPATH_CAPA_AVISAME = "//*[@id='bocataAvisame']";
-	private static final String XPATH_GUIA_DE_TALLAS_LINK = "//*[@id='productFormSizesGuide']";
+	private static final String XP_CAPA_AVISAME = "//*[@id='bocataAvisame']";
+	private static final String XP_GUIA_DE_TALLAS_LINK = "//*[@id='productFormSizesGuide']";
 
 	//xpaths asociados a los precios
-	private static final String XPATH_PRECIO_FINAL = "//span[@data-testid='currentPrice']";
-	private static final String XPATH_PRECIO_FINAL_CROATIA = XPATH_PRECIO_FINAL + "/span/span";
-	private static final String XPATH_PRECIO_REBAJADO = "//span[@data-testid[contains(.,'crossedOutPrice')]]";
+	private static final String XP_PRECIO_FINAL = "//span[@data-testid='currentPrice']";
+	private static final String XP_PRECIO_FINAL_CROATIA = XP_PRECIO_FINAL + "/span/span";
+	private static final String XP_PRECIO_REBAJADO = "//span[@data-testid[contains(.,'crossedOutPrice')]]";
 
 	//xpaths asociados a los colores de la prenda
-	private static final String XPATH_COLORES_PRENDA_SIN_IDENTIFICAR = "//*[@class[contains(.,'color-container')]]";
+	private static final String XP_COLORES_PRENDA_SIN_IDENTIFICAR = "//*[@class[contains(.,'color-container')]]";
 
 	private String getXPathPastillaColorClick(String codigoColor) {
 		return ("//*[@class[contains(.,'color-container')] and @id='" + codigoColor + "']/img");
@@ -101,15 +101,15 @@ public class SecDataProduct extends PageBase {
 
 	private String getXPathNombreArt() {
 		if (channel.isDevice()) {
-			return XPATH_NOMBRE_ARTICULO_MOBIL;
+			return XP_NOMBRE_ARTICULO_MOBIL;
 		}
-		return XPATH_NOMBRE_ARTICULO_DESKTOP;
+		return XP_NOMBRE_ARTICULO_DESKTOP;
 	}
 	private String getXPathPrecioFinal() {
 		if (CROATIA.isEquals(dataTest.getPais())) {
-			return XPATH_PRECIO_FINAL_CROATIA;
+			return XP_PRECIO_FINAL_CROATIA;
 		}
-		return XPATH_PRECIO_FINAL;
+		return XP_PRECIO_FINAL;
 	}
 
 	public ArticuloScreen getArticuloObject() {
@@ -188,8 +188,8 @@ public class SecDataProduct extends PageBase {
 	public String getNombreColorSelected() {
 		switch (channel) {
 			case desktop:
-				if (state(Present, XPATH_NOMBRE_COLOR_SELECTED_DESKTOP).check()) {
-					return getElement(XPATH_NOMBRE_COLOR_SELECTED_DESKTOP).getText();
+				if (state(Present, XP_NOMBRE_COLOR_SELECTED_DESKTOP).check()) {
+					return getElement(XP_NOMBRE_COLOR_SELECTED_DESKTOP).getText();
 				}
 				return Constantes.COLOR_DESCONOCIDO;
 			case mobile:
@@ -199,7 +199,7 @@ public class SecDataProduct extends PageBase {
 	}
 
 	public boolean checkPotatoe () {
-		return state(Present, XPATH_NOMBRE_COLOR_SELECTED_DESKTOP).check();
+		return state(Present, XP_NOMBRE_COLOR_SELECTED_DESKTOP).check();
 	}
 
 	public void selectColorWaitingForAvailability(String codigoColor) {
@@ -225,8 +225,8 @@ public class SecDataProduct extends PageBase {
 	 * Extrae (si existe) el precio rebajado de la página de ficha de producto. Si no existe devuelve ""
 	 */
 	public String getPrecioTachadoFromFichaArt() {
-		if (state(Present, XPATH_PRECIO_REBAJADO).check()) {
-			String precioRebajado = getElementVisible(XPATH_PRECIO_REBAJADO).getText();
+		if (state(Present, XP_PRECIO_REBAJADO).check()) {
+			String precioRebajado = getElementVisible(XP_PRECIO_REBAJADO).getText();
 			return ImporteScreen.normalizeImportFromScreen(precioRebajado);
 		}
 		return "";
@@ -234,15 +234,15 @@ public class SecDataProduct extends PageBase {
 
 	//Funciones referentes a las tallas (en algunas se actúa a modo de Wrapper)
 	public boolean isVisibleCapaAvisame() {
-		return state(Visible, XPATH_CAPA_AVISAME).check();
+		return state(Visible, XP_CAPA_AVISAME).check();
 	}
 
 	public void selectGuiaDeTallasLink() {
-		click(XPATH_GUIA_DE_TALLAS_LINK).exec();
+		click(XP_GUIA_DE_TALLAS_LINK).exec();
 	}
 
 	public boolean selectGuiaDeTallasIfVisible() {
-		boolean isVisible = state(Visible, XPATH_GUIA_DE_TALLAS_LINK).check();
+		boolean isVisible = state(Visible, XP_GUIA_DE_TALLAS_LINK).check();
 		if (isVisible) {
 			selectGuiaDeTallasLink();
 		}
@@ -266,7 +266,7 @@ public class SecDataProduct extends PageBase {
 
 	public List<String> getColorsGarment() {
 		List<String> colors = new ArrayList<>();
-		for (WebElement element : getElements(XPATH_COLORES_PRENDA_SIN_IDENTIFICAR)) {
+		for (WebElement element : getElements(XP_COLORES_PRENDA_SIN_IDENTIFICAR)) {
 			colors.add(element.getAttribute("id"));
 		}
 		return colors;

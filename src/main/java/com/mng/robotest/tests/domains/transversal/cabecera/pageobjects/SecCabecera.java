@@ -18,13 +18,13 @@ public abstract class SecCabecera extends PageBase {
 	
 	protected final SecSearch secSearch = SecSearch.getNew(channel);
 
-	private static final String XPATH_HEADER = "//header";
-	private static final String XPATH_LINK_LOGO_MANGO = 
+	private static final String XP_HEADER = "//header";
+	private static final String XP_LINK_LOGO_MANGO = 
 			"//a[@class='logo-link' or " + 
 			"@class[contains(.,'logo_')] or" + 
 			"@title[contains(.,'MANGO Shop Online')]]";
 	
-	private static final String XPATH_HAMBURGUER_DEVICE_ICON = "//*[@data-testid='menu.burger']";
+	private static final String XP_HAMBURGUER_DEVICE_ICON = "//*[@data-testid='menu.burger']";
 
 	abstract String getXPathNumberArtIcono();
 	public abstract boolean isInStateIconoBolsa(State state, int seconds);
@@ -37,7 +37,7 @@ public abstract class SecCabecera extends PageBase {
 	}
 	
 	public void bring(BringTo bringTo) {
-		bringElement(getElement(XPATH_HEADER), bringTo);
+		bringElement(getElement(XP_HEADER), bringTo);
 	}
 	
 	public static void buscarTexto(String referencia, Channel channel) {
@@ -50,24 +50,24 @@ public abstract class SecCabecera extends PageBase {
 	
 	public boolean clickLogoMango() {
 		if (isPresentLogoMango(2)) {
-			click(XPATH_LINK_LOGO_MANGO).exec();
+			click(XP_LINK_LOGO_MANGO).exec();
 			return true;
 		}
 		return false;
 	}
 	
 	public boolean isPresentLogoMango(int seconds) {
-		return state(Present, XPATH_LINK_LOGO_MANGO).wait(seconds).check();
+		return state(Present, XP_LINK_LOGO_MANGO).wait(seconds).check();
 	}
 
 	public void hoverLogoMango() {
-		if (state(Present, XPATH_LINK_LOGO_MANGO).check()) {
-			moveToElement(XPATH_LINK_LOGO_MANGO);
+		if (state(Present, XP_LINK_LOGO_MANGO).check()) {
+			moveToElement(XP_LINK_LOGO_MANGO);
 		}
 	}
 
 	public boolean validaLogoMangoGoesToIdioma(IdiomaPais idioma) {
-		String xpathLogoIdiom = XPATH_LINK_LOGO_MANGO + "[@href[contains(.,'/" + idioma.getAcceso() + "')]]";
+		String xpathLogoIdiom = XP_LINK_LOGO_MANGO + "[@href[contains(.,'/" + idioma.getAcceso() + "')]]";
 		return state(Present, xpathLogoIdiom).check();
 	}
 
@@ -97,16 +97,16 @@ public abstract class SecCabecera extends PageBase {
 	//-- Específic functions for movil (Shop & Outlet)
 	
 
-	private static final String XPATH_SMART_BANNER = XPATH_HEADER + "/div[@id='smartbanner']";
-	private static final String XPATH_LINK_CLOSE_SMART_BANNER = XPATH_SMART_BANNER + "//a[@class='sb-close']";	
+	private static final String XP_SMART_BANNER = XP_HEADER + "/div[@id='smartbanner']";
+	private static final String XP_LINK_CLOSE_SMART_BANNER = XP_SMART_BANNER + "//a[@class='sb-close']";	
 
 	
 	/**
 	 * Si existe, cierra el banner de aviso en móvil (p.e. el que sale proponiendo la descarga de la App)
 	 */
 	public void closeSmartBannerIfExistsMobil() {
-		if (state(Visible, XPATH_LINK_CLOSE_SMART_BANNER).check()) {
-			click(XPATH_LINK_CLOSE_SMART_BANNER).exec();
+		if (state(Visible, XP_LINK_CLOSE_SMART_BANNER).check()) {
+			click(XP_LINK_CLOSE_SMART_BANNER).exec();
 		}
 	}
 
@@ -122,8 +122,8 @@ public abstract class SecCabecera extends PageBase {
 		var typeClick = TypeClick.webdriver;
 		while ((menuVisible!=toOpenMenus) && i<5) {
 			try {
-				state(Visible, XPATH_HAMBURGUER_DEVICE_ICON).wait(5).check();
-				click(XPATH_HAMBURGUER_DEVICE_ICON).type(typeClick).exec();
+				state(Visible, XP_HAMBURGUER_DEVICE_ICON).wait(5).check();
+				click(XP_HAMBURGUER_DEVICE_ICON).type(typeClick).exec();
 				typeClick = TypeClick.next(typeClick);
 				menuVisible = secMenus.isMenuInState(toOpenMenus, 2);
 			}

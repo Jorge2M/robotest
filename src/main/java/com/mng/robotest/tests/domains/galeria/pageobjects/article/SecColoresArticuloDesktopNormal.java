@@ -11,15 +11,15 @@ import com.mng.robotest.testslegacy.data.Constantes;
 
 public class SecColoresArticuloDesktopNormal extends SecColoresArticuloDesktop {
 
-	private static final String XPATH_ARTICULO = PageGaleriaDesktopNormal.XPATH_ARTICULO;
-	private static final String XPATH_ARTICULO_ANCESTOR = XPATH_ARTICULO.replaceFirst("//", "ancestor::"); 
-	private static final String XPATH_COLORS_ARTICLE = "//div[@class[contains(.,'product-colors')]]";
-	private static final String XPATH_COLOR_ICON = XPATH_COLORS_ARTICLE + "//img[@loading='lazy']";
+	private static final String XP_ARTICULO = PageGaleriaDesktopNormal.XP_ARTICULO;
+	private static final String XP_ARTICULO_ANCESTOR = XP_ARTICULO.replaceFirst("//", "ancestor::"); 
+	private static final String XP_COLORS_ARTICLE = "//div[@class[contains(.,'product-colors')]]";
+	private static final String XP_COLOR_ICON = XP_COLORS_ARTICLE + "//img[@loading='lazy']";
 	
 	private String getXPathArticuloConColores() {
 		return (
-			XPATH_COLORS_ARTICLE + "/" + 
-			XPATH_ARTICULO_ANCESTOR);
+			XP_COLORS_ARTICLE + "/" + 
+			XP_ARTICULO_ANCESTOR);
 	}
 	
 	private String getXPathArticuloConVariedadColores(int numArticulo) {
@@ -28,13 +28,13 @@ public class SecColoresArticuloDesktopNormal extends SecColoresArticuloDesktop {
 	
 	private String getXPathImgColorRelativeArticle(boolean selected) {
 		if (!selected) {
-			return XPATH_COLOR_ICON;
+			return XP_COLOR_ICON;
 		}
-		return "//button[@aria-label[contains(.,'colorSelected')]]" + XPATH_COLOR_ICON;
+		return "//button[@aria-label[contains(.,'colorSelected')]]" + XP_COLOR_ICON;
 	}
 
 	private String getXPathImgCodigoColor(String codigoColor) {
-		return XPATH_COLOR_ICON + "//self::*[@src[contains(.,'_" + codigoColor + "_')]]";
+		return XP_COLOR_ICON + "//self::*[@src[contains(.,'_" + codigoColor + "_')]]";
 	}
 	
 	@Override

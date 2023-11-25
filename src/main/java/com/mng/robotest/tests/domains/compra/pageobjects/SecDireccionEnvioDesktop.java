@@ -6,23 +6,23 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class SecDireccionEnvioDesktop extends PageBase {
 
-	private static final String XPATH_SECTION = "//micro-frontend[@id='checkoutDeliveryAddressDesktop']";
-	private static final String XPATH_EDIT_DIRECCION_BUTTON = XPATH_SECTION + "//button";
-	private static final String XPATH_NOMBRE_ENVIO = XPATH_SECTION + "//div[@class[contains(.,'tpavy')]]"; 
-	private static final String XPATH_DIRECCION_ENVIO = "//*[@data-testid='checkout.delivery.address']";
+	private static final String XP_SECTION = "//micro-frontend[@id='checkoutDeliveryAddressDesktop']";
+	private static final String XP_EDIT_DIRECCION_BUTTON = XP_SECTION + "//button";
+	private static final String XP_NOMBRE_ENVIO = XP_SECTION + "//div[@class[contains(.,'tpavy')]]"; 
+	private static final String XP_DIRECCION_ENVIO = "//*[@data-testid='checkout.delivery.address']";
 	
 	public void clickEditDireccion() {
 		waitLoadPage(); //For avoid StaleElementReferenceException
-		click(XPATH_EDIT_DIRECCION_BUTTON).waitLink(2).exec();
+		click(XP_EDIT_DIRECCION_BUTTON).waitLink(2).exec();
 	}
 
 	public String getTextNombreEnvio() {
-		return getElement(XPATH_NOMBRE_ENVIO).getText();
+		return getElement(XP_NOMBRE_ENVIO).getText();
 	}
 	
 	public String getTextDireccionEnvio() {
-		if (state(Present, XPATH_DIRECCION_ENVIO).check()) {
-			return getElement(XPATH_DIRECCION_ENVIO).getText();
+		if (state(Present, XP_DIRECCION_ENVIO).check()) {
+			return getElement(XP_DIRECCION_ENVIO).getText();
 		}
 		return "";
 	}

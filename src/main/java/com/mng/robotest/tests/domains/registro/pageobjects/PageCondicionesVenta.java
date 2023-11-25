@@ -6,10 +6,10 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageCondicionesVenta extends PageBase {
 
-	private static final String XPATH_MICRO = "//micro-frontend[@id='legalConditions']";
+	private static final String XP_MICRO = "//micro-frontend[@id='legalConditions']";
 	
 	public boolean isPageUntil(int seconds) {
-		return state(Present, XPATH_MICRO).wait(seconds).check();
+		return state(Present, XP_MICRO).wait(seconds).check();
 	}
 
 }

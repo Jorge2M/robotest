@@ -6,14 +6,14 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageAlertaVOTF extends PageBase {
 	
-	private static final String XPATH_CAPA_ALERTA = "//div[@class='alert']";
-	private static final String XPATH_BUTTON_CONTINUAR = "//div[@class='alert']//span[@class='button']";
+	private static final String XP_CAPA_ALERTA = "//div[@class='alert']";
+	private static final String XP_BUTTON_CONTINUAR = "//div[@class='alert']//span[@class='button']";
 	
 	public boolean isPage() {
-		return state(Present, XPATH_CAPA_ALERTA).check();
+		return state(Present, XP_CAPA_ALERTA).check();
 	}
 	 
 	public void clickButtonContinuar() {
-		click(XPATH_BUTTON_CONTINUAR).exec();
+		click(XP_BUTTON_CONTINUAR).exec();
 	}
 }

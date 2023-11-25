@@ -32,39 +32,39 @@ public class LineasArticuloBolsa extends PageBase {
 		}
 	}
 	
-	private static final String XPATH_ITEM = "//li[@data-testid='bag.item']";
+	private static final String XP_ITEM = "//li[@data-testid='bag.item']";
 	
-	private static final String XPATH_LINK_RELATIVE_ARTICLE = ".//img";
-	private static final String XPATH_NOMBRE_RELATIVE_ARTICLE = ".//*[@data-testid='bag.item.detail.button']";
-	private static final String XPATH_CANTIDAD_RELATIVE_ARTICLE = ".//*[@data-testid='bag.item.quantity']";
-	
-	//TODO pedir @data-testid
-	private static final String XPATH_TALLA_ALF_RELATIVE_ARTICLE = XPATH_CANTIDAD_RELATIVE_ARTICLE + "/../following-sibling::p";
+	private static final String XP_LINK_RELATIVE_ARTICLE = ".//img";
+	private static final String XP_NOMBRE_RELATIVE_ARTICLE = ".//*[@data-testid='bag.item.detail.button']";
+	private static final String XP_CANTIDAD_RELATIVE_ARTICLE = ".//*[@data-testid='bag.item.quantity']";
 	
 	//TODO pedir @data-testid
-	private static final String XPATH_COLOR_RELATIVE_ARTICLE = XPATH_NOMBRE_RELATIVE_ARTICLE + "/..//p[3]";
-	private static final String XPATH_PRECIO_RELATIVE_ARTICLE = ".//*[@data-testid[contains(.,'currentPrice')]]";
+	private static final String XP_TALLA_ALF_RELATIVE_ARTICLE = XP_CANTIDAD_RELATIVE_ARTICLE + "/../following-sibling::p";
+	
+	//TODO pedir @data-testid
+	private static final String XP_COLOR_RELATIVE_ARTICLE = XP_NOMBRE_RELATIVE_ARTICLE + "/..//p[3]";
+	private static final String XP_PRECIO_RELATIVE_ARTICLE = ".//*[@data-testid[contains(.,'currentPrice')]]";
 	private static final String TAG_REF = "[TAGREF]";
-	private static final String XPATH_LINK_ITEM_REF = XPATH_ITEM + "//img[@src[contains(.,'" + TAG_REF + "')]]";
-	private static final String XPATH_ITEM_REF = XPATH_LINK_ITEM_REF + "/ancestor::li";
+	private static final String XP_LINK_ITEM_REF = XP_ITEM + "//img[@src[contains(.,'" + TAG_REF + "')]]";
+	private static final String XP_ITEM_REF = XP_LINK_ITEM_REF + "/ancestor::li";
 	
 	private String getXPathLinkBorrarArt(String refArticulo) {
-		String xpathLinkBorrarArtRef = XPATH_ITEM_REF + "//*[@data-testid[contains(.,'removeItem.button')]]";
+		String xpathLinkBorrarArtRef = XP_ITEM_REF + "//*[@data-testid[contains(.,'removeItem.button')]]";
 		return xpathLinkBorrarArtRef.replace(TAG_REF, refArticulo);
 	}
 	
 	private String getXPathDataRelativeArticle(DataArtBolsa dataArt) {
 		switch (dataArt) {
 		case NOMBRE:
-			return XPATH_NOMBRE_RELATIVE_ARTICLE;
+			return XP_NOMBRE_RELATIVE_ARTICLE;
 		case COLOR:
-			return XPATH_COLOR_RELATIVE_ARTICLE;
+			return XP_COLOR_RELATIVE_ARTICLE;
 		case TALLA:
-			return XPATH_TALLA_ALF_RELATIVE_ARTICLE;
+			return XP_TALLA_ALF_RELATIVE_ARTICLE;
 		case CANTIDAD:
-			return XPATH_CANTIDAD_RELATIVE_ARTICLE;
+			return XP_CANTIDAD_RELATIVE_ARTICLE;
 		case PRECIO:
-			return XPATH_PRECIO_RELATIVE_ARTICLE;
+			return XP_PRECIO_RELATIVE_ARTICLE;
 		default:
 			return "";
 		}
@@ -77,7 +77,7 @@ public class LineasArticuloBolsa extends PageBase {
 	
 	public void clickArticle(int position) {
 		WebElement article = getElement(getXPathItem(position));
-		click(article).by(By.xpath(XPATH_LINK_RELATIVE_ARTICLE)).exec();
+		click(article).by(By.xpath(XP_LINK_RELATIVE_ARTICLE)).exec();
 	}
 	
 	public void clickRemoveArticleIfExists() {
@@ -93,7 +93,7 @@ public class LineasArticuloBolsa extends PageBase {
 	}
 	
 	private String getXPathItem(int position) {
-		return "(" + XPATH_ITEM + ")[" + position + "]";
+		return "(" + XP_ITEM + ")[" + position + "]";
 	}
 	
 	private String getXPathLinkBorrarArt() {
@@ -101,16 +101,16 @@ public class LineasArticuloBolsa extends PageBase {
 	}
 
 	private String getXPathLineaArticleByPosicion(int posicion) {
-		return ("(" + XPATH_ITEM + ")[" + posicion + "]");
+		return ("(" + XP_ITEM + ")[" + posicion + "]");
 	}
 	
 	private static final String TAG_REFERENCE = "@Reference";
 	private String getXPathLineaArticleByReference(String reference) {
-		return XPATH_ITEM_REF.replace(TAG_REFERENCE, reference);
+		return XP_ITEM_REF.replace(TAG_REFERENCE, reference);
 	}
 	
 	public int getNumLinesArticles() {
-		return getElements(XPATH_ITEM).size();
+		return getElements(XP_ITEM).size();
 	}
 	
 	public WebElement getLineaArticuloByPosicion(int posicion) {
@@ -161,13 +161,13 @@ public class LineasArticuloBolsa extends PageBase {
 	}
 	
 	private WebElement getLineaLinkArticle(WebElement lineaArticleWeb) {
-		state(Visible, lineaArticleWeb).by(By.xpath(XPATH_LINK_RELATIVE_ARTICLE)).wait(2).check();
+		state(Visible, lineaArticleWeb).by(By.xpath(XP_LINK_RELATIVE_ARTICLE)).wait(2).check();
 		try {
-			return lineaArticleWeb.findElement(By.xpath(XPATH_LINK_RELATIVE_ARTICLE));
+			return lineaArticleWeb.findElement(By.xpath(XP_LINK_RELATIVE_ARTICLE));
 		} 
 		catch (Exception e) {
 			waitMillis(2000);
-			return lineaArticleWeb.findElement(By.xpath(XPATH_LINK_RELATIVE_ARTICLE));
+			return lineaArticleWeb.findElement(By.xpath(XP_LINK_RELATIVE_ARTICLE));
 		}
 	}
 

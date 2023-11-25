@@ -7,10 +7,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public abstract class PageMercpagoDatosTrj extends PageBase {
 	
-	static final String XPATH_INPUT_NUM_TARJ = "//input[@name='cardNumber']";
-	static final String XPATH_INPUT_FEC_CADUCIDAD = "//input[@name='cardExpiration']";
-	static final String XPATH_INPUT_CVC = "//input[@id='securityCode']";
-	static final String XPATH_BOTON_PAGAR = "//input[@type='submit']";
+	static final String XP_INPUT_NUM_TARJ = "//input[@name='cardNumber']";
+	static final String XP_INPUT_FEC_CADUCIDAD = "//input[@name='cardExpiration']";
+	static final String XP_INPUT_CVC = "//input[@id='securityCode']";
+	static final String XP_BOTON_PAGAR = "//input[@type='submit']";
 	
 	public enum TypePant {INPUT_DATA_TRJ_NEW, INPUT_CVC_TRJ_SAVED} 
 	
@@ -29,11 +29,11 @@ public abstract class PageMercpagoDatosTrj extends PageBase {
 	}
 	
 	public void sendNumTarj(String numTarjeta) {
-		getElement(XPATH_INPUT_NUM_TARJ).sendKeys(numTarjeta);
+		getElement(XP_INPUT_NUM_TARJ).sendKeys(numTarjeta);
 	}
 	
 	public TypePant getTypeInput() {
-		if (state(Visible, XPATH_INPUT_NUM_TARJ).check()) {
+		if (state(Visible, XP_INPUT_NUM_TARJ).check()) {
 			return TypePant.INPUT_DATA_TRJ_NEW;
 		}
 		return TypePant.INPUT_CVC_TRJ_SAVED;

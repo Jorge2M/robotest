@@ -6,14 +6,14 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageMercpago1rst extends PageBase {
 
-	private static final String XPATH_INPUT_NUM_TARJETA = "//input[@id='cardNumber']";
-	private static final String XPATH_LINK_REGISTRO = "//a[@href[contains(.,'changeGuestMail')]]";
+	private static final String XP_INPUT_NUM_TARJETA = "//input[@id='cardNumber']";
+	private static final String XP_LINK_REGISTRO = "//a[@href[contains(.,'changeGuestMail')]]";
 
 	public boolean isPageUntil(int seconds) {
-		return state(Visible, XPATH_INPUT_NUM_TARJETA).wait(seconds).check();
+		return state(Visible, XP_INPUT_NUM_TARJETA).wait(seconds).check();
 	}
 
 	public void clickLinkRegistro() {
-		click(XPATH_LINK_REGISTRO).exec();
+		click(XP_LINK_REGISTRO).exec();
 	}
 }

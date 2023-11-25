@@ -8,11 +8,11 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	
 	private final SectionPrendas sectionPrendas = new SectionPrendas();
 	
-	private static final String XPATH_ID_TICKET = "//h2[@class[contains(.,'text-title-xl')]]/span";
-	private static final String XPATH_IMPORTE = "//*[@data-testid='myPurchases.price']";
+	private static final String XP_ID_TICKET = "//h2[@class[contains(.,'text-title-xl')]]/span";
+	private static final String XP_IMPORTE = "//*[@data-testid='myPurchases.price']";
 	
 	//TODO necesitaría un data-testid
-	private static final String XPATH_DIRECCION_ENVIO_ONLINE = XPATH_ID_TICKET + "/../..//h2[@class[contains(.,'text-title-l')]]/..";
+	private static final String XP_DIRECCION_ENVIO_ONLINE = XP_ID_TICKET + "/../..//h2[@class[contains(.,'text-title-l')]]/..";
 	
 	@Override
 	public boolean isPage(int seconds) {
@@ -46,13 +46,13 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	}
 	@Override
 	public String getImporte() {
-		state(Visible, XPATH_IMPORTE).wait(2).check();
-		String importe = getElement(XPATH_IMPORTE).getText();
+		state(Visible, XP_IMPORTE).wait(2).check();
+		String importe = getElement(XP_IMPORTE).getText();
 		return importe.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
 	}
 	@Override
 	public String getDireccionEnvioOnline() {
-		return getElement(XPATH_DIRECCION_ENVIO_ONLINE).getText();
+		return getElement(XP_DIRECCION_ENVIO_ONLINE).getText();
 	}
 	@Override
 	public String getReferenciaArticulo(int posArticulo) {
@@ -72,6 +72,6 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	}
 	
 	private String getXPathTicket() {
-		return XPATH_ID_TICKET;
+		return XP_ID_TICKET;
 	}
 }

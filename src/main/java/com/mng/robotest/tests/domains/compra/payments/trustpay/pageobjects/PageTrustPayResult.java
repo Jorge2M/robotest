@@ -8,13 +8,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageTrustPayResult extends PageBase {
 	
-	private static final String XPATH_HEADER = "//h2[@id='stageheader']";
-	private static final String XPATH_BUTTON_CONTINUE = "//input[@type='submit' and @value='continue']";
+	private static final String XP_HEADER = "//h2[@id='stageheader']";
+	private static final String XP_BUTTON_CONTINUE = "//input[@type='submit' and @value='continue']";
 	
 	public String getHeaderText() {
-		WebElement titleNws = getElement(XPATH_HEADER);
+		WebElement titleNws = getElement(XP_HEADER);
 		if (titleNws!=null) {
-			return getElement(XPATH_HEADER).getText();
+			return getElement(XP_HEADER).getText();
 		}
 		return "";
 	}
@@ -24,10 +24,10 @@ public class PageTrustPayResult extends PageBase {
 	}
 	
 	public boolean isPresentButtonContinue() {
-		return state(Present, XPATH_BUTTON_CONTINUE).check();
+		return state(Present, XP_BUTTON_CONTINUE).check();
 	}
 
 	public void clickButtonContinue() {
-		click(XPATH_BUTTON_CONTINUE).exec();
+		click(XP_BUTTON_CONTINUE).exec();
 	}
 }

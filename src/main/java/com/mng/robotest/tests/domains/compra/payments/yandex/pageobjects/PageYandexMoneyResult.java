@@ -9,15 +9,15 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageYandexMoneyResult extends PageBase {
 	
 	public static final String MSG_TRANSFER_OK = "Обработка завершена. Запрос выполнен успешно. Зачисление перевода проведено успешно";
-	public static final String XPATH_DIV_RESULT_MSG = "//div[@class='docbook-para']";
+	public static final String XP_DIV_RESULT_MSG = "//div[@class='docbook-para']";
 	
 	public boolean isPage() {
-		return state(Visible, XPATH_DIV_RESULT_MSG).check();
+		return state(Visible, XP_DIV_RESULT_MSG).check();
 	}
 		
 	public boolean isVisibleMsgTransferOk() {
-		WebElement divResult = getElement(XPATH_DIV_RESULT_MSG);
-		return (state(Visible, XPATH_DIV_RESULT_MSG).check() &&
+		WebElement divResult = getElement(XP_DIV_RESULT_MSG);
+		return (state(Visible, XP_DIV_RESULT_MSG).check() &&
 				divResult.getText().contains(MSG_TRANSFER_OK));
 	}
 }

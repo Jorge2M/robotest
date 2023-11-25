@@ -9,11 +9,11 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageMangoLikesYou extends PageBase {
 
-	private static final String XPATH_WRAPP_PAGE = "//micro-frontend[@id='loyaltySpace']";
-	private static final String XPATH_POINTS = XPATH_WRAPP_PAGE + "//div[@id='space-header']/div[3]";
+	private static final String XP_WRAPP_PAGE = "//micro-frontend[@id='loyaltySpace']";
+	private static final String XP_POINTS = XP_WRAPP_PAGE + "//div[@id='space-header']/div[3]";
 	
 	//TODO solicitar data-testid en lugar de React
-	private static final String XPATH_LINK_AYUDA = "//div[text()='Ayuda']";
+	private static final String XP_LINK_AYUDA = "//div[text()='Ayuda']";
 	
 	//TODO solicitar data-testid en lugar de React (Kiritaki)
 	public enum TabLink {
@@ -51,12 +51,12 @@ public class PageMangoLikesYou extends PageBase {
 	}
 	
 	public boolean checkIsPageUntil(int seconds) {
-		return state(Visible, XPATH_WRAPP_PAGE).wait(seconds).check();
+		return state(Visible, XP_WRAPP_PAGE).wait(seconds).check();
 	}
 	
 	public int getPoints() {
-		if (state(Present, XPATH_POINTS).wait(2).check()) {
-			String textPoints = getElement(XPATH_POINTS).getText();
+		if (state(Present, XP_POINTS).wait(2).check()) {
+			String textPoints = getElement(XP_POINTS).getText();
 			Pattern pattern = Pattern.compile(" [0-9,.]+ ");
 			Matcher matcher = pattern.matcher(textPoints);
 			if (matcher.find()) {
@@ -79,7 +79,7 @@ public class PageMangoLikesYou extends PageBase {
 	}
 	
 	public void clickAyuda() {
-		click(XPATH_LINK_AYUDA).exec();
+		click(XP_LINK_AYUDA).exec();
 	}
 	
 	public boolean isPageAyudaMangoLikesYouVisible(int seconds) {

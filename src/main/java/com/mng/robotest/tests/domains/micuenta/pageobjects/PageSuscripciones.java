@@ -9,9 +9,9 @@ public class PageSuscripciones extends PageBase {
 
 	public enum NewsLetter { she, he, kids, teen }
 	
-	private static final String XPATH_BUTTON_GUARDAR_CAMBIOS = "//input[@type='submit' and @value[contains(.,'Guardar')]]";
-	private static final String XPATH_PAGE_RES_OK = "//*[text()[contains(.,'Preferencias actualizadas!')]]";
-	private static final String XPATH_CHECKBOX_NEWSLETTER = "//form/div[@class='checkboxContent'][1]//div[@class='multipleCheckbox']";
+	private static final String XP_BUTTON_GUARDAR_CAMBIOS = "//input[@type='submit' and @value[contains(.,'Guardar')]]";
+	private static final String XP_PAGE_RES_OK = "//*[text()[contains(.,'Preferencias actualizadas!')]]";
+	private static final String XP_CHECKBOX_NEWSLETTER = "//form/div[@class='checkboxContent'][1]//div[@class='multipleCheckbox']";
 	
 	private String getXPathNewsletterDesmarcadas() {
 		return getXPathNewsletterDesmarcadas("");
@@ -22,11 +22,11 @@ public class PageSuscripciones extends PageBase {
 	}
 	
 	private String getXPathNewsletterDesmarcadas(String linea) {
-		return (XPATH_CHECKBOX_NEWSLETTER + 
+		return (XP_CHECKBOX_NEWSLETTER + 
 				"//input[not(@checked) and @data-component-id[contains(.,'_" + linea.toLowerCase() + "')]]");
 	}
 	private String getXPathNewsletterMarcadas(String linea) {
-		return (XPATH_CHECKBOX_NEWSLETTER + 
+		return (XP_CHECKBOX_NEWSLETTER + 
 				"//input[@checked and @data-component-id[contains(.,'_" + linea.toLowerCase() + "')]]");
 	}	
 	
@@ -46,15 +46,15 @@ public class PageSuscripciones extends PageBase {
 	}
 	
 	public void clickGuardarCambios() {
-		click(XPATH_BUTTON_GUARDAR_CAMBIOS).exec();
+		click(XP_BUTTON_GUARDAR_CAMBIOS).exec();
 	}
 	
 	public boolean isPageResOKUntil(int seconds) { 
-		return state(Present, XPATH_PAGE_RES_OK).wait(seconds).check();
+		return state(Present, XP_PAGE_RES_OK).wait(seconds).check();
 	}
 	
 	public int getNumNewsletters() {
-		return getElements(XPATH_CHECKBOX_NEWSLETTER).size();
+		return getElements(XP_CHECKBOX_NEWSLETTER).size();
 	}
 	
 	public int getNumNewslettersDesmarcadas() {

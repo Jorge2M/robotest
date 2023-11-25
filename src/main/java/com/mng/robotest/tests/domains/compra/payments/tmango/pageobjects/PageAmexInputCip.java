@@ -6,18 +6,18 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageAmexInputCip extends PageBase {
 
-	private static final String XPATH_INPUT_CIP = "//input[@name='pin']";
-	private static final String XPATH_ACCEPT_BUTTON = "//img[@src[contains(.,'daceptar.gif')]]/../../a";
+	private static final String XP_INPUT_CIP = "//input[@name='pin']";
+	private static final String XP_ACCEPT_BUTTON = "//img[@src[contains(.,'daceptar.gif')]]/../../a";
 	
 	public boolean isPageUntil(int seconds) {
-		return state(Present, XPATH_INPUT_CIP).wait(seconds).check();
+		return state(Present, XP_INPUT_CIP).wait(seconds).check();
 	}
 	
 	public void inputCIP(String cip) {
-		getElement(XPATH_INPUT_CIP).sendKeys(cip);
+		getElement(XP_INPUT_CIP).sendKeys(cip);
 	}
 
 	public void clickAceptarButton() {
-		click(XPATH_ACCEPT_BUTTON).exec();
+		click(XP_ACCEPT_BUTTON).exec();
 	}
 }

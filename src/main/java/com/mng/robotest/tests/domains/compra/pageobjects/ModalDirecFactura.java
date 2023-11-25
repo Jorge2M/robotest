@@ -8,34 +8,34 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalDirecFactura extends ModalDireccion {
 
-	private static final String XPATH_FORM_MODAL = "//form[@class[contains(.,'customFormIdFACT')]]";
-	private static final String XPATH_BUTTON_UPDATE = XPATH_FORM_MODAL + "//div[@class[contains(.,'updateButton')]]/input[@type='submit']";
+	private static final String XP_FORM_MODAL = "//form[@class[contains(.,'customFormIdFACT')]]";
+	private static final String XP_BUTTON_UPDATE = XP_FORM_MODAL + "//div[@class[contains(.,'updateButton')]]/input[@type='submit']";
 	
 	public void sendDataToInputs(DataDireccion dataToSend) {
-		sendDataToInputs(dataToSend, XPATH_FORM_MODAL);
+		sendDataToInputs(dataToSend, XP_FORM_MODAL);
 	}
 	
 	public void selectPoblacion(String poblacion) {
-		selectPoblacion(poblacion, XPATH_FORM_MODAL);
+		selectPoblacion(poblacion, XP_FORM_MODAL);
 	}
 
 	public void selectProvincia(String provincia) {
-		selectProvincia(provincia, XPATH_FORM_MODAL);
+		selectProvincia(provincia, XP_FORM_MODAL);
 	} 
 
 	public boolean isVisibleFormUntil(int seconds) {
-		return state(Visible, XPATH_FORM_MODAL).wait(seconds).check();
+		return state(Visible, XP_FORM_MODAL).wait(seconds).check();
 	}
 
 	public boolean isVisibleButtonActualizar() {
-		return state(Visible, XPATH_BUTTON_UPDATE).check();
+		return state(Visible, XP_BUTTON_UPDATE).check();
 	}
 
 	public void clickActualizar() {
-		click(XPATH_BUTTON_UPDATE).exec(); 
+		click(XP_BUTTON_UPDATE).exec(); 
 		try {
 			if (isVisibleButtonActualizar()) {
-				click(XPATH_BUTTON_UPDATE).exec();
+				click(XP_BUTTON_UPDATE).exec();
 			}
 		}
 		catch (StaleElementReferenceException e) {

@@ -8,10 +8,10 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	
 	private final SectionPrendas sectionPrendas = new SectionPrendas();
 	
-	private static final String XPATH_ID_TICKET = "//*[@data-testid[contains(.,'purchaseDetail.purchaseNumber')]]";
-	private static final String XPATH_LINEA_IMPORTE = "//div[@class[contains(.,'text-body-s')]]//*[@data-testid='myPurchases.price']";
-	private static final String XPATH_DESPLEGABLE_DATOS_ENVIO = "//button[@id='accordion-purchase-0-title']";
-	private static final String XPATH_DATOS_ENVIO = "//dd[@id='accordion-purchase-0']/div";
+	private static final String XP_ID_TICKET = "//*[@data-testid[contains(.,'purchaseDetail.purchaseNumber')]]";
+	private static final String XP_LINEA_IMPORTE = "//div[@class[contains(.,'text-body-s')]]//*[@data-testid='myPurchases.price']";
+	private static final String XP_DESPLEGABLE_DATOS_ENVIO = "//button[@id='accordion-purchase-0-title']";
+	private static final String XP_DATOS_ENVIO = "//dd[@id='accordion-purchase-0']/div";
 	
 	@Override
 	public boolean isPage(int seconds) {
@@ -20,7 +20,7 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	@Override
 	public boolean isPresentImporteTotal(String importeTotal, String codPais) {
 		String importe = getImporte().replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
-		return (importe.compareTo(importeTotal)==0);
+		return importe.compareTo(importeTotal)==0;
 	}
 	@Override
 	public boolean isVisiblePrendaUntil(int seconds) {
@@ -32,25 +32,25 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	@Override
 	public boolean isVisibleDataTicket(int seconds) {
-		return state(Visible, XPATH_ID_TICKET).wait(seconds).check();
+		return state(Visible, XP_ID_TICKET).wait(seconds).check();
 	}
 	@Override
 	public boolean isVisibleIdTicket(int seconds) {
-		return state(Visible, XPATH_ID_TICKET).wait(seconds).check();
+		return state(Visible, XP_ID_TICKET).wait(seconds).check();
 	}
 	@Override
 	public String getIdTicket(TypeTicket typeTicket) {
-		return getElementWeb(XPATH_ID_TICKET).getText();
+		return getElementWeb(XP_ID_TICKET).getText();
 	}
 	@Override
 	public String getImporte() {
-		state(Visible, XPATH_LINEA_IMPORTE).wait(2).check();
-		return getElementWeb(XPATH_LINEA_IMPORTE).getText();
+		state(Visible, XP_LINEA_IMPORTE).wait(2).check();
+		return getElementWeb(XP_LINEA_IMPORTE).getText();
 	}
 	@Override
 	public String getDireccionEnvioOnline() {
 		makeVisibleDatosEnvio();
-		return getElement(XPATH_DATOS_ENVIO).getText(); 
+		return getElement(XP_DATOS_ENVIO).getText(); 
 	}
 	@Override
 	public String getReferenciaArticulo(int posArticulo) {
@@ -70,9 +70,9 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	
 	private void makeVisibleDatosEnvio() {
-		if (state(Invisible, XPATH_DATOS_ENVIO).check()) {
-			click(XPATH_DESPLEGABLE_DATOS_ENVIO).exec();
-			state(Visible, XPATH_DATOS_ENVIO).wait(1).check();
+		if (state(Invisible, XP_DATOS_ENVIO).check()) {
+			click(XP_DESPLEGABLE_DATOS_ENVIO).exec();
+			state(Visible, XP_DATOS_ENVIO).wait(1).check();
 		}
 	}
 }

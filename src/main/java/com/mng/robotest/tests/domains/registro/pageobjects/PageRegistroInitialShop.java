@@ -7,27 +7,27 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageRegistroInitialShop extends PageBase {
 
-	private static final String XPATH_MODAL_CONTENT = "//micro-frontend[@id='registry']";
-	private static final String XPATH_INPUT_EMAIL = XPATH_MODAL_CONTENT + "//input[@data-testid[contains(.,'emailInput')]]";
-	private static final String XPATH_INPUT_PASSWORD = XPATH_MODAL_CONTENT + "//input[@data-testid[contains(.,'passInput')]]";
-	private static final String XPATH_INPUT_BIRTHDATE = "//input[@id='birthdate']";
-	private static final String XPATH_INPUT_MOVIL = XPATH_MODAL_CONTENT + "//input[@data-testid[contains(.,'phoneInput')]]";
-	private static final String XPATH_CHECKBOX_GIVE_PROMOTIONS = XPATH_MODAL_CONTENT + "//input[@data-testid[contains(.,'subscribeCheckbox.subscribeToNewsletter')]]";
-	private static final String XPATH_LINK_GIVE_PROMOTIONS = XPATH_CHECKBOX_GIVE_PROMOTIONS + "/..//*[@data-testid='mng-link']";	
-	private static final String XPATH_RADIO_CONSENT_PERSONAL_INFORMATION = "//input[@id='createAccountLegal']";
-	private static final String XPATH_LINK_CONSENT_PERSONAL_INFORMATION = XPATH_RADIO_CONSENT_PERSONAL_INFORMATION + "/..//*[@data-testid='mng-link']";
-	private static final String XPATH_PERSONAL_INFORMATION_INFO = "//div[@id='createAccountLegal_description']";	
-	private static final String XPATH_CREATE_ACCOUNT_BUTTON = XPATH_MODAL_CONTENT + "//button[@data-testid[contains(.,'submitButton.submit')]]";	
-	private static final String XPATH_LINK_POLITICA_PRIVACIDAD = XPATH_MODAL_CONTENT + "/div/div/p/*[@data-testid='mng-link']";
-	private static final String XPATH_LINK_CONDICIONES_VENTA = XPATH_MODAL_CONTENT + "//*[@data-testid='mng-link' and @href[contains(.,'terms-and-conditions')]]";
-	private static final String XPATH_MESSAGE_ERROR_MOVIL = "//*[@id='mobile-number-error']";	
+	private static final String XP_MODAL_CONTENT = "//micro-frontend[@id='registry']";
+	private static final String XP_INPUT_EMAIL = XP_MODAL_CONTENT + "//input[@data-testid[contains(.,'emailInput')]]";
+	private static final String XP_INPUT_PASSWORD = XP_MODAL_CONTENT + "//input[@data-testid[contains(.,'passInput')]]";
+	private static final String XP_INPUT_BIRTHDATE = "//input[@id='birthdate']";
+	private static final String XP_INPUT_MOVIL = XP_MODAL_CONTENT + "//input[@data-testid[contains(.,'phoneInput')]]";
+	private static final String XP_CHECKBOX_GIVE_PROMOTIONS = XP_MODAL_CONTENT + "//input[@data-testid[contains(.,'subscribeCheckbox.subscribeToNewsletter')]]";
+	private static final String XP_LINK_GIVE_PROMOTIONS = XP_CHECKBOX_GIVE_PROMOTIONS + "/..//*[@data-testid='mng-link']";	
+	private static final String XP_RADIO_CONSENT_PERSONAL_INFORMATION = "//input[@id='createAccountLegal']";
+	private static final String XP_LINK_CONSENT_PERSONAL_INFORMATION = XP_RADIO_CONSENT_PERSONAL_INFORMATION + "/..//*[@data-testid='mng-link']";
+	private static final String XP_PERSONAL_INFORMATION_INFO = "//div[@id='createAccountLegal_description']";	
+	private static final String XP_CREATE_ACCOUNT_BUTTON = XP_MODAL_CONTENT + "//button[@data-testid[contains(.,'submitButton.submit')]]";	
+	private static final String XP_LINK_POLITICA_PRIVACIDAD = XP_MODAL_CONTENT + "/div/div/p/*[@data-testid='mng-link']";
+	private static final String XP_LINK_CONDICIONES_VENTA = XP_MODAL_CONTENT + "//*[@data-testid='mng-link' and @href[contains(.,'terms-and-conditions')]]";
+	private static final String XP_MESSAGE_ERROR_MOVIL = "//*[@id='mobile-number-error']";	
 	
-	private static final String XPATH_MODAL_MESSAGE_ERROR_DESKTOP = "//*[@aria-describedby[contains(.,'genericErrorModal')]]";
-	private static final String XPATH_MODAL_MESSAGE_USER_EXISTS_DESKTOP = XPATH_MODAL_MESSAGE_ERROR_DESKTOP + "//p[text()[contains(.,'¿Ya tienes cuenta?')]]";
-	private static final String XPATH_CLOSE_MODAL_MESSAGE_ERROR_DESKTOP = XPATH_MODAL_MESSAGE_ERROR_DESKTOP + "//*[@data-testid='modal.close.button']";
-	private static final String XPATH_MODAL_MESSAGE_ERROR_MOVIL = "//*[@data-testid='sheet.draggable.dialog']";
-	private static final String XPATH_MODAL_MESSAGE_USER_EXISTS_MOVIL = XPATH_MODAL_MESSAGE_ERROR_MOVIL + "//p[text()[contains(.,'¿Ya tienes cuenta?')]]";
-	private static final String XPATH_CLOSE_MODAL_MESSAGE_ERROR_MOVIL = XPATH_MODAL_MESSAGE_ERROR_MOVIL + "//button/span[text()='Cancelar']";
+	private static final String XP_MODAL_MESSAGE_ERROR_DESKTOP = "//*[@aria-describedby[contains(.,'genericErrorModal')]]";
+	private static final String XP_MODAL_MESSAGE_USER_EXISTS_DESKTOP = XP_MODAL_MESSAGE_ERROR_DESKTOP + "//p[text()[contains(.,'¿Ya tienes cuenta?')]]";
+	private static final String XP_CLOSE_MODAL_MESSAGE_ERROR_DESKTOP = XP_MODAL_MESSAGE_ERROR_DESKTOP + "//*[@data-testid='modal.close.button']";
+	private static final String XP_MODAL_MESSAGE_ERROR_MOVIL = "//*[@data-testid='sheet.draggable.dialog']";
+	private static final String XP_MODAL_MESSAGE_USER_EXISTS_MOVIL = XP_MODAL_MESSAGE_ERROR_MOVIL + "//p[text()[contains(.,'¿Ya tienes cuenta?')]]";
+	private static final String XP_CLOSE_MODAL_MESSAGE_ERROR_MOVIL = XP_MODAL_MESSAGE_ERROR_MOVIL + "//button/span[text()='Cancelar']";
 
 	private String getXPathModalPoliticaPrivacidad() {
 		return
@@ -99,16 +99,16 @@ public class PageRegistroInitialShop extends PageBase {
 	
 	private String getXPathModalMessageUserExists() {
 		if (channel.isDevice()) {
-			return XPATH_MODAL_MESSAGE_USER_EXISTS_MOVIL;
+			return XP_MODAL_MESSAGE_USER_EXISTS_MOVIL;
 		}
-		return XPATH_MODAL_MESSAGE_USER_EXISTS_DESKTOP;
+		return XP_MODAL_MESSAGE_USER_EXISTS_DESKTOP;
 	}
 	
 	private String getXPathCloseModalMessageError() {
 		if (channel.isDevice()) {
-			return XPATH_CLOSE_MODAL_MESSAGE_ERROR_MOVIL;
+			return XP_CLOSE_MODAL_MESSAGE_ERROR_MOVIL;
 		}
-		return XPATH_CLOSE_MODAL_MESSAGE_ERROR_DESKTOP;
+		return XP_CLOSE_MODAL_MESSAGE_ERROR_DESKTOP;
 	}	
 	
 	
@@ -116,27 +116,27 @@ public class PageRegistroInitialShop extends PageBase {
 		return isPage(0);
 	}
 	public boolean isPage(int seconds) {
-		return state(Visible, XPATH_CHECKBOX_GIVE_PROMOTIONS).wait(seconds).check();
+		return state(Visible, XP_CHECKBOX_GIVE_PROMOTIONS).wait(seconds).check();
 	}
 	
 	public void inputEmail(String email) {
-		getElement(XPATH_INPUT_EMAIL).sendKeys(KEYS_CLEAR_INPUT);
-		getElement(XPATH_INPUT_EMAIL).sendKeys(email);
+		getElement(XP_INPUT_EMAIL).sendKeys(KEYS_CLEAR_INPUT);
+		getElement(XP_INPUT_EMAIL).sendKeys(email);
 	}
 	
 	public void inputPassword(String password) {
-		getElement(XPATH_INPUT_PASSWORD).sendKeys(KEYS_CLEAR_INPUT);
-		getElement(XPATH_INPUT_PASSWORD).sendKeys(password);
+		getElement(XP_INPUT_PASSWORD).sendKeys(KEYS_CLEAR_INPUT);
+		getElement(XP_INPUT_PASSWORD).sendKeys(password);
 	}
 
 	public void inputMovil(String number) {
 		moveToInputMovil();
-		getElement(XPATH_INPUT_MOVIL).sendKeys(KEYS_CLEAR_INPUT);
-		getElement(XPATH_INPUT_MOVIL).sendKeys(number);
+		getElement(XP_INPUT_MOVIL).sendKeys(KEYS_CLEAR_INPUT);
+		getElement(XP_INPUT_MOVIL).sendKeys(number);
 	}
 	private void moveToInputMovil() {
 		for (int i=0; i<3; i++) {
-			if (state(Visible, XPATH_INPUT_MOVIL).check()) {
+			if (state(Visible, XP_INPUT_MOVIL).check()) {
 				return;
 			}
 			keyUp(5);
@@ -144,7 +144,7 @@ public class PageRegistroInitialShop extends PageBase {
 	}
 	
 	public void inputBirthDate(String birthdate) {
-		getElement(XPATH_INPUT_BIRTHDATE).sendKeys(birthdate);
+		getElement(XP_INPUT_BIRTHDATE).sendKeys(birthdate);
 	}
 
 	public void enableCheckBoxGivePromotions() {
@@ -158,34 +158,34 @@ public class PageRegistroInitialShop extends PageBase {
 		}		
 	}	
 	private void clickCheckBoxGivePromotions() {
-		click(XPATH_CHECKBOX_GIVE_PROMOTIONS).exec();
+		click(XP_CHECKBOX_GIVE_PROMOTIONS).exec();
 	}
 	public boolean isSelectedCheckboxGivePromotions() {
-		return getElement(XPATH_CHECKBOX_GIVE_PROMOTIONS).isSelected();
+		return getElement(XP_CHECKBOX_GIVE_PROMOTIONS).isSelected();
 	}
 	
 	public void clickLinkGivePromotions() {
-		click(XPATH_LINK_GIVE_PROMOTIONS).exec();
+		click(XP_LINK_GIVE_PROMOTIONS).exec();
 	}
 	public void clickConsentPersonalInformationRadio() {
-		click(XPATH_RADIO_CONSENT_PERSONAL_INFORMATION).exec();
+		click(XP_RADIO_CONSENT_PERSONAL_INFORMATION).exec();
 	}	
 	public void clickConsentPersonalInformationLink() {
-		click(XPATH_LINK_CONSENT_PERSONAL_INFORMATION).exec();
+		click(XP_LINK_CONSENT_PERSONAL_INFORMATION).exec();
 	}
 	public boolean checkPersonalInformationInfoVisible() {
-		return state(Visible, XPATH_PERSONAL_INFORMATION_INFO).check();
+		return state(Visible, XP_PERSONAL_INFORMATION_INFO).check();
 	}
 	
 	public void clickCreateAccountButton() {
-		click(XPATH_CREATE_ACCOUNT_BUTTON).exec();
+		click(XP_CREATE_ACCOUNT_BUTTON).exec();
 	}
 	
 	public boolean checkUserExistsModalMessage(int seconds) {
 		return state(Visible, getXPathModalMessageUserExists()).wait(seconds).check();
 	}
 	public boolean checkMessageErrorMovil(int seconds) {
-		return state(Visible, XPATH_MESSAGE_ERROR_MOVIL).wait(seconds).check();
+		return state(Visible, XP_MESSAGE_ERROR_MOVIL).wait(seconds).check();
 	}
 	
 	public void closeModalMessageError() {
@@ -193,7 +193,7 @@ public class PageRegistroInitialShop extends PageBase {
 	}
 	
 	public void clickPoliticaPrivacidad() {
-		click(XPATH_LINK_POLITICA_PRIVACIDAD).exec();
+		click(XP_LINK_POLITICA_PRIVACIDAD).exec();
 	}
 	public boolean isModalPoliticaPrivacidadVisible(int seconds) {
 		return state(Visible, getXPathModalPoliticaPrivacidad()).wait(seconds).check();
@@ -205,7 +205,7 @@ public class PageRegistroInitialShop extends PageBase {
 		click(getXPathLinkPoliticaPrivacidad()).exec();
 	}
 	public void clickCondicionesVenta() {
-		click(XPATH_LINK_CONDICIONES_VENTA).exec();
+		click(XP_LINK_CONDICIONES_VENTA).exec();
 	}
 	
 	@Override
@@ -220,7 +220,7 @@ public class PageRegistroInitialShop extends PageBase {
 		super.keyUp(times);
 	}
 	private void clickModalContentCorner() {
-		click(XPATH_MODAL_CONTENT).setX(1).setY(1).exec();
+		click(XP_MODAL_CONTENT).setX(1).setY(1).exec();
 	}
 	
 }

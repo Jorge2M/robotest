@@ -11,9 +11,7 @@ import com.mng.robotest.tests.domains.reembolsos.steps.PageReembolsosSteps;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
-import com.mng.robotest.testslegacy.beans.Pago;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow;
@@ -57,19 +55,19 @@ public class Ree002 extends TestBase {
 		new SecBolsaSteps().altaArticlosConColores(1);
 		
 		//Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
-		ConfigCheckout configCheckout = ConfigCheckout.config()
+		var configCheckout = ConfigCheckout.config()
 				.checkPagos()
 				.storeCredit()
 				.emaiExists()
 				.checkPromotionalCode().build();
 		
-		DataPago dataPago = getDataPago(configCheckout);
+		var dataPago = getDataPago(configCheckout);
 		
 		//Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
 		dataPago.getDataPedido().setEmailCheckout(dataTest.getUserConnected());
 		dataPago.setUserWithStoreC(true);
 		dataPago.setSaldoCta(saldoCtaIni);
-		Pago pagoStoreCredit = dataTest.getPais().getPago("STORECREDIT");
+		var pagoStoreCredit = dataTest.getPais().getPago("STORECREDIT");
 		
 		dataPago = new CheckoutFlow.BuilderCheckout(dataPago)
 			.pago(pagoStoreCredit)

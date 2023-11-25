@@ -8,14 +8,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PagePaytrail1rst extends PageBase {
 	
-	private static final String XPATH_LIST_OF_PAYMENTS = "//ul[@id='paymentMethods']";
-	private static final String XPATH_INPUT_ICONO_PAYTRAIL = "//input[@type='submit' and @name='brandName']";	
-	private static final String XPATH_BUTTON_PAGO_DESKTOP = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
-	private static final String XPATH_BUTTON_CONTINUE_MOBIL = "//input[@type='submit' and @name[contains(.,'ebanking')]]";
-	private static final String XPATH_SELECT_BANCOS = "//select[@id[contains(.,'ebanking')]]";
+	private static final String XP_LIST_OF_PAYMENTS = "//ul[@id='paymentMethods']";
+	private static final String XP_INPUT_ICONO_PAYTRAIL = "//input[@type='submit' and @name='brandName']";	
+	private static final String XP_BUTTON_PAGO_DESKTOP = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
+	private static final String XP_BUTTON_CONTINUE_MOBIL = "//input[@type='submit' and @name[contains(.,'ebanking')]]";
+	private static final String XP_SELECT_BANCOS = "//select[@id[contains(.,'ebanking')]]";
 	
 	private String getXPathEntradaPago(String nombrePago) {
-		return (XPATH_LIST_OF_PAYMENTS + "//input[@value[contains(.,'" + nombrePago.toLowerCase() + "')] or @value[contains(.,'" + nombrePago + "')]]");
+		return (XP_LIST_OF_PAYMENTS + "//input[@value[contains(.,'" + nombrePago.toLowerCase() + "')] or @value[contains(.,'" + nombrePago + "')]]");
 	}
 	
 	public boolean isPresentEntradaPago(String nombrePago) {
@@ -24,36 +24,36 @@ public class PagePaytrail1rst extends PageBase {
 	}
 	
 	public boolean isPresentButtonPago() {
-		return state(Present, XPATH_BUTTON_PAGO_DESKTOP).check();
+		return state(Present, XP_BUTTON_PAGO_DESKTOP).check();
 	}
 
 	public boolean isPresentSelectBancos() {
-		return state(Present, XPATH_SELECT_BANCOS).check();
+		return state(Present, XP_SELECT_BANCOS).check();
 	}
 	
 	public boolean isVisibleSelectBancosUntil(int seconds) {
-		return state(Visible, XPATH_SELECT_BANCOS).wait(seconds).check();
+		return state(Visible, XP_SELECT_BANCOS).wait(seconds).check();
 	}	
 	
 	public void clickButtonContinue() {
 		if (channel.isDevice()) {
-			click(XPATH_BUTTON_CONTINUE_MOBIL).exec();
+			click(XP_BUTTON_CONTINUE_MOBIL).exec();
 		} else {
-			click(XPATH_BUTTON_PAGO_DESKTOP).exec();
+			click(XP_BUTTON_PAGO_DESKTOP).exec();
 		}
 	}
 	
 	public void selectBanco(String visibleText) {
 		//En el caso de móvil hemos de seleccionar el icono del banco para visualizar el desplegable
 		if (channel.isDevice() &&
-			state(Visible, XPATH_SELECT_BANCOS).check()) {
+			state(Visible, XP_SELECT_BANCOS).check()) {
 			clickIconoBanco();
 		}
 			
-		new Select(getElement(XPATH_SELECT_BANCOS)).selectByVisibleText(visibleText);
+		new Select(getElement(XP_SELECT_BANCOS)).selectByVisibleText(visibleText);
 	}
 
 	public void clickIconoBanco() {
-		click(XPATH_INPUT_ICONO_PAYTRAIL).exec();
+		click(XP_INPUT_ICONO_PAYTRAIL).exec();
 	}
 }

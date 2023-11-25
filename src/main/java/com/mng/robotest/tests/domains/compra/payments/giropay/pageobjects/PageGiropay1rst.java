@@ -6,18 +6,18 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageGiropay1rst extends PageBase {
 	
-	private static final String XPATH_LIST_OF_PAYMENTS = "//ul[@id='paymentMethods']";
-	private static final String XPATH_CABECERA_STEP = "//h2[@id[contains(.,'stageheader')]]";
-	private static final String XPATH_BUTTON_PAGO_DESKTOP = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
-	private static final String XPATH_BUTTON_CONTINUE_MOBIL = "//input[@type='submit' and @id='mainSubmit']";
-	private static final String XPATH_ICONO_GIROPAY_MOBIL = XPATH_LIST_OF_PAYMENTS + "//input[@class[contains(.,'giropay')]]";
-	private static final String XPATH_ICONO_GIROPAY_DESKTOP = XPATH_LIST_OF_PAYMENTS + "/li[@data-variant[contains(.,'giropay')]]";
+	private static final String XP_LIST_OF_PAYMENTS = "//ul[@id='paymentMethods']";
+	private static final String XP_CABECERA_STEP = "//h2[@id[contains(.,'stageheader')]]";
+	private static final String XP_BUTTON_PAGO_DESKTOP = "//input[@class[contains(.,'paySubmit')] and @type='submit']";
+	private static final String XP_BUTTON_CONTINUE_MOBIL = "//input[@type='submit' and @id='mainSubmit']";
+	private static final String XP_ICONO_GIROPAY_MOBIL = XP_LIST_OF_PAYMENTS + "//input[@class[contains(.,'giropay')]]";
+	private static final String XP_ICONO_GIROPAY_DESKTOP = XP_LIST_OF_PAYMENTS + "/li[@data-variant[contains(.,'giropay')]]";
 	
 	private String getXPathIconoGiropay() {
 		if (channel.isDevice()) {
-			return XPATH_ICONO_GIROPAY_MOBIL;
+			return XP_ICONO_GIROPAY_MOBIL;
 		}
-		return XPATH_ICONO_GIROPAY_DESKTOP;
+		return XP_ICONO_GIROPAY_DESKTOP;
 	}
 	
 	public boolean isPresentIconoGiropay() {
@@ -25,11 +25,11 @@ public class PageGiropay1rst extends PageBase {
 	}
 	
 	public boolean isPresentCabeceraStep() {
-		return state(Present, XPATH_CABECERA_STEP).check();
+		return state(Present, XP_CABECERA_STEP).check();
 	}
 	
 	public boolean isPresentButtonPagoDesktopUntil(int seconds) {
-		return state(Present, XPATH_BUTTON_PAGO_DESKTOP).wait(seconds).check();
+		return state(Present, XP_BUTTON_PAGO_DESKTOP).wait(seconds).check();
 	}
 
 	public void clickIconoGiropay() {
@@ -45,11 +45,11 @@ public class PageGiropay1rst extends PageBase {
 	}
 
 	public void clickButtonPagoDesktop() {
-		click(XPATH_BUTTON_PAGO_DESKTOP).exec();
+		click(XP_BUTTON_PAGO_DESKTOP).exec();
 	}
 
 	public void clickButtonContinueMobil() {
-		click(XPATH_BUTTON_CONTINUE_MOBIL).exec();
+		click(XP_BUTTON_CONTINUE_MOBIL).exec();
 	}
 	
 }

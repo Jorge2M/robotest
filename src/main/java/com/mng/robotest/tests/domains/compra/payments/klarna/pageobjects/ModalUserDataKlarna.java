@@ -25,7 +25,7 @@ public class ModalUserDataKlarna extends PageBase {
 		}
 	}
 	
-	private static final String XPATH_BUTTON_CONTINUE = "//button[@id='button-primary']";
+	private static final String XP_BUTTON_CONTINUE = "//button[@id='button-primary']";
 	
 	public boolean isModal(int seconds) {
 		return state(Visible, InputKlarna.EMAIL.getXPath()).wait(seconds).check();
@@ -83,9 +83,9 @@ public class ModalUserDataKlarna extends PageBase {
 	}
 	
 	public void clickButtonContinue() {
-		click(XPATH_BUTTON_CONTINUE).exec();
-		if (!state(Invisible, XPATH_BUTTON_CONTINUE).wait(2).check()) {
-			click(XPATH_BUTTON_CONTINUE).exec();
+		click(XP_BUTTON_CONTINUE).exec();
+		if (!state(Invisible, XP_BUTTON_CONTINUE).wait(2).check()) {
+			click(XP_BUTTON_CONTINUE).exec();
 		}
 	}
 	

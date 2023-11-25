@@ -88,25 +88,25 @@ public class GroupWeb extends PageBase {
 		this.group = group;
 	}
 
-	private static final String XPATH_GROUP_DEVICE = 
+	private static final String XP_GROUP_DEVICE = 
 			"//*[@data-testid[contains(.,'header.tabButton')] or " + 
 				"@data-testid[contains(.,'header.tabLink')] or " + 
 				"@data-testid[contains(.,'menu.section')]]";
 	
-	private static final String XPATH_GROUP_VIEW_MORE_DEVICE = "//button[@data-testid[contains(.,'viewMore')]]";
-	private static final String XPATH_GROUP_DESKTOP = "//li[@data-testid[contains(.,'menu.section')]]";
+	private static final String XP_GROUP_VIEW_MORE_DEVICE = "//button[@data-testid[contains(.,'viewMore')]]";
+	private static final String XP_GROUP_DESKTOP = "//li[@data-testid[contains(.,'menu.section')]]";
 	private static final String TAG_GROUP = "@tag_group";
 	
-	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP = 
+	private static final String XP_SUBMENU_WITH_TAG_DESKTOP = 
 			"//ul[@data-testid[contains(.,'menu.section')]]" + 
 			"/li/*[@data-testid[contains(.,'" + TAG_GROUP + "')]]/..";
-	private static final String XPATH_SUBMENU_WITH_TAG_DESKTOP_GENESIS = //Génesis 14-11-23
+	private static final String XP_SUBMENU_WITH_TAG_DESKTOP_GENESIS = //Génesis 14-11-23
 			"//li[@data-testid[contains(.,'" + TAG_GROUP + "')]]" + 
 			"/ul[@id[contains(.,'subMenuColumn3')]]" +  
 			"/li[@data-testid[contains(.,'" + TAG_GROUP + "')]]";
 	
-	private static final String XPATH_SUBMENU_DEVICE = "//div[@id='subMenuPortalContainer']//div[@data-testid='menu.subMenu']";
-	private static final String XPATH_SUBMENU_DEVICE_GENESIS = "//li[@class[contains(.,'Submenu_selected')]]//div[@data-testid='menu.subMenu']";
+	private static final String XP_SUBMENU_DEVICE = "//div[@id='subMenuPortalContainer']//div[@data-testid='menu.subMenu']";
+	private static final String XP_SUBMENU_DEVICE_GENESIS = "//li[@class[contains(.,'Submenu_selected')]]//div[@data-testid='menu.subMenu']";
 
 	private String getXPathGroupSelected() {
 		String groupOld = getXPathGroup() + "//self::*[@aria-expanded='true']";
@@ -121,9 +121,9 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private String getXPathGroupDevice() {
-		String xpath = XPATH_GROUP_DEVICE;
+		String xpath = XP_GROUP_DEVICE;
 		if (group.getGroupResponse()==MORE) {
-			xpath = XPATH_GROUP_VIEW_MORE_DEVICE;
+			xpath = XP_GROUP_VIEW_MORE_DEVICE;
 		}
 		return xpath + "//self::*[@data-testid[contains(.,'" + group.getId() + "')]]"; 
 	}
@@ -131,9 +131,9 @@ public class GroupWeb extends PageBase {
 	private String getXPathGroupDesktop() {
 		String dataTestId = "[@data-testid[contains(.,'" + group.getId() + "')]]";
 		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
-			return XPATH_GROUP_DESKTOP + "//a" + dataTestId;
+			return XP_GROUP_DESKTOP + "//a" + dataTestId;
 		} else {
-			return XPATH_GROUP_DESKTOP + "//button" + dataTestId;
+			return XP_GROUP_DESKTOP + "//button" + dataTestId;
 		}
 	}
 
@@ -145,14 +145,14 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private String getXPathSubmenuDevice() {
-		String xpathSubmenu = XPATH_SUBMENU_DEVICE;
-		String xpathSubmenuGenesis = XPATH_SUBMENU_DEVICE_GENESIS; 
+		String xpathSubmenu = XP_SUBMENU_DEVICE;
+		String xpathSubmenuGenesis = XP_SUBMENU_DEVICE_GENESIS; 
 		return "(" + xpathSubmenu + " | " + xpathSubmenuGenesis + ")";
 	}
 	
 	private String getXPathSubmenuDesktop() {
-		String xpathSubmenu = XPATH_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
-		String xpathSubmenuGenesis = XPATH_SUBMENU_WITH_TAG_DESKTOP_GENESIS.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
+		String xpathSubmenu = XP_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
+		String xpathSubmenuGenesis = XP_SUBMENU_WITH_TAG_DESKTOP_GENESIS.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
 		return "(" + xpathSubmenu + " | " + xpathSubmenuGenesis + ")";
 	}
 	

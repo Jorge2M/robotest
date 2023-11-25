@@ -6,19 +6,19 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PagePaytrailIdConfirm extends PageBase {
 	
-	private static final String XPATH_INPUT_ID = "//input[@name[contains(.,'PMTCONNB')]]";
-	private static final String XPATH_BUTTON_CONFIRMAR = "//input[@name[contains(.,'SAVEBTN')]]";
+	private static final String XP_INPUT_ID = "//input[@name[contains(.,'PMTCONNB')]]";
+	private static final String XP_BUTTON_CONFIRMAR = "//input[@name[contains(.,'SAVEBTN')]]";
 	
 	public boolean isPage() {
-		return state(Present, XPATH_INPUT_ID).check();
+		return state(Present, XP_INPUT_ID).check();
 	}
 	
 	public void inputIdConfirm(String idConfirm) {
-		getElement(XPATH_INPUT_ID).clear();
-		getElement(XPATH_INPUT_ID).sendKeys(idConfirm);
+		getElement(XP_INPUT_ID).clear();
+		getElement(XP_INPUT_ID).sendKeys(idConfirm);
 	}
 
 	public void clickConfirmar() {
-		click(XPATH_BUTTON_CONFIRMAR).exec();
+		click(XP_BUTTON_CONFIRMAR).exec();
 	}
 }

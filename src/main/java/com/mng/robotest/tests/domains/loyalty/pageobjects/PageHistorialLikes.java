@@ -9,13 +9,13 @@ import com.mng.robotest.tests.domains.loyalty.beans.LoyaltyMovement;
 
 public class PageHistorialLikes extends PageBase {
 	
-	private static final String XPATH_LIST_MOVIMIENTOS = "//div[@id='history-list']";
+	private static final String XP_LIST_MOVIMIENTOS = "//div[@id='history-list']";
 	
 	//TODO solicitar data-testid en lugar de React
-	private static final String XPATH_MOVIMIENTO = XPATH_LIST_MOVIMIENTOS + "/div";	
+	private static final String XP_MOVIMIENTO = XP_LIST_MOVIMIENTOS + "/div";	
 	
 	private String getXPathMovimiento(int position) {
-		return "(" + XPATH_MOVIMIENTO + ")[" + position + "]"; 
+		return "(" + XP_MOVIMIENTO + ")[" + position + "]"; 
 	}
 	private String getXPathConcepto(int position) {
 		return getXPathMovimiento(position) + "/div[3]/div[2]/div"; 

@@ -24,8 +24,8 @@ public class PageCheckoutWrapper extends PageBase {
 	private final SecTarjetaPci secTarjetaPci = SecTarjetaPci.makeSecTarjetaPci(channel);
 	
 	//Abarca cualquier div de loading
-	private static final String XPATH_DIV_LOADING = "//div[@class[contains(.,'panel_loading')] or @class[contains(.,'container-full-centered-loading')] or @class[contains(.,'loading-panel')]]";
-	private static final String XPATH_DISCOUNT_LOYALTY_APPLIED_MOBIL = "//span[@class='redeem-likes__discount']";	
+	private static final String XP_DIV_LOADING = "//div[@class[contains(.,'panel_loading')] or @class[contains(.,'container-full-centered-loading')] or @class[contains(.,'loading-panel')]]";
+	private static final String XP_DISCOUNT_LOYALTY_APPLIED_MOBIL = "//span[@class='redeem-likes__discount']";	
 	
 	public Page1DktopCheckout getPage1DktopCheckout() {
 		return page1DktopCheckout;
@@ -122,23 +122,23 @@ public class PageCheckoutWrapper extends PageBase {
 		}
 	}	
 
-	private static final String XPATH_BUTTON_FOR_APPLY_LOYALTY_POINTS = "//button[@class[contains(.,'redeem-likes')] and @type='button']";
+	private static final String XP_BUTTON_FOR_APPLY_LOYALTY_POINTS = "//button[@class[contains(.,'redeem-likes')] and @type='button']";
 	public boolean isVisibleButtonForApplyLoyaltyPoints() {
-		return (state(Visible, XPATH_BUTTON_FOR_APPLY_LOYALTY_POINTS).wait(2).check());
+		return (state(Visible, XP_BUTTON_FOR_APPLY_LOYALTY_POINTS).wait(2).check());
 	}
 
 	public float applyAndGetLoyaltyPoints() {
-		WebElement buttonLoyalty = getElementsVisible(XPATH_BUTTON_FOR_APPLY_LOYALTY_POINTS).get(0);
+		WebElement buttonLoyalty = getElementsVisible(XP_BUTTON_FOR_APPLY_LOYALTY_POINTS).get(0);
 		String textButtonApply = buttonLoyalty.getAttribute("innerHTML");
 		String importeButton = ImporteScreen.normalizeImportFromScreen(textButtonApply);
-		click(XPATH_BUTTON_FOR_APPLY_LOYALTY_POINTS).exec();
+		click(XP_BUTTON_FOR_APPLY_LOYALTY_POINTS).exec();
 		isNoDivLoadingUntil(1);
 		return (ImporteScreen.getFloatFromImporteMangoScreen(importeButton));
 	}
 
 	public float getDiscountLoyaltyAppliedMobil() {
-		if (state(Visible, XPATH_DISCOUNT_LOYALTY_APPLIED_MOBIL).check()) {
-			String discountApplied = getElement(XPATH_DISCOUNT_LOYALTY_APPLIED_MOBIL).getAttribute("innerHTML");
+		if (state(Visible, XP_DISCOUNT_LOYALTY_APPLIED_MOBIL).check()) {
+			String discountApplied = getElement(XP_DISCOUNT_LOYALTY_APPLIED_MOBIL).getAttribute("innerHTML");
 			return (ImporteScreen.getFloatFromImporteMangoScreen(discountApplied));
 		}	
 		return 0;
@@ -243,11 +243,11 @@ public class PageCheckoutWrapper extends PageBase {
 	}
 
 	public boolean waitUntilNoDivLoading(int seconds) {
-		return state(Invisible, XPATH_DIV_LOADING).wait(seconds).check();
+		return state(Invisible, XP_DIV_LOADING).wait(seconds).check();
 	}
 
 	public boolean isNoDivLoadingUntil(int seconds) {
-		return state(Invisible, XPATH_DIV_LOADING).wait(seconds).check();
+		return state(Invisible, XP_DIV_LOADING).wait(seconds).check();
 	}
 
 	public String getMethodInputValue(String metodoPago) {

@@ -17,12 +17,12 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	private final LineaType lineaType;
 	private final SublineaType sublineaType;
 	
-	private static final String XPATH_LINK_SUBLINEA_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_nina')]]";
-	private static final String XPATH_LINK_SUBLINEA_BEBE_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_babyNina')]]";
-	private static final String XPATH_LINK_SUBLINEA_TEEN_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenQ')]]";
-	private static final String XPATH_LINK_SUBLINEA_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_nino')]]";
-	private static final String XPATH_LINK_SUBLINEA_BEBE_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_babyNino')]]";
-	private static final String XPATH_LINK_SUBLINEA_TEEN_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenP')]]";
+	private static final String XP_LINK_SUBLINEA_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_nina')]]";
+	private static final String XP_LINK_SUBLINEA_BEBE_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_babyNina')]]";
+	private static final String XP_LINK_SUBLINEA_TEEN_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenQ')]]";
+	private static final String XP_LINK_SUBLINEA_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_nino')]]";
+	private static final String XP_LINK_SUBLINEA_BEBE_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_babyNino')]]";
+	private static final String XP_LINK_SUBLINEA_TEEN_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenP')]]";
 	
 	public LineaActionsDevice(LineaWeb lineaWeb) {
 		this.lineaType = lineaWeb.getLinea();
@@ -57,18 +57,18 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	private String getXPathSublineaLink() {
 		switch (sublineaType) {
 		case NINA_NINA:
-			return XPATH_LINK_SUBLINEA_NINA;
+			return XP_LINK_SUBLINEA_NINA;
 		case TEEN_NINA:
-			return XPATH_LINK_SUBLINEA_TEEN_NINA;
+			return XP_LINK_SUBLINEA_TEEN_NINA;
 		case NINA_BEBE:
-			return XPATH_LINK_SUBLINEA_BEBE_NINA;
+			return XP_LINK_SUBLINEA_BEBE_NINA;
 		case NINO_NINO:
-			return XPATH_LINK_SUBLINEA_NINO;
+			return XP_LINK_SUBLINEA_NINO;
 		case TEEN_NINO:
-			return XPATH_LINK_SUBLINEA_TEEN_NINO;
+			return XP_LINK_SUBLINEA_TEEN_NINO;
 		case NINO_BEBE:
 		default:
-			return XPATH_LINK_SUBLINEA_BEBE_NINO;
+			return XP_LINK_SUBLINEA_BEBE_NINO;
 		}
 	}
 	

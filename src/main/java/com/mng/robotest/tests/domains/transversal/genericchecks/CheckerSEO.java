@@ -24,8 +24,8 @@ import static com.github.jorge2m.testmaker.conf.Channel.*;
 
 public class CheckerSEO extends PageBase implements Checker {
 
-	public static final String XPATH_TAG_CANONICAL = "//link[@rel='canonical']";
-	public static final String XPATH_TAG_ROBOTS = "//meta[@name='robots' and @content[contains(.,'noindex')]]";
+	public static final String XP_TAG_CANONICAL = "//link[@rel='canonical']";
+	public static final String XP_TAG_ROBOTS = "//meta[@name='robots' and @content[contains(.,'noindex')]]";
 	
 	private final State level;
 	
@@ -170,15 +170,15 @@ public class CheckerSEO extends PageBase implements Checker {
 	}
 	
 	private boolean isPresentTagCanonical() {
-		return state(Present, XPATH_TAG_CANONICAL).check();
+		return state(Present, XP_TAG_CANONICAL).check();
 	}
 
 	private boolean isPresentTagRobots() {
-		return state(Present, XPATH_TAG_ROBOTS).check();
+		return state(Present, XP_TAG_ROBOTS).check();
 	}
 
 	private WebElement getTagCanonincal() {
-		return getElement(XPATH_TAG_CANONICAL);
+		return getElement(XP_TAG_CANONICAL);
 	}
 	
 	private String getURLTagCanonical() {

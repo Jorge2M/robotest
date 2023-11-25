@@ -11,12 +11,12 @@ public class PageGestorCheques extends PageBase {
 	
 	public static final String TITULO = "Gestor de Cheques";
 	public static final String TITULO_DETALLES = "DETALLES CHEQUE REGALO";
-	private static final String INI_XPATH_TITULO = "//td[@class='txt11B' and text()[contains(.,'";
-	private static final String XPATH_DIV_CONTENT = "//div[@id='busquedaRapidaContent']";
-	private static final String XPATH_TEXT_AREA = XPATH_DIV_CONTENT + "//textarea";
-	private static final String XPATH_CORREO_RECEPTOR_BUTTON = XPATH_DIV_CONTENT + "//input[@value='Correo del receptor']";
-	private static final String XPATH_TABLA = "//table[@class[contains(.,'grupotalla-table')]]";
-	private static final String XPATH_DETALLES_TABLA_CHEQUE_NUMERO = "//table//td[text()[contains(.,'CHEQUE NUMERO')]]";
+	private static final String INI_XP_TITULO = "//td[@class='txt11B' and text()[contains(.,'";
+	private static final String XP_DIV_CONTENT = "//div[@id='busquedaRapidaContent']";
+	private static final String XP_TEXT_AREA = XP_DIV_CONTENT + "//textarea";
+	private static final String XP_CORREO_RECEPTOR_BUTTON = XP_DIV_CONTENT + "//input[@value='Correo del receptor']";
+	private static final String XP_TABLA = "//table[@class[contains(.,'grupotalla-table')]]";
+	private static final String XP_DETALLES_TABLA_CHEQUE_NUMERO = "//table//td[text()[contains(.,'CHEQUE NUMERO')]]";
 
 	public enum ButtonsCheque implements ElementPage {
 		EDITAR("//input[@value='EDITAR']"),
@@ -71,7 +71,7 @@ public class PageGestorCheques extends PageBase {
 	}
 	
 	private String getXPathFila(int numFila) {
-		return (XPATH_TABLA + "//tr[" + numFila + "]");
+		return (XP_TABLA + "//tr[" + numFila + "]");
 	}
 	
 	private String getXPathMailFila(int numFila, String mail) {
@@ -95,15 +95,15 @@ public class PageGestorCheques extends PageBase {
 	}
 	
 	private String getXPathTitulo(String title){
-		return INI_XPATH_TITULO + title + "')]]";
+		return INI_XP_TITULO + title + "')]]";
 	}
 	
 	private String getXPathDetallesMail(String mail){
-		return XPATH_DETALLES_TABLA_CHEQUE_NUMERO + "/ancestor::tr/following::tr//table//td[contains(.,'" + mail + "')]";
+		return XP_DETALLES_TABLA_CHEQUE_NUMERO + "/ancestor::tr/following::tr//table//td[contains(.,'" + mail + "')]";
 	}
 	
 	private String getXPathDetallesPedido(String pedido){
-		return XPATH_DETALLES_TABLA_CHEQUE_NUMERO + "/ancestor::tr/following::tr//table//td[contains(.,'" + pedido + "')]";
+		return XP_DETALLES_TABLA_CHEQUE_NUMERO + "/ancestor::tr/following::tr//table//td[contains(.,'" + pedido + "')]";
 	}
 	
 	public boolean isPage() {
@@ -126,13 +126,13 @@ public class PageGestorCheques extends PageBase {
 	}
 
 	private void inputMail(String mail) {
-		getElement(XPATH_TEXT_AREA).click();
-		getElement(XPATH_TEXT_AREA).clear();
-		getElement(XPATH_TEXT_AREA).sendKeys(mail);
+		getElement(XP_TEXT_AREA).click();
+		getElement(XP_TEXT_AREA).clear();
+		getElement(XP_TEXT_AREA).sendKeys(mail);
 	}
 	
 	private void clickCorreoReceptorButtonAndWaitLoad() {
-		click(XPATH_CORREO_RECEPTOR_BUTTON).exec();
+		click(XP_CORREO_RECEPTOR_BUTTON).exec();
 	}
 
 	public boolean comprobarNumeroPedidos(int numPedidosEsther) {

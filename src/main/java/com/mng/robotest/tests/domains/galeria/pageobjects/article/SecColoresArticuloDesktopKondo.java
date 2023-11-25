@@ -11,15 +11,15 @@ import com.mng.robotest.testslegacy.data.Constantes;
 
 public class SecColoresArticuloDesktopKondo extends SecColoresArticuloDesktop {
 
-	private static final String XPATH_ARTICULO = CommonGaleriaKondo.XPATH_ARTICULO;
-	private static final String XPATH_ARTICULO_ANCESTOR = XPATH_ARTICULO.replaceFirst("//", "ancestor::");
-	private static final String XPATH_COLORS_ARTICLE = "//div/p[@id[contains(.,'color-selector')]]/..";
-	private static final String XPATH_COLOR_ICON = XPATH_COLORS_ARTICLE + "//img[@id[contains(.,'Color')]]"; 
+	private static final String XP_ARTICULO = CommonGaleriaKondo.XP_ARTICULO;
+	private static final String XP_ARTICULO_ANCESTOR = XP_ARTICULO.replaceFirst("//", "ancestor::");
+	private static final String XP_COLORS_ARTICLE = "//div/p[@id[contains(.,'color-selector')]]/..";
+	private static final String XP_COLOR_ICON = XP_COLORS_ARTICLE + "//img[@id[contains(.,'Color')]]"; 
 	
 	private String getXPathArticuloConColores() {
 		return (
-			XPATH_COLORS_ARTICLE + "/" + 
-			XPATH_ARTICULO_ANCESTOR);
+			XP_COLORS_ARTICLE + "/" + 
+			XP_ARTICULO_ANCESTOR);
 	}
 	
 	private String getXPathArticuloConVariedadColores(int numArticulo) {
@@ -27,7 +27,7 @@ public class SecColoresArticuloDesktopKondo extends SecColoresArticuloDesktop {
 	}
 	
 	private String getXPathImgCodigoColor(String codigoColor) {
-		return XPATH_COLOR_ICON + "//self::*[@src[contains(.,'_" + codigoColor + "_')]]";
+		return XP_COLOR_ICON + "//self::*[@src[contains(.,'_" + codigoColor + "_')]]";
 	}
 	
 	@Override
@@ -61,7 +61,7 @@ public class SecColoresArticuloDesktopKondo extends SecColoresArticuloDesktop {
 	}
 	
 	private String getXPathImgColorRelativeArticle(boolean selected) {
-		String xpathColor = XPATH_COLORS_ARTICLE;
+		String xpathColor = XP_COLORS_ARTICLE;
 		if (!selected) {
 			return xpathColor + "//img";
 		}

@@ -19,26 +19,26 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	protected final Pais pais = dataTest.getPais();
 	protected final IdiomaPais idioma = dataTest.getIdioma();	
 
-	private static final String XPATH_SELECTOR_PAISES = "//*[@data-testid='countrySelector.country']";
-	private static final String XPATH_PAIS_SELECCIONADO = "//input[@data-testid='countrySelector.country.inputSearch.search']";
-	private static final String XPATH_PAIS_OPTION = "//li[@data-testid[contains(.,'countrySelector.country.list.option')]]";
-	private static final String XPATH_ICON_SALE_PAIS_SELECCIONADO = XPATH_PAIS_SELECCIONADO + "//span[@class[contains(.,'icon-outline-bag')]]";
-	private static final String XPATH_SELECTOR_IDIOMAS = "//*[@data-testid='countrySelector.languagues']/..";
-	private static final String XPATH_IDIOMA_OPTION_DESKTOP = XPATH_SELECTOR_IDIOMAS + "//div";
-	private static final String XPATH_IDIOMA_OPTION_MOBILE = XPATH_SELECTOR_IDIOMAS + "//option";
-	private static final String XPATH_BUTTON_ACCEPT = "//form//button[@type='submit']"; //Necesitamos un data-testid (React)
+	private static final String XP_SELECTOR_PAISES = "//*[@data-testid='countrySelector.country']";
+	private static final String XP_PAIS_SELECCIONADO = "//input[@data-testid='countrySelector.country.inputSearch.search']";
+	private static final String XP_PAIS_OPTION = "//li[@data-testid[contains(.,'countrySelector.country.list.option')]]";
+	private static final String XP_ICON_SALE_PAIS_SELECCIONADO = XP_PAIS_SELECCIONADO + "//span[@class[contains(.,'icon-outline-bag')]]";
+	private static final String XP_SELECTOR_IDIOMAS = "//*[@data-testid='countrySelector.languagues']/..";
+	private static final String XP_IDIOMA_OPTION_DESKTOP = XP_SELECTOR_IDIOMAS + "//div";
+	private static final String XP_IDIOMA_OPTION_MOBILE = XP_SELECTOR_IDIOMAS + "//option";
+	private static final String XP_BUTTON_ACCEPT = "//form//button[@type='submit']"; //Necesitamos un data-testid (React)
 
 	private String getXPathCountryItemFromCodigo(String codigoPrehome) {
-		return XPATH_PAIS_OPTION + "//self::*[@value='" + codigoPrehome + "']";
+		return XP_PAIS_OPTION + "//self::*[@value='" + codigoPrehome + "']";
 	}
 	private String getXPathCountryItemFromName(String nameCountry) {
-		return XPATH_PAIS_OPTION + "//self::*[text()='" + nameCountry + "']";
+		return XP_PAIS_OPTION + "//self::*[text()='" + nameCountry + "']";
 	}
 	private String getXPathIdiomaItemFromName(String nameIdioma) {
 		if (channel==Channel.desktop) {
-		    return XPATH_IDIOMA_OPTION_DESKTOP + "//self::*[@name='" + nameIdioma + "']";
+		    return XP_IDIOMA_OPTION_DESKTOP + "//self::*[@name='" + nameIdioma + "']";
 		}
-		return XPATH_IDIOMA_OPTION_MOBILE + "//self::*[text()='" + nameIdioma + "']";
+		return XP_IDIOMA_OPTION_MOBILE + "//self::*[text()='" + nameIdioma + "']";
 	}	
 
 	@Override
@@ -52,11 +52,11 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	}	
 	
 	public boolean isPageUntil(int seconds) {
-		return state(Present, XPATH_PAIS_SELECCIONADO).wait(seconds).check();
+		return state(Present, XP_PAIS_SELECCIONADO).wait(seconds).check();
 	}
 
 	boolean isNotPageUntil(int seconds) {
-		return state(Invisible, XPATH_PAIS_SELECCIONADO).wait(seconds).check();
+		return state(Invisible, XP_PAIS_SELECCIONADO).wait(seconds).check();
 	}
 	
 	public boolean isPage() {
@@ -64,11 +64,11 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	}
 	
 	public boolean isPaisSelectedWithMarcaCompra() {
-		return state(Visible, XPATH_ICON_SALE_PAIS_SELECCIONADO).check();
+		return state(Visible, XP_ICON_SALE_PAIS_SELECCIONADO).check();
 	}
 	
 	public void selecionPais() {
-		state(Present, XPATH_SELECTOR_PAISES).wait(5).check();
+		state(Present, XP_SELECTOR_PAISES).wait(5).check();
 		new LocalStorageMango().setInitialModalsOff();
 		if (!isPaisSelected()) {
 			unfoldCountrys();
@@ -77,18 +77,18 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	}
 	
 	public boolean isPaisSelected() {
-		state(Visible, XPATH_PAIS_SELECCIONADO).wait(1).check();
-		return getElement(XPATH_PAIS_SELECCIONADO).getAttribute("value")
+		state(Visible, XP_PAIS_SELECCIONADO).wait(1).check();
+		return getElement(XP_PAIS_SELECCIONADO).getAttribute("value")
 				.contains(pais.getNombrePais());
 	}
 	
 	private void unfoldCountrys() {
-		click(XPATH_SELECTOR_PAISES).exec();
+		click(XP_SELECTOR_PAISES).exec();
 	}
 	
 	private void inputAndSelectCountry() {
 		String nameCountry = getNameCountry();
-		getElement(XPATH_PAIS_SELECCIONADO).sendKeys(nameCountry);
+		getElement(XP_PAIS_SELECCIONADO).sendKeys(nameCountry);
 		waitMillis(500);
 		clickCountry(nameCountry);
 	}
@@ -122,16 +122,16 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	}
 
 	private void unfoldIdiomas() {
-		state(Visible, XPATH_SELECTOR_IDIOMAS).wait(2).check();
-		click(XPATH_SELECTOR_IDIOMAS).exec();
+		state(Visible, XP_SELECTOR_IDIOMAS).wait(2).check();
+		click(XP_SELECTOR_IDIOMAS).exec();
 	}
 	
 	void selectButtonForEnter() {
-		click(XPATH_BUTTON_ACCEPT).exec();
-		if (!state(Invisible, XPATH_BUTTON_ACCEPT).wait(10).check()) {
-			click(XPATH_BUTTON_ACCEPT).type(TypeClick.javascript).exec();
-			if (!state(Invisible, XPATH_BUTTON_ACCEPT).wait(15).check()) {
-				click(XPATH_BUTTON_ACCEPT).exec();
+		click(XP_BUTTON_ACCEPT).exec();
+		if (!state(Invisible, XP_BUTTON_ACCEPT).wait(10).check()) {
+			click(XP_BUTTON_ACCEPT).type(TypeClick.javascript).exec();
+			if (!state(Invisible, XP_BUTTON_ACCEPT).wait(15).check()) {
+				click(XP_BUTTON_ACCEPT).exec();
 			}
 		}
 	}	

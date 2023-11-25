@@ -63,7 +63,7 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 		
 		checks.add(
 			"Aparece un TOTAL de: " + dataPedido.getImporteTotalManto(),
-			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XPATH_IMNPORTE_TOTAL, driver), Warn);
+			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XP_IMNPORTE_TOTAL, driver), Warn);
 		
 		checks.add(
 			"Las 3 líneas de la dirección de envío figuran en la dirección del pedido (" + dataPedido.getDireccionEnvio() +")",
