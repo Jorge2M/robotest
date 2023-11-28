@@ -19,10 +19,11 @@ public class PageHomeConseguirPorLikesSteps extends StepBase {
 	@Step (
 		description="Seleccionar el botón de \"Conseguir por Likes\"",
 		expected="Aparece el icono de operación Ok")
-	public void selectConseguirButton() {
-		pageHomeConseguirPorLikes.selectConseguirButton();
+	public int selectConseguirButton() {
+		int likes = pageHomeConseguirPorLikes.selectConseguirButton();
 		checkAfterConseguirButton();
 		checksDefault();
+		return likes;
 	}
 	
 	@Validation

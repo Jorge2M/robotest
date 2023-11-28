@@ -23,7 +23,7 @@ public class PageHomeDonateLikes extends PageBase {
 			return numLikes;
 		}
 		public String getXPath() {
-			return "//button/span[text()[contains(.,'" + numLikes + "')]]";
+			return "//button/span[text()[contains(.,' " + numLikes + "')]]";
 		}
 		
 		public By getBy() {

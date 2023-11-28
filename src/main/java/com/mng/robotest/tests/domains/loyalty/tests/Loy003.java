@@ -2,19 +2,16 @@ package com.mng.robotest.tests.domains.loyalty.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.loyalty.beans.User;
+import com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
+import com.mng.robotest.tests.domains.loyalty.steps.PageHistorialLikesSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageHomeConseguirPorLikesSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
-import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 
 public class Loy003 extends TestBase {
 
 	static final User USER = new User("test.performance22@mango.com", "6876577027622042923", "ES");
-	
-	private final SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
-	private final PageMangoLikesYouSteps pageHomeLikesSteps = new PageMangoLikesYouSteps();
-	private final PageHomeConseguirPorLikesSteps pageHomeConseguirPorLikesSteps = new PageHomeConseguirPorLikesSteps();
 	
 	public Loy003() throws Exception {
 		super();
@@ -35,18 +32,38 @@ public class Loy003 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		accessAndLogin();
-		int loyaltyPointsIni = LoyaltyCommons.clickMangoLikesYou();
+		int loyaltyPointsIni = clickMangoLikesYou();
 		if (loyaltyPointsIni < 3000 && !isPRO()) {
-			loyaltyPointsIni = LoyaltyCommons.addLoyaltyPoints(USER);
+			chargePoints();
 		}
-		pageHomeLikesSteps.clickConseguirPorLikesButton();
+		clickConseguirPorLikesButton();
 		
 		if (!isPRO()) {
-			pageHomeConseguirPorLikesSteps.selectConseguirButton();
-			
-			int loyaltyPointsFin = secMenusUserSteps.clickMenuMangoLikesYou();
-			secMenusUserSteps.checkLoyaltyPoints(loyaltyPointsIni, 1200, loyaltyPointsFin);
+			int likesUsed = selectConseguirButton();
+			checkLikes(likesUsed);
 		}
+	}
+	
+	private int clickMangoLikesYou() {
+		return LoyaltyCommons.clickMangoLikesYou();
+	}
+	
+	private int chargePoints() {
+		return LoyaltyCommons.addLoyaltyPoints(USER);
+	}
+	
+	private void clickConseguirPorLikesButton() {
+		new PageMangoLikesYouSteps().clickConseguirPorLikesButton();
+	}	
+	
+	private int selectConseguirButton() {
+		return (new PageHomeConseguirPorLikesSteps().selectConseguirButton());
+	}
+	
+	private void checkLikes(int likesUsed) {
+		clickMangoLikesYou();
+		new PageMangoLikesYouSteps().click(TabLink.HISTORIAL);
+		new PageHistorialLikesSteps().isLastMovementOf(likesUsed);
 	}
 
 }

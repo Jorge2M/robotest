@@ -14,6 +14,12 @@ public class PageHistorialLikesSteps extends StepBase {
 		return pageHistorialLikes.isMovimientoVisible(seconds);
 	}
 	
+	@Validation(description = "El primer movimiento es de <b>#{likes}</b> puntos")
+	public boolean isLastMovementOf(int likes) {
+		var mov1Opt = pageHistorialLikes.getLoyaltyMovement(1);
+		return (!mov1Opt.isEmpty() && mov1Opt.get().getPoints()==likes);		
+	}
+	
 	@Validation
 	public ChecksTM checkPointsForEnvioTiendaPayment(int points, String idPedido) {
 		var checks = ChecksTM.getNew();
