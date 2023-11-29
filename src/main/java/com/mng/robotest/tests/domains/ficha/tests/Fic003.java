@@ -16,13 +16,15 @@ import static com.mng.robotest.testslegacy.data.PaisShop.*;
 public class Fic003 extends TestBase {
 
 	private final Pais corea = COREA_DEL_SUR.getPais();
-	private final PageGaleriaSteps pGaleriaSteps = new PageGaleriaSteps();
-	private final PageFichaSteps pFichaSteps = new PageFichaSteps();
+	private final PageGaleriaSteps pGaleriaSteps;
+	private final PageFichaSteps pFichaSteps;
 
 	public Fic003() throws Exception {
 		super();
 		dataTest.setPais(corea);
 		dataTest.setIdioma(corea.getListIdiomas().get(0));
+		pGaleriaSteps = new PageGaleriaSteps();
+		pFichaSteps = new PageFichaSteps();
 	}
 
 	@Override
