@@ -35,6 +35,8 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	private final SecBannerHeadGallery secBannerHead = new SecBannerHeadGallery();
 	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
 	
+	public abstract void clickLinkColumnas(NumColumnas numColumnas);
+	
 	public void clickSubMenu(String submenu) {
 		secSubMenusGallery.clickSubMenu(submenu);
 	}
@@ -63,13 +65,11 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		}
 	}
 	
-	private static final String XP_LIST_ARTICLES = "//div[@class[contains(.,'columns')] and @id='list']";
-	
-	public PageGaleriaDesktop() {
+	protected PageGaleriaDesktop() {
 		super();
 	}
 	
-	public PageGaleriaDesktop(From from) {
+	protected PageGaleriaDesktop(From from) {
 		super(from);
 	}
 	
@@ -172,7 +172,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	public boolean isArticleFromLinCarrusel(int numArticle, String idLinCarrusel) {
-		WebElement article = getArticulo(numArticle);
+		var article = getArticulo(numArticle);
 		if (article==null) {
 			return false;
 		}
@@ -188,7 +188,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		}
 		
 		//Los ids de carrusels para niño/niña son nino/nina pero a nivel del HTML de los artículos figura KidsA/KidsO
-		LineaType lineaType = LineaType.getLineaType(idLinCarrusel);
+		var lineaType = LineaType.getLineaType(idLinCarrusel);
 		return 
 		    (lineaType!=null && 
 		    (lineaType==LineaType.NINA || lineaType==LineaType.NINO) &&
@@ -206,10 +206,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 
 	public String getXPathNombreArticuloWithString(String string) {
 		return (getXPathArticulo() + "//*[(" + classProductName + "]) and text()[contains(.,'" + string + "')]]");
-	}
-	
-	public String getXPathLinkNumColumnas(NumColumnas numColumnas) {
-		return ("//button[@id='navColumns" + getNumColumnas(numColumnas) + "']");
 	}
 	
 	public int getNumColumnas(NumColumnas numColumnas) {
@@ -235,21 +231,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return state(Present, xpathArtWithString).check();
 	}	
  
-	@Override
-	public int getLayoutNumColumnas() {
-		return getLayoutNumColumnasShop(); 
-	}	
-	
-	private int getLayoutNumColumnasShop() {
-		var listArt = getElement(XP_LIST_ARTICLES );
-		if (listArt.getAttribute("class").contains("columns3")) {
-			return 3;
-		}
-		if (listArt.getAttribute("class").contains("columns4")) {
-			return 4;
-		}
-		return 2;
-	}
+
 	
 	@Override
 	public boolean isArticleRebajado(WebElement articulo) {
@@ -604,11 +586,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 			}
 		}
 		return "";
-	}
-
-	public void clickLinkColumnas(NumColumnas numColumnas) {
-		String xpathLink = getXPathLinkNumColumnas(numColumnas);
-		click(xpathLink).exec();
 	}
 
 	public boolean isPresentAnyArticle(TypeArticleDesktop typeArticle) {

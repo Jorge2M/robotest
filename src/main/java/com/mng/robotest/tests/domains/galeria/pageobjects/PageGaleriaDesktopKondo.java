@@ -12,6 +12,7 @@ public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
 
 	private final CommonGaleriaKondo commonKondo = new CommonGaleriaKondo();
 	
+	
 	public PageGaleriaDesktopKondo() {
 		super();
 	}
@@ -28,6 +29,10 @@ public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
 	@Override
 	protected String getXPathNombreRelativeToArticle() {
 		return commonKondo.getXPathNombreRelativeToArticle();
+	}
+	
+	private String getXPathLinkNumColumnas(NumColumnas numColumnas) {
+		return ("//*[@data-testid='plp.columns" + getNumColumnas(numColumnas) + ".button']");
 	}
 	
 	@Override
@@ -54,9 +59,20 @@ public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
 	public void clickSlider(WebElement articulo, TypeSlider typeSlider) {
 		commonKondo.clickSlider(articulo, typeSlider);
 	}	
+
+	@Override
+	public void clickLinkColumnas(NumColumnas numColumnas) {
+		String xpathLink = getXPathLinkNumColumnas(numColumnas);
+		click(xpathLink).exec();
+	}	
+
+	@Override
+	public int getLayoutNumColumnas() {
+		return commonKondo.getLayoutNumColumnas();
+	}
 	
 	public boolean isVisibleColorTags(List<Color> colors) {
 		return new SecFiltrosDesktopKondo().isVisibleColorTags(colors);
 	}
-	
+
 }

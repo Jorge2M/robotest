@@ -2,6 +2,8 @@ package com.mng.robotest.tests.domains.galeria.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
 
+import java.util.regex.Pattern;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -10,6 +12,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 
 public class CommonGaleriaKondo extends PageBase {
 
+	private static final String XP_LISTA_ARTICULOS = "//ul[@data-testid[contains(.,'plp.grid.')]]";
 	private static final String XP_CAPA_ARTICULO = "//div[@data-testid='plp.product.figure']";
 	public static final String XP_ARTICULO = XP_CAPA_ARTICULO + "/..";
 	private static final String XP_ANCESTOR_ARTICLE = "//ancestor::div[@data-testid='plp.product.figure']/..";
@@ -68,6 +71,18 @@ public class CommonGaleriaKondo extends PageBase {
 		waitMillis(500);
 		click(articulo).by(By.xpath("." + xpathSlider)).exec();		
 	}	
+	
+	public int getLayoutNumColumnas() {
+		String dataTestId = getElement(XP_LISTA_ARTICULOS).getAttribute("data-testid");
+		var pattern = Pattern.compile("\\d+$");
+		var matcher = pattern.matcher(dataTestId);
+        if (matcher.find()) {
+            String match = matcher.group();
+            return Integer.parseInt(match);
+        } else {
+        	return 0;
+        }
+	}
 	
 	//TODO Galería Kondo React (13-10)
 	private String getXPathImgArticulo() {

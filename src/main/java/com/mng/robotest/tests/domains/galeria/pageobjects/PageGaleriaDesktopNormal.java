@@ -15,6 +15,7 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 
 	public static final String XP_ARTICULO = "//li[@id[contains(.,'product-key-id')]]";
 	private static final String XP_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
+	private static final String XP_LIST_ARTICLES = "//div[@class[contains(.,'columns')] and @id='list']";
 	
 	public PageGaleriaDesktopNormal() {
 		super();
@@ -36,6 +37,10 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 	@Override
 	protected String getXPathNombreRelativeToArticle() {
 		return XP_NOMBRE_RELATIVE_TO_ARTICLE;
+	}
+	
+	private String getXPathLinkNumColumnas(NumColumnas numColumnas) {
+		return ("//button[@id='navColumns" + getNumColumnas(numColumnas) + "']");
 	}
 	
 	private String getXPathImgArticulo(WebElement article) {
@@ -99,6 +104,24 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
 		waitMillis(500);
 		click(articulo).by(By.xpath(xpathSlider)).exec();		
+	}
+	
+	@Override
+	public void clickLinkColumnas(NumColumnas numColumnas) {
+		String xpathLink = getXPathLinkNumColumnas(numColumnas);
+		click(xpathLink).exec();
+	}
+	
+	@Override
+	public int getLayoutNumColumnas() {
+		var listArt = getElement(XP_LIST_ARTICLES);
+		if (listArt.getAttribute("class").contains("columns3")) {
+			return 3;
+		}
+		if (listArt.getAttribute("class").contains("columns4")) {
+			return 4;
+		}
+		return 2; 
 	}	
 	
 	private String getRefFromId(WebElement articulo) {
