@@ -166,10 +166,12 @@ public class UtilsTest {
 			for (var garment : listGarments) {
 				if (garment!=garment1Opt.get()) {
 					almacen1 = garment.getAlmacenFirstArticle();
-					garment.removeArticlesAlmacen(almacen1);
-					if (!garment.getColors().isEmpty() && garment.isAnyArticleWithStock()) {
-						garment2 = garment;
-						break;
+					if (almacen1!=null) {
+						garment.removeArticlesAlmacen(almacen1);
+						if (!garment.getColors().isEmpty() && garment.isAnyArticleWithStock()) {
+							garment2 = garment;
+							break;
+						}
 					}
 				}
 			}
