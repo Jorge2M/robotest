@@ -1898,7 +1898,7 @@ where
     t3.baja_shop is null-->
 <accesovotf usuario="tda00003" password="mng00003"/>
 <!-- https://confluence.mango.com/pages/viewpage.action?pageId=230916541-->
-<galeriakondo>shop,outlet</galeriakondo>
+<galeriakondo>outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="España (Ceuta)" codigo="022">
