@@ -441,6 +441,14 @@ public class PageCheckoutWrapper extends PageBase {
 		return new SecEps().isBancoSeleccionado(nombreBanco);
 	}
 	
+	public boolean isVisibleMessageErrorPago(int seconds) {
+		if (isMobile()) {
+			return page2MobilCheckout.isVisibleMessageErrorPayment(seconds);
+		} else {
+			return page1DktopCheckout.isVisibleMessageErrorPayment(seconds);
+		}
+	}
+	
 	private boolean isMobile() {
 		return channel==Channel.mobile;
 	}	

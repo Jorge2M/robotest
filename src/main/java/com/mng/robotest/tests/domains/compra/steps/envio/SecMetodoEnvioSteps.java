@@ -67,8 +67,8 @@ public class SecMetodoEnvioSteps extends StepBase {
 
 	public void selectMetodoEnvio(DataPago dataPago, String nombrePago) {
 		alterTypeEnviosAccordingContext(dataPago);
-		Pago pago = dataPago.getDataPedido().getPago();
-		TipoTransporte tipoTransporte = pago.getTipoEnvioType(app);
+		var pago = dataPago.getDataPedido().getPago();
+		var tipoTransporte = pago.getTipoEnvioType(app);
 		if (channel==Channel.mobile) {
 			new Page1EnvioCheckoutMobilSteps().selectMetodoEnvio(tipoTransporte, nombrePago, dataPago);
 		} else {
@@ -78,12 +78,12 @@ public class SecMetodoEnvioSteps extends StepBase {
 	
 	public boolean fluxSelectEnvio(DataPago dataPago) {
 		boolean pagoPintado = false;
-		Pago pago = dataPago.getDataPedido().getPago();
+		var pago = dataPago.getDataPedido().getPago();
 		if (pago.getTipoEnvio(app)!=null) {
 			String nombrePago = dataPago.getDataPedido().getPago().getNombre(channel, app);
 			selectMetodoEnvio(dataPago, nombrePago);
 			pagoPintado = true;
-			TipoTransporte tipoEnvio = pago.getTipoEnvioType(app);
+			var tipoEnvio = pago.getTipoEnvioType(app);
 			if (tipoEnvio.isDroppoint()) {
 				modalDroppointsSteps.fluxSelectDroppoint(dataPago);
 			}

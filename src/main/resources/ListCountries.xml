@@ -438,7 +438,9 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
+
 <pais nombre_pais="Denmark" codigo="008">
 <codigo_pais>008</codigo_pais>
 <codigo_alf>DK</codigo_alf>
@@ -831,6 +833,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Iceland" codigo="024">
@@ -1470,6 +1473,7 @@
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Poland" codigo="060">
@@ -2144,6 +2148,7 @@ where
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 <mobiluser>0765-260000</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Schweiz" codigo="036">

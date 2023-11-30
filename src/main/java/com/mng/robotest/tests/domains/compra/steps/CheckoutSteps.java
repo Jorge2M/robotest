@@ -492,8 +492,7 @@ public class CheckoutSteps extends StepBase {
 		validateLoyaltyPointsDiscountMobilUntil(loyaltyPoints, 3);
 	}
 	
-	@Validation (
-		description="Aparece un descuento aplicado de #{descuento} " + SECONDS_WAIT)
+	@Validation(description="Aparece un descuento aplicado de #{descuento} " + SECONDS_WAIT)
 	public boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			float discountApplied = UtilsMangoTest.round(pageCheckoutWrapper.getDiscountLoyaltyAppliedMobil(), 2);
@@ -503,6 +502,11 @@ public class CheckoutSteps extends StepBase {
 			waitMillis(1000);
 		}
 		return false;
+	}
+	
+	@Validation(description="Aparece un mensaje de error de <b>Pago no completado</b> " + SECONDS_WAIT)
+	public boolean isVisibleMessageErrorPayment(int seconds) {
+		return pageCheckoutWrapper.isVisibleMessageErrorPago(seconds);
 	}
 	
 	private boolean isMobile() {

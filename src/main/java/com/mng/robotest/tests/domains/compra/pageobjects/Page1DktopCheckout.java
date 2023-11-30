@@ -102,6 +102,8 @@ public class Page1DktopCheckout extends PageBase {
 	private static final String TAG_COD_VENDEDOR = "@TagCodVendedor";
 	private static final String XP_COD_VENDEDOR_VOTF_WITH_TAG = "//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + TAG_COD_VENDEDOR + "')]]";
 	private static final String XP_TEXT_VALE_CAMPAIGN = "//span[@class='texto_banner_promociones']";
+	
+	private static final String XPATH_ERROR_MESSAGE = "//div[@id='bocataTarjeta' and @class='errorbocatapago']";
 
 	public SecTMango getSecTMango() {
 		return secTMango;
@@ -485,13 +487,13 @@ public class Page1DktopCheckout extends PageBase {
 		ListIterator<WebElement> itArticuloDecimal = null;
 		itArticuloEntero = importeWeb.findElements(By.className("entero")).listIterator();
 		while (itArticuloEntero != null && itArticuloEntero.hasNext()) {
-			WebElement articuloEntero = itArticuloEntero.next();
+			var articuloEntero = itArticuloEntero.next();
 			precioArticulo += articuloEntero.getText();
 		}
 
 		itArticuloDecimal = importeWeb.findElements(By.className("decimal")).listIterator();
 		while (itArticuloDecimal != null && itArticuloDecimal.hasNext()) {
-			WebElement articuloDecimal = itArticuloDecimal.next();
+			var articuloDecimal = itArticuloDecimal.next();
 			precioArticulo += articuloDecimal.getText();
 		}
 
@@ -561,13 +563,14 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isDataChequeRegalo(ChequeRegalo chequeRegalo) {
-		if (!getElement(XP_NOMBRE_CHEQUE_REGALO).getText().contains(chequeRegalo.getNombre()) ||
-			!getElement(XP_NOMBRE_CHEQUE_REGALO).getText().contains(chequeRegalo.getApellidos()) ||
-			!getElement(XP_PRECIO_CHEQUE_REGALO).getText().contains(chequeRegalo.getImporte().toString().replace("EURO_", "")) ||
-			!getElement(XP_MENSAJE_CHEQUE_REGALO).getText().contains(chequeRegalo.getMensaje())) {
-			return false;
-		}
-		return true;
+	    return getElement(XP_NOMBRE_CHEQUE_REGALO).getText().contains(chequeRegalo.getNombre()) &&
+	           getElement(XP_NOMBRE_CHEQUE_REGALO).getText().contains(chequeRegalo.getApellidos()) &&
+	           getElement(XP_PRECIO_CHEQUE_REGALO).getText().contains(chequeRegalo.getImporte().toString().replace("EURO_", "")) &&
+	           getElement(XP_MENSAJE_CHEQUE_REGALO).getText().contains(chequeRegalo.getMensaje());
+	}
+	
+	public boolean isVisibleMessageErrorPayment(int seconds) {
+		return state(Visible, XPATH_ERROR_MESSAGE).wait(seconds).check();
 	}
 
 }

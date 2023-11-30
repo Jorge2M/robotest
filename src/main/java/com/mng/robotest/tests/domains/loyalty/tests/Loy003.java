@@ -17,7 +17,7 @@ public class Loy003 extends TestBase {
 		super();
 
 		if (isPRO()) {
-			dataTest.setUserConnected(LoyaltyCommons.USER_PRO_WITH_LOY_POINTS.getEmail());
+			dataTest.setUserConnected(LoyTestCommons.USER_PRO_WITH_LOY_POINTS.getEmail());
 			dataTest.setPasswordUser(GetterSecrets.factory()
 					.getCredentials(SecretType.SHOP_STANDARD_USER)
 					.getPassword());
@@ -45,11 +45,11 @@ public class Loy003 extends TestBase {
 	}
 	
 	private int clickMangoLikesYou() {
-		return LoyaltyCommons.clickMangoLikesYou();
+		return LoyTestCommons.clickMangoLikesYou();
 	}
 	
 	private int chargePoints() {
-		return LoyaltyCommons.addLoyaltyPoints(USER);
+		return LoyTestCommons.addLoyaltyPoints(USER);
 	}
 	
 	private void clickConseguirPorLikesButton() {

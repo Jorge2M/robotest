@@ -47,6 +47,8 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	private static final String XP_PRECIO_TOTAL_CROATIA_EUROS = "//*[@data-testid='summaryTotalPrice.additionalPrice.1']";
 	private static final String XP_DIRECCION_ENVIO_TEXT = "//p[@class='address']";
 	
+	private static final String XPATH_ERROR_MESSAGE = "//div[@class[contains(.,'step-error')]]";
+	
 	private String getXPathBlockTarjetaGuardada(String metodoPago) {
 		return (XP_BLOCK_TARJETA_GUARDADA_PAGO_WITH_TAG
 				.replace(TAG_METODO_PAGO, metodoPago)
@@ -356,5 +358,9 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 			return (getElement(XP_DIRECCION_ENVIO_TEXT)).getText();
 		}
 		return "";
+	}
+	
+	public boolean isVisibleMessageErrorPayment(int seconds) {
+		return state(Visible, XPATH_ERROR_MESSAGE).wait(seconds).check();
 	}
 }

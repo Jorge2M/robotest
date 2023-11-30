@@ -60,7 +60,7 @@ public class Loy005 extends TestBase {
 	}
 
 	private int clickMangoLikesYou() {
-		return LoyaltyCommons.clickMangoLikesYou();
+		return LoyTestCommons.clickMangoLikesYou();
 	}
 	
 	private int givePoints(int pointsRegalar, int iniPointsEmisor) {

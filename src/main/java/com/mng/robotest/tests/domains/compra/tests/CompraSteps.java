@@ -11,6 +11,8 @@ import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.testslegacy.steps.navigations.manto.PedidoNavigations;
 
+import static com.mng.robotest.testslegacy.datastored.DataCheckPedidos.CheckPedido.*;
+
 public class CompraSteps extends StepBase {
 
 	public void startPayment(DataPago dataPago, boolean executePayment) throws Exception {
@@ -23,17 +25,14 @@ public class CompraSteps extends StepBase {
 	
 	@Override
 	public void checkPedidosManto(List<DataPedido> listPedidos) throws Exception {
-		List<CheckPedido> listChecks = Arrays.asList(
-			CheckPedido.CONSULTAR_BOLSA, 
-			CheckPedido.CONSULTAR_PEDIDO);
-		
+		var listChecks = Arrays.asList(CONSULTAR_BOLSA,	CONSULTAR_PEDIDO);
 		checkPedidosManto(listChecks, listPedidos);
 	}
 	
 	@Override
 	public void checkPedidosManto(List<CheckPedido> listChecks, List<DataPedido> listPedidos) 
 			throws Exception {
-		DataCheckPedidos checksPedidos = DataCheckPedidos.newInstance(listPedidos, listChecks);
+		var checksPedidos = DataCheckPedidos.newInstance(listPedidos, listChecks);
 		new PedidoNavigations().testPedidosShopEnManto(checksPedidos);
 	}
 	

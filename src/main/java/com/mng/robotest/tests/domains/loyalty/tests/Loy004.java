@@ -9,14 +9,14 @@ import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 
 public class Loy004 extends TestBase {
 
-	static final User USER = LoyaltyCommons.USER_PRO_WITH_LOY_POINTS;
+	static final User USER = LoyTestCommons.USER_PRO_WITH_LOY_POINTS;
 	
 	private final PageMangoLikesYouSteps pageMangoLikesYouSteps = new PageMangoLikesYouSteps();
 	
 	public Loy004() throws Exception {
 		super();
 
-		dataTest.setUserConnected(LoyaltyCommons.USER_PRO_WITH_LOY_POINTS.getEmail());
+		dataTest.setUserConnected(LoyTestCommons.USER_PRO_WITH_LOY_POINTS.getEmail());
 		dataTest.setPasswordUser(GetterSecrets.factory()
 				.getCredentials(SecretType.SHOP_STANDARD_USER)
 				.getPassword());
@@ -25,7 +25,7 @@ public class Loy004 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		accessAndLogin();
-		LoyaltyCommons.clickMangoLikesYou();
+		LoyTestCommons.clickMangoLikesYou();
 		pageMangoLikesYouSteps.click(TabLink.HISTORIAL);
 		pageMangoLikesYouSteps.clickAyuda();
 	}
