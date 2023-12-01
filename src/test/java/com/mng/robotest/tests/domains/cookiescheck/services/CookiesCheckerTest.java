@@ -30,7 +30,7 @@ public class CookiesCheckerTest {
 		
 		assertEquals(2, notAllowedCookies.size());
 		
-		List<String> notAllowedNames = Arrays.asList(
+		var notAllowedNames = Arrays.asList(
 				notAllowedCookies.get(0).getName(),
 				notAllowedCookies.get(1).getName());
 		
