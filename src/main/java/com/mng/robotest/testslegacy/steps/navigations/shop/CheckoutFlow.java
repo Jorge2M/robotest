@@ -273,7 +273,7 @@ public class CheckoutFlow extends StepBase {
 	private void testPagoFromCheckoutToEnd(Pago pagoToTest) throws Exception {
 		var dataPedido = dataPago.getDataPedido();
 		dataPedido.setPago(pagoToTest);
-		dataPedido.setResejecucion(com.github.jorge2m.testmaker.conf.State.NOK);
+		dataPedido.setResejecucion(com.github.jorge2m.testmaker.conf.State.KO);
 		
 		var pagoSteps = FactoryPagos.makePagoSteps(dataPago);
 		boolean execPay = iCanExecPago(pagoSteps);
