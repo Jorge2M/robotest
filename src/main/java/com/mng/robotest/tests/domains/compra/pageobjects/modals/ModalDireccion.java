@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.compra.pageobjects;
+package com.mng.robotest.tests.domains.compra.pageobjects.modals;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -7,7 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.compra.pageobjects.DataDireccion.DataDirType;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion.DataDirType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -81,22 +82,22 @@ public abstract class ModalDireccion extends PageBase {
 	
 	public void selectPoblacion(String poblacion, String xpathFormModal) {
 		String xpath = xpathFormModal + XP_SELECT_POBLACION;
-		state(Visible, xpath).wait(2).check();
+		state(VISIBLE, xpath).wait(2).check();
 		waitMillis(1000);
 		new Select(getElement(xpath)).selectByValue(poblacion);
 	}
 	
 	public void selectProvincia(String provincia, String xpathFormModal) {
 		String xpath = xpathFormModal + XP_SELECT_PROVINCIA;
-		state(Clickable, xpath).wait(2).check();
+		state(CLICKABLE, xpath).wait(2).check();
 		new Select(getElement(xpath)).selectByVisibleText(provincia);
 	}
 
 	public void selectPais(String codigoPais, String xpathFormModal) {
 		String xpathSelectedPais = XP_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
-		if (!state(Present, xpathSelectedPais).check()) {
+		if (!state(PRESENT, xpathSelectedPais).check()) {
 			String xpath = xpathFormModal + XP_SELECT_PAIS;
-			state(Clickable, xpath).wait(2).check();
+			state(CLICKABLE, xpath).wait(2).check();
 			new Select(getElement(xpath)).selectByValue(codigoPais);
 		}
 	}

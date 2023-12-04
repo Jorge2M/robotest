@@ -14,7 +14,7 @@ public class PageAmexInputTarjeta extends PageBase {
 	private static final String XP_PAGAR_BUTTON = "//button[@id[contains(.,'divImgAceptar')]]";
 	
 	public boolean isPasarelaRedSysUntil(int seconds) {
-		return state(Present, XP_PAGE_REDSYS).wait(seconds).check();
+		return state(PRESENT, XP_PAGE_REDSYS).wait(seconds).check();
 	}
 	
 	public void inputDataTarjeta(String numTarj, String mesCad, String anyCad, String cvc) {
@@ -25,23 +25,23 @@ public class PageAmexInputTarjeta extends PageBase {
 	}
 
 	public boolean isPresentNumTarj() {
-		return state(Present, XP_INPUT_NUM_TARJ).check();
+		return state(PRESENT, XP_INPUT_NUM_TARJ).check();
 	}
 	
 	public boolean isPresentInputMesCad() {
-		return state(Present, XP_INPUT_MES_CAD).check();
+		return state(PRESENT, XP_INPUT_MES_CAD).check();
 	}
 	
 	public boolean isPresentInputAnyCad() {
-		return state(Present, XP_INPUT_ANY_CAD).check();
+		return state(PRESENT, XP_INPUT_ANY_CAD).check();
 	}
 	
 	public boolean isPresentInputCvc() {
-		return state(Present, XP_INPUT_CVC).check();
+		return state(PRESENT, XP_INPUT_CVC).check();
 	}
 
 	public boolean isPresentPagarButton() {
-		return state(Present, XP_PAGAR_BUTTON).check();
+		return state(PRESENT, XP_PAGAR_BUTTON).check();
 	}
 
 	public void clickPagarButton() {

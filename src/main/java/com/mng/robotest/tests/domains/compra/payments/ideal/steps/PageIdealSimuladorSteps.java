@@ -7,18 +7,18 @@ import com.mng.robotest.tests.domains.compra.payments.ideal.pageobjects.PageIdea
 
 public class PageIdealSimuladorSteps extends StepBase {
 
-	private final PageIdealSimulador pageIdealSimulador = new PageIdealSimulador();
+	private final PageIdealSimulador pgIdealSimulador = new PageIdealSimulador();
 	
 	@Validation (
 		description="Aparece la página de simulación de Ideal")
 	public boolean validateIsPage() { 
-		return pageIdealSimulador.isPage();
+		return pgIdealSimulador.isPage();
 	}
 
 	@Step (
 		description="Seleccionar el botón \"Continuar\"", 
 		expected="El pago se realiza correctamente")
 	public void clickContinueButton() {
-		pageIdealSimulador.clickButtonContinue();
+		pgIdealSimulador.clickButtonContinue();
 	}
 }

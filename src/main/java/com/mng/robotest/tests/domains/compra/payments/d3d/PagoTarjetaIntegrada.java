@@ -16,16 +16,16 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dataPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		
 		if (execPay) {
 			dataPedido.setCodtipopago("U");
 			String metodoPago = dataPago.getDataPedido().getPago().getNombre();
 			if (dataPago.getFTCkout().checkSavedCard && 
-				pageCheckoutWrapperSteps.isTarjetaGuardadaAvailable(metodoPago)) {
-				pageCheckoutWrapperSteps.selectTrjGuardadaAndConfirmPago(dataPago, "737");
+				checkoutSteps.isTarjetaGuardadaAvailable(metodoPago)) {
+				checkoutSteps.selectTrjGuardadaAndConfirmPago(dataPago, "737");
 			} else {
-				pageCheckoutWrapperSteps.inputDataTrjAndConfirmPago(dataPago);
+				checkoutSteps.inputDataTrjAndConfirmPago(dataPago);
 			}
 			switch (dataPedido.getPago().getTipotarjEnum()) {
 			case VISAD3D:

@@ -21,7 +21,7 @@ public class PageChequeRegaloInputDataOld extends PageChequeRegaloInputData impl
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return state(Present, XP_CONTENT).wait(seconds).check();
+		return state(PRESENT, XP_CONTENT).wait(seconds).check();
 	}
 	
 	private String getXPathRadio(Importe importe) {
@@ -40,7 +40,7 @@ public class PageChequeRegaloInputDataOld extends PageChequeRegaloInputData impl
 	
 	@Override
 	public boolean isVisibleDataInput(int seconds) {
-		return state(Visible, XP_INPUT_NOMBRE).wait(seconds).check();
+		return state(VISIBLE, XP_INPUT_NOMBRE).wait(seconds).check();
 	}
 	
 	@Override

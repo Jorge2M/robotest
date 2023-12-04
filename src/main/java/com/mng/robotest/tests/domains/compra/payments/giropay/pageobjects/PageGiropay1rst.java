@@ -21,15 +21,15 @@ public class PageGiropay1rst extends PageBase {
 	}
 	
 	public boolean isPresentIconoGiropay() {
-		return state(Present, getXPathIconoGiropay()).check();
+		return state(PRESENT, getXPathIconoGiropay()).check();
 	}
 	
 	public boolean isPresentCabeceraStep() {
-		return state(Present, XP_CABECERA_STEP).check();
+		return state(PRESENT, XP_CABECERA_STEP).check();
 	}
 	
 	public boolean isPresentButtonPagoDesktopUntil(int seconds) {
-		return state(Present, XP_BUTTON_PAGO_DESKTOP).wait(seconds).check();
+		return state(PRESENT, XP_BUTTON_PAGO_DESKTOP).wait(seconds).check();
 	}
 
 	public void clickIconoGiropay() {

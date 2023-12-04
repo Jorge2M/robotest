@@ -18,7 +18,7 @@ public class PagoAssist extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		pageAssist1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal());
 		

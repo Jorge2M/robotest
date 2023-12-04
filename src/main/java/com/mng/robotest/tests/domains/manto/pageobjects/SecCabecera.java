@@ -11,7 +11,7 @@ public class SecCabecera extends PageBase {
 	private static final String XP_LINK_VOLVER_MENU = "//a[text()[contains(.,'volver al menu')]] | //a/img[@src='/images/logo-mango.png']";
 
 	public String getLitTienda() {
-		if (state(Present, XP_LIT_TIENDA).check()) {
+		if (state(PRESENT, XP_LIT_TIENDA).check()) {
 			return getElement(XP_LIT_TIENDA).getText();	
 		}
 		return "";

@@ -42,7 +42,7 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		return isVisibleUntil(0);
 	}
 	public boolean isVisibleUntil(int seconds) {
-		return state(Visible, XP_CAPA_MENUS).wait(seconds).check();
+		return state(VISIBLE, XP_CAPA_MENUS).wait(seconds).check();
 	}	
 	
 	public boolean isMenuInState(MenuUserDesktop menu, State state) {
@@ -54,7 +54,7 @@ public class ModalUserSesionShopDesktop extends PageBase {
 	}
 	
 	public void wait1sForItAndclickMenu(MenuUserDesktop menu) {
-		isMenuInStateUntil(menu, Clickable, 1);
+		isMenuInStateUntil(menu, CLICKABLE, 1);
 		click(menu.getBy()).exec();
 	}
 	

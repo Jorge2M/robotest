@@ -1,7 +1,5 @@
 package com.mng.robotest.tests.domains.bolsa.pageobjects;
 
-import org.openqa.selenium.By;
-
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
@@ -16,8 +14,8 @@ public class SecBolsa extends SecBolsaCommon {
 	private static final String XP_PANEL_BOLSA_DESKTOP = "//*[@data-testid='bag.opened']";
 	private static final String XP_PANEL_BOLSA_MOBILE = "//*[@data-testid='bagpage.container']";
 	private static final String XP_BOTON_COMPRAR = "//button[@data-testid[contains(.,'checkout.button')]]";
-	private static final String XP_PRECIO_SUBTOTAL_DESKTOP = "//*[@data-testid='bag.preview.summary.price']";
-	private static final String XP_PRECIO_SUBTOTAL_MOBILE = "//*[@data-testid='bag.preview.summary.price']";
+	private static final String XP_PRECIO_SUBTOTAL_MOBILE = "//*[@data-testid[contains(.,'subTotalprice')]]//*[@data-testid='currentPrice']";
+	private static final String XP_PRECIO_SUBTOTAL_DESKTOP = "//*[@data-testid='bag.preview.summary.price']//*[@data-testid='currentPrice']";
 	private static final String XP_INICIAR_SESION_MOBILE = "//*[@data-testid[contains(.,'goToLogin')]]";
 	private static final String XP_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE = "//*[@data-testid[contains(.,'goToContinueAsGuest')]]";	
 
@@ -55,29 +53,16 @@ public class SecBolsa extends SecBolsaCommon {
 	
 	@Override
 	public String getPrecioSubTotal() {
-		String precioTotal = "";
-		String xpathCapaBolsa = getXPathPanelBolsa();
-		String xpathSubtotal = getXPathPrecioSubTotal();
-		By byTotalEntero = By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_big']");
-		By byTotalDecimal = By.xpath(xpathCapaBolsa + xpathSubtotal + "//*[@class='bolsa_price_small']");
-		var itTotalEntero = getElements(byTotalEntero).listIterator();
-		var itTotalDecimal = getElements(byTotalDecimal).listIterator();
-		
-		while (itTotalEntero != null && itTotalEntero.hasNext()) {
-			precioTotal += itTotalEntero.next().getText();
-		}
-		while (itTotalDecimal != null && itTotalDecimal.hasNext()) {
-			precioTotal += itTotalDecimal.next().getText();
-		}
-
-		return (ImporteScreen.normalizeImportFromScreen(precioTotal));
+		isInStateUntil(StateBolsa.OPEN, 2);
+		String precioTotal = getElement(getXPathPrecioSubTotal()).getText(); 
+		return ImporteScreen.normalizeImportFromScreen(precioTotal);
 	} 
 	
 	@Override
 	public String getPrecioTransporte() {
 		String precioTotal = "0";
 		String xpathImpTransp = getXPathPrecioTransporte();
-		if (state(Present, xpathImpTransp).check()) {
+		if (state(PRESENT, xpathImpTransp).check()) {
 			String xpathTotalEntero = xpathImpTransp + "//*[@class='bolsa_price_big']";
 			String xpathTotalDecimal = xpathImpTransp + "//*[@class='bolsa_price_small']";
 			var itTotalEntero = getElements(xpathTotalEntero).listIterator();
@@ -115,7 +100,7 @@ public class SecBolsa extends SecBolsaCommon {
 	}
 	
 	public boolean isVisibleContinuarSinCuentaButtonMobile(int seconds) {
-		return state(Visible, XP_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE).wait(seconds).check();
+		return state(VISIBLE, XP_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE).wait(seconds).check();
 	}
 
 	private void setBolsaDesktopToState(StateBolsa stateBolsaExpected) {
@@ -132,14 +117,13 @@ public class SecBolsa extends SecBolsaCommon {
 			} else {
 				driver.navigate().back();
 			}
-			
 		}
 		isInStateUntil(stateBolsaExpected, 2);
 	}
 	
 	private void clickIconoCloseMobile() {
 		String xpathAspa =  "//div[@id='close_mobile']";
-		if (state(Visible, xpathAspa).check()) {
+		if (state(VISIBLE, xpathAspa).check()) {
 			click(xpathAspa).exec();
 		}
 	}

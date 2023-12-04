@@ -56,7 +56,7 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 	}
 	
 	private boolean isMenuOpen(int seconds) {
-		return state(Visible, XP_WRAPPER_MENU).wait(seconds).check();
+		return state(VISIBLE, XP_WRAPPER_MENU).wait(seconds).check();
 	}
 	private boolean isMenuClose(int seconds) {
 		for (int i=0; i<seconds; i++) {

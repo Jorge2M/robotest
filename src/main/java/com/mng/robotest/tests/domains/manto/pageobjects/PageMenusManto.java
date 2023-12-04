@@ -11,10 +11,10 @@ import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.manto.tests.MenusFact.Section;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageMenusManto extends PageBase {
@@ -40,7 +40,7 @@ public class PageMenusManto extends PageBase {
 	}
 
 	public boolean isPage() {
-		return state(Present, XP_CELDA_TEXT_MENU_PRINCIPAL).check();
+		return state(PRESENT, XP_CELDA_TEXT_MENU_PRINCIPAL).check();
 	}
 	
 	public boolean validateIsPage(String subMenu, int seconds) {
@@ -68,7 +68,7 @@ public class PageMenusManto extends PageBase {
 	}
 
 	public boolean isMenuHeaderVisible() {
-		return state(Present, XP_TITULO).check();
+		return state(PRESENT, XP_TITULO).check();
 	}
 
 	public String clickMenuAndAcceptAlertIfExists(String textoMenu) {
@@ -92,14 +92,14 @@ public class PageMenusManto extends PageBase {
 			String textoMenuRecortado = textoMenu.substring(positionDelete+1, textoMenu.length());
 			click(getXPathLinkMenu(textoMenuRecortado))
 				.waitLink(60).waitLoadPage(60)
-				.type(TypeClick.javascript).exec();
+				.type(JAVASCRIPT).exec();
 		}else {
 			click(getXPathLinkMenu(textoMenu))
 				.waitLink(60).waitLoadPage(60)
-				.type(TypeClick.javascript).exec();
+				.type(JAVASCRIPT).exec();
 		}
 		
-		while (!state(Present, XP_TITULO).check() && 
+		while (!state(PRESENT, XP_TITULO).check() && 
 				timeWaited != maxTimeToWait) {
 			waitMillis(1000);
 			timeWaited++;

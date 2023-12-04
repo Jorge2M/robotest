@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
@@ -67,27 +66,27 @@ public class PageFavoritos extends PageBase {
 	}
 
 	public void closeShareModal() {
-		click(XP_CLOSE_SHARE_MODAL_BUTTON).type(javascript).exec();
+		click(XP_CLOSE_SHARE_MODAL_BUTTON).type(JAVASCRIPT).exec();
 	}
 
 	public boolean checkShareModalUntill(int seconds) {
-		return state(Visible, XP_CLOSE_SHARE_MODAL_BUTTON).wait(seconds).check();
+		return state(VISIBLE, XP_CLOSE_SHARE_MODAL_BUTTON).wait(seconds).check();
 	}
 	
 	public boolean isShareFavoritesVisible() {
-		return state(Visible, XP_SHARE_MODAL_BUTTON).check();
+		return state(VISIBLE, XP_SHARE_MODAL_BUTTON).check();
 	}
 	
 	public boolean isShareWhatsappFavoritesVisible() {
-		return state(Visible, XP_WHATSAPP_SHARE_BUTTON).check();
+		return state(VISIBLE, XP_WHATSAPP_SHARE_BUTTON).check();
 	}
 	
 	public boolean isShareTelegramFavoritesVisible() {
-		return state(Visible, XP_TELEGRAM_SHARE_BUTTON).check();
+		return state(VISIBLE, XP_TELEGRAM_SHARE_BUTTON).check();
 	}
 	
 	public boolean isShareUrlFavoritesVisible() {
-		return state(Visible, XP_URL_SHARE_LABEL).check();
+		return state(VISIBLE, XP_URL_SHARE_LABEL).check();
 	}
 	
 	public void closeSharedModal() {
@@ -98,27 +97,27 @@ public class PageFavoritos extends PageBase {
 	}
 	
 	public boolean checkShareModalInvisible(int seconds) {
-		return state(Invisible, XP_CLOSE_SHARE_MODAL_BUTTON).wait(seconds).check();
+		return state(INVISIBLE, XP_CLOSE_SHARE_MODAL_BUTTON).wait(seconds).check();
 	}
 
 	public boolean isSectionVisible() {
-		return state(Visible, XP_BLOCK_FAVORITOS).check();
+		return state(VISIBLE, XP_BLOCK_FAVORITOS).check();
 	}
 	
 	public boolean isSectionArticlesVisibleUntil(int seconds) {
-		return state(Visible, XP_BLOCK_FAV_WITH_ART).wait(seconds).check();
+		return state(VISIBLE, XP_BLOCK_FAV_WITH_ART).wait(seconds).check();
 	}
 	
 	public void clearArticuloAndWait(String refArticulo, String codColorArticulo) {
 		String xpathBorrar = getXPathAspaBorrar(refArticulo, codColorArticulo);
 		
 		//Ejecutamos el click mediante JavaScript porque en el caso de móvil en ocasiones el aspa de cerrado queda por debajo de la cabecera
-		click(xpathBorrar).type(javascript).exec();
+		click(xpathBorrar).type(JAVASCRIPT).exec();
 	}
 	
 	public boolean isInvisibleArticleUntil(String referencia, String codColor, int seconds) {
 		String xpathArticulo = getXPathArticle(referencia, codColor);
-		return state(Invisible, xpathArticulo).wait(seconds).check();
+		return state(INVISIBLE, xpathArticulo).wait(seconds).check();
 	}
 	
 	public void clearAllArticulos() {
@@ -134,7 +133,7 @@ public class PageFavoritos extends PageBase {
 	
 	public boolean hayArticulos() {
 		waitMillis(500);
-		return state(Present, XP_ARTICULO).check();
+		return state(PRESENT, XP_ARTICULO).check();
 	}
 	
 	public boolean areVisibleArticlesUntil(int seconds) {
@@ -154,7 +153,7 @@ public class PageFavoritos extends PageBase {
 	
 	public boolean isVisibleArticleUntil(String refArticulo, String codigoColor, int seconds) {
 		String xpathArt = getXPathArticle(refArticulo, codigoColor);
-		return state(Visible, xpathArt).wait(seconds).check();
+		return state(VISIBLE, xpathArt).wait(seconds).check();
 	}
 	
 	public void clear1rstArticuloAndWait() {
@@ -163,8 +162,8 @@ public class PageFavoritos extends PageBase {
 			
 			//Ejecutamos el click mediante JavaScript porque en el caso de móvil en ocasiones el aspa de cerrado queda por debajo de la cabecera
 			String xpath = xpathArtWithIdItem + "//span[@class[contains(.,'icofav-eliminar')]]";
-			click(xpath).type(javascript).exec();
-			state(Invisible, xpathArtWithIdItem).wait(3).build();
+			click(xpath).type(JAVASCRIPT).exec();
+			state(INVISIBLE, xpathArtWithIdItem).wait(3).build();
 		}
 	}
 
@@ -176,7 +175,7 @@ public class PageFavoritos extends PageBase {
 	public void clickButtonAddToBagAndWait(String refProducto, String codigoColor) {
 		clickButtonAddToBag(refProducto, codigoColor);
 		String xpathCapaTallas = getXPathCapaTallas(refProducto, codigoColor);
-		state(Visible, xpathCapaTallas).wait(1).build();
+		state(VISIBLE, xpathCapaTallas).wait(1).build();
 	}
 	
 	private void clickButtonAddToBag(String refProducto, String codigoColor) {
@@ -195,7 +194,7 @@ public class PageFavoritos extends PageBase {
 		//Ejecutamos el click mediante JavaScript porque hay un error en la shop que hace 
 		//que en ocasiones el artículo quede parcialmente tapado por el footer.
 		String xpathImg = getXPathImgProducto(refProducto, codigoColor);
-		click(xpathImg).type(TypeClick.javascript).exec();
+		click(xpathImg).type(JAVASCRIPT).exec();
 	}
 	
 	public List<WebElement> getListaTallas(String refProducto, String codigoColor) {
@@ -216,7 +215,7 @@ public class PageFavoritos extends PageBase {
 		var listTallas = getListaTallas(refProducto, codigoColor);
 		List<WebElement> listTallasAvailable = new ArrayList<>();
 		for (var talla : listTallas) {
-			if (!state(Present, talla).by(By.xpath("./span")).check()) {
+			if (!state(PRESENT, talla).by(By.xpath("./span")).check()) {
 				listTallasAvailable.add(talla);
 			}
 		}
@@ -225,12 +224,12 @@ public class PageFavoritos extends PageBase {
 		var talla = Talla.fromLabel(tallaDisponible.getText());
 		tallaDisponible.click();
 		String xpathCapaTallas = getXPathCapaTallas(refProducto, codigoColor);
-		state(Invisible, xpathCapaTallas).wait(1).build();
+		state(INVISIBLE, xpathCapaTallas).wait(1).build();
 		
 		return talla;
 	}
 	
 	public boolean isVisibleButtonEmpty() {
-		return state(Visible, XP_BUTTON_EMPTY).check();
+		return state(VISIBLE, XP_BUTTON_EMPTY).check();
 	}
 }

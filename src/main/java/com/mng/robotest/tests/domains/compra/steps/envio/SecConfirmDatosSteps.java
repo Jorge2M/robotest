@@ -54,7 +54,7 @@ public class SecConfirmDatosSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Desaparece la capa de Droppoints " + getLitSecondsWait(seconds),
-			modalDroppoints.isInvisibleUntil(seconds), Warn);
+			modalDroppoints.isInvisibleUntil(seconds), WARN);
 		
 		DataDeliveryPoint dataDp = dataPedido.getDataDeliveryPoint();
 		String textDireccionEnvioCompleta = new PageCheckoutWrapper().getTextDireccionEnvioCompleta();

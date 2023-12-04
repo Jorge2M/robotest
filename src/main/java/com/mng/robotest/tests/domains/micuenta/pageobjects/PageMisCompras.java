@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.micuenta.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -77,12 +77,12 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private List<WebElement> getTicketsPage() {
-		state(Visible, XP_TICKET).wait(2).check();
+		state(VISIBLE, XP_TICKET).wait(2).check();
 		return getElements(XP_TICKET);
 	}
 	
 	private boolean isVisibleTicket(int seconds) {
-		return state(Visible, XP_TICKET).wait(seconds).check();
+		return state(VISIBLE, XP_TICKET).wait(seconds).check();
 	}
 
 	public boolean areTickets() {
@@ -119,8 +119,8 @@ public class PageMisCompras extends PageBase {
 		return (XP_TICKET + "//img[@loading='lazy' and @alt[contains(.,'" + id + "')]]/..");
 	}
 	
-	public boolean isPageUntil(int seconds) {
-		return state(Visible, getXPathCapaContenedora()).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(VISIBLE, getXPathCapaContenedora()).wait(seconds).check();
 	}
 	
 	private Ticket getTicket(WebElement ticketScreen) {
@@ -152,7 +152,7 @@ public class PageMisCompras extends PageBase {
 	
 	private String getIdTicketPage(WebElement boxDataTicket) {
 		By byIdTicket = By.xpath(XP_ID_RELATIVE_TICKET);
-		if (!state(Visible, boxDataTicket).by(byIdTicket).check()) {
+		if (!state(VISIBLE, boxDataTicket).by(byIdTicket).check()) {
 			return "";
 		}
 		String lineaId = getElement(boxDataTicket, byIdTicket).getText();
@@ -169,7 +169,7 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private int getNumItemsTicketPage(WebElement boxDataTicket) {
-		if (!state(Visible, XP_ITEMS_RELATIVE_TICKET).check()) {
+		if (!state(VISIBLE, XP_ITEMS_RELATIVE_TICKET).check()) {
 			return 0;
 		}
 		String textLinea = "0" + getElement(boxDataTicket, XP_ITEMS_RELATIVE_TICKET).getText();

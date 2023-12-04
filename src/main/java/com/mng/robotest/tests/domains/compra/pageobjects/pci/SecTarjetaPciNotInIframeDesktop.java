@@ -24,37 +24,37 @@ public class SecTarjetaPciNotInIframeDesktop extends PageBase implements SecTarj
 	@Override
 	public boolean isVisiblePanelPagoUntil(String nombrePago, int seconds) {
 		String xpathPanelPago = getXPathPanelPago(nombrePago);
-		return state(Visible, xpathPanelPago).wait(seconds).check();
+		return state(VISIBLE, xpathPanelPago).wait(seconds).check();
 	}
 	
 	@Override
 	public boolean isPresentInputNumberUntil(int seconds) {
-		return state(Present, XP_INPUT_NUMBER).wait(seconds).check();
+		return state(PRESENT, XP_INPUT_NUMBER).wait(seconds).check();
 	}
 	
 	@Override
 	public boolean isPresentInputTitular() {
-		return state(Present, XP_INPUT_TITULAR).check();
+		return state(PRESENT, XP_INPUT_TITULAR).check();
 	}
 	
 	@Override
 	public boolean isPresentSelectMes() {
-		return state(Present, XP_SELECT_MES).check();
+		return state(PRESENT, XP_SELECT_MES).check();
 	}
 	 
 	@Override
 	public boolean isPresentSelectAny() {
-		return state(Present, XP_SELECT_ANY).check();
+		return state(PRESENT, XP_SELECT_ANY).check();
 	}
 	
 	@Override
 	public boolean isPresentInputCvc() {
-		return state(Present, XP_INPUT_CVC).check();
+		return state(PRESENT, XP_INPUT_CVC).check();
 	}
 	
 	@Override
 	public boolean isPresentInputDni() {
-		return state(Present, XP_INPUT_DNI).check();
+		return state(PRESENT, XP_INPUT_DNI).check();
 	}	
 	
 	@Override

@@ -60,7 +60,7 @@ public abstract class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	@Override
 	public boolean isClickableFiltroUntil(int seconds) {
 		String xpathFilterDesc = getXPathLinkOrdenacion(FilterOrdenacion.PRECIO_DESC);
-		return state(Clickable, xpathFilterDesc).wait(seconds).check();
+		return state(CLICKABLE, xpathFilterDesc).wait(seconds).check();
 	}
 	
 	@Override
@@ -85,13 +85,13 @@ public abstract class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	
 	public void showFilters() {
 		if (!isFiltersShopVisible(1) &&
-			state(Clickable, getXPathButtonFiltrar()).check()) {
+			state(CLICKABLE, getXPathButtonFiltrar()).check()) {
 			click(getXPathButtonFiltrar()).exec();
 		}
 	}
 	public void hideFilters() {
 		if (isFiltersShopVisible(1) &&
-			state(Clickable, getXPathButtonFiltrar()).check()) {
+			state(CLICKABLE, getXPathButtonFiltrar()).check()) {
 			click(getXPathButtonFiltrar()).exec();
 		}
 	}
@@ -122,11 +122,11 @@ public abstract class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	}
 
 	public boolean isVisibleLabel(String label) {
-		return state(Visible, getXPathLabel(label)).check();
+		return state(VISIBLE, getXPathLabel(label)).check();
 	}	
 	
 	private boolean isFiltersShopVisible(int seconds) {
-		return state(Visible, getXPathCapaFilters()).wait(seconds).check();
+		return state(VISIBLE, getXPathCapaFilters()).wait(seconds).check();
 	}
 	
 }

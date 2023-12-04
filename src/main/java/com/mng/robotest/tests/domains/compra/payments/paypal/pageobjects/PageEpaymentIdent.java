@@ -14,10 +14,10 @@ public class PageEpaymentIdent extends PageBase {
 	}
 	
 	public boolean isPresentInputUserTypePassword() {
-		return state(Present, XP_INPUT_USER).check();
+		return state(PRESENT, XP_INPUT_USER).check();
 	}
 	
 	public boolean isPresentCodeUserTypePassword() {
-		return state(Present, XP_INPUT_CODE).check();
+		return state(PRESENT, XP_INPUT_CODE).check();
 	}
 }

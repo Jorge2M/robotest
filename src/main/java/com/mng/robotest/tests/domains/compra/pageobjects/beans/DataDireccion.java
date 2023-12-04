@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.compra.pageobjects;
+package com.mng.robotest.tests.domains.compra.pageobjects.beans;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;

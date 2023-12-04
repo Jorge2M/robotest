@@ -42,7 +42,7 @@ public class PageGoogle extends PageBase {
 	}
 	
 	private boolean isVisibleModalCookie(int seconds) {
-		return state(Visible, XP_BUTTON_ACCEPT_MODAL_COOKIE).wait(seconds).check();
+		return state(VISIBLE, XP_BUTTON_ACCEPT_MODAL_COOKIE).wait(seconds).check();
 	}
 	
 	private void acceptModalCookie() {

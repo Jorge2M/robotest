@@ -24,11 +24,11 @@ public class SecConfirmDatos extends PageBase {
 	
 	public boolean isVisibleUntil(int seconds) {
 		String xpathDivGeneral = getXPathDivGeneral();
-		return state(Visible, xpathDivGeneral).wait(seconds).check();
+		return state(VISIBLE, xpathDivGeneral).wait(seconds).check();
 	}
 	
 	public boolean isVisibleInputPostNumberIdDeutschland() {
-		return state(Visible, XP_INPUT_POST_NUMBER_ID_DEUTSCHLAND).check();
+		return state(VISIBLE, XP_INPUT_POST_NUMBER_ID_DEUTSCHLAND).check();
 	}
 	
 	public void sendDataInputPostNumberIdDeutschland(String data) {

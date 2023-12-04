@@ -41,7 +41,7 @@ public class SecFiltros extends PageBase {
 	}
 
 	public void setFiltroCodPaisIfExists(String codigoPais) {
-		if (state(Present, XP_FILTRO_COD_PAIS).check()) {
+		if (state(PRESENT, XP_FILTRO_COD_PAIS).check()) {
 			getElement(XP_FILTRO_COD_PAIS).clear();
 			getElement(XP_FILTRO_COD_PAIS).sendKeys(codigoPais);
 		}

@@ -8,8 +8,8 @@ public class PageCondicionesVenta extends PageBase {
 
 	private static final String XP_MICRO = "//micro-frontend[@id='legalConditions']";
 	
-	public boolean isPageUntil(int seconds) {
-		return state(Present, XP_MICRO).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(PRESENT, XP_MICRO).wait(seconds).check();
 	}
 
 }

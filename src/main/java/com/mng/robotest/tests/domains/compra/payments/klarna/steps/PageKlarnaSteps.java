@@ -51,14 +51,14 @@ public class PageKlarnaSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible el modal para la introducción del número personal " + SECONDS_WAIT,
-		level=Info)
+		level=INFO)
 	public boolean checkModalInputPersonNumber(int seconds) { 
 		return pageKlarna.isVisibleModalPersonNumber(seconds);
 	}
 	
 	@Validation (
 		description="Es visible el modal para la introducción del phone number " + SECONDS_WAIT,
-		level=Info)
+		level=INFO)
 	public boolean checkModalInputPhoneNumber(int seconds) { 
 		return pageKlarna.isVisibleModalInputPhone(seconds);
 	}

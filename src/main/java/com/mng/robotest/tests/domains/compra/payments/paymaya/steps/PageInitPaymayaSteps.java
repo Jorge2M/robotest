@@ -16,7 +16,7 @@ public class PageInitPaymayaSteps {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página inicial de PayMaya",
-			pageInitPaymaya.isPage(), Warn); 
+			pageInitPaymaya.isPage(), WARN); 
 	 	checks.add(
 			"Aparece la imagen del QR",
 			pageInitPaymaya.isQrVisible());

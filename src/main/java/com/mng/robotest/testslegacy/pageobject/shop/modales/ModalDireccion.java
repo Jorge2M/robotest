@@ -8,8 +8,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.compra.pageobjects.DataDireccion;
-import com.mng.robotest.tests.domains.compra.pageobjects.DataDireccion.DataDirType;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion.DataDirType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -81,20 +81,20 @@ public abstract class ModalDireccion extends PageBase {
 	}
 	
 	public void selectPoblacion(String poblacion, String xpathFormModal) {
-		state(Visible, xpathFormModal + XP_SELECT_POBLACION).wait(2).check();
+		state(VISIBLE, xpathFormModal + XP_SELECT_POBLACION).wait(2).check();
 		waitMillis(1000);
 		new Select(getElement(xpathFormModal + XP_SELECT_POBLACION)).selectByValue(poblacion);
 	}
 	
 	public void selectProvincia(String provincia, String xpathFormModal) {
-		state(Visible, xpathFormModal + XP_SELECT_PROVINCIA).wait(2).check();
+		state(VISIBLE, xpathFormModal + XP_SELECT_PROVINCIA).wait(2).check();
 		new Select(getElement(xpathFormModal + XP_SELECT_PROVINCIA)).selectByVisibleText(provincia);
 	}	
 	
 	public void selectPais(String codigoPais, String xpathFormModal) {
 		String xpathSelectedPais = XP_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
-		if (!state(Present, xpathSelectedPais).check()) {
-			state(Visible, xpathFormModal + XP_SELECT_PAIS).wait(2).check();
+		if (!state(PRESENT, xpathSelectedPais).check()) {
+			state(VISIBLE, xpathFormModal + XP_SELECT_PAIS).wait(2).check();
 			new Select(getElement(xpathFormModal + XP_SELECT_PAIS)).selectByValue(codigoPais);
 		}
 	}	

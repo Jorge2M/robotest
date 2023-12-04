@@ -33,7 +33,7 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	}
 	@Override
 	public boolean isVisibleDataTicket(int seconds) {
-		return state(Visible, getXPathTicket()).wait(seconds).check();
+		return state(VISIBLE, getXPathTicket()).wait(seconds).check();
 	}
 	@Override
 	public String getIdTicket(TypeTicket typeTicket) {
@@ -42,11 +42,11 @@ public class PageDetalleCompraDesktop extends PageDetalleCompra {
 	}
 	@Override
 	public boolean isVisibleIdTicket(int seconds) {
-		return state(Visible, getXPathTicket()).wait(seconds).check();
+		return state(VISIBLE, getXPathTicket()).wait(seconds).check();
 	}
 	@Override
 	public String getImporte() {
-		state(Visible, XP_IMPORTE).wait(2).check();
+		state(VISIBLE, XP_IMPORTE).wait(2).check();
 		String importe = getElement(XP_IMPORTE).getText();
 		return importe.replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
 	}

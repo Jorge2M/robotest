@@ -28,17 +28,17 @@ public class PageYandexPayingByCode extends PageBase {
 	}
 	
 	public boolean isPage() {
-		return state(Visible, XP_DIV_PAYMENT_CODE).check();
+		return state(VISIBLE, XP_DIV_PAYMENT_CODE).check();
 	}
 		
 	public boolean isVisibleEmail(String emailUsr) {
 		String xpathEmail = getXPathDataUnitThatContains(emailUsr);
-		return state(Visible, xpathEmail).check();
+		return state(VISIBLE, xpathEmail).check();
 	}
 	
 	public boolean isPresentEmail(String emailUsr) {
 		String xpathEmail = getXPathDataUnitThatContains(emailUsr);
-		return state(Present, xpathEmail).check();
+		return state(PRESENT, xpathEmail).check();
 	}	
 
 	public void clickBackToMango() {
@@ -46,7 +46,7 @@ public class PageYandexPayingByCode extends PageBase {
 	}
 
 	public boolean isVisiblePaymentCode() {
-		return state(Visible, XP_PAYMENT_CODE).check();
+		return state(VISIBLE, XP_PAYMENT_CODE).check();
 	}
 	
 	public String getPaymentCode() {

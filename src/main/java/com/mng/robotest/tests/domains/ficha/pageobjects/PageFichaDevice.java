@@ -61,9 +61,9 @@ public class PageFichaDevice extends PageFicha {
 	}
 
 	@Override
-	public boolean isPageUntil(int seconds) {
+	public boolean isPage(int seconds) {
 		return (
-				state(Present, XP_CONTAINER_FICHA).wait(seconds).check() &&
+				state(PRESENT, XP_CONTAINER_FICHA).wait(seconds).check() &&
 						//secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(seconds)
 						secDataProduct.getSecSelTallas().isSectionUntil(seconds)
 		);
@@ -73,17 +73,17 @@ public class PageFichaDevice extends PageFicha {
 	public boolean isFichaArticuloUntil(String refArticulo, int seconds) {
 		String refSinColor = refArticulo.substring(0,8);
 		String xpathFichaRef = getXPathIsPage(refSinColor);
-		return state(Present, xpathFichaRef).wait(seconds).check();
+		return state(PRESENT, xpathFichaRef).wait(seconds).check();
 	}
 
 	@Override
 	public boolean isVisibleBolsaButton(int seconds) {
-		return state(Visible, XP_ALTA_BOLSA_BUTTON).wait(seconds).check();
+		return state(VISIBLE, XP_ALTA_BOLSA_BUTTON).wait(seconds).check();
 	}
 	
 	@Override
 	public void clickAnadirBolsaButtonAndWait() {
-		click(XP_ALTA_BOLSA_BUTTON).waitLink(2).type(javascript).exec();
+		click(XP_ALTA_BOLSA_BUTTON).waitLink(2).type(JAVASCRIPT).exec();
 	}
 
 	@Override
@@ -98,22 +98,22 @@ public class PageFichaDevice extends PageFicha {
 
 	@Override
 	public boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		return state(Visible, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
+		return state(VISIBLE, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
 	}
 
 	@Override
 	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		return state(Invisible, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
+		return state(INVISIBLE, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
 	}
 
 	@Override
 	public boolean isVisibleButtonElimFavoritos(int seconds) {
-		return state(Visible, XP_BUTTON_FAVORITOS_FOR_REMOVE).wait(seconds).check();
+		return state(VISIBLE, XP_BUTTON_FAVORITOS_FOR_REMOVE).wait(seconds).check();
 	}
 
 	@Override
 	public boolean isVisibleButtonAnadirFavoritos(int seconds) {
-		return state(Visible, XP_BUTTON_FAVORITOS_FOR_ADD).wait(seconds).check();
+		return state(VISIBLE, XP_BUTTON_FAVORITOS_FOR_ADD).wait(seconds).check();
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public class PageFichaDevice extends PageFicha {
 
 	@Override
 	public boolean isVisibleBuscarEnTiendaLink() {
-		return state(Visible, XP_BUSCAR_ENN_TIENDA_BUTTON).check();
+		return state(VISIBLE, XP_BUSCAR_ENN_TIENDA_BUTTON).check();
 	}
 
 	@Override
@@ -133,11 +133,11 @@ public class PageFichaDevice extends PageFicha {
 
 	@Override
 	public boolean isModalNoStockVisible(int seconds) {
-		return state(Visible, XP_MODAL_NO_STOCK).wait(seconds).check();
+		return state(VISIBLE, XP_MODAL_NO_STOCK).wait(seconds).check();
 	}
 
 	public boolean isVisibleUltimosProductosSection() {
-		return state(Visible, XP_ULTIMOS_PRODUCTOS_SECTION).check();
+		return state(VISIBLE, XP_ULTIMOS_PRODUCTOS_SECTION).check();
 	}
 
 	public void clickImagenFichaCentral() {
@@ -155,7 +155,7 @@ public class PageFichaDevice extends PageFicha {
 	public String getSrcImgCarruselIzq(int numImagen) {
 		String srcImagen = "";
 		String xpathImagenX = "(" + XP_IMAGEN_CARRUSEL_IZQ + ")[" + numImagen + "]";
-		if (state(Present, xpathImagenX).check()) {
+		if (state(PRESENT, xpathImagenX).check()) {
 			String srcImagenO = getElement(xpathImagenX).getAttribute("src");
 			srcImagen = srcImagenO.substring(srcImagenO.lastIndexOf("/"));
 		}
@@ -164,7 +164,7 @@ public class PageFichaDevice extends PageFicha {
 
 	public String getSrcImagenCentral() {
 		String xpathImg = getXPathImagenCentral();
-		if (state(Present, xpathImg).check()) {
+		if (state(PRESENT, xpathImg).check()) {
 			String srcImagenO = getElement(xpathImg).getAttribute("src");
 			return srcImagenO.substring(srcImagenO.lastIndexOf("/"));
 		}
@@ -173,7 +173,7 @@ public class PageFichaDevice extends PageFicha {
 
 	public String getSrcImagenCentralConZoom() {
 		String xpathImg = getXPathImagenCentralConZoom();
-		if (state(Present, xpathImg).check()) {
+		if (state(PRESENT, xpathImg).check()) {
 			String srcImagenO = getElement(xpathImg).getAttribute("src");
 			return srcImagenO.substring(srcImagenO.lastIndexOf("/"));
 		}
@@ -214,7 +214,7 @@ public class PageFichaDevice extends PageFicha {
 	}
 
 	public boolean isVisibleFichaConZoom() {
-		return (state(Visible, getXPathDivImgCentralDiv()).check());
+		return (state(VISIBLE, getXPathDivImgCentralDiv()).check());
 	}
 
 	public void selectGuiaDeTallasLink() {
@@ -222,6 +222,6 @@ public class PageFichaDevice extends PageFicha {
 	}
 
 	public boolean isPresentPageUntil(int seconds) {
-		return (state(Present, XP_CONTAINER_FICHA).wait(seconds).check());
+		return (state(PRESENT, XP_CONTAINER_FICHA).wait(seconds).check());
 	}
 }

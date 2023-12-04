@@ -107,12 +107,12 @@ public class PageGestorCheques extends PageBase {
 	}
 	
 	public boolean isPage() {
-		return state(Present, getXPathTitulo(TITULO)).check();
+		return state(PRESENT, getXPathTitulo(TITULO)).check();
 	}
 
 	public boolean isPageDetalles() {
 		String xpath = getXPathTitulo(TITULO_DETALLES);
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 
 	public void inputMailAndClickCorreoReceptorButton(String mail) {
@@ -136,11 +136,11 @@ public class PageGestorCheques extends PageBase {
 	}
 
 	public boolean comprobarNumeroPedidos(int numPedidosEsther) {
-		return state(Visible, getXPathFila(numPedidosEsther)).wait(20).check();
+		return state(VISIBLE, getXPathFila(numPedidosEsther)).wait(20).check();
 	}
 
 	public boolean isMailCorrecto(String mail) {
-		return state(Visible, getXPathMailFila(1, mail)).wait(20).check();
+		return state(VISIBLE, getXPathMailFila(1, mail)).wait(20).check();
 	}
 
 	public String clickPedido(int numFila, String mail) {
@@ -150,11 +150,11 @@ public class PageGestorCheques extends PageBase {
 	}
 
 	public boolean comprobarMailDetallesCheque(String mail) {
-		return state(Present, getXPathDetallesMail(mail)).check();
+		return state(PRESENT, getXPathDetallesMail(mail)).check();
 	}
 
 	public boolean comprobarPedidoDetallesCheque(String pedido) {
-		return state(Present, getXPathDetallesPedido(pedido)).check();
+		return state(PRESENT, getXPathDetallesPedido(pedido)).check();
 	}
 
 }

@@ -5,10 +5,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.*;
-import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
-
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
@@ -25,6 +21,9 @@ import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class SecMenusUserSteps extends StepBase {
 	
@@ -33,7 +32,7 @@ public class SecMenusUserSteps extends StepBase {
 	@Step (
 		description="Seleccionar el menú de usuario \"Favoritos\"", 
 		expected="Aparece la página de gestión de favoritos con los artículos correctos",
-		saveHtmlPage=IfProblem)
+		saveHtmlPage=IF_PROBLEM)
 	public void selectFavoritos() {
 		clickUserMenu(FAVORITOS);
 		new PageFavoritosSteps().validaIsPageOK();
@@ -42,7 +41,7 @@ public class SecMenusUserSteps extends StepBase {
 	@Step (
 		description="Seleccionar el menú de usuario <b>Regístrate</b>", 
 		expected="Aparece al página inicial del registro",
-		saveHtmlPage=Always)
+		saveHtmlPage=ALWAYS)
 	public void selectRegistrate() {
 		clickUserMenu(REGISTRATE);
 		if (channel.isDevice()) {
@@ -69,7 +68,7 @@ public class SecMenusUserSteps extends StepBase {
 	@Validation (
 		description="Aparece el link superior de \"Iniciar sesión\" " + SECONDS_WAIT)
 	private boolean checkIsVisibleIniciarSesionLink(int seconds) {
-		return (userMenus.isMenuInStateUntil(INICIAR_SESION, Present, seconds));
+		return (userMenus.isMenuInStateUntil(INICIAR_SESION, PRESENT, seconds));
 	}
 	
 	public void logoffLogin(String userConnect, String userPassword) {
@@ -115,13 +114,13 @@ public class SecMenusUserSteps extends StepBase {
 		if (channel==Channel.desktop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-		return (userMenus.isMenuInStateUntil(CERRAR_SESION, Present, 1));
+		return (userMenus.isMenuInStateUntil(CERRAR_SESION, PRESENT, 1));
 	}
 	private boolean isInvisibleLinkCerrarSesion() {
 		if (channel==Channel.desktop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-		return (!userMenus.isMenuInStateUntil(CERRAR_SESION, Present, 1));
+		return (!userMenus.isMenuInStateUntil(CERRAR_SESION, PRESENT, 1));
 	}	
 
 	@Step (
@@ -164,7 +163,7 @@ public class SecMenusUserSteps extends StepBase {
 		if (channel==Channel.desktop && app==AppEcom.shop) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
-		boolean visibilityMLY = userMenus.isMenuInStateUntil(MANGO_LIKES_YOU, Present, 1);
+		boolean visibilityMLY = userMenus.isMenuInStateUntil(MANGO_LIKES_YOU, PRESENT, 1);
 		if (app==AppEcom.shop) {
 			checks.add(
 				"Sí aparece el link de \"Mango Likes You\" en el menú de usuario",
@@ -205,7 +204,7 @@ public class SecMenusUserSteps extends StepBase {
 			"Los Loyalty Points que figuran ahora en la web (<b>" + finalPoints + "</b>) " + 
 			"coinciden con los <b>" + loyaltyPointsExpected + "</b> esperados " + 
 			"(inicialmente teníamos " + initPoints + " y hemos utilizado " + donatedPoints + ")",
-			finalPoints==loyaltyPointsExpected, Warn);
+			finalPoints==loyaltyPointsExpected, WARN);
 	 	
 	 	return checks;
 	}

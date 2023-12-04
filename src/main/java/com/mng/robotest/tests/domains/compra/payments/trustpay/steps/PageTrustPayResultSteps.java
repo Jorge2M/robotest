@@ -24,7 +24,7 @@ public class PageTrustPayResultSteps extends StepBase {
 	 	String codPais = dataTest.getCodigoPais();
 	 	checks.add(
 			"Figura el importe total de la compra (" + importeTotal + ")",
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), WARN);
 	 	
 	 	checks.add(
 			"Figura el botón \"continue\"",

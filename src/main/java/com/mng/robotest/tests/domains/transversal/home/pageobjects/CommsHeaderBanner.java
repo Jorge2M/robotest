@@ -10,10 +10,10 @@ public class CommsHeaderBanner extends PageBase {
 	private static final String XP_BANNER_LOYALTY = XP_HEADER_BANNER + "//*[@data-testid='commsBanner.mangoLikesYou']"; 
 	
 	public boolean isHeaderBanner() {
-		return state(Visible, XP_HEADER_BANNER).check();
+		return state(VISIBLE, XP_HEADER_BANNER).check();
 	}
 
 	public boolean isHeaderBannerMangoLikesYou(int seconds) {
-		return state(Visible, XP_BANNER_LOYALTY).wait(seconds).check(); 
+		return state(VISIBLE, XP_BANNER_LOYALTY).wait(seconds).check(); 
 	}
 }

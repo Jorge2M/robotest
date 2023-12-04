@@ -16,7 +16,7 @@ import static com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesY
 
 public class PageMangoLikesYouSteps extends StepBase {
 
-	private final PageMangoLikesYou pageMangoLikesYou = new PageMangoLikesYou();
+	private final PageMangoLikesYou pgMangoLikesYou = new PageMangoLikesYou();
 	
 	@Validation
 	public ChecksResultWithNumberPoints checkIsPageOk() {
@@ -24,17 +24,17 @@ public class PageMangoLikesYouSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de <b>Mango likes you</b> " + getLitSecondsWait(seconds),
-			pageMangoLikesYou.checkIsPageUntil(4));
+			pgMangoLikesYou.checkisPage(4));
 		
 		int secondsButton = 10;
 		checks.add(
 			"Es visible el botón \"Compra con descuento\" (esperamos hasta " + secondsButton + " segundos)",
-			pageMangoLikesYou.isVisibleButton(COMPRA_CON_DESCUENTO, secondsButton));
+			pgMangoLikesYou.isVisibleButton(COMPRA_CON_DESCUENTO, secondsButton));
 		
-		checks.setNumberPoints(pageMangoLikesYou.getPoints());
+		checks.setNumberPoints(pgMangoLikesYou.getPoints());
 		checks.add(
 			"El número de puntos Loyalty es > 0",
-			checks.getNumberPoints() > 0, Warn);
+			checks.getNumberPoints() > 0, WARN);
 		return checks;
 	}
 
@@ -48,7 +48,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		expected="Aparece la página de ayuda específica de Mango Likes You")
 	private Pair<String, String> clickAyudaStep() {
 		String parentWindow = driver.getWindowHandle();
-		pageMangoLikesYou.clickAyuda();
+		pgMangoLikesYou.clickAyuda();
 		String childWindow = switchToAnotherWindow(driver, parentWindow);
 		checkPageAyudaMangoLikesYouVisible(2);
 		return Pair.of(parentWindow, childWindow);
@@ -68,7 +68,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		checks.add(
 			"Aparece la página específica de ayuda para MangoLikesYou "  + SECONDS_WAIT + 
 		    "(problema <a href='https://jira.mango.com/browse/PIUR-4471'>PIUR4471</a>)",
-		    pageMangoLikesYou.isPageAyudaMangoLikesYouVisible(seconds), Warn);
+		    pgMangoLikesYou.isPageAyudaMangoLikesYouVisible(seconds), WARN);
 		
 	    return checks;
     }	
@@ -77,7 +77,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		description="Seleccionar la pestaña <b>#{tabLink.name()}</b>",
 		expected="Aparece la página asociada a dicha pestaña")
 	public void click(TabLink tabLink) {
-		pageMangoLikesYou.click(tabLink);
+		pgMangoLikesYou.click(tabLink);
 		if (tabLink==TabLink.HISTORIAL) {
 			new PageHistorialLikesSteps().checkHistorialVisible(5);
 		}
@@ -87,7 +87,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		description="Seleccionar el link \"Compra un descuento\"",
 		expected="Aparece la página de \"Compra con descuento\"")
 	public void clickOpcionCompraUnDescuento() {
-		pageMangoLikesYou.clickButton(COMPRA_CON_DESCUENTO);
+		pgMangoLikesYou.clickButton(COMPRA_CON_DESCUENTO);
 		new PageHomePurchaseWithDiscountSteps()
 			.checkHomePurchaseWithDiscountPageOk();
 	}
@@ -96,13 +96,13 @@ public class PageMangoLikesYouSteps extends StepBase {
 		description="Seleccionar el 1er botón \"Donar Likes\"",
 		expected="Aparece una página para donar mis Likes")
 	public void clickButtonDonarLikes() {
-		pageMangoLikesYou.clickButton(DONAR_MIS_LIKES);
+		pgMangoLikesYou.clickButton(DONAR_MIS_LIKES);
 		new PageHomeDonateLikesSteps().checkIsPage(5, BUTTON_50_LIKES, BUTTON_100_LIKES);
 		checksDefault();
 	}
 	
 	public void clickConseguirPorLikesButton() {
-		if (pageMangoLikesYou.isVisibleButton(LIKES_1200, 0)) {
+		if (pgMangoLikesYou.isVisibleButton(LIKES_1200, 0)) {
 			click1200Likes();
 		} else {
 			clickSaberMas();
@@ -114,7 +114,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		description="Seleccionar el 1er botón para la compra de una entrada de cine",
 		expected="Aparece una página para conseguir la entrada de cine")
 	private void clickSaberMas() {
-		pageMangoLikesYou.clickButton(ENTRADA_CINE);
+		pgMangoLikesYou.clickButton(ENTRADA_CINE);
 		new PageHomeConseguirPorLikesSteps().checkIsPage(2);
 		
 	}
@@ -123,7 +123,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		description="Seleccionar el 1er botón \"1200 Likes\"",
 		expected="Aparece una página para conseguir por 1200 Likes")
 	private void click1200Likes() {
-		pageMangoLikesYou.clickButton(LIKES_1200);
+		pgMangoLikesYou.clickButton(LIKES_1200);
 		new PageHomeConseguirPorLikesSteps().checkIsPage(2);
 	}
 	
@@ -131,7 +131,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		description="Seleccionar el 1er botón \"Regalar mis Likes\"",
 		expected="Aparece la página para regalar mis Likes")
 	public PageRegalarMisLikesSteps clickButtonRegalarMisLikes() {
-		pageMangoLikesYou.clickButton(REGALAR_MIS_LIKES);
+		pgMangoLikesYou.clickButton(REGALAR_MIS_LIKES);
 		var pageRegalarSteps = new PageRegalarMisLikesSteps();
 		pageRegalarSteps.checkIsPage();
 		return pageRegalarSteps;

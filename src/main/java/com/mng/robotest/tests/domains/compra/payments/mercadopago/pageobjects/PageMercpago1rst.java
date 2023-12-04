@@ -9,8 +9,8 @@ public class PageMercpago1rst extends PageBase {
 	private static final String XP_INPUT_NUM_TARJETA = "//input[@id='cardNumber']";
 	private static final String XP_LINK_REGISTRO = "//a[@href[contains(.,'changeGuestMail')]]";
 
-	public boolean isPageUntil(int seconds) {
-		return state(Visible, XP_INPUT_NUM_TARJETA).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(VISIBLE, XP_INPUT_NUM_TARJETA).wait(seconds).check();
 	}
 
 	public void clickLinkRegistro() {

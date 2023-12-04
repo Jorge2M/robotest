@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.tests.domains.base.StepMantoBase;
 import com.mng.robotest.tests.domains.compra.steps.envio.DataDeliveryPoint;
 import com.mng.robotest.tests.domains.manto.pageobjects.PageDetalleCliente;
@@ -21,6 +20,7 @@ import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.manto.pageobjects.PagePedidos.IdColumn.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class PagePedidosMantoSteps extends StepMantoBase {
 
@@ -39,27 +39,27 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	 	
 	 	checks.add(
 			"En la columna " + IDPEDIDO.getTextoColumna() + " aparece el código de pedido: " + dataPedido.getCodigoPedidoManto(),
-			checks.getExistsLinkCodPed(), Warn);
+			checks.getExistsLinkCodPed(), WARN);
 	 	
 	 	checks.add(
 			"Aparece un solo pedido",
-			pagePedidos.getNumLineas()==1, Warn);
+			pagePedidos.getNumLineas()==1, WARN);
 		
 	 	checks.add(
 			"En la columna " + EMAIL.getTextoColumna() + " aparece el email asociado: " + dataPedido.getEmailCheckout(),
 			pagePedidos.isPresentDataInPedido(EMAIL, dataPedido.getEmailCheckout(), TypeDetalle.PEDIDO, 0), 
-			Warn);
+			WARN);
 	 	
 	 	String xpathCeldaImporte = pagePedidos.getXPathCeldaLineaPedido(TOTAL, TypeDetalle.PEDIDO);
 	 	checks.add(
 			"En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto(),
 			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), xpathCeldaImporte, driver), 
-			Warn);
+			WARN);
 	 	
 	 	checks.add(
 			"En la columna " + TARJETA.getTextoColumna() + " aparece el tipo de tarjeta: " + dataPedido.getCodtipopago(),
 			pagePedidos.isPresentDataInPedido(TARJETA, dataPedido.getCodtipopago(), TypeDetalle.PEDIDO, 0), 
-			Warn);
+			WARN);
 		
 		return checks;
 	}
@@ -67,7 +67,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	@Step (
 		description="Buscamos pedidos con id registro",
 		expected="Debemos obtener el ID del pedido",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public DataPedido getPedidoUsuarioRegistrado(DataPedido dPedidoPrueba) {
 		int posicionPedidoActual = 6;
 		int posicionMaxPaginaPedidos = 105;
@@ -96,7 +96,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	@Step (
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public DataPedido getDataPedido(DataPedido dPedidoPrueba) {
 		var dBagPrueba = new DataBag();
 		List<String> referencias = new PageDetallePedido().getReferenciasArticulosDetallePedido();
@@ -119,7 +119,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	@Step (
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public DataPedido getDataCliente(DataPedido dPedidoPrueba) {
 		new PageDetallePedido().clickLinkDetallesCliente();
 		var pageDetalleCliente = new PageDetalleCliente();
@@ -150,7 +150,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	@Step (
 		description="Un pedido con tienda física en la lista de pedidos", 
 		expected="Debemos obtener una tienda física válida",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public DataPedido getTiendaFisicaListaPedidos(DataPedido dPedidoPrueba) {
 		var dEnvioPrueba = new DataDeliveryPoint();
 		dPedidoPrueba.setDataDeliveryPoint(dEnvioPrueba);

@@ -14,7 +14,7 @@ public abstract class PageMercpagoDatosTrj extends PageBase {
 	
 	public enum TypePant {INPUT_DATA_TRJ_NEW, INPUT_CVC_TRJ_SAVED} 
 	
-	public abstract boolean isPageUntil(int seconds);
+	public abstract boolean isPage(int seconds);
 	public abstract void sendCvc(String cvc);
 	public abstract void sendCaducidadTarj(String fechaVencimiento);
 	
@@ -33,7 +33,7 @@ public abstract class PageMercpagoDatosTrj extends PageBase {
 	}
 	
 	public TypePant getTypeInput() {
-		if (state(Visible, XP_INPUT_NUM_TARJ).check()) {
+		if (state(VISIBLE, XP_INPUT_NUM_TARJ).check()) {
 			return TypePant.INPUT_DATA_TRJ_NEW;
 		}
 		return TypePant.INPUT_CVC_TRJ_SAVED;

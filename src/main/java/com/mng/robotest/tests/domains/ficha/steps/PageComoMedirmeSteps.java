@@ -8,12 +8,12 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageComoMedirmeSteps extends StepBase {
 
-	private final PageComoMedirme pageComoMedirme = new PageComoMedirme();
+	private final PageComoMedirme pgComoMedirme = new PageComoMedirme();
 	
 	@Validation (
 		description="Aparece la página de <b>Cómo medirme</b> en una nueva pestaña",
-		level=Warn)
+		level=WARN)
 	public boolean isPageInNewTab() {
-		return (pageComoMedirme.goToPageInNewTabCheckAndClose());
+		return (pgComoMedirme.goToPageInNewTabCheckAndClose());
 	}
 }

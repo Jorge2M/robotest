@@ -21,8 +21,8 @@ public class PageD3DJPTestSelectOption extends PageBase {
 	private static final String XP_BUTTON_SUBMIT = "//input[@type='submit' and @name='B2']";
 	private static final String XP_BUTTON_RESET = "//input[@type='submit' and @name='B3']";
 	
-	public boolean isPageUntil(int seconds) {
-		return state(Visible, XP_SELECT_OPTION).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(VISIBLE, XP_SELECT_OPTION).wait(seconds).check();
 	}
 	
 	public void selectOption(OptionD3D option) {

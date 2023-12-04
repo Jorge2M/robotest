@@ -18,11 +18,11 @@ public class PageDotpayPaymentChannelSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Aparece la página de Dotpay para la selección del banco",
-			pageDotpayPaymentChannel.isPage(), Warn);
+			pageDotpayPaymentChannel.isPage(), WARN);
 	  	
 	  	checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), WARN);
 		return checks;
 	}
 	
@@ -36,7 +36,7 @@ public class PageDotpayPaymentChannelSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible el bloque de introducción del nombre " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	private boolean isVisibleBlockInputNombre(int seconds) {
 		return pageDotpayPaymentChannel.isVisibleBlockInputDataUntil(seconds);
 	}

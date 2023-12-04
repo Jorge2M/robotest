@@ -68,13 +68,13 @@ public class SecTallasArticuloKondo extends SecTallasArticulo {
 	@Override
 	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
 		String xpathCapa = getXPathArticleTallaAvailable(posArticulo);
-		return state(Visible, xpathCapa).wait(seconds).check();
+		return state(VISIBLE, xpathCapa).wait(seconds).check();
 	}
 	
 	@Override
 	public Talla selectTallaAvailableArticle(int posArticulo) throws Exception {
 		String xpathTalla = getXPathArticleTallaAvailable(posArticulo);
-		if (state(Visible, xpathTalla).check()) {
+		if (state(VISIBLE, xpathTalla).check()) {
 			var tallaToSelect = getElement(xpathTalla);
 			tallaToSelect.click();
 			return Talla.fromLabel(tallaToSelect.getText());
@@ -84,7 +84,7 @@ public class SecTallasArticuloKondo extends SecTallasArticulo {
 	
 	@Override
 	public boolean isVisibleTallaNotAvailable() {
-		return state(Visible, getXPathTallaUnavailable()).check();
+		return state(VISIBLE, getXPathTallaUnavailable()).check();
 	}	
 	
 	@Override
@@ -101,7 +101,7 @@ public class SecTallasArticuloKondo extends SecTallasArticulo {
 		moveToElement(getXPathArticulo(position));
 		moveToElement(getXPathCapaTallasArticulo(position));
 		keyDown(2); //Without this fails (real problem in production) (20-10-23)
-		return state(Visible, getXPathTallaUnavailable()).wait(1).check();
+		return state(VISIBLE, getXPathTallaUnavailable()).wait(1).check();
 	}
 	
 	@Override

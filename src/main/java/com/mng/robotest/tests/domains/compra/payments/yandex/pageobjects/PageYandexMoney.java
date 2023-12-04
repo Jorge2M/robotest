@@ -35,11 +35,11 @@ public class PageYandexMoney extends PageBase {
 	}
 	
 	public boolean isVisibleInputPaymentCode() {
-		return state(Visible, XP_INPUT_PAYMENT_CODE).check();
+		return state(VISIBLE, XP_INPUT_PAYMENT_CODE).check();
 	}
 	
 	public boolean isVisibleInputImport() {
-		return state(Visible, XP_INPUT_IMPORT).check();
+		return state(VISIBLE, XP_INPUT_IMPORT).check();
 	}
 
 	public void clickPayButton() {

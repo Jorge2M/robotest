@@ -95,7 +95,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	}
 	
 	public boolean isInputTarjetaVisible(int seconds) {
-		return state(Visible, ConsultaSaldo.NUMERO_TARJETA.getBy()).wait(seconds).check();
+		return state(VISIBLE, ConsultaSaldo.NUMERO_TARJETA.getBy()).wait(seconds).check();
 	}
 	
 	public void introducirTarjetaConsultaSaldo(String numTarjeta) {
@@ -110,7 +110,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	}
 	
 	public boolean isVisibleCvv(int seconds) {
-		return state(Visible, ConsultaSaldo.VALIDAR.getBy()).wait(seconds).check();
+		return state(VISIBLE, ConsultaSaldo.VALIDAR.getBy()).wait(seconds).check();
 	}
 	
 	public void introducirCvc(String cvvNumber) {
@@ -121,7 +121,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	}
 	
 	public boolean isTarjetaWithoutSaldo(int seconds) {
-		return state(Present, ConsultaSaldo.MENSAJE_TARJETA_SIN_SALDO.getBy()).wait(seconds).check();
+		return state(PRESENT, ConsultaSaldo.MENSAJE_TARJETA_SIN_SALDO.getBy()).wait(seconds).check();
 	}
 	
 	public void clickBotonVolver() {
@@ -130,7 +130,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return (state(Present, ElementCheque.PAGINA_FORM.getBy()).wait(seconds).check());
+		return (state(PRESENT, ElementCheque.PAGINA_FORM.getBy()).wait(seconds).check());
 	}
 	
 	@Override
@@ -145,7 +145,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	
 	@Override
 	public boolean isVisibleDataInput(int seconds) {
-		return state(Present, InputCheque.DATA_PROOF.getBy()).wait(seconds).check();
+		return state(PRESENT, InputCheque.DATA_PROOF.getBy()).wait(seconds).check();
 	}
 	
 	@Override
@@ -164,7 +164,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 		//Existe un problema en Firefox-Gecko muy extraño: a veces, después de seleccionar el botón "comprar ahora" 
 		//te muestra error en todos los campos de input y no avanza a la siguiente página
 		for (int i=0; i<10; i++) {
-			if (!state(Invisible, ElementCheque.COMPRAR_AHORA.getBy()).wait(3).check()) {
+			if (!state(INVISIBLE, ElementCheque.COMPRAR_AHORA.getBy()).wait(3).check()) {
 				inputDataCheque(chequeRegalo);
 				click(ElementCheque.COMPRAR_AHORA.getBy()).exec();
 			} else {
@@ -187,7 +187,7 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 	public boolean isPresentInputImportes() {
 		for (Importe importe : Importe.values()) {
 			String xpathRadio = getXPathRadioImporte(importe);
-			if (!state(Present, xpathRadio).check()) {
+			if (!state(PRESENT, xpathRadio).check()) {
 				return false;
 			}
 		}

@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.ficha.steps;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -14,7 +13,6 @@ import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDetalleProduct;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDataProduct.ColorType;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb;
@@ -23,11 +21,14 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Artic
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
+import com.mng.robotest.tests.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
 
 import java.util.List;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.mng.robotest.tests.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton.*;
+import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
 public class PageFichaSteps extends StepBase {
 
@@ -66,20 +67,20 @@ public class PageFichaSteps extends StepBase {
 
 		checks.add(
 			"Aparece algún color no disponible",
-			state(Present, ColorType.UNAVAILABLE.getBy(), driver).check());
+			state(PRESENT, ColorType.UNAVAILABLE.getBy(), driver).check());
 
 		return checks;
 	}
 
 	public void loadFichaWithRetry(String urlFicha) {
-		boolean checkOk = loadFicha(urlFicha, State.Warn);
+		boolean checkOk = loadFicha(urlFicha, WARN);
 		if (!checkOk) {
-			loadFicha(urlFicha, State.Defect);
+			loadFicha(urlFicha, DEFECT);
 		}
 	}
 	
 	public void loadFicha(String urlFicha) {
-		loadFicha(urlFicha, State.Defect);
+		loadFicha(urlFicha, DEFECT);
 	}
 	
     @Step(
@@ -92,7 +93,7 @@ public class PageFichaSteps extends StepBase {
 	
 	@Validation (description="Aparece la página de Ficha " + SECONDS_WAIT)
 	public boolean checkIsFicha(int seconds) {
-		return pageFicha.isPageUntil(seconds);
+		return pageFicha.isPage(seconds);
 	}
 
     @Validation 
@@ -120,7 +121,7 @@ public class PageFichaSteps extends StepBase {
 			String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt().trim();
 			checks.add(
 				"Como nombre del artículo aparece el seleccionado: " + datosArticulo.getNombre(),
-				datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())==0, Warn);
+				datosArticulo.getNombre().toLowerCase().compareTo(nombreArtFicha.toLowerCase())==0, WARN);
 		}
 
 		return checks;
@@ -254,7 +255,7 @@ public class PageFichaSteps extends StepBase {
 		return checks;
 	}
 
-	@Validation (description="Se hace visible la lista de tallas", level=Warn)
+	@Validation (description="Se hace visible la lista de tallas", level=WARN)
 	public boolean checkListaTallasVisible() {
 		return (pageFicha.getSecDataProduct().getSecSelTallas().isVisibleListTallasForSelectUntil(0));
 	}
@@ -276,7 +277,7 @@ public class PageFichaSteps extends StepBase {
 		ArticuloScreen articulo = pageFicha.getArticuloObject();
 		dataTest.getDataFavoritos().addArticulo(articulo);
 		checkCapaAltaFavoritos();
-		checkVisibleButtonFavoritos(ActionFavButton.REMOVE);
+		checkVisibleButtonFavoritos(REMOVE);
 	}
 
 	@Step (
@@ -288,7 +289,7 @@ public class PageFichaSteps extends StepBase {
 		String codeColor = getColorNotSelected(colors, articulo);
 		pageFicha.getSecDataProduct().selectColor(codeColor);
 
-		validateNotVisibleButtonFavoritos(ActionFavButton.ADD);
+		validateNotVisibleButtonFavoritos(ADD);
 
 		pageFicha.getSecDataProduct().selectColor(articulo.getCodigoColor());
 		pageFicha.getSecDataProduct().getSecSelTallas().selectTallaByValue(articulo.getTalla());
@@ -320,12 +321,12 @@ public class PageFichaSteps extends StepBase {
 		int seconds1 = 3;
 		checks.add(
 				"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" " + getLitSecondsWait(seconds1),
-				pageFicha.isVisibleDivAnadiendoAFavoritosUntil(seconds1), Info);
+				pageFicha.isVisibleDivAnadiendoAFavoritosUntil(seconds1), INFO);
 
 		int seconds2 = 3;
 		checks.add(
 				"La capa superior acaba desapareciendo " + getLitSecondsWait(seconds2),
-				pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(seconds2), Warn);
+				pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(seconds2), WARN);
 
 		return checks;
 	}
@@ -335,7 +336,7 @@ public class PageFichaSteps extends StepBase {
 		expected="El artículo se elimina de Favoritos")
 	public void selectRemoveFromFavoritos() {
 		pageFicha.selectRemoveFromFavoritosButton();
-		checkVisibleButtonFavoritos(ActionFavButton.ADD);
+		checkVisibleButtonFavoritos(ADD);
 	}
 
 	@Validation (description="Aparece el botón de #{buttonType} a Favoritos")
@@ -394,15 +395,14 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description="Es visible el slider de artículos de tipo <b>#{slider}</b>",
-		level=Info,
-		store=StoreType.None)
+		level=INFO,	store=NONE)
 	public boolean checkSliderVisible(Slider slider) {
 		return pageFicha.isVisibleSlider(slider);
 	}
 
 	@Validation (
 		description="El número de artículos del slider de tipo <b>#{typeSlider}</b> es > #{numArtMin}",
-		level=Warn)
+		level=WARN)
 	public boolean checkNumArticlesSlider(int numArtMin, Slider typeSlider) {
 		return (pageFicha.getNumArtVisiblesSlider(typeSlider) > numArtMin);
 	}
@@ -415,16 +415,16 @@ public class PageFichaSteps extends StepBase {
 		if (position==1) {
 			checks.add(
 					"No es visible el link <b>Prev</b> " + getLitSecondsWait(seconds),
-					!isVisiblePrevLink, Warn);
+					!isVisiblePrevLink, WARN);
 		} else {
 			checks.add(
 					"Sí es visible el link <b>Prev</b> " + getLitSecondsWait(seconds),
-					isVisiblePrevLink, Warn);
+					isVisiblePrevLink, WARN);
 		}
 		if (app==AppEcom.outlet || channel==Channel.desktop) {
 			checks.add(
 					"Es visible el link <b>Next</b>",
-					pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.NEXT, 0), Warn);
+					pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.NEXT, 0), WARN);
 		}
 		return checks;
 	}
@@ -448,7 +448,7 @@ public class PageFichaSteps extends StepBase {
 
 	@Validation (
 		description="Existe más de una imagen de carrusel a la izquierda de la imagen principal",
-		level=Warn)
+		level=WARN)
 	public boolean validaExistsImgsCarruselIzqFichaOld() {
 		return (((PageFichaDevice)pageFicha).getNumImgsCarruselIzq() >= 2);
 	}
@@ -514,7 +514,7 @@ public class PageFichaSteps extends StepBase {
 		String urlGaleryBC = new SecDetalleProduct().getUrlItemBreadCrumb(ItemBreadcrumb.GALERIA);
 		checks.add(
 			"El link correspondiente a la Galería del artículo linca a la URL " + urlGaleryOrigin,
-			urlGaleryOrigin.contains(urlGaleryBC), Warn);
+			urlGaleryOrigin.contains(urlGaleryBC), WARN);
 
 		return checks;
 	}

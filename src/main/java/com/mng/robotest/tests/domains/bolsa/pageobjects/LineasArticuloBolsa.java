@@ -82,7 +82,7 @@ public class LineasArticuloBolsa extends PageBase {
 	
 	public void clickRemoveArticleIfExists() {
 		By byRemove = By.xpath(getXPathLinkBorrarArt());
-		if (state(Present, byRemove).check()) {
+		if (state(PRESENT, byRemove).check()) {
 			click(byRemove).exec();
 		}
 	}
@@ -161,7 +161,7 @@ public class LineasArticuloBolsa extends PageBase {
 	}
 	
 	private WebElement getLineaLinkArticle(WebElement lineaArticleWeb) {
-		state(Visible, lineaArticleWeb).by(By.xpath(XP_LINK_RELATIVE_ARTICLE)).wait(2).check();
+		state(VISIBLE, lineaArticleWeb).by(By.xpath(XP_LINK_RELATIVE_ARTICLE)).wait(2).check();
 		try {
 			return lineaArticleWeb.findElement(By.xpath(XP_LINK_RELATIVE_ARTICLE));
 		} 

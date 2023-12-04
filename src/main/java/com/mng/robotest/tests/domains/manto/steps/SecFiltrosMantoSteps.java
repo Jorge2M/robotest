@@ -3,11 +3,12 @@ package com.mng.robotest.tests.domains.manto.steps;
 import java.time.LocalDate;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.tests.domains.base.StepMantoBase;
 import com.mng.robotest.tests.domains.manto.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.manto.pageobjects.SecFiltros;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
+
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class SecFiltrosMantoSteps extends StepMantoBase {
 
@@ -33,7 +34,7 @@ public class SecFiltrosMantoSteps extends StepMantoBase {
 			"- Fecha desde: #{fechaDesde.toString()}<br>" +
 			"- Fecha hasta: #{fechaHasta.toString()}",
 		expected="La búsqueda es correcta",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void setFiltrosYbuscar(
 			DataPedido dataPedido, TypeSearch typeSearch, LocalDate fechaDesde, LocalDate fechaHasta) {
 		replaceStepDescription(TAG_NOMBRE_PAGO, dataPedido.getPago().getNombre());

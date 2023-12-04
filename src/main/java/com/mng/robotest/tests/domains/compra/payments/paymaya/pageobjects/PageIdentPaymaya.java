@@ -12,7 +12,7 @@ public class PageIdentPaymaya extends PageBase {
 	private static final String XP_LOGIN_BUTTON = "//input[@class[contains(.,'login-btn')]]";
 	
 	public boolean isPage() {
-		return state(Visible, XP_WRAPPER_LOGIN).check();
+		return state(VISIBLE, XP_WRAPPER_LOGIN).check();
 	}
 	
 	public void login(String user, String password) {

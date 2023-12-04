@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
@@ -21,8 +20,8 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
-import com.mng.robotest.tests.domains.compra.pageobjects.DataDireccion;
-import com.mng.robotest.tests.domains.compra.pageobjects.Page1EnvioCheckoutMobil;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion;
+import com.mng.robotest.tests.domains.compra.pageobjects.mobile.Page1EnvioCheckoutMobil;
 import com.mng.robotest.tests.domains.compra.payments.FactoryPagos;
 import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
@@ -46,8 +45,9 @@ import com.mng.robotest.testslegacy.generic.beans.ValeDiscount;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
-import static com.mng.robotest.tests.domains.compra.pageobjects.DataDireccion.DataDirType.*;
+import static com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion.DataDirType.*;
 import static com.mng.robotest.testslegacy.data.PaisShop.ESPANA;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class CheckoutFlow extends StepBase {
 
@@ -62,7 +62,7 @@ public class CheckoutFlow extends StepBase {
 	
 	private final ValeDiscount valeTest = new ValeDiscount("TEST", 10, "EXTRA SOBRE LOS ARTÍCULOS");
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-	private final CheckoutSteps pageCheckoutWrapperSteps = new CheckoutSteps();
+	private final CheckoutSteps checkoutSteps = new CheckoutSteps();
 	
 	private static final String TAG_LOGIN_OR_LOGOFF = "@TagLoginOfLogoff";
 	
@@ -135,8 +135,9 @@ public class CheckoutFlow extends StepBase {
 		
 		test1rstPageCheckout();
 		if (isMobile()) {
-			pageCheckoutWrapperSteps.goToMetodosPagoMobile();
+			checkoutSteps.goToMetodosPagoMobile();
 		}
+		checkoutSteps.checkTotalImport();
 	}
 	
 	private void testFromIdentToCheckoutIni() {
@@ -190,24 +191,23 @@ public class CheckoutFlow extends StepBase {
 		if (app==AppEcom.votf && dataTest.getCodigoPais().compareTo("001")==0) {
 			new Page1DktopCheckoutSteps().stepIntroduceCodigoVendedorVOTF("111111");
 		}
-		
 	}
 	
 	public void testInputCodPromoEmplSpain() {
-		var accesoEmpl = AccesoEmpl.forSpain(); 
-		pageCheckoutWrapperSteps.inputTarjetaEmplEnCodPromo(pais, accesoEmpl);
-		pageCheckoutWrapperSteps.inputDataEmplEnPromoAndAccept(accesoEmpl);
+		var accesoEmpl = AccesoEmpl.forSpain();
+		checkoutSteps.inputTarjetaEmplEnCodPromo(pais, accesoEmpl);
+		checkoutSteps.inputDataEmplEnPromoAndAccept(accesoEmpl);
 	}
 	
 	private void checkMetodosPagos(List<Pais> paisesDestino) throws Exception {
 		try {
 			var dataPedido = dataPago.getDataPedido();
 			if (!isMobile()) {
-				pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
+				checkoutSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 			}
 				
 			if (!dataPago.getFTCkout().chequeRegalo) {
-				pageCheckoutWrapperSteps.despliegaYValidaMetodosPago(dataPago.getFTCkout().userIsEmployee);
+				checkoutSteps.despliegaYValidaMetodosPago(dataPago.getFTCkout().userIsEmployee);
 			}
 			if (dataPago.getFTCkout().checkPasarelas) {
 				if (pago==null) { 
@@ -226,7 +226,7 @@ public class CheckoutFlow extends StepBase {
 					paisChange = itPaises.next();
 					if (app==AppEcom.shop) {
 						//Test funcionalidad "Quiero recibir factura"
-						pageCheckoutWrapperSteps.clickSolicitarFactura();
+						checkoutSteps.clickSolicitarFactura();
 						var dataDirFactura = new DataDireccion();
 						dataDirFactura.put(NIF, "76367949Z");
 						dataDirFactura.put(NAME, "Carolina");
@@ -242,7 +242,7 @@ public class CheckoutFlow extends StepBase {
 					
 					if (app!=AppEcom.votf) {
 						//Test funcionalidad "Cambio dirección de envío"
-						pageCheckoutWrapperSteps.clickEditarDirecEnvio();
+						checkoutSteps.clickEditarDirecEnvio();
 						var dataDirEnvio = new DataDireccion();
 						dataDirEnvio.put(CODIGOPAIS, paisChange.getCodigoPais());
 						dataDirEnvio.put(CODPOSTAL, paisChange.getCodpos());					
@@ -252,10 +252,10 @@ public class CheckoutFlow extends StepBase {
 						var userShop = GestorUsersShop.getUser();
 						dataDirEnvio.put(EMAIL, userShop.getUser());
 						dataDirEnvio.put(TELEFONO, "665015122");
-						pageCheckoutWrapperSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
-						pageCheckoutWrapperSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
+						checkoutSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
+						checkoutSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
 						dataTest.setPais(paisChange);
-						pageCheckoutWrapperSteps.validaMetodosPagoDisponibles(dataPago.getFTCkout().userIsEmployee);
+						checkoutSteps.validaMetodosPagoDisponibles(dataPago.getFTCkout().userIsEmployee);
 					}
 				}
 			}
@@ -267,14 +267,13 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	private void testValeDescuento() {
-		var page1 = new Page1DktopCheckoutSteps();
-		page1.inputValeDescuento(valeTest);
+		new Page1DktopCheckoutSteps().inputValeDescuento(valeTest);
 	}
 	
 	private void testPagoFromCheckoutToEnd(Pago pagoToTest) throws Exception {
 		var dataPedido = dataPago.getDataPedido();
 		dataPedido.setPago(pagoToTest);
-		dataPedido.setResejecucion(com.github.jorge2m.testmaker.conf.State.Nok);
+		dataPedido.setResejecucion(com.github.jorge2m.testmaker.conf.State.NOK);
 		
 		var pagoSteps = FactoryPagos.makePagoSteps(dataPago);
 		boolean execPay = iCanExecPago(pagoSteps);
@@ -321,7 +320,7 @@ public class CheckoutFlow extends StepBase {
 		secBolsaSteps.selectButtonComprar();
 		testFromIdentificationToMetodosPago();
 		if (!isMobile()) {
-			pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
+			checkoutSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 		}
 	}	
 	
@@ -339,7 +338,7 @@ public class CheckoutFlow extends StepBase {
 			checkPasarelaPago();
 			if (it.hasNext()) {
 				if (!dataPago.isPaymentExecuted(pagoToTest)) {
-					pageCheckoutWrapperSteps.getPageCheckoutWrapper().backPageMetodosPagos(urlPagChekoutToReturn);
+					checkoutSteps.getPageCheckoutWrapper().backPageMetodosPagos(urlPagChekoutToReturn);
 				} else {
 					fluxQuickInitToCheckout();
 				}
@@ -372,7 +371,7 @@ public class CheckoutFlow extends StepBase {
 		Pago pagoPais = dataPedido.getPago();
 		try {
 			if (!isMobile()) {
-				pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
+				checkoutSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
 			}
 			testPagoFromCheckoutToEnd(pagoPais);
 			updateInfoExecutionSuite(dataPedido.getCodpedido());
@@ -402,11 +401,11 @@ public class CheckoutFlow extends StepBase {
 		DataPedido dataPedido = dataPago.getDataPedido();
 		dataPedido.setCodtipopago("R");
 		if (!isMobile()) {
-			pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
-			pageCheckoutWrapperSteps.pasoBotonAceptarCompraDesktop();
+			checkoutSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
+			checkoutSteps.pasoBotonAceptarCompraDesktop();
 		} else {
-			pageCheckoutWrapperSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
-			pageCheckoutWrapperSteps.pasoBotonConfirmarPagoCheckout3Mobil();
+			checkoutSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
+			checkoutSteps.pasoBotonConfirmarPagoCheckout3Mobil();
 		}	   
 	}
 	
@@ -431,8 +430,7 @@ public class CheckoutFlow extends StepBase {
 	@Step (
 		description="Acceder a Mango " + TAG_LOGIN_OR_LOGOFF, 
 		expected="Se accede a Mango",
-		saveNettraffic=SaveWhen.Always,
-		saveErrorData=SaveWhen.Always)
+		saveNettraffic=ALWAYS, saveErrorData=ALWAYS)
 	private void accessShopAndLoginOrLogoff() throws Exception {
 		if (dataTest.isUserRegistered()) {
 			accessShopAndLogin();

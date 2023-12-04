@@ -32,11 +32,11 @@ public class ModalSetCookies extends PageBase {
 	private static final String XP_CHECKBOX_INACTIVE = XP_MICROFRONTEND + "//input[@type='checkbox']";
 			
 	public boolean isVisible(int seconds) {
-		return state(Visible, XP_SAVE_CONF_BUTTON).wait(seconds).check();
+		return state(VISIBLE, XP_SAVE_CONF_BUTTON).wait(seconds).check();
 	}
 	
 	public boolean isInvisible(int seconds) {
-		return state(Invisible, XP_SAVE_CONF_BUTTON).wait(seconds).check();
+		return state(INVISIBLE, XP_SAVE_CONF_BUTTON).wait(seconds).check();
 	}
 	
 	public void saveConfiguration() {
@@ -44,7 +44,7 @@ public class ModalSetCookies extends PageBase {
 	}
 	
 	public void clickSection(SectionConfCookies section) {
-		state(Visible, section.getXPathOption()).wait(1).check();
+		state(VISIBLE, section.getXPathOption()).wait(1).check();
 		click(section.getXPathOption()).exec();
 	}
 	

@@ -11,12 +11,12 @@ public class PageIdentAmazon extends PageBase {
 	private static final String XP_INPUT_PASSWORD = "//input[@id='ap_password']";
 
 	public boolean isLogoAmazon() { 
-		return state(Visible, XP_IMG_LOGO_AMAZON).check();
+		return state(VISIBLE, XP_IMG_LOGO_AMAZON).check();
 	}
 
 	public boolean isPageIdent() {
 		return (
-			state(Visible, XP_INPUT_EMAIL).check() &&
-			state(Visible, XP_INPUT_PASSWORD).check());
+			state(VISIBLE, XP_INPUT_EMAIL).check() &&
+			state(VISIBLE, XP_INPUT_PASSWORD).check());
 	}
 }

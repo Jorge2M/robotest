@@ -21,7 +21,7 @@ public class PageComoMedirme extends PageBase {
 	}
 	
 	private boolean isPage() {
-		return state(Visible, XP_BLOQUE_GUIA_TALLAS).check();
+		return state(VISIBLE, XP_BLOQUE_GUIA_TALLAS).check();
 	}
 	
 	private void close(String windowFatherHandle) {

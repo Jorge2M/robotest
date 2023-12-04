@@ -13,7 +13,7 @@ public class PageResultPaymayaSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página de introducción resultado de Paymaya",
-		level=Warn)
+		level=WARN)
 	public boolean checkPage() {
 		return pageResultPaymaya.isPage();
 	}

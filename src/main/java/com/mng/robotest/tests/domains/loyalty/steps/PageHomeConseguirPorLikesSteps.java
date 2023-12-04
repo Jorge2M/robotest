@@ -8,19 +8,19 @@ import com.mng.robotest.tests.domains.loyalty.pageobjects.PageHomeConseguirPorLi
 
 public class PageHomeConseguirPorLikesSteps extends StepBase {
 
-	private final PageHomeConseguirPorLikes pageHomeConseguirPorLikes = new PageHomeConseguirPorLikes();
+	private final PageHomeConseguirPorLikes pgHomeConseguirPorLikes = new PageHomeConseguirPorLikes();
 	
 	@Validation (
 		description="Aparece el botón de \"Conseguir por Likes\" " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
-		return pageHomeConseguirPorLikes.isPage(seconds);
+		return pgHomeConseguirPorLikes.isPage(seconds);
 	}
 	
 	@Step (
 		description="Seleccionar el botón de \"Conseguir por Likes\"",
 		expected="Aparece el icono de operación Ok")
 	public int selectConseguirButton() {
-		int likes = pageHomeConseguirPorLikes.selectConseguirButton();
+		int likes = pgHomeConseguirPorLikes.selectConseguirButton();
 		checkAfterConseguirButton();
 		checksDefault();
 		return likes;
@@ -32,7 +32,7 @@ public class PageHomeConseguirPorLikesSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece el icono correspondiente a la operación realizada " + getLitSecondsWait(seconds),
-			pageHomeConseguirPorLikes.isVisibleIconOperationDoneUntil(seconds));
+			pgHomeConseguirPorLikes.isVisibleIconOperationDoneUntil(seconds));
 
 		return checks;
 	}	

@@ -8,8 +8,8 @@ public class PageCondicionesVentaSteps extends StepBase {
 
 	@Validation (
 		description="Aparece la página con las condiciones de venta " + SECONDS_WAIT)
-	public boolean checkIsPageUntil(int seconds) {
-		return new PageCondicionesVenta().isPageUntil(seconds);
+	public boolean checkisPage(int seconds) {
+		return new PageCondicionesVenta().isPage(seconds);
 	}
 	
 }

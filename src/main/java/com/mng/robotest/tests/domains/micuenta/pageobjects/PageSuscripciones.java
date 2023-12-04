@@ -31,7 +31,7 @@ public class PageSuscripciones extends PageBase {
 	}	
 	
 	public boolean isPage() {
-		return state(Visible, "//div[@class[contains(.,'Subscriptions')]]").check();
+		return state(VISIBLE, "//div[@class[contains(.,'Subscriptions')]]").check();
 	}
 	
 	private boolean isRadioNewsletterSelected(NewsLetter idRadio) {
@@ -50,7 +50,7 @@ public class PageSuscripciones extends PageBase {
 	}
 	
 	public boolean isPageResOKUntil(int seconds) { 
-		return state(Present, XP_PAGE_RES_OK).wait(seconds).check();
+		return state(PRESENT, XP_PAGE_RES_OK).wait(seconds).check();
 	}
 	
 	public int getNumNewsletters() {
@@ -64,10 +64,10 @@ public class PageSuscripciones extends PageBase {
 	
 	public boolean isNewsletterDesmarcada(String linea) {
 		String xpathLinDesmarcada = getXPathNewsletterDesmarcadas(linea);
-		return state(Present, xpathLinDesmarcada).check();
+		return state(PRESENT, xpathLinDesmarcada).check();
 	}
 	public boolean isNewsletterMarcada(String linea) {
 		String xpathLinMarcada = getXPathNewsletterMarcadas(linea);
-		return state(Present, xpathLinMarcada).check();
+		return state(PRESENT, xpathLinMarcada).check();
 	}	
 }

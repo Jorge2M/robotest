@@ -11,11 +11,11 @@ public class PageResultPagoTpv extends PageBase {
 	private static final String XP_GASTOS_TRANSPORTE = "//div[@id='transporte']/div[@class='valor']";
 
 	public boolean isPresentCabeceraConfCompra() {
-		return state(Present, XP_CABECERA_CONF_COMPRA).check();
+		return state(PRESENT, XP_CABECERA_CONF_COMPRA).check();
 	}
 
 	public boolean isVisibleCodPedido() {
-		return state(Visible, XP_COD_PEDIDO).check();
+		return state(VISIBLE, XP_COD_PEDIDO).check();
 	}
 
 	public String getCodigoPedido() {

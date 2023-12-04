@@ -33,7 +33,7 @@ public class SecKrediKartiCheckout extends PageBase {
 	}
 	
 	public boolean isVisiblePagoAPlazoUntil(int seconds) {
-		return state(Visible, getXPathCapaPagoPlazo()).wait(seconds).check();
+		return state(VISIBLE, getXPathCapaPagoPlazo()).wait(seconds).check();
 	}
 	
 	public void clickRadioPlazo(int posicion) {

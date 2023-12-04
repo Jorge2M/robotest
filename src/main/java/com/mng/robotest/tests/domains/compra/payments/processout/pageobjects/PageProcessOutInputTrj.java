@@ -15,7 +15,7 @@ public class PageProcessOutInputTrj extends PageBase {
 	private static final String XP_BUTTON_PAGO = "//a[@class[contains(.,'form-submit')]]";
 	
 	public boolean checkIsPage() {
-		return state(Visible, XP_FORMULARIO_TRJ).check();
+		return state(VISIBLE, XP_FORMULARIO_TRJ).check();
 	}
 	
 	public void inputDataTrj(Pago pago) {
@@ -26,7 +26,7 @@ public class PageProcessOutInputTrj extends PageBase {
 	}
 	
 	public boolean isPresentButtonPago() {
-		return state(Visible, XP_BUTTON_PAGO).check();
+		return state(VISIBLE, XP_BUTTON_PAGO).check();
 	}
 	
 	public void clickButtonPay() {

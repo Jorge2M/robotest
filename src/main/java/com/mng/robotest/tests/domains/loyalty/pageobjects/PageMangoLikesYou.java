@@ -50,12 +50,12 @@ public class PageMangoLikesYou extends PageBase {
 		click(tabLink.xpath()).exec();
 	}
 	
-	public boolean checkIsPageUntil(int seconds) {
-		return state(Visible, XP_WRAPP_PAGE).wait(seconds).check();
+	public boolean checkisPage(int seconds) {
+		return state(VISIBLE, XP_WRAPP_PAGE).wait(seconds).check();
 	}
 	
 	public int getPoints() {
-		if (state(Present, XP_POINTS).wait(2).check()) {
+		if (state(PRESENT, XP_POINTS).wait(2).check()) {
 			String textPoints = getElement(XP_POINTS).getText();
 			Pattern pattern = Pattern.compile(" [0-9,.]+ ");
 			Matcher matcher = pattern.matcher(textPoints);
@@ -71,7 +71,7 @@ public class PageMangoLikesYou extends PageBase {
 	}
 
 	public boolean isVisibleButton(ButtonUseLikes button, int seconds) {
-		return state(Visible, button.xpath()).wait(seconds).check();
+		return state(VISIBLE, button.xpath()).wait(seconds).check();
 	}
 
 	public void clickButton(ButtonUseLikes button) {
@@ -83,6 +83,7 @@ public class PageMangoLikesYou extends PageBase {
 	}
 	
 	public boolean isPageAyudaMangoLikesYouVisible(int seconds) {
-		return state(Visible, "//h1[text()='Club Mango Likes you']").wait(seconds).check();
+		return state(VISIBLE, "//h1[text()='Club Mango Likes you']").wait(seconds).check();
 	}
+	
 }

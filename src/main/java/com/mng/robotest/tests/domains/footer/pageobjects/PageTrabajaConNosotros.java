@@ -13,6 +13,6 @@ public class PageTrabajaConNosotros extends PageBase implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return state(Present, "//title[contains(.,'" + getName() + "')]").wait(seconds).check();
+		return state(PRESENT, "//title[contains(.,'" + getName() + "')]").wait(seconds).check();
 	}
 }

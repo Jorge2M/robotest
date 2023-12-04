@@ -21,19 +21,19 @@ public class PageSelectLineaVOTFSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el banner correspondiente a SHE",
-			pageSelectLineaVOTF.isBannerPresent(LineaType.SHE), Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.SHE), WARN);
 		
 		checks.add(
 			"Aparece el banner correspondiente a MAN",
-			pageSelectLineaVOTF.isBannerPresent(LineaType.HE), Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.HE), WARN);
 		
 		checks.add(
 			"Aparece el banner correspondiente a NIÑAS",
-			pageSelectLineaVOTF.isBannerPresent(LineaType.NINA), Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.NINA), WARN);
 		
 		checks.add(
 			"Aparece el banner correspondiente a NIÑOS",
-			pageSelectLineaVOTF.isBannerPresent(LineaType.NINO), Warn);
+			pageSelectLineaVOTF.isBannerPresent(LineaType.NINO), WARN);
 		
 		return checks;
 	}

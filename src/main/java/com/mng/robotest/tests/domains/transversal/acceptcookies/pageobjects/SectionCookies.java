@@ -24,11 +24,11 @@ public class SectionCookies extends PageBase {
 	}
 	
 	public boolean isVisible(int seconds) {
-		return state(Visible, getXPathAcceptButton()).wait(seconds).check();
+		return state(VISIBLE, getXPathAcceptButton()).wait(seconds).check();
 	}
 	
 	public boolean isInvisible(int seconds) {
-		return state(Invisible, getXPathAcceptButton()).wait(seconds).check();
+		return state(INVISIBLE, getXPathAcceptButton()).wait(seconds).check();
 	}
 	
 	public void accept() {
@@ -39,7 +39,7 @@ public class SectionCookies extends PageBase {
 	}
 	
 	public void setCookies() {
-		state(Present, getXPathSetCookiesButton()).wait(1).check();
+		state(PRESENT, getXPathSetCookiesButton()).wait(1).check();
 		click(getXPathSetCookiesButton()).exec();
 	}
 	

@@ -19,11 +19,11 @@ public class PagePaytrailEpaymentSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	   	checks.add(
 			"Aparece la página inicial de E-Payment",
-			pageEpaymentIdent.isPage(), Warn);
+			pageEpaymentIdent.isPage(), WARN);
 	   	
 	   	checks.add(
 			"Figuran el input correspondientes al \"User ID\"",
-			pageEpaymentIdent.isPresentInputUserTypePassword(), Warn);	
+			pageEpaymentIdent.isPresentInputUserTypePassword(), WARN);	
 	   	
 	   	return checks;
 	}

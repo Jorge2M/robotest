@@ -11,7 +11,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageDetallePedidoSteps extends StepBase {
 	
-	private final PageDetalleCompra pageDetalleCompra = PageDetalleCompra.make(channel);
+	private final PageDetalleCompra pgDetalleCompra = PageDetalleCompra.make(channel);
 	
 	public void validateIsPageOk(Ticket compra) {
 		String importeTotal = compra.getPrecio().replaceAll("[^\\d.,]", "");  //Eliminamos la divisa;
@@ -25,11 +25,11 @@ public class PageDetallePedidoSteps extends StepBase {
 		int seconds = 2;
 	  	checks.add(
 	  		"Es visible alguna prenda " + getLitSecondsWait(seconds),
-	  		pageDetalleCompra.isVisiblePrendaUntil(seconds), Info);
+	  		pgDetalleCompra.isVisiblePrendaUntil(seconds), INFO);
 	  	
 	  	checks.add(
 	  		"Aparecen " + numPrendasCompraOnline + " prendas",
-	  		pageDetalleCompra.getNumPrendas()==numPrendasCompraOnline, Warn);
+	  		pgDetalleCompra.getNumPrendas()==numPrendasCompraOnline, WARN);
 	  	
 		return checks;
 	}
@@ -51,15 +51,15 @@ public class PageDetallePedidoSteps extends StepBase {
 		int seconds = 5;
 	  	checks.add(
 	  		"Aparece la página de detalle del pedido " + getLitSecondsWait(seconds),
-	  		pageDetalleCompra.isPage(seconds), Warn);	   
+	  		pgDetalleCompra.isPage(seconds), WARN);	   
 	  	
 	  	checks.add(
 	  		"En la página figura el Nº de pedido: " + codPedido,
-	  		driver.getPageSource().contains(codPedido), Info);	
+	  		driver.getPageSource().contains(codPedido), INFO);	
 	  	
 	  	checks.add(
 	  		"Como total figura el importe: " + importeTotalWithoutCurrency,
-	  		pageDetalleCompra.isPresentImporteTotal(importeTotalWithoutCurrency, codPais), Info);
+	  		pgDetalleCompra.isPresentImporteTotal(importeTotalWithoutCurrency, codPais), INFO);
 	  	
 	  	return checks;
 	}

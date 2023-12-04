@@ -16,7 +16,7 @@ import com.mng.robotest.testslegacy.pageobject.shop.navigations.ArticuloNavigati
 
 public class SecBuscadorSteps extends StepBase {
 
-	private final PageGaleria pageGaleria = PageGaleria.make(From.BUSCADOR, channel, app, dataTest.getPais());
+	private final PageGaleria pgGaleria = PageGaleria.make(From.BUSCADOR, channel, app, dataTest.getPais());
 	
 	private static final String TAB_HTML = "&emsp;";
 	@Step (
@@ -68,11 +68,11 @@ public class SecBuscadorSteps extends StepBase {
 		description="Aparece como mínimo un producto de tipo #{categoriaABuscar} " + SECONDS_WAIT)
 	private boolean areProducts(String categoriaABuscar, int seconds) {
 		String producSin1erCaracter = categoriaABuscar.substring(1, categoriaABuscar.length()-1).toLowerCase();
-		return "".compareTo(pageGaleria.getNombreArticuloWithText(producSin1erCaracter, seconds))!=0;
+		return "".compareTo(pgGaleria.getNombreArticuloWithText(producSin1erCaracter, seconds))!=0;
 	}
 	
 	@Validation (description="Aparece algún producto " + SECONDS_WAIT)
 	private boolean areProducts(int seconds) {
-		return pageGaleria.isVisibleArticleUntil(1, seconds);
+		return pgGaleria.isVisibleArticleUntil(1, seconds);
 	}
 }

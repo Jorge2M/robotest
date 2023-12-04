@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.seo.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import java.io.StringReader;
 import java.util.Optional;
@@ -31,7 +31,7 @@ public class PageSitemap extends PageBase {
 	
 	private String getPageSource() {
 		String xpathWebkit = "//*[@id='webkit-xml-viewer-source-xml']";
-		if (state(Present, xpathWebkit).check()) {
+		if (state(PRESENT, xpathWebkit).check()) {
 			return getElement(xpathWebkit).getAttribute("innerHTML");
 		}
 		return driver.getPageSource();

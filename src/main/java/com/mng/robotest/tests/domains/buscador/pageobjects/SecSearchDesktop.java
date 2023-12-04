@@ -14,7 +14,7 @@ public class SecSearchDesktop extends PageBase implements SecSearch {
 
 	@Override
 	public void search(String referencia) {
-		state(Visible, XP_INPUT_BUSCADOR).wait(2).check();
+		state(VISIBLE, XP_INPUT_BUSCADOR).wait(2).check();
 		setTextAndReturn(referencia);
 	}
 

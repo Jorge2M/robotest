@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.compra.pageobjects.secsoynuevo;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Invisible;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecSoyNuevoDesktop extends SecSoyNuevo {
 	
@@ -30,7 +29,7 @@ public class SecSoyNuevoDesktop extends SecSoyNuevo {
 	
 	@Override
 	boolean isSection(int seconds) {
-		return state(Visible, XP_BOTON_CONTINUE).wait(seconds).check();
+		return state(VISIBLE, XP_BOTON_CONTINUE).wait(seconds).check();
 	}
 	
 	@Override
@@ -51,7 +50,7 @@ public class SecSoyNuevoDesktop extends SecSoyNuevo {
 	}
 	
 	private boolean isCheckedPubliNewsletter() {
-		if (state(Invisible, XP_INPUT_PUBLICIDAD).check()) {
+		if (state(INVISIBLE, XP_INPUT_PUBLICIDAD).check()) {
 			return false;
 		}
 		String checked = getElement(XP_INPUT_PUBLICIDAD).getAttribute("checked");
@@ -59,7 +58,7 @@ public class SecSoyNuevoDesktop extends SecSoyNuevo {
 	}
 	
 	private boolean isCheckedConsentimiento() {
-		if (state(Invisible, XP_INPUT_CONSENTIMIENTO).check()) {
+		if (state(INVISIBLE, XP_INPUT_CONSENTIMIENTO).check()) {
 			return false;
 		}
 		String checked = getElement(XP_INPUT_CONSENTIMIENTO).getAttribute("checked");

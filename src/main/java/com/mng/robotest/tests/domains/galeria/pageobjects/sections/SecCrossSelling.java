@@ -26,7 +26,7 @@ public class SecCrossSelling extends PageBase {
 	}
 
 	public boolean isSectionVisible() {
-		return (state(Visible, By.xpath(getXPathSection()), driver).check());
+		return (state(VISIBLE, By.xpath(getXPathSection()), driver).check());
 	}
 
 	/**

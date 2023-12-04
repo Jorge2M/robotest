@@ -19,7 +19,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 public class SecModalPersonalizacionSteps extends StepBase {
 
 	public boolean checkArticleCustomizable() {
-		return checkArticleCustomizable(Defect);
+		return checkArticleCustomizable(DEFECT);
 	}
 	
 	public boolean checkArticleCustomizable(State levelError) {
@@ -37,7 +37,7 @@ public class SecModalPersonalizacionSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"El artículo es personalizable (aparece el link \"Añadir bordado\")",
-			state(Present, ModalElement.ANADIR_BORDADO_LINK.getBy(channel)).wait(1).check(), 
+			state(PRESENT, ModalElement.ANADIR_BORDADO_LINK.getBy(channel)).wait(1).check(), 
 			levelError);
 		return checks;
 	}
@@ -46,7 +46,7 @@ public class SecModalPersonalizacionSteps extends StepBase {
 		description="Seleccionamos el link <b>Añadir bordado</b>",
 		expected="Aparece el modal para la personalización de la prenda")
 	public void selectLinkPersonalizacion () {
-		click(ModalElement.ANADIR_BORDADO_LINK.getBy(channel)).type(javascript).exec();
+		click(ModalElement.ANADIR_BORDADO_LINK.getBy(channel)).type(JAVASCRIPT).exec();
 		validateModal();
 		checksDefault();
 	}
@@ -58,36 +58,36 @@ public class SecModalPersonalizacionSteps extends StepBase {
 		checks.add(
 			"Aparece el modal de personalización con el botón <b>Siguiente</b> " + getLitSecondsWait(seconds),
 			isBotonSiguienteVisible(seconds), 
-			Warn);
+			WARN);
 		
 		checks.add(
 			"Aparece la opción <b>Un icono</b> " + getLitSecondsWait(seconds),
-			state(Visible, ModalElement.BUTTON_UN_ICONO.getBy(channel)).wait(seconds).check(), 
-			Warn);
+			state(VISIBLE, ModalElement.BUTTON_UN_ICONO.getBy(channel)).wait(seconds).check(), 
+			WARN);
 	
 		return checks;
 	}
 
 	@Validation(
 		description="1) Aparece la cabecera correspondiente a la personalizacion de la prenda",
-		level=Warn)
+		level=WARN)
 	private boolean validationInitMblCustomization(int seconds, ModalElement element) {
-		return (state(Visible, element.getBy(channel)).wait(seconds).check());
+		return (state(VISIBLE, element.getBy(channel)).wait(seconds).check());
 	}
 
 	@Step(
 		description="Seleccionamos la opción <b>Un icono</b>",
 		expected="Aparece la lista de iconos")
 	public void selectIconCustomization() {
-		click(ModalElement.BUTTON_UN_ICONO.getBy(channel)).type(javascript).exec();
+		click(ModalElement.BUTTON_UN_ICONO.getBy(channel)).type(JAVASCRIPT).exec();
 		validationIconSelection(2);
 	}
 
 	@Validation(
 		description="1) Aparece la lista de iconos seleccionables",
-		level=Warn)
+		level=WARN)
 	public boolean validationIconSelection(int seconds) {
-		return (state(Visible, ModalElement.ICON_SELECTION.getBy(channel)).wait(seconds).check());
+		return (state(VISIBLE, ModalElement.ICON_SELECTION.getBy(channel)).wait(seconds).check());
 	}
 
 	@Step(
@@ -97,7 +97,7 @@ public class SecModalPersonalizacionSteps extends StepBase {
 		if (channel == Channel.desktop) {
 			click(ModalElement.ICON_SELECTION.getBy(channel)).exec();
 		} else {
-			click(ModalElement.ICON_SELECTION.getBy(channel)).type(javascript).exec();
+			click(ModalElement.ICON_SELECTION.getBy(channel)).type(JAVASCRIPT).exec();
 		}
 	}
 
@@ -107,12 +107,12 @@ public class SecModalPersonalizacionSteps extends StepBase {
 		int seconds = 3;
 		checks.add(
 			"Aparece seleccionado el primer icono",
-			state(Visible, ModalElement.ICON_SELECTION.getBy()).wait(seconds).check(), 
-			Warn);
+			state(VISIBLE, ModalElement.ICON_SELECTION.getBy()).wait(seconds).check(), 
+			WARN);
 		checks.add(
 			"Podemos confirmar nuestra seleccion",
 			isBotonSiguienteVisible(seconds),
-			Warn);
+			WARN);
 		return checks;
 	}
 
@@ -142,13 +142,13 @@ public class SecModalPersonalizacionSteps extends StepBase {
 		int seconds = 3;
 		checks.add(
 			"Aparecen las opciones correspondientes a la ubicación del bordado",
-			state(Visible, ModalElement.POSITION_BUTTON.getBy()).wait(seconds).check(),
-			Warn);
+			state(VISIBLE, ModalElement.POSITION_BUTTON.getBy()).wait(seconds).check(),
+			WARN);
 		checks.add(
 			"Podemos confirmar nuestra seleccion",
 			isBotonSiguienteVisible(seconds),
-			//state(Visible, ModalElement.Siguiente.getBy()).wait(seconds).check(),
-			Warn);
+			//state(VISIBLE, ModalElement.Siguiente.getBy()).wait(seconds).check(),
+			WARN);
 		return checks;
 	}
 
@@ -158,12 +158,14 @@ public class SecModalPersonalizacionSteps extends StepBase {
 		int seconds = 3;
 		checks.add(
 			"Aparecen los botones correspondientes a los colores",
-			state(Visible, ModalElement.COLORS_CONTAINER.getBy()).wait(seconds).check(),
-			Warn);
+			state(VISIBLE, ModalElement.COLORS_CONTAINER.getBy()).wait(seconds).check(),
+			WARN);
+		
 		checks.add(
 			"Aparece el botón de \"Confirmar\"",
-			state(Present, ModalElement.SIGUIENTE.getBy()).wait(seconds).check(),
-			Warn);
+			state(PRESENT, ModalElement.SIGUIENTE.getBy()).wait(seconds).check(),
+			WARN);
+		
 		return checks;
 	}
 
@@ -177,9 +179,9 @@ public class SecModalPersonalizacionSteps extends StepBase {
 
 	@Validation(
 		description="1) Aparecen los botones con los posibles tamaños del bordado",
-		level=Warn)
+		level=WARN)
 	private boolean validateSizeList(int seconds) {
-		return (state(Visible, ModalElement.SIZE_CONTAINER.getBy(channel)).wait(seconds).check());
+		return (state(VISIBLE, ModalElement.SIZE_CONTAINER.getBy(channel)).wait(seconds).check());
 	}
 
 	@Step(
@@ -190,7 +192,7 @@ public class SecModalPersonalizacionSteps extends StepBase {
 		validateAddBag(2);
 	}
 
-	@Validation (description="1) Aparece el botón para añadir a la bolsa", level=Warn)
+	@Validation (description="1) Aparece el botón para añadir a la bolsa", level=WARN)
 	private boolean validateAddBag(int seconds) {
 		return isBotonSiguienteVisible(seconds);
 	}
@@ -209,22 +211,22 @@ public class SecModalPersonalizacionSteps extends StepBase {
 	@Validation(
 		description="En la bolsa aparece el apartado correspondiente a la personalización " + SECONDS_WAIT)
 	private boolean validateCustomizationProof(int seconds) {
-		return (state(Visible, ModalElement.BOLSA_PROOF.getBy(channel)).wait(seconds).check());
+		return (state(VISIBLE, ModalElement.BOLSA_PROOF.getBy(channel)).wait(seconds).check());
 	}
 
 	@Validation(
 		description="Es visible el apartado <b>#{level}</b>",
-		level=Warn)
+		level=WARN)
 	public boolean validateCabeceraStep(int level) {
 		switch (level) {
 		case 1:
-			return (state(Visible, ModalElement.STEP1_PROOF.getBy()).wait(4).check());
+			return (state(VISIBLE, ModalElement.STEP1_PROOF.getBy()).wait(4).check());
 		case 2:
-			return (state(Visible, ModalElement.STEP2_PROOF.getBy()).wait(4).check());
+			return (state(VISIBLE, ModalElement.STEP2_PROOF.getBy()).wait(4).check());
 		case 3:
-			return (state(Visible, ModalElement.STEP3_PROOF.getBy()).wait(4).check());
+			return (state(VISIBLE, ModalElement.STEP3_PROOF.getBy()).wait(4).check());
 		case 4:
-			return (state(Visible, ModalElement.STEP4_PROOF.getBy()).wait(4).check());
+			return (state(VISIBLE, ModalElement.STEP4_PROOF.getBy()).wait(4).check());
 		default:
 			return false;
 		}

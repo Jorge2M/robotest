@@ -35,7 +35,7 @@ public class PageHomeDonateLikes extends PageBase {
 	private static final String XP_ICON_OPERATION_DONE = "//*[@class[contains(.,'icon-outline-done')]]";
 
 	public boolean checkIsPage(int seconds) {
-		return state(Visible, XP_PAGE).wait(seconds).check();
+		return state(VISIBLE, XP_PAGE).wait(seconds).check();
 	}
 	
 	public boolean isVisibleAny(int seconds, ButtonLikes... listButtons) {
@@ -50,7 +50,7 @@ public class PageHomeDonateLikes extends PageBase {
 		return false;
 	}
 	public boolean isVisible(ButtonLikes buttonLikes, int seconds) {
-		return state(Visible, buttonLikes.getXPath()).wait(seconds).check();
+		return state(VISIBLE, buttonLikes.getXPath()).wait(seconds).check();
 	}
 	
 	public void clickButton(ButtonLikes buttonLikes) {
@@ -58,6 +58,6 @@ public class PageHomeDonateLikes extends PageBase {
 	}
 	
 	public boolean isVisibleIconOperationDoneUntil(int seconds) {
-		return state(Visible, XP_ICON_OPERATION_DONE).wait(seconds).check();
+		return state(VISIBLE, XP_ICON_OPERATION_DONE).wait(seconds).check();
 	}
 }

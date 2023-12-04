@@ -127,7 +127,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public boolean isArticleRebajado(WebElement articulo) {
-		return state(Present, articulo)
+		return state(PRESENT, articulo)
 				.by(By.xpath("." + PRECIO_INICIAL_TACHADO.getXPath())).check();
 	}
 	
@@ -142,7 +142,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public String getNameColorFromCodigo(String codigoColor) {
 		String xpathImgColor = getXPathImgCodigoColor(codigoColor);
-		if (!state(Present, xpathImgColor).check()) {
+		if (!state(PRESENT, xpathImgColor).check()) {
 			return Constantes.COLOR_DESCONOCIDO;
 		}
 		WebElement imgColorWeb = getElement(xpathImgColor);
@@ -164,7 +164,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public boolean isArticleWithHearthIconPresentUntil(int posArticle, int seconds) {
 		String xpathIcon = getXPathArticleHearthIcon(posArticle);
-		return state(Present, xpathIcon).wait(seconds).check();
+		return state(PRESENT, xpathIcon).wait(seconds).check();
 	}
 	
 	@Override
@@ -176,7 +176,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	private WebElement moveToHearthIcon(int posArticle) {
 		moveToArticle(posArticle);
 		String xpathIcon = getXPathArticleHearthIcon(posArticle);
-		state(Visible, getElement(xpathIcon)).wait(1).check();
+		state(VISIBLE, getElement(xpathIcon)).wait(1).check();
 		var hearthIcon = getElement(xpathIcon);
 		moveToElement(getElement(xpathIcon));
 		return hearthIcon;
@@ -204,7 +204,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	
 	@Override
 	public boolean isHeaderArticlesVisible(String textHeader) {
-		if (state(Visible, XP_HEADER_ARTICLES).check()) {
+		if (state(VISIBLE, XP_HEADER_ARTICLES).check()) {
 			return getElement(XP_HEADER_ARTICLES).getText().toLowerCase().contains(textHeader.toLowerCase());
 		}
 		return false;
@@ -215,12 +215,12 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 		moveToArticleAndGetObject(posArticulo);
 		if (!secTallas.isVisibleArticleCapaTallasUntil(posArticulo, 0)) {
 			String xpathButtonAnyadir = getXPathButtonAnyadirArticle(posArticulo);
-			state(Visible, xpathButtonAnyadir).wait(3).check();
+			state(VISIBLE, xpathButtonAnyadir).wait(3).check();
 			click(xpathButtonAnyadir).exec();
 		}
 	}
 	public void unshowTallasArticulo() {
-		if (state(Present, XP_BUTTON_FOR_CLOSE_TALLAS).check()) {
+		if (state(PRESENT, XP_BUTTON_FOR_CLOSE_TALLAS).check()) {
 			click(XP_BUTTON_FOR_CLOSE_TALLAS).exec();
 		}
 	}
@@ -250,7 +250,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
 		moveToElement(hearthIcon);
-		state(Clickable, hearthIcon).wait(1).check();
+		state(CLICKABLE, hearthIcon).wait(1).check();
 		hearthIcon.click();
 	}
 	

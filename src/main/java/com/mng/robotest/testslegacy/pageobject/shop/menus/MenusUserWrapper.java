@@ -22,6 +22,8 @@ import com.mng.robotest.testslegacy.pageobject.shop.menus.device.SecMenusUserDev
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 public class MenusUserWrapper extends PageBase {
 	
 	private final SecCabeceraCommon secCabecera = SecCabecera.make();
@@ -61,7 +63,7 @@ public class MenusUserWrapper extends PageBase {
 		if (menu==UserMenu.BOLSA) {
 			secCabecera.hoverIconoBolsa();
 		} else {
-			isMenuInStateUntil(menu, State.Visible, 2);
+			isMenuInStateUntil(menu, VISIBLE, 2);
 			var menuUserItem = new MenuUserItem(menu, channel, app);
 			moveToElement(menuUserItem.getLink().getBy(channel));
 		}

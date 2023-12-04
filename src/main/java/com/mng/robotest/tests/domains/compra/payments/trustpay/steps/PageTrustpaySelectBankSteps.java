@@ -24,11 +24,11 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
-			pageTrustpaySelectBank.isPresentEntradaPago(nombrePago), Warn);
+			pageTrustpaySelectBank.isPresentEntradaPago(nombrePago), WARN);
 	 	
-	 	State level = Warn;
+	 	State level = WARN;
 		if (channel.isDevice()) {
-			level = Info;
+			level = INFO;
 		}
 		String codPais = dataTest.getCodigoPais();
 	 	checks.add(
@@ -37,12 +37,12 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 	 	
 	 	checks.add(
 			"Aparece la cabecera indicando la 'etapa' del pago",
-			pageTrustpaySelectBank.isPresentCabeceraStep(nombrePago), Warn);
+			pageTrustpaySelectBank.isPresentCabeceraStep(nombrePago), WARN);
 	 	
 		if (channel==Channel.desktop) {
 		 	checks.add(
 				"Figura el desplegable de bancos",
-				pageTrustpaySelectBank.isPresentSelectBancos(), Warn);
+				pageTrustpaySelectBank.isPresentSelectBancos(), WARN);
 		 	
 		 	checks.add(
 				"Figura un botón de pago",

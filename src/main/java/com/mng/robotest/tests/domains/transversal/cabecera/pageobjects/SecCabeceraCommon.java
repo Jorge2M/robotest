@@ -5,7 +5,6 @@ import org.openqa.selenium.NoSuchElementException;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
 import javax.ws.rs.NotAllowedException;
@@ -13,6 +12,7 @@ import javax.ws.rs.NotAllowedException;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.desktop.ModalUserSesionShopDesktop;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabeceraCommon.IconoCabecera.*;
 
@@ -102,15 +102,15 @@ public class SecCabeceraCommon extends SecCabecera {
 
 	@Override
 	public void clickIconoBolsaWhenDisp(int seconds) {
-		boolean isIconoClickable = state(Clickable, BOLSA.getBy(channel)).wait(seconds).check();
+		boolean isIconoClickable = state(CLICKABLE, BOLSA.getBy(channel)).wait(seconds).check();
 		if (isIconoClickable) {
 			clickIconoBolsa(); 
 		}
 	}
 
 	public void clickIconoAndWait(IconoCabecera icono) {
-		isInStateIconoBolsa(Visible, 3); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
-		click(icono.getBy(channel)).type(TypeClick.javascript).exec(); //TODO
+		isInStateIconoBolsa(VISIBLE, 3); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
+		click(icono.getBy(channel)).type(JAVASCRIPT).exec(); //TODO
 	}
 	
 	public boolean isIconoInState(IconoCabecera icono, State state) {
@@ -126,7 +126,7 @@ public class SecCabeceraCommon extends SecCabecera {
 	}
 	
 	public void hoverIcono(IconoCabecera icono) {
-		isInStateIconoBolsa(Visible, 5); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
+		isInStateIconoBolsa(VISIBLE, 5); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
 		waitForPageLoaded(driver);
 		moveToElement(icono.getXPath(channel) + "/*"); //Workaround problema hover en Firefox
 		moveToElement(icono.getBy(channel));
@@ -151,7 +151,7 @@ public class SecCabeceraCommon extends SecCabecera {
 
 	private void hoverVisibleUserIcon() {
 		try {
-			if (isIconoInState(INICIAR_SESION, Visible)) {
+			if (isIconoInState(INICIAR_SESION, VISIBLE)) {
 				hoverIcono(INICIAR_SESION); 
 			} else {
 				hoverIcono(MICUENTA);

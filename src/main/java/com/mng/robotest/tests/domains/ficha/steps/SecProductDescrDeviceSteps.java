@@ -47,4 +47,5 @@ public class SecProductDescrDeviceSteps extends StepBase {
 	private boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int seconds) {
 		return (secProductDescr.isPanelInStateUntil(typePanel, stateExpectedAfterClick, seconds));
 	}
+	
 }

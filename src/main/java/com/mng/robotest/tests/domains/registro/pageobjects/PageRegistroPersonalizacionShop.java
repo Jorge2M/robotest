@@ -47,13 +47,13 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	}
 	
 	public boolean isPage() {
-		return isPageUntil(0);
+		return isPage(0);
 	}
-	public boolean isPageUntil(int seconds) {
-		return state(Present, XP_INPUT_NOMBRE).wait(seconds).check(); 
+	public boolean isPage(int seconds) {
+		return state(PRESENT, XP_INPUT_NOMBRE).wait(seconds).check(); 
 	}
 	public boolean isPostalCodeVisible() {
-		return state(Present, XP_INPUT_POSTALCODE).check();
+		return state(PRESENT, XP_INPUT_POSTALCODE).check();
 	}
 	
 	public void inputName(String name) {
@@ -61,7 +61,7 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	}
 	
 	public void inputPostalCode(String postalCode) {
-		state(Present, XP_INPUT_POSTALCODE).wait(2).check();
+		state(PRESENT, XP_INPUT_POSTALCODE).wait(2).check();
 		getElement(XP_INPUT_POSTALCODE).sendKeys(postalCode);
 	}
 	
@@ -70,7 +70,7 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	}
 	
 	public void selectGender(GenderOption gender) {
-		state(Visible, getXPathCheckboxGender(gender)).wait(2).check();
+		state(VISIBLE, getXPathCheckboxGender(gender)).wait(2).check();
 		click(getXPathCheckboxGender(gender)).exec();
 	}
 	
@@ -101,6 +101,6 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	}
 	
 	public boolean checkMessageErrorMovil(int seconds) {
-		return state(Visible, XP_MESSAGE_ERROR_CODPOSTAL).wait(seconds).check();
+		return state(VISIBLE, XP_MESSAGE_ERROR_CODPOSTAL).wait(seconds).check();
 	}
 }

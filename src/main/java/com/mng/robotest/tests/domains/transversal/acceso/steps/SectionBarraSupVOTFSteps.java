@@ -12,7 +12,7 @@ public class SectionBarraSupVOTFSteps extends StepBase {
 	
 	@Validation (
 		description="En la barra superior figura un \"" + SectionBarraSupVOTF.TITLE_USERNAME + "#{usuarioVOTF}" + "\"",
-		level=Warn)
+		level=WARN)
 	public boolean validate(String usuarioVOTF) {
 		return sectionBarraSupVOTF.isPresentUsuario(usuarioVOTF);
 	}	

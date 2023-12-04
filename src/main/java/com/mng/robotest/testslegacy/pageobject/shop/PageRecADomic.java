@@ -12,10 +12,10 @@ public class PageRecADomic extends PageBase {
 	private static final String XP_NO_HAY_PEDIDOS_PRO = "//*[@class[contains(.,'noOrders')]]";	
 
 	public boolean isPage(int seconds) {
-		return state(Present, XP_IS_PAGE_RECOGIDA + " | " + XP_IS_PAGE_RECOGIDA_PRO).wait(seconds).check();
+		return state(PRESENT, XP_IS_PAGE_RECOGIDA + " | " + XP_IS_PAGE_RECOGIDA_PRO).wait(seconds).check();
 	}
 
 	public boolean noHayPedidos() {
-		return state(Present, XP_NO_HAY_PEDIDOS + " | " + XP_NO_HAY_PEDIDOS_PRO).check();
+		return state(PRESENT, XP_NO_HAY_PEDIDOS + " | " + XP_NO_HAY_PEDIDOS_PRO).check();
 	}
 }

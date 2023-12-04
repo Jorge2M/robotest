@@ -12,6 +12,7 @@ import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public abstract class SecCabecera extends PageBase {
@@ -42,7 +43,7 @@ public abstract class SecCabecera extends PageBase {
 	
 	public static void buscarTexto(String referencia, Channel channel) {
 		var menusUser = new MenusUserWrapper();
-		menusUser.isMenuInStateUntil(UserMenu.LUPA, Visible, 1);
+		menusUser.isMenuInStateUntil(UserMenu.LUPA, VISIBLE, 1);
 		menusUser.clickMenuAndWait(UserMenu.LUPA);
 		var secSearch = SecSearch.getNew(channel);
 		secSearch.search(referencia);
@@ -57,18 +58,18 @@ public abstract class SecCabecera extends PageBase {
 	}
 	
 	public boolean isPresentLogoMango(int seconds) {
-		return state(Present, XP_LINK_LOGO_MANGO).wait(seconds).check();
+		return state(PRESENT, XP_LINK_LOGO_MANGO).wait(seconds).check();
 	}
 
 	public void hoverLogoMango() {
-		if (state(Present, XP_LINK_LOGO_MANGO).check()) {
+		if (state(PRESENT, XP_LINK_LOGO_MANGO).check()) {
 			moveToElement(XP_LINK_LOGO_MANGO);
 		}
 	}
 
 	public boolean validaLogoMangoGoesToIdioma(IdiomaPais idioma) {
 		String xpathLogoIdiom = XP_LINK_LOGO_MANGO + "[@href[contains(.,'/" + idioma.getAcceso() + "')]]";
-		return state(Present, xpathLogoIdiom).check();
+		return state(PRESENT, xpathLogoIdiom).check();
 	}
 
 	public int getNumArticulosBolsa() throws Exception {
@@ -88,7 +89,7 @@ public abstract class SecCabecera extends PageBase {
 		waitLoadPage(); //Para evitar staleElement en la línea posterior
 		String xpathNumberArtIcono = getXPathNumberArtIcono();
 		int seconds = (app==AppEcom.outlet) ? 1 : 0; 
-		if (state(Visible, xpathNumberArtIcono).wait(seconds).check()) {
+		if (state(VISIBLE, xpathNumberArtIcono).wait(seconds).check()) {
 			return getElement(xpathNumberArtIcono).getText();
 		}
 		return "0";
@@ -105,7 +106,7 @@ public abstract class SecCabecera extends PageBase {
 	 * Si existe, cierra el banner de aviso en móvil (p.e. el que sale proponiendo la descarga de la App)
 	 */
 	public void closeSmartBannerIfExistsMobil() {
-		if (state(Visible, XP_LINK_CLOSE_SMART_BANNER).check()) {
+		if (state(VISIBLE, XP_LINK_CLOSE_SMART_BANNER).check()) {
 			click(XP_LINK_CLOSE_SMART_BANNER).exec();
 		}
 	}
@@ -119,10 +120,10 @@ public abstract class SecCabecera extends PageBase {
 		var secMenus = MenusWebAll.make(channel);
 		boolean menuVisible = secMenus.isMenuInState(toOpenMenus, 1);
 		int i=0;
-		var typeClick = TypeClick.webdriver;
+		var typeClick = WEBDRIVER;
 		while ((menuVisible!=toOpenMenus) && i<5) {
 			try {
-				state(Visible, XP_HAMBURGUER_DEVICE_ICON).wait(5).check();
+				state(VISIBLE, XP_HAMBURGUER_DEVICE_ICON).wait(5).check();
 				click(XP_HAMBURGUER_DEVICE_ICON).type(typeClick).exec();
 				typeClick = TypeClick.next(typeClick);
 				menuVisible = secMenus.isMenuInState(toOpenMenus, 2);

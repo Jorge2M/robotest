@@ -36,7 +36,7 @@ public class PageYandex1rst extends PageBase {
 	}
 
 	public boolean retryButtonExists() {
-		return state(Present, XP_RETRY_BUTTON).check();
+		return state(PRESENT, XP_RETRY_BUTTON).check();
 	}
 
 	public void clickOnRetry() {

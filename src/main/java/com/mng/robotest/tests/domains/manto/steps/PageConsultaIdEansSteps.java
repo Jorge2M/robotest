@@ -7,7 +7,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepMantoBase;
 import com.mng.robotest.tests.domains.manto.pageobjects.PageConsultaIdEans;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class PageConsultaIdEansSteps extends StepMantoBase {
 
@@ -34,7 +35,7 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 	@Step (
 		description="Introducimos datos de pedidos válidos #{pedidosPrueba} y consultamos los datos de contacto", 
 		expected="Deben mostrar la información de contacto",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void consultaDatosContacto(List<String> pedidosPrueba) {
 		pageConsultaIdEans.inputPedidosAndClickBuscarDatos(pedidosPrueba);
 		checkAfterConsultContact(pedidosPrueba);
@@ -63,7 +64,7 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 	@Step (
 		description="Introducimos datos de pedidos válidos #{pedidosPrueba} y consultamos los Identificadores que tiene",
 		expected="Debe mostrar los identificadores del pedido",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void consultaIdentificadoresPedido(List<String> pedidosPrueba) {
 		pageConsultaIdEans.inputPedidosAndClickBuscarIdentificadores(pedidosPrueba);
 		checkAfterConsultaIdentPedidos(pedidosPrueba);
@@ -91,7 +92,7 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 	@Step (
 		description="Introducimos datos de pedidos válidos #{pedidosPrueba} y consultamos el trackings",
 		expected="Debe mostrar el tracking",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void consultaTrackings(List<String> pedidosPrueba) {
 		pageConsultaIdEans.inputPedidosAndClickBuscarTrackings(pedidosPrueba);
 		checkIsTableTrackingsInformation(2);
@@ -106,7 +107,7 @@ public class PageConsultaIdEansSteps extends StepMantoBase {
 	@Step (
 		description="Introducimos artículos válidos #{articulosPrueba} y consultamos el EAN",
 		expected="Debe mostrar el EAN",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void consultaDatosEan(List<String> articulosPrueba) {
 		pageConsultaIdEans.inputArticulosAndClickBuscarDatosEan(articulosPrueba);
 		checkAfterConsultEAN(articulosPrueba);

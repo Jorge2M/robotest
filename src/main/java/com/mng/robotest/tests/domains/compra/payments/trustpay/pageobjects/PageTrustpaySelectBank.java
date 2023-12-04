@@ -27,26 +27,26 @@ public class PageTrustpaySelectBank extends PageBase {
 	
 	public boolean isPresentEntradaPago(String nombrePago) {
 		String xpathPago = getXPathEntradaPago(nombrePago);
-		return state(Present, xpathPago).check();
+		return state(PRESENT, xpathPago).check();
 	}
 	
 	public boolean isPresentCabeceraStep(String nombrePago) {
 		String xpathCab = getXPathEntradaPago(nombrePago);
-		return state(Present, xpathCab).check();
+		return state(PRESENT, xpathCab).check();
 	}
 	
 	public boolean isPresentButtonPago() {
-		return state(Present, XP_BUTTON_PAGO).check();
+		return state(PRESENT, XP_BUTTON_PAGO).check();
 	}
 	
 	public boolean isPresentSelectBancos() {
-		return state(Present, XP_SELECT_BANCOS).check();
+		return state(PRESENT, XP_SELECT_BANCOS).check();
 	}
 	
 	public void selectBankThatContains(List<String> strContains) {
 		//En el caso de móvil para que aparezca el desplegable se ha de seleccionar el icono del banco
 		if (channel.isDevice() &&
-			!state(Visible, XP_SELECT_BANCOS).check()) {
+			!state(VISIBLE, XP_SELECT_BANCOS).check()) {
 			clickIconoBanco();
 		}
 		

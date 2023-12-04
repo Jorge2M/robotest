@@ -17,7 +17,7 @@ import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
 public class Rgl001 extends TestBase {
 
-	private final PageChequeRegaloInputDataSteps pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps();
+	private final PageChequeRegaloInputDataSteps pgChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps();
 	
 	private final DataPago dataPago;
 		
@@ -55,11 +55,11 @@ public class Rgl001 extends TestBase {
 		if(channel.isDevice()){
 			String nTarjeta = "100000040043";
 			String cvvTarjeta = "618";
-			pageChequeRegaloInputDataSteps.paginaConsultarSaldo(nTarjeta);
-			pageChequeRegaloInputDataSteps.insertCVVConsultaSaldo(cvvTarjeta);
+			pgChequeRegaloInputDataSteps.paginaConsultarSaldo(nTarjeta);
+			pgChequeRegaloInputDataSteps.insertCVVConsultaSaldo(cvvTarjeta);
 		}
-		pageChequeRegaloInputDataSteps.seleccionarCantidades(Importe.EURO_50);
-		pageChequeRegaloInputDataSteps.clickQuieroComprarChequeRegalo();
+		pgChequeRegaloInputDataSteps.seleccionarCantidades(Importe.EURO_50);
+		pgChequeRegaloInputDataSteps.clickQuieroComprarChequeRegalo();
 		
 		var chequeRegalo = new ChequeRegalo();
 		chequeRegalo.setNombre("Jorge");
@@ -67,7 +67,7 @@ public class Rgl001 extends TestBase {
 		chequeRegalo.setEmail(Constantes.MAIL_PERSONAL);
 		chequeRegalo.setImporte(Importe.EURO_50);
 		chequeRegalo.setMensaje("Te conocía aún antes de haberte formado en el vientre de tu madre");
-		pageChequeRegaloInputDataSteps.inputDataAndClickComprar(channel, app, chequeRegalo);
+		pgChequeRegaloInputDataSteps.inputDataAndClickComprar(channel, app, chequeRegalo);
 	}	
 	
 	private void checkoutChequeRegalo() throws Exception {

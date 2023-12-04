@@ -10,13 +10,13 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageInputPedidoSteps extends StepBase {
 
-	private final PageInputPedido pageInputPedido = new PageInputPedido();
+	private final PageInputPedido pgInputPedido = new PageInputPedido();
 	
 	@Validation (
 		description="La página contiene un campo para la introducción del Nº de pedido",
-		level=Warn)
+		level=WARN)
 	public boolean validateIsPage() {
-		return (pageInputPedido.isVisibleInputPedido());
+		return pgInputPedido.isVisibleInputPedido();
 	}
 	
 	@Step (
@@ -27,9 +27,10 @@ public class PageInputPedidoSteps extends StepBase {
 	public void inputPedidoAndSubmit(DataPedido dataPedido) {
 		String usuarioAcceso = dataPedido.getEmailCheckout();
 		String codPedido = dataPedido.getCodpedido();
-		pageInputPedido.inputEmailUsr(usuarioAcceso);
-		pageInputPedido.inputPedido(codPedido);
-		pageInputPedido.clickRecuperarDatos();
+		pgInputPedido.inputEmailUsr(usuarioAcceso);
+		pgInputPedido.inputPedido(codPedido);
+		pgInputPedido.clickRecuperarDatos();
 		new PageDetallePedidoSteps().validateIsPageOk(dataPedido);
 	}
+	
 }

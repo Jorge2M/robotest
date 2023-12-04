@@ -14,19 +14,19 @@ public class SecFitFinder extends PageBase {
 	private static final String XP_ASPA_FOR_CLOSE = XP_WRAPPER + "//div[@data-ref='close']";
 	
 	public boolean isVisibleUntil(int seconds) {
-		return state(Visible, XP_INPUT_ALTURA).wait(seconds).check();
+		return state(VISIBLE, XP_INPUT_ALTURA).wait(seconds).check();
 	}
 	
 	public boolean isInvisibileUntil(int seconds) {
-		return state(Invisible, XP_WRAPPER).wait(seconds).check();
+		return state(INVISIBLE, XP_WRAPPER).wait(seconds).check();
 	}
 	
 	public boolean isVisibleInputAltura() {
-		return state(Visible, XP_INPUT_ALTURA).check();
+		return state(VISIBLE, XP_INPUT_ALTURA).check();
 	}
 		
 	public boolean isVisibleInputPeso() {
-		return state(Visible, XP_INPUT_PESO).check();
+		return state(VISIBLE, XP_INPUT_PESO).check();
 	}
 	
 	public boolean clickAspaForCloseAndWait() {

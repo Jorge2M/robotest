@@ -40,49 +40,49 @@ public class PageMisDatos extends PageBase {
 	}
 	
 	public String getTextInputEmail() {
-		if (state(Present, XP_INPUT_EMAIL).check()) {
+		if (state(PRESENT, XP_INPUT_EMAIL).check()) {
 			return getElement(XP_INPUT_EMAIL).getAttribute("value");
 		}
 		return "";
 	}
 
 	public String getTextInputDireccion() {
-		if (state(Present, XP_INPUT_DIRECCION).check()) {
+		if (state(PRESENT, XP_INPUT_DIRECCION).check()) {
 			return getElement(XP_INPUT_DIRECCION).getAttribute("value");
 		}
 		return "";
 	}
 	
 	public String getTextInputCodPostal() {
-		if (state(Present, XP_INPUT_COD_POSTAL).check()) {
+		if (state(PRESENT, XP_INPUT_COD_POSTAL).check()) {
 			return getElement(XP_INPUT_COD_POSTAL).getAttribute("value");
 		}
 		return "";
 	}
 	
 	public String getTextInputPoblacion() {
-		if (state(Present, XP_INPUT_POBLACION).check()) {
+		if (state(PRESENT, XP_INPUT_POBLACION).check()) {
 			return getElement(XP_INPUT_POBLACION).getAttribute("value");
 		}
 		return "";
 	}
 	
 	public String getCodPaisSelected() {
-		if (state(Present, XP_OPTION_PAIS_SELECTED).check()) {
+		if (state(PRESENT, XP_OPTION_PAIS_SELECTED).check()) {
 			return getElement(XP_OPTION_PAIS_SELECTED).getAttribute("value");
 		}
 		return "";
 	}
 	
 	public String getProvinciaSelected() {
-		if (state(Present, XP_OPTION_PROVINCIA_SELECTED).check()) {
+		if (state(PRESENT, XP_OPTION_PROVINCIA_SELECTED).check()) {
 			return getElement(XP_OPTION_PROVINCIA_SELECTED).getText();
 		}
 		return "";
 	}	
 	
 	public boolean isVisiblePasswordTypePassword() {
-		return state(Visible, XP_INPUT_PASSWORD_TYPE_PASSWORD).check();
+		return state(VISIBLE, XP_INPUT_PASSWORD_TYPE_PASSWORD).check();
 	}
 	
 	public int getNumInputContentVoid() {
@@ -93,11 +93,11 @@ public class PageMisDatos extends PageBase {
 		return isPage(0);
 	}
 	public boolean isPage(int seconds) {
-		return state(Present, XP_IS_PAGE).wait(seconds).check();
+		return state(PRESENT, XP_IS_PAGE).wait(seconds).check();
 	}
 	
 	public boolean titleOk() {
-		return state(Present, XP_TITLE_OK).check();
+		return state(PRESENT, XP_TITLE_OK).check();
 	}
 	
 	public String getValueEmailInput() {
@@ -118,7 +118,7 @@ public class PageMisDatos extends PageBase {
 	}
 	
 	public boolean pageResOK() { 
-		return state(Present, XP_PAGE_RES_OK).check();
+		return state(PRESENT, XP_PAGE_RES_OK).check();
 	}
 	
 	public void cancelarCuenta() {
@@ -128,7 +128,7 @@ public class PageMisDatos extends PageBase {
 	
 	private void clickEliminarCuenta() {
 		click(XP_LINK_ELIMINAR_CUENTA).exec();
-		if (!state(Invisible, XP_LINK_ELIMINAR_CUENTA).wait(1).check()) {
+		if (!state(INVISIBLE, XP_LINK_ELIMINAR_CUENTA).wait(1).check()) {
 			click(XP_LINK_ELIMINAR_CUENTA).exec();
 		}		
 	}
@@ -138,6 +138,6 @@ public class PageMisDatos extends PageBase {
 	}
 	
 	public boolean isMessageCuentaCanceladaOkVisible(int seconds) {
-		return state(Visible, XP_MESSAGE_CUENTA_CANCELADA_OK).wait(seconds).check();
+		return state(VISIBLE, XP_MESSAGE_CUENTA_CANCELADA_OK).wait(seconds).check();
 	}
 }

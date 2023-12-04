@@ -1,12 +1,12 @@
 package com.mng.robotest.tests.domains.compra.pageobjects.secsoynuevo;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.base.datatest.DataTest;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.tests.domains.compra.pageobjects.secsoynuevo.SecSoyNuevo.RadioState.*;
 
 public abstract class SecSoyNuevo extends PageBase {
 	
@@ -20,7 +20,7 @@ public abstract class SecSoyNuevo extends PageBase {
 	public abstract void setCheckPubliNewsletter(RadioState action);
 	public abstract void setCheckConsentimiento(RadioState action);
 	
-	public static SecSoyNuevo make(Channel channel, AppEcom app, DataTest dataTest) {
+	public static SecSoyNuevo make(Channel channel, DataTest dataTest) {
 		if (channel!=Channel.mobile) {
 			return new SecSoyNuevoDesktop();
 		}
@@ -28,11 +28,11 @@ public abstract class SecSoyNuevo extends PageBase {
 	}
 	
 	public boolean isFormIdentUntil(int seconds) { 
-		return state(Present, getXPathFormIdent()).wait(seconds).check();
+		return state(PRESENT, getXPathFormIdent()).wait(seconds).check();
 	}
 	
 	public boolean isInputEmailUntil(int seconds) { 
-		return state(Present, getXPathInputEmail()).wait(seconds).check();
+		return state(PRESENT, getXPathInputEmail()).wait(seconds).check();
 	}
 	
 	public void inputEmail(String email) {
@@ -43,24 +43,15 @@ public abstract class SecSoyNuevo extends PageBase {
 	}
 	
 	public void clickContinue() {
-		click(getXPathBotonContinue()).type(TypeClick.javascript).exec();
+		click(getXPathBotonContinue()).type(JAVASCRIPT).exec();
 	}
 
-	void clickRadio(RadioState action, boolean isActivated, String xpathRadio) {
-		switch (action) {
-		case ACTIVATE:
-			if (!isActivated) {
-				getElement(xpathRadio).click();
-			}
-			break;
-		case DEACTIVATE:
-			if (isActivated) {
-				getElement(xpathRadio).click();
-			}
-			break;
-		default:
-			break;
-		}
+	void clickRadio(RadioState radioAction, boolean isActivated, String xpathRadio) {
+	    var radioElement = getElement(xpathRadio);
+	    if ((radioAction == ACTIVATE && !isActivated) || 
+	        (radioAction == DEACTIVATE && isActivated)) {
+	        radioElement.click();
+	    }
 	}	
 	
 	private void inputEmailOneTime(String email) {

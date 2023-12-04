@@ -42,11 +42,11 @@ public class PageJCAS extends PageBase {
 	
 	public void clickCaptchaIfPresent() {
 		By byIframe = By.xpath(XP_IFRAME_CAPTCHA);
-		if (state(Present, byIframe).check()) {
+		if (state(PRESENT, byIframe).check()) {
 			try {
 				driver.switchTo().frame(driver.findElement(byIframe));
 				click(XP_RADIO_CAPTCHA_WITHIN_IFRAME).exec();
-				state(Visible, XP_RECAPTCHA_CHECKED_WITHIN_IFRAME).wait(5).check();
+				state(VISIBLE, XP_RECAPTCHA_CHECKED_WITHIN_IFRAME).wait(5).check();
 			}
 			finally {
 				driver.switchTo().defaultContent();

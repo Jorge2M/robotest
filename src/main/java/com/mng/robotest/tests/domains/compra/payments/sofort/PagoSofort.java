@@ -18,7 +18,7 @@ public class PagoSofort extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		boolean isPageIconoSofort = new PageSofort1rst().isPageVisibleUntil(3);
 		
@@ -26,7 +26,7 @@ public class PagoSofort extends PagoSteps {
 		//saltándose la página de selección del icono de sofort
 		if (isPageIconoSofort) {
 			var pageSofortIconosBancoSteps = new PageSofortIconosBancoSteps();
-			pageSofortIconosBancoSteps.validateIsPageUntil(3);
+			pageSofortIconosBancoSteps.validateisPage(3);
 			pageSofortIconosBancoSteps.clickIconoSofort();
 		}
 

@@ -4,13 +4,9 @@ import java.net.URISyntaxException;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.*;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
@@ -25,6 +21,10 @@ import com.mng.robotest.tests.domains.transversal.prehome.steps.PagePrehomeSteps
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class AccesoSteps extends StepBase {
 
@@ -53,7 +53,7 @@ public class AccesoSteps extends StepBase {
 			"Seleccionar \"Iniciar sesión\" e identificarse con el usuario <b style=\"color:blue;\">#{dataTest.getUserConnected()}</b> " + 
 			"(borrar artículos bolsa: <b>#{clearArticulos}</b>)",
 		expected="el login es correcto",
-		saveNettraffic=SaveWhen.Always)
+		saveNettraffic=ALWAYS)
 	public void identification(DataTest dataTest, boolean clearArticulos) {
 		new AccesoFlows().identification(dataTest.getUserConnected(), dataTest.getPasswordUser());
 		validaIdentificacionEnShop();
@@ -74,7 +74,7 @@ public class AccesoSteps extends StepBase {
 		description="Aparece el link \"Mi cuenta\" (usuario loginado) " + SECONDS_WAIT)
 	public boolean checkIsLogged(int seconds) {
 		return new MenusUserWrapper()
-				.isMenuInStateUntil(MI_CUENTA, Present, seconds);
+				.isMenuInStateUntil(MI_CUENTA, PRESENT, seconds);
 	}
 	
 	@Validation
@@ -84,9 +84,9 @@ public class AccesoSteps extends StepBase {
 		var userMenus = new MenusUserWrapper();
 		checks.add(
 			"Aparece el link \"Mi cuenta\" " + getLitSecondsWait(seconds),
-			userMenus.isMenuInStateUntil(MI_CUENTA, Present, seconds));
+			userMenus.isMenuInStateUntil(MI_CUENTA, PRESENT, seconds));
 		
-		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(FAVORITOS, Present, 0);
+		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(FAVORITOS, PRESENT, 0);
 		if (app==AppEcom.outlet) { 
 			checks.add(
 				"NO aparece el link \"Favoritos\"",
@@ -98,7 +98,7 @@ public class AccesoSteps extends StepBase {
 		}
 		
 		if (channel!=Channel.desktop) {
-			boolean isPresentLinkMisCompras = userMenus.isMenuInState(MIS_COMPRAS, Present);
+			boolean isPresentLinkMisCompras = userMenus.isMenuInState(MIS_COMPRAS, PRESENT);
 			checks.add(
 				"Aparece el link \"Mis Compras\"",
 				isPresentLinkMisCompras);
@@ -107,10 +107,10 @@ public class AccesoSteps extends StepBase {
 		if (channel!=Channel.desktop) {
 			checks.add(
 				"Aparece el link \"Ayuda\"",
-				userMenus.isMenuInState(AYUDA, Visible));
+				userMenus.isMenuInState(AYUDA, VISIBLE));
 			checks.add(
 				"Aparece el link \"Cerrar sesión\"",
-				userMenus.isMenuInState(CERRAR_SESION, Present));
+				userMenus.isMenuInState(CERRAR_SESION, PRESENT));
 		}
 		
 		return checks;
@@ -144,7 +144,7 @@ public class AccesoSteps extends StepBase {
 	}
 
 	public void identificacionEnMango() {
-		if (!new MenusUserWrapper().isMenuInState(CERRAR_SESION, Present)) {
+		if (!new MenusUserWrapper().isMenuInState(CERRAR_SESION, PRESENT)) {
 			iniciarSesion(dataTest);
 		}
 	}
@@ -166,7 +166,7 @@ public class AccesoSteps extends StepBase {
 	@Step (
 		description="Seleccionar <b>Iniciar Sesión</b> y logarse con el usuario <b>#{userConnect}</b>", 
 		expected="La identificación es correcta",
-		saveNettraffic=SaveWhen.Always)
+		saveNettraffic=ALWAYS)
 	public void identification(String userConnect, String userPassword) {
 		new AccesoFlows().identification(userConnect, userPassword);
 		validaIdentificacionEnShop();
@@ -188,7 +188,7 @@ public class AccesoSteps extends StepBase {
 	@Step (
 		description="Logarse con el usuario <b>#{userConnect} / #{userPassword}</b>", 
 		expected="El login es correcto",
-		saveNettraffic=SaveWhen.Always)
+		saveNettraffic=ALWAYS)
 	public void login(String userConnect, String userPassword) {
 		new AccesoFlows().login(userConnect, userPassword);
 		validaIdentificacionEnShop();
@@ -222,7 +222,7 @@ public class AccesoSteps extends StepBase {
 			"<b>#{paisDestino.getNombrePais()}</b> (#{paisDestino.getCodigoPais()}), <b>idioma #{idiomaDestino.getLiteral()}</b>",
 		expected=
 			"Se accede a la shop de #{paisDestino.getNombrePais()} en #{idiomaDestino.getLiteral()}",
-		saveHtmlPage=SaveWhen.Always)
+		saveHtmlPage=ALWAYS)
 	public void accesoPRYCambioPais(Pais paisDestino, IdiomaPais idiomaDestino) throws Exception {
 		replaceStepDescription(TAG_NOMBRE_PAIS_ORIGEN, dataTest.getPais().getNombrePais());
 		replaceStepDescription(TAG_CODIGO_PAIS_ORIGEN, dataTest.getCodigoPais());

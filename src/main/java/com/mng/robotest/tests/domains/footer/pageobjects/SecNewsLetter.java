@@ -35,7 +35,7 @@ public class SecNewsLetter extends PageBase {
 		new SecFooter().moveTo();
 		
 		String xpathLink = XP_TEXT_AREA_MAIL_SUSCRIPTION;
-		state(Visible, xpathLink).wait(2).check();
+		state(VISIBLE, xpathLink).wait(2).check();
 		click(xpathLink).exec();
 	}
 

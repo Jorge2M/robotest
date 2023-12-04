@@ -20,7 +20,7 @@ public class PagePostfSelectChannel extends PageBase {
 	}
 	
 	public boolean isPage(int seconds) {
-		return state(Visible, ChannelPF.CARD.getXPath()).wait(seconds).check();
+		return state(VISIBLE, ChannelPF.CARD.getXPath()).wait(seconds).check();
 	}
 	
 	public void selectChannel(ChannelPF channelPF) {

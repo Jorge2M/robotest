@@ -28,7 +28,7 @@ public class SecSoyNuevoMobile extends SecSoyNuevo {
 	
 	@Override
 	boolean isSection(int seconds) {
-		return state(Visible, XP_BOTON_CONTINUE).wait(seconds).check();
+		return state(VISIBLE, XP_BOTON_CONTINUE).wait(seconds).check();
 	}
 	
 	@Override
@@ -49,14 +49,14 @@ public class SecSoyNuevoMobile extends SecSoyNuevo {
 	}	
 	
 	private boolean isCheckedPubliNewsletter() {
-		if (!state(Present, XP_INPUT_PUBLICIDAD).check()) {
+		if (!state(PRESENT, XP_INPUT_PUBLICIDAD).check()) {
 			return false;
 		}
 		return getElement(XP_INPUT_PUBLICIDAD).isSelected();
 	}
 	
 	private boolean isCheckedConsentimiento() {
-		if (!state(Present, XP_INPUT_CONSENTIMIENTO).check()) {
+		if (!state(PRESENT, XP_INPUT_CONSENTIMIENTO).check()) {
 			return false;
 		}
 		return getElement(XP_INPUT_CONSENTIMIENTO).isSelected();

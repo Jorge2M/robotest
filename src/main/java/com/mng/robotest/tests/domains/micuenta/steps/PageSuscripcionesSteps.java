@@ -19,7 +19,7 @@ public class PageSuscripcionesSteps extends StepBase {
 
 	private final PageSuscripciones pageSuscripciones = new PageSuscripciones();
 	
-	@Validation (description="1) Aparece la página de \"Suscripciones\"", level=Warn)
+	@Validation (description="1) Aparece la página de \"Suscripciones\"", level=WARN)
 	public boolean validaIsPage () {
 		return pageSuscripciones.isPage();
 	}
@@ -34,17 +34,17 @@ public class PageSuscripcionesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparecen "  + numLineasTotales + " Newsletter",
-			pageSuscripciones.getNumNewsletters()==numLineasTotales, Warn);
+			pageSuscripciones.getNumNewsletters()==numLineasTotales, WARN);
 		
 		checks.add(
 			"Aparecen "  + numLinDesmarcadas + " suscripciones desmarcadas",
-			pageSuscripciones.getNumNewslettersDesmarcadas()==numLinDesmarcadas, Warn);
+			pageSuscripciones.getNumNewslettersDesmarcadas()==numLinDesmarcadas, WARN);
 		
 		while (tokensLinDesmarcadas.hasMoreElements()) {
 			String lineaStr = tokensLinDesmarcadas.nextToken();
 			checks.add(
 				"Aparecen desmarcadas las suscripciones de: " + lineasUnchecked,
-				pageSuscripciones.isNewsletterDesmarcada(lineaStr), Warn);
+				pageSuscripciones.isNewsletterDesmarcada(lineaStr), WARN);
 		}
 		return checks;
 	}
@@ -57,7 +57,7 @@ public class PageSuscripcionesSteps extends StepBase {
 		int numLineasTotales = linesAll.size();
 		checks.add(
 				"Aparecen "  + numLineasTotales + " Newsletter",
-				pageSuscripciones.getNumNewsletters()==numLineasTotales, Warn);
+				pageSuscripciones.getNumNewsletters()==numLineasTotales, WARN);
 		
 		for (var linea : linesAll) {
 			if (linesMarked.contains(linea)) {
@@ -67,7 +67,7 @@ public class PageSuscripcionesSteps extends StepBase {
 			} else {
 				checks.add(
 					"Aparecen desmarcada la suscripción de <b>" + linea + "</b>",
-					pageSuscripciones.isNewsletterDesmarcada(linea.name()), Warn);				
+					pageSuscripciones.isNewsletterDesmarcada(linea.name()), WARN);				
 			}
 		}
 		return checks;

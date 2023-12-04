@@ -1,6 +1,8 @@
-package com.mng.robotest.tests.domains.compra.pageobjects;
+package com.mng.robotest.tests.domains.compra.pageobjects.modals;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion;
 
 public class ModalDirecEnvioOld extends ModalDireccion {
 
@@ -25,11 +27,11 @@ public class ModalDirecEnvioOld extends ModalDireccion {
 	} 
 
 	public boolean isVisibleFormUntil(int seconds) {
-		return state(Visible, XP_FORM_MODAL).wait(seconds).check();
+		return state(VISIBLE, XP_FORM_MODAL).wait(seconds).check();
 	}
 
 	public boolean isVisibleButtonActualizar() {
-		return state(Visible, XP_BUTTON_UPDATE).check();
+		return state(VISIBLE, XP_BUTTON_UPDATE).check();
 	}
 
 	public void moveToAndDoubleClickActualizar() {

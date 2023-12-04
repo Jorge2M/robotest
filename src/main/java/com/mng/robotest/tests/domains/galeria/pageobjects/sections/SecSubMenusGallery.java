@@ -25,11 +25,11 @@ public abstract class SecSubMenusGallery extends PageBase {
 	}
 	
 	public boolean isVisible(int seconds) {
-		return state(Visible, getXPathCapa()).wait(seconds).check();
+		return state(VISIBLE, getXPathCapa()).wait(seconds).check();
 	}
 	
 	public boolean isVisibleSubMenu(String nameMenu) {
-		return state(Visible, getXPathMenu(nameMenu)).wait(1).check();
+		return state(VISIBLE, getXPathMenu(nameMenu)).wait(1).check();
 	}
 	
 	public void clickSubMenu(String nameMenu) {

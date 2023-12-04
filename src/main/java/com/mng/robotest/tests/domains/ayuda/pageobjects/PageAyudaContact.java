@@ -16,7 +16,7 @@ public class PageAyudaContact extends PageBase {
 	}
 	
 	public boolean isPage() {
-		return state(Visible, XP_ESCRIBENOS_UN_MENSAJE).check();
+		return state(VISIBLE, XP_ESCRIBENOS_UN_MENSAJE).check();
 	}
 	
 	public void clickEscribenosUnMensaje() {

@@ -25,7 +25,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	@Validation (
 		description="Estamos en la página de introducción de los datos de la tarjeta " + SECONDS_WAIT)
 	public boolean validaIsPage(int seconds) {
-		return (pageMercpagoDatosTrj.isPageUntil(seconds));
+		return (pageMercpagoDatosTrj.isPage(seconds));
 	}	
 	
 	public void inputNumTarjeta(String numTarjeta) {
@@ -50,7 +50,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	
 	@Validation (
 		description="El \"Wrapper\" de la tarjeta se hace visible con los datos de la Visa " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	private boolean isWrapperTarjetaVisibleVisaDataMobil(int seconds) {
 		 return (((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).isActiveWrapperVisaUntil(seconds));
 	}
@@ -65,7 +65,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el icono de Visa a la derecha de la tarjeta " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	private boolean isVisaIconAtRightTrjDesktop(int seconds) {
 		return (((PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj).isVisibleVisaIconUntil(seconds));
 	}
@@ -128,7 +128,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece activado el botón \"Next\" para continuar con el pago " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	private boolean isEnabledButtonNextMobil(int seconds) {
 		return (((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).isClickableButtonNextPayUntil(seconds));
 	}
@@ -139,10 +139,10 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	public void clickButtonForPayMobil(boolean afterTrjGuardada) {
 		((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).clickButtonForPay();
 		if (afterTrjGuardada) {
-			new PageResultPagoSteps().validaIsPageUntil(30);
+			new PageResultPagoSteps().validaisPage(30);
 		}
 		else {
-			new PageMercpagoConfSteps().validaIsPageUntil(5);
+			new PageMercpagoConfSteps().validaisPage(5);
 		}
 	}	
 	
@@ -168,10 +168,10 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 		PageMercpagoDatosTrjDesktop pageDesktop = (PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj;
 		pageDesktop.clickBotonForContinue();
 		if (afterTrjGuardada) {
-			new PageResultPagoSteps().validaIsPageUntil(30);
+			new PageResultPagoSteps().validaisPage(30);
 		}
 		else {
-			new PageMercpagoConfSteps().validaIsPageUntil(10);
+			new PageMercpagoConfSteps().validaisPage(10);
 		}
 	}
 	

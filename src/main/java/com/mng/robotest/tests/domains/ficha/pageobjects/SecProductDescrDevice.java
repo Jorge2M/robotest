@@ -83,14 +83,14 @@ public class SecProductDescrDevice extends PageBase {
 	public TypeStatePanel getStatePanel(TypePanel typePanel) {
 		waitMillis(200);
 		String xpathPanel = typePanel.getXPath(channel, app);
-		if (!state(Present, xpathPanel).check()) {
+		if (!state(PRESENT, xpathPanel).check()) {
 			return TypeStatePanel.MISSING;
 		}
 		
 		WebElement panel = getElement(xpathPanel);
 		if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {
 			By byCapa = By.xpath(".//div[@class[contains(.,'collapsible-info-body')]]");
-			if (state(Present, panel).by(byCapa).check()) {
+			if (state(PRESENT, panel).by(byCapa).check()) {
 				WebElement capa = driver.findElement(byCapa);
 				if (capa.getAttribute("class").contains("-opened")) {
 					return TypeStatePanel.UNFOLDED;

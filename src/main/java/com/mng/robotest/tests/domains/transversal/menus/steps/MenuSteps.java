@@ -8,7 +8,6 @@ import org.openqa.selenium.NoSuchElementException;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.conf.AppEcom;
@@ -36,6 +35,7 @@ import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.transversal.menus.beans.FactoryMenus.MenuItem.ABRIGOS_HE;
+import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
 public class MenuSteps extends StepBase {
 
@@ -106,7 +106,7 @@ public class MenuSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible la capa de los submenús del grupo #{groupWeb.getGroup()}",
-		level=Info)
+		level=INFO)
 	private boolean checkGroupSubMenuVisible(GroupWeb groupWeb) {
 		return groupWeb.isVisibleSubMenus();
 	}	
@@ -183,16 +183,16 @@ public class MenuSteps extends StepBase {
 	 	checks.add(
 	 		Check.make(
 	 				"El title de la página es el asociado al menú <b>" + nameMenu + "</b>",
-	 				isTitleAccording, Info)
-	 			.store(StoreType.None).build());
+	 				isTitleAccording, INFO)
+	 			.store(NONE).build());
 	 	
 	 	if (!isTitleAccording) {
 		 	checks.add(
 		 	    Check.make(
 				    "El título no coincide -> Validamos que exista el header <b>" + 
 		 	        nameMenu + "</b> en el inicio de la galería",
-		 	       PageGaleria.make(channel, app, dataTest.getPais()).isHeaderArticlesVisible(nameMenu), Warn)
-		 	    .store(StoreType.Evidences).build());
+		 	       PageGaleria.make(channel, app, dataTest.getPais()).isHeaderArticlesVisible(nameMenu), WARN)
+		 	    .store(EVIDENCES).build());
 	 	}
 	 	return checks;
 	}
@@ -215,7 +215,7 @@ public class MenuSteps extends StepBase {
 	private ChecksTM checkArticlesContainsLiteralsDesktop(List<String> articles) {
 		var pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(channel, app, dataTest.getPais());
 		var articlesNoValid = pageGaleriaDesktop.getArticlesNoValid(articles);
-		var stateVal = (articlesNoValid.size()<10) ? Warn : Defect;
+		var stateVal = (articlesNoValid.size()<10) ? WARN : DEFECT;
 		
 		var checks = ChecksTM.getNew();
 		checks.add(
@@ -290,17 +290,14 @@ public class MenuSteps extends StepBase {
 		waitMillis(100);
 	}	
 	
-	@Validation (
-		description="Aparecen los menús",
-		level=Info)
+	@Validation (description="Aparecen los menús", level=INFO)
 	public boolean validateHoverLineaDesktop(LineaWeb lineaWeb) {
 		return MenusWebAll.make(channel).isMenuInState(true, 1);
 	}	
 	
 	@Validation (
 		description="Está seleccionada la línea <b>#{lineaWeb.getLinea()}</b>",
-		level=Info,
-		store=StoreType.None)
+		level=INFO, store=NONE)
 	public boolean validateIsLineaSelected(LineaWeb lineaWeb) {
 		return lineaWeb.isLineaSelected(0);
 	}	
@@ -361,8 +358,7 @@ public class MenuSteps extends StepBase {
 	
 	@Validation (
 		description="Está seleccionada la sublínea #{lineaWeb.getSublinea()} / <b>#{lineaWeb.getSublinea()}</b>",
-		level=Info,
-		store=StoreType.None)
+		level=INFO, store=NONE)
 	public boolean validateIsSubLineaSelected(LineaWeb lineaWeb) {
 		return lineaWeb.isSublineaSelected(0);
 	}		
@@ -379,11 +375,11 @@ public class MenuSteps extends StepBase {
 				if (apareceLinea==ThreeState.TRUE) {
 					checks.add (
 						"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
-						isLineaPresent, Defect);
+						isLineaPresent);
 				} else {
 					checks.add (
 						"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
-						!isLineaPresent, Warn);
+						!isLineaPresent, WARN);
 				}
 			}
 		}

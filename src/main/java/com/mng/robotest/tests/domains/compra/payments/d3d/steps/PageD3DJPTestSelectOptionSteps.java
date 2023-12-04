@@ -15,14 +15,14 @@ public class PageD3DJPTestSelectOptionSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página de Test correspondiente al D3D de JPMorgan " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	public boolean validateIsD3D(int seconds) {
-		return pageD3DJPTestSelectOption.isPageUntil(seconds);
+		return pageD3DJPTestSelectOption.isPage(seconds);
 	}	
 	
 	@Validation (
 		description="Aparece el importe #{importeTotal} de la operación",
-		level=Warn)
+		level=WARN)
 	public boolean isImporteVisible(String importeTotal, String codPais) {
 		return (ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver));
 	}

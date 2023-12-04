@@ -10,7 +10,7 @@ public class ModalLoyaltyAfterLogin extends PageBase {
 	private static final String XP_IR_DE_SHOPPING_LINK = XP_CAPA_CONTAINER + "//a[@class[contains(.,'loyalty-irdeshopping')]]";
 	
 	public boolean isModalVisibleUntil(int seconds) {
-		return state(Visible, XP_IR_DE_SHOPPING_LINK).wait(seconds).check();
+		return state(VISIBLE, XP_IR_DE_SHOPPING_LINK).wait(seconds).check();
 	}
 	
 	public void closeModal() {

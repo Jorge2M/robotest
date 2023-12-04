@@ -22,7 +22,7 @@ public class SecEps extends PageBase {
 
 	public boolean isBancoSeleccionado(String nombreBanco) {
 		String xpath = getXPathSelectOptionBanco(nombreBanco);
-		return state(Visible, xpath).check();
+		return state(VISIBLE, xpath).check();
 	}
 
 }

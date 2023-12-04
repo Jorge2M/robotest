@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.base;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -259,7 +259,7 @@ public class PageBase extends PageObjTM {
 	
 	public boolean isPresentElementWithText(String text, int seconds) {
 		String xpath = "//*[text()[contains(.,'" + text + "')]]";
-		return state(Present, xpath).wait(seconds).check();
+		return state(PRESENT, xpath).wait(seconds).check();
 	}
 	
 	public boolean isTitleAssociatedToMenu(String menuName) {

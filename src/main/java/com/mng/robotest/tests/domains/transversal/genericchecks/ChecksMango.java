@@ -90,7 +90,7 @@ public class ChecksMango extends PageBase {
 			return this;
 		}
 		public BuilderChecksMango accesibility() {
-			accesibility = Warn;
+			accesibility = WARN;
 			return this;
 		}
 		
@@ -99,7 +99,7 @@ public class ChecksMango extends PageBase {
 			return this;
 		}
 		public BuilderChecksMango cookiesAllowed() {
-			cookiesAllowed = Defect;
+			cookiesAllowed = DEFECT;
 			return this;
 		}
 
@@ -108,7 +108,7 @@ public class ChecksMango extends PageBase {
 			return this;
 		}
 		public BuilderChecksMango seo() {
-			seo = Info;
+			seo = INFO;
 			return this;
 		}
 		
@@ -117,7 +117,7 @@ public class ChecksMango extends PageBase {
 			return this;
 		}
 		public BuilderChecksMango analitica() {
-			analitica = Defect;
+			analitica = DEFECT;
 			return this;
 		}
 		
@@ -126,7 +126,7 @@ public class ChecksMango extends PageBase {
 			return this;
 		}
 		public BuilderChecksMango textsTraduced() {
-			textsTraduced = Defect;
+			textsTraduced = DEFECT;
 			return this;
 		}
 		
@@ -135,7 +135,7 @@ public class ChecksMango extends PageBase {
 			return this;
 		}
 		public BuilderChecksMango googleAnalytics() {
-			googleAnalytics = Warn;
+			googleAnalytics = WARN;
 			return this;
 		}
 
@@ -144,7 +144,7 @@ public class ChecksMango extends PageBase {
 			return this;
 		}
 		public BuilderChecksMango imgsBroken() {
-			imgsBroken = Warn;
+			imgsBroken = WARN;
 			return this;
 		}
 		
@@ -155,7 +155,7 @@ public class ChecksMango extends PageBase {
 		}
 		@Override
 		public BuilderChecksMango jsErrors() {
-			jsErrors = Info;
+			jsErrors = INFO;
 			return this;
 		}
 
@@ -166,7 +166,7 @@ public class ChecksMango extends PageBase {
 		}
 		@Override
 		public BuilderChecksMango netTraffic() {
-			netTraffic = Warn;
+			netTraffic = WARN;
 			return this;
 		}
 		

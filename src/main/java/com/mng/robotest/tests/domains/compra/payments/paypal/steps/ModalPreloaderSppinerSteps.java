@@ -1,15 +1,15 @@
 package com.mng.robotest.tests.domains.compra.payments.paypal.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.StoreType;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.payments.paypal.pageobjects.ModalPreloaderSpinner;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
 public class ModalPreloaderSppinerSteps extends StepBase {
 	
-	private final ModalPreloaderSpinner modalPreloaderSpinner = new ModalPreloaderSpinner();
+	private final ModalPreloaderSpinner mdPreloaderSpinner = new ModalPreloaderSpinner();
 	
 	public void validateAppearsAndDisappears() {
 		validateIsVisible(2);
@@ -18,17 +18,15 @@ public class ModalPreloaderSppinerSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece el icono del candado de \"Cargando\" " + SECONDS_WAIT,
-		level=Info,
-		store=StoreType.None)
+		level=INFO, store=NONE)
 	public boolean validateIsVisible(int seconds) {
-		return (modalPreloaderSpinner.isVisibleUntil(seconds));
+		return (mdPreloaderSpinner.isVisibleUntil(seconds));
 	}
 	
 	@Validation (
 		description="Desaparece el icono del candado de \"Cargando\" " + SECONDS_WAIT,
-		level=Info,
-		store=StoreType.None)
+		level=INFO, store=NONE)
 	public boolean validateIsVanished(int seconds) {
-		return (modalPreloaderSpinner.isNotVisibleUntil(seconds));
+		return (mdPreloaderSpinner.isNotVisibleUntil(seconds));
 	}
 }

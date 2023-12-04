@@ -91,7 +91,7 @@ public class ImporteScreen {
 		}
 		
 		xpathImports = replaceLast(xpathImports, litOr, "") + "]";
-		return (state(Present, By.xpath(xpathImports), driver).check());
+		return (state(PRESENT, By.xpath(xpathImports), driver).check());
 	}
 	
 	/**

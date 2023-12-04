@@ -16,7 +16,7 @@ public class ModalInputPersonnumberKlarna extends PageBase {
 	}
 	
 	public boolean isModal(int seconds) {
-		return state(Visible, getXPathInputPersonNumber()).wait(seconds).check();
+		return state(VISIBLE, getXPathInputPersonNumber()).wait(seconds).check();
 	}
 	
 	public void inputPersonNumber(String personnumber) {
@@ -25,7 +25,7 @@ public class ModalInputPersonnumberKlarna extends PageBase {
 	
 	public void clickButtonConf() {
 		click(XP_BUTTON_CONF).exec();
-		if (state(Visible, XP_SECOND_BUTTON_CONF).wait(2).check()) {
+		if (state(VISIBLE, XP_SECOND_BUTTON_CONF).wait(2).check()) {
 			click(XP_SECOND_BUTTON_CONF).exec();
 		}
 	}

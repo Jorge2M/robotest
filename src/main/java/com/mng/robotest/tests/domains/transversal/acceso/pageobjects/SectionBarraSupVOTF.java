@@ -12,7 +12,7 @@ public class SectionBarraSupVOTF extends PageBase {
 	public boolean isPresentUsuario(String usuarioVOTF) {
 		String usuarioLit = TITLE_USERNAME + usuarioVOTF;
 		return (
-			state(Present, XP_BARRA).check() &&
+			state(PRESENT, XP_BARRA).check() &&
 			getElement(XP_BARRA).getText().toLowerCase().contains(usuarioLit.toLowerCase()));
 	}
 	

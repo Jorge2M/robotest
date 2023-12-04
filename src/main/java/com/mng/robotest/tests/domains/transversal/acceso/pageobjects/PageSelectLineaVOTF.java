@@ -28,7 +28,7 @@ public class PageSelectLineaVOTF extends PageBase {
 	
 	public boolean isBannerPresent(LineaType linea) {
 		String xpathBanner = getXPathLineaSection(linea);
-		return state(Present, xpathBanner).check();
+		return state(PRESENT, xpathBanner).check();
 	}
 	
 	public void clickBanner(LineaType linea) {

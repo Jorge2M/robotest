@@ -9,7 +9,7 @@ public class ModalConfUserDataKlarna extends PageBase {
 	private static final String XP_BUTTON_CONFIRMATION = "//div[@id[contains(.,'footer-button-wrapper')]]//button";
 	
 	public boolean isModal(int seconds) {
-		return state(Visible, XP_BUTTON_CONFIRMATION).wait(seconds).check();
+		return state(VISIBLE, XP_BUTTON_CONFIRMATION).wait(seconds).check();
 	}
 	
 	public void clickButtonConfirmation() {

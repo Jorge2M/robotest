@@ -42,7 +42,7 @@ public class SecSelectDPoint extends PageBase {
 	}
 
 	private boolean isInputProvinciaVisible() {
-		return state(Visible, XP_INPUT_PROVINCIA).check();
+		return state(VISIBLE, XP_INPUT_PROVINCIA).check();
 	}
  
 	private void sendProvinciaToInput(String provincia) {
@@ -71,7 +71,7 @@ public class SecSelectDPoint extends PageBase {
 
 	public boolean isDroppointVisibleUntil(int position, int seconds) {
 		String xpathDeliveryPoint = "(" + XP_DELIVERY_POINT + ")[" + position + "]";  
-		return state(Visible, xpathDeliveryPoint).wait(seconds).check(); 
+		return state(VISIBLE, xpathDeliveryPoint).wait(seconds).check(); 
 	}
 
 	public TypeDeliveryPoint getTypeDeliveryPoint(int position) {
@@ -106,26 +106,26 @@ public class SecSelectDPoint extends PageBase {
 
 		//Recuperamos los datos del DeliveryPoint mirando de evitar excepciones de "StaleElement"
 		String xpathDpoint = XP_DELIVERY_POINT_SELECTED + XP_NAME_DPOINT;
-		if (state(Present, xpathDpoint).check()) {
+		if (state(PRESENT, xpathDpoint).check()) {
 			dataDp.setName(getElement(xpathDpoint).getText());
 		}
 		
 		String xpathColDpoint = XP_DELIVERY_POINT_SELECTED + XP_COLECCIONES_DPOINT;
-		if (state(Present, xpathColDpoint).check()) {
+		if (state(PRESENT, xpathColDpoint).check()) {
 			dataDp.setColecciones(getElement(xpathColDpoint).getText());			
 		}
 		
 		String xpathAddDpoint = XP_DELIVERY_POINT_SELECTED + XP_ADDRESS_DPOINT;
-		if (state(Present, xpathAddDpoint).check()) {
+		if (state(PRESENT, xpathAddDpoint).check()) {
 			dataDp.setDireccion(getElement(xpathAddDpoint).getText());
 		}
 		
 		String xpathCodDpoint = XP_DELIVERY_POINT_SELECTED + XP_POSTAL_CODE_DPOINT;
-		if (state(Present, xpathCodDpoint).check()) {
+		if (state(PRESENT, xpathCodDpoint).check()) {
 			dataDp.setCodPostal(getElement(xpathCodDpoint).getText());
 		}
 		
-		if (state(Present, XP_TELEFONO_DPOINT).check()) {
+		if (state(PRESENT, XP_TELEFONO_DPOINT).check()) {
 			dataDp.setTelefono(getElement(XP_TELEFONO_DPOINT).getText());
 		}
 		return dataDp;

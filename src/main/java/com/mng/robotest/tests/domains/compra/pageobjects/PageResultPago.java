@@ -35,11 +35,11 @@ public class PageResultPago extends PageBase {
 	}
 
 	public boolean isVisibleTextoConfirmacionPago(int seconds) {
-		return state(Visible, XP_TEXT_CONFIRMACION_PAGO_ESTANDAR).wait(seconds).check();
+		return state(VISIBLE, XP_TEXT_CONFIRMACION_PAGO_ESTANDAR).wait(seconds).check();
 	}
 
 	public boolean isVisibleDescubrirLoUltimo() {
-		return state(Visible, XP_DESCUBRIR_LO_ULTIMO_BUTTON).check();
+		return state(VISIBLE, XP_DESCUBRIR_LO_ULTIMO_BUTTON).check();
 	}
 	
 	public void clickDescubrirLoUltimo() {
@@ -47,25 +47,25 @@ public class PageResultPago extends PageBase {
 	}
 
 	public String getCodigoPedido(int seconds) {
-		if (state(Present, XP_CODIGO_PEDIDO_ESTANDAR).wait(seconds).check()) {
+		if (state(PRESENT, XP_CODIGO_PEDIDO_ESTANDAR).wait(seconds).check()) {
 			return getElement(XP_CODIGO_PEDIDO_ESTANDAR).getText();
 		}
 		return "";
 	}
 
 	public boolean isButtonMisCompras(int seconds) {
-		return state(Visible, XP_BUTTON_MIS_COMPRAS).wait(seconds).check();
+		return state(VISIBLE, XP_BUTTON_MIS_COMPRAS).wait(seconds).check();
 	}
 
 	public void clickMisCompras() {
 		click(XP_BUTTON_MIS_COMPRAS).exec();
-		if (!state(Invisible, XP_BUTTON_MIS_COMPRAS).wait(1).check()) {
-			click(XP_BUTTON_MIS_COMPRAS).type(javascript).exec();
+		if (!state(INVISIBLE, XP_BUTTON_MIS_COMPRAS).wait(1).check()) {
+			click(XP_BUTTON_MIS_COMPRAS).type(JAVASCRIPT).exec();
 		}
 	}
 
 	public boolean isVisibleBlockNewLoyaltyPoints() {
-		return state(Visible, XP_BLOCK_NEW_LOYALTY_POINTS).check();
+		return state(VISIBLE, XP_BLOCK_NEW_LOYALTY_POINTS).check();
 	}
 	public int getLikesGenerated() {
 		var microLikes = getElement(XP_MICROFRONTEND_LOYALTY);
@@ -76,7 +76,7 @@ public class PageResultPago extends PageBase {
 	}
 	
 	public void clickLinkDescuentosExperiencias() {
-		state(Visible, XP_LINK_DESCUENTOS_Y_EXPERIENCIAS).wait(2).check();
+		state(VISIBLE, XP_LINK_DESCUENTOS_Y_EXPERIENCIAS).wait(2).check();
 		click(XP_LINK_DESCUENTOS_Y_EXPERIENCIAS).exec();
 	}
 }

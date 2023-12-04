@@ -17,11 +17,11 @@ public class PageAmexResult extends PageBase {
 	}
 	
 	public boolean isResultOkUntil(int seconds) {
-		return state(Present, XP_SECTION_OK).wait(seconds).check();
+		return state(PRESENT, XP_SECTION_OK).wait(seconds).check();
 	}
 	
 	public boolean isPresentContinueButton() {
-		return state(Present, XP_CONTINUE_BUTTON).check();
+		return state(PRESENT, XP_CONTINUE_BUTTON).check();
 	}
 
 	public void clickContinuarButton() {

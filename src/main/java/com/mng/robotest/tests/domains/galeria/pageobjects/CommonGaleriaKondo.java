@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import java.util.regex.Pattern;
 
@@ -46,7 +46,7 @@ public class CommonGaleriaKondo extends PageBase {
 	
 	public String getNombreArticulo(WebElement articulo) {
 		String xpathNameArticle = "." + getXPathNombreRelativeToArticle();
-		if (state(Visible, articulo).by(By.xpath(xpathNameArticle)).check()) {
+		if (state(VISIBLE, articulo).by(By.xpath(xpathNameArticle)).check()) {
 			return getElement(articulo, xpathNameArticle).getText();
 		} else {
 			return "Not Found"; 
@@ -60,7 +60,7 @@ public class CommonGaleriaKondo extends PageBase {
 	public WebElement getImagenElementArticulo(WebElement articulo) {
 		moveToElement(articulo);
 		String xpathImg = getXPathImgArticulo();
-		if (state(Visible, articulo).by(By.xpath(xpathImg)).wait(1).check()) {
+		if (state(VISIBLE, articulo).by(By.xpath(xpathImg)).wait(1).check()) {
 			return getElement(articulo, "." + xpathImg);
 		}
 		return null;

@@ -22,7 +22,7 @@ public class ModalChatBot extends PageBase {
 	}
 	
 	public boolean checkIconVisible() {
-		return state(Visible, XP_ICON).check();
+		return state(VISIBLE, XP_ICON).check();
 	}
 	
 	public void clickIcon() {
@@ -30,11 +30,11 @@ public class ModalChatBot extends PageBase {
 	}
 	
 	public boolean checkWebchatVisible(int seconds) {
-		return state(Visible, XP_WEBCHAT).wait(seconds).check();
+		return state(VISIBLE, XP_WEBCHAT).wait(seconds).check();
 	}
 
 	public boolean isOptionVisible(String text, int seconds) {
-		return state(Visible, getXPathOption(text)).wait(seconds).check();
+		return state(VISIBLE, getXPathOption(text)).wait(seconds).check();
 	}
 	
 	public void clickOption(String text) {
@@ -43,10 +43,10 @@ public class ModalChatBot extends PageBase {
 	}
 	
 	public boolean isResponseVisible(String text, int seconds) {
-		return state(Visible, getXPathResponse(text)).wait(seconds).check();
+		return state(VISIBLE, getXPathResponse(text)).wait(seconds).check();
 	}
 	
 	public boolean isButtonVisible(String text, int seconds) {
-		return state(Visible, getXPathButton(text)).wait(seconds).check();
+		return state(VISIBLE, getXPathButton(text)).wait(seconds).check();
 	}
 }

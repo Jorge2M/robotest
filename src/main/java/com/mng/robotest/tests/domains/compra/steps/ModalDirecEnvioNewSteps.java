@@ -3,8 +3,8 @@ package com.mng.robotest.tests.domains.compra.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.compra.pageobjects.DirectionData;
-import com.mng.robotest.tests.domains.compra.pageobjects.ModalDirecEnvioNew;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DirectionData;
+import com.mng.robotest.tests.domains.compra.pageobjects.modals.ModalDirecEnvioNew;
 
 public class ModalDirecEnvioNewSteps extends StepBase {
 

@@ -38,7 +38,7 @@ public class SecMenusFiltroDiscount extends PageBase {
 	}
 	
 	public boolean isVisible() {
-		return state(Visible, XP_DIV_MENUS).check();
+		return state(VISIBLE, XP_DIV_MENUS).check();
 	}
 	
 	public boolean isVisibleMenu(String typeMenu) {
@@ -47,7 +47,7 @@ public class SecMenusFiltroDiscount extends PageBase {
 	
 	public boolean isVisibleMenu(TypeMenuDiscount typeMenu) {
 		String xpathMenu = getXPathMenu(typeMenu);
-		return state(Visible, xpathMenu).check();
+		return state(VISIBLE, xpathMenu).check();
 	}
 	
 	public int getNumberOfVisibleMenus() {

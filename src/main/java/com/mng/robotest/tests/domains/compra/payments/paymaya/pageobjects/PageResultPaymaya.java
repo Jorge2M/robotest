@@ -9,7 +9,7 @@ public class PageResultPaymaya extends PageBase {
 	private static final String XP_CONFIRM_BUTTON = "//input[@id='confirm-button']";
 	
 	public boolean isPage() {
-		return state(Visible, XP_CONFIRM_BUTTON).check();
+		return state(VISIBLE, XP_CONFIRM_BUTTON).check();
 	}
 	
 	public void confirmPayment() {

@@ -16,16 +16,16 @@ public class PageMispedidos extends PageBase {
 	}
 
 	public boolean isPage() {
-		return (state(Present, By.xpath(XP_PANEL_PEDIDOS)).check());
+		return (state(PRESENT, By.xpath(XP_PANEL_PEDIDOS)).check());
 	}
 
 	public boolean elementContainsText(String text) {
 		String xpath = "//*[text()[contains(.,'" + text.toUpperCase() + "')] or text()[contains(.,'" + text.toLowerCase() + "')]]";
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 
 	public boolean listaPedidosVacia() {
-		return state(Present, getXPathListaPedidosVacia()).check();
+		return state(PRESENT, getXPathListaPedidosVacia()).check();
 	}
 
 }

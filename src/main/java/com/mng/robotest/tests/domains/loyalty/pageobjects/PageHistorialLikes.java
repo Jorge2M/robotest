@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.loyalty.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import java.util.Optional;
 
@@ -28,7 +28,7 @@ public class PageHistorialLikes extends PageBase {
 		return isMovimientoVisible(1, seconds);
 	}
 	public boolean isMovimientoVisible(int position, int seconds) {
-		return state(Visible, getXPathMovimiento(position)).wait(seconds).check();
+		return state(VISIBLE, getXPathMovimiento(position)).wait(seconds).check();
 	}	
 	
 	public Optional<LoyaltyMovement> getLoyaltyMovement(int position) {

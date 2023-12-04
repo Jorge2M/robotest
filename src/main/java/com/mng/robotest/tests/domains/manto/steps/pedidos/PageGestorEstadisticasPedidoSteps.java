@@ -5,26 +5,27 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepMantoBase;
 import com.mng.robotest.tests.domains.manto.pageobjects.PageGestorEstadisticasPedido;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class PageGestorEstadisticasPedidoSteps extends StepMantoBase {
 
-	private final PageGestorEstadisticasPedido pageGestorEstadisticasPedido = new PageGestorEstadisticasPedido();
+	private final PageGestorEstadisticasPedido pgGestorEstadisticasPedido = new PageGestorEstadisticasPedido();
 	
 	@Validation
 	public ChecksTM validateIsPage() {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Estamos en la página " + PageGestorEstadisticasPedido.TITULO,
-			pageGestorEstadisticasPedido.isPage());
+			pgGestorEstadisticasPedido.isPage());
 	 	
 	 	checks.add(
 			"Aparece el input de fecha de inicio",
-			pageGestorEstadisticasPedido.isVisibleStartDateInput());
+			pgGestorEstadisticasPedido.isVisibleStartDateInput());
 	 	
 	 	checks.add(
 			"Aparece el input de fecha fin",
-			pageGestorEstadisticasPedido.isVisibleEndDateInput());
+			pgGestorEstadisticasPedido.isVisibleEndDateInput());
 	 	
 	 	return checks;
 	}
@@ -32,11 +33,11 @@ public class PageGestorEstadisticasPedidoSteps extends StepMantoBase {
 	@Step (
 		description="Seleccionamos \"Todos los zalandos\" y damos click a \"Mostrar Pedidos\"",
 		expected="Muestra la tabla de información correctamente",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void searchZalandoOrdersInformation() {
-		pageGestorEstadisticasPedido.selectZalandoEs();
-		pageGestorEstadisticasPedido.inputFechaInicioYesterday();
-		pageGestorEstadisticasPedido.clickMostrarPedidosButton();
+		pgGestorEstadisticasPedido.selectZalandoEs();
+		pgGestorEstadisticasPedido.inputFechaInicioYesterday();
+		pgGestorEstadisticasPedido.clickMostrarPedidosButton();
 		checkAfterSelectMostrarPedidosZalandos();
 	}
 	
@@ -45,15 +46,15 @@ public class PageGestorEstadisticasPedidoSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la tabla de información",
-			pageGestorEstadisticasPedido.isTablaInformacionVisible());
+			pgGestorEstadisticasPedido.isTablaInformacionVisible());
 	 	
 	 	checks.add(
 			"Las columnas de comparación en verde contienen \"0 €\"",
-			pageGestorEstadisticasPedido.isColumnaCompararVerdeZero());
+			pgGestorEstadisticasPedido.isColumnaCompararVerdeZero());
 	 	
 	 	checks.add(
 			"Las columnas de comparación en rojo contienen \"0 %\"",
-			pageGestorEstadisticasPedido.isColumnaCompararRojoZero());
+			pgGestorEstadisticasPedido.isColumnaCompararRojoZero());
 	 	
 	 	return checks;
 	}
@@ -61,9 +62,9 @@ public class PageGestorEstadisticasPedidoSteps extends StepMantoBase {
 	@Step (
 		description="Seleccionamos el radio \"Día Anterior\" y damos click a \"Comparar\"",
 		expected="Se muestran las celdas rojas y verdes con valores correctos",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void compareLastDayInformation() {
-		pageGestorEstadisticasPedido.selectDiaAnteriorAndClickCompararButton();
+		pgGestorEstadisticasPedido.selectDiaAnteriorAndClickCompararButton();
 		checkAfterCompararDias();
 	}
 	
@@ -72,11 +73,11 @@ public class PageGestorEstadisticasPedidoSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Las columnas de comparación en verde no contienen \"0 €\"",
-			pageGestorEstadisticasPedido.isColumnaCompararVerdeNoZero());
+			pgGestorEstadisticasPedido.isColumnaCompararVerdeNoZero());
 	 	
 	 	checks.add(
 			"Las columnas de comparación en rojo no contienen \"0 %\"",
-			pageGestorEstadisticasPedido.isColumnaCompararRojaNoZero());
+			pgGestorEstadisticasPedido.isColumnaCompararRojaNoZero());
 	 	
 		return checks;
 	}

@@ -19,16 +19,16 @@ public class PagePaysecureQiwi1rstSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página inicial de la pasarela PaySecure",
-			pagePaysecureQiwi.isPage(), Warn);
+			pagePaysecureQiwi.isPage(), WARN);
 	 	
 	 	String codPais = dataTest.getCodigoPais();
 	 	checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), WARN);
 	 	
 	 	checks.add(
 			"Aparece el icono de Qiwi",
-			pagePaysecureQiwi.isPresentIcon(PaysecureGateway.QIWI), Warn);
+			pagePaysecureQiwi.isPresentIcon(PaysecureGateway.QIWI), WARN);
 	 	
 	 	return checks;
 	}

@@ -44,14 +44,14 @@ public class PageAccesoMisCompras extends PageBase implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return state(Present, getXPathIsPage()).wait(seconds).check();
+		return state(PRESENT, getXPathIsPage()).wait(seconds).check();
 	}
 	
 	public boolean isPage() {
 		return isPage(0);
 	}
 	public boolean isPage(int seconds) {
-		return state(Present, getXPathIsPage()).wait(seconds).check();
+		return state(PRESENT, getXPathIsPage()).wait(seconds).check();
 	}
 	
 	public boolean isPresentBlock(TypeBlock typeBlock) {
@@ -59,12 +59,12 @@ public class PageAccesoMisCompras extends PageBase implements PageFromFooter {
 	}
 	public boolean isPresentBlock(TypeBlock typeBlock, int seconds) {
 		String xpathBlock = getXPathLinkBlock(typeBlock);
-		return state(Present, xpathBlock).wait(seconds).check();
+		return state(PRESENT, xpathBlock).wait(seconds).check();
 	}
 	
 	public boolean isVisibleBlockUntil(TypeBlock typeBlock, int seconds) {
 		String xpathBlock = getXPathLinkBlock(typeBlock);
-		return state(Visible, xpathBlock).wait(seconds).check();
+		return state(VISIBLE, xpathBlock).wait(seconds).check();
 	}
 	
 	public void clickBlock(TypeBlock typeBlock) {
@@ -106,7 +106,7 @@ public class PageAccesoMisCompras extends PageBase implements PageFromFooter {
 	
 	public void clickBuscarPedidoBlockNo() {
 		click(XP_BUTTON_BUSCAR_PEDIDO_BLOCK_NO).exec();
-		if (!state(Invisible, XP_BUTTON_BUSCAR_PEDIDO_BLOCK_NO).wait(2).check()) {
+		if (!state(INVISIBLE, XP_BUTTON_BUSCAR_PEDIDO_BLOCK_NO).wait(2).check()) {
 			click(XP_BUTTON_BUSCAR_PEDIDO_BLOCK_NO).exec();
 		}
 	}

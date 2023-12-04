@@ -22,15 +22,15 @@ public class PageTrustpayTestConfirmSteps extends StepBase {
 		
 		checks.add(
 			"Figura el botón \"ANNOUNCED\"",
-			pageTrustpayTestConfirm.isPresentButton(typeButtons.ANNOUNCED), Warn);
+			pageTrustpayTestConfirm.isPresentButton(typeButtons.ANNOUNCED), WARN);
 		
 		checks.add(
 			"Figura el botón \"FAIL\"",
-			pageTrustpayTestConfirm.isPresentButton(typeButtons.FAIL), Warn);
+			pageTrustpayTestConfirm.isPresentButton(typeButtons.FAIL), WARN);
 		
 		checks.add(
 			"Figura el botón \"PENDING\"",
-			pageTrustpayTestConfirm.isPresentButton(typeButtons.PENDING), Warn);
+			pageTrustpayTestConfirm.isPresentButton(typeButtons.PENDING), WARN);
 		
 		return checks;
 	}

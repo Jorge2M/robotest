@@ -8,11 +8,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 public abstract class BannerObject extends PageBase {
 
@@ -103,7 +103,7 @@ public abstract class BannerObject extends PageBase {
 	}
 
 	protected String getUrlDestinoSearchingForAnchor(WebElement banner) {
-		if (state(Present, banner).by(By.xpath(".//a")).check()) {
+		if (state(PRESENT, banner).by(By.xpath(".//a")).check()) {
 			return (banner.findElement(By.xpath(".//a")).getAttribute("href"));
 		}
 		return "";
@@ -115,6 +115,6 @@ public abstract class BannerObject extends PageBase {
 
 	public void clickBannerAndWaitLoad(DataBanner dataBanner) {
 		WebElement bannerWeb = dataBanner.getBannerWeb();
-		click(bannerWeb, driver).type(TypeClick.javascript).waitLoadPage(10).exec();
+		click(bannerWeb, driver).type(JAVASCRIPT).waitLoadPage(10).exec();
 	}
 }

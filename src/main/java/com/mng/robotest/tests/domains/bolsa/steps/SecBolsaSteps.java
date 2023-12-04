@@ -5,9 +5,7 @@ import java.util.List;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
@@ -29,6 +27,7 @@ import com.mng.robotest.testslegacy.utils.UtilsTest;
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa.*;
 import static com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps.FluxBolsaCheckout.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class SecBolsaSteps extends StepBase {
 
@@ -108,8 +107,7 @@ public class SecBolsaSteps extends StepBase {
 	@Step (
 		description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + TAG_LISTA_ART,
 		expected="Los productos se dan de alta en la bolsa correctamente",
-		saveErrorData=SaveWhen.Always,
-		saveNettraffic=SaveWhen.Always)
+		saveErrorData=ALWAYS, saveNettraffic=ALWAYS)
 	public void altaBolsaArticulos(List<Article> listParaAlta) {
 		insertArticlesInStepDescription(listParaAlta);
 		for (int i=0; i<listParaAlta.size(); i++) {
@@ -163,7 +161,7 @@ public class SecBolsaSteps extends StepBase {
 		int seconds = 1;
 		
 	 	//Confiar que en algún momento se solventa el problema de los saltos de instancia
-	 	var state = (!isPRO() && UtilsTest.todayBeforeDate("2023-09-15")) ? State.Warn : State.Defect;
+	 	var state = (!isPRO() && UtilsTest.todayBeforeDate("2023-09-15")) ? WARN : DEFECT;
 	 	
 	 	checks.add(
 			"Es visible la capa/página correspondiente a la bolsa " + getLitSecondsWait(seconds),
@@ -183,7 +181,7 @@ public class SecBolsaSteps extends StepBase {
 		String itemsSaved = String.valueOf(dataTest.getDataBag().getListArticulos().size());
 	 	checks.add(
 			"Existen " + dataTest.getDataBag().getListArticulos().size() + " elementos dados de alta en la bolsa " + getLitSecondsWait(seconds),
-			secBolsa.numberItemsIsUntil(itemsSaved, seconds), Warn);
+			secBolsa.numberItemsIsUntil(itemsSaved, seconds), WARN);
 	 	
 	 	return checks;
 	}
@@ -194,38 +192,38 @@ public class SecBolsaSteps extends StepBase {
 		var checkerBag = new ValidatorContentBolsa();
 		checks.add(
 			"Cuadra el númeo de artículos existentes en la bolsa",
-			checkerBag.numArticlesIsCorrect(), Warn);
+			checkerBag.numArticlesIsCorrect(), WARN);
 		
 		var listToCheck = new ArrayList<DataArtBolsa>();
 		listToCheck.add(REFERENCIA);
 		checks.add(
 			"Cuadran las referencias de los artículos existentes en la bolsa",
-			checkerBag.allArticlesExpectedDataAreInScreen(listToCheck), Warn);
+			checkerBag.allArticlesExpectedDataAreInScreen(listToCheck), WARN);
 		
 		listToCheck.clear();
 		listToCheck.add(NOMBRE);
 		checks.add(
 			"Cuadran los nombres de los artículos existentes en la bolsa",
-			checkerBag.allArticlesExpectedDataAreInScreen(listToCheck), Warn);
+			checkerBag.allArticlesExpectedDataAreInScreen(listToCheck), WARN);
 		
 		listToCheck.clear();
 		listToCheck.add(COLOR);
 		checks.add(
 			"Cuadran los colores de los artículos existentes en la bolsa",
-			checkerBag.allArticlesExpectedDataAreInScreen(listToCheck), Warn);
+			checkerBag.allArticlesExpectedDataAreInScreen(listToCheck), WARN);
 		
 		listToCheck.clear();
 		listToCheck.add(TALLA);
 		boolean tallaNumOk = checkerBag.allArticlesExpectedDataAreInScreen(listToCheck);
 		checks.add(
 			"Cuadran las tallas de los artículos existentes en la bolsa",
-			tallaNumOk, Warn);
+			tallaNumOk, WARN);
 		
 		listToCheck.clear();
 		listToCheck.add(PRECIO_TOTAL);
 		checks.add(
 			"Cuadran los precios de los artículos existentes en la bolsa",
-			checkerBag.allArticlesExpectedDataAreInScreen(listToCheck), Warn);
+			checkerBag.allArticlesExpectedDataAreInScreen(listToCheck), WARN);
 		
 		return checks;
 	}
@@ -248,7 +246,7 @@ public class SecBolsaSteps extends StepBase {
 
 	@Validation (
 		description="El importe total se acaba modificando " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	private boolean checkImporteIsModified(String importeTotalOrig, int seconds) {
 		return (secBolsa.isNotThisImporteTotalUntil(importeTotalOrig, seconds));
 	}
@@ -289,7 +287,7 @@ public class SecBolsaSteps extends StepBase {
 	@Step (
 		description="Se selecciona el botón \"COMPRAR\" de la bolsa", 
 		expected="Se muestra la página de identificación",
-		saveNettraffic=SaveWhen.Always)
+		saveNettraffic=ALWAYS)
 	public void selectButtonComprarBasic() {
 		secBolsa.clickBotonComprar(10);
 	}
@@ -309,8 +307,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation (
-		description="Es visible el botón \"Continuar sin cuenta\" " + SECONDS_WAIT,
-		level=State.Defect)
+		description="Es visible el botón \"Continuar sin cuenta\" " + SECONDS_WAIT)
 	private boolean checkVisibleContinuarSinCuentaButtonDevice(int seconds) {
 		return secBolsa.isVisibleContinuarSinCuentaButtonMobile(seconds);
 	}

@@ -40,27 +40,27 @@ public class PageAssist1rst extends PageBase {
 	
 	public boolean isPresentLogoAssist() {
 		String xpathLogo = getXPathLogoAssist();
-		return state(Present, xpathLogo).check();
+		return state(PRESENT, xpathLogo).check();
 	}
 	
 	public boolean isPresentInputsForTrjData() {
 		boolean inputsOk = true;
 		if (channel.isDevice()) {
-			if (!state(Present, XP_INPUT_NUM_TRJ_MOVIL).check() ||
-				!state(Present, XP_SELECT_MM_CADUC_MOVIL).check() ||
-				!state(Present, XP_SELECT_AA_CADUC_MOVIL).check()) {
+			if (!state(PRESENT, XP_INPUT_NUM_TRJ_MOVIL).check() ||
+				!state(PRESENT, XP_SELECT_MM_CADUC_MOVIL).check() ||
+				!state(PRESENT, XP_SELECT_AA_CADUC_MOVIL).check()) {
 				inputsOk = false;
 			}
 		} else {
-			if (!state(Present, XP_INPUT_NUM_TRJ_DESKTOP).check() ||
-				!state(Present, XP_INPUT_MM_CADUC_DESKTOP).check() ||
-				!state(Present, XP_INPUT_AA_CADUC_DESKTOP).check()) {
+			if (!state(PRESENT, XP_INPUT_NUM_TRJ_DESKTOP).check() ||
+				!state(PRESENT, XP_INPUT_MM_CADUC_DESKTOP).check() ||
+				!state(PRESENT, XP_INPUT_AA_CADUC_DESKTOP).check()) {
 				inputsOk = false;
 			}
 		}
 		
-		if (!state(Present, XP_INPUT_TITULAR).check() ||
-			!state(Present, XP_INPUT_CVC).check()) {
+		if (!state(PRESENT, XP_INPUT_TITULAR).check() ||
+			!state(PRESENT, XP_INPUT_CVC).check()) {
 			inputsOk = false;
 		}
 		
@@ -98,11 +98,11 @@ public class PageAssist1rst extends PageBase {
 	}
 
 	public void waitForBotonAvailable(int seconds) {
-		state(Present, getXPathButtonPago()).wait(seconds);
+		state(PRESENT, getXPathButtonPago()).wait(seconds);
 	}
 	
 	public boolean invisibilityBotonPagoUntil(int seconds) {
-		return state(Invisible, getXPathButtonPago()).wait(seconds).check();
+		return state(INVISIBLE, getXPathButtonPago()).wait(seconds).check();
 	 }
 }
 

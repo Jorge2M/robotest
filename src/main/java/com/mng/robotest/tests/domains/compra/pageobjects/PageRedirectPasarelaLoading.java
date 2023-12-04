@@ -8,11 +8,11 @@ public class PageRedirectPasarelaLoading extends PageBase {
 
 	public static final String XP_IS_PAGE = "//div[@class[contains(.,'payment-redirect')]]/div[@class='loading' or @class='logo']";
 
-	public boolean isPageUntil(int seconds) {
-		return state(Present, XP_IS_PAGE).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(PRESENT, XP_IS_PAGE).wait(seconds).check();
 	}
 
 	public boolean isPageNotVisibleUntil(int seconds) {
-		return state(Invisible, XP_IS_PAGE).wait(seconds).check();
+		return state(INVISIBLE, XP_IS_PAGE).wait(seconds).check();
 	}
 }

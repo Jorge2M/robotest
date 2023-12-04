@@ -1,13 +1,17 @@
-package com.mng.robotest.tests.domains.compra.pageobjects;
+package com.mng.robotest.tests.domains.compra.pageobjects.mobile;
 
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
+import com.mng.robotest.tests.domains.compra.pageobjects.PageRedirectPasarelaLoading;
+import com.mng.robotest.tests.domains.compra.pageobjects.UtilsCheckout;
 import com.mng.robotest.tests.domains.compra.payments.billpay.pageobjects.SecBillpay;
 import com.mng.robotest.tests.domains.compra.payments.tmango.pageobjects.SecTMango;
 import com.mng.robotest.testslegacy.beans.Pago;
+import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -18,6 +22,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	public enum StateMethod {UNSELECTED, SELECTING, SELECTED}
 	enum TypeActionLinkFP {PLEGAR_PAGOS, DESPLEGAR_PAGOS}
 	
+	private final SecCabeceraCheckoutMobil secCabecera = new SecCabeceraCheckoutMobil();
 	private final SecTMango secTMango = new SecTMango();
 	private final SecBillpay secBillpay = new SecBillpay();
 	
@@ -43,6 +48,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	//secciones de pagos (que se pueden mostrar/ocultar) disponibles en países como México
 	private static final String XP_SECTIONS_PAGOS_MOBIL = "//*[@class[contains(.,'group-card-js')]]";
 	private static final String XP_ARTICLE_BOLSA = "//div[@id[contains(.,'panelBolsa:iteradorEntrega')]]";
+	private static final String XP_PRECIO_SUBTOTAL = "//div[@class='summary-subtotal-price']";
 	private static final String XP_PRECIO_TOTAL = "//*[@data-testid='summaryTotalPrice.price']";
 	private static final String XP_PRECIO_TOTAL_CROATIA_EUROS = "//*[@data-testid='summaryTotalPrice.additionalPrice.1']";
 	private static final String XP_DIRECCION_ENVIO_TEXT = "//p[@class='address']";
@@ -69,10 +75,6 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 			String methodRadioName = new PageCheckoutWrapper().getMethodInputValue(nombrePago);
 			return ("//div[@data-custom-radio-id='" + methodRadioName + "']"); 
 		}
-		//TODO eliminar cuando añadan el valor klarna al atributo data-analytics-value
-		if (nombrePago.compareTo("KLARNA")==0) {
-			return "//div[@data-custom-radio-id='klarna']";
-		}
 		return (getXPathPago(nombrePago) + "//*[@data-custom-radio-id]");
 	}
 	
@@ -93,27 +95,27 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		}
 	}
 	
-	public boolean isPageUntil(int seconds) {
+	public boolean isPage(int seconds) {
 		return isClickableButtonFinalizarCompraUntil(seconds);
 	}
 
 	public void clickLink2DatosPagoAndWait() {
 		click(XP_LINK2_DATOS_PAGO).exec();
-		isPageUntil(2);
+		isPage(2);
 	}
 
 	public void clickLink2DatosPagoIfVisible() {
-		if (state(Visible, XP_LINK2_DATOS_PAGO).check()) {
+		if (state(VISIBLE, XP_LINK2_DATOS_PAGO).check()) {
 			clickLink2DatosPagoAndWait();
 		}
 	}
 
 	public void clickButtonFinalizarCompra() {
-		click(XP_BUTTON_FINALIZAR_COMPRA).type(javascript).exec();
+		click(XP_BUTTON_FINALIZAR_COMPRA).type(JAVASCRIPT).exec();
 	}
 
 	public boolean isClickableButtonFinalizarCompraUntil(int seconds) {
-		return state(Clickable, XP_BUTTON_FINALIZAR_COMPRA).wait(seconds).check();
+		return state(CLICKABLE, XP_BUTTON_FINALIZAR_COMPRA).wait(seconds).check();
 	}
 
 	public void waitAndClickFinalizarCompra(int seconds) {
@@ -127,7 +129,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 
 	public boolean isMetodoPagoPresent(String nombrePago) {
-		return state(Present, getXPathRadioPago(nombrePago)).check();
+		return state(PRESENT, getXPathRadioPago(nombrePago)).check();
 	}
 
 	public StateMethod getStateMethod(String nombrePago) {
@@ -162,15 +164,15 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 
 	public boolean isPresentMetodosPago() {
-		return state(Present, XP_LINEA_PAGO_LAYOUT_LINEA).check();
+		return state(PRESENT, XP_LINEA_PAGO_LAYOUT_LINEA).check();
 	}
 
 	public void goToPageFromCheckoutIfNeeded() {
 		int i=0;
-		while (!isPageUntil(1) && i<3) {
+		while (!isPage(1) && i<3) {
 			i+=1;
 			Page1EnvioCheckoutMobil page1 = new Page1EnvioCheckoutMobil();
-			if (page1.isPageUntil(0)) {
+			if (page1.isPage(0)) {
 				page1.clickContinuarAndWaitPage2();
 			} else {
 				clickLink2DatosPagoAndWait();
@@ -186,15 +188,15 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		despliegaMetodosPago();
 		moveToFirstMetodoPagoLine();
 		
-		var pageCheckoutWrapper = new PageCheckoutWrapper();
-		pageCheckoutWrapper.waitUntilNoDivLoading(2);
+		var pgCheckoutWrapper = new PageCheckoutWrapper();
+		pgCheckoutWrapper.waitUntilNoDivLoading(2);
 		clickMetodoPagoAndWait(nombrePago);
-		pageCheckoutWrapper.waitUntilNoDivLoading(10);
+		pgCheckoutWrapper.waitUntilNoDivLoading(10);
 		waitLoadPage(); //For avoid StaleElementReferenceException
 	}
 
 	public void clickLinkFormasPagoFor(TypeActionLinkFP typeAction) {
-		click(getXPathLinkFormasPagoFor(typeAction)).type(javascript).exec();
+		click(getXPathLinkFormasPagoFor(typeAction)).type(JAVASCRIPT).exec();
 	}
 
 	public void moveToFirstMetodoPagoLine() {
@@ -210,7 +212,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 
 	public boolean areMetodosPagoPlegados() {
 		String xpathOtrasFormasPagoPlegado = getXPathLinkFormasPagoFor(TypeActionLinkFP.DESPLEGAR_PAGOS); 
-		return state(Visible, xpathOtrasFormasPagoPlegado).check();
+		return state(VISIBLE, xpathOtrasFormasPagoPlegado).check();
 	}
 
 	public void metodosPagosInStateUntil(boolean plegados, int seconds) {
@@ -254,7 +256,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 			return (secBillpay.isVisibleUntil(seconds));
 		default:
 			String xpathTexto = getXPathTextUnderPago(pago.getNombre(channel, app));
-			return state(Visible, xpathTexto).wait(seconds).check();
+			return state(VISIBLE, xpathTexto).wait(seconds).check();
 		}
 	}
 
@@ -278,7 +280,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}	
 
 	public boolean isRedErrorVisible() {
-		return state(Visible, XP_RED_ERROR).check();
+		return state(VISIBLE, XP_RED_ERROR).check();
 	}
 
 	public String getTextRedError() {
@@ -287,7 +289,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 
 	public boolean isVisibleRadioTrjGuardada(String metodoPago)  {
 		String xpathRadioTrjGuardada = getXPathRadioTarjetaGuardada(metodoPago);
-		return state(Visible, xpathRadioTrjGuardada).check();
+		return state(VISIBLE, xpathRadioTrjGuardada).check();
 	}
 
 	public void clickRadioTrjGuardada() {
@@ -295,7 +297,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 
 	public void inputCvcTrjGuardadaIfVisible(String cvc) {
-		if (state(Visible, XP_CVC_TRJ_GUARDADA).check()) {
+		if (state(VISIBLE, XP_CVC_TRJ_GUARDADA).check()) {
 			WebElement input = getElement(XP_CVC_TRJ_GUARDADA);
 			input.clear();
 			input.sendKeys(cvc);
@@ -308,7 +310,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 
 
 	public boolean isArticulos() {
-		return state(Present, XP_ARTICLE_BOLSA).check();
+		return state(PRESENT, XP_ARTICLE_BOLSA).check();
 	}
 
 	public void confirmarPagoFromMetodos() {
@@ -336,6 +338,11 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		new PageRedirectPasarelaLoading().isPageNotVisibleUntil(seconds);
 	}
 	
+	public float getPrecioSubTotalFromResumen() {
+		var subtotalScreen = getElement(XP_PRECIO_SUBTOTAL);
+		return UtilsCheckout.getImporteScreenFromIntegerAndDecimal(subtotalScreen);
+	}
+	
 	public String getPrecioTotalFromResumen(boolean normalize) {
 		String precioTotal = new PageCheckoutWrapper().formateaPrecioTotal(XP_PRECIO_TOTAL);
 		if (!normalize) {
@@ -354,13 +361,21 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 	
 	public String getTextDireccionEnvioCompleta() {
-		if (state(Present, XP_DIRECCION_ENVIO_TEXT).check()) {
+		if (state(PRESENT, XP_DIRECCION_ENVIO_TEXT).check()) {
 			return (getElement(XP_DIRECCION_ENVIO_TEXT)).getText();
 		}
 		return "";
 	}
 	
 	public boolean isVisibleMessageErrorPayment(int seconds) {
-		return state(Visible, XPATH_ERROR_MESSAGE).wait(seconds).check();
+		return state(VISIBLE, XPATH_ERROR_MESSAGE).wait(seconds).check();
 	}
+	
+	public float getSumPreciosArticles() {
+		secCabecera.showBolsa();
+		float sumPrecios = new SecBolsaCheckoutMobil().getSumPreciosArticles();
+		secCabecera.unshowBolsa();
+		return UtilsMangoTest.round(sumPrecios, 2);
+	}
+	
 }

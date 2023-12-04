@@ -12,23 +12,23 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageAmazonIdentSteps extends StepBase {
 	
-	private final PageAmazonIdent pageAmazonIdent = new PageAmazonIdent();
+	private final PageAmazonIdent pgAmazonIdent = new PageAmazonIdent();
 	
 	@Validation
 	public ChecksTM validateIsPage(DataPedido dataPedido) {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece una página con el logo de Amazon",
-			pageAmazonIdent.isLogoAmazon(), Warn);
+			pgAmazonIdent.isLogoAmazon(), WARN);
 		
 		checks.add(
 			"Aparece los campos para la identificación (usuario/password)",
-			pageAmazonIdent.isPageIdent());
+			pgAmazonIdent.isPageIdent());
 		
 		if (channel==Channel.desktop) {
 			checks.add(
 				"En la página resultante figura el importe total de la compra (" + dataPedido.getImporteTotal() + ")",
-				ImporteScreen.isPresentImporteInScreen(dataPedido.getImporteTotal(), dataTest.getCodigoPais(), driver), Warn);
+				ImporteScreen.isPresentImporteInScreen(dataPedido.getImporteTotal(), dataTest.getCodigoPais(), driver), WARN);
 		}
 		return checks;
 	}

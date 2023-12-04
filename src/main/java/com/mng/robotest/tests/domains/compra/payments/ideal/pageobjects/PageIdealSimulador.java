@@ -9,7 +9,7 @@ public class PageIdealSimulador extends PageBase {
 	private static final String XP_CONTINUE_BUTTON = "//input[@type='submit' and @class='btnLink']";
 
 	public boolean isPage() {
-		return state(Visible, "//h3[text()[contains(.,'iDEAL Issuer Simulation')]]").check();
+		return state(VISIBLE, "//h3[text()[contains(.,'iDEAL Issuer Simulation')]]").check();
 	}
 
 	public void clickButtonContinue() {

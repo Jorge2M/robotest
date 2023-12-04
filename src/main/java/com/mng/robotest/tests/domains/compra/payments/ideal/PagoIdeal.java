@@ -18,7 +18,7 @@ public class PagoIdeal extends PagoSteps {
 
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		secIdealCheckoutSteps.checkIsSectionOk();
 		if (execPay) {
 			secIdealCheckoutSteps.clickBanco(BancoSeleccionado.TEST_ISSUER);

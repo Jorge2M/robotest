@@ -12,20 +12,20 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageRegistroFinStepsOutlet extends StepBase {
 	
-	private final PageRegistroFinOutlet pageRegistroFin = new PageRegistroFinOutlet();
+	private final PageRegistroFinOutlet pgRegistroFin = new PageRegistroFinOutlet();
 	
 	@Validation(
 		description="Aparece la página final del proceso de registro " + SECONDS_WAIT,
-		level=Warn)
-	public boolean isPageUntil(int seconds) {
-		return pageRegistroFin.isPageUntil(seconds);
+		level=WARN)
+	public boolean isPage(int seconds) {
+		return pgRegistroFin.isPage(seconds);
 	}
 	
 	@Step (
 		description="Seleccionar el botón \"Ir de shopping\" y finalmente el icono de Mango", 
 		expected="Se accede a la shop correctamente")
 	public void clickIrDeShoppingButton() {
-		pageRegistroFin.clickIrDeShopping();
+		pgRegistroFin.clickIrDeShopping();
 		SecCabecera.make().clickLogoMango();
 		validateWeAreLogged();
 	}
@@ -41,7 +41,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 		checks.add(
 			"El logo de Mango redirige al país/idioma origen: " + dataTest.getIdioma().getAcceso(),
 			SecCabecera.make()
-				.validaLogoMangoGoesToIdioma(dataTest.getIdioma()), Warn);
+				.validaLogoMangoGoesToIdioma(dataTest.getIdioma()), WARN);
 		return checks;		
 	}
 }

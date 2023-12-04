@@ -11,11 +11,11 @@ public class PageInitPaymaya extends PageBase {
 	private static final String XP_BUTTON_PAY_MAYA = "//button[@class='button--paylink-btn']";
 	
 	public boolean isPage() {
-		return state(Present, XP_WRAPPER).check();
+		return state(PRESENT, XP_WRAPPER).check();
 	}
 	
 	public boolean isQrVisible() {
-		return state(Visible, XP_QR).check();
+		return state(VISIBLE, XP_QR).check();
 	}
 	
 	public void clickButtonPayMaya() {

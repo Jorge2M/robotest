@@ -12,9 +12,9 @@ import com.mng.robotest.tests.domains.manto.pageobjects.PagePedidos;
 import com.mng.robotest.tests.domains.manto.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.manto.steps.pedidos.PageGestorEstadisticasPedidoSteps;
 import com.mng.robotest.tests.domains.manto.tests.MenusFact.Section;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class PageMenusMantoSteps extends StepMantoBase {
 
@@ -23,7 +23,7 @@ public class PageMenusMantoSteps extends StepMantoBase {
 	@Step (
 		description="Desde la página de menús, seleccionamos el menú \"#{subMenu}\"", 
 		expected="Aparece la página al menú seleccionado",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void goToMainMenusAndClickMenu(String subMenu) {
 		if (!pageMenusManto.isPage()) {
 			waitMillis(1000);
@@ -43,7 +43,7 @@ public class PageMenusMantoSteps extends StepMantoBase {
 	 	
 	 	checks.add(
 			"No aparece ninguna ventana de alerta",
-			"".compareTo(textAlertObtained)==0, Warn);
+			"".compareTo(textAlertObtained)==0, WARN);
 	 	
 	 	return checks;
 	}

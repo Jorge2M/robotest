@@ -22,8 +22,8 @@ public class PagoEps extends PagoSteps {
 		//activateTestABforMethodEPS();
 		driver.navigate().refresh();
 		
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
-		pageCheckoutWrapperSteps.selectBancoEPS();
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.selectBancoEPS();
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		if (!isPRO()) {
 			pageEpsSimuladorSteps.validateIsPage();

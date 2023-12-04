@@ -95,7 +95,7 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}
 	@Override
 	public boolean isVisibleMenu() {
-		return state(Visible, getXPathMenu()).check();
+		return state(VISIBLE, getXPathMenu()).check();
 	}
 	@Override
 	public boolean isVisibleSubMenus() {
@@ -113,7 +113,7 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}	
 	
 	private String clickMenuSuperior() {
-		state(Visible, getXPathMenu()).wait(1).check();
+		state(VISIBLE, getXPathMenu()).wait(1).check();
 		String nameMenu = getElement(getXPathMenu()).getText(); 
 		click(getXPathMenu()).exec();
 		return nameMenu;

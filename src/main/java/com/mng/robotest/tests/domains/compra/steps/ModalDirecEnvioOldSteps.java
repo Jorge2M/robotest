@@ -4,10 +4,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.compra.pageobjects.DataDireccion;
-import com.mng.robotest.tests.domains.compra.pageobjects.ModalDirecEnvioOld;
-import com.mng.robotest.tests.domains.compra.pageobjects.Page1DktopCheckout;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion;
+import com.mng.robotest.tests.domains.compra.pageobjects.desktop.Page1DktopCheckout;
+import com.mng.robotest.tests.domains.compra.pageobjects.modals.ModalDirecEnvioOld;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -46,11 +46,11 @@ public class ModalDirecEnvioOldSteps extends StepBase {
 		int seconds = 2; 
 		checks.add(
 			"Aparece un modal de alerta alertando de un posible cambio de precios " + getLitSecondsWait(seconds),
-			page1DktopCheckout.getModalAvisoCambioPais().isVisibleUntil(seconds), Warn);
+			page1DktopCheckout.getModalAvisoCambioPais().isVisibleUntil(seconds), WARN);
 		
 		checks.add(
 			"Desaparece la capa de Loading " + getLitSecondsWait(seconds), 
-			new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
+			new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), WARN);
 		
 		return checks;
 	}

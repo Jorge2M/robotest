@@ -1,12 +1,10 @@
 package com.mng.robotest.tests.domains.transversal.prehome.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Invisible;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.footer.pageobjects.PageFromFooter;
 import com.mng.robotest.tests.domains.transversal.browser.LocalStorageMango;
@@ -48,27 +46,27 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return isPageUntil(seconds);
+		return isPage(seconds);
 	}	
 	
-	public boolean isPageUntil(int seconds) {
-		return state(Present, XP_PAIS_SELECCIONADO).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(PRESENT, XP_PAIS_SELECCIONADO).wait(seconds).check();
 	}
 
 	boolean isNotPageUntil(int seconds) {
-		return state(Invisible, XP_PAIS_SELECCIONADO).wait(seconds).check();
+		return state(INVISIBLE, XP_PAIS_SELECCIONADO).wait(seconds).check();
 	}
 	
 	public boolean isPage() {
-		return isPageUntil(0);
+		return isPage(0);
 	}
 	
 	public boolean isPaisSelectedWithMarcaCompra() {
-		return state(Visible, XP_ICON_SALE_PAIS_SELECCIONADO).check();
+		return state(VISIBLE, XP_ICON_SALE_PAIS_SELECCIONADO).check();
 	}
 	
 	public void selecionPais() {
-		state(Present, XP_SELECTOR_PAISES).wait(5).check();
+		state(PRESENT, XP_SELECTOR_PAISES).wait(5).check();
 		new LocalStorageMango().setInitialModalsOff();
 		if (!isPaisSelected()) {
 			unfoldCountrys();
@@ -77,7 +75,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	}
 	
 	public boolean isPaisSelected() {
-		state(Visible, XP_PAIS_SELECCIONADO).wait(1).check();
+		state(VISIBLE, XP_PAIS_SELECCIONADO).wait(1).check();
 		return getElement(XP_PAIS_SELECCIONADO).getAttribute("value")
 				.contains(pais.getNombrePais());
 	}
@@ -106,7 +104,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	void seleccionaIdioma(String nombreIdioma) {
 		unfoldIdiomas();
 		String xpathButtonIdioma = getXPathIdiomaItemFromName(nombreIdioma);
-		if (!state(Visible, xpathButtonIdioma).wait(1).check()) {
+		if (!state(VISIBLE, xpathButtonIdioma).wait(1).check()) {
 			unfoldIdiomas();
 		}
 		click(xpathButtonIdioma).exec();
@@ -122,15 +120,15 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	}
 
 	private void unfoldIdiomas() {
-		state(Visible, XP_SELECTOR_IDIOMAS).wait(2).check();
+		state(VISIBLE, XP_SELECTOR_IDIOMAS).wait(2).check();
 		click(XP_SELECTOR_IDIOMAS).exec();
 	}
 	
 	void selectButtonForEnter() {
 		click(XP_BUTTON_ACCEPT).exec();
-		if (!state(Invisible, XP_BUTTON_ACCEPT).wait(10).check()) {
-			click(XP_BUTTON_ACCEPT).type(TypeClick.javascript).exec();
-			if (!state(Invisible, XP_BUTTON_ACCEPT).wait(15).check()) {
+		if (!state(INVISIBLE, XP_BUTTON_ACCEPT).wait(10).check()) {
+			click(XP_BUTTON_ACCEPT).type(JAVASCRIPT).exec();
+			if (!state(INVISIBLE, XP_BUTTON_ACCEPT).wait(15).check()) {
 				click(XP_BUTTON_ACCEPT).exec();
 			}
 		}
@@ -138,7 +136,6 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	
 	public void accesoShopViaPrehome() {
 		selecPaisIdiomaYAccede();
-//		new ModalLoyaltyAfterAccess().closeModalIfVisible();
 		if (channel.isDevice()) {
 			SecCabecera.make().closeSmartBannerIfExistsMobil();
 		}

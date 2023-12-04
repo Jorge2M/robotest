@@ -117,6 +117,9 @@
 <linea 		  id="HOME"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="banners"   contentMovil="menus2"/>
 </shoponline>
 <pago 
+	type="Klarna" tiendas="shop,outlet"
+	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna='23.04.1974'></pago>
+<pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 

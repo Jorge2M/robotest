@@ -57,11 +57,11 @@ public class SecTMango extends PageBase {
 	}
 	
 	public boolean isVisibleUntil(int seconds) {
-		return state(Visible, getXPathSection()).wait(seconds).check();
+		return state(VISIBLE, getXPathSection()).wait(seconds).check();
 	}
 	
 	public boolean isModalidadDisponible(TipoPago tipoPago) {
-		return state(Present, getXPathLabelModalidad(tipoPago)).check();
+		return state(PRESENT, getXPathLabelModalidad(tipoPago)).check();
 	}
 	
 	public void clickModalidad(TipoPago tipoPago) {

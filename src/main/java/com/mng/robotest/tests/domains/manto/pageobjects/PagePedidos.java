@@ -108,7 +108,7 @@ public class PagePedidos extends PageBase {
 		int i=0;
 		for (WebElement tdColumn : listColumns) {
 			i+=1;
-			if (state(Present, tdColumn, driver).by(By.xpath("./span")).check() &&
+			if (state(PRESENT, tdColumn, driver).by(By.xpath("./span")).check() &&
 				tdColumn.findElement(By.xpath("./span")).getText().compareTo(idColumn.textoColumna)==0) {
 				return i;
 			}
@@ -117,11 +117,11 @@ public class PagePedidos extends PageBase {
 	}
 
 	public boolean isPage() {
-		return state(Present, XP_MAIN_FORM).check();
+		return state(PRESENT, XP_MAIN_FORM).check();
 	}
 
 	public boolean isInvisibleCapaLoadingUntil(int seconds) {
-		return state(Invisible, XP_CAPA_LOADING).wait(seconds).check();
+		return state(INVISIBLE, XP_CAPA_LOADING).wait(seconds).check();
 	}
 
 	public int getNumLineas() {
@@ -135,7 +135,7 @@ public class PagePedidos extends PageBase {
 
 	public boolean isPresentDataInPedido(IdColumn idColumn, String data, TypeDetalle typeDetalle, int seconds) {
 		String xpath = getXPathDataPedidoInLineas(idColumn, data, typeDetalle);
-		return state(Present, xpath).wait(seconds).check();
+		return state(PRESENT, xpath).wait(seconds).check();
 	}
 
 	public String getCodigoPedidoUsuarioRegistrado(int posicionPedidoActual) {
@@ -155,7 +155,7 @@ public class PagePedidos extends PageBase {
 	public int getPosicionPedidoUsuarioRegistrado(int posicionPedidoActual) {
 		int iterator = posicionPedidoActual;
 		String xpath = getXPathIdRegistroForLine(posicionPedidoActual);
-		state(Visible, xpath).wait(400).check();
+		state(VISIBLE, xpath).wait(400).check();
 		while (getElement(getXPathIdRegistroForLine(iterator)).getText().equals("0")) {
 			iterator++;
 		}

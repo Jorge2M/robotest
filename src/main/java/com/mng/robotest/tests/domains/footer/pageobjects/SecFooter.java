@@ -108,12 +108,12 @@ public class SecFooter extends PageBase {
 	}
 	
 	public boolean isPresent() {
-		return state(Present, getXPathCapaFooter()).check();
+		return state(PRESENT, getXPathCapaFooter()).check();
 	}
 	
 	public boolean isVisible() {
 		waitLoadPage();
-		return state(Visible, getXPathCapaFooter()).check();
+		return state(VISIBLE, getXPathCapaFooter()).check();
 	}	
 	
 	public void clickLink(FooterLink footerType) {
@@ -121,7 +121,7 @@ public class SecFooter extends PageBase {
 		moveToElement(footerType.getXPathRelativeCapa());
 		
 		String xpathLink = footerType.getXPathRelativeCapa();
-		state(Visible, xpathLink).wait(2).check();
+		state(VISIBLE, xpathLink).wait(2).check();
 		waitMillis(500);
 		click(xpathLink).exec();
 	}
@@ -141,12 +141,12 @@ public class SecFooter extends PageBase {
 	}
 
 	public boolean checkFooter(FooterLink footerLink) {
-		return state(Present, getXPathLink(footerLink)).check();
+		return state(PRESENT, getXPathLink(footerLink)).check();
 	}
 	
 	public void moveTo() {
 		String xpathFooter = getXPathCapaFooter();
-		if (state(Visible, xpathFooter).check()) {
+		if (state(VISIBLE, xpathFooter).check()) {
 			moveToElement(xpathFooter);
 		}
 	}

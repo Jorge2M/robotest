@@ -7,18 +7,18 @@ import com.mng.robotest.tests.domains.compra.payments.paypal.pageobjects.PagePay
 
 public class PagePaypalConfirmacionSteps extends StepBase {
 
-	private final PagePaypalConfirmacion pagePaypalConfirmacion = new PagePaypalConfirmacion();
+	private final PagePaypalConfirmacion pgPaypalConfirmacion = new PagePaypalConfirmacion();
 	
 	@Validation (
 		description="Aparece la página de Confirmación " + SECONDS_WAIT)
-	public boolean validateIsPageUntil(int seconds) {
-		return (pagePaypalConfirmacion.isPageUntil(seconds));
+	public boolean validateisPage(int seconds) {
+		return pgPaypalConfirmacion.isPage(seconds);
 	}
 
 	@Step (
 		description="Seleccionar el botón \"Continuar\"", 
 		expected="Aparece la página de Mango de resultado OK del pago")
 	public void clickContinuarButton() { 
-		pagePaypalConfirmacion.clickContinuarButton();
+		pgPaypalConfirmacion.clickContinuarButton();
 	}
 }

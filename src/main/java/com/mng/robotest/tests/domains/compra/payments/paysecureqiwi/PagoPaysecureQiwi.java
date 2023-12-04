@@ -17,18 +17,18 @@ public class PagoPaysecureQiwi extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
-		var pagePaysecureQiwi1rstSteps = new PagePaysecureQiwi1rstSteps();
-		pagePaysecureQiwi1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal());
-		pagePaysecureQiwi1rstSteps.clickIconPasarelaQiwi();
+		var pgPaysecureQiwi1rstSteps = new PagePaysecureQiwi1rstSteps();
+		pgPaysecureQiwi1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal());
+		pgPaysecureQiwi1rstSteps.clickIconPasarelaQiwi();
 		
 		if (execPay) {
 			String tlfQiwi = dataPago.getDataPedido().getPago().getTelefqiwi();
-			var pageQiwiInputTlfnSteps = new PageQiwiInputTlfnSteps();
-			pageQiwiInputTlfnSteps.inputTelefono(tlfQiwi);
-			pageQiwiInputTlfnSteps.clickConfirmarButton();
+			var pgQiwiInputTlfnSteps = new PageQiwiInputTlfnSteps();
+			pgQiwiInputTlfnSteps.inputTelefono(tlfQiwi);
+			pgQiwiInputTlfnSteps.clickConfirmarButton();
 			if (new PagePaysecureConfirm().isPage()) {
 				new PageQiwiConfirmSteps().selectConfirmButton();
 			}

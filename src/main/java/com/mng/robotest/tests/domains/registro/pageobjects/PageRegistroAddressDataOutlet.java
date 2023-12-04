@@ -17,17 +17,17 @@ public class PageRegistroAddressDataOutlet extends PageBase {
 		return ("//select[@id[contains(.,'pais')]]/option[@selected='selected' and @value='" + codigoPais + "']");
 	}
 
-	public boolean isPageUntil(int secondsWait) {
-		return state(Present, XP_TITLE_ADDRESS_STEPS).wait(secondsWait).check();
+	public boolean isPage(int secondsWait) {
+		return state(PRESENT, XP_TITLE_ADDRESS_STEPS).wait(secondsWait).check();
 	}
 
 	public boolean existsDesplegablePaises() {
-		return state(Present, XP_DESPLEGABLE_PAISES).check();
+		return state(PRESENT, XP_DESPLEGABLE_PAISES).check();
 	}
 
 	public boolean isOptionPaisSelected(String codigoPais) {
 		String xpathOptionPaisSelected = getXPathOptionPaisSelected(codigoPais);
-		return state(Present, xpathOptionPaisSelected).check();
+		return state(PRESENT, xpathOptionPaisSelected).check();
 	}
 
 	public void clickButtonFinalizar() {
@@ -35,6 +35,6 @@ public class PageRegistroAddressDataOutlet extends PageBase {
 	}
 
 	public boolean isVisibleErrorInputDireccion() {
-		return state(Visible, XP_ERROR_INPUT_DIRECCION).check();
+		return state(VISIBLE, XP_ERROR_INPUT_DIRECCION).check();
 	}
 }

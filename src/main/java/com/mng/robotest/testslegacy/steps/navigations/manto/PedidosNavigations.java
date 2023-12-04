@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
@@ -26,6 +25,8 @@ import com.mng.robotest.tests.domains.manto.steps.SecFiltrosMantoSteps.TypeSearc
 import com.mng.robotest.tests.domains.manto.steps.pedidos.PagePedidosMantoSteps;
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
+
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PedidosNavigations extends StepBase {
 
@@ -72,7 +73,7 @@ public class PedidosNavigations extends StepBase {
 		//Bucle para obtener la lista de Países -> Pedidos
 		for (DataPedido dataPedido : listDataPedidos) {
 			//Sólo consultamos el pedido si el pago se realizó de forma correcta
-			if (dataPedido.getResejecucion()==State.Ok) {
+			if (dataPedido.getResejecucion()==OK) {
 				try {
 					//Ejecutamos todo el flujo de pasos/validaciones para validar un pedido concreto y volvemos a la página de pedidos
 					validaPedidoStepss(dataPedido);

@@ -4,7 +4,6 @@ import java.util.Map;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.conf.AppEcom;
@@ -15,10 +14,11 @@ import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Constantes.ThreeState;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
 public class PageRegistroSegundaStepsOutlet extends StepBase {
 	
-	private PageRegistroSegundaOutlet pageRegistroSegunda = new PageRegistroSegundaOutlet();
+	private PageRegistroSegundaOutlet pgRegistroSegunda = new PageRegistroSegundaOutlet();
 	private final Pais pais = dataTest.getPais();
 	
 	@Validation
@@ -52,19 +52,19 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la 2ª página de introducción de datos " + getLitSecondsWait(seconds),
-			pageRegistroSegunda.isPageUntil(seconds), Warn);
+			pgRegistroSegunda.isPage(seconds), WARN);
 		checks.add(
 			Check.make(
 			    "Se pueden seleccionar las colecciones " + lineasComaSeparated,
-			    pageRegistroSegunda.isPresentInputForLineas(lineasComaSeparated), Info)
-			.store(StoreType.None).build());
+			    pgRegistroSegunda.isPresentInputForLineas(lineasComaSeparated), INFO)
+			.store(NONE).build());
 		
-		int numColecciones = pageRegistroSegunda.getNumColecciones();
+		int numColecciones = pgRegistroSegunda.getNumColecciones();
 		checks.add(
 			Check.make(
 			    "Aparece un número de colecciones coincidente con el número de líneas (" + numLineas + ")",
-			    numColecciones==numLineas, Info)
-			.store(StoreType.None).build());
+			    numColecciones==numLineas, INFO)
+			.store(NONE).build());
 		
 		return checks;
 	}
@@ -90,14 +90,14 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 		}
 		
 		setStepDescription(stepDescription);
-		pageRegistroSegunda.setFechaNacimiento(fechaNacimiento);
-		String lineasDesmarcadas = pageRegistroSegunda.desmarcarLineasRandom(dataRegistroOK.get("lineascomaseparated"));
+		pgRegistroSegunda.setFechaNacimiento(fechaNacimiento);
+		String lineasDesmarcadas = pgRegistroSegunda.desmarcarLineasRandom(dataRegistroOK.get("lineascomaseparated"));
 		replaceStepDescription(tagListaRandom, lineasDesmarcadas);
 		dataRegistroOK.put("clicklineas", lineasDesmarcadas);
 		if (paisConNinos) {
-			pageRegistroSegunda.setNumeroNinos(numNinos);
+			pgRegistroSegunda.setNumeroNinos(numNinos);
 		} else {
-			pageRegistroSegunda.clickButtonContinuar();
+			pgRegistroSegunda.clickButtonContinuar();
 		}				
 
 		if (paisConNinos) {

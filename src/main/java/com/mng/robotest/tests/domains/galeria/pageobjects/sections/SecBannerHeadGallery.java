@@ -44,7 +44,7 @@ public class SecBannerHeadGallery extends PageBase {
 	}
 	
 	public boolean isVisible() {
-		if (state(Visible, XP_BANNER).check()) {
+		if (state(VISIBLE, XP_BANNER).check()) {
 			Dimension bannerSize = getElement(XP_BANNER).getSize(); 
 			if (bannerSize.height>0 && bannerSize.width>0) {
 				return true;
@@ -68,13 +68,13 @@ public class SecBannerHeadGallery extends PageBase {
 	
 	public boolean isBannerWithoutTextAccesible() {
 		String xpath = XP_BANNER_WITH_VIDEO + " | " + XP_BANNER_WITH_BACKGROUND_IMAGE;
-		return state(Visible, xpath).check();
+		return state(VISIBLE, xpath).check();
 	}
 	
 	public boolean isLinkable() {
-		if (state(Present, XP_BANNER).check()) {
+		if (state(PRESENT, XP_BANNER).check()) {
 			WebElement banner = getElement(XP_BANNER);
-			return state(Clickable, banner).by(By.xpath(".//a[@href]")).check();
+			return state(CLICKABLE, banner).by(By.xpath(".//a[@href]")).check();
 		}
 		return false;
 	}
@@ -86,26 +86,26 @@ public class SecBannerHeadGallery extends PageBase {
 	}
 	
 	public String getText() {
-		if (state(Present, XP_TEXT).check()) {
+		if (state(PRESENT, XP_TEXT).check()) {
 			return getElement(XP_BANNER).getText();
 		}
 		return "";
 	}
 	
 	public boolean isVisibleLinkInfoRebajas() {
-		return state(Visible, XP_TEXT_LINK_INFO_REBAJAS).check();
+		return state(VISIBLE, XP_TEXT_LINK_INFO_REBAJAS).check();
 	}
 
 	public void clickLinkInfoRebajas() {
-		click(XP_TEXT_LINK_INFO_REBAJAS).type(javascript).exec();
+		click(XP_TEXT_LINK_INFO_REBAJAS).type(JAVASCRIPT).exec();
 	}
 
 	public boolean isVisibleLinkTextInfoRebajas(TypeLinkInfo typeLink) {
 		String xpathText = getXPathTextInfoRebajas(typeLink);
-		return state(Visible, xpathText).check();
+		return state(VISIBLE, xpathText).check();
 	}
 	
 	public boolean isVisibleInfoRebajasUntil(int seconds) {
-		return state(Visible, XP_TEXT_INFO_REBAJAS).wait(seconds).check();
+		return state(VISIBLE, XP_TEXT_INFO_REBAJAS).wait(seconds).check();
 	}
 }

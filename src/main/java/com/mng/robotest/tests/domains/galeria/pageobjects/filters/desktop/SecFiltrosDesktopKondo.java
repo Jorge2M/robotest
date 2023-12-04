@@ -68,7 +68,7 @@ public class SecFiltrosDesktopKondo extends SecFiltrosDesktop {
 	public boolean isVisibleColorTags(List<Color> colors) {
 		return colors.stream()
 			.map(color -> getXPathFilterTag(color.getNameFiltro()))
-			.filter(xpath -> !state(Visible, xpath).check())
+			.filter(xpath -> !state(VISIBLE, xpath).check())
 			.findAny().isEmpty();
 	}
 

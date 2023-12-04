@@ -11,12 +11,12 @@ public class PageRecuperaPasswd extends PageBase {
 	private static final String XP_MSG_REVISA_TU_EMAIL = "//div[text()[contains(.,'REVISA TU EMAIL')]]";
 	private static final String XP_BUTTON_IR_DE_SHOPPING = "//div[@id[contains(.,'IrShopping')]]/a";
 	
-	public boolean isPageUntil(int seconds) {
+	public boolean isPage(int seconds) {
 		return isPresentElementWithText("RECUPERA TU CONTRASEÑA", seconds);
 	}
 	
 	public boolean isPresentInputCorreo() {
-		return state(Present, XP_INPUT_CORREO).check();
+		return state(PRESENT, XP_INPUT_CORREO).check();
 	}
 	
 	public void inputEmail(String email) {
@@ -29,11 +29,11 @@ public class PageRecuperaPasswd extends PageBase {
 	}
 
 	public boolean isVisibleRevisaTuEmailUntil(int seconds) {
-		return state(Visible, XP_MSG_REVISA_TU_EMAIL).wait(seconds).check();
+		return state(VISIBLE, XP_MSG_REVISA_TU_EMAIL).wait(seconds).check();
 	}
 
 	public boolean isVisibleButtonIrDeShopping() {
-		return state(Visible, XP_BUTTON_IR_DE_SHOPPING).check();
+		return state(VISIBLE, XP_BUTTON_IR_DE_SHOPPING).check();
 	}
 		
 }

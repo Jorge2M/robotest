@@ -13,19 +13,19 @@ public class PageRegistroFinOutlet extends PageBase {
 
 	private static final String XP_BUTTON_IR_SHOPPING = "//div[@class[contains(.,'ir-de-shopping')]]/input[@type='submit']";
 	
-	public boolean isPageUntil(int seconds) {
-		return state(Present, XP_BUTTON_IR_SHOPPING).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(PRESENT, XP_BUTTON_IR_SHOPPING).wait(seconds).check();
 	}
 	
 	public void clickIrDeShopping() {
 		waitLoadPage(); //Para evitar StaleElement Exception
-		click(XP_BUTTON_IR_SHOPPING).type(javascript).exec();
+		click(XP_BUTTON_IR_SHOPPING).type(JAVASCRIPT).exec();
 		if (isVisibleButtonIrDeShopping()) {
 			click(XP_BUTTON_IR_SHOPPING).exec();
 		}
 	}
 	
 	public boolean isVisibleButtonIrDeShopping() {
-		return state(Visible, XP_BUTTON_IR_SHOPPING).check();
+		return state(VISIBLE, XP_BUTTON_IR_SHOPPING).check();
 	}
 }

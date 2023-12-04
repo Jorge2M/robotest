@@ -12,8 +12,8 @@ public class PageSofort2onSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página de selección del país/banco " + SECONDS_WAIT)
-	public boolean validaIsPageUntil(int seconds) {
-		return pageSofort2on.isPageUntil(seconds);
+	public boolean validaisPage(int seconds) {
+		return pageSofort2on.isPage(seconds);
 	}
 	
 	@Step (

@@ -9,7 +9,7 @@ public class ModalSuscripcion extends PageBase {
 	private static final String XP_LEGAL_RGPD = "//p[@class='gdpr-text gdpr-data-protection']";
 
 	public boolean isTextoLegalRGPDPresent() {
-		return state(Present, XP_LEGAL_RGPD).check();
+		return state(PRESENT, XP_LEGAL_RGPD).check();
 	}
 	
 }

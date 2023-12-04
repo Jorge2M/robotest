@@ -40,7 +40,7 @@ public class SecFotosNew extends PageBase {
 	}
 
 	public int getNumLinesFotos() {
-		if (!state(Present, XP_LINE_FOTO).check()) {
+		if (!state(PRESENT, XP_LINE_FOTO).check()) {
 			return 0;
 		}
 		return getElements(XP_LINE_FOTO).size();
@@ -48,7 +48,7 @@ public class SecFotosNew extends PageBase {
 		
 	public int getNumFotosLine(int line) {
 		String xpathFotoLine = getXPathFoto(line);
-		if (!state(Present, xpathFotoLine).check()) {
+		if (!state(PRESENT, xpathFotoLine).check()) {
 			return 0;
 		}
 		return getElements(xpathFotoLine).size();

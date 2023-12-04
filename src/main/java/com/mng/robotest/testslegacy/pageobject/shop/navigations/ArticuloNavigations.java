@@ -11,14 +11,14 @@ import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
 public class ArticuloNavigations extends StepBase {
 
-	private final PageFicha pageFicha = PageFicha.of(channel);
+	private final PageFicha pgFicha = PageFicha.of(channel);
 	
 	public ArticuloScreen selectArticuloTallaColorByRef(Article articleStock) {
 		var articulo = new ArticuloScreen();
 		articulo.setReferencia(articleStock.getGarmentId());
 		
 		searchArticle(articleStock);
-		pageFicha.isFichaArticuloUntil(articulo.getReferencia(), 10);
+		pgFicha.isFichaArticuloUntil(articulo.getReferencia(), 10);
 
 		var color = selectColor(articleStock);
 		articulo.setCodigoColor(color.getLeft());
@@ -27,9 +27,9 @@ public class ArticuloNavigations extends StepBase {
 		var talla = selectTalla(articleStock);
 		articulo.setTalla(talla);
 
-		articulo.setPrecio(pageFicha.getSecDataProduct().getPrecioFinalArticulo());
+		articulo.setPrecio(pgFicha.getSecDataProduct().getPrecioFinalArticulo());
 		articulo.setPrecioSinDesc(getPrecioOriginal(articulo));
-		articulo.setNombre(pageFicha.getSecDataProduct().getTituloArt());
+		articulo.setNombre(pgFicha.getSecDataProduct().getTituloArt());
 		
 		return articulo;
 	}
@@ -54,10 +54,10 @@ public class ArticuloNavigations extends StepBase {
 		if (articleStock.getColor()!=null) {
 			idColor = articleStock.getColor().getId();
 		}
-		if (pageFicha.getSecDataProduct().isClickableColor(idColor)) {
-			pageFicha.getSecDataProduct().selectColorWaitingForAvailability(idColor);
+		if (pgFicha.getSecDataProduct().isClickableColor(idColor)) {
+			pgFicha.getSecDataProduct().selectColorWaitingForAvailability(idColor);
 		}
-		String nameColor = pageFicha.getSecDataProduct().getNombreColorSelected();
+		String nameColor = pgFicha.getSecDataProduct().getNombreColorSelected();
 		return Pair.of(idColor, nameColor);
 	}
 	
@@ -66,18 +66,18 @@ public class ArticuloNavigations extends StepBase {
 			String size = articleStock.getSize().getId2Digits();
 			if (articleStock.getSize().getLabel().matches("\\d+")) {
 				size = articleStock.getSize().getLabel();
-				pageFicha.selectTallaByValue(Talla.fromLabel(size));
+				pgFicha.selectTallaByValue(Talla.fromLabel(size));
 			} else {
-				pageFicha.selectTallaByValue(Talla.fromValue(size));
+				pgFicha.selectTallaByValue(Talla.fromValue(size));
 			}
 		} else {
-			pageFicha.selectTallaByIndex(1);
+			pgFicha.selectTallaByIndex(1);
 		}
-		return pageFicha.getTallaSelected();
+		return pgFicha.getTallaSelected();
 	}	
 	
 	private String getPrecioOriginal(ArticuloScreen articulo) {
-		String precioSinDesc = pageFicha.getSecDataProduct().getPrecioTachadoFromFichaArt();
+		String precioSinDesc = pgFicha.getSecDataProduct().getPrecioTachadoFromFichaArt();
 		if (precioSinDesc!=null && "".compareTo(precioSinDesc)!=0) {
 			return precioSinDesc;
 		} else {
@@ -86,11 +86,11 @@ public class ArticuloNavigations extends StepBase {
 	}
 
 	private void selectColorIfExists(String colourCode) {
-		if (colourCode!=null && "".compareTo(colourCode)!=0) {
-			if (pageFicha.getSecDataProduct().isClickableColor(colourCode) &&
-				pageFicha.isPageUntil(5)) {
-				pageFicha.getSecDataProduct().selectColorWaitingForAvailability(colourCode);
-			}
+		if (colourCode!=null && "".compareTo(colourCode)!=0 &&
+			pgFicha.getSecDataProduct().isClickableColor(colourCode) &&
+			pgFicha.isPage(5)) {
+			pgFicha.getSecDataProduct().selectColorWaitingForAvailability(colourCode);
 		}
 	}
+	
 }

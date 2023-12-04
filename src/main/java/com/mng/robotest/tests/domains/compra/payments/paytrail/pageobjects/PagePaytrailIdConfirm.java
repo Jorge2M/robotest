@@ -10,7 +10,7 @@ public class PagePaytrailIdConfirm extends PageBase {
 	private static final String XP_BUTTON_CONFIRMAR = "//input[@name[contains(.,'SAVEBTN')]]";
 	
 	public boolean isPage() {
-		return state(Present, XP_INPUT_ID).check();
+		return state(PRESENT, XP_INPUT_ID).check();
 	}
 	
 	public void inputIdConfirm(String idConfirm) {

@@ -13,22 +13,22 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageMisDatosSteps extends StepBase {
 
-	private final PageMisDatos pageMisDatos = new PageMisDatos();
+	private final PageMisDatos pgMisDatos = new PageMisDatos();
 	
 	@Validation
 	public ChecksTM validaIsPage (String usuarioReg) {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
-		boolean isPage = pageMisDatos.isPage(seconds);
+		boolean isPage = pgMisDatos.isPage(seconds);
 		checks.add(
 			"Aparece una página con el la cabecera \"Mis datos\" " + getLitSecondsWait(seconds),
-			isPage, Warn);
+			isPage, WARN);
 		
 		if (isPage) {
 			checks.add(
 				"El campo de email contiene " + usuarioReg,
-				pageMisDatos.getValueEmailInput().toUpperCase().compareTo(usuarioReg.toUpperCase())==0, 
-				Warn);
+				pgMisDatos.getValueEmailInput().toUpperCase().compareTo(usuarioReg.toUpperCase())==0, 
+				WARN);
 		}
 
 		return checks;
@@ -43,19 +43,19 @@ public class PageMisDatosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece un campo de contraseña de tipo password",
-			pageMisDatos.isVisiblePasswordTypePassword());
+			pgMisDatos.isVisiblePasswordTypePassword());
 		
 		checks.add(
 			"El Nombre contiene el definido durante el registro: <b>" + nombre + "</b>",
-			(pageMisDatos.getNumInputContentVoid() <= 1));
+			(pgMisDatos.getNumInputContentVoid() <= 1));
 		
 		checks.add(
 			"El Apellidos contiene el definido durante el registro: <b>" + apellidos + "</b>",
-			(pageMisDatos.getTextInputNombre().compareTo(nombre)==0));
+			(pgMisDatos.getTextInputNombre().compareTo(nombre)==0));
 		
 		checks.add(
 			"El Email contiene el definido durante el registro: <b>" + email + "</b>",
-			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0));
+			(pgMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0));
 
 		return checks;
 	}
@@ -68,15 +68,15 @@ public class PageMisDatosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece un campo de contraseña de tipo password",
-			pageMisDatos.isVisiblePasswordTypePassword());
+			pgMisDatos.isVisiblePasswordTypePassword());
 		
 		checks.add(
 			"El Nombre contiene el definido durante el registro: <b>" + nombre + "</b>",
-			(pageMisDatos.getTextInputNombre().compareTo(nombre)==0));
+			(pgMisDatos.getTextInputNombre().compareTo(nombre)==0));
 		
 		checks.add(
 			"El Email contiene el definido durante el registro: <b>" + email + "</b>",
-			(pageMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0));
+			(pgMisDatos.getTextInputEmail().toLowerCase().compareTo(email.toLowerCase())==0));
 		
 		return checks;
 	}	
@@ -85,11 +85,11 @@ public class PageMisDatosSteps extends StepBase {
 		description = "Modificar el nombre (cambio entre #{name1}<->#{name2}) + Botón \"Modificar Datos\"",
 		expected = "Aparece la confirmación que los datos se han modificados")
 	public String modificaNombreYGuarda(String name1, String name2) {
-		String currentName = pageMisDatos.getValueNombreInput();
+		String currentName = pgMisDatos.getValueNombreInput();
 		String newName = (currentName.compareTo(name2)==0) ? name1 : name2;
 		
-		pageMisDatos.setNombreInput(newName);
-		pageMisDatos.clickGuardarCambios();
+		pgMisDatos.setNombreInput(newName);
+		pgMisDatos.clickGuardarCambios();
 		validateModificationOfData();
 
 		return newName;
@@ -97,21 +97,21 @@ public class PageMisDatosSteps extends StepBase {
 
 	@Validation (description = "Aparece una pantalla de resultado Ok de la suscripción")
 	private boolean validateModificationOfData() {
-		return pageMisDatos.pageResOK();
+		return pgMisDatos.pageResOK();
 	}
 
 	@Validation (
 		description="En el campo del nombre figura<b>: #{nombre}<b>",
-		level=Warn)
+		level=WARN)
 	public boolean validaContenidoNombre(String nombre) {
-		return pageMisDatos.getValueNombreInput().contains(nombre);
+		return pgMisDatos.getValueNombreInput().contains(nombre);
 	}
 
 	@Step(
 		description = "Seleccionar el link Cancelar cuenta + confirmar cancelación",
 		expected = "Aparece la página de resultado de cancelación de la cuenta ok")
 	public void cancelarCuenta() {
-		pageMisDatos.cancelarCuenta();
+		pgMisDatos.cancelarCuenta();
 		checkCuentaCanceladaOk(3);
 	}
 	
@@ -119,7 +119,7 @@ public class PageMisDatosSteps extends StepBase {
 		description = "Confirmar la cancelación de la cuenta",
 		expected = "Aparece la página de resultado de cancelación de la cuenta ok")
 	public void confirmCancelarCuenta() {
-		pageMisDatos.confirmEliminarCuenta();
+		pgMisDatos.confirmEliminarCuenta();
 		checkCuentaCanceladaOk(3);
 	}	
 	
@@ -127,7 +127,7 @@ public class PageMisDatosSteps extends StepBase {
 	@Validation (
 		description="Aparece un mensaje de cuenta cancelada correctamente " + SECONDS_WAIT)
 	private boolean checkCuentaCanceladaOk(int seconds) {
-		return pageMisDatos.isMessageCuentaCanceladaOkVisible(seconds);
+		return pgMisDatos.isMessageCuentaCanceladaOkVisible(seconds);
 	}
 	
 }

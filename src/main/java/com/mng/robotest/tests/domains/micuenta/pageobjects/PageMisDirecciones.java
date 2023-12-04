@@ -16,21 +16,21 @@ public class PageMisDirecciones extends PageBase {
 	private static final String XP_BOTON_GUARDAR = "//*[@data-testid='deliveryAddress.form.button.submit']";
 	
 	public boolean isPage(int seconds) {
-		return state(Visible, XP_MICROFRONTEND).wait(seconds).check();
+		return state(VISIBLE, XP_MICROFRONTEND).wait(seconds).check();
 	}
 	
 	public boolean isLinkEditarVisible(int seconds) {
-		return state(Visible, XP_LINK_EDITAR).wait(seconds).check(); 
+		return state(VISIBLE, XP_LINK_EDITAR).wait(seconds).check(); 
 	}
 	
 	public void clickLinkEditar() {
 		click(XP_LINK_EDITAR).waitLink(3).exec();
 	}
 	public boolean isFormularioUsuario(int seconds) {
-		return state(Visible, XP_BOTON_GUARDAR).wait(seconds).check();
+		return state(VISIBLE, XP_BOTON_GUARDAR).wait(seconds).check();
 	}
 	public String getCodigoPostal() {
-		state(Visible, XP_INPUT_CODPOSTAL).wait(2).check();
+		state(VISIBLE, XP_INPUT_CODPOSTAL).wait(2).check();
 		return getElement(XP_INPUT_CODPOSTAL).getAttribute("value");
 	}
 
@@ -45,7 +45,7 @@ public class PageMisDirecciones extends PageBase {
 		return inputPoblacion.getAttribute("value");
 	}
 	private String getPoblacionDesktop() {
-		if (state(Visible, XP_POBLACION_DESPLEGABLE_DESKTOP).check()) {
+		if (state(VISIBLE, XP_POBLACION_DESPLEGABLE_DESKTOP).check()) {
 			var inputPoblacion = getElement(XP_POBLACION_DESPLEGABLE_DESKTOP);
 			return inputPoblacion.getText();
 		}

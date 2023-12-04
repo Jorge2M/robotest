@@ -16,7 +16,7 @@ public class PageIniShopJaponSteps extends StepBase {
 			"Estamos en la página inicial de la shop de Japón " + getLitSecondsWait(seconds) + ":<br>" +
 			"   - El título es \"" + PageIniShopJapon.TITLE + "\"<br>" +		
 			"   - La URL contiene \"" + PageIniShopJapon.URL + "\"",
-			new PageIniShopJapon().isPageUntil(seconds), Warn);
+			new PageIniShopJapon().isPage(seconds), WARN);
 		
 		return checks;
 	}

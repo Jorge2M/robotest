@@ -19,11 +19,11 @@ public class PageAmexInputCipSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Aparece la página de introducción del CIP " + getLitSecondsWait(seconds),
-			pageAmexInputCip.isPageUntil(seconds));
+			pageAmexInputCip.isPage(seconds));
 	 	
 	 	checks.add(
 			"Aparece el importe de la operación " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codigoPais, pageAmexInputCip.driver), Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codigoPais, pageAmexInputCip.driver), WARN);
 	 	
 	 	return checks;
 	}

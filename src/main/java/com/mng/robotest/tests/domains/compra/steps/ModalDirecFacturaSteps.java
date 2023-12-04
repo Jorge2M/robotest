@@ -4,10 +4,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.compra.pageobjects.DataDireccion;
-import com.mng.robotest.tests.domains.compra.pageobjects.ModalDirecFactura;
-import com.mng.robotest.tests.domains.compra.pageobjects.Page1DktopCheckout;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion;
+import com.mng.robotest.tests.domains.compra.pageobjects.desktop.Page1DktopCheckout;
+import com.mng.robotest.tests.domains.compra.pageobjects.modals.ModalDirecFactura;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -30,7 +30,7 @@ public class ModalDirecFacturaSteps extends StepBase {
 	 	seconds = 2;
 	 	checks.add(
 	 		"Desaparece la capa de Loading " + getLitSecondsWait(seconds), 
-	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
+	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), WARN);
 		return checks;
 	}
 	
@@ -57,7 +57,7 @@ public class ModalDirecFacturaSteps extends StepBase {
 	 	int seconds = 2;
 	 	checks.add(
 	 		"Desaparece la capa de Loading " + getLitSecondsWait(seconds), 
-	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
+	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), WARN);
 	 	
 	 	return checks;
 	}

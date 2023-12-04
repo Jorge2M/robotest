@@ -55,15 +55,15 @@ public class PageReembolsos extends PageBase {
 	}
 
 	public boolean isPage() {
-		return state(Present, XP_REFUNDS_PANEL).check();
+		return state(PRESENT, XP_REFUNDS_PANEL).check();
 	}
 
 	public boolean existsInputBanco() {
-		return state(Present, XP_INPUT_BANCO).check();
+		return state(PRESENT, XP_INPUT_BANCO).check();
 	}
 
 	public boolean isVisibleInputBanco() {
-		return state(Visible, XP_INPUT_BANCO).check();
+		return state(VISIBLE, XP_INPUT_BANCO).check();
 	}
 
 	public void typeInputBanco(String banco) {
@@ -72,15 +72,15 @@ public class PageReembolsos extends PageBase {
 	}
 
 	public boolean isVisibleTextBancoUntil(int seconds) {
-		return state(Visible, XP_TEXT_BANCO_AFTER_SAVE).wait(seconds).check();
+		return state(VISIBLE, XP_TEXT_BANCO_AFTER_SAVE).wait(seconds).check();
 	}
 
 	public boolean existsInputTitular() {
-		return state(Present, XP_INPUT_TITULAR).check();
+		return state(PRESENT, XP_INPUT_TITULAR).check();
 	}
 
 	public boolean isVisibleInputTitular() {
-		return state(Visible, XP_INPUT_TITULAR).check();
+		return state(VISIBLE, XP_INPUT_TITULAR).check();
 	}
 
 	public void typeInputTitular(String titular) {
@@ -89,19 +89,19 @@ public class PageReembolsos extends PageBase {
 	}
 
 	public boolean isVisibleTextTitular() {
-		return state(Visible, XP_TITULAR_AFTER_SAVE).check();
+		return state(VISIBLE, XP_TITULAR_AFTER_SAVE).check();
 	}
 
 	public boolean existsInputIBAN() {
-		return state(Present, XP_INPUT_IBAN).check();
+		return state(PRESENT, XP_INPUT_IBAN).check();
 	}
 
 	public boolean isVisibleInputIBAN() {
-		return state(Visible, XP_INPUT_IBAN).check();
+		return state(VISIBLE, XP_INPUT_IBAN).check();
 	}
 
 	public boolean isVisibleTextIBAN() {
-		return state(Visible, XP_TEXT_IBANA_AFTER_SAVE).check();
+		return state(VISIBLE, XP_TEXT_IBANA_AFTER_SAVE).check();
 	}
 
 	public void typeInputIBAN(String iban) {
@@ -110,14 +110,14 @@ public class PageReembolsos extends PageBase {
 	}
 
 	public void typeIdPassportIfInputExists(String idPassport) {
-		if (state(Visible, XP_INPUT_PASSPORT).check()) {
+		if (state(VISIBLE, XP_INPUT_PASSPORT).check()) {
 			getElement(XP_INPUT_PASSPORT).clear();
 			getElement(XP_INPUT_PASSPORT).sendKeys(idPassport);
 		}
 	}
 	
 	public void typeDateOfBirthIfInputExists(int day, int month, int year) {
-		if (state(Visible, XP_BIRTHDAY_DAY_BLOCK).check()) {
+		if (state(VISIBLE, XP_BIRTHDAY_DAY_BLOCK).check()) {
 			new Select(getElement(XP_SELECT_DAY_BIRTH)).selectByValue(String.valueOf(day));
 			new Select(getElement(XP_SELECT_MONTH_BIRTH)).selectByValue(String.valueOf(month));
 			new Select(getElement(XP_SELECT_YEAR_BIRTH)).selectByValue(String.valueOf(year));
@@ -141,17 +141,17 @@ public class PageReembolsos extends PageBase {
 
 	public boolean isVisibleTransferenciaSectionUntil(int seconds) {
 		String xpathBlock = getXPathBlock(TypeReembolso.TRANSFERENCIA);
-		return state(Visible, xpathBlock).wait(seconds).check();
+		return state(VISIBLE, xpathBlock).wait(seconds).check();
 	}
 
 	public boolean isVisibleStorecreditSection() {
 		String xpathBlock = getXPathBlock(TypeReembolso.STORE_CREDIT);
-		return state(Visible, xpathBlock).check();
+		return state(VISIBLE, xpathBlock).check();
 	}
 
 	public boolean isCheckedRadio(TypeReembolso typeReembolso) {
 		String xpathDiv = getXPath_divRadioCheckedTypeReembolso(typeReembolso);
-		return state(Present, xpathDiv).check();
+		return state(PRESENT, xpathDiv).check();
 	}
 
 	public void clickRadio(TypeReembolso typeReembolso) {
@@ -164,7 +164,7 @@ public class PageReembolsos extends PageBase {
 	 */
 	public void clickButtonSaveTransfForce() {
 		click(XP_BUTTON_SAVE_TRANSF).exec();
-		if (state(Present, XP_BUTTON_SAVE_TRANSF).check()) {
+		if (state(PRESENT, XP_BUTTON_SAVE_TRANSF).check()) {
 			click(XP_BUTTON_SAVE_TRANSF).exec();
 		}
 	}
@@ -186,7 +186,7 @@ public class PageReembolsos extends PageBase {
 		}
 
 		//En el caso de Desktop la capa se oculta normalmente
-		return state(Visible, XP_MODAL_CONF_TRANS).wait(seconds).check();
+		return state(VISIBLE, XP_MODAL_CONF_TRANS).wait(seconds).check();
 	}
 
 	public boolean isNotVisibleModalConfTransf(int seconds) {
@@ -202,12 +202,12 @@ public class PageReembolsos extends PageBase {
 		}
 
 		//En el caso de Desktop la capa se oculta normalmente
-		return state(Invisible, XP_MODAL_CONF_TRANS).wait(seconds).check();
+		return state(INVISIBLE, XP_MODAL_CONF_TRANS).wait(seconds).check();
 	}
 	
 	public float getImporteStoreCredit() {
 		float precioFloat = -1;
-		if (state(Visible, getXPathTextoImporteStoreCredit()).check()) {
+		if (state(VISIBLE, getXPathTextoImporteStoreCredit()).check()) {
 			String precioTotal = getElement(getXPathTextoImporteStoreCredit()).getText();
 			precioFloat = ImporteScreen.getFloatFromImporteMangoScreen(precioTotal);
 		}
@@ -215,11 +215,11 @@ public class PageReembolsos extends PageBase {
 	}
 
 	public boolean isVisibleSaveButtonStoreCredit() {
-		return state(Visible, XP_SAVE_BUTTON_STORE_CREDIT).check();
+		return state(VISIBLE, XP_SAVE_BUTTON_STORE_CREDIT).check();
 	}
 
 	public boolean isVisibleSaveButtonStoreCreditUntil(int seconds) {
-		return state(Visible, XP_SAVE_BUTTON_STORE_CREDIT).wait(seconds).check();
+		return state(VISIBLE, XP_SAVE_BUTTON_STORE_CREDIT).wait(seconds).check();
 	}
 
 	public void clickSaveButtonStoreCredit() {

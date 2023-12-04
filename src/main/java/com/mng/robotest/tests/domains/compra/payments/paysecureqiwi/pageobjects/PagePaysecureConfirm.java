@@ -12,7 +12,7 @@ public class PagePaysecureConfirm extends PageBase {
 	 * @return si estamos en la página de confirmación de Qiwi (aparece a veces después de la introducción del teléfono + botón continuar)
 	 */
 	public boolean isPage() {
-		return state(Present, XP_BUTTON_CONFIRMAR).check();
+		return state(PRESENT, XP_BUTTON_CONFIRMAR).check();
 	}
 
 	public void clickConfirmar() {

@@ -1,24 +1,27 @@
-package com.mng.robotest.tests.domains.compra.pageobjects;
+package com.mng.robotest.tests.domains.compra.pageobjects.desktop;
 
-import java.util.ListIterator;
 import java.util.StringTokenizer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.chequeregalo.beans.ChequeRegalo;
+import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
+import com.mng.robotest.tests.domains.compra.pageobjects.UtilsCheckout;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.PreciosArticulo;
+import com.mng.robotest.tests.domains.compra.pageobjects.modals.ModalAvisoCambioPais;
 import com.mng.robotest.tests.domains.compra.payments.billpay.pageobjects.SecBillpay;
 import com.mng.robotest.tests.domains.compra.payments.eps.pageobjects.SecEps;
 import com.mng.robotest.tests.domains.compra.payments.tmango.pageobjects.SecTMango;
 import com.mng.robotest.testslegacy.beans.Pago;
 import com.mng.robotest.testslegacy.data.Descuento;
-import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
+import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 public class Page1DktopCheckout extends PageBase {
 	
@@ -26,7 +29,7 @@ public class Page1DktopCheckout extends PageBase {
 	private final SecTMango secTMango = new SecTMango();
 	private final SecBillpay secBillpay = new SecBillpay();
 	private final SecEps secEps = new SecEps();
-	private final ModalAvisoCambioPais modalAvisoCambioPais = new ModalAvisoCambioPais();
+	private final ModalAvisoCambioPais mdAvisoCambioPais = new ModalAvisoCambioPais();
 	
 	private static final String XP_CONF_PAGO_BUTTON_DESKTOP = "//*[@id[contains(.,'btnCheckout')]]";
 	private static final String XP_ALMACEN_IN_NO_PRO_ENTORNOS = "//span[@class='labelTestShowAlmacenStrong']";
@@ -93,7 +96,7 @@ public class Page1DktopCheckout extends PageBase {
 	private static final String TEXT_KREDI_KARTI = "KREDİ KARTI";
 	private static final String XP_PESTANYA_KREDI_KARTI = "//div[@class[contains(.,'pmGroupTitle')]]/span[text()='" + TEXT_KREDI_KARTI + "']";
 	
-	private static final String XP_METODO_PAGO = "//*[@class[contains(.,'cardBox')]]";
+	private static final String XP_METODO_PAGO = "//*[@class[contains(.,'cardBox')]]/label/..";
 	
 	private static final String TAG_REFERENCIA = "@TagRef";
 	private static final String XP_LINEA_ARTICULO_WITH_TAG = 
@@ -118,7 +121,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	public ModalAvisoCambioPais getModalAvisoCambioPais() {
-		return modalAvisoCambioPais;
+		return mdAvisoCambioPais;
 	}
 	
 	private String getXPathLinArticle(String referencia) {
@@ -143,7 +146,7 @@ public class Page1DktopCheckout extends PageBase {
 		default:
 			String nameExpected = pago.getNombreInCheckout(channel, app).toLowerCase();
 			return (
-				state(Visible, XP_BLOQUES_PAGO_POSIBLES).wait(seconds).check() &&
+				state(VISIBLE, XP_BLOQUES_PAGO_POSIBLES).wait(seconds).check() &&
 				getElement(XP_BLOQUES_PAGO_POSIBLES).getAttribute("innerHTML").toLowerCase().contains(nameExpected));
 		}
 	}
@@ -160,16 +163,16 @@ public class Page1DktopCheckout extends PageBase {
 		return (XP_COD_VENDEDOR_VOTF_WITH_TAG.replace(TAG_COD_VENDEDOR, codigoVendedor));
 	}
 	
-	public boolean isPageUntil(int secondsWait) {
-		return (isBloqueImporteTotal(secondsWait));
+	public boolean isPage(int seconds) {
+		return isBloqueImporteTotal(seconds);
 	}
 
 	public boolean isBloqueImporteTotal(int seconds) {
-		return state(Present, XP_IMPORTE_TOTAL).wait(seconds).check();
+		return state(PRESENT, XP_IMPORTE_TOTAL).wait(seconds).check();
 	}
 
 	public boolean isPresentInputApellidoPromoEmplUntil(int seconds) {
-		return state(Present, XP_INPUT_APELLIDO_PROMO_EMPL).wait(seconds).check();
+		return state(PRESENT, XP_INPUT_APELLIDO_PROMO_EMPL).wait(seconds).check();
 	}
 
 	public void inputApellidoPromoEmpl(String apellido) {
@@ -177,7 +180,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isPresentInputDNIPromoEmpl() {
-		return state(Present, XP_INPUT_DNI_PROMO_EMPL).check();
+		return state(PRESENT, XP_INPUT_DNI_PROMO_EMPL).check();
 	}
 
 	public void inputDNIPromoEmpl(String dni) {
@@ -185,15 +188,15 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isPresentDiaNaciPromoEmpl() {
-		return state(Present, XP_DIA_NACI_PROMO_EMPL).check();
+		return state(PRESENT, XP_DIA_NACI_PROMO_EMPL).check();
 	}
 
 	public boolean isPresentMesNaciPromoEmpl() {
-		return state(Present, XP_MES_NACI_PROMO_EMPL).check();
+		return state(PRESENT, XP_MES_NACI_PROMO_EMPL).check();
 	}
 
 	public boolean isPresentAnyNaciPromoEmpl() {
-		return state(Present, XP_ANY_NACI_PROMO_EMPL).check();
+		return state(PRESENT, XP_ANY_NACI_PROMO_EMPL).check();
 	}
 
 	/**
@@ -230,11 +233,11 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isPresentButtonConfPago() {
-		return state(Present, XP_CONF_PAGO_BUTTON_DESKTOP).check();
+		return state(PRESENT, XP_CONF_PAGO_BUTTON_DESKTOP).check();
 	}
 
 	public boolean isVisibleBlockCodigoPromoUntil(int seconds) {
-		return state(Visible, XP_BLOCK_CODIGO_PROMO).wait(seconds).check();
+		return state(VISIBLE, XP_BLOCK_CODIGO_PROMO).wait(seconds).check();
 	}
 
 	public void clickLinkToViewBlockPromo() {
@@ -251,11 +254,11 @@ public class Page1DktopCheckout extends PageBase {
 		}
 	}
 	public boolean isVisibleInputCodigoPromoUntil(int seconds) {
-		return state(Visible, XP_INPUT_PROMO).wait(seconds).check();
+		return state(VISIBLE, XP_INPUT_PROMO).wait(seconds).check();
 	}
 
 	public void clickEliminarValeIfExists() {
-		if (state(Visible, XP_LINK_ELIMINAR_PROMO).check()) {
+		if (state(VISIBLE, XP_LINK_ELIMINAR_PROMO).check()) {
 			click(XP_LINK_ELIMINAR_PROMO).exec();
 		}
 	}
@@ -264,9 +267,8 @@ public class Page1DktopCheckout extends PageBase {
 		sendKeysWithRetry(codigoPromo, By.xpath(XP_INPUT_PROMO), 2, driver);
 	}
 
-
 	public boolean checkTextValeCampaingIs(String textoCampaingVale) {
-		if (state(Visible, XP_TEXT_VALE_CAMPAIGN).check()) {
+		if (state(VISIBLE, XP_TEXT_VALE_CAMPAIGN).check()) {
 			return getElement(XP_TEXT_VALE_CAMPAIGN).getText().toLowerCase().contains(textoCampaingVale.toLowerCase());
 		}
 		return false;
@@ -277,7 +279,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isVisibleDescuentoEmpleadoUntil(int seconds) {
-		return state(Visible, XP_DESCUENTO_EMPLEADO).wait(seconds).check();
+		return state(VISIBLE, XP_DESCUENTO_EMPLEADO).wait(seconds).check();
 	}
 	
 	public void clickEditDirecEnvio() {
@@ -290,7 +292,7 @@ public class Page1DktopCheckout extends PageBase {
 
 	public boolean isMetodoPagoPresent(String metodoPagoClick) {
 		String xpathClickPago = getXPathClickMetodoPago(metodoPagoClick);
-		return state(Present, xpathClickPago).check();
+		return state(PRESENT, xpathClickPago).check();
 	}
 
 	public boolean isNumMetodosPagoOK(boolean isEmpl) {
@@ -310,7 +312,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isPresentMetodosPago() {
-		return state(Present, XP_METODO_PAGO).check();
+		return state(PRESENT, XP_METODO_PAGO).check();
 	}
 
 	/**
@@ -318,11 +320,11 @@ public class Page1DktopCheckout extends PageBase {
 	 */
 	public void forceClickMetodoPagoAndWait(String metodoPago) {
 		despliegaMetodosPago();
-		var pageCheckoutWrapper = new PageCheckoutWrapper();
-		pageCheckoutWrapper.waitUntilNoDivLoading(2);
+		var pgCheckoutWrapper = new PageCheckoutWrapper();
+		pgCheckoutWrapper.waitUntilNoDivLoading(2);
 		moveToMetodosPago();
 		clickMetodoPago(metodoPago);
-		pageCheckoutWrapper.waitUntilNoDivLoading(10);
+		pgCheckoutWrapper.waitUntilNoDivLoading(10);
 	}
 
 	
@@ -343,8 +345,8 @@ public class Page1DktopCheckout extends PageBase {
 
 	public boolean areMetodosPagoPlegados() {
 		return (
-			state(Present, XP_OTRAS_FORMAS_PAGO).check() &&
-			!state(Visible, XP_OTRAS_FORMAS_PAGO).check());
+			state(PRESENT, XP_OTRAS_FORMAS_PAGO).check() &&
+			!state(VISIBLE, XP_OTRAS_FORMAS_PAGO).check());
 	}
 
 	private void metodosPagosInStateUntil(boolean plegados, int seconds) {
@@ -362,13 +364,13 @@ public class Page1DktopCheckout extends PageBase {
 
 	public void clickMetodoPago(String metodoPago) {
 		click(getXPathClickMetodoPago(metodoPago))
-			.type(TypeClick.webdriver)
+			.type(WEBDRIVER)
 			.waitLink(2)
 			.waitLoadPage(1).exec();
 	}
 
 	public boolean isRedErrorVisible() {
-		return state(Visible, XP_RED_ERROR).check();
+		return state(VISIBLE, XP_RED_ERROR).check();
 	}
 
 	public String getTextRedError() {
@@ -392,7 +394,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public String getAlmacenFromNoProdEntorn() {
-		if (state(Present, XP_ALMACEN_IN_NO_PRO_ENTORNOS).check()) {
+		if (state(PRESENT, XP_ALMACEN_IN_NO_PRO_ENTORNOS).check()) {
 			return getElement(XP_ALMACEN_IN_NO_PRO_ENTORNOS).getText();
 		}
 		return "";
@@ -400,21 +402,31 @@ public class Page1DktopCheckout extends PageBase {
 
 	public WebElement getLineaArticle(String referencia) {
 		String xpathLinArticle = getXPathLinArticle(referencia);
-		if (state(Present, xpathLinArticle).check()) {
+		if (state(PRESENT, xpathLinArticle).check()) {
 			return getElement(xpathLinArticle);
 		}
 		return null;
 	}
 
+	public float getSumPreciosArticles() {
+	    var sumPrecios = dataTest.getDataBag().getListArticlesTypeViewInBolsa().stream()
+	    		.map(articuloScreen -> getLineaArticle(articuloScreen.getReferencia()))
+	            .map(this::getPreciosArticuloResumen)
+	            .map(PreciosArticulo::getDefinitivo)
+	            .reduce(0.0f, Float::sum);
+	    
+	    return UtilsMangoTest.round(sumPrecios, 2);
+	}
+	
 	public boolean validateArticlesAndImport() {
-		for (ArticuloScreen articulo : dataTest.getDataBag().getListArticlesTypeViewInBolsa()) {
-			WebElement lineaArticulo = getLineaArticle(articulo.getReferencia());
+		for (var articuloScreen : dataTest.getDataBag().getListArticlesTypeViewInBolsa()) {
+			var lineaArticulo = getLineaArticle(articuloScreen.getReferencia());
 			if (lineaArticulo==null) {
 				return false;
 			}
 			
-			PreciosArticulo preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
-			if (!validateArticleImport(preciosArticuloScreen, articulo.getPrecio())) {
+			var preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
+			if (!validateArticleImport(preciosArticuloScreen, articuloScreen.getPrecio())) {
 				return false;
 			}
 		}
@@ -422,87 +434,70 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	public boolean validateArticleImport(PreciosArticulo preciosScreen, String precioArticulo) {
-		return (preciosScreen.definitivo == ImporteScreen.getFloatFromImporteMangoScreen(precioArticulo));
+		return (preciosScreen.getDefinitivo() == ImporteScreen.getFloatFromImporteMangoScreen(precioArticulo));
 	}
 	
 	public boolean validateArticlesAndDiscount(Descuento descuento) {
-		for (ArticuloScreen articulo : dataTest.getDataBag().getListArticlesTypeViewInBolsa()) {
-			var lineaArticulo = getLineaArticle(articulo.getReferencia());
-			if (lineaArticulo==null) {
-				return false;
-			}
-			
-			var preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
-			var pageCheckoutWrapper = new PageCheckoutWrapper();
-			if (articulo.getValePais()!=null) {
-				if (!pageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuento)) {
-					return false;
-				}
-			} else {
-				var descuentoZero = new Descuento(0);
-				if (!pageCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuentoZero)) {
-					return false;
-				}
-			}
-		}
-		
-		return true;
-	}
+	    var pgCheckoutWrapper = new PageCheckoutWrapper();
+	    for (var articulo : dataTest.getDataBag().getListArticlesTypeViewInBolsa()) {
+	        var lineaArticulo = getLineaArticle(articulo.getReferencia());
+	        if (lineaArticulo == null) {
+	            return false;
+	        }
+
+	        var preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
+	        var descuentoToValidate = (articulo.getValePais() != null) ? descuento : new Descuento(0);
+	        if (!pgCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuentoToValidate)) {
+	            return false;
+	        }
+	    }
+	    return true;
+	}	
 	
 	public String getPrecioSubTotalFromResumen() {
 		return new PageCheckoutWrapper().formateaPrecioTotal(XP_PRECIO_SUBTOTAL);
 	}
 	
 	private PreciosArticulo getPreciosArticuloResumen(WebElement articuloWeb) {
-		var precios = new PreciosArticulo();
-		var preciosNoTachados= articuloWeb.findElements(By.xpath("." + XP_PRECIO_NO_TACHADO_REL_ARTICLE));
-		var preciosSiTachados= articuloWeb.findElements(By.xpath("." + XP_PRECIOO_SI_TACHADO_REL_ARTICLE));
-		int cantidad = Integer.parseInt(articuloWeb.findElement(By.xpath("." + XP_CANTIDAD_ARTICULOS)).getText());
-		for (var precioNoTachado : preciosNoTachados) {
-			precios.definitivo = getFloatFromImporteScreen(precioNoTachado) / cantidad; 
-			if (precios.definitivo!=0) {
-				precios.original = precios.definitivo;
-				break;
-			}
-		}
-		
-		for (var precioSiTachado : preciosSiTachados) {
-			float precio = getFloatFromImporteScreen(precioSiTachado) / cantidad; 
-			if (precio!=0) {
-				precios.ultimaRebaja = precio;
-				if (precios.original==0 || precios.original==precios.definitivo) {
-					precios.original = getFloatFromImporteScreen(precioSiTachado) / cantidad;
-				}
-			}
-		}
-		
-		return (precios);
+	    var precios = new PreciosArticulo();
+	    int cantidad = Integer.parseInt(articuloWeb.findElement(By.xpath("." + XP_CANTIDAD_ARTICULOS)).getText());
+
+	    setPrecioNoTachado(precios, articuloWeb, cantidad);
+	    setPrecioSiTachado(precios, articuloWeb, cantidad);
+
+	    return precios;
 	}
-	
-	private float getFloatFromImporteScreen(WebElement importeWeb) {
-		String precioArticulo = "";
-		
-		// Iteramos sobre los elementos correspondientes a la parte entera y decimal
-		ListIterator<WebElement> itArticuloEntero = null;
-		ListIterator<WebElement> itArticuloDecimal = null;
-		itArticuloEntero = importeWeb.findElements(By.className("entero")).listIterator();
-		while (itArticuloEntero != null && itArticuloEntero.hasNext()) {
-			var articuloEntero = itArticuloEntero.next();
-			precioArticulo += articuloEntero.getText();
-		}
 
-		itArticuloDecimal = importeWeb.findElements(By.className("decimal")).listIterator();
-		while (itArticuloDecimal != null && itArticuloDecimal.hasNext()) {
-			var articuloDecimal = itArticuloDecimal.next();
-			precioArticulo += articuloDecimal.getText();
-		}
+	private void setPrecioNoTachado(PreciosArticulo precios, WebElement articuloWeb, int cantidad) {
+	    var preciosNoTachados = articuloWeb.findElements(By.xpath("." + XP_PRECIO_NO_TACHADO_REL_ARTICLE));
+	    for (var precioNoTachado : preciosNoTachados) {
+	        float precio = UtilsCheckout.getImporteScreenFromIntegerAndDecimal(precioNoTachado) / cantidad;
+	        if (precio != 0) {
+	            precios.setDefinitivo(precio);
+	            if (precios.getDefinitivo() != 0) {
+	                precios.setOriginal(precios.getDefinitivo());
+	                break;
+	            }
+	        }
+	    }
+	}
 
-		return ImporteScreen.getFloatFromImporteMangoScreen(precioArticulo);
+	private void setPrecioSiTachado(PreciosArticulo precios, WebElement articuloWeb, int cantidad) {
+	    var preciosSiTachados = articuloWeb.findElements(By.xpath("." + XP_PRECIOO_SI_TACHADO_REL_ARTICLE));
+	    for (var precioSiTachado : preciosSiTachados) {
+	        float precio = UtilsCheckout.getImporteScreenFromIntegerAndDecimal(precioSiTachado) / cantidad;
+	        if (precio != 0) {
+	            precios.setUltimaRebaja(precio);
+	            if (precios.getOriginal() == 0 || precios.getOriginal() == precios.getDefinitivo()) {
+	                precios.setOriginal(precio);
+	            }
+	        }
+	    }
 	}
 
 	public boolean isVisibleRadioTrjGuardada(String metodoPago)  {
 		String xpathRadioTrjGuardada = getXPathRadioTarjetaGuardada(metodoPago);
-		return state(Visible, xpathRadioTrjGuardada).check();
+		return state(VISIBLE, xpathRadioTrjGuardada).check();
 	}
 
 	public void clickRadioTrjGuardada() {
@@ -510,7 +505,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public void inputCvcTrjGuardadaIfVisible(String cvc) {
-		if (state(Visible, XP_CVC_TRJ_GUARDADA).check()) {
+		if (state(VISIBLE, XP_CVC_TRJ_GUARDADA).check()) {
 			var input = getElement(XP_CVC_TRJ_GUARDADA);
 			input.clear();
 			input.sendKeys(cvc);
@@ -522,11 +517,11 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	public boolean isVisibleDescartarFacturaLink() {
-		return state(Visible, XP_LINK_DESCARTAR_FACTURA).wait(1).check();
+		return state(VISIBLE, XP_LINK_DESCARTAR_FACTURA).wait(1).check();
 	}
 	
 	public boolean isArticulos() {
-		return state(Present, XP_FIRST_ARTICULO).check();
+		return state(PRESENT, XP_FIRST_ARTICULO).check();
 	}
 
 	/**
@@ -539,7 +534,7 @@ public class Page1DktopCheckout extends PageBase {
 
 	public boolean isVisibleErrorRojoInputPromoUntil(int seconds) {
 		return (
-			state(Visible, XP_ERROR_PROMO).wait(seconds).check() &&
+			state(VISIBLE, XP_ERROR_PROMO).wait(seconds).check() &&
 			getElement(XP_ERROR_PROMO).getAttribute("style").contains("color: red"));
 	}
 
@@ -553,13 +548,13 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isVisibleInputVendedorVOTF(int seconds) {
-		return state(Visible, XP_INPUT_VENDEDOR_VOTF).wait(seconds).check();
+		return state(VISIBLE, XP_INPUT_VENDEDOR_VOTF).wait(seconds).check();
 	}
 
 
 	public boolean isVisibleCodigoVendedorVOTF(String codigoVendedor) {
 		String xpathVendedor = getXPathCodigoVendedorVOTF(codigoVendedor);
-		return state(Visible, xpathVendedor).check();
+		return state(VISIBLE, xpathVendedor).check();
 	}
 
 	public boolean isDataChequeRegalo(ChequeRegalo chequeRegalo) {
@@ -570,7 +565,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	public boolean isVisibleMessageErrorPayment(int seconds) {
-		return state(Visible, XPATH_ERROR_MESSAGE).wait(seconds).check();
+		return state(VISIBLE, XPATH_ERROR_MESSAGE).wait(seconds).check();
 	}
 
 }

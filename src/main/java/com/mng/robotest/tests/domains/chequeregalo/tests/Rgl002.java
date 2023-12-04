@@ -20,7 +20,7 @@ import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
 public class Rgl002 extends TestBase {
 
-	private final PageChequeRegaloInputDataSteps pageChequeRegaloInputDataSteps;
+	private final PageChequeRegaloInputDataSteps pgChequeRegaloInputDataSteps;
 	
 	private final DataPago dataPago;
 	
@@ -40,7 +40,7 @@ public class Rgl002 extends TestBase {
 		
 		dataPago = getDataPago(configCheckout);
 		
-		pageChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps();
+		pgChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps();
 	}
 	
 	@Override
@@ -64,8 +64,8 @@ public class Rgl002 extends TestBase {
 	}
 
 	private void inputDataChequeRegalo() {
-		pageChequeRegaloInputDataSteps.clickQuieroComprarChequeRegalo();
-		pageChequeRegaloInputDataSteps.seleccionarCantidades(Importe.EURO_50);
+		pgChequeRegaloInputDataSteps.clickQuieroComprarChequeRegalo();
+		pgChequeRegaloInputDataSteps.seleccionarCantidades(Importe.EURO_50);
 
 		var chequeRegalo = new ChequeRegalo();
 		chequeRegalo.setNombre("Jorge");
@@ -73,7 +73,7 @@ public class Rgl002 extends TestBase {
 		chequeRegalo.setEmail(Constantes.MAIL_PERSONAL);
 		chequeRegalo.setImporte(Importe.EURO_50);
 		chequeRegalo.setMensaje("Te conocía aún antes de haberte formado en el vientre de tu madre");
-		pageChequeRegaloInputDataSteps.inputDataAndClickComprar(channel, app, chequeRegalo);
+		pgChequeRegaloInputDataSteps.inputDataAndClickComprar(channel, app, chequeRegalo);
 	}
 	
 	private void checkoutChequeRegalo() throws Exception {

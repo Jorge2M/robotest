@@ -11,20 +11,20 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalArticleNotAvailableSteps extends StepBase {
 
-	private final ModalArticleNotAvailable modalArticleNotAvailable = new ModalArticleNotAvailable();
+	private final ModalArticleNotAvailable mdArticleNotAvailable = new ModalArticleNotAvailable();
 	
 	@Validation (
 		description="El modal de \"Avísame\" por artículo no disponible está en estado #{stateModal} " + SECONDS_WAIT,
-		level=Info)
+		level=INFO)
 	public boolean validateState(int seconds, StateModal stateModal) {
-		return modalArticleNotAvailable.inStateUntil(stateModal, seconds);
+		return mdArticleNotAvailable.inStateUntil(stateModal, seconds);
 	}
 	
 	@Step (
 		description="Seleccionamos el aspa del modal para cerrarlo", 
 		expected="El modal queda en estado No-visible")
 	public void clickAspaForClose() {
-		modalArticleNotAvailable.clickAspaForClose();
+		mdArticleNotAvailable.clickAspaForClose();
 		validateState(1, StateModal.NOT_VISIBLE);
 	}
 
@@ -34,15 +34,15 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece el modal de avisame " + getLitSecondsWait(seconds),
-			modalArticleNotAvailable.isVisibleUntil(seconds));
+			mdArticleNotAvailable.isVisibleUntil(seconds));
 
 		checks.add(
 			"Aparece el input para la introducción del email " + getLitSecondsWait(seconds),
-			modalArticleNotAvailable.isVisibleInputEmail(seconds));		
+			mdArticleNotAvailable.isVisibleInputEmail(seconds));		
 		
 		checks.add(
 			"Aparece la descripcion de RPGD de usuario",
-			modalArticleNotAvailable.isVisibleRPGD(2));
+			mdArticleNotAvailable.isVisibleRPGD(2));
 		
 		return checks;
 	}
@@ -51,21 +51,21 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 		description="Seleccionar el link <b>Política de privacidad</b>", 
 		expected="Aparece el texto adicional de política de privacidad")
 	public void clickPoliticaPrivacidad() {
-		modalArticleNotAvailable.clickPoliticaPrivacidad();
+		mdArticleNotAvailable.clickPoliticaPrivacidad();
 	}
 	
 	@Step (
 		description="Pulsamos el botón <b>Recibir Aviso</b>", 
 		expected="Aparece el snackbar de Petición confirmada")
 	public void clickRecibirAviso() {
-		modalArticleNotAvailable.clickRecibirAviso();
+		mdArticleNotAvailable.clickRecibirAviso();
 		checkSnackvarAvisoOkVisible(3);
 	}
 	
 	@Validation (
 		description="Aparece el snackvar de petición confirmada OK " + SECONDS_WAIT)
 	public boolean checkSnackvarAvisoOkVisible(int seconds) {
-		return modalArticleNotAvailable.isSnackvarAvisoOkVisible(seconds);
+		return mdArticleNotAvailable.isSnackvarAvisoOkVisible(seconds);
 	}	
 	
 }

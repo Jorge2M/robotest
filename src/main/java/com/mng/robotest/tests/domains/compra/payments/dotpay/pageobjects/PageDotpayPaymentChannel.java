@@ -18,7 +18,7 @@ public class PageDotpayPaymentChannel extends PageBase {
 	}
 	
 	public boolean isPage() {
-		return state(Present, XP_SECTION_PAYMENT_CHANNELS).check();
+		return state(PRESENT, XP_SECTION_PAYMENT_CHANNELS).check();
 	}
 
 	public void clickPayment(int numPayment) {
@@ -35,6 +35,6 @@ public class PageDotpayPaymentChannel extends PageBase {
 	}
 
 	public boolean isVisibleBlockInputDataUntil(int seconds) {
-		return state(Visible, XP_BLOCK_INPUT_DATA).wait(seconds).check();
+		return state(VISIBLE, XP_BLOCK_INPUT_DATA).wait(seconds).check();
 	}
 }

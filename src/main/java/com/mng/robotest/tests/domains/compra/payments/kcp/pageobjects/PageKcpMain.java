@@ -16,7 +16,7 @@ public class PageKcpMain extends PageBase {
 	
 	public boolean isPage(int seconds) {
 		goToIframe();
-		boolean result = state(Present, XP_AGREE_ALL_RADIO).wait(seconds).check();
+		boolean result = state(PRESENT, XP_AGREE_ALL_RADIO).wait(seconds).check();
 		leaveIframe();
 		return result;
 	}
@@ -29,7 +29,7 @@ public class PageKcpMain extends PageBase {
 	
 	public boolean isVisibleTermAndConditions(int seconds) {
 		goToIframe();
-		boolean isVisible = state(Present, XP_AGREE_ALL_RADIO).wait(seconds).check();
+		boolean isVisible = state(PRESENT, XP_AGREE_ALL_RADIO).wait(seconds).check();
 		leaveIframe();
 		return isVisible;
 	}
@@ -42,7 +42,7 @@ public class PageKcpMain extends PageBase {
 	
 	public boolean isSelectInstallmentVisible(int seconds) {
 		goToIframe();
-		boolean result = state(Visible, XP_SELECT_INSTALLMENT).wait(seconds).check();
+		boolean result = state(VISIBLE, XP_SELECT_INSTALLMENT).wait(seconds).check();
 		leaveIframe();
 		return result;
 	}

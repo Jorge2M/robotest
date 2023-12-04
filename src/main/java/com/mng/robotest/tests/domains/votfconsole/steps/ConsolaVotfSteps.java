@@ -7,13 +7,13 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.votfconsole.pageobjects.IframeResult;
 import com.mng.robotest.tests.domains.votfconsole.pageobjects.PageConsola;
 import com.mng.robotest.tests.domains.votfconsole.utils.ChecksResultWithStringData;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class ConsolaVotfSteps extends StepBase {
 
-	private final PageConsola pageConsola = new PageConsola();
+	private final PageConsola pgConsola = new PageConsola();
 	private final IframeResult iframeResult = new IframeResult();
 	
 	@Step (
@@ -28,11 +28,11 @@ public class ConsolaVotfSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el apartado \"Test servicios VOTF\"",
-			pageConsola.existTestServVOTF(), Warn);
+			pgConsola.existTestServVOTF(), WARN);
 	 	
 	 	checks.add(
 			"Aparece el apartado \"Consola comandos VOTF\"",
-			pageConsola.existConsolaComVOTF(), Warn);
+			pgConsola.existConsolaComVOTF(), WARN);
 	 	
 		return checks;
 	}
@@ -40,10 +40,10 @@ public class ConsolaVotfSteps extends StepBase {
 	@Step (
 		description="Seleccionamos el entorno de #{entorno} en los apartados \"Test servicios VOTF\" y \"Consola comandos VOTF\"",
 		expected="El entorno se selecciona correctamente",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void selectEntornoTestAndCons(String entorno) {
-		pageConsola.selectEntornoTestServ(entorno);
-		pageConsola.selectEntornoConsolaCom(entorno);
+		pgConsola.selectEntornoTestServ(entorno);
+		pgConsola.selectEntornoConsolaCom(entorno);
 	}
 	
 	@Step (
@@ -51,35 +51,35 @@ public class ConsolaVotfSteps extends StepBase {
 			"Introducimos el artículo disponible <b>#{articulo}</b> (a nivel de  artículo disponible y de compra) + la tienda <b>#{tienda}</b>",
 		expected=
 			"Aparecen datos correspondientes a " + PageConsola.MSG_CONS_TIPOS_ENVIO_OK,
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void inputArticleAndTiendaDisp(String articulo, String tienda) {
-		pageConsola.inputArticDispYCompra(articulo);
-		pageConsola.inputTiendas(tienda);
+		pgConsola.inputArticDispYCompra(articulo);
+		pgConsola.inputTiendas(tienda);
 	}
 	
 	@Step (
 		description="Selección botón \"Consultar tipos de envío\"",
 		expected="Aparecen datos correspondientes a " + PageConsola.MSG_CONS_TIPOS_ENVIO_OK,
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void consultarTiposEnvio() {
-		pageConsola.clickButtonConsTiposEnvios();
-		String paginaPadre = pageConsola.driver.getWindowHandle();
+		pgConsola.clickButtonConsTiposEnvios();
+		String paginaPadre = pgConsola.driver.getWindowHandle();
 		checkAfterConsultarTiposEnvio(paginaPadre);
 	}
 	
 	@Validation (
 		description="En el bloque de \"Petición/Resultado\" aparece el literal \"" + PageConsola.MSG_CONS_TIPOS_ENVIO_OK + "\"",
-		level=Warn)
+		level=WARN)
 	private boolean checkAfterConsultarTiposEnvio(String paginaPadre) {
 		boolean resultado = true;
 		try {
-			pageConsola.switchToResultIFrame();
+			pgConsola.switchToResultIFrame();
 			if (!iframeResult.resultadoContainsText(PageConsola.MSG_CONS_TIPOS_ENVIO_OK)) {
 				resultado = false;
 			}
 		} 
 		finally {
-			pageConsola.driver.switchTo().window(paginaPadre);
+			pgConsola.driver.switchTo().window(paginaPadre);
 		}
 		
 		return resultado;
@@ -91,33 +91,33 @@ public class ConsolaVotfSteps extends StepBase {
 			"Seleccionar el botón \"Consultar Disponibilidad Envío Domicilio\"",
 		expected=
 			"Aparece la tabla de transportes con los tipos",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public boolean consultarDispEnvDomic(String articulo) {
-		pageConsola.inputArticDispYCompra(articulo);
-		pageConsola.clickButtonConsultarDispEnvioDomicilio();
+		pgConsola.inputArticDispYCompra(articulo);
+		pgConsola.clickButtonConsultarDispEnvioDomicilio();
 		return checkAfterClickConsultDispEnvioDomicilio().areAllChecksOvercomed();
 	}
 	
 	@Validation
 	private ChecksTM checkAfterClickConsultDispEnvioDomicilio() {
 		ChecksTM checks = ChecksResultWithStringData.getNew();
-		String paginaPadre = pageConsola.driver.getWindowHandle();
+		String paginaPadre = pgConsola.driver.getWindowHandle();
 		try {
-			pageConsola.switchToResultIFrame();
+			pgConsola.switchToResultIFrame();
 			checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una tabla \"Transportes\"",
-				iframeResult.existsTransportes(), Warn);
+				iframeResult.existsTransportes(), WARN);
 			
 			checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una tabla \"Disponibilidad\"",
-				iframeResult.existsDisponibilidad(), Warn);
+				iframeResult.existsDisponibilidad(), WARN);
 			
 		 	checks.add(
 				"En la tabla \"Disponibilidad\" figura el campo <b>Disponible=true</b>",
-				iframeResult.flagDisponibleIsTrue(), Warn);
+				iframeResult.flagDisponibleIsTrue(), WARN);
 		}
 		finally {
-			pageConsola.driver.switchTo().window(paginaPadre);
+			pgConsola.driver.switchTo().window(paginaPadre);
 		}
 		return checks;
 	}
@@ -125,11 +125,11 @@ public class ConsolaVotfSteps extends StepBase {
 	@Step (
 		description="Introducimos el artículo #{articulo} (a nivel de  artículo disponible y de compra) + Seleccionar el botón \"Consultar Disponibilidad Envío Tienda\"",
 		expected="Aparece el bloque de transportes y el tipo de stock",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void consultarDispEnvTienda(String articulo) {
-		pageConsola.inputArticDispYCompra(articulo);
-		pageConsola.consDispEnvioTienda();
-		String paginaPadre = pageConsola.driver.getWindowHandle();
+		pgConsola.inputArticDispYCompra(articulo);
+		pgConsola.consDispEnvioTienda();
+		String paginaPadre = pgConsola.driver.getWindowHandle();
 		checkAfterClickConsultDispEnvioTienda(paginaPadre);
 	}
 	
@@ -137,7 +137,7 @@ public class ConsolaVotfSteps extends StepBase {
 	private ChecksTM checkAfterClickConsultDispEnvioTienda(String paginaPadre) {
 		var checks = ChecksTM.getNew();
 		try {
-			pageConsola.switchToResultIFrame();
+			pgConsola.switchToResultIFrame();
 		 	checks.add(
 				"En el bloque de \"Petición/Resultado\" NO aparece una tabla \"transportes__content\"",
 				!iframeResult.existsTransportes());
@@ -147,7 +147,7 @@ public class ConsolaVotfSteps extends StepBase {
 				iframeResult.isPresentTipoStock());
 		}
 		finally {
-			pageConsola.driver.switchTo().window(paginaPadre);
+			pgConsola.driver.switchTo().window(paginaPadre);
 		}
 		
 		return checks;
@@ -156,18 +156,18 @@ public class ConsolaVotfSteps extends StepBase {
 	@Step (
 		description="Seleccionar el botón \"Realizar Solicitud A Domicilio\"",
 		expected="El pedido se crea correctamente",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public String realizarSolicitudTienda(String articulo) {
-		pageConsola.inputArticDispYCompra(articulo);
-		pageConsola.clickButtonSolADomicilio();
+		pgConsola.inputArticDispYCompra(articulo);
+		pgConsola.clickButtonSolADomicilio();
 		return switchToIframeAndCheckAfterSolicitudAdomicilio();
 	}
 	
 	private String switchToIframeAndCheckAfterSolicitudAdomicilio() {
-		String paginaPadre = pageConsola.driver.getWindowHandle();
-		pageConsola.switchToResultIFrame();
+		String paginaPadre = pgConsola.driver.getWindowHandle();
+		pgConsola.switchToResultIFrame();
 		var checks = checkAfterSolicitudAdomicilioInIframe();
-		pageConsola.driver.switchTo().window(paginaPadre);
+		pgConsola.driver.switchTo().window(paginaPadre);
 		return checks.getData();
 	}
 	
@@ -178,7 +178,7 @@ public class ConsolaVotfSteps extends StepBase {
 		checks.add(
 			"En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Código de pedido\"" + 
 			getLitSecondsWait(seconds),
-			iframeResult.isPresentCodigoPedido(seconds), Warn);
+			iframeResult.isPresentCodigoPedido(seconds), WARN);
 		
 		String codigoPedido = iframeResult.getCodigoPedido();
 		checks.setData(codigoPedido);
@@ -188,7 +188,7 @@ public class ConsolaVotfSteps extends StepBase {
 		
 		checks.add(
 			"Aparece el literal \"Resultado creación pedido: (0) Total\"",
-			iframeResult.resCreacionPedidoOk(), Warn);
+			iframeResult.resCreacionPedidoOk(), WARN);
 		
 	 	return checks;
 	}
@@ -196,19 +196,19 @@ public class ConsolaVotfSteps extends StepBase {
 	@Step (
 		description="Seleccionar el botón \"Obtener Pedidos\"",
 		expected="Aparece la lista de pedidos",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public String obtenerPedidos(String codigoPedido) {
-		pageConsola.clickButtonObtenerPedidos();
+		pgConsola.clickButtonObtenerPedidos();
 		return switchToIframeAndCheckAfterObtenerPedidos(codigoPedido);
 	}
 	
 	private String switchToIframeAndCheckAfterObtenerPedidos(String codigoPedido) {
-		String paginaPadre = pageConsola.driver.getWindowHandle();
-		pageConsola.switchToResultIFrame();
+		String paginaPadre = pgConsola.driver.getWindowHandle();
+		pgConsola.switchToResultIFrame();
 
 		checkAfterObtenerPedidosInIframe(codigoPedido);
 		String codigoPedidoFull = iframeResult.getPedidoFromListaPedidosUntil(codigoPedido, 5);
-		pageConsola.driver.switchTo().window(paginaPadre);
+		pgConsola.driver.switchTo().window(paginaPadre);
 		return codigoPedidoFull;
 	}
 	
@@ -224,7 +224,7 @@ public class ConsolaVotfSteps extends StepBase {
 	
 	@Validation (
 		description = "En el bloque de \"Petición/Resultado\" aparece una línea correspondiente al \"Pedidos\" " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	private boolean checkIsLineaPedidos(int seconds) {
 		return iframeResult.isPresentListaPedidosUntil(seconds);
 	}
@@ -239,27 +239,27 @@ public class ConsolaVotfSteps extends StepBase {
 	@Step (
 		description="Seleccionar el pedido #{codigoPedidoFull} en el desplegable \"Pedido\" y pulsar \"Seleccionar pedido\"",
 		expected="Aparece el pedido seleccionado",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void seleccionarPedido(String codigoPedidoFull) {
-		pageConsola.selectPedido(codigoPedidoFull);
-		pageConsola.clickButtonSelectPedido();
+		pgConsola.selectPedido(codigoPedidoFull);
+		pgConsola.clickButtonSelectPedido();
 		checkAfterSelectPedido(codigoPedidoFull);
 	}
 	
 	@Validation (
 		description="En el bloque de \"Petición/Resultado\" aparece una línea \"Seleccionado: #{codigoPedidoFull}\"",
-		level=Warn)
+		level=WARN)
 	private boolean checkAfterSelectPedido(String codigoPedidoFull) {
 		boolean resultado = true;
-		String paginaPadre = pageConsola.driver.getWindowHandle();
+		String paginaPadre = pgConsola.driver.getWindowHandle();
 		try {  
-			pageConsola.switchToResultIFrame();
+			pgConsola.switchToResultIFrame();
 			if (iframeResult.resSelectPedidoOk(codigoPedidoFull)) {
 				resultado = false;
 			}
 		}
 		finally {
-			pageConsola.driver.switchTo().window(paginaPadre);
+			pgConsola.driver.switchTo().window(paginaPadre);
 		}
 
 		return resultado;
@@ -268,28 +268,28 @@ public class ConsolaVotfSteps extends StepBase {
 	@Step (
 		description="Pulsar el botón \"Preconfirmar Pedido\"",
 		expected="Aparece el pedido como preconfirmado",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void selectPreconfPedido(String codigoPedidoFull) {
-		pageConsola.clickButtonPreconfPedido();
+		pgConsola.clickButtonPreconfPedido();
 		checkAfterPreconfirmarPedido(codigoPedidoFull);
 	}
 	
 	@Validation
 	private ChecksTM checkAfterPreconfirmarPedido(String codigoPedidoFull) {
 		var checks = ChecksTM.getNew();
-		String paginaPadre = pageConsola.driver.getWindowHandle();
+		String paginaPadre = pgConsola.driver.getWindowHandle();
 		try {
-			pageConsola.switchToResultIFrame();
+			pgConsola.switchToResultIFrame();
 		 	checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una línea \"Preconfirmado\"", 
-				iframeResult.isLineaPreconfirmado(), Warn);
+				iframeResult.isLineaPreconfirmado(), WARN);
 		 	
 		 	checks.add(
 				"Aparece un XML con el dato \"&lt;pedido&gt;" + codigoPedidoFull + "&lt;/pedido&gt;\"",
 				iframeResult.isPedidoInXML(codigoPedidoFull));
 		}
 		finally {
-			pageConsola.driver.switchTo().window(paginaPadre);
+			pgConsola.driver.switchTo().window(paginaPadre);
 		}
 
 		return checks;
@@ -298,24 +298,24 @@ public class ConsolaVotfSteps extends StepBase {
 	@Step (
 		description="Pulsar el botón \"Confirmar Pedido\"",
 		expected="Aparece el pedido confirmado",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void selectConfPedido(String codigoPedidoFull) {
-		pageConsola.clickButtonConfPedido();
+		pgConsola.clickButtonConfPedido();
 		checkAfterConfirmarPedido(codigoPedidoFull);
 	}
 	
 	@Validation
 	private ChecksTM checkAfterConfirmarPedido(String codigoPedidoFull) {
 		var checks = ChecksTM.getNew();
-		String paginaPadre = pageConsola.driver.getWindowHandle();
+		String paginaPadre = pgConsola.driver.getWindowHandle();
 		try {
-			pageConsola.switchToResultIFrame();
+			pgConsola.switchToResultIFrame();
 		 	checks.add(
 				"En el bloque de \"Petición/Resultado\" aparece una línea \"Confirmado: " + codigoPedidoFull + "\"", 
-				iframeResult.resConfPedidoOk(codigoPedidoFull), Warn);	 
+				iframeResult.resConfPedidoOk(codigoPedidoFull), WARN);	 
 		}
 		finally {
-			pageConsola.driver.switchTo().window(paginaPadre);
+			pgConsola.driver.switchTo().window(paginaPadre);
 		}	   
 		
 		return checks;

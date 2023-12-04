@@ -8,7 +8,7 @@ import com.mng.robotest.tests.domains.login.pageobjects.PageRecuperaPasswd;
 
 public class PageRecuperaPasswdSteps extends StepBase {
 	
-	private final PageRecuperaPasswd pageRecuperaPasswd = new PageRecuperaPasswd();
+	private final PageRecuperaPasswd pgRecuperaPasswd = new PageRecuperaPasswd();
 	
 	@Validation
 	public ChecksTM isPage() {
@@ -16,11 +16,11 @@ public class PageRecuperaPasswdSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece la pantalla de recuperación de la contraseña " + getLitSecondsWait(seconds),
-			pageRecuperaPasswd.isPageUntil(seconds));
+			pgRecuperaPasswd.isPage(seconds));
 		
 		checks.add(
 			"Aparece el campo para la introducción del correo",
-			pageRecuperaPasswd.isPresentInputCorreo());
+			pgRecuperaPasswd.isPresentInputCorreo());
 		
 		return checks;
 	}
@@ -29,8 +29,8 @@ public class PageRecuperaPasswdSteps extends StepBase {
 		description="Introducir el email <b>#{email}</b> y pulsar el botón \"Enviar\"", 
 		expected="Aparece la página de cambio de contraseña")
 	public void inputMailAndClickEnviar(String email) {
-		pageRecuperaPasswd.inputEmail(email);
-		pageRecuperaPasswd.clickEnviar();
+		pgRecuperaPasswd.inputEmail(email);
+		pgRecuperaPasswd.clickEnviar();
 		isPageCambioPassword();
 		checksDefault();
 	}
@@ -41,11 +41,11 @@ public class PageRecuperaPasswdSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece el mensaje de \"Revisa tu email\" " + getLitSecondsWait(seconds),
-			pageRecuperaPasswd.isVisibleRevisaTuEmailUntil(seconds));
+			pgRecuperaPasswd.isVisibleRevisaTuEmailUntil(seconds));
 		
 		checks.add(
 			"Aparece el botón \"Ir de Shopping\"",
-			pageRecuperaPasswd.isVisibleButtonIrDeShopping());
+			pgRecuperaPasswd.isVisibleButtonIrDeShopping());
 		
 		return checks;
 	}

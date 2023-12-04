@@ -20,19 +20,19 @@ public class PagePaytrail1rst extends PageBase {
 	
 	public boolean isPresentEntradaPago(String nombrePago) {
 		String xpathPago = getXPathEntradaPago(nombrePago);
-		return state(Present, xpathPago).check();
+		return state(PRESENT, xpathPago).check();
 	}
 	
 	public boolean isPresentButtonPago() {
-		return state(Present, XP_BUTTON_PAGO_DESKTOP).check();
+		return state(PRESENT, XP_BUTTON_PAGO_DESKTOP).check();
 	}
 
 	public boolean isPresentSelectBancos() {
-		return state(Present, XP_SELECT_BANCOS).check();
+		return state(PRESENT, XP_SELECT_BANCOS).check();
 	}
 	
 	public boolean isVisibleSelectBancosUntil(int seconds) {
-		return state(Visible, XP_SELECT_BANCOS).wait(seconds).check();
+		return state(VISIBLE, XP_SELECT_BANCOS).wait(seconds).check();
 	}	
 	
 	public void clickButtonContinue() {
@@ -46,7 +46,7 @@ public class PagePaytrail1rst extends PageBase {
 	public void selectBanco(String visibleText) {
 		//En el caso de móvil hemos de seleccionar el icono del banco para visualizar el desplegable
 		if (channel.isDevice() &&
-			state(Visible, XP_SELECT_BANCOS).check()) {
+			state(VISIBLE, XP_SELECT_BANCOS).check()) {
 			clickIconoBanco();
 		}
 			

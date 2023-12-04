@@ -5,7 +5,6 @@ import java.util.List;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.tests.domains.base.StepMantoBase;
 import com.mng.robotest.tests.domains.compra.steps.envio.DataDeliveryPoint;
 import com.mng.robotest.tests.domains.manto.pageobjects.PageDetalleCliente;
@@ -19,10 +18,11 @@ import com.mng.robotest.testslegacy.utils.ImporteScreen;
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.manto.pageobjects.PagePedidos.IdColumn.*;
 import static com.mng.robotest.tests.domains.manto.pageobjects.PagePedidos.TypeDetalle.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class PagePedidosMantoSteps extends StepMantoBase {
 
-	private final PagePedidos pagePedidos = new PagePedidos();
+	private final PagePedidos pgPedidos = new PagePedidos();
 	
 	@Validation
 	public ChecksResultWithFlagLinkCodPed validaLineaPedido(DataPedido dataPedido) {
@@ -31,28 +31,28 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		int seconds = 30;
 	 	checks.add(String.format(
 	 		"Desaparece la capa de Loading de \"Consultando\"" + getLitSecondsWait(seconds) ),
-			pagePedidos.isInvisibleCapaLoadingUntil(seconds), Warn);
+			pgPedidos.isInvisibleCapaLoadingUntil(seconds), WARN);
 	 	
 		checks.setExistsLinkCodPed(
-			pagePedidos.isPresentDataInPedido(IDPEDIDO, dataPedido.getCodigoPedidoManto(), PEDIDO, 0));
+			pgPedidos.isPresentDataInPedido(IDPEDIDO, dataPedido.getCodigoPedidoManto(), PEDIDO, 0));
 		
 	 	checks.add(String.format(
 	 		"En la columna %s aparece el código de pedido: %s", IDPEDIDO.getTextoColumna(), dataPedido.getCodigoPedidoManto()),
-			checks.getExistsLinkCodPed(), Warn);
+			checks.getExistsLinkCodPed(), WARN);
 	 	
 	 	checks.add(
 			"Aparece un solo pedido",
-			pagePedidos.getNumLineas()==1, Warn);
+			pgPedidos.getNumLineas()==1, WARN);
 		
 	 	checks.add(String.format(
 	 		"En la columna %s aparece el email asociado: %s", EMAIL.getTextoColumna(), dataPedido.getEmailCheckout()),
-	 		pagePedidos.isPresentDataInPedido(EMAIL, dataPedido.getEmailCheckout(), PEDIDO, 0), Warn);
+	 		pgPedidos.isPresentDataInPedido(EMAIL, dataPedido.getEmailCheckout(), PEDIDO, 0), WARN);
 	 	
-	 	String xpathCeldaImporte = pagePedidos.getXPathCeldaLineaPedido(TOTAL, PEDIDO);
+	 	String xpathCeldaImporte = pgPedidos.getXPathCeldaLineaPedido(TOTAL, PEDIDO);
 	 	checks.add(
 			"En pantalla aparece el importe asociado: " +  dataPedido.getImporteTotalManto(),
 			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), xpathCeldaImporte, driver), 
-			Warn);
+			WARN);
 		
 		return checks;
 	}
@@ -60,21 +60,21 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	@Step (
 		description="Buscamos pedidos con id registro",
 		expected="Debemos obtener el ID del pedido",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void setPedidoUsuarioRegistrado(DataPedido dPedidoPrueba) {
 		int posicionPedidoActual = 6;
 		int posicionMaxPaginaPedidos = 105;
 		do {
 			posicionPedidoActual++;
-			posicionPedidoActual = pagePedidos.getPosicionPedidoUsuarioRegistrado(posicionPedidoActual);
-			dPedidoPrueba.setCodpedido(pagePedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual));
+			posicionPedidoActual = pgPedidos.getPosicionPedidoUsuarioRegistrado(posicionPedidoActual);
+			dPedidoPrueba.setCodpedido(pgPedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual));
 			if (posicionPedidoActual == posicionMaxPaginaPedidos) {
 				posicionPedidoActual = 6;
-				pagePedidos.clickPaginaSiguientePedidos();
+				pgPedidos.clickPaginaSiguientePedidos();
 			}
 		} while (dPedidoPrueba.getCodpedido().equals(""));
 
-		pagePedidos.clickLinkPedidoInLineas(pagePedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual), PEDIDO);
+		pgPedidos.clickLinkPedidoInLineas(pgPedidos.getCodigoPedidoUsuarioRegistrado(posicionPedidoActual), PEDIDO);
 		checkCodePedidoOk(dPedidoPrueba);
 	}
 	
@@ -87,7 +87,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	@Step (
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void setDataPedidoStep(DataPedido dPedidoPrueba) {
 		var dBagPrueba = new DataBag();
 		List<String> referencias = new PageDetallePedido().getReferenciasArticulosDetallePedido();
@@ -110,7 +110,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	@Step (
 		description="Buscamos pedidos con id registro para obtener información del cliente",
 		expected="Debemos obtener la información del cliente",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void setDataCliente(DataPedido dPedidoPrueba) {
 		new PageDetallePedido().clickLinkDetallesCliente();
 		var pageDetalleCliente = new PageDetalleCliente();
@@ -141,11 +141,11 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 	@Step (
 		description="Un pedido con tienda física en la lista de pedidos",
 		expected="Debemos obtener una tienda física válida",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void setTiendaFisicaListaPedidos(DataPedido dPedidoPrueba) {
 		var dEnvioPrueba = new DataDeliveryPoint();
 		dPedidoPrueba.setDataDeliveryPoint(dEnvioPrueba);
-		dPedidoPrueba.getDataDeliveryPoint().setCodigo(pagePedidos.getTiendaFisicaFromListaPedidos());
+		dPedidoPrueba.getDataDeliveryPoint().setCodigo(pgPedidos.getTiendaFisicaFromListaPedidos());
 		checkIsTiendaFisica(dPedidoPrueba.getDataDeliveryPoint().getCodigo());
 	}
 	

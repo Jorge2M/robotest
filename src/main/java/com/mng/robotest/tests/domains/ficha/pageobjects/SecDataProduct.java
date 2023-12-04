@@ -14,8 +14,8 @@ import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.testslegacy.data.PaisShop.CROATIA;
 
@@ -188,7 +188,7 @@ public class SecDataProduct extends PageBase {
 	public String getNombreColorSelected() {
 		switch (channel) {
 			case desktop:
-				if (state(Present, XP_NOMBRE_COLOR_SELECTED_DESKTOP).check()) {
+				if (state(PRESENT, XP_NOMBRE_COLOR_SELECTED_DESKTOP).check()) {
 					return getElement(XP_NOMBRE_COLOR_SELECTED_DESKTOP).getText();
 				}
 				return Constantes.COLOR_DESCONOCIDO;
@@ -199,23 +199,23 @@ public class SecDataProduct extends PageBase {
 	}
 
 	public boolean checkPotatoe () {
-		return state(Present, XP_NOMBRE_COLOR_SELECTED_DESKTOP).check();
+		return state(PRESENT, XP_NOMBRE_COLOR_SELECTED_DESKTOP).check();
 	}
 
 	public void selectColorWaitingForAvailability(String codigoColor) {
 		click(getXPathPastillaColorClick(codigoColor))
-				.type(TypeClick.javascript)
+				.type(JAVASCRIPT)
 				.waitLink(3).waitLoadPage(5).exec();
 	}
 
 	public boolean isClickableColor(String codigoColor) {
 		String xpathColor = getXPathPastillaColorClick(codigoColor);
-		return state(Clickable, xpathColor).check();
+		return state(CLICKABLE, xpathColor).check();
 	}
 
 	//Funciones referentes a los precios
 	public String getPrecioFinalArticulo() {
-		state(Visible, getXPathPrecioFinal()).wait(1).check();
+		state(VISIBLE, getXPathPrecioFinal()).wait(1).check();
 		var precioElem = getElementVisible(getXPathPrecioFinal());
 		String precioArticulo = precioElem.getText();
 		return (ImporteScreen.normalizeImportFromScreen(precioArticulo));
@@ -225,7 +225,7 @@ public class SecDataProduct extends PageBase {
 	 * Extrae (si existe) el precio rebajado de la página de ficha de producto. Si no existe devuelve ""
 	 */
 	public String getPrecioTachadoFromFichaArt() {
-		if (state(Present, XP_PRECIO_REBAJADO).check()) {
+		if (state(PRESENT, XP_PRECIO_REBAJADO).check()) {
 			String precioRebajado = getElementVisible(XP_PRECIO_REBAJADO).getText();
 			return ImporteScreen.normalizeImportFromScreen(precioRebajado);
 		}
@@ -234,7 +234,7 @@ public class SecDataProduct extends PageBase {
 
 	//Funciones referentes a las tallas (en algunas se actúa a modo de Wrapper)
 	public boolean isVisibleCapaAvisame() {
-		return state(Visible, XP_CAPA_AVISAME).check();
+		return state(VISIBLE, XP_CAPA_AVISAME).check();
 	}
 
 	public void selectGuiaDeTallasLink() {
@@ -242,7 +242,7 @@ public class SecDataProduct extends PageBase {
 	}
 
 	public boolean selectGuiaDeTallasIfVisible() {
-		boolean isVisible = state(Visible, XP_GUIA_DE_TALLAS_LINK).check();
+		boolean isVisible = state(VISIBLE, XP_GUIA_DE_TALLAS_LINK).check();
 		if (isVisible) {
 			selectGuiaDeTallasLink();
 		}
@@ -254,7 +254,7 @@ public class SecDataProduct extends PageBase {
 	//Funciones referentes al prev/next
 	public boolean isVisiblePrevNextUntil(ProductNav productNav, int seconds) {
 		String xpathLink = getXPathLinkProductNav(productNav);
-		return state(Visible, xpathLink).wait(seconds).check();
+		return state(VISIBLE, xpathLink).wait(seconds).check();
 	}
 
 	public void selectLinkNavigation(ProductNav productNav) {

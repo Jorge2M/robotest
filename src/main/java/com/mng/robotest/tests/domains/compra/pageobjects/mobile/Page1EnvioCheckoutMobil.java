@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.compra.pageobjects;
+package com.mng.robotest.tests.domains.compra.pageobjects.mobile;
 
 import java.util.StringTokenizer;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -33,7 +33,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	private static final String XP_BOTON_CONTINUAR = "//button[@id[contains(.,'complete-step1')]]";
 	private static final String XP_ERROR_PROMO = "//div[@data-component-id='error-voucherCode']";
 	private static final String XP_ENVIO_STANDARD = "//div[@data-analytics-id='standard' and @class[contains(.,'checked')]]";
-	private static final String XP_EDITAR_DIRECCION = "//*[@data-testid[contains(.,'delivery.methods.editAddress.button')]]";	
+	private static final String XP_EDITAR_DIRECCION = "//*[@data-testid[contains(.,'delivery.methods.editAddress.button')]]";
 	
 	private String getXPathBlockMetodo(TipoTransporte tipoTransporte) {
 		return ("//label[@for='selection-" + tipoTransporte.getCodigo() + "']");
@@ -43,25 +43,25 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		return getXPathBlockMetodo(tipoTransporte) + XP_RADIO_ENVIO;
 	}
 
-	public boolean isPageUntil(int seconds) {
+	public boolean isPage(int seconds) {
 		return isVisibleInputCodigoPromoUntil(seconds);
 	}
 	
 	public boolean isPresentEnvioStandard() {
-		return state(Present, XP_ENVIO_STANDARD).check();
+		return state(PRESENT, XP_ENVIO_STANDARD).check();
 	}
 
 	public boolean isVisibleLink1EnvioUntil(int seconds) {
-		return state(Visible, XP_LINK1_ENVIO).wait(seconds).check();
+		return state(VISIBLE, XP_LINK1_ENVIO).wait(seconds).check();
 	}
 
 	public void clickLink1EnvioAndWaitForPage() {
-		click(XP_LINK1_ENVIO).type(javascript).exec();
-		isPageUntil(2);
+		click(XP_LINK1_ENVIO).type(JAVASCRIPT).exec();
+		isPage(2);
 	}
 
 	public boolean isPresentInputApellidoPromoEmplUntil(int seconds) {
-		return state(Present, XP_INPUT_APELLIDO_PROMO_EMPL).wait(seconds).check();
+		return state(PRESENT, XP_INPUT_APELLIDO_PROMO_EMPL).wait(seconds).check();
 	}
 
 	public void inputApellidoPromoEmpl(String apellido) {
@@ -69,19 +69,19 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public boolean isPresentInputDNIPromoEmpl() {
-		return state(Present, XP_INPUT_DNI_PROMO_EMPL).check();
+		return state(PRESENT, XP_INPUT_DNI_PROMO_EMPL).check();
 	}
 
 	public boolean isPresentDiaNaciPromoEmpl() {
-		return state(Present, XP_DIA_NACI_PROMO_EMPL).check();
+		return state(PRESENT, XP_DIA_NACI_PROMO_EMPL).check();
 	}
 
 	public boolean isPresentMesNaciPromoEmpl() {
-		return state(Present, XP_MES_NACI_PROMO_EMPL).check();
+		return state(PRESENT, XP_MES_NACI_PROMO_EMPL).check();
 	}
 
 	public boolean isPresentAnyNaciPromoEmpl() {
-		return state(Present, XP_ANY_NACI_PROMO_EMPL).check();
+		return state(PRESENT, XP_ANY_NACI_PROMO_EMPL).check();
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public boolean isVisibleButtonAceptarPromoEmpl() {
-		return state(Visible, XP_ACEPTAR_PROMO_EMPL).check();
+		return state(VISIBLE, XP_ACEPTAR_PROMO_EMPL).check();
 	}
 
 	public void clickButtonAceptarPromoEmpl() {
@@ -126,7 +126,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public boolean isVisibleInputCodigoPromoUntil(int seconds) {
-		return state(Visible, XP_INPUT_PROMO).wait(seconds).check();
+		return state(VISIBLE, XP_INPUT_PROMO).wait(seconds).check();
 	}
 
 	public void inputCodigoPromo(String codigoPromo) {
@@ -139,19 +139,19 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 	
 	public void clickEliminarValeIfExists() {
-		if (state(Visible, XP_LINK_CANCELAR_CODIGO).check()) {
+		if (state(VISIBLE, XP_LINK_CANCELAR_CODIGO).check()) {
 			click(XP_LINK_CANCELAR_CODIGO).exec();
 		}
 	}
 	public String getImporteDescuentoEmpleado() {
-		if (state(Present, XP_DESCUENTO_EMPLEADO).check()) {
+		if (state(PRESENT, XP_DESCUENTO_EMPLEADO).check()) {
 			return getElement(XP_DESCUENTO_EMPLEADO).getText();
 		}
 		return "";
 	}
 
 	public boolean isVisibleDescuentoEmpleadoUntil(int seconds) {
-		return state(Visible, XP_DESCUENTO_EMPLEADO).wait(seconds).check();
+		return state(VISIBLE, XP_DESCUENTO_EMPLEADO).wait(seconds).check();
 	}
 	
 	public boolean validateDiscountEmpleadoNotNull() {
@@ -165,7 +165,7 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	}
 
 	public void selectMetodoAfterPositioningIn1Envio(TipoTransporte tipoTransporte) {
-		if (!isPageUntil(0)) {
+		if (!isPage(0)) {
 			clickLink1EnvioAndWaitForPage();
 		}
 		selectMetodoEnvioAfterLinkOtrosIfNeeded(tipoTransporte);
@@ -179,14 +179,14 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 			clickEditarDireccion();
 		} else {
 			String xpathLink = getXPathRadioMetodo(tipoTransporte);
-			state(Visible, xpathLink).wait(2).check();
-			click(xpathLink).type(javascript).waitLink(2).exec();
+			state(VISIBLE, xpathLink).wait(2).check();
+			click(xpathLink).type(JAVASCRIPT).waitLink(2).exec();
 			waitMillis(1000);
 		}
 	}
 	
 	private boolean isVisibleEditarDireccion() {
-		return state(Visible, XP_EDITAR_DIRECCION).check();
+		return state(VISIBLE, XP_EDITAR_DIRECCION).check();
 	}
 	private void clickEditarDireccion() {
 		click(XP_EDITAR_DIRECCION).exec();
@@ -194,17 +194,17 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 
 	public boolean isPresentBlockMetodo(TipoTransporte tipoTransporte) {
 		String xpathBLock = getXPathBlockMetodo(tipoTransporte);
-		return state(Present, xpathBLock).check();
+		return state(PRESENT, xpathBLock).check();
 	}
 
 	public void openOtrosMetodosDeEnvio() {
-		if (state(Visible, XP_OPEN_METODOS_ENVIO).wait(2).check()) {
+		if (state(VISIBLE, XP_OPEN_METODOS_ENVIO).wait(2).check()) {
 			try {
-				click(XP_OPEN_METODOS_ENVIO).type(javascript).exec();
+				click(XP_OPEN_METODOS_ENVIO).type(JAVASCRIPT).exec();
 			} catch (Exception e) {
 				click(XP_OPEN_METODOS_ENVIO).exec();
 			}
-			state(Visible, XP_CLOSE_METODOS_ENVIO).wait(2).check();
+			state(VISIBLE, XP_CLOSE_METODOS_ENVIO).wait(2).check();
 		}
 	}
 
@@ -252,21 +252,21 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		// Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no
 		// funciona así que ejecutamos un 2o
 		if (isVisibleButtonContinuarUntil(2)) {
-			click(XP_BOTON_CONTINUAR).type(javascript).exec();
+			click(XP_BOTON_CONTINUAR).type(JAVASCRIPT).exec();
 		}
 	}
 
 	public void clickContinuarAndWaitPage2() {
 		clickContinuar();
-		new Page2DatosPagoCheckoutMobil().isPageUntil(2);
+		new Page2DatosPagoCheckoutMobil().isPage(2);
 	}
 	
 	public boolean isVisibleButtonContinuarUntil(int seconds) {
-		return state(Visible, XP_BOTON_CONTINUAR).wait(seconds).check();
+		return state(VISIBLE, XP_BOTON_CONTINUAR).wait(seconds).check();
 	}
 
 	public boolean isVisibleErrorPromoUntil(int seconds) {
-		return state(Visible, XP_ERROR_PROMO).wait(seconds).check();
+		return state(VISIBLE, XP_ERROR_PROMO).wait(seconds).check();
 	}
 
 	public void selectFranjaHorariaUrgente(int posicion) {

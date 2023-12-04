@@ -4,8 +4,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.compra.pageobjects.ModalAvisoCambioPais;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
+import com.mng.robotest.tests.domains.compra.pageobjects.modals.ModalAvisoCambioPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 
 public class ModalAvisoCambioPaisSteps extends StepBase {

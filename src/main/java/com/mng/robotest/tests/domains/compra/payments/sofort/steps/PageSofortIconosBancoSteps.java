@@ -18,8 +18,8 @@ public class PageSofortIconosBancoSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la 1a página de Sofort " + SECONDS_WAIT,
-		level=Warn)
-	public boolean validateIsPageUntil(int seconds) {
+		level=WARN)
+	public boolean validateisPage(int seconds) {
 		return pageSofort1rst.isPageVisibleUntil(seconds);
 	}
 	
@@ -28,6 +28,6 @@ public class PageSofortIconosBancoSteps extends StepBase {
 		expected="Aparece la página de selección del Banco")
 	public void clickIconoSofort() { 
 		pageSofort1rst.clickGoToSofort();
-		new PageSofort2onSteps().validaIsPageUntil(3);
+		new PageSofort2onSteps().validaisPage(3);
 	}
 }

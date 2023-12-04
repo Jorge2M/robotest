@@ -45,7 +45,7 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 	
 	@Override
 	public boolean isClickableFiltroUntil(int seconds) {
-		return state(Clickable, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
+		return state(CLICKABLE, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
 	}	
 
 	@Override
@@ -70,7 +70,7 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 		}
 		getElement(typeFiltro.getXPathKondo()).click();
 		for (String textFiltro : listTextFiltros) {
-			if (!state(Visible, getXPathFiltroOption(typeFiltro, textFiltro)).check()) {
+			if (!state(VISIBLE, getXPathFiltroOption(typeFiltro, textFiltro)).check()) {
 				close();
 				return false;
 			}
@@ -82,13 +82,13 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 	public boolean isVisibleColorTags(List<Color> colors) {
 		return colors.stream()
 			.map(color -> getXPathFiltroTag(FiltroMobil.COLORES, color.getNameFiltro()))
-			.filter(xpath -> !state(Present, xpath).check())
+			.filter(xpath -> !state(PRESENT, xpath).check())
 			.findAny().isEmpty();
 	}
 
 	private void selectFiltrosAndWaitLoad(FiltroMobil typeFiltro, List<String> listTextFiltros) {
 		goAndClickFiltroButton();
-		state(Visible, typeFiltro.getXPathKondo()).wait(2).check();
+		state(VISIBLE, typeFiltro.getXPathKondo()).wait(2).check();
 		getElement(typeFiltro.getXPathKondo()).click();
 		waitLoadPage();
 		for (String textFiltro : listTextFiltros) {
@@ -110,7 +110,7 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 	private void clickFiltroOptionStaleNotSafe(FiltroMobil typeFiltro, String textFiltro) {
 		var filtroLinea = getElement(typeFiltro.getXPathKondo());
 		By byFiltroOption = By.xpath(getXPathFiltroOption(typeFiltro, textFiltro));
-		state(Clickable, byFiltroOption).wait(2).check();
+		state(CLICKABLE, byFiltroOption).wait(2).check();
 		click(filtroLinea).by(byFiltroOption).exec();
 		waitLoadPage();
 	}
@@ -121,7 +121,7 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 	
 	private boolean goAndClickFiltroButton() {
 		if (!isOpenFiltrosUntil(0)) {
-			if (state(Clickable, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(2).check()) {
+			if (state(CLICKABLE, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(2).check()) {
 				click(XP_FILTRAR_Y_ORDENAR_BUTTON).exec();
 				return isOpenFiltrosUntil(3);
 			}
@@ -130,7 +130,7 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 	}
 	
 	private boolean isOpenFiltrosUntil(int seconds) {
-		return state(Visible, ORDENAR.getXPathKondo()).wait(seconds).check();
+		return state(VISIBLE, ORDENAR.getXPathKondo()).wait(seconds).check();
 	}
 	private boolean isCloseFiltrosUntil(int seconds) {
 		for (int i=0; i<seconds; i++) {

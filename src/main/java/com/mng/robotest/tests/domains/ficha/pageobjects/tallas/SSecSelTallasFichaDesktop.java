@@ -4,8 +4,7 @@ import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallasFicha {
 	
@@ -39,12 +38,12 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	
 	@Override
 	public boolean isVisibleSelectorTallasUntil(int seconds) {
-		return (state(Visible, XP_SELECTOR_TALLAS).wait(seconds).check());
+		return (state(VISIBLE, XP_SELECTOR_TALLAS).wait(seconds).check());
 	}
 	
 	@Override
 	public String getTallaAlfSelected(AppEcom app) {
-		if (state(Present, XP_TALLA_SELECTED).check()) {
+		if (state(PRESENT, XP_TALLA_SELECTED).check()) {
 			if (isTallaUnica()) {
 			   return "unitalla";
 			}
@@ -60,7 +59,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	@Override
 	public String getTallaAlf(int posicion) {
 		String xpathTalla = "(" + XP_TALLA_ITEM + ")[" + posicion + "]";
-		if (state(Present, xpathTalla).check()) {
+		if (state(PRESENT, xpathTalla).check()) {
 			return getElement(xpathTalla).getAttribute("innerHTML");
 		}
 		return "";
@@ -69,7 +68,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	@Override
 	public String getTallaCodNum(int posicion) {
 		String xpathTalla = "(" + XP_TALLA_ITEM + ")[" + posicion + "]";
-		if (state(Present, xpathTalla).check()) {
+		if (state(PRESENT, xpathTalla).check()) {
 			return getElement(xpathTalla).getAttribute("data-value");
 		}
 		return "";
@@ -78,21 +77,21 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	@Override
 	public boolean isTallaUnica() {
 		return 
-			!state(Visible, XP_ICON_DESPLEGABLE_TALLAS).check() &&
+			!state(VISIBLE, XP_ICON_DESPLEGABLE_TALLAS).check() &&
 			getElements(XP_TALLA_ITEM).size()==1;
 	}
 	
 	@Override
 	public boolean isVisibleListTallasForSelectUntil(int seconds) {
-		return (state(Visible, XP_LIST_TALLAS_FOR_SELECT).wait(seconds).check());
+		return (state(VISIBLE, XP_LIST_TALLAS_FOR_SELECT).wait(seconds).check());
 	}
 	
 	@Override
 	public void selectTallaByValue(String codigoNumericoTalla) {
 		unfoldTallas();
 		String xpathTalla = getXPathTallaByCodigo(codigoNumericoTalla);
-		if (state(Present, xpathTalla).check()) {
-			click(xpathTalla).type(TypeClick.javascript).exec();
+		if (state(PRESENT, xpathTalla).check()) {
+			click(xpathTalla).type(JAVASCRIPT).exec();
 		}
 	}
 	
@@ -100,7 +99,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	public void selectTallaByLabel(String tallaLabel) {
 		unfoldTallas();
 		String xpathTalla = getXPathTallaByLabel(tallaLabel);
-		if (state(Clickable, xpathTalla).check()) {
+		if (state(CLICKABLE, xpathTalla).check()) {
 			getElement(xpathTalla).click();
 		}
 	}
@@ -109,7 +108,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	public void selectTallaByIndex(int posicion) {
 		unfoldTallas();
 		String xpathTallaByPos = "(" + XP_TALLA_ITEM + ")[" + posicion + "]";
-		if (state(Clickable, xpathTallaByPos).check()) {
+		if (state(CLICKABLE, xpathTallaByPos).check()) {
 			getElement(xpathTallaByPos).click();
 		}
 	}
@@ -117,13 +116,13 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	@Override
 	public void selectFirstTallaAvailable() {
 		unfoldTallas();
-		if (state(Clickable, XP_TALLA_AVAILABLE).check()) {
+		if (state(CLICKABLE, XP_TALLA_AVAILABLE).check()) {
 			getElement(XP_TALLA_AVAILABLE).click();
 		}
 	}
 	
 	private void unfoldTallas() {
-		if (state(Visible, XP_ICON_DESPLEGABLE_TALLAS).check()) {
+		if (state(VISIBLE, XP_ICON_DESPLEGABLE_TALLAS).check()) {
 			click(XP_ICON_DESPLEGABLE_TALLAS).exec();
 		}
 	}
@@ -136,7 +135,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	@Override
 	public boolean isTallaAvailable(String talla) {
 		String xpathTalla = getXPathTallaAvailable(talla);
-		return state(Present, xpathTalla).check();
+		return state(PRESENT, xpathTalla).check();
 	}
 	
 	@Override
@@ -146,7 +145,7 @@ public class SSecSelTallasFichaDesktop extends PageBase implements SSecSelTallas
 	
 	@Override
 	public boolean isVisibleAvisoSeleccionTalla() {
-		return state(Visible, XP_MSG_AVISO_TALLA).check();
+		return state(VISIBLE, XP_MSG_AVISO_TALLA).check();
 	}
 	
 	@Override

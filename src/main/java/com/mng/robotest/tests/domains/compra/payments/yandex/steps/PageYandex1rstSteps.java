@@ -20,15 +20,15 @@ public class PageYandex1rstSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página inicial de Yandex",
-			pageYandex1rst.isPage(), Warn);
+			pageYandex1rst.isPage(), WARN);
 	 	
 	 	checks.add(
 			"Figura preinformado el email del usuario: " + emailUsr,
-			pageYandex1rst.isValueEmail(emailUsr), Warn);
+			pageYandex1rst.isValueEmail(emailUsr), WARN);
 	 	
 	 	checks.add(
 			"Aparece el importe de la compra por pantalla: " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), WARN);
 	 	
 		return checks;
 	}

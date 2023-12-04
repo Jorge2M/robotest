@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.manto.steps.pedidos;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepMantoBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
@@ -15,16 +14,16 @@ import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 
-	private final PageDetallePedido pageDetallePedido = new PageDetallePedido();
+	private final PageDetallePedido pgDetallePedido = new PageDetallePedido();
 	
 	@Step (
 		description="Seleccionamos el código de pedido para acceder al Detalle", 
 		expected="Aparece la página de detalle de #{typeDetalle} correcta",
-		saveImagePage=SaveWhen.Always,
-		saveErrorData=SaveWhen.Never)
+		saveImagePage=ALWAYS, saveErrorData=NEVER)
 	public void detalleFromListaPedBol(DataPedido dataPedido, TypeDetalle typeDetalle) {
 		new PagePedidos().clickLinkPedidoInLineas(dataPedido.getCodigoPedidoManto(), typeDetalle);
 		validacionesTotalesPedido(dataPedido, typeDetalle);
@@ -41,7 +40,7 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 		TipoTransporte tipoTransporte = dataPedido.getPago().getTipoEnvioType(app);
 		checks.add(
 			"El campo \"tipo servicio\" contiene el valor <b>" + tipoTransporte.getCodigoIntercambio() + "</b> (asociado al tipo de envío " + tipoTransporte + ")",
-			pageDetallePedido.getTipoServicio().compareTo(tipoTransporte.getCodigoIntercambio())==0, Info);		
+			pgDetallePedido.getTipoServicio().compareTo(tipoTransporte.getCodigoIntercambio())==0, INFO);		
 		
 		if (typeDetalle==TypeDetalle.PEDIDO && 
 			dataPedido.getTypeEnvio()==TipoTransporte.TIENDA && 
@@ -49,7 +48,7 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 			String textEnvioTienda = dataPedido.getDataDeliveryPoint().getCodigo();
 			checks.add(
 				"En los datos de envío aparece el texto <b>ENVIO A TIENDA " + textEnvioTienda + "</b>",
-				pageDetallePedido.get1rstLineDatosEnvioText().contains(textEnvioTienda));			  
+				pgDetallePedido.get1rstLineDatosEnvioText().contains(textEnvioTienda));			  
 		}
 		return checks;
 	}
@@ -59,28 +58,28 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la pantalla de detalle del pedido",
-			pageDetallePedido.isPage(), Warn);
+			pgDetallePedido.isPage(), WARN);
 		
 		checks.add(
 			"Aparece un TOTAL de: " + dataPedido.getImporteTotalManto(),
-			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XP_IMNPORTE_TOTAL, driver), Warn);
+			ImporteScreen.isPresentImporteInElements(dataPedido.getImporteTotalManto(), dataPedido.getCodigoPais(), PageDetallePedido.XP_IMNPORTE_TOTAL, driver), WARN);
 		
 		checks.add(
 			"Las 3 líneas de la dirección de envío figuran en la dirección del pedido (" + dataPedido.getDireccionEnvio() +")",
-			pageDetallePedido.isDireccionPedido(dataPedido.getDireccionEnvio()), Warn);
+			pgDetallePedido.isDireccionPedido(dataPedido.getDireccionEnvio()), WARN);
 		
 		checks.add(
 			"Figura el código de país (" + dataPedido.getCodigoPais() + ")",
-			pageDetallePedido.isCodPaisPedido(dataPedido.getCodigoPais()), Warn);
+			pgDetallePedido.isCodPaisPedido(dataPedido.getCodigoPais()), WARN);
 		
 		Pago pago = dataPedido.getPago();
 		if (!pago.getEstados().isEmpty() &&
 			app!=AppEcom.votf) {
-			boolean isPedidoInStateTpv = pageDetallePedido.isCorrectState(dataPedido);
-			boolean pedidoInStateMenos1Null = pageDetallePedido.isPedidoInStateMenos1NULL();
+			boolean isPedidoInStateTpv = pgDetallePedido.isCorrectState(dataPedido);
+			boolean pedidoInStateMenos1Null = pgDetallePedido.isPedidoInStateMenos1NULL();
 			checks.add(
 				"Aparece uno de los resultados posibles del pago: " + pago.getEstados(),
-				isPedidoInStateTpv, Warn);
+				isPedidoInStateTpv, WARN);
 			
 			if (!isPedidoInStateTpv) {
 				checks.add(
@@ -94,10 +93,9 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 	@Step (
 		description="Seleccionamos el botón \"Ir A Generar\"", 
 		expected="Aparece la página de generación del pedido",
-		saveImagePage=SaveWhen.Always,
-		saveErrorData=SaveWhen.Never)
+		saveImagePage=ALWAYS, saveErrorData=NEVER)
 	public void clickButtonIrAGenerar(String idPedido) {
-		pageDetallePedido.clickIrAGenerarButton();
+		pgDetallePedido.clickIrAGenerarButton();
 		new PageGenerarPedidoSteps().validateIsPage(idPedido);
 	}
 }

@@ -4,7 +4,6 @@ import java.util.StringTokenizer;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -23,31 +22,32 @@ import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 
 import static com.mng.robotest.testslegacy.beans.TypePago.*;
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class CheckoutSteps extends StepBase {
 
-	private final PageCheckoutWrapper pageCheckoutWrapper = new PageCheckoutWrapper(); 
-	private final ModalDirecEnvioOldSteps modalDirecEnvioSteps = new ModalDirecEnvioOldSteps();
+	private final PageCheckoutWrapper pgCheckoutWrapper = new PageCheckoutWrapper(); 
+	private final ModalDirecEnvioOldSteps mdDirecEnvioSteps = new ModalDirecEnvioOldSteps();
 	private final SecMetodoEnvioSteps secMetodoEnvioDesktopSteps = new SecMetodoEnvioSteps();
 	private final SecTMangoSteps secTMangoSteps = new SecTMangoSteps();
 	private final SecKrediKartiSteps secKrediKartiSteps = new SecKrediKartiSteps();
 	private final SecBillpaySteps secBillpaySteps = new SecBillpaySteps();
-	private final ModalDirecFacturaSteps modalDirecFacturaSteps = new ModalDirecFacturaSteps();
-	private final ModalAvisoCambioPaisSteps modalAvisoCambioPaisSteps = new ModalAvisoCambioPaisSteps();
-	private final Page1DktopCheckoutSteps page1DktopCheckSteps = new Page1DktopCheckoutSteps();
-	private final Page1EnvioCheckoutMobilSteps page1MobilCheckSteps = new Page1EnvioCheckoutMobilSteps();
+	private final ModalDirecFacturaSteps mdDirecFacturaSteps = new ModalDirecFacturaSteps();
+	private final ModalAvisoCambioPaisSteps mdAvisoCambioPaisSteps = new ModalAvisoCambioPaisSteps();
+	private final Page1DktopCheckoutSteps pg1DktopCheckSteps = new Page1DktopCheckoutSteps();
+	private final Page1EnvioCheckoutMobilSteps pg1MobilCheckSteps = new Page1EnvioCheckoutMobilSteps();
 	private final SecTarjetaPciSteps secTarjetaPciSteps = new SecTarjetaPciSteps();
-	private final PageRedirectPasarelaLoadingSteps pageRedirectPasarelaLoadingSteps = new PageRedirectPasarelaLoadingSteps();
+	private final PageRedirectPasarelaLoadingSteps pgRedirectPasarelaLoadingSteps = new PageRedirectPasarelaLoadingSteps();
 	
 	public PageCheckoutWrapper getPageCheckoutWrapper() {
-		return pageCheckoutWrapper;
+		return pgCheckoutWrapper;
 	}
 	public Page1EnvioCheckoutMobilSteps getPage1CheckoutMobilSteps() {
-		return page1MobilCheckSteps;
+		return pg1MobilCheckSteps;
 	}
 	
 	public ModalDirecEnvioOldSteps getModalDirecEnvioSteps() {
-		return modalDirecEnvioSteps;
+		return mdDirecEnvioSteps;
 	}
 
 	public SecBillpaySteps getSecBillpaySteps() {
@@ -63,22 +63,22 @@ public class CheckoutSteps extends StepBase {
 		return secTMangoSteps;
 	}
 	public ModalDirecFacturaSteps getModalDirecFacturaSteps() {
-		return modalDirecFacturaSteps;
+		return mdDirecFacturaSteps;
 	}
 	public ModalAvisoCambioPaisSteps getModalAvisoCambioPaisSteps() {
-		return modalAvisoCambioPaisSteps;
+		return mdAvisoCambioPaisSteps;
 	}
 	
 	public void validateIsFirstPage(boolean userLogged) {
 		if (isMobile()) {
-			page1MobilCheckSteps.validateIsPage(userLogged);
+			pg1MobilCheckSteps.validateIsPage(userLogged);
 		} else {
-			page1DktopCheckSteps.validateIsPageOK();
+			pg1DktopCheckSteps.validateIsPageOK();
 		}
 	} 
 
 	public void goToMetodosPagoMobile() {
-		page1MobilCheckSteps.clickContinuarToMetodosPago();
+		pg1MobilCheckSteps.clickContinuarToMetodosPago();
 	}
 	
 	@Step (
@@ -88,9 +88,9 @@ public class CheckoutSteps extends StepBase {
 			"Aparece modal multidirección (usr logado) o " + 
 			"introducción de la dirección de envío (usr express)")
 	public void clickEditarDirecEnvio() {
-		pageCheckoutWrapper.clickEditDirecEnvio();
+		pgCheckoutWrapper.clickEditDirecEnvio();
 		if (!dataTest.isUserRegistered()) {
-			modalDirecEnvioSteps.validateIsOk();
+			mdDirecEnvioSteps.validateIsOk();
 		} else {
 			new ModalMultidirectionSteps().checkIsVisible(2);
 		}
@@ -99,10 +99,10 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation (
 		description="Acaba desapareciendo la capa de \"Cargando...\" " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	public boolean validateLoadingDisappears(int seconds) {
 		waitMillis(200); //Damos tiempo a que aparezca la capa de "Cargando"
-		return (pageCheckoutWrapper.isNoDivLoadingUntil(seconds));
+		return (pgCheckoutWrapper.isNoDivLoadingUntil(seconds));
 	}
 	
 	void despliegaYValidaMetodosPago() {
@@ -117,8 +117,8 @@ public class CheckoutSteps extends StepBase {
 	@Validation
 	public ChecksTM isCroatiaImportInFn() throws Exception {
 		var checks = ChecksTM.getNew();
-	 	String precioScreen = pageCheckoutWrapper.getPrecioTotalFromResumen(false);
-	 	String importeStr = pageCheckoutWrapper.getPrecioTotalFromResumen(true);
+	 	String precioScreen = pgCheckoutWrapper.getPrecioTotalFromResumen(false);
+	 	String importeStr = pgCheckoutWrapper.getPrecioTotalFromResumen(true);
 	 	Float importe = Float.valueOf(importeStr.replace(",", "."));
 	 	
 	 	checks.add(
@@ -135,8 +135,8 @@ public class CheckoutSteps extends StepBase {
 	@Validation
 	public ChecksTM isCroatiaImportInEuros() throws Exception {
 		var checks = ChecksTM.getNew();
-	 	String precioScreenEuros = pageCheckoutWrapper.getCroaciaPrecioTotalInEuros(false);
-	 	String importeStrEuros = pageCheckoutWrapper.getCroaciaPrecioTotalInEuros(true);
+	 	String precioScreenEuros = pgCheckoutWrapper.getCroaciaPrecioTotalInEuros(false);
+	 	String importeStrEuros = pgCheckoutWrapper.getCroaciaPrecioTotalInEuros(true);
 	 	Float importeEuros = Float.valueOf(importeStrEuros.replace(",", "."));
 	 	
 	 	checks.add(
@@ -155,7 +155,7 @@ public class CheckoutSteps extends StepBase {
 		expected="Aparecen los métodos de pagos asociados al país")
 	public void despliegaYValidaMetodosPago(boolean isEmpl) {
 		setStepDescription(getStepDescription() + ": " + dataTest.getPais().getStringPagosTest(app, isEmpl));
-		pageCheckoutWrapper.despliegaMetodosPago();
+		pgCheckoutWrapper.despliegaMetodosPago();
 		validaMetodosPagoDisponibles(isEmpl);
 	}
 	
@@ -170,7 +170,8 @@ public class CheckoutSteps extends StepBase {
 	 	checks.add(
 			"El número de pagos disponibles, logos tarjetas, coincide con el de asociados al país " + 
 			"(" + dataTest.getPais().getListPagosForTest(app, isEmpl).size() + ")",
-			pageCheckoutWrapper.isNumMetodosPagoOK(isEmpl), Warn);		
+			pgCheckoutWrapper.isNumMetodosPagoOK(isEmpl), WARN);	
+	 	
 		return checks;
 	}
 	
@@ -186,7 +187,7 @@ public class CheckoutSteps extends StepBase {
 				String pagoNameExpected = listPagos.get(i).getNombre(channel, app);
 			 	checks.add(
 					"Aparece el logo/pestaña asociado al pago <b>" + pagoNameExpected + "</b>",
-					pageCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected));	
+					pgCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected));	
 			}
 		}   
 		return checks;
@@ -228,7 +229,7 @@ public class CheckoutSteps extends StepBase {
 		}
 
 		try {
-			pageCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel, app));
+			pgCheckoutWrapper.forceClickMetodoPagoAndWait(pago.getNombre(channel, app));
 			checksDefault();
 		}
 		catch (Exception e) {
@@ -262,12 +263,12 @@ public class CheckoutSteps extends StepBase {
 	@Validation (
 		description="Se hace visible el texto bajo el método de pago: #{nombrePago} " + SECONDS_WAIT)
 	private boolean checkIsVisibleTextUnderPayment(String nombrePago, Pago pago, int seconds) {
-		return pageCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, seconds);
+		return pgCheckoutWrapper.isVisibleBloquePagoNoTRJIntegradaUntil(pago, seconds);
 	}
 	
 	@Validation (description="Aparece el botón de \"Confirmar Compra\"")
 	public boolean validateIsPresentButtonCompraDesktop() {
-		return pageCheckoutWrapper.getPage1DktopCheckout().isPresentButtonConfPago();
+		return pgCheckoutWrapper.getPage1DktopCheckout().isPresentButtonConfPago();
 	}
 	
 	private static final String TAG_TIPO_TARJ = "@TagTipoTarj";
@@ -281,78 +282,78 @@ public class CheckoutSteps extends StepBase {
 		replaceStepDescription(TAG_NUM_TARJ, pago.getNumtarj());
 	   
 		if (pago.getNumtarj()!=null && "".compareTo(pago.getNumtarj())!=0) {
-			pageCheckoutWrapper.inputNumberPci(pago.getNumtarj());
+			pgCheckoutWrapper.inputNumberPci(pago.getNumtarj());
 		}
-		pageCheckoutWrapper.inputTitularPci(pago.getTitular());
+		pgCheckoutWrapper.inputTitularPci(pago.getTitular());
 		if (pago.getMescad()!=null && "".compareTo(pago.getMescad())!=0) {
-			pageCheckoutWrapper.selectMesByVisibleTextPci(pago.getMescad());
+			pgCheckoutWrapper.selectMesByVisibleTextPci(pago.getMescad());
 		}
 		if (pago.getAnycad()!=null && "".compareTo(pago.getAnycad())!=0) {
-			pageCheckoutWrapper.selectAnyByVisibleTextPci(pago.getAnycad());
+			pgCheckoutWrapper.selectAnyByVisibleTextPci(pago.getAnycad());
 		}
 		if (pago.getCvc()!=null && "".compareTo(pago.getCvc())!=0) {
-			pageCheckoutWrapper.inputCvcPci(pago.getCvc());
+			pgCheckoutWrapper.inputCvcPci(pago.getCvc());
 		}
 		if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0) {
-			pageCheckoutWrapper.inputDniPci(pago.getDni());   
+			pgCheckoutWrapper.inputDniPci(pago.getDni());   
 		}
 
-		pageCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
-		pageRedirectPasarelaLoadingSteps.validateDisappeared(5);
+		pgCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
+		pgRedirectPasarelaLoadingSteps.validateDisappeared(5);
 	}
 
 	@Validation (
 		description="Está disponible una tarjeta guardada de tipo #{tipoTarjeta}",
-		level=Warn)
+		level=WARN)
 	public boolean isTarjetaGuardadaAvailable(String tipoTarjeta) {
-		return (pageCheckoutWrapper.isAvailableTrjGuardada(tipoTarjeta));
+		return (pgCheckoutWrapper.isAvailableTrjGuardada(tipoTarjeta));
 	}
 	
 	@Step (
 		description="Seleccionamos la tarjeta guardada, si nos lo pide introducimos el cvc #{cvc} y pulsamos el botón \"Confirmar pago\"",
 		expected="Aparece la página de resultado OK")
 	public void selectTrjGuardadaAndConfirmPago(DataPago dataPago, String cvc) {
-		pageCheckoutWrapper.clickRadioTrjGuardada();
-		pageCheckoutWrapper.inputCvcTrjGuardadaIfVisible(cvc);
-		pageCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
-		pageRedirectPasarelaLoadingSteps.validateDisappeared(5);
+		pgCheckoutWrapper.clickRadioTrjGuardada();
+		pgCheckoutWrapper.inputCvcTrjGuardadaIfVisible(cvc);
+		pgCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
+		pgRedirectPasarelaLoadingSteps.validateDisappeared(5);
 	}
 
 	@Step (
 		description="Seleccionar el radiobutton \"Quiero recibir una factura\"", 
 		expected="Aparece el modal para la introducción de la dirección de facturación")
 	public void clickSolicitarFactura() {
-		pageCheckoutWrapper.clickSolicitarFactura();
-		modalDirecFacturaSteps.validateIsOk();
+		pgCheckoutWrapper.clickSolicitarFactura();
+		mdDirecFacturaSteps.validateIsOk();
 	}
 
 	@Step (
 		description="Seleccionamos el botón \"Confirmar Pago\"", 
 		expected="Aparece una pasarela de pago",
-		saveImagePage=SaveWhen.Always)
+		saveImagePage=ALWAYS)
 	public void pasoBotonAceptarCompraDesktop() {
-		pageCheckoutWrapper.getPage1DktopCheckout().clickConfirmarPago();
+		pgCheckoutWrapper.getPage1DktopCheckout().clickConfirmarPago();
 	}	  
 	
 	@Validation (
 		description="Aparece el botón de \"Confirmar Pago\" " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	private boolean checkAfterClickVerResumen(int seconds) {
-		return (pageCheckoutWrapper.getPage2MobilCheckout().isClickableButtonFinalizarCompraUntil(seconds));
+		return (pgCheckoutWrapper.getPage2MobilCheckout().isClickableButtonFinalizarCompraUntil(seconds));
 	}
 			
 	@Step (
 		description="Seleccionamos el botón \"Finalizar Compra\" (previamente esperamos hasta 20 segundos a que desaparezca la capa \"Espera unos segundos...\")", 
 		expected="Aparece una pasarela de pago",
-		saveImagePage=SaveWhen.Always)
+		saveImagePage=ALWAYS)
 	public void pasoBotonConfirmarPagoCheckout3Mobil() {
 		try {
-			pageCheckoutWrapper.getPage2MobilCheckout().clickFinalizarCompraAndWait(20);
+			pgCheckoutWrapper.getPage2MobilCheckout().clickFinalizarCompraAndWait(20);
 		}
 		catch (Exception e) {
 			Log4jTM.getLogger().warn("Problem in click Confirm payment button", e);
 		}
-		pageRedirectPasarelaLoadingSteps.validateDisappeared(5);
+		pgRedirectPasarelaLoadingSteps.validateDisappeared(5);
 	}	
 	
 	private static final String TAG_TARJETA = "@TagTarjeta";
@@ -362,7 +363,7 @@ public class CheckoutSteps extends StepBase {
 		expected="Aparecen los datos para la introducción del 1er apellido y el nif")
 	public void inputTarjetaEmplEnCodPromo(Pais pais, AccesoEmpl accesoEmpl) {
 		replaceStepDescription(TAG_TARJETA, accesoEmpl.getTarjeta());
-		pageCheckoutWrapper.inputCodigoPromoAndAccept(accesoEmpl.getTarjeta());
+		pgCheckoutWrapper.inputCodigoPromoAndAccept(accesoEmpl.getTarjeta());
 		checkAfterInputTarjetaEmpleado(pais, accesoEmpl);
 		checksDefault();
 	}
@@ -373,9 +374,9 @@ public class CheckoutSteps extends StepBase {
 		int seconds = 5;
 	 	checks.add(
 			"Aparece el campo de introducción del primer apellido " + getLitSecondsWait(seconds),
-			pageCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(seconds));
+			pgCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(seconds));
 		
-		boolean isPresentInputDni = pageCheckoutWrapper.isPresentInputDNIPromoEmpl();
+		boolean isPresentInputDni = pgCheckoutWrapper.isPresentInputDNIPromoEmpl();
 		if (accesoEmpl.getNif()!=null) {
 		 	checks.add(
 				"Aparece el campo de introducción del DNI/Pasaporte",
@@ -386,7 +387,7 @@ public class CheckoutSteps extends StepBase {
 				!isPresentInputDni);
 		}
 		
-		boolean isPresentInputFechaNac = pageCheckoutWrapper.isPresentDiaNaciPromoEmpl();
+		boolean isPresentInputFechaNac = pgCheckoutWrapper.isPresentDiaNaciPromoEmpl();
 	 	checks.add(
 			"No aparece el campo de introducción de la fecha de nacimiento",
 			!isPresentInputFechaNac);	
@@ -404,24 +405,24 @@ public class CheckoutSteps extends StepBase {
 		
 		if (accesoEmpl.getNif()!=null) {
 			getCurrentStep().addRightDescriptionText("Introducir el NIF del usuario " + accesoEmpl.getNif() + ". ");
-			pageCheckoutWrapper.inputDNIPromoEmpl(accesoEmpl.getNif());
+			pgCheckoutWrapper.inputDNIPromoEmpl(accesoEmpl.getNif());
 		}
-		pageCheckoutWrapper.inputApellidoPromoEmpl(primerApellido);
-		pageCheckoutWrapper.clickButtonAceptarPromoEmpl();
+		pgCheckoutWrapper.inputApellidoPromoEmpl(primerApellido);
+		pgCheckoutWrapper.clickButtonAceptarPromoEmpl();
 		
 		validaResultImputPromoEmpl();
 	}
 		
 	public void validaResultImputPromoEmpl() {
 		if (isMobile()) {
-			page1MobilCheckSteps.validaResultImputPromoEmpl();
+			pg1MobilCheckSteps.validaResultImputPromoEmpl();
 		} else {
-			page1DktopCheckSteps.validaResultImputPromoEmpl();
+			pg1DktopCheckSteps.validaResultImputPromoEmpl();
 		}
 	}	
 	
 	public void validaIsVersionChequeRegalo(ChequeRegalo chequeRegalo) {
-		page1DktopCheckSteps.validateIsVersionChequeRegalo(chequeRegalo);
+		pg1DktopCheckSteps.validateIsVersionChequeRegalo(chequeRegalo);
 	}
 	
 	private static final String TAG_NOMBRE_BANCO = "@TagNombreBanco";
@@ -435,18 +436,18 @@ public class CheckoutSteps extends StepBase {
 		}
 		replaceStepDescription(TAG_NOMBRE_BANCO, nombreBanco);
 			
-		pageCheckoutWrapper.selectBancoEPS(nombreBanco);
+		pgCheckoutWrapper.selectBancoEPS(nombreBanco);
 		checkIsVisibleBank(nombreBanco);
 	}
 	
 	@Validation (description="Aparece el banco \"#{ombreBanco}\" en el cuadro de selección")
 	private boolean checkIsVisibleBank(String nombreBanco) {
-		return pageCheckoutWrapper.isBancoSeleccionado(nombreBanco);
+		return pgCheckoutWrapper.isBancoSeleccionado(nombreBanco);
 	}
 
 	@Validation (description="Aparece el botón que permite aplicar los Loyalty Points")
 	public boolean validateBlockLoyalty() {
-		return pageCheckoutWrapper.isVisibleButtonForApplyLoyaltyPoints();
+		return pgCheckoutWrapper.isVisibleButtonForApplyLoyaltyPoints();
 	}
 	
 	@Step (
@@ -461,8 +462,8 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	public void loyaltyPointsApplyDesktop() {
-		float subTotalInicial = UtilsMangoTest.round(pageCheckoutWrapper.getImportSubtotalDesktop(), 2);
-		float loyaltyPointsNoRound = pageCheckoutWrapper.applyAndGetLoyaltyPoints();
+		float subTotalInicial = pgCheckoutWrapper.getImportSubtotalRounded(2);
+		float loyaltyPointsNoRound = pgCheckoutWrapper.applyAndGetLoyaltyPoints();
 		float loyaltyPoints = UtilsMangoTest.round(loyaltyPointsNoRound, 2);
 		validateLoyaltyPointsDiscountDesktopUntil(loyaltyPoints, subTotalInicial, 3);
 		checksDefault();
@@ -476,7 +477,7 @@ public class CheckoutSteps extends StepBase {
 			float descuento, float subtotalInicial, int seconds) {
 		
 		for (int i=0; i<seconds; i++) {
-			float subTotalActual = pageCheckoutWrapper.getImportSubtotalDesktop();
+			float subTotalActual = pgCheckoutWrapper.getImportSubtotal();
 			float estimado = UtilsMangoTest.round(subtotalInicial - descuento, 2);
 			if (estimado == subTotalActual) {
 				return true;
@@ -487,7 +488,7 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	public void loyaltyPointsApplyMobil() {
-		float loyaltyPointsNoRound = pageCheckoutWrapper.applyAndGetLoyaltyPoints();
+		float loyaltyPointsNoRound = pgCheckoutWrapper.applyAndGetLoyaltyPoints();
 		float loyaltyPoints = UtilsMangoTest.round(loyaltyPointsNoRound, 2);
 		validateLoyaltyPointsDiscountMobilUntil(loyaltyPoints, 3);
 	}
@@ -495,7 +496,7 @@ public class CheckoutSteps extends StepBase {
 	@Validation(description="Aparece un descuento aplicado de #{descuento} " + SECONDS_WAIT)
 	public boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int seconds) {
 		for (int i=0; i<seconds; i++) {
-			float discountApplied = UtilsMangoTest.round(pageCheckoutWrapper.getDiscountLoyaltyAppliedMobil(), 2);
+			float discountApplied = UtilsMangoTest.round(pgCheckoutWrapper.getDiscountLoyaltyAppliedMobil(), 2);
 			if (discountApplied == descuento) {
 				return true;
 			}
@@ -506,7 +507,20 @@ public class CheckoutSteps extends StepBase {
 	
 	@Validation(description="Aparece un mensaje de error de <b>Pago no completado</b> " + SECONDS_WAIT)
 	public boolean isVisibleMessageErrorPayment(int seconds) {
-		return pageCheckoutWrapper.isVisibleMessageErrorPago(seconds);
+		return pgCheckoutWrapper.isVisibleMessageErrorPago(seconds);
+	}
+	
+	public boolean checkTotalImport() {
+		float sumImportProducts = pgCheckoutWrapper.getSumProductImports();
+		float subtotal = pgCheckoutWrapper.getImportSubtotal();
+		return checkTotalImport(subtotal, sumImportProducts);
+	}
+	
+	@Validation(description=
+		"Cuadra el subtotal <b>#{subTotal}</b> con " + 
+		"la suma de los importes de los productos <b>#{sumImportProducts}</b>")
+	private boolean checkTotalImport(float subTotal, float sumImportProducts) {
+		return subTotal == sumImportProducts;
 	}
 	
 	private boolean isMobile() {

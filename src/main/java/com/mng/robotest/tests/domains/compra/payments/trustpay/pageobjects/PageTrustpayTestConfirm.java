@@ -29,7 +29,7 @@ public class PageTrustpayTestConfirm extends PageBase {
 	
 	public boolean isPresentButton(typeButtons typeButton) {
 		String xpathButton = getXPathButton(typeButton);
-		return state(Present, xpathButton).check();
+		return state(PRESENT, xpathButton).check();
 	}
 
 	public void clickButton(typeButtons typeButton) {

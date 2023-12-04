@@ -29,11 +29,11 @@ public class PageLanding extends PageBase {
 	private CommsHeaderBanner commsHeaderBanner = new CommsHeaderBanner();
 
 	public boolean isPage() {
-		return isPageUntil(0);
+		return isPage(0);
 	}
 	
-	public boolean isPageUntil(int seconds) {
-		return state(Present, XP_CONTENIDO).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(PRESENT, XP_CONTENIDO).wait(seconds).check();
 	}
 	
 	public boolean isPageDependingCountry() {
@@ -55,14 +55,14 @@ public class PageLanding extends PageBase {
 	}	
 	
 	public String getCodigoPais() {
-		if (state(Present, XP_MAIN_CONTENT_PAIS).check()) {
+		if (state(PRESENT, XP_MAIN_CONTENT_PAIS).check()) {
 			return getElement(XP_MAIN_CONTENT_PAIS).getAttribute("data-pais");
 		}
 		return "";
 	}
 	
 	public boolean haySliders() {
-		return state(Visible, XP_SLIDER).check();
+		return state(VISIBLE, XP_SLIDER).check();
 	}
 	
 	public boolean hayMaps() {
@@ -98,16 +98,16 @@ public class PageLanding extends PageBase {
 		boolean banners = true;
 		String xpathImg = "";
 		try {
-			if (state(Present, "//*[@class[contains(.,'bannerHome')]]").check()) {
+			if (state(PRESENT, "//*[@class[contains(.,'bannerHome')]]").check()) {
 				xpathImg = "//*[@class[contains(.,'bannerHome')]]//img";
 			} else {
-				if (state(Present, "//*[@id[contains(.,'homeContent')]]").check()) {
+				if (state(PRESENT, "//*[@id[contains(.,'homeContent')]]").check()) {
 					xpathImg = "//*[@id[contains(.,'homeContent')]]//img";
 				} else {
-					if (state(Present, "//*[@class[contains(.,'contentHolder')]]").check()) {
+					if (state(PRESENT, "//*[@class[contains(.,'contentHolder')]]").check()) {
 						xpathImg = "//*[@class[contains(.,'contentHolder')]]//iframe";
 					} else {
-						if (state(Present, "//*[@id[contains(.,'bodyContent')]]").check()) {
+						if (state(PRESENT, "//*[@id[contains(.,'bodyContent')]]").check()) {
 							xpathImg = "//*[@id[contains(.,'bodyContent')]]//img";
 						} else {
 							banners = false;
@@ -115,7 +115,7 @@ public class PageLanding extends PageBase {
 					}
 				}
 			}
-			state(Present, xpathImg).wait(15).check();
+			state(PRESENT, xpathImg).wait(15).check();
 		} catch (Exception e) {
 			banners = false;
 		}
@@ -130,7 +130,7 @@ public class PageLanding extends PageBase {
 		}
 
 		var pageFicha = PageFicha.of(Channel.desktop);
-		if (pageFicha.isPageUntil(0)) {
+		if (pageFicha.isPage(0)) {
 			return true;
 		}
 		var banners = BannerObjectFactory.make(BannerType.STANDAR);
@@ -182,7 +182,7 @@ public class PageLanding extends PageBase {
 	}
 
 	public boolean isPresentMainContent() {
-		return state(Present, getXPathMainContent()).check();
+		return state(PRESENT, getXPathMainContent()).check();
 	}
 	
 	public boolean isVisibleCommsHeaderBannerLoyalty(int seconds) {
@@ -190,7 +190,7 @@ public class PageLanding extends PageBase {
 	}
 	
 	public boolean isVisibleAnyElementLoyalty() {
-		return state(Visible, XP_LOYALTY_ELEMENT).check();
+		return state(VISIBLE, XP_LOYALTY_ELEMENT).check();
 	}
 
 }

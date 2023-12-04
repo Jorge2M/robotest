@@ -23,16 +23,16 @@ public class ModalCambioPais extends PageBase {
 	}
 	
 	public boolean isVisibleModalUntil(int seconds) {
-		return state(Visible, XP_MODAL).wait(seconds).check();
+		return state(VISIBLE, XP_MODAL).wait(seconds).check();
 	}
 	
 	public boolean isVisibleModalSelecProvincia() {
-		return state(Visible, XP_MODAL_SELECT_PROVINCIA).check();
+		return state(VISIBLE, XP_MODAL_SELECT_PROVINCIA).check();
 	}
 	
 	public boolean isLinkToConfirmPais(String hrefPais) {
 		String xpath = getXPathLinkToConfirmPais(hrefPais);
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 	
 	public Pais getPaisOfButtonForChangePais(List<Pais> listPaisesCandidatos, String urlBaseTest) 
@@ -51,7 +51,7 @@ public class ModalCambioPais extends PageBase {
 	
 	public boolean isButtonToChangePais(String urlAccesoPais) {
 		String xpath = getXPathButtonToChangePais(urlAccesoPais);
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 	
 	public String getTextPaisButtonChagePais() {
@@ -71,7 +71,7 @@ public class ModalCambioPais extends PageBase {
 	public void closeModalIfVisible() {
 		if (isVisibleModalUntil(0)) {
 			getElementVisible(XP_ASPA_CLOSE).click();
-			state(Invisible, XP_MODAL).wait(1).check();
+			state(INVISIBLE, XP_MODAL).wait(1).check();
 		}
 	}
 	

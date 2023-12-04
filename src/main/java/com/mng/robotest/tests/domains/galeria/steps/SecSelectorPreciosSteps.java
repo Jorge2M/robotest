@@ -12,16 +12,16 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecSelectorPreciosSteps extends StepBase {
 
-	private final PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(Channel.desktop, app, dataTest.getPais());
+	private final PageGaleriaDesktop pgGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(Channel.desktop, app, dataTest.getPais());
 	
 	private static final String TAG_MINIMO = "[MINIMO]";
 	private static final String TAG_MAXIMO = "[MAXIMO]";
 	
 	@Validation (
 		description="Es visible el selector de precios",
-		level=Warn)
+		level=WARN)
 	public boolean validaIsSelector() {
-		return pageGaleriaDesktop.isVisibleSelectorPrecios();
+		return pgGaleriaDesktop.isVisibleSelectorPrecios();
 	}
 
 	@Step (
@@ -30,16 +30,16 @@ public class SecSelectorPreciosSteps extends StepBase {
 	public void seleccionaIntervalo() throws Exception {
 		var dataFilter = new DataFilterPrecios();
 		if (channel==Channel.desktop) {
-			pageGaleriaDesktop.showFilters();
+			pgGaleriaDesktop.showFilters();
 		}
-		dataFilter.minimoOrig = pageGaleriaDesktop.getMinImportFilter();
-		dataFilter.maximoOrig = pageGaleriaDesktop.getMaxImportFilter();
+		dataFilter.minimoOrig = pgGaleriaDesktop.getMinImportFilter();
+		dataFilter.maximoOrig = pgGaleriaDesktop.getMaxImportFilter();
 
-		pageGaleriaDesktop.clickIntervalImportFilter(30, 30);
-		dataFilter.minimoFinal = pageGaleriaDesktop.getMinImportFilter();
-		dataFilter.maximoFinal = pageGaleriaDesktop.getMaxImportFilter();
+		pgGaleriaDesktop.clickIntervalImportFilter(30, 30);
+		dataFilter.minimoFinal = pgGaleriaDesktop.getMinImportFilter();
+		dataFilter.maximoFinal = pgGaleriaDesktop.getMaxImportFilter();
 		if (channel==Channel.desktop) {
-			pageGaleriaDesktop.acceptFilters();
+			pgGaleriaDesktop.acceptFilters();
 		}
 		
 		replaceStepDescription(TAG_MINIMO, String.valueOf(dataFilter.minimoFinal));
@@ -54,16 +54,16 @@ public class SecSelectorPreciosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.minimoOrig + "</b> y ahora es <b>" + dataFilter.minimoFinal + "</b>",
-			dataFilter.minimoFinal > dataFilter.minimoOrig, Warn);
+			dataFilter.minimoFinal > dataFilter.minimoOrig, WARN);
 		
 		checks.add(
 			"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.maximoOrig + "</b> y ahora es <b>" + dataFilter.maximoFinal + "</b>",
-			dataFilter.maximoFinal < dataFilter.maximoOrig, Warn);
+			dataFilter.maximoFinal < dataFilter.maximoOrig, WARN);
 		
 		var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 		checks.add(
 			"Todos los precios están en el intervalo [" + dataFilter.minimoFinal + ", " + dataFilter.maximoFinal + "]",
-			pageGaleria.preciosInIntervalo(dataFilter.minimoFinal, dataFilter.maximoFinal), Warn);
+			pageGaleria.preciosInIntervalo(dataFilter.minimoFinal, dataFilter.maximoFinal), WARN);
 		
 		return checks;
 	}

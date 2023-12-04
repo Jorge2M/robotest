@@ -13,8 +13,8 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecTarjetaPciSteps extends StepBase {
 	
-	private final PageCheckoutWrapper pageCheckoutSteps = new PageCheckoutWrapper();
-	private final SecTarjetaPci secTarjetaPci = pageCheckoutSteps.getSecTarjetaPci();
+	private final PageCheckoutWrapper pgCheckoutSteps = new PageCheckoutWrapper();
+	private final SecTarjetaPci secTarjetaPci = pgCheckoutSteps.getSecTarjetaPci();
 	
 	@Validation
 	public ChecksTM validateIsSectionOk(Pago pago) {
@@ -24,7 +24,7 @@ public class SecTarjetaPciSteps extends StepBase {
 		 	checks.add(
 				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel, app) + 
 				getLitSecondsWait(seconds),
-				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel, app), seconds), Warn);	
+				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel, app), seconds), WARN);	
 		}
 		
 	 	checks.add(

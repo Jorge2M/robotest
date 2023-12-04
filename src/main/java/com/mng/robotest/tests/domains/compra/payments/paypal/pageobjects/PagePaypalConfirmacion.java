@@ -9,8 +9,8 @@ public class PagePaypalConfirmacion extends PageBase {
 	private static final String XP_REVIEW_PAGE = "//div[@class[contains(.,'review-page')]]";
 	private static final String XP_CONTINUE_BUTTON = "//input[@id='confirmButtonTop']";
 
-	public boolean isPageUntil(int seconds) {
-		return state(Visible, XP_REVIEW_PAGE).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(VISIBLE, XP_REVIEW_PAGE).wait(seconds).check();
 	}
 
 	public void clickContinuarButton() {

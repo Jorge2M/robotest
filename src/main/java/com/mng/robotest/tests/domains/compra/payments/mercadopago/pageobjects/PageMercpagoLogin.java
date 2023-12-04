@@ -25,15 +25,15 @@ public class PageMercpagoLogin extends PageBase {
 	}
 	
 	public boolean isInputUserVisible() {
-		return state(Visible, XP_INPUT_USER).check();
+		return state(VISIBLE, XP_INPUT_USER).check();
 	}
 	
 	public boolean isInputPasswordVisible() {
-		return state(Visible, XP_INPUT_PASSWORD).check();
+		return state(VISIBLE, XP_INPUT_PASSWORD).check();
 	}	
 	
 	public boolean isVisibleBotonContinuarPageId() {
-		return state(Visible, XP_BOTON_CONTINUAR).check();
+		return state(VISIBLE, XP_BOTON_CONTINUAR).check();
 	}
 
 	public void clickBotonContinuar() {

@@ -3,8 +3,6 @@ package com.mng.robotest.tests.domains.compra.payments.sepa.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
@@ -12,6 +10,7 @@ import com.mng.robotest.tests.domains.compra.payments.sepa.pageobjects.PageSepa1
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
 public class PageSepa1rstSteps extends StepBase {
 	
@@ -22,13 +21,13 @@ public class PageSepa1rstSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePago + "</b>",
-			pageSepa1rst.isPresentIconoSepa(channel), Warn);
+			pageSepa1rst.isPresentIconoSepa(channel), WARN);
 		
-		State stateVal = Warn;
-		StoreType store = StoreType.Evidences;
+		var stateVal = WARN;
+		var store = EVIDENCES;
 		if (channel.isDevice()) {
-			stateVal = Info;
-			store = StoreType.None;
+			stateVal = INFO;
+			store = NONE;
 		}
 		checks.add(
 		    Check.make(
@@ -38,15 +37,15 @@ public class PageSepa1rstSteps extends StepBase {
 		
 		checks.add(
 			"Aparece la cabecera indicando la 'etapa' del pago",
-			pageSepa1rst.isPresentCabeceraStep(), Warn);		
+			pageSepa1rst.isPresentCabeceraStep(), WARN);		
 		
 		if (channel==Channel.desktop) {
 			checks.add(
 				"Figura el campo de introducción del titular",
-				pageSepa1rst.isPresentInputTitular(), Warn);
+				pageSepa1rst.isPresentInputTitular(), WARN);
 			checks.add(
 				"Figura el campo de introducción del la cuenta",
-				pageSepa1rst.isPresentInputCuenta(), Warn);
+				pageSepa1rst.isPresentInputCuenta(), WARN);
 			checks.add(
 				"Figura un botón de pago",
 				pageSepa1rst.isPresentButtonPagoDesktop());

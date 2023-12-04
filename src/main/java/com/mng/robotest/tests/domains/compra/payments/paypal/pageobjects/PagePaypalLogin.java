@@ -15,20 +15,20 @@ public class PagePaypalLogin extends PageBase {
 	private static final String XP_INICIAR_SESION_BUTTON = XP_CONTAINER + "//div/button[@id='btnLogin' or @id='login']";
 	
 	public boolean isPage() {
-		return isPageUntil(0);
+		return isPage(0);
 	}
-	public boolean isPageUntil(int seconds) {
-		return state(Present, XP_INPUT_PASSWORD).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(PRESENT, XP_INPUT_PASSWORD).wait(seconds).check();
 	}
 	
 	public void inputUserAndPassword(String userMail, String password) {
 		waitLoadPage(); //For avoid StaleElementReferenceException
 		sendKeysWithRetry(userMail, By.xpath(XP_INPUT_LOGIN), 2, driver);
-		if (state(Visible, XP_INPUT_PASSWORD).check()) {
+		if (state(VISIBLE, XP_INPUT_PASSWORD).check()) {
 			getElement(XP_INPUT_PASSWORD).sendKeys(password);
 		} else {
 			new PagePaypalLogin().clickIniciarSesion();
-			if (state(Visible, XP_INPUT_PASSWORD).wait(3).check()) {
+			if (state(VISIBLE, XP_INPUT_PASSWORD).wait(3).check()) {
 				getElement(XP_INPUT_PASSWORD).sendKeys(password);
 			}
 		}

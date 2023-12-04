@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -16,6 +15,7 @@ import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
 public class CheckerAnalitica implements Checker {
 
@@ -36,7 +36,7 @@ public class CheckerAnalitica implements Checker {
 				Check.make(
 				    "La siguiente sentencia Js retorna 1 \"" + commandJs + "\"",
 				    stringIs(result, 1), getLevel())
-				.store(StoreType.None).build());
+				.store(NONE).build());
 		}
 		catch (JavascriptException e) {
 			Log4jTM.getLogger().warn("Problema executing JavaScript for check Analitics {}", e.getMessage());
@@ -50,13 +50,13 @@ public class CheckerAnalitica implements Checker {
 		if (inputParamsSuite!=null && 
 			inputParamsSuite.getApp()!=null &&
 			inputParamsSuite.getApp()==AppEcom.votf) {
-			return Info;
+			return INFO;
 		}
 		
 		//TODO actualmente hay muchos errores -> reportar a Alberte
 		//mientras tanto lo ponemos en Warn
 		if (UtilsTest.todayBeforeDate("2023-11-01")) {
-			return Warn;
+			return WARN;
 		}
 		return level;
 	}

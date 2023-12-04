@@ -12,7 +12,7 @@ public class PageOtpPaymayaSteps {
 	
 	@Validation (
 		description="Aparece la página de introducción del OTP de Paymaya",
-		level=Warn)
+		level=WARN)
 	public boolean checkPage() {
 		return pageOtpPaymaya.isPage();
 	}

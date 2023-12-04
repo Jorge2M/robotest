@@ -22,15 +22,15 @@ public class PageBolsasMantoSteps extends StepMantoBase {
 		checks.setExistsLinkCodPed(isPresentLinkPedido);
 	 	checks.add(
 			"En la columna 1 aparece el código de pedido: " + dataPedido.getCodigoPedidoManto() + " " + getLitSecondsWait(seconds),
-			isPresentLinkPedido, Warn);
+			isPresentLinkPedido, WARN);
 	 	
 	 	checks.add(
 			"Aparece una sola bolsa",
-			pageBolsas.getNumLineas()==1, Warn);
+			pageBolsas.getNumLineas()==1, WARN);
 	 	
 	 	checks.add(
 			"En la columna 7 aparece el email asociado: " + dataPedido.getEmailCheckout(),
-			pageBolsas.presentCorreoInBolsa(dataPedido.getEmailCheckout()), Warn);
+			pageBolsas.presentCorreoInBolsa(dataPedido.getEmailCheckout()), WARN);
 		
 		return checks;
 	}

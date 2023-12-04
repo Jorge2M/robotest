@@ -41,7 +41,7 @@ public class PagePostfCodSeg extends PageBase {
 	}
 	
 	public boolean isPresentButtonAceptar() {
-		return state(Present, XP_ACEPTAR_BUTTON).check();
+		return state(PRESENT, XP_ACEPTAR_BUTTON).check();
 	}
 
 	public void clickAceptarButton() {
@@ -49,11 +49,11 @@ public class PagePostfCodSeg extends PageBase {
 	}
 	
 	public boolean isPresentInputCodSeg() {
-		return state(Present, XP_INPUT_COD_SEG).check();
+		return state(PRESENT, XP_INPUT_COD_SEG).check();
 	}
 	
 	public boolean isPresentButtonWeiter() {
-		return state(Present, XP_BUTTON_WEITER).check();
+		return state(PRESENT, XP_BUTTON_WEITER).check();
 	}
 	
 	public void inputCodigoSeguridad(String codigoSeg) {

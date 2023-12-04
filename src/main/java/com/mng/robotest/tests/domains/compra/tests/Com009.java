@@ -5,7 +5,7 @@ import java.time.Instant;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
-import com.mng.robotest.tests.domains.compra.pageobjects.DirectionData;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DirectionData;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.ModalDirecEnvioNewSteps;

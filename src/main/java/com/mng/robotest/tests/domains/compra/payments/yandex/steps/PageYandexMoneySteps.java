@@ -28,11 +28,11 @@ public class PageYandexMoneySteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el input para el <b>Payment Code</b>",
-			pageYandexMoney.isVisibleInputPaymentCode(), Warn);
+			pageYandexMoney.isVisibleInputPaymentCode(), WARN);
 	 	
 	 	checks.add(
 			"Aparece el input para el importe",
-			pageYandexMoney.isVisibleInputImport(), Warn);
+			pageYandexMoney.isVisibleInputImport(), WARN);
 	 	
 	 	return checks;
 	}

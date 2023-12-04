@@ -62,7 +62,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	
 	@Override
 	public boolean isVisibleMenu() {
-		return state(Visible, getXPathMenu()).check();
+		return state(VISIBLE, getXPathMenu()).check();
 	}
 	@Override
 	public boolean isVisibleSubMenus() {

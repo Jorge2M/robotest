@@ -10,7 +10,7 @@ public class ModalActPoliticaPrivacidad extends PageBase {
 	private static final String XP_BUTTON_OK = XP_MODAL + "//input[@type='submit']";
 	
 	public boolean isVisible() {
-		return state(Visible, XP_MODAL).check();
+		return state(VISIBLE, XP_MODAL).check();
 	}
 	
 	public void clickOk() {

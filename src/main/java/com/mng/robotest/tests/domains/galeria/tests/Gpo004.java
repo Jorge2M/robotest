@@ -15,7 +15,7 @@ import static com.mng.robotest.testslegacy.data.Color.*;
 
 public class Gpo004 extends TestBase {
 
-	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
+	private final PageGaleriaSteps pgGaleriaSteps = new PageGaleriaSteps();
 	private final DataForScrollStep dataScroll = new DataForScrollStep();
 	
 	public Gpo004() {
@@ -58,17 +58,17 @@ public class Gpo004 extends TestBase {
 
 	private void scrollToSecondPage() throws Exception {
 		dataScroll.setNumPageToScroll(2);
-		pageGaleriaSteps.scrollFromFirstPage(dataScroll);
+		pgGaleriaSteps.scrollFromFirstPage(dataScroll);
 	}
 
 	private void selectArticleInOtherLabel() {
-		pageGaleriaSteps.selectArticuloEnPestanyaAndBack(40);
+		pgGaleriaSteps.selectArticuloEnPestanyaAndBack(40);
 	}
 
 	private int scrollToLastAndSelectArticle() throws Exception {
 		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
-		var datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
-		pageGaleriaSteps.selectArticulo(45);
+		var datosScrollFinalGaleria = pgGaleriaSteps.scrollFromFirstPage(dataScroll);
+		pgGaleriaSteps.selectArticulo(45);
 		return datosScrollFinalGaleria.getArticulosTotalesPagina();
 	}
 
@@ -80,7 +80,7 @@ public class Gpo004 extends TestBase {
 		dataScroll.setValidateArticlesExpected(true);
 		dataScroll.setNumArticlesExpected(articulosTotalesPagina);
 		dataScroll.setValidaImgBroken(false);
-		pageGaleriaSteps.scrollFromFirstPage(dataScroll);
+		pgGaleriaSteps.scrollFromFirstPage(dataScroll);
 	}
 
 }

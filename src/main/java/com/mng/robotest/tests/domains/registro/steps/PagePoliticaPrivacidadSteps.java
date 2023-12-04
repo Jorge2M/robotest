@@ -8,8 +8,8 @@ public class PagePoliticaPrivacidadSteps extends StepBase {
 
 	@Validation (
 		description="Aparece la página con la política de privacidad " + SECONDS_WAIT)
-	public boolean checkIsPageUntil(int seconds) {
-		return new PagePoliticaPrivacidad().isPageUntil(seconds);
+	public boolean checkisPage(int seconds) {
+		return new PagePoliticaPrivacidad().isPage(seconds);
 	}
 	
 }

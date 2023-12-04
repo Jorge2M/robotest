@@ -35,7 +35,7 @@ public class SecMenuLateralDesktop extends PageBase {
 	public boolean isSelectedMenu(MenuLateralDesktop menu, int seconds) {
 		new SecFiltrosDesktopKondo().showLateralMenus();
 		String linkMenuSel = getXPathLinkMenuSelected(menu) ;
-		return (state(Visible, By.xpath(linkMenuSel)).wait(seconds).check());
+		return (state(VISIBLE, By.xpath(linkMenuSel)).wait(seconds).check());
 	}
 
 	public void clickMenu(MenuLateralDesktop menu) {
@@ -49,7 +49,7 @@ public class SecMenuLateralDesktop extends PageBase {
 	 */
 	public boolean isVisibleMenu(MenuLateralDesktop menu) {
 		new SecFiltrosDesktopKondo().showLateralMenus();
-		return state(Visible, getXPathLinkMenu(menu)).check();
+		return state(VISIBLE, getXPathLinkMenu(menu)).check();
 	}
 	
 	private static final String XP_CAPA_MENUS_SHOP = "//div[@id='sidebar']/aside[@id='navigation']";
@@ -57,10 +57,10 @@ public class SecMenuLateralDesktop extends PageBase {
 	
 	public boolean isVisibleCapaMenus(int seconds) {
 		if (app==AppEcom.outlet) {
-			return state(Visible, XP_CAPA_MENUS_OUTLET).wait(seconds).check();
+			return state(VISIBLE, XP_CAPA_MENUS_OUTLET).wait(seconds).check();
 		}
 		else {
-			return state(Visible, XP_CAPA_MENUS_SHOP).wait(seconds).check();
+			return state(VISIBLE, XP_CAPA_MENUS_SHOP).wait(seconds).check();
 		}
 	}
 }

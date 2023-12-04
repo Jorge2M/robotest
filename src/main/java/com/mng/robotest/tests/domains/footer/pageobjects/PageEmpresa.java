@@ -15,6 +15,6 @@ public class PageEmpresa extends PageBase implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return state(Present, XP_FOR_ID_PAGE_NEW).wait(seconds).check();
+		return state(PRESENT, XP_FOR_ID_PAGE_NEW).wait(seconds).check();
 	}
 }

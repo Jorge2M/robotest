@@ -10,10 +10,10 @@ public class PageEpsSelBanco extends PageBase {
 	private static final String XP_ICONO_BANCO = "//div[@class='loginlogo']";
 
 	public boolean isPresentIconoEps() {
-		return state(Present, XP_ICONO_EPS).check();
+		return state(PRESENT, XP_ICONO_EPS).check();
 	}
 	
 	public boolean isVisibleIconoBanco() {
-		return state(Present, XP_ICONO_BANCO).check();
+		return state(PRESENT, XP_ICONO_BANCO).check();
 	}
 }

@@ -17,7 +17,7 @@ public class PageRegalarMisLikes extends PageBase {
 	private static final String XP_BOTON_ENVIAR_REGALO = "//button[@class[contains(.,'step2-form')]]";
 	
 	public boolean checkIsPage() {
-		return state(Visible, XP_WRAPPER_PAGE).check();
+		return state(VISIBLE, XP_WRAPPER_PAGE).check();
 	}
 	
 	public void inputMensaje(String mensaje) {
@@ -35,11 +35,11 @@ public class PageRegalarMisLikes extends PageBase {
 	}
 	
 	public boolean checkIsVisibleBlockCuantosLikes() {
-		return state(Visible, XP_BLOCK_CUANTOS_LIKES).check();
+		return state(VISIBLE, XP_BLOCK_CUANTOS_LIKES).check();
 	}
 	
 	public void inputLikesToRegalar(int numLikesToRegalar) {
-		click(XP_RADIO_INPUT_NUM_LIKES).type(javascript).exec();
+		click(XP_RADIO_INPUT_NUM_LIKES).type(JAVASCRIPT).exec();
 		var input = getElement(XP_INPUT_NUM_LIKES);
 		input.clear();
 		input.sendKeys(String.valueOf(numLikesToRegalar));

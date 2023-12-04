@@ -99,7 +99,7 @@ public class ErrorStorer extends EvidenceStorer {
 	}
 
 	private void waitForErrorPage(WebDriver driver) {
-		new PageBase(driver).state(Present, "//*[@class='stackTrace']").wait(5).check();
+		new PageBase(driver).state(PRESENT, "//*[@class='stackTrace']").wait(5).check();
 	}
 	
 	private String getTabName() {

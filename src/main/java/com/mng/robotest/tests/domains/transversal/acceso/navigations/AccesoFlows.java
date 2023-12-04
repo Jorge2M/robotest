@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.transversal.acceso.navigations;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Clickable;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.transversal.acceptcookies.pageobjects.ModalSetCookies.SectionConfCookies.COOKIES_DE_RENDIMIENTO;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.CERRAR_SESION;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.INICIAR_SESION;
@@ -139,7 +139,7 @@ public class AccesoFlows extends StepBase {
 			
 			// Si existe, nos posicionamos y seleccionamos el link \"CERRAR SESIÓN\" 
 			// En el caso de iPhone parece que mantiene la sesión abierta después de un caso de prueba 
-			boolean menuClicado = new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, Clickable);
+			boolean menuClicado = new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, CLICKABLE);
 			
 			//Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
 			if (menuClicado) {

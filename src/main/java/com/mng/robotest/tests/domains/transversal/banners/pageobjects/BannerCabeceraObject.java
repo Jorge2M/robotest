@@ -2,8 +2,8 @@ package com.mng.robotest.tests.domains.transversal.banners.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class BannerCabeceraObject extends BannerObject {
@@ -19,7 +19,7 @@ public class BannerCabeceraObject extends BannerObject {
 	@Override
 	protected String getUrlBanner(WebElement bannerScreen) {
 		String urlBanner = "";
-		if (state(Present, bannerScreen).by(By.xpath(XP_ANCOR_RELATIVE_BANNER)).check()) {
+		if (state(PRESENT, bannerScreen).by(By.xpath(XP_ANCOR_RELATIVE_BANNER)).check()) {
 			WebElement ancor = bannerScreen.findElement(By.xpath(XP_ANCOR_RELATIVE_BANNER));
 			urlBanner = ancor.getAttribute("href");
 		}
@@ -40,11 +40,11 @@ public class BannerCabeceraObject extends BannerObject {
 		WebElement bannerWeb = dataBanner.getBannerWeb();
 		By byLink = By.xpath(XP_ANCOR_RELATIVE_BANNER);
 		WebElement bannerLink;
-		if (state(Present, bannerWeb, driver).by(byLink).check()) {
+		if (state(PRESENT, bannerWeb, driver).by(byLink).check()) {
 			bannerLink = bannerWeb.findElement(byLink);
 		} else {
 			bannerLink = bannerWeb;
 		}
-		click(bannerLink, driver).waitLoadPage(10).type(TypeClick.javascript).exec();
+		click(bannerLink, driver).waitLoadPage(10).type(JAVASCRIPT).exec();
 	}
 }

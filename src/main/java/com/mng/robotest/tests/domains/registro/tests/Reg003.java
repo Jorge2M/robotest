@@ -26,14 +26,14 @@ import com.mng.robotest.testslegacy.data.Constantes.ThreeState;
 
 public class Reg003 extends TestBase {
 
-	private final PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
-	private final PageRegistroSegundaStepsOutlet pageRegistroSegundaSteps = new PageRegistroSegundaStepsOutlet();	
-	private final PageRegistroNinosStepsOutlet pageRegistroNinosSteps = new PageRegistroNinosStepsOutlet();
-	private final PageRegistroDirecStepsOutlet pageRegistroDirecSteps = new PageRegistroDirecStepsOutlet();
-	private final PageRegistroFinStepsOutlet pageRegistroFinSteps = new PageRegistroFinStepsOutlet();
+	private final PageRegistroIniStepsOutlet pgRegistroIniSteps = new PageRegistroIniStepsOutlet();
+	private final PageRegistroSegundaStepsOutlet pgRegistroSegundaSteps = new PageRegistroSegundaStepsOutlet();	
+	private final PageRegistroNinosStepsOutlet pgRegistroNinosSteps = new PageRegistroNinosStepsOutlet();
+	private final PageRegistroDirecStepsOutlet pgRegistroDirecSteps = new PageRegistroDirecStepsOutlet();
+	private final PageRegistroFinStepsOutlet pgRegistroFinSteps = new PageRegistroFinStepsOutlet();
 
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
-	private final PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
+	private final PageMiCuentaSteps pgMiCuentaSteps = new PageMiCuentaSteps();
 	private final SecCabeceraSteps secCabeceraSteps = new SecCabeceraSteps();
 	
 	private final VersionRegistroSuite version;
@@ -77,28 +77,28 @@ public class Reg003 extends TestBase {
 
 	private void firstPageRegister() {
 		String emailNonExistent = DataMango.getEmailNonExistentTimestamp();
-		dataRegister = pageRegistroIniSteps.sendDataAccordingCountryToInputs(emailNonExistent, true);
-		pageRegistroIniSteps.clickRegistrateButton(dataRegister);
+		dataRegister = pgRegistroIniSteps.sendDataAccordingCountryToInputs(emailNonExistent, true);
+		pgRegistroIniSteps.clickRegistrateButton(dataRegister);
 	}
 	
 	private void secondPageRegister() {
 		boolean paisConNinos = dataTest.getPais().getShoponline().stateLinea(LineaType.NINA, app)==ThreeState.TRUE;
-		pageRegistroSegundaSteps.setDataAndLineasRandom("23/4/1974", paisConNinos, 2, dataRegister);
+		pgRegistroSegundaSteps.setDataAndLineasRandom("23/4/1974", paisConNinos, 2, dataRegister);
 		if (paisConNinos) {
 			var listaNinos = new ListDataNinos();
 			listaNinos.add(new DataNino(sexoType.nina, "Martina Muñoz Rancaño", "11/10/2010"));
 			listaNinos.add(new DataNino(sexoType.nina, "Irene Muñoz Rancaño", "29/8/2016"));
-			pageRegistroNinosSteps.sendNinoDataAndContinue(listaNinos);
+			pgRegistroNinosSteps.sendNinoDataAndContinue(listaNinos);
 		}
 	}	
 	
 	private void thirdPageRegister() {
-		pageRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister);
-		pageRegistroDirecSteps.clickFinalizarButton();
+		pgRegistroDirecSteps.sendDataAccordingCountryToInputs(dataRegister);
+		pgRegistroDirecSteps.clickFinalizarButton();
 	}
 	
 	private void goToShopping() {
-		pageRegistroFinSteps.clickIrDeShoppingButton();
+		pgRegistroFinSteps.clickIrDeShoppingButton();
 		secCabeceraSteps.selecLogo();
 		new SecFooterSteps().clickFooterSubscriptionInput(version.register());
 	}
@@ -108,8 +108,8 @@ public class Reg003 extends TestBase {
 		String password = dataRegister.get("cfPass");
 		userMenusSteps.logoffLogin(emailUsr, password);
 
-		pageMiCuentaSteps.goToMisDatosAndValidateData(dataRegister, dataTest.getCodigoPais());
-		pageMiCuentaSteps.goToSuscripcionesAndValidateData(dataRegister);
+		pgMiCuentaSteps.goToMisDatosAndValidateData(dataRegister, dataTest.getCodigoPais());
+		pgMiCuentaSteps.goToSuscripcionesAndValidateData(dataRegister);
 	}	
 
 }

@@ -9,7 +9,7 @@ public class PageAssistLast extends PageBase {
 	private static final String XP_BUTTON_SUBMIT = "//button[@type='submit']";
 
 	public boolean isPage() {
-		return state(Present, XP_BUTTON_SUBMIT).check();
+		return state(PRESENT, XP_BUTTON_SUBMIT).check();
 	}
 
 	public void clickButtonSubmit() {

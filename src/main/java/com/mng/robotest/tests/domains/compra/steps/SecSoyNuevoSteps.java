@@ -9,7 +9,7 @@ import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 public class SecSoyNuevoSteps extends StepBase {
 
-	private final SecSoyNuevo secSoyNuevo = SecSoyNuevo.make(channel, app, dataTest);
+	private final SecSoyNuevo secSoyNuevo = SecSoyNuevo.make(channel, dataTest);
 	
 	public void inputEmailAndContinue(String email) {
 		inputEmailAndContinue(email, true);

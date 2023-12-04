@@ -24,8 +24,8 @@ public class Fic005 extends TestBase {
 	private final Optional<Article> articlePersonalizable;
 	
 	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	private final PageFichaSteps pageFichaSteps = new PageFichaSteps();
-	private final SecModalPersonalizacionSteps modalPersonalizacionSteps = new SecModalPersonalizacionSteps();
+	private final PageFichaSteps pgFichaSteps = new PageFichaSteps();
+	private final SecModalPersonalizacionSteps mdPersonalizacionSteps = new SecModalPersonalizacionSteps();
 	
 	public Fic005() throws Exception {
 		super();
@@ -40,30 +40,30 @@ public class Fic005 extends TestBase {
 		access();
  		searchAndCheckArticlePersonalizable();
 		
-		pageFichaSteps.selectFirstTallaAvailable();
-		modalPersonalizacionSteps.selectLinkPersonalizacion();
-		modalPersonalizacionSteps.selectIconCustomization();
-		modalPersonalizacionSteps.selectFirstIcon();
-		modalPersonalizacionSteps.validateIconSelectedDesktop();
-		modalPersonalizacionSteps.selectConfirmarButton();
-		modalPersonalizacionSteps.validateCabeceraStep(2);
-		modalPersonalizacionSteps.validateWhereDesktop();
-		modalPersonalizacionSteps.selectConfirmarButton();
-		modalPersonalizacionSteps.validateCabeceraStep(3);
-		modalPersonalizacionSteps.validateSelectionColor();
+		pgFichaSteps.selectFirstTallaAvailable();
+		mdPersonalizacionSteps.selectLinkPersonalizacion();
+		mdPersonalizacionSteps.selectIconCustomization();
+		mdPersonalizacionSteps.selectFirstIcon();
+		mdPersonalizacionSteps.validateIconSelectedDesktop();
+		mdPersonalizacionSteps.selectConfirmarButton();
+		mdPersonalizacionSteps.validateCabeceraStep(2);
+		mdPersonalizacionSteps.validateWhereDesktop();
+		mdPersonalizacionSteps.selectConfirmarButton();
+		mdPersonalizacionSteps.validateCabeceraStep(3);
+		mdPersonalizacionSteps.validateSelectionColor();
  
-		modalPersonalizacionSteps.selectSize();
-		modalPersonalizacionSteps.confirmCustomization();
-		modalPersonalizacionSteps.checkCustomizationProof();
+		mdPersonalizacionSteps.selectSize();
+		mdPersonalizacionSteps.confirmCustomization();
+		mdPersonalizacionSteps.checkCustomizationProof();
 	}
 
 	private void searchAndCheckArticlePersonalizable() {
 		secBuscadorSteps.searchArticulo(articlePersonalizable.get());
-		int numColors = pageFichaSteps.getFicha().getNumColors();
+		int numColors = pgFichaSteps.getFicha().getNumColors();
 		for (int i=1; i<=numColors; i++) {
-			pageFichaSteps.selectColor(i);
-			State levelError = (i==numColors) ? Defect : Info;
-			if (modalPersonalizacionSteps.checkArticleCustomizable(levelError)) {
+			pgFichaSteps.selectColor(i);
+			State levelError = (i==numColors) ? DEFECT : INFO;
+			if (mdPersonalizacionSteps.checkArticleCustomizable(levelError)) {
 				break;
 			}
 		}

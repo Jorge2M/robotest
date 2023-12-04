@@ -1,6 +1,7 @@
-package com.mng.robotest.tests.domains.compra.pageobjects;
+package com.mng.robotest.tests.domains.compra.pageobjects.modals;
 
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DirectionData;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -61,7 +62,7 @@ public class ModalDirecEnvioNew extends PageBase {
 	
 	
 	public boolean isVisible(int seconds) {
-		return state(Present, InputType.NOMBRE.getXPath()).wait(seconds).check();
+		return state(PRESENT, InputType.NOMBRE.getXPath()).wait(seconds).check();
 	}
 	
 	public void inputData(DirectionData direction) {
@@ -105,28 +106,28 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 
 	private boolean isPresent(InputType inputType) {
-		return state(Present, inputType.getXPath()).wait(1).check();
+		return state(PRESENT, inputType.getXPath()).wait(1).check();
 	}
 	
 	private void setProvinciaIfNotYet() {
-		if (state(Present, getXPathSelectorProvincia()).check() && 
+		if (state(PRESENT, getXPathSelectorProvincia()).check() && 
 		   ("".compareTo(getValueInitialProvincia())==0)) {
 			setProvincia();
 		}
 	}
 
 	private String getValueInitialProvincia() {
-		if (state(Visible, XP_SELECTOR_PROVINCIA).check()) {
+		if (state(VISIBLE, XP_SELECTOR_PROVINCIA).check()) {
 		    return getElement(XP_SELECTOR_PROVINCIA).getAttribute("value");
 		}
-		if (state(Visible, XP_PROVINCIA_SELECTED_PRE).check()) {
+		if (state(VISIBLE, XP_PROVINCIA_SELECTED_PRE).check()) {
 			return getElement(XP_PROVINCIA_SELECTED_PRE).getText();
 		}
 		return "";
 	}
 	
 	private void setProvincia() {
-		if (state(Visible, XP_SELECTOR_PROVINCIA).check()) {
+		if (state(VISIBLE, XP_SELECTOR_PROVINCIA).check()) {
 			setProvinciaPro();
 		} else {
 			setProvinciaPre();
@@ -171,7 +172,7 @@ public class ModalDirecEnvioNew extends PageBase {
 	}
 
 	public boolean isVisibleModalConfirmacionEliminar(int seconds) {
-		return state(Visible, XP_REMOVE_CONFIRM_BUTTON).wait(seconds).check();
+		return state(VISIBLE, XP_REMOVE_CONFIRM_BUTTON).wait(seconds).check();
 	}
 	
 	public void clickConfirmEliminarButton() {

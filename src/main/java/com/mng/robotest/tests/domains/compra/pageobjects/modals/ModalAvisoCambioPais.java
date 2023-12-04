@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.compra.pageobjects;
+package com.mng.robotest.tests.domains.compra.pageobjects.modals;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -10,11 +10,11 @@ public class ModalAvisoCambioPais extends PageBase {
 	private static final String XP_BUTTON_CONF_CAMBIO = XP_MODAL + "//button[@name='continue']";
 
 	public boolean isVisibleUntil(int seconds) {
-		return state(Visible, XP_MODAL).wait(seconds).check();
+		return state(VISIBLE, XP_MODAL).wait(seconds).check();
 	}
 
 	public boolean isInvisibleUntil(int seconds) {
-		return state(Invisible, XP_MODAL).wait(seconds).check();
+		return state(INVISIBLE, XP_MODAL).wait(seconds).check();
 	}
 
 	public void clickConfirmarCambio() {

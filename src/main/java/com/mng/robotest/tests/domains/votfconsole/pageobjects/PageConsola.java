@@ -43,12 +43,12 @@ public class PageConsola extends PageBase {
 	
 	public boolean existTestServVOTF() {
 		String xpath = "//span[text()[contains(.,'Test servicios VOTF')]]";
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 	
 	public boolean existConsolaComVOTF() {
 		String xpath = "//span[text()[contains(.,'Consola comandos VOTF')]]";
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 	
 	public String getTextOptionSelectTestServ(String textOption) {
@@ -111,7 +111,7 @@ public class PageConsola extends PageBase {
 	
 	public boolean isDataSelectCodigoTransporte(int seconds) {
 		String xpath = XP_SELECT_COD_TRANSPORTE + "/option";
-		return state(Present, xpath).wait(seconds).check();
+		return state(PRESENT, xpath).wait(seconds).check();
 	}
 		
 	public String getCodigoTransporte() { 

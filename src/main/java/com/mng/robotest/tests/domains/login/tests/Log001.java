@@ -8,7 +8,7 @@ import com.mng.robotest.testslegacy.data.Constantes;
 
 public class Log001 extends TestBase {
 
-	private final PageIdentificacionSteps pageIdentificacionSteps = new PageIdentificacionSteps();
+	private final PageIdentificacionSteps pgIdentificacionSteps = new PageIdentificacionSteps();
 	
 	@Override
 	public void execute() throws Exception {
@@ -24,7 +24,7 @@ public class Log001 extends TestBase {
 	}
 	
 	private void restorePassword() {
-		pageIdentificacionSteps.selectHasOlvidadoTuContrasenya();
+		pgIdentificacionSteps.selectHasOlvidadoTuContrasenya();
 		String emailQA = "eqp.ecommerce.qamango@mango.com";
 		new PageRecuperaPasswdSteps().inputMailAndClickEnviar(emailQA);
 	}

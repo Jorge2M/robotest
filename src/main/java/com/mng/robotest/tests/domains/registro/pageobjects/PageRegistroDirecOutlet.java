@@ -67,7 +67,7 @@ public class PageRegistroDirecOutlet extends PageBase {
 	
 	public void sendDataToPaisIfNotExist(String codigoPais) {
 		String xpathSelectedPais = XP_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']";
-		if (state(Present, xpathSelectedPais).check()) {
+		if (state(PRESENT, xpathSelectedPais).check()) {
 			new Select(getElement(XP_SELECT_PAIS)).selectByValue(codigoPais);
 		}
 	}	
@@ -86,7 +86,7 @@ public class PageRegistroDirecOutlet extends PageBase {
 	}
 	
 	public boolean isVisibleFinalizarButton() {
-		return state(Visible, XP_FINALIZAR_BUTTON).check();
+		return state(VISIBLE, XP_FINALIZAR_BUTTON).check();
 	}
 	
 	public void clickFinalizarButton() {
@@ -94,7 +94,7 @@ public class PageRegistroDirecOutlet extends PageBase {
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
 		if (isVisibleFinalizarButton()) {
-			click(XP_FINALIZAR_BUTTON).type(javascript).exec();
+			click(XP_FINALIZAR_BUTTON).type(JAVASCRIPT).exec();
 		}
 	}
 	

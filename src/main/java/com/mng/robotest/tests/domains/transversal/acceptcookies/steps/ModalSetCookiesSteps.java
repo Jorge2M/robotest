@@ -20,7 +20,7 @@ public class ModalSetCookiesSteps extends StepBase {
 	
 	@Validation (
 		description="No es visible el modal para el seteo de Cookies " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	public boolean isInvisible(int seconds) {
 		return modalSetCookies.isInvisible(seconds);
 	}
@@ -35,7 +35,7 @@ public class ModalSetCookiesSteps extends StepBase {
 	
 	@Validation (
 		description="Está seleccionada la sección #{section.getNombre()}",
-		level=Warn)
+		level=WARN)
 	public boolean checkSectionUnfold(SectionConfCookies section) {
 		return modalSetCookies.isSectionUnfold(section);
 	}
@@ -58,14 +58,14 @@ public class ModalSetCookiesSteps extends StepBase {
 	
 	@Validation (
 		description="El switch de las cookies está activado",
-		level=Warn)
+		level=WARN)
 	public boolean checkSwitchEnabled() {
 		return modalSetCookies.isSwitchEnabled();
 	}
 	
 	@Validation (
 		description="El switch de las cookies está desactivado",
-		level=Warn)
+		level=WARN)
 	public boolean checkSwitchNotEnabled() {
 		return !modalSetCookies.isSwitchEnabled();
 	}

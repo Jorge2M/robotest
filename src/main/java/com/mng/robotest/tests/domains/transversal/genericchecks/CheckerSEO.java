@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.genericchecks.Checker;
@@ -19,8 +18,9 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.conf.Channel.*;
+import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
 public class CheckerSEO extends PageBase implements Checker {
 
@@ -45,7 +45,7 @@ public class CheckerSEO extends PageBase implements Checker {
 			Check.make(
 			    descripValidac,
 			    resValidac.isOK(), level)
-			.store(StoreType.None).build());
+			.store(NONE).build());
 		
 		return checks;
 	}
@@ -69,7 +69,7 @@ public class CheckerSEO extends PageBase implements Checker {
 			listaProblemas.addAll(validacionRobots(driver));
 		}
 		catch (Exception e) {
-			listaProblemas.add("<br><b style=\"color:" + Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Se ha producido una excepción (" + e.getMessage() + ") durante las validaciones</c>");
+			listaProblemas.add("<br><b style=\"color:" + WARN.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Se ha producido una excepción (" + e.getMessage() + ") durante las validaciones</c>");
 		}
 		
 		if (!listaProblemas.isEmpty()) {
@@ -88,7 +88,7 @@ public class CheckerSEO extends PageBase implements Checker {
 		List<String> listaErrorsInHtmlFormat = new ArrayList<>();
 		String title = driver.getTitle();
 		if (title == null || "".compareTo(title) == 0) {
-			listaErrorsInHtmlFormat.add("<br><b style=\"color:" + Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">No existe el title o es nulo</c>");
+			listaErrorsInHtmlFormat.add("<br><b style=\"color:" + WARN.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">No existe el title o es nulo</c>");
 		}
 		return listaErrorsInHtmlFormat;
 	}
@@ -101,11 +101,11 @@ public class CheckerSEO extends PageBase implements Checker {
 			PageGaleria pageGaleria = PageGaleria.make(desktop, app, dataTest.getPais());
 			if ((new PageLanding()).isPage() || 
 				((PageGaleriaDesktop)pageGaleria).isPage() || 
-				pageFicha.isPageUntil(0)) {
+				pageFicha.isPage(0)) {
 				String currentURL = driver.getCurrentUrl(); 
 				//Hemos de añadir un par de excepciones
 				if (!currentURL.contains("catalogPc.faces?") && !currentURL.contains("search?") && !currentURL.contains("favorites.faces?")) {
-					listaErrorsInHtmlFormat.add("<br><b style=\"color:" + Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Estamos en Home (no favorites.faces?), Galeria (no catalogPc.faces? ni search?) o Ficha pero no existe el tag canonical</c>");
+					listaErrorsInHtmlFormat.add("<br><b style=\"color:" + WARN.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Estamos en Home (no favorites.faces?), Galeria (no catalogPc.faces? ni search?) o Ficha pero no existe el tag canonical</c>");
 				}
 			}
 		}
@@ -142,12 +142,12 @@ public class CheckerSEO extends PageBase implements Checker {
 		}
 		if ("".compareTo(operativaRobots)!=0) {
 			if (!robotNoindex) {
-				listaErrorsInHtmlFormat.add("<br><b style=\"color:" + Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Estamos en <b>" + operativaRobots + "</b> pero no aparece el tag 'robots'</c>");
+				listaErrorsInHtmlFormat.add("<br><b style=\"color:" + WARN.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Estamos en <b>" + operativaRobots + "</b> pero no aparece el tag 'robots'</c>");
 			}
 		} else {
 			if (robotNoindex && !currentURL.contains(".faces")) {
 				listaErrorsInHtmlFormat .add(
-					"<br><b style=\"color:" + Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\"> " + 
+					"<br><b style=\"color:" + WARN.getColorCss() + "\">Warning!</b> <c style=\"color:brown\"> " + 
 					"Está apareciendo el tag 'robots' pero no estamos en:<br>" +
 					"1) el buscador de ítems o<br>" +
 					//"2) el filtro de color/talla o<br>" +
@@ -162,7 +162,7 @@ public class CheckerSEO extends PageBase implements Checker {
 		if (isPresentTagCanonical()) {
 			String urlTagCanonical = getURLTagCanonical();
 			if (robotNoindex && urlTagCanonical.compareTo(driver.getCurrentUrl())!=0) {
-				listaErrorsInHtmlFormat.add("<br><b style=\"color:" + Warn.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Existe el tag robot/noindex junto el canonical apuntando a URL de otra página (" + urlTagCanonical + ")</c>");
+				listaErrorsInHtmlFormat.add("<br><b style=\"color:" + WARN.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Existe el tag robot/noindex junto el canonical apuntando a URL de otra página (" + urlTagCanonical + ")</c>");
 			}
 		}
 		
@@ -170,11 +170,11 @@ public class CheckerSEO extends PageBase implements Checker {
 	}
 	
 	private boolean isPresentTagCanonical() {
-		return state(Present, XP_TAG_CANONICAL).check();
+		return state(PRESENT, XP_TAG_CANONICAL).check();
 	}
 
 	private boolean isPresentTagRobots() {
-		return state(Present, XP_TAG_ROBOTS).check();
+		return state(PRESENT, XP_TAG_ROBOTS).check();
 	}
 
 	private WebElement getTagCanonincal() {

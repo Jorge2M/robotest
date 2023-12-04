@@ -116,7 +116,7 @@ public class PageRegistroInitialShop extends PageBase {
 		return isPage(0);
 	}
 	public boolean isPage(int seconds) {
-		return state(Visible, XP_CHECKBOX_GIVE_PROMOTIONS).wait(seconds).check();
+		return state(VISIBLE, XP_CHECKBOX_GIVE_PROMOTIONS).wait(seconds).check();
 	}
 	
 	public void inputEmail(String email) {
@@ -136,7 +136,7 @@ public class PageRegistroInitialShop extends PageBase {
 	}
 	private void moveToInputMovil() {
 		for (int i=0; i<3; i++) {
-			if (state(Visible, XP_INPUT_MOVIL).check()) {
+			if (state(VISIBLE, XP_INPUT_MOVIL).check()) {
 				return;
 			}
 			keyUp(5);
@@ -174,7 +174,7 @@ public class PageRegistroInitialShop extends PageBase {
 		click(XP_LINK_CONSENT_PERSONAL_INFORMATION).exec();
 	}
 	public boolean checkPersonalInformationInfoVisible() {
-		return state(Visible, XP_PERSONAL_INFORMATION_INFO).check();
+		return state(VISIBLE, XP_PERSONAL_INFORMATION_INFO).check();
 	}
 	
 	public void clickCreateAccountButton() {
@@ -182,10 +182,10 @@ public class PageRegistroInitialShop extends PageBase {
 	}
 	
 	public boolean checkUserExistsModalMessage(int seconds) {
-		return state(Visible, getXPathModalMessageUserExists()).wait(seconds).check();
+		return state(VISIBLE, getXPathModalMessageUserExists()).wait(seconds).check();
 	}
 	public boolean checkMessageErrorMovil(int seconds) {
-		return state(Visible, XP_MESSAGE_ERROR_MOVIL).wait(seconds).check();
+		return state(VISIBLE, XP_MESSAGE_ERROR_MOVIL).wait(seconds).check();
 	}
 	
 	public void closeModalMessageError() {
@@ -196,10 +196,10 @@ public class PageRegistroInitialShop extends PageBase {
 		click(XP_LINK_POLITICA_PRIVACIDAD).exec();
 	}
 	public boolean isModalPoliticaPrivacidadVisible(int seconds) {
-		return state(Visible, getXPathModalPoliticaPrivacidad()).wait(seconds).check();
+		return state(VISIBLE, getXPathModalPoliticaPrivacidad()).wait(seconds).check();
 	}
 	public boolean isModalPoliticaPrivacidadInvisible(int seconds) {
-		return state(Invisible, getXPathModalPoliticaPrivacidad()).wait(seconds).check();
+		return state(INVISIBLE, getXPathModalPoliticaPrivacidad()).wait(seconds).check();
 	}	
 	public void clickPoliticaPrivacidadModal() {
 		click(getXPathLinkPoliticaPrivacidad()).exec();

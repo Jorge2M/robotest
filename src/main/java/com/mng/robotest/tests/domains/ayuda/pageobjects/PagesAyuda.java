@@ -27,7 +27,7 @@ public class PagesAyuda extends PageBase implements PageFromFooter {
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
 		String xpath = getXPathIcon("Devoluciones, cambios y reembolsos");
-		return state(Visible, xpath).wait(seconds).check();
+		return state(VISIBLE, xpath).wait(seconds).check();
 	}
 	
 	public void selectIcon(String textIcon) {
@@ -35,7 +35,7 @@ public class PagesAyuda extends PageBase implements PageFromFooter {
 	}
 	
 	public boolean isQuestionVisible(String textQuestion) {
-		return state(Visible, getXPathQuestion(textQuestion)).check();
+		return state(VISIBLE, getXPathQuestion(textQuestion)).check();
 	}
 	
 	public void clickQuestion(String textQuestion) {
@@ -44,7 +44,7 @@ public class PagesAyuda extends PageBase implements PageFromFooter {
 	
 	public boolean isTextVisible(String text) {
 		String xpathText = "//*[text()[contains(.,'" + text + "')]]";
-		return state(Visible, xpathText).check();
+		return state(VISIBLE, xpathText).check();
 	}
 	
 	public void clickContactarButton() {

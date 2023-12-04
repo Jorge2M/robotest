@@ -48,11 +48,11 @@ public class SecMetodoEnvioSteps extends StepBase {
 		int seconds = 5;
 	  	checks.add(
 			"Desaparece la capa de Loading " + getLitSecondsWait(seconds),
-			new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), Warn);
+			new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), WARN);
 	  	
 	  	checks.add(
 			"Queda seleccionado el bloque correspondiete a <b>" + tipoTransporte + "</b>",
-			secMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, seconds), Warn);
+			secMetodoEnvioDesktop.isBlockSelectedUntil(tipoTransporte, seconds), WARN);
 	  	
 	  	return checks;
 	}

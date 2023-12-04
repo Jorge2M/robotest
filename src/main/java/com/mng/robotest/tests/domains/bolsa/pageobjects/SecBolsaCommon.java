@@ -8,12 +8,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa.*;
 
@@ -34,26 +34,26 @@ public abstract class SecBolsaCommon extends PageBase {
 	
 	public boolean isInStateUntil(StateBolsa stateBolsaExpected, int seconds) {
 		String xpath = getXPathPanelBolsa();
-		if (stateBolsaExpected==OPEN) {
-			return state(Visible, xpath).wait(seconds).check();
+		if (stateBolsaExpected == OPEN) {
+			return state(VISIBLE, xpath).wait(seconds).check();
 		}
-		return state(Invisible, xpath).wait(seconds).check();
+		return state(INVISIBLE, xpath).wait(seconds).check();
 	}
 
 	public boolean isVisibleBotonComprar() {
 		String xpathComprarBt = getXPathBotonComprar();
-		return state(Visible, xpathComprarBt).check();
+		return state(VISIBLE, xpathComprarBt).check();
 	}
 
 	public boolean isVisibleBotonComprarUntil(int seconds) { 
 		String xpathBoton = getXPathBotonComprar();
-		return state(Visible, xpathBoton).wait(seconds).check();
+		return state(VISIBLE, xpathBoton).wait(seconds).check();
 	}
 
 	public void clickBotonComprar( int secondsWait) {
 		String xpathComprarBt = getXPathBotonComprar();
-		state(Visible, xpathComprarBt).wait(secondsWait).check();
-		click(xpathComprarBt).type(TypeClick.javascript).exec();
+		state(VISIBLE, xpathComprarBt).wait(secondsWait).check();
+		click(xpathComprarBt).type(JAVASCRIPT).exec();
 	}
 	
 	public String getNumberArtIcono() {
@@ -73,7 +73,7 @@ public abstract class SecBolsaCommon extends PageBase {
 		}
 		return false;
 	}
-
+	
 	public String getPrecioSubtotalTextPant() {
 		String xpathImporte = getXPathPrecioSubTotal();
 		return getElement(xpathImporte).getText();
@@ -81,7 +81,7 @@ public abstract class SecBolsaCommon extends PageBase {
 	
 	public float getPrecioSubTotalFloat() {
 		String precioTotal = getPrecioSubTotal();
-		return (ImporteScreen.getFloatFromImporteMangoScreen(precioTotal));
+		return ImporteScreen.getFloatFromImporteMangoScreen(precioTotal);
 	}
 
 	public float getPrecioTransporteFloat() {
@@ -102,39 +102,33 @@ public abstract class SecBolsaCommon extends PageBase {
 	}
 
 	public void clearArticulos() {
-		setBolsaToStateIfNotYet(OPEN);
-		int ii = 0;
-		do {
-			int numArticulos = getLineasArtBolsa().getNumLinesArticles();
-			int i = 0;
-			while (numArticulos > 0 && i < 50) { 
-				try {
-					getLineasArtBolsa().clickRemoveArticleIfExists();
-				} catch (Exception e) {
-					if (i==49) {
-						Log4jTM.getLogger().warn(
-							"Problem clearing articles from Bag. {}. {}", e.getClass().getName(), e.getMessage());
-					}
-				}
-
-				try {
-					state(Present, By.className("bagItem")).wait(3).check();
-					numArticulos = getLineasArtBolsa().getNumLinesArticles();
-				} 
-				catch (Exception e) {
-					Log4jTM.getLogger().debug(
-						"Problem getting num articles in Bag. {}. {}" , e.getClass().getName(), e.getMessage());
-					numArticulos = 0;
-				}
-				i += 1;
-			}
-			ii += 1;
-		}
-		while (!numberItemsIsUntil("0", 0) && ii<10);
-
-		setBolsaToStateIfNotYet(CLOSED);
+	    setBolsaToStateIfNotYet(OPEN);
+	    int intentos = 0;
+	    while (intentos < 10 && !numberItemsIsUntil("0", 0)) {
+	        clearArticulosIteracion();
+	        intentos++;
+	    }
+	    setBolsaToStateIfNotYet(CLOSED);
 	}
-	
+
+	private void clearArticulosIteracion() {
+	    int intentos = 0;
+	    int maxIntentos = 50;
+	    while (intentos < maxIntentos) {
+	        try {
+	            getLineasArtBolsa().clickRemoveArticleIfExists();
+	            state(PRESENT, By.className("bagItem")).wait(3).check();
+	        } catch (Exception e) {
+	            Log4jTM.getLogger().warn("Problem clearing articles from Bag. {}. {}", e.getClass().getName(), e.getMessage());
+	        }
+
+	        int numArticulos = getLineasArtBolsa().getNumLinesArticles();
+	        if (numArticulos == 0 || ++intentos == maxIntentos) {
+	            break;
+	        }
+	    }
+	}	
+
 	public void click1erArticuloBolsa() {
 		getLineasArtBolsa().clickArticle(1);
 		waitLoadPage();

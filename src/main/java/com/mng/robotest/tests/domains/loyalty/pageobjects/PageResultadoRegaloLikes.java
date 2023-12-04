@@ -9,7 +9,7 @@ public class PageResultadoRegaloLikes extends PageBase {
 	private static final String XP_DONE_ICON = "//img[@class='done-icon']";
 	
 	public boolean isEnvioOk(int seconds) {
-		return state(Visible, XP_DONE_ICON).wait(seconds).check();
+		return state(VISIBLE, XP_DONE_ICON).wait(seconds).check();
 	}
 	
 }

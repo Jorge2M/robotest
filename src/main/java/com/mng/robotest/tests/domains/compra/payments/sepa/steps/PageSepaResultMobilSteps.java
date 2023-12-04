@@ -17,12 +17,12 @@ public class PageSepaResultMobilSteps {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de resultado de SEPA para móvil",
-			pageSepaResultMobil.isPage(), Warn);	
+			pageSepaResultMobil.isPage(), WARN);	
 		
 		checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, pageSepaResultMobil.driver), 
-			Warn);
+			WARN);
 		
 		return checks;
 	}

@@ -22,11 +22,11 @@ public class PagoMercadopago extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		var dataPedido = this.dataPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
 		var pageMercpago1rstSteps = new PageMercpago1rstSteps();
-		pageMercpago1rstSteps.validateIsPageUntil(5);
+		pageMercpago1rstSteps.validateisPage(5);
 		pageMercpago1rstSteps.clickLinkRegistration();
 		if (execPay) {
 			new PageMercpagoLoginSteps().loginMercadopago(dataPedido.getPago());

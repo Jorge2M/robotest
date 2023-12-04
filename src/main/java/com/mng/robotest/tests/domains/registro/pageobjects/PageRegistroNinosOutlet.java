@@ -19,9 +19,9 @@ public class PageRegistroNinosOutlet extends PageBase {
 			"//div[@class[contains(.,'registerStepsModal')]]" + 
 	        "//form[@id[contains(.,'cfKids')]]//input[@type='submit']";
 	
-	public boolean isPageUntil(int seconds) {
+	public boolean isPage(int seconds) {
 		String xpath = "//form[@id[contains(.,'cfKids')]]";
-		return state(Present, xpath).wait(seconds).check();
+		return state(PRESENT, xpath).wait(seconds).check();
 	}
 	
 	public int getNumInputsNameNino() {
@@ -76,7 +76,7 @@ public class PageRegistroNinosOutlet extends PageBase {
 	
 	public void clickContinuar() {
 		click(XP_BOTON_CONTINUAR).exec();
-		if (!state(Invisible, XP_BOTON_CONTINUAR).wait(2).check()) {
+		if (!state(INVISIBLE, XP_BOTON_CONTINUAR).wait(2).check()) {
 			click(XP_BOTON_CONTINUAR).exec();
 		}
 	}

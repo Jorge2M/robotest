@@ -92,12 +92,12 @@ public class PageRegistroIniOutlet extends PageBase {
 //		click(XP_PESTANYA_REGISTRO).type(TypeClick.javascript).exec();
 //	}
 	
-	public boolean isPageUntil(int seconds) {
-		return state(Visible, XP_INPUT_NAME).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(VISIBLE, XP_INPUT_NAME).wait(seconds).check();
 	}
 	
 	public boolean isCapaLoadingInvisibleUntil(int seconds) {
-		return state(Invisible, XP_CAPA_LOADING).wait(seconds).check();
+		return state(INVISIBLE, XP_CAPA_LOADING).wait(seconds).check();
 	}
 	
 	public String getNewsLetterTitleText() {
@@ -163,23 +163,23 @@ public class PageRegistroIniOutlet extends PageBase {
 	
 	public boolean isVisibleMsgInputInvalid(DataRegType inputType) {
 		String xpath = getXPathDataInput(inputType).getXPathDivError();
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 	
 	public int getNumberMsgInputInvalid(DataRegType inputType) {
 		String xpathError = getXPathDataInput(inputType).getXPathDivError() + "//span";
-		if (state(Present, xpathError).check()) {
+		if (state(PRESENT, xpathError).check()) {
 			return (getNumElementsVisible(xpathError));
 		}
 		return 0;
 	}
 	
 	public boolean isVisibleAnyInputErrorMessage() {
-		return state(Visible, XP_DIV_ERROR_NAME).check();
+		return state(VISIBLE, XP_DIV_ERROR_NAME).check();
 	}
 
 	public boolean isButtonRegistrateVisible() {
-		return state(Visible, XP_BUTTON_REGISTRATE).check();
+		return state(VISIBLE, XP_BUTTON_REGISTRATE).check();
 	}
 	
 	public void clickButtonRegistrate() {
@@ -188,7 +188,7 @@ public class PageRegistroIniOutlet extends PageBase {
 	
 	public boolean isVisibleErrorUsrDuplicadoUntil(int seconds) {
 		String xpathError = getXPath_mensajeErrorFormulario(MSG_USR_DUPLICADO_POST_CLICK);
-		return state(Present, xpathError).wait(seconds).check();
+		return state(PRESENT, xpathError).wait(seconds).check();
 	}	
 	
 	public boolean isVisibleErrorEmailIncorrecto() {
@@ -205,12 +205,12 @@ public class PageRegistroIniOutlet extends PageBase {
 	}
 	
 	public boolean isVisibleSelectPais() {
-		return state(Visible, XP_SELECT_PAIS).check();
+		return state(VISIBLE, XP_SELECT_PAIS).check();
 	}
 	
 	public boolean isSelectedOptionPais(String codigoPais) {
 		String xpathOption = XP_SELECT_PAIS + "/option[@selected='selected' and @value='" + codigoPais + "']"; 
-		return state(Present, xpathOption).check();
+		return state(PRESENT, xpathOption).check();
 	}
 
 	public boolean isTextoRGPDVisible() {
@@ -234,6 +234,6 @@ public class PageRegistroIniOutlet extends PageBase {
 	}
 
 	public boolean isCheckboxRecibirInfoPresentUntil(int seconds) {
-		return state(Present, XP_CHECKBOX_PUBLI).wait(seconds).check();
+		return state(PRESENT, XP_CHECKBOX_PUBLI).wait(seconds).check();
 	}
 }

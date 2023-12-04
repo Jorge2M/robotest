@@ -21,7 +21,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	private static final String XP_INPUT_DNI = XP_BLOCK + "//input[@name[contains(.,'dni')]]"; //Specific for Codensa (Colombia)
 	
 	protected void goToIframe() {
-		state(Visible, XP_IFRAME).wait(2).check();
+		state(VISIBLE, XP_IFRAME).wait(2).check();
 		driver.switchTo().frame(getElement(XP_IFRAME));
 	}
 	
@@ -37,7 +37,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public boolean isPresentInputNumberUntil(int seconds) {
 		goToIframe();
-		boolean present = state(Present, XP_INPUT_NUMBER).wait(seconds).check();
+		boolean present = state(PRESENT, XP_INPUT_NUMBER).wait(seconds).check();
 		leaveIframe();
 		return present;
 	}
@@ -45,7 +45,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public boolean isPresentInputTitular() {
 		goToIframe();
-		boolean present = state(Present, XP_INPUT_TITULAR).check();
+		boolean present = state(PRESENT, XP_INPUT_TITULAR).check();
 		leaveIframe();
 		return present;
 	}
@@ -53,7 +53,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public boolean isPresentSelectMes() {
 		goToIframe();
-		boolean present = state(Present, XP_SELECT_MES).check();
+		boolean present = state(PRESENT, XP_SELECT_MES).check();
 		leaveIframe();
 		return present;
 	}
@@ -61,7 +61,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public boolean isPresentSelectAny() {
 		goToIframe();
-		boolean present = state(Present, XP_SELECT_ANY).check();
+		boolean present = state(PRESENT, XP_SELECT_ANY).check();
 		leaveIframe();
 		return present;
 	}
@@ -69,7 +69,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public boolean isPresentInputCvc() {
 		goToIframe();
-		boolean present = state(Present, XP_INPUT_CVC).check();
+		boolean present = state(PRESENT, XP_INPUT_CVC).check();
 		leaveIframe();
 		return present;
 	}
@@ -77,7 +77,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	@Override
 	public boolean isPresentInputDni() {
 		goToIframe();
-		boolean present = state(Present, XP_INPUT_DNI).check();
+		boolean present = state(PRESENT, XP_INPUT_DNI).check();
 		leaveIframe();
 		return present;
 	}	

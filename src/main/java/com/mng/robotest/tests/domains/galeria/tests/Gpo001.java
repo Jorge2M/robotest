@@ -16,7 +16,7 @@ import com.mng.robotest.testslegacy.data.Color;
 
 public class Gpo001 extends TestBase {
 
-	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
+	private final PageGaleriaSteps pgGaleriaSteps = new PageGaleriaSteps();
 	
 	@Override
 	public void execute() throws Exception {
@@ -32,8 +32,8 @@ public class Gpo001 extends TestBase {
 	private void changeTwoToFourColumns() {
 		var pageGaleria = (PageGaleriaDesktop)PageGaleria.make(From.MENU, channel, app, dataTest.getPais());
 		var listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
-		listArticlesGaleria2Cols = pageGaleriaSteps.selectListadoXColumnasDesktop(CUATRO, listArticlesGaleria2Cols);
-		pageGaleriaSteps.selectListadoXColumnasDesktop(DOS, listArticlesGaleria2Cols);
+		listArticlesGaleria2Cols = pgGaleriaSteps.selectListadoXColumnasDesktop(CUATRO, listArticlesGaleria2Cols);
+		pgGaleriaSteps.selectListadoXColumnasDesktop(DOS, listArticlesGaleria2Cols);
 	}
 
 	private void checkScroll() throws Exception {
@@ -43,22 +43,22 @@ public class Gpo001 extends TestBase {
 		dataScroll.setOrdenacionExpected(RECOMENDADOS);
 		dataScroll.setValidateArticlesExpected(false);
 		dataScroll.setValidaImgBroken(true);
-		var datosScrollFinalGaleria = pageGaleriaSteps.scrollFromFirstPage(dataScroll);
+		var datosScrollFinalGaleria = pgGaleriaSteps.scrollFromFirstPage(dataScroll);
 		
 		if (channel.isDevice()) {
-			pageGaleriaSteps.backTo1erArticleMobilStep();
+			pgGaleriaSteps.backTo1erArticleMobilStep();
 		}
 		int numArticulosPantalla = 
-			pageGaleriaSteps.seleccionaOrdenacionGaleria(PRECIO_DESC, nameMenuCamisas);
+			pgGaleriaSteps.seleccionaOrdenacionGaleria(PRECIO_DESC, nameMenuCamisas);
 		
 		dataScroll.setValidateArticlesExpected(true);
 		dataScroll.setNumArticlesExpected(datosScrollFinalGaleria.getArticulosTotalesPagina());
-		pageGaleriaSteps.scrollFromFirstPage(dataScroll);	
+		pgGaleriaSteps.scrollFromFirstPage(dataScroll);	
 		
-		pageGaleriaSteps.seleccionaOrdenacionGaleria(PRECIO_ASC, nameMenuCamisas, numArticulosPantalla);
-		pageGaleriaSteps.scrollFromFirstPage(dataScroll);
-		pageGaleriaSteps.selecColorFromArtGaleriaStep(1, 2);
-		pageGaleriaSteps.selecArticuloGaleriaStep(1);
+		pgGaleriaSteps.seleccionaOrdenacionGaleria(PRECIO_ASC, nameMenuCamisas, numArticulosPantalla);
+		pgGaleriaSteps.scrollFromFirstPage(dataScroll);
+		pgGaleriaSteps.selecColorFromArtGaleriaStep(1, 2);
+		pgGaleriaSteps.selecArticuloGaleriaStep(1);
 	}
 	
 }

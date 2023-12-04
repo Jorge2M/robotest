@@ -19,11 +19,11 @@ public class PageEpsSelBancoSteps extends StepBase {
 		String codPais = dataTest.getCodigoPais();
 		checks.add(
 			"Figura el icono correspondiente al pago <b>EPS</b>",
-			pageEpsSelBanco.isPresentIconoEps(), Warn);
+			pageEpsSelBanco.isPresentIconoEps(), WARN);
 		
-		State stateVal = Warn;
+		State stateVal = WARN;
 		if (channel.isDevice()) {
-			stateVal=Info;
+			stateVal=INFO;
 		}
 		checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
@@ -31,7 +31,7 @@ public class PageEpsSelBancoSteps extends StepBase {
 		
 		checks.add(
 			"Aparece el logo del banco seleccionado",
-			pageEpsSelBanco.isVisibleIconoBanco(), Warn);
+			pageEpsSelBanco.isVisibleIconoBanco(), WARN);
 		
 		return checks;
 	}

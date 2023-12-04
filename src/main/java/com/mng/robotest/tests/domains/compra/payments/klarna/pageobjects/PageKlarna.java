@@ -15,12 +15,12 @@ public class PageKlarna extends PageBase {
 	private static final String XP_IFRMAE = "//iframe[@id[contains(.,'klarna-hpp-instance-fullscreen')]]";
 	
 	public boolean isPage(int seconds) {
-		return state(Visible, XP_BUY_BUTTON).wait(seconds).check();
+		return state(VISIBLE, XP_BUY_BUTTON).wait(seconds).check();
 	}
 	
 	public void clickBuyButton() {
 		click(XP_BUY_BUTTON).exec();
-		if (!state(Invisible, XP_BUY_BUTTON).wait(2).check()) {
+		if (!state(INVISIBLE, XP_BUY_BUTTON).wait(2).check()) {
 			click(XP_BUY_BUTTON).exec();
 		}
 	}

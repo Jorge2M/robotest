@@ -5,9 +5,9 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepMantoBase;
 import com.mng.robotest.tests.domains.manto.pageobjects.PageSelTda;
 import com.mng.robotest.tests.domains.transversal.prehome.pageobjects.PageJCAS;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class PageLoginMantoSteps extends StepMantoBase {
 
@@ -25,7 +25,7 @@ public class PageLoginMantoSteps extends StepMantoBase {
 			"Aparece la página de selección de login o selección de tienda",
 		expected=
 			"Aparece la página de selección de login o selección de tienda",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void goToMantoIfNotYet(String urlManto) {
 		String currentURL = driver.getCurrentUrl();
 		if (currentURL.compareTo(urlManto)!=0) {
@@ -37,14 +37,14 @@ public class PageLoginMantoSteps extends StepMantoBase {
 	@Step (
 		description="Identificarse desde la página de Jasig CAS con #{usrManto}",
 		expected="Aparece la página de selección de la tienda",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void identFromJasigCasPage(String usrManto, String passManto) {
 		new PageJCAS().identication(usrManto, passManto);
 	}
 
 	@Validation (
 		description="Aparece la página de selección de la tienda " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	private boolean checkIsPageSelectTienda(int seconds) {
 		return (new PageSelTda().isPage(seconds));
 	}

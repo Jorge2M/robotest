@@ -16,7 +16,7 @@ public class PageHomeConseguirPorLikes extends PageBase {
 			"//*[@class[contains(.,'icon-outline-done')]]";
 	
 	public boolean isPage(int seconds) {
-		return state(Visible, XP_BUTTON_LIKES).wait(seconds).check();
+		return state(VISIBLE, XP_BUTTON_LIKES).wait(seconds).check();
 	}
 	
 	public int selectConseguirButton() {
@@ -36,7 +36,7 @@ public class PageHomeConseguirPorLikes extends PageBase {
 	}
 	
 	public boolean isVisibleIconOperationDoneUntil(int seconds) {
-		return (state(Visible, XP_ICON_OPERATION_DONE).wait(seconds).check());
+		return (state(VISIBLE, XP_ICON_OPERATION_DONE).wait(seconds).check());
 	}
 	
 }

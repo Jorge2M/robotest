@@ -47,16 +47,16 @@ public class SecIdealCheckout extends PageBase {
 	}
 	
 	public boolean isVisibleUntil(int seconds) {
-		return state(Visible, XP_CARD_CONDITIONS).wait(seconds).check();
+		return state(VISIBLE, XP_CARD_CONDITIONS).wait(seconds).check();
 	}
 	
 	public boolean isVisibleSelectorOfBank(int seconds) {
-		return state(Present, XP_SELECTOR_BANK_IDEAL).wait(seconds).check();
+		return state(PRESENT, XP_SELECTOR_BANK_IDEAL).wait(seconds).check();
 	}
 	
 	public boolean isBancoDisponible(BancoSeleccionado bancoSeleccionado) {
 		String xpath = getXPathBankOption(bancoSeleccionado);
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 	
 	public void clickBancoByValue(BancoSeleccionado bancoSeleccionado) {

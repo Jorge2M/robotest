@@ -22,11 +22,11 @@ public class PagePaytrail1rstSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Figura el bloque correspondiente al pago <b>" + nombrePagoCabecera + "</b>",
-			pagePaytrail1rst.isPresentEntradaPago(nombrePagoCabecera), Warn);
+			pagePaytrail1rst.isPresentEntradaPago(nombrePagoCabecera), WARN);
 		
-		State stateVal = Warn;
+		State stateVal = WARN;
 		if (channel.isDevice()) {
-			stateVal = Info;
+			stateVal = INFO;
 		}
 		String codPais = dataTest.getCodigoPais();
 		checks.add(
@@ -36,7 +36,7 @@ public class PagePaytrail1rstSteps extends StepBase {
 		if (channel==Channel.desktop) {
 			checks.add(
 				"Es visible el desplegable de bancos " + getLitSecondsWait(seconds),
-				pagePaytrail1rst.isVisibleSelectBancosUntil(seconds), Warn);
+				pagePaytrail1rst.isVisibleSelectBancosUntil(seconds), WARN);
 			
 			checks.add(
 				"Figura un botón de pago",

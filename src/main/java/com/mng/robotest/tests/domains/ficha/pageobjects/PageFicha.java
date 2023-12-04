@@ -8,7 +8,7 @@ import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
 public abstract class PageFicha extends PageBase {
 
-	public abstract boolean isPageUntil(int seconds);
+	public abstract boolean isPage(int seconds);
 	public abstract boolean isFichaArticuloUntil(String refArticulo, int seconds);
 	public abstract boolean isVisibleBolsaButton(int seconds);
 	public abstract void clickAnadirBolsaButtonAndWait();

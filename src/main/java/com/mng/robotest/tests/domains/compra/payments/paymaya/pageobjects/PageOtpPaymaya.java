@@ -10,7 +10,7 @@ public class PageOtpPaymaya extends PageBase {
 	private static final String XP_PROCEED_BUTTON = "//button[@id='btn-proceed']";
 	
 	public boolean isPage() {
-		return state(Visible, XP_INPUT_OTP).check();
+		return state(VISIBLE, XP_INPUT_OTP).check();
 	}
 	
 	public void proceed(String otp) {

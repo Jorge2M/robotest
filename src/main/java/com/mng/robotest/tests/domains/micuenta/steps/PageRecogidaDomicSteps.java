@@ -9,7 +9,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageRecogidaDomicSteps extends StepBase {
 
-	private final PageRecADomic pageRecADomic = new PageRecADomic();
+	private final PageRecADomic pgRecADomic = new PageRecADomic();
 	
 	@Validation
 	public ChecksTM validaIsPageSinDevoluciones () {
@@ -17,11 +17,11 @@ public class PageRecogidaDomicSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de Recogida a Domicilio " + getLitSecondsWait(seconds),
-			pageRecADomic.isPage(seconds));
+			pgRecADomic.isPage(seconds));
 		
 		checks.add(
 			"No aparece ningún pedido",
-			 pageRecADomic.noHayPedidos(), Info);
+			 pgRecADomic.noHayPedidos(), INFO);
 
 		return checks;
 	}

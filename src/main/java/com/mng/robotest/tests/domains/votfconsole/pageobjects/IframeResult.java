@@ -17,22 +17,22 @@ public class IframeResult extends PageBase {
 	private static final String XP_BLOCK_LISTA_PEDIDOS_FULL= XP_BLOCK_RESULTADO + "//span[@class='pedido']";
 	
 	public boolean resultadoContainsText(String text) {
-		if (state(Present, XP_BLOCK_RESULTADO).check()) {
+		if (state(PRESENT, XP_BLOCK_RESULTADO).check()) {
 			return getElement(XP_BLOCK_RESULTADO).getText().contains(text);
 		}
 		return false;
 	}
 
 	public boolean existsTransportes() {
-		return state(Present, XP_BLOCK_TRANSPORTES).check();
+		return state(PRESENT, XP_BLOCK_TRANSPORTES).check();
 	}	
 	
 	public boolean existsDisponibilidad() {
-		return state(Present, XP_BLOCK_DISPONIBILIDAD).check();
+		return state(PRESENT, XP_BLOCK_DISPONIBILIDAD).check();
 	}	
 	
 	public boolean flagDisponibleIsTrue() {
-		if (state(Present, XP_CAMPO_DISPONIBLE).check()) {
+		if (state(PRESENT, XP_CAMPO_DISPONIBLE).check()) {
 			return ("true".compareTo(getElement(XP_CAMPO_DISPONIBLE).getText())==0);
 		}
 		return false;
@@ -43,7 +43,7 @@ public class IframeResult extends PageBase {
 		String[] listTrans = codigosTransporte.trim().split("\n");
 		for (int i=0; i<listTrans.length; i++) {
 			String xpath = XP_BLOCK_TRANSPORTES + "//table//tr[" + (i+3) + "]/td[1][text()='" + listTrans[i] + "']";
-			if (!state(Present, xpath).check()) { 
+			if (!state(PRESENT, xpath).check()) { 
 			   contains = false;
 			}
 		}
@@ -51,11 +51,11 @@ public class IframeResult extends PageBase {
 	}
 	
 	public boolean isPresentTipoStock() { 
-		return state(Present, XP_LINT_TIPO_STOCK).check();
+		return state(PRESENT, XP_LINT_TIPO_STOCK).check();
 	}
 	
 	public boolean isPresentCodigoPedido(int seconds) {
-		if (!state(Present, XP_BLOCK_RESULT_PEDIDO).wait(seconds).check()) {
+		if (!state(PRESENT, XP_BLOCK_RESULT_PEDIDO).wait(seconds).check()) {
 			return false;
 		}
 		return getElement(XP_BLOCK_RESULT_PEDIDO).getText().contains("Código pedido"); 
@@ -63,7 +63,7 @@ public class IframeResult extends PageBase {
 	
 	public String getCodigoPedido() {
 		String codigoPedido = "";
-		if (state(Present, XP_BLOCK_CODIGO_PEDIDO).check()) {
+		if (state(PRESENT, XP_BLOCK_CODIGO_PEDIDO).check()) {
 			codigoPedido = getElement(XP_BLOCK_CODIGO_PEDIDO).getText();
 		}
 		return codigoPedido;
@@ -99,14 +99,14 @@ public class IframeResult extends PageBase {
 
 	public boolean resCreacionPedidoOk() { 
 		boolean resultado = false;
-		if (state(Present, XP_BLOCK_RESULTADO).check()) {
+		if (state(PRESENT, XP_BLOCK_RESULTADO).check()) {
 			resultado = getElement(XP_BLOCK_RESULTADO).getText().contains("Resultado creación pedido: (0) Total");
 		}
 		return resultado;
 	}
 
 	public boolean isPresentListaPedidosUntil(int seconds) {
-		if (!state(Present, XP_BLOCK_LIST_PEDIDOS).wait(seconds).check()) {
+		if (!state(PRESENT, XP_BLOCK_LIST_PEDIDOS).wait(seconds).check()) {
 			return false;
 		}
 		return getElement(XP_BLOCK_LIST_PEDIDOS).getText().contains("Pedidos:");
@@ -114,21 +114,21 @@ public class IframeResult extends PageBase {
 	
 	public boolean resSelectPedidoOk(String codigoPedidoFull) {
 		boolean resultado = false;
-		if (state(Present, XP_BLOCK_RESULT_PEDIDO).check()) {
+		if (state(PRESENT, XP_BLOCK_RESULT_PEDIDO).check()) {
 			resultado = getElement(XP_BLOCK_RESULT_PEDIDO).getText().contains("Seleccionado: " + codigoPedidoFull);
 		}
 		return resultado;
 	}
 
 	public boolean isLineaPreconfirmado() {
-		if (state(Present, XP_BLOCK_RESULTADO).wait(1).check()) {
+		if (state(PRESENT, XP_BLOCK_RESULTADO).wait(1).check()) {
 			return getElement(XP_BLOCK_RESULTADO).getText().contains("Preconfirmado");
 		}
 		return false;
 	}
 
 	public boolean isPedidoInXML(String codigoPedidoFull) {
-		if (state(Present, XP_BLOCK_RESULTADO).check()) {
+		if (state(PRESENT, XP_BLOCK_RESULTADO).check()) {
 			return getElement(XP_BLOCK_RESULTADO + "//span").getText()
 					.contains("<pedido>" + codigoPedidoFull + "</pedido>");
 		}
@@ -137,7 +137,7 @@ public class IframeResult extends PageBase {
 
 	public boolean resConfPedidoOk(String codigoPedidoFull) {
 		boolean resultado = false;
-		if (state(Present, XP_BLOCK_RESULTADO).check()) {
+		if (state(PRESENT, XP_BLOCK_RESULTADO).check()) {
 			//En el bloque de "Petición/Resultado" aparece una línea "Confirmado: + codigoPedidoFull"
 			resultado = getElement(XP_BLOCK_RESULTADO).getText()
 					.contains("Confirmado: " + codigoPedidoFull);

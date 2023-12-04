@@ -9,10 +9,10 @@ public class ModalPreloaderSpinner extends PageBase {
 	private static final String XP_PRE_LOADER_SPINNER = "//div[@id='preloaderSpinner']";
 
 	public boolean isVisibleUntil(int seconds) {
-		return state(Visible, XP_PRE_LOADER_SPINNER).wait(seconds).check();
+		return state(VISIBLE, XP_PRE_LOADER_SPINNER).wait(seconds).check();
 	}
 	
 	public boolean isNotVisibleUntil(int seconds) {
-		return state(Invisible, XP_PRE_LOADER_SPINNER).wait(seconds).check();
+		return state(INVISIBLE, XP_PRE_LOADER_SPINNER).wait(seconds).check();
 	}
 }

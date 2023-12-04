@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.compra.pageobjects;
+package com.mng.robotest.tests.domains.compra.pageobjects.desktop;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -21,7 +21,7 @@ public class SecDireccionEnvioDesktop extends PageBase {
 	}
 	
 	public String getTextDireccionEnvio() {
-		if (state(Present, XP_DIRECCION_ENVIO).check()) {
+		if (state(PRESENT, XP_DIRECCION_ENVIO).check()) {
 			return getElement(XP_DIRECCION_ENVIO).getText();
 		}
 		return "";

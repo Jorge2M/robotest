@@ -11,7 +11,7 @@ public class ModEnvioYdevolNew extends PageBase {
 	private static final String XP_ASPA_FOR_CLOSE = "//div[@role='document']//*[@data-testid='modal.close.button']";
 	
 	public boolean isVisible(int seconds) {
-		return state(Present, XP_ASPA_FOR_CLOSE).wait(seconds).check();
+		return state(PRESENT, XP_ASPA_FOR_CLOSE).wait(seconds).check();
 	}
 
 	public void clickAspaForClose() {

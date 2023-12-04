@@ -1,8 +1,7 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.filters.device;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Clickable;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.javascript;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.device.FiltroMobil.*;
 
 import java.util.Arrays;
@@ -41,7 +40,7 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 	
 	@Override
 	public boolean isClickableFiltroUntil(int seconds) {
-		return state(Clickable, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
+		return state(CLICKABLE, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
 	}	
 	
 	@Override
@@ -72,7 +71,7 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 		waitLoadPage();
 		for (String textFiltro : listTextFiltros) {
 			String xpathFiltroOption = getXPathFiltroOption(textFiltro);
-			if (!state(Visible, xpathFiltroOption).check()) {
+			if (!state(VISIBLE, xpathFiltroOption).check()) {
 				close();
 				return false;
 			}
@@ -118,7 +117,7 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 	}
 	
 	private boolean goAndClickFiltroButton() {
-		if (state(Visible, XP_FILTRAR_Y_ORDENAR_BUTTON).check()) {
+		if (state(VISIBLE, XP_FILTRAR_Y_ORDENAR_BUTTON).check()) {
 			moveToElement(XP_FILTRAR_Y_ORDENAR_BUTTON);
 			waitMillis(500);
 			scrollVertical(-50);
@@ -128,18 +127,17 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 	}
 	
 	private boolean waitAndClickFiltroButton(int seconds) {
-		if (!isOpenFiltrosUntil(0)) {
-			if (state(Clickable, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check()) {
-				click(XP_FILTRAR_Y_ORDENAR_BUTTON).type(javascript).exec();
-				return isOpenFiltrosUntil(seconds);
-			}
+		if (!isOpenFiltrosUntil(0) &&
+			state(CLICKABLE, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check()) {
+			click(XP_FILTRAR_Y_ORDENAR_BUTTON).type(JAVASCRIPT).exec();
+			return isOpenFiltrosUntil(seconds);
 		}		
 		return false;
 	}
 	
 	private boolean isOpenFiltrosUntil(int seconds) {
 		String xpathLineaOrdenar = ORDENAR.getXPathNormal();
-		return state(Visible, xpathLineaOrdenar).wait(seconds).check();
+		return state(VISIBLE, xpathLineaOrdenar).wait(seconds).check();
 	}
 	private boolean isCloseFiltrosUntil(int seconds) {
 		for (int i=0; i<seconds; i++) {

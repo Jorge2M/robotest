@@ -32,8 +32,6 @@ import com.mng.robotest.testslegacy.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public abstract class StepBase extends PageBase {
 
 	protected static final String SECONDS_WAIT = "(esperamos hasta #{seconds}s)";
@@ -171,7 +169,7 @@ public abstract class StepBase extends PageBase {
 		for (var legalText : legalTexts.getTexts()) {
 			checks.add(
 				"Aparece el <b>texto legal</b> \"" + legalText.getText() + "\"<br>",
-				legalTextsPage.isVisibleLegalText(legalText), Defect);
+				legalTextsPage.isVisibleLegalText(legalText));
 		}
 	}
 	

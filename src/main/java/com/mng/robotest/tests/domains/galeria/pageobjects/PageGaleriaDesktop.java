@@ -27,6 +27,7 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.StateFavorito.*;
 
 public abstract class PageGaleriaDesktop extends PageGaleria {
 	
@@ -87,7 +88,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 
 	public boolean isPage() {
 		String xpath = "//div[@class[contains(.,'container-fluid catalog')]]";
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 	
 	private String getXPathLabel(LabelArticle label) {
@@ -181,9 +182,9 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		String linea1rstCharCapital = idLinCarrusel.substring(0,1).toUpperCase() + idLinCarrusel.substring(1, idLinCarrusel.length());
 		String lastCharUpper = idLinCarrusel.substring(idLinCarrusel.length()-1,idLinCarrusel.length()).toUpperCase();
 		String lineaLastCharCapital = idLinCarrusel.substring(0,idLinCarrusel.length()-1) + lastCharUpper;
-		if (state(Present, article).by(By.xpath(".//a[@href[contains(.,'" + idLinCarrusel + "')]]")).check() ||
-			state(Present, article).by(By.xpath(".//a[@href[contains(.,'s=" + linea1rstCharCapital + "')]]")).check() ||
-			state(Present, article).by(By.xpath(".//a[@href[contains(.,'_" + lineaLastCharCapital + "')]]")).check()) {
+		if (state(PRESENT, article).by(By.xpath(".//a[@href[contains(.,'" + idLinCarrusel + "')]]")).check() ||
+			state(PRESENT, article).by(By.xpath(".//a[@href[contains(.,'s=" + linea1rstCharCapital + "')]]")).check() ||
+			state(PRESENT, article).by(By.xpath(".//a[@href[contains(.,'_" + lineaLastCharCapital + "')]]")).check()) {
 			return true;
 		}
 		
@@ -192,7 +193,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return 
 		    (lineaType!=null && 
 		    (lineaType==LineaType.NINA || lineaType==LineaType.NINO) &&
-		    (state(Present, ".//a[@href[contains(.,'" + lineaType.getId2() + "')]]").check()));
+		    (state(PRESENT, ".//a[@href[contains(.,'" + lineaType.getId2() + "')]]").check()));
 	}
 	
 	/**
@@ -228,7 +229,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 
 	public boolean isArticuloWithStringInName(String string) {
 		String xpathArtWithString = getXPathNombreArticuloWithString(string);
-		return state(Present, xpathArtWithString).check();
+		return state(PRESENT, xpathArtWithString).check();
 	}	
  
 
@@ -242,8 +243,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	public String getPrecioArticulo(WebElement articulo) {
 		return (secPrecios.getPrecioDefinitivo(articulo));
 	}	
-	
-
 	
 	/**
 	 * @return número de doble tamaño de la galería
@@ -333,7 +332,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 			String referencia = litWebEl.getAttribute("id").replace("_info", "");
 			dataTextArticles.add(litWebEl.getText() + " (" + referencia + ")");
 		}
-		
 		return dataTextArticles;
 	}
 	
@@ -367,7 +365,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	@Override
 	public void moveToArticleAndGetObject(int posArticulo) {
 		String xpathArticle = getXPathLinkArticulo(posArticulo) + "/..";
-		state(Visible, xpathArticle).wait(1).check();
+		state(VISIBLE, xpathArticle).wait(1).check();
 		moveToElement(xpathArticle);
 	}
 
@@ -399,7 +397,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	public boolean isVisibleAnyArticle() {
-		return (state(Visible, getXPathArticulo()).check());
+		return (state(VISIBLE, getXPathArticulo()).check());
 	}
 
 	public void clickArticulo(int numArticulo) {
@@ -407,9 +405,9 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		click(xpathArticulo).exec();
 		
 		//Existe un problema en Firefox-Gecko con este botón: a veces el 1er click no funciona así que ejecutamos un 2o 
-		if (state(Visible, xpathArticulo).check()) {
+		if (state(VISIBLE, xpathArticulo).check()) {
 			try {
-				click(xpathArticulo).type(javascript).exec();
+				click(xpathArticulo).type(JAVASCRIPT).exec();
 			}
 			catch (Exception e) {
 				//Hay un caso en el que el artículo justo desaparece y se clicka -> 
@@ -432,50 +430,48 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return getElement("(" + getXPathArticulo() + ")[" + numArticulo + "]//span[" + classProductName + "]").getText().trim();
 	}
 
-	/**
-	 * Revisa si los nombres de los artículos son válidos (si los nombres contienen alguno de los del conjunto de literales)
-	 * @param isMobil
-	 * @param nombrePosibles: conjuntos de substrings que han de contener los artículos
-	 * @return 
-	 *	En caso de que todos los artículso tengan un nombre válido: ""
-	 *	En caso de que exista algún artículo no válido: nombre del 1er artículo no válido  
-	 */
 	public List<String> getArticlesNoValid(List<String> articleNames) {
-		//Obtenemos el xpath de los artículos eliminando el último carácter (]) pues hemos de insertar condiciones en el XPATH
-		String xpathLitArticulos = getXPathArticulo() + "//*[" + classProductName + "]";
-		xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
-		for (String article : articleNames) {
-			xpathLitArticulos +=  
-				" and text()[not(contains(.,'" + article + "'))]" +
-				" and text()[not(contains(.,'" + article.toLowerCase() + "'))]" +
-				" and text()[not(contains(.,'" + article.toUpperCase() + "'))]";
-		} 
-		xpathLitArticulos += "]";
-
-		//Si existe algún elemento que no pertenece al grupo de nombres válidos -> devolvemos el 1ero que no coincide
-		List<String> listTxtArtNoValidos = new ArrayList<>();
-		if (state(Present, xpathLitArticulos).check()) {
-			for (int i=0; i<3; i++) {
-				try {
-					waitLoadPage();
-					List<WebElement> listTextosArticulosNoValidos = getElements(xpathLitArticulos);
-					for (WebElement textoArticuloNoValido : listTextosArticulosNoValidos) {
-						String nombre = textoArticuloNoValido.getText();
-						String xpathArtWithoutDoubleSlash = getXPathArticulo().substring(2);
-						//String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::*[@class[contains(.,'product-list-item')]]")).getAttribute("id");
-						String referencia = textoArticuloNoValido.findElement(By.xpath("./ancestor::" + xpathArtWithoutDoubleSlash)).getAttribute("id");
-						listTxtArtNoValidos.add(nombre + " (" + referencia + ")");
-					}
-					break;
-				}
-				catch (StaleElementReferenceException e) {
-					Log4jTM.getLogger().info("StaleElementReferenceException getting listTextos no validos from Galery");
-				}
-			}
-		}
-
-		return listTxtArtNoValidos;
+	    String xpathLitArticulos = getXPathArticleNames(articleNames);
+	    List<String> listTxtArtNoValidos = new ArrayList<>();
+	    if (state(PRESENT, xpathLitArticulos).check()) {
+	        for (int i = 0; i < 3; i++) {
+	            try {
+	                waitLoadPage();
+	                listTxtArtNoValidos = getListTextosNoValidos(xpathLitArticulos);
+	                break;
+	            } catch (StaleElementReferenceException e) {
+	                Log4jTM.getLogger().info("StaleElementReferenceException getting listTextos no validos from Gallery");
+	            }
+	        }
+	    }
+	    return listTxtArtNoValidos;
 	}
+
+	private String getXPathArticleNames(List<String> articleNames) {
+	    String xpathLitArticulos = getXPathArticulo();
+	    xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
+	    for (String article : articleNames) {
+	        xpathLitArticulos +=  
+	                " and text()[not(contains(.,'" + article + "'))]" +
+	                " and text()[not(contains(.,'" + article.toLowerCase() + "'))]" +
+	                " and text()[not(contains(.,'" + article.toUpperCase() + "'))]";
+	    }
+	    xpathLitArticulos += "]";
+	    return xpathLitArticulos;
+	}
+
+	private List<String> getListTextosNoValidos(String xpath) {
+	    var listTextosArticulosNoValidos = getElements(xpath);
+	    List<String> listTxtArtNoValidos = new ArrayList<>();
+	    for (var textoArticuloNoValido : listTextosArticulosNoValidos) {
+	        String nombre = textoArticuloNoValido.getText();
+	        String referencia = textoArticuloNoValido
+	                .findElement(By.xpath("./ancestor::" + getXPathArticulo().substring(2) + "]"))
+	                .getAttribute("id");
+	        listTxtArtNoValidos.add(nombre + " (" + referencia + ")");
+	    }
+	    return listTxtArtNoValidos;
+	}	
 	
 	//Equivalent to Mobil
 	@Override
@@ -520,7 +516,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
 		moveToElement(hearthIcon);
-		state(Clickable, hearthIcon).wait(1).check();
+		state(CLICKABLE, hearthIcon).wait(1).check();
 		try {
 			hearthIcon.click();
 		} 
@@ -542,32 +538,23 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	@Override
 	public boolean isArticleWithHearthIconPresentUntil(int posArticle, int seconds) {
 		String xpathIcon = getXPathArticleHearthIcon(posArticle);
-		return state(Present, xpathIcon).wait(seconds).check();
+		return state(PRESENT, xpathIcon).wait(seconds).check();
 	}
 	
 	//Equivalent to Mobil
 	@Override
 	public void clickHearhIcon(int posArticle) throws Exception {
-		//Nos posicionamos en el icono del Hearth 
-		String xpathIcon = getXPathArticleHearthIcon(posArticle);
-		state(Visible, xpathIcon).wait(1).check();
-		var hearthIcon = getElement(xpathIcon);
-		moveToElement(hearthIcon);
-		
-		//Clicamos y esperamos a que el icono cambie de estado
-		StateFavorito estadoInicial = getStateHearthIcon(hearthIcon);
-		clickHearthIcon(hearthIcon);
-		switch (estadoInicial) {
-		case MARCADO:
-			waitToHearthIconInState(hearthIcon, StateFavorito.DESMARCADO, 2);
-			break;
-		case DESMARCADO:
-			waitToHearthIconInState(hearthIcon, StateFavorito.MARCADO, 2);
-			break;
-		default:
-			break;
-		}		
-	}
+	    String xpathIcon = getXPathArticleHearthIcon(posArticle);
+	    state(VISIBLE, xpathIcon).wait(1).check();
+	    var hearthIcon = getElement(xpathIcon);
+	    moveToElement(hearthIcon);
+
+	    var estadoInicial = getStateHearthIcon(hearthIcon);
+	    clickHearthIcon(hearthIcon);
+
+	    var estadoFinal = (estadoInicial == MARCADO) ? DESMARCADO : MARCADO;
+	    waitToHearthIconInState(hearthIcon, estadoFinal, 2);
+	}	
 
 	@Override
 	public boolean isHeaderArticlesVisible(String textHeader) {
@@ -576,7 +563,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 	
 	private String getHeaderText(int seconds) {
-		if (state(Visible, XP_HEADER_ARTICLES).wait(1).check()) {
+		if (state(VISIBLE, XP_HEADER_ARTICLES).wait(1).check()) {
 			for (int i=0; i<seconds; i++) {
 				String headerText = getElement(XP_HEADER_ARTICLES).getText();
 				if (headerText.compareTo("")!=0) {
@@ -590,7 +577,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 
 	public boolean isPresentAnyArticle(TypeArticleDesktop typeArticle) {
 		String xpathVideo = getXPathArticulo(typeArticle);
-		return state(Present, xpathVideo).check();
+		return state(PRESENT, xpathVideo).check();
 	}
 
 	public boolean isVisibleSelectorPrecios() {

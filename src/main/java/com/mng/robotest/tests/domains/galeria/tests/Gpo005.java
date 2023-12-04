@@ -11,7 +11,7 @@ import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.Lin
 
 public class Gpo005 extends TestBase {
 
-	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
+	private final PageGaleriaSteps pgGaleriaSteps = new PageGaleriaSteps();
 	
 	@Override
 	public void execute() throws Exception {
@@ -29,7 +29,7 @@ public class Gpo005 extends TestBase {
 	private void clickMenu() {
 		if (isGroupNewNowSelectable()) {
 			clickGroup(NEW_NOW);
-			pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);			
+			pgGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);			
 		} else {
 			clickMenu(CARDIGANS_Y_JERSEIS_SHE);
 		}
@@ -42,11 +42,11 @@ public class Gpo005 extends TestBase {
 	}
 	
 	private void selectPricesInterval() throws Exception {
-		pageGaleriaSteps.getSecSelectorPreciosSteps().seleccionaIntervalo();
+		pgGaleriaSteps.getSecSelectorPreciosSteps().seleccionaIntervalo();
 	}
 	
 	private void checkCrossSelling() {
-		pageGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);
+		pgGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);
 	}
 	
 	private void clickSubmenu() {

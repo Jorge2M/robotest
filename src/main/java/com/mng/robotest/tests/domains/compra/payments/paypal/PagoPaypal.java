@@ -29,11 +29,11 @@ public class PagoPaypal extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		modalPreloaderSppinerSteps.validateAppearsAndDisappears();
 		if (getInitPagePaypal() == InitPagePaypal.LOGIN) {
-			pagePaypalLoginSteps.validateIsPageUntil(0);
+			pagePaypalLoginSteps.validateisPage(0);
 		}
 		else {
 			pagePaypalCreacionCuentaSteps.clickButtonIniciarSesion();
@@ -50,13 +50,13 @@ public class PagoPaypal extends PagoSteps {
 			
 			modalPreloaderSppinerSteps.validateIsVanished(seconds);
 			if (getPostLoginPagePaypal()==PostLoginPagePaypal.SELECT_PAGO) {
-				pagePaypalSelectPagoSteps.validateIsPageUntil(0);
+				pagePaypalSelectPagoSteps.validateisPage(0);
 				pagePaypalSelectPagoSteps.clickContinuarButton();	  
 			}
 			
 			seconds = 3;
-			if (new PagePaypalConfirmacion().isPageUntil(seconds)) {
-				pagePaypalConfirmacionSteps.validateIsPageUntil(0);
+			if (new PagePaypalConfirmacion().isPage(seconds)) {
+				pagePaypalConfirmacionSteps.validateisPage(0);
 				pagePaypalConfirmacionSteps.clickContinuarButton();
 			}
 		}
@@ -66,11 +66,11 @@ public class PagoPaypal extends PagoSteps {
 	private enum PostLoginPagePaypal { SELECT_PAGO, CONFIRMACION }
 	
 	private InitPagePaypal getInitPagePaypal() {
-		if (new PagePaypalLogin().isPageUntil(5)) {
+		if (new PagePaypalLogin().isPage(5)) {
 			return InitPagePaypal.LOGIN;
 		}
 		
-		if (new PagePaypalCreacionCuenta().isPageUntil(1)) {
+		if (new PagePaypalCreacionCuenta().isPage(1)) {
 			return InitPagePaypal.CREACION_CUENTA;
 		}
 		
@@ -79,10 +79,10 @@ public class PagoPaypal extends PagoSteps {
 	
 	private PostLoginPagePaypal getPostLoginPagePaypal() {
 		int seconds = 5;
-		if (new PagePaypalSelectPago().isPageUntil(seconds)) {
+		if (new PagePaypalSelectPago().isPage(seconds)) {
 			return PostLoginPagePaypal.SELECT_PAGO;
 		}
-		if (new PagePaypalConfirmacion().isPageUntil(0)) {
+		if (new PagePaypalConfirmacion().isPage(0)) {
 			return PostLoginPagePaypal.CONFIRMACION;
 		}
 

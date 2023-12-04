@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.SelectElement.TypeSelect.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageGenerarPedido extends PageBase {
 
@@ -46,7 +46,7 @@ public class PageGenerarPedido extends PageBase {
 	}
 	
 	public boolean isPage(String idPedido) {
-		WebElement inputIdPedido = getElementWeb(XP_INPUT_PURCHORDER_NUM);
+		var inputIdPedido = getElementWeb(XP_INPUT_PURCHORDER_NUM);
 		if (inputIdPedido!=null) {
 			String valueInput = inputIdPedido.getAttribute("value");
 			if (valueInput!=null) {
@@ -84,7 +84,7 @@ public class PageGenerarPedido extends PageBase {
 	}
 	
 	public boolean isVisibleMessageFileCreated() {
-		return state(Visible, XP_MESSAGE_OK_FICHERO_CREADO).check();
+		return state(VISIBLE, XP_MESSAGE_OK_FICHERO_CREADO).check();
 	}
 	
 	public void clickInformarBancoEnCasoCancelacionAlGenerarPedido() {

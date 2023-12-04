@@ -9,7 +9,7 @@ import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroNinosOutl
 
 public class PageRegistroNinosStepsOutlet extends StepBase {
 	
-	private final PageRegistroNinosOutlet pageRegistroNinos = new PageRegistroNinosOutlet();
+	private final PageRegistroNinosOutlet pgRegistroNinos = new PageRegistroNinosOutlet();
 	
 	@Validation
 	public ChecksTM validaIsPageWithNinos(int numNinos) {
@@ -17,10 +17,12 @@ public class PageRegistroNinosStepsOutlet extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de introducción de datos del niño " + getLitSecondsWait(seconds),
-			pageRegistroNinos.isPageUntil(seconds));
+			pgRegistroNinos.isPage(seconds));
+		
 		checks.add(
 			"Aparecen inputs para introducir <b>" + numNinos + "</b>",
-			pageRegistroNinos.getNumInputsNameNino()==numNinos);
+			pgRegistroNinos.getNumInputsNameNino()==numNinos);
+		
 		return checks;		
 	}
 	
@@ -28,8 +30,8 @@ public class PageRegistroNinosStepsOutlet extends StepBase {
 		description="Introducir datos de los niños: <br>#{listaNinos.getFormattedHTMLData()}<br> y finalmente pulsar el botón \"Continuar\"", 
 		expected="Aparece la página de introducción de datos de la dirección")
 	public void sendNinoDataAndContinue(ListDataNinos listaNinos) {
-		pageRegistroNinos.setDataNinoIfNotExists(listaNinos, 2);
-		pageRegistroNinos.clickContinuar();
+		pgRegistroNinos.setDataNinoIfNotExists(listaNinos, 2);
+		pgRegistroNinos.clickContinuar();
 		new PageRegistroDirecStepsOutlet().isPageFromPais();
 		checksDefault();
 	}

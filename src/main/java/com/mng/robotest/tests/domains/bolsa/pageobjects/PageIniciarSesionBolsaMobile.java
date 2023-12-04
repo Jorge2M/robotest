@@ -13,8 +13,8 @@ public class PageIniciarSesionBolsaMobile extends PageBase {
 	
 	public boolean isPage(int seconds) {
 		return 
-			state(Present, XP_USER_INPUT).wait(seconds).check() &&
-			state(Present, XP_PASSWORD_INPUT).wait(seconds).check();
+			state(PRESENT, XP_USER_INPUT).wait(seconds).check() &&
+			state(PRESENT, XP_PASSWORD_INPUT).wait(seconds).check();
 	}
 	
 	public void login(String user, String password) {

@@ -51,7 +51,7 @@ public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 	@Override
 	public boolean isClickableFiltroUntil(int seconds) {
 		String xpath = getXPathLinkOrdenacion(FilterOrdenacion.PRECIO_ASC);
-		return state(Clickable, xpath).wait(seconds).check();
+		return state(CLICKABLE, xpath).wait(seconds).check();
 	}
 	
 	@Override

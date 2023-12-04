@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.tests.conf.factories.entities.EgyptCity;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
@@ -22,6 +21,7 @@ import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.pageobject.shop.PopupFindAddress;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.*;
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
@@ -75,12 +75,12 @@ public class Page2IdentCheckout extends PageBase {
 		this.egyptCity = egyptCity;
 	}
 	
-	public boolean isPageUntil(int seconds) {
-		return state(Present, XP_MAIN_FORM).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(PRESENT, XP_MAIN_FORM).wait(seconds).check();
 	}
 	
 	public boolean checkEmail(String email) {
-		if (state(Visible, XP_INPUT_EMAIL).check()) {
+		if (state(VISIBLE, XP_INPUT_EMAIL).check()) {
 			String emailScreen = getElement(XP_INPUT_EMAIL).getAttribute(VALUE);
 			if (emailScreen!=null) {
 				return (email.compareTo(emailScreen)==0);
@@ -90,7 +90,7 @@ public class Page2IdentCheckout extends PageBase {
 	}
 
 	public boolean isInputPasswordAccordingEmail(boolean emailYetExists) {
-		boolean isVisiblePassword = state(Visible, XP_INPUT_PASSWORD).check();
+		boolean isVisiblePassword = state(VISIBLE, XP_INPUT_PASSWORD).check();
 		return (emailYetExists!=isVisiblePassword);
 	}
 
@@ -120,7 +120,7 @@ public class Page2IdentCheckout extends PageBase {
 	}
 	
 	public boolean isNombreUsuarioVisible(int seconds) {
-		return state(Visible, XP_INPUT_NOMBRE_USR).wait(seconds).check();
+		return state(VISIBLE, XP_INPUT_NOMBRE_USR).wait(seconds).check();
 	}
 	
 	public void setNombreUsuarioIfVisible(String nombreUsr, Map<String,String> datosRegistro) {
@@ -160,7 +160,7 @@ public class Page2IdentCheckout extends PageBase {
 
 	public void setInputPoblacionIfVisible(String cfCity, Map<String,String> datosRegistro) {
 		waitLoadPage();
-		state(Clickable, XP_INPUT_POBLACION_ACTIVE).wait(1).check();
+		state(CLICKABLE, XP_INPUT_POBLACION_ACTIVE).wait(1).check();
 		boolean datoSeteado = setInputIfVisible(XP_INPUT_POBLACION_ACTIVE, cfCity);
 		if (datoSeteado) {
 			datosRegistro.put("cfCity", cfCity);
@@ -210,7 +210,7 @@ public class Page2IdentCheckout extends PageBase {
 				//Si existe el tag 'onkeyup' (se desencadena petición Ajax) tenemos que esperaremos un máximo de 2 segundos hasta que aparezca el desplegable con las poblaciones
 				cfCodpostalList.get(0).getAttribute("onkeyup")!=null && 
 				cfCodpostalList.get(0).getAttribute("onkeyup").compareTo("")!=0) {
-					state(Visible, XP_SELECT_LOCALIDADES).wait(2).check();
+					state(VISIBLE, XP_SELECT_LOCALIDADES).wait(2).check();
 			}
 		}
 		return datoSeteado;
@@ -259,7 +259,7 @@ public class Page2IdentCheckout extends PageBase {
 		List<WebElement> paisCf = getElementsVisible(XP_SELECT_PAIS);
 		if (!paisCf.isEmpty()) {
 			String xpathSelectedPais = XP_SELECT_PAIS + "/option[@selected='selected' and @value='" + pais.getAddress() + "']";
-			if (state(Present, xpathSelectedPais).check()) {
+			if (state(PRESENT, xpathSelectedPais).check()) {
 				new Select(paisCf.get(0)).selectByValue(pais.getCodigoPais());
 				datoSeteado = true;
 			}
@@ -286,7 +286,7 @@ public class Page2IdentCheckout extends PageBase {
 	public void setDireccionWithFindAddressIfExists(Map<String,String> datosRegistro) {
 		String codPostalSeteado = getCodigoPostal();
 		if (pais.getCodpos().compareTo(codPostalSeteado)!=0 &&
-			state(Visible, By.xpath(XP_BOTON_FIND_ADDRESS)).check()) {
+			state(VISIBLE, By.xpath(XP_BOTON_FIND_ADDRESS)).check()) {
 			clickBotonFindAddress();
 			String mainWindowHandle = driver.getWindowHandle();
 			try {
@@ -306,11 +306,11 @@ public class Page2IdentCheckout extends PageBase {
 			}
 			finally { 
 				driver.switchTo().window(mainWindowHandle);
-				if (state(Present, XP_INPUT_DIRECCION1 + "//self::*[string-length(@value)>0]").wait(1).check()) {
+				if (state(PRESENT, XP_INPUT_DIRECCION1 + "//self::*[string-length(@value)>0]").wait(1).check()) {
 					String direccion1 = getElement(XP_INPUT_DIRECCION1).getAttribute("value");
 					datosRegistro.put("cfDir1", direccion1);
 				}
-				if (state(Present, XP_INPUT_CODPOST).check()) {
+				if (state(PRESENT, XP_INPUT_CODPOST).check()) {
 					String direccion1 = getElement(XP_INPUT_CODPOST).getAttribute("value");
 					datosRegistro.put("cfCp", direccion1);
 				}
@@ -319,17 +319,17 @@ public class Page2IdentCheckout extends PageBase {
 	}
 
 	public String getCodigoPostal() {
-		if (state(Present, XP_INPUT_CODPOST).check()) {
+		if (state(PRESENT, XP_INPUT_CODPOST).check()) {
 			return getElement(XP_INPUT_CODPOST).getAttribute(VALUE);
 		}
 		return "";
 	}
 
 	public void selectReceiveNewsletterRadio(Map<String,String> datosRegistro) {
-		if (state(Present, XP_CHECK_PUBLICIDAD).check() && 
+		if (state(PRESENT, XP_CHECK_PUBLICIDAD).check() && 
 			!getElement(XP_CHECK_PUBLICIDAD).isSelected()) {
 			moveToElement(XP_CHECK_PUBLICIDAD);
-			if (state(Visible, XP_CHECK_PUBLICIDAD).check()) {
+			if (state(VISIBLE, XP_CHECK_PUBLICIDAD).check()) {
 				getElement(XP_CHECK_PUBLICIDAD).click();
 				datosRegistro.put("cfPubli", "true");
 				return;
@@ -339,7 +339,7 @@ public class Page2IdentCheckout extends PageBase {
 	}
 	
 	public void clickOver18YearsIfVisible(Map<String,String> datosRegistro) {
-		if (state(Present, XP_CHECK_OVER18YEARS).check()) {
+		if (state(PRESENT, XP_CHECK_OVER18YEARS).check()) {
 			moveToElement(XP_CHECK_OVER18YEARS);
 			getElement(XP_CHECK_OVER18YEARS).click();
 			datosRegistro.put("cfPriv18", "true");
@@ -349,7 +349,7 @@ public class Page2IdentCheckout extends PageBase {
 	}
 	
 	public void clickReadConsentIfVisible(Map<String,String> datosRegistro) {
-		if (state(Present, XP_CHECK_READCONSENT).check()) {
+		if (state(PRESENT, XP_CHECK_READCONSENT).check()) {
 			moveToElement(XP_CHECK_READCONSENT);
 			getElement(XP_CHECK_READCONSENT).click();
 			datosRegistro.put("cfPriv", "true");
@@ -671,21 +671,21 @@ public class Page2IdentCheckout extends PageBase {
 	}
 
 	public boolean isContinuarClickableUntil(int seconds) {
-		return state(Clickable, XP_BOTON_CONTINUAR).wait(seconds).check();
+		return state(CLICKABLE, XP_BOTON_CONTINUAR).wait(seconds).check();
 	}
 
 	public void clickBotonContinuarAndWait(int seconds) {
 		click(XP_BOTON_CONTINUAR).waitLoadPage(seconds).exec();
  
 		//Hay una especie de bug (p.e. en el caso de Turquía) que hace que en ocasiones el click no tenga efecto
-		if (state(Present, XP_BOTON_CONTINUAR).check()) {
+		if (state(PRESENT, XP_BOTON_CONTINUAR).check()) {
 			waitMillis(1500);
-			click(XP_BOTON_CONTINUAR).type(TypeClick.javascript).exec();
+			click(XP_BOTON_CONTINUAR).type(JAVASCRIPT).exec();
 		}
 	}
 
 	public boolean isDisplayedAvisoAduanas() {
-		return state(Visible, XP_MSG_ADUANAS).wait(1).check();
+		return state(VISIBLE, XP_MSG_ADUANAS).wait(1).check();
 	}
 	
 	public void clickPoliticaPrivacidad() {

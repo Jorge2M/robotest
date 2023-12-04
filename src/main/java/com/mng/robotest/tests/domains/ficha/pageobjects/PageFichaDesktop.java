@@ -29,9 +29,9 @@ public class PageFichaDesktop extends PageFicha {
 	}
 
 	@Override
-	public boolean isPageUntil(int seconds) {
+	public boolean isPage(int seconds) {
 		return 
-			state(Present, XP_HTML_FICHA).wait(seconds).check() &&
+			state(PRESENT, XP_HTML_FICHA).wait(seconds).check() &&
 			secDataProduct.getSecSelTallas().isVisibleSelectorTallasUntil(seconds);
 	}
 
@@ -39,7 +39,7 @@ public class PageFichaDesktop extends PageFicha {
 	public boolean isFichaArticuloUntil(String refArticulo, int seconds) {
 		String refSinColor = refArticulo.substring(0,8);
 		String xpathFichaRef = getXPathIsPage(refSinColor);
-		return state(Visible, xpathFichaRef).wait(seconds).check();
+		return state(VISIBLE, xpathFichaRef).wait(seconds).check();
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class PageFichaDesktop extends PageFicha {
 
 	@Override
 	public boolean isVisibleBuscarEnTiendaLink() {
-		return secBolsaButtonAndLinks.checkLinkInState(DISPONIBILIDAD_TIENDA, Visible);
+		return secBolsaButtonAndLinks.checkLinkInState(DISPONIBILIDAD_TIENDA, VISIBLE);
 	}
 
 	@Override

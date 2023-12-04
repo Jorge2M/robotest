@@ -19,7 +19,7 @@ import static com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType
 public class Reg002 extends TestBase {
 
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
-	private final PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
+	private final PageRegistroIniStepsOutlet pgRegistroIniSteps = new PageRegistroIniStepsOutlet();
 	
 	private final Map<String, String> dataRegister = new HashMap<>();
 	
@@ -44,7 +44,7 @@ public class Reg002 extends TestBase {
 	}
 	
 	private void registerWithoutInputData() {
-		pageRegistroIniSteps.clickRegistrateButton(dataRegister, INPUT_WARINGS);
+		pgRegistroIniSteps.clickRegistrateButton(dataRegister, INPUT_WARINGS);
 	}
 	
 	private void registerWithIncorrectInputData() {
@@ -57,7 +57,7 @@ public class Reg002 extends TestBase {
 		dataKOToSend.add(CODPOSTAL, "0872A", false);
 		
 		String dataToSendInHtmlFormat = dataKOToSend.getFormattedHTMLData(PAGEINICIAL);
-		pageRegistroIniSteps.sendFixedDataToInputs(dataKOToSend, dataToSendInHtmlFormat);
+		pgRegistroIniSteps.sendFixedDataToInputs(dataKOToSend, dataToSendInHtmlFormat);
 	}	
 	
 	private void registerWithExistentEmail() {
@@ -74,7 +74,7 @@ public class Reg002 extends TestBase {
 		dataToSend.add(CODPOSTAL, "08720", true);
 		String dataToSendInHtmlFormat = dataToSend.getFormattedHTMLData(PAGEINICIAL);
 		
-		pageRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
-		pageRegistroIniSteps.clickRegistrateButton(dataRegister, USR_EXISTS_IN_MANGO);
+		pgRegistroIniSteps.sendFixedDataToInputs(dataToSend, dataToSendInHtmlFormat);
+		pgRegistroIniSteps.clickRegistrateButton(dataRegister, USR_EXISTS_IN_MANGO);
 	}
 }

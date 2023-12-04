@@ -13,7 +13,7 @@ public class Bus001 extends TestBase {
 	private final String catProdInexistente;
 	
 	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	private final PageLandingSteps pageLandingSteps = new PageLandingSteps();
+	private final PageLandingSteps pgLandingSteps = new PageLandingSteps();
 	
 	public Bus001(String categoriaProdExistente, String catProdInexistente) {
 		super();
@@ -24,7 +24,7 @@ public class Bus001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access();
-		pageLandingSteps.checkIsPageWithCorrectLineas();
+		pgLandingSteps.checkIsPageWithCorrectLineas();
 		
 		GarmentCatalog product = getProduct();
 		secBuscadorSteps.searchArticulo(Article.getArticleForTest(product));

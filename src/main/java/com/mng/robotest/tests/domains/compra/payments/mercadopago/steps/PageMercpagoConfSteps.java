@@ -12,8 +12,8 @@ public class PageMercpagoConfSteps extends StepBase {
 	
 	@Validation (
 		description="Estamos en la página de confirmación del pago " + SECONDS_WAIT)
-	public boolean validaIsPageUntil(int seconds) {  
-		return pageMercpagoConf.isPageUntil(seconds);
+	public boolean validaisPage(int seconds) {  
+		return pageMercpagoConf.isPage(seconds);
 	}
 	
 	@Step (
@@ -21,6 +21,6 @@ public class PageMercpagoConfSteps extends StepBase {
 		expected="Aparece la página de resultado")
 	public void clickPagar() {
 		pageMercpagoConf.clickPagar();
-		new PageResultPagoSteps().validaIsPageUntil(30);
+		new PageResultPagoSteps().validaisPage(30);
 	}
 }

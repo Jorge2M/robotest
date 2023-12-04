@@ -15,11 +15,11 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalDetalleCompraSteps extends StepBase {
 	
-	private final PageDetalleCompra pageDetalleCompra = PageDetalleCompra.make(channel);
+	private final PageDetalleCompra pgDetalleCompra = PageDetalleCompra.make(channel);
 	
 	public void validateIsOk(Ticket compraTienda) {
 		ChecksTM checks = checkIsDataVisible();
-		if (!checks.calculateStateValidation().isMoreCriticThan(Warn)) {
+		if (!checks.calculateStateValidation().isMoreCriticThan(WARN)) {
 			checkDataContent(compraTienda);
 		}
 	}
@@ -30,20 +30,20 @@ public class ModalDetalleCompraSteps extends StepBase {
 		int seconds = 3;
 		checks.add(
 			"Es visible la capa correspondiente al detalle del tícket de compra " + getLitSecondsWait(seconds),
-			pageDetalleCompra.isVisibleDataTicket(seconds), Warn);
+			pgDetalleCompra.isVisibleDataTicket(seconds), WARN);
 		
 		seconds = 2;
 		checks.add(
 			"Son visibles los datos del tícket " + getLitSecondsWait(seconds),
-			pageDetalleCompra.isVisibleDataTicket(seconds));
+			pgDetalleCompra.isVisibleDataTicket(seconds));
 		
 		checks.add(
 			"Figura un id de tícket " + getLitSecondsWait(seconds),
-			pageDetalleCompra.isVisibleIdTicket(seconds));
+			pgDetalleCompra.isVisibleIdTicket(seconds));
 		
 		checks.add(
 			"Figura alguna prenda " + getLitSecondsWait(seconds),
-			pageDetalleCompra.isVisiblePrendaUntil(seconds), Warn);
+			pgDetalleCompra.isVisiblePrendaUntil(seconds), WARN);
 		
 		return checks;
 	}
@@ -53,13 +53,16 @@ public class ModalDetalleCompraSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Figura un id de tícket " + compra.getId(),
-			pageDetalleCompra.getIdTicket(compra.getType()).compareTo(compra.getId())==0, Warn);
+			pgDetalleCompra.getIdTicket(compra.getType()).compareTo(compra.getId())==0, WARN);
+		
 		checks.add(
 			"Figura el importe " + compra.getPrecio(),
-			pageDetalleCompra.getImporte().contains(compra.getPrecio()), Warn);
+			pgDetalleCompra.getImporte().contains(compra.getPrecio()), WARN);
+		
 		checks.add(
 			"Existen " + compra.getNumItems() + " prendas",
-			pageDetalleCompra.getNumPrendas()==compra.getNumItems(), Warn);
+			pgDetalleCompra.getNumPrendas()==compra.getNumItems(), WARN);
+		
 		return checks;
 	}
 	
@@ -67,14 +70,14 @@ public class ModalDetalleCompraSteps extends StepBase {
 		description="Seleccionar el #{posArticulo}o artículo de la Compra", 
 		expected="Aparece la ficha del artículo")
 	public void selectArticulo(int posArticulo) {
-		ArticuloScreen articulo = pageDetalleCompra.getDataArticulo(posArticulo);
-		pageDetalleCompra.selectArticulo(posArticulo);
+		ArticuloScreen articulo = pgDetalleCompra.getDataArticulo(posArticulo);
+		pgDetalleCompra.selectArticulo(posArticulo);
 		var dataFichaArt = new DataFichaArt(articulo.getReferencia(), articulo.getNombre());
 		new PageFichaSteps().checkDetallesProducto(dataFichaArt);
 	}
 	
 	@Validation (description="Es visible la dirección <b>#{address}</b>")
 	public boolean checkIsVisibleDirection(String address) {
-		return pageDetalleCompra.isVisibleDireccionEnvio(address);
+		return pgDetalleCompra.isVisibleDireccionEnvio(address);
 	}
 }

@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.manto.steps.pedidos;
 
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepMantoBase;
@@ -9,6 +8,7 @@ import com.mng.robotest.tests.domains.manto.pageobjects.PageGenerarPedido.Estado
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.manto.pageobjects.PageGenerarPedido.EstadoPedido.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class PageGenerarPedidoSteps extends StepMantoBase {
 
@@ -31,7 +31,7 @@ public class PageGenerarPedidoSteps extends StepMantoBase {
 	@Step (
 		description="Seleccionamos el estado <b>#{newState}</b> y pulsamos el botón <b>Generar Fichero</b>", 
 		expected="Aparece una página de la pasarela de resultado OK",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void changePedidoToEstado(EstadoPedido newState) {
 		pageGenerarPedido.selectEstado(newState);
 		pageGenerarPedido.clickInformarBancoEnCasoCancelacionAlGenerarPedido();
@@ -41,7 +41,7 @@ public class PageGenerarPedidoSteps extends StepMantoBase {
 	
 	@Validation (
 		description="Aparece el mensaje de <b>Fichero creado correctamente</b>",
-		level=Warn)
+		level=WARN)
 	private boolean checkMsgFileCreatedCorrectly() {
 		return pageGenerarPedido.isVisibleMessageFileCreated();
 	}

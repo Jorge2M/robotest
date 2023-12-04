@@ -41,7 +41,7 @@ public class SecMetodoEnvioDesktop extends PageBase {
 
 	public void selectMetodo(TipoTransporte tipoTransporte) {
 		String xpathMethodRadio = getXPathRadioMetodo(tipoTransporte);
-		if (state(Visible, xpathMethodRadio).check() &&
+		if (state(VISIBLE, xpathMethodRadio).check() &&
 			tipoTransporte != TipoTransporte.POSTNORD) {
 			click(xpathMethodRadio).waitLoadPage(5).exec();
 		} else {
@@ -52,13 +52,13 @@ public class SecMetodoEnvioDesktop extends PageBase {
 
 	public boolean isPresentBlockMetodo(TipoTransporte tipoTransporte) {
 		String xpathBLock = getXPathBlockMetodo(tipoTransporte);
-		return state(Present, xpathBLock).check();
+		return state(PRESENT, xpathBLock).check();
 	}
 	
 	public boolean isBlockSelectedUntil(TipoTransporte tipoTransporte, int seconds) {
 		String xpathBlockSelected = getXPathBlockMetodoSelected(tipoTransporte);
 		waitLoadPage();
-		return state(Visible, xpathBlockSelected).wait(seconds).check();
+		return state(VISIBLE, xpathBlockSelected).wait(seconds).check();
 	}
 	
 	public void selectFranjaHorariaUrgente(int posicion) {

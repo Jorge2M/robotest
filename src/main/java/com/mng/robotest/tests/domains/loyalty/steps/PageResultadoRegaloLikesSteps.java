@@ -6,12 +6,12 @@ import com.mng.robotest.tests.domains.loyalty.pageobjects.PageResultadoRegaloLik
 
 public class PageResultadoRegaloLikesSteps extends StepBase {
 
-	private final PageResultadoRegaloLikes pageResultado = new PageResultadoRegaloLikes();
+	private final PageResultadoRegaloLikes pgResultado = new PageResultadoRegaloLikes();
 	
 	@Validation (
 		description="Aparece la página de resultado Ok del envío de Likes " + SECONDS_WAIT)
 	public boolean checkIsEnvioLikesOk(int seconds) {
-		return pageResultado.isEnvioOk(seconds);
+		return pgResultado.isEnvioOk(seconds);
 	}
 	
 }

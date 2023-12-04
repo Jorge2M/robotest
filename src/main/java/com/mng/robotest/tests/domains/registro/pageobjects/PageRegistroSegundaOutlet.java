@@ -52,8 +52,8 @@ public class PageRegistroSegundaOutlet extends PageBase {
 		return "//div[@class='radiobuttonBtn']/input[@value='" + numNinos + "']";
 	}
 	
-	public boolean isPageUntil(int seconds) {
-		return state(Present, XP_FORM_STEP2).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(PRESENT, XP_FORM_STEP2).wait(seconds).check();
 	}
 	
 	public int getNumColecciones() {
@@ -81,7 +81,7 @@ public class PageRegistroSegundaOutlet extends PageBase {
 	}
 	
 	public boolean isPresentSelectDiaNacim() {
-		return state(Present, XP_SELECT_DIA_NACIM).check();
+		return state(PRESENT, XP_SELECT_DIA_NACIM).check();
 	}
 	
 	public void selectDiaNacimByText(String dia) {
@@ -105,7 +105,7 @@ public class PageRegistroSegundaOutlet extends PageBase {
 		while (tokensLinea.hasMoreElements()) {
 			String lineaStr=tokensLinea.nextToken();
 			String xpathCheckboxLinea = getXPath_checkboxLinea(lineaStr);
-			if (!state(Present, xpathCheckboxLinea).check()) {
+			if (!state(PRESENT, xpathCheckboxLinea).check()) {
 				isPresentInputs = false;
 				break;
 			}
@@ -126,7 +126,7 @@ public class PageRegistroSegundaOutlet extends PageBase {
 			String lineaStr=tokensLin.nextToken();
 			if (Math.random() < 0.5) {
 				String xpathLineaClick = getXPath_checkboxLineaClickable(lineaStr);
-				if (state(Present, xpathLineaClick).check()) {
+				if (state(PRESENT, xpathLineaClick).check()) {
 					click(xpathLineaClick).exec();
 				}
 						

@@ -10,10 +10,11 @@ public class PageHomePurchaseWithDiscount extends PageBase {
 	private static final String XP_BUTTON_PURCHASE_NOW = "//a[text()='Comprar ahora']";
 	
 	public boolean checkIsPage() {
-		return state(Visible, ID_BLOCK_LOYALTY).check();
+		return state(VISIBLE, ID_BLOCK_LOYALTY).check();
 	}
 
 	public boolean areVisibleButtonPurchaseNow() {
-		return state(Visible, XP_BUTTON_PURCHASE_NOW).wait(2).check();
+		return state(VISIBLE, XP_BUTTON_PURCHASE_NOW).wait(2).check();
 	}
+	
 }

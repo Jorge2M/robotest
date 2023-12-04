@@ -13,7 +13,7 @@ public class PageIdentPaymayaSteps extends PageBase {
 	
 	@Validation (
 		description="Aparece la página de identificación en PayMaya",
-		level=Warn)
+		level=WARN)
 	public boolean checkPage() {
 		return pageIdentPaymaya.isPage();
 	}

@@ -56,9 +56,9 @@ public class Ava001 extends TestBase {
 	}
 	
 	private void checkLanding() {
-		var pageLandingSteps = new PageLandingSteps();
-		pageLandingSteps.checkIsPage(5);
-		pageLandingSteps.checkIsPageWithCorrectLineas();
+		var pgLandingSteps = new PageLandingSteps();
+		pgLandingSteps.checkIsPage(5);
+		pgLandingSteps.checkIsPageWithCorrectLineas();
 	}	
 	
 	private void checkCatalogAndFicha() throws Exception {
@@ -68,21 +68,21 @@ public class Ava001 extends TestBase {
 	
     private void checkFichasAvailable() throws Exception {
         var randomGarmentIds = getRandomUrlProductsPage();
-        var pageFichaSteps = new PageFichaSteps();
+        var pgFichaSteps = new PageFichaSteps();
         for (int i=0; i<randomGarmentIds.size(); i++) {
         	String urlFicha = randomGarmentIds.get(i);
         	if (i==0) {
-        		pageFichaSteps.loadFichaWithRetry(urlFicha);
+        		pgFichaSteps.loadFichaWithRetry(urlFicha);
         	} else {
-        		pageFichaSteps.loadFicha(urlFicha);
+        		pgFichaSteps.loadFicha(urlFicha);
         	}
         }
     }	
     
     private void checkCatalogsAvailable() {
-    	var pageGaleriaSteps = new PageGaleriaSteps();
+    	var pgGaleriaSteps = new PageGaleriaSteps();
         for (var urlCatalog : retrieveRandomUrlCatalogsFromMenu()) {
-           	pageGaleriaSteps.loadCatalog(urlCatalog);
+           	pgGaleriaSteps.loadCatalog(urlCatalog);
         }
     }    
     private List<String> retrieveRandomUrlCatalogsFromMenu() throws CatalogsNotFoundException {

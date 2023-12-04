@@ -12,7 +12,7 @@ public class PageQiwiInputTlfnSteps {
 	
 	@Validation (
 		description="Aparece una página con el campo de introducción del Qiwi Mobile Phone",
-		level=Warn)
+		level=WARN)
 	public boolean validateIsPage() { 
 		return pageQiwiInputTlfn.isPresentInputPhone();
 	}

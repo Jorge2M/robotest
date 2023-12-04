@@ -17,6 +17,6 @@ public class PageTrabajaConNosotrosOld extends PageBase implements PageFromFoote
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
 		driver.switchTo().frame(getElement(XP_ID_FRAME));
-		return state(Present, XP_FOR_IDPAGE).wait(seconds).check();
+		return state(PRESENT, XP_FOR_IDPAGE).wait(seconds).check();
 	}
 }

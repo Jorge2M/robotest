@@ -27,7 +27,7 @@ public abstract class SecSelectorPreciosDesktop extends PageBase {
 	}
 	
 	public boolean isVisible() {
-		return state(Visible, getXPathLineaFiltro()).check();
+		return state(VISIBLE, getXPathLineaFiltro()).check();
 	}
 
 	public int getMinImport() {

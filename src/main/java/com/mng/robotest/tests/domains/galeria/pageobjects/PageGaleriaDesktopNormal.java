@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -72,7 +72,7 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 	@Override
 	public String getNombreArticulo(WebElement articulo) {
 		String xpathNameArticle = "." + getXPathNombreRelativeToArticle();
-		if (state(Visible, articulo).by(By.xpath(xpathNameArticle)).check()) {
+		if (state(VISIBLE, articulo).by(By.xpath(xpathNameArticle)).check()) {
 			return articulo.findElement(By.xpath(xpathNameArticle)).getText();
 		} else {
 			return "Not Found"; 
@@ -93,7 +93,7 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 	public WebElement getImagenElementArticulo(WebElement articulo) {
 		moveToElement(articulo);
 		By byImg = By.xpath(getXPathImgArticulo(articulo));
-		if (state(Visible, articulo).by(byImg).wait(1).check()) {
+		if (state(VISIBLE, articulo).by(byImg).wait(1).check()) {
 			return getElement(byImg);
 		}
 		return null;

@@ -11,7 +11,7 @@ import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroInitialSh
 
 public class PageRegistroInitialShopSteps extends StepBase {
 
-	private final PageRegistroInitialShop pageRegistroInitial = new PageRegistroInitialShop();
+	private final PageRegistroInitialShop pgRegistroInitial = new PageRegistroInitialShop();
 	
 	public void checkPage(int seconds) {
 		checkIsPage(seconds);
@@ -21,13 +21,13 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	@Validation (
 		description="Aparece la página inicial del proceso de registro " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
-		return pageRegistroInitial.isPage(seconds);
+		return pgRegistroInitial.isPage(seconds);
 	}
 
 	@Validation
 	private ChecksTM checkRadioPubli() {
 		var checks = ChecksTM.getNew();
-		boolean isSelectedPubli = pageRegistroInitial.isSelectedCheckboxGivePromotions();
+		boolean isSelectedPubli = pgRegistroInitial.isSelectedCheckboxGivePromotions();
 		if (dataTest.getPais().getRegister().isPubli()) {
 		  	checks.add(
 				"Sí está seleccionado el radiobox de publicidad",
@@ -50,13 +50,13 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		expected=
 			"La introducción de datos es correcta")
 	public void inputData(DataNewRegister data) {
-		pageRegistroInitial.inputMovil(data.getMovil());
-		pageRegistroInitial.inputPassword(data.getPassword());
-		pageRegistroInitial.inputEmail(data.getEmail());
+		pgRegistroInitial.inputMovil(data.getMovil());
+		pgRegistroInitial.inputPassword(data.getPassword());
+		pgRegistroInitial.inputEmail(data.getEmail());
 		if (data.isCheckPromotions()) {
-			pageRegistroInitial.enableCheckBoxGivePromotions();
+			pgRegistroInitial.enableCheckBoxGivePromotions();
 		} else {
-			pageRegistroInitial.disableCheckBoxGivePromotions();
+			pgRegistroInitial.disableCheckBoxGivePromotions();
 		}
 	}
 	
@@ -64,7 +64,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		description="Pulsar el botón <b>Crear cuenta</b>",
 		expected="Aparece la página de personalización del registro")
 	public void clickCreateAccountButton() {
-		pageRegistroInitial.clickCreateAccountButton();
+		pgRegistroInitial.clickCreateAccountButton();
 		new PageRegistroPersonalizacionShopSteps().checkPage(10);
 		checksDefault();
 	}	
@@ -73,77 +73,77 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		description="Pulsar el botón <b>Crear cuenta</b>",
 		expected="")
 	public void clickCreateAccountButtonWithoutCheck() {
-		pageRegistroInitial.clickCreateAccountButton();
+		pgRegistroInitial.clickCreateAccountButton();
 	}	
 	
 	@Validation(
 	    description="Aparece un modal de error con el texto \"¿ya tienes cuenta?\" " + SECONDS_WAIT)
 	public boolean checkUserExistsMessage(int seconds) {
-		return pageRegistroInitial.checkUserExistsModalMessage(seconds);
+		return pgRegistroInitial.checkUserExistsModalMessage(seconds);
 	}
 
 	@Validation(
 	    description="Aparece un error de móvil incorrecto " + SECONDS_WAIT)	
 	public boolean checkPhoneInvalidMessage(int seconds) {
-		return pageRegistroInitial.checkMessageErrorMovil(seconds);
+		return pgRegistroInitial.checkMessageErrorMovil(seconds);
 	}
 	
 	@Step (
 		description="Cerrar el modal con el mensaje de error",
 		expected="Desaparece el modal")
 	public void closeModalError() {
-		pageRegistroInitial.closeModalMessageError();
+		pgRegistroInitial.closeModalMessageError();
 	}
 
 	@Step(
 		description="Introducir la fecha de nacimiento <b>#{birthdate}</b>",
 		expected="El dato se introduce correctamente")	
 	public void inputBirthDate(String birthdate) {
-		pageRegistroInitial.inputBirthDate(birthdate);
+		pgRegistroInitial.inputBirthDate(birthdate);
 	}
 	
 	@Step(
 		description="Seleccionar el link <b>Collection and use of optional personal information</b>",
 		expected="Aparece el apartado de collection and use")	
 	public void clickLinkGivePromotions() {
-		pageRegistroInitial.clickLinkGivePromotions();
+		pgRegistroInitial.clickLinkGivePromotions();
 	}	
 		
 	@Step(
 		description="Seleccionar el link <b>Collection and use</b>",
 		expected="Aparece el apartado de collection and use")	
 	public void clickConsentPersonalInformationLink() {
-		pageRegistroInitial.clickConsentPersonalInformationLink();
+		pgRegistroInitial.clickConsentPersonalInformationLink();
 		checkPersonalInformationInfoVisible();
 	}	
 	@Validation(
 	    description="Aparece el apartado de \"Collection and use of your personal information\"")	
 	public boolean checkPersonalInformationInfoVisible() {
-		return pageRegistroInitial.checkPersonalInformationInfoVisible();
+		return pgRegistroInitial.checkPersonalInformationInfoVisible();
 	}
 	
 	@Step(
 		description="Seleccionar el checkbox <b>Collection and use</b>",
 		expected="Se selecciona el checkbox")	
 	public void clickConsentPersonalInformationRadio() {
-		pageRegistroInitial.clickConsentPersonalInformationRadio();
+		pgRegistroInitial.clickConsentPersonalInformationRadio();
 	}
 
 	@Step (
 		description="Pulsar el link <b>Política de privacidad</b>",
 		expected="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"")	
 	public void clickPoliticaPrivacidad() {
-		pageRegistroInitial.clickPoliticaPrivacidad();
-		pageRegistroInitial.keyDown(5);
-		if (!pageRegistroInitial.isModalPoliticaPrivacidadVisible(1)) {
-			pageRegistroInitial.clickPoliticaPrivacidad();
+		pgRegistroInitial.clickPoliticaPrivacidad();
+		pgRegistroInitial.keyDown(5);
+		if (!pgRegistroInitial.isModalPoliticaPrivacidadVisible(1)) {
+			pgRegistroInitial.clickPoliticaPrivacidad();
 		}
-		pageRegistroInitial.keyDown(5);
+		pgRegistroInitial.keyDown(5);
 		checkIsModalPoliticaPrivacidadVisible(1);
 	}
 	@Validation (description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\" " + SECONDS_WAIT)
 	public boolean checkIsModalPoliticaPrivacidadVisible(int seconds) {
-		return pageRegistroInitial.isModalPoliticaPrivacidadVisible(seconds);
+		return pgRegistroInitial.isModalPoliticaPrivacidadVisible(seconds);
 	}	
 	
 	public void clickPoliticaPrivacidadModal() {
@@ -161,9 +161,9 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		expected="Aparece una nueva página con la política de privacidad y cookies")
 	private synchronized Pair<String, String> clickPoliticaPrivacidadModalStep() {
 		String parentWindow = driver.getWindowHandle();
-		pageRegistroInitial.clickPoliticaPrivacidadModal();
+		pgRegistroInitial.clickPoliticaPrivacidadModal();
 		String childWindow = switchToAnotherWindow(driver, parentWindow);
-		new PagePoliticaPrivacidadSteps().checkIsPageUntil(4);
+		new PagePoliticaPrivacidadSteps().checkisPage(4);
 		return Pair.of(parentWindow, childWindow);
 	}
 	
@@ -172,9 +172,9 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		expected="Aparece una nueva página con la política de privacidad y cookies")
 	private Pair<String, String> clickCondicionesVentaStep() {
 		String parentWindow = driver.getWindowHandle();
-		pageRegistroInitial.clickCondicionesVenta();
+		pgRegistroInitial.clickCondicionesVenta();
 		String childWindow = switchToAnotherWindow(driver, parentWindow);
-		new PageCondicionesVentaSteps().checkIsPageUntil(4);
+		new PageCondicionesVentaSteps().checkisPage(4);
 		return Pair.of(parentWindow, childWindow);
 	}	
 	
@@ -188,7 +188,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	
 	@Validation (description="Desaparece el modal de \"Cómo protegemos y tratamos tus datos?\"")
 	public boolean checkIsModalPoliticaPrivacidadInvisible() {
-		return pageRegistroInitial.isModalPoliticaPrivacidadInvisible(2);
+		return pgRegistroInitial.isModalPoliticaPrivacidadInvisible(2);
 	}
 	
 }

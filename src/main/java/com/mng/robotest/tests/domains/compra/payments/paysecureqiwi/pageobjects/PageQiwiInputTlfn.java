@@ -14,11 +14,11 @@ public class PageQiwiInputTlfn extends PageBase {
 	}
 	
 	public boolean isPresentInputPhone() {
-		return state(Present, XP_INPUT_PHONE).check();
+		return state(PRESENT, XP_INPUT_PHONE).check();
 	}	
 	
 	public boolean isVisibleLinkAceptar(int seconds) {
-		return state(Visible, XP_LINK_ACEPTAR).wait(seconds).check();
+		return state(VISIBLE, XP_LINK_ACEPTAR).wait(seconds).check();
 	}
 	
 	public void clickLinkAceptar() {

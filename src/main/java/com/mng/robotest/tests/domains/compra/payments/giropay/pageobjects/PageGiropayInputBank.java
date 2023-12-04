@@ -13,14 +13,14 @@ public class PageGiropayInputBank extends PageBase {
 	private static final String XP_BUTTON_CONFIRM = "//div[@id='idtoGiropayDiv']/input";
 	
 	public boolean checkIsPage() {
-		return state(Visible, XP_INPUT_BANK).check();
+		return state(VISIBLE, XP_INPUT_BANK).check();
 	}
 	
 	public void inputBank(String idBank) {
 		WebElement input = getElement(XP_INPUT_BANK);
 		input.clear();
 		input.sendKeys(idBank);
-		state(Visible, XP_LINK_BAK_OPTION).wait(1).check();
+		state(VISIBLE, XP_LINK_BAK_OPTION).wait(1).check();
 		click(XP_LINK_BAK_OPTION).exec();
 	}
 	

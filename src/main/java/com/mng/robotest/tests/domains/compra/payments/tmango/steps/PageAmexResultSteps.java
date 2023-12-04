@@ -24,7 +24,7 @@ public class PageAmexResultSteps extends StepBase {
 	 	
 	 	checks.add(
 			"Aparece el importe de la operación " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codigoPais, driver), Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codigoPais, driver), WARN);
 	 	
 	 	checks.add(
 			"Aparece un botón \"CONTINUAR\"",

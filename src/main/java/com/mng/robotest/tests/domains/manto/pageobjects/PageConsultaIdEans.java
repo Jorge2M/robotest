@@ -34,19 +34,19 @@ public class PageConsultaIdEans extends PageBase {
 	}
 
 	public boolean isVisibleTituloPagina() {
-		return state(Visible, XP_TITULO_PAGINA).check();
+		return state(VISIBLE, XP_TITULO_PAGINA).check();
 	}
 
 	public boolean isVisibleDivBusquedaExcel() {	
-		return state(Visible, XP_DIV_BUSQUEDA_EXCEL).check();
+		return state(VISIBLE, XP_DIV_BUSQUEDA_EXCEL).check();
 	}
 
 	public boolean isVisibleDivBusquedaRapida() {
-		return state(Visible, XP_DIV_BUSQUEDA_RAPIDA).check();
+		return state(VISIBLE, XP_DIV_BUSQUEDA_RAPIDA).check();
 	}
 
 	public boolean isVisibleTablaInformacionUntil(int seconds) {
-		return state(Visible, XP_HEADER_TABLA_ID).wait(seconds).check();
+		return state(VISIBLE, XP_HEADER_TABLA_ID).wait(seconds).check();
 	}
 
 	public void inputPedidosAndClickBuscarDatos(List<String> pedidosPrueba) {
@@ -73,7 +73,7 @@ public class PageConsultaIdEans extends PageBase {
 	public boolean isPedidosTablaCorrecto(List<String> pedidosPrueba) {
 		for (String pedido : pedidosPrueba) {
 			String xpathLineaPedido = getXPathLineaPedido(pedido);
-			if (!state(Visible, By.xpath(xpathLineaPedido)).check()) {
+			if (!state(VISIBLE, By.xpath(xpathLineaPedido)).check()) {
 				return false;
 			}
 		}
@@ -118,7 +118,7 @@ public class PageConsultaIdEans extends PageBase {
 
 	public boolean isArticulosTablaCorrecto(List<String> articulosPrueba) {
 		for (String articulo : articulosPrueba) {
-			if (!state(Visible, getXPathLineaPedido(articulo)).check()) {
+			if (!state(VISIBLE, getXPathLineaPedido(articulo)).check()) {
 				return false;
 			}
 		}

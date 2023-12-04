@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.article;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -42,13 +42,13 @@ public class SecTallasArticuloNormal extends SecTallasArticulo {
 	@Override
 	public boolean isVisibleArticleCapaTallasUntil(int position, int seconds) {
 		String xpathCapa = getXPathCapaTallas(position);
-		return state(Visible, xpathCapa).wait(seconds).check();
+		return state(VISIBLE, xpathCapa).wait(seconds).check();
 	}
 	
 	@Override
 	public Talla selectTallaAvailableArticle(int posArticulo) throws Exception {
 		String xpathTalla = getXPathArticleTallaAvailable(posArticulo);
-		if (state(Visible, xpathTalla).check()) {
+		if (state(VISIBLE, xpathTalla).check()) {
 			var tallaToSelect = getElement(xpathTalla);
 			tallaToSelect.click();
 			return Talla.fromLabel(tallaToSelect.getText());
@@ -58,7 +58,7 @@ public class SecTallasArticuloNormal extends SecTallasArticulo {
 	
 	@Override
 	public boolean isVisibleTallaNotAvailable() {
-		return state(Visible, XP_TALLA_UNAVAILABLE).check();
+		return state(VISIBLE, XP_TALLA_UNAVAILABLE).check();
 	}
 	
 	@Override

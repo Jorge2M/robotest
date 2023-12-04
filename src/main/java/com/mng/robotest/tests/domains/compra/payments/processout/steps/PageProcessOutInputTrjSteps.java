@@ -24,7 +24,7 @@ public class PageProcessOutInputTrjSteps extends StepBase {
 		String codPais = dataTest.getCodigoPais();
 		checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), WARN);
 		
 		checks.add(
 			"Figura un botón de pago",

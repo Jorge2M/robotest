@@ -24,14 +24,14 @@ public class PageAmexInputTarjetaSteps extends StepBase {
 	 	
 	 	checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), WARN);
 	 	
 	 	checks.add(
 			"Aparecen los campos de introducción de tarjeta, fecha caducidad y código de seguridad",
 			pageAmexInputTarjeta.isPresentNumTarj() &&
 			pageAmexInputTarjeta.isPresentInputMesCad() &&
 			pageAmexInputTarjeta.isPresentInputAnyCad() &&
-			pageAmexInputTarjeta.isPresentInputCvc(), Warn); 
+			pageAmexInputTarjeta.isPresentInputCvc(), WARN); 
 	 	
 	 	checks.add(
 			"Figura un botón de Aceptar",

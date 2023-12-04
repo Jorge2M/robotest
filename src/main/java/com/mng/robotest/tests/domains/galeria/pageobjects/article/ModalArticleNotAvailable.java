@@ -31,19 +31,19 @@ public class ModalArticleNotAvailable extends PageBase {
 	}
 	
 	public boolean isVisibleUntil(int seconds) {
-		return state(Visible, XP_MODAL).wait(seconds).check();
+		return state(VISIBLE, XP_MODAL).wait(seconds).check();
 	}
 	
 	public boolean isNotVisibleUntil(int seconds) {
-		return (state(Invisible, XP_MODAL).wait(seconds).check());
+		return (state(INVISIBLE, XP_MODAL).wait(seconds).check());
 	}
 
 	public boolean isVisibleRPGD(int seconds) {
-		return state(Visible, XP_MODAL).wait(seconds).check();
+		return state(VISIBLE, XP_MODAL).wait(seconds).check();
 	}
 
 	public boolean isVisibleInputEmail(int seconds) {
-		return state(Visible, XP_INPUT_MAIL + "/..").wait(seconds).check();
+		return state(VISIBLE, XP_INPUT_MAIL + "/..").wait(seconds).check();
 	}	
 	public void inputMail(String mail) {
 		getElement(XP_INPUT_MAIL).sendKeys(mail);
@@ -52,7 +52,7 @@ public class ModalArticleNotAvailable extends PageBase {
 		click(XP_RECIBIR_AVISO_BUTTON).exec();
 	}
 	public boolean isSnackvarAvisoOkVisible(int seconds) {
-		return state(Visible, XP_SNACKVAR_AVISAME_OK).wait(seconds).check();
+		return state(VISIBLE, XP_SNACKVAR_AVISAME_OK).wait(seconds).check();
 	}	
 	
 	public void clickPoliticaPrivacidad() {

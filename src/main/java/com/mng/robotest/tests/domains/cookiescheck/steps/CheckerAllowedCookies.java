@@ -8,12 +8,13 @@ import org.openqa.selenium.Cookie;
 
 import com.github.jorge2m.testmaker.conf.SendType;
 import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.genericchecks.Checker;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.cookiescheck.services.CookiesChecker;
+
+import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
 public class CheckerAllowedCookies implements Checker {
 
@@ -43,7 +44,7 @@ public class CheckerAllowedCookies implements Checker {
 				resultCheck.getLeft(), level)
 			.info(getInfoError(resultCheck))
 			.code("COOKIE_TRUST")			
-			.store(StoreType.None)
+			.store(NONE)
 			.send(SendType.Alert).build());
 		
 		return checks;
@@ -52,7 +53,7 @@ public class CheckerAllowedCookies implements Checker {
 	private static String getInfoError(Pair<Boolean, List<Cookie>> resultCheck) {
 		if (!resultCheck.getLeft()) {
 			String info ="Se detectan las siguientes cookies no permitidas:<ul>";
-			for (Cookie cookie : resultCheck.getRight()) {
+			for (var cookie : resultCheck.getRight()) {
 				info+="<li>" + cookie.toString() + "</li>";
 			}
 			info+="</ul>";

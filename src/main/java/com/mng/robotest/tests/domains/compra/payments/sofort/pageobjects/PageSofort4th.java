@@ -15,7 +15,7 @@ public class PageSofort4th extends PageBase {
 	
 	public boolean isPage() {
 		return (driver.getTitle().toLowerCase().contains("sofort") && 
-				state(Visible, XP_INPUT_USER).check());
+				state(VISIBLE, XP_INPUT_USER).check());
 	}
 	
 	public void inputUserPass(String user, String password) {
@@ -28,7 +28,7 @@ public class PageSofort4th extends PageBase {
 	}
 
 	public boolean isVisibleFormSelCta() {
-		return state(Visible, XP_FORM_SEL_CTA).check();
+		return state(VISIBLE, XP_FORM_SEL_CTA).check();
 	}
 	
 	public void selectRadioCta(int posCta) {
@@ -36,7 +36,7 @@ public class PageSofort4th extends PageBase {
 	}
 	
 	public boolean isVisibleInputTAN() {
-		return state(Visible, XP_INPUT_TAN).check();
+		return state(VISIBLE, XP_INPUT_TAN).check();
 	}
 	
 	public void inputTAN(String tan) {

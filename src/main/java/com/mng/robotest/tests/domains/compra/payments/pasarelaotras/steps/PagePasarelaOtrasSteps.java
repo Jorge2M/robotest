@@ -17,7 +17,7 @@ public class PagePasarelaOtrasSteps extends StepBase {
 		if (channel==Channel.desktop) {
 		   	checks.add(
 				"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-				ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), Warn);
+				ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), WARN);
 		}
 	   	checks.add(
 			"No se trata de la página de precompra (no aparece los logos de formas de pago)",

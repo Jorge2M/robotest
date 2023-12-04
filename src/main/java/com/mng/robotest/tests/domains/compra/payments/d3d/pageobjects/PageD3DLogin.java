@@ -1,7 +1,8 @@
 package com.mng.robotest.tests.domains.compra.payments.d3d.pageobjects;
 
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.tests.domains.base.PageBase;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 public class PageD3DLogin extends PageBase {
 	
@@ -9,7 +10,7 @@ public class PageD3DLogin extends PageBase {
 	private static final String XP_INPUT_PASSWORD = "//input[@id='password']";
 	private static final String XP_BUTTON_SUBMIT = "//input[@class[contains(.,'button')] and @type='submit']";
 	
-	public boolean isPageUntil(int seconds) {
+	public boolean isPage(int seconds) {
 		return (titleContainsUntil(driver, "3D Authentication", seconds));
 	}
 	
@@ -19,6 +20,6 @@ public class PageD3DLogin extends PageBase {
 	}
 		   
 	public void clickButtonSubmit() {
-		click(XP_BUTTON_SUBMIT).type(TypeClick.javascript).exec();
+		click(XP_BUTTON_SUBMIT).type(JAVASCRIPT).exec();
 	}
 }

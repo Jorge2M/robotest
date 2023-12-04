@@ -2,9 +2,10 @@ package com.mng.robotest.tests.domains.transversal.modales.pageobject;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalSuscripcion;
+
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class ModalSuscripcionSteps extends StepBase {
 
@@ -13,7 +14,7 @@ public class ModalSuscripcionSteps extends StepBase {
 	@Step (
 		description="Comprobar que se incluyen o no los textos legales de RGPD en el modal de suscripcion (el modal está en el HTML de la página no visible)",
 		expected="Los textos existen en el código fuente dependiendo del pais",
-		saveNettraffic=SaveWhen.Always)
+		saveNettraffic=ALWAYS)
 	public void validaRGPDModal() {
 		String codPais = dataTest.getCodigoPais();
 		if (dataTest.getPais().getRgpd().equals("S")) {

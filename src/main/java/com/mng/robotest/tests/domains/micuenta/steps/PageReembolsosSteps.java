@@ -9,19 +9,19 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageReembolsosSteps extends StepBase {
 
-	private final PageReembolsos pageReembolsos = new PageReembolsos();
+	private final PageReembolsos pgReembolsos = new PageReembolsos();
 	
 	@Validation
 	public ChecksTM checkIsPage () {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de Reembolsos",
-			pageReembolsos.isPage());
+			pgReembolsos.isPage());
 		
 		checks.add(
 			"Aparecen los inputs de BANCO, TITULAR e IBAN",
-			(pageReembolsos.existsInputBanco() && pageReembolsos.existsInputTitular() && pageReembolsos.existsInputIBAN()), 
-			Warn);
+			(pgReembolsos.existsInputBanco() && pgReembolsos.existsInputTitular() && pgReembolsos.existsInputIBAN()), 
+			WARN);
 		
 		return checks;
 	}

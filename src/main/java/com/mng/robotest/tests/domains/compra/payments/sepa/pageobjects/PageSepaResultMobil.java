@@ -10,7 +10,7 @@ public class PageSepaResultMobil extends PageBase {
 	private static final String XP_STAGE_3HEADER = "//h2[@id='stageheader' and text()[contains(.,'3:')]]";
 
 	public boolean isPage() {
-		return state(Present, XP_STAGE_3HEADER).check();
+		return state(PRESENT, XP_STAGE_3HEADER).check();
 	}
 
 	public void clickButtonPay() {

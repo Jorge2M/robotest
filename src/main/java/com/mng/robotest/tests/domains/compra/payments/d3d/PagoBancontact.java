@@ -17,10 +17,10 @@ public class PagoBancontact extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		boolean isD3D = true;
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		
 		if (execPay) {
-			pageCheckoutWrapperSteps.inputDataTrjAndConfirmPago(dataPago);
+			checkoutSteps.inputDataTrjAndConfirmPago(dataPago);
 			DataPedido dataPedido = this.dataPago.getDataPedido(); 
 			dataPedido.setCodtipopago("U");
 			Pago pago = dataPedido.getPago();

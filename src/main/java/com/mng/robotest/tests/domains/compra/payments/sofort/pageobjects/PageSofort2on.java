@@ -17,12 +17,12 @@ public class PageSofort2on extends PageBase {
 		return "//input[@data-label='" + bank + "']";
 	}
 	
-	public boolean isPageUntil(int seconds) {
-		return state(Present, XP_SELECT_PAISES).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(PRESENT, XP_SELECT_PAISES).wait(seconds).check();
 	}
 	
 	public void acceptCookies() {
-		if (state(Visible, XP_BUTTON_ACCEPT_COOKIES).check()) {
+		if (state(VISIBLE, XP_BUTTON_ACCEPT_COOKIES).check()) {
 			click(XP_BUTTON_ACCEPT_COOKIES).exec();
 		}
 	}

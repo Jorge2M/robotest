@@ -1,8 +1,6 @@
 package com.mng.robotest.tests.domains.micuenta.steps;
 
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
@@ -13,11 +11,13 @@ import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMisCompras.TypeTi
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.conf.StoreType.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class PageMisComprasSteps extends StepBase {
 	
-	private final PageMisCompras pageMisCompras = new PageMisCompras();
-	private final ModalDetalleCompraSteps modalDetalleCompraSteps = new ModalDetalleCompraSteps();
+	private final PageMisCompras pgMisCompras = new PageMisCompras();
+	private final ModalDetalleCompraSteps mdDetalleCompraSteps = new ModalDetalleCompraSteps();
 
 	@Validation
 	public ChecksTM validateIsPage() {
@@ -25,7 +25,7 @@ public class PageMisComprasSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de \"Mis Compras\" " + getLitSecondsWait(seconds),
-			pageMisCompras.isPageUntil(seconds), Warn);
+			pgMisCompras.isPage(seconds), WARN);
 		
 		return checks;
 	}
@@ -35,7 +35,7 @@ public class PageMisComprasSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"No aparece ningún tícket",
-			!pageMisCompras.areTickets(), Warn);
+			!pgMisCompras.areTickets(), WARN);
 	  	return checks;
 	}
 	
@@ -69,38 +69,37 @@ public class PageMisComprasSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Es visible la compra Online asociada al pedido <b>" + codPedido + "</b> " + getLitSecondsWait(seconds),
-			pageMisCompras.isTicketOnline(codPedido, seconds), getLevel());
+			pgMisCompras.isTicketOnline(codPedido, seconds), getLevel());
 		
 		return checks;		
 	}	
 	private State getLevel() {
 		if (dataTest.isUserRegistered()) { 
-			return (UtilsTest.todayBeforeDate("2024-01-31")) ? State.Warn : Defect;
+			return (UtilsTest.todayBeforeDate("2024-01-31")) ? WARN : DEFECT;
 		}
-		return State.Defect;
+		return DEFECT;
 	}
 	
 	
 	@Validation (
 		description=
 			"Es visible la compra Online asociada al pedido <b>#{codPedido}</b> " + SECONDS_WAIT,
-		level=Info,
-		store=StoreType.None)
+		level=INFO,	store=NONE)
 	private boolean validateIsCompraOnlineChequeRegalo(String codPedido, int seconds) {
-		return pageMisCompras.isTicketOnline(codPedido, seconds);
+		return pgMisCompras.isTicketOnline(codPedido, seconds);
 	}	
 	
 	@Validation (description="Es visible una compra de tipo #{typeTicket} " + SECONDS_WAIT)
 	public boolean validateIsCompraOfType(TypeTicket typeTicket, int seconds) {
-		return pageMisCompras.isTicket(typeTicket, seconds);
+		return pgMisCompras.isTicket(typeTicket, seconds);
 	}
 	
 	@Step (
 		description="Seleccionamos la #{posInLista}a compra (tipo Online) de la lista", 
 		expected="Aparece la página con los detalles del pedido",
-		saveHtmlPage=SaveWhen.IfProblem)
+		saveHtmlPage=IF_PROBLEM)
 	public void selectCompraOnline(int posInLista) {
-		Ticket ticket = pageMisCompras.selectTicket(TypeTicket.ONLINE, posInLista);	   
+		Ticket ticket = pgMisCompras.selectTicket(TypeTicket.ONLINE, posInLista);	   
 		new PageDetallePedidoSteps().validateIsPageOk(ticket);	   
 	}
 
@@ -108,20 +107,20 @@ public class PageMisComprasSteps extends StepBase {
 		description="Seleccionamos la #{posInLista}a compra (tipo Tienda) de la lista", 
 		expected="Aparece una sección con los detalles de la Compra")
 	public void selectCompraTienda(int posInLista) {
-		Ticket ticket = pageMisCompras.selectTicket(TypeTicket.TIENDA, posInLista);	 
-		modalDetalleCompraSteps.validateIsOk(ticket);	  
+		Ticket ticket = pgMisCompras.selectTicket(TypeTicket.TIENDA, posInLista);	 
+		mdDetalleCompraSteps.validateIsOk(ticket);	  
 	}
 	
 	@Step (
 		description="Seleccionamos el ticket <b>#{idTicket}</b> de la lista", 
 		expected="Aparece una sección con los detalles de la Compra")
 	public void selectCompra(String idTicket) {
-		pageMisCompras.selectTicket(idTicket);	  
-		modalDetalleCompraSteps.checkIsDataVisible();
+		pgMisCompras.selectTicket(idTicket);	  
+		mdDetalleCompraSteps.checkIsDataVisible();
 	}	
 	
 	public void clickDetalleArticulo(int posArticulo) {
-		modalDetalleCompraSteps.selectArticulo(posArticulo);
+		mdDetalleCompraSteps.selectArticulo(posArticulo);
 	}
 	
 }

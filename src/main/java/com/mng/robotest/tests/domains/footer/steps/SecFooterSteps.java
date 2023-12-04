@@ -52,11 +52,11 @@ public class SecFooterSteps extends StepBase {
 		try {
 			checks.add(
 				"Aparece la página <b>" + pageObject.getName() + "</b> " + getLitSecondsWait(seconds),
-				pageObject.isPageCorrectUntil(seconds), Warn);
+				pageObject.isPageCorrectUntil(seconds), WARN);
 			if (typeFooter.pageInNewTab()) {
 				checks.add(
 					"Aparece la página en una ventana aparte",
-					newWindowInNewTab, Warn);		
+					newWindowInNewTab, WARN);		
 			}
 		}
 		finally {

@@ -18,11 +18,11 @@ public class PageInputPedido extends PageBase implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return state(Present, XP_INPUT_PEDIDO).wait(seconds).check();
+		return state(PRESENT, XP_INPUT_PEDIDO).wait(seconds).check();
 	}
 	
 	public boolean isVisibleInputPedido() {
-		return state(Visible, XP_INPUT_PEDIDO).check();
+		return state(VISIBLE, XP_INPUT_PEDIDO).check();
 	}
 	
 	public void inputPedido(String codPedido) {

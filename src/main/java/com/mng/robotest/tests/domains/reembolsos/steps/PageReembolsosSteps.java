@@ -112,7 +112,7 @@ public class PageReembolsosSteps extends StepBase {
 		
 		checks.add(
 			"Aparece seleccionado el radiobutton de \"Transferencia bancaria\"",
-			pageReembolsos.isCheckedRadio(TypeReembolso.TRANSFERENCIA), Warn);
+			pageReembolsos.isCheckedRadio(TypeReembolso.TRANSFERENCIA), WARN);
 		
 		return checks;
 	}
@@ -130,7 +130,7 @@ public class PageReembolsosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	   	checks.add(
 			"Aparece seleccionado el radiobutton de \"Store Credit\"",
-			pageReembolsos.isCheckedRadio(TypeReembolso.STORE_CREDIT), Warn);
+			pageReembolsos.isCheckedRadio(TypeReembolso.STORE_CREDIT), WARN);
 	   	
 	   	checks.add(
 			"Aparece un saldo >= 0",
@@ -149,7 +149,7 @@ public class PageReembolsosSteps extends StepBase {
 	
 	@Validation (
 		description="Desaparece el botón \"Save\" de Store Credit " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	private boolean checkButtonSaveDisappears(int seconds) {
 		return !pageReembolsos.isVisibleSaveButtonStoreCreditUntil(seconds);
 	}

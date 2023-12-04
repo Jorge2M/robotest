@@ -7,27 +7,26 @@ import com.mng.robotest.tests.domains.base.StepMantoBase;
 import com.mng.robotest.tests.domains.manto.pageobjects.PageGestionarClientes;
 
 import static com.mng.robotest.tests.domains.manto.pageobjects.PageGestionarClientes.TypeThirdButton.*;
-
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class PageGestionarClientesSteps extends StepMantoBase {
 
-	private final PageGestionarClientes pageGestionarClientes = new PageGestionarClientes();
+	private final PageGestionarClientes pgGestionarClientes = new PageGestionarClientes();
 	
 	@Validation
 	public ChecksTM validateIsPage() {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Estamos en la página " + PageGestionarClientes.TITULO,
-			pageGestionarClientes.isPage());
+			pgGestionarClientes.isPage());
 	 	
 	 	checks.add(
 			"Aparece el apartado de \"Buscar clientes\"",
-			pageGestionarClientes.isVisibleFormBuscarClientes());
+			pgGestionarClientes.isVisibleFormBuscarClientes());
 	 	
 	 	checks.add(
 			"Aparece el apartado de \"Tratar clientes\"",
-			pageGestionarClientes.isVisibleFormTratarClientes());
+			pgGestionarClientes.isVisibleFormTratarClientes());
 	 	
 		return checks;
 	}
@@ -35,10 +34,9 @@ public class PageGestionarClientesSteps extends StepMantoBase {
 	@Step (
 		description="Introducimos el DNI <b>#{dni}</b> y pulsamos el botón \"Buscar\"",
 		expected="Aparece una lista de clientes válida",
-		saveErrorData=SaveWhen.Never,
-		saveImagePage=SaveWhen.Always)
+		saveErrorData=NEVER, saveImagePage=ALWAYS)
 	public void inputDniAndClickBuscar(String dni) {
-		pageGestionarClientes.inputDniAndClickBuscarButton(dni, 20);	 
+		pgGestionarClientes.inputDniAndClickBuscarButton(dni, 20);	 
 		checkAfterSearchByDni(dni);
 	}
 	
@@ -47,17 +45,17 @@ public class PageGestionarClientesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Se muestra la tabla de información",
-			pageGestionarClientes.isVisibleTablaInformacion());
+			pgGestionarClientes.isVisibleTablaInformacion());
 	 	
 	 	checks.add(
 			"Aparece el DNI <b>" + dni + "</b> en la tabla",
-			pageGestionarClientes.getDniTabla(dni));
+			pgGestionarClientes.getDniTabla(dni));
 	 	
 		int seconds = 1;
 	 	checks.add(String.format(
 			"Aparece el botón de Alta o Baja (los esperamos un máximo de %s segundos)", seconds),
-			pageGestionarClientes.isVisibleThirdButton(BAJA, seconds) ||
-			pageGestionarClientes.isVisibleThirdButton(ALTA, seconds));
+			pgGestionarClientes.isVisibleThirdButton(BAJA, seconds) ||
+			pgGestionarClientes.isVisibleThirdButton(ALTA, seconds));
 	 	
 	 	return checks;
 	}
@@ -65,10 +63,10 @@ public class PageGestionarClientesSteps extends StepMantoBase {
 	@Step(
 		description="Tras haber introducido un DNI y haber dado al botón \"Buscar\", damos click al botón \"Detalles\"",
 		expected="Muestra los detalles del cliente correctamente",
-		saveErrorData=SaveWhen.Never)
+		saveErrorData=NEVER)
 	public void clickDetallesButton(String dni) {
-		String idCliente = pageGestionarClientes.getIdClienteTablaFromDni(dni);
-		pageGestionarClientes.clickDetallesButtonAndWaitSeconds(3);	
+		String idCliente = pgGestionarClientes.getIdClienteTablaFromDni(dni);
+		pgGestionarClientes.clickDetallesButtonAndWaitSeconds(3);	
 		checkAfterClickDetalles(dni, idCliente);
 	}
 	
@@ -77,11 +75,11 @@ public class PageGestionarClientesSteps extends StepMantoBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece el id del cliente <b>" + idCliente + "</b>",
-			pageGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente));
+			pgGestionarClientes.isVisibleIdClienteClickDetallesButton(idCliente));
 	 	
 	 	checks.add(
 			"Aparece el dni del cliente <b>" + dni + "</b>",
-			pageGestionarClientes.isVisibleDniClickDetallesButton(dni));
+			pgGestionarClientes.isVisibleDniClickDetallesButton(dni));
 	 	
 	 	return checks;
 	}

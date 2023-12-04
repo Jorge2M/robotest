@@ -7,10 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class Mly001 extends TestBase {
 
@@ -189,9 +190,9 @@ public class Mly001 extends TestBase {
 	}
 	
 	private boolean isModalMangoLikesYouVisible(int seconds) {
-		return state(State.Visible, XP_MODAL + "//a[@data-testid='newsletterSubscriptionModal.feedback.createAccount']").wait(seconds).check();
+		return state(VISIBLE, XP_MODAL + "//a[@data-testid='newsletterSubscriptionModal.feedback.createAccount']").wait(seconds).check();
 	}
 	private boolean isModalDiscouNewsletterSubscriptionVisible(int seconds) {
-		return state(State.Visible, XP_MODAL + "//input[@data-testid='newsletterSubscriptionModal.nonModal.toggle']").wait(seconds).check();
+		return state(VISIBLE, XP_MODAL + "//input[@data-testid='newsletterSubscriptionModal.nonModal.toggle']").wait(seconds).check();
 	}
 }

@@ -15,7 +15,7 @@ public class PagoAmazon extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		new PageAmazonIdentSteps().validateIsPage(dataPago.getDataPedido());
 		if (execPay) {

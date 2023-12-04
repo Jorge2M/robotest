@@ -15,6 +15,6 @@ public class PageMangoShoppingApp extends PageBase implements PageFromFooter {
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return state(Present, XP_FOR_IDPAGE).wait(seconds).check();
+		return state(PRESENT, XP_FOR_IDPAGE).wait(seconds).check();
 	}
 }

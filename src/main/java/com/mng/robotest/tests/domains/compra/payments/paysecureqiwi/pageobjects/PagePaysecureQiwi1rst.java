@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.compra.payments.paysecureqiwi.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import org.openqa.selenium.By;
 
@@ -32,11 +31,11 @@ public class PagePaysecureQiwi1rst extends PageBase {
 	}
 	
 	public boolean isPage() {
-		return state(Visible, PaysecureGateway.QIWI.getBy(isPRO())).check();
+		return state(VISIBLE, PaysecureGateway.QIWI.getBy(isPRO())).check();
 	}
 
 	public boolean isPresentIcon(PaysecureGateway gateway) {
-		return state(Present, gateway.getBy(isPRO())).check();
+		return state(PRESENT, gateway.getBy(isPRO())).check();
 	}
 
 	public void clickIcon(PaysecureGateway gateway) {

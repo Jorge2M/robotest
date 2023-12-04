@@ -8,11 +8,9 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
-import com.github.jorge2m.testmaker.conf.StoreType;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.mng.robotest.tests.conf.AppEcom;
@@ -30,14 +28,16 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.Typ
 import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
 import com.mng.robotest.testslegacy.data.Color;
-import com.mng.robotest.testslegacy.pageobject.utils.DataArticleGalery;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 import com.mng.robotest.testslegacy.pageobject.utils.DataScroll;
 import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
+import com.github.jorge2m.testmaker.conf.StoreType;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery.TypeLinkInfo.*;
+import static com.github.jorge2m.testmaker.conf.StoreType.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class PageGaleriaSteps extends StepBase {
 
@@ -46,7 +46,7 @@ public class PageGaleriaSteps extends StepBase {
 	private final SecSelectorPreciosSteps secSelectorPreciosSteps = new SecSelectorPreciosSteps();
 	private final SecFiltrosSteps secFiltrosSteps = new SecFiltrosSteps();
 	
-	private final PageGaleria pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
+	private final PageGaleria pgGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 
 	public enum TypeGalery { SALES, NO_SALES }
 	public enum TypeActionFav { MARCAR, DESMARCAR }
@@ -71,12 +71,12 @@ public class PageGaleriaSteps extends StepBase {
 		var datosArticulo = new DataFichaArt();
 
 		//Almacenamos el nombre del artículo y su referencia
-		var articulo = pageGaleria.getArticulo(position);
+		var articulo = pgGaleria.getArticulo(position);
 		moveToElement(articulo);
-		datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
-		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
+		datosArticulo.setNombre(pgGaleria.getNombreArticulo(articulo));
+		datosArticulo.setReferencia(pgGaleria.getRefArticulo(articulo));
 
-		String detailWindowHandle = pageGaleria.openArticuloPestanyaAndGo(articulo);
+		String detailWindowHandle = pgGaleria.openArticuloPestanyaAndGo(articulo);
 		new PageFichaSteps().checkDetallesProducto(datosArticulo);
 
 		if (detailWindowHandle.compareTo(galeryWindowHandle)!=0) {
@@ -95,11 +95,11 @@ public class PageGaleriaSteps extends StepBase {
 		String urlGaleria = driver.getCurrentUrl();
 		
 		//Almacenamos el nombre del artículo y su referencia
-		var articulo = pageGaleria.getArticulo(position);
-		datosArticulo.setNombre(pageGaleria.getNombreArticulo(articulo));
-		datosArticulo.setReferencia(pageGaleria.getRefArticulo(articulo));
+		var articulo = pgGaleria.getArticulo(position);
+		datosArticulo.setNombre(pgGaleria.getNombreArticulo(articulo));
+		datosArticulo.setReferencia(pgGaleria.getRefArticulo(articulo));
 
-		pageGaleria.clickArticulo(articulo);
+		pgGaleria.clickArticulo(articulo);
 		var pageFichaSteps = new PageFichaSteps();
 		pageFichaSteps.checkDetallesProducto(datosArticulo);
 		pageFichaSteps.checkPrevNext(position);
@@ -132,15 +132,15 @@ public class PageGaleriaSteps extends StepBase {
 	}
 	
 	private void showTallas(int posArticulo) {
-		pageGaleria.showTallasArticulo(posArticulo);
+		pgGaleria.showTallasArticulo(posArticulo);
 		checkIsVisibleCapaInfoTallas(posArticulo, 1);
 	}
 	
 	@Validation (
 		description="Aparece la capa con la información de las tallas " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	private boolean checkIsVisibleCapaInfoTallas(int posArticulo, int seconds) {
-		return pageGaleria.isVisibleArticleCapaTallasUntil(posArticulo, seconds);
+		return pgGaleria.isVisibleArticleCapaTallasUntil(posArticulo, seconds);
 	}
 
 	public void selectTallaAvailable() throws Exception {
@@ -162,7 +162,7 @@ public class PageGaleriaSteps extends StepBase {
 		description="Del #{posArticulo}o artículo, seleccionamos la 1a talla disponible", 
 		expected="Se da de alta correctamente el artículo en la bolsa")
 	public boolean selectTallaAvailableArticulo(int posArticulo) throws Exception {
-		var articulo = pageGaleria.selectTallaAvailableArticle(posArticulo);
+		var articulo = pgGaleria.selectTallaAvailableArticle(posArticulo);
 		boolean tallaVisible = (articulo!=null);
 		if (tallaVisible) {
 			dataTest.getDataBag().addArticulo(articulo);
@@ -174,9 +174,9 @@ public class PageGaleriaSteps extends StepBase {
 	@Step (
 		description="Seleccionamos la primera talla no disponible del listado",
 		expected="Se abre el modal de avimase de la prenda",
-		saveHtmlPage=SaveWhen.Always)
+		saveHtmlPage=ALWAYS)
 	public void selectTallaNoDisponibleArticulo() {
-		pageGaleria.selectTallaArticleNotAvalaible();
+		pgGaleria.selectTallaArticleNotAvalaible();
 	}
 	
 	public DataScroll scrollFromFirstPage() throws Exception {
@@ -195,7 +195,7 @@ public class PageGaleriaSteps extends StepBase {
 	@Step (
 		description="Escrollar hasta posicionarse en la " + TAG_ID_PAGE + " página", 
 		expected="Se escrolla correctamente",
-		saveNettraffic=SaveWhen.Always)
+		saveNettraffic=ALWAYS)
 	public DataScroll scrollFromFirstPage(DataForScrollStep dataForScroll) throws Exception {
 		int pageToScroll = dataForScroll.getNumPageToScroll();
 		String idPage = pageToScroll + "a";
@@ -203,8 +203,8 @@ public class PageGaleriaSteps extends StepBase {
 			idPage = "última";
 		}
 		replaceStepDescription(TAG_ID_PAGE, idPage);
-		int numArticulosInicio = pageGaleria.getNumArticulos();
-		var datosScroll = pageGaleria.scrollToPageFromFirst(pageToScroll);
+		int numArticulosInicio = pgGaleria.getNumArticulos();
+		var datosScroll = pgGaleria.scrollToPageFromFirst(pageToScroll);
 
 		if (pageToScroll>=PageGaleria.MAX_PAGE_TO_SCROLL) {
 			checkVisibilityFooter(pageToScroll, app);
@@ -230,7 +230,7 @@ public class PageGaleriaSteps extends StepBase {
 		return datosScroll;
 	}
 
-	@Validation (description="Sí aparece el footer", level=Warn)
+	@Validation (description="Sí aparece el footer", level=WARN)
 	private boolean checkVisibilityFooter(int pageToScroll, AppEcom app) {
 		return new SecFooter().isVisible();
 	}
@@ -239,24 +239,24 @@ public class PageGaleriaSteps extends StepBase {
 		description=
 			"En pantalla aparecen más artículos (#{numArticlesCurrently}) " + 
 			"de los que había inicialmente (#{numArticlesInit})",
-		level=Warn)
+		level=WARN)
 	private boolean checkAreMoreArticlesThatInitially(int numArticlesCurrently, int numArticlesInit) {
 		return (numArticlesCurrently > numArticlesInit);
 	}
 
 	@Validation (description="Los artículos aparecen ordenados por #{orderExpected}")
 	private boolean checkArticlesOrdered(FilterOrdenacion orderExpected) throws Exception {
-		return (pageGaleria.articlesInOrder(orderExpected));
+		return (pgGaleria.articlesInOrder(orderExpected));
 	}
 	
 	@Validation
 	private ChecksTM checkNotRepeatedArticles() {
 		var checks = ChecksTM.getNew();
-		var productsRepeated = pageGaleria.searchArticleRepeatedInGallery();
+		var productsRepeated = pgGaleria.searchArticleRepeatedInGallery();
 		String producRepeatedWarning = "";
 		if (productsRepeated!=null && !productsRepeated.isEmpty()) {
 			producRepeatedWarning+=
-				"<br><b style=\"color:" + Warn.getColorCss() + "\">Warning!</b>: " + 
+				"<br><b style=\"color:" + WARN.getColorCss() + "\">Warning!</b>: " + 
 				"hay " + productsRepeated.size() + " productos repetidos, " + 
 				"por ejemplo el <b>" + productsRepeated.get(0).toString();
 		}
@@ -271,7 +271,7 @@ public class PageGaleriaSteps extends StepBase {
 		description=
 			"En pantalla aparecen exactamente #{numArticlesInPage} artículos " + 
 			"(están apareciendo #{numArticlesExpected}",
-		level=Info)
+		level=INFO)
 	private boolean checkNumArticlesInScreen(int numArticlesInPage, int numArticlesExpected) {
 		return (numArticlesInPage==numArticlesExpected);
 	}
@@ -287,10 +287,10 @@ public class PageGaleriaSteps extends StepBase {
 	public int seleccionaOrdenacionGaleria(
 			FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar) throws Exception {
 		
-		pageGaleria.selecOrdenacionAndReturnNumArticles(typeOrdenacion);
+		pgGaleria.selecOrdenacionAndReturnNumArticles(typeOrdenacion);
 
 		checkIsVisiblePageWithTitle(tipoPrendasGaleria);
-		int numArticulosPant = pageGaleria.getNumArticulos() + pageGaleria.getNumArticulos();
+		int numArticulosPant = pgGaleria.getNumArticulos() + pgGaleria.getNumArticulos();
 		checkOrderListArticles(typeOrdenacion, numArticulosPant, numArticulosValidar);
  
 		checksDefault();
@@ -300,7 +300,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation (
 		description="Aparece una pantalla en la que el title contiene <b>#{tipoPrendasGaleria}",
-		level=Warn)
+		level=WARN)
 	private boolean checkIsVisiblePageWithTitle(String tipoPrendasGaleria) {
 		return driver.getTitle().toLowerCase()
 				.contains(tipoPrendasGaleria.toLowerCase());
@@ -312,15 +312,15 @@ public class PageGaleriaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Aparecen > 1 prendas",
-			numArticulosPant > 1, Warn);
+			numArticulosPant > 1, WARN);
 		if (numArticulosValidar>=0) {
 		  	checks.add(
 				"Aparecen " + numArticulosValidar + " artículos",
-				numArticulosValidar==numArticulosPant, Info);
+				numArticulosValidar==numArticulosPant, INFO);
 		}
 	  	checks.add(
 			"Los artículos aparecen ordenados por " + typeOrdenacion.name(),
-			pageGaleria.articlesInOrder(typeOrdenacion), Warn);
+			pgGaleria.articlesInOrder(typeOrdenacion), WARN);
 	  	
 	  	return checks;
 	}
@@ -329,7 +329,7 @@ public class PageGaleriaSteps extends StepBase {
 		description="Volver al 1er artículo de la galería (mediante selección del icono de la flecha Up)", 
 		expected="Se visualiza el 1er elemento")
 	public void backTo1erArticleMobilStep() throws Exception {
-		pageGaleria.backTo1erArticulo();
+		pgGaleria.backTo1erArticulo();
 		checkBackTo1ersElementOk();
 	}
 
@@ -338,12 +338,12 @@ public class PageGaleriaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Es clickable el 1er elemento de la lista",
-			pageGaleria.isClickableArticuloUntil(1, 0), Warn);
+			pgGaleria.isClickableArticuloUntil(1, 0), WARN);
 	  	
 		int seconds = 2;
 	  	checks.add(
 			"Es clickable el bloque de filtros " + getLitSecondsWait(seconds),
-			pageGaleria.isClickableFiltroUntil(seconds), Warn);
+			pgGaleria.isClickableFiltroUntil(seconds), WARN);
 	  	
 	  	return checks;
 	}
@@ -367,16 +367,16 @@ public class PageGaleriaSteps extends StepBase {
 		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax. En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
 		waitForPageLoaded(driver, 2);
 
-		var articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
-		replaceStepDescription(TAG_NOMBRE_1ER_ARTIC, pageGaleria.getNombreArticulo(articuloColores));
-		replaceStepDescription(TAG_PRECIO_1ER_ARTIC, pageGaleria.getPrecioArticulo(articuloColores));
-		String srcImg1erArt = pageGaleria.getImagenArticulo(articuloColores);
+		var articuloColores = pgGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
+		replaceStepDescription(TAG_NOMBRE_1ER_ARTIC, pgGaleria.getNombreArticulo(articuloColores));
+		replaceStepDescription(TAG_PRECIO_1ER_ARTIC, pgGaleria.getPrecioArticulo(articuloColores));
+		String srcImg1erArt = pgGaleria.getImagenArticulo(articuloColores);
 		replaceStepDescription(TAG_SRC_PNG_2O_COLOR, srcImg1erArt);
 		
-		pageGaleria.clickColorArticulo(articuloColores, posColor);
+		pgGaleria.clickColorArticulo(articuloColores, posColor);
 		waitMillis(100);
 		
-		String srcImgAfterClickColor = pageGaleria.getImagenArticulo(articuloColores);
+		String srcImgAfterClickColor = pgGaleria.getImagenArticulo(articuloColores);
 		checkImageIsModified(srcImg1erArt, srcImgAfterClickColor);
 	   
 		return srcImgAfterClickColor;
@@ -418,16 +418,16 @@ public class PageGaleriaSteps extends StepBase {
 		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax.
 		//En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
 		waitForPageLoaded(driver, 2);
-		var pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+		var pageGaleriaDesktop = (PageGaleriaDesktop)pgGaleria;
 		var articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHover(numArtConColores);
 		
-		replaceStepDescription(TAG_NOMBRE_ART, pageGaleria.getNombreArticulo(articuloColores));
-		replaceStepExpected(TAG_NOMBRE_ART, pageGaleria.getNombreArticulo(articuloColores));
+		replaceStepDescription(TAG_NOMBRE_ART, pgGaleria.getNombreArticulo(articuloColores));
+		replaceStepExpected(TAG_NOMBRE_ART, pgGaleria.getNombreArticulo(articuloColores));
 		
-		String srcImg1erSlider = pageGaleria.getImagenArticulo(articuloColores);
+		String srcImg1erSlider = pgGaleria.getImagenArticulo(articuloColores);
 		pageGaleriaDesktop.clickSliders(articuloColores, typeSliderList);
 
-		String srcImg2oSlider = pageGaleria.getImagenArticulo(articuloColores);
+		String srcImg2oSlider = pgGaleria.getImagenArticulo(articuloColores);
 		checkImageSliderArticleHasChanged(srcImg1erSlider, srcImg2oSlider, typeSliderList.length);
 		if ("".compareTo(srcImageExpected)!=0) {
 			checkActualImgSliderIsTheExpected(srcImg2oSlider, srcImageExpected);
@@ -437,10 +437,10 @@ public class PageGaleriaSteps extends StepBase {
 
 	@Validation
 	private ChecksTM checkImageSliderArticleHasChanged(String srcImg1erSlider, String srcImg2oSlider, int numClicks) {
-		State state = Defect;
+		State state = DEFECT;
 		if (numClicks>1) {
 			//Si hemos realizado varios clicks y sólo hay 2 imágenes habremos vuelto a la inicial
-			state = Warn;
+			state = WARN;
 		}
 		var checks = ChecksTM.getNew();
 		checks.add(
@@ -471,18 +471,18 @@ public class PageGaleriaSteps extends StepBase {
 	@Step (
 		description="Seleccionar el " + TAG_NUM_ART_CON_COLORES + "o artículo con variedad de colores (" + TAG_NOMBRE_1ER_ART + " " + TAG_PRECIO_1ER_ART + ")", 
 		expected="Aparece el artículo original(" + TAG_NOMBRE_1ER_ART + " " + TAG_PRECIO_1ER_ART + ")",
-		saveNettraffic=SaveWhen.Always)
+		saveNettraffic=ALWAYS)
 	public void selecArticuloGaleriaStep(int numArtConColores) {
-		WebElement articuloColores = pageGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
-		String nombre1erArt = pageGaleria.getNombreArticulo(articuloColores);
-		String precio1erArt = pageGaleria.getPrecioArticulo(articuloColores);
+		WebElement articuloColores = pgGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
+		String nombre1erArt = pgGaleria.getNombreArticulo(articuloColores);
+		String precio1erArt = pgGaleria.getPrecioArticulo(articuloColores);
 		replaceStepDescription(TAG_NUM_ART_CON_COLORES, String.valueOf(numArtConColores));
 		replaceStepDescription(TAG_NOMBRE_1ER_ART, nombre1erArt);
 		replaceStepDescription(TAG_PRECIO_1ER_ART, precio1erArt);
 		replaceStepExpected(TAG_NOMBRE_1ER_ART, nombre1erArt);
 		replaceStepExpected(TAG_PRECIO_1ER_ART, precio1erArt);
 
-		pageGaleria.clickArticulo(articuloColores);
+		pgGaleria.clickArticulo(articuloColores);
 		int seconds = 3;
 		checkIsFichaArticle(nombre1erArt, precio1erArt, seconds);
 
@@ -499,7 +499,7 @@ public class PageGaleriaSteps extends StepBase {
 		PageFicha pageFicha = PageFicha.of(channel);
 	  	checks.add(
 			"Aparece la página de ficha " + getLitSecondsWait(seconds),
-			pageFicha.isPageUntil(seconds), Warn);
+			pageFicha.isPage(seconds), WARN);
 	  	
 		String nombreArtFicha = pageFicha.getSecDataProduct().getTituloArt();
 		String precioArtFicha = pageFicha.getSecDataProduct().getPrecioFinalArticulo();
@@ -510,22 +510,22 @@ public class PageGaleriaSteps extends StepBase {
 			    "   - Precio " + precio1erArt,
 			    nombreArtFicha.toUpperCase().contains(nombre1erArt.toUpperCase()) &&
 			    precioArtFicha.replace(" ", "").toUpperCase().contains(precio1erArt.replace(" ", "").toUpperCase()),
-			    Info)
-	  	    .store(StoreType.None).build());
+			    INFO)
+	  	    .store(NONE).build());
 		
 	  	return checks;
 	}
 
-	@Validation (description="Existe algún vídeo en la galería", level=Warn)
+	@Validation (description="Existe algún vídeo en la galería", level=WARN)
 	public boolean validaHayVideoEnGaleria() {
-		PageGaleriaDesktop pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
-		return (pageGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.VIDEO));
+		var pgGaleriaDesktop = (PageGaleriaDesktop)pgGaleria;
+		return (pgGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.VIDEO));
 	}
 
 	@Validation (
-		description="Aparece una página con artículos " + SECONDS_WAIT,	level=Warn)
+		description="Aparece una página con artículos " + SECONDS_WAIT,	level=WARN)
 	public boolean validaArtEnContenido(int seconds) {
-		return (pageGaleria.isVisibleArticleUntil(1, seconds));
+		return pgGaleria.isVisibleArticleUntil(1, seconds);
 	}
 
 	private static final String TAG_POS_ICONS = "@TagPosIcons";
@@ -537,7 +537,7 @@ public class PageGaleriaSteps extends StepBase {
 			throws Exception {
 		replaceStepDescription(TAG_POS_ICONS, Arrays.toString(posIconsToClick));
 		
-		var listAddFav = pageGaleria.clickArticleHearthIcons(posIconsToClick);
+		var listAddFav = pgGaleria.clickArticleHearthIcons(posIconsToClick);
 		String estadoFinal = "";
 		if (actionFav==TypeActionFav.MARCAR) {
 				estadoFinal = "Marcados";
@@ -556,14 +556,14 @@ public class PageGaleriaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
    		checks.add(
 			"Quedan " + estadoFinal + " los iconos asociados a los artículos con posiciones <b>" + Arrays.toString(posIconsSelected) + "</b>",
-   	   		pageGaleria.iconsInCorrectState(actionFav, posIconsSelected), Warn);
+   	   		pgGaleria.iconsInCorrectState(actionFav, posIconsSelected), WARN);
 		return checks;
 	}
 
 	public ListDataArticleGalery selectListadoXColumnasDesktop(
 			NumColumnas numColumnas, ListDataArticleGalery listArticlesGaleriaAnt){
 		selectListadoXColumnasDesktop(numColumnas);
-		var listArticlesGaleriaAct = pageGaleria.getListDataArticles();
+		var listArticlesGaleriaAct = pgGaleria.getListDataArticles();
 		if (listArticlesGaleriaAnt!=null) {
 			int articulosComprobar = 20;
 			checkArticlesEqualsToPreviousGalery(articulosComprobar, listArticlesGaleriaAnt, listArticlesGaleriaAct, numColumnas);
@@ -575,7 +575,7 @@ public class PageGaleriaSteps extends StepBase {
 		description="Seleccionar el link del listado a <b>#{numColumnas.name()} columnas</b>", 
 		expected="Aparece un listado de artículos a #{numColumnas.name()} columnas")
 	public void selectListadoXColumnasDesktop(NumColumnas numColumnas)	{
-		((PageGaleriaDesktop)pageGaleria).clickLinkColumnas(numColumnas);
+		((PageGaleriaDesktop)pgGaleria).clickLinkColumnas(numColumnas);
 		checkIsVisibleLayoutListadoXcolumns(numColumnas);
 	}
 
@@ -588,28 +588,28 @@ public class PageGaleriaSteps extends StepBase {
    		boolean articlesEquals = listArticlesGaleriaAct.isArticleListEquals(listArticlesGaleriaAnt, articulosComprobar);
    		String infoWarning = "";
    		if (!articlesEquals) {
-   			DataArticleGalery articleGaleryActualNotFit = listArticlesGaleriaAct.getFirstArticleThatNotFitWith(listArticlesGaleriaAnt);
-   			infoWarning+="<br><b style=\"color:" + Info.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería anterior (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
+   			var articleGaleryActualNotFit = listArticlesGaleriaAct.getFirstArticleThatNotFitWith(listArticlesGaleriaAnt);
+   			infoWarning+="<br><b style=\"color:" + INFO.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería anterior (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
    			infoWarning+=listArticlesGaleriaAct.getTableHTLMCompareArticlesGaleria(listArticlesGaleriaAnt);
    		}
    		checks.add(
    			"Los primeros " + articulosComprobar + " artículos de la galería a " + 
    			numColumnas.name() + " columnas son iguales a los de la anterior galería" + infoWarning,
-   			articlesEquals, Info);
+   			articlesEquals, INFO);
    		
    		return checks;
 	}
 
 	@Validation (
 		description="Aparece el layout correspondiente al listado a <b>#{numColumnas.name()} columnas</b>",
-		level=Warn)
+		level=WARN)
 	private boolean checkIsVisibleLayoutListadoXcolumns(NumColumnas numColumnas) {
-		return (pageGaleria.getLayoutNumColumnas()==((PageGaleriaDesktop)pageGaleria).getNumColumnas(numColumnas));
+		return (pgGaleria.getLayoutNumColumnas()==((PageGaleriaDesktop)pgGaleria).getNumColumnas(numColumnas));
 	}
 
-	@Validation (description="Estamos en la página de Galería",	level=Warn)
+	@Validation (description="Estamos en la página de Galería",	level=WARN)
 	private boolean checkIsPageGaleria(WebDriver driver) {
-		var pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+		var pageGaleriaDesktop = (PageGaleriaDesktop)pgGaleria;
 		return (pageGaleriaDesktop.isPage());
 	}
 
@@ -618,18 +618,18 @@ public class PageGaleriaSteps extends StepBase {
 	}
 
 	public void validaArticlesOfTemporadas(List<Integer> listTemporadas) {
-		validaArticlesOfTemporadas(listTemporadas, false, Warn, StoreType.Evidences);
+		validaArticlesOfTemporadas(listTemporadas, false, WARN, EVIDENCES);
 	}
 
 	public void validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles) {
-		validaArticlesOfTemporadas(listTemporadas, validaNotNewArticles, Warn, StoreType.Evidences);
+		validaArticlesOfTemporadas(listTemporadas, validaNotNewArticles, WARN, EVIDENCES);
 	}
 
 	@Validation
 	public ChecksTM validaArticlesOfTemporadas(
 			List<Integer> listTemporadas, boolean validaNotNewArticles, State levelError, StoreType store) {
 		var checks = ChecksTM.getNew();
-		var pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+		var pageGaleriaDesktop = (PageGaleriaDesktop)pgGaleria;
 		var listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM_OTHER, listTemporadas);
 		if (validaNotNewArticles) {
 			listArtWrong = PageGaleria.getNotNewArticlesFrom(listArtWrong);
@@ -643,7 +643,7 @@ public class PageGaleriaSteps extends StepBase {
 		String infoWarning = "";
 		if (!listArtWrong.isEmpty()) {
 			infoWarning+=
-				"<br><lin style=\"color:" + Warn.getColorCss() + ";\"><b>Warning!</b>: " +
+				"<br><lin style=\"color:" + WARN.getColorCss() + ";\"><b>Warning!</b>: " +
 				"hay " + listArtWrong.size() + " artículos que no pertenecen a las temporadas " + listTemporadas + ":<br>";
 			for (String nameWrong : listArtWrong) {
 				infoWarning+=(nameWrong + "<br>");
@@ -664,7 +664,7 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation
 	public ChecksTM validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, StoreType store) {
 		var checks = ChecksTM.getNew();
-		var pageGaleriaDesktop = (PageGaleriaDesktop)pageGaleria;
+		var pageGaleriaDesktop = (PageGaleriaDesktop)pgGaleria;
 		var listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
 		checks.add(
 			Check.make(
@@ -681,7 +681,7 @@ public class PageGaleriaSteps extends StepBase {
 
 	private void addInfoArtWrongToDescription(List<String> listArtWrong, TypeArticle typeArticle, Check validation) {
 		String textToAdd =
-				"<br><lin style=\"color:" + Warn.getColorCss() + ";\"><b>Warning!</b>: " +
+				"<br><lin style=\"color:" + WARN.getColorCss() + ";\"><b>Warning!</b>: " +
 						"hay " + listArtWrong.size() + " artículos que son del tipo <b>" + typeArticle + "</b><br>:";
 		for (String nameWrong : listArtWrong) {
 			textToAdd+=(nameWrong + "<br>");
@@ -695,23 +695,23 @@ public class PageGaleriaSteps extends StepBase {
 			description="Seleccionamos el link <b>Más Info</b>",
 			expected="Se hace visible el aviso legal")
 	public void clickMoreInfoBannerRebajasJun2018() {
-		((PageGaleriaDesktop)pageGaleria).clickRebajasBannerHead();
+		((PageGaleriaDesktop)pgGaleria).clickRebajasBannerHead();
 		checkAfterClickInfoRebajas();
 	}
 
 	@Validation
 	private ChecksTM checkAfterClickInfoRebajas() {
 		var checks = ChecksTM.getNew();
-		var pageGaleriaDesktop = ((PageGaleriaDesktop)pageGaleria);
+		var pageGaleriaDesktop = ((PageGaleriaDesktop)pgGaleria);
 		int seconds = 1;
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
 			"Se despliega la información relativa a las rebajas " + getLitSecondsWait(seconds),
-			pageGaleriaDesktop.isVisibleInfoRebajasBannerHead(seconds), Warn);
+			pageGaleriaDesktop.isVisibleInfoRebajasBannerHead(seconds), WARN);
 		
 		checks.add(
 			"Aparece el link de <b>Menos info</b>",
-			pageGaleriaDesktop.isVisibleLinkInfoRebajasBannerHead(LESS), Warn);
+			pageGaleriaDesktop.isVisibleLinkInfoRebajasBannerHead(LESS), WARN);
 		
 		return checks;
 	}
@@ -727,12 +727,12 @@ public class PageGaleriaSteps extends StepBase {
 		int secondsArticle = 8;
 		checks.add (
 			"Como mínimo se obtiene un artículo " + getLitSecondsWait(secondsArticle),
-			pageGaleria.isVisibleArticleUntil(1, secondsArticle));
+			pgGaleria.isVisibleArticleUntil(1, secondsArticle));
 		
 		int secondsImage = 5;
 		checks.add (
 			"Aparece la imagen del 1er artículo  " + getLitSecondsWait(secondsImage),
-			pageGaleria.isVisibleArticleUntil(1, secondsImage), Warn);
+			pgGaleria.isVisibleArticleUntil(1, secondsImage), WARN);
 		
 		return checks;
 	}
@@ -746,8 +746,8 @@ public class PageGaleriaSteps extends StepBase {
 			checks.add (
 				Check.make(
 					"El 1er artículo tiene 1 icono de favorito asociado " + getLitSecondsWait(secondsIcon),
-					pageGaleria.isArticleWithHearthIconPresentUntil(1, secondsIcon), Info)
-				.store(StoreType.None).build());
+					pgGaleria.isArticleWithHearthIconPresentUntil(1, secondsIcon), INFO)
+				.store(NONE).build());
 		}
 		return checks;
 	}

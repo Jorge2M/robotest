@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.compra.pageobjects;
+package com.mng.robotest.tests.domains.compra.pageobjects.modals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	public boolean isVisible(int seconds) {
-		return state(Visible, XP_MODAL_DIRECTIONS).wait(seconds).check();
+		return state(VISIBLE, XP_MODAL_DIRECTIONS).wait(seconds).check();
 	}
 	
 	public Optional<Direction> getPrincipalDirection(int seconds) {
@@ -103,14 +103,14 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	private String getDirectionItem(WebElement lineDirection, DirectionItem item) {
-		if (state(Visible, lineDirection).by(By.xpath(item.getXPath())).check()) {
+		if (state(VISIBLE, lineDirection).by(By.xpath(item.getXPath())).check()) {
 			return getElement(lineDirection, "." + item.getXPath()).getText();
 		}
 		return "";
 	}
 	
 	private boolean isPrincipal(WebElement lineDirection) {
-		return state(Visible, lineDirection).by(By.xpath("." + XP_TEXT_PRINCIPAL)).check();
+		return state(VISIBLE, lineDirection).by(By.xpath("." + XP_TEXT_PRINCIPAL)).check();
 	}
 	
 	public void clickEditAddress(String address) throws NoSuchElementException {
@@ -131,7 +131,7 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	public boolean isModalInvisible(int seconds) {
-		return state(Invisible, XP_MODAL_DIRECTIONS).wait(seconds).check();
+		return state(INVISIBLE, XP_MODAL_DIRECTIONS).wait(seconds).check();
 	}
 
 }

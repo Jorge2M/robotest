@@ -59,17 +59,17 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 
 	@Override
 	public void clickLinea() {
-		state(Present, getXPathLinea()).wait(1).check();
+		state(PRESENT, getXPathLinea()).wait(1).check();
 		click(getXPathLinea()).exec();
 	}	
 	@Override 
 	public void clickSublinea() {
-		state(Present, getXPathLinea()).wait(1).check();
+		state(PRESENT, getXPathLinea()).wait(1).check();
 		click(getXPathSublinea()).exec();
 	}
 	@Override
 	public void hoverLinea() {
-		state(Visible, getXPathLinea()).wait(1).check();
+		state(VISIBLE, getXPathLinea()).wait(1).check();
 		moveToElement(getXPathLinea());
 	}
 	@Override 
@@ -89,15 +89,15 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	
 	@Override
 	public boolean isSublineaSelected(int seconds) {
-		return state(Visible, getXPathSublineaSelected()).wait(seconds).check();
+		return state(VISIBLE, getXPathSublineaSelected()).wait(seconds).check();
 	}
 	@Override
 	public boolean isLineaPresent(int seconds) {
-		return state(Visible, getXPathLinea()).wait(seconds).check();
+		return state(VISIBLE, getXPathLinea()).wait(seconds).check();
 	}
 	@Override
 	public boolean isSublineaPresent(int seconds) {
-		return state(Visible, getXPathSublinea()).wait(seconds).check();
+		return state(VISIBLE, getXPathSublinea()).wait(seconds).check();
 	}
 	
 }

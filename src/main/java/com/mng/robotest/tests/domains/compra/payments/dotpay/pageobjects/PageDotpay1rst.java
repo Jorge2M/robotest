@@ -19,16 +19,16 @@ public class PageDotpay1rst extends PageBase {
 	
 	public boolean isPresentEntradaPago(String nombrePago) {
 		String xpathPago = getXPathEntradaPago(nombrePago);
-		return state(Present, xpathPago).check();
+		return state(PRESENT, xpathPago).check();
 	}
 	
 	public boolean isPresentCabeceraStep(String nombrePago) {
 		String xpathCab = getXPathEntradaPago(nombrePago);
-		return state(Present, xpathCab).check();
+		return state(PRESENT, xpathCab).check();
 	}
 
 	public boolean isPresentButtonPago() {
-		return state(Present, XP_BUTTON_PAGO).check();
+		return state(PRESENT, XP_BUTTON_PAGO).check();
 	}
 
 	public void clickToPay() {

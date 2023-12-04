@@ -11,14 +11,14 @@ public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
 	private static final String XP_BUTTON_NEXT_PAY = "//button[@id='submit' and @class[contains(.,'submit-arrow')]]";
 	
 	@Override
-	public boolean isPageUntil(int seconds) {
-		return state(Visible, XP_INPUT_CVC).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(VISIBLE, XP_INPUT_CVC).wait(seconds).check();
 	}
 	
 	@Override
 	public void sendCaducidadTarj(String fechaVencimiento) {
 		int i=0;
-		while (!state(Clickable, XP_INPUT_FEC_CADUCIDAD).wait(1).check() && i<3) {
+		while (!state(CLICKABLE, XP_INPUT_FEC_CADUCIDAD).wait(1).check() && i<3) {
 			clickNextButton();
 			i+=1;
 		}
@@ -28,7 +28,7 @@ public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
 	@Override
 	public void sendCvc(String securityCode) {
 		int i=0;
-		while (!state(Clickable, XP_INPUT_CVC).wait(1).check() && i<3) {
+		while (!state(CLICKABLE, XP_INPUT_CVC).wait(1).check() && i<3) {
 			clickNextButton();
 			i+=1;
 		}
@@ -36,7 +36,7 @@ public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
 	}
 	
 	public boolean isActiveWrapperVisaUntil(int seconds) {
-		return state(Visible, XP_WRAPPER_VISA_ACTIVE).wait(seconds).check();
+		return state(VISIBLE, XP_WRAPPER_VISA_ACTIVE).wait(seconds).check();
 	}
 	
 	public void clickNextButton() {
@@ -48,7 +48,7 @@ public class PageMercpagoDatosTrjMobil extends PageMercpagoDatosTrj {
 	}	
 	
 	public boolean isClickableButtonNextPayUntil(int seconds) {
-		return state(Clickable, XP_BUTTON_NEXT_PAY).wait(seconds).check();
+		return state(CLICKABLE, XP_BUTTON_NEXT_PAY).wait(seconds).check();
 	}
 
 	public void clickButtonForPay() {

@@ -19,8 +19,8 @@ public class PageMercpagoConf extends PageBase {
 		}
 	}
 	
-	public boolean isPageUntil(int seconds) {
-		return state(Present, getXPathSectionReview()).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(PRESENT, getXPathSectionReview()).wait(seconds).check();
 	}
 
 	public void clickPagar() {

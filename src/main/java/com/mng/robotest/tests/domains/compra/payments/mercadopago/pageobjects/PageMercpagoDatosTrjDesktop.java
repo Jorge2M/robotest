@@ -9,8 +9,8 @@ public class PageMercpagoDatosTrjDesktop extends PageMercpagoDatosTrj {
 	private static final String XP_BOTON_CONTINUAR = "//button[@id='submit']";
 	
 	@Override
-	public boolean isPageUntil(int seconds) {
-		return state(Visible, XP_INPUT_CVC).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(VISIBLE, XP_INPUT_CVC).wait(seconds).check();
 	}
 	
 	@Override
@@ -24,7 +24,7 @@ public class PageMercpagoDatosTrjDesktop extends PageMercpagoDatosTrj {
 	}
 	
 	public boolean isVisibleVisaIconUntil(int seconds) {
-		return state(Visible, XP_VISA_ICON_NUM_TARJ).wait(seconds).check();
+		return state(VISIBLE, XP_VISA_ICON_NUM_TARJ).wait(seconds).check();
 	}
 
 	public void clickBotonForContinue() {

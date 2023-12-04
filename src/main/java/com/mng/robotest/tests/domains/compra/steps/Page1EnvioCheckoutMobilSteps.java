@@ -4,11 +4,11 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.compra.pageobjects.Page1EnvioCheckoutMobil;
-import com.mng.robotest.tests.domains.compra.pageobjects.Page2DatosPagoCheckoutMobil;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.ModalDroppoints;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
+import com.mng.robotest.tests.domains.compra.pageobjects.mobile.Page1EnvioCheckoutMobil;
+import com.mng.robotest.tests.domains.compra.pageobjects.mobile.Page2DatosPagoCheckoutMobil;
 import com.mng.robotest.tests.domains.compra.steps.envio.ModalDroppointsSteps;
 import com.mng.robotest.testslegacy.datastored.DataPago;
 
@@ -25,7 +25,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece la página correspondiente al paso-1 " + getLitSecondsWait(seconds),
-			page1EnvioCheckoutMobil.isPageUntil(seconds), Warn);
+			page1EnvioCheckoutMobil.isPage(seconds), WARN);
 		
 		checks.add(
 			"Aparece el botón de introducción del código promocional",
@@ -34,7 +34,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		if (!userLogged) {
 			checks.add(
 				"Aparece seleccionado el método de envío \"Estándar\"",
-				page1EnvioCheckoutMobil.isPresentEnvioStandard(), Warn);
+				page1EnvioCheckoutMobil.isPresentEnvioStandard(), WARN);
 		}
 		return checks;
 	}
@@ -62,7 +62,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	
 	@Validation (
 		description="Queda seleccionado el bloque correspondiete a <b>#{tipoTransporte}</b> " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	public boolean validaBlockSelected(TipoTransporte tipoTransporte, int seconds) {
 		return (page1EnvioCheckoutMobil.isBlockSelectedUntil(tipoTransporte, seconds));
 	}
@@ -79,7 +79,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	
 	@Validation (description="Aparece la página asociada al Paso-2")
 	private boolean checkAppearsStep2() {
-		return new Page2DatosPagoCheckoutMobil().isPageUntil(3);
+		return new Page2DatosPagoCheckoutMobil().isPage(3);
 	}
 	
 	@Validation (description="Están presentes los métodos de pago")
@@ -93,11 +93,11 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		int seconds = 2;
 	 	checks.add(
 			"Aparece el descuento total aplicado al empleado " + getLitSecondsWait(seconds),
-			page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(seconds), Warn);
+			page1EnvioCheckoutMobil.isVisibleDescuentoEmpleadoUntil(seconds), WARN);
 	 	
 	 	checks.add(
 			"Aparece un descuento de empleado mayor que 0",
-			page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(), Warn);
+			page1EnvioCheckoutMobil.validateDiscountEmpleadoNotNull(), WARN);
 	 	
 	 	return checks;
 	}

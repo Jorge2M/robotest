@@ -1,8 +1,9 @@
-package com.mng.robotest.tests.domains.compra.pageobjects;
+package com.mng.robotest.tests.domains.compra.pageobjects.modals;
 
 import org.openqa.selenium.StaleElementReferenceException;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -24,11 +25,11 @@ public class ModalDirecFactura extends ModalDireccion {
 	} 
 
 	public boolean isVisibleFormUntil(int seconds) {
-		return state(Visible, XP_FORM_MODAL).wait(seconds).check();
+		return state(VISIBLE, XP_FORM_MODAL).wait(seconds).check();
 	}
 
 	public boolean isVisibleButtonActualizar() {
-		return state(Visible, XP_BUTTON_UPDATE).check();
+		return state(VISIBLE, XP_BUTTON_UPDATE).check();
 	}
 
 	public void clickActualizar() {

@@ -171,12 +171,12 @@ public class GroupWeb extends PageBase {
 	}	
 	public boolean isPresent() {
 		hoverLinea();
-		return state(Visible, getXPathGroup()).wait(1).check();
+		return state(VISIBLE, getXPathGroup()).wait(1).check();
 	}
 	
 	private void clickGroup() {
-		state(Visible, getXPathGroup()).wait(2).check();
-		click(getXPathGroup()).state(Visible).exec(); 
+		state(VISIBLE, getXPathGroup()).wait(2).check();
+		click(getXPathGroup()).state(VISIBLE).exec(); 
 		if (!isVisibleSubMenus() && group.getGroupResponse()==GroupResponse.MENUS) {
 			waitMillis(1000);
 			click(getXPathGroup()).exec();
@@ -184,7 +184,7 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private void hoverGroup() {
-		state(Visible, getXPathGroup()).wait(2).check();
+		state(VISIBLE, getXPathGroup()).wait(2).check();
 		moveToElement(getXPathGroup()); 
 	}
 	
@@ -193,7 +193,7 @@ public class GroupWeb extends PageBase {
 			   (group.getGroupResponse()!=GroupResponse.MENUS || isVisibleSubMenus()));
 	}
 	private boolean isGroupSelected() {
-		return state(Visible, getXPathGroupSelected()).wait(1).check();
+		return state(VISIBLE, getXPathGroupSelected()).wait(1).check();
 	}
 	
 	private void hoverLinea() {
@@ -217,7 +217,7 @@ public class GroupWeb extends PageBase {
 	}
 	
 	public boolean isVisibleSubMenus() {
-		return state(Visible, getXPathSubmenu()).check();
+		return state(VISIBLE, getXPathSubmenu()).check();
 	}
 	
 }

@@ -1,8 +1,7 @@
 package com.mng.robotest.tests.domains.transversal.menus.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Visible;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.javascript;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
@@ -79,7 +78,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 		secCabecera.clickIconoMenuHamburguerMobil(toOpenMenus);
 		Linea linea = Linea.getLinea(lineaType, dataTest.getPais());
 		if ("n".compareTo(linea.getExtended())==0) {
-			click(getXPathLineaLink()).type(javascript).exec();
+			click(getXPathLineaLink()).type(JAVASCRIPT).exec();
 		}
  	}
 	@Override
@@ -90,7 +89,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	@Override
 	public void clickSublinea() {
 		if (!isSublineaSelected(0)) {
-			click(getXPathSublineaLink()).type(javascript).exec();
+			click(getXPathSublineaLink()).type(JAVASCRIPT).exec();
 		}
 	}
 	@Override
@@ -113,7 +112,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 		if (app==AppEcom.outlet || channel==Channel.tablet) {
 			xpathLineaWithFlagSelected+="/..";
 		}
-		if (state(Present, xpathLineaWithFlagSelected).check()) {
+		if (state(PRESENT, xpathLineaWithFlagSelected).check()) {
 			return getElement(xpathLineaWithFlagSelected).getAttribute("class").contains("selected");
 		}
 		return false;
@@ -134,7 +133,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 		if (app==AppEcom.outlet || channel==Channel.tablet) {
 			xpathSublineaWithFlagOpen+="/..";
 		}
-		if (state(Present, xpathSublineaWithFlagOpen).check()) {
+		if (state(PRESENT, xpathSublineaWithFlagOpen).check()) {
 			String classDropdown = getElement(xpathSublineaWithFlagOpen).getAttribute("class");
 			return (classDropdown.contains("open") || classDropdown.contains("-up"));
 		}
@@ -143,11 +142,11 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 
 	@Override
 	public boolean isLineaPresent(int seconds) {
-		return state(Visible, getXPathLineaLink()).wait(seconds).check();
+		return state(VISIBLE, getXPathLineaLink()).wait(seconds).check();
 	}
 	@Override
 	public boolean isSublineaPresent(int seconds) {
-		return state(Visible, getXPathSublineaLink()).wait(seconds).check();
+		return state(VISIBLE, getXPathSublineaLink()).wait(seconds).check();
 	}	
 	
 }

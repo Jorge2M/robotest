@@ -20,11 +20,11 @@ public class PagePedidosSteps extends StepBase {
 		
 		checks.add(
 			"La página contiene " + usrRegistrado ,
-			pageMispedidos.elementContainsText(usrRegistrado), Warn);
+			pageMispedidos.elementContainsText(usrRegistrado), WARN);
 		
 		checks.add(
 			"La lista de pedidos está vacía",
-			pageMispedidos.listaPedidosVacia(), Warn);
+			pageMispedidos.listaPedidosVacia(), WARN);
 		
 		return checks;
 	}

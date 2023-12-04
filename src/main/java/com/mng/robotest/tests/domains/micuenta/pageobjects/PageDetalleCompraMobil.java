@@ -32,11 +32,11 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	@Override
 	public boolean isVisibleDataTicket(int seconds) {
-		return state(Visible, XP_ID_TICKET).wait(seconds).check();
+		return state(VISIBLE, XP_ID_TICKET).wait(seconds).check();
 	}
 	@Override
 	public boolean isVisibleIdTicket(int seconds) {
-		return state(Visible, XP_ID_TICKET).wait(seconds).check();
+		return state(VISIBLE, XP_ID_TICKET).wait(seconds).check();
 	}
 	@Override
 	public String getIdTicket(TypeTicket typeTicket) {
@@ -44,7 +44,7 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	@Override
 	public String getImporte() {
-		state(Visible, XP_LINEA_IMPORTE).wait(2).check();
+		state(VISIBLE, XP_LINEA_IMPORTE).wait(2).check();
 		return getElementWeb(XP_LINEA_IMPORTE).getText();
 	}
 	@Override
@@ -70,9 +70,9 @@ public class PageDetalleCompraMobil extends PageDetalleCompra {
 	}
 	
 	private void makeVisibleDatosEnvio() {
-		if (state(Invisible, XP_DATOS_ENVIO).check()) {
+		if (state(INVISIBLE, XP_DATOS_ENVIO).check()) {
 			click(XP_DESPLEGABLE_DATOS_ENVIO).exec();
-			state(Visible, XP_DATOS_ENVIO).wait(1).check();
+			state(VISIBLE, XP_DATOS_ENVIO).wait(1).check();
 		}
 	}
 }

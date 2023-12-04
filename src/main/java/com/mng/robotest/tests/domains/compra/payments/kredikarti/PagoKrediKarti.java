@@ -15,15 +15,15 @@ public class PagoKrediKarti extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		DataPedido dataPedido = dataPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		
-		SecKrediKartiSteps secKrediKartiSteps = pageCheckoutWrapperSteps.getSecKrediKartiSteps();
+		SecKrediKartiSteps secKrediKartiSteps = checkoutSteps.getSecKrediKartiSteps();
 		secKrediKartiSteps.inputNumTarjeta(dataPedido.getPago().getNumtarj());
 		secKrediKartiSteps.clickOpcionPagoAPlazo(1);
 		
 		if (execPay) {
 			dataPedido.setCodtipopago("O");
-			pageCheckoutWrapperSteps.inputDataTrjAndConfirmPago(dataPago);
+			checkoutSteps.inputDataTrjAndConfirmPago(dataPago);
 		}
 	}	
 }

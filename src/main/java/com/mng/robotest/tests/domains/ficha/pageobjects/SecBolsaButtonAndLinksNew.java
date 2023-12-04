@@ -47,21 +47,21 @@ public class SecBolsaButtonAndLinksNew extends PageBase {
 	}
 	
 	public boolean isVisibleBolsaButton(int seconds) {
-		return state(Visible, XP_BUTTON_ADD_BOLSA).wait(seconds).check();
+		return state(VISIBLE, XP_BUTTON_ADD_BOLSA).wait(seconds).check();
 	}
 	
 	public void clickAnadirBolsaButtonAndWait() {
-		state(Visible, XP_BUTTON_ADD_BOLSA).wait(2).check();
-		click(XP_BUTTON_ADD_BOLSA).type(javascript).exec();
+		state(VISIBLE, XP_BUTTON_ADD_BOLSA).wait(2).check();
+		click(XP_BUTTON_ADD_BOLSA).type(JAVASCRIPT).exec();
 	}
 
 	public boolean isVisibleButtonFavoritos() {
-		return state(Visible, XP_BUTTON_FAVORITOS).check();
+		return state(VISIBLE, XP_BUTTON_FAVORITOS).check();
 	}
 
 	public boolean isVisibleButtonFavoritos(ActionFavButton actionButton, int seconds) {
 		String xpathButtonFav = getXPathButtonFavoritos(actionButton);
-		return (state(Visible, xpathButtonFav).wait(seconds).check());
+		return (state(VISIBLE, xpathButtonFav).wait(seconds).check());
 	}
 
 	public void selectFavoritosButton(ActionFavButton actionButton) {
@@ -70,11 +70,11 @@ public class SecBolsaButtonAndLinksNew extends PageBase {
 	}
 
 	public boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		return state(Visible, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
+		return state(VISIBLE, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
 	}
 
 	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		return state(Invisible, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
+		return state(INVISIBLE, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
 	}
 
 	public void clickLinkAndWaitLoad(LinksAfterBolsa linkType) {

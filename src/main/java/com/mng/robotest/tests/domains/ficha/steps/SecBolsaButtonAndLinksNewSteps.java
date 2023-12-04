@@ -51,19 +51,19 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Figura el bloque de BreadCrumbs",
-			secDetalleProductNew.isVisibleBreadcrumbs(0), Warn);
+			secDetalleProductNew.isVisibleBreadcrumbs(0), WARN);
 	 	
 	 	checks.add(
 			"Es visible el item " + LINEA,
-			secDetalleProductNew.isVisibleItemBreadCrumb(LINEA), Warn);
+			secDetalleProductNew.isVisibleItemBreadCrumb(LINEA), WARN);
 	 	
 	 	checks.add(
 			"Es visible el item " + SUBGALERIA,
-			secDetalleProductNew.isVisibleItemBreadCrumb(SUBGALERIA), Warn);
+			secDetalleProductNew.isVisibleItemBreadCrumb(SUBGALERIA), WARN);
 	 	
 	 	checks.add(
 			"Es visible el item " + GALERIA,
-			secDetalleProductNew.isVisibleItemBreadCrumb(GALERIA), Warn);
+			secDetalleProductNew.isVisibleItemBreadCrumb(GALERIA), WARN);
 	 	
 	 	return checks;
 	}
@@ -95,11 +95,11 @@ public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 			if (isPaisChina != icon.isSpecificChina()) {
 			 	checks.add(
 			 		"No es visible el icono de " + icon,
-			 		!isVisibleIcon, Warn);
+			 		!isVisibleIcon, WARN);
 			} else {
 			 	checks.add(
 			 		"Sí es visible el icono de " + icon,
-			 		isVisibleIcon, Warn);
+			 		isVisibleIcon, WARN);
 			}
 		}
 

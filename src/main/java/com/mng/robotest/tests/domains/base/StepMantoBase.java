@@ -63,11 +63,11 @@ public abstract class StepMantoBase extends PageBase {
 	}
 	
 	private void setDataPedido(DataPedido pedidoData) {
-		var pagePedidosMantoSteps = new PagePedidosMantoSteps();
-		pagePedidosMantoSteps.setPedidoUsuarioRegistrado(pedidoData);
-		pagePedidosMantoSteps.setDataPedidoStep(pedidoData);
-		pagePedidosMantoSteps.setDataCliente(pedidoData);
-		pagePedidosMantoSteps.setTiendaFisicaListaPedidos(pedidoData);
+		var pgPedidosMantoSteps = new PagePedidosMantoSteps();
+		pgPedidosMantoSteps.setPedidoUsuarioRegistrado(pedidoData);
+		pgPedidosMantoSteps.setDataPedidoStep(pedidoData);
+		pgPedidosMantoSteps.setDataCliente(pedidoData);
+		pgPedidosMantoSteps.setTiendaFisicaListaPedidos(pedidoData);
 	}
 	
 	protected StepTM getCurrentStep() {

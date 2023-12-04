@@ -42,7 +42,7 @@ public class UtilsMangoTest extends PageBase {
 			if (urlPaginaPostAcceso!=null) {
 				driver.get(urlPaginaPostAcceso);
 			} else {
-				if (state(Present, "//base").check()) {
+				if (state(PRESENT, "//base").check()) {
 					String urlBase = getElement("//base").getAttribute("href");
 					driver.get(urlBase);
 				}

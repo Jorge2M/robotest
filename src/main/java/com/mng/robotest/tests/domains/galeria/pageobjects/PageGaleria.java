@@ -169,12 +169,12 @@ public abstract class PageGaleria extends PageBase {
 
 	public boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
 		String xpathArticulo = "(" + getXPathArticulo() + ")[" + numArticulo + "]";
-		return state(Visible, xpathArticulo).wait(seconds).check();
+		return state(VISIBLE, xpathArticulo).wait(seconds).check();
 	}
 
 	public boolean isClickableArticuloUntil(int numArticulo, int seconds) {
 		String xpathArticulo = "(" + getXPathArticulo() + ")[" + numArticulo + "]";
-		return state(Clickable, xpathArticulo).wait(seconds).check();
+		return state(CLICKABLE, xpathArticulo).wait(seconds).check();
 	}
 
 	public List<WebElement> getListaArticulos() {
@@ -211,7 +211,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
-		return state(Visible, getXPathArticulo(numArticulo)).wait(seconds).check();
+		return state(VISIBLE, getXPathArticulo(numArticulo)).wait(seconds).check();
 	}
 	public void moveToArticle(int numArticulo) {
 		moveToArticle(getElement(getXPathArticulo(numArticulo)));
@@ -226,7 +226,7 @@ public abstract class PageGaleria extends PageBase {
 	public boolean isFirstArticleOfType(LineaType lineaType) {
 		var listaArticulos = getElements(getXPathArticulo());
 		return (!listaArticulos.isEmpty() &&
-				state(Present, listaArticulos.get(0))
+				state(PRESENT, listaArticulos.get(0))
 					.by(By.xpath("//a[@href[contains(.,'" + lineaType + "')]]")).check());
 	}
 
@@ -389,7 +389,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public void clickIconoUpToGaleryIfVisible(String xpathIconoUpGalery) {
-		if (state(Visible, xpathIconoUpGalery).wait(1).check()) {
+		if (state(VISIBLE, xpathIconoUpGalery).wait(1).check()) {
 			getElement(xpathIconoUpGalery).click();
 		}
 	}
@@ -408,7 +408,7 @@ public abstract class PageGaleria extends PageBase {
 				getXPathNombreRelativeToArticle() +
 				"//self::*[text()[contains(.,'" + literal + "')]]");
 		
-		if (state(Present, byArticleName).wait(seconds).check()) {
+		if (state(PRESENT, byArticleName).wait(seconds).check()) {
 			return getElement(getXPathArticulo());
 		}
 		return null;
@@ -508,7 +508,7 @@ public abstract class PageGaleria extends PageBase {
 		int paginaActual = 1;
 		while (!lastPageReached && paginaActual<numPageToGo) {
 			By byPagina = By.xpath(getXPathPagina(paginaActual));
-			if (state(Visible, byPagina).check()) {
+			if (state(VISIBLE, byPagina).check()) {
 				moveToElement(byPagina);
 				scrollVertical(+50);
 				paginaActual+=1;
@@ -545,7 +545,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public boolean isPresentPagina(int pagina) {
-		return state(Visible, getXPathPagina(pagina)).check();
+		return state(VISIBLE, getXPathPagina(pagina)).check();
 	}
 
 	public void clickArticulo(WebElement articulo) {
@@ -590,7 +590,7 @@ public abstract class PageGaleria extends PageBase {
 		String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
 
 		PageFicha pageFicha = PageFicha.of(channel);
-		pageFicha.isPageUntil(10);
+		pageFicha.isPage(10);
 
 		return detailWindowHandle;
 	}

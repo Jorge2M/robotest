@@ -16,7 +16,7 @@ public class GetProductsSteps extends StepBase {
 	public void callProductListService(LineaType linea, String seccion, String galeria, String familia) throws Exception {
 		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), app, driver)
 				.method(MethodGetter.WEBDRIVER)
-				.linea(LineaType.SHE)
+				.linea(linea)
 				.menu(Menu.VAQUEROS)
 				.build();
 		

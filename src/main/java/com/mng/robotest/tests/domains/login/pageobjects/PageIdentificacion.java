@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.login.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Clickable;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.CERRAR_SESION;
 
 import com.mng.robotest.tests.domains.base.PageBase;
@@ -20,16 +19,16 @@ public abstract class PageIdentificacion extends PageBase {
 	private static final String XP_TAB_REGISTRATE = "//*[@data-testid[contains(.,'registerTab.goToRegister')]]";
 	
 	public void clickTabRegistrate() {
-		state(Clickable, XP_TAB_REGISTRATE).wait(5).check();
+		state(CLICKABLE, XP_TAB_REGISTRATE).wait(5).check();
 		click(XP_TAB_REGISTRATE).setX(0).setY(10).exec();
 	}
 	
 	public void logoff() {
-		new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, Clickable);
+		new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, CLICKABLE);
 	}
 	
 	public boolean isErrorEmailoPasswordKO() {
-		return state(Present, XP_ERROR_CREDENCIALES_KO).wait(1).check();
+		return state(PRESENT, XP_ERROR_CREDENCIALES_KO).wait(1).check();
 	}
 
 }

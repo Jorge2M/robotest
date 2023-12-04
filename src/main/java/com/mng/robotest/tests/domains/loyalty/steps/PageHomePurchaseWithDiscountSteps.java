@@ -7,18 +7,18 @@ import com.mng.robotest.tests.domains.loyalty.pageobjects.PageHomePurchaseWithDi
 
 public class PageHomePurchaseWithDiscountSteps extends StepBase {
 
-	private final PageHomePurchaseWithDiscount pageHomePurchaseWithDiscount = new PageHomePurchaseWithDiscount();
+	private final PageHomePurchaseWithDiscount pgHomePurchaseWithDiscount = new PageHomePurchaseWithDiscount();
 	
 	@Validation
 	public ChecksTM checkHomePurchaseWithDiscountPageOk() {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de <b>Descuento Mango likes you</b>",
-			pageHomePurchaseWithDiscount.checkIsPage());
+			pgHomePurchaseWithDiscount.checkIsPage());
 		
 		checks.add(
 			"Aparece el boton que permite <b>comprar ahora</b>",
-			pageHomePurchaseWithDiscount.areVisibleButtonPurchaseNow());
+			pgHomePurchaseWithDiscount.areVisibleButtonPurchaseNow());
 		
 		return checks;
 	}

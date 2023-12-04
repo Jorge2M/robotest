@@ -27,15 +27,15 @@ public class SecCabeceraSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIconoBolsa() {
 		var checks = ChecksTM.getNew();
-		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(Visible, 2);
+		boolean isVisibleIconoBolsa = secCabecera.isInStateIconoBolsa(VISIBLE, 2);
 		if (dataTest.getPais().isVentaOnline()) {
 			checks.add(
 				"<b>Sí</b> es posible comprar (aparece la capa relacionada con la bolsa)",
-				isVisibleIconoBolsa, Warn);
+				isVisibleIconoBolsa, WARN);
 		} else {
 			checks.add(
 				"<b>No</b> es posible comprar (aparece la capa relacionada con la bolsa)",
-				!isVisibleIconoBolsa, Warn);
+				!isVisibleIconoBolsa, WARN);
 		}
 		return checks;
 	}

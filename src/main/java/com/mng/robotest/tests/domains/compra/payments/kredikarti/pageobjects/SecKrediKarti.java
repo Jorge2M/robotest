@@ -37,7 +37,7 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
 
 	public boolean isVisiblePagoAPlazoUntil(int seconds) {
 		goToIframe();
-		boolean result = state(Visible, getXPathCapaPagoPlazo()).wait(seconds).check();
+		boolean result = state(VISIBLE, getXPathCapaPagoPlazo()).wait(seconds).check();
 		leaveIframe();
 		return result;
 	}
@@ -45,7 +45,7 @@ public class SecKrediKarti extends SecTarjetaPciInIframe {
 	public void clickRadioPagoAPlazo(int numRadio) {
 		goToIframe();
 		String xpathRadio = getXPathRadioPagoAPlazo(numRadio);
-		state(Visible, xpathRadio).wait(1).check();
+		state(VISIBLE, xpathRadio).wait(1).check();
 		click(xpathRadio).exec();
 		click(xpathRadio).exec();
 		leaveIframe();

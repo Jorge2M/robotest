@@ -22,7 +22,7 @@ public class PagePaytrailResultadoOkSteps extends StepBase {
 	   	
 	   	checks.add(
 			"Aparece el importe de la compra: " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), WARN);
 	   	
 	   	return checks;
 	}

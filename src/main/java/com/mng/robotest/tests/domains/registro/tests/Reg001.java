@@ -20,8 +20,8 @@ import com.mng.robotest.testslegacy.data.PaisShop;
 
 public class Reg001 extends TestBase {
 
-	private final PageRegistroInitialShopSteps pageRegistroInitialSteps = new PageRegistroInitialShopSteps();
-	private final PageRegistroPersonalizacionShopSteps pageRegistroPersonalizacionSteps = new PageRegistroPersonalizacionShopSteps();
+	private final PageRegistroInitialShopSteps pgRegistroInitialSteps = new PageRegistroInitialShopSteps();
+	private final PageRegistroPersonalizacionShopSteps pgRegistroPersonalizacionSteps = new PageRegistroPersonalizacionShopSteps();
 	
 	private final String emailNotExistent = DataMango.getEmailNonExistentTimestamp();
 	private final String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_ROBOT_USER).getPassword();
@@ -62,35 +62,35 @@ public class Reg001 extends TestBase {
 	}	
 	
 	private void inputBirthDateAndConsentPersonalInfo() {
-		pageRegistroInitialSteps.clickConsentPersonalInformationLink();
-		pageRegistroInitialSteps.clickConsentPersonalInformationRadio();
-		pageRegistroInitialSteps.inputBirthDate(dataNewRegister.getDateOfBirth());
+		pgRegistroInitialSteps.clickConsentPersonalInformationLink();
+		pgRegistroInitialSteps.clickConsentPersonalInformationRadio();
+		pgRegistroInitialSteps.inputBirthDate(dataNewRegister.getDateOfBirth());
 	}
 	
 	private void selectLinkPoliticaPrivacidad() {
-		pageRegistroInitialSteps.clickPoliticaPrivacidad();
-		pageRegistroInitialSteps.clickPoliticaPrivacidadModal();
-		pageRegistroInitialSteps.clickCondicionesVenta();
+		pgRegistroInitialSteps.clickPoliticaPrivacidad();
+		pgRegistroInitialSteps.clickPoliticaPrivacidadModal();
+		pgRegistroInitialSteps.clickCondicionesVenta();
 	}
 	
 	private void inputInitialDataAndClickCreate() {
-		pageRegistroInitialSteps.inputData(dataNewRegister);
+		pgRegistroInitialSteps.inputData(dataNewRegister);
 		if (isCorea()) {
 			inputBirthDateAndConsentPersonalInfo();	
 		}
-		pageRegistroInitialSteps.clickCreateAccountButton();
+		pgRegistroInitialSteps.clickCreateAccountButton();
 	}
 
 	private void inputPersonalizedDataAndClickGuardar() {
-		pageRegistroPersonalizacionSteps.inputData(dataNewRegister);
-		pageRegistroPersonalizacionSteps.clickGuardar();
+		pgRegistroPersonalizacionSteps.inputData(dataNewRegister);
+		pgRegistroPersonalizacionSteps.clickGuardar();
 	}
 	
 	private void checkLoginAndUserData() {
 		new SecMenusUserSteps().logoffLogin(dataNewRegister.getEmail(), dataNewRegister.getPassword());
-		var pageMiCuentaSteps = new PageMiCuentaSteps();
-		pageMiCuentaSteps.goToMisDatosAndValidateData(dataNewRegister);
-		pageMiCuentaSteps.goToSuscripcionesAndValidateData(dataNewRegister.getLineas());
+		var pgMiCuentaSteps = new PageMiCuentaSteps();
+		pgMiCuentaSteps.goToMisDatosAndValidateData(dataNewRegister);
+		pgMiCuentaSteps.goToSuscripcionesAndValidateData(dataNewRegister.getLineas());
 	}	
 
 	private boolean isCorea() {

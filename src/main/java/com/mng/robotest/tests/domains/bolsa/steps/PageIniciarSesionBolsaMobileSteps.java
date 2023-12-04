@@ -8,11 +8,11 @@ import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 
 public class PageIniciarSesionBolsaMobileSteps extends StepBase {
 
-	private final PageIniciarSesionBolsaMobile pageIdentificacionBolsa = new PageIniciarSesionBolsaMobile();
+	private final PageIniciarSesionBolsaMobile pgIdentificacionBolsa = new PageIniciarSesionBolsaMobile();
 	
 	@Validation (description="Se carga la página de identificación desde la bolsa " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
-		return pageIdentificacionBolsa.isPage(seconds);
+		return pgIdentificacionBolsa.isPage(seconds);
 	}
 	
 	public void login() {
@@ -23,7 +23,7 @@ public class PageIniciarSesionBolsaMobileSteps extends StepBase {
 		description="Nos identificamos con el usuario <b>#{user}</b> y password <b>#{password}</b>",
 		expected="Aparece la página de checkout")
 	public void login(String user, String password) {
-		pageIdentificacionBolsa.login(user, password);
+		pgIdentificacionBolsa.login(user, password);
 		new CheckoutSteps().validateIsFirstPage(true);
 	}
 

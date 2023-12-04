@@ -7,12 +7,12 @@ import com.mng.robotest.tests.domains.compra.payments.paypal.pageobjects.PagePay
 
 public class PagePaypalLoginSteps extends StepBase {
 
-	private final PagePaypalLogin pagePaypalLogin = new PagePaypalLogin();
+	private final PagePaypalLogin pgPaypalLogin = new PagePaypalLogin();
 	
 	@Validation (
 		description="Aparece la página de login " + SECONDS_WAIT)
-	public boolean validateIsPageUntil(int seconds) {
-		return pagePaypalLogin.isPageUntil(seconds);
+	public boolean validateisPage(int seconds) {
+		return pgPaypalLogin.isPage(seconds);
 	}
 	
 	@Step (
@@ -20,9 +20,10 @@ public class PagePaypalLoginSteps extends StepBase {
 		expected="Aparece la página de inicio de sesión en Paypal")
 	public void loginPaypal(String userMail, String password) {  
 		String paginaPadre = driver.getWindowHandle();
-		pagePaypalLogin.inputUserAndPassword(userMail, password);
-		pagePaypalLogin.clickIniciarSesion();
+		pgPaypalLogin.inputUserAndPassword(userMail, password);
+		pgPaypalLogin.clickIniciarSesion();
 		driver.switchTo().window(paginaPadre); //Salimos del iframe
-		new PagePaypalSelectPagoSteps().validateIsPageUntil(20);
+		new PagePaypalSelectPagoSteps().validateisPage(20);
 	}
+	
 }

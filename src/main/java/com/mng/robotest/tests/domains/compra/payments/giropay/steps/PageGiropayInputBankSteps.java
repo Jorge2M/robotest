@@ -13,7 +13,7 @@ public class PageGiropayInputBankSteps extends StepBase {
 	
 	@Validation(
 		description="Estamos en la página de introducción del banco",
-		level=Warn)
+		level=WARN)
 	public boolean checkIsPage() {
 		return pageGiropayInputBank.checkIsPage();
 	}

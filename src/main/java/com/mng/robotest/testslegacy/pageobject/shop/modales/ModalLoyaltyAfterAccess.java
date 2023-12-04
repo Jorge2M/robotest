@@ -13,11 +13,11 @@ public class ModalLoyaltyAfterAccess extends PageBase {
 	private static final String XP_ASPA_FOR_CLOSE = XP_CAPA_CONTAINER + "//span[@class='modal-close-icon']";
 	
 	public boolean isModalVisibleUntil(int seconds) {
-		return state(Visible, XP_CAPA_CONTAINER).wait(seconds).check();
+		return state(VISIBLE, XP_CAPA_CONTAINER).wait(seconds).check();
 	}
 	
 	public void closeModal() {
-		click(XP_ASPA_FOR_CLOSE).type(javascript).exec();
+		click(XP_ASPA_FOR_CLOSE).type(JAVASCRIPT).exec();
 	}
 	
 	public void closeModalIfVisible() {

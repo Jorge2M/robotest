@@ -23,11 +23,11 @@ public class PopupFindAddress extends PageBase {
 	}
 
 	public boolean isIFrameUntil(int seconds) {
-		return state(Present, "//iframe").wait(seconds).check();
+		return state(PRESENT, "//iframe").wait(seconds).check();
 	}
 
 	public boolean isBuscadorClickableUntil(int seconds) {
-		return state(Clickable, XP_INPUT_BUSCADOR).wait(seconds).check();
+		return state(CLICKABLE, XP_INPUT_BUSCADOR).wait(seconds).check();
 	}
 
 	public void setDataBuscador(String data) {

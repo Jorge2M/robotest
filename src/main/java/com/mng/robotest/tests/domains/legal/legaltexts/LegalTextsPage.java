@@ -54,9 +54,9 @@ public abstract class LegalTextsPage extends PageBase {
 	private boolean isVisibleLegalTextByXPath(LegalText legalText) {
 		try {
 			if (!legalText.isShadowDom()) {
-				return state(Visible, legalText.getXPathWithLiteral()).check();
+				return state(VISIBLE, legalText.getXPathWithLiteral()).check();
 			}
-			return state(Visible, legalText.getXPath())
+			return state(VISIBLE, legalText.getXPath())
 					.byShadow(By.cssSelector(legalText.getCssShadowDom())).check();
 		} 
 		catch (Exception e) {

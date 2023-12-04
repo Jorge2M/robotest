@@ -30,9 +30,9 @@ public class SecBillpay extends PageBase {
 	public boolean isVisibleUntil(int seconds) {
 		if (channel.isDevice()) {
 			String xpath = XP_BLOCK_RECHNUNG_MOBIL + " | " + XP_BLOCK_LAST_SCHRIFT_MOBIL;
-			return state(Visible, xpath).wait(seconds).check();
+			return state(VISIBLE, xpath).wait(seconds).check();
 		}
-		return state(Visible, XP_BLOCK_BILLPAY_DESKTOP).wait(seconds).check();
+		return state(VISIBLE, XP_BLOCK_BILLPAY_DESKTOP).wait(seconds).check();
 	}
 
 	/**
@@ -58,32 +58,32 @@ public class SecBillpay extends PageBase {
 	}
 	
 	public boolean isPresentSelectBirthDay() {
-		return state(Present, XP_SELECT_BIRTHDAY).check();
+		return state(PRESENT, XP_SELECT_BIRTHDAY).check();
 	}
 	
 	public boolean isPresentSelectBirthMonth() {
-		return state(Present, XP_SELECT_BIRTH_MONTH).check();
+		return state(PRESENT, XP_SELECT_BIRTH_MONTH).check();
 	}
 	
 	public boolean isPresentSelectBirthBirthYear() {
-		return state(Present, XP_SELECT_BIRTH_YEAR).check();
+		return state(PRESENT, XP_SELECT_BIRTH_YEAR).check();
 	}
 
 	public boolean isPresentRadioAcepto() {
 		String xpath = getXPath_radioAcepto();
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 
 	public boolean isPresentInputTitular() {
-		return state(Present, XP_INPUT_TITULAR).check();
+		return state(PRESENT, XP_INPUT_TITULAR).check();
 	}
 
 	public boolean isPresentInputIBAN() {
-		return state(Present, XP_INPUT_IBAN).check();
+		return state(PRESENT, XP_INPUT_IBAN).check();
 	}
 
 	public boolean isPresentInputBIC() {
-		return state(Present, XP_INPUT_BIC).check();
+		return state(PRESENT, XP_INPUT_BIC).check();
 	}
 
 	public void sendDataInputTitular(String titular) {

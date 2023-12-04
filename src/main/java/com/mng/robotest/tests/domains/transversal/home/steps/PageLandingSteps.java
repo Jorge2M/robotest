@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.transversal.home.steps;
 
-import static com.github.jorge2m.testmaker.conf.State.Warn;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import org.openqa.selenium.By;
 
@@ -23,7 +23,7 @@ public class PageLandingSteps extends StepBase {
 	
 	@Validation (description="Aparece la página de Landing " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
-		return pageLanding.isPageUntil(seconds);
+		return pageLanding.isPage(seconds);
 	}
 	
 	public void checkIsPageWithCorrectLineas() {
@@ -36,7 +36,7 @@ public class PageLandingSteps extends StepBase {
 
 	@Validation (
 		description="Aparece el div de contenido asociado al país #{pais.getNombrePais()} (#{pais.getCodigoPais()})",
-		level=Warn)
+		level=WARN)
 	public boolean checkMainContentPais(Pais pais) {
 		return pageLanding.isPresentMainContent();
 	}
@@ -47,11 +47,11 @@ public class PageLandingSteps extends StepBase {
 		if (app!=AppEcom.outlet) {
 			checks.add(
 				"Aparece la home de marcas/multimarcas según el país",
-				pageLanding.isPageDependingCountry(), Warn);	
+				pageLanding.isPageDependingCountry(), WARN);	
 		}
 		checks.add(
 			"No aparece ningún tag de error",
-			!state(Present, By.xpath("//error"), driver).check(), Warn);
+			!state(PRESENT, By.xpath("//error"), driver).check(), WARN);
 		
 		return checks;
 	}	

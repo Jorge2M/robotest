@@ -12,4 +12,5 @@ public class PageQiwiConfirmSteps extends StepBase {
 	public void selectConfirmButton() {
 		new PagePaysecureConfirm().clickConfirmar();		 
 	}
+	
 }

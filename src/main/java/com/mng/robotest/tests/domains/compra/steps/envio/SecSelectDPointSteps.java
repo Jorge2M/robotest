@@ -37,9 +37,9 @@ public class SecSelectDPointSteps extends StepBase {
 	private ChecksTM checkDroppointSelectedContainsDirecc(DataSearchDeliveryPoint dataSearchDp) {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
-		State stateVal = Warn;
+		State stateVal = WARN;
 		if (dataSearchDp.getTypeData()==DataSearchDp.CODIGO_POSTAL) {
-			stateVal = Info;
+			stateVal = INFO;
 		}
 	 	checks.add(
 			"La dirección del droppoint seleccionado contiene <b>" + dataSearchDp.getData() + 

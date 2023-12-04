@@ -19,7 +19,7 @@ public class PagoPostfinance extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		DataPedido dataPedido = dataPago.getDataPedido();
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		String nombrePago = dataPedido.getPago().getNombre(channel, app);
 		String importeTotal = dataPedido.getImporteTotal();

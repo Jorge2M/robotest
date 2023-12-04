@@ -34,20 +34,20 @@ public class ModalDroppoints extends PageBase {
 	
 	public boolean isVisibleUntil(int seconds) {
 		String xpathPanelGeneral = getXPathPanelGeneral();
-		return state(Visible, xpathPanelGeneral).wait(seconds).check();
+		return state(VISIBLE, xpathPanelGeneral).wait(seconds).check();
 	}
 	
 	public boolean isInvisibleUntil(int seconds) {
 		String xpathPanelGeneral = getXPathPanelGeneral();
-		return state(Invisible, xpathPanelGeneral).wait(seconds).check();
+		return state(INVISIBLE, xpathPanelGeneral).wait(seconds).check();
 	}
 	
 	public boolean isInvisibleCargandoMsgUntil(int seconds) {
-		return state(Invisible, XP_MSG_CARGANDO).wait(seconds).check();
+		return state(INVISIBLE, XP_MSG_CARGANDO).wait(seconds).check();
 	}
 	
 	public boolean isErrorMessageVisibleUntil() {
-		return state(Visible, XP_ERROR_MESSAGE).wait(2).check();
+		return state(VISIBLE, XP_ERROR_MESSAGE).wait(2).check();
 	}
 	
 	public void sendProvincia(String provincia) {

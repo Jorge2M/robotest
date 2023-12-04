@@ -67,11 +67,11 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	@Override
 	public boolean isVisibleSelectorTallasUntil(int seconds) {
-		return state(Visible, XP_CAPA_TALLAS).wait(seconds).check();
+		return state(VISIBLE, XP_CAPA_TALLAS).wait(seconds).check();
 	}
 	
 	public boolean isVisibleSelectorButtonUntil(int seconds) {
-		return state(Visible, XP_SELECTOR_BUTTON).wait(seconds).check();
+		return state(VISIBLE, XP_SELECTOR_BUTTON).wait(seconds).check();
 	}
 	
 	@Override
@@ -86,17 +86,17 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	@Override
 	public boolean isTallaAvailable(String talla) {
-		return state(Present, getXPathOptionTallaDisponible(talla)).check();
+		return state(PRESENT, getXPathOptionTallaDisponible(talla)).check();
 	}
 	
 	@Override
 	public boolean isTallaUnica() {
-		return state(Present, XP_OPTION_TALLA_UNICA).check();
+		return state(PRESENT, XP_OPTION_TALLA_UNICA).check();
 	}
 	
 	@Override
 	public boolean isVisibleListTallasForSelectUntil(int seconds) {
-		return state(Visible, XP_OPTION_TALLA).wait(seconds).check();
+		return state(VISIBLE, XP_OPTION_TALLA).wait(seconds).check();
 	}
 	
 	@Override
@@ -122,7 +122,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	private void despliegaSelectTallasExec() {
 		for (int i=0; i<3; i++) {
-			state(Visible, XP_SELECTOR_BUTTON).wait(2).check();
+			state(VISIBLE, XP_SELECTOR_BUTTON).wait(2).check();
 			click(XP_SELECTOR_BUTTON).exec();
 			if (isVisibleSelectorTallasUntil(1)) {
 				break;
@@ -139,7 +139,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 		despliegaSelectTallas();
 		Talla talla = Talla.fromValue(tallaNum);
 		String xpathTalla = getXPathOptionTalla(talla);
-		state(Clickable, xpathTalla).wait(2).check();
+		state(CLICKABLE, xpathTalla).wait(2).check();
 		click(xpathTalla).exec();
 	}
 
@@ -150,7 +150,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 		}
 		despliegaSelectTallas();
 		String xpathTalla = getXPathOptionTalla(Arrays.asList(tallaLabel));
-		state(Clickable, xpathTalla).wait(2).check();
+		state(CLICKABLE, xpathTalla).wait(2).check();
 		click(xpathTalla).exec();
 	}
 	
@@ -191,7 +191,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	@Override
 	public String getTallaAlf(int posicion) {
 		String xpathTalla = "(" + XP_OPTION_TALLA + ")[" + posicion + "]";
-		if (state(Present, xpathTalla).check()) {
+		if (state(PRESENT, xpathTalla).check()) {
 			return getElement(xpathTalla).getText();
 		}
 		return "";
@@ -200,7 +200,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	@Override
 	public String getTallaCodNum(int posicion) {
 		String xpathTalla = "(" + XP_OPTION_TALLA + ")[" + posicion + "]";
-		if (state(Present, xpathTalla).check()) {
+		if (state(PRESENT, xpathTalla).check()) {
 			return getElement(xpathTalla).getAttribute("value");
 		}
 		return "";
@@ -208,6 +208,6 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	@Override
 	public boolean isVisibleAvisoSeleccionTalla() {
-		return state(Visible, XP_MSG_AVISO_TALLA).check();
+		return state(VISIBLE, XP_MSG_AVISO_TALLA).check();
 	}	
 }

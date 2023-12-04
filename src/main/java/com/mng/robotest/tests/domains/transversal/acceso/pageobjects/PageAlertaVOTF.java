@@ -10,7 +10,7 @@ public class PageAlertaVOTF extends PageBase {
 	private static final String XP_BUTTON_CONTINUAR = "//div[@class='alert']//span[@class='button']";
 	
 	public boolean isPage() {
-		return state(Present, XP_CAPA_ALERTA).check();
+		return state(PRESENT, XP_CAPA_ALERTA).check();
 	}
 	 
 	public void clickButtonContinuar() {

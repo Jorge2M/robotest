@@ -7,17 +7,18 @@ import com.mng.robotest.tests.domains.micuenta.pageobjects.PageInfoNewMisCompras
 
 public class PageInfoNewMisComprasMovilSteps extends StepBase {
 
-	private final PageInfoNewMisComprasMovil pageInfoNewMisComprasMovil = new PageInfoNewMisComprasMovil();
+	private final PageInfoNewMisComprasMovil pgInfoNewMisComprasMovil = new PageInfoNewMisComprasMovil();
 	
 	@Validation(description="Aparece la página \"New!\" informativa a nivel de \"Mis Compras\"")
 	public boolean validateIsPage() {
-		return pageInfoNewMisComprasMovil.isPage();
+		return pgInfoNewMisComprasMovil.isPage();
 	}
 
 	@Step(
 		description = "Seleccionar el botón \"Ver mis compras\"",
 		expected = "Aparece la página de \"Mis Compras\"")
 	public void clickButtonToMisComprasAndNoValidate() {
-		pageInfoNewMisComprasMovil.clickButtonToMisCompras();
+		pgInfoNewMisComprasMovil.clickButtonToMisCompras();
 	}
+	
 }

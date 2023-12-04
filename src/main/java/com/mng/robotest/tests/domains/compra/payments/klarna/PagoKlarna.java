@@ -14,7 +14,7 @@ public class PagoKlarna extends PagoSteps {
 
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		pageCheckoutWrapperSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
 		//TODO ajustar
 //		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 //		if (pageKlarnaSteps.getPageObject().isPage(10)) {

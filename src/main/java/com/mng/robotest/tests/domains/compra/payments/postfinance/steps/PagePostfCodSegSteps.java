@@ -53,7 +53,7 @@ public class PagePostfCodSegSteps extends StepBase {
 		String codPais = dataTest.getCodigoPais();
 		checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), WARN);
 		
 		checks.add(
 			"Aparece el botón Weiter (Aceptar)",

@@ -6,6 +6,7 @@ import com.mng.robotest.testslegacy.beans.Pago;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.github.jorge2m.testmaker.conf.State;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class DataPedido {
 	String emailCheckout;
@@ -87,7 +88,7 @@ public class DataPedido {
 	}   
 	
 	public boolean isResultadoOk() {
-		return (getResejecucion()==State.Ok);
+		return (getResejecucion()==OK);
 	}
 		
 	/**

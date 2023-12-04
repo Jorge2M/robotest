@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.otros.steps;
 
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -10,19 +9,20 @@ import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
 import com.mng.robotest.tests.domains.transversal.prehome.pageobjects.PagePrehome;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class GoogleSteps extends StepBase {
 
-	private final PageGoogle pageGoogle = new PageGoogle();
+	private final PageGoogle pgGoogle = new PageGoogle();
 	
 	@Step (
 		description="Accedemos a la URL de Google (http://www.google.es\") y buscamos \"MANGO\"", 
 		expected="Aparecen los links de Mango con contenido correcto",
-		saveHtmlPage=SaveWhen.IfProblem)
+		saveHtmlPage=IF_PROBLEM)
 	public void accessGoogleAndSearchMango() {
-		pageGoogle.accessViaURL();
-		pageGoogle.acceptModalCookieIfExists();
-		pageGoogle.searchTextAndWait("MANGO");
+		pgGoogle.accessViaURL();
+		pgGoogle.acceptModalCookieIfExists();
+		pgGoogle.searchTextAndWait("MANGO");
 		checkLinksMango();
 	}
 	
@@ -32,11 +32,11 @@ public class GoogleSteps extends StepBase {
 		int seconds = 3;
 		checks.add(
 			"El 1er link no-anuncio contiene \"MANGO\" " + getLitSecondsWait(seconds),
-			pageGoogle.validaFirstLinkContainsUntil("Mango", seconds));	
+			pgGoogle.validaFirstLinkContainsUntil("Mango", seconds));	
 		
 		checks.add(
 			"El 1er link no-anuncion no contiene \"robots.txt\"",
-			!pageGoogle.validaFirstLinkContainsUntil("robots.txt", 0), Warn);
+			!pgGoogle.validaFirstLinkContainsUntil("robots.txt", 0), WARN);
 		
 		return checks;
 	}
@@ -45,7 +45,7 @@ public class GoogleSteps extends StepBase {
 		description="Seleccionamos el 1er link normal (sin publicidad)", 
 		expected="Aparece la página inicial de la shop de Mango")
 	public void selectFirstLinkSinPublicidad() { 
-		pageGoogle.clickFirstLinkNoPubli();
+		pgGoogle.clickFirstLinkNoPubli();
 		checkInitialPageShop();
 	}
 	

@@ -35,15 +35,15 @@ public class PageGestorEstadisticasPedido extends PageBase {
 	}
 
 	public boolean isPage() {
-		return state(Present, getXPathTitulo(TITULO)).check();
+		return state(PRESENT, getXPathTitulo(TITULO)).check();
 	}
 
 	public boolean isVisibleStartDateInput() {
-		return state(Visible, XP_START_DATE).check();
+		return state(VISIBLE, XP_START_DATE).check();
 	}
 	
 	public boolean isVisibleEndDateInput() {
-		return state(Visible, XP_END_DATE).check();
+		return state(VISIBLE, XP_END_DATE).check();
 	}
 
 	public void selectZalandoEs() {
@@ -60,21 +60,21 @@ public class PageGestorEstadisticasPedido extends PageBase {
 	
 	public void clickMostrarPedidosButton() {
 		click(XP_MOSTRAR_PEDIDOS_BUTTON).waitLoadPage(60).exec();
-		state(Invisible, XP_LOAD_POPUP_IMAGE).wait(60).check();
+		state(INVISIBLE, XP_LOAD_POPUP_IMAGE).wait(60).check();
 	}
 
 	public boolean isTablaInformacionVisible() {
-		return state(Visible, XP_TABLA_INFORMACION).check();
+		return state(VISIBLE, XP_TABLA_INFORMACION).check();
 	}
 
 	public boolean isColumnaCompararVerdeZero() {
 		String xpath = getXPathColumnaCompararVerde(XP_TABLA_INFORMACION);
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 	
 	public boolean isColumnaCompararRojoZero() {
 		String xpath = getXPathColumnaCompararRoja(XP_TABLA_INFORMACION);
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 
 	public void selectDiaAnteriorAndClickCompararButton() {
@@ -88,16 +88,16 @@ public class PageGestorEstadisticasPedido extends PageBase {
 	
 	private void clickCompararButton() {
 		click(XP_COMPARAR_BUTTON).waitLoadPage(60).exec();
-		state(Invisible, XP_LOAD_POPUP_IMAGE).wait(60).check();
+		state(INVISIBLE, XP_LOAD_POPUP_IMAGE).wait(60).check();
 	}
 
 	public boolean isColumnaCompararVerdeNoZero() {
 		String xpath = getXPathColumnaCompararVerde(XP_TABLA_INFORMACION);
-		return !state(Present, xpath).check();
+		return !state(PRESENT, xpath).check();
 	}
 
 	public boolean isColumnaCompararRojaNoZero() {
 		String xpath = getXPathColumnaCompararRoja(XP_TABLA_INFORMACION);
-		return !state(Present, xpath).check();
+		return !state(PRESENT, xpath).check();
 	}
 }

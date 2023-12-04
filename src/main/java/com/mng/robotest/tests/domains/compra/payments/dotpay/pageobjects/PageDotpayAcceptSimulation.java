@@ -10,11 +10,11 @@ public class PageDotpayAcceptSimulation extends PageBase {
 	private static final String XP_RED_BUTTON_ACEPTAR = "//input[@id='submit_success' and @type='submit']";
 
 	public boolean isPage(int seconds) {
-		return state(Visible, XP_ENCABEZADO).wait(seconds).check();
+		return state(VISIBLE, XP_ENCABEZADO).wait(seconds).check();
 	}
 	
 	public boolean isPresentRedButtonAceptar() {
-		return state(Present, XP_RED_BUTTON_ACEPTAR).check();
+		return state(PRESENT, XP_RED_BUTTON_ACEPTAR).check();
 	}
 
 	public void clickRedButtonAceptar() {

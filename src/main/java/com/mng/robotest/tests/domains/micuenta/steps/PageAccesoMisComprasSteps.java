@@ -12,7 +12,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageAccesoMisComprasSteps extends StepBase {
 
-	private final PageAccesoMisCompras pageAccesoMisCompras = new PageAccesoMisCompras();
+	private final PageAccesoMisCompras pgAccesoMisCompras = new PageAccesoMisCompras();
 	
 	@Validation
 	public ChecksTM validateIsPage() {
@@ -20,16 +20,16 @@ public class PageAccesoMisComprasSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece la página de \"Acceso a Mis Compras\" " + getLitSecondsWait(seconds),
-			pageAccesoMisCompras.isPage(seconds), Warn);
+			pgAccesoMisCompras.isPage(seconds), WARN);
 		
 		seconds = 3;
 		checks.add(
 			"Aparece el bloque \"Ya estoy registrado\" " + getLitSecondsWait(seconds),
-			pageAccesoMisCompras.isPresentBlock(TypeBlock.SI_REGISTRADO, seconds), Warn);
+			pgAccesoMisCompras.isPresentBlock(TypeBlock.SI_REGISTRADO, seconds), WARN);
 		
 		checks.add(
 			"Aparece el bloque de \"No estoy registrado\"",
-			pageAccesoMisCompras.isPresentBlock(TypeBlock.NO_REGISTRADO), Warn);
+			pgAccesoMisCompras.isPresentBlock(TypeBlock.NO_REGISTRADO), WARN);
 		
 		return checks;
 	}
@@ -38,23 +38,23 @@ public class PageAccesoMisComprasSteps extends StepBase {
 		description="Seleccionar el bloque \"#{typeBlock}\"", 
 		expected="Se hace visible el bloque de #{typeBlock}")
 	public void clickBlock(TypeBlock typeBlock) {
-		pageAccesoMisCompras.clickBlock(typeBlock);
+		pgAccesoMisCompras.clickBlock(typeBlock);
 		checkIsVisibleBlock(typeBlock, 1);
 	}
 	
 	@Validation (
 		description="Se hace visible el bloque de \"#{typeBlock}\" " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	private boolean checkIsVisibleBlock(TypeBlock typeBlock, int seconds) {
-		return (pageAccesoMisCompras.isVisibleBlockUntil(typeBlock, seconds));
+		return (pgAccesoMisCompras.isVisibleBlockUntil(typeBlock, seconds));
 	}
 	
 	@Step (
 		description="En el bloque de \"Si Registrado\", introducir el usuario/password (#{usuario}/#{password}) y pulsar \"Entrar\"", 
 		expected="Aparece la página de \"Mis compras\"")
 	public void enterForSiRegistrado(String usuario, String password) {
-		pageAccesoMisCompras.inputUserPasswordBlockSi(usuario, password); 
-		pageAccesoMisCompras.clickEntrarBlockSi();
+		pgAccesoMisCompras.inputUserPasswordBlockSi(usuario, password); 
+		pgAccesoMisCompras.clickEntrarBlockSi();
 		new PageMisComprasSteps().validateIsPage();
 	}
 
@@ -69,8 +69,8 @@ public class PageAccesoMisComprasSteps extends StepBase {
 		String usuario = dataPedido.getEmailCheckout();
 		replaceStepDescription(TAG_USUARIO, usuario);
 
-		pageAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido()); 
-		pageAccesoMisCompras.clickBuscarPedidoBlockNo(); 
+		pgAccesoMisCompras.inputUserAndNumPedidoBlockNo(usuario, dataPedido.getCodpedido()); 
+		pgAccesoMisCompras.clickBuscarPedidoBlockNo(); 
 
 		new PageDetallePedidoSteps().validateIsPageOk(dataPedido);
 	}

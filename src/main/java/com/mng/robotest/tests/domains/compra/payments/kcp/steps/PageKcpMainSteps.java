@@ -6,18 +6,18 @@ import com.mng.robotest.tests.domains.compra.payments.kcp.pageobjects.PageKcpMai
 
 public class PageKcpMainSteps extends StepBase {
 
-	private final PageKcpMain pageKcpMain = new PageKcpMain();
+	private final PageKcpMain pgKcpMain = new PageKcpMain();
 	
 	@Validation (
 		description="Aparece la página inicial de KCP " + SECONDS_WAIT)
 	public boolean isPage(int seconds) { 
-		return (pageKcpMain.isPage(seconds));
+		return pgKcpMain.isPage(seconds);
 	}
 	
 	@Validation (
 		description="Aparece el radiobutton para aceptar los términos y condiciones " + SECONDS_WAIT)
 	public boolean isPresentTermAndConditions(int seconds) { 
-		return (pageKcpMain.isVisibleTermAndConditions(seconds));
+		return pgKcpMain.isVisibleTermAndConditions(seconds);
 	}	
 	
 }

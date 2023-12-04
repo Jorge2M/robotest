@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.compra.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.conf.AppEcom;
@@ -23,12 +22,12 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageResultPagoSteps extends StepBase {
 
-	private final PageResultPago pageResultPago = new PageResultPago();
+	private final PageResultPago pgResultPago = new PageResultPago();
 	
 	@Validation (
 		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" " + SECONDS_WAIT)
-	public boolean validaIsPageUntil(int seconds) {
-		return (pageResultPago.isVisibleTextoConfirmacionPago(seconds));
+	public boolean validaisPage(int seconds) {
+		return (pgResultPago.isVisibleTextoConfirmacionPago(seconds));
 	}
 	
 	public void validateIsPageOk(DataPago dataPago) {
@@ -40,22 +39,22 @@ public class PageResultPagoSteps extends StepBase {
 	@Validation (
 		description="Aparece la URL correspondiente a la página de resultado OK " + SECONDS_WAIT)
 	public boolean checkUrl(int seconds) {
-		return (pageResultPago.checkUrl(seconds));
+		return (pgResultPago.checkUrl(seconds));
 	}
 	
 	@Validation
 	public ChecksTM validateTextConfirmacionPago() {
 		var checks = ChecksTM.getNew();
 		int seconds1 = 10;
-		boolean isVisibleTextConfirmacion = pageResultPago.isVisibleTextoConfirmacionPago(seconds1);
+		boolean isVisibleTextConfirmacion = pgResultPago.isVisibleTextoConfirmacionPago(seconds1);
 		checks.add(
 			"Aparece un texto de confirmación del pago " + getLitSecondsWait(seconds1),
-			isVisibleTextConfirmacion, Warn);
+			isVisibleTextConfirmacion, WARN);
 		if (!isVisibleTextConfirmacion) {
 			int seconds2 = 20;
 			checks.add(
 				"Si no aparece lo esperamos " + seconds2 + " segundos",
-				pageResultPago.isVisibleTextoConfirmacionPago(seconds2));
+				pgResultPago.isVisibleTextoConfirmacionPago(seconds2));
 		}
 		return checks;
 	}
@@ -71,17 +70,17 @@ public class PageResultPagoSteps extends StepBase {
 		}
 	  	checks.add(
 	  		"Aparece el importe " + importeTotal + " de la operación",
-	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), Warn);
+	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), WARN);
 		
 		if (channel==Channel.desktop) {
 			int seconds = 1;
 			checks.add(
 		  		"Aparece el link hacia las compras " + getLitSecondsWait(seconds),
-		  		pageResultPago.isButtonMisCompras(seconds), Warn);
+		  		pgResultPago.isButtonMisCompras(seconds), WARN);
 		}
 		
 		int seconds = 5;
-		String codigoPed = pageResultPago.getCodigoPedido(seconds);
+		String codigoPed = pgResultPago.getCodigoPedido(seconds);
 		boolean isCodPedidoVisible = "".compareTo(codigoPed)!=0;
 		checks.add(
 	  		"Aparece el código de pedido (" + codigoPed + ") " + getLitSecondsWait(seconds),
@@ -89,7 +88,7 @@ public class PageResultPagoSteps extends StepBase {
 		
 		DataPedido dataPedido = dataPago.getDataPedido();
 		if (isCodPedidoVisible) {
-			dataPedido.setResejecucion(State.Ok);
+			dataPedido.setResejecucion(OK);
 		}
 		dataPedido.setCodpedido(codigoPed);
 		
@@ -101,13 +100,13 @@ public class PageResultPagoSteps extends StepBase {
 		var checks = new ChecksResultWithNumberPoints();
 	  	checks.add(
 		  	"Aparece el bloque con los nuevos <b>Loyalty Points</b> generados",
-		  	pageResultPago.isVisibleBlockNewLoyaltyPoints());
+		  	pgResultPago.isVisibleBlockNewLoyaltyPoints());
 		
-	  	checks.setNumberPoints(pageResultPago.getLikesGenerated());
+	  	checks.setNumberPoints(pgResultPago.getLikesGenerated());
 	  	checks.add(
 	  		Check.make(
 	  			"El número de likes es > 0",
-	  			checks.getNumberPoints()>0, Defect)
+	  			checks.getNumberPoints()>0)
 		  	.info(String.format("Se generan <b>%s</b> Likes", checks.getNumberPoints())).build());
 	  	
 	  	return checks;
@@ -117,7 +116,7 @@ public class PageResultPagoSteps extends StepBase {
 		description="Seleccionar el link <b>descuentos y experiencias</b>", 
 		expected="Aparece la página de Mango Likes You")	
 	public void clickLinkDescuentosExperiencias() {
-		pageResultPago.clickLinkDescuentosExperiencias();
+		pgResultPago.clickLinkDescuentosExperiencias();
 		new PageMangoLikesYouSteps().checkIsPageOk();
 	}
 	
@@ -125,7 +124,7 @@ public class PageResultPagoSteps extends StepBase {
 		description="Seleccionar el link \"Mis Compras\"",
 		expected="Aparece la página de \"Mis compras\" o la de \"Acceso a Mis compras\" según si el usuario está o no loginado")
 	public void selectMisCompras() {
-		pageResultPago.clickMisCompras();	 
+		pgResultPago.clickMisCompras();	 
 		if (dataTest.isUserRegistered()) {
 			new PageMisComprasSteps().validateIsPage();
 		} else {
@@ -137,8 +136,8 @@ public class PageResultPagoSteps extends StepBase {
 		description="Seleccionar el botón \"Descubrir lo último\" o el icono de Mango", 
 		expected="Volvemos a la portada")
 	public void selectSeguirDeShopping(AppEcom app) {  
-		if (pageResultPago.isVisibleDescubrirLoUltimo()) {
-			pageResultPago.clickDescubrirLoUltimo();
+		if (pgResultPago.isVisibleDescubrirLoUltimo()) {
+			pgResultPago.clickDescubrirLoUltimo();
 		} else {
 			SecCabecera.make().clickLogoMango();
 		}

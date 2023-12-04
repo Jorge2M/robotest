@@ -12,12 +12,12 @@ public class PageYandexMoneyResult extends PageBase {
 	public static final String XP_DIV_RESULT_MSG = "//div[@class='docbook-para']";
 	
 	public boolean isPage() {
-		return state(Visible, XP_DIV_RESULT_MSG).check();
+		return state(VISIBLE, XP_DIV_RESULT_MSG).check();
 	}
 		
 	public boolean isVisibleMsgTransferOk() {
 		WebElement divResult = getElement(XP_DIV_RESULT_MSG);
-		return (state(Visible, XP_DIV_RESULT_MSG).check() &&
+		return (state(VISIBLE, XP_DIV_RESULT_MSG).check() &&
 				divResult.getText().contains(MSG_TRANSFER_OK));
 	}
 }

@@ -9,18 +9,18 @@ import com.mng.robotest.tests.domains.loyalty.pageobjects.PageHomeDonateLikes.Bu
 
 public class PageHomeDonateLikesSteps extends StepBase {
 	
-	private final PageHomeDonateLikes pageHomeDonateLikes = new PageHomeDonateLikes();
+	private final PageHomeDonateLikes pgHomeDonateLikes = new PageHomeDonateLikes();
 	
 	@Validation
 	public ChecksTM checkIsPage(int seconds, ButtonLikes... listButtons) {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la pagina de <b>Donar Likes</b>",
-			pageHomeDonateLikes.checkIsPage(0));
+			pgHomeDonateLikes.checkIsPage(0));
 
 		checks.add(
 			"Aparece alguno de los botones para donar " +  listButtons + " Likes " + getLitSecondsWait(seconds),
-			pageHomeDonateLikes.isVisibleAny(seconds, listButtons));
+			pgHomeDonateLikes.isVisibleAny(seconds, listButtons));
 		
 		return checks;
 	}
@@ -28,7 +28,7 @@ public class PageHomeDonateLikesSteps extends StepBase {
 	public int selectDonateButton(ButtonLikes... buttonLikesList) {
 		for (int i=0; i<buttonLikesList.length; i++) {
 			var buttonLikes = buttonLikesList[i];
-			if (pageHomeDonateLikes.isVisible(buttonLikes, 0)) {
+			if (pgHomeDonateLikes.isVisible(buttonLikes, 0)) {
 				selectDonateButton(buttonLikes);
 				return buttonLikes.getNumLikes();
 			}
@@ -40,7 +40,7 @@ public class PageHomeDonateLikesSteps extends StepBase {
 		description="Seleccionamos un botón para donar #{buttonLikes.getNumLikes()} likes",
 		expected="Se donan correctamente los likes")
 	public void selectDonateButton(ButtonLikes buttonLikes) {
-		pageHomeDonateLikes.clickButton(buttonLikes);
+		pgHomeDonateLikes.clickButton(buttonLikes);
 		checkAfterDonateLikes(buttonLikes);
 		checksDefault();
 	}
@@ -51,7 +51,7 @@ public class PageHomeDonateLikesSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece el icono correspondiente a la operación realizada " + getLitSecondsWait(seconds),
-			pageHomeDonateLikes.isVisibleIconOperationDoneUntil(seconds));
+			pgHomeDonateLikes.isVisibleIconOperationDoneUntil(seconds));
 
 		return checks;
 	}	

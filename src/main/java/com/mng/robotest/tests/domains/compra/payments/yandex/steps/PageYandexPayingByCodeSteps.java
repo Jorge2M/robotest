@@ -18,11 +18,11 @@ public class PageYandexPayingByCodeSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página de <b>Paying by code</b>",
-			pageYandexPayingByCode.isPage(), Warn);
+			pageYandexPayingByCode.isPage(), WARN);
 	 	
 	 	checks.add(
 			"Aparece el importe de la compra por pantalla: " + importeTotal,
-			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), Warn);
+			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), WARN);
 	 	
 	 	checks.add(
 			"Aparece un <b>PaymentCode</b>",

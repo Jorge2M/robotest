@@ -348,11 +348,11 @@ public class GetterProducts {
 		try {
 			PageObjTM.loadUrlInAnotherTabTitle(urlGetProducts, nameTab, driver);
 			var page = new PageBase(driver);
-			if (page.state(Visible, By.id("rawdata-tab")).check()) {
+			if (page.state(VISIBLE, By.id("rawdata-tab")).check()) {
 				page.click(By.id("rawdata-tab")).exec();
 			}
 			By bodyPreBy = By.xpath("//body//pre");
-			if (page.state(Present, bodyPreBy).check()) {
+			if (page.state(PRESENT, bodyPreBy).check()) {
 				body = driver.findElement(bodyPreBy).getText();
 			}
 		} 

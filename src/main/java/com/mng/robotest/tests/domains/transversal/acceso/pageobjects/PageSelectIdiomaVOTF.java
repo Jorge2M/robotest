@@ -26,6 +26,6 @@ public class PageSelectIdiomaVOTF extends PageBase {
 	}
 	
 	public boolean isVisibleButtonAceptar() {
-		return state(Visible, XP_BUTTON_ACEPTAR).check();
+		return state(VISIBLE, XP_BUTTON_ACEPTAR).check();
 	}
 }

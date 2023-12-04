@@ -23,13 +23,13 @@ public class PageMiCuenta extends PageBase {
 		}
 		
 	}
-	public boolean isPageUntil(int seconds) {
-		return state(Visible, Link.MIS_DATOS.getXPath()).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(VISIBLE, Link.MIS_DATOS.getXPath()).wait(seconds).check();
 	}
 	
 	public void click(Link link) {
 		click(link.getXPath()).exec();
-		if (!state(Invisible, link.getXPath()).wait(1).check()) {
+		if (!state(INVISIBLE, link.getXPath()).wait(1).check()) {
 			click(link.getXPath()).exec();
 		}
 	}

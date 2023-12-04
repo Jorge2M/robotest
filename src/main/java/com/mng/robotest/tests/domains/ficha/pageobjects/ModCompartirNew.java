@@ -37,11 +37,11 @@ public class ModCompartirNew extends PageBase {
 	
 	public boolean isVisibleUntil(int seconds) {
 		moveToElement(XP_WRAPPER);
-		return state(Visible, XP_WRAPPER).wait(seconds).check();
+		return state(VISIBLE, XP_WRAPPER).wait(seconds).check();
 	}
 	
 	public boolean isVisibleIcon(IconSocial icon) {
 		String xpathIcon = getXPathIcon(icon);
-		return state(Visible, xpathIcon).check();
+		return state(VISIBLE, xpathIcon).check();
 	}
 }

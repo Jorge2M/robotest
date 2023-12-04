@@ -9,12 +9,12 @@ import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores.Resultado;
 
 import static org.junit.Assert.*;
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class CheckerImgsBrokenTest {
 
@@ -63,7 +63,7 @@ public class CheckerImgsBrokenTest {
 		resultadoImgsBroken.setListaLogError(listBrokenImages);
 		resultadoImgsBroken.setResultado(Resultado.ERRORES);
 		
-		CheckerImgsBroken checkerSpy = Mockito.spy(new CheckerImgsBroken(State.Warn));
+		CheckerImgsBroken checkerSpy = Mockito.spy(new CheckerImgsBroken(WARN));
 		Mockito.doReturn(resultadoImgsBroken).when(checkerSpy).imagesBroken(any(WebDriver.class), any(Channel.class), anyInt());
 		return checkerSpy;
 	}

@@ -41,7 +41,7 @@ public class PageDevoluciones extends PageBase {
 		}
 		
 		public boolean isPresentLink(WebDriver driver) {
-			return state(Present, By.xpath(this.xpathLink), driver).check();
+			return state(PRESENT, By.xpath(this.xpathLink), driver).check();
 		}
 
 		public void click(WebDriver driver) {
@@ -50,7 +50,7 @@ public class PageDevoluciones extends PageBase {
 		
 		public void waitForInState(boolean plegada, int seconds, WebDriver driver) {
 			By byLink = By.xpath(getXPath(plegada));
-			state(Present, byLink, driver).wait(seconds).check();
+			state(PRESENT, byLink, driver).wait(seconds).check();
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class PageDevoluciones extends PageBase {
 	private static final String XP_BUTTON_SOLICITAR_RECOGIDA = "//div[@class[contains(.,'devoluciones_button_container')]]/*";
 
 	public boolean isPage() {
-		return state(Present, XP_IS_PAGE_DEVOLUCIONES).check();
+		return state(PRESENT, XP_IS_PAGE_DEVOLUCIONES).check();
 	}
 
 	public void clickSolicitarRecogida() {
@@ -66,6 +66,6 @@ public class PageDevoluciones extends PageBase {
 	}
 
 	public boolean isVisibleSolicitarRecogidaButton() {
-		return state(Visible, XP_BUTTON_SOLICITAR_RECOGIDA).check();
+		return state(VISIBLE, XP_BUTTON_SOLICITAR_RECOGIDA).check();
 	}
 }

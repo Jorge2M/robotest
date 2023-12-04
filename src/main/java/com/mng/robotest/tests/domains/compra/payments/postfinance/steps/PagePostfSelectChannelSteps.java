@@ -14,7 +14,7 @@ public class PagePostfSelectChannelSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página de selección del canal " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	public boolean checkIsPage(int seconds) {
 		return pageObj.isPage(seconds);
 	}

@@ -40,28 +40,28 @@ public class SecDetalleProduct extends PageBase {
 	}
 	
 	public boolean isVisibleUntil(int seconds) {
-		return state(Visible, XP_WRAPPER).wait(seconds).check();
+		return state(VISIBLE, XP_WRAPPER).wait(seconds).check();
 	}
 	
 	public boolean isVisibleBreadcrumbs(int seconds) {
-		return state(Visible, XP_BREAD_CRUMBS).wait(seconds).check();
+		return state(VISIBLE, XP_BREAD_CRUMBS).wait(seconds).check();
 	}
 	
 	public boolean isVisibleItemBreadCrumb(ItemBreadcrumb itemBCrumb) {
 		String xpathItem = getXPathBreadcrumbItemLink(itemBCrumb);
-		return state(Visible, xpathItem).check();
+		return state(VISIBLE, xpathItem).check();
 	}
 	
 	public String getUrlItemBreadCrumb(ItemBreadcrumb itemBCrumb) {
 		String xpathItem = getXPathBreadcrumbItemLink(itemBCrumb);
-		if (state(Visible, xpathItem).check()) {
+		if (state(VISIBLE, xpathItem).check()) {
 			return getElement(xpathItem).getAttribute("href");
 		}
 		return "";
 	}	
 	
 	public boolean isVisibleBlockKcSafety() {
-		return state(Visible, XP_BLOCK_KC_SAFETY).check();
+		return state(VISIBLE, XP_BLOCK_KC_SAFETY).check();
 	}
 	
 }

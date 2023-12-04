@@ -17,7 +17,7 @@ public class PageFormularioAyuda extends PageBase {
 	}
 	
 	public boolean isPage(int seconds) {
-		return state(Visible, XP_SELECTOR).wait(seconds).check();
+		return state(VISIBLE, XP_SELECTOR).wait(seconds).check();
 	}
 	
 	public void inputInSelectors(List<String> inputData) {
@@ -30,7 +30,7 @@ public class PageFormularioAyuda extends PageBase {
 	
 	public void inputInSelector(int level, String inputData) {
 		String xpathSelector = getXPathSelector(level);
-		state(Visible, xpathSelector).wait(1).check();
+		state(VISIBLE, xpathSelector).wait(1).check();
 		new Select(getElement(xpathSelector)).selectByVisibleText(inputData);
 	}
 

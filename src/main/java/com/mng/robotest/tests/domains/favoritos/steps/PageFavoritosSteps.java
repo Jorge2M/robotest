@@ -13,10 +13,10 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageFavoritosSteps extends StepBase {
 	
-	private final PageFavoritos pageFavoritos = new PageFavoritos();
+	private final PageFavoritos pgFavoritos = new PageFavoritos();
 	
 	public PageFavoritos getPageFavoritos() {
-		return pageFavoritos;
+		return pgFavoritos;
 	}
 	
 	@Validation
@@ -26,11 +26,11 @@ public class PageFavoritosSteps extends StepBase {
 		int secondsArticles = 2;
 		checks.add(
 			"Está visible la capa de favoritos con artículos " + getLitSecondsWait(secondsCapa),
-			pageFavoritos.isSectionArticlesVisibleUntil(secondsCapa));
+			pgFavoritos.isSectionArticlesVisibleUntil(secondsCapa));
 		
 		checks.add(
 			"Aparecen los artículos " + getLitSecondsWait(secondsArticles) + ": <br>" + dataTest.getDataFavoritos().getListArtDescHTML(),
-			pageFavoritos.areVisibleArticlesUntil(secondsArticles));
+			pgFavoritos.areVisibleArticlesUntil(secondsArticles));
 		
 		return checks;
 	}
@@ -44,7 +44,7 @@ public class PageFavoritosSteps extends StepBase {
 		description="Seleccionar el link de favoritos compartidos",
 		expected="El modal de favoritos compartidos aparece correctamente")
 	public void clickShareIsOk() {
-		pageFavoritos.openShareModal();
+		pgFavoritos.openShareModal();
 		checkShareIsOk();
 	}
 	
@@ -53,19 +53,19 @@ public class PageFavoritosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el modal de favoritos compartidos",
-			pageFavoritos.checkShareModalUntill(5));
+			pgFavoritos.checkShareModalUntill(5));
 		
 		checks.add(
 			"Aparece el boton de compartir por Telegram",
-			pageFavoritos.isShareTelegramFavoritesVisible());
+			pgFavoritos.isShareTelegramFavoritesVisible());
 		
 		checks.add(
 			"Aparece el boton de compartir por WhatsApp",
-			pageFavoritos.isShareWhatsappFavoritesVisible());
+			pgFavoritos.isShareWhatsappFavoritesVisible());
 		
 		checks.add(
 			"Aparece la url para copiarla y compartir como texto", 
-			pageFavoritos.isShareUrlFavoritesVisible());
+			pgFavoritos.isShareUrlFavoritesVisible());
 		
 		return checks;
 	}
@@ -74,29 +74,29 @@ public class PageFavoritosSteps extends StepBase {
 		description="Cerramos el modal de favoritos compartidos",
 		expected="El modal de favoritos compartidos desaparece correctamente")
 	public void closeShareModal() {
-		pageFavoritos.closeSharedModal();
+		pgFavoritos.closeSharedModal();
 		checkShareIsClosedUntil(2);
 	}
 	
 	@Validation (
 		description="Desaparece el modal de favoritos compartidos " + SECONDS_WAIT,
-		level=Warn)
+		level=WARN)
 	public boolean checkShareIsClosedUntil(int seconds) {
-		return (pageFavoritos.checkShareModalInvisible(seconds));
+		return (pgFavoritos.checkShareModalInvisible(seconds));
 	}
 	
 	@Step (
 		description="Eliminamos de Favoritos el artículo con referencia <b>#{refArticulo}</b> y código de color <b>#{codColor}</b>",
 		expected="El artículo desaparece de Favoritos")
 	public void clear(String refArticulo, String codColor) {
-		pageFavoritos.clearArticuloAndWait(refArticulo, codColor);
+		pgFavoritos.clearArticuloAndWait(refArticulo, codColor);
 		checkArticleDisappearsFromFavoritesUntil(refArticulo, codColor, 5);
 	}
 	
 	@Validation (
 		description="Desaparece de Favoritos el artículo con referencia <b>#{refArticle}</b> y código de color <b>#{codColor}</b> " + SECONDS_WAIT)
 	public boolean checkArticleDisappearsFromFavoritesUntil(String refArticle, String codColor, int seconds) {
-		return (pageFavoritos.isInvisibleArticleUntil(refArticle, codColor, seconds));
+		return (pgFavoritos.isInvisibleArticleUntil(refArticle, codColor, seconds));
 	}
 	
 	@Step (
@@ -104,7 +104,7 @@ public class PageFavoritosSteps extends StepBase {
 		expected="No queda ningún artículo en Favoritos")
 	public void clearAll() {
 		dataTest.getDataFavoritos().clear();
-		pageFavoritos.clearAllArticulos();
+		pgFavoritos.clearAllArticulos();
 		checkFavoritosWithoutArticles();
 	}
 	
@@ -113,11 +113,11 @@ public class PageFavoritosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"No queda ningún artículo en Favoritos",
-			!pageFavoritos.hayArticulos());
+			!pgFavoritos.hayArticulos());
 		
 		checks.add(
 			"Aparece el botón \"Inspírate con lo último\"",
-			pageFavoritos.isVisibleButtonEmpty(), Warn);
+			pgFavoritos.isVisibleButtonEmpty(), WARN);
 		
 		return checks;
 	}  
@@ -128,7 +128,7 @@ public class PageFavoritosSteps extends StepBase {
 	public void clickArticuloImg(ArticuloScreen artToPlay) {
 		String refProducto = artToPlay.getRefProducto();
 		String codigoColor = artToPlay.getCodigoColor();
-		pageFavoritos.clickImgProducto(refProducto, codigoColor);
+		pgFavoritos.clickImgProducto(refProducto, codigoColor);
 		new PageFichaSteps().checkIsFichaArtDisponible(refProducto, 2);
 	}
 	

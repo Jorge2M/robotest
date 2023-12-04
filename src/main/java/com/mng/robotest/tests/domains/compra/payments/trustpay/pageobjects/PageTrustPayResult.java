@@ -24,7 +24,7 @@ public class PageTrustPayResult extends PageBase {
 	}
 	
 	public boolean isPresentButtonContinue() {
-		return state(Present, XP_BUTTON_CONTINUE).check();
+		return state(PRESENT, XP_BUTTON_CONTINUE).check();
 	}
 
 	public void clickButtonContinue() {

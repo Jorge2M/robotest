@@ -38,7 +38,7 @@ public class ModalsSubscriptions extends PageBase {
 	}
 	
 	public boolean isVisible(InitialModal modal) {
-		return state(Visible, modal.getXPath()).check();
+		return state(VISIBLE, modal.getXPath()).check();
 	}
 	
 	public void close(InitialModal modal) {

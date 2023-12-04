@@ -27,7 +27,7 @@ public class ModEnvioYdevolNewSteps extends StepBase {
 	
 	@Validation (
 		description="No es visible el modal con los datos a nivel de envío y devolución",
-		level=Warn)
+		level=WARN)
 	private boolean checkIsVisibleModalDatosEnvio() {
 		return !modEnvioYdev.isVisible(1);
 	}

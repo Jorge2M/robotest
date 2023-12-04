@@ -32,13 +32,13 @@ public class PageDetallePedido extends PageBase {
 
 	public boolean isPage() {
 		String xpath = "//td[text()[contains(.,'DETALLES PEDIDOS')]]";
-		return state(Present, xpath).check();
+		return state(PRESENT, xpath).check();
 	}
 
 	public boolean isPage(String idPedido) {
 		if (isPage()) {
 			String xpathLabelIdPedido = getXPathLabelIdPedido(idPedido);
-			return state(Visible, xpathLabelIdPedido).check();
+			return state(VISIBLE, xpathLabelIdPedido).check();
 		}
 		return false;
 	}
@@ -48,7 +48,7 @@ public class PageDetallePedido extends PageBase {
 	}
 
 	public String getTiendaIfExists() {
-		if (state(Present, XP_LINK_ENVIO_TIENDA).check()) {
+		if (state(PRESENT, XP_LINK_ENVIO_TIENDA).check()) {
 			String lineaTexto = getElement(XP_LINK_ENVIO_TIENDA).getText();
 			Pattern pattern = Pattern.compile("(.*?)ENVIO A TIENDA(.*?)(\\d+)");
 			Matcher matcher = pattern.matcher(lineaTexto);
@@ -105,7 +105,7 @@ public class PageDetallePedido extends PageBase {
 	}
 
 	public void gotoListaPedidos() {
-		if (state(Present, XP_LINK_VOLVER_PEDIDOS).check()) {
+		if (state(PRESENT, XP_LINK_VOLVER_PEDIDOS).check()) {
 			click(XP_LINK_VOLVER_PEDIDOS).exec();
 		}
 	}

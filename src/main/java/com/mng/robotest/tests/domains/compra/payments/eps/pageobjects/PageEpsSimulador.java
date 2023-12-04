@@ -31,7 +31,7 @@ public class PageEpsSimulador extends PageBase {
 	}
 	
 	public boolean isPage() {
-		return state(Visible, XP_LOGO_EPS).check();
+		return state(VISIBLE, XP_LOGO_EPS).check();
 	}
 	
 	public void selectDelayAuthorised(TypeDelay typeDelay) {

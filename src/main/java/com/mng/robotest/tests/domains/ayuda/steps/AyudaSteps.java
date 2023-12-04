@@ -12,52 +12,52 @@ import com.mng.robotest.tests.domains.base.StepBase;
 
 public class AyudaSteps extends StepBase {
 	
-	private final PagesAyuda pageAyuda = new PagesAyuda();
-	private final PageAyudaContact pageAyudaContact = new PageAyudaContact();
+	private final PagesAyuda pgAyuda = new PagesAyuda();
+	private final PageAyudaContact pgAyudaContact = new PageAyudaContact();
 	
 	@Step(
 		description = "Seleccionamos el icono de <b>#{textIcon}</b>",
 		expected = "Aparecen las preguntas asociadas")
 	public void clickIcon(String textIcon) {
-		pageAyuda.selectIcon(textIcon);
+		pgAyuda.selectIcon(textIcon);
 	}
 	
 	@Validation(
 		description="Está presente la pregunta <b>#{questionText}</b>")
 	public boolean checkIsQuestionVisible(String questionText) {
-		return pageAyuda.isQuestionVisible(questionText);
+		return pgAyuda.isQuestionVisible(questionText);
 	}
 
 	@Step(
 		description = "Seleccionamos la pregunta <b>#{questionText}</b>",
 		expected = "Aparecen la respuesta correcta")
 	public void clickQuestion(String questionText) {
-		pageAyuda.clickQuestion(questionText);
+		pgAyuda.clickQuestion(questionText);
 	}
 
 	@Validation(description="Está presente el texto <b>#{text}</b>")
 	public boolean checkIsTextVisible(String text) {
-		return pageAyuda.isTextVisible(text);
+		return pgAyuda.isTextVisible(text);
 	}
 	
 	@Step(
 		description = "Seleccionar el botón <b>Contactar</b>",
 		expected = "Aparece la página de ayuda de Contáctanos")
 	public void clickContactarButton() {
-		pageAyuda.clickContactarButton();
+		pgAyuda.clickContactarButton();
 		checkPageAyudaContactVisible();
 	}
 	
 	@Validation(description="Aparece la página para contactar") 
 	public boolean checkPageAyudaContactVisible() {
-		return pageAyudaContact.isPage();
+		return pgAyudaContact.isPage();
 	}
 	
 	@Step(
 		description = "Seleccionar el apartado de <b>Escríbenos un mensaje</b>",
 		expected = "Aparece en una nueva página el formulario para el envío de un mensaje")
 	public void clickEscribenosUnMensaje() {
-		pageAyudaContact.clickEscribenosUnMensaje();
+		pgAyudaContact.clickEscribenosUnMensaje();
 		checkNewPageWithFormularioAyuda();
 	}
 	

@@ -49,7 +49,7 @@ public class SecFotosNewSteps extends StepBase {
 		int numFotos1rstLine = secFotosNew.getNumFotosLine(1);
 	 	checks.add(
 			"La 1a línea tiene " + numFotosExpected1rstLineA + " o " + numFotosExpected1rstLineB + " fotos",
-			numFotos1rstLine==numFotosExpected1rstLineA || numFotos1rstLine==numFotosExpected1rstLineB, Warn);
+			numFotos1rstLine==numFotosExpected1rstLineA || numFotos1rstLine==numFotosExpected1rstLineB, WARN);
 	 	
 	 	int numLinesFotos = secFotosNew.getNumLinesFotos();
 	 	int numFotosLastLine = 0;
@@ -59,7 +59,7 @@ public class SecFotosNewSteps extends StepBase {
 		int minFotosExpectedLastLine = 5;
 	 	checks.add(
 			"La última línea tiene < " + minFotosExpectedLastLine + " fotos",
-			numFotosLastLine<minFotosExpectedLastLine, Warn);
+			numFotosLastLine<minFotosExpectedLastLine, WARN);
 	 	
 	 	if (numLinesFotos > 2) {
 	 		boolean allLinesWith2fotos = true;
@@ -72,7 +72,7 @@ public class SecFotosNewSteps extends StepBase {
 			}
 		 	checks.add(
 				"Las líneas intermedias tienen 2 fotos",
-				allLinesWith2fotos, Warn);
+				allLinesWith2fotos, WARN);
 	 	}	
 	 	
 	 	return checks;

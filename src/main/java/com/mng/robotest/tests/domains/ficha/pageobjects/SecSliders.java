@@ -50,7 +50,7 @@ public class SecSliders extends PageBase {
 	}	
 	
 	public boolean isVisible(Slider slider) {
-		return state(Present, slider.getXPath()).check();
+		return state(PRESENT, slider.getXPath()).check();
 	}
 	
 	public int getNumVisibleArticles(Slider slider) {

@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.article;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import java.util.Optional;
 
@@ -33,7 +33,7 @@ public class SecColoresArticuloDesktopKondo extends SecColoresArticuloDesktop {
 	@Override
 	public String getNameColorFromCodigo(String codigoColor) {
 		String xpathImgColor = getXPathImgCodigoColor(codigoColor);
-		if (!state(Present, xpathImgColor).check()) {
+		if (!state(PRESENT, xpathImgColor).check()) {
 			return Constantes.COLOR_DESCONOCIDO;
 		}
 		
@@ -45,7 +45,7 @@ public class SecColoresArticuloDesktopKondo extends SecColoresArticuloDesktop {
 	public Optional<WebElement> getArticuloConVariedadColores(int numArticulo) {
 		String xpathArticulo = getXPathArticuloConVariedadColores(numArticulo);
 		for (int i=0; i<8; i++) {
-			if (state(Present, xpathArticulo).check()) {
+			if (state(PRESENT, xpathArticulo).check()) {
 				return Optional.of(getElement(xpathArticulo));
 			}
 			scrollVertical(1000);

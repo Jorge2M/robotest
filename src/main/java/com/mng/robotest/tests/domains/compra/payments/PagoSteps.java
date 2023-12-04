@@ -12,7 +12,7 @@ import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow;
 public abstract class PagoSteps extends StepBase {
 	
 	protected final CheckoutFlow checkoutFlow;
-	protected final CheckoutSteps pageCheckoutWrapperSteps = new CheckoutSteps();
+	protected final CheckoutSteps checkoutSteps = new CheckoutSteps();
 	
 	public DataPago dataPago;
 	public static final String MSG_NO_PAY_IMPLEMENTED = "No está diponible la parte del test que permite completar/ejecutar el pago";

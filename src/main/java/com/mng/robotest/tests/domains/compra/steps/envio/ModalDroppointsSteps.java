@@ -22,11 +22,11 @@ public class ModalDroppointsSteps extends StepBase {
 		int seconds = 3;
 	  	checks.add(
 			"Desaparece el mensaje de \"Cargando...\" " + getLitSecondsWait(seconds),
-			modalDroppoints.isInvisibleCargandoMsgUntil(seconds), Warn);
+			modalDroppoints.isInvisibleCargandoMsgUntil(seconds), WARN);
 	  	
 	  	checks.add(
 			"Aparece un 1er Droppoint visible " + getLitSecondsWait(seconds),
-			modalDroppoints.isDroppointVisibleUntil(1, seconds), Info);
+			modalDroppoints.isDroppointVisibleUntil(1, seconds), INFO);
 	  	
 	  	checks.add(
 			"Sí aparece el modal con el mapa de Droppoints",

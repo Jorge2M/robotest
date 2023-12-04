@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.Present;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -128,7 +128,7 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 	
 	private String getRefColorArticuloMethod1(WebElement articulo) {
 		String xpathDivRelativeArticle = "//div[@id and @class='product-container-image']";
-		if (state(Present, articulo).by(By.xpath("." + xpathDivRelativeArticle)).check()) {
+		if (state(PRESENT, articulo).by(By.xpath("." + xpathDivRelativeArticle)).check()) {
 			return (articulo.findElement(By.xpath("." + xpathDivRelativeArticle)).getAttribute("id"));
 		}
 		return "";
@@ -147,7 +147,7 @@ public class PageGaleriaDeviceNormal extends PageGaleriaDevice {
 	public WebElement getImagenElementArticulo(WebElement articulo) {
 		moveToElement(articulo);
 		By byImg = By.xpath("." + XP_IMG_RELATIVE_ARTICLE);
-		if (state(Present, articulo).by(byImg).wait(3).check()) {
+		if (state(PRESENT, articulo).by(byImg).wait(3).check()) {
 			return getElement(articulo, "." + XP_IMG_RELATIVE_ARTICLE);
 		}
 		return null;

@@ -13,7 +13,7 @@ public class SecSearchDevice extends PageBase implements SecSearch {
 	
 	@Override
 	public void search(String text) {
-		state(Visible, XP_INPUT_BUSCADOR).wait(2).check();
+		state(VISIBLE, XP_INPUT_BUSCADOR).wait(2).check();
 		var input = getElement(XP_INPUT_BUSCADOR);
 		input.clear();
 		input.sendKeys(text);

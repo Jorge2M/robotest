@@ -16,12 +16,12 @@ import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
 
 public class PageMiCuentaSteps extends StepBase {
 	
-	private final PageMiCuenta pageMiCuenta = new PageMiCuenta();
+	private final PageMiCuenta pgMiCuenta = new PageMiCuenta();
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	
 	@Validation(description="Aparece la página de \"Mi cuenta\" " + SECONDS_WAIT)
 	public boolean validateIsPage (int seconds) {
-		return pageMiCuenta.isPageUntil(seconds);
+		return pgMiCuenta.isPage(seconds);
 	}
 
 	public void goToMisDatos(String usuarioReg) {
@@ -42,7 +42,7 @@ public class PageMiCuentaSteps extends StepBase {
 		description = "Seleccionar el link <b>Mis datos</b>",
 		expected = "Aparece la página de Mis datos")
 	private void clickLinkMisDatos(String usuarioReg) {
-		pageMiCuenta.click(MIS_DATOS);
+		pgMiCuenta.click(MIS_DATOS);
 		new PageMisDatosSteps().validaIsPage(usuarioReg);
 		checksDefault();
 	}
@@ -51,7 +51,7 @@ public class PageMiCuentaSteps extends StepBase {
 		description = "Seleccionar el link <b>Mis direcciones</b>",
 		expected = "Aparece la página de Mis direcciones")
 	private void clickLinkMisDirecciones() {
-		pageMiCuenta.click(MIS_DIRECCIONES);
+		pgMiCuenta.click(MIS_DIRECCIONES);
 		new PageMisDireccionesSteps().checkIsPage(3);
 		checksDefault();
 	}	
@@ -65,7 +65,7 @@ public class PageMiCuentaSteps extends StepBase {
 		description = "Seleccionar el link \"Mis Compras\"",
 		expected = "Aparece la página de \"Mis Compras\"")
 	private void goToMisComprasFromMenuAndValidate() {
-		pageMiCuenta.click(MIS_COMPRAS);
+		pgMiCuenta.click(MIS_COMPRAS);
 		if (channel.isDevice() &&
 			new PageInfoNewMisComprasMovil().isPage()) {
 			new PageInfoNewMisComprasMovilSteps().validateIsPage();
@@ -104,7 +104,7 @@ public class PageMiCuentaSteps extends StepBase {
 		description = "Seleccionar el link \"Suscripciones\"",
 		expected = "Aparece la página de \"Suscripciones\"")
 	private void clickLinkSuscripciones() {
-		pageMiCuenta.click(SUSCRIPCIONES);
+		pgMiCuenta.click(SUSCRIPCIONES);
 		new PageSuscripcionesSteps().validaIsPage();
 		checksDefault();
 	}
@@ -127,7 +127,7 @@ public class PageMiCuentaSteps extends StepBase {
 		description = "Seleccionar el link \"Devoluciones\"",
 		expected = "Aparece la página de \"Devoluciones\"")
 	private void clickLinkDevoluciones() {
-		pageMiCuenta.click(DEVOLUCIONES);
+		pgMiCuenta.click(DEVOLUCIONES);
 		new PageDevolucionesSteps().validaIsPage();
 	}
 
@@ -140,7 +140,8 @@ public class PageMiCuentaSteps extends StepBase {
 		description = "Seleccionar el link \"Reembolsos\"",
 		expected = "Aparece la página de \"Reembolsos\"")
 	private void clickLinkReembolsos() {
-		pageMiCuenta.click(REEMBOLSOS);
+		pgMiCuenta.click(REEMBOLSOS);
 		new PageReembolsosSteps().checkIsPage();
 	}
+	
 }

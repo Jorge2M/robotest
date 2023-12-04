@@ -9,8 +9,8 @@ public class PagePaypalSelectPago extends PageBase {
 	private static final String XP_CONTINUE_BUTTON = "//*[@data-testid='submit-button-initial']";
 	private static final String XP_MET_PAGOS = "//section[@data-testid='pay-with']";
 
-	public boolean isPageUntil(int seconds) {
-		return state(Visible, XP_MET_PAGOS).wait(seconds).check();
+	public boolean isPage(int seconds) {
+		return state(VISIBLE, XP_MET_PAGOS).wait(seconds).check();
 	}
 
 	public void clickContinuarButton() {

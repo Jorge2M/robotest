@@ -110,7 +110,7 @@ public class SecBannersSteps extends StepBase {
 	 		"La página cambia: <br>" + 
 	 		"- La URL cambia o <br>" + 
 	 		"- El número de elementos DOM ha variado (en " + marginElements + " o más) con respecto al original (" + elementosPagPadre + ")",
-	 		(!urlEqual || !elemsEqual), Warn); 
+	 		(!urlEqual || !elemsEqual), WARN); 
 	 	
 		String urlPagActual = driver.getCurrentUrl();
 		URI uriPagActual = new URI(urlPagActual);
@@ -129,7 +129,7 @@ public class SecBannersSteps extends StepBase {
 			"- Banners<br>" + 
 			"- Ficha<br>" +
 			"- Bloque de contenido con imágenes o página acceso",
-		level=Warn)
+		level=WARN)
 	public boolean validacionesBannerEstandar(int seconds, Channel channel) {
 		for (int i=0; i<seconds; i++) {
 			if (validacionesBannerEstandar(channel)) {
@@ -144,7 +144,7 @@ public class SecBannersSteps extends StepBase {
 		if (!pageLanding.haySecc_Art_Banners() &&
 			!pageLanding.hayImgsEnContenido()) {
 			PageFicha pageFicha = PageFicha.of(channel);
-			return pageFicha.isPageUntil(0);
+			return pageFicha.isPage(0);
 		}
 		return true; 
 	}

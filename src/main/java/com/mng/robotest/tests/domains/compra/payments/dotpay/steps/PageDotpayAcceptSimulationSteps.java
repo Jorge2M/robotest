@@ -17,7 +17,7 @@ public class PageDotpayAcceptSimulationSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	  	checks.add(
 			"Aparece la página para la aceptación de la simulación " + getLitSecondsWait(seconds),
-			pageDotpayAcceptSimulation.isPage(seconds), Warn);
+			pageDotpayAcceptSimulation.isPage(seconds), WARN);
 	  	
 	  	checks.add(
 			"Figura un botón de aceptar rojo",

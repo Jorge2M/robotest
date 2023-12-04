@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.registro.steps;
 
-import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -10,9 +9,11 @@ import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroPersonali
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.testslegacy.data.PaisShop;
 
+import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
+
 public class PageRegistroPersonalizacionShopSteps extends StepBase {
 
-	private final PageRegistroPersonalizacionShop pageRegistroPersonalizacion = new PageRegistroPersonalizacionShop();
+	private final PageRegistroPersonalizacionShop pgRegistroPersonalizacion = new PageRegistroPersonalizacionShop();
 	
 	public void checkPage(int seconds) {
 		checkIsPage(seconds);
@@ -22,13 +23,13 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 	@Validation (
 		description="Aparece la página de personalización del registro " + SECONDS_WAIT)
 	public boolean checkIsPage(int seconds) {
-		return pageRegistroPersonalizacion.isPageUntil(seconds);
+		return pgRegistroPersonalizacion.isPage(seconds);
 	}
 	
 	@Validation
 	public ChecksTM checkPostalCode() {
 		var checks = ChecksTM.getNew();
-		boolean isVisibleCodPostal = pageRegistroPersonalizacion.isPostalCodeVisible();
+		boolean isVisibleCodPostal = pgRegistroPersonalizacion.isPostalCodeVisible();
 		if (dataTest.getPais().getRegister().isCpost()) {
 		  	checks.add(
 				"Sí es visible el input del código postal",
@@ -60,13 +61,13 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 			"  - Líneas: <b>#{data.getLineas()}</b>",
 		expected=
 			"La introducción de datos es correcta",
-		saveHtmlPage=SaveWhen.Always
+		saveHtmlPage=ALWAYS
 		)
 	private void inputDataWithouBirthDate(DataNewRegister data) {
-		pageRegistroPersonalizacion.inputPostalCode(data.getPostalCode());
-		pageRegistroPersonalizacion.inputName(data.getName());
-		pageRegistroPersonalizacion.selectGender(data.getGender());
-		pageRegistroPersonalizacion.selectLineas(data.getLineas());
+		pgRegistroPersonalizacion.inputPostalCode(data.getPostalCode());
+		pgRegistroPersonalizacion.inputName(data.getName());
+		pgRegistroPersonalizacion.selectGender(data.getGender());
+		pgRegistroPersonalizacion.selectLineas(data.getLineas());
 	}	
 	
 	@Step (
@@ -78,33 +79,33 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 		expected=
 			"La introducción de datos es correcta")
 	private void inputDataWithouBirthDateAndPostalCode(DataNewRegister data) {
-		pageRegistroPersonalizacion.inputName(data.getName());
-		pageRegistroPersonalizacion.selectGender(data.getGender());
-		pageRegistroPersonalizacion.selectLineas(data.getLineas());
+		pgRegistroPersonalizacion.inputName(data.getName());
+		pgRegistroPersonalizacion.selectGender(data.getGender());
+		pgRegistroPersonalizacion.selectLineas(data.getLineas());
 	}	
 	
 	@Step (
 		description="Introducir la Fecha de nacimiento: <b>#{birthDate}</b><br>",
 		expected="La introducción de datos es correcta")
 	private void inputBirthDate(String birthDate) {
-		pageRegistroPersonalizacion.inputDateOfBirth(birthDate);
+		pgRegistroPersonalizacion.inputDateOfBirth(birthDate);
 	}	
 	
 	@Step (
 		description="Pulsar el botón <b>Guardar</b>",
 		expected="Accedemos a la shop como conectados",
-		saveImagePage=SaveWhen.Always)
+		saveImagePage=ALWAYS)
 	public void clickGuardar() {
-		pageRegistroPersonalizacion.clickGuardar();
+		pgRegistroPersonalizacion.clickGuardar();
 		checkWeAreLogged();
 	}		
 	
 	@Step (
 		description="Pulsar el botón <b>Guardar</b>",
 		expected="",
-		saveImagePage=SaveWhen.Always)
+		saveImagePage=ALWAYS)
 	public void clickGuardarNoChecks() {
-		pageRegistroPersonalizacion.clickGuardar();
+		pgRegistroPersonalizacion.clickGuardar();
 	}		
 	
 	
@@ -115,7 +116,7 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 	@Validation(
 	    description="Aparece un error de código postal incorrecto " + SECONDS_WAIT)
 	public boolean checkCodPostalInvalidMessage(int seconds) {
-		return pageRegistroPersonalizacion.checkMessageErrorMovil(seconds);
+		return pgRegistroPersonalizacion.checkMessageErrorMovil(seconds);
 	}
 	
 }
