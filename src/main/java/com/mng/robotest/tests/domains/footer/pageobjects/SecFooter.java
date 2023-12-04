@@ -101,7 +101,7 @@ public class SecFooter extends PageBase {
 	}
 	
 	private String getXPathLinkCambioPais() {
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			return XP_CAMBIO_PAIS_OUTLET;
 		}
 		return XP_CAMBIO_PAIS_SHOP;

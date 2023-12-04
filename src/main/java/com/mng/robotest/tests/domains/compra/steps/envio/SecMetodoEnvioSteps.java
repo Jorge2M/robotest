@@ -1,11 +1,9 @@
 package com.mng.robotest.tests.domains.compra.steps.envio;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.ModalDroppoints;
@@ -69,7 +67,7 @@ public class SecMetodoEnvioSteps extends StepBase {
 		alterTypeEnviosAccordingContext(dataPago);
 		var pago = dataPago.getDataPedido().getPago();
 		var tipoTransporte = pago.getTipoEnvioType(app);
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			new Page1EnvioCheckoutMobilSteps().selectMetodoEnvio(tipoTransporte, nombrePago, dataPago);
 		} else {
 			selectMetodoEnvio(tipoTransporte, nombrePago, dataPago);
@@ -96,7 +94,7 @@ public class SecMetodoEnvioSteps extends StepBase {
 	}
 	
 	public void selectFranjaHorariaUrgente() {
-		if (channel==Channel.desktop || channel==Channel.tablet) {
+		if (isDesktop() || isTablet()) {
 			selectFranjaHorariaUrgente(1);
 		} else {
 			new Page1EnvioCheckoutMobilSteps().selectFranjaHorariaUrgente(1);
@@ -127,9 +125,10 @@ public class SecMetodoEnvioSteps extends StepBase {
 			
 			//Esto no está muy claro si es correcto, pero la configuración en Manto de los transportes dice que en el caso de Outlet los 
 			//empleados no tienen PickPoint así que nos ceñimos a ella.
-			if (app==AppEcom.outlet &&
-				pago.getTipoEnvioType(app)==TipoTransporte.ASM)
+			if (isOutlet() &&
+				pago.getTipoEnvioType(app)==TipoTransporte.ASM) {
 				pago.setTipoEnvioOutlet(TipoTransporte.STANDARD);
+			}
 		}		
 	}
 	

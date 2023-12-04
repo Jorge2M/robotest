@@ -2,7 +2,6 @@ package com.mng.robotest.testslegacy.steps.navigations.manto;
 
 import java.util.List;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepMantoBase;
 import com.mng.robotest.tests.domains.manto.pageobjects.PageDetallePedido;
 import com.mng.robotest.tests.domains.manto.pageobjects.PagePedidos.TypeDetalle;
@@ -25,12 +24,11 @@ public class PedidoNavigations extends StepMantoBase {
 
 	public void testPedidosShopEnManto(DataCheckPedidos dataCheckPedidos) {
 		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
-		if (app!=AppEcom.votf) {  
-			if (dataCheckPedidos.areChecksToExecute() && 
-				inputParamsSuite.getTypeAccess()!=TypeAccess.Bat) {
-				new PageLoginMantoSteps().login();
-				validacionListPedidosStepss(dataCheckPedidos);
-			}
+		if (!isVotf() &&  
+			dataCheckPedidos.areChecksToExecute() && 
+			inputParamsSuite.getTypeAccess()!=TypeAccess.Bat) {
+			new PageLoginMantoSteps().login();
+			validacionListPedidosStepss(dataCheckPedidos);
 		}
 	}
 	
@@ -54,7 +52,7 @@ public class PedidoNavigations extends StepMantoBase {
 			consultarBolsaSteps(dataPedido);
 		}
 		
-		if (app!=AppEcom.votf) {
+		if (!isVotf()) {
 			if (listChecks.contains(CheckPedido.CONSULTAR_PEDIDO)) {
 				consultarPedidoSteps(dataPedido);	
 			}

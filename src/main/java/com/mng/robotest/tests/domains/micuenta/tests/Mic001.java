@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.micuenta.tests;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageSuscripciones.NewsLetter;
 import com.mng.robotest.tests.domains.micuenta.steps.PageDevolucionesSteps;
@@ -28,7 +27,7 @@ public class Mic001 extends TestBase {
 		checkMisDatos();
 		checkMisCompras();
 		checkSuscripciones();
-		if (app!=AppEcom.outlet) {
+		if (!isOutlet()) {
 			checkDevoluciones();
 			checkReembolsos();
 		}

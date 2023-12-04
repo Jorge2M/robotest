@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.compra.payments.tmango.pageobjects;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -28,7 +27,7 @@ public class SecTMango extends PageBase {
 	}
 	
 	private String getXPathSection() {
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			return XP_SECTION_MOBIL;
 		}
 		return XP_SECTION_DESKTOP;
@@ -36,7 +35,7 @@ public class SecTMango extends PageBase {
 	
 	private String getXPathLabelsCheckModalidad() {
 		String xpathSection = getXPathSection(); 
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			return (xpathSection + "//p[@class='method-name']");
 		}
 		return (xpathSection + "//input/../label/span");
@@ -50,7 +49,7 @@ public class SecTMango extends PageBase {
 	
 	public String getXPathClickModalidad(TipoPago tipoPago) {
 		String xpathLabelMod = getXPathLabelModalidad(tipoPago);
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			return (xpathLabelMod);
 		}
 		return (xpathLabelMod + "/../../input");

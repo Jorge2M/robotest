@@ -1,6 +1,9 @@
 package com.mng.robotest.tests.domains.compra.pageobjects;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ListIterator;
+import java.util.Locale;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -27,6 +30,12 @@ public class UtilsCheckout {
 		}
 
 		return ImporteScreen.getFloatFromImporteMangoScreen(precioArticulo);
+	}
+	
+	public float getArabicNumber(String arabicNumberString) throws ParseException {
+        var arabicFormat = NumberFormat.getInstance(new Locale("ar"));
+        var arabicNumber = arabicFormat.parse(arabicNumberString);
+        return arabicNumber.floatValue();
 	}
 
 }

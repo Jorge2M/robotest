@@ -6,7 +6,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroSegundaOutlet;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -42,7 +41,7 @@ public class PageRegistroSegundaStepsOutlet extends StepBase {
 			numLineas+=1;
 		}
 		
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			lineasComaSeparated+=",outlet";
 			numLineas+=1;
 		}

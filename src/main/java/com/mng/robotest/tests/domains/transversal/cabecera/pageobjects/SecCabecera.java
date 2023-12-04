@@ -4,7 +4,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.buscador.pageobjects.SecSearch;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.MenusWebAll;
@@ -88,7 +87,7 @@ public abstract class SecCabecera extends PageBase {
 	public String getNumberArtIcono() {
 		waitLoadPage(); //Para evitar staleElement en la línea posterior
 		String xpathNumberArtIcono = getXPathNumberArtIcono();
-		int seconds = (app==AppEcom.outlet) ? 1 : 0; 
+		int seconds = (isOutlet()) ? 1 : 0; 
 		if (state(VISIBLE, xpathNumberArtIcono).wait(seconds).check()) {
 			return getElement(xpathNumberArtIcono).getText();
 		}

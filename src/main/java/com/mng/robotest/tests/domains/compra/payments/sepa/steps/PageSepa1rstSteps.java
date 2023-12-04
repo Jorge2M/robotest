@@ -39,7 +39,7 @@ public class PageSepa1rstSteps extends StepBase {
 			"Aparece la cabecera indicando la 'etapa' del pago",
 			pageSepa1rst.isPresentCabeceraStep(), WARN);		
 		
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			checks.add(
 				"Figura el campo de introducción del titular",
 				pageSepa1rst.isPresentInputTitular(), WARN);

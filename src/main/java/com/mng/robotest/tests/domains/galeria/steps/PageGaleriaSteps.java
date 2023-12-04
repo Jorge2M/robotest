@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -408,7 +407,7 @@ public class PageGaleriaSteps extends StepBase {
 		expected="Aparece el artículo original(" + TAG_NOMBRE_ART + ")")
 	public String clicksSliderArticuloConColores(int numArtConColores, String srcImageExpected, TypeSlider... typeSliderList) 
 			throws Exception {
-		if (channel!=Channel.desktop) {
+		if (!isDesktop()) {
 			throw new RuntimeException("Method clickSliderArticuloConColores doesn't support channel " + channel);
 		}
 
@@ -741,7 +740,7 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation
 	public ChecksTM checkHearthIconVisible() {
 		var checks = ChecksTM.getNew();
-		if (app==AppEcom.shop) {
+		if (isShop()) {
 			int secondsIcon = 2;
 			checks.add (
 				Check.make(

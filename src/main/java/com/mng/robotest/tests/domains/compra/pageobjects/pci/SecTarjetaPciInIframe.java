@@ -4,7 +4,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -87,9 +86,9 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 		goToIframe();
 		WebElement input = getElement(XP_INPUT_NUMBER);
 		if (number.compareTo(input.getAttribute("value").replace(" ", ""))!=0) {
-			WebElement inputNumber = getElement(XP_INPUT_NUMBER);
+			var inputNumber = getElement(XP_INPUT_NUMBER);
 			inputNumber.clear();
-			if (channel==Channel.tablet) {
+			if (isTablet()) {
 				for(char c : number.toCharArray()) {
 					inputNumber.sendKeys(String.valueOf(c));
 				}

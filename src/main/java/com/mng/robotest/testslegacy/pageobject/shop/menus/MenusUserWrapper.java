@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
 import com.mng.robotest.tests.conf.AppEcom;
@@ -75,7 +74,7 @@ public class MenusUserWrapper extends PageBase {
 	}
 	
 	public void hoverIconForShowUserMenuDesktopShop() {
-		if (channel!=Channel.desktop && app!=AppEcom.shop) {
+		if (!isDesktop() && !isShop()) {
 			throw new IllegalArgumentException(
 				"This function doesn't support the channel " + channel + " and the application " + app);
 		}

@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.chequeregalo.beans.ChequeRegalo;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
@@ -297,7 +296,7 @@ public class Page1DktopCheckout extends PageBase {
 
 	public boolean isNumMetodosPagoOK(boolean isEmpl) {
 		int numPagosPant = getElements(XP_METODO_PAGO).size();
-		if (app!=AppEcom.votf) {
+		if (!isVotf()) {
 			int numPagosPais = dataTest.getPais().getListPagosForTest(app, isEmpl).size();
 			return (numPagosPais == numPagosPant);
 		}
@@ -456,6 +455,7 @@ public class Page1DktopCheckout extends PageBase {
 	
 	public String getPrecioSubTotalFromResumen() {
 		return new PageCheckoutWrapper().formateaPrecioTotal(XP_PRECIO_SUBTOTAL);
+		
 	}
 	
 	private PreciosArticulo getPreciosArticuloResumen(WebElement articuloWeb) {

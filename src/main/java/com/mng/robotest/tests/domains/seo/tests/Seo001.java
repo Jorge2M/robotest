@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.seo.tests;
 
 import java.net.URI;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.seo.steps.SeoSteps;
 
@@ -16,7 +15,7 @@ public class Seo001 extends TestBase {
 		}
 		
 		String urlBase = inputParamsSuite.getUrlBase();
-		if (app==AppEcom.shop) {
+		if (isShop()) {
 			browserSteps.inputRobotsURLandValidate(urlBase);
 		}
 

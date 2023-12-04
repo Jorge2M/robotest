@@ -2,10 +2,8 @@ package com.mng.robotest.tests.domains.transversal.prehome.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
 import com.mng.robotest.tests.domains.transversal.prehome.pageobjects.PageJCAS;
@@ -38,7 +36,7 @@ public class PagePrehomeSteps extends StepBase {
 	@Validation
 	private ChecksTM checkPaisSelected() {
 		var checks = ChecksTM.getNew();
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			checks.add(
 			    Check.make(
 				    "Queda seleccionado el país con código " + pais.getCodigoPais() + " (" + pais.getNombrePais() + ")",
@@ -99,7 +97,7 @@ public class PagePrehomeSteps extends StepBase {
 	private ChecksTM checkPagePostPreHome() {
 		var checks = ChecksTM.getNew();
 		String title = driver.getTitle().toLowerCase();
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			checks.add(
 				"Aparece una pantalla en la que el título contiene <b>outlet</b>",
 				title.contains("outlet"));

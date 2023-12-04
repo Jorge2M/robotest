@@ -12,7 +12,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.micuenta.beans.Ticket;
 
@@ -109,7 +108,7 @@ public class PageMisCompras extends PageBase {
 	}
 	
 	private String getXPathCapaContenedora() {
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			return XP_CAPA_CONTENEDORA_MOBILE;
 		}
 		return XP_CAPA_CONTENEDORA_DESKTOP;
@@ -173,7 +172,7 @@ public class PageMisCompras extends PageBase {
 			return 0;
 		}
 		String textLinea = "0" + getElement(boxDataTicket, XP_ITEMS_RELATIVE_TICKET).getText();
-		return Integer.valueOf(textLinea.replaceAll("[^0-9]", ""));
+		return Integer.valueOf(textLinea.replaceAll("\\D", ""));
 	}
 	
 	private String getFechaTicketPage(WebElement boxDataTicket) {

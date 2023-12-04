@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
@@ -135,7 +134,7 @@ public abstract class SecBolsaCommon extends PageBase {
 	}
 	
 	public void closeInMobil() {
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			click(XP_ASPA).exec();
 		} else {
 			setBolsaToStateIfNotYet(CLOSED);

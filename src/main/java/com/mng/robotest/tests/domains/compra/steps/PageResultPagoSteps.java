@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.compra.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.conf.AppEcom;
@@ -72,7 +71,7 @@ public class PageResultPagoSteps extends StepBase {
 	  		"Aparece el importe " + importeTotal + " de la operación",
 	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), WARN);
 		
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			int seconds = 1;
 			checks.add(
 		  		"Aparece el link hacia las compras " + getLitSecondsWait(seconds),

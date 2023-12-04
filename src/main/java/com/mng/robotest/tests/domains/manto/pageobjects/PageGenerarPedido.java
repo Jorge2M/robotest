@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.manto.pageobjects;
 
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.mng.robotest.tests.domains.base.PageBase;
@@ -90,4 +89,5 @@ public class PageGenerarPedido extends PageBase {
 	public void clickInformarBancoEnCasoCancelacionAlGenerarPedido() {
 		click(XP_RADIO_INFORMA_BANCO).exec();
 	}
+	
 }

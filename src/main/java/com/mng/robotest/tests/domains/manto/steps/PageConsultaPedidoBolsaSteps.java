@@ -4,7 +4,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepMantoBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.tests.domains.manto.pageobjects.PageDetallePedido;
@@ -74,7 +73,7 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 			pgDetallePedido.isCodPaisPedido(dataPedido.getCodigoPais()), WARN);
 	 	
 		Pago pago = dataPedido.getPago();
-	 	if (!pago.getEstados().isEmpty() && app!=AppEcom.votf) {
+	 	if (!pago.getEstados().isEmpty() && !isVotf()) {
 	 		State stateVal = WARN;
 	 		if (pgDetallePedido.isPedidoInStateMenos1NULL()) {
 				stateVal = DEFECT;

@@ -4,11 +4,9 @@ import java.net.URISyntaxException;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.base.datatest.DataTest;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
@@ -30,7 +28,7 @@ public class AccesoSteps extends StepBase {
 
 	public void oneStep(boolean clearArticulos) throws Exception {
 		new AccesoFlows().accesoHomeAppWeb();
-		if (dataTest.isUserRegistered() && app!=AppEcom.votf) {
+		if (dataTest.isUserRegistered() && !isVotf()) {
 			identification(dataTest, clearArticulos);
 		}
 	}
@@ -87,7 +85,7 @@ public class AccesoSteps extends StepBase {
 			userMenus.isMenuInStateUntil(MI_CUENTA, PRESENT, seconds));
 		
 		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(FAVORITOS, PRESENT, 0);
-		if (app==AppEcom.outlet) { 
+		if (isOutlet()) { 
 			checks.add(
 				"NO aparece el link \"Favoritos\"",
 				!isVisibleMenuFav);
@@ -97,14 +95,14 @@ public class AccesoSteps extends StepBase {
 				isVisibleMenuFav);
 		}
 		
-		if (channel!=Channel.desktop) {
+		if (!isDesktop()) {
 			boolean isPresentLinkMisCompras = userMenus.isMenuInState(MIS_COMPRAS, PRESENT);
 			checks.add(
 				"Aparece el link \"Mis Compras\"",
 				isPresentLinkMisCompras);
 		}
 		
-		if (channel!=Channel.desktop) {
+		if (!isDesktop()) {
 			checks.add(
 				"Aparece el link \"Ayuda\"",
 				userMenus.isMenuInState(AYUDA, VISIBLE));
@@ -121,7 +119,7 @@ public class AccesoSteps extends StepBase {
 	 * Se ejecutan cada acción en un paso
 	 */
 	public void manySteps() throws Exception {
-		if (app==AppEcom.votf && !dataTest.isUserRegistered()) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
+		if (isVotf() && !dataTest.isUserRegistered()) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
 			accesoVOTFtoHOME();					
 		} else {
 			accessFromPreHome(false, true);

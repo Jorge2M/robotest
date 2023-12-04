@@ -3,17 +3,13 @@ package com.mng.robotest.tests.domains.ficha.pageobjects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-
-import com.github.jorge2m.testmaker.conf.Channel;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageFichaDevice extends PageFicha {
 
 	private static final String XP_CONTAINER_FICHA = "//*[@class='product-detail']";
-	private static final String XP_ALTA_BOLSA_BUTTON ="//*[@data-testid='pdp.form.addToCart']";;
+	private static final String XP_ALTA_BOLSA_BUTTON ="//*[@data-testid='pdp.form.addToCart']";
 	private static final String XP_BUTTON_FAVORITOS = "//*[@data-testid='button-icon']";
 	private static final String XP_BUTTON_FAVORITOS_FOR_ADD = XP_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'outline')]]";
 	private static final String XP_BUTTON_FAVORITOS_FOR_REMOVE = XP_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'fill')]]";
@@ -39,7 +35,7 @@ public class PageFichaDevice extends PageFicha {
 	}
 
 	private String getXPathDivImgCentralDiv() {
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			return XP_DIV_IMG_CENTRAL_DIV_DEVICE;
 		}
 		return XP_DIV_IMG_CENTRAL_DIV_DESKTOP;

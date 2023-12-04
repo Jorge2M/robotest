@@ -108,7 +108,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 		if (isTallaUnica()) {
 			return;
 		}
-		if (channel==Channel.tablet && app==AppEcom.votf) {
+		if (isTablet() && isVotf()) {
 			despliegaSelectTallasTabletVotf();
 		} else {
 			despliegaSelectTallasExec();

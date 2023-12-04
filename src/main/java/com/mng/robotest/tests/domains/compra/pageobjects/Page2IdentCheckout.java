@@ -405,7 +405,7 @@ public class Page2IdentCheckout extends PageBase {
 		String datoSeteado = "";
 		WebElement provinciaPais = getElementPriorizingDisplayed(XP_SELECT_PROV_PAIS);
 		if (provinciaPais!=null) {
-			if (PaisShop.getPais(pais)==UKRAINE && channel==Channel.desktop) {
+			if (PaisShop.getPais(pais)==UKRAINE && isDesktop()) {
 				return selectProvinciaUkraineDesktop();
 			}
 			if (PaisShop.getPais(pais)==EGYPT && egyptCity!=null) {

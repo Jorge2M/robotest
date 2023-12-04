@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktopKondo;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuLateralDesktop;
@@ -56,7 +55,7 @@ public class SecMenuLateralDesktop extends PageBase {
 	private static final String XP_CAPA_MENUS_OUTLET = "//div[@id='sticky']/aside[@id='filters']";
 	
 	public boolean isVisibleCapaMenus(int seconds) {
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			return state(VISIBLE, XP_CAPA_MENUS_OUTLET).wait(seconds).check();
 		}
 		else {

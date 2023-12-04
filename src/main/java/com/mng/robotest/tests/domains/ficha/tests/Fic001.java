@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.buscador.steps.SecBuscadorSteps;
@@ -17,7 +16,6 @@ import com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
-
 
 public class Fic001 extends TestBase {
 
@@ -58,26 +56,40 @@ public class Fic001 extends TestBase {
 	private void articleNoOnlineTest() throws Exception {
 		var articleNoOnlineWithColors = Article.getArticleForTest(produtNoOnlineWithColors.get());
 		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
-		boolean isTallaUnica = pageFichaSteps.selectAnadirALaBolsaTallaPrevNoSelected();
-		if (channel.isDevice()) {
-			pageFichaSteps.closeTallas();
+		if (isShop() && channel!=Channel.tablet) {
+			pageFichaSteps.selectBuscarEnTiendaButton();
+			new ModalBuscadorTiendasSteps().close();
 		}
 
+		var articulo = selectColorAndTalla();
+		if (isShop()) {
+			checkFavorites();
+		}
+		
+		pageFichaSteps.selectAnadirALaBolsaTallaPrevSiSelected(articulo);
+	}
+
+	private ArticuloScreen selectColorAndTalla() throws Exception {
+		boolean isTallaUnica = checkClickAddBolsaWithoutSelectTalla();
 		var articulo = new ArticuloScreen(produtNoOnlineWithColors.get());
 		pageFichaSteps.selectColorAndSaveData(articulo);
 		pageFichaSteps.selectTallaAndSaveData(articulo);
 		ifTallaUnicaClearBolsa(isTallaUnica);
-		if (app==AppEcom.shop) {
-			if (channel!=Channel.tablet) {
-				pageFichaSteps.selectBuscarEnTiendaButton();
-				new ModalBuscadorTiendasSteps().close();
-			}
-			pageFichaSteps.selectAnadirAFavoritos();
-			pageFichaSteps.changeColorGarment();
-			pageFichaSteps.selectRemoveFromFavoritos();
+		return articulo;
+	}	
+	
+	private boolean checkClickAddBolsaWithoutSelectTalla() {
+		boolean isTallaUnica = pageFichaSteps.selectAnadirALaBolsaTallaPrevNoSelected();
+		if (channel.isDevice()) {
+			pageFichaSteps.closeTallas();
 		}
-
-		pageFichaSteps.selectAnadirALaBolsaTallaPrevSiSelected(articulo);
+		return isTallaUnica;
+	}
+	
+	private void checkFavorites() {
+		pageFichaSteps.selectAnadirAFavoritos();
+		pageFichaSteps.changeColorGarment();
+		pageFichaSteps.selectRemoveFromFavoritos();		
 	}
 
 	private void stopIfNoPresentArticleNoOnlineWithColors() throws NotFoundException {

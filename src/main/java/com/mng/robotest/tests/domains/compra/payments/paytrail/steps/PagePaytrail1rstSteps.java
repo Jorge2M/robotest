@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.compra.payments.paytrail.steps;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -33,7 +32,7 @@ public class PagePaytrail1rstSteps extends StepBase {
 			"Aparece el importe de la compra: \" + importeTotal",
 			ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver), stateVal);  
 		
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			checks.add(
 				"Es visible el desplegable de bancos " + getLitSecondsWait(seconds),
 				pagePaytrail1rst.isVisibleSelectBancosUntil(seconds), WARN);

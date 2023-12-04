@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.compra.payments.pasarelaotras.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
@@ -14,7 +13,7 @@ public class PagePasarelaOtrasSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsPage(String importeTotal) {
 		var checks = ChecksTM.getNew();
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 		   	checks.add(
 				"En la página resultante figura el importe total de la compra (" + importeTotal + ")",
 				ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), WARN);

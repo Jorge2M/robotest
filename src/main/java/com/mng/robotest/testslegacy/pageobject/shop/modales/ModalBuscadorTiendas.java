@@ -1,6 +1,5 @@
 package com.mng.robotest.testslegacy.pageobject.shop.modales;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.footer.pageobjects.PageFromFooter;
 
@@ -45,11 +44,11 @@ public class ModalBuscadorTiendas extends PageBase implements PageFromFooter {
 	}
 	
 	private void clickAspaForClose() {
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			click(XP_LEFT_ARROW_MOBILE).exec();
 			return;
 		} 
-		if (channel==Channel.tablet) {
+		if (isTablet()) {
 			click(XP_CLOSE_TABLET).type(JAVASCRIPT).exec();
 		}
 		

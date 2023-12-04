@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.compra.steps;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
@@ -19,7 +18,7 @@ public class SecTarjetaPciSteps extends StepBase {
 	@Validation
 	public ChecksTM validateIsSectionOk(Pago pago) {
 		var checks = ChecksTM.getNew();
-		if (channel==Channel.desktop && pago.getTypePago()!=TypePago.KREDI_KARTI) {
+		if (isDesktop() && pago.getTypePago()!=TypePago.KREDI_KARTI) {
 			int seconds = 5;
 		 	checks.add(
 				"Aparece el bloque correspondiente a la introducción de los datos del método de pago " + pago.getNombre(channel, app) + 

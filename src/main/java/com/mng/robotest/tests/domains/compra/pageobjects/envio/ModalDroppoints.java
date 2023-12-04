@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.compra.pageobjects.envio;
 
 import org.openqa.selenium.Keys;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.SecSelectDPoint.TypeDeliveryPoint;
 import com.mng.robotest.tests.domains.compra.steps.envio.DataDeliveryPoint;
@@ -22,7 +21,7 @@ public class ModalDroppoints extends PageBase {
 	private static final String XP_CP_INPUT_BOX = "//div[@class='list__container']//input[@class[contains(.,searchBoxInput)]]";
 	
 	private String getXPathPanelGeneral() {
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			return XP_PANEL_GENERAL_MOVIL;
 		}
 		return XP_PANEL_GENERAL_DESKTOP;

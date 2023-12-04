@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.compra.payments.amazon.steps;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
@@ -25,7 +24,7 @@ public class PageAmazonIdentSteps extends StepBase {
 			"Aparece los campos para la identificación (usuario/password)",
 			pgAmazonIdent.isPageIdent());
 		
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			checks.add(
 				"En la página resultante figura el importe total de la compra (" + dataPedido.getImporteTotal() + ")",
 				ImporteScreen.isPresentImporteInScreen(dataPedido.getImporteTotal(), dataTest.getCodigoPais(), driver), WARN);

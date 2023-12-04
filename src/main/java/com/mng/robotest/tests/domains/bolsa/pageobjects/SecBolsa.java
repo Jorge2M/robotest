@@ -1,7 +1,5 @@
 package com.mng.robotest.tests.domains.bolsa.pageobjects;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
@@ -21,7 +19,7 @@ public class SecBolsa extends SecBolsaCommon {
 
 	@Override
 	String getXPathPanelBolsa() {
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			return XP_PANEL_BOLSA_MOBILE;
 		}
 		return XP_PANEL_BOLSA_DESKTOP;
@@ -34,7 +32,7 @@ public class SecBolsa extends SecBolsaCommon {
 	
 	@Override
 	String getXPathPrecioSubTotal() {
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			return XP_PRECIO_SUBTOTAL_MOBILE;
 		}
 		return XP_PRECIO_SUBTOTAL_DESKTOP;
@@ -83,7 +81,7 @@ public class SecBolsa extends SecBolsaCommon {
 	@Override
 	public void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected) {
 		if (!isInStateUntil(stateBolsaExpected, 1)) {
-			if (channel==Channel.mobile) {
+			if (isMobile()) {
 				setBolsaMobileToState(stateBolsaExpected);
 			} else {
 				setBolsaDesktopToState(stateBolsaExpected);
@@ -112,7 +110,7 @@ public class SecBolsa extends SecBolsaCommon {
 		if (stateBolsaExpected==StateBolsa.OPEN) {
 			SecCabecera.make().clickIconoBolsaWhenDisp(2);
 		} else {
-			if (app==AppEcom.outlet) {
+			if (isOutlet()) {
 				clickIconoCloseMobile();
 			} else {
 				driver.navigate().back();

@@ -7,7 +7,6 @@ import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.Us
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.conf.testab.TestABactive;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
@@ -56,7 +55,7 @@ public class AccesoFlows extends StepBase {
 	}
 	
 	public void accesoHomeAppWeb(boolean acceptCookies) throws Exception {
-		if (app==AppEcom.votf) {
+		if (isVotf()) {
 			accesoVOTF();
 			goFromLineasToMultimarcaVOTF();
 			previousAccessShopSteps();
@@ -187,7 +186,7 @@ public class AccesoFlows extends StepBase {
 	}
 	
 	public void cambioPais(Pais newPais, IdiomaPais newIdioma) {
-		if (channel.isDevice() && app==AppEcom.outlet) {
+		if (channel.isDevice() && isOutlet()) {
 			new SecMenusUserSteps().cambioPaisMobil(newPais, newIdioma);
 		} else {
 			new SecFooterSteps().cambioPais(newPais, newIdioma);

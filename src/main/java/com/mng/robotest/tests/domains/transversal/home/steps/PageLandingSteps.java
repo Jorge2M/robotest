@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
 import com.mng.robotest.tests.domains.transversal.menus.steps.MenuSteps;
@@ -44,7 +43,7 @@ public class PageLandingSteps extends StepBase {
 	@Validation
 	public ChecksTM checkIsPageOk() {
 		var checks = ChecksTM.getNew();
-		if (app!=AppEcom.outlet) {
+		if (!isOutlet()) {
 			checks.add(
 				"Aparece la home de marcas/multimarcas según el país",
 				pageLanding.isPageDependingCountry(), WARN);	

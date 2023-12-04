@@ -8,7 +8,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.NoSuchElementException;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
@@ -66,8 +65,8 @@ public class Fic002 extends TestBase {
 	
 	private void checkSliders() {
 		Stream.of(Slider.values())
-			.filter(s -> isSliderChequeable(s))
-			.forEach(s -> pFichaSteps.checkSliderIfExists(s));
+			.filter(this::isSliderChequeable)
+			.forEach(pFichaSteps::checkSliderIfExists);
 	}
 	private boolean isSliderChequeable(Slider slider) {
 		return 
@@ -78,7 +77,7 @@ public class Fic002 extends TestBase {
 	private void pageFichaDesktopTest() {
 		boolean isFichaAccesorio = pFichaSteps.getFicha().isFichaAccesorio();
 		pFichaSteps.getSecFotosNewSteps().validaLayoutFotosNew(isFichaAccesorio);
-		if (app==AppEcom.shop) {
+		if (isShop()) {
 			pFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectEnvioYDevoluciones();
 			pFichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
 		}
@@ -88,7 +87,7 @@ public class Fic002 extends TestBase {
 	}
 
 	private void pageFichaDeviceTest() {
-		if (app==AppEcom.outlet && channel!=Channel.mobile) {
+		if (isOutlet() && !isMobile()) {
 			pFichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}
 		pFichaSteps.getSecProductDescDeviceSteps().validateAreInStateInitial();
@@ -138,9 +137,9 @@ public class Fic002 extends TestBase {
 				.Builder(dataTest.getPais().getCodigoAlf(), app, driver)
 				.build();
 	
-		var article = getterProducts.getOne(Arrays.asList(TOTAL_LOOK));
-		if (article.isPresent()) {
-			return Pair.of(article, true);
+		var articleGet = getterProducts.getOne(Arrays.asList(TOTAL_LOOK));
+		if (articleGet.isPresent()) {
+			return Pair.of(articleGet, true);
 		}
 		return Pair.of(getterProducts.getOne(), false);
 	}

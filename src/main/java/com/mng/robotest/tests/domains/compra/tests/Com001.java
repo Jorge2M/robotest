@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
@@ -49,7 +48,7 @@ public class Com001 extends TestBase {
 
 	private void checkout() throws Exception {
 		var pagoVisa = dataTest.getPais().getPago("VISA");
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			new BuilderCheckout(dataPago)
 					.pago(pagoVisa)
 					.build()
@@ -73,7 +72,7 @@ public class Com001 extends TestBase {
 	}
 	
 	private Optional<List<Article>> getArticlesHome() throws Exception {
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			return Optional.empty();
 		}
 		

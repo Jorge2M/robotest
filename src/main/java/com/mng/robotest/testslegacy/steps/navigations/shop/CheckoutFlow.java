@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
 import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
@@ -174,7 +173,7 @@ public class CheckoutFlow extends StepBase {
 	
 	private void test1rstPageCheckout() {
 		if ((dataPago.getFTCkout().checkPromotionalCode || dataPago.getFTCkout().userIsEmployee) && 
-			 app!=AppEcom.votf) {
+			!isVotf()) {
 			if (dataPago.getFTCkout().userIsEmployee && ESPANA.isEquals(pais)) {
 				testInputCodPromoEmplSpain();
 			} else {
@@ -188,7 +187,7 @@ public class CheckoutFlow extends StepBase {
 			}
 		}
 		
-		if (app==AppEcom.votf && dataTest.getCodigoPais().compareTo("001")==0) {
+		if (isVotf() && dataTest.getCodigoPais().compareTo("001")==0) {
 			new Page1DktopCheckoutSteps().stepIntroduceCodigoVendedorVOTF("111111");
 		}
 	}
@@ -224,7 +223,7 @@ public class CheckoutFlow extends StepBase {
 				var itPaises = paisesDestino.iterator();
 				while (itPaises.hasNext()) {
 					paisChange = itPaises.next();
-					if (app==AppEcom.shop) {
+					if (isShop()) {
 						//Test funcionalidad "Quiero recibir factura"
 						checkoutSteps.clickSolicitarFactura();
 						var dataDirFactura = new DataDireccion();
@@ -240,7 +239,7 @@ public class CheckoutFlow extends StepBase {
 							.inputDataAndActualizar(dataDirFactura);
 					}
 					
-					if (app!=AppEcom.votf) {
+					if (!isVotf()) {
 						//Test funcionalidad "Cambio dirección de envío"
 						checkoutSteps.clickEditarDirecEnvio();
 						var dataDirEnvio = new DataDireccion();
@@ -547,8 +546,5 @@ public class CheckoutFlow extends StepBase {
 			build().checkout(from);
 		}
 	}
-	
-	private boolean isMobile() {
-		return channel==Channel.mobile;
-	}		
+		
 }

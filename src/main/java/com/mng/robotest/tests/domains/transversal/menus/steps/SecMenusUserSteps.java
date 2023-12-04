@@ -2,10 +2,8 @@ package com.mng.robotest.tests.domains.transversal.menus.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
@@ -111,13 +109,13 @@ public class SecMenusUserSteps extends StepBase {
 	}
 	
 	private boolean isVisibleLinkCerrarSesion() {
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
 		return (userMenus.isMenuInStateUntil(CERRAR_SESION, PRESENT, 1));
 	}
 	private boolean isInvisibleLinkCerrarSesion() {
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
 		return (!userMenus.isMenuInStateUntil(CERRAR_SESION, PRESENT, 1));
@@ -160,11 +158,11 @@ public class SecMenusUserSteps extends StepBase {
 	@Validation
 	public ChecksTM checkVisibilityLinkMangoLikesYou() {	
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
-		if (channel==Channel.desktop && app==AppEcom.shop) {
+		if (isDesktop() && isShop()) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
 		boolean visibilityMLY = userMenus.isMenuInStateUntil(MANGO_LIKES_YOU, PRESENT, 1);
-		if (app==AppEcom.shop) {
+		if (isShop()) {
 			checks.add(
 				"Sí aparece el link de \"Mango Likes You\" en el menú de usuario",
 				visibilityMLY);
@@ -181,7 +179,7 @@ public class SecMenusUserSteps extends StepBase {
 	@Validation
 	public ChecksResultWithNumberPoints checkAngGetLoyaltyPoints(int seconds) {
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
 		LoyaltyData loyaltyData = userMenus.checkAndGetLoyaltyPointsUntil(seconds);

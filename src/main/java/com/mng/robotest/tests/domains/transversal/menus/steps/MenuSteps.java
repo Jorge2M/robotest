@@ -7,10 +7,8 @@ import org.openqa.selenium.NoSuchElementException;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
@@ -165,7 +163,7 @@ public class MenuSteps extends StepBase {
 		if (menu.getSubMenus()!=null && !menu.getSubMenus().isEmpty()) {
 			checkVisibilitySubmenus(menu);
 		}
-		if (channel==Channel.desktop &&
+		if (isDesktop() &&
 			menu.getArticles()!=null && !menu.getArticles().isEmpty()) {
 			checkArticlesContainsLiteralsDesktop(menu.getArticles());
 		}
@@ -199,7 +197,7 @@ public class MenuSteps extends StepBase {
 	
 	private void checkSelectSubMenu(MenuWeb menu) {
 		new PageGaleriaSteps().checkGaleriaAfeterSelectMenu();
-		if (channel==Channel.desktop &&
+		if (isDesktop() &&
 			menu.getArticlesSubMenu()!=null && !menu.getArticlesSubMenu().isEmpty()) {
 			checkArticlesContainsLiteralsDesktop(menu.getArticlesSubMenu());
 		}
@@ -335,7 +333,7 @@ public class MenuSteps extends StepBase {
 		}
 		catch (NoSuchElementException e) {
 			//Try to fix random problem in selection of Teen - Nina
-			if (channel==Channel.desktop) {
+			if (isDesktop()) {
 				lineaWeb.hoverLinea();
 			} else {
 				lineaWeb.clickLinea();
@@ -445,7 +443,7 @@ public class MenuSteps extends StepBase {
 	public void checkURLRedirectParkasHeEspanya() throws Exception {
 		URI uri = new URI(driver.getCurrentUrl());
 		String tiendaId = "he";
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			tiendaId = "outletH";
 		}
 		String urlAccesoCorreo = 
@@ -474,7 +472,7 @@ public class MenuSteps extends StepBase {
 		
 		URI uri = new URI(driver.getCurrentUrl());
 		String tiendaId = "she";
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			tiendaId = "outlet";
 		}
 		

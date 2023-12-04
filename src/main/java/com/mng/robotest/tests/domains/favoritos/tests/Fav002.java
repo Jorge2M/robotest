@@ -14,8 +14,6 @@ import com.mng.robotest.testslegacy.beans.Pais;
 import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
 import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 
-import com.mng.robotest.tests.conf.AppEcom;
-
 public class Fav002 extends TestBase {
 
 	private final PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
@@ -47,7 +45,7 @@ public class Fav002 extends TestBase {
 	}	
 
 	private void goToGaleryAndSelectArticle() {
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			clickMenu("Vestidos");
 		} else {
 			clickMenu(new MenuWeb

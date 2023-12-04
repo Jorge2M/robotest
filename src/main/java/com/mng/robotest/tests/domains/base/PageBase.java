@@ -239,7 +239,27 @@ public class PageBase extends PageObjTM {
 	}
 	protected void keyUp(int times) {
 		pushKey(Keys.ARROW_UP, times);
+	}
+	
+	protected boolean isMobile() {
+		return channel==Channel.mobile;
+	}
+	protected boolean isDesktop() {
+		return channel==Channel.desktop;
+	}
+	protected boolean isTablet() {
+		return channel==Channel.tablet;
 	}	
+	protected boolean isOutlet() {
+		return app==AppEcom.outlet;
+	}
+	protected boolean isShop() {
+		return app==AppEcom.shop;
+	}	
+	protected boolean isVotf() {
+		return app==AppEcom.votf;
+	}	
+	
 	private void pushKey(Keys key, int times) {
 		var actions = new Actions(driver);
 		for (int i=0; i<times; i++) {

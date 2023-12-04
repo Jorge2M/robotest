@@ -7,12 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
-import com.github.jorge2m.testmaker.conf.Channel;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArticulo.TipoPrecio.*;
@@ -46,11 +44,11 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	//Número de páginas a partir del que consideramos que se requiere un scroll hasta el final de la galería
 	public static final int SCROLL_TO_LAST = 20; 
 	
-	public PageGaleriaDevice() {
+	protected PageGaleriaDevice() {
 		super();
 	}
 	
-	public PageGaleriaDevice(From from) {
+	protected PageGaleriaDevice(From from) {
 		super(from);
 	}
 	
@@ -68,7 +66,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	String getXPathPagina(int pagina) {
-		if (channel==Channel.tablet && app==AppEcom.outlet ) {
+		if (isTablet() && isOutlet()) {
 			return (XP_PAGINA_TABLET_OUTLET_WITH_TAG.replace(TAG_NUM_PAGINA, String.valueOf(pagina)));
 		}
 		return (XP_PAGINA_WITH_TAG.replace(TAG_NUM_PAGINA, String.valueOf(pagina)));
@@ -85,11 +83,11 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	@Override
 	public void clickColorArticulo(WebElement articulo, int posColor) {
 		showColors(articulo);
-		var color = getColorArticulo(articulo, posColor);
+		var color = getColorArticulo(posColor);
 		color.click(); 
 	}
 	
-	private WebElement getColorArticulo(WebElement articulo, int posColor) {
+	private WebElement getColorArticulo(int posColor) {
 		return getElements("." + getXPathColorArticleOption()).get(posColor-1);
 	}
 

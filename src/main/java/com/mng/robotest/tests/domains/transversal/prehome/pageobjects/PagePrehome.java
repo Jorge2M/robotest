@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.transversal.prehome.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.footer.pageobjects.PageFromFooter;
@@ -33,7 +32,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 		return XP_PAIS_OPTION + "//self::*[text()='" + nameCountry + "']";
 	}
 	private String getXPathIdiomaItemFromName(String nameIdioma) {
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 		    return XP_IDIOMA_OPTION_DESKTOP + "//self::*[@name='" + nameIdioma + "']";
 		}
 		return XP_IDIOMA_OPTION_MOBILE + "//self::*[text()='" + nameIdioma + "']";

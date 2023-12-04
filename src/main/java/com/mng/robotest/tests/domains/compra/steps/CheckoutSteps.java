@@ -4,7 +4,6 @@ import java.util.StringTokenizer;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
@@ -522,8 +521,5 @@ public class CheckoutSteps extends StepBase {
 	private boolean checkTotalImport(float subTotal, float sumImportProducts) {
 		return subTotal == sumImportProducts;
 	}
-	
-	private boolean isMobile() {
-		return channel==Channel.mobile;
-	}	
+
 }

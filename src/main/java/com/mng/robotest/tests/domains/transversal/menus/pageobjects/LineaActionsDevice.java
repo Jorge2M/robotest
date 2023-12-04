@@ -3,8 +3,6 @@ package com.mng.robotest.tests.domains.transversal.menus.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -38,12 +36,12 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	private String getXPathLineaLink(String dataTestid) throws IllegalArgumentException {
 		switch (lineaType) {
 		case SHE, HE, TEEN, HOME:
-			if (app==AppEcom.outlet) {
+			if (isOutlet()) {
 				return "//*[@data-testid='" + dataTestid + "." + lineaType.getSufixOutlet(channel).trim() + "']";
 			}
 			return "//*[@data-testid='" + dataTestid + "." + lineaType.getId2() + "']";
 		case NINA, NINO:
-			if (app==AppEcom.outlet) {
+			if (isOutlet()) {
 				return "//*[@data-testid='" + dataTestid + "." + lineaType.getSufixOutlet(channel) + "']";
 			}
 		case KIDS:			
@@ -109,7 +107,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	}
 	public boolean isLineaSelected() {
 		String xpathLineaWithFlagSelected = getXPathLineaLink();
-		if (app==AppEcom.outlet || channel==Channel.tablet) {
+		if (isOutlet() || isTablet()) {
 			xpathLineaWithFlagSelected+="/..";
 		}
 		if (state(PRESENT, xpathLineaWithFlagSelected).check()) {
@@ -130,7 +128,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	}
 	public boolean isSublineaSelected() {
 		String xpathSublineaWithFlagOpen = getXPathSublineaLink();
-		if (app==AppEcom.outlet || channel==Channel.tablet) {
+		if (isOutlet() || isTablet()) {
 			xpathSublineaWithFlagOpen+="/..";
 		}
 		if (state(PRESENT, xpathSublineaWithFlagOpen).check()) {

@@ -87,7 +87,7 @@ public class SecProductDescrDevice extends PageBase {
 			return TypeStatePanel.MISSING;
 		}
 		
-		WebElement panel = getElement(xpathPanel);
+		var panel = getElement(xpathPanel);
 		if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {
 			By byCapa = By.xpath(".//div[@class[contains(.,'collapsible-info-body')]]");
 			if (state(PRESENT, panel).by(byCapa).check()) {

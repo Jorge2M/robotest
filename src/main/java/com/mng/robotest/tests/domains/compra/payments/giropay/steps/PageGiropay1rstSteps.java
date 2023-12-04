@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.compra.payments.giropay.steps;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -40,7 +39,7 @@ public class PageGiropay1rstSteps extends StepBase {
 			"Aparece la cabecera indicando la 'etapa' del pago",
 			pgGiropay1rst.isPresentCabeceraStep(), WARN);	
 
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			int seconds = 2;
 			checks.add(
 				"Figura un botón de pago " + getLitSecondsWait(seconds),

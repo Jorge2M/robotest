@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.favoritos.tests;
 
 import static com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps.TypeActionFav.*;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
@@ -43,7 +42,7 @@ public class Fav001 extends TestBase {
 	
 	private void goToVestidosGalery() {
 		clickMenu("Vestidos");
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			pGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO);
 		}
 	}	

@@ -10,7 +10,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.TestRunTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.base.datatest.DataMantoTest;
 import com.mng.robotest.tests.domains.manto.pageobjects.PageDetallePedido;
@@ -32,7 +31,7 @@ public class PedidosNavigations extends StepBase {
 
 	public void testPedidosEnManto(List<DataPedido> listPedidos) throws Exception {
 		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
-		if (app!=AppEcom.votf) {  
+		if (!isVotf()) {  
 			TestCaseTM testCase = getTestCase();
 			TestRunTM testRun = testCase.getTestRunParent();
 			DataMantoTest dMantoAcc = DataMantoTest.make();
@@ -98,7 +97,7 @@ public class PedidosNavigations extends StepBase {
 			pageConsultaPedidoBolsaSteps.detalleFromListaPedBol(dataPedido, TypeDetalle.BOLSA);
 		}
 		
-		if (app!=AppEcom.votf) {
+		if (!isVotf()) {
 			new PageMenusMantoSteps().goToPedidosStep();
 			secFiltrosMantoSteps.setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
 			boolean existsLinkCodPed = new PagePedidosMantoSteps().validaLineaPedido(dataPedido).getExistsLinkCodPed();	

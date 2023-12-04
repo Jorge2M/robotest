@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.compra.payments.dotpay.steps;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -39,7 +38,7 @@ public class PageDotpay1rstSteps extends StepBase {
 			"Aparece la cabecera indicando la 'etapa' del pago",
 			pageDotpay1rst.isPresentCabeceraStep(nombrePago), WARN);
 	  	
-	  	if (channel==Channel.desktop) {
+	  	if (isDesktop()) {
 		  	checks.add(
 				"Figura un botón de pago",
 				pageDotpay1rst.isPresentButtonPago());

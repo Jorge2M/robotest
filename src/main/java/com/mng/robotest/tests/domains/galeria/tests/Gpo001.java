@@ -4,7 +4,6 @@ import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesk
 import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion.*;
 import static com.mng.robotest.tests.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
@@ -23,7 +22,7 @@ public class Gpo001 extends TestBase {
 		accessAndLogin();
 		clickMenu(CAMISAS_SHE);
 		filterGaleryByColor(CAMISAS_SHE, Color.BLANCO);
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			changeTwoToFourColumns();
 		}
 		checkScroll();		

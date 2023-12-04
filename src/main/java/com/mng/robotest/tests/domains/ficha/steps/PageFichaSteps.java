@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.ficha.steps;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -421,7 +420,7 @@ public class PageFichaSteps extends StepBase {
 					"Sí es visible el link <b>Prev</b> " + getLitSecondsWait(seconds),
 					isVisiblePrevLink, WARN);
 		}
-		if (app==AppEcom.outlet || channel==Channel.desktop) {
+		if (isOutlet() || isDesktop()) {
 			checks.add(
 					"Es visible el link <b>Next</b>",
 					pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.NEXT, 0), WARN);

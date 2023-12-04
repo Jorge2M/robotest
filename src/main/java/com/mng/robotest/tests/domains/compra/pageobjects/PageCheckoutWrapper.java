@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.compra.pageobjects;
 
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.PageBase;
@@ -333,14 +332,14 @@ public class PageCheckoutWrapper extends PageBase {
 	}
 	
 	public float getSumProductImports() {
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			return pg2MobilCheckout.getSumPreciosArticles();
 		}
 		return pg1DktopCheckout.getSumPreciosArticles();
 	}
 	
 	public float getImportSubtotal() {
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			return pg2MobilCheckout.getPrecioSubTotalFromResumen();
 		}
 		String textImporte = pg1DktopCheckout.getPrecioSubTotalFromResumen();
@@ -467,8 +466,5 @@ public class PageCheckoutWrapper extends PageBase {
 			return pg1DktopCheckout.isVisibleMessageErrorPayment(seconds);
 		}
 	}
-	
-	private boolean isMobile() {
-		return channel==Channel.mobile;
-	}	
+
 }

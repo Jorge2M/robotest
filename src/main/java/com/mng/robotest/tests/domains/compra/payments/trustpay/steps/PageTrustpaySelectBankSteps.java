@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -39,7 +38,7 @@ public class PageTrustpaySelectBankSteps extends StepBase {
 			"Aparece la cabecera indicando la 'etapa' del pago",
 			pageTrustpaySelectBank.isPresentCabeceraStep(nombrePago), WARN);
 	 	
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 		 	checks.add(
 				"Figura el desplegable de bancos",
 				pageTrustpaySelectBank.isPresentSelectBancos(), WARN);

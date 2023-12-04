@@ -29,7 +29,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 		expected="Aparecen artículos con precio en el intervalo seleccionado")
 	public void seleccionaIntervalo() throws Exception {
 		var dataFilter = new DataFilterPrecios();
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			pgGaleriaDesktop.showFilters();
 		}
 		dataFilter.minimoOrig = pgGaleriaDesktop.getMinImportFilter();
@@ -38,7 +38,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 		pgGaleriaDesktop.clickIntervalImportFilter(30, 30);
 		dataFilter.minimoFinal = pgGaleriaDesktop.getMinImportFilter();
 		dataFilter.maximoFinal = pgGaleriaDesktop.getMaxImportFilter();
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			pgGaleriaDesktop.acceptFilters();
 		}
 		

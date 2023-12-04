@@ -13,7 +13,6 @@ import org.apache.commons.cli.CommandLine;
 import com.github.jorge2m.testmaker.boundary.access.OptionTMaker;
 import com.github.jorge2m.testmaker.domain.InputParamsTM;
 
-
 public class InputParamsMango extends InputParamsTM {
 
 	private static final String COUNTRYS_NAME_PARAM = "countrys";

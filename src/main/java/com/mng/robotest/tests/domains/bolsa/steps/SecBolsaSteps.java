@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
@@ -116,7 +115,7 @@ public class SecBolsaSteps extends StepBase {
 			dataTest.getDataBag().addArticulo(articulo);
 		}
 
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			secBolsa.isInStateUntil(StateBolsa.OPEN, 10);
 		}
 	}
@@ -142,7 +141,7 @@ public class SecBolsaSteps extends StepBase {
 
 	public void validaAltaArtBolsa() throws Exception {
 		validaNumArtEnBolsa();
-		if (channel==Channel.desktop) {
+		if (isDesktop()) {
 			checkIsBolsaVisibleInDesktop();
 		}
 		validaCuadranArticulosBolsa();
@@ -263,7 +262,7 @@ public class SecBolsaSteps extends StepBase {
 
 	private void fluxPostSelectComprar(FluxBolsaCheckout fluxMobile) {
 		if (!dataTest.isUserRegistered()) {
-			if (channel==Channel.mobile) {
+			if (isMobile()) {
 				fluxPostSelectComprarUserNotIdentifiedMobile(fluxMobile);
 			} else {
 				new Page1IdentCheckoutSteps().checkIsPage(7);

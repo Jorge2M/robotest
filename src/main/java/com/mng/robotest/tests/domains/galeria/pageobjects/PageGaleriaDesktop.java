@@ -376,11 +376,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		moveToArticleAndGetObject(posArticulo);
 	}
 
-//	@Override
-//	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
-//		return secTallas.isVisibleArticleCapaTallasUntil(posArticulo, seconds);
-//	}
-//	
 	@Override
 	public ArticuloScreen selectTallaAvailableArticle(int posArticulo) throws Exception {
 		waitLoadPage();

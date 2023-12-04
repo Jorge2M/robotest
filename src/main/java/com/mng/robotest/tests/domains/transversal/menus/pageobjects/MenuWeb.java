@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.transversal.menus.pageobjects;
 
 import java.util.List;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.GroupWeb.GroupType;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -98,7 +97,7 @@ public class MenuWeb extends PageBase implements MenuActions {
 	}	
 	
 	public List<String> getSubMenus() {
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			return getSubMenusOutlet();
 		}
 		return getSubMenusShop();

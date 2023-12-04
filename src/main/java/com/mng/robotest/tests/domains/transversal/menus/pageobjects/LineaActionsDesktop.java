@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.transversal.menus.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
@@ -32,7 +31,7 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	}
 	
 	public String getIdLineaEnDOM() {
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			return lineaType.getSufixOutlet(channel);
 		}
 		return lineaType.name(app).toLowerCase();

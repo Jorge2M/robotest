@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.seo.beans.Sitemapindex;
 import com.mng.robotest.tests.domains.seo.beans.Sitemapindex.Sitemap;
@@ -104,7 +103,7 @@ public class SeoSteps extends StepBase {
 		checks.add(
 				"Figura el siguiente contenido: <br>" + contRobots1.replace("\n", "<br>"),
 				driver.getPageSource().toLowerCase().contains(contRobots1.toLowerCase()));
-		if (app==AppEcom.outlet) {
+		if (isOutlet()) {
 			checks.add(
 					"Figura el siguiente contenido: <br>" + contRobots2.replace("\n", "<br>"),
 					driver.getPageSource().contains(contRobots2));

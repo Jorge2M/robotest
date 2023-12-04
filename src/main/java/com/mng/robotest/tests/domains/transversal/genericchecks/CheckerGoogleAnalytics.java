@@ -13,7 +13,6 @@ import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.github.jorge2m.testmaker.service.genericchecks.Checker;
 import com.github.jorge2m.testmaker.service.genericchecks.UtilsChecker;
 import com.github.jorge2m.testmaker.testreports.stepstore.GestorDatosHarJSON;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 
 public class CheckerGoogleAnalytics extends PageBase implements Checker {
@@ -54,7 +53,7 @@ public class CheckerGoogleAnalytics extends PageBase implements Checker {
 				String valueTid1 = "UA-855910-26";
 				String valueTid2 = "UA-855910-3";
 				String valueTid3 = "UA-855910-34";
-				if (app==AppEcom.outlet) {
+				if (isOutlet()) {
 					valueTid1 = "UA-855910-5";
 					valueTid2 = "UA-855910-5";
 					valueTid3 = "UA-855910-5";

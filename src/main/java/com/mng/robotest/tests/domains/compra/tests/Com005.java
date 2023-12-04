@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.compra.tests;
 
 import java.util.Map;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
@@ -19,7 +18,7 @@ public class Com005 extends TestBase {
 		DataPago dataPago = fromPrehomeToCheckout();
 		goToPortada();
 		
-		if (app!=AppEcom.votf) {
+		if (!isVotf()) {
 			String usrEmail = dataPago.getDatosRegistro().get("cfEmail");
 			String password = dataPago.getDatosRegistro().get("cfPass");
 			
