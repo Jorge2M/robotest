@@ -136,7 +136,10 @@ public class CheckoutFlow extends StepBase {
 		if (isMobile()) {
 			checkoutSteps.goToMetodosPagoMobile();
 		}
-		checkoutSteps.checkTotalImport();
+		
+		if (!dataPago.getFTCkout().chequeRegalo) {
+			checkoutSteps.checkTotalImport();
+		}
 	}
 	
 	private void testFromIdentToCheckoutIni() {
