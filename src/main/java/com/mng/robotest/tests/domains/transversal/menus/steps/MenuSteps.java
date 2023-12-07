@@ -212,7 +212,7 @@ public class MenuSteps extends StepBase {
 	@Validation
 	private ChecksTM checkArticlesContainsLiteralsDesktop(List<String> articles) {
 		var pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(channel, app, dataTest.getPais());
-		var articlesNoValid = pageGaleriaDesktop.getArticlesNoValid(articles);
+		var articlesNoValid = pageGaleriaDesktop.searchForArticlesNoValid(articles);
 		var stateVal = (articlesNoValid.size()<10) ? WARN : DEFECT;
 		
 		var checks = ChecksTM.getNew();

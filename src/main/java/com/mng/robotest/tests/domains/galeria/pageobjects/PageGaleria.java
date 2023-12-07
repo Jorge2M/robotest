@@ -18,11 +18,11 @@ import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
@@ -36,6 +36,7 @@ import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.AttributeArticle.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion.*;
 
 public abstract class PageGaleria extends PageBase {
 
@@ -153,12 +154,6 @@ public abstract class PageGaleria extends PageBase {
 				"//self::*[not(@class[contains(.,'layout-2-coumns-A2')])]");
 	}
 
-	static String classProductName =
-			"(@class[contains(.,'productList__name')] or " +
-					"@class[contains(.,'product-list-name')] or " +
-					"@class='product-list-info-name' or " +
-					"@class[contains(.,'product-name')])";
-
 	public String getXPathCabeceraBusquedaProd() {
 		return "//*[@id='buscador_cabecera2']";
 	}
@@ -238,14 +233,10 @@ public abstract class PageGaleria extends PageBase {
 	 * Indica si los artículos de la galería realmente están ordenados por precio ascendente o descendente
 	 */
 	public String getAnyArticleNotInOrder(FilterOrdenacion typeOrden) throws Exception {
-		switch (typeOrden) {
-			case RECOMENDADOS:
-				return "";
-			case PRECIO_ASC, PRECIO_DESC:
-				return secPrecios.getAnyPrecioNotInOrder(typeOrden, getListaArticulos());
-			default:
-				return "";
+		if (typeOrden==PRECIO_ASC || typeOrden==PRECIO_ASC) {
+			return secPrecios.getAnyPrecioNotInOrder(typeOrden, getListaArticulos());
 		}
+		return "";
 	}
 
 	public boolean preciosInIntervalo(int minimo, int maximo) throws Exception {

@@ -3576,19 +3576,19 @@ where
 </shoponline>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="支付宝" namefilter="zChina_Alipay" testpasarela='s' testpago='n'></pago>
+	nombre="支付宝" namefilter="zChina_Alipay" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="中国工商银行" namefilter="zChina_Commercial Bk" testpasarela='s' testpago='n'></pago>
+	nombre="中国工商银行" namefilter="zChina_Commercial Bk" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="中国工商银行" namefilter="zChina_Agricultural Bk" testpasarela='s' testpago='n'></pago>
+	nombre="中国工商银行" namefilter="zChina_Agricultural Bk" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="中国银行" namefilter="zChina_Bk" testpasarela='s' testpago='n'></pago>
+	nombre="中国银行" namefilter="zChina_Bk" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="中国建设银行" namefilter="zChina_Construction Bk" testpasarela='s' testpago='n'></pago>
+	nombre="中国建设银行" namefilter="zChina_Construction Bk" testpasarela='n' testpago='n'></pago>
 <!-- 
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
@@ -3596,37 +3596,37 @@ where
 -->
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="交通银行" namefilter="zChina_Bk of Communications" testpasarela='s' testpago='n'></pago>
+	nombre="交通银行" namefilter="zChina_Bk of Communications" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="招商银行" namefilter="zChina_Merchants Bk" testpasarela='s' testpago='n'></pago>
+	nombre="招商银行" namefilter="zChina_Merchants Bk" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="浦发银行" namefilter="zChina_Shanghai Develop Bk" testpasarela='s' testpago='n'></pago>
+	nombre="浦发银行" namefilter="zChina_Shanghai Develop Bk" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="兴业银行" namefilter="zChina_Industrial Bk" testpasarela='s' testpago='n'></pago>
+	nombre="兴业银行" namefilter="zChina_Industrial Bk" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="广发银行" namefilter="zChina_Guangfa Bk" testpasarela='s' testpago='n'></pago>
+	nombre="广发银行" namefilter="zChina_Guangfa Bk" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="北京银行" namefilter="zChina_Bk of Beijing" testpasarela='s' testpago='n'></pago>
+	nombre="北京银行" namefilter="zChina_Bk of Beijing" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="上海银行" namefilter="zChina_Bk of Shanghai" testpasarela='s' testpago='n'></pago>
+	nombre="上海银行" namefilter="zChina_Bk of Shanghai" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="杭州银行" namefilter="zChina_Bk of Hangzhou" testpasarela='s' testpago='n'></pago>
+	nombre="杭州银行" namefilter="zChina_Bk of Hangzhou" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="温州银行" namefilter="zChina_Bk of Wenzhou" testpasarela='s' testpago='n'></pago>
+	nombre="温州银行" namefilter="zChina_Bk of Wenzhou" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="宁波银行" namefilter="zChina_Bk of Ningbo" testpasarela='s' testpago='n'></pago>
+	nombre="宁波银行" namefilter="zChina_Bk of Ningbo" testpasarela='n' testpago='n'></pago>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
-	nombre="富滇银行" namefilter="zChina_Fudian Bk" testpasarela='s' testpago='n'></pago>
+	nombre="富滇银行" namefilter="zChina_Fudian Bk" testpasarela='n' testpago='n'></pago>
 <pago
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>

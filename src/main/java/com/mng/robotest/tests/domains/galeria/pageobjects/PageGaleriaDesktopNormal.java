@@ -2,6 +2,7 @@ package com.mng.robotest.tests.domains.galeria.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +17,7 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 	public static final String XP_ARTICULO = "//li[@id[contains(.,'product-key-id')]]";
 	private static final String XP_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
 	private static final String XP_LIST_ARTICLES = "//div[@class[contains(.,'columns')] and @id='list']";
+	private static final String XP_ICONO_UP_GALERY = "//div[@id='scroll-top-step' or @id='iconFillUp']";
 	
 	public PageGaleriaDesktopNormal() {
 		super();
@@ -123,6 +125,16 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 		}
 		return 2; 
 	}	
+	
+	@Override
+	public List<String> searchForArticlesNoValid(List<String> articleNames) {
+		return getArticlesNoValid(articleNames);
+	}
+	
+	@Override
+	public String getXPathIconUpGalery() {
+		return XP_ICONO_UP_GALERY;
+	}
 	
 	private String getRefFromId(WebElement articulo) {
 		String id = articulo.getAttribute("id");

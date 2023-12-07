@@ -21,7 +21,6 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHead
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
-import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 
@@ -36,7 +35,9 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	private final SecBannerHeadGallery secBannerHead = new SecBannerHeadGallery();
 	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
 	
+	public abstract String getXPathIconUpGalery();
 	public abstract void clickLinkColumnas(NumColumnas numColumnas);
+	public abstract List<String> searchForArticlesNoValid(List<String> articleNames);
 	
 	public void clickSubMenu(String submenu) {
 		secSubMenusGallery.clickSubMenu(submenu);
@@ -83,7 +84,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return (getXPathArticulo() + xpathPrecio + XP_ANCESTOR_ARTICLE);
 	}
 	
-	private static final String XP_ICONO_UP_GALERY = "//div[@id='scroll-top-step' or @id='iconFillUp']";
 	private static final String XP_HEADER_ARTICLES = "//div[@id[contains(.,'title')]]/h1";
 
 	public boolean isPage() {
@@ -206,7 +206,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	public String getXPathNombreArticuloWithString(String string) {
-		return (getXPathArticulo() + "//*[(" + classProductName + "]) and text()[contains(.,'" + string + "')]]");
+		return getXPathArticulo() + getXPathNombreRelativeToArticle() + "[text()[contains(.,'" + string + "')]]";
 	}
 	
 	public int getNumColumnas(NumColumnas numColumnas) {
@@ -227,13 +227,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return getElements(XP_HEARTH_ICON_RELATIVE_ARTICLE).size();
 	}
 
-	public boolean isArticuloWithStringInName(String string) {
-		String xpathArtWithString = getXPathNombreArticuloWithString(string);
-		return state(PRESENT, xpathArtWithString).check();
-	}	
- 
-
-	
 	@Override
 	public boolean isArticleRebajado(WebElement articulo) {
 		return (secPrecios.isArticleRebajado(articulo));
@@ -271,8 +264,8 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	@Override
-	public boolean backTo1erArticulo() throws InterruptedException {
-		return backTo1erArticulo(XP_ICONO_UP_GALERY);
+	public boolean backTo1erArticulo() {
+		return backTo1erArticulo(getXPathIconUpGalery());
 	}
 	
 	public List<String> getArticlesRebajadosWithLiteralInLabel(List<LabelArticle> listLabels) {
@@ -380,7 +373,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	public ArticuloScreen selectTallaAvailableArticle(int posArticulo) throws Exception {
 		waitLoadPage();
 		showTallasArticulo(posArticulo);
-		Talla talla = secTallas.selectTallaAvailableArticle(posArticulo);
+		var talla = secTallas.selectTallaAvailableArticle(posArticulo);
 		var articulo = getArticuloObject(posArticulo);
 		articulo.setTalla(talla);
 		return articulo;
@@ -421,11 +414,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		clickSlider(articulo, typeSlider);
 	}
 
-	public String getNombreArticulo(int numArticulo) {
-		return getElement("(" + getXPathArticulo() + ")[" + numArticulo + "]//span[" + classProductName + "]").getText().trim();
-	}
-
-	public List<String> getArticlesNoValid(List<String> articleNames) {
+	protected List<String> getArticlesNoValid(List<String> articleNames) {
 	    String xpathLitArticulos = getXPathArticleNames(articleNames);
 	    List<String> listTxtArtNoValidos = new ArrayList<>();
 	    if (state(PRESENT, xpathLitArticulos).check()) {
@@ -443,16 +432,23 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	}
 
 	private String getXPathArticleNames(List<String> articleNames) {
-	    String xpathLitArticulos = getXPathArticulo();
-	    xpathLitArticulos = xpathLitArticulos.substring(0, xpathLitArticulos.length() - 1);
-	    for (String article : articleNames) {
-	        xpathLitArticulos +=  
-	                " and text()[not(contains(.,'" + article + "'))]" +
-	                " and text()[not(contains(.,'" + article.toLowerCase() + "'))]" +
-	                " and text()[not(contains(.,'" + article.toUpperCase() + "'))]";
+	    //String xpathNombreArticulos = getXPathNombreArticulo();
+		String xpathNombreArticulos = getXPathArticulo() + getXPathNombreRelativeToArticle();
+	    xpathNombreArticulos+="//self::*[";
+	    for (int i=0; i<articleNames.size(); i++) {
+	    	var articleName = articleNames.get(i);
+	        xpathNombreArticulos +=  
+	                "text()[not(contains(.,'" + articleName + "'))] and " +
+	                "text()[not(contains(.,'" + articleName.toLowerCase() + "'))] and " +
+	                "text()[not(contains(.,'" + articleName.toUpperCase() + "'))]";
+	        
+	        if (i<articleNames.size()-1) {
+	        	xpathNombreArticulos+=" and ";
+	        }
+	        
 	    }
-	    xpathLitArticulos += "]";
-	    return xpathLitArticulos;
+	    xpathNombreArticulos += "]";
+	    return xpathNombreArticulos;
 	}
 
 	private List<String> getListTextosNoValidos(String xpath) {
@@ -461,7 +457,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	    for (var textoArticuloNoValido : listTextosArticulosNoValidos) {
 	        String nombre = textoArticuloNoValido.getText();
 	        String referencia = textoArticuloNoValido
-	                .findElement(By.xpath("./ancestor::" + getXPathArticulo().substring(2) + "]"))
+	                .findElement(By.xpath("./ancestor::" + getXPathArticulo().substring(2)))
 	                .getAttribute("id");
 	        listTxtArtNoValidos.add(nombre + " (" + referencia + ")");
 	    }

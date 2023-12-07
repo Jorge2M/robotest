@@ -11,7 +11,12 @@ import com.mng.robotest.testslegacy.data.Color;
 public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
 
 	private final CommonGaleriaKondo commonKondo = new CommonGaleriaKondo();
+	private static final String XP_ICONO_UP_GALERY = "//button[@aria-label='Scroll up']";
 	
+	@Override
+	public String getXPathIconUpGalery() {
+		return XP_ICONO_UP_GALERY;
+	}
 	
 	public PageGaleriaDesktopKondo() {
 		super();
@@ -69,6 +74,13 @@ public class PageGaleriaDesktopKondo extends PageGaleriaDesktop {
 	@Override
 	public int getLayoutNumColumnas() {
 		return commonKondo.getLayoutNumColumnas();
+	}
+	
+	@Override
+	public List<String> searchForArticlesNoValid(List<String> articleNames) {
+		scrollToPageFromFirst(2);
+		backTo1erArticulo();
+		return getArticlesNoValid(articleNames);
 	}
 	
 	public boolean isVisibleColorTags(List<Color> colors) {
