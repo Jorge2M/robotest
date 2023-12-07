@@ -234,7 +234,7 @@ public abstract class PageGaleria extends PageBase {
 	 * Indica si los artículos de la galería realmente están ordenados por precio ascendente o descendente
 	 */
 	public String getAnyArticleNotInOrder(FilterOrdenacion typeOrden) throws Exception {
-		if (typeOrden==PRECIO_ASC || typeOrden==PRECIO_ASC) {
+		if (typeOrden==PRECIO_ASC || typeOrden==PRECIO_DESC) {
 			return secPrecios.getAnyPrecioNotInOrder(typeOrden, getListaArticulos());
 		}
 		return "";

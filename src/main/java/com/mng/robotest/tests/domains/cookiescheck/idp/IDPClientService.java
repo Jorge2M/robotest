@@ -46,7 +46,7 @@ public class IDPClientService {
     }
 
     public IdentityToken clientCredentialsToken() throws IOException {
-        HttpRequest request = HttpRequest.newBuilder()
+        var request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .uri(URI.create(baseUrl + OAUTH_TOKEN_ENDPOINT + "?" + GRANT_TYPE + "=" + CLIENT_CREDENTIALS))
                 .build();
@@ -55,7 +55,7 @@ public class IDPClientService {
     }
 
     public IdentityToken resourceOwnerToken() throws IOException {
-        HttpRequest request = HttpRequest.newBuilder()
+        var request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .uri(URI.create(baseUrl + OAUTH_TOKEN_ENDPOINT))
                 .headers(GRANT_TYPE, PASSWORD)
@@ -64,7 +64,7 @@ public class IDPClientService {
     }
 
     public IdentityToken refreshToken(String refreshTokenValue) throws IOException {
-        HttpRequest request = HttpRequest.newBuilder()
+        var request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .uri(URI.create(baseUrl + OAUTH_TOKEN_ENDPOINT))
                 .headers(GRANT_TYPE, REFRESH_TOKEN, REFRESH_TOKEN, refreshTokenValue)
@@ -73,7 +73,7 @@ public class IDPClientService {
     }
 
     public SignatureKey signatureKey() throws IOException {
-        HttpRequest request = HttpRequest.newBuilder()
+        var request = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create(baseUrl + OAUTH_TOKEN_KEY_ENDPOINT))
                 .build();
@@ -97,5 +97,6 @@ public class IDPClientService {
         }
         return null;
     }
+    
 }
 

@@ -10,7 +10,6 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.ValidatorContentBolsa;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa;
-import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
@@ -22,11 +21,13 @@ import com.mng.robotest.tests.repository.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
+import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa.*;
 import static com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps.FluxBolsaCheckout.*;
 import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
+import static com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa.*;
 
 public class SecBolsaSteps extends StepBase {
 
@@ -52,7 +53,7 @@ public class SecBolsaSteps extends StepBase {
 		if (channel.isDevice()) {
 			closeInMobil();
 		} else {
-			forceStateBolsaTo(StateBolsa.CLOSED);
+			forceStateBolsaTo(CLOSED);
 		}
 	}
 
@@ -66,7 +67,7 @@ public class SecBolsaSteps extends StepBase {
 
 	@Validation (description="Desaparece la bolsa " + SECONDS_WAIT)
 	private boolean checkBolsaDisappears(int seconds) {
-		return (secBolsa.isInStateUntil(StateBolsa.CLOSED, seconds));
+		return (secBolsa.isInStateUntil(CLOSED, seconds));
 	}
 
 	@Step (
@@ -79,7 +80,7 @@ public class SecBolsaSteps extends StepBase {
 
 	@Validation(description="La bolsa queda en estado #{stateBolsaExpected} " + SECONDS_WAIT)
 	private boolean validateBolsaInState(StateBolsa stateBolsaExpected, int seconds) {
-		return (secBolsa.isInStateUntil(stateBolsaExpected, seconds));
+		return secBolsa.isInStateUntil(stateBolsaExpected, seconds);
 	}
 
 	public void altaArticlosConColores(int numArticulos) throws Exception {
@@ -116,7 +117,7 @@ public class SecBolsaSteps extends StepBase {
 		}
 
 		if (isDesktop()) {
-			secBolsa.isInStateUntil(StateBolsa.OPEN, 10);
+			secBolsa.isInStateUntil(OPEN, 10);
 		}
 	}
 
@@ -164,7 +165,7 @@ public class SecBolsaSteps extends StepBase {
 	 	
 	 	checks.add(
 			"Es visible la capa/página correspondiente a la bolsa " + getLitSecondsWait(seconds),
-			secBolsa.isInStateUntil(StateBolsa.OPEN, seconds), state);
+			secBolsa.isInStateUntil(OPEN, seconds), state);
 	 	
 	 	checks.add(
 			"Aparece el botón \"Comprar\" " + getLitSecondsWait(seconds),
@@ -320,11 +321,12 @@ public class SecBolsaSteps extends StepBase {
 		description="Lincar con el artículo existente en la bolsa" + " #{articuloClickado.getReferencia()})", 
 		expected="El link al artículo es correcto")
 	public void clickArticuloBolsa(ArticuloScreen articuloClickado) {
-		secBolsa.setBolsaToStateIfNotYet(StateBolsa.OPEN);
+		secBolsa.setBolsaToStateIfNotYet(OPEN);
 		secBolsa.click1erArticuloBolsa();
 
 		String refArticulo = articuloClickado.getReferencia();
 		new PageFichaSteps().checkIsFichaArtDisponible(refArticulo, 3);
 		checksDefault();
 	}
+	
 }

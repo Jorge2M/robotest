@@ -85,7 +85,7 @@ public class SecMenusUserDevice extends PageBase {
 		return false;
 	}	
 	
-	public void MoveAndclickMenu(MenuUserDevice menu) {
+	public void moveAndclickMenu(MenuUserDevice menu) {
 		secCabecera.clickIconoMenuHamburguerMobil(true);
 		moveToElement(menu.getBy(app));
 		clickMenu(menu);

@@ -11,7 +11,8 @@ public class TestABmanagerSteps extends StepBase {
 	@Step (
 		description="Activar el TestAB <b>#{testAB.name()}</b> con la variante <b>#{variante}</b>",
 		expected="El TestAB se activa correctamente")
-	public void activateTestAB_GoogleExp(TestABGoogleExpImpl testAB, int variante) throws Exception {
+	public void activateTestABGoogleExp(TestABGoogleExpImpl testAB, int variante) throws Exception {
 		TestABmanager.activateTestAB(TestABactData.getNew(testAB, variante), channel, app, driver);
 	}
+	
 }

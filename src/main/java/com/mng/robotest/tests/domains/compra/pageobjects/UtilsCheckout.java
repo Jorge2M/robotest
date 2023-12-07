@@ -12,6 +12,8 @@ import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 public class UtilsCheckout {
 
+	private UtilsCheckout() {}
+	
 	public static float getImporteScreenFromIntegerAndDecimal(WebElement importeWeb) {
 		String precioArticulo = "";
 		

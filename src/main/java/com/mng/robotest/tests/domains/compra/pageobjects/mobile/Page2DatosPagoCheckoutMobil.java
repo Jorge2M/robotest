@@ -87,13 +87,10 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	 * @return el XPath correspondiente al link para plegar/desplegar los métodos de pago
 	 */
 	private String getXPathLinkFormasPagoFor(TypeActionLinkFP actionForLink) {
-		switch (actionForLink) {
-		case PLEGAR_PAGOS:
+		if (actionForLink==TypeActionLinkFP.PLEGAR_PAGOS) {
 			return XP_LINK_FORMAS_PAGO + "//self::*[@class[contains(.,'selected')]]";
-		case DESPLEGAR_PAGOS:
-		default:
-			return XP_LINK_FORMAS_PAGO + "//self::*[@class[not(contains(.,'selected'))]]";
 		}
+		return XP_LINK_FORMAS_PAGO + "//self::*[@class[not(contains(.,'selected'))]]";
 	}
 	
 	public boolean isPage(int seconds) {
@@ -134,8 +131,8 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 
 	public StateMethod getStateMethod(String nombrePago) {
-		WebElement radio = getElement(getXPathRadioPago(nombrePago));
-		String classRadio = radio.getAttribute("class");
+		var radioElem = getElement(getXPathRadioPago(nombrePago));
+		String classRadio = radioElem.getAttribute("class");
 		if (classRadio.contains("checked")) {
 			return StateMethod.SELECTED;
 		}
@@ -319,12 +316,11 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 	
 	public boolean isMarkedQuieroFactura() {
-		WebElement radio = getElement(XP_LINK_SOLICITAR_FACTURA);
+		var radio = getElement(XP_LINK_SOLICITAR_FACTURA);
 		return (
 			radio.getAttribute("checked")!=null &&
 			radio.getAttribute("checked").contains("true"));
 	}
-	
 
 	public void clickFinalizarCompraAndWait(int seconds) {
 		clickButtonFinalizarCompra();

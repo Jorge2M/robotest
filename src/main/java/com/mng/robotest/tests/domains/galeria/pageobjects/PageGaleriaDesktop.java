@@ -9,7 +9,6 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.article.LabelArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecColoresArticuloDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktop;
@@ -91,29 +90,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return state(PRESENT, xpath).check();
 	}
 	
-	private String getXPathLabel(LabelArticle label) {
-		String xpath = "//span[@class='product-list-label' and (";
-		for (int i=0; i<label.getListTraducciones().size(); i++) {
-			String labelTraduction = label.getListTraducciones().get(i);
-			xpath+="text()[contains(.,'" + labelTraduction + "')]";
-			if (i<label.getListTraducciones().size()-1) {
-				xpath+=" or ";
-			}
-		}
-		xpath+=")]";
-		return xpath;
-	}
-
-	private String getXPathDataArticuloRebajadoWithLabel(LabelArticle label) {
-		String xpathLabelWithLit = getXPathLabel(label);
-		return (getXPathDataArticuloOfType(TypeArticle.REBAJADO) + xpathLabelWithLit + "/..");
-	}
-
-	private String getXPathDataArticuloTemporadaXWithLabel(List<Integer> temporadasX, LabelArticle label) {
-		String xpathLabelWithLit = getXPathLabel(label);
-		return (getXPathArticuloTemporadasX(ControlTemporada.ARTICLES_FROM, temporadasX) + xpathLabelWithLit + "/..");
-	}
-
 	String getXPathArticuloFromPagina(int pagina, TypeArticleDesktop sizeArticle) {
 		String xpathPagina = getXPathPagina(pagina);
 		return  (xpathPagina + getXPathArticulo(sizeArticle));
@@ -268,27 +244,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return backTo1erArticulo(getXPathIconUpGalery());
 	}
 	
-	public List<String> getArticlesRebajadosWithLiteralInLabel(List<LabelArticle> listLabels) {
-		List<String> dataTextArticles = new ArrayList<>();
-		for (var label : listLabels) {
-			String xpathLit = getXPathDataArticuloRebajadoWithLabel(label);
-			dataTextArticles.addAll(getDataFromArticlesLiteral(xpathLit));
-		}
-		return dataTextArticles;
-	}
-	
-	public List<String> getArticlesTemporadaxRebajadosWithLiteralInLabel(List<Integer> listTemporadas, List<LabelArticle> listLabels) {
-		var listArtSaleWithLabel = getArticlesRebajadosWithLiteralInLabel(listLabels);
-		if (listArtSaleWithLabel.isEmpty()) {
-			return listArtSaleWithLabel;
-		}
-		
-		List<String> listArtTempX = getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM, listTemporadas);
-		List<String> common = new ArrayList<>(listArtTempX);
-		common.retainAll(listArtSaleWithLabel);
-		return common;
-	}
-	
 	public List<String> getArticles(TypeArticle typeArticle, List<Integer> listTemporadas) {
 		var listArtOfType = getArticlesOfType(typeArticle);
 		if (!listArtOfType.isEmpty()) {
@@ -310,15 +265,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return (getDataFromArticlesLiteral(xpathLit));
 	}
 	
-	public List<String> getArticlesTemporadaXWithLiteralInLabel(List<Integer> temporadasX, List<LabelArticle> listLabels) {
-		List<String> dataTextArticles = new ArrayList<>();
-	   	for (var label : listLabels) {
-	   		String xpathLit = getXPathDataArticuloTemporadaXWithLabel(temporadasX, label);
-			dataTextArticles.addAll(getDataFromArticlesLiteral(xpathLit));
-		}
-		return dataTextArticles;
-	}
-	
 	private List<String> getDataFromArticlesLiteral(String xpathLiteralArticle) {
 		List<String> dataTextArticles = new ArrayList<>();
 		for (var litWebEl : getElements(xpathLiteralArticle)) {
@@ -327,33 +273,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		}
 		return dataTextArticles;
 	}
-	
-	/**
-	 * @return lista de artículos que tienen ambas etiquetas
-	 */
-	public List<String> getArticlesTemporadaXWithLiteralInLabel(
-			List<Integer> temporadasX, LabelArticle label1, LabelArticle label2) {
-		List<String> listResult = new ArrayList<>();
-		var listArticles1 = getArticlesTemporadaXWithLiteralInLabel(temporadasX, Arrays.asList(label1));
-		if (listArticles1.isEmpty()) {
-			return listResult;
-		}
-		
-		var listArticles2 = getArticlesTemporadaXWithLiteralInLabel(temporadasX, Arrays.asList(label2));
-		if (listArticles2.isEmpty()) {
-			return listResult;
-		}
-			
-		for (String article1 : listArticles1) {
-			for (String article2 : listArticles2) {
-				if (article1.compareTo(article2)==0) {
-					listResult.add(article1);
-				}
-			}
-		}
-		
-		return listResult;
-	}	
 	
 	@Override
 	public void moveToArticleAndGetObject(int posArticulo) {

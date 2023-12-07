@@ -37,7 +37,7 @@ public class UtilsMangoTest extends PageBase {
 	public void goToPaginaInicio() throws Exception {
 		boolean existeLogo = SecCabecera.make().clickLogoMango();
 		if (!existeLogo) {
-			ITestContext ctx = getTestCase().getTestRunParent().getTestNgContext();
+			var ctx = getTestCase().getTestRunParent().getTestNgContext();
 			String urlPaginaPostAcceso = (String)ctx.getAttribute(Constantes.ATTR_URL_PAG_POST_ACCESO); 
 			if (urlPaginaPostAcceso!=null) {
 				driver.get(urlPaginaPostAcceso);

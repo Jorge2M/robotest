@@ -49,4 +49,5 @@ public class ModalChatBot extends PageBase {
 	public boolean isButtonVisible(String text, int seconds) {
 		return state(VISIBLE, getXPathButton(text)).wait(seconds).check();
 	}
+	
 }
