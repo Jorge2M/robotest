@@ -16,6 +16,7 @@ import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
+import static com.mng.robotest.testslegacy.data.CodIdioma.AR;
 
 public class Page2DatosPagoCheckoutMobil extends PageBase {
 	
@@ -143,7 +144,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	
 	public boolean isMethodInStateUntil(String nombrePago, StateMethod stateExpected, int seconds) {
 		for (int i=0; i<seconds; i++) {
-			StateMethod actualState = getStateMethod(nombrePago);
+			var actualState = getStateMethod(nombrePago);
 			if (actualState==stateExpected) {
 				return true;
 			}
@@ -340,6 +341,9 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	
 	public float getPrecioSubTotalFromResumen() {
 		var subtotalScreen = getElement(XP_PRECIO_SUBTOTAL);
+		if (isIdioma(AR)) {
+			return UtilsCheckout.getArabicNumber(subtotalScreen.getText());
+		}
 		return UtilsCheckout.getImporteScreenFromIntegerAndDecimal(subtotalScreen);
 	}
 	

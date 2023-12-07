@@ -342,8 +342,7 @@ public class PageCheckoutWrapper extends PageBase {
 		if (isMobile()) {
 			return pg2MobilCheckout.getPrecioSubTotalFromResumen();
 		}
-		String textImporte = pg1DktopCheckout.getPrecioSubTotalFromResumen();
-		return ImporteScreen.getFloatFromImporteMangoScreen(textImporte);
+		return pg1DktopCheckout.getPrecioSubTotalFromResumen();
 	}
 	
 	public float getImportSubtotalRounded(int decimalPlace) {

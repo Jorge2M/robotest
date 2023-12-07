@@ -177,7 +177,7 @@ public class CheckoutFlow extends StepBase {
 	private void test1rstPageCheckout() {
 		if ((dataPago.getFTCkout().checkPromotionalCode || dataPago.getFTCkout().userIsEmployee) && 
 			!isVotf()) {
-			if (dataPago.getFTCkout().userIsEmployee && ESPANA.isEquals(pais)) {
+			if (dataPago.getFTCkout().userIsEmployee && isCountry(ESPANA)) {
 				testInputCodPromoEmplSpain();
 			} else {
 				if (dataPago.getFTCkout().checkPromotionalCode) {

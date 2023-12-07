@@ -32,10 +32,14 @@ public class UtilsCheckout {
 		return ImporteScreen.getFloatFromImporteMangoScreen(precioArticulo);
 	}
 	
-	public float getArabicNumber(String arabicNumberString) throws ParseException {
+	public static float getArabicNumber(String importScreen) {
         var arabicFormat = NumberFormat.getInstance(new Locale("ar"));
-        var arabicNumber = arabicFormat.parse(arabicNumberString);
-        return arabicNumber.floatValue();
+        var arabicNumber = importScreen.replaceAll("[A-Za-z]", "");
+        try {
+        	return arabicFormat.parse(arabicNumber).floatValue();
+        } catch (ParseException e) {
+        	return 0;
+        }
 	}
 
 }

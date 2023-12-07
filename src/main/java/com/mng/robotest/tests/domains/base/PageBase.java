@@ -30,6 +30,8 @@ import com.mng.robotest.tests.domains.legal.legaltexts.FactoryLegalTexts;
 import com.mng.robotest.tests.domains.legal.legaltexts.LegalTextsPage;
 import com.mng.robotest.tests.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
+import com.mng.robotest.testslegacy.data.CodIdioma;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 
@@ -258,8 +260,15 @@ public class PageBase extends PageObjTM {
 	}	
 	protected boolean isVotf() {
 		return app==AppEcom.votf;
-	}	
+	}
 	
+	protected boolean isIdioma(CodIdioma codIdioma) {
+		return codIdioma.isEquals(dataTest.getIdioma());
+	}
+	protected boolean isCountry(PaisShop paisShop) {
+		return paisShop.isEquals(dataTest.getPais());
+	}
+
 	private void pushKey(Keys key, int times) {
 		var actions = new Actions(driver);
 		for (int i=0; i<times; i++) {

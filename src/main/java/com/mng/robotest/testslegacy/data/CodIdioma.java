@@ -1,5 +1,6 @@
 package com.mng.robotest.testslegacy.data;
 
+import com.mng.robotest.testslegacy.beans.IdiomaPais;
 
 public enum CodIdioma {
 	AL("Deutsch"),
@@ -42,5 +43,9 @@ public enum CodIdioma {
 	
 	public static CodIdioma from(String codIdioma) {
 		return CodIdioma.valueOf(codIdioma);
+	}
+	
+	public boolean isEquals(IdiomaPais idioma) {
+		return this.name().compareTo(idioma.getCodigo().name())==0;
 	}
 }

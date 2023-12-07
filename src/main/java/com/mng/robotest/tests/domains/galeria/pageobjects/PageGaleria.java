@@ -37,6 +37,7 @@ import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.AttributeArticle.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.StateFavorito.*;
 
 public abstract class PageGaleria extends PageBase {
 
@@ -354,12 +355,12 @@ public abstract class PageGaleria extends PageBase {
 			var hearthIcon = getElement(xPathIcon);
 			switch (typeAction) {
 				case MARCAR:
-					if (getStateHearthIcon(hearthIcon)!=StateFavorito.MARCADO) {
+					if (getStateHearthIcon(hearthIcon)!=MARCADO) {
 						return false;
 					}
 					break;
 				case DESMARCAR:
-					if (getStateHearthIcon(hearthIcon)!=StateFavorito.DESMARCADO) {
+					if (getStateHearthIcon(hearthIcon)!=DESMARCADO) {
 						return false;
 					}
 					break;
@@ -649,9 +650,9 @@ public abstract class PageGaleria extends PageBase {
 	
 	public StateFavorito getStateHearthIcon(WebElement hearthIcon) {
 		if (hearthIcon.getAttribute("class").contains("icon-fill")) {
-			return StateFavorito.MARCADO;
+			return MARCADO;
 		}
-		return StateFavorito.DESMARCADO;
+		return DESMARCADO;
 	}
 	public int selectColoresAndReturnNumArticles(List<Color> colorsToSelect) {
 		secFiltros.selecFiltroColores(colorsToSelect);
