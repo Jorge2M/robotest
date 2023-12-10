@@ -30,7 +30,7 @@ public class Com001 extends TestBase {
 			.getCredentials(SecretType.SHOP_PERFORMANCE_USER)
 			.getPassword());
 		
-		ConfigCheckout configCheckout = ConfigCheckout.config()
+		var configCheckout = ConfigCheckout.config()
 				.checkPagos()
 				.checkMisCompras()
 				.emaiExists()

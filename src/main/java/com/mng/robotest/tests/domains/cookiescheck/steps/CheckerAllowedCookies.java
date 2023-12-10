@@ -45,13 +45,13 @@ public class CheckerAllowedCookies implements Checker {
 			.info(getInfoError(resultCheck))
 			.code("COOKIE_TRUST")			
 			.store(NONE)
-			.send(SendType.Alert).build());
+			.send(SendType.ALERT).build());
 		
 		return checks;
 	}
 	
 	private static String getInfoError(Pair<Boolean, List<Cookie>> resultCheck) {
-		if (!resultCheck.getLeft()) {
+		if (Boolean.FALSE.equals(resultCheck.getLeft())) {
 			String info ="Se detectan las siguientes cookies no permitidas:<ul>";
 			for (var cookie : resultCheck.getRight()) {
 				info+="<li>" + cookie.toString() + "</li>";

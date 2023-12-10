@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.tests.domains.ficha.pageobjects.SecProductDescrDevice.TypeStatePanel.*;
 
 public class SecProductDescrDevice extends PageBase {
 
@@ -18,19 +18,19 @@ public class SecProductDescrDevice extends PageBase {
 	public enum TypePanel {
 		DESCRIPTION(
 			"//div[@id='descriptionPanel']", "//div[@class[contains(.,'product-description')]]",
-			Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), TypeStatePanel.UNFOLDED),
+			Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), UNFOLDED),
 		COMPOSITION(
 			"//div[@id='compositionPanel']", "//div[@class[contains(.,'more-info')]]",
-			Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), TypeStatePanel.FOLDED),
+			Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), FOLDED),
 		SHIPMENT(
 			"//div[@id='shipmentPanel']", "//div[@class[contains(.,'shipment-and-returns')]]",
-			Arrays.asList(AppEcom.shop, AppEcom.votf), TypeStatePanel.FOLDED), 
+			Arrays.asList(AppEcom.shop, AppEcom.votf), FOLDED), 
 		RETURNS(
 			"//div[@id='returnsPanel']", "//div[@class[contains(.,'shipment-and-returns')]]",
-			Arrays.asList(AppEcom.shop, AppEcom.votf), TypeStatePanel.FOLDED),
+			Arrays.asList(AppEcom.shop, AppEcom.votf), FOLDED),
 		KC_SAFETY(
 			"//div[@id='kcSafetyPanel']", "//div[@id='kcSafetyPanel']", //?
-			Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), TypeStatePanel.MISSING);
+			Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), MISSING);
 		
 		private final String xPathDesktop;
 		private final String xPathDevice;
@@ -71,12 +71,12 @@ public class SecProductDescrDevice extends PageBase {
 	public TypeStatePanel getStatePanelAfterClick(TypeStatePanel stateOriginal) {
 		switch (stateOriginal) {
 		case FOLDED:
-			return TypeStatePanel.UNFOLDED;
+			return UNFOLDED;
 		case UNFOLDED:
-			return TypeStatePanel.FOLDED;
+			return FOLDED;
 		case MISSING:
 		default:
-			return TypeStatePanel.MISSING;
+			return MISSING;
 		}
 	}
 	
@@ -84,30 +84,30 @@ public class SecProductDescrDevice extends PageBase {
 		waitMillis(200);
 		String xpathPanel = typePanel.getXPath(channel, app);
 		if (!state(PRESENT, xpathPanel).check()) {
-			return TypeStatePanel.MISSING;
+			return MISSING;
 		}
 		
 		var panel = getElement(xpathPanel);
 		if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {
 			By byCapa = By.xpath(".//div[@class[contains(.,'collapsible-info-body')]]");
 			if (state(PRESENT, panel).by(byCapa).check()) {
-				WebElement capa = driver.findElement(byCapa);
-				if (capa.getAttribute("class").contains("-opened")) {
-					return TypeStatePanel.UNFOLDED;
+				var capaElem = driver.findElement(byCapa);
+				if (capaElem.getAttribute("class").contains("-opened")) {
+					return UNFOLDED;
 				}
 			} else {
-				return TypeStatePanel.UNFOLDED;
+				return UNFOLDED;
 			}
 		} else {
 			if (panel.getAttribute("class").contains("-active")) {
-				return TypeStatePanel.UNFOLDED;
+				return UNFOLDED;
 			}
 		}
-		return TypeStatePanel.FOLDED;
+		return FOLDED;
 	}
 	
 	public boolean isPanelInStateUntil(TypePanel typePanel, TypeStatePanel stateExpected, int maxSeconds) {
-		TypeStatePanel statePanel = getStatePanel(typePanel);
+		var statePanel = getStatePanel(typePanel);
 		int seconds=0;
 		while (statePanel!=stateExpected && seconds<maxSeconds) {
 			waitMillis(1000);
@@ -115,11 +115,12 @@ public class SecProductDescrDevice extends PageBase {
 			statePanel = getStatePanel(typePanel);
 		}
 
-		return (statePanel==stateExpected);
+		return statePanel==stateExpected;
 	}
 
 	public void clickPanel(TypePanel typePanel) {
 		String xpathPanelLink = typePanel.getXPathLink(channel, app);
 		click(xpathPanelLink).exec();
 	}
+	
 }

@@ -10,16 +10,16 @@ import org.openqa.selenium.WebDriver;
 import com.github.jorge2m.testmaker.domain.suitetree.StepTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.webdriver.maker.FactoryWebdriverMaker.EmbeddedDriver;
-import com.github.jorge2m.testmaker.testreports.stepstore.EvidenceStorer;
 import com.github.jorge2m.testmaker.testreports.stepstore.StepEvidence;
+import com.github.jorge2m.testmaker.testreports.stepstore.StepEvidenceStorer;
 import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class ErrorStorer extends EvidenceStorer {
+public class ErrorStorer extends StepEvidenceStorer {
 
 	public ErrorStorer() {
-		super(StepEvidence.ErrorPage);
+		super(StepEvidence.ERROR_PAGE);
 	}
 	
 	@Override

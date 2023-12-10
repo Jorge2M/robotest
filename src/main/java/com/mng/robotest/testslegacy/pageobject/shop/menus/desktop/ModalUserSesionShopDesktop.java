@@ -71,7 +71,7 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		return false;
 	}	
 	
-	public void MoveAndclickMenu(MenuUserDesktop menu) {
+	public void moveAndclickMenu(MenuUserDesktop menu) {
 		moveToElement(menu.getBy());
 		clickMenu(menu);
 	}

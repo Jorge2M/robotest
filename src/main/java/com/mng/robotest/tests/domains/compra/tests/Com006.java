@@ -21,7 +21,7 @@ public class Com006 extends TestBase {
 		dataTest.setPais(ITALIA_PAIS);
 		dataTest.setIdioma(ITALIANO);
 		
-		ConfigCheckout configCheckout = ConfigCheckout.config()
+		var configCheckout = ConfigCheckout.config()
 				.checkMisCompras()
 				.emaiExists().build();
 		

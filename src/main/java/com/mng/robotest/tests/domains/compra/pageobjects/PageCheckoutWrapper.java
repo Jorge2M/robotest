@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.compra.pageobjects;
 
 import org.openqa.selenium.StaleElementReferenceException;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.beans.PreciosArticulo;
 import com.mng.robotest.tests.domains.compra.pageobjects.desktop.Page1DktopCheckout;
@@ -433,7 +432,7 @@ public class PageCheckoutWrapper extends PageBase {
 
 		//En el caso de móvil existen 3 páginas de checkout y no tenemos claro si estamos en la de los métodos de pago 
 		//así que si existe, clickamos el link a la página-2 del checkout con los métodos de pago		
-		if (channel==Channel.mobile) {
+		if (isMobile()) {
 			pg2MobilCheckout.clickLink2DatosPagoIfVisible();
 		}
 	}

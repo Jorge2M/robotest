@@ -2,9 +2,7 @@ package com.mng.robotest.testslegacy.steps.navigations.shop;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
@@ -38,7 +36,6 @@ import com.mng.robotest.testslegacy.beans.Pago;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.beans.TypePago;
 import com.mng.robotest.testslegacy.datastored.DataPago;
-import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.generic.beans.ValeDiscount;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalCambioPais;
@@ -190,7 +187,7 @@ public class CheckoutFlow extends StepBase {
 			}
 		}
 		
-		if (isVotf() && dataTest.getCodigoPais().compareTo("001")==0) {
+		if (isVotf() && isCountry(ESPANA)) {
 			new Page1DktopCheckoutSteps().stepIntroduceCodigoVendedorVOTF("111111");
 		}
 	}
@@ -312,7 +309,7 @@ public class CheckoutFlow extends StepBase {
 		description="Nos posicionamos en la página inicial", 
 		expected="La acción se ejecuta correctamente")
 	private void fluxQuickInitToCheckout() throws Exception {
-		DataPedido dataPedido = dataPago.getDataPedido();
+		var dataPedido = dataPago.getDataPedido();
 		new UtilsMangoTest().goToPaginaInicio();
 		
 		//(en Chrome, cuando existe paralelización en ocasiones se pierden las cookies cuando se completa un pago con pasarela externa)
@@ -333,8 +330,8 @@ public class CheckoutFlow extends StepBase {
 	
 	private void validaPasarelasPagoPais() throws Exception {
 		var listPagosToTest = getListPagosToTest(dataPago.getFTCkout().userIsEmployee);
-		for (Iterator<Pago> it = listPagosToTest.iterator(); it.hasNext(); ) {
-			Pago pagoToTest = it.next();
+		for (var it = listPagosToTest.iterator(); it.hasNext(); ) {
+			var pagoToTest = it.next();
 			dataPago.setPago(pagoToTest);
 			String urlPagChekoutToReturn = driver.getCurrentUrl();
 			checkPasarelaPago();
@@ -352,7 +349,7 @@ public class CheckoutFlow extends StepBase {
 		List<Pago> listPagosToTest = new ArrayList<>();
 		var ctx = getTestCase().getTestRunContext();
 		var listPagosPais = pais.getListPagosForTest(app, isEmpl);
-		for (Pago pagoPais : listPagosPais) {
+		for (var pagoPais : listPagosPais) {
 			if (pagoPais.isNeededTestPasarelaDependingFilter(channel, app, ctx)) {
 				listPagosToTest.add(pagoPais);
 			}
@@ -361,7 +358,7 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	private TestCaseTM getTestCase() throws NotFoundException {
-		Optional<TestCaseTM> testCaseOpt = TestMaker.getTestCase();
+		var testCaseOpt = TestMaker.getTestCase();
 		if (!testCaseOpt.isPresent()) {
 		  throw new NotFoundException("Not found TestCase");
 		}
@@ -369,8 +366,8 @@ public class CheckoutFlow extends StepBase {
 	}
 
 	private void checkPasarelaPago() throws Exception {
-		DataPedido dataPedido = dataPago.getDataPedido(); 
-		Pago pagoPais = dataPedido.getPago();
+		var dataPedido = dataPago.getDataPedido(); 
+		var pagoPais = dataPedido.getPago();
 		try {
 			if (!isMobile()) {
 				checkoutSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
@@ -400,7 +397,7 @@ public class CheckoutFlow extends StepBase {
 	 *	 Movil  : se selecciona los botones "Ver resumen" y "Confirmación del pago)
 	 */
 	private void aceptarCompraDesdeMetodosPago() {
-		DataPedido dataPedido = dataPago.getDataPedido();
+		var dataPedido = dataPago.getDataPedido();
 		dataPedido.setCodtipopago("R");
 		if (!isMobile()) {
 			checkoutSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
@@ -413,8 +410,8 @@ public class CheckoutFlow extends StepBase {
 	
 	private boolean iCanExecPago(PagoSteps pagoSteps) {
 		boolean validaPagos = pagoSteps.dataPago.getFTCkout().checkPagos;
-		Pago pagoPais = pagoSteps.dataPago.getDataPedido().getPago();
-		TypeAccess typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
+		var pagoPais = pagoSteps.dataPago.getDataPedido().getPago();
+		var typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		return (
 			//No estamos en el entorno productivo
 			!isPRO() &&
