@@ -2,11 +2,14 @@ package com.mng.robotest.tests.conf.testab;
 
 import static com.mng.robotest.tests.conf.testab.TestABOptimizeImpl.*;
 
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.InvalidCookieDomainException;
 
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.testab.TestABactData;
 import com.github.jorge2m.testmaker.service.testab.manager.TestABmanager;
 import com.mng.robotest.tests.domains.base.PageBase;
@@ -34,9 +37,21 @@ public class TestABactive extends PageBase {
 		TestABmanager.activateTestsAB(testABs, channel, app, driver);
 	}
 	
-	private void activateOptimizelly() throws Exception {
-		//Force TestABs to original variant 
-		var cookieClientId = new Cookie("client_id", "robotest");
+	private void activateOptimizelly() {
+		//Force TestABs to original variant
+		Cookie cookieClientId = new Cookie("client_id", "robotest");
+		try {
+			setCookieOptimizelly(cookieClientId);
+		} catch (InvalidCookieDomainException | URISyntaxException e) {
+			String cookieDomain = "";
+			String cookieName = "";
+			cookieDomain = cookieClientId.getDomain();
+			cookieName = cookieClientId.getName();
+			Log4jTM.getLogger().warn("Problem setting cookie {}/{}", cookieDomain, cookieName, e);
+		}
+	}
+
+	private Cookie setCookieOptimizelly(Cookie cookieClientId) throws URISyntaxException {
 		driver.manage().addCookie(cookieClientId);
 		
 		//Si no existe darla de alta con dominio tipo .mango.com
@@ -50,6 +65,7 @@ public class TestABactive extends PageBase {
 					"/", null, false, false);
 			driver.manage().addCookie(cookieClientId2);
 		}
+		
+		return cookieClientId;
 	}
-	
 }
