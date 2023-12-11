@@ -7,9 +7,9 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroPersonalizacionShop;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
-import com.mng.robotest.testslegacy.data.PaisShop;
 
 import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
+import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 public class PageRegistroPersonalizacionShopSteps extends StepBase {
 
@@ -47,7 +47,7 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 		if (pais.getRegister().isCpost()) {
 			inputDataWithouBirthDate(data);
 		}
-		if (PaisShop.getPais(pais)!=PaisShop.COREA_DEL_SUR) {
+		if (!isCountry(COREA_DEL_SUR)) {
 			inputBirthDate(data.getDateOfBirth());
 		}
 	}

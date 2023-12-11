@@ -16,7 +16,8 @@ import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.DataMango;
-import com.mng.robotest.testslegacy.data.PaisShop;
+
+import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 public class Reg001 extends TestBase {
 
@@ -94,7 +95,7 @@ public class Reg001 extends TestBase {
 	}	
 
 	private boolean isCorea() {
-		return PaisShop.getPais(dataTest.getPais())==PaisShop.COREA_DEL_SUR;
+		return isCountry(COREA_DEL_SUR);
 	}
 
 }

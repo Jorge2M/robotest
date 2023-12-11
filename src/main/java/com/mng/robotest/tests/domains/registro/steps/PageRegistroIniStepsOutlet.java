@@ -10,11 +10,11 @@ import com.mng.robotest.tests.domains.registro.beans.DataRegistro;
 import com.mng.robotest.tests.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroIniOutlet;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.github.jorge2m.testmaker.conf.StoreType.*;
+import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 public class PageRegistroIniStepsOutlet extends StepBase {
 	
@@ -37,8 +37,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		expected=
 			"No aparece ningún mensaje de dato incorrecto")
 	public Map<String,String> sendDataAccordingCountryToInputs(String emailNonExistent, boolean clickPubli) {
-		Map<String,String> dataSended = 
-				pgRegistroIni.sendDataAccordingCountryToInputs(emailNonExistent, clickPubli, channel);
+		var dataSended = pgRegistroIni.sendDataAccordingCountryToInputs(emailNonExistent, clickPubli);
 		validateNotAreErrorMessageInCorrectFields();
 		return dataSended;
 	}
@@ -47,7 +46,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 		description="No aparece mensaje de error en los campos con datos correctos",
 		level=WARN)
 	public boolean validateNotAreErrorMessageInCorrectFields() {
-		return (!pgRegistroIni.isVisibleAnyInputErrorMessage());
+		return !pgRegistroIni.isVisibleAnyInputErrorMessage();
 	}
 
 	@Step (
@@ -124,13 +123,13 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	@Validation (
 		description="Aparece un error <b>Email ya registrado</b> " + SECONDS_WAIT)
 	private boolean validaEmailYaRegistradoShown(int seconds) {
-		return(pgRegistroIni.isVisibleErrorUsrDuplicadoUntil(seconds));
+		return pgRegistroIni.isVisibleErrorUsrDuplicadoUntil(seconds);
 	}
 	
 	@Validation (
 		description="Aparece un error <b>Email incorrecto</b>")
 	private boolean validaEmailIncorrectShown() {
-		return(pgRegistroIni.isVisibleErrorEmailIncorrecto());
+		return pgRegistroIni.isVisibleErrorEmailIncorrecto();
 	}
 	
 	@Validation
@@ -162,7 +161,7 @@ public class PageRegistroIniStepsOutlet extends StepBase {
 	}
 
 	public void validaIsRGPDVisible() {
-		if (PaisShop.COREA_DEL_SUR.isEquals(pais)) {
+		if (isCountry(COREA_DEL_SUR)) {
 			validateRGPDInCorea();
 			return;
 		}

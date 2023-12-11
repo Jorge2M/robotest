@@ -8,10 +8,10 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.ModalDroppoints;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.SecConfirmDatos;
-import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 public class SecConfirmDatosSteps extends StepBase {
 
@@ -25,8 +25,7 @@ public class SecConfirmDatosSteps extends StepBase {
 	}
 	
 	public void setDataIfNeeded() {
-		String codigoPais = dataTest.getCodigoPais();
-		if (PaisShop.DEUTSCHLAND == PaisShop.from(codigoPais) &&
+		if (isCountry(DEUTSCHLAND) &&
 			secConfirmDatos.isVisibleInputPostNumberIdDeutschland()) {
 			inputPostNumberId("0038594352");
 		}

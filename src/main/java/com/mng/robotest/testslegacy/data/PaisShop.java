@@ -184,11 +184,12 @@ public enum PaisShop {
 	}
 	
 	public static PaisShop from(String codigoPais) {
-		for (PaisShop paisShop : PaisShop.values()) {
+		for (var paisShop : PaisShop.values()) {
 			if (paisShop.getCodigoPais().compareTo(codigoPais)==0) {
 				return paisShop;
 			}
 		}
 		return null;
 	}
+	
 }

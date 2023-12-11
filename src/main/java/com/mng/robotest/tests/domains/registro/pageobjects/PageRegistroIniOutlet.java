@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.Page2IdentCheckout;
 import com.mng.robotest.tests.domains.registro.beans.DataRegistro;
@@ -22,11 +21,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageRegistroIniOutlet extends PageBase {
 	
-//	private static final String XP_PESTANYA_REGISTRO = "//*[@class[contains(.,'registerTab')]]";
 	private static final String XP_HEADER_NEWS = "//div[@class[contains(.,'registerModal')]]//div[@class='info']";
-	
 	private static final String XP_NEWSLETTER_TITLE = XP_HEADER_NEWS + "//p[@class[contains(.,'newsletter-register-title')]]";
-	
 	private static final String XP_INPUT_NAME = "//input[@id[contains(.,'cfName')]]";
 	private static final String XP_INPUT_APELLIDOS = "//input[@id[contains(.,'cfSname')]]";
 	private static final String XP_INPUT_EMAIL = "//input[@id[contains(.,'cfEmail')]]";
@@ -64,7 +60,7 @@ public class PageRegistroIniOutlet extends PageBase {
 	private static final String MSG_USR_DUPLICADO_POST_CLICK = "Email ya registrado";
 
 	
-	private String getXPath_mensajeErrorFormulario(String mensajeError) {
+	private String getXPathMensajeErrorFormulario(String mensajeError) {
 		return ("//div[@class='formErrors']//li[text()[contains(.,'" + mensajeError + "')]]");
 	}
 	
@@ -87,10 +83,6 @@ public class PageRegistroIniOutlet extends PageBase {
 			return (new InputDataXPath("", "", ""));
 		}
 	}
-	
-//	public void clickRegisterTab() {
-//		click(XP_PESTANYA_REGISTRO).type(TypeClick.javascript).exec();
-//	}
 	
 	public boolean isPage(int seconds) {
 		return state(VISIBLE, XP_INPUT_NAME).wait(seconds).check();
@@ -140,12 +132,11 @@ public class PageRegistroIniOutlet extends PageBase {
 	}
 	
 	public Map<String,String> sendDataAccordingCountryToInputs(
-			String emailNonExistent, boolean clickPubli, Channel channel) {
-		return new Page2IdentCheckout().inputDataPorDefectoSegunPais(emailNonExistent, false, clickPubli, channel);
+			String emailNonExistent, boolean clickPubli) {
+		return new Page2IdentCheckout().inputDataPorDefectoSegunPais(emailNonExistent, false, clickPubli);
 	}
 	
 	public void sendDataToInputs(ListDataRegistro dataToSend) {
-		//clickRegisterTab();
 		for (DataRegistro dataInput : dataToSend.getDataPageInicial()) {
 			if (dataInput.dataRegType!=DataRegType.CODPAIS) {
 				sendKeysToInput(dataInput.dataRegType, dataInput.data);
@@ -187,7 +178,7 @@ public class PageRegistroIniOutlet extends PageBase {
 	}
 	
 	public boolean isVisibleErrorUsrDuplicadoUntil(int seconds) {
-		String xpathError = getXPath_mensajeErrorFormulario(MSG_USR_DUPLICADO_POST_CLICK);
+		String xpathError = getXPathMensajeErrorFormulario(MSG_USR_DUPLICADO_POST_CLICK);
 		return state(PRESENT, xpathError).wait(seconds).check();
 	}	
 	

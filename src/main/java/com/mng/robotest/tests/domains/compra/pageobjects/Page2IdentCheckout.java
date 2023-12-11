@@ -11,14 +11,12 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.tests.conf.factories.entities.EgyptCity;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.pageobject.shop.PopupFindAddress;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -405,10 +403,10 @@ public class Page2IdentCheckout extends PageBase {
 		String datoSeteado = "";
 		WebElement provinciaPais = getElementPriorizingDisplayed(XP_SELECT_PROV_PAIS);
 		if (provinciaPais!=null) {
-			if (PaisShop.getPais(pais)==UKRAINE && isDesktop()) {
+			if (isCountry(UKRAINE) && isDesktop()) {
 				return selectProvinciaUkraineDesktop();
 			}
-			if (PaisShop.getPais(pais)==EGYPT && egyptCity!=null) {
+			if (isCountry(EGYPT) && egyptCity!=null) {
 			    return selectProvinciaEgyptCity(provinciaPais);
 			}
 			
@@ -430,7 +428,7 @@ public class Page2IdentCheckout extends PageBase {
 		return FIRST_PROVINCIA_UKRANIE;
 	}
 	
-	public void setSelectProvPaisIfVisible(Map<String,String> datosRegistro, Channel channel) {
+	public void setSelectProvPaisIfVisible(Map<String,String> datosRegistro) {
 		String datoSeteado = setSelectProv1PaisIfVisible();
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("provinciaPais", datoSeteado);
@@ -544,8 +542,7 @@ public class Page2IdentCheckout extends PageBase {
 	}
 	
 	private String selectLocalidad(WebElement localidad, int posInSelect) {
-		if (PaisShop.getPais(pais)==EGYPT && 
-			egyptCity!=null) {
+		if (isCountry(EGYPT) && egyptCity!=null) {
 			new Select(localidad).selectByVisibleText(egyptCity.getCity());
 			return egyptCity.getCity();
 		}
@@ -614,7 +611,7 @@ public class Page2IdentCheckout extends PageBase {
 	}
 	
 	public Map<String,String> inputDataPorDefectoSegunPais(
-			String emailUsr, boolean testCharNoLatinos, boolean clickPubli, Channel channel) {
+			String emailUsr, boolean testCharNoLatinos, boolean clickPubli) {
 		
 		Map<String,String> datosSeteados = new HashMap<>();
 		String nombreUsr = "Jorge";
@@ -648,7 +645,7 @@ public class Page2IdentCheckout extends PageBase {
 			setCodPostalIfExistsAndWait(codPostalPais, datosSeteados);
 			setInputPoblacionIfVisible(cfCity, datosSeteados);
 			setSelectLocalidadesIfVisible(1, datosSeteados);
-			setSelectProvPaisIfVisible(datosSeteados, channel); // Desplegable provincia país (p.e. Turquía)
+			setSelectProvPaisIfVisible(datosSeteados); // Desplegable provincia país (p.e. Turquía)
 			setCheckCondicionesIfVisible(datosSeteados); // Selección aceptación de condiciones (actualmente sólo en Turquía)
 			setSelectLocalidadesProvCity(1, datosSeteados); // Desplegable específico de Turquía
 			setSelectDistrito(1, datosSeteados);

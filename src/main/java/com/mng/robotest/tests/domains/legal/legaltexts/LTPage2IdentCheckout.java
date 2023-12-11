@@ -7,7 +7,6 @@ import java.util.Arrays;
 import com.mng.robotest.tests.domains.legal.beans.LegalText;
 import com.mng.robotest.tests.domains.legal.beans.LegalTextGroup;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.data.PaisShop;
 
 public class LTPage2IdentCheckout extends LegalTextsPage {
 
@@ -55,12 +54,11 @@ public class LTPage2IdentCheckout extends LegalTextsPage {
 	
 	@Override
 	public LegalTextGroup getLegalTexts(Pais pais) {
-		if (PaisShop.getPais(pais)==CHINA ||
-			PaisShop.getPais(pais)==USA) {
+		if (isCountry(CHINA) || isCountry(USA)) {
 			return CHINA_USA;
 		}
 		
-		if (PaisShop.getPais(pais)==TURQUIA) { 
+		if (isCountry(TURQUIA)) { 
 			return TURQUIA_LT;
 		}
 		return RGPD;

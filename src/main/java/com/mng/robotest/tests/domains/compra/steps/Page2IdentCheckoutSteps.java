@@ -48,7 +48,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		saveImagePage=ALWAYS)
 	public Map<String, String> inputDataPorDefecto(String emailUsr, boolean inputDireccCharNoLatinos) {
 		var datosRegistro = 
-			pg2IdentCheckout.inputDataPorDefectoSegunPais(emailUsr, inputDireccCharNoLatinos, false, channel);
+			pg2IdentCheckout.inputDataPorDefectoSegunPais(emailUsr, inputDireccCharNoLatinos, false);
 		
 		setStepDescription(getStepDescription() + ". Utilizando los datos: "+ UtilsMangoTest.listaCamposHTML(datosRegistro)); 
 		checkIsVisibleContiueButton(5);

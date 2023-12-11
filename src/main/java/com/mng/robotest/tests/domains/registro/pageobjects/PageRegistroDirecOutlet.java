@@ -31,7 +31,7 @@ public class PageRegistroDirecOutlet extends PageBase {
 	
 	public void sendDataAccordingCountryToInputs(Map<String,String> dataRegistro) {
 		dataRegistro.putAll(new Page2IdentCheckout()
-				.inputDataPorDefectoSegunPais(dataRegistro.get("cfEmail"), false, false, channel));
+				.inputDataPorDefectoSegunPais(dataRegistro.get("cfEmail"), false, false));
 	}
 	
 	public void sendDataToInputs(ListDataRegistro dataToSend, int repeat) {
