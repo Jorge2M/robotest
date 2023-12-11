@@ -16,8 +16,8 @@ import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.Sub
 public class Linea implements Serializable {
 
 	private static final long serialVersionUID = -4709433951288421080L;
-	public enum TypeContentDesk {banners, articulos, vacio}
-	public enum TypeContentMobil {bloquesnuevo, bloquesrebaj, sublineas, menus2, articulos}
+	public enum TypeContentDesk { BANNERS, ARTICULOS, VACIO}
+	public enum TypeContentMobil { SUBLINEAS, MENUS2 }
 	
 	String id;
 	String outlet;

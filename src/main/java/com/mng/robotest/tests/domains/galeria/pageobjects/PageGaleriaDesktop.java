@@ -14,7 +14,6 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktopKondo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery;
-import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecCrossSelling;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecSubMenusGallery;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
@@ -32,7 +31,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	private final SecSubMenusGallery secSubMenusGallery = SecSubMenusGallery.make(app, dataTest.getPais());
 	private final SecColoresArticuloDesktop secColores = SecColoresArticuloDesktop.make(app, dataTest.getPais());
 	private final SecBannerHeadGallery secBannerHead = new SecBannerHeadGallery();
-	private final SecCrossSelling secCrossSelling = new SecCrossSelling();
 	
 	public abstract String getXPathIconUpGalery();
 	public abstract void clickLinkColumnas(NumColumnas numColumnas);

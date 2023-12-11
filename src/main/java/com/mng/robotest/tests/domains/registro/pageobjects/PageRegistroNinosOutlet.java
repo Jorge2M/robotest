@@ -4,7 +4,6 @@ import java.util.StringTokenizer;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.registro.beans.DataNino;
 import com.mng.robotest.tests.domains.registro.beans.ListDataNinos;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -48,13 +47,14 @@ public class PageRegistroNinosOutlet extends PageBase {
 	/* Repetimos la introducción de datos n times para paliar errores aleatorios de desaparición de datos ya introducidos
 	 */
 	public void setDataNinoIfNotExists(ListDataNinos listNinos, int nTimes) {
-		for (int i=0; i<nTimes; i++)
+		for (int i=0; i<nTimes; i++) {
 			setDataNinoIfNotExists(listNinos);
+		}
 	}
 	
 	public void setDataNinoIfNotExists(ListDataNinos listNinos) {
 		int i=1;
-		for (DataNino dataNino : listNinos.getListNinos()) {
+		for (var dataNino : listNinos.getListNinos()) {
 			String nombreNino = dataNino.getNombre();
 			String xpathInputNombreNino = getXPathInputNombre(i);
 			if (getElement(xpathInputNombreNino).getAttribute("value").compareTo(nombreNino)!=0) {

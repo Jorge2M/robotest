@@ -45,7 +45,7 @@ public class Mic001 extends TestBase {
 	private void checkSuscripciones() {
 		pageMiCuentaSteps.goToSuscripciones();
 		List<NewsLetter> listNewsletters = new ArrayList<>();
-		listNewsletters.add(NewsLetter.she);
+		listNewsletters.add(NewsLetter.SHE);
 		new PageSuscripcionesSteps().selectNewslettersAndGuarda(listNewsletters);
 	}
 

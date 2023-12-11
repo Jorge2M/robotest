@@ -86,8 +86,8 @@ public class Reg003 extends TestBase {
 		pgRegistroSegundaSteps.setDataAndLineasRandom("23/4/1974", paisConNinos, 2, dataRegister);
 		if (paisConNinos) {
 			var listaNinos = new ListDataNinos();
-			listaNinos.add(new DataNino(sexoType.nina, "Martina Muñoz Rancaño", "11/10/2010"));
-			listaNinos.add(new DataNino(sexoType.nina, "Irene Muñoz Rancaño", "29/8/2016"));
+			listaNinos.add(new DataNino(sexoType.NINA, "Martina Muñoz Rancaño", "11/10/2010"));
+			listaNinos.add(new DataNino(sexoType.NINA, "Irene Muñoz Rancaño", "29/8/2016"));
 			pgRegistroNinosSteps.sendNinoDataAndContinue(listaNinos);
 		}
 	}	

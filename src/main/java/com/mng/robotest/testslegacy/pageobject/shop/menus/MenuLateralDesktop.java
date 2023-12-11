@@ -19,7 +19,7 @@ public interface MenuLateralDesktop {
 	abstract int getLevel();
 	
 	public enum Element {
-		article, campaign, slider, map, iframe
+		ARTICLE, CAMPAIGN, SLIDER, MAP, IFRAME
 	}
 
 

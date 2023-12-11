@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.compra.pageobjects.secsoynuevo;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.base.datatest.DataTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -20,7 +19,7 @@ public abstract class SecSoyNuevo extends PageBase {
 	public abstract void setCheckPubliNewsletter(RadioState action);
 	public abstract void setCheckConsentimiento(RadioState action);
 	
-	public static SecSoyNuevo make(Channel channel, DataTest dataTest) {
+	public static SecSoyNuevo make(Channel channel) {
 		if (channel!=Channel.mobile) {
 			return new SecSoyNuevoDesktop();
 		}

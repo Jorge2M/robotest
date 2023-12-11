@@ -5,7 +5,6 @@ import java.util.List;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
-import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Color;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -17,7 +16,7 @@ public class SecFiltrosTabletOutlet extends PageBase implements SecFiltros {
 	private static final String XP_LINK_ORDEN_WITH_TAG = "//a[text()[contains(.,'" + TAG_ORDENACION + "')]]";
 	private static final String XP_LINK_COLOR_WITH_TAG = "//label[@for='color_" + TAG_COLOR + "']/a";
 	
-	public static SecFiltrosTabletOutlet make(Pais pais) {
+	public static SecFiltrosTabletOutlet make() {
 		return new SecFiltrosTabletOutlet();
 	}
 	

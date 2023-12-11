@@ -4,12 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuLateralDesktop.Element;
+import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuLateralDesktop.Element.*;
 
 public enum GroupMenu {
 	
-	ARTICLES(Arrays.asList(Element.article)),
-	CAMPAIGNS(Arrays.asList(Element.article, Element.campaign)),
-	UNKNOWN(Arrays.asList(Element.article, Element.campaign, Element.slider, Element.map, Element.iframe));
+	ARTICLES(Arrays.asList(ARTICLE)),
+	CAMPAIGNS(Arrays.asList(ARTICLE, CAMPAIGN)),
+	UNKNOWN(Arrays.asList(ARTICLE, CAMPAIGN, SLIDER, MAP, IFRAME));
 	
 	private List<Element> elementsCanBeContained;
 	private GroupMenu(List<Element> elementsCanBeContained) {

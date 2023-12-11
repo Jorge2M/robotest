@@ -2,6 +2,7 @@ package com.mng.robotest.testslegacy.beans;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -45,7 +46,7 @@ public class IdiomaPais implements Serializable {
 			return Arrays.asList();
 		}
 		return Stream.of(tiendas.split(","))
-				.map(a -> AppEcom.valueOf(a)).toList();
+				.map(AppEcom::valueOf).toList();
 	}
 
 	
@@ -59,7 +60,7 @@ public class IdiomaPais implements Serializable {
 	}
 
 	//Función que obtiene la URL de acceso al país/idioma
-	public String getUrlIdioma(String urlBase) throws Exception {
+	public String getUrlIdioma(String urlBase) throws URISyntaxException {
 		URI uri = new URI(urlBase);
 		return (urlBase.replace(uri.getPath(), "") + "/" + getAcceso());			
 	}

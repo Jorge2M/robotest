@@ -18,13 +18,13 @@ public class Shoponline implements Serializable {
 	private static final long serialVersionUID = -8214276147980655399L;
 
 	//Líneas correspondientes a las 5 básicas ("kids" sigue apareciendo en algunos países sin venta como Bolivia) 
-	public enum LineaBasica { she, he, nina, nino, kids, teen }	
+	public enum LineaBasica { SHE, HE, NINA, NINO, KIDS, TEEN }	
 
 	@XmlElement(name="linea") 
-	List<Linea> Lineas = new LinkedList<>();
+	List<Linea> lineas = new LinkedList<>();
 	
 	public List<Linea> getLineas() {
-		return this.Lineas;
+		return this.lineas;
 	}
 	
 	public List<Linea> getLineasToTest(AppEcom app) {
@@ -86,7 +86,7 @@ public class Shoponline implements Serializable {
 	public Linea getLinea(LineaType lineaId) {
 		Linea lineaRet = null;
 		boolean encontrada = false;
-		Iterator<Linea> it = this.Lineas.iterator();
+		Iterator<Linea> it = this.lineas.iterator();
 		while (!encontrada && it.hasNext()) {
 			Linea lineaTmp = it.next();
 			if (lineaTmp.getType() == lineaId) {
@@ -100,7 +100,7 @@ public class Shoponline implements Serializable {
 	
 	public int getNumLineas(AppEcom app) {
 		int numLineas = 0;
-		for (Linea linea : this.Lineas) {
+		for (Linea linea : this.lineas) {
 			if (this.stateLinea(linea, app)==ThreeState.TRUE) {
 				numLineas+=1;
 			}
@@ -114,7 +114,7 @@ public class Shoponline implements Serializable {
 	 */
 	public List<Linea> getListLineasTiendas(AppEcom app) {
 		List<Linea> listLineas = new ArrayList<>();
-		for (Linea linea : this.Lineas) {
+		for (Linea linea : this.lineas) {
 			if (this.stateLinea(linea, app)==ThreeState.TRUE && this.isLineaTienda(linea)) {
 				listLineas.add(linea);
 			}

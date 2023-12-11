@@ -5,7 +5,7 @@ import com.mng.robotest.tests.domains.compra.pageobjects.secsoynuevo.SecSoyNuevo
 
 public class Page1IdentCheckout extends PageBase {
 	
-	private final SecSoyNuevo secSoyNuevo = SecSoyNuevo.make(channel, dataTest);
+	private final SecSoyNuevo secSoyNuevo = SecSoyNuevo.make(channel);
 
 	public SecSoyNuevo getSecSoyNuevo() {
 		return secSoyNuevo;

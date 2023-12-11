@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.registro.beans;
 
 
 public class DataNino {
-	public enum sexoType {nina, nino}
+	public enum sexoType { NINA, NINO }
 	
 	private sexoType sexo;
 	private String nombre;

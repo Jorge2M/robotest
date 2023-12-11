@@ -152,20 +152,20 @@ public class PageLanding extends PageBase {
 		for (var element : elementsCanBeContained) {
 			boolean elementContained = false;
 			switch (element) {
-			case article:
+			case ARTICLE:
 				var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 				elementContained = pageGaleria.isVisibleArticleUntil(1, 3);
 				break;
-			case campaign:
+			case CAMPAIGN:
 				elementContained = ManagerBannersScreen.isBanners();
 				break;
-			case slider:
+			case SLIDER:
 				elementContained = haySliders();
 				break;
-			case map:
+			case MAP:
 				elementContained = hayMaps();
 				break;
-			case iframe:
+			case IFRAME:
 				elementContained = hayIframes();
 				break;
 			}

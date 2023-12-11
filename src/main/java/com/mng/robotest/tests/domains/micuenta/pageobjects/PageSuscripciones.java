@@ -7,7 +7,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageSuscripciones extends PageBase {
 
-	public enum NewsLetter { she, he, kids, teen }
+	public enum NewsLetter { SHE, HE, KIDS, TEEN }
 	
 	private static final String XP_BUTTON_GUARDAR_CAMBIOS = "//input[@type='submit' and @value[contains(.,'Guardar')]]";
 	private static final String XP_PAGE_RES_OK = "//*[text()[contains(.,'Preferencias actualizadas!')]]";
@@ -18,7 +18,7 @@ public class PageSuscripciones extends PageBase {
 	}
 	
 	private String getXPathRadioNewsletterClickable(NewsLetter idRadio) {
-		return ("//input[@data-component-id='SUBS_" + idRadio.toString() + "']/..");
+		return ("//input[@data-component-id='SUBS_" + idRadio.toString().toLowerCase() + "']/..");
 	}
 	
 	private String getXPathNewsletterDesmarcadas(String linea) {

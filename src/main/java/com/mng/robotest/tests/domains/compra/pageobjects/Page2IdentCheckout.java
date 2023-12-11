@@ -401,7 +401,7 @@ public class Page2IdentCheckout extends PageBase {
 	private static final String FIRST_PROVINCIA_UKRANIE = "Ananivskyi";
 	private static final String XP_OPTION_FIRST_PROV_UKRANIE = "//div[@class[contains(.,'choices')] and text()[contains(.,'" + FIRST_PROVINCIA_UKRANIE + "')]]";
 	
-	public String setSelectProv1PaisIfVisible(Channel channel) {
+	public String setSelectProv1PaisIfVisible() {
 		String datoSeteado = "";
 		WebElement provinciaPais = getElementPriorizingDisplayed(XP_SELECT_PROV_PAIS);
 		if (provinciaPais!=null) {
@@ -431,7 +431,7 @@ public class Page2IdentCheckout extends PageBase {
 	}
 	
 	public void setSelectProvPaisIfVisible(Map<String,String> datosRegistro, Channel channel) {
-		String datoSeteado = setSelectProv1PaisIfVisible(channel);
+		String datoSeteado = setSelectProv1PaisIfVisible();
 		if ("".compareTo(datoSeteado)!=0) {
 			datosRegistro.put("provinciaPais", datoSeteado);
 		}

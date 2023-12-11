@@ -23,7 +23,6 @@ public class SecFooter extends PageBase {
 	private static final List<AppEcom> FOOTER_ALL = Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf);
 	
 	private static final List<Channel> CHANNEL_DESKTOP = Arrays.asList(Channel.desktop);
-	private static final List<Channel> CHANNEL_MOBILE = Arrays.asList(Channel.mobile, Channel.tablet);
 	private static final List<Channel> CHANNEL_ALL = Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet);	
 	
 	public enum FooterLink {

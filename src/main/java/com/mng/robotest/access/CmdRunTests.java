@@ -8,9 +8,6 @@ import com.mng.robotest.tests.conf.Suites;
 
 public class CmdRunTests {  
 	
-	enum TypeCallbackSchema {http, https}
-	public enum TypeCallBackMethod {POST, GET}	
-
 	public static void main(String[] args) throws Exception { 
 		var inputParamsMango = new InputParamsMango(Suites.class, AppEcom.class);
 		var cmdLineAccess = CmdLineMaker.from(args, inputParamsMango);
