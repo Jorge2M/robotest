@@ -1,5 +1,6 @@
 package com.mng.robotest.tests.domains.compra.pageobjects.desktop;
 
+import java.util.Objects;
 import java.util.StringTokenizer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -410,6 +411,7 @@ public class Page1DktopCheckout extends PageBase {
 	public float getSumPreciosArticles() {
 	    var sumPrecios = dataTest.getDataBag().getListArticlesTypeViewInBolsa().stream()
 	    		.map(articuloScreen -> getLineaArticle(articuloScreen.getReferencia()))
+	    		.filter(Objects::nonNull)
 	            .map(this::getPreciosArticuloResumen)
 	            .map(PreciosArticulo::getDefinitivo)
 	            .reduce(0.0f, Float::sum);
