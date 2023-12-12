@@ -564,10 +564,11 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isDataChequeRegalo(ChequeRegalo chequeRegalo) {
-	    return getElement(XP_NOMBRE_CHEQUE_REGALO).getText().contains(chequeRegalo.getNombre()) &&
-	           getElement(XP_NOMBRE_CHEQUE_REGALO).getText().contains(chequeRegalo.getApellidos()) &&
-	           getElement(XP_PRECIO_CHEQUE_REGALO).getText().contains(chequeRegalo.getImporte().toString().replace("EURO_", "")) &&
-	           getElement(XP_MENSAJE_CHEQUE_REGALO).getText().contains(chequeRegalo.getMensaje());
+	    return 
+	    	getElement(XP_NOMBRE_CHEQUE_REGALO).getText().contains(chequeRegalo.getNombre()) &&
+	        getElement(XP_NOMBRE_CHEQUE_REGALO).getText().contains(chequeRegalo.getApellidos()) &&
+	        getElement(XP_PRECIO_CHEQUE_REGALO).getText().contains(chequeRegalo.getImporte().toString().replace("EURO_", "")) &&
+	        getElement(XP_MENSAJE_CHEQUE_REGALO).getText().contains(chequeRegalo.getMensaje());
 	}
 	
 	public boolean isVisibleMessageErrorPayment(int seconds) {

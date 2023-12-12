@@ -12,6 +12,7 @@ import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDetalleProduct;
+import com.mng.robotest.tests.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDataProduct.ColorType;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb;
@@ -20,13 +21,12 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Artic
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
 
 import java.util.List;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton.*;
+import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
 public class PageFichaSteps extends StepBase {
