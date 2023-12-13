@@ -489,11 +489,11 @@ public class CheckoutSteps extends StepBase {
 	public void loyaltyPointsApplyMobil() {
 		float loyaltyPointsNoRound = pgCheckoutWrapper.applyAndGetLoyaltyPoints();
 		float loyaltyPoints = UtilsMangoTest.round(loyaltyPointsNoRound, 2);
-		validateLoyaltyPointsDiscountMobilUntil(loyaltyPoints, 3);
+		checkLoyaltyPointsDiscountMobilUntil(loyaltyPoints, 3);
 	}
 	
 	@Validation(description="Aparece un descuento aplicado de #{descuento} " + SECONDS_WAIT)
-	public boolean validateLoyaltyPointsDiscountMobilUntil(float descuento, int seconds) {
+	public boolean checkLoyaltyPointsDiscountMobilUntil(float descuento, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			float discountApplied = UtilsMangoTest.round(pgCheckoutWrapper.getDiscountLoyaltyAppliedMobil(), 2);
 			if (discountApplied == descuento) {

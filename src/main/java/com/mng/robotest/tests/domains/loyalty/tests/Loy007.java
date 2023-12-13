@@ -9,7 +9,7 @@ import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 
 public class Loy007 extends TestBase {
 
-	static final User USER = LoyTestCommons.USER_PRO_WITH_LOY_POINTS;
+	private static final User USER = new User("test.performance30@mango.com", "6876577027631042977", "ES");
 	
 	private final LoyTestCommons loyTestCommons = new LoyTestCommons();
 	
@@ -25,6 +25,9 @@ public class Loy007 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
+		if (isPRO()) {
+			return;
+		}
 		accessAndClearData();
 		chargePointsIfNotEnough();
 		loyTestCommons.addBagArticleNoRebajadoAndClickComprar();

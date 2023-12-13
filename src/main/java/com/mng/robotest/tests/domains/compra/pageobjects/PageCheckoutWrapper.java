@@ -28,8 +28,8 @@ public class PageCheckoutWrapper extends PageBase {
 	
 	//Abarca cualquier div de loading
 	private static final String XP_DIV_LOADING = "//div[@class[contains(.,'panel_loading')] or @class[contains(.,'container-full-centered-loading')] or @class[contains(.,'loading-panel')]]";
-	private static final String XP_DISCOUNT_LOYALTY_APPLIED_MOBIL = "//span[@class='redeem-likes__discount']";
-	private static final String XP_BUTTON_FOR_APPLY_LOYALTY_POINTS = "//button[@data-testid='redeemLikesDesktop.applyDiscount.button']";	
+	private static final String XP_DISCOUNT_LOYALTY_APPLIED_MOBIL = "//p[@class[contains(.,'redeem-likes__discount')]]";
+	private static final String XP_BUTTON_FOR_APPLY_LOYALTY_POINTS = "//button[@data-testid[contains(.,'applyDiscount.button')]]";	
 	
 	public Page1DktopCheckout getPage1DktopCheckout() {
 		return pg1DktopCheckout;
@@ -127,12 +127,12 @@ public class PageCheckoutWrapper extends PageBase {
 	}	
 
 	public boolean isVisibleButtonForApplyLoyaltyPoints() {
-		return (state(VISIBLE, XP_BUTTON_FOR_APPLY_LOYALTY_POINTS).wait(2).check());
+		return state(VISIBLE, XP_BUTTON_FOR_APPLY_LOYALTY_POINTS).wait(2).check();
 	}
 
 	public float applyAndGetLoyaltyPoints() {
 		var buttonLoyalty = getElementsVisible(XP_BUTTON_FOR_APPLY_LOYALTY_POINTS).get(0);
-		String textButtonApply = buttonLoyalty.getAttribute("innerHTML");
+		String textButtonApply = buttonLoyalty.getText();
 		String importeButton = ImporteScreen.normalizeImportFromScreen(textButtonApply);
 		click(XP_BUTTON_FOR_APPLY_LOYALTY_POINTS).exec();
 		isNoDivLoadingUntil(1);
