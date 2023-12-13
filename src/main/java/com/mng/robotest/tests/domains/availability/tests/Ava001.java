@@ -16,7 +16,6 @@ import com.mng.robotest.testslegacy.beans.Pais;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.io.IOException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -113,13 +112,13 @@ public class Ava001 extends TestBase {
 	        var json = JsonParser.parseString(response.body()).getAsJsonObject().get(STR_MENUS).getAsJsonArray();
 	        collectLinks(json, true, allLinks);
         }
-        catch (URISyntaxException | IOException e) {
-        	throw new CatalogsNotFoundException("Problem getting catalogs from " + countryId + " / " + lang + " menus", e);
-        }
         catch (InterruptedException e) {
         	Log4jTM.getLogger().warn("Proglem getting random url catalogs from menus", e);	    	  
         	Thread.currentThread().interrupt();
-	    }
+	    }        
+        catch (Exception e) {
+        	throw new CatalogsNotFoundException("Problem getting catalogs from " + countryId + " / " + lang + " menus", e);
+        }
         
         return allLinks.subList(0, MAX_CATALOGS);
     }    
