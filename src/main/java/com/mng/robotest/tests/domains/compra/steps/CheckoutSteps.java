@@ -445,7 +445,7 @@ public class CheckoutSteps extends StepBase {
 	}
 
 	@Validation (description="Aparece el botón que permite aplicar los Loyalty Points")
-	public boolean validateBlockLoyalty() {
+	public boolean checkBlockLoyalty() {
 		return pgCheckoutWrapper.isVisibleButtonForApplyLoyaltyPoints();
 	}
 	

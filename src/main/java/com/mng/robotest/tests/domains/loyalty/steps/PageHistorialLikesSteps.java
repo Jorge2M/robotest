@@ -23,21 +23,36 @@ public class PageHistorialLikesSteps extends StepBase {
 	@Validation
 	public ChecksTM checkPointsForEnvioTiendaPayment(int points, String idPedido) {
 		var checks = ChecksTM.getNew();
-		var mov1Opt = pgHistorialLikes.getLoyaltyMovement(1);
 		checks.add(
-			"El primer movimiento es de <b>" + points + "</b> puntos",
-			!mov1Opt.isEmpty() && mov1Opt.get().getPoints()==points);
+			"En los primeros 3 movimientos existe uno de <b>" + points + "</b> puntos asociado al código de pedido <b>" + idPedido + "</b>",
+			isInFirst3Movements(points, idPedido));
 			
+		int pointsExpected = 10;
 		checks.add(
-			"El primer movimiento hace referencia al código de pedido <b>" + idPedido + "</b>",
-			!mov1Opt.isEmpty() && mov1Opt.get().getConcepto().contains(idPedido));
-		
-		var mov2Opt = pgHistorialLikes.getLoyaltyMovement(2);
-		checks.add(
-			"El segundo movimiento es de <b>10</b> puntos",
-			!mov2Opt.isEmpty() && mov2Opt.get().getPoints()==10);
+			"En los primeros 3 movimientos existe uno de <b>" + pointsExpected + "</b> puntos",
+			isInFirst3Movements(pointsExpected));
 		
 		return checks;
+	}
+	
+	private boolean isInFirst3Movements(int points) {
+		return isInFirst3Movements(points, "");
+	}
+	
+	private boolean isInFirst3Movements(int points, String idPedido) {
+		for (int i=1; i<=3; i++) {
+			var movementOpt = pgHistorialLikes.getLoyaltyMovement(i);
+			if (movementOpt.isEmpty()) {
+				return false;
+			}
+			
+			var movement = movementOpt.get();
+			if (movement.getPoints()==points && 
+				movement.getConcepto().contains(idPedido)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

@@ -47,7 +47,7 @@ public class LoyTestCommons extends StepBase {
 	
 	public void inputLoyaltyPoints() {
 		var checkoutSteps = new CheckoutSteps();
-		checkoutSteps.validateBlockLoyalty();
+		checkoutSteps.checkBlockLoyalty();
 		checkoutSteps.loyaltyPointsApply();
 	}
 	

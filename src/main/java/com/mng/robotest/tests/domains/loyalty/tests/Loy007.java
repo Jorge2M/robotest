@@ -26,6 +26,7 @@ public class Loy007 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		accessAndClearData();
+		chargePointsIfNotEnough();
 		loyTestCommons.addBagArticleNoRebajadoAndClickComprar();
 		loyTestCommons.inputLoyaltyPoints();
 		if (!isEnvPRO()) {
@@ -34,6 +35,12 @@ public class Loy007 extends TestBase {
 			loyTestCommons.checkLoyaltyPointsGenerated(idPedido);
 		}
 	}
+	
+	private void chargePointsIfNotEnough() {
+		if (!isPRO() && LoyTestCommons.clickMangoLikesYou() < 3000) { 
+			LoyTestCommons.addLoyaltyPoints(USER);
+		}
+	}	
 	
     private void executeMastercardPaymentCvcKo() throws Exception {
         var dataPago = getDataPago();

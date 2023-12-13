@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.loyalty.tests;
 
-import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.loyalty.beans.User;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
@@ -25,15 +24,22 @@ public class Loy001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		accessAndClearData();
+		chargePointsIfNotEnough();
 		loyTestCommons.addBagArticleNoRebajadoAndClickComprar();
 		loyTestCommons.inputLoyaltyPoints();
-		if (!PageBase.isEnvPRO()) {
+		if (!isPRO()) {
 			String idPedido = executeMastercardEnvioTiendaPayment();
 			loyTestCommons.checkLoyaltyPointsGenerated(idPedido);
 		}
 	}
 	
-    public String executeMastercardEnvioTiendaPayment() throws Exception {
+	private void chargePointsIfNotEnough() {
+		if (!isPRO() && LoyTestCommons.clickMangoLikesYou() < 3000) { 
+			LoyTestCommons.addLoyaltyPoints(USER);
+		}
+	}
+	
+    private String executeMastercardEnvioTiendaPayment() throws Exception {
     	return executeMastercardPayment().getDataPedido().getCodpedido();
     }
 

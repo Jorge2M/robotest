@@ -44,7 +44,7 @@ public class PageHistorialLikes extends PageBase {
 	private int getPoints(int position) {
 		var pointsElem = getElement(getXPathPoints(position));
 		if (pointsElem!=null) {
-			return Integer.valueOf(pointsElem.getText().replaceAll("[^\\d.,]", "")); 
+			return Integer.valueOf(pointsElem.getText().replaceAll("[^\\d,]", "")); 
 		}
 		return 0;
 	}
