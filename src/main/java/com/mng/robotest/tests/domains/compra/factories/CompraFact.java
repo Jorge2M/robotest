@@ -17,7 +17,6 @@ public class CompraFact implements Serializable {
 
 	private static final long serialVersionUID = -2440149806957032044L;
 	
-	public int prioridad;
 	private String indexFact = "";
 	private Pais pais = ESPANA.getPais();
 	private IdiomaPais idioma = pais.getListIdiomas().get(0);
@@ -33,7 +32,7 @@ public class CompraFact implements Serializable {
 	//From @Factory
 	public CompraFact(
 			Pais pais, IdiomaPais idioma, Pago pago, AppEcom appE, Channel channel, boolean usrRegistrado, 
-			boolean empleado, boolean testVale, boolean manyArticles, boolean checkAnulaPedido, int prioridad) {
+			boolean empleado, boolean testVale, boolean manyArticles, boolean checkAnulaPedido) {
 		this.pais = pais;
 		this.idioma = idioma;
 		this.pago = pago;
@@ -42,7 +41,6 @@ public class CompraFact implements Serializable {
 		this.testVale = testVale;
 		this.manyArticles = manyArticles;
 		this.checkAnulaPedido = checkAnulaPedido;
-		this.prioridad = prioridad;
 		this.indexFact = getIndexFactoria(pais, pago, appE, channel);
 	}
 	
@@ -73,7 +71,7 @@ public class CompraFact implements Serializable {
 	}   
 	
 	@Test (
-		groups={"Compra", "Checkout", "Canal:all_App:all"}, alwaysRun=true, priority=1, 
+		groups={"Compra", "Checkout", "Canal:all_App:all"}, alwaysRun=true, 
 		description="Test de compra (creado desde Factoría) con valores específicos a nivel de Pago, Tipo de Envío, Usuario Conectado y Empleado")
 	public void COM010_Pago() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);

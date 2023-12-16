@@ -13,8 +13,8 @@ public abstract class PagoSteps extends StepBase {
 	
 	protected final CheckoutFlow checkoutFlow;
 	protected final CheckoutSteps checkoutSteps = new CheckoutSteps();
+	protected DataPago dataPago;
 	
-	public DataPago dataPago;
 	public static final String MSG_NO_PAY_IMPLEMENTED = "No está diponible la parte del test que permite completar/ejecutar el pago";
 
 	private boolean availableExecPay = false;
@@ -37,5 +37,9 @@ public abstract class PagoSteps extends StepBase {
 		dataTest.setDataBag(new DataBag());
 		this.dataPago.storePedidoForManto();
 		this.dataPago.setDataPedido(new DataPedido(dataTest.getPais(), dataTest.getDataBag()));
+	}
+
+	public DataPago getDataPago() {
+		return dataPago;
 	}
 }

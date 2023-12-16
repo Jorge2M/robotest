@@ -172,24 +172,26 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	private void test1rstPageCheckout() {
-		if ((dataPago.getFTCkout().checkPromotionalCode || dataPago.getFTCkout().userIsEmployee) && 
-			!isVotf()) {
-			if (dataPago.getFTCkout().userIsEmployee && isCountry(ESPANA)) {
-				testInputCodPromoEmplSpain();
-			} else {
-				if (dataPago.getFTCkout().checkPromotionalCode) {
-					if (isMobile()) {
-						new Page1EnvioCheckoutMobil().inputCodigoPromo(valeTest.getCodigoVale());
-					} else {
-						testValeDescuento();
-					}
-				}
-			}
-		}
-		
-		if (isVotf() && isCountry(ESPANA)) {
-			new Page1DktopCheckoutSteps().stepIntroduceCodigoVendedorVOTF("111111");
-		}
+	    var ftcKout = dataPago.getFTCkout();
+	    if ((ftcKout.checkPromotionalCode || ftcKout.userIsEmployee) && !isVotf()) {
+	        if (ftcKout.userIsEmployee && isCountry(ESPANA)) {
+	            testInputCodPromoEmplSpain();
+	        } else if (ftcKout.checkPromotionalCode) {
+	            handlePromotionalCode();
+	        }
+	    }
+
+	    if (isVotf() && isCountry(ESPANA)) {
+	        new Page1DktopCheckoutSteps().stepIntroduceCodigoVendedorVOTF("111111");
+	    }
+	}
+
+	private void handlePromotionalCode() {
+	    if (isMobile()) {
+	        new Page1EnvioCheckoutMobil().inputCodigoPromo(valeTest.getCodigoVale());
+	    } else {
+	        testValeDescuento();
+	    }
 	}
 	
 	public void testInputCodPromoEmplSpain() {
@@ -198,72 +200,174 @@ public class CheckoutFlow extends StepBase {
 		checkoutSteps.inputDataEmplEnPromoAndAccept(accesoEmpl);
 	}
 	
+//	private void checkMetodosPagos(List<Pais> paisesDestino) throws Exception {
+//		try {
+//			var dataPedido = dataPago.getDataPedido();
+//			if (!isMobile()) {
+//				checkoutSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
+//			}
+//				
+//			if (!dataPago.getFTCkout().chequeRegalo) {
+//				checkoutSteps.despliegaYValidaMetodosPago(dataPago.getFTCkout().userIsEmployee);
+//			}
+//			if (dataPago.getFTCkout().checkPasarelas) {
+//				if (pago==null) { 
+//					validaPasarelasPagoPais();
+//				} else {
+//					dataPago.setPago(pago);
+//					checkPasarelaPago();
+//				}
+//			}
+//				
+//			//En el caso de españa, después de validar todos los países probamos el botón "CHANGE DETAILS" sobre los países indicados en la lista
+//			if (dataTest.getCodigoPais().compareTo("001")==0 /*España*/ && paisesDestino!=null && !paisesDestino.isEmpty()) {
+//				Pais paisChange = null;
+//				var itPaises = paisesDestino.iterator();
+//				while (itPaises.hasNext()) {
+//					paisChange = itPaises.next();
+//					if (isShop()) {
+//						//Test funcionalidad "Quiero recibir factura"
+//						checkoutSteps.clickSolicitarFactura();
+//						var dataDirFactura = new DataDireccion();
+//						dataDirFactura.put(NIF, "76367949Z");
+//						dataDirFactura.put(NAME, "Carolina");
+//						dataDirFactura.put(APELLIDOS, "Rancaño Pérez");
+//						dataDirFactura.put(CODPOSTAL, "08720");
+//						dataDirFactura.put(DIRECCION, "c./ mossen trens nº6 5º1ª");
+//						dataDirFactura.put(EMAIL, "voyadominarelmundo@gmail.com");
+//						dataDirFactura.put(TELEFONO, "665015122");
+//						dataDirFactura.put(POBLACION, "PEREPAU");
+//						new CheckoutSteps().getModalDirecFacturaSteps()
+//							.inputDataAndActualizar(dataDirFactura);
+//					}
+//					
+//					if (!isVotf()) {
+//						//Test funcionalidad "Cambio dirección de envío"
+//						checkoutSteps.clickEditarDirecEnvio();
+//						var dataDirEnvio = new DataDireccion();
+//						dataDirEnvio.put(CODIGOPAIS, paisChange.getCodigoPais());
+//						dataDirEnvio.put(CODPOSTAL, paisChange.getCodpos());					
+//						dataDirEnvio.put(NAME, "Jorge");
+//						dataDirEnvio.put(APELLIDOS, "Muñoz Martínez");
+//						dataDirEnvio.put(DIRECCION, "c./ mossen trens nº6 5º1ª");
+//						var userShop = GestorUsersShop.getUser();
+//						dataDirEnvio.put(EMAIL, userShop.getUser());
+//						dataDirEnvio.put(TELEFONO, "665015122");
+//						checkoutSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
+//						checkoutSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
+//						dataTest.setPais(paisChange);
+//						checkoutSteps.validaMetodosPagoDisponibles(dataPago.getFTCkout().userIsEmployee);
+//					}
+//				}
+//			}
+//		}
+//		catch (Exception e) {
+//			Log4jTM.getLogger().warn("Problem validating Payments methods of country {} ",  dataTest.getPais().getNombrePais(), e);
+//			throw e; 
+//		}
+//	}
+	
 	private void checkMetodosPagos(List<Pais> paisesDestino) throws Exception {
-		try {
-			var dataPedido = dataPago.getDataPedido();
-			if (!isMobile()) {
-				checkoutSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
-			}
-				
-			if (!dataPago.getFTCkout().chequeRegalo) {
-				checkoutSteps.despliegaYValidaMetodosPago(dataPago.getFTCkout().userIsEmployee);
-			}
-			if (dataPago.getFTCkout().checkPasarelas) {
-				if (pago==null) { 
-					validaPasarelasPagoPais();
-				} else {
-					dataPago.setPago(pago);
-					checkPasarelaPago();
-				}
-			}
-				
-			//En el caso de españa, después de validar todos los países probamos el botón "CHANGE DETAILS" sobre los países indicados en la lista
-			if (dataTest.getCodigoPais().compareTo("001")==0 /*España*/ && paisesDestino!=null && !paisesDestino.isEmpty()) {
-				Pais paisChange = null;
-				var itPaises = paisesDestino.iterator();
-				while (itPaises.hasNext()) {
-					paisChange = itPaises.next();
-					if (isShop()) {
-						//Test funcionalidad "Quiero recibir factura"
-						checkoutSteps.clickSolicitarFactura();
-						var dataDirFactura = new DataDireccion();
-						dataDirFactura.put(NIF, "76367949Z");
-						dataDirFactura.put(NAME, "Carolina");
-						dataDirFactura.put(APELLIDOS, "Rancaño Pérez");
-						dataDirFactura.put(CODPOSTAL, "08720");
-						dataDirFactura.put(DIRECCION, "c./ mossen trens nº6 5º1ª");
-						dataDirFactura.put(EMAIL, "voyadominarelmundo@gmail.com");
-						dataDirFactura.put(TELEFONO, "665015122");
-						dataDirFactura.put(POBLACION, "PEREPAU");
-						new CheckoutSteps().getModalDirecFacturaSteps()
-							.inputDataAndActualizar(dataDirFactura);
-					}
-					
-					if (!isVotf()) {
-						//Test funcionalidad "Cambio dirección de envío"
-						checkoutSteps.clickEditarDirecEnvio();
-						var dataDirEnvio = new DataDireccion();
-						dataDirEnvio.put(CODIGOPAIS, paisChange.getCodigoPais());
-						dataDirEnvio.put(CODPOSTAL, paisChange.getCodpos());					
-						dataDirEnvio.put(NAME, "Jorge");
-						dataDirEnvio.put(APELLIDOS, "Muñoz Martínez");
-						dataDirEnvio.put(DIRECCION, "c./ mossen trens nº6 5º1ª");
-						var userShop = GestorUsersShop.getUser();
-						dataDirEnvio.put(EMAIL, userShop.getUser());
-						dataDirEnvio.put(TELEFONO, "665015122");
-						checkoutSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
-						checkoutSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
-						dataTest.setPais(paisChange);
-						checkoutSteps.validaMetodosPagoDisponibles(dataPago.getFTCkout().userIsEmployee);
-					}
-				}
-			}
-		}
-		catch (Exception e) {
-			Log4jTM.getLogger().warn("Problem validating Payments methods of country {} ",  dataTest.getPais().getNombrePais(), e);
-			throw e; 
-		}
+	    try {
+	        setupDataPedido();
+	        handleCheckoutSteps();
+	        handlePaymentPasarelas();
+	        if (shouldHandleChangeDetails(paisesDestino)) {
+	            handleCountryChangeDetails(paisesDestino);
+	        }
+	    } catch (Exception e) {
+	        handleException(e);
+	    }
 	}
+
+	private void setupDataPedido() {
+	    var dataPedido = dataPago.getDataPedido();
+	    if (!isMobile()) {
+	        checkoutSteps.getPageCheckoutWrapper().getDataPedidoFromCheckout(dataPedido);
+	    }
+	}
+
+	private void handleCheckoutSteps() {
+	    var ftcKout = dataPago.getFTCkout();
+	    if (!ftcKout.chequeRegalo) {
+	        checkoutSteps.despliegaYValidaMetodosPago(ftcKout.userIsEmployee);
+	    }
+	}
+
+	private void handlePaymentPasarelas() throws Exception {
+	    var ftcKout = dataPago.getFTCkout();
+	    if (ftcKout.checkPasarelas) {
+	        if (pago == null) {
+	            validaPasarelasPagoPais();
+	        } else {
+	            dataPago.setPago(pago);
+	            checkPasarelaPago();
+	        }
+	    }
+	}
+
+	private boolean shouldHandleChangeDetails(List<Pais> paisesDestino) {
+	    return 
+	    	dataTest.getCodigoPais().equals("001") && 
+	    	paisesDestino != null && 
+	    	!paisesDestino.isEmpty();
+	}
+
+	private void handleCountryChangeDetails(List<Pais> paisesDestino) {
+	    for (Pais paisChange : paisesDestino) {
+	        if (isShop()) {
+	            handleSolicitarFactura();
+	        }
+
+	        if (!isVotf()) {
+	            handleEditarDirecEnvio(paisChange);
+	        }
+	    }
+	}	
+	
+	private void handleException(Exception e) throws Exception {
+	    Log4jTM.getLogger().warn("Problem validating Payments methods of country {}", dataTest.getPais().getNombrePais(), e);
+	    throw e;
+	}	
+	
+	private void handleSolicitarFactura() {
+	    checkoutSteps.clickSolicitarFactura();
+	    var dataDirFactura = createSampleDataDireccion(
+	    		"76367949Z", "Carolina", "Rancaño Pérez", "08720",
+	            "c./ mossen trens nº6 5º1ª", "voyadominarelmundo@gmail.com", "665015122", "PEREPAU");
+	    checkoutSteps.getModalDirecFacturaSteps().inputDataAndActualizar(dataDirFactura);
+	}
+
+	private void handleEditarDirecEnvio(Pais paisChange) {
+	    checkoutSteps.clickEditarDirecEnvio();
+	    var dataDirEnvio = createSampleDataDireccion(
+	    		paisChange.getCodigoPais(), paisChange.getCodpos(),
+	            "Jorge", "Muñoz Martínez", "c./ mossen trens nº6 5º1ª", getUserForEmail(), "665015122");
+	    checkoutSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
+	    checkoutSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
+	    dataTest.setPais(paisChange);
+	    checkoutSteps.validaMetodosPagoDisponibles(dataPago.getFTCkout().userIsEmployee);
+	}
+
+	private DataDireccion createSampleDataDireccion(String... values) {
+	    var dataDireccion = new DataDireccion();
+	    dataDireccion.put(NIF, values[0]);
+	    dataDireccion.put(NAME, values[1]);
+	    dataDireccion.put(APELLIDOS, values[2]);
+	    dataDireccion.put(CODPOSTAL, values[3]);
+	    dataDireccion.put(DIRECCION, values[4]);
+	    dataDireccion.put(EMAIL, values[5]);
+	    dataDireccion.put(TELEFONO, values[6]);
+	    if (values.length > 7) {
+	        dataDireccion.put(POBLACION, values[7]);
+	    }
+	    return dataDireccion;
+	}
+
+	private String getUserForEmail() {
+	    var userShop = GestorUsersShop.getUser();
+	    return userShop.getUser();
+	}	
 	
 	private void testValeDescuento() {
 		new Page1DktopCheckoutSteps().inputValeDescuento(valeTest);
@@ -409,8 +513,8 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	private boolean iCanExecPago(PagoSteps pagoSteps) {
-		boolean validaPagos = pagoSteps.dataPago.getFTCkout().checkPagos;
-		var pagoPais = pagoSteps.dataPago.getDataPedido().getPago();
+		boolean validaPagos = pagoSteps.getDataPago().getFTCkout().checkPagos;
+		var pagoPais = pagoSteps.getDataPago().getDataPedido().getPago();
 		var typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();
 		return (
 			//No estamos en el entorno productivo

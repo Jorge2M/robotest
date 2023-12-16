@@ -30,6 +30,7 @@ import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 import com.mng.robotest.testslegacy.pageobject.utils.DataScroll;
 import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
+import com.mng.robotest.testslegacy.steps.navigations.exceptions.ChannelNotSupportedRuntimeException;
 import com.github.jorge2m.testmaker.conf.StoreType;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -151,7 +152,7 @@ public class PageGaleriaSteps extends StepBase {
 				articleAvailable = selectTallaAvailableArticulo(posArticulo);
 			}
 			catch (Exception e) {
-				Log4jTM.getLogger().warn("Problem selecting first talla available from article " + posArticulo, e);
+				Log4jTM.getLogger().warn(String.format("Failed to select the first available size for article %d", posArticulo), e);
 			}
 			posArticulo+=1;
 		}
@@ -389,8 +390,7 @@ public class PageGaleriaSteps extends StepBase {
 	/**
 	 * @return src de la imagen obtenida al ejecutar los clicks
 	 */
-	public String clicksSliderArticuloConColores(int numArtConColores, TypeSlider... typeSliderList)
-			throws Exception {
+	public String clicksSliderArticuloConColores(int numArtConColores, TypeSlider... typeSliderList) {
 		return clicksSliderArticuloConColores(numArtConColores, "", typeSliderList);
 	}
    
@@ -405,10 +405,9 @@ public class PageGaleriaSteps extends StepBase {
 			"Clickar la siguiente secuencia de sliders: <b>" + TAG_SLIDER_LIST + "</b> del #{numArtConColores}o " + 
 			" artículo con variedad de colores (" + TAG_NOMBRE_ART + "). Previamente realizamos un \"Hover\" sobre dicho artículo", 
 		expected="Aparece el artículo original(" + TAG_NOMBRE_ART + ")")
-	public String clicksSliderArticuloConColores(int numArtConColores, String srcImageExpected, TypeSlider... typeSliderList) 
-			throws Exception {
+	public String clicksSliderArticuloConColores(int numArtConColores, String srcImageExpected, TypeSlider... typeSliderList) {
 		if (!isDesktop()) {
-			throw new RuntimeException("Method clickSliderArticuloConColores doesn't support channel " + channel);
+			throw new ChannelNotSupportedRuntimeException("Method clickSliderArticuloConColores doesn't support channel " + channel);
 		}
 
 		String slidersListStr = getStringSliderList(typeSliderList);

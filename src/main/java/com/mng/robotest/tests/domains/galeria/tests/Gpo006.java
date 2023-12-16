@@ -17,7 +17,7 @@ public class Gpo006 extends TestBase {
 		checkSliders();		
 	}
 
-	private void checkSliders() throws Exception {
+	private void checkSliders() {
 		String src2onImage = pGaleriaSteps.clicksSliderArticuloConColores(1, NEXT);
 		pGaleriaSteps.clicksSliderArticuloConColores(1, PREVIOUS);
 		pGaleriaSteps.clicksSliderArticuloConColores(1, src2onImage, NEXT);
