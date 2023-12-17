@@ -15,6 +15,8 @@ import com.github.jorge2m.testmaker.domain.InputParamsTM;
 
 public class InputParamsMango extends InputParamsTM {
 
+	private static final long serialVersionUID = 1L;
+	
 	private static final String COUNTRYS_NAME_PARAM = "countrys";
 	private static final String LINEAS_NAME_PARAM = "lineas";
 	private static final String PAYMENTS_NAME_PARAM = "payments";

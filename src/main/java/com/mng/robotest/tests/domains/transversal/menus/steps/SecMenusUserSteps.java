@@ -183,10 +183,10 @@ public class SecMenusUserSteps extends StepBase {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
 		LoyaltyData loyaltyData = userMenus.checkAndGetLoyaltyPointsUntil(seconds);
-		checks.setNumberPoints(loyaltyData.numberPoints);
+		checks.setNumberPoints(loyaltyData.getNumberPoints());
 	 	checks.add(
 			"Aparecen Loyalty Points en el menú de usuario " + getLitSecondsWait(seconds),
-			loyaltyData.isPresent);
+			loyaltyData.isPresent());
 	 	
 		return checks;
 	}

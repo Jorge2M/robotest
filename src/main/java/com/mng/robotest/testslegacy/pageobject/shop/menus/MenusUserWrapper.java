@@ -155,12 +155,29 @@ public class MenusUserWrapper extends PageBase {
 	}
 	
 	public class LoyaltyData {
-		public boolean isPresent=false;
-		public int numberPoints=0;
+		private boolean isPresent;
+		private int numberPoints;
 		
 		public LoyaltyData(boolean isPresent, int numberPoints) {
 			this.isPresent = isPresent;
 			this.numberPoints = numberPoints;
 		}
+
+		public boolean isPresent() {
+			return isPresent;
+		}
+
+		public void setPresent(boolean isPresent) {
+			this.isPresent = isPresent;
+		}
+
+		public int getNumberPoints() {
+			return numberPoints;
+		}
+
+		public void setNumberPoints(int numberPoints) {
+			this.numberPoints = numberPoints;
+		}
 	}
+	
 }
