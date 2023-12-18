@@ -11,7 +11,8 @@ public class PageRedirectPasarelaLoadingSteps extends StepBase {
 	@Validation (
 		description="Acaba desapareciendo la página de \"Por favor espere. Este proceso puede tardar...\" " + SECONDS_WAIT,
 		level=WARN)
-	public boolean validateDisappeared(int seconds) { 
+	public boolean checkDisappeared(int seconds) { 
 		return new PageRedirectPasarelaLoading().isPageNotVisibleUntil(seconds);
 	}
+	
 }

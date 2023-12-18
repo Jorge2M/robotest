@@ -542,6 +542,10 @@ public abstract class PageGaleria extends PageBase {
 
 	public void clickArticulo(WebElement articulo) {
 		forceVisibilityImageArticle(articulo);
+		if (isDesktop() && isOutlet()) {
+			//En Desktop-Outlet la cabecera tapa en ocasiones el artículo  
+			scrollVertical(-300);
+		}
 		click(articulo).waitLoadPage(30).exec();
 	}
 	

@@ -8,6 +8,7 @@ import java.util.Locale;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 public class UtilsCheckout {
@@ -36,10 +37,11 @@ public class UtilsCheckout {
 	
 	public static float getArabicNumber(String importScreen) {
         var arabicFormat = NumberFormat.getInstance(new Locale("ar"));
-        var arabicNumber = importScreen.replaceAll("[A-Za-z]", "");
+        var arabicNumber = importScreen.replaceAll("[A-Za-z\\s]", "");
         try {
         	return arabicFormat.parse(arabicNumber).floatValue();
         } catch (ParseException e) {
+        	Log4jTM.getLogger().error("Problem obtaining import from arabic number in screen", e);
         	return 0;
         }
 	}

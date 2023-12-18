@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -95,6 +96,13 @@ public class PageBase extends PageObjTM {
 		return new BuilderSelect(By.xpath(xpath), value, driver);
 	}
 	
+	public Optional<WebElement> getElementIfExists(String xpath) {
+		try {
+			return Optional.of(getElement(xpath));
+		} catch (NoSuchElementException e) {
+			return Optional.empty();
+		}
+	}
 	public WebElement getElement(String xpath) {
 		return getElement(By.xpath(xpath));
 	}

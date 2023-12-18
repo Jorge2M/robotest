@@ -298,7 +298,7 @@ public class CheckoutSteps extends StepBase {
 		}
 
 		pgCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
-		pgRedirectPasarelaLoadingSteps.validateDisappeared(5);
+		pgRedirectPasarelaLoadingSteps.checkDisappeared(5);
 	}
 
 	@Validation (
@@ -315,7 +315,7 @@ public class CheckoutSteps extends StepBase {
 		pgCheckoutWrapper.clickRadioTrjGuardada();
 		pgCheckoutWrapper.inputCvcTrjGuardadaIfVisible(cvc);
 		pgCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
-		pgRedirectPasarelaLoadingSteps.validateDisappeared(5);
+		pgRedirectPasarelaLoadingSteps.checkDisappeared(5);
 	}
 
 	@Step (
@@ -352,7 +352,7 @@ public class CheckoutSteps extends StepBase {
 		catch (Exception e) {
 			Log4jTM.getLogger().warn("Problem in click Confirm payment button", e);
 		}
-		pgRedirectPasarelaLoadingSteps.validateDisappeared(5);
+		pgRedirectPasarelaLoadingSteps.checkDisappeared(5);
 	}	
 	
 	private static final String TAG_TARJETA = "@TagTarjeta";

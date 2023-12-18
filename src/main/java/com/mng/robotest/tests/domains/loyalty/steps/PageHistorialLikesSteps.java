@@ -25,22 +25,22 @@ public class PageHistorialLikesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"En los primeros 3 movimientos existe uno de <b>" + points + "</b> puntos asociado al código de pedido <b>" + idPedido + "</b>",
-			isInFirst3Movements(points, idPedido));
+			isInFirst4Movements(points, idPedido));
 			
 		int pointsExpected = 10;
 		checks.add(
 			"En los primeros 3 movimientos existe uno de <b>" + pointsExpected + "</b> puntos",
-			isInFirst3Movements(pointsExpected));
+			isInFirst4Movements(pointsExpected));
 		
 		return checks;
 	}
 	
-	private boolean isInFirst3Movements(int points) {
-		return isInFirst3Movements(points, "");
+	private boolean isInFirst4Movements(int points) {
+		return isInFirst4Movements(points, "");
 	}
 	
-	private boolean isInFirst3Movements(int points, String idPedido) {
-		for (int i=1; i<=3; i++) {
+	private boolean isInFirst4Movements(int points, String idPedido) {
+		for (int i=1; i<=4; i++) {
 			var movementOpt = pgHistorialLikes.getLoyaltyMovement(i);
 			if (movementOpt.isEmpty()) {
 				return false;
