@@ -42,7 +42,7 @@ public class Registro implements Serializable {
 	}
 	
 	@Test (
-		groups={"Registro", "Canal:all_App:all"},
+		groups={"Registro", "Canal:all_App:shop,outlet"},
 		description="Registro con errores en la introducción de los datos (España)")
 	public void REG007_NewRegisterNOK() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);

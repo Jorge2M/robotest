@@ -45,7 +45,7 @@ public class SecProductDescrDeviceSteps extends StepBase {
 	@Validation (
 		description="La sección ha de quedar en estado <b>#{stateExpectedAfterClick}</b> " + SECONDS_WAIT)
 	private boolean checkPanelInState(TypePanel typePanel, TypeStatePanel stateExpectedAfterClick, int seconds) {
-		return (secProductDescr.isPanelInStateUntil(typePanel, stateExpectedAfterClick, seconds));
+		return secProductDescr.isPanelInStateUntil(typePanel, stateExpectedAfterClick, seconds);
 	}
 	
 }

@@ -120,6 +120,7 @@ public class SecProductDescrDevice extends PageBase {
 
 	public void clickPanel(TypePanel typePanel) {
 		String xpathPanelLink = typePanel.getXPathLink(channel, app);
+		moveToElement(xpathPanelLink);
 		click(xpathPanelLink).exec();
 	}
 	
