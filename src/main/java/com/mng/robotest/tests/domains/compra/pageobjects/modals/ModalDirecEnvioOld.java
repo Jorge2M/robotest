@@ -9,22 +9,14 @@ public class ModalDirecEnvioOld extends ModalDireccion {
 	private static final String XP_FORM_MODAL = "//form[@class[contains(.,'customFormIdENVIO')]]";
 	private static final String XP_BUTTON_UPDATE = XP_FORM_MODAL + "//div[@class[contains(.,'updateButton')]]/*[@class[contains(.,'modalConfirmar')]]";
 
+	public ModalDirecEnvioOld() {
+		super(XP_FORM_MODAL);
+	}
+	
 	public void sendDataToInputsNTimesAndWait(DataDireccion dataToSend, int nTimes) {
-		sendDataToInputsNTimes(dataToSend, nTimes, XP_FORM_MODAL);
+		sendDataToInputsNTimes(dataToSend, nTimes);
 		waitLoadPage();
 	}
-
-	public void sendDataToInputs(DataDireccion dataToSend) {
-		sendDataToInputs(dataToSend, XP_FORM_MODAL);
-	}
-
-	public void selectPoblacion(String poblacion) {
-		selectPoblacion(poblacion, XP_FORM_MODAL);
-	}
-
-	public void selectProvincia(String provincia) {
-		selectProvincia(provincia, XP_FORM_MODAL);
-	} 
 
 	public boolean isVisibleFormUntil(int seconds) {
 		return state(VISIBLE, XP_FORM_MODAL).wait(seconds).check();

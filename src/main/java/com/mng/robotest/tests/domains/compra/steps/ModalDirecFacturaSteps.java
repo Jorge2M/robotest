@@ -10,6 +10,7 @@ import com.mng.robotest.tests.domains.compra.pageobjects.desktop.Page1DktopCheck
 import com.mng.robotest.tests.domains.compra.pageobjects.modals.ModalDirecFactura;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion.DataDirType.*;
 
 public class ModalDirecFacturaSteps extends StepBase {
 
@@ -40,11 +41,11 @@ public class ModalDirecFacturaSteps extends StepBase {
 	public void inputDataAndActualizar(DataDireccion dataDirFactura) {
 		modalDirecFactura.sendDataToInputs(dataDirFactura);
 		modalDirecFactura.clickActualizar();
-		checkAfterChangeDireccion();
+		checkAfterChangeDireccion(dataDirFactura);
 	}
 	
 	@Validation
-	private ChecksTM checkAfterChangeDireccion() {
+	private ChecksTM checkAfterChangeDireccion(DataDireccion dataDirFactura) {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 	 	checks.add(
@@ -58,6 +59,11 @@ public class ModalDirecFacturaSteps extends StepBase {
 	 	checks.add(
 	 		"Desaparece la capa de Loading " + getLitSecondsWait(seconds), 
 	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), WARN);
+	 	
+	 	var poblacion = dataDirFactura.getValue(POBLACION); 
+	 	checks.add(
+	 		"En la dirección de facturación aparece la nueva población <b>" + poblacion + "</b>", 
+	 		modalDirecFactura.getAddress().contains(poblacion));
 	 	
 	 	return checks;
 	}

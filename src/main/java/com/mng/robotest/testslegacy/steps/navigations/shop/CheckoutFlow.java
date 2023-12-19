@@ -265,35 +265,37 @@ public class CheckoutFlow extends StepBase {
 	
 	private void handleSolicitarFactura() {
 	    checkoutSteps.clickSolicitarFactura();
-	    var dataDirFactura = createSampleDataDireccion(
-	    		"76367949Z", "Carolina", "Rancaño Pérez", "08720",
-	            "c./ mossen trens nº6 5º1ª", "voyadominarelmundo@gmail.com", "665015122", "PEREPAU");
+	    var dataDirFactura = createSampleDataDireccion();
 	    checkoutSteps.getModalDirecFacturaSteps().inputDataAndActualizar(dataDirFactura);
 	}
 
 	private void handleEditarDirecEnvio(Pais paisChange) {
 	    checkoutSteps.clickEditarDirecEnvio();
-	    var dataDirEnvio = createSampleDataDireccion(
-	    		paisChange.getCodigoPais(), paisChange.getCodpos(),
-	            "Jorge", "Muñoz Martínez", "c./ mossen trens nº6 5º1ª", getUserForEmail(), "665015123");
+	    var dataDirEnvio = createSampleDataDireccion(paisChange);
 	    checkoutSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
-	    //checkoutSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
+	    checkoutSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
 	    dataTest.setPais(paisChange);
 	    checkoutSteps.validaMetodosPagoDisponibles(dataPago.getFTCkout().userIsEmployee);
 	}
 
-	private DataDireccion createSampleDataDireccion(String... values) {
+	private DataDireccion createSampleDataDireccion(Pais pais) {
+		var dataDireccion = createSampleDataDireccion();
+		dataDireccion.put(CODPOSTAL, pais.getCodpos());
+		dataDireccion.put(TELEFONO, pais.getTelefono());
+		dataDireccion.put(CODIGOPAIS, pais.getCodigoPais());
+		return dataDireccion;
+	}
+	
+	private DataDireccion createSampleDataDireccion() {
 	    var dataDireccion = new DataDireccion();
-	    dataDireccion.put(NIF, values[0]);
-	    dataDireccion.put(NAME, values[1]);
-	    dataDireccion.put(APELLIDOS, values[2]);
-	    dataDireccion.put(CODPOSTAL, values[3]);
-	    dataDireccion.put(DIRECCION, values[4]);
-	    dataDireccion.put(EMAIL, values[5]);
-	    dataDireccion.put(TELEFONO, values[6]);
-	    if (values.length > 7) {
-	        dataDireccion.put(POBLACION, values[7]);
-	    }
+	    dataDireccion.put(NIF, "76367949Z");
+	    dataDireccion.put(NAME, "Carolina");
+	    dataDireccion.put(APELLIDOS, "Rancaño Pérez");
+	    dataDireccion.put(CODPOSTAL, "08720");
+	    dataDireccion.put(DIRECCION, "c./ mossen trens nº6 5º1ª");
+	    dataDireccion.put(EMAIL, getUserForEmail());
+	    dataDireccion.put(TELEFONO, "665015122");
+        dataDireccion.put(POBLACION, "PEREPAU");
 	    return dataDireccion;
 	}
 

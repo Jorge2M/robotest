@@ -11,25 +11,22 @@ public class ModalDirecFactura extends ModalDireccion {
 
 	private static final String XP_FORM_MODAL = "//form[@class[contains(.,'customFormIdFACT')]]";
 	private static final String XP_BUTTON_UPDATE = XP_FORM_MODAL + "//div[@class[contains(.,'updateButton')]]/input[@type='submit']";
+	private static final String XP_ADDRESS = "//div[@class='direccionCliente']";
 	
-	public void sendDataToInputs(DataDireccion dataToSend) {
-		sendDataToInputs(dataToSend, XP_FORM_MODAL);
+	public ModalDirecFactura() {
+		super(XP_FORM_MODAL);
 	}
 	
-	public void selectPoblacion(String poblacion) {
-		selectPoblacion(poblacion, XP_FORM_MODAL);
-	}
-
-	public void selectProvincia(String provincia) {
-		selectProvincia(provincia, XP_FORM_MODAL);
-	} 
-
 	public boolean isVisibleFormUntil(int seconds) {
 		return state(VISIBLE, XP_FORM_MODAL).wait(seconds).check();
 	}
 
 	public boolean isVisibleButtonActualizar() {
 		return state(VISIBLE, XP_BUTTON_UPDATE).check();
+	}
+	
+	public String getAddress() {
+		return getElement(XP_ADDRESS).getText();
 	}
 
 	public void clickActualizar() {
