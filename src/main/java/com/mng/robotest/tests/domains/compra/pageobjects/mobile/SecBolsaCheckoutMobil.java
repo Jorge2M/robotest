@@ -14,6 +14,7 @@ public class SecBolsaCheckoutMobil extends PageBase {
 
 	private static final String XP_SEC_BOLSA = "//div[@id='checkout-bag-layer']/div";
 	private static final String XP_LINE_ARTICLE = "//div[@class[contains(.,'loadedOnMobile')]]";
+//	private static final String XP_AMOUNT = "//*[@data-testid='bag.item.info']/p[2]";
 	private static final String XP_IMPORTS = ".//div[@class[contains(.,'card__header-right')]]/div/p";
 	private static final String XP_CLOSE_ASPA = "//button[text()='✕']";
 	
@@ -32,6 +33,15 @@ public class SecBolsaCheckoutMobil extends PageBase {
 		}
 		return sumPrecios;
 	}
+	
+//	private int getNumArticulos(WebElement article) {
+//		var amount = getElement(article, "." + XP_AMOUNT);
+//		if (amount!=null) {
+//			String amountStr = amount.getText().replaceAll("[^0-9]", "");
+//			return Integer.parseInt(amountStr);
+//		}
+//		return 1;
+//	}
 	
 	private float getMinPrice(WebElement article) {
 		float minPrice = 999999999f;

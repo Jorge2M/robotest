@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.compra.pageobjects.desktop;
 
-import java.util.Objects;
 import java.util.StringTokenizer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -100,7 +99,9 @@ public class Page1DktopCheckout extends PageBase {
 	private static final String XP_METODO_PAGO = "//*[@class[contains(.,'cardBox')]]/label/..";
 	
 	private static final String TAG_REFERENCIA = "@TagRef";
-	private static final String XP_LINEA_ARTICULO_WITH_TAG = 
+	private static final String XP_LINEA_ARTICULO = 
+		"//div[@class[contains(.,'ref')]]/ancestor::div[@class[contains(.,'articuloResBody')]]";	
+	private static final String XP_LINEA_ARTICULO_WITH_REFERENCE = 
 		"//div[@class[contains(.,'ref')] and text()[contains(.,'" + TAG_REFERENCIA + "')]]/ancestor::div[@class[contains(.,'articuloResBody')]]";
 	
 	private static final String TAG_COD_VENDEDOR = "@TagCodVendedor";
@@ -126,7 +127,7 @@ public class Page1DktopCheckout extends PageBase {
 	}
 	
 	private String getXPathLinArticle(String referencia) {
-		return (XP_LINEA_ARTICULO_WITH_TAG.replace(TAG_REFERENCIA, referencia));
+		return (XP_LINEA_ARTICULO_WITH_REFERENCE.replace(TAG_REFERENCIA, referencia));
 	}
 	
 	private String getXPathBlockTarjetaGuardada(String metodoPago) {
@@ -410,13 +411,14 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public float getSumPreciosArticles() {
-	    var sumPrecios = dataTest.getDataBag().getListArticlesTypeViewInBolsa().stream()
-	    		.map(articuloScreen -> getLineaArticle(articuloScreen.getReferencia()))
-	    		.filter(Objects::nonNull)
-	            .map(this::getPreciosArticuloResumen)
-	            .map(PreciosArticulo::getDefinitivo)
-	            .reduce(0.0f, Float::sum);
-	    
+	    var sumPrecios = 0.0f;
+	    for (var articulo : getElements(XP_LINEA_ARTICULO)) {
+	        if (articulo != null) {
+	            var preciosArticuloResumen = getPreciosArticuloResumen(articulo);
+	            var cantidad = getNumArticulos(articulo);
+	            sumPrecios += preciosArticuloResumen.getDefinitivo() * cantidad;
+	        }
+	    }	    
 	    return UtilsMangoTest.round(sumPrecios, 2);
 	}
 	
@@ -466,12 +468,20 @@ public class Page1DktopCheckout extends PageBase {
 	
 	private PreciosArticulo getPreciosArticuloResumen(WebElement articuloWeb) {
 	    var precios = new PreciosArticulo();
-	    int cantidad = Integer.parseInt(articuloWeb.findElement(By.xpath("." + XP_CANTIDAD_ARTICULOS)).getText());
-
+	    
+	    int cantidad = getNumArticulos(articuloWeb); 
 	    setPrecioNoTachado(precios, articuloWeb, cantidad);
 	    setPrecioSiTachado(precios, articuloWeb, cantidad);
 
 	    return precios;
+	}
+	
+	private int getNumArticulos(WebElement article) {
+		var amount = getElement(article, "." + XP_CANTIDAD_ARTICULOS);
+		if (amount != null) {
+			return Integer.parseInt(amount.getText());
+		}
+		return 1;
 	}
 
 	private void setPrecioNoTachado(PreciosArticulo precios, WebElement articuloWeb, int cantidad) {
