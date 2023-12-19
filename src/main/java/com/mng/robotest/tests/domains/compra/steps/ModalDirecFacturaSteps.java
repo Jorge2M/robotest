@@ -46,15 +46,15 @@ public class ModalDirecFacturaSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterChangeDireccion() {
 		var checks = ChecksTM.getNew();
+		int seconds = 2;
 	 	checks.add(
-			"Desaparece el modal de introducción de los datos de la dirección",
+			"Desaparece el modal de introducción de los datos de la dirección " + getLitSecondsWait(seconds),
 	 		!modalDirecFactura.isVisibleFormUntil(0));
 	 	
 	 	checks.add(
 			"Es visible el link \"Descartar factura\"",
 			new Page1DktopCheckout().isVisibleDescartarFacturaLink());
 	 	
-	 	int seconds = 2;
 	 	checks.add(
 	 		"Desaparece la capa de Loading " + getLitSecondsWait(seconds), 
 	 		new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), WARN);

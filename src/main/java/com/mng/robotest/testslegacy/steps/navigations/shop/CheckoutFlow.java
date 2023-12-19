@@ -275,9 +275,9 @@ public class CheckoutFlow extends StepBase {
 	    checkoutSteps.clickEditarDirecEnvio();
 	    var dataDirEnvio = createSampleDataDireccion(
 	    		paisChange.getCodigoPais(), paisChange.getCodpos(),
-	            "Jorge", "Muñoz Martínez", "c./ mossen trens nº6 5º1ª", getUserForEmail(), "665015122");
+	            "Jorge", "Muñoz Martínez", "c./ mossen trens nº6 5º1ª", getUserForEmail(), "665015123");
 	    checkoutSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
-	    checkoutSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
+	    //checkoutSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
 	    dataTest.setPais(paisChange);
 	    checkoutSteps.validaMetodosPagoDisponibles(dataPago.getFTCkout().userIsEmployee);
 	}

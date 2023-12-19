@@ -8,7 +8,8 @@ import java.util.Map;
 public class DataDireccion {
 	
 	public enum DataDirType {
-		NIF, NAME, APELLIDOS, DIRECCION, CODPOSTAL, CODIGOPAIS, POBLACION, PROVINCIA, EMAIL, TELEFONO
+		NIF, NAME, APELLIDOS, DIRECCION, CODPOSTAL, CODIGOPAIS, 
+		POBLACION, PROVINCIA, EMAIL, TELEFONO
 	}
 	
 	private LinkedHashMap<DataDirType, String> dataDireccion = new LinkedHashMap<>();

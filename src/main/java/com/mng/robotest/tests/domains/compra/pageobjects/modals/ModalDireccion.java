@@ -84,7 +84,7 @@ public abstract class ModalDireccion extends PageBase {
 		String xpath = xpathFormModal + XP_SELECT_POBLACION;
 		state(VISIBLE, xpath).wait(2).check();
 		waitMillis(1000);
-		new Select(getElement(xpath)).selectByValue(poblacion);
+		new Select(getElement(xpath)).selectByVisibleText(poblacion);
 	}
 	
 	public void selectProvincia(String provincia, String xpathFormModal) {
