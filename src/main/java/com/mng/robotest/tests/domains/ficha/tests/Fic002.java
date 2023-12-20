@@ -90,7 +90,7 @@ public class Fic002 extends TestBase {
 		if (isOutlet() && !isMobile()) {
 			pFichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}
-		pFichaSteps.getSecProductDescDeviceSteps().validateAreInStateInitial();
+		pFichaSteps.getSecProductDescDeviceSteps().checkAreInStateInitial();
 		var pageFicha = PageFicha.of(channel);
 		if (((PageFichaDevice)pageFicha).getNumImgsCarruselIzq() > 2) {
 			pFichaSteps.selectImgCarruselIzqFichaOld(2);

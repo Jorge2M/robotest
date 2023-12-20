@@ -11,6 +11,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.ficha.pageobjects.SecProductDescrDevice.TypeStatePanel.*;
+import static com.mng.robotest.tests.conf.AppEcom.*;
 
 public class SecProductDescrDevice extends PageBase {
 
@@ -18,19 +19,19 @@ public class SecProductDescrDevice extends PageBase {
 	public enum TypePanel {
 		DESCRIPTION(
 			"//div[@id='descriptionPanel']", "//div[@class[contains(.,'product-description')]]",
-			Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), UNFOLDED),
+			Arrays.asList(shop, outlet, votf), UNFOLDED),
 		COMPOSITION(
 			"//div[@id='compositionPanel']", "//div[@class[contains(.,'more-info')]]",
-			Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), FOLDED),
+			Arrays.asList(shop, outlet, votf), FOLDED),
 		SHIPMENT(
 			"//div[@id='shipmentPanel']", "//div[@class[contains(.,'shipment-and-returns')]]",
-			Arrays.asList(AppEcom.shop, AppEcom.votf), FOLDED), 
+			Arrays.asList(shop, outlet, votf), FOLDED), 
 		RETURNS(
 			"//div[@id='returnsPanel']", "//div[@class[contains(.,'shipment-and-returns')]]",
-			Arrays.asList(AppEcom.shop, AppEcom.votf), FOLDED),
+			Arrays.asList(shop, outlet, votf), FOLDED),
 		KC_SAFETY(
 			"//div[@id='kcSafetyPanel']", "//div[@id='kcSafetyPanel']", //?
-			Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf), MISSING);
+			Arrays.asList(shop, outlet, votf), MISSING);
 		
 		private final String xPathDesktop;
 		private final String xPathDevice;

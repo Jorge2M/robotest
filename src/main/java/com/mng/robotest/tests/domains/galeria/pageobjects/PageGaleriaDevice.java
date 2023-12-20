@@ -88,6 +88,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	}
 	
 	private WebElement getColorArticulo(int posColor) {
+		state(VISIBLE, getXPathColorArticleOption()).wait(1).check();
 		return getElements("." + getXPathColorArticleOption()).get(posColor-1);
 	}
 
@@ -143,8 +144,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 		if (!state(PRESENT, xpathImgColor).check()) {
 			return Constantes.COLOR_DESCONOCIDO;
 		}
-		WebElement imgColorWeb = getElement(xpathImgColor);
-		return imgColorWeb.getAttribute("title");
+		return getElement(xpathImgColor).getAttribute("title");
 	}
 	
 	@Override

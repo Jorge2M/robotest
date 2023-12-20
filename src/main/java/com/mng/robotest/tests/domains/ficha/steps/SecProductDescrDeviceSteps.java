@@ -13,7 +13,7 @@ public class SecProductDescrDeviceSteps extends StepBase {
 	private final SecProductDescrDevice secProductDescr = new SecProductDescrDevice();
 	
 	@Validation
-	public ChecksTM validateAreInStateInitial() {
+	public ChecksTM checkAreInStateInitial() {
 		var checks = ChecksTM.getNew();
 		for (var typePanel : TypePanel.values()) {
 			var stateExpected = TypeStatePanel.MISSING;

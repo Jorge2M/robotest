@@ -50,7 +50,7 @@ public class SecTMango extends PageBase {
 	public String getXPathClickModalidad(TipoPago tipoPago) {
 		String xpathLabelMod = getXPathLabelModalidad(tipoPago);
 		if (isMobile()) {
-			return (xpathLabelMod);
+			return (xpathLabelMod + "/../*[@data-custom-radio-id]");
 		}
 		return (xpathLabelMod + "/../../input");
 	}
