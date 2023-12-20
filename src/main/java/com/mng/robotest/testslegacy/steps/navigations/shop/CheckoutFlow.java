@@ -17,7 +17,6 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
-import com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion;
 import com.mng.robotest.tests.domains.compra.pageobjects.mobile.Page1EnvioCheckoutMobil;
 import com.mng.robotest.tests.domains.compra.payments.FactoryPagos;
 import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
@@ -30,7 +29,6 @@ import com.mng.robotest.tests.domains.compra.steps.PageResultPagoTpvSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
-import com.mng.robotest.tests.repository.usuarios.GestorUsersShop;
 import com.mng.robotest.testslegacy.beans.AccesoEmpl;
 import com.mng.robotest.testslegacy.beans.Pago;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -41,7 +39,6 @@ import com.mng.robotest.testslegacy.generic.beans.ValeDiscount;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
-import static com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion.DataDirType.*;
 import static com.mng.robotest.testslegacy.data.PaisShop.ESPANA;
 import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
@@ -52,7 +49,6 @@ public class CheckoutFlow extends StepBase {
 	private final DataPago dataPago;
 	private final Pago pago;
 	private final EgyptCity egyptCity;
-	private final List<Pais> finalCountrys;
 	private final List<Article> listArticles;
 	private final Pais pais = dataTest.getPais();
 	
@@ -62,13 +58,7 @@ public class CheckoutFlow extends StepBase {
 	
 	private static final String TAG_LOGIN_OR_LOGOFF = "@TagLoginOfLogoff";
 	
-	private CheckoutFlow (
-			DataPago dataPago, 
-			Pago pago, 
-			List<Article> listArticles, 
-			List<Pais> finalCountrys,
-			EgyptCity egyptCity) {
-		this.finalCountrys = finalCountrys;
+	private CheckoutFlow (DataPago dataPago, Pago pago, List<Article> listArticles, EgyptCity egyptCity) {
 		this.pago = pago;
 		this.egyptCity = egyptCity;
 		this.dataPago = dataPago;
@@ -98,7 +88,7 @@ public class CheckoutFlow extends StepBase {
 		
 		if ((from==From.CHECKOUT || from==From.IDENTIFICATION || from==From.BOLSA || from==From.PREHOME) &&
 			(!pais.getListPagosForTest(app, dataPago.getFTCkout().userIsEmployee).isEmpty())) {
-			checkMetodosPagos(finalCountrys);
+			checkMetodosPagos();
 		}
 		return dataPago;
 	}
@@ -200,14 +190,11 @@ public class CheckoutFlow extends StepBase {
 		checkoutSteps.inputDataEmplEnPromoAndAccept(accesoEmpl);
 	}
 	
-	private void checkMetodosPagos(List<Pais> paisesDestino) throws Exception {
+	private void checkMetodosPagos() throws Exception {
 	    try {
 	        setupDataPedido();
 	        handleCheckoutSteps();
 	        handlePaymentPasarelas();
-	        if (shouldHandleChangeDetails(paisesDestino)) {
-	            handleCountryChangeDetails(paisesDestino);
-	        }
 	    } catch (Exception e) {
 	        handleException(e);
 	    }
@@ -238,70 +225,10 @@ public class CheckoutFlow extends StepBase {
 	        }
 	    }
 	}
-
-	private boolean shouldHandleChangeDetails(List<Pais> paisesDestino) {
-	    return 
-	    	dataTest.getCodigoPais().equals("001") && 
-	    	paisesDestino != null && 
-	    	!paisesDestino.isEmpty();
-	}
-
-	private void handleCountryChangeDetails(List<Pais> paisesDestino) {
-	    for (Pais paisChange : paisesDestino) {
-	        if (isShop()) {
-	            handleSolicitarFactura();
-	        }
-
-	        if (!isVotf()) {
-	            handleEditarDirecEnvio(paisChange);
-	        }
-	    }
-	}	
 	
 	private void handleException(Exception e) throws Exception {
 	    Log4jTM.getLogger().warn("Problem validating Payments methods of country {}", dataTest.getPais().getNombrePais(), e);
 	    throw e;
-	}	
-	
-	private void handleSolicitarFactura() {
-	    checkoutSteps.clickSolicitarFactura();
-	    var dataDirFactura = createSampleDataDireccion();
-	    checkoutSteps.getModalDirecFacturaSteps().inputDataAndActualizar(dataDirFactura);
-	}
-
-	private void handleEditarDirecEnvio(Pais paisChange) {
-	    checkoutSteps.clickEditarDirecEnvio();
-	    var dataDirEnvio = createSampleDataDireccion(paisChange);
-	    checkoutSteps.getModalDirecEnvioSteps().inputDataAndActualizar(dataDirEnvio);
-	    checkoutSteps.getModalAvisoCambioPaisSteps().clickConfirmar(paisChange);
-	    dataTest.setPais(paisChange);
-	    checkoutSteps.validaMetodosPagoDisponibles(dataPago.getFTCkout().userIsEmployee);
-	}
-
-	private DataDireccion createSampleDataDireccion(Pais pais) {
-		var dataDireccion = createSampleDataDireccion();
-		dataDireccion.put(CODPOSTAL, pais.getCodpos());
-		dataDireccion.put(TELEFONO, pais.getTelefono());
-		dataDireccion.put(CODIGOPAIS, pais.getCodigoPais());
-		return dataDireccion;
-	}
-	
-	private DataDireccion createSampleDataDireccion() {
-	    var dataDireccion = new DataDireccion();
-	    dataDireccion.put(NIF, "76367949Z");
-	    dataDireccion.put(NAME, "Carolina");
-	    dataDireccion.put(APELLIDOS, "Rancaño Pérez");
-	    dataDireccion.put(CODPOSTAL, "08720");
-	    dataDireccion.put(DIRECCION, "c./ mossen trens nº6 5º1ª");
-	    dataDireccion.put(EMAIL, getUserForEmail());
-	    dataDireccion.put(TELEFONO, "665015122");
-        dataDireccion.put(POBLACION, "PEREPAU");
-	    return dataDireccion;
-	}
-
-	private String getUserForEmail() {
-	    var userShop = GestorUsersShop.getUser();
-	    return userShop.getUser();
 	}	
 	
 	private void testValeDescuento() {
@@ -494,7 +421,6 @@ public class CheckoutFlow extends StepBase {
 	
 	public static class BuilderCheckout {
 		private List<Article> listArticles = null;
-		private List<Pais> finalCountrys = null;
 		private Pago pago = null;
 		private EgyptCity egyptCity = null;
 		
@@ -514,10 +440,6 @@ public class CheckoutFlow extends StepBase {
 		
 		public BuilderCheckout listArticles(List<Article> listArticles) {
 			this.listArticles = listArticles;
-			return this;
-		}
-		public BuilderCheckout finalCountrys(List<Pais> finalCountrys) {
-			this.finalCountrys = finalCountrys;
 			return this;
 		}
 		public BuilderCheckout pago(Pago pago) {
@@ -578,7 +500,6 @@ public class CheckoutFlow extends StepBase {
 					getDataPago(), 
 					pago, 
 					listArticles, 
-					finalCountrys, 
 					egyptCity);
 		}
 		public void exec(From from) throws Exception {

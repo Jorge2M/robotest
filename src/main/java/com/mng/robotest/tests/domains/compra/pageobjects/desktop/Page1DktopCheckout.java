@@ -10,7 +10,6 @@ import com.mng.robotest.tests.domains.chequeregalo.beans.ChequeRegalo;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.tests.domains.compra.pageobjects.UtilsCheckout;
 import com.mng.robotest.tests.domains.compra.pageobjects.beans.PreciosArticulo;
-import com.mng.robotest.tests.domains.compra.pageobjects.modals.ModalAvisoCambioPais;
 import com.mng.robotest.tests.domains.compra.payments.billpay.pageobjects.SecBillpay;
 import com.mng.robotest.tests.domains.compra.payments.eps.pageobjects.SecEps;
 import com.mng.robotest.tests.domains.compra.payments.tmango.pageobjects.SecTMango;
@@ -29,7 +28,6 @@ public class Page1DktopCheckout extends PageBase {
 	private final SecTMango secTMango = new SecTMango();
 	private final SecBillpay secBillpay = new SecBillpay();
 	private final SecEps secEps = new SecEps();
-	private final ModalAvisoCambioPais mdAvisoCambioPais = new ModalAvisoCambioPais();
 	
 	private static final String XP_CONF_PAGO_BUTTON_DESKTOP = "//*[@id[contains(.,'btnCheckout')]]";
 	private static final String XP_ALMACEN_IN_NO_PRO_ENTORNOS = "//span[@class='labelTestShowAlmacenStrong']";
@@ -120,10 +118,6 @@ public class Page1DktopCheckout extends PageBase {
 
 	public SecEps getSecEps() {
 		return secEps;
-	}
-	
-	public ModalAvisoCambioPais getModalAvisoCambioPais() {
-		return mdAvisoCambioPais;
 	}
 	
 	private String getXPathLinArticle(String referencia) {

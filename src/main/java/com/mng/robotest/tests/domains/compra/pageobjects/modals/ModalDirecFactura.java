@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.compra.pageobjects.modals;
 import org.openqa.selenium.StaleElementReferenceException;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 

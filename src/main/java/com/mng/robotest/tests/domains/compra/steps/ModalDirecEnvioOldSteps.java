@@ -6,10 +6,10 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion;
-import com.mng.robotest.tests.domains.compra.pageobjects.desktop.Page1DktopCheckout;
 import com.mng.robotest.tests.domains.compra.pageobjects.modals.ModalDirecEnvioOld;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
+import static com.mng.robotest.tests.domains.compra.pageobjects.beans.DataDireccion.DataDirType.POBLACION;
 
 public class ModalDirecEnvioOldSteps extends StepBase {
 	
@@ -31,27 +31,32 @@ public class ModalDirecEnvioOldSteps extends StepBase {
 	}
 
 	@Step (
-		description="Introducir los datos y pulsar \"Guardar\"<br>#{dataDirFactura.getFormattedHTMLData()}", 
+		description="Introducir los datos y pulsar \"Guardar\"<br>#{dataDirEnvio.getFormattedHTMLData()}", 
 		expected="Los datos se actualizan correctamente")
-	public void inputDataAndActualizar(DataDireccion dataDirFactura) {
-		modalDirecEnvio.sendDataToInputsNTimesAndWait(dataDirFactura, 3);
+	public void inputDataAndActualizar(DataDireccion dataDirEnvio) {
+		modalDirecEnvio.sendDataToInputsNTimesAndWait(dataDirEnvio, 3);
 		modalDirecEnvio.moveToAndDoubleClickActualizar();
-		checkAfterUpdateData();
+		checkAfterUpdateData(dataDirEnvio);
 	}
 	
 	@Validation
-	private ChecksTM checkAfterUpdateData() {
+	private ChecksTM checkAfterUpdateData(DataDireccion dataDirEnvio) {
 		var checks = ChecksTM.getNew();
-		var page1DktopCheckout = new Page1DktopCheckout();
-		int seconds = 2; 
-		checks.add(
-			"Aparece un modal de alerta alertando de un posible cambio de precios " + getLitSecondsWait(seconds),
-			page1DktopCheckout.getModalAvisoCambioPais().isVisibleUntil(seconds), WARN);
-		
+		int seconds = 2;
+	 	checks.add(
+			"Desaparece el modal de introducción de los datos de la dirección " + getLitSecondsWait(seconds),
+	 		!modalDirecEnvio.isVisibleFormUntil(0));
+
 		checks.add(
 			"Desaparece la capa de Loading " + getLitSecondsWait(seconds), 
 			new PageCheckoutWrapper().waitUntilNoDivLoading(seconds), WARN);
 		
+	 	var poblacion = dataDirEnvio.getValue(POBLACION); 
+	 	checks.add(
+	 		"En la dirección de envío aparece la nueva población <b>" + poblacion + "</b>", 
+	 		modalDirecEnvio.getAddress().contains(poblacion));
+		
 		return checks;
 	}
+	
 }

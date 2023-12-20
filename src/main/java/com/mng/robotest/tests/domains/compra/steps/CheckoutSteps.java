@@ -32,7 +32,6 @@ public class CheckoutSteps extends StepBase {
 	private final SecKrediKartiSteps secKrediKartiSteps = new SecKrediKartiSteps();
 	private final SecBillpaySteps secBillpaySteps = new SecBillpaySteps();
 	private final ModalDirecFacturaSteps mdDirecFacturaSteps = new ModalDirecFacturaSteps();
-	private final ModalAvisoCambioPaisSteps mdAvisoCambioPaisSteps = new ModalAvisoCambioPaisSteps();
 	private final Page1DktopCheckoutSteps pg1DktopCheckSteps = new Page1DktopCheckoutSteps();
 	private final Page1EnvioCheckoutMobilSteps pg1MobilCheckSteps = new Page1EnvioCheckoutMobilSteps();
 	private final SecTarjetaPciSteps secTarjetaPciSteps = new SecTarjetaPciSteps();
@@ -63,9 +62,6 @@ public class CheckoutSteps extends StepBase {
 	}
 	public ModalDirecFacturaSteps getModalDirecFacturaSteps() {
 		return mdDirecFacturaSteps;
-	}
-	public ModalAvisoCambioPaisSteps getModalAvisoCambioPaisSteps() {
-		return mdAvisoCambioPaisSteps;
 	}
 	
 	public void validateIsFirstPage(boolean userLogged) {
