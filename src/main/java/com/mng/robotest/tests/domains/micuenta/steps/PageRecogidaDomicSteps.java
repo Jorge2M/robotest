@@ -12,7 +12,7 @@ public class PageRecogidaDomicSteps extends StepBase {
 	private final PageRecADomic pgRecADomic = new PageRecADomic();
 	
 	@Validation
-	public ChecksTM validaIsPageSinDevoluciones () {
+	public ChecksTM checkIsPageWithoutReturns() {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		checks.add(

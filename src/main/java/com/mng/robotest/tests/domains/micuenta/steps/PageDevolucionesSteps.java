@@ -41,7 +41,7 @@ public class PageDevolucionesSteps extends StepBase {
 		EN_DOMICILIO.click(driver);
 		EN_DOMICILIO.waitForInState(true, 2, driver);
 		pgDevoluciones.clickSolicitarRecogida();
-		new PageRecogidaDomicSteps().validaIsPageSinDevoluciones();
+		new PageRecogidaDomicSteps().checkIsPageWithoutReturns();
 		checksDefault();
 	}
 	
