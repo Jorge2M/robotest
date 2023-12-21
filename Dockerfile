@@ -15,8 +15,12 @@ RUN unzip robotest.zip
 	
 COPY docker-entrypoint.sh /robotest/docker-entrypoint.sh
 
-RUN apt-get update && apt-get install -y
-#RUN sed 's/TLSv1, TLSv1.1,/ /' etc/java-8-openjdk/security/java.security -i
+RUN apt-get update && apt-get install -y tzdata \
+    && rm -rf /var/lib/apt/lists/*
+	
+# Set time zone
+ENV TZ=Europe/Madrid
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone	
 	
 WORKDIR /robotest
 
