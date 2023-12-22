@@ -465,9 +465,9 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	public DiscountLikes loyaltyPointsApplyDesktop() {
-		var dataLikesDiscount = pgCheckoutWrapper.applyLoyaltyPoints();
 		float subTotalInicial = pgCheckoutWrapper.getImportSubtotalRounded(2);
-		validateLoyaltyPointsDiscountDesktopUntil(dataLikesDiscount.getDiscount(), subTotalInicial, 3);
+		var dataLikesDiscount = pgCheckoutWrapper.applyLoyaltyPoints();
+		checkLoyaltyPointsDiscountDesktopUntil(dataLikesDiscount.getDiscount(), subTotalInicial, 3);
 		checksDefault();
 		return dataLikesDiscount;
 	}
@@ -476,7 +476,7 @@ public class CheckoutSteps extends StepBase {
 		description=
 			"Se aplica el descuento de <b>#{descuento}</b> al subtotal inicial de #{subtotalInicial} " + 
 			SECONDS_WAIT)
-	public boolean validateLoyaltyPointsDiscountDesktopUntil(
+	public boolean checkLoyaltyPointsDiscountDesktopUntil(
 			float descuento, float subtotalInicial, int seconds) {
 		
 		for (int i=0; i<seconds; i++) {
