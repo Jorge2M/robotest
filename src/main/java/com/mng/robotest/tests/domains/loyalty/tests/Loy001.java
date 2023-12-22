@@ -28,8 +28,9 @@ public class Loy001 extends TestBase {
 		loyTestCommons.addBagArticleNoRebajadoAndClickComprar();
 		loyTestCommons.inputLoyaltyPoints();
 		if (!isPRO()) {
+			var discountLikes = loyTestCommons.inputLoyaltyPoints();
 			String idPedido = executeMastercardEnvioTiendaPayment();
-			loyTestCommons.checkLoyaltyPointsGenerated(idPedido);
+			loyTestCommons.checkLoyaltyPointsInHistorial(discountLikes.getLikes(), idPedido);
 		}
 	}
 	

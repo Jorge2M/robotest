@@ -3,6 +3,7 @@ package com.mng.robotest.tests.domains.compra.pageobjects;
 import org.openqa.selenium.StaleElementReferenceException;
 
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DiscountLikes;
 import com.mng.robotest.tests.domains.compra.pageobjects.beans.PreciosArticulo;
 import com.mng.robotest.tests.domains.compra.pageobjects.desktop.Page1DktopCheckout;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.SecMetodoEnvioDesktop;
@@ -130,13 +131,19 @@ public class PageCheckoutWrapper extends PageBase {
 		return state(VISIBLE, XP_BUTTON_FOR_APPLY_LOYALTY_POINTS).wait(2).check();
 	}
 
-	public float applyAndGetLoyaltyPoints() {
-		var buttonLoyalty = getElementsVisible(XP_BUTTON_FOR_APPLY_LOYALTY_POINTS).get(0);
-		String textButtonApply = buttonLoyalty.getText();
-		String importeButton = ImporteScreen.normalizeImportFromScreen(textButtonApply);
+	public DiscountLikes applyLoyaltyPoints() {
+		var discountLikes = getDataLikesDiscount();
 		click(XP_BUTTON_FOR_APPLY_LOYALTY_POINTS).exec();
 		isNoDivLoadingUntil(1);
-		return (ImporteScreen.getFloatFromImporteMangoScreen(importeButton));
+		return discountLikes;
+	}
+	
+	private DiscountLikes getDataLikesDiscount() {
+		var discountElem = getElementsVisible(XP_BUTTON_FOR_APPLY_LOYALTY_POINTS).get(0);
+		var discountStr = ImporteScreen.normalizeImportFromScreen(discountElem.getText());
+		var discountFloat = ImporteScreen.getFloatFromImporteMangoScreen(discountStr);
+		return DiscountLikes.from(
+				UtilsMangoTest.round(discountFloat, 2));
 	}
 
 	public float getDiscountLoyaltyAppliedMobil() {

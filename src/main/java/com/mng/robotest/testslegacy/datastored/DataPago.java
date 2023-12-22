@@ -16,6 +16,7 @@ public class DataPago {
 	boolean userWithStoreC = false;
 	float saldoCta = 0;
 	boolean okCheckChar;
+	boolean selectEnvioType = true;
 	Map<String, String> datosRegistro = new HashMap<>();
 	
 	public DataPago(ConfigCheckout ftCkout) {
@@ -93,5 +94,13 @@ public class DataPago {
 			}
 		}
 		return false;
+	}
+
+	public boolean isSelectEnvioType() {
+		return selectEnvioType;
+	}
+
+	public void setSelectEnvioType(boolean selectEnvioType) {
+		this.selectEnvioType = selectEnvioType;
 	}
 }

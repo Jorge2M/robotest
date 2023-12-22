@@ -17,12 +17,18 @@ public class PageHistorialLikes extends PageBase {
 	private String getXPathMovimiento(int position) {
 		return "(" + XP_MOVIMIENTO + ")[" + position + "]"; 
 	}
+	
 	private String getXPathConcepto(int position) {
 		return getXPathMovimiento(position) + "/div[3]/div[2]/div"; 
 	}
-	private String getXPathPoints(int position) {
+	
+	private String getXPathPointsReceived(int position) {
 		return getXPathMovimiento(position) + "/div[3]/div[2]/div[2]/div";
 	}
+	
+	private String getXPathPointsUsed(int position) {
+		return getXPathMovimiento(position) + "/div[3]/div[2]/div[3]/div";
+	}	
 	
 	public boolean isMovimientoVisible(int seconds) {
 		return isMovimientoVisible(1, seconds);
@@ -35,18 +41,32 @@ public class PageHistorialLikes extends PageBase {
 		if (!isMovimientoVisible(position, 0)) {
 			return Optional.empty();
 		}
-		return Optional.of(new LoyaltyMovement(getConcepto(position), getPoints(position)));
+		var loyaltyMovement = new LoyaltyMovement(
+				getConcepto(position), 
+				getPointsReceived(position),
+				getPointsUsed(position));
+				
+		return Optional.of(loyaltyMovement);
 	}
 	
 	private String getConcepto(int position) {
 		return getElement(getXPathConcepto(position)).getText();
 	}
-	private int getPoints(int position) {
-		var pointsElem = getElement(getXPathPoints(position));
-		if (pointsElem!=null) {
-			return Integer.valueOf(pointsElem.getText().replaceAll("[^\\d,]", "")); 
+	
+	private int getPointsReceived(int position) {
+		var pointsElem = getElementIfExists(getXPathPointsReceived(position));
+		if (pointsElem.isPresent()) {
+			return Integer.valueOf(pointsElem.get().getText().replaceAll("[^\\d,]", "")); 
 		}
 		return 0;
 	}
+	
+	private int getPointsUsed(int position) {
+		var pointsElem = getElementIfExists(getXPathPointsUsed(position));
+		if (pointsElem.isPresent()) {
+			return Integer.valueOf(pointsElem.get().getText().replaceAll("[^\\d,]", "")); 
+		}
+		return 0;
+	}	
 
 }

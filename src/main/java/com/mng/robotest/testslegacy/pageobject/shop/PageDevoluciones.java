@@ -68,4 +68,5 @@ public class PageDevoluciones extends PageBase {
 	public boolean isVisibleSolicitarRecogidaButton() {
 		return state(VISIBLE, XP_BUTTON_SOLICITAR_RECOGIDA).check();
 	}
+	
 }

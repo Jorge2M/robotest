@@ -9,7 +9,7 @@ public class Per001 extends TestBase {
 
 	@Override
 	public void execute() throws Exception {	
-		access();
+		accessAndLogin();
 		selectCamisasAndCheckProducts();
 		scrollAndCheckDuplicatedProducts();		
 	}

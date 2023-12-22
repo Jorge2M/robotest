@@ -9,6 +9,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.chequeregalo.beans.ChequeRegalo;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DiscountLikes;
 import com.mng.robotest.tests.domains.compra.payments.billpay.steps.SecBillpaySteps;
 import com.mng.robotest.tests.domains.compra.payments.kredikarti.steps.SecKrediKartiSteps;
 import com.mng.robotest.tests.domains.compra.payments.tmango.steps.SecTMangoSteps;
@@ -200,7 +201,8 @@ public class CheckoutSteps extends StepBase {
 	 */
 	public void fluxSelectEnvioAndClickPaymentMethod(DataPago dataPago) throws Exception {
 		boolean pagoPintado = false;
-		if (!dataPago.getFTCkout().chequeRegalo) {
+		if (dataPago.isSelectEnvioType() &&
+			!dataPago.getFTCkout().chequeRegalo) {
 			pagoPintado = secMetodoEnvioDesktopSteps.fluxSelectEnvio(dataPago);
 		}
 		boolean methodSelectedOK = forceClickIconoPagoAndWait(dataPago.getDataPedido().getPago(), !pagoPintado);
@@ -448,20 +450,26 @@ public class CheckoutSteps extends StepBase {
 	@Step (
 		description="Seleccionamos el botón para aplicar el descuento de Loyalty Points",
 		expected="Se aplica correctamente el descuento")
-	public void loyaltyPointsApply() {
+	public DiscountLikes loyaltyPointsApply() {
 		if (isMobile()) {
-			loyaltyPointsApplyMobil();
+			return loyaltyPointsApplyMobil();
 		} else {
-			loyaltyPointsApplyDesktop();
+			return loyaltyPointsApplyDesktop();
 		}
 	}
 	
-	public void loyaltyPointsApplyDesktop() {
+	public DiscountLikes loyaltyPointsApplyMobil() {
+		var dataLikesDiscount = pgCheckoutWrapper.applyLoyaltyPoints();
+		checkLoyaltyPointsDiscountMobilUntil(dataLikesDiscount.getDiscount(), 3);
+		return dataLikesDiscount;
+	}
+	
+	public DiscountLikes loyaltyPointsApplyDesktop() {
+		var dataLikesDiscount = pgCheckoutWrapper.applyLoyaltyPoints();
 		float subTotalInicial = pgCheckoutWrapper.getImportSubtotalRounded(2);
-		float loyaltyPointsNoRound = pgCheckoutWrapper.applyAndGetLoyaltyPoints();
-		float loyaltyPoints = UtilsMangoTest.round(loyaltyPointsNoRound, 2);
-		validateLoyaltyPointsDiscountDesktopUntil(loyaltyPoints, subTotalInicial, 3);
+		validateLoyaltyPointsDiscountDesktopUntil(dataLikesDiscount.getDiscount(), subTotalInicial, 3);
 		checksDefault();
+		return dataLikesDiscount;
 	}
 	
 	@Validation (
@@ -480,12 +488,6 @@ public class CheckoutSteps extends StepBase {
 			waitMillis(1000);
 		}
 		return false;
-	}
-	
-	public void loyaltyPointsApplyMobil() {
-		float loyaltyPointsNoRound = pgCheckoutWrapper.applyAndGetLoyaltyPoints();
-		float loyaltyPoints = UtilsMangoTest.round(loyaltyPointsNoRound, 2);
-		checkLoyaltyPointsDiscountMobilUntil(loyaltyPoints, 3);
 	}
 	
 	@Validation(description="Aparece un descuento aplicado de #{descuento} " + SECONDS_WAIT)

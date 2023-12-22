@@ -7,14 +7,14 @@ public class Loyalty {
 	
 	@Test (
 		groups={"Loyalty", "Compra", "Checkout", "Canal:desktop,mobile_App:shop"},
-		description="Se realiza una compra con envío a tienda OK comprobando que se  se restan correctamente los Likes")
+		description="Se realiza una compra con envío a tienda OK comprobando que se aplican correctamente los Likes")
 	public void LOY001_Compra_LikesStored() throws Exception {
 		new Loy001().execute();
 	}
 	
 	@Test (
 		groups={"Loyalty", "Compra", "Checkout", "Canal:desktop,mobile_App:shop"},
-		description="Se realiza un primer pago con envío a domicilio KO y después uno OK comprobando que se restan correctamente los Likes")
+		description="Se realiza un primer pago KO y después uno con envío a domicilio OK comprobando que se aplican correctamente los Likes")
 	public void LOY007_PagoKoOk_LikesStored() throws Exception {
 		new Loy007().execute();
 	}	

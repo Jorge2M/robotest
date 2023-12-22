@@ -5,6 +5,7 @@ import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.Group
 
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.compra.pageobjects.beans.DiscountLikes;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
@@ -45,18 +46,28 @@ public class LoyTestCommons extends StepBase {
 		return new GroupWeb(NEW_NOW).isPresent();
 	}	
 	
-	public void inputLoyaltyPoints() {
+	public DiscountLikes inputLoyaltyPoints() {
 		var checkoutSteps = new CheckoutSteps();
 		checkoutSteps.checkBlockLoyalty();
-		checkoutSteps.loyaltyPointsApply();
+		return checkoutSteps.loyaltyPointsApply();
 	}
 	
-    public void checkLoyaltyPointsGenerated(String idPedido) {
+    public void checkLoyaltyPointsInHistorial(int pointsUsed, String idPedido) {
+    	var pointsGenerated = goToLoyaltyPointsHistorial();
+		new PageHistorialLikesSteps().checkPointsPayment(pointsUsed, pointsGenerated, idPedido);
+    }    
+    
+    public void checkLoyaltyPointsEnvioTiendaInHistorial(int pointsUsed, String idPedido) {
+    	var pointsGenerated = goToLoyaltyPointsHistorial();
+		new PageHistorialLikesSteps().checkPointsForEnvioTiendaPayment(pointsUsed, pointsGenerated, idPedido);    	
+    }
+    
+    private int goToLoyaltyPointsHistorial() {
     	var pageResultPagoSteps = new PageResultPagoSteps();
-    	int points = pageResultPagoSteps.checkLoyaltyPointsGenerated().getNumberPoints();
+    	int pointsGenerated = pageResultPagoSteps.checkLoyaltyPointsGenerated().getNumberPoints();
 		pageResultPagoSteps.clickLinkDescuentosExperiencias();
 		new PageMangoLikesYouSteps().click(TabLink.HISTORIAL);
-		new PageHistorialLikesSteps().checkPointsForEnvioTiendaPayment(points, idPedido);
-    }    
+		return pointsGenerated;
+    }
 
 }
