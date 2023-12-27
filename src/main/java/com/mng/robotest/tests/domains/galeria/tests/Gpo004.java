@@ -52,6 +52,7 @@ public class Gpo004 extends TestBase {
 		if (app==shop) {
 			filterGaleryByColors(CAMISAS_SHE, colorsToFilter);
 		} else {
+			colorsToFilter.add(GRIS);
 			filterGaleryByColors(ABRIGOS_SHE, colorsToFilter);
 		}
 	}
@@ -62,13 +63,15 @@ public class Gpo004 extends TestBase {
 	}
 
 	private void selectArticleInOtherLabel() {
-		pgGaleriaSteps.selectArticuloEnPestanyaAndBack(40);
+		int position = (app==shop) ? 50 : 20; 
+		pgGaleriaSteps.selectArticuloEnPestanyaAndBack(position);
 	}
 
 	private int scrollToLastAndSelectArticle() throws Exception {
 		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
 		var datosScrollFinalGaleria = pgGaleriaSteps.scrollFromFirstPage(dataScroll);
-		pgGaleriaSteps.selectArticulo(45);
+		int position = (app==shop) ? 50 : 30;
+		pgGaleriaSteps.selectArticulo(position);
 		return datosScrollFinalGaleria.getArticulosTotalesPagina();
 	}
 
