@@ -5,6 +5,7 @@ import java.util.Arrays;
 import com.mng.robotest.tests.conf.Suites;
 import com.mng.robotest.tests.conf.suites.GenericFactorySuite;
 import com.mng.robotest.tests.conf.suites.MenusPaisSuite;
+import com.mng.robotest.tests.conf.suites.MenusPaisSuite2;
 import com.mng.robotest.tests.conf.suites.PagosPaisesSuite;
 import com.mng.robotest.tests.conf.suites.PaisIdiomaSuite;
 import com.mng.robotest.tests.conf.suites.RegistrosNewSuite;
@@ -51,6 +52,8 @@ public class CreatorSuiteRunMango extends CreatorSuiteRun {
 				return new PaisIdiomaSuite(inputParamsMango);
 			case MenusPais:
 				return new MenusPaisSuite(inputParamsMango);
+			case MenusPais2:
+				return new MenusPaisSuite2(inputParamsMango);				
 			case ConsolaVotf:
 				return new ConsolaVotfSuite(inputParamsMango);
 			case RegistrosPaises:

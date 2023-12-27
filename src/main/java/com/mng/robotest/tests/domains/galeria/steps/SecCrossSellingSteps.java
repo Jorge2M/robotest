@@ -4,8 +4,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecCrossSelling;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 
 public class SecCrossSellingSteps extends StepBase {

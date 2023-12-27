@@ -8,10 +8,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageSuscripciones;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageSuscripciones.NewsLetter;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroPersonalizacionShop;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 

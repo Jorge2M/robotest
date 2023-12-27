@@ -3,14 +3,14 @@ package com.mng.robotest.tests.domains.ficha.tests;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.MenuWeb;
+import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 
 import static com.mng.robotest.tests.domains.ficha.pageobjects.SecDataProduct.ProductNav.*;
 import static com.mng.robotest.tests.domains.ficha.pageobjects.SecProductDescrDevice.TypePanel.*;
-import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
-import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.SublineaType.*;
+import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
+import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType.*;
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 public class Fic003 extends TestBase {

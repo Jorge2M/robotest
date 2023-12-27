@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.tests.domains.menus.beans.Linea;
 import com.mng.robotest.tests.repository.usuarios.GestorUsersShop;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
-import com.mng.robotest.testslegacy.beans.Linea;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.datastored.DataBag;

@@ -16,9 +16,9 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
+import com.mng.robotest.tests.domains.menus.beans.Linea;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
-import com.mng.robotest.testslegacy.beans.Linea;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.data.DataMango;

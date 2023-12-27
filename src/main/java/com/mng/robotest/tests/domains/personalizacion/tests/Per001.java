@@ -2,8 +2,8 @@ package com.mng.robotest.tests.domains.personalizacion.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.personalizacion.steps.GetProductsSteps;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 public class Per001 extends TestBase {
 

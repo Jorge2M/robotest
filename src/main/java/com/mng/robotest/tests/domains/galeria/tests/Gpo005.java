@@ -1,13 +1,13 @@
 package com.mng.robotest.tests.domains.galeria.tests;
 
 import static com.mng.robotest.tests.conf.AppEcom.*;
-import static com.mng.robotest.tests.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
-import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
+import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*;
+import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.GroupWeb;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 
 public class Gpo005 extends TestBase {
 

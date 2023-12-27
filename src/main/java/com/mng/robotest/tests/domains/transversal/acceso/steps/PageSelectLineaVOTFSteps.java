@@ -4,9 +4,9 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageSelectLineaVOTF;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.testslegacy.beans.AccesoVOTF;
 import com.mng.robotest.testslegacy.data.PaisShop;
 

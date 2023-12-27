@@ -1,18 +1,18 @@
 package com.mng.robotest.tests.domains.favoritos.tests;
 
+import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType.*;
+import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
+
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
+import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.MenuWeb;
-import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
-
-import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.GroupWeb.GroupType.*;
-import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
 
 public class Fav002 extends TestBase {
 

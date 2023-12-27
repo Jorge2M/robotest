@@ -6,7 +6,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.tests.conf.suites.PaisIdiomaSuite.VersionPaisSuite;
-import com.mng.robotest.testslegacy.appshop.paisidioma.PaisIdioma;
+import com.mng.robotest.tests.domains.menus.tests.PaisIdioma;
 import com.mng.robotest.testslegacy.beans.*;
 
 public class LineasBannersFactory extends FactoryBase {

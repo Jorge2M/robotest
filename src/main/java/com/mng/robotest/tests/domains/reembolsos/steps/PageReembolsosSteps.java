@@ -2,11 +2,11 @@ package com.mng.robotest.tests.domains.reembolsos.steps;
 
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
+import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuenta.Link;
 import com.mng.robotest.tests.domains.reembolsos.pageobjects.PageReembolsos;
 import com.mng.robotest.tests.domains.reembolsos.pageobjects.PageReembolsos.TypeReembolso;
-import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 

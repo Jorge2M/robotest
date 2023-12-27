@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.chequeregalo.tests;
 
-import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
+import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;

@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.loyalty.tests;
 
-import static com.mng.robotest.tests.domains.transversal.menus.beans.FactoryMenus.MenuItem.CARDIGANS_Y_JERSEIS_SHE;
-import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.GroupWeb.GroupType.NEW_NOW;
+import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.CARDIGANS_Y_JERSEIS_SHE;
+import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType.NEW_NOW;
 
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
@@ -14,8 +14,8 @@ import com.mng.robotest.tests.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.tests.domains.loyalty.steps.PageHistorialLikesSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.GroupWeb;
-import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
+import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 
 public class LoyTestCommons extends StepBase {
 	

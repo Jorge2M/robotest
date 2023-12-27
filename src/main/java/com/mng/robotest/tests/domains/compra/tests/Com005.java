@@ -4,8 +4,8 @@ import java.util.Map;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
+import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
-import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.steps.navigations.shop.NavigationsSteps;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.BuilderCheckout;

@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.galeria.tests;
 
 import static com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider.*;
-import static com.mng.robotest.tests.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
+import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;

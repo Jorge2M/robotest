@@ -9,7 +9,7 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.SecBolsaButtonAndLinksNe
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDetalleProduct;
 import com.mng.robotest.tests.domains.ficha.pageobjects.ModCompartirNew.IconSocial;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecProductDescrDevice.TypePanel;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.LinksAfterBolsa.*;

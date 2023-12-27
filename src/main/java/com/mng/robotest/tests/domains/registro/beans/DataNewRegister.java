@@ -3,8 +3,8 @@ package com.mng.robotest.tests.domains.registro.beans;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroPersonalizacionShop.GenderOption;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 
 public class DataNewRegister {
 

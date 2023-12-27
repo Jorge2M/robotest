@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.compra.tests;
 
-import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
+import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
 
 import java.util.Arrays;
 import java.util.List;

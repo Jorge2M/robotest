@@ -6,7 +6,7 @@ import com.mng.robotest.tests.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageRegalarMisLikesSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps.DataRegaloPuntos;
-import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 

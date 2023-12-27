@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.testslegacy.beans.Linea;
+import com.mng.robotest.tests.domains.menus.beans.Linea;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
+import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
 
 public class PageRegistroPersonalizacionShop extends PageBase {
 

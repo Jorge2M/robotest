@@ -11,6 +11,8 @@ import com.mng.robotest.tests.conf.testab.TestABactive;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.transversal.acceptcookies.pageobjects.SectionCookies;
 import com.mng.robotest.tests.domains.transversal.acceptcookies.steps.SectionCookiesSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageAlertaVOTF;
@@ -20,8 +22,6 @@ import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageSelectL
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.transversal.prehome.pageobjects.PageJCAS;
 import com.mng.robotest.testslegacy.beans.AccesoVOTF;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;

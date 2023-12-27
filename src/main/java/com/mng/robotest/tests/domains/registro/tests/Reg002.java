@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.mng.robotest.tests.domains.base.TestBase;
+import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOutlet;
-import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;

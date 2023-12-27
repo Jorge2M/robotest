@@ -6,7 +6,7 @@ import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.buscador.pageobjects.SecSearch;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.MenusWebAll;
+import com.mng.robotest.tests.domains.menus.pageobjects.MenusWebAll;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu;

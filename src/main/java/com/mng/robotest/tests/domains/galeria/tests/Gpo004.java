@@ -10,7 +10,7 @@ import com.mng.robotest.testslegacy.data.Color;
 
 import static com.mng.robotest.tests.conf.AppEcom.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion.*;
-import static com.mng.robotest.tests.domains.transversal.menus.beans.FactoryMenus.MenuItem.*;
+import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*;
 import static com.mng.robotest.testslegacy.data.Color.*;
 
 public class Gpo004 extends TestBase {

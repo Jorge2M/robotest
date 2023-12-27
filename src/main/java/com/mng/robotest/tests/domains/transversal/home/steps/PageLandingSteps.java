@@ -8,8 +8,8 @@ import org.openqa.selenium.By;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
+import com.mng.robotest.tests.domains.menus.steps.MenuSteps;
 import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
-import com.mng.robotest.tests.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.testslegacy.beans.Pais;
 
 public class PageLandingSteps extends StepBase {

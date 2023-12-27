@@ -8,11 +8,11 @@ import java.util.Map;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageInfoNewMisComprasMovil;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
 
 public class PageMiCuentaSteps extends StepBase {
 	

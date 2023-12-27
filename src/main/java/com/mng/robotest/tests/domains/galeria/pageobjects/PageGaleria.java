@@ -25,7 +25,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArtic
 import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;

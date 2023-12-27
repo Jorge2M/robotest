@@ -1,22 +1,21 @@
 package com.mng.robotest.tests.domains.registro.tests;
 
-import static com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType.*;
-
 import java.util.Arrays;
 
 import com.mng.robotest.tests.domains.base.TestBase;
+import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroPersonalizacionShop.GenderOption;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroPersonalizacionShopSteps;
-import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.DataMango;
 
+import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 public class Reg001 extends TestBase {

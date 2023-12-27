@@ -2,8 +2,8 @@ package com.mng.robotest.testslegacy.pageobject.shop.menus;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.SublineaType;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
 
 public interface MenuLateralDesktop {
 	public abstract AppEcom getApp();

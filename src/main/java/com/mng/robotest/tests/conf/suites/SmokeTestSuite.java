@@ -18,12 +18,12 @@ import com.mng.robotest.tests.domains.footer.tests.Footer;
 import com.mng.robotest.tests.domains.galeria.tests.Galeria;
 import com.mng.robotest.tests.domains.login.tests.Login;
 import com.mng.robotest.tests.domains.loyalty.tests.Loyalty;
+import com.mng.robotest.tests.domains.menus.tests.PaisIdioma;
 import com.mng.robotest.tests.domains.micuenta.tests.MiCuenta;
 import com.mng.robotest.tests.domains.otros.tests.Otras;
 import com.mng.robotest.tests.domains.personalizacion.tests.Personalizacion;
 import com.mng.robotest.tests.domains.reembolsos.tests.Reembolsos;
 import com.mng.robotest.tests.domains.registro.tests.Registro;
-import com.mng.robotest.testslegacy.appshop.paisidioma.PaisIdioma;
 
 public class SmokeTestSuite extends SuiteMangoMaker {
 

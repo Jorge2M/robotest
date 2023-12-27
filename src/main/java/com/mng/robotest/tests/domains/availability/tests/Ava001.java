@@ -7,8 +7,8 @@ import com.mng.robotest.tests.domains.availability.exceptions.CatalogsNotFoundEx
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenuSteps;
 import com.mng.robotest.tests.domains.transversal.home.steps.PageLandingSteps;
-import com.mng.robotest.tests.domains.transversal.menus.steps.MenuSteps;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;

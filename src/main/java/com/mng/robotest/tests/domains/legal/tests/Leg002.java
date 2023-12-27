@@ -3,8 +3,8 @@ package com.mng.robotest.tests.domains.legal.tests;
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
+import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroInitialShop;
-import com.mng.robotest.tests.domains.transversal.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.testslegacy.data.PaisShop;
 
 /**

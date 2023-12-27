@@ -16,8 +16,8 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFil
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecSubMenusGallery;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery.TypeLinkInfo;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.github.jorge2m.testmaker.conf.Log4jTM;

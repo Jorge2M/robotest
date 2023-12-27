@@ -1,6 +1,6 @@
 package com.mng.robotest.testslegacy.utils;
 
-import com.mng.robotest.tests.domains.transversal.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 
 
 public enum LevelPais {
