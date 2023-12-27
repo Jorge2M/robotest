@@ -20,24 +20,25 @@ public class Menus implements Serializable {
 	private final IdiomaPais idiom;
 	private final Linea line;
 	private final Sublinea subline;
-	private final GroupType group = GroupType.PRENDAS;
+	private final GroupType group;
 
 	//From @Factory
-	public Menus(Pais country, IdiomaPais idiom, Linea line) {
-		this(country, idiom, line, null);
+	public Menus(Pais country, IdiomaPais idiom, Linea line, GroupType group) {
+		this(country, idiom, line, null, group);
 	}
 	
-	public Menus(Pais country, IdiomaPais idiom, Linea line, Sublinea subline) {
+	public Menus(Pais country, IdiomaPais idiom, Linea line, Sublinea subline, GroupType group) {
 		this.indexFact = 
 				country.getNombrePais() + "-" + 
 				idiom.getLiteral() + "-" +
 				line.getType() + "-" +
-				group;
+				group.name();
 		
 		this.country = country;
 		this.idiom = idiom;
 		this.line = line;
 		this.subline = subline;
+		this.group = group;
 	}
 	  
 	@Test (

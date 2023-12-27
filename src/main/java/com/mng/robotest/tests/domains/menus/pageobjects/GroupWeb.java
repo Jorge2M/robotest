@@ -26,7 +26,7 @@ public class GroupWeb extends PageBase {
 		SELECTION("SELECTION", ARTICLES, SHE_LINE),
 		PRENDAS("prendas", MENUS, ALL_EXCEPT_HOME), 
 		ACCESORIOS("accesorios", MENUS, ALL_EXCEPT_HOME), 
-		TALLAS_PLUS("violeta", ARTICLES, SHE_LINE), 
+		TALLAS_PLUS("tplus", ARTICLES, SHE_LINE), 
 		TRAJES("sastreria", MENUS, HE_LINE),
 		BASICOS("basics", ARTICLES, HOME_LINE),
 		DORMITORIO("dormitorio", MENUS, HOME_LINE),
@@ -36,10 +36,8 @@ public class GroupWeb extends PageBase {
 		ROPA_CASA("ropa_casa", MENUS, HOME_LINE),
 		VELAS_Y_AROMAS("velas_y_aromas", MENUS, HOME_LINE),
 		PROMOCION("promocionado", MENUS, ALL_LINES), 
-		INTIMISSIMI("intimissimi", MENUS, SHE_LINE), 
-		RITUALS("rituals", MENUS, SHE_LINE),
-		COLECCIONES("colecciones", MORE, ALL_EXCEPT_HOME),		
-		DESTACADOS("destacados", MORE, ALL_LINES);
+		NUEVA_COLECCION("nuevacol", MENUS, ALL_LINES),
+		COLECCIONES("colecciones", MORE, ALL_EXCEPT_HOME);
 	
 		private final String id; 
 		private final GroupResponse groupResponse; 
