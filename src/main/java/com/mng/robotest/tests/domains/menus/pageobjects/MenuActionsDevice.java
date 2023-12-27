@@ -1,6 +1,7 @@
 package com.mng.robotest.tests.domains.menus.pageobjects;
 
 import java.util.Arrays;
+import java.text.Normalizer;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.device.FiltroMobil;
@@ -29,11 +30,12 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 		if (menu.getSublinea()!=null) {
 			idLinea = menu.getSublinea().getId(app);
 		}
-		
-		String nameMenu = menu.getMenu().toLowerCase();
+
+		String nameMenu = menu.getMenu();
+		String nameMenuInDataTestId = getMenuNameForDataTestId(nameMenu);
 		String xpath =  
 				"//ul/li//a[@data-testid='" + dataTestid + "." + 
-			nameMenu + "_" + idLinea + sufix + "' or text()='" + menu.getMenu() + "'";
+				nameMenuInDataTestId + "_" + idLinea + sufix + "' or text()='" + menu.getMenu() + "'";
 		
 		if (nameMenu.contains(" ")) {
 			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
@@ -43,6 +45,16 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 		
 		return xpath;
 	}	
+
+	private String getMenuNameForDataTestId(String menuName) {
+		String menuWithoutSpaces = menu.getMenu().toLowerCase().replace(" ", "_");
+		return removeAccents(menuWithoutSpaces);
+	}
+	
+	private String removeAccents(String value) {
+		String normalizedString = Normalizer.normalize(value, Normalizer.Form.NFD);
+        return normalizedString.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+	}
 	
 	public MenuActionsDevice(MenuWeb menu) {
 		this.menu = menu;

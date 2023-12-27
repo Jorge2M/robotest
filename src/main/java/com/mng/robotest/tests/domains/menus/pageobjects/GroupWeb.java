@@ -32,9 +32,9 @@ public class GroupWeb extends PageBase {
 		DORMITORIO("dormitorio", MENUS, HOME_LINE),
 		BANO("bano", MENUS, HOME_LINE), 
 		SALON("salon", MENUS, HOME_LINE),
-		COCINA_Y_COMEDOR("cociona", MENUS, HOME_LINE),
+		COCINA_Y_COMEDOR("cocina", MENUS, HOME_LINE),
 		ROPA_CASA("ropa_casa", MENUS, HOME_LINE),
-		VELAS_Y_AROMAS("velas_y_aromas", MENUS, HOME_LINE),
+		VELAS_Y_AROMAS("velas", MENUS, HOME_LINE),
 		PROMOCION("promocionado", MENUS, ALL_LINES), 
 		NUEVA_COLECCION("nuevacol", MENUS, ALL_LINES),
 		COLECCIONES("colecciones", MORE, ALL_EXCEPT_HOME);
