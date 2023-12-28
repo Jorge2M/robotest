@@ -4,17 +4,13 @@ import java.util.List;
 
 import com.mng.robotest.tests.conf.suites.FlagsNaviationLineas;
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktopKondo;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.tests.domains.menus.beans.Linea;
 import com.mng.robotest.tests.domains.menus.beans.Sublinea;
 import com.mng.robotest.tests.domains.menus.beans.Linea.TypeContentDesk;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb;
 import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
-import com.mng.robotest.tests.domains.menus.steps.MenuSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.tests.domains.transversal.banners.steps.SecBannersSteps;
 import com.mng.robotest.tests.domains.transversal.home.steps.PageLandingSteps;
@@ -64,19 +60,8 @@ public class Par001 extends TestBase {
 			testSpecificFeaturesForLinea(linea);
 		}
 
-		//Validamos si hemos de ejecutar los pasos correspondientes al recorrido de los menús
-		if (testMenus(linea, sublinea)) {
-			new MenuSteps().clickAllMenus(new LineaWeb(lineaType, sublineaType));
-		} else {
-			if (canClickMenuArticles(dataTest.getPais(), linea, sublinea)) {
-				clickMenuDependingLine(lineaType, sublineaType);
-				if (flagsNavigation.testMenus()) {
-					boolean bannerIsLincable = new PageGaleriaDesktopKondo().isBannerHeadLinkable();
-					if (bannerIsLincable) {
-						new PageGaleriaSteps().bannerHead.clickBannerSuperiorIfLinkableDesktop();
-					}
-				}
-			}
+		if (canClickMenuArticles(dataTest.getPais(), linea, sublinea)) {
+			clickMenuDependingLine(lineaType, sublineaType);
 		}
 	}
 	
@@ -124,16 +109,6 @@ public class Par001 extends TestBase {
 		return (
 			flagsNavigation.testBanners() && 
 			linea.getContentDeskType()==TypeContentDesk.BANNERS);
-	}
-	
-	private boolean testMenus(Linea linea, Sublinea sublinea) {
-		if (flagsNavigation.testMenus()) {
-			if (sublinea==null) {
-				return linea.getMenus().compareTo("s")==0;
-			}
-			return sublinea.getMenus().compareTo("s")==0;
-		}
-		return false;
 	}
 	
 	private int getMaxBannersToTest(LineaType linea) {

@@ -48,7 +48,7 @@ public class Menus implements Serializable {
 	    return country.getNombrePais().replace(" (Península y Baleares)", "") + "-" + 
 	            idiom.getLiteral() + "-" +
 	            line.getType() + "-" +
-	            (subline != null ? subline.getTypeSublinea() + "-" : "") +
+	            (subline == null ? line.getType() : subline.getTypeSublinea() + "-") +
 	            group.name();
 	}
 	

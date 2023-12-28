@@ -177,7 +177,7 @@ public class MenuSteps extends StepBase {
 	@Validation
 	private ChecksTM isTitleAssociatedMenu(String nameMenu) {
 		var checks = ChecksTM.getNew();
-		boolean isTitleAccording = isTitleAssociatedToMenu(nameMenu);
+		boolean isTitleAccording = isTitleAssociatedToMenu(nameMenu, 1);
 	 	checks.add(
 	 		Check.make(
 	 				"El title de la página es el asociado al menú <b>" + nameMenu + "</b>",

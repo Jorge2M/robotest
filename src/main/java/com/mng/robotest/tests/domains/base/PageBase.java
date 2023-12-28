@@ -254,6 +254,9 @@ public class PageBase extends PageObjTM {
 	protected boolean isMobile() {
 		return channel==Channel.mobile;
 	}
+	protected boolean isDevice() {
+		return channel.isDevice();
+	}
 	protected boolean isDesktop() {
 		return channel==Channel.desktop;
 	}
@@ -297,6 +300,16 @@ public class PageBase extends PageObjTM {
 	public boolean isPresentElementWithText(String text, int seconds) {
 		String xpath = "//*[text()[contains(.,'" + text + "')]]";
 		return state(PRESENT, xpath).wait(seconds).check();
+	}
+	
+	public boolean isTitleAssociatedToMenu(String menuName, int seconds) {
+		for (int i=0; i<seconds; i++) {
+			if (isTitleAssociatedToMenu(menuName)) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
 	}
 	
 	public boolean isTitleAssociatedToMenu(String menuName) {

@@ -10,28 +10,18 @@ import static org.testng.xml.XmlSuite.ParallelMode.METHODS;
 public class PaisIdiomaSuite extends SuiteMakerMango {
 
 	public enum VersionPaisSuite implements FlagsNaviationLineas {
-		V1(true, false, false, false),
-		V2(true, true, false, false),
-		V3(true, false, true, false),
-		V4(true, false, false, true),
-		V5(true, false, true, true);
+		V1(true, false),
+		V2(true, true);
 		
 		boolean testLineas;
 		boolean testBanners;
-		boolean testMenus;
-		boolean testOrderAndTranslationMenus;
-		private VersionPaisSuite(
-				boolean testLineas, boolean testBanners, boolean testMenus, boolean testOrderAndTranslationMenus) {
+		private VersionPaisSuite(boolean testLineas, boolean testBanners) {
 			this.testLineas = testLineas;
 			this.testBanners = testBanners;
-			this.testMenus = testMenus;
-			this.testOrderAndTranslationMenus = testOrderAndTranslationMenus;
 		}
 		
 		public boolean testLineas() {return testLineas;}
 		public boolean testBanners() {return testBanners;}
-		public boolean testMenus() {return testMenus;}
-		public boolean testOrderAndTranslationMenus() {return testOrderAndTranslationMenus;}
 	}
 	
 	public PaisIdiomaSuite(InputParamsMango inputParams) {

@@ -5,9 +5,11 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.mng.robotest.tests.conf.suites.MenusPaisSuite.VersionMenusPais;
 import com.mng.robotest.tests.domains.menus.beans.Linea;
-import com.mng.robotest.tests.domains.menus.tests.PaisIdioma;
+import com.mng.robotest.tests.domains.menus.beans.Sublinea;
+import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupResponse;
+import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
+import com.mng.robotest.tests.domains.menus.tests.Menus;
 import com.mng.robotest.testslegacy.beans.*;
 
 public class MenusFactory extends FactoryBase {
@@ -16,8 +18,7 @@ public class MenusFactory extends FactoryBase {
 	@Parameters({"countrys", "lineas"})
 	public Object[] createInstances(String countrysStr, String lineas, ITestContext ctx) {
 	    inputParams = getInputParams(ctx);
-	    List<PaisIdioma> listTests = new ArrayList<>();
-	    var version = VersionMenusPais.valueOf(inputParams.getVersion());
+	    List<Menus> listTests = new ArrayList<>();
 
 	    for (Pais pais : getListCountries(countrysStr)) {
 	        var optionalIdioma = pais.getListIdiomas(getApp()).stream().findFirst();
@@ -27,9 +28,7 @@ public class MenusFactory extends FactoryBase {
 	            Utilidades.getLinesToTest(pais, getApp(), lineas).stream()
 	                .filter(linea -> Utilidades.lineaToTest(linea, getApp()))
 	                .forEach(linea -> {
-	                    List<Linea> lineasAprobar = Collections.singletonList(linea);
-	                    listTests.add(new PaisIdioma(version, pais, idioma, lineasAprobar));
-	                    printTestCreated(pais, idioma, linea);
+	                    makeTestsForEachLine(listTests, pais, idioma, linea);
 	                });
 	        }
 	    }
@@ -37,10 +36,31 @@ public class MenusFactory extends FactoryBase {
 	    return listTests.toArray(new Object[0]);
 	}
 
-	private void printTestCreated(Pais pais, IdiomaPais idioma, Linea linea) {
+	private void makeTestsForEachLine(List<Menus> listTests, Pais pais, IdiomaPais idioma, Linea linea) {
+		List<Sublinea> sublineas = linea.getListSublineas(getApp());
+		var listGroups = GroupType.getGroups(linea.getType());
+		for (var group : listGroups) {
+			if (group.getGroupResponse()==GroupResponse.ARTICLES) {
+				//TODO pending
+			} else {
+				if (sublineas != null && !sublineas.isEmpty()) {
+				    for (var sublinea : sublineas) {
+				        listTests.add(new Menus(pais, idioma, linea, sublinea, group));
+				        printTestCreated(pais, idioma, linea, sublinea, group);
+				    }
+				} else {
+				    listTests.add(new Menus(pais, idioma, linea, group));
+				    printTestCreated(pais, idioma, linea, null, group);
+				}
+			}
+		}
+	}
+
+	private void printTestCreated(Pais pais, IdiomaPais idioma, Linea linea, Sublinea sublinea, GroupType group) {
+		String sublineaStr = (sublinea!=null) ? sublinea.getTypeSublinea().name() : "null";
 		System.out.println(String.format("Creado Test \"PaisIdioma\" con datos: " +
-		        "Pais=%s, Idioma=%s, Linea=%s, Num Idiomas=%d",
+		        "Pais=%s, Idioma=%s, Linea=%s, Sublinea=%s, Grupo=%s",
 		        pais.getNombrePais(), idioma.getCodigo().getLiteral(),
-		        linea.getType(), pais.getListIdiomas(getApp()).size()));
+		        linea.getType(), sublineaStr, group));
 	}
 }

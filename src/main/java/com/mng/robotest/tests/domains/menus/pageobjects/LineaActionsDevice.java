@@ -33,6 +33,11 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 				getXPathLineaLink("menu.brand") + ")";
 	}
 	
+	private String getXPathMenusSublinea() {
+		var idSublinea = sublineaType.getId(app);
+		return "//ul[@data-testid[contains(.,'menu.family.sections_" + idSublinea + "')]]";
+	}	
+	
 	private String getXPathLineaLink(String dataTestid) throws IllegalArgumentException {
 		switch (lineaType) {
 		case SHE, HE, TEEN, HOME:
@@ -126,16 +131,9 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 		}
 		return false;
 	}
+	
 	public boolean isSublineaSelected() {
-		String xpathSublineaWithFlagOpen = getXPathSublineaLink();
-		if (isOutlet() || isTablet()) {
-			xpathSublineaWithFlagOpen+="/..";
-		}
-		if (state(PRESENT, xpathSublineaWithFlagOpen).check()) {
-			String classDropdown = getElement(xpathSublineaWithFlagOpen).getAttribute("class");
-			return (classDropdown.contains("open") || classDropdown.contains("-up"));
-		}
-		return false;
+		return state(VISIBLE, getXPathMenusSublinea()).check();
 	}	
 
 	@Override
