@@ -123,7 +123,7 @@ public class GroupWeb extends PageBase {
 	
 	private String getXPathGroupDevice() {
 		String xpath = XP_GROUP_DEVICE;
-		if (group.getGroupResponse()==MORE) {
+		if (group.getGroupResponse()==MORE && sublinea==null) {
 			xpath = XP_GROUP_VIEW_MORE_DEVICE;
 		}
 		return xpath + "//self::*[@data-testid[contains(.,'" + group.getId() + "')]]"; 

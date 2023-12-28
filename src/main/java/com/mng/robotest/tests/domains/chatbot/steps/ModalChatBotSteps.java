@@ -20,7 +20,7 @@ public class ModalChatBotSteps extends StepBase {
 	public boolean clickIcon() {
 		mdChatBot.clickIcon();
 		checksDefault();
-		return checkWebchatVisible(3);
+		return checkWebchatVisible(4);
 		
 	}
 	

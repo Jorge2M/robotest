@@ -27,11 +27,11 @@ public class PagoBancontact extends PagoSteps {
 			//En el caso de Bancontact siempre saltará el D3D
 			if (dataPedido.getPago().getTipotarjEnum()==TypeTarj.VISAD3D) {
 				var pageD3DLoginSteps = new PageD3DLoginSteps();
-				isD3D = pageD3DLoginSteps.validateIsD3D(2);
+				isD3D = pageD3DLoginSteps.checkIsD3D(2);
 				pageD3DLoginSteps.isImporteVisible(dataPedido.getImporteTotal());
 				if (isD3D) {
 					dataPedido.setCodtipopago("Y");
-					pageD3DLoginSteps.loginAndClickSubmit(pago.getUsrd3d(), pago.getPassd3d());
+					pageD3DLoginSteps.loginAndClickSubmit(pago.getPassd3d());
 				}
 			}
 		}

@@ -1,25 +1,48 @@
 package com.mng.robotest.tests.domains.compra.payments.d3d.pageobjects;
 
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageD3DLogin extends PageBase {
+
+	private static final String XP_PAGE = "//title[text()[contains(.,'Payment Authentication')]]";
+	private static final String XP_IFRAME = "//iframe[@name='threeDSIframe']";
+	private static final String XP_INPUT_PASSWORD = "//input[@type='password']";
+	private static final String XP_BUTTON_SUBMIT = "//button[@id='buttonSubmit']";
 	
-	private static final String XP_INPUT_USER = "//input[@id='username']";
-	private static final String XP_INPUT_PASSWORD = "//input[@id='password']";
-	private static final String XP_BUTTON_SUBMIT = "//input[@class[contains(.,'button')] and @type='submit']";
-	
-	public boolean isPage(int seconds) {
-		return (titleContainsUntil(driver, "3D Authentication", seconds));
+	private void goToIframe() {
+		state(VISIBLE, XP_IFRAME).wait(2).check();
+		driver.switchTo().frame(getElement(XP_IFRAME));
 	}
 	
-	public void inputUserPassword(String user, String password) {
-		getElement(XP_INPUT_USER).sendKeys(user);
+	private void leaveIframe() {
+		driver.switchTo().defaultContent();
+	}	
+	
+	public boolean isPage(int seconds) {
+		return state(PRESENT, XP_PAGE).wait(seconds).check();
+	}
+	
+	public boolean isImporteVisible(String importeTotal) {
+		goToIframe();
+		var codPais = dataTest.getCodigoPais();
+		var resultado = ImporteScreen.isPresentImporteInScreen(importeTotal, codPais, driver);
+		leaveIframe();
+		return resultado;
+	}
+	
+	public void inputPassword(String password) {
+		goToIframe();
 		getElement(XP_INPUT_PASSWORD).sendKeys(password);
+		leaveIframe();
 	}
 		   
 	public void clickButtonSubmit() {
+		goToIframe();
 		click(XP_BUTTON_SUBMIT).type(JAVASCRIPT).exec();
+		leaveIframe();
 	}
 }

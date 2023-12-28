@@ -28,12 +28,7 @@ public class Menus implements Serializable {
 	}
 	
 	public Menus(Pais country, IdiomaPais idiom, Linea line, Sublinea subline, GroupType group) {
-		this.indexFact = 
-				country.getNombrePais() + "-" + 
-				idiom.getLiteral() + "-" +
-				line.getType() + "-" +
-				group.name();
-		
+		this.indexFact = getIndexFact(country, idiom, line, subline, group);
 		this.country = country;
 		this.idiom = idiom;
 		this.line = line;
@@ -47,6 +42,14 @@ public class Menus implements Serializable {
 	public void MEN001() throws Exception {
 		TestCaseTM.addNameSufix(this.indexFact);
 		new Men001(country, idiom, line, subline, group).execute();
+	}
+	
+	private String getIndexFact(Pais country, IdiomaPais idiom, Linea line, Sublinea subline, GroupType group) {
+	    return country.getNombrePais().replace(" (Península y Baleares)", "") + "-" + 
+	            idiom.getLiteral() + "-" +
+	            line.getType() + "-" +
+	            (subline != null ? subline.getTypeSublinea() + "-" : "") +
+	            group.name();
 	}
 	
 }
