@@ -50,8 +50,9 @@ public class SecTallasArticuloNormal extends SecTallasArticulo {
 		String xpathTalla = getXPathArticleTallaAvailable(posArticulo);
 		if (state(VISIBLE, xpathTalla).check()) {
 			var tallaToSelect = getElement(xpathTalla);
+			var tallaText = tallaToSelect.getText();
 			tallaToSelect.click();
-			return Talla.fromLabel(tallaToSelect.getText());
+			return Talla.fromLabel(tallaText);
 		}
 		return null;
 	}
