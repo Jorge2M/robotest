@@ -34,7 +34,8 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 				pageD3DLoginSteps.isImporteVisible(dataPedido.getImporteTotal());
 				dataPedido.setCodtipopago("Y");
 				if (isD3D) {
-					pageD3DLoginSteps.loginAndClickSubmit(dataPedido.getPago().getPassd3d());
+					var pago = dataPedido.getPago();
+					pageD3DLoginSteps.loginAndClickSubmit(pago.getUsrd3d(), pago.getPassd3d());
 				}
 				
 				break;

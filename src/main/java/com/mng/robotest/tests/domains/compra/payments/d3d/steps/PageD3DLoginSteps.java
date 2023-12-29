@@ -10,7 +10,7 @@ import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
 public class PageD3DLoginSteps extends StepBase {
 
-	private final PageD3DLogin pageD3DLogin = new PageD3DLogin();
+	private final PageD3DLogin pageD3DLogin = PageD3DLogin.make();
 	
 	@Validation (
 		description="Aparece la página de identificación D3D " + SECONDS_WAIT,
@@ -27,10 +27,10 @@ public class PageD3DLoginSteps extends StepBase {
 	}
 	
 	@Step (
-		description="Autenticarse en D3D con password #{password}", 
+		description="Autenticarse en D3D con #{user} / #{password}", 
 		expected="Aparece la página de resultado OK")
-	public void loginAndClickSubmit(String password) {
-		pageD3DLogin.inputPassword(password);
+	public void loginAndClickSubmit(String user, String password) {
+		pageD3DLogin.inputCredentials(user, password);
 		pageD3DLogin.clickButtonSubmit();
 	}
 	

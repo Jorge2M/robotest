@@ -1,6 +1,7 @@
 package com.mng.robotest.tests.domains.menus.steps;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.NoSuchElementException;
@@ -37,6 +38,8 @@ import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.A
 
 public class MenuSteps extends StepBase {
 
+	private static final List<String> MENUS_WITHOUT_ARTICLES = Arrays.asList("Essentials", "Antoine Griezmann");
+	
 	@Override
 	public void clickMenu(String menuLabel) {
 		click(MenuWeb.of(menuLabel));
@@ -158,8 +161,11 @@ public class MenuSteps extends StepBase {
 	}	
 	
 	public void checkSelecMenu(MenuWeb menu) {
-		isTitleAssociatedMenu(menu.getNameScreen());
-		new PageGaleriaSteps().checkGaleriaAfeterSelectMenu();
+		String menuName = menu.getNameScreen();
+		isTitleAssociatedMenu(menuName);
+		if (isMenuWithArticles(menuName)) {
+			new PageGaleriaSteps().checkGaleriaAfeterSelectMenu();
+		}
 		if (menu.getSubMenus()!=null && !menu.getSubMenus().isEmpty()) {
 			checkVisibilitySubmenus(menu);
 		}
@@ -172,6 +178,10 @@ public class MenuSteps extends StepBase {
 		checksGeneric()
 			.googleAnalytics()
 			.netTraffic().execute();
+	}
+	
+	private boolean isMenuWithArticles(String menuName) {
+		return !MENUS_WITHOUT_ARTICLES.contains(menuName);
 	}
 	
 	@Validation

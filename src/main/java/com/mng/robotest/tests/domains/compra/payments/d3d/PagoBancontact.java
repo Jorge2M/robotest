@@ -31,7 +31,7 @@ public class PagoBancontact extends PagoSteps {
 				pageD3DLoginSteps.isImporteVisible(dataPedido.getImporteTotal());
 				if (isD3D) {
 					dataPedido.setCodtipopago("Y");
-					pageD3DLoginSteps.loginAndClickSubmit(pago.getPassd3d());
+					pageD3DLoginSteps.loginAndClickSubmit(pago.getUsrd3d(), pago.getPassd3d());
 				}
 			}
 		}
