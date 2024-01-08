@@ -15,7 +15,7 @@ public class Bor001 extends TestBase {
 		selectTallaArticle();
 		navigateToCheckoutAndCheckEmployee();
 	}
-
+	
 	private void accessAndSelectMenuVestidos() throws Exception {
 		new AccesoSteps().manySteps();
 		clickMenu("Vestidos");
@@ -26,7 +26,7 @@ public class Bor001 extends TestBase {
 	}
 	
 	private void navigateToCheckoutAndCheckEmployee() throws Exception {
-		ConfigCheckout configCheckout = ConfigCheckout.config()
+		var configCheckout = ConfigCheckout.config()
 				.emaiExists()
 				.userIsEmployee().build();
 		
