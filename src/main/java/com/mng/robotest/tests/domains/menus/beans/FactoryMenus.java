@@ -13,8 +13,8 @@ public class FactoryMenus {
 		CAMISAS_BASICAS_SHE, 
 		CAMISAS_SHE, 
 		ABRIGOS_SHE,
-		CARDIGANS_Y_JERSEIS_JERSEIS_SHE,
-		CARDIGANS_Y_JERSEIS_SHE,
+		JERSEIS_Y_CARDIGANS_JERSEIS_SHE,
+		JERSEIS_Y_CARDIGANS_SHE,
 		ABRIGOS_HE 
 	}
 	
@@ -26,7 +26,7 @@ public class FactoryMenus {
 			return getCamisasBasicasShe();
 		case ABRIGOS_SHE:
 			return getAbrigosShe();
-		case CARDIGANS_Y_JERSEIS_JERSEIS_SHE, CARDIGANS_Y_JERSEIS_SHE:
+		case JERSEIS_Y_CARDIGANS_JERSEIS_SHE, JERSEIS_Y_CARDIGANS_SHE:
 			return getCardigansJerseisJerseisShe();
 		case ABRIGOS_HE:
 		default:
@@ -75,7 +75,7 @@ public class FactoryMenus {
 	
 	private static MenuWeb getCardigansJerseisJerseisShe() {
 		return new MenuWeb
-			.Builder("Cardigans y jerséis")
+			.Builder("Jerséis y cárdigans")
 			.linea(LineaType.SHE)
 			.group(GroupType.PRENDAS)
 			.articles(Arrays.asList("Jersey", "Chaleco", "Top", "Sudadera", "Cárdigan", "Cardigan"))

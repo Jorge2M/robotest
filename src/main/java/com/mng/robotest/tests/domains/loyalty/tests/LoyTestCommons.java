@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.loyalty.tests;
 
-import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.CARDIGANS_Y_JERSEIS_SHE;
+import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.JERSEIS_Y_CARDIGANS_SHE;
 import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType.NEW_NOW;
 
 import com.mng.robotest.tests.domains.base.StepBase;
@@ -36,7 +36,7 @@ public class LoyTestCommons extends StepBase {
 		if (isGroupNewNowSelectable()) {
 			clickGroup(NEW_NOW);
 		} else {
-			clickMenu(CARDIGANS_Y_JERSEIS_SHE);
+			clickMenu(JERSEIS_Y_CARDIGANS_SHE);
 		}
 		new PageGaleriaSteps().selectTallaAvailable();
         new SecBolsaSteps().selectButtonComprar();

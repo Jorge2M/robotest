@@ -31,7 +31,7 @@ public class Gpo005 extends TestBase {
 			clickGroup(NEW_NOW);
 			pgGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);			
 		} else {
-			clickMenu(CARDIGANS_Y_JERSEIS_SHE);
+			clickMenu(JERSEIS_Y_CARDIGANS_SHE);
 		}
 	}
 
@@ -52,7 +52,7 @@ public class Gpo005 extends TestBase {
 	private void clickSubmenu() {
 		clickMenu(VESTIDOS_SHE);
 		if (app==outlet || channel.isDevice()) {
-			clickSubMenu(CARDIGANS_Y_JERSEIS_JERSEIS_SHE);
+			clickSubMenu(JERSEIS_Y_CARDIGANS_JERSEIS_SHE);
 		} else {
 			clickSubMenu(CAMISAS_BASICAS_SHE);
 		}		
