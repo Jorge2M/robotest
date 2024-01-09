@@ -1395,7 +1395,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Kuzey Kıbrıs (Türk Lirasi)" codigo="602"> <!-- Chipre del norte -->
@@ -1532,7 +1532,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Portugal" codigo="010">
@@ -2329,7 +2329,7 @@ where
 	type="Paypal" tiendas="shop,outlet" empleado="n" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="United Kingdom (Channel Islands)" codigo="019">
