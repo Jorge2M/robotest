@@ -7,7 +7,6 @@ import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 
-import static com.mng.robotest.tests.domains.ficha.pageobjects.SecDataProduct.ProductNav.*;
 import static com.mng.robotest.tests.domains.ficha.pageobjects.SecProductDescrDevice.TypePanel.*;
 import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
 import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType.*;
@@ -35,11 +34,8 @@ public class Fic003 extends TestBase {
 				.linea(NINA)
 				.sublinea(NINA_NINA).build());
 		
-		DataFichaArt dataArtOrigin = selectFirstArticleInGalery();
-
+		selectFirstArticleInGalery();
 		kcSafetyTest();
-		pFichaSteps.selectLinkNavigation(NEXT, dataArtOrigin.getReferencia(), 1);
-		pFichaSteps.selectLinkNavigation(PREV, dataArtOrigin.getReferencia(), 2);
 	}
 
 	private DataFichaArt selectFirstArticleInGalery() {

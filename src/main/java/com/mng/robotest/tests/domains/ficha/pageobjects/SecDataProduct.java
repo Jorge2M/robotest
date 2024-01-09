@@ -21,8 +21,6 @@ import static com.mng.robotest.testslegacy.data.PaisShop.CROATIA;
 
 public class SecDataProduct extends PageBase {
 
-	public enum ProductNav { PREV, NEXT }
-
 	private final SSecSelTallasFicha secSelTallas = SSecSelTallasFicha.make(channel, app);
 
 	private static final String XP_NOMBRE_ARTICULO_DESKTOP = "//h1[@itemprop='name']";
@@ -32,20 +30,6 @@ public class SecDataProduct extends PageBase {
 
 	public SSecSelTallasFicha getSecSelTallas() {
 		return secSelTallas;
-	}
-
-	//xpaths asociados a los links prev/next
-	private static final String XP_PRODUCT_NAV_BLOCK = "//div[@class='nav-product-container' or @class='nav-product-navigation']";
-	private static final String XP_PREV_LINK = XP_PRODUCT_NAV_BLOCK + "//a[@id='prev' or text()[contains(.,'Anterior')]]";
-	private static final String XP_NEXT_LINK = XP_PRODUCT_NAV_BLOCK + "//a[@id='next' or text()[contains(.,'Siguiente')]]";
-	private String getXPathLinkProductNav(ProductNav productNav) {
-		switch (productNav) {
-			case PREV:
-				return XP_PREV_LINK;
-			case NEXT:
-			default:
-				return XP_NEXT_LINK;
-		}
 	}
 
 	//xpaths asociados a los colores
@@ -250,17 +234,6 @@ public class SecDataProduct extends PageBase {
 	}
 
 
-
-	//Funciones referentes al prev/next
-	public boolean isVisiblePrevNextUntil(ProductNav productNav, int seconds) {
-		String xpathLink = getXPathLinkProductNav(productNav);
-		return state(VISIBLE, xpathLink).wait(seconds).check();
-	}
-
-	public void selectLinkNavigation(ProductNav productNav) {
-		String xpathLink = getXPathLinkProductNav(productNav);
-		click(xpathLink).waitLink(2).exec();
-	}
 
 	//zona de colores dentro de la ficha
 

@@ -14,7 +14,6 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.PageFichaDevice;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDetalleProduct;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.ActionFavButton;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDataProduct.ColorType;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecDataProduct.ProductNav;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecSliders.Slider;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
@@ -404,42 +403,6 @@ public class PageFichaSteps extends StepBase {
 		level=WARN)
 	public boolean checkNumArticlesSlider(int numArtMin, Slider typeSlider) {
 		return (pageFicha.getNumArtVisiblesSlider(typeSlider) > numArtMin);
-	}
-
-	@Validation
-	public ChecksTM checkPrevNext(int position) {
-		var checks = ChecksTM.getNew();
-		int seconds = 5;
-		boolean isVisiblePrevLink = pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.PREV, seconds);
-		if (position==1) {
-			checks.add(
-					"No es visible el link <b>Prev</b> " + getLitSecondsWait(seconds),
-					!isVisiblePrevLink, WARN);
-		} else {
-			checks.add(
-					"Sí es visible el link <b>Prev</b> " + getLitSecondsWait(seconds),
-					isVisiblePrevLink, WARN);
-		}
-		if (isOutlet() || isDesktop()) {
-			checks.add(
-					"Es visible el link <b>Next</b>",
-					pageFicha.getSecDataProduct().isVisiblePrevNextUntil(ProductNav.NEXT, 0), WARN);
-		}
-		return checks;
-	}
-
-	@Step (
-		description="Seleccionamos el link #{productNav}</b>",
-		expected="Aparece una página de ficha correcta")
-	public void selectLinkNavigation(ProductNav productNav, String refProductOrigin, int position) {
-		pageFicha.getSecDataProduct().selectLinkNavigation(productNav);
-		if (productNav==ProductNav.PREV) {
-			checkIsFichaArtDisponible(refProductOrigin, 3);
-		}
-
-		if (productNav==ProductNav.NEXT) {
-			checkPrevNext(position + 1);
-		}
 	}
 
 	//------------------------------------------------------------------------

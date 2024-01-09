@@ -102,11 +102,9 @@ public class PageGaleriaSteps extends StepBase {
 		pgGaleria.clickArticulo(articulo);
 		var pageFichaSteps = new PageFichaSteps();
 		pageFichaSteps.checkDetallesProducto(datosArticulo);
-		pageFichaSteps.checkPrevNext(position);
-
 		pageFichaSteps.validaBreadCrumbFicha(urlGaleria);
 		
-		return (datosArticulo);
+		return datosArticulo;
 	}
 
 	public void showTallasArticulo(int posArticulo) {
