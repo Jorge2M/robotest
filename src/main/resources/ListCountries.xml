@@ -3431,7 +3431,7 @@ where
 <idioma acceso="am">IN</idioma>
 <idioma acceso="am-ru">RU</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>43500700</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3797,7 +3797,7 @@ where
 <codigo_alf>IR</codigo_alf>
 <idioma acceso="ir">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>09211231234</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -4231,7 +4231,7 @@ where
 <codigo_alf>MN</codigo_alf>
 <idioma acceso="mn">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>80940032</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -4580,7 +4580,7 @@ where
 <codigo_alf>SY</codigo_alf>
 <idioma acceso="sy">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>995664664</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -4629,7 +4629,7 @@ where
 <idioma acceso="th">TH</idioma>
 <idioma acceso="th-en">IN</idioma>
 <codpos>10560</codpos>
-<telefono>665015122</telefono>
+<telefono>845271640</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -4698,7 +4698,7 @@ where
 <idioma acceso="ae">AR</idioma>
 <idioma acceso="ae-en">IN</idioma>
 <codpos>08720</codpos>
-<telefono>0501234567</telefono>
+<telefono>551234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
 <register nuevo="S" cpost="N" publi="S"/>
@@ -4901,7 +4901,7 @@ where
 <paistop>N</paistop>
 <loyalty>N</loyalty>
 <codpos>00000</codpos>
-<telefono>651234567</telefono>
+<telefono>670710966</telefono>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
@@ -5098,7 +5098,7 @@ where
 <rgpd>S</rgpd>
 <loyalty>N</loyalty>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>692324245</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -5395,7 +5395,7 @@ where
 <codigo_alf>NG</codigo_alf>
 <idioma acceso="ng">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>8062556177</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -5549,7 +5549,7 @@ where
 <!-- <idioma acceso="tn">IN</idioma>-->
 <idioma acceso="tn-fr">FR</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>22858290</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
