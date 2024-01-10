@@ -651,7 +651,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Deutschland" codigo="004">
@@ -709,7 +709,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Gibraltar" codigo="044">
@@ -783,7 +783,7 @@
 	type="tpvvotf" tiendas="votf" empleado="n"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Hungary" codigo="064">
@@ -1581,7 +1581,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Romania" codigo="066">
@@ -2848,6 +2848,7 @@ where
 -->
 <multidireccion>N</multidireccion>
 <!-- <emailuser>test_user_722183@testuser.com</emailuser>--> <!-- Es preciso probar con este email para que se pinte el pago 'mercadopago' -->
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Curaçao" codigo="478">
@@ -4688,6 +4689,7 @@ where
 	type="tpvvotf" tiendas="votf"
 	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="United Arab Emirates" codigo="647">
