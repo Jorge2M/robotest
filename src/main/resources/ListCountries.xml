@@ -152,7 +152,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -722,7 +722,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -992,7 +992,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1199,7 +1199,7 @@
 <telefono>78343630</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1264,7 +1264,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1329,7 +1329,7 @@
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1406,7 +1406,7 @@
 <telefono>99123456</telefono>
 <dni>10000000146</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1920,7 +1920,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1983,7 +1983,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2042,7 +2042,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2342,7 +2342,7 @@ where
 <telefono>07123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2430,7 +2430,7 @@ where
 <codpos>8649</codpos>
 <telefono>4412346526</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2467,7 +2467,7 @@ where
 <codpos>HT6130</codpos>
 <telefono>48331575</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2580,7 +2580,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2601,7 +2601,7 @@ where
 <telefono>8095903838</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2899,7 +2899,7 @@ where
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<register nuevo="N" cpost="N" publi="S"/>
+<register nuevo="S" cpost="N" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3001,7 +3001,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3020,7 +3020,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3039,7 +3039,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3058,7 +3058,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3075,7 +3075,7 @@ where
 <telefono>3101234567</telefono>
 <dni>8001984561</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="n" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="s" outlet="n" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3125,7 +3125,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3277,7 +3277,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3295,7 +3295,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3312,7 +3312,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3329,7 +3329,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3348,7 +3348,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3411,7 +3411,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3433,7 +3433,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="n" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3453,7 +3453,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3530,7 +3530,7 @@ where
 <codpos>120101</codpos>
 <telefono>86232004</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3565,7 +3565,7 @@ where
 <telefono>13910998888</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="s" outlet="n" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3646,7 +3646,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3799,7 +3799,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3818,7 +3818,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3837,7 +3837,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3856,7 +3856,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3895,7 +3895,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3914,7 +3914,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4057,7 +4057,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4122,7 +4122,7 @@ where
 <telefono>68258508</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<register nuevo="N" cpost="N" publi="S"/>
+<register nuevo="S" cpost="N" publi="S"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4233,7 +4233,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4298,7 +4298,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4327,7 +4327,7 @@ where
 <telefono>9123456789</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4546,7 +4546,7 @@ where
 <codpos>10120</codpos>
 <telefono>777306509</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4582,7 +4582,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4601,7 +4601,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <!--<tiendas_online>shop,votf</tiendas_online>-->
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea 		  id="HE"        shop="n" outlet="n" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4631,7 +4631,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="n" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4699,7 +4699,7 @@ where
 <telefono>0501234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<register nuevo="N" cpost="N" publi="S"/>
+<register nuevo="S" cpost="N" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4784,7 +4784,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4847,7 +4847,7 @@ where
 <codpos>204</codpos>
 <telefono>67844110</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4880,7 +4880,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4901,7 +4901,7 @@ where
 <codpos>00000</codpos>
 <telefono>651234567</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4936,7 +4936,7 @@ where
 <codpos>109</codpos>
 <telefono>63221967</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4971,7 +4971,7 @@ where
 <telefono>012345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5004,7 +5004,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5064,7 +5064,7 @@ where
 <codpos>1000</codpos>
 <telefono>911234567</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5099,7 +5099,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5120,7 +5120,7 @@ where
 <telefono>232345671</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5155,7 +5155,7 @@ where
 <telefono>704400831</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5191,7 +5191,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5212,7 +5212,7 @@ where
 <codpos>105</codpos>
 <telefono>342031030</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5246,7 +5246,7 @@ where
 <codpos>101100</codpos>
 <telefono>996705984</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5284,7 +5284,7 @@ where
 <codpos>376</codpos>
 <telefono>74442222</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5318,7 +5318,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5339,7 +5339,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5360,7 +5360,7 @@ where
 <codpos>1100</codpos>
 <telefono>843339993</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5396,7 +5396,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5417,7 +5417,7 @@ where
 <codpos>672</codpos>
 <telefono>788301021</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5453,7 +5453,7 @@ where
 <telefono>701012345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5515,7 +5515,7 @@ where
 <codpos>0255</codpos>
 <telefono>752848220</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5550,7 +5550,7 @@ where
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5570,7 +5570,7 @@ where
 <codpos>1595</codpos>
 <telefono>774699282</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5604,7 +5604,7 @@ where
 <codpos>10101</codpos>
 <telefono>761990075</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5638,7 +5638,7 @@ where
 <codpos>08720</codpos>
 <telefono>773443049</telefono>
 <tiendas_online>shop</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
