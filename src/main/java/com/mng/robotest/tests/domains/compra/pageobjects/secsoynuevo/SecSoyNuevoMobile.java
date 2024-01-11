@@ -8,8 +8,7 @@ public class SecSoyNuevoMobile extends SecSoyNuevo {
 	private static final String XP_INPUT_EMAIL = XP_FORM_IDENT + "//input[@data-testid='checkout.guestContinue.emailInput']";
 	private static final String XP_BOTON_CONTINUE = "//button[@data-testid='checkout.guestContinue.continueOrderButton.continueOrder']";
 	private static final String XP_INPUT_PUBLICIDAD = "//input[@data-testid='checkout.guestContinue.subscribeNewsletterCheckbox']";
-	
-	private static final String XP_INPUT_CONSENTIMIENTO = "//input[@data-component-id='privacidad']";
+	private static final String XP_INPUT_CONSENTIMIENTO = "//input[@data-component-id='privacidad' or @id='createAccountLegal']";
 	
 	@Override
 	String getXPathBotonContinue() {
