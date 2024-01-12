@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.registro.beans.DataRegistro;
 import com.mng.robotest.tests.domains.registro.beans.ListDataRegistro;
-import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroIniOutlet;
+import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroIniOld;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
@@ -16,9 +16,9 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.github.jorge2m.testmaker.conf.StoreType.*;
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
-public class PageRegistroIniStepsOutlet extends StepBase {
+public class PageRegistroIniStepsOld extends StepBase {
 	
-	private final PageRegistroIniOutlet pgRegistroIni = new PageRegistroIniOutlet();
+	private final PageRegistroIniOld pgRegistroIni = new PageRegistroIniOld();
 	private final Pais pais = dataTest.getPais();
 	
 	@Validation (

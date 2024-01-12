@@ -6,7 +6,7 @@ import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroDirecStepsOutlet;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroFinStepsOutlet;
-import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOutlet;
+import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.DataMango;
@@ -14,7 +14,7 @@ import com.mng.robotest.testslegacy.data.DataMango;
 public class Reg004 extends TestBase {
 	
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
-	private final PageRegistroIniStepsOutlet pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
+	private final PageRegistroIniStepsOld pageRegistroIniSteps = new PageRegistroIniStepsOld();
 	private final PageRegistroDirecStepsOutlet pageRegistroDirecSteps = new PageRegistroDirecStepsOutlet();
 	private final PageRegistroFinStepsOutlet pageRegistroFinSteps = new PageRegistroFinStepsOutlet(); 
 	

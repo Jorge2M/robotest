@@ -9,7 +9,7 @@ import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
-import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOutlet;
+import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.tests.domains.transversal.modales.pageobject.ModalCambioPaisSteps;
@@ -46,7 +46,7 @@ public class SecMenusUserSteps extends StepBase {
 			new PageLogin().clickTabRegistrate();
 		}
 		if (!dataTest.getPais().isNewRegister()) {
-			var pageRegistroIniSteps = new PageRegistroIniStepsOutlet();
+			var pageRegistroIniSteps = new PageRegistroIniStepsOld();
 			pageRegistroIniSteps.checkIsPage(5);
 			pageRegistroIniSteps.validaIsRGPDVisible();
 		} else {

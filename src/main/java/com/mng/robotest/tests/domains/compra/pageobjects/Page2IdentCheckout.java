@@ -327,11 +327,9 @@ public class Page2IdentCheckout extends PageBase {
 		if (state(PRESENT, XP_CHECK_PUBLICIDAD).check() && 
 			!getElement(XP_CHECK_PUBLICIDAD).isSelected()) {
 			moveToElement(XP_CHECK_PUBLICIDAD);
-			if (state(VISIBLE, XP_CHECK_PUBLICIDAD).check()) {
-				getElement(XP_CHECK_PUBLICIDAD).click();
-				datosRegistro.put("cfPubli", "true");
-				return;
-			}
+			getElement(XP_CHECK_PUBLICIDAD).click();
+			datosRegistro.put("cfPubli", "true");
+			return;
 		}
 		datosRegistro.put("cfPubli", "false");
 	}

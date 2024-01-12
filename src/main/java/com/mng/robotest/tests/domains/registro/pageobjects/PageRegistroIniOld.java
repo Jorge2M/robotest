@@ -19,7 +19,7 @@ import com.mng.robotest.tests.domains.registro.beans.ListDataRegistro.DataRegTyp
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageRegistroIniOutlet extends PageBase {
+public class PageRegistroIniOld extends PageBase {
 	
 	private static final String XP_HEADER_NEWS = "//div[@class[contains(.,'registerModal')]]//div[@class='info']";
 	private static final String XP_NEWSLETTER_TITLE = XP_HEADER_NEWS + "//p[@class[contains(.,'newsletter-register-title')]]";

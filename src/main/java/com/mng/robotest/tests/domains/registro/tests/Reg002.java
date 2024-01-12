@@ -6,20 +6,20 @@ import java.util.Map;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.registro.beans.ListDataRegistro;
-import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOutlet;
+import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 
 import static com.mng.robotest.tests.domains.registro.beans.ListDataRegistro.DataRegType.*;
 import static com.mng.robotest.tests.domains.registro.beans.ListDataRegistro.PageData.*;
-import static com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOutlet.ErrorRegister.*;
+import static com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld.ErrorRegister.*;
 import static com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType.*;
 
 public class Reg002 extends TestBase {
 
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
-	private final PageRegistroIniStepsOutlet pgRegistroIniSteps = new PageRegistroIniStepsOutlet();
+	private final PageRegistroIniStepsOld pgRegistroIniSteps = new PageRegistroIniStepsOld();
 	
 	private final Map<String, String> dataRegister = new HashMap<>();
 	

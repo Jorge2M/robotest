@@ -14,7 +14,7 @@ import com.mng.robotest.tests.domains.registro.beans.ListDataNinos;
 import com.mng.robotest.tests.domains.registro.beans.DataNino.sexoType;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroDirecStepsOutlet;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroFinStepsOutlet;
-import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOutlet;
+import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroNinosStepsOutlet;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroSegundaStepsOutlet;
 import com.mng.robotest.tests.domains.transversal.cabecera.steps.SecCabeceraSteps;
@@ -26,7 +26,7 @@ import com.mng.robotest.testslegacy.data.Constantes.ThreeState;
 
 public class Reg003 extends TestBase {
 
-	private final PageRegistroIniStepsOutlet pgRegistroIniSteps = new PageRegistroIniStepsOutlet();
+	private final PageRegistroIniStepsOld pgRegistroIniSteps = new PageRegistroIniStepsOld();
 	private final PageRegistroSegundaStepsOutlet pgRegistroSegundaSteps = new PageRegistroSegundaStepsOutlet();	
 	private final PageRegistroNinosStepsOutlet pgRegistroNinosSteps = new PageRegistroNinosStepsOutlet();
 	private final PageRegistroDirecStepsOutlet pgRegistroDirecSteps = new PageRegistroDirecStepsOutlet();
