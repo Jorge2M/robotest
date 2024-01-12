@@ -14,7 +14,7 @@ public class SectionCookies extends PageBase {
 	//TODO si con Genesis podemos aprovechar los class habrá que cambiar esto
 	private static final String XP_WRAPPER_NEW = "//*[@data-testid='cookies.layout']";
 	private static final String XP_SET_COOKIES_BUTTON_NEW = XP_WRAPPER_NEW + "//button[@class[contains(.,'Button_secondary')]]";
-	private static final String XP_ACCEPT_BUTTON_NEW = XP_WRAPPER_NEW + "//button[@class[contains(.,'Button_inverse')] and not(@class[contains(.,'Button_secondary')])]";
+	private static final String XP_ACCEPT_BUTTON_NEW = XP_WRAPPER_NEW + "//button[@class[contains(.,'CookiesContent_button')]][2]";
 	
 	private String getXPathSetCookiesButton() {
 		return "(" + XP_SET_COOKIES_BUTTON + " | " + XP_SET_COOKIES_BUTTON_NEW + ")";
