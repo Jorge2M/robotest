@@ -84,6 +84,21 @@ Covers the web channels: desktop, mobile, tablet
 	Launch execution is analog to the previous case
 	
 	The html report can be viewed using the "idExecSuite" field returned by the previous POST call and executing the follow url in the browser: localhost/suiterun/{id_testrun}/report	
+
+### How view and interact with the browsers executed in docker
+	modify Dockerfile including the code:
+		RUN apt-get update && \
+		DEBIAN_FRONTEND=noninteractive apt-get install -y \
+		xauth \
+		x11-apps
+    
+		ENV DISPLAY=:0 
+
+	modify docker-entrypoint.sh replacing sentence xvfb-run by:	
+		java -cp robotest.jar com.mng.robotest.access.rest.ServerRest -port 8080 -secureport 443 ${PARAM_URL_HUB} ${PARAM_URL_INIT_SLAVE}
+
+	docker run -e DISPLAY=172.28.8.106:0 -p 80:8080 --privileged jorge2m/robotest:latest	
+
     
 ### Run integration tests 
   

@@ -17,6 +17,15 @@ RUN unzip robotest.zip
 	
 COPY docker-entrypoint.sh /robotest/docker-entrypoint.sh
 
+#DEVELOP ONLY - INIT
+#RUN apt-get update && \
+#    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+#    xauth \
+#    x11-apps
+    
+#ENV DISPLAY=:0
+#DEVELOP ONLY - FIN
+
 RUN apt-get update && apt-get install -y tzdata \
     && rm -rf /var/lib/apt/lists/*
 	

@@ -22,4 +22,8 @@ mount -o remount /dev/shm
 
 echo $SCREEN_RESOLUTION
 echo $PARAM_URL_HUB
-xvfb-run -s "-screen 0 ${SCREEN_RESOLUTION}" java -cp robotest.jar com.mng.robotest.access.rest.ServerRest -port 8080 -secureport 443 ${PARAM_URL_HUB} ${PARAM_URL_INIT_SLAVE}
+xvfb-run -s "-screen 0 ${SCREEN_RESOLUTION}" java -cp robotest.jar com.mng.robotest.access.rest.ServerRest -port 8080 -secureport 443 ${PARAM_URL_HUB} ${PARAM_URL_INIT_SLAVE} --disable-gpu
+#Xvfb :1 -screen 0 ${SCREEN_RESOLUTION} &
+#export DISPLAY=:1
+#java -cp robotest.jar com.mng.robotest.access.rest.ServerRest -port 8080 -secureport 443 ${PARAM_URL_HUB} ${PARAM_URL_INIT_SLAVE}
+#java -cp robotest.jar com.mng.robotest.access.rest.ServerRest -port 8080 -secureport 443 ${PARAM_URL_HUB} ${PARAM_URL_INIT_SLAVE}
