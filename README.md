@@ -94,12 +94,10 @@ Covers the web channels: desktop, mobile, tablet
     
 		ENV DISPLAY=:0 
 
-	modify docker-entrypoint.sh replacing sentence xvfb-run by:	
-		java -cp robotest.jar com.mng.robotest.access.rest.ServerRest -port 8080 -secureport 443 ${PARAM_URL_HUB} ${PARAM_URL_INIT_SLAVE}
+	start XLaunch Terminal in Windows
 
 	docker run -e DISPLAY=172.28.8.106:0 -p 80:8080 --privileged jorge2m/robotest:latest	
-
-    
+	
 ### Run integration tests 
   
     ./mvnw clean verify -DskipUnitTests    
