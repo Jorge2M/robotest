@@ -51,7 +51,7 @@
 <telefono>345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,outlet,votf</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -719,7 +719,7 @@
 <rgpd>S</rgpd>
 <loyalty>N</loyalty>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>51234000</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -2577,7 +2577,7 @@ where
 <codigo_alf>CU</codigo_alf>
 <idioma acceso="cu">ES</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>52999412</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3018,7 +3018,7 @@ where
 <codigo_alf>BO</codigo_alf>
 <idioma acceso="bo">ES</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>76078060</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3037,7 +3037,7 @@ where
 <idioma acceso="br-en">IN</idioma>
 <idioma acceso="br-es">ES</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>83987654321</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3056,7 +3056,7 @@ where
 <codigo_alf>CL</codigo_alf>
 <idioma acceso="cl">ES</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>223413675</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3451,7 +3451,7 @@ where
 <idioma acceso="az">IN</idioma>
 <idioma acceso="az-ru">RU</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>703111184</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3644,7 +3644,7 @@ where
 <codigo_alf>GE</codigo_alf>
 <idioma acceso="ge">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>595123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3816,7 +3816,7 @@ where
 <codigo_alf>IQ</codigo_alf>
 <idioma acceso="iq">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>7733334149</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3835,7 +3835,7 @@ where
 <codigo_alf>IL</codigo_alf>
 <idioma acceso="il">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>501234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -4828,7 +4828,7 @@ where
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4879,7 +4879,7 @@ where
 <codigo_alf>BF</codigo_alf>
 <idioma acceso="bf">FR</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>60991234</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -5003,7 +5003,7 @@ where
 <codigo_alf>CI</codigo_alf>
 <idioma acceso="ci">FR</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>0112345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -5097,7 +5097,7 @@ where
 <idioma acceso="re">FR</idioma>
 <rgpd>S</rgpd>
 <loyalty>N</loyalty>
-<codpos>08720</codpos>
+<codpos>97424</codpos>
 <telefono>692324245</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
