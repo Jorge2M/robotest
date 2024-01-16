@@ -110,7 +110,7 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 	
 	
 	public void checkWeAreLogged() {
-		new AccesoSteps().checkIsLogged(7);
+		new AccesoSteps().checkIsLogged();
 	}	
 	
 	@Validation(

@@ -4,6 +4,7 @@ import java.net.URISyntaxException;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 
@@ -23,6 +24,7 @@ import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.*;
 import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class AccesoSteps extends StepBase {
 
@@ -68,21 +70,39 @@ public class AccesoSteps extends StepBase {
 			.netTraffic().execute();
 	}
 	
-	@Validation(
-		description="Aparece el link \"Mi cuenta\" (usuario loginado) " + SECONDS_WAIT)
-	public boolean checkIsLogged(int seconds) {
-		return new MenusUserWrapper()
-				.isMenuInStateUntil(MI_CUENTA, PRESENT, seconds);
+	public void checkIsLogged() {
+		int seconds = 6;
+		if (isPRO()) {
+			checkIsLogged(seconds, DEFECT);
+		} else {
+			//Overcome random performance problem in PRE
+			var checks = checkIsLogged(seconds, WARN);
+			if (!checks.areAllChecksOvercomed()) {
+				checkIsLogged(seconds, DEFECT);
+			}
+		}
 	}
 	
+	public void checkLinksAfterLogin() {
+		checkIsLogged();
+		checkOtherLinksAfterLogin();
+	}	
+	
 	@Validation
-	public ChecksTM checkLinksAfterLogin() {
+	public ChecksTM checkIsLogged(int seconds, State level) {
 		var checks = ChecksTM.getNew();
-		int seconds = 7;
 		var userMenus = new MenusUserWrapper();
 		checks.add(
 			"Aparece el link \"Mi cuenta\" " + getLitSecondsWait(seconds),
-			userMenus.isMenuInStateUntil(MI_CUENTA, PRESENT, seconds));
+			userMenus.isMenuInStateUntil(MI_CUENTA, PRESENT, seconds), level);
+		
+		return checks;
+	}
+	
+	@Validation
+	private ChecksTM checkOtherLinksAfterLogin() {
+		var checks = ChecksTM.getNew();
+		var userMenus = new MenusUserWrapper();
 		
 		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(FAVORITOS, PRESENT, 0);
 		if (isOutlet()) { 
