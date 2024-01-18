@@ -9,6 +9,8 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroInitialShop;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 public class PageRegistroInitialShopSteps extends StepBase {
 
 	private final PageRegistroInitialShop pgRegistroInitial = new PageRegistroInitialShop();
@@ -31,11 +33,11 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		if (dataTest.getPais().getRegister().isPubli()) {
 		  	checks.add(
 				"Sí está seleccionado el radiobox de publicidad",
-				isSelectedPubli);
+				isSelectedPubli, WARN);
 		} else {
 		  	checks.add(
 				"No está seleccionado el radiobox de publicidad",
-				!isSelectedPubli);
+				!isSelectedPubli, WARN);
 		}
 		return checks;
 	}		

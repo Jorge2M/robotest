@@ -144,12 +144,12 @@
 <galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
-<pais nombre_pais="Беларусь" codigo="073">
+<pais nombre_pais="Беларусь" codigo="073"> <!-- Bielorrusia -->
 <codigo_pais>073</codigo_pais>
 <codigo_alf>BY</codigo_alf>
 <idioma acceso="by">RU</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>297064452</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -1261,7 +1261,7 @@
 <codigo_alf>MD</codigo_alf>
 <idioma acceso="md">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>78983333</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -1326,7 +1326,7 @@
 <codigo_alf>ME</codigo_alf>
 <idioma acceso="me">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>67573733</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -1905,7 +1905,7 @@ where
     t3.baja_shop is null-->
 <accesovotf usuario="tda00003" password="mng00003"/>
 <!-- https://confluence.mango.com/pages/viewpage.action?pageId=230916541-->
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="España (Ceuta)" codigo="022">
@@ -2419,6 +2419,26 @@ where
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
 <galeriakondo>shop</galeriakondo>	
+</pais>
+
+<pais nombre_pais="Belize" codigo="421">
+<codigo_pais>431</codigo_pais>
+<codigo_alf>BZ</codigo_alf>
+<idioma acceso="bz">IN</idioma>
+<idioma acceso="bz-es">ES</idioma>
+<codpos>08720</codpos>
+<telefono>6007171</telefono>
+<dni>34763592N</dni>
+<tiendas_online></tiendas_online>
+<register nuevo="S" cpost="S" publi="N"/>
+<shoponline>
+<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
+<linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+</shoponline>
+<multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
 </pais>
 
 <pais nombre_pais="Bermuda " codigo="413">
@@ -2999,7 +3019,7 @@ where
 <codigo_alf>AR</codigo_alf>
 <idioma acceso="ar">ES</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>91112345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3275,7 +3295,7 @@ where
 <codigo_alf>PY</codigo_alf>
 <idioma acceso="py">ES</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>981123456</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3293,7 +3313,7 @@ where
 <codigo_alf>PE</codigo_alf>
 <idioma acceso="pe">ES</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>949162475</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3310,7 +3330,7 @@ where
 <codigo_alf>SR</codigo_alf>
 <idioma acceso="sr">NL</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>8571589</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3327,7 +3347,7 @@ where
 <codigo_alf>UY</codigo_alf>
 <idioma acceso="uy">ES</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>99268333</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3346,7 +3366,7 @@ where
 <codigo_alf>VE</codigo_alf>
 <idioma acceso="ve">ES</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>4142340061</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -3409,7 +3429,7 @@ where
 <codigo_alf>NC</codigo_alf>
 <idioma acceso="nc">FR</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>942223</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -4055,7 +4075,7 @@ where
 <codigo_alf>KG</codigo_alf>
 <idioma acceso="kg">RU</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>701234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -4296,7 +4316,7 @@ where
 <codigo_alf>PK</codigo_alf>
 <idioma acceso="pk">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>3409234567</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -4599,7 +4619,7 @@ where
 <codigo_alf>TW</codigo_alf>
 <idioma acceso="tw">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>912345678</telefono>
 <dni>34763592N</dni>
 <!--<tiendas_online>shop,votf</tiendas_online>-->
 <register nuevo="S" cpost="S" publi="N"/>
@@ -4632,7 +4652,7 @@ where
 <telefono>845271640</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop,votf</tiendas_online>
-<register nuevo="S" cpost="S" publi="N"/>
+<register nuevo="S" cpost="N" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="s" outlet="n" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4783,7 +4803,7 @@ where
 <codigo_alf>VN</codigo_alf>
 <idioma acceso="vn">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>962455517</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -4846,7 +4866,7 @@ where
 <idioma acceso="bj-en">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>204</codpos>
+<codpos>300271</codpos>
 <telefono>67844110</telefono>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -5153,7 +5173,7 @@ where
 <idioma acceso="ke">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>00100</codpos>
+<codpos>00503</codpos>
 <telefono>704400831</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
@@ -5190,7 +5210,7 @@ where
 <codigo_alf>LY</codigo_alf>
 <idioma acceso="ly">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>916812717</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -5317,7 +5337,7 @@ where
 <idioma acceso="mu-fr">FR</idioma>
 <idioma acceso="mu-en">IN</idioma>
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>52554898</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -5338,7 +5358,7 @@ where
 <idioma acceso="ma-fr">IN</idioma>
 <!-- <idioma acceso="ma">FR</idioma>-->
 <codpos>08720</codpos>
-<telefono>665015122</telefono>
+<telefono>637751475</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -5386,6 +5406,34 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
+<multidireccion>N</multidireccion>
+<galeriakondo>shop</galeriakondo>
+</pais>
+
+<pais nombre_pais="Niger" codigo="240">
+<codigo_pais>240</codigo_pais>
+<codigo_alf>NE</codigo_alf>
+<idioma acceso="ne">FR</idioma>
+<idioma acceso="ne-en">IN</idioma>
+<codpos>08720</codpos>
+<telefono>91553890</telefono>
+<dni>34763592N</dni>
+<tiendas_online></tiendas_online>
+<register nuevo="S" cpost="S" publi="N"/>
+<shoponline>
+<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
+<linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
+<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
+<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
+</shoponline>
 <multidireccion>N</multidireccion>
 <galeriakondo>shop</galeriakondo>
 </pais>
@@ -5451,7 +5499,7 @@ where
 <idioma acceso="sn-en">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>08720</codpos>
+<codpos>11500</codpos>
 <telefono>701012345</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
@@ -5569,7 +5617,7 @@ where
 <idioma acceso="ug">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>1595</codpos>
+<codpos>10039</codpos>
 <telefono>774699282</telefono>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
