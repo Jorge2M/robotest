@@ -3,6 +3,7 @@ package com.mng.robotest.tests.domains.ficha.pageobjects;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.SecSliders.Slider;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
@@ -48,7 +49,7 @@ public abstract class PageFicha extends PageBase {
 	}
 
 	public Talla getTallaSelected() {
-		return (secDataProduct.getSecSelTallas().getTallaSelected(app));
+		return (secDataProduct.getSecSelTallas().getTallaSelected(app, PaisShop.from(dataTest.getCodigoPais())));
 	}
 
 	public void selectTallaByValue(Talla talla) {

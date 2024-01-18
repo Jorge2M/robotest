@@ -5,6 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
@@ -190,7 +191,12 @@ public class LineasArticuloBolsa extends PageBase {
 		articleData.setReferencia(getReferenciaArticle(lineaArticleWeb));
 		articleData.setNombre(getDataArticle(DataArtBolsa.NOMBRE, lineaArticleWeb));
 		articleData.setColor(getDataArticle(DataArtBolsa.COLOR, lineaArticleWeb));
-		articleData.setTalla(Talla.fromLabel(getDataArticle(DataArtBolsa.TALLA, lineaArticleWeb)));
+		
+		var talla = Talla.fromLabel(
+			getDataArticle(DataArtBolsa.TALLA, lineaArticleWeb), 
+			PaisShop.from(dataTest.getCodigoPais())); 
+		articleData.setTalla(talla);
+
 		articleData.setCantidad(getDataArticle(DataArtBolsa.CANTIDAD, lineaArticleWeb));
 		articleData.setPrecio(getPrecioArticle(lineaArticleWeb));
 		return articleData;

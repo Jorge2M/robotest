@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.tallas.SSecSelTallasFicha;
 import com.mng.robotest.testslegacy.data.Constantes;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.ElementPage;
@@ -103,7 +104,7 @@ public class SecDataProduct extends PageBase {
 		articulo.setPrecio(getPrecioFinalArticulo());
 		articulo.setCodigoColor(getCodeColor(ColorType.SELECTED));
 		articulo.setColorName(getNombreColorSelected());
-		articulo.setTalla(secSelTallas.getTallaSelected(app));
+		articulo.setTalla(secSelTallas.getTallaSelected(app, PaisShop.from(dataTest.getCodigoPais())));
 		articulo.setNumero(1);
 		return articulo;
 	}

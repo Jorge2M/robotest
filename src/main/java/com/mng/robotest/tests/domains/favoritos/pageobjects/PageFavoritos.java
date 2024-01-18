@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu;
 
@@ -221,7 +222,7 @@ public class PageFavoritos extends PageBase {
 		}
 	   
 		var tallaDisponible = listTallasAvailable.get(posicionTalla - 1); 
-		var talla = Talla.fromLabel(tallaDisponible.getText());
+		var talla = Talla.fromLabel(tallaDisponible.getText(), PaisShop.from(dataTest.getCodigoPais()));
 		tallaDisponible.click();
 		String xpathCapaTallas = getXPathCapaTallas(refProducto, codigoColor);
 		state(INVISIBLE, xpathCapaTallas).wait(1).build();

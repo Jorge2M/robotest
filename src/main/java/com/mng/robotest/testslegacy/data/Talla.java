@@ -47,15 +47,33 @@ public enum Talla {
 		this.labels = Arrays.asList(labels);
 		this.value = value;
 	}
-	public List<String> getLabels() {
+	public List<String> getLabels(PaisShop pais) {
+		if (pais==PaisShop.CHINA) {
+			var labelsNextSizeOpt = getLabelsNextSize();
+			if (labelsNextSizeOpt.isPresent()) {
+				return labelsNextSizeOpt.get();
+			}
+		}
 		return labels;
 	}
 	public String getValue() {
 		return value;
 	}
-	public static Talla fromLabel(String label) {
+	
+	private Optional<List<String>> getLabelsNextSize() {
+		int nextNumber = Integer.valueOf(getValue()) + 1;
+		String nextValue = String.format("%02d", nextNumber);
+		var nextTallaOpt = getTalla(nextValue);
+		if (nextTallaOpt.isPresent()) {
+			var nextLabels = fromValue(nextValue).getLabels(PaisShop.ESPANA);
+			return Optional.of(nextLabels);
+		}
+		return Optional.empty();
+	}
+	
+	public static Talla fromLabel(String label, PaisShop pais) {
 		Optional<Talla> talla = Arrays.asList(Talla.values()).stream()
-			.filter(e -> e.getLabels().contains(label))
+			.filter(e -> e.getLabels(pais).contains(label))
 			.findAny();
 		
 		if (talla.isPresent()) {
@@ -64,13 +82,16 @@ public enum Talla {
 		return T00;
 	}
 	public static Talla fromValue(String value) {
-		Optional<Talla> talla = Arrays.asList(Talla.values()).stream()
-				.filter(e -> e.getValue().compareTo(value)==0)
-				.findAny();
-		
-		if (talla.isPresent()) {
-			return talla.get();
+		var tallaOpt = getTalla(value);
+		if (tallaOpt.isPresent()) {
+			return tallaOpt.get();
 		}
 		return T00;
+	}
+	
+	private static Optional<Talla> getTalla(String value) {
+		return Arrays.asList(Talla.values()).stream()
+				.filter(e -> e.getValue().compareTo(value)==0)
+				.findAny();
 	}
 }

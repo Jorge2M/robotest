@@ -3,6 +3,7 @@ package com.mng.robotest.tests.domains.ficha.pageobjects.tallas;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 
 import java.util.Arrays;
@@ -37,7 +38,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	}
 	
 	String getXPathOptionTalla(Talla talla) {
-		return getXPathOptionTalla(talla.getLabels()); 
+		return getXPathOptionTalla(talla.getLabels(PaisShop.from(dataTest.getCodigoPais()))); 
 	}
 	
 	private String getXPathOptionTalla(List<String> possibleLabels) {

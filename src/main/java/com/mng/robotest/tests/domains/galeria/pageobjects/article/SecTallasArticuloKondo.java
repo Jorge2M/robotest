@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.galeria.pageobjects.CommonGaleriaKondo;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 
 public class SecTallasArticuloKondo extends SecTallasArticulo {
@@ -77,7 +78,7 @@ public class SecTallasArticuloKondo extends SecTallasArticulo {
 		if (state(VISIBLE, xpathTalla).check()) {
 			var tallaToSelect = getElement(xpathTalla);
 			tallaToSelect.click();
-			return Talla.fromLabel(tallaToSelect.getText());
+			return Talla.fromLabel(tallaToSelect.getText(), PaisShop.from(dataTest.getCodigoPais()));
 		}
 		return null;
 	}

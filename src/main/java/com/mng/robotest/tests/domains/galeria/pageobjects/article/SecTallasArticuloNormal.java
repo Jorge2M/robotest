@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktopNormal;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 
 public class SecTallasArticuloNormal extends SecTallasArticulo {
@@ -52,7 +53,7 @@ public class SecTallasArticuloNormal extends SecTallasArticulo {
 			var tallaToSelect = getElement(xpathTalla);
 			var tallaText = tallaToSelect.getText();
 			tallaToSelect.click();
-			return Talla.fromLabel(tallaText);
+			return Talla.fromLabel(tallaText, PaisShop.from(dataTest.getCodigoPais()));
 		}
 		return null;
 	}

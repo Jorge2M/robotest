@@ -2,6 +2,7 @@ package com.mng.robotest.tests.domains.ficha.pageobjects.tallas;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 
 import java.util.regex.Matcher;
@@ -33,8 +34,8 @@ public interface SSecSelTallasFicha {
 		return new SSecSelTallasFichaDesktop();
 	}
 	
-	public default Talla getTallaSelected(AppEcom app) {
-		return Talla.fromLabel(getTallaAlfSelected(app));
+	public default Talla getTallaSelected(AppEcom app, PaisShop pais) {
+		return Talla.fromLabel(getTallaAlfSelected(app), pais);
 	}
 	
 	public default void selectTallaByValue(Talla talla) {

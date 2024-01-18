@@ -8,13 +8,13 @@ public class TallaTest {
 
 	@Test
 	public void testFromLabel() {
-		Talla talla = Talla.fromLabel("13");
+		Talla talla = Talla.fromLabel("13", PaisShop.ESPANA);
 		assertEquals(Talla.T46, talla);
 	}
 	
 	@Test
 	public void testFromLabelVoid() {
-		Talla talla = Talla.fromLabel("92");
+		Talla talla = Talla.fromLabel("92", PaisShop.ESPANA);
 		assertEquals(Talla.T00, talla);
 	}
 	

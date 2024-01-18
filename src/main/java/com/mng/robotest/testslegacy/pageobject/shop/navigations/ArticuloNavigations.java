@@ -6,6 +6,7 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
@@ -66,7 +67,7 @@ public class ArticuloNavigations extends StepBase {
 			String size = articleStock.getSize().getId2Digits();
 			if (articleStock.getSize().getLabel().matches("\\d+")) {
 				size = articleStock.getSize().getLabel();
-				pgFicha.selectTallaByValue(Talla.fromLabel(size));
+				pgFicha.selectTallaByValue(Talla.fromLabel(size, PaisShop.from(dataTest.getCodigoPais())));
 			} else {
 				pgFicha.selectTallaByValue(Talla.fromValue(size));
 			}
