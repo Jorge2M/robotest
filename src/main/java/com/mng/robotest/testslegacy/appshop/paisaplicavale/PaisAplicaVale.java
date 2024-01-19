@@ -7,9 +7,9 @@ import com.mng.robotest.tests.conf.suites.PagosPaisesSuite.VersionPagosSuite;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.domain.TestFromFactory;
 
-public class PaisAplicaVale implements Serializable {
+public class PaisAplicaVale implements TestFromFactory, Serializable {
 
 	private static final long serialVersionUID = 7404913971070937277L;
 	
@@ -33,11 +33,15 @@ public class PaisAplicaVale implements Serializable {
 			idioma.getCodigo().getLiteral();
 	}
 	
+	@Override
+	public String getIdTestInFactory() {
+		return indexFact;
+	}
+	
 	@Test (
 		groups={"Pagos", "shop-movil-web", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, 
 		description="Compra usuario no registrado")
 	public void CHK001_Compra() throws Exception {
-		TestCaseTM.addNameSufix(this.indexFact);
 		new Chk001(pais, idioma, fTCkoutIni).execute();
 	}
 	

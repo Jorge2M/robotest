@@ -6,14 +6,14 @@ import java.io.Serializable;
 import org.testng.annotations.Test;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.domain.TestFromFactory;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.compra.tests.Com010;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pago;
 import com.mng.robotest.testslegacy.beans.Pais;
 
-public class CompraFact implements Serializable {
+public class CompraFact implements TestFromFactory, Serializable {
 
 	private static final long serialVersionUID = -2440149806957032044L;
 	
@@ -70,11 +70,15 @@ public class CompraFact implements Serializable {
 		return index;
 	}   
 	
+	@Override
+	public String getIdTestInFactory() {
+		return this.indexFact;
+	}
+	
 	@Test (
 		groups={"Compra", "Checkout", "Canal:all_App:all"}, alwaysRun=true, 
 		description="Test de compra (creado desde Factoría) con valores específicos a nivel de Pago, Tipo de Envío, Usuario Conectado y Empleado")
 	public void COM010_Pago() throws Exception {
-		TestCaseTM.addNameSufix(this.indexFact);
 		new Com010(
 				pais, idioma, pago, usrRegistrado, testVale, manyArticles, empleado, checkAnulaPedido)
 			.execute();

@@ -31,7 +31,7 @@ public class ListRegistrosNewXPais extends FactoryBase {
 			var itIdiomas = pais.getListIdiomas(appE).iterator();
 			while (itIdiomas.hasNext()) {
 				var idioma = itIdiomas.next();
-				listTests.add(new RegistroNew(pais, idioma, 1));
+				listTests.add(new RegistroNew(pais, idioma));
 				printTestCreation(pais, idioma);
 			}
 		}

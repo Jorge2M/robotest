@@ -5,11 +5,11 @@ import static com.mng.robotest.testslegacy.data.PaisShop.*;
 import java.io.Serializable;
 import org.testng.annotations.*;
 
-import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.domain.TestFromFactory;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 
-public class MiCuenta implements Serializable {
+public class MiCuenta implements TestFromFactory, Serializable {
 	
 	private static final long serialVersionUID = 2188911402476562105L;
 	
@@ -26,13 +26,17 @@ public class MiCuenta implements Serializable {
 		this.indexFact = pais.getNombrePais() + " (" + pais.getCodigoPais() + ") " + "-" + idioma.getCodigo().getLiteral();
 	}	
 	
+	@Override
+	public String getIdTestInFactory() {
+		return indexFact;
+	}
+	
 	@Test (
 		groups={"Micuenta", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
 		description="Verificar opciones de 'mi cuenta'")
 	@Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
 	public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
 			throws Exception {
-		TestCaseTM.addNameSufix(this.indexFact);
 		new Mic001(userConDevolucionPeroNoEnPRO, passwordUserConDevolucion).execute();
 	}
 	
@@ -43,7 +47,6 @@ public class MiCuenta implements Serializable {
 	public void MIC002_CheckConsultaMisCompras(
 			String userWithOnlinePurchases, String userWithStorePurchases, 
 			String passUserWithOnlinePurchases, String passUserWithStorePurchases) throws Exception {
-		TestCaseTM.addNameSufix(this.indexFact);
 		new Mic002(
 				pais, idioma, 
 				userWithOnlinePurchases, userWithStorePurchases,

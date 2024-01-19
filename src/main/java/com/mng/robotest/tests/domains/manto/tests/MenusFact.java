@@ -2,9 +2,10 @@ package com.mng.robotest.tests.domains.manto.tests;
 
 import java.io.Serializable;
 import org.testng.annotations.Test;
-import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 
-public class MenusFact implements Serializable {
+import com.github.jorge2m.testmaker.domain.TestFromFactory;
+
+public class MenusFact implements TestFromFactory, Serializable {
 
 	private static final long serialVersionUID = -5780907750259210736L;
 
@@ -37,23 +38,27 @@ public class MenusFact implements Serializable {
 	
 	private final Section section;
 	int prioridad = 1;
-	String indexFact = "";
 	
 	/**
 	 * Constructor para invocación desde @Factory
 	 */
 	public MenusFact(Section section, int prioridad) {
 		this.section = section;
-		this.indexFact = section.getCabecera();
 		this.prioridad = prioridad;
-		this.indexFact = section.getCabecera();
+	}
+	
+	@Override
+	public String getIdTestInFactory() {
+		if (section!=null) {
+			return section.getCabecera();
+		}
+		return "";
 	}
 
 	@Test(
 		groups={"Manto", "Canal:desktop_App:all"},
 		description="Consulta de menús")
 	public void MAN900_ConsultaMenus() {
-		TestCaseTM.addNameSufix(this.indexFact);
 		new Man900(section).execute();
 	}
 }

@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.menus.tests;
 
 import org.testng.annotations.*;
 
-import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.domain.TestFromFactory;
 import com.mng.robotest.tests.domains.menus.beans.Linea;
 import com.mng.robotest.tests.domains.menus.beans.Sublinea;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
@@ -10,7 +10,7 @@ import com.mng.robotest.testslegacy.beans.*;
 
 import java.io.Serializable;
 
-public class Menus implements Serializable {
+public class Menus implements TestFromFactory, Serializable {
 	
 	private static final long serialVersionUID = 7000361927887748996L;
 	
@@ -35,12 +35,16 @@ public class Menus implements Serializable {
 		this.subline = subline;
 		this.group = group;
 	}
+	
+	@Override
+	public String getIdTestInFactory() {
+		return indexFact;
+	}
 	  
 	@Test (
 		groups={"Menus", "Galeria", "Canal:all_App:shop,outlet"}, 
 		description="Acceso desde prehome y navegación por todos los menús del país/línea/grupo")
 	public void MEN001() throws Exception {
-		TestCaseTM.addNameSufix(this.indexFact);
 		new Men001(country, idiom, line, subline, group).execute();
 	}
 	

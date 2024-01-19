@@ -9,9 +9,9 @@ import org.testng.annotations.Test;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
+import com.github.jorge2m.testmaker.domain.TestFromFactory;
 
-public class Registro implements Serializable {
+public class Registro implements TestFromFactory, Serializable {
 	
 	private static final long serialVersionUID = 9220128375933995114L;
 	
@@ -30,11 +30,15 @@ public class Registro implements Serializable {
 		this.accessFromFactory = true;
 	}
 	
+	@Override
+	public String getIdTestInFactory() {
+		return indexFact;
+	}
+	
 	@Test (
 		groups={"Registro", "Canal:all_App:shop,outlet", "SupportsFactoryCountrys"},
 		description="Registro nuevo de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG001_NewRegisterOK() throws Exception {
-		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {
 			return;
 		}
@@ -45,7 +49,6 @@ public class Registro implements Serializable {
 		groups={"Registro", "Canal:all_App:shop,outlet"},
 		description="Registro con errores en la introducción de los datos (España)")
 	public void REG007_NewRegisterNOK() throws Exception {
-		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {
 			return;
 		}
@@ -58,7 +61,6 @@ public class Registro implements Serializable {
 		groups={"Registro", "Canal:all_App:outlet"},
 		description="Registro antiguo con errores en la introducción de los datos")
 	public void REG002_RegistroNOK() throws Exception {
-		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {
 			return;
 		}
@@ -70,7 +72,6 @@ public class Registro implements Serializable {
 		groups={"Registro", "Canal:all_App:outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="Registro antiguo de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG003_RegistroOK_publi() throws Exception {
-		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {
 			return;
 		}
@@ -82,7 +83,6 @@ public class Registro implements Serializable {
 		groups={"Registro", "Canal:desktop_App:outlet"}, alwaysRun=true, 
 		description="Registro antiguo de un usuario (sin seleccionar el link de publicidad)")
 	public void REG004_RegistroOK_NoPubli() throws Exception {
-		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {
 			return;
 		}
@@ -93,7 +93,6 @@ public class Registro implements Serializable {
 		groups={"Registro", "Canal:all_App:shop"},
 		description="Registro nuevo de un usuario en Corea (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG005_NewRegisterCorea() throws Exception {
-		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {
 			return;
 		}
@@ -106,7 +105,6 @@ public class Registro implements Serializable {
 		groups={"Registro", "Canal:all_App:shop"},
 		description="Alta/Registro antiguo de un usuario en Deutschland y (seleccionando link de publicidad) posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG006_OldRegisterDeutschland() throws Exception {
-		TestCaseTM.addNameSufix(this.indexFact);
 		if (isPro()) {
 			return;
 		}
