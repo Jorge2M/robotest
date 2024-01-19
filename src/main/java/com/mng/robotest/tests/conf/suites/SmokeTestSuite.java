@@ -21,7 +21,6 @@ import com.mng.robotest.tests.domains.loyalty.tests.Loyalty;
 import com.mng.robotest.tests.domains.menus.tests.PaisIdioma;
 import com.mng.robotest.tests.domains.micuenta.tests.MiCuenta;
 import com.mng.robotest.tests.domains.otros.tests.Otras;
-import com.mng.robotest.tests.domains.personalizacion.tests.Personalizacion;
 import com.mng.robotest.tests.domains.reembolsos.tests.Reembolsos;
 import com.mng.robotest.tests.domains.registro.tests.Registro;
 
@@ -52,8 +51,7 @@ public class SmokeTestSuite extends SuiteMangoMaker {
 			MiCuenta.class,
 			Favoritos.class,
 			Reembolsos.class,
-			Loyalty.class,
-			Personalizacion.class
+			Loyalty.class
 		);
 	}
 
