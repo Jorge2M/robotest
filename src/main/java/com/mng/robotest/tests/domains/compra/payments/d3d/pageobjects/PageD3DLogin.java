@@ -9,7 +9,7 @@ public interface PageD3DLogin {
 	
 	public static PageD3DLogin make() {
 		var pageNew = new PageD3DLoginNew();
-		if (pageNew.isPage(5)) {
+		if (pageNew.isPage(10)) {
 			return pageNew;
 		}
 		return new PageD3DLoginOld();

@@ -14,7 +14,7 @@ public class PageGaleriaDeviceKondo extends PageGaleriaDevice {
 	
 	private static final String XP_COLOR_ARTICLE_BUTTON = "//*[@data-testid='productCard.showColors.button']";
 	private static final String XP_COLOR_ARTICLE_OPTION = "//button[@data-testid='plp.color.selector']";
-	private static final String XP_UP_BUTTON = "//*[@data-testid='button-icon']";
+	private static final String XP_UP_BUTTON = "//button[@aria-label='Scroll up']/*[@data-testid='button-icon']";
 	
 	public PageGaleriaDeviceKondo() {
 		super();
