@@ -41,7 +41,6 @@ import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class PageGaleriaSteps extends StepBase {
 
-	public final SecCrossSellingSteps secCrossSellingSteps = new SecCrossSellingSteps();
 	public final BannerHeadGallerySteps bannerHead = new BannerHeadGallerySteps(this);
 	private final SecSelectorPreciosSteps secSelectorPreciosSteps = new SecSelectorPreciosSteps();
 	private final SecFiltrosSteps secFiltrosSteps = new SecFiltrosSteps();

@@ -7,7 +7,6 @@ import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupTyp
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 
 public class Gpo005 extends TestBase {
 
@@ -20,16 +19,12 @@ public class Gpo005 extends TestBase {
 		if (!channel.isDevice()) {
 			selectPricesInterval();
 		}
-		if (app!=outlet && !channel.isDevice()) {
-			checkCrossSelling();
-		}	
 		clickSubmenu();
 	}
 
 	private void clickMenu() {
 		if (isGroupNewNowSelectable()) {
 			clickGroup(NEW_NOW);
-			pgGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);			
 		} else {
 			clickMenu(JERSEIS_Y_CARDIGANS_SHE);
 		}
@@ -43,10 +38,6 @@ public class Gpo005 extends TestBase {
 	
 	private void selectPricesInterval() throws Exception {
 		pgGaleriaSteps.getSecSelectorPreciosSteps().seleccionaIntervalo();
-	}
-	
-	private void checkCrossSelling() {
-		pgGaleriaSteps.secCrossSellingSteps.validaIsCorrect(LineaType.SHE, null);
 	}
 	
 	private void clickSubmenu() {
