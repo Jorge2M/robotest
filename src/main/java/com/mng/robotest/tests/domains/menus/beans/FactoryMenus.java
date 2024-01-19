@@ -90,7 +90,7 @@ public class FactoryMenus {
 			.linea(LineaType.HE)
 			.group(GroupType.PRENDAS)
 			.articles(Arrays.asList("Abrigo", "Anorak", "Parka", "Trench", "Chaquetón", "Sobrecamisa", "Chaleco", "Chaqueta", "Cazadora"))
-			.subMenusShop(Arrays.asList("abrigos", "básicos"))
+			.subMenusShop(Arrays.asList("abrigos", "trench"))
 			.subMenusOutlet(Arrays.asList("todo", "chaquetas de piel"))
 			.build();
 	}

@@ -38,7 +38,11 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	}
 	
 	String getXPathOptionTalla(Talla talla) {
-		return getXPathOptionTalla(talla.getLabels(PaisShop.from(dataTest.getCodigoPais()))); 
+		return getXPathOptionTalla(talla, dataTest.getCodigoPais());
+	}
+	
+	String getXPathOptionTalla(Talla talla, String codPais) {
+		return getXPathOptionTalla(talla.getLabels(PaisShop.from(codPais)));
 	}
 	
 	private String getXPathOptionTalla(List<String> possibleLabels) {

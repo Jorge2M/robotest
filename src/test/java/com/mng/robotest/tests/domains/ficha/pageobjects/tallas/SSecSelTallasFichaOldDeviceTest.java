@@ -6,14 +6,15 @@ import org.junit.Test;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 
 public class SSecSelTallasFichaOldDeviceTest {
 
 	@Test
 	public void testGetXPathOptionTalla() {
-		SSecSelTallasFichaDevice selTallas = new SSecSelTallasFichaDevice(Channel.desktop, AppEcom.shop);
-		String xpath = selTallas.getXPathOptionTalla(Talla.T32);
+		var selTallas = new SSecSelTallasFichaDevice(Channel.desktop, AppEcom.shop);
+		String xpath = selTallas.getXPathOptionTalla(Talla.T32, PaisShop.ESPANA.getCodigoPais());
 
 		String xpathExpected =
 				"//div[@id='sizesContainerId']" +
