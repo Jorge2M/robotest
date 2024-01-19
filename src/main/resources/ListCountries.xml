@@ -1968,7 +1968,7 @@ where
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
 <transporte nombre="Urgente 24 h"       importe="7,95"     gratuito="99999"/>
 <multidireccion>N</multidireccion>
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="España (Islas Canarias)" codigo="021">
@@ -2090,7 +2090,7 @@ where
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
 <transporte nombre="Urgente 24 h"       importe="7,95"     gratuito="99999"/>
 <multidireccion>N</multidireccion>
-<galeriakondo>outlet</galeriakondo>
+<galeriakondo>shop,outlet</galeriakondo>
 </pais>
 
 <pais nombre_pais="Sweden" codigo="030">

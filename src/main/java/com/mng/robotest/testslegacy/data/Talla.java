@@ -94,4 +94,5 @@ public enum Talla {
 				.filter(e -> e.getValue().compareTo(value)==0)
 				.findAny();
 	}
+	
 }

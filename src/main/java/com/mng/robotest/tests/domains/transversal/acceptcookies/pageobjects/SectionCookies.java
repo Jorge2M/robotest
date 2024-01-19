@@ -6,9 +6,8 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class SectionCookies extends PageBase {
 
-	private static final String XP_WRAPPER_NEW = "//*[@id='cookies']";
-	private static final String XP_SET_COOKIES_BUTTON = XP_WRAPPER_NEW + "//*[@data-testid='cookies.button.settings']";
-	private static final String XP_ACCEPT_BUTTON = XP_WRAPPER_NEW + "//*[@data-testid='cookies.button.acceptAll']";
+	private static final String XP_SET_COOKIES_BUTTON = "//*[@data-testid='cookies.button.settings']";
+	private static final String XP_ACCEPT_BUTTON = "//*[@data-testid='cookies.button.acceptAll']";
 	
 	public boolean isVisible(int seconds) {
 		return state(VISIBLE, XP_ACCEPT_BUTTON).wait(seconds).check();
