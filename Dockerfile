@@ -9,12 +9,6 @@ FROM jorge2m/chrome-firefox-openjdk17-maven:1703091256
 COPY target/robotest.zip robotest.zip
 RUN unzip robotest.zip
 
-#WORKAROUND UNTIL SYSOPS WILL FIX COMMUNICATION PROBLEM IN K8S-TOOLS
-#COPY chromedriver-linux64.zip chromedriver.zip
-#RUN unzip chromedriver.zip && \
-#	mkdir -p /root/.cache/selenium/chromedriver/linux64/117.0.5938.149/ && \
-#	mv chromedriver/chromedriver /root/.cache/selenium/chromedriver/linux64/117.0.5938.149/
-	
 COPY docker-entrypoint.sh /robotest/docker-entrypoint.sh
 
 #DEVELOP ONLY - INIT
@@ -26,12 +20,13 @@ COPY docker-entrypoint.sh /robotest/docker-entrypoint.sh
 #ENV DISPLAY=:0
 #DEVELOP ONLY - FIN
 
-RUN apt-get update && apt-get install -y tzdata \
-    && rm -rf /var/lib/apt/lists/*
-	
 # Set time zone
 ENV TZ=Europe/Madrid
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone	
+RUN apt-get update \
+    && apt-get install -y tzdata fonts-noto-cjk fonts-noto-cjk-extra \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -snf /usr/share/zoneinfo/Europe/Madrid /etc/localtime \
+    && echo Europe/Madrid > /etc/timezone	
 	
 WORKDIR /robotest
 
