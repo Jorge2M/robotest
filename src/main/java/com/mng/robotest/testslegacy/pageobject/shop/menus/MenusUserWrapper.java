@@ -36,7 +36,7 @@ public class MenusUserWrapper extends PageBase {
 			return (secCabecera.isInStateIconoBolsa(state, seconds));
 		} else {
 			var menuUserItem = new MenuUserItem(menu, channel, app);
-			return (isMenuInStateUntil(menuUserItem, state, seconds));
+			return isMenuInStateUntil(menuUserItem, state, seconds);
 		}
 	}
 	

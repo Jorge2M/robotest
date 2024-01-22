@@ -126,9 +126,11 @@ public class AccesoSteps extends StepBase {
 			checks.add(
 				"Aparece el link \"Ayuda\"",
 				userMenus.isMenuInState(AYUDA, VISIBLE));
+			
+			//TODO pasarlo a DEFECT cuanto tengamos los tests-ids (actualmente no hay forma de identificar el de Outlet)
 			checks.add(
 				"Aparece el link \"Cerrar sesión\"",
-				userMenus.isMenuInState(CERRAR_SESION, PRESENT));
+				userMenus.isMenuInState(CERRAR_SESION, PRESENT), WARN);
 		}
 		
 		return checks;

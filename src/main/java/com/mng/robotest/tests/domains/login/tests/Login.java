@@ -19,7 +19,7 @@ public class Login {
 	}
 	
 	@Test (
-		groups={"Login", "Bolsa", "Compra", "Canal:mobile_App:shop"}, 
+		groups={"Login", "Bolsa", "Checkout", "Compra", "Canal:mobile_App:shop,outlet"}, 
 		description="Flujo bolsa -> identificación -> checkout")
 	public void LOG003_Bolsa_Identificacion() throws Exception {
 		new Log003().execute();

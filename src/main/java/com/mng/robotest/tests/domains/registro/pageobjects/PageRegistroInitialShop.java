@@ -125,6 +125,7 @@ public class PageRegistroInitialShop extends PageBase {
 	}
 	
 	public void inputPassword(String password) {
+		state(VISIBLE, XP_INPUT_PASSWORD).wait(1).check();
 		getElement(XP_INPUT_PASSWORD).sendKeys(KEYS_CLEAR_INPUT);
 		getElement(XP_INPUT_PASSWORD).sendKeys(password);
 	}

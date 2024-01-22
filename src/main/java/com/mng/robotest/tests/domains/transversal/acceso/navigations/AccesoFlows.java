@@ -132,7 +132,7 @@ public class AccesoFlows extends StepBase {
 	private void clickIniciarSesionAndWait() {
 		if (channel.isDevice()) {
 			//En el caso de mobile nos tenemos que asegurar que están desplegados los menús
-			SecCabecera secCabeceraDevice = SecCabecera.make();
+			var secCabeceraDevice = SecCabecera.make();
 			boolean toOpen = true;
 			secCabeceraDevice.clickIconoMenuHamburguerMobil(toOpen);
 			

@@ -13,6 +13,7 @@ import com.mng.robotest.tests.domains.bolsa.pageobjects.LineasArticuloBolsa.Data
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
+import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType;
@@ -35,7 +36,8 @@ public class SecBolsaSteps extends StepBase {
 	
 	public enum FluxBolsaCheckout {
 		INICIAR_SESION,
-		CONTINUAR_SIN_CUENTA 
+		CONTINUAR_SIN_CUENTA,
+		REGISTRO
 	}
 	
 	private final SecBolsa secBolsa = new SecBolsa();
@@ -269,19 +271,26 @@ public class SecBolsaSteps extends StepBase {
 				new Page1IdentCheckoutSteps().checkIsPage(7);
 			}
 		} else {
-			new CheckoutSteps().validateIsFirstPage(dataTest.isUserRegistered());
+			new CheckoutSteps().checkIsFirstPage(dataTest.isUserRegistered());
 		}
 	}
 
 	private void fluxPostSelectComprarUserNotIdentifiedMobile(FluxBolsaCheckout flux) {
 		checkVisibleContinuarSinCuentaButtonDevice(2);
-		if (flux==INICIAR_SESION) {
+		switch (flux) {
+		case INICIAR_SESION:
 			clickIniciarSesionMobile();
-			new PageIniciarSesionBolsaMobileSteps().checkIsPage(3);
-		} else {
+			new PageIniciarSesionBolsaMobileSteps().checkIsPage(3);			
+			break;
+		case CONTINUAR_SIN_CUENTA:
 			clickContinuarSinCuentaMobile();
 			new Page1IdentCheckoutSteps().checkIsPage(7);
+			break;
+		case REGISTRO:
+			clickRegistroMobile();
+			new PageRegistroInitialShopSteps().checkIsPage(5);
 		}
+
 	}
 	
 	@Step (
@@ -304,6 +313,13 @@ public class SecBolsaSteps extends StepBase {
 		expected="Se muestra la página de continuar como invitado/a")
 	public void clickContinuarSinCuentaMobile() {
 		secBolsa.clickContinuarSinCuentaMobile();
+	}
+	
+	@Step (
+		description="Se selecciona el botón <b>Registro</b>",
+		expected="Se muestra la página de inicio del registro")
+	public void clickRegistroMobile() {
+		secBolsa.clickRegistroMobile();
 	}
 
 	@Validation (

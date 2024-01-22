@@ -75,7 +75,7 @@ public class FactoryMenus {
 	
 	private static MenuWeb getCardigansJerseisJerseisShe() {
 		return new MenuWeb
-			.Builder("Jerséis y cárdigans")
+			.Builder("Cárdigans y jerséis")
 			.linea(LineaType.SHE)
 			.group(GroupType.PRENDAS)
 			.articles(Arrays.asList("Jersey", "Chaleco", "Top", "Sudadera", "Cárdigan", "Cardigan"))

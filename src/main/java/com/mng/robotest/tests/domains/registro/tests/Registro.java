@@ -45,16 +45,6 @@ public class Registro implements TestFromFactory, Serializable {
 		new Reg001(pais, idioma).execute();
 	}
 	
-	@Test (
-		groups={"Registro", "Canal:all_App:shop,outlet"},
-		description="Registro con errores en la introducción de los datos (España)")
-	public void REG007_NewRegisterNOK() throws Exception {
-		if (isPro()) {
-			return;
-		}
-		new Reg007().execute();
-	}	
-	
 	//TODO eliminar REG002,REG003,REG004
 	@Test (
 		enabled=false,
@@ -112,6 +102,26 @@ public class Registro implements TestFromFactory, Serializable {
 		IdiomaPais deutsch = deutschland.getListIdiomas().get(0);
 		new Reg003(deutschland, deutsch, false).execute();
 	}	
+	
+	@Test (
+		groups={"Registro", "Canal:all_App:shop,outlet"},
+		description="Registro con errores en la introducción de los datos (España)")
+	public void REG007_NewRegisterNOK() throws Exception {
+		if (isPro()) {
+			return;
+		}
+		new Reg007().execute();
+	}		
+	
+	@Test (
+		groups={"Bolsa", "Registro", "Checkout", "Canal:mobile_App:shop,outlet"}, 
+		description="Flujo bolsa -> identificación -> checkout")
+	public void REG008_Bolsa_Registro() throws Exception {
+		if (isPro()) {
+			return;
+		}
+		new Reg008().execute();
+	}
 
 	private boolean isPro() {
 		return PageBase.isEnvPRO();

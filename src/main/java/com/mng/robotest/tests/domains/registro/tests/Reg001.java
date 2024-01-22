@@ -1,48 +1,27 @@
 package com.mng.robotest.tests.domains.registro.tests;
 
-import java.util.Arrays;
-
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
-import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroPersonalizacionShop.GenderOption;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroPersonalizacionShopSteps;
-import com.mng.robotest.tests.repository.secrets.GetterSecrets;
-import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.data.DataMango;
 
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 public class Reg001 extends TestBase {
 
 	private final PageRegistroInitialShopSteps pgRegistroInitialSteps = new PageRegistroInitialShopSteps();
 	private final PageRegistroPersonalizacionShopSteps pgRegistroPersonalizacionSteps = new PageRegistroPersonalizacionShopSteps();
-	
-	private final String emailNotExistent = DataMango.getEmailNonExistentTimestamp();
-	private final String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_ROBOT_USER).getPassword();
-	
 	private final DataNewRegister dataNewRegister;
 
 	public Reg001(Pais pais, IdiomaPais idioma) {
 		super();
 		dataTest.setPais(pais);
 		dataTest.setIdioma(idioma);
-		
-		dataNewRegister = new DataNewRegister(
-				emailNotExistent, 
-				passStandard, 
-				pais.getTelefono(), 
-				true,
-				"Jorge",
-				pais.getCodpos(),
-				"04/02/1974",
-				GenderOption.MASCULINO,
-				Arrays.asList(SHE, HE, KIDS));
+		dataNewRegister = DataNewRegister.makeDefault(pais);
 	}
 	
 	@Override

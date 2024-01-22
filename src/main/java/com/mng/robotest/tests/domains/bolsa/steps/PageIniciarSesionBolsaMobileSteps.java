@@ -24,7 +24,7 @@ public class PageIniciarSesionBolsaMobileSteps extends StepBase {
 		expected="Aparece la página de checkout")
 	public void login(String user, String password) {
 		pgIdentificacionBolsa.login(user, password);
-		new CheckoutSteps().validateIsFirstPage(true);
+		new CheckoutSteps().checkIsFirstPage(true);
 	}
 
 }

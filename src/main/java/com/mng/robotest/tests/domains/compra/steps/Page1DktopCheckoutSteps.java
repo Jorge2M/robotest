@@ -21,7 +21,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	private final Page1DktopCheckout pg1DktopCheckout = new Page1DktopCheckout();
 	
 	@Validation
-	public ChecksTM validateIsPageOK() {
+	public ChecksTM checkIsPageOK() {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
 		boolean isPageInitCheckout = pg1DktopCheckout.isPage(seconds);

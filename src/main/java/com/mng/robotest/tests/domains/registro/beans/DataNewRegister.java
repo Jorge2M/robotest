@@ -1,10 +1,18 @@
 package com.mng.robotest.tests.domains.registro.beans;
 
+import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.HE;
+import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.KIDS;
+import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.SHE;
+
 import java.util.Arrays;
 import java.util.List;
 
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroPersonalizacionShop.GenderOption;
+import com.mng.robotest.tests.repository.secrets.GetterSecrets;
+import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
+import com.mng.robotest.testslegacy.data.DataMango;
+import com.mng.robotest.testslegacy.beans.Pais;
 
 public class DataNewRegister {
 
@@ -18,6 +26,22 @@ public class DataNewRegister {
 	private String dateOfBirth;
 	private GenderOption gender;
 	private List<LineaType> lineas;
+	
+	public static final DataNewRegister makeDefault(Pais pais) {
+		String emailNotExistent = DataMango.getEmailNonExistentTimestamp();
+		String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_ROBOT_USER).getPassword();
+
+		return new DataNewRegister(
+				emailNotExistent, 
+				passStandard, 
+				pais.getTelefono(), 
+				true,
+				"Jorge",
+				pais.getCodpos(),
+				"04/02/1974",
+				GenderOption.MASCULINO,
+				Arrays.asList(SHE, HE, KIDS));
+	}
 	
 	public DataNewRegister(
 			String email, String password, String movil, boolean checkPromotions,

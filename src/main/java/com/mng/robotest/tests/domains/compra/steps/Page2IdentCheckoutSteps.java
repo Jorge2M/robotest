@@ -66,7 +66,7 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		saveImagePage=ALWAYS)
 	public void clickContinuar(boolean userRegistered) {
 		pg2IdentCheckout.clickBotonContinuarAndWait(20);   
-		new CheckoutSteps().validateIsFirstPage(userRegistered);
+		new CheckoutSteps().checkIsFirstPage(userRegistered);
 	}
 	
 	@Step (

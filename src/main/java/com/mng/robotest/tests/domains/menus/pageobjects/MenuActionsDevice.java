@@ -39,7 +39,8 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 		
 		if (nameMenu.contains(" ")) {
 			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
-			xpath+=" or @data-testid='" + dataTestid + "." + menuIni + "_" + idLinea + sufix + "'"; 
+			String menuInDataTestId = getMenuNameForDataTestId(menuIni);
+			xpath+=" or @data-testid='" + dataTestid + "." + menuInDataTestId + "_" + idLinea + sufix + "'"; 
 		}
 		xpath+="]";
 		
@@ -47,7 +48,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}	
 
 	private String getMenuNameForDataTestId(String menuName) {
-		String menuWithoutSpaces = menu.getMenu().toLowerCase().replace(" ", "_");
+		String menuWithoutSpaces = menuName.toLowerCase().replace(" ", "_");
 		return removeAccents(menuWithoutSpaces);
 	}
 	
@@ -97,4 +98,5 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 		SecMultiFiltrosDevice.make(app, dataTest.getPais())
 			.selectMenu2onLevel(Arrays.asList(menu.getSubMenu()));
 	}
+	
 }

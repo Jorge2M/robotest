@@ -23,7 +23,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 	private static final String XP_SELECTOR_IDIOMAS = "//*[@data-testid='countrySelector.languagues']/..";
 	private static final String XP_IDIOMA_OPTION_DESKTOP = XP_SELECTOR_IDIOMAS + "//div";
 	private static final String XP_IDIOMA_OPTION_MOBILE = XP_SELECTOR_IDIOMAS + "//option";
-	private static final String XP_BUTTON_ACCEPT = "//form//button[@type='submit']"; //Necesitamos un data-testid (React)
+	private static final String XP_BUTTON_ACCEPT = "//*[@data-testid='preHome.title']/..//button[@type='submit']"; //Necesitamos un data-testid (React)
 
 	private String getXPathCountryItemFromCodigo(String codigoPrehome) {
 		return XP_PAIS_OPTION + "//self::*[@value='" + codigoPrehome + "']";

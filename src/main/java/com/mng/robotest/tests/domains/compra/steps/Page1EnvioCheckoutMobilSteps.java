@@ -20,7 +20,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 	public final ModalDroppointsSteps modalDroppointsSteps = new ModalDroppointsSteps();
 	
 	@Validation
-	public ChecksTM validateIsPage(boolean userLogged) {
+	public ChecksTM checkIsPage(boolean userLogged) {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		checks.add(

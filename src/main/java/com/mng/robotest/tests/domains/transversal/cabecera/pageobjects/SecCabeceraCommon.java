@@ -33,13 +33,14 @@ public class SecCabeceraCommon extends SecCabecera {
 			"//*[@data-testid='header.userMenu.login_any']"),
 		MICUENTA(
 			"//*[@data-testid='header.userMenu.login_mobile']",
-			"//*[@data-testid='header.userMenu.login']"),
+			"//*[@data-testid='header.userMenu.login' or @data-testid='header.userMenu.login_any']"),
 		FAVORITOS(
 			"//*[@data-testid='header.userMenu.favorites_mobile_any']",
 			"//*[@data-testid[contains(.,'header.userMenu.favorites')]]"),
 		BOLSA(
 			"//*[@data-testid='header-user-menu-bag']",
 			"//*[@data-testid[contains(.,'header.userMenu.bolsa')] or " + //TODO eliminar cuando todos los países vayan por la nueva bolsa 
+			    "@data-testid[contains(.,'header.userMenu.cart.button')] or " + 
 			    "@data-testid[contains(.,'header-user-menu-bag')]]");
 
 		private By byDevice;

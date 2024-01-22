@@ -6,6 +6,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
+import com.mng.robotest.tests.domains.compra.steps.Page2IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroInitialShop;
 
@@ -69,6 +70,14 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		pgRegistroInitial.clickCreateAccountButton();
 		new PageRegistroPersonalizacionShopSteps().checkPage(10);
 		checksDefault();
+	}	
+	
+	@Step (
+		description="Pulsar el botón <b>Crear cuenta</b> desde el flujo Bolsa -> Checkout",
+		expected="Aparece la página de introducción de datos del checkout")
+	public void clickCreateAccountButtonFromBolsa() {
+		pgRegistroInitial.clickCreateAccountButton();
+		new Page2IdentCheckoutSteps().validateIsPage(false, 2);
 	}	
 	
 	@Step (

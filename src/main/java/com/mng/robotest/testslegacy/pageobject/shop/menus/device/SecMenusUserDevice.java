@@ -11,38 +11,31 @@ import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabece
 public class SecMenusUserDevice extends PageBase {
 
 	private final SecCabecera secCabecera = SecCabecera.make();
+
+	private static final String XP_ITEM = "//a[@class[contains(.,'icon-outline')] or @class[contains(.,'UserLinks_item')]]";
 	
 	public enum MenuUserDevice implements ElementPage {
+		
 		AYUDA(
-			//"//*[@data-label='ayuda']",
-			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'help')]]"),
+			XP_ITEM + "/self::*[@href[contains(.,'help')]]"),
 		MIS_COMPRAS(
-			//"//*[@data-label='mis-compras']",
-			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'mypurchases')]]"),
+			XP_ITEM + "/self::*[@href[contains(.,'mypurchases')]]"),
 		PEDIDOS(
-			//"//*[@data-label='pedidos']",
-			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'mypurchases')]]"),
+			XP_ITEM + "/self::*[@href[contains(.,'mypurchases')]]"),
 		CERRAR_SESION(
-			//"//*[@data-label='cerrar_sesion']",
 			"//a[@href[contains(.,'/logout')]]"),
 		FAVORITOS(
-			//"//*[@data-label='favoritos']",
-			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'favorites')]]"),
+			XP_ITEM + "/self::*[@href[contains(.,'favorites')]]"),
 		INICIAR_SESION(
-			//"//*[@data-label='iniciar_sesion']",
-			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'login')]]"),
+			XP_ITEM + "/self::*[@href[contains(.,'login')]]"),
 		REGISTRATE(
-			//"//*[@data-label='iniciar_sesion']",
-			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'login')]]"),
+			XP_ITEM + "/self::*[@href[contains(.,'login')]]"),
 		MI_CUENTA(
-			//"//*[@data-label='mi_cuenta']",
-			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'account')]]"),
+			XP_ITEM + "/self::*[@href[contains(.,'mypurchases')]]"),
 		MANGO_LIKES_YOU(
-			//"//*[text()[contains(.,'Mango likes you')]]",
-			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'mangolikesyou')]]"),
+			XP_ITEM + "/self::*[@href[contains(.,'mangolikesyou')]]"),
 		CAMBIO_PAIS(
-			//"//*[@data-label='cambio_pais']",
-			"//a[@class[contains(.,'icon-outline')] and @href[contains(.,'preHome')]]");
+			XP_ITEM + "/self::*[@href[contains(.,'preHome')]]");
 
 		private static final String XP_CAPA_USER_MENU = "//ul";
 		private By byMenu;

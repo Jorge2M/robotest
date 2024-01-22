@@ -65,11 +65,11 @@ public class CheckoutSteps extends StepBase {
 		return mdDirecFacturaSteps;
 	}
 	
-	public void validateIsFirstPage(boolean userLogged) {
+	public void checkIsFirstPage(boolean userLogged) {
 		if (isMobile()) {
-			pg1MobilCheckSteps.validateIsPage(userLogged);
+			pg1MobilCheckSteps.checkIsPage(userLogged);
 		} else {
-			pg1DktopCheckSteps.validateIsPageOK();
+			pg1DktopCheckSteps.checkIsPageOK();
 		}
 	} 
 

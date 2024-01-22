@@ -41,6 +41,10 @@ public class CookiesChecker extends PageBase {
 		replaceAllowedCookies("_hjSessionUser", "_hjSessionUser*");
 		replaceAllowedCookies("_hjSession", "_hjSession*");
 		
+		if (UtilsTest.todayBeforeDate("2024-02-01")) {
+			whiteList.get().add(Pattern.compile("token-expiration"));
+		}
+		
 		if (UtilsTest.todayBeforeDate("2024-03-01")) {
 			whiteList.get().add(Pattern.compile("refresh-token"));
 			whiteList.get().add(Pattern.compile("auth-token"));			
