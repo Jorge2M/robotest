@@ -62,7 +62,7 @@ public class MenusUserWrapper extends PageBase {
 		if (menu==UserMenu.BOLSA) {
 			secCabecera.hoverIconoBolsa();
 		} else {
-			isMenuInStateUntil(menu, VISIBLE, 2);
+			isMenuInStateUntil(menu, VISIBLE, 5);
 			var menuUserItem = new MenuUserItem(menu, channel, app);
 			moveToElement(menuUserItem.getLink().getBy(channel));
 		}

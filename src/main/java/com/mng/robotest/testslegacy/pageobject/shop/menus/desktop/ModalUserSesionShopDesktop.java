@@ -15,21 +15,39 @@ public class ModalUserSesionShopDesktop extends PageBase {
 			"@class[contains(.,'user-icon-button')]]";
 	
 	private static final String XP_CAPA_MENUS = XP_WRAPPER_USER_MENU + "/div[@role='button']";
+	private static final String XP_CAPA_MENUS_GENESIS = "//div[@class[contains(.,'AccountMenu')]]";
 	
+	//TODO pedidos data-testids para Genesis a Marcos (23-01-2024)
 	public enum MenuUserDesktop implements ElementPage { 
-		INICIAR_SESION (XP_CAPA_MENUS + "//div[@class[contains(.,'login-button')]]"),
+		INICIAR_SESION (
+			XP_CAPA_MENUS + "//button[@micro='Fukku']",
+			"//*[@data-testid='header.myAccount.login.button']"),
 		
 		//Pedir React ID
-		REGISTRATE (XP_CAPA_MENUS + "//span[@class='login-register-link' or @class[contains(.,'register-link')] or text()='Regístrate' or @class[contains(.,'RuqlF')]]"),
-		MI_CUENTA (XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mi_cuenta')]]"),
-		MIS_COMPRAS (XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mis_compras')] or @data-testid[contains(.,'my_purchases')]]"),	 
-		MANGO_LIKES_YOU (XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mango_likes_you')]]"),
-		AYUDA (XP_CAPA_MENUS + "//div[@data-testid[contains(.,'ayuda')]]"),   
-		CERRAR_SESION(XP_CAPA_MENUS + "//div[@data-testid[contains(.,'logout')] or @class[contains(.,'logout')]]");
+		REGISTRATE (
+			XP_CAPA_MENUS + "//span[@class='login-register-link' or @class[contains(.,'register-link')] or text()='Regístrate' or @class[contains(.,'RuqlF')]]",
+			XP_CAPA_MENUS_GENESIS + "//a[@href[contains(.,'/signup?tab=register')]]"),
+		
+		MI_CUENTA (
+			XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mi_cuenta')]]",
+			XP_CAPA_MENUS_GENESIS + "//a[@href[contains(.,'/account')]]"),
+		MIS_COMPRAS (
+			XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mis_compras')] or @data-testid[contains(.,'my_purchases')]]",
+			XP_CAPA_MENUS_GENESIS + "//a[@href[contains(.,'/mypurchases')]]"),
+		
+		MANGO_LIKES_YOU (
+			XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mango_likes_you')]]",
+			""),
+		AYUDA (
+			XP_CAPA_MENUS + "//div[@data-testid[contains(.,'ayuda')]]",
+			XP_CAPA_MENUS_GENESIS + "//a[@href[contains(.,'/help')]]"),
+		CERRAR_SESION (
+			XP_CAPA_MENUS + "//div[@data-testid[contains(.,'logout')] or @class[contains(.,'logout')]]",
+			"(" + XP_CAPA_MENUS_GENESIS + "//*[@data-testid='next-s'])[last()]");
 		
 		By by;
-		private MenuUserDesktop(String xPath) {
-			by = By.xpath(xPath);
+		private MenuUserDesktop(String xPath, String xpathGenesis) {
+			by = By.xpath(xPath + " | " + xpathGenesis);
 		}
 		
 		@Override
