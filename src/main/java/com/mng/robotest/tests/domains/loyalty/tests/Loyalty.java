@@ -13,13 +13,6 @@ public class Loyalty {
 	}
 	
 	@Test (
-		groups={"Loyalty", "Compra", "Checkout", "Canal:desktop,mobile_App:shop"},
-		description="Se realiza un primer pago KO y después uno con envío a domicilio OK comprobando que se aplican correctamente los Likes")
-	public void LOY007_PagoKoOk_LikesStored() throws Exception {
-		new Loy007().execute();
-	}	
-	
-	@Test (
 		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
 		description="Exchange mediante donación de Likes")
 	public void LOY002_Exhange_Donacion_Likes() throws Exception {
@@ -47,6 +40,19 @@ public class Loyalty {
 		new Loy006().execute();
 	}	
 	
+	@Test (
+		groups={"Loyalty", "Compra", "Checkout", "Canal:desktop,mobile_App:shop"},
+		description="Se realiza un primer pago KO y después uno con envío a domicilio OK comprobando que se aplican correctamente los Likes")
+	public void LOY007_PagoKoOk_LikesStored() throws Exception {
+		new Loy007().execute();
+	}		
+	
+//	@Test (
+//		groups={"Loyalty", "Compra", "Checkout", "Canal:desktop,mobile_App:shop"},
+//		description="Se realiza un primer pago KO y después uno con envío a domicilio OK comprobando que se aplican correctamente los Likes")
+//	public void LOY008_PagoKoOk_USA() throws Exception {
+//		new Loy008().execute();
+//	}	
 
 //  Se ha desactivado la operativa de transferencia de Likes
 //	@Test (

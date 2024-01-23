@@ -4,12 +4,12 @@ import static com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps.FluxBolsa
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.compra.steps.Page2IdentCheckoutSteps;
+import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 
 public class Reg008 extends TestBase {
-	
-	//TODO gestionar el caso de PRO
 	
 	@Override
 	public void execute() throws Exception {
@@ -17,7 +17,11 @@ public class Reg008 extends TestBase {
 		altaArticulosBolsa();
 		clickComprarAndSelectRegistro();
 		register();
-		System.out.println("Fin");
+		if (!isPRO()) {
+			executeVisaPayment();
+			clickVerMisCompras();
+			checkNoElementsInBag();
+		}
 	}
 
 	private void altaArticulosBolsa() throws Exception {
@@ -34,7 +38,17 @@ public class Reg008 extends TestBase {
 		pgRegistroInitialSteps.inputData(dataNewRegister);
 		pgRegistroInitialSteps.clickCreateAccountButtonFromBolsa();
 		
-		//new Page2IdentCheckoutSteps().checkIsPage(false, 2);
+		var page2IdentCheckoutSteps = new Page2IdentCheckoutSteps();
+		page2IdentCheckoutSteps.inputDataPorDefecto(dataTest.getUserConnected(), false);
+		page2IdentCheckoutSteps.clickContinuar(false);
 	}
+	
+	private void clickVerMisCompras() {
+		new PageResultPagoSteps().selectMisCompras();
+	}
+	
+	private void checkNoElementsInBag() {
+		new SecBolsaSteps().checkBolsaIsVoid();
+	}	
 	
 }

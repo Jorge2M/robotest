@@ -147,7 +147,7 @@ public class SecBolsaSteps extends StepBase {
 		if (isDesktop()) {
 			checkIsBolsaVisibleInDesktop();
 		}
-		validaCuadranArticulosBolsa();
+		checkArticulosBolsa();
 		checksDefault();
 		checksGeneric().googleAnalytics().execute();
 	}
@@ -189,7 +189,7 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	@Validation
-	public ChecksTM validaCuadranArticulosBolsa() throws Exception {
+	public ChecksTM checkArticulosBolsa() throws Exception {
 		var checks = ChecksTM.getNew();
 		var checkerBag = new ValidatorContentBolsa();
 		checks.add(
@@ -243,7 +243,7 @@ public class SecBolsaSteps extends StepBase {
 		secBolsa.getLineasArtBolsa().clearArticuloAndWait(artToClear.getReferencia());
 		dataTest.getDataBag().removeArticulo(0); 
 		checkImporteIsModified(importeTotalOrig, 5);
-		validaCuadranArticulosBolsa();
+		checkArticulosBolsa();
 	}
 
 	@Validation (

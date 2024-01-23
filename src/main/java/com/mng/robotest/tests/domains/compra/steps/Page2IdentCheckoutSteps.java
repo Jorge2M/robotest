@@ -25,8 +25,12 @@ public class Page2IdentCheckoutSteps extends StepBase {
 		this.pg2IdentCheckout = new Page2IdentCheckout(egyptCity);
 	}
 	
+	public ChecksTM checkIsPageAccessFromBolsaDevice(int seconds) {
+		return checkIsPage(true, seconds);
+	}	
+	
 	@Validation
-	public ChecksTM validateIsPage(boolean emailYetExists, int seconds) {
+	public ChecksTM checkIsPage(boolean emailYetExists, int seconds) {
 		var checks = ChecksTM.getNew();
 	 	checks.add(
 			"Aparece la página-2 de introducción de datos de la dirección del cliente " + getLitSecondsWait(seconds),

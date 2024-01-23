@@ -77,7 +77,7 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		expected="Aparece la página de introducción de datos del checkout")
 	public void clickCreateAccountButtonFromBolsa() {
 		pgRegistroInitial.clickCreateAccountButton();
-		new Page2IdentCheckoutSteps().validateIsPage(false, 2);
+		new Page2IdentCheckoutSteps().checkIsPageAccessFromBolsaDevice(2);
 	}	
 	
 	@Step (

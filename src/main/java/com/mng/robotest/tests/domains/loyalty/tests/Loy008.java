@@ -5,25 +5,22 @@ import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.compra.tests.CompraSteps;
 import com.mng.robotest.tests.domains.loyalty.beans.User;
-import com.mng.robotest.tests.repository.secrets.GetterSecrets;
-import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 
-public class Loy007 extends TestBase {
+import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
-	private static final User USER = new User("test.performance30@mango.com", "6876577027631042977", "ES");
+public class Loy008 extends TestBase {
+
+	//private static final User USER = new User("test.performance30@mango.com", "6876577027631042977", "ES");
+	private static final String usaUserId = "598535048017297955"; //Associated to e2e.us.test@mango.com user
 	
 	private final LoyTestCommons loyTestCommons = new LoyTestCommons();
 	private final String cvcVisaOK = dataTest.getPais().getPago("VISA").getCvc();
 	private static final String CVC_VISA_KO = "111";
 	
-	public Loy007() throws Exception {
+	public Loy008() throws Exception {
 		super();
-		
-		dataTest.setUserConnected(USER.getEmail());
+		dataTest.setPais(USA.getPais());
 		dataTest.setUserRegistered(true);
-		dataTest.setPasswordUser(GetterSecrets.factory()
-				.getCredentials(SecretType.SHOP_STANDARD_USER)
-				.getPassword());
 	}
 	
 	@Override
@@ -44,7 +41,8 @@ public class Loy007 extends TestBase {
 	
 	private void chargePointsIfNotEnough() {
 		if (!isPRO() && LoyTestCommons.clickMangoLikesYou() < 3000) { 
-			LoyTestCommons.addLoyaltyPoints(USER);
+			var user = new User(dataTest.getUserConnected(), usaUserId, "US");
+			LoyTestCommons.addLoyaltyPoints(user);
 		}
 	}	
 	
