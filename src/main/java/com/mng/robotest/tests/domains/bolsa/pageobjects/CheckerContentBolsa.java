@@ -5,18 +5,19 @@ import java.util.List;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa;
-import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
-public class ValidatorContentBolsa extends PageBase {
+import static com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa.*;
+
+public class CheckerContentBolsa extends PageBase {
 	
 	private final SecBolsaCommon secBolsa = new SecBolsa();
 	
 	private final List<ArticuloScreen> linesArticlesExpected;
 	private final List<ArticuloDataBolsaScreen> linesArticlesInScreen = new ArrayList<>();
 
-	public ValidatorContentBolsa() throws Exception {
+	public CheckerContentBolsa() throws Exception {
 		super();
 		this.linesArticlesExpected = dataTest.getDataBag().getListArticlesTypeViewInBolsa();
 		storeArticlesFromScreen();
@@ -24,7 +25,7 @@ public class ValidatorContentBolsa extends PageBase {
 	
 	private void storeArticlesFromScreen() {
 		linesArticlesInScreen.clear();
-		secBolsa.setBolsaToStateIfNotYet(StateBolsa.OPEN);
+		secBolsa.setBolsaToStateIfNotYet(OPEN);
 		int numArticles = secBolsa.getLineasArtBolsa().getNumLinesArticles();
 		for (int i=1; i<=numArticles; i++) {
 			var dataArtScreen = secBolsa.getLineasArtBolsa().getArticuloDataByPosicion(i);
@@ -69,7 +70,6 @@ public class ValidatorContentBolsa extends PageBase {
 		return false;
 	}
 
-	@SuppressWarnings("incomplete-switch")
 	private boolean articleInScreenMatchArticleData(ArticuloScreen articleExpected, ArticuloDataBolsaScreen articuloScreen, DataArtBolsa typeDataToMatch) {
 		switch (typeDataToMatch) {
 		case REFERENCIA:

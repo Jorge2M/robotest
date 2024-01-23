@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
-import com.mng.robotest.tests.domains.bolsa.pageobjects.ValidatorContentBolsa;
+import com.mng.robotest.tests.domains.bolsa.pageobjects.CheckerContentBolsa;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
@@ -191,7 +191,7 @@ public class SecBolsaSteps extends StepBase {
 	@Validation
 	public ChecksTM checkArticulosBolsa() throws Exception {
 		var checks = ChecksTM.getNew();
-		var checkerBag = new ValidatorContentBolsa();
+		var checkerBag = new CheckerContentBolsa();
 		checks.add(
 			"Cuadra el númeo de artículos existentes en la bolsa",
 			checkerBag.numArticlesIsCorrect(), WARN);

@@ -125,7 +125,7 @@ public class SecBolsa extends SecBolsaCommon {
 				driver.navigate().back();
 			}
 		}
-		isInStateUntil(stateBolsaExpected, 2);
+		isInStateUntil(stateBolsaExpected, 3);
 	}
 	
 	private void clickIconoCloseMobile() {
