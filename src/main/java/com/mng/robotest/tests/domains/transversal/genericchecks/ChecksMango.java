@@ -5,7 +5,7 @@ import com.github.jorge2m.testmaker.service.genericchecks.Checker;
 import com.github.jorge2m.testmaker.service.genericchecks.GenericChecks;
 import com.github.jorge2m.testmaker.service.genericchecks.GenericChecks.BuilderCheck;
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.cookiescheck.steps.CheckerAllowedCookies;
+import com.mng.robotest.tests.domains.cookiesallowed.steps.CheckerAllowedCookies;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 

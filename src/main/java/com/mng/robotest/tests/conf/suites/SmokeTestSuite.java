@@ -23,6 +23,7 @@ import com.mng.robotest.tests.domains.micuenta.tests.MiCuenta;
 import com.mng.robotest.tests.domains.otros.tests.Otras;
 import com.mng.robotest.tests.domains.reembolsos.tests.Reembolsos;
 import com.mng.robotest.tests.domains.registro.tests.Registro;
+import com.mng.robotest.tests.domains.setcookies.tests.Setcookies;
 
 public class SmokeTestSuite extends SuiteMangoMaker {
 
@@ -45,6 +46,7 @@ public class SmokeTestSuite extends SuiteMangoMaker {
 			PaisIdioma.class,
 			Galeria.class,
 			Compra.class,
+			Setcookies.class,
 			ChequeRegalo.class,
 			CompraMultiAddress.class,
 			ListPagosEspana.class,

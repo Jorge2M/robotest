@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.transversal.acceso.navigations;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.tests.domains.transversal.acceptcookies.pageobjects.ModalSetCookies.SectionConfCookies.COOKIES_DE_RENDIMIENTO;
+import static com.mng.robotest.tests.domains.setcookies.pageobjects.ModalSetCookies.CookiesType.COOKIES_DE_ANALISIS;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.CERRAR_SESION;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.INICIAR_SESION;
 
@@ -13,8 +13,8 @@ import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
-import com.mng.robotest.tests.domains.transversal.acceptcookies.pageobjects.SectionCookies;
-import com.mng.robotest.tests.domains.transversal.acceptcookies.steps.SectionCookiesSteps;
+import com.mng.robotest.tests.domains.setcookies.pageobjects.SectionCookies;
+import com.mng.robotest.tests.domains.setcookies.steps.SectionCookiesSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageAlertaVOTF;
 import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageLoginVOTF;
 import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageSelectIdiomaVOTF;
@@ -85,8 +85,7 @@ public class AccesoFlows extends StepBase {
 	
 	private void enablePerformanceCookies() {
 		var modalSetCookiesSteps = new SectionCookiesSteps().setCookies();
-		modalSetCookiesSteps.select(COOKIES_DE_RENDIMIENTO);
-		modalSetCookiesSteps.enableSwitchCookies();
+		modalSetCookiesSteps.enable(COOKIES_DE_ANALISIS);
 		modalSetCookiesSteps.saveConfiguration();
 	}	
 	

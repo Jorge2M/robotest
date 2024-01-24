@@ -14,13 +14,6 @@ public class Compra {
 	}
 	
 	@Test (
-		groups={"Compra", "Pedidomanto", "Checkout", "Canal:all_App:shop,outlet"}, alwaysRun=true,
-		description="[Usuario no registrado] Compra sin permitir todas las cookies y con tarjeta real")
-	public void COM002_Compra_Tarjeta_Real_No_Cookies() throws Exception {
-		new Com002().execute();
-	}
-
-	@Test (
 		groups={"Compra", "Checkout", "Multidireccion", "Canal:desktop_App:shop,outlet"}, alwaysRun=true,
 		description="[Usuario no registrado] Compra con cambio datos en dirección de envío y facturación en checkout",
 		retry=false)
