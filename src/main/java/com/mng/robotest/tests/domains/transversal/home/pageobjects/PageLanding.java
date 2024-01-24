@@ -19,7 +19,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageLanding extends PageBase {
 	
 	private static final String XP_MAIN_CONTENT_PAIS = "//div[@class[contains(.,'main-content')] and @data-pais]";
-	private static final String XP_CONTENIDO = "//div[@class[contains(.,'container-fluid home')]]";
+	
+	private static final String XP_CONTENIDO_OLD = "//div[@class[contains(.,'container-fluid home')]]";
+	private static final String XP_CONTENIDO_GENESIS = "//*[@data-testid='landings.home.multibrand']";
+	private static final String XP_CONTENIDO = "(" + XP_CONTENIDO_OLD + " | " + XP_CONTENIDO_GENESIS + ")";
+	
 	private static final String XP_SLIDER = "//section[@class='entitieswrapper']//div[@class[contains(.,'vsv-slide')]]";
 	private static final String XP_EDIT_ITEM = "//div[@class[contains(.,'item-edit')] and @data-id]";
 	private static final String XP_MAP_T1 = "//map[@name[contains(.,'item_')]]/..";

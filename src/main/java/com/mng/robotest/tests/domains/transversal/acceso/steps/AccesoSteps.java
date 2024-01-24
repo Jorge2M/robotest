@@ -16,6 +16,7 @@ import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.tests.domains.login.steps.PageIdentificacionSteps;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
+import com.mng.robotest.tests.domains.transversal.browser.LocalStorageMango;
 import com.mng.robotest.tests.domains.transversal.prehome.steps.PagePrehomeSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -45,6 +46,7 @@ public class AccesoSteps extends StepBase {
 		description="Acceso <b style=\"color:brown;\">#{pais.getNombrePais()} / #{idioma.getLiteral()}</b> a través de la URL <a href='#{urlAccess}'>#{urlAccess}</a>",
 		expected="el acceso es correcto")
 	private void quickAccess(String urlAccess, Pais pais, IdiomaPais idioma) {
+		new LocalStorageMango().setInitialModalsOff();
 		driver.get(urlAccess);
 	}
 	
