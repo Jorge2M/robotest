@@ -34,7 +34,7 @@ public class Loy001 extends TestBase {
 	}
 	
 	private void chargePointsIfNotEnough() {
-		if (!isPRO() && LoyTestCommons.clickMangoLikesYou() < 3000) { 
+		if (!isPRO() && LoyTestCommons.clickMyAccountAndGetPoints() < 3000) { 
 			LoyTestCommons.addLoyaltyPoints(USER);
 		}
 	}

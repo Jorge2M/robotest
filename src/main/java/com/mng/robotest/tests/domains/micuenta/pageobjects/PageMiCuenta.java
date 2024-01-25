@@ -3,8 +3,11 @@ package com.mng.robotest.tests.domains.micuenta.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.tests.domains.loyalty.pageobjects.utils.UtilsLoyaltyPage;
 
 public class PageMiCuenta extends PageBase {
+	
+	private static final String XP_LOYALTY_POINTS = "//*[@data-testid='loyaltyMyAccount.MyAccountInfo.info']//p[2]";
 	
 	public enum Link {
 		MIS_DATOS("//a[@href[contains(.,'account/personalinfo')]]"),
@@ -33,4 +36,13 @@ public class PageMiCuenta extends PageBase {
 			click(link.getXPath()).exec();
 		}
 	}
+	
+	public int getNumberPoints() {
+		if (state(VISIBLE, XP_LOYALTY_POINTS).wait(2).check()) {
+			String textPoints = getElement(XP_LOYALTY_POINTS).getText();
+			return UtilsLoyaltyPage.getPointsFromLiteral(textPoints);
+		}
+		return 0;
+	}
+	
 }

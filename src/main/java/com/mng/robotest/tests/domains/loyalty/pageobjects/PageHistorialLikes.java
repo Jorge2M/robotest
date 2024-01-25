@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.loyalty.beans.LoyaltyMovement;
+import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 public class PageHistorialLikes extends PageBase {
 	
@@ -56,7 +57,7 @@ public class PageHistorialLikes extends PageBase {
 	private int getPointsReceived(int position) {
 		var pointsElem = getElementIfExists(getXPathPointsReceived(position));
 		if (pointsElem.isPresent()) {
-			return Integer.valueOf(pointsElem.get().getText().replaceAll("[^\\d,]", "")); 
+			return getIntegerPoints(pointsElem.get().getText());
 		}
 		return 0;
 	}
@@ -64,9 +65,14 @@ public class PageHistorialLikes extends PageBase {
 	private int getPointsUsed(int position) {
 		var pointsElem = getElementIfExists(getXPathPointsUsed(position));
 		if (pointsElem.isPresent()) {
-			return Integer.valueOf(pointsElem.get().getText().replaceAll("[^\\d,]", "")); 
+			return getIntegerPoints(pointsElem.get().getText());
 		}
 		return 0;
 	}	
+	
+	private int getIntegerPoints(String pointsText) {
+		float importFloat = ImporteScreen.getFloatFromImporteMangoScreen(pointsText);
+		return Math.round(importFloat);		
+	}
 
 }

@@ -26,10 +26,14 @@ public class LoyTestCommons extends StepBase {
 		return new SecMenusUserSteps().clickMenuMangoLikesYou();
 	}
 	
+	public static int clickMyAccountAndGetPoints() {
+		return new SecMenusUserSteps().clickMyAccountAndGetPoints();
+	}
+	
 	public static int addLoyaltyPoints(User user) {
 		var client = new ClientApiLoyaltyPointsDev();
 		client.addLoyaltyPoints(user, 25000);
-		return clickMangoLikesYou();
+		return clickMyAccountAndGetPoints();
 	}
 	
 	public void addBagArticleNoRebajadoAndClickComprar() throws Exception {

@@ -13,7 +13,7 @@ public class Foo001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access();
-		secFooterSteps.validaLinksFooter();
+		secFooterSteps.checkLinksFooter();
 		checkLinksSelection();		
 	}
 

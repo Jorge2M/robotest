@@ -19,7 +19,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 	private final PageMangoLikesYou pgMangoLikesYou = new PageMangoLikesYou();
 	
 	@Validation
-	public ChecksResultWithNumberPoints checkIsPageOk() {
+	public ChecksResultWithNumberPoints checkIsPage() {
 		var checks = new ChecksResultWithNumberPoints();
 		int seconds = 5;
 		checks.add(

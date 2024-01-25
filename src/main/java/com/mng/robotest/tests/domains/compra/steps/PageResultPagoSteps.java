@@ -116,7 +116,7 @@ public class PageResultPagoSteps extends StepBase {
 		expected="Aparece la página de Mango Likes You")	
 	public void clickLinkDescuentosExperiencias() {
 		pgResultPago.clickLinkDescuentosExperiencias();
-		new PageMangoLikesYouSteps().checkIsPageOk();
+		new PageMangoLikesYouSteps().checkIsPage();
 	}
 	
 	@Step (

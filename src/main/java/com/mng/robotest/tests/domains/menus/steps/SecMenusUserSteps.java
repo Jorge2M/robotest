@@ -8,6 +8,7 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
+import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
@@ -148,12 +149,24 @@ public class SecMenusUserSteps extends StepBase {
 		expected="Aparece la página de \"Mi cuenta\"")
 	public int clickMenuMangoLikesYou() {
 		clickUserMenu(MANGO_LIKES_YOU);
-		int numberPoints = new PageMangoLikesYouSteps().checkIsPageOk().getNumberPoints();
+		int numberPoints = new PageMangoLikesYouSteps().checkIsPage().getNumberPoints();
 		checksDefault();
 		
 		replaceStepDescription(TAG_POINTS, String.valueOf(numberPoints));
 		return (numberPoints);
 	}
+	
+	@Step (
+		description=
+			"Seleccionar el link \"Mi cuenta\"<br>" + 
+			"<b>info</b>: el usuario tiene " + TAG_POINTS + " puntos", 
+		expected="Aparece la página de \"Mi cuenta\"")
+	public int clickMyAccountAndGetPoints() {
+		clickUserMenu(MI_CUENTA);
+		int numberPoints = new PageMiCuenta().getNumberPoints();
+		replaceStepDescription(TAG_POINTS, String.valueOf(numberPoints));
+		return (numberPoints);
+	}	
 
 	@Validation
 	public ChecksTM checkVisibilityLinkMangoLikesYou() {	

@@ -14,7 +14,7 @@ import static com.mng.robotest.tests.domains.legal.legaltexts.FactoryLegalTexts.
 public class SecFooter extends PageBase {
 
 	private static final String XP_CAPA_SHOP = "//div[@id='nav-footer']";
-	private static final String XP_CAPA_OUTLET = "//footer[@id='footerMNG']";
+	private static final String XP_CAPA_OUTLET = "//footer";
 	
 	private final SecNewsLetter secNewsLetter = new SecNewsLetter();
 	

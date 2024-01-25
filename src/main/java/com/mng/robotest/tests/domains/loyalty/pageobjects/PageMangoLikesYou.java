@@ -2,10 +2,8 @@ package com.mng.robotest.tests.domains.loyalty.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.tests.domains.loyalty.pageobjects.utils.UtilsLoyaltyPage;
 
 public class PageMangoLikesYou extends PageBase {
 
@@ -57,15 +55,7 @@ public class PageMangoLikesYou extends PageBase {
 	public int getPoints() {
 		if (state(PRESENT, XP_POINTS).wait(2).check()) {
 			String textPoints = getElement(XP_POINTS).getText();
-			Pattern pattern = Pattern.compile(" [0-9,.]+ ");
-			Matcher matcher = pattern.matcher(textPoints);
-			if (matcher.find()) {
-				return Integer.valueOf(
-					matcher.group(0).
-					trim().
-					replace(",", "").
-					replace(".", ""));
-			}
+			return UtilsLoyaltyPage.getPointsFromLiteral(textPoints);
 		}
 		return 0;
 	}

@@ -47,7 +47,11 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		
 		By by;
 		private MenuUserDesktop(String xPath, String xpathGenesis) {
-			by = By.xpath(xPath + " | " + xpathGenesis);
+			String xpathResult = xPath;
+			if ("".compareTo(xpathGenesis)!=0) {
+				xpathResult+= " | " + xpathGenesis;
+			}
+			by = By.xpath(xpathResult);
 		}
 		
 		@Override

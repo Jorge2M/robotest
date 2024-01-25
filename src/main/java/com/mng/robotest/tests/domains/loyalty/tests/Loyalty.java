@@ -47,6 +47,7 @@ public class Loyalty {
 		new Loy007().execute();
 	}		
 	
+	//TODO activarlo cuando se active Loyalty en USA
 //	@Test (
 //		groups={"Loyalty", "Compra", "Checkout", "Canal:desktop,mobile_App:shop"},
 //		description="Se realiza un primer pago KO y después uno con envío a domicilio OK comprobando que se aplican correctamente los Likes")
