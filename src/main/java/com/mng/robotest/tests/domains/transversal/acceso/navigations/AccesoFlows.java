@@ -188,7 +188,7 @@ public class AccesoFlows extends StepBase {
 		if (channel.isDevice() && isOutlet()) {
 			new SecMenusUserSteps().cambioPaisMobil(newPais, newIdioma);
 		} else {
-			new SecFooterSteps().cambioPais(newPais, newIdioma);
+			new SecFooterSteps().changeCountryClick(newPais, newIdioma);
 		}
 	}
 		

@@ -8,6 +8,8 @@ import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 
+import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
+
 public class Otr001 extends TestBase {
 
 	private static final Pais FRANCIA = FRANCE.getPais();
@@ -16,12 +18,14 @@ public class Otr001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access();
+		clickLinea(HE);
 		new MenuSteps().checkURLRedirectParkasHeEspanya();
 		
 		dataTest.setPais(FRANCIA);
 		dataTest.setIdioma(FRANCIA_FRANCES);
 		new AccesoSteps().goToInitialURL();
-		access();	  
+		access();
+		clickLinea(SHE);
 		new MenuSteps().checkURLRedirectFicha();		
 	}
 	

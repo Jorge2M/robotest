@@ -713,7 +713,9 @@ public class PageGaleriaSteps extends StepBase {
 
 	public void checkGaleriaAfeterSelectMenu() {
 		checkArticleGaleriaLoaded();
-		checkHearthIconVisible();
+		if (isShop()) {
+			checkHearthIconVisible();
+		}
 	}
 	
 	@Validation
@@ -736,14 +738,12 @@ public class PageGaleriaSteps extends StepBase {
 	@Validation
 	public ChecksTM checkHearthIconVisible() {
 		var checks = ChecksTM.getNew();
-		if (isShop()) {
-			int secondsIcon = 2;
-			checks.add (
-				Check.make(
-					"El 1er artículo tiene 1 icono de favorito asociado " + getLitSecondsWait(secondsIcon),
-					pgGaleria.isArticleWithHearthIconPresentUntil(1, secondsIcon), INFO)
-				.store(NONE).build());
-		}
+		int secondsIcon = 2;
+		checks.add (
+			Check.make(
+				"El 1er artículo tiene 1 icono de favorito asociado " + getLitSecondsWait(secondsIcon),
+				pgGaleria.isArticleWithHearthIconPresentUntil(1, secondsIcon), INFO)
+			.store(NONE).build());
 		return checks;
 	}
 	

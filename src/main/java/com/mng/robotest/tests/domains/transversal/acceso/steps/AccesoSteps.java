@@ -256,7 +256,7 @@ public class AccesoSteps extends StepBase {
 		var idiomaOriginal = dataTest.getIdioma();
 		dataTest.setPais(paisDestino);
 		dataTest.setIdioma(idiomaDestino);
-		new SecFooterSteps().cambioPais(dataTest.getPais(), dataTest.getIdioma());
+		new SecFooterSteps().changeCountryClick(dataTest.getPais(), dataTest.getIdioma());
 		dataTest.setPais(paisOriginal);
 		dataTest.setIdioma(idiomaOriginal);
 
