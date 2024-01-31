@@ -2,7 +2,7 @@
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-library("k8s@1.0.0")
+library("k8s@master")
 
 def outputFolders = [
         build       : '**/target/**',
