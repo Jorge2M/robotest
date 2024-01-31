@@ -29,7 +29,7 @@ public class Loy001 extends TestBase {
 		var discountLikes = loyTestCommons.inputLoyaltyPoints();
 		if (!isPRO()) {
 			String idPedido = executeMastercardEnvioTiendaPayment();
-			loyTestCommons.checkLoyaltyPointsInHistorial(discountLikes.getLikes(), idPedido);
+			loyTestCommons.checkLoyaltyPointsEnvioTiendaInHistorial(discountLikes.getLikes(), idPedido);
 		}
 	}
 	

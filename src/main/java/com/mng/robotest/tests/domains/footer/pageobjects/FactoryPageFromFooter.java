@@ -4,7 +4,6 @@ import com.mng.robotest.tests.domains.ayuda.pageobjects.PagesAyuda;
 import com.mng.robotest.tests.domains.chequeregalo.pageobjects.PageChequeRegaloInputDataNew;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageAccesoMisCompras;
-import com.mng.robotest.tests.domains.transversal.prehome.pageobjects.PagePrehome;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalBuscadorTiendas;
 
 public class FactoryPageFromFooter {
@@ -35,18 +34,12 @@ public class FactoryPageFromFooter {
 			return (new PageNotasPrensa());
 		case MANGO_OUTLET:
 			return (new PageMultimarcasOutlet());
-		case PREGUNTAS_FRECUENTES:
-			return (new PagePreguntasFreq());
 //		case PEDIDOS:
 //			return (new PageInputPedido());
 		case ENVIO:
 			return (new PageEnvio());
-		case FORMAS_DE_PAGO:
-			return (new PageFormasDePago());
 		case GUIA_DE_TALLAS:
 			return (new PageGuiaDeTallas());
-		case MANGO:
-			return (new PagePrehome());		
 		default:
 			return null;
 		}

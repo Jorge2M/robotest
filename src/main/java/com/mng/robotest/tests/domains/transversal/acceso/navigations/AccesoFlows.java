@@ -9,10 +9,10 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.conf.testab.TestABactive;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountry;
+import com.mng.robotest.tests.domains.changecountry.tests.Chg001;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.setcookies.pageobjects.SectionCookies;
 import com.mng.robotest.tests.domains.setcookies.steps.SectionCookiesSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageAlertaVOTF;
@@ -29,7 +29,6 @@ import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalActPoliticaPrivacidad;
-import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalNewsLetterAfterAccess;
@@ -108,7 +107,7 @@ public class AccesoFlows extends StepBase {
 		closeModalsPostLogin();
 	}
 	private void closeModalsPostLogin() {
-		new ModalCambioPais().closeModalIfVisible();
+		ModalChangeCountry.make(app).closeModalIfVisible();
 		new ModalActPoliticaPrivacidad().clickOkIfVisible();
 		new ModalLoyaltyAfterLogin().closeModalIfVisible();
 	}
@@ -121,7 +120,7 @@ public class AccesoFlows extends StepBase {
 		try {
 			new ModalLoyaltyAfterAccess().closeModalIfVisible();
 			new ModalNewsLetterAfterAccess().closeModalIfVisible();
-			new ModalCambioPais().closeModalIfVisible();
+			ModalChangeCountry.make(app).closeModalIfVisible();
 		} 
 		catch (Exception e) {
 			Log4jTM.getLogger().warn("Problem closing modals", e);
@@ -185,11 +184,7 @@ public class AccesoFlows extends StepBase {
 	}
 	
 	public void cambioPais(Pais newPais, IdiomaPais newIdioma) {
-		if (channel.isDevice() && isOutlet()) {
-			new SecMenusUserSteps().cambioPaisMobil(newPais, newIdioma);
-		} else {
-			new SecFooterSteps().changeCountryClick(newPais, newIdioma);
-		}
+		new Chg001().changeCountry(newPais, newIdioma);
 	}
 		
 }

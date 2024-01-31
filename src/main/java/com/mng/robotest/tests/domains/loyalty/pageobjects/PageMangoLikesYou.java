@@ -1,9 +1,9 @@
 package com.mng.robotest.tests.domains.loyalty.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.utils.UtilsLoyaltyPage;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageMangoLikesYou extends PageBase {
 

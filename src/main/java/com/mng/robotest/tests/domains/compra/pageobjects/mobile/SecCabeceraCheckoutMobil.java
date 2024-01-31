@@ -2,6 +2,8 @@ package com.mng.robotest.tests.domains.compra.pageobjects.mobile;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
 public class SecCabeceraCheckoutMobil extends PageBase {
 
 	private SecBolsaCheckoutMobil secBolsa = new SecBolsaCheckoutMobil();
@@ -21,6 +23,7 @@ public class SecCabeceraCheckoutMobil extends PageBase {
 	}
 	
 	private void clickVerBolsa() {
+		state(VISIBLE, XP_LINK_VER_BOLSA).wait(1).check();
 		click(XP_LINK_VER_BOLSA).exec();
 	}
 

@@ -350,11 +350,11 @@ public class MenuSteps extends StepBase {
 			}
 			lineaWeb.clickSublinea();					
 		}
-		validaSelecSublinea(lineaWeb);
+		checkSelecSublinea(lineaWeb);
 		
 	}
 	
-	private void validaSelecSublinea(LineaWeb lineaWeb) {
+	private void checkSelecSublinea(LineaWeb lineaWeb) {
 		validateIsSubLineaSelected(lineaWeb);
 		Linea linea = Linea.getLinea(lineaWeb.getLinea(), dataTest.getPais());
 		Linea subLinea = linea.getSublineaNinos(lineaWeb.getSublinea());
@@ -374,25 +374,29 @@ public class MenuSteps extends StepBase {
 	@Validation
 	public ChecksTM checkLineasCountry() {
 		var checks = ChecksTM.getNew();
-		var lineasToTest = LineaType.values();
 		showMenuIfDevice();
-		for (var lineaType : lineasToTest) {
-			var apareceLinea = dataTest.getPais().getShoponline().stateLinea(lineaType, app);
-			if (checkLinea(lineaType, apareceLinea)) {
-				boolean isLineaPresent = new LineaWeb(lineaType).isLineaPresent(0);
-				if (apareceLinea==ThreeState.TRUE) {
-					checks.add (
-						"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
-						isLineaPresent);
-				} else {
-					checks.add (
-						"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
-						!isLineaPresent, WARN);
-				}
-			}
+		for (var lineaType : LineaType.values()) {
+			int seconds = (lineaType==LineaType.SHE) ? 1 : 0;
+			checkLineaVisible(checks, lineaType, seconds);
 		}
 		unshowMenuIfDevice();
 		return checks;
+	}
+
+	private void checkLineaVisible(ChecksTM checks, LineaType lineaType, int seconds) {
+		var apareceLinea = dataTest.getPais().getShoponline().stateLinea(lineaType, app);
+		if (checkLinea(lineaType, apareceLinea)) {
+			boolean isLineaPresent = new LineaWeb(lineaType).isLineaPresent(seconds);
+			if (apareceLinea==ThreeState.TRUE) {
+				checks.add (
+					"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
+					isLineaPresent);
+			} else {
+				checks.add (
+					"<b>No</b> aparece el link de la línea <b>" + lineaType + "</b>",
+					!isLineaPresent, WARN);
+			}
+		}
 	}
 	
 	private void showMenuIfDevice() {
@@ -499,4 +503,5 @@ public class MenuSteps extends StepBase {
 		var datosArticulo = new DataFichaArt(article.getGarmentId(), "");
 		new PageFichaSteps().checkDetallesProducto(datosArticulo);
 	}	
+	
 }

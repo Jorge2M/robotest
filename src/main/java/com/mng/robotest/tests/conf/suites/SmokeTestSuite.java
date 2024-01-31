@@ -8,6 +8,7 @@ import com.mng.robotest.tests.conf.factories.ListPagosEspana;
 import com.mng.robotest.tests.domains.ayuda.tests.Ayuda;
 import com.mng.robotest.tests.domains.bolsa.tests.Bolsa;
 import com.mng.robotest.tests.domains.buscador.tests.Buscador;
+import com.mng.robotest.tests.domains.changecountry.tests.ChangeCountry;
 import com.mng.robotest.tests.domains.chatbot.tests.Chatbot;
 import com.mng.robotest.tests.domains.chequeregalo.tests.ChequeRegalo;
 import com.mng.robotest.tests.domains.compra.tests.Compra;
@@ -35,6 +36,7 @@ public class SmokeTestSuite extends SuiteMangoMaker {
 	List<Class<?>> getClasses() {
 		return Arrays.asList(
 			Otras.class,
+			ChangeCountry.class,
 			Chatbot.class,
 			Login.class,
 			Bolsa.class,

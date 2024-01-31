@@ -24,7 +24,7 @@ public class Bus001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access();
-		pgLandingSteps.checkIsPageWithCorrectLineas();
+		pgLandingSteps.checkIsCountryWithCorrectLineas(2);
 		
 		GarmentCatalog product = getProduct();
 		secBuscadorSteps.searchArticulo(Article.getArticleForTest(product));

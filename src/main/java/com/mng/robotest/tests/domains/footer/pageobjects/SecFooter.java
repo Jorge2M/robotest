@@ -13,9 +13,6 @@ import static com.mng.robotest.tests.domains.legal.legaltexts.FactoryLegalTexts.
 
 public class SecFooter extends PageBase {
 
-	private static final String XP_CAPA_SHOP = "//div[@id='nav-footer']";
-	private static final String XP_CAPA_OUTLET = "//footer";
-	
 	private final SecNewsLetter secNewsLetter = new SecNewsLetter();
 	
 	private static final List<AppEcom> FOOTER_SHOP = Arrays.asList(AppEcom.shop);
@@ -25,40 +22,83 @@ public class SecFooter extends PageBase {
 	private static final List<Channel> CHANNEL_DESKTOP = Arrays.asList(Channel.desktop);
 	private static final List<Channel> CHANNEL_ALL = Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet);	
 	
+	//TODO pendiente data-testids de Outlet (Genesis) solicitados a GPS mediante tícket ?????
 	public enum FooterLink {
-		AYUDA(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", false), 
-		MIS_COMPRAS(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='miscompras']", false), 
-		DEVOLUCIONES(FOOTER_ALL, CHANNEL_ALL, "//a[@data-ga-label='devoluciones' and text()[contains(.,'Devoluciones')]]", false), 
-		TIENDAS(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='buscarTiendas']", false),
-		CHEQUE_REGALO(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='cheques' and text()[contains(.,'egalo')]]", false),
-		CHEQUE_REGALO_OLD(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='cheques']", false),
-		APPS(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='apps' and text()[contains(.,'Apps')]]", false), 
-		EMPRESA(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='pieEmpresa' and text()[contains(.,'Empresa')]]", true), 
-		FRANQUICIAS(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='pieFranquicias' and text()[contains(.,'Franquicias')]]", true), 
-		TRABAJA_CON_NOSOTROS(FOOTER_ALL, CHANNEL_ALL, "//a[@data-ga-label[contains(.,'pieTrabajar')] and text()[contains(.,'Trabaja')]]", true), 
-		PRENSA(FOOTER_SHOP, CHANNEL_DESKTOP, "//a[@data-ga-label='pressroom' and text()[contains(.,'Prensa')]]", true), 
-		MANGO_OUTLET(FOOTER_SHOP, CHANNEL_ALL, "//a[@data-ga-label='outlet' and text()[contains(.,'Mango Outlet')]]", true),
-		
-		PREGUNTAS_FRECUENTES(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='ayuda' and text()[contains(.,'Preguntas Frecuentes')]]", false), 
-		ENVIO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='envio' and text()[contains(.,'Envío')]]", false), 
-		FORMAS_DE_PAGO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='pago' and text()[contains(.,'Formas de pago')]]", false), 
-		GUIA_DE_TALLAS(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='guiaTallas']", true),
-		MANGO(FOOTER_OUTLET, CHANNEL_ALL, "//a[@data-ga-label='shop' and (text()[contains(.,'MANGO')] or text()[contains(.,'Mango')])]", true); 
+		AYUDA(FOOTER_ALL, CHANNEL_ALL, 
+				"//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", 
+				"//a[text()='Ayuda']", false), 
+		MIS_COMPRAS(FOOTER_ALL, CHANNEL_ALL, 
+				"//a[@data-ga-label='miscompras']", 
+				"//a[text()='Mis compras']", false), 
+		DEVOLUCIONES(FOOTER_SHOP, CHANNEL_ALL, 
+				"//a[@data-ga-label='devoluciones' and text()[contains(.,'Devoluciones')]]", 
+				"//a[text()='Devoluciones']", false), 
+		TIENDAS(FOOTER_SHOP, CHANNEL_ALL, 
+				"//a[@data-ga-label='buscarTiendas']", 
+				"//a[text()='Tiendas']", false),
+		CHEQUE_REGALO(FOOTER_SHOP, CHANNEL_DESKTOP, 
+				"//a[@data-ga-label='cheques' and text()[contains(.,'egalo')]]", 
+				"//a[text()='Tarjeta Regalo']", false),
+		CHEQUE_REGALO_OLD(FOOTER_SHOP, CHANNEL_DESKTOP, 
+				"//a[@data-ga-label='cheques']", 
+				"//a[text()='Tarjeta Regalo']", false),
+		APPS(FOOTER_SHOP, CHANNEL_ALL, 
+				"//a[@data-ga-label='apps' and text()[contains(.,'Apps')]]", 
+				"//a[text()='Apps']", false), 
+		EMPRESA(FOOTER_SHOP, CHANNEL_DESKTOP, 
+				"//a[@data-ga-label='pieEmpresa' and text()[contains(.,'Empresa')]]", 
+				"//a[text()='Empresa']", true), 
+		FRANQUICIAS(FOOTER_SHOP, CHANNEL_DESKTOP, 
+				"//a[@data-ga-label='pieFranquicias' and text()[contains(.,'Franquicias')]]", 
+				"//a[text()='Franquicias']", true), 
+		TRABAJA_CON_NOSOTROS(FOOTER_ALL, CHANNEL_ALL, 
+				"//a[@data-ga-label[contains(.,'pieTrabajar')] and text()[contains(.,'Trabaja')]]", 
+				"//a[text()='Trabaja con nosotros']", true), 
+		PRENSA(FOOTER_ALL, CHANNEL_DESKTOP, 
+				"//a[@data-ga-label='pressroom' and text()[contains(.,'Prensa')]]", 
+				"//a[text()='Prensa']", true), 
+		MANGO_OUTLET(FOOTER_SHOP, CHANNEL_ALL, 
+				"//a[@data-ga-label='outlet' and text()[contains(.,'Mango Outlet')]]", 
+				"//a[text()='Mango Outlet']", true),
+		ENVIO(FOOTER_OUTLET, CHANNEL_ALL, 
+				"//a[@data-ga-label='envio' and text()[contains(.,'Envío')]]", 
+				"//a[text()='Envíos']", false), 
+		GUIA_DE_TALLAS(FOOTER_OUTLET, CHANNEL_ALL, 
+				"//a[@data-ga-label='guiaTallas']", 
+				"//a[text()='Guía de tallas']", true);
 		
 		List<AppEcom> appList;
 		List<Channel> channel;
-		String xpathRelativeCapa;
+		String xpath;
+		String xpathGenesis;
 		boolean pageInNewTab;
+		private String xpCapa = "//div[@id='nav-footer']";
+		private String xpCapaGenesis = "//footer";
 		
-		private FooterLink(List<AppEcom> appList, List<Channel> channel, String xpathRelativeCapa, boolean pageInNewTab) {
+		private FooterLink(List<AppEcom> appList, List<Channel> channel, String xpath, String xpathGenesis, boolean pageInNewTab) {
 			this.appList = appList;
 			this.channel = channel;
-			this.xpathRelativeCapa = xpathRelativeCapa;
+			this.xpath = xpath;
+			this.xpathGenesis = xpathGenesis;
 			this.pageInNewTab = pageInNewTab;
 		}
 		
-		public String getXPathRelativeCapa() {
-			return this.xpathRelativeCapa;
+		public String getXPathCapa(AppEcom app) {
+			if (app==AppEcom.outlet) {
+				return xpCapaGenesis;
+			}
+			return xpCapa;
+		}
+		
+		private String getXPathLink(AppEcom app) {
+			if (app==AppEcom.outlet) {
+				return xpathGenesis;
+			}
+			return xpath;			
+		}
+		
+		public String getXPath(AppEcom app) {
+			return getXPathCapa(app) + getXPathLink(app);
 		}
 		
 		public boolean pageInNewTab() {
@@ -67,59 +107,48 @@ public class SecFooter extends PageBase {
 		
 		public static List<FooterLink> getFooterLinksFiltered(AppEcom app, Channel channel) {
 			List<FooterLink> listLinksToReturn = new ArrayList<>();
-			for (FooterLink footerLink : FooterLink.values()) {
+			for (var footerLink : FooterLink.values()) {
 				if (footerLink.appList.contains(app) && footerLink.channel.contains(channel)) {
 					listLinksToReturn.add(footerLink);
 				}
 			}
-
 			return listLinksToReturn;
 		}
 
 	}
 	
 	private static final String XP_CAMBIO_PAIS_SHOP = "//div[@class[contains(.,'modalCambioPaisShow')]]";
-	private static final String XP_CAMBIO_PAIS_OUTLET = "//span[@class[contains(.,'countrySelector')]]";
+	private static final String XP_CAMBIO_PAIS_GENESIS = "//*[@data-testid='changeButton']";
 	
 	public SecFooter() {
 		super(SUSCRIPCION_EN_FOOTER_Y_NON_MODAL_LEGAL_TEXTS);
 	}
 	
-	private String getXPathCapaFooter() {
-		switch (app) {
-		case outlet:
-			return XP_CAPA_OUTLET;
-		case shop:
-		default:
-			return XP_CAPA_SHOP;
-		}
-	}
-	
 	private String getXPathLink(FooterLink footerType) {
-		return (getXPathCapaFooter() + footerType.getXPathRelativeCapa());
+		return footerType.getXPath(app);
 	}
 	
 	private String getXPathLinkCambioPais() {
 		if (isOutlet()) {
-			return XP_CAMBIO_PAIS_OUTLET;
+			return XP_CAMBIO_PAIS_GENESIS;
 		}
 		return XP_CAMBIO_PAIS_SHOP;
 	}
 	
 	public boolean isPresent() {
-		return state(PRESENT, getXPathCapaFooter()).check();
+		return state(PRESENT, FooterLink.AYUDA.getXPathCapa(app)).check();
 	}
 	
 	public boolean isVisible() {
 		waitLoadPage();
-		return state(VISIBLE, getXPathCapaFooter()).check();
+		return state(VISIBLE, FooterLink.AYUDA.getXPathCapa(app)).check();
 	}	
 	
 	public void clickLink(FooterLink footerType) {
 		new ModalsSubscriptions().closeAllIfVisible();
-		moveToElement(footerType.getXPathRelativeCapa());
+		moveToElement(footerType.getXPath(app));
 		
-		String xpathLink = footerType.getXPathRelativeCapa();
+		String xpathLink = footerType.getXPath(app);
 		state(VISIBLE, xpathLink).wait(2).check();
 		waitMillis(500);
 		click(xpathLink).exec();
@@ -144,7 +173,7 @@ public class SecFooter extends PageBase {
 	}
 	
 	public void moveTo() {
-		String xpathFooter = getXPathCapaFooter();
+		String xpathFooter = FooterLink.AYUDA.getXPathCapa(app);
 		if (state(VISIBLE, xpathFooter).check()) {
 			moveToElement(xpathFooter);
 		}
@@ -157,4 +186,5 @@ public class SecFooter extends PageBase {
 	public boolean newsLetterMsgContains(String literal) {
 		return secNewsLetter.newsLetterMsgContains(literal);
 	}
+	
 }

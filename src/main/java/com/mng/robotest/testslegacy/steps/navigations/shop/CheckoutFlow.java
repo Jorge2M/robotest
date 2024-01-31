@@ -16,6 +16,7 @@ import com.mng.robotest.tests.conf.factories.entities.EgyptCity;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountry;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.compra.pageobjects.mobile.Page1EnvioCheckoutMobil;
 import com.mng.robotest.tests.domains.compra.payments.FactoryPagos;
@@ -36,7 +37,6 @@ import com.mng.robotest.testslegacy.beans.TypePago;
 import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.generic.beans.ValeDiscount;
-import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalCambioPais;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.mng.robotest.testslegacy.data.PaisShop.ESPANA;
@@ -218,7 +218,7 @@ public class CheckoutFlow extends StepBase {
 	    var ftcKout = dataPago.getFTCkout();
 	    if (ftcKout.checkPasarelas) {
 	        if (pago == null) {
-	            validaPasarelasPagoPais();
+	            checkPasarelasPagoPais();
 	        } else {
 	            dataPago.setPago(pago);
 	            checkPasarelaPago();
@@ -290,11 +290,11 @@ public class CheckoutFlow extends StepBase {
 	}	
 	
 	private void actionsWhenSessionLoss() {
-		new ModalCambioPais().closeModalIfVisible();
+		ModalChangeCountry.make(app).closeModalIfVisible();
 		new AccesoFlows().cambioPaisFromHomeIfNeeded(pais, dataTest.getIdioma());
 	}
 	
-	private void validaPasarelasPagoPais() throws Exception {
+	private void checkPasarelasPagoPais() throws Exception {
 		var listPagosToTest = getListPagosToTest(dataPago.getFTCkout().userIsEmployee);
 		for (var it = listPagosToTest.iterator(); it.hasNext(); ) {
 			var pagoToTest = it.next();

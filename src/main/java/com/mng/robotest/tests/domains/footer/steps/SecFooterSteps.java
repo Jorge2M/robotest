@@ -4,13 +4,11 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
+import com.mng.robotest.tests.domains.changecountry.steps.ModalChangeCountrySteps;
 import com.mng.robotest.tests.domains.footer.pageobjects.FactoryPageFromFooter;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
-import com.mng.robotest.tests.domains.transversal.modales.pageobject.ModalCambioPaisSteps;
-import com.mng.robotest.testslegacy.beans.IdiomaPais;
-import com.mng.robotest.testslegacy.beans.Pais;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -73,15 +71,9 @@ public class SecFooterSteps extends StepBase {
 	 @Step (
 		description="Se selecciona el link para el cambio de país", 
 		expected="Aparece el modal para el cambio de país")
-	 public void changeCountryClick(Pais newPais, IdiomaPais newIdioma) {
+	 public void clickChangeCountry() {
 		 secFooter.clickLinkCambioPais();
-		 var modalCambioPaisSteps = new ModalCambioPaisSteps();
-		 if (!modalCambioPaisSteps.validateIsVisible(3)) {
-			 //Hay un problema según el cuál en ocasiones no funciona el click así que lo repetimos
-			 secFooter.clickLinkCambioPais(); 
-		 }
-		 modalCambioPaisSteps.validateIsVisible(5);
-		 modalCambioPaisSteps.cambioPais(newPais, newIdioma);  
+		 new ModalChangeCountrySteps().checkIsVisible(5);
 	 }
 	 
 	 public void clickFooterSubscriptionInput() {

@@ -28,7 +28,7 @@ public class MenuUserItem {
 		PEDIDOS(Arrays.asList(outlet)),
 		MANGO_LIKES_YOU(Arrays.asList(shop)),
 		AYUDA(Arrays.asList(shop, outlet, votf)),
-		CAMBIO_PAIS(Arrays.asList(outlet));
+		CAMBIO_PAIS(Arrays.asList(shop, outlet));
 
 		List<AppEcom> apps;
 		private UserMenu(List<AppEcom> apps) {

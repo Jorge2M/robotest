@@ -185,8 +185,8 @@ public class PageLanding extends PageBase {
 		return ("//div[@class[contains(.,'main-content')] and @data-pais='" + dataTest.getCodigoPais() + "']");
 	}
 
-	public boolean isPresentMainContent() {
-		return state(PRESENT, getXPathMainContent()).check();
+	public boolean isPresentMainContent(int seconds) {
+		return state(PRESENT, getXPathMainContent()).wait(seconds).check();
 	}
 	
 	public boolean isVisibleCommsHeaderBannerLoyalty(int seconds) {

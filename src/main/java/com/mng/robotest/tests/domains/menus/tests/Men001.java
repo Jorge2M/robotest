@@ -29,7 +29,7 @@ public class Men001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		new AccesoSteps().accessFromPreHome();
-		new PageLandingSteps().checkIsPageWithCorrectLineas();
+		new PageLandingSteps().checkIsCountryWithCorrectLineas(2);
 		if (new UtilsMangoTest().isLineActive(line)) {
 			if (subline==null) {
 				checkLineGroupMenus();

@@ -25,7 +25,7 @@ public class SecMenusUserDevice extends PageBase {
 		CERRAR_SESION(
 			"//*[@href[contains(.,'/logout')] or text()='Cerrar sesión']"), //Necesitamos el data-testid de la parte Genesis (Outlet)
 		FAVORITOS(
-			XP_ITEM + "/self::*[@href[contains(.,'favorites')]]"),
+			XP_ITEM + "//self::*[@href[contains(.,'favorites')]]"),
 		INICIAR_SESION(
 			XP_ITEM + "/self::*[@href[contains(.,'login')]]"),
 		REGISTRATE(
@@ -35,12 +35,11 @@ public class SecMenusUserDevice extends PageBase {
 		MANGO_LIKES_YOU(
 			XP_ITEM + "/self::*[@href[contains(.,'mangolikesyou')]]"),
 		CAMBIO_PAIS(
-			XP_ITEM + "/self::*[@href[contains(.,'preHome')]]");
+			"(//*[@id='changeCountry'] | //*[@data-testid='language-l']/..)");
 
-		private static final String XP_CAPA_USER_MENU = "//ul";
 		private By byMenu;
 		MenuUserDevice(String xpath) {
-			byMenu = By.xpath(XP_CAPA_USER_MENU + xpath);
+			byMenu = By.xpath(xpath);
 		}
 
 		@Override
@@ -65,6 +64,7 @@ public class SecMenusUserDevice extends PageBase {
 	
 	public void clickMenu(MenuUserDevice menu) {
 		secCabecera.clickIconoMenuHamburguerMobil(true);
+		moveToElement(menu.getBy(app));
 		click(menu.getBy(app)).exec();
 	}
 

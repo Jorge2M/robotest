@@ -13,9 +13,6 @@ import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
-import com.mng.robotest.tests.domains.transversal.modales.pageobject.ModalCambioPaisSteps;
-import com.mng.robotest.testslegacy.beans.IdiomaPais;
-import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
 
@@ -127,20 +124,10 @@ public class SecMenusUserSteps extends StepBase {
 		expected="Aparece la página de \"Mi cuenta\"")
 	public void clickMenuMiCuenta() {
 		clickUserMenu(MI_CUENTA);
-		new PageMiCuentaSteps().validateIsPage(2);
+		new PageMiCuentaSteps().checkIsPage(3);
 		checksDefault();
 	}
 	
-	@Step (
-		description="Se selecciona el menú para el cambio de país", 
-		expected="Aparece el modal para el cambio de país")
-	public void cambioPaisMobil(Pais newPais, IdiomaPais newIdioma) {
-		clickUserMenu(CAMBIO_PAIS);
-		var modalCambioPaisSteps = new ModalCambioPaisSteps();
-		modalCambioPaisSteps.validateIsVisible(5); 
-		modalCambioPaisSteps.cambioPais(newPais, newIdioma);
-	}
-
 	private static final String TAG_POINTS = "@TagPoints";
 	@Step (
 		description=

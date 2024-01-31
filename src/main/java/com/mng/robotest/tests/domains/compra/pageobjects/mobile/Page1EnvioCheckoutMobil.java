@@ -239,10 +239,12 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 	public void clickEditDirecEnvio() {
 		waitForPageLoaded(driver);
 		try { 
-			click(XP_BUTTON_EDIT_DIREC_ENVIO).waitLink(2).exec();
+			state(VISIBLE, XP_BUTTON_EDIT_DIREC_ENVIO).wait(2).check();
+			click(XP_BUTTON_EDIT_DIREC_ENVIO).exec();
 		} catch (Exception e ) {
-			waitMillis(1000);
-			click(XP_BUTTON_EDIT_DIREC_ENVIO).waitLink(2).exec();
+			waitMillis(2000);
+			state(VISIBLE, XP_BUTTON_EDIT_DIREC_ENVIO).wait(2).check();
+			click(XP_BUTTON_EDIT_DIREC_ENVIO).exec();
 		}
 	}
 	

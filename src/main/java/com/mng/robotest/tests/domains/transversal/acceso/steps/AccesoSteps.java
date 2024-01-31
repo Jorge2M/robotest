@@ -12,7 +12,6 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.base.datatest.DataTest;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
-import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.tests.domains.login.steps.PageIdentificacionSteps;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
@@ -230,37 +229,6 @@ public class AccesoSteps extends StepBase {
 		checksDefault();
 		
 		pageSelectLineaVOTFSteps.selectMenuAndLogoMango(1);
-	}
-
-
-	private static final String TAG_NOMBRE_PAIS_ORIGEN = "@TagPaisOrigen";
-	private static final String TAG_CODIGO_PAIS_ORIGEN = "@TagCodigoPaisOrigen";
-	private static final String TAG_NOMBRE_IDIOMA_ORIGEN = "@TagIdiomaOrigen";
-	
-	@Step (
-		description=
-			"Datos del cambio de país <br>" + 
-			"<b>" + TAG_NOMBRE_PAIS_ORIGEN + "</b> (" + TAG_CODIGO_PAIS_ORIGEN + "), <b>idioma " + TAG_NOMBRE_IDIOMA_ORIGEN + "</b><br>" +  
-			"<b>#{paisDestino.getNombrePais()}</b> (#{paisDestino.getCodigoPais()}), <b>idioma #{idiomaDestino.getLiteral()}</b>",
-		expected=
-			"Se accede a la shop de #{paisDestino.getNombrePais()} en #{idiomaDestino.getLiteral()}",
-		saveHtmlPage=ALWAYS)
-	public void accesoPRYCambioPais(Pais paisDestino, IdiomaPais idiomaDestino) throws Exception {
-		replaceStepDescription(TAG_NOMBRE_PAIS_ORIGEN, dataTest.getPais().getNombrePais());
-		replaceStepDescription(TAG_CODIGO_PAIS_ORIGEN, dataTest.getCodigoPais());
-		replaceStepDescription(TAG_NOMBRE_IDIOMA_ORIGEN, dataTest.getIdioma().getLiteral());
-	
-		manySteps();
-
-		var paisOriginal = dataTest.getPais();
-		var idiomaOriginal = dataTest.getIdioma();
-		dataTest.setPais(paisDestino);
-		dataTest.setIdioma(idiomaDestino);
-		new SecFooterSteps().changeCountryClick(dataTest.getPais(), dataTest.getIdioma());
-		dataTest.setPais(paisOriginal);
-		dataTest.setIdioma(idiomaOriginal);
-
-		//No hacemos nada, simplemente es un paso informativo
 	}
 
 	@Step (

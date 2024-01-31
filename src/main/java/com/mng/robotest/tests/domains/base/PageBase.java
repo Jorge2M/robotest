@@ -228,5 +228,15 @@ public class PageBase extends PageObjTM {
 		}
 		return false;
 	}	
+	
+	public boolean isTextInURL(String text, int seconds) {
+		for (int i=0; i<seconds; i++) {
+			if (driver.getCurrentUrl().contains(text)) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
 
 }
