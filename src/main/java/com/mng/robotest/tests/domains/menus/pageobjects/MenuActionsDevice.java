@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.menus.pageobjects;
 
 import java.util.Arrays;
-import java.text.Normalizer;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.device.FiltroMobil;
@@ -32,14 +31,14 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 		}
 
 		String nameMenu = menu.getMenu();
-		String nameMenuInDataTestId = getMenuNameForDataTestId(nameMenu);
+		String nameMenuInDataTestId = UtilsMenusPO.getMenuNameForDataTestId(nameMenu);
 		String xpath =  
 				"//ul/li//a[@data-testid='" + dataTestid + "." + 
 				nameMenuInDataTestId + "_" + idLinea + sufix + "' or text()='" + menu.getMenu() + "'";
 		
 		if (nameMenu.contains(" ")) {
 			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
-			String menuInDataTestId = getMenuNameForDataTestId(menuIni);
+			String menuInDataTestId = UtilsMenusPO.getMenuNameForDataTestId(menuIni);
 			xpath+=" or @data-testid='" + dataTestid + "." + menuInDataTestId + "_" + idLinea + sufix + "'"; 
 		}
 		xpath+="]";
@@ -47,16 +46,6 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 		return xpath;
 	}	
 
-	private String getMenuNameForDataTestId(String menuName) {
-		String menuWithoutSpaces = menuName.toLowerCase().replace(" ", "_");
-		return removeAccents(menuWithoutSpaces);
-	}
-	
-	private String removeAccents(String value) {
-		String normalizedString = Normalizer.normalize(value, Normalizer.Form.NFD);
-        return normalizedString.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
-	}
-	
 	public MenuActionsDevice(MenuWeb menu) {
 		this.menu = menu;
 	}

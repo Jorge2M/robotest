@@ -39,14 +39,16 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 		}
 			
 		String nameMenu = menu.getMenu().toLowerCase();
+		String nameMenuInDataTestId = UtilsMenusPO.getMenuNameForDataTestId(nameMenu);
 		String xpath =  
 			"//ul/li[@class[contains(.,'Submenu_selected')]]" + 
 			"//a[@data-testid='menu.family." + 
-			nameMenu + "_" + idLinea + ".link'";
+			nameMenuInDataTestId + "_" + idLinea + ".link'";
 		
 		if (nameMenu.contains(" ")) {
 			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
-			xpath+=" or @data-testid='menu.family." + menuIni + "_" + idLinea + ".link'"; 
+			String nameMenuIniInDataTestId = UtilsMenusPO.getMenuNameForDataTestId(menuIni);
+			xpath+=" or @data-testid='menu.family." + nameMenuIniInDataTestId + "_" + idLinea + ".link'"; 
 		}
 		xpath+="]";
 		return xpath;		
@@ -58,14 +60,16 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 			idLinea = menu.getSublinea().getId(app);
 		}
 			
-		String nameMenu = menu.getMenu().toLowerCase();
+		String nameMenu = menu.getMenu();
+		String nameMenuInDataTestId = UtilsMenusPO.getMenuNameForDataTestId(nameMenu);
 		String xpath =  
 			"//ul[@data-family]/li//a[@data-testid='menu.family." + 
-			nameMenu + "_" + idLinea + ".link'";
+			nameMenuInDataTestId + "_" + idLinea + ".link'";
 		
 		if (nameMenu.contains(" ")) {
 			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
-			xpath+=" or @data-testid='menu.family." + menuIni + "_" + idLinea + ".link'"; 
+			String nameMenuIniInDataTestId = UtilsMenusPO.getMenuNameForDataTestId(menuIni);			
+			xpath+=" or @data-testid='menu.family." + nameMenuIniInDataTestId + "_" + idLinea + ".link'"; 
 		}
 		xpath+="]";
 		return xpath;

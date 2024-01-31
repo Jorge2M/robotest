@@ -31,6 +31,7 @@ public abstract class SecSelectorPreciosDesktop extends PageBase {
 	}
 
 	public int getMinImport() {
+		state(VISIBLE, getXPathImporteMinimo()).wait(2).check();
 		var impMinElement = getElement(getXPathImporteMinimo());
 		return getImportFilter(impMinElement.getText());
 	}
