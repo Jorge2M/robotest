@@ -28,15 +28,15 @@ public class FactoryPageFromFooter {
 			return (new PageEmpresa());
 		case FRANQUICIAS:
 			return (new PageFranquicias());
-		case TRABAJA_CON_NOSOTROS:
+		case TRABAJA_CON_NOSOTROS: //
 			return (new PageTrabajaConNosotros());
-		case PRENSA:
+		case PRENSA: //
 			return (new PageNotasPrensa());
 		case MANGO_OUTLET:
 			return (new PageMultimarcasOutlet());
 //		case PEDIDOS:
 //			return (new PageInputPedido());
-		case ENVIO:
+		case ENVIO: //
 			return (new PageEnvio());
 		case GUIA_DE_TALLAS:
 			return (new PageGuiaDeTallas());

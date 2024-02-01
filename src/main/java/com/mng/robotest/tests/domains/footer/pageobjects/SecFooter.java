@@ -75,7 +75,9 @@ public class SecFooter extends PageBase {
 		private String xpCapa = "//div[@id='nav-footer']";
 		private String xpCapaGenesis = "//footer";
 		
-		private FooterLink(List<AppEcom> appList, List<Channel> channel, String xpath, String xpathGenesis, boolean pageInNewTab) {
+		private FooterLink(
+				List<AppEcom> appList, List<Channel> channel, String xpath, String xpathGenesis, 
+				boolean pageInNewTab) {
 			this.appList = appList;
 			this.channel = channel;
 			this.xpath = xpath;
@@ -101,7 +103,10 @@ public class SecFooter extends PageBase {
 			return getXPathCapa(app) + getXPathLink(app);
 		}
 		
-		public boolean pageInNewTab() {
+		public boolean pageInNewTab(AppEcom app) {
+			if (app==AppEcom.outlet) {
+				return false;
+			}
 			return this.pageInNewTab;
 		}
 		

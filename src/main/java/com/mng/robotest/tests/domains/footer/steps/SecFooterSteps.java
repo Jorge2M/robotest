@@ -51,14 +51,14 @@ public class SecFooterSteps extends StepBase {
 			checks.add(
 				"Aparece la página <b>" + pageObject.getName() + "</b> " + getLitSecondsWait(seconds),
 				pageObject.isPageCorrectUntil(seconds), WARN);
-			if (typeFooter.pageInNewTab()) {
+			if (typeFooter.pageInNewTab(app)) {
 				checks.add(
 					"Aparece la página en una ventana aparte",
 					newWindowInNewTab, WARN);		
 			}
 		}
 		finally {
-			if (typeFooter.pageInNewTab() &&
+			if (typeFooter.pageInNewTab(app) &&
 				closeAtEnd && newWindowInNewTab) {
 				driver.close();
 				driver.switchTo().window(windowFatherHandle);

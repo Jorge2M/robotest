@@ -8,11 +8,11 @@ public class PageTrabajaConNosotros extends PageBase implements PageFromFooter {
 	
 	@Override
 	public String getName() {
-		return "Work Your Passion";
+		return "Life at Mango";
 	}
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return state(PRESENT, "//title[contains(.,'" + getName() + "')]").wait(seconds).check();
+		return state(PRESENT, "//title[text()[contains(.,'MANGO Jobs')]]").wait(seconds).check();
 	}
 }

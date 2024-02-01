@@ -6,15 +6,13 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageNotasPrensa extends PageBase implements PageFromFooter {
 	
-	private static final String XP_FOR_IDPAGE = "//*[text()[contains(.,'NOTAS DE PRENSA')] or text()[contains(.,'Notas de prensa')] or text()[contains(.,'PRESS RELEASES')]]";
-	
 	@Override
 	public String getName() {
-		return "Noticias en prensa";
+		return "Mango pressroom";
 	}
 	
 	@Override
 	public boolean isPageCorrectUntil(int seconds) {
-		return state(PRESENT, XP_FOR_IDPAGE).wait(seconds).check();
+		return state(PRESENT, "//section[@class='mango-prensa-h1']").wait(seconds).check();
 	}
 }
