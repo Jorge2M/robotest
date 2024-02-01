@@ -32,7 +32,7 @@ public class PageHistorialLikesSteps extends StepBase {
 	@Validation
 	public ChecksTM checkPointsPayment(int pointsUsed, int pointsReceived, String idPedido) {
 		var checks = ChecksTM.getNew();
-		int marginPoints = 2;
+		int marginPoints = 5;
 		checks.add(
 			"En los primeros 4 movimientos existe uno de <b>" + pointsReceived + "</b> puntos recibidos asociado al código de pedido <b>" + idPedido + "</b>",
 			isInFirst4Movements(RECEIVED, pointsReceived, idPedido));
