@@ -57,7 +57,8 @@ public class SecColoresArticuloDesktopKondo extends SecColoresArticuloDesktop {
 	@Override
 	public void clickColorArticulo(WebElement articulo, int posColor) {
 		String xpathImgColorRelArticle = getXPathImgColorRelativeArticle(false);
-		getElements(articulo, xpathImgColorRelArticle).get(posColor-1).click();
+		moveToElement(xpathImgColorRelArticle);
+		getElements(articulo, "." + xpathImgColorRelArticle).get(posColor-1).click();
 	}
 	
 	private String getXPathImgColorRelativeArticle(boolean selected) {

@@ -59,8 +59,8 @@ public class CommonGaleriaKondo extends PageBase {
 	
 	public WebElement getImagenElementArticulo(WebElement articulo) {
 		moveToElement(articulo);
-		String xpathImg = getXPathImgArticulo();
-		if (state(VISIBLE, articulo).by(By.xpath("." + xpathImg)).wait(1).check()) {
+		String xpathImg = getXPathImgArticulo(); 
+		if (state(PRESENT, articulo).by(By.xpath("." + xpathImg)).wait(1).check()) {
 			return getElement(articulo, "." + xpathImg);
 		}
 		return null;
