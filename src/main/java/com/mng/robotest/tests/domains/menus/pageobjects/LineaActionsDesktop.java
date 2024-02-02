@@ -68,7 +68,7 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	}
 	@Override
 	public void hoverLinea() {
-		state(VISIBLE, getXPathLinea()).wait(2).check();
+		state(VISIBLE, getXPathLinea()).wait(3).check();
 		moveToElement(getXPathLinea());
 	}
 	@Override 
@@ -78,6 +78,9 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	@Override
 	public boolean isLineaSelected(int seconds) {
 		for (int i=0; i<seconds; i++) {
+			if (!state(VISIBLE, getXPathLinkLinea()).wait(1).check()) {
+				return false;
+			}
 			String textDecoration = getElement(getXPathLinkLinea()).getCssValue("text-decoration");
 			if (textDecoration.contains("underline")) {
 				return true;
