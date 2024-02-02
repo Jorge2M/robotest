@@ -160,6 +160,7 @@ public class LineaWeb extends PageBase implements LineaActions {
 	@Override
 	public void hoverLinea() {
 		lineaActions.hoverLinea();
+		lineaActions.hoverLinea();
 		if (!isLineaAvailable(1)) {
 			lineaActions.hoverLinea();
 		}
