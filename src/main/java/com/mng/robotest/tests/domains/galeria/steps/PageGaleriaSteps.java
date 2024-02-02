@@ -279,12 +279,13 @@ public class PageGaleriaSteps extends StepBase {
 	}
 	
 	@Step (
-		description="Seleccionar la ordenación #{typeOrdenacion}", 
+		description="Seleccionar la ordenación #{typeOrdenacion} y posicionarse en el 1er artículo", 
 		expected="Los artículos se ordenan correctamente")
 	public int seleccionaOrdenacionGaleria(
 			FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria, int numArticulosValidar) throws Exception {
 		
 		pgGaleria.selecOrdenacionAndReturnNumArticles(typeOrdenacion);
+		pgGaleria.backTo1erArticulo();
 
 		checkIsVisiblePageWithTitle(tipoPrendasGaleria);
 		int numArticulosPant = pgGaleria.getNumArticulos() + pgGaleria.getNumArticulos();
