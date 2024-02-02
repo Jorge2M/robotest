@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
@@ -249,7 +250,13 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
 		moveToElement(hearthIcon);
 		state(CLICKABLE, hearthIcon).wait(1).check();
-		hearthIcon.click();
+		try {
+			hearthIcon.click();
+		} catch (ElementClickInterceptedException e) {
+			//In many cases the chatbot, the header or the up icon are over the hearth icon
+			keyUp(2);
+			hearthIcon.click();
+		}
 	}
 	
 	private List<WebElement> getListArticulosFromPagina(int numPagina) {
