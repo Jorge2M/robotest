@@ -14,13 +14,13 @@ public class PageAmexInputTarjetaSteps extends StepBase {
 	private final PageAmexInputTarjeta pageAmexInputTarjeta = new PageAmexInputTarjeta();
 	
 	@Validation
-	public ChecksTM validateIsPageOk(String importeTotal) {
+	public ChecksTM checkIsPageOk(String importeTotal) {
 		var checks = ChecksTM.getNew();
 		String codPais = dataTest.getCodigoPais();
 		int seconds = 5;
 	 	checks.add(
 			"Aparece la pasarela de pagos de RedSys " + getLitSecondsWait(seconds),
-			pageAmexInputTarjeta.isPasarelaRedSysUntil(seconds)); 
+			pageAmexInputTarjeta.isPasarelaRedSys(seconds)); 
 	 	
 	 	checks.add(
 			"En la página resultante figura el importe total de la compra (" + importeTotal + ")",

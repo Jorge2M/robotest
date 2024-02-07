@@ -10,7 +10,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageGoogle extends PageBase {
 
 	private static final String URL_ACCESO = "http://www.google.es";
-	private static final String XP_INPUT_TEXT = "//textarea[@type='search']";
+	private static final String XP_INPUT_TEXT = "//textarea[@role='combobox']";
 	private static final String XP_LINK_NO_PUBLI = "//div[@class='g']//a";
 	private static final String XP_LINK_NO_PUBLI_TEXT = XP_LINK_NO_PUBLI + "//h3";
 	private static final String XP_BUTTON_ACCEPT_MODAL_COOKIE = "//button[@id='L2AGLb']";
@@ -23,7 +23,7 @@ public class PageGoogle extends PageBase {
 		return URL_ACCESO;
 	}
 
-	public String getXPath_linkWithText(String textContained) {
+	public String getXPathLinkWithText(String textContained) {
 		return (XP_LINK_NO_PUBLI_TEXT + "[text()[contains(.,'" + textContained + "')]]");	
 	}
 

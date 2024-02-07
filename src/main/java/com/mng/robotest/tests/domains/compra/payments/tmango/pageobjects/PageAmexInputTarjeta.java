@@ -6,14 +6,14 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageAmexInputTarjeta extends PageBase {
 
-	private static final String XP_PAGE_REDSYS = "//title[text()='Redsys']";
+	private static final String XP_PAGE_REDSYS = "//title[text()[contains(.,'Redsys')]]";
 	private static final String XP_INPUT_NUM_TARJ = "//input[@id[contains(.,'inputCard')]]";
 	private static final String XP_INPUT_MES_CAD = "//input[@id[contains(.,'cad1')] and @maxlength=2]";
 	private static final String XP_INPUT_ANY_CAD = "//input[@id[contains(.,'cad2')] and @maxlength=2]";
 	private static final String XP_INPUT_CVC = "//input[@id[contains(.,'codseg')] and @maxlength=4]";
 	private static final String XP_PAGAR_BUTTON = "//button[@id[contains(.,'divImgAceptar')]]";
 	
-	public boolean isPasarelaRedSysUntil(int seconds) {
+	public boolean isPasarelaRedSys(int seconds) {
 		return state(PRESENT, XP_PAGE_REDSYS).wait(seconds).check();
 	}
 	

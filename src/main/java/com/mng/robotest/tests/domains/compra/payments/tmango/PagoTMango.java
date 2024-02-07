@@ -25,7 +25,7 @@ public class PagoTMango extends PagoSteps {
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		
 		var pageAmexInputTarjetaSteps = new PageAmexInputTarjetaSteps();
-		pageAmexInputTarjetaSteps.validateIsPageOk(dataPedido.getImporteTotal());
+		pageAmexInputTarjetaSteps.checkIsPageOk(dataPedido.getImporteTotal());
 		
 		if (execPay) {
 			dataPedido.setCodtipopago("M");
