@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class Loyalty {
 	
 	@Test (
-		groups={"Loyalty", "Compra", "Checkout", "Canal:desktop,mobile_App:shop"},
+		groups={"Loyalty", "Smoke", "Compra", "Checkout", "Canal:desktop,mobile_App:shop"},
 		description="Se realiza una compra con envío a tienda OK comprobando que se aplican correctamente los Likes")
 	public void LOY001_Compra_LikesStored() throws Exception {
 		new Loy001().execute();
@@ -20,7 +20,7 @@ public class Loyalty {
 	}
 
 	@Test (
-		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
+		groups={"Loyalty", "Smoke", "Canal:desktop,mobile_App:shop"},
 		description="Compra entrada cine a cambio de Likes")
 	public void LOY003_Exhange_Compra_Entrada() throws Exception {
 		new Loy003().execute();

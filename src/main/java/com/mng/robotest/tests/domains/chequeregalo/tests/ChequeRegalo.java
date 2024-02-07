@@ -5,7 +5,7 @@ import org.testng.annotations.*;
 public class ChequeRegalo {
 
 	@Test (
-		groups={"Compra", "Chequeregalo", "Canal:desktop_App:shop"}, alwaysRun=true,
+		groups={"Compra", "Smoke", "Chequeregalo", "Canal:desktop_App:shop"}, alwaysRun=true,
 		description="Consulta datos cheque existente y posterior compra Cheque regalo New (España)")
 	public void RGL001_Cheque_Regalo_New() throws Exception {
 		new Rgl001().execute();

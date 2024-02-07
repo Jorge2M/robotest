@@ -6,7 +6,7 @@ import org.testng.annotations.*;
 public class Buscador {
 
 	@Test (
-		groups={"Buscador", "Canal:all_App:all"}, alwaysRun=true, 
+		groups={"Buscador", "Smoke", "Canal:all_App:all"}, alwaysRun=true, 
 		description="[Usuario no registrado] Búsqueda artículos existente / no existente")
 	@Parameters({"categoriaProdExistente", "catProdInexistente"})
 	public void BUS001_Buscador_NoReg(String categoriaProdExistente, String catProdInexistente) 

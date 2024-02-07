@@ -7,7 +7,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 public class Compra {
 
 	@Test (
-		groups={"Compra", "Checkout", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, priority=2, 
+		groups={"Compra", "Smoke", "Checkout", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, priority=2, 
 		description="[Usuario registrado][Tarjeta guardada][Productos Home (Shop)][No aceptación cookies] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
 	public void COM001_Compra_Home_TrjSaved_Empl() throws Exception {
 		new Com001().execute();
@@ -24,7 +24,7 @@ public class Compra {
 	}
 	
 	@Test (
-		groups={"Registro_Express", "Bolsa", "Canal:all_App:all"}, alwaysRun=true,
+		groups={"Registro_Express", "Smoke", "Bolsa", "Canal:all_App:all"}, alwaysRun=true,
 		description="Registro Express, cierre/inicio sesión correcto")
 	public void COM005_Compra_noReg_emailNoExist() throws Exception {
 		new Com005().execute();

@@ -33,14 +33,14 @@ public class Favoritos implements TestFromFactory, Serializable {
 	}
 	
 	@Test(
-		groups={"Favoritos", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
+		groups={"Favoritos", "Smoke", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario registrado] Alta favoritos desde la galería")
 	public void FAV001_AltaFavoritosDesdeGaleria() throws Exception {
 		new Fav001(pais, idioma).execute();
 	}
 
 	@Test(
-		groups={"Favoritos", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
+		groups={"Favoritos", "Smoke", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario no registrado] Alta favoritos desde la galería Mango-Home y posterior identificación")
 	public void FAV002_AltaFavoritosDesdeFicha() throws Exception {
 		new Fav002(pais, idioma).execute();

@@ -36,7 +36,7 @@ public class Registro implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
-		groups={"Registro", "Canal:all_App:shop,outlet", "SupportsFactoryCountrys"},
+		groups={"Registro", "Smoke", "Canal:all_App:shop,outlet", "SupportsFactoryCountrys"},
 		description="Registro nuevo de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
 	public void REG001_NewRegisterOK() throws Exception {
 		if (isPro()) {

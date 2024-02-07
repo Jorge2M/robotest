@@ -50,7 +50,7 @@ public class PaisIdioma implements Serializable, TestFromFactory {
 	}	
 	  
 	@Test (
-		groups={"Menus", "Galeria", "Canal:all_App:shop,outlet"}, 
+		groups={"Menus", "Smoke", "Galeria", "Canal:all_App:shop,outlet"}, 
 		description="Acceso desde prehome y navegación por todas las líneas/sublíneas del país + selección menú/s")
 	public void PAR001_Lineas() throws Exception {
 		new Par001(pais, idioma, linesToTest, flagsNavigation).execute();

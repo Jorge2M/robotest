@@ -5,7 +5,7 @@ import org.testng.annotations.*;
 public class Login {
 
 	@Test (
-		groups={"Login", "Canal:desktop_App:shop,outlet"}, 
+		groups={"Login", "Smoke", "Canal:desktop_App:shop,outlet"}, 
 		description="Verificar inicio sesión con usuario incorrecto + recuperar password")
 	public void LOG001_IniciarSesion_NOK() throws Exception {
 		new Log001().execute();

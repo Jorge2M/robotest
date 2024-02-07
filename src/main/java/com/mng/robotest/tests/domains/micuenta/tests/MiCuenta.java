@@ -32,7 +32,7 @@ public class MiCuenta implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
-		groups={"Micuenta", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
+		groups={"Micuenta", "Smoke", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
 		description="Verificar opciones de 'mi cuenta'")
 	@Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
 	public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
@@ -41,7 +41,7 @@ public class MiCuenta implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
-		groups={"Miscompras", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
+		groups={"Miscompras", "Smoke", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="Consulta de mis compras con un usuario con datos a nivel de Tienda y Online")
 	@Parameters({"userWithOnlinePurchases", "userWithStorePurchases", "passUserWithOnlinePurchases", "passUserWithStorePurchases"})
 	public void MIC002_CheckConsultaMisCompras(
@@ -54,7 +54,7 @@ public class MiCuenta implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
-		groups={"Micuenta", "Canal:desktop,mobile_App:shop"}, 
+		groups={"Micuenta", "Smoke", "Canal:desktop,mobile_App:shop"}, 
 		description="Registro y cancelación de la cuenta creada")
 	public void MIC003_CancelacionCuenta() throws Exception {
 		new Mic003().execute();

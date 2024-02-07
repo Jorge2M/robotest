@@ -15,10 +15,8 @@ import com.mng.robotest.testslegacy.data.DataMango;
 public class Mic003 extends TestBase {
 
 	private final PageRegistroInitialShopSteps pageRegistroInitialSteps = new PageRegistroInitialShopSteps();
-	
 	private final String emailNotExistent = DataMango.getEmailNonExistentTimestamp();
 	private final String passStandard = GetterSecrets.factory().getCredentials(SecretType.SHOP_ROBOT_USER).getPassword();
-	
 	private final DataNewRegister dataNewRegister;
 
 	public Mic003() {
