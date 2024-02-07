@@ -5,7 +5,7 @@ import org.testng.annotations.*;
 public class Otras {
 	
 	@Test (
-		groups={"Redireccion", "Canal:desktop_App:shop,outlet"}, 
+		groups={"Redirects", "Canal:desktop_App:shop,outlet"}, 
 		description="Comprobar acceso url desde email")
 	public void OTR001_check_Redirects() throws Exception {
 		new Otr001().execute();
