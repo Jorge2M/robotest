@@ -14,6 +14,11 @@ public class ModalChatBotSteps extends StepBase {
 		return mdChatBot.checkIconVisible();
 	}
 	
+	@Validation (description="No aparece el icono de ChatBot")
+	public boolean checkIconInvisible() {
+		return mdChatBot.checkIconInvisible();
+	}	
+	
 	@Step (
 		description="Clickar el icono de ChatBot", 
 		expected="Aparece la capa del webchat")

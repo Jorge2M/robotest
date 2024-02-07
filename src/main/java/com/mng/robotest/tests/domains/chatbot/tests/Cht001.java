@@ -11,6 +11,12 @@ public class Cht001 extends TestBase {
 		access();
 		new ModalsSubscriptionsSteps().closeIfVisible();
 		var chatBotSteps = new ModalChatBotSteps();
+		
+		if (isOutlet()) {
+			chatBotSteps.checkIconInvisible();
+			return;
+		}
+		
 		if (!chatBotSteps.checkIconVisible()) {
 			return;
 		}

@@ -4,8 +4,6 @@ import org.testng.annotations.*;
 
 public class ChangeCountry {
 
-	//TODO añadir grupo
-	
 	@Test (
 		groups={"Changecountry", "Canal:desktop,mobile_App:shop,outlet"}, 
 		description="Cambiar de país a través de click en link del footer")

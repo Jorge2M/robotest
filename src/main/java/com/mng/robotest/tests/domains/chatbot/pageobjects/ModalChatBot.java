@@ -25,6 +25,10 @@ public class ModalChatBot extends PageBase {
 		return state(VISIBLE, XP_ICON).check();
 	}
 	
+	public boolean checkIconInvisible() {
+		return state(INVISIBLE, XP_ICON).check();
+	}	
+	
 	public void clickIcon() {
 		click(XP_ICON).exec();
 	}
