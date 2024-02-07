@@ -12,7 +12,7 @@ public class Galeria {
 	}
 
 	@Test (
-		groups={"Galeria", "Smoke", "Canal:all_App:all"},
+		groups={"Galeria", "Canal:all_App:all"},
 		description="[Usuario no registrado][Chrome] Acceder a galería camisas. Filtro color. Scroll")
 	public void GPO004_Navega_Galeria() throws Exception {
 		new Gpo004().execute();
