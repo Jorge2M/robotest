@@ -10,7 +10,11 @@ public class LocalStorageMango extends LocalStorage {
 		setItemInLocalStorage("modalAdhesionLoyalty", "true");
 		setItemInLocalStorage("modalSPShown", "1");
 		setItemInLocalStorage("MangoShopModalIPConfirmed", "ES-es__2");
-		setItemInLocalStorage("userCountrySelected", "\"" + dataTest.getPais().getCodigoAlf() + "\""); //Avoid change country modal
+		
+		String codigoPais = dataTest.getPais().getCodigoAlf();
+		String codigoIdioma = dataTest.getIdioma().getAcceso();
+		setItemInLocalStorage("userCountrySelected", "\"" + codigoPais + "\""); //Avoid change country modal
+		setItemInLocalStorage("userData", "{\"countryISO\":\"" + codigoPais.toLowerCase() + "\",\"languageISO\":\"" + codigoIdioma + "\"}");
 	}
 	
 	public void setInitialModalsOn() {
