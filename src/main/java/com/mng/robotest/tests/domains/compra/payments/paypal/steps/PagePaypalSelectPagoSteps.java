@@ -11,7 +11,7 @@ public class PagePaypalSelectPagoSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página de Selección del Pago " + SECONDS_WAIT)
-	public boolean validateisPage(int seconds) {
+	public boolean checkIsPage(int seconds) {
 		return pgPaypalSelectPago.isPage(seconds);
 	}
 	

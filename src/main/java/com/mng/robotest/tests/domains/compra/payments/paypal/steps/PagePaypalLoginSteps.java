@@ -22,8 +22,8 @@ public class PagePaypalLoginSteps extends StepBase {
 		String paginaPadre = driver.getWindowHandle();
 		pgPaypalLogin.inputUserAndPassword(userMail, password);
 		pgPaypalLogin.clickIniciarSesion();
-		driver.switchTo().window(paginaPadre); //Salimos del iframe
-		new PagePaypalSelectPagoSteps().validateisPage(20);
+		driver.switchTo().window(paginaPadre); 
+		new PagePaypalSelectPagoSteps().checkIsPage(20);
 	}
 	
 }

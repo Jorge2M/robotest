@@ -50,7 +50,7 @@ public class PagoPaypal extends PagoSteps {
 			
 			modalPreloaderSppinerSteps.validateIsVanished(seconds);
 			if (getPostLoginPagePaypal()==PostLoginPagePaypal.SELECT_PAGO) {
-				pagePaypalSelectPagoSteps.validateisPage(0);
+				pagePaypalSelectPagoSteps.checkIsPage(0);
 				pagePaypalSelectPagoSteps.clickContinuarButton();	  
 			}
 			
