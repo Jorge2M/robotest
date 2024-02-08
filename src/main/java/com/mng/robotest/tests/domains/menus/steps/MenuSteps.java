@@ -376,7 +376,7 @@ public class MenuSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		showMenuIfDevice();
 		for (var lineaType : LineaType.values()) {
-			int seconds = (lineaType==LineaType.SHE) ? 1 : 0;
+			int seconds = (lineaType==LineaType.SHE) ? 2 : 0;
 			checkLineaVisible(checks, lineaType, seconds);
 		}
 		unshowMenuIfDevice();
