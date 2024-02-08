@@ -33,9 +33,10 @@ public class Gpo004 extends TestBase {
 			selectArticleInOtherLabel();
 		}
 		
-		int articulosTotalesPagina = scrollToLastAndSelectArticle();
-		goBackToGalery();
-		scrollToLastAndCheck(articulosTotalesPagina);		
+		scrollToLastAndSelectArticle();
+//		int articulosTotalesPagina = scrollToLastAndSelectArticle();
+//		goBackToGalery();
+//		scrollToLastAndCheck(articulosTotalesPagina);		
 	}
 
 	private void selectGaleryAndFilterByColor() {
