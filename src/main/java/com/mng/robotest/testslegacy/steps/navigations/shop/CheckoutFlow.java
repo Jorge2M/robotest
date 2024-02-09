@@ -281,7 +281,7 @@ public class CheckoutFlow extends StepBase {
 		//(en Chrome, cuando existe paralelización en ocasiones se pierden las cookies cuando se completa un pago con pasarela externa)
 		actionsWhenSessionLoss(); 
 		
-		secBolsaSteps.altaArticlosConColores(1);
+		secBolsaSteps.addArticlesWithColors(1);
 		secBolsaSteps.selectButtonComprar();
 		testFromIdentificationToMetodosPago();
 		if (!isMobile()) {

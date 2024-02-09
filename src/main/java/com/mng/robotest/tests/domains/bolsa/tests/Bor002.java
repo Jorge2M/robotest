@@ -27,7 +27,7 @@ public class Bor002 extends TestBase {
 	}
 	
 	private void addBagArticleWithColors() throws Exception {
-		new SecBolsaSteps().altaArticlosConColores(1);
+		new SecBolsaSteps().addArticlesWithColors(1);
 	}
 	
 	private void navigateToCheckout() throws Exception {

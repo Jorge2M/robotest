@@ -1,7 +1,13 @@
 package com.mng.robotest.tests.domains.bolsa.pageobjects;
 
+import static com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa.OPEN;
+
+import java.net.URISyntaxException;
+
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -118,6 +124,7 @@ public class SecBolsa extends SecBolsaCommon {
 	private void setBolsaMobileToState(StateBolsa stateBolsaExpected) {
 		if (stateBolsaExpected==StateBolsa.OPEN) {
 			SecCabecera.make().clickIconoBolsaWhenDisp(2);
+			manageRandomProblemInPreDevice();
 		} else {
 			if (isOutlet()) {
 				clickIconoCloseMobile();
@@ -126,6 +133,20 @@ public class SecBolsa extends SecBolsaCommon {
 			}
 		}
 		isInStateUntil(stateBolsaExpected, 3);
+	}
+
+	//Manejo de problema random en PRE según el cual la página pasa
+	//a visión Desktop después de seleccionar el icono
+	private void manageRandomProblemInPreDevice() {
+		if (UtilsTest.todayBeforeDate("2025-02-09") && 
+			!isInStateUntil(OPEN, 1) && !isPRO()) {
+			try {
+				driver.get(inputParamsSuite.getDnsUrlAcceso() + "/mobil");
+				SecCabecera.make().clickIconoBolsaWhenDisp(2);
+			} catch (URISyntaxException e) {
+				Log4jTM.getLogger().warn("Problem managing bag problem", e);
+			}
+		}
 	}
 	
 	private void clickIconoCloseMobile() {

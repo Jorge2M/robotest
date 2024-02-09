@@ -21,7 +21,6 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Artic
 import com.mng.robotest.tests.repository.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
-import com.mng.robotest.testslegacy.utils.UtilsTest;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -77,15 +76,15 @@ public class SecBolsaSteps extends StepBase {
 		expected="La bolsa queda en estado #{stateBolsaExpected}")
 	public void forceStateBolsaTo(StateBolsa stateBolsaExpected) {
 		secBolsa.setBolsaToStateIfNotYet(stateBolsaExpected);
-		validateBolsaInState(stateBolsaExpected, 1);
+		checkBagInState(stateBolsaExpected, 1);
 	}
 
 	@Validation(description="La bolsa queda en estado #{stateBolsaExpected} " + SECONDS_WAIT)
-	private boolean validateBolsaInState(StateBolsa stateBolsaExpected, int seconds) {
+	private boolean checkBagInState(StateBolsa stateBolsaExpected, int seconds) {
 		return secBolsa.isInStateUntil(stateBolsaExpected, seconds);
 	}
 
-	public void altaArticlosConColores(int numArticulos) throws Exception {
+	public void addArticlesWithColors(int numArticulos) throws Exception {
 		var getterProducts = new GetterProducts.Builder(dataTest.getPais()
 				.getCodigoAlf(), app, driver)
 				.filter(FilterType.MANY_COLORS)
@@ -99,8 +98,8 @@ public class SecBolsaSteps extends StepBase {
 	public void altaListaArticulosEnBolsa(List<Article> listArticlesForAdd) 
 			throws Exception {
 		if (listArticlesForAdd!=null && !listArticlesForAdd.isEmpty()) {
-			altaBolsaArticulos(listArticlesForAdd);
-			validaAltaArtBolsa();
+			addArticlesBag(listArticlesForAdd);
+			checkArticlesAddedToBag();
 		}
 		dataTest.getDataBag().setImporteTotal(secBolsa.getPrecioSubTotal());
 		dataTest.getDataBag().setImporteTransp(secBolsa.getPrecioTransporte());
@@ -110,7 +109,7 @@ public class SecBolsaSteps extends StepBase {
 		description="Utilizar el buscador para acceder a la ficha y dar de alta los siguientes productos en la bolsa:<br>" + TAG_LISTA_ART,
 		expected="Los productos se dan de alta en la bolsa correctamente",
 		saveErrorData=ALWAYS, saveNettraffic=ALWAYS)
-	public void altaBolsaArticulos(List<Article> listParaAlta) {
+	public void addArticlesBag(List<Article> listParaAlta) {
 		insertArticlesInStepDescription(listParaAlta);
 		for (int i=0; i<listParaAlta.size(); i++) {
 			var artTmp = listParaAlta.get(i);
@@ -142,8 +141,8 @@ public class SecBolsaSteps extends StepBase {
 		replaceStepDescription(TAG_LISTA_ART, str.toString());
 	}
 
-	public void validaAltaArtBolsa() throws Exception {
-		validaNumArtEnBolsa();
+	public void checkArticlesAddedToBag() throws Exception {
+		checkNumArticlesInBag();
 		if (isDesktop()) {
 			checkIsBolsaVisibleInDesktop();
 		}
@@ -162,22 +161,19 @@ public class SecBolsaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int seconds = 1;
 		
-	 	//Confiar que en algún momento se solventa el problema de los saltos de instancia
-	 	var state = (!isPRO() && UtilsTest.todayBeforeDate("2023-09-15")) ? WARN : DEFECT;
-	 	
 	 	checks.add(
 			"Es visible la capa/página correspondiente a la bolsa " + getLitSecondsWait(seconds),
-			secBolsa.isInStateUntil(OPEN, seconds), state);
+			secBolsa.isInStateUntil(OPEN, seconds));
 	 	
 	 	checks.add(
 			"Aparece el botón \"Comprar\" " + getLitSecondsWait(seconds),
-			secBolsa.isVisibleBotonComprarUntil(seconds), state);
+			secBolsa.isVisibleBotonComprarUntil(seconds));
 	 	
 		return checks;
 	}
 
 	@Validation
-	public ChecksTM validaNumArtEnBolsa() {
+	public ChecksTM checkNumArticlesInBag() {
 		var checks = ChecksTM.getNew();
 		int seconds = 3;
 		String itemsSaved = String.valueOf(dataTest.getDataBag().getListArticulos().size());
@@ -290,7 +286,6 @@ public class SecBolsaSteps extends StepBase {
 			clickRegistroMobile();
 			new PageRegistroInitialShopSteps().checkIsPage(5);
 		}
-
 	}
 	
 	@Step (

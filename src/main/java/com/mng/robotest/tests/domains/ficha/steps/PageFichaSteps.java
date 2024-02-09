@@ -264,7 +264,7 @@ public class PageFichaSteps extends StepBase {
 	public void selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo) throws Exception {
 		selectAnadirALaBolsaStep();
 		dataTest.getDataBag().addArticulo(articulo);
-		new SecBolsaSteps().validaAltaArtBolsa();
+		new SecBolsaSteps().checkArticlesAddedToBag();
 	}
 
 	@Step (

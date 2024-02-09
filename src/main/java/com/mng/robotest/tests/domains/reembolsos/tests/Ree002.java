@@ -52,7 +52,7 @@ public class Ree002 extends TestBase {
 			pageReembolsosSteps.clickSaveButtonStoreCredit();
 		}
 		float saldoCtaIni = new PageReembolsos().getImporteStoreCredit();
-		new SecBolsaSteps().altaArticlosConColores(1);
+		new SecBolsaSteps().addArticlesWithColors(1);
 		
 		//Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
 		var configCheckout = ConfigCheckout.config()

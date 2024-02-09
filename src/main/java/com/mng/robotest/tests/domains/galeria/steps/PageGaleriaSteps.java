@@ -163,7 +163,7 @@ public class PageGaleriaSteps extends StepBase {
 		boolean tallaVisible = (articulo!=null);
 		if (tallaVisible) {
 			dataTest.getDataBag().addArticulo(articulo);
-			new SecBolsaSteps().validaAltaArtBolsa();
+			new SecBolsaSteps().checkArticlesAddedToBag();
 		}
 		return tallaVisible;
 	}

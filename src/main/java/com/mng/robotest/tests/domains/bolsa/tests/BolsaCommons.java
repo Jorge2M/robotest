@@ -12,11 +12,11 @@ public class BolsaCommons extends StepBase {
 		new AccesoSteps().oneStep(dataTest.isUserRegistered());
 		
 		var secBolsaSteps = new SecBolsaSteps();
-		secBolsaSteps.altaArticlosConColores(2);
+		secBolsaSteps.addArticlesWithColors(2);
 		secBolsaSteps.forceStateBolsaTo(CLOSED);
 		secBolsaSteps.forceStateBolsaTo(OPEN); 
 		secBolsaSteps.clear1erArticuloBolsa();								
-		secBolsaSteps.altaArticlosConColores(1);
+		secBolsaSteps.addArticlesWithColors(1);
 		secBolsaSteps.click1erArticuloBolsa();
 	}
 	

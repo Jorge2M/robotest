@@ -28,10 +28,10 @@ public class Gpo004 extends TestBase {
 	public void execute() throws Exception {
 		quickAccess();
 		selectGaleryAndFilterByColor();
-		scrollToSecondPage();
-		if (!channel.isDevice()) {
-			selectArticleInOtherLabel();
-		}
+//		scrollToSecondPage();
+//		if (!channel.isDevice()) {
+//			selectArticleInOtherLabel();
+//		}
 		
 		scrollToLastAndSelectArticle();
 //		int articulosTotalesPagina = scrollToLastAndSelectArticle();
@@ -68,12 +68,14 @@ public class Gpo004 extends TestBase {
 		pgGaleriaSteps.selectArticuloEnPestanyaAndBack(position);
 	}
 
-	private int scrollToLastAndSelectArticle() throws Exception {
+	private void scrollToLastAndSelectArticle() throws Exception {
 		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
-		var datosScrollFinalGaleria = pgGaleriaSteps.scrollFromFirstPage(dataScroll);
+		pgGaleriaSteps.scrollFromFirstPage(dataScroll);
 		int position = (app==shop) ? 50 : 30;
 		pgGaleriaSteps.selectArticulo(position);
-		return datosScrollFinalGaleria.getArticulosTotalesPagina();
+		if (!channel.isDevice()) {
+			selectArticleInOtherLabel();
+		}
 	}
 
 	private void goBackToGalery() {

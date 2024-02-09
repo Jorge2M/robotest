@@ -127,7 +127,7 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	
 	private void despliegaSelectTallasExec() {
 		for (int i=0; i<3; i++) {
-			state(VISIBLE, XP_SELECTOR_BUTTON).wait(2).check();
+			state(VISIBLE, XP_SELECTOR_BUTTON).wait(4).check();
 			click(XP_SELECTOR_BUTTON).exec();
 			if (isVisibleSelectorTallasUntil(1)) {
 				break;
