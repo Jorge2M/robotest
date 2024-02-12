@@ -73,6 +73,7 @@ public class Gpo004 extends TestBase {
 		pgGaleriaSteps.scrollFromFirstPage(dataScroll);
 		int position = (app==shop) ? 50 : 30;
 		pgGaleriaSteps.selectArticulo(position);
+		goBackToGalery();
 		if (!channel.isDevice()) {
 			selectArticleInOtherLabel();
 		}
@@ -80,6 +81,7 @@ public class Gpo004 extends TestBase {
 
 	private void goBackToGalery() {
 		back();
+		pgGaleriaSteps.checkArticleGaleriaLoaded();
 	}
 
 	private void scrollToLastAndCheck(int articulosTotalesPagina) throws Exception {
