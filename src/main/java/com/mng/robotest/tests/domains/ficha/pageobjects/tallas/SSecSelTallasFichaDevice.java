@@ -17,7 +17,8 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 	private static final String XP_SELECTOR_BUTTON = "//*[@data-testid='sizeSelectorButton']";
 	private static final String XP_CAPA_TALLAS = "//div[@id='sizesContainerId']";
 	private static final String XP_OPTION_TALLA = XP_CAPA_TALLAS + "//div[@data-testid[contains(.,'sizeSelector.size')]]";
-	private static final String XP_TALLA_SELECTED = XP_SELECTOR_BUTTON + "//span[@class[contains(.,'size-text')]]";
+	private static final String XP_CAPA_TALLA_SELECTED = "(" + XP_SELECTOR_BUTTON + " | //*[@id='productFormSelect'])";
+	private static final String XP_TALLA_SELECTED = XP_CAPA_TALLA_SELECTED + "//span[@class[contains(.,'size-text')]]";
 	private static final String XP_OPTION_TALLA_UNICA = "//button[@id='productFormSelect']//span[@class='one-size-text']";
 	private static final String XP_MSG_AVISO_TALLA = "//p[@class[contains(.,'sizes-notify-error')]]";
 	private static final String XP_DIV_CLOSE = "//div[@data-testid='sheet.overlay' or @aria-label='close']";
