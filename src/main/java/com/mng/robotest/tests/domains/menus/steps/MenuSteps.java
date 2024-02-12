@@ -38,7 +38,7 @@ import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.A
 
 public class MenuSteps extends StepBase {
 
-	private static final List<String> MENUS_WITHOUT_ARTICLES = Arrays.asList("Essentials", "Antoine Griezmann");
+	private static final List<String> MENUS_WITHOUT_ARTICLES = Arrays.asList("Essentials", "Antoine Griezmann", "Trajes");
 	
 	@Override
 	public void clickMenu(String menuLabel) {

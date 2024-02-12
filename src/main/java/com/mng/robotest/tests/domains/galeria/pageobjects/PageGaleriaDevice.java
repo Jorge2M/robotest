@@ -29,7 +29,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	private static final String TAG_NUM_PAGINA = "@tagNumPagina";
 	private static final String XP_PAGINA_WITH_TAG = "//div[@id='page" + TAG_NUM_PAGINA + "']";
 	private static final String XP_PAGINA_TABLET_OUTLET_WITH_TAG = "//div[@id='page" + TAG_NUM_PAGINA + "Height']";
-	private static final String XP_HEADER_ARTICLES = "//h1[@class='catalog-title']";
+	private static final String XP_HEADER_ARTICLES = "//header[@id='catalogTitle']/h1";
 	private static final String XP_BUTTON_FOR_CLOSE_TALLAS = "//button[@data-testid='sheet.overlay']";
 	
 	protected abstract String getXPathArticuloAncestor();

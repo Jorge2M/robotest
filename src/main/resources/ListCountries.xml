@@ -2484,7 +2484,7 @@ where
 <idioma acceso="ht">FR</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>HT6130</codpos>
+<codpos>1111</codpos>
 <telefono>48331575</telefono>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -5138,7 +5138,7 @@ where
 <idioma acceso="gh">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>AE</codpos>
+<codpos>1111</codpos>
 <telefono>232345671</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
