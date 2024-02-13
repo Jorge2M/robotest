@@ -128,7 +128,7 @@ public class PageMiCuentaSteps extends StepBase {
 		expected = "Aparece la página de \"Devoluciones\"")
 	private void clickLinkDevoluciones() {
 		pgMiCuenta.click(DEVOLUCIONES);
-		new PageDevolucionesSteps().validaIsPage();
+		new PageDevolucionesSteps().checkIsPage();
 	}
 
 	public void goToReembolsos() {

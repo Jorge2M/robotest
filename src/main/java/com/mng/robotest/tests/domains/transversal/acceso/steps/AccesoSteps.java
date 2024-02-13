@@ -104,16 +104,14 @@ public class AccesoSteps extends StepBase {
 	private ChecksTM checkOtherLinksAfterLogin() {
 		var checks = ChecksTM.getNew();
 		var userMenus = new MenusUserWrapper();
-		
-		boolean isVisibleMenuFav = userMenus.isMenuInStateUntil(FAVORITOS, PRESENT, 0);
 		if (isOutlet()) { 
 			checks.add(
 				"NO aparece el link \"Favoritos\"",
-				!isVisibleMenuFav);
+				!userMenus.isMenuInStateUntil(FAVORITOS, PRESENT, 0));
 		} else {
 			checks.add(
 				"Aparece el link \"Favoritos\"",
-				isVisibleMenuFav);
+				userMenus.isMenuInStateUntil(FAVORITOS, PRESENT, 1));
 		}
 		
 		if (!isDesktop()) {

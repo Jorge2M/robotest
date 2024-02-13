@@ -5,6 +5,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.testslegacy.pageobject.shop.PageDevoluciones;
+import com.mng.robotest.testslegacy.pageobject.shop.PageDevoluciones.Devolucion;
 
 import static com.mng.robotest.testslegacy.pageobject.shop.PageDevoluciones.Devolucion.*;
 
@@ -13,33 +14,25 @@ public class PageDevolucionesSteps extends StepBase {
 	private final PageDevoluciones pgDevoluciones = new PageDevoluciones();
 	
 	@Validation
-	public ChecksTM validaIsPage () {
+	public ChecksTM checkIsPage () {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece la página de devoluciones",
-			pgDevoluciones.isPage());
+			pgDevoluciones.isPage(1));
 		
-		checks.add(
-			"Aparece la opción de " + EN_TIENDA.getLiteral(),
-			EN_TIENDA.isPresentLink(driver));
-		
-		checks.add(
-			"Aparece la opcion de " + EN_DOMICILIO.getLiteral(),
-			EN_DOMICILIO.isPresentLink(driver));
-		
-		checks.add(
-			"Aparece la opción de " + PUNTO_CELERITAS.getLiteral(),
-			EN_DOMICILIO.isPresentLink(driver));
-		
+		for (Devolucion devolucion : Devolucion.values()) {
+			checks.add(
+				"Aparece la opción de " + devolucion.getLiteral(),
+				pgDevoluciones.isVisible(devolucion, 1));
+		}
 		return checks;
 	}
 
 	@Step(
-		description = "Pulsar \"Recogida gratuíta a domicilio\" + \"Solicitar Recogida\"",
+		description = "Pulsar <b>Recogida gratuíta a domicilio + Solicitar Recogida</b>",
 		expected = "Aparece la tabla devoluciones sin ningún pedido")
 	public void solicitarRegogidaGratuitaADomicilio() {
-		EN_DOMICILIO.click(driver);
-		EN_DOMICILIO.waitForInState(true, 2, driver);
+		pgDevoluciones.click(RECOGIDA_GRATUITA_A_DOMICILIO);
 		pgDevoluciones.clickSolicitarRecogida();
 		new PageRecogidaDomicSteps().checkIsPageWithoutReturns();
 		checksDefault();

@@ -10,11 +10,11 @@ public class PageMiCuenta extends PageBase {
 	private static final String XP_LOYALTY_POINTS = "//*[@data-testid='loyaltyMyAccount.MyAccountInfo.info']//p[2]";
 	
 	public enum Link {
-		MIS_DATOS("//a[@href[contains(.,'account/personalinfo')]]"),
-		MIS_COMPRAS("//a[@href[contains(.,'/mypurchases')]]"),
+		MIS_DATOS("//a[@data-event-category='mis-datos']"),
+		MIS_COMPRAS("//a[@data-event-category='mis-compras']"),
 		MIS_DIRECCIONES("//*[@data-testid[contains(.,'myAddresses.link')]]"),
-		SUSCRIPCIONES("//a[@href[contains(.,'account/suscriptions')]]"),
-		DEVOLUCIONES("//span[@data-event-category='devoluciones']"),
+		SUSCRIPCIONES("//a[@data-event-category='suscripciones']"),
+		DEVOLUCIONES("//a[@data-event-category='devoluciones']"),
 		REEMBOLSOS("//a[@data-event-category='mi-cuenta-reembolsos']");
 	
 		private String xpath;

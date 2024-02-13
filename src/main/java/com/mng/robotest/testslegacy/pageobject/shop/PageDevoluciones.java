@@ -1,66 +1,47 @@
 package com.mng.robotest.testslegacy.pageobject.shop;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-
 public class PageDevoluciones extends PageBase {
 	
 	public enum Devolucion {
-		EN_TIENDA("DEVOLUCIÓN GRATUITA EN TIENDA"),
-		EN_DOMICILIO("RECOGIDA GRATUITA A DOMICILIO"),
-		POR_CORREO("DEVOLUCIÓN POR CORREO"),
-		PUNTO_CELERITAS("DEVOLUCIÓN GRATUITA PUNTO CELERITAS");
-		
-		String literal;
-		String xpathLink;
-		String xpathLinkPlegada;
-		String xpathLinkDesplegada;
-		private Devolucion(String literal) {
+		EN_TIENDA("En tienda", "myPurchases.returns.tab.store"),
+		EN_PUNTO_DE_ENTREGA("En punto de entrega", "myPurchases.returns.tab.dropPoint"),
+		RECOGIDA_GRATUITA_A_DOMICILIO("Recogida gratuita a domicilio", "myPurchases.returns.tab.home");
+
+		private final String literal;
+		private final String testid;;
+		private Devolucion(String literal, String testid) {
 			this.literal = literal;
-			String tagClass = "@tagClass";
-			String xpathBase = "//button[" + tagClass + " and text()[contains(.,'" + this.literal + "')]]";
-			this.xpathLink = xpathBase.replace(tagClass, "@class[contains(.,'panel-heading')]");
-			this.xpathLinkPlegada = xpathBase.replace(tagClass, "@class[contains(.,'opened')]");
-			this.xpathLinkDesplegada = xpathBase.replace(tagClass, "@class[contains(.,'closed')]");
-		}
-		
-		private String getXPath(boolean plegada) {
-			if (plegada) {
-				return xpathLinkPlegada;
-			}
-			return xpathLinkDesplegada;
-		}
-		
-		public String getLiteral() {
-			return this.literal;
-		}
-		
-		public boolean isPresentLink(WebDriver driver) {
-			return state(PRESENT, By.xpath(this.xpathLink), driver).check();
+			this.testid = testid;
 		}
 
-		public void click(WebDriver driver) {
-			new PageBase(driver).click(xpathLink).exec();
-		}
+		public String getLiteral() {
+			return this.literal;
+		}		
 		
-		public void waitForInState(boolean plegada, int seconds, WebDriver driver) {
-			By byLink = By.xpath(getXPath(plegada));
-			state(PRESENT, byLink, driver).wait(seconds).check();
+		public String getXPath() {
+			return "//*[@data-testid='" + testid + "']";
 		}
 	}
 	
-	private static final String XP_IS_PAGE_DEVOLUCIONES = "//div[@class='devoluciones']";
-	private static final String XP_BUTTON_SOLICITAR_RECOGIDA = "//div[@class[contains(.,'devoluciones_button_container')]]/*";
+	private static final String XP_CAPA = "//*[@data-testid='myReturns.home.page']";
+	private static final String XP_BUTTON_SOLICITAR_RECOGIDA = "//*[@data-testid='myPurchases.returns.seeInstructions.button']";
 
-	public boolean isPage() {
-		return state(PRESENT, XP_IS_PAGE_DEVOLUCIONES).check();
+	public boolean isPage(int seconds) {
+		return state(VISIBLE, XP_CAPA).wait(seconds).check();
+	}
+	
+	public boolean isVisible(Devolucion devolucion, int seconds) {
+		return state(VISIBLE, devolucion.getXPath()).wait(seconds).check();
 	}
 
+	public void click(Devolucion devolucion) {
+		click(devolucion.getXPath()).exec();
+	}
+	
 	public void clickSolicitarRecogida() {
 		click(XP_BUTTON_SOLICITAR_RECOGIDA).waitLink(1).exec();
 	}
