@@ -120,6 +120,9 @@ public class Ava001 extends TestBase {
         	throw new CatalogsNotFoundException("Problem getting catalogs from " + countryId + " / " + lang + " menus", e);
         }
         
+        if (allLinks.size() < MAX_CATALOGS) {
+        	return allLinks;
+        }
         return allLinks.subList(0, MAX_CATALOGS);
     }    
 
