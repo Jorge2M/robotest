@@ -123,9 +123,16 @@ public class SecMenusUserSteps extends StepBase {
 		description="Seleccionar el link \"Mi cuenta\"", 
 		expected="Aparece la página de \"Mi cuenta\"")
 	public void clickMenuMiCuenta() {
-		clickUserMenu(MI_CUENTA);
-		new PageMiCuentaSteps().checkIsPage(3);
+		//There is a random problem in the first select of the MyAccount icon
+		if (!clickMenuMiCuentaOneTime()) {
+			clickMenuMiCuentaOneTime();
+		}
 		checksDefault();
+	}
+	
+	private boolean clickMenuMiCuentaOneTime() {
+		clickUserMenu(MI_CUENTA);
+		return new PageMiCuentaSteps().checkIsPage(3);
 	}
 	
 	private static final String TAG_POINTS = "@TagPoints";
