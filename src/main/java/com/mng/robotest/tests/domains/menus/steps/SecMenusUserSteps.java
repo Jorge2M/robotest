@@ -2,6 +2,7 @@ package com.mng.robotest.tests.domains.menus.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
 import com.mng.robotest.tests.domains.base.StepBase;
@@ -124,15 +125,15 @@ public class SecMenusUserSteps extends StepBase {
 		expected="Aparece la página de \"Mi cuenta\"")
 	public void clickMenuMiCuenta() {
 		//There is a random problem in the first select of the MyAccount icon
-		if (!clickMenuMiCuentaOneTime()) {
-			clickMenuMiCuentaOneTime();
+		if (!clickMenuMiCuentaOneTime(State.WARN)) {
+			clickMenuMiCuentaOneTime(State.DEFECT);
 		}
 		checksDefault();
 	}
 	
-	private boolean clickMenuMiCuentaOneTime() {
+	private boolean clickMenuMiCuentaOneTime(State state) {
 		clickUserMenu(MI_CUENTA);
-		return new PageMiCuentaSteps().checkIsPage(3);
+		return new PageMiCuentaSteps().checkIsPage(state, 3).areAllChecksOvercomed();
 	}
 	
 	private static final String TAG_POINTS = "@TagPoints";

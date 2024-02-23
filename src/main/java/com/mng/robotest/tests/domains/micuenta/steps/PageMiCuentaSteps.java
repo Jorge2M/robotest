@@ -7,6 +7,8 @@ import java.util.Map;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
@@ -19,10 +21,14 @@ public class PageMiCuentaSteps extends StepBase {
 	private final PageMiCuenta pgMiCuenta = new PageMiCuenta();
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	
-	@Validation(description="Aparece la página de \"Mi cuenta\" " + SECONDS_WAIT)
-	public boolean checkIsPage (int seconds) {
-		return pgMiCuenta.isPage(seconds);
-	}
+	@Validation
+	public ChecksTM checkIsPage(State state, int seconds) {
+		var checks = ChecksTM.getNew();
+	  	checks.add(
+	  		"Aparece la página de \"Mi cuenta\" " + getLitSecondsWait(seconds),
+			!pgMiCuenta.isPage(seconds), state);
+	  	return checks;
+	}	
 
 	public void goToMisDatos(String usuarioReg) {
 		userMenusSteps.clickMenuMiCuenta();
