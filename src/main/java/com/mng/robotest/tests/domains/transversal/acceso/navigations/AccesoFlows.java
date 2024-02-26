@@ -10,6 +10,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.conf.testab.TestABactive;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountry;
+import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalGeolocation;
 import com.mng.robotest.tests.domains.changecountry.tests.Chg001;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
@@ -120,6 +121,7 @@ public class AccesoFlows extends StepBase {
 		try {
 			new ModalLoyaltyAfterAccess().closeModalIfVisible();
 			new ModalNewsLetterAfterAccess().closeModalIfVisible();
+			new ModalGeolocation().closeModalIfVisible();
 			ModalChangeCountry.make(app).closeModalIfVisible();
 		} 
 		catch (Exception e) {

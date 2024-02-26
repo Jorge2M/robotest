@@ -7,9 +7,11 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalChangeCountryGenesis extends ModalChangeCountry {
 	
-	private static final String XP_MODAL = 
-			"//*[@data-testid[contains(.,'modalCountryLanguage')] or @data-testid[contains(.,'changeCountryLanguage')]]";
+	private static final String XP_MODAL = "//*[" + 
+			"@data-testid[contains(.,'modalCountryLanguage')] or " + 
+			"@data-testid[contains(.,'changeCountryLanguage')]]";
 //	private static final String XP_MODAL = "//*[@data-testid[contains(.,'changeCountryLanguage')]]";
+	
 	private static final String XP_ASPA_CLOSE = "//*[@data-testid='modal.close.button']";
 	private static final String XP_SELECTOR_PAISES = XP_MODAL + "//*[@id='countryAutocomplete']";
 	private static final String XP_INPUT_COUNTRY = XP_SELECTOR_PAISES;
