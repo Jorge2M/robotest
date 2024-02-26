@@ -26,7 +26,7 @@ public class PageMiCuentaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 	  	checks.add(
 	  		"Aparece la página de \"Mi cuenta\" " + getLitSecondsWait(seconds),
-			!pgMiCuenta.isPage(seconds), state);
+			pgMiCuenta.isPage(seconds), state);
 	  	return checks;
 	}	
 
