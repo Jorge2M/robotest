@@ -70,7 +70,7 @@ public class SecMultiFiltrosDeviceKondo extends SecMultiFiltrosDevice {
 		}
 		getElement(typeFiltro.getXPathKondo()).click();
 		for (String textFiltro : listTextFiltros) {
-			if (!state(VISIBLE, getXPathFiltroOption(typeFiltro, textFiltro)).check()) {
+			if (!state(VISIBLE, getXPathFiltroOption(typeFiltro, textFiltro)).wait(1).check()) {
 				close();
 				return false;
 			}
