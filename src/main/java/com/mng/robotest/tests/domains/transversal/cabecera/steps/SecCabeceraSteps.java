@@ -46,4 +46,5 @@ public class SecCabeceraSteps extends StepBase {
 	public void setVisibilityLeftMenuMobil(boolean setVisible) {
 		secCabecera.clickIconoMenuHamburguerMobil(setVisible);
 	}
+	
 }

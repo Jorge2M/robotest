@@ -20,8 +20,8 @@ public class SecConfirmDatosSteps extends StepBase {
 	
 	@Validation (
 		description="Es visible la capa de confirmación de los datos " + SECONDS_WAIT)
-	public boolean validateIsVisible(int seconds) {
-		return (secConfirmDatos.isVisibleUntil(seconds));
+	public boolean checkIsVisible(int seconds) {
+		return secConfirmDatos.isVisibleUntil(seconds);
 	}
 	
 	public void setDataIfNeeded() {

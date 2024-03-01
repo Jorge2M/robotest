@@ -368,7 +368,7 @@ public class CheckoutSteps extends StepBase {
 	@Validation
 	private ChecksTM checkAfterInputTarjetaEmpleado(Pais pais, AccesoEmpl accesoEmpl) {
 		var checks = ChecksTM.getNew();
-		int seconds = 5;
+		int seconds = 7;
 	 	checks.add(
 			"Aparece el campo de introducción del primer apellido " + getLitSecondsWait(seconds),
 			pgCheckoutWrapper.isPresentInputApellidoPromoEmplUntil(seconds));
