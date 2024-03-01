@@ -11,7 +11,7 @@ public class PagePaypalLoginSteps extends StepBase {
 	
 	@Validation (
 		description="Aparece la página de login " + SECONDS_WAIT)
-	public boolean validateisPage(int seconds) {
+	public boolean checkIsPage(int seconds) {
 		return pgPaypalLogin.isPage(seconds);
 	}
 	

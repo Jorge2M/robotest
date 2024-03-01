@@ -33,7 +33,7 @@ public class PagoPaypal extends PagoSteps {
 		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 		modalPreloaderSppinerSteps.validateAppearsAndDisappears();
 		if (getInitPagePaypal() == InitPagePaypal.LOGIN) {
-			pagePaypalLoginSteps.validateisPage(0);
+			pagePaypalLoginSteps.checkIsPage(1);
 		}
 		else {
 			pagePaypalCreacionCuentaSteps.clickButtonIniciarSesion();

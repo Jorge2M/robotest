@@ -12,7 +12,7 @@ public class PagePaypalCreacionCuentaSteps extends StepBase {
 		 expected="Aparece la página de login")
 	public void clickButtonIniciarSesion() {
 		new PagePaypalCreacionCuenta().clickButtonIniciarSesion();
-		new PagePaypalLoginSteps().validateisPage(10);
+		new PagePaypalLoginSteps().checkIsPage(10);
 	}
 	
 }

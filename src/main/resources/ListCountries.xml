@@ -3585,7 +3585,7 @@ where
 <codpos>266033</codpos>
 <telefono>13910998888</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4097,7 +4097,7 @@ where
 <codpos>2038 3054</codpos>
 <telefono>3123456</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
