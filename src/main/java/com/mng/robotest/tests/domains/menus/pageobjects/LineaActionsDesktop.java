@@ -2,6 +2,8 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import org.openqa.selenium.StaleElementReferenceException;
+
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
@@ -68,9 +70,19 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	}
 	@Override
 	public void hoverLinea() {
+		try {
+			hoverLineaInternal();
+		}
+		catch (StaleElementReferenceException e) {
+			hoverLineaInternal();
+		}
+	}
+	private void hoverLineaInternal() {
 		state(VISIBLE, getXPathLinea()).wait(3).check();
 		moveToElement(getXPathLinea());
 	}
+	
+	
 	@Override 
 	public void hoverSublinea() {
 		moveToElement(getXPathSublinea());

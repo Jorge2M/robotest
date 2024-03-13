@@ -85,6 +85,6 @@ public class SecSelectDPointSteps extends StepBase {
 	public void clickSelectButton() {
 		int seconds = 5;
 		modalDroppoints.clickSelectButtonAndWait(seconds);
-		new ModalDroppointsSteps().getSecConfirmDatosSteps().checkIsVisible(5);
+		new ModalDroppointsSteps().getSecConfirmDatosSteps().checkIsVisible(7);
 	}
 }

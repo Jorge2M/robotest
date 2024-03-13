@@ -45,6 +45,9 @@ public class CookiesChecker extends PageBase {
 			whiteList.get().add(Pattern.compile("AWSALBTGCORS"));
 			whiteList.get().add(Pattern.compile("AWSALBTG"));
 		}
+		if (UtilsTest.todayBeforeDate("2024-03-20")) {
+			whiteList.get().add(Pattern.compile("FPGSID"));
+		}
 	}
 	
 	//For UnitTest purposes

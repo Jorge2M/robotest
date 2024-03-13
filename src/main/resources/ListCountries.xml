@@ -1328,7 +1328,7 @@
 <codpos>08720</codpos>
 <telefono>67573733</telefono>
 <dni>34763592N</dni>
-<tiendas_online></tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1899,10 +1899,11 @@ select * from
 where
     t1.username = t2.username and
     t2.id_tienda = t3.id and
-    t1.bloqueado = 'N' and
-    t3.codigo_pais = '005' and
-    t3.bloqueo_votf = 'N' and
-    t3.baja_shop is null-->
+    (t1.bloqueado = 'N' or t1.bloqueado is null) and
+    t3.codigo_pais = '001' and
+    (t3.bloqueo_votf = 'N' or t3.bloqueo_votf is null) and
+    t3.baja_shop is null and
+    t1.password is not null-->
 <accesovotf usuario="tda00003" password="mng00003"/>
 <!-- https://confluence.mango.com/pages/viewpage.action?pageId=230916541-->
 <galeriakondo>shop,outlet</galeriakondo>
