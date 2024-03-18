@@ -20,14 +20,14 @@ public class SecSelectorPreciosSteps extends StepBase {
 	@Validation (
 		description="Es visible el selector de precios",
 		level=WARN)
-	public boolean validaIsSelector() {
+	public boolean checkIsSelector() {
 		return pgGaleriaDesktop.isVisibleSelectorPrecios();
 	}
 
 	@Step (
 		description="Utilizar el selector de precio: Mínimo=" + TAG_MINIMO + " Máximo=" + TAG_MAXIMO, 
 		expected="Aparecen artículos con precio en el intervalo seleccionado")
-	public void seleccionaIntervalo() throws Exception {
+	public void selectInterval() throws Exception {
 		var dataFilter = new DataFilterPrecios();
 		if (isDesktop()) {
 			pgGaleriaDesktop.showFilters();
