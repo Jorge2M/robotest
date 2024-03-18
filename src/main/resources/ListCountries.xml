@@ -718,7 +718,7 @@
 <idioma acceso="gi">IN</idioma>
 <rgpd>S</rgpd>
 <loyalty>N</loyalty>
-<codpos>08720</codpos>
+<codpos>GX11 1AA</codpos>
 <telefono>51234000</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
@@ -3057,7 +3057,7 @@ where
 <codigo_alf>BR</codigo_alf>
 <idioma acceso="br-en">IN</idioma>
 <idioma acceso="br-es">ES</idioma>
-<codpos>08720</codpos>
+<codpos>01000-000</codpos>
 <telefono>83987654321</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
@@ -3330,7 +3330,7 @@ where
 <codigo_pais>492</codigo_pais>
 <codigo_alf>SR</codigo_alf>
 <idioma acceso="sr">NL</idioma>
-<codpos>08720</codpos>
+<codpos>008720</codpos>
 <telefono>8571589</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
@@ -4600,7 +4600,7 @@ where
 <codigo_pais>608</codigo_pais>
 <codigo_alf>SY</codigo_alf>
 <idioma acceso="sy">IN</idioma>
-<codpos>08720</codpos>
+<codpos>008720</codpos>
 <telefono>995664664</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
@@ -4845,7 +4845,7 @@ where
 <codigo_pais>330</codigo_pais>
 <codigo_alf>AO</codigo_alf>
 <idioma acceso="ao" >IN</idioma>
-<codpos>08720</codpos>
+<codpos>008720</codpos>
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
@@ -4899,7 +4899,7 @@ where
 <codigo_pais>236</codigo_pais>
 <codigo_alf>BF</codigo_alf>
 <idioma acceso="bf">FR</idioma>
-<codpos>08720</codpos>
+<codpos>008720</codpos>
 <telefono>60991234</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
@@ -4921,7 +4921,7 @@ where
 <idioma acceso="cm-en">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>00000</codpos>
+<codpos>000000</codpos>
 <telefono>670710966</telefono>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -4956,7 +4956,7 @@ where
 <idioma acceso="td-en">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>109</codpos>
+<codpos>000109</codpos>
 <telefono>63221967</telefono>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -4990,7 +4990,7 @@ where
 <idioma acceso="cg">FR</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>7948</codpos>
+<codpos>007948</codpos>
 <telefono>012345678</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
@@ -5139,7 +5139,7 @@ where
 <idioma acceso="gh">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>1111</codpos>
+<codpos>001111</codpos>
 <telefono>232345671</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
@@ -5210,7 +5210,7 @@ where
 <codigo_pais>216</codigo_pais>
 <codigo_alf>LY</codigo_alf>
 <idioma acceso="ly">IN</idioma>
-<codpos>08720</codpos>
+<codpos>000100</codpos>
 <telefono>916812717</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
@@ -5465,7 +5465,7 @@ where
 <idioma acceso="rw-fr">FR</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>672</codpos>
+<codpos>000672</codpos>
 <telefono>788301021</telefono>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -5563,7 +5563,7 @@ where
 <idioma acceso="tz">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>0255</codpos>
+<codpos>000255</codpos>
 <telefono>752848220</telefono>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -5618,7 +5618,7 @@ where
 <idioma acceso="ug">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>10039</codpos>
+<codpos>010039</codpos>
 <telefono>774699282</telefono>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
@@ -5686,7 +5686,7 @@ where
 <idioma acceso="zw">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>08720</codpos>
+<codpos>008720</codpos>
 <telefono>773443049</telefono>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
