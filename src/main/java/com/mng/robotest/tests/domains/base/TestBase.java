@@ -52,7 +52,7 @@ public abstract class TestBase extends StepBase {
         DataPago dataPago = getDataPago();
         dataPago.setPago(dataTest.getPais().getPago(payment));
         new CompraSteps().startPayment(dataPago, true);
-        new PageResultPagoSteps().validateIsPageOk(dataPago);
+        new PageResultPagoSteps().checkIsPageOk(dataPago);
         return dataPago;
     }
     

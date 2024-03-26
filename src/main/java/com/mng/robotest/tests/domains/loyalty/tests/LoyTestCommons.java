@@ -69,7 +69,7 @@ public class LoyTestCommons extends StepBase {
     private int goToLoyaltyPointsHistorial() {
     	var pageResultPagoSteps = new PageResultPagoSteps();
     	int pointsGenerated = pageResultPagoSteps.checkLoyaltyPointsGenerated().getNumberPoints();
-		pageResultPagoSteps.clickLinkDescuentosExperiencias();
+		pageResultPagoSteps.clickLinkDescubrirVentajas();
 		new PageMangoLikesYouSteps().click(TabLink.HISTORIAL);
 		return pointsGenerated;
     }

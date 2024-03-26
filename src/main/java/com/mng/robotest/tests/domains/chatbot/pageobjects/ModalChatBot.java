@@ -1,25 +1,13 @@
 package com.mng.robotest.tests.domains.chatbot.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.INVISIBLE;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.VISIBLE;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 
-public class ModalChatBot extends PageBase {
-
+public abstract class ModalChatBot extends PageBase {
+	
 	private static final String XP_ICON = "//*[@data-testid='chatbot.button.open']";
-	private static final String XP_WEBCHAT = "//div[@id='snack-bubble']";
-	
-	private String getXPathOption(String text) {
-		return XP_WEBCHAT + "//button[text()='" + text + "']";
-	}
-	
-	private String getXPathResponse(String text) {
-		return XP_WEBCHAT + "//div[text()[contains(.,'" + text + "')] and @class[contains(.,'bubble')]]";
-	}
-	
-	private String getXPathButton(String text) {
-		return XP_WEBCHAT + "//button[text()='" + text + "']";
-	}
 	
 	public boolean checkIconVisible() {
 		return state(VISIBLE, XP_ICON).check();
@@ -33,25 +21,6 @@ public class ModalChatBot extends PageBase {
 		click(XP_ICON).exec();
 	}
 	
-	public boolean checkWebchatVisible(int seconds) {
-		return state(VISIBLE, XP_WEBCHAT).wait(seconds).check();
-	}
-
-	public boolean isOptionVisible(String text, int seconds) {
-		return state(VISIBLE, getXPathOption(text)).wait(seconds).check();
-	}
-	
-	public void clickOption(String text) {
-		waitMillis(100); //Avoid strange Sonia´s case: capa in vertical unfold process
-		click(getXPathOption(text)).exec();
-	}
-	
-	public boolean isResponseVisible(String text, int seconds) {
-		return state(VISIBLE, getXPathResponse(text)).wait(seconds).check();
-	}
-	
-	public boolean isButtonVisible(String text, int seconds) {
-		return state(VISIBLE, getXPathButton(text)).wait(seconds).check();
-	}
+	abstract boolean checkVisible(int seconds);
 	
 }

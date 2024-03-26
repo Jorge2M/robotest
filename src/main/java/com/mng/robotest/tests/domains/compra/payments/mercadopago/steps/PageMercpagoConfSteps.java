@@ -21,6 +21,6 @@ public class PageMercpagoConfSteps extends StepBase {
 		expected="Aparece la página de resultado")
 	public void clickPagar() {
 		pageMercpagoConf.clickPagar();
-		new PageResultPagoSteps().validaisPage(30);
+		new PageResultPagoSteps().checkIsPage(30);
 	}
 }

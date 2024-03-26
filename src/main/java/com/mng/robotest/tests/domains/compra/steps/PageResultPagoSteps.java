@@ -25,13 +25,13 @@ public class PageResultPagoSteps extends StepBase {
 	
 	@Validation (
 		description="Acaba apareciendo la página de la Shop de Mango de \"Ya has hecho tu compra\" " + SECONDS_WAIT)
-	public boolean validaisPage(int seconds) {
-		return (pgResultPago.isVisibleTextoConfirmacionPago(seconds));
+	public boolean checkIsPage(int seconds) {
+		return pgResultPago.isVisibleTextoConfirmacionPago(seconds);
 	}
 	
-	public void validateIsPageOk(DataPago dataPago) {
-		validateTextConfirmacionPago();
-		validateDataPedido(dataPago);
+	public void checkIsPageOk(DataPago dataPago) {
+		checkTextConfirmationPayment();
+		checkDataPedido(dataPago);
 		checksDefault();
 	}
 	
@@ -42,7 +42,7 @@ public class PageResultPagoSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validateTextConfirmacionPago() {
+	public ChecksTM checkTextConfirmationPayment() {
 		var checks = ChecksTM.getNew();
 		int seconds1 = 10;
 		boolean isVisibleTextConfirmacion = pgResultPago.isVisibleTextoConfirmacionPago(seconds1);
@@ -59,7 +59,7 @@ public class PageResultPagoSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validateDataPedido(DataPago dataPago) {
+	public ChecksTM checkDataPedido(DataPago dataPago) {
 		var checks = ChecksTM.getNew();
 		String importeTotal = "";
 		if (dataTest.getDataBag()!=null && "".compareTo(dataTest.getDataBag().getImporteTotal())!=0) {
@@ -78,11 +78,10 @@ public class PageResultPagoSteps extends StepBase {
 		  		pgResultPago.isButtonMisCompras(seconds), WARN);
 		}
 		
-		int seconds = 5;
-		String codigoPed = pgResultPago.getCodigoPedido(seconds);
+		String codigoPed = pgResultPago.getCodigoPedido(5);
 		boolean isCodPedidoVisible = "".compareTo(codigoPed)!=0;
 		checks.add(
-	  		"Aparece el código de pedido (" + codigoPed + ") " + getLitSecondsWait(seconds),
+	  		"Aparece el código de pedido (" + codigoPed + ") " + getLitSecondsWait(5),
 	  		isCodPedidoVisible);
 		
 		DataPedido dataPedido = dataPago.getDataPedido();
@@ -114,8 +113,8 @@ public class PageResultPagoSteps extends StepBase {
 	@Step(
 		description="Seleccionar el link <b>descuentos y experiencias</b>", 
 		expected="Aparece la página de Mango Likes You")	
-	public void clickLinkDescuentosExperiencias() {
-		pgResultPago.clickLinkDescuentosExperiencias();
+	public void clickLinkDescubrirVentajas() {
+		pgResultPago.clickLinkDescubrirVentajas();
 		new PageMangoLikesYouSteps().checkIsPage();
 	}
 	

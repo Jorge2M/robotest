@@ -251,7 +251,7 @@ public class CheckoutFlow extends StepBase {
 			}
 			else {
 				if (pagoToTest.getTypePago()!=TypePago.TPV_VOTF) {
-					pageResultPagoSteps.validateIsPageOk(dataPago);
+					pageResultPagoSteps.checkIsPageOk(dataPago);
 					if (!isMobile() && 
 						!dataPago.getFTCkout().chequeRegalo &&
 						dataPago.getFTCkout().checkMisCompras) {

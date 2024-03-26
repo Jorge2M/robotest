@@ -139,7 +139,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 	public void clickButtonForPayMobil(boolean afterTrjGuardada) {
 		((PageMercpagoDatosTrjMobil)pageMercpagoDatosTrj).clickButtonForPay();
 		if (afterTrjGuardada) {
-			new PageResultPagoSteps().validaisPage(30);
+			new PageResultPagoSteps().checkIsPage(30);
 		}
 		else {
 			new PageMercpagoConfSteps().validaisPage(5);
@@ -168,7 +168,7 @@ public class PageMercpagoDatosTrjSteps extends StepBase {
 		PageMercpagoDatosTrjDesktop pageDesktop = (PageMercpagoDatosTrjDesktop)pageMercpagoDatosTrj;
 		pageDesktop.clickBotonForContinue();
 		if (afterTrjGuardada) {
-			new PageResultPagoSteps().validaisPage(30);
+			new PageResultPagoSteps().checkIsPage(30);
 		}
 		else {
 			new PageMercpagoConfSteps().validaisPage(10);

@@ -66,7 +66,7 @@ public class Loy007 extends TestBase {
         dataPago.setSelectEnvioType(false);
         
         new CompraSteps().startPayment(dataPago, true);
-        new PageResultPagoSteps().validateIsPageOk(dataPago);
+        new PageResultPagoSteps().checkIsPageOk(dataPago);
         return dataPago.getDataPedido().getCodpedido();
     }
 	

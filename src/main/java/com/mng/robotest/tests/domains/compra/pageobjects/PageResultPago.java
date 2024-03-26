@@ -16,7 +16,7 @@ public class PageResultPago extends PageBase {
 	public static final String XP_BUTTON_MIS_COMPRAS = "//button[@data-testid[contains(.,'goToMyPurchases')] or @data-testid[contains(.,'goToMyOrders')]]";
 	public static final String XP_MICROFRONTEND_LOYALTY = "//micro-frontend[@name='purchaseConfirmation']";
 	public static final String XP_BLOCK_NEW_LOYALTY_POINTS = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
-	public static final String XP_LINK_DESCUENTOS_Y_EXPERIENCIAS = "//*[@data-testid='mng-link']";
+	public static final String XP_LINK_DESCUBRIR_VENTAJAS = "//*[@data-testid='purchaseConfirmation.loyalty.club.link']";
 
 	public boolean checkUrl(int seconds) {
 		for (int i=0; i<seconds; i++) {
@@ -75,8 +75,8 @@ public class PageResultPago extends PageBase {
 		return 0;
 	}
 	
-	public void clickLinkDescuentosExperiencias() {
-		state(VISIBLE, XP_LINK_DESCUENTOS_Y_EXPERIENCIAS).wait(2).check();
-		click(XP_LINK_DESCUENTOS_Y_EXPERIENCIAS).exec();
+	public void clickLinkDescubrirVentajas() {
+		state(VISIBLE, XP_LINK_DESCUBRIR_VENTAJAS).wait(2).check();
+		click(XP_LINK_DESCUBRIR_VENTAJAS).exec();
 	}
 }
