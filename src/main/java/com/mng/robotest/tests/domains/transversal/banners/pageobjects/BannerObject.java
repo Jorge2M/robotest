@@ -114,7 +114,7 @@ public abstract class BannerObject extends PageBase {
 	}
 
 	public void clickBannerAndWaitLoad(DataBanner dataBanner) {
-		WebElement bannerWeb = dataBanner.getBannerWeb();
+		var bannerWeb = dataBanner.getBannerWeb();
 		click(bannerWeb, driver).type(JAVASCRIPT).waitLoadPage(10).exec();
 	}
 }

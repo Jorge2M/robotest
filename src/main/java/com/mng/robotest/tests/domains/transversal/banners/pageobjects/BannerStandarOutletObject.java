@@ -4,17 +4,12 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-public class BannerStandarObject extends BannerObject {
+public class BannerStandarOutletObject extends BannerObject {
 
-	private static final String XP_WRAPPER_BANNER = "//div[@class[contains(.,'bannercontainer')] and @data-bannerid]";
-	private static final String XP_BANNER = XP_WRAPPER_BANNER + 
-		"//div[@data-cta and not(@data-cta='') and " + 
-			  "@data-cta[not(contains(.,'op=ayuda'))] and " + 
-			  "not(@class='link')]";
+	private static final String XP_BANNER = "//div[@class[contains(.,'bannerWrapper')]]";
+	private static final String XP_IMAGE_BANNER = "//img[@class[contains(.,'Promo_image')]]"; 
 	
-	private static final String XP_IMAGE_RELATIVE_BANNER = "//img[@class='img-responsive']";
-	
-	public BannerStandarObject(BannerType bannerType) {
+	public BannerStandarOutletObject(BannerType bannerType) {
 		super(bannerType, XP_BANNER);
 	}
 	
@@ -29,7 +24,7 @@ public class BannerStandarObject extends BannerObject {
 
 	@Override
 	protected String getSrcImageBanner(WebElement bannerScreen) {
-		List<WebElement> listImgsBanner = getElementsVisible(bannerScreen, "." + XP_IMAGE_RELATIVE_BANNER);
+		List<WebElement> listImgsBanner = getElementsVisible(bannerScreen, "." + XP_IMAGE_BANNER);
 		if (!listImgsBanner.isEmpty()) {
 			return (listImgsBanner.get(0).getAttribute("src"));
 		}

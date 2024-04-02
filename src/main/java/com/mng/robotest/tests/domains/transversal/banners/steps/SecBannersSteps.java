@@ -132,7 +132,7 @@ public class SecBannersSteps extends StepBase {
 		level=WARN)
 	public boolean validacionesBannerEstandar(int seconds, Channel channel) {
 		for (int i=0; i<seconds; i++) {
-			if (validacionesBannerEstandar(channel)) {
+			if (checksStandardBanners(channel)) {
 				return true;
 			}
 			waitMillis(1000);
@@ -140,7 +140,7 @@ public class SecBannersSteps extends StepBase {
 		return false;
 	}
 	
-	private boolean validacionesBannerEstandar(Channel channel) {
+	private boolean checksStandardBanners(Channel channel) {
 		if (!pageLanding.haySecc_Art_Banners() &&
 			!pageLanding.hayImgsEnContenido()) {
 			PageFicha pageFicha = PageFicha.of(channel);

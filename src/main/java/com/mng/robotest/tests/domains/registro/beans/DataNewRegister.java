@@ -92,6 +92,9 @@ public class DataNewRegister {
 	public boolean isCheckPromotions() {
 		return checkPromotions;
 	}
+	public void setCheckPromotions(boolean checkPromotions) {
+		this.checkPromotions = checkPromotions;
+	}
 
 	public String getName() {
 		return name;
@@ -117,5 +120,8 @@ public class DataNewRegister {
 
 	public List<LineaType> getLineas() {
 		return lineas;
+	}
+	public void setLineas(List<LineaType> lineas) {
+		this.lineas = lineas;
 	}
 }

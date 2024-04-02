@@ -67,7 +67,9 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 		pgRegistroPersonalizacion.inputPostalCode(data.getPostalCode());
 		pgRegistroPersonalizacion.inputName(data.getName());
 		pgRegistroPersonalizacion.selectGender(data.getGender());
-		pgRegistroPersonalizacion.selectLineas(data.getLineas());
+		if (data.isCheckPromotions()) {
+			pgRegistroPersonalizacion.selectLineas(data.getLineas());
+		}
 	}	
 	
 	@Step (
@@ -81,7 +83,9 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 	private void inputDataWithouBirthDateAndPostalCode(DataNewRegister data) {
 		pgRegistroPersonalizacion.inputName(data.getName());
 		pgRegistroPersonalizacion.selectGender(data.getGender());
-		pgRegistroPersonalizacion.selectLineas(data.getLineas());
+		if (data.isCheckPromotions()) {
+			pgRegistroPersonalizacion.selectLineas(data.getLineas());
+		}
 	}	
 	
 	@Step (

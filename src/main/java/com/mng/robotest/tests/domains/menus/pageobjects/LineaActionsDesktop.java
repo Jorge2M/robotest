@@ -17,7 +17,8 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	private static final String XP_LINEA_WITH_TAG = "//li[@data-testid[contains(.,'menu.brand." + TAG_ID_LINEA + "')]]";
 	private static final String TAG_ID_SUBLINEA = "@SublineaId";
 	private static final String TAG_ID_SUBLINEA2 = "@2SublineaId";
-	private static final String XP_SUBLINEA_WITH_2TAG = "//li[(@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] or @id[contains(.,'" + TAG_ID_SUBLINEA2 + "')]) and @data-testid[contains(.,'section')]]";
+	//private static final String XP_SUBLINEA_WITH_2TAG = "//li[(@id[contains(.,'" + TAG_ID_SUBLINEA+ "')] or @id[contains(.,'" + TAG_ID_SUBLINEA2 + "')]) and @data-testid[contains(.,'section')]]";
+	private static final String XP_SUBLINEA_WITH_2TAG = "//li[(@data-testid[contains(.,'" + TAG_ID_SUBLINEA+ "')] or @data-testid[contains(.,'" + TAG_ID_SUBLINEA2 + "')]) and @data-testid[contains(.,'section')]]";
 	
 	public LineaActionsDesktop(LineaWeb lineaWeb) {
 		this.lineaType = lineaWeb.getLinea();

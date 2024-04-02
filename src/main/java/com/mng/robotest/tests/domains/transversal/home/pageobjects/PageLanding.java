@@ -137,7 +137,7 @@ public class PageLanding extends PageBase {
 		if (pageFicha.isPage(0)) {
 			return true;
 		}
-		var banners = BannerObjectFactory.make(BannerType.STANDAR);
+		var banners = BannerObjectFactory.make(BannerType.STANDAR, app);
 		return banners.isVisibleAnyBanner();
 	}
 	
