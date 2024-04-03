@@ -454,20 +454,40 @@ public class MenuSteps extends StepBase {
 		}
 	}
 	
+	public void checkURLRedirectParkasHeEspanya() throws Exception {
+		if (isOutlet()) {
+			checkURLRedirectParkasHeEspanyaOutlet();
+		} else {
+			checkURLRedirectParkasHeEspanyaShop();
+		}
+		
+	}
+	
 	private static final String TAG_URL_ACCESO = "@TagUrlAcceso";
 	@Step (
 		description="Cargar la siguiente URL de redirect a <b>España / HE / Abrigos / Parkas </b>:<br>" + TAG_URL_ACCESO,
 		expected="Aparece desplegada la página de Parkas (HE)")
-	public void checkURLRedirectParkasHeEspanya() throws Exception {
+	private void checkURLRedirectParkasHeEspanyaShop() throws Exception {
 		URI uri = new URI(driver.getCurrentUrl());
-		String tiendaId = "he";
-		if (isOutlet()) {
-			tiendaId = "outletH";
-		}
 		String urlAccesoCorreo = 
 			uri.getScheme() + "://" + 
 			uri.getHost() + 
-			"/redirect.faces?op=conta&seccion=prendas_he.abrigos_he&menu_abrigos106=Parkas&tiendaid=" + tiendaId;
+			"/redirect.faces?op=conta&seccion=prendas_he.abrigos_he&menu_abrigos106=Parkas&tiendaid=he";
+		replaceStepDescription(TAG_URL_ACCESO, urlAccesoCorreo);
+
+		driver.navigate().to(urlAccesoCorreo);
+		new MenuSteps().checkSelecMenu(FactoryMenus.get(ABRIGOS_HE));
+	}
+
+	@Step (
+		description="Cargar la siguiente URL de redirect a <b>España / HE / Abrigos</b> :<br>" + TAG_URL_ACCESO,
+		expected="Aparece desplegada la página de Abrigos (HE)")
+	private void checkURLRedirectParkasHeEspanyaOutlet() throws Exception {
+		URI uri = new URI(driver.getCurrentUrl());
+		String urlAccesoCorreo = 
+			uri.getScheme() + "://" + 
+			uri.getHost() + 
+			"/redirect.faces?op=conta&seccion=prendas_he.abrigos_he&tiendaid=outletH";
 		replaceStepDescription(TAG_URL_ACCESO, urlAccesoCorreo);
 
 		driver.navigate().to(urlAccesoCorreo);
