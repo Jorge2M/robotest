@@ -9,7 +9,6 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenaci
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Color;
-import com.mng.robotest.testslegacy.pageobject.shop.menus.desktop.SecMenuLateralDesktop;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -21,7 +20,6 @@ public abstract class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	abstract String getXPathWrapper();
 	abstract String getXPathLinkOrdenacion(FilterOrdenacion ordenacion);
 	abstract String getXPathLinkColor(Color color);
-	abstract String getXPathLinkCollection();
 	abstract String getXPathCapaFilters();
 	abstract String getXPathMostrarArticulos();
 	abstract String getXPathLabel(String label);
@@ -75,12 +73,6 @@ public abstract class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	public void bring(BringTo bringTo) {
 		String xpathWrapper = getXPathWrapper(); 
 		bringElement(getElement(xpathWrapper), bringTo);
-	}
-	
-	public void showLateralMenus() {
-		if (!new SecMenuLateralDesktop().isVisibleCapaMenus(1)) {
-			click(getXPathLinkCollection()).exec();
-		}
 	}
 	
 	public void showFilters() {

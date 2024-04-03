@@ -1,11 +1,8 @@
 package com.mng.robotest.testslegacy.pageobject.shop.menus.desktop;
 
-import org.openqa.selenium.By;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktopKondo;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuLateralDesktop;
 
 public class SecMenuLateralDesktop extends PageBase {
@@ -31,26 +28,12 @@ public class SecMenuLateralDesktop extends PageBase {
 		return (getXPathLinkMenu(menu) + XP_SELECTED_RELATIVE_MENU_SHOP);
 	}
 
-	public boolean isSelectedMenu(MenuLateralDesktop menu, int seconds) {
-		new SecFiltrosDesktopKondo().showLateralMenus();
-		String linkMenuSel = getXPathLinkMenuSelected(menu) ;
-		return (state(VISIBLE, By.xpath(linkMenuSel)).wait(seconds).check());
-	}
-
 	public void clickMenu(MenuLateralDesktop menu) {
 		String xpathMenu1erNivel = getXPathLinkMenu(menu);
 		moveToElement(xpathMenu1erNivel);
 		click(xpathMenu1erNivel).exec();
 	}
 
-	/**
-	 * @return si es o no visible un menú lateral de 1er (menu2oNivel=null) o 2o nivel (menu2oNivel!=null)
-	 */
-	public boolean isVisibleMenu(MenuLateralDesktop menu) {
-		new SecFiltrosDesktopKondo().showLateralMenus();
-		return state(VISIBLE, getXPathLinkMenu(menu)).check();
-	}
-	
 	private static final String XP_CAPA_MENUS_SHOP = "//div[@id='sidebar']/aside[@id='navigation']";
 	private static final String XP_CAPA_MENUS_OUTLET = "//div[@id='sticky']/aside[@id='filters']";
 	

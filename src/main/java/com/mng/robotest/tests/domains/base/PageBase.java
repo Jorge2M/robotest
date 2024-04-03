@@ -238,5 +238,11 @@ public class PageBase extends PageObjTM {
 		}
 		return false;
 	}
+	
+	protected void inputClearAndSendKeys(String xpath, String keys) {
+		var element = getElement(xpath);
+		element.clear();
+		element.sendKeys(keys);
+	}
 
 }

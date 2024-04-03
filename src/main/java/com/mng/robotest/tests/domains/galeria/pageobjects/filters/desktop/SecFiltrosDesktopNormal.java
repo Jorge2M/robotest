@@ -11,7 +11,6 @@ public class SecFiltrosDesktopNormal extends SecFiltrosDesktop {
 	//TODO hablar con Sergio Campillo para que añada algún id no-react
 	private static final String XP_CAPA_FILTERS = "//div[@class[contains(.,'filters--')]]";
 	private static final String XP_BUTTON_MOSTRAR_ARTICULOS = XP_CAPA_FILTERS + "//button";	
-	private static final String XP_LINK_COLLECTION = "//div[@id='navigationContainer']/button";
 	
 	@Override
 	String getXPathWrapper() {
@@ -32,11 +31,6 @@ public class SecFiltrosDesktopNormal extends SecFiltrosDesktop {
 	String getXPathMostrarArticulos() {
 		return XP_BUTTON_MOSTRAR_ARTICULOS;
 	}	
-	
-	@Override
-	String getXPathLinkCollection() {
-		return XP_LINK_COLLECTION;
-	}
 	
 	@Override
 	String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) {
