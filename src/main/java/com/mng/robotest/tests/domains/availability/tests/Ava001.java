@@ -56,7 +56,7 @@ public class Ava001 extends TestBase {
 	
 	private void checkLanding() {
 		var pgLandingSteps = new PageLandingSteps();
-		pgLandingSteps.checkIsPage(5);
+		pgLandingSteps.checkIsPageMultimarca(5);
 		pgLandingSteps.checkIsCountryWithCorrectLineas(2);
 	}	
 	

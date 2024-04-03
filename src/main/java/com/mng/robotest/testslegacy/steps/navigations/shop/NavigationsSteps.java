@@ -16,7 +16,8 @@ public class NavigationsSteps extends StepBase {
 		
 		secCabeceraSteps.selecLogo();
 		secCabeceraSteps.selecLogo();
-		(new PageLandingSteps()).checkIsPage(5);
+		
+		new PageLandingSteps().checkIsPageMultimarca(5);
 	}
 	
 }

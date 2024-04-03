@@ -20,9 +20,12 @@ public class PageLanding extends PageBase {
 	
 	private static final String XP_MAIN_CONTENT_PAIS = "//div[@class[contains(.,'main-content')] and @data-pais]";
 	
-	private static final String XP_CONTENIDO_OLD = "//div[@class[contains(.,'container-fluid home')]]";
-	private static final String XP_CONTENIDO_GENESIS = "//*[@data-testid='landings.home.multibrand']";
-	private static final String XP_CONTENIDO = "(" + XP_CONTENIDO_OLD + " | " + XP_CONTENIDO_GENESIS + ")";
+	private static final String XP_MULTIMARCA_OLD = "//div[@class[contains(.,'container-fluid home')]]";
+	private static final String XP_MULTIMARCA_GENESIS = "//*[@data-testid='landings.home.multibrand']";
+	private static final String XP_MULTIMARCA_SHOP = "(" + XP_MULTIMARCA_OLD + " | " + XP_MULTIMARCA_GENESIS + ")";
+	private static final String XP_MULTIMARCA_OUTLET = "//*[" + 
+			"@data-testid='landings.home.brand' or " + 
+			"@class[contains(.,'HeroBannerPrimaryLines')]]"; //PRO
 	
 	private static final String XP_SLIDER = "//section[@class='entitieswrapper']//div[@class[contains(.,'vsv-slide')]]";
 	private static final String XP_EDIT_ITEM = "//div[@class[contains(.,'item-edit')] and @data-id]";
@@ -32,12 +35,19 @@ public class PageLanding extends PageBase {
 		
 	private CommsHeaderBanner commsHeaderBanner = new CommsHeaderBanner();
 
-	public boolean isPage() {
-		return isPage(0);
+	private String getXPMultimarca() {
+		if (isOutlet()) {
+			return XP_MULTIMARCA_OUTLET;
+		}
+		return XP_MULTIMARCA_SHOP;
 	}
 	
-	public boolean isPage(int seconds) {
-		return state(PRESENT, XP_CONTENIDO).wait(seconds).check();
+	public boolean isPageMultimarca() {
+		return isPageMultimarca(0);
+	}
+	
+	public boolean isPageMultimarca(int seconds) {
+		return state(PRESENT, getXPMultimarca()).wait(seconds).check();
 	}
 	
 	public boolean isPageDependingCountry() {

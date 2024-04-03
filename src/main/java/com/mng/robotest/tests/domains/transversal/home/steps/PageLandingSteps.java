@@ -20,9 +20,9 @@ public class PageLandingSteps extends StepBase {
 		pageLanding = new PageLanding();
 	}
 	
-	@Validation (description="Aparece la página de Landing " + SECONDS_WAIT)
-	public boolean checkIsPage(int seconds) {
-		return pageLanding.isPage(seconds);
+	@Validation (description="Aparece la página de Landing <b>Multimarca</b> " + SECONDS_WAIT)
+	public boolean checkIsPageMultimarca(int seconds) {
+		return pageLanding.isPageMultimarca(seconds);
 	}
 	
 	public void checkIsCountryWithCorrectLineas(int seconds) {

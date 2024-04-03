@@ -51,7 +51,7 @@ public class GoogleSteps extends StepBase {
 	
 	@Validation (description="Aparece la página de <b>Landing</b> o <b>Prehome</b>")
 	private boolean checkInitialPageShop() {
-		boolean isPageLanding = (new PageLanding()).isPage();
+		boolean isPageLanding = (new PageLanding()).isPageMultimarca();
 		boolean isPagePrehome = new PagePrehome().isPage();
 		return (isPageLanding || isPagePrehome);
 	}

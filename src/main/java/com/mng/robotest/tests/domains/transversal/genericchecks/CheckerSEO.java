@@ -99,7 +99,7 @@ public class CheckerSEO extends PageBase implements Checker {
 			//El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
 			PageFicha pageFicha = PageFicha.of(channel);
 			PageGaleria pageGaleria = PageGaleria.make(desktop, app, dataTest.getPais());
-			if ((new PageLanding()).isPage() || 
+			if ((new PageLanding()).isPageMultimarca() || 
 				((PageGaleriaDesktop)pageGaleria).isPage() || 
 				pageFicha.isPage(0)) {
 				String currentURL = driver.getCurrentUrl(); 
