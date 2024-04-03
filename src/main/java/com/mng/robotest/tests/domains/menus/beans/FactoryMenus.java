@@ -52,11 +52,11 @@ public class FactoryMenus {
 			.group(GroupType.PRENDAS)
 			.articles(Arrays.asList(
 					"Camisa", "Blusa", "Bluson", "Blusón", "Top", "Bustier", "Body", "Camisero", 
-					"Poncho", "Corsé"))
+					"Poncho", "Corsé", "Camiseta"))
 			.subMenusShop(Arrays.asList("camisas", "blusas", "estampadas"))	
 			.subMenusOutlet(Arrays.asList("camisas manga larga", "camisas manga corta"))
-			.subMenu("básicas")
-			.articlesSubMenu(Arrays.asList("Camisa", "Blusa", "Top"))
+			.subMenu("blusas")
+			.articlesSubMenu(Arrays.asList("Camisa", "Blusa", "Camiseta"))
 			.build();
 	}
 	
