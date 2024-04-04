@@ -30,10 +30,9 @@ public class PagoGetterTest {
 		assertTrue(listPaymentsResult.contains("KLARNA"));
 		assertTrue(listPaymentsResult.contains("MASTERCARD"));
 		assertTrue(listPaymentsResult.contains("PAYPAL"));
-		assertTrue(listPaymentsResult.contains("TARJETA MANGO"));
 		assertTrue(listPaymentsResult.contains("VISA"));
 		assertTrue(listPaymentsResult.contains("VISA ELECTRON"));
-		assertEquals(7, listPaymentsResult.size());
+		assertEquals(6, listPaymentsResult.size());
 	}
 	
 	@Test

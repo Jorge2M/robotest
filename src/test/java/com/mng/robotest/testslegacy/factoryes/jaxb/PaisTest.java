@@ -24,7 +24,7 @@ public class PaisTest {
 		
 		//Then
 		assertEquals("VISA", pagosForTest.get(0).getNombre());
-		assertEquals("VISA ELECTRON", pagosForTest.get(5).getNombre());
+		assertEquals("VISA ELECTRON", pagosForTest.get(4).getNombre());
 		assertEquals(5, pagosForTest.size());
 	}
 
