@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 public enum TypePago {
 	TARJETA_INTEGRADA("TRJintegrada",0,4), 
-	TARJETA_MANGO("TMango"), 
 	KREDI_KARTI("KrediKarti", 0), 
 	BILLPAY("Billpay", 0), 
 	PAYPAL("Paypal", 0,4), 

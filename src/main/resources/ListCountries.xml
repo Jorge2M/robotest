@@ -1871,9 +1871,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipoenvioshop='ASM' tipoenviooutlet='ASM' provinciaenvio="MADRID" tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373"></pago>
 <!-- Inicialmente estaba tipoenvioshop='NEXTDAY' pero se desactivó así que lo hemos sustituído por 'TIENDA' -->
 <pago 
-	type="TMango" tiendas="shop,outlet" empleado="s" 
-	nombre="TARJETA MANGO" testpasarela='s' testpago='s' tipoenvioshop='TIENDA' tipoenviooutlet='STANDARD' provinciaenvio="BARCELONA" tipotarj="VISAESTANDAR" numtarj="4548812049400004" mescad="12" anycad="2016" cvc="737" cip="123456"></pago>
-<pago 
 	type="Paypal" tiendas="shop,outlet" empleado="s" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <!-- 

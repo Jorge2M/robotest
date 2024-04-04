@@ -12,7 +12,6 @@ import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.tests.domains.compra.pageobjects.beans.DiscountLikes;
 import com.mng.robotest.tests.domains.compra.payments.billpay.steps.SecBillpaySteps;
 import com.mng.robotest.tests.domains.compra.payments.kredikarti.steps.SecKrediKartiSteps;
-import com.mng.robotest.tests.domains.compra.payments.tmango.steps.SecTMangoSteps;
 import com.mng.robotest.tests.domains.compra.steps.envio.SecMetodoEnvioSteps;
 import com.mng.robotest.testslegacy.beans.AccesoEmpl;
 import com.mng.robotest.testslegacy.beans.Pago;
@@ -29,7 +28,6 @@ public class CheckoutSteps extends StepBase {
 	private final PageCheckoutWrapper pgCheckoutWrapper = new PageCheckoutWrapper(); 
 	private final ModalDirecEnvioOldSteps mdDirecEnvioSteps = new ModalDirecEnvioOldSteps();
 	private final SecMetodoEnvioSteps secMetodoEnvioDesktopSteps = new SecMetodoEnvioSteps();
-	private final SecTMangoSteps secTMangoSteps = new SecTMangoSteps();
 	private final SecKrediKartiSteps secKrediKartiSteps = new SecKrediKartiSteps();
 	private final SecBillpaySteps secBillpaySteps = new SecBillpaySteps();
 	private final ModalDirecFacturaSteps mdDirecFacturaSteps = new ModalDirecFacturaSteps();
@@ -57,9 +55,6 @@ public class CheckoutSteps extends StepBase {
 	}
 	public SecKrediKartiSteps getSecKrediKartiSteps() {
 		return secKrediKartiSteps;
-	}
-	public SecTMangoSteps getSecTMangoSteps() {
-		return secTMangoSteps;
 	}
 	public ModalDirecFacturaSteps getModalDirecFacturaSteps() {
 		return mdDirecFacturaSteps;

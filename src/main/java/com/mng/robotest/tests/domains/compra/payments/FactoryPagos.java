@@ -25,7 +25,6 @@ import com.mng.robotest.tests.domains.compra.payments.postfinance.PagoPostfinanc
 import com.mng.robotest.tests.domains.compra.payments.processout.PagoProcessOut;
 import com.mng.robotest.tests.domains.compra.payments.sepa.PagoSepa;
 import com.mng.robotest.tests.domains.compra.payments.sofort.PagoSofort;
-import com.mng.robotest.tests.domains.compra.payments.tmango.PagoTMango;
 import com.mng.robotest.tests.domains.compra.payments.trustpay.PagoTrustpay;
 import com.mng.robotest.tests.domains.compra.payments.votftpv.PagoTpvVotf;
 import com.mng.robotest.tests.domains.compra.payments.yandex.PagoYandex;
@@ -46,9 +45,6 @@ public class FactoryPagos {
 			break;
 		case KREDI_KARTI:
 			pagoMaked = new PagoKrediKarti(dataPago);
-			break;
-		case TARJETA_MANGO:
-			pagoMaked = new PagoTMango(dataPago);
 			break;
 		case BILLPAY:
 			pagoMaked = new PagoBillpay(dataPago);

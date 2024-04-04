@@ -9,8 +9,8 @@ import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageRedirectPasarelaLoading;
 import com.mng.robotest.tests.domains.compra.pageobjects.UtilsCheckout;
 import com.mng.robotest.tests.domains.compra.payments.billpay.pageobjects.SecBillpay;
-import com.mng.robotest.tests.domains.compra.payments.tmango.pageobjects.SecTMango;
 import com.mng.robotest.testslegacy.beans.Pago;
+import com.mng.robotest.testslegacy.beans.TypePago;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
@@ -24,7 +24,6 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	enum TypeActionLinkFP {PLEGAR_PAGOS, DESPLEGAR_PAGOS}
 	
 	private final SecCabeceraCheckoutMobil secCabecera = new SecCabeceraCheckoutMobil();
-	private final SecTMango secTMango = new SecTMango();
 	private final SecBillpay secBillpay = new SecBillpay();
 	
 	private static final String XP_LINK2_DATOS_PAGO = "//h2[@class[contains(.,'xwing-toggle')] and @data-toggle='step2']";
@@ -247,15 +246,12 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 
 	public boolean isVisibleTextoBajoPagoUntil(Pago pago, int seconds) {
-		switch (pago.getTypePago()) {
-		case TARJETA_MANGO:
-			return (secTMango.isVisibleUntil(seconds));
-		case BILLPAY:
+		if (pago.getTypePago() == TypePago.BILLPAY) {
 			return (secBillpay.isVisibleUntil(seconds));
-		default:
-			String xpathTexto = getXPathTextUnderPago(pago.getNombre(channel, app));
-			return state(VISIBLE, xpathTexto).wait(seconds).check();
 		}
+
+		String xpathTexto = getXPathTextUnderPago(pago.getNombre(channel, app));
+		return state(VISIBLE, xpathTexto).wait(seconds).check();
 	}
 
 	/**

@@ -76,7 +76,7 @@ public class InputParamsMango extends InputParamsTM {
 			.required(false)
 			.hasArgs()
 			.valueSeparator(',') 
-			.desc("List of payments comma separated (p.e. VISA,TARJETA MANGO,...)")
+			.desc("List of payments comma separated (p.e. VISA,MASTERCARD,...)")
 			.build());
 		
 		options.add(OptionTMaker.builder(InputParamsMango.CATALOGS_NAME_PARAM)

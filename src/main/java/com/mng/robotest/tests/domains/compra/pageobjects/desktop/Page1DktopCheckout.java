@@ -12,8 +12,8 @@ import com.mng.robotest.tests.domains.compra.pageobjects.UtilsCheckout;
 import com.mng.robotest.tests.domains.compra.pageobjects.beans.PreciosArticulo;
 import com.mng.robotest.tests.domains.compra.payments.billpay.pageobjects.SecBillpay;
 import com.mng.robotest.tests.domains.compra.payments.eps.pageobjects.SecEps;
-import com.mng.robotest.tests.domains.compra.payments.tmango.pageobjects.SecTMango;
 import com.mng.robotest.testslegacy.beans.Pago;
+import com.mng.robotest.testslegacy.beans.TypePago;
 import com.mng.robotest.testslegacy.data.Descuento;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
@@ -25,7 +25,6 @@ import static com.mng.robotest.testslegacy.data.CodIdioma.*;
 public class Page1DktopCheckout extends PageBase {
 	
 	private final SecDireccionEnvioDesktop secDireccionEnvio = new SecDireccionEnvioDesktop();
-	private final SecTMango secTMango = new SecTMango();
 	private final SecBillpay secBillpay = new SecBillpay();
 	private final SecEps secEps = new SecEps();
 	
@@ -108,10 +107,6 @@ public class Page1DktopCheckout extends PageBase {
 	
 	private static final String XPATH_ERROR_MESSAGE = "//div[@id='bocataTarjeta' and @class='errorbocatapago']";
 
-	public SecTMango getSecTMango() {
-		return secTMango;
-	}
-
 	public SecBillpay getSecBillpay() {
 		return secBillpay;
 	}
@@ -134,17 +129,14 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public boolean isVisibleBloquePagoNoTRJIntegradaUntil(Pago pago, int seconds) {
-		switch (pago.getTypePago()) {
-		case TARJETA_MANGO:
-			return (secTMango.isVisibleUntil(seconds));
-		case BILLPAY:
+		if (pago.getTypePago() == TypePago.BILLPAY) {
 			return (secBillpay.isVisibleUntil(seconds));
-		default:
-			String nameExpected = pago.getNombreInCheckout(channel, app).toLowerCase();
-			return (
-				state(VISIBLE, XP_BLOQUES_PAGO_POSIBLES).wait(seconds).check() &&
-				getElement(XP_BLOQUES_PAGO_POSIBLES).getAttribute("innerHTML").toLowerCase().contains(nameExpected));
 		}
+
+		String nameExpected = pago.getNombreInCheckout(channel, app).toLowerCase();
+		return (
+			state(VISIBLE, XP_BLOQUES_PAGO_POSIBLES).wait(seconds).check() &&
+			getElement(XP_BLOQUES_PAGO_POSIBLES).getAttribute("innerHTML").toLowerCase().contains(nameExpected));
 	}
 
 	private String getXPathClickMetodoPago(String metodoPago) {
