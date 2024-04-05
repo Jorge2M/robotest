@@ -42,6 +42,18 @@ public class ModalChatBotNew extends ModalChatBot {
 		return state(VISIBLE, getXPathAnswer(answerExpected)).wait(seconds).check();
 	}
 	
+	public boolean checkResponseVisible(
+			String answerExpected1, String answerExpected2, int seconds) {
+		for (int i=0; i<seconds; i++) {
+			if (checkResponseVisible(answerExpected1, 0) ||
+				checkResponseVisible(answerExpected2, 0)) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
+	
 	public void inputQuestion(String question) {
 		state(VISIBLE, XP_INPUT_QUESTION).wait(1).check();
 		getElement(XP_INPUT_QUESTION).sendKeys(question);

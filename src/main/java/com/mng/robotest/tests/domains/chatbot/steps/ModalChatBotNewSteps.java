@@ -37,6 +37,11 @@ public class ModalChatBotNewSteps extends ModalChatBotSteps {
 		return mdChatBot.checkResponseVisible(answerExpected, seconds);
 	}
 	
+	@Validation (description="Es visible la respuesta \"#{answerExpected1}\" o \"#{answerExpected2}\" " + SECONDS_WAIT)
+	public boolean checkResponseVisible(String answerExpected1, String answerExpected2, int seconds) {
+		return mdChatBot.checkResponseVisible(answerExpected1, answerExpected2, seconds);
+	}	
+	
 	@Step (
 		description="Introducir la cuestión \"#{question}\"", 
 		expected="Aparece una respuesta correcta")	

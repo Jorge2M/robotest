@@ -61,12 +61,12 @@ public class Cht001 extends TestBase {
 		chatBotSteps.clickIcon();
 		String question = "Cómo encontrar un producto por su referencia";
 		chatBotSteps.inputQuestion(question);
-		answerExpected = "Puedes encontrar un producto por su referencia utilizando el buscador";
+		answerExpected = "Puedes encontrar un producto por su referencia utilizando";
 		chatBotSteps.checkResponseVisible(answerExpected, 5);
 		
 		chatBotSteps.isVisibleYesButton(5);
 		chatBotSteps.clickYesButton();
-		chatBotSteps.checkResponseVisible("Muchas gracias", 5);
+		chatBotSteps.checkResponseVisible("Muchas gracias", "¿Puedo hacer algo más por ti?", 5);
 		chatBotSteps.close();
 	}
 	

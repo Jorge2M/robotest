@@ -286,8 +286,7 @@ public class PageFichaSteps extends StepBase {
 		var colors = pageFicha.getSecDataProduct().getColorsGarment();
 		String codeColor = getColorNotSelected(colors, articulo);
 		pageFicha.getSecDataProduct().selectColor(codeColor);
-
-		validateNotVisibleButtonFavoritos(ADD);
+		checkNotVisibleButtonFavoritos(ADD);
 
 		pageFicha.getSecDataProduct().selectColor(articulo.getCodigoColor());
 		pageFicha.getSecDataProduct().getSecSelTallas().selectTallaByValue(articulo.getTalla());
@@ -303,14 +302,11 @@ public class PageFichaSteps extends StepBase {
 	}
 
 	@Validation (description="No aparece el icono de favorito marcado al cambiar de color")
-	public boolean validateNotVisibleButtonFavoritos(ActionFavButton buttonType) {
-		switch (buttonType) {
-			case REMOVE:
-				return pageFicha.isVisibleButtonElimFavoritos(3);
-			case ADD:
-			default:
-				return pageFicha.isVisibleButtonAnadirFavoritos(3);
+	public boolean checkNotVisibleButtonFavoritos(ActionFavButton buttonType) {
+		if (buttonType == ActionFavButton.REMOVE) {
+			return pageFicha.isVisibleButtonElimFavoritos(3);
 		}
+		return pageFicha.isVisibleButtonAnadirFavoritos(3);
 	}
 
 	@Validation
