@@ -13,6 +13,7 @@ import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.CheckerContentBolsa;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
+import com.mng.robotest.tests.domains.compra.steps.Page1DktopCheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1EnvioCheckoutMobilSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
@@ -302,7 +303,7 @@ public class SecBolsaSteps extends StepBase {
 		return 
 			dataTest.isUserRegistered() &&
 			!isFirstPageCheckoutMobil(2) &&
-			isDesktopLoginCheckoutPage();
+			isDesktopCheckoutPage();
 	}
 	
 	private boolean isFirstPageCheckoutMobil(int seconds) {
@@ -311,6 +312,10 @@ public class SecBolsaSteps extends StepBase {
 	
 	private boolean isDesktopLoginCheckoutPage() {
 		return new Page1IdentCheckoutSteps().isUrlDesktopPage();
+	}
+	
+	private boolean isDesktopCheckoutPage() {
+		return new Page1DktopCheckoutSteps().isPage(0);
 	}
 	
 	private void fluxPostSelectComprar(FluxBolsaCheckout fluxMobile) {

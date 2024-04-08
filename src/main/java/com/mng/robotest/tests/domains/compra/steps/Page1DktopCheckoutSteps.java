@@ -24,7 +24,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	public ChecksTM checkIsPageOK() {
 		var checks = ChecksTM.getNew();
 		int seconds = 5;
-		boolean isPageInitCheckout = pg1DktopCheckout.isPage(seconds);
+		boolean isPageInitCheckout = isPage(seconds);
 	 	checks.add(
 	 		Check.make(
 			    "Aparece la página inicial del Checkout " + getLitSecondsWait(seconds),
@@ -41,6 +41,10 @@ public class Page1DktopCheckoutSteps extends StepBase {
 			pg1DktopCheckout.validateArticlesAndImport(), WARN);
 	 	
 	 	return checks;
+	}
+	
+	public boolean isPage(int seconds) {
+		return pg1DktopCheckout.isPage(seconds);
 	}
 	
 	@Validation
