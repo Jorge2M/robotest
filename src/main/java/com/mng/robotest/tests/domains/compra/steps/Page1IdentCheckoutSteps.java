@@ -15,6 +15,10 @@ public class Page1IdentCheckoutSteps extends StepBase {
 		return pg1IdentCheckout.getSecSoyNuevo().isInputEmailUntil(seconds);
 	}
 	
+	public boolean isUrlDesktopPage() {
+		return driver.getCurrentUrl().contains("login/pc/logincheckout.faces");
+	}
+	
 	public void inputEmailAndContinue(String email, boolean emailExistsYet) {
 		secSoyNuevoSteps.inputEmailAndContinue(email, emailExistsYet);
 	}

@@ -25,7 +25,7 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		int seconds = 2;
 		checks.add(
 			"Aparece la página correspondiente al paso-1 " + getLitSecondsWait(seconds),
-			page1EnvioCheckoutMobil.isPage(seconds), WARN);
+			isPage(seconds), WARN);
 		
 		checks.add(
 			"Aparece el botón de introducción del código promocional",
@@ -37,6 +37,10 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 				page1EnvioCheckoutMobil.isPresentEnvioStandard(), WARN);
 		}
 		return checks;
+	}
+	
+	public boolean isPage(int seconds) {
+		return page1EnvioCheckoutMobil.isPage(seconds);
 	}
 
 	@Step (

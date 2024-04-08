@@ -1,16 +1,19 @@
 package com.mng.robotest.tests.domains.bolsa.steps;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.CheckerContentBolsa;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
+import com.mng.robotest.tests.domains.compra.steps.Page1EnvioCheckoutMobilSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
@@ -255,10 +258,61 @@ public class SecBolsaSteps extends StepBase {
 	
 	public void selectButtonComprar(FluxBolsaCheckout fluxMobile) {
 		selectButtonComprarBasic();
+		normalizeRandomErrorIfExistsInMobil();
 		fluxPostSelectComprar(fluxMobile);
 		checksDefault();
 	}
 
+	//TODO eliminar cuando veamos que el problema no se produzca
+	private void normalizeRandomErrorIfExistsInMobil() {
+		if (!isNotRandomErrorInMobil()) {
+			back();
+			inputUrlMobil();
+			forceStateBolsaTo(OPEN);
+			selectButtonComprarBasic();
+		}
+	}
+	
+	private void inputUrlMobil() {
+		try {
+			get(inputParamsSuite.getDnsUrlAcceso() + "/mobil");
+		}
+		catch (URISyntaxException e) {
+			Log4jTM.getLogger().warn("Problem getting DNS URL Acceso", e);
+		}
+	}
+	
+	@Validation (
+		description=
+			"No se ha producido el error random según el cual aparece la página de checkout en formato Desktop",
+		level=WARN)
+	private boolean isNotRandomErrorInMobil() {
+		return !isRandomErrorInMobil();
+	}
+	
+	private boolean isRandomErrorInMobil() {
+		if (!isMobile() || isPRO()) {
+			return false;
+		}
+		if (!dataTest.isUserRegistered() &&
+			!isVisibleContinuarSinCuentaButtonDevice(2) && 
+			isDesktopLoginCheckoutPage()) {
+			return true;
+		}
+		return 
+			dataTest.isUserRegistered() &&
+			!isFirstPageCheckoutMobil(2) &&
+			isDesktopLoginCheckoutPage();
+	}
+	
+	private boolean isFirstPageCheckoutMobil(int seconds) {
+		return new Page1EnvioCheckoutMobilSteps().isPage(seconds);
+	}
+	
+	private boolean isDesktopLoginCheckoutPage() {
+		return new Page1IdentCheckoutSteps().isUrlDesktopPage();
+	}
+	
 	private void fluxPostSelectComprar(FluxBolsaCheckout fluxMobile) {
 		if (!dataTest.isUserRegistered()) {
 			if (isMobile()) {
@@ -320,6 +374,10 @@ public class SecBolsaSteps extends StepBase {
 	@Validation (
 		description="Es visible el botón \"Continuar sin cuenta\" " + SECONDS_WAIT)
 	private boolean checkVisibleContinuarSinCuentaButtonDevice(int seconds) {
+		return isVisibleContinuarSinCuentaButtonDevice(seconds);
+	}
+	
+	private boolean isVisibleContinuarSinCuentaButtonDevice(int seconds) {
 		return secBolsa.isVisibleContinuarSinCuentaButtonMobile(seconds);
 	}
 

@@ -194,4 +194,10 @@ public abstract class StepBase extends PageBase {
 		backPage();
 	}
 	
+	@Step (
+		description="Cargar la URL <b>#{url}</b> en el navegador", 
+		expected="La URL se carga correctamente")
+	public void get(String url) {
+		driver.get(url);
+	}	
 }

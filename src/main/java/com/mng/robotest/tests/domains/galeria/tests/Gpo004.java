@@ -26,7 +26,7 @@ public class Gpo004 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		quickAccess();
+		access();
 		selectGaleryAndFilterByColor();
 //		scrollToSecondPage();
 //		if (!channel.isDevice()) {

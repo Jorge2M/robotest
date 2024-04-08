@@ -18,7 +18,7 @@ public class PageRegistroInitialShop extends PageBase {
 	private static final String XP_LINK_CONSENT_PERSONAL_INFORMATION = XP_RADIO_CONSENT_PERSONAL_INFORMATION + "/..//*[@data-testid='mng-link']";
 	private static final String XP_PERSONAL_INFORMATION_INFO = "//div[@id='createAccountLegal_description']";	
 	private static final String XP_CREATE_ACCOUNT_BUTTON = XP_MODAL_CONTENT + "//button[@data-testid[contains(.,'submitButton.submit')]]";	
-	private static final String XP_LINK_POLITICA_PRIVACIDAD = XP_MODAL_CONTENT + "/div/div/p/*[@data-testid='mng-link']";
+	private static final String XP_LINK_POLITICA_PRIVACIDAD = XP_MODAL_CONTENT + "//div/p/*[@data-testid='mng-link']";
 	private static final String XP_LINK_CONDICIONES_VENTA = XP_MODAL_CONTENT + "//*[@data-testid='mng-link' and @href[contains(.,'terms-and-conditions')]]";
 	private static final String XP_MESSAGE_ERROR_MOVIL = "//*[@id='mobile-number-error']";	
 	
