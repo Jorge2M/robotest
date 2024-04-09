@@ -126,7 +126,7 @@ public class Registro implements TestFromFactory, Serializable {
 	@Test (
 		groups={"Bolsa", "Registro", "Checkout", "Canal:desktop_App:shop,outlet"}, 
 		description="Registro sin publicidad no pierde contactabilidad")
-	public void REG009_Contactability_Presists() throws Exception {
+	public void REG009_Contactability_Persists() throws Exception {
 		if (isPro()) {
 			return;
 		}
