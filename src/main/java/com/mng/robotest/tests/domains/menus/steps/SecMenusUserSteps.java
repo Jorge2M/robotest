@@ -8,6 +8,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
+import com.mng.robotest.tests.domains.loyalty.steps.PageMLYUnirmeAlClubSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
@@ -135,14 +136,22 @@ public class SecMenusUserSteps extends StepBase {
 		clickUserMenu(MI_CUENTA);
 		return new PageMiCuentaSteps().checkIsPage(state, 3).areAllChecksOvercomed();
 	}
+
+	public int clickMenuMangoLikesYou() {
+		if (dataTest.isUserRegistered()) {
+			return clickMenuMangoLikesYouLogged();
+		}
+		clickMenuMangoLikesYouNotLogged();
+		return 0;
+	}	
 	
 	private static final String TAG_POINTS = "@TagPoints";
 	@Step (
 		description=
 			"Seleccionar el link \"Mango Likes You\"<br>" + 
 			"<b>info</b>: el usuario tiene " + TAG_POINTS + " puntos", 
-		expected="Aparece la página de \"Mi cuenta\"")
-	public int clickMenuMangoLikesYou() {
+		expected="Aparece la página de \"Mango Likes You\"")
+	private int clickMenuMangoLikesYouLogged() {
 		clickUserMenu(MANGO_LIKES_YOU);
 		int numberPoints = new PageMangoLikesYouSteps().checkIsPage().getNumberPoints();
 		checksDefault();
@@ -150,6 +159,14 @@ public class SecMenusUserSteps extends StepBase {
 		replaceStepDescription(TAG_POINTS, String.valueOf(numberPoints));
 		return (numberPoints);
 	}
+	
+	@Step (
+		description= "Seleccionar el link \"Mango Likes You\"<br>", 
+		expected="Aparece la página de \"Unirme al club Mango Likes You\"")
+	private void clickMenuMangoLikesYouNotLogged() {
+		clickUserMenu(MANGO_LIKES_YOU);
+		new PageMLYUnirmeAlClubSteps().isPage(2);
+	}	
 	
 	@Step (
 		description=

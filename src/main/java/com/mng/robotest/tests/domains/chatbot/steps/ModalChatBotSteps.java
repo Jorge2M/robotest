@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.chatbot.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.chatbot.pageobjects.ModalChatBot;
 

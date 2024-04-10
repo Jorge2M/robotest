@@ -24,7 +24,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		int seconds = 5;
 		checks.add(
 			"Aparece la página de <b>Mango likes you</b> " + getLitSecondsWait(seconds),
-			pgMangoLikesYou.checkisPage(4));
+			pgMangoLikesYou.isPage(4));
 		
 		int secondsButton = 10;
 		checks.add(

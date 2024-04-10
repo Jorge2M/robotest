@@ -124,13 +124,23 @@ public class Registro implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
-		groups={"Bolsa", "Registro", "Checkout", "Canal:desktop_App:shop,outlet"}, 
+		groups={"Registro", "Canal:desktop_App:shop,outlet"}, 
 		description="Registro sin publicidad no pierde contactabilidad")
 	public void REG009_Contactability_Persists() throws Exception {
 		if (isPro()) {
 			return;
 		}
 		new Reg009().execute();
+	}	
+	
+	@Test (
+		groups={"Registro", "Loyalty", "Canal:all_App:shop"}, 
+		description="Registro a través de la página del Club Mango Likes You")
+	public void REG010_From_MLY_Club() throws Exception {
+		if (isPro()) {
+			return;
+		}
+		new Reg010().execute();
 	}	
 
 	private boolean isPro() {

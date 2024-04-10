@@ -48,7 +48,7 @@ public class PageMangoLikesYou extends PageBase {
 		click(tabLink.xpath()).exec();
 	}
 	
-	public boolean checkisPage(int seconds) {
+	public boolean isPage(int seconds) {
 		return state(VISIBLE, XP_WRAPP_PAGE).wait(seconds).check();
 	}
 	
