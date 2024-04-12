@@ -1948,9 +1948,6 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002" mescad="03" anycad="2030" cvc="7373"></pago>
 <pago 
-	type="TMango" tiendas="shop,outlet" empleado="n" 
-	nombre="TARJETA MANGO" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4548812049400004" mescad="12" anycad="2016" cvc="737" cip="123456"></pago>
-<pago 
 	type="Paypal" tiendas="shop,outlet" empleado="s" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <!-- 
@@ -2011,9 +2008,6 @@ where
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373"></pago>
 <pago 
-	type="TMango" tiendas="shop,outlet" empleado="n" 
-	nombre="TARJETA MANGO" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4548812049400004" mescad="12" anycad="2016" cvc="737" cip="123456"></pago>
-<pago 
 	type="Paypal" tiendas="shop,outlet" empleado="s" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <!-- 
@@ -2069,9 +2063,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373"></pago>
-<pago 
-	type="TMango" tiendas="shop,outlet" empleado="n" 
-	nombre="TARJETA MANGO" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4548812049400004" mescad="12" anycad="2016" cvc="737" cip="123456"></pago>
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="s" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
