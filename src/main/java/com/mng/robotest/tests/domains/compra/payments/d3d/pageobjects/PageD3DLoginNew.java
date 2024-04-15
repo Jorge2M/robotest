@@ -14,7 +14,7 @@ public class PageD3DLoginNew extends PageBase implements PageD3DLogin {
 	private static final String XP_BUTTON_SUBMIT = "//button[@id='buttonSubmit']";
 	
 	private void goToIframe() {
-		state(VISIBLE, XP_IFRAME).wait(2).check();
+		state(VISIBLE, XP_IFRAME).wait(5).check();
 		driver.switchTo().frame(getElement(XP_IFRAME));
 	}
 	

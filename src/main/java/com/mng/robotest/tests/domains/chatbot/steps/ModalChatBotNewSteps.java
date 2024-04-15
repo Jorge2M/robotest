@@ -1,9 +1,13 @@
 package com.mng.robotest.tests.domains.chatbot.steps;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.chatbot.pageobjects.ModalChatBot;
 import com.mng.robotest.tests.domains.chatbot.pageobjects.ModalChatBotNew;
+import com.mng.robotest.tests.domains.votfconsole.utils.ChecksResultWithStringData;
 
 public class ModalChatBotNewSteps extends ModalChatBotSteps {
 
@@ -20,6 +24,31 @@ public class ModalChatBotNewSteps extends ModalChatBotSteps {
 		return mdChatBot.checkVisible(seconds);
 	}
 	
+	public Optional<String> isVisibleAnyButton(List<String> buttons, int seconds) {
+		String button = isVisibleAnyButtonInternal(buttons, seconds).getData();
+		if (button==null || "".compareTo(button)==0) {
+			return Optional.empty();
+		}
+		return Optional.of(button);
+	}
+	
+	@Validation 
+	private ChecksResultWithStringData isVisibleAnyButtonInternal(List<String> buttons, int seconds) {
+		var checks = ChecksResultWithStringData.getNew();
+		var buttonOpt = mdChatBot.isVisibleAnyButton(buttons, seconds);
+		checks.add(
+			"Es visible alguno de los botones <b>" + buttons + "</b> " + getLitSecondsWait(seconds),
+			buttonOpt.isPresent());
+		
+		if (buttonOpt.isPresent()) {
+			checks.setData(buttonOpt.get());
+		} else {
+			checks.setData("");
+		}
+		
+		return checks;
+	}
+	
 	@Validation (description="Es visible el botón <b>#{button}</b> " + SECONDS_WAIT)
 	public boolean isVisibleButton(String button, int seconds) {
 		return mdChatBot.isVisibleButton(button, seconds);
@@ -30,6 +59,11 @@ public class ModalChatBotNewSteps extends ModalChatBotSteps {
 		expected="Aparece una respuesta correcta")
 	public void selectButton(String button) {
 		mdChatBot.selectButton(button);
+	}
+	
+	@Validation (description="Es visible alguna de las respuestas \"#{answersExpected}\" " + SECONDS_WAIT)
+	public boolean checkAnyResponseVisible(List<String> answersExpected, int seconds) {
+		return mdChatBot.checkAnyResponseVisible(answersExpected, seconds);
 	}
 	
 	@Validation (description="Es visible la respuesta \"#{answerExpected}\" " + SECONDS_WAIT)

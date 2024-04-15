@@ -2,6 +2,9 @@ package com.mng.robotest.tests.domains.chatbot.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import java.util.List;
+import java.util.Optional;
+
 public class ModalChatBotNew extends ModalChatBot {
 
 	private static final String XP_WEBCHAT = "//div[@data-testid='iris']";
@@ -30,12 +33,36 @@ public class ModalChatBotNew extends ModalChatBot {
 		return state(INVISIBLE, XP_WEBCHAT).wait(seconds).check();
 	}	
 	
+	public Optional<String> isVisibleAnyButton(List<String> buttons, int seconds) {
+		for (int i=0; i<seconds; i++) {
+			for (var button : buttons) {
+				if (isVisibleButton(button, 0)) {
+					return Optional.of(button);
+				}
+			}
+			waitMillis(1000);
+		}
+		return Optional.empty();
+	}
+	
 	public boolean isVisibleButton(String button, int seconds) {
 		return state(VISIBLE, getXPathButton(button)).wait(seconds).check();
 	}
 	
 	public void selectButton(String button) {
 		click(getXPathButton(button)).exec();
+	}
+	
+	public boolean checkAnyResponseVisible(List<String> answersExpected, int seconds) {
+		for (int i=0; i<seconds; i++) {
+			for (String answerExpected : answersExpected) {
+				if (checkResponseVisible(answerExpected, 0)) {
+					return true;
+				}
+			}
+			waitMillis(1000);
+		}
+		return false;
 	}
 	
 	public boolean checkResponseVisible(String answerExpected, int seconds) {

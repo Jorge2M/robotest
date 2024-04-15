@@ -160,7 +160,7 @@ public class PageGaleriaSteps extends StepBase {
 		expected="Se da de alta correctamente el artículo en la bolsa")
 	public boolean selectTallaAvailableArticulo(int posArticulo) throws Exception {
 		var articulo = pgGaleria.selectTallaAvailableArticle(posArticulo);
-		boolean tallaVisible = (articulo!=null);
+		boolean tallaVisible = (articulo!=null && articulo.getTalla()!=null);
 		if (tallaVisible) {
 			dataTest.getDataBag().addArticulo(articulo);
 			new SecBolsaSteps().checkArticlesAddedToBag();

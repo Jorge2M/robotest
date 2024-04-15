@@ -33,7 +33,7 @@ public class SecMenusUserDevice extends PageBase {
 		MI_CUENTA(
 			XP_ITEM + "/self::*[@href[contains(.,'/account')] or text()='Mi cuenta' or text()='My account']"),
 		MANGO_LIKES_YOU(
-			XP_ITEM + "/self::*[@href[contains(.,'mango-likes-you')]]"),
+			XP_ITEM + "/self::*[@href[contains(.,'mango-likes-you')] or @href[contains(.,'mangolikesyou')]]"),
 		CAMBIO_PAIS(
 			"(//*[@id='changeCountry'] | //*[@data-testid='language-l']/..)");
 

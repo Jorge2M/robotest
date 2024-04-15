@@ -1,5 +1,7 @@
 package com.mng.robotest.tests.domains.chatbot.tests;
 
+import java.util.Arrays;
+
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.chatbot.steps.ModalChatBotNewSteps;
 import com.mng.robotest.tests.domains.chatbot.steps.ModalChatBotOldSteps;
@@ -50,23 +52,55 @@ public class Cht001 extends TestBase {
 	
 	private void executeNewChatBot() {
 		var chatBotSteps = new ModalChatBotNewSteps();
+		String buttonDondeEstaMiPedido = "¿Dónde está mi pedido?";
+		String buttonComoSaberMiTalla = "¿Cómo puedo saber mi talla?";
+		var optButton = chatBotSteps.isVisibleAnyButton(Arrays.asList(buttonDondeEstaMiPedido, buttonComoSaberMiTalla), 5);
+		if (!optButton.isPresent()) {
+			return;
+		}
 		
-		String button = "¿Dónde está mi pedido?";
-		chatBotSteps.isVisibleButton(button, 5);
-		chatBotSteps.selectButton(button);
+		var button = optButton.get();
+		chatBotSteps.selectButton(optButton.get());
+		if (button.compareTo(buttonDondeEstaMiPedido)==0) {
+			checkDondeEstaMiPedidoResponse();
+		} else {
+			checkComoSaberMiTallaResponse();
+		}
+		checkInputQuestion();
+	}
+	
+	private void checkDondeEstaMiPedidoResponse() {
+		var chatBotSteps = new ModalChatBotNewSteps();
 		String answerExpected = "Para poder encontrar tu pedido, escribe el e-mail con el que hiciste la compra (ej. nombre@ejemplo.com).";
 		chatBotSteps.checkResponseVisible(answerExpected, 3);
 		chatBotSteps.close();
-
+	}
+	
+	private void checkComoSaberMiTallaResponse() {
+		var chatBotSteps = new ModalChatBotNewSteps();
+		var answersExpected = Arrays.asList(
+			"Puedes consultar la guía de tallas",
+			"Puedes consultar la talla de cada artículo",
+			"Puedes encontrar la guía de tallas",
+			"Puedes consultar la \"Guía de tallas\" disponible en cada artículo",
+			"Puedes consultar las tallas en las que se ha fabricado de cada artículo");
+		chatBotSteps.checkAnyResponseVisible(answersExpected, 6);		
+		chatBotSteps.close();
+	}
+	
+	private void checkInputQuestion() {
+		var chatBotSteps = new ModalChatBotNewSteps();
 		chatBotSteps.clickIcon();
 		String question = "Cómo encontrar un producto por su referencia";
 		chatBotSteps.inputQuestion(question);
-		answerExpected = "Puedes encontrar un producto por su referencia utilizando";
-		chatBotSteps.checkResponseVisible(answerExpected, 5);
+		var answersExpected = Arrays.asList(
+			"Puedes encontrar un producto por su referencia utilizando",
+			"Puedes encontrar un producto por su referencia introduciendo");
+		chatBotSteps.checkAnyResponseVisible(answersExpected, 6);
 		
 		chatBotSteps.isVisibleYesButton(5);
 		chatBotSteps.clickYesButton();
-		chatBotSteps.checkResponseVisible("Muchas gracias", "¿Puedo hacer algo más por ti?", 5);
+		chatBotSteps.checkResponseVisible("Muchas gracias", "¿Puedo hacer algo más por ti?", 6);
 		chatBotSteps.close();
 	}
 	
