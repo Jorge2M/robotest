@@ -11,9 +11,6 @@ public abstract class SecSubMenusGallery extends PageBase {
 	abstract String getXPathCapa();
 	
 	public static SecSubMenusGallery make(AppEcom app, Pais pais) {
-		if (pais.isGaleriaKondo(app)) {
-			return new SecSubMenusGalleryKondo();
-		}
 		return new SecSubMenusGalleryNormal();
 	}
 	

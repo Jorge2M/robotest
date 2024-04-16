@@ -46,18 +46,12 @@ public abstract class PageGaleria extends PageBase {
 
 	public static final int MAX_PAGE_TO_SCROLL = 20;
 
-	protected final From from;
-	protected final SecTallasArticulo secTallas = SecTallasArticulo.make(channel, app, dataTest.getPais());
+	protected final SecTallasArticulo secTallas = SecTallasArticulo.make(channel, dataTest.getPais());
 	protected final SecPreciosArticulo secPrecios = new SecPreciosArticulo();
 	protected final SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());
 
 	protected PageGaleria() {
 		super();
-		this.from = From.MENU;
-	}
-
-	protected PageGaleria(From from) {
-		this.from = from;
 	}
 
 	protected abstract String getXPathArticulo();
@@ -116,16 +110,22 @@ public abstract class PageGaleria extends PageBase {
 	public static PageGaleria make(From from, Channel channel, AppEcom app, Pais pais) {
 		switch (channel) {
 			case desktop:
-				if (!pais.isGaleriaKondo(app) || from==From.BUSCADOR) {
-					return new PageGaleriaDesktopNormal(from);
+				if (from==From.BUSCADOR) {
+					return new PageGaleriaDesktopOld();
 				}
-				return new PageGaleriaDesktopKondo(from);
+				if (pais.isGaleriaGenesis(app)) {
+					return new PageGaleriaDesktopGenesis();
+				}
+				return new PageGaleriaDesktopNormal();
 			case mobile, tablet:
 			default:
-				if (!pais.isGaleriaKondo(app) || from==From.BUSCADOR) {
-					return new PageGaleriaDeviceNormal(from);
+				if (from==From.BUSCADOR) {
+					return new PageGaleriaDeviceOld();
 				}
-				return new PageGaleriaDeviceKondo(from);
+				if (pais.isGaleriaGenesis(app)) {
+					return new PageGaleriaDeviceGenesis();
+				}
+				return new PageGaleriaDeviceNormal();
 		}
 	}
 

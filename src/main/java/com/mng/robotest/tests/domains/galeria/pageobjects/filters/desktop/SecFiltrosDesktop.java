@@ -25,9 +25,6 @@ public abstract class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	abstract String getXPathLabel(String label);
 	
 	public static SecFiltrosDesktop make(AppEcom app, Pais pais) {
-		if (pais.isGaleriaKondo(app)) {
-			return new SecFiltrosDesktopKondo();
-		}
 		return new SecFiltrosDesktopNormal();
 	}
 	

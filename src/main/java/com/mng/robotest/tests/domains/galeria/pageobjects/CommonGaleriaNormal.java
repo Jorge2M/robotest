@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 
-public class CommonGaleriaKondo extends PageBase {
+public class CommonGaleriaNormal extends PageBase {
 
 	private static final String XP_LISTA_ARTICULOS = "//ul[@data-testid[contains(.,'plp.grid.')]]";
 	private static final String XP_CAPA_ARTICULO = "//div[@data-testid='plp.product.figure']";
@@ -37,7 +37,7 @@ public class CommonGaleriaKondo extends PageBase {
 	}
 	
 	private String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
-		return "//button[@aria-label='" + typeSlider.getKondo() + "']";
+		return "//button[@aria-label='" + typeSlider.getNormal() + "']";
 	}	
 	
 	public String getRefArticulo(WebElement articulo) {

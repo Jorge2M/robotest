@@ -18,7 +18,7 @@ import static com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPrec
 
 public abstract class PageGaleriaDevice extends PageGaleria {
 	
-	private final SecTallasArticulo secTallas = SecTallasArticulo.make(channel, app, dataTest.getPais());
+	private final SecTallasArticulo secTallas = SecTallasArticulo.make(channel, dataTest.getPais());
 	
 	private static final String TAG_ID_COLOR = "@TagIdColor";
 	
@@ -47,10 +47,6 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	
 	protected PageGaleriaDevice() {
 		super();
-	}
-	
-	protected PageGaleriaDevice(From from) {
-		super(from);
 	}
 	
 	String getXPathArticuloConVariedadColores(int numArticulo) {

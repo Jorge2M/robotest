@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktopKondo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktopNormal;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.device.SecMultiFiltrosDevice;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Color;
@@ -28,11 +28,11 @@ public interface SecFiltros {
 			return SecFiltrosDesktop.make(app, pais);
 		case mobile, tablet:
 			if (app==AppEcom.outlet && channel==Channel.tablet) {
-				return new SecFiltrosDesktopKondo();
+				return new SecFiltrosDesktopNormal();
 			}
-			return SecMultiFiltrosDevice.make(app, pais);
+			return SecMultiFiltrosDevice.make();
 		default:
-			return SecMultiFiltrosDevice.make(app, pais);
+			return SecMultiFiltrosDevice.make();
 		}
 	}
 	

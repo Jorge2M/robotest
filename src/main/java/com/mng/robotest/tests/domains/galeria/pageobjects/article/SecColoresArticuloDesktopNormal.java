@@ -6,15 +6,15 @@ import java.util.Optional;
 
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktopNormal;
+import com.mng.robotest.tests.domains.galeria.pageobjects.CommonGaleriaNormal;
 import com.mng.robotest.testslegacy.data.Constantes;
 
 public class SecColoresArticuloDesktopNormal extends SecColoresArticuloDesktop {
 
-	private static final String XP_ARTICULO = PageGaleriaDesktopNormal.XP_ARTICULO;
-	private static final String XP_ARTICULO_ANCESTOR = XP_ARTICULO.replaceFirst("//", "ancestor::"); 
-	private static final String XP_COLORS_ARTICLE = "//div[@class[contains(.,'product-colors')]]";
-	private static final String XP_COLOR_ICON = XP_COLORS_ARTICLE + "//img[@loading='lazy']";
+	private static final String XP_ARTICULO = CommonGaleriaNormal.XP_ARTICULO;
+	private static final String XP_ARTICULO_ANCESTOR = XP_ARTICULO.replaceFirst("//", "ancestor::");
+	private static final String XP_COLORS_ARTICLE = "//div/p[@id[contains(.,'color-selector')]]/..";
+	private static final String XP_COLOR_ICON = XP_COLORS_ARTICLE + "//img[@id[contains(.,'Color')]]"; 
 	
 	private String getXPathArticuloConColores() {
 		return (
@@ -26,13 +26,6 @@ public class SecColoresArticuloDesktopNormal extends SecColoresArticuloDesktop {
 		return ("(" + getXPathArticuloConColores() + ")" + "[" + numArticulo + "]");
 	}
 	
-	private String getXPathImgColorRelativeArticle(boolean selected) {
-		if (!selected) {
-			return XP_COLOR_ICON;
-		}
-		return "//button[@aria-label[contains(.,'colorSelected')]]" + XP_COLOR_ICON;
-	}
-
 	private String getXPathImgCodigoColor(String codigoColor) {
 		return XP_COLOR_ICON + "//self::*[@src[contains(.,'_" + codigoColor + "_')]]";
 	}
@@ -58,13 +51,22 @@ public class SecColoresArticuloDesktopNormal extends SecColoresArticuloDesktop {
 			scrollVertical(1000);
 			waitMillis(1000);
 		}
-		return Optional.empty();
+		return Optional.empty();		
 	}
 	
 	@Override
 	public void clickColorArticulo(WebElement articulo, int posColor) {
 		String xpathImgColorRelArticle = getXPathImgColorRelativeArticle(false);
-		getElements(articulo, xpathImgColorRelArticle).get(posColor-1).click();
+		moveToElement(xpathImgColorRelArticle);
+		getElements(articulo, "." + xpathImgColorRelArticle).get(posColor-1).click();
 	}
 	
+	private String getXPathImgColorRelativeArticle(boolean selected) {
+		String xpathColor = XP_COLORS_ARTICLE;
+		if (!selected) {
+			return xpathColor + "//img";
+		}
+		return xpathColor + "//button[@class[contains(.,'selected')]]/img";
+	}	
+
 }

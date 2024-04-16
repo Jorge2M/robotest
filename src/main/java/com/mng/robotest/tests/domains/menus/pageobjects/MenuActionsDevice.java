@@ -68,7 +68,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 	@Override
 	public boolean isVisibleSubMenus() {
-		return SecMultiFiltrosDevice.make(app, dataTest.getPais())
+		return SecMultiFiltrosDevice.make()
 				.isAvailableFiltros(FiltroMobil.FAMILIA, menu.getSubMenus());
 	}
 
@@ -84,7 +84,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 	
 	private void clickSubLevelMenu() {
-		SecMultiFiltrosDevice.make(app, dataTest.getPais())
+		SecMultiFiltrosDevice.make()
 			.selectMenu2onLevel(Arrays.asList(menu.getSubMenu()));
 	}
 	

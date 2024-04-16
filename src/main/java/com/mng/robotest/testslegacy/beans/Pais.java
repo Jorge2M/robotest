@@ -50,7 +50,7 @@ public class Pais implements Serializable {
 	List<Pago> listPagos = new LinkedList<>();
 	
 	String multidireccion;
-	String galeriakondo;
+	String galeriagenesis;
 	String emailuser;
 	String mobiluser;
 	
@@ -273,23 +273,23 @@ public class Pais implements Serializable {
 		this.multidireccion = multidireccion;
 	}
 	
-	public String getGaleriakondo() {
-		return this.galeriakondo;
+	public String getGaleriagenesis() {
+		return this.galeriagenesis;
 	}
 
 	@XmlElement
-	public void setGaleriakondo(String galeriakondo) {
-		this.galeriakondo = galeriakondo;
+	public void setGaleriagenesis(String galeriagenesis) {
+		this.galeriagenesis = galeriagenesis;
 	}
 	
-	public boolean isGaleriaKondo(AppEcom app) {
-		return getTiendasGaleriaKondo().contains(app);
+	public boolean isGaleriaGenesis(AppEcom app) {
+		return getTiendasGaleriaGenesis().contains(app);
 	}
 	
-	private List<AppEcom> getTiendasGaleriaKondo() {
+	private List<AppEcom> getTiendasGaleriaGenesis() {
 		List<AppEcom> listApps = new ArrayList<>();
-		if (getGaleriakondo()!=null && getGaleriakondo().length()>0) {
-			var listAppsStr = Arrays.asList(getGaleriakondo().split(","));
+		if (getGaleriagenesis()!=null && getGaleriagenesis().length()>0) {
+			var listAppsStr = Arrays.asList(getGaleriagenesis().split(","));
 			for (String app : listAppsStr) {
 				listApps.add(AppEcom.valueOf(app));
 			}

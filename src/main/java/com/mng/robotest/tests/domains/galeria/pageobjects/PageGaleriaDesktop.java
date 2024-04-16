@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecColoresArticuloDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktopKondo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecFiltrosDesktopNormal;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecSubMenusGallery;
 import com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery.TypeLinkInfo;
@@ -29,7 +29,7 @@ import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.Sta
 public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	private final SecSubMenusGallery secSubMenusGallery = SecSubMenusGallery.make(app, dataTest.getPais());
-	private final SecColoresArticuloDesktop secColores = SecColoresArticuloDesktop.make(app, dataTest.getPais());
+	private final SecColoresArticuloDesktop secColores = SecColoresArticuloDesktop.make();
 	private final SecBannerHeadGallery secBannerHead = new SecBannerHeadGallery();
 	
 	public abstract String getXPathIconUpGalery();
@@ -66,10 +66,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	protected PageGaleriaDesktop() {
 		super();
-	}
-	
-	protected PageGaleriaDesktop(From from) {
-		super(from);
 	}
 	
 	public enum TypeArticle { REBAJADO, NO_REBAJADO }
@@ -187,8 +183,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		switch (numColumnas) {
 		case DOS:
 			return 2;
-		case TRES:
-			return 3;
 		case CUATRO:
 			return 4;
 		default:
@@ -435,7 +429,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	
 	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) {
 		var secCabecera = SecCabecera.make();
-		var secFiltros = new SecFiltrosDesktopKondo();
+		var secFiltros = new SecFiltrosDesktopNormal();
 		secCabecera.bring(BringTo.BACKGROUND);
 		secFiltros.bring(BringTo.BACKGROUND);
 		hearthIcon.click();

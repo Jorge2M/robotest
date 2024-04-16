@@ -4,7 +4,7 @@ public class SecSubMenusGalleryNormal extends SecSubMenusGallery {
 
 	@Override
 	String getXPathCapa() {
-		return "//div[@id='title']";
+		return "//header[@id='catalogTitle']";
 	}
 
 }

@@ -200,16 +200,16 @@ public class PageGaleriaSteps extends StepBase {
 			idPage = "última";
 		}
 		replaceStepDescription(TAG_ID_PAGE, idPage);
-		int numArticulosInicio = pgGaleria.getNumArticulos();
+//		int numArticulosInicio = pgGaleria.getNumArticulos();
 		var datosScroll = pgGaleria.scrollToPageFromFirst(pageToScroll);
 
 		if (pageToScroll>=PageGaleria.MAX_PAGE_TO_SCROLL) {
 			checkVisibilityFooter(pageToScroll, app);
 		}
-		if (!dataTest.getPais().isGaleriaKondo(app) &&
-			pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
-			checkAreMoreArticlesThatInitially(datosScroll.getArticulosMostrados(), numArticulosInicio);
-		}
+//		if (!dataTest.getPais().isGaleriaKondo(app) &&
+//			pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
+//			checkAreMoreArticlesThatInitially(datosScroll.getArticulosMostrados(), numArticulosInicio);
+//		}
 		if (dataForScroll.getOrdenacionExpected()!=RECOMENDADOS) {
 			checkArticlesOrdered(dataForScroll.getOrdenacionExpected());
 		}

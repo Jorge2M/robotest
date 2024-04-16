@@ -20,9 +20,6 @@ public abstract class SecSelectorPreciosDesktop extends PageBase {
 	public abstract void clickMinAndMax(int margenPixelsIzquierda, int margenPixelsDerecha);
 	
 	public static SecSelectorPreciosDesktop make(Pais pais, AppEcom app) {
-		if (pais.isGaleriaKondo(app)) {
-			return new SecSelectorPreciosDesktopKondo();
-		}
 		return new SecSelectorPreciosDesktopNormal();
 	}
 	

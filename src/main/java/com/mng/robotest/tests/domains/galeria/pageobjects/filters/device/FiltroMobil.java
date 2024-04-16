@@ -23,25 +23,25 @@ public enum FiltroMobil {
 		"//button[@id[contains(.,'Precio')]]",
 		"//label[@for[contains(.,'onSale')]]");	
 	
-	static final String XP_FILTRO_MULTI_NORMAL = "//*[@class[contains(.,'orders-filters-scroll')]]";
-	static final String XP_FILTRO_MULTI_KONDO = SecMultiFiltrosDeviceKondo.XP_FILTER_PANEL;
+	static final String XP_FILTRO_MULTI_OLD = "//*[@class[contains(.,'orders-filters-scroll')]]";
+	static final String XP_FILTRO_MULTI_NORMAL = SecMultiFiltrosDeviceNormal.XP_FILTER_PANEL;
+	String xpathOld;
 	String xpathNormal;
-	String xpathKondo;
-	String xpathOptionKondo;
-	private FiltroMobil(String xpathNormal, String xpathKondo, String xpathOptionKondo) {
+	String xpathOptionNormal;
+	private FiltroMobil(String xpathOld, String xpathNormal, String xpathOptionNormal) {
+		this.xpathOld = xpathOld;
 		this.xpathNormal = xpathNormal;
-		this.xpathKondo = xpathKondo;
-		this.xpathOptionKondo = xpathOptionKondo;
+		this.xpathOptionNormal = xpathOptionNormal;
 	}
 	
+	public String getXPathOld() {
+		return XP_FILTRO_MULTI_OLD + xpathOld;
+	}
 	public String getXPathNormal() {
-		return XP_FILTRO_MULTI_NORMAL + xpathNormal;
+		return XP_FILTRO_MULTI_NORMAL + xpathNormal + "/../..";
 	}
-	public String getXPathKondo() {
-		return XP_FILTRO_MULTI_KONDO + xpathKondo + "/../..";
-	}
-	public String getXPathOptionKondo() {
-		return XP_FILTRO_MULTI_KONDO + xpathOptionKondo;
+	public String getXPathOptionNormal() {
+		return XP_FILTRO_MULTI_NORMAL + xpathOptionNormal;
 	}
 	
 }

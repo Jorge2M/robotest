@@ -7,8 +7,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktopKondo;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktopNormal;
 import com.mng.robotest.testslegacy.data.Color;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -39,19 +38,10 @@ public class SecFiltrosSteps extends StepBase {
 			List<Color> colorsSelected, String litMenu, int numArticulos1page) {
 		
 		var checks = ChecksTM.getNew();
-		if (dataTest.getPais().isGaleriaKondo(app)) {
-			if (isDesktop()) {
-			 	checks.add(
-					"Aparecen los tags de color <b>" + colorsSelected.toString() + "</b>",
-					((PageGaleriaDesktopKondo)pgGaleria).isVisibleColorTags(colorsSelected));
-			}
-		} else {
-			String currentUrl = driver.getCurrentUrl();
-			var listCodColors = Color.getListCodigosColor(colorsSelected);
+		if (isDesktop()) {
 		 	checks.add(
-				"En la URL (*) aparece el parámetro c= que contiene los códigos de color <b>" + 
-				listCodColors.toString() + "</b> (*) " + currentUrl + "<br>",
-				SecFiltros.checkUrlAfterFilterContainsColors(colorsSelected, currentUrl), WARN);		
+				"Aparecen los tags de color <b>" + colorsSelected.toString() + "</b>",
+				((PageGaleriaDesktopNormal)pgGaleria).isVisibleColorTags(colorsSelected));
 		}
 		
 	 	checks.add(

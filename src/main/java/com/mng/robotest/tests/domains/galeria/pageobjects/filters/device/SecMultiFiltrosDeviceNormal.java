@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.filters.device;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.device.FiltroMobil.*;
 
 import java.util.Arrays;
@@ -9,30 +8,36 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
 import com.mng.robotest.testslegacy.data.Color;
 
 public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 
-	private static final String XP_FILTRAR_Y_ORDENAR_BUTTON = "//button[@data-testid[contains(.,'filter-sort')]]";
-	private static final String XP_BUTTON_APLICAR_FILTROS = "//button[@class[contains(.,'filters-apply')]]";
-	private static final String XP_BUTTON_CLOSE = "//div[@class='orders-filters-close' and @role='button']";
+	private static final String XP_FILTRAR_Y_ORDENAR_BUTTON = "//*[@data-testid='plp.filters.mobile.button']";
+	public static final String XP_FILTER_PANEL = "//*[@data-testid='plp.filters.mobile.panel']";
 	
-	/** 
-	 * Seleccionamos una ordenación ascendente/descendente
-	 */
+	//TODO Galería Kondo (19-10-23)
+	private static final String XP_BUTTON_MOSTRAR_ARTICULOS = "//button/span[text()[contains(.,'Mostrar artículos')]]";
+	private static final String XP_BUTTON_CLOSE = XP_FILTER_PANEL + "//button[@aria-label='close']";
+
+	private String getXPathFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
+		String textXPath = 
+			"text()[contains(.,'" + textFiltro + "')] or " +
+			"text()[contains(.,'" + upperCaseFirst(textFiltro) + "')]";
+
+		return typeFiltro.getXPathOptionNormal() + "//self::*[" + textXPath+ "]";
+	}
+	
+	private String getXPathFiltroTag(FiltroMobil typeFiltro, String name) {
+		return typeFiltro.getXPathNormal() + "/../div[text()='" + name + "']"; 
+	}
+	
 	@Override
 	public void selecOrdenacion(FilterOrdenacion typeOrden) throws Exception {
 		selectFiltroAndWaitLoad(ORDENAR, typeOrden.getValue());
 	}
 
-	/** 
-	 * Seleccionamos un filtro de color
-	 * @param codigoColor código asociado al color, p.e. el 01 es el código asociado al color Blanco
-	 * @return el número de artículos que aparecen en la galería después de seleccionar el filtro
-	 */
 	@Override
 	public void selecFiltroColores(List<Color> colorsToFilter) {
 		selectFiltrosAndWaitLoad(COLORES, Color.getListNamesFiltros(colorsToFilter));
@@ -42,20 +47,17 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 	public boolean isClickableFiltroUntil(int seconds) {
 		return state(CLICKABLE, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check();
 	}	
-	
+
 	@Override
 	public void selectMenu2onLevel(List<String> listMenus) {
 		selectFiltrosAndWaitLoad(FAMILIA, listMenus);
 	}
+	
 	@Override
 	public void selectMenu2onLevel(String menuLabel) {
 		selectFiltrosAndWaitLoad(FAMILIA, Arrays.asList(menuLabel));
 	}
 	
-	/**
-	 * Selecciona un determinado filtro de la galería de móvil
-	 * @param valor atributo 'value' a nivel de la option del filtro (select)
-	 */
 	private void selectFiltroAndWaitLoad(FiltroMobil typeFiltro, String textFiltro) {
 		var listTextFiltros = Arrays.asList(textFiltro);
 		selectFiltrosAndWaitLoad(typeFiltro, listTextFiltros);
@@ -66,12 +68,9 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 		if (!goAndClickFiltroButton()) {
 			return false;
 		}
-		var filtroLinea = getElement(typeFiltro.getXPathNormal());
-		filtroLinea.click();
-		waitLoadPage();
+		getElement(typeFiltro.getXPathNormal()).click();
 		for (String textFiltro : listTextFiltros) {
-			String xpathFiltroOption = getXPathFiltroOption(textFiltro);
-			if (!state(VISIBLE, xpathFiltroOption).check()) {
+			if (!state(VISIBLE, getXPathFiltroOption(typeFiltro, textFiltro)).wait(1).check()) {
 				close();
 				return false;
 			}
@@ -80,12 +79,22 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 		return true;
 	}
 	
+	public boolean isVisibleColorTags(List<Color> colors) {
+		return colors.stream()
+			.map(color -> getXPathFiltroTag(FiltroMobil.COLORES, color.getNameFiltro()))
+			.filter(xpath -> !state(PRESENT, xpath).check())
+			.findAny().isEmpty();
+	}
+
 	private void selectFiltrosAndWaitLoad(FiltroMobil typeFiltro, List<String> listTextFiltros) {
 		goAndClickFiltroButton();
+		state(VISIBLE, typeFiltro.getXPathNormal()).wait(2).check();
+		getElement(typeFiltro.getXPathNormal()).click();
+		waitLoadPage();
 		for (String textFiltro : listTextFiltros) {
 			clickFiltroOption(typeFiltro, textFiltro);
 		}
-		clickApplicarFiltrosButton();
+		clickMostrarArticulosButton();
 	}
 
 	private void clickFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
@@ -97,47 +106,31 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 			clickFiltroOptionStaleNotSafe(typeFiltro, textFiltro);
 		}
 	}
-	
+
 	private void clickFiltroOptionStaleNotSafe(FiltroMobil typeFiltro, String textFiltro) {
-		WebElement filtroLinea = getElement(typeFiltro.getXPathNormal());
-		filtroLinea.click();
-		waitLoadPage();
-		By byFiltroOption = By.xpath(getXPathFiltroOption(textFiltro));
-		click(filtroLinea).by(byFiltroOption).waitLink(1).exec();
+		var filtroLinea = getElement(typeFiltro.getXPathNormal());
+		By byFiltroOption = By.xpath(getXPathFiltroOption(typeFiltro, textFiltro));
+		state(CLICKABLE, byFiltroOption).wait(2).check();
+		click(filtroLinea).by(byFiltroOption).exec();
 		waitLoadPage();
 	}
-	private String getXPathFiltroOption(String textFiltro) {
-		return "//a[@class='filter-option' or @class='order-option']//span[" + 
-					"text()[contains(.,'" + textFiltro + "')] or " +
-					"text()[contains(.,'" + upperCaseFirst(textFiltro) + "')]]/..";
-	}
-	
-	private void clickApplicarFiltrosButton() {
-		click(XP_BUTTON_APLICAR_FILTROS).exec();
+
+	private void clickMostrarArticulosButton() {
+		click(XP_BUTTON_MOSTRAR_ARTICULOS).exec();
 	}
 	
 	private boolean goAndClickFiltroButton() {
-		if (state(VISIBLE, XP_FILTRAR_Y_ORDENAR_BUTTON).check()) {
-			moveToElement(XP_FILTRAR_Y_ORDENAR_BUTTON);
-			waitMillis(500);
-			scrollVertical(-50);
-		}
-		
-		return waitAndClickFiltroButton(2);
-	}
-	
-	private boolean waitAndClickFiltroButton(int seconds) {
-		if (!isOpenFiltrosUntil(0) &&
-			state(CLICKABLE, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(seconds).check()) {
-			click(XP_FILTRAR_Y_ORDENAR_BUTTON).type(JAVASCRIPT).exec();
-			return isOpenFiltrosUntil(seconds);
+		if (!isOpenFiltrosUntil(0)) {
+			if (state(CLICKABLE, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(2).check()) {
+				click(XP_FILTRAR_Y_ORDENAR_BUTTON).exec();
+				return isOpenFiltrosUntil(3);
+			}
 		}		
 		return false;
 	}
 	
 	private boolean isOpenFiltrosUntil(int seconds) {
-		String xpathLineaOrdenar = ORDENAR.getXPathNormal();
-		return state(VISIBLE, xpathLineaOrdenar).wait(seconds).check();
+		return state(VISIBLE, ORDENAR.getXPathNormal()).wait(seconds).check();
 	}
 	private boolean isCloseFiltrosUntil(int seconds) {
 		for (int i=0; i<seconds; i++) {
@@ -159,5 +152,5 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 		arr[0] = Character.toUpperCase(arr[0]);
 		return new String(arr);
 	}
-
+	
 }

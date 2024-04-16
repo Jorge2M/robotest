@@ -1,19 +1,17 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop;
 
-import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecSelectorPreciosDesktop.TypeClick.LEFT;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.desktop.SecSelectorPreciosDesktop.TypeClick.RIGHT;
-
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 public class SecSelectorPreciosDesktopNormal extends SecSelectorPreciosDesktop {
 
-	private static final String XP_LINEA_FILTRO = "//div[@class[contains(.,'input-range__track--background')]]"; //
-	private static final String XP_IMPORTE_MINIMO = "(" + XP_LINEA_FILTRO + "//span[@class[contains(.,'label-container')]])[1]"; //
-	private static final String XP_IMPORTE_MAXIMO = "(" + XP_LINEA_FILTRO + "//span[@class[contains(.,'label-container')]])[2]"; //
-	private static final String XP_FILTRO_WRAPPER = "//div[@class='input-range']"; //
-	private static final String XP_LEFT_CORNER = XP_IMPORTE_MINIMO + "/../..";
-	private static final String XP_RIGHT_CORNER = XP_IMPORTE_MAXIMO + "/../..";
-
+	private static final String XP_LEFT_CORNER = "//*[@data-testid='min-selector']";
+	private static final String XP_RIGHT_CORNER = "//*[@data-testid='max-selector']";
+	private static final String XP_LINEA_FILTRO = XP_LEFT_CORNER + "/..";
+	private static final String XP_FILTRO_WRAPPER = XP_LINEA_FILTRO;	
+	private static final String XP_IMPORTE_MINIMO = XP_LINEA_FILTRO + "/div[3]";
+	private static final String XP_IMPORTE_MAXIMO = XP_LINEA_FILTRO + "/div[4]";
+	
 	@Override
 	String getXPathLineaFiltro() {
 		return XP_LINEA_FILTRO;
@@ -42,33 +40,18 @@ public class SecSelectorPreciosDesktopNormal extends SecSelectorPreciosDesktop {
 	@Override
 	String getXPathFiltroWrapper() {
 		return XP_FILTRO_WRAPPER;
-	}
-
-	@Override
-	public void clickMinAndMax(int margenPixelsIzquierda, int margenPixelsDerecha) {
-		click(TypeClick.RIGHT, -margenPixelsDerecha);
-		click(TypeClick.LEFT, margenPixelsIzquierda);
-	}
-
-	private void click(TypeClick typeClick, int pixelsFromCorner) {
-		var builder = new Actions(driver);
-		moveToCornerSelector(RIGHT);
-		waitMillis(2000);
-		moveToCornerSelector(typeClick);
-		waitLoadPage();
-		builder.moveByOffset(pixelsFromCorner, 0).click().build().perform();
-		waitLoadPage();
-	}
-
-	private void moveToCornerSelector(TypeClick typeCorner) {
-		waitLoadPage();
-		moveToElement(getXPathFiltroWrapper());
-		if (typeCorner==LEFT) { 
-			moveToElement(getXPathLeftCorner());
-		}
-		else {
-			moveToElement(getXPathRightCorner());
-		}
-	}	
+	}		
 	
+	@Override
+	public void clickMinAndMax(int pixelsLeft, int pixelsRight) {
+		var minSelector = getElement(getXPathLeftCorner());
+		var maxSelector = getElement(getXPathRightCorner());
+		drag(minSelector, pixelsLeft);
+		drag(maxSelector, -pixelsRight);
+	}
+	
+	private void drag(WebElement element, int pixels) {
+        new Actions(driver).dragAndDropBy(element, pixels, 0).build().perform();		
+	}
+
 }

@@ -1,19 +1,24 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.entities;
 
 public enum TypeSlider { 
-	PREVIOUS(".prev", "previous") , 
-	NEXT(".next", "next"); 
+	PREVIOUS(".prev", "previous", "preview") , 
+	NEXT(".next", "next", "next"); 
 	
+	final String old;
 	final String normal;
-	final String kondo;
-	private TypeSlider(String normal, String kondo) {
+	final String genesis;
+	private TypeSlider(String old, String normal, String genesis) {
+		this.old = old;
 		this.normal = normal;
-		this.kondo = kondo;
+		this.genesis = genesis;
+	}
+	public String getOld() {
+		return this.normal;
 	}
 	public String getNormal() {
 		return this.normal;
 	}
-	public String getKondo() {
-		return this.kondo;
+	public String getGenesis() {
+		return this.getGenesis();
 	}
 }
