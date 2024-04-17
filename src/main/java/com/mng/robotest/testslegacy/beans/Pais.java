@@ -350,7 +350,7 @@ public class Pais implements Serializable {
 	}
 
 	/**
-	 * Obtiene la lista de pagos correspondientes al Shop, Outlet o votf en el orden en el que se testearán 
+	 * Obtiene la lista de pagos correspondientes al Shop u Outlet en el orden en el que se testearán 
 	 * (como se encuentran en el XML pero dando prioridad a los que tienen no tienen testpago='s')
 	 */
 	public List<Pago> getListPagosForTest(AppEcom app, boolean isEmpleado) {

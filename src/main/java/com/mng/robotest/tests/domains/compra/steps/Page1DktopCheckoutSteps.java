@@ -140,30 +140,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		description="Aparece el input para la introducción del vale " + SECONDS_WAIT,
 		level=WARN)
 	private boolean checkIsVisibleInputVale(int seconds) {
-		return (pg1DktopCheckout.isVisibleInputCodigoPromoUntil(seconds));
+		return pg1DktopCheckout.isVisibleInputCodigoPromoUntil(seconds);
 	}
-	
-	@Step (
-		description="Introducir un código de vendedor correcto #{codigoVendedor} y pulsar el botón \"Aceptar\"", 
-		expected="El vendedor queda registrado")
-	public void stepIntroduceCodigoVendedorVOTF(String codigoVendedor) {
-		pg1DktopCheckout.inputVendedorVOTF(codigoVendedor);
-		pg1DktopCheckout.acceptInputVendedorVOTF();
-		checkAfterInputCodigoVendedor(codigoVendedor);				
-	}
-	
-	@Validation
-	private ChecksTM checkAfterInputCodigoVendedor(String codigoVendedor) {
-		int seconds = 3;
-		var checks = ChecksTM.getNew();
-	 	checks.add(
-			"Desaparece el campo de Input del código de vendedor " + getLitSecondsWait(seconds),
-			!pg1DktopCheckout.isVisibleInputVendedorVOTF(seconds));
-	 	
-	 	checks.add(
-			"En su lugar se pinta el código de vendedor " + codigoVendedor,
-			pg1DktopCheckout.isVisibleCodigoVendedorVOTF(codigoVendedor));
-	 	
-	 	return checks;
-	}
+
 }

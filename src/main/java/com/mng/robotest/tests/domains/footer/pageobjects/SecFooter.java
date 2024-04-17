@@ -17,7 +17,7 @@ public class SecFooter extends PageBase {
 	
 	private static final List<AppEcom> FOOTER_SHOP = Arrays.asList(AppEcom.shop);
 	private static final List<AppEcom> FOOTER_OUTLET = Arrays.asList(AppEcom.outlet);
-	private static final List<AppEcom> FOOTER_ALL = Arrays.asList(AppEcom.shop, AppEcom.outlet, AppEcom.votf);
+	private static final List<AppEcom> FOOTER_ALL = Arrays.asList(AppEcom.shop, AppEcom.outlet);
 	
 	private static final List<Channel> CHANNEL_DESKTOP = Arrays.asList(Channel.desktop);
 	private static final List<Channel> CHANNEL_ALL = Arrays.asList(Channel.desktop, Channel.mobile, Channel.tablet);	

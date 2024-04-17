@@ -9,9 +9,7 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.genericchecks.Checker;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -46,16 +44,9 @@ public class CheckerAnalitica implements Checker {
 	}
 	
 	private State getLevel() {
-		var inputParamsSuite = TestMaker.getInputParamsSuite();
-		if (inputParamsSuite!=null && 
-			inputParamsSuite.getApp()!=null &&
-			inputParamsSuite.getApp()==AppEcom.votf) {
-			return INFO;
-		}
-		
 		//TODO actualmente hay muchos errores -> reportar a Alberte
 		//mientras tanto lo ponemos en Warn
-		if (UtilsTest.todayBeforeDate("2023-11-01")) {
+		if (UtilsTest.todayBeforeDate("2024-11-01")) {
 			return WARN;
 		}
 		return level;

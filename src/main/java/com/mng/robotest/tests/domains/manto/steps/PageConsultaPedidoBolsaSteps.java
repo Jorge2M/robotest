@@ -73,7 +73,7 @@ public class PageConsultaPedidoBolsaSteps extends StepMantoBase {
 			pgDetallePedido.isCodPaisPedido(dataPedido.getCodigoPais()), WARN);
 	 	
 		Pago pago = dataPedido.getPago();
-	 	if (!pago.getEstados().isEmpty() && !isVotf()) {
+	 	if (!pago.getEstados().isEmpty()) {
 	 		State stateVal = WARN;
 	 		if (pgDetallePedido.isPedidoInStateMenos1NULL()) {
 				stateVal = DEFECT;

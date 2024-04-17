@@ -172,10 +172,6 @@ public class PageBase extends PageObjTM {
 	protected boolean isShop() {
 		return app==AppEcom.shop;
 	}	
-	protected boolean isVotf() {
-		return app==AppEcom.votf;
-	}
-	
 	protected boolean isIdioma(CodIdioma codIdioma) {
 		return codIdioma.isEquals(dataTest.getIdioma());
 	}

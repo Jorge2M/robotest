@@ -31,13 +31,6 @@ public class Compra {
 	}
 
 	@Test (
-		groups={"Compra", "Checkout", "Canal:tablet_App:votf"}, alwaysRun=true,
-		description="description=[Usuario no registrado] Test en VOTF compra desde tienda Italia")
-	public void COM006_Compra_Francia_Tienda() throws Exception {
-		new Com006().execute();
-	}	
-	
-	@Test (
 		groups={"Compra", "Checkout", "Canal:desktop_App:shop"}, alwaysRun=true,
 		description="Compra Serbia [usuario registrado]")
 	public void COM008_Compra_Serbia() throws Exception {

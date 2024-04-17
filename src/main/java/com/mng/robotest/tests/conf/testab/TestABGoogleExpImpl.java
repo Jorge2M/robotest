@@ -18,7 +18,7 @@ public enum TestABGoogleExpImpl implements TestABGoogleExp {
 			"V0-Original", 
 			"V1-Nuevo"),
 		Arrays.asList(Channel.mobile,Channel.tablet),
-		Arrays.asList(AppEcom.shop, AppEcom.votf)
+		Arrays.asList(AppEcom.shop)
 	);
 		
 	private String valueCookieShop;

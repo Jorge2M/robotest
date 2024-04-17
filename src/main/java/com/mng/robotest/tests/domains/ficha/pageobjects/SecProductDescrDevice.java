@@ -19,19 +19,19 @@ public class SecProductDescrDevice extends PageBase {
 	public enum TypePanel {
 		DESCRIPTION(
 			"//div[@id='descriptionPanel']", "//div[@class[contains(.,'product-description')]]",
-			Arrays.asList(shop, outlet, votf), UNFOLDED),
+			Arrays.asList(shop, outlet), UNFOLDED),
 		COMPOSITION(
 			"//div[@id='compositionPanel']", "//div[@class[contains(.,'more-info')]]",
-			Arrays.asList(shop, outlet, votf), FOLDED),
+			Arrays.asList(shop, outlet), FOLDED),
 		SHIPMENT(
 			"//div[@id='shipmentPanel']", "//div[@class[contains(.,'shipment-and-returns')]]",
-			Arrays.asList(shop, outlet, votf), FOLDED), 
+			Arrays.asList(shop, outlet), FOLDED), 
 		RETURNS(
 			"//div[@id='returnsPanel']", "//div[@class[contains(.,'shipment-and-returns')]]",
-			Arrays.asList(shop, outlet, votf), FOLDED),
+			Arrays.asList(shop, outlet), FOLDED),
 		KC_SAFETY(
 			"//div[@id='kcSafetyPanel']", "//div[@id='kcSafetyPanel']", //?
-			Arrays.asList(shop, outlet, votf), MISSING);
+			Arrays.asList(shop, outlet), MISSING);
 		
 		private final String xPathDesktop;
 		private final String xPathDevice;

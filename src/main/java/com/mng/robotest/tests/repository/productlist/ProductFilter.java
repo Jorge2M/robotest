@@ -3,7 +3,6 @@ package com.mng.robotest.tests.repository.productlist;
 import java.util.List;
 import java.util.Optional;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.tests.repository.productlist.entity.ProductList;
 import com.mng.robotest.tests.repository.productlist.filter.Filter;
@@ -28,12 +27,10 @@ public class ProductFilter {
 	}
 	
 	private final ProductList productList;
-	private final AppEcom app;
 	private final String urlForJavaCall;
 	
-	public ProductFilter(ProductList productList, AppEcom app, String urlForJavaCall) {
+	public ProductFilter(ProductList productList, String urlForJavaCall) {
 		this.productList = productList;
-		this.app = app;
 		this.urlForJavaCall = urlForJavaCall;
 	}
 	
@@ -73,7 +70,7 @@ public class ProductFilter {
 	public Filter factoryFilter(FilterType filter) {
 		switch (filter) {
 		case TOTAL_LOOK:
-			return new FilterTotalLook(urlForJavaCall, app, productList.getStockId());
+			return new FilterTotalLook(urlForJavaCall, productList.getStockId());
 		case MANY_COLORS:
 			return new FilterManyColors();
 		case ONLINE:
@@ -90,4 +87,5 @@ public class ProductFilter {
 			return null;
 		}
 	}
+	
 }

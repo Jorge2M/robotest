@@ -11,7 +11,6 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.genericchecks.Checker;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.cookiesallowed.services.CookiesChecker;
 
 import static com.github.jorge2m.testmaker.conf.StoreType.*;
@@ -19,19 +18,14 @@ import static com.github.jorge2m.testmaker.conf.StoreType.*;
 public class CheckerAllowedCookies implements Checker {
 
 	private final State level;
-	private final AppEcom app;
 	
-	public CheckerAllowedCookies(State level, AppEcom app) {
+	public CheckerAllowedCookies(State level) {
 		this.level = level;
-		this.app = app;
 	}
 	
 	@Override
 	public ChecksTM check(WebDriver driver) {
-		if (app!=AppEcom.votf) {
-			return checkCookies();
-		}
-		return ChecksTM.getNew();
+		return checkCookies();
 	}
 
 	private ChecksTM checkCookies() {

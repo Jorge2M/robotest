@@ -12,7 +12,7 @@ Based on TestNG / Selenium 4 / Java17+
 
 Implements a library of E2E tests launched from real Chrome/Firefox Browsers. That library covers many functionalities of many ebusiness applications.
 
-Covers the applications: shop, outlet, votf, manto
+Covers the applications: shop, outlet, consola votf, manto
 Covers the web channels: desktop, mobile, tablet
 
 ### Infrastructure

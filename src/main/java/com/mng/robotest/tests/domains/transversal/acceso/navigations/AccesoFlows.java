@@ -13,21 +13,14 @@ import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCount
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalGeolocation;
 import com.mng.robotest.tests.domains.changecountry.tests.Chg001;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.setcookies.pageobjects.SectionCookies;
 import com.mng.robotest.tests.domains.setcookies.steps.SectionCookiesSteps;
-import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageAlertaVOTF;
-import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageLoginVOTF;
-import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageSelectIdiomaVOTF;
-import com.mng.robotest.tests.domains.transversal.acceso.pageobjects.PageSelectLineaVOTF;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
 import com.mng.robotest.tests.domains.transversal.prehome.pageobjects.PageJCAS;
-import com.mng.robotest.testslegacy.beans.AccesoVOTF;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalActPoliticaPrivacidad;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterAccess;
@@ -36,9 +29,6 @@ import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalNewsLetterAfter
 
 public class AccesoFlows extends StepBase {
 
-	private final Pais pais = dataTest.getPais();
-	private final IdiomaPais idioma = dataTest.getIdioma();
-	
 	public void goToInitURL() {
 		String canary = "";
 		//Temporal para test Canary!!!
@@ -55,14 +45,7 @@ public class AccesoFlows extends StepBase {
 	}
 	
 	public void accesoHomeAppWeb(boolean acceptCookies) throws Exception {
-		if (isVotf()) {
-			accesoVOTF();
-			goFromLineasToMultimarcaVOTF();
-			previousAccessShopSteps();
-			manageCookies(acceptCookies);			
-		} else {
-			new AccesoSteps().accessFromPreHome(false, acceptCookies);
-		}
+		new AccesoSteps().accessFromPreHome(false, acceptCookies);
 	}
 	
 	public void previousAccessShopSteps() throws Exception {
@@ -147,35 +130,6 @@ public class AccesoFlows extends StepBase {
 		}
 		
 		new MenusUserWrapper().moveAndClick(INICIAR_SESION);
-	}	
-	
-	public void goFromLineasToMultimarcaVOTF() {
-		var pageSelectLineaVOTF = new PageSelectLineaVOTF();
-		pageSelectLineaVOTF.clickBanner(LineaType.SHE);
-		pageSelectLineaVOTF.clickMenu(LineaType.SHE, 1);
-		
-		//Cuando se selecciona el icono de Mango deja de tener efecto el forzado del TestAB de la cabecera que habíamos ejecutado previamente
-		SecCabecera.make().clickLogoMango();
-	}
-	
-	public void accesoVOTF() throws Exception {
-		var pageLoginVOTF = new PageLoginVOTF();
-		pageLoginVOTF.goToFromUrlAndSetTestABs();
-		new PageJCAS().identJCASifExists();
-		var accesoVOTF = AccesoVOTF.forCountry(PaisShop.getPais(pais));
-		pageLoginVOTF.inputUsuario(accesoVOTF.getUsuario());
-		pageLoginVOTF.inputPassword(accesoVOTF.getPassword());
-		pageLoginVOTF.clickButtonContinue();
-		if (pais.getListIdiomas(app).size() > 1) {
-			var pageSelectIdiomaVOTF = new PageSelectIdiomaVOTF();
-			pageSelectIdiomaVOTF.selectIdioma(idioma.getCodigo());
-			pageSelectIdiomaVOTF.clickButtonAceptar();
-		}
-
-		var pageAlertaVOTF = new PageAlertaVOTF();
-		if (pageAlertaVOTF.isPage()) {
-			pageAlertaVOTF.clickButtonContinuar();
-		}
 	}	
 	
 	public void cambioPaisFromHomeIfNeeded(Pais newPais, IdiomaPais newIdioma) {

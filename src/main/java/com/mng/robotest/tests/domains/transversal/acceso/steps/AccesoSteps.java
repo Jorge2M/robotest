@@ -30,7 +30,7 @@ public class AccesoSteps extends StepBase {
 
 	public void oneStep(boolean clearArticulos) throws Exception {
 		new AccesoFlows().accesoHomeAppWeb();
-		if (dataTest.isUserRegistered() && !isVotf()) {
+		if (dataTest.isUserRegistered()) {
 			identification(dataTest, clearArticulos);
 		}
 	}
@@ -136,18 +136,14 @@ public class AccesoSteps extends StepBase {
 	}
 
 	/**
-	 * Accedemos a la aplicación (shop/outlet/votf)
+	 * Accedemos a la aplicación (shop/outlet)
 	 * Se ejecutan cada acción en un paso
 	 */
 	public void manySteps() throws Exception {
-		if (isVotf() && !dataTest.isUserRegistered()) { //En VOTF no tiene sentido identificarte con las credenciales del cliente
-			accesoVOTFtoHOME();					
-		} else {
-			accessFromPreHome(false, true);
-			if (dataTest.isUserRegistered()) {
-				identificacionEnMango();
-				new SecBolsaSteps().clear();
-			}
+		accessFromPreHome(false, true);
+		if (dataTest.isUserRegistered()) {
+			identificacionEnMango();
+			new SecBolsaSteps().clear();
 		}
 	}
 	
@@ -213,22 +209,6 @@ public class AccesoSteps extends StepBase {
 		validaIdentificacionEnShop();
 	}	
 	
-	public void accesoVOTFtoHOME() throws Exception {
-		String urlAcceso = inputParamsSuite.getUrlBase();
-		int numIdiomas = dataTest.getPais().getListIdiomas(app).size();
-		
-		new PageLoginVOTFSteps().goToAndLogin(urlAcceso);
-		if (numIdiomas > 1) {
-			new PageSelectIdiomaVOTFSteps().selectIdiomaAndContinue();
-		}
-
-		var pageSelectLineaVOTFSteps = new PageSelectLineaVOTFSteps();
-		pageSelectLineaVOTFSteps.validateIsPage();
-		checksDefault();
-		
-		pageSelectLineaVOTFSteps.selectMenuAndLogoMango(1);
-	}
-
 	@Step (
 		description="Cargar la URL inicial", 
 		expected="La URL se carga correctamente")

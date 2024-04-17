@@ -42,6 +42,7 @@ public class GetterProducts {
 	private final String codigoPaisAlf;
 	private final String codigoIdiomAlf;
 	private final AppEcom app;
+	private final boolean isVotf;
 	private final LineaType lineaType;
 	private final List<MenuProduct> menusCandidates;
 	private final Integer numProducts;
@@ -63,6 +64,7 @@ public class GetterProducts {
 			String codigoPaisAlf,
 			String codigoIdiomAlf,
 			AppEcom app, 
+			boolean isVotf,
 			LineaType lineaType, 
 			List<MenuProduct> menusCandidates, 
 			Integer numProducts, 
@@ -78,7 +80,8 @@ public class GetterProducts {
 		urlForJavaCall = getUrlForJavaCall(url);
 		urlForBrowserCall = UtilsData.getUrlBase(url);
 		nameCloudTest = UtilsData.getNameCloudTest(url);
-		if (app==AppEcom.votf) {
+		this.isVotf = isVotf;
+		if (isVotf) {
 			this.saleType = "V";
 		} else {
 			this.saleType = "";
@@ -99,7 +102,7 @@ public class GetterProducts {
 		this.sortBy = sortBy;
 		this.extraCanonicalInfo = extraCanonicalInfo;
 		this.productList = getProductList();
-		this.productFilter = new ProductFilter(productList, app, urlForJavaCall);
+		this.productFilter = new ProductFilter(productList, urlForJavaCall);
 	}
 	
 	public List<GarmentCatalog> getAll() throws Exception {
@@ -232,6 +235,7 @@ public class GetterProducts {
 				codigoPaisAlf,
 				codigoIdiomAlf,
 				app, 
+				isVotf,
 				lineaType, 
 				menusCandidates,
 				numProducts, 
@@ -392,6 +396,7 @@ public class GetterProducts {
 		private final String url;
 		private final String codigoPaisAlf;
 		private final AppEcom app;
+		private boolean isVotf = false;
 		private final WebDriver driver;
 		private LineaType lineaType = LineaType.SHE;
 		private Integer numProducts = 40;
@@ -442,6 +447,10 @@ public class GetterProducts {
 			this.pagina = pagina;
 			return this;
 		}
+		public Builder isVotf(Boolean isVotf) {
+			this.isVotf = isVotf;
+			return this;
+		}		
 		public Builder numProducts(Integer numProducts) {
 			this.numProducts = numProducts;
 			return this;
@@ -493,6 +502,7 @@ public class GetterProducts {
 						codigoPaisAlf,
 						codigoIdiomAlf,
 						app, 
+						isVotf,
 						lineaType, 
 						getMenusProduct(), 
 						numProducts, 

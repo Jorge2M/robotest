@@ -26,7 +26,6 @@ import com.mng.robotest.tests.domains.compra.payments.processout.PagoProcessOut;
 import com.mng.robotest.tests.domains.compra.payments.sepa.PagoSepa;
 import com.mng.robotest.tests.domains.compra.payments.sofort.PagoSofort;
 import com.mng.robotest.tests.domains.compra.payments.trustpay.PagoTrustpay;
-import com.mng.robotest.tests.domains.compra.payments.votftpv.PagoTpvVotf;
 import com.mng.robotest.tests.domains.compra.payments.yandex.PagoYandex;
 import com.mng.robotest.testslegacy.beans.TypePago;
 import com.mng.robotest.testslegacy.datastored.DataPago;
@@ -120,9 +119,6 @@ public class FactoryPagos {
 			break;
 		case PROCESS_OUT:
 			pagoMaked = new PagoProcessOut(dataPago);
-			break;
-		case TPV_VOTF:
-			pagoMaked = new PagoTpvVotf(dataPago);
 			break;
 		default:
 			break;

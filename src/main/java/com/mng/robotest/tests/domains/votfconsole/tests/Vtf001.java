@@ -43,8 +43,9 @@ public class Vtf001 extends TestBase {
 	}
 
 	private List<Article> getArticlesAvailable(int numProductsMax) throws Exception {
-		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), AppEcom.votf, driver)
+		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), AppEcom.shop, driver)
 				.numProducts(numProductsMax)
+				.isVotf(true)
 				.build();		
 		
 		return Article.getArticlesForTest(getterProducts.getAll());

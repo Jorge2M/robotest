@@ -81,8 +81,6 @@ public class Page1DktopCheckout extends PageBase {
 	
 	private static final String XP_LINK_SOLICITAR_FACTURA = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
 	private static final String XP_FIRST_ARTICULO = "//div[@class[contains(.,'firstArticulo')]]";
-	private static final String XP_INPUT_VENDEDOR_VOTF = "//input[@class[contains(.,'codiDependenta')]]";
-	private static final String XP_BUTTON_ACCEPT_VENDEDOR_VOTF = "//span[@id[contains(.,'CodigoDependienta')]]";
 	
 	private static final String XP_CONTENT_CHEQUE_REGALO = "//div[@class[contains(.,'contentsChequeRegalo')]]";
 	private static final String XP_NOMBRE_CHEQUE_REGALO = "(" + XP_CONTENT_CHEQUE_REGALO + "//div[@class='span3'])[1]";
@@ -101,10 +99,7 @@ public class Page1DktopCheckout extends PageBase {
 	private static final String XP_LINEA_ARTICULO_WITH_REFERENCE = 
 		"//div[@class[contains(.,'ref')] and text()[contains(.,'" + TAG_REFERENCIA + "')]]/ancestor::div[@class[contains(.,'articuloResBody')]]";
 	
-	private static final String TAG_COD_VENDEDOR = "@TagCodVendedor";
-	private static final String XP_COD_VENDEDOR_VOTF_WITH_TAG = "//form[@id[contains(.,'Dependienta')]]//span[text()[contains(.,'" + TAG_COD_VENDEDOR + "')]]";
 	private static final String XP_TEXT_VALE_CAMPAIGN = "//span[@class='texto_banner_promociones']";
-	
 	private static final String XPATH_ERROR_MESSAGE = "//div[@id='bocataTarjeta' and @class='errorbocatapago']";
 
 	public SecBillpay getSecBillpay() {
@@ -147,10 +142,6 @@ public class Page1DktopCheckout extends PageBase {
 		return (XP_RADIO_PAGO_WITH_TAG.replace(TAG_METODO_PAGO, metodoPagoClick));
 	}
 
-	private String getXPathCodigoVendedorVOTF(String codigoVendedor) {
-		return (XP_COD_VENDEDOR_VOTF_WITH_TAG.replace(TAG_COD_VENDEDOR, codigoVendedor));
-	}
-	
 	public boolean isPage(int seconds) {
 		return isBloqueImporteTotal(seconds);
 	}
@@ -285,13 +276,8 @@ public class Page1DktopCheckout extends PageBase {
 
 	public boolean isNumMetodosPagoOK(boolean isEmpl) {
 		int numPagosPant = getElements(XP_METODO_PAGO).size();
-		if (!isVotf()) {
-			int numPagosPais = dataTest.getPais().getListPagosForTest(app, isEmpl).size();
-			return (numPagosPais == numPagosPant);
-		}
-		
-		//En el caso de VOTF no existe ningún método de pago por pantalla (por defecto es el pago vía TPV)
-		return (numPagosPant == 0);
+		int numPagosPais = dataTest.getPais().getListPagosForTest(app, isEmpl).size();
+		return (numPagosPais == numPagosPant);
 	}
 	
 	public boolean isNumpagos(int numPagosExpected) {
@@ -538,25 +524,6 @@ public class Page1DktopCheckout extends PageBase {
 		return (
 			state(VISIBLE, XP_ERROR_PROMO).wait(seconds).check() &&
 			getElement(XP_ERROR_PROMO).getAttribute("style").contains("color: red"));
-	}
-
-	public void inputVendedorVOTF(String codigoVendedor) {
-		getElement(XP_INPUT_VENDEDOR_VOTF).clear();
-		getElement(XP_INPUT_VENDEDOR_VOTF).sendKeys(codigoVendedor);
-	}
-
-	public void acceptInputVendedorVOTF() {
-		click(XP_BUTTON_ACCEPT_VENDEDOR_VOTF).exec();
-	}
-
-	public boolean isVisibleInputVendedorVOTF(int seconds) {
-		return state(VISIBLE, XP_INPUT_VENDEDOR_VOTF).wait(seconds).check();
-	}
-
-
-	public boolean isVisibleCodigoVendedorVOTF(String codigoVendedor) {
-		String xpathVendedor = getXPathCodigoVendedorVOTF(codigoVendedor);
-		return state(VISIBLE, xpathVendedor).check();
 	}
 
 	public boolean isDataChequeRegalo(ChequeRegalo chequeRegalo) {

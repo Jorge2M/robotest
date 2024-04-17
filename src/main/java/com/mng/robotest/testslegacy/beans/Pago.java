@@ -33,7 +33,7 @@ public class Pago implements Serializable {
 	String almacenmontcada;
 	String testpago;
 	String tipoenvioshop = "STANDARD";
-	String tipoenviooutlet = "STANDARD";
+	String tipoenviooutlet = tipoenvioshop;
 	String provinciaenvio;
 	String tipotarj;
 	String numtarj;
@@ -208,8 +208,6 @@ public class Pago implements Serializable {
 			return getTipoEnvioShop();
 		case outlet:
 			return getTipoEnvioOutlet();
-		case votf:
-			return "TIENDA";			
 		default:
 			return "STANDARD";
 		}

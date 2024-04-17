@@ -23,9 +23,7 @@ import com.github.jorge2m.testmaker.domain.InputParamsTM.TypeAccess;
 public class PedidoNavigations extends StepMantoBase {
 
 	public void testPedidosShopEnManto(DataCheckPedidos dataCheckPedidos) {
-		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
-		if (!isVotf() &&  
-			dataCheckPedidos.areChecksToExecute() && 
+		if (dataCheckPedidos.areChecksToExecute() && 
 			inputParamsSuite.getTypeAccess()!=TypeAccess.Bat) {
 			new PageLoginMantoSteps().login();
 			validacionListPedidosStepss(dataCheckPedidos);
@@ -52,14 +50,12 @@ public class PedidoNavigations extends StepMantoBase {
 			consultarBolsaSteps(dataPedido);
 		}
 		
-		if (!isVotf()) {
-			if (listChecks.contains(CheckPedido.CONSULTAR_PEDIDO)) {
-				consultarPedidoSteps(dataPedido);	
-			}
-			
-			if (listChecks.contains(CheckPedido.ANULAR)) {
-				anularPedidoSteps(dataPedido);
-			}
+		if (listChecks.contains(CheckPedido.CONSULTAR_PEDIDO)) {
+			consultarPedidoSteps(dataPedido);	
+		}
+		
+		if (listChecks.contains(CheckPedido.ANULAR)) {
+			anularPedidoSteps(dataPedido);
 		}
 	}
 	
@@ -89,4 +85,5 @@ public class PedidoNavigations extends StepMantoBase {
 		new PageConsultaPedidoBolsaSteps().clickButtonIrAGenerar(dataPedido.getCodigoPedidoManto());
 		new PageGenerarPedidoSteps().anulaPedido();
 	}
+	
 }

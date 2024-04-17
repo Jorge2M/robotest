@@ -38,12 +38,9 @@ public class ListPagosEspana extends FactoryBase implements Serializable {
 		inputParams = getInputParams(ctx);
 		List<Object> listTests = new ArrayList<>(); 
 		getDataCountrys(getApp());
-		if (getApp()!=AppEcom.votf) {
-			createTestPagosEspana(listTests, getApp(), getChannel(), ctx);
-			createTestPagosFrancia(listTests, getApp(), getChannel(), ctx);
-		} else {
-			createTestPagosVotf(listTests, getApp(), getChannel(), ctx);
-		}
+		
+		createTestPagosEspana(listTests, getApp(), getChannel(), ctx);
+		createTestPagosFrancia(listTests, getApp(), getChannel(), ctx);
 	
 		return (listTests.toArray(new Object[listTests.size()]));
 	}
@@ -87,17 +84,6 @@ public class ListPagosEspana extends FactoryBase implements Serializable {
 		}		
 	}
 	
-	private void createTestPagosVotf(List<Object> listTests, AppEcom app, Channel channel, ITestContext ctx) {
-		List<Pago> listPagosToTest = espana.getListPagosForTest(app, false/*isEmpl*/);
-		for (Pago pago : listPagosToTest) {
-			if (pago.isNeededTestPasarelaDependingFilter(channel, app, ctx) &&
-				pago.getTestpago()!=null && "s".compareTo(pago.getTestpago())==0) {
-				createTestPago(listTests, espana, castellano, pago, app, channel, !USR_REG, !EMPLEADO, !TEST_VALE, TWO_ARTICLES, !ANUL_PEDIDO);
-				break;
-			}
-		}		
-	}
-
 	private void createTestPago(
 			List<Object> listTests, Pais pais, IdiomaPais idioma, Pago pago, AppEcom app, Channel channel, boolean usrRegistrado, 
 			boolean empleado, boolean testVale, boolean manyArticles, boolean anulPedido) {

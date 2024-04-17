@@ -11,7 +11,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.conf.factories.entities.EgyptCity;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
@@ -26,14 +25,12 @@ import com.mng.robotest.tests.domains.compra.steps.Page1DktopCheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page2IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
-import com.mng.robotest.tests.domains.compra.steps.PageResultPagoTpvSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.testslegacy.beans.AccesoEmpl;
 import com.mng.robotest.testslegacy.beans.Pago;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.beans.TypePago;
 import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.generic.beans.ValeDiscount;
@@ -130,7 +127,7 @@ public class CheckoutFlow extends StepBase {
 	}
 	
 	private void testFromIdentToCheckoutIni() {
-		boolean validaCharNoLatinos = (pais!=null && dataTest.getPais().getDireccharnolatinos().check() && app!=AppEcom.votf);
+		boolean validaCharNoLatinos = (pais!=null && dataTest.getPais().getDireccharnolatinos().check());
 		String emailCheckout = getUserEmail(dataPago.getFTCkout().emailExists); 
 		dataPago.getDataPedido().setEmailCheckout(emailCheckout);
 
@@ -163,16 +160,12 @@ public class CheckoutFlow extends StepBase {
 	
 	private void test1rstPageCheckout() {
 	    var ftcKout = dataPago.getFTCkout();
-	    if ((ftcKout.checkPromotionalCode || ftcKout.userIsEmployee) && !isVotf()) {
+	    if ((ftcKout.checkPromotionalCode || ftcKout.userIsEmployee)) {
 	        if (ftcKout.userIsEmployee && isCountry(ESPANA)) {
 	            testInputCodPromoEmplSpain();
 	        } else if (ftcKout.checkPromotionalCode) {
 	            handlePromotionalCode();
 	        }
-	    }
-
-	    if (isVotf() && isCountry(ESPANA)) {
-	        new Page1DktopCheckoutSteps().stepIntroduceCodigoVendedorVOTF("111111");
 	    }
 	}
 
@@ -250,15 +243,11 @@ public class CheckoutFlow extends StepBase {
 				pageResultPagoSteps.checkUrl(10);
 			}
 			else {
-				if (pagoToTest.getTypePago()!=TypePago.TPV_VOTF) {
-					pageResultPagoSteps.checkIsPageOk(dataPago);
-					if (!isMobile() && 
-						!dataPago.getFTCkout().chequeRegalo &&
-						dataPago.getFTCkout().checkMisCompras) {
-						pageResultPagoSteps.selectLinkMisComprasAndValidateCompra(dataPago);
-					}
-				} else {
-					new PageResultPagoTpvSteps().validateIsPageOk(dataPedido, dataTest.getCodigoPais());
+				pageResultPagoSteps.checkIsPageOk(dataPago);
+				if (!isMobile() && 
+					!dataPago.getFTCkout().chequeRegalo &&
+					dataPago.getFTCkout().checkMisCompras) {
+					pageResultPagoSteps.selectLinkMisComprasAndValidateCompra(dataPago);
 				}
 				
 				//Almacenamos el pedido en el contexto para la futura validación en Manto

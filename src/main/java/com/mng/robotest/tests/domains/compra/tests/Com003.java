@@ -25,14 +25,10 @@ public class Com003 extends TestBase {
         access();
 		altaArticulosBolsaAndClickComprar();
 		goToCheckout();
-		
         if (isShop()) {
             checkSolicitarFactura();
         }
-
-        if (!isVotf()) {
-            checkEditarDirecEnvio();
-        }	        	
+        checkEditarDirecEnvio();
 	}
 	
 	private void goToCheckout() {

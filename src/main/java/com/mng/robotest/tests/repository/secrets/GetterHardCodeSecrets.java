@@ -22,8 +22,6 @@ public class GetterHardCodeSecrets extends GetterSecretsFromInputStream {
 			"      <password_robot>sirjorge75</password_robot>" + lineJump +
 			"      <user_francia>francia.test@mango.com</user_francia>" + lineJump +
 			"      <password_francia>mango123</password_francia>" + lineJump +
-			"      <user_francia_votf>francia.test@mango.com</user_francia_votf>" + lineJump +
-			"      <password_francia_votf>mango123</password_francia_votf>" + lineJump +
 			"   </secret>" + lineJump +
 			"   <secret type=\"MANTO_USER\">" + lineJump +
 			"      <user>00556106</user>" + lineJump +
@@ -32,10 +30,6 @@ public class GetterHardCodeSecrets extends GetterSecretsFromInputStream {
 			"   <secret type=\"BROWSERSTACK_USER\">" + lineJump +
 			"      <user>equipoqa1</user>" + lineJump +
 			"      <password>qp3dr5VJbFMAxPsT4k1b</password>" + lineJump +
-			"   </secret>" + lineJump +
-			"   <secret type=\"VOTF_USER\">" + lineJump +
-			"      <user>tda00003</user>" + lineJump +
-			"      <password>mng00003</password>" + lineJump +
 			"   </secret>" + lineJump +
 			"   <secret type=\"EMPLOYEE_DATA\">" + lineJump +
 			"      <user>8000007330287</user>" + lineJump +

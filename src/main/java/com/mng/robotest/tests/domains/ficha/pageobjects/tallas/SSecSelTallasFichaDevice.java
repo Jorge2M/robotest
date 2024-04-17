@@ -114,15 +114,6 @@ public class SSecSelTallasFichaDevice extends PageBase implements SSecSelTallasF
 		if (isTallaUnica()) {
 			return;
 		}
-		if (isTablet() && isVotf()) {
-			despliegaSelectTallasTabletVotf();
-		} else {
-			despliegaSelectTallasExec();
-		}
-	}
-	
-	//Synchronized because is a error when unfold in many tablet-votf in parallel
-	private synchronized void despliegaSelectTallasTabletVotf() {
 		despliegaSelectTallasExec();
 	}
 	

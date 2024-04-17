@@ -174,21 +174,12 @@ public class CheckoutSteps extends StepBase {
 			return checks;
 		}
 		for (int i=0; i<listPagos.size(); i++) {
-			if (listPagos.get(i).getTypePago()!=TPV_VOTF) {
-				String pagoNameExpected = listPagos.get(i).getNombre(channel, app);
-			 	checks.add(
-					"Aparece el logo/pestaña asociado al pago <b>" + pagoNameExpected + "</b>",
-					pgCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected));	
-			}
+			String pagoNameExpected = listPagos.get(i).getNombre(channel, app);
+		 	checks.add(
+				"Aparece el logo/pestaña asociado al pago <b>" + pagoNameExpected + "</b>",
+				pgCheckoutWrapper.isMetodoPagoPresent(pagoNameExpected));	
 		}   
 		return checks;
-	}
-	
-	@Step (
-		description="<b>#{nombrePagoTpvVOTF}</b>: no clickamos el icono pues no existe", 
-		expected="No aplica")
-	public void noClickIconoVotf(String nombrePagoTpvVOTF) throws Exception {		
-		//No hacemos nada pues el pago con TPV en VOTF no tiene icono ni pasarelas asociadas
 	}
 	
 	/**

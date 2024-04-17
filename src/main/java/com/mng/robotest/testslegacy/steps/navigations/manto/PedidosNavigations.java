@@ -30,17 +30,14 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 public class PedidosNavigations extends StepBase {
 
 	public void testPedidosEnManto(List<DataPedido> listPedidos) throws Exception {
-		//En el caso de Votf se ha de realizar un paso manual para que los pedidos aparezcan en Manto
-		if (!isVotf()) {  
-			TestCaseTM testCase = getTestCase();
-			TestRunTM testRun = testCase.getTestRunParent();
-			DataMantoTest dMantoAcc = DataMantoTest.make();
-			dMantoAcc.setUrlManto(testRun.getParameter(Constantes.PARAM_URL_MANTO));
-			dMantoAcc.setUserManto(testRun.getParameter(Constantes.PARAM_USR_MANTO));
-			dMantoAcc.setPassManto(testRun.getParameter(Constantes.PARAM_PAS_MANTO));
-			dMantoAcc.setAppE(app);
-			testPedidosManto(listPedidos);
-		}
+		TestCaseTM testCase = getTestCase();
+		TestRunTM testRun = testCase.getTestRunParent();
+		DataMantoTest dMantoAcc = DataMantoTest.make();
+		dMantoAcc.setUrlManto(testRun.getParameter(Constantes.PARAM_URL_MANTO));
+		dMantoAcc.setUserManto(testRun.getParameter(Constantes.PARAM_USR_MANTO));
+		dMantoAcc.setPassManto(testRun.getParameter(Constantes.PARAM_PAS_MANTO));
+		dMantoAcc.setAppE(app);
+		testPedidosManto(listPedidos);
 	}
 	
 	private TestCaseTM getTestCase() throws NotFoundException {
@@ -97,13 +94,11 @@ public class PedidosNavigations extends StepBase {
 			pageConsultaPedidoBolsaSteps.detalleFromListaPedBol(dataPedido, TypeDetalle.BOLSA);
 		}
 		
-		if (!isVotf()) {
-			new PageMenusMantoSteps().goToPedidosStep();
-			secFiltrosMantoSteps.setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
-			boolean existsLinkCodPed = new PagePedidosMantoSteps().validaLineaPedido(dataPedido).getExistsLinkCodPed();	
-			if (existsLinkCodPed) {
-				pageConsultaPedidoBolsaSteps.detalleFromListaPedBol(dataPedido, TypeDetalle.PEDIDO);
-			}
+		new PageMenusMantoSteps().goToPedidosStep();
+		secFiltrosMantoSteps.setFiltrosYbuscar(dataPedido, TypeSearch.PEDIDO);
+		boolean existsLinkCodPed = new PagePedidosMantoSteps().validaLineaPedido(dataPedido).getExistsLinkCodPed();	
+		if (existsLinkCodPed) {
+			pageConsultaPedidoBolsaSteps.detalleFromListaPedBol(dataPedido, TypeDetalle.PEDIDO);
 		}
 		
 		new PageDetallePedido().gotoListaPedidos();

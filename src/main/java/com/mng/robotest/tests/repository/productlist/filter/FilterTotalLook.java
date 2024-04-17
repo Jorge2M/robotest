@@ -10,7 +10,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.repository.UtilsData;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentDetails;
@@ -19,13 +18,11 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Artic
 public class FilterTotalLook implements Filter {
 
 	private final String urlForJavaCall;
-	private final AppEcom app;
 	private final String stockId;
 	
-	public FilterTotalLook(String urlForJavaCall, AppEcom app, String stockId) {
+	public FilterTotalLook(String urlForJavaCall, String stockId) {
 		this.urlForJavaCall = urlForJavaCall;
-		this.app = app;
-		this.stockId = getIdStockNormalized(stockId);
+		this.stockId = stockId;
 	}
 	
 	@Override
@@ -84,16 +81,6 @@ public class FilterTotalLook implements Filter {
 				.path(article.getGarmentId())
 				.path("looktotal")
 				.queryParam("color", article.getColor().getId()));
-	}
-	
-	private String getIdStockNormalized(String stockId) {
-		if (app==AppEcom.votf) {
-			//Por algún motivo que no entiendo, falla "001.ES.0.false.true.v0" pero funciona "001.ES.0.false.false.v0"
-			return (stockId
-						.replace("false.true", "false.false")
-						.replace("true.true", "true.false"));
-		}
-		return stockId;
 	}
 	
 }

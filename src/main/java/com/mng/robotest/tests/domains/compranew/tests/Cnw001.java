@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.compra.tests;
+package com.mng.robotest.tests.domains.compranew.tests;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import com.mng.robotest.testslegacy.steps.navigations.shop.NavigationsSteps;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
-public class Com005 extends TestBase {
+public class Cnw001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {

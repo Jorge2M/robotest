@@ -12,7 +12,6 @@ public interface GetterSecrets {
 		SHOP_ROBOT_USER("SHOP_USER"),
 		MANTO_USER("MANTO_USER"),
 		BROWSERSTACK_USER("BROWSERSTACK_USER"),
-		VOTF_USER("VOTF_USER"),
 		EMPLOYEE_DATA("EMPLOYEE_DATA");
 		
 		private final String secretName;

@@ -38,8 +38,6 @@ package com.mng.robotest.tests.repository.secrets;
 //			return "arn:aws:secretsmanager:eu-west-1:687762684238:secret:pro/robotest/user-manto-Vl6Mxx";
 //		case BROWSERSTACK_USER:
 //			return "arn:aws:secretsmanager:eu-west-1:687762684238:secret:pro/robotest/user-browserstack-ilZgDx";
-//		case VOTF_USER: 
-//			return "arn:aws:secretsmanager:eu-west-1:687762684238:secret:pro/robotest/user-votf-ynflty";
 //		case EMPLOYEE_DATA: 
 //			return "arn:aws:secretsmanager:eu-west-1:687762684238:secret:pro/robotest/data-employee-RiPVix";
 //		default:

@@ -32,8 +32,7 @@ public enum TypePago {
 	PROCESS_OUT("ProcessOut",0,4),
 	YANDEX("Yandex",0,4),
 	PAYMAYA("Paymaya",0,4),
-	STORE_CREDIT("storecredit",0,4), 
-	TPV_VOTF("tpvvotf");
+	STORE_CREDIT("storecredit",0,4);
 	
 	String name;
 	Integer[] estados;

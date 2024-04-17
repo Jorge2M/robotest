@@ -2,7 +2,6 @@ package com.mng.robotest.testslegacy.pageobject.shop.menus;
 
 import static com.mng.robotest.tests.conf.AppEcom.outlet;
 import static com.mng.robotest.tests.conf.AppEcom.shop;
-import static com.mng.robotest.tests.conf.AppEcom.votf;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,17 +16,17 @@ import com.mng.robotest.testslegacy.pageobject.shop.menus.device.SecMenusUserDev
 public class MenuUserItem {
 	
 	public enum UserMenu {
-		LUPA(Arrays.asList(shop, outlet, votf)),
+		LUPA(Arrays.asList(shop, outlet)),
 		INICIAR_SESION(Arrays.asList(shop, outlet)),
 		CERRAR_SESION(Arrays.asList(shop, outlet)),
 		REGISTRATE(Arrays.asList(shop, outlet)),
 		MI_CUENTA(Arrays.asList(shop, outlet)),
-		FAVORITOS(Arrays.asList(shop, votf)),
+		FAVORITOS(Arrays.asList(shop)),
 		BOLSA(Arrays.asList(shop, outlet)),
 		MIS_COMPRAS(Arrays.asList(shop)),
 		PEDIDOS(Arrays.asList(outlet)),
 		MANGO_LIKES_YOU(Arrays.asList(shop)),
-		AYUDA(Arrays.asList(shop, outlet, votf)),
+		AYUDA(Arrays.asList(shop, outlet)),
 		CAMBIO_PAIS(Arrays.asList(shop, outlet));
 
 		List<AppEcom> apps;
@@ -149,7 +148,7 @@ public class MenuUserItem {
 				return MenuUserDevice.MI_CUENTA;
 			}
 		}
-		if (app==AppEcom.shop || app==AppEcom.votf) {
+		if (app==AppEcom.shop) {
 			return IconoCabecera.MICUENTA;
 		}
 		return null;

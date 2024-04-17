@@ -9,7 +9,7 @@
 <codpos>1506</codpos>
 <telefono>672020241</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea id="SHE"       		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -49,7 +49,7 @@
 <codpos>AD400</codpos>
 <telefono>345678</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -95,7 +95,7 @@
 <codpos>4482</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -135,9 +135,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -168,7 +165,7 @@
 <codpos>1030</codpos>
 <telefono>465162757</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -197,10 +194,10 @@
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <pago 
-	type="TRJintegrada" tiendas="shop,outlet" votf="n" empleado="s"
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <pago 
-	type="TRJintegrada" tiendas="shop,outlet" votf="n" empleado="s"
+	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373"></pago>
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
@@ -208,9 +205,6 @@
 <pago 
 	type="Ideal" tiendas="shop,outlet" empleado="s"
 	nombre="IDEAL" testpasarela='s' testpago='s'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -221,7 +215,7 @@
 <codpos>08720</codpos>
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="N" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -262,7 +256,7 @@
 <codpos>2030</codpos>
 <telefono>871234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -305,7 +299,7 @@
 <codpos>10363</codpos>
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -345,7 +339,7 @@
 <codpos>3000</codpos>
 <telefono>94123456</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="N" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -378,9 +372,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -394,7 +385,7 @@
 <codpos>251 99</codpos>
 <telefono>602123456</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -428,9 +419,6 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
 	nombre="PLATBA NA DOBÍRKU" nombremovil="Platba Na Dobírku" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -444,7 +432,7 @@
 <address>Strandvejen 153</address>
 <telefono>20123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -492,7 +480,7 @@
 <codpos>08720</codpos>
 <telefono>5123456</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <outlet_online>true</outlet_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
@@ -542,7 +530,7 @@
 <address>Palkkatilankatu 5 C 28</address>
 <telefono>0401234567</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="N" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -601,7 +589,7 @@
 <telefono>0612345678</telefono>
 <dni>34763592N</dni>
 <register nuevo="S" cpost="S" publi="N">A</register>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE" 		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -634,9 +622,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -651,7 +636,7 @@
 <address>Platz vor dem Neuen Tor 6</address>
 <telefono>017632021234</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="N" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -691,9 +676,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -729,7 +711,7 @@
 <codpos>180 30</codpos>
 <telefono>6951234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -763,9 +745,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -779,7 +758,7 @@
 <codpos>3000</codpos>
 <telefono>201234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="N" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -812,9 +791,6 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
 	nombre="UTÁNVÉTELES FIZETÉS" nombremovil="Utánvételes Fizetés" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -827,7 +803,7 @@
 <codpos>220</codpos>
 <telefono>6123456</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/> 
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -872,7 +848,7 @@
 <codpos>A65 F4E2</codpos>
 <telefono>881234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -919,7 +895,7 @@
 <codpos>08720</codpos>
 <telefono>3123456789</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -956,9 +932,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -991,7 +964,7 @@
 <codpos>5401</codpos>
 <telefono>21234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1036,7 +1009,7 @@
 <codpos>9490</codpos>
 <telefono>7916972</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1076,7 +1049,7 @@
 <codpos>08720</codpos>
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1125,7 +1098,7 @@
 <codpos>0001</codpos>
 <telefono>621345678</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1159,9 +1132,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1192,7 +1162,7 @@
 <codpos>ZTN1073</codpos>
 <telefono>79123456</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1255,7 +1225,7 @@
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1321,7 +1291,7 @@
 <codpos>1071 ZD</codpos>
 <telefono>0612345678</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1358,9 +1328,6 @@
 <pago 
 	type="Ideal" tiendas="shop,outlet" empleado="s"
 	nombre="IDEAL" testpasarela='s' testpago='s'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -1395,7 +1362,7 @@
 <address>Hakasteinvegen 243</address>
 <telefono>40123456</telefono> <!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1439,9 +1406,6 @@
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1455,7 +1419,7 @@
 <codpos>62-262</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="N" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1493,9 +1457,6 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
 	nombre="Płatność przy odbiorze" namefilter="Platnosc przy odbiorze" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -1509,7 +1470,7 @@
 <codpos>4455-111</codpos>
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1559,7 +1520,7 @@
 <codpos>030000</codpos>
 <telefono>722560300</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1601,7 +1562,7 @@
 <telefono>9123456789</telefono>
 <dni>34763592N</dni>
 <!-- Reactivar cuando se reactive la compra -->
-<tiendas_online><!-- shop,outlet,votf--></tiendas_online>
+<tiendas_online><!-- shop,outlet--></tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1645,9 +1606,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="Yandex" tiendas="shop"
 	nombre="Наличными в терминалах Yandex" namefilter="Russia_Yandex" testpasarela='s' testpago='s'></pago>--> <!-- La hemos de poner la última porque provoca una excepción que envía a Portada -->
-<pago 
-	type="tpvvotf" tiendas="votf" 
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1658,7 +1616,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1697,7 +1655,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codpos>811 02</codpos>
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1742,7 +1700,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codpos>1000</codpos>
 <telefono>030123456</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1796,7 +1754,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codpos>08720</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <!-- https://365mango-my.sharepoint.com/:x:/r/personal/raul_castro_mango_com/_layouts/15/Doc.aspx?sourcedoc=%7B1166E459-8955-4E94-B49A-45BBB4156FE1%7D&file=Registro%20pa%25u00edses%20%20Loyalty%20y%20noLoyalty.xlsx&action=default&mobileredirect=true -->
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline> 
@@ -1838,9 +1796,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="outlet" empleado="n" 
 	nombre="TRANSFERENCIA BANCARIA" nombremovil="transferencia" testpasarela='s' testpago='s'></pago>
 -->
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n" 
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <transporte nombre="Recogida en tienda" importe="Gratuito" gratuito="0"/>
 <transporte nombre="Estándar"           importe="2,95"     gratuito="30"/>
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
@@ -1848,21 +1803,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <multidireccion>S</multidireccion>
 <!-- select * from MNGBD.tarjeta_empleados where codigo_carnet = '8000000002266'; -->
 <accesoempl tarjeta="8000007330287" nif="32070858A" nombre="OCA MUÑOZ, ADRIAN"/>
-<!-- 
-select * from 
-    mngbd.usuarios_venta_asistida t1, 
-    mngbd.usuarios_venta_asis_tda_fisica t2,
-    mngbd.tiendas_fisicas t3
-where
-    t1.username = t2.username and
-    t2.id_tienda = t3.id and
-    (t1.bloqueado = 'N' or t1.bloqueado is null) and
-    t3.codigo_pais = '001' and
-    (t3.bloqueo_votf = 'N' or t3.bloqueo_votf is null) and
-    t3.baja_shop is null and
-    t1.password is not null-->
-<accesovotf usuario="tda00003" password="mng00003"/>
-<!-- https://confluence.mango.com/pages/viewpage.action?pageId=230916541-->
 </pais>
 
 <pais nombre_pais="España (Ceuta)" codigo="022">
@@ -1876,7 +1816,7 @@ where
 <codpos>51003</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1914,9 +1854,6 @@ where
 	type="ContraReembolso" tiendas="outlet" empleado="n" 
 	nombre="TRANSFERENCIA BANCARIA" nombremovil="transferencia" testpasarela='s' testpago='s'></pago>
 -->
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n" 
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <transporte nombre="Recogida en tienda" importe="Gratuito" gratuito="0"/>
 <transporte nombre="Estándar"           importe="2,95"     gratuito="30"/>
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
@@ -1935,7 +1872,7 @@ where
 <codpos>35229</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -1973,9 +1910,6 @@ where
 	type="ContraReembolso" tiendas="outlet" empleado="n" 
 	nombre="TRANSFERENCIA BANCARIA" nombremovil="transferencia" testpasarela='s' testpago='s'></pago>
 -->
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n" 
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -1990,7 +1924,7 @@ where
 <codpos>52004</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline> 
 <linea 		  id="SHE" 	  	 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2028,9 +1962,6 @@ where
 	type="ContraReembolso" tiendas="outlet" empleado="n" 
 	nombre="TRANSFERENCIA BANCARIA" nombremovil="transferencia" testpasarela='s' testpago='s'></pago>
 -->
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n" 
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <transporte nombre="Recogida en tienda" importe="Gratuito" gratuito="0"/>
 <transporte nombre="Estándar"           importe="2,95"     gratuito="30"/>
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
@@ -2049,7 +1980,7 @@ where
 <address>Kammakargatan 70</address>
 <telefono>0765260000</telefono><!-- Teléfono compatible con Klarna -->
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS" contentMovil="MENUS2"/>
@@ -2091,9 +2022,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet" empleado="n" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n" 
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 <mobiluser>0765-260000</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
 </pais>
@@ -2109,7 +2037,7 @@ where
 <codpos>8001</codpos>
 <telefono>754111234</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2164,9 +2092,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 <emailuser>jorge.munoz@mango.com</emailuser> <!-- Utilizaremos un email con timestamp para superar el control de fraude de "Rechnung" -->
 </pais>
@@ -2224,7 +2149,7 @@ where
 <codpos>EC1Y 8SY</codpos>
 <telefono>07123456789</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2282,7 +2207,7 @@ where
 <codpos>GY10 1PB</codpos>
 <telefono>07123456789</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2330,7 +2255,7 @@ where
 <codpos>08720</codpos>
 <telefono>5612345</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2456,7 +2381,7 @@ where
 <codpos>M5H 2N2</codpos>
 <telefono>6135550165</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2496,7 +2421,7 @@ where
 <codpos>08720</codpos>
 <telefono>50012345</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2588,7 +2513,7 @@ where
 <codpos>1120</codpos>
 <telefono>71234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2630,7 +2555,7 @@ where
 <codpos>97110</codpos>
 <telefono>690123456</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2673,7 +2598,7 @@ where
 <codpos>08720</codpos>
 <telefono>41234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2751,7 +2676,7 @@ where
 <codpos>08720</codpos>
 <telefono>8183202020</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2809,7 +2734,7 @@ where
 <codpos>08720</codpos>
 <telefono>96671040</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2846,7 +2771,7 @@ where
 <codpos>08720</codpos>
 <telefono>61234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="N" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2892,7 +2817,7 @@ where
 <telefono>2014920975</telefono>
 <address>538 Clinton St #4</address>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet,votf</tiendas_online>
+<tiendas_online>shop,outlet</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea id="SHE"       		 shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -2932,9 +2857,6 @@ where
 <pago 
 	type="Amazon" tiendas="shop,outlet" empleado="n"
 	nombre="CHECKOUT BY AMAZON" testpasarela='s'></pago>-->
-<pago 
-	type="tpvvotf" tiendas="votf" empleado="n"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -3018,7 +2940,7 @@ where
 <codpos>056060</codpos> <!-- Este código posta hace que se muestre el pago "Contra entrega efectivo" -->
 <telefono>3101234567</telefono>
 <dni>8001984561</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="n" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3087,7 +3009,7 @@ where
 <codpos>97201</codpos>
 <telefono>696123456</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3132,7 +3054,7 @@ where
 <codpos>97300</codpos>
 <telefono>694123456</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3175,7 +3097,7 @@ where
 <codpos>08720</codpos>
 <telefono>81234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="N" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3304,7 +3226,7 @@ where
 <codpos>2060</codpos>
 <telefono>412345678</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="N" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3414,7 +3336,7 @@ where
 <codpos>08720</codpos>
 <telefono>31234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3561,9 +3483,6 @@ where
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
 	nombre="富滇银行" namefilter="zChina_Fudian Bk" testpasarela='n' testpago='n'></pago>
-<pago
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3602,7 +3521,7 @@ where
 <codpos>08720</codpos>
 <telefono>62836675</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="N" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3632,9 +3551,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3645,7 +3561,7 @@ where
 <codpos>110006</codpos>
 <telefono>9123456789</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3687,7 +3603,7 @@ where
 <codpos>10350</codpos>
 <telefono>812345678</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="N" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3777,7 +3693,7 @@ where
 <codpos>4640852</codpos>
 <telefono>665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
@@ -3803,9 +3719,6 @@ where
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3853,7 +3766,7 @@ where
 <codpos>08720</codpos>
 <telefono>775669933</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3891,7 +3804,7 @@ where
 <telefono>7012345678</telefono>
 <dni>34763592N</dni>
 <!-- Reactivar cuando se reactive la compra -->
-<tiendas_online><!-- shop,votf--></tiendas_online>
+<tiendas_online><!-- shop--></tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3930,7 +3843,7 @@ where
 <codpos>08720</codpos>
 <telefono>51234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3960,9 +3873,6 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4023,9 +3933,6 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> -->
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4036,7 +3943,7 @@ where
 <codpos>08720</codpos>
 <telefono>68258508</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="N" publi="S"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
@@ -4063,7 +3970,7 @@ where
 <codpos>08720</codpos>
 <telefono>126946551</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="N" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4090,9 +3997,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4103,7 +4007,7 @@ where
 <codpos>08720</codpos>
 <telefono>7712345</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="N" cpost="S" publi="S"/> 
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4163,7 +4067,7 @@ where
 <codpos>112</codpos>
 <telefono>91234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4235,7 +4139,7 @@ where
 <codpos>1008</codpos>
 <telefono>9123456789</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4265,9 +4169,6 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4279,7 +4180,7 @@ where
 <codpos>08720</codpos>
 <telefono>33123456</telefono>
 <dni>27612405934</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="N" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4309,9 +4210,6 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago> 
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4324,7 +4222,7 @@ where
 <codpos>11522</codpos>
 <telefono>512345678</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="N" cpost="N" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4368,7 +4266,7 @@ where
 <codpos>546080</codpos>
 <telefono>81234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="N" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4395,9 +4293,6 @@ where
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4412,7 +4307,7 @@ where
 <codpos>06043</codpos>
 <telefono>01665015122</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4435,9 +4330,6 @@ where
 <pago 
 	type="KCP" tiendas="shop,outlet"
 	nombre="신용 카드" namefilter="KCP" testpasarela='s' testpago='s'></pago>
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4502,7 +4394,7 @@ where
 <codpos>08720</codpos>
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
-<!--<tiendas_online>shop,votf</tiendas_online>-->
+<!--<tiendas_online>shop</tiendas_online>-->
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
@@ -4531,7 +4423,7 @@ where
 <codpos>10560</codpos>
 <telefono>845271640</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="N" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4554,7 +4446,7 @@ where
 <codpos>08720</codpos>
 <telefono>5301234567</telefono>
 <dni>10000000146</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="N" cpost="S" publi="N"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4584,9 +4476,6 @@ where
 <pago 
 	type="KrediKarti" tiendas="outlet"
 	nombre="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5311570000000005" mescad="12" anycad="2020" cvc="000"></pago>
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4598,7 +4487,7 @@ where
 <codpos>08720</codpos>
 <telefono>551234567</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="N" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4631,9 +4520,6 @@ where
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<pago 
-	type="tpvvotf" tiendas="votf"
-	nombre="PAGO EN TPV" testpasarela='s' testpago='s'></pago>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -4644,7 +4530,7 @@ where
 <codpos>100123</codpos>
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -4913,7 +4799,7 @@ where
 <codpos>08720</codpos>
 <telefono>1123456789</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -5390,7 +5276,7 @@ where
 <codpos>0083</codpos>
 <telefono>665015122</telefono>
 <dni>9007263637083</dni>
-<tiendas_online>shop,votf</tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
