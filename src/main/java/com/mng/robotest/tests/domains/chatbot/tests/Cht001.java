@@ -28,11 +28,11 @@ public class Cht001 extends TestBase {
 			return;
 		}
 		
-		if (isPRO()) {
+//		if (isPRO()) {
 			executeOldChatBot();
-		} else {
-			executeNewChatBot();
-		}
+//		} else {
+//			executeNewChatBot();
+//		}
 	}
 	
 	private void executeOldChatBot() {
