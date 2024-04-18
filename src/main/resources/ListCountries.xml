@@ -152,6 +152,7 @@
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriagenesis>shop</galeriagenesis>
 </pais>
 
 <pais nombre_pais="Belgique" codigo="017">
@@ -3326,6 +3327,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </linea>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriagenesis>shop</galeriagenesis>
 </pais>
 
 <pais nombre_pais="Bahrain" codigo="640">
@@ -3430,6 +3432,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	<!-- <sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>-->
 </linea>
 </shoponline>
+<galeriagenesis>shop</galeriagenesis>
 <pago
 	type="PasarelaOtras" tiendas="shop,outlet"
 	nombre="支付宝" namefilter="zChina_Alipay" testpasarela='n' testpago='n'></pago>
@@ -3833,6 +3836,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Assist" tiendas="shop,outlet"
 	nombre="JCB" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<galeriagenesis>shop</galeriagenesis>
 </pais>
 
 <pais nombre_pais="Kuwait" codigo="636">
@@ -3891,6 +3895,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
+<galeriagenesis>shop</galeriagenesis>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -3934,6 +3939,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> -->
 <multidireccion>N</multidireccion>
+<galeriagenesis>shop</galeriagenesis>
 </pais>
 
 <pais nombre_pais="Macao" codigo="743">
@@ -4617,6 +4623,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriagenesis>shop</galeriagenesis>
 </pais>
 
 <pais nombre_pais="Bénin" codigo="284">
@@ -5195,6 +5202,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<galeriagenesis>shop</galeriagenesis>
 </pais>
 
 <pais nombre_pais="Rwanda" codigo="324">
