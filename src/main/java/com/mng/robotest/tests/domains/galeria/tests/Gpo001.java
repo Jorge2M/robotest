@@ -9,13 +9,13 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.From;
 import com.mng.robotest.tests.domains.galeria.steps.DataForScrollStep;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.beans.FactoryMenus;
 import com.mng.robotest.testslegacy.data.Color;
 
 public class Gpo001 extends TestBase {
 
-	private final PageGaleriaSteps pgGaleriaSteps = new PageGaleriaSteps();
+	private final GaleriaSteps galeriaSteps = new GaleriaSteps();
 	
 	@Override
 	public void execute() throws Exception {
@@ -31,8 +31,8 @@ public class Gpo001 extends TestBase {
 	private void changeTwoToFourColumns() {
 		var pageGaleria = (PageGaleriaDesktop)PageGaleria.make(From.MENU, channel, app, dataTest.getPais());
 		var listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
-		listArticlesGaleria2Cols = pgGaleriaSteps.selectListadoXColumnasDesktop(CUATRO, listArticlesGaleria2Cols);
-		pgGaleriaSteps.selectListadoXColumnasDesktop(DOS, listArticlesGaleria2Cols);
+		listArticlesGaleria2Cols = galeriaSteps.selectListadoXColumnasDesktop(CUATRO, listArticlesGaleria2Cols);
+		galeriaSteps.selectListadoXColumnasDesktop(DOS, listArticlesGaleria2Cols);
 	}
 
 	private void checkScroll() throws Exception {
@@ -42,22 +42,22 @@ public class Gpo001 extends TestBase {
 		dataScroll.setOrdenacionExpected(RECOMENDADOS);
 		dataScroll.setValidateArticlesExpected(false);
 		dataScroll.setValidaImgBroken(true);
-		var datosScrollFinalGaleria = pgGaleriaSteps.scrollFromFirstPage(dataScroll);
+		var datosScrollFinalGaleria = galeriaSteps.scrollFromFirstPage(dataScroll);
 		
 		if (channel.isDevice()) {
-			pgGaleriaSteps.backTo1erArticleMobilStep();
+			galeriaSteps.backTo1erArticleMobilStep();
 		}
 		int numArticulosPantalla = 
-			pgGaleriaSteps.seleccionaOrdenacionGaleria(PRECIO_DESC, nameMenuCamisas);
+			galeriaSteps.seleccionaOrdenacionGaleria(PRECIO_DESC, nameMenuCamisas);
 		
 		dataScroll.setValidateArticlesExpected(true);
 		dataScroll.setNumArticlesExpected(datosScrollFinalGaleria.getArticulosTotalesPagina());
-		pgGaleriaSteps.scrollFromFirstPage(dataScroll);	
+		galeriaSteps.scrollFromFirstPage(dataScroll);	
 		
-		pgGaleriaSteps.seleccionaOrdenacionGaleria(PRECIO_ASC, nameMenuCamisas, numArticulosPantalla);
-		pgGaleriaSteps.scrollFromFirstPage(dataScroll);
-		pgGaleriaSteps.selecColorFromArtGaleriaStep(1, 2);
-		pgGaleriaSteps.selecArticuloGaleriaStep(1);
+		galeriaSteps.seleccionaOrdenacionGaleria(PRECIO_ASC, nameMenuCamisas, numArticulosPantalla);
+		galeriaSteps.scrollFromFirstPage(dataScroll);
+		galeriaSteps.selecColorFromArtGaleriaStep(1, 2);
+		galeriaSteps.selecArticuloGaleriaStep(1);
 	}
 	
 }

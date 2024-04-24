@@ -51,6 +51,7 @@ public class Pais implements Serializable {
 	
 	String multidireccion;
 	String galeriagenesis;
+	String fichagenesis;
 	String emailuser;
 	String mobiluser;
 	
@@ -290,6 +291,30 @@ public class Pais implements Serializable {
 		List<AppEcom> listApps = new ArrayList<>();
 		if (getGaleriagenesis()!=null && getGaleriagenesis().length()>0) {
 			var listAppsStr = Arrays.asList(getGaleriagenesis().split(","));
+			for (String app : listAppsStr) {
+				listApps.add(AppEcom.valueOf(app));
+			}
+		}
+		return listApps;
+	}	
+	
+	public String getFichagenesis() {
+		return this.fichagenesis;
+	}
+
+	@XmlElement
+	public void setFichagenesis(String fichagenesis) {
+		this.fichagenesis = fichagenesis;
+	}
+	
+	public boolean isFichaGenesis(AppEcom app) {
+		return getTiendasFichaGenesis().contains(app);
+	}
+	
+	private List<AppEcom> getTiendasFichaGenesis() {
+		List<AppEcom> listApps = new ArrayList<>();
+		if (getFichagenesis()!=null && getFichagenesis().length()>0) {
+			var listAppsStr = Arrays.asList(getFichagenesis().split(","));
 			for (String app : listAppsStr) {
 				listApps.add(AppEcom.valueOf(app));
 			}

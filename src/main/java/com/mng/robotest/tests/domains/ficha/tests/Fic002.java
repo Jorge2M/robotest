@@ -10,15 +10,14 @@ import org.openqa.selenium.NoSuchElementException;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.buscador.steps.SecBuscadorSteps;
-import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
-import com.mng.robotest.tests.domains.ficha.pageobjects.PageFichaDevice;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecSliders.Slider;
-import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders.Slider;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.PageFichaDeviceNoGenesis;
+import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 
-import static com.mng.robotest.tests.domains.ficha.pageobjects.SecProductDescrDevice.TypePanel.*;
+import static com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecProductDescrDevice.TypePanel.*;
 import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
 import static com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType.*;
 
@@ -28,7 +27,7 @@ public class Fic002 extends TestBase {
 	private final boolean isTotalLook;
 
 	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	private final PageFichaSteps pFichaSteps = new PageFichaSteps();
+	private final FichaSteps fichaSteps = new FichaSteps();
 
 	public Fic002() throws Exception {
 		super();
@@ -60,13 +59,13 @@ public class Fic002 extends TestBase {
 	}
 	
 	private void checkGuiaDeTallas() {
-		pFichaSteps.selectGuiaDeTallas(app);		
+		fichaSteps.selectGuiaDeTallas(app);		
 	}
 	
 	private void checkSliders() {
 		Stream.of(Slider.values())
 			.filter(this::isSliderChequeable)
-			.forEach(pFichaSteps::checkSliderIfExists);
+			.forEach(fichaSteps::checkSliderIfExists);
 	}
 	private boolean isSliderChequeable(Slider slider) {
 		return 
@@ -75,46 +74,46 @@ public class Fic002 extends TestBase {
 	}
 
 	private void pageFichaDesktopTest() {
-		boolean isFichaAccesorio = pFichaSteps.getFicha().isFichaAccesorio();
-		pFichaSteps.getSecFotosNewSteps().validaLayoutFotosNew(isFichaAccesorio);
+		boolean isFichaAccesorio = fichaSteps.getFicha().isFichaAccesorio();
+		fichaSteps.getSecFotosNewSteps().validaLayoutFotosNew(isFichaAccesorio);
 		if (isShop()) {
-			pFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectEnvioYDevoluciones();
-			pFichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
+			fichaSteps.getSecBolsaButtonAndLinksNewSteps().selectEnvioYDevoluciones();
+			fichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
 		}
 
-		pFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(SHE);
-		pFichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.getCodigoPais());
+		fichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(SHE);
+		fichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.getCodigoPais());
 	}
 
 	private void pageFichaDeviceTest() {
 		if (isOutlet() && !isMobile()) {
-			pFichaSteps.validaExistsImgsCarruselIzqFichaOld();
+			fichaSteps.validaExistsImgsCarruselIzqFichaOld();
 		}
-		pFichaSteps.getSecProductDescDeviceSteps().checkAreInStateInitial();
-		var pageFicha = PageFicha.of(channel);
-		if (((PageFichaDevice)pageFicha).getNumImgsCarruselIzq() > 2) {
-			pFichaSteps.selectImgCarruselIzqFichaOld(2);
+		fichaSteps.getSecProductDescDeviceSteps().checkAreInStateInitial();
+		var pageFicha = new PageFichaDeviceNoGenesis();
+		if (pageFicha.getNumImgsCarruselIzq() > 2) {
+			fichaSteps.selectImgCarruselIzqFichaOld(2);
 		}
 
 		if (channel!=Channel.tablet) {
-			pFichaSteps.selectImagenCentralFichaOld();
+			fichaSteps.selectImagenCentralFichaOld();
 			if (channel.isDevice()) {
-				pFichaSteps.closeZoomImageCentralDevice();
+				fichaSteps.closeZoomImageCentralDevice();
 			}
 		}
 		if (DESCRIPTION.getListApps().contains(app) &&
 			!channel.isDevice()) {
-			pFichaSteps.getSecProductDescDeviceSteps().selectPanel(DESCRIPTION);
+			fichaSteps.getSecProductDescDeviceSteps().selectPanel(DESCRIPTION);
 		}
 		if (COMPOSITION.getListApps().contains(app)) {
-			pFichaSteps.getSecProductDescDeviceSteps().selectPanel(COMPOSITION);
+			fichaSteps.getSecProductDescDeviceSteps().selectPanel(COMPOSITION);
 		}
 		if (RETURNS.getListApps().contains(app)) {
-			pFichaSteps.getSecProductDescDeviceSteps().selectPanel(RETURNS);
+			fichaSteps.getSecProductDescDeviceSteps().selectPanel(RETURNS);
 		}
 		if (SHIPMENT.getListApps().contains(app) &&
 			!channel.isDevice()) {
-			pFichaSteps.getSecProductDescDeviceSteps().selectPanel(SHIPMENT);  
+			fichaSteps.getSecProductDescDeviceSteps().selectPanel(SHIPMENT);  
 		}
 	}
 	

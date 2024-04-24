@@ -11,10 +11,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
+import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.beans.FactoryMenus;
 import com.mng.robotest.tests.domains.menus.beans.Linea;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
@@ -99,7 +99,7 @@ public class MenuSteps extends StepBase {
 	 
 	private void checkSelecGroup(GroupWeb groupWeb) {
 		if (groupWeb.getGroup().getGroupResponse()==GroupResponse.ARTICLES) {
-			new PageGaleriaSteps().checkGaleriaAfeterSelectMenu();
+			new GaleriaSteps().checkGaleriaAfeterSelectMenu();
 		} else {
 			checkGroupSubMenuVisible(groupWeb);
 		}
@@ -164,7 +164,7 @@ public class MenuSteps extends StepBase {
 		String menuName = menu.getNameScreen();
 		isTitleAssociatedMenu(menuName);
 		if (isMenuWithArticles(menuName)) {
-			new PageGaleriaSteps().checkGaleriaAfeterSelectMenu();
+			new GaleriaSteps().checkGaleriaAfeterSelectMenu();
 		}
 		if (menu.getSubMenus()!=null && !menu.getSubMenus().isEmpty()) {
 			checkVisibilitySubmenus(menu);
@@ -206,7 +206,7 @@ public class MenuSteps extends StepBase {
 	}
 	
 	private void checkSelectSubMenu(MenuWeb menu) {
-		new PageGaleriaSteps().checkGaleriaAfeterSelectMenu();
+		new GaleriaSteps().checkGaleriaAfeterSelectMenu();
 		if (isDesktop() &&
 			menu.getArticlesSubMenu()!=null && !menu.getArticlesSubMenu().isEmpty()) {
 			checkArticlesContainsLiteralsDesktop(menu.getArticlesSubMenu());
@@ -313,7 +313,7 @@ public class MenuSteps extends StepBase {
 	private void checkContentGaleriaAfterClickLinea(Linea linea) {
 		switch (linea.getContentDeskType()) {
 		case ARTICULOS:
-			new PageGaleriaSteps().validaArtEnContenido(3);
+			new GaleriaSteps().validaArtEnContenido(3);
 			break;
 		case BANNERS:
 			if (!channel.isDevice()) {
@@ -521,7 +521,7 @@ public class MenuSteps extends StepBase {
 		driver.navigate().to(urlAccesoCorreo);
 
 		var datosArticulo = new DataFichaArt(article.getGarmentId(), "");
-		new PageFichaSteps().checkDetallesProducto(datosArticulo);
+		new FichaSteps().checkDetallesProducto(datosArticulo);
 	}	
 	
 }

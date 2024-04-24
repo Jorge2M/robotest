@@ -408,6 +408,7 @@ public class GetterProducts {
 		private List<MenuI> menusCandidates = 
 			Arrays.asList(
 				Menu.CAMISAS, 
+				Menu.VAQUEROS,
 				Menu.PIJAMAS,
 				Menu.FALDAS,
 				Menu.SHORTS,

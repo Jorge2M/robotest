@@ -6,8 +6,8 @@ import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaTyp
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
-import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
+import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
@@ -18,7 +18,7 @@ public class Fav002 extends TestBase {
 
 	private final PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
-	private final PageGaleriaSteps pageGaleriaSteps = new PageGaleriaSteps();
+	private final GaleriaSteps galeriaSteps = new GaleriaSteps();
 	
 	public Fav002(Pais pais, IdiomaPais idioma) {
 		super();
@@ -53,11 +53,11 @@ public class Fav002 extends TestBase {
 				.linea(HOME)
 				.group(BANO).build());
 		}
-		pageGaleriaSteps.selectArticulo(1);
+		galeriaSteps.selectArticulo(1);
 	}	
 
 	private void clickFavoritesInFicha() {
-		new PageFichaSteps().selectAnadirAFavoritos();
+		new FichaSteps().selectAnadirAFavoritos();
 	}	
 	
 	private void login() throws Exception {
@@ -75,9 +75,9 @@ public class Fav002 extends TestBase {
 		var firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
 		pageFavoritosSteps.clickArticuloImg(firstFavorite);
 		
-		var pageFichaSteps = new PageFichaSteps();
-		pageFichaSteps.selectFirstTallaAvailable();
-		pageFichaSteps.selectAnadirALaBolsaStep();
+		var fichaSteps = new FichaSteps();
+		fichaSteps.selectFirstTallaAvailable();
+		fichaSteps.selectAnadirALaBolsaStep();
 	}
 
 	private void clearFirstFavoriteFromFavorites() {

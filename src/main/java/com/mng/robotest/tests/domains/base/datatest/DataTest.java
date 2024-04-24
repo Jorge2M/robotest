@@ -105,6 +105,7 @@ public class DataTest implements Cloneable, Serializable {
 
 	public void setPais(Pais pais) {
 		this.pais = pais;
+		setIdioma(pais.getListIdiomas().get(0));
 	}
 	
 	public String getCodigoPais() {

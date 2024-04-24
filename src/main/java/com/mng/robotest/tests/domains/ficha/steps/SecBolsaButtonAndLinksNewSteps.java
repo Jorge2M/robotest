@@ -4,20 +4,20 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.ficha.pageobjects.ModCompartirNew;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecDetalleProduct;
-import com.mng.robotest.tests.domains.ficha.pageobjects.ModCompartirNew.IconSocial;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecProductDescrDevice.TypePanel;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ModCompartirNew;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ModCompartirNew.IconSocial;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecBolsaButtonAndLinks;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProduct;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecProductDescrDevice.TypePanel;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
-import static com.mng.robotest.tests.domains.ficha.pageobjects.SecBolsaButtonAndLinksNew.LinksAfterBolsa.*;
-import static com.mng.robotest.tests.domains.ficha.pageobjects.SecDetalleProduct.ItemBreadcrumb.*;
+import static com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecBolsaButtonAndLinks.LinksAfterBolsa.*;
+import static com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProduct.ItemBreadcrumb.*;
 
 public class SecBolsaButtonAndLinksNewSteps extends StepBase {
 
-	private final SecBolsaButtonAndLinksNew secBolsaButtonAndLinksNew = new SecBolsaButtonAndLinksNew();
+	private final SecBolsaButtonAndLinks secBolsaButtonAndLinksNew = new SecBolsaButtonAndLinks();
 	private final SecDetalleProduct secDetalleProductNew = new SecDetalleProduct();
 	
 	@Step (

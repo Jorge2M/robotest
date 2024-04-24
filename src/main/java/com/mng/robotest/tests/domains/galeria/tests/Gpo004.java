@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.steps.DataForScrollStep;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.testslegacy.data.Color;
 
 import static com.mng.robotest.tests.conf.AppEcom.*;
@@ -15,7 +15,7 @@ import static com.mng.robotest.testslegacy.data.Color.*;
 
 public class Gpo004 extends TestBase {
 
-	private final PageGaleriaSteps pgGaleriaSteps = new PageGaleriaSteps();
+	private final GaleriaSteps galeriaSteps = new GaleriaSteps();
 	private final DataForScrollStep dataScroll = new DataForScrollStep();
 	
 	public Gpo004() {
@@ -60,19 +60,19 @@ public class Gpo004 extends TestBase {
 
 	private void scrollToSecondPage() throws Exception {
 		dataScroll.setNumPageToScroll(2);
-		pgGaleriaSteps.scrollFromFirstPage(dataScroll);
+		galeriaSteps.scrollFromFirstPage(dataScroll);
 	}
 
 	private void selectArticleInOtherLabel() {
 		int position = (app==shop) ? 50 : 20; 
-		pgGaleriaSteps.selectArticuloEnPestanyaAndBack(position);
+		galeriaSteps.selectArticuloEnPestanyaAndBack(position);
 	}
 
 	private void scrollToLastAndSelectArticle() throws Exception {
 		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
-		pgGaleriaSteps.scrollFromFirstPage(dataScroll);
+		galeriaSteps.scrollFromFirstPage(dataScroll);
 		int position = (app==shop) ? 50 : 30;
-		pgGaleriaSteps.selectArticulo(position);
+		galeriaSteps.selectArticulo(position);
 		goBackToGalery();
 		if (!channel.isDevice()) {
 			selectArticleInOtherLabel();
@@ -81,14 +81,14 @@ public class Gpo004 extends TestBase {
 
 	private void goBackToGalery() {
 		back();
-		pgGaleriaSteps.checkArticleGaleriaLoaded();
+		galeriaSteps.checkArticleGaleriaLoaded();
 	}
 
 	private void scrollToLastAndCheck(int articulosTotalesPagina) throws Exception {
 		dataScroll.setValidateArticlesExpected(true);
 		dataScroll.setNumArticlesExpected(articulosTotalesPagina);
 		dataScroll.setValidaImgBroken(false);
-		pgGaleriaSteps.scrollFromFirstPage(dataScroll);
+		galeriaSteps.scrollFromFirstPage(dataScroll);
 	}
 
 }

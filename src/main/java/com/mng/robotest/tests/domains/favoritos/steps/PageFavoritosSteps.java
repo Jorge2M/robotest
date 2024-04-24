@@ -6,7 +6,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.favoritos.pageobjects.PageFavoritos;
-import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
+import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -129,7 +129,7 @@ public class PageFavoritosSteps extends StepBase {
 		String refProducto = artToPlay.getRefProducto();
 		String codigoColor = artToPlay.getCodigoColor();
 		pgFavoritos.clickImgProducto(refProducto, codigoColor);
-		new PageFichaSteps().checkIsFichaArtDisponible(refProducto, 2);
+		new FichaSteps().checkIsFichaArtDisponible(refProducto, 2);
 	}
 	
 }

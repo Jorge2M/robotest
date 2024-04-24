@@ -4,10 +4,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.ficha.beans.DataFoto;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecFotosNew;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecFotosNew;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
-import static com.mng.robotest.tests.domains.ficha.pageobjects.TipoImagenProducto.*;
+import static com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.TipoImagenProducto.*;
 
 public class SecFotosNewSteps extends StepBase {
 

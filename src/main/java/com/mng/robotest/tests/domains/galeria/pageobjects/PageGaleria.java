@@ -24,7 +24,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecPreciosArti
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.SecTallasArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.filters.SecFiltros;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps.TypeActionFav;
+import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActionFav;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Color;
@@ -373,7 +373,7 @@ public abstract class PageGaleria extends PageBase {
 	}
 
 	public boolean backTo1erArticulo(String xpathIconoUpGalery) {
-		scrollVertical(-50); //Assure icon showed
+		scrollEjeY(-50); //Assure icon showed
 		clickIconoUpToGaleryIfVisible(xpathIconoUpGalery);
 		boolean isVisible1erArt = isVisibleArticuloUntil(1, 2);
 		waitMillis(1000);
@@ -502,7 +502,7 @@ public abstract class PageGaleria extends PageBase {
 			By byPagina = By.xpath(getXPathPagina(paginaActual));
 			if (state(VISIBLE, byPagina).check()) {
 				moveToElement(byPagina);
-				scrollVertical(+50);
+				scrollEjeY(+50);
 				paginaActual+=1;
 			} else {
 				lastPageReached = true;
@@ -544,7 +544,7 @@ public abstract class PageGaleria extends PageBase {
 		forceVisibilityImageArticle(articulo);
 		if (isDesktop() && isOutlet()) {
 			//En Desktop-Outlet la cabecera tapa en ocasiones el artículo  
-			scrollVertical(-300);
+			scrollEjeY(-300);
 		}
 		click(articulo).waitLoadPage(30).exec();
 	}
@@ -557,7 +557,7 @@ public abstract class PageGaleria extends PageBase {
 			}
 			driver.manage().window().setSize(new Dimension(i*200,i*200));
 			driver.manage().window().setSize(originalSize);
-			scrollVertical(-800);
+			scrollEjeY(-800);
 			moveToElement(articulo);
 		}
 	}
@@ -585,7 +585,7 @@ public abstract class PageGaleria extends PageBase {
 		//Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible
 		String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
 
-		PageFicha pageFicha = PageFicha.of(channel);
+		var pageFicha = PageFicha.make(channel, app, dataTest.getPais());
 		pageFicha.isPage(10);
 
 		return detailWindowHandle;

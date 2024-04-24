@@ -5,8 +5,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import com.mng.robotest.tests.domains.availability.exceptions.CatalogsNotFoundException;
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
+import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.steps.MenuSteps;
 import com.mng.robotest.tests.domains.transversal.home.steps.PageLandingSteps;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
@@ -67,21 +67,21 @@ public class Ava001 extends TestBase {
 	
     private void checkFichasAvailable() throws Exception {
         var randomGarmentIds = getRandomUrlProductsPage();
-        var pgFichaSteps = new PageFichaSteps();
+        var fichaSteps = new FichaSteps();
         for (int i=0; i<randomGarmentIds.size(); i++) {
         	String urlFicha = randomGarmentIds.get(i);
         	if (i==0) {
-        		pgFichaSteps.loadFichaWithRetry(urlFicha);
+        		fichaSteps.loadFichaWithRetry(urlFicha);
         	} else {
-        		pgFichaSteps.loadFicha(urlFicha);
+        		fichaSteps.loadFicha(urlFicha);
         	}
         }
     }	
     
     private void checkCatalogsAvailable() {
-    	var pgGaleriaSteps = new PageGaleriaSteps();
+    	var galeriaSteps = new GaleriaSteps();
         for (var urlCatalog : retrieveRandomUrlCatalogsFromMenu()) {
-           	pgGaleriaSteps.loadCatalog(urlCatalog);
+           	galeriaSteps.loadCatalog(urlCatalog);
         }
     }    
     private List<String> retrieveRandomUrlCatalogsFromMenu() throws CatalogsNotFoundException {

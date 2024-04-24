@@ -5,7 +5,7 @@ import static com.mng.robotest.testslegacy.data.PaisShop.*;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.article.ModalArticleNotAvailable;
 import com.mng.robotest.tests.domains.galeria.steps.ModalArticleNotAvailableSteps;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 
 /**
  * Control textos legales "Avisame + suscripción":
@@ -29,7 +29,7 @@ public class Leg005 extends TestBase {
 	private void goToAvisame() throws Exception {
 		access();
 		clickMenu("Camisas");
-		new PageGaleriaSteps().selectTallaNoDisponibleArticulo();
+		new GaleriaSteps().selectTallaNoDisponibleArticulo();
 		new ModalArticleNotAvailableSteps().checkVisibleAvisame();
 	}
 	

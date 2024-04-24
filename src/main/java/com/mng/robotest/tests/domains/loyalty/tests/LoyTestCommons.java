@@ -8,7 +8,7 @@ import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.compra.pageobjects.beans.DiscountLikes;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.loyalty.beans.User;
 import com.mng.robotest.tests.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
@@ -42,7 +42,7 @@ public class LoyTestCommons extends StepBase {
 		} else {
 			clickMenu(JERSEIS_Y_CARDIGANS_SHE);
 		}
-		new PageGaleriaSteps().selectTallaAvailable();
+		new GaleriaSteps().selectTallaAvailable();
         new SecBolsaSteps().selectButtonComprar();
 	}
 	

@@ -4,19 +4,16 @@ import java.net.URI;
 
 import org.openqa.selenium.By;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
-import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
+import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.transversal.banners.pageobjects.DataBanner;
 import com.mng.robotest.tests.domains.transversal.banners.pageobjects.ManagerBannersScreen;
 import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
-import com.mng.robotest.testslegacy.beans.Pais;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -39,7 +36,7 @@ public class SecBannersSteps extends StepBase {
 		int sizeListBanners = managerBannersScreen.getListDataBanners().size();
 		for (int posBanner=1; posBanner<=sizeListBanners && posBanner<=maximoBanners; posBanner++) {
 			boolean makeValidations = true;
-			seleccionarBanner(posBanner, makeValidations, app, channel, dataTest.getPais());
+			seleccionarBanner(posBanner, makeValidations);
 			driver.get(urlPagPrincipal);
 			PageObjTM.waitForPageLoaded(driver);
 			managerBannersScreen.reloadBanners(); //For avoid StaleElement Exception
@@ -47,10 +44,9 @@ public class SecBannersSteps extends StepBase {
 		}
 	}
 	
-	public void seleccionarBanner(int posBanner, boolean validaciones, AppEcom app, Channel channel, Pais pais) 
-	throws Exception {
+	public void seleccionarBanner(int posBanner, boolean validaciones) throws Exception {
 		DataBanner dataBanner = managerBannersScreen.getBanner(posBanner);
-		seleccionarBanner(dataBanner, validaciones, app, channel, pais);
+		seleccionarBanner(dataBanner, validaciones);
 	}
 	
 	@Step (
@@ -60,8 +56,7 @@ public class SecBannersSteps extends StepBase {
 				"<b>imagen</b>: #{dataBanner.getSrcImage()}<br>" + 
 				"<b>texto</b>: #{dataBanner.getText()}",
 		expected="Aparece una página correcta (con banners o artículos)")
-	public void seleccionarBanner(DataBanner dataBanner, boolean validaciones, AppEcom app, Channel channel, Pais pais) 
-	throws Exception {
+	public void seleccionarBanner(DataBanner dataBanner, boolean validaciones) throws Exception {
 		String urlPagPrincipal = driver.getCurrentUrl();
 		URI uriPagPrincipal = new URI(urlPagPrincipal);
 		int elementosPagPrincipal = driver.findElements(By.xpath("//*")).size();
@@ -69,20 +64,20 @@ public class SecBannersSteps extends StepBase {
 		managerBannersScreen.clickBannerAndWaitLoad(dataBanner);
 		dataBanner.setUrlDestino(driver.getCurrentUrl());
 		if (validaciones) {
-			validacionesGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal);
+			checkGeneralesBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal);
 			switch (dataBanner.getDestinoType()) {
 			case FICHA:
-				new PageFichaSteps().checkIsFicha(2);
+				new FichaSteps().checkIsFicha(2);
 				break;
 			default:				
 			case OTROS:
-				validacionesBannerEstandar(3, channel);
+				validacionesBannerEstandar(3);
 				break;
 			}
 		}
 	}
 		
-	public void validacionesGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre) 
+	public void checkGeneralesBanner(String urlPagPadre, URI uriPagPadre, int elementosPagPadre) 
 			throws Exception {
 		checksGeneralesBanner(urlPagPadre, uriPagPadre, elementosPagPadre);
 		checksGeneric().imgsBroken().execute();
@@ -130,9 +125,9 @@ public class SecBannersSteps extends StepBase {
 			"- Ficha<br>" +
 			"- Bloque de contenido con imágenes o página acceso",
 		level=WARN)
-	public boolean validacionesBannerEstandar(int seconds, Channel channel) {
+	public boolean validacionesBannerEstandar(int seconds) {
 		for (int i=0; i<seconds; i++) {
-			if (checksStandardBanners(channel)) {
+			if (checksStandardBanners()) {
 				return true;
 			}
 			waitMillis(1000);
@@ -140,10 +135,10 @@ public class SecBannersSteps extends StepBase {
 		return false;
 	}
 	
-	private boolean checksStandardBanners(Channel channel) {
-		if (!pageLanding.haySecc_Art_Banners() &&
+	private boolean checksStandardBanners() {
+		if (!pageLanding.isSeccArtBanners() &&
 			!pageLanding.hayImgsEnContenido()) {
-			PageFicha pageFicha = PageFicha.of(channel);
+			var pageFicha = PageFicha.make(channel, app, dataTest.getPais());
 			return pageFicha.isPage(0);
 		}
 		return true; 
@@ -157,4 +152,5 @@ public class SecBannersSteps extends StepBase {
 		boolean existsEditItems = pageLanding.hayItemsEdits();
 		return (existBanners || existsMaps || existsEditItems);
 	}
+	
 }

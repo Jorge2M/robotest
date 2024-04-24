@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.mng.robotest.tests.domains.ficha.beans.DataFoto;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.TipoImagenProducto;
 
 public class DataFotoTest {
 

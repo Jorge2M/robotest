@@ -1,13 +1,19 @@
 package com.mng.robotest.tests.domains.ficha.pageobjects;
 
+import java.util.List;
+
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecSliders.Slider;
-import com.mng.robotest.testslegacy.data.PaisShop;
+import com.mng.robotest.tests.conf.AppEcom;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.PageFichaDesktopNoGenesis;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.PageFichaDeviceNoGenesis;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ColorType;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders.Slider;
+import com.mng.robotest.tests.domains.ficha.pageobjects.genesis.PageFichaGenesis;
+import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
-public abstract class PageFicha extends PageBase {
+public interface PageFicha {
 
 	public abstract boolean isPage(int seconds);
 	public abstract boolean isFichaArticuloUntil(String refArticulo, int seconds);
@@ -23,83 +29,57 @@ public abstract class PageFicha extends PageBase {
 	public abstract void selectBuscarEnTiendaLink();
 	public abstract boolean isVisibleBuscarEnTiendaLink();
 	public abstract boolean isModalNoStockVisible(int seconds);
+	
+	public boolean isClickableColor(String colourCode);
+	public void clickColor(int posColor);
+	public void selectColor(String color);
+	public void selectColorWaitingForAvailability(String colourCode);
+	public String getCodeColor(ColorType colorType);
+	public boolean isPresentColor(ColorType colorType);
+	public List<String> getColorsGarment();
+	public String getTituloArt();
+	public String getPrecioFinalArticulo();
+	public String getNombreColorSelected();
+	public String getPrecioTachadoFromFichaArt();
+	public void selectTallaByValue(String tallaValue);
+	public boolean selectGuiaDeTallasIfVisible();
+	public boolean isVisibleCapaAvisame();
+	public boolean isVisibleAvisoSeleccionTalla();
+	public boolean isVisibleListTallasForSelectUntil(int seconds);
 
-	protected final SecDataProduct secDataProduct = new SecDataProduct(); //Name, color, talla section
-	protected final SecFitFinder secFitFinder = new SecFitFinder(); //Guía de tallas v.Fit Finder
-	protected final SecSliders secSliders = new SecSliders();
-
-	public SecDataProduct getSecDataProduct() {
-		return secDataProduct;
-	}
-
-	public static PageFicha of(Channel channel) {
+	public ArticuloScreen getArticuloObject();
+	public boolean isTallaUnica();
+	public Talla getTallaSelected();
+	public String getTallaSelectedAlf();
+	public void selectTallaByValue(Talla talla);
+	public void selectTallaByLabel(String tallaLabel);
+	public void selectTallaByIndex(int posicion);
+	public void selectFirstTallaAvailable();
+	public String getTallaAlf(int posicion);
+	public String getTallaCodNum(int posicion);
+	public int getNumOptionsTallasNoDisponibles();
+	public int getNumOptionsTallas();
+	public void closeTallas();
+	public boolean isFichaAccesorio();
+	public int getNumColors();
+	public boolean isVisibleSlider(Slider slider);
+	public int getNumArtVisiblesSlider(Slider slider);
+	
+	public boolean isVisibleStickyContent(int seconds);
+	public boolean isInvisibleStickyContent(int seconds);
+	public boolean isVisibleReferenciaStickyContent(String referencia);
+	public boolean isVisibleTallaLabelStickyContent(String tallaLabel);
+	public boolean isVisibleColorCodeStickyContent(String colorCode);
+	
+	public static PageFicha make(Channel channel, AppEcom app, Pais pais) {
+		if (pais.isFichaGenesis(app)) {
+			return new PageFichaGenesis();
+		}
 		if (channel.isDevice()) {
-			return new PageFichaDevice();
+			return new PageFichaDeviceNoGenesis();
 		} else {
-			return new PageFichaDesktop();
+			return new PageFichaDesktopNoGenesis();
 		}
 	}
-
-	public ArticuloScreen getArticuloObject() {
-		return (secDataProduct.getArticuloObject());
-	}
-
-	public boolean isTallaUnica() {
-		return (secDataProduct.getSecSelTallas().isTallaUnica());
-	}
-
-	public Talla getTallaSelected() {
-		return (secDataProduct.getSecSelTallas().getTallaSelected(app, PaisShop.from(dataTest.getCodigoPais())));
-	}
-
-	public void selectTallaByValue(Talla talla) {
-		secDataProduct.getSecSelTallas().selectTallaByValue(talla);
-	}
-
-	public void selectTallaByLabel(String tallaLabel) {
-		secDataProduct.getSecSelTallas().selectTallaByLabel(tallaLabel);
-	}
-
-	public void selectTallaByIndex(int posicion) {
-		secDataProduct.getSecSelTallas().selectTallaByIndex(posicion);
-	}
-
-	public void selectFirstTallaAvailable() {
-		secDataProduct.getSecSelTallas().selectFirstTallaAvailable();
-	}
-
-	public String getTallaAlf(int posicion) {
-		return secDataProduct.getSecSelTallas().getTallaAlf(posicion);
-	}
-
-	public String getTallaCodNum(int posicion) {
-		return secDataProduct.getSecSelTallas().getTallaCodNum(posicion);
-	}
-
-	public int getNumOptionsTallasNoDisponibles() {
-		return secDataProduct.getSecSelTallas().getNumOptionsTallasNoDisponibles();
-	}
-
-	public int getNumOptionsTallas() {
-		return secDataProduct.getSecSelTallas().getNumOptionsTallas();
-	}
-	public void closeTallas() {
-		secDataProduct.getSecSelTallas().closeTallas();
-	}	
-
-	public boolean isFichaAccesorio() {
-		return (this.driver.getCurrentUrl().contains("accesorio"));
-	}
-
-	public int getNumColors() {
-		return secDataProduct.getNumColors();
-	}
 	
-	public boolean isVisibleSlider(Slider slider) {
-		return secSliders.isVisible(slider);
-	}
-	public int getNumArtVisiblesSlider(Slider slider) {
-		return secSliders.getNumVisibleArticles(slider);
-	}
-
 }

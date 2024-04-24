@@ -4,9 +4,9 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecProductDescrDevice;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecProductDescrDevice.TypePanel;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecProductDescrDevice.TypeStatePanel;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecProductDescrDevice;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecProductDescrDevice.TypePanel;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecProductDescrDevice.TypeStatePanel;
 
 public class SecProductDescrDeviceSteps extends StepBase {
 	

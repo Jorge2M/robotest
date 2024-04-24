@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.ficha.beans;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.mng.robotest.tests.domains.ficha.pageobjects.TipoImagenProducto;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.TipoImagenProducto;
 
 
 public class DataFoto {

@@ -6,21 +6,28 @@ import org.testng.annotations.Test;
 public class Ficha {
 	
 	@Test (
-		groups={"Ficha", "Smoke", "Canal:all_App:all"}, alwaysRun=true,
-		description="[Usuario registrado] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
-	public void FIC001_FichaFromSearch_PrimaryFeatures_Reg() throws Exception {
+		groups={"Ficha", "Smoke", "Canal:all_App:all"},
+		description="Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
+	public void FIC001_PrimaryFeatures_Reg() throws Exception {
 		new Fic001().execute();
 	}
+	
+	@Test (
+		groups={"Ficha", "Smoke", "Canal:all_App:all"},
+		description="[Liechtenstein][versión Genesis] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
+	public void FIC006_PrimaryFeatures_Genesis_Reg() throws Exception {
+		new Fic006().execute();
+	}	
 
 	@Test (
-		groups={"Ficha", "Smoke", "Canal:all_App:all"}, alwaysRun=true, 
+		groups={"Ficha", "Smoke", "Canal:all_App:all"},
 		description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones, total look")
 	public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg() throws Exception {
 		new Fic002().execute();
 	}
 
 	@Test (
-		groups={"Ficha", "Smoke", "Canal:desktop_App:shop"}, alwaysRun=true, 
+		groups={"Ficha", "Smoke", "Canal:desktop_App:shop"}, 
 		description="[Usuario no registrado] Desde Corea/coreano, se testea una ficha con origen la Galería validando el panel KcSafety")
 	public void FIC003_FichaFromGalery_CheckKcSafety() throws Exception {
 		new Fic003().execute();

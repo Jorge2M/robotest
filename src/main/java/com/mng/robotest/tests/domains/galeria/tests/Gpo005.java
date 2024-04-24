@@ -5,12 +5,12 @@ import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*
 import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
 
 public class Gpo005 extends TestBase {
 
-	private final PageGaleriaSteps pgGaleriaSteps = new PageGaleriaSteps();
+	private final GaleriaSteps galeriaSteps = new GaleriaSteps();
 	
 	@Override
 	public void execute() throws Exception {
@@ -37,7 +37,7 @@ public class Gpo005 extends TestBase {
 	}
 	
 	private void selectPricesInterval() throws Exception {
-		pgGaleriaSteps.getSecSelectorPreciosSteps().selectInterval();
+		galeriaSteps.getSecSelectorPreciosSteps().selectInterval();
 	}
 	
 	private void clickSubmenu() {

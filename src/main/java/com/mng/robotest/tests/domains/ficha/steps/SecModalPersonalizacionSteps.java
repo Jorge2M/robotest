@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
-import com.mng.robotest.tests.domains.ficha.pageobjects.SecModalPersonalizacion.ModalElement;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecModalPersonalizacion.ModalElement;
 
 import org.openqa.selenium.WebElement;
 

@@ -16,6 +16,7 @@ public class ArticuloScreen {
 	String colorName = "";
 	String codigoColor = "";
 	Talla talla;
+	String tallaAlf;
 	String precio = "";
 	String precioSinDesc = "";
 	ValeDiscount valePais=null;
@@ -71,6 +72,9 @@ public class ArticuloScreen {
 	public Talla getTalla() {
 		return this.talla;
 	}
+	public String getTallaAlf() {
+		return this.tallaAlf;
+	}
 	
 	public String getPrecio() {
 		return this.precio;
@@ -90,6 +94,10 @@ public class ArticuloScreen {
 	
 	public void setTalla(Talla talla) {
 		this.talla = talla;
+	}
+	
+	public void setTallaAlf(String tallaAlf) {
+		this.tallaAlf = tallaAlf;
 	}
 	
 	public int getNumero() {

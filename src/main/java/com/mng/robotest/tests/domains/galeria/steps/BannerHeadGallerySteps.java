@@ -10,7 +10,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps.TypeGalery;
+import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeGalery;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
@@ -20,11 +20,11 @@ import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
 public class BannerHeadGallerySteps extends StepBase {
 
-	private final PageGaleriaSteps pgGaleriaParentSteps;
+	private final GaleriaSteps galeriaParentSteps;
 	private final PageGaleriaDesktop pgGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(Channel.desktop, app, dataTest.getPais());
 
-	public BannerHeadGallerySteps(PageGaleriaSteps pgGaleriaParentSteps) {
-		this.pgGaleriaParentSteps = pgGaleriaParentSteps;
+	public BannerHeadGallerySteps(GaleriaSteps galeriaParentSteps) {
+		this.galeriaParentSteps = galeriaParentSteps;
 	}
 
 	public void checkBannerSuperiorIfExistsDesktop() {
@@ -59,7 +59,7 @@ public class BannerHeadGallerySteps extends StepBase {
 			expected="Aparece una galería de artículos")
 	public void clickBannerSuperiorIfLinkableDesktop() {
 		pgGaleriaDesktop.clickBannerHeadIfClickable();
-		pgGaleriaParentSteps.validaArtEnContenido(3);
+		galeriaParentSteps.validaArtEnContenido(3);
 	}
 
 	@Validation

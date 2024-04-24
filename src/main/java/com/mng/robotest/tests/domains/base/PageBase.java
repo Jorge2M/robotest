@@ -38,6 +38,7 @@ public class PageBase extends PageObjTM {
 	protected DataMantoTest dataMantoTest = TestMantoBase.DATA_MANTO_TEST.get();
 	protected LegalTextsPage legalTexts;
 	protected static final String KEYS_CLEAR_INPUT = Keys.chord(Keys.CONTROL,"a", Keys.DELETE);
+	protected static final String TAG = "@TAG_ELEMENT";
 	
 	public PageBase() {
 		super();
@@ -143,7 +144,7 @@ public class PageBase extends PageObjTM {
 		return true;
 	}
 	
-	protected void scrollVertical(int y) {
+	protected void scrollEjeY(int y) {
 		((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + y + ")", "");
 	}
 	

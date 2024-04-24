@@ -1038,6 +1038,7 @@
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop,outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Lithuania" codigo="055">

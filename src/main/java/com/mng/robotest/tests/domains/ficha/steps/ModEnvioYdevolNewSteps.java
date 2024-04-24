@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.ficha.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.ficha.pageobjects.ModEnvioYdevolNew;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ModEnvioYdevolNew;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 

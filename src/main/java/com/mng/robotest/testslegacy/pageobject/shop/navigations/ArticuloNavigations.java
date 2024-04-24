@@ -12,7 +12,7 @@ import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
 public class ArticuloNavigations extends StepBase {
 
-	private final PageFicha pgFicha = PageFicha.of(channel);
+	private final PageFicha pgFicha = PageFicha.make(channel, app, dataTest.getPais());
 	
 	public ArticuloScreen selectArticuloTallaColorByRef(Article articleStock) {
 		var articulo = new ArticuloScreen();
@@ -28,9 +28,9 @@ public class ArticuloNavigations extends StepBase {
 		var talla = selectTalla(articleStock);
 		articulo.setTalla(talla);
 
-		articulo.setPrecio(pgFicha.getSecDataProduct().getPrecioFinalArticulo());
+		articulo.setPrecio(pgFicha.getPrecioFinalArticulo());
 		articulo.setPrecioSinDesc(getPrecioOriginal(articulo));
-		articulo.setNombre(pgFicha.getSecDataProduct().getTituloArt());
+		articulo.setNombre(pgFicha.getTituloArt());
 		
 		return articulo;
 	}
@@ -55,10 +55,10 @@ public class ArticuloNavigations extends StepBase {
 		if (articleStock.getColor()!=null) {
 			idColor = articleStock.getColor().getId();
 		}
-		if (pgFicha.getSecDataProduct().isClickableColor(idColor)) {
-			pgFicha.getSecDataProduct().selectColorWaitingForAvailability(idColor);
+		if (pgFicha.isClickableColor(idColor)) {
+			pgFicha.selectColorWaitingForAvailability(idColor);
 		}
-		String nameColor = pgFicha.getSecDataProduct().getNombreColorSelected();
+		String nameColor = pgFicha.getNombreColorSelected();
 		return Pair.of(idColor, nameColor);
 	}
 	
@@ -78,7 +78,7 @@ public class ArticuloNavigations extends StepBase {
 	}	
 	
 	private String getPrecioOriginal(ArticuloScreen articulo) {
-		String precioSinDesc = pgFicha.getSecDataProduct().getPrecioTachadoFromFichaArt();
+		String precioSinDesc = pgFicha.getPrecioTachadoFromFichaArt();
 		if (precioSinDesc!=null && "".compareTo(precioSinDesc)!=0) {
 			return precioSinDesc;
 		} else {
@@ -88,9 +88,9 @@ public class ArticuloNavigations extends StepBase {
 
 	private void selectColorIfExists(String colourCode) {
 		if (colourCode!=null && "".compareTo(colourCode)!=0 &&
-			pgFicha.getSecDataProduct().isClickableColor(colourCode) &&
+			pgFicha.isClickableColor(colourCode) &&
 			pgFicha.isPage(5)) {
-			pgFicha.getSecDataProduct().selectColorWaitingForAvailability(colourCode);
+			pgFicha.selectColorWaitingForAvailability(colourCode);
 		}
 	}
 	

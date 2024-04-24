@@ -48,7 +48,7 @@ public class SecColoresArticuloDesktopNormal extends SecColoresArticuloDesktop {
 			if (state(PRESENT, xpathArticulo).check()) {
 				return Optional.of(getElement(xpathArticulo));
 			}
-			scrollVertical(1000);
+			scrollEjeY(1000);
 			waitMillis(1000);
 		}
 		return Optional.empty();		

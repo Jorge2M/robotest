@@ -10,7 +10,7 @@ import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.buscador.steps.SecBuscadorSteps;
 import com.mng.robotest.tests.domains.ficha.steps.ModalBuscadorTiendasSteps;
-import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
+import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
@@ -24,13 +24,13 @@ public class Fic001 extends TestBase {
 	private final List<FilterType> filterOnline = Arrays.asList(FilterType.ONLINE);
 	private final List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NO_ONLINE, FilterType.MANY_COLORS);
 	
-	private final PageFichaSteps pageFichaSteps = new PageFichaSteps();
+	private final FichaSteps fichaSteps = new FichaSteps();
 	
 	public Fic001() throws Exception {
 		super();
 		dataTest.setUserRegistered(true);
 		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), app, driver)
-				.numProducts(80)
+				.minProducts(200)
 				.build();
 
 		productOnline = getterProducts.getOne(filterOnline);
@@ -50,14 +50,14 @@ public class Fic001 extends TestBase {
 	private void articleOnlineTest() {
 		var articleOnline = Article.getArticleForTest(productOnline.get());
 		new SecBuscadorSteps().searchArticulo(articleOnline, filterOnline);
-		pageFichaSteps.checkLinkDispTiendaInvisible();
+		fichaSteps.checkLinkDispTiendaInvisible();
 	}
 	
 	private void articleNoOnlineTest() throws Exception {
 		var articleNoOnlineWithColors = Article.getArticleForTest(produtNoOnlineWithColors.get());
 		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
 		if (isShop() && channel!=Channel.tablet) {
-			pageFichaSteps.selectBuscarEnTiendaButton();
+			fichaSteps.selectBuscarEnTiendaButton();
 			new ModalBuscadorTiendasSteps().close();
 		}
 
@@ -66,30 +66,30 @@ public class Fic001 extends TestBase {
 			checkFavorites();
 		}
 		
-		pageFichaSteps.selectAnadirALaBolsaTallaPrevSiSelected(articulo);
+		fichaSteps.selectAnadirALaBolsaTallaPrevSiSelected(articulo);
 	}
 
 	private ArticuloScreen selectColorAndTalla() throws Exception {
 		boolean isTallaUnica = checkClickAddBolsaWithoutSelectTalla();
 		var articulo = new ArticuloScreen(produtNoOnlineWithColors.get());
-		pageFichaSteps.selectColorAndSaveData(articulo);
-		pageFichaSteps.selectTallaAndSaveData(articulo);
+		fichaSteps.selectColorAndSaveData(articulo);
+		fichaSteps.selectTallaAndSaveData(articulo);
 		ifTallaUnicaClearBolsa(isTallaUnica);
 		return articulo;
 	}	
 	
 	private boolean checkClickAddBolsaWithoutSelectTalla() {
-		boolean isTallaUnica = pageFichaSteps.selectAnadirALaBolsaTallaPrevNoSelected();
+		boolean isTallaUnica = fichaSteps.selectAnadirALaBolsaTallaPrevNoSelected();
 		if (channel.isDevice()) {
-			pageFichaSteps.closeTallas();
+			fichaSteps.closeTallas();
 		}
 		return isTallaUnica;
 	}
 	
 	private void checkFavorites() {
-		pageFichaSteps.selectAnadirAFavoritos();
-		pageFichaSteps.changeColorGarment();
-		pageFichaSteps.selectRemoveFromFavoritos();		
+		fichaSteps.selectAnadirAFavoritos();
+		fichaSteps.changeColorGarment();
+		fichaSteps.selectRemoveFromFavoritos();		
 	}
 
 	private void stopIfNoPresentArticleNoOnlineWithColors() throws NotFoundException {

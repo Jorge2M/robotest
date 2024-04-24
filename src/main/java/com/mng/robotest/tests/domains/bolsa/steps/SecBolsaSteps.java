@@ -16,7 +16,7 @@ import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1DktopCheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1EnvioCheckoutMobilSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
-import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
+import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
@@ -399,7 +399,7 @@ public class SecBolsaSteps extends StepBase {
 		secBolsa.click1erArticuloBolsa();
 
 		String refArticulo = articuloClickado.getReferencia();
-		new PageFichaSteps().checkIsFichaArtDisponible(refArticulo, 3);
+		new FichaSteps().checkIsFichaArtDisponible(refArticulo, 3);
 		checksDefault();
 	}
 	

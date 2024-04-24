@@ -1,12 +1,12 @@
 package com.mng.robotest.tests.domains.favoritos.tests;
 
-import static com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps.TypeActionFav.*;
+import static com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActionFav.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.NumColumnas;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -14,7 +14,7 @@ import com.mng.robotest.testslegacy.beans.Pais;
 public class Fav001 extends TestBase {
 
 	private final PageFavoritosSteps pFavoritosSteps = new PageFavoritosSteps();
-	private final PageGaleriaSteps pGaleriaSteps = new PageGaleriaSteps();
+	private final GaleriaSteps galeriaSteps = new GaleriaSteps();
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 	
 	public Fav001(Pais pais, IdiomaPais idioma) {
@@ -43,13 +43,13 @@ public class Fav001 extends TestBase {
 	private void goToVestidosGalery() {
 		clickMenu("Vestidos");
 		if (isDesktop()) {
-			pGaleriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO);
+			galeriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO);
 		}
 	}	
 	
 	private void clickFavoritesInGalery() throws Exception {
-		pGaleriaSteps.clickArticlesHearthIcons(MARCAR, 2, 3, 4);
-		pGaleriaSteps.clickArticlesHearthIcons(DESMARCAR, 3);
+		galeriaSteps.clickArticlesHearthIcons(MARCAR, 2, 3, 4);
+		galeriaSteps.clickArticlesHearthIcons(DESMARCAR, 3);
 	}	
 
 	private void goToFavorites() {

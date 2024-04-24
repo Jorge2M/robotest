@@ -7,7 +7,6 @@ import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.Us
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.tests.conf.testab.TestABactive;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountry;
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalGeolocation;
@@ -51,7 +50,6 @@ public class AccesoFlows extends StepBase {
 	public void previousAccessShopSteps() throws Exception {
 		reloadIfServiceUnavailable();
 		new PageJCAS().identJCASifExists();
-		new TestABactive().currentTestABsToActivate();
 	}
 	
 	public void manageCookies(boolean acceptCookies) {

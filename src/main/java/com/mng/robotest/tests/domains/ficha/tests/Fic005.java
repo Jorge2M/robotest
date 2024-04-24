@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.buscador.steps.SecBuscadorSteps;
-import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
+import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.ficha.steps.SecModalPersonalizacionSteps;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
@@ -24,7 +24,7 @@ public class Fic005 extends TestBase {
 	private final Optional<Article> articlePersonalizable;
 	
 	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
-	private final PageFichaSteps pgFichaSteps = new PageFichaSteps();
+	private final FichaSteps fichaSteps = new FichaSteps();
 	private final SecModalPersonalizacionSteps mdPersonalizacionSteps = new SecModalPersonalizacionSteps();
 	
 	public Fic005() throws Exception {
@@ -40,7 +40,7 @@ public class Fic005 extends TestBase {
 		access();
  		searchAndCheckArticlePersonalizable();
 		
-		pgFichaSteps.selectFirstTallaAvailable();
+		fichaSteps.selectFirstTallaAvailable();
 		mdPersonalizacionSteps.selectLinkPersonalizacion();
 		mdPersonalizacionSteps.selectIconCustomization();
 		mdPersonalizacionSteps.selectFirstIcon();
@@ -59,9 +59,9 @@ public class Fic005 extends TestBase {
 
 	private void searchAndCheckArticlePersonalizable() {
 		secBuscadorSteps.searchArticulo(articlePersonalizable.get());
-		int numColors = pgFichaSteps.getFicha().getNumColors();
+		int numColors = fichaSteps.getFicha().getNumColors();
 		for (int i=1; i<=numColors; i++) {
-			pgFichaSteps.selectColor(i);
+			fichaSteps.selectColor(i);
 			State levelError = (i==numColors) ? DEFECT : INFO;
 			if (mdPersonalizacionSteps.checkArticleCustomizable(levelError)) {
 				break;

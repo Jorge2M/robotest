@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
+import com.mng.robotest.tests.repository.productlist.entity.ProductLabel;
 
 public class FilterOnline implements Filter {
 	
@@ -37,11 +38,12 @@ public class FilterOnline implements Filter {
 	}
 	
 	private boolean isGarmentOnline(GarmentCatalog garment) {
-		for (var productLabel : garment.getLabels().getProductLabels()) {
-			if (productLabel!=null && "exclusivo_online".compareTo(productLabel.getKey())==0) {
-				return true;
-			}
-		}
-		return false;
+	    return garment.getLabels().getProductLabels().stream()
+	            .anyMatch(this::isLabelOnline);
 	}
+	
+	private boolean isLabelOnline(ProductLabel productLabel) {
+		return productLabel != null && productLabel.getKey().contains("online");
+	}
+	
 }

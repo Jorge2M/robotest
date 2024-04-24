@@ -5,7 +5,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
+import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.micuenta.beans.Ticket;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageDetalleCompra;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
@@ -73,7 +73,7 @@ public class ModalDetalleCompraSteps extends StepBase {
 		ArticuloScreen articulo = pgDetalleCompra.getDataArticulo(posArticulo);
 		pgDetalleCompra.selectArticulo(posArticulo);
 		var dataFichaArt = new DataFichaArt(articulo.getReferencia(), articulo.getNombre());
-		new PageFichaSteps().checkDetallesProducto(dataFichaArt);
+		new FichaSteps().checkDetallesProducto(dataFichaArt);
 	}
 	
 	@Validation (description="Es visible la dirección <b>#{address}</b>")

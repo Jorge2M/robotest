@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.ficha.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.ficha.pageobjects.PageComoMedirme;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.PageComoMedirme;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 

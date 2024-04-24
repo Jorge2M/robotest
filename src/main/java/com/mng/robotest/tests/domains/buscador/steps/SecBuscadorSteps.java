@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.ficha.steps.PageFichaSteps;
+import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.From;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
@@ -46,7 +46,7 @@ public class SecBuscadorSteps extends StepBase {
 	private void searchArticuloCommon(Article article) {
 		new ArticuloNavigations().buscarArticulo(article);
 		waitLoadPage();  
-		new PageFichaSteps().checkIsFichaAccordingTypeProduct(article);
+		new FichaSteps().checkIsFichaAccordingTypeProduct(article);
 	}
 
 	@Step (

@@ -4,7 +4,7 @@ import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.steps.ModalArticleNotAvailableSteps;
-import com.mng.robotest.tests.domains.galeria.steps.PageGaleriaSteps;
+import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 
 public class Gpo007 extends TestBase {
 
@@ -17,14 +17,14 @@ public class Gpo007 extends TestBase {
 	}
 
 	private void checkAvisame() {
-		new PageGaleriaSteps().selectTallaNoDisponibleArticulo();
+		new GaleriaSteps().selectTallaNoDisponibleArticulo();
 		var modal = new ModalArticleNotAvailableSteps();
 		modal.checkVisibleAvisame();
 		modal.clickRecibirAviso();
 	}
 	
 	private void selectTallaArticle() throws Exception {
-		new PageGaleriaSteps().selectTallaAvailable();
+		new GaleriaSteps().selectTallaAvailable();
 	}
 
 }

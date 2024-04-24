@@ -137,13 +137,13 @@ public class PageLanding extends PageBase {
 		return banners;
 	}
 
-	public boolean haySecc_Art_Banners() {
+	public boolean isSeccArtBanners() {
 		var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 		if (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle()) {
 			return true;
 		}
 
-		var pageFicha = PageFicha.of(Channel.desktop);
+		var pageFicha = PageFicha.make(Channel.desktop, app, dataTest.getPais());
 		if (pageFicha.isPage(0)) {
 			return true;
 		}
