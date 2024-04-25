@@ -83,6 +83,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Österreich" codigo="038">
@@ -284,9 +285,10 @@
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
+<!-- 
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet"
-	nombre="НАЛОЖЕН ПЛАТЕЖ" testpasarela='s' testpago='s'></pago><!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+	nombre="НАЛОЖЕН ПЛАТЕЖ" testpasarela='s' testpago='s'></pago>-->
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -519,6 +521,7 @@
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Finland" codigo="032">
@@ -577,6 +580,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <mobiluser>0401234567</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="France" codigo="011">
@@ -1262,6 +1266,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='n' testpago='n' useremail='Test.mango@mango.com' passwordemail='mango123'></pago> <!-- Desactivada la validación de la pasarela porque no acepta mail asociado a otro país -->
 <multidireccion>N</multidireccion>
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Montenegro" codigo="090">
@@ -2185,9 +2190,10 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
+<!-- 	
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373"></pago>
+	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373"></pago> -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="MAESTRO" testpasarela='s' testpago='s' tipotarj="VISAD3D_JP" numtarj="5116561111111119" mescad="03" anycad="2030" cvc="123" usrd3d="user" passd3d="password"></pago>
