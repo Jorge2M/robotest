@@ -1135,6 +1135,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Macedonia " codigo="096">

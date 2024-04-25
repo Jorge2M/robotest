@@ -19,6 +19,13 @@ public class Galeria {
 	}
 	
 	@Test (
+		groups={"Galeria", "Canal:all_App:all"},
+		description="[Genesis] Acceder a galería camisas. Filtro color. Scroll")
+	public void GPO008_Galeria_Genesis() throws Exception {
+		new Gpo008().execute();
+	}	
+	
+	@Test (
 		groups={"Galeria", "Smoke", "Canal:all_App:all"}, 
 		description="[Usuario registrado] Acceder a galería. Navegación menú lateral de primer y segundo nivel. Selector de precios")
 	public void GPO005_Galeria_Menu_Lateral() throws Exception {

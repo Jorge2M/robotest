@@ -3,8 +3,8 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
 
 public class MenuActionsDesktop extends PageBase implements MenuActions {
 

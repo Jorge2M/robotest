@@ -5,8 +5,8 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 

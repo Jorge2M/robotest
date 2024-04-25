@@ -1,13 +1,13 @@
 package com.mng.robotest.tests.domains.galeria.tests;
 
-import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.NumColumnas.*;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.NumColumnas.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion.*;
 import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.From;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria.From;
 import com.mng.robotest.tests.domains.galeria.steps.DataForScrollStep;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.beans.FactoryMenus;

@@ -18,14 +18,14 @@ import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.ControlTemporada;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.NumColumnas;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticle;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop.TypeArticleDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.entities.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.ControlTemporada;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.NumColumnas;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.TypeArticle;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 import com.mng.robotest.testslegacy.pageobject.utils.DataScroll;
@@ -34,8 +34,8 @@ import com.mng.robotest.testslegacy.steps.navigations.exceptions.ChannelNotSuppo
 import com.github.jorge2m.testmaker.conf.StoreType;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.filters.FilterOrdenacion.*;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.sections.SecBannerHeadGallery.TypeLinkInfo.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo.*;
 import static com.github.jorge2m.testmaker.conf.StoreType.*;
 import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 

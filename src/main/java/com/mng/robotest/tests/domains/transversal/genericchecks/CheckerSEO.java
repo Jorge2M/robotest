@@ -13,8 +13,8 @@ import com.github.jorge2m.testmaker.service.genericchecks.Checker;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleriaDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
 import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
 
 import static com.github.jorge2m.testmaker.conf.State.*;

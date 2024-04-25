@@ -159,6 +159,20 @@ public class SecTallasGenesis extends PageBase {
 	private String getXPathTalla(String label) {
 		return getXPathTallaItem() + "//span[text()='" + label + "']/ancestor::li";
 	}
+	private String getXPathTalla(Talla talla) {
+		String xpath = getXPathTallaItem() + "//span[";
+		var pais = PaisShop.getPais(dataTest.getPais());
+		var labels = talla.getLabels(pais);
+		
+		for (int i = 0; i < labels.size(); i++) {
+			xpath += "text()='" + labels.get(i) + "'";
+	        if (i < labels.size() - 1) {
+	            xpath += " or ";
+	        }
+		}
+		xpath+="]/ancestor::li";
+		return xpath;
+	}
 	
 	public void selectTallaByLabel(String label) { //Tested
 		unfoldTallas();
@@ -171,8 +185,8 @@ public class SecTallasGenesis extends PageBase {
 	}
 	
 	public void selectTallaByValue(Talla talla) {
-		//TODO pendiente de disponer del id de la talla en el data-testid. De momento...
-		selectTallaByLabel(talla.getValue());
+		unfoldTallas();
+		click(getXPathTalla(talla)).exec();
 	}
 	
 	private String getXPathTalla(int position) {
