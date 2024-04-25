@@ -61,8 +61,9 @@ public class IdiomaPais implements Serializable {
 
 	//Función que obtiene la URL de acceso al país/idioma
 	public String getUrlIdioma(String urlBase) throws URISyntaxException {
-		URI uri = new URI(urlBase);
-		return (urlBase.replace(uri.getPath(), "") + "/" + getAcceso());			
+		String urlBaseNormalized = urlBase.endsWith("/") ? urlBase.substring(0, urlBase.length() - 1) : urlBase;
+	    URI uri = new URI(urlBaseNormalized);
+	    return (urlBaseNormalized.replace(uri.getPath(), "") + "/" + getAcceso());
 	}
 
 	public String getLiteral() {

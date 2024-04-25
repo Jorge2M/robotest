@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-
+import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.base.datatest.DataTest;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
@@ -45,6 +45,7 @@ public class AccesoSteps extends StepBase {
 		description="Acceso <b style=\"color:brown;\">#{pais.getNombrePais()} / #{idioma.getLiteral()}</b> a través de la URL <a href='#{urlAccess}'>#{urlAccess}</a>",
 		expected="el acceso es correcto")
 	private void quickAccess(String urlAccess, Pais pais, IdiomaPais idioma) {
+		//waitForPageLoaded();
 		new LocalStorageMango().setInitialModalsOff();
 		driver.get(urlAccess);
 	}

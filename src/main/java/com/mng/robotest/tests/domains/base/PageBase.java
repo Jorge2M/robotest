@@ -226,6 +226,10 @@ public class PageBase extends PageObjTM {
 		return false;
 	}	
 	
+	public void waitForPageLoaded() {
+		waitForPageLoaded(driver);
+	}
+	
 	public boolean isTextInURL(String text, int seconds) {
 		for (int i=0; i<seconds; i++) {
 			if (driver.getCurrentUrl().contains(text)) {
