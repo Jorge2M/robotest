@@ -35,7 +35,71 @@ public class PageMisCompras extends PageBase {
 	private static final String XP_PRICE_RELATIVE_TICKET = ".//*[@data-testid='myPurchases.price']";	
 	private static final String XP_FECHA_RELATIVE_TICKET = ".//*[@data-testid='myPurchases.purchaseCard.date']";
 	
-	public List<Ticket> getTickets() {
+	private String getXPathCapaContenedora() {
+		if (isMobile()) {
+			return XP_CAPA_CONTENEDORA_MOBILE;
+		}
+		return XP_CAPA_CONTENEDORA_DESKTOP;
+	}
+
+	private String getXPathTicketLink(String id) {
+		return (XP_TICKET + "//img[@loading='lazy' and @alt[contains(.,'" + id + "')]]/..");
+	}
+	
+	public boolean isPage(int seconds) {
+		return state(VISIBLE, getXPathCapaContenedora()).wait(seconds).check();
+	}
+	
+	public boolean isTicket(TypeTicket typeCompra, int seconds) {
+		for (int i=0; i<seconds; i++) {
+			List<Ticket> tickets = getTickets(typeCompra);
+			if (!tickets.isEmpty()) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
+	
+	public boolean areTickets() {
+		return !getTickets().isEmpty();
+	}
+	
+	public boolean isTicketOnline(String idPedido, int seconds) {
+		for (int i=0; i<seconds; i++) {
+			if (isTicketOnline(idPedido)) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
+	
+	public void selectTicket(String idTicket) {
+		click(getXPathTicketLink(idTicket)).exec();
+	}
+	
+	public Ticket selectTicket(TypeTicket type, int position) {
+		var ticket = getTickets(type).get(position-1);
+		click(getXPathTicketLink(ticket.getId())).exec();
+		return ticket;
+	}
+
+	private boolean isTicketOnline(String idPedido) {
+		return (getTickets().stream()
+			.anyMatch(item -> item.getId().compareTo(idPedido)==0));
+	}
+	
+	private List<Ticket> getTickets(TypeTicket typeCompra) {
+		if (listTickets==null || listTickets.isEmpty()) {
+			listTickets = getTickets().stream()
+				.filter(ticket -> ticket.getType()==typeCompra)
+				.toList();
+		}
+		return listTickets;
+	}
+	
+	private List<Ticket> getTickets() {
 		isVisibleTicket(5);
 		waitLoadPage();
 		waitMillis(1000);
@@ -54,27 +118,6 @@ public class PageMisCompras extends PageBase {
 				.toList();
 	}
 	
-	
-	public List<Ticket> getTickets(TypeTicket typeCompra) {
-		if (listTickets==null || listTickets.isEmpty()) {
-			listTickets = getTickets().stream()
-				.filter(ticket -> ticket.getType()==typeCompra)
-				.toList();
-		}
-		return listTickets;
-	}
-	
-	public boolean isTicket(TypeTicket typeCompra, int seconds) {
-		for (int i=0; i<seconds; i++) {
-			List<Ticket> tickets = getTickets(typeCompra);
-			if (!tickets.isEmpty()) {
-				return true;
-			}
-			waitMillis(1000);
-		}
-		return false;
-	}
-	
 	private List<WebElement> getTicketsPage() {
 		state(VISIBLE, XP_TICKET).wait(2).check();
 		return getElements(XP_TICKET);
@@ -82,44 +125,6 @@ public class PageMisCompras extends PageBase {
 	
 	private boolean isVisibleTicket(int seconds) {
 		return state(VISIBLE, XP_TICKET).wait(seconds).check();
-	}
-
-	public boolean areTickets() {
-		return !getTickets().isEmpty();
-	}
-	
-	public boolean isTicketOnline(String idPedido, int seconds) {
-		for (int i=0; i<seconds; i++) {
-			if (isTicketOnline(idPedido)) {
-				return true;
-			}
-			waitMillis(1000);
-		}
-		return false;
-	}
-	
-	public boolean isTicketOnline(String idPedido) {
-		return (getTickets().stream()
-			.anyMatch(item -> item.getId().compareTo(idPedido)==0));
-	}
-	
-	public void selectTicket(String idTicket) {
-		click(getXPathTicketLink(idTicket)).exec();
-	}
-	
-	private String getXPathCapaContenedora() {
-		if (isMobile()) {
-			return XP_CAPA_CONTENEDORA_MOBILE;
-		}
-		return XP_CAPA_CONTENEDORA_DESKTOP;
-	}
-
-	private String getXPathTicketLink(String id) {
-		return (XP_TICKET + "//img[@loading='lazy' and @alt[contains(.,'" + id + "')]]/..");
-	}
-	
-	public boolean isPage(int seconds) {
-		return state(VISIBLE, getXPathCapaContenedora()).wait(seconds).check();
 	}
 	
 	private Ticket getTicket(WebElement ticketScreen) {
@@ -129,12 +134,6 @@ public class PageMisCompras extends PageBase {
 		ticket.setPrecio(getPrecioTicketPage(ticketScreen));
 		ticket.setNumItems(getNumItemsTicketPage(ticketScreen));
 		ticket.setFecha(getFechaTicketPage(ticketScreen));
-		return ticket;
-	}
-	
-	public Ticket selectTicket(TypeTicket type, int position) {
-		var ticket = getTickets(type).get(position-1);
-		click(getXPathTicketLink(ticket.getId())).exec();
 		return ticket;
 	}
 	

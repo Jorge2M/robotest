@@ -6,6 +6,7 @@ import java.util.List;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalsSubscriptions;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -85,22 +86,22 @@ public class SecFooter extends PageBase {
 			this.pageInNewTab = pageInNewTab;
 		}
 		
-		public String getXPathCapa(AppEcom app) {
-			if (app==AppEcom.outlet) {
+		public String getXPathCapa(AppEcom app, Pais pais) {
+			if (isGenesis(app, pais)) {
 				return xpCapaGenesis;
 			}
 			return xpCapa;
 		}
 		
-		private String getXPathLink(AppEcom app) {
-			if (app==AppEcom.outlet) {
+		private String getXPathLink(AppEcom app, Pais pais) {
+			if (isGenesis(app, pais)) {
 				return xpathGenesis;
 			}
 			return xpath;			
 		}
 		
-		public String getXPath(AppEcom app) {
-			return getXPathCapa(app) + getXPathLink(app);
+		public String getXPath(AppEcom app, Pais pais) {
+			return getXPathCapa(app, pais) + getXPathLink(app, pais);
 		}
 		
 		public boolean pageInNewTab(AppEcom app) {
@@ -119,6 +120,10 @@ public class SecFooter extends PageBase {
 			}
 			return listLinksToReturn;
 		}
+		
+		private boolean isGenesis(AppEcom app, Pais pais) {
+			return app==AppEcom.outlet || pais.isGaleriaGenesis(app);
+		}
 
 	}
 	
@@ -130,7 +135,7 @@ public class SecFooter extends PageBase {
 	}
 	
 	private String getXPathLink(FooterLink footerType) {
-		return footerType.getXPath(app);
+		return footerType.getXPath(app, dataTest.getPais());
 	}
 	
 	private String getXPathLinkCambioPais() {
@@ -141,19 +146,21 @@ public class SecFooter extends PageBase {
 	}
 	
 	public boolean isPresent() {
-		return state(PRESENT, FooterLink.AYUDA.getXPathCapa(app)).check();
+		String xpathAyuda = FooterLink.AYUDA.getXPathCapa(app, dataTest.getPais());
+		return state(PRESENT, xpathAyuda).check();
 	}
 	
 	public boolean isVisible() {
 		waitLoadPage();
-		return state(VISIBLE, FooterLink.AYUDA.getXPathCapa(app)).check();
+		String xpathAyuda = FooterLink.AYUDA.getXPathCapa(app, dataTest.getPais());
+		return state(VISIBLE, xpathAyuda).check();
 	}	
 	
 	public void clickLink(FooterLink footerType) {
 		new ModalsSubscriptions().closeAllIfVisible();
-		moveToElement(footerType.getXPath(app));
+		moveToElement(footerType.getXPath(app, dataTest.getPais()));
 		
-		String xpathLink = footerType.getXPath(app);
+		String xpathLink = footerType.getXPath(app, dataTest.getPais());
 		state(VISIBLE, xpathLink).wait(2).check();
 		waitMillis(500);
 		click(xpathLink).exec();
@@ -178,9 +185,9 @@ public class SecFooter extends PageBase {
 	}
 	
 	public void moveTo() {
-		String xpathFooter = FooterLink.AYUDA.getXPathCapa(app);
-		if (state(VISIBLE, xpathFooter).check()) {
-			moveToElement(xpathFooter);
+		String xpathAyuda = FooterLink.AYUDA.getXPathCapa(app, dataTest.getPais());
+		if (state(VISIBLE, xpathAyuda).check()) {
+			moveToElement(xpathAyuda);
 		}
 	}
 	

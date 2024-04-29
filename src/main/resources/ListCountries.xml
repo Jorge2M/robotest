@@ -1042,6 +1042,7 @@
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<galeriagenesis>shop,outlet</galeriagenesis>
 <fichagenesis>shop,outlet</fichagenesis>
 </pais>
 
@@ -1285,6 +1286,7 @@
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 <galeriagenesis>shop</galeriagenesis>
 </pais>
 

@@ -6,8 +6,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopNormal;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopNoGenesis;
 import com.mng.robotest.testslegacy.data.Color;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -41,7 +41,7 @@ public class SecFiltrosSteps extends StepBase {
 		if (isDesktop()) {
 		 	checks.add(
 				"Aparecen los tags de color <b>" + colorsSelected.toString() + "</b>",
-				((PageGaleriaDesktopNormal)pgGaleria).isVisibleColorTags(colorsSelected));
+				((PageGaleriaDesktopNoGenesis)pgGaleria).isVisibleColorTags(colorsSelected));
 		}
 		
 	 	checks.add(

@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.TypeArticle;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.TypeArticle;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;

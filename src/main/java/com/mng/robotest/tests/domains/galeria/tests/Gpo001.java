@@ -1,13 +1,14 @@
 package com.mng.robotest.tests.domains.galeria.tests;
 
-import static com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.NumColumnas.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.NumColumnas.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion.*;
 import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria.From;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.From;
 import com.mng.robotest.tests.domains.galeria.steps.DataForScrollStep;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.beans.FactoryMenus;
@@ -38,11 +39,11 @@ public class Gpo001 extends TestBase {
 	private void checkScroll() throws Exception {
 		String nameMenuCamisas = FactoryMenus.get(CAMISAS_SHE).getMenu();
 		var dataScroll = new DataForScrollStep();
-		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
+		dataScroll.setNumPageToScroll(PageGaleriaNoGenesis.MAX_PAGE_TO_SCROLL);
 		dataScroll.setOrdenacionExpected(RECOMENDADOS);
 		dataScroll.setValidateArticlesExpected(false);
 		dataScroll.setValidaImgBroken(true);
-		var datosScrollFinalGaleria = galeriaSteps.scrollFromFirstPage(dataScroll);
+		var datosScrollFinalGaleria = galeriaSteps.scrollFromFirstPageNoGenesis(dataScroll);
 		
 		if (channel.isDevice()) {
 			galeriaSteps.backTo1erArticleMobilStep();
@@ -52,10 +53,10 @@ public class Gpo001 extends TestBase {
 		
 		dataScroll.setValidateArticlesExpected(true);
 		dataScroll.setNumArticlesExpected(datosScrollFinalGaleria.getArticulosTotalesPagina());
-		galeriaSteps.scrollFromFirstPage(dataScroll);	
+		galeriaSteps.scrollFromFirstPageNoGenesis(dataScroll);	
 		
 		galeriaSteps.seleccionaOrdenacionGaleria(PRECIO_ASC, nameMenuCamisas, numArticulosPantalla);
-		galeriaSteps.scrollFromFirstPage(dataScroll);
+		galeriaSteps.scrollFromFirstPageNoGenesis(dataScroll);
 		galeriaSteps.selecColorFromArtGaleriaStep(1, 2);
 		galeriaSteps.selecArticuloGaleriaStep(1);
 	}

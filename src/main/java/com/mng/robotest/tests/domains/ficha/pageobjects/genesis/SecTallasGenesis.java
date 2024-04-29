@@ -20,14 +20,14 @@ public class SecTallasGenesis extends PageBase {
 	private static final String XP_SELECTOR_TALLAS_DESKTOP = "//*[@data-testid='pdp.productInfo.sizeSelector']";
 	private static final String XP_TALLA_ITEM_DESKTOP = XP_SELECTOR_TALLAS_DESKTOP + "//li/button[@data-testid[contains(.,'pdp.productInfo.sizeSelector')]]//..";
 	private static final String XP_TALLA_SELECTED_DESKTOP = XP_TALLA_ITEM_DESKTOP + XP_ICON_DESPLEGABLE_TALLAS + "//ancestor::li";	
-	private static final String XP_TALLA_AVAILABLE_DESKTOP = XP_TALLA_ITEM_DESKTOP + "/p[@data-testid[contains(.,'sizeAvailable')]]";
-	private static final String XP_TALLA_UNAVAILABLE_DESKTOP = XP_TALLA_ITEM_DESKTOP + "/p[@data-testid[contains(.,'sizeUnavailable')]]";
+	private static final String XP_TALLA_AVAILABLE_DESKTOP = XP_TALLA_ITEM_DESKTOP + "//*[@data-testid[contains(.,'Available')]]";;
+	private static final String XP_TALLA_UNAVAILABLE_DESKTOP = XP_TALLA_ITEM_DESKTOP + "//*[@data-testid[contains(.,'Unavailable')]]";
 	
 	private static final String XP_SELECTOR_TALLAS_MOBIL = "//*[@data-testid='sheet.draggable.dialog']";
 	private static final String XP_TALLA_MOBIL = "//button[@data-testid[contains(.,'pdp.productInfo.sizeSelector')]]/..";
 	private static final String XP_TALLA_ITEM_MOBIL = XP_SELECTOR_TALLAS_MOBIL + XP_TALLA_MOBIL;
 	private static final String XP_TALLA_UNSELECTED_MOBIL = XP_LINK_GUIA_TALLAS;
-	private static final String XP_TALLA_SELECTED_MOBIL = "//*[@data-testid='pdp.productInfo.sizeSelector']/button[@data-testid='pdp.productInfo.sizeSelector.sizeAvailable']";
+	private static final String XP_TALLA_SELECTED_MOBIL = "//*[@data-testid='pdp.productInfo.sizeSelector']/button[@data-testid[contains(.,'pdp.productInfo.sizeSelector.sizeAvailable')]]";
 	private static final String XP_TALLA_AVAILABLE_MOBIL = XP_TALLA_ITEM_MOBIL + "//*[@data-testid[contains(.,'Available')]]";
 	private static final String XP_TALLA_UNAVAILABLE_MOBIL = XP_TALLA_ITEM_MOBIL + "//*[@data-testid[contains(.,'Unavailable')]]";
 
@@ -66,6 +66,10 @@ public class SecTallasGenesis extends PageBase {
 		return XP_TALLA_SELECTED_DESKTOP;
 	}
 	
+	private String getXPathTallaValue(String tallaValue) {
+		return getXPathTallaItem() + "//self::*[@data-testid[contains(.,'." + tallaValue + "')]]";
+	}
+	
 	public boolean isVisibleAvisoSeleccionTalla() { //Tested
 		return state(VISIBLE, XP_MSG_AVISO_SELECT_TALLA).check();
 	}
@@ -89,12 +93,12 @@ public class SecTallasGenesis extends PageBase {
 		return getElements(getXPathTallaItem()).isEmpty();
 	}
 	
-	public Talla getTallaSelected() { //Tested
+	public Talla getTallaSelected() {
 		var pais = PaisShop.from(dataTest.getCodigoPais());
 		return Talla.fromLabel(getTallaSelectedAlf(), pais);
 	}
 
-	public String getTallaSelectedAlf() { //Tested
+	public String getTallaSelectedAlf() {
 		if (isTallaSelected()) {
 			if (isTallaUnica()) {
 				return "unitalla";
@@ -139,6 +143,7 @@ public class SecTallasGenesis extends PageBase {
 	}
 	
 	private void unfoldTallasMobil() {
+		waitMillis(250);
 		if (!state(VISIBLE, XP_SELECTOR_TALLAS_MOBIL).check()) {
 			clickIconForUnfoldTallas();
 			waitMillis(250);
@@ -156,9 +161,10 @@ public class SecTallasGenesis extends PageBase {
 		}
 	}
 	
-	private String getXPathTalla(String label) {
+	private String getXPathTallaLabel(String label) {
 		return getXPathTallaItem() + "//span[text()='" + label + "']/ancestor::li";
 	}
+	
 	private String getXPathTalla(Talla talla) {
 		String xpath = getXPathTallaItem() + "//span[";
 		var pais = PaisShop.getPais(dataTest.getPais());
@@ -176,12 +182,12 @@ public class SecTallasGenesis extends PageBase {
 	
 	public void selectTallaByLabel(String label) { //Tested
 		unfoldTallas();
-		click(getXPathTalla(label)).exec();
+		click(getXPathTallaLabel(label)).exec();
 	}
 	
 	public void selectTallaByValue(String tallaValue) {
-		//TODO pendiente de disponer del id de la talla en el data-testid. De momento...
-		selectTallaByLabel(tallaValue);
+		unfoldTallas();
+		click(getXPathTallaValue(tallaValue)).exec();
 	}
 	
 	public void selectTallaByValue(Talla talla) {
@@ -209,9 +215,11 @@ public class SecTallasGenesis extends PageBase {
 		return getElement(xpTalla).getText();
 	}
 	
-	public String getTallaCodNum(int posicion) {
-		//TODO pendiente de disponer del id de la talla en el data-testid
-		return "";
+	public String getTallaCodNum(int position) {
+		unfoldTallas();
+		String xpTalla = getXPathTalla(position); 
+		String tallaDtid = getElement(xpTalla).getAttribute("data-testid");
+		return tallaDtid.substring(tallaDtid.length() - 2);
 	}
 	
 	public int getNumOptionsTallasNoDisponibles() {

@@ -1,6 +1,7 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito.*;
 
 import java.util.regex.Pattern;
 
@@ -8,12 +9,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria.StateFavorito;
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito;
 
-import static com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria.StateFavorito.*;
-
-public class CommonGaleriaNormal extends PageBase {
+public class CommonGaleriaNoGenesis extends PageBase {
 
 	private static final String XP_LISTA_ARTICULOS = "//ul[@data-testid[contains(.,'plp.grid.')]]";
 	private static final String XP_CAPA_ARTICULO = "//div[@data-testid='plp.product.figure']";
@@ -114,5 +113,5 @@ public class CommonGaleriaNormal extends PageBase {
 	public int getNumFavoritoIcons() {
 		return getElements(XP_HEARTH_ICON_RELATIVE_ARTICLE).size();
 	}
-
+	
 }

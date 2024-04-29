@@ -1,7 +1,5 @@
 package com.mng.robotest.tests.domains.micuenta.steps;
 
-import static com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuenta.Link.*;
-
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +14,11 @@ import com.mng.robotest.tests.domains.micuenta.pageobjects.PageInfoNewMisCompras
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 
+import static com.mng.robotest.tests.domains.micuenta.pageobjects.LinkMiCuenta.*;
+
 public class PageMiCuentaSteps extends StepBase {
 	
-	private final PageMiCuenta pgMiCuenta = new PageMiCuenta();
+	private final PageMiCuenta pgMiCuenta = PageMiCuenta.make();
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	
 	@Validation
@@ -97,7 +97,7 @@ public class PageMiCuentaSteps extends StepBase {
 			new PageMisDireccionesSteps().checkData();
 		}
 		goToMisDatos(dataNewRegister.getEmail());
-		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataNewRegister);
+		new PageMisDatosSteps().checkIsDataAssociatedToRegister(dataNewRegister);
 		checksDefault();
 	}	
 	

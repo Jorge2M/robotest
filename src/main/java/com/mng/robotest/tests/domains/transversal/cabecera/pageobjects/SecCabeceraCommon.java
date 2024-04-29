@@ -33,7 +33,7 @@ public class SecCabeceraCommon extends SecCabecera {
 			"//*[@data-testid='header.userMenu.login_any']"),
 		MICUENTA(
 			"//*[@data-testid='header.userMenu.login_mobile']",
-			"//*[@data-testid='header.userMenu.login' or @data-testid='header.userMenu.login_any']"),
+			"//*[@data-testid='header.userMenu.login']"),
 		FAVORITOS(
 			"//*[@data-testid='header.userMenu.favorites_mobile_any']",
 			"//*[@data-testid[contains(.,'header.userMenu.favorites')]]"),

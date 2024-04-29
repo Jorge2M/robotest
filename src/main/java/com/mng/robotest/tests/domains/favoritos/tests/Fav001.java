@@ -5,7 +5,7 @@ import static com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActi
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.NumColumnas;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;

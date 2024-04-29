@@ -3,13 +3,12 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 
 public class MenuActionsDesktop extends PageBase implements MenuActions {
 
 	private final MenuWeb menu;
-	private final PageGaleriaDesktop pageGaleria = ((PageGaleriaDesktop)PageGaleria.make(channel, app, dataTest.getPais()));
+	private final PageGaleria pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 
 	public MenuActionsDesktop(MenuWeb menu) {
 		this.menu = menu;
@@ -95,7 +94,7 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}
 	@Override
 	public void clickSubMenu() {
-		pageGaleria.clickSubMenu(menu.getSubMenu());
+		pageGaleria.clickSubMenuDesktop(menu.getSubMenu());
 	}
 	@Override
 	public boolean isVisibleMenu() {
@@ -104,7 +103,7 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	@Override
 	public boolean isVisibleSubMenus() {
 		for (String subMenu : menu.getSubMenus()) {
-			if (!pageGaleria.isVisibleSubMenu(subMenu)) {
+			if (!pageGaleria.isVisibleSubMenuDesktop(subMenu)) {
 				return false;
 			}
 		}

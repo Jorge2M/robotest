@@ -18,13 +18,14 @@ import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.ControlTemporada;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.NumColumnas;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.TypeArticle;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.ControlTemporada;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.NumColumnas;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.TypeArticle;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
@@ -34,7 +35,7 @@ import com.mng.robotest.testslegacy.steps.navigations.exceptions.ChannelNotSuppo
 import com.github.jorge2m.testmaker.conf.StoreType;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion.RECOMENDADOS;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo.*;
 import static com.github.jorge2m.testmaker.conf.StoreType.*;
 import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
@@ -93,7 +94,6 @@ public class GaleriaSteps extends StepBase {
 		var datosArticulo = new DataFichaArt();
 		String urlGaleria = driver.getCurrentUrl();
 		
-		//Almacenamos el nombre del artículo y su referencia
 		var articulo = pgGaleria.getArticulo(position);
 		datosArticulo.setNombre(pgGaleria.getNombreArticulo(articulo));
 		datosArticulo.setReferencia(pgGaleria.getRefArticulo(articulo));
@@ -101,7 +101,7 @@ public class GaleriaSteps extends StepBase {
 		pgGaleria.clickArticulo(articulo);
 		var fichaSteps = new FichaSteps();
 		fichaSteps.checkDetallesProducto(datosArticulo);
-		fichaSteps.validaBreadCrumbFicha(urlGaleria);
+		fichaSteps.checkBreadCrumbFicha(urlGaleria);
 		
 		return datosArticulo;
 	}
@@ -176,59 +176,8 @@ public class GaleriaSteps extends StepBase {
 		pgGaleria.selectTallaArticleNotAvalaible();
 	}
 	
-	public DataScroll scrollFromFirstPage() throws Exception {
-		var data = new DataForScrollStep();
-		data.setNumPageToScroll(99);
-		data.setOrdenacionExpected(RECOMENDADOS);
-		return scrollFromFirstPage(data);
-	}
-	
-	/**
-	 * Escrollamos hasta llegar a la página indicada en toPage
-	 * @param toPage indica el número de página en el que nos queremos posicionar. Si es PageGaleria.scrollToLast asumimos que queremos llegar hasta el final del catálogo
-	 */
-	private static final String TAG_ID_PAGE = "@TagIdPage";
-	
-	@Step (
-		description="Escrollar hasta posicionarse en la " + TAG_ID_PAGE + " página", 
-		expected="Se escrolla correctamente",
-		saveNettraffic=ALWAYS)
-	public DataScroll scrollFromFirstPage(DataForScrollStep dataForScroll) throws Exception {
-		int pageToScroll = dataForScroll.getNumPageToScroll();
-		String idPage = pageToScroll + "a";
-		if (pageToScroll>=PageGaleria.MAX_PAGE_TO_SCROLL) {
-			idPage = "última";
-		}
-		replaceStepDescription(TAG_ID_PAGE, idPage);
-//		int numArticulosInicio = pgGaleria.getNumArticulos();
-		var datosScroll = pgGaleria.scrollToPageFromFirst(pageToScroll);
-
-		if (pageToScroll>=PageGaleria.MAX_PAGE_TO_SCROLL) {
-			checkVisibilityFooter(pageToScroll, app);
-		}
-//		if (!dataTest.getPais().isGaleriaKondo(app) &&
-//			pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
-//			checkAreMoreArticlesThatInitially(datosScroll.getArticulosMostrados(), numArticulosInicio);
-//		}
-		if (dataForScroll.getOrdenacionExpected()!=RECOMENDADOS) {
-			checkArticlesOrdered(dataForScroll.getOrdenacionExpected());
-		}
-		checkNotRepeatedArticles();
-		if (dataForScroll.isValidateArticlesExpected()) {
-			checkNumArticlesInScreen(datosScroll.getArticulosTotalesPagina(), dataForScroll.getNumArticlesExpected());
-		}
-		
-		checksDefault();
-		if (dataForScroll.isValidaImgBroken()) {
-			checksGeneric().imgsBroken().execute();
-		}
-		
-		datosScroll.setStep(getCurrentStep());
-		return datosScroll;
-	}
-
 	@Validation (description="Sí aparece el footer", level=WARN)
-	private boolean checkVisibilityFooter(int pageToScroll, AppEcom app) {
+	public boolean checkVisibilityFooter(AppEcom app) {
 		return new SecFooter().isVisible();
 	}
 
@@ -242,12 +191,12 @@ public class GaleriaSteps extends StepBase {
 	}
 
 	@Validation (description="Los artículos aparecen ordenados por #{orderExpected}")
-	private boolean checkArticlesOrdered(FilterOrdenacion orderExpected) throws Exception {
+	public boolean checkArticlesOrdered(FilterOrdenacion orderExpected) throws Exception {
 		return (pgGaleria.articlesInOrder(orderExpected));
 	}
 	
 	@Validation
-	private ChecksTM checkNotRepeatedArticles() {
+	public ChecksTM checkNotRepeatedArticles() {
 		var checks = ChecksTM.getNew();
 		var productsRepeated = pgGaleria.searchArticleRepeatedInGallery();
 		String producRepeatedWarning = "";
@@ -269,8 +218,14 @@ public class GaleriaSteps extends StepBase {
 			"En pantalla aparecen exactamente #{numArticlesInPage} artículos " + 
 			"(están apareciendo #{numArticlesExpected}",
 		level=INFO)
-	private boolean checkNumArticlesInScreen(int numArticlesInPage, int numArticlesExpected) {
+	public boolean checkNumArticlesInScreen(int numArticlesInPage, int numArticlesExpected) {
 		return (numArticlesInPage==numArticlesExpected);
+	}
+	
+	@Validation (
+		description="Hay más artículos después del scroll (<b>#{finArticles}</b>) que al principio (<b>#{iniArticles})</b>")
+	public boolean checkAreMoreArticles(int iniArticles, int finArticles) {
+		return finArticles > iniArticles;
 	}
 
 	public int seleccionaOrdenacionGaleria(FilterOrdenacion typeOrdenacion, String tipoPrendasGaleria) 
@@ -628,12 +583,12 @@ public class GaleriaSteps extends StepBase {
 		var pageGaleriaDesktop = (PageGaleriaDesktop)pgGaleria;
 		var listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM_OTHER, listTemporadas);
 		if (validaNotNewArticles) {
-			listArtWrong = PageGaleria.getNotNewArticlesFrom(listArtWrong);
+			listArtWrong = PageGaleriaNoGenesis.getNotNewArticlesFrom(listArtWrong);
 		}
 		
 		String validaNotNewArticlesStr = "";
 		if (validaNotNewArticles) {
-			validaNotNewArticlesStr = " y no contienen alguna de las etiquetas de artículo nuevo (" + PageGaleria.getListlabelsnew() + ")";
+			validaNotNewArticlesStr = " y no contienen alguna de las etiquetas de artículo nuevo (" + PageGaleriaNoGenesis.getListlabelsnew() + ")";
 		}
 		
 		String infoWarning = "";
@@ -751,5 +706,68 @@ public class GaleriaSteps extends StepBase {
 	public int selectFiltroColores(List<Color> colorsToSelect, String litMenu) {
 		return secFiltrosSteps.selectFiltroColores(colorsToSelect, litMenu);
 	}
+	
+	public DataScroll scrollFromFirstPage() throws Exception {
+		var data = new DataForScrollStep();
+		data.setNumPageToScroll(99);
+		data.setOrdenacionExpected(RECOMENDADOS);
+		return scrollFromFirstPageNoGenesis(data);
+	}
+	
+	@Step (
+		description="Escrollar hasta posicionarse en la última página", 
+		expected="Se escrolla correctamente")
+	public void scrollToLast() {
+		int iniArticles = pgGaleria.getNumArticulos();
+		pgGaleria.scrollToLastPage();
+		int finArticles = pgGaleria.getNumArticulos();
+		checkVisibilityFooter(app);
+		checkAreMoreArticles(iniArticles, finArticles);		
+		checkNotRepeatedArticles();
+	}
+	
+	/**
+	 * Escrollamos hasta llegar a la página indicada en toPage
+	 * @param toPage indica el número de página en el que nos queremos posicionar. Si es PageGaleria.scrollToLast asumimos que queremos llegar hasta el final del catálogo
+	 */
+	private static final String TAG_ID_PAGE = "@TagIdPage";
+	
+	@Step (
+		description="Escrollar hasta posicionarse en la " + TAG_ID_PAGE + " página", 
+		expected="Se escrolla correctamente",
+		saveNettraffic=ALWAYS)
+	public DataScroll scrollFromFirstPageNoGenesis(DataForScrollStep dataForScroll) throws Exception {
+		int pageToScroll = dataForScroll.getNumPageToScroll();
+		String idPage = pageToScroll + "a";
+		if (pageToScroll>=PageGaleriaNoGenesis.MAX_PAGE_TO_SCROLL) {
+			idPage = "última";
+		}
+		replaceStepDescription(TAG_ID_PAGE, idPage);
+//		int numArticulosInicio = pgGaleria.getNumArticulos();
+		var datosScroll = pgGaleria.scrollToPageFromFirst(pageToScroll);
+
+		if (pageToScroll>=PageGaleriaNoGenesis.MAX_PAGE_TO_SCROLL) {
+			checkVisibilityFooter(app);
+		}
+//		if (!dataTest.getPais().isGaleriaKondo(app) &&
+//			pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
+//			checkAreMoreArticlesThatInitially(datosScroll.getArticulosMostrados(), numArticulosInicio);
+//		}
+		if (dataForScroll.getOrdenacionExpected()!=RECOMENDADOS) {
+			checkArticlesOrdered(dataForScroll.getOrdenacionExpected());
+		}
+		checkNotRepeatedArticles();
+		if (dataForScroll.isValidateArticlesExpected()) {
+			checkNumArticlesInScreen(datosScroll.getArticulosTotalesPagina(), dataForScroll.getNumArticlesExpected());
+		}
+		
+		checksDefault();
+		if (dataForScroll.isValidaImgBroken()) {
+			checksGeneric().imgsBroken().execute();
+		}
+		
+		datosScroll.setStep(getCurrentStep());
+		return datosScroll;
+	}	
 
 }

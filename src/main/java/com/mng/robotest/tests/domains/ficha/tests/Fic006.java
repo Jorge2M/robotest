@@ -89,9 +89,7 @@ public class Fic006 extends TestBase {
 	
 	private boolean checkClickAddBolsaWithoutSelectTalla() {
 		boolean isTallaUnica = fichaSteps.selectAnadirALaBolsaTallaPrevNoSelected();
-		if (channel.isDevice()) {
-			fichaSteps.closeTallas();
-		}
+		fichaSteps.closeTallas();
 		return isTallaUnica;
 	}
 	

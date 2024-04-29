@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.commons;
+package com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.SecTallasArticulo;
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
@@ -16,7 +16,7 @@ import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.SecPreciosArticulo.TipoPrecio.*;
 
-public abstract class PageGaleriaDevice extends PageGaleria {
+public abstract class PageGaleriaDevice extends PageGaleriaNoGenesis {
 	
 	private final SecTallasArticulo secTallas = SecTallasArticulo.make(channel, dataTest.getPais());
 	
@@ -36,11 +36,6 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 	protected abstract String getXPathArticuloConColores();
 	protected abstract String getXPathColorArticleOption();
 	protected abstract void showColors(WebElement articulo);
-	
-	@Override
-	public String getXPathCabeceraBusquedaProd() {
-		return ("//*[@id='buscador_cabecera2']");
-	}
 	
 	//Número de páginas a partir del que consideramos que se requiere un scroll hasta el final de la galería
 	public static final int SCROLL_TO_LAST = 20; 
@@ -62,7 +57,7 @@ public abstract class PageGaleriaDevice extends PageGaleria {
 		return (xpathArticulo + XP_BUTTON_ANYADIR_RELATIVE_ARTICLE);
 	}
 	
-	String getXPathPagina(int pagina) {
+	public String getXPathPagina(int pagina) {
 		if (isTablet() && isOutlet()) {
 			return (XP_PAGINA_TABLET_OUTLET_WITH_TAG.replace(TAG_NUM_PAGINA, String.valueOf(pagina)));
 		}

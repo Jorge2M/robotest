@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.commons;
+package com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

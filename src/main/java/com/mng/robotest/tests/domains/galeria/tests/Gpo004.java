@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.galeria.tests;
 import java.util.ArrayList;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis;
 import com.mng.robotest.tests.domains.galeria.steps.DataForScrollStep;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.testslegacy.data.Color;
@@ -60,7 +60,7 @@ public class Gpo004 extends TestBase {
 
 	private void scrollToSecondPage() throws Exception {
 		dataScroll.setNumPageToScroll(2);
-		galeriaSteps.scrollFromFirstPage(dataScroll);
+		galeriaSteps.scrollFromFirstPageNoGenesis(dataScroll);
 	}
 
 	private void selectArticleInOtherLabel() {
@@ -69,8 +69,8 @@ public class Gpo004 extends TestBase {
 	}
 
 	private void scrollToLastAndSelectArticle() throws Exception {
-		dataScroll.setNumPageToScroll(PageGaleria.MAX_PAGE_TO_SCROLL);
-		galeriaSteps.scrollFromFirstPage(dataScroll);
+		dataScroll.setNumPageToScroll(PageGaleriaNoGenesis.MAX_PAGE_TO_SCROLL);
+		galeriaSteps.scrollFromFirstPageNoGenesis(dataScroll);
 		int position = (app==shop) ? 50 : 30;
 		galeriaSteps.selectArticulo(position);
 		goBackToGalery();
@@ -88,7 +88,7 @@ public class Gpo004 extends TestBase {
 		dataScroll.setValidateArticlesExpected(true);
 		dataScroll.setNumArticlesExpected(articulosTotalesPagina);
 		dataScroll.setValidaImgBroken(false);
-		galeriaSteps.scrollFromFirstPage(dataScroll);
+		galeriaSteps.scrollFromFirstPageNoGenesis(dataScroll);
 	}
 
 }

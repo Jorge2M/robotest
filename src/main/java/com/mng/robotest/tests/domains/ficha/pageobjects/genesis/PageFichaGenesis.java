@@ -1,6 +1,9 @@
 package com.mng.robotest.tests.domains.ficha.pageobjects.genesis;
 
 import java.util.List;
+import java.util.regex.Pattern;
+
+import org.openqa.selenium.NoSuchElementException;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
@@ -19,12 +22,10 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	private final SecStickyContentGenesis secStickyContent = new SecStickyContentGenesis();
 	private final SecSliders secSliders = new SecSliders();
 	
-	private static final String XP_PAGE = "//article[@itemscope]";
-	private static final String XP_PAGE_META_ARTICLE = XP_PAGE + "/meta[@itemprop='mpn']";
-	private static final String XP_PAGE_ARTICLE = XP_PAGE_META_ARTICLE + "//self::*[@content='" + TAG + "']";
-	private static final String XP_FAVORITES_BUTTON = "//*[@data-testid='pdp.productInfo.favorites']";
-	private static final String XP_ADD_FAVORITES_BUTTON = XP_FAVORITES_BUTTON + "/span/*[@data-testid='favoff-l']/../..";
-	private static final String XP_REMOVE_FAVORITES_BUTTON = XP_FAVORITES_BUTTON + "/span/*[@data-testid='favoff-s']/../..";
+	private static final String XP_PAGE = "//*[@data-testid='pdp.gallery.grid']";
+	private static final String XP_PAGE_ARTICLE = "//*[@data-testid='pdp.productInfo.reference']";
+	private static final String XP_ADD_FAVORITES_BUTTON = "//*[@data-testid='pdp.productInfo.favorite.inactive']";
+	private static final String XP_REMOVE_FAVORITES_BUTTON = "//*[@data-testid='pdp.productInfo.favorite.active']";
 	private static final String XP_BOLSA_BUTTON = "//*[@data-testid='pdp.productInfo.addToBag']";
 	private static final String XP_TITLE_ART = "//*[@data-testid='pdp.productInfo.title']";
 	private static final String XP_WRAPPER_PRICES = "//*[@data-testid='pdp.productInfo.price']";
@@ -32,7 +33,7 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	private static final String XP_PRICE_TACHADO = XP_WRAPPER_PRICES + "//*[@data-testid='crossedOutPrice']";
 	
 	private String getXPathPageArticulo(String reference) {
-		return XP_PAGE_ARTICLE.replace(TAG, reference);
+		return XP_PAGE_ARTICLE + "//self::*[text()[contains(.,'" + reference + "')]]";
 	}
 	
 	@Override
@@ -59,7 +60,13 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 		return articulo;
 	}
 	private String getReferencia() {
-		return getElement(XP_PAGE_META_ARTICLE).getAttribute("content");
+		String referenceText = getElement(XP_PAGE_ARTICLE).getText();
+		var pattern = Pattern.compile("\\b\\d{8}\\b");
+		var matcher = pattern.matcher(referenceText);
+		if (matcher.find()) {
+			return matcher.group();
+		}
+		throw new NoSuchElementException("Problem obtaining the article reference");
 	}
 	
 	@Override	
@@ -134,6 +141,9 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	}
 	@Override
 	public String getPrecioFinalArticulo() {
+		if (isDevice()) {
+			return getElement(XP_PRICE_CURRENT + "//span/span").getAttribute("innerHTML");
+		}
 		return getElementVisible(XP_PRICE_CURRENT).getText();
 	}
 	@Override

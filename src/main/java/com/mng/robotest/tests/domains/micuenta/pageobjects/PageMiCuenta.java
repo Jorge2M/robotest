@@ -1,48 +1,42 @@
 package com.mng.robotest.tests.domains.micuenta.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.INVISIBLE;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.VISIBLE;
+import static com.mng.robotest.tests.domains.micuenta.pageobjects.LinkMiCuenta.*;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.utils.UtilsLoyaltyPage;
 
-public class PageMiCuenta extends PageBase {
+public abstract class PageMiCuenta extends PageBase {
+
+	abstract String getXPath(LinkMiCuenta link);
+	abstract String getXPathNumberPoints();
 	
-	private static final String XP_LOYALTY_POINTS = "//*[@data-testid='loyaltyMyAccount.MyAccountInfo.info']//p[2]";
-	
-	public enum Link {
-		MIS_DATOS("//a[@data-event-category='mis-datos']"),
-		MIS_COMPRAS("//a[@data-event-category='mis-compras']"),
-		MIS_DIRECCIONES("//*[@data-testid[contains(.,'myAddresses.link')]]"),
-		SUSCRIPCIONES("//a[@data-event-category='suscripciones']"),
-		DEVOLUCIONES("//a[@data-event-category='devoluciones']"),
-		REEMBOLSOS("//a[@data-event-category='mi-cuenta-reembolsos']");
-	
-		private String xpath;
-		private Link(String xpath) {
-			this.xpath = xpath;
+	public static PageMiCuenta make() {
+		if (isEnvPRO()) {
+			return new PageMiCuentaOld();
 		}
-		public String getXPath() {
-			return xpath;
-		}
-		
+		return new PageMiCuentaNew();
 	}
+	
 	public boolean isPage(int seconds) {
-		return state(VISIBLE, Link.MIS_DATOS.getXPath()).wait(seconds).check();
+		return state(VISIBLE, getXPath(MIS_DATOS)).wait(seconds).check();
 	}
 	
-	public void click(Link link) {
-		click(link.getXPath()).exec();
-		if (!state(INVISIBLE, link.getXPath()).wait(1).check()) {
-			click(link.getXPath()).exec();
+	public void click(LinkMiCuenta link) {
+		var xpLink = getXPath(link);
+		click(xpLink).exec();
+		if (!state(INVISIBLE, xpLink).wait(1).check()) {
+			click(xpLink).exec();
 		}
 	}
 	
 	public int getNumberPoints() {
-		if (state(VISIBLE, XP_LOYALTY_POINTS).wait(2).check()) {
-			String textPoints = getElement(XP_LOYALTY_POINTS).getText();
+		if (state(VISIBLE, getXPathNumberPoints()).wait(2).check()) {
+			String textPoints = getElement(getXPathNumberPoints()).getText();
 			return UtilsLoyaltyPage.getPointsFromLiteral(textPoints);
 		}
 		return 0;
-	}
+	}	
 	
 }

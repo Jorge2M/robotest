@@ -6,14 +6,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.CommonGaleriaNormal;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.CommonGaleriaNoGenesis;
 import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 
 public class SecTallasArticuloNormal extends SecTallasArticulo {
 
-	private static final String XP_ARTICULO_DESKTOP = CommonGaleriaNormal.XP_ARTICULO;
-	private static final String XP_ARTICULO_DEVICE = CommonGaleriaNormal.XP_ARTICULO;
+	private static final String XP_ARTICULO_DESKTOP = CommonGaleriaNoGenesis.XP_ARTICULO;
+	private static final String XP_ARTICULO_DEVICE = CommonGaleriaNoGenesis.XP_ARTICULO;
 	
 	private static final String XP_CAPA_TALLAS_ARTICULO_DESKTOP = "//*[@data-testid='plp.productSizeSelector.panel']/div";
 	private static final String XP_TALLA_AVAILABLE_DESKTOP = XP_CAPA_TALLAS_ARTICULO_DESKTOP + "//button[@data-testid[contains(.,'size.available')]]";

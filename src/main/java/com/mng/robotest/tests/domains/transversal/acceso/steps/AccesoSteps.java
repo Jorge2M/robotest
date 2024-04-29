@@ -4,6 +4,7 @@ import java.net.URISyntaxException;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -19,6 +20,8 @@ import com.mng.robotest.tests.domains.transversal.prehome.steps.PagePrehomeSteps
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
+
+import io.netty.handler.timeout.TimeoutException;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.*;
@@ -43,11 +46,19 @@ public class AccesoSteps extends StepBase {
 	}
 
 	private void fixRandomSeleniumProblem() {
-		if (driver.getCurrentUrl().contains("data:,")) {
+		String currentUrl = "";
+		try {
+			currentUrl = driver.getCurrentUrl();
+		} catch (TimeoutException e) {
+			Log4jTM.getLogger().warn("Timeout trying to capture current url from browser");
+		}
+		
+		if ("".compareTo(currentUrl)==0 || currentUrl.contains("data:,")) {
+			Log4jTM.getLogger().warn(String.format("Problem with data:, in url. Trying to get URL %s", inputParamsSuite.getUrlBase()));
 			driver.get(inputParamsSuite.getUrlBase());
+			Log4jTM.getLogger().info(String.format("URL in browser %s", driver.getCurrentUrl()));
 		}
 	}
-
 	
 	@Step (
 		description="Acceso <b style=\"color:brown;\">#{pais.getNombrePais()} / #{idioma.getLiteral()}</b> a través de la URL <a href='#{urlAccess}'>#{urlAccess}</a>",

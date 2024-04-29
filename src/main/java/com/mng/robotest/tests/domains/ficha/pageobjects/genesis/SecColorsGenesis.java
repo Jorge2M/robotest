@@ -1,14 +1,12 @@
 package com.mng.robotest.tests.domains.ficha.pageobjects.genesis;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.CLICKABLE;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.VISIBLE;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
@@ -17,16 +15,14 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ColorType;
 
 public class SecColorsGenesis extends PageBase {
 
-	private static final String XP_COLORS_SELECTOR = "//*[@data-testid='pdp.productInfo.colorSelector']";
-	private static final String XP_COLOR_ITEM = XP_COLORS_SELECTOR + "//li";
+	private static final String XP_COLOR_ITEM = "//li[@data-testid[contains(.,'pdp.colorSelector')]]";
 	private static final String XP_COLOR_SELECTED = XP_COLOR_ITEM + "/div[@style[contains(.,'color-item')]]/..";
-	private static final String XP_COLOR_AVAILABLE = XP_COLOR_ITEM + "/a[@data-testid[@contains(.,'colorSelector')]]/div/img[not(@class[contains(.,'disabled'))]//..//..//..";
-	private static final String XP_COLOR_UNAVAILABLE = XP_COLOR_ITEM + "/a[@data-testid[@contains(.,'colorSelector')]]/div/img[@class[contains(.,'disabled')]//..//..//..";
+	private static final String XP_COLOR_AVAILABLE = XP_COLOR_ITEM + "/a/div/img[not(@class[contains(.,'disabled'))]//..//..//..";
+	private static final String XP_COLOR_UNAVAILABLE = XP_COLOR_ITEM + "/a/div/img[@class[contains(.,'disabled')]//..//..//..";
 	private static final String XP_COLOR_LAST = XP_COLOR_ITEM + "[last()]";
 	
 	private String getXPathColorItem(String colorCode) {
-		//TODO reclamado (19-abril) a Kaliope un data-testid con el código de color		
-		return XP_COLOR_ITEM + "//img[@src[contains(.,'_" + colorCode + "_')]]//ancestor::li";
+		return XP_COLOR_ITEM + "//self::*[@data-testid[contains(.,'." + colorCode + "')]]";
 	}
 	private String getXPathColorItem(int posColor) {
 		return "(" + XP_COLOR_ITEM + ")[" + posColor + "]";  
@@ -50,11 +46,11 @@ public class SecColorsGenesis extends PageBase {
 		return getXPath(colorType) + "//img";
 	}
 	
-	public boolean isClickableColor(String colorCode) { //Tested
+	public boolean isClickableColor(String colorCode) {
 		return state(CLICKABLE, getXPathColorItem(colorCode)).check();
 	}
 
-	public void selectColor(String colorCode) { //Tested
+	public void selectColor(String colorCode) {
 		click(getXPathColorItem(colorCode)).exec();
 	}
 
@@ -62,12 +58,12 @@ public class SecColorsGenesis extends PageBase {
 		click(getXPathColorItem(posColor)).exec();
 	}
 
-	public void selectColorWaitingForAvailability(String colorCode) { //Tested
+	public void selectColorWaitingForAvailability(String colorCode) {
 		state(VISIBLE, getXPathColorItem(colorCode)).wait(3).check();
 		selectColor(colorCode);
 	}
 
-	public String getNombreColorSelected() { //Tested
+	public String getNombreColorSelected() {
 		String xpColorImg = getXPathImgColor(ColorType.SELECTED);
 		return getElement(xpColorImg).getAttribute("alt");
 	}
@@ -82,12 +78,10 @@ public class SecColorsGenesis extends PageBase {
 	}
 
 	public boolean isPresentColor(ColorType colorType) {
-		//TODO implementar cuando hayan añadido el código de color en el data-testid
-		return true;
+		return state(PRESENT, getXPath(colorType)).check();
 	}
 
 	public List<String> getColorsGarment() {
-		//TODO modificar cuando hayan añadido el código de color en el data-testid
 		var colors = new ArrayList<String>();
 		for (var colorItem : getElements(XP_COLOR_ITEM)) {
 			var codeColorOpt = getCodeFromColorItem(colorItem);
@@ -107,9 +101,9 @@ public class SecColorsGenesis extends PageBase {
 	}
 	
 	private Optional<String> getCodeFromColorItem(WebElement colorItem) {
-		var pattern = Pattern.compile("(?:_(\\d+))?_C\\.png");
-		var srcColor = colorItem.findElement(By.xpath(".//img")).getAttribute("src");
-		var matcher = pattern.matcher(srcColor);
+		var pattern = Pattern.compile("\\.([a-zA-Z0-9]{2})$");
+		var colorTid = colorItem.getAttribute("data-testid");
+		var matcher = pattern.matcher(colorTid);
 		if (matcher.find()) {
 			return Optional.of(matcher.group(1));
 		}		

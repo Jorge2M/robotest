@@ -8,8 +8,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeGalery;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -21,16 +20,16 @@ import static com.github.jorge2m.testmaker.conf.StoreType.*;
 public class BannerHeadGallerySteps extends StepBase {
 
 	private final GaleriaSteps galeriaParentSteps;
-	private final PageGaleriaDesktop pgGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(Channel.desktop, app, dataTest.getPais());
+	private final PageGaleria pgGaleria = PageGaleria.make(Channel.desktop, app, dataTest.getPais());
 
 	public BannerHeadGallerySteps(GaleriaSteps galeriaParentSteps) {
 		this.galeriaParentSteps = galeriaParentSteps;
 	}
 
 	public void checkBannerSuperiorIfExistsDesktop() {
-		boolean bannerIsVisible = pgGaleriaDesktop.isVisibleBannerHead();
+		boolean bannerIsVisible = pgGaleria.isVisibleBannerHead();
 		if (bannerIsVisible &&
-			!pgGaleriaDesktop.isBannerHeadWithoutTextAccesible()) {
+			!pgGaleria.isBannerHeadWithoutTextAccesible()) {
 			checkBannerContainsSomeText();
 		}
 	}
@@ -39,14 +38,14 @@ public class BannerHeadGallerySteps extends StepBase {
 		description="El Banner de Cabecera contiene algún texto",
 		level=WARN)
 	public boolean checkBannerContainsSomeText() {
-		String textBanner = pgGaleriaDesktop.getTextBannerHead();
+		String textBanner = pgGaleria.getTextBannerHead();
 		return ("".compareTo(textBanner)!=0);
 	}
 
 	@Validation
 	public ChecksTM checkBannerContainsText(List<String> possibleTexts) {
 		var checks = ChecksTM.getNew();
-		String textBanner = pgGaleriaDesktop.getTextBannerHead();
+		String textBanner = pgGaleria.getTextBannerHead();
 		checks.add(
 			"El banner de cabecera contiene el texto <b>" + possibleTexts.get(0) + "</b>",
 			textBannersContainsPossibleText(textBanner, possibleTexts));
@@ -58,7 +57,7 @@ public class BannerHeadGallerySteps extends StepBase {
 			description="Seleccionar el banner superior de la Galería",
 			expected="Aparece una galería de artículos")
 	public void clickBannerSuperiorIfLinkableDesktop() {
-		pgGaleriaDesktop.clickBannerHeadIfClickable();
+		pgGaleria.clickBannerHeadIfClickable();
 		galeriaParentSteps.validaArtEnContenido(3);
 	}
 
@@ -68,19 +67,19 @@ public class BannerHeadGallerySteps extends StepBase {
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b>" + 
 			"</br>Es visible el banner de cabecera",
-			pgGaleriaDesktop.isVisibleBannerHead());
+			pgGaleria.isVisibleBannerHead());
 
 		String saleTraduction = UtilsTest.getSaleTraduction(idioma);
-		String textBanner = pgGaleriaDesktop.getTextBannerHead();
+		String textBanner = pgGaleria.getTextBannerHead();
 		checks.add(
 			"El banner de cabecera es de rebajas  (contiene un símbolo de porcentaje o " + saleTraduction + ")",
 			UtilsTest.textContainsPercentage(textBanner, idioma) || textBanner.contains(saleTraduction));
 		
 		checks.add(
 			"El banner de cabecera contiene un link de \"Más info\"",
-			pgGaleriaDesktop.isVisibleLinkInfoRebajasBannerHead(), WARN);
+			pgGaleria.isVisibleLinkInfoRebajasBannerHead(), WARN);
 
-		boolean bannerLincable = pgGaleriaDesktop.isBannerHeadLinkable();
+		boolean bannerLincable = pgGaleria.isBannerHeadLinkable();
 		if (typeGalery==TypeGalery.SALES || !pais.isVentaOnline()) {
 			checks.add(
 				Check.make(
@@ -103,7 +102,7 @@ public class BannerHeadGallerySteps extends StepBase {
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +
 			"El banner de cabecera NO es de rebajas  (NO contiene un símbolo de porcentaje o \"" + saleTraduction + "\")",
-			!pgGaleriaDesktop.isBannerHeadSalesBanner(idioma));
+			!pgGaleria.isBannerHeadSalesBanner(idioma));
 
 		return checks;
 	}

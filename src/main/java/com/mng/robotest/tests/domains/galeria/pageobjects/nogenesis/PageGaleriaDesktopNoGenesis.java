@@ -6,14 +6,13 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNormal;
 import com.mng.robotest.testslegacy.data.Color;
 
-public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
+public class PageGaleriaDesktopNoGenesis extends PageGaleriaDesktop {
 
-	private final CommonGaleriaNormal commonNormal = new CommonGaleriaNormal();
+	private final CommonGaleriaNoGenesis commonNormal = new CommonGaleriaNoGenesis();
 	private static final String XP_ICONO_UP_GALERY = "//button[@aria-label='Scroll up']";
 	private static final String XP_HEADER_ARTICLES = "//header[@id='catalogTitle']/h1";
 	
@@ -22,17 +21,17 @@ public class PageGaleriaDesktopNormal extends PageGaleriaDesktop {
 		return XP_ICONO_UP_GALERY;
 	}
 	
-	public PageGaleriaDesktopNormal() {
+	public PageGaleriaDesktopNoGenesis() {
 		super();
 	}
 	
 	@Override
-	protected String getXPathArticulo() {
+	public String getXPathArticulo() {
 		return commonNormal.getXPathArticulo();
 	}
 	
 	@Override
-	protected String getXPathNombreRelativeToArticle() {
+	public String getXPathNombreRelativeToArticle() {
 		return commonNormal.getXPathNombreRelativeToArticle();
 	}
 	

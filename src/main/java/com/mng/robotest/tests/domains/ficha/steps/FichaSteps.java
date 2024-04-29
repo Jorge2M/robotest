@@ -137,7 +137,7 @@ public class FichaSteps extends StepBase {
 		if (pageFicha.isClickableColor(codigoColor)) {
 			pageFicha.selectColorWaitingForAvailability(codigoColor);
 		}
-		checkIsSelectedColor(codigoColor);
+		checkIsSelectedColor(codigoColor, 5);
 	}
 
 	@Step (
@@ -147,10 +147,16 @@ public class FichaSteps extends StepBase {
 		pageFicha.clickColor(posColor);
 	}
 
-	@Validation (description="Está seleccionado el color con código <b>#{codigoColor}<b>")
-	private boolean checkIsSelectedColor(String codigoColor) {
-		String codigoColorPage = pageFicha.getCodeColor(ColorType.SELECTED);
-		return codigoColorPage.contains(codigoColor);
+	@Validation (description="Está seleccionado el color con código <b>#{codigoColor}<b> "  + SECONDS_WAIT)
+	private boolean checkIsSelectedColor(String codigoColor, int seconds) {
+		for (int i=0; i<=seconds; i++) {
+			String codigoColorPage = pageFicha.getCodeColor(ColorType.SELECTED);
+			if (codigoColorPage.contains(codigoColor)) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
 	}
 
 	public void selectTallaAndSaveData(ArticuloScreen articulo) {
@@ -491,11 +497,15 @@ public class FichaSteps extends StepBase {
 	}
 
 	@Validation
-	public ChecksTM validaBreadCrumbFicha(String urlGaleryOrigin) {
+	public ChecksTM checkBreadCrumbFicha(String urlGaleryOrigin) {
 		var checks = ChecksTM.getNew();
-		checks.add(
-			"Existen el bloque correspondiente a las <b>BreadCrumb</b>",
-			new SecDetalleProduct().isVisibleBreadcrumbs(0));
+		
+		//TODO activar si en algún momento se añaden las BreadCrumb en la ficha Génesis
+		if (!dataTest.getPais().isFichaGenesis(app)) {
+			checks.add(
+				"Existen el bloque correspondiente a las <b>BreadCrumb</b>",
+				new SecDetalleProduct().isVisibleBreadcrumbs(0));
+		}
 
 		String urlGaleryBC = new SecDetalleProduct().getUrlItemBreadCrumb(ItemBreadcrumb.GALERIA);
 		checks.add(

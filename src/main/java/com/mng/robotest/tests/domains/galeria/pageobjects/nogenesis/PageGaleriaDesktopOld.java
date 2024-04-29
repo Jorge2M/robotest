@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
@@ -29,12 +28,12 @@ public class PageGaleriaDesktopOld extends PageGaleriaDesktop {
 	}
 	
 	@Override
-	protected String getXPathArticulo() {
+	public String getXPathArticulo() {
 		return XP_ARTICULO;
 	}
 	
 	@Override
-	protected String getXPathNombreRelativeToArticle() {
+	public String getXPathNombreRelativeToArticle() {
 		return XP_NOMBRE_RELATIVE_TO_ARTICLE;
 	}
 	
@@ -135,17 +134,17 @@ public class PageGaleriaDesktopOld extends PageGaleriaDesktop {
 	
 	@Override
 	public StateFavorito getStateHearthIcon(int iconNumber) {
-		return new CommonGaleriaNormal().getStateHearthIcon(iconNumber);
+		return new CommonGaleriaNoGenesis().getStateHearthIcon(iconNumber);
 	}
 	
 	@Override
 	public String getXPathArticleHearthIcon(int posArticulo) {
-		return new CommonGaleriaNormal().getXPathArticleHearthIcon(posArticulo);
+		return new CommonGaleriaNoGenesis().getXPathArticleHearthIcon(posArticulo);
 	}
 
 	@Override
 	public int getNumFavoritoIcons() {
-		return new CommonGaleriaNormal().getNumFavoritoIcons();
+		return new CommonGaleriaNoGenesis().getNumFavoritoIcons();
 	}	
 	
 	private String getRefFromId(WebElement articulo) {

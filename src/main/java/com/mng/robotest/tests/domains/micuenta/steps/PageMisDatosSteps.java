@@ -61,7 +61,7 @@ public class PageMisDatosSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validaIsDataAssociatedToRegister(DataNewRegister dataNewRegister) {
+	public ChecksTM checkIsDataAssociatedToRegister(DataNewRegister dataNewRegister) {
 		String nombre = dataNewRegister.getName();
 		String email = dataNewRegister.getEmail();
 

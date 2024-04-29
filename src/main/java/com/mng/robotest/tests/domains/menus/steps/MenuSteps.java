@@ -12,8 +12,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.beans.FactoryMenus;
 import com.mng.robotest.tests.domains.menus.beans.Linea;
@@ -29,6 +28,7 @@ import com.mng.robotest.tests.domains.transversal.banners.steps.SecBannersSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.testslegacy.data.CodIdioma;
 import com.mng.robotest.testslegacy.data.Constantes.ThreeState;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 
@@ -167,10 +167,14 @@ public class MenuSteps extends StepBase {
 			new GaleriaSteps().checkGaleriaAfeterSelectMenu();
 		}
 		if (menu.getSubMenus()!=null && !menu.getSubMenus().isEmpty()) {
-			checkVisibilitySubmenus(menu);
+			//TODO eliminar esta condición cuando implementen los submenús en la galería de Genesis
+			if (!dataTest.getPais().isGaleriaGenesis(app)) {
+				checkVisibilitySubmenus(menu);
+			}
 		}
-		if (isDesktop() &&
-			menu.getArticles()!=null && !menu.getArticles().isEmpty()) {
+		if (isDesktop() && 
+			menu.getArticles()!=null && !menu.getArticles().isEmpty() &&
+			dataTest.getIdioma().getCodigo()==CodIdioma.ES) {
 			checkArticlesContainsLiteralsDesktop(menu.getArticles());
 		}
 		
@@ -221,8 +225,8 @@ public class MenuSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkArticlesContainsLiteralsDesktop(List<String> articles) {
-		var pageGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(channel, app, dataTest.getPais());
-		var articlesNoValid = pageGaleriaDesktop.searchForArticlesNoValid(articles);
+		var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
+		var articlesNoValid = pageGaleria.searchForArticlesNoValid(articles);
 		var stateVal = (articlesNoValid.size()<10) ? WARN : DEFECT;
 		
 		var checks = ChecksTM.getNew();

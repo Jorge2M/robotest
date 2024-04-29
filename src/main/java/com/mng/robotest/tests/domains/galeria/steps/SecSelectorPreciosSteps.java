@@ -5,14 +5,13 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleriaDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecSelectorPreciosSteps extends StepBase {
 
-	private final PageGaleriaDesktop pgGaleriaDesktop = (PageGaleriaDesktop)PageGaleria.make(Channel.desktop, app, dataTest.getPais());
+	private final PageGaleria pgGaleria = PageGaleria.make(Channel.desktop, app, dataTest.getPais());
 	
 	private static final String TAG_MINIMO = "[MINIMO]";
 	private static final String TAG_MAXIMO = "[MAXIMO]";
@@ -21,7 +20,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 		description="Es visible el selector de precios",
 		level=WARN)
 	public boolean checkIsSelector() {
-		return pgGaleriaDesktop.isVisibleSelectorPrecios();
+		return pgGaleria.isVisibleSelectorPreciosDesktop();
 	}
 
 	@Step (
@@ -30,16 +29,16 @@ public class SecSelectorPreciosSteps extends StepBase {
 	public void selectInterval() throws Exception {
 		var dataFilter = new DataFilterPrecios();
 		if (isDesktop()) {
-			pgGaleriaDesktop.showFilters();
+			pgGaleria.showFiltersDesktop();
 		}
-		dataFilter.minimoOrig = pgGaleriaDesktop.getMinImportFilter();
-		dataFilter.maximoOrig = pgGaleriaDesktop.getMaxImportFilter();
+		dataFilter.minimoOrig = pgGaleria.getMinImportFilterDesktop();
+		dataFilter.maximoOrig = pgGaleria.getMaxImportFilterDesktop();
 
-		pgGaleriaDesktop.clickIntervalImportFilter(30, 30);
-		dataFilter.minimoFinal = pgGaleriaDesktop.getMinImportFilter();
-		dataFilter.maximoFinal = pgGaleriaDesktop.getMaxImportFilter();
+		pgGaleria.clickIntervalImportFilterDesktop(30, 30);
+		dataFilter.minimoFinal = pgGaleria.getMinImportFilterDesktop();
+		dataFilter.maximoFinal = pgGaleria.getMaxImportFilterDesktop();
 		if (isDesktop()) {
-			pgGaleriaDesktop.acceptFilters();
+			pgGaleria.acceptFiltersDesktop();
 		}
 		
 		replaceStepDescription(TAG_MINIMO, String.valueOf(dataFilter.minimoFinal));

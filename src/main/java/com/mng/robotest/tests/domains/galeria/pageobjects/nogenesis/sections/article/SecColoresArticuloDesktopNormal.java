@@ -6,12 +6,12 @@ import java.util.Optional;
 
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.CommonGaleriaNormal;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.CommonGaleriaNoGenesis;
 import com.mng.robotest.testslegacy.data.Constantes;
 
 public class SecColoresArticuloDesktopNormal extends SecColoresArticuloDesktop {
 
-	private static final String XP_ARTICULO = CommonGaleriaNormal.XP_ARTICULO;
+	private static final String XP_ARTICULO = CommonGaleriaNoGenesis.XP_ARTICULO;
 	private static final String XP_ARTICULO_ANCESTOR = XP_ARTICULO.replaceFirst("//", "ancestor::");
 	private static final String XP_COLORS_ARTICLE = "//div/p[@id[contains(.,'color-selector')]]/..";
 	private static final String XP_COLOR_ICON = XP_COLORS_ARTICLE + "//img[@id[contains(.,'Color')]]"; 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.SecFiltros;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -89,7 +89,7 @@ public abstract class SecFiltrosDesktop extends PageBase implements SecFiltros {
 		click(getXPathMostrarArticulos()).exec();
 		waitMillis(1000);
 		waitForPageLoaded(driver);
-		var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
+		PageGaleria pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 		pageGaleria.isVisibleImageArticle(1, 2);
 	}
 	

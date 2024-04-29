@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.commons;
+package com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,10 +23,10 @@ import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.commons.PageGaleria.StateFavorito.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public abstract class PageGaleriaDesktop extends PageGaleria {
+public abstract class PageGaleriaDesktop extends PageGaleriaNoGenesis {
 	
 	private final SecSubMenusGallery secSubMenusGallery = SecSubMenusGallery.make(app, dataTest.getPais());
 	private final SecColoresArticuloDesktop secColores = SecColoresArticuloDesktop.make();
@@ -36,10 +36,12 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	public abstract void clickLinkColumnas(NumColumnas numColumnas);
 	public abstract List<String> searchForArticlesNoValid(List<String> articleNames);
 	
-	public void clickSubMenu(String submenu) {
+	@Override
+	public void clickSubMenuDesktop(String submenu) {
 		secSubMenusGallery.clickSubMenu(submenu);
 	}
-	public boolean isVisibleSubMenu(String submenu) {
+	@Override
+	public boolean isVisibleSubMenuDesktop(String submenu) {
 		return secSubMenusGallery.isVisibleSubMenu(submenu);
 	}
 	
@@ -119,7 +121,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 	private static final String INI_XP_PAGINA_GALERIA = "//*[@id='page";
 
 	@Override
-	String getXPathPagina(int pagina) {
+	public String getXPathPagina(int pagina) {
 		return (INI_XP_PAGINA_GALERIA + pagina + "']");
 	}
 
@@ -166,15 +168,6 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		    (state(PRESENT, ".//a[@href[contains(.,'" + lineaType.getId2() + "')]]").check()));
 	}
 	
-	/**
-	 * @param categoriaProducto categoría de producto (p.e. "BOLSOS")
-	 * @return el xpath correspondiente a la cabecera de resultado de una búsqueda de una determinada categoría de producto
-	 */
-	@Override
-	public String getXPathCabeceraBusquedaProd() {
-		return ("//*[@id='buscador_cabecera2']");
-	}
-
 	public String getXPathNombreArticuloWithString(String string) {
 		return getXPathArticulo() + getXPathNombreRelativeToArticle() + "[text()[contains(.,'" + string + "')]]";
 	}
@@ -477,22 +470,22 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
 		return state(PRESENT, xpathVideo).check();
 	}
 
-	public boolean isVisibleSelectorPrecios() {
+	public boolean isVisibleSelectorPreciosDesktop() {
 		return ((SecFiltrosDesktop)secFiltros).isVisibleSelectorPrecios();
 	}
-	public int getMinImportFilter() {
+	public int getMinImportFilterDesktop() {
 		return ((SecFiltrosDesktop)secFiltros).getMinImportFilter(); 
 	}
-	public int getMaxImportFilter() {
+	public int getMaxImportFilterDesktop() {
 		return ((SecFiltrosDesktop)secFiltros).getMaxImportFilter(); 
 	}	
-	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
+	public void clickIntervalImportFilterDesktop(int margenPixelsLeft, int margenPixelsRight) {
 		((SecFiltrosDesktop)secFiltros).clickIntervalImportFilter(margenPixelsLeft, margenPixelsRight);
 	}
-	public void showFilters() {
+	public void showFiltersDesktop() {
 		((SecFiltrosDesktop)secFiltros).showFilters();
 	}
-	public void acceptFilters() { 
+	public void acceptFiltersDesktop() { 
 		((SecFiltrosDesktop)secFiltros).acceptFilters();
 	}
 	
@@ -502,6 +495,7 @@ public abstract class PageGaleriaDesktop extends PageGaleria {
     public boolean isVisibleInfoRebajasBannerHead(int seconds) {
     	return secBannerHead.isVisibleInfoRebajasUntil(seconds);
     }
+    
     public boolean isVisibleLinkInfoRebajasBannerHead() {
     	return secBannerHead.isVisibleLinkInfoRebajas();
     }
