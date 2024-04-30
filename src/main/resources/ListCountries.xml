@@ -83,7 +83,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
-<fichagenesis>outlet</fichagenesis>
+<fichagenesis>shop,outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Österreich" codigo="038">
@@ -137,6 +137,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Беларусь" codigo="073"> <!-- Bielorrusia -->
@@ -208,6 +209,7 @@
 	type="Ideal" tiendas="shop,outlet" empleado="s"
 	nombre="IDEAL" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Bosnia and Herzegovina " codigo="093">
@@ -376,6 +378,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop,outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Czech Republic" codigo="061">
@@ -423,6 +426,7 @@
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
 	nombre="PLATBA NA DOBÍRKU" nombremovil="Platba Na Dobírku" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>S</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Denmark" codigo="008">
@@ -471,6 +475,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <mobiluser>20123456</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Estonia" codigo="053">
@@ -521,7 +526,7 @@
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
-<fichagenesis>outlet</fichagenesis>
+<fichagenesis>shop,outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Finland" codigo="032">
@@ -702,6 +707,7 @@
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Greece" codigo="009">
@@ -842,6 +848,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago> 
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Ireland" codigo="007">
@@ -957,6 +964,7 @@
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Latvia" codigo="054">
@@ -1093,6 +1101,7 @@
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Luxemburg" codigo="018">
@@ -1159,6 +1168,7 @@
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Malta" codigo="046">
@@ -1204,6 +1214,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Moldova" codigo="074">
@@ -1222,6 +1233,7 @@
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Monaco" codigo="015">
@@ -1267,7 +1279,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='n' testpago='n' useremail='Test.mango@mango.com' passwordemail='mango123'></pago> <!-- Desactivada la validación de la pasarela porque no acepta mail asociado a otro país -->
 <multidireccion>N</multidireccion>
-<fichagenesis>outlet</fichagenesis>
+<fichagenesis>shop,outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Montenegro" codigo="090">
@@ -1339,6 +1351,7 @@
 	type="Ideal" tiendas="shop,outlet" empleado="s"
 	nombre="IDEAL" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Kuzey Kıbrıs (Türk Lirasi)" codigo="602"> <!-- Chipre del norte -->
@@ -1417,6 +1430,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Poland" codigo="060">
@@ -1617,6 +1631,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Yandex" tiendas="shop"
 	nombre="Наличными в терминалах Yandex" namefilter="Russia_Yandex" testpasarela='s' testpago='s'></pago>--> <!-- La hemos de poner la última porque provoca una excepción que envía a Portada -->
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Serbia" codigo="094">
@@ -1699,6 +1714,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n" 
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Slovenia" codigo="091">
@@ -1751,6 +1767,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="España (Península y Baleares)" codigo="001">
@@ -2034,6 +2051,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <mobiluser>0765-260000</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
+<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Schweiz" codigo="036">
@@ -2294,6 +2312,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Belize" codigo="421">
@@ -2459,7 +2478,8 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
-<multidireccion>N</multidireccion>	
+<multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>	
 </pais>
 
 <pais nombre_pais="Cuba" codigo="448">
@@ -2478,6 +2498,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Dominican Republic" codigo="456">
@@ -2555,6 +2576,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="France (Guadeloupe)" codigo="458">
@@ -2637,6 +2659,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <!-- 
@@ -2773,6 +2796,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Panamá" codigo="442">
@@ -2813,6 +2837,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="USA" codigo="400">
@@ -2889,6 +2914,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Bolivia" codigo="516">
@@ -2906,6 +2932,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Brazil " codigo="508">
@@ -2925,6 +2952,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Chile" codigo="512">
@@ -2942,6 +2970,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Colombia" codigo="480">
@@ -3009,6 +3038,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="France (Martinique)" codigo="475">
@@ -3054,6 +3084,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="France (Guyane Française)" codigo="496">
@@ -3099,6 +3130,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Nicaragua" codigo="432">
@@ -3138,7 +3170,8 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<multidireccion>N</multidireccion>	
+<multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>	
 </pais>
 
 <pais nombre_pais="Paraguay" codigo="520">
@@ -3156,6 +3189,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Perú" codigo="504">
@@ -3165,7 +3199,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codpos>08720</codpos>
 <telefono>949162475</telefono>
 <dni>34763592N</dni>
-<tiendas_online></tiendas_online>
+<tiendas_onlin<fichagenesis>shop</fichagenesis>e></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3173,6 +3207,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Surinam" codigo="492">
@@ -3190,6 +3225,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="KIDS"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Uruguay" codigo="524">
@@ -3208,6 +3244,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Venezuela" codigo="484">
@@ -3226,6 +3263,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 </continente>
@@ -3287,6 +3325,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 </continente>
@@ -3308,6 +3347,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="n" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Azerbaijan" codigo="078">
@@ -3338,6 +3378,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <multidireccion>N</multidireccion>
 <galeriagenesis>shop</galeriagenesis>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Bahrain" codigo="640">
@@ -3497,6 +3538,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="PasarelaOtras" tiendas="shop,outlet"
 	nombre="富滇银行" namefilter="zChina_Fudian Bk" testpasarela='n' testpago='n'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Georgia" codigo="076">
@@ -3525,6 +3567,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </linea>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Hong Kong" codigo="740">
@@ -3661,6 +3704,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Iraq" codigo="612">
@@ -3679,6 +3723,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Israel" codigo="624">
@@ -3696,6 +3741,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="日本" codigo="732" exists="n"> <!-- Japón (sólo existe a nivel de la prehome, al seleccionarlo se dirige a otra shop)-->
@@ -3751,6 +3797,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Laos" codigo="684">
@@ -3769,6 +3816,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Jordan" codigo="628">
@@ -3847,6 +3895,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="JCB" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
 <galeriagenesis>shop</galeriagenesis>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Kuwait" codigo="636">
@@ -3950,6 +3999,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> -->
 <multidireccion>N</multidireccion>
 <galeriagenesis>shop</galeriagenesis>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Macao" codigo="743">
@@ -3977,6 +4027,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Malaysia" codigo="701">
@@ -4055,6 +4106,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <entregadomic>N</entregadomic>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Mongolia" codigo="716">
@@ -4073,6 +4125,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Oman" codigo="649">
@@ -4146,6 +4199,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </linea>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Philippines" codigo="708">
@@ -4401,6 +4455,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Taiwan" codigo="736">
@@ -4429,6 +4484,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </linea>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Tailandia" codigo="680">
@@ -4592,6 +4648,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 </continente>
@@ -4634,6 +4691,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <multidireccion>N</multidireccion>
 <galeriagenesis>shop</galeriagenesis>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Bénin" codigo="284">
@@ -4686,6 +4744,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Cameroon" codigo="302">
@@ -4806,6 +4865,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Egypt" codigo="220">
@@ -4898,6 +4958,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Ghana" codigo="276">
@@ -4987,6 +5048,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Madagascar" codigo="370">
@@ -5130,6 +5192,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Mozambique" codigo="366">
@@ -5194,6 +5257,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </linea>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Nigeria" codigo="288">
@@ -5213,6 +5277,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <multidireccion>N</multidireccion>
 <galeriagenesis>shop</galeriagenesis>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Rwanda" codigo="324">
@@ -5362,6 +5427,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Uganda" codigo="350">
