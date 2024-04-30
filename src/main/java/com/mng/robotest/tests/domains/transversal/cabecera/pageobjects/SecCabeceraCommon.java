@@ -20,40 +20,42 @@ public class SecCabeceraCommon extends SecCabecera {
 	
 	private final ModalUserSesionShopDesktop modalUserSesionShopDesktop = new ModalUserSesionShopDesktop(); 
 	
-	private static final String XP_DIV_NAV_TOOLS = "//div[@id='navTools']";
-	private static final String XP_NUM_ARTICLES_MANY_LOCATIONS = "//span[@data-testid[contains(.,'numItems')] or @data-testid[contains(.,'totalItems')]]";
+	private static final String XP_NUM_ARTICLES = "//span[@data-testid[contains(.,'numItems')] or @data-testid[contains(.,'totalItems')]]";
 	
 	public enum IconoCabecera implements ElementPage {
 		LUPA(
 			"//*[@data-testid='header.userMenu.search.button']",
-			//TODO eliminar el 1o cuando suba la actual versión a pro (24-enero)			
-			"//*[@data-testid[contains(.,'header.userMenu.searchIconButton')] or @data-testid='header.userMenu.search.button']"),
+			"//*[@data-testid='header.userMenu.search.button']",
+			"//button[@class[contains(.,'SearchIcon')]]"),
 		INICIAR_SESION(
 			"//*[@data-testid='header.userMenu.login_mobile_any']",
-			"//*[@data-testid='header.userMenu.login_any']"),
+			"//*[@data-testid='header.userMenu.login_any']",
+			"//*[@data-testid[contains(.,header.userMenu.login)] and @href[contains(.,'login')]]"),
 		MICUENTA(
 			"//*[@data-testid='header.userMenu.login_mobile']",
-			"//*[@data-testid='header.userMenu.login']"),
+			"//*[@data-testid='header.userMenu.login']",
+			"//*[@data-testid[contains(.,'header.userMenu.login')] and @href[contains(.,'my-account')]]"),
 		FAVORITOS(
 			"//*[@data-testid='header.userMenu.favorites_mobile_any']",
-			"//*[@data-testid[contains(.,'header.userMenu.favorites')]]"),
+			"//*[@data-testid[contains(.,'header.userMenu.favorites')]]",
+			"//*[@data-testid[contains(.,'header.userMenu.favorites_any')]]"),
 		BOLSA(
 			"//*[@data-testid='header-user-menu-bag']",
-			"//*[@data-testid[contains(.,'header.userMenu.bolsa')] or " + //TODO eliminar cuando todos los países vayan por la nueva bolsa 
-			    "@data-testid[contains(.,'header.userMenu.cart.button')] or " + 
-			    "@data-testid[contains(.,'header-user-menu-bag')]]");
+			"//*[@data-testid[contains(.,'header.userMenu.cart.button')] or " + 
+			    "@data-testid[contains(.,'header-user-menu-bag')]]",
+			"//a[@href[contains(.,'/cart')]]");
 
 		private By byDevice;
 		private String xpathDevice;
 		private By byDesktop;
 		private String xpathDesktop;
 		
-		IconoCabecera(String xpathDevice, String xPathDesktop) {
-			this.xpathDevice = xpathDevice;
-			this.byDevice = By.xpath(xpathDevice);
+		IconoCabecera(String xpathDevice, String xpathDesktop, String xpathGenesis) {
+			this.xpathDevice = "( " + xpathDevice + " | " + xpathGenesis + ")";
+			this.byDevice = By.xpath(this.xpathDevice);
 			
-			this.xpathDesktop = xPathDesktop;
-			this.byDesktop = By.xpath(xPathDesktop);
+			this.xpathDesktop = "( " + xpathDesktop + " | " + xpathGenesis + ")";
+			this.byDesktop = By.xpath(this.xpathDesktop);
 		}
 		
 		@Override
@@ -83,7 +85,7 @@ public class SecCabeceraCommon extends SecCabecera {
 
 	@Override
 	public String getXPathNumberArtIcono() {
-		return XP_NUM_ARTICLES_MANY_LOCATIONS;
+		return XP_NUM_ARTICLES;
 	}
 	
 	@Override
@@ -131,11 +133,6 @@ public class SecCabeceraCommon extends SecCabecera {
 		waitForPageLoaded(driver);
 		moveToElement(icono.getXPath(channel) + "/*"); //Workaround problema hover en Firefox
 		moveToElement(icono.getBy(channel));
-	}
-	
-	public void focusAwayBolsa() {
-		//The moveElement doens't works properly for hide the Bolsa-Modal
-		click(XP_DIV_NAV_TOOLS).exec();
 	}
 	
 	public void hoverIconForShowUserMenuDesktop() {
