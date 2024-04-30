@@ -65,7 +65,9 @@ public class AccesoSteps extends StepBase {
 		expected="el acceso es correcto")
 	private void quickAccess(String urlAccess, Pais pais, IdiomaPais idioma) {
 		new LocalStorageMango().setInitialModalsOff();
-		driver.get(urlAccess);
+		if (driver.getCurrentUrl().compareTo(urlAccess)!=0) {
+			driver.get(urlAccess);
+		}
 	}
 	
 	@Step (
