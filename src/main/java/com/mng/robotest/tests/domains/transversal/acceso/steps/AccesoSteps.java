@@ -44,6 +44,15 @@ public class AccesoSteps extends StepBase {
 		fixRandomSeleniumProblem(); 
 		quickAccess(urlAccess, dataTest.getPais(), dataTest.getIdioma());
 	}
+	
+	public void manySteps() throws Exception {
+		fixRandomSeleniumProblem();
+		accessFromPreHome(false, true);
+		if (dataTest.isUserRegistered()) {
+			identificacionEnMango();
+			new SecBolsaSteps().clear();
+		}
+	}
 
 	private void fixRandomSeleniumProblem() {
 		String currentUrl = "";
@@ -156,18 +165,6 @@ public class AccesoSteps extends StepBase {
 		return checks;
 	}
 
-	/**
-	 * Accedemos a la aplicación (shop/outlet)
-	 * Se ejecutan cada acción en un paso
-	 */
-	public void manySteps() throws Exception {
-		accessFromPreHome(false, true);
-		if (dataTest.isUserRegistered()) {
-			identificacionEnMango();
-			new SecBolsaSteps().clear();
-		}
-	}
-	
 	public void accessFromPreHome() throws Exception {
 		accessFromPreHome(false, true);
 	}
