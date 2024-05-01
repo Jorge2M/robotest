@@ -33,9 +33,10 @@ public class Temporal implements TestFromFactory, Serializable {
 	}
 	
 	@Test(
+		testName="MLY001",			
 		groups={"Tempral", "Canal:desktop_App:shop", "SupportsFactoryCountrys"}, 
 		description="Check modal inicio")
-	public void MLY001_CheckModalInicio() throws Exception {
+	public void checkModalInicio() throws Exception {
 		new Mly001(pais, idioma).execute();
 	}
 

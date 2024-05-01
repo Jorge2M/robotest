@@ -32,9 +32,10 @@ public class CompraMultiAddress implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
+		testName="COM009",			
 		groups={"Compra", "Multidireccion", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true,
 		description="[Usuario registrado] Acceder a la sección de multidirecciones del checkout y añadir/eliminar una dirección")
-	public void COM009_MultiAddress() throws Exception {
+	public void multiAddress() throws Exception {
 		new Com009(pais, idioma).execute();
 	}
 

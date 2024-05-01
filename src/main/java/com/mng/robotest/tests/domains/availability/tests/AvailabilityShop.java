@@ -32,9 +32,10 @@ public class AvailabilityShop implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
+		testName="AVA001",				
 		groups={"Availability", "Canal:all_App:shop,outlet"}, 
 		description="Acceso al país y chequeo disponibilidad galerías y fichas")
-	public void AVA001_AvailabilityShop() throws Exception {
+	public void availabilityShop() throws Exception {
 		new Ava001(pais, idioma).execute();
 	}
 

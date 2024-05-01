@@ -36,9 +36,10 @@ public class Registro implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
+		testName="REG001",			
 		groups={"Registro", "Smoke", "Canal:all_App:shop,outlet", "SupportsFactoryCountrys"},
 		description="Registro nuevo de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
-	public void REG001_NewRegisterOK() throws Exception {
+	public void newRegisterOK() throws Exception {
 		if (isPro()) {
 			return;
 		}
@@ -47,10 +48,10 @@ public class Registro implements TestFromFactory, Serializable {
 	
 	//TODO eliminar REG002,REG003,REG004
 	@Test (
-		enabled=false,
+		testName="REG002", enabled=false,
 		groups={"Registro", "Canal:all_App:outlet"},
 		description="Registro antiguo con errores en la introducción de los datos")
-	public void REG002_RegistroNOK() throws Exception {
+	public void registroNOK() throws Exception {
 		if (isPro()) {
 			return;
 		}
@@ -58,10 +59,10 @@ public class Registro implements TestFromFactory, Serializable {
 	}
 
 	@Test (
-		enabled=false,
+		testName="REG003", enabled=false,
 		groups={"Registro", "Canal:all_App:outlet", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="Registro antiguo de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
-	public void REG003_RegistroOK_publi() throws Exception {
+	public void registroOkPubli() throws Exception {
 		if (isPro()) {
 			return;
 		}
@@ -69,10 +70,10 @@ public class Registro implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
-		enabled=false,
+		testName="REG004", enabled=false,
 		groups={"Registro", "Canal:desktop_App:outlet"}, alwaysRun=true, 
 		description="Registro antiguo de un usuario (sin seleccionar el link de publicidad)")
-	public void REG004_RegistroOK_NoPubli() throws Exception {
+	public void registroOkNoPubli() throws Exception {
 		if (isPro()) {
 			return;
 		}
@@ -80,9 +81,10 @@ public class Registro implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
+		testName="REG005",			
 		groups={"Registro", "Canal:all_App:shop"},
 		description="Registro nuevo de un usuario en Corea (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
-	public void REG005_NewRegisterCorea() throws Exception {
+	public void newRegisterCorea() throws Exception {
 		if (isPro()) {
 			return;
 		}
@@ -92,9 +94,10 @@ public class Registro implements TestFromFactory, Serializable {
 	}	
 	
 	@Test (
+		testName="REG006",			
 		groups={"Registro", "Canal:all_App:shop"},
 		description="Alta/Registro antiguo de un usuario en Deutschland y (seleccionando link de publicidad) posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
-	public void REG006_OldRegisterDeutschland() throws Exception {
+	public void oldRegisterDeutschland() throws Exception {
 		if (isPro()) {
 			return;
 		}
@@ -104,9 +107,10 @@ public class Registro implements TestFromFactory, Serializable {
 	}	
 	
 	@Test (
+		testName="REG007",			
 		groups={"Registro", "Canal:all_App:shop,outlet"},
 		description="Registro con errores en la introducción de los datos (España)")
-	public void REG007_NewRegisterNOK() throws Exception {
+	public void newRegisterNOK() throws Exception {
 		if (isPro()) {
 			return;
 		}
@@ -114,9 +118,10 @@ public class Registro implements TestFromFactory, Serializable {
 	}		
 	
 	@Test (
+		testName="REG008",			
 		groups={"Bolsa", "Registro", "Checkout", "Canal:mobile_App:shop,outlet"}, 
 		description="Flujo bolsa -> identificación -> checkout")
-	public void REG008_Bolsa_Registro() throws Exception {
+	public void bolsaRegistro() throws Exception {
 		if (isPro()) {
 			return;
 		}
@@ -124,9 +129,10 @@ public class Registro implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
+		testName="REG009",			
 		groups={"Registro", "Canal:desktop_App:shop,outlet"}, 
 		description="Registro sin publicidad no pierde contactabilidad")
-	public void REG009_Contactability_Persists() throws Exception {
+	public void contactabilityPersists() throws Exception {
 		if (isPro()) {
 			return;
 		}
@@ -134,9 +140,10 @@ public class Registro implements TestFromFactory, Serializable {
 	}	
 	
 	@Test (
+		testName="REG010",			
 		groups={"Registro", "Loyalty", "Canal:all_App:shop"}, 
 		description="Registro a través de la página del Club Mango Likes You")
-	public void REG010_From_MLY_Club() throws Exception {
+	public void fromMLYClub() throws Exception {
 		if (isPro()) {
 			return;
 		}

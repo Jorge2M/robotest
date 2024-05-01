@@ -6,7 +6,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import com.mng.robotest.tests.conf.suites.PagosPaisesSuite.VersionPagosSuite;
-import com.mng.robotest.testslegacy.appshop.paisaplicavale.PaisAplicaVale;
+import com.mng.robotest.testslegacy.appshop.paisaplicavale.PaisCompra;
 import com.mng.robotest.testslegacy.beans.*;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
@@ -24,7 +24,7 @@ public class ListPrecompraPaises extends FactoryBase {
 			for (Pais pais : listCountrys) {
 				var primerIdioma = pais.getListIdiomas(getApp()).get(0);
 				if (UtilsTest.paisConCompra(pais, getApp())) {
-					listTests.add(new PaisAplicaVale(version, pais, primerIdioma, prioridad));
+					listTests.add(new PaisCompra(version, pais, primerIdioma, prioridad));
 					prioridad+=1;
 					System.out.println(
 						"Creado Test con datos: " +

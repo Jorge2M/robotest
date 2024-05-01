@@ -5,16 +5,18 @@ import org.testng.annotations.*;
 public class Login {
 
 	@Test (
+		testName="LOG001",			
 		groups={"Login", "Smoke", "Canal:desktop_App:shop,outlet"}, 
 		description="Verificar inicio sesión con usuario incorrecto + recuperar password")
-	public void LOG001_IniciarSesion_NOK() throws Exception {
+	public void iniciarSesionNok() throws Exception {
 		new Log001().execute();
 	}
 
 	@Test (
+		testName="LOG002",			
 		groups={"Login", "Canal:desktop_App:shop,outlet"}, 
 		description="Verificar inicio sesión usuario credenciales correctas")
-	public void LOG002_IniciarSesion_OK() throws Exception {
+	public void iniciarSesionOk() throws Exception {
 		new Log002().execute();
 	}
 	
@@ -26,9 +28,10 @@ public class Login {
 	}	
 	
 //	@Test (
+//		testName="LOG004",	
 //		groups={"SoftLogin", "Canal:desktop_App:shop"}, 
 //		description="Forzar estado SoftLogin para usuario y chequear funcionalidades")
-//	public void LOG004_softLogin() throws Exception {
+//	public void softLogin() throws Exception {
 //		new Log004().execute();
 //	}	
 }

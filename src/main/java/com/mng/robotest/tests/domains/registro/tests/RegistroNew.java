@@ -34,9 +34,10 @@ public class RegistroNew implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
+		testName="REG001",			
 		groups={"Registro", "Canal:all_App:all", "SupportsFactoryCountrys"},
 		description="Registro nuevo de un usuario (seleccionando link de publicidad) y posterior logof + login + consulta en mis datos para comprobar la coherencia de los datos utilizados en el registro")
-	public void REG001_NewRegisterOK() throws Exception {
+	public void newRegisterOK() throws Exception {
 		if (isPro()) {
 			return;
 		}

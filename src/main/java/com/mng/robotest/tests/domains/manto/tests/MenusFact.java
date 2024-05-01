@@ -56,9 +56,10 @@ public class MenusFact implements TestFromFactory, Serializable {
 	}
 
 	@Test(
+		testName="MAN009",			
 		groups={"Manto", "Canal:desktop_App:all"},
 		description="Consulta de menús")
-	public void MAN900_ConsultaMenus() {
+	public void consultaMenus() {
 		new Man900(section).execute();
 	}
 }

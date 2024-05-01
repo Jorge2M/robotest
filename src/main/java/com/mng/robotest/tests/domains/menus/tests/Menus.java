@@ -42,9 +42,10 @@ public class Menus implements TestFromFactory, Serializable {
 	}
 	  
 	@Test (
+		testName="MEN001",			
 		groups={"Menus", "Galeria", "Canal:all_App:shop,outlet"}, 
 		description="Acceso desde prehome y navegación por todos los menús del país/línea/grupo")
-	public void MEN001() throws Exception {
+	public void menus() throws Exception {
 		new Men001(country, idiom, line, subline, group).execute();
 	}
 	

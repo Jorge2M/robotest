@@ -6,37 +6,42 @@ import org.testng.annotations.Test;
 public class Ficha {
 	
 	@Test (
+		testName="FIC001",			
 		groups={"Ficha", "Smoke", "Canal:all_App:all"},
 		description="Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
-	public void FIC001_PrimaryFeatures_Reg() throws Exception {
+	public void primaryFeaturesReg() throws Exception {
 		new Fic001().execute();
 	}
 	
 	@Test (
+		testName="FIC006",			
 		groups={"Ficha", "Smoke", "Canal:all_App:all"},
 		description="[Liechtenstein][versión Genesis] Se testean las features principales de una ficha con origen el buscador: añadir a la bolsa, selección color/talla, buscar en tienda, añadir a favoritos")
-	public void FIC006_PrimaryFeatures_Genesis_Reg() throws Exception {
+	public void primaryFeaturesGenesisReg() throws Exception {
 		new Fic006().execute();
 	}	
 
 	@Test (
+		testName="FIC002",			
 		groups={"Ficha", "Smoke", "Canal:all_App:all"},
 		description="[Usuario no registrado] Se testean las features secundarias de una ficha con origen el buscador: guía de tallas, carrusel imágenes, imagen central, panel de opciones, total look")
-	public void FIC002_FichaFromSearch_SecondaryFeatures_NoReg() throws Exception {
+	public void fichaFromSearchSecondaryFeaturesNoReg() throws Exception {
 		new Fic002().execute();
 	}
 
 	@Test (
+		testName="FIC003",			
 		groups={"Ficha", "Smoke", "Canal:desktop_App:shop"}, 
 		description="[Usuario no registrado] Desde Corea/coreano, se testea una ficha con origen la Galería validando el panel KcSafety")
-	public void FIC003_FichaFromGalery_CheckKcSafety() throws Exception {
+	public void fichaFromGaleryCheckKcSafety() throws Exception {
 		new Fic003().execute();
 	}
 	
 	@Test (
+		testName="FIC005",			
 		groups={"Bordados", "Canal:desktop,mobile_App:shop"}, 
 		alwaysRun=true, description="[Usario no registrado] Testeo Personalización bordados")
-	public void FIC005_Articulo_Personalizable_Noreg() throws Exception {
+	public void articuloPersonalizableNoreg() throws Exception {
 		new Fic005().execute();
 	}
 

@@ -14,17 +14,19 @@ public class TextosLegales {
 	
 	//TODO (Grecia y España) actualmente el problema con el scroll provoca un Defect dado que no se ve el 2o link de Política de privacidad
 	@Test(
+		testName="LEG001",			
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Nuevo Registro")
-	public void LEG001_TextosLegalesNuevoRegistro() throws Exception {
+	public void textosLegalesNuevoRegistro() throws Exception {
 		new Leg001().execute();
 	}	
 	
 	//TODO en Russia salen los textos mal
 	@Test(
+		testName="LEG002",			
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Antiguo Registro")
-	public void LEG002_TextosLegalesAntiguoRegistro() throws Exception {
+	public void textosLegalesAntiguoRegistro() throws Exception {
 		new Leg002().execute();
 	}
 	
@@ -32,9 +34,10 @@ public class TextosLegales {
 	//https://confluence.mango.com/display/PIUR/Mapeo+de+textos+legales#expand-GuestcheckoutPaso1
 	
 	@Test(
+		testName="LEG003",			
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Guest checkout - Paso 2")
-	public void LEG003_TextosLegalesGuestCheckoutPaso2() throws Exception {
+	public void textosLegalesGuestCheckoutPaso2() throws Exception {
 		new Leg003().execute();
 	}
 	
@@ -42,39 +45,44 @@ public class TextosLegales {
 	//https://confluence.mango.com/pages/viewpage.action?spaceKey=PIUR&title=Mapeo+de+textos+legales#expand-Suscripcin	
 
 	@Test(
+		testName="LEG004",			
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Suscripción Footer y non modal")
-	public void LEG004_TextosLegalesSuscripcionFooterAndNonModal() throws Exception {
+	public void textosLegalesSuscripcionFooterAndNonModal() throws Exception {
 		new Leg004().execute();
 	}	
 
 	//TODO el 3er literal sale cortado
 	@Test(
+		testName="LEG005",			
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Avisame + suscripción")
-	public void LEG005_TextosLegalesAvisameSuscripcion() throws Exception {
+	public void textosLegalesAvisameSuscripcion() throws Exception {
 		new Leg005().execute();
 	}	
 	
 	//TODO en Serbia (texto común RGPD) no aparecen los textos legales -> parece un error -> reportar
 	@Test(
+		testName="LEG006",			
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Mis Datos")
-	public void LEG006_TextosLegalesMisDatos() throws Exception {
+	public void textosLegalesMisDatos() throws Exception {
 		new Leg006().execute();
 	}	
 	
 	@Test(
+		testName="LEG008",			
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Formulario de ayuda (Genki)")
-	public void LEG008_TextosLegalesFormularioAyuda() throws Exception {
+	public void textosLegalesFormularioAyuda() throws Exception {
 		new Leg008().execute();
 	}
 	
 	@Test(
+		testName="LEG009",			
 		groups={"Legal", "Canal:mobile_App:shop"}, 
 		description="Chequeo textos legales: Cheque Regalo (Pagos)")
-	public void LEG009_TextosLegalesChequeRegalo() throws Exception {
+	public void textosLegalesChequeRegalo() throws Exception {
 		new Leg009().execute();
 	}
 	

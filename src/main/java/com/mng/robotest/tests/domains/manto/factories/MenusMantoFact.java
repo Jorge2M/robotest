@@ -13,9 +13,10 @@ import com.mng.robotest.tests.domains.manto.tests.MenusFact.Section;
 public class MenusMantoFact {
 
 	@Factory(
+		testName="MAN900",			
         groups={"Manto", "Canal:desktop_App:all"}, 
 		description="Factoría que incluye 1 tests por cada uno de los grupos de menús del Manto") 
-	public Object[] MAN900_MenusManto(ITestContext ctxTestRun) throws Exception {
+	public Object[] menusManto(ITestContext ctxTestRun) throws Exception {
 		InputParamsTM inputData = TestMaker.getInputParamsSuite(ctxTestRun);
 		var listTests = new ArrayList<MenusFact>();
 		int prioridad=0;

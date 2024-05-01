@@ -30,11 +30,12 @@ public class ListPagosEspana extends FactoryBase implements Serializable {
 	private static final boolean ANUL_PEDIDO = true;
 	
 	@Factory(
+		  testName="COM010",
 		  groups={"Compra", "Checkout", "Canal:all_App:all"}, 
 		  description=
 	  		"Factoría que incluye varios tests por cada uno de los pagos de España " + 
 	  		"variando los flags de usuario registrado, empleado y métodos de envío")
-	public Object[] COM010_PagoFactory(ITestContext ctx) throws Exception {
+	public Object[] pagoFactory(ITestContext ctx) throws Exception {
 		inputParams = getInputParams(ctx);
 		List<Object> listTests = new ArrayList<>(); 
 		getDataCountrys(getApp());

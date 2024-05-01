@@ -32,19 +32,21 @@ public class MiCuenta implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
+		testName="MIC001",			
 		groups={"Micuenta", "Smoke", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
 		description="Verificar opciones de 'mi cuenta'")
 	@Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
-	public void MIC001_Opciones_Mi_Cuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
+	public void opcionesMiCuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
 			throws Exception {
 		new Mic001(userConDevolucionPeroNoEnPRO, passwordUserConDevolucion).execute();
 	}
 	
 	@Test (
+		testName="MIC002",			
 		groups={"Miscompras", "Smoke", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="Consulta de mis compras con un usuario con datos a nivel de Tienda y Online")
 	@Parameters({"userWithOnlinePurchases", "userWithStorePurchases", "passUserWithOnlinePurchases", "passUserWithStorePurchases"})
-	public void MIC002_CheckConsultaMisCompras(
+	public void checkConsultaMisCompras(
 			String userWithOnlinePurchases, String userWithStorePurchases, 
 			String passUserWithOnlinePurchases, String passUserWithStorePurchases) throws Exception {
 		new Mic002(
@@ -54,16 +56,18 @@ public class MiCuenta implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
+		testName="MIC003",			
 		groups={"Micuenta", "Smoke", "Canal:desktop,mobile_App:shop"}, 
 		description="Registro y cancelación de la cuenta creada")
-	public void MIC003_CancelacionCuenta() throws Exception {
+	public void cancelacionCuenta() throws Exception {
 		new Mic003().execute();
 	}
 	
 	@Test (
+		testName="MIC004",			
 		groups={"Micuenta", "Canal:desktop_App:shop"}, 
 		description="Cancelación de cuenta mediante endpoint de PlayStore")
-	public void MIC004_CancelacionCuenta() throws Exception {
+	public void cancelacionCuentaEndpointPlaystore() throws Exception {
 		new Mic004().execute();
 	}
 	

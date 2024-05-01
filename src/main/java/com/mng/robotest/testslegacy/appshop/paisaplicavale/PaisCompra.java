@@ -9,7 +9,7 @@ import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.github.jorge2m.testmaker.domain.TestFromFactory;
 
-public class PaisAplicaVale implements TestFromFactory, Serializable {
+public class PaisCompra implements TestFromFactory, Serializable {
 
 	private static final long serialVersionUID = 7404913971070937277L;
 	
@@ -20,7 +20,7 @@ public class PaisAplicaVale implements TestFromFactory, Serializable {
 	private final Pais pais;
 	private final IdiomaPais idioma;
 
-	public PaisAplicaVale(VersionPagosSuite version, Pais pais, IdiomaPais idioma, int prioridad) {
+	public PaisCompra(VersionPagosSuite version, Pais pais, IdiomaPais idioma, int prioridad) {
 		this.prioridad = prioridad;
 		this.pais = pais;
 		this.idioma = idioma;
@@ -39,9 +39,10 @@ public class PaisAplicaVale implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
+		testName="CHK001",	
 		groups={"Pagos", "shop-movil-web", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, 
 		description="Compra usuario no registrado")
-	public void CHK001_Compra() throws Exception {
+	public void compra() throws Exception {
 		new Chk001(pais, idioma, fTCkoutIni).execute();
 	}
 	

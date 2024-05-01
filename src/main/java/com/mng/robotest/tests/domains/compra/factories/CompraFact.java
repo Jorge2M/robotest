@@ -76,9 +76,10 @@ public class CompraFact implements TestFromFactory, Serializable {
 	}
 	
 	@Test (
+		testName="COM010",
 		groups={"Compra", "Checkout", "Canal:all_App:all"}, alwaysRun=true, 
 		description="Test de compra (creado desde Factoría) con valores específicos a nivel de Pago, Tipo de Envío, Usuario Conectado y Empleado")
-	public void COM010_Pago() throws Exception {
+	public void pago() throws Exception {
 		new Com010(
 				pais, idioma, pago, usrRegistrado, testVale, manyArticles, empleado, checkAnulaPedido)
 			.execute();

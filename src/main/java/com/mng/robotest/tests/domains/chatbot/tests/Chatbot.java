@@ -5,9 +5,10 @@ import org.testng.annotations.*;
 public class Chatbot {
 
 	@Test (
+		testName="CHT001",
 		groups={"Chatbot", "Smoke", "Canal:desktop,mobile_App:shop,outlet"}, 
 		description="Chequear el ChatBot")
-	public void CHT001_chatBot() throws Exception {
+	public void chatBot() throws Exception {
 		new Cht001().execute();
 	}
 
