@@ -13,9 +13,9 @@ public abstract class PageMiCuenta extends PageBase {
 	abstract String getXPathNumberPoints();
 	
 	public static PageMiCuenta make() {
-		if (isEnvPRO()) {
-			return new PageMiCuentaOld();
-		}
+//		if (isEnvPRO()) {
+//			return new PageMiCuentaOld();
+//		}
 		return new PageMiCuentaNew();
 	}
 	
