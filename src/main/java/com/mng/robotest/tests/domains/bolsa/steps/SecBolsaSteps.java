@@ -323,7 +323,7 @@ public class SecBolsaSteps extends StepBase {
 			if (isMobile()) {
 				fluxPostSelectComprarUserNotIdentifiedMobile(fluxMobile);
 			} else {
-				new Page1IdentCheckoutSteps().checkIsPage(7);
+				new Page1IdentCheckoutSteps().isPage(7);
 			}
 		} else {
 			new CheckoutSteps().checkIsFirstPage(dataTest.isUserRegistered());
@@ -331,21 +331,33 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	private void fluxPostSelectComprarUserNotIdentifiedMobile(FluxBolsaCheckout flux) {
+		fluxPostSelectComprarUserNotIdentifiedMobileOld(flux);
+	}
+	
+	//TODO [flux-bolsa] reactivar cuando se reactive el nuevo flujo
+	private void fluxPostSelectComprarUserNotIdentifiedMobileNew(FluxBolsaCheckout flux) {
 		checkVisibleContinuarSinCuentaButtonDevice(2);
 		switch (flux) {
 		case INICIAR_SESION:
 			clickIniciarSesionMobile();
-			new PageIniciarSesionBolsaMobileSteps().checkIsPage(3);			
+			new PageIniciarSesionBolsaMobileSteps().isPage(3);			
 			break;
 		case CONTINUAR_SIN_CUENTA:
 			clickContinuarSinCuentaMobile();
-			new Page1IdentCheckoutSteps().checkIsPage(7);
+			new Page1IdentCheckoutSteps().isPage(7);
 			break;
 		case REGISTRO:
 			clickRegistroMobile();
 			new PageRegistroInitialShopSteps().checkIsPage(5);
 		}
 	}
+	
+	private void fluxPostSelectComprarUserNotIdentifiedMobileOld(FluxBolsaCheckout flux) {
+		if (flux==REGISTRO) {
+			throw new UnsupportedOperationException("Registro is not supported in the old bolsa->checkout flux");			
+		}
+		new Page1IdentCheckoutSteps().isPage(7);
+	}	
 	
 	@Step (
 		description="Se selecciona el botón \"COMPRAR\" de la bolsa", 

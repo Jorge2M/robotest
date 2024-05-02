@@ -5,6 +5,7 @@ import static com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps.FluxBolsa
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.PageIniciarSesionBolsaMobileSteps;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 
 public class Log003 extends TestBase {
@@ -31,7 +32,9 @@ public class Log003 extends TestBase {
 	}
 	
 	private void iniciarSesion() {
-		new PageIniciarSesionBolsaMobileSteps().login();
+		//TODO [flux-bolsa] reactivar cuando se reactive el nuevo flujo
+		//new PageIniciarSesionBolsaMobileSteps().login();
+		new Page1IdentCheckoutSteps().login();
 	}
 	
 	private void clickVerMisCompras() {

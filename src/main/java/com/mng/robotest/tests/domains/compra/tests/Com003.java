@@ -34,8 +34,8 @@ public class Com003 extends TestBase {
 	private void goToCheckout() {
 		var userEmail = getUserEmail();
 		var page1IdentCheckoutSteps = new Page1IdentCheckoutSteps(); 
-		page1IdentCheckoutSteps.checkIsPage(7);
-		page1IdentCheckoutSteps.inputEmailAndContinue(userEmail, true);
+		page1IdentCheckoutSteps.isPage(7);
+		page1IdentCheckoutSteps.inputEmailNewUserAndContinue(userEmail, true);
 		
 		var page2IdentCheckoutSteps = new Page2IdentCheckoutSteps();
 		page2IdentCheckoutSteps.inputDataPorDefecto(userEmail, false);

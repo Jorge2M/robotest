@@ -20,10 +20,11 @@ public abstract class SecSoyNuevo extends PageBase {
 	public abstract void setCheckConsentimiento(RadioState action);
 	
 	public static SecSoyNuevo make(Channel channel) {
-		if (channel!=Channel.mobile) {
+		//TODO [flux-bolsa] reactivar cuando se reactive el nuevo flujo
+//		if (channel!=Channel.mobile) {
 			return new SecSoyNuevoDesktop();
-		}
-		return new SecSoyNuevoMobile();
+//		}
+//		return new SecSoyNuevoMobile();
 	}
 	
 	public boolean isFormIdentUntil(int seconds) { 

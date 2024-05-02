@@ -6,8 +6,8 @@ import static com.mng.robotest.testslegacy.data.PaisShop.*;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.compra.pageobjects.Page2IdentCheckout;
+import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page2IdentCheckoutSteps;
-import com.mng.robotest.tests.domains.compra.steps.SecSoyNuevoSteps;
 
 /**
  * Control textos legales "Guest Checkout - Paso 2":
@@ -62,7 +62,7 @@ public class Leg003 extends TestBase {
 	}	
 	
 	private void inputEmailAndContinue() {
-		new SecSoyNuevoSteps().inputEmailAndContinue(getUserEmail());
+		new Page1IdentCheckoutSteps().inputEmailNewUserAndContinue(getUserEmail());
 	}
 	
 	private void clickLinkPoliticaPrivacidad() {
