@@ -146,7 +146,7 @@ public class PagePrehome extends PageBase implements PageFromFooter {
 			selecionIdiomaAndEnter();
 		}
 		catch (Exception e) {
-			Log4jTM.getLogger().error("Problem accessing prehome. {}. {}", e.getClass().getName(), e.getStackTrace());
+			Log4jTM.getLogger().error("Problem accessing prehome. {}. {}. {}", e.getClass().getName(), e.getMessage(), e.getStackTrace());
 		}		
 	}
 

@@ -4,7 +4,6 @@ import java.net.URISyntaxException;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
-import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
@@ -21,8 +20,6 @@ import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 
-import io.netty.handler.timeout.TimeoutException;
-
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.*;
 import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
@@ -31,7 +28,6 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 public class AccesoSteps extends StepBase {
 
 	public void oneStep(boolean clearArticulos) throws Exception {
-		fixRandomSeleniumProblem();		
 		new AccesoFlows().accesoHomeAppWeb();
 		if (dataTest.isUserRegistered()) {
 			identification(dataTest, clearArticulos);
@@ -41,12 +37,10 @@ public class AccesoSteps extends StepBase {
 	public void quickAccessCountry() throws Exception {
 		String urlBase = inputParamsSuite.getUrlBase();
 		String urlAccess = dataTest.getPais().getUrlAccess(urlBase);
-		fixRandomSeleniumProblem(); 
 		quickAccess(urlAccess, dataTest.getPais(), dataTest.getIdioma());
 	}
 	
 	public void manySteps() throws Exception {
-		fixRandomSeleniumProblem();
 		accessFromPreHome(false, true);
 		if (dataTest.isUserRegistered()) {
 			identificacionEnMango();
@@ -54,29 +48,26 @@ public class AccesoSteps extends StepBase {
 		}
 	}
 
-	private void fixRandomSeleniumProblem() {
-		String currentUrl = "";
-		try {
-			currentUrl = driver.getCurrentUrl();
-		} catch (TimeoutException e) {
-			Log4jTM.getLogger().warn("Timeout trying to capture current url from browser");
-		}
-		
-		if ("".compareTo(currentUrl)==0 || currentUrl.contains("data:,")) {
-			Log4jTM.getLogger().warn(String.format("Problem with data:, in url. Trying to get URL %s", inputParamsSuite.getUrlBase()));
-			driver.get(inputParamsSuite.getUrlBase());
-			Log4jTM.getLogger().info(String.format("URL in browser %s", driver.getCurrentUrl()));
-		}
-	}
-	
 	@Step (
 		description="Acceso <b style=\"color:brown;\">#{pais.getNombrePais()} / #{idioma.getLiteral()}</b> a través de la URL <a href='#{urlAccess}'>#{urlAccess}</a>",
 		expected="el acceso es correcto")
 	private void quickAccess(String urlAccess, Pais pais, IdiomaPais idioma) {
+		new AccesoFlows().fixRandomSeleniumProblem();
 		new LocalStorageMango().setInitialModalsOff();
 		if (driver.getCurrentUrl().compareTo(urlAccess)!=0) {
 			driver.get(urlAccess);
 		}
+	}
+
+	public void accessFromPreHome() throws Exception {
+		accessFromPreHome(false, true);
+	}
+	
+	public void accessFromPreHome(boolean execValidacs, boolean acceptCookies) throws Exception {
+		var accesoFlows = new AccesoFlows();
+		accesoFlows.previousAccessShopSteps();
+		new PagePrehomeSteps().accessShopViaPreHome(execValidacs, acceptCookies);
+		accesoFlows.closeModalsPostAccessAndManageCookies(acceptCookies);
 	}
 	
 	@Step (
@@ -85,15 +76,15 @@ public class AccesoSteps extends StepBase {
 			"(borrar artículos bolsa: <b>#{clearArticulos}</b>)",
 		expected="el login es correcto",
 		saveNettraffic=ALWAYS)
-	public void identification(DataTest dataTest, boolean clearArticulos) {
+	private void identification(DataTest dataTest, boolean clearArticulos) {
 		new AccesoFlows().identification(dataTest.getUserConnected(), dataTest.getPasswordUser());
-		validaIdentificacionEnShop();
+		checkIdentificacionEnShop();
 		if (clearArticulos) {
 			new SecBolsa().clearArticulos();
 		}
 	}
 
-	public void validaIdentificacionEnShop() {
+	private void checkIdentificacionEnShop() {
 		checkLinksAfterLogin();
 		checksDefault();
 		checksGeneric()
@@ -114,13 +105,13 @@ public class AccesoSteps extends StepBase {
 		}
 	}
 	
-	public void checkLinksAfterLogin() {
+	private void checkLinksAfterLogin() {
 		checkIsLogged();
 		checkOtherLinksAfterLogin();
 	}	
 	
 	@Validation
-	public ChecksTM checkIsLogged(int seconds, State level) {
+	private ChecksTM checkIsLogged(int seconds, State level) {
 		var checks = ChecksTM.getNew();
 		var userMenus = new MenusUserWrapper();
 		checks.add(
@@ -165,17 +156,6 @@ public class AccesoSteps extends StepBase {
 		return checks;
 	}
 
-	public void accessFromPreHome() throws Exception {
-		accessFromPreHome(false, true);
-	}
-	
-	public void accessFromPreHome(boolean execValidacs, boolean acceptCookies) throws Exception {
-		var accesoFlows = new AccesoFlows();
-		accesoFlows.previousAccessShopSteps();
-		new PagePrehomeSteps().accessShopViaPreHome(execValidacs, acceptCookies);
-		accesoFlows.closeModalsPostAccessAndManageCookies(acceptCookies);
-	}
-
 	public void identificacionEnMango() {
 		if (!new MenusUserWrapper().isMenuInState(CERRAR_SESION, PRESENT)) {
 			iniciarSesion(dataTest);
@@ -202,7 +182,7 @@ public class AccesoSteps extends StepBase {
 		saveNettraffic=ALWAYS)
 	public void identification(String userConnect, String userPassword) {
 		new AccesoFlows().identification(userConnect, userPassword);
-		validaIdentificacionEnShop();
+		checkIdentificacionEnShop();
 	}
 	
 	public void login() {
@@ -224,7 +204,7 @@ public class AccesoSteps extends StepBase {
 		saveNettraffic=ALWAYS)
 	public void login(String userConnect, String userPassword) {
 		new AccesoFlows().login(userConnect, userPassword);
-		validaIdentificacionEnShop();
+		checkIdentificacionEnShop();
 	}	
 	
 	@Step (

@@ -26,6 +26,8 @@ import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterAcc
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalNewsLetterAfterAccess;
 
+import io.netty.handler.timeout.TimeoutException;
+
 public class AccesoFlows extends StepBase {
 
 	public void goToInitURL() {
@@ -48,6 +50,7 @@ public class AccesoFlows extends StepBase {
 	}
 	
 	public void previousAccessShopSteps() throws Exception {
+		fixRandomSeleniumProblem();
 		reloadIfServiceUnavailable();
 		new PageJCAS().identJCASifExists();
 	}
@@ -139,6 +142,21 @@ public class AccesoFlows extends StepBase {
 	
 	public void cambioPais(Pais newPais, IdiomaPais newIdioma) {
 		new Chg001().changeCountry(newPais, newIdioma);
+	}
+	
+	public void fixRandomSeleniumProblem() {
+		String currentUrl = "";
+		try {
+			currentUrl = driver.getCurrentUrl();
+		} catch (TimeoutException e) {
+			Log4jTM.getLogger().warn("Timeout trying to capture current url from browser");
+		}
+		
+		if ("".compareTo(currentUrl)==0 || currentUrl.contains("data:,")) {
+			Log4jTM.getLogger().warn(String.format("Problem with data:, in url. Trying to get URL %s", inputParamsSuite.getUrlBase()));
+			driver.get(inputParamsSuite.getUrlBase());
+			Log4jTM.getLogger().info(String.format("URL in browser %s", driver.getCurrentUrl()));
+		}
 	}
 		
 }
