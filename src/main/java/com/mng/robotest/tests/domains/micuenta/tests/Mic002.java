@@ -43,7 +43,7 @@ public class Mic002 extends TestBase {
 	}
 
 	//TODO activar cuando suba a PRE el tícket https://jira.mango.com/browse/PIUR-5086
-	private void compraOnline_PostPIUR5086() throws Exception {
+	private void compraOnlinePostPIUR5086() throws Exception {
 		accessAndClickMisCompras();
 		login();
 		checkCompraOnline();

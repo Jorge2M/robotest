@@ -21,9 +21,10 @@ public class Login {
 	}
 	
 	@Test (
+		testName="LOG003",
 		groups={"Login", "Bolsa", "Checkout", "Compra", "Canal:mobile_App:shop,outlet"}, 
 		description="Flujo bolsa -> identificación -> checkout")
-	public void LOG003_Bolsa_Identificacion() throws Exception {
+	public void bolsaIdentificacion() throws Exception {
 		new Log003().execute();
 	}	
 	
