@@ -13,7 +13,6 @@ public class CompraMultiAddress implements TestFromFactory, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String indexFact = "";
-	public int prioridad;
 	private Pais pais;
 	private IdiomaPais idioma;
 	

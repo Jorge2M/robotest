@@ -81,11 +81,11 @@ public class HttpCookiesFinderMangoAuditor implements CookiesRepository {
     
     private List<Cookie> getCookiesData(CookiesMangoAuditor cookiesMangoAuditor) {
     	List<Cookie> listCookies = new ArrayList<>();
-    	listCookies.addAll(getCookies(cookiesMangoAuditor.functional));
-    	listCookies.addAll(getCookies(cookiesMangoAuditor.targeting));
-    	listCookies.addAll(getCookies(cookiesMangoAuditor.performance));
-    	listCookies.addAll(getCookies(cookiesMangoAuditor.necessary));
-    	listCookies.addAll(getCookies(cookiesMangoAuditor.social));
+    	listCookies.addAll(getCookies(cookiesMangoAuditor.getFunctional()));
+    	listCookies.addAll(getCookies(cookiesMangoAuditor.getTargeting()));
+    	listCookies.addAll(getCookies(cookiesMangoAuditor.getPerformance()));
+    	listCookies.addAll(getCookies(cookiesMangoAuditor.getNecessary()));
+    	listCookies.addAll(getCookies(cookiesMangoAuditor.getSocial()));
     	return listCookies;
     }
     
