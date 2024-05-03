@@ -1,53 +1,46 @@
 package com.mng.robotest.tests.domains.compranew.tests;
 
-import java.util.Map;
-
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
-import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
+import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
+import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.datastored.DataPago;
-import com.mng.robotest.testslegacy.steps.navigations.shop.NavigationsSteps;
-import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
-import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
+import com.mng.robotest.testslegacy.utils.PaisGetter;
 
 public class Cnw001 extends TestBase {
 	
+	private final CheckoutSteps checkoutSteps = new CheckoutSteps();
+	
+	public Cnw001() throws Exception {
+		dataTest.setUserRegistered(true);
+		dataTest.setPais(PaisGetter.from(PaisShop.SERBIA));
+		dataTest.setIdioma(dataTest.getPais().getListIdiomas().get(0));
+	}
+	
 	@Override
 	public void execute() throws Exception {
-		DataPago dataPago = fromPrehomeToCheckout();
-		goToPortada();
-		
-		String usrEmail = dataPago.getDatosRegistro().get("cfEmail");
-		String password = dataPago.getDatosRegistro().get("cfPass");
-			
-		loginWithNewUser(usrEmail, password);
-		checkMisDatos(dataPago, usrEmail, password);
+		accessLoginAndClearBolsa();
+		altaArticulosBolsaAndClickComprar();
+		if (!isPRO()) {
+			var dataPago = executeVisaPayment();
+			checkMisCompras(dataPago);
+		}
 	}
 
-	private DataPago fromPrehomeToCheckout() throws Exception {
-		var configCheckout = ConfigCheckout.config().build();
-		var dataPago = getDataPago(configCheckout);
-		dataPago = new BuilderCheckout(dataPago)
-			.build()
-			.checkout(From.PREHOME);
-		return dataPago;
+	private void accessLoginAndClearBolsa() throws Exception {
+		access();
+		new SecBolsaSteps().clear();
 	}
-
-	private void goToPortada() {
-		new NavigationsSteps().gotoPortada();
-	}
-
-	private void loginWithNewUser(String usrEmail, String password) {
-		new SecMenusUserSteps().logoffLogin(usrEmail, password);
-	}	
 	
-	private void checkMisDatos(DataPago dataPago, String usrEmail, String password) {
-		Map<String,String> datosRegistro = dataPago.getDatosRegistro();
-		datosRegistro.put("cfEmail", usrEmail);
-		datosRegistro.put("cfPass", password);
-		datosRegistro.put("", "Barcelona");
-		datosRegistro.put("provinciaPais", "Barcelona");
-		new PageMiCuentaSteps().goToMisDatosAndValidateData(datosRegistro, dataTest.getCodigoPais());
-	}	
+	public void checkIsPresentImportInBothCurrencies() throws Exception {
+		checkoutSteps.isCroatiaImportInBothCurrencies();
+	}
+	
+	private void checkMisCompras(DataPago dataPago) {
+		String codigoPedido = dataPago.getDataPedido().getCodpedido();
+		new PageResultPagoSteps().selectMisCompras();
+		new PageMisComprasSteps().checkIsCompraOnline(codigoPedido);
+	}
 }

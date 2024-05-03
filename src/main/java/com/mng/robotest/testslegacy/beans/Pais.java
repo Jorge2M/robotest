@@ -52,6 +52,7 @@ public class Pais implements Serializable {
 	String multidireccion;
 	String galeriagenesis;
 	String fichagenesis;
+	String newcheckout;
 	String emailuser;
 	String mobiluser;
 	
@@ -315,6 +316,30 @@ public class Pais implements Serializable {
 		List<AppEcom> listApps = new ArrayList<>();
 		if (getFichagenesis()!=null && getFichagenesis().length()>0) {
 			var listAppsStr = Arrays.asList(getFichagenesis().split(","));
+			for (String app : listAppsStr) {
+				listApps.add(AppEcom.valueOf(app));
+			}
+		}
+		return listApps;
+	}	
+	
+	public String getNewcheckout() {
+		return this.newcheckout;
+	}
+
+	@XmlElement
+	public void setNewcheckout(String newcheckout) {
+		this.newcheckout = newcheckout;
+	}
+	
+	public boolean isNewcheckout(AppEcom app) {
+		return getTiendasNewcheckout().contains(app);
+	}
+	
+	private List<AppEcom> getTiendasNewcheckout() {
+		List<AppEcom> listApps = new ArrayList<>();
+		if (getNewcheckout()!=null && getNewcheckout().length()>0) {
+			var listAppsStr = Arrays.asList(getNewcheckout().split(","));
 			for (String app : listAppsStr) {
 				listApps.add(AppEcom.valueOf(app));
 			}

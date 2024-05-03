@@ -20,9 +20,9 @@ public class SecBolsa extends SecBolsaCommon {
 	private static final String XP_BOTON_COMPRAR = "//button[@data-testid[contains(.,'checkout.button')]]";
 	private static final String XP_PRECIO_SUBTOTAL_MOBILE = "//*[@data-testid[contains(.,'subTotalprice')]]//*[@data-testid='currentPrice']";
 	private static final String XP_PRECIO_SUBTOTAL_DESKTOP = "//*[@data-testid='bag.preview.summary.price']//*[@data-testid='currentPrice']";
-	private static final String XP_INICIAR_SESION_MOBILE = "//*[@data-testid[contains(.,'goToLogin')]]";
-	private static final String XP_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE = "//*[@data-testid[contains(.,'goToContinueAsGuest')]]";
-	private static final String XP_REGISTRO_BUTTON_MOBILE = "//*[@data-testid[contains(.,'goToRegistry')]]";
+	private static final String XP_SIGN_IN_BUTTON_MOBILE = "//*[@data-testid='shoppingCart.loginModal.cta.login']";
+	private static final String XP_CREATE_ACCOUNT_BUTTON_MOBILE = "//*[@data-testid='shoppingCart.loginModal.cta.register']";	
+	private static final String XP_CONTINUE_AS_GUEST_LINK_MOBILE = "//*[@data-testid='shoppingCart.loginModal.cta.guest']";
 
 	@Override
 	String getXPathPanelBolsa() {
@@ -100,20 +100,20 @@ public class SecBolsa extends SecBolsaCommon {
 	}
 
 	public void clickIniciarSesionMobile() {
-		click(XP_INICIAR_SESION_MOBILE).exec();
+		click(XP_SIGN_IN_BUTTON_MOBILE).exec();
 	}
 	
 	public void clickContinuarSinCuentaMobile() {
-		click(XP_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE).exec();
+		click(XP_CONTINUE_AS_GUEST_LINK_MOBILE).exec();
 	}
 	
 	public void clickRegistroMobile() {
-		state(VISIBLE, XP_REGISTRO_BUTTON_MOBILE).wait(1).check();
-		click(XP_REGISTRO_BUTTON_MOBILE).exec();
+		state(VISIBLE, XP_CREATE_ACCOUNT_BUTTON_MOBILE).wait(1).check();
+		click(XP_CREATE_ACCOUNT_BUTTON_MOBILE).exec();
 	}	
 	
 	public boolean isVisibleContinuarSinCuentaButtonMobile(int seconds) {
-		return state(VISIBLE, XP_CONTINUAR_SIN_CUENTA_BUTTON_MOBILE).wait(seconds).check();
+		return state(VISIBLE, XP_CONTINUE_AS_GUEST_LINK_MOBILE).wait(seconds).check();
 	}
 
 	private void setBolsaDesktopToState(StateBolsa stateBolsaExpected) {

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE xml>
+<!-- Ficha Genesis: https://mangospain.atlassian.net/wiki/spaces/CLAV/pages/275186111/Pa+ses+por+versi+n-->
+<!-- Nuevo Checkout: https://mangospain.atlassian.net/wiki/spaces/ODY/pages/394821650/New+CheckOut+rollout -->
 <Response>
 <continente nombre_continente="Europe">
 <pais nombre_pais="Albania" codigo="070">
@@ -37,6 +39,7 @@
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Andorra" codigo="043">
@@ -247,6 +250,7 @@
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Bulgaria" codigo="068">
@@ -1669,6 +1673,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Slovakia" codigo="063">
@@ -2313,6 +2318,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
 <fichagenesis>shop</fichagenesis>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Belize" codigo="421">
@@ -2368,6 +2374,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Haiti" codigo="452">
@@ -2401,6 +2408,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Canada" codigo="404">
@@ -2480,6 +2488,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
 <fichagenesis>shop</fichagenesis>	
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Cuba" codigo="448">
@@ -2536,6 +2545,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="El Salvador" codigo="428">
@@ -2577,6 +2587,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <fichagenesis>shop</fichagenesis>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="France (Guadeloupe)" codigo="458">
@@ -2660,6 +2671,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <fichagenesis>shop</fichagenesis>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <!-- 
@@ -2797,6 +2809,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
 <fichagenesis>shop</fichagenesis>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Panamá" codigo="442">
@@ -3172,6 +3185,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <fichagenesis>shop</fichagenesis>	
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Paraguay" codigo="520">
@@ -3458,6 +3472,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="中国" codigo="720"> <!-- China -->
@@ -4028,6 +4043,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
 <fichagenesis>shop</fichagenesis>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Malaysia" codigo="701">
@@ -4065,6 +4081,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Maldives" codigo="667">
@@ -4107,6 +4124,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <multidireccion>N</multidireccion>
 <entregadomic>N</entregadomic>
 <fichagenesis>shop</fichagenesis>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Mongolia" codigo="716">
@@ -4437,6 +4455,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Syria " codigo="608">
@@ -4726,6 +4745,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Burkina" codigo="236">
@@ -4779,6 +4799,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Chad" codigo="244">
@@ -4813,6 +4834,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Democratic Republic of the Congo" codigo="318">
@@ -4847,6 +4869,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Côte d" codigo="272">
@@ -4938,6 +4961,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="France (La Réunion)" codigo="372">
@@ -4993,6 +5017,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Kenya" codigo="346">
@@ -5030,6 +5055,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Libya" codigo="216">
@@ -5083,6 +5109,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Malawi" codigo="386">
@@ -5119,6 +5146,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Mali" codigo="232">
@@ -5153,6 +5181,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Maurice" codigo="373">
@@ -5230,6 +5259,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Niger" codigo="240">
@@ -5312,6 +5342,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Sénégal" codigo="248">
@@ -5350,6 +5381,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="South Africa" codigo="388">
@@ -5407,6 +5439,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <!-- <pais nombre_pais="Tunisia" codigo="212">-->
@@ -5461,6 +5494,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Zambia" codigo="378">
@@ -5494,6 +5528,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Zimbabwe" codigo="382">
@@ -5527,6 +5562,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 </continente>

@@ -33,7 +33,7 @@ public class MiCuenta implements TestFromFactory, Serializable {
 	
 	@Test (
 		testName="MIC001",			
-		groups={"Micuenta", "Smoke", "Canal:desktop_App:shop,outlet"}, alwaysRun=true, 
+		groups={"Micuenta", "Smoke", "Canal:desktop_App:shop,outlet"}, 
 		description="Verificar opciones de 'mi cuenta'")
 	@Parameters({"userConDevolucionPeroSoloEnPRO", "passwordUserConDevolucion"})
 	public void opcionesMiCuenta(String userConDevolucionPeroNoEnPRO, String passwordUserConDevolucion) 
@@ -57,7 +57,7 @@ public class MiCuenta implements TestFromFactory, Serializable {
 	
 	@Test (
 		testName="MIC003",			
-		groups={"Micuenta", "Smoke", "Canal:desktop,mobile_App:shop"}, 
+		groups={"Micuenta", "Smoke", "Canal:desktop,mobile_App:shop,outlet"}, 
 		description="Registro y cancelación de la cuenta creada")
 	public void cancelacionCuenta() throws Exception {
 		new Mic003().execute();

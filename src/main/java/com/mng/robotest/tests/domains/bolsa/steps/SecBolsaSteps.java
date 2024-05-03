@@ -331,7 +331,11 @@ public class SecBolsaSteps extends StepBase {
 	}
 
 	private void fluxPostSelectComprarUserNotIdentifiedMobile(FluxBolsaCheckout flux) {
-		fluxPostSelectComprarUserNotIdentifiedMobileOld(flux);
+		if (dataTest.getPais().isNewcheckout(app)) {
+			fluxPostSelectComprarUserNotIdentifiedMobileNew(flux);
+		} else {
+			fluxPostSelectComprarUserNotIdentifiedMobileOld(flux);
+		}
 	}
 	
 	//TODO [flux-bolsa] reactivar cuando se reactive el nuevo flujo

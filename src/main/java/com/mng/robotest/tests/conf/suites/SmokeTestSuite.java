@@ -13,6 +13,7 @@ import com.mng.robotest.tests.domains.chatbot.tests.Chatbot;
 import com.mng.robotest.tests.domains.chequeregalo.tests.ChequeRegalo;
 import com.mng.robotest.tests.domains.compra.tests.Compra;
 import com.mng.robotest.tests.domains.compra.tests.CompraMultiAddress;
+import com.mng.robotest.tests.domains.compranew.tests.CompraNew;
 import com.mng.robotest.tests.domains.favoritos.tests.Favoritos;
 import com.mng.robotest.tests.domains.ficha.tests.Ficha;
 import com.mng.robotest.tests.domains.footer.tests.Footer;
@@ -48,6 +49,7 @@ public class SmokeTestSuite extends SuiteMangoMaker {
 			PaisIdioma.class,
 			Galeria.class,
 			Compra.class,
+			CompraNew.class,
 			Setcookies.class,
 			ChequeRegalo.class,
 			CompraMultiAddress.class,
