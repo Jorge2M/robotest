@@ -6,7 +6,6 @@ public class SecSoyNuevoDesktop extends SecSoyNuevo {
 	
 	private static final String XP_FORM_IDENT = "//div[@class='register' or @id='registerCheckOut']//form"; //desktop y mobil
 	private static final String XP_INPUT_EMAIL = XP_FORM_IDENT + "//input[@id[contains(.,'expMail')]]";
-	private static final String XP_INPUT_CONTENT = XP_FORM_IDENT + "//span[@class='eac-cval']";
 	private static final String XP_BOTON_CONTINUE = "//div[@class='register']//div[@class='submit']/input";
 	private static final String XP_INPUT_PUBLICIDAD = "//input[@id[contains(.,':publicidad')]]";
 	private static final String XP_RADIO_PUBLICIDAD = XP_INPUT_PUBLICIDAD;
@@ -34,7 +33,7 @@ public class SecSoyNuevoDesktop extends SecSoyNuevo {
 	
 	@Override
 	boolean isInputWithText(String text) {
-		return getElement(XP_INPUT_CONTENT).getAttribute("innerHTML").compareTo(text)==0;
+		return getElement(XP_INPUT_EMAIL).getAttribute("value").compareTo(text)==0;
 	}
 	
 	@Override

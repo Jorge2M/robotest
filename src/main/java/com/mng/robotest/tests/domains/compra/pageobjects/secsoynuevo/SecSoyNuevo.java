@@ -43,7 +43,12 @@ public abstract class SecSoyNuevo extends PageBase {
 	}
 	
 	public void clickContinue() {
-		click(getXPathBotonContinue()).type(JAVASCRIPT).exec();
+		//TODO [flux-bolsa] quitar el caso de device cuando se reactive el nuevo flujo
+		if (isDevice()) {
+			click("//input[@id[contains(.,'RegLogChkNew')] and @type='submit']").exec();
+		} else {
+			click(getXPathBotonContinue()).type(JAVASCRIPT).exec();
+		}
 	}
 
 	void clickRadio(RadioState radioAction, boolean isActivated, String xpathRadio) {
