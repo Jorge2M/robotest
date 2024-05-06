@@ -20,7 +20,7 @@ public class PageFavoritosSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validaIsPageOK() {
+	public ChecksTM checkPage() {
 		var checks = ChecksTM.getNew();
 		int secondsCapa = 3;
 		int secondsArticles = 2;

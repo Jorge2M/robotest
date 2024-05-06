@@ -33,7 +33,7 @@ public class SecMenusUserSteps extends StepBase {
 		saveHtmlPage=IF_PROBLEM)
 	public void selectFavoritos() {
 		clickUserMenu(FAVORITOS);
-		new PageFavoritosSteps().validaIsPageOK();
+		new PageFavoritosSteps().checkPage();
 	}
 
 	@Step (

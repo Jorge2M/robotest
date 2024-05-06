@@ -48,7 +48,7 @@ public abstract class SecSoyNuevo extends PageBase {
 			String xpathContinue = "//input[@id[contains(.,'RegLogChkNew')] and @type='submit']"; 
 			click(xpathContinue).exec();
 			if (!state(INVISIBLE, xpathContinue).wait(5).check()) {
-				click(xpathContinue).exec();
+				click(xpathContinue).type(JAVASCRIPT).exec();
 			}
 		} else {
 			click(getXPathBotonContinue()).type(JAVASCRIPT).exec();
