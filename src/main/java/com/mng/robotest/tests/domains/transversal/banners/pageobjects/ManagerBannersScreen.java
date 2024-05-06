@@ -43,14 +43,17 @@ public class ManagerBannersScreen extends PageBase {
 	public void clearAndStoreNewBannersDataFromScreen(List<BannerType> listBannerTypes) {
 		clearBannersData(listBannerTypes);
 		for (BannerType bannerType : listBannerTypes) {
-			BannerObject bannerObject = BannerObjectFactory.make(bannerType, app);
+			var bannerObject = BannerObjectFactory.make(bannerType, app);
 			if (bannerType==BannerType.STANDAR) {
-				//Para recopilar este tipo de banners hemos de paginar para asegurarnos que se visualizan todos
-				new Actions(driver).sendKeys(Keys.PAGE_DOWN).perform();
+				pageDownForDisplayAllBanners();
 			}
-			List<DataBanner> listBannersOfType = bannerObject.getListBannersDataUntil(maxBannersToLoad, 1);
+			var listBannersOfType = bannerObject.getListBannersDataUntil(maxBannersToLoad, 1);
 			addBanners(listBannersOfType);
 		}
+	}
+	
+	private void pageDownForDisplayAllBanners() {
+		new Actions(driver).sendKeys(Keys.PAGE_DOWN).perform();
 	}
 	
 	public void clearBannersData(List<BannerType> listBannerTypes) {

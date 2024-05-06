@@ -36,7 +36,7 @@ public class SecBannersSteps extends StepBase {
 		int sizeListBanners = managerBannersScreen.getListDataBanners().size();
 		for (int posBanner=1; posBanner<=sizeListBanners && posBanner<=maximoBanners; posBanner++) {
 			boolean makeValidations = true;
-			seleccionarBanner(posBanner, makeValidations);
+			selectBanner(posBanner, makeValidations);
 			driver.get(urlPagPrincipal);
 			PageObjTM.waitForPageLoaded(driver);
 			managerBannersScreen.reloadBanners(); //For avoid StaleElement Exception
@@ -44,9 +44,9 @@ public class SecBannersSteps extends StepBase {
 		}
 	}
 	
-	public void seleccionarBanner(int posBanner, boolean validaciones) throws Exception {
+	public void selectBanner(int posBanner, boolean validaciones) throws Exception {
 		DataBanner dataBanner = managerBannersScreen.getBanner(posBanner);
-		seleccionarBanner(dataBanner, validaciones);
+		selectBanner(dataBanner, validaciones);
 	}
 	
 	@Step (
@@ -56,7 +56,7 @@ public class SecBannersSteps extends StepBase {
 				"<b>imagen</b>: #{dataBanner.getSrcImage()}<br>" + 
 				"<b>texto</b>: #{dataBanner.getText()}",
 		expected="Aparece una página correcta (con banners o artículos)")
-	public void seleccionarBanner(DataBanner dataBanner, boolean validaciones) throws Exception {
+	public void selectBanner(DataBanner dataBanner, boolean validaciones) throws Exception {
 		String urlPagPrincipal = driver.getCurrentUrl();
 		URI uriPagPrincipal = new URI(urlPagPrincipal);
 		int elementosPagPrincipal = driver.findElements(By.xpath("//*")).size();

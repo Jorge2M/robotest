@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class BannerStandarOutletObject extends BannerObject {
 
-	private static final String XP_BANNER = "//div[@class[contains(.,'bannerWrapper')]]";
+	private static final String XP_BANNER = "//div[@class[contains(.,'bannerWrapper')]]//a";
 	private static final String XP_IMAGE_BANNER = "//img[@class[contains(.,'Promo_image')]]"; 
 	
 	public BannerStandarOutletObject(BannerType bannerType) {
