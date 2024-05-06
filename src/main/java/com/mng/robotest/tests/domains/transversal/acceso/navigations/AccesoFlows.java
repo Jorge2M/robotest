@@ -5,6 +5,8 @@ import static com.mng.robotest.tests.domains.setcookies.pageobjects.ModalSetCook
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.CERRAR_SESION;
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.INICIAR_SESION;
 
+import org.openqa.selenium.JavascriptExecutor;
+
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
@@ -154,6 +156,8 @@ public class AccesoFlows extends StepBase {
 		
 		if ("".compareTo(currentUrl)==0 || currentUrl.contains("data:,")) {
 			Log4jTM.getLogger().warn(String.format("Problem with data:, in url. Trying to get URL %s", inputParamsSuite.getUrlBase()));
+			var js = (JavascriptExecutor) driver;
+			js.executeScript("window.stop();");
 			driver.get(inputParamsSuite.getUrlBase());
 			Log4jTM.getLogger().info(String.format("URL in browser %s", driver.getCurrentUrl()));
 		}
