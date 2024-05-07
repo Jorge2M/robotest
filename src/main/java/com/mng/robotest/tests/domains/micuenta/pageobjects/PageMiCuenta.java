@@ -4,18 +4,20 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.VISIBLE;
 import static com.mng.robotest.tests.domains.micuenta.pageobjects.LinkMiCuenta.*;
 
+import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.utils.UtilsLoyaltyPage;
+import com.mng.robotest.testslegacy.beans.Pais;
 
 public abstract class PageMiCuenta extends PageBase {
 
 	abstract String getXPath(LinkMiCuenta link);
 	abstract String getXPathNumberPoints();
 	
-	public static PageMiCuenta make() {
-//		if (isEnvPRO()) {
-//			return new PageMiCuentaOld();
-//		}
+	public static PageMiCuenta make(Pais pais, AppEcom app) {
+		if (pais.isMicuentanew(app)) {
+			return new PageMiCuentaOld();
+		}
 		return new PageMiCuentaNew();
 	}
 	

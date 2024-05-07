@@ -18,7 +18,7 @@ import static com.mng.robotest.tests.domains.micuenta.pageobjects.LinkMiCuenta.*
 
 public class PageMiCuentaSteps extends StepBase {
 	
-	private final PageMiCuenta pgMiCuenta = PageMiCuenta.make();
+	private final PageMiCuenta pgMiCuenta = PageMiCuenta.make(dataTest.getPais(), app);
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
 	
 	@Validation

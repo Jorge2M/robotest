@@ -10,10 +10,10 @@ public abstract class ModalChatBotSteps extends StepBase {
 	abstract ModalChatBot getModal();
 	
 	public static ModalChatBotSteps make() {
-		if (isEnvPRO()) {
+//		if (isEnvPRO()) {
 			return new ModalChatBotOldSteps();
-		}
-		return new ModalChatBotNewSteps(); 
+//		}
+//		return new ModalChatBotNewSteps(); 
 	}
 	
 	@Validation (description="Aparece el icono de ChatBot")
