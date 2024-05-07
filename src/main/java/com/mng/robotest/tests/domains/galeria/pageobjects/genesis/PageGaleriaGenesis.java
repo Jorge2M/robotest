@@ -32,6 +32,7 @@ import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
 
 public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria {
 
+	private static final String XP_HEADER = "//*[@data-testid='plp.products.list.h1Seo']";
 	private static final String XP_LISTA_ARTICULOS = "//*[@data-testid[contains(.,'plp.products.list')]]//ul";
 	public static final String XP_ARTICULO = XP_LISTA_ARTICULOS + "//li[@data-slot]";
 	protected static final String XP_ICONO_UP_GALERY = "//button[@aria-label='plp.catalog.scroll-to-top']";
@@ -227,6 +228,12 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		pageFicha.isPage(10);
 		return detailWindowHandle;
 	}
+
+	@Override
+	public boolean isHeaderArticlesVisible(String textHeader) {
+		return state(VISIBLE, XP_HEADER).check();
+	}
+	
 	
 	private List<WebElement> getArticulos() {
 		return getElements(getXPathArticulo());
@@ -374,9 +381,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		throw new UnsupportedOperationException();
 	}
 	public WebElement getArticleFromPagina(int numPagina, int numArticle) {
-		throw new UnsupportedOperationException();
-	}
-	public boolean isHeaderArticlesVisible(String textHeader) {
 		throw new UnsupportedOperationException();
 	}
 	public void showTallasArticulo(int posArticulo) {

@@ -82,13 +82,13 @@ public class AccesoFlows extends StepBase {
 	}
 	
 	public void identification(String user, String password) {
-		clickIniciarSesionAndWait();
+		clickIniciarSesion();
 		login(user, password);
 	}
 	
 	public void login(String user, String password) {
 		var pageLogin = new PageLogin();
-		pageLogin.isPage(5);
+		pageLogin.isPage(8);
 		pageLogin.inputUserPassword(user, password);
 		pageLogin.clickButtonEntrar();
 		closeModalsPostLogin();
@@ -115,23 +115,16 @@ public class AccesoFlows extends StepBase {
 		}
 	}
 	
-	private void clickIniciarSesionAndWait() {
+	private void clickIniciarSesion() {
 		if (channel.isDevice()) {
-			//En el caso de mobile nos tenemos que asegurar que están desplegados los menús
 			var secCabeceraDevice = SecCabecera.make();
 			boolean toOpen = true;
 			secCabeceraDevice.clickIconoMenuHamburguerMobil(toOpen);
-			
-			// Si existe, nos posicionamos y seleccionamos el link \"CERRAR SESIÓN\" 
-			// En el caso de iPhone parece que mantiene la sesión abierta después de un caso de prueba 
 			boolean menuClicado = new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, CLICKABLE);
-			
-			//Si hemos clicado el menú 'Cerrar Sesión' volvemos a abrir los menús
 			if (menuClicado) {
 				secCabeceraDevice.clickIconoMenuHamburguerMobil(toOpen);
 			}
 		}
-		
 		new MenusUserWrapper().moveAndClick(INICIAR_SESION);
 	}	
 	
