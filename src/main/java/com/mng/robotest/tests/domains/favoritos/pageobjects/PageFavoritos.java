@@ -122,7 +122,7 @@ public class PageFavoritos extends PageBase {
 	}
 	
 	public void clearAllArticulos() {
-		if (!isSectionVisible()) {
+		if (!isSectionVisible() && !isOutlet()) {
 			clickUserMenu(UserMenu.FAVORITOS);
 		}
 		int i=0; //Para evitar posibles bucles infinitos
