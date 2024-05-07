@@ -6,11 +6,11 @@ import com.mng.robotest.testslegacy.beans.Pais;
 
 import static com.mng.robotest.tests.conf.AppEcom.*;
 import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*;
-import static com.mng.robotest.testslegacy.data.PaisShop.MONTENEGRO;
+import static com.mng.robotest.testslegacy.data.PaisShop.LIECHTENSTEIN;;
 
 public class Gpo008 extends TestBase {
 
-	private final Pais montenegro = MONTENEGRO.getPais();
+	private final Pais montenegro = LIECHTENSTEIN.getPais();
 	private final GaleriaSteps galeriaSteps;
 	
 	public Gpo008() {
@@ -41,7 +41,8 @@ public class Gpo008 extends TestBase {
 		galeriaSteps.scrollToLast();
 		galeriaSteps.selectArticulo(30);
 		goBackToGalery();
-		if (!channel.isDevice()) {
+		if (!channel.isDevice() &&
+			!isPRO()) { //problem in Robotest that not sends specific user-agent in other label
 			selectArticleInOtherLabel();
 		}
 	}
