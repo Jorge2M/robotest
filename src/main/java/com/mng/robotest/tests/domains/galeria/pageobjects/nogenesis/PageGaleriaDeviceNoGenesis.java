@@ -27,7 +27,7 @@ public class PageGaleriaDeviceNoGenesis extends PageGaleriaDevice {
 	public String getXPathArticulo() {
 		return commonNormal.getXPathArticulo();
 	}
-	
+
 	@Override
 	protected String getXPathArticuloAncestor() {
 		return commonNormal.getXPathArticuloAncestor();
@@ -46,6 +46,11 @@ public class PageGaleriaDeviceNoGenesis extends PageGaleriaDevice {
 	@Override
 	public String getXPathNombreRelativeToArticle() {
 		return commonNormal.getXPathNombreRelativeToArticle();
+	}
+	
+	@Override
+	public boolean isVisibleAnyArticle() {
+		return commonNormal.isVisibleAnyArticle();
 	}
 	
 	@Override

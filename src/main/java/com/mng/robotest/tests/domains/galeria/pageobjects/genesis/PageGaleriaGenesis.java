@@ -55,6 +55,11 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
 		return state(VISIBLE, getXPathArticulo(numArticulo)).wait(seconds).check();
 	}
+
+	@Override
+	public boolean isVisibleAnyArticle() {
+		return state(VISIBLE, getXPathArticulo()).check();
+	}
 	
 	private String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
 		return "//button[@data-testid[contains(.,'slideshow" + typeSlider.getGenesis() + "')]";

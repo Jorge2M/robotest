@@ -31,6 +31,7 @@ public interface PageGaleria {
 	String getXPathArticulo();
 	String getXPathNombreRelativeToArticle();
 	
+	boolean isVisibleAnyArticle();
 	int getLayoutNumColumnas();
 	WebElement getArticuloConVariedadColoresAndHover(int numArticulo);
 	WebElement getImagenElementArticulo(WebElement articulo);

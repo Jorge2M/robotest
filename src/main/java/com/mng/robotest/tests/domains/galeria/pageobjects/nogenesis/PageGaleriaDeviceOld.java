@@ -76,6 +76,11 @@ public class PageGaleriaDeviceOld extends PageGaleriaDevice {
 	}
 	
 	@Override
+	public boolean isVisibleAnyArticle() {
+		return state(VISIBLE, XP_ARTICULO).check();
+	}
+	
+	@Override
 	public String getRefArticulo(WebElement articulo) {
 		int lengthReferencia = 8;
 		String id = getRefFromId(articulo);

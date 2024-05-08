@@ -8,7 +8,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop;
 import com.mng.robotest.tests.domains.transversal.banners.pageobjects.BannerObjectFactory;
 import com.mng.robotest.tests.domains.transversal.banners.pageobjects.BannerType;
 import com.mng.robotest.tests.domains.transversal.banners.pageobjects.ManagerBannersScreen;
@@ -139,7 +138,7 @@ public class PageLanding extends PageBase {
 
 	public boolean isSeccArtBanners() {
 		var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
-		if (((PageGaleriaDesktop)pageGaleria).isVisibleAnyArticle()) {
+		if (pageGaleria.isVisibleAnyArticle()) {
 			return true;
 		}
 

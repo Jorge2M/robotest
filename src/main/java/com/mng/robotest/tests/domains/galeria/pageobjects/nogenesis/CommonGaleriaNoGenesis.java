@@ -40,6 +40,10 @@ public class CommonGaleriaNoGenesis extends PageBase {
 		return XP_NOMBRE_RELATIVE_TO_ARTICLE_DESKTOP;
 	}
 	
+	public boolean isVisibleAnyArticle() {
+		return state(VISIBLE, getXPathArticulo()).check();
+	}
+	
 	private String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
 		return "//button[@aria-label='" + typeSlider.getNormal() + "']";
 	}	
