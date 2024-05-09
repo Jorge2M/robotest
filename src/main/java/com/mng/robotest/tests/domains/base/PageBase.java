@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -180,6 +181,14 @@ public class PageBase extends PageObjTM {
 		return paisShop.isEquals(dataTest.getPais());
 	}
 
+	protected Optional<WebElement> findElement(String xpath) {
+	    try {
+	        return Optional.of(getElement(xpath));
+	    } catch (NoSuchElementException e) {
+	        return Optional.empty();
+	    }
+	}
+	
 	private void pushKey(Keys key, int times) {
 		var actions = new Actions(driver);
 		for (int i=0; i<times; i++) {

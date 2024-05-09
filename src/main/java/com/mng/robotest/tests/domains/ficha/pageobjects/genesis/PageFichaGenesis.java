@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
@@ -148,7 +149,9 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	}
 	@Override
 	public String getPrecioTachadoFromFichaArt() {
-		return getElement(XP_PRICE_TACHADO).getText();
+	    return findElement(XP_PRICE_TACHADO)
+	            .map(WebElement::getText)
+	            .orElse("0");
 	}
 	
 	@Override
