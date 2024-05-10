@@ -2,20 +2,19 @@ package com.mng.robotest.tests.domains.compra.payments.kredikarti;
 
 import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
 import com.mng.robotest.tests.domains.compra.payments.kredikarti.steps.SecKrediKartiSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
 
 public class PagoKrediKarti extends PagoSteps {
 	
-	public PagoKrediKarti(DataPago dataPago) {
-		super(dataPago);
+	public PagoKrediKarti() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		DataPedido dataPedido = dataPago.getDataPedido();
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
 		
 		SecKrediKartiSteps secKrediKartiSteps = checkoutSteps.getSecKrediKartiSteps();
 		secKrediKartiSteps.inputNumTarjeta(dataPedido.getPago().getNumtarj());
@@ -23,7 +22,7 @@ public class PagoKrediKarti extends PagoSteps {
 		
 		if (execPay) {
 			dataPedido.setCodtipopago("O");
-			checkoutSteps.inputDataTrjAndConfirmPago(dataPago);
+			checkoutSteps.inputDataTrjAndConfirmPago();
 		}
 	}	
 }

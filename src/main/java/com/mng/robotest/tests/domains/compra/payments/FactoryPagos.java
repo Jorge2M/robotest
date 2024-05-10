@@ -28,97 +28,94 @@ import com.mng.robotest.tests.domains.compra.payments.sofort.PagoSofort;
 import com.mng.robotest.tests.domains.compra.payments.trustpay.PagoTrustpay;
 import com.mng.robotest.tests.domains.compra.payments.yandex.PagoYandex;
 import com.mng.robotest.testslegacy.beans.TypePago;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 
 public class FactoryPagos {
 
 	private FactoryPagos() {}
 	
-	public static PagoSteps makePagoSteps(DataPago dataPago) {
-		TypePago typePago = dataPago.getDataPedido().getPago().getTypePago();
-		
+	public static PagoSteps makePagoSteps(TypePago typePago) {
 		PagoSteps pagoMaked = null; 
 		switch (typePago) {
 		case TARJETA_INTEGRADA:
-			pagoMaked = new PagoTarjetaIntegrada(dataPago);
+			pagoMaked = new PagoTarjetaIntegrada();
 			break;
 		case KREDI_KARTI:
-			pagoMaked = new PagoKrediKarti(dataPago);
+			pagoMaked = new PagoKrediKarti();
 			break;
 		case BILLPAY:
-			pagoMaked = new PagoBillpay(dataPago);
+			pagoMaked = new PagoBillpay();
 			break;
 		case PAYPAL:
-			pagoMaked = new PagoPaypal(dataPago);
+			pagoMaked = new PagoPaypal();
 			break;  
 		case MERCADOPAGO:
-			pagoMaked = new PagoMercadopago(dataPago);
+			pagoMaked = new PagoMercadopago();
 			break;
 		case AMAZON:
-			pagoMaked = new PagoAmazon(dataPago);
+			pagoMaked = new PagoAmazon();
 			break;			
 		case POSTFINANCE:
-			pagoMaked = new PagoPostfinance(dataPago);
+			pagoMaked = new PagoPostfinance();
 			break;			
 		case TRUSTPAY:
-			pagoMaked = new PagoTrustpay(dataPago);
+			pagoMaked = new PagoTrustpay();
 			break;			
 		case MULTIBANCO:
-			pagoMaked = new PagoMultibanco(dataPago);
+			pagoMaked = new PagoMultibanco();
 			break;			
 		case PAYTRAIL:
-			pagoMaked = new PagoPaytrail(dataPago);
+			pagoMaked = new PagoPaytrail();
 			break;			
 		case DOTPAY:
-			pagoMaked = new PagoDotpay(dataPago);
+			pagoMaked = new PagoDotpay();
 			break;			
 		case IDEAL:
-			pagoMaked = new PagoIdeal(dataPago);
+			pagoMaked = new PagoIdeal();
 			break;   
 		case EPS:
-			pagoMaked = new PagoEps(dataPago);
+			pagoMaked = new PagoEps();
 			break;  
 		case SEPA:
-			pagoMaked = new PagoSepa(dataPago);
+			pagoMaked = new PagoSepa();
 			break;			
 		case GIROPAY:
-			pagoMaked = new PagoGiropay(dataPago);
+			pagoMaked = new PagoGiropay();
 			break;			
 		case SOFORT:
-			pagoMaked = new PagoSofort(dataPago);
+			pagoMaked = new PagoSofort();
 			break;	   
 		case PAYMAYA:
-			pagoMaked = new PagoPayMaya(dataPago);
+			pagoMaked = new PagoPayMaya();
 			break;
 		case KLARNA:
-			pagoMaked = new PagoKlarna(dataPago);
+			pagoMaked = new PagoKlarna();
 			break;
 		case KLARNA_UK:
-			pagoMaked = new PagoKlarnaUK(dataPago);
+			pagoMaked = new PagoKlarnaUK();
 			break;
 		case PAYSECURE_QIWI:
-			pagoMaked = new PagoPaysecureQiwi(dataPago);
+			pagoMaked = new PagoPaysecureQiwi();
 			break;
 		case ASSIST:
-			pagoMaked = new PagoAssist(dataPago);
+			pagoMaked = new PagoAssist();
 			break;			
 		case YANDEX:
-			pagoMaked = new PagoYandex(dataPago);
+			pagoMaked = new PagoYandex();
 			break;
 		case PASARELA_OTRAS:
-			pagoMaked = new PagoPasarelaOtras(dataPago);
+			pagoMaked = new PagoPasarelaOtras();
 			break;
 		case KCP:
-			pagoMaked = new PagoKCP(dataPago);
+			pagoMaked = new PagoKCP();
 			break;
 		case CONTRA_REEMBOLSO:			
-			pagoMaked = new PagoContraReembolso(dataPago);
+			pagoMaked = new PagoContraReembolso();
 			break;
 		case BANCONTACT:
-			pagoMaked = new PagoBancontact(dataPago);
+			pagoMaked = new PagoBancontact();
 			break;
 		case PROCESS_OUT:
-			pagoMaked = new PagoProcessOut(dataPago);
+			pagoMaked = new PagoProcessOut();
 			break;
 		default:
 			break;

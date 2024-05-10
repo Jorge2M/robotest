@@ -6,7 +6,6 @@ import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.testslegacy.data.PaisShop;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.utils.PaisGetter;
 
 public class Com008 extends TestBase {
@@ -24,8 +23,8 @@ public class Com008 extends TestBase {
 		accessLoginAndClearBolsa();
 		altaArticulosBolsaAndClickComprar();
 		if (!isPRO()) {
-			var dataPago = executeVisaPayment();
-			checkMisCompras(dataPago);
+			executeVisaPayment();
+			checkMisCompras();
 		}
 	}
 
@@ -38,7 +37,8 @@ public class Com008 extends TestBase {
 		checkoutSteps.isCroatiaImportInBothCurrencies();
 	}
 	
-	private void checkMisCompras(DataPago dataPago) {
+	private void checkMisCompras() {
+		var dataPago = dataTest.getDataPago();
 		String codigoPedido = dataPago.getDataPedido().getCodpedido();
 		new PageResultPagoSteps().selectMisCompras();
 		new PageMisComprasSteps().checkIsCompraOnline(codigoPedido);

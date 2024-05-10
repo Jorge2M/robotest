@@ -4,15 +4,14 @@ import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
 import com.mng.robotest.tests.domains.compra.payments.eps.pageobjects.PageEpsSimulador.TypeDelay;
 import com.mng.robotest.tests.domains.compra.payments.eps.steps.PageEpsSelBancoSteps;
 import com.mng.robotest.tests.domains.compra.payments.eps.steps.PageEpsSimuladorSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoEps extends PagoSteps {
 
 	private final PageEpsSimuladorSteps pageEpsSimuladorSteps = new PageEpsSimuladorSteps();
 	
-	public PagoEps(DataPago dataPago) {
-		super(dataPago);
+	public PagoEps() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 	
@@ -22,9 +21,9 @@ public class PagoEps extends PagoSteps {
 		//activateTestABforMethodEPS();
 		driver.navigate().refresh();
 		
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
 		checkoutSteps.selectBancoEPS();
-		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+		checkoutFlow.checkout(From.METODOSPAGO);
 		if (!isPRO()) {
 			pageEpsSimuladorSteps.validateIsPage();
 			pageEpsSimuladorSteps.selectDelay(TypeDelay.ONE_MINUTES);

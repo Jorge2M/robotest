@@ -5,7 +5,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.ModalDroppoints;
 import com.mng.robotest.testslegacy.beans.Pago;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -40,7 +39,8 @@ public class ModalDroppointsSteps extends StepBase {
 		return (!modalDroppoints.isVisible());
 	}
 	
-	public void fluxSelectDroppoint(DataPago dataPago) {
+	public void fluxSelectDroppoint() {
+		var dataPago = dataTest.getDataPago();
 		Pago pago = dataPago.getDataPedido().getPago();
 		DataSearchDeliveryPoint dataSearchDp = new DataSearchDeliveryPoint(pago, app, dataTest.getPais());
 		secSelectDPointSteps.searchPoblacion(dataSearchDp);

@@ -10,6 +10,7 @@ import com.mng.robotest.tests.domains.chequeregalo.beans.ChequeRegalo;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageCheckoutWrapper;
 import com.mng.robotest.tests.domains.compra.pageobjects.UtilsCheckout;
 import com.mng.robotest.tests.domains.compra.pageobjects.beans.PreciosArticulo;
+import com.mng.robotest.tests.domains.compra.pageobjects.pci.SecTarjetaPciInIframe;
 import com.mng.robotest.tests.domains.compra.payments.billpay.pageobjects.SecBillpay;
 import com.mng.robotest.tests.domains.compra.payments.eps.pageobjects.SecEps;
 import com.mng.robotest.testslegacy.beans.Pago;
@@ -77,7 +78,6 @@ public class Page1DktopCheckout extends PageBase {
 	private static final String TAG_METODO_PAGO = "@TagMetodoPago";
 	private static final String XP_BLOCK_TARJETA_GUARDADA_PAGO_WITH_TAG = "//div[@class[contains(.,'tarjetaGuardada')] and @data-analytics-value='" + TAG_METODO_PAGO + "']";
 	private static final String XP_RADIO_TRJ_GUARDADA = "//input[@class[contains(.,'guardadaInput')]]";
-	private static final String XP_CVC_TRJ_GUARDADA = "//div[@class='storedCardForm']//input[@id='cvc']";
 	
 	private static final String XP_LINK_SOLICITAR_FACTURA = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
 	private static final String XP_FIRST_ARTICULO = "//div[@class[contains(.,'firstArticulo')]]";
@@ -493,13 +493,9 @@ public class Page1DktopCheckout extends PageBase {
 	}
 
 	public void inputCvcTrjGuardadaIfVisible(String cvc) {
-		if (state(VISIBLE, XP_CVC_TRJ_GUARDADA).check()) {
-			var input = getElement(XP_CVC_TRJ_GUARDADA);
-			input.clear();
-			input.sendKeys(cvc);
-		}
+		new SecTarjetaPciInIframe().inputCvcTrjGuardadaIfVisible(cvc);
 	}
-
+	
 	public void clickSolicitarFactura() {
 		getElement(XP_LINK_SOLICITAR_FACTURA).click();
 	}

@@ -6,7 +6,6 @@ import com.mng.robotest.tests.domains.compra.payments.paymaya.steps.PageInitPaym
 import com.mng.robotest.tests.domains.compra.payments.paymaya.steps.PageOtpPaymayaSteps;
 import com.mng.robotest.tests.domains.compra.payments.paymaya.steps.PageResultPaymayaSteps;
 import com.mng.robotest.testslegacy.beans.Pago;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoPayMaya extends PagoSteps {
@@ -16,15 +15,15 @@ public class PagoPayMaya extends PagoSteps {
 	private final PageOtpPaymayaSteps pageOtpPaymayaSteps = new PageOtpPaymayaSteps();
 	private final PageResultPaymayaSteps pageResultPaymayaSteps = new PageResultPaymayaSteps();
 	
-	public PagoPayMaya(DataPago dataPago) {
-		super(dataPago);
+	public PagoPayMaya() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
-		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutFlow.checkout(From.METODOSPAGO);
 		
 		if (!isPRO()) {
 			pageInitPaymayaSteps.checkPage();

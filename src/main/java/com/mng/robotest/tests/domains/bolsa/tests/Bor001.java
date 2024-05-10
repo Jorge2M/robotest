@@ -30,8 +30,9 @@ public class Bor001 extends TestBase {
 				.emaiExists()
 				.userIsEmployee().build();
 		
-		var dataPago = getDataPago(configCheckout);
-		new CheckoutFlow.BuilderCheckout(dataPago).build().checkout(From.BOLSA);
+		dataTest.setDataPago(configCheckout);
+		new CheckoutFlow.BuilderCheckout(dataTest.getDataPago()).build()
+			.checkout(From.BOLSA);
 	}	
 
 }

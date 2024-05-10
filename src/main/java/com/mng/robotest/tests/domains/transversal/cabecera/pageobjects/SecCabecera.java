@@ -19,10 +19,12 @@ public abstract class SecCabecera extends PageBase {
 	protected final SecSearch secSearch = SecSearch.getNew(channel);
 
 	private static final String XP_HEADER = "//header";
-	private static final String XP_LINK_LOGO_MANGO = 
+	private static final String XP_LINK_LOGO_MANGO_V1 = 
 			"//a[@class='logo-link' or " + 
-			"@class[contains(.,'logo_')] or" + 
+			"@class[contains(.,'logo_')] or " + 
 			"@title[contains(.,'MANGO Shop Online')]]";
+	private static final String XP_LINK_LOGO_MANGO_V2 = 
+			"//a/*[@data-test-id[contains(.,'logo.mango')]]/..";
 	
 	private static final String XP_HAMBURGUER_DEVICE_ICON = "//*[@data-testid='menu.burger']";
 
@@ -34,6 +36,10 @@ public abstract class SecCabecera extends PageBase {
 
 	public static SecCabeceraCommon make() {
 		return new SecCabeceraCommon();
+	}
+	
+	private String getXPathLinkLogoMango() {
+		return "(" + XP_LINK_LOGO_MANGO_V1 + " | " + XP_LINK_LOGO_MANGO_V2 + ")"; 
 	}
 	
 	public void bring(BringTo bringTo) {
@@ -50,24 +56,24 @@ public abstract class SecCabecera extends PageBase {
 	
 	public boolean clickLogoMango() {
 		if (isPresentLogoMango(2)) {
-			click(XP_LINK_LOGO_MANGO).exec();
+			click(getXPathLinkLogoMango()).exec();
 			return true;
 		}
 		return false;
 	}
 	
 	public boolean isPresentLogoMango(int seconds) {
-		return state(PRESENT, XP_LINK_LOGO_MANGO).wait(seconds).check();
+		return state(PRESENT, getXPathLinkLogoMango()).wait(seconds).check();
 	}
 
 	public void hoverLogoMango() {
-		if (state(PRESENT, XP_LINK_LOGO_MANGO).check()) {
-			moveToElement(XP_LINK_LOGO_MANGO);
+		if (state(PRESENT, getXPathLinkLogoMango()).check()) {
+			moveToElement(getXPathLinkLogoMango());
 		}
 	}
 
 	public boolean validaLogoMangoGoesToIdioma(IdiomaPais idioma) {
-		String xpathLogoIdiom = XP_LINK_LOGO_MANGO + "[@href[contains(.,'/" + idioma.getAcceso() + "')]]";
+		String xpathLogoIdiom = getXPathLinkLogoMango() + "[@href[contains(.,'/" + idioma.getAcceso() + "')]]";
 		return state(PRESENT, xpathLogoIdiom).check();
 	}
 

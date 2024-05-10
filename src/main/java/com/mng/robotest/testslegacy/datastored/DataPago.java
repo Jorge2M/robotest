@@ -17,6 +17,8 @@ public class DataPago {
 	float saldoCta = 0;
 	boolean okCheckChar;
 	boolean selectEnvioType = true;
+	boolean selectSaveCard = false;
+	boolean useSavedCard = false;
 	Map<String, String> datosRegistro = new HashMap<>();
 	
 	public DataPago(ConfigCheckout ftCkout) {
@@ -102,5 +104,21 @@ public class DataPago {
 
 	public void setSelectEnvioType(boolean selectEnvioType) {
 		this.selectEnvioType = selectEnvioType;
+	}
+
+	public boolean isSelectSaveCard() {
+		return selectSaveCard;
+	}
+
+	public void setSelectSaveCard(boolean selectSaveCard) {
+		this.selectSaveCard = selectSaveCard;
+	}
+
+	public boolean isUseSavedCard() {
+		return useSavedCard;
+	}
+
+	public void setUseSavedCard(boolean useSavedCard) {
+		this.useSavedCard = useSavedCard;
 	}
 }

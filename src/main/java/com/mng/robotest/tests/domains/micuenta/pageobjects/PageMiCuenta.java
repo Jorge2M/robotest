@@ -16,9 +16,9 @@ public abstract class PageMiCuenta extends PageBase {
 	
 	public static PageMiCuenta make(Pais pais, AppEcom app) {
 		if (pais.isMicuentanew(app)) {
-			return new PageMiCuentaOld();
+			return new PageMiCuentaNew();
 		}
-		return new PageMiCuentaNew();
+		return new PageMiCuentaOld();
 	}
 	
 	public boolean isPage(int seconds) {

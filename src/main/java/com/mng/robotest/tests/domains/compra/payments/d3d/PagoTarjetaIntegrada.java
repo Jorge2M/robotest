@@ -3,29 +3,29 @@ package com.mng.robotest.tests.domains.compra.payments.d3d;
 import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
 import com.mng.robotest.tests.domains.compra.payments.d3d.steps.PageD3DJPTestSelectOptionSteps;
 import com.mng.robotest.tests.domains.compra.payments.d3d.steps.PageD3DLoginSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
 
 public class PagoTarjetaIntegrada extends PagoSteps {
 
-	public PagoTarjetaIntegrada(DataPago dataPago) {
-		super(dataPago);
+	public PagoTarjetaIntegrada() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dataPago.getDataPedido();
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		if (dataPago.isSelectSaveCard()) {
+			checkoutSteps.selectSaveCard();
+		}
 		
 		if (execPay) {
 			dataPedido.setCodtipopago("U");
-			String metodoPago = dataPago.getDataPedido().getPago().getNombre();
-			if (dataPago.getFTCkout().checkSavedCard && 
-				checkoutSteps.isTarjetaGuardadaAvailable(metodoPago)) {
-				checkoutSteps.selectTrjGuardadaAndConfirmPago(dataPago, "737");
+			if (dataPago.isUseSavedCard()) {
+				checkoutSteps.selectTrjGuardadaAndConfirmPago("747");
 			} else {
-				checkoutSteps.inputDataTrjAndConfirmPago(dataPago);
+				checkoutSteps.inputDataTrjAndConfirmPago();
 			}
 			switch (dataPedido.getPago().getTipotarjEnum()) {
 			case VISAD3D:

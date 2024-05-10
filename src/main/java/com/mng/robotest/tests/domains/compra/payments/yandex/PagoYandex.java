@@ -4,21 +4,20 @@ import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
 import com.mng.robotest.tests.domains.compra.payments.yandex.steps.PageYandex1rstSteps;
 import com.mng.robotest.tests.domains.compra.payments.yandex.steps.PageYandexMoneySteps;
 import com.mng.robotest.tests.domains.compra.payments.yandex.steps.PageYandexPayingByCodeSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoYandex extends PagoSteps {
 	
-	public PagoYandex(DataPago dataPago) {
-		super(dataPago);
+	public PagoYandex() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
-		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = this.dataPago.getDataPedido();
 		
 		var pageYandex1rstSteps = new PageYandex1rstSteps();

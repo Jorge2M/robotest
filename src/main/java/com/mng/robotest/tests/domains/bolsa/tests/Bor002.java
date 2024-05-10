@@ -4,7 +4,6 @@ import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
@@ -34,8 +33,9 @@ public class Bor002 extends TestBase {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.emaiExists().build();
 		
-		DataPago dataPago = getDataPago(configCheckout);
-		new CheckoutFlow.BuilderCheckout(dataPago).build().checkout(From.BOLSA);
+		dataTest.setDataPago(configCheckout);
+		new CheckoutFlow.BuilderCheckout(dataTest.getDataPago()).build()
+			.checkout(From.BOLSA);
 	}
 
 }

@@ -5,13 +5,11 @@ import java.util.List;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.datatest.DataTest;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
-import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.compra.tests.CompraSteps;
+import com.mng.robotest.tests.domains.transversal.cabecera.steps.SecCabeceraSteps;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.testslegacy.data.PaisShop;
-import com.mng.robotest.testslegacy.datastored.DataPago;
-import com.mng.robotest.testslegacy.datastored.DataPedido;
 
 public abstract class TestBase extends StepBase {
 
@@ -42,31 +40,42 @@ public abstract class TestBase extends StepBase {
         new SecBolsaSteps().selectButtonComprar();
     }
 	
-    protected DataPago executeVisaPayment() throws Exception {
-    	return executePayment("VISA");
+	protected void clickLogoMango() {
+		new SecCabeceraSteps().selecLogo();
+	}
+    
+    protected void executeVisaPayment() throws Exception {
+    	executePayment("VISA");
     }	    
-    protected DataPago executeMastercardPayment() throws Exception {
-    	return executePayment("MASTERCARD");
-    }
-    protected DataPago executePayment(String payment) throws Exception {
-        DataPago dataPago = getDataPago();
-        dataPago.setPago(dataTest.getPais().getPago(payment));
-        new CompraSteps().startPayment(dataPago, true);
-        new PageResultPagoSteps().checkIsPageOk(dataPago);
-        return dataPago;
+    protected void executeMastercardPayment() throws Exception {
+    	executePayment("MASTERCARD");
     }
     
-	protected DataPago getDataPago() {
-		return getDataPago(ConfigCheckout.config().build());
-	}
-	
-	protected DataPago getDataPago(ConfigCheckout configCheckout) {
-		var dataPago = new DataPago(configCheckout);
-		var dataPedido = new DataPedido(dataTest.getPais(), dataTest.getDataBag());
-		dataPago.setDataPedido(dataPedido);
-		return dataPago;
-	}	
-	
+    protected void executeVisaPaymentSavingCard() throws Exception {
+        var dataPago = dataTest.getDataPago();
+        dataPago.setPago(dataTest.getPais().getPago("VISA"));
+        dataPago.setSelectSaveCard(true);
+        executePayment();
+    }
+    
+    protected void executeVisaPaymentUsingSavedCard() throws Exception {
+        var dataPago = dataTest.getDataPago();
+        dataPago.setPago(dataTest.getPais().getPago("VISA"));
+        dataPago.setUseSavedCard(true);
+        executePayment();
+    }
+    
+    protected void executePayment(String payment) throws Exception {
+        var dataPago = dataTest.getDataPago();
+        dataPago.setPago(dataTest.getPais().getPago(payment));
+        executePayment();
+    }
+    
+    protected void executePayment() throws Exception {
+        new CompraSteps().startPayment(true);
+        new PageResultPagoSteps().checkIsPageOk();
+    }
+    
 	protected void renewBrowser() {
 		dataTest.setUserConnected("");
 		TestMaker.renewDriverTestCase();

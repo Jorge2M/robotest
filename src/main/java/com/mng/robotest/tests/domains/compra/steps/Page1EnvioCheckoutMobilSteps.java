@@ -10,7 +10,6 @@ import com.mng.robotest.tests.domains.compra.pageobjects.envio.TipoTransporteEnu
 import com.mng.robotest.tests.domains.compra.pageobjects.mobile.Page1EnvioCheckoutMobil;
 import com.mng.robotest.tests.domains.compra.pageobjects.mobile.Page2DatosPagoCheckoutMobil;
 import com.mng.robotest.tests.domains.compra.steps.envio.ModalDroppointsSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -47,12 +46,14 @@ public class Page1EnvioCheckoutMobilSteps extends StepBase {
 		description="<b style=\"color:blue;\">#{nombrePago}</b>:Seleccionamos el método de envío <b>#{tipoTransporte}</b> (previamente, si no lo estamos, nos posicionamos en el apartado \"1. Envio\")", 
 		expected="Se selecciona el método de envío correctamente")
 	public void selectMetodoEnvio(
-			TipoTransporte tipoTransporte, @SuppressWarnings("unused") String nombrePago, DataPago dataPago) {
+			TipoTransporte tipoTransporte, @SuppressWarnings("unused") String nombrePago) {
+		
 		page1EnvioCheckoutMobil.selectMetodoAfterPositioningIn1Envio(tipoTransporte);
 		if (!tipoTransporte.isEntregaDomicilio()) {
 			var modalDroppoints = new ModalDroppoints();
 			if (modalDroppoints.isErrorMessageVisibleUntil()) {
-				modalDroppoints.searchAgainByUserCp(dataPago.getDatosRegistro().get("cfCp"));
+				var datosRegistro = dataTest.getDataPago().getDatosRegistro();
+				modalDroppoints.searchAgainByUserCp(datosRegistro.get("cfCp"));
 			}
 		}
 

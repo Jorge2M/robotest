@@ -10,6 +10,7 @@ public interface SecTarjetaPci {
 	public boolean isPresentSelectAny();
 	public boolean isPresentInputCvc();
 	public boolean isPresentInputDni(); //Specific for Codensa (Colombia)
+	public void selectSaveCard();
 	public void inputNumber(String number);
 	public void inputTitular(String titular);
 	public void inputCvc(String cvc);
@@ -18,13 +19,6 @@ public interface SecTarjetaPci {
 	public void selectAnyByVisibleText(String any);
 	
 	public static SecTarjetaPci makeSecTarjetaPci(Channel channel) {
-		//TODO cuando suba a PRO pci en iframe se podrá eliminar SecTarjetaPciNotInIframeMobil y SecTarjetaPciNotInIframeDesktop
-		if (channel==Channel.desktop) {
-			var secTarjetaPci = new SecTarjetaPciNotInIframeDesktop();
-			if (secTarjetaPci.isPresentInputNumberUntil(1)) {
-				return secTarjetaPci;
-			}
-		}
 		return new SecTarjetaPciInIframe();	
 	}
 }

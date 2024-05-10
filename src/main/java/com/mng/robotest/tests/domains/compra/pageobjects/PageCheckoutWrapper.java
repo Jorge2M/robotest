@@ -49,6 +49,10 @@ public class PageCheckoutWrapper extends PageBase {
 		return pg1DktopCheckout.isPage(seconds);	
 	}
 	
+	public void selectSaveCard() {
+		secTarjetaPci.selectSaveCard();
+	}
+	
 	public void inputNumberPci(String numtarj) {
 		secTarjetaPci.inputNumber(numtarj);
 	}

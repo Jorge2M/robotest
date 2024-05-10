@@ -2,22 +2,21 @@ package com.mng.robotest.tests.domains.compra.payments.klarna;
 
 import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
 import com.mng.robotest.tests.domains.compra.payments.klarna.steps.PageKlarnaSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoKlarnaUK extends PagoSteps {
 	
 	private final PageKlarnaSteps pageKlarnaSteps = new PageKlarnaSteps();
 
-	public PagoKlarnaUK(DataPago dataPago) {
-		super(dataPago);
+	public PagoKlarnaUK() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
-		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutFlow.checkout(From.METODOSPAGO);
 		pageKlarnaSteps.checkIsPage(10);
 		pageKlarnaSteps.clickComprar();
 		

@@ -16,7 +16,7 @@ public class SecTarjetaPciSteps extends StepBase {
 	private final SecTarjetaPci secTarjetaPci = pgCheckoutSteps.getSecTarjetaPci();
 	
 	@Validation
-	public ChecksTM validateIsSectionOk(Pago pago) {
+	public ChecksTM checkIsSectionOk(Pago pago) {
 		var checks = ChecksTM.getNew();
 		if (isDesktop() && pago.getTypePago()!=TypePago.KREDI_KARTI) {
 			int seconds = 5;
@@ -26,18 +26,22 @@ public class SecTarjetaPciSteps extends StepBase {
 				secTarjetaPci.isVisiblePanelPagoUntil(pago.getNombre(channel, app), seconds), WARN);	
 		}
 		
-	 	checks.add(
-			"Aparecen los 4 campos <b>Número, Titular, Mes, Año</b> para la introducción de los datos de la tarjeta",
-			secTarjetaPci.isPresentInputNumberUntil(1) &&
-			secTarjetaPci.isPresentInputTitular() &&
-			secTarjetaPci.isPresentSelectMes() &&
-			secTarjetaPci.isPresentSelectAny());  
-	 	
-	 	if (pago.getTypePago()!=TypePago.BANCONTACT) {
+		var dataPago = dataTest.getDataPago();
+		if (!dataPago.isUseSavedCard()) {
 		 	checks.add(
-				"Aparece también el campo <b>CVC</b>",
-				secTarjetaPci.isPresentInputCvc()); 
-	 	}
+				"Aparecen los 4 campos <b>Número, Titular, Mes, Año</b> para la introducción de los datos de la tarjeta",
+				secTarjetaPci.isPresentInputNumberUntil(1) &&
+				secTarjetaPci.isPresentInputTitular() &&
+				secTarjetaPci.isPresentSelectMes() &&
+				secTarjetaPci.isPresentSelectAny());
+		 	
+		 	if (pago.getTypePago()!=TypePago.BANCONTACT) {
+			 	checks.add(
+					"Aparece también el campo <b>CVC</b>",
+					secTarjetaPci.isPresentInputCvc()); 
+		 	}
+		}
+	 	
 		if (pago.getDni()!=null && "".compareTo(pago.getDni())!=0) {
 		 	checks.add(
 				"Aparece también el campo <b>DNI(C.C)</b>",

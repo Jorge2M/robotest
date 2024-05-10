@@ -47,7 +47,8 @@ public class Loy008 extends TestBase {
 	}
 	
     private String executeMastercardEnvioTiendaPayment() throws Exception {
-    	return executeMastercardPayment().getDataPedido().getCodpedido();
+    	executeMastercardPayment();
+    	return dataTest.getDataPago().getDataPedido().getCodpedido();
     }
     
     

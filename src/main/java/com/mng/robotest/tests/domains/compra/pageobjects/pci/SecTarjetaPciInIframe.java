@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.compra.pageobjects.pci;
 
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.mng.robotest.tests.domains.base.PageBase;
@@ -12,19 +11,29 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	
 	private static final String XP_IFRAME = "//iframe[@title='credit_card_form']";
 	private static final String XP_BLOCK = "//div[@id='root']";
+	private static final String XP_SAVE_CARD_CHECKBOX_DESKTOP = "//input[@name[contains(.,'guardarDatosIntegrado')]]";
+	private static final String XP_SAVE_CARD_CHECKBOX_MOBIL = "//div[@data-custom-checkbox-id='button-check']";
 	private static final String XP_INPUT_NUMBER = XP_BLOCK + "//input[@name[contains(.,'cardNumber')]]";
 	private static final String XP_INPUT_TITULAR = XP_BLOCK + "//input[@name[contains(.,'cardHolder')]]";
 	private static final String XP_SELECT_MES = XP_BLOCK + "//select[@name[contains(.,'expirationMonth')]]";
 	private static final String XP_SELECT_ANY = XP_BLOCK + "//select[@name[contains(.,'expirationYear')]]";
 	private static final String XP_INPUT_CVC = XP_BLOCK + "//input[@name[contains(.,'cvc')]]";
 	private static final String XP_INPUT_DNI = XP_BLOCK + "//input[@name[contains(.,'dni')]]"; //Specific for Codensa (Colombia)
+	private static final String XP_CVC_TRJ_GUARDADA = "//div[@class[contains(.,'tarjetasGuardadas')]]//input[@id='cvc']";	
+
+	private String getXPathSaveCardCheckbox() {
+		if (isDesktop()) {
+			return XP_SAVE_CARD_CHECKBOX_DESKTOP;
+		}
+		return XP_SAVE_CARD_CHECKBOX_MOBIL;
+	}
 	
-	protected void goToIframe() {
+	public void goToIframe() {
 		state(VISIBLE, XP_IFRAME).wait(2).check();
 		driver.switchTo().frame(getElement(XP_IFRAME));
 	}
 	
-	protected void leaveIframe() {
+	public void leaveIframe() {
 		driver.switchTo().defaultContent();
 	}
 	
@@ -82,9 +91,14 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	}	
 	
 	@Override
+	public void selectSaveCard() {
+		click(getXPathSaveCardCheckbox()).exec();
+	}
+	
+	@Override
 	public void inputNumber(String number) {
 		goToIframe();
-		WebElement input = getElement(XP_INPUT_NUMBER);
+		var input = getElement(XP_INPUT_NUMBER);
 		if (number.compareTo(input.getAttribute("value").replace(" ", ""))!=0) {
 			var inputNumber = getElement(XP_INPUT_NUMBER);
 			inputNumber.clear();
@@ -136,6 +150,16 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 		goToIframe();
 		new Select(getElement(XP_SELECT_ANY)).selectByVisibleText(any);
 		new Select(getElement(XP_SELECT_ANY)).selectByVisibleText(any);
+		leaveIframe();
+	}
+	
+	public void inputCvcTrjGuardadaIfVisible(String cvc) {
+		goToIframe();
+		if (state(VISIBLE, XP_CVC_TRJ_GUARDADA).check()) {
+			var input = getElement(XP_CVC_TRJ_GUARDADA);
+			input.clear();
+			input.sendKeys(cvc);
+		}
 		leaveIframe();
 	}
 	

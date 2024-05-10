@@ -11,17 +11,17 @@ import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow;
 
 public abstract class PagoSteps extends StepBase {
 	
+	protected final DataPago dataPago;
 	protected final CheckoutFlow checkoutFlow;
 	protected final CheckoutSteps checkoutSteps = new CheckoutSteps();
-	protected DataPago dataPago;
 	
 	public static final String MSG_NO_PAY_IMPLEMENTED = "No está diponible la parte del test que permite completar/ejecutar el pago";
 
 	private boolean availableExecPay = false;
 
-	protected PagoSteps(DataPago dataPago) {
-		this.dataPago = dataPago;
-		this.checkoutFlow = new BuilderCheckout(dataPago).build();
+	protected PagoSteps() {
+		this.dataPago = dataTest.getDataPago();
+		this.checkoutFlow = new BuilderCheckout(dataTest.getDataPago()).build();
 	}
 
 	public boolean isAvailableExecPay() {

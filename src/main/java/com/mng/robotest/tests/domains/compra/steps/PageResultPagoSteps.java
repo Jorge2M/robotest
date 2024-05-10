@@ -4,7 +4,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageResultPago;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
@@ -13,8 +12,6 @@ import com.mng.robotest.tests.domains.micuenta.pageobjects.PageAccesoMisCompras.
 import com.mng.robotest.tests.domains.micuenta.steps.PageAccesoMisComprasSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
-import com.mng.robotest.testslegacy.datastored.DataPago;
-import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -29,9 +26,9 @@ public class PageResultPagoSteps extends StepBase {
 		return pgResultPago.isVisibleTextoConfirmacionPago(seconds);
 	}
 	
-	public void checkIsPageOk(DataPago dataPago) {
+	public void checkIsPageOk() {
 		checkTextConfirmationPayment();
-		checkDataPedido(dataPago);
+		checkDataPedido();
 		checksDefault();
 	}
 	
@@ -59,9 +56,10 @@ public class PageResultPagoSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM checkDataPedido(DataPago dataPago) {
+	public ChecksTM checkDataPedido() {
 		var checks = ChecksTM.getNew();
 		String importeTotal = "";
+		var dataPago = dataTest.getDataPago();
 		if (dataTest.getDataBag()!=null && "".compareTo(dataTest.getDataBag().getImporteTotal())!=0) {
 			importeTotal = dataTest.getDataBag().getImporteTotal();
 		} else {
@@ -84,7 +82,7 @@ public class PageResultPagoSteps extends StepBase {
 	  		"Aparece el código de pedido (" + codigoPed + ") " + getLitSecondsWait(5),
 	  		isCodPedidoVisible);
 		
-		DataPedido dataPedido = dataPago.getDataPedido();
+		var dataPedido = dataPago.getDataPedido();
 		if (isCodPedidoVisible) {
 			dataPedido.setResejecucion(OK);
 		}
@@ -133,7 +131,7 @@ public class PageResultPagoSteps extends StepBase {
 	@Step (
 		description="Seleccionar el botón \"Descubrir lo último\" o el icono de Mango", 
 		expected="Volvemos a la portada")
-	public void selectSeguirDeShopping(AppEcom app) {  
+	public void selectSeguirDeShopping() {  
 		if (pgResultPago.isVisibleDescubrirLoUltimo()) {
 			pgResultPago.clickDescubrirLoUltimo();
 		} else {
@@ -141,8 +139,9 @@ public class PageResultPagoSteps extends StepBase {
 		}
 	}
 	
-	public void selectLinkMisComprasAndValidateCompra(DataPago dataPago) {		
+	public void selectLinkMisComprasAndValidateCompra() {		
 		selectMisCompras();
+		var dataPago = dataTest.getDataPago();
 		var dataPedido = dataPago.getDataPedido();
 		if (dataTest.isUserRegistered()) {
 			new PageMisComprasSteps().checkIsCompraOnline(

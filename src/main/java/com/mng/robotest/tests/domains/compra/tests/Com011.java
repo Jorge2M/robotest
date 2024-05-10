@@ -9,7 +9,6 @@ import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.ModalDetalleCompraSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 
 public class Com011 extends TestBase {
 
@@ -24,9 +23,9 @@ public class Com011 extends TestBase {
         accessLoginAndClearBolsa();
         altaArticulosBolsaAndComprar();
 		if (!isPRO()) {
-			var dataPago = executeVisaPayment();
-			checkMisCompras(dataPago);
-			checkPedidos(dataPago);
+			executeVisaPayment();
+			checkMisCompras();
+			checkPedidos();
 		} 
 	}
 	
@@ -40,8 +39,8 @@ public class Com011 extends TestBase {
 		altaArticulosBolsaAndClickComprar(articles);
     }	
 
-	private void checkMisCompras(DataPago dataPago) {
-		String codigoPedido = dataPago.getDataPedido().getCodpedido();
+	private void checkMisCompras() {
+		String codigoPedido = dataTest.getDataPago().getDataPedido().getCodpedido();
 		new PageResultPagoSteps().selectMisCompras();
 		
 		var pageMisComprasSteps = new PageMisComprasSteps();
@@ -51,7 +50,8 @@ public class Com011 extends TestBase {
 		}
 	}    
 	
-	private void checkPedidos(DataPago dataPago) throws Exception {
+	private void checkPedidos() throws Exception {
+		var dataPago = dataTest.getDataPago();
 		var dataPedido = dataPago.getDataPedido();
 		dataPedido.setEmailCheckout(dataTest.getUserConnected());
 		checkPedidosManto(Arrays.asList(dataPago.getDataPedido()));

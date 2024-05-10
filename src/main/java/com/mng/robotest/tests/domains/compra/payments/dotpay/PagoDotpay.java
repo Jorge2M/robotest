@@ -4,7 +4,6 @@ import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
 import com.mng.robotest.tests.domains.compra.payments.dotpay.steps.PageDotpay1rstSteps;
 import com.mng.robotest.tests.domains.compra.payments.dotpay.steps.PageDotpayAcceptSimulationSteps;
 import com.mng.robotest.tests.domains.compra.payments.dotpay.steps.PageDotpayPaymentChannelSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
@@ -14,15 +13,15 @@ public class PagoDotpay extends PagoSteps {
 	private final PageDotpayPaymentChannelSteps pageDotpayPaymentChannelSteps = new PageDotpayPaymentChannelSteps();
 	private final PageDotpayAcceptSimulationSteps pageDotpayAcceptSimulationSteps = new PageDotpayAcceptSimulationSteps();
 	
-	public PagoDotpay(DataPago dataPago) {
-		super(dataPago);
+	public PagoDotpay() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
-		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = dataPago.getDataPedido(); 
 		String nombrePago = dataPedido.getPago().getNombre(channel, app);
 		pageDotpay1rstSteps.validateIsPage(nombrePago, dataPedido.getImporteTotal(), dataTest.getCodigoPais());

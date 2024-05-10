@@ -11,7 +11,6 @@ import com.mng.robotest.tests.domains.compra.pageobjects.envio.SecMetodoEnvioDes
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.tests.domains.compra.steps.Page1EnvioCheckoutMobilSteps;
 import com.mng.robotest.testslegacy.beans.Pago;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -25,11 +24,12 @@ public class SecMetodoEnvioSteps extends StepBase {
 	@Step (
 		description="<b style=\"color:blue;\">#{nombrePago}</b>:Seleccionamos el método de envío <b>#{tipoTransporte}</b>", 
 		expected="Se selecciona el método de envío correctamente")
-	public void selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago, DataPago dataPago) {
+	public void selectMetodoEnvio(TipoTransporte tipoTransporte, String nombrePago) {
 		secMetodoEnvioDesktop.selectMetodo(tipoTransporte);
 		if (!tipoTransporte.isEntregaDomicilio() &&
 			modalDroppoints.isErrorMessageVisibleUntil()) {
-			modalDroppoints.searchAgainByUserCp(dataPago.getDatosRegistro().get("cfCp"));
+			var datosRegistro = dataTest.getDataPago().getDatosRegistro();
+			modalDroppoints.searchAgainByUserCp(datosRegistro.get("cfCp"));
 		}
 
 		validaBlockSelectedDesktop(tipoTransporte);
@@ -63,27 +63,27 @@ public class SecMetodoEnvioSteps extends StepBase {
 	}
 	
 
-	public void selectMetodoEnvio(DataPago dataPago, String nombrePago) {
-		alterTypeEnviosAccordingContext(dataPago);
-		var pago = dataPago.getDataPedido().getPago();
+	public void selectMetodoEnvio(String nombrePago) {
+		alterTypeEnviosAccordingContext();
+		var pago = dataTest.getDataPago().getDataPedido().getPago();
 		var tipoTransporte = pago.getTipoEnvioType(app);
 		if (isMobile()) {
-			new Page1EnvioCheckoutMobilSteps().selectMetodoEnvio(tipoTransporte, nombrePago, dataPago);
+			new Page1EnvioCheckoutMobilSteps().selectMetodoEnvio(tipoTransporte, nombrePago);
 		} else {
-			selectMetodoEnvio(tipoTransporte, nombrePago, dataPago);
+			selectMetodoEnvio(tipoTransporte, nombrePago);
 		}
 	}
 	
-	public boolean fluxSelectEnvio(DataPago dataPago) {
+	public boolean fluxSelectEnvio() {
 		boolean pagoPintado = false;
-		var pago = dataPago.getDataPedido().getPago();
+		var pago = dataTest.getDataPago().getDataPedido().getPago();
 		if (pago.getTipoEnvio(app)!=null) {
-			String nombrePago = dataPago.getDataPedido().getPago().getNombre(channel, app);
-			selectMetodoEnvio(dataPago, nombrePago);
+			String nombrePago = pago.getNombre(channel, app);
+			selectMetodoEnvio(nombrePago);
 			pagoPintado = true;
 			var tipoEnvio = pago.getTipoEnvioType(app);
 			if (tipoEnvio.isDroppoint()) {
-				modalDroppointsSteps.fluxSelectDroppoint(dataPago);
+				modalDroppointsSteps.fluxSelectDroppoint();
 			}
 			if (tipoEnvio.isFranjaHoraria()) {
 				selectFranjaHorariaUrgente();
@@ -104,14 +104,16 @@ public class SecMetodoEnvioSteps extends StepBase {
 	/**
 	 * No tenemos posibilidad sencilla de determinar si nos aparecerá el envío de tipo "Urgente" o "SendayNextday" así que si no encontramos uno ejecutamos la prueba con el otro
 	 */
-	private void alterTypeEnviosAccordingContext(DataPago dataPago) {
-		alterTypeEnviosTiendaStandar(dataPago);
-		Pago pago = dataPago.getDataPedido().getPago();
+	private void alterTypeEnviosAccordingContext() {
+		alterTypeEnviosTiendaStandar();
+		var dataPedido = dataTest.getDataPago().getDataPedido();
+		Pago pago = dataPedido.getPago();
 		alterTypeEnviosNextaySomedayUntilExists(pago);
 	}
 	
-	private void alterTypeEnviosTiendaStandar(DataPago dataPago) {
+	private void alterTypeEnviosTiendaStandar() {
 		//If employee and Spain not "Recogida en Tienda"
+		var dataPago = dataTest.getDataPago();
 		Pago pago = dataPago.getDataPedido().getPago();
 		if (dataPago.getFTCkout().userIsEmployee && 
 			"001".compareTo(dataPago.getDataPedido().getCodigoPais())==0) {

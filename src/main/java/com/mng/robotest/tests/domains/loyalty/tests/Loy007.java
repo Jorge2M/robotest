@@ -49,24 +49,23 @@ public class Loy007 extends TestBase {
 	}	
 	
     private void executeVisaEnvioDomicilioPaymentKO() throws Exception {
-        var dataPago = getDataPago();
         var pagoVisa = dataTest.getPais().getPago("VISA");
         pagoVisa.setCvc(CVC_VISA_KO);
-        dataPago.setPago(pagoVisa);
+        dataTest.getDataPago().setPago(pagoVisa);
         
-        new CompraSteps().startPayment(dataPago, true);
+        new CompraSteps().startPayment(true);
         new CheckoutSteps().isVisibleMessageErrorPayment(5);
     }
     
     public String executeVisaPaymentOK() throws Exception {
-    	var dataPago = getDataPago();
         var pagoVisa = dataTest.getPais().getPago("VISA");
         pagoVisa.setCvc(cvcVisaOK);
+        var dataPago = dataTest.getDataPago();
         dataPago.setPago(pagoVisa);
         dataPago.setSelectEnvioType(false);
         
-        new CompraSteps().startPayment(dataPago, true);
-        new PageResultPagoSteps().checkIsPageOk(dataPago);
+        new CompraSteps().startPayment(true);
+        new PageResultPagoSteps().checkIsPageOk();
         return dataPago.getDataPedido().getCodpedido();
     }
 	

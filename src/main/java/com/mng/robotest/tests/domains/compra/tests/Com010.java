@@ -52,7 +52,8 @@ public class Com010 extends TestBase {
 				.checkPromotionalCode(testVale || empleado)
 				.userIsEmployee(empleado).build();
 		
-		new BuilderCheckout(getDataPago(configCheckout))
+		dataTest.setDataPago(configCheckout);
+		new BuilderCheckout(dataTest.getDataPago())
 			.pago(this.pago)
 			.build()
 			.checkout(From.BOLSA);

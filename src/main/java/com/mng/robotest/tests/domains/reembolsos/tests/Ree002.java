@@ -61,22 +61,21 @@ public class Ree002 extends TestBase {
 				.emaiExists()
 				.checkPromotionalCode().build();
 		
-		var dataPago = getDataPago(configCheckout);
-		
+		dataTest.setDataPago(configCheckout);
+		var dataPago = dataTest.getDataPago();
 		//Informamos datos varios necesarios para el proceso de pagos de modo que se pruebe el pago StoreCredit
 		dataPago.getDataPedido().setEmailCheckout(dataTest.getUserConnected());
 		dataPago.setUserWithStoreC(true);
 		dataPago.setSaldoCta(saldoCtaIni);
 		var pagoStoreCredit = dataTest.getPais().getPago("STORECREDIT");
 		
-		dataPago = new CheckoutFlow.BuilderCheckout(dataPago)
+		new CheckoutFlow.BuilderCheckout(dataPago)
 			.pago(pagoStoreCredit)
 			.build()
 			.checkout(From.BOLSA);
 		
 		if (!isPRO()) {
-			//Volvemos a la portada (Seleccionamos el link "Seguir de shopping" o el icono de Mango)
-			new PageResultPagoSteps().selectSeguirDeShopping(app);
+			new PageResultPagoSteps().selectSeguirDeShopping();
 			
 			//Calculamos el saldo en cuenta que debería quedar (según si se ha realizado o no el pago);
 			float saldoCtaEsperado;

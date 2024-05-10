@@ -6,7 +6,6 @@ import com.mng.robotest.tests.domains.compra.payments.mercadopago.steps.PageMerc
 import com.mng.robotest.tests.domains.compra.payments.mercadopago.steps.PageMercpagoConfSteps;
 import com.mng.robotest.tests.domains.compra.payments.mercadopago.steps.PageMercpagoDatosTrjSteps;
 import com.mng.robotest.tests.domains.compra.payments.mercadopago.steps.PageMercpagoLoginSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
@@ -14,16 +13,16 @@ public class PagoMercadopago extends PagoSteps {
 
 	private static final String CODIGO_SEGURIDAD = "123";
 	
-	public PagoMercadopago(DataPago dataPago) {
-		super(dataPago);
+	public PagoMercadopago() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		var dataPedido = this.dataPago.getDataPedido();
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
-		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutFlow.checkout(From.METODOSPAGO);
 		
 		var pageMercpago1rstSteps = new PageMercpago1rstSteps();
 		pageMercpago1rstSteps.validateisPage(5);

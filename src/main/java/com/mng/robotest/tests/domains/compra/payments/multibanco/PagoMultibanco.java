@@ -1,22 +1,20 @@
 package com.mng.robotest.tests.domains.compra.payments.multibanco;
 
 import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
-
 
 public class PagoMultibanco extends PagoSteps {
 
-	public PagoMultibanco( DataPago dataPago) {
-		super(dataPago);
+	public PagoMultibanco() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
 		if (execPay) {
-			dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+			checkoutFlow.checkout(From.METODOSPAGO);
 		}
 	}	
 }

@@ -10,7 +10,6 @@ import com.mng.robotest.tests.domains.compra.payments.paypal.steps.PagePaypalCon
 import com.mng.robotest.tests.domains.compra.payments.paypal.steps.PagePaypalCreacionCuentaSteps;
 import com.mng.robotest.tests.domains.compra.payments.paypal.steps.PagePaypalLoginSteps;
 import com.mng.robotest.tests.domains.compra.payments.paypal.steps.PagePaypalSelectPagoSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
@@ -22,15 +21,15 @@ public class PagoPaypal extends PagoSteps {
 	private final PagePaypalSelectPagoSteps pagePaypalSelectPagoSteps = new PagePaypalSelectPagoSteps();
 	private final PagePaypalConfirmacionSteps pagePaypalConfirmacionSteps = new PagePaypalConfirmacionSteps();
 	
-	public PagoPaypal(DataPago dataPago) {
-		super(dataPago);
+	public PagoPaypal() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
-		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutFlow.checkout(From.METODOSPAGO);
 		modalPreloaderSppinerSteps.validateAppearsAndDisappears();
 		if (getInitPagePaypal() == InitPagePaypal.LOGIN) {
 			pagePaypalLoginSteps.checkIsPage(1);

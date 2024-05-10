@@ -14,15 +14,12 @@ import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 import com.mng.robotest.testslegacy.data.Constantes;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
 public class Rgl002 extends TestBase {
 
 	private final PageChequeRegaloInputDataSteps pgChequeRegaloInputDataSteps;
-	
-	private final DataPago dataPago;
 	
 	public Rgl002() throws Exception {
 		dataTest.setPais(FRANCE.getPais());
@@ -38,7 +35,7 @@ public class Rgl002 extends TestBase {
 				.emaiExists()
 				.chequeRegalo().build();
 		
-		dataPago = getDataPago(configCheckout);
+		dataTest.setDataPago(configCheckout);
 		
 		pgChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps();
 	}
@@ -77,7 +74,7 @@ public class Rgl002 extends TestBase {
 	}
 	
 	private void checkoutChequeRegalo() throws Exception {
-		new BuilderCheckout(dataPago)
+		new BuilderCheckout(dataTest.getDataPago())
 			.pago(dataTest.getPais().getPago("VISA"))
 			.build()
 			.checkout(From.IDENTIFICATION);

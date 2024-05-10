@@ -5,20 +5,19 @@ import com.mng.robotest.tests.domains.compra.payments.paytrail.steps.PagePaytrai
 import com.mng.robotest.tests.domains.compra.payments.paytrail.steps.PagePaytrailEpaymentSteps;
 import com.mng.robotest.tests.domains.compra.payments.paytrail.steps.PagePaytrailIdConfirmSteps;
 import com.mng.robotest.tests.domains.compra.payments.paytrail.steps.PagePaytrailResultadoOkSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoPaytrail extends PagoSteps {
 	
-	public PagoPaytrail(DataPago dataPago) {
-		super(dataPago);
+	public PagoPaytrail() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
-		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutFlow.checkout(From.METODOSPAGO);
 		
 		var pagePaytrail1rstSteps = new PagePaytrail1rstSteps();
 		pagePaytrail1rstSteps.validateIsPage(dataPago.getDataPedido().getImporteTotal());

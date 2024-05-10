@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.menus.beans.Linea;
 import com.mng.robotest.tests.repository.usuarios.GestorUsersShop;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
@@ -11,6 +12,8 @@ import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.datastored.DataBag;
 import com.mng.robotest.testslegacy.datastored.DataFavoritos;
+import com.mng.robotest.testslegacy.datastored.DataPago;
+import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.utils.PaisGetter;
 
 public class DataTest implements Cloneable, Serializable {
@@ -25,6 +28,7 @@ public class DataTest implements Cloneable, Serializable {
 	private String passwordUser = "";
 	private DataBag dataBag = new DataBag(); 
 	private DataFavoritos dataFavoritos = new DataFavoritos();
+	private DataPago dataPago;
 	
 	public DataTest() { 
 		//TODO esperar a 2.1.39 TestMaker para poder hacer uso de .getCode();
@@ -39,6 +43,7 @@ public class DataTest implements Cloneable, Serializable {
 	public DataTest(Pais paisI) {
 		this();
 		this.pais = paisI;
+		setDataPago(ConfigCheckout.config().build());
 	}
 	
 	public DataTest(Pais paisI, IdiomaPais idiomaI) {
@@ -50,6 +55,7 @@ public class DataTest implements Cloneable, Serializable {
 		DataTest dataTest = new DataTest();
 		dataTest.pais = PaisGetter.from(paisShop);
 		dataTest.idioma = dataTest.pais.getListIdiomas().get(0);
+		dataTest.setDataPago(ConfigCheckout.config().build());
 		return dataTest;
 	}	
 	
@@ -136,6 +142,20 @@ public class DataTest implements Cloneable, Serializable {
 		this.dataBag = dataBag;
 	}
 
+	public DataPago getDataPago() {
+		return dataPago;
+	}
+	
+	public void setDataPago(ConfigCheckout configCheckout) {
+		this.dataPago = new DataPago(configCheckout);
+		var dataPedido = new DataPedido(getPais(), getDataBag());
+		dataPago.setDataPedido(dataPedido);
+	}
+	
+	public void setDataPago(DataPago dataPago) {
+		this.dataPago = dataPago;
+	}
+	
 	public DataFavoritos getDataFavoritos() {
 		return dataFavoritos;
 	}

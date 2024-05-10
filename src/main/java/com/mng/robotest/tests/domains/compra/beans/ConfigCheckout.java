@@ -13,7 +13,6 @@ public class ConfigCheckout implements Cloneable, Serializable {
 	public final boolean checkManto;
 	public final boolean checkMisCompras;
 	public final boolean emailExists; 
-	public final boolean checkSavedCard;
 	public final boolean userIsEmployee;
 	public final boolean acceptCookies;
 	public final boolean checkPromotionalCode;
@@ -30,7 +29,6 @@ public class ConfigCheckout implements Cloneable, Serializable {
 		this.checkManto = checkManto;
 		this.checkMisCompras = checkMisCompras;
 		this.emailExists = emailExists; 
-		this.checkSavedCard = checkSavedCard;
 		this.userIsEmployee = userIsEmployee;
 		this.acceptCookies = acceptCookies;
 		this.checkPromotionalCode = checkPromotionalCode;

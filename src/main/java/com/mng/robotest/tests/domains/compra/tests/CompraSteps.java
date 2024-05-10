@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.payments.FactoryPagos;
+import com.mng.robotest.testslegacy.beans.TypePago;
 import com.mng.robotest.testslegacy.datastored.DataCheckPedidos;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.testslegacy.steps.navigations.manto.PedidoNavigations;
@@ -15,11 +15,14 @@ import static com.mng.robotest.testslegacy.datastored.DataCheckPedidos.CheckPedi
 
 public class CompraSteps extends StepBase {
 
-	public void startPayment(DataPago dataPago, boolean executePayment) throws Exception {
+	public void startPayment(boolean executePayment) throws Exception {
+		var dataPago = dataTest.getDataPago();
 		if (dataPago.getPago()==null) {
 			dataPago.setPago(dataTest.getPais().getPago("VISA"));
 		}
-		var pagoSteps = FactoryPagos.makePagoSteps(dataPago);
+		
+		TypePago typePago = dataPago.getDataPedido().getPago().getTypePago();
+		var pagoSteps = FactoryPagos.makePagoSteps(typePago);
 		pagoSteps.startPayment(executePayment);
 	}
 	

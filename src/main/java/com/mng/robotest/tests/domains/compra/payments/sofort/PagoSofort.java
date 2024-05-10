@@ -6,20 +6,19 @@ import com.mng.robotest.tests.domains.compra.payments.sofort.steps.PageSofort2on
 import com.mng.robotest.tests.domains.compra.payments.sofort.steps.PageSofort4thSteps;
 import com.mng.robotest.tests.domains.compra.payments.sofort.steps.PageSofortIconosBancoSteps;
 import com.mng.robotest.testslegacy.beans.Pago;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
 public class PagoSofort extends PagoSteps {
 	
-	public PagoSofort(DataPago dataPago) {
-		super(dataPago);
+	public PagoSofort() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
-		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutFlow.checkout(From.METODOSPAGO);
 		boolean isPageIconoSofort = new PageSofort1rst().isPageVisibleUntil(3);
 		
 		//En ocasiones se salta desde la página de Checkout-Mango hasta la página de selección del banco

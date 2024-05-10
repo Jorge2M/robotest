@@ -17,7 +17,6 @@ import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pago;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 
 public class Com009 extends TestBase {
 	
@@ -69,8 +68,8 @@ public class Com009 extends TestBase {
 	}
 
 	private void comprarAndValidateCompras(DirectionData directionPrincipal) throws Exception {
-		DataPago dataPago = executeVisaPayment();
-		checkMisCompras(dataPago, directionPrincipal.getDireccion());
+		executeVisaPayment();
+		checkMisCompras(directionPrincipal.getDireccion());
 	}
 
 	private void removeDireccion(String addressSecondary) {
@@ -91,14 +90,14 @@ public class Com009 extends TestBase {
 	}
     
     private void selectEnvioEstandard() {
-    	DataPago dataPago = getDataPago();
     	Pago pagoVISA = dataTest.getPais().getPago("VISA");
     	pagoVISA.setTipoEnvio(TipoTransporte.STANDARD);
-    	dataPago.setPago(pagoVISA);
-    	new SecMetodoEnvioSteps().selectMetodoEnvio(dataPago, "VISA");
+    	dataTest.getDataPago().setPago(pagoVISA);
+    	new SecMetodoEnvioSteps().selectMetodoEnvio("VISA");
     }
     
-	private void checkMisCompras(DataPago dataPago, String address) {
+	private void checkMisCompras(String address) {
+		var dataPago = dataTest.getDataPago();
 		String codigoPedido = dataPago.getDataPedido().getCodpedido();
 		new PageResultPagoSteps().selectMisCompras();
 		

@@ -11,7 +11,6 @@ import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.testslegacy.data.Constantes;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
@@ -19,8 +18,6 @@ public class Rgl001 extends TestBase {
 
 	private final PageChequeRegaloInputDataSteps pgChequeRegaloInputDataSteps = new PageChequeRegaloInputDataSteps();
 	
-	private final DataPago dataPago;
-		
 	public Rgl001() throws Exception {
 		ConfigCheckout configCheckout = ConfigCheckout.config()
 				.checkMisCompras()
@@ -28,7 +25,7 @@ public class Rgl001 extends TestBase {
 				.emaiExists()
 				.chequeRegalo().build();
 		
-		dataPago = getDataPago(configCheckout);		
+		dataTest.setDataPago(configCheckout);		
 	}
 	
 	@Override
@@ -71,7 +68,7 @@ public class Rgl001 extends TestBase {
 	}	
 	
 	private void checkoutChequeRegalo() throws Exception {
-		new BuilderCheckout(dataPago)
+		new BuilderCheckout(dataTest.getDataPago())
 			.pago(dataTest.getPais().getPago("VISA"))
 			.build()
 			.checkout(From.IDENTIFICATION);

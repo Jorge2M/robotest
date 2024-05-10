@@ -66,10 +66,9 @@ public class CheckoutFlow extends StepBase {
 		}
 	}
 	
-	public DataPago checkout(From from) throws Exception {
+	public void checkout(From from) throws Exception {
 		if (from==From.METODOSPAGO) {
 			aceptarCompraDesdeMetodosPago();
-			return dataPago;
 		}
 		if (from==From.PREHOME) {
 			testFromPrehomeToBolsa();
@@ -87,7 +86,6 @@ public class CheckoutFlow extends StepBase {
 			(!pais.getListPagosForTest(app, dataPago.getFTCkout().userIsEmployee).isEmpty())) {
 			checkMetodosPagos();
 		}
-		return dataPago;
 	}
 	
 	private List<Article> makeListArticles() {
@@ -233,7 +231,8 @@ public class CheckoutFlow extends StepBase {
 		dataPedido.setPago(pagoToTest);
 		dataPedido.setResejecucion(com.github.jorge2m.testmaker.conf.State.KO);
 		
-		var pagoSteps = FactoryPagos.makePagoSteps(dataPago);
+		var typePago = dataPago.getDataPedido().getPago().getTypePago();
+		var pagoSteps = FactoryPagos.makePagoSteps(typePago);
 		boolean execPay = iCanExecPago(pagoSteps);
 		pagoSteps.startPayment(execPay);
 		dataPedido = dataPago.getDataPedido();
@@ -243,11 +242,11 @@ public class CheckoutFlow extends StepBase {
 				pageResultPagoSteps.checkUrl(10);
 			}
 			else {
-				pageResultPagoSteps.checkIsPageOk(dataPago);
+				pageResultPagoSteps.checkIsPageOk();
 				if (!isMobile() && 
 					!dataPago.getFTCkout().chequeRegalo &&
 					dataPago.getFTCkout().checkMisCompras) {
-					pageResultPagoSteps.selectLinkMisComprasAndValidateCompra(dataPago);
+					pageResultPagoSteps.selectLinkMisComprasAndValidateCompra();
 				}
 				
 				//Almacenamos el pedido en el contexto para la futura validación en Manto

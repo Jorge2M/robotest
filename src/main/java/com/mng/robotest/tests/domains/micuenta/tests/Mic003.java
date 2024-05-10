@@ -7,7 +7,6 @@ import com.mng.robotest.tests.domains.micuenta.steps.PageMisDatosSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
-import com.mng.robotest.tests.domains.transversal.cabecera.steps.SecCabeceraSteps;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 import com.mng.robotest.testslegacy.data.DataMango;
@@ -44,10 +43,6 @@ public class Mic003 extends TestBase {
 	private void inputInitialDataAndClickCreate() {
 		pageRegistroInitialSteps.inputData(dataNewRegister);
 		pageRegistroInitialSteps.clickCreateAccountButton();
-	}
-	
-	private void clickLogoMango() {
-		new SecCabeceraSteps().selecLogo();
 	}
 	
 	private void cancelarCuentaAndCheckLoginKO() {

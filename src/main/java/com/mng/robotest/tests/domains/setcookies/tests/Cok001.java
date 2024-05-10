@@ -3,14 +3,11 @@ package com.mng.robotest.tests.domains.setcookies.tests;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.testslegacy.beans.Pago;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
 
 public class Cok001 extends TestBase {
 
-	private final DataPago dataPago;
-	
 	public Cok001() throws Exception {
 		var configCheckout = ConfigCheckout.config()
 				.acceptCookies(false)
@@ -18,7 +15,7 @@ public class Cok001 extends TestBase {
 				.checkMisCompras()
 				.emaiExists().build();
 		
-		dataPago = getDataPago(configCheckout);
+		dataTest.setDataPago(configCheckout);
 	}
 	
 	@Override
@@ -27,7 +24,7 @@ public class Cok001 extends TestBase {
 	}
 	
 	private void checkout() throws Exception {
-		new BuilderCheckout(dataPago)
+		new BuilderCheckout(dataTest.getDataPago())
 				.pago(getPagoRealCard())
 				.build()
 				.checkout(From.PREHOME);

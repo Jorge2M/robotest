@@ -1,20 +1,17 @@
 package com.mng.robotest.tests.domains.compra.payments.klarna;
 
 import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 
 public class PagoKlarna extends PagoSteps {
 	
-//	private final PageKlarnaSteps pageKlarnaSteps = new PageKlarnaSteps();
-
-	public PagoKlarna(DataPago dataPago) {
-		super(dataPago);
+	public PagoKlarna() {
+		super();
 		super.setAvaliableExecPay(true);
 	}
 
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod(dataPago);
+		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
 		//TODO ajustar
 //		dataPago = checkoutFlow.checkout(From.METODOSPAGO);
 //		if (pageKlarnaSteps.getPageObject().isPage(10)) {

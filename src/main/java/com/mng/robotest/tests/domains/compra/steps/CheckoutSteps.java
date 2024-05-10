@@ -16,7 +16,6 @@ import com.mng.robotest.tests.domains.compra.steps.envio.SecMetodoEnvioSteps;
 import com.mng.robotest.testslegacy.beans.AccesoEmpl;
 import com.mng.robotest.testslegacy.beans.Pago;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 
 import static com.mng.robotest.testslegacy.beans.TypePago.*;
@@ -185,11 +184,12 @@ public class CheckoutSteps extends StepBase {
 	/**
 	 * Realiza una navegación (conjunto de pasos/validaciones) mediante la que se selecciona el método de envío y finalmente el método de pago 
 	 */
-	public void fluxSelectEnvioAndClickPaymentMethod(DataPago dataPago) throws Exception {
+	public void fluxSelectEnvioAndClickPaymentMethod() throws Exception {
 		boolean pagoPintado = false;
+		var dataPago = dataTest.getDataPago();
 		if (dataPago.isSelectEnvioType() &&
 			!dataPago.getFTCkout().chequeRegalo) {
-			pagoPintado = secMetodoEnvioDesktopSteps.fluxSelectEnvio(dataPago);
+			pagoPintado = secMetodoEnvioDesktopSteps.fluxSelectEnvio();
 		}
 		boolean methodSelectedOK = forceClickIconoPagoAndWait(dataPago.getDataPedido().getPago(), !pagoPintado);
 		if (!methodSelectedOK) {
@@ -222,23 +222,23 @@ public class CheckoutSteps extends StepBase {
 		if (pago.getTypePago()==TARJETA_INTEGRADA || 
 			pago.getTypePago()==KREDI_KARTI ||
 			pago.getTypePago()==BANCONTACT) {
-			validateSelectPagoTRJintegrada(pago);
+			checkSelectPagoTRJintegrada(pago);
 			return true;
 		} else {
 			return validateSelectPagoNoTRJintegrada(pago);
 		}
 	}
 	
-	public void validateSelectPagoTRJintegrada(Pago pago) {
+	public void checkSelectPagoTRJintegrada(Pago pago) {
 		if (!isMobile()) {
-			validateIsPresentButtonCompraDesktop();
+			checkIsPresentButtonCompraDesktop();
 		}
-		getSecTarjetaPciSteps().validateIsSectionOk(pago);
+		getSecTarjetaPciSteps().checkIsSectionOk(pago);
 	}
 	
 	public boolean validateSelectPagoNoTRJintegrada(Pago pago) {
 		if (!isMobile()) {
-			validateIsPresentButtonCompraDesktop();
+			checkIsPresentButtonCompraDesktop();
 		}
 		return checkIsVisibleTextUnderPayment(pago.getNombreInCheckout(channel, app), pago, 2);
 	}
@@ -250,8 +250,13 @@ public class CheckoutSteps extends StepBase {
 	}
 	
 	@Validation (description="Aparece el botón de \"Confirmar Compra\"")
-	public boolean validateIsPresentButtonCompraDesktop() {
+	public boolean checkIsPresentButtonCompraDesktop() {
 		return pgCheckoutWrapper.getPage1DktopCheckout().isPresentButtonConfPago();
+	}
+	
+	@Step(description="Seleccionamos el checkbox para grabar la tarjeta", expected="")
+	public void selectSaveCard() {
+		pgCheckoutWrapper.selectSaveCard();
 	}
 	
 	private static final String TAG_TIPO_TARJ = "@TagTipoTarj";
@@ -259,7 +264,8 @@ public class CheckoutSteps extends StepBase {
 	@Step (
 		description="Introducimos los datos de la tarjeta (" + TAG_TIPO_TARJ + ") " + TAG_NUM_TARJ + " y pulsamos el botón \"Confirmar pago\"",
 		expected="Aparece la página de resultado OK")
-	public void inputDataTrjAndConfirmPago(DataPago dataPago) {
+	public void inputDataTrjAndConfirmPago() {
+		var dataPago = dataTest.getDataPago();
 		Pago pago = dataPago.getDataPedido().getPago();
 		replaceStepDescription(TAG_TIPO_TARJ, pago.getTipotarj());
 		replaceStepDescription(TAG_NUM_TARJ, pago.getNumtarj());
@@ -295,10 +301,10 @@ public class CheckoutSteps extends StepBase {
 	@Step (
 		description="Seleccionamos la tarjeta guardada, si nos lo pide introducimos el cvc #{cvc} y pulsamos el botón \"Confirmar pago\"",
 		expected="Aparece la página de resultado OK")
-	public void selectTrjGuardadaAndConfirmPago(DataPago dataPago, String cvc) {
+	public void selectTrjGuardadaAndConfirmPago(String cvc) {
 		pgCheckoutWrapper.clickRadioTrjGuardada();
 		pgCheckoutWrapper.inputCvcTrjGuardadaIfVisible(cvc);
-		pgCheckoutWrapper.confirmarPagoFromMetodos(dataPago.getDataPedido());
+		pgCheckoutWrapper.confirmarPagoFromMetodos(dataTest.getDataPago().getDataPedido());
 		pgRedirectPasarelaLoadingSteps.checkDisappeared(5);
 	}
 
@@ -396,6 +402,10 @@ public class CheckoutSteps extends StepBase {
 		validaResultImputPromoEmpl();
 	}
 		
+	public void selectSeguirDeShopping() {
+		new PageResultPagoSteps().selectSeguirDeShopping();
+	}
+	
 	public void validaResultImputPromoEmpl() {
 		if (isMobile()) {
 			pg1MobilCheckSteps.validaResultImputPromoEmpl();

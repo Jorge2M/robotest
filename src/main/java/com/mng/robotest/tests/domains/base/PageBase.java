@@ -197,6 +197,10 @@ public class PageBase extends PageObjTM {
 		}
 	}
 	
+	protected void renewBrowser() {
+		TestMaker.renewDriverTestCase();
+	}
+	
 	protected void refreshPage() {
 		driver.navigate().refresh();
 	}

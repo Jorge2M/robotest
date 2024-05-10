@@ -99,7 +99,7 @@ public class Mic002 extends TestBase {
 		
 		//Existe un problema en por el cual si te vuelves a loginar manteniendo el navegador
 		//se muestran las compras del anterior usuario
-		TestMaker.renewDriverTestCase();
+		renewBrowser();
 		var accesoSteps = new AccesoSteps();
 		accesoSteps.accessFromPreHome();
 		accesoSteps.identificacionEnMango();
