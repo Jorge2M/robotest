@@ -99,6 +99,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 
 	@Override
 	public String getNombreArticulo(WebElement articulo) {
+		state(PRESENT, articulo).by(By.xpath(XP_TITLE_ARTICLE)).wait(1).check();
 		return getElement(articulo, "." + XP_TITLE_ARTICLE).getText();
 	}
 	

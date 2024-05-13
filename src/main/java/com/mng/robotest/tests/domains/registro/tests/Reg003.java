@@ -8,7 +8,7 @@ import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
-import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
+import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNino;
 import com.mng.robotest.tests.domains.registro.beans.ListDataNinos;
 import com.mng.robotest.tests.domains.registro.beans.DataNino.sexoType;
@@ -33,7 +33,7 @@ public class Reg003 extends TestBase {
 	private final PageRegistroFinStepsOutlet pgRegistroFinSteps = new PageRegistroFinStepsOutlet();
 
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
-	private final PageMiCuentaSteps pgMiCuentaSteps = new PageMiCuentaSteps();
+	private final MiCuentaSteps pgMiCuentaSteps;
 	private final SecCabeceraSteps secCabeceraSteps = new SecCabeceraSteps();
 	
 	private final VersionRegistroSuite version;
@@ -44,7 +44,8 @@ public class Reg003 extends TestBase {
 		dataTest.setPais(pais);
 		dataTest.setIdioma(idioma);
 		dataTest.setUserRegistered(false);
-
+		pgMiCuentaSteps = new MiCuentaSteps();
+		
 		if (accessFromFactory) {
 			version = VersionRegistroSuite.valueOf(inputParamsSuite.getVersion());
 		} else {

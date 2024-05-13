@@ -5,7 +5,7 @@ import static com.mng.robotest.testslegacy.data.PaisShop.*;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMisDatos;
-import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
+import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 
 /**
  * Control textos legales "Mis Datos":
@@ -38,7 +38,7 @@ public class Leg006 extends TestBase {
 	
 	private void goToMisDatos() {
 		new SecMenusUserSteps().clickMenuMiCuenta();
-		new PageMiCuentaSteps().clickLinkMisDatos();
+		new MiCuentaSteps().clickLinkMisDatos();
 	}	
 	
 	private void checkTextoLegal() {

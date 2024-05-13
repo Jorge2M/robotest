@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.registro.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
-import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
+import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroPersonalizacionShopSteps;
@@ -67,7 +67,7 @@ public class Reg001 extends TestBase {
 	
 	private void checkLoginAndUserData() {
 		new SecMenusUserSteps().logoffLogin(dataNewRegister.getEmail(), dataNewRegister.getPassword());
-		var pgMiCuentaSteps = new PageMiCuentaSteps();
+		var pgMiCuentaSteps = new MiCuentaSteps();
 		pgMiCuentaSteps.goToMisDatosAndValidateData(dataNewRegister);
 		pgMiCuentaSteps.goToSuscripcionesAndValidateData(dataNewRegister.getLineas());
 	}	

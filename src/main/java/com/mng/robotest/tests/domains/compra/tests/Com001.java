@@ -35,6 +35,7 @@ public class Com001 extends TestBase {
 			}
 			checkPromoEmployee();
 			executeVisaPaymentSelectingSaveCard();
+			checkMisDatos();
 			checkMisCompras();
 		}
 	}
@@ -73,6 +74,10 @@ public class Com001 extends TestBase {
 		var accesoEmpl = AccesoEmpl.forSpain();
 		checkoutSteps.inputTarjetaEmplEnCodPromo(dataTest.getPais(), accesoEmpl);
 		checkoutSteps.inputDataEmplEnPromoAndAccept(accesoEmpl);
+	}
+	
+	private void checkMisDatos() {
+//		MiCuentaSteps.checkIsPedido(dataTest.getDataPago(););
 	}
 	
 	private void checkMisCompras() {

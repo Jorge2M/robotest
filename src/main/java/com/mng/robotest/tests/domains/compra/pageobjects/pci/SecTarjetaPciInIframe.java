@@ -28,9 +28,12 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 		return XP_SAVE_CARD_CHECKBOX_MOBIL;
 	}
 	
-	public void goToIframe() {
-		state(VISIBLE, XP_IFRAME).wait(2).check();
-		driver.switchTo().frame(getElement(XP_IFRAME));
+	public boolean goToIframe() {
+		if (state(VISIBLE, XP_IFRAME).wait(2).check()) {
+			driver.switchTo().frame(getElement(XP_IFRAME));
+			return true;
+		}
+		return false;
 	}
 	
 	public void leaveIframe() {
@@ -154,13 +157,14 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	}
 	
 	public void inputCvcTrjGuardadaIfVisible(String cvc) {
-		goToIframe();
-		if (state(VISIBLE, XP_CVC_TRJ_GUARDADA).check()) {
-			var input = getElement(XP_CVC_TRJ_GUARDADA);
-			input.clear();
-			input.sendKeys(cvc);
+		if (goToIframe()) {
+			if (state(VISIBLE, XP_CVC_TRJ_GUARDADA).check()) {
+				var input = getElement(XP_CVC_TRJ_GUARDADA);
+				input.clear();
+				input.sendKeys(cvc);
+			}
+			leaveIframe();
 		}
-		leaveIframe();
 	}
 	
 	public void inputCardNumberAndTab(String numTarj) {

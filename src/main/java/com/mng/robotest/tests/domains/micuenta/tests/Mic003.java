@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.micuenta.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
-import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
+import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisDatosSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
@@ -46,7 +46,7 @@ public class Mic003 extends TestBase {
 	}
 	
 	private void cancelarCuentaAndCheckLoginKO() {
-		new PageMiCuentaSteps().goToMisDatosAndValidateData(dataNewRegister);
+		new MiCuentaSteps().goToMisDatosAndValidateData(dataNewRegister);
 		new PageMisDatosSteps().cancelarCuenta();
 		new SecMenusUserSteps().logoff();
 		new AccesoSteps().inicioSesionDatosKO(

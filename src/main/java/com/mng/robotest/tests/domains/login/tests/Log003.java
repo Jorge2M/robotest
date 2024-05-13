@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.login.tests;
 import static com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps.FluxBolsaCheckout.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.PageIniciarSesionBolsaMobileSteps;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;

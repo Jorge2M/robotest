@@ -289,19 +289,23 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 
 	public void inputCvcTrjGuardadaIfVisible(String cvc) {
-		goToIframeCvcTrjGuardada();
-		if (state(VISIBLE, XP_CVC_TRJ_GUARDADA).check()) {
-			var input = getElement(XP_CVC_TRJ_GUARDADA);
-			input.clear();
-			input.sendKeys(cvc);
+		if (goToIframeCvcTrjGuardada()) {
+			if (state(VISIBLE, XP_CVC_TRJ_GUARDADA).check()) {
+				var input = getElement(XP_CVC_TRJ_GUARDADA);
+				input.clear();
+				input.sendKeys(cvc);
+			}
+			leaveIframeCvcTrjGuardada();
 		}
-		leaveIframeCvcTrjGuardada();
 	}
 	
-	private void goToIframeCvcTrjGuardada() {
-		String XP_IFRAME_CVC_SAVEDCARD = "//iframe[@title='credit_card_form']";
-		state(VISIBLE, XP_IFRAME_CVC_SAVEDCARD).wait(2).check();
-		driver.switchTo().frame(getElement(XP_IFRAME_CVC_SAVEDCARD));
+	private boolean goToIframeCvcTrjGuardada() {
+		String xpIframeCvcSavedCard = "//iframe[@title='credit_card_form']";
+		if (state(VISIBLE, xpIframeCvcSavedCard).wait(2).check()) {
+			driver.switchTo().frame(getElement(xpIframeCvcSavedCard));
+			return true;
+		}
+		return false;
 	}
 	private void leaveIframeCvcTrjGuardada() {
 		driver.switchTo().defaultContent();

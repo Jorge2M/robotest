@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.micuenta.tests;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
-import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
+import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
@@ -58,7 +58,7 @@ public class Mic002 extends TestBase {
 		accesoSteps.accessFromPreHome();
 		accesoSteps.identificacionEnMango();
 		
-		new PageMiCuentaSteps().goToMisComprasFromMenu();
+		new MiCuentaSteps().goToMisComprasFromMenu();
 		var pageMisComprasSteps = new PageMisComprasSteps();
 		pageMisComprasSteps.validateIsCompraOfType(ONLINE, 5);
 		pageMisComprasSteps.selectCompraOnline(1);
@@ -104,7 +104,7 @@ public class Mic002 extends TestBase {
 		accesoSteps.accessFromPreHome();
 		accesoSteps.identificacionEnMango();
 		
-		new PageMiCuentaSteps().goToMisComprasFromMenu();
+		new MiCuentaSteps().goToMisComprasFromMenu();
 		var pageMisComprasSteps = new PageMisComprasSteps();
 		pageMisComprasSteps.validateIsCompraOfType(TIENDA, 5);
 		pageMisComprasSteps.selectCompraTienda(1);

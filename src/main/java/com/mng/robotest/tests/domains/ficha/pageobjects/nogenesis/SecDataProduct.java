@@ -192,9 +192,12 @@ public class SecDataProduct extends PageBase {
 	//Funciones referentes a los precios
 	public String getPrecioFinalArticulo() {
 		state(VISIBLE, getXPathPrecioFinal()).wait(1).check();
-		var precioElem = getElementVisible(getXPathPrecioFinal());
-		String precioArticulo = precioElem.getText();
-		return (ImporteScreen.normalizeImportFromScreen(precioArticulo));
+		var precioOpt = findElement(getXPathPrecioFinal());
+		if (precioOpt.isEmpty()) {
+			return "0";
+		}
+		String precioArticulo = precioOpt.get().getText();
+		return ImporteScreen.normalizeImportFromScreen(precioArticulo);
 	}
 
 	/**

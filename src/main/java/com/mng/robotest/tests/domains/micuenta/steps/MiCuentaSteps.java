@@ -16,7 +16,7 @@ import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 
 import static com.mng.robotest.tests.domains.micuenta.pageobjects.LinkMiCuenta.*;
 
-public class PageMiCuentaSteps extends StepBase {
+public class MiCuentaSteps extends StepBase {
 	
 	private final PageMiCuenta pgMiCuenta = PageMiCuenta.make(dataTest.getPais(), app);
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();

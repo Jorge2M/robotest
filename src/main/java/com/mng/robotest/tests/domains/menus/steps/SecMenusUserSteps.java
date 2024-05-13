@@ -11,7 +11,7 @@ import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMLYUnirmeAlClubSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuentaOld;
-import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
+import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
@@ -134,7 +134,7 @@ public class SecMenusUserSteps extends StepBase {
 	
 	private boolean clickMenuMiCuentaOneTime(State state) {
 		clickUserMenu(MI_CUENTA);
-		return new PageMiCuentaSteps().checkIsPage(state, 3).areAllChecksOvercomed();
+		return new MiCuentaSteps().checkIsPage(state, 3).areAllChecksOvercomed();
 	}
 
 	public int clickMenuMangoLikesYou() {

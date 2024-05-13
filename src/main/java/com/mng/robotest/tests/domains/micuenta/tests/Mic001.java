@@ -6,13 +6,13 @@ import java.util.List;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageSuscripciones.NewsLetter;
 import com.mng.robotest.tests.domains.micuenta.steps.PageDevolucionesSteps;
-import com.mng.robotest.tests.domains.micuenta.steps.PageMiCuentaSteps;
+import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisDatosSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageSuscripcionesSteps;
 
 public class Mic001 extends TestBase {
 
-	private final PageMiCuentaSteps pageMiCuentaSteps = new PageMiCuentaSteps();
+	private final MiCuentaSteps pageMiCuentaSteps = new MiCuentaSteps();
 	private final PageMisDatosSteps pageMisDatosSteps = new PageMisDatosSteps();
 	
 	public Mic001(String userConDevolucionPeroSoloEnPRO, String passwordUserConDevolucion) {

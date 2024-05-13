@@ -1,5 +1,7 @@
 package com.mng.robotest.tests.domains.micuenta.pageobjects;
 
+import com.mng.robotest.testslegacy.datastored.DataPedido;
+
 public class PageMiCuentaNew extends PageMiCuenta {
 
 	private static final String XP_MYACCOUNT_LINKS = "//*[@data-testid='myAccount.links']";
@@ -34,6 +36,11 @@ public class PageMiCuentaNew extends PageMiCuenta {
 	@Override
 	String getXPathNumberPoints() {
 		return XP_LOYALTY_POINTS;
+	}
+	
+	@Override
+	public String checkIsPedido(DataPedido dataPedido) {
+		throw new UnsupportedOperationException();
 	}
 	
 }
