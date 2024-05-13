@@ -37,9 +37,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		"@data-analytics-value='" + TAG_METODO_PAGO + "' or " + 
 		"@data-analytics-value='" + TAG_METODO_PAGO_LOWER_CASE + "']";
 	private static final String XP_RADIO_TRJ_GUARDADA = "//*[@data-custom-radio-id[contains(.,'-saved')]]";
-	
-	//Desconozco este XPath, de momento he puesto el de Desktop
-	private static final String XP_CVC_TRJ_GUARDADA = "//div[@class='storedCardForm']//input[@id='cvc']"; 
+	private static final String XP_CVC_TRJ_GUARDADA = "//input[@id='cvc']"; 
 	
 	private static final String XP_LINK_SOLICITAR_FACTURA = "//input[@type='checkbox' and @id[contains(.,'chekFacturaE')]]";
 	private static final String XP_LINK_FORMAS_PAGO = "//div[@class[contains(.,'payment-method')]]//span[@class[contains(.,'others-title')]]"; 
@@ -291,13 +289,24 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 
 	public void inputCvcTrjGuardadaIfVisible(String cvc) {
+		goToIframeCvcTrjGuardada();
 		if (state(VISIBLE, XP_CVC_TRJ_GUARDADA).check()) {
-			WebElement input = getElement(XP_CVC_TRJ_GUARDADA);
+			var input = getElement(XP_CVC_TRJ_GUARDADA);
 			input.clear();
 			input.sendKeys(cvc);
 		}
+		leaveIframeCvcTrjGuardada();
 	}
-
+	
+	private void goToIframeCvcTrjGuardada() {
+		String XP_IFRAME_CVC_SAVEDCARD = "//iframe[@title='credit_card_form']";
+		state(VISIBLE, XP_IFRAME_CVC_SAVEDCARD).wait(2).check();
+		driver.switchTo().frame(getElement(XP_IFRAME_CVC_SAVEDCARD));
+	}
+	private void leaveIframeCvcTrjGuardada() {
+		driver.switchTo().defaultContent();
+	}	
+	
 	public void clickSolicitarFactura() {
 		getElement(XP_LINK_SOLICITAR_FACTURA).click();
 	}
