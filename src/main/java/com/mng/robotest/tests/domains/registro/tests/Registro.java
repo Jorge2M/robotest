@@ -116,17 +116,18 @@ public class Registro implements TestFromFactory, Serializable {
 		}
 		new Reg007().execute();
 	}		
-	
-	@Test (
-		testName="REG008",			
-		groups={"Bolsa", "Registro", "Checkout", "Canal:mobile_App:shop,outlet"}, 
-		description="Flujo bolsa -> identificación -> checkout")
-	public void bolsaRegistro() throws Exception {
-		if (isPro()) {
-			return;
-		}
-		new Reg008().execute();
-	}
+
+	//TODO [flux-bolsa] reactivar cuando se reactive el nuevo flujo
+//	@Test (
+//		testName="REG008",			
+//		groups={"Bolsa", "Registro", "Checkout", "Canal:mobile_App:shop,outlet"}, 
+//		description="Flujo bolsa -> identificación -> checkout")
+//	public void bolsaRegistro() throws Exception {
+//		if (isPro()) {
+//			return;
+//		}
+//		new Reg008().execute();
+//	}
 	
 	@Test (
 		testName="REG009",			
