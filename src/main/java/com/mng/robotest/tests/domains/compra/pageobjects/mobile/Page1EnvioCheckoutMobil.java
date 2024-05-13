@@ -55,6 +55,12 @@ public class Page1EnvioCheckoutMobil extends PageBase {
 		return state(VISIBLE, XP_LINK1_ENVIO).wait(seconds).check();
 	}
 
+	public void goToPageFromCheckoutIfNeeded() {
+		if (!isPage(1)) {
+			clickLink1EnvioAndWaitForPage();
+		}
+	}
+	
 	public void clickLink1EnvioAndWaitForPage() {
 		click(XP_LINK1_ENVIO).type(JAVASCRIPT).exec();
 		isPage(2);

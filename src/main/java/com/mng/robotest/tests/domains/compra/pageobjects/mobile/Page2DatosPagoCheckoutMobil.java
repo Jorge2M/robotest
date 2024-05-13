@@ -36,7 +36,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	private static final String XP_BLOCK_TARJETA_GUARDADA_PAGO_WITH_TAG = "//div[" + 
 		"@data-analytics-value='" + TAG_METODO_PAGO + "' or " + 
 		"@data-analytics-value='" + TAG_METODO_PAGO_LOWER_CASE + "']";
-	private static final String XP_RADIO_TRJ_GUARDADA = "//div[@data-custom-radio-id[contains(.,'-saved')]]";
+	private static final String XP_RADIO_TRJ_GUARDADA = "//*[@data-custom-radio-id[contains(.,'-saved')]]";
 	
 	//Desconozco este XPath, de momento he puesto el de Desktop
 	private static final String XP_CVC_TRJ_GUARDADA = "//div[@class='storedCardForm']//input[@id='cvc']"; 
@@ -168,7 +168,7 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 		int i=0;
 		while (!isPage(1) && i<3) {
 			i+=1;
-			Page1EnvioCheckoutMobil page1 = new Page1EnvioCheckoutMobil();
+			var page1 = new Page1EnvioCheckoutMobil();
 			if (page1.isPage(0)) {
 				page1.clickContinuarAndWaitPage2();
 			} else {

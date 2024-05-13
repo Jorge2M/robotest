@@ -1846,6 +1846,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <multidireccion>S</multidireccion>
 <!-- select * from MNGBD.tarjeta_empleados where codigo_carnet = '8000000002266'; -->
 <accesoempl tarjeta="8000007330287" nif="32070858A" nombre="OCA MUÑOZ, ADRIAN"/>
+<micuentanew>shop,outlet</micuentanew>
 </pais>
 
 <pais nombre_pais="España (Ceuta)" codigo="022">

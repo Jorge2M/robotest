@@ -80,6 +80,7 @@ public class PageCheckoutWrapper extends PageBase {
 	
 	public void inputCodigoPromoAndAccept(String codigoPromo) {
 		if (isMobile()) {
+			pg1MobilCheckout.goToPageFromCheckoutIfNeeded();
 			pg1MobilCheckout.inputCodigoPromoAndAccept(codigoPromo);
 		} else {
 			pg1DktopCheckout.showInputCodigoPromoAndAccept(codigoPromo);
@@ -296,7 +297,9 @@ public class PageCheckoutWrapper extends PageBase {
 	
 	public boolean isAvailableTrjGuardada(String metodoPago) {
 		if (isMobile()) {
+			pg2MobilCheckout.goToPageFromCheckoutIfNeeded();
 			return (pg2MobilCheckout.isVisibleRadioTrjGuardada(metodoPago));
+			
 		} else {
 			return (pg1DktopCheckout.isVisibleRadioTrjGuardada(metodoPago));
 		}
