@@ -43,7 +43,7 @@ public class SecMenusUserSteps extends StepBase {
 	public void selectRegistrate() {
 		clickUserMenu(REGISTRATE);
 		if (channel.isDevice()) {
-			new PageLogin().clickTabRegistrate();
+			new PageLogin().clickButtonCrearCuenta();
 		}
 		if (!dataTest.getPais().isNewRegister()) {
 			var pageRegistroIniSteps = new PageRegistroIniStepsOld();

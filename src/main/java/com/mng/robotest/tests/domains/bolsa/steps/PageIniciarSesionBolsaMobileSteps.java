@@ -3,12 +3,12 @@ package com.mng.robotest.tests.domains.bolsa.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.bolsa.pageobjects.PageIniciarSesionBolsaMobile;
+import com.mng.robotest.tests.domains.bolsa.pageobjects.PageLoginGenesis;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 
 public class PageIniciarSesionBolsaMobileSteps extends StepBase {
 
-	private final PageIniciarSesionBolsaMobile pgIdentificacionBolsa = new PageIniciarSesionBolsaMobile();
+	private final PageLoginGenesis pgIdentificacionBolsa = new PageLoginGenesis();
 	
 	@Validation (description="Se carga la página de identificación desde la bolsa " + SECONDS_WAIT)
 	public boolean isPage(int seconds) {
