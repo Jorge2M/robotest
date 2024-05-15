@@ -44,7 +44,11 @@ public class PageLoginGenesis extends PageBase {
 		click(XP_INICIAR_SESION_BUTTON).exec();
 	}
 	
-	public void clickCrearCuenta() {
+	public boolean isVisibleCrearCuentaButton(int seconds) {
+		return state(VISIBLE, XP_CREAR_CUENTA_BUTTON).wait(seconds).check();
+	}
+	
+	public void clickCrearCuentaButton() {
 		click(XP_CREAR_CUENTA_BUTTON).exec();
 	}
 

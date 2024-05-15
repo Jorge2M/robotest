@@ -17,6 +17,12 @@ public abstract class PageIdentificacion extends PageBase {
 	public abstract void clickButtonCrearCuenta();
 	public abstract void clickHasOlvidadoContrasenya();	
 
+	private static final String XP_TAB_REGISTRATE = "//*[@data-testid[contains(.,'registerTab.goToRegister')]]";
+	
+	public void clickTabRegistrate() {
+		click(XP_TAB_REGISTRATE).setX(0).setY(10).exec();
+	}
+	
 	public void logoff() {
 		new MenusUserWrapper().clickMenuIfInState(CERRAR_SESION, CLICKABLE);
 	}

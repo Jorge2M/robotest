@@ -23,7 +23,11 @@ public class PageLogin extends PageIdentificacion {
 	
 	@Override
 	public void clickButtonCrearCuenta() {
-		pLoginGenesis.clickCrearCuenta();
+		if (pLoginGenesis.isVisibleCrearCuentaButton(5)) {
+			pLoginGenesis.clickCrearCuentaButton();
+		} else {
+			clickTabRegistrate();
+		}
 	}
 	
 	@Override
