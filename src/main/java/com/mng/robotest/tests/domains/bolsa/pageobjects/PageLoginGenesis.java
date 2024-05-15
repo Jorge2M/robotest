@@ -12,7 +12,10 @@ public class PageLoginGenesis extends PageBase {
 			"@data-testid[contains(.,'login.passwordInput')]]"; //Genesis
 	
 	private static final String XP_INICIAR_SESION_BUTTON = "//*[@data-testid[contains(.,'login.loginButton.login')]]";
-	private static final String XP_CREAR_CUENTA_BUTTON = "//*[@data-testid='login.registryLink.createAccount']";
+	private static final String XP_CREAR_CUENTA_BUTTON = "//*[" + 
+			"@data-testid='login.registryLink.createAccount' or " + //Genesis
+			"@data-testid='registro.login.createAccountButton.createAccount']";
+	
 	private static final String XP_HAS_OLVIDADO_TU_CONTRASENA = "//*[" +
 			"@data-testid[contains(.,'resetPassword')] or " + 
 			"@data-testid[contains(.,'recoveryPassword')]]"; //Genesis
