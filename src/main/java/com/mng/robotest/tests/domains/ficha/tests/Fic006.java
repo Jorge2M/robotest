@@ -100,12 +100,12 @@ public class Fic006 extends TestBase {
 	}
 	
 	private void checkStickyContent(ArticuloScreen articulo) {
-		scrollVertical(1500);
+		scrollVertical(2500);
 		fichaSteps.checkStickyContentVisible(articulo);
 		waitMillis(500);
-		scrollVertical(-750);
+		scrollVertical(-1250);
 		waitMillis(500);
-		scrollVertical(-750);
+		scrollVertical(-1250);
 		fichaSteps.checkStickyContentInvisible(2);
 	}
 	
