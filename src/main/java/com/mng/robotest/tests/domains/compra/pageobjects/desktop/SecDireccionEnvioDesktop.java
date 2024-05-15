@@ -2,6 +2,8 @@ package com.mng.robotest.tests.domains.compra.pageobjects.desktop;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import org.openqa.selenium.StaleElementReferenceException;
+
 import com.mng.robotest.tests.domains.base.PageBase;
 
 public class SecDireccionEnvioDesktop extends PageBase {
@@ -14,7 +16,16 @@ public class SecDireccionEnvioDesktop extends PageBase {
 	public void clickEditDireccion() {
 		waitLoadPage(); //For avoid StaleElementReferenceException
 		state(VISIBLE, XP_EDIT_DIRECCION_BUTTON).wait(3).check();
-		click(XP_EDIT_DIRECCION_BUTTON).exec();
+		clickEditDireccionSafeStaleException();
+	}
+	
+	private void clickEditDireccionSafeStaleException() {
+		try {
+			click(XP_EDIT_DIRECCION_BUTTON).exec();
+		} catch (StaleElementReferenceException e) {
+			waitMillis(1000);
+			click(XP_EDIT_DIRECCION_BUTTON).exec();
+		}
 	}
 
 	public String getTextNombreEnvio() {
