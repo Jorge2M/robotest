@@ -431,7 +431,6 @@
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
 	nombre="PLATBA NA DOBÍRKU" nombremovil="Platba Na Dobírku" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>S</multidireccion>
-<fichagenesis>shop</fichagenesis>
 </pais>
 
 <pais nombre_pais="Denmark" codigo="008">
@@ -2657,6 +2656,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
+<fichagenesis>shop</fichagenesis>	
 </pais>
 
 <pais nombre_pais="Guatemala" codigo="416">
