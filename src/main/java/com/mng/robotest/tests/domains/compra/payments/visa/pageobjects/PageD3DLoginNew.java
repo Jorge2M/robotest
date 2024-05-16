@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.compra.payments.d3d.pageobjects;
+package com.mng.robotest.tests.domains.compra.payments.visa.pageobjects;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
@@ -17,10 +17,6 @@ public class PageD3DLoginNew extends PageBase implements PageD3DLogin {
 		state(VISIBLE, XP_IFRAME).wait(5).check();
 		driver.switchTo().frame(getElement(XP_IFRAME));
 	}
-	
-	private void leaveIframe() {
-		driver.switchTo().defaultContent();
-	}	
 	
 	@Override
 	public boolean isPage(int seconds) {

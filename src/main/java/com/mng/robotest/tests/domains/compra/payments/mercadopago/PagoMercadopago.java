@@ -21,7 +21,7 @@ public class PagoMercadopago extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		var dataPedido = this.dataPago.getDataPedido();
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutSteps.selectDeliveryAndClickPaymentMethod();
 		checkoutFlow.checkout(From.METODOSPAGO);
 		
 		var pageMercpago1rstSteps = new PageMercpago1rstSteps();

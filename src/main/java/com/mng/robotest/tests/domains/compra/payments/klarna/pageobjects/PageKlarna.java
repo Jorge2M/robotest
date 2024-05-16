@@ -76,7 +76,4 @@ public class PageKlarna extends PageBase {
 		driver.switchTo().frame(getElement(XP_IFRMAE));
 	}
 	
-	private void leaveIframe() {
-		driver.switchTo().defaultContent();
-	}
 }

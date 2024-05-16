@@ -1,7 +1,5 @@
 package com.mng.robotest.tests.domains.micuenta.pageobjects;
 
-import com.mng.robotest.testslegacy.datastored.DataPedido;
-
 public class PageMiCuentaOld extends PageMiCuenta {
 	
 	private static final String XP_LOYALTY_POINTS = "//*[@data-testid='loyaltyMyAccount.MyAccountInfo.info']//p[2]";
@@ -32,7 +30,7 @@ public class PageMiCuentaOld extends PageMiCuenta {
 	}
 	
 	@Override
-	public String checkIsPedido(DataPedido dataPedido) {
+	public boolean isPurchase(String idOrder, int seconds) {
 		throw new UnsupportedOperationException();
 	}
 	

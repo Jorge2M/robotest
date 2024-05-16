@@ -184,7 +184,7 @@ public class CheckoutSteps extends StepBase {
 	/**
 	 * Realiza una navegación (conjunto de pasos/validaciones) mediante la que se selecciona el método de envío y finalmente el método de pago 
 	 */
-	public void fluxSelectEnvioAndClickPaymentMethod() throws Exception {
+	public void selectDeliveryAndClickPaymentMethod() throws Exception {
 		boolean pagoPintado = false;
 		var dataPago = dataTest.getDataPago();
 		if (dataPago.isSelectEnvioType() &&

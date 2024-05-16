@@ -37,7 +37,7 @@ public class Com001 extends TestBase {
 			checkPromoEmployee();
 			executeVisaPaymentSelectingSaveCard();
 			checkMisCompras();
-			//checkMisDatos();
+			checkMisDatos();
 		}
 	}
 	

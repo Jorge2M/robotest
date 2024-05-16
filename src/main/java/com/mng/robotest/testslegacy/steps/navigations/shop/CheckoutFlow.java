@@ -19,7 +19,7 @@ import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCount
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.compra.pageobjects.mobile.Page1EnvioCheckoutMobil;
 import com.mng.robotest.tests.domains.compra.payments.FactoryPagos;
-import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
+import com.mng.robotest.tests.domains.compra.payments.PaymentSteps;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1DktopCheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
@@ -232,7 +232,7 @@ public class CheckoutFlow extends StepBase {
 		dataPedido.setResejecucion(com.github.jorge2m.testmaker.conf.State.KO);
 		
 		var typePago = dataPago.getDataPedido().getPago().getTypePago();
-		var pagoSteps = FactoryPagos.makePagoSteps(typePago);
+		var pagoSteps = FactoryPagos.makePagoSteps(typePago, dataTest.getPais(), app);
 		boolean execPay = iCanExecPago(pagoSteps);
 		pagoSteps.startPayment(execPay);
 		dataPedido = dataPago.getDataPedido();
@@ -362,7 +362,7 @@ public class CheckoutFlow extends StepBase {
 		}	   
 	}
 	
-	private boolean iCanExecPago(PagoSteps pagoSteps) {
+	private boolean iCanExecPago(PaymentSteps pagoSteps) {
 		boolean validaPagos = pagoSteps.getDataPago().getFTCkout().checkPagos;
 		var pagoPais = pagoSteps.getDataPago().getDataPedido().getPago();
 		var typeAccess = ((InputParamsMango)TestMaker.getInputParamsSuite()).getTypeAccess();

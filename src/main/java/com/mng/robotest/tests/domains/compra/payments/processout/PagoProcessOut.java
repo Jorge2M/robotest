@@ -14,7 +14,7 @@ public class PagoProcessOut extends PagoSteps {
 
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutSteps.selectDeliveryAndClickPaymentMethod();
 		checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = dataPago.getDataPedido(); 
 		var pageProcessOutSteps = new PageProcessOutInputTrjSteps();

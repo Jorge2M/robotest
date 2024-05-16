@@ -62,8 +62,5 @@ public class PageKcpMain extends PageBase {
 	public void goToIframe() {
 		driver.switchTo().frame(getElement(XP_IFRAME_PAGE));
 	}
-	
-	protected void leaveIframe() {
-		driver.switchTo().defaultContent();
-	}
+
 }

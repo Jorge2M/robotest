@@ -258,5 +258,17 @@ public class PageBase extends PageObjTM {
 		element.clear();
 		element.sendKeys(keys);
 	}
+	
+	protected boolean goToIframe(String title) {
+		String xpIframe = "//iframe[@title='" + title + "']";
+		if (state(VISIBLE, xpIframe).wait(2).check()) {
+			driver.switchTo().frame(getElement(xpIframe));
+			return true;
+		}
+		return false;
+	}
+	protected void leaveIframe() {
+		driver.switchTo().defaultContent();
+	}
 
 }

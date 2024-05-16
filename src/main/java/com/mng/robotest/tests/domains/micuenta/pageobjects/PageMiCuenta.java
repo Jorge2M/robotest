@@ -8,13 +8,12 @@ import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.utils.UtilsLoyaltyPage;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.datastored.DataPedido;
 
 public abstract class PageMiCuenta extends PageBase {
 
 	abstract String getXPath(LinkMiCuenta link);
 	abstract String getXPathNumberPoints();
-	abstract String checkIsPedido(DataPedido dataPedido);
+	public abstract boolean isPurchase(String idOrder, int seconds);
 	
 	public static PageMiCuenta make(Pais pais, AppEcom app) {
 		if (pais.isMicuentanew(app)) {

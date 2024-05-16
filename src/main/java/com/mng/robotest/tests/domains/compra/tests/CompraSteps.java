@@ -22,7 +22,7 @@ public class CompraSteps extends StepBase {
 		}
 		
 		TypePago typePago = dataPago.getDataPedido().getPago().getTypePago();
-		var pagoSteps = FactoryPagos.makePagoSteps(typePago);
+		var pagoSteps = FactoryPagos.makePagoSteps(typePago, dataTest.getPais(), app);
 		pagoSteps.startPayment(executePayment);
 	}
 	

@@ -1,11 +1,10 @@
 package com.mng.robotest.tests.domains.compra.payments;
 
+import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.compra.payments.amazon.PagoAmazon;
 import com.mng.robotest.tests.domains.compra.payments.assist.PagoAssist;
 import com.mng.robotest.tests.domains.compra.payments.billpay.PagoBillpay;
 import com.mng.robotest.tests.domains.compra.payments.contrareembolso.PagoContraReembolso;
-import com.mng.robotest.tests.domains.compra.payments.d3d.PagoBancontact;
-import com.mng.robotest.tests.domains.compra.payments.d3d.PagoTarjetaIntegrada;
 import com.mng.robotest.tests.domains.compra.payments.dotpay.PagoDotpay;
 import com.mng.robotest.tests.domains.compra.payments.eps.PagoEps;
 import com.mng.robotest.tests.domains.compra.payments.giropay.PagoGiropay;
@@ -26,101 +25,81 @@ import com.mng.robotest.tests.domains.compra.payments.processout.PagoProcessOut;
 import com.mng.robotest.tests.domains.compra.payments.sepa.PagoSepa;
 import com.mng.robotest.tests.domains.compra.payments.sofort.PagoSofort;
 import com.mng.robotest.tests.domains.compra.payments.trustpay.PagoTrustpay;
+import com.mng.robotest.tests.domains.compra.payments.visa.PagoBancontact;
+import com.mng.robotest.tests.domains.compra.payments.visa.PagoTrjIntegrated;
+import com.mng.robotest.tests.domains.compra.payments.visa.PagoTrjIntegratedNew;
 import com.mng.robotest.tests.domains.compra.payments.yandex.PagoYandex;
+import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.beans.TypePago;
 
 public class FactoryPagos {
 
 	private FactoryPagos() {}
 	
-	public static PagoSteps makePagoSteps(TypePago typePago) {
-		PagoSteps pagoMaked = null; 
+	public static PaymentSteps makePagoSteps(TypePago typePago, Pais pais, AppEcom app) {
+
 		switch (typePago) {
 		case TARJETA_INTEGRADA:
-			pagoMaked = new PagoTarjetaIntegrada();
-			break;
+			if (pais.isNewcheckout(app)) {
+				return new PagoTrjIntegratedNew();
+			} else {
+				return new PagoTrjIntegrated();
+			}
 		case KREDI_KARTI:
-			pagoMaked = new PagoKrediKarti();
-			break;
+			return new PagoKrediKarti();
 		case BILLPAY:
-			pagoMaked = new PagoBillpay();
-			break;
+			return new PagoBillpay();
 		case PAYPAL:
-			pagoMaked = new PagoPaypal();
-			break;  
+			return new PagoPaypal();
 		case MERCADOPAGO:
-			pagoMaked = new PagoMercadopago();
-			break;
+			return new PagoMercadopago();
 		case AMAZON:
-			pagoMaked = new PagoAmazon();
-			break;			
+			return new PagoAmazon();
 		case POSTFINANCE:
-			pagoMaked = new PagoPostfinance();
-			break;			
+			return new PagoPostfinance();
 		case TRUSTPAY:
-			pagoMaked = new PagoTrustpay();
-			break;			
+			return new PagoTrustpay();
 		case MULTIBANCO:
-			pagoMaked = new PagoMultibanco();
-			break;			
+			return new PagoMultibanco();
 		case PAYTRAIL:
-			pagoMaked = new PagoPaytrail();
-			break;			
+			return new PagoPaytrail();
 		case DOTPAY:
-			pagoMaked = new PagoDotpay();
-			break;			
+			return new PagoDotpay();
 		case IDEAL:
-			pagoMaked = new PagoIdeal();
-			break;   
+			return new PagoIdeal();
 		case EPS:
-			pagoMaked = new PagoEps();
-			break;  
+			return new PagoEps();
 		case SEPA:
-			pagoMaked = new PagoSepa();
-			break;			
+			return new PagoSepa();
 		case GIROPAY:
-			pagoMaked = new PagoGiropay();
-			break;			
+			return new PagoGiropay();
 		case SOFORT:
-			pagoMaked = new PagoSofort();
-			break;	   
+			return new PagoSofort();
 		case PAYMAYA:
-			pagoMaked = new PagoPayMaya();
-			break;
+			return new PagoPayMaya();
 		case KLARNA:
-			pagoMaked = new PagoKlarna();
-			break;
+			return new PagoKlarna();
 		case KLARNA_UK:
-			pagoMaked = new PagoKlarnaUK();
-			break;
+			return new PagoKlarnaUK();
 		case PAYSECURE_QIWI:
-			pagoMaked = new PagoPaysecureQiwi();
-			break;
+			return new PagoPaysecureQiwi();
 		case ASSIST:
-			pagoMaked = new PagoAssist();
-			break;			
+			return new PagoAssist();
 		case YANDEX:
-			pagoMaked = new PagoYandex();
-			break;
+			return new PagoYandex();
 		case PASARELA_OTRAS:
-			pagoMaked = new PagoPasarelaOtras();
-			break;
+			return new PagoPasarelaOtras();
 		case KCP:
-			pagoMaked = new PagoKCP();
-			break;
+			return new PagoKCP();
 		case CONTRA_REEMBOLSO:			
-			pagoMaked = new PagoContraReembolso();
-			break;
+			return new PagoContraReembolso();
 		case BANCONTACT:
-			pagoMaked = new PagoBancontact();
-			break;
+			return new PagoBancontact();
 		case PROCESS_OUT:
-			pagoMaked = new PagoProcessOut();
-			break;
+			return new PagoProcessOut();
 		default:
-			break;
+			return null;
 		}
-		
-		return pagoMaked;
 	}
+	
 }

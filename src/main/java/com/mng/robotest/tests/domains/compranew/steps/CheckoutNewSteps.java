@@ -5,6 +5,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compranew.pageobjects.PageCheckoutIdent;
 import com.mng.robotest.tests.domains.compranew.pageobjects.PageCheckoutPayment;
+import com.mng.robotest.testslegacy.beans.Pago;
 
 public class CheckoutNewSteps extends StepBase {
 
@@ -29,12 +30,29 @@ public class CheckoutNewSteps extends StepBase {
 		return pCheckout.isPage(seconds);
 	}	
 	
+	@Step(description="Seleccionamos el checkbox para grabar la tarjeta", expected="")
+	public void selectSaveCard() {
+		pCheckout.selectSaveCard();
+	}
 	
+	@Step(
+		description="Seleccionamos la tarjeta guardada y pulsamos el botón <b>Pay now</b>", 
+		expected="El pago se realiza correctamente")
+	public void selectTrjGuardadaAndPayNow() {
+		pCheckout.selectSavedCard();
+		pCheckout.clickPayNow();
+	}
 	
-//	createAccount
-
-
-		
-	
+	@Step (
+		description=
+			"Introducimos los datos de la tarjeta <b>#{pago.getTipotarj()} #{pago.getNumtarj()}</b> " + 
+			"y pulsamos el botón <b>Pay Now</b>",
+		expected=
+			"Aparece la página de resultado OK")
+	public void inputTrjAndPayNow(Pago pago) {
+		pCheckout.clickNewCardIfPresent();
+		pCheckout.inputCard(pago);
+		pCheckout.clickPayNow();
+	}
 	
 }

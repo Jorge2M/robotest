@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.compra.payments.d3d.pageobjects;
+package com.mng.robotest.tests.domains.compra.payments.visa.pageobjects;
 
 public interface PageD3DLogin {
 

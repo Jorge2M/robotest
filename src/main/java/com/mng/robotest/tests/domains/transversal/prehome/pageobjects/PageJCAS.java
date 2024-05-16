@@ -49,7 +49,7 @@ public class PageJCAS extends PageBase {
 				state(VISIBLE, XP_RECAPTCHA_CHECKED_WITHIN_IFRAME).wait(5).check();
 			}
 			finally {
-				driver.switchTo().defaultContent();
+				leaveIframe();
 			}
 		}
 	}

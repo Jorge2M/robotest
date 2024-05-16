@@ -18,7 +18,7 @@ import com.mng.robotest.tests.domains.cookiesallowed.exceptions.UnparseableCooki
 import com.mng.robotest.tests.domains.cookiesallowed.services.CookiesRepository;
 import com.mng.robotest.tests.domains.cookiesallowed.services.mangoauditor.beans.CookiesMangoAuditor;
 import com.mng.robotest.tests.domains.cookiesallowed.services.mangoauditor.beans.GroupsParty;
-import com.mng.robotest.tests.repository.UtilsData;
+import com.mng.robotest.tests.repository.UtilsRepository;
 
 import static org.apache.http.impl.client.HttpClients.createDefault;
 
@@ -38,8 +38,8 @@ public class HttpCookiesFinderMangoAuditor implements CookiesRepository {
     }
     
     private final String getUrlEndpoint(String initialUrl, AppEcom app) throws Exception {
-    	String urlBase = UtilsData.getUrlBase(initialUrl);
-    	String nameCloudTest = UtilsData.getNameCloudTest(initialUrl);
+    	String urlBase = UtilsRepository.getUrlBase(initialUrl);
+    	String nameCloudTest = UtilsRepository.getNameCloudTest(initialUrl);
     	urlBase+="/ws-cookies-auditor/cookies";
     	urlBase+="?channel=" + app;
 		if ("".compareTo(nameCloudTest)!=0) {

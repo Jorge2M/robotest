@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.compra.payments.d3d.pageobjects;
+package com.mng.robotest.tests.domains.compra.payments.visa.pageobjects;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;

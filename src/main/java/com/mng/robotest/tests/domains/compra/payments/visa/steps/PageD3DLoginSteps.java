@@ -1,9 +1,9 @@
-package com.mng.robotest.tests.domains.compra.payments.d3d.steps;
+package com.mng.robotest.tests.domains.compra.payments.visa.steps;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.compra.payments.d3d.pageobjects.PageD3DLogin;
+import com.mng.robotest.tests.domains.compra.payments.visa.pageobjects.PageD3DLogin;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.github.jorge2m.testmaker.conf.StoreType.*;

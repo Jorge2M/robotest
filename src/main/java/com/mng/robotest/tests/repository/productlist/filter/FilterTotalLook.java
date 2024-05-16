@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
-import com.mng.robotest.tests.repository.UtilsData;
+import com.mng.robotest.tests.repository.UtilsRepository;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentDetails;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
@@ -52,7 +52,7 @@ public class FilterTotalLook implements Filter {
 				.request(MediaType.APPLICATION_JSON)
 				.header("stock-id", stockId);
 		
-		String nameCloudTest = UtilsData.getNameCloudTest();
+		String nameCloudTest = UtilsRepository.getNameCloudTest();
 		if ("".compareTo(nameCloudTest)!=0) {
 			builder = builder.cookie("cloudtest-name", nameCloudTest);
 		}

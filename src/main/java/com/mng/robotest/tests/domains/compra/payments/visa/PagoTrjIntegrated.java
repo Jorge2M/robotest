@@ -1,13 +1,13 @@
-package com.mng.robotest.tests.domains.compra.payments.d3d;
+package com.mng.robotest.tests.domains.compra.payments.visa;
 
 import com.mng.robotest.tests.domains.compra.payments.PagoSteps;
-import com.mng.robotest.tests.domains.compra.payments.d3d.steps.PageD3DJPTestSelectOptionSteps;
-import com.mng.robotest.tests.domains.compra.payments.d3d.steps.PageD3DLoginSteps;
+import com.mng.robotest.tests.domains.compra.payments.visa.steps.PageD3DJPTestSelectOptionSteps;
+import com.mng.robotest.tests.domains.compra.payments.visa.steps.PageD3DLoginSteps;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
 
-public class PagoTarjetaIntegrada extends PagoSteps {
+public class PagoTrjIntegrated extends PagoSteps {
 
-	public PagoTarjetaIntegrada() {
+	public PagoTrjIntegrated() {
 		super();
 		super.setAvaliableExecPay(true);
 	}
@@ -15,7 +15,7 @@ public class PagoTarjetaIntegrada extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		DataPedido dataPedido = this.dataPago.getDataPedido();
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutSteps.selectDeliveryAndClickPaymentMethod();
 		if (dataPago.isSelectSaveCard()) {
 			checkoutSteps.selectSaveCard();
 		}

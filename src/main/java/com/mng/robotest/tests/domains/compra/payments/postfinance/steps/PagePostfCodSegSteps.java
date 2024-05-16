@@ -76,7 +76,7 @@ public class PagePostfCodSegSteps extends StepBase {
 			pagePostfCodSeg.clickAceptarButton();
 		}
 		finally {
-			driver.switchTo().defaultContent(); 
+			leaveIframe();
 		}
 		
 		var pagePostfRedirectSteps = new PagePostfRedirectSteps();

@@ -300,15 +300,10 @@ public class Page2DatosPagoCheckoutMobil extends PageBase {
 	}
 	
 	private boolean goToIframeCvcTrjGuardada() {
-		String xpIframeCvcSavedCard = "//iframe[@title='credit_card_form']";
-		if (state(VISIBLE, xpIframeCvcSavedCard).wait(2).check()) {
-			driver.switchTo().frame(getElement(xpIframeCvcSavedCard));
-			return true;
-		}
-		return false;
+		return goToIframe("credit_card_form");
 	}
 	private void leaveIframeCvcTrjGuardada() {
-		driver.switchTo().defaultContent();
+		leaveIframe();
 	}	
 	
 	public void clickSolicitarFactura() {

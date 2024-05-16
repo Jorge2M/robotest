@@ -22,7 +22,7 @@ public class PagoPayMaya extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutSteps.selectDeliveryAndClickPaymentMethod();
 		checkoutFlow.checkout(From.METODOSPAGO);
 		
 		if (!isPRO()) {

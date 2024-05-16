@@ -19,7 +19,7 @@ import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.repository.UtilsData;
+import com.mng.robotest.tests.repository.UtilsRepository;
 import com.mng.robotest.tests.repository.canonicalproduct.GetterProductApiCanonical;
 import com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
@@ -78,8 +78,8 @@ public class GetterProducts {
 			WebDriver driver) throws Exception {
 		
 		urlForJavaCall = getUrlForJavaCall(url);
-		urlForBrowserCall = UtilsData.getUrlBase(url);
-		nameCloudTest = UtilsData.getNameCloudTest(url);
+		urlForBrowserCall = UtilsRepository.getUrlBase(url);
+		nameCloudTest = UtilsRepository.getNameCloudTest(url);
 		this.isVotf = isVotf;
 		if (isVotf) {
 			this.saleType = "V";
@@ -145,7 +145,7 @@ public class GetterProducts {
 	}
 	
 	private String getUrlForJavaCall(String initialURL) throws Exception {
-		return UtilsData.getUrlBase(initialURL);
+		return UtilsRepository.getUrlBase(initialURL);
 	}
 	
 	public ProductList getProductList() throws Exception {

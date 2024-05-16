@@ -14,7 +14,7 @@ public class PagoPasarelaOtras extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutSteps.selectDeliveryAndClickPaymentMethod();
 		checkoutFlow.checkout(From.METODOSPAGO);
 		new PagePasarelaOtrasSteps().validateIsPage(dataPago.getDataPedido().getImporteTotal());
 		if (execPay) {

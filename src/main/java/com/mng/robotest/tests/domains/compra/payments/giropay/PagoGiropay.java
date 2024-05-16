@@ -19,7 +19,7 @@ public class PagoGiropay extends PagoSteps {
 
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutSteps.selectDeliveryAndClickPaymentMethod();
 		checkoutFlow.checkout(From.METODOSPAGO);
 		DataPedido dataPedido = dataPago.getDataPedido(); 
 		String nombrePago = dataPedido.getPago().getNombre(channel, app);

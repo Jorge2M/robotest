@@ -37,17 +37,12 @@ public class MiCuentaSteps extends StepBase {
 	}	
 
 	public void checkIsPedido(DataPago dataPago) {
-		//String idOrder = getIdOrder(dataPago.getDataPedido().getCodpedido());
-		isVisiblePedido(dataPago.getDataPedido().getCodpedido());
+		isVisiblePedido(dataPago.getDataPedido().getCodpedido(), 3);
 	}
 	
-	@Validation(description="El primer pedido es el <b>idOrder</b>")
-	private boolean isVisiblePedido(String idOrder) {
-		//String idPedidoScreen = pgMiCuenta.getCodeFirstPedido();
-		//String idPedidoCompra = getIdPedido(idOrder);
-		String idPedidoScreen = "";
-		String idPedidoCompra = idOrder;
-		return idPedidoScreen.compareTo(idPedidoCompra)==0;
+	@Validation(description="El primer pedido es el <b>#{idOrder}</b> " + SECONDS_WAIT)
+	private boolean isVisiblePedido(String idOrder, int seconds) {
+		return pgMiCuenta.isPurchase(idOrder, seconds);
 	}
 	
 	public void goToMisDatos(String usuarioReg) {

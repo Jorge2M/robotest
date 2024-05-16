@@ -12,7 +12,7 @@ public class PagoMultibanco extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutSteps.selectDeliveryAndClickPaymentMethod();
 		if (execPay) {
 			checkoutFlow.checkout(From.METODOSPAGO);
 		}

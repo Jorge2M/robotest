@@ -14,7 +14,7 @@ public class PagoTrustpay extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutSteps.selectDeliveryAndClickPaymentMethod();
 		checkoutFlow.checkout(From.METODOSPAGO);
 		String importeTotal = this.dataPago.getDataPedido().getImporteTotal();
 		

@@ -1,7 +1,5 @@
 package com.mng.robotest.tests.repository.garment;
 
-import java.net.URI;
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -12,14 +10,14 @@ import org.glassfish.jersey.client.ClientProperties;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
-import com.mng.robotest.tests.repository.UtilsData;
+import com.mng.robotest.tests.repository.UtilsRepository;
 import com.mng.robotest.tests.repository.garment.entity.GarmentFicha;
 
 public class GetterGarment {
 
 	private final Client client = ClientBuilder.newBuilder().build();
 	private final String target;
-	private final String nameCloudTest = UtilsData.getNameCloudTest();
+	private final String nameCloudTest = UtilsRepository.getNameCloudTest();
 	private final String stockId;
 	
 	public GetterGarment(String stockId) {
@@ -28,7 +26,7 @@ public class GetterGarment {
 	
 	public GetterGarment(String stockId, String initialURL) {
 		this.stockId = stockId;
-		this.target = getUrlBase(initialURL);
+		this.target = UtilsRepository.getUrlBase(initialURL);
 	}
 	
 	public GarmentFicha getGarment(String idGarment) {
@@ -54,20 +52,6 @@ public class GetterGarment {
 				.path("garments")
 				.path(idGarment)
 				.property(ClientProperties.FOLLOW_REDIRECTS, Boolean.TRUE);
-	}
-	
-	private static String getUrlBase(String initialURL) {
-		try {
-			URI uri = new URI(initialURL);
-			String urlTmp = (uri.getScheme() + "://" + uri.getHost());
-			if (urlTmp.charAt(urlTmp.length()-1)=='/') {
-				return urlTmp;
-			} else {
-				return urlTmp + "/";
-			}
-		} catch (Exception e) {
-			return null;
-		}
 	}
 	
 }

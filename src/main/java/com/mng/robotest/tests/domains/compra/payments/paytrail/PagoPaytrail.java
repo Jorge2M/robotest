@@ -16,7 +16,7 @@ public class PagoPaytrail extends PagoSteps {
 	
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutSteps.selectDeliveryAndClickPaymentMethod();
 		checkoutFlow.checkout(From.METODOSPAGO);
 		
 		var pagePaytrail1rstSteps = new PagePaytrail1rstSteps();

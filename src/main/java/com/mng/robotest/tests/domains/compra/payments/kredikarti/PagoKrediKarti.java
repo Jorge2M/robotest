@@ -14,7 +14,7 @@ public class PagoKrediKarti extends PagoSteps {
 	@Override
 	public void startPayment(boolean execPay) throws Exception {
 		DataPedido dataPedido = dataPago.getDataPedido();
-		checkoutSteps.fluxSelectEnvioAndClickPaymentMethod();
+		checkoutSteps.selectDeliveryAndClickPaymentMethod();
 		
 		SecKrediKartiSteps secKrediKartiSteps = checkoutSteps.getSecKrediKartiSteps();
 		secKrediKartiSteps.inputNumTarjeta(dataPedido.getPago().getNumtarj());

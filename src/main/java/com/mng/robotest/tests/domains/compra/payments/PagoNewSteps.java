@@ -1,27 +1,22 @@
 package com.mng.robotest.tests.domains.compra.payments;
 
-import static com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
-
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
+import com.mng.robotest.tests.domains.compranew.steps.CheckoutNewSteps;
 import com.mng.robotest.testslegacy.datastored.DataBag;
 import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
-import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow;
 
-public abstract class PagoSteps extends StepBase implements PaymentSteps {
+public abstract class PagoNewSteps extends StepBase implements PaymentSteps {
 	
 	protected final DataPago dataPago;
-	protected final CheckoutFlow checkoutFlow;
-	protected final CheckoutSteps checkoutSteps = new CheckoutSteps();
+	protected final CheckoutNewSteps checkoutSteps = new CheckoutNewSteps();
 	
 	public static final String MSG_NO_PAY_IMPLEMENTED = "No está diponible la parte del test que permite completar/ejecutar el pago";
 
 	private boolean availableExecPay = false;
 
-	protected PagoSteps() {
+	protected PagoNewSteps() {
 		this.dataPago = dataTest.getDataPago();
-		this.checkoutFlow = new BuilderCheckout(dataTest.getDataPago()).build();
 	}
 
 	@Override

@@ -7,9 +7,9 @@ import java.util.regex.Pattern;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 
-public class UtilsData {
+public class UtilsRepository {
 
-	private UtilsData() {}
+	private UtilsRepository() {}
 	
 	public static String getNameCloudTest() {
 		try {
@@ -35,13 +35,17 @@ public class UtilsData {
 		return "";
 	}
 	
-	public static String getUrlBase(String initialURL) throws Exception {
-		URI uri = new URI(initialURL);
-		String urlTmp = (uri.getScheme() + "://" + uri.getHost());
-		if (urlTmp.charAt(urlTmp.length()-1)=='/') {
-			return urlTmp;
-		} else {
-			return urlTmp + "/";
+	public static String getUrlBase(String initialURL) {
+		try {
+			URI uri = new URI(initialURL);
+			String urlTmp = (uri.getScheme() + "://" + uri.getHost());
+			if (urlTmp.charAt(urlTmp.length()-1)=='/') {
+				return urlTmp;
+			} else {
+				return urlTmp + "/";
+			}
+		} catch (Exception e) {
+			return null;
 		}
 	}
 }

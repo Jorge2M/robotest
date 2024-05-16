@@ -1679,7 +1679,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
