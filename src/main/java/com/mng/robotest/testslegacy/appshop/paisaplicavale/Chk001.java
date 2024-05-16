@@ -3,6 +3,7 @@ package com.mng.robotest.testslegacy.appshop.paisaplicavale;
 import java.util.Arrays;
 
 import com.mng.robotest.tests.domains.base.TestBase;
+import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -23,6 +24,25 @@ public class Chk001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		dataTest.setDataPago(fTCkoutIni);
+		if (dataTest.getPais().isNewcheckout(app)) {
+			fluxNewCheckout();
+		} else {
+			fluxOldCheckout();
+		}
+	}
+	
+	private void fluxNewCheckout() throws Exception {
+		accessLoginAndClearBolsa();
+		altaArticulosBolsaAndClickComprar();
+		//TODO
+	}
+	
+	private void accessLoginAndClearBolsa() throws Exception {
+		access();
+		new SecBolsaSteps().clear();
+	}
+	
+	private void fluxOldCheckout() throws Exception {
 		new CheckoutFlow.BuilderCheckout(dataTest.getDataPago())
 			.build()
 			.checkout(From.PREHOME);
