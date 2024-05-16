@@ -30,6 +30,7 @@ import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
 import com.mng.robotest.testslegacy.datastored.DataCheckPedidos.CheckPedido;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
+import com.mng.robotest.testslegacy.steps.navigations.shop.NavigationsSteps;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 public abstract class StepBase extends PageBase {
@@ -205,5 +206,9 @@ public abstract class StepBase extends PageBase {
 	public void scrollVertical(int pixels) {
 		scrollEjeY(pixels);
 	}	
+	
+	public void goToPortada() {
+		new NavigationsSteps().gotoPortada();
+	}
 	
 }

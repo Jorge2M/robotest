@@ -13,6 +13,7 @@ import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageInfoNewMisComprasMovil;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
+import com.mng.robotest.testslegacy.datastored.DataPago;
 
 import static com.mng.robotest.tests.domains.micuenta.pageobjects.LinkMiCuenta.*;
 
@@ -20,6 +21,11 @@ public class MiCuentaSteps extends StepBase {
 	
 	private final PageMiCuenta pgMiCuenta = PageMiCuenta.make(dataTest.getPais(), app);
 	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
+	
+	public void goTo() {
+		goToPortada();
+		new SecMenusUserSteps().clickMenuMiCuenta();
+	}
 	
 	@Validation
 	public ChecksTM checkIsPage(State state, int seconds) {
@@ -30,6 +36,20 @@ public class MiCuentaSteps extends StepBase {
 	  	return checks;
 	}	
 
+	public void checkIsPedido(DataPago dataPago) {
+		//String idOrder = getIdOrder(dataPago.getDataPedido().getCodpedido());
+		isVisiblePedido(dataPago.getDataPedido().getCodpedido());
+	}
+	
+	@Validation(description="El primer pedido es el <b>idOrder</b>")
+	private boolean isVisiblePedido(String idOrder) {
+		//String idPedidoScreen = pgMiCuenta.getCodeFirstPedido();
+		//String idPedidoCompra = getIdPedido(idOrder);
+		String idPedidoScreen = "";
+		String idPedidoCompra = idOrder;
+		return idPedidoScreen.compareTo(idPedidoCompra)==0;
+	}
+	
 	public void goToMisDatos(String usuarioReg) {
 		userMenusSteps.clickMenuMiCuenta();
 		clickLinkMisDatos(usuarioReg);

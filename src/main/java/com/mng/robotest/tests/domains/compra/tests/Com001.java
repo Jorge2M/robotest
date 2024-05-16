@@ -4,6 +4,7 @@ import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
+import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
@@ -35,8 +36,8 @@ public class Com001 extends TestBase {
 			}
 			checkPromoEmployee();
 			executeVisaPaymentSelectingSaveCard();
-			checkMisDatos();
 			checkMisCompras();
+			//checkMisDatos();
 		}
 	}
 	
@@ -76,15 +77,17 @@ public class Com001 extends TestBase {
 		checkoutSteps.inputDataEmplEnPromoAndAccept(accesoEmpl);
 	}
 	
-	private void checkMisDatos() {
-//		MiCuentaSteps.checkIsPedido(dataTest.getDataPago(););
-	}
-	
 	private void checkMisCompras() {
 		var dataPago = dataTest.getDataPago();
 		String codigoPedido = dataPago.getDataPedido().getCodpedido();
 		new PageResultPagoSteps().selectMisCompras();
 		new PageMisComprasSteps().checkIsCompraOnline(codigoPedido);
+	}
+	
+	private void checkMisDatos() {
+		var miCuentaSteps = new MiCuentaSteps();
+		miCuentaSteps.goTo();
+		miCuentaSteps.checkIsPedido(dataTest.getDataPago());
 	}
 
 }

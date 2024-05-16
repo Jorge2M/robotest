@@ -16,6 +16,7 @@ import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1DktopCheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1EnvioCheckoutMobilSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
+import com.mng.robotest.tests.domains.compranew.steps.CheckoutNewSteps;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
@@ -259,7 +260,6 @@ public class SecBolsaSteps extends StepBase {
 	
 	public void selectButtonComprar(FluxBolsaCheckout fluxMobile) {
 		selectButtonComprarBasic();
-		normalizeRandomErrorIfExistsInMobil();
 		fluxPostSelectComprar(fluxMobile);
 		checksDefault();
 	}
@@ -319,6 +319,23 @@ public class SecBolsaSteps extends StepBase {
 	}
 	
 	private void fluxPostSelectComprar(FluxBolsaCheckout fluxMobile) {
+		if (dataTest.getPais().isNewcheckout(app)) {
+			fluxPostSelectComprarCheckoutNew(fluxMobile);
+		} else {
+			fluxPostSelectComprarCheckoutOld(fluxMobile);
+		}
+	}
+	
+	private void fluxPostSelectComprarCheckoutNew(FluxBolsaCheckout fluxMobile) {
+		if (dataTest.isUserRegistered()) {
+			new CheckoutNewSteps().isPageCheckout(5);
+		} else {
+			//TODO
+		}
+	}
+	
+	private void fluxPostSelectComprarCheckoutOld(FluxBolsaCheckout fluxMobile) {
+		normalizeRandomErrorIfExistsInMobil();
 		if (!dataTest.isUserRegistered()) {
 			if (isMobile()) {
 				fluxPostSelectComprarUserNotIdentifiedMobile(fluxMobile);

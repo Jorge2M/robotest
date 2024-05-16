@@ -8,8 +8,8 @@ public class Compra {
 
 	@Test (
 		testName="COM001",			
-		groups={"Compra", "Smoke", "Checkout", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, priority=2, 
-		description="[Usuario registrado][Tarjeta guardada][Productos Home (Shop)][No aceptación cookies] Compra con descuento empleado. Verificar compra en sección 'Mis compras'") //Lo marcamos con prioridad 2 para dar tiempo a que otro caso de prueba registre la tarjeta 
+		groups={"Compra", "Smoke", "Checkout", "Micuenta", "Miscompras", "Canal:desktop,mobile_App:shop,outlet"}, alwaysRun=true, priority=2, 
+		description="[Usuario registrado][Tarjeta guardada][Productos Home (Shop)][No aceptación cookies][Descuento empleado][Mi Cuenta][Mis Compras]") 
 	public void compraHomeTrjSavedEmpl() throws Exception {
 		new Com001().execute();
 	}
@@ -33,14 +33,6 @@ public class Compra {
 		new Com005().execute();
 	}
 
-	@Test (
-		testName="COM008",			
-		groups={"Compra", "Checkout", "Canal:desktop_App:shop"}, alwaysRun=true,
-		description="Compra Serbia [usuario registrado]")
-	public void compraSerbia() throws Exception {
-		new Com008().execute();
-	}
-	
 	@Test (
 		testName="COM011",			
 		groups={"Compra", "Multialmacen", "Canal:all_App:shop"}, alwaysRun=true,

@@ -43,4 +43,10 @@ public class PageMiCuentaNew extends PageMiCuenta {
 		throw new UnsupportedOperationException();
 	}
 	
+	private static final String XP_PEDIDO_LINE = "?????";
+	public String getCodeFirstPedido() {
+		return getElement(XP_PEDIDO_LINE).getAttribute("data-testid");
+	}
+
+	
 }

@@ -6,7 +6,6 @@ public class CompraNew {
 
 	@Test (
 		testName="CNW001",	
-		enabled=false,
 		groups={"Compra", "Smoke", "Checkout", "Canal:desktop,mobile_App:shop,outlet"}, 
 		description="[Registro Express][Compra] en Serbia con nuevo checkout")  
 	public void compraRegExpressMaldivas() throws Exception {

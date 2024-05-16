@@ -23,8 +23,9 @@ public class Cnw001 extends TestBase {
 		accessLoginAndClearBolsa();
 		altaArticulosBolsaAndClickComprar();
 		if (!isPRO()) {
-			executeVisaPayment();
-			checkMisCompras();
+			//TODO
+			//executeVisaPayment();
+			//checkMisCompras();
 		}
 	}
 

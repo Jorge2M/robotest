@@ -4,7 +4,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageIdentCheckoutNew extends PageBase {
+public class PageCheckoutIdent extends PageBase {
 
 	private static final String XP_INPUT_MAIL = "//*[@data-testid='login.emailInput.text']";
 	private static final String XP_INPUT_PASSWORD = "//*[@data-testid='login.passwordInput.text']";
