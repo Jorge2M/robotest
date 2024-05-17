@@ -38,8 +38,10 @@ public class SecPaymentMethod extends PageBase {
 	}
 	
 	private boolean isVisibleInputsCard(int seconds) {
-		if (goToIframeInputsCard()) {
-			return state(VISIBLE, XP_CARD_NUMBER_INPUT).wait(seconds).check();
+		if (goToIframeInputsCard(seconds)) {
+			var visible = state(VISIBLE, XP_CARD_NUMBER_INPUT + "/..").wait(seconds).check();
+			leaveIframe();
+			return visible;
 		}
 		return false;
 	}
@@ -54,7 +56,17 @@ public class SecPaymentMethod extends PageBase {
 	}
 	
 	private boolean goToIframeInputsCard() {
-		return goToIframe("cardFormIframe");
+		return goToIframeInputsCard(0);
+	}
+	
+	private boolean goToIframeInputsCard(int seconds) {
+		for (int i=0; i<=seconds; i++) {
+			if (goToIframe("cardFormIframe")) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
 	}
 
 }

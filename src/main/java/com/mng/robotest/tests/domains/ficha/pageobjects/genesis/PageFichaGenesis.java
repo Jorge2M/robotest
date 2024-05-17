@@ -98,6 +98,7 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	
 	@Override	
 	public void selectRemoveFromFavoritosButton() {
+		state(VISIBLE, XP_REMOVE_FAVORITES_BUTTON).wait(1).check();
 		click(XP_REMOVE_FAVORITES_BUTTON).exec();
 	}
 	

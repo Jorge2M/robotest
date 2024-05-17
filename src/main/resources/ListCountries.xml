@@ -214,7 +214,6 @@
 	type="Ideal" tiendas="shop,outlet" empleado="s"
 	nombre="IDEAL" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
-<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Bosnia and Herzegovina " codigo="093">
@@ -1367,7 +1366,6 @@
 	type="Ideal" tiendas="shop,outlet" empleado="s"
 	nombre="IDEAL" testpasarela='s' testpago='s'></pago>
 <multidireccion>S</multidireccion>
-<fichagenesis>outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Kuzey Kıbrıs (Türk Lirasi)" codigo="602"> <!-- Chipre del norte -->
@@ -1679,7 +1677,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4400000000000008" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>

@@ -22,7 +22,7 @@ public class CheckoutNewSteps extends StepBase {
 		expected="Aparece la página de Checkout")
 	public void login(String mail, String password) {
 		pIdentCheckout.login(mail, password);
-		isPageCheckout(5); 
+		isPageCheckout(10); 
 	}	
 	
 	@Validation (description="Aparece página de checkout " + SECONDS_WAIT)
