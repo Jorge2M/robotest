@@ -22,8 +22,7 @@ public class AyudaSteps extends StepBase {
 		pgAyuda.selectIcon(textIcon);
 	}
 	
-	@Validation(
-		description="Está presente la pregunta <b>#{questionText}</b>")
+	@Validation(description="Está presente la pregunta <b>#{questionText}</b>")
 	public boolean checkIsQuestionVisible(String questionText) {
 		return pgAyuda.isQuestionVisible(questionText);
 	}

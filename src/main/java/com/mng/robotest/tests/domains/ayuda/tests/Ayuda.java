@@ -7,7 +7,7 @@ public class Ayuda {
 	
 	@Test(
 		testName="AYU001",				
-		groups={"Ayuda", "Smoke", "Canal:all_App:shop,outlet"}, alwaysRun = true,
+		groups={"Ayuda", "Smoke", "Canal:all_App:shop,outlet"}, 
 		description="Verificar que los elementos de la página ayuda están correctamente presentes")
 	public void ayuda() throws Exception {
 		new Ayu001().execute();

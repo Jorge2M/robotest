@@ -3,17 +3,20 @@ package com.mng.robotest.tests.domains.compranew.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
+import com.mng.robotest.tests.domains.compranew.pageobjects.PageCheckoutGuestData;
 import com.mng.robotest.tests.domains.compranew.pageobjects.PageCheckoutIdent;
 import com.mng.robotest.tests.domains.compranew.pageobjects.PageCheckoutPayment;
+import com.mng.robotest.tests.domains.compranew.pageobjects.beans.DeliveryData;
 import com.mng.robotest.testslegacy.beans.Pago;
 
 public class CheckoutNewSteps extends StepBase {
 
 	PageCheckoutIdent pIdentCheckout = new PageCheckoutIdent();
+	PageCheckoutGuestData pGuestCheckout = new PageCheckoutGuestData(); 
 	PageCheckoutPayment pCheckout = new PageCheckoutPayment();
 	
 	@Validation (description="Aparece página de identificación-checkout " + SECONDS_WAIT)
-	public boolean isPageIdentCheckout(int seconds) {
+	public boolean isPageIdentification(int seconds) {
 		return pIdentCheckout.isPage(seconds);
 	}	
 	
@@ -24,6 +27,26 @@ public class CheckoutNewSteps extends StepBase {
 		pIdentCheckout.login(mail, password);
 		isPageCheckout(10); 
 	}	
+	
+	@Validation (
+		description="Aparece página de introducción de los datos de delivery asociados al Usuario Guest " + SECONDS_WAIT)
+	public boolean isPageGuestUserData(int seconds) {
+		return pGuestCheckout.isPage(seconds);
+	}
+	
+	@Step
+	public void inputDeliveryGuestDefaultData() {
+		var pais = dataTest.getPais();
+		var delivery = new DeliveryData();
+		delivery.setName("Jorge");
+		delivery.setSurname("Muñoz Martínez");
+		delivery.setCountry("VILAFRANCA DEL PENEDES");
+		delivery.setAddress(pais.getAddress());
+		delivery.setPostcode(pais.getCodpos());
+		delivery.setEmail(getUserEmail());
+		delivery.setMobile(pais.getTelefono());
+		pGuestCheckout.inputData(delivery);
+	}
 	
 	@Validation (description="Aparece página de checkout " + SECONDS_WAIT)
 	public boolean isPageCheckout(int seconds) {

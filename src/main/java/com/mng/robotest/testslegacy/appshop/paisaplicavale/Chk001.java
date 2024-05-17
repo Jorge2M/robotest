@@ -5,6 +5,7 @@ import java.util.Arrays;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
+import com.mng.robotest.tests.domains.compranew.steps.CheckoutNewSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.datastored.DataCheckPedidos.CheckPedido;
@@ -34,7 +35,7 @@ public class Chk001 extends TestBase {
 	private void fluxNewCheckout() throws Exception {
 		accessLoginAndClearBolsa();
 		altaArticulosBolsaAndClickComprar();
-		//TODO
+		new CheckoutNewSteps().inputDeliveryGuestDefaultData();
 	}
 	
 	private void accessLoginAndClearBolsa() throws Exception {

@@ -326,11 +326,34 @@ public class SecBolsaSteps extends StepBase {
 		}
 	}
 	
-	private void fluxPostSelectComprarCheckoutNew(FluxBolsaCheckout fluxMobile) {
+	private void fluxPostSelectComprarCheckoutNew(FluxBolsaCheckout flux) {
+		var checkoutSteps = new CheckoutNewSteps();
 		if (dataTest.isUserRegistered()) {
-			new CheckoutNewSteps().isPageCheckout(5);
+			checkoutSteps.isPageCheckout(10);
 		} else {
-			//TODO
+			if (isDevice()) {
+				checkVisibleContinuarSinCuentaButtonDevice(2);
+			} else {
+				checkoutSteps.isPageIdentification(5);
+			}
+			
+			if (flux==FluxBolsaCheckout.CONTINUAR_SIN_CUENTA) {
+				if (isDevice()) {
+					clickContinuarSinCuentaMobile();
+				} else {
+					//TODO
+				}
+				checkoutSteps.isPageGuestUserData(5);
+			}
+//				switch (flux) {
+//				case INICIAR_SESION:
+//					clickIniciarSesionMobile();
+//					new PageIniciarSesionBolsaMobileSteps().isPage(3);			
+//					break;
+//				case REGISTRO:
+//					clickRegistroMobile();
+//					new PageRegistroInitialShopSteps().checkIsPage(5);
+//				}
 		}
 	}
 	

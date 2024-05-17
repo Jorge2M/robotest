@@ -16,7 +16,7 @@ public class PageCheckoutIdent extends PageBase {
 	private static final String XP_CONTINUE_AS_GUEST_BUTTON = "//a[@data-testid='purchaseAuthentication.guest.link.toDelivery']";
 	
 	public boolean isPage(int seconds) {
-		return state(VISIBLE, XP_INPUT_MAIL).wait(seconds).check();
+		return state(VISIBLE, XP_INPUT_MAIL + "/..").wait(seconds).check();
 	}
 	
 	public void login(String mail, String password) {
