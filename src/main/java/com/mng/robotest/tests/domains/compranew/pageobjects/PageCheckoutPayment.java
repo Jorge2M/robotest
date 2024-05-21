@@ -5,8 +5,8 @@ import com.mng.robotest.testslegacy.beans.Pago;
 
 public class PageCheckoutPayment extends PageBase {
 
-	private static final SecDeliveryMethod sDeliveryMethod = new SecDeliveryMethod();
-	private static final SecPaymentMethod sPaymentMethod = new SecPaymentMethod();
+	private final SecDeliveryMethod sDeliveryMethod = new SecDeliveryMethod();
+	private final SecPaymentMethod sPaymentMethod = new SecPaymentMethod();
 	
 	private static final String XP_PAYNOW_BUTTON = "//*[@data-testid='checkout.step2.button.confirmPayment']"; 
 	

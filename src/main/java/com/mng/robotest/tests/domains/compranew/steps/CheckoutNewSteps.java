@@ -63,7 +63,7 @@ public class CheckoutNewSteps extends StepBase {
 	@Step (description="Seleccionamos el botón <b>Continue to payment</b> de la página de input data guest user")
 	public void clickContinueToPaymentButton() {
 		pGuestCheckout.clickContinueToPayment();
-		isPageCheckout(5);
+		isPageCheckout(10);
 	}
 	
 	@Validation (description="Aparece página de checkout " + SECONDS_WAIT)

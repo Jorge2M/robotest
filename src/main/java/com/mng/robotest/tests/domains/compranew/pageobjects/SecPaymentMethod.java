@@ -6,6 +6,8 @@ import com.mng.robotest.testslegacy.beans.TypePago;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import org.openqa.selenium.NoSuchSessionException;
+
 public class SecPaymentMethod extends PageBase {
 
 	private static final String XP_PAYMENT_METHOD_BLOCK = "//*[@data-testid='checkout.payment.paymentMethodsList']";
@@ -22,7 +24,24 @@ public class SecPaymentMethod extends PageBase {
 	}
 	
 	public boolean isVisible(int seconds) {
-		return state(VISIBLE, XP_PAYMENT_METHOD_BLOCK).wait(seconds).check();
+		//Workarround for selenium bug
+		for (int i=0; i<seconds; i++) {
+			if (isVisible()) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
+	private boolean isVisible() {
+		try {
+			if (state(VISIBLE, XP_PAYMENT_METHOD_BLOCK).check()) {
+				return true;
+			}
+		} catch (NoSuchSessionException e) {
+			return false;
+		}
+		return false;
 	}
 	
 	public void selectSaveCard() {
