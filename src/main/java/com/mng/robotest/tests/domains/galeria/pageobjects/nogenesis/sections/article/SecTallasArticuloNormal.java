@@ -101,7 +101,7 @@ public class SecTallasArticuloNormal extends SecTallasArticulo {
 	private boolean isUnavailableSizeInArticle(int position) {
 		moveToElement(getXPathArticulo(position));
 		moveToElement(getXPathCapaTallasArticulo(position));
-		keyDown(2); //Without this fails (real problem in production) (20-10-23)
+		keyDown(3); //Without this fails (real problem in production) (20-10-23)
 		return state(VISIBLE, getXPathTallaUnavailable()).wait(1).check();
 	}
 	
