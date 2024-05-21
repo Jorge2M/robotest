@@ -9,18 +9,22 @@ import javax.ws.rs.core.UriBuilder;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.tests.domains.micuenta.repository.beans.Purchase;
 import com.mng.robotest.tests.repository.UtilsRepository;
-import com.mng.robotest.tests.repository.customerrepository.BaseCustomerClient;
 
-public class PurchasesRepositoryClient extends BaseCustomerClient {
+public class PurchasesRepositoryClient extends TokenClient {
 
 	private final String urlBasePurchase;
+	private final String username;
+	private final String password;
 	
-	public PurchasesRepositoryClient(String initialURL) {
+	public PurchasesRepositoryClient(String initialURL, String username, String password) {
+		super(UtilsRepository.getUrlBase(initialURL));
 		this.urlBasePurchase = UtilsRepository.getUrlBase(initialURL);
+		this.username = username;
+		this.password = password;
 	}
 	
 	public Optional<Purchase> getPurchase(String idPurchase) {
-		String bearerToken = getCustomerToken();
+		String bearerToken = getCustomerToken(username, password);
 		
 		var builder = UriBuilder.fromUri(urlBasePurchase)
         		.path("ws-my-purchases/purchases/online/{idPurchase}")
@@ -33,6 +37,7 @@ public class PurchasesRepositoryClient extends BaseCustomerClient {
             Response response = client.target(purchaseUrl)
                     .request(MediaType.APPLICATION_JSON)
                     .header("Authorization", "Bearer " + bearerToken)
+                    .header("Accept-Language", "es-ES")
                     .get();
 
             if (response.getStatus() == Response.Status.OK.getStatusCode()) {

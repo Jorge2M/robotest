@@ -77,7 +77,11 @@ public class PageMiCuentaNew extends PageMiCuenta {
 	}
 	
 	private Optional<String> getCodeFirstOrder(String idPurchase) {
-		var purchasesClient = new PurchasesRepositoryClient(inputParamsSuite.getUrlBase());
+		var purchasesClient = new PurchasesRepositoryClient(
+				inputParamsSuite.getUrlBase(),
+				dataTest.getUserConnected(),
+				dataTest.getPasswordUser());
+		
 		var purchaseOpt = purchasesClient.getPurchase(idPurchase);
 		if (purchaseOpt.isEmpty()) {
 			return Optional.empty();

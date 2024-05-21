@@ -39,7 +39,7 @@ public class CheckoutNewSteps extends StepBase {
 		return pGuestCheckout.isPage(seconds);
 	}
 	
-	@Step
+	@Step (description="Introducimos los datos del cliente invitado:")	
 	public void inputDeliveryGuestDefaultData() {
 		var pais = dataTest.getPais();
 		var delivery = new DeliveryData();
@@ -51,7 +51,19 @@ public class CheckoutNewSteps extends StepBase {
 		delivery.setPostcode(pais.getCodpos());
 		delivery.setEmail(getUserEmail());
 		delivery.setMobile(pais.getTelefono());
+		addDeliveryDataToStepDescription(delivery);
+		
 		pGuestCheckout.inputData(delivery);
+	}
+	
+	private void addDeliveryDataToStepDescription(DeliveryData delivery) {
+		setStepDescription(getStepDescription() + delivery.getHtmlData());
+	}
+	
+	@Step (description="Seleccionamos el botón <b>Continue to payment</b> de la página de input data guest user")
+	public void clickContinueToPaymentButton() {
+		pGuestCheckout.clickContinueToPayment();
+		isPageCheckout(5);
 	}
 	
 	@Validation (description="Aparece página de checkout " + SECONDS_WAIT)

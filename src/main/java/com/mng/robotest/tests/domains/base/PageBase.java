@@ -89,6 +89,16 @@ public class PageBase extends PageObjTM {
 		return isPRO(driver.getCurrentUrl());
 	}
 	
+	public static Environment getEnvironment(String url) {
+		if (isEnvPRO()) {
+			return Environment.PRODUCTION;
+		}
+		if (url.contains(".dev.")) {
+			return Environment.DEVELOPMENT;
+		}
+		return Environment.PREPRODUCTION;
+	}
+	
 	public static boolean isEnvPRO() {
 		String urlBase = TestMaker.getInputParamsSuite().getUrlBase();
 		return isPRO(urlBase);

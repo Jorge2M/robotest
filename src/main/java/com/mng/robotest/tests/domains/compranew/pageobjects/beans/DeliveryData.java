@@ -1,5 +1,8 @@
 package com.mng.robotest.tests.domains.compranew.pageobjects.beans;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DeliveryData {
 
 	private String name;
@@ -67,6 +70,32 @@ public class DeliveryData {
 		this.mobile = mobile;
 	}
 	
+	public String getHtmlData() {
+		var duplas = getDuplas();
+        var resultado = new StringBuilder();
+        for (var dupla : duplas.entrySet()) {
+            if (dupla.getValue() != null && !dupla.getValue().isEmpty()) {
+                resultado.append("<br><b>")
+                         .append(dupla.getKey())
+                         .append("</b>: ")
+                         .append(dupla.getValue());
+            }
+        }
+        return resultado.toString();
+	}
 	
+	private Map<String, String> getDuplas() {
+        Map<String, String> duplas = new HashMap<>();
+        duplas.put("name", name);
+        duplas.put("surname", surname);
+        duplas.put("country", country);
+        duplas.put("address", address);
+        duplas.put("postcode", postcode);
+        duplas.put("city", city);
+        duplas.put("state", state);
+        duplas.put("email", email);
+        duplas.put("mobile", mobile);
+        return duplas;
+	}
 
 }

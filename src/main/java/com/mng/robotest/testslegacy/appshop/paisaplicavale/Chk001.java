@@ -35,7 +35,10 @@ public class Chk001 extends TestBase {
 	private void fluxNewCheckout() throws Exception {
 		accessLoginAndClearBolsa();
 		altaArticulosBolsaAndClickComprar();
-		new CheckoutNewSteps().inputDeliveryGuestDefaultData();
+		var checkoutSteps = new CheckoutNewSteps();
+		checkoutSteps.inputDeliveryGuestDefaultData();
+		checkoutSteps.clickContinueToPaymentButton();
+		executeVisaPayment();
 	}
 	
 	private void accessLoginAndClearBolsa() throws Exception {
