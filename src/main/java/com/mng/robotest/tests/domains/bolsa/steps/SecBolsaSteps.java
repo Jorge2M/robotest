@@ -334,16 +334,16 @@ public class SecBolsaSteps extends StepBase {
 			if (isDevice()) {
 				checkVisibleContinuarSinCuentaButtonDevice(2);
 			} else {
-				checkoutSteps.isPageIdentification(5);
+				checkoutSteps.isPageIdentificationDesktop(5);
 			}
 			
 			if (flux==FluxBolsaCheckout.CONTINUAR_SIN_CUENTA) {
 				if (isDevice()) {
 					clickContinuarSinCuentaMobile();
 				} else {
-					//TODO
+					checkoutSteps.continueAsGuestDesktop();
 				}
-				checkoutSteps.isPageGuestUserData(5);
+				checkoutSteps.isPageGuestUserData(8);
 			}
 //				switch (flux) {
 //				case INICIAR_SESION:

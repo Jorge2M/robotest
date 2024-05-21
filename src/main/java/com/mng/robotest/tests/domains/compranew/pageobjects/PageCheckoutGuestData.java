@@ -7,21 +7,20 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageCheckoutGuestData extends PageBase {
 
-	private static final String XP_DELIVERY_DETAILS_BLOCK = "//*[@data-testid='checkout.delivery.tab.home']";
 	private static final String XP_NAME_INPUT = "//*[@data-testid='checkout.addressForm.firstName']";
 	private static final String XP_SURNAME_INPUT = "//*[@data-testid='checkout.addressForm.lastName']";
 	private static final String XP_ADDRESS_INPUT = "//*[@data-testid='checkout.addressForm.address']";
 	private static final String XP_POSTCODE_INPUT = "//*[@data-testid='checkout.addressForm.postalCode']";
 	private static final String XP_CITY_INPUT = "//*[@data-testid='checkout.addressForm.city']";
-	private static final String XP_COUNTRY_LIST = "//*[@data-testid='checkout.addressForm.provinceId.listbox']";
-	private static final String XP_COUNTRY_ITEM = XP_COUNTRY_LIST + "/div[@role='option']";
+	private static final String XP_COUNTRY_LIST = "//*[@data-testid='checkout.addressForm.provinceId']";
+	private static final String XP_COUNTRY_ITEM = "//*[@data-testid='checkout.addressForm.provinceId.listbox']/div[@role='option']";
 	private static final String XP_EMAIL_INPUT = "//*[@data-testid='checkout.addressForm.email']";
 	private static final String XP_MOBILE_INPUT = "//*[@data-testid='address.form.number']";
 	
 	private static final String XP_CONTINUE_TO_PAYMENT_BUTTON = "//*[@data-testid='checkout.step1.button.toPayment']";
 	
 	public boolean isPage(int seconds) {
-		return state(VISIBLE, XP_DELIVERY_DETAILS_BLOCK).wait(seconds).check();
+		return state(VISIBLE, XP_NAME_INPUT + "/..").wait(seconds).check();
 	}
 	
 	public void inputData(DeliveryData delivery) {
@@ -38,10 +37,11 @@ public class PageCheckoutGuestData extends PageBase {
 	private void selectCountryIfExists(String country) {
 		if (state(VISIBLE, XP_COUNTRY_LIST).check()) {
 			click(XP_COUNTRY_LIST).exec(); //Unfold list
-			if (country==null) {
-				click(XP_COUNTRY_ITEM).exec(); //Select first
+			String xpathItemCountry = XP_COUNTRY_ITEM + "/p[text()='" + country + "']/.."; 
+			if (country!=null && state(VISIBLE, xpathItemCountry).check()) {
+				click(xpathItemCountry).exec();
 			} else {
-				click(XP_COUNTRY_ITEM + "/p[text()='" + country + "']/..").exec();
+				click(XP_COUNTRY_ITEM).exec(); //Select first
 			}
 		}		
 	}

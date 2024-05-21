@@ -4,7 +4,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class PageCheckoutIdent extends PageBase {
+public class PageCheckoutIdentDesktop extends PageBase {
 
 	private static final String XP_INPUT_MAIL = "//*[@data-testid='login.emailInput.text']";
 	private static final String XP_INPUT_PASSWORD = "//*[@data-testid='login.passwordInput.text']";
@@ -17,6 +17,10 @@ public class PageCheckoutIdent extends PageBase {
 	
 	public boolean isPage(int seconds) {
 		return state(VISIBLE, XP_INPUT_MAIL + "/..").wait(seconds).check();
+	}
+	
+	public void continueAsGuest() {
+		click(XP_CONTINUE_AS_GUEST_BUTTON).exec();
 	}
 	
 	public void login(String mail, String password) {
@@ -37,8 +41,4 @@ public class PageCheckoutIdent extends PageBase {
 		click(XP_CREATE_ACCOUNT_BUTTON).exec();
 	}
 	
-	public void clickContinueAccountButton() {
-		click(XP_CONTINUE_AS_GUEST_BUTTON).exec();
-	}
-
 }

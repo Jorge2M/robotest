@@ -4,29 +4,34 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compranew.pageobjects.PageCheckoutGuestData;
-import com.mng.robotest.tests.domains.compranew.pageobjects.PageCheckoutIdent;
+import com.mng.robotest.tests.domains.compranew.pageobjects.PageCheckoutIdentDesktop;
 import com.mng.robotest.tests.domains.compranew.pageobjects.PageCheckoutPayment;
 import com.mng.robotest.tests.domains.compranew.pageobjects.beans.DeliveryData;
 import com.mng.robotest.testslegacy.beans.Pago;
 
 public class CheckoutNewSteps extends StepBase {
 
-	PageCheckoutIdent pIdentCheckout = new PageCheckoutIdent();
+	PageCheckoutIdentDesktop pIdentCheckoutDesktop = new PageCheckoutIdentDesktop();
 	PageCheckoutGuestData pGuestCheckout = new PageCheckoutGuestData(); 
 	PageCheckoutPayment pCheckout = new PageCheckoutPayment();
 	
 	@Validation (description="Aparece página de identificación-checkout " + SECONDS_WAIT)
-	public boolean isPageIdentification(int seconds) {
-		return pIdentCheckout.isPage(seconds);
+	public boolean isPageIdentificationDesktop(int seconds) {
+		return pIdentCheckoutDesktop.isPage(seconds);
 	}	
 	
 	@Step (
 		description="Loginarse utilizando <b>#{mail} / #{password}</b>",
 		expected="Aparece la página de Checkout")
-	public void login(String mail, String password) {
-		pIdentCheckout.login(mail, password);
+	public void loginDesktop(String mail, String password) {
+		pIdentCheckoutDesktop.login(mail, password);
 		isPageCheckout(10); 
 	}	
+	
+	@Step (description="Seleccionar el botón <b>Continue as guest</b>")
+	public void continueAsGuestDesktop() {
+		pIdentCheckoutDesktop.continueAsGuest();
+	}
 	
 	@Validation (
 		description="Aparece página de introducción de los datos de delivery asociados al Usuario Guest " + SECONDS_WAIT)
@@ -41,6 +46,7 @@ public class CheckoutNewSteps extends StepBase {
 		delivery.setName("Jorge");
 		delivery.setSurname("Muñoz Martínez");
 		delivery.setCountry("VILAFRANCA DEL PENEDES");
+		delivery.setCity("BARCELONA");
 		delivery.setAddress(pais.getAddress());
 		delivery.setPostcode(pais.getCodpos());
 		delivery.setEmail(getUserEmail());
