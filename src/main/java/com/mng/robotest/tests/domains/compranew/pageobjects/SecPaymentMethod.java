@@ -2,6 +2,7 @@ package com.mng.robotest.tests.domains.compranew.pageobjects;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.testslegacy.beans.Pago;
+import com.mng.robotest.testslegacy.beans.TypePago;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -15,6 +16,10 @@ public class SecPaymentMethod extends PageBase {
 	private static final String XP_CARD_NUMBER_INPUT = "//input[@data-testid='checkout.payment.cardNumber']";
 	private static final String XP_CARD_EXPIRATION_INPUT = "//input[@data-testid='checkout.payment.expirationDate']";
 	private static final String XP_CARD_CVC_INPUT = "//input[@data-testid='checkout.payment.cvv']";
+
+	private String getXPathOptionPayment(TypePago typePago) {
+		return "//*[@data-testid[contains(.,'checkout.payment.paymentMethodsList." + typePago.getCode() + "')]]";
+	}
 	
 	public boolean isVisible(int seconds) {
 		return state(VISIBLE, XP_PAYMENT_METHOD_BLOCK).wait(seconds).check();
@@ -28,12 +33,32 @@ public class SecPaymentMethod extends PageBase {
 		click(XP_SAVED_CARD).exec();
 	}
 	
-	public void clickNewCardIfVisible() {
+	public void unfoldCardFormulary() {
+		if (!isVisibleInputsCard(1)) {
+			clickNewCardIfVisible();
+			clickOptionCreditCardIfVisible();
+		}
+	}
+	
+	private void clickNewCardIfVisible() {
 		if (state(VISIBLE, XP_NEW_CARD).check() || 
-			state(VISIBLE, XP_SAVED_CARD).check() ||
-			!isVisibleInputsCard(1)) {
+			state(VISIBLE, XP_SAVED_CARD).check()) {
 			click(XP_NEW_CARD).exec();
 			isVisibleInputsCard(1);
+		}
+	}
+	
+	private void clickOptionCreditCardIfVisible() {
+		var typePago = dataTest.getDataPago().getPago().getTypePago();
+		String xpathOptionPago = getXPathOptionPayment(typePago);
+		if (state(VISIBLE, xpathOptionPago).check()) {
+			moveToElement(xpathOptionPago);
+			click(xpathOptionPago).exec();
+			if (!isVisibleInputsCard(1)) {
+				keyDown(5);
+				click(xpathOptionPago).exec();
+				isVisibleInputsCard(1);
+			}
 		}
 	}
 	

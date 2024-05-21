@@ -91,7 +91,7 @@ public class CheckoutNewSteps extends StepBase {
 		expected=
 			"Aparece la página de resultado OK")
 	public void inputTrjAndPayNow(Pago pago) {
-		pCheckout.clickNewCardIfPresent();
+		pCheckout.unfoldCardFormulary();
 		pCheckout.inputCard(pago);
 		pCheckout.clickPayNow();
 	}

@@ -26,8 +26,8 @@ public class PageCheckoutPayment extends PageBase {
 		click(XP_PAYNOW_BUTTON).exec();
 	}
 	
-	public void clickNewCardIfPresent() {
-		sPaymentMethod.clickNewCardIfVisible();
+	public void unfoldCardFormulary() {
+		sPaymentMethod.unfoldCardFormulary();
 	}
 	
 	public void inputCard(Pago pago) {
