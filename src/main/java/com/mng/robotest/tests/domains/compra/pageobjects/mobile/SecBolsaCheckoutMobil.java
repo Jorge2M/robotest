@@ -23,8 +23,17 @@ public class SecBolsaCheckoutMobil extends PageBase {
 	}
 	
 	public void close() {
-		click(XP_CLOSE_ASPA).exec();
+		try {
+			closePage();
+		} catch (StaleElementReferenceException e) {
+			waitMillis(100);
+			closePage();
+		}
 	}	
+	
+	private void closePage() {
+		click(XP_CLOSE_ASPA).exec();
+	}
 	
 	public float getSumPreciosArticles() {
 		float sumPrecios = 0.0f;

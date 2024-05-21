@@ -158,7 +158,7 @@ public class SecTarjetaPciInIframe extends PageBase implements SecTarjetaPci {
 	
 	public void inputCvcTrjGuardadaIfVisible(String cvc) {
 		if (goToIframe()) {
-			if (state(VISIBLE, XP_CVC_TRJ_GUARDADA).check()) {
+			if (state(VISIBLE, XP_CVC_TRJ_GUARDADA).wait(1).check()) {
 				var input = getElement(XP_CVC_TRJ_GUARDADA);
 				input.clear();
 				input.sendKeys(cvc);

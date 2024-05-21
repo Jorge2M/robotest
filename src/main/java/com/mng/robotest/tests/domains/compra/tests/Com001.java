@@ -49,6 +49,7 @@ public class Com001 extends TestBase {
 		executeVisaPaymentSavingCard();
 		renewTestCase();
 		access();
+        dataTest.getDataPago().setSelectSaveCard(false);
 		altaArticulosBolsaAndClickComprar(2);
 	}
 	

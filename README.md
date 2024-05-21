@@ -4,7 +4,7 @@
 
 # Robotest
 
-Confluent Mango Page https://confluence.mango.com/display/TT/Robotest
+Confluent Mango Page https://mangospain.atlassian.net/wiki/spaces/TT/pages/156013812/Robotest
 
 Project based on Open Source Artifact https://github.com/AubaySpain/testmaker
 
