@@ -105,6 +105,11 @@ public class SecBolsa extends SecBolsaCommon {
 	
 	public void clickContinuarSinCuentaMobile() {
 		click(XP_CONTINUE_AS_GUEST_LINK_MOBILE).exec();
+		
+		//Random problem in click without effect
+		if (!state(INVISIBLE, XP_CONTINUE_AS_GUEST_LINK_MOBILE).wait(1).check()) {
+			click(XP_CONTINUE_AS_GUEST_LINK_MOBILE).exec();
+		}
 	}
 	
 	public void clickRegistroMobile() {
