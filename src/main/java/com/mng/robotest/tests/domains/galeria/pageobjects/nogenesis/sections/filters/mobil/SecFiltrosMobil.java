@@ -1,7 +1,7 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.device;
+package com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.device.FiltroMobil.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,10 +9,12 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 
+import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.SecFiltros;
 import com.mng.robotest.testslegacy.data.Color;
 
-public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
+public class SecFiltrosMobil extends PageBase implements SecFiltros {
 
 	private static final String XP_FILTRAR_Y_ORDENAR_BUTTON = "//*[@data-testid='plp.filters.mobile.button']";
 	public static final String XP_FILTER_PANEL = "//*[@data-testid='plp.filters.mobile.panel']";
@@ -34,7 +36,7 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 	}
 	
 	@Override
-	public void selecOrdenacion(FilterOrdenacion typeOrden) throws Exception {
+	public void selectOrdenacion(FilterOrdenacion typeOrden) throws Exception {
 		selectFiltroAndWaitLoad(ORDENAR, typeOrden.getValue());
 	}
 
@@ -57,10 +59,13 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 	public void selectMenu2onLevel(String menuLabel) {
 		selectFiltrosAndWaitLoad(FAMILIA, Arrays.asList(menuLabel));
 	}
-	
-	private void selectFiltroAndWaitLoad(FiltroMobil typeFiltro, String textFiltro) {
-		var listTextFiltros = Arrays.asList(textFiltro);
-		selectFiltrosAndWaitLoad(typeFiltro, listTextFiltros);
+
+	@Override
+	public boolean isVisibleColorTags(List<Color> colors) {
+		return colors.stream()
+			.map(color -> getXPathFiltroTag(FiltroMobil.COLORES, color.getNameFiltro()))
+			.filter(xpath -> !state(PRESENT, xpath).check())
+			.findAny().isEmpty();
 	}
 	
 	@Override
@@ -79,13 +84,6 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 		return true;
 	}
 	
-	public boolean isVisibleColorTags(List<Color> colors) {
-		return colors.stream()
-			.map(color -> getXPathFiltroTag(FiltroMobil.COLORES, color.getNameFiltro()))
-			.filter(xpath -> !state(PRESENT, xpath).check())
-			.findAny().isEmpty();
-	}
-
 	private void selectFiltrosAndWaitLoad(FiltroMobil typeFiltro, List<String> listTextFiltros) {
 		goAndClickFiltroButton();
 		state(VISIBLE, typeFiltro.getXPathNormal()).wait(2).check();
@@ -97,6 +95,11 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 		clickMostrarArticulosButton();
 	}
 
+	private void selectFiltroAndWaitLoad(FiltroMobil typeFiltro, String textFiltro) {
+		var listTextFiltros = Arrays.asList(textFiltro);
+		selectFiltrosAndWaitLoad(typeFiltro, listTextFiltros);
+	}
+	
 	private void clickFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
 		try {
 			clickFiltroOptionStaleNotSafe(typeFiltro, textFiltro);
@@ -151,6 +154,36 @@ public class SecMultiFiltrosDeviceNormal extends SecMultiFiltrosDevice {
 		char[] arr = val.toCharArray();
 		arr[0] = Character.toUpperCase(arr[0]);
 		return new String(arr);
+	}
+
+	@Override
+	public void showFilters() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void acceptFilters() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isVisibleSelectorPrecios() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public int getMinImportFilter() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public int getMaxImportFilter() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
+		throw new UnsupportedOperationException();		
 	}
 	
 }

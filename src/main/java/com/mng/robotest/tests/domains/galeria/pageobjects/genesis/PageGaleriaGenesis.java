@@ -428,7 +428,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public boolean isVisibleImageArticle(int numArticulo, int seconds) {
 		throw new UnsupportedOperationException();
 	}
-	public int selectColoresAndReturnNumArticles(List<Color> colorsToSelect) {
+	public int filterByColorsAndReturnNumArticles(List<Color> colorsToSelect) {
 		throw new UnsupportedOperationException();
 	}
 	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {

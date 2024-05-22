@@ -12,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.SecColoresArticuloDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNormal;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecSubMenusGallery;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;
@@ -417,7 +416,7 @@ public abstract class PageGaleriaDesktop extends PageGaleriaNoGenesis {
 	
 	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) {
 		var secCabecera = SecCabecera.make();
-		var secFiltros = new SecFiltrosDesktopNormal();
+		var secFiltros = new SecFiltrosDesktop();
 		secCabecera.bring(BringTo.BACKGROUND);
 		secFiltros.bring(BringTo.BACKGROUND);
 		hearthIcon.click();
@@ -470,23 +469,23 @@ public abstract class PageGaleriaDesktop extends PageGaleriaNoGenesis {
 		return state(PRESENT, xpathVideo).check();
 	}
 
-	public boolean isVisibleSelectorPreciosDesktop() {
-		return ((SecFiltrosDesktop)secFiltros).isVisibleSelectorPrecios();
+	public boolean isVisibleSelectorPrecios() {
+		return secFiltros.isVisibleSelectorPrecios();
 	}
-	public int getMinImportFilterDesktop() {
-		return ((SecFiltrosDesktop)secFiltros).getMinImportFilter(); 
+	public int getMinImportFilter() {
+		return secFiltros.getMinImportFilter(); 
 	}
-	public int getMaxImportFilterDesktop() {
-		return ((SecFiltrosDesktop)secFiltros).getMaxImportFilter(); 
+	public int getMaxImportFilter() {
+		return secFiltros.getMaxImportFilter(); 
 	}	
-	public void clickIntervalImportFilterDesktop(int margenPixelsLeft, int margenPixelsRight) {
-		((SecFiltrosDesktop)secFiltros).clickIntervalImportFilter(margenPixelsLeft, margenPixelsRight);
+	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
+		secFiltros.clickIntervalImportFilter(margenPixelsLeft, margenPixelsRight);
 	}
-	public void showFiltersDesktop() {
-		((SecFiltrosDesktop)secFiltros).showFilters();
+	public void showFilters() {
+		secFiltros.showFilters();
 	}
-	public void acceptFiltersDesktop() { 
-		((SecFiltrosDesktop)secFiltros).acceptFilters();
+	public void acceptFilters() { 
+		secFiltros.acceptFilters();
 	}
 	
 	public void clickRebajasBannerHead() {

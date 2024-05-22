@@ -20,7 +20,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 		description="Es visible el selector de precios",
 		level=WARN)
 	public boolean checkIsSelector() {
-		return pgGaleria.isVisibleSelectorPreciosDesktop();
+		return pgGaleria.isVisibleSelectorPrecios();
 	}
 
 	@Step (
@@ -29,16 +29,16 @@ public class SecSelectorPreciosSteps extends StepBase {
 	public void selectInterval() throws Exception {
 		var dataFilter = new DataFilterPrecios();
 		if (isDesktop()) {
-			pgGaleria.showFiltersDesktop();
+			pgGaleria.showFilters();
 		}
-		dataFilter.minimoOrig = pgGaleria.getMinImportFilterDesktop();
-		dataFilter.maximoOrig = pgGaleria.getMaxImportFilterDesktop();
+		dataFilter.minimoOrig = pgGaleria.getMinImportFilter();
+		dataFilter.maximoOrig = pgGaleria.getMaxImportFilter();
 
-		pgGaleria.clickIntervalImportFilterDesktop(30, 30);
-		dataFilter.minimoFinal = pgGaleria.getMinImportFilterDesktop();
-		dataFilter.maximoFinal = pgGaleria.getMaxImportFilterDesktop();
+		pgGaleria.clickIntervalImportFilter(30, 30);
+		dataFilter.minimoFinal = pgGaleria.getMinImportFilter();
+		dataFilter.maximoFinal = pgGaleria.getMaxImportFilter();
 		if (isDesktop()) {
-			pgGaleria.acceptFiltersDesktop();
+			pgGaleria.acceptFilters();
 		}
 		
 		replaceStepDescription(TAG_MINIMO, String.valueOf(dataFilter.minimoFinal));

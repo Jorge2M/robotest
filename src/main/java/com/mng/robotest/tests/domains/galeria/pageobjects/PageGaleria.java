@@ -80,7 +80,7 @@ public interface PageGaleria {
 	boolean isVisibleImageArticle(int numArticulo, int seconds);
 	String openArticuloPestanyaAndGo(WebElement article);
 	String getImagenArticulo(WebElement articulo);
-	int selectColoresAndReturnNumArticles(List<Color> colorsToSelect);
+	int filterByColorsAndReturnNumArticles(List<Color> colorsToSelect);
 	int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception;
 	boolean isClickableFiltroUntil(int seconds);
 	boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds);
@@ -99,12 +99,12 @@ public interface PageGaleria {
     String getTextBannerHead();
     boolean isBannerHeadSalesBanner(IdiomaPais idioma);
     
-	public boolean isVisibleSelectorPreciosDesktop();
-	public int getMinImportFilterDesktop();
-	public int getMaxImportFilterDesktop();
-	public void clickIntervalImportFilterDesktop(int margenPixelsLeft, int margenPixelsRight);
-	public void showFiltersDesktop();
-	public void acceptFiltersDesktop();
+	public boolean isVisibleSelectorPrecios();
+	public int getMinImportFilter();
+	public int getMaxImportFilter();
+	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight);
+	public void showFilters();
+	public void acceptFilters();
 	
 	public List<String> searchForArticlesNoValid(List<String> articleNames);
 	

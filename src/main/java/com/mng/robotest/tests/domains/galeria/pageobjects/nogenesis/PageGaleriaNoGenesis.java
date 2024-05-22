@@ -400,13 +400,13 @@ public abstract class PageGaleriaNoGenesis extends PageBase implements PageGaler
 		return LIST_LABELS_NEW;
 	}
 	
-	public int selectColoresAndReturnNumArticles(List<Color> colorsToSelect) {
+	public int filterByColorsAndReturnNumArticles(List<Color> colorsToSelect) {
 		secFiltros.selecFiltroColores(colorsToSelect);
 		return waitForArticleVisibleAndGetNumberOfThem(10);
 	}
 	
 	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
-		secFiltros.selecOrdenacion(typeOrden);
+		secFiltros.selectOrdenacion(typeOrden);
 		return waitForArticleVisibleAndGetNumberOfThem(10);
 	}
 	public boolean isClickableFiltroUntil(int seconds) {

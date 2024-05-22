@@ -9,31 +9,32 @@ import java.util.regex.Pattern;
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNormal;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.device.SecMultiFiltrosDevice;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobil;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Color;
 
 public interface SecFiltros {
 	
-	public void selecOrdenacion(FilterOrdenacion typeOrden) throws Exception;
+	public void showFilters();
+	public void acceptFilters();
+	public void selectOrdenacion(FilterOrdenacion typeOrden) throws Exception;
+	public boolean isVisibleSelectorPrecios();
+	public int getMinImportFilter();
+	public int getMaxImportFilter();
+	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight);
 	public void selecFiltroColores(List<Color> colorsToSelect);
 	public void selectMenu2onLevel(List<String> listMenus);
 	public void selectMenu2onLevel(String menuLabel);
+	public boolean isVisibleColorTags(List<Color> colors);
 	public boolean isClickableFiltroUntil(int seconds);
+	public boolean isAvailableFiltros(FiltroMobil typeFiltro, List<String> listTextFiltros);
 	
 	public static SecFiltros make(Channel channel, AppEcom app, Pais pais) {
-		switch (channel) {
-		case desktop:
-			return SecFiltrosDesktop.make(app, pais);
-		case mobile, tablet:
-			if (app==AppEcom.outlet && channel==Channel.tablet) {
-				return new SecFiltrosDesktopNormal();
-			}
-			return SecMultiFiltrosDevice.make();
-		default:
-			return SecMultiFiltrosDevice.make();
+		if (channel.isDevice()) {
+			return new SecFiltrosMobil();
 		}
+		return new SecFiltrosDesktop();
 	}
 	
 	/**
@@ -57,7 +58,7 @@ public interface SecFiltros {
 		return true;
 	}
 	
-	public static List<String> getCodColoresFromListCommaSeparated(String listCodColorsCommaSeparated) {
+	private static List<String> getCodColoresFromListCommaSeparated(String listCodColorsCommaSeparated) {
 		List<String> listCodColores = new ArrayList<>();
 		var tokensColores = new StringTokenizer(listCodColorsCommaSeparated, ",");
 		while (tokensColores.hasMoreElements()) {

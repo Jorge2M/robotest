@@ -4,7 +4,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import java.util.List;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNormal;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.data.Color;
@@ -30,7 +30,7 @@ public class PageGaleriaDesktopGenesis extends PageGaleriaGenesis {
 	}	
 	
 	public boolean isVisibleColorTags(List<Color> colors) {
-		return new SecFiltrosDesktopNormal().isVisibleColorTags(colors);
+		return new SecFiltrosDesktop().isVisibleColorTags(colors);
 	}
 	
 	@Override
@@ -76,27 +76,27 @@ public class PageGaleriaDesktopGenesis extends PageGaleriaGenesis {
     }
 	
 	@Override
-	public boolean isVisibleSelectorPreciosDesktop() {
+	public boolean isVisibleSelectorPrecios() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public int getMinImportFilterDesktop() {
+	public int getMinImportFilter() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public int getMaxImportFilterDesktop() {
+	public int getMaxImportFilter() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void clickIntervalImportFilterDesktop(int margenPixelsLeft, int margenPixelsRight) {
+	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void showFiltersDesktop() {
+	public void showFilters() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void acceptFiltersDesktop() {
+	public void acceptFilters() {
 		throw new UnsupportedOperationException();
 	}	
 	

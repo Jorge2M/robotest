@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.device.SecMultiFiltrosDeviceNormal;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobil;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.data.Color;
@@ -148,27 +148,27 @@ public class PageGaleriaDeviceNoGenesis extends PageGaleriaDevice {
     }
 	
 	@Override
-	public boolean isVisibleSelectorPreciosDesktop() {
+	public boolean isVisibleSelectorPrecios() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public int getMinImportFilterDesktop() {
+	public int getMinImportFilter() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public int getMaxImportFilterDesktop() {
+	public int getMaxImportFilter() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void clickIntervalImportFilterDesktop(int margenPixelsLeft, int margenPixelsRight) {
+	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void showFiltersDesktop() {
+	public void showFilters() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void acceptFiltersDesktop() {
+	public void acceptFilters() {
 		throw new UnsupportedOperationException();
 	}	
 	
@@ -178,6 +178,6 @@ public class PageGaleriaDeviceNoGenesis extends PageGaleriaDevice {
 	}
 	
 	public boolean isVisibleColorTags(List<Color> colors) {
-		return new SecMultiFiltrosDeviceNormal().isVisibleColorTags(colors);
+		return new SecFiltrosMobil().isVisibleColorTags(colors);
 	}
 }

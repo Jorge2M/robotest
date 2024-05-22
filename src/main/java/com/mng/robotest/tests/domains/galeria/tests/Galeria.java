@@ -23,7 +23,7 @@ public class Galeria {
 	@Test (
 		testName="GPO008",			
 		groups={"Galeria", "Canal:all_App:all"},
-		description="[Genesis] Acceder a galería camisas. Filtro color. Scroll")
+		description="[Genesis][Liechtenstein][Galería camisas][Scroll][View ficha]")
 	public void galeriaGenesis() throws Exception {
 		new Gpo008().execute();
 	}	

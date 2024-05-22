@@ -229,27 +229,27 @@ public class PageGaleriaDeviceOld extends PageGaleriaDevice {
     }
 
 	@Override
-	public boolean isVisibleSelectorPreciosDesktop() {
+	public boolean isVisibleSelectorPrecios() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public int getMinImportFilterDesktop() {
+	public int getMinImportFilter() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public int getMaxImportFilterDesktop() {
+	public int getMaxImportFilter() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void clickIntervalImportFilterDesktop(int margenPixelsLeft, int margenPixelsRight) {
+	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void showFiltersDesktop() {
+	public void showFilters() {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void acceptFiltersDesktop() {
+	public void acceptFilters() {
 		throw new UnsupportedOperationException();
 	}
 	@Override

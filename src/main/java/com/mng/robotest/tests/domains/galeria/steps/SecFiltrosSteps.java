@@ -28,7 +28,7 @@ public class SecFiltrosSteps extends StepBase {
 			TAG_LIT_COLORS_TO_SELECT, 
 			Color.getListNamesFiltros(colorsToSelect).toString());
 		
-		int numArticulos1page = pgGaleria.selectColoresAndReturnNumArticles(colorsToSelect);			
+		int numArticulos1page = pgGaleria.filterByColorsAndReturnNumArticles(colorsToSelect);			
 		checkAfterSelectFiltroColores(colorsToSelect, litMenu, numArticulos1page);
 		return numArticulos1page;
 	}

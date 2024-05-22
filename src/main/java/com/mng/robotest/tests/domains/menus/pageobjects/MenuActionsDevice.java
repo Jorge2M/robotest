@@ -3,8 +3,8 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 import java.util.Arrays;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.device.FiltroMobil;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.device.SecMultiFiltrosDevice;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobil;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -68,7 +68,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 	@Override
 	public boolean isVisibleSubMenus() {
-		return SecMultiFiltrosDevice.make()
+		return new SecFiltrosMobil()
 				.isAvailableFiltros(FiltroMobil.FAMILIA, menu.getSubMenus());
 	}
 
@@ -84,7 +84,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 	
 	private void clickSubLevelMenu() {
-		SecMultiFiltrosDevice.make()
+		new SecFiltrosMobil()
 			.selectMenu2onLevel(Arrays.asList(menu.getSubMenu()));
 	}
 	
