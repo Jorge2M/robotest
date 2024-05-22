@@ -25,8 +25,9 @@ public class Chk001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		dataTest.setDataPago(fTCkoutIni);
-		if (dataTest.getPais().isNewcheckout(app)) {
-			fluxNewCheckout();
+		if (dataTest.getPais().isNewcheckout(app) &&
+			isCheckeableNewCheckout()) {
+			fluxNewCheckout();	
 		} else {
 			fluxOldCheckout();
 		}

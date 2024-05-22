@@ -10,6 +10,7 @@ import com.mng.robotest.tests.domains.compra.tests.CompraSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.steps.SecCabeceraSteps;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.testslegacy.data.PaisShop;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 public abstract class TestBase extends StepBase {
 
@@ -84,4 +85,11 @@ public abstract class TestBase extends StepBase {
 		dataTest.setUserConnected("");
 		driver.get(inputParamsSuite.getUrlBase());		
 	}
+
+	//Comenta Alberte (22-05): la infra de checkout aun no esta para QA, 
+	//esta pendiente que la desplieguen en PCI
+	protected boolean isCheckeableNewCheckout() {
+		return (!isPRO() || !UtilsTest.todayBeforeDate("2024-06-22"));
+	}
+	
 }

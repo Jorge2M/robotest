@@ -20,11 +20,13 @@ public class Cnw001 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		accessLoginAndClearBolsa();
-		altaArticulosBolsaAndClickComprar();
-		if (!isPRO()) {
-			executeVisaPayment();
-			checkMisCompras();
+		if (isCheckeableNewCheckout()) {
+			accessLoginAndClearBolsa();
+			altaArticulosBolsaAndClickComprar();
+			if (!isPRO()) {
+				executeVisaPayment();
+				checkMisCompras();
+			}
 		}
 	}
 
