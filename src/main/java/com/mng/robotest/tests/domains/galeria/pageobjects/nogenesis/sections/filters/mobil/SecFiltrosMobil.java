@@ -16,12 +16,12 @@ import com.mng.robotest.testslegacy.data.Color;
 
 public class SecFiltrosMobil extends PageBase implements SecFiltros {
 
-	private static final String XP_FILTRAR_Y_ORDENAR_BUTTON = "//*[@data-testid='plp.filters.mobile.button']";
 	public static final String XP_FILTER_PANEL = "//*[@data-testid='plp.filters.mobile.panel']";
 	
 	//TODO Galería Kondo (19-10-23)
 	private static final String XP_BUTTON_MOSTRAR_ARTICULOS = "//button/span[text()[contains(.,'Mostrar artículos')]]";
 	private static final String XP_BUTTON_CLOSE = XP_FILTER_PANEL + "//button[@aria-label='close']";
+	private static final String XP_FILTRAR_Y_ORDENAR_BUTTON = "//*[@data-testid='plp.filters.mobile.button']";
 
 	private String getXPathFiltroOption(FiltroMobil typeFiltro, String textFiltro) {
 		String textXPath = 
@@ -123,13 +123,17 @@ public class SecFiltrosMobil extends PageBase implements SecFiltros {
 	}
 	
 	private boolean goAndClickFiltroButton() {
-		if (!isOpenFiltrosUntil(0)) {
-			if (state(CLICKABLE, XP_FILTRAR_Y_ORDENAR_BUTTON).wait(2).check()) {
-				click(XP_FILTRAR_Y_ORDENAR_BUTTON).exec();
-				return isOpenFiltrosUntil(3);
-			}
+		if (!isOpenFiltrosUntil(0) &&
+			isClickableFiltroUntil(2)) {
+			clickFilterAndSortButton();
+			return isOpenFiltrosUntil(3);
 		}		
 		return false;
+	}
+	
+	@Override
+	public void clickFilterAndSortButton() {
+		click(XP_FILTRAR_Y_ORDENAR_BUTTON).exec();
 	}
 	
 	private boolean isOpenFiltrosUntil(int seconds) {

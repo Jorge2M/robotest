@@ -13,7 +13,7 @@ public class PageResultPago extends PageBase {
 	public static final String XP_CODIGO_PEDIDO_ESTANDAR = XP_DATA_PEDIDO + "//*[@data-testid[contains(.,'.orderId')]]";
 	public static final String XP_CODIGO_PEDIDO_CONTRAREEMBOLSO_DESKTOP = "//div[@class='labels']//*[@class[contains(.,'data')] and string-length(text())=6]";
 	public static final String XP_CODIGO_PEDIDO_CONTRAREEMBOLSO_MOBIL = "//div[@class[contains(.,'confirmation-summary-value')]]//p[string-length(text())=6]"; 
-	public static final String XP_BUTTON_MIS_COMPRAS = "//button[@data-testid[contains(.,'goToMyPurchases')] or @data-testid[contains(.,'goToMyOrders')]]";
+	public static final String XP_BUTTON_MIS_COMPRAS = "//*[@data-testid[contains(.,'goToMyPurchases')] or @data-testid[contains(.,'goToMyOrders')]]";
 	public static final String XP_MICROFRONTEND_LOYALTY = "//micro-frontend[@name='purchaseConfirmation']";
 	public static final String XP_BLOCK_NEW_LOYALTY_POINTS = "//*[@data-testid[contains(.,'loyaltyPointsBlock')]]";
 	public static final String XP_LINK_DESCUBRIR_VENTAJAS = "//*[@data-testid='purchaseConfirmation.loyalty.club.link']";

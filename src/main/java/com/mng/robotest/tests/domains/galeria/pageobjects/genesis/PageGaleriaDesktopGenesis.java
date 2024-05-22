@@ -103,5 +103,5 @@ public class PageGaleriaDesktopGenesis extends PageGaleriaGenesis {
 	private void forcePagination() {
 		moveToElement("(" + getXPathArticulo() + ")[5]");
 	}
-
+	
 }

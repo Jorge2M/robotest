@@ -104,7 +104,7 @@ public class PageGaleriaDesktopNoGenesis extends PageGaleriaDesktop {
 	public int getNumFavoritoIcons() {
 		return commonNormal.getNumFavoritoIcons();
 	}
-
+	
 	public boolean isVisibleColorTags(List<Color> colors) {
 		return new SecFiltrosDesktop().isVisibleColorTags(colors);
 	}

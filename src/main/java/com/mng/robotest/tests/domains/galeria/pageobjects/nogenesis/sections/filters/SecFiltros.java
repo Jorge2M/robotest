@@ -28,6 +28,7 @@ public interface SecFiltros {
 	public void selectMenu2onLevel(String menuLabel);
 	public boolean isVisibleColorTags(List<Color> colors);
 	public boolean isClickableFiltroUntil(int seconds);
+	public void clickFilterAndSortButton();
 	public boolean isAvailableFiltros(FiltroMobil typeFiltro, List<String> listTextFiltros);
 	
 	public static SecFiltros make(Channel channel, AppEcom app, Pais pais) {

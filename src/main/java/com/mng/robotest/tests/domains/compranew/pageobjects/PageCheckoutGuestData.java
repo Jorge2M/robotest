@@ -32,9 +32,15 @@ public class PageCheckoutGuestData extends PageBase {
 		inputClearAndSendKeys(XP_CITY_INPUT, delivery.getCity());
 		inputClearAndSendKeys(XP_EMAIL_INPUT, delivery.getEmail());
 		inputClearAndSendKeys(XP_MOBILE_INPUT, delivery.getMobile());
-		inputClearAndSendKeys(XP_TIN_INPUT, delivery.getDni());
 		
+		inputTinIfExists(delivery.getDni());
 		selectCountryIfExists(delivery.getCountry());
+	}
+	
+	private void inputTinIfExists(String dni) {
+		if (dni!=null && state(VISIBLE, XP_TIN_INPUT).check()) {
+			inputClearAndSendKeys(XP_TIN_INPUT, dni);
+		}
 	}
 	
 	private void selectCountryIfExists(String country) {

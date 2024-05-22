@@ -22,7 +22,7 @@ public class PageGaleriaDeviceGenesis extends PageGaleriaGenesis {
 	public boolean isVisibleColorTags(List<Color> colors) {
 		return new SecFiltrosMobil().isVisibleColorTags(colors);
 	}
-	
+
 	@Override
 	public boolean isVisibleSubMenuDesktop(String submenu) {
 		throw new UnsupportedOperationException();
@@ -93,6 +93,5 @@ public class PageGaleriaDeviceGenesis extends PageGaleriaGenesis {
 	public List<String> searchForArticlesNoValid(List<String> articleNames) {
 		throw new UnsupportedOperationException();
 	}
-	
 	
 }

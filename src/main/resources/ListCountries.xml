@@ -32,7 +32,7 @@
 </shoponline>
 <pago
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -73,7 +73,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -126,7 +126,7 @@
 	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna='23.04.1974'></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -194,7 +194,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='BPOST' tipoenviooutlet='BPOST' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='BPOST' tipoenviooutlet='BPOST' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="Bancontact" tiendas="shop,outlet" empleado="s"
 	nombre="Bancontact" testpasarela='s' testpago='s' tipotarj="VISAD3D" numtarj="5454545454545454" mescad="03" anycad="2030" cvc="" usrd3d="user" passd3d="password"></pago>
@@ -243,7 +243,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -285,7 +285,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -331,7 +331,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -370,7 +370,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -418,7 +418,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -468,7 +468,7 @@
 	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna="0801363945"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s'></pago>
@@ -514,7 +514,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -576,7 +576,7 @@
 	nombre="KLARNA ACCOUNT" testpasarela='s' testpago='s' numperklarna="190122-829F" telefklarna = "0401234567" nomklarna="Testperson-fi Approved" direcklarna="Kiväärikatu 10" provinklarna="28100 Pori" searchaddklarna="n"></pago>-->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -625,7 +625,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop="CHRONOPOST" tipoenviooutlet="CHRONOPOST" tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop="CHRONOPOST" tipoenviooutlet="CHRONOPOST" tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -677,7 +677,7 @@
 	nombre="KLARNA" testpasarela='n' testpago='n' numperklarna='23.04.1974'></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipoenviooutlet='PACKSTATION' tipoenvioshop='PACKSTATION' numtarj="5555444433331111" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -750,7 +750,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -797,7 +797,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -843,7 +843,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -891,7 +891,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -939,7 +939,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1008,7 +1008,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1055,7 +1055,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1097,7 +1097,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1148,7 +1148,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1214,7 +1214,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1279,7 +1279,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1349,10 +1349,10 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" tipoenvioshop='POSTNLPOINT' tipoenviooutlet='STANDARD' numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago> <!-- JPMorgan -->
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" tipoenvioshop='POSTNLPOINT' tipoenviooutlet='STANDARD' numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago> <!-- JPMorgan -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAESTANDAR' numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago> <!-- JPMorgan -->
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAESTANDAR' numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago> <!-- JPMorgan -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
@@ -1430,7 +1430,7 @@
 -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1479,7 +1479,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" tipoenvioshop='INPOST' tipoenviooutlet='STANDARD' numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" tipoenvioshop='INPOST' tipoenviooutlet='STANDARD' numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1530,7 +1530,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1580,7 +1580,7 @@
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1622,7 +1622,7 @@
 </shoponline>
 <pago 
 	type="PaysecureQiwi" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='PICKPOINT' tipoenviooutlet='PICKPOINT' provinciaenvio="Абинск" tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737" telefqiwi = "8000005105"></pago> <!-- En  el caso de Rusia no se puede testear el pago, es Assist -->
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='PICKPOINT' tipoenviooutlet='PICKPOINT' provinciaenvio="Абинск" tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737" telefqiwi = "8000005105"></pago> <!-- En  el caso de Rusia no se puede testear el pago, es Assist -->
 <pago 
 	type="PaysecureQiwi" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password" telefqiwi = "8000005105"></pago>
@@ -1677,7 +1677,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4400000000000008" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1717,7 +1717,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1764,7 +1764,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1821,7 +1821,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='STANDARD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='STANDARD' tipoenviooutlet='STANDARD' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipoenvioshop='TIENDA' tipoenviooutlet='STANDARD' provinciaenvio="BARCELONA" tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -1882,7 +1882,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAESTANDAR' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737"></pago>
@@ -1939,7 +1939,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='CORREOS' tipoenviooutlet='CORREOS' provinciaenvio="35610" tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='CORREOS' tipoenviooutlet='CORREOS' provinciaenvio="35610" tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAESTANDAR' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737"></pago>
@@ -1992,7 +1992,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAESTANDAR' numtarj="4212345678901237" mescad="03" anycad="2030" cvc="737"></pago>
@@ -2061,7 +2061,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 --> 
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="VISA" testpasarela='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' tipoenvioshop='POSTNORD' tipoenviooutlet='STANDARD' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj="VISAD3D" numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2107,7 +2107,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <!-- 
 <pago 
 	type="Billpay" tiendas="shop,outlet"
@@ -2181,7 +2181,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2227,7 +2227,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
-	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='COLLECT_PLUS' tipotarj="VISAD3D_JP" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipoenvioshop='COLLECT_PLUS' tipotarj="VISAD3D_JP" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s" 
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj="VISAD3D_JP" numtarj="5116561111111119" mescad="03" anycad="2030" cvc="123" usrd3d="user" passd3d="password"></pago>
@@ -2281,7 +2281,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2330,7 +2330,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" 
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2390,7 +2390,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2429,7 +2429,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2467,7 +2467,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2508,7 +2508,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2567,7 +2567,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2607,7 +2607,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2654,7 +2654,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <multidireccion>N</multidireccion>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2699,7 +2699,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <multidireccion>N</multidireccion>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2741,7 +2741,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <multidireccion>N</multidireccion>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2784,7 +2784,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2837,7 +2837,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2877,7 +2877,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -2923,10 +2923,10 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373"></pago>
@@ -3126,7 +3126,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -3173,7 +3173,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -3218,7 +3218,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -3354,7 +3354,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <multidireccion>N</multidireccion>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -3473,7 +3473,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="storecredit" tiendas="shop" nombre="STORECREDIT"      testpasarela='s' testpago='s'></pago>--> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago) -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -3515,7 +3515,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -3659,7 +3659,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -3702,7 +3702,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -3742,7 +3742,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -3830,7 +3830,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="JCB" testpasarela='s'></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s'></pago>
@@ -3913,7 +3913,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -3949,7 +3949,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="Assist" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="12" anycad="17" cvc="123"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="12" anycad="17" cvc="123"></pago>
 <pago 
 	type="Assist" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s'></pago>
@@ -3992,7 +3992,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4052,7 +4052,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4085,7 +4085,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4125,7 +4125,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4163,7 +4163,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4232,7 +4232,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="storecredit" tiendas="shop" nombre="STORECREDIT"      testpasarela='s' testpago='s'></pago>--> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago) -->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4298,7 +4298,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4343,7 +4343,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4429,7 +4429,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4502,7 +4502,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4619,7 +4619,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 -->
 <pago 
 	type="KrediKarti" tiendas="shop"
-	nombre="KREDİ KARTI" namefilter="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="KREDİ KARTI" namefilter="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="KrediKarti" tiendas="outlet"
 	nombre="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5311570000000005" mescad="12" anycad="2020" cvc="000"></pago>
@@ -4657,7 +4657,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="STORECREDIT" testpasarela='s' testpago='s'></pago> <!-- Pago Store Credit que aparece cuando el usuario tiene Saldo en Cuenta (y desaparecen el resto de métodos de pago)-->
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4697,7 +4697,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4796,7 +4796,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4853,7 +4853,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4889,7 +4889,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4926,7 +4926,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -4983,7 +4983,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5020,7 +5020,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5078,7 +5078,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5116,7 +5116,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5176,7 +5176,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5212,7 +5212,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5252,7 +5252,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5329,7 +5329,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5417,7 +5417,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5455,7 +5455,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5485,7 +5485,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5518,7 +5518,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5575,7 +5575,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5611,7 +5611,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
@@ -5647,7 +5647,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
-	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4111111111111111" mescad="03" anycad="2030" cvc="737"></pago>
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>

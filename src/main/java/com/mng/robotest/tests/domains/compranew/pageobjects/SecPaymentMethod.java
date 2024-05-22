@@ -94,7 +94,10 @@ public class SecPaymentMethod extends PageBase {
 		goToIframeInputsCard();
 		inputClearAndSendKeys(XP_CARD_HOLDER_INPUT, payment.getTitular());
 		inputClearAndSendKeys(XP_CARD_NUMBER_INPUT, payment.getNumtarj());
-		inputClearAndSendKeys(XP_CARD_EXPIRATION_INPUT, payment.getAnycad());
+		
+		String year = payment.getAnycad();
+		String yearAA = year.substring(year.length() - 2);		
+		inputClearAndSendKeys(XP_CARD_EXPIRATION_INPUT, payment.getMescad() + yearAA);
 		inputClearAndSendKeys(XP_CARD_CVC_INPUT, payment.getCvc());
 		leaveIframe();
 	}

@@ -74,14 +74,19 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	public void showFilters() {
 		if (!isFiltersShopVisible(1) &&
 			state(CLICKABLE, XP_BUTTON_FILTRAR).check()) {
-			click(XP_BUTTON_FILTRAR).exec();
+			clickFilterAndSortButton();
 		}
+	}
+	
+	@Override
+	public void clickFilterAndSortButton() {
+		click(XP_BUTTON_FILTRAR).exec();
 	}
 	
 	private void hideFilters() {
 		if (isFiltersShopVisible(1) &&
 			state(CLICKABLE, XP_BUTTON_FILTRAR).check()) {
-			click(XP_BUTTON_FILTRAR).exec();
+			clickFilterAndSortButton();
 		}
 	}
 	
