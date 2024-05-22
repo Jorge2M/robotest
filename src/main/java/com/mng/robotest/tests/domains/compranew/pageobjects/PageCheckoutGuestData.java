@@ -16,6 +16,7 @@ public class PageCheckoutGuestData extends PageBase {
 	private static final String XP_COUNTRY_ITEM = "//*[@data-testid='checkout.addressForm.provinceId.listbox']/div[@role='option']";
 	private static final String XP_EMAIL_INPUT = "//*[@data-testid='checkout.addressForm.email']";
 	private static final String XP_MOBILE_INPUT = "//*[@data-testid='address.form.number']";
+	private static final String XP_TIN_INPUT = "//*[@data-testid='checkout.addressForm.tin']";
 	
 	private static final String XP_CONTINUE_TO_PAYMENT_BUTTON = "//*[@data-testid='checkout.step1.button.toPayment']";
 	
@@ -31,6 +32,8 @@ public class PageCheckoutGuestData extends PageBase {
 		inputClearAndSendKeys(XP_CITY_INPUT, delivery.getCity());
 		inputClearAndSendKeys(XP_EMAIL_INPUT, delivery.getEmail());
 		inputClearAndSendKeys(XP_MOBILE_INPUT, delivery.getMobile());
+		inputClearAndSendKeys(XP_TIN_INPUT, delivery.getDni());
+		
 		selectCountryIfExists(delivery.getCountry());
 	}
 	

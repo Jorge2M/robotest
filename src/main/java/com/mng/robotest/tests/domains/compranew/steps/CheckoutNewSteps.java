@@ -51,6 +51,7 @@ public class CheckoutNewSteps extends StepBase {
 		delivery.setPostcode(pais.getCodpos());
 		delivery.setEmail(getUserEmail());
 		delivery.setMobile(pais.getTelefono());
+		delivery.setDni(pais.getDni());
 		addDeliveryDataToStepDescription(delivery);
 		
 		pGuestCheckout.inputData(delivery);

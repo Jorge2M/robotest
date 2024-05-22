@@ -14,6 +14,7 @@ public class DeliveryData {
 	private String state;
 	private String email;
 	private String mobile;
+	private String dni;
 	
 	public String getName() {
 		return name;
@@ -69,6 +70,12 @@ public class DeliveryData {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	public String getDni() {
+		return dni;
+	}
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
 	
 	public String getHtmlData() {
 		var duplas = getDuplas();
@@ -95,6 +102,7 @@ public class DeliveryData {
         duplas.put("state", state);
         duplas.put("email", email);
         duplas.put("mobile", mobile);
+        duplas.put("dni", dni);
         return duplas;
 	}
 
