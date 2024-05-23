@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.SecColoresArticuloDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNoGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecSubMenusGallery;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;
@@ -416,7 +416,7 @@ public abstract class PageGaleriaDesktop extends PageGaleriaNoGenesis {
 	
 	private void clickHearthIconHiddindPossibleInterceptors(WebElement hearthIcon) {
 		var secCabecera = SecCabecera.make();
-		var secFiltros = new SecFiltrosDesktop();
+		var secFiltros = new SecFiltrosDesktopNoGenesis();
 		secCabecera.bring(BringTo.BACKGROUND);
 		secFiltros.bring(BringTo.BACKGROUND);
 		hearthIcon.click();

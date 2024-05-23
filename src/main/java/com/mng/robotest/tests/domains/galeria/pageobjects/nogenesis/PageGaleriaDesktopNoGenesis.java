@@ -7,7 +7,7 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNoGenesis;
 import com.mng.robotest.testslegacy.data.Color;
 
 public class PageGaleriaDesktopNoGenesis extends PageGaleriaDesktop {
@@ -106,7 +106,7 @@ public class PageGaleriaDesktopNoGenesis extends PageGaleriaDesktop {
 	}
 	
 	public boolean isVisibleColorTags(List<Color> colors) {
-		return new SecFiltrosDesktop().isVisibleColorTags(colors);
+		return new SecFiltrosDesktopNoGenesis().isVisibleColorTags(colors);
 	}
 
 }

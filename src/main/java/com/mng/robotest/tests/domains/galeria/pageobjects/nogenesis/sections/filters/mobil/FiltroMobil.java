@@ -24,7 +24,7 @@ public enum FiltroMobil {
 		"//label[@for[contains(.,'onSale')]]");	
 	
 	static final String XP_FILTRO_MULTI_OLD = "//*[@class[contains(.,'orders-filters-scroll')]]";
-	static final String XP_FILTRO_MULTI_NORMAL = SecFiltrosMobil.XP_FILTER_PANEL;
+	static final String XP_FILTRO_MULTI_NORMAL = SecFiltrosMobilNoGenesis.XP_FILTER_PANEL;
 	String xpathOld;
 	String xpathNormal;
 	String xpathOptionNormal;

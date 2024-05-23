@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobil;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobilNoGenesis;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -68,7 +68,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 	@Override
 	public boolean isVisibleSubMenus() {
-		return new SecFiltrosMobil()
+		return new SecFiltrosMobilNoGenesis()
 				.isAvailableFiltros(FiltroMobil.FAMILIA, menu.getSubMenus());
 	}
 
@@ -84,7 +84,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 	
 	private void clickSubLevelMenu() {
-		new SecFiltrosMobil()
+		new SecFiltrosMobilNoGenesis()
 			.selectMenu2onLevel(Arrays.asList(menu.getSubMenu()));
 	}
 	

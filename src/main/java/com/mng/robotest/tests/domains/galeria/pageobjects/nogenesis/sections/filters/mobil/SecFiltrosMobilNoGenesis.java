@@ -14,7 +14,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.fil
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.SecFiltros;
 import com.mng.robotest.testslegacy.data.Color;
 
-public class SecFiltrosMobil extends PageBase implements SecFiltros {
+public class SecFiltrosMobilNoGenesis extends PageBase implements SecFiltros {
 
 	public static final String XP_FILTER_PANEL = "//*[@data-testid='plp.filters.mobile.panel']";
 	

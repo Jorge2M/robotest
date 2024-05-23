@@ -10,7 +10,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.fil
 import com.mng.robotest.testslegacy.data.Color;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecFiltrosDesktop extends PageBase implements SecFiltros {
+public class SecFiltrosDesktopNoGenesis extends PageBase implements SecFiltros {
 
 	private final SecSelectorPreciosDesktop secSelectorPreciosDesktop = new SecSelectorPreciosDesktop();
 	
@@ -59,11 +59,11 @@ public class SecFiltrosDesktop extends PageBase implements SecFiltros {
 	
 	@Override
 	public void selectMenu2onLevel(List<String> listMenus) {
-		//TODO
+		throw new UnsupportedOperationException();
 	}
 	@Override
 	public void selectMenu2onLevel(String menuLabel) {
-		//TODO
+		throw new UnsupportedOperationException();
 	}	
 	
 	public void bring(BringTo bringTo) {

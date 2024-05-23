@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNoGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobil;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobilNoGenesis;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Color;
 
@@ -33,9 +33,9 @@ public interface SecFiltros {
 	
 	public static SecFiltros make(Channel channel, AppEcom app, Pais pais) {
 		if (channel.isDevice()) {
-			return new SecFiltrosMobil();
+			return new SecFiltrosMobilNoGenesis();
 		}
-		return new SecFiltrosDesktop();
+		return new SecFiltrosDesktopNoGenesis();
 	}
 	
 	/**
