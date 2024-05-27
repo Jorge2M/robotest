@@ -11,11 +11,15 @@ import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBols
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ColorType;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ModCompartirNew;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ModCompartirNew.IconSocial;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders.Slider;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.PageFichaDeviceNoGenesis;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProduct;
-import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecBolsaButtonAndLinks.ActionFavButton;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ActionFavButton;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProduct.ItemBreadcrumb;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecProductDescrDevice.TypePanel;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
@@ -24,7 +28,7 @@ import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 import java.util.List;
 
 import static com.mng.robotest.tests.domains.ficha.pageobjects.commons.ColorType.*;
-import static com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecBolsaButtonAndLinks.ActionFavButton.*;
+import static com.mng.robotest.tests.domains.ficha.pageobjects.commons.ActionFavButton.*;
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
@@ -34,8 +38,7 @@ public class FichaSteps extends StepBase {
 	private final SecBolsa secBolsa = new SecBolsa();
 	private final ModEnvioYdevolNewSteps modEnvioYdevolSteps = new ModEnvioYdevolNewSteps();
 	private final SecProductDescrDeviceSteps secProductDescOldSteps = new SecProductDescrDeviceSteps();
-	private final SecBolsaButtonAndLinksNewSteps secBolsaButtonAndLinksNewSteps = new SecBolsaButtonAndLinksNewSteps();
-	private final SecFotosNewSteps secFotosNewSteps = new SecFotosNewSteps();
+	private final SecBolsaButtonAndLinksDesktopSteps secBolsaButtonAndLinksNewSteps = new SecBolsaButtonAndLinksDesktopSteps();
 	private final SecFitFinderSteps secFitFinderSteps = new SecFitFinderSteps();
 
 	public PageFicha getFicha() {
@@ -434,6 +437,98 @@ public class FichaSteps extends StepBase {
 	public boolean checkStickyContentInvisible(int seconds) {
 		return pageFicha.isInvisibleStickyContent(seconds);
 	}
+	
+	public SecBolsaButtonAndLinksDesktopSteps getSecBolsaButtonAndLinksNewSteps() {
+		return secBolsaButtonAndLinksNewSteps;
+	}	
+	
+//	// INI
+//	@Step (
+//		description="Seleccionar el link <b>Envío gratis a tienda</b>",
+//		expected="Aparece el modal con los datos a nivel de envío y devolución")
+//	public void selectEnvioYDevoluciones() {
+//		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(ENVIO_GRATIS_TIENDA);
+//		new ModEnvioYdevolNewSteps().checkIsVisible(2);
+//	}
+//
+//	@Step (
+//		description="Seleccionar el link <b>Detalle del producto</b>",
+//		expected="Se scrolla hasta el apartado de \"Descripción\"")
+//	public void selectDetalleDelProducto(LineaType lineaType) {
+//		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(DETALLE_PRODUCTO);
+//		checkScrollToDescription();
+//		checkBreadCrumbs();
+//		if (TypePanel.KC_SAFETY.getListApps().contains(app) &&
+//			(lineaType==LineaType.NINA || lineaType==LineaType.NINO)) {
+//			checkKcSafety();
+//		}
+//	}
+//	
+//	@Validation (description="Se scrolla hasta el apartado de \"Descriptión\"")
+//	private boolean checkScrollToDescription() {
+//		return secDetalleProductNew.isVisibleUntil(3);
+//	}
+//	
+//	@Validation
+//	private ChecksTM checkBreadCrumbs() {
+//		var checks = ChecksTM.getNew();
+//	 	checks.add(
+//			"Figura el bloque de BreadCrumbs",
+//			secDetalleProductNew.isVisibleBreadcrumbs(0), WARN);
+//	 	
+//	 	checks.add(
+//			"Es visible el item " + LINEA,
+//			secDetalleProductNew.isVisibleItemBreadCrumb(LINEA), WARN);
+//	 	
+//	 	checks.add(
+//			"Es visible el item " + SUBGALERIA,
+//			secDetalleProductNew.isVisibleItemBreadCrumb(SUBGALERIA), WARN);
+//	 	
+//	 	checks.add(
+//			"Es visible el item " + GALERIA,
+//			secDetalleProductNew.isVisibleItemBreadCrumb(GALERIA), WARN);
+//	 	
+//	 	return checks;
+//	}
+//	
+//	@Validation (description="Aparece el bloque de \"KcSafety\"")
+//	private boolean checkKcSafety() {
+//		return secDetalleProductNew.isVisibleBlockKcSafety();
+//	}
+//
+//	@Step (
+//		description="Seleccionar el link <b>Compartir</b>",
+//		expected="Aparece el modal para compartir el enlace")
+//	public void selectLinkCompartir(String codigoPais) {
+//		secBolsaButtonAndLinksNew.clickLinkAndWaitLoad(COMPARTIR);
+//		checkAppearsModalShareSocial(codigoPais);
+//	}
+//	
+//	@Validation
+//	private ChecksTM checkAppearsModalShareSocial(String codigoPais) {
+//		var checks = ChecksTM.getNew();
+//		int seconds = 2;
+//	 	checks.add(
+//	 		"Aparece el modal para compartir a nivel social " + getLitSecondsWait(seconds),
+//	 		new ModCompartirNew().isVisibleUntil(seconds));
+//		
+//		boolean isPaisChina = (codigoPais.compareTo("720")==0);
+//		for (IconSocial icon : IconSocial.values()) {
+//			boolean isVisibleIcon = new ModCompartirNew().isVisibleIcon(icon);
+//			if (isPaisChina != icon.isSpecificChina()) {
+//			 	checks.add(
+//			 		"No es visible el icono de " + icon,
+//			 		!isVisibleIcon, WARN);
+//			} else {
+//			 	checks.add(
+//			 		"Sí es visible el icono de " + icon,
+//			 		isVisibleIcon, WARN);
+//			}
+//		}
+//
+//		return checks;
+//	}	
+//	// FIN
 
 	//------------------------------------------------------------------------
 	//Específic Ficha Old
@@ -517,14 +612,6 @@ public class FichaSteps extends StepBase {
 
 	public SecProductDescrDeviceSteps getSecProductDescDeviceSteps() {
 		return secProductDescOldSteps;
-	}
-
-	public SecBolsaButtonAndLinksNewSteps getSecBolsaButtonAndLinksNewSteps() {
-		return secBolsaButtonAndLinksNewSteps;
-	}
-
-	public SecFotosNewSteps getSecFotosNewSteps() {
-		return secFotosNewSteps;
 	}
 
 	public SecFitFinderSteps getSecFitFinderSteps() {

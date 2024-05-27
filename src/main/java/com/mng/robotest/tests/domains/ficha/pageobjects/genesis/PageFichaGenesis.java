@@ -161,12 +161,6 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 		return false;
 	}
 	
-	@Override	
-	public boolean isFichaAccesorio() {
-		throw new UnsupportedOperationException("This method is not supported");
-	}
-	
-
 	//-- Colors
 	
 	@Override

@@ -2,26 +2,24 @@ package com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis;
 
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecBolsaButtonAndLinks.ActionFavButton.*;
-import static com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecBolsaButtonAndLinks.LinksAfterBolsa.*;
+import static com.mng.robotest.tests.domains.ficha.pageobjects.commons.ActionFavButton.*;
+import static com.mng.robotest.tests.domains.ficha.pageobjects.commons.LinksAfterBolsa.*;
 
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ModEnvioYdevolNew;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ModNoStock;
 
 public class PageFichaDesktopNoGenesis extends PageFichaNoGenesis {
 
-	public final SecBolsaButtonAndLinks secBolsaButtonAndLinks;
+	public final SecBolsaButtonAndLinksNoGenesis secBolsaButtonAndLinks;
 	public final ModEnvioYdevolNew modEnvioYdevolNew;
-	public final SecFotosNew secFotos;
 	public final SecDetalleProduct secProductInfo;
 	private ModNoStock modNoStock;
 
 	private static final String XP_HTML_FICHA = "//html[@class[contains(.,'ficha')]]";
 
 	public PageFichaDesktopNoGenesis() {
-		this.secBolsaButtonAndLinks = new SecBolsaButtonAndLinks();
+		this.secBolsaButtonAndLinks = new SecBolsaButtonAndLinksNoGenesis();
 		this.modEnvioYdevolNew = new ModEnvioYdevolNew();
-		this.secFotos = new SecFotosNew();
 		this.secProductInfo = new SecDetalleProduct();
 		this.modNoStock = new ModNoStock();
 	}

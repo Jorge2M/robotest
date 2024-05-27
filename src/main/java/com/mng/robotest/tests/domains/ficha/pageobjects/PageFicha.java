@@ -61,7 +61,6 @@ public interface PageFicha {
 	public int getNumOptionsTallasNoDisponibles();
 	public int getNumOptionsTallas();
 	public void closeTallas();
-	public boolean isFichaAccesorio();
 	public int getNumColors();
 	public boolean isVisibleSlider(Slider slider);
 	public int getNumArtVisiblesSlider(Slider slider);

@@ -74,8 +74,6 @@ public class Fic002 extends TestBase {
 	}
 
 	private void pageFichaDesktopTest() {
-		boolean isFichaAccesorio = fichaSteps.getFicha().isFichaAccesorio();
-		fichaSteps.getSecFotosNewSteps().validaLayoutFotosNew(isFichaAccesorio);
 		if (isShop()) {
 			fichaSteps.getSecBolsaButtonAndLinksNewSteps().selectEnvioYDevoluciones();
 			fichaSteps.getModEnvioYdevolSteps().clickAspaForClose();

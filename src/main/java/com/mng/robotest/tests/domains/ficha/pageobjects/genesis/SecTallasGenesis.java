@@ -1,7 +1,8 @@
 package com.mng.robotest.tests.domains.ficha.pageobjects.genesis;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.INVISIBLE;
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.VISIBLE;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import org.openqa.selenium.By;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.testslegacy.data.PaisShop;
@@ -145,19 +146,24 @@ public class SecTallasGenesis extends PageBase {
 	private void unfoldTallasMobil() {
 		waitMillis(250);
 		if (!state(VISIBLE, XP_SELECTOR_TALLAS_MOBIL).check()) {
-			clickIconForUnfoldTallas();
+			clickIconOrButtonForUnfoldTallas();
 			waitMillis(250);
 		}
 	}
 	
-	private void unfoldTallasDesktop() { //Tested
-		clickIconForUnfoldTallas();
+	private void unfoldTallasDesktop() { 
+		clickIconOrButtonForUnfoldTallas();
 	}
 	
-	private void clickIconForUnfoldTallas() {
+	private void clickIconOrButtonForUnfoldTallas() {
 		var icon = getElementVisible(XP_ICON_DESPLEGABLE_TALLAS);
-		if (icon!=null) { 
-			click(icon).exec();
+		if (icon!=null) {
+			//For when the chatbot icon overlays the tallas icon
+			try {
+				click(icon).exec();
+			} catch (Exception e) {
+				click(icon).by(By.xpath("./..")).exec();
+			}
 		}
 	}
 	

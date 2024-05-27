@@ -2,14 +2,13 @@ package com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ActionFavButton;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.LinksAfterBolsa;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecBolsaButtonAndLinks extends PageBase {
-
-	public enum LinksAfterBolsa { DETALLE_PRODUCTO, DISPONIBILIDAD_TIENDA, ENVIO_GRATIS_TIENDA, COMPARTIR }
-	public enum ActionFavButton { ADD, REMOVE }
+public class SecBolsaButtonAndLinksNoGenesis extends PageBase {
 
 	private static final String XP_WRAPPER = "//div[@class='product-actions']";
 	private static final String XP_BUTTON_ADD_BOLSA = "//*[@data-testid='pdp.form.addToCart']";

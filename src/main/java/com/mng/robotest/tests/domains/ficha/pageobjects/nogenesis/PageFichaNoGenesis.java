@@ -149,11 +149,6 @@ public abstract class PageFichaNoGenesis extends PageBase implements PageFicha {
 	}	
 
 	@Override
-	public boolean isFichaAccesorio() {
-		return (this.driver.getCurrentUrl().contains("accesorio"));
-	}
-
-	@Override
 	public int getNumColors() {
 		return secDataProduct.getNumColors();
 	}
