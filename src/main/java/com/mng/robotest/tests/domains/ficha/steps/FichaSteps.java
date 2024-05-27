@@ -30,7 +30,7 @@ import static com.github.jorge2m.testmaker.conf.StoreType.*;
 
 public class FichaSteps extends StepBase {
 
-	private final PageFicha pageFicha = PageFicha.make(channel, app, dataTest.getPais(), inputParamsSuite.getUrlBase());
+	private final PageFicha pageFicha = PageFicha.make(channel, app, dataTest.getPais());
 	private final SecBolsa secBolsa = new SecBolsa();
 	private final ModEnvioYdevolNewSteps modEnvioYdevolSteps = new ModEnvioYdevolNewSteps();
 	private final SecProductDescrDeviceSteps secProductDescOldSteps = new SecProductDescrDeviceSteps();

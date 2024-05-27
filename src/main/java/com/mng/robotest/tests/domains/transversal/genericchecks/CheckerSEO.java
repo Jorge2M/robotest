@@ -97,7 +97,7 @@ public class CheckerSEO extends PageBase implements Checker {
 		List<String> listaErrorsInHtmlFormat = new ArrayList<>();
 		if (!isPresentTagCanonical()) {
 			//El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
-			var pageFicha = PageFicha.make(channel, app, dataTest.getPais(), inputParamsSuite.getUrlBase());
+			var pageFicha = PageFicha.make(channel, app, dataTest.getPais());
 			var pageGaleria = PageGaleria.make(desktop, app, dataTest.getPais());
 			if ((new PageLanding()).isPageMultimarca() || 
 				((PageGaleriaDesktopBaseNoGenesis)pageGaleria).isPage() || 

@@ -12,7 +12,7 @@ import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
 public class ArticuloNavigations extends StepBase {
 
-	private final PageFicha pgFicha = PageFicha.make(channel, app, dataTest.getPais(), inputParamsSuite.getUrlBase());
+	private final PageFicha pgFicha = PageFicha.make(channel, app, dataTest.getPais());
 	
 	public ArticuloScreen selectArticuloTallaColorByRef(Article articleStock) {
 		var articulo = new ArticuloScreen();

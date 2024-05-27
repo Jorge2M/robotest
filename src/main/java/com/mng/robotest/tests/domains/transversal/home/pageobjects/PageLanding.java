@@ -142,7 +142,7 @@ public class PageLanding extends PageBase {
 			return true;
 		}
 
-		var pageFicha = PageFicha.make(Channel.desktop, app, dataTest.getPais(), inputParamsSuite.getUrlBase());
+		var pageFicha = PageFicha.make(Channel.desktop, app, dataTest.getPais());
 		if (pageFicha.isPage(0)) {
 			return true;
 		}

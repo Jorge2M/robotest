@@ -333,7 +333,7 @@ public abstract class PageGaleriaNoGenesis extends PageBase implements PageGaler
 		//Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible
 		String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
 
-		var pageFicha = PageFicha.make(channel, app, dataTest.getPais(), inputParamsSuite.getUrlBase());
+		var pageFicha = PageFicha.make(channel, app, dataTest.getPais());
 		pageFicha.isPage(10);
 
 		return detailWindowHandle;

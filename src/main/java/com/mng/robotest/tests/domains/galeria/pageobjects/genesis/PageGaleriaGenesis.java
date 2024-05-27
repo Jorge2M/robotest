@@ -233,7 +233,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		String galeryWindowHandle = driver.getWindowHandle();
 		new UtilsMangoTest().openLinkInNewTab(article);
 		String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
-		var pageFicha = PageFicha.make(channel, app, dataTest.getPais(), inputParamsSuite.getUrlBase());
+		var pageFicha = PageFicha.make(channel, app, dataTest.getPais());
 		pageFicha.isPage(10);
 		return detailWindowHandle;
 	}

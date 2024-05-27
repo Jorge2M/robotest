@@ -450,7 +450,7 @@ public class GaleriaSteps extends StepBase {
 	@Validation
 	private ChecksTM checkIsFichaArticle(String nombre1erArt, String precio1erArt, int seconds) {
 		var checks = ChecksTM.getNew();
-		var pageFicha = PageFicha.make(channel, app, dataTest.getPais(), inputParamsSuite.getUrlBase());
+		var pageFicha = PageFicha.make(channel, app, dataTest.getPais());
 		
 	  	checks.add(
 			"Aparece la página de ficha " + getLitSecondsWait(seconds),
