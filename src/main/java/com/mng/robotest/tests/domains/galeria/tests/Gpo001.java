@@ -1,13 +1,13 @@
 package com.mng.robotest.tests.domains.galeria.tests;
 
-import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.NumColumnas.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion.*;
 import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.From;
 import com.mng.robotest.tests.domains.galeria.steps.DataForScrollStep;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
@@ -30,7 +30,7 @@ public class Gpo001 extends TestBase {
 	}
 
 	private void changeTwoToFourColumns() {
-		var pageGaleria = (PageGaleriaDesktop)PageGaleria.make(From.MENU, channel, app, dataTest.getPais());
+		var pageGaleria = (PageGaleriaDesktopBaseNoGenesis)PageGaleria.make(From.MENU, channel, app, dataTest.getPais());
 		var listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
 		listArticlesGaleria2Cols = galeriaSteps.selectListadoXColumnasDesktop(CUATRO, listArticlesGaleria2Cols);
 		galeriaSteps.selectListadoXColumnasDesktop(DOS, listArticlesGaleria2Cols);

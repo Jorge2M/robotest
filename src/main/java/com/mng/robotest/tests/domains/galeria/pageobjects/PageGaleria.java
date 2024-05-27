@@ -13,7 +13,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaD
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopOld;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDeviceNoGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDeviceOld;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;

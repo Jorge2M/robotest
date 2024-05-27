@@ -16,9 +16,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 	private static final String TAG_MINIMO = "[MINIMO]";
 	private static final String TAG_MAXIMO = "[MAXIMO]";
 	
-	@Validation (
-		description="Es visible el selector de precios",
-		level=WARN)
+	@Validation (description="Es visible el selector de precios", level=WARN)
 	public boolean checkIsSelector() {
 		return pgGaleria.isVisibleSelectorPrecios();
 	}
@@ -31,18 +29,18 @@ public class SecSelectorPreciosSteps extends StepBase {
 		if (isDesktop()) {
 			pgGaleria.showFilters();
 		}
-		dataFilter.minimoOrig = pgGaleria.getMinImportFilter();
-		dataFilter.maximoOrig = pgGaleria.getMaxImportFilter();
+		dataFilter.setMinimoOrig(pgGaleria.getMinImportFilter());
+		dataFilter.setMaximoOrig(pgGaleria.getMaxImportFilter());
 
 		pgGaleria.clickIntervalImportFilter(30, 30);
-		dataFilter.minimoFinal = pgGaleria.getMinImportFilter();
-		dataFilter.maximoFinal = pgGaleria.getMaxImportFilter();
+		dataFilter.setMinimoFinal(pgGaleria.getMinImportFilter());
+		dataFilter.setMaximoFinal(pgGaleria.getMaxImportFilter());
 		if (isDesktop()) {
 			pgGaleria.acceptFilters();
 		}
 		
-		replaceStepDescription(TAG_MINIMO, String.valueOf(dataFilter.minimoFinal));
-		replaceStepDescription(TAG_MAXIMO, String.valueOf(dataFilter.maximoFinal));
+		replaceStepDescription(TAG_MINIMO, String.valueOf(dataFilter.getMinimoFinal()));
+		replaceStepDescription(TAG_MAXIMO, String.valueOf(dataFilter.getMaximoFinal()));
 		
 		checkResultSelectFiltro(dataFilter);
 		checksDefault();
@@ -52,25 +50,50 @@ public class SecSelectorPreciosSteps extends StepBase {
 	private ChecksTM checkResultSelectFiltro(DataFilterPrecios dataFilter) throws Exception {
 		var checks = ChecksTM.getNew();
 		checks.add(
-			"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.minimoOrig + "</b> y ahora es <b>" + dataFilter.minimoFinal + "</b>",
-			dataFilter.minimoFinal > dataFilter.minimoOrig, WARN);
+			"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.getMinimoOrig() + "</b> y ahora es <b>" + dataFilter.getMinimoFinal() + "</b>",
+			dataFilter.getMinimoFinal() > dataFilter.getMinimoOrig(), WARN);
 		
 		checks.add(
-			"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.maximoOrig + "</b> y ahora es <b>" + dataFilter.maximoFinal + "</b>",
-			dataFilter.maximoFinal < dataFilter.maximoOrig, WARN);
+			"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.getMaximoOrig() + "</b> y ahora es <b>" + dataFilter.getMaximoFinal() + "</b>",
+			dataFilter.getMaximoFinal() < dataFilter.getMaximoOrig(), WARN);
 		
 		var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 		checks.add(
-			"Todos los precios están en el intervalo [" + dataFilter.minimoFinal + ", " + dataFilter.maximoFinal + "]",
-			pageGaleria.preciosInIntervalo(dataFilter.minimoFinal, dataFilter.maximoFinal), WARN);
+			"Todos los precios están en el intervalo [" + dataFilter.getMinimoFinal() + ", " + dataFilter.getMaximoFinal() + "]",
+			pageGaleria.preciosInIntervalo(dataFilter.getMinimoFinal(), dataFilter.getMaximoFinal()), WARN);
 		
 		return checks;
 	}
 }
 
 class DataFilterPrecios {
-	public int minimoOrig = 0;
-	public int maximoOrig = 0;
-	public int minimoFinal = 0;
-	public int maximoFinal = 0;
+	private int minimoOrig = 0;
+	private int maximoOrig = 0;
+	private int minimoFinal = 0;
+	private int maximoFinal = 0;
+	
+	public int getMinimoOrig() {
+		return minimoOrig;
+	}
+	public void setMinimoOrig(int minimoOrig) {
+		this.minimoOrig = minimoOrig;
+	}
+	public int getMaximoOrig() {
+		return maximoOrig;
+	}
+	public void setMaximoOrig(int maximoOrig) {
+		this.maximoOrig = maximoOrig;
+	}
+	public int getMinimoFinal() {
+		return minimoFinal;
+	}
+	public void setMinimoFinal(int minimoFinal) {
+		this.minimoFinal = minimoFinal;
+	}
+	public int getMaximoFinal() {
+		return maximoFinal;
+	}
+	public void setMaximoFinal(int maximoFinal) {
+		this.maximoFinal = maximoFinal;
+	}
 }

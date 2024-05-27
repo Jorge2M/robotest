@@ -10,8 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.SecFiltros;
 import com.mng.robotest.testslegacy.data.Color;
 
 public class SecFiltrosMobilNoGenesis extends PageBase implements SecFiltros {

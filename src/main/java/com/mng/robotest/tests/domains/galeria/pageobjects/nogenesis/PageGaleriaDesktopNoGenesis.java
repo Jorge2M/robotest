@@ -10,7 +10,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSli
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNoGenesis;
 import com.mng.robotest.testslegacy.data.Color;
 
-public class PageGaleriaDesktopNoGenesis extends PageGaleriaDesktop {
+public class PageGaleriaDesktopNoGenesis extends PageGaleriaDesktopBaseNoGenesis {
 
 	private final CommonGaleriaNoGenesis commonNormal = new CommonGaleriaNoGenesis();
 	private static final String XP_ICONO_UP_GALERY = "//button[@aria-label='Scroll up']";

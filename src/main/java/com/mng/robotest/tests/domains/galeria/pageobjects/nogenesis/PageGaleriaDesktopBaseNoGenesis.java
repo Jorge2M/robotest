@@ -25,7 +25,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClic
 import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public abstract class PageGaleriaDesktop extends PageGaleriaNoGenesis {
+public abstract class PageGaleriaDesktopBaseNoGenesis extends PageGaleriaNoGenesis {
 	
 	private final SecSubMenusGallery secSubMenusGallery = SecSubMenusGallery.make(app, dataTest.getPais());
 	private final SecColoresArticuloDesktop secColores = SecColoresArticuloDesktop.make();
@@ -65,7 +65,7 @@ public abstract class PageGaleriaDesktop extends PageGaleriaNoGenesis {
 		}
 	}
 	
-	protected PageGaleriaDesktop() {
+	protected PageGaleriaDesktopBaseNoGenesis() {
 		super();
 	}
 	

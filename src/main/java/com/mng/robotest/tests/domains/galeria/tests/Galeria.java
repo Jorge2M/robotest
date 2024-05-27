@@ -24,17 +24,25 @@ public class Galeria {
 		testName="GPO008",			
 		groups={"Galeria", "Canal:all_App:all"},
 		description="[Genesis][Liechtenstein][Galería camisas][Scroll][View ficha]")
-	public void galeriaGenesis() throws Exception {
+	public void galeriaGenesisLiechtenstein() throws Exception {
 		new Gpo008().execute();
 	}	
 	
 	@Test (
 		testName="GPO005",			
 		groups={"Galeria", "Smoke", "Canal:all_App:all"}, 
-		description="[Usuario registrado] Acceder a galería. Navegación menú lateral de primer y segundo nivel. Selector de precios")
+		description="[Logged][ Acceder a galería. Navegación menú lateral de primer y segundo nivel. Selector de precios")
 	public void galeriaMenuLateral() throws Exception {
 		new Gpo005().execute();
 	}
+	
+	@Test (
+		testName="GPO009",			
+		groups={"Galeria", "Smoke", "Canal:all_App:all"}, 
+		description="[Logged][Monaco][Galeria new][Filtro precios, colores, tallas][Filtro submenús]")
+	public void galeriaGenesisMonaco() throws Exception {
+		new Gpo009().execute();
+	}	
 	
 	@Test (
 		testName="GPO006",			

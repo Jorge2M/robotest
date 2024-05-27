@@ -280,5 +280,9 @@ public class PageBase extends PageObjTM {
 	protected void leaveIframe() {
 		driver.switchTo().defaultContent();
 	}
+	
+	protected void drag(WebElement element, int pixels) {
+		new Actions(driver).dragAndDropBy(element, pixels, 0).build().perform();		
+	}
 
 }

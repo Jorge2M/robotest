@@ -252,6 +252,7 @@
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 <newcheckout>shop</newcheckout>
 </pais>
 
@@ -1686,6 +1687,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 <newcheckout>shop</newcheckout>
 </pais>
 
@@ -4138,6 +4140,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<fichagenesis>shop</fichagenesis>
 <newcheckout>shop</newcheckout>
 </pais>
 
@@ -4518,6 +4521,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
 <galeriagenesis>shop</galeriagenesis>
+<fichagenesis>shop</fichagenesis>
 <newcheckout>shop</newcheckout>
 </pais>
 
@@ -4941,7 +4945,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
 <galeriagenesis>shop</galeriagenesis>
-<fichagenesis>shop</fichagenesis>
 <newcheckout>shop</newcheckout>
 </pais>
 

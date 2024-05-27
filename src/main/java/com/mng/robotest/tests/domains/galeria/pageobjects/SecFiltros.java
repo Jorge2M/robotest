@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters;
+package com.mng.robotest.tests.domains.galeria.pageobjects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
+import com.mng.robotest.tests.domains.galeria.pageobjects.genesis.SecFiltrosDesktopGenesis;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNoGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobilNoGenesis;
@@ -34,6 +36,9 @@ public interface SecFiltros {
 	public static SecFiltros make(Channel channel, AppEcom app, Pais pais) {
 		if (channel.isDevice()) {
 			return new SecFiltrosMobilNoGenesis();
+		}
+		if (pais.isGaleriaGenesis(app)) {
+			return new SecFiltrosDesktopGenesis();
 		}
 		return new SecFiltrosDesktopNoGenesis();
 	}

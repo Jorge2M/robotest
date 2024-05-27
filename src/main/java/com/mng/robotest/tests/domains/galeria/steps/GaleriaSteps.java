@@ -21,11 +21,11 @@ import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.ControlTemporada;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.NumColumnas;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.TypeArticle;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.ControlTemporada;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticle;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
@@ -63,6 +63,10 @@ public class GaleriaSteps extends StepBase {
     	checkArticleGaleriaLoaded();
     }
 	
+    public void selectPricesInterval() throws Exception {
+    	secSelectorPreciosSteps.selectInterval();
+    }
+    
 	@Step (
 		description="Seleccionamos el artículo #{position} en una pestaña aparte", 
 		expected="Aparece la ficha del artículo seleccionado en una pestaña aparte")
@@ -369,7 +373,7 @@ public class GaleriaSteps extends StepBase {
 		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax.
 		//En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
 		waitForPageLoaded(driver, 2);
-		var pageGaleriaDesktop = (PageGaleriaDesktop)pgGaleria;
+		var pageGaleriaDesktop = (PageGaleriaDesktopBaseNoGenesis)pgGaleria;
 		var articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHover(numArtConColores);
 		
 		replaceStepDescription(TAG_NOMBRE_ART, pgGaleria.getNombreArticulo(articuloColores));
@@ -446,7 +450,7 @@ public class GaleriaSteps extends StepBase {
 	@Validation
 	private ChecksTM checkIsFichaArticle(String nombre1erArt, String precio1erArt, int seconds) {
 		var checks = ChecksTM.getNew();
-		var pageFicha = PageFicha.make(channel, app, dataTest.getPais());
+		var pageFicha = PageFicha.make(channel, app, dataTest.getPais(), inputParamsSuite.getUrlBase());
 		
 	  	checks.add(
 			"Aparece la página de ficha " + getLitSecondsWait(seconds),
@@ -469,7 +473,7 @@ public class GaleriaSteps extends StepBase {
 
 	@Validation (description="Existe algún vídeo en la galería", level=WARN)
 	public boolean validaHayVideoEnGaleria() {
-		var pgGaleriaDesktop = (PageGaleriaDesktop)pgGaleria;
+		var pgGaleriaDesktop = (PageGaleriaDesktopBaseNoGenesis)pgGaleria;
 		return (pgGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.VIDEO));
 	}
 
@@ -526,7 +530,7 @@ public class GaleriaSteps extends StepBase {
 		description="Seleccionar el link del listado a <b>#{numColumnas.name()} columnas</b>", 
 		expected="Aparece un listado de artículos a #{numColumnas.name()} columnas")
 	public void selectListadoXColumnasDesktop(NumColumnas numColumnas)	{
-		((PageGaleriaDesktop)pgGaleria).clickLinkColumnas(numColumnas);
+		((PageGaleriaDesktopBaseNoGenesis)pgGaleria).clickLinkColumnas(numColumnas);
 		checkIsVisibleLayoutListadoXcolumns(numColumnas);
 	}
 
@@ -555,12 +559,12 @@ public class GaleriaSteps extends StepBase {
 		description="Aparece el layout correspondiente al listado a <b>#{numColumnas.name()} columnas</b>",
 		level=WARN)
 	private boolean checkIsVisibleLayoutListadoXcolumns(NumColumnas numColumnas) {
-		return (pgGaleria.getLayoutNumColumnas()==((PageGaleriaDesktop)pgGaleria).getNumColumnas(numColumnas));
+		return (pgGaleria.getLayoutNumColumnas()==((PageGaleriaDesktopBaseNoGenesis)pgGaleria).getNumColumnas(numColumnas));
 	}
 
 	@Validation (description="Estamos en la página de Galería",	level=WARN)
 	private boolean checkIsPageGaleria(WebDriver driver) {
-		var pageGaleriaDesktop = (PageGaleriaDesktop)pgGaleria;
+		var pageGaleriaDesktop = (PageGaleriaDesktopBaseNoGenesis)pgGaleria;
 		return (pageGaleriaDesktop.isPage());
 	}
 
@@ -580,7 +584,7 @@ public class GaleriaSteps extends StepBase {
 	public ChecksTM validaArticlesOfTemporadas(
 			List<Integer> listTemporadas, boolean validaNotNewArticles, State levelError, StoreType store) {
 		var checks = ChecksTM.getNew();
-		var pageGaleriaDesktop = (PageGaleriaDesktop)pgGaleria;
+		var pageGaleriaDesktop = (PageGaleriaDesktopBaseNoGenesis)pgGaleria;
 		var listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM_OTHER, listTemporadas);
 		if (validaNotNewArticles) {
 			listArtWrong = PageGaleriaNoGenesis.getNotNewArticlesFrom(listArtWrong);
@@ -615,7 +619,7 @@ public class GaleriaSteps extends StepBase {
 	@Validation
 	public ChecksTM validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, StoreType store) {
 		var checks = ChecksTM.getNew();
-		var pageGaleriaDesktop = (PageGaleriaDesktop)pgGaleria;
+		var pageGaleriaDesktop = (PageGaleriaDesktopBaseNoGenesis)pgGaleria;
 		var listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
 		checks.add(
 			Check.make(
@@ -646,14 +650,14 @@ public class GaleriaSteps extends StepBase {
 			description="Seleccionamos el link <b>Más Info</b>",
 			expected="Se hace visible el aviso legal")
 	public void clickMoreInfoBannerRebajasJun2018() {
-		((PageGaleriaDesktop)pgGaleria).clickRebajasBannerHead();
+		((PageGaleriaDesktopBaseNoGenesis)pgGaleria).clickRebajasBannerHead();
 		checkAfterClickInfoRebajas();
 	}
 
 	@Validation
 	private ChecksTM checkAfterClickInfoRebajas() {
 		var checks = ChecksTM.getNew();
-		var pageGaleriaDesktop = ((PageGaleriaDesktop)pgGaleria);
+		var pageGaleriaDesktop = ((PageGaleriaDesktopBaseNoGenesis)pgGaleria);
 		int seconds = 1;
 		checks.add(
 			"<b style=\"color:blue\">Rebajas</b></br>" +

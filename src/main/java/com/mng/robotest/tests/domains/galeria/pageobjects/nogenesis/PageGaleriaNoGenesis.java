@@ -16,12 +16,12 @@ import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.LabelArticle;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.SecPreciosArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.SecTallasArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActionFav;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
@@ -333,7 +333,7 @@ public abstract class PageGaleriaNoGenesis extends PageBase implements PageGaler
 		//Cambiamos el foco de driver a la nueva pestaña que hemos creado y esperamos hasta que está disponible
 		String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
 
-		var pageFicha = PageFicha.make(channel, app, dataTest.getPais());
+		var pageFicha = PageFicha.make(channel, app, dataTest.getPais(), inputParamsSuite.getUrlBase());
 		pageFicha.isPage(10);
 
 		return detailWindowHandle;

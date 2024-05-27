@@ -1,23 +1,26 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop;
+package com.mng.robotest.tests.domains.galeria.pageobjects.genesis;
 
 import java.util.List;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
 import com.mng.robotest.testslegacy.data.Color;
+import com.mng.robotest.testslegacy.utils.ImporteScreen;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecFiltrosDesktopGenesis extends PageBase implements SecFiltros {
 
-	private final SecSelectorPreciosDesktop secSelectorPreciosDesktop = new SecSelectorPreciosDesktop();
-	
 	private static final String XP_BUTTON_FILTRAR = "//*[@data-testid='plp.filters.desktop.button']"; //
 	private static final String XP_WRAPPER = XP_BUTTON_FILTRAR + "/../.."; //
 	private static final String XP_CAPA_FILTERS = "//*[@data-testid='plp.filters.desktop.panel']"; //
-	private static final String XP_BUTTON_MOSTRAR_ARTICULOS = "//*[@data-testid='plp.filters.apply.button']"; //	
+	private static final String XP_BUTTON_MOSTRAR_ARTICULOS = "//*[@data-testid='plp.filters.apply.button']"; //
+	
+	private static final String XP_INPUT_MINIMO = "//input[@step='1']";
+	private static final String XP_INPUT_MAXIMO = "(" + XP_INPUT_MINIMO + ")[2]";
 
 	private String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) { //
 		return "//*[@data-testid='plp.filters.mobile.panel.order-']" + ordenacion.getValue() + "/..";
@@ -97,24 +100,38 @@ public class SecFiltrosDesktopGenesis extends PageBase implements SecFiltros {
 	@Override
 	public boolean isVisibleSelectorPrecios() {
 		showFilters();
-		boolean visible = secSelectorPreciosDesktop.isVisible();
+		boolean visible = state(VISIBLE, XP_INPUT_MINIMO).check();
 		hideFilters();
 		return visible;
 	}
 	
 	@Override
 	public int getMinImportFilter() {
-		return secSelectorPreciosDesktop.getMinImport(); 
+		state(VISIBLE, XP_INPUT_MINIMO).wait(2).check();
+		var minOpt = findElement(XP_INPUT_MINIMO);
+		if (minOpt.isEmpty()) {
+			return 0;
+		}
+		return getImportFilter(minOpt.get().getAttribute("value")); 
 	}
 	
 	@Override
 	public int getMaxImportFilter() {
-		return secSelectorPreciosDesktop.getMaxImport(); 
+		var maxOpt = findElement(XP_INPUT_MAXIMO);
+		if (maxOpt.isEmpty()) {
+			return 0;
+		}
+		return getImportFilter(maxOpt.get().getAttribute("value")); 
 	}	
 	
 	@Override
 	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
-		secSelectorPreciosDesktop.clickMinAndMax(margenPixelsLeft, margenPixelsRight);
+		var minSelector = getElement(XP_INPUT_MINIMO);
+		var maxSelector = getElement(XP_INPUT_MAXIMO);
+		//TODO
+		//...modificar el style --relative-start-position: 0; --relative-end-position: 1;
+		drag(minSelector, margenPixelsLeft);
+		drag(maxSelector, -margenPixelsRight);
 	}
 
 	@Override
@@ -132,6 +149,10 @@ public class SecFiltrosDesktopGenesis extends PageBase implements SecFiltros {
 	
 	private boolean isFiltersShopVisible(int seconds) {
 		return state(VISIBLE, XP_CAPA_FILTERS).wait(seconds).check();
+	}	
+	
+	private int getImportFilter(String importScreen) {
+		return (int)(ImporteScreen.getFloatFromImporteMangoScreen(importScreen));		
 	}	
 
 }

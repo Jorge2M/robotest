@@ -6,11 +6,11 @@ import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupTyp
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
-import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
 
 public class Gpo005 extends TestBase {
 
 	private final GaleriaSteps galeriaSteps = new GaleriaSteps();
+	private final CommonsGaleria commonsGaleria = new CommonsGaleria();
 	
 	@Override
 	public void execute() throws Exception {
@@ -23,21 +23,15 @@ public class Gpo005 extends TestBase {
 	}
 
 	private void clickMenu() {
-		if (isGroupNewNowSelectable()) {
+		if (commonsGaleria.isGroupNewNowSelectable()) {
 			clickGroup(NEW_NOW);
 		} else {
 			clickMenu(JERSEIS_Y_CARDIGANS_SHE);
 		}
 	}
-
-	private boolean isGroupNewNowSelectable() {
-		return 
-			app==shop && !channel.isDevice() &&	
-			new GroupWeb(NEW_NOW).isPresent();
-	}
 	
 	private void selectPricesInterval() throws Exception {
-		galeriaSteps.getSecSelectorPreciosSteps().selectInterval();
+		galeriaSteps.selectPricesInterval();
 	}
 	
 	private void clickSubmenu() {

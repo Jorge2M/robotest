@@ -17,9 +17,10 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.NumColumnas;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActionFav;
@@ -32,6 +33,8 @@ import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
 
 public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria {
 
+	SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());	
+	
 	private static final String XP_HEADER = "//*[@data-testid='plp.products.list.h1Seo']";
 	private static final String XP_LISTA_ARTICULOS = "//*[@data-testid[contains(.,'plp.products.list')]]//ul";
 	public static final String XP_ARTICULO = XP_LISTA_ARTICULOS + "//li[@data-slot]";
@@ -41,7 +44,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	private static final String XP_LINK_2_COLUMNAS = "//*[@data-testid='column-selector-2']";
 	private static final String XP_LINK_4_COLUMNAS = "//*[@data-testid='column-selector-4']";
 	private static final String XP_TITLE_ARTICLE = "//p[@class[contains(.,'productTitle')]]";
-
+	
 	@Override
 	public String getXPathArticulo() {
 		return XP_ARTICULO;
@@ -230,7 +233,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		String galeryWindowHandle = driver.getWindowHandle();
 		new UtilsMangoTest().openLinkInNewTab(article);
 		String detailWindowHandle = switchToAnotherWindow(driver, galeryWindowHandle);
-		var pageFicha = PageFicha.make(channel, app, dataTest.getPais());
+		var pageFicha = PageFicha.make(channel, app, dataTest.getPais(), inputParamsSuite.getUrlBase());
 		pageFicha.isPage(10);
 		return detailWindowHandle;
 	}
@@ -240,6 +243,30 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return state(VISIBLE, XP_HEADER).check();
 	}
 	
+	@Override
+	public void showFilters() {
+		secFiltros.showFilters();
+	}
+	@Override
+	public void acceptFilters() {
+		secFiltros.acceptFilters();
+	}	
+	@Override
+	public boolean isVisibleSelectorPrecios() {
+		return secFiltros.isVisibleSelectorPrecios();
+	}
+	@Override
+	public int getMinImportFilter() {
+		return secFiltros.getMinImportFilter();
+	}
+	@Override
+	public int getMaxImportFilter() {
+		return secFiltros.getMaxImportFilter();
+	}
+	@Override
+	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
+		secFiltros.clickIntervalImportFilter(margenPixelsLeft, margenPixelsRight);
+	}
 	
 	private List<WebElement> getArticulos() {
 		return getElements(getXPathArticulo());

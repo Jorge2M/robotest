@@ -6,15 +6,15 @@ import com.mng.robotest.testslegacy.beans.Pais;
 
 import static com.mng.robotest.tests.conf.AppEcom.*;
 import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*;
-import static com.mng.robotest.testslegacy.data.PaisShop.LIECHTENSTEIN;;
+import static com.mng.robotest.testslegacy.data.PaisShop.LIECHTENSTEIN;
 
 public class Gpo008 extends TestBase {
 
-	private final Pais montenegro = LIECHTENSTEIN.getPais();
+	private final Pais liechtenstein = LIECHTENSTEIN.getPais();
 	private final GaleriaSteps galeriaSteps;
 	
 	public Gpo008() {
-		dataTest.setPais(montenegro);
+		dataTest.setPais(liechtenstein);
 		galeriaSteps = new GaleriaSteps();
 	}
 	

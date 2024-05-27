@@ -8,7 +8,7 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktop.TypeArticleDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.SecTallasArticulo;
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;

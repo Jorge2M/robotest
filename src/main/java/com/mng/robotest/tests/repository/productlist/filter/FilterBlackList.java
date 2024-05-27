@@ -8,7 +8,7 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 public class FilterBlackList implements Filter {
 	
 	private static final List<String> BLACK_LIST = Arrays.asList(
-		"47040356" //El artículo está casi agotado en todas las tallas
+		"67085722" //Tiene problemas en CloudTest
 	);
 //	private static final List<String> BLACK_LIST = new ArrayList<>();
 	

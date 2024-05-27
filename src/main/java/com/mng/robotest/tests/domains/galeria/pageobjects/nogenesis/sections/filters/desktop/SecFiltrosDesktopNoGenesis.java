@@ -4,15 +4,15 @@ import java.util.List;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
 import com.mng.robotest.testslegacy.data.Color;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecFiltrosDesktopNoGenesis extends PageBase implements SecFiltros {
 
-	private final SecSelectorPreciosDesktop secSelectorPreciosDesktop = new SecSelectorPreciosDesktop();
+	private final SecSelectorPreciosDesktopNoGenesis secSelectorPreciosDesktop = new SecSelectorPreciosDesktopNoGenesis();
 	
 	private static final String XP_WRAPPER = "//div[@id='catalogMenu']";
 	private static final String XP_BUTTON_FILTRAR = "//button[@data-testid='plp.filters.desktop.button']";

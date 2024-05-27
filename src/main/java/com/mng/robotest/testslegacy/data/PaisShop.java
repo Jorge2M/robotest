@@ -145,7 +145,7 @@ public enum PaisShop {
 	MALI("232"),
 	CHAD("244"),
 	RWANDA("324"),
-	ETHIOPIA("344"),
+	ETHIOPIA("334"),
 	UGANDA("350"),
 	TANZANIA("352"),
 	MOZAMBIQUE("366"),

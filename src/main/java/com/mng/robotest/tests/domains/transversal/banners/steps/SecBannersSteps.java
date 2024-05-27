@@ -138,7 +138,7 @@ public class SecBannersSteps extends StepBase {
 	private boolean checksStandardBanners() {
 		if (!pageLanding.isSeccArtBanners() &&
 			!pageLanding.hayImgsEnContenido()) {
-			var pageFicha = PageFicha.make(channel, app, dataTest.getPais());
+			var pageFicha = PageFicha.make(channel, app, dataTest.getPais(), inputParamsSuite.getUrlBase());
 			return pageFicha.isPage(0);
 		}
 		return true; 

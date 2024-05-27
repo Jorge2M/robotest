@@ -75,31 +75,6 @@ public class PageGaleriaDesktopGenesis extends PageGaleriaGenesis {
 		throw new UnsupportedOperationException();
     }
 	
-	@Override
-	public boolean isVisibleSelectorPrecios() {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public int getMinImportFilter() {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public int getMaxImportFilter() {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void showFilters() {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void acceptFilters() {
-		throw new UnsupportedOperationException();
-	}	
-	
 	private void forcePagination() {
 		moveToElement("(" + getXPathArticulo() + ")[5]");
 	}

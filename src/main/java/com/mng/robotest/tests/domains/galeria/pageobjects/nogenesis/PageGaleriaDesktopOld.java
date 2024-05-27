@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
-public class PageGaleriaDesktopOld extends PageGaleriaDesktop {
+public class PageGaleriaDesktopOld extends PageGaleriaDesktopBaseNoGenesis {
 
 	public static final String XP_ARTICULO = "//li[@id[contains(.,'product-key-id')]]";
 	private static final String XP_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
