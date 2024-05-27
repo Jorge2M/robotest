@@ -6,7 +6,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageEmpresa extends PageBase implements PageFromFooter {
 	
-	private static final String XP_FOR_ID_PAGE_NEW = "//img[@src[contains(.,'empresa-mango')]]";
+	private static final String XP_FOR_ID_PAGE_NEW = "//a[@data-text='Nosotros']";
 	
 	@Override
 	public String getName() {

@@ -19,7 +19,7 @@ public class SecFooterSteps extends StepBase {
 	@Validation 
 	public ChecksTM checkLinksFooter() { 
 		var checks = ChecksTM.getNew();
-		for (var footerLink : FooterLink.getFooterLinksFiltered(app, channel)) {
+		for (var footerLink : FooterLink.getFooterLinksFiltered(app, channel, dataTest.getPais())) {
 			checks.add(
 				"Aparecen el link <b>" + footerLink + "</b> en el footer",
 				secFooter.checkFooter(footerLink));
@@ -51,14 +51,14 @@ public class SecFooterSteps extends StepBase {
 			checks.add(
 				"Aparece la página <b>" + pageObject.getName() + "</b> " + getLitSecondsWait(seconds),
 				pageObject.isPageCorrectUntil(seconds), WARN);
-			if (typeFooter.pageInNewTab(app)) {
+			if (typeFooter.pageInNewTab(app, dataTest.getPais())) {
 				checks.add(
 					"Aparece la página en una ventana aparte",
 					newWindowInNewTab, WARN);		
 			}
 		}
 		finally {
-			if (typeFooter.pageInNewTab(app) &&
+			if (typeFooter.pageInNewTab(app, dataTest.getPais()) &&
 				closeAtEnd && newWindowInNewTab) {
 				driver.close();
 				driver.switchTo().window(windowFatherHandle);

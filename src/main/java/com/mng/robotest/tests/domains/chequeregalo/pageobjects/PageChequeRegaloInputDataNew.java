@@ -34,11 +34,11 @@ public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData impl
 
 	private enum ElementCheque implements ElementPage {
 		TITULO(
-			"//h1[text()='Tarjeta Regalo']",
+			"//h1[text()='Tarjeta regalo']",
 			null),
 		PAGINA_FORM(
-			"//h1[text()[contains(.,'Tarjeta Regalo')]]",
-			"//h1[text()[contains(.,'Tarjeta Regalo')]]"),
+			"//h1[text()[contains(.,'Tarjeta regalo')]]",
+			"//h1[text()[contains(.,'Tarjeta regalo')]]"),
 		COMPRAR_AHORA(
 			"//button[text()[contains(.,'Comprar ahora')]]",
 			null);

@@ -25,48 +25,48 @@ public class SecFooter extends PageBase {
 	
 	//TODO pendiente data-testids de Outlet (Genesis) solicitados a GPS mediante tícket ?????
 	public enum FooterLink {
-		AYUDA(FOOTER_ALL, CHANNEL_ALL, 
-				"//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", 
-				"//a[text()='Ayuda']", false), 
+		AYUDA(FOOTER_ALL, CHANNEL_ALL,
+			"//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", 
+			"//a[text()='Ayuda']", false, true), 
 		MIS_COMPRAS(FOOTER_ALL, CHANNEL_ALL, 
-				"//a[@data-ga-label='miscompras']", 
-				"//a[text()='Mis compras']", false), 
-		DEVOLUCIONES(FOOTER_SHOP, CHANNEL_ALL, 
-				"//a[@data-ga-label='devoluciones' and text()[contains(.,'Devoluciones')]]", 
-				"//a[text()='Devoluciones']", false), 
+			"//a[@data-ga-label='miscompras']", 
+			"//a[text()='Mis compras']", false, true), 
+		DEVOLUCIONES(FOOTER_SHOP, CHANNEL_ALL,
+			"//a[@data-ga-label='devoluciones' and text()[contains(.,'Devoluciones')]]", 
+			"//a[text()='Devoluciones']", false, true), 
 		TIENDAS(FOOTER_SHOP, CHANNEL_ALL, 
-				"//a[@data-ga-label='buscarTiendas']", 
-				"//a[text()='Tiendas']", false),
+			"//a[@data-ga-label='buscarTiendas']", 
+			"//a[text()='Tiendas']", false, false),
 		CHEQUE_REGALO(FOOTER_SHOP, CHANNEL_DESKTOP, 
-				"//a[@data-ga-label='cheques' and text()[contains(.,'egalo')]]", 
-				"//a[text()='Tarjeta Regalo']", false),
+			"//a[@data-ga-label='cheques' and text()[contains(.,'egalo')]]", 
+			"//a[text()='Tarjeta regalo']", false, true),
 		CHEQUE_REGALO_OLD(FOOTER_SHOP, CHANNEL_DESKTOP, 
-				"//a[@data-ga-label='cheques']", 
-				"//a[text()='Tarjeta Regalo']", false),
+			"//a[@data-ga-label='cheques']", 
+			"//a[text()='Tarjeta regalo']", false, true),
 		APPS(FOOTER_SHOP, CHANNEL_ALL, 
-				"//a[@data-ga-label='apps' and text()[contains(.,'Apps')]]", 
-				"//a[text()='Apps']", false), 
-		EMPRESA(FOOTER_SHOP, CHANNEL_DESKTOP, 
-				"//a[@data-ga-label='pieEmpresa' and text()[contains(.,'Empresa')]]", 
-				"//a[text()='Empresa']", true), 
+			"//a[@data-ga-label='apps' and text()[contains(.,'Apps')]]", 
+			"//a[text()='Apps']", false, false), 
+		EMPRESA(FOOTER_SHOP, CHANNEL_DESKTOP,
+			"//a[@data-ga-label='pieEmpresa' and text()[contains(.,'Empresa')]]", 
+			"//a[text()='Empresa']", true, true), 
 		FRANQUICIAS(FOOTER_SHOP, CHANNEL_DESKTOP, 
-				"//a[@data-ga-label='pieFranquicias' and text()[contains(.,'Franquicias')]]", 
-				"//a[text()='Franquicias']", true), 
+			"//a[@data-ga-label='pieFranquicias' and text()[contains(.,'Franquicias')]]", 
+			"//a[text()='Franquicias']", true, false), 
 		TRABAJA_CON_NOSOTROS(FOOTER_ALL, CHANNEL_ALL, 
-				"//a[@data-ga-label[contains(.,'pieTrabajar')] and text()[contains(.,'Trabaja')]]", 
-				"//a[text()='Trabaja con nosotros']", true), 
-		PRENSA(FOOTER_ALL, CHANNEL_DESKTOP, 
-				"//a[@data-ga-label='pressroom' and text()[contains(.,'Prensa')]]", 
-				"//a[text()='Prensa']", true), 
+			"//a[@data-ga-label[contains(.,'pieTrabajar')] and text()[contains(.,'Trabaja')]]", 
+			"//a[text()='Trabaja con nosotros']", true, true), 
+		PRENSA(FOOTER_ALL, CHANNEL_DESKTOP,
+			"//a[@data-ga-label='pressroom' and text()[contains(.,'Prensa')]]", 
+			"//a[text()='Prensa']", true, true), 
 		MANGO_OUTLET(FOOTER_SHOP, CHANNEL_ALL, 
-				"//a[@data-ga-label='outlet' and text()[contains(.,'Mango Outlet')]]", 
-				"//a[text()='Mango Outlet']", true),
+			"//a[@data-ga-label='outlet' and text()[contains(.,'Mango Outlet')]]", 
+			"//a[text()='Mango Outlet']", true, true),
 		ENVIO(FOOTER_OUTLET, CHANNEL_ALL, 
-				"//a[@data-ga-label='envio' and text()[contains(.,'Envío')]]", 
-				"//a[text()='Envíos']", false), 
+			"//a[@data-ga-label='envio' and text()[contains(.,'Envío')]]", 
+			"//a[text()='Envíos']", false, false), 
 		GUIA_DE_TALLAS(FOOTER_OUTLET, CHANNEL_ALL, 
-				"//a[@data-ga-label='guiaTallas']", 
-				"//a[text()='Guía de tallas']", true);
+			"//a[@data-ga-label='guiaTallas']", 
+			"//a[text()='Guía de tallas']", true, false);
 		
 		List<AppEcom> appList;
 		List<Channel> channel;
@@ -75,15 +75,17 @@ public class SecFooter extends PageBase {
 		boolean pageInNewTab;
 		private String xpCapa = "//div[@id='nav-footer']";
 		private String xpCapaGenesis = "//footer";
+		private boolean isInGenesis;
 		
 		private FooterLink(
 				List<AppEcom> appList, List<Channel> channel, String xpath, String xpathGenesis, 
-				boolean pageInNewTab) {
+				boolean pageInNewTab, boolean isInGenesis) {
 			this.appList = appList;
 			this.channel = channel;
 			this.xpath = xpath;
 			this.xpathGenesis = xpathGenesis;
 			this.pageInNewTab = pageInNewTab;
+			this.isInGenesis = isInGenesis;
 		}
 		
 		public String getXPathCapa(AppEcom app, Pais pais) {
@@ -104,18 +106,29 @@ public class SecFooter extends PageBase {
 			return getXPathCapa(app, pais) + getXPathLink(app, pais);
 		}
 		
-		public boolean pageInNewTab(AppEcom app) {
-			if (app==AppEcom.outlet) {
+		public boolean pageInNewTab(AppEcom app, Pais pais) {
+			if (isGenesis(app, pais)) {
 				return false;
 			}
 			return this.pageInNewTab;
 		}
 		
-		public static List<FooterLink> getFooterLinksFiltered(AppEcom app, Channel channel) {
+		public boolean isInGenesis() {
+			return isInGenesis;
+		}
+		
+		public static List<FooterLink> getFooterLinksFiltered(AppEcom app, Channel channel, Pais pais) {
 			List<FooterLink> listLinksToReturn = new ArrayList<>();
 			for (var footerLink : FooterLink.values()) {
-				if (footerLink.appList.contains(app) && footerLink.channel.contains(channel)) {
-					listLinksToReturn.add(footerLink);
+				if (footerLink.appList.contains(app) && 
+					footerLink.channel.contains(channel)) {
+					if (!footerLink.isGenesis(app, pais)) {
+						listLinksToReturn.add(footerLink);
+					} else {
+						if (footerLink.isInGenesis()) {
+							listLinksToReturn.add(footerLink);
+						}
+					}
 				}
 			}
 			return listLinksToReturn;

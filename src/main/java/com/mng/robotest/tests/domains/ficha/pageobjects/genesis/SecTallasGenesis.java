@@ -211,8 +211,10 @@ public class SecTallasGenesis extends PageBase {
 	}
 	
 	public void selectFirstTallaAvailable() {
-		unfoldTallas();
-		click(getXPathTallaAvailable()).exec();
+		if (!isTallaUnica()) {
+			unfoldTallas();
+			click(getXPathTallaAvailable()).exec();
+		}
 	}
 	
 	public String getTallaAlf(int position) {
