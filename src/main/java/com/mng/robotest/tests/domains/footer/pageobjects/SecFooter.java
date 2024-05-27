@@ -122,9 +122,11 @@ public class SecFooter extends PageBase {
 		}
 		
 		private boolean isGenesis(AppEcom app, Pais pais) {
-			return app==AppEcom.outlet || pais.isGaleriaGenesis(app);
+			return 
+				!isEnvPRO() || 
+				app==AppEcom.outlet || 
+				pais.isGaleriaGenesis(app);
 		}
-
 	}
 	
 	private static final String XP_CAMBIO_PAIS_SHOP = "//div[@class[contains(.,'modalCambioPaisShow')]]";

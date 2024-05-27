@@ -6,7 +6,6 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.PageFichaDesktopNoGenesis;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.PageFichaDeviceNoGenesis;
-import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ColorType;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders.Slider;
 import com.mng.robotest.tests.domains.ficha.pageobjects.genesis.PageFichaGenesis;
@@ -72,8 +71,7 @@ public interface PageFicha {
 	public boolean isVisibleColorCodeStickyContent(String colorCode);
 	
 	public static PageFicha make(Channel channel, AppEcom app, Pais pais) {
-		if (pais.isFichaGenesis(app) || 
-			!PageBase.isEnvPRO()) {
+		if (pais.isFichaGenesis(app)) {
 			return new PageFichaGenesis();
 		}
 		if (channel.isDevice()) {

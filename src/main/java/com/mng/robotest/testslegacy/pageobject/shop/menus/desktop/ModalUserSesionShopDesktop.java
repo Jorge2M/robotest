@@ -36,7 +36,7 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		
 		MANGO_LIKES_YOU (
 			XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mango_likes_you')]]",
-			""),
+			XP_CAPA_MENUS_GENESIS + "//a[@data-testid='header.userSubmenu.mango_likes_you']"),
 		AYUDA (
 			XP_CAPA_MENUS + "//div[@data-testid[contains(.,'ayuda')]]",
 			XP_CAPA_MENUS_GENESIS + "//a[@data-testid='header.userSubmenu.help']"),

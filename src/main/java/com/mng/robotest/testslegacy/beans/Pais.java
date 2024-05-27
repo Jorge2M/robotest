@@ -310,7 +310,7 @@ public class Pais implements Serializable {
 	}
 	
 	public boolean isFichaGenesis(AppEcom app) {
-		return getTiendasFichaGenesis().contains(app);
+		return  !PageBase.isEnvPRO() || getTiendasFichaGenesis().contains(app);
 	}
 	
 	private List<AppEcom> getTiendasFichaGenesis() {
