@@ -10,8 +10,6 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.transversal.banners.pageobjects.BannerObjectFactory;
 import com.mng.robotest.tests.domains.transversal.banners.pageobjects.BannerType;
-import com.mng.robotest.tests.domains.transversal.banners.pageobjects.ManagerBannersScreen;
-import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuLateralDesktop.Element;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -26,7 +24,6 @@ public class PageLanding extends PageBase {
 			"@data-testid='landings.home.brand' or " + 
 			"@class[contains(.,'HeroBannerPrimaryLines')]]"; //PRO
 	
-	private static final String XP_SLIDER = "//section[@class='entitieswrapper']//div[@class[contains(.,'vsv-slide')]]";
 	private static final String XP_EDIT_ITEM = "//div[@class[contains(.,'item-edit')] and @data-id]";
 	private static final String XP_MAP_T1 = "//map[@name[contains(.,'item_')]]/..";
 	private static final String XP_MAP_T2 = "//img[@class[contains(.,'responsive')] and @hidefocus='true']";
@@ -40,6 +37,12 @@ public class PageLanding extends PageBase {
 		}
 		return XP_MULTIMARCA_SHOP;
 	}
+
+	private String getXPathMainContent() {
+		String mainContentNoGenesis = "//div[@class[contains(.,'main-content')] and @data-pais='" + dataTest.getCodigoPais() + "']";
+		String mainContentGenesis = "//*[@data-testid='changeButton']//span[text()[contains(.,'" + dataTest.getNombrePais() + "')]]";
+		return "(" + mainContentNoGenesis + " | " + mainContentGenesis + ")";
+	}
 	
 	public boolean isPageMultimarca() {
 		return isPageMultimarca(0);
@@ -50,21 +53,23 @@ public class PageLanding extends PageBase {
 	}
 	
 	public boolean isPageDependingCountry() {
-		//Comprobamos el número de líneas e incluimos una excepción en Chile/Perú/Paraguay (códigos 512/504/520) el cual tiene 4 líneas pero se define como "home"
-		int numLineas = dataTest.getPais().getShoponline().getNumLineasTiendas(app);
-		if (numLineas < 3 || 
-			dataTest.getCodigoPais().equals("512") || 
-			dataTest.getCodigoPais().equals("504") || 
-			dataTest.getCodigoPais().equals("520")) {
-			if(!driver.getPageSource().contains("home")) {
-				return false;
-			}
-		}  else {
-			if (!driver.getPageSource().contains("homeMarcas")) {
-				return false;
-			}
-		}
-		return true;
+		return state(PRESENT, XP_MULTIMARCA_SHOP).check();
+//		//Comprobamos el número de líneas e incluimos una excepción en Chile/Perú/Paraguay (códigos 512/504/520) el cual tiene 4 líneas pero se define como "home"
+//		int numLineas = dataTest.getPais().getShoponline().getNumLineasTiendas(app);
+//		if (numLineas < 3 || 
+//			dataTest.getCodigoPais().equals("512") || 
+//			dataTest.getCodigoPais().equals("504") || 
+//			dataTest.getCodigoPais().equals("520")) {
+//			if(!driver.getPageSource().contains("home")) {
+//				return false;
+//			}
+//		}  else {
+//			if (!state(PRESENT, "//*[@data-testid='landings.home.multibrand']").check() && //Genesis
+//				!driver.getPageSource().contains("homeMarcas")) { //No Genesis
+//				return false;
+//			}
+//		}
+//		return true;
 	}	
 	
 	public String getCodigoPais() {
@@ -74,37 +79,13 @@ public class PageLanding extends PageBase {
 		return "";
 	}
 	
-	public boolean haySliders() {
-		return state(VISIBLE, XP_SLIDER).check();
-	}
-	
 	public boolean hayMaps() {
-		var listaMaps = getListaMaps();
-		return (listaMaps!=null && !listaMaps.isEmpty());
+		return !getListaMaps().isEmpty();
 	}
 	
 	public boolean hayItemsEdits() {
 		var listaItemsEdits = getListaItemsEdit();
 		return (listaItemsEdits!=null && !listaItemsEdits.isEmpty());
-	}
-	
-	public List<WebElement> getListaMaps() {
-		// Seleccionamos cada uno de los banners visibles
-		List<WebElement> listMaps;
-		listMaps = getElementsVisible(XP_MAP_T1);
-		listMaps.addAll(getElementsVisible(XP_MAP_T2));
-		return listMaps;
-	}
-	
-	public List<WebElement> getListaItemsEdit() {
-		List<WebElement> listItemsEdits;
-		listItemsEdits = getElementsVisible(XP_EDIT_ITEM);
-		return listItemsEdits;		
-	}
-	
-	public boolean hayIframes() {
-		List<WebElement> listaIFrames = getElementsVisible("//iframe");
-		return (listaIFrames!=null && !listaIFrames.isEmpty());
 	}
 	
 	public boolean hayImgsEnContenido() {
@@ -150,50 +131,6 @@ public class PageLanding extends PageBase {
 		return banners.isVisibleAnyBanner();
 	}
 	
-	public boolean isSomeElementVisibleInPage(
-			List<Element> elementsCanBeContained, Channel channel, int seconds) {
-		for (int i=0; i<seconds; i++) {
-			if (isSomeElementVisibleInPage(elementsCanBeContained, channel)) {
-				return true;
-			}
-			waitMillis(1000);
-		}
-		return false;
-	}
-		
-	private boolean isSomeElementVisibleInPage(List<Element> elementsCanBeContained, Channel channel) {
-		for (var element : elementsCanBeContained) {
-			boolean elementContained = false;
-			switch (element) {
-			case ARTICLE:
-				var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
-				elementContained = pageGaleria.isVisibleArticleUntil(1, 3);
-				break;
-			case CAMPAIGN:
-				elementContained = ManagerBannersScreen.isBanners();
-				break;
-			case SLIDER:
-				elementContained = haySliders();
-				break;
-			case MAP:
-				elementContained = hayMaps();
-				break;
-			case IFRAME:
-				elementContained = hayIframes();
-				break;
-			}
-				
-			if (elementContained) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	private String getXPathMainContent() {
-		return ("//div[@class[contains(.,'main-content')] and @data-pais='" + dataTest.getCodigoPais() + "']");
-	}
-
 	public boolean isPresentMainContent(int seconds) {
 		return state(PRESENT, getXPathMainContent()).wait(seconds).check();
 	}
@@ -204,6 +141,19 @@ public class PageLanding extends PageBase {
 	
 	public boolean isVisibleAnyElementLoyalty() {
 		return state(VISIBLE, XP_LOYALTY_ELEMENT).check();
+	}
+	
+	private List<WebElement> getListaMaps() {
+		List<WebElement> listMaps;
+		listMaps = getElementsVisible(XP_MAP_T1);
+		listMaps.addAll(getElementsVisible(XP_MAP_T2));
+		return listMaps;
+	}
+	
+	private List<WebElement> getListaItemsEdit() {
+		List<WebElement> listItemsEdits;
+		listItemsEdits = getElementsVisible(XP_EDIT_ITEM);
+		return listItemsEdits;		
 	}
 
 }
