@@ -363,7 +363,7 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 		secFitFinder.close();
 	}
 	
-	private static final String XP_ADD_BORDADO = "//div[@class[contains(.,'Customization')]//button";
+	private static final String XP_ADD_BORDADO = "//div[@class[contains(.,'Customization')]]//button";
 	
 	@Override
 	public boolean isLinkAddBordado(int seconds) {
