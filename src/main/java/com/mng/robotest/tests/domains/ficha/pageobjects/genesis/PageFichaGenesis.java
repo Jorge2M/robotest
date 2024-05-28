@@ -329,10 +329,12 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 		//No aparece en la nueva Ficha Genesis
 		throw new UnsupportedOperationException();
 	}
+	
+	private static final String XP_KC_SAFETY = "//*[@data-testid='pdp.productDetails.kcSafety']";
+	
 	@Override
 	public boolean isVisibleBlockKcSafety() {
-		//No aparece en la nueva Ficha Genesis
-		throw new UnsupportedOperationException();
+		return state(VISIBLE, XP_KC_SAFETY).check();
 	}
 	
 	private static final String XP_MODAL_DATOS_ENVIO = "//dialog[@id='shipping-returns-modal']";
