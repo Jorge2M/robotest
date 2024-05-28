@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.ficha.steps;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
@@ -18,41 +17,8 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecModalPersonalizacionSteps extends StepBase {
 
-	public boolean checkArticleCustomizable() {
-		return checkArticleCustomizable(DEFECT);
-	}
-	
-	public boolean checkArticleCustomizable(State levelError) {
-		var checks = checkAreArticleCustomizable(levelError);
-		for (var check : checks.getListChecks()) {
-			if (!check.isOvercomed()) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
 	@Validation
-	private ChecksTM checkAreArticleCustomizable(State levelError) {
-		var checks = ChecksTM.getNew();
-		checks.add(
-			"El artículo es personalizable (aparece el link \"Añadir bordado\")",
-			state(PRESENT, ModalElement.ANADIR_BORDADO_LINK.getBy(channel)).wait(1).check(), 
-			levelError);
-		return checks;
-	}
-
-	@Step(
-		description="Seleccionamos el link <b>Añadir bordado</b>",
-		expected="Aparece el modal para la personalización de la prenda")
-	public void selectLinkPersonalizacion () {
-		click(ModalElement.ANADIR_BORDADO_LINK.getBy(channel)).type(JAVASCRIPT).exec();
-		validateModal();
-		checksDefault();
-	}
-	
-	@Validation
-	private ChecksTM validateModal() {
+	public ChecksTM checkModal() {
 		int seconds = 3;
 		var checks = ChecksTM.getNew();
 		checks.add(

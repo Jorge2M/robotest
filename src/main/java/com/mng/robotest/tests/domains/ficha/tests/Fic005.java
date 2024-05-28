@@ -41,7 +41,7 @@ public class Fic005 extends TestBase {
  		searchAndCheckArticlePersonalizable();
 		
 		fichaSteps.selectFirstTallaAvailable();
-		mdPersonalizacionSteps.selectLinkPersonalizacion();
+		fichaSteps.selectLinkPersonalizacion();
 		mdPersonalizacionSteps.selectIconCustomization();
 		mdPersonalizacionSteps.selectFirstIcon();
 		mdPersonalizacionSteps.validateIconSelectedDesktop();
@@ -63,7 +63,7 @@ public class Fic005 extends TestBase {
 		for (int i=1; i<=numColors; i++) {
 			fichaSteps.selectColor(i);
 			State levelError = (i==numColors) ? DEFECT : INFO;
-			if (mdPersonalizacionSteps.checkArticleCustomizable(levelError)) {
+			if (fichaSteps.checkArticleCustomizable(levelError)) {
 				break;
 			}
 		}

@@ -11,7 +11,7 @@ public class SecModalPersonalizacion extends PageBase {
 
 	public enum ModalElement implements ElementPage {
 		SECCION("//div[@class='customization-form']"),
-		ANADIR_BORDADO_LINK("//button[@class='customization-btn']", "//button[@id='productFormPersonalize']"),
+//		ANADIR_BORDADO_LINK("//button[@class='customization-btn']", "//button[@id='productFormPersonalize']"),
 		PANTALLA_PREVIA("div[@class='customization-action']"),
 		STEP_PROOF("//li[@class[contains(.,'breadcrumb--active')]]"),
 		STEP1_PROOF("//*[text()[contains(.,'1. ')]]"),

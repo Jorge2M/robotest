@@ -85,6 +85,9 @@ public interface PageFicha {
 	public boolean isInvisibleGuiaTallas(int seconds);
 	public void closeGuiaTallas();
 	
+	public boolean isLinkAddBordado(int seconds);
+	public void clickAddBordado();
+	
 	public static PageFicha make(Channel channel, AppEcom app, Pais pais) {
 		if (pais.isFichaGenesis(app)) {
 			return new PageFichaGenesis();

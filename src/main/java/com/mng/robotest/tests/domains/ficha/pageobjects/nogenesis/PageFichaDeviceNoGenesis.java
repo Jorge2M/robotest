@@ -147,6 +147,17 @@ public class PageFichaDeviceNoGenesis extends PageFichaNoGenesis {
 	public boolean isVisibleColorCodeStickyContent(String colorCode) {
 		return false;
 	}	
+	
+	private static final String XP_ADD_BORDADO = "//button[@id='productFormPersonalize']";
+	
+	@Override
+	public boolean isLinkAddBordado(int seconds) {
+		return state(VISIBLE, XP_ADD_BORDADO).wait(seconds).check();
+	}	
+	@Override
+	public void clickAddBordado() {
+		click(XP_ADD_BORDADO).exec();
+	}
 
 	public boolean isVisibleUltimosProductosSection() {
 		return state(VISIBLE, XP_ULTIMOS_PRODUCTOS_SECTION).check();

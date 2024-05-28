@@ -118,4 +118,15 @@ public class PageFichaDesktopNoGenesis extends PageFichaNoGenesis {
 		return false;
 	}
 	
+	private static final String XP_ADD_BORDADO = "//button[@class='customization-btn']";
+	
+	@Override
+	public boolean isLinkAddBordado(int seconds) {
+		return state(VISIBLE, XP_ADD_BORDADO).wait(seconds).check();
+	}
+	@Override
+	public void clickAddBordado() {
+		click(XP_ADD_BORDADO).exec();
+	}	
+	
 }

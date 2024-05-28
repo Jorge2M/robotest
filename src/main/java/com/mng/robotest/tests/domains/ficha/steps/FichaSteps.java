@@ -635,4 +635,36 @@ public class FichaSteps extends StepBase {
 		return secProductDescOldSteps;
 	}
 
+	public boolean checkArticleCustomizable() {
+		return checkArticleCustomizable(DEFECT);
+	}
+	
+	public boolean checkArticleCustomizable(State levelError) {
+		var checks = checkAreArticleCustomizable(levelError);
+		for (var check : checks.getListChecks()) {
+			if (!check.isOvercomed()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	@Validation
+	private ChecksTM checkAreArticleCustomizable(State levelError) {
+		var checks = ChecksTM.getNew();
+		checks.add(
+			"El artículo es personalizable (aparece el link \"Añadir bordado\")",
+			pageFicha.isLinkAddBordado(1), levelError);
+		return checks;
+	}
+
+	@Step(
+		description="Seleccionamos el link <b>Añadir bordado</b>",
+		expected="Aparece el modal para la personalización de la prenda")
+	public void selectLinkPersonalizacion () {
+		pageFicha.clickAddBordado();
+		new SecModalPersonalizacionSteps().checkModal();
+		checksDefault();
+	}
+	
 }
