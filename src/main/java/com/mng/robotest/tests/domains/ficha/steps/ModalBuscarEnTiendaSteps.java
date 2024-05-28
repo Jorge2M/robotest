@@ -4,26 +4,26 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalBuscadorTiendas;
+import com.mng.robotest.testslegacy.pageobject.shop.modales.buscarentienda.ModalBuscarEnTienda;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
-public class ModalBuscadorTiendasSteps extends StepBase {
+public class ModalBuscarEnTiendaSteps extends StepBase {
 
-	private final ModalBuscadorTiendas modalBuscadorTiendas = new ModalBuscadorTiendas();
+	private final ModalBuscarEnTienda modalBuscarEnTienda = ModalBuscarEnTienda.make(app, dataTest.getPais());
 	
 	@Validation
-	public ChecksTM validaBusquedaConResultados() {
+	public ChecksTM checkBusquedaConResultados() {
 		var checks = ChecksTM.getNew();
-		int seconds = 3;
+		int seconds = 5;
 	 	checks.add(
 			"La capa de búsqueda es visible<br> " + getLitSecondsWait(seconds),
-			modalBuscadorTiendas.isVisible(seconds), WARN);
+			modalBuscarEnTienda.isVisible(seconds), WARN);
 	 	
 	 	var state = isPRO()? DEFECT:WARN;
 	 	checks.add(
 			"Se ha localizado alguna tienda " + getLitSecondsWait(seconds),
-			modalBuscadorTiendas.isPresentAnyTiendaUntil(seconds), state);
+			modalBuscarEnTienda.isPresentAnyTiendaUntil(seconds), state);
 	 	
 		return checks;
 	}
@@ -32,12 +32,12 @@ public class ModalBuscadorTiendasSteps extends StepBase {
 		description="Cerramos la capa correspondiente al resultado del buscador", 
 		expected="La capa correspondiente a la búsqueda desaparece")
 	public void close() {
-		modalBuscadorTiendas.close();
+		modalBuscarEnTienda.close();
 		checkModalSearchInvisible();
 	}
 	
 	@Validation (description="La capa correspondiente a la búsqueda desaparece")
 	private boolean checkModalSearchInvisible() {
-		return modalBuscadorTiendas.isInvisible(1);
+		return modalBuscarEnTienda.isInvisible(1);
 	}
 }

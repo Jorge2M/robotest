@@ -766,6 +766,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<fichagenesis>shop,outlet</fichagenesis>
 <micuentanew>shop,outlet</micuentanew>
 </pais>
 
@@ -1499,6 +1500,7 @@
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
 	nombre="Płatność przy odbiorze" namefilter="Platnosc przy odbiorze" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>S</multidireccion>
+<fichagenesis>shop,outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Portugal" codigo="010">

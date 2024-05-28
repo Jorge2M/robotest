@@ -83,18 +83,13 @@ public class PageFichaDesktopNoGenesis extends PageFichaNoGenesis {
 	}
 
 	@Override
-	public String getNameLinkBuscarEnTienda() {
-		return "Link Disponibilidad en tienda";
-	}
-
-	@Override
 	public boolean isVisibleBuscarEnTiendaLink() {
-		return secBolsaButtonAndLinks.checkLinkInState(DISPONIBILIDAD_TIENDA, VISIBLE);
+		return checkLinkInState(DISPONIBILIDAD_TIENDA, VISIBLE);
 	}
 
 	@Override
 	public void selectBuscarEnTiendaLink() {
-		secBolsaButtonAndLinks.clickLinkAndWaitLoad(DISPONIBILIDAD_TIENDA);
+		clickLink(DISPONIBILIDAD_TIENDA);
 	}
 
 	@Override

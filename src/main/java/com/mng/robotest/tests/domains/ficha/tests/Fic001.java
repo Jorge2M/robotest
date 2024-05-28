@@ -9,7 +9,7 @@ import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.buscador.steps.SecBuscadorSteps;
-import com.mng.robotest.tests.domains.ficha.steps.ModalBuscadorTiendasSteps;
+import com.mng.robotest.tests.domains.ficha.steps.ModalBuscarEnTiendaSteps;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType;
@@ -57,8 +57,8 @@ public class Fic001 extends TestBase {
 		var articleNoOnlineWithColors = Article.getArticleForTest(produtNoOnlineWithColors.get());
 		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
 		if (isShop() && channel!=Channel.tablet) {
-			fichaSteps.selectBuscarEnTiendaButton();
-			new ModalBuscadorTiendasSteps().close();
+			fichaSteps.selectBuscarEnTienda();
+			new ModalBuscarEnTiendaSteps().close();
 		}
 
 		var articulo = selectColorAndTalla();

@@ -11,6 +11,7 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ColorType;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders.Slider;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProduct.ItemBreadcrumb;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
@@ -32,6 +33,7 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	private static final String XP_WRAPPER_PRICES = "//*[@data-testid='pdp.productInfo.price']";
 	private static final String XP_PRICE_CURRENT = XP_WRAPPER_PRICES + "//*[@data-testid='currentPrice']";
 	private static final String XP_PRICE_TACHADO = XP_WRAPPER_PRICES + "//*[@data-testid='crossedOutPrice']";
+	private static final String XP_DISPONIBILIDAD_TIENDA_BUTTON = "//*[@data-testid='pdp.productInfo.storeFinder']";
 	
 	private String getXPathPageArticulo(String reference) {
 		return XP_PAGE_ARTICLE + "//self::*[text()[contains(.,'" + reference + "')]]";
@@ -104,37 +106,27 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	
 	@Override	
 	public boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		//TODO implement
-		return false;
+		throw new UnsupportedOperationException();
 	}
 	
 	@Override	
 	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		//TODO implement
-		return true;
-	}
-	
-	@Override	
-	public String getNameLinkBuscarEnTienda() {
-		//TODO implement
-		return "";
+		throw new UnsupportedOperationException();
 	}
 	
 	@Override	
 	public void selectBuscarEnTiendaLink() {
-		//TODO implement
+		click(XP_DISPONIBILIDAD_TIENDA_BUTTON).exec();
 	}
 	
 	@Override	
 	public boolean isVisibleBuscarEnTiendaLink() {
-		//TODO implement
-		return false;
+		throw new UnsupportedOperationException();
 	}
 	
 	@Override	
 	public boolean isModalNoStockVisible(int seconds) {
-		//TODO implement
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -157,8 +149,7 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	
 	@Override
 	public boolean isVisibleCapaAvisame() {
-		//TODO esperar a que añadan esta funcionalidad a la página
-		return false;
+		throw new UnsupportedOperationException();
 	}
 	
 	//-- Colors
@@ -302,6 +293,36 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	@Override
 	public boolean isVisibleColorCodeStickyContent(String colorCode) {
 		return secStickyContent.isVisibleColorCodeStickyContent(colorCode);
+	}
+	
+	// -- Others
+	@Override
+	public void selectEnvioGratisTienda() {
+		throw new UnsupportedOperationException();
+	}
+	@Override
+	public void selectDetalleDelProducto() {
+		throw new UnsupportedOperationException();
+	}
+	@Override
+	public void selectLinkCompartir() {
+		throw new UnsupportedOperationException();
+	}
+	@Override
+	public boolean isVisibleDescription() {
+		throw new UnsupportedOperationException();
+	}
+	@Override
+	public boolean isVisibleBreadcrumbs(int seconds) {
+		throw new UnsupportedOperationException();
+	}
+	@Override
+	public boolean isVisibleItemBreadCrumb(ItemBreadcrumb item) {
+		throw new UnsupportedOperationException();
+	}
+	@Override
+	public boolean isVisibleBlockKcSafety() {
+		throw new UnsupportedOperationException();
 	}
 	
 }

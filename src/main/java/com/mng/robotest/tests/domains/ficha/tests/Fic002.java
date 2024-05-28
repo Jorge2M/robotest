@@ -75,12 +75,12 @@ public class Fic002 extends TestBase {
 
 	private void pageFichaDesktopTest() {
 		if (isShop()) {
-			fichaSteps.getSecBolsaButtonAndLinksNewSteps().selectEnvioYDevoluciones();
+			fichaSteps.selectEnvioGratisTienda();
 			fichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
 		}
 
-		fichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(SHE);
-		fichaSteps.getSecBolsaButtonAndLinksNewSteps().selectLinkCompartir(dataTest.getCodigoPais());
+		fichaSteps.selectDetalleDelProducto(SHE);
+		fichaSteps.selectLinkCompartir(dataTest.getCodigoPais());
 	}
 
 	private void pageFichaDeviceTest() {

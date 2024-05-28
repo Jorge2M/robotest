@@ -4,7 +4,7 @@ import com.mng.robotest.tests.domains.ayuda.pageobjects.PagesAyuda;
 import com.mng.robotest.tests.domains.chequeregalo.pageobjects.PageChequeRegaloInputDataNew;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageAccesoMisCompras;
-import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalBuscadorTiendas;
+import com.mng.robotest.testslegacy.pageobject.shop.modales.buscarentienda.ModalBuscarEnTiendaNoGenesis;
 
 public class FactoryPageFromFooter {
 	
@@ -19,7 +19,7 @@ public class FactoryPageFromFooter {
 		case DEVOLUCIONES:
 			return (new PageCambiosYdevoluciones());
 		case TIENDAS: 
-			return (new ModalBuscadorTiendas());
+			return (new ModalBuscarEnTiendaNoGenesis());
 		case CHEQUE_REGALO, CHEQUE_REGALO_OLD:			
 			return (new PageChequeRegaloInputDataNew());
 		case APPS:

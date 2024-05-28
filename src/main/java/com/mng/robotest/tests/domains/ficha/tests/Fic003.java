@@ -48,7 +48,7 @@ public class Fic003 extends TestBase {
 			}
 		} else {
 			if (KC_SAFETY.getListApps().contains(app)) {
-				fichaSteps.getSecBolsaButtonAndLinksNewSteps().selectDetalleDelProducto(NINA);
+				fichaSteps.selectDetalleDelProducto(NINA);
 			}
 		}
 	}

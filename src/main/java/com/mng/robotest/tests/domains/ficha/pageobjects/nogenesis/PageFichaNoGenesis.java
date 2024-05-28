@@ -1,12 +1,19 @@
 package com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis;
 
+import static com.mng.robotest.tests.domains.ficha.pageobjects.commons.LinksAfterBolsa.COMPARTIR;
+import static com.mng.robotest.tests.domains.ficha.pageobjects.commons.LinksAfterBolsa.DETALLE_PRODUCTO;
+import static com.mng.robotest.tests.domains.ficha.pageobjects.commons.LinksAfterBolsa.ENVIO_GRATIS_TIENDA;
+
 import java.util.List;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ColorType;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.LinksAfterBolsa;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders.Slider;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProduct.ItemBreadcrumb;
 import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
@@ -16,7 +23,27 @@ public abstract class PageFichaNoGenesis extends PageBase implements PageFicha {
 	protected final SecDataProduct secDataProduct = new SecDataProduct(); //Name, color, talla section
 	protected final SecFitFinder secFitFinder = new SecFitFinder(); //Guía de tallas v.Fit Finder
 	protected final SecSliders secSliders = new SecSliders();
+	protected final SecDetalleProduct secDetalleProductNew = new SecDetalleProduct();
 
+	private static final String XP_LINK_ENVIO_GRATIS_TIENDA = "//button[@class[contains(.,'freeShipping')]]";
+	private static final String XP_LINK_DISPONIBILIDAD_TIENDA = "//button[@id='garmentFinderOption']";
+	private static final String XP_LINK_DETALLE_PRODUCTO = "//button[@id='productDetailOption']";
+	private static final String XP_LINK_COMPARTIR = "//*[@id='optionsSocialTrigger']";	
+	
+	private String getXPathLink(LinksAfterBolsa linkType) {
+		switch (linkType) {
+		case ENVIO_GRATIS_TIENDA:
+			return XP_LINK_ENVIO_GRATIS_TIENDA;
+		case DISPONIBILIDAD_TIENDA:
+			return XP_LINK_DISPONIBILIDAD_TIENDA;
+		case DETALLE_PRODUCTO:
+			return XP_LINK_DETALLE_PRODUCTO;
+		case COMPARTIR:
+		default:
+			return XP_LINK_COMPARTIR;
+		}
+	}
+	
 	@Override
 	public boolean isClickableColor(String colourCode) {
 		return secDataProduct.isClickableColor(colourCode);
@@ -161,6 +188,51 @@ public abstract class PageFichaNoGenesis extends PageBase implements PageFicha {
 	@Override
 	public int getNumArtVisiblesSlider(Slider slider) {
 		return secSliders.getNumVisibleArticles(slider);
+	}
+	
+	@Override
+	public void selectEnvioGratisTienda() {
+		clickLink(ENVIO_GRATIS_TIENDA);
+	}
+	
+	@Override
+	public void selectDetalleDelProducto() {
+		clickLink(DETALLE_PRODUCTO);
+	}
+	
+	@Override
+	public void selectLinkCompartir() {
+		clickLink(COMPARTIR);
+	}
+	
+	@Override
+	public boolean isVisibleDescription() {
+		return secDetalleProductNew.isVisibleUntil(3);
+	}
+	
+	@Override
+	public boolean isVisibleBreadcrumbs(int seconds) {
+		return secDetalleProductNew.isVisibleBreadcrumbs(0);
+	}
+	
+	@Override
+	public boolean isVisibleItemBreadCrumb(ItemBreadcrumb item) {
+		return secDetalleProductNew.isVisibleItemBreadCrumb(item);
+	}
+	
+	@Override
+	public boolean isVisibleBlockKcSafety() {
+		return secDetalleProductNew.isVisibleBlockKcSafety();
+	}
+	
+	public void clickLink(LinksAfterBolsa linkType) {
+		moveToElement(getXPathLink(linkType));
+		click(getXPathLink(linkType)).exec();
+	}
+	
+	public boolean checkLinkInState(LinksAfterBolsa linkType, State state) {
+		String xpathLink = getXPathLink(linkType);
+		return state(state, xpathLink).check();
 	}
 
 }

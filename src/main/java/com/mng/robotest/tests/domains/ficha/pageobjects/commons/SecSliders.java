@@ -29,7 +29,7 @@ public class SecSliders extends PageBase {
 		POPULAR_AHORA_MISMO(
 				Arrays.asList(shop),
 				"//*[@data-testid='recommendationsProductDetail']",
-				"??????",
+				"//*[@data-testid='pdp.crossSelling.recommendations']",
 				"//li[@id[contains(.,'RecommendationsCarousel')]]",
 				"//*[@data-testid='crossSelling']"),
 		TAMBIEN_HAS_VISTO(

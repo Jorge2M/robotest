@@ -113,11 +113,6 @@ public class PageFichaDeviceNoGenesis extends PageFichaNoGenesis {
 	}
 
 	@Override
-	public String getNameLinkBuscarEnTienda() {
-		return "Botón Buscar en tienda";
-	}
-
-	@Override
 	public boolean isVisibleBuscarEnTiendaLink() {
 		return state(VISIBLE, XP_BUSCAR_ENN_TIENDA_BUTTON).check();
 	}

@@ -34,7 +34,14 @@ public class CookiesChecker extends PageBase {
 						Pattern.compile("JSESSIONID"),
 						Pattern.compile("JSESSIONID2"),
 						Pattern.compile("JSESSIONIDPRE"),
-						Pattern.compile("disable-s3-microfrontend") //Sólo aparece en Cloud con development=enabled
+						
+						//Cookies del dominio www.mangofashiongroup.com que aparecen cuando se selecciona EMPRESAS del footer
+						Pattern.compile("GUEST_LANGUAGE_ID"),
+						Pattern.compile("LFR_SESSION_STATE_20102"),
+						Pattern.compile("COOKIE_SUPPORT"),
+						
+						//Sólo aparece en Cloud con development=enabled
+						Pattern.compile("disable-s3-microfrontend") 
 				)));
 		
 		replaceAllowedCookies("_hjIncludedInSessionSample", "_hjIncludedInSessionSample*");

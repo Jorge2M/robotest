@@ -6,6 +6,7 @@ import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.PageFichaDesktopNoGenesis;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.PageFichaDeviceNoGenesis;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProduct.ItemBreadcrumb;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ColorType;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders.Slider;
 import com.mng.robotest.tests.domains.ficha.pageobjects.genesis.PageFichaGenesis;
@@ -25,10 +26,17 @@ public interface PageFicha {
 	public abstract boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds);
 	public abstract boolean isVisibleButtonElimFavoritos(int seconds);
 	public abstract boolean isVisibleButtonAnadirFavoritos(int seconds);
-	public abstract String getNameLinkBuscarEnTienda();
-	public abstract void selectBuscarEnTiendaLink();
 	public abstract boolean isVisibleBuscarEnTiendaLink();
 	public abstract boolean isModalNoStockVisible(int seconds);
+	
+	public abstract void selectBuscarEnTiendaLink();
+	public abstract void selectEnvioGratisTienda();
+	public abstract void selectDetalleDelProducto();
+	public abstract void selectLinkCompartir();
+	public abstract boolean isVisibleDescription();
+	public abstract boolean isVisibleBreadcrumbs(int seconds);
+	public abstract boolean isVisibleItemBreadCrumb(ItemBreadcrumb item);
+	public abstract boolean isVisibleBlockKcSafety();
 	
 	public boolean isClickableColor(String colourCode);
 	public void clickColor(int posColor);
@@ -69,6 +77,9 @@ public interface PageFicha {
 	public boolean isVisibleReferenciaStickyContent(String referencia);
 	public boolean isVisibleTallaLabelStickyContent(String tallaLabel);
 	public boolean isVisibleColorCodeStickyContent(String colorCode);
+	
+//	public void clickLink(LinksAfterBolsa linkType);
+//	public boolean checkLinkInState(LinksAfterBolsa linkType, State state);
 	
 	public static PageFicha make(Channel channel, AppEcom app, Pais pais) {
 		if (pais.isFichaGenesis(app)) {
