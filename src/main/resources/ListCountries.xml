@@ -959,6 +959,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<fichagenesis>shop,outlet</fichagenesis>
 </pais>
 
 <pais nombre_pais="Kosovo" codigo="095">
