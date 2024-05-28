@@ -123,7 +123,7 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	
 	@Override	
 	public boolean isVisibleBuscarEnTiendaLink() {
-		throw new UnsupportedOperationException();
+		return state(VISIBLE, XP_DISPONIBILIDAD_TIENDA_BUTTON).check();
 	}
 	
 	@Override	
