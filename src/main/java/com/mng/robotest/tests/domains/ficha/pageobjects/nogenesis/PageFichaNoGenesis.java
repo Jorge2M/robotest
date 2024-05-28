@@ -11,6 +11,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ColorType;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.LinksAfterBolsa;
+import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ModEnvioYdevolNew;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders.Slider;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProduct.ItemBreadcrumb;
@@ -24,6 +25,7 @@ public abstract class PageFichaNoGenesis extends PageBase implements PageFicha {
 	protected final SecFitFinder secFitFinder = new SecFitFinder(); //Guía de tallas v.Fit Finder
 	protected final SecSliders secSliders = new SecSliders();
 	protected final SecDetalleProduct secDetalleProductNew = new SecDetalleProduct();
+	protected final ModEnvioYdevolNew modEnvioYdev = new ModEnvioYdevolNew();
 
 	private static final String XP_LINK_ENVIO_GRATIS_TIENDA = "//button[@class[contains(.,'freeShipping')]]";
 	private static final String XP_LINK_DISPONIBILIDAD_TIENDA = "//button[@id='garmentFinderOption']";
@@ -223,6 +225,29 @@ public abstract class PageFichaNoGenesis extends PageBase implements PageFicha {
 	@Override
 	public boolean isVisibleBlockKcSafety() {
 		return secDetalleProductNew.isVisibleBlockKcSafety();
+	}
+	
+	@Override
+	public boolean isVisibleModalDatosEnvio(int seconds) {
+		return modEnvioYdev.isVisible(seconds);
+	}
+	
+	@Override
+	public void closeModalDatosEnvio() {
+		modEnvioYdev.clickAspaForClose();
+	}
+	
+	@Override
+	public boolean isVisibleGuiaTallas(int seconds) {
+		return secFitFinder.isVisibleUntil(seconds);
+	}
+	@Override
+	public boolean isInvisibleGuiaTallas(int seconds) {
+		return secFitFinder.isInvisibileUntil(seconds);
+	}
+	@Override
+	public void closeGuiaTallas() {
+		secFitFinder.close();
 	}
 	
 	public void clickLink(LinksAfterBolsa linkType) {

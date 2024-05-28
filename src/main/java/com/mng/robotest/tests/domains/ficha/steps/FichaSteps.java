@@ -39,9 +39,7 @@ public class FichaSteps extends StepBase {
 
 	private final PageFicha pageFicha = PageFicha.make(channel, app, dataTest.getPais());
 	private final SecBolsa secBolsa = new SecBolsa();
-	private final ModEnvioYdevolNewSteps modEnvioYdevolSteps = new ModEnvioYdevolNewSteps();
 	private final SecProductDescrDeviceSteps secProductDescOldSteps = new SecProductDescrDeviceSteps();
-	private final SecFitFinderSteps secFitFinderSteps = new SecFitFinderSteps();
 
 	public PageFicha getFicha() {
 		return this.pageFicha;
@@ -379,13 +377,10 @@ public class FichaSteps extends StepBase {
 	public void selectGuiaDeTallas(AppEcom app) {
 		boolean isVisibleLink = pageFicha.selectGuiaDeTallasIfVisible();
 		if (isVisibleLink) {
-			switch (app) {
-				case outlet:
-					new PageComoMedirmeSteps().isPageInNewTab();
-					break;
-				case shop:
-				default:
-					secFitFinderSteps.validateIsOkAndClose();
+			if (app==AppEcom.outlet) {
+				new PageComoMedirmeSteps().isPageInNewTab();
+			} else {
+				checkGuiaDeTallasModal();
 			}
 		}
 	}
@@ -443,7 +438,7 @@ public class FichaSteps extends StepBase {
 		expected="Aparece el modal con los datos a nivel de envío y devolución")
 	public void selectEnvioGratisTienda() {
 		pageFicha.selectEnvioGratisTienda();
-		new ModEnvioYdevolNewSteps().checkIsVisible(2);
+		isVisibleModalDatosEnvio(2);
 	}
 	
 	@Step (
@@ -452,7 +447,9 @@ public class FichaSteps extends StepBase {
 	public void selectDetalleDelProducto(LineaType lineaType) {
 		pageFicha.selectDetalleDelProducto();
 		checkScrollToDescription();
-		checkBreadCrumbs();
+		if (!dataTest.getPais().isFichaGenesis(app)) {
+			checkBreadCrumbs();
+		}
 		if (TypePanel.KC_SAFETY.getListApps().contains(app) &&
 			(lineaType==LineaType.NINA || lineaType==LineaType.NINO)) {
 			checkKcSafety();
@@ -600,16 +597,42 @@ public class FichaSteps extends StepBase {
 
 		return checks;
 	}
+	
+	@Validation (
+		description="Aparece el modal con los datos a nivel de envío y devolución " + SECONDS_WAIT)
+	public boolean isVisibleModalDatosEnvio(int seconds) {
+		return pageFicha.isVisibleModalDatosEnvio(seconds);
+	}
+
+	@Step (
+		description="Seleccionar el aspa para cerrar el modal de \"Envío y devolución\"",
+		expected="Desaparece el modal")
+	public void closeModalDatosEnvio() {
+		pageFicha.closeModalDatosEnvio();
+		checkIsVisibleModalDatosEnvio();
+	}
+	
+	@Validation (
+		description="No es visible el modal con los datos a nivel de envío y devolución",
+		level=WARN)
+	private boolean checkIsVisibleModalDatosEnvio() {
+		return !pageFicha.isVisibleModalDatosEnvio(1);
+	}	
+	
+	@Validation
+	public ChecksTM checkGuiaDeTallasModal() {
+		var checks = ChecksTM.getNew();
+		int seconds = 2;
+	  	checks.add(
+			"Es visible el Wrapper con la guía de tallas " + getLitSecondsWait(seconds),
+			pageFicha.isVisibleGuiaTallas(seconds));
+	  	
+		pageFicha.closeGuiaTallas();
+		return checks;
+	}
 
 	public SecProductDescrDeviceSteps getSecProductDescDeviceSteps() {
 		return secProductDescOldSteps;
 	}
 
-	public SecFitFinderSteps getSecFitFinderSteps() {
-		return secFitFinderSteps;
-	}
-
-	public ModEnvioYdevolNewSteps getModEnvioYdevolSteps() {
-		return this.modEnvioYdevolSteps;
-	}
 }

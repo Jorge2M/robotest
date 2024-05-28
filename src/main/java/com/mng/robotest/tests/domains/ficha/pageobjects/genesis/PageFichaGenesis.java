@@ -11,6 +11,7 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ColorType;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders.Slider;
+import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecFitFinder;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProduct.ItemBreadcrumb;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
@@ -23,6 +24,7 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	private final SecTallasGenesis secTallas = new SecTallasGenesis();
 	private final SecStickyContentGenesis secStickyContent = new SecStickyContentGenesis();
 	private final SecSliders secSliders = new SecSliders();
+	private final SecFitFinder secFitFinder = new SecFitFinder(); //Guía de tallas v.Fit Finder
 	
 	private static final String XP_PAGE = "//*[@data-testid='pdp.gallery.grid']";
 	private static final String XP_PAGE_ARTICLE = "//*[@data-testid='pdp.productInfo.reference']";
@@ -296,33 +298,67 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	}
 	
 	// -- Others
+	private static final String XP_ENVIO_GRATIS_A_TIENDA = "//*[@data-testid='pdp.productInfo.shippingAndReturns']";
+	private static final String XP_DETALLES_DEL_PRODUCTO = "//*[@data-testid='pdp.productDetails.button']";
+	private static final String XP_DESCRIPCION_PRODUCTO = "//*[@data-testid='pdp.productDetails.description']";
+	
 	@Override
 	public void selectEnvioGratisTienda() {
-		throw new UnsupportedOperationException();
+		click(XP_ENVIO_GRATIS_A_TIENDA).exec();
 	}
 	@Override
 	public void selectDetalleDelProducto() {
-		throw new UnsupportedOperationException();
+		click(XP_DETALLES_DEL_PRODUCTO).exec();
 	}
 	@Override
 	public void selectLinkCompartir() {
+		//No aparece en la nueva Ficha Genesis
 		throw new UnsupportedOperationException();
 	}
 	@Override
 	public boolean isVisibleDescription() {
-		throw new UnsupportedOperationException();
+		return state(VISIBLE, XP_DESCRIPCION_PRODUCTO).check();
 	}
 	@Override
 	public boolean isVisibleBreadcrumbs(int seconds) {
+		//No aparece en la nueva Ficha Genesis
 		throw new UnsupportedOperationException();
 	}
 	@Override
 	public boolean isVisibleItemBreadCrumb(ItemBreadcrumb item) {
+		//No aparece en la nueva Ficha Genesis
 		throw new UnsupportedOperationException();
 	}
 	@Override
 	public boolean isVisibleBlockKcSafety() {
+		//No aparece en la nueva Ficha Genesis
 		throw new UnsupportedOperationException();
+	}
+	
+	private static final String XP_MODAL_DATOS_ENVIO = "//dialog[@id='shipping-returns-modal']";
+	private static final String XP_CLOSE_MODAL_DATOS_ENVIO = XP_MODAL_DATOS_ENVIO + "//*[@data-testid='modal.close.button']";
+	
+	@Override
+	public boolean isVisibleModalDatosEnvio(int seconds) {
+		return state(VISIBLE, XP_MODAL_DATOS_ENVIO).wait(seconds).check();
+	}
+	
+	@Override
+	public void closeModalDatosEnvio() {
+		click(XP_CLOSE_MODAL_DATOS_ENVIO).exec();
+	}	
+	
+	@Override
+	public boolean isVisibleGuiaTallas(int seconds) {
+		return secFitFinder.isVisibleUntil(seconds);
+	}
+	@Override
+	public boolean isInvisibleGuiaTallas(int seconds) {
+		return secFitFinder.isInvisibileUntil(seconds);
+	}
+	@Override
+	public void closeGuiaTallas() {
+		secFitFinder.close();
 	}
 	
 }

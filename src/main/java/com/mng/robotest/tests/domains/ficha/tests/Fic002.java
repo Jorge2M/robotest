@@ -16,6 +16,7 @@ import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecProductDescrDevice.TypePanel.*;
 import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
@@ -54,7 +55,6 @@ public class Fic002 extends TestBase {
 			pageFichaDeviceTest();
 		} else {
 			pageFichaDesktopTest();
-
 		}
 	}
 	
@@ -76,11 +76,16 @@ public class Fic002 extends TestBase {
 	private void pageFichaDesktopTest() {
 		if (isShop()) {
 			fichaSteps.selectEnvioGratisTienda();
-			fichaSteps.getModEnvioYdevolSteps().clickAspaForClose();
+			fichaSteps.closeModalDatosEnvio();
 		}
 
 		fichaSteps.selectDetalleDelProducto(SHE);
-		fichaSteps.selectLinkCompartir(dataTest.getCodigoPais());
+		
+		//Me informan desde Kaliope que inicialmente no estará el link
+		//Compartir en la ficha Genesis. Desactivamos la validación durante un tiempo 
+		if (!(dataTest.getPais().isFichaGenesis(app) && UtilsTest.todayBeforeDate("2024-06-28"))) { 
+			fichaSteps.selectLinkCompartir(dataTest.getCodigoPais());
+		}
 	}
 
 	private void pageFichaDeviceTest() {

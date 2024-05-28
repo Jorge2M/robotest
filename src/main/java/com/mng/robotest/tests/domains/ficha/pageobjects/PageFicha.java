@@ -78,8 +78,12 @@ public interface PageFicha {
 	public boolean isVisibleTallaLabelStickyContent(String tallaLabel);
 	public boolean isVisibleColorCodeStickyContent(String colorCode);
 	
-//	public void clickLink(LinksAfterBolsa linkType);
-//	public boolean checkLinkInState(LinksAfterBolsa linkType, State state);
+	public boolean isVisibleModalDatosEnvio(int seconds);
+	public void closeModalDatosEnvio();
+	
+	public boolean isVisibleGuiaTallas(int seconds);
+	public boolean isInvisibleGuiaTallas(int seconds);
+	public void closeGuiaTallas();
 	
 	public static PageFicha make(Channel channel, AppEcom app, Pais pais) {
 		if (pais.isFichaGenesis(app)) {
