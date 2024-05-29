@@ -126,7 +126,7 @@ public class PageFavoritos extends PageBase {
 			clickUserMenu(UserMenu.FAVORITOS);
 		}
 		int i=0; //Para evitar posibles bucles infinitos
-		while (hayArticulos() && i<50) {
+		while (hayArticulos() && i<10) {
 			clear1rstArticuloAndWait();
 			i+=1;
 		}
