@@ -276,18 +276,12 @@ public class Pais implements Serializable {
 	
 	public boolean isGaleriaGenesis(AppEcom app) {
 		//Sólo falta por migrar España y USA
-		if (codigoPais.compareTo("001")==0 || codigoPais.compareTo("400")==0) {
-			return false;
-		}
-		return true;
+		return (codigoPais.compareTo("001")!=0 && codigoPais.compareTo("400")!=0);
 	}
 	
 	public boolean isFichaGenesis(AppEcom app) {
 		//Sólo falta por migrar USA
-		if (codigoPais.compareTo("400")==0) {
-			return false;
-		}
-		return true;
+		return (codigoPais.compareTo("400")!=0);
 	}
 	
 	public String getMicuentanew() {
