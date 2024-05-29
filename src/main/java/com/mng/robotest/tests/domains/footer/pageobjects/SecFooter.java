@@ -135,14 +135,15 @@ public class SecFooter extends PageBase {
 		}
 		
 		private boolean isGenesis(AppEcom app, Pais pais) {
-			return 
-				!isEnvPRO() || 
-				app==AppEcom.outlet || 
-				pais.isGaleriaGenesis(app);
+			return true;
+			//TODO cuando esté todo migrado a Genesis eliminar lo antiguo
+//				!isEnvPRO() || 
+//				app==AppEcom.outlet || 
+//				pais.isGaleriaGenesis(app);
 		}
 	}
 	
-	private static final String XP_CAMBIO_PAIS_SHOP = "//div[@class[contains(.,'modalCambioPaisShow')]]";
+//	private static final String XP_CAMBIO_PAIS_SHOP = "//div[@class[contains(.,'modalCambioPaisShow')]]";
 	private static final String XP_CAMBIO_PAIS_GENESIS = "//*[@data-testid='changeButton']";
 	
 	public SecFooter() {
@@ -154,10 +155,10 @@ public class SecFooter extends PageBase {
 	}
 	
 	private String getXPathLinkCambioPais() {
-		if (isOutlet()) {
+//		if (isOutlet()) {
 			return XP_CAMBIO_PAIS_GENESIS;
-		}
-		return XP_CAMBIO_PAIS_SHOP;
+//		}
+//		return XP_CAMBIO_PAIS_SHOP;
 	}
 	
 	public boolean isPresent() {

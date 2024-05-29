@@ -26,7 +26,7 @@ public class Leg008 extends TestBase {
 		
 		var ayudaSteps = new AyudaSteps();
 		String question = "¿Dónde está mi pedido?";
-		ayudaSteps.checkIsQuestionVisible(question);
+		ayudaSteps.checkIsQuestionVisible(question, 1);
 		ayudaSteps.clickQuestion(question);
 
 		ayudaSteps.clickContactarButton();

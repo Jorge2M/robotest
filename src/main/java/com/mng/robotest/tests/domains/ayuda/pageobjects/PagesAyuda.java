@@ -34,8 +34,8 @@ public class PagesAyuda extends PageBase implements PageFromFooter {
 		click(getXPathIcon(textIcon)).exec();
 	}
 	
-	public boolean isQuestionVisible(String textQuestion) {
-		return state(VISIBLE, getXPathQuestion(textQuestion)).check();
+	public boolean isQuestionVisible(String textQuestion, int seconds) {
+		return state(VISIBLE, getXPathQuestion(textQuestion)).wait(seconds).check();
 	}
 	
 	public void clickQuestion(String textQuestion) {

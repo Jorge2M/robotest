@@ -20,7 +20,7 @@ public class Ayu001 extends TestBase {
 		var ayudaSteps = new AyudaSteps();
 		ayudaSteps.clickIcon("Devoluciones, cambios y reembolsos");
 		String question = "¿Cómo puedo cambiar o devolver una compra online?";
-		ayudaSteps.checkIsQuestionVisible(question);
+		ayudaSteps.checkIsQuestionVisible(question, 1);
 		ayudaSteps.clickQuestion(question);
 		ayudaSteps.checkIsTextVisible("Devolución gratuita en tienda");		
 	}

@@ -283,7 +283,6 @@ public class FichaSteps extends StepBase {
 		pageFicha.selectAnadirAFavoritosButton();
 		ArticuloScreen articulo = pageFicha.getArticuloObject();
 		dataTest.getDataFavoritos().addArticulo(articulo);
-		checkCapaAltaFavoritos();
 		checkVisibleButtonFavoritos(REMOVE);
 	}
 
@@ -316,22 +315,6 @@ public class FichaSteps extends StepBase {
 			return pageFicha.isVisibleButtonElimFavoritos(3);
 		}
 		return pageFicha.isVisibleButtonAnadirFavoritos(3);
-	}
-
-	@Validation
-	private ChecksTM checkCapaAltaFavoritos() {
-		var checks = ChecksTM.getNew();
-		int seconds1 = 3;
-		checks.add(
-			"Aparece una capa superior de \"Añadiendo artículo a favoritos...\" " + getLitSecondsWait(seconds1),
-			pageFicha.isVisibleDivAnadiendoAFavoritosUntil(seconds1), INFO);
-
-		int seconds2 = 3;
-		checks.add(
-			"La capa superior acaba desapareciendo " + getLitSecondsWait(seconds2),
-			pageFicha.isInvisibleDivAnadiendoAFavoritosUntil(seconds2), WARN);
-
-		return checks;
 	}
 
 	@Step (

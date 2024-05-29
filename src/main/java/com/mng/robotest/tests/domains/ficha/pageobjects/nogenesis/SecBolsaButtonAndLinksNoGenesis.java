@@ -13,7 +13,6 @@ public class SecBolsaButtonAndLinksNoGenesis extends PageBase {
 	private static final String XP_BUTTON_FAVORITOS = XP_WRAPPER + "//*[@data-testid='button-icon']";
 	private static final String XP_BUTTON_FAVORITOS_FOR_ADD = XP_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'outline')]]";
 	private static final String XP_BUTTON_FAVORITOS_FOR_REMOVE = XP_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'fill')]]";
-	private static final String XP_DIV_ANADIENDO_FAVORITOS = "//div[@id='favoriteBanner']";
 
 	private String getXPathButtonFavoritos(ActionFavButton actionButton) {
 		switch (actionButton) {
@@ -43,14 +42,6 @@ public class SecBolsaButtonAndLinksNoGenesis extends PageBase {
 		String xpathButtonFav = getXPathButtonFavoritos(actionButton);
 		state(VISIBLE, xpathButtonFav).wait(2).check();
 		click(xpathButtonFav).exec();
-	}
-
-	public boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		return state(VISIBLE, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
-	}
-
-	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		return state(INVISIBLE, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
 	}
 
 }

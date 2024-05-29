@@ -63,16 +63,6 @@ public class PageFichaDesktopNoGenesis extends PageFichaNoGenesis {
 	}
 
 	@Override
-	public boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		return (secBolsaButtonAndLinks.isVisibleDivAnadiendoAFavoritosUntil(seconds));
-	}
-
-	@Override
-	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		return (secBolsaButtonAndLinks.isInvisibleDivAnadiendoAFavoritosUntil(seconds));
-	}
-
-	@Override
 	public boolean isVisibleButtonElimFavoritos(int seconds) {
 		return (secBolsaButtonAndLinks.isVisibleButtonFavoritos(REMOVE, seconds));
 	}

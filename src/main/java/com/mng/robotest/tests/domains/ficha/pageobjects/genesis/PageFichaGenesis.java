@@ -96,24 +96,14 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	
 	@Override	
 	public void selectAnadirAFavoritosButton() {
-		state(VISIBLE, XP_ADD_FAVORITES_BUTTON).wait(1).check();
+		state(VISIBLE, XP_ADD_FAVORITES_BUTTON).wait(2).check();
 		click(XP_ADD_FAVORITES_BUTTON).exec();
 	}
 	
 	@Override	
 	public void selectRemoveFromFavoritosButton() {
-		state(VISIBLE, XP_REMOVE_FAVORITES_BUTTON).wait(1).check();
+		state(VISIBLE, XP_REMOVE_FAVORITES_BUTTON).wait(2).check();
 		click(XP_REMOVE_FAVORITES_BUTTON).exec();
-	}
-	
-	@Override	
-	public boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		throw new UnsupportedOperationException();
-	}
-	
-	@Override	
-	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		throw new UnsupportedOperationException();
 	}
 	
 	@Override	

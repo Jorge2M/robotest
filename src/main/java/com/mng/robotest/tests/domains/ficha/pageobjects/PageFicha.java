@@ -22,8 +22,6 @@ public interface PageFicha {
 	public abstract void clickAnadirBolsaButtonAndWait();
 	public abstract void selectAnadirAFavoritosButton();
 	public abstract void selectRemoveFromFavoritosButton();
-	public abstract boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds);
-	public abstract boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds);
 	public abstract boolean isVisibleButtonElimFavoritos(int seconds);
 	public abstract boolean isVisibleButtonAnadirFavoritos(int seconds);
 	public abstract boolean isVisibleBuscarEnTiendaLink();

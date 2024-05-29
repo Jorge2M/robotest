@@ -50,7 +50,6 @@ public class Pais implements Serializable {
 	List<Pago> listPagos = new LinkedList<>();
 	
 	String multidireccion;
-	String galeriagenesis;
 	String fichagenesis;
 	String micuentanew;
 	String newcheckout;
@@ -276,29 +275,13 @@ public class Pais implements Serializable {
 		this.multidireccion = multidireccion;
 	}
 	
-	public String getGaleriagenesis() {
-		return this.galeriagenesis;
-	}
-
-	@XmlElement
-	public void setGaleriagenesis(String galeriagenesis) {
-		this.galeriagenesis = galeriagenesis;
-	}
-	
 	public boolean isGaleriaGenesis(AppEcom app) {
-		return getTiendasGaleriaGenesis().contains(app);
-	}
-	
-	private List<AppEcom> getTiendasGaleriaGenesis() {
-		List<AppEcom> listApps = new ArrayList<>();
-		if (getGaleriagenesis()!=null && getGaleriagenesis().length()>0) {
-			var listAppsStr = Arrays.asList(getGaleriagenesis().split(","));
-			for (String app : listAppsStr) {
-				listApps.add(AppEcom.valueOf(app));
-			}
+		//Sólo falta por migrar España y USA
+		if (codigoPais.compareTo("001")==0 || codigoPais.compareTo("400")==0) {
+			return false;
 		}
-		return listApps;
-	}	
+		return true;
+	}
 	
 	public String getFichagenesis() {
 		return this.fichagenesis;

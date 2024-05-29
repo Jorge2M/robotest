@@ -13,7 +13,6 @@ public class PageFichaDeviceNoGenesis extends PageFichaNoGenesis {
 	private static final String XP_BUTTON_FAVORITOS = "//*[@data-testid='button-icon']";
 	private static final String XP_BUTTON_FAVORITOS_FOR_ADD = XP_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'outline')]]";
 	private static final String XP_BUTTON_FAVORITOS_FOR_REMOVE = XP_BUTTON_FAVORITOS + "//self::*[@class[contains(.,'fill')]]";
-	private static final String XP_DIV_ANADIENDO_FAVORITOS = "//div[@class[contains(.,'product-banner')]]";
 
 	private static final String XP_BUSCAR_ENN_TIENDA_BUTTON = "//button[@class[contains(.,'garment-finder')]]";
 	private static final String XP_GUIA_DE_TALLAS_LINK = "//span[@id='productFormSizesGuide']";
@@ -90,16 +89,6 @@ public class PageFichaDeviceNoGenesis extends PageFichaNoGenesis {
 	@Override
 	public void selectRemoveFromFavoritosButton() {
 		click(XP_BUTTON_FAVORITOS_FOR_REMOVE).waitLink(2).exec();
-	}
-
-	@Override
-	public boolean isVisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		return state(VISIBLE, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
-	}
-
-	@Override
-	public boolean isInvisibleDivAnadiendoAFavoritosUntil(int seconds) {
-		return state(INVISIBLE, XP_DIV_ANADIENDO_FAVORITOS).wait(seconds).check();
 	}
 
 	@Override

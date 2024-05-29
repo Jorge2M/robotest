@@ -9,9 +9,10 @@ import com.mng.robotest.tests.domains.base.PageBase;
 public abstract class ModalSetCookies extends PageBase {
 
 	public static ModalSetCookies make(Channel channel, AppEcom app) {
-		if (app==AppEcom.shop) {
-			return new ModalSetCookiesOld();
-		}
+		//TODO eliminar el código antiguo en un futuro
+//		if (app==AppEcom.shop) {
+//			return new ModalSetCookiesOld();
+//		}
 		return new ModalSetCookiesGenesis();
 	}
 	

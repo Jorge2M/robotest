@@ -18,10 +18,10 @@ public abstract class ModalChangeCountry extends PageBase {
 	}
 	
 	public static ModalChangeCountry make(AppEcom app) {
-		if (app==AppEcom.outlet) {
+//		if (app==AppEcom.outlet) {
 			return new ModalChangeCountryGenesis();
-		}
-		return new ModalChangeCountryOld();
+//		}
+//		return new ModalChangeCountryOld();
 	}
 	
 }
