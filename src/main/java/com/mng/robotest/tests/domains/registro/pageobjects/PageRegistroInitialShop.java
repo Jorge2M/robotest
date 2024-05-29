@@ -162,6 +162,7 @@ public class PageRegistroInitialShop extends PageBase {
 		click(XP_CHECKBOX_GIVE_PROMOTIONS).exec();
 	}
 	public boolean isSelectedCheckboxGivePromotions() {
+		state(VISIBLE, XP_CHECKBOX_GIVE_PROMOTIONS).wait(1).check();
 		return getElement(XP_CHECKBOX_GIVE_PROMOTIONS).isSelected();
 	}
 	
