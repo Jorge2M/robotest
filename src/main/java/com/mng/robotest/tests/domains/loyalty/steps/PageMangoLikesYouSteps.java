@@ -21,10 +21,10 @@ public class PageMangoLikesYouSteps extends StepBase {
 	@Validation
 	public ChecksResultWithNumberPoints checkIsPage() {
 		var checks = new ChecksResultWithNumberPoints();
-		int seconds = 5;
+		int seconds = 6;
 		checks.add(
 			"Aparece la página de <b>Mango likes you</b> " + getLitSecondsWait(seconds),
-			pgMangoLikesYou.isPage(4));
+			pgMangoLikesYou.isPage(seconds));
 		
 		int secondsButton = 10;
 		checks.add(

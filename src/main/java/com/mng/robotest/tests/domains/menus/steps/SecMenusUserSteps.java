@@ -203,7 +203,7 @@ public class SecMenusUserSteps extends StepBase {
 
 	@Validation
 	public ChecksResultWithNumberPoints checkAngGetLoyaltyPoints(int seconds) {
-		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
+		var checks = ChecksResultWithNumberPoints.getNew();
 		if (isDesktop()) {
 			userMenus.hoverIconForShowUserMenuDesktopShop();
 		}
