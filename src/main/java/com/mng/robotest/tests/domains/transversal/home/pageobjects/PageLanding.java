@@ -38,12 +38,6 @@ public class PageLanding extends PageBase {
 		return XP_MULTIMARCA_SHOP;
 	}
 
-	private String getXPathMainContent() {
-		String mainContentNoGenesis = "//div[@class[contains(.,'main-content')] and @data-pais='" + dataTest.getCodigoPais() + "']";
-		String mainContentGenesis = "//*[@data-testid='changeButton']//span[text()[contains(.,'" + dataTest.getNombrePais() + "')]]";
-		return "(" + mainContentNoGenesis + " | " + mainContentGenesis + ")";
-	}
-	
 	public boolean isPageMultimarca() {
 		return isPageMultimarca(0);
 	}
@@ -129,10 +123,6 @@ public class PageLanding extends PageBase {
 		}
 		var banners = BannerObjectFactory.make(BannerType.STANDAR, app);
 		return banners.isVisibleAnyBanner();
-	}
-	
-	public boolean isPresentMainContent(int seconds) {
-		return state(PRESENT, getXPathMainContent()).wait(seconds).check();
 	}
 	
 	public boolean isVisibleCommsHeaderBannerLoyalty(int seconds) {

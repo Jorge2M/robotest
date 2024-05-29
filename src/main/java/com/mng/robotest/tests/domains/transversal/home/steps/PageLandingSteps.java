@@ -26,23 +26,13 @@ public class PageLandingSteps extends StepBase {
 	}
 	
 	public void checkIsCountryWithCorrectLineas(int seconds) {
-		if (isOutlet()) {
-			checkUrlOfCountry(dataTest.getPais(), seconds);
-		} else {
-			checkMainContentPais(dataTest.getPais(), seconds);
-		}
+		checkUrlOfCountry(dataTest.getPais(), seconds);
 		checkIsPageOk();
 		if (!channel.isDevice()) {
 			new MenuSteps().checkLineasCountry();
 		}
 	}
 
-	@Validation (
-		description="Aparece el div de contenido asociado al país #{pais.getNombrePais()} (#{pais.getCodigoPais()}) " + SECONDS_WAIT)
-	public boolean checkMainContentPais(Pais pais, int seconds) {
-		return pageLanding.isPresentMainContent(seconds);
-	}
-	
 	@Validation (
 		description="En la URL figura <b>/#{pais.getCodigoPrehome().toLowerCase()}</b> " + SECONDS_WAIT)
 	public boolean checkUrlOfCountry(Pais pais, int seconds) {
