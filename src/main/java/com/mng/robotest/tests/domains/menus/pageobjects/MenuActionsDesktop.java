@@ -2,6 +2,7 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 
@@ -15,77 +16,46 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}
 	
 	private String getXPathMenu() {
-		return 
-			"(" + getXPathMenuStandard() + ") | " + 
-			"(" + getXPathMenuAlternative() + ")";
+		return "(" + getXPathMenuStandard() + ") | (" + getXPathMenuAlternative() + ")";
 	}
 	
 	private String getXPathMenuStandard() {
-		String xpathMenuActual = getXPathMenuStandardActual();
-		String xpathMenuGenesis = getXPathMenuStandardGenesis();
-		return "(" + xpathMenuActual + " | " +xpathMenuGenesis + ")";
-	}
-	private String getXPathMenuAlternative() {
-		String xpathMenuActual = getXPathMenuAlternativeActual();
-		String xpathMenuGenesis = getXPathMenuAlternativeGenesis();
-		return "(" + xpathMenuActual + " | " +xpathMenuGenesis + ")";
-	}
-	
-	private String getXPathMenuStandardGenesis() {
 		String idLinea = menu.getLinea().name().toLowerCase();
 		if (menu.getSublinea()!=null) {
-			idLinea = menu.getSublinea().getId(app);
+			idLinea = menu.getSublinea().getId(AppEcom.shop);
 		}
 			
 		String nameMenu = menu.getMenu().toLowerCase();
-		String nameMenuInDataTestId = UtilsMenusPO.getMenuNameForDataTestId(nameMenu);
-		String xpath =  
-			"//ul/li[@class[contains(.,'Submenu_selected')]]" + 
-			"//a[@data-testid='menu.family." + 
-			nameMenuInDataTestId + "_" + idLinea + ".link'";
+		String testId = getDataTestId(idLinea, nameMenu);
+		String xpath = "//ul/li//a[@data-testid='" + testId + "'";
 		
 		if (nameMenu.contains(" ")) {
 			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
-			String nameMenuIniInDataTestId = UtilsMenusPO.getMenuNameForDataTestId(menuIni);
-			xpath+=" or @data-testid='menu.family." + nameMenuIniInDataTestId + "_" + idLinea + ".link'"; 
+			String testId2 = getDataTestId(idLinea, menuIni);
+			xpath+=" or @data-testid='" + testId2 + "'"; 
 		}
 		xpath+="]";
 		return xpath;		
 	}
 	
-	private String getXPathMenuStandardActual() {
-		String idLinea = menu.getLinea().name().toLowerCase();
-		if (menu.getSublinea()!=null) {
-			idLinea = menu.getSublinea().getId(app);
-		}
-			
-		String nameMenu = menu.getMenu();
+	private String getDataTestId(String idLinea, String nameMenu) {
 		String nameMenuInDataTestId = UtilsMenusPO.getMenuNameForDataTestId(nameMenu);
-		String xpath =  
-			"//ul[@data-family]/li//a[@data-testid='menu.family." + 
-			nameMenuInDataTestId + "_" + idLinea + ".link'";
-		
-		if (nameMenu.contains(" ")) {
-			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
-			String nameMenuIniInDataTestId = UtilsMenusPO.getMenuNameForDataTestId(menuIni);			
-			xpath+=" or @data-testid='menu.family." + nameMenuIniInDataTestId + "_" + idLinea + ".link'"; 
-		}
-		xpath+="]";
-		return xpath;
-	}	
+		return "menu.family." + nameMenuInDataTestId + "_" + idLinea + ".link";
+	}
 	
-	private String getXPathMenuAlternativeGenesis() {
+	private String getXPathMenuAlternative() {
 		return 
 			"//ul/li[@class[contains(.,'Submenu_selected')]]" + 
 			"//a[@data-testid[contains(.,'menu.family.')]]" +
-			"//self::*[text()[contains(.,'" + menu.getMenu() + "')]]";		
+			"//self::*[text()[contains(.,'" + removeFirstCharacter(menu.getMenu()) + "')]]";		
 	}
-	private String getXPathMenuAlternativeActual() {
-		return 
-			"//ul[@data-family]/li//a[" + 
-			"@data-testid[contains(.,'menu.family.')]]" +
-		    "//self::*[text()[contains(.,'" + menu.getMenu() + "')]]";
-	}	
+	
+	private String removeFirstCharacter(String value) {
+        if (value == null || value.length() <= 1) {
+        	return "";
+        }
+        return value.substring(1); 
+	}
 	
 	@Override
 	public String click() {
@@ -116,8 +86,15 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}	
 	
 	private String clickMenuSuperior() {
-		state(VISIBLE, getXPathMenu()).wait(1).check();
-		String nameMenu = getElement(getXPathMenu()).getText(); 
+		String nameMenu = "";
+		state(PRESENT, getXPathMenu()).wait(1).check();
+		var menuElement = getElement(getXPathMenu());
+		if (isOutlet()) {
+			nameMenu = getElement(menuElement, "./div").getAttribute("innerHTML");
+		} else {
+			nameMenu = menuElement.getText();
+		}
+		
 		click(getXPathMenu()).exec();
 		return nameMenu;
 	}	

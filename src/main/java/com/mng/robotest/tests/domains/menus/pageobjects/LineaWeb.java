@@ -91,10 +91,10 @@ public class LineaWeb extends PageBase implements LineaActions {
 	public enum SublineaType { 
 		TEEN_NINA("teenA", "teenA", "nina", TEEN),
 		TEEN_NINO("teenO", "teenO", "nino", TEEN),
-		NINA_NINA("nina", "nina", "nina", NINA), 
-		NINA_BEBE("babyNina", "babyNina", "bebe", NINA),
-		NINO_NINO("nino", "nino", "nino", NINO), 
-		NINO_BEBE("babyNino", "babyNino", "bebe", NINO); 
+		NINA_NINA("nina", "outletA", "nina", NINA), 
+		NINA_BEBE("babyNina", "outletBA", "bebe", NINA),
+		NINO_NINO("nino", "outletO", "nino", NINO), 
+		NINO_BEBE("babyNino", "outletBO", "bebe", NINO); 
 		
 		String idShop = "";
 		String idOutlet = "";
@@ -112,6 +112,13 @@ public class LineaWeb extends PageBase implements LineaActions {
 				return idOutlet;
 			}
 			return idShop;
+		}
+		
+		public String getIdTeen2(AppEcom app) {
+			if (getId(app).compareTo("teenA")==0) {
+				return "teenQ";
+			}
+			return "teenP";
 		}
 		
 		public String getText() {
