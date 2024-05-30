@@ -279,11 +279,7 @@ public class Pais implements Serializable {
 	}
 	
 	public boolean isFichaGenesis(AppEcom app) {
-		if (app==AppEcom.outlet) {
-			return true;
-		}
-		//Sólo falta por migrar USA
-		return (codigoPais.compareTo("400")!=0);
+		return true;
 	}
 	
 	public String getMicuentanew() {

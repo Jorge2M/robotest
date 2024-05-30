@@ -298,12 +298,18 @@ public class MenuSteps extends StepBase {
 			"Aparecen los menús asociados a la línea #{lineaWeb.getLinea()}")
 	public void hoverLineaDesktop(LineaWeb lineaWeb) {
 		lineaWeb.hoverLinea();
-		validateHoverLineaDesktop(lineaWeb);
+        
+        //En ocasiones no aparecen los menús después de un Hover sobre la línea de niños
+		if (!checkHoverLineaDesktop(lineaWeb)) {
+	        new LineaWeb(LineaType.SHE).hoverLinea();
+	        lineaWeb.hoverLinea();
+	        checkHoverLineaDesktop(lineaWeb);
+		}
 		waitMillis(100);
 	}	
 	
 	@Validation (description="Aparecen los menús", level=INFO)
-	public boolean validateHoverLineaDesktop(LineaWeb lineaWeb) {
+	public boolean checkHoverLineaDesktop(LineaWeb lineaWeb) {
 		return MenusWebAll.make(channel).isMenuInState(true, 1);
 	}	
 	
