@@ -275,11 +275,7 @@ public class Pais implements Serializable {
 	}
 	
 	public boolean isGaleriaGenesis(AppEcom app) {
-		if (app==AppEcom.outlet) {
-			return true;
-		}
-		//Sólo falta por migrar España y USA
-		return (codigoPais.compareTo("001")!=0 && codigoPais.compareTo("400")!=0);
+		return true;
 	}
 	
 	public boolean isFichaGenesis(AppEcom app) {
