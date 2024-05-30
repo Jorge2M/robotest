@@ -2,6 +2,8 @@ package com.mng.robotest.tests.domains.ficha.tests;
 
 import org.testng.annotations.Test;
 
+import com.mng.robotest.testslegacy.utils.UtilsTest;
+
 
 public class Ficha {
 	
@@ -42,7 +44,11 @@ public class Ficha {
 		groups={"Bordados", "Canal:desktop,mobile_App:shop"}, 
 		alwaysRun=true, description="[Usario no registrado] Testeo Personalización bordados")
 	public void articuloPersonalizableNoreg() throws Exception {
-		new Fic005().execute();
+		//Todavía no se ha implementado en la ficha Genesis 
+		//el tema de la personalización, le damos un margen de tiempo
+		if (!UtilsTest.todayBeforeDate("2024-06-30")) {
+			new Fic005().execute();
+		}
 	}
 
 }

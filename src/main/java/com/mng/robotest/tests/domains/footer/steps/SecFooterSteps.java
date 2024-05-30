@@ -19,7 +19,7 @@ public class SecFooterSteps extends StepBase {
 	@Validation 
 	public ChecksTM checkLinksFooter() { 
 		var checks = ChecksTM.getNew();
-		for (var footerLink : FooterLink.getFooterLinksFiltered(app, channel, dataTest.getPais())) {
+		for (var footerLink : FooterLink.getFooterLinksFiltered(app, channel)) {
 			checks.add(
 				"Aparecen el link <b>" + footerLink + "</b> en el footer",
 				secFooter.checkFooter(footerLink));

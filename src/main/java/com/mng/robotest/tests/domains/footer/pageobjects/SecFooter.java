@@ -88,58 +88,31 @@ public class SecFooter extends PageBase {
 			this.isInGenesis = isInGenesis;
 		}
 		
-		public String getXPathCapa(AppEcom app, Pais pais) {
-			if (isGenesis(app, pais)) {
-				return xpCapaGenesis;
-			}
-			return xpCapa;
-		}
-		
-		private String getXPathLink(AppEcom app, Pais pais) {
-			if (isGenesis(app, pais)) {
-				return xpathGenesis;
-			}
-			return xpath;			
-		}
-		
-		public String getXPath(AppEcom app, Pais pais) {
-			return getXPathCapa(app, pais) + getXPathLink(app, pais);
+		public String getXPath() {
+			String xpathFull = xpCapa + xpath;
+			String xpathGenesisFull = xpCapaGenesis + xpathGenesis;
+			return "(" + xpathFull + " | " + xpathGenesisFull + ")";
 		}
 		
 		public boolean pageInNewTab(AppEcom app, Pais pais) {
-			if (isGenesis(app, pais)) {
-				return false;
-			}
-			return this.pageInNewTab;
+			return false;
 		}
 		
 		public boolean isInGenesis() {
 			return isInGenesis;
 		}
 		
-		public static List<FooterLink> getFooterLinksFiltered(AppEcom app, Channel channel, Pais pais) {
+		public static List<FooterLink> getFooterLinksFiltered(AppEcom app, Channel channel) {
 			List<FooterLink> listLinksToReturn = new ArrayList<>();
 			for (var footerLink : FooterLink.values()) {
 				if (footerLink.appList.contains(app) && 
 					footerLink.channel.contains(channel)) {
-					if (!footerLink.isGenesis(app, pais)) {
+					if (footerLink.isInGenesis()) {
 						listLinksToReturn.add(footerLink);
-					} else {
-						if (footerLink.isInGenesis()) {
-							listLinksToReturn.add(footerLink);
-						}
 					}
 				}
 			}
 			return listLinksToReturn;
-		}
-		
-		private boolean isGenesis(AppEcom app, Pais pais) {
-			return true;
-			//TODO cuando esté todo migrado a Genesis eliminar lo antiguo
-//				!isEnvPRO() || 
-//				app==AppEcom.outlet || 
-//				pais.isGaleriaGenesis(app);
 		}
 	}
 	
@@ -151,7 +124,7 @@ public class SecFooter extends PageBase {
 	}
 	
 	private String getXPathLink(FooterLink footerType) {
-		return footerType.getXPath(app, dataTest.getPais());
+		return footerType.getXPath();
 	}
 	
 	private String getXPathLinkCambioPais() {
@@ -162,21 +135,21 @@ public class SecFooter extends PageBase {
 	}
 	
 	public boolean isPresent() {
-		String xpathAyuda = FooterLink.AYUDA.getXPathCapa(app, dataTest.getPais());
+		String xpathAyuda = FooterLink.AYUDA.getXPath();
 		return state(PRESENT, xpathAyuda).check();
 	}
 	
 	public boolean isVisible() {
 		waitLoadPage();
-		String xpathAyuda = FooterLink.AYUDA.getXPathCapa(app, dataTest.getPais());
+		String xpathAyuda = FooterLink.AYUDA.getXPath();
 		return state(VISIBLE, xpathAyuda).check();
 	}	
 	
 	public void clickLink(FooterLink footerType) {
 		new ModalsSubscriptions().closeAllIfVisible();
-		moveToElement(footerType.getXPath(app, dataTest.getPais()));
+		moveToElement(footerType.getXPath());
 		
-		String xpathLink = footerType.getXPath(app, dataTest.getPais());
+		String xpathLink = footerType.getXPath();
 		state(VISIBLE, xpathLink).wait(2).check();
 		waitMillis(500);
 		click(xpathLink).exec();
@@ -201,7 +174,7 @@ public class SecFooter extends PageBase {
 	}
 	
 	public void moveTo() {
-		String xpathAyuda = FooterLink.AYUDA.getXPathCapa(app, dataTest.getPais());
+		String xpathAyuda = FooterLink.AYUDA.getXPath();
 		if (state(VISIBLE, xpathAyuda).check()) {
 			moveToElement(xpathAyuda);
 		}
