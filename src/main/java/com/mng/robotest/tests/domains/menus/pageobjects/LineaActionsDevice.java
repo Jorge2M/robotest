@@ -124,7 +124,9 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 			if (isSublineaSelected()) {
 				return true;
 			}
-			waitMillis(1000);
+			if (i<seconds) {
+				waitMillis(1000);
+			}
 		}
 		return false;
 	}
