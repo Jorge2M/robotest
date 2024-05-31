@@ -47,14 +47,14 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 		return 
 			"//ul/li[@class[contains(.,'Submenu_selected')]]" + 
 			"//a[@data-testid[contains(.,'menu.family.')]]" +
-			"//self::*[text()[contains(.,'" + removeFirstCharacter(menu.getMenu()) + "')]]";		
+			"//self::*[text()[contains(.,'" + capitalizeFirstLetter(menu.getMenu()) + "')]]";		
 	}
 	
-	private String removeFirstCharacter(String value) {
-        if (value == null || value.length() <= 1) {
-        	return "";
+	private String capitalizeFirstLetter(String value) {
+        if (value == null || value.isEmpty()) {
+            return value;
         }
-        return value.substring(1); 
+        return value.substring(0, 1).toUpperCase() + value.substring(1);
 	}
 	
 	@Override

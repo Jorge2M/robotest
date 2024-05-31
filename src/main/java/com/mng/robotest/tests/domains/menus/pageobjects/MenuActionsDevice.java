@@ -14,7 +14,6 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	private final MenuWeb menu;
 	
 	private String getXPathMenu() {
-		//return "//li[@class[contains(.,'Submenu_selected')]]" + getXPathMenuBase();
 		return "//li[@data-testid[contains(.,'menu.section')]]" + getXPathMenuBase();
 	}
 	
@@ -30,7 +29,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 		String nameMenuInDataTestId = UtilsMenusPO.getMenuNameForDataTestId(nameMenu);
 		String xpath =  
 				"//ul/li//a[@data-testid='" + dataTestid + "." + 
-				nameMenuInDataTestId + "_" + idLinea + sufix + "' or text()='" + menu.getMenu() + "'";
+				nameMenuInDataTestId + "_" + idLinea + sufix + "' or text()[contains(.,'" + capitalizeFirstLetter(menu.getMenu()) + "')]";
 		
 		if (nameMenu.contains(" ")) {
 			String menuIni = nameMenu.substring(0, menu.getMenu().indexOf(" "));
@@ -41,6 +40,13 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 		
 		return xpath;
 	}	
+	
+	private String capitalizeFirstLetter(String value) {
+        if (value == null || value.isEmpty()) {
+            return value;
+        }
+        return value.substring(0, 1).toUpperCase() + value.substring(1);
+	}
 
 	public MenuActionsDevice(MenuWeb menu) {
 		this.menu = menu;
