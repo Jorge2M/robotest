@@ -9,36 +9,51 @@ import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 
+import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType.*;
+
 public class LineaActionsDevice extends PageBase implements LineaActions {
 
 	private final LineaType lineaType;
 	private final SublineaType sublineaType;
 	
-	private static final String XP_LINK_SUBLINEA_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_nina')]]";
-	private static final String XP_LINK_SUBLINEA_BEBE_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_babyNina')]]";
-	private static final String XP_LINK_SUBLINEA_TEEN_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenQ')]]";
-	private static final String XP_LINK_SUBLINEA_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_nino')]]";
-	private static final String XP_LINK_SUBLINEA_BEBE_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_babyNino')]]";
-	private static final String XP_LINK_SUBLINEA_TEEN_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenP')]]";
+//	private static final String XP_LINK_SUBLINEA_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_nina')]]";
+//	private static final String XP_LINK_SUBLINEA_BEBE_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_babyNina')]]";
+//	private static final String XP_LINK_SUBLINEA_TEEN_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenQ')]]";
+//	private static final String XP_LINK_SUBLINEA_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_nino')]]";
+//	private static final String XP_LINK_SUBLINEA_BEBE_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_babyNino')]]";
+//	private static final String XP_LINK_SUBLINEA_TEEN_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenP')]]";
+	
+	private String getXPathSublineaLink() {
+		if (isOutlet()) {
+			return getXPathSublineaLinkOutlet();
+		}
+		return getXPathSublineaLinkShop();
+	}
+	
+	private String getXPathSublineaLinkShop() {
+		String xpatIni = "//*[@data-testid[contains(.,'menu.subBrand.sections_";
+		if (sublineaType==TEEN_NINA || sublineaType==TEEN_NINO) {
+			return xpatIni + sublineaType.getIdTeen2(app) + "')]]";
+		}
+		return xpatIni + sublineaType.getId(app) + "')]]";
+	}
+	
+	private String getXPathSublineaLinkOutlet() {
+		return "//*[@data-testid[contains(.,'menu.subBrand." + sublineaType.getId(app) + ".section')]]";
+	}
 	
 	public LineaActionsDevice(LineaWeb lineaWeb) {
 		this.lineaType = lineaWeb.getLinea();
 		this.sublineaType = lineaWeb.getSublinea();
 	}
 
-	//TODO eliminar el OLD ("header.menuItem") cuando suba la nueva versión a PRO (31-05-2023)
-	private String getXPathLineaLink() throws IllegalArgumentException {
-		return "(" + 
-				getXPathLineaLink("header.menuItem") + " | " + 
-				getXPathLineaLink("menu.brand") + ")";
-	}
-	
 	private String getXPathMenusSublinea() {
 		var idSublinea = sublineaType.getId(app);
-		return "//ul[@data-testid[contains(.,'menu.family.sections_" + idSublinea + "')]]";
+		return "//ul[@data-testid[contains(.,'menu.family." + idSublinea + "')]]";
 	}	
 	
-	private String getXPathLineaLink(String dataTestid) throws IllegalArgumentException {
+	private String getXPathLineaLink() throws IllegalArgumentException {
+		String dataTestid = "menu.brand";
 		switch (lineaType) {
 		case SHE, HE, TEEN, HOME:
 			if (isOutlet()) {
@@ -55,24 +70,6 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 			throw new IllegalArgumentException("The line " + lineaType + " is not present in the movil channel");
 		}
 	}	
-	
-	private String getXPathSublineaLink() {
-		switch (sublineaType) {
-		case NINA_NINA:
-			return XP_LINK_SUBLINEA_NINA;
-		case TEEN_NINA:
-			return XP_LINK_SUBLINEA_TEEN_NINA;
-		case NINA_BEBE:
-			return XP_LINK_SUBLINEA_BEBE_NINA;
-		case NINO_NINO:
-			return XP_LINK_SUBLINEA_NINO;
-		case TEEN_NINO:
-			return XP_LINK_SUBLINEA_TEEN_NINO;
-		case NINO_BEBE:
-		default:
-			return XP_LINK_SUBLINEA_BEBE_NINO;
-		}
-	}
 	
 	@Override
 	public void clickLinea() {

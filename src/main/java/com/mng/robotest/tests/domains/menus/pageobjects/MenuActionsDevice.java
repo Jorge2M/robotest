@@ -2,6 +2,7 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 
 import java.util.Arrays;
 
+import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobilNoGenesis;
@@ -22,7 +23,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 		String sufix = ".link";
 		String idLinea = menu.getLinea().name().toLowerCase();
 		if (menu.getSublinea()!=null) {
-			idLinea = menu.getSublinea().getId(app);
+			idLinea = menu.getSublinea().getId(AppEcom.shop);
 		}
 
 		String nameMenu = menu.getMenu();
@@ -73,7 +74,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 	
 	private String clickMenu() {
-		String menuItem = getElement(getXPathMenu()).getText();
+		String menuItem = getElement(getXPathMenu()).getAttribute("innerHTML");
 		click(getXPathMenu()).exec();
 		return menuItem;
 	}
