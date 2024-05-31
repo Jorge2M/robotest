@@ -99,22 +99,18 @@ public class GroupWeb extends PageBase {
 	private static final String XP_GROUP_DESKTOP = "//li[@data-testid[contains(.,'menu.section')]]";
 	private static final String TAG_GROUP = "@tag_group";
 	
-//	private static final String XP_SUBMENU_WITH_TAG_DESKTOP = 
-//			"//ul[@data-testid[contains(.,'menu.section')]]" + 
-//			"/li/*[@data-testid[contains(.,'" + TAG_GROUP + "')]]/..";
-	private static final String XP_SUBMENU_WITH_TAG_DESKTOP_GENESIS = //Génesis 14-11-23
+	private static final String XP_SUBMENU_WITH_TAG_DESKTOP = 
 			"//li[@data-testid[contains(.,'" + TAG_GROUP + "')]]" + 
 			"/ul[@id[contains(.,'subMenuColumn3')]]" +  
 			"/li[@data-testid[contains(.,'" + TAG_GROUP + "')]]";
 	
-//	private static final String XP_SUBMENU_DEVICE = "//div[@id='subMenuPortalContainer']//div[@data-testid='menu.subMenu']";
-	private static final String XP_SUBMENU_DEVICE_GENESIS = "//li[@class[contains(.,'Submenu_selected')]]//div[@data-testid='menu.subMenu']";
+	//private static final String XP_SUBMENU_DEVICE = "//li[@class[contains(.,'Submenu_selected')]]//div[@data-testid='menu.subMenu']";
+	private static final String XP_SUBMENU_DEVICE = "//li[@data-testid[contains(.,'menu.section')]]//div[@data-testid='menu.subMenu']";
 
 	private String getXPathGroupSelected() {
-		String groupOld = getXPathGroup() + "//self::*[@aria-expanded='true']";
-		String groupGenesis = getXPathGroup() + "/../self::*[@class[contains(.,'Submenu_selected')]]/button"; //Génesis (14-11-23)
-		return "(" + groupOld + " | " + groupGenesis + ")";
+		return getXPathGroup() + "/../self::*[@class[contains(.,'Submenu_selected')]]/button"; //Génesis (14-11-23)
 	}
+	
 	private String getXPathGroup() {
 		if (channel.isDevice()) {
 			return getXPathGroupDevice();
@@ -141,26 +137,17 @@ public class GroupWeb extends PageBase {
 
 	private String getXPathSubmenu() {
 		if (channel.isDevice()) {
-			return getXPathSubmenuDevice();
+			return XP_SUBMENU_DEVICE;
 		}
 		return getXPathSubmenuDesktop(); 
 	}
 	
-	private String getXPathSubmenuDevice() {
-//		String xpathSubmenu = XP_SUBMENU_DEVICE;
-		String xpathSubmenuGenesis = XP_SUBMENU_DEVICE_GENESIS; 
-		return xpathSubmenuGenesis;
-//		return "(" + xpathSubmenu + " | " + xpathSubmenuGenesis + ")";
-	}
-	
 	private String getXPathSubmenuDesktop() {
-//		String xpathSubmenu = XP_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
-		String xpathSubmenuGenesis = XP_SUBMENU_WITH_TAG_DESKTOP_GENESIS.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
+		String xpathSubmenu = XP_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
 		if (sublinea!=null) {
-			xpathSubmenuGenesis = xpathSubmenuGenesis.replace("subMenuColumn3", "subMenuColumn4"); 
+			return xpathSubmenu.replace("subMenuColumn3", "subMenuColumn4"); 
 		}
-		return xpathSubmenuGenesis;
-//		return "(" + xpathSubmenu + " | " + xpathSubmenuGenesis + ")";
+		return xpathSubmenu;
 	}
 	
 	public void click() {

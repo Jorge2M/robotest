@@ -92,7 +92,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	@Override
 	public void clickSublinea() {
 		if (!isSublineaSelected(0)) {
-			click(getXPathSublineaLink()).type(JAVASCRIPT).exec();
+			click(getXPathSublineaLink()).exec();
 		}
 	}
 	@Override
@@ -123,7 +123,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 
 	@Override
 	public boolean isSublineaSelected(int seconds) {
-		for (int i=0; i<seconds; i++) {
+		for (int i=0; i<=seconds; i++) {
 			if (isSublineaSelected()) {
 				return true;
 			}

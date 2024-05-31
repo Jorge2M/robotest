@@ -12,14 +12,9 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 
 	private final MenuWeb menu;
 	
-	public String getXPathMenu() {
-		return "(" + getXPathMenuActual() + " | " + getXPathMenuGenesis() + ")";
-	}
-	private String getXPathMenuActual() {
-		return "//div[@id='subMenuPortalContainer']" +  getXPathMenuBase();
-	}
-	private String getXPathMenuGenesis() {
-		return "//li[@class[contains(.,'Submenu_selected')]]" + getXPathMenuBase();
+	private String getXPathMenu() {
+		//return "//li[@class[contains(.,'Submenu_selected')]]" + getXPathMenuBase();
+		return "//li[@data-testid[contains(.,'menu.section')]]" + getXPathMenuBase();
 	}
 	
 	private String getXPathMenuBase() {
