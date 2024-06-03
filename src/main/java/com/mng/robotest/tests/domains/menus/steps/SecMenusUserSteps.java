@@ -10,6 +10,7 @@ import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMLYUnirmeAlClubSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
+import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuentaOld;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
@@ -17,6 +18,7 @@ import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopStep
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -138,6 +140,10 @@ public class SecMenusUserSteps extends StepBase {
 	}
 
 	public int clickMenuMangoLikesYou() {
+		//https://mangospain.atlassian.net/browse/ONLINE-72646
+		if (isDevice() && UtilsTest.todayBeforeDate("2024-07-03")) {
+			clickLinea(LineaType.SHE);
+		}
 		if (dataTest.isUserRegistered()) {
 			return clickMenuMangoLikesYouLogged();
 		}
@@ -166,7 +172,7 @@ public class SecMenusUserSteps extends StepBase {
 	private void clickMenuMangoLikesYouNotLogged() {
 		clickUserMenu(MANGO_LIKES_YOU);
 		new PageMLYUnirmeAlClubSteps().isPage(2);
-	}	
+	}
 	
 	@Step (
 		description=
@@ -179,7 +185,7 @@ public class SecMenusUserSteps extends StepBase {
 		replaceStepDescription(TAG_POINTS, String.valueOf(numberPoints));
 		return (numberPoints);
 	}	
-
+	
 	@Validation
 	public ChecksTM checkVisibilityLinkMangoLikesYou() {	
 		ChecksResultWithNumberPoints checks = ChecksResultWithNumberPoints.getNew();
