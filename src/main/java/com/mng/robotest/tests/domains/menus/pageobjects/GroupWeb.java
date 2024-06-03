@@ -112,7 +112,7 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private String getXPathGroup() {
-		if (channel.isDevice()) {
+		if (Utils.isMenuNewService(app, dataTest.getPais())) {
 			return getXPathGroupDevice();
 		}
 		return getXPathGroupDesktop();
