@@ -26,7 +26,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 		expected="Se accede a la shop correctamente")
 	public void clickIrDeShoppingButton() {
 		pgRegistroFin.clickIrDeShopping();
-		SecCabecera.make().clickLogoMango();
+		clickIconMango();
 		validateWeAreLogged();
 	}
 	

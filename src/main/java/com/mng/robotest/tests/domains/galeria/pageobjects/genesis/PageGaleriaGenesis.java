@@ -22,9 +22,13 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSli
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.UtilsPageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActionFav;
 import com.mng.robotest.testslegacy.data.Color;
+import com.mng.robotest.testslegacy.data.Constantes;
+import com.mng.robotest.testslegacy.data.PaisShop;
+import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.pageobject.utils.DataArticleGalery;
@@ -376,27 +380,58 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 
 	
 	//----
-
+	@Override
 	public boolean backTo1erArticulo(String xpathUpButton) {
 		throw new UnsupportedOperationException();
 	}
+	
+	@Override
 	public WebElement getArticuloConVariedadColoresAndHover(int numArticulo) {
 		throw new UnsupportedOperationException();
 	}
-	public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
-		throw new UnsupportedOperationException();
+	
+	@Override
+	public ArticuloScreen getArticuloObject(int numArticulo) {
+		var articleElem = getElements(getXPathArticulo()).get(numArticulo-1);
+		moveToElement(articleElem);
+		var articulo = new ArticuloScreen();
+		articulo.setReferencia(getRefArticulo(articleElem)); 
+		articulo.setNombre(getNombreArticulo(articleElem));
+		articulo.setPrecio(getPrecioArticulo(articleElem));
+		var codColor = getCodColorArticulo(articleElem);
+		articulo.setCodigoColor(codColor);
+		articulo.setColorName(getNameColorFromCodigo(codColor));
+		articulo.setNumero(1);
+		
+		return articulo;
 	}
+	
+	private static final String XP_PRICE_ARTICLE = "//*[@data-testid='currentPrice']";
+	
+	@Override
 	public String getPrecioArticulo(WebElement articulo) {
-		throw new UnsupportedOperationException();
+		return getElement(articulo, "." + XP_PRICE_ARTICLE).getText();
 	}
+	
 	public boolean isArticleRebajado(WebElement articulo) {
 		throw new UnsupportedOperationException();
 	}
-	public String getCodColorArticulo(int numArticulo) throws Exception {
-		throw new UnsupportedOperationException();
+	
+	@Override
+	public String getCodColorArticulo(int numArticulo) {
+		var articuloElem = getElement(getXPathArticulo(numArticulo));
+		return getCodColorArticulo(articuloElem);
 	}
+	
+	private static final String XP_URL_FICHA_ARTICLE = "//*[@data-testid='productCard.images']/a";
+	
+	private String getCodColorArticulo(WebElement articulo) {
+		String urlFicha = getElement(articulo, "." + XP_URL_FICHA_ARTICLE).getAttribute("href");
+		return UtilsPageGaleria.getReferenciaAndCodColorFromURLficha(urlFicha);
+	}
+	
 	public String getNameColorFromCodigo(String codigoColor) {
-		throw new UnsupportedOperationException();
+		return Constantes.COLOR_DESCONOCIDO;
 	}
 	public void clickColorArticulo(WebElement articulo, int posColor) {
 		throw new UnsupportedOperationException();
@@ -416,12 +451,75 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public WebElement getArticleFromPagina(int numPagina, int numArticle) {
 		throw new UnsupportedOperationException();
 	}
+	
+	@Override
 	public void showTallasArticulo(int posArticulo) {
-		throw new UnsupportedOperationException();
+		if (isDevice()) {
+			showTallasArticuloMobile(posArticulo);
+		} else {
+			showTallasArticuloDesktop(posArticulo);
+		}
 	}
-	public ArticuloScreen selectTallaAvailableArticle(int posArticulo) throws Exception {
-		throw new UnsupportedOperationException();
+	
+	private static final String XP_ANADIR_ARTICLE_MOBILE = "//*[@data-testid='productCard.sizeSheetButton']";
+	
+	private void showTallasArticuloMobile(int posArticulo) {
+		String xpathArticle = getXPathArticulo(posArticulo);
+		state(VISIBLE, xpathArticle).wait(1).check();
+		moveToElement(xpathArticle);
+		var articleElem = getElement(xpathArticle);
+		var showTallasButton = getElement(articleElem, "." + XP_ANADIR_ARTICLE_MOBILE);
+		moveToElement(showTallasButton);
+		scrollEjeY(70); //Avoid capa article added to bag
+		showTallasButton.click();
 	}
+	private void showTallasArticuloDesktop(int posArticulo) {
+		String xpathArticle = getXPathArticulo(posArticulo);
+		state(VISIBLE, xpathArticle).wait(1).check();
+		moveToElement(xpathArticle);		
+	}
+	
+	@Override
+	public ArticuloScreen selectTallaAvailableArticle(int posArticulo) {
+		if (isInvisibleArticleCapaTallasUntil(posArticulo, 0)) {
+			showTallasArticulo(posArticulo);
+		}
+		var talla = selectTallaAvailableArticleClick(posArticulo);
+		var articulo = getArticuloObject(posArticulo);
+		articulo.setTalla(talla);
+		return null;
+	}
+	
+	private static final String XP_TALLA_AVAILABLE = "//*[@data-testid='plp.product.sizeSelector.available']";
+	private static final String XP_TALLA_UNAVAILABLE = "//*[@data-testid='plp.product.sizeSelector.unavailable']";
+	
+	private String getXPathTallaAvailableArticle(int posArticulo) {
+		if (isDevice()) {
+			return XP_TALLA_AVAILABLE;
+		}
+		return getXPathArticulo(posArticulo) + XP_TALLA_AVAILABLE;
+	}
+	private String getXPathTallaUnavailable(int posArticulo) {
+		if (isDevice()) {
+			return XP_TALLA_UNAVAILABLE;
+		}
+		return getXPathArticulo(posArticulo) + XP_TALLA_UNAVAILABLE;
+	}
+	
+	private Talla selectTallaAvailableArticleClick(int posArticulo) {
+		String xpathTalla = getXPathTallaAvailableArticle(posArticulo);
+		if (state(VISIBLE, xpathTalla).wait(1).check()) {
+			var tallaToSelect = getElement(xpathTalla);
+			var labelTalla = tallaToSelect.getText();
+			tallaToSelect.click();
+			if (isDevice()) { //wait for tallas unshow in webmobil
+				isInvisibleArticleCapaTallasUntil(posArticulo, 2);
+			}
+			return Talla.fromLabel(labelTalla, PaisShop.from(dataTest.getCodigoPais()));
+		}
+		return null;
+	}
+	
 	public void selectTallaArticleNotAvalaible() {
 		throw new UnsupportedOperationException();
 	}
@@ -464,9 +562,32 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public boolean isClickableFiltroUntil(int seconds) {
 		throw new UnsupportedOperationException();
 	}
-	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
-		throw new UnsupportedOperationException();
+	
+	private static final String XP_CAPA_TALLAS_DESKTOP = "//*[@data-testid='plp.product.sizeSelector.panel']";
+	private static final String XP_CAPA_TALLAS_MOBILE = "//*[@data-testid='productCard.sizeSheet']/div";
+	private String getXPathCapaTallas() {
+		if (isDevice()) {
+			return XP_CAPA_TALLAS_MOBILE;
+		}
+		return XP_CAPA_TALLAS_DESKTOP;
 	}
+	
+	private String getXPathCapaTallas(int posArticulo) {
+		String xpCapaTallas = getXPathCapaTallas();
+		if (isDevice()) {
+			return xpCapaTallas;
+		}
+		return "(" + xpCapaTallas + ")[" + posArticulo + "]";
+	}
+
+	@Override
+	public boolean isVisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
+		return state(VISIBLE, getXPathCapaTallas(posArticulo)).wait(seconds).check();
+	}
+	private boolean isInvisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
+		return state(INVISIBLE, getXPathCapaTallas(posArticulo)).wait(seconds).check();
+	}
+	
 	public DataScroll scrollToPageFromFirst(int numPage) {
 		throw new UnsupportedOperationException();
 	}

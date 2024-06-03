@@ -8,7 +8,6 @@ import com.mng.robotest.tests.domains.changecountry.steps.ModalChangeCountryStep
 import com.mng.robotest.tests.domains.footer.pageobjects.FactoryPageFromFooter;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.FooterLink;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -85,7 +84,7 @@ public class SecFooterSteps extends StepBase {
 		expected="Aparecen los textos legales de RGPD")
 	public void clickFooterSubscriptionInput(boolean clickRegister) {
 		if (!clickRegister) {
-			SecCabecera.make().clickLogoMango();
+			clickIconMango();
 		}
 		secFooter.clickFooterSuscripcion();
 	}

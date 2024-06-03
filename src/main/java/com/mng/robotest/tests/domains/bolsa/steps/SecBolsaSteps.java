@@ -408,6 +408,7 @@ public class SecBolsaSteps extends StepBase {
 		expected="Se muestra la página de identificación",
 		saveNettraffic=ALWAYS)
 	public void selectButtonComprarBasic() {
+		secBolsa.setBolsaToStateIfNotYet(OPEN);
 		secBolsa.clickBotonComprar(10);
 	}
 	

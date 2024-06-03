@@ -10,7 +10,6 @@ import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMLYUnirmeAlClubSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuentaOld;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
@@ -142,7 +141,7 @@ public class SecMenusUserSteps extends StepBase {
 	public int clickMenuMangoLikesYou() {
 		//https://mangospain.atlassian.net/browse/ONLINE-72646
 		if (isDevice() && UtilsTest.todayBeforeDate("2024-07-03")) {
-			clickLinea(LineaType.SHE);
+			clickIconMango();
 		}
 		if (dataTest.isUserRegistered()) {
 			return clickMenuMangoLikesYouLogged();

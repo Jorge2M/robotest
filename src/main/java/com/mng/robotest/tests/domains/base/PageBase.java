@@ -25,6 +25,7 @@ import com.mng.robotest.tests.domains.base.datatest.DataTest;
 import com.mng.robotest.tests.domains.legal.legaltexts.FactoryLegalTexts;
 import com.mng.robotest.tests.domains.legal.legaltexts.LegalTextsPage;
 import com.mng.robotest.tests.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts;
+import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.testslegacy.data.CodIdioma;
 import com.mng.robotest.testslegacy.data.PaisShop;
@@ -283,6 +284,10 @@ public class PageBase extends PageObjTM {
 	
 	protected void drag(WebElement element, int pixels) {
 		new Actions(driver).dragAndDropBy(element, pixels, 0).build().perform();		
+	}
+	
+	protected boolean clickIconMango() {
+		return SecCabecera.make().clickLogoMango();
 	}
 
 }

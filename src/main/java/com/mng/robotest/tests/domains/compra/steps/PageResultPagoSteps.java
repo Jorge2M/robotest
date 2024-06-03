@@ -11,7 +11,6 @@ import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps.ChecksResult
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.tests.domains.micuenta.steps.PageAccesoMisComprasSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -135,7 +134,7 @@ public class PageResultPagoSteps extends StepBase {
 		if (pgResultPago.isVisibleDescubrirLoUltimo()) {
 			pgResultPago.clickDescubrirLoUltimo();
 		} else {
-			SecCabecera.make().clickLogoMango();
+			clickIconMango();
 		}
 	}
 	

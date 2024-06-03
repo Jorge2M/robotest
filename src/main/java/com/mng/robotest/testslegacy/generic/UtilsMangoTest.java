@@ -17,7 +17,6 @@ import org.openqa.selenium.interactions.Actions;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.menus.beans.Linea;
-import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Constantes;
@@ -34,7 +33,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class UtilsMangoTest extends PageBase {
 
 	public void goToPaginaInicio() throws Exception {
-		boolean existeLogo = SecCabecera.make().clickLogoMango();
+		boolean existeLogo = clickIconMango();
 		if (!existeLogo) {
 			var ctx = getTestCase().getTestRunParent().getTestNgContext();
 			String urlPaginaPostAcceso = (String)ctx.getAttribute(Constantes.ATTR_URL_PAG_POST_ACCESO); 
