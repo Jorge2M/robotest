@@ -13,16 +13,17 @@ public class Utils {
 		if (app==AppEcom.outlet) {
 			return true;
 		}
-		return (
-			!ESPANA.isEquals(pais) &&
-			!ISLAS_CANARIAS.isEquals(pais) &&
-			!MELILLA.isEquals(pais) &&
-			!CEUTA.isEquals(pais) &&
-			!ITALIA.isEquals(pais) &&
-			!NEDERLAND.isEquals(pais) &&
-			!FRANCE.isEquals(pais) &&
-			!COREA_DEL_SUR.isEquals(pais) &&
-			!PORTUGAL.isEquals(pais));
+		return true;
+//		return (
+//			!ESPANA.isEquals(pais) &&
+//			!ISLAS_CANARIAS.isEquals(pais) &&
+//			!MELILLA.isEquals(pais) &&
+//			!CEUTA.isEquals(pais) &&
+//			!ITALIA.isEquals(pais) &&
+//			!NEDERLAND.isEquals(pais) &&
+//			!FRANCE.isEquals(pais) &&
+//			!COREA_DEL_SUR.isEquals(pais) &&
+//			!PORTUGAL.isEquals(pais));
 	}
 
 
