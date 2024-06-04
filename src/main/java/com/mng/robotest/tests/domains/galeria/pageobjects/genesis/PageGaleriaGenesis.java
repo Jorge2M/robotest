@@ -44,7 +44,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public static final String XP_ARTICULO = XP_LISTA_ARTICULOS + "//li[@data-slot]";
 	protected static final String XP_ICONO_UP_GALERY = "//button[@aria-label='plp.catalog.scroll-to-top']";
 	private static final String XP_IMAGE_ARTICLE = "//img[@data-testid[contains(.,'plp.product-slot')]]";
-	private static final String XP_HEARTH_ICON = "//button[@aria-label[contains(.,'accessibility.wishlist')]]";
+	private static final String XP_HEARTH_ICON = "//button[@data-testid[contains(.,'plp.product.favorite.heart')]]";
 	private static final String XP_LINK_2_COLUMNAS = "//*[@data-testid='column-selector-2']";
 	private static final String XP_LINK_4_COLUMNAS = "//*[@data-testid='column-selector-4']";
 	private static final String XP_TITLE_ARTICLE = "//p[@class[contains(.,'productTitle')]]";
