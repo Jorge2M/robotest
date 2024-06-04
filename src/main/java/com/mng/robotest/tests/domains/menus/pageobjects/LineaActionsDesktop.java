@@ -88,6 +88,7 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	
 	@Override 
 	public void hoverSublinea() {
+		state(VISIBLE, getXPathSublinea()).wait(1).check();
 		moveToElement(getXPathSublinea());
 	}
 	@Override

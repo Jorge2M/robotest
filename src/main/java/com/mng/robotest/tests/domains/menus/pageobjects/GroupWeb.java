@@ -112,7 +112,7 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private String getXPathGroup() {
-		if (Utils.isMenuNewService(app, dataTest.getPais())) {
+		if (isDevice()) {
 			return getXPathGroupDevice();
 		}
 		return getXPathGroupDesktop();
@@ -126,8 +126,15 @@ public class GroupWeb extends PageBase {
 		return xpath + "//self::*[@data-testid[contains(.,'" + group.getId() + "')]]"; 
 	}
 	
+	public String getIdLinea() {
+		if (sublinea!=null) {
+			return sublinea.getId(app);
+		}
+		return linea.getId2();
+	}
+	
 	private String getXPathGroupDesktop() {
-		String dataTestId = "[@data-testid[contains(.,'" + group.getId() + "')]]";
+		String dataTestId = "[@data-testid[contains(.,'" + group.getId() + "_" + getIdLinea() + "')]]";
 		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
 			return XP_GROUP_DESKTOP + "//a" + dataTestId;
 		} else {

@@ -9,8 +9,6 @@ import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType.*;
-
 public class LineaActionsDevice extends PageBase implements LineaActions {
 
 	private final LineaType lineaType;
@@ -24,24 +22,9 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 //	private static final String XP_LINK_SUBLINEA_TEEN_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenP')]]";
 	
 	private String getXPathSublineaLink() {
-		if (Utils.isMenuNewService(app, dataTest.getPais())) {
-			return getXPathSublineaLinkOutlet();
-		}
-		return getXPathSublineaLinkShop();
-	}
-
-	private String getXPathSublineaLinkShop() {
-		String xpatIni = "//*[@data-testid[contains(.,'menu.subBrand.sections_";
-		if (sublineaType==TEEN_NINA || sublineaType==TEEN_NINO) {
-			return xpatIni + sublineaType.getIdTeen2(app) + "')]]";
-		}
-		return xpatIni + sublineaType.getId(app) + "')]]";
-	}
-	
-	private String getXPathSublineaLinkOutlet() {
 		return "//*[@data-testid[contains(.,'menu.subBrand." + sublineaType.getId(app) + ".section')]]";
 	}
-	
+
 	public LineaActionsDevice(LineaWeb lineaWeb) {
 		this.lineaType = lineaWeb.getLinea();
 		this.sublineaType = lineaWeb.getSublinea();

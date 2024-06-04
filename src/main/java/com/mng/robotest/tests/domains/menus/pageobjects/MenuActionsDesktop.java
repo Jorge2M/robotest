@@ -45,8 +45,7 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	
 	private String getXPathMenuAlternative() {
 		return 
-			"//ul/li[@class[contains(.,'Submenu_selected')]]" + 
-			"//a[@data-testid[contains(.,'menu.family.')]]" +
+			"//ul/li//a[@data-testid[contains(.,'menu.family.')]]" +
 			"//self::*[text()[contains(.,'" + capitalizeFirstLetter(menu.getMenu()) + "')]]";		
 	}
 	

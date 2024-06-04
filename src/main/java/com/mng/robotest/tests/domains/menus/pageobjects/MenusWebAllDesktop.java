@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -27,8 +26,8 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 		return isMenuClose(seconds);
 	}
 	
-	private String getXPathMenuItem(LineaType linea) {
-		return XP_MENU_ITEM + "/*[@data-testid[contains(.,'_" + linea.toString().toLowerCase() + "')]]/.."; 
+	private String getXPathMenuItem(String idLinea) {
+		return XP_MENU_ITEM + "/*[@data-testid[contains(.,'_" + idLinea + "')]]/.."; 
 	}
 	
 	@Override
@@ -39,14 +38,17 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 	
 	private List<MenuWeb> getVisibleMenus(GroupWeb groupWeb) {
 		List<MenuWeb> menus = new ArrayList<>();
-		var menuElements = getElements(getXPathMenuItem(groupWeb.getLinea()));
-		for (WebElement menuElement : menuElements) {
-			menus.add(new MenuWeb
-					.Builder(getNameMenu(menuElement))
-					.linea(groupWeb.getLinea())
-					.sublinea(groupWeb.getSublinea())
-					.group(groupWeb.getGroup())
-					.build());
+		var menuElements = getElements(getXPathMenuItem(groupWeb.getIdLinea()));
+		for (var menuElement : menuElements) {
+			String name = getNameMenu(menuElement);
+			if ("".compareTo(name)!=0) {
+				menus.add(new MenuWeb
+						.Builder(getNameMenu(menuElement))
+						.linea(groupWeb.getLinea())
+						.sublinea(groupWeb.getSublinea())
+						.group(groupWeb.getGroup())
+						.build());
+			}
 		}
 		return menus;
 	}

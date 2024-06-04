@@ -17,7 +17,6 @@ import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopStep
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
-import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -139,10 +138,6 @@ public class SecMenusUserSteps extends StepBase {
 	}
 
 	public int clickMenuMangoLikesYou() {
-		//https://mangospain.atlassian.net/browse/ONLINE-72646
-		if (isDevice() && UtilsTest.todayBeforeDate("2024-07-03")) {
-			clickIconMango();
-		}
 		if (dataTest.isUserRegistered()) {
 			return clickMenuMangoLikesYouLogged();
 		}
