@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobilNoGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
@@ -177,7 +178,13 @@ public class PageGaleriaDeviceNoGenesis extends PageGaleriaDevice {
 		throw new UnsupportedOperationException();
 	}
 	
+	@Override
+	public void clickLinkColumnas(NumColumnas numColumnas) {
+		throw new UnsupportedOperationException();
+	}	
+	
 	public boolean isVisibleColorTags(List<Color> colors) {
 		return new SecFiltrosMobilNoGenesis().isVisibleColorTags(colors);
 	}
+
 }

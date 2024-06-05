@@ -160,6 +160,7 @@ public class PageFavoritos extends PageBase {
 	public void clear1rstArticuloAndWait() {
 		if (hayArticulos()) {
 			String xpathArtWithIdItem = getXPathWithIdItem(1);
+			moveToElement(xpathArtWithIdItem);
 			
 			//Ejecutamos el click mediante JavaScript porque en el caso de móvil en ocasiones el aspa de cerrado queda por debajo de la cabecera
 			String xpath = xpathArtWithIdItem + "//span[@class[contains(.,'icofav-eliminar')]]";

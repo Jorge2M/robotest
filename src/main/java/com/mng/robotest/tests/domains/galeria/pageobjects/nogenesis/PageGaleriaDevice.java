@@ -85,11 +85,6 @@ public abstract class PageGaleriaDevice extends PageGaleriaNoGenesis {
 	}
 
 	@Override
-	public int getLayoutNumColumnas() {
-		return 1;
-	}		 
-	
-	@Override
 	public ArticuloScreen getArticuloObject(int numArticulo) throws Exception {
 		var artWElem = getElements(getXPathArticulo()).get(numArticulo-1);
 		var articulo = new ArticuloScreen();

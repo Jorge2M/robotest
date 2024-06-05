@@ -71,11 +71,6 @@ public class PageGaleriaDesktopNoGenesis extends PageGaleriaDesktopBaseNoGenesis
 	}	
 
 	@Override
-	public int getLayoutNumColumnas() {
-		return commonNormal.getLayoutNumColumnas();
-	}
-	
-	@Override
 	public List<String> searchForArticlesNoValid(List<String> articleNames) {
 		scrollToPageFromFirst(2);
 		backTo1erArticulo();

@@ -495,11 +495,11 @@ public class GaleriaSteps extends StepBase {
 		var listAddFav = pgGaleria.clickArticleHearthIcons(posIconsToClick);
 		String estadoFinal = "";
 		if (actionFav==TypeActionFav.MARCAR) {
-				estadoFinal = "Marcados";
-				dataTest.getDataFavoritos().addToLista(listAddFav);
+			estadoFinal = "Marcados";
+			dataTest.getDataFavoritos().addToLista(listAddFav);
 		} else {
-				estadoFinal = "Desmarcados";
-				dataTest.getDataFavoritos().removeFromLista(listAddFav);
+			estadoFinal = "Desmarcados";
+			dataTest.getDataFavoritos().removeFromLista(listAddFav);
 		}
 		
 		replaceStepExpected(TAG_ESTADO_FINAL, estadoFinal);
@@ -530,8 +530,7 @@ public class GaleriaSteps extends StepBase {
 		description="Seleccionar el link del listado a <b>#{numColumnas.name()} columnas</b>", 
 		expected="Aparece un listado de artículos a #{numColumnas.name()} columnas")
 	public void selectListadoXColumnasDesktop(NumColumnas numColumnas)	{
-		((PageGaleriaDesktopBaseNoGenesis)pgGaleria).clickLinkColumnas(numColumnas);
-		checkIsVisibleLayoutListadoXcolumns(numColumnas);
+		pgGaleria.clickLinkColumnas(numColumnas);
 	}
 
 	@Validation
@@ -553,13 +552,6 @@ public class GaleriaSteps extends StepBase {
    			articlesEquals, INFO);
    		
    		return checks;
-	}
-
-	@Validation (
-		description="Aparece el layout correspondiente al listado a <b>#{numColumnas.name()} columnas</b>",
-		level=WARN)
-	private boolean checkIsVisibleLayoutListadoXcolumns(NumColumnas numColumnas) {
-		return (pgGaleria.getLayoutNumColumnas()==((PageGaleriaDesktopBaseNoGenesis)pgGaleria).getNumColumnas(numColumnas));
 	}
 
 	@Validation (description="Estamos en la página de Galería",	level=WARN)

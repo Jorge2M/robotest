@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
@@ -254,6 +255,10 @@ public class PageGaleriaDeviceOld extends PageGaleriaDevice {
 	}
 	@Override
 	public List<String> searchForArticlesNoValid(List<String> articleNames) {
+		throw new UnsupportedOperationException();
+	}
+	@Override
+	public void clickLinkColumnas(NumColumnas numColumnas) {
 		throw new UnsupportedOperationException();
 	}
 	

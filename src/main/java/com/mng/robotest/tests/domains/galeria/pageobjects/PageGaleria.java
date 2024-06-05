@@ -13,6 +13,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaD
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopOld;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDeviceNoGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDeviceOld;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
@@ -30,9 +31,8 @@ public interface PageGaleria {
 
 	String getXPathArticulo();
 	String getXPathNombreRelativeToArticle();
-	
 	boolean isVisibleAnyArticle();
-	int getLayoutNumColumnas();
+	void clickLinkColumnas(NumColumnas numColumnas);
 	WebElement getArticuloConVariedadColoresAndHover(int numArticulo);
 	WebElement getImagenElementArticulo(WebElement articulo);
 	ArticuloScreen getArticuloObject(int numArticulo) throws Exception;

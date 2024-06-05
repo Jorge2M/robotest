@@ -16,7 +16,6 @@ public class PageGaleriaDesktopOld extends PageGaleriaDesktopBaseNoGenesis {
 
 	public static final String XP_ARTICULO = "//li[@id[contains(.,'product-key-id')]]";
 	private static final String XP_NOMBRE_RELATIVE_TO_ARTICLE = "//*[@class[contains(.,'product-name')]]";
-	private static final String XP_LIST_ARTICLES = "//div[@class[contains(.,'columns')] and @id='list']";
 	private static final String XP_ICONO_UP_GALERY = "//div[@id='scroll-top-step' or @id='iconFillUp']";
 	
 	public PageGaleriaDesktopOld() {
@@ -109,18 +108,6 @@ public class PageGaleriaDesktopOld extends PageGaleriaDesktopBaseNoGenesis {
 		String xpathLink = getXPathLinkNumColumnas(numColumnas);
 		click(xpathLink).exec();
 	}
-	
-	@Override
-	public int getLayoutNumColumnas() {
-		var listArt = getElement(XP_LIST_ARTICLES);
-		if (listArt.getAttribute("class").contains("columns3")) {
-			return 3;
-		}
-		if (listArt.getAttribute("class").contains("columns4")) {
-			return 4;
-		}
-		return 2; 
-	}	
 	
 	@Override
 	public List<String> searchForArticlesNoValid(List<String> articleNames) {

@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito;
 
 public class CommonGaleriaNoGenesis extends PageBase {
@@ -80,15 +81,15 @@ public class CommonGaleriaNoGenesis extends PageBase {
 		click(articulo).by(By.xpath("." + xpathSlider)).exec();		
 	}	
 	
-	public int getLayoutNumColumnas() {
+	public NumColumnas getLayoutNumColumnas() {
 		String dataTestId = getElement(XP_LISTA_ARTICULOS).getAttribute("data-testid");
 		var pattern = Pattern.compile("\\d+$");
 		var matcher = pattern.matcher(dataTestId);
         if (matcher.find()) {
             String match = matcher.group();
-            return Integer.parseInt(match);
+            return NumColumnas.getValue(Integer.parseInt(match));
         } else {
-        	return 0;
+        	return null;
         }
 	}
 	

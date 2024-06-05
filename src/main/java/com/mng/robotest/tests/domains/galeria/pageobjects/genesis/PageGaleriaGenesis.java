@@ -19,7 +19,6 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.UtilsPageGaleria;
@@ -45,8 +44,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	protected static final String XP_ICONO_UP_GALERY = "//button/*[@data-testid='up-large']/..";
 	private static final String XP_IMAGE_ARTICLE = "//img[@data-testid[contains(.,'plp.product-slot')]]";
 	private static final String XP_HEARTH_ICON = "//button[@data-testid[contains(.,'plp.product.favorite.heart')]]";
-	private static final String XP_LINK_2_COLUMNAS = "//*[@data-testid='column-selector-2']";
-	private static final String XP_LINK_4_COLUMNAS = "//*[@data-testid='column-selector-4']";
 	private static final String XP_TITLE_ARTICLE = "//p[@class[contains(.,'productTitle')]]";
 	
 	@Override
@@ -81,18 +78,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public String getXPathArticleHearthIcon(int posArticulo) {
 		String xpathArticulo = "(" + getXPathArticulo() + ")[" + posArticulo + "]";
 		return (xpathArticulo + XP_HEARTH_ICON);
-	}
-	
-	private String getXPathLinkNumColumnas(NumColumnas numColumnas) {
-		if (numColumnas==NumColumnas.DOS) {
-			return XP_LINK_2_COLUMNAS;
-		}
-		return XP_LINK_4_COLUMNAS;
-	}
-	
-	public void clickLinkColumnas(NumColumnas numColumnas) {
-		String xpathLink = getXPathLinkNumColumnas(numColumnas);
-		click(xpathLink).exec();
 	}
 	
 	@Override
@@ -139,19 +124,9 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	}	
 	
 	@Override
-	public int getLayoutNumColumnas() {
-		String xpathLink2 = getXPathLinkNumColumnas(NumColumnas.DOS);
-		var elemLink2 = getElement(xpathLink2);
-		if (elemLink2!=null && elemLink2.getAttribute("class").contains("current")) {
-			return 2;
-		}
-		return 4;
-	}
-
-	@Override
 	public StateFavorito getStateHearthIcon(int iconNumber) {
 		var icon = getElement(getXPathArticleHearthIcon(iconNumber));
-		if (icon.getAttribute("aria-label").contains("remove")) {
+		if (icon.getAttribute("data-testid").contains(".active")) {
 			return MARCADO;
 		}
 		return DESMARCADO;
@@ -437,10 +412,16 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		throw new UnsupportedOperationException();
 	}
 	public List<ArticuloScreen> clickArticleHearthIcons(Integer... posIconsToClick) throws Exception {
-		throw new UnsupportedOperationException();
+		List<ArticuloScreen> listArtFav = new ArrayList<>();
+		for (int posIcon : posIconsToClick) {
+			clickHearhIcon(posIcon);
+			listArtFav.add(getArticuloObject(posIcon));
+		}
+		return listArtFav;
 	}
 	public void clickHearhIcon(int posArticle) throws Exception {
-		throw new UnsupportedOperationException();
+		String xpHearth = getXPathArticleHearthIcon(posArticle);
+		click(xpHearth).exec();
 	}
 	public String getXPathPagina(int pagina) {
 		throw new UnsupportedOperationException();
@@ -545,9 +526,23 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public boolean waitToHearthIconInState(int posArticle, StateFavorito stateIcon, int seconds) {
 		throw new UnsupportedOperationException();
 	}
+	
 	public boolean iconsInCorrectState(TypeActionFav typeAction, Integer... posIconosFav) {
-		throw new UnsupportedOperationException(); 
+		for (int posIcon : posIconosFav) {
+			if (typeAction==TypeActionFav.MARCAR) {
+				if (getStateHearthIcon(posIcon)!=MARCADO) {
+					return false;
+				}
+			}
+			else { 
+				if (getStateHearthIcon(posIcon)!=DESMARCADO) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
+	
 	public String getNombreArticuloWithText(String literal, int secondsWait) {
 		throw new UnsupportedOperationException();
 	}
