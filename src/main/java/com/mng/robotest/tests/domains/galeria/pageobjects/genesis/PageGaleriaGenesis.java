@@ -42,7 +42,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	private static final String XP_HEADER = "//*[@data-testid='plp.products.list.h1Seo']";
 	private static final String XP_LISTA_ARTICULOS = "//*[@data-testid[contains(.,'plp.products.list')]]//ul";
 	public static final String XP_ARTICULO = XP_LISTA_ARTICULOS + "//li[@data-slot]";
-	protected static final String XP_ICONO_UP_GALERY = "//button[@aria-label='plp.catalog.scroll-to-top']";
+	protected static final String XP_ICONO_UP_GALERY = "//button/*[@data-testid='up-large']/..";
 	private static final String XP_IMAGE_ARTICLE = "//img[@data-testid[contains(.,'plp.product-slot')]]";
 	private static final String XP_HEARTH_ICON = "//button[@data-testid[contains(.,'plp.product.favorite.heart')]]";
 	private static final String XP_LINK_2_COLUMNAS = "//*[@data-testid='column-selector-2']";
@@ -476,7 +476,8 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	private void showTallasArticuloDesktop(int posArticulo) {
 		String xpathArticle = getXPathArticulo(posArticulo);
 		state(VISIBLE, xpathArticle).wait(1).check();
-		moveToElement(xpathArticle);		
+		moveToElement(xpathArticle);
+		moveToElement(xpathArticle, 0, 100); //Try to surpase case when bag is overloaping article partially
 	}
 	
 	@Override

@@ -167,6 +167,11 @@ public class PageBase extends PageObjTM {
 		pushKey(Keys.ARROW_UP, times);
 	}
 	
+	protected void moveToElement(String xpath, int x, int y) {
+		var elem = getElement(xpath);
+		new Actions(driver).moveToElement(elem, x, y).build().perform();
+	}
+	
 	protected boolean isMobile() {
 		return channel==Channel.mobile;
 	}
@@ -195,6 +200,14 @@ public class PageBase extends PageObjTM {
 	protected Optional<WebElement> findElement(String xpath) {
 	    try {
 	        return Optional.of(getElement(xpath));
+	    } catch (NoSuchElementException e) {
+	        return Optional.empty();
+	    }
+	}
+	
+	protected Optional<WebElement> findElement(WebElement element, String xpath) {
+	    try {
+	        return Optional.of(getElement(element, xpath));
 	    } catch (NoSuchElementException e) {
 	        return Optional.empty();
 	    }

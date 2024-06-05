@@ -51,6 +51,7 @@ public class GroupWeb extends PageBase {
 		
 		public static List<GroupType> getGroups(LineaType linea) {
 //			return Arrays.asList(COLECCIONES);
+//			return Arrays.asList(ACCESORIOS);
 			return Arrays.stream(GroupType.values())
 				.filter(g -> g.getLineas().contains(linea))
 				.toList();

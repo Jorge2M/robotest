@@ -85,17 +85,24 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}	
 	
 	private String clickMenuSuperior() {
-		String nameMenu = "";
 		state(PRESENT, getXPathMenu()).wait(1).check();
-		var menuElement = getElement(getXPathMenu());
-		if (isOutlet()) {
-			nameMenu = getElement(menuElement, "./div").getAttribute("innerHTML");
-		} else {
-			nameMenu = menuElement.getText();
-		}
-		
+		String nameMenu = getNameMenu();
 		click(getXPathMenu()).exec();
 		return nameMenu;
 	}	
+	private String getNameMenu() {
+		var menuElement = getElement(getXPathMenu());
+		String nameMenu = menuElement.getText();
+		if ("".compareTo(nameMenu)!=0) {
+			return nameMenu;
+		}
+		
+		var menuDivOpt = findElement(menuElement, "./div");
+		if (menuDivOpt.isPresent()) {
+			return menuDivOpt.get().getAttribute("innerHTML");
+		} else {
+			return menuElement.getAttribute("innerHTML");
+		}
+	}
 
 }
