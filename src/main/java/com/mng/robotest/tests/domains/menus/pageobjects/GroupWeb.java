@@ -3,6 +3,7 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
@@ -128,7 +129,7 @@ public class GroupWeb extends PageBase {
 	
 	public String getIdLinea() {
 		if (sublinea!=null) {
-			return sublinea.getId(app);
+			return sublinea.getId(AppEcom.shop);
 		}
 		return linea.getId2();
 	}
