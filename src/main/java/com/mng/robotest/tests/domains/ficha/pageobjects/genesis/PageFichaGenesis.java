@@ -86,7 +86,7 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	
 	@Override	
 	public boolean isVisibleButtonElimFavoritos(int seconds) {
-		return state(VISIBLE, XP_REMOVE_FAVORITES_BUTTON).wait(seconds).check();
+		return !getElementsVisible(XP_REMOVE_FAVORITES_BUTTON).isEmpty();
 	}
 	
 	@Override	
