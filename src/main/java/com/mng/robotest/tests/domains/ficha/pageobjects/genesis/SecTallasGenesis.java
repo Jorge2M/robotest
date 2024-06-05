@@ -27,7 +27,6 @@ public class SecTallasGenesis extends PageBase {
 	private static final String XP_SELECTOR_TALLAS_MOBIL = "//*[@data-testid='sheet.draggable.dialog']";
 	private static final String XP_TALLA_MOBIL = "//button[@data-testid[contains(.,'pdp.productInfo.sizeSelector')]]/..";
 	private static final String XP_TALLA_ITEM_MOBIL = XP_SELECTOR_TALLAS_MOBIL + XP_TALLA_MOBIL;
-	private static final String XP_TALLA_UNSELECTED_MOBIL = XP_LINK_GUIA_TALLAS;
 	private static final String XP_TALLA_SELECTED_MOBIL = "//*[@data-testid='pdp.productInfo.sizeSelector']/button[@data-testid[contains(.,'pdp.productInfo.sizeSelector.sizeAvailable')]]";
 	private static final String XP_TALLA_AVAILABLE_MOBIL = XP_TALLA_ITEM_MOBIL + "//*[@data-testid[contains(.,'Available')]]";
 	private static final String XP_TALLA_UNAVAILABLE_MOBIL = XP_TALLA_ITEM_MOBIL + "//*[@data-testid[contains(.,'Unavailable')]]";
@@ -128,7 +127,7 @@ public class SecTallasGenesis extends PageBase {
 		return state(VISIBLE, XP_TALLA_SELECTED_DESKTOP).check();
 	}
 	private boolean isTallaSelectedMobil() {
-		return state(INVISIBLE, XP_TALLA_UNSELECTED_MOBIL).check();
+		return state(VISIBLE, XP_TALLA_SELECTED_MOBIL).check();
 	}
 	
 	private String getLabelTallaSelected() { //Tested
