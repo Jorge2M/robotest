@@ -25,8 +25,7 @@ public class Chk001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		dataTest.setDataPago(fTCkoutIni);
-		if (dataTest.getPais().isNewcheckout(app) &&
-			isCheckeableNewCheckout()) {
+		if (dataTest.getPais().isNewcheckout(app)) {
 			fluxNewCheckout();	
 		} else {
 			fluxOldCheckout();
@@ -36,10 +35,12 @@ public class Chk001 extends TestBase {
 	private void fluxNewCheckout() throws Exception {
 		accessLoginAndClearBolsa();
 		altaArticulosBolsaAndClickComprar();
-		var checkoutSteps = new CheckoutNewSteps();
-		checkoutSteps.inputDeliveryGuestDefaultData();
-		checkoutSteps.clickContinueToPaymentButton();
-		executeVisaPayment();
+		if (isCheckeableNewCheckout()) {
+			var checkoutSteps = new CheckoutNewSteps();
+			checkoutSteps.inputDeliveryGuestDefaultData();
+			checkoutSteps.clickContinueToPaymentButton();
+			executeVisaPayment();
+		}
 	}
 	
 	private void accessLoginAndClearBolsa() throws Exception {

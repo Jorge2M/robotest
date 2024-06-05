@@ -329,7 +329,9 @@ public class SecBolsaSteps extends StepBase {
 	private void fluxPostSelectComprarCheckoutNew(FluxBolsaCheckout flux) {
 		var checkoutSteps = new CheckoutNewSteps();
 		if (dataTest.isUserRegistered()) {
-			checkoutSteps.isPageCheckout(10);
+			if (isCheckeableNewCheckout()) {
+				checkoutSteps.isPageCheckout(10);
+			}
 		} else {
 			if (isDevice()) {
 				checkVisibleContinuarSinCuentaButtonDevice(2);
@@ -343,17 +345,10 @@ public class SecBolsaSteps extends StepBase {
 				} else {
 					checkoutSteps.continueAsGuestDesktop();
 				}
-				checkoutSteps.isPageGuestUserData(8);
+				if (isCheckeableNewCheckout()) {
+					checkoutSteps.isPageGuestUserData(8);
+				}
 			}
-//				switch (flux) {
-//				case INICIAR_SESION:
-//					clickIniciarSesionMobile();
-//					new PageIniciarSesionBolsaMobileSteps().isPage(3);			
-//					break;
-//				case REGISTRO:
-//					clickRegistroMobile();
-//					new PageRegistroInitialShopSteps().checkIsPage(5);
-//				}
 		}
 	}
 	
