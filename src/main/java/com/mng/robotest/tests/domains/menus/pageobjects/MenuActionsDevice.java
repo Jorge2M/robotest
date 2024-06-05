@@ -14,7 +14,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	private final MenuWeb menu;
 	
 	private String getXPathMenu() {
-		return "//li[@data-testid[contains(.,'menu.section')]]" + getXPathMenuBase();
+		return "//*[@data-testid[contains(.,'menu.subMenu')]]" + getXPathMenuBase();
 	}
 	
 	private String getXPathMenuBase() {
