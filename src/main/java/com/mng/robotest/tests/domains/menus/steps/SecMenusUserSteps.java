@@ -152,6 +152,9 @@ public class SecMenusUserSteps extends StepBase {
 			"<b>info</b>: el usuario tiene " + TAG_POINTS + " puntos", 
 		expected="Aparece la página de \"Mango Likes You\"")
 	private int clickMenuMangoLikesYouLogged() {
+		if (isDevice()) {
+			waitMillis(500);
+		}
 		clickUserMenu(MANGO_LIKES_YOU);
 		int numberPoints = new PageMangoLikesYouSteps().checkIsPage().getNumberPoints();
 		checksDefault();
