@@ -38,7 +38,7 @@ import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.A
 
 public class MenuSteps extends StepBase {
 
-	private static final List<String> MENUS_WITHOUT_ARTICLES = Arrays.asList("Essentials", "Antoine Griezmann", "Trajes", "Capsule");
+	private static final List<String> MENUS_WITHOUT_ARTICLES = Arrays.asList("Essentials", "Antoine Griezmann", "Trajes", "CAPSULE");
 	
 	@Override
 	public void clickMenu(String menuLabel) {
@@ -161,7 +161,7 @@ public class MenuSteps extends StepBase {
 	}	
 	
 	public void checkSelecMenu(MenuWeb menu) {
-		String menuName = menu.getNameScreen();
+		String menuName = menu.getMenu();
 		isTitleAssociatedMenu(menuName);
 		if (isMenuWithArticles(menuName)) {
 			new GaleriaSteps().checkGaleriaAfeterSelectMenu();
