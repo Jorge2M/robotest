@@ -13,7 +13,7 @@ public class SecTallasGenesis extends PageBase {
 	//TODO pendiente que den de alta el data-testid
 	private static final String XP_LINK_GUIA_TALLAS = "//button[@class[contains(.,'sizeGuide')]]";
 	
-	private static final String XP_MSG_AVISO_SELECT_TALLA = "//div[@id='pdp-form']/div/p";
+	private static final String XP_MSG_AVISO_SELECT_TALLA = "//div[@id='pdp-primary-actions']/div[@class[contains(.,'ErrorMessage')]]";
 //	private static final String XP_STICKY_CONTENT = "//div[@id='sticky-content']";
 //	private static final String XP_TALLA_SELECTED = XP_STICKY_CONTENT + "//button[@data-testid='pdp.sticky.size']";
 	private static final String XP_ICON_DESPLEGABLE_TALLAS = "//*[@data-testid='down-small']";

@@ -45,6 +45,9 @@ public class MenusUserWrapper extends PageBase {
 		if (menu==UserMenu.BOLSA) {
 			secCabecera.clickIconoBolsa();
 		} else {
+			if (menu==UserMenu.MANGO_LIKES_YOU && isDevice()) {
+				waitMillis(500);
+			}
 			var menuUserItem = new MenuUserItem(menu, channel, app);
 			clickMenuAndWait(menuUserItem);
 		}
