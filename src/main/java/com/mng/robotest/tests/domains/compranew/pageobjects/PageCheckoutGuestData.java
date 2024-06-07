@@ -38,7 +38,7 @@ public class PageCheckoutGuestData extends PageBase {
 	}
 	
 	private void inputTinIfExists(String dni) {
-		if (dni!=null && state(VISIBLE, XP_TIN_INPUT).check()) {
+		if (dni!=null && state(PRESENT, XP_TIN_INPUT).check()) {
 			inputClearAndSendKeys(XP_TIN_INPUT, dni);
 		}
 	}

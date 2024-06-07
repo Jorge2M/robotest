@@ -148,8 +148,8 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		pgRegistroInitial.keyDown(5);
 		if (!pgRegistroInitial.isModalPoliticaPrivacidadVisible(1)) {
 			pgRegistroInitial.clickPoliticaPrivacidad();
+			pgRegistroInitial.keyDown(5);
 		}
-		pgRegistroInitial.keyDown(5);
 		checkIsModalPoliticaPrivacidadVisible(1);
 	}
 	@Validation (description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\" " + SECONDS_WAIT)

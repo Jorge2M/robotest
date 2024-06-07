@@ -22,6 +22,8 @@ import com.mng.robotest.tests.domains.transversal.modales.pageobject.ModalSuscri
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.DataMango;
+import com.mng.robotest.testslegacy.data.PaisShop;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 import com.mng.robotest.testslegacy.data.Constantes.ThreeState;
 
 public class Reg003 extends TestBase {
@@ -56,14 +58,25 @@ public class Reg003 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		access();
-		new ModalSuscripcionSteps().validaRGPDModal();
+		if (!isNotCheckInGermany()) {
+			new ModalSuscripcionSteps().checkRGPDModal();
+		}
 		new SecMenusUserSteps().selectRegistrate();
 		if(version.register()) {
 			registerAndGoShoppingSiPubli();
 		} else {
-			new SecFooterSteps().clickFooterSubscriptionInput(version.register());
+			if (!isNotCheckInGermany()) {
+				new SecFooterSteps().clickFooterSubscriptionInput(version.register());
+			}
 		}
-
+	}
+	
+	private boolean isNotCheckInGermany() {
+		//The Newsletter suscription in the Germany Landing is unactive 
+		//until Frontend implements double opt-in in this country
+		return (
+			PaisShop.DEUTSCHLAND.isEquals(dataTest.getPais()) &&
+			UtilsTest.todayBeforeDate("2024-08-07"));
 	}
 
 	private void registerAndGoShoppingSiPubli() {
@@ -100,8 +113,10 @@ public class Reg003 extends TestBase {
 	
 	private void goToShopping() {
 		pgRegistroFinSteps.clickIrDeShoppingButton();
-		secCabeceraSteps.selecLogo();
-		new SecFooterSteps().clickFooterSubscriptionInput(version.register());
+		if (!isNotCheckInGermany()) {
+			secCabeceraSteps.selecLogo();
+			new SecFooterSteps().clickFooterSubscriptionInput(version.register());
+		}
 	}
 	
 	private void loginAfterRegister() {

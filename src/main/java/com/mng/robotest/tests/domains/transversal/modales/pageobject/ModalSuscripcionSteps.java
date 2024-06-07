@@ -15,7 +15,7 @@ public class ModalSuscripcionSteps extends StepBase {
 		description="Comprobar que se incluyen o no los textos legales de RGPD en el modal de suscripcion (el modal está en el HTML de la página no visible)",
 		expected="Los textos existen en el código fuente dependiendo del pais",
 		saveNettraffic=ALWAYS)
-	public void validaRGPDModal() {
+	public void checkRGPDModal() {
 		String codPais = dataTest.getCodigoPais();
 		if (dataTest.getPais().getRgpd().equals("S")) {
 			checkExistsTextsRGPD(codPais);

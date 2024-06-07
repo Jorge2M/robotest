@@ -16,7 +16,7 @@ public class Cht001 extends TestBase {
 		new ModalsSubscriptionsSteps().closeIfVisible();
 		
 		var chatBotSteps = ModalChatBotSteps.make();
-		if (isOutlet()) {
+		if (isOutlet() && isPRO()) { //En breve subirá a PRO (7-6-24)
 			chatBotSteps.checkIconInvisible();
 			return;
 		}

@@ -279,9 +279,12 @@ public class PageBase extends PageObjTM {
 	}
 	
 	protected void inputClearAndSendKeys(String xpath, String keys) {
-		var element = getElement(xpath);
-		element.clear();
-		element.sendKeys(keys);
+		var elementOpt = findElement(xpath);
+		if (elementOpt.isPresent()) {
+			var element = elementOpt.get();
+			element.clear();
+			element.sendKeys(keys);
+		}
 	}
 	
 	protected boolean goToIframe(String title) {

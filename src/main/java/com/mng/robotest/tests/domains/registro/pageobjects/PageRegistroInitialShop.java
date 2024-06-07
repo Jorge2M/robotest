@@ -222,7 +222,8 @@ public class PageRegistroInitialShop extends PageBase {
 		super.keyUp(times);
 	}
 	private void clickModalContentCorner() {
-		click(XP_MODAL_CONTENT).setX(1).setY(1).exec();
+		click(XP_INPUT_EMAIL).exec();
+		click(XP_MODAL_CONTENT + "/div").setX(1).setY(1).exec();
 	}
 	
 }

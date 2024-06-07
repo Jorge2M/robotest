@@ -1,6 +1,7 @@
 package com.mng.robotest.tests.domains.registro.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
+import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
@@ -32,9 +33,10 @@ public class Reg001 extends TestBase {
 		}
 		inputInitialDataAndClickCreate();
 		inputPersonalizedDataAndClickGuardar();
+		checkNewsletterSuscription();
 		checkLoginAndUserData();
 	}
-
+	
 	private void accesoAndClickRegistrate() throws Exception {
 		access();
 		new SecMenusUserSteps().selectRegistrate();
@@ -63,6 +65,10 @@ public class Reg001 extends TestBase {
 	private void inputPersonalizedDataAndClickGuardar() {
 		pgRegistroPersonalizacionSteps.inputData(dataNewRegister);
 		pgRegistroPersonalizacionSteps.clickGuardar();
+	}
+	
+	private void checkNewsletterSuscription() {
+		new SecFooterSteps().clickFooterSubscriptionInput(false);
 	}
 	
 	private void checkLoginAndUserData() {
