@@ -4,7 +4,7 @@
 #   -> In PowerShell replace %CD% by ${pwd}
 # docker run -d -p 80:8080 -p 443:443 --privileged -m=4g -v "${PWD}\dockerresults:/robotest/output-library" jorge2m/robotest:latest
 
-FROM jorge2m/chrome-firefox-openjdk17-maven:1703091256
+FROM jorge2m/chrome-firefox-openjdk17-maven:1717773795
 
 COPY target/robotest.zip robotest.zip
 RUN unzip robotest.zip
