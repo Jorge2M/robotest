@@ -132,6 +132,9 @@ public class GroupWeb extends PageBase {
 		if (sublinea!=null) {
 			return sublinea.getId(AppEcom.shop);
 		}
+		if (isOutlet() && group==GroupType.COLECCIONES) {
+			return linea.getSufixOutlet(channel);
+		}
 		return linea.getId2();
 	}
 	
@@ -152,7 +155,8 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private String getXPathSubmenuDesktop() {
-		String xpathSubmenu = XP_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
+		//String xpathSubmenu = XP_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
+		String xpathSubmenu = XP_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + getIdLinea());
 		if (sublinea!=null) {
 			return xpathSubmenu.replace("subMenuColumn3", "subMenuColumn4"); 
 		}

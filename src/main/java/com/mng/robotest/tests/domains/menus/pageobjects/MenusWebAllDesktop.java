@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -38,7 +39,7 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 	
 	private List<MenuWeb> getVisibleMenus(GroupWeb groupWeb) {
 		List<MenuWeb> menus = new ArrayList<>();
-		var menuElements = getElements(getXPathMenuItem(groupWeb.getIdLinea()));
+		var menuElements = getElements(getXPathMenuItem(getIdLinea(groupWeb)));
 		for (var menuElement : menuElements) {
 			String name = getNameMenu(menuElement);
 			if ("".compareTo(name)!=0) {
@@ -51,6 +52,15 @@ public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
 			}
 		}
 		return menus;
+	}
+	
+	public String getIdLinea(GroupWeb group) {
+		var linea = group.getLinea();
+		var sublinea = group.getSublinea();
+		if (sublinea!=null) {
+			return sublinea.getId(AppEcom.shop);
+		}
+		return linea.getId2();
 	}
 
 	private String getNameMenu(WebElement menuElement) {
