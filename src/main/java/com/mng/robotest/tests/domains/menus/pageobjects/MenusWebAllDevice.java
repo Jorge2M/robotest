@@ -3,8 +3,6 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.WebElement;
-
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 
@@ -35,16 +33,20 @@ public class MenusWebAllDevice extends PageBase implements MenusWebAll {
 	private List<MenuWeb> getVisibleMenus(GroupWeb groupWeb) {
 		List<MenuWeb> menus = new ArrayList<>();
 		var menuElements = getElements(getXPathMenuItem());
-		for (WebElement menuElement : menuElements) {
-			menus.add(new MenuWeb
-					.Builder(menuElement.getText())
-					.linea(groupWeb.getLinea())
-					.sublinea(groupWeb.getSublinea())
-					.group(groupWeb.getGroup())
-					.build());
+		for (var menuElement : menuElements) {
+			String name = menuElement.getText();
+			if ("".compareTo(name)!=0) {
+				menus.add(new MenuWeb
+						.Builder(name)
+						.linea(groupWeb.getLinea())
+						.sublinea(groupWeb.getSublinea())
+						.group(groupWeb.getGroup())
+						.build());
+			}
 		}
 		return menus;
 	}
+
 	
 	private boolean isMenuOpen(int seconds) {
 		return (new LineaWeb(LineaType.SHE).isLineaPresent(seconds));

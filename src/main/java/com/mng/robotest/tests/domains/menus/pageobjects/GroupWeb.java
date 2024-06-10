@@ -125,7 +125,7 @@ public class GroupWeb extends PageBase {
 		if (group.getGroupResponse()==MORE && sublinea==null) {
 			xpath = XP_GROUP_VIEW_MORE_DEVICE;
 		}
-		return xpath + "//self::*[@data-testid[contains(.,'" + group.getId() + "')]]"; 
+		return xpath + "//self::*[@data-testid[contains(.,'menu.section." + group.getId() + "')]]"; 
 	}
 	
 	public String getIdLinea() {
