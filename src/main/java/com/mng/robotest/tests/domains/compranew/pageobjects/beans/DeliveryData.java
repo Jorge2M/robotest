@@ -11,6 +11,7 @@ public class DeliveryData {
 	private String address;
 	private String postcode;
 	private String city;
+	private String province;
 	private String state;
 	private String email;
 	private String mobile;
@@ -51,6 +52,12 @@ public class DeliveryData {
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
 	}
 	public String getState() {
 		return state;

@@ -2504,7 +2504,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <loyalty>N</loyalty>
 <codpos>10410</codpos>
 <telefono>8095903838</telefono>
-<dni>123456789012</dni>
+<dni>00112345678</dni>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
@@ -4681,6 +4681,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <loyalty>N</loyalty>
 <codpos>300271</codpos>
 <telefono>67844110</telefono>
+<dni>B1234567</dni>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
@@ -4769,6 +4770,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <loyalty>N</loyalty>
 <codpos>000109</codpos>
 <telefono>63221967</telefono>
+<dni>123456789</dni>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
@@ -5190,6 +5192,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <loyalty>N</loyalty>
 <codpos>1100</codpos>
 <telefono>843339993</telefono>
+<dni>123456789MZB</dni>
 <tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>

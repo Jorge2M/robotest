@@ -47,6 +47,7 @@ public class CheckoutNewSteps extends StepBase {
 		delivery.setSurname("Muñoz Martínez");
 		delivery.setCountry("VILAFRANCA DEL PENEDES");
 		delivery.setCity("BARCELONA");
+		delivery.setProvince("BARCELONA");
 		delivery.setAddress(pais.getAddress());
 		delivery.setPostcode(pais.getCodpos());
 		delivery.setEmail(getUserEmail());

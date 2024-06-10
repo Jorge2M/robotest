@@ -12,6 +12,7 @@ public class PageCheckoutGuestData extends PageBase {
 	private static final String XP_ADDRESS_INPUT = "//*[@data-testid='checkout.addressForm.address']";
 	private static final String XP_POSTCODE_INPUT = "//*[@data-testid='checkout.addressForm.postalCode']";
 	private static final String XP_CITY_INPUT = "//*[@data-testid='checkout.addressForm.city']";
+	private static final String XP_PROVINCE = "//*[@data-testid='checkout.addressForm.provinceName']";
 	private static final String XP_COUNTRY_LIST = "//*[@data-testid='checkout.addressForm.provinceId']";
 	private static final String XP_COUNTRY_ITEM = "//*[@data-testid='checkout.addressForm.provinceId.listbox']/div[@role='option']";
 	private static final String XP_EMAIL_INPUT = "//*[@data-testid='checkout.addressForm.email']";
@@ -32,6 +33,7 @@ public class PageCheckoutGuestData extends PageBase {
 		inputClearAndSendKeys(XP_CITY_INPUT, delivery.getCity());
 		inputClearAndSendKeys(XP_EMAIL_INPUT, delivery.getEmail());
 		inputClearAndSendKeys(XP_MOBILE_INPUT, delivery.getMobile());
+		inputClearAndSendKeys(XP_PROVINCE, delivery.getProvince());
 		
 		inputTinIfExists(delivery.getDni());
 		selectCountryIfExists(delivery.getCountry());
@@ -57,6 +59,9 @@ public class PageCheckoutGuestData extends PageBase {
 	
 	public void clickContinueToPayment() {
 		click(XP_CONTINUE_TO_PAYMENT_BUTTON).exec();
+		if (!state(INVISIBLE, XP_CONTINUE_TO_PAYMENT_BUTTON).wait(3).check()) {
+			click(XP_CONTINUE_TO_PAYMENT_BUTTON).exec();
+		}
 	}
 
 }
