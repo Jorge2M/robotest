@@ -20,7 +20,8 @@ public abstract class SecCabecera extends PageBase {
 
 	private static final String XP_HEADER = "//header";
 	private static final String XP_LINK_LOGO_MANGO_V1 = 
-			"//a[@class='logo-link' or " + 
+			"//a[@class='logo-link' or " +
+			"@class[contains(.,'logoLink_')] or " + 
 			"@class[contains(.,'logo_')] or " + 
 			"@title[contains(.,'MANGO Shop Online')]]";
 	private static final String XP_LINK_LOGO_MANGO_V2 = 
