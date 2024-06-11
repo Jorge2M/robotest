@@ -106,7 +106,6 @@ public class GroupWeb extends PageBase {
 			"/ul[@id[contains(.,'subMenuColumn3')]]" +  
 			"/li[@data-testid[contains(.,'" + TAG_GROUP + "')]]";
 	
-	//private static final String XP_SUBMENU_DEVICE = "//li[@class[contains(.,'Submenu_selected')]]//div[@data-testid='menu.subMenu']";
 	private static final String XP_SUBMENU_DEVICE = "//li[@data-testid[contains(.,'menu.section')]]//div[@data-testid='menu.subMenu']";
 
 	private String getXPathGroupSelected() {
@@ -124,6 +123,9 @@ public class GroupWeb extends PageBase {
 		String xpath = XP_GROUP_DEVICE;
 		if (group.getGroupResponse()==MORE && sublinea==null) {
 			xpath = XP_GROUP_VIEW_MORE_DEVICE;
+		}
+		if (group==GroupType.PRENDAS) {
+			return xpath + "//self::*[@data-testid[contains(.,'menu.section." + group.getId() + "')] or @data-testid[contains(.,'menu.section.all" + group.getId() + "')]]";
 		}
 		return xpath + "//self::*[@data-testid[contains(.,'menu.section." + group.getId() + "')]]"; 
 	}
