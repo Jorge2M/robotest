@@ -803,7 +803,6 @@
 	nombre="UTÁNVÉTELES FIZETÉS" nombremovil="Utánvételes Fizetés" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
 <micuentanew>shop,outlet</micuentanew>
-<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Iceland" codigo="024">
@@ -2619,7 +2618,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
-<newcheckout>shop</newcheckout>	
 </pais>
 
 <pais nombre_pais="Guatemala" codigo="416">
@@ -3080,7 +3078,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
-<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="France (Guyane Française)" codigo="496">
@@ -3126,7 +3123,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
-<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Nicaragua" codigo="432">
@@ -3637,7 +3633,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="offline" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago>--> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
-<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Indonesia" codigo="700">
@@ -3839,7 +3834,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
-<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Казахстан" codigo="079"> <!-- Kadjastan -->
@@ -4344,7 +4338,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
-<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="대한민국" codigo="728"> <!-- Corea del Sur -->
@@ -4887,7 +4880,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="externa" tiendas="shop,outlet"
 	nombre="cashu" testpasarela='s' testpago='s'></pago>-->
 <multidireccion>N</multidireccion>
-<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Ethiopia" codigo="334">
