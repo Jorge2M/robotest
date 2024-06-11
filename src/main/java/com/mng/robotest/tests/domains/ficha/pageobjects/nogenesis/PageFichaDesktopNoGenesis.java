@@ -104,7 +104,7 @@ public class PageFichaDesktopNoGenesis extends PageFichaNoGenesis {
 		return false;
 	}
 	@Override
-	public boolean isVisibleColorCodeStickyContent(String colorCode) {
+	public boolean isVisibleColorNameStickyContent(String colorCode) {
 		return false;
 	}
 	

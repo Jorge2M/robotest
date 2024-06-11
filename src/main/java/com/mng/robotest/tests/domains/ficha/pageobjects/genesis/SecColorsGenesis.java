@@ -20,6 +20,7 @@ public class SecColorsGenesis extends PageBase {
 	private static final String XP_COLOR_AVAILABLE = XP_COLOR_ITEM + "/a/div/img[not(@class[contains(.,'disabled'))]//..//..//..";
 	private static final String XP_COLOR_UNAVAILABLE = XP_COLOR_ITEM + "/a/div/img[@class[contains(.,'disabled')]//..//..//..";
 	private static final String XP_COLOR_LAST = XP_COLOR_ITEM + "[last()]";
+	private static final String XP_NAME_COLOR = "//*[@data-testid='pdp.productInfo.colorSelector.label']";
 	
 	private String getXPathColorItem(String colorCode) {
 		return XP_COLOR_ITEM + "//self::*[@data-testid[contains(.,'." + colorCode + "')]]";
@@ -42,10 +43,6 @@ public class SecColorsGenesis extends PageBase {
 		}
 	}
 	
-	private String getXPathImgColor(ColorType colorType) {
-		return getXPath(colorType) + "//img";
-	}
-	
 	public boolean isClickableColor(String colorCode) {
 		return state(CLICKABLE, getXPathColorItem(colorCode)).check();
 	}
@@ -64,8 +61,9 @@ public class SecColorsGenesis extends PageBase {
 	}
 
 	public String getNombreColorSelected() {
-		String xpColorImg = getXPathImgColor(ColorType.SELECTED);
-		return getElement(xpColorImg).getAttribute("alt");
+//		String xpColorImg = getXPathImgColor(ColorType.SELECTED);
+//		return getElement(xpColorImg).getAttribute("alt");
+		return getElement(XP_NAME_COLOR).getText();
 	}
 
 	public String getCodeColor(ColorType colorType) {

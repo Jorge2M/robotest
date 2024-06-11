@@ -31,7 +31,7 @@ public class SecMenusUserDevice extends PageBase {
 		REGISTRATE(
 			XP_ITEM + "/self::*[@href[contains(.,'login')]]"),
 		MI_CUENTA(
-			XP_ITEM + "/self::*[@href[contains(.,'/account')] or text()='Mi cuenta' or text()='My account']"),
+			XP_ITEM + "/self::*[@href[contains(.,'/account')] or text()='Mi cuenta' or text()='My account' or text()='Mein Konto']"),
 		MANGO_LIKES_YOU(
 			XP_ITEM + "/self::*[@href[contains(.,'mango-likes-you')] or @href[contains(.,'mangolikesyou')]]"),
 		CAMBIO_PAIS(

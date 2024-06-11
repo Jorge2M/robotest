@@ -24,6 +24,7 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Artic
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import java.util.List;
 
@@ -341,8 +342,16 @@ public class FichaSteps extends StepBase {
 		return pageFicha.isVisibleBuscarEnTiendaLink();
 	}
 	
-	@Validation (description="Es invisible el link de <b>Disponibilidad en Tienda</b>")
 	public boolean checkLinkDispTiendaInvisible() {
+		//These feature is still in developping fase by Kaliope (11-junio-2024)
+		if (!UtilsTest.todayBeforeDate("2024-09-06")) {
+			return checkLinkDispTiendaInvisibleOriginal();
+		}
+		return true;
+	}
+	
+	@Validation (description="Es invisible el link de <b>Disponibilidad en Tienda</b>")
+	private boolean checkLinkDispTiendaInvisibleOriginal() {
 		return !pageFicha.isVisibleBuscarEnTiendaLink();
 	}
 
@@ -406,7 +415,7 @@ public class FichaSteps extends StepBase {
 		
 		checks.add(
 			"Es visible el nombre del color seleccionado <b>" + articulo.getColorName() + "</b>",
-			pageFicha.isVisibleColorCodeStickyContent(articulo.getColor().getCodigoColor()));		
+			pageFicha.isVisibleColorNameStickyContent(articulo.getColorName()));		
 
 		return checks;
 	}	

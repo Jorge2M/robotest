@@ -295,8 +295,8 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 		return secStickyContent.isVisibleTallaLabelStickyContent(tallaLabel);
 	}
 	@Override
-	public boolean isVisibleColorCodeStickyContent(String colorCode) {
-		return secStickyContent.isVisibleColorCodeStickyContent(colorCode);
+	public boolean isVisibleColorNameStickyContent(String colorName) {
+		return secStickyContent.isVisibleColorNameStickyContent(colorName);
 	}
 	
 	// -- Others

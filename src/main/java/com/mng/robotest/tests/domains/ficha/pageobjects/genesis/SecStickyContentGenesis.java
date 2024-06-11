@@ -27,8 +27,8 @@ public class SecStickyContentGenesis extends PageBase {
 		return state(VISIBLE, xpath).check();
 	}
 
-	public boolean isVisibleColorCodeStickyContent(String colorCode) {
-		String xpath = XP_CAPA_STICKY_CONTENT + "//img[@src[contains(.,'_" + colorCode + "_')]]";
+	public boolean isVisibleColorNameStickyContent(String colorName) {
+		String xpath = XP_CAPA_STICKY_CONTENT + "//div[@class[contains(.,'Sticky_color')]]//p[text()='" + colorName + "']";
 		return state(VISIBLE, xpath).check();
 	}
 	

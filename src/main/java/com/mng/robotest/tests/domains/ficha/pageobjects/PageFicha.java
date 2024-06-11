@@ -74,7 +74,7 @@ public interface PageFicha {
 	public boolean isInvisibleStickyContent(int seconds);
 	public boolean isVisibleReferenciaStickyContent(String referencia);
 	public boolean isVisibleTallaLabelStickyContent(String tallaLabel);
-	public boolean isVisibleColorCodeStickyContent(String colorCode);
+	public boolean isVisibleColorNameStickyContent(String colorName);
 	
 	public boolean isVisibleModalDatosEnvio(int seconds);
 	public void closeModalDatosEnvio();

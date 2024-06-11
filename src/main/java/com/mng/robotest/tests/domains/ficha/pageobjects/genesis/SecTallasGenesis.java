@@ -20,7 +20,7 @@ public class SecTallasGenesis extends PageBase {
 	
 	private static final String XP_SELECTOR_TALLAS_DESKTOP = "//*[@data-testid='pdp.productInfo.sizeSelector']";
 	private static final String XP_TALLA_ITEM_DESKTOP = XP_SELECTOR_TALLAS_DESKTOP + "//li/button[@data-testid[contains(.,'pdp.productInfo.sizeSelector')]]//..";
-	private static final String XP_TALLA_SELECTED_DESKTOP = XP_TALLA_ITEM_DESKTOP + XP_ICON_DESPLEGABLE_TALLAS + "//ancestor::li";	
+	private static final String XP_TALLA_SELECTED_DESKTOP = XP_TALLA_ITEM_DESKTOP + XP_ICON_DESPLEGABLE_TALLAS + "//ancestor::li//span";	
 	private static final String XP_TALLA_AVAILABLE_DESKTOP = XP_TALLA_ITEM_DESKTOP + "//*[@data-testid[contains(.,'Available')]]";;
 	private static final String XP_TALLA_UNAVAILABLE_DESKTOP = XP_TALLA_ITEM_DESKTOP + "//*[@data-testid[contains(.,'Unavailable')]]";
 	
