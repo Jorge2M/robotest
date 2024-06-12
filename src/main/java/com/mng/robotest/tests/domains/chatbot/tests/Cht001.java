@@ -3,6 +3,7 @@ package com.mng.robotest.tests.domains.chatbot.tests;
 import java.util.Arrays;
 
 import com.mng.robotest.tests.domains.base.TestBase;
+import com.mng.robotest.tests.domains.chatbot.pageobjects.ModalChatBotNew;
 import com.mng.robotest.tests.domains.chatbot.steps.ModalChatBotNewSteps;
 import com.mng.robotest.tests.domains.chatbot.steps.ModalChatBotOldSteps;
 import com.mng.robotest.tests.domains.chatbot.steps.ModalChatBotSteps;
@@ -28,11 +29,11 @@ public class Cht001 extends TestBase {
 			return;
 		}
 		
-//		if (isPRO()) {
+		if (new ModalChatBotNew().isNewChatBot()) {
+			executeNewChatBot();
+		} else {
 			executeOldChatBot();
-//		} else {
-//			executeNewChatBot();
-//		}
+		}
 	}
 	
 	private void executeOldChatBot() {
@@ -80,6 +81,7 @@ public class Cht001 extends TestBase {
 		var chatBotSteps = new ModalChatBotNewSteps();
 		var answersExpected = Arrays.asList(
 			"Puedes consultar la guía de tallas",
+			"Consulta nuestra \"Guía de tallas\", disponible en cada artículo",
 			"Puedes consultar la talla de cada artículo",
 			"Puedes encontrar la guía de tallas",
 			"Puedes consultar la \"Guía de tallas\" disponible en cada artículo",

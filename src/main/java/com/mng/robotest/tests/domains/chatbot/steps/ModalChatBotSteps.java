@@ -4,16 +4,19 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.chatbot.pageobjects.ModalChatBot;
+import com.mng.robotest.tests.domains.chatbot.pageobjects.ModalChatBotNew;
 
 public abstract class ModalChatBotSteps extends StepBase {
 
 	abstract ModalChatBot getModal();
 	
 	public static ModalChatBotSteps make() {
-//		if (isEnvPRO()) {
+		if (new ModalChatBotNew().isNewChatBot()) {
+			return new ModalChatBotNewSteps();
+		}
+		else {
 			return new ModalChatBotOldSteps();
-//		}
-//		return new ModalChatBotNewSteps(); 
+		}
 	}
 	
 	@Validation (description="Aparece el icono de ChatBot")
