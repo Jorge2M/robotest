@@ -11,6 +11,7 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountry;
+import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountryOld;
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalGeolocation;
 import com.mng.robotest.tests.domains.changecountry.tests.Chg001;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
@@ -97,6 +98,7 @@ public class AccesoFlows extends StepBase {
 		ModalChangeCountry.make(app).closeModalIfVisible();
 		new ModalActPoliticaPrivacidad().clickOkIfVisible();
 		new ModalLoyaltyAfterLogin().closeModalIfVisible();
+		new ModalChangeCountryOld().closeModalIfVisible();
 	}
 	public void closeModalsPostAccessAndManageCookies(boolean acceptCookies) {
 		manageCookies(acceptCookies);
