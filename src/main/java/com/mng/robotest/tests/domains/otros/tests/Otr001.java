@@ -21,6 +21,7 @@ public class Otr001 extends TestBase {
 		clickLinea(HE);
 		new MenuSteps().checkURLRedirectParkasHeEspanya();
 		
+		renewBrowser();
 		dataTest.setPais(FRANCIA);
 		dataTest.setIdioma(FRANCIA_FRANCES);
 		new AccesoSteps().goToInitialURL();

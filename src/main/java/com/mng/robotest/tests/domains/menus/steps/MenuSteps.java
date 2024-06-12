@@ -507,8 +507,8 @@ public class MenuSteps extends StepBase {
 	private static final String TAG_REF_ARTICLE = "@TagRefArticle";
 	@Step (
 		description=
-			"Cargar la siguiente URL de redirect a la ficha del producto <b>" + TAG_REF_ARTICLE + 
-			" (#{pais.getNombrePais()})</b>:<br>" + TAG_URL_ACCESO,
+			"Cargar la siguiente URL de redirect a la ficha del producto <b>" + 
+			TAG_REF_ARTICLE + "</b>:<br>" + TAG_URL_ACCESO,
 		expected=
 			"Aparece la ficha del producto " + TAG_REF_ARTICLE)
 	public void checkURLRedirectFicha() throws Exception {

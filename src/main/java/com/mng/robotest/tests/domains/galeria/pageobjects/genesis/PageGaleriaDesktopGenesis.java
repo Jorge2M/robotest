@@ -10,6 +10,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.men
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.data.Color;
 
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class PageGaleriaDesktopGenesis extends PageGaleriaGenesis {
 
@@ -94,7 +95,10 @@ public class PageGaleriaDesktopGenesis extends PageGaleriaGenesis {
     }
 	
 	private void forcePagination() {
-		moveToElement("(" + getXPathArticulo() + ")[5]");
+		String xp5oArticle = "(" + getXPathArticulo() + ")[5]";
+		if (state(PRESENT, xp5oArticle).check()) {
+			moveToElement(xp5oArticle);
+		}
 	}
 	
 }
