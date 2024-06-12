@@ -15,6 +15,11 @@ public class ModalChatBotOldSteps extends ModalChatBotSteps {
 	}
 	
 	@Override
+	public boolean isNewChatBot() {
+		return false;
+	}
+	
+	@Override
 	@Validation (description="Aparece la capa del WebChat " + SECONDS_WAIT)
 	protected boolean checkVisible(int seconds) {
 		return mdChatBot.checkVisible(seconds);

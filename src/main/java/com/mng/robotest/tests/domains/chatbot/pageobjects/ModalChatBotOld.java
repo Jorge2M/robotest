@@ -4,7 +4,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalChatBotOld extends ModalChatBot {
 
-	private static final String XP_WEBCHAT = "//div[@id='snack-bubble']";
+	private static final String XP_WEBCHAT = "//div[@id='emergya-widget']";
+	private static final String XP_CLOSE = XP_WEBCHAT + "//*[@id='icon-close']";
 	
 	private String getXPathOption(String text) {
 		return XP_WEBCHAT + "//button[text()='" + text + "']";
@@ -21,6 +22,10 @@ public class ModalChatBotOld extends ModalChatBot {
 	@Override
 	public boolean checkVisible(int seconds) {
 		return state(VISIBLE, XP_WEBCHAT).wait(seconds).check();
+	}
+	
+	public void close() {
+		click(XP_CLOSE).exec();
 	}
 
 	public boolean isOptionVisible(String text, int seconds) {

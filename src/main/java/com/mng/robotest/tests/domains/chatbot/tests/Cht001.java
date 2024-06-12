@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.chatbot.tests;
 import java.util.Arrays;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.chatbot.pageobjects.ModalChatBotNew;
 import com.mng.robotest.tests.domains.chatbot.steps.ModalChatBotNewSteps;
 import com.mng.robotest.tests.domains.chatbot.steps.ModalChatBotOldSteps;
 import com.mng.robotest.tests.domains.chatbot.steps.ModalChatBotSteps;
@@ -29,7 +28,7 @@ public class Cht001 extends TestBase {
 			return;
 		}
 		
-		if (new ModalChatBotNew().isNewChatBot()) {
+		if (chatBotSteps.isNewChatBot()) {
 			executeNewChatBot();
 		} else {
 			executeOldChatBot();

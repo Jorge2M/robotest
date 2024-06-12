@@ -9,11 +9,8 @@ public abstract class ModalChatBot extends PageBase {
 	
 	private static final String XP_ICON = "//*[@data-testid='chatbot.button.open']";
 	
-	private final boolean isNewChatBot;
-	
 	protected ModalChatBot() {
 		super();
-		isNewChatBot = getNewChatBot();
 	}
 	
 	public boolean checkIconVisible() {
@@ -25,19 +22,15 @@ public abstract class ModalChatBot extends PageBase {
 	}	
 	
 	public boolean isNewChatBot() {
-		return isNewChatBot;
-	}
-	
-	private boolean getNewChatBot() {
 		boolean newChatBot;
 		clickIcon();
 		var modalChatBotNew = new ModalChatBotNew();
-		if (modalChatBotNew.checkVisible(0)) {
+		if (modalChatBotNew.checkVisible(1)) {
 			newChatBot=true;
 			modalChatBotNew.close();
 		} else {
 			newChatBot=false;
-			new ModalChatBotNew().close();
+			new ModalChatBotOld().close();
 		}
 		return newChatBot;
 	}
