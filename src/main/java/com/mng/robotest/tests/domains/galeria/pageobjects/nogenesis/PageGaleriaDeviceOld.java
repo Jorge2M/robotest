@@ -165,6 +165,11 @@ public class PageGaleriaDeviceOld extends PageGaleriaDevice {
 		waitMillis(500);
 		click(articulo).by(By.xpath("." + xpathSlider)).exec();		
 	}
+	
+	@Override
+	public void clickSliders(WebElement articulo, TypeSlider... typeSliderList) {
+		throw new UnsupportedOperationException();
+	}	
 
 	@Override
 	public boolean backTo1erArticulo() throws InterruptedException {

@@ -58,6 +58,7 @@ public interface PageGaleria {
 	void selectTallaArticleNotAvalaible();
 	void clickHearthIcon(WebElement hearthIcon) throws Exception;
 	void clickSlider(WebElement articulo, TypeSlider typeSlider);
+	void clickSliders(WebElement articulo, TypeSlider... typeSliderList);
 	String getXPathArticleHearthIcon(int posArticulo);
 	StateFavorito getStateHearthIcon(int iconNumber);
 	boolean preciosInIntervalo(int minimo, int maximo) throws Exception;

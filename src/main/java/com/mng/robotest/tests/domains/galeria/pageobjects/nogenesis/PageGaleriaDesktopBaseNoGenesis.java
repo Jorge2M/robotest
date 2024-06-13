@@ -317,12 +317,13 @@ public abstract class PageGaleriaDesktopBaseNoGenesis extends PageGaleriaNoGenes
 		}
 	}
 	
+	@Override
 	public void clickSliders(WebElement articulo, TypeSlider... typeSliderList) {
 		Arrays.stream(typeSliderList)
 			.forEach(s -> hoverArticleAndclickSlider(articulo, s));
 	}
 	
-	public void hoverArticleAndclickSlider(WebElement articulo, TypeSlider typeSlider) {
+	private void hoverArticleAndclickSlider(WebElement articulo, TypeSlider typeSlider) {
 		hoverArticle(articulo);
 		clickSlider(articulo, typeSlider);
 	}

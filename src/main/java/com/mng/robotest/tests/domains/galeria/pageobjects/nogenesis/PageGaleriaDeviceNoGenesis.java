@@ -80,6 +80,11 @@ public class PageGaleriaDeviceNoGenesis extends PageGaleriaDevice {
 	}
 	
 	@Override
+	public void clickSliders(WebElement articulo, TypeSlider... typeSliderList) {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
 	public void showColors(WebElement articulo) {
 		By byColorButton = By.xpath("." + XP_COLOR_ARTICLE_BUTTON);
 		click(articulo).by(byColorButton).exec();

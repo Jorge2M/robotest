@@ -136,9 +136,34 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	
 	@Override
 	public void clickSlider(WebElement articulo, TypeSlider typeSlider) {
+		if (isDevice()) {
+			throw new UnsupportedOperationException();
+		}
+		clickSliderDesktop(articulo, typeSlider);
+	}
+	
+	private void clickSliderDesktop(WebElement articulo, TypeSlider typeSlider) {
 		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
 		waitMillis(500);
 		click(articulo).by(By.xpath("." + xpathSlider)).exec();		
+	}	
+	
+	@Override
+	public void clickSliders(WebElement articulo, TypeSlider... typeSliderList) {
+		if (isDevice()) {
+			throw new UnsupportedOperationException();
+		}
+		clickSlidersDesktop(articulo, typeSliderList);
+	}	
+	
+	private void clickSlidersDesktop(WebElement articulo, TypeSlider... typeSliderList) {
+		Arrays.stream(typeSliderList)
+			.forEach(s -> hoverArticleAndclickSlider(articulo, s));
+	}
+	
+	private void hoverArticleAndclickSlider(WebElement articulo, TypeSlider typeSlider) {
+		hoverArticle(articulo);
+		clickSlider(articulo, typeSlider);
 	}	
 	
 	@Override

@@ -24,12 +24,9 @@ public class PageRegistroInitialShop extends PageBase {
 	private static final String XP_LINK_POLITICA_PRIVACIDAD_MODAL = XP_MODAL_CONTENT + "//*[@data-testid='registry.privacyPolicy.linkToRGPD']";
 	private static final String XP_MESSAGE_ERROR_MOVIL = "//*[@id='mobile-number-error']";	
 	
-	private static final String XP_MODAL_MESSAGE_ERROR_DESKTOP = "//*[@aria-describedby[contains(.,'genericErrorModal')]]";
-	private static final String XP_MODAL_MESSAGE_USER_EXISTS_DESKTOP = XP_MODAL_MESSAGE_ERROR_DESKTOP + "//p[text()[contains(.,'¿Ya tienes cuenta?')]]";
-	private static final String XP_CLOSE_MODAL_MESSAGE_ERROR_DESKTOP = XP_MODAL_MESSAGE_ERROR_DESKTOP + "//*[@data-testid='modal.close.button']";
-	private static final String XP_MODAL_MESSAGE_ERROR_MOVIL = "//*[@data-testid='sheet.draggable.dialog']";
-	private static final String XP_MODAL_MESSAGE_USER_EXISTS_MOVIL = XP_MODAL_MESSAGE_ERROR_MOVIL + "//p[text()[contains(.,'¿Ya tienes cuenta?')]]";
-	private static final String XP_CLOSE_MODAL_MESSAGE_ERROR_MOVIL = XP_MODAL_MESSAGE_ERROR_MOVIL + "//button/span[text()='Cancelar']";
+	private static final String XP_MODAL_MESSAGE_ERROR = "//*[@id='registry-generic-modal']";
+	private static final String XP_MODAL_MESSAGE_USER_EXISTS = XP_MODAL_MESSAGE_ERROR + "//p[text()[contains(.,'¿Ya tienes cuenta?')]]";
+	private static final String XP_CLOSE_MODAL_MESSAGE_ERROR = XP_MODAL_MESSAGE_ERROR + "//*[@data-testid='registry.genericError.emptyFields']";
 
 	private String getXPathModalPoliticaPrivacidad() {
 		return
@@ -105,21 +102,6 @@ public class PageRegistroInitialShop extends PageBase {
 		super(NUEVO_REGISTRO_LEGAL_TEXTS);
 	}
 	
-	private String getXPathModalMessageUserExists() {
-		if (channel.isDevice()) {
-			return XP_MODAL_MESSAGE_USER_EXISTS_MOVIL;
-		}
-		return XP_MODAL_MESSAGE_USER_EXISTS_DESKTOP;
-	}
-	
-	private String getXPathCloseModalMessageError() {
-		if (channel.isDevice()) {
-			return XP_CLOSE_MODAL_MESSAGE_ERROR_MOVIL;
-		}
-		return XP_CLOSE_MODAL_MESSAGE_ERROR_DESKTOP;
-	}	
-	
-	
 	public boolean isPage() {
 		return isPage(0);
 	}
@@ -192,14 +174,14 @@ public class PageRegistroInitialShop extends PageBase {
 	}
 	
 	public boolean checkUserExistsModalMessage(int seconds) {
-		return state(VISIBLE, getXPathModalMessageUserExists()).wait(seconds).check();
+		return state(VISIBLE, XP_MODAL_MESSAGE_USER_EXISTS).wait(seconds).check();
 	}
 	public boolean checkMessageErrorMovil(int seconds) {
 		return state(VISIBLE, XP_MESSAGE_ERROR_MOVIL).wait(seconds).check();
 	}
 	
 	public void closeModalMessageError() {
-		click(getXPathCloseModalMessageError()).exec();
+		click(XP_CLOSE_MODAL_MESSAGE_ERROR).exec();
 	}
 	
 	public void clickPoliticaPrivacidad() {

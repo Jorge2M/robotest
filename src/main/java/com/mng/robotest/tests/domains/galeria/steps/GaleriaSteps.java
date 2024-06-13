@@ -373,14 +373,13 @@ public class GaleriaSteps extends StepBase {
 		//En el caso de la galería con artículos "Sliders" es preciso esperar la ejecución Ajax.
 		//En caso contrario hay elementos que no están disponibles (como la imagen principal del slider)
 		waitForPageLoaded(driver, 2);
-		var pageGaleriaDesktop = (PageGaleriaDesktopBaseNoGenesis)pgGaleria;
-		var articuloColores = pageGaleriaDesktop.getArticuloConVariedadColoresAndHover(numArtConColores);
+		var articuloColores = pgGaleria.getArticuloConVariedadColoresAndHover(numArtConColores);
 		
 		replaceStepDescription(TAG_NOMBRE_ART, pgGaleria.getNombreArticulo(articuloColores));
 		replaceStepExpected(TAG_NOMBRE_ART, pgGaleria.getNombreArticulo(articuloColores));
 		
 		String srcImg1erSlider = pgGaleria.getImagenArticulo(articuloColores);
-		pageGaleriaDesktop.clickSliders(articuloColores, typeSliderList);
+		pgGaleria.clickSliders(articuloColores, typeSliderList);
 
 		String srcImg2oSlider = pgGaleria.getImagenArticulo(articuloColores);
 		checkImageSliderArticleHasChanged(srcImg1erSlider, srcImg2oSlider, typeSliderList.length);
