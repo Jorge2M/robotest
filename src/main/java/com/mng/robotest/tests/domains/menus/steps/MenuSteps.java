@@ -161,7 +161,7 @@ public class MenuSteps extends StepBase {
 	}	
 	
 	public void checkSelecMenu(MenuWeb menu) {
-		String menuName = menu.getMenu();
+		String menuName = menu.getNameScreen();
 		isTitleAssociatedMenu(menuName);
 		if (isMenuWithArticles(menuName)) {
 			new GaleriaSteps().checkGaleriaAfeterSelectMenu();

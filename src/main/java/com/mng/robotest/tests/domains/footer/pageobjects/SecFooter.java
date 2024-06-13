@@ -26,8 +26,8 @@ public class SecFooter extends PageBase {
 	//TODO pendiente data-testids de Outlet (Genesis) solicitados a GPS mediante tícket ?????
 	public enum FooterLink {
 		AYUDA(FOOTER_ALL, CHANNEL_ALL,
-			"//a[@data-ga-label='ayuda' and text()[contains(.,'Ayuda')]]", 
-			"//a[text()='Ayuda']", false, true), 
+			"//a[@href[contains(.,'/help')]]", 
+			"//a[@href[contains(.,'/help')]]", false, true), 
 		MIS_COMPRAS(FOOTER_ALL, CHANNEL_ALL, 
 			"//a[@data-ga-label='miscompras']", 
 			"//a[text()='Mis compras']", false, true), 

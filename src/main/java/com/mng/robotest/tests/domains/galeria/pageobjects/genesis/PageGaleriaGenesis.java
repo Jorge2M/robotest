@@ -175,7 +175,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	@Override
 	public void scrollToLastPage() {
 		int numArticles = getNumArticulos();
-		while (numArticles<300) {
+		while (numArticles<500) {
 			moveToArticle(numArticles);
 			if (!isVisibleArticuloUntil(numArticles+1, 2)) {
 				return;
