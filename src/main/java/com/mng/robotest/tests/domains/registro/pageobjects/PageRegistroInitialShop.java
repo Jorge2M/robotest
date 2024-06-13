@@ -3,23 +3,25 @@ package com.mng.robotest.tests.domains.registro.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.*;
 
+import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
 import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageRegistroInitialShop extends PageBase {
 
-	private static final String XP_MODAL_CONTENT = "//micro-frontend[@id='registry']";
+	private static final String XP_MODAL_CONTENT = "//div[@class[contains(.,'RegistryPageLayout')]]";
 	private static final String XP_INPUT_EMAIL = XP_MODAL_CONTENT + "//input[@data-testid[contains(.,'emailInput')]]";
-	private static final String XP_INPUT_PASSWORD = XP_MODAL_CONTENT + "//input[@data-testid[contains(.,'passInput')]]";
+	private static final String XP_INPUT_PASSWORD = XP_MODAL_CONTENT + "//input[@data-testid[contains(.,'passwordInput')]]";
 	private static final String XP_INPUT_BIRTHDATE = "//input[@id='birthdate']";
 	private static final String XP_INPUT_MOVIL = XP_MODAL_CONTENT + "//input[@data-testid[contains(.,'phoneInput')]]";
-	private static final String XP_CHECKBOX_GIVE_PROMOTIONS = XP_MODAL_CONTENT + "//input[@data-testid[contains(.,'subscribeCheckbox.subscribeToNewsletter')]]";
+	private static final String XP_CHECKBOX_GIVE_PROMOTIONS = XP_MODAL_CONTENT + "//input[@data-testid[contains(.,'registry.newsletterSubscription.subscribe')]]";	
 	private static final String XP_LINK_GIVE_PROMOTIONS = XP_CHECKBOX_GIVE_PROMOTIONS + "/..//*[@data-testid='mng-link']";	
 	private static final String XP_RADIO_CONSENT_PERSONAL_INFORMATION = "//input[@id='createAccountLegal']";
 	private static final String XP_LINK_CONSENT_PERSONAL_INFORMATION = XP_RADIO_CONSENT_PERSONAL_INFORMATION + "/..//*[@data-testid='mng-link']";
 	private static final String XP_PERSONAL_INFORMATION_INFO = "//div[@id='createAccountLegal_description']";	
-	private static final String XP_CREATE_ACCOUNT_BUTTON = XP_MODAL_CONTENT + "//button[@data-testid[contains(.,'submitButton.submit')]]";	
-	private static final String XP_LINK_POLITICA_PRIVACIDAD = XP_MODAL_CONTENT + "//div/p/*[@data-testid='mng-link']";
+	private static final String XP_CREATE_ACCOUNT_BUTTON = XP_MODAL_CONTENT + "//*[@data-testid='registry.registryButton.registry']";	
+	private static final String XP_LINK_POLITICA_PRIVACIDAD = XP_MODAL_CONTENT + "//*[@data-testid='registry.privacyPolicy.expand']";	
 	private static final String XP_LINK_CONDICIONES_VENTA = XP_MODAL_CONTENT + "//*[@data-testid='mng-link' and @href[contains(.,'terms-and-conditions')]]";
+	private static final String XP_LINK_POLITICA_PRIVACIDAD_MODAL = XP_MODAL_CONTENT + "//*[@data-testid='registry.privacyPolicy.linkToRGPD']";
 	private static final String XP_MESSAGE_ERROR_MOVIL = "//*[@id='mobile-number-error']";	
 	
 	private static final String XP_MODAL_MESSAGE_ERROR_DESKTOP = "//*[@aria-describedby[contains(.,'genericErrorModal')]]";
@@ -34,12 +36,18 @@ public class PageRegistroInitialShop extends PageBase {
 			"//*[text()[contains(.,'" + getLiteralPoliticaPrivacidad() + "')]]" + 
 			"/following-sibling::p";
 	}
-	private String getXPathLinkPoliticaPrivacidad() {
-		return getXPathModalPoliticaPrivacidad() + "//*[@data-testid='mng-link']";
-	}
 
-	//TODO pedir data-testid
 	private String getLiteralPoliticaPrivacidad() {
+		switch (dataTest.getIdioma().getCodigo()) {
+		case ES: //"Español"
+			return "¿Cómo protegemos y tratamos tus datos?";
+		default:
+			return getLiteralPoliticaPrivacidadOld();
+		}
+	}
+	
+	//TODO pedir data-testid
+	private String getLiteralPoliticaPrivacidadOld() {
 		switch (dataTest.getIdioma().getCodigo()) {
 		case AL: //"Deutsch"
 			return "Grundlegende Informationen zum Datenschutz";
@@ -116,7 +124,7 @@ public class PageRegistroInitialShop extends PageBase {
 		return isPage(0);
 	}
 	public boolean isPage(int seconds) {
-		return state(VISIBLE, XP_CHECKBOX_GIVE_PROMOTIONS).wait(seconds).check();
+		return state(PRESENT, XP_CHECKBOX_GIVE_PROMOTIONS).wait(seconds).check();
 	}
 	
 	public void inputEmail(String email) {
@@ -125,7 +133,7 @@ public class PageRegistroInitialShop extends PageBase {
 	}
 	
 	public void inputPassword(String password) {
-		state(VISIBLE, XP_INPUT_PASSWORD).wait(1).check();
+		state(PRESENT, XP_INPUT_PASSWORD).wait(1).check();
 		getElement(XP_INPUT_PASSWORD).sendKeys(KEYS_CLEAR_INPUT);
 		getElement(XP_INPUT_PASSWORD).sendKeys(password);
 	}
@@ -162,7 +170,7 @@ public class PageRegistroInitialShop extends PageBase {
 		click(XP_CHECKBOX_GIVE_PROMOTIONS).exec();
 	}
 	public boolean isSelectedCheckboxGivePromotions() {
-		state(VISIBLE, XP_CHECKBOX_GIVE_PROMOTIONS).wait(1).check();
+		state(PRESENT, XP_CHECKBOX_GIVE_PROMOTIONS).wait(1).check();
 		return getElement(XP_CHECKBOX_GIVE_PROMOTIONS).isSelected();
 	}
 	
@@ -204,7 +212,7 @@ public class PageRegistroInitialShop extends PageBase {
 		return state(INVISIBLE, getXPathModalPoliticaPrivacidad()).wait(seconds).check();
 	}	
 	public void clickPoliticaPrivacidadModal() {
-		click(getXPathLinkPoliticaPrivacidad()).exec();
+		click(XP_LINK_POLITICA_PRIVACIDAD_MODAL).type(TypeClick.JAVASCRIPT).exec();
 	}
 	public void clickCondicionesVenta() {
 		click(XP_LINK_CONDICIONES_VENTA).exec();

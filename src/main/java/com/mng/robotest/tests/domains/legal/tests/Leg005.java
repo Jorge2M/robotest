@@ -4,7 +4,7 @@ import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.steps.ModalArticleNotAvailableSteps;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.ModalArticleNotAvailable;
+import com.mng.robotest.tests.domains.galeria.pageobjects.genesis.ModalArticleNotAvailable;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 
 /**

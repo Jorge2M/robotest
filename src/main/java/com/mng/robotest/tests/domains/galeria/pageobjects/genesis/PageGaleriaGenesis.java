@@ -7,6 +7,7 @@ import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageG
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -46,6 +47,9 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	private static final String XP_HEARTH_ICON = "//button[@data-testid[contains(.,'plp.product.favorite.heart')]]";
 	private static final String XP_TITLE_ARTICLE = "//p[@class[contains(.,'productTitle')]]";
 	
+	private static final String XP_TALLA_AVAILABLE = "//*[@data-testid='plp.product.sizeSelector.available']";
+	private static final String XP_TALLA_UNAVAILABLE = "//*[@data-testid='plp.product.sizeSelector.unavailable']";
+	
 	@Override
 	public String getXPathArticulo() {
 		return XP_ARTICULO;
@@ -53,6 +57,20 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	
 	private String getXPathArticulo(int numArticulo) {
 		return "(" + XP_ARTICULO + ")[" + numArticulo + "]";
+	}
+	
+	private String getXPathTallaAvailableArticle(int posArticulo) {
+		if (isDevice()) {
+			return XP_TALLA_AVAILABLE;
+		}
+		return getXPathArticulo(posArticulo) + XP_TALLA_AVAILABLE;
+	}
+	
+	private String getXPathTallaUnavailable(int posArticulo) {
+		if (isDevice()) {
+			return XP_TALLA_UNAVAILABLE;
+		}
+		return getXPathArticulo(posArticulo) + XP_TALLA_UNAVAILABLE;
 	}
 
 	@Override
@@ -466,45 +484,60 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		if (isInvisibleArticleCapaTallasUntil(posArticulo, 0)) {
 			showTallasArticulo(posArticulo);
 		}
-		var talla = selectTallaAvailableArticleClick(posArticulo);
+		String xpTalla = getXPathTallaAvailableArticle(posArticulo);
+		var tallaOpt = selectTalla(xpTalla, posArticulo);
 		var articulo = getArticuloObject(posArticulo);
-		articulo.setTalla(talla);
-		return null;
-	}
-	
-	private static final String XP_TALLA_AVAILABLE = "//*[@data-testid='plp.product.sizeSelector.available']";
-	private static final String XP_TALLA_UNAVAILABLE = "//*[@data-testid='plp.product.sizeSelector.unavailable']";
-	
-	private String getXPathTallaAvailableArticle(int posArticulo) {
-		if (isDevice()) {
-			return XP_TALLA_AVAILABLE;
+		if (tallaOpt.isPresent()) {
+			articulo.setTalla(tallaOpt.get());
+		} else {
+			articulo.setTalla(null);
 		}
-		return getXPathArticulo(posArticulo) + XP_TALLA_AVAILABLE;
+		return articulo;
 	}
-	private String getXPathTallaUnavailable(int posArticulo) {
-		if (isDevice()) {
-			return XP_TALLA_UNAVAILABLE;
+
+	@Override
+	public void selectTallaArticleNotAvalaible() {
+		for (int i=1; i<20; i++) {
+			var tallaOpt = selectTallaArticleNotAvalaible(i); 
+			if (tallaOpt.isPresent()) {
+				break;
+			}
+			if (isDevice()) {
+				unshowTallasArticuloDevice();
+			}
 		}
-		return getXPathArticulo(posArticulo) + XP_TALLA_UNAVAILABLE;
+	}
+
+	private static final String XP_BUTTON_FOR_CLOSE_TALLAS_DEVICE = "//button[@data-testid='modal.close.button']";
+	
+	private void unshowTallasArticuloDevice() {
+		if (state(VISIBLE, XP_BUTTON_FOR_CLOSE_TALLAS_DEVICE).check()) {
+			click(XP_BUTTON_FOR_CLOSE_TALLAS_DEVICE).exec();
+		}
 	}
 	
-	private Talla selectTallaAvailableArticleClick(int posArticulo) {
-		String xpathTalla = getXPathTallaAvailableArticle(posArticulo);
-		if (state(VISIBLE, xpathTalla).wait(1).check()) {
-			var tallaToSelect = getElement(xpathTalla);
+	public Optional<Talla> selectTallaArticleNotAvalaible(int posArticulo) {
+		if (isInvisibleArticleCapaTallasUntil(posArticulo, 0)) {
+			showTallasArticulo(posArticulo);
+		}
+		String xpTallaUnavailable = getXPathTallaUnavailable(posArticulo);
+		return selectTalla(xpTallaUnavailable, posArticulo);
+	}
+	
+	private Optional<Talla> selectTalla(String xpTalla, int posArticulo) {
+		if (state(VISIBLE, xpTalla).wait(1).check()) {
+			var tallaToSelect = getElement(xpTalla);
 			var labelTalla = tallaToSelect.getText();
 			tallaToSelect.click();
 			if (isDevice()) { //wait for tallas unshow in webmobil
 				isInvisibleArticleCapaTallasUntil(posArticulo, 2);
 			}
-			return Talla.fromLabel(labelTalla, PaisShop.from(dataTest.getCodigoPais()));
+			var talla = Talla.fromLabel(labelTalla, PaisShop.from(dataTest.getCodigoPais()));
+			return Optional.of(talla);
 		}
-		return null;
+		return Optional.empty();
 	}
 	
-	public void selectTallaArticleNotAvalaible() {
-		throw new UnsupportedOperationException();
-	}
 	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
 		throw new UnsupportedOperationException();
 	}

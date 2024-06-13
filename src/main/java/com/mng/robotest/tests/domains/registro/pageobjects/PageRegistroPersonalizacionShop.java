@@ -13,29 +13,26 @@ import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaTyp
 public class PageRegistroPersonalizacionShop extends PageBase {
 
 	public enum GenderOption { 
-		FEMENINO('M'), 
-		MASCULINO('H'), 
-		NO_BINARIO('X'), 
-		PREFIERO_NO_INCLUIRLO('N');
+		FEMENINO("FEMALE"), 
+		MASCULINO("MALE"), 
+		NO_BINARIO("BINARY"), 
+		PREFIERO_NO_INCLUIRLO("DONT_ANSWER");
 	
-		private char code;
-		private GenderOption(char code) {
+		private String code;
+		private GenderOption(String code) {
 			this.code = code;
 		}
 	}
 	
 	private static final List<LineaType> ALL_LINEAS = Arrays.asList(SHE, HE, KIDS, HOME); 
 	
-	private static final String XP_MODAL_CONTENT = "//div[@id[contains(.,'registerModal')]]";
-	private static final String XP_INPUT_NOMBRE = "//input[@id='name']";
-	private static final String XP_INPUT_POSTALCODE = "//input[@id='postalCode']";
-	private static final String XP_INPUT_DATE_BIRTH = "//input[@id='birthDate']";
-	private static final String XP_SAVE_BUTTON = XP_MODAL_CONTENT + "//button[@type='submit']";
+	private static final String XP_INPUT_NOMBRE = "//*[@data-testid='personalization.nameInput.text']";
+	private static final String XP_INPUT_POSTALCODE = "//*[@data-testid='personalization.postalCodeInput.text']";
+	private static final String XP_INPUT_DATE_BIRTH = "//*[@data-testid='personalization.birthDateInput.date']";
+	private static final String XP_SAVE_BUTTON = "//*[@data-testid='personalization.personalizationButton.personalization']";
 	private static final String XP_MESSAGE_ERROR_CODPOSTAL = "//p[@id='postalCode-error']";
-	
 	private static final String TAG_GENDER = "@TagGender";
 	private static final String XP_CHECKBOX_GENEDER_WITH_TAG = "//label[@for='gender-" + TAG_GENDER + "']";
-	
 	private static final String TAG_LINEA = "@TagLinea";
 	private static final String XP_CHECKBOX_LINEA_WITH_TAG = "//input[@id='" + TAG_LINEA + "']";
 	

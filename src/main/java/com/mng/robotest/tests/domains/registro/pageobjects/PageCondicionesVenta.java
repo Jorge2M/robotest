@@ -6,10 +6,10 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageCondicionesVenta extends PageBase {
 
-	private static final String XP_MICRO = "//micro-frontend[@id='legalConditions']";
+	private static final String XP_PAGE = "//div[@class[contains(.,'termsAndConditionsPage')]]";
 	
 	public boolean isPage(int seconds) {
-		return state(PRESENT, XP_MICRO).wait(seconds).check();
+		return state(PRESENT, XP_PAGE).wait(seconds).check();
 	}
 
 }

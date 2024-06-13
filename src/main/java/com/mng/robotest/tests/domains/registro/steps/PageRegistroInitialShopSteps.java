@@ -1,7 +1,5 @@
 package com.mng.robotest.tests.domains.registro.steps;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
@@ -157,45 +155,31 @@ public class PageRegistroInitialShopSteps extends StepBase {
 		return pgRegistroInitial.isModalPoliticaPrivacidadVisible(seconds);
 	}	
 	
-	public void clickPoliticaPrivacidadModal() {
-		Pair<String, String> pair = clickPoliticaPrivacidadModalStep();
-		switchToParent(pair.getLeft(), pair.getRight());
+	public void clickCondicionesVenta() {
+		clickCondicionesVentaStep();
+		back();
 	}
 	
-	public void clickCondicionesVenta() {
-		Pair<String, String> pair = clickCondicionesVentaStep();
-		switchToParent(pair.getLeft(), pair.getRight());
+	public void clickPoliticaPrivacidadModal() {
+		clickPoliticaPrivacidadModalStep();
+		back();
 	}
 	
 	@Step (
 		description="Pulsar el link <b>Política de privacidad</b> del modal",
 		expected="Aparece una nueva página con la política de privacidad y cookies")
-	private synchronized Pair<String, String> clickPoliticaPrivacidadModalStep() {
-		String parentWindow = driver.getWindowHandle();
+	private void clickPoliticaPrivacidadModalStep() {
 		pgRegistroInitial.clickPoliticaPrivacidadModal();
-		String childWindow = switchToAnotherWindow(driver, parentWindow);
 		new PagePoliticaPrivacidadSteps().checkisPage(4);
-		return Pair.of(parentWindow, childWindow);
 	}
 	
 	@Step (
 		description="Pulsar el link <b>Condiciones de venta</b> del modal",
 		expected="Aparece una nueva página con la política de privacidad y cookies")
-	private Pair<String, String> clickCondicionesVentaStep() {
-		String parentWindow = driver.getWindowHandle();
+	private void clickCondicionesVentaStep() {
 		pgRegistroInitial.clickCondicionesVenta();
-		String childWindow = switchToAnotherWindow(driver, parentWindow);
 		new PageCondicionesVentaSteps().checkisPage(4);
-		return Pair.of(parentWindow, childWindow);
 	}	
-	
-	private void switchToParent(String parentWindow, String childWindow) {
-		if (childWindow.compareTo(parentWindow)!=0) {
-			driver.switchTo().window(childWindow);
-			driver.close();
-			driver.switchTo().window(parentWindow);
-		}
-	}
 	
 	@Validation (description="Desaparece el modal de \"Cómo protegemos y tratamos tus datos?\"")
 	public boolean checkIsModalPoliticaPrivacidadInvisible() {

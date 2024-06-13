@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article;
+package com.mng.robotest.tests.domains.galeria.pageobjects.genesis;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.AVISAME_Y_SUSCRIPCION_LEGAL_TEXTS;
@@ -9,11 +9,11 @@ public class ModalArticleNotAvailable extends PageBase {
 
 	public enum StateModal { VISIBLE, NOT_VISIBLE }
 	
-	private static final String XP_MODAL = "//div[@data-testid[contains(.,'backInStock.dialog')]]/../..";
+	private static final String XP_MODAL = "//*[@data-testid='backInStock.modal']";
 	private static final String XP_INPUT_MAIL = XP_MODAL + "//input[@data-testid[contains(.,'emailInput')]]";
-	private static final String XP_RECIBIR_AVISO_BUTTON = "//button[@data-testid='listado.backInStock.button.submit']";
+	private static final String XP_RECIBIR_AVISO_BUTTON = "//button[@data-testid='plp.backInStock.button.submit']";
 	private static final String XP_SNACKVAR_AVISAME_OK = "//*[@data-testid[contains(.,'feedback-snackbar')]]";
-	private static final String XP_POLITICA_PRIVACIDAD = XP_MODAL + "//span[@data-testid='mng-link']";
+	private static final String XP_POLITICA_PRIVACIDAD = XP_MODAL + "//*[@data-testid='bacnInStock-policy.privacyPolicy.expand']";
 	private static final String XP_ASPA_FOR_CLOSE = XP_MODAL + "//button[@data-testid='modal.close.button']";
 	
 	public ModalArticleNotAvailable() {
