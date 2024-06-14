@@ -22,7 +22,7 @@ public class PageRegistroInitialShop extends PageBase {
 	private static final String XP_LINK_POLITICA_PRIVACIDAD = XP_MODAL_CONTENT + "//*[@data-testid='registry.privacyPolicy.expand']";	
 	private static final String XP_LINK_CONDICIONES_VENTA = XP_MODAL_CONTENT + "//*[@data-testid='mng-link' and @href[contains(.,'terms-and-conditions')]]";
 	private static final String XP_LINK_POLITICA_PRIVACIDAD_MODAL = XP_MODAL_CONTENT + "//*[@data-testid='registry.privacyPolicy.linkToRGPD']";
-	private static final String XP_MESSAGE_ERROR_MOVIL = "//*[@id='mobile-number-error']";	
+	private static final String XP_MESSAGE_ERROR_MOVIL = "//*[@id[contains(.,'phone-input-number-error')]]";	
 	
 	private static final String XP_MODAL_MESSAGE_ERROR = "//*[@id='registry-generic-modal']";
 	private static final String XP_MODAL_MESSAGE_USER_EXISTS = XP_MODAL_MESSAGE_ERROR + "//p[text()[contains(.,'¿Ya tienes cuenta?')]]";
@@ -122,8 +122,13 @@ public class PageRegistroInitialShop extends PageBase {
 
 	public void inputMovil(String number) {
 		moveToInputMovil();
-		getElement(XP_INPUT_MOVIL).sendKeys(KEYS_CLEAR_INPUT);
-		getElement(XP_INPUT_MOVIL).sendKeys(number);
+		var inputMobil = getElement(XP_INPUT_MOVIL);
+		inputMobil.sendKeys(KEYS_CLEAR_INPUT);
+		
+		//Workarround for paliate bug in sendKeys
+	    for (char ch : number.toCharArray()) {
+	        inputMobil.sendKeys(String.valueOf(ch));
+	    }
 	}
 	private void moveToInputMovil() {
 		for (int i=0; i<3; i++) {
