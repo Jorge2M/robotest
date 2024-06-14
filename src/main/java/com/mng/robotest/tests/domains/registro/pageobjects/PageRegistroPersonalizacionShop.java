@@ -30,7 +30,7 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	private static final String XP_INPUT_POSTALCODE = "//*[@data-testid='personalization.postalCodeInput.text']";
 	private static final String XP_INPUT_DATE_BIRTH = "//*[@data-testid='personalization.birthDateInput.date']";
 	private static final String XP_SAVE_BUTTON = "//*[@data-testid='personalization.personalizationButton.personalization']";
-	private static final String XP_MESSAGE_ERROR_CODPOSTAL = "//p[@id='postalCode-error']";
+	private static final String XP_MESSAGE_ERROR_CODPOSTAL = "//p[@id[contains(.,'postal-code-input-error')]]";
 	private static final String TAG_GENDER = "@TagGender";
 	private static final String XP_CHECKBOX_GENEDER_WITH_TAG = "//label[@for='gender-" + TAG_GENDER + "']";
 	private static final String TAG_LINEA = "@TagLinea";
