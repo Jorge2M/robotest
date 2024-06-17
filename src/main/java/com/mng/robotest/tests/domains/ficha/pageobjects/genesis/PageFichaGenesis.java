@@ -28,8 +28,8 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	
 	private static final String XP_PAGE = "//*[@data-testid='pdp.gallery.grid']";
 	private static final String XP_PAGE_ARTICLE = "//*[@data-testid='pdp.productInfo.reference']";
-	private static final String XP_ADD_FAVORITES_BUTTON = "//*[@data-testid='pdp.productInfo.favorite.inactive']";
-	private static final String XP_REMOVE_FAVORITES_BUTTON = "//*[@data-testid='pdp.productInfo.favorite.active']";
+	private static final String XP_ADD_FAVORITES_BUTTON = "//*[@data-testid[contains(.,'pdp.productInfo.favorite.inactive')]]";
+	private static final String XP_REMOVE_FAVORITES_BUTTON = "//*[@data-testid[contains(.,'pdp.productInfo.favorite.active')]]";
 	private static final String XP_BOLSA_BUTTON = "//*[@data-testid='pdp.productInfo.addToBag']";
 	private static final String XP_TITLE_ART = "//*[@data-testid='pdp.productInfo.title']";
 	private static final String XP_WRAPPER_PRICES = "//*[@data-testid='pdp.productInfo.price']";

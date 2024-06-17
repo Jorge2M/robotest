@@ -18,8 +18,7 @@ public class SecBolsa extends SecBolsaCommon {
 	private static final String XP_PANEL_BOLSA_DESKTOP = "//*[@data-testid='bag.opened']";
 	private static final String XP_PANEL_BOLSA_MOBILE = "//*[@data-testid='bagpage.container']";
 	private static final String XP_BOTON_COMPRAR = "//button[@data-testid[contains(.,'checkout.button')]]";
-	private static final String XP_PRECIO_SUBTOTAL_MOBILE = "//*[@data-testid[contains(.,'subTotalprice')]]//*[@data-testid='currentPrice']";
-	private static final String XP_PRECIO_SUBTOTAL_DESKTOP = "//*[@data-testid='bag.preview.summary.price']//*[@data-testid='currentPrice']";
+	private static final String XP_PRECIO_SUBTOTAL = "//*[@data-testid[contains(.,'subTotalprice')]]//*[@data-testid='currentPrice']";
 	private static final String XP_SIGN_IN_BUTTON_MOBILE = "//*[@data-testid='shoppingCart.loginModal.cta.login']";
 	private static final String XP_CREATE_ACCOUNT_BUTTON_MOBILE = "//*[@data-testid='shoppingCart.loginModal.cta.register']";	
 	private static final String XP_CONTINUE_AS_GUEST_LINK_MOBILE = "//*[@data-testid='shoppingCart.loginModal.cta.guest']";
@@ -39,10 +38,7 @@ public class SecBolsa extends SecBolsaCommon {
 	
 	@Override
 	String getXPathPrecioSubTotal() {
-		if (isMobile()) {
-			return XP_PRECIO_SUBTOTAL_MOBILE;
-		}
-		return XP_PRECIO_SUBTOTAL_DESKTOP;
+		return XP_PRECIO_SUBTOTAL;
 	}  
 	
 	@Override
