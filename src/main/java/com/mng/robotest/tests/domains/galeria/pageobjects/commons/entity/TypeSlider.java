@@ -19,6 +19,6 @@ public enum TypeSlider {
 		return this.normal;
 	}
 	public String getGenesis() {
-		return this.getGenesis();
+		return this.genesis;
 	}
 }
