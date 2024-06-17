@@ -43,7 +43,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	private static final String XP_LISTA_ARTICULOS = "//*[@data-testid[contains(.,'plp.products.list')]]//ul";
 	public static final String XP_ARTICULO = XP_LISTA_ARTICULOS + "//li[@data-slot]";
 	protected static final String XP_ICONO_UP_GALERY = "//button/*[@data-testid='up-large']/..";
-	private static final String XP_IMAGE_ARTICLE = "//img[@data-testid[contains(.,'plp.product-slot')]]";
 	private static final String XP_HEARTH_ICON = "//button[@data-testid[contains(.,'plp.product.favorite.heart')]]";
 	private static final String XP_TITLE_ARTICLE = "//p[@class[contains(.,'productTitle')]]";
 	
@@ -84,7 +83,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	}
 	
 	private String getXPathSliderRelativeToArticle(TypeSlider typeSlider) {
-		return "//button[@data-testid[contains(.,'slideshow" + typeSlider.getGenesis() + "')]";
+		return "//*[@data-testid='plp.product.slideshow." + typeSlider.getGenesis() + "ItemButton']";
 	}	
 
 	@Override
@@ -115,8 +114,8 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	
 	@Override
 	public String getImagenArticulo(WebElement articulo) {
-		moveToElement(articulo);
-		String srcImage = getElement(articulo, "." + XP_IMAGE_ARTICLE).getAttribute("src");
+		var image = getImagenElementArticulo(articulo);
+		String srcImage = image.getAttribute("src");
 		return srcImage.split("\\?")[0];
 	}	
 	
@@ -124,14 +123,30 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public String getRefColorArticulo(WebElement articulo) {
 		return getReference(articulo).replace(":", "");
 	}
+
+	private static final String XP_IMAGE_ARTICLE_DESKTOP = "//*[@data-testid='plp.product.slideshow']//img";
+	private static final String XP_IMAGE_ARTICLE_DEVICE = "//*[@data-testid='productCard.image.wrapper']//img";	
+	
+	private String getXPathImageArticle() {
+		if (isDevice()) {
+			return XP_IMAGE_ARTICLE_DEVICE;
+		}
+		return XP_IMAGE_ARTICLE_DESKTOP;
+	}
 	
 	@Override
 	public WebElement getImagenElementArticulo(WebElement articulo) {
+		int posXarticle = articulo.getLocation().getX();
+		String xpImage = getXPathImageArticle();
 		moveToElement(articulo);
-		if (state(PRESENT, articulo).by(By.xpath("." + XP_IMAGE_ARTICLE)).wait(1).check()) {
-			return getElement(articulo, "." + XP_IMAGE_ARTICLE);
-		}
-		return null;
+		
+		WebElement imgResult = null;
+        for (var imgArticle : articulo.findElements(By.xpath("." + xpImage))) {
+        	if (imgArticle.getLocation().getX()==posXarticle) {
+        		imgResult = imgArticle;
+        	}
+        }
+		return imgResult;
 	}
 	
 	@Override
@@ -145,7 +160,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	private void clickSliderDesktop(WebElement articulo, TypeSlider typeSlider) {
 		String xpathSlider = getXPathSliderRelativeToArticle(typeSlider);
 		waitMillis(500);
-		click(articulo).by(By.xpath("." + xpathSlider)).exec();		
+		click(articulo).by(By.xpath("." + xpathSlider)).exec();	
 	}	
 	
 	@Override
@@ -396,16 +411,45 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return state(VISIBLE, xpathArticulo).wait(seconds).check();
 	}
 
-	
-	//----
-	@Override
-	public boolean backTo1erArticulo(String xpathUpButton) {
-		throw new UnsupportedOperationException();
-	}
-	
 	@Override
 	public WebElement getArticuloConVariedadColoresAndHover(int numArticulo) {
-		throw new UnsupportedOperationException();
+		var articulo = getArticuloConVariedadColores(numArticulo);
+		if (articulo.isPresent()) {
+			hoverArticle(articulo.get());
+			return articulo.get();
+		}
+		return null;
+	}
+	
+	private static final String XP_ARTICULO_ANCESTOR = "ancestor::li[@data-slot]";
+	private static final String XP_BLOCK_COLORS_ARTICLE = "//*[@data-testid='productCard.colorPicker']";
+	private static final String XP_COLOR = XP_BLOCK_COLORS_ARTICLE + "//button[@data-testid[contains(.,'productCard.colorPicker.button')]]";
+	
+	private String getXPathArticuloConColores() {
+		return (
+			XP_BLOCK_COLORS_ARTICLE + "/" + 
+			XP_ARTICULO_ANCESTOR);
+	}
+	
+	private String getXPathArticuloConVariedadColores(int numArticulo) {
+		return ("(" + getXPathArticuloConColores() + ")" + "[" + numArticulo + "]");
+	}
+	
+	private Optional<WebElement> getArticuloConVariedadColores(int numArticulo) {
+		String xpathArticulo = getXPathArticuloConVariedadColores(numArticulo);
+		for (int i=0; i<8; i++) {
+			if (state(PRESENT, xpathArticulo).check()) {
+				return Optional.of(getElement(xpathArticulo));
+			}
+			scrollEjeY(1000);
+			waitMillis(1000);
+		}
+		return Optional.empty();		
+	}	
+	
+	@Override
+	public void hoverArticle(WebElement article) {
+		moveToElement(article);
 	}
 	
 	@Override
@@ -431,10 +475,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return getElement(articulo, "." + XP_PRICE_ARTICLE).getText();
 	}
 	
-	public boolean isArticleRebajado(WebElement articulo) {
-		throw new UnsupportedOperationException();
-	}
-	
 	@Override
 	public String getCodColorArticulo(int numArticulo) {
 		var articuloElem = getElement(getXPathArticulo(numArticulo));
@@ -451,9 +491,8 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public String getNameColorFromCodigo(String codigoColor) {
 		return Constantes.COLOR_DESCONOCIDO;
 	}
-	public void clickColorArticulo(WebElement articulo, int posColor) {
-		throw new UnsupportedOperationException();
-	}
+	
+	@Override
 	public List<ArticuloScreen> clickArticleHearthIcons(Integer... posIconsToClick) throws Exception {
 		List<ArticuloScreen> listArtFav = new ArrayList<>();
 		for (int posIcon : posIconsToClick) {
@@ -462,20 +501,13 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		}
 		return listArtFav;
 	}
+	
+	@Override
 	public void clickHearhIcon(int posArticle) throws Exception {
 		String xpHearth = getXPathArticleHearthIcon(posArticle);
 		click(xpHearth).exec();
 	}
-	public String getXPathPagina(int pagina) {
-		throw new UnsupportedOperationException();
-	}
-	public int getNumArticulosFromPagina(int pagina, TypeArticleDesktop sizeArticle) {
-		throw new UnsupportedOperationException();
-	}
-	public WebElement getArticleFromPagina(int numPagina, int numArticle) {
-		throw new UnsupportedOperationException();
-	}
-	
+
 	@Override
 	public void showTallasArticulo(int posArticulo) {
 		if (isDevice()) {
@@ -563,28 +595,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return Optional.empty();
 	}
 	
-	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
-		throw new UnsupportedOperationException();
-	}
-	public boolean preciosInIntervalo(int minimo, int maximo) throws Exception {
-		throw new UnsupportedOperationException();
-	}
-	public boolean isClickableArticuloUntil(int numArticulo, int seconds) {
-		throw new UnsupportedOperationException();
-	}
-	public boolean articlesInOrder(FilterOrdenacion typeOrden) throws Exception {
-		throw new UnsupportedOperationException();
-	}
-	public void hoverArticle(WebElement article) {
-		throw new UnsupportedOperationException();
-	}
-	public void moveToArticleAndGetObject(int posArticulo) {
-		throw new UnsupportedOperationException();
-	}
-	public boolean waitToHearthIconInState(int posArticle, StateFavorito stateIcon, int seconds) {
-		throw new UnsupportedOperationException();
-	}
-	
+	@Override
 	public boolean iconsInCorrectState(TypeActionFav typeAction, Integer... posIconosFav) {
 		for (int posIcon : posIconosFav) {
 			if (typeAction==TypeActionFav.MARCAR) {
@@ -599,22 +610,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 			}
 		}
 		return true;
-	}
-	
-	public String getNombreArticuloWithText(String literal, int secondsWait) {
-		throw new UnsupportedOperationException();
-	}
-	public boolean isVisibleImageArticle(int numArticulo, int seconds) {
-		throw new UnsupportedOperationException();
-	}
-	public int filterByColorsAndReturnNumArticles(List<Color> colorsToSelect) {
-		throw new UnsupportedOperationException();
-	}
-	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
-		throw new UnsupportedOperationException();
-	}
-	public boolean isClickableFiltroUntil(int seconds) {
-		throw new UnsupportedOperationException();
 	}
 	
 	private static final String XP_CAPA_TALLAS_DESKTOP = "//*[@data-testid='plp.product.sizeSelector.panel']";
@@ -640,6 +635,75 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	}
 	private boolean isInvisibleArticleCapaTallasUntil(int posArticulo, int seconds) {
 		return state(INVISIBLE, getXPathCapaTallas(posArticulo)).wait(seconds).check();
+	}
+
+	private String getXPathImgColorRelativeArticle(boolean selected) {
+		if (!selected) {
+			return XP_COLOR;
+		}
+		return XP_COLOR + "//self::*[@class[contains(.,'selected')]]";
+	}	
+	
+	@Override
+	public void clickColorArticulo(WebElement articulo, int posColor) {
+		String xpathImgColorRelArticle = getXPathImgColorRelativeArticle(false);
+		moveToElement(xpathImgColorRelArticle);
+		getElements(articulo, "." + xpathImgColorRelArticle).get(posColor-1).click();
+	}
+	
+	//----
+	@Override
+	public boolean backTo1erArticulo(String xpathUpButton) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public boolean isArticleRebajado(WebElement articulo) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public String getXPathPagina(int pagina) {
+		throw new UnsupportedOperationException();
+	}
+	public int getNumArticulosFromPagina(int pagina, TypeArticleDesktop sizeArticle) {
+		throw new UnsupportedOperationException();
+	}
+	public WebElement getArticleFromPagina(int numPagina, int numArticle) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
+		throw new UnsupportedOperationException();
+	}
+	public boolean preciosInIntervalo(int minimo, int maximo) throws Exception {
+		throw new UnsupportedOperationException();
+	}
+	public boolean isClickableArticuloUntil(int numArticulo, int seconds) {
+		throw new UnsupportedOperationException();
+	}
+	public boolean articlesInOrder(FilterOrdenacion typeOrden) throws Exception {
+		throw new UnsupportedOperationException();
+	}
+	public void moveToArticleAndGetObject(int posArticulo) {
+		throw new UnsupportedOperationException();
+	}
+	public boolean waitToHearthIconInState(int posArticle, StateFavorito stateIcon, int seconds) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public String getNombreArticuloWithText(String literal, int secondsWait) {
+		throw new UnsupportedOperationException();
+	}
+	public boolean isVisibleImageArticle(int numArticulo, int seconds) {
+		throw new UnsupportedOperationException();
+	}
+	public int filterByColorsAndReturnNumArticles(List<Color> colorsToSelect) {
+		throw new UnsupportedOperationException();
+	}
+	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
+		throw new UnsupportedOperationException();
+	}
+	public boolean isClickableFiltroUntil(int seconds) {
+		throw new UnsupportedOperationException();
 	}
 	
 	public DataScroll scrollToPageFromFirst(int numPage) {
