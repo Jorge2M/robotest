@@ -49,6 +49,9 @@ public class PageRegistroPersonalizacionShop extends PageBase {
 	public boolean isPage(int seconds) {
 		return state(PRESENT, XP_INPUT_NOMBRE).wait(seconds).check(); 
 	}
+	public boolean isNotPage(int seconds) {
+		return state(INVISIBLE, XP_INPUT_NOMBRE).wait(seconds).check();
+	}
 	public boolean isPostalCodeVisible() {
 		return state(PRESENT, XP_INPUT_POSTALCODE).check();
 	}

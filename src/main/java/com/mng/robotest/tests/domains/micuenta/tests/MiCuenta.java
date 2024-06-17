@@ -57,7 +57,7 @@ public class MiCuenta implements TestFromFactory, Serializable {
 	
 	@Test (
 		testName="MIC003",			
-		groups={"Micuenta", "Smoke", "Canal:desktop,mobile_App:shop,outlet"}, 
+		groups={"Micuenta", "Registro", "Smoke", "Canal:desktop,mobile_App:shop,outlet"}, 
 		description="Registro y cancelación de la cuenta creada")
 	public void cancelacionCuenta() throws Exception {
 		new Mic003().execute();
@@ -65,7 +65,7 @@ public class MiCuenta implements TestFromFactory, Serializable {
 	
 	@Test (
 		testName="MIC004",			
-		groups={"Micuenta", "Canal:desktop_App:shop"}, 
+		groups={"Micuenta", "Registro", "Canal:desktop_App:shop"}, 
 		description="Cancelación de cuenta mediante endpoint de PlayStore")
 	public void cancelacionCuentaEndpointPlaystore() throws Exception {
 		new Mic004().execute();

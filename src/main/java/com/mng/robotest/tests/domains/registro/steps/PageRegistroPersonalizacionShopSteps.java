@@ -114,6 +114,7 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 	
 	
 	public void checkWeAreLogged() {
+		pgRegistroPersonalizacion.isNotPage(5);
 		new AccesoSteps().checkIsLogged();
 	}	
 	

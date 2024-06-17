@@ -93,7 +93,10 @@ public class AccesoSteps extends StepBase {
 	}
 	
 	public void checkIsLogged() {
-		int seconds = 6;
+		checkIsLogged(6);
+	}
+	
+	public void checkIsLogged(int seconds) {
 		if (isPRO()) {
 			checkIsLogged(seconds, DEFECT);
 		} else {
@@ -102,7 +105,7 @@ public class AccesoSteps extends StepBase {
 			if (!checks.areAllChecksOvercomed()) {
 				checkIsLogged(seconds, DEFECT);
 			}
-		}
+		}		
 	}
 	
 	private void checkLinksAfterLogin() {
