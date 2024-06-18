@@ -38,18 +38,19 @@ public class Gpo008 extends TestBase {
 	}
 
 	private void scrollToLastAndSelectArticle() throws Exception {
+		int posArticleToSelect = 30;
 		galeriaSteps.scrollToLast();
-		galeriaSteps.selectArticulo(30);
-		goBackToGalery();
+		galeriaSteps.selectArticulo(posArticleToSelect);
+		goBackToGalery(posArticleToSelect);
 		if (!channel.isDevice() &&
 			!isPRO()) { //problem in Robotest that not sends specific user-agent in other label
 			selectArticleInOtherLabel();
 		}
 	}
 
-	private void goBackToGalery() {
+	private void goBackToGalery(int posArticle) {
 		back();
-		galeriaSteps.checkArticleGaleriaLoaded();
+		galeriaSteps.checkArticleGaleriaLoaded(posArticle);
 	}
 
 }

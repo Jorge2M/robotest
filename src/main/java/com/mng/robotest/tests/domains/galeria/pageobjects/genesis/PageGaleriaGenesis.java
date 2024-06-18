@@ -74,7 +74,14 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 
 	@Override
 	public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
-		return state(VISIBLE, getXPathArticulo(numArticulo)).wait(seconds).check();
+		for (int i=0; i<=seconds; i++) {
+			if (isVisibleInScreen(getXPathArticulo(numArticulo))) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+//		return state(VISIBLE, getXPathArticulo(numArticulo)).wait(seconds).check();
 	}
 
 	@Override
@@ -108,7 +115,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 
 	@Override
 	public String getNombreArticulo(WebElement articulo) {
-		state(PRESENT, articulo).by(By.xpath(XP_TITLE_ARTICLE)).wait(1).check();
+		state(PRESENT, articulo).by(By.xpath("." + XP_TITLE_ARTICLE)).wait(3).check();
 		return getElement(articulo, "." + XP_TITLE_ARTICLE).getText();
 	}
 	

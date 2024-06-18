@@ -669,18 +669,17 @@ public class GaleriaSteps extends StepBase {
 		}
 	}
 	
-	@Validation
 	public ChecksTM checkArticleGaleriaLoaded() {
+		return checkArticleGaleriaLoaded(1);
+	}
+	
+	@Validation
+	public ChecksTM checkArticleGaleriaLoaded(int posArticulo) {
 		var checks = ChecksTM.getNew();
 		int secondsArticle = 8;
 		checks.add (
-			"Como mínimo se obtiene un artículo " + getLitSecondsWait(secondsArticle),
-			pgGaleria.isVisibleArticleUntil(1, secondsArticle));
-		
-		int secondsImage = 5;
-		checks.add (
-			"Aparece la imagen del 1er artículo  " + getLitSecondsWait(secondsImage),
-			pgGaleria.isVisibleArticleUntil(1, secondsImage), WARN);
+			"Aparece la imagen del artículo en la posición <b>" + posArticulo + "</b> " + getLitSecondsWait(secondsArticle),
+			pgGaleria.isVisibleArticleUntil(posArticulo, secondsArticle));
 		
 		return checks;
 	}

@@ -311,6 +311,32 @@ public class PageBase extends PageObjTM {
 	//esta pendiente que la desplieguen en PCI
 	protected boolean isCheckeableNewCheckout() {
 		return (!isPRO() || !UtilsTest.todayBeforeDate("2024-07-06"));
-	}	
+	}
+	
+	protected boolean isVisibleInScreen(String xpath) {
+		var elemOpt = findElement(xpath);
+		if (elemOpt.isEmpty()) {
+			return false;
+		}
+		return isVisibleInScreen(elemOpt.get());
+	}
+	
+	protected boolean isVisibleInScreen(WebElement element) {
+		if (!element.isDisplayed()) {
+			return false;
+		}
+		return (Boolean) ((JavascriptExecutor) driver).executeScript(
+            "var elem = arguments[0], " +
+            "    box = elem.getBoundingClientRect(), " +
+            "    cx = box.left + box.width / 2, " +
+            "    cy = box.top + box.height / 2, " +
+            "    e = document.elementFromPoint(cx, cy); " +
+            "for (; e; e = e.parentElement) { " +
+            "    if (e === elem) " +
+            "        return true; " +
+            "} " +
+            "return false;",
+            element);
+	}
 
 }
