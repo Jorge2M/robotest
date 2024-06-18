@@ -6,7 +6,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageRecADomic extends PageBase {
 
-	private static final String XP_PAGE_NO_HAY_PEDIDOS = "//*[@data-testid[contains(.,'noPurchasesFound.page')]]";
+	private static final String XP_PAGE_NO_HAY_PEDIDOS = "//*[@data-testid[contains(.,'noPurchasesFound')]]";
 	private static final String XP_PAGE_SI_HAY_PEDIDOS = "//micro-frontend[@id='myReturns']";
 
 	public boolean isPage(int seconds) {

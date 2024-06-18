@@ -5,8 +5,6 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.reembolsos.pageobjects.PageReembolsos;
 
-import static com.github.jorge2m.testmaker.conf.State.*;
-
 public class PageReembolsosSteps extends StepBase {
 
 	private final PageReembolsos pgReembolsos = new PageReembolsos();
@@ -18,10 +16,10 @@ public class PageReembolsosSteps extends StepBase {
 			"Aparece la página de Reembolsos",
 			pgReembolsos.isPage());
 		
+		int seconds = 5;
 		checks.add(
-			"Aparecen los inputs de BANCO, TITULAR e IBAN",
-			(pgReembolsos.existsInputBanco() && pgReembolsos.existsInputTitular() && pgReembolsos.existsInputIBAN()), 
-			WARN);
+			"Aparecen los inputs de BANCO, TITULAR e IBAN " + getLitSecondsWait(seconds),
+			(pgReembolsos.existsInputBanco(seconds) && pgReembolsos.existsInputTitular() && pgReembolsos.existsInputIBAN()));
 		
 		return checks;
 	}

@@ -59,7 +59,10 @@ public class PageReembolsos extends PageBase {
 	}
 
 	public boolean existsInputBanco() {
-		return state(PRESENT, XP_INPUT_BANCO).check();
+		return existsInputBanco(0);
+	}
+	public boolean existsInputBanco(int seconds) {
+		return state(PRESENT, XP_INPUT_BANCO).wait(seconds).check();
 	}
 
 	public boolean isVisibleInputBanco() {
