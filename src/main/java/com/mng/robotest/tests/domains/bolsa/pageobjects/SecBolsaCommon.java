@@ -75,6 +75,9 @@ public abstract class SecBolsaCommon extends PageBase {
 	
 	public String getPrecioSubtotalTextPant() {
 		String xpathImporte = getXPathPrecioSubTotal();
+		if (!state(VISIBLE, xpathImporte).check()) {
+			return "0";
+		}
 		return getElement(xpathImporte).getText();
 	}
 	
