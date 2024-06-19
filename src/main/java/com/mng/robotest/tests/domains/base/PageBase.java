@@ -317,11 +317,7 @@ public class PageBase extends PageObjTM {
 	}
 	
 	protected boolean isVisibleInScreen(String xpath) {
-		var elemOpt = findElement(xpath);
-		if (elemOpt.isEmpty()) {
-			return false;
-		}
-		return isVisibleInScreen(elemOpt.get(), 1, 1);
+		return isVisibleCenterInScreen(xpath);
 	}
 	
 	protected boolean isVisibleCenterInScreen(String xpath) {
@@ -332,6 +328,16 @@ public class PageBase extends PageObjTM {
 		var elem = elemOpt.get();
 		return isVisibleInScreen(elem, elem.getRect().getX(), elem.getRect().getY());		
 	}
+	
+	protected boolean isVisibleCornerLeftInScreen(String xpath) {
+		var elemOpt = findElement(xpath);
+		if (elemOpt.isEmpty()) {
+			return false;
+		}
+		return isVisibleInScreen(elemOpt.get(), 1, 1);
+	}
+	
+	
 	
 	protected boolean isVisibleInScreen(WebElement element, int pointX, int pointY) {
 		if (!element.isDisplayed()) {
