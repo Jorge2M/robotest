@@ -326,9 +326,9 @@ public class PageBase extends PageObjTM {
 			return false;
 		}
 		var elem = elemOpt.get();
-		var pointX = elem.getRect().getX() / 2;
-		var pointY = elem.getRect().getY() / 2;
-		return isVisibleInScreen(elem, pointX, pointY);		
+		var centerX = elem.getRect().getWidth() / 2;
+		var centerY = elem.getRect().getHeight() / 2;
+		return isVisibleInScreen(elem, centerX, centerY);		
 	}
 	
 	protected boolean isVisibleCornerLeftInScreen(String xpath) {
