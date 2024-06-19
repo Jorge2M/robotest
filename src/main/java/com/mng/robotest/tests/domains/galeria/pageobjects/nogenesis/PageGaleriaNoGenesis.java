@@ -76,7 +76,8 @@ public abstract class PageGaleriaNoGenesis extends PageBase implements PageGaler
 		return getXPathArticulo(numArticulo) + "//a";
 	}
 
-	private boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
+	@Override
+	public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
 		String xpathArticulo = "(" + getXPathArticulo() + ")[" + numArticulo + "]";
 		return state(VISIBLE, xpathArticulo).wait(seconds).check();
 	}
@@ -107,19 +108,19 @@ public abstract class PageGaleriaNoGenesis extends PageBase implements PageGaler
 
 	private int waitForArticleVisibleAndGetNumberOfThem(int seconds) {
 		int numArticle = 1;
-		isVisibleArticleUntil(numArticle, seconds);
+		isVisibleInScreenArticleUntil(numArticle, seconds);
 		return (getNumArticulos());
 	}
 
 	private boolean waitArticleAndGoTo(int numArticulo, int seconds) {
-		if (isVisibleArticleUntil(numArticulo, seconds)) {
+		if (isVisibleInScreenArticleUntil(numArticulo, seconds)) {
 			moveToArticle(numArticulo);
 			return true;
 		}
 		return false;
 	}
 
-	public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
+	public boolean isVisibleInScreenArticleUntil(int numArticulo, int seconds) {
 		return state(VISIBLE, getXPathArticulo(numArticulo)).wait(seconds).check();
 	}
 	public void moveToArticle(int numArticulo) {
@@ -253,7 +254,7 @@ public abstract class PageGaleriaNoGenesis extends PageBase implements PageGaler
 	public boolean backTo1erArticulo(String xpathIconoUpGalery) {
 		scrollEjeY(-50); //Assure icon showed
 		clickIconoUpToGaleryIfVisible(xpathIconoUpGalery);
-		boolean isVisible1erArt = isVisibleArticuloUntil(1, 2);
+		boolean isVisible1erArt = isVisibleArticleUntil(1, 2);
 		waitMillis(1000);
 		return isVisible1erArt;
 	}
@@ -544,7 +545,7 @@ public abstract class PageGaleriaNoGenesis extends PageBase implements PageGaler
 	private void goToInitPageAndWaitForArticle() {
 		//Algo raro le pasa al menú Nuevo que requiere un refresh para funcionar ok
 		driver.navigate().refresh();
-		isVisibleArticleUntil(1, 10);
+		isVisibleInScreenArticleUntil(1, 10);
 	}
 	
 	public void scrollToLastPage() {

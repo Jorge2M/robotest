@@ -67,6 +67,7 @@ public interface PageGaleria {
 	boolean articlesInOrder(FilterOrdenacion typeOrden) throws Exception;
 	void hoverArticle(WebElement article);
 	int getNumArticulos();
+	boolean isVisibleInScreenArticleUntil(int numArticulo, int seconds);
 	boolean isVisibleArticleUntil(int numArticulo, int seconds);
 	void moveToArticle(int numArticulo);
 	void moveToArticleAndGetObject(int posArticulo);

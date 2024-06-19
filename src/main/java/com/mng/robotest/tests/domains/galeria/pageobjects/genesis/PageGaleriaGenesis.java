@@ -73,7 +73,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	}
 
 	@Override
-	public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
+	public boolean isVisibleInScreenArticleUntil(int numArticulo, int seconds) {
 		for (int i=0; i<=seconds; i++) {
 			if (isVisibleInScreen(getXPathArticulo(numArticulo))) {
 				return true;
@@ -81,7 +81,11 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 			waitMillis(1000);
 		}
 		return false;
-//		return state(VISIBLE, getXPathArticulo(numArticulo)).wait(seconds).check();
+	}
+	
+	@Override
+	public boolean isVisibleArticleUntil(int numArticulo, int seconds) {
+		return state(VISIBLE, getXPathArticulo(numArticulo)).wait(seconds).check();		
 	}
 
 	@Override

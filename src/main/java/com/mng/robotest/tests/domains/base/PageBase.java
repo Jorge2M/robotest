@@ -321,18 +321,27 @@ public class PageBase extends PageObjTM {
 		if (elemOpt.isEmpty()) {
 			return false;
 		}
-		return isVisibleInScreen(elemOpt.get());
+		return isVisibleInScreen(elemOpt.get(), 1, 1);
 	}
 	
-	protected boolean isVisibleInScreen(WebElement element) {
+	protected boolean isVisibleCenterInScreen(String xpath) {
+		var elemOpt = findElement(xpath);
+		if (elemOpt.isEmpty()) {
+			return false;
+		}
+		var elem = elemOpt.get();
+		return isVisibleInScreen(elem, elem.getRect().getX(), elem.getRect().getY());		
+	}
+	
+	protected boolean isVisibleInScreen(WebElement element, int pointX, int pointY) {
 		if (!element.isDisplayed()) {
 			return false;
 		}
 		return (Boolean) ((JavascriptExecutor) driver).executeScript(
             "var elem = arguments[0], " +
             "    box = elem.getBoundingClientRect(), " +
-            "    cx = box.left + box.width / 2, " +
-            "    cy = box.top + box.height / 2, " +
+            "    cx = box.left + " + pointX + ", " +
+            "    cy = box.top + " + pointY + ", " +
             "    e = document.elementFromPoint(cx, cy); " +
             "for (; e; e = e.parentElement) { " +
             "    if (e === elem) " +
@@ -341,5 +350,5 @@ public class PageBase extends PageObjTM {
             "return false;",
             element);
 	}
-
+	
 }

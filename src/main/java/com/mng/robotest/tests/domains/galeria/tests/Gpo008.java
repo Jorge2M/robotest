@@ -50,7 +50,7 @@ public class Gpo008 extends TestBase {
 
 	private void goBackToGalery(int posArticle) {
 		back();
-		galeriaSteps.checkArticleGaleriaLoaded(posArticle);
+		galeriaSteps.checkArticleGaleriaVisibleInScreen(posArticle);
 	}
 
 }

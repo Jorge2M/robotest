@@ -81,7 +81,7 @@ public class Gpo004 extends TestBase {
 
 	private void goBackToGalery(int posArticleToSelect) {
 		back();
-		galeriaSteps.checkArticleGaleriaLoaded(posArticleToSelect);
+		galeriaSteps.checkArticleGaleriaVisibleInScreen(posArticleToSelect);
 	}
 
 	private void scrollToLastAndCheck(int articulosTotalesPagina) throws Exception {

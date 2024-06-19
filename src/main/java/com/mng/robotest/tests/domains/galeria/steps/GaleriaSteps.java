@@ -479,7 +479,7 @@ public class GaleriaSteps extends StepBase {
 	@Validation (
 		description="Aparece una página con artículos " + SECONDS_WAIT,	level=WARN)
 	public boolean validaArtEnContenido(int seconds) {
-		return pgGaleria.isVisibleArticleUntil(1, seconds);
+		return pgGaleria.isVisibleInScreenArticleUntil(1, seconds);
 	}
 
 	private static final String TAG_POS_ICONS = "@TagPosIcons";
@@ -683,6 +683,17 @@ public class GaleriaSteps extends StepBase {
 		
 		return checks;
 	}
+	
+	@Validation
+	public ChecksTM checkArticleGaleriaVisibleInScreen(int posArticulo) {
+		var checks = ChecksTM.getNew();
+		int secondsArticle = 8;
+		checks.add (
+			"Aparece la imagen del artículo en la posición <b>" + posArticulo + "</b> " + getLitSecondsWait(secondsArticle),
+			pgGaleria.isVisibleInScreenArticleUntil(posArticulo, secondsArticle));
+		
+		return checks;
+	}	
 	
 	
 	@Validation
