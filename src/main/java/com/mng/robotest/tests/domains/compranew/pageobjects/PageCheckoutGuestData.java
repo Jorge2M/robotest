@@ -46,7 +46,7 @@ public class PageCheckoutGuestData extends PageBase {
 	}
 	
 	private void selectCountryIfExists(String country) {
-		if (state(VISIBLE, XP_COUNTRY_LIST).check()) {
+		if (isCountryInteractable()) {
 			click(XP_COUNTRY_LIST).exec(); //Unfold list
 			String xpathItemCountry = XP_COUNTRY_ITEM + "/p[text()='" + country + "']/.."; 
 			if (country!=null && state(VISIBLE, xpathItemCountry).check()) {
@@ -55,6 +55,16 @@ public class PageCheckoutGuestData extends PageBase {
 				click(XP_COUNTRY_ITEM).exec(); //Select first
 			}
 		}		
+	}
+	
+	private boolean isCountryInteractable() {
+		if (state(VISIBLE, XP_COUNTRY_LIST).check()) {
+			var countryList = getElement(XP_COUNTRY_LIST); 
+			if (!countryList.getAttribute("class").contains("disabled")) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void clickContinueToPayment() {

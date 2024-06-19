@@ -282,8 +282,11 @@ public class PageBase extends PageObjTM {
 		var elementOpt = findElement(xpath);
 		if (elementOpt.isPresent()) {
 			var element = elementOpt.get();
-			element.clear();
-			element.sendKeys(keys);
+			if (element.isEnabled() && 
+				findElement(element, ".//self::*[not(@readonly)]").isPresent()) {
+				element.clear();
+				element.sendKeys(keys);
+			}
 		}
 	}
 	

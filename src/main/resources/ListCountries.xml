@@ -3633,6 +3633,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="offline" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago>--> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Indonesia" codigo="700">
@@ -4008,7 +4009,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_pais>701</codigo_pais>
 <codigo_alf>MY</codigo_alf>
 <idioma acceso="my">IN</idioma>
-<codpos>08720</codpos>
+<codpos>01634</codpos>
 <telefono>126946551</telefono>
 <dni>34763592N</dni>
 <tiendas_online>shop</tiendas_online>
