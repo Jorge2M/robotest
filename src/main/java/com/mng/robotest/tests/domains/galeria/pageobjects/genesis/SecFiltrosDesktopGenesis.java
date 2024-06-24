@@ -2,6 +2,9 @@ package com.mng.robotest.tests.domains.galeria.pageobjects.genesis;
 
 import java.util.List;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.interactions.Actions;
+
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
@@ -19,6 +22,7 @@ public class SecFiltrosDesktopGenesis extends PageBase implements SecFiltros {
 	private static final String XP_CAPA_FILTERS = "//*[@data-testid='plp.filters.desktop.panel']"; //
 	private static final String XP_BUTTON_MOSTRAR_ARTICULOS = "//*[@data-testid='plp.filters.apply.button']"; //
 	
+	private static final String XP_FILTRO_PRECIOS = "//div[@style[contains(.,'relative-start-position')]]";
 	private static final String XP_INPUT_MINIMO = "//input[@step='1']";
 	private static final String XP_INPUT_MAXIMO = "(" + XP_INPUT_MINIMO + ")[2]";
 
@@ -129,9 +133,15 @@ public class SecFiltrosDesktopGenesis extends PageBase implements SecFiltros {
 		var minSelector = getElement(XP_INPUT_MINIMO);
 		var maxSelector = getElement(XP_INPUT_MAXIMO);
 		//TODO
-		//...modificar el style --relative-start-position: 0; --relative-end-position: 1;
+		//No se puede de ningún modo -> cambiar los values y a correr
+		new Actions(driver).contextClick(minSelector).build().perform();
 		drag(minSelector, margenPixelsLeft);
 		drag(maxSelector, -margenPixelsRight);
+		
+		var filtro = getElement(XP_FILTRO_PRECIOS);
+        var js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].style.setProperty('--relative-start-position', '0.5');", getElement(XP_FILTRO_PRECIOS));
+        js.executeScript("arguments[0].style.setProperty('--relative-end-position', '0.75');", filtro);
 	}
 
 	@Override

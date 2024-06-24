@@ -7,8 +7,8 @@ import com.mng.robotest.tests.domains.availability.exceptions.CatalogsNotFoundEx
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
+import com.mng.robotest.tests.domains.landings.steps.LandingSteps;
 import com.mng.robotest.tests.domains.menus.steps.MenuSteps;
-import com.mng.robotest.tests.domains.transversal.home.steps.PageLandingSteps;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
@@ -55,8 +55,8 @@ public class Ava001 extends TestBase {
 	}
 	
 	private void checkLanding() {
-		var pgLandingSteps = new PageLandingSteps();
-		pgLandingSteps.checkIsPageMultimarca(5);
+		var pgLandingSteps = new LandingSteps();
+		pgLandingSteps.checkIsLandingMultimarca(5);
 		pgLandingSteps.checkIsCountryWithCorrectLineas(2);
 	}	
 	

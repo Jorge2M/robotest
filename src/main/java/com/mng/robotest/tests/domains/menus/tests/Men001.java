@@ -1,13 +1,13 @@
 package com.mng.robotest.tests.domains.menus.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
+import com.mng.robotest.tests.domains.landings.steps.LandingSteps;
 import com.mng.robotest.tests.domains.menus.beans.Linea;
 import com.mng.robotest.tests.domains.menus.beans.Sublinea;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
 import com.mng.robotest.tests.domains.menus.steps.MenuSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
-import com.mng.robotest.tests.domains.transversal.home.steps.PageLandingSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
@@ -29,7 +29,7 @@ public class Men001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		new AccesoSteps().accessFromPreHome();
-		new PageLandingSteps().checkIsCountryWithCorrectLineas(2);
+		new LandingSteps().checkIsCountryWithCorrectLineas(2);
 		if (new UtilsMangoTest().isLineActive(line)) {
 			if (subline==null) {
 				checkLineGroupMenus();

@@ -4,8 +4,8 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
+import com.mng.robotest.tests.domains.landings.pageobjects.PageLanding;
 import com.mng.robotest.tests.domains.otros.pageobjects.PageGoogle;
-import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
 import com.mng.robotest.tests.domains.transversal.prehome.pageobjects.PagePrehome;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -51,7 +51,7 @@ public class GoogleSteps extends StepBase {
 	
 	@Validation (description="Aparece la página de <b>Landing</b> o <b>Prehome</b>")
 	private boolean checkInitialPageShop() {
-		boolean isPageLanding = (new PageLanding()).isPageMultimarca();
+		boolean isPageLanding = (new PageLanding()).isLandingMultimarca();
 		boolean isPagePrehome = new PagePrehome().isPage();
 		return (isPageLanding || isPagePrehome);
 	}

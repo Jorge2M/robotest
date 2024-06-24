@@ -19,7 +19,6 @@ import com.mng.robotest.tests.domains.setcookies.pageobjects.SectionCookies;
 import com.mng.robotest.tests.domains.setcookies.steps.SectionCookiesSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
-import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
 import com.mng.robotest.tests.domains.transversal.prehome.pageobjects.PageJCAS;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -131,10 +130,7 @@ public class AccesoFlows extends StepBase {
 	}	
 	
 	public void cambioPaisFromHomeIfNeeded(Pais newPais, IdiomaPais newIdioma) {
-		String codigoPaisActual = (new PageLanding()).getCodigoPais();
-		if (newPais.getCodigoPais().compareTo(codigoPaisActual)!=0) {
-			cambioPais(newPais, newIdioma);
-		}
+		cambioPais(newPais, newIdioma);
 	}
 	
 	public void cambioPais(Pais newPais, IdiomaPais newIdioma) {

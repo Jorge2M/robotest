@@ -15,7 +15,7 @@ import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis;
-import com.mng.robotest.tests.domains.transversal.home.pageobjects.PageLanding;
+import com.mng.robotest.tests.domains.landings.pageobjects.PageLanding;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -99,7 +99,7 @@ public class CheckerSEO extends PageBase implements Checker {
 			//El canonical ha de aparecer como mínimo en las páginas de Portada, Catálogo y Ficha
 			var pageFicha = PageFicha.make(channel, app, dataTest.getPais());
 			var pageGaleria = PageGaleria.make(desktop, app, dataTest.getPais());
-			if ((new PageLanding()).isPageMultimarca() || 
+			if ((new PageLanding()).isLandingMultimarca() || 
 				((PageGaleriaDesktopBaseNoGenesis)pageGaleria).isPage() || 
 				pageFicha.isPage(0)) {
 				String currentURL = driver.getCurrentUrl(); 

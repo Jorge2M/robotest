@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mng.robotest.tests.conf.suites.FlagsNaviationLineas;
 import com.mng.robotest.tests.domains.base.TestBase;
+import com.mng.robotest.tests.domains.landings.steps.LandingSteps;
 import com.mng.robotest.tests.domains.menus.beans.Linea;
 import com.mng.robotest.tests.domains.menus.beans.Sublinea;
 import com.mng.robotest.tests.domains.menus.beans.Linea.TypeContentDesk;
@@ -12,8 +13,6 @@ import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
-import com.mng.robotest.tests.domains.transversal.banners.steps.SecBannersSteps;
-import com.mng.robotest.tests.domains.transversal.home.steps.PageLandingSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
@@ -37,18 +36,18 @@ public class Par001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		new AccesoSteps().accessFromPreHome();
-		new PageLandingSteps().checkIsCountryWithCorrectLineas(2);
+		new LandingSteps().checkIsCountryWithCorrectLineas(2);
 		for (Linea linea : linesToTest) {
 			if (new UtilsMangoTest().isLineActive(linea)) {
-				validaLinea(linea, null);
+				checkLinea(linea, null);
 				for (Sublinea sublinea : linea.getListSublineas(app)) {
-					validaLinea(linea, sublinea);
+					checkLinea(linea, sublinea);
 				}
 			}
 		}		
 	}
 	
-	private void validaLinea(Linea linea, Sublinea sublinea) throws Exception {
+	private void checkLinea(Linea linea, Sublinea sublinea) throws Exception {
 		var lineaType = linea.getType();
 		SublineaType sublineaType = null;
 		if (sublinea!=null) {
@@ -100,8 +99,7 @@ public class Par001 extends TestBase {
 	public void testSpecificFeaturesForLinea(Linea linea) throws Exception {
 		if (testBanners(linea)) {
 			int maxBannersToTest = getMaxBannersToTest(linea.getType());
-			new SecBannersSteps(maxBannersToTest)
-				.checkPageBanners(maxBannersToTest);
+			new LandingSteps().checkPageBanners(maxBannersToTest);
 		}
 	}
 	

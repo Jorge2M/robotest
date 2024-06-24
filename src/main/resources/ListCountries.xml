@@ -2308,15 +2308,14 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 </pais>
 
 <pais nombre_pais="Belize" codigo="421">
-<codigo_pais>431</codigo_pais>
+<codigo_pais>421</codigo_pais>
 <codigo_alf>BZ</codigo_alf>
 <idioma acceso="bz">IN</idioma>
-<idioma acceso="bz-es">ES</idioma>
-<codpos>08720</codpos>
+<codpos>087201</codpos>
 <telefono>6007171</telefono>
 <dni>34763592N</dni>
 <tiendas_online></tiendas_online>
-<register nuevo="S" cpost="S" publi="N"/>
+<register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
@@ -3125,6 +3124,23 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <multidireccion>N</multidireccion>
 </pais>
 
+<pais nombre_pais="Honduras" codigo="424">
+<codigo_pais>424</codigo_pais>
+<codigo_alf>HN</codigo_alf>
+<idioma acceso="hn">IN</idioma>
+<codpos>11101</codpos>
+<telefono>22345678</telefono>
+<tiendas_online></tiendas_online>
+<register nuevo="S" cpost="S" publi="N"/>
+<shoponline>
+<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+</shoponline>
+<multidireccion>N</multidireccion>
+</pais>
+
 <pais nombre_pais="Nicaragua" codigo="432">
 <codigo_pais>432</codigo_pais>
 <codigo_alf>NI</codigo_alf>
@@ -3297,6 +3313,23 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <micuentanew>shop</micuentanew>
 </pais>
 
+<pais nombre_pais="New Zealand" codigo="804">
+<codigo_pais>804</codigo_pais>
+<codigo_alf>NZ</codigo_alf>
+<idioma acceso="nz">IN</idioma>
+<codpos>6011</codpos>
+<telefono>044991234</telefono>
+<tiendas_online></tiendas_online>
+<register nuevo="S" cpost="S" publi="N"/>
+<shoponline>
+<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+</shoponline>
+<multidireccion>N</multidireccion>
+</pais>
+
 <pais nombre_pais="Nouvelle-Calédonie" codigo="809">
 <codigo_pais>809</codigo_pais>
 <codigo_alf>NC</codigo_alf>
@@ -3311,6 +3344,23 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+</shoponline>
+<multidireccion>N</multidireccion>
+</pais>
+
+<pais nombre_pais="Papua New Guinea" codigo="801">
+<codigo_pais>801</codigo_pais>
+<codigo_alf>PG</codigo_alf>
+<idioma acceso="pg">IN</idioma>
+<codpos>6011</codpos>
+<telefono>3123456</telefono>
+<tiendas_online></tiendas_online>
+<register nuevo="S" cpost="S" publi="S"/>
+<shoponline>
+<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
 </pais>
@@ -4304,6 +4354,23 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <!-- <emailuser>arabia.test@mango.com</emailuser>--> <!-- Es preciso probar con este email si queremos certificar el tema de storec -->
 </pais>
 
+<pais nombre_pais="Brunei" codigo="703">
+<codigo_pais>703</codigo_pais>
+<codigo_alf>BN</codigo_alf>
+<idioma acceso="bn">IN</idioma>
+<codpos>BB1110</codpos>
+<telefono>2243554</telefono>
+<tiendas_online></tiendas_online>
+<register nuevo="S" cpost="S" publi="S"/>
+<shoponline>
+<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+</shoponline>
+<multidireccion>N</multidireccion>
+</pais>
+
 <pais nombre_pais="Singapore" codigo="706">
 <codigo_pais>706</codigo_pais>
 <codigo_alf>SG</codigo_alf>
@@ -4973,6 +5040,23 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <micuentanew>shop</micuentanew>
 </pais>
 
+<pais nombre_pais="Equatorial Guinea" codigo="310">
+<codigo_pais>310</codigo_pais>
+<codigo_alf>GQ</codigo_alf>
+<idioma acceso="gq">ES</idioma>
+<codpos>08720</codpos>
+<telefono>333123456</telefono>
+<tiendas_online></tiendas_online>
+<register nuevo="S" cpost="S" publi="S"/>
+<shoponline>
+<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+</shoponline>
+<multidireccion>N</multidireccion>
+</pais>
+
 <pais nombre_pais="Kenya" codigo="346">
 <codigo_pais>346</codigo_pais>
 <codigo_alf>KE</codigo_alf>
@@ -5010,6 +5094,40 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <multidireccion>N</multidireccion>
 <newcheckout>shop</newcheckout>
 <micuentanew>shop</micuentanew>
+</pais>
+
+<pais nombre_pais="Gabon" codigo="314">
+<codigo_pais>314</codigo_pais>
+<codigo_alf>GA</codigo_alf>
+<idioma acceso="ga">FR</idioma>
+<codpos>BP 2120</codpos>
+<telefono>01761234</telefono>
+<tiendas_online></tiendas_online>
+<register nuevo="S" cpost="S" publi="N"/>
+<shoponline>
+<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+</shoponline>
+<multidireccion>N</multidireccion>
+</pais>
+
+<pais nombre_pais="Gambia" codigo="252">
+<codigo_pais>252</codigo_pais>
+<codigo_alf>GM</codigo_alf>
+<idioma acceso="gm">IN</idioma>
+<codpos>08720</codpos>
+<telefono>4221234</telefono>
+<tiendas_online></tiendas_online>
+<register nuevo="S" cpost="S" publi="N"/>
+<shoponline>
+<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+</shoponline>
+<multidireccion>N</multidireccion>
 </pais>
 
 <pais nombre_pais="Libya" codigo="216">
@@ -5391,6 +5509,23 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
 <multidireccion>N</multidireccion>
 <newcheckout>shop</newcheckout>
+</pais>
+
+<pais nombre_pais="Togo" codigo="280">
+<codigo_pais>280</codigo_pais>
+<codigo_alf>TG</codigo_alf>
+<idioma acceso="tg">IN</idioma>
+<codpos>08720</codpos>
+<telefono>22212345</telefono>
+<tiendas_online></tiendas_online>
+<register nuevo="S" cpost="S" publi="S"/>
+<shoponline>
+<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+</shoponline>
+<multidireccion>N</multidireccion>
 </pais>
 
 <!-- <pais nombre_pais="Tunisia" codigo="212">-->

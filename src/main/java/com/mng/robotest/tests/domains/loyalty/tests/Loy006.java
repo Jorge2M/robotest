@@ -1,8 +1,8 @@
 package com.mng.robotest.tests.domains.loyalty.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
+import com.mng.robotest.tests.domains.landings.steps.LandingSteps;
 import com.mng.robotest.tests.domains.transversal.browser.LocalStorageMango;
-import com.mng.robotest.tests.domains.transversal.home.steps.PageLandingSteps;
 
 public class Loy006 extends TestBase {
 
@@ -19,7 +19,7 @@ public class Loy006 extends TestBase {
 	}
 	
 	private void checkNoMangoLikesYouElements() {
-		var pageLandingSteps = new PageLandingSteps(); 
+		var pageLandingSteps = new LandingSteps(); 
 		pageLandingSteps.isInvisibleCommsHeaderBannerLoyalty(5);
 		pageLandingSteps.isInvisibleAnyElementLoyalty();
 	}

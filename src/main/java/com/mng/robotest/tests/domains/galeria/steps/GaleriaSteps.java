@@ -55,6 +55,17 @@ public class GaleriaSteps extends StepBase {
 		return secSelectorPreciosSteps;
 	}
 
+	@Validation (description="Aparece una galería con algún artículo visible " + SECONDS_WAIT)	
+	public boolean isArticlePresent(int seconds) {
+		for (int i=0; i<=seconds; i++) {
+			if (pgGaleria.isVisibleAnyArticle()) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
+	
     @Step(
     	description="Cargamos el <b>Catálogo</b> <a href='#{urlCatalog}'>#{urlCatalog}</a>", 
     	expected="Aparece un catálogo con artículos")    		

@@ -14,6 +14,7 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
+import com.mng.robotest.tests.domains.landings.steps.LandingSteps;
 import com.mng.robotest.tests.domains.menus.beans.FactoryMenus;
 import com.mng.robotest.tests.domains.menus.beans.Linea;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
@@ -24,7 +25,6 @@ import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupResponse;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
-import com.mng.robotest.tests.domains.transversal.banners.steps.SecBannersSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
@@ -327,7 +327,7 @@ public class MenuSteps extends StepBase {
 			break;
 		case BANNERS:
 			if (!channel.isDevice()) {
-				new SecBannersSteps(1).checkBannersInContent();
+				new LandingSteps().checkBannersInContent();
 			}
 			break;
 		case VACIO:

@@ -1,8 +1,8 @@
 package com.mng.robotest.testslegacy.steps.navigations.shop;
 
 import com.mng.robotest.tests.domains.base.StepBase;
+import com.mng.robotest.tests.domains.landings.steps.LandingSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.steps.SecCabeceraSteps;
-import com.mng.robotest.tests.domains.transversal.home.steps.PageLandingSteps;
 
 public class NavigationsSteps extends StepBase {
 
@@ -17,7 +17,7 @@ public class NavigationsSteps extends StepBase {
 		secCabeceraSteps.selecLogo();
 		secCabeceraSteps.selecLogo();
 		
-		new PageLandingSteps().checkIsPageMultimarca(5);
+		new LandingSteps().checkIsLandingMultimarca(5);
 	}
 	
 }
