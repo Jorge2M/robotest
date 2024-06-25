@@ -14,7 +14,11 @@ public class HeroBanner extends PageBase implements Banner {
 
 	private static final BannerType TYPE = BannerType.HERO;
 	
-	private static final String XP_BANNER = "//div[@class[contains(.,'HeroBannerFullHeight')]]";
+	private static final String XP_BANNER = "//div["
+			+ "@class[contains(.,'HeroBannerFullHeight')] or "
+			+ "@class[contains(.,'HeroBannerPromo_bannerWrapper')] or "
+			+ "@class[contains(.,'HeroBannerCtas_bannerWrapper')]"
+			+ "]";
 	
 	@Override
 	public boolean isBanner() {

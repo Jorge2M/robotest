@@ -6,7 +6,7 @@ import com.mng.robotest.tests.domains.transversal.cabecera.steps.SecCabeceraStep
 
 public class NavigationsSteps extends StepBase {
 
-	public void gotoPortada() {
+	public void toPortada() {
 		var secCabeceraSteps =	new SecCabeceraSteps();
 		int i=0;
 		while (!secCabeceraSteps.getSecCabecera().isPresentLogoMango(1) && i<5) {
@@ -17,7 +17,7 @@ public class NavigationsSteps extends StepBase {
 		secCabeceraSteps.selecLogo();
 		secCabeceraSteps.selecLogo();
 		
-		new LandingSteps().checkIsLandingMultimarca(5);
+		new LandingSteps().checkIsLanding(5);
 	}
 	
 }

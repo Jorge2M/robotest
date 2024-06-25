@@ -3129,7 +3129,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_alf>HN</codigo_alf>
 <idioma acceso="hn">IN</idioma>
 <codpos>11101</codpos>
-<telefono>22345678</telefono>
+<telefono>91234567</telefono>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
@@ -3318,7 +3318,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_alf>NZ</codigo_alf>
 <idioma acceso="nz">IN</idioma>
 <codpos>6011</codpos>
-<telefono>044991234</telefono>
+<telefono>211234567</telefono>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
@@ -3352,8 +3352,8 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_pais>801</codigo_pais>
 <codigo_alf>PG</codigo_alf>
 <idioma acceso="pg">IN</idioma>
-<codpos>6011</codpos>
-<telefono>3123456</telefono>
+<codpos>121</codpos>
+<telefono>71234567</telefono>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
@@ -4359,7 +4359,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_alf>BN</codigo_alf>
 <idioma acceso="bn">IN</idioma>
 <codpos>BB1110</codpos>
-<telefono>2243554</telefono>
+<telefono>8712345</telefono>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
@@ -5045,7 +5045,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_alf>GQ</codigo_alf>
 <idioma acceso="gq">ES</idioma>
 <codpos>08720</codpos>
-<telefono>333123456</telefono>
+<telefono>222123456</telefono>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
@@ -5101,7 +5101,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_alf>GA</codigo_alf>
 <idioma acceso="ga">FR</idioma>
 <codpos>BP 2120</codpos>
-<telefono>01761234</telefono>
+<telefono>62123456</telefono>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
@@ -5118,7 +5118,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_alf>GM</codigo_alf>
 <idioma acceso="gm">IN</idioma>
 <codpos>08720</codpos>
-<telefono>4221234</telefono>
+<telefono>7221234</telefono>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
@@ -5516,7 +5516,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_alf>TG</codigo_alf>
 <idioma acceso="tg">IN</idioma>
 <codpos>08720</codpos>
-<telefono>22212345</telefono>
+<telefono>90123456</telefono>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>

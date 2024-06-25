@@ -17,17 +17,15 @@ public class PageLanding extends PageBase {
 	private DataBanners dataBanners = loadDataBanners();
 	
 	private static final String XP_LANDING_MULTIMARCA = "//*[@data-testid='landings.home.multibrand']";
-	private static final String XP_LANDING = "//*[@data-testid='landings.home.brand']";
+	private static final String XP_LANDING_LINEA = "//*[@data-testid='landings.home.brand']";
 	private static final String XP_LOYALTY_ELEMENT = "//*[@data-testid[contains(.,'Likes')] or @id[contains(.,'Likes')]]";
 	
-	public boolean isPage() {
-		return isPage(0);
-	}
 	public boolean isPage(int seconds) {
 		for (int i=0; i<=seconds; i++) {
-			if (isLandingMultimarca() || isLanding()) {
+			if (isLandingLinea(0) || isLandingMultimarca()) {
 				return true;
 			}
+			waitMillis(1000);
 		}
 		return false;
 	}
@@ -40,12 +38,8 @@ public class PageLanding extends PageBase {
 		return state(PRESENT, XP_LANDING_MULTIMARCA).wait(seconds).check();
 	}
 	
-	public boolean isLanding() {
-		return isLanding(0);
-	}
-	
-	public boolean isLanding(int seconds) {
-		return state(PRESENT, XP_LANDING).wait(seconds).check();
+	public boolean isLandingLinea(int seconds) {
+		return state(PRESENT, XP_LANDING_LINEA).wait(seconds).check();
 	}	
 	
 	public boolean isVisibleAnyElementLoyalty() {
@@ -124,7 +118,7 @@ public class PageLanding extends PageBase {
 	}
 	
 	private DataBanners loadDataBanners() {
-		DataBanners dataBannersNew = new DataBanners();
+		var dataBannersNew = new DataBanners();
 		List<DataBanner> listDataBanners = new ArrayList<>();
 		for (var bannerType : BannerType.values()) {
 			var banner = Banner.make(bannerType);

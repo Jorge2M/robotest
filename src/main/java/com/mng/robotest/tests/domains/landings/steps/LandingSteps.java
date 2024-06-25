@@ -21,19 +21,24 @@ public class LandingSteps extends StepBase {
 
 	private final PageLanding pageLanding = new PageLanding();
 	
+	@Validation (description="Aparece la página de Landing Multimarca o de Línea " + SECONDS_WAIT)
+	public boolean checkIsLanding(int seconds) {
+		return pageLanding.isPage(seconds);
+	}
+	
 	@Validation (description="Aparece la página de Landing <b>Multimarca</b> " + SECONDS_WAIT)
 	public boolean checkIsLandingMultimarca(int seconds) {
 		return pageLanding.isLandingMultimarca(seconds);
 	}
 	
-	@Validation(description="Aparece la Landing de línea o multimarca")
-	public boolean checkIsLanding() {
-		return pageLanding.isPage();	
+	@Validation(description="Aparece la Landing de línea")
+	public boolean checkIsLandingLinea() {
+		return pageLanding.isLandingLinea(0);	
 	}	
 	
 	public void checkIsCountryWithCorrectLineas(int seconds) {
 		checkUrlOfCountry(dataTest.getPais(), seconds);
-		checkIsLanding();
+		checkIsLanding(0);
 		if (!channel.isDevice()) {
 			new MenuSteps().checkLineasCountry();
 		}

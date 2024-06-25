@@ -14,7 +14,10 @@ public class FamilyBanner extends PageBase implements Banner {
 
 	private static final BannerType TYPE = BannerType.FAMILY;
 	
-	private static final String XP_BANNER = "//div[@class[contains(.,'FamilyBannerShop')]]//ancestor::a";
+	private static final String XP_BANNER = "//div["
+			+ "@class[contains(.,'FamilyBannerShop')] or "
+			+ "@class[contains(.,'FamilyBanner_imageContainer')]]"
+			+ "//ancestor::a";
 	
 	@Override
 	public boolean isBanner() {

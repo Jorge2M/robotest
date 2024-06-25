@@ -208,7 +208,7 @@ public abstract class StepBase extends PageBase {
 	}	
 	
 	public void goToPortada() {
-		new NavigationsSteps().gotoPortada();
+		new NavigationsSteps().toPortada();
 	}
 	
 }
