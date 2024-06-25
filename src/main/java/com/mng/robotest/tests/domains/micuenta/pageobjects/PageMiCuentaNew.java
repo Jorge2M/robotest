@@ -16,7 +16,7 @@ public class PageMiCuentaNew extends PageMiCuenta {
 		case MIS_COMPRAS:
 			return XP_MYACCOUNT_LINKS + "//a[@href[contains(.,'mypurchases')]]";
 		case DEVOLUCIONES:
-			return XP_MYACCOUNT_LINKS + "//a[@href[contains(.,'my-returns')]]";
+			return XP_MYACCOUNT_LINKS + "//a[@href[contains(.,'my-returns')] or @href[contains(.,'/myreturns')]]";
 		case REEMBOLSOS:
 			return XP_MYACCOUNT_LINKS + "//a[@href[contains(.,'refunds')]]";
 		case CLUB_MLY:
