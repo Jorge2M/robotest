@@ -13,7 +13,7 @@ import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 public class PageRegistroPersonalizacionShopSteps extends StepBase {
 
-	private final PageRegistroPersonalizacionShop pgRegistroPersonalizacion = new PageRegistroPersonalizacionShop();
+	private final PageRegistroPersonalizacionShop pgRegistroPersonalizacion = PageRegistroPersonalizacionShop.make(inputParamsSuite.getUrlBase(), channel);
 	
 	public void checkPage(int seconds) {
 		checkIsPage(seconds);

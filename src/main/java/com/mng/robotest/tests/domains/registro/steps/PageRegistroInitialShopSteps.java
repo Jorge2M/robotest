@@ -12,7 +12,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageRegistroInitialShopSteps extends StepBase {
 
-	private final PageRegistroInitialShop pgRegistroInitial = new PageRegistroInitialShop();
+	private final PageRegistroInitialShop pgRegistroInitial = PageRegistroInitialShop.make(inputParamsSuite.getUrlBase(), channel);
 	
 	public void checkPage(int seconds) {
 		checkIsPage(seconds);
