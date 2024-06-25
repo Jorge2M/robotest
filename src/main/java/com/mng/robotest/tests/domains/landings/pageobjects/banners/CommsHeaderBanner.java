@@ -14,7 +14,7 @@ public class CommsHeaderBanner extends PageBase implements Banner {
 
 	private static final BannerType TYPE = BannerType.COMMS_HEADER;
 	
-	private static final String XP_HEADER_BANNER = "//micro-frontend[@data-testid[contains(.,'userCommsHeaderBanner')]]";
+	private static final String XP_HEADER_BANNER = "//div[@class[contains(.,'CommsBanner_commsBanner_')]]";
 	private static final String XP_BANNER_LOYALTY = XP_HEADER_BANNER + "//*[@data-testid='commsBanner.mangoLikesYou']"; 
 	
 	@Override
@@ -34,17 +34,33 @@ public class CommsHeaderBanner extends PageBase implements Banner {
 			var dataBanner = new DataBanner();
 			dataBanner.setBannerType(TYPE);
 			dataBanner.setBannerWeb(bannerElem);
-			dataBanner.setUrl("???");
-			dataBanner.setSrcImage("???");
-			dataBanner.setText("???");
+			dataBanner.setUrl(getUrl(bannerElem));
+			dataBanner.setSrcImage("");
+			dataBanner.setText(getText(bannerElem));
 			listBannersFound.add(dataBanner);
 		}
 		return Optional.of(listBannersFound);
 	}
 	
+	private String getUrl(WebElement banner) {
+		return getAncor(banner).getAttribute("href");
+	}
+	
+	private WebElement getAncor(WebElement banner) {
+		return getElement(banner, ".//a");
+	}
+	
+	private String getText(WebElement banner) {
+		var h2Opt = findElement(banner, ".//h2");
+		if (h2Opt.isPresent()) {
+			return h2Opt.get().getText();
+		}
+		return banner.getText();
+	}
+	
 	@Override
 	public void clickBanner(WebElement banner) {
-		banner.click();
+		getAncor(banner).click();
 	}
 
 	public boolean isHeaderBannerMangoLikesYou(int seconds) {
