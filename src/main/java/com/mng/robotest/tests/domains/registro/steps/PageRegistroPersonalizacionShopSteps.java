@@ -64,6 +64,7 @@ public class PageRegistroPersonalizacionShopSteps extends StepBase {
 		saveHtmlPage=ALWAYS
 		)
 	private void inputDataWithouBirthDate(DataNewRegister data) {
+		waitLoadPage();
 		pgRegistroPersonalizacion.inputPostalCode(data.getPostalCode());
 		pgRegistroPersonalizacion.inputName(data.getName());
 		pgRegistroPersonalizacion.selectGender(data.getGender());

@@ -44,12 +44,12 @@ public class PageRegistroPersonalizacionShopGenesis extends PageRegistroPersonal
 	}
 	@Override
 	public void inputName(String name) {
-		getElement(XP_INPUT_NOMBRE).sendKeys(name);
+		sendKeysWithRetry(2, getElement(XP_INPUT_NOMBRE), name);
 	}
 	@Override
 	public void inputPostalCode(String postalCode) {
 		state(PRESENT, XP_INPUT_POSTALCODE).wait(2).check();
-		getElement(XP_INPUT_POSTALCODE).sendKeys(postalCode);
+		sendKeysWithRetry(2, getElement(XP_INPUT_POSTALCODE), postalCode);
 	}
 	@Override
 	public void inputDateOfBirth(String date) {
@@ -57,8 +57,9 @@ public class PageRegistroPersonalizacionShopGenesis extends PageRegistroPersonal
 	}
 	@Override
 	public void selectGender(GenderOption gender) {
-		state(VISIBLE, getXPathCheckboxGender(gender)).wait(2).check();
-		click(getXPathCheckboxGender(gender)).exec();
+		var xpGender = getXPathCheckboxGender(gender);
+		state(VISIBLE, xpGender).wait(2).check();
+		click(xpGender).exec();
 	}
 	@Override
 	public void selectLineas(List<LineaType> lineasToSelect) {

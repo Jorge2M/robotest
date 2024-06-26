@@ -17,17 +17,17 @@ import com.mng.robotest.testslegacy.data.PaisShop;
 public abstract class PageRegistroPersonalizacionShop extends PageBase {
 
 	public enum GenderOption { 
-		FEMENINO('M'), 
-		MASCULINO('H'), 
-		NO_BINARIO('X'), 
-		PREFIERO_NO_INCLUIRLO('N');
+		FEMENINO("FEMALE"), 
+		MASCULINO("MALE"), 
+		NO_BINARIO("NON_BINARY"), 
+		PREFIERO_NO_INCLUIRLO("DONT_ANSWER");
 	
-		private char code;
-		private GenderOption(char code) {
+		private String code;
+		private GenderOption(String code) {
 			this.code = code;
 		}
 		
-		public char getCode() {
+		public String getCode() {
 			return code;
 		}
 	}
