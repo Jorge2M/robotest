@@ -5100,7 +5100,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codigo_pais>314</codigo_pais>
 <codigo_alf>GA</codigo_alf>
 <idioma acceso="ga">FR</idioma>
-<codpos>BP 2120</codpos>
+<codpos>BP2120</codpos>
 <telefono>62123456</telefono>
 <tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>

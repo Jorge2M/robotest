@@ -66,7 +66,7 @@ public class Leg001 extends TestBase {
 	
 	private void checkTextoLegal() {
 		var baseUrl = inputParamsSuite.getUrlBase();
-		checkLegalTextsVisible(PageRegistroInitialShop.make(baseUrl, channel));
+		checkLegalTextsVisible(PageRegistroInitialShop.make(baseUrl, dataTest.getPais(), channel));
 	}	
 	
 }
