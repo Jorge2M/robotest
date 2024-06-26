@@ -74,8 +74,8 @@ public class GaleriaSteps extends StepBase {
     	checkArticleGaleriaLoaded();
     }
 	
-    public void selectPricesInterval() throws Exception {
-    	secSelectorPreciosSteps.selectInterval();
+    public void selectPricesInterval(int minim, int maxim) throws Exception {
+    	secSelectorPreciosSteps.selectInterval(minim, maxim);
     }
     
 	@Step (

@@ -121,6 +121,11 @@ public class SecFiltrosDesktopNoGenesis extends PageBase implements SecFiltros {
 	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
 		secSelectorPreciosDesktop.clickMinAndMax(margenPixelsLeft, margenPixelsRight);
 	}
+	
+	@Override
+	public void selectIntervalImport(int minim, int maxim) {
+		throw new UnsupportedOperationException();
+	}
 
 	@Override
 	public boolean isVisibleColorTags(List<Color> colors) {

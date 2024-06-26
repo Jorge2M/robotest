@@ -25,6 +25,7 @@ public interface SecFiltros {
 	public int getMinImportFilter();
 	public int getMaxImportFilter();
 	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight);
+	public void selectIntervalImport(int minim, int maxim);
 	public void selecFiltroColores(List<Color> colorsToSelect);
 	public void selectMenu2onLevel(List<String> listMenus);
 	public void selectMenu2onLevel(String menuLabel);

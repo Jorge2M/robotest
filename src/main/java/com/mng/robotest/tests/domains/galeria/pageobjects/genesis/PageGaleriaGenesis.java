@@ -23,6 +23,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSli
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.UtilsPageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.SecPreciosArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActionFav;
 import com.mng.robotest.testslegacy.data.Color;
@@ -315,6 +316,10 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
 		secFiltros.clickIntervalImportFilter(margenPixelsLeft, margenPixelsRight);
 	}
+	@Override
+	public void selectIntervalImports(int minim, int maxim) {
+		secFiltros.selectIntervalImport(minim, maxim);
+	}
 	
 	private List<WebElement> getArticulos() {
 		return getElements(getXPathArticulo());
@@ -479,7 +484,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return articulo;
 	}
 	
-	private static final String XP_PRICE_ARTICLE = "//*[@data-testid='currentPrice']";
+	private static final String XP_PRICE_ARTICLE = new SecPreciosArticulo().getXPathPrecioArticulo();
 	
 	@Override
 	public String getPrecioArticulo(WebElement articulo) {
@@ -664,6 +669,49 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		moveToElement(xpathImgColorRelArticle);
 		getElements(articulo, "." + xpathImgColorRelArticle).get(posColor-1).click();
 	}
+
+	@Override
+	public boolean isVisibleImageArticle(int numArticulo, int seconds) {
+		var articulo = getElement(getXPathArticulo(numArticulo));
+		return isVisibleImageArticle(articulo, seconds);
+	}
+	
+	private boolean isVisibleImageArticle(WebElement articulo, int seconds) {
+		for (int i=0; i<seconds; i++) {
+			if (getImagenElementArticulo(articulo)!=null) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
+	}
+	
+	public boolean preciosInIntervalo(int minimo, int maximo) throws Exception {
+		List<WebElement> listaPreciosPrendas = getListaPreciosPrendas(getListaArticulos());
+		for (var prendaPrecio : listaPreciosPrendas) {
+			String entero = prendaPrecio.getText();
+			float precioActual = Float.parseFloat(entero.replace(",",".").replaceAll("[^\\d.]", ""));
+			if (precioActual < minimo || precioActual > maximo) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) {
+		List<WebElement> listPrecios = new ArrayList<>();
+		for (var articulo : listArticles) {
+			WebElement precio = getPrecioDefinitivoElem(articulo);
+			if (precio!=null) {
+				listPrecios.add(precio);
+			}
+		}
+		return listPrecios;
+	}	
+	
+	private WebElement getPrecioDefinitivoElem(WebElement articulo) {
+		return new SecPreciosArticulo().getPrecioDefinitivoElem(articulo);
+	}
 	
 	//----
 	@Override
@@ -688,9 +736,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public void clickHearthIcon(WebElement hearthIcon) throws Exception {
 		throw new UnsupportedOperationException();
 	}
-	public boolean preciosInIntervalo(int minimo, int maximo) throws Exception {
-		throw new UnsupportedOperationException();
-	}
 	public boolean isClickableArticuloUntil(int numArticulo, int seconds) {
 		throw new UnsupportedOperationException();
 	}
@@ -705,9 +750,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	}
 	
 	public String getNombreArticuloWithText(String literal, int secondsWait) {
-		throw new UnsupportedOperationException();
-	}
-	public boolean isVisibleImageArticle(int numArticulo, int seconds) {
 		throw new UnsupportedOperationException();
 	}
 	public int filterByColorsAndReturnNumArticles(List<Color> colorsToSelect) {

@@ -105,6 +105,7 @@ public interface PageGaleria {
 	public int getMinImportFilter();
 	public int getMaxImportFilter();
 	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight);
+	public void selectIntervalImports(int minim, int maxim);
 	public void showFilters();
 	public void acceptFilters();
 	

@@ -190,4 +190,9 @@ public class SecFiltrosMobilNoGenesis extends PageBase implements SecFiltros {
 		throw new UnsupportedOperationException();		
 	}
 	
+	@Override
+	public void selectIntervalImport(int minim, int maxim) {
+		throw new UnsupportedOperationException();
+	}
+	
 }

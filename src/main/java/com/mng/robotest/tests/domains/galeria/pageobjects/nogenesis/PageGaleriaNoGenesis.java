@@ -144,6 +144,11 @@ public abstract class PageGaleriaNoGenesis extends PageBase implements PageGaler
 		return "";
 	}
 
+	@Override
+	public void selectIntervalImports(int minim, int maxim) {
+		throw new UnsupportedOperationException();
+	}
+	
 	public boolean preciosInIntervalo(int minimo, int maximo) throws Exception {
 		boolean inInterval = false;
 		for (int i=0; i<3; i++) {

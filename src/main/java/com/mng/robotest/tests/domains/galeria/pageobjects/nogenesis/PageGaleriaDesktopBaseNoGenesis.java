@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.SecColoresArticuloDesktop;
+import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.SecPreciosArticulo;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNoGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecSubMenusGallery;
@@ -89,7 +90,7 @@ public abstract class PageGaleriaDesktopBaseNoGenesis extends PageGaleriaNoGenes
 	private static final String XP_ANCESTOR_ARTICLE = "//ancestor::div[@class[contains(.,'product-list-info')]]";
 	
 	private String getXPathDataArticuloOfType(TypeArticle typeArticle) {
-		String xpathPrecio = secPrecios.getXPathPrecioArticulo(typeArticle);
+		String xpathPrecio = new SecPreciosArticulo().getXPathPrecioArticulo();
 		return (getXPathArticulo() + xpathPrecio + XP_ANCESTOR_ARTICLE);
 	}
 	

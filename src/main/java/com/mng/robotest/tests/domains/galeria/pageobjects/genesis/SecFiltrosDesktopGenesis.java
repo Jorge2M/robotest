@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.galeria.pageobjects.genesis;
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.interactions.Actions;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
@@ -24,7 +23,9 @@ public class SecFiltrosDesktopGenesis extends PageBase implements SecFiltros {
 	
 	private static final String XP_FILTRO_PRECIOS = "//div[@style[contains(.,'relative-start-position')]]";
 	private static final String XP_INPUT_MINIMO = "//input[@step='1']";
-	private static final String XP_INPUT_MAXIMO = "(" + XP_INPUT_MINIMO + ")[2]";
+	private static final String XP_INPUT_MAXIMO = "" + XP_INPUT_MINIMO + "[2]";
+	private static final String XP_LABEL_MINIMO = "//*[@data-testid='plp.rangePicker.label-min']";
+	private static final String XP_LABEL_MAXIMO = "//*[@data-testid='plp.rangePicker.label-max']";
 
 	private String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) { //
 		return "//*[@data-testid='plp.filters.mobile.panel.order-']" + ordenacion.getValue() + "/..";
@@ -130,18 +131,29 @@ public class SecFiltrosDesktopGenesis extends PageBase implements SecFiltros {
 	
 	@Override
 	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight) {
-		var minSelector = getElement(XP_INPUT_MINIMO);
-		var maxSelector = getElement(XP_INPUT_MAXIMO);
-		//TODO
-		//No se puede de ningún modo -> cambiar los values y a correr
-		new Actions(driver).contextClick(minSelector).build().perform();
-		drag(minSelector, margenPixelsLeft);
-		drag(maxSelector, -margenPixelsRight);
+		throw new UnsupportedOperationException();
+//		var minSelector = getElement(XP_INPUT_MINIMO);
+//		var maxSelector = getElement(XP_INPUT_MAXIMO);
+//		//TODO
+//		//No se puede de ningún modo -> cambiar los values y a correr
+//		new Actions(driver).contextClick(minSelector).build().perform();
+//		drag(minSelector, margenPixelsLeft);
+//		drag(maxSelector, -margenPixelsRight);
+//		
+//		var filtro = getElement(XP_FILTRO_PRECIOS);
+//        var js = (JavascriptExecutor) driver;
+//        js.executeScript("arguments[0].style.setProperty('--relative-start-position', '0.5');", getElement(XP_FILTRO_PRECIOS));
+//        js.executeScript("arguments[0].style.setProperty('--relative-end-position', '0.75');", filtro);
+	}
+	
+	@Override
+	public void selectIntervalImport(int minim, int maxim) {
+		var js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].value='" + minim + "';", getElement(XP_INPUT_MINIMO));
+		js.executeScript("arguments[0].value='" + maxim + "';", getElement(XP_INPUT_MAXIMO));
 		
-		var filtro = getElement(XP_FILTRO_PRECIOS);
-        var js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].style.setProperty('--relative-start-position', '0.5');", getElement(XP_FILTRO_PRECIOS));
-        js.executeScript("arguments[0].style.setProperty('--relative-end-position', '0.75');", filtro);
+		js.executeScript("arguments[0].innerText='" + minim + "';", getElement(XP_LABEL_MINIMO));
+		js.executeScript("arguments[0].innerText='" + maxim + "';", getElement(XP_LABEL_MAXIMO));
 	}
 
 	@Override

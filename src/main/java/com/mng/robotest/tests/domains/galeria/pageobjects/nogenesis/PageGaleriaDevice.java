@@ -100,16 +100,13 @@ public abstract class PageGaleriaDevice extends PageGaleriaNoGenesis {
 
 	@Override
 	public String getPrecioArticulo(WebElement articulo) {
-		if (isArticleRebajado(articulo)) {
-			return articulo.findElement(By.xpath("." + PRECIO_REBAJADO_DEFINITIVO.getXPath())).getText();
-		}
-		return articulo.findElement(By.xpath("." + PRECIO_NO_REBAJADO_DEFINITIVO.getXPath())).getText();
+		return secPrecios.getPrecioDefinitivo(articulo);
 	}	
 	
 	@Override
 	public boolean isArticleRebajado(WebElement articulo) {
 		return state(PRESENT, articulo)
-				.by(By.xpath("." + PRECIO_INICIAL_TACHADO.getXPath())).check();
+				.by(By.xpath("." + INICIAL_TACHADO.getXPath())).check();
 	}
 	
 	@Override
