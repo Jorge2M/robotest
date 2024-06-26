@@ -17,6 +17,15 @@ public class PageGaleriaDesktopGenesis extends PageGaleriaGenesis {
 	private static final String XP_HEADER_ARTICLES = "//h1[@data-testid[contains(.,'plp.products.list')]]";
 	private static final String XP_2_COLUMN_LINK = "//*[@data-testid='column-selector-2']";
 	private static final String XP_4_COLUMN_LINK = "//*[@data-testid='column-selector-4']";
+	private static final String XP_SUBFAMILY_BLOCK = "//*[@data-testid='plp.products.list.subfamily']";
+
+	private String getXPathSubFamilyMenu(String nameMenu) {
+		String nameMenuFirstCapital = nameMenu.substring(0, 1).toUpperCase() + nameMenu.substring(1);
+		return 
+			XP_SUBFAMILY_BLOCK + 
+			"//li/a[text()='" + nameMenu + "' or text()='" + nameMenuFirstCapital + "']";
+	}
+	
 	
 	@Override
 	public List<String> searchForArticlesNoValid(List<String> articleNames) {
@@ -58,7 +67,7 @@ public class PageGaleriaDesktopGenesis extends PageGaleriaGenesis {
 	}
 	@Override
 	public void clickSubMenuDesktop(String submenu) {
-		throw new UnsupportedOperationException();
+		click(getXPathSubFamilyMenu(submenu));
 	}
 	
 	@Override
