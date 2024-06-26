@@ -9,7 +9,7 @@ import com.mng.robotest.tests.domains.chequeregalo.pageobjects.PageChequeRegaloI
 import com.mng.robotest.tests.domains.chequeregalo.steps.PageChequeRegaloInputDataSteps;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.FooterLink;
-import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
@@ -45,7 +45,7 @@ public class Rgl001 extends TestBase {
 	
 	private void selectFooterLinkChequeRegalo() {
 		clickLinea(SHE);
-		new SecFooterSteps().clickLinkFooter(FooterLink.CHEQUE_REGALO, false);
+		new FooterSteps().clickLinkFooter(FooterLink.CHEQUE_REGALO, false);
 	}	
 	
 	private void inputDataChequeRegalo() {

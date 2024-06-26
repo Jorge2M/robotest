@@ -11,7 +11,7 @@ import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.FooterLink;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
-public class SecFooterSteps extends StepBase {
+public class FooterSteps extends StepBase {
 	
 	private final SecFooter secFooter = new SecFooter();
 	

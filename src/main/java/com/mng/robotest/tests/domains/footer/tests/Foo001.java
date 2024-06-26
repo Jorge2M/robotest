@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.FooterLink;
-import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
 
 public class Foo001 extends TestBase {
 
-	private final SecFooterSteps secFooterSteps = new SecFooterSteps();
+	private final FooterSteps secFooterSteps = new FooterSteps();
 	
 	@Override
 	public void execute() throws Exception {

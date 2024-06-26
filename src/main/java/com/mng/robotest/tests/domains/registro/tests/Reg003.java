@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.mng.robotest.tests.conf.suites.RegistrosSuite.VersionRegistroSuite;
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
@@ -66,7 +66,7 @@ public class Reg003 extends TestBase {
 			registerAndGoShoppingSiPubli();
 		} else {
 			if (!isNotCheckInGermany()) {
-				new SecFooterSteps().clickFooterSubscriptionInput(version.register());
+				new FooterSteps().clickFooterSubscriptionInput(version.register());
 			}
 		}
 	}
@@ -115,7 +115,7 @@ public class Reg003 extends TestBase {
 		pgRegistroFinSteps.clickIrDeShoppingButton();
 		if (!isNotCheckInGermany()) {
 			secCabeceraSteps.selecLogo();
-			new SecFooterSteps().clickFooterSubscriptionInput(version.register());
+			new FooterSteps().clickFooterSubscriptionInput(version.register());
 		}
 	}
 	

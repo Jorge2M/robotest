@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.registro.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
@@ -68,7 +68,7 @@ public class Reg001 extends TestBase {
 	}
 	
 	private void checkNewsletterSuscription() {
-		new SecFooterSteps().clickFooterSubscriptionInput(false);
+		new FooterSteps().clickFooterSubscriptionInput(false);
 	}
 	
 	private void checkLoginAndUserData() {

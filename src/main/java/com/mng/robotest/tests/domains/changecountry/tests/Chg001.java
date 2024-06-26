@@ -5,7 +5,7 @@ import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.Us
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.changecountry.steps.ModalChangeCountrySteps;
-import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 
@@ -34,7 +34,7 @@ public class Chg001 extends TestBase {
 		if (channel.isDevice()) {
 			clickUserMenu(CAMBIO_PAIS);
 		} else {
-			new SecFooterSteps().clickChangeCountry();
+			new FooterSteps().clickChangeCountry();
 		}
 	}
 

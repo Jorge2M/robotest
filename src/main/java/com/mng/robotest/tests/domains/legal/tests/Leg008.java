@@ -5,7 +5,7 @@ import static com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.Footer
 import com.mng.robotest.tests.domains.ayuda.pageobjects.PageAyudaContact;
 import com.mng.robotest.tests.domains.ayuda.steps.AyudaSteps;
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
 
 /**
  * Control textos legales: Formulario de ayuda (Genki)
@@ -22,7 +22,7 @@ public class Leg008 extends TestBase {
 	}
 	
 	private void goToAyudaWithLegalText() {
-		new SecFooterSteps().clickLinkFooter(AYUDA);
+		new FooterSteps().clickLinkFooter(AYUDA);
 		
 		var ayudaSteps = new AyudaSteps();
 		String question = "¿Dónde está mi pedido?";

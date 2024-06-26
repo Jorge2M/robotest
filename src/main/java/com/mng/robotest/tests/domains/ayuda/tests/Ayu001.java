@@ -4,7 +4,7 @@ import static com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.Footer
 
 import com.mng.robotest.tests.domains.ayuda.steps.AyudaSteps;
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
 
 public class Ayu001 extends TestBase {
 
@@ -15,7 +15,7 @@ public class Ayu001 extends TestBase {
 	}
 	
 	private void checkAyuda() {
-		new SecFooterSteps().clickLinkFooter(AYUDA, false);
+		new FooterSteps().clickLinkFooter(AYUDA);
 		
 		var ayudaSteps = new AyudaSteps();
 		ayudaSteps.clickIcon("Devoluciones, cambios y reembolsos");

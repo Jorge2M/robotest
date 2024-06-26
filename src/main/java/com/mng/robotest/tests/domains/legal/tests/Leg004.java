@@ -4,7 +4,7 @@ import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
-import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
 
 /**
  * Control textos legales "Suscripción en footer y non-modal":
@@ -41,7 +41,7 @@ public class Leg004 extends TestBase {
 	
 	private void goToNewsletter() throws Exception {
 		access();
-		new SecFooterSteps().clickFooterSubscriptionInput();
+		new FooterSteps().clickFooterSubscriptionInput();
 	}
 	
 	private void checkTextoLegal() {

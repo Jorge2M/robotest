@@ -4,7 +4,7 @@ import static com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.Footer
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.chequeregalo.pageobjects.PageChequeRegaloInputDataNew;
-import com.mng.robotest.tests.domains.footer.steps.SecFooterSteps;
+import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
 
 /**
  * Control textos legales:
@@ -21,7 +21,7 @@ public class Leg009 extends TestBase {
 	}
 	
 	private void goToChequeRegalo() {
-		new SecFooterSteps().clickLinkFooter(CHEQUE_REGALO);
+		new FooterSteps().clickLinkFooter(CHEQUE_REGALO);
 	}	
 	
 	private void checkTextoLegal() {

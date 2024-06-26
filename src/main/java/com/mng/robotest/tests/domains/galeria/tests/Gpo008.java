@@ -33,10 +33,6 @@ public class Gpo008 extends TestBase {
 		}
 	}
 
-	private void selectArticleInOtherLabel() {
-		galeriaSteps.selectArticuloEnPestanyaAndBack(20);
-	}
-
 	private void scrollToLastAndSelectArticle() throws Exception {
 		int posArticleToSelect = 30;
 		galeriaSteps.scrollToLast();
@@ -46,6 +42,10 @@ public class Gpo008 extends TestBase {
 			!isPRO()) { //problem in Robotest that not sends specific user-agent in other label
 			selectArticleInOtherLabel();
 		}
+	}
+	
+	private void selectArticleInOtherLabel() {
+		galeriaSteps.selectArticuloEnPestanyaAndBack(20);
 	}
 
 	private void goBackToGalery(int posArticle) {
