@@ -99,7 +99,7 @@ public class SecDataProduct extends PageBase {
 
 	//Funciones referentes a los datos básicos del artículo
 	public String getReferenciaProducto() {
-		String url = driver.getCurrentUrl();
+		String url = getCurrentUrl();
 		Pattern pattern = Pattern.compile("_(.*?).html");
 		Matcher matcher = pattern.matcher(url);
 		if (matcher.find()) {

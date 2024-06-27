@@ -149,7 +149,8 @@ public class SecFiltrosMobilNoGenesis extends PageBase implements SecFiltros {
 		return false;
 	}
 	
-	private void close() {
+	@Override
+	public void close() {
 		click(XP_BUTTON_CLOSE).exec();
 		isCloseFiltrosUntil(1);
 	}
@@ -192,6 +193,11 @@ public class SecFiltrosMobilNoGenesis extends PageBase implements SecFiltros {
 	
 	@Override
 	public void selectIntervalImport(int minim, int maxim) {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim) {
 		throw new UnsupportedOperationException();
 	}
 	

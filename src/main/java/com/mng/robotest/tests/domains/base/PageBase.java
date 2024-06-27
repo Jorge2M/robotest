@@ -124,6 +124,10 @@ public class PageBase extends PageObjTM {
 		waitForPageLoaded(driver);
 	}
 	
+	protected String getCurrentUrl() {
+		return driver.getCurrentUrl();
+	}
+	
 	protected void clickUserMenu(UserMenu userMenu) {
 		new MenusUserWrapper().clickMenuAndWait(userMenu);
 	}

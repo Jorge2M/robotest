@@ -54,7 +54,7 @@ public class AccesoSteps extends StepBase {
 	private void quickAccess(String urlAccess, Pais pais, IdiomaPais idioma) {
 		new AccesoFlows().fixRandomSeleniumProblem();
 		new LocalStorageMango().setInitialModalsOff();
-		if (driver.getCurrentUrl().compareTo(urlAccess)!=0) {
+		if (getCurrentUrl().compareTo(urlAccess)!=0) {
 			driver.get(urlAccess);
 		}
 	}

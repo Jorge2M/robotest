@@ -107,7 +107,7 @@ public class GaleriaSteps extends StepBase {
 		expected="Aparece la ficha del artículo seleccionado")
 	public DataFichaArt selectArticulo(int position) {
 		var datosArticulo = new DataFichaArt();
-		String urlGaleria = driver.getCurrentUrl();
+		String urlGaleria = getCurrentUrl();
 		
 		var articulo = pgGaleria.getArticulo(position);
 		datosArticulo.setNombre(pgGaleria.getNombreArticulo(articulo));

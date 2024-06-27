@@ -22,72 +22,23 @@ public class SecSelectorPreciosSteps extends StepBase {
 		description="Utilizar el selector de precio: Mínimo=<b>#{minim}</b> Máximo=#{maxim}", 
 		expected="Aparecen artículos con precio en el intervalo seleccionado")
 	public void selectInterval(int minim, int maxim) throws Exception {
-		var dataFilter = new DataFilterPrecios();
-		if (isDesktop()) {
-			pgGaleria.showFilters();
-		}
-		dataFilter.setMinimoOrig(pgGaleria.getMinImportFilter());
-		dataFilter.setMaximoOrig(pgGaleria.getMaxImportFilter());
-
 		pgGaleria.selectIntervalImports(minim, maxim);
-		dataFilter.setMinimoFinal(pgGaleria.getMinImportFilter());
-		dataFilter.setMaximoFinal(pgGaleria.getMaxImportFilter());
-		if (isDesktop()) {
-			pgGaleria.acceptFilters();
-		}
-		
-		checkResultSelectFiltro(dataFilter);
+		checkResultSelectFiltro(minim, maxim);
 		checksDefault();
 	}
 	
 	@Validation
-	private ChecksTM checkResultSelectFiltro(DataFilterPrecios dataFilter) throws Exception {
+	private ChecksTM checkResultSelectFiltro(int min, int max) throws Exception {
 		var checks = ChecksTM.getNew();
-		checks.add(
-			"El nuevo mínimo es mayor que el anterior. Era de <b>" + dataFilter.getMinimoOrig() + "</b> y ahora es <b>" + dataFilter.getMinimoFinal() + "</b>",
-			dataFilter.getMinimoFinal() > dataFilter.getMinimoOrig());
-		
-		checks.add(
-			"El nuevo máximo es menor que el anterior. Era de <b>" + dataFilter.getMaximoOrig() + "</b> y ahora es <b>" + dataFilter.getMaximoFinal() + "</b>",
-			dataFilter.getMaximoFinal() < dataFilter.getMaximoOrig());
-		
 		var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 		checks.add(
-			"Todos los precios están en el intervalo [" + dataFilter.getMinimoFinal() + ", " + dataFilter.getMaximoFinal() + "]",
-			pageGaleria.preciosInIntervalo(dataFilter.getMinimoFinal(), dataFilter.getMaximoFinal()), WARN);
+			"En pantalla aparece el fitro por precios aplicado con valores [<b>" + min + " - " + max + "</b>]",
+			pageGaleria.isVisibleLabelFiltroPrecioApplied(min, max));
+		
+		checks.add(
+			"Todos los precios están en el intervalo [<b>" + min + " - " + max + "</b>]",
+			pageGaleria.preciosInIntervalo(min, max));
 		
 		return checks;
-	}
-}
-
-class DataFilterPrecios {
-	private int minimoOrig = 0;
-	private int maximoOrig = 0;
-	private int minimoFinal = 0;
-	private int maximoFinal = 0;
-	
-	public int getMinimoOrig() {
-		return minimoOrig;
-	}
-	public void setMinimoOrig(int minimoOrig) {
-		this.minimoOrig = minimoOrig;
-	}
-	public int getMaximoOrig() {
-		return maximoOrig;
-	}
-	public void setMaximoOrig(int maximoOrig) {
-		this.maximoOrig = maximoOrig;
-	}
-	public int getMinimoFinal() {
-		return minimoFinal;
-	}
-	public void setMinimoFinal(int minimoFinal) {
-		this.minimoFinal = minimoFinal;
-	}
-	public int getMaximoFinal() {
-		return maximoFinal;
-	}
-	public void setMaximoFinal(int maximoFinal) {
-		this.maximoFinal = maximoFinal;
 	}
 }

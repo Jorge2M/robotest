@@ -37,7 +37,7 @@ public class AccesoFlows extends StepBase {
 		//Temporal para test Canary!!!
 		//canary = "?canary=true";
 		String urlInitial = TestMaker.getInputParamsSuite().getUrlBase() + canary;
-		String currentUrl = driver.getCurrentUrl();
+		String currentUrl = getCurrentUrl();
 		if (currentUrl.compareTo(urlInitial)!=0) {
 			driver.get(urlInitial);
 		}
@@ -140,7 +140,7 @@ public class AccesoFlows extends StepBase {
 	public void fixRandomSeleniumProblem() {
 		String currentUrl = "";
 		try {
-			currentUrl = driver.getCurrentUrl();
+			currentUrl = getCurrentUrl();
 		} catch (TimeoutException e) {
 			Log4jTM.getLogger().warn("Timeout trying to capture current url from browser");
 		}
@@ -150,7 +150,7 @@ public class AccesoFlows extends StepBase {
 			var js = (JavascriptExecutor) driver;
 			js.executeScript("window.stop();");
 			driver.get(inputParamsSuite.getUrlBase());
-			Log4jTM.getLogger().info(String.format("URL in browser %s", driver.getCurrentUrl()));
+			Log4jTM.getLogger().info(String.format("URL in browser %s", getCurrentUrl()));
 		}
 	}
 		

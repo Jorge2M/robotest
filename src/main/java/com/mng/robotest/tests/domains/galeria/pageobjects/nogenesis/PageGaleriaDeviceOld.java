@@ -266,5 +266,9 @@ public class PageGaleriaDeviceOld extends PageGaleriaDevice {
 	public void clickLinkColumnas(NumColumnas numColumnas) {
 		throw new UnsupportedOperationException();
 	}
+	@Override
+	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim) {
+		throw new UnsupportedOperationException();
+	}
 	
 }

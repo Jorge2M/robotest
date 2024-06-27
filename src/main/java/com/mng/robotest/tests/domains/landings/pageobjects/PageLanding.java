@@ -94,7 +94,7 @@ public class PageLanding extends PageBase {
 	public boolean checkUrlNotMatch(String url, int seconds) {
 		int secondsCount = 0;
 		do {
-			if (url.compareTo(driver.getCurrentUrl())!=0) {
+			if (url.compareTo(getCurrentUrl())!=0) {
 				return true;
 			}
 			waitMillis(1000);

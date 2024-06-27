@@ -439,7 +439,7 @@ public class PageCheckoutWrapper extends PageBase {
 	}
 	
 	public void backPageMetodosPagos(String urlPagCheckout) {
-		if (driver.getCurrentUrl().compareTo(urlPagCheckout)!=0) {
+		if (getCurrentUrl().compareTo(urlPagCheckout)!=0) {
 			driver.get(urlPagCheckout);
 			acceptAlertIfExists(driver);
 		}

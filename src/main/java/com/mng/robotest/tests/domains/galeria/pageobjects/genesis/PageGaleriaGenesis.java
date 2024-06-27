@@ -320,6 +320,10 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public void selectIntervalImports(int minim, int maxim) {
 		secFiltros.selectIntervalImport(minim, maxim);
 	}
+	@Override
+	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim) {
+		return secFiltros.isVisibleLabelFiltroPrecioApplied(minim, maxim);
+	}
 	
 	private List<WebElement> getArticulos() {
 		return getElements(getXPathArticulo());
@@ -675,17 +679,8 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		var articulo = getElement(getXPathArticulo(numArticulo));
 		return isVisibleImageArticle(articulo, seconds);
 	}
-	
-	private boolean isVisibleImageArticle(WebElement articulo, int seconds) {
-		for (int i=0; i<seconds; i++) {
-			if (getImagenElementArticulo(articulo)!=null) {
-				return true;
-			}
-			waitMillis(1000);
-		}
-		return false;
-	}
-	
+
+	@Override
 	public boolean preciosInIntervalo(int minimo, int maximo) throws Exception {
 		List<WebElement> listaPreciosPrendas = getListaPreciosPrendas(getListaArticulos());
 		for (var prendaPrecio : listaPreciosPrendas) {
@@ -696,6 +691,28 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public int filterByColorsAndReturnNumArticles(List<Color> colorsToSelect) {
+		secFiltros.selecFiltroColores(colorsToSelect);
+		return waitForArticleVisibleAndGetNumberOfThem(10);
+	}
+	
+	private int waitForArticleVisibleAndGetNumberOfThem(int seconds) {
+		int numArticle = 1;
+		isVisibleInScreenArticleUntil(numArticle, seconds);
+		return (getNumArticulos());
+	}	
+	
+	private boolean isVisibleImageArticle(WebElement articulo, int seconds) {
+		for (int i=0; i<seconds; i++) {
+			if (getImagenElementArticulo(articulo)!=null) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
 	}
 	
 	private List<WebElement> getListaPreciosPrendas(List<WebElement> listArticles) {
@@ -750,9 +767,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	}
 	
 	public String getNombreArticuloWithText(String literal, int secondsWait) {
-		throw new UnsupportedOperationException();
-	}
-	public int filterByColorsAndReturnNumArticles(List<Color> colorsToSelect) {
 		throw new UnsupportedOperationException();
 	}
 	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {

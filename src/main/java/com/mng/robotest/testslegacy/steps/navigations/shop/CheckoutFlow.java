@@ -287,7 +287,7 @@ public class CheckoutFlow extends StepBase {
 		for (var it = listPagosToTest.iterator(); it.hasNext(); ) {
 			var pagoToTest = it.next();
 			dataPago.setPago(pagoToTest);
-			String urlPagChekoutToReturn = driver.getCurrentUrl();
+			String urlPagChekoutToReturn = getCurrentUrl();
 			checkPasarelaPago();
 			if (it.hasNext()) {
 				if (!dataPago.isPaymentExecuted(pagoToTest)) {

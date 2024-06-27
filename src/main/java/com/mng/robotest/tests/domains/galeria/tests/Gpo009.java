@@ -30,7 +30,7 @@ public class Gpo009 extends TestBase {
 	}
 	
 	private void priceFilter() throws Exception {
-		galeriaSteps.selectPricesInterval(20, 40);
+		galeriaSteps.selectPricesInterval(20, 35);
 	}
 
 	private void selectGalery() {

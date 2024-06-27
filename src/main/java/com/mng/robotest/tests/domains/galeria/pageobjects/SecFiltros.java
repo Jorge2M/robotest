@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
-import com.mng.robotest.tests.domains.galeria.pageobjects.genesis.SecFiltrosDesktopGenesis;
+import com.mng.robotest.tests.domains.galeria.pageobjects.genesis.SecFiltrosGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNoGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
@@ -26,6 +26,7 @@ public interface SecFiltros {
 	public int getMaxImportFilter();
 	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight);
 	public void selectIntervalImport(int minim, int maxim);
+	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim);
 	public void selecFiltroColores(List<Color> colorsToSelect);
 	public void selectMenu2onLevel(List<String> listMenus);
 	public void selectMenu2onLevel(String menuLabel);
@@ -33,13 +34,14 @@ public interface SecFiltros {
 	public boolean isClickableFiltroUntil(int seconds);
 	public void clickFilterAndSortButton();
 	public boolean isAvailableFiltros(FiltroMobil typeFiltro, List<String> listTextFiltros);
+	public void close();
 	
 	public static SecFiltros make(Channel channel, AppEcom app, Pais pais) {
+		if (pais.isGaleriaGenesis(app)) {
+			return new SecFiltrosGenesis();
+		}
 		if (channel.isDevice()) {
 			return new SecFiltrosMobilNoGenesis();
-		}
-		if (pais.isGaleriaGenesis(app)) {
-			return new SecFiltrosDesktopGenesis();
 		}
 		return new SecFiltrosDesktopNoGenesis();
 	}

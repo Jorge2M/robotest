@@ -102,7 +102,7 @@ public class CheckerSEO extends PageBase implements Checker {
 			if ((new PageLanding()).isLandingMultimarca() || 
 				((PageGaleriaDesktopBaseNoGenesis)pageGaleria).isPage() || 
 				pageFicha.isPage(0)) {
-				String currentURL = driver.getCurrentUrl(); 
+				String currentURL = getCurrentUrl(); 
 				//Hemos de añadir un par de excepciones
 				if (!currentURL.contains("catalogPc.faces?") && !currentURL.contains("search?") && !currentURL.contains("favorites.faces?")) {
 					listaErrorsInHtmlFormat.add("<br><b style=\"color:" + WARN.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Estamos en Home (no favorites.faces?), Galeria (no catalogPc.faces? ni search?) o Ficha pero no existe el tag canonical</c>");
@@ -119,7 +119,7 @@ public class CheckerSEO extends PageBase implements Checker {
 		//Buscamos el robots
 		boolean robotNoindex = isPresentTagRobots();
 		String operativaRobots = "";
-		String currentURL = driver.getCurrentUrl();
+		String currentURL = getCurrentUrl();
 		
 		//El tag con name = 'robots' y content[contains(.,'noindex')] sólo aparece en el buscador de ítems y en ficha.faces, catalog.faces y iframe.faces
 		if (currentURL.contains("ficha.faces")) {
@@ -161,7 +161,7 @@ public class CheckerSEO extends PageBase implements Checker {
 		//Si existe el tag canonical (apuntando a la propia página) no ha de exitir el tag robot/noindex
 		if (isPresentTagCanonical()) {
 			String urlTagCanonical = getURLTagCanonical();
-			if (robotNoindex && urlTagCanonical.compareTo(driver.getCurrentUrl())!=0) {
+			if (robotNoindex && urlTagCanonical.compareTo(getCurrentUrl())!=0) {
 				listaErrorsInHtmlFormat.add("<br><b style=\"color:" + WARN.getColorCss() + "\">Warning!</b> <c style=\"color:brown\">Existe el tag robot/noindex junto el canonical apuntando a URL de otra página (" + urlTagCanonical + ")</c>");
 			}
 		}

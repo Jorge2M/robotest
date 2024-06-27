@@ -140,8 +140,18 @@ public class SecFiltrosDesktopNoGenesis extends PageBase implements SecFiltros {
 		throw new UnsupportedOperationException();
 	}
 	
+	@Override
+	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim) {
+		throw new UnsupportedOperationException();
+	}	
+	
 	private boolean isFiltersShopVisible(int seconds) {
 		return state(VISIBLE, XP_CAPA_FILTERS).wait(seconds).check();
+	}
+
+	@Override
+	public void close() {
+		throw new UnsupportedOperationException();
 	}	
 
 }

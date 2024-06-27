@@ -27,7 +27,7 @@ public class PageLoginMantoSteps extends StepMantoBase {
 			"Aparece la página de selección de login o selección de tienda",
 		saveErrorData=NEVER)
 	public void goToMantoIfNotYet(String urlManto) {
-		String currentURL = driver.getCurrentUrl();
+		String currentURL = getCurrentUrl();
 		if (currentURL.compareTo(urlManto)!=0) {
 			driver.manage().deleteAllCookies();
 			driver.get(urlManto);

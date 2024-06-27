@@ -10,7 +10,7 @@ public class PageIniShopJapon extends PageBase {
 	public boolean isPage(int seconds) {
 		return (
 			titleContainsUntil(driver, TITLE, seconds) &&
-			driver.getCurrentUrl().contains(URL));
+			getCurrentUrl().contains(URL));
 	}
 	
 }

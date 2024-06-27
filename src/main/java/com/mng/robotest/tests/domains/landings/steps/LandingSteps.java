@@ -61,7 +61,7 @@ public class LandingSteps extends StepBase {
 	}	
 	
 	public void checkPageBanners(int maximoBanners) throws Exception { 
-		String urlPagPrincipal = driver.getCurrentUrl();
+		String urlPagPrincipal = getCurrentUrl();
 		int sizeListBanners = pageLanding.getListDataBanners().size();
 		for (int posBanner=1; posBanner<=sizeListBanners && posBanner<=maximoBanners; posBanner++) {
 			selectBanner(posBanner, true);
@@ -87,12 +87,12 @@ public class LandingSteps extends StepBase {
 			"</div>", 
 		expected="Aparece una página con artículos")
 	private void selectBanner(DataBanner dataBanner, boolean checks) throws Exception {
-		String urlPagPrincipal = driver.getCurrentUrl();
+		String urlPagPrincipal = getCurrentUrl();
 		URI uriPagPrincipal = new URI(urlPagPrincipal);
 		int elementosPagPrincipal = driver.findElements(By.xpath("//*")).size();
 		
 		pageLanding.clickBannerAndWaitLoad(dataBanner);
-		dataBanner.setUrlResultant(driver.getCurrentUrl());
+		dataBanner.setUrlResultant(getCurrentUrl());
 		if (checks) {
 			checkSelectBanner(urlPagPrincipal, uriPagPrincipal, elementosPagPrincipal);
 		}
@@ -143,7 +143,7 @@ public class LandingSteps extends StepBase {
 	 		"- El número de elementos DOM ha variado (en " + marginElements + " o más) con respecto al original (" + elementosPagPadre + ")",
 	 		(!urlEqual || !elemsEqual), WARN); 
 	 	
-		String urlPagActual = driver.getCurrentUrl();
+		String urlPagActual = getCurrentUrl();
 		URI uriPagActual = new URI(urlPagActual);
 	 	checks.add(
 	 		"El dominio de la página se corresponde con el de la página padre:" + uriPagPadre.getHost(),

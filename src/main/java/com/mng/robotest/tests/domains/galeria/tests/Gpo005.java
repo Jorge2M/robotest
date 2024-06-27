@@ -16,9 +16,9 @@ public class Gpo005 extends TestBase {
 	public void execute() throws Exception {
 		accessAndLogin();
 		clickMenu();
-		if (!channel.isDevice()) {
+//		if (!channel.isDevice()) {
 			selectPricesInterval();
-		}
+//		}
 		clickSubmenu();
 	}
 
@@ -31,7 +31,7 @@ public class Gpo005 extends TestBase {
 	}
 	
 	private void selectPricesInterval() throws Exception {
-		galeriaSteps.selectPricesInterval(20, 40);
+		galeriaSteps.selectPricesInterval(20, 35);
 	}
 	
 	private void clickSubmenu() {

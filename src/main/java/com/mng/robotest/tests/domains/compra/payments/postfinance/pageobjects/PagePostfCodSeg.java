@@ -19,7 +19,7 @@ public class PagePostfCodSeg extends PageBase {
 	 *   PRO-PostFinance -> https://epayment.postfinance.ch/pfef/authentication/v2
 	 */ 
 	public boolean isPasarelaTest() {
-		return (driver.getCurrentUrl().contains("test"));
+		return getCurrentUrl().contains("test");
 	}
 	
 	/**

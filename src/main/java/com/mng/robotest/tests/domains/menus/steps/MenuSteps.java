@@ -478,7 +478,7 @@ public class MenuSteps extends StepBase {
 		description="Cargar la siguiente URL de redirect a <b>España / HE / Abrigos / Parkas </b>:<br>" + TAG_URL_ACCESO,
 		expected="Aparece desplegada la página de Parkas (HE)")
 	private void checkURLRedirectParkasHeEspanyaShop() throws Exception {
-		URI uri = new URI(driver.getCurrentUrl());
+		URI uri = new URI(getCurrentUrl());
 		String urlAccesoCorreo = 
 			uri.getScheme() + "://" + 
 			uri.getHost() + 
@@ -493,7 +493,7 @@ public class MenuSteps extends StepBase {
 		description="Cargar la siguiente URL de redirect a <b>España / HE / Abrigos</b> :<br>" + TAG_URL_ACCESO,
 		expected="Aparece desplegada la página de Abrigos (HE)")
 	private void checkURLRedirectParkasHeEspanyaOutlet() throws Exception {
-		URI uri = new URI(driver.getCurrentUrl());
+		URI uri = new URI(getCurrentUrl());
 		String urlAccesoCorreo = 
 			uri.getScheme() + "://" + 
 			uri.getHost() + 
@@ -518,7 +518,7 @@ public class MenuSteps extends StepBase {
 		replaceStepDescription(TAG_REF_ARTICLE, article.getGarmentId());
 		replaceStepExpected(TAG_REF_ARTICLE, article.getGarmentId());
 		
-		URI uri = new URI(driver.getCurrentUrl());
+		URI uri = new URI(getCurrentUrl());
 		String tiendaId = "she";
 		if (isOutlet()) {
 			tiendaId = "outlet";

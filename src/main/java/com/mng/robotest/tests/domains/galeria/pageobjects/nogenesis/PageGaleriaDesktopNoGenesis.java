@@ -100,6 +100,11 @@ public class PageGaleriaDesktopNoGenesis extends PageGaleriaDesktopBaseNoGenesis
 		return commonNormal.getNumFavoritoIcons();
 	}
 	
+	@Override
+	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim) {
+		throw new UnsupportedOperationException();
+	}
+	
 	public boolean isVisibleColorTags(List<Color> colors) {
 		return new SecFiltrosDesktopNoGenesis().isVisibleColorTags(colors);
 	}

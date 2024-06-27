@@ -21,11 +21,11 @@ public class PageResultPago extends PageBase {
 	public boolean checkUrl(int seconds) {
 		for (int i=0; i<seconds; i++) {
 			if (channel.isDevice()) {
-				if (driver.getCurrentUrl().contains("success.faces")) {
+				if (getCurrentUrl().contains("success.faces")) {
 					return true;
 				}
 			} else {
-				if (driver.getCurrentUrl().contains("resultadoOK")) {
+				if (getCurrentUrl().contains("resultadoOK")) {
 					return true;
 				}
 			}

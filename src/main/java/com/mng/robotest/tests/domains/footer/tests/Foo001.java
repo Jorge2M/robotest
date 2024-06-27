@@ -18,7 +18,7 @@ public class Foo001 extends TestBase {
 	}
 
 	private void checkLinksSelection() {
-		String urlInitialPage = driver.getCurrentUrl();
+		String urlInitialPage = getCurrentUrl();
 		List<FooterLink> listFooterLinksToCheck = FooterLink.getFooterLinksFiltered(app, channel);
 		for (var footerLinkToValidate : listFooterLinksToCheck) {
 			secFooterSteps.clickLinkFooter(footerLinkToValidate, true);

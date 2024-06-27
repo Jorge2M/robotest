@@ -188,6 +188,11 @@ public class PageGaleriaDeviceNoGenesis extends PageGaleriaDevice {
 		throw new UnsupportedOperationException();
 	}	
 	
+	@Override
+	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim) {
+		throw new UnsupportedOperationException();
+	}	
+	
 	public boolean isVisibleColorTags(List<Color> colors) {
 		return new SecFiltrosMobilNoGenesis().isVisibleColorTags(colors);
 	}

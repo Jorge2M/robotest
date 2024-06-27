@@ -19,7 +19,7 @@ public class Page1IdentCheckoutSteps extends StepBase {
 	}
 	
 	public boolean isUrlDesktopPage() {
-		return driver.getCurrentUrl().contains("login/pc/logincheckout.faces");
+		return getCurrentUrl().contains("login/pc/logincheckout.faces");
 	}
 	
 	public void inputEmailNewUserAndContinue(String email) {

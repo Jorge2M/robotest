@@ -134,6 +134,11 @@ public class PageGaleriaDesktopOld extends PageGaleriaDesktopBaseNoGenesis {
 		return new CommonGaleriaNoGenesis().getNumFavoritoIcons();
 	}	
 	
+	@Override
+	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim) {
+		throw new UnsupportedOperationException();
+	}	
+	
 	private String getRefFromId(WebElement articulo) {
 		String id = articulo.getAttribute("id");
 		return (id.replace("product-key-id-", ""));
