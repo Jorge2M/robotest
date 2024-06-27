@@ -11,6 +11,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSli
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
+import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 public class PageGaleriaDeviceOld extends PageGaleriaDevice {
@@ -268,6 +269,10 @@ public class PageGaleriaDeviceOld extends PageGaleriaDevice {
 	}
 	@Override
 	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim) {
+		throw new UnsupportedOperationException();
+	}
+	@Override
+	public boolean isVisibleLabelFiltroColorApplied(List<Color> colorsSelected) {
 		throw new UnsupportedOperationException();
 	}
 	

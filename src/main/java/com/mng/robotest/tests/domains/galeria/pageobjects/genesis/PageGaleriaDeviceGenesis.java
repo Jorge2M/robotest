@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobilNoGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.data.Color;
@@ -20,8 +19,8 @@ public class PageGaleriaDeviceGenesis extends PageGaleriaGenesis {
 		click(articulo).by(byColorButton).exec();
 	}
 	
-	public boolean isVisibleColorTags(List<Color> colors) {
-		return new SecFiltrosMobilNoGenesis().isVisibleColorTags(colors);
+	public boolean isVisibleLabelFiltroColorApplied(List<Color> colorsSelected) {
+		return secFiltros.isVisibleLabelFiltroColorApplied(colorsSelected);
 	}
 
 	@Override

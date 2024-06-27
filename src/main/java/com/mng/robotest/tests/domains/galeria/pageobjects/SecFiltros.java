@@ -27,10 +27,10 @@ public interface SecFiltros {
 	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight);
 	public void selectIntervalImport(int minim, int maxim);
 	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim);
+	public boolean isVisibleLabelFiltroColorApplied(List<Color> colorsSelected);
 	public void selecFiltroColores(List<Color> colorsToSelect);
-	public void selectMenu2onLevel(List<String> listMenus);
-	public void selectMenu2onLevel(String menuLabel);
-	public boolean isVisibleColorTags(List<Color> colors);
+	public void selectMenu2onLevelDevice(List<String> listMenus);
+	public void selectMenu2onLevelDevice(String menuLabel);
 	public boolean isClickableFiltroUntil(int seconds);
 	public void clickFilterAndSortButton();
 	public boolean isAvailableFiltros(FiltroMobil typeFiltro, List<String> listTextFiltros);

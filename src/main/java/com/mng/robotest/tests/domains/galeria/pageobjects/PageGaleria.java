@@ -107,6 +107,7 @@ public interface PageGaleria {
 	public void clickIntervalImportFilter(int margenPixelsLeft, int margenPixelsRight);
 	public void selectIntervalImports(int minim, int maxim);
 	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim);
+	public boolean isVisibleLabelFiltroColorApplied(List<Color> colorsSelected);
 	public void showFilters();
 	public void acceptFilters();
 	

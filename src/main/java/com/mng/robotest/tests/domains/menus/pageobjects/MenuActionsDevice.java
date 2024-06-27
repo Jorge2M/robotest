@@ -1,9 +1,8 @@
 package com.mng.robotest.tests.domains.menus.pageobjects;
 
-import java.util.Arrays;
-
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobilNoGenesis;
 
@@ -86,8 +85,8 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 	
 	private void clickSubLevelMenu() {
-		new SecFiltrosMobilNoGenesis()
-			.selectMenu2onLevel(Arrays.asList(menu.getSubMenu()));
+		SecFiltros.make(channel, app, dataTest.getPais())
+			.selectMenu2onLevelDevice(menu.getSubMenu());
 	}
 	
 }

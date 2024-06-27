@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
+import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 public class PageGaleriaDesktopOld extends PageGaleriaDesktopBaseNoGenesis {
@@ -138,6 +139,11 @@ public class PageGaleriaDesktopOld extends PageGaleriaDesktopBaseNoGenesis {
 	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim) {
 		throw new UnsupportedOperationException();
 	}	
+	
+	@Override
+	public boolean isVisibleLabelFiltroColorApplied(List<Color> colorsSelected) {
+		throw new UnsupportedOperationException();
+	}
 	
 	private String getRefFromId(WebElement articulo) {
 		String id = articulo.getAttribute("id");

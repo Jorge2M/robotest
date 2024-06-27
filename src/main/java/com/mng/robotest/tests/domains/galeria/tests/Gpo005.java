@@ -16,9 +16,7 @@ public class Gpo005 extends TestBase {
 	public void execute() throws Exception {
 		accessAndLogin();
 		clickMenu();
-//		if (!channel.isDevice()) {
-			selectPricesInterval();
-//		}
+		selectPricesInterval();
 		clickSubmenu();
 	}
 

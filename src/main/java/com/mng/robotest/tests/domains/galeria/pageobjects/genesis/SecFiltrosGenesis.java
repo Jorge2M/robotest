@@ -13,6 +13,23 @@ import com.mng.robotest.testslegacy.utils.ImporteScreen;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class SecFiltrosGenesis extends PageBase implements SecFiltros {
+	
+	public enum TypeFiltro {
+		ORDENAR("plp.filters.mobile.panel.order"), 
+		FAMILIA("plp.filters.mobile.panel.generic"), 
+		COLORES("plp.filters.mobile.panel.colorGroups"), 
+		TALLAS("plp.filters.mobile.panel.sizes"),
+		PRECIOS("plp.filters.mobile.panel.price");
+		
+		String dataTestId;
+		private TypeFiltro(String dataTestId) {
+			this.dataTestId = dataTestId;
+		}
+		
+		public String getXPathPanelMobil() {
+			return "//*[@data-testid='" + dataTestId + "']";
+		}
+	}
 
 	private static final String XP_BUTTON_FILTRAR_DESKTOP = "//*[@data-testid='plp.filters.desktop.button']";
 	private static final String XP_BUTTON_FILTRAR_MOBIL = "//*[@data-testid='plp.filters.mobile.button']";
@@ -28,7 +45,10 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	
 	private static final String XP_INPUT_MINIMO = "//input[@step='1']";
 	private static final String XP_INPUT_MAXIMO = "" + XP_INPUT_MINIMO + "[2]";
-	private static final String XP_INPUT_COLOR = "//input[@id[contains(.,'colorGroups')]]";
+	
+	private static final String XP_ITEM_COLOR = "//input[@id[contains(.,'colorGroups')]]";
+	private static final String XP_ITEM_ORDENACION = "//*[@data-testid[contains(.,'plp.filters.mobile.panel.order')]]";
+	private static final String XP_ITEM_FAMILIA = "//*[@data-testid[contains(.,'plp.filters.mobile.panel.generic-generic-subfamilies')]]";
 	
 	private static final String XP_CLOSE_DESKTOP = "//*[@data-testid='plp.filters.desktop.panel.close']";
 	private static final String XP_CLOSE_MOBIL = "//*[@data-testid='modal.close.button']";
@@ -62,22 +82,37 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	}
 	
 	private String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) {
-		return "//*[@data-testid='plp.filters.mobile.panel.order-']" + ordenacion.getValue() + "/..";
+		return XP_ITEM_ORDENACION + "//self::*[@data-testid[contains(.,-" + ordenacion.getValue() + "]]/..";
 	}
 	
 	private String getXPathLinkColor(Color color) {
-		return XP_INPUT_COLOR + "//self::*[@aria-label[contains(.,'" + color.getNameFiltro() + "')]]";
+		return XP_ITEM_COLOR + "//self::*[@aria-label[contains(.,'" + color.getNameFiltro() + "')]]";
+	}
+	
+	private String getXPathLinkFamily(String family) {
+		String familyFirstCapital = family.substring(0, 1).toUpperCase() + family.substring(1);
+		return XP_ITEM_FAMILIA + "/../span["
+				+ "text()[contains(.,'" + family + "')] or "
+				+ "text()[contains(.,'" + familyFirstCapital + "')]]";
 	}
 	
 	@Override
 	public void selectOrdenacion(FilterOrdenacion ordenacion) {
+		showFilters();
+		if (isDevice()) {
+			showPanelFiltroMobil(TypeFiltro.ORDENAR);
+		}
 		String xpathLink = getXPathLinkOrdenacion(ordenacion);
 		click(xpathLink).exec();
+		acceptFilters();
 	}
 	
 	@Override
 	public void selecFiltroColores(List<Color> colorsToSelect) {
 		showFilters();
+		if (isDevice()) {
+			showPanelFiltroMobil(TypeFiltro.COLORES);
+		}
 		for (Color color : colorsToSelect) {
 			String xpathLinkColor = getXPathLinkColor(color);
 			moveToElement(xpathLinkColor);
@@ -87,19 +122,42 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	}
 	
 	@Override
+	public void selectMenu2onLevelDevice(String menuLabel) {
+		showFilters();
+		if (isDevice()) {
+			showPanelFiltroMobil(TypeFiltro.FAMILIA);
+		}
+		click(getXPathLinkFamily(menuLabel)).exec();
+		acceptFilters();
+	}	
+	
+	@Override
+	public void selectMenu2onLevelDevice(List<String> listMenus) {
+		showFilters();
+		if (isDevice()) {
+			showPanelFiltroMobil(TypeFiltro.FAMILIA);
+		}
+		for (var menu : listMenus) {
+			click(getXPathLinkFamily(menu)).exec();
+		}
+		acceptFilters();
+	}
+
+	@Override
+	public void selectIntervalImport(int minim, int maxim) {
+		//It has not been possible to select the filters from the browser
+		driver.get(getCurrentUrl() + "?range=" + minim + "-" + maxim);
+	}	
+	
+	private void showPanelFiltroMobil(TypeFiltro typeFiltro) {
+		click(typeFiltro.getXPathPanelMobil()).exec();
+	}
+	
+	@Override
 	public boolean isClickableFiltroUntil(int seconds) {
 		String xpathFilterDesc = getXPathLinkOrdenacion(FilterOrdenacion.PRECIO_DESC);
 		return state(CLICKABLE, xpathFilterDesc).wait(seconds).check();
 	}
-	
-	@Override
-	public void selectMenu2onLevel(List<String> listMenus) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void selectMenu2onLevel(String menuLabel) {
-		throw new UnsupportedOperationException();
-	}	
 	
 	public void bring(BringTo bringTo) {
 		bringElement(getElement(getXPathWrapper()), bringTo);
@@ -110,6 +168,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		if (!isFiltersShopVisible(1) &&
 			state(CLICKABLE, getXPathButtonFiltrar()).check()) {
 			clickFilterAndSortButton();
+			isFiltersShopVisible(1);
 		}
 	}
 	
@@ -119,10 +178,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	}
 	
 	private void hideFilters() {
-		if (isFiltersShopVisible(1) &&
-			state(CLICKABLE, getXPathButtonFiltrar()).check()) {
-			clickFilterAndSortButton();
-		}
+		close();
 	}
 	
 	@Override
@@ -167,20 +223,26 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	}
 	
 	@Override
-	public void selectIntervalImport(int minim, int maxim) {
-		//It has not been possible to select the filters from the browser
-		driver.get(getCurrentUrl() + "?range=" + minim + "-" + maxim);
-	}	
-
-	@Override
 	public void close() {
-		click(getXPathClose()).exec();
+		if (state(PRESENT, getXPathClose()).check()) {
+			click(getXPathClose()).exec();
+		}
 	}
 	
 	@Override
 	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim) {
 		var labelExpected = "Desde " + minim + ",00 € hasta " + maxim + ",00 €";
 		return isVisibleLabelFiltroApplied(labelExpected);
+	}
+	
+	@Override
+	public boolean isVisibleLabelFiltroColorApplied(List<Color> colorsSelected) {
+		for (var color : colorsSelected) {
+			if (!isVisibleLabelFiltroApplied(color.getNameFiltro())) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	private boolean isVisibleLabelFiltroApplied(String labelExpected) {
@@ -193,7 +255,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		}
 		boolean found = false;
 		for (var labelFiltro : labelsFiltro) {
-			if (labelFiltro.getText().compareTo(labelExpected)==0) {
+			if (labelFiltro.getText().contains(labelExpected)) {
 				found = true;
 				break;
 			}
@@ -204,14 +266,6 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		return found;
 	}
 
-	@Override
-	public boolean isVisibleColorTags(List<Color> colors) {
-		return colors.stream()
-			.map(this::getXPathLinkColor)
-			.filter(xpath -> !state(VISIBLE, xpath).check())
-			.findAny().isEmpty();
-	}
-	
 	@Override
 	public boolean isAvailableFiltros(FiltroMobil typeFiltro, List<String> listTextFiltros) {
 		throw new UnsupportedOperationException();

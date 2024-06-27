@@ -51,18 +51,18 @@ public class SecFiltrosMobilNoGenesis extends PageBase implements SecFiltros {
 	}	
 
 	@Override
-	public void selectMenu2onLevel(List<String> listMenus) {
+	public void selectMenu2onLevelDevice(List<String> listMenus) {
 		selectFiltrosAndWaitLoad(FAMILIA, listMenus);
 	}
 	
 	@Override
-	public void selectMenu2onLevel(String menuLabel) {
+	public void selectMenu2onLevelDevice(String menuLabel) {
 		selectFiltrosAndWaitLoad(FAMILIA, Arrays.asList(menuLabel));
 	}
 
 	@Override
-	public boolean isVisibleColorTags(List<Color> colors) {
-		return colors.stream()
+	public boolean isVisibleLabelFiltroColorApplied(List<Color> colorsSelected) {
+		return colorsSelected.stream()
 			.map(color -> getXPathFiltroTag(FiltroMobil.COLORES, color.getNameFiltro()))
 			.filter(xpath -> !state(PRESENT, xpath).check())
 			.findAny().isEmpty();

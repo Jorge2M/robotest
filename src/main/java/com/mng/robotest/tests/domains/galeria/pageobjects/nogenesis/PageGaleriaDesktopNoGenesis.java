@@ -105,8 +105,9 @@ public class PageGaleriaDesktopNoGenesis extends PageGaleriaDesktopBaseNoGenesis
 		throw new UnsupportedOperationException();
 	}
 	
-	public boolean isVisibleColorTags(List<Color> colors) {
-		return new SecFiltrosDesktopNoGenesis().isVisibleColorTags(colors);
+	@Override
+	public boolean isVisibleLabelFiltroColorApplied(List<Color> colorsSelected) {
+		return new SecFiltrosDesktopNoGenesis().isVisibleLabelFiltroColorApplied(colorsSelected);
 	}
 
 }

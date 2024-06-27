@@ -193,8 +193,9 @@ public class PageGaleriaDeviceNoGenesis extends PageGaleriaDevice {
 		throw new UnsupportedOperationException();
 	}	
 	
-	public boolean isVisibleColorTags(List<Color> colors) {
-		return new SecFiltrosMobilNoGenesis().isVisibleColorTags(colors);
+	@Override
+	public boolean isVisibleLabelFiltroColorApplied(List<Color> colorsSelected) {
+		return new SecFiltrosMobilNoGenesis().isVisibleLabelFiltroColorApplied(colorsSelected);
 	}
 
 }

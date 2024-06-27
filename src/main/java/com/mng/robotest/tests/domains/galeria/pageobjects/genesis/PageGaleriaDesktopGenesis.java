@@ -5,7 +5,6 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import java.util.List;
 
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNoGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.data.Color;
@@ -57,8 +56,9 @@ public class PageGaleriaDesktopGenesis extends PageGaleriaGenesis {
 		click(getXPathLinkNumColumnas(numColumnas)).exec();
 	}
 	
-	public boolean isVisibleColorTags(List<Color> colors) {
-		return new SecFiltrosDesktopNoGenesis().isVisibleColorTags(colors);
+	@Override
+	public boolean isVisibleLabelFiltroColorApplied(List<Color> colorsSelected) {
+		return new SecFiltrosGenesis().isVisibleLabelFiltroColorApplied(colorsSelected);
 	}
 	
 	@Override

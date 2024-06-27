@@ -58,11 +58,11 @@ public class SecFiltrosDesktopNoGenesis extends PageBase implements SecFiltros {
 	}
 	
 	@Override
-	public void selectMenu2onLevel(List<String> listMenus) {
+	public void selectMenu2onLevelDevice(List<String> listMenus) {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void selectMenu2onLevel(String menuLabel) {
+	public void selectMenu2onLevelDevice(String menuLabel) {
 		throw new UnsupportedOperationException();
 	}	
 	
@@ -128,8 +128,8 @@ public class SecFiltrosDesktopNoGenesis extends PageBase implements SecFiltros {
 	}
 
 	@Override
-	public boolean isVisibleColorTags(List<Color> colors) {
-		return colors.stream()
+	public boolean isVisibleLabelFiltroColorApplied(List<Color> colorsSelected) {
+		return colorsSelected.stream()
 			.map(this::getXPathLinkColor)
 			.filter(xpath -> !state(VISIBLE, xpath).check())
 			.findAny().isEmpty();

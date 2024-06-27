@@ -235,6 +235,11 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 			numArticles = getNumArticulos();
 		}
 	}
+	
+	@Override
+	public DataScroll scrollToPageFromFirst(int numPage) {
+		throw new UnsupportedOperationException();
+	}	
 
 	@Override
 	public int getNumArticulos() {
@@ -725,7 +730,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		}
 		return listPrecios;
 	}	
-	
+
 	private WebElement getPrecioDefinitivoElem(WebElement articulo) {
 		return new SecPreciosArticulo().getPrecioDefinitivoElem(articulo);
 	}
@@ -776,9 +781,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		throw new UnsupportedOperationException();
 	}
 	
-	public DataScroll scrollToPageFromFirst(int numPage) {
-		throw new UnsupportedOperationException();
-	}
+
 
 
 }
