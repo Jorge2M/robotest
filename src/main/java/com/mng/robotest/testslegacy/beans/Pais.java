@@ -10,6 +10,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.utils.LevelPais;
 import com.mng.robotest.testslegacy.utils.PagoGetter;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
@@ -278,7 +279,10 @@ public class Pais implements Serializable {
 		return true;
 	}
 	
-	public boolean isFichaGenesis(AppEcom app) {
+	public boolean isFichaGenesis(Pais pais, AppEcom app) {
+		if (PaisShop.COLOMBIA.isEquals(pais)) {
+			return false;
+		}
 		return true;
 	}
 	

@@ -22,6 +22,9 @@ public abstract class ModalChatBot extends PageBase {
 	}	
 	
 	public boolean isNewChatBot() {
+		if (isOutlet()) {
+			return true;
+		}
 		boolean newChatBot;
 		clickIcon();
 		var modalChatBotNew = new ModalChatBotNew();

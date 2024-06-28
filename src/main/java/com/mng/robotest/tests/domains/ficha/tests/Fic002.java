@@ -83,7 +83,7 @@ public class Fic002 extends TestBase {
 		
 		//Me informan desde Kaliope que inicialmente no estará el link
 		//Compartir en la ficha Genesis. Desactivamos la validación durante un tiempo 
-		if (!(dataTest.getPais().isFichaGenesis(app) && UtilsTest.todayBeforeDate("2024-06-28"))) { 
+		if (!(dataTest.getPais().isFichaGenesis(dataTest.getPais(), app) && UtilsTest.todayBeforeDate("2024-06-28"))) { 
 			fichaSteps.selectLinkCompartir(dataTest.getCodigoPais());
 		}
 	}

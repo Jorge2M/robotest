@@ -57,7 +57,7 @@ public class SecSliders extends PageBase {
 			return apps.contains(app);
 		}
 		public String getXPath(Pais pais, AppEcom app) {
-			if (pais.isFichaGenesis(app)) {
+			if (pais.isFichaGenesis(pais, app)) {
 				return getXPathGenesis();
 			}
 			return getXPathNoGenesis();
@@ -69,7 +69,7 @@ public class SecSliders extends PageBase {
 			return this.xpathGenesis;
 		}
 		public String getXPathItem(Pais pais, AppEcom app) {
-			if (pais.isFichaGenesis(app)) {
+			if (pais.isFichaGenesis(pais, app)) {
 				return getXPathGenesis() + getXPathItemGenesis();
 			}
 			return getXPathNoGenesis() + getXPathItemNoGenesis();

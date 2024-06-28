@@ -87,7 +87,7 @@ public interface PageFicha {
 	public void clickAddBordado();
 	
 	public static PageFicha make(Channel channel, AppEcom app, Pais pais) {
-		if (pais.isFichaGenesis(app)) {
+		if (pais.isFichaGenesis(pais, app)) {
 			return new PageFichaGenesis();
 		}
 		if (channel.isDevice()) {

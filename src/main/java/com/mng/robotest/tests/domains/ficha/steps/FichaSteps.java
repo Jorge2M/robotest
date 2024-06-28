@@ -439,7 +439,7 @@ public class FichaSteps extends StepBase {
 	public void selectDetalleDelProducto(LineaType lineaType) {
 		pageFicha.selectDetalleDelProducto();
 		checkScrollToDescription();
-		if (!dataTest.getPais().isFichaGenesis(app)) {
+		if (!dataTest.getPais().isFichaGenesis(dataTest.getPais(), app)) {
 			checkBreadCrumbs();
 		}
 		if (TypePanel.KC_SAFETY.getListApps().contains(app) &&
@@ -576,7 +576,7 @@ public class FichaSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		
 		//TODO activar si en algún momento se añaden las BreadCrumb en la ficha Génesis
-		if (!dataTest.getPais().isFichaGenesis(app)) {
+		if (!dataTest.getPais().isFichaGenesis(dataTest.getPais(), app)) {
 			checks.add(
 				"Existen el bloque correspondiente a las <b>BreadCrumb</b>",
 				new SecDetalleProduct().isVisibleBreadcrumbs(0));

@@ -13,7 +13,7 @@ public abstract class ModalBuscarEnTienda extends PageBase implements PageFromFo
 	public abstract void close();
 	
 	public static ModalBuscarEnTienda make(AppEcom app, Pais pais) {
-		if (pais.isFichaGenesis(app)) {
+		if (pais.isFichaGenesis(pais, app)) {
 			return new ModalBuscarEnTiendaGenesis();
 		}
 		return new ModalBuscarEnTiendaNoGenesis();
