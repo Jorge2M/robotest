@@ -11,8 +11,6 @@ import com.mng.robotest.tests.domains.chequeregalo.steps.PageChequeRegaloInputDa
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter.FooterLink;
 import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
-import com.mng.robotest.tests.repository.secrets.GetterSecrets;
-import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
@@ -24,12 +22,8 @@ public class Rgl002 extends TestBase {
 	public Rgl002() throws Exception {
 		dataTest.setPais(FRANCE.getPais());
 		dataTest.setUserRegistered(true);
-		dataTest.setUserConnected("francia.test@mango.com");
-		dataTest.setPasswordUser(GetterSecrets.factory()
-			.getCredentials(SecretType.SHOP_FRANCIA_USER)
-			.getPassword());
 		
-		ConfigCheckout configCheckout = ConfigCheckout.config()
+		var configCheckout = ConfigCheckout.config()
 				.checkPagos()
 				.checkMisCompras()
 				.emaiExists()

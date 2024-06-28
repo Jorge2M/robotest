@@ -42,7 +42,7 @@ public class SecFooter extends PageBase {
 			"//a[text()='Tarjeta regalo']", false, true),
 		CHEQUE_REGALO_OLD(FOOTER_SHOP, CHANNEL_DESKTOP, 
 			"//a[@data-ga-label='cheques']", 
-			"//a[text()='Tarjeta regalo']", false, true),
+			"//a[text()='Carte cadeau']", false, true),
 		APPS(FOOTER_SHOP, CHANNEL_ALL, 
 			"//a[@data-ga-label='apps' and text()[contains(.,'Apps')]]", 
 			"//a[text()='Apps']", false, false), 
