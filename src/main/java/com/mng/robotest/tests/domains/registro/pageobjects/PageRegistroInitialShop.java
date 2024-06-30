@@ -2,10 +2,7 @@ package com.mng.robotest.tests.domains.registro.pageobjects;
 
 import static com.mng.robotest.tests.domains.legal.legaltexts.FactoryLegalTexts.PageLegalTexts.NUEVO_REGISTRO_LEGAL_TEXTS;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.data.PaisShop;
 
 public abstract class PageRegistroInitialShop extends PageBase {
 
@@ -33,10 +30,8 @@ public abstract class PageRegistroInitialShop extends PageBase {
 	public abstract void clickCondicionesVenta();
 	public abstract void clickModalContentCorner();
 
-	public static PageRegistroInitialShop make(String urlBase, Pais pais, Channel channel) {
-		if (PageBase.isPRO(urlBase) ||
-			!PaisShop.ESPANA.isEquals(pais) ||
-			channel.isDevice()) {
+	public static PageRegistroInitialShop make() {
+		if (!new CommonsRegisterObject().isGenesis()) {
 			return new PageRegistroInitialShopOld();
 		}
 		return new PageRegistroInitialShopGenesis();

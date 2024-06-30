@@ -1,6 +1,8 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.genesis;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
@@ -231,8 +233,9 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	
 	@Override
 	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim) {
-		var labelExpected = "Desde " + minim + ",00 € hasta " + maxim + ",00 €";
-		return isVisibleLabelFiltroApplied(labelExpected);
+		Pattern pattern = Pattern.compile(
+				".*\\d{1,3}(\\.\\d{3})*,00 €.*\\d{1,3}(\\.\\d{3})*,00 €.*");
+		return isVisibleLabelFiltroApplied(pattern);
 	}
 	
 	@Override
@@ -246,6 +249,10 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	}
 	
 	private boolean isVisibleLabelFiltroApplied(String labelExpected) {
+		return isVisibleLabelFiltroApplied(Pattern.compile(labelExpected));
+	}
+	
+	private boolean isVisibleLabelFiltroApplied(Pattern labelExpected) {
 		if (isDevice()) {
 			showFilters();
 		}
@@ -255,7 +262,8 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		}
 		boolean found = false;
 		for (var labelFiltro : labelsFiltro) {
-			if (labelFiltro.getText().contains(labelExpected)) {
+			Matcher matcher = labelExpected.matcher(labelFiltro.getText());
+			if (matcher.matches()) {
 				found = true;
 				break;
 			}

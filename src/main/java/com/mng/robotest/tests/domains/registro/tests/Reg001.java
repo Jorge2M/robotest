@@ -5,6 +5,7 @@ import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
 import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
+import com.mng.robotest.tests.domains.registro.pageobjects.CommonsRegisterObject;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroPersonalizacionShopSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
@@ -50,8 +51,10 @@ public class Reg001 extends TestBase {
 	
 	private void selectLinkPoliticaPrivacidad() {
 		pgRegistroInitialSteps.clickPoliticaPrivacidad();
-		pgRegistroInitialSteps.clickPoliticaPrivacidadModal();
-		pgRegistroInitialSteps.clickCondicionesVenta();
+		if (new CommonsRegisterObject().isGenesis()) {
+			pgRegistroInitialSteps.clickPoliticaPrivacidadModal();
+			pgRegistroInitialSteps.clickCondicionesVenta();
+		}
 	}
 	
 	private void inputInitialDataAndClickCreate() {

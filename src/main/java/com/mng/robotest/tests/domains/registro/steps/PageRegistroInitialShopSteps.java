@@ -6,13 +6,14 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.steps.Page2IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
+import com.mng.robotest.tests.domains.registro.pageobjects.CommonsRegisterObject;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroInitialShop;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageRegistroInitialShopSteps extends StepBase {
 
-	private final PageRegistroInitialShop pgRegistroInitial = PageRegistroInitialShop.make(inputParamsSuite.getUrlBase(), dataTest.getPais(), channel);
+	private final PageRegistroInitialShop pgRegistroInitial = PageRegistroInitialShop.make();
 	
 	public void checkPage(int seconds) {
 		checkIsPage(seconds);
@@ -157,12 +158,16 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	
 	public void clickCondicionesVenta() {
 		clickCondicionesVentaStep();
-		back();
+		if (new CommonsRegisterObject().isGenesis()) {
+			back();
+		}
 	}
 	
 	public void clickPoliticaPrivacidadModal() {
 		clickPoliticaPrivacidadModalStep();
-		back();
+		if (new CommonsRegisterObject().isGenesis()) {
+			back();
+		}
 	}
 	
 	@Step (
