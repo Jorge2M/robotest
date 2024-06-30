@@ -10,47 +10,31 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalUserSesionShopDesktop extends PageBase { 
 	
-	private static final String XP_WRAPPER_USER_MENU = 
-			"//*[@data-testid[contains(.,'header.userMenu.login')] or " + 
-			"@class[contains(.,'user-icon-button')]]";
-	
-	private static final String XP_CAPA_MENUS = XP_WRAPPER_USER_MENU + "/div[@role='button']";
-	private static final String XP_CAPA_MENUS_GENESIS = "//div[@class[contains(.,'AccountMenu')]]";
+	private static final String XP_CAPA_MENUS = "//div[@id='account-menu']";
 	
 	public enum MenuUserDesktop implements ElementPage { 
 		INICIAR_SESION (
-			XP_CAPA_MENUS + "//button[@micro='Fukku']",
 			"//*[@data-testid='header.myAccount.login.button']"),
 		
 		//Pedir React ID
 		REGISTRATE (
-			XP_CAPA_MENUS + "//span[@class='login-register-link' or @class[contains(.,'register-link')] or text()='Regístrate' or @class[contains(.,'RuqlF')]]",
-			XP_CAPA_MENUS_GENESIS + "//a[@data-testid='header.usermenu.register.click']"),
+			XP_CAPA_MENUS + "//a[@data-testid='header.usermenu.register.click']"),
 		
 		MI_CUENTA (
-			XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mi_cuenta')]]",
-			XP_CAPA_MENUS_GENESIS + "//a[@data-testid='header.userSubmenu.my_account']"),
+			XP_CAPA_MENUS + "//a[@data-testid='header.userSubmenu.my_account']"),
 		MIS_COMPRAS (
-			XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mis_compras')] or @data-testid[contains(.,'my_purchases')]]",
-			XP_CAPA_MENUS_GENESIS + "//a[@data-testid='header.userSubmenu.my_purchases']"),
+			XP_CAPA_MENUS + "//a[@data-testid='header.userSubmenu.my_purchases']"),
 		
 		MANGO_LIKES_YOU (
-			XP_CAPA_MENUS + "//div[@data-testid[contains(.,'mango_likes_you')]]",
-			XP_CAPA_MENUS_GENESIS + "//a[@data-testid='header.userSubmenu.mango_likes_you']"),
+			XP_CAPA_MENUS + "//a[@data-testid='header.userSubmenu.mango_likes_you']"),
 		AYUDA (
-			XP_CAPA_MENUS + "//div[@data-testid[contains(.,'ayuda')]]",
-			XP_CAPA_MENUS_GENESIS + "//a[@data-testid='header.userSubmenu.help']"),
+			XP_CAPA_MENUS + "//a[@data-testid='header.userSubmenu.help']"),
 		CERRAR_SESION (
-			XP_CAPA_MENUS + "//div[@data-testid[contains(.,'logout')] or @class[contains(.,'logout')]]",
-			XP_CAPA_MENUS_GENESIS + "//*[@data-testid='header.userSubmenu.logout']");
+			XP_CAPA_MENUS + "//*[@data-testid='header.userSubmenu.logout']");
 		
 		By by;
-		private MenuUserDesktop(String xPath, String xpathGenesis) {
-			String xpathResult = xPath;
-			if ("".compareTo(xpathGenesis)!=0) {
-				xpathResult+= " | " + xpathGenesis;
-			}
-			by = By.xpath(xpathResult);
+		private MenuUserDesktop(String xpath) {
+			by = By.xpath(xpath);
 		}
 		
 		@Override
