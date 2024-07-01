@@ -10,27 +10,14 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class ModalUserSesionShopDesktop extends PageBase { 
 	
-	private static final String XP_CAPA_MENUS = "//div[@id='account-menu']";
-	
 	public enum MenuUserDesktop implements ElementPage { 
-		INICIAR_SESION (
-			"//*[@data-testid='header.myAccount.login.button']"),
-		
-		//Pedir React ID
-		REGISTRATE (
-			XP_CAPA_MENUS + "//a[@data-testid='header.usermenu.register.click']"),
-		
-		MI_CUENTA (
-			XP_CAPA_MENUS + "//a[@data-testid='header.userSubmenu.my_account']"),
-		MIS_COMPRAS (
-			XP_CAPA_MENUS + "//a[@data-testid='header.userSubmenu.my_purchases']"),
-		
-		MANGO_LIKES_YOU (
-			XP_CAPA_MENUS + "//a[@data-testid='header.userSubmenu.mango_likes_you']"),
-		AYUDA (
-			XP_CAPA_MENUS + "//a[@data-testid='header.userSubmenu.help']"),
-		CERRAR_SESION (
-			XP_CAPA_MENUS + "//*[@data-testid='header.userSubmenu.logout']");
+		INICIAR_SESION ("//*[@data-testid='header.myAccount.login.button']"),
+		REGISTRATE ("//a[@data-testid='header.usermenu.register.click']"),
+		MI_CUENTA ("//a[@data-testid='header.userSubmenu.my_account']"),
+		MIS_COMPRAS ("//a[@data-testid='header.userSubmenu.my_purchases']"),
+		MANGO_LIKES_YOU ("//a[@data-testid='header.userSubmenu.mango_likes_you']"),
+		AYUDA ("//a[@data-testid='header.userSubmenu.help']"),
+		CERRAR_SESION ("//*[@data-testid='header.userSubmenu.logout']");
 		
 		By by;
 		private MenuUserDesktop(String xpath) {
@@ -47,7 +34,7 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		return isVisibleUntil(0);
 	}
 	public boolean isVisibleUntil(int seconds) {
-		return state(VISIBLE, XP_CAPA_MENUS).wait(seconds).check();
+		return isMenuInStateUntil(MenuUserDesktop.AYUDA, VISIBLE, seconds);
 	}	
 	
 	public boolean isMenuInState(MenuUserDesktop menu, State state) {
