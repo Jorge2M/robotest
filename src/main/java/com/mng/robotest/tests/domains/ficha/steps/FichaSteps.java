@@ -358,9 +358,10 @@ public class FichaSteps extends StepBase {
 	@Step (
 		description="Seleccionar la opción <b>Disponibilidad en tienda</b>",
 		expected="Aparece un resultado de la búsqueda correcta")
-	public void selectBuscarEnTienda() {
+	public boolean selectBuscarEnTienda(State state) {
 		pageFicha.selectBuscarEnTiendaLink();
-		new ModalBuscarEnTiendaSteps().checkBusquedaConResultados();
+		var checks = new ModalBuscarEnTiendaSteps().checkBusquedaConResultados(state);
+		return checks.areAllChecksOvercomed();
 	}
 
 	@Step (

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
@@ -17,10 +16,12 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
+import com.github.jorge2m.testmaker.conf.State;
+
 public class Fic001 extends TestBase {
 
 	private final Optional<GarmentCatalog> productOnline;
-	private final Optional<GarmentCatalog> produtNoOnlineWithColors;
+	private final List<GarmentCatalog> produtsNoOnlineWithColors;
 	private final List<FilterType> filterOnline = Arrays.asList(FilterType.ONLINE);
 	private final List<FilterType> filterNoOnlineWithColors = Arrays.asList(FilterType.NO_ONLINE, FilterType.MANY_COLORS);
 	
@@ -34,7 +35,7 @@ public class Fic001 extends TestBase {
 				.build();
 
 		productOnline = getterProducts.getOne(filterOnline);
-		produtNoOnlineWithColors = getterProducts.getOne(filterNoOnlineWithColors);
+		produtsNoOnlineWithColors = getterProducts.getAll(filterNoOnlineWithColors);
 	}
 	
 	@Override
@@ -54,24 +55,48 @@ public class Fic001 extends TestBase {
 	}
 	
 	private void articleNoOnlineTest() throws Exception {
-		var articleNoOnlineWithColors = Article.getArticleForTest(produtNoOnlineWithColors.get());
-		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
-		if (isShop() && channel!=Channel.tablet) {
-			fichaSteps.selectBuscarEnTienda();
-			new ModalBuscarEnTiendaSteps().close();
-		}
-
-		var articulo = selectColorAndTalla();
+		var garmentCatalog = searchArticleNoOnline();
+		var articulo = selectColorAndTalla(garmentCatalog);
 		if (isShop()) {
 			checkFavorites();
 		}
-		
 		fichaSteps.selectAnadirALaBolsaTallaPrevSiSelected(articulo);
 	}
 
-	private ArticuloScreen selectColorAndTalla() throws Exception {
+	private GarmentCatalog searchArticleNoOnline() {
+		if (isOutlet()) {
+			return searchArticleNoOnlineOutlet();
+		} 
+		return searchArticleNoOnlineShop();
+	}
+	
+	private GarmentCatalog searchArticleNoOnlineOutlet() {
+		var garmentNoOnline = produtsNoOnlineWithColors.get(0);
+		var articleNoOnlineWithColors = Article.getArticleForTest(garmentNoOnline);
+		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
+		return garmentNoOnline;
+	}
+	
+	private GarmentCatalog searchArticleNoOnlineShop() {
+		GarmentCatalog garmentNoOnline = produtsNoOnlineWithColors.get(0);
+		for (int i=0; i<3; i++) {
+			garmentNoOnline = produtsNoOnlineWithColors.get(i);
+			var articleNoOnlineWithColors = Article.getArticleForTest(garmentNoOnline);
+			new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
+			var state = (i==3) ? State.DEFECT : State.WARN;
+			var foundTiendas = fichaSteps.selectBuscarEnTienda(state);
+			new ModalBuscarEnTiendaSteps().close();
+			if (foundTiendas) {
+				break;
+			}
+		}
+		return garmentNoOnline;
+	}	
+
+	private ArticuloScreen selectColorAndTalla(GarmentCatalog produtNoOnlineWithColors) 
+			throws Exception {
 		boolean isTallaUnica = checkClickAddBolsaWithoutSelectTalla();
-		var articulo = new ArticuloScreen(produtNoOnlineWithColors.get());
+		var articulo = new ArticuloScreen(produtNoOnlineWithColors);
 		fichaSteps.selectColorAndSaveData(articulo);
 		fichaSteps.selectTallaAndSaveData(articulo);
 		ifTallaUnicaClearBolsa(isTallaUnica);
@@ -93,7 +118,7 @@ public class Fic001 extends TestBase {
 	}
 
 	private void stopIfNoPresentArticleNoOnlineWithColors() throws NotFoundException {
-		if (!produtNoOnlineWithColors.isPresent()) {
+		if (produtsNoOnlineWithColors.isEmpty()) {
 			var filtersLabels = 
 				filterNoOnlineWithColors
 					.stream()
