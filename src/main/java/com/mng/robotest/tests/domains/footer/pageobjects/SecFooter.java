@@ -106,10 +106,10 @@ public class SecFooter extends PageBase {
 			List<FooterLink> listLinksToReturn = new ArrayList<>();
 			for (var footerLink : FooterLink.values()) {
 				if (footerLink.appList.contains(app) && 
-					footerLink.channel.contains(channel)) {
-					if (footerLink.isInGenesis()) {
-						listLinksToReturn.add(footerLink);
-					}
+					footerLink.channel.contains(channel) &&
+					footerLink.isInGenesis() &&
+					footerLink!=FooterLink.CHEQUE_REGALO_OLD) {
+					listLinksToReturn.add(footerLink);
 				}
 			}
 			return listLinksToReturn;
