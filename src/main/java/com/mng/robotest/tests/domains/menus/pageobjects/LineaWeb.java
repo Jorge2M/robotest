@@ -18,7 +18,7 @@ public class LineaWeb extends PageBase implements LineaActions {
 		HE("hombre", "outletH", "he", "he", Arrays.asList(desktop, mobile, tablet)), 
 		NINA("ninas", "outletA", "kidsA", "nina", Arrays.asList(desktop, mobile, tablet)), 
 		NINO("ninos", "outletO", "kidsO", "nino", Arrays.asList(desktop, mobile, tablet)), 
-		KIDS("kids", "outletX", "kids", "kids", Arrays.asList(desktop, mobile, tablet)),
+		KIDS("kids", "outletX", "nina", "nina", Arrays.asList(desktop, mobile, tablet)),
 		TEEN("teen", "?", "teen", "teen", Arrays.asList(desktop, mobile, tablet)),
 		HOME("home", "home", "home", "home", Arrays.asList(desktop, mobile, tablet));
 		

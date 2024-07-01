@@ -1287,8 +1287,7 @@
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <multidireccion>N</multidireccion>
 </pais>
@@ -2281,14 +2280,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-	<sublinea id="NINA_BEBE" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
-<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-	<sublinea id="NINO_BEBE" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
 	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
@@ -2342,12 +2334,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 </linea>
-<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
-<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -2544,14 +2531,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-	<sublinea id="NINA_BEBE" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
-<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-	<sublinea id="NINO_BEBE" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
 	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
@@ -4752,12 +4732,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 </linea>
-<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
-<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -4805,12 +4780,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 </linea>
-<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
-<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -4876,12 +4846,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 </linea>
-<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
-<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -5075,12 +5040,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 </linea>
-<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
-<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"
@@ -5432,12 +5392,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 </linea>
-<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
-<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet" empleado="s"

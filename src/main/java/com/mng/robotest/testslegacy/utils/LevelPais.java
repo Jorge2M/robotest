@@ -5,7 +5,7 @@ import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 
 public enum LevelPais {
 	TOP(4, 2, 2, 2, 2, 2),
-	CON_COMPRA_NO_TOP(2, 1, 0, 0, 0, 0),
+	CON_COMPRA_NO_TOP(2, 1, 1, 1, 1, 1),
 	SIN_COMPRA(1, 0, 0, 0, 0, 0);
 	
 	private final int numBannersShe; 

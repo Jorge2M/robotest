@@ -60,7 +60,11 @@ public class HeroBanner extends PageBase implements Banner {
 		if (ancorType1Opt.isPresent()) {
 			return ancorType1Opt.get();
 		}
-		return getElement(banner, ".//a");
+		var ancorOpt = findElement(banner, ".//a");
+		if (ancorOpt.isPresent()) {
+			return ancorOpt.get();
+		}
+		return banner;
 	}
 	
 	private String getImageBanner(WebElement banner) {
