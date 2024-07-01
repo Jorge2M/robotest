@@ -6,7 +6,7 @@ public class ConsolaVotf {
 
 	@Test (
 		testName="VTF001",			
-		groups={"Consola_Votf", "Canal:desktop_App:votf"},
+		groups={"Consola_Votf", "Canal:desktop_App:shop"},
 		description="[PRE] Generar pedido mediante la consola de VOTF")
 	public void generarPedido() throws Exception {
 		new Vtf001().execute();

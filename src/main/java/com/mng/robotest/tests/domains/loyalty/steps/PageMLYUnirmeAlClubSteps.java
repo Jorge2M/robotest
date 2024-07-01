@@ -34,7 +34,7 @@ public class PageMLYUnirmeAlClubSteps extends StepBase {
 		expected="Aparece la capa de crea tu cuenta")
 	public void selectUnirmeAlClub() {
 		pgMLYUnirmeAlClub.selectUnirmeAlClub();
-		isVisibleCreaTuCuenta(2);
+		isVisibleCreaTuCuenta(3);
 	}
 	
 	@Step (

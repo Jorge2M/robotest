@@ -1,13 +1,12 @@
 package com.mng.robotest.tests.domains.loyalty.pageobjects;
 
-import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.VISIBLE;
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageMLYUnirmeAlClub extends PageBase {
 
 	private static final String XP_BUTTON_UNIRME = "//button[@data-testid='landingMangoLikesYou.signUp.modalButton.open']";
-	private static final String XP_CAPA_CREAR_CUENTA = "//*[@data-testid='modal']";
 	private static final String XP_INPUT_EMAIL = "//input[@data-testid='registry.emailInput.text']";
 	private static final String XP_INPUT_PASSWORD = "//input[@data-testid='registry.passwordInput.text']";
 	private static final String XP_INPUT_MOBIL = "//input[@data-testid='registry.phoneInput.text']";
@@ -22,7 +21,7 @@ public class PageMLYUnirmeAlClub extends PageBase {
 	}
 	
 	public boolean isVisibleCrearCuenta(int seconds) {
-		return state(VISIBLE, XP_CAPA_CREAR_CUENTA).wait(seconds).check();
+		return state(PRESENT, XP_INPUT_EMAIL).wait(seconds).check();
 	}
 	
 	public void inputEmail(String email) {

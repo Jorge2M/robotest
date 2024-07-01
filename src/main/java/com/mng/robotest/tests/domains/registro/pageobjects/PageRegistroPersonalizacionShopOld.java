@@ -23,7 +23,7 @@ public class PageRegistroPersonalizacionShopOld extends PageRegistroPersonalizac
 	private static final String XP_CHECKBOX_LINEA_WITH_TAG = "//input[@id='" + TAG_LINEA + "']";
 	
 	private String getXPathCheckboxGender(GenderOption gender) {
-		return XP_CHECKBOX_GENEDER_WITH_TAG.replace(TAG_GENDER, String.valueOf(gender.getCode()));
+		return XP_CHECKBOX_GENEDER_WITH_TAG.replace(TAG_GENDER, String.valueOf(gender.getCodeOld()));
 	}
 	private String getXPathCheckboxLinea(LineaType linea) {
 		return XP_CHECKBOX_LINEA_WITH_TAG.replace(TAG_LINEA, linea.name().toUpperCase());

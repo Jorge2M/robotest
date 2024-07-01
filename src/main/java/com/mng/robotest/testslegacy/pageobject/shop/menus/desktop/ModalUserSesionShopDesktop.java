@@ -15,7 +15,7 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		REGISTRATE ("//a[@data-testid='header.usermenu.register.click']"),
 		MI_CUENTA ("//a[@data-testid='header.userSubmenu.my_account']"),
 		MIS_COMPRAS ("//a[@data-testid='header.userSubmenu.my_purchases']"),
-		MANGO_LIKES_YOU ("//a[@data-testid='header.userSubmenu.mango_likes_you']"),
+		MANGO_LIKES_YOU ("//*[@data-testid='header.userSubmenu.mango_likes_you']"),
 		AYUDA ("//a[@data-testid='header.userSubmenu.help']"),
 		CERRAR_SESION ("//*[@data-testid='header.userSubmenu.logout']");
 		

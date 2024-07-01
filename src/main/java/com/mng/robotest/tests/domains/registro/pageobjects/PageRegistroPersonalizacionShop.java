@@ -14,19 +14,24 @@ import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 public abstract class PageRegistroPersonalizacionShop extends PageBase {
 
 	public enum GenderOption { 
-		FEMENINO("FEMALE"), 
-		MASCULINO("MALE"), 
-		NO_BINARIO("NON_BINARY"), 
-		PREFIERO_NO_INCLUIRLO("DONT_ANSWER");
+		FEMENINO("FEMALE", "M"), 
+		MASCULINO("MALE", "H"), 
+		NO_BINARIO("NON_BINARY", "X"), 
+		PREFIERO_NO_INCLUIRLO("DONT_ANSWER", "N");
 	
 		private String code;
-		private GenderOption(String code) {
+		private String codeOld;
+		private GenderOption(String code, String codeOld) {
 			this.code = code;
+			this.codeOld = codeOld;
 		}
 		
 		public String getCode() {
 			return code;
 		}
+		public String getCodeOld() {
+			return codeOld;
+		}		
 	}
 	
 	public abstract boolean isPage();
