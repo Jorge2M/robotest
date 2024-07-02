@@ -280,7 +280,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 
 	@Override
 	public void clickArticulo(WebElement articulo) {
-		moveToElement(articulo);
 		try {
 			articulo.click();
 		} catch (ElementNotInteractableException e) {

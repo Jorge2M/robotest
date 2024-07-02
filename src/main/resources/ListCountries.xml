@@ -4556,6 +4556,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 </linea>
+<linea 		  id="HOME"   	 shop="s" outlet="n" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 </shoponline>
 <!-- Hay un pequeño problema y es que en Shop aparece "KREDİ KARTI"  y en Outlet "KREDI KARTI". Mientras que siga así tendremos que definir las siguientes 2 líneas-->
 <!-- 

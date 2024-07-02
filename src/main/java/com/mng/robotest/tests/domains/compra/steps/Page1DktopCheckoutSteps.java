@@ -91,7 +91,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	public void inputValeDescuento(ValeDiscount valePais) { 
 		var pageCheckoutWrapper = new PageCheckoutWrapper();
 		pageCheckoutWrapper.inputCodigoPromoAndAccept(valePais.getCodigoVale());
-		dataTest.getDataBag().setImporteTotal(pageCheckoutWrapper.getPrecioTotalFromResumen(true));
+		setImporteTotalInDataTest();
 		if (!isPRO()) {
 			checkRedMessageInputValeInvisible(valePais);
 			checkValeDiscountIsCorrect(valePais);
@@ -103,6 +103,11 @@ public class Page1DktopCheckoutSteps extends StepBase {
 		checksGeneric()
 			.googleAnalytics()
 			.netTraffic().execute();
+	}
+	
+	private void setImporteTotalInDataTest() {
+		var precio = new PageCheckoutWrapper().getPrecioTotalFromResumen(true);
+		dataTest.getDataBag().setImporteTotal(precio);		
 	}
 	
 	@Validation(

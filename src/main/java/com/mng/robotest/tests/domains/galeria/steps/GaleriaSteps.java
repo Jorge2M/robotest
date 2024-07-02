@@ -706,7 +706,6 @@ public class GaleriaSteps extends StepBase {
 		return checks;
 	}	
 	
-	
 	@Validation
 	public ChecksTM checkHearthIconVisible() {
 		var checks = ChecksTM.getNew();

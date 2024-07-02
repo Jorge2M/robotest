@@ -1,5 +1,6 @@
 package com.mng.robotest.tests.domains.compra.pageobjects;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 
 import com.mng.robotest.tests.domains.base.PageBase;
@@ -237,6 +238,17 @@ public class PageCheckoutWrapper extends PageBase {
 	}
 
 	public String getPrecioTotalFromResumen(boolean normalize) {
+		for (int i=0; i<=2; i++) {
+			try {
+				return getPrecioTotalFromResumenItem(normalize);
+			} catch (NoSuchElementException e) {
+				waitMillis(1000);
+			}
+		}
+		return "0";
+	}
+	
+	private String getPrecioTotalFromResumenItem(boolean normalize) {
 		if (isMobile()) {
 			return (pg2MobilCheckout.getPrecioTotalFromResumen(normalize));
 		}
@@ -386,6 +398,17 @@ public class PageCheckoutWrapper extends PageBase {
 			return (pg2MobilCheckout.getTextDireccionEnvioCompleta());
 		}
 		return (pg1DktopCheckout.getTextDireccionEnvioCompleta());
+	}
+	
+	public boolean isDireccionEnvioContains(String text, int seconds) {
+		for (int i=0; i<=seconds; i++) {
+			var direccionScreen = getTextDireccionEnvioCompleta();
+			if (direccionScreen.contains(text)) {
+				return true;
+			}
+			waitMillis(1000);
+		}
+		return false;
 	}
 	
 	public void getDataPedidoFromCheckout(DataPedido dataPedido) {
