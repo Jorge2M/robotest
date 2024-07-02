@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
@@ -279,7 +280,15 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 
 	@Override
 	public void clickArticulo(WebElement articulo) {
-		click(articulo).waitLoadPage(30).exec();
+		moveToElement(articulo);
+		try {
+			articulo.click();
+		} catch (ElementNotInteractableException e) {
+			//Case when the header overlays the article
+			keyUp(20);
+			articulo.click();
+		}
+		waitLoadPage();
 	}
 
 	@Override

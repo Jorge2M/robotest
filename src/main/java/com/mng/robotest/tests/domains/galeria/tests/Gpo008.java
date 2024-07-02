@@ -34,7 +34,7 @@ public class Gpo008 extends TestBase {
 	}
 
 	private void scrollToLastAndSelectArticle() throws Exception {
-		int posArticleToSelect = 30;
+		int posArticleToSelect = (isOutlet()) ? 15 : 30;
 		galeriaSteps.scrollToLast();
 		galeriaSteps.selectArticulo(posArticleToSelect);
 		goBackToGalery(posArticleToSelect);

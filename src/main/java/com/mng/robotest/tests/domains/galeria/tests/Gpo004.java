@@ -51,7 +51,7 @@ public class Gpo004 extends TestBase {
 	}
 	
 	private void selectArticleInOtherLabel() {
-		int position = (app==shop) ? 50 : 20; 
+		int position = (app==shop) ? 50 : 30; 
 		galeriaSteps.selectArticuloEnPestanyaAndBack(position);
 	}
 
