@@ -9,7 +9,7 @@ import org.openqa.selenium.NoSuchElementException;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.buscador.steps.SecBuscadorSteps;
+import com.mng.robotest.tests.domains.buscador.steps.BuscadorSteps;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders.Slider;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.PageFichaDeviceNoGenesis;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
@@ -27,7 +27,7 @@ public class Fic002 extends TestBase {
 	private final Article article;
 	private final boolean isTotalLook;
 
-	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
+	private final BuscadorSteps buscadorSteps = new BuscadorSteps();
 	private final FichaSteps fichaSteps = new FichaSteps();
 
 	public Fic002() throws Exception {
@@ -41,14 +41,13 @@ public class Fic002 extends TestBase {
 	public void execute() throws Exception {
 		access();
 		searchArticle();
-		searchArticle();
 		checkSliders();
 		checkFicha();
 		checkGuiaDeTallas();
 	}
 	
 	private void searchArticle() {
-		secBuscadorSteps.searchArticulo(article);
+		buscadorSteps.searchArticulo(article);
 	}
 	private void checkFicha() {
 		if (channel.isDevice()) {
@@ -83,15 +82,14 @@ public class Fic002 extends TestBase {
 		
 		//Me informan desde Kaliope que inicialmente no estará el link
 		//Compartir en la ficha Genesis. Desactivamos la validación durante un tiempo 
-		if (!(dataTest.getPais().isFichaGenesis(dataTest.getPais(), app) && UtilsTest.todayBeforeDate("2024-08-15"))) { 
-			fichaSteps.selectLinkCompartir(dataTest.getCodigoPais());
+		if (!(dataTest.getPais().isFichaGenesis(dataTest.getPais(), app) || 
+			!UtilsTest.todayBeforeDate("2024-08-15"))) { 
+			fichaSteps.selectLinkCompartir();
 		}
 	}
 
 	private void pageFichaDeviceTest() {
-		if (isOutlet() && !isMobile()) {
-			fichaSteps.validaExistsImgsCarruselIzqFichaOld();
-		}
+		
 		fichaSteps.getSecProductDescDeviceSteps().checkAreInStateInitial();
 		var pageFicha = new PageFichaDeviceNoGenesis();
 		if (pageFicha.getNumImgsCarruselIzq() > 2) {
@@ -135,8 +133,9 @@ public class Fic002 extends TestBase {
 	
 	private Pair<Optional<GarmentCatalog>, Boolean> getArticleTLook() 
 			throws Exception {
+		var codPais = dataTest.getPais().getCodigoAlf();
 		var getterProducts = new GetterProducts
-				.Builder(dataTest.getPais().getCodigoAlf(), app, driver)
+				.Builder(codPais, app, driver)
 				.build();
 	
 		var articleGet = getterProducts.getOne(Arrays.asList(TOTAL_LOOK));

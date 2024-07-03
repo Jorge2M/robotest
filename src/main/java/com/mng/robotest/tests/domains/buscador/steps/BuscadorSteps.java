@@ -14,7 +14,7 @@ import com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.testslegacy.pageobject.shop.navigations.ArticuloNavigations;
 
-public class SecBuscadorSteps extends StepBase {
+public class BuscadorSteps extends StepBase {
 
 	private final PageGaleria pgGaleria = PageGaleria.make(From.BUSCADOR, channel, app, dataTest.getPais());
 	

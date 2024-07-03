@@ -16,7 +16,7 @@ public class Ayu001 extends TestBase {
 	
 	private void checkAyuda() {
 		new FooterSteps().clickLinkFooter(AYUDA);
-		
+
 		var ayudaSteps = new AyudaSteps();
 		ayudaSteps.clickIcon("Devoluciones, cambios y reembolsos");
 		String question = "¿Cómo puedo cambiar o devolver una compra online?";

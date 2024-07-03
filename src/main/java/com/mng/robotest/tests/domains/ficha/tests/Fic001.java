@@ -7,7 +7,7 @@ import java.util.Optional;
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
-import com.mng.robotest.tests.domains.buscador.steps.SecBuscadorSteps;
+import com.mng.robotest.tests.domains.buscador.steps.BuscadorSteps;
 import com.mng.robotest.tests.domains.ficha.steps.ModalBuscarEnTiendaSteps;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
@@ -50,7 +50,7 @@ public class Fic001 extends TestBase {
 
 	private void articleOnlineTest() {
 		var articleOnline = Article.getArticleForTest(productOnline.get());
-		new SecBuscadorSteps().searchArticulo(articleOnline, filterOnline);
+		new BuscadorSteps().searchArticulo(articleOnline, filterOnline);
 		fichaSteps.checkLinkDispTiendaInvisible();
 	}
 	
@@ -73,7 +73,7 @@ public class Fic001 extends TestBase {
 	private GarmentCatalog searchArticleNoOnlineOutlet() {
 		var garmentNoOnline = produtsNoOnlineWithColors.get(0);
 		var articleNoOnlineWithColors = Article.getArticleForTest(garmentNoOnline);
-		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
+		new BuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
 		return garmentNoOnline;
 	}
 	
@@ -82,7 +82,7 @@ public class Fic001 extends TestBase {
 		for (int i=0; i<3; i++) {
 			garmentNoOnline = produtsNoOnlineWithColors.get(i);
 			var articleNoOnlineWithColors = Article.getArticleForTest(garmentNoOnline);
-			new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
+			new BuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
 			var state = (i==3) ? State.DEFECT : State.WARN;
 			var foundTiendas = fichaSteps.selectBuscarEnTienda(state);
 			new ModalBuscarEnTiendaSteps().close();

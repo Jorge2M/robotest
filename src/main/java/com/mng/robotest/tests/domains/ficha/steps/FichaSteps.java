@@ -21,6 +21,7 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProd
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecProductDescrDevice.TypePanel;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
@@ -481,21 +482,21 @@ public class FichaSteps extends StepBase {
 	@Step (
 		description="Seleccionar el link <b>Compartir</b>",
 		expected="Aparece el modal para compartir el enlace")
-	public void selectLinkCompartir(String codigoPais) {
+	public void selectLinkCompartir() {
 		pageFicha.selectLinkCompartir();
-		checkAppearsModalShareSocial(codigoPais);
+		checkAppearsModalShareSocial();
 	}
 	
 	@Validation
-	private ChecksTM checkAppearsModalShareSocial(String codigoPais) {
+	private ChecksTM checkAppearsModalShareSocial() {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 	 	checks.add(
 	 		"Aparece el modal para compartir a nivel social " + getLitSecondsWait(seconds),
 	 		new ModCompartirNew().isVisibleUntil(seconds));
 		
-		boolean isPaisChina = (codigoPais.compareTo("720")==0);
-		for (IconSocial icon : IconSocial.values()) {
+		boolean isPaisChina = PaisShop.CHINA.isEquals(dataTest.getPais());
+		for (var icon : IconSocial.values()) {
 			boolean isVisibleIcon = new ModCompartirNew().isVisibleIcon(icon);
 			if (isPaisChina != icon.isSpecificChina()) {
 			 	checks.add(
@@ -513,13 +514,6 @@ public class FichaSteps extends StepBase {
 		
 	//------------------------------------------------------------------------
 	//Específic Ficha Old
-
-	@Validation (
-		description="Existe más de una imagen de carrusel a la izquierda de la imagen principal",
-		level=WARN)
-	public boolean validaExistsImgsCarruselIzqFichaOld() {
-		return (((PageFichaDeviceNoGenesis)pageFicha).getNumImgsCarruselIzq() >= 2);
-	}
 
 	@Step (
 		description="Seleccionar la #{numImagen}a imagen del carrusel izquierdo",

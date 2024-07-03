@@ -6,7 +6,7 @@ import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.buscador.steps.SecBuscadorSteps;
+import com.mng.robotest.tests.domains.buscador.steps.BuscadorSteps;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.ficha.steps.SecModalPersonalizacionSteps;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
@@ -23,7 +23,7 @@ public class Fic005 extends TestBase {
 
 	private final Optional<Article> articlePersonalizable;
 	
-	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
+	private final BuscadorSteps secBuscadorSteps = new BuscadorSteps();
 	private final FichaSteps fichaSteps = new FichaSteps();
 	private final SecModalPersonalizacionSteps mdPersonalizacionSteps = new SecModalPersonalizacionSteps();
 	
