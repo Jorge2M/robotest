@@ -57,7 +57,8 @@ public class SecBolsa extends SecBolsaCommon {
 		isInStateUntil(StateBolsa.OPEN, 2);
 		var subtotalOpt = getElementIfExists(getXPathPrecioSubTotal());
 		if (subtotalOpt.isPresent()) {
-			return ImporteScreen.normalizeImportFromScreen(subtotalOpt.get().getText());
+			String importScreen = subtotalOpt.get().getText();
+			return ImporteScreen.normalizeImportFromScreen(importScreen);
 		}
 		return "0";
 	} 

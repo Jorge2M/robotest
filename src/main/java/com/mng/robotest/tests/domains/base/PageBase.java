@@ -210,6 +210,14 @@ public class PageBase extends PageObjTM {
 	    }
 	}
 	
+	protected Optional<WebElement> findElement(String xpath, String xpathChild) {
+		var parentOpt = findElement(xpath);
+		if (parentOpt.isEmpty()) {
+			return Optional.empty();
+		}
+		return findElement(parentOpt.get(), xpathChild);
+	}
+	
 	protected Optional<WebElement> findElement(WebElement element, String xpath) {
 	    try {
 	        return Optional.of(getElement(element, xpath));
