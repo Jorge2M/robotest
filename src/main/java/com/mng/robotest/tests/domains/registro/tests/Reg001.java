@@ -15,14 +15,16 @@ import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 public class Reg001 extends TestBase {
 
-	private final PageRegistroInitialShopSteps pgRegistroInitialSteps = new PageRegistroInitialShopSteps();
-	private final PageRegistroPersonalizacionShopSteps pgRegistroPersonalizacionSteps = new PageRegistroPersonalizacionShopSteps();
+	private final PageRegistroInitialShopSteps pgRegistroInitialSteps;
+	private final PageRegistroPersonalizacionShopSteps pgRegistroPersonalizacionSteps;
 	private final DataNewRegister dataNewRegister;
 
 	public Reg001(Pais pais, IdiomaPais idioma) {
 		super();
 		dataTest.setPais(pais);
 		dataTest.setIdioma(idioma);
+		pgRegistroInitialSteps = new PageRegistroInitialShopSteps();
+		pgRegistroPersonalizacionSteps = new PageRegistroPersonalizacionShopSteps();		
 		dataNewRegister = DataNewRegister.makeDefault(pais);
 	}
 	
