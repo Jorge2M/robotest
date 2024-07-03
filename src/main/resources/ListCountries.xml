@@ -3865,6 +3865,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Казахстан" codigo="079"> <!-- Kadjastan -->
@@ -4914,6 +4915,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="externa" tiendas="shop,outlet"
 	nombre="cashu" testpasarela='s' testpago='s'></pago>-->
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Ethiopia" codigo="334">
