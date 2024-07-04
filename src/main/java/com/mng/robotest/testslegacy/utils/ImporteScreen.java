@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.mng.robotest.tests.domains.compra.pageobjects.UtilsCheckout;
+
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -70,7 +72,10 @@ public class ImporteScreen {
 		if (importeResult.compareTo("") == 0) {
 			return (0);
 		}
-		return (Float.parseFloat(importeResult.replace(',', '.')));
+		if (containsArabicNumber(screenImport)) {
+			return UtilsCheckout.getArabicNumber(screenImport);
+		}
+		return Float.parseFloat(importeResult.replace(',', '.'));
 	}
 	
 	/**
