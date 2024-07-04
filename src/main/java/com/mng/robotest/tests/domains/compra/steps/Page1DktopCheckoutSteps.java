@@ -79,7 +79,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 	 	checks.add(
 			"Para todos los artículos, el % de descuento final es como mínimo del " + 
 			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + ")",
-			pg1DktopCheckout.validateArticlesAndDiscount(descuento), WARN);
+			pg1DktopCheckout.checkArticlesAndDiscount(descuento), WARN);
 	 	
 	 	return checks;
 	}
@@ -129,7 +129,7 @@ public class Page1DktopCheckoutSteps extends StepBase {
 			"En los artículos a los que aplica, el descuento es de " +  
 			descuento.getPercentageDesc() + "% (" + descuento.getDiscountOver().getDescription() + "):" +
 			dataTest.getDataBag().getListArtDescHTML(),
-			pg1DktopCheckout.validateArticlesAndDiscount(descuento));
+			pg1DktopCheckout.checkArticlesAndDiscount(descuento));
 	 	return checks;
 	}
 	

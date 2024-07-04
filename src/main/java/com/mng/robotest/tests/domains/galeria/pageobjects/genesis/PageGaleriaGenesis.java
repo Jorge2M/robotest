@@ -569,7 +569,12 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		String xpathArticle = getXPathArticulo(posArticulo);
 		state(VISIBLE, xpathArticle).wait(1).check();
 		moveToElement(xpathArticle);
-		moveToElement(xpathArticle, 0, 100); //Try to surpase case when bag is overloaping article partially
+		try {
+			//Try to surpase case when bag is overloaping article partially
+			moveToElement(xpathArticle, 0, 100); 
+		} catch (Exception e) {
+			scrollEjeY(100);			
+		}
 	}
 	
 	@Override

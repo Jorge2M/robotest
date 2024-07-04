@@ -235,6 +235,7 @@ public class PageBase extends PageObjTM {
 	}
 	
 	protected void renewBrowser() {
+		dataTest.setUserConnected("");
 		TestMaker.renewDriverTestCase();
 	}
 	

@@ -439,13 +439,13 @@ public class PageCheckoutWrapper extends PageBase {
 		return new SecMetodoEnvioDesktop().isPresentBlockMetodo(tipoTransporte);
 	}
 	
-	public boolean validateDiscountOk(PreciosArticulo preciosArtScreen, Descuento descuento) {
+	public boolean checkDiscountOk(PreciosArticulo preciosArtScreen, Descuento descuento) {
 		switch (descuento.getDiscountOver()) {
 		case ORIGINAL_PRICE:
 			return (validateDiscountOverOriginalPrice(preciosArtScreen, descuento.getPercentageDesc()));
 		case LAST_PRICE_OR_SALE:
 		default:
-			return (validateDiscountOverLastPriceOrSale(preciosArtScreen, descuento.getPercentageDesc()));
+			return (checkDiscountOverLastPriceOrSale(preciosArtScreen, descuento.getPercentageDesc()));
 		}
 	}
 	
@@ -455,7 +455,7 @@ public class PageCheckoutWrapper extends PageBase {
 		return (preciosArtScreen.getDefinitivo() <= importeDescMinTeorico);
 	}
 	
-	private boolean validateDiscountOverLastPriceOrSale(PreciosArticulo preciosArtScreen, int porcMinDiscount) {
+	private boolean checkDiscountOverLastPriceOrSale(PreciosArticulo preciosArtScreen, int porcMinDiscount) {
 		float porcMinDiscountLessOne = porcMinDiscount - 1f; //Restamos 1 por un tema de precisión
 		float importeDescMinTeorico = preciosArtScreen.getUltimaRebaja() * (1 - (porcMinDiscountLessOne/100));
 		return (preciosArtScreen.getDefinitivo() <= importeDescMinTeorico);
