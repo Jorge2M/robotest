@@ -4,7 +4,7 @@ import static com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActi
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
-import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
+import com.mng.robotest.tests.domains.favoritos.steps.FavoritosSteps;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
@@ -13,9 +13,13 @@ import com.mng.robotest.testslegacy.beans.Pais;
 
 public class Fav001 extends TestBase {
 
-	private final PageFavoritosSteps pFavoritosSteps = new PageFavoritosSteps();
+	private final FavoritosSteps pFavoritosSteps = new FavoritosSteps();
 	private final GaleriaSteps galeriaSteps = new GaleriaSteps();
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
+	
+	public Fav001() {
+		super();
+	}
 	
 	public Fav001(Pais pais, IdiomaPais idioma) {
 		super();

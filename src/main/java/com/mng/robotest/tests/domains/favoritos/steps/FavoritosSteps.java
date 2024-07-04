@@ -11,9 +11,9 @@ import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
-public class PageFavoritosSteps extends StepBase {
+public class FavoritosSteps extends StepBase {
 	
-	private final PageFavoritos pgFavoritos = new PageFavoritos();
+	private final PageFavoritos pgFavoritos = PageFavoritos.make(dataTest.getPais());
 	
 	public PageFavoritos getPageFavoritos() {
 		return pgFavoritos;
@@ -26,11 +26,11 @@ public class PageFavoritosSteps extends StepBase {
 		int secondsArticles = 2;
 		checks.add(
 			"Está visible la capa de favoritos con artículos " + getLitSecondsWait(secondsCapa),
-			pgFavoritos.isSectionArticlesVisibleUntil(secondsCapa));
+			pgFavoritos.isSectionArticlesVisible(secondsCapa));
 		
 		checks.add(
 			"Aparecen los artículos " + getLitSecondsWait(secondsArticles) + ": <br>" + dataTest.getDataFavoritos().getListArtDescHTML(),
-			pgFavoritos.areVisibleArticlesUntil(secondsArticles));
+			pgFavoritos.isVisibleArticles(secondsArticles));
 		
 		return checks;
 	}
@@ -53,7 +53,7 @@ public class PageFavoritosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"Aparece el modal de favoritos compartidos",
-			pgFavoritos.checkShareModalUntill(5));
+			pgFavoritos.checkShareModal(5));
 		
 		checks.add(
 			"Aparece el boton de compartir por Telegram",
@@ -89,14 +89,14 @@ public class PageFavoritosSteps extends StepBase {
 		description="Eliminamos de Favoritos el artículo con referencia <b>#{refArticulo}</b> y código de color <b>#{codColor}</b>",
 		expected="El artículo desaparece de Favoritos")
 	public void clear(String refArticulo, String codColor) {
-		pgFavoritos.clearArticuloAndWait(refArticulo, codColor);
-		checkArticleDisappearsFromFavoritesUntil(refArticulo, codColor, 5);
+		pgFavoritos.clearArticulo(refArticulo, codColor);
+		checkArticleDisappearsFromFavoritesUntil(refArticulo, codColor, 8);
 	}
 	
 	@Validation (
 		description="Desaparece de Favoritos el artículo con referencia <b>#{refArticle}</b> y código de color <b>#{codColor}</b> " + SECONDS_WAIT)
 	public boolean checkArticleDisappearsFromFavoritesUntil(String refArticle, String codColor, int seconds) {
-		return (pgFavoritos.isInvisibleArticleUntil(refArticle, codColor, seconds));
+		return pgFavoritos.isInvisibleArticle(refArticle, codColor, seconds);
 	}
 	
 	@Step (
@@ -113,11 +113,11 @@ public class PageFavoritosSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		checks.add(
 			"No queda ningún artículo en Favoritos",
-			!pgFavoritos.hayArticulos());
+			!pgFavoritos.isArticulos());
 		
 		checks.add(
 			"Aparece el botón \"Inspírate con lo último\"",
-			pgFavoritos.isVisibleButtonEmpty(), WARN);
+			pgFavoritos.isListEmpty(), WARN);
 		
 		return checks;
 	}  
@@ -128,7 +128,7 @@ public class PageFavoritosSteps extends StepBase {
 	public void clickArticuloImg(ArticuloScreen artToPlay) {
 		String refProducto = artToPlay.getRefProducto();
 		String codigoColor = artToPlay.getCodigoColor();
-		pgFavoritos.clickImgProducto(refProducto, codigoColor);
+		pgFavoritos.clickProducto(refProducto, codigoColor);
 		new FichaSteps().checkIsFichaArtDisponible(refProducto, 2);
 	}
 	

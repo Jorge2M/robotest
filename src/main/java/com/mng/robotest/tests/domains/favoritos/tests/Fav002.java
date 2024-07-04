@@ -5,7 +5,7 @@ import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaTyp
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
-import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
+import com.mng.robotest.tests.domains.favoritos.steps.FavoritosSteps;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
@@ -16,9 +16,13 @@ import com.mng.robotest.testslegacy.beans.Pais;
 
 public class Fav002 extends TestBase {
 
-	private final PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
+	private final FavoritosSteps pageFavoritosSteps = new FavoritosSteps();
 	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
 	private final GaleriaSteps galeriaSteps = new GaleriaSteps();
+	
+	public Fav002() {
+		super();
+	}
 	
 	public Fav002(Pais pais, IdiomaPais idioma) {
 		super();

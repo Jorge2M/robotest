@@ -55,7 +55,7 @@ public class Fic006 extends TestBase {
 	
 	private void accessAndClear() throws Exception {
 		accessAndClearData();
-		new PageFavoritos().clearAllArticulos();
+		PageFavoritos.make(dataTest.getPais()).clearAllArticulos();
 	}
 
 	private void articleOnlineTest() {

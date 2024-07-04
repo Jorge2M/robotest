@@ -6,8 +6,6 @@ import com.github.jorge2m.testmaker.domain.TestFromFactory;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 
-import static com.mng.robotest.testslegacy.data.PaisShop.*;
-
 import java.io.Serializable;
 
 public class Favoritos implements TestFromFactory, Serializable {
@@ -15,8 +13,8 @@ public class Favoritos implements TestFromFactory, Serializable {
 	private static final long serialVersionUID = -3932978752450813757L;
 	
 	private String indexFact = "";
-	private Pais pais = ESPANA.getPais();
-	private IdiomaPais idioma = pais.getListIdiomas().get(0);
+	private Pais pais;
+	private IdiomaPais idioma;
 
 	public Favoritos() {}
 
@@ -37,7 +35,11 @@ public class Favoritos implements TestFromFactory, Serializable {
 		groups={"Favoritos", "Smoke", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario registrado] Alta favoritos desde la galería")
 	public void altaFavoritosDesdeGaleria() throws Exception {
-		new Fav001(pais, idioma).execute();
+		if (pais==null) {
+			new Fav001().execute();
+		} else {
+			new Fav001(pais, idioma).execute();
+		}
 	}
 
 	@Test(
@@ -45,7 +47,11 @@ public class Favoritos implements TestFromFactory, Serializable {
 		groups={"Favoritos", "Smoke", "Canal:desktop,mobile_App:shop", "SupportsFactoryCountrys"}, alwaysRun=true, 
 		description="[Usuario no registrado] Alta favoritos desde la galería Mango-Home y posterior identificación")
 	public void altaFavoritosDesdeFicha() throws Exception {
-		new Fav002(pais, idioma).execute();
+		if (pais==null) {
+			new Fav002().execute();
+		} else {
+			new Fav002(pais, idioma).execute();
+		}
 	}
 	
 }

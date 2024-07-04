@@ -6,7 +6,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
+import com.mng.robotest.tests.domains.favoritos.steps.FavoritosSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMLYUnirmeAlClubSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
@@ -39,7 +39,7 @@ public class MenusUserSteps extends StepBase {
 		saveHtmlPage=IF_PROBLEM)
 	public void selectFavoritos() {
 		clickUserMenu(FAVORITOS);
-		new PageFavoritosSteps().checkPage();
+		new FavoritosSteps().checkPage();
 	}
 
 	@Step (
