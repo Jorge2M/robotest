@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.registro.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.pageobjects.CommonsRegisterObject;
@@ -42,7 +42,7 @@ public class Reg001 extends TestBase {
 	
 	private void accesoAndClickRegistrate() throws Exception {
 		access();
-		new SecMenusUserSteps().selectRegistrate();
+		new MenusUserSteps().selectRegistrate();
 	}	
 	
 	private void inputBirthDateAndConsentPersonalInfo() {
@@ -70,6 +70,7 @@ public class Reg001 extends TestBase {
 	private void inputPersonalizedDataAndClickGuardar() {
 		pgRegistroPersonalizacionSteps.inputData(dataNewRegister);
 		pgRegistroPersonalizacionSteps.clickGuardar();
+		new MenusUserSteps().isVisibleNameUser(dataNewRegister.getName(), 3);
 	}
 	
 	private void checkNewsletterSuscription() {
@@ -77,10 +78,13 @@ public class Reg001 extends TestBase {
 	}
 	
 	private void checkLoginAndUserData() {
-		new SecMenusUserSteps().logoffLogin(dataNewRegister.getEmail(), dataNewRegister.getPassword());
-		var pgMiCuentaSteps = new MiCuentaSteps();
-		pgMiCuentaSteps.goToMisDatosAndValidateData(dataNewRegister);
-		pgMiCuentaSteps.goToSuscripcionesAndValidateData(dataNewRegister.getLineas());
+		var menuUserSteps = new MenusUserSteps();
+		menuUserSteps.logoffLogin(dataNewRegister.getEmail(), dataNewRegister.getPassword());
+		menuUserSteps.isVisibleNameUser(dataNewRegister.getName(), 2);
+		
+		var miCuentaSteps = new MiCuentaSteps();
+		miCuentaSteps.goToMisDatosAndValidateData(dataNewRegister);
+		miCuentaSteps.goToSuscripcionesAndValidateData(dataNewRegister.getLineas());
 	}	
 
 	private boolean isCorea() {

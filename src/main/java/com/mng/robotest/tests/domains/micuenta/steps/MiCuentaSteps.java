@@ -9,7 +9,7 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageInfoNewMisComprasMovil;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
@@ -20,11 +20,11 @@ import static com.mng.robotest.tests.domains.micuenta.pageobjects.LinkMiCuenta.*
 public class MiCuentaSteps extends StepBase {
 	
 	private final PageMiCuenta pgMiCuenta = PageMiCuenta.make(dataTest.getPais(), app);
-	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
+	private final MenusUserSteps userMenusSteps = new MenusUserSteps();
 	
 	public void goTo() {
 		goToPortada();
-		new SecMenusUserSteps().clickMenuMiCuenta();
+		new MenusUserSteps().clickMenuMiCuenta();
 	}
 	
 	@Validation

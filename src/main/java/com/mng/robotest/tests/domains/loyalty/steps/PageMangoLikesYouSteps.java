@@ -8,7 +8,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps.ChecksResultWithNumberPoints;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps.ChecksResultWithNumberPoints;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes.*;

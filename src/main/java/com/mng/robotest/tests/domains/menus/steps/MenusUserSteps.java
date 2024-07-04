@@ -23,9 +23,15 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu.*;
 import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
-public class SecMenusUserSteps extends StepBase {
+public class MenusUserSteps extends StepBase {
 	
 	private final MenusUserWrapper userMenus = new MenusUserWrapper();
+	
+	@Validation(
+		description="En los menús de usuario es visible el nombre <b>#{nameUser}</b> " + SECONDS_WAIT)
+	public boolean isVisibleNameUser(String nameUser, int seconds) {
+		return userMenus.isNameVisible(nameUser, seconds);
+	}
 	
 	@Step (
 		description="Seleccionar el menú de usuario \"Favoritos\"", 

@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.reembolsos.steps;
 
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.tests.domains.reembolsos.pageobjects.PageReembolsos;
 import com.mng.robotest.tests.domains.reembolsos.pageobjects.PageReembolsos.TypeReembolso;
@@ -17,7 +17,7 @@ public class PageReembolsosSteps extends StepBase {
 	private final PageReembolsos pageReembolsos = new PageReembolsos(); 
 	
 	public void gotoRefundsFromMenu(boolean paisConSaldoCta) {
-		new SecMenusUserSteps().clickMenuMiCuenta();
+		new MenusUserSteps().clickMenuMiCuenta();
 		selectReembolsos(paisConSaldoCta);
 	}
 	

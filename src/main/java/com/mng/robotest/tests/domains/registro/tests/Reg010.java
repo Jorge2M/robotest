@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.registro.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMLYUnirmeAlClubSteps;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 
 public class Reg010 extends TestBase {
@@ -24,7 +24,7 @@ public class Reg010 extends TestBase {
 	
 	private void accesoAndClickMangoLikesYou() throws Exception {
 		access();
-		new SecMenusUserSteps().clickMenuMangoLikesYou();
+		new MenusUserSteps().clickMenuMangoLikesYou();
 	}	
 	
 	private void unirmeAlClub() {
@@ -34,7 +34,7 @@ public class Reg010 extends TestBase {
 	}
 	
 	private void checkLogin() {
-		new SecMenusUserSteps().logoffLogin(dataRegister.getEmail(), dataRegister.getPassword());
+		new MenusUserSteps().logoffLogin(dataRegister.getEmail(), dataRegister.getPassword());
 	}
 	
 }

@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.micuenta.tests;
 import java.net.URISyntaxException;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisDatosSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
@@ -38,7 +38,7 @@ public class Mic004 extends TestBase {
 
 	private void accesoAndClickRegistrate() throws Exception {
 		access();
-		new SecMenusUserSteps().selectRegistrate();
+		new MenusUserSteps().selectRegistrate();
 	}	
 	
 	private void inputInitialDataAndClickCreate() {
@@ -49,7 +49,7 @@ public class Mic004 extends TestBase {
 	
 	private void clickLogoMangoAndLogoff() {
 		new SecCabeceraSteps().selecLogo();
-		new SecMenusUserSteps().logoff();
+		new MenusUserSteps().logoff();
 	}
 	
 	private void openUrlAccountBajaInNewBrowser() throws URISyntaxException {
@@ -62,7 +62,7 @@ public class Mic004 extends TestBase {
 		
 		new AccesoSteps().login(user, password);		
 		new PageMisDatosSteps().confirmCancelarCuenta();		
-		new SecMenusUserSteps().logoff();
+		new MenusUserSteps().logoff();
 		new AccesoSteps().inicioSesionDatosKO(user, password);
 	}	
 

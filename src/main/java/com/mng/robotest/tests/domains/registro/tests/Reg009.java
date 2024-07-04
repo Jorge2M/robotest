@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.registro.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.exceptions.CustomerNotCreatedException;
 import com.mng.robotest.tests.domains.registro.steps.CustomerRepositorySteps;
@@ -37,7 +37,7 @@ public class Reg009 extends TestBase {
 	
 	private void accesoAndClickRegistrate() throws Exception {
 		access();
-		new SecMenusUserSteps().selectRegistrate();
+		new MenusUserSteps().selectRegistrate();
 	}	
 	
 	private void inputInitialDataAndClickCreate() {

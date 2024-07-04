@@ -30,6 +30,12 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		}
 	}
 	
+	private static final String XP_USER_LOGGED = "//p[@class[contains(.,'userLogged')]]";
+	
+	private String getXPathUserLogged(String nameUser) {
+		return XP_USER_LOGGED + "//self::*[text()[contains(.,'" + nameUser + "')]]";
+	}
+	
 	public boolean isVisible() {
 		return isVisibleUntil(0);
 	}
@@ -43,6 +49,10 @@ public class ModalUserSesionShopDesktop extends PageBase {
 	
 	public boolean isMenuInStateUntil(MenuUserDesktop menu, State state, int seconds) {
 		return state(state, menu.getBy()).wait(seconds).check();
+	}
+	
+	public boolean isNameVisible(String name, int seconds) {
+		return state(VISIBLE, getXPathUserLogged(name)).wait(seconds).check();
 	}
 	
 	public void wait1sForItAndclickMenu(MenuUserDesktop menu) {
@@ -67,4 +77,5 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		moveToElement(menu.getBy());
 		clickMenu(menu);
 	}
+	
 }

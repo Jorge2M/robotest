@@ -7,7 +7,7 @@ import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 
@@ -53,7 +53,7 @@ public class Fav001 extends TestBase {
 	}	
 
 	private void goToFavorites() {
-		new SecMenusUserSteps().selectFavoritos();
+		new MenusUserSteps().selectFavoritos();
 	}	
 
 	private void clearFirstFavorite() {

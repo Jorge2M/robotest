@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageResultPago;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps.ChecksResultWithNumberPoints;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps.ChecksResultWithNumberPoints;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.tests.domains.micuenta.steps.PageAccesoMisComprasSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;

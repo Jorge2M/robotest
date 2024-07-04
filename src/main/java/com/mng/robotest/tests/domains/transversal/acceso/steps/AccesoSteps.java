@@ -12,7 +12,7 @@ import com.mng.robotest.tests.domains.base.datatest.DataTest;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.login.steps.PageIdentificacionSteps;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
 import com.mng.robotest.tests.domains.transversal.browser.LocalStorageMango;
 import com.mng.robotest.tests.domains.transversal.prehome.steps.PagePrehomeSteps;
@@ -175,7 +175,7 @@ public class AccesoSteps extends StepBase {
 	public void inicioSesionDatosKO(String usuario, String password) {
 		new AccesoFlows().identification(usuario, password);
 		new PageIdentificacionSteps().checkTextoCredencialesKO();
-		new SecMenusUserSteps().checkIsInvisibleLinkCerrarSesion();
+		new MenusUserSteps().checkIsInvisibleLinkCerrarSesion();
 		checksDefault();	
 	}
 	

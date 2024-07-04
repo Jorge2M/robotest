@@ -9,7 +9,7 @@ import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -66,7 +66,7 @@ public class Fav002 extends TestBase {
 	}	
 	
 	private void goToFavoritesAndCheckSharedFavorites() {
-		new SecMenusUserSteps().selectFavoritos();
+		new MenusUserSteps().selectFavoritos();
 		pageFavoritosSteps.clickShareIsOk();
 		pageFavoritosSteps.closeShareModal();
 	}	
@@ -82,7 +82,7 @@ public class Fav002 extends TestBase {
 
 	private void clearFirstFavoriteFromFavorites() {
 		var firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
-		new SecMenusUserSteps().selectFavoritos();
+		new MenusUserSteps().selectFavoritos();
 		pageFavoritosSteps.clear(firstFavorite);
 	}	
 }

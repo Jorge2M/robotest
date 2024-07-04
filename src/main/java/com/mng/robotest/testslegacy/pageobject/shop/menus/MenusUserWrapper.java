@@ -104,6 +104,22 @@ public class MenusUserWrapper extends PageBase {
 		}
 	}
 	
+	public boolean isNameVisible(String name, int seconds) {
+		openMenus();
+		if (isDevice()) {
+			return new SecMenusUserDevice().isNameVisible(name, seconds);
+		}
+		return secCabecera.getModalUserSesionDesktop().isNameVisible(name, seconds);
+	}
+	
+	public void openMenus() {
+		if (isDevice()) {
+			secCabecera.clickIconoMenuHamburguerMobil(true);
+		} else {
+			secCabecera.hoverIconForShowUserMenuDesktop();
+		}
+	}
+	
 	private void clickMenuAndWait(MenuUserItem menu) {
 		var menuLink = menu.getLink();
 		switch (menu.getType()) {
