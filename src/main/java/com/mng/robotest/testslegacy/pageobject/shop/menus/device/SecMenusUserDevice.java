@@ -25,7 +25,7 @@ public class SecMenusUserDevice extends PageBase {
 		PEDIDOS(
 			XP_ITEM + "/self::*[@href[contains(.,'mypurchases')]]"),
 		CERRAR_SESION(
-			"//*[@href[contains(.,'/logout')] or text()='Cerrar sesión']"), //Necesitamos el data-testid de la parte Genesis (Outlet)
+			"//*[@href[contains(.,'/logout')] or text()='Cerrar sesión' or text()='Sign out']"), //Necesitamos el data-testid de la parte Genesis (Outlet)
 		FAVORITOS(
 			XP_ITEM + "//self::*[@href[contains(.,'favorites')]]"),
 		INICIAR_SESION(
