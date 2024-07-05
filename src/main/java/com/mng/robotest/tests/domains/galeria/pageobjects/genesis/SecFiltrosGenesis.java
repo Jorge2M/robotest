@@ -1,7 +1,6 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.genesis;
 
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.mng.robotest.tests.domains.base.PageBase;
@@ -262,8 +261,9 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		}
 		boolean found = false;
 		for (var labelFiltro : labelsFiltro) {
-			Matcher matcher = labelExpected.matcher(labelFiltro.getText());
-			if (matcher.matches()) {
+			String filtroLabel = labelFiltro.getText();
+			var matcher = labelExpected.matcher(labelFiltro.getText());
+			if (filtroLabel.contains(labelExpected.toString()) || matcher.matches()) {
 				found = true;
 				break;
 			}

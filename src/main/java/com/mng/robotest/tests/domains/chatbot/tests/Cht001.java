@@ -3,6 +3,7 @@ package com.mng.robotest.tests.domains.chatbot.tests;
 import java.util.Arrays;
 
 import com.mng.robotest.tests.domains.base.TestBase;
+import com.mng.robotest.tests.domains.chatbot.beans.AnswersExpected;
 import com.mng.robotest.tests.domains.chatbot.steps.ModalChatBotNewSteps;
 import com.mng.robotest.tests.domains.chatbot.steps.ModalChatBotOldSteps;
 import com.mng.robotest.tests.domains.chatbot.steps.ModalChatBotSteps;
@@ -78,13 +79,14 @@ public class Cht001 extends TestBase {
 	
 	private void checkComoSaberMiTallaResponse() {
 		var chatBotSteps = new ModalChatBotNewSteps();
-		var answersExpected = Arrays.asList(
+		var answersExpected = new AnswersExpected (Arrays.asList(
 			"Puedes consultar la guía de tallas",
-			"Consulta nuestra \"Guía de tallas\", disponible en cada artículo",
+			"nuestra \"Guía de tallas\", disponible en cada artículo",
 			"Puedes consultar la talla de cada artículo",
 			"Puedes encontrar la guía de tallas",
+			"Puedes saber tu talla consultando nuestra \"Guía de tallas\"",
 			"Puedes consultar la \"Guía de tallas\" disponible en cada artículo",
-			"Puedes consultar las tallas en las que se ha fabricado de cada artículo");
+			"Puedes consultar las tallas en las que se ha fabricado de cada artículo"));
 		chatBotSteps.checkAnyResponseVisible(answersExpected, 6);		
 		chatBotSteps.close();
 	}
@@ -94,14 +96,15 @@ public class Cht001 extends TestBase {
 		chatBotSteps.clickIcon();
 		String question = "Cómo encontrar un producto por su referencia";
 		chatBotSteps.inputQuestion(question);
-		var answersExpected = Arrays.asList(
+		var answersExpected = new AnswersExpected(Arrays.asList(
 			"Puedes encontrar un producto por su referencia utilizando",
-			"Puedes encontrar un producto por su referencia introduciendo");
+			"Puedes encontrar un producto por su referencia introduciendo",
+			"Puedes encontrar un producto por su referencia introduciéndola"));
 		chatBotSteps.checkAnyResponseVisible(answersExpected, 6);
 		
 		chatBotSteps.isVisibleYesButton(5);
 		chatBotSteps.clickYesButton();
-		chatBotSteps.checkResponseVisible("Muchas gracias", "¿Puedo hacer algo más por ti?", 6);
+		chatBotSteps.checkResponseVisible("Muchas gracias", "¿Puedo hacer algo más por ti?", 8);
 		chatBotSteps.close();
 	}
 	
