@@ -22,10 +22,14 @@ public interface PageFavoritos {
 	boolean isListEmpty();
 	
 	public static PageFavoritos make(Pais pais) {
-		if (PaisShop.ANDORRA.isEquals(pais)) {
+		if (isGenesis(pais)) {
 			return new PageFavoritosGenesis();
 		}
 		return new PageFavoritosOld();
+	}
+	
+	public static boolean isGenesis(Pais pais) {
+		return PaisShop.ANDORRA.isEquals(pais);
 	}
 	
 }

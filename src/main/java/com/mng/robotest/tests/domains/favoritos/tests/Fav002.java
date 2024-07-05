@@ -5,6 +5,7 @@ import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaTyp
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.favoritos.pageobjects.PageFavoritos;
 import com.mng.robotest.tests.domains.favoritos.steps.FavoritosSteps;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
@@ -41,6 +42,10 @@ public class Fav002 extends TestBase {
 		clearFirstFavoriteFromFavorites();		
 	}
 	
+	private boolean isGenesis() {
+		return PageFavoritos.isGenesis(dataTest.getPais());
+	}
+	
 	private void accessWithoutLoginAndClearData() throws Exception {
 		dataTest.setUserRegistered(false);
 		access();
@@ -71,8 +76,10 @@ public class Fav002 extends TestBase {
 	
 	private void goToFavoritesAndCheckSharedFavorites() {
 		new MenusUserSteps().selectFavoritos();
-		pageFavoritosSteps.clickShareIsOk();
-		pageFavoritosSteps.closeShareModal();
+		if (!isGenesis()) {
+			pageFavoritosSteps.clickShareIsOk();
+			pageFavoritosSteps.closeShareModal();
+		}
 	}	
 	
 	private void selectFirstFavoriteAndAddBolsa() {
