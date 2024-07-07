@@ -13,6 +13,7 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.SecSliders.Slider;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecFitFinder;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProduct.ItemBreadcrumb;
+import com.mng.robotest.tests.domains.landings.pageobjects.banners.UtilsBanners;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
@@ -36,6 +37,13 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	private static final String XP_PRICE_CURRENT = XP_WRAPPER_PRICES + "//*[@data-testid='currentPrice']";
 	private static final String XP_PRICE_TACHADO = XP_WRAPPER_PRICES + "//*[@data-testid='crossedOutPrice']";
 	private static final String XP_DISPONIBILIDAD_TIENDA_BUTTON = "//*[@data-testid='pdp.productInfo.storeFinder']";
+	private static final String XP_IMAGE_CENTRAL = "//*[@data-testid='pdp.gallery.image']/img";
+	private static final String XP_KC_SAFETY = "//*[@data-testid='pdp.productDetails.kcSafety']";
+	private static final String XP_MODAL_DATOS_ENVIO = "//dialog[@id='shipping-returns-modal']";
+	private static final String XP_CLOSE_MODAL_DATOS_ENVIO = XP_MODAL_DATOS_ENVIO + "//*[@data-testid='modal.close.button']";
+	private static final String XP_ADD_BORDADO = "//div[@class[contains(.,'Customization')]]//button";
+	private static final String XP_ZOOM_IMAGE = "//*[@data-testid='pdp.zoom.image']";
+	private static final String XP_CLOSE_ZOOM_X = "//*[@data-testid='modal.close.button']";
 	
 	private String getXPathPageArticulo(String reference) {
 		return XP_PAGE_ARTICLE + "//self::*[text()[contains(.,'" + reference + "')]]";
@@ -332,15 +340,10 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 		throw new UnsupportedOperationException();
 	}
 	
-	private static final String XP_KC_SAFETY = "//*[@data-testid='pdp.productDetails.kcSafety']";
-	
 	@Override
 	public boolean isVisibleBlockKcSafety() {
 		return state(VISIBLE, XP_KC_SAFETY).check();
 	}
-	
-	private static final String XP_MODAL_DATOS_ENVIO = "//dialog[@id='shipping-returns-modal']";
-	private static final String XP_CLOSE_MODAL_DATOS_ENVIO = XP_MODAL_DATOS_ENVIO + "//*[@data-testid='modal.close.button']";
 	
 	@Override
 	public boolean isVisibleModalDatosEnvio(int seconds) {
@@ -365,8 +368,6 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 		secFitFinder.close();
 	}
 	
-	private static final String XP_ADD_BORDADO = "//div[@class[contains(.,'Customization')]]//button";
-	
 	@Override
 	public boolean isLinkAddBordado(int seconds) {
 		return state(VISIBLE, XP_ADD_BORDADO).wait(seconds).check();
@@ -374,6 +375,54 @@ public class PageFichaGenesis extends PageBase implements PageFicha {
 	@Override
 	public void clickAddBordado() {
 		click(XP_ADD_BORDADO).exec();
+	}
+
+	@Override
+	public String getSrcImagenCentralDevice() {
+		var imageSet = getElement(XP_IMAGE_CENTRAL);
+		var srcSet = imageSet.getAttribute("srcset");
+		if (srcSet==null) {
+			return "";
+		}
+		return UtilsBanners.getFirstImageFromSrcset(srcSet);
+	}
+
+	@Override
+	public void clickImagenCentralDevice() {
+		click(XP_IMAGE_CENTRAL).exec();
+	}
+
+	@Override
+	public boolean isVisibleFichaConZoomDevice(int seconds) {
+		return state(VISIBLE, XP_ZOOM_IMAGE).wait(seconds).check();
+	}
+
+	@Override
+	public boolean srcImagenCentralConZoomContainsDevice(String pngImgCentralOriginal) {
+		var imageSet = getElement(XP_ZOOM_IMAGE);
+		var srcSet = imageSet.getAttribute("srcset");
+		String imageZoomSrc = "";
+		if (srcSet!=null) {
+			imageZoomSrc = UtilsBanners.getFirstImageFromSrcset(srcSet);
+		}
+		
+		String imgOriginal = removeAfterQuestionMark(pngImgCentralOriginal);
+		String imgZoom = removeAfterQuestionMark(imageZoomSrc);
+		return imgOriginal.compareTo(imgZoom)==0;
+	}
+
+	@Override
+	public void closeZoomImageCentralDevice() {
+		click(XP_CLOSE_ZOOM_X).exec();
 	}	
+	
+    private static String removeAfterQuestionMark(String input) {
+        int index = input.indexOf("?");
+        if (index != -1) {
+            return input.substring(0, index);
+        } else {
+            return input; 
+        }
+    }
 	
 }

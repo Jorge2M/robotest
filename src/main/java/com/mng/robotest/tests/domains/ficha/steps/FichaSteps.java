@@ -533,22 +533,23 @@ public class FichaSteps extends StepBase {
 	@Step (
 		description="Seleccionar la imagen/ficha central",
 		expected="Se produce un zoom sobre la imagen")
-	public void selectImagenCentralFichaOld() {
-		String pngImgCentralOriginal = ((PageFichaDeviceNoGenesis)pageFicha).getSrcImagenCentral();
-		((PageFichaDeviceNoGenesis)pageFicha).clickImagenFichaCentral();
+	public void selectImagenCentralFichaDevice() {
+		String pngImgCentralOriginal = pageFicha.getSrcImagenCentralDevice();
+		pageFicha.clickImagenCentralDevice();
 		checkImgCentralAfterZoom(pngImgCentralOriginal);
 	}
 
 	@Validation
 	public ChecksTM checkImgCentralAfterZoom(String pngImgCentralOriginal) {
 		var checks = ChecksTM.getNew();
+		int seconds = 2;
 		checks.add(
-			"Se aplica un Zoom sobre la imagen central",
-			((PageFichaDeviceNoGenesis)pageFicha).isVisibleFichaConZoom());
+			"Se aplica un Zoom sobre la imagen central " + getLitSecondsWait(seconds),
+			pageFicha.isVisibleFichaConZoomDevice(seconds));
 
 		checks.add(
 			"La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal,
-			((PageFichaDeviceNoGenesis)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal));
+			pageFicha.srcImagenCentralConZoomContainsDevice(pngImgCentralOriginal));
 
 		return checks;
 	}
@@ -557,13 +558,13 @@ public class FichaSteps extends StepBase {
 		description="Seleccionar el aspa para cerrar la imagen central con Zoom",
 		expected="La imagen con Zoom desaparece")
 	public void closeZoomImageCentralDevice() {
-		((PageFichaDeviceNoGenesis)pageFicha).closeZoomImageCentralDevice();
+		pageFicha.closeZoomImageCentralDevice();
 	}
 
 	@Validation (
 		description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)")
 	private boolean checkZoomImageCentralDissapeared() {
-		return !((PageFichaDeviceNoGenesis)pageFicha).isVisibleFichaConZoom();
+		return !pageFicha.isVisibleFichaConZoomDevice(0);
 	}
 
 	@Validation

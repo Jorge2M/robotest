@@ -97,7 +97,7 @@ public class Fic002 extends TestBase {
 		}
 
 		if (channel!=Channel.tablet) {
-			fichaSteps.selectImagenCentralFichaOld();
+			fichaSteps.selectImagenCentralFichaDevice();
 			if (channel.isDevice()) {
 				fichaSteps.closeZoomImageCentralDevice();
 			}
