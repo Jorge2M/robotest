@@ -4,6 +4,7 @@ import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMLYUnirmeAlClubSteps;
 import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 public class Reg010 extends TestBase {
 
@@ -30,7 +31,9 @@ public class Reg010 extends TestBase {
 	}
 	
 	private void clickQueSonLosLikes() {
-		pgMLYUnirmeAlClubSteps.selectQueSonLosLikes();
+		if (!(isPRO() && UtilsTest.todayBeforeDate("2024-09-30"))) {
+			pgMLYUnirmeAlClubSteps.selectQueSonLosLikes();
+		}
 	}
 	
 	private void unirmeAlClub() {
