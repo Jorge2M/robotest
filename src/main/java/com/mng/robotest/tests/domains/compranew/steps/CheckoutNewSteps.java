@@ -1,5 +1,6 @@
 package com.mng.robotest.tests.domains.compranew.steps;
 
+import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
@@ -28,7 +29,9 @@ public class CheckoutNewSteps extends StepBase {
 		isPageCheckout(10); 
 	}	
 	
-	@Step (description="Seleccionar el botón <b>Continue as guest</b>")
+	@Step (
+		description="Seleccionar el botón <b>Continue as guest</b>",
+		saveHtmlPage=SaveWhen.IF_PROBLEM)
 	public void continueAsGuestDesktop() {
 		pIdentCheckoutDesktop.continueAsGuest();
 	}

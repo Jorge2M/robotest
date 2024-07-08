@@ -8,6 +8,7 @@ import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 public class Reg010 extends TestBase {
 
 	private final DataNewRegister dataRegister = makeDataRegister();
+	private final PageMLYUnirmeAlClubSteps pgMLYUnirmeAlClubSteps = new PageMLYUnirmeAlClubSteps();
 
 	private DataNewRegister makeDataRegister() {
 		var dataNewRegister = DataNewRegister.makeDefault(dataTest.getPais());
@@ -17,18 +18,22 @@ public class Reg010 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		accesoAndClickMangoLikesYou();
+		access();
+		clickMangoLikesYou();
+		clickQueSonLosLikes();
 		unirmeAlClub();
 		checkLogin();
 	}
 	
-	private void accesoAndClickMangoLikesYou() throws Exception {
-		access();
+	private void clickMangoLikesYou() {
 		new MenusUserSteps().clickMenuMangoLikesYou();
-	}	
+	}
+	
+	private void clickQueSonLosLikes() {
+		pgMLYUnirmeAlClubSteps.selectQueSonLosLikes();
+	}
 	
 	private void unirmeAlClub() {
-		var pgMLYUnirmeAlClubSteps = new PageMLYUnirmeAlClubSteps();
 		pgMLYUnirmeAlClubSteps.selectUnirmeAlClub();
 		pgMLYUnirmeAlClubSteps.registro(dataRegister);
 	}
