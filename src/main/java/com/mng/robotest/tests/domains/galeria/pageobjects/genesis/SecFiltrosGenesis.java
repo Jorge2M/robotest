@@ -32,13 +32,14 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		}
 	}
 
-	private static final String XP_BUTTON_FILTRAR_DESKTOP = "//*[@data-testid='plp.filters.desktop.button']";
-	private static final String XP_BUTTON_FILTRAR_MOBIL = "//*[@data-testid='plp.filters.mobile.button']";
-	private static final String XP_PANEL_FILTRO_MOBIL = "//*[@data-testid='plp.filters.mobile.panel']";
-	private static final String XP_LABEL_FILTRO_DESKTOP = XP_BUTTON_FILTRAR_DESKTOP + "//following-sibling::ul/li/span";
-	private static final String XP_LABEL_FILTRO_MOBIL = XP_PANEL_FILTRO_MOBIL + "//div[@class[contains(.,'Element_subtitle')]]";
+	private static final String XP_BUTTON_FILTRAR = "//*["
+			+ "@data-testid='plp.filters.desktop.button' or "
+			+ "@data-testid='plp.filters.mobile.button']";
+
+	private static final String XP_LABEL_FILTRO_DESKTOP = XP_BUTTON_FILTRAR + "//following-sibling::ul/li/span";
+	private static final String XP_LABEL_FILTRO_MOBIL = XP_BUTTON_FILTRAR + "//div[@class[contains(.,'Element_subtitle')]]";
 	
-	private static final String XP_WRAPPER_DESKTOP = XP_BUTTON_FILTRAR_DESKTOP + "/../..";
+	private static final String XP_WRAPPER_DESKTOP = XP_BUTTON_FILTRAR + "/../..";
 	private static final String XP_WRAPPER_MOBIL = "//*[@data-testid='plp.filters.mobile.panel']";
 	
 	private static final String XP_CAPA_FILTERS = "//*[@data-testid='plp.filters.desktop.panel']"; //
@@ -59,13 +60,6 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 			return XP_WRAPPER_MOBIL;
 		}
 		return XP_WRAPPER_DESKTOP;
-	}
-	
-	private String getXPathButtonFiltrar() {
-		if (isDevice()) {
-			return XP_BUTTON_FILTRAR_MOBIL;
-		}
-		return XP_BUTTON_FILTRAR_DESKTOP;
 	}
 	
 	private String getXPathLabelFiltro() {
@@ -167,7 +161,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	@Override
 	public void showFilters() {
 		if (!isFiltersShopVisible(1) &&
-			state(CLICKABLE, getXPathButtonFiltrar()).check()) {
+			state(CLICKABLE, XP_BUTTON_FILTRAR).check()) {
 			clickFilterAndSortButton();
 			isFiltersShopVisible(1);
 		}
@@ -175,7 +169,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	
 	@Override
 	public void clickFilterAndSortButton() {
-		click(getXPathButtonFiltrar()).exec();
+		click(XP_BUTTON_FILTRAR).exec();
 	}
 	
 	private void hideFilters() {
