@@ -30,7 +30,7 @@ public interface PageFavoritos {
 	}
 	
 	public static boolean isGenesis(Pais pais, AppEcom app) {
-		return UtilsTest.paisConCompra(pais, app);
+		return !UtilsTest.paisConCompra(pais, app);
 	}
 	
 }
