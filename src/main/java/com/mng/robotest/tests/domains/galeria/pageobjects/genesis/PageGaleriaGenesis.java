@@ -521,7 +521,8 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	
 	private String getCodColorArticulo(WebElement articulo) {
 		String urlFicha = getElement(articulo, "." + XP_URL_FICHA_ARTICLE).getAttribute("href");
-		return UtilsPageGaleria.getReferenciaAndCodColorFromURLficha(urlFicha);
+		String refAndColor = UtilsPageGaleria.getReferenciaAndCodColorFromURLficha(urlFicha);
+		return refAndColor.substring(refAndColor.length() - 2);
 	}
 	
 	public String getNameColorFromCodigo(String codigoColor) {

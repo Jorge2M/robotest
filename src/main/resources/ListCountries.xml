@@ -1283,7 +1283,7 @@
 <codpos>08720</codpos>
 <telefono>67573733</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop</tiendas_online>
+<tiendas_online></tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
