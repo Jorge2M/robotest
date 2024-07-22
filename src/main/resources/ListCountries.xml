@@ -1050,6 +1050,7 @@
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Lithuania" codigo="055">
@@ -2581,7 +2582,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 </linea>
 </shoponline>
-<multidireccion>N</multidireccion>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
@@ -2597,6 +2597,8 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
+<multidireccion>N</multidireccion>	
+<newcheckout>shop</newcheckout>	
 </pais>
 
 <pais nombre_pais="Guatemala" codigo="416">
@@ -3057,6 +3059,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="France (Guyane Française)" codigo="496">
@@ -3102,6 +3105,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Honduras" codigo="424">
