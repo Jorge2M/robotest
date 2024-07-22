@@ -43,7 +43,7 @@ public class Fav002 extends TestBase {
 	}
 	
 	private boolean isGenesis() {
-		return PageFavoritos.isGenesis(dataTest.getPais());
+		return PageFavoritos.isGenesis(dataTest.getPais(), app);
 	}
 	
 	private void accessWithoutLoginAndClearData() throws Exception {

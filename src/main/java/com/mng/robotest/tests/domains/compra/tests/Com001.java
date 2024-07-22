@@ -30,11 +30,12 @@ public class Com001 extends TestBase {
 	public void execute() throws Exception {
 		accessLoginAndClearBolsa();
 		altaArticulosBolsaAndClickComprar(2);
-		if (!isPRO() && !isTarjetaVisaSaved()) {
+		boolean isPro = isPRO();
+		if (!isPro && !isTarjetaVisaSaved()) {
 			execPaymentSavingCardAndRepeatCheckout();
 		}
 		checkPromoEmployee();
-		if (!isPRO()) {
+		if (!isPro) {
 			executeVisaPaymentSelectingSaveCard();
 			checkMisCompras();
 			checkMisDatos();

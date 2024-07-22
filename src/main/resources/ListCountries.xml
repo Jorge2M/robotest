@@ -2307,14 +2307,28 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codpos>087201</codpos>
 <telefono>6007171</telefono>
 <dni>34763592N</dni>
-<tiendas_online></tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
-<linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" 
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="VISA ELECTRON" testpasarela='s'></pago>
+<multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -2639,7 +2653,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <newcheckout>shop</newcheckout>
 </pais>
 
-<!-- 
 <pais nombre_pais="Honduras" codigo="424">
 <codigo_pais>424</codigo_pais>
 <codigo_alf>HN</codigo_alf>
@@ -2677,7 +2690,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 </pais>
--->
 
 <pais nombre_pais="México" codigo="412">
 <codigo_pais>412</codigo_pais>
@@ -3303,15 +3315,28 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <idioma acceso="nz">IN</idioma>
 <codpos>6011</codpos>
 <telefono>211234567</telefono>
-<tiendas_online></tiendas_online>
-<register nuevo="S" cpost="S" publi="N"/>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" 
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Nouvelle-Calédonie" codigo="809">
@@ -3338,15 +3363,28 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <idioma acceso="pg">IN</idioma>
 <codpos>121</codpos>
 <telefono>71234567</telefono>
-<tiendas_online></tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" 
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 </continente>
@@ -3822,15 +3860,28 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codpos>08720</codpos>
 <telefono>2059888463</telefono>
 <dni>34763592N</dni>
-<tiendas_online></tiendas_online>
-<register nuevo="S" cpost="S" publi="N"/>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
-<linea id="HE"        shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINA"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINO"      shop="n" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" 
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Jordan" codigo="628">
@@ -4128,15 +4179,28 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codpos>08720</codpos>
 <telefono>80940032</telefono>
 <dni>34763592N</dni>
-<tiendas_online></tiendas_online>
-<register nuevo="S" cpost="S" publi="N"/>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" 
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Oman" codigo="649">
@@ -4345,15 +4409,29 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <idioma acceso="bn">IN</idioma>
 <codpos>BB1110</codpos>
 <telefono>8712345</telefono>
-<tiendas_online></tiendas_online>
+<dni>00123456A</dni>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" 
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Singapore" codigo="706">
@@ -4708,15 +4786,28 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <codpos>008720</codpos>
 <telefono>912345678</telefono>
 <dni>34763592N</dni>
-<tiendas_online></tiendas_online>
-<register nuevo="S" cpost="S" publi="N"/>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" 
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Bénin" codigo="284">
@@ -5018,15 +5109,28 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <idioma acceso="gq">ES</idioma>
 <codpos>08720</codpos>
 <telefono>222123456</telefono>
-<tiendas_online></tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" 
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Kenya" codigo="346">
@@ -5069,15 +5173,28 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <idioma acceso="ga">FR</idioma>
 <codpos>BP2120</codpos>
 <telefono>62123456</telefono>
-<tiendas_online></tiendas_online>
-<register nuevo="S" cpost="S" publi="N"/>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" 
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Gambia" codigo="252">
@@ -5086,15 +5203,28 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <idioma acceso="gm">IN</idioma>
 <codpos>08720</codpos>
 <telefono>7221234</telefono>
-<tiendas_online></tiendas_online>
-<register nuevo="S" cpost="S" publi="N"/>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" 
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Libya" codigo="216">
@@ -5479,15 +5609,28 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <idioma acceso="tg">IN</idioma>
 <codpos>08720</codpos>
 <telefono>90123456</telefono>
-<tiendas_online></tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
-<linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINA"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea id="NINO"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
+<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
+	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
+</linea>
 </shoponline>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet" 
+	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="MASTERCARD" testpasarela='s' testpago='s' tipotarj='VISAD3D' numtarj="5454545454545454" mescad="03" anycad="2030" cvc="737" usrd3d="user" passd3d="password"></pago>
+<pago 
+	type="TRJintegrada" tiendas="shop,outlet"
+	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <!-- <pais nombre_pais="Tunisia" codigo="212">-->

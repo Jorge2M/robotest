@@ -1,7 +1,8 @@
 package com.mng.robotest.tests.domains.favoritos.pageobjects;
 
+import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.data.PaisShop;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 public interface PageFavoritos {
 
@@ -21,15 +22,15 @@ public interface PageFavoritos {
 	void clickProducto(String refProducto, String codigoColor);
 	boolean isListEmpty();
 	
-	public static PageFavoritos make(Pais pais) {
-		if (isGenesis(pais)) {
+	public static PageFavoritos make(Pais pais, AppEcom app) {
+		if (isGenesis(pais, app)) {
 			return new PageFavoritosGenesis();
 		}
 		return new PageFavoritosOld();
 	}
 	
-	public static boolean isGenesis(Pais pais) {
-		return PaisShop.ANDORRA.isEquals(pais);
+	public static boolean isGenesis(Pais pais, AppEcom app) {
+		return UtilsTest.paisConCompra(pais, app);
 	}
 	
 }

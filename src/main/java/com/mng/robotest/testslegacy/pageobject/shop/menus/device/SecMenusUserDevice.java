@@ -14,7 +14,9 @@ public class SecMenusUserDevice extends PageBase {
 
 	private final SecCabecera secCabecera = SecCabecera.make();
 
-	private static final String XP_ITEM = "//a[@class[contains(.,'icon-outline')] or @class[contains(.,'UserLinks_item')]]";
+	private static final String XP_ITEM = "//a["
+			+ "@class[contains(.,'icon-outline')] or "
+			+ "@class[contains(.,'UserLinks_item')]]";
 	
 	public enum MenuUserDevice implements ElementPage {
 		
@@ -27,7 +29,7 @@ public class SecMenusUserDevice extends PageBase {
 		CERRAR_SESION(
 			"//*[@href[contains(.,'/logout')] or text()='Cerrar sesión' or text()='Sign out']"), //Necesitamos el data-testid de la parte Genesis (Outlet)
 		FAVORITOS(
-			XP_ITEM + "//self::*[@href[contains(.,'favorites')]]"),
+			"//*[@data-testid='header.userMenu.favorites_any']"),
 		INICIAR_SESION(
 			XP_ITEM + "/self::*[@href[contains(.,'login')]]"),
 		REGISTRATE(

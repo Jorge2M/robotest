@@ -44,7 +44,7 @@ public class ModalMultidirectionSteps extends StepBase {
 		expected="Aparece el modal para la introducción de los datos de la nueva dirección")
 	public void clickAnyadirOtraDireccion() {
 		modalMultidirection.clickAnyadirOtraDireccion();
-		new ModalDirecEnvioNewSteps().checkIsVisible(3);
+		new ModalDirecEnvioNewSteps().checkIsVisible(5);
 		checksDefault();
 	}
 

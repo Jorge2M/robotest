@@ -13,7 +13,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class FavoritosSteps extends StepBase {
 	
-	private final PageFavoritos pgFavoritos = PageFavoritos.make(dataTest.getPais());
+	private final PageFavoritos pgFavoritos = PageFavoritos.make(dataTest.getPais(), app);
 	
 	public PageFavoritos getPageFavoritos() {
 		return pgFavoritos;
