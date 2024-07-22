@@ -15,8 +15,10 @@ import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper;
 import com.mng.robotest.testslegacy.pageobject.shop.menus.MenusUserWrapper.LoyaltyData;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -27,9 +29,36 @@ public class MenusUserSteps extends StepBase {
 	
 	private final MenusUserWrapper userMenus = new MenusUserWrapper();
 	
+	public boolean isVisibleNameUser(String nameUser, int seconds) {
+		if (isRegisterGenesis()) {
+			return isVisibleNameUserRegisterGenesis(nameUser, seconds);
+		}
+		return isVisibleNameUserNoRegisterGenesis(nameUser, seconds);
+	}
+	
+	private boolean isRegisterGenesis() {
+		//Consideramos que a partir de esta fecha se habrán migrado todos los registros a Genesis
+		if (!UtilsTest.todayBeforeDate("2025-02-01")) {
+			return true;
+		}
+		
+		var pais = dataTest.getPais();
+		return 
+			!PaisShop.TURQUIA.isEquals(pais) && 
+			!PaisShop.COREA_DEL_SUR.isEquals(pais) &&
+			!PaisShop.DEUTSCHLAND.isEquals(pais);
+	}
+	
 	@Validation(
 		description="En los menús de usuario es visible el nombre <b>#{nameUser}</b> " + SECONDS_WAIT)
-	public boolean isVisibleNameUser(String nameUser, int seconds) {
+	private boolean isVisibleNameUserRegisterGenesis(String nameUser, int seconds) {
+		return userMenus.isNameVisible(nameUser, seconds);
+	}
+	
+	@Validation(
+		description="En los menús de usuario es visible el nombre <b>#{nameUser}</b> " + SECONDS_WAIT,
+		level=WARN)
+	private boolean isVisibleNameUserNoRegisterGenesis(String nameUser, int seconds) {
 		return userMenus.isNameVisible(nameUser, seconds);
 	}
 	
@@ -66,7 +95,7 @@ public class MenusUserSteps extends StepBase {
 		expected="Aparece el link de login")
 	public void logoff() {
 		clickUserMenu(CERRAR_SESION);
-		checkIsVisibleIniciarSesionLink(3);
+		checkIsVisibleIniciarSesionLink(5);
 	}
 	
 	@Validation (

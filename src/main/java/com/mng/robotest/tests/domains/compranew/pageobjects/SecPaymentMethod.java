@@ -108,7 +108,7 @@ public class SecPaymentMethod extends PageBase {
 	
 	private boolean goToIframeInputsCard(int seconds) {
 		for (int i=0; i<=seconds; i++) {
-			if (goToIframe("cardFormIframe")) {
+			if (goToIframe("checkout.paymentMethod.iframeWrapper.CREDIT_CARD")) {
 				return true;
 			}
 			waitMillis(1000);
