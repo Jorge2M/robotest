@@ -13,10 +13,10 @@ import static com.mng.robotest.tests.domains.legal.legaltexts.FactoryLegalTexts.
 public class PageChequeRegaloInputDataNew extends PageChequeRegaloInputData implements PageFromFooter {
 
 	private enum ConsultaSaldo implements ElementPage {
-		IR("//button[@class='sg-t-btn' and text()[contains(.,'Consultar')]]"),
+		IR("//button[@class='sg-t-btn' and (text()[contains(.,'Consultar')] or text()[contains(.,'Check')])]"),
 		NUMERO_TARJETA("//input[@id='cardNumber']"),
 		CVV_TARJETA("//input[@id='cvvCode']"),
-		VALIDAR("//button[text()[contains(.,'Validar')]]"),
+		VALIDAR("//button[text()[contains(.,'Validar')] or text()[contains(.,'Check')]]"),
 		VOLVER("//button[@class='gc-header-back']"),
 		CVV_INPUT_ERROR("//span[@class[contains(.,'gc-error-message--show')]]"),
 		MENSAJE_TARJETA_SIN_SALDO("//span[@class[contains(.,'gc-error-message--show')] and text()[contains(.,'no tiene saldo')]]");

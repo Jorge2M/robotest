@@ -32,7 +32,7 @@ public abstract class PageChequeRegaloInputData extends PageBase {
 	}
 
 	public static PageChequeRegaloInputData make(Pais pais) {
-		if ("001".compareTo(pais.getCodigoPais())==0) {
+		if ("011".compareTo(pais.getCodigoPais())!=0) {
 			return new PageChequeRegaloInputDataNew();
 		}
 		return new PageChequeRegaloInputDataOld();

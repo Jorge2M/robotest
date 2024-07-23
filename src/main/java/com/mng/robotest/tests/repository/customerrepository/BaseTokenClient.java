@@ -12,15 +12,18 @@ import javax.ws.rs.core.Response;
 
 import com.mng.robotest.tests.repository.customerrepository.entity.Token;
 
-public class BaseCustomerClient {
+public class BaseTokenClient {
 
-	protected String urlBase = "https://apitest2.mango.com/uat-e-consumer/consumer";
+	public String getGiftCardToken() {
+		return getToken("0oarwtf6aLaBluCTr0x6", "q4mEMEjEWOQep3Tsu37oJvrHL1KKvQ47yQANq2Jt");
+	}
 	
-    public String getCustomerToken() {
-
+	public String getCustomerToken() {
+		return getToken("0oaosagb7QtCnny7Q0x6", "J1Y_nEvCnrzRzr9uC3oKb93xWf8BAeUBUTkj8C63");
+	}
+	
+    private String getToken(String username, String password) {
         String url = "https://mango.oktapreview.com/oauth2/default/v1/token";
-        String username = "0oaosagb7QtCnny7Q0x6";
-        String password = "J1Y_nEvCnrzRzr9uC3oKb93xWf8BAeUBUTkj8C63";
         String grantType = "client_credentials";
         String scope = "mango";
         

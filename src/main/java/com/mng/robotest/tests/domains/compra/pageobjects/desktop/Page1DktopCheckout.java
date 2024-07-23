@@ -232,8 +232,13 @@ public class Page1DktopCheckout extends PageBase {
 			clickAplicarPromo();
 		}
 	}
+	
 	public boolean isVisibleInputCodigoPromoUntil(int seconds) {
 		return state(VISIBLE, XP_INPUT_PROMO).wait(seconds).check();
+	}
+	
+	public void clickButtonAplicarChequeRegalo() {
+		
 	}
 
 	public void clickEliminarValeIfExists() {

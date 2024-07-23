@@ -79,6 +79,20 @@ public class PageCheckoutWrapper extends PageBase {
 		secTarjetaPci.inputDni(dni);
 	}
 	
+	public void inputChequeRegalo(String id, String cvc) {
+		if (isMobile()) {
+			pg1MobilCheckout.goToPageFromCheckoutIfNeeded();
+			pg1MobilCheckout.inputCodigoPromoAndAccept(id);
+//			pg1MobilCheckout.inputCvcChequeRegalo(cvc);
+//			pg1MobilCheckout.clickButtonAplicarChequeRegalo();
+		} else {
+			pg1DktopCheckout.showInputCodigoPromoAndAccept(id);
+//			pg1DktopCheckout.inputCvcChequeRegalo(cvc);
+			pg1DktopCheckout.clickButtonAplicarChequeRegalo();
+		}	
+		
+	}
+	
 	public void inputCodigoPromoAndAccept(String codigoPromo) {
 		if (isMobile()) {
 			pg1MobilCheckout.goToPageFromCheckoutIfNeeded();

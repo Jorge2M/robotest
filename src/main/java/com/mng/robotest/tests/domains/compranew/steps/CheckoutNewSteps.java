@@ -1,13 +1,19 @@
 package com.mng.robotest.tests.domains.compranew.steps;
 
+import java.math.BigDecimal;
+import java.util.Optional;
+
 import com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compranew.pageobjects.PageCheckoutGuestData;
 import com.mng.robotest.tests.domains.compranew.pageobjects.PageCheckoutIdentDesktop;
 import com.mng.robotest.tests.domains.compranew.pageobjects.PageCheckoutPayment;
 import com.mng.robotest.tests.domains.compranew.pageobjects.beans.DeliveryData;
+import com.mng.robotest.tests.repository.chequeregalo.ChequeRepositoryClient;
+import com.mng.robotest.tests.repository.chequeregalo.entity.ChequeRegaloOutput;
 import com.mng.robotest.testslegacy.beans.Pago;
 
 public class CheckoutNewSteps extends StepBase {
@@ -99,6 +105,74 @@ public class CheckoutNewSteps extends StepBase {
 		pCheckout.unfoldCardFormulary();
 		pCheckout.inputCard(pago);
 		pCheckout.clickPayNow();
+	}
+	
+	@Step (description="Creación de un cheque regalo de <b>#{amount}</b> mediante API Rest")
+	public Optional<ChequeRegaloOutput> createChequeRegalo(double amount) {
+		String codPais = dataTest.getPais().getCodigoAlf().toLowerCase();
+		var chequeCreated = new ChequeRepositoryClient()
+				.create(BigDecimal.valueOf(amount), codPais);
+
+		checkChequeCreated(chequeCreated);
+		return chequeCreated;
+	}
+	
+	@Validation (description="Se ha creado el cheque correctamente")
+	private boolean checkChequeCreated(Optional<ChequeRegaloOutput> chequeRegalo) {
+		return chequeRegalo.isPresent();
+	}
+	
+	@Step (
+		description="Introducir el cheque regalo <b>#{chequeRegalo.getCertificateNumber()}</b> con cvc <b>#{chequeRegalo.getCvc()}</b>")
+	public void inputChequeRegalo(ChequeRegaloOutput chequeRegalo) {
+		var importeOriginal = pCheckout.getTotalImport();
+		pCheckout.inputChequeRegalo(chequeRegalo.getCertificateNumber(), chequeRegalo.getCvc());
+		checkInputChequeRegalo(chequeRegalo.getCertificateBalance(), importeOriginal);
+	}
+	
+	@Validation
+	public ChecksTM checkInputChequeRegalo(BigDecimal amountCheque, float importeOriginal) {
+		var checks = ChecksTM.getNew();
+		
+		int seconds = 2;
+		checks.add(
+			"Aparece un descuento por cheque regalo de <b>" + amountCheque + "</b> " + getLitSecondsWait(seconds),
+			pCheckout.isDiscountChequeRegalo(amountCheque, seconds));
+		
+		var importeResult = new BigDecimal(Float.toString(pCheckout.getTotalImport()));
+		var importeOrigin = new BigDecimal(Float.toString(importeOriginal));
+		checks.add(
+			"El importe total resultante <b>" + importeResult + "</b> = " + 
+			"original <b>" + importeOriginal + "</b> - importe cheque <b>" + amountCheque + "</b>",
+			importeOrigin.subtract(amountCheque).compareTo(importeResult)==0);
+		
+		return checks;
+	}
+	
+	@Step ( description="Borrar el cheque regalo" )
+	public void removeChequeRegalo(ChequeRegaloOutput chequeRegalo) {
+		var importeOriginal = pCheckout.getTotalImport();
+		pCheckout.removeChequeRegalo();
+		checkRemovedChequeRegalo(chequeRegalo.getCertificateBalance(), importeOriginal);
+	}
+	
+	@Validation
+	public ChecksTM checkRemovedChequeRegalo(BigDecimal amountCheque, float importeOriginal) {
+		var checks = ChecksTM.getNew();
+		
+		int seconds = 2;
+		checks.add(
+			"No aparece un descuento por cheque regalo " + getLitSecondsWait(seconds),
+			pCheckout.isNotDiscountChequeRegalo(seconds));
+		
+		var importeResult = new BigDecimal(Float.toString(pCheckout.getTotalImport()));
+		var importeOrigin = new BigDecimal(Float.toString(importeOriginal));
+		checks.add(
+			"El importe total resultante <b>" + importeResult + "</b> = " + 
+			"original <b>" + importeOriginal + "</b> + importe cheque <b>" + amountCheque + "</b>",
+			importeOrigin.add(amountCheque).compareTo(importeResult)==0);
+		
+		return checks;
 	}
 	
 }
