@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.favoritos.pageobjects;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.testslegacy.beans.Pais;
-import com.mng.robotest.testslegacy.utils.UtilsTest;
+import com.mng.robotest.testslegacy.data.PaisShop;
 
 public interface PageFavoritos {
 
@@ -30,7 +30,7 @@ public interface PageFavoritos {
 	}
 	
 	public static boolean isGenesis(Pais pais, AppEcom app) {
-		return !UtilsTest.paisConCompra(pais, app);
+		return !PaisShop.CHIPRE_DEL_NORTE.isEquals(pais);
 	}
 	
 }
