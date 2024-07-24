@@ -37,7 +37,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 			+ "@data-testid='plp.filters.mobile.button']";
 
 	private static final String XP_LABEL_FILTRO_DESKTOP = XP_BUTTON_FILTRAR + "//following-sibling::ul/li/span";
-	private static final String XP_LABEL_FILTRO_MOBIL = XP_BUTTON_FILTRAR + "//div[@class[contains(.,'Element_subtitle')]]";
+	private static final String XP_LABEL_FILTRO_MOBIL = "//*[@data-testid[contains(.,'plp.filters.mobile.panel.')]]//div[@class[contains(.,'Element_subtitle')]]";
 	
 	private static final String XP_WRAPPER_DESKTOP = XP_BUTTON_FILTRAR + "/../..";
 	private static final String XP_WRAPPER_MOBIL = "//*[@data-testid='plp.filters.mobile.panel']";
@@ -145,7 +145,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	}	
 	
 	private void showPanelFiltroMobil(TypeFiltro typeFiltro) {
-		click(typeFiltro.getXPathPanelMobil()).exec();
+		click(typeFiltro.getXPathPanelMobil()).waitLink(1).exec();
 	}
 	
 	@Override

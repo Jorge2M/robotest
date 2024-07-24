@@ -230,7 +230,8 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		int numArticles = getNumArticulos();
 		while (numArticles<500) {
 			moveToArticle(numArticles);
-			if (!isVisibleArticuloUntil(numArticles+1, 2)) {
+			keyDown(10);
+			if (!isPresentArticuloUntil(numArticles+1, 2)) {
 				return;
 			}
 			numArticles = getNumArticulos();
@@ -442,6 +443,11 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	private boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
 		String xpathArticulo = "(" + getXPathArticulo() + ")[" + numArticulo + "]";
 		return state(VISIBLE, xpathArticulo).wait(seconds).check();
+	}
+	
+	private boolean isPresentArticuloUntil(int numArticulo, int seconds) {
+		String xpathArticulo = "(" + getXPathArticulo() + ")[" + numArticulo + "]";
+		return state(PRESENT, xpathArticulo).wait(seconds).check();
 	}
 
 	@Override
