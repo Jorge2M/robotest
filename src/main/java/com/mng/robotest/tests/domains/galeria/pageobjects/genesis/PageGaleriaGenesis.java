@@ -571,6 +571,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		moveToElement(showTallasButton);
 		scrollEjeY(70); //Avoid capa article added to bag
 		showTallasButton.click();
+		waitMillis(250); //Time for unfold completelly
 	}
 	private void showTallasArticuloDesktop(int posArticulo) {
 		String xpathArticle = getXPathArticulo(posArticulo);
