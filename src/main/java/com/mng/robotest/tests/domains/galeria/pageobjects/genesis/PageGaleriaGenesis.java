@@ -533,8 +533,8 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public List<ArticuloScreen> clickArticleHearthIcons(Integer... posIconsToClick) throws Exception {
 		List<ArticuloScreen> listArtFav = new ArrayList<>();
 		for (int posIcon : posIconsToClick) {
-			clickHearhIcon(posIcon);
 			listArtFav.add(getArticuloObject(posIcon));
+			clickHearhIcon(posIcon);
 		}
 		return listArtFav;
 	}
