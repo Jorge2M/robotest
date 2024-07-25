@@ -350,26 +350,19 @@
 <codpos>3000</codpos>
 <telefono>94123456</telefono>
 <dni>34763592N</dni>
-<tiendas_online>shop,outlet</tiendas_online>
-<register nuevo="N" cpost="S" publi="N"/>
+<tiendas_online>shop</tiendas_online>
+<register nuevo="S" cpost="S" publi="S"/>
 <shoponline>
 <linea 		  id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="HE"        shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
-<linea    	  id="NINA" 	 shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINA_NINA" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-	<sublinea id="NINA_BEBE" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
-<linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-	<sublinea id="NINO_BEBE" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
+<linea        id="KIDS"      shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2"/>
 <linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
 	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 </linea>
 </shoponline>
 <pago 
-	type="TRJintegrada" tiendas="shop,outlet"
+	type="TRJintegrada" tiendas="shop,outlet" 
 	nombre="VISA" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="4646464646464644" mescad="03" anycad="2030" cvc="737"></pago>
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
@@ -382,9 +375,10 @@
 	nombre="AMERICAN EXPRESS" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="370000000000002"  mescad="03" anycad="2030" cvc="7373"></pago>
 <pago 
 	type="Paypal" tiendas="shop,outlet"
-	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
+	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
 <micuentanew>shop,outlet</micuentanew>
+<multidireccion>N</multidireccion>
 </pais>
 
 <pais nombre_pais="Czech Republic" codigo="061">
@@ -1356,7 +1350,7 @@
 <codpos>08720</codpos>
 <telefono>99123456</telefono>
 <dni>10000000146</dni>
-<tiendas_online></tiendas_online>
+<tiendas_online>shop</tiendas_online>
 <register nuevo="S" cpost="S" publi="N"/>
 <shoponline>
 <linea id="SHE"       shop="s" outlet="s" menus="s" menusart="s" contentDesk="BANNERS"   contentMovil="MENUS2" extended='s'/>
