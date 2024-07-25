@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.registro.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick;
-import com.mng.robotest.testslegacy.data.CodIdioma;
 
 public class PageRegistroInitialShopGenesis extends PageRegistroInitialShop {
 
@@ -35,9 +34,6 @@ public class PageRegistroInitialShopGenesis extends PageRegistroInitialShop {
 
 	@Override
 	protected String getLiteralPoliticaPrivacidad() {
-		if (dataTest.getIdioma().getCodigo()==CodIdioma.ES) {
-			return "¿Cómo protegemos y tratamos tus datos?";
-		}
 		return super.getLiteralPoliticaPrivacidad();
 	}
 	

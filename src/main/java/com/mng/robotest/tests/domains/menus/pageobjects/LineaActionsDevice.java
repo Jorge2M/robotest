@@ -126,7 +126,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 
 	@Override
 	public boolean isLineaPresent(int seconds) {
-		return state(VISIBLE, getXPathLineaLink()).wait(seconds).check();
+		return state(VISIBLE, getXPathLineaLink() + "/../..").wait(seconds).check();
 	}
 	@Override
 	public boolean isSublineaPresent(int seconds) {

@@ -136,7 +136,7 @@ public class MiCuentaSteps extends StepBase {
 	}
 	public void goToSuscripcionesAndValidateData(List<LineaType> linesMarked) {
 		goToSuscripciones();
-		new PageSuscripcionesSteps().validaIsDataAssociatedToRegister(linesMarked);
+		new PageSuscripcionesSteps().checkIsDataAssociatedToRegister(linesMarked);
 	}
 
 	public void goToDevoluciones() {

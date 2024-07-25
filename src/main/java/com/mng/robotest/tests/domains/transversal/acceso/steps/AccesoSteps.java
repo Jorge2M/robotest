@@ -138,7 +138,7 @@ public class AccesoSteps extends StepBase {
 				userMenus.isMenuInStateUntil(FAVORITOS, PRESENT, 1));
 		}
 		
-		if (!isDesktop()) {
+		if (!isDesktop() && dataTest.getPais().isVentaOnline()) {
 			boolean isPresentLinkMisCompras = userMenus.isMenuInState(MIS_COMPRAS, PRESENT);
 			checks.add(
 				"Aparece el link \"Mis Compras\"",

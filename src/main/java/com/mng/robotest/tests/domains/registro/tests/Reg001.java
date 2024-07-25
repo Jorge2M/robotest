@@ -52,10 +52,11 @@ public class Reg001 extends TestBase {
 	}
 	
 	private void selectLinkPoliticaPrivacidad() {
-		pgRegistroInitialSteps.clickPoliticaPrivacidad();
-		if (new CommonsRegisterObject().isGenesis()) {
-			pgRegistroInitialSteps.clickPoliticaPrivacidadModal();
-			pgRegistroInitialSteps.clickCondicionesVenta();
+		if (pgRegistroInitialSteps.clickPoliticaPrivacidad()) {
+			if (new CommonsRegisterObject().isGenesis()) {
+				pgRegistroInitialSteps.clickPoliticaPrivacidadModal();
+				pgRegistroInitialSteps.clickCondicionesVenta();
+			}
 		}
 	}
 	

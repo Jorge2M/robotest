@@ -45,54 +45,56 @@ public abstract class PageRegistroInitialShop extends PageBase {
 	protected String getLiteralPoliticaPrivacidad() {
 		switch (dataTest.getIdioma().getCodigo()) {
 		case AL: //"Deutsch"
-			return "Grundlegende Informationen zum Datenschutz";
+			return "Wie schützen und verarbeiten wir Ihre Daten?"; //
 		case BG: //"български" (Búlgaro)
-			return "Основна информация за защита на данните";
+			return "По какъв начин защитаваме и обработваме вашите лични данни?"; //
 		case CA: //"Català"
-			return "Informació bàsica sobre protecció de dades";
+			return "Com protegim i tractem les teves dades?"; //
 		case CS: //"Čeština" (Checo)
-			return "Základní informace o ochraně osobních údajů";
+			return "Jak chráníme a zpracováváme vaše údaje?"; //
 		case ES: //"Castellano"
-			return "Información básica sobre protección de datos";
+			return "¿Cómo protegemos y tratamos tus datos?"; //
 		case FR: //"Français"
-			return "Informations sur la protection des données";
+			return "Comment protégeons-nous et traitons-nous vos données ?"; //
 		case HU: //"Magyar" (Húngaro)
-			return "Alapvető adatvédelmi információk";
+			return "Hogyan védjük és kezeljük az adataidat?"; //
 		case ID: //"Bahasa indonesia"
-			return "Informasi dasar tentang perlindungan data";
+			return "Bagaimana kami melindungi dan memperlakukan data Anda?"; //
 		case IT: //"Italiano"
-			return "Informazioni di base sulla protezione dei dati";
+			return "Come proteggiamo e trattiamo i tuoi dati?"; //
 		case HR: //"Hrvatski" (Croata)
-			return "Osnovne informacije o zaštiti podataka";
+			return "Kako štitimo i obrađujemo vaše podatke?"; //
 		case JA: //"日本"
 			return "データ保護に関する基本情報";
 		case KO: //"한국어"
 			return "데이터 보호에 대한 기본 정보";
 		case EL: //"Ελληνικά" (Griego)
-			return "Βασικές πληροφορίες περί προστασίας δεδομένων";
+			return "Πώς προστατεύουμε και διαχειριζόμαστε τα δεδομένα σας;"; //
 		case NL: //"Nederlands"
-			return "Basisinformatie inzake gegevensbescherming";
+			return "Hoe beschermen en verwerken we je gegevens?"; //
 		case NO: //"Norsk"
-			return "Grunnleggende informasjon om databeskyttelse";
+			return "Hvordan beskytter og behandler vi dataene dine?"; //
 		case PL: //"Polski"
-			return "Podstawowe informacje o ochronie danych";
+			return "Jak chronimy i przetwarzamy Twoje dane?"; //
 		case PO: //"Português
-			return "Informação básica sobre proteção de dados";
+			return "Como é que protegemos e processamos os seus dados?"; //
 		case RO: //"Româna"
-			return "Informații de bază privind protecția datelor personale";
-		case RU,SV: //"Русский", "Svenska" (Sueco)
-			return "Grundläggande information om uppgiftsskydd";
+			return "Cum îți protejăm și cum îți prelucrăm datele?"; //
+		case RU: //"Русский"
+			return "Как мы защищаем и обрабатываем Ваши данные?"; //
+		case SV: //"Svenska" (Sueco)
+			return "Hur skyddar och behandlar vi dina uppgifter?"; //
 		case TH: //"ไทย" (Tailandés)
-			return "??????";
+			return "เราจะปกป้องและประมวลผลข้อมูลของคุณได้อย่างไร?"; //
 		case TR: //"Türk"
 			return "Veri korumasına ilişkin temel bilgiler";
 		case ZH: //"中文" (Chino)
-			return "数据保护基本信息";
+			return "我们如何保护和处理您的数据？";
 		case AR: //"العربية"
-			return "معلومات أساسية عن حماية البيانات";
+			return "كيف نحمي بياناتك ونعالجها؟"; //
 		case US,IN: //"English (USA)", "English"			
 		default:
-			return "Basic information on data protection";
+			return "How do we protect and process your data?"; //
 		}
 	}
 	
