@@ -7,9 +7,10 @@ import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu;
 
 public class PageFavoritosGenesis extends PageBase implements PageFavoritos {
 
-	private static final String XP_BLOCK_FAVORITOS = "//div[@class[contains(.,'Favorites_wrapper')]]";
+//	private static final String XP_BLOCK_FAVORITOS = "//div[@class[contains(.,'Favorites_wrapper')]]";
+	private static final String XP_BLOCK_FAVORITOS = "//*[@data-testid[contains(.,'favorites.content')]]";
 	private static final String XP_ARTICULO = "//li[@data-testid='plp.slot.client']"; //
-	private static final String XP_BLOCK_EMPTY = "//div[@class[contains(.,emptyFavorites)]]"; //TODO usar el futuro data-testid
+	private static final String XP_BLOCK_EMPTY = "//*[@data-testid='favorites.content.empty']"; 
 	private static final String XP_HEARTH_ARTICULO = "//*[@data-testid='plp.product.favorite.heart.active']";
 	
 	private String getXPathAncorArticle(String refProducto, String codigoColor) {

@@ -42,7 +42,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());	
 	
 	private static final String XP_HEADER = "//*[@data-testid='plp.products.list.h1Seo']";
-	private static final String XP_LISTA_ARTICULOS = "//*[@data-testid[contains(.,'plp.products.list')]]//ul";
+	private static final String XP_LISTA_ARTICULOS = "//*[@data-testid[contains(.,'plp.products.list')] or @id='grid-container']//ul";
 	public static final String XP_ARTICULO = XP_LISTA_ARTICULOS + "//li[@data-slot]";
 	protected static final String XP_ICONO_UP_GALERY = "//button/*[@data-testid='up-large']/..";
 	private static final String XP_HEARTH_ICON = "//button[@data-testid[contains(.,'plp.product.favorite.heart')]]";
@@ -50,6 +50,27 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	
 	private static final String XP_TALLA_AVAILABLE = "//*[@data-testid='plp.product.sizeSelector.available']";
 	private static final String XP_TALLA_UNAVAILABLE = "//*[@data-testid='plp.product.sizeSelector.unavailable']";
+	
+	private static final String XP_IMAGE_ARTICLE_DESKTOP = "//*[@data-testid='plp.product.slideshow']//img";
+	private static final String XP_IMAGE_ARTICLE_DEVICE = "//*[@data-testid='productCard.image.wrapper']//img";
+	
+	private static final String XP_ARTICULO_ANCESTOR = "ancestor::li[@data-slot]";
+	private static final String XP_BLOCK_COLORS_ARTICLE = "//*[@data-testid='productCard.colorPicker']";
+	private static final String XP_COLOR = XP_BLOCK_COLORS_ARTICLE + "//button[@data-testid[contains(.,'productCard.colorPicker.button')]]";
+	
+	private static final String XP_PRICE_ARTICLE = new SecPreciosArticulo().getXPathPrecioArticulo();
+	
+	private static final String XP_CAPA_TALLAS_DESKTOP = "//*[@data-testid='plp.product.sizeSelector.panel']";
+	private static final String XP_CAPA_TALLAS_MOBILE = "//*[@data-testid='productCard.sizeSheet']/div";
+	
+	private static final String XP_ANADIR_ARTICLE_MOBILE = "//*[@data-testid='productCard.sizeSheetButton']";
+	
+	private static final String XP_BUTTON_FOR_CLOSE_TALLAS_DEVICE = "//button[@data-testid='modal.close.button']";
+	
+	private static final String XP_URL_FICHA_ARTICLE = "//*["
+			+ "@data-testid='productCard.images' or "
+			+ "@data-testid='productCard.image.wrapper'" //Image double
+			+ "]/a";
 	
 	@Override
 	public String getXPathArticulo() {
@@ -137,9 +158,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return getReference(articulo).replace(":", "");
 	}
 
-	private static final String XP_IMAGE_ARTICLE_DESKTOP = "//*[@data-testid='plp.product.slideshow']//img";
-	private static final String XP_IMAGE_ARTICLE_DEVICE = "//*[@data-testid='productCard.image.wrapper']//img";	
-	
 	private String getXPathImageArticle() {
 		if (isDevice()) {
 			return XP_IMAGE_ARTICLE_DEVICE;
@@ -460,10 +478,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return null;
 	}
 	
-	private static final String XP_ARTICULO_ANCESTOR = "ancestor::li[@data-slot]";
-	private static final String XP_BLOCK_COLORS_ARTICLE = "//*[@data-testid='productCard.colorPicker']";
-	private static final String XP_COLOR = XP_BLOCK_COLORS_ARTICLE + "//button[@data-testid[contains(.,'productCard.colorPicker.button')]]";
-	
 	private String getXPathArticuloConColores() {
 		return (
 			XP_BLOCK_COLORS_ARTICLE + "/" + 
@@ -507,8 +521,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return articulo;
 	}
 	
-	private static final String XP_PRICE_ARTICLE = new SecPreciosArticulo().getXPathPrecioArticulo();
-	
 	@Override
 	public String getPrecioArticulo(WebElement articulo) {
 		return getElement(articulo, "." + XP_PRICE_ARTICLE).getText();
@@ -519,11 +531,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		var articuloElem = getElement(getXPathArticulo(numArticulo));
 		return getCodColorArticulo(articuloElem);
 	}
-	
-	private static final String XP_URL_FICHA_ARTICLE = "//*["
-			+ "@data-testid='productCard.images' or "
-			+ "@data-testid='productCard.image.wrapper'" //Image double
-			+ "]/a";
 	
 	private String getCodColorArticulo(WebElement articulo) {
 		String urlFicha = getElement(articulo, "." + XP_URL_FICHA_ARTICLE).getAttribute("href");
@@ -559,8 +566,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 			showTallasArticuloDesktop(posArticulo);
 		}
 	}
-	
-	private static final String XP_ANADIR_ARTICLE_MOBILE = "//*[@data-testid='productCard.sizeSheetButton']";
 	
 	private void showTallasArticuloMobile(int posArticulo) {
 		String xpathArticle = getXPathArticulo(posArticulo);
@@ -614,8 +619,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		}
 	}
 
-	private static final String XP_BUTTON_FOR_CLOSE_TALLAS_DEVICE = "//button[@data-testid='modal.close.button']";
-	
 	private void unshowTallasArticuloDevice() {
 		if (state(VISIBLE, XP_BUTTON_FOR_CLOSE_TALLAS_DEVICE).check()) {
 			click(XP_BUTTON_FOR_CLOSE_TALLAS_DEVICE).exec();
@@ -661,8 +664,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return true;
 	}
 	
-	private static final String XP_CAPA_TALLAS_DESKTOP = "//*[@data-testid='plp.product.sizeSelector.panel']";
-	private static final String XP_CAPA_TALLAS_MOBILE = "//*[@data-testid='productCard.sizeSheet']/div";
 	private String getXPathCapaTallas() {
 		if (isDevice()) {
 			return XP_CAPA_TALLAS_MOBILE;
@@ -724,6 +725,27 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		secFiltros.selecFiltroColores(colorsToSelect);
 		return waitForArticleVisibleAndGetNumberOfThem(10);
 	}
+
+	@Override
+	public String getNombreArticuloWithText(String literal, int seconds) {
+		var articuloOpt = getArticleThatContainsLit(literal, seconds);
+		if (articuloOpt.isPresent()) {
+			return getNombreArticulo(articuloOpt.get());
+		}
+		return "";
+	}
+	
+	private Optional<WebElement> getArticleThatContainsLit(String literal, int seconds) {
+		By byArticleName = By.xpath(
+				getXPathArticulo() +
+				getXPathNombreRelativeToArticle() +
+				"//self::*[text()[contains(.,'" + literal + "')]]");
+		
+		if (state(PRESENT, byArticleName).wait(seconds).check()) {
+			return Optional.of(getElement(getXPathArticulo()));
+		}
+		return Optional.empty();
+	}	
 	
 	private int waitForArticleVisibleAndGetNumberOfThem(int seconds) {
 		int numArticle = 1;
@@ -792,9 +814,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		throw new UnsupportedOperationException();
 	}
 	
-	public String getNombreArticuloWithText(String literal, int secondsWait) {
-		throw new UnsupportedOperationException();
-	}
 	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
 		throw new UnsupportedOperationException();
 	}

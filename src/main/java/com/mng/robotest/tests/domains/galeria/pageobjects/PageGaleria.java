@@ -123,7 +123,7 @@ public interface PageGaleria {
 	public static PageGaleria make(From from, Channel channel, AppEcom app, Pais pais) {
 		switch (channel) {
 			case desktop:
-				if (from==From.BUSCADOR) {
+				if (from==From.BUSCADOR && app!=AppEcom.outlet) {
 					return new PageGaleriaDesktopOld();
 				}
 				if (pais.isGaleriaGenesis(app)) {
@@ -132,7 +132,7 @@ public interface PageGaleria {
 				return new PageGaleriaDesktopNoGenesis();
 			case mobile, tablet:
 			default:
-				if (from==From.BUSCADOR) {
+				if (from==From.BUSCADOR && app!=AppEcom.outlet) {
 					return new PageGaleriaDeviceOld();
 				}
 				if (pais.isGaleriaGenesis(app)) {
