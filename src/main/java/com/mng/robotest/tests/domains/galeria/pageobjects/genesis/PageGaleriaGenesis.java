@@ -248,7 +248,10 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		int numArticles = getNumArticulos();
 		while (numArticles<500) {
 			moveToArticle(numArticles);
-			keyDown(10);
+			if (!isPresentArticuloUntil(numArticles+1, 1)) {
+				moveToArticle(numArticles);
+				keyDown(10);
+			}
 			if (!isPresentArticuloUntil(numArticles+1, 2)) {
 				return;
 			}
