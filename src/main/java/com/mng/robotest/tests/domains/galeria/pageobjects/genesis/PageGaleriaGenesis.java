@@ -42,8 +42,10 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());	
 	
 	private static final String XP_HEADER = "//*[@data-testid='plp.products.list.h1Seo']";
-	private static final String XP_LISTA_ARTICULOS = "//*[@data-testid[contains(.,'plp.products.list')] or @id='grid-container']//ul";
-	public static final String XP_ARTICULO = XP_LISTA_ARTICULOS + "//li[@data-slot]";
+	private static final String XP_LISTA_ARTICULOS_OLD = "//*[@data-testid[contains(.,'plp.products.list')] or @id='grid-container']//ul";
+	public static final String XP_ARTICULO_OLD = XP_LISTA_ARTICULOS_OLD + "//li[@data-slot]";
+	public static final String XP_ARTICULO_NEW = "//ul/li[@data-testid='plp.slot']";
+	
 	protected static final String XP_ICONO_UP_GALERY = "//button/*[@data-testid='up-large']/..";
 	private static final String XP_HEARTH_ICON = "//button[@data-testid[contains(.,'plp.product.favorite.heart')]]";
 	private static final String XP_TITLE_ARTICLE = "//p[@class[contains(.,'productTitle')]]";
@@ -74,11 +76,11 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	
 	@Override
 	public String getXPathArticulo() {
-		return XP_ARTICULO;
+		return "(" + XP_ARTICULO_OLD + " | " + XP_ARTICULO_NEW + ")";
 	}
 	
 	private String getXPathArticulo(int numArticulo) {
-		return "(" + XP_ARTICULO + ")[" + numArticulo + "]";
+		return getXPathArticulo() + "[" + numArticulo + "]";
 	}
 	
 	private String getXPathTallaAvailableArticle(int posArticulo) {
@@ -266,7 +268,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 
 	@Override
 	public int getNumArticulos() {
-		return getElements(XP_ARTICULO).size();
+		return getElements(getXPathArticulo()).size();
 	}
 
 	@Override
@@ -572,7 +574,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	
 	private void showTallasArticuloMobile(int posArticulo) {
 		String xpathArticle = getXPathArticulo(posArticulo);
-		state(VISIBLE, xpathArticle).wait(1).check();
+		state(VISIBLE, xpathArticle).wait(3).check();
 		moveToElement(xpathArticle);
 		var articleElem = getElement(xpathArticle);
 		var showTallasButton = getElement(articleElem, "." + XP_ANADIR_ARTICLE_MOBILE);

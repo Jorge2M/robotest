@@ -33,8 +33,10 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	}
 
 	private static final String XP_BUTTON_FILTRAR = "//*["
-			+ "@data-testid='plp.filters.desktop.button' or "
-			+ "@data-testid='plp.filters.mobile.button']";
+			+ "@data-testid='plp.filters.desktop.button' or " //Old
+			+ "@data-testid='plp.filters.mobile.button' or " //Old
+			+ "@data-testid='productList.filters.small.button' or " //New
+			+ "@data-testid='productList.filters.large.button']"; //New
 
 	private static final String XP_LABEL_FILTRO_DESKTOP = XP_BUTTON_FILTRAR + "//following-sibling::ul/li/span";
 	private static final String XP_LABEL_FILTRO_MOBIL = "//*[@data-testid[contains(.,'plp.filters.mobile.panel.')]]//div[@class[contains(.,'Element_subtitle')]]";
