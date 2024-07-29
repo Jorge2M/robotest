@@ -76,7 +76,10 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	
 	@Override
 	public String getXPathArticulo() {
-		return "(" + XP_ARTICULO_OLD + " | " + XP_ARTICULO_NEW + ")";
+		return "(" + getXPathArticuloBase() + ")";
+	}
+	private String getXPathArticuloBase() {
+		return XP_ARTICULO_OLD + " | " + XP_ARTICULO_NEW;
 	}
 	
 	private String getXPathArticulo(int numArticulo) {
@@ -456,7 +459,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	    for (var textoArticuloNoValido : listTextosArticulosNoValidos) {
 	        String nombre = textoArticuloNoValido.getText();
 	        String referencia = textoArticuloNoValido
-	                .findElement(By.xpath("./ancestor::" + getXPathArticulo().substring(2)))
+	                .findElement(By.xpath("./ancestor::" + getXPathArticuloBase().substring(2)))
 	                .getAttribute("id");
 	        listTxtArtNoValidos.add(nombre + " (" + referencia + ")");
 	    }
