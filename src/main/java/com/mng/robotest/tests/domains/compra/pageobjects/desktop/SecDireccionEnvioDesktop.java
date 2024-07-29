@@ -24,6 +24,7 @@ public class SecDireccionEnvioDesktop extends PageBase {
 			click(XP_EDIT_DIRECCION_BUTTON).exec();
 		} catch (StaleElementReferenceException e) {
 			waitMillis(1000);
+			state(VISIBLE, XP_EDIT_DIRECCION_BUTTON).wait(4).check();
 			click(XP_EDIT_DIRECCION_BUTTON).exec();
 		}
 	}
