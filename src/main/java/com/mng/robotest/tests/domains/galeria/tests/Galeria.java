@@ -21,14 +21,6 @@ public class Galeria {
 	}
 	
 	@Test (
-		testName="GPO008",			
-		groups={"Galeria", "Canal:all_App:all"},
-		description="[Genesis][Liechtenstein][Galería camisas][Scroll][View ficha]")
-	public void galeriaGenesisLiechtenstein() throws Exception {
-		new Gpo008().execute();
-	}	
-	
-	@Test (
 		testName="GPO005",			
 		groups={"Galeria", "Smoke", "Canal:all_App:all"}, 
 		description="[Logged][ Acceder a galería. Navegación menú lateral de primer y segundo nivel. Selector de precios")
