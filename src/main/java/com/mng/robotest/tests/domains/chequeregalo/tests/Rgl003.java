@@ -8,8 +8,9 @@ import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.compranew.steps.CheckoutNewSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.tests.repository.chequeregalo.entity.ChequeRegaloOutput;
-import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.utils.PaisGetter;
+
+import static com.mng.robotest.testslegacy.data.PaisShop.INDIA;
 
 public class Rgl003 extends TestBase {
 	
@@ -17,8 +18,10 @@ public class Rgl003 extends TestBase {
 	
 	public Rgl003() throws Exception {
 		dataTest.setUserRegistered(true);
-		dataTest.setPais(PaisGetter.from(PaisShop.INDIA));
-		dataTest.setIdioma(dataTest.getPais().getListIdiomas().get(0));
+		if (inputParamsSuite.getListaPaises().isEmpty()) {
+			dataTest.setPais(PaisGetter.from(INDIA));
+			dataTest.setIdioma(dataTest.getPais().getListIdiomas().get(0));
+		}
 	}
 	
 	@Override

@@ -22,8 +22,8 @@ public class ChequeRegalo {
 	
 	@Test (
 		testName="RGL003",			
-		groups={"Compra", "Smoke", "Chequeregalo", "Canal:all_App:shop"},
-		description="Crea un cheque regalo y realiza una compra haciendo uso de él")
+		groups={"Compra", "Smoke", "Chequeregalo", "Checkout", "NewCheckout", "Canal:all_App:shop"},
+		description="[India] Crea un cheque regalo y realiza una compra haciendo uso de él")
 	public void useChequeRegalo() throws Exception {
 		new Rgl003().execute();
 	}	

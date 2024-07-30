@@ -115,7 +115,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		expected="Aparece una página para conseguir la entrada de cine")
 	private void clickSaberMas() {
 		pgMangoLikesYou.clickButton(ENTRADA_CINE);
-		new PageHomeConseguirPorLikesSteps().checkIsPage(2);
+		new PageHomeConseguirPorLikesSteps().checkIsPage(3);
 		
 	}
 	
@@ -124,7 +124,7 @@ public class PageMangoLikesYouSteps extends StepBase {
 		expected="Aparece una página para conseguir por 1200 Likes")
 	private void click1200Likes() {
 		pgMangoLikesYou.clickButton(LIKES_1200);
-		new PageHomeConseguirPorLikesSteps().checkIsPage(2);
+		new PageHomeConseguirPorLikesSteps().checkIsPage(3);
 	}
 	
 	@Step(

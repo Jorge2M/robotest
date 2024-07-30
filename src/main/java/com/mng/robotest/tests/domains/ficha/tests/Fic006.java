@@ -32,7 +32,9 @@ public class Fic006 extends TestBase {
 	public Fic006() throws Exception {
 		super();
 		dataTest.setUserRegistered(true);
-		dataTest.setPais(liechtenstein);
+		if (inputParamsSuite.getListaPaises().isEmpty()) {
+			dataTest.setPais(liechtenstein);
+		}
 		
 		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), app, driver)
 				.minProducts(200)
