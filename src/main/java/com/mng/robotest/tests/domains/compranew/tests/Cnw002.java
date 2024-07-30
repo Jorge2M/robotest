@@ -19,7 +19,7 @@ public class Cnw002 extends TestBase {
 	
 	private void setDataTest() {
 		dataTest.setUserRegistered(true);
-		dataTest.setPais(PaisGetter.from(SERBIA));
+		dataTest.setPais(PaisGetter.from(EGYPT));
 		dataTest.setIdioma(dataTest.getPais().getListIdiomas().get(0));
 	}
 	

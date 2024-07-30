@@ -64,7 +64,7 @@ public class SecPaymentMethod extends PageBase {
 	}
 	
 	public void selectSavedCard() {
-		click(XP_SAVED_CARD).exec();
+		click(XP_SAVED_CARD).waitLink(2).exec();
 	}
 	
 	public void unfoldCardFormulary() {
