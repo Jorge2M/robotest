@@ -14,7 +14,7 @@ public class CompraNew {
 	
 	@Test (
 		testName="CNW002",	
-		groups={"Compra", "Smoke", "Checkout", "NewCheckout", "Canal:desktop,mobile_App:shop"}, 
+		groups={"Compra", "Checkout", "NewCheckout", "Canal:desktop,mobile_App:shop"}, 
 		description="[Compra][Usuario logado] Serbia con nuevo checkout")  
 	public void compraSerbiaLogged() throws Exception {
 		new Cnw002().execute();
