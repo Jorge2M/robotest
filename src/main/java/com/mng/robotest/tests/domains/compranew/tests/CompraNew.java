@@ -12,4 +12,12 @@ public class CompraNew {
 		new Cnw001().execute();
 	}
 	
+	@Test (
+		testName="CNW002",	
+		groups={"Compra", "Smoke", "Checkout", "Canal:desktop,mobile_App:shop"}, 
+		description="[Compra][Usuario logado] Serbia con nuevo checkout")  
+	public void compraSerbiaTrjSaved() throws Exception {
+		new Cnw002().execute();
+	}	
+
 }

@@ -1,5 +1,7 @@
 package com.mng.robotest.tests.domains.compranew.steps;
 
+import static com.github.jorge2m.testmaker.conf.State.*;
+
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -85,6 +87,18 @@ public class CheckoutNewSteps extends StepBase {
 	@Step(description="Seleccionamos el checkbox para grabar la tarjeta", expected="")
 	public void selectSaveCard() {
 		pCheckout.selectSaveCard();
+	}
+	
+	@Validation (
+		description="Está disponible una tarjeta guardada de tipo #{tipoTarjeta}",
+		level=INFO)
+	public boolean isTarjetaGuardadaAvailable(String tipoTarjeta) {
+		return pCheckout.isSavedCard(tipoTarjeta);
+	}
+	
+	@Step (description="Eliminamos la tarjeta guardada")
+	public void removeSavedCard() {
+		pCheckout.removeSavedCard();
 	}
 	
 	@Step(

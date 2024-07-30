@@ -25,6 +25,14 @@ public class PageCheckoutPayment extends PageBase {
 	public void selectSaveCard() {
 		sPaymentMethod.selectSaveCard();
 	}
+
+	public boolean isSavedCard(String tipoTarjeta) {
+		return sPaymentMethod.isSavedCard(tipoTarjeta);
+	}
+	
+	public void removeSavedCard() {
+		sPaymentMethod.removeSavedCard();
+	}
 	
 	public void selectSavedCard() {
 		sPaymentMethod.selectSavedCard();

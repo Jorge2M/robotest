@@ -36,7 +36,7 @@ public class Com001 extends TestBase {
 		}
 		checkPromoEmployee();
 		if (!isPro) {
-			executeVisaPaymentSelectingSaveCard();
+			executeVisaPaymentSelectingSavedCard();
 			checkMisCompras();
 			checkMisDatos();
 		}
@@ -61,7 +61,7 @@ public class Com001 extends TestBase {
 		dataTest.getDataPago().setUseSavedCard(false);
 	}
 	
-	private void executeVisaPaymentSelectingSaveCard() throws Exception {
+	private void executeVisaPaymentSelectingSavedCard() throws Exception {
         var dataPago = dataTest.getDataPago();
         dataPago.setPago(dataTest.getPais().getPago("VISA"));
         dataPago.setUseSavedCard(true);
