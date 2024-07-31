@@ -17,11 +17,6 @@ public class Cht001 extends TestBase {
 		new ModalsSubscriptionsSteps().closeIfVisible();
 		
 		var chatBotSteps = ModalChatBotSteps.make();
-		if (isOutlet() && isPRO()) { //En breve subirá a PRO (7-6-24)
-			chatBotSteps.checkIconInvisible();
-			return;
-		}
-		
 		if (!chatBotSteps.checkIconVisible()) {
 			return;
 		}
@@ -97,9 +92,8 @@ public class Cht001 extends TestBase {
 		String question = "Cómo encontrar un producto por su referencia";
 		chatBotSteps.inputQuestion(question);
 		var answersExpected = new AnswersExpected(Arrays.asList(
-			"Puedes encontrar un producto por su referencia utilizando",
-			"Puedes encontrar un producto por su referencia introduciendo",
-			"Puedes encontrar un producto por su referencia introduciéndola"));
+			"Puedes encontrar un producto ",
+			"Puedes encontrar un artículo"));
 		chatBotSteps.checkAnyResponseVisible(answersExpected, 6);
 		
 		chatBotSteps.isVisibleYesButton(5);

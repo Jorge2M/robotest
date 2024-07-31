@@ -77,14 +77,27 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 		try {
 			hoverLineaInternal();
 		} catch (StaleElementReferenceException | NoSuchElementException e) {
-			hoverLineaInternal();
+			manageExceptionHoverLinea();
 		}
 	}
+	
 	private void hoverLineaInternal() {
 		state(VISIBLE, getXPathLinea()).wait(3).check();
 		moveToElement(getXPathLinea());
 	}
 	
+	private void manageExceptionHoverLinea() {
+		try {
+			hoverLineaInternal();
+		} catch (NoSuchElementException e) {
+			if (lineaType==LineaType.NINO) {
+				refreshPage();
+				hoverLineaInternal();
+			} else {
+				throw e;
+			}
+		}
+	}
 	
 	@Override 
 	public void hoverSublinea() {

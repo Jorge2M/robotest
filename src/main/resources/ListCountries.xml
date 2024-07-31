@@ -88,6 +88,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>outlet</newcheckout>
 <micuentanew>shop,outlet</micuentanew>
 </pais>
 
@@ -524,6 +525,7 @@
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<newcheckout>outlet</newcheckout>
 <micuentanew>shop,outlet</micuentanew>
 </pais>
 
@@ -1008,6 +1010,7 @@
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<newcheckout>outlet</newcheckout>
 <micuentanew>shop,outlet</micuentanew>
 </pais>
 
@@ -1049,7 +1052,7 @@
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
 <micuentanew>shop,outlet</micuentanew>
-<newcheckout>shop</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Lithuania" codigo="055">
@@ -1147,6 +1150,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>outlet</newcheckout>
 <micuentanew>shop,outlet</micuentanew>
 </pais>
 
@@ -1208,6 +1212,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>outlet</newcheckout>
 <micuentanew>shop,outlet</micuentanew>
 </pais>
 
@@ -4468,7 +4473,8 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
-<micuentanew>shop,outlet</micuentanew>
+<newcheckout>shop</newcheckout>
+<micuentanew>shop</micuentanew>
 </pais>
 
 <pais nombre_pais="대한민국" codigo="728"> <!-- Corea del Sur -->
