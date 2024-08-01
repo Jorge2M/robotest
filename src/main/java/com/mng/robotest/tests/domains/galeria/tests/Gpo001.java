@@ -7,7 +7,6 @@ import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.From;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.beans.FactoryMenus;
 import com.mng.robotest.testslegacy.data.Color;
@@ -28,7 +27,7 @@ public class Gpo001 extends TestBase {
 	}
 
 	private void changeTwoToFourColumns() {
-		var pageGaleria = (PageGaleriaDesktopBaseNoGenesis)PageGaleria.make(From.MENU, channel, app, dataTest.getPais());
+		var pageGaleria = (PageGaleriaDesktopBaseNoGenesis)PageGaleria.make(channel, app, dataTest.getPais());
 		var listArticlesGaleria2Cols = pageGaleria.getListDataArticles();
 		listArticlesGaleria2Cols = galeriaSteps.selectListadoXColumnasDesktop(CUATRO, listArticlesGaleria2Cols);
 		galeriaSteps.selectListadoXColumnasDesktop(DOS, listArticlesGaleria2Cols);

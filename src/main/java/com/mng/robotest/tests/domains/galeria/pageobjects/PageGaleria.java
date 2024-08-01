@@ -10,9 +10,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSli
 import com.mng.robotest.tests.domains.galeria.pageobjects.genesis.PageGaleriaDesktopGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.genesis.PageGaleriaDeviceGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopNoGenesis;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopOld;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDeviceNoGenesis;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDeviceOld;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
 import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito;
@@ -113,33 +111,21 @@ public interface PageGaleria {
 	
 	public List<String> searchForArticlesNoValid(List<String> articleNames);
 	
-	public enum From { MENU, BUSCADOR }
 	public enum AttributeArticle { NOMBRE, REFERENCIA, IMAGEN }
 	public static final int MAX_PAGE_TO_SCROLL = 20;
 
 	public static PageGaleria make(Channel channel, AppEcom app, Pais pais) {
-		return make(From.MENU, channel, app, pais);
-	}
-	public static PageGaleria make(From from, Channel channel, AppEcom app, Pais pais) {
-		switch (channel) {
-			case desktop:
-				if (from==From.BUSCADOR && app!=AppEcom.outlet) {
-					return new PageGaleriaDesktopOld();
-				}
-				if (pais.isGaleriaGenesis(app)) {
-					return new PageGaleriaDesktopGenesis();
-				}
-				return new PageGaleriaDesktopNoGenesis();
-			case mobile, tablet:
-			default:
-				if (from==From.BUSCADOR && app!=AppEcom.outlet) {
-					return new PageGaleriaDeviceOld();
-				}
-				if (pais.isGaleriaGenesis(app)) {
-					return new PageGaleriaDeviceGenesis();
-				}
-				return new PageGaleriaDeviceNoGenesis();
+		if (channel==Channel.desktop) {
+			if (pais.isGaleriaGenesis(app)) {
+				return new PageGaleriaDesktopGenesis();
+			}
+			return new PageGaleriaDesktopNoGenesis();
 		}
+		
+		if (pais.isGaleriaGenesis(app)) {
+			return new PageGaleriaDeviceGenesis();
+		}
+		return new PageGaleriaDeviceNoGenesis();
 	}
 	
 }

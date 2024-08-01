@@ -8,7 +8,6 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.From;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
@@ -16,7 +15,7 @@ import com.mng.robotest.testslegacy.pageobject.shop.navigations.ArticuloNavigati
 
 public class BuscadorSteps extends StepBase {
 
-	private final PageGaleria pgGaleria = PageGaleria.make(From.BUSCADOR, channel, app, dataTest.getPais());
+	private final PageGaleria pgGaleria = PageGaleria.make(channel, app, dataTest.getPais());
 	
 	private static final String TAB_HTML = "&emsp;";
 	@Step (
