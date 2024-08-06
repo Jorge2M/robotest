@@ -27,6 +27,7 @@ import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalActPoliticaPriv
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalNewsLetterAfterAccess;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import io.netty.handler.timeout.TimeoutException;
 
@@ -82,6 +83,9 @@ public class AccesoFlows extends StepBase {
 	}
 	
 	public void identification(String user, String password) {
+		if (UtilsTest.todayBeforeDate("2024-09-06")) {
+			workAroundLoginProblem();
+		}
 		clickIniciarSesion();
 		login(user, password);
 	}
@@ -128,6 +132,18 @@ public class AccesoFlows extends StepBase {
 		}
 		new MenusUserWrapper().moveAndClick(INICIAR_SESION);
 	}	
+	
+	private void workAroundLoginProblem() {
+		//TODO workaround 06-08-2024 para corregir el problema de prehome->login->checkout
+		String urlHelp = "";
+		try {
+			urlHelp = inputParamsSuite.getDnsUrlAcceso() + "/es/help";
+			driver.get(urlHelp);
+		}
+		catch (Exception e) {
+			Log4jTM.getLogger().warn("Problem loading " + urlHelp, e);
+		}
+	}
 	
 	public void cambioPaisFromHomeIfNeeded(Pais newPais, IdiomaPais newIdioma) {
 		cambioPais(newPais, newIdioma);

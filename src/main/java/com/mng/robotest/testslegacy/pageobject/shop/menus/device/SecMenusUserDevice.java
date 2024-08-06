@@ -29,7 +29,9 @@ public class SecMenusUserDevice extends PageBase {
 		CERRAR_SESION(
 			"//*[@href[contains(.,'/logout')] or text()='Cerrar sesión' or text()='Sign out' or text()='Abmelden']"), //Necesitamos el data-testid de la parte Genesis (Outlet)
 		FAVORITOS(
-			"//*[@data-testid='header.userMenu.favorites_any']"),
+			"//*[" + 
+				"@data-testid='header.userMenu.favorites_any' or " + //Genesis
+				"@data-testid='header.userMenu.favorites_mobile']"), //Old
 		INICIAR_SESION(
 			XP_ITEM + "/self::*[@href[contains(.,'login')]]"),
 		REGISTRATE(
