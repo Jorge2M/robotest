@@ -6,7 +6,7 @@ public class ModalBuscarEnTiendaGenesis extends ModalBuscarEnTienda {
 
 	private static final String XP_CONTAINER = "//dialog[@id='store-finder-modal']";
 	private static final String XP_ASPA_FOR_CLOSE = XP_CONTAINER + "//*[@data-testid='modal.close.button']";
-	private static final String XP_TIENDA = "//*[@data-testid='checkout.delivery.storeList']//input[@id[contains(.,'store')]]/..";
+	private static final String XP_TIENDA = "//*[@data-testid='maps.storeList']//input[@id[contains(.,'store')]]/..";
 	
 	@Override
 	public boolean isVisible(int seconds) {

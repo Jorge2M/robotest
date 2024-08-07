@@ -30,7 +30,8 @@ public class Fic001 extends TestBase {
 	public Fic001() throws Exception {
 		super();
 		dataTest.setUserRegistered(true);
-		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), app, driver)
+		var codPais = dataTest.getPais().getCodigoAlf();
+		var getterProducts = new GetterProducts.Builder(codPais, app, driver)
 				.minProducts(200)
 				.build();
 

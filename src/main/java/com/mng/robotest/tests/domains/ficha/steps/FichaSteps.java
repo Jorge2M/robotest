@@ -283,8 +283,7 @@ public class FichaSteps extends StepBase {
 		expected="El artículo se añade a Favoritos")
 	public void selectAnadirAFavoritos() {
 		pageFicha.selectAnadirAFavoritosButton();
-		ArticuloScreen articulo = pageFicha.getArticuloObject();
-		dataTest.getDataFavoritos().addArticulo(articulo);
+		dataTest.addFavorite(pageFicha.getArticuloObject());
 		checkVisibleButtonFavoritos(REMOVE);
 	}
 
@@ -329,13 +328,10 @@ public class FichaSteps extends StepBase {
 
 	@Validation (description="Aparece el botón de #{buttonType} a Favoritos")
 	public boolean checkVisibleButtonFavoritos(ActionFavButton buttonType) {
-		switch (buttonType) {
-			case REMOVE:
-				return (pageFicha.isVisibleButtonElimFavoritos(1));
-			case ADD:
-			default:
-				return (pageFicha.isVisibleButtonAnadirFavoritos(1));
+		if (buttonType==ActionFavButton.REMOVE) {
+			return pageFicha.isVisibleButtonElimFavoritos(1);
 		}
+		return pageFicha.isVisibleButtonAnadirFavoritos(1);
 	}
 
 	@Validation (description="Es visible el link de <b>Disponibilidad en Tienda</b>")

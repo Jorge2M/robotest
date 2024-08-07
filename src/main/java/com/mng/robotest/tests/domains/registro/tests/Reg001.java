@@ -84,7 +84,7 @@ public class Reg001 extends TestBase {
 		menuUserSteps.isVisibleNameUser(dataNewRegister.getName(), 2);
 		
 		var miCuentaSteps = new MiCuentaSteps();
-		miCuentaSteps.goToMisDatosAndValidateData(dataNewRegister);
+		miCuentaSteps.goToMisDatosAndCheckData(dataNewRegister);
 		miCuentaSteps.goToSuscripcionesAndValidateData(dataNewRegister.getLineas());
 	}	
 

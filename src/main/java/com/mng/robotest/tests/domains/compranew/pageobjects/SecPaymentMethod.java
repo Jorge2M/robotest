@@ -14,7 +14,7 @@ public class SecPaymentMethod extends PageBase {
 	private static final String XP_SAVE_CARD = "//*[@data-testid='checkout.payment.save.checkbox']";
 	private static final String XP_SAVED_CARD = "//*[@data-testid='checkout.paymentMethod.storedCard']";
 	private static final String XP_DELETE_SAVED_CARD = "//*[@data-testid='checkout.paymentMethod.storedCard.action']";
-	private static final String XP_NEW_CARD = "//*[@data-testid='checkout.payment.card.options-NEW_CARD']";
+	private static final String XP_NEW_CARD = "//*[@data-testid='payment-method-CREDIT_CARD.title']";
 	private static final String XP_CARD_HOLDER_INPUT = "//input[@data-testid='checkout.payment.cardHolder']";
 	private static final String XP_CARD_NUMBER_INPUT = "//input[@data-testid='checkout.payment.cardNumber']";
 	private static final String XP_CARD_EXPIRATION_INPUT = "//input[@data-testid='checkout.payment.expirationDate']";

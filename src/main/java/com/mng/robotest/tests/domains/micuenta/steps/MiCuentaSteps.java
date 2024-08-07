@@ -14,6 +14,7 @@ import com.mng.robotest.tests.domains.micuenta.pageobjects.PageInfoNewMisCompras
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.testslegacy.datastored.DataPago;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.mng.robotest.tests.domains.micuenta.pageobjects.LinkMiCuenta.*;
 
@@ -64,8 +65,18 @@ public class MiCuentaSteps extends StepBase {
 		expected = "Aparece la página de Mis datos")
 	private void clickLinkMisDatos(String usuarioReg) {
 		pgMiCuenta.click(MIS_DATOS);
-		new PageMisDatosSteps().validaIsPage(usuarioReg);
+		var resultChecks = new MisDatosSteps().checkIsPage(usuarioReg);
+		workAroundMisDatosProblem(usuarioReg, !resultChecks.isAvoidEvidences());
 		checksDefault();
+	}
+	
+	private void workAroundMisDatosProblem(String usuarioReg, boolean apply) {
+		//TODO workaround 06-08-2024 para corregir el problema de login->mis datos
+		if (UtilsTest.todayBeforeDate("2024-09-06") && apply) {
+			back();
+			pgMiCuenta.click(MIS_DATOS);
+			new MisDatosSteps().checkIsPage(usuarioReg);			
+		}
 	}
 	
 	@Step(
@@ -103,16 +114,16 @@ public class MiCuentaSteps extends StepBase {
 			new PageMisDireccionesSteps().checkData(dataRegistro);
 		}		
 		goToMisDatos(dataRegistro.get("cfEmail"));
-		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataRegistro, codPais);
+		new MisDatosSteps().validaIsDataAssociatedToRegister(dataRegistro, codPais);
 		checksDefault();
 	}
-	public void goToMisDatosAndValidateData(DataNewRegister dataNewRegister) {
+	public void goToMisDatosAndCheckData(DataNewRegister dataNewRegister) {
 		if (dataTest.getPais().isMisdirecciones(app)) {
 			goToMisDirecciones();
 			new PageMisDireccionesSteps().checkData();
 		}
 		goToMisDatos(dataNewRegister.getEmail());
-		new PageMisDatosSteps().checkIsDataAssociatedToRegister(dataNewRegister);
+		new MisDatosSteps().checkIsDataAssociatedToRegister(dataNewRegister);
 		checksDefault();
 	}	
 	

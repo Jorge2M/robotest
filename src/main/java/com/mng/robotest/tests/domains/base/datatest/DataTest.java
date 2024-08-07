@@ -14,6 +14,7 @@ import com.mng.robotest.testslegacy.datastored.DataBag;
 import com.mng.robotest.testslegacy.datastored.DataFavoritos;
 import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
+import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.utils.PaisGetter;
 
 public class DataTest implements Cloneable, Serializable {
@@ -162,6 +163,10 @@ public class DataTest implements Cloneable, Serializable {
 
 	public void setDataFavoritos(DataFavoritos dataFavoritos) {
 		this.dataFavoritos = dataFavoritos;
+	}
+	
+	public void addFavorite(ArticuloScreen articulo) {
+		getDataFavoritos().addArticulo(articulo);
 	}
 
 	public static long getSerialversionuid() {

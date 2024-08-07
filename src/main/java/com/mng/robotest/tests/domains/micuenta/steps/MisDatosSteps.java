@@ -11,12 +11,12 @@ import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
-public class PageMisDatosSteps extends StepBase {
+public class MisDatosSteps extends StepBase {
 
 	private final PageMisDatos pgMisDatos = new PageMisDatos();
 	
 	@Validation
-	public ChecksTM validaIsPage (String usuarioReg) {
+	public ChecksTM checkIsPage (String usuarioReg) {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 		boolean isPage = pgMisDatos.isPage(seconds);

@@ -4,7 +4,7 @@ import java.net.URISyntaxException;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
-import com.mng.robotest.tests.domains.micuenta.steps.PageMisDatosSteps;
+import com.mng.robotest.tests.domains.micuenta.steps.MisDatosSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
@@ -61,7 +61,7 @@ public class Mic004 extends TestBase {
 		String password = dataNewRegister.getPassword();
 		
 		new AccesoSteps().login(user, password);		
-		new PageMisDatosSteps().confirmCancelarCuenta();		
+		new MisDatosSteps().confirmCancelarCuenta();		
 		new MenusUserSteps().logoff();
 		new AccesoSteps().inicioSesionDatosKO(user, password);
 	}	
