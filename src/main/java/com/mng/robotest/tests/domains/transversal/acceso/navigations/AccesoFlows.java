@@ -9,6 +9,8 @@ import org.openqa.selenium.JavascriptExecutor;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.tests.domains.base.Environment;
+import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountry;
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountryOld;
@@ -83,9 +85,7 @@ public class AccesoFlows extends StepBase {
 	}
 	
 	public void identification(String user, String password) {
-		if (UtilsTest.todayBeforeDate("2024-09-06")) {
-			workAroundLoginProblem();
-		}
+		workAroundLoginProblem();
 		clickIniciarSesion();
 		login(user, password);
 	}
@@ -135,14 +135,20 @@ public class AccesoFlows extends StepBase {
 	
 	private void workAroundLoginProblem() {
 		//TODO workaround 06-08-2024 para corregir el problema de prehome->login->checkout
-		String urlHelp = "";
-		try {
-			String accesoIdioma = dataTest.getIdioma().getAcceso();
-			urlHelp = inputParamsSuite.getDnsUrlAcceso() + "/" + accesoIdioma + "/help";
-			driver.get(urlHelp);
-		}
-		catch (Exception e) {
-			Log4jTM.getLogger().warn("Problem loading " + urlHelp, e);
+		boolean apply = 
+				UtilsTest.todayBeforeDate("2024-09-06") && 
+				PageBase.getEnvironment(inputParamsSuite.getUrlBase())!=Environment.DEVELOPMENT;
+		
+		if (apply) {
+			String urlHelp = "";
+			try {
+				String accesoIdioma = dataTest.getIdioma().getAcceso();
+				urlHelp = inputParamsSuite.getDnsUrlAcceso() + "/" + accesoIdioma + "/help";
+				driver.get(urlHelp);
+			}
+			catch (Exception e) {
+				Log4jTM.getLogger().warn("Problem loading " + urlHelp, e);
+			}
 		}
 	}
 	
