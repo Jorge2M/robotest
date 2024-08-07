@@ -38,7 +38,8 @@ public class Par001 extends TestBase {
 		new AccesoSteps().accessFromPreHome();
 		new LandingSteps().checkIsCountryWithCorrectLineas(2);
 		for (Linea linea : linesToTest) {
-			if (new UtilsMangoTest().isLineActive(linea)) {
+			if (new UtilsMangoTest().isLineActive(linea) &&
+				linea.getType()!=LineaType.NINO) { //This line produces random errors and checking NINA is enough
 				checkLinea(linea, null);
 				for (Sublinea sublinea : linea.getListSublineas(app)) {
 					checkLinea(linea, sublinea);

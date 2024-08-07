@@ -137,7 +137,8 @@ public class AccesoFlows extends StepBase {
 		//TODO workaround 06-08-2024 para corregir el problema de prehome->login->checkout
 		String urlHelp = "";
 		try {
-			urlHelp = inputParamsSuite.getDnsUrlAcceso() + "/es/help";
+			String accesoIdioma = dataTest.getIdioma().getAcceso();
+			urlHelp = inputParamsSuite.getDnsUrlAcceso() + "/" + accesoIdioma + "/help";
 			driver.get(urlHelp);
 		}
 		catch (Exception e) {
