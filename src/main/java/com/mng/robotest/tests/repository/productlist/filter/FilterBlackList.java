@@ -7,8 +7,12 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 
 public class FilterBlackList implements Filter {
 	
-	private static final List<String> BLACK_LIST = Arrays.asList(
-		"67085722" //Tiene problemas en CloudTest
+	public static final List<String> BLACK_LIST = Arrays.asList(
+		"77094027",
+		"77093267",
+		"77093262",
+		"77083263",
+		"77014032" //Tienen problemas en CloudTest (se visualiza la PLP en lugar de la PDP)
 	);
 //	private static final List<String> BLACK_LIST = new ArrayList<>();
 	

@@ -24,6 +24,7 @@ import com.mng.robotest.tests.repository.canonicalproduct.GetterProductApiCanoni
 import com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
 import com.mng.robotest.tests.repository.productlist.entity.ProductList;
+import com.mng.robotest.tests.repository.productlist.filter.FilterBlackList;
 import com.mng.robotest.tests.repository.productlist.filter.FilterStock;
 import com.mng.robotest.tests.repository.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.testslegacy.utils.PaisGetter;
@@ -493,9 +494,7 @@ public class GetterProducts {
 			return this;
 		}
 		public GetterProducts build() throws Exception {
-//	        List<FilterType> filtersNew = new ArrayList<>(filters);
-//	        filtersNew.add(FilterType.BLACK_LIST);
-//	        filters = filtersNew;
+			activeBlackListFilterIfNeeded();
 			
 			return (
 				new GetterProducts(
@@ -515,6 +514,14 @@ public class GetterProducts {
 						sortBy,
 						extraCanonicalInfo,
 						driver));
+		}
+
+		private void activeBlackListFilterIfNeeded() {
+			if (!FilterBlackList.BLACK_LIST.isEmpty()) {
+		        List<FilterType> filtersNew = new ArrayList<>(filters);
+		        filtersNew.add(FilterType.BLACK_LIST);
+		        filters = filtersNew;
+			}
 		}
 		
 		private List<MenuProduct> getMenusProduct() {
