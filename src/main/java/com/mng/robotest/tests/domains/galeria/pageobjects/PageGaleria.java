@@ -5,20 +5,14 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.tests.conf.AppEcom;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.NumColumnas;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.StateFavorito;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.genesis.PageGaleriaDesktopGenesis;
 import com.mng.robotest.tests.domains.galeria.pageobjects.genesis.PageGaleriaDeviceGenesis;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopNoGenesis;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDeviceNoGenesis;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActionFav;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
-import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.pageobject.utils.DataArticleGalery;
@@ -48,7 +42,6 @@ public interface PageGaleria {
 	String getRefColorArticulo(WebElement articulo);
 	boolean backTo1erArticulo() throws InterruptedException;
 	String getXPathPagina(int pagina);
-	int getNumArticulosFromPagina(int pagina, TypeArticleDesktop sizeArticle);
 	WebElement getArticleFromPagina(int numPagina, int numArticle);
 	boolean isHeaderArticlesVisible(String textHeader);
 	void showTallasArticulo(int posArticulo);
@@ -90,8 +83,6 @@ public interface PageGaleria {
 	boolean isVisibleSubMenuDesktop(String submenu);
 	void clickSubMenuDesktop(String submenu);
 	
-    boolean isVisibleLinkInfoRebajasBannerHead();
-    boolean isVisibleLinkInfoRebajasBannerHead(TypeLinkInfo typeLinkInfo);
     boolean isVisibleBannerHead();
     boolean isBannerHeadLinkable();
     void clickBannerHeadIfClickable();
@@ -114,18 +105,11 @@ public interface PageGaleria {
 	public enum AttributeArticle { NOMBRE, REFERENCIA, IMAGEN }
 	public static final int MAX_PAGE_TO_SCROLL = 20;
 
-	public static PageGaleria make(Channel channel, AppEcom app, Pais pais) {
+	public static PageGaleria make(Channel channel) {
 		if (channel==Channel.desktop) {
-			if (pais.isGaleriaGenesis(app)) {
-				return new PageGaleriaDesktopGenesis();
-			}
-			return new PageGaleriaDesktopNoGenesis();
+			return new PageGaleriaDesktopGenesis();
 		}
-		
-		if (pais.isGaleriaGenesis(app)) {
-			return new PageGaleriaDeviceGenesis();
-		}
-		return new PageGaleriaDeviceNoGenesis();
+		return new PageGaleriaDeviceGenesis();
 	}
 	
 }

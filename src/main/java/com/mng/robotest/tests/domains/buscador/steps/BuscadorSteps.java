@@ -15,7 +15,7 @@ import com.mng.robotest.testslegacy.pageobject.shop.navigations.ArticuloNavigati
 
 public class BuscadorSteps extends StepBase {
 
-	private final PageGaleria pgGaleria = PageGaleria.make(channel, app, dataTest.getPais());
+	private final PageGaleria pgGaleria = PageGaleria.make(channel);
 	
 	private static final String TAB_HTML = "&emsp;";
 	@Step (

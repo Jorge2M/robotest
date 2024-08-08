@@ -107,7 +107,7 @@ public class LandingSteps extends StepBase {
 	
 	@Validation (description="Aparece una Galería o Edits con algún artículo visible " + SECONDS_WAIT)	
 	public boolean isArticlePresent(int seconds) {
-		var pgGaleria = PageGaleria.make(channel, app, dataTest.getPais());
+		var pgGaleria = PageGaleria.make(channel);
 		var pgEdits = new PageEdits();
 		for (int i=0; i<=seconds; i++) {
 			if (pgGaleria.isVisibleAnyArticle() ||

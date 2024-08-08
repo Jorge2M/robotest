@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.FilterOrdenacion;
+import com.mng.robotest.tests.domains.transversal.exceptions.NotImplementedYetException;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
@@ -183,7 +183,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		click(XP_BUTTON_MOSTRAR_ARTICULOS).exec();
 		waitMillis(1000);
 		waitForPageLoaded(driver);
-		PageGaleria pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
+		PageGaleria pageGaleria = PageGaleria.make(channel);
 		pageGaleria.isVisibleImageArticle(1, 2);
 	}
 	
@@ -243,6 +243,11 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		return true;
 	}
 	
+	@Override
+	public boolean isAvailableFiltrosFamilia(List<String> submenus) {
+		throw new NotImplementedYetException();
+	}
+	
 	private boolean isVisibleLabelFiltroApplied(String labelExpected) {
 		return isVisibleLabelFiltroApplied(Pattern.compile(labelExpected));
 	}
@@ -270,11 +275,6 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		return found;
 	}
 
-	@Override
-	public boolean isAvailableFiltros(FiltroMobil typeFiltro, List<String> listTextFiltros) {
-		throw new UnsupportedOperationException();
-	}
-	
 	private boolean isFiltersShopVisible(int seconds) {
 		return state(VISIBLE, XP_CAPA_FILTERS).wait(seconds).check();
 	}	

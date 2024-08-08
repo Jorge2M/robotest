@@ -14,7 +14,6 @@ public class ChecksMango extends PageBase {
 	private final GenericChecks genericChecks;
 	private final State accesibility;
 	private final State cookiesAllowed;
-	private final State seo;
 	private final State analitica;
 	private final State textsTraduced;
 	private final State googleAnalytics;
@@ -22,11 +21,10 @@ public class ChecksMango extends PageBase {
 	
 	private ChecksMango(
 			GenericChecks genericChecks, 
-			State accesibility, State cookiesAllowed, State seo, State analitica, State textsTraduced, State googleAnalytics, State imgsBroken) {
+			State accesibility, State cookiesAllowed, State analitica, State textsTraduced, State googleAnalytics, State imgsBroken) {
 		this.genericChecks = genericChecks;
 		this.accesibility = accesibility;
 		this.cookiesAllowed = cookiesAllowed;
-		this.seo = seo;
 		this.analitica = analitica;
 		this.textsTraduced = textsTraduced;
 		this.googleAnalytics = googleAnalytics;
@@ -46,9 +44,6 @@ public class ChecksMango extends PageBase {
 		}
 		if (cookiesAllowed!=null) {
 			executeCheck(new CheckerAllowedCookies(cookiesAllowed));
-		}
-		if (seo!=null) {
-			executeCheck(new CheckerSEO(seo));
 		}
 		if (analitica!=null) {
 			executeCheck(new CheckerAnalitica(analitica));
@@ -79,7 +74,6 @@ public class ChecksMango extends PageBase {
 		
 		private State accesibility;
 		private State cookiesAllowed;
-		private State seo;
 		private State analitica;
 		private State textsTraduced;
 		private State googleAnalytics;		
@@ -103,15 +97,6 @@ public class ChecksMango extends PageBase {
 			return this;
 		}
 
-		public BuilderChecksMango seo(State level) {
-			seo = level;
-			return this;
-		}
-		public BuilderChecksMango seo() {
-			seo = INFO;
-			return this;
-		}
-		
 		public BuilderChecksMango analitica(State level) {
 			analitica = level;
 			return this;
@@ -174,7 +159,7 @@ public class ChecksMango extends PageBase {
 			var genericChecks = super.build();
 			new ChecksMango(
 					genericChecks, 
-					accesibility, cookiesAllowed, seo, analitica, textsTraduced, googleAnalytics, imgsBroken)
+					accesibility, cookiesAllowed, analitica, textsTraduced, googleAnalytics, imgsBroken)
 				.checks();
 		}
 	}

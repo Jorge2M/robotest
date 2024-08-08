@@ -14,7 +14,7 @@ import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
 public class SecFiltrosSteps extends StepBase {
 
-	private final PageGaleria pgGaleria = PageGaleria.make(channel, app, dataTest.getPais());
+	private final PageGaleria pgGaleria = PageGaleria.make(channel);
 	
 	private static final String TAG_LIT_COLORS_TO_SELECT = "@TagLitColorsToSelect";
 	

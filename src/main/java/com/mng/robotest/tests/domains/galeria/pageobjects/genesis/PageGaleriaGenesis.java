@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.galeria.pageobjects.genesis;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.AttributeArticle.*;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.entity.StateFavorito.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,12 +20,10 @@ import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.UtilsPageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.SecPreciosArticulo;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.UtilsPageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.StateFavorito;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActionFav;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.data.Constantes;
@@ -39,7 +37,7 @@ import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
 
 public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria {
 
-	SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());	
+	SecFiltros secFiltros = SecFiltros.make();	
 	
 	private static final String XP_HEADER = "//*[@data-testid='plp.products.list.h1Seo']";
 	private static final String XP_LISTA_ARTICULOS_OLD = "//*[@data-testid[contains(.,'plp.products.list')] or @id='grid-container']//ul";
@@ -329,7 +327,10 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 
 	@Override
 	public boolean isHeaderArticlesVisible(String textHeader) {
-		return state(VISIBLE, XP_HEADER).check();
+		if (!state(VISIBLE, XP_HEADER).check()) {
+			return false;
+		}
+		return getElement(XP_HEADER).getText().toLowerCase().contains(textHeader.toLowerCase());
 	}
 	
 	@Override
@@ -799,9 +800,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public String getXPathPagina(int pagina) {
 		throw new UnsupportedOperationException();
 	}
-	public int getNumArticulosFromPagina(int pagina, TypeArticleDesktop sizeArticle) {
-		throw new UnsupportedOperationException();
-	}
 	public WebElement getArticleFromPagina(int numPagina, int numArticle) {
 		throw new UnsupportedOperationException();
 	}
@@ -829,7 +827,4 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		throw new UnsupportedOperationException();
 	}
 	
-
-
-
 }

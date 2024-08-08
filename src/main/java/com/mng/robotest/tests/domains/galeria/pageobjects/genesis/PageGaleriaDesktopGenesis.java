@@ -4,8 +4,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 import java.util.List;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.NumColumnas;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.data.Color;
 
@@ -93,14 +92,6 @@ public class PageGaleriaDesktopGenesis extends PageGaleriaGenesis {
 	@Override
     public boolean isBannerHeadSalesBanner(IdiomaPais idioma) {
     	throw new UnsupportedOperationException();
-    }
-	@Override
-    public boolean isVisibleLinkInfoRebajasBannerHead() {
-		throw new UnsupportedOperationException();
-    }
-	@Override
-    public boolean isVisibleLinkInfoRebajasBannerHead(TypeLinkInfo typeLinkInfo) {
-		throw new UnsupportedOperationException();
     }
 	
 	private void forcePagination() {

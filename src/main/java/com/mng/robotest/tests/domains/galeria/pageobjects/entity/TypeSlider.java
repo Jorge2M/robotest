@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity;
+package com.mng.robotest.tests.domains.galeria.pageobjects.entity;
 
 public enum TypeSlider { 
 	PREVIOUS(".prev", "previous", "preview") , 

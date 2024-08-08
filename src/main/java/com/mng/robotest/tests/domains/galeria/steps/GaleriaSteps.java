@@ -3,7 +3,6 @@ package com.mng.robotest.tests.domains.galeria.steps;
 import java.util.Arrays;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
@@ -19,24 +18,15 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.ControlTemporada;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticle;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.NumColumnas;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.TypeSlider;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
-import com.mng.robotest.testslegacy.pageobject.utils.DataScroll;
 import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.testslegacy.steps.navigations.exceptions.ChannelNotSupportedRuntimeException;
-import com.github.jorge2m.testmaker.conf.StoreType;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion.RECOMENDADOS;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo.*;
 import static com.github.jorge2m.testmaker.conf.StoreType.*;
 import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
 
@@ -46,7 +36,7 @@ public class GaleriaSteps extends StepBase {
 	private final SecSelectorPreciosSteps secSelectorPreciosSteps = new SecSelectorPreciosSteps();
 	private final SecFiltrosSteps secFiltrosSteps = new SecFiltrosSteps();
 	
-	private final PageGaleria pgGaleria = PageGaleria.make(channel, app, dataTest.getPais());
+	private final PageGaleria pgGaleria = PageGaleria.make(channel);
 
 	public enum TypeGalery { SALES, NO_SALES }
 	public enum TypeActionFav { MARCAR, DESMARCAR }
@@ -481,12 +471,6 @@ public class GaleriaSteps extends StepBase {
 	  	return checks;
 	}
 
-	@Validation (description="Existe algún vídeo en la galería", level=WARN)
-	public boolean validaHayVideoEnGaleria() {
-		var pgGaleriaDesktop = (PageGaleriaDesktopBaseNoGenesis)pgGaleria;
-		return (pgGaleriaDesktop.isPresentAnyArticle(TypeArticleDesktop.VIDEO));
-	}
-
 	@Validation (
 		description="Aparece una página con artículos " + SECONDS_WAIT,	level=WARN)
 	public boolean validaArtEnContenido(int seconds) {
@@ -564,115 +548,6 @@ public class GaleriaSteps extends StepBase {
    		return checks;
 	}
 
-	@Validation (description="Estamos en la página de Galería",	level=WARN)
-	private boolean checkIsPageGaleria(WebDriver driver) {
-		var pageGaleriaDesktop = (PageGaleriaDesktopBaseNoGenesis)pgGaleria;
-		return (pageGaleriaDesktop.isPage());
-	}
-
-	public void validaArticlesOfTemporadas(List<Integer> listTemporadas, State levelError, StoreType store) {
-		validaArticlesOfTemporadas(listTemporadas, false, levelError, store);
-	}
-
-	public void validaArticlesOfTemporadas(List<Integer> listTemporadas) {
-		validaArticlesOfTemporadas(listTemporadas, false, WARN, EVIDENCES);
-	}
-
-	public void validaArticlesOfTemporadas(List<Integer> listTemporadas, boolean validaNotNewArticles) {
-		validaArticlesOfTemporadas(listTemporadas, validaNotNewArticles, WARN, EVIDENCES);
-	}
-
-	@Validation
-	public ChecksTM validaArticlesOfTemporadas(
-			List<Integer> listTemporadas, boolean validaNotNewArticles, State levelError, StoreType store) {
-		var checks = ChecksTM.getNew();
-		var pageGaleriaDesktop = (PageGaleriaDesktopBaseNoGenesis)pgGaleria;
-		var listArtWrong = pageGaleriaDesktop.getArticlesTemporadasX(ControlTemporada.ARTICLES_FROM_OTHER, listTemporadas);
-		if (validaNotNewArticles) {
-			listArtWrong = PageGaleriaNoGenesis.getNotNewArticlesFrom(listArtWrong);
-		}
-		
-		String validaNotNewArticlesStr = "";
-		if (validaNotNewArticles) {
-			validaNotNewArticlesStr = " y no contienen alguna de las etiquetas de artículo nuevo (" + PageGaleriaNoGenesis.getListlabelsnew() + ")";
-		}
-		
-		String infoWarning = "";
-		if (!listArtWrong.isEmpty()) {
-			infoWarning+=
-				"<br><lin style=\"color:" + WARN.getColorCss() + ";\"><b>Warning!</b>: " +
-				"hay " + listArtWrong.size() + " artículos que no pertenecen a las temporadas " + listTemporadas + ":<br>";
-			for (String nameWrong : listArtWrong) {
-				infoWarning+=(nameWrong + "<br>");
-			}
-			infoWarning+="</lin>";
-		}
-		
-		checks.add(
-			Check.make(
-				"<b style=\"color:blue\">Rebajas</b></br>" +
-				"Todos los artículos pertenecen a las temporadas <b>" + listTemporadas.toString() + "</b>" + validaNotNewArticlesStr + infoWarning,
-				listArtWrong.isEmpty(), levelError)
-			.store(store).build());
-
-		return checks;
-	}
-
-	@Validation
-	public ChecksTM validaNotArticlesOfTypeDesktop(TypeArticle typeArticle, State levelError, StoreType store) {
-		var checks = ChecksTM.getNew();
-		var pageGaleriaDesktop = (PageGaleriaDesktopBaseNoGenesis)pgGaleria;
-		var listArtWrong = pageGaleriaDesktop.getArticlesOfType(typeArticle);
-		checks.add(
-			Check.make(
-				"<b style=\"color:blue\">Rebajas</b></br>" +
-				"No hay ningún artículo del tipo <b>" + typeArticle + "</b>",
-				listArtWrong.isEmpty(), levelError)
-			.store(store).build());
-
-		if (!listArtWrong.isEmpty()) {
-			addInfoArtWrongToDescription(listArtWrong, typeArticle, checks.get(0));
-		}
-		return checks;
-	}
-
-	private void addInfoArtWrongToDescription(List<String> listArtWrong, TypeArticle typeArticle, Check validation) {
-		String textToAdd =
-				"<br><lin style=\"color:" + WARN.getColorCss() + ";\"><b>Warning!</b>: " +
-						"hay " + listArtWrong.size() + " artículos que son del tipo <b>" + typeArticle + "</b><br>:";
-		for (String nameWrong : listArtWrong) {
-			textToAdd+=(nameWrong + "<br>");
-		}
-		textToAdd+="</lin>";
-		String descriptionOrigin = validation.getDescription();
-		validation.setDescription(descriptionOrigin + textToAdd);
-	}
-
-	@Step (
-			description="Seleccionamos el link <b>Más Info</b>",
-			expected="Se hace visible el aviso legal")
-	public void clickMoreInfoBannerRebajasJun2018() {
-		((PageGaleriaDesktopBaseNoGenesis)pgGaleria).clickRebajasBannerHead();
-		checkAfterClickInfoRebajas();
-	}
-
-	@Validation
-	private ChecksTM checkAfterClickInfoRebajas() {
-		var checks = ChecksTM.getNew();
-		var pageGaleriaDesktop = ((PageGaleriaDesktopBaseNoGenesis)pgGaleria);
-		int seconds = 1;
-		checks.add(
-			"<b style=\"color:blue\">Rebajas</b></br>" +
-			"Se despliega la información relativa a las rebajas " + getLitSecondsWait(seconds),
-			pageGaleriaDesktop.isVisibleInfoRebajasBannerHead(seconds), WARN);
-		
-		checks.add(
-			"Aparece el link de <b>Menos info</b>",
-			pageGaleriaDesktop.isVisibleLinkInfoRebajasBannerHead(LESS), WARN);
-		
-		return checks;
-	}
-
 	public void checkGaleriaAfeterSelectMenu() {
 		checkArticleGaleriaLoaded();
 		if (isShop()) {
@@ -722,13 +597,6 @@ public class GaleriaSteps extends StepBase {
 		return secFiltrosSteps.selectFiltroColores(colorsToSelect, litMenu);
 	}
 	
-	public DataScroll scrollFromFirstPage() throws Exception {
-		var data = new DataForScrollStep();
-		data.setNumPageToScroll(99);
-		data.setOrdenacionExpected(RECOMENDADOS);
-		return scrollFromFirstPageNoGenesis(data);
-	}
-	
 	@Step (
 		description="Escrollar hasta posicionarse en la última página", 
 		expected="Se escrolla correctamente")
@@ -740,49 +608,5 @@ public class GaleriaSteps extends StepBase {
 		checkAreMoreArticles(iniArticles, finArticles);		
 		checkNotRepeatedArticles();
 	}
-	
-	/**
-	 * Escrollamos hasta llegar a la página indicada en toPage
-	 * @param toPage indica el número de página en el que nos queremos posicionar. Si es PageGaleria.scrollToLast asumimos que queremos llegar hasta el final del catálogo
-	 */
-	private static final String TAG_ID_PAGE = "@TagIdPage";
-	
-	@Step (
-		description="Escrollar hasta posicionarse en la " + TAG_ID_PAGE + " página", 
-		expected="Se escrolla correctamente",
-		saveNettraffic=ALWAYS)
-	public DataScroll scrollFromFirstPageNoGenesis(DataForScrollStep dataForScroll) throws Exception {
-		int pageToScroll = dataForScroll.getNumPageToScroll();
-		String idPage = pageToScroll + "a";
-		if (pageToScroll>=PageGaleriaNoGenesis.MAX_PAGE_TO_SCROLL) {
-			idPage = "última";
-		}
-		replaceStepDescription(TAG_ID_PAGE, idPage);
-//		int numArticulosInicio = pgGaleria.getNumArticulos();
-		var datosScroll = pgGaleria.scrollToPageFromFirst(pageToScroll);
-
-		if (pageToScroll>=PageGaleriaNoGenesis.MAX_PAGE_TO_SCROLL) {
-			checkVisibilityFooter(app);
-		}
-//		if (!dataTest.getPais().isGaleriaKondo(app) &&
-//			pageToScroll < PageGaleria.MAX_PAGE_TO_SCROLL) {
-//			checkAreMoreArticlesThatInitially(datosScroll.getArticulosMostrados(), numArticulosInicio);
-//		}
-		if (dataForScroll.getOrdenacionExpected()!=RECOMENDADOS) {
-			checkArticlesOrdered(dataForScroll.getOrdenacionExpected());
-		}
-		checkNotRepeatedArticles();
-		if (dataForScroll.isValidateArticlesExpected()) {
-			checkNumArticlesInScreen(datosScroll.getArticulosTotalesPagina(), dataForScroll.getNumArticlesExpected());
-		}
-		
-		checksDefault();
-		if (dataForScroll.isValidaImgBroken()) {
-			checksGeneric().imgsBroken().execute();
-		}
-		
-		datosScroll.setStep(getCurrentStep());
-		return datosScroll;
-	}	
 
 }

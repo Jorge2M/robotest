@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.galeria.tests;
 
-import static com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.entity.TypeSlider.*;
 import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;

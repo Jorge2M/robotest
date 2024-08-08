@@ -11,7 +11,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class SecSelectorPreciosSteps extends StepBase {
 
-	private final PageGaleria pgGaleria = PageGaleria.make(Channel.desktop, app, dataTest.getPais());
+	private final PageGaleria pgGaleria = PageGaleria.make(Channel.desktop);
 	
 	@Validation (description="Es visible el selector de precios", level=WARN)
 	public boolean checkIsSelector() {
@@ -30,7 +30,7 @@ public class SecSelectorPreciosSteps extends StepBase {
 	@Validation
 	private ChecksTM checkResultSelectFiltro(int min, int max) throws Exception {
 		var checks = ChecksTM.getNew();
-		var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
+		var pageGaleria = PageGaleria.make(channel);
 		checks.add(
 			"En pantalla aparece el fitro por precios aplicado con valores [<b>" + min + " - " + max + "</b>]",
 			pageGaleria.isVisibleLabelFiltroPrecioApplied(min, max));
