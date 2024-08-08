@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entity.FilterOrdenacion;
-import com.mng.robotest.tests.domains.galeria.pageobjects.entity.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entity.StateFavorito;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entity.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.pageobjects.genesis.PageGaleriaDesktopGenesis;
@@ -24,7 +23,7 @@ public interface PageGaleria {
 	String getXPathArticulo();
 	String getXPathNombreRelativeToArticle();
 	boolean isVisibleAnyArticle();
-	void clickLinkColumnas(NumColumnas numColumnas);
+	void clickGridview(String gridview);
 	WebElement getArticuloConVariedadColoresAndHover(int numArticulo);
 	WebElement getImagenElementArticulo(WebElement articulo);
 	ArticuloScreen getArticuloObject(int numArticulo) throws Exception;

@@ -5,7 +5,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.entity.NumColumnas;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.data.Color;
 
@@ -82,10 +81,6 @@ public class PageGaleriaDeviceGenesis extends PageGaleriaGenesis {
 	}
 	@Override
 	public List<String> searchForArticlesNoValid(List<String> articleNames) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void clickLinkColumnas(NumColumnas numColumnas) {
 		throw new UnsupportedOperationException();
 	}
 	

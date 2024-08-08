@@ -5,7 +5,6 @@ import static com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActi
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
 import com.mng.robotest.tests.domains.favoritos.steps.FavoritosSteps;
-import com.mng.robotest.tests.domains.galeria.pageobjects.entity.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
@@ -30,7 +29,7 @@ public class Fav001 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		loginAndClearData();
-		goToVestidosGalery();
+		clickMenu("Vestidos");
 		clickFavoritesInGalery();
 		goToFavorites();
 		//addFirstFavoriteToBag();
@@ -42,13 +41,6 @@ public class Fav001 extends TestBase {
 		accessAndLogin();
 		secBolsaSteps.clear();
 		pFavoritosSteps.clearAll();
-	}	
-	
-	private void goToVestidosGalery() {
-		clickMenu("Vestidos");
-		if (isDesktop()) {
-			galeriaSteps.selectListadoXColumnasDesktop(NumColumnas.CUATRO);
-		}
 	}	
 	
 	private void clickFavoritesInGalery() throws Exception {

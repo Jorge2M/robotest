@@ -7,7 +7,6 @@ import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entity.FilterOrdenacion;
-import com.mng.robotest.tests.domains.transversal.exceptions.NotImplementedYetException;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
@@ -120,13 +119,10 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	
 	@Override
 	public void selectMenu2onLevelDevice(String menuLabel) {
-		showFilters();
-		if (isDevice()) {
-			showPanelFiltroMobil(TypeFiltro.FAMILIA);
-		}
+		openSubfamilyFilter();
 		click(getXPathLinkFamily(menuLabel)).exec();
 		acceptFilters();
-	}	
+	}
 	
 	@Override
 	public void selectMenu2onLevelDevice(List<String> listMenus) {
@@ -245,7 +241,23 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	
 	@Override
 	public boolean isAvailableFiltrosFamilia(List<String> submenus) {
-		throw new NotImplementedYetException();
+		openSubfamilyFilter();
+		for (var submenu : submenus) {
+			if (!state(VISIBLE, getXPathLinkFamily(submenu)).check()) {
+				return false;
+			}
+		}
+		if (isDevice()) {
+			close();
+		}
+		return true;
+	}
+	
+	private void openSubfamilyFilter() {
+		showFilters();
+		if (isDevice()) {
+			showPanelFiltroMobil(TypeFiltro.FAMILIA);
+		}
 	}
 	
 	private boolean isVisibleLabelFiltroApplied(String labelExpected) {

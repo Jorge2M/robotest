@@ -2,9 +2,12 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.github.jorge2m.testmaker.conf.Channel;
 
 public class MenuActionsDevice extends PageBase implements MenuActions {
 
@@ -52,7 +55,16 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	@Override
 	public String click() {
 		clickGroup();
-		return clickMenu();
+		String nameMenu = clickMenu();
+		ifGalerySetGridOneColumn();
+		return nameMenu;
+	}
+
+	private void ifGalerySetGridOneColumn() {
+		var pageGaleria = PageGaleria.make(Channel.mobile);
+		if (pageGaleria.isVisibleAnyArticle()) {
+			pageGaleria.clickGridview("01");
+		}
 	}
 	
 	@Override

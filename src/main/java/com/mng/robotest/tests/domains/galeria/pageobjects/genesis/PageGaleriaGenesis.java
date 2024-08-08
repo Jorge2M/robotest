@@ -48,8 +48,8 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	private static final String XP_HEARTH_ICON = "//button[@data-testid[contains(.,'plp.product.favorite.heart')]]";
 	private static final String XP_TITLE_ARTICLE = "//p[@class[contains(.,'productTitle')]]";
 	
-	private static final String XP_TALLA_AVAILABLE = "//*[@data-testid='plp.product.sizeSelector.available']";
-	private static final String XP_TALLA_UNAVAILABLE = "//*[@data-testid='plp.product.sizeSelector.unavailable']";
+	private static final String XP_TALLA_AVAILABLE = "//*[@data-testid[contains(.,'sizeSelector.available')]]";
+	private static final String XP_TALLA_UNAVAILABLE = "//*[@data-testid[contains(.,'sizeSelector.unavailable')]]";
 	
 	private static final String XP_IMAGE_ARTICLE_DESKTOP = "//*[@data-testid='plp.product.slideshow']//img";
 	private static final String XP_IMAGE_ARTICLE_DEVICE = "//*[@data-testid='productCard.image.wrapper']//img";
@@ -80,6 +80,10 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return XP_ARTICULO_OLD + " | " + XP_ARTICULO_NEW;
 	}
 	
+	private String getXPathGridviewIcon(String gridview) {
+		return "//label[@title[contains(.,'accessibility.gridview" + gridview + "')]]";
+	}
+	
 	private String getXPathArticulo(int numArticulo) {
 		return getXPathArticulo() + "[" + numArticulo + "]";
 	}
@@ -107,6 +111,11 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 			waitMillis(1000);
 		}
 		return false;
+	}
+	
+	@Override
+	public void clickGridview(String gridview) {
+		click(getXPathGridviewIcon(gridview)).exec();
 	}
 	
 	@Override

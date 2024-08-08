@@ -19,11 +19,9 @@ import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entity.FilterOrdenacion;
-import com.mng.robotest.tests.domains.galeria.pageobjects.entity.NumColumnas;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entity.TypeSlider;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
-import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
 import com.mng.robotest.testslegacy.steps.navigations.exceptions.ChannelNotSupportedRuntimeException;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
@@ -507,45 +505,6 @@ public class GaleriaSteps extends StepBase {
 			"Quedan " + estadoFinal + " los iconos asociados a los artículos con posiciones <b>" + Arrays.toString(posIconsSelected) + "</b>",
    	   		pgGaleria.iconsInCorrectState(actionFav, posIconsSelected), WARN);
 		return checks;
-	}
-
-	public ListDataArticleGalery selectListadoXColumnasDesktop(
-			NumColumnas numColumnas, ListDataArticleGalery listArticlesGaleriaAnt){
-		selectListadoXColumnasDesktop(numColumnas);
-		var listArticlesGaleriaAct = pgGaleria.getListDataArticles();
-		if (listArticlesGaleriaAnt!=null) {
-			int articulosComprobar = 20;
-			checkArticlesEqualsToPreviousGalery(articulosComprobar, listArticlesGaleriaAnt, listArticlesGaleriaAct, numColumnas);
-		}
-		return listArticlesGaleriaAct;
-	}
-
-	@Step (
-		description="Seleccionar el link del listado a <b>#{numColumnas.name()} columnas</b>", 
-		expected="Aparece un listado de artículos a #{numColumnas.name()} columnas")
-	public void selectListadoXColumnasDesktop(NumColumnas numColumnas)	{
-		pgGaleria.clickLinkColumnas(numColumnas);
-	}
-
-	@Validation
-	private ChecksTM checkArticlesEqualsToPreviousGalery(
-		int articulosComprobar, ListDataArticleGalery listArticlesGaleriaAnt, 
-		ListDataArticleGalery listArticlesGaleriaAct, NumColumnas numColumnas) {
-   		var checks = ChecksTM.getNew();
-   		
-   		boolean articlesEquals = listArticlesGaleriaAct.isArticleListEquals(listArticlesGaleriaAnt, articulosComprobar);
-   		String infoWarning = "";
-   		if (!articlesEquals) {
-   			var articleGaleryActualNotFit = listArticlesGaleriaAct.getFirstArticleThatNotFitWith(listArticlesGaleriaAnt);
-   			infoWarning+="<br><b style=\"color:" + INFO.getColorCss() + "\">Warning!</b>: hay productos de la galería que no cuadran con los de la galería anterior (por ejemplo <b>" + articleGaleryActualNotFit.toString() + "</b>). ";
-   			infoWarning+=listArticlesGaleriaAct.getTableHTLMCompareArticlesGaleria(listArticlesGaleriaAnt);
-   		}
-   		checks.add(
-   			"Los primeros " + articulosComprobar + " artículos de la galería a " + 
-   			numColumnas.name() + " columnas son iguales a los de la anterior galería" + infoWarning,
-   			articlesEquals, INFO);
-   		
-   		return checks;
 	}
 
 	public void checkGaleriaAfeterSelectMenu() {
