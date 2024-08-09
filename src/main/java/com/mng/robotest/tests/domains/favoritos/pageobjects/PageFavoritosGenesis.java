@@ -7,11 +7,10 @@ import com.mng.robotest.testslegacy.pageobject.shop.menus.MenuUserItem.UserMenu;
 
 public class PageFavoritosGenesis extends PageBase implements PageFavoritos {
 
-//	private static final String XP_BLOCK_FAVORITOS = "//div[@class[contains(.,'Favorites_wrapper')]]";
 	private static final String XP_BLOCK_FAVORITOS = "//*[@data-testid[contains(.,'favorites.content')]]";
-	private static final String XP_ARTICULO = "//li[@data-testid='plp.slot.client']"; //
+	private static final String XP_ARTICULO = "//li[@data-testid[contains(.,'plp.slot')]]"; //
 	private static final String XP_BLOCK_EMPTY = "//*[@data-testid='favorites.content.empty']"; 
-	private static final String XP_HEARTH_ARTICULO = "//*[@data-testid='plp.product.favorite.heart.active']";
+	private static final String XP_HEARTH_ARTICULO = "//*[@data-testid[contains(.,'favorite.heart.active')]]";
 	
 	private String getXPathAncorArticle(String refProducto, String codigoColor) {
 		return XP_ARTICULO + "//a[@href[contains(.,'" + refProducto + "?c=" + codigoColor + "')]]";
@@ -44,10 +43,10 @@ public class PageFavoritosGenesis extends PageBase implements PageFavoritos {
 			return (!isArticulos());
 		}
 		
-		var itArticulos = dataTest.getDataFavoritos().getListArticulos().iterator();
-		while (itArticulos.hasNext()) {
-			var articulo = itArticulos.next();
-			if (!isVisibleArticle(articulo.getRefProducto(), articulo.getCodigoColor(), seconds)) {
+		var itFavorites = dataTest.getDataFavoritos().getListArticulos().iterator();
+		while (itFavorites.hasNext()) {
+			var favorite = itFavorites.next();
+			if (!isVisibleArticle(favorite.getReferencia(), favorite.getCodigoColor(), seconds)) {
 				return false;
 			}
 		}
@@ -88,7 +87,8 @@ public class PageFavoritosGenesis extends PageBase implements PageFavoritos {
 	}
 	
 	private void clear1rstArticulo() {
-		if (isArticulos()) {
+		if (isArticulos() && 
+			state(VISIBLE, XP_HEARTH_ARTICULO).wait(1).check()) {
 			var hearthArticulo = getElement(XP_HEARTH_ARTICULO);
 			moveToElement(hearthArticulo);
 			click(hearthArticulo).exec();

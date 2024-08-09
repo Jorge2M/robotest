@@ -13,7 +13,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.footer.pageobjects.SecFooter;
@@ -165,8 +165,8 @@ public class GaleriaSteps extends StepBase {
 		var articulo = pgGaleria.selectTallaAvailableArticle(posArticulo);
 		boolean tallaVisible = (articulo!=null && articulo.getTalla()!=null);
 		if (tallaVisible) {
-			dataTest.getDataBag().addArticulo(articulo);
-			new SecBolsaSteps().checkArticlesAddedToBag();
+			dataTest.getDataBag().add(articulo);
+			new BolsaSteps().checkArticlesAddedToBag();
 		}
 		return tallaVisible;
 	}
@@ -488,10 +488,10 @@ public class GaleriaSteps extends StepBase {
 		String estadoFinal = "";
 		if (actionFav==TypeActionFav.MARCAR) {
 			estadoFinal = "Marcados";
-			dataTest.getDataFavoritos().addToLista(listAddFav);
+			dataTest.getDataFavoritos().addArticlesToLista(listAddFav);
 		} else {
 			estadoFinal = "Desmarcados";
-			dataTest.getDataFavoritos().removeFromLista(listAddFav);
+			dataTest.getDataFavoritos().removeArticlesFromLista(listAddFav);
 		}
 		
 		replaceStepExpected(TAG_ESTADO_FINAL, estadoFinal);

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.buscador.steps.BuscadorSteps;
 import com.mng.robotest.tests.domains.favoritos.pageobjects.PageFavoritos;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
@@ -129,7 +129,7 @@ public class Fic006 extends TestBase {
 		//Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
 		//-> Lo damos de baja
 		if (isTallaUnica) {
-			new SecBolsaSteps().clear();
+			new BolsaSteps().clear();
 		}
 	}
 

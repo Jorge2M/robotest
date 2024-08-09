@@ -14,9 +14,9 @@ import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
-import static com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa.*;
+import static com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaBase.StateBolsa.*;
 
-public abstract class SecBolsaCommon extends PageBase {
+public abstract class SecBolsaBase extends PageBase {
 
 	public enum StateBolsa { OPEN, CLOSED }
 	
@@ -28,6 +28,7 @@ public abstract class SecBolsaCommon extends PageBase {
 	public abstract String getPrecioTransporte();
 	public abstract void setBolsaToStateIfNotYet(StateBolsa stateBolsaExpected);
 	public abstract LineasArticuloBolsa getLineasArtBolsa();
+	public abstract void addArticleToFavorites();
 	
 	private static final String XP_ASPA = "//span[@class[contains(.,'outline-close')]]";
 	

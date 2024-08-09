@@ -4,7 +4,7 @@ import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupTyp
 import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.favoritos.pageobjects.PageFavoritos;
 import com.mng.robotest.tests.domains.favoritos.steps.FavoritosSteps;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
@@ -18,7 +18,7 @@ import com.mng.robotest.testslegacy.beans.Pais;
 public class Fav002 extends TestBase {
 
 	private final FavoritosSteps pageFavoritosSteps = new FavoritosSteps();
-	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
+	private final BolsaSteps secBolsaSteps = new BolsaSteps();
 	private final GaleriaSteps galeriaSteps = new GaleriaSteps();
 	
 	public Fav002() {

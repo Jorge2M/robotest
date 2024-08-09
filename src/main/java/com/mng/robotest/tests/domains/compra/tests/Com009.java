@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.compra.pageobjects.beans.DirectionData;
 import com.mng.robotest.tests.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
@@ -39,7 +39,7 @@ public class Com009 extends TestBase {
     }
     private void accessLoginAndClearBolsa() throws Exception {
         access();
-        new SecBolsaSteps().clear();
+        new BolsaSteps().clear();
     }
     
     private void changeDirecciones() throws Exception {

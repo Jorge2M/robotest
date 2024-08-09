@@ -8,11 +8,11 @@ import com.mng.robotest.tests.domains.bolsa.pageobjects.LineasArticuloBolsa.Data
 import com.mng.robotest.testslegacy.data.Constantes;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
-import static com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa.*;
+import static com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaBase.StateBolsa.*;
 
 public class CheckerContentBolsa extends PageBase {
 	
-	private final SecBolsaCommon secBolsa = new SecBolsa();
+	private final SecBolsaBase secBolsa = new SecBolsa();
 	
 	private final List<ArticuloScreen> linesArticlesExpected;
 	private final List<ArticuloDataBolsaScreen> linesArticlesInScreen = new ArrayList<>();

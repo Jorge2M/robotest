@@ -4,7 +4,7 @@ import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaTyp
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.chequeregalo.beans.ChequeRegalo;
 import com.mng.robotest.tests.domains.chequeregalo.pageobjects.PageChequeRegaloInputData.Importe;
 import com.mng.robotest.tests.domains.chequeregalo.steps.PageChequeRegaloInputDataSteps;
@@ -46,7 +46,7 @@ public class Rgl002 extends TestBase {
 	
 	private void loginAndClearBolsa() throws Exception {
 		access();
-		new SecBolsaSteps().clear();
+		new BolsaSteps().clear();
 	}	
 
 	private void selectFooterLinkChequeRegalo() {

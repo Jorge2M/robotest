@@ -3,7 +3,7 @@ package com.mng.robotest.testslegacy.appshop.paisaplicavale;
 import java.util.Arrays;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.compranew.steps.CheckoutNewSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
@@ -45,7 +45,7 @@ public class Chk001 extends TestBase {
 	
 	private void accessLoginAndClearBolsa() throws Exception {
 		access();
-		new SecBolsaSteps().clear();
+		new BolsaSteps().clear();
 	}
 	
 	private void fluxOldCheckout() throws Exception {

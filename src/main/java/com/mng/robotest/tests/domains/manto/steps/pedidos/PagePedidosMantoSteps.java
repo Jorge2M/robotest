@@ -103,7 +103,7 @@ public class PagePedidosMantoSteps extends StepMantoBase {
 		for (String referencia : referencias) {
 			var articulo = new ArticuloScreen();
 			articulo.setReferencia(referencia);
-			dBagPrueba.addArticulo(articulo);
+			dBagPrueba.add(articulo);
 		}
 		dPedidoPrueba.setDataBag(dBagPrueba);
 

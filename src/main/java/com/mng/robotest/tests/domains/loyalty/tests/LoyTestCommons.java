@@ -4,7 +4,7 @@ import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.J
 import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType.NEW_NOW;
 
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.compra.pageobjects.beans.DiscountLikes;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
@@ -43,7 +43,7 @@ public class LoyTestCommons extends StepBase {
 			clickMenu(JERSEIS_Y_CARDIGANS_SHE);
 		}
 		new GaleriaSteps().selectTallaAvailable();
-        new SecBolsaSteps().selectButtonComprar();
+        new BolsaSteps().selectButtonComprar();
 	}
 	
 	private boolean isGroupNewNowSelectable() {

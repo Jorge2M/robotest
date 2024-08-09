@@ -6,6 +6,7 @@ public class ArticuloDataBolsaScreen {
 	private String referencia;
 	private String nombre;
 	private String color;
+	private String codColor;
 	private Talla talla;
 	private String cantidad;
 	private float precio;
@@ -25,8 +26,14 @@ public class ArticuloDataBolsaScreen {
 	public String getColor() {
 		return color;
 	}
+	public String getCodColor() {
+		return codColor;
+	}
 	public void setColor(String color) {
 		this.color = color;
+	}
+	public void setCodColor(String codColor) {
+		this.codColor = codColor;
 	}
 	public Talla getTalla() {
 		return talla;

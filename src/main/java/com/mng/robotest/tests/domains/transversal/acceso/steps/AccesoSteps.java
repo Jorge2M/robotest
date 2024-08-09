@@ -10,7 +10,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.base.datatest.DataTest;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.login.steps.PageIdentificacionSteps;
 import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
@@ -44,7 +44,7 @@ public class AccesoSteps extends StepBase {
 		accessFromPreHome(false, true);
 		if (dataTest.isUserRegistered()) {
 			identificacionEnMango();
-			new SecBolsaSteps().clear();
+			new BolsaSteps().clear();
 		}
 	}
 

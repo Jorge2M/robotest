@@ -23,10 +23,7 @@ public interface PageFavoritos {
 	boolean isListEmpty();
 	
 	public static PageFavoritos make(Pais pais, AppEcom app) {
-		if (isGenesis(pais, app)) {
-			return new PageFavoritosGenesis();
-		}
-		return new PageFavoritosOld();
+		return new PageFavoritosGenesis();
 	}
 	
 	public static boolean isGenesis(Pais pais, AppEcom app) {

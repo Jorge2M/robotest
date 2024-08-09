@@ -1,9 +1,9 @@
 package com.mng.robotest.tests.domains.registro.tests;
 
-import static com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps.FluxBolsaCheckout.*;
+import static com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps.FluxBolsaCheckout.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page2IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
@@ -25,11 +25,11 @@ public class Reg008 extends TestBase {
 	}
 
 	private void altaArticulosBolsa() throws Exception {
-		new SecBolsaSteps().altaListaArticulosEnBolsa(getArticles(1));
+		new BolsaSteps().altaListaArticulosEnBolsa(getArticles(1));
 	}
 	
 	private void clickComprarAndSelectRegistro() {
-		new SecBolsaSteps().selectButtonComprar(REGISTRO);
+		new BolsaSteps().selectButtonComprar(REGISTRO);
 	}
 	
 	private void register() {
@@ -48,7 +48,7 @@ public class Reg008 extends TestBase {
 	}
 	
 	private void checkNoElementsInBag() {
-		new SecBolsaSteps().checkBolsaIsVoid();
+		new BolsaSteps().checkBolsaIsVoid();
 	}	
 	
 }

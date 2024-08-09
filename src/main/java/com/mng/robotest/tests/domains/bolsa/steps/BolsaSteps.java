@@ -26,15 +26,15 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Artic
 import com.mng.robotest.tests.repository.productlist.sort.SortFactory.SortBy;
 import com.mng.robotest.testslegacy.generic.UtilsMangoTest;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
-import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
+import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaBase.StateBolsa;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.bolsa.pageobjects.LineasArticuloBolsa.DataArtBolsa.*;
-import static com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps.FluxBolsaCheckout.*;
+import static com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps.FluxBolsaCheckout.*;
 import static com.github.jorge2m.testmaker.boundary.aspects.step.SaveWhen.*;
-import static com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa.*;
+import static com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaBase.StateBolsa.*;
 
-public class SecBolsaSteps extends StepBase {
+public class BolsaSteps extends StepBase {
 
 	private static final String TAG_LISTA_ART = "@TagListaArt";
 	
@@ -119,12 +119,19 @@ public class SecBolsaSteps extends StepBase {
 		for (int i=0; i<listParaAlta.size(); i++) {
 			var artTmp = listParaAlta.get(i);
 			var articulo = new UtilsMangoTest().addArticuloBolsa(artTmp);
-			dataTest.getDataBag().addArticulo(articulo);
+			dataTest.getDataBag().add(articulo);
 		}
 
 		if (isDesktop()) {
 			secBolsa.isInStateUntil(OPEN, 10);
 		}
+	}
+	
+	@Step (
+		description="Añadimos el primer artículo de la bolsa a <b>Favoritos</b>",
+		expected="El producto se añade correctamente a favoritos")
+	public void addArticleToFavorites() {	
+		secBolsa.addArticleToFavorites();
 	}
 
 	private void insertArticlesInStepDescription(List<Article> listParaAlta) {
@@ -242,7 +249,7 @@ public class SecBolsaSteps extends StepBase {
 	private void clearArticuloBolsa(ArticuloScreen artToClear) throws Exception {
 		String importeTotalOrig = secBolsa.getPrecioSubtotalTextPant();
 		secBolsa.getLineasArtBolsa().clearArticuloAndWait(artToClear.getReferencia());
-		dataTest.getDataBag().removeArticulo(0); 
+		dataTest.getDataBag().remove(0); 
 		checkImporteIsModified(importeTotalOrig, 5);
 		checkArticulosBolsa();
 	}

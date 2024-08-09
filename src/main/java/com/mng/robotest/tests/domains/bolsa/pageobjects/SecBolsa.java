@@ -1,17 +1,18 @@
 package com.mng.robotest.tests.domains.bolsa.pageobjects;
 
-import static com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa.OPEN;
+import static com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaBase.StateBolsa.OPEN;
 
 import java.net.URISyntaxException;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
+import com.mng.robotest.tests.domains.favoritos.entity.Favorite;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class SecBolsa extends SecBolsaCommon {
+public class SecBolsa extends SecBolsaBase {
 
 	private final LineasArticuloBolsa lineasArtBolsa = new LineasArticuloBolsa();
 	
@@ -22,6 +23,7 @@ public class SecBolsa extends SecBolsaCommon {
 	private static final String XP_SIGN_IN_BUTTON_MOBILE = "//*[@data-testid='shoppingCart.loginModal.cta.login']";
 	private static final String XP_CREATE_ACCOUNT_BUTTON_MOBILE = "//*[@data-testid='shoppingCart.loginModal.cta.register']";	
 	private static final String XP_CONTINUE_AS_GUEST_LINK_MOBILE = "//*[@data-testid='shoppingCart.loginModal.cta.guest']";
+	private static final String XP_HEARTH_ICON = "//*[@data-testid='bag.item.removeItem.button']";
 
 	@Override
 	String getXPathPanelBolsa() {
@@ -94,6 +96,19 @@ public class SecBolsa extends SecBolsaCommon {
 				setBolsaDesktopToState(stateBolsaExpected);
 			}
 		}
+	}
+	
+	@Override
+	public void addArticleToFavorites() {
+		var artBolsa = lineasArtBolsa.getArticuloDataByPosicion(1);
+		click(XP_HEARTH_ICON).exec();
+		moveFromBolsaToFavoritos(artBolsa);
+	}
+	
+	private void moveFromBolsaToFavoritos(ArticuloDataBolsaScreen artBolsa) {
+		var favorite = Favorite.from(artBolsa.getReferencia(), artBolsa.getCodColor());
+		dataTest.addFavorite(favorite);
+		dataTest.getDataBag().remove(favorite);
 	}
 
 	public void clickIniciarSesionMobile() {

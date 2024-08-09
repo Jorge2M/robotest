@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.compranew.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.compranew.steps.CheckoutNewSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
@@ -43,7 +43,7 @@ public class Cnw001 extends TestBase {
 
 	private void accessLoginAndClearBolsa() throws Exception {
 		access();
-		new SecBolsaSteps().clear();
+		new BolsaSteps().clear();
 	}
 	
 	private boolean isTarjetaVisaSaved() {

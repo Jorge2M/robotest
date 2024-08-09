@@ -7,8 +7,9 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
-import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaBase.StateBolsa;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
+import com.mng.robotest.tests.domains.favoritos.entity.Favorite;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ColorType;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ModCompartirNew;
@@ -274,8 +275,8 @@ public class FichaSteps extends StepBase {
 	 */
 	public void selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo) throws Exception {
 		selectAnadirALaBolsaStep();
-		dataTest.getDataBag().addArticulo(articulo);
-		new SecBolsaSteps().checkArticlesAddedToBag();
+		dataTest.getDataBag().add(articulo);
+		new BolsaSteps().checkArticlesAddedToBag();
 	}
 
 	@Step (
@@ -283,7 +284,7 @@ public class FichaSteps extends StepBase {
 		expected="El artículo se añade a Favoritos")
 	public void selectAnadirAFavoritos() {
 		pageFicha.selectAnadirAFavoritosButton();
-		dataTest.addFavorite(pageFicha.getArticuloObject());
+		dataTest.addFavorite(Favorite.from(pageFicha.getArticuloObject()));
 		checkVisibleButtonFavoritos(REMOVE);
 	}
 

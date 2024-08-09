@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.chequeregalo.tests;
 import java.util.Optional;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.compranew.steps.CheckoutNewSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
@@ -46,7 +46,7 @@ public class Rgl003 extends TestBase {
 	
 	private void accessLoginAndClearBolsa() throws Exception {
 		access();
-		new SecBolsaSteps().clear();
+		new BolsaSteps().clear();
 	}
 	
 	private Optional<ChequeRegaloOutput> checkInputChequeRegalo(double amount) {

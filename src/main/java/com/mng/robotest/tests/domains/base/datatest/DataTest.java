@@ -5,16 +5,16 @@ import java.util.List;
 
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
+import com.mng.robotest.tests.domains.favoritos.entity.Favorite;
+import com.mng.robotest.tests.domains.favoritos.entity.FavoritesStored;
 import com.mng.robotest.tests.domains.menus.beans.Linea;
 import com.mng.robotest.tests.repository.usuarios.GestorUsersShop;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.datastored.DataBag;
-import com.mng.robotest.testslegacy.datastored.DataFavoritos;
 import com.mng.robotest.testslegacy.datastored.DataPago;
 import com.mng.robotest.testslegacy.datastored.DataPedido;
-import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.utils.PaisGetter;
 
 public class DataTest implements Cloneable, Serializable {
@@ -28,7 +28,7 @@ public class DataTest implements Cloneable, Serializable {
 	private String userConnected = "";
 	private String passwordUser = "";
 	private DataBag dataBag = new DataBag(); 
-	private DataFavoritos dataFavoritos = new DataFavoritos();
+	private FavoritesStored dataFavoritos = new FavoritesStored();
 	private DataPago dataPago;
 	
 	public DataTest() { 
@@ -142,6 +142,10 @@ public class DataTest implements Cloneable, Serializable {
 	public void setDataBag(DataBag dataBag) {
 		this.dataBag = dataBag;
 	}
+	
+	public void removeFromBag(Favorite favorite) {
+		this.dataBag.remove(favorite);
+	}
 
 	public DataPago getDataPago() {
 		return dataPago;
@@ -157,15 +161,15 @@ public class DataTest implements Cloneable, Serializable {
 		this.dataPago = dataPago;
 	}
 	
-	public DataFavoritos getDataFavoritos() {
+	public FavoritesStored getDataFavoritos() {
 		return dataFavoritos;
 	}
 
-	public void setDataFavoritos(DataFavoritos dataFavoritos) {
+	public void setDataFavoritos(FavoritesStored dataFavoritos) {
 		this.dataFavoritos = dataFavoritos;
 	}
 	
-	public void addFavorite(ArticuloScreen articulo) {
+	public void addFavorite(Favorite articulo) {
 		getDataFavoritos().addArticulo(articulo);
 	}
 

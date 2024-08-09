@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.compra.tests;
 import java.util.Arrays;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pago;
@@ -41,7 +41,7 @@ public class Com010 extends TestBase {
 			listArticles = Arrays.asList(listArticles.get(0));
 		}
 		
-		new SecBolsaSteps().altaListaArticulosEnBolsa(listArticles);
+		new BolsaSteps().altaListaArticulosEnBolsa(listArticles);
 
 		//Hasta página Checkout
 		var configCheckout = ConfigCheckout.config()

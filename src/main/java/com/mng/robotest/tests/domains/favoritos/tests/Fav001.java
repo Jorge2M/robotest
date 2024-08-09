@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.favoritos.tests;
 import static com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActionFav.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.favoritos.steps.FavoritosSteps;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
@@ -14,7 +14,7 @@ public class Fav001 extends TestBase {
 
 	private final FavoritosSteps pFavoritosSteps = new FavoritosSteps();
 	private final GaleriaSteps galeriaSteps = new GaleriaSteps();
-	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
+	private final BolsaSteps secBolsaSteps = new BolsaSteps();
 	
 	public Fav001() {
 		super();

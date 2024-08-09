@@ -5,9 +5,9 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.domains.base.StepBase;
+import com.mng.robotest.tests.domains.favoritos.entity.Favorite;
 import com.mng.robotest.tests.domains.favoritos.pageobjects.PageFavoritos;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
-import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 
@@ -35,9 +35,9 @@ public class FavoritosSteps extends StepBase {
 		return checks;
 	}
 	
-	public void clear(ArticuloScreen articulo) {
-		dataTest.getDataFavoritos().removeArticulo(articulo);
-		clear(articulo.getReferencia(), articulo.getCodigoColor());
+	public void clear(Favorite favorite) {
+		dataTest.getDataFavoritos().removeArticulo(favorite);
+		clear(favorite.getReferencia(), favorite.getCodigoColor());
 	}
 	
 	@Step (
@@ -82,7 +82,7 @@ public class FavoritosSteps extends StepBase {
 		description="Desaparece el modal de favoritos compartidos " + SECONDS_WAIT,
 		level=WARN)
 	public boolean checkShareIsClosedUntil(int seconds) {
-		return (pgFavoritos.checkShareModalInvisible(seconds));
+		return pgFavoritos.checkShareModalInvisible(seconds);
 	}
 	
 	@Step (
@@ -123,10 +123,10 @@ public class FavoritosSteps extends StepBase {
 	}  
 	
 	@Step (
-		description="Desde Favoritos seleccionamos la imagen del artículo <b>#{artToPlay.getRefProducto()}</b>",
+		description="Desde Favoritos seleccionamos la imagen del artículo <b>#{artToPlay.getReferencia()}</b>",
 		expected="Aparece el modal con la ficha del artículo")
-	public void clickArticuloImg(ArticuloScreen artToPlay) {
-		String refProducto = artToPlay.getRefProducto();
+	public void clickArticuloImg(Favorite artToPlay) {
+		String refProducto = artToPlay.getReferencia();
 		String codigoColor = artToPlay.getCodigoColor();
 		pgFavoritos.clickProducto(refProducto, codigoColor);
 		new FichaSteps().checkIsFichaArtDisponible(refProducto, 2);

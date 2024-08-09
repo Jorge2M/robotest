@@ -9,11 +9,13 @@ import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 import com.mng.robotest.testslegacy.utils.UtilsTest;
+import com.mng.robotest.tests.domains.galeria.pageobjects.UtilsPageGaleria;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class LineasArticuloBolsa extends PageBase {
 
@@ -161,6 +163,34 @@ public class LineasArticuloBolsa extends PageBase {
 		}
 	}
 	
+	private String getCodColorArticle(WebElement lineaArticleWeb) {
+		WebElement link = getLineaLinkArticle(lineaArticleWeb);
+		if (link==null) {
+			return "";
+		}
+		
+		var hrefOpt = getHrefArticle(lineaArticleWeb);
+		if (hrefOpt.isPresent()) {
+			return UtilsPageGaleria.getColorFromURLficha(hrefOpt.get());
+		} else {
+			return UtilsPageGaleria.getColorFromURLficha(link.getAttribute("src"));
+		}
+	}
+	
+	private Optional<String> getHrefArticle(WebElement lineaArticleWeb) {
+		var href = lineaArticleWeb.getAttribute("href");
+		if (href==null) {
+			var linkOpt = findElement(lineaArticleWeb, ".//a");
+			if (linkOpt.isPresent()) {
+				href = linkOpt.get().getAttribute("href");
+				if (href!=null) {
+					return Optional.of(href);
+				}
+			}
+		}
+		return Optional.empty();
+	}
+	
 	private WebElement getLineaLinkArticle(WebElement lineaArticleWeb) {
 		state(VISIBLE, lineaArticleWeb).by(By.xpath(XP_LINK_RELATIVE_ARTICLE)).wait(2).check();
 		try {
@@ -191,6 +221,7 @@ public class LineasArticuloBolsa extends PageBase {
 		articleData.setReferencia(getReferenciaArticle(lineaArticleWeb));
 		articleData.setNombre(getDataArticle(DataArtBolsa.NOMBRE, lineaArticleWeb));
 		articleData.setColor(getDataArticle(DataArtBolsa.COLOR, lineaArticleWeb));
+		articleData.setCodColor(getCodColorArticle(lineaArticleWeb));
 		
 		var talla = Talla.fromLabel(
 			getDataArticle(DataArtBolsa.TALLA, lineaArticleWeb), 
