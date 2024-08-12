@@ -6,14 +6,8 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.github.jorge2m.testmaker.conf.Channel;
-import com.mng.robotest.tests.conf.AppEcom;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.FilterOrdenacion;
 import com.mng.robotest.tests.domains.galeria.pageobjects.genesis.SecFiltrosGenesis;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.desktop.SecFiltrosDesktopNoGenesis;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobilNoGenesis;
-import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.Color;
 
 public interface SecFiltros {
@@ -28,22 +22,16 @@ public interface SecFiltros {
 	public void selectIntervalImport(int minim, int maxim);
 	public boolean isVisibleLabelFiltroPrecioApplied(int minim, int maxim);
 	public boolean isVisibleLabelFiltroColorApplied(List<Color> colorsSelected);
+	public boolean isAvailableFiltrosFamilia(List<String> submenus);
 	public void selecFiltroColores(List<Color> colorsToSelect);
 	public void selectMenu2onLevelDevice(List<String> listMenus);
 	public void selectMenu2onLevelDevice(String menuLabel);
 	public boolean isClickableFiltroUntil(int seconds);
 	public void clickFilterAndSortButton();
-	public boolean isAvailableFiltros(FiltroMobil typeFiltro, List<String> listTextFiltros);
 	public void close();
 	
-	public static SecFiltros make(Channel channel, AppEcom app, Pais pais) {
-		if (pais.isGaleriaGenesis(app)) {
-			return new SecFiltrosGenesis();
-		}
-		if (channel.isDevice()) {
-			return new SecFiltrosMobilNoGenesis();
-		}
-		return new SecFiltrosDesktopNoGenesis();
+	public static SecFiltros make() {
+		return new SecFiltrosGenesis();
 	}
 	
 	/**
@@ -75,4 +63,5 @@ public interface SecFiltros {
 		}
 		return listCodColores;
 	}
+	
 }

@@ -7,8 +7,9 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
-import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaCommon.StateBolsa;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsaBase.StateBolsa;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
+import com.mng.robotest.tests.domains.favoritos.entity.Favorite;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ColorType;
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ModCompartirNew;
@@ -21,6 +22,7 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProd
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecProductDescrDevice.TypePanel;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
@@ -273,8 +275,8 @@ public class FichaSteps extends StepBase {
 	 */
 	public void selectAnadirALaBolsaTallaPrevSiSelected(ArticuloScreen articulo) throws Exception {
 		selectAnadirALaBolsaStep();
-		dataTest.getDataBag().addArticulo(articulo);
-		new SecBolsaSteps().checkArticlesAddedToBag();
+		dataTest.getDataBag().add(articulo);
+		new BolsaSteps().checkArticlesAddedToBag();
 	}
 
 	@Step (
@@ -282,8 +284,7 @@ public class FichaSteps extends StepBase {
 		expected="El artículo se añade a Favoritos")
 	public void selectAnadirAFavoritos() {
 		pageFicha.selectAnadirAFavoritosButton();
-		ArticuloScreen articulo = pageFicha.getArticuloObject();
-		dataTest.getDataFavoritos().addArticulo(articulo);
+		dataTest.addFavorite(Favorite.from(pageFicha.getArticuloObject()));
 		checkVisibleButtonFavoritos(REMOVE);
 	}
 
@@ -328,13 +329,10 @@ public class FichaSteps extends StepBase {
 
 	@Validation (description="Aparece el botón de #{buttonType} a Favoritos")
 	public boolean checkVisibleButtonFavoritos(ActionFavButton buttonType) {
-		switch (buttonType) {
-			case REMOVE:
-				return (pageFicha.isVisibleButtonElimFavoritos(1));
-			case ADD:
-			default:
-				return (pageFicha.isVisibleButtonAnadirFavoritos(1));
+		if (buttonType==ActionFavButton.REMOVE) {
+			return pageFicha.isVisibleButtonElimFavoritos(1);
 		}
+		return pageFicha.isVisibleButtonAnadirFavoritos(1);
 	}
 
 	@Validation (description="Es visible el link de <b>Disponibilidad en Tienda</b>")
@@ -481,21 +479,21 @@ public class FichaSteps extends StepBase {
 	@Step (
 		description="Seleccionar el link <b>Compartir</b>",
 		expected="Aparece el modal para compartir el enlace")
-	public void selectLinkCompartir(String codigoPais) {
+	public void selectLinkCompartir() {
 		pageFicha.selectLinkCompartir();
-		checkAppearsModalShareSocial(codigoPais);
+		checkAppearsModalShareSocial();
 	}
 	
 	@Validation
-	private ChecksTM checkAppearsModalShareSocial(String codigoPais) {
+	private ChecksTM checkAppearsModalShareSocial() {
 		var checks = ChecksTM.getNew();
 		int seconds = 2;
 	 	checks.add(
 	 		"Aparece el modal para compartir a nivel social " + getLitSecondsWait(seconds),
 	 		new ModCompartirNew().isVisibleUntil(seconds));
 		
-		boolean isPaisChina = (codigoPais.compareTo("720")==0);
-		for (IconSocial icon : IconSocial.values()) {
+		boolean isPaisChina = PaisShop.CHINA.isEquals(dataTest.getPais());
+		for (var icon : IconSocial.values()) {
 			boolean isVisibleIcon = new ModCompartirNew().isVisibleIcon(icon);
 			if (isPaisChina != icon.isSpecificChina()) {
 			 	checks.add(
@@ -513,13 +511,6 @@ public class FichaSteps extends StepBase {
 		
 	//------------------------------------------------------------------------
 	//Específic Ficha Old
-
-	@Validation (
-		description="Existe más de una imagen de carrusel a la izquierda de la imagen principal",
-		level=WARN)
-	public boolean validaExistsImgsCarruselIzqFichaOld() {
-		return (((PageFichaDeviceNoGenesis)pageFicha).getNumImgsCarruselIzq() >= 2);
-	}
 
 	@Step (
 		description="Seleccionar la #{numImagen}a imagen del carrusel izquierdo",
@@ -539,22 +530,23 @@ public class FichaSteps extends StepBase {
 	@Step (
 		description="Seleccionar la imagen/ficha central",
 		expected="Se produce un zoom sobre la imagen")
-	public void selectImagenCentralFichaOld() {
-		String pngImgCentralOriginal = ((PageFichaDeviceNoGenesis)pageFicha).getSrcImagenCentral();
-		((PageFichaDeviceNoGenesis)pageFicha).clickImagenFichaCentral();
+	public void selectImagenCentralFichaDevice() {
+		String pngImgCentralOriginal = pageFicha.getSrcImagenCentralDevice();
+		pageFicha.clickImagenCentralDevice();
 		checkImgCentralAfterZoom(pngImgCentralOriginal);
 	}
 
 	@Validation
 	public ChecksTM checkImgCentralAfterZoom(String pngImgCentralOriginal) {
 		var checks = ChecksTM.getNew();
+		int seconds = 2;
 		checks.add(
-			"Se aplica un Zoom sobre la imagen central",
-			((PageFichaDeviceNoGenesis)pageFicha).isVisibleFichaConZoom());
+			"Se aplica un Zoom sobre la imagen central " + getLitSecondsWait(seconds),
+			pageFicha.isVisibleFichaConZoomDevice(seconds));
 
 		checks.add(
 			"La imagen central con Zoom sigue conteniendo la imagen original: " + pngImgCentralOriginal,
-			((PageFichaDeviceNoGenesis)pageFicha).srcImagenCentralConZoomContains(pngImgCentralOriginal));
+			pageFicha.srcImagenCentralConZoomContainsDevice(pngImgCentralOriginal));
 
 		return checks;
 	}
@@ -563,13 +555,13 @@ public class FichaSteps extends StepBase {
 		description="Seleccionar el aspa para cerrar la imagen central con Zoom",
 		expected="La imagen con Zoom desaparece")
 	public void closeZoomImageCentralDevice() {
-		((PageFichaDeviceNoGenesis)pageFicha).closeZoomImageCentralDevice();
+		pageFicha.closeZoomImageCentralDevice();
 	}
 
 	@Validation (
 		description="La imagen central se corresponde con la imagen del carrusel seleccionada (<b>#{pngImagenCarrusel}</b>)")
 	private boolean checkZoomImageCentralDissapeared() {
-		return !((PageFichaDeviceNoGenesis)pageFicha).isVisibleFichaConZoom();
+		return !pageFicha.isVisibleFichaConZoomDevice(0);
 	}
 
 	@Validation

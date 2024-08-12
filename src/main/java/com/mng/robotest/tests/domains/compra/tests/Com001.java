@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.compra.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
@@ -30,12 +30,13 @@ public class Com001 extends TestBase {
 	public void execute() throws Exception {
 		accessLoginAndClearBolsa();
 		altaArticulosBolsaAndClickComprar(2);
-		if (!isPRO() && !isTarjetaVisaSaved()) {
+		boolean isPro = isPRO();
+		if (!isPro && !isTarjetaVisaSaved()) {
 			execPaymentSavingCardAndRepeatCheckout();
 		}
 		checkPromoEmployee();
-		if (!isPRO()) {
-			executeVisaPaymentSelectingSaveCard();
+		if (!isPro) {
+			executeVisaPaymentSelectingSavedCard();
 			checkMisCompras();
 			checkMisDatos();
 		}
@@ -60,7 +61,7 @@ public class Com001 extends TestBase {
 		dataTest.getDataPago().setUseSavedCard(false);
 	}
 	
-	private void executeVisaPaymentSelectingSaveCard() throws Exception {
+	private void executeVisaPaymentSelectingSavedCard() throws Exception {
         var dataPago = dataTest.getDataPago();
         dataPago.setPago(dataTest.getPais().getPago("VISA"));
         dataPago.setUseSavedCard(true);
@@ -69,7 +70,7 @@ public class Com001 extends TestBase {
 	
 	private void accessLoginAndClearBolsa() throws Exception {
 		access();
-		new SecBolsaSteps().clear();
+		new BolsaSteps().clear();
 	}
 	
 	private void checkPromoEmployee() {

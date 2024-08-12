@@ -8,8 +8,8 @@ import java.util.Optional;
 
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
-import com.mng.robotest.tests.domains.buscador.steps.SecBuscadorSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
+import com.mng.robotest.tests.domains.buscador.steps.BuscadorSteps;
 import com.mng.robotest.tests.domains.favoritos.pageobjects.PageFavoritos;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
@@ -32,7 +32,9 @@ public class Fic006 extends TestBase {
 	public Fic006() throws Exception {
 		super();
 		dataTest.setUserRegistered(true);
-		dataTest.setPais(liechtenstein);
+		if (inputParamsSuite.getListaPaises().isEmpty()) {
+			dataTest.setPais(liechtenstein);
+		}
 		
 		var getterProducts = new GetterProducts.Builder(dataTest.getPais().getCodigoAlf(), app, driver)
 				.minProducts(200)
@@ -55,18 +57,20 @@ public class Fic006 extends TestBase {
 	
 	private void accessAndClear() throws Exception {
 		accessAndClearData();
-		new PageFavoritos().clearAllArticulos();
+		if (!isOutlet()) {
+			PageFavoritos.make(dataTest.getPais(), app).clearAllArticulos();
+		}
 	}
 
 	private void articleOnlineTest() {
 		var articleOnline = Article.getArticleForTest(productOnline.get());
-		new SecBuscadorSteps().searchArticulo(articleOnline, filterOnline);
+		new BuscadorSteps().searchArticulo(articleOnline, filterOnline);
 		fichaSteps.checkLinkDispTiendaInvisible();
 	}
 	
 	private void articleNoOnlineTest() throws Exception {
 		var articleNoOnlineWithColors = Article.getArticleForTest(produtNoOnlineWithColors.get());
-		new SecBuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
+		new BuscadorSteps().searchArticulo(articleNoOnlineWithColors, filterNoOnlineWithColors);
 		var articulo = selectColorAndTalla();
 		if (isShop()) {
 			checkFavorites();
@@ -125,7 +129,7 @@ public class Fic006 extends TestBase {
 		//Si es talla única -> Significa que lo dimos de alta en la bolsa cuando seleccionamos el click "Añadir a la bolsa"
 		//-> Lo damos de baja
 		if (isTallaUnica) {
-			new SecBolsaSteps().clear();
+			new BolsaSteps().clear();
 		}
 	}
 

@@ -10,9 +10,9 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.base.datatest.DataTest;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.login.steps.PageIdentificacionSteps;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
 import com.mng.robotest.tests.domains.transversal.browser.LocalStorageMango;
 import com.mng.robotest.tests.domains.transversal.prehome.steps.PagePrehomeSteps;
@@ -44,7 +44,7 @@ public class AccesoSteps extends StepBase {
 		accessFromPreHome(false, true);
 		if (dataTest.isUserRegistered()) {
 			identificacionEnMango();
-			new SecBolsaSteps().clear();
+			new BolsaSteps().clear();
 		}
 	}
 
@@ -138,7 +138,7 @@ public class AccesoSteps extends StepBase {
 				userMenus.isMenuInStateUntil(FAVORITOS, PRESENT, 1));
 		}
 		
-		if (!isDesktop()) {
+		if (!isDesktop() && dataTest.getPais().isVentaOnline()) {
 			boolean isPresentLinkMisCompras = userMenus.isMenuInState(MIS_COMPRAS, PRESENT);
 			checks.add(
 				"Aparece el link \"Mis Compras\"",
@@ -175,7 +175,7 @@ public class AccesoSteps extends StepBase {
 	public void inicioSesionDatosKO(String usuario, String password) {
 		new AccesoFlows().identification(usuario, password);
 		new PageIdentificacionSteps().checkTextoCredencialesKO();
-		new SecMenusUserSteps().checkIsInvisibleLinkCerrarSesion();
+		new MenusUserSteps().checkIsInvisibleLinkCerrarSesion();
 		checksDefault();	
 	}
 	

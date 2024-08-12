@@ -18,16 +18,16 @@ public class SecProductDescrDevice extends PageBase {
 	public enum TypeStatePanel { FOLDED, UNFOLDED, MISSING }
 	public enum TypePanel {
 		DESCRIPTION(
-			"//div[@id='descriptionPanel']", "//div[@class[contains(.,'product-description')]]",
+			"//div[@id='descriptionPanel']", "//*[@data-testid='pdp.productDetails.description']",
 			Arrays.asList(shop, outlet), UNFOLDED),
 		COMPOSITION(
-			"//div[@id='compositionPanel']", "//div[@class[contains(.,'more-info')]]",
+			"//div[@id='compositionPanel']", "//*[@data-testid='pdp.productDetails.compositionOriginAndCare.accordion']",
 			Arrays.asList(shop, outlet), FOLDED),
 		SHIPMENT(
-			"//div[@id='shipmentPanel']", "//div[@class[contains(.,'shipment-and-returns')]]",
+			"//div[@id='shipmentPanel']", "//*[@data-testid='pdp.productInfo.shippingAndReturns.accordion']",
 			Arrays.asList(shop, outlet), FOLDED), 
 		RETURNS(
-			"//div[@id='returnsPanel']", "//div[@class[contains(.,'shipment-and-returns')]]",
+			"//div[@id='returnsPanel']", "//*[@data-testid='pdp.productInfo.shippingAndReturns.accordion']",
 			Arrays.asList(shop, outlet), FOLDED),
 		KC_SAFETY(
 			"//div[@id='kcSafetyPanel']", "//div[@id='kcSafetyPanel']", //?
@@ -45,7 +45,7 @@ public class SecProductDescrDevice extends PageBase {
 		}
 		
 		private static final String XP_DIV_PRODUCT_DESCRIPTION_DESKTOP = "//div[@class='product-description']";
-		private static final String XP_DIV_PRODUCT_DESCRIPTION_DEVICE = "//div[@class[contains(.,'product-detail')]]";
+		private static final String XP_DIV_PRODUCT_DESCRIPTION_DEVICE = "//div[@class[contains(.,'ProductDetail')]]";
 		
 		public String getXPath(Channel channel, AppEcom app) {
 			if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {
@@ -54,7 +54,7 @@ public class SecProductDescrDevice extends PageBase {
 			return XP_DIV_PRODUCT_DESCRIPTION_DESKTOP + xPathDesktop;
 		}
 		public String getXPathLink(Channel channel, AppEcom app) {
-			if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {
+			if (channel.isDevice()) {
 				return getXPath(channel, app);
 			}
 			return getXPath(channel, app) + "//*[@role='button']";
@@ -89,13 +89,10 @@ public class SecProductDescrDevice extends PageBase {
 		}
 		
 		var panel = getElement(xpathPanel);
-		if (channel==Channel.mobile || (channel==Channel.tablet && app!=AppEcom.outlet)) {
-			By byCapa = By.xpath(".//div[@class[contains(.,'collapsible-info-body')]]");
-			if (state(PRESENT, panel).by(byCapa).check()) {
-				var capaElem = driver.findElement(byCapa);
-				if (capaElem.getAttribute("class").contains("-opened")) {
-					return UNFOLDED;
-				}
+		if (channel.isDevice()) {
+			By byPanelFolded = By.xpath(".//button[@aria-expanded='false']");
+			if (state(PRESENT, panel).by(byPanelFolded).check()) {
+				return FOLDED;
 			} else {
 				return UNFOLDED;
 			}

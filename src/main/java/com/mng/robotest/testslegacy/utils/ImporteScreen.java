@@ -3,10 +3,14 @@ package com.mng.robotest.testslegacy.utils;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import com.mng.robotest.tests.domains.compra.pageobjects.UtilsCheckout;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
@@ -16,6 +20,10 @@ public class ImporteScreen {
 	private ImporteScreen() {}
 	
 	public static String normalizeImportFromScreen(String screenImport) {
+		if (containsArabicNumber(screenImport)) {
+			return screenImport.replaceAll("[A-Za-z\\s]", "");
+		}
+		
 		String impToReturn = screenImport.replaceAll("[^\\d.,]", "");
 		
 		//Remove first and last character if "." o ","
@@ -49,6 +57,13 @@ public class ImporteScreen {
 		return impToReturn;
 	}
 	
+	private static boolean containsArabicNumber(String screenImport) {
+        String arabicNumberRegex = "[\\u0660-\\u0669]";
+        Pattern pattern = Pattern.compile(arabicNumberRegex);
+        Matcher matcher = pattern.matcher(screenImport);
+        return matcher.find();
+	}
+	
 	/**
 	 * Adapta un importe a un float teniendo en cuenta los diferentes formatos de importe mostrados en MANGO
 	 */
@@ -57,7 +72,10 @@ public class ImporteScreen {
 		if (importeResult.compareTo("") == 0) {
 			return (0);
 		}
-		return (Float.parseFloat(importeResult.replace(',', '.')));
+		if (containsArabicNumber(screenImport)) {
+			return UtilsCheckout.getArabicNumber(screenImport);
+		}
+		return Float.parseFloat(importeResult.replace(',', '.'));
 	}
 	
 	/**

@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.registro.tests;
 import java.util.Map;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroDirecStepsOutlet;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroFinStepsOutlet;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
@@ -13,7 +13,7 @@ import com.mng.robotest.testslegacy.data.DataMango;
 
 public class Reg004 extends TestBase {
 	
-	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
+	private final MenusUserSteps userMenusSteps = new MenusUserSteps();
 	private final PageRegistroIniStepsOld pageRegistroIniSteps = new PageRegistroIniStepsOld();
 	private final PageRegistroDirecStepsOutlet pageRegistroDirecSteps = new PageRegistroDirecStepsOutlet();
 	private final PageRegistroFinStepsOutlet pageRegistroFinSteps = new PageRegistroFinStepsOutlet(); 

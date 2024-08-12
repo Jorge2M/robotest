@@ -9,22 +9,23 @@ import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageInfoNewMisComprasMovil;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuenta;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.testslegacy.datastored.DataPago;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.mng.robotest.tests.domains.micuenta.pageobjects.LinkMiCuenta.*;
 
 public class MiCuentaSteps extends StepBase {
 	
 	private final PageMiCuenta pgMiCuenta = PageMiCuenta.make(dataTest.getPais(), app);
-	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
+	private final MenusUserSteps userMenusSteps = new MenusUserSteps();
 	
 	public void goTo() {
 		goToPortada();
-		new SecMenusUserSteps().clickMenuMiCuenta();
+		new MenusUserSteps().clickMenuMiCuenta();
 	}
 	
 	@Validation
@@ -64,8 +65,18 @@ public class MiCuentaSteps extends StepBase {
 		expected = "Aparece la página de Mis datos")
 	private void clickLinkMisDatos(String usuarioReg) {
 		pgMiCuenta.click(MIS_DATOS);
-		new PageMisDatosSteps().validaIsPage(usuarioReg);
+		var resultChecks = new MisDatosSteps().checkIsPage(usuarioReg);
+		workAroundMisDatosProblem(usuarioReg, !resultChecks.isAvoidEvidences());
 		checksDefault();
+	}
+	
+	private void workAroundMisDatosProblem(String usuarioReg, boolean apply) {
+		//TODO workaround 06-08-2024 para corregir el problema de login->mis datos
+		if (UtilsTest.todayBeforeDate("2024-09-06") && apply) {
+			back();
+			pgMiCuenta.click(MIS_DATOS);
+			new MisDatosSteps().checkIsPage(usuarioReg);			
+		}
 	}
 	
 	@Step(
@@ -103,16 +114,16 @@ public class MiCuentaSteps extends StepBase {
 			new PageMisDireccionesSteps().checkData(dataRegistro);
 		}		
 		goToMisDatos(dataRegistro.get("cfEmail"));
-		new PageMisDatosSteps().validaIsDataAssociatedToRegister(dataRegistro, codPais);
+		new MisDatosSteps().validaIsDataAssociatedToRegister(dataRegistro, codPais);
 		checksDefault();
 	}
-	public void goToMisDatosAndValidateData(DataNewRegister dataNewRegister) {
+	public void goToMisDatosAndCheckData(DataNewRegister dataNewRegister) {
 		if (dataTest.getPais().isMisdirecciones(app)) {
 			goToMisDirecciones();
 			new PageMisDireccionesSteps().checkData();
 		}
 		goToMisDatos(dataNewRegister.getEmail());
-		new PageMisDatosSteps().checkIsDataAssociatedToRegister(dataNewRegister);
+		new MisDatosSteps().checkIsDataAssociatedToRegister(dataNewRegister);
 		checksDefault();
 	}	
 	
@@ -136,7 +147,7 @@ public class MiCuentaSteps extends StepBase {
 	}
 	public void goToSuscripcionesAndValidateData(List<LineaType> linesMarked) {
 		goToSuscripciones();
-		new PageSuscripcionesSteps().validaIsDataAssociatedToRegister(linesMarked);
+		new PageSuscripcionesSteps().checkIsDataAssociatedToRegister(linesMarked);
 	}
 
 	public void goToDevoluciones() {

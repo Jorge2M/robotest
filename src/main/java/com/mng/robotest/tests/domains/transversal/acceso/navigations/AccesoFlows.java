@@ -9,6 +9,8 @@ import org.openqa.selenium.JavascriptExecutor;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
+import com.mng.robotest.tests.domains.base.Environment;
+import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountry;
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountryOld;
@@ -27,6 +29,7 @@ import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalActPoliticaPriv
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalNewsLetterAfterAccess;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import io.netty.handler.timeout.TimeoutException;
 
@@ -82,6 +85,7 @@ public class AccesoFlows extends StepBase {
 	}
 	
 	public void identification(String user, String password) {
+		workAroundLoginProblem();
 		clickIniciarSesion();
 		login(user, password);
 	}
@@ -128,6 +132,25 @@ public class AccesoFlows extends StepBase {
 		}
 		new MenusUserWrapper().moveAndClick(INICIAR_SESION);
 	}	
+	
+	private void workAroundLoginProblem() {
+		//TODO workaround 06-08-2024 para corregir el problema de prehome->login->checkout
+		boolean apply = 
+				UtilsTest.todayBeforeDate("2024-09-06") && 
+				PageBase.getEnvironment(inputParamsSuite.getUrlBase())!=Environment.DEVELOPMENT;
+		
+		if (apply) {
+			String urlHelp = "";
+			try {
+				String accesoIdioma = dataTest.getIdioma().getAcceso();
+				urlHelp = inputParamsSuite.getDnsUrlAcceso() + "/" + accesoIdioma + "/help";
+				driver.get(urlHelp);
+			}
+			catch (Exception e) {
+				Log4jTM.getLogger().warn("Problem loading " + urlHelp, e);
+			}
+		}
+	}
 	
 	public void cambioPaisFromHomeIfNeeded(Pais newPais, IdiomaPais newIdioma) {
 		cambioPais(newPais, newIdioma);

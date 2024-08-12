@@ -9,7 +9,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 public class MenuActionsDesktop extends PageBase implements MenuActions {
 
 	private final MenuWeb menu;
-	private final PageGaleria pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
+	private final PageGaleria pageGaleria = PageGaleria.make(channel);
 
 	public MenuActionsDesktop(MenuWeb menu) {
 		this.menu = menu;

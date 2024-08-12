@@ -4,7 +4,7 @@ import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroFinOutlet;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 
@@ -32,7 +32,7 @@ public class PageRegistroFinStepsOutlet extends StepBase {
 	
 	public void validateWeAreLogged() {
 		validateLogoGoesToPaisIdioma();
-		new SecMenusUserSteps().checkIsVisibleLinkCerrarSesion();
+		new MenusUserSteps().checkIsVisibleLinkCerrarSesion();
 	}
 	
 	@Validation

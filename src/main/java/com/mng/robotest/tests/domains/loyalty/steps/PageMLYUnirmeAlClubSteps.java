@@ -24,6 +24,17 @@ public class PageMLYUnirmeAlClubSteps extends StepBase {
 		isVisibleCreaTuCuenta(1);
 	}
 	
+	@Step (description="Seleccionar el link <b>¿Qué son los likes?</b>")
+	public void selectQueSonLosLikes() {
+		pgMLYUnirmeAlClub.selectQueSonLosLikes();
+		isVisibleModalTodoSobreLosLikes(1);
+	}
+	
+	@Validation (description="Es visible el modal <b>Todo sobre los Likes</b> " + SECONDS_WAIT)	
+	public boolean isVisibleModalTodoSobreLosLikes(int seconds) {
+		return pgMLYUnirmeAlClub.isVisibleModalTodoSobreLosLikes(seconds); 
+	}
+	
 	@Validation (description="Es visible el modal para crear tu cuenta " + SECONDS_WAIT)	
 	public boolean isVisibleCreaTuCuenta(int seconds) {
 		return pgMLYUnirmeAlClub.isVisibleCrearCuenta(seconds); 

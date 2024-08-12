@@ -123,6 +123,13 @@ public class ModalMultidirection extends PageBase {
 	}
 	
 	public void closeModal() {
+		closeModalOneTime();
+		if (!isModalInvisible(2)) {
+			closeModalOneTime();
+		}
+	}
+	
+	private void closeModalOneTime() {
 		if (channel.isDevice()) {
 			click(XP_CONFIRMAR_BUTTON).exec();
 		} else {

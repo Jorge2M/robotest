@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.compra.pageobjects.PageResultPago;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps.ChecksResultWithNumberPoints;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps.ChecksResultWithNumberPoints;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageAccesoMisCompras.TypeBlock;
 import com.mng.robotest.tests.domains.micuenta.steps.PageAccesoMisComprasSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
@@ -57,16 +57,11 @@ public class PageResultPagoSteps extends StepBase {
 	@Validation
 	public ChecksTM checkDataPedido() {
 		var checks = ChecksTM.getNew();
-		String importeTotal = "";
-		var dataPago = dataTest.getDataPago();
-		if (dataTest.getDataBag()!=null && "".compareTo(dataTest.getDataBag().getImporteTotal())!=0) {
-			importeTotal = dataTest.getDataBag().getImporteTotal();
-		} else {
-			importeTotal = dataPago.getDataPedido().getImporteTotal();
-		}
+		String importeTotalExpected = getImporteTotalExpected();
+		
 	  	checks.add(
-	  		"Aparece el importe " + importeTotal + " de la operación",
-	  		ImporteScreen.isPresentImporteInScreen(importeTotal, dataTest.getCodigoPais(), driver), WARN);
+	  		"Aparece el importe " + importeTotalExpected + " de la operación",
+	  		ImporteScreen.isPresentImporteInScreen(importeTotalExpected, dataTest.getCodigoPais(), driver), WARN);
 		
 		if (isDesktop()) {
 			int seconds = 1;
@@ -81,13 +76,23 @@ public class PageResultPagoSteps extends StepBase {
 	  		"Aparece el código de pedido (" + codigoPed + ") " + getLitSecondsWait(5),
 	  		isCodPedidoVisible);
 		
-		var dataPedido = dataPago.getDataPedido();
+		var dataPedido = dataTest.getDataPago().getDataPedido();
 		if (isCodPedidoVisible) {
 			dataPedido.setResejecucion(OK);
 		}
 		dataPedido.setCodpedido(codigoPed);
 		
 		return checks;
+	}
+
+	private String getImporteTotalExpected() {
+		var dataBag = dataTest.getDataBag();
+		if (dataBag!=null && "".compareTo(dataBag.getImporteTotal())!=0) {
+			return dataBag.getImporteTotal();
+		} else {
+			var dataPago = dataTest.getDataPago();
+			return dataPago.getDataPedido().getImporteTotal();
+		}
 	}
 	
 	@Validation

@@ -7,7 +7,7 @@ import com.mng.robotest.tests.conf.suites.RegistrosSuite.VersionRegistroSuite;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNino;
 import com.mng.robotest.tests.domains.registro.beans.ListDataNinos;
@@ -34,7 +34,7 @@ public class Reg003 extends TestBase {
 	private final PageRegistroDirecStepsOutlet pgRegistroDirecSteps = new PageRegistroDirecStepsOutlet();
 	private final PageRegistroFinStepsOutlet pgRegistroFinSteps = new PageRegistroFinStepsOutlet();
 
-	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
+	private final MenusUserSteps userMenusSteps = new MenusUserSteps();
 	private final MiCuentaSteps pgMiCuentaSteps;
 	private final SecCabeceraSteps secCabeceraSteps = new SecCabeceraSteps();
 	
@@ -61,7 +61,7 @@ public class Reg003 extends TestBase {
 		if (!isNotCheckInGermany()) {
 			new ModalSuscripcionSteps().checkRGPDModal();
 		}
-		new SecMenusUserSteps().selectRegistrate();
+		new MenusUserSteps().selectRegistrate();
 		if(version.register()) {
 			registerAndGoShoppingSiPubli();
 		} else {

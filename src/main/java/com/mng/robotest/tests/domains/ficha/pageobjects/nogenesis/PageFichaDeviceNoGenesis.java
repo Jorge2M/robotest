@@ -152,7 +152,8 @@ public class PageFichaDeviceNoGenesis extends PageFichaNoGenesis {
 		return state(VISIBLE, XP_ULTIMOS_PRODUCTOS_SECTION).check();
 	}
 
-	public void clickImagenFichaCentral() {
+	@Override
+	public void clickImagenCentralDevice() {
 		click(getXPathDivImgCentralDiv()).exec();
 	}
 
@@ -174,7 +175,8 @@ public class PageFichaDeviceNoGenesis extends PageFichaNoGenesis {
 		return srcImagen;
 	}
 
-	public String getSrcImagenCentral() {
+	@Override
+	public String getSrcImagenCentralDevice() {
 		String xpathImg = getXPathImagenCentral();
 		if (state(PRESENT, xpathImg).check()) {
 			String srcImagenO = getElement(xpathImg).getAttribute("src");
@@ -183,7 +185,7 @@ public class PageFichaDeviceNoGenesis extends PageFichaNoGenesis {
 		return "";
 	}
 
-	public String getSrcImagenCentralConZoom() {
+	public String getSrcImagenCentralConZoomDevice() {
 		String xpathImg = getXPathImagenCentralConZoom();
 		if (state(PRESENT, xpathImg).check()) {
 			String srcImagenO = getElement(xpathImg).getAttribute("src");
@@ -199,7 +201,7 @@ public class PageFichaDeviceNoGenesis extends PageFichaNoGenesis {
 	}
 
 	public boolean srcImagenCentralCorrespondsToImgCarrusel(String srcImgCarrusel) {
-		String srcImgCentral = getSrcImagenCentral();
+		String srcImgCentral = getSrcImagenCentralDevice();
 		String nameFileImgCentral = getNameFileImgArticleWithoutExt(srcImgCentral);
 		String nameFileImgCarrusel = getNameFileImgArticleWithoutExt(srcImgCarrusel);
 		return (nameFileImgCentral.compareTo(nameFileImgCarrusel)==0);
@@ -214,8 +216,8 @@ public class PageFichaDeviceNoGenesis extends PageFichaNoGenesis {
 		return "";
 	}
 
-	public boolean srcImagenCentralConZoomContains(String srcImagen) {
-		String srcImagenCentralConZoom = getSrcImagenCentralConZoom();
+	public boolean srcImagenCentralConZoomContainsDevice(String srcImagen) {
+		String srcImagenCentralConZoom = getSrcImagenCentralConZoomDevice();
 		if ("".compareTo(srcImagen)!=0 &&
 				"".compareTo(srcImagenCentralConZoom)!=0) {
 			String nameOld = getNameFileImgArticleWithoutExt(srcImagen);
@@ -225,8 +227,8 @@ public class PageFichaDeviceNoGenesis extends PageFichaNoGenesis {
 		return false;
 	}
 
-	public boolean isVisibleFichaConZoom() {
-		return (state(VISIBLE, getXPathDivImgCentralDiv()).check());
+	public boolean isVisibleFichaConZoomDevice(int seconds) {
+		return (state(VISIBLE, getXPathDivImgCentralDiv()).wait(seconds).check());
 	}
 
 	public void selectGuiaDeTallasLink() {

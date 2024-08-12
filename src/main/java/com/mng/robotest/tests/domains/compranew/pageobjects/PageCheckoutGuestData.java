@@ -11,7 +11,8 @@ public class PageCheckoutGuestData extends PageBase {
 	private static final String XP_SURNAME_INPUT = "//*[@data-testid='checkout.addressForm.lastName']";
 	private static final String XP_ADDRESS_INPUT = "//*[@data-testid='checkout.addressForm.address']";
 	private static final String XP_POSTCODE_INPUT = "//*[@data-testid='checkout.addressForm.postalCode']";
-	private static final String XP_CITY_INPUT = "//*[@data-testid='checkout.addressForm.city']";
+	private static final String XP_CITY = "//*[@data-testid='checkout.addressForm.city']";
+	private static final String XP_CITY_ITEM = "//*[@data-testid='checkout.addressForm.city.listbox']/div[@role='option']";
 	private static final String XP_PROVINCE = "//*[@data-testid='checkout.addressForm.provinceName']";
 	private static final String XP_COUNTRY_LIST = "//*[@data-testid='checkout.addressForm.provinceId']";
 	private static final String XP_COUNTRY_ITEM = "//*[@data-testid='checkout.addressForm.provinceId.listbox']/div[@role='option']";
@@ -30,14 +31,40 @@ public class PageCheckoutGuestData extends PageBase {
 		inputClearAndSendKeys(XP_SURNAME_INPUT, delivery.getSurname());
 		inputClearAndSendKeys(XP_ADDRESS_INPUT, delivery.getAddress());
 		inputClearAndSendKeys(XP_POSTCODE_INPUT, delivery.getPostcode());
-		inputClearAndSendKeys(XP_CITY_INPUT, delivery.getCity());
+		selectCountryIfExists(delivery.getCountry());
+		selectCityIfExists(delivery.getCity());
 		inputClearAndSendKeys(XP_EMAIL_INPUT, delivery.getEmail());
 		inputClearAndSendKeys(XP_MOBILE_INPUT, delivery.getMobile());
 		inputClearAndSendKeys(XP_PROVINCE, delivery.getProvince());
-		
 		inputTinIfExists(delivery.getDni());
-		selectCountryIfExists(delivery.getCountry());
 	}
+	
+	private void selectCityIfExists(String city) {
+		if (findElement(XP_CITY, ".//self::*[@role='combobox']").isEmpty()) {
+			inputClearAndSendKeys(XP_CITY, city);
+			return;
+		}
+		
+		if (isCityInteractable()) {
+			click(XP_CITY).exec(); //Unfold list
+			String xpathItemCity = XP_CITY_ITEM + "/p[text()='" + city + "']/.."; 
+			if (city!=null && state(VISIBLE, xpathItemCity).check()) {
+				click(xpathItemCity).exec();
+			} else {
+				click(XP_CITY_ITEM).exec(); //Select first
+			}
+		}		
+	} 
+	
+	private boolean isCityInteractable() {
+		if (state(VISIBLE, XP_CITY).check()) {
+			var cityList = getElement(XP_CITY); 
+			if (!cityList.getAttribute("class").contains("disabled")) {
+				return true;
+			}
+		}
+		return false;
+	}	
 	
 	private void inputTinIfExists(String dni) {
 		if (dni!=null && state(PRESENT, XP_TIN_INPUT).check()) {

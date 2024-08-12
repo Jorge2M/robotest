@@ -34,6 +34,7 @@ public class CookiesChecker extends PageBase {
 						Pattern.compile("JSESSIONID"),
 						Pattern.compile("JSESSIONID2"),
 						Pattern.compile("JSESSIONIDPRE"),
+						Pattern.compile("JSESSIONIDPREPRE"),
 						
 						//Cookies del dominio www.mangofashiongroup.com que aparecen cuando se selecciona EMPRESAS del footer
 						Pattern.compile("GUEST_LANGUAGE_ID"),

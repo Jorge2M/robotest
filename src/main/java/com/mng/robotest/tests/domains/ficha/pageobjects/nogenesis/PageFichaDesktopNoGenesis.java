@@ -117,6 +117,31 @@ public class PageFichaDesktopNoGenesis extends PageFichaNoGenesis {
 	@Override
 	public void clickAddBordado() {
 		click(XP_ADD_BORDADO).exec();
+	}
+
+	@Override
+	public String getSrcImagenCentralDevice() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void clickImagenCentralDevice() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isVisibleFichaConZoomDevice(int seconds) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean srcImagenCentralConZoomContainsDevice(String pngImgCentralOriginal) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void closeZoomImageCentralDevice() {
+		throw new UnsupportedOperationException();	
 	}	
 	
 }

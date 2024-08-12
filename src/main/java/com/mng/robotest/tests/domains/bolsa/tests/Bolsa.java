@@ -11,21 +11,21 @@ public class Bolsa {
 	public void addBolsaFromGaleriaNoReg() throws Exception {
 		new Bor001().execute();
 	}
-
+	
+	@Test (
+		testName="BOR002",
+		groups={"Bolsa", "Smoke", "Canal:all_App:all"}, 
+		description="[Usuario registrado][Bolsa -> Favoritos][Acceder a checkout]")
+	public void anyadirBolsayCompraSiReg() throws Exception {
+		new Bor002().execute();
+	}
+	
 	@Test (
 		testName="BOR005",
 		groups={"Bolsa", "Canal:desktop_App:all"}, 
 		description="[Usuario no registrado] Añadir y eliminar artículos de la bolsa")
 	public void gestProdBolsaNoreg() throws Exception {
 		new Bor005().execute();
-	}
-
-	@Test (
-		testName="BOR002",
-		groups={"Bolsa", "Smoke", "Canal:desktop_App:shop,outlet"}, 
-		description="[Usuario registrado] Añadir artículo a la bolsa")
-	public void anyadirBolsayCompraSiReg() throws Exception {
-		new Bor002().execute();
 	}
 
 	@Test (

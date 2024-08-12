@@ -142,14 +142,14 @@ public class PageRegistroInitialShopSteps extends StepBase {
 	@Step (
 		description="Pulsar el link <b>Política de privacidad</b>",
 		expected="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\"")	
-	public void clickPoliticaPrivacidad() {
+	public boolean clickPoliticaPrivacidad() {
 		pgRegistroInitial.clickPoliticaPrivacidad();
 		pgRegistroInitial.keyDown(5);
 		if (!pgRegistroInitial.isModalPoliticaPrivacidadVisible(1)) {
 			pgRegistroInitial.clickPoliticaPrivacidad();
 			pgRegistroInitial.keyDown(5);
 		}
-		checkIsModalPoliticaPrivacidadVisible(1);
+		return checkIsModalPoliticaPrivacidadVisible(1);
 	}
 	@Validation (description="Aparece el modal de \"Cómo protegemos y tratamos tus datos?\" " + SECONDS_WAIT)
 	public boolean checkIsModalPoliticaPrivacidadVisible(int seconds) {

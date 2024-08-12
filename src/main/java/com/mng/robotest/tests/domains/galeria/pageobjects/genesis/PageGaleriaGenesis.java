@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.galeria.pageobjects.genesis;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.AttributeArticle.*;
-import static com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.entity.StateFavorito.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,12 +20,10 @@ import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.ficha.pageobjects.PageFicha;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
-import com.mng.robotest.tests.domains.galeria.pageobjects.commons.entity.TypeSlider;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.TypeArticleDesktop;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaNoGenesis.StateFavorito;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.UtilsPageGaleria;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.article.SecPreciosArticulo;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.UtilsPageGaleria;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.StateFavorito;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActionFav;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.data.Constantes;
@@ -39,25 +37,55 @@ import com.mng.robotest.testslegacy.pageobject.utils.ListDataArticleGalery;
 
 public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria {
 
-	SecFiltros secFiltros = SecFiltros.make(channel, app, dataTest.getPais());	
+	SecFiltros secFiltros = SecFiltros.make();	
 	
 	private static final String XP_HEADER = "//*[@data-testid='plp.products.list.h1Seo']";
-	private static final String XP_LISTA_ARTICULOS = "//*[@data-testid[contains(.,'plp.products.list')]]//ul";
-	public static final String XP_ARTICULO = XP_LISTA_ARTICULOS + "//li[@data-slot]";
+	private static final String XP_LISTA_ARTICULOS_OLD = "//*[@data-testid[contains(.,'plp.products.list')] or @id='grid-container']//ul";
+	public static final String XP_ARTICULO_OLD = XP_LISTA_ARTICULOS_OLD + "//li[@data-slot]";
+	public static final String XP_ARTICULO_NEW = "//ul/li[@data-testid='plp.slot']";
+	
 	protected static final String XP_ICONO_UP_GALERY = "//button/*[@data-testid='up-large']/..";
 	private static final String XP_HEARTH_ICON = "//button[@data-testid[contains(.,'plp.product.favorite.heart')]]";
 	private static final String XP_TITLE_ARTICLE = "//p[@class[contains(.,'productTitle')]]";
 	
-	private static final String XP_TALLA_AVAILABLE = "//*[@data-testid='plp.product.sizeSelector.available']";
-	private static final String XP_TALLA_UNAVAILABLE = "//*[@data-testid='plp.product.sizeSelector.unavailable']";
+	private static final String XP_TALLA_AVAILABLE = "//*[@data-testid[contains(.,'sizeSelector.available')]]";
+	private static final String XP_TALLA_UNAVAILABLE = "//*[@data-testid[contains(.,'sizeSelector.unavailable')]]";
+	
+	private static final String XP_IMAGE_ARTICLE_DESKTOP = "//*[@data-testid='plp.product.slideshow']//img";
+	private static final String XP_IMAGE_ARTICLE_DEVICE = "//*[@data-testid='productCard.image.wrapper']//img";
+	
+	private static final String XP_ARTICULO_ANCESTOR = "ancestor::li[@data-slot]";
+	private static final String XP_BLOCK_COLORS_ARTICLE = "//*[@data-testid='productCard.colorPicker']";
+	private static final String XP_COLOR = XP_BLOCK_COLORS_ARTICLE + "//button[@data-testid[contains(.,'productCard.colorPicker.button')]]";
+	
+	private static final String XP_PRICE_ARTICLE = new SecPreciosArticulo().getXPathPrecioArticulo();
+	
+	private static final String XP_CAPA_TALLAS_DESKTOP = "//*[@data-testid='plp.product.sizeSelector.panel']";
+	private static final String XP_CAPA_TALLAS_MOBILE = "//*[@data-testid='productCard.sizeSheet']/div";
+	
+	private static final String XP_ANADIR_ARTICLE_MOBILE = "//*[@data-testid='productCard.sizeSheetButton']";
+	
+	private static final String XP_BUTTON_FOR_CLOSE_TALLAS_DEVICE = "//button[@data-testid='modal.close.button']";
+	
+	private static final String XP_URL_FICHA_ARTICLE = "//*["
+			+ "@data-testid='productCard.images' or "
+			+ "@data-testid='productCard.image.wrapper'" //Image double
+			+ "]/a";
 	
 	@Override
 	public String getXPathArticulo() {
-		return XP_ARTICULO;
+		return "(" + getXPathArticuloBase() + ")";
+	}
+	private String getXPathArticuloBase() {
+		return XP_ARTICULO_OLD + " | " + XP_ARTICULO_NEW;
+	}
+	
+	private String getXPathGridviewIcon(String gridview) {
+		return "//label[@title[contains(.,'accessibility.gridview" + gridview + "')]]";
 	}
 	
 	private String getXPathArticulo(int numArticulo) {
-		return "(" + XP_ARTICULO + ")[" + numArticulo + "]";
+		return getXPathArticulo() + "[" + numArticulo + "]";
 	}
 	
 	private String getXPathTallaAvailableArticle(int posArticulo) {
@@ -83,6 +111,11 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 			waitMillis(1000);
 		}
 		return false;
+	}
+	
+	@Override
+	public void clickGridview(String gridview) {
+		click(getXPathGridviewIcon(gridview)).exec();
 	}
 	
 	@Override
@@ -116,12 +149,18 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	}
 
 	private String getReference(WebElement articulo) {
-		return articulo.getAttribute("data-slot");
+		if (articulo!=null) {
+			String dataSlot = articulo.getAttribute("data-slot");
+			if (dataSlot!=null && "".compareTo(dataSlot)!=0) {
+				return articulo.getAttribute("data-slot");
+			}
+		}
+		return "00000000:00";
 	}
 
 	@Override
 	public String getNombreArticulo(WebElement articulo) {
-		state(PRESENT, articulo).by(By.xpath("." + XP_TITLE_ARTICLE)).wait(3).check();
+		state(PRESENT, articulo).by(By.xpath("." + XP_TITLE_ARTICLE)).wait(5).check();
 		return getElement(articulo, "." + XP_TITLE_ARTICLE).getText();
 	}
 	
@@ -137,9 +176,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return getReference(articulo).replace(":", "");
 	}
 
-	private static final String XP_IMAGE_ARTICLE_DESKTOP = "//*[@data-testid='plp.product.slideshow']//img";
-	private static final String XP_IMAGE_ARTICLE_DEVICE = "//*[@data-testid='productCard.image.wrapper']//img";	
-	
 	private String getXPathImageArticle() {
 		if (isDevice()) {
 			return XP_IMAGE_ARTICLE_DEVICE;
@@ -230,7 +266,11 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		int numArticles = getNumArticulos();
 		while (numArticles<500) {
 			moveToArticle(numArticles);
-			if (!isVisibleArticuloUntil(numArticles+1, 2)) {
+			if (!isPresentArticuloUntil(numArticles+1, 1)) {
+				moveToArticle(numArticles);
+				keyDown(10);
+			}
+			if (!isPresentArticuloUntil(numArticles+1, 2)) {
 				return;
 			}
 			numArticles = getNumArticulos();
@@ -244,7 +284,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 
 	@Override
 	public int getNumArticulos() {
-		return getElements(XP_ARTICULO).size();
+		return getElements(getXPathArticulo()).size();
 	}
 
 	@Override
@@ -302,7 +342,10 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 
 	@Override
 	public boolean isHeaderArticlesVisible(String textHeader) {
-		return state(VISIBLE, XP_HEADER).check();
+		if (!state(VISIBLE, XP_HEADER).check()) {
+			return false;
+		}
+		return getElement(XP_HEADER).getText().toLowerCase().contains(textHeader.toLowerCase());
 	}
 	
 	@Override
@@ -432,7 +475,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	    for (var textoArticuloNoValido : listTextosArticulosNoValidos) {
 	        String nombre = textoArticuloNoValido.getText();
 	        String referencia = textoArticuloNoValido
-	                .findElement(By.xpath("./ancestor::" + getXPathArticulo().substring(2)))
+	                .findElement(By.xpath("./ancestor::" + getXPathArticuloBase().substring(2)))
 	                .getAttribute("id");
 	        listTxtArtNoValidos.add(nombre + " (" + referencia + ")");
 	    }
@@ -442,6 +485,11 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	private boolean isVisibleArticuloUntil(int numArticulo, int seconds) {
 		String xpathArticulo = "(" + getXPathArticulo() + ")[" + numArticulo + "]";
 		return state(VISIBLE, xpathArticulo).wait(seconds).check();
+	}
+	
+	private boolean isPresentArticuloUntil(int numArticulo, int seconds) {
+		String xpathArticulo = "(" + getXPathArticulo() + ")[" + numArticulo + "]";
+		return state(PRESENT, xpathArticulo).wait(seconds).check();
 	}
 
 	@Override
@@ -453,10 +501,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		}
 		return null;
 	}
-	
-	private static final String XP_ARTICULO_ANCESTOR = "ancestor::li[@data-slot]";
-	private static final String XP_BLOCK_COLORS_ARTICLE = "//*[@data-testid='productCard.colorPicker']";
-	private static final String XP_COLOR = XP_BLOCK_COLORS_ARTICLE + "//button[@data-testid[contains(.,'productCard.colorPicker.button')]]";
 	
 	private String getXPathArticuloConColores() {
 		return (
@@ -501,8 +545,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return articulo;
 	}
 	
-	private static final String XP_PRICE_ARTICLE = new SecPreciosArticulo().getXPathPrecioArticulo();
-	
 	@Override
 	public String getPrecioArticulo(WebElement articulo) {
 		return getElement(articulo, "." + XP_PRICE_ARTICLE).getText();
@@ -514,14 +556,10 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return getCodColorArticulo(articuloElem);
 	}
 	
-	private static final String XP_URL_FICHA_ARTICLE = "//*["
-			+ "@data-testid='productCard.images' or "
-			+ "@data-testid='productCard.image.wrapper'" //Image double
-			+ "]/a";
-	
 	private String getCodColorArticulo(WebElement articulo) {
 		String urlFicha = getElement(articulo, "." + XP_URL_FICHA_ARTICLE).getAttribute("href");
-		return UtilsPageGaleria.getReferenciaAndCodColorFromURLficha(urlFicha);
+		String refAndColor = UtilsPageGaleria.getReferenciaAndCodColorFromURLficha(urlFicha);
+		return refAndColor.substring(refAndColor.length() - 2);
 	}
 	
 	public String getNameColorFromCodigo(String codigoColor) {
@@ -532,8 +570,8 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public List<ArticuloScreen> clickArticleHearthIcons(Integer... posIconsToClick) throws Exception {
 		List<ArticuloScreen> listArtFav = new ArrayList<>();
 		for (int posIcon : posIconsToClick) {
-			clickHearhIcon(posIcon);
 			listArtFav.add(getArticuloObject(posIcon));
+			clickHearhIcon(posIcon);
 		}
 		return listArtFav;
 	}
@@ -553,23 +591,27 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		}
 	}
 	
-	private static final String XP_ANADIR_ARTICLE_MOBILE = "//*[@data-testid='productCard.sizeSheetButton']";
-	
 	private void showTallasArticuloMobile(int posArticulo) {
 		String xpathArticle = getXPathArticulo(posArticulo);
-		state(VISIBLE, xpathArticle).wait(1).check();
+		state(VISIBLE, xpathArticle).wait(3).check();
 		moveToElement(xpathArticle);
 		var articleElem = getElement(xpathArticle);
 		var showTallasButton = getElement(articleElem, "." + XP_ANADIR_ARTICLE_MOBILE);
 		moveToElement(showTallasButton);
 		scrollEjeY(70); //Avoid capa article added to bag
 		showTallasButton.click();
+		waitMillis(250); //Time for unfold completelly
 	}
 	private void showTallasArticuloDesktop(int posArticulo) {
 		String xpathArticle = getXPathArticulo(posArticulo);
 		state(VISIBLE, xpathArticle).wait(1).check();
 		moveToElement(xpathArticle);
-		moveToElement(xpathArticle, 0, 100); //Try to surpase case when bag is overloaping article partially
+		try {
+			//Try to surpase case when bag is overloaping article partially
+			moveToElement(xpathArticle, 0, 100); 
+		} catch (Exception e) {
+			scrollEjeY(100);			
+		}
 	}
 	
 	@Override
@@ -601,8 +643,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		}
 	}
 
-	private static final String XP_BUTTON_FOR_CLOSE_TALLAS_DEVICE = "//button[@data-testid='modal.close.button']";
-	
 	private void unshowTallasArticuloDevice() {
 		if (state(VISIBLE, XP_BUTTON_FOR_CLOSE_TALLAS_DEVICE).check()) {
 			click(XP_BUTTON_FOR_CLOSE_TALLAS_DEVICE).exec();
@@ -648,8 +688,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return true;
 	}
 	
-	private static final String XP_CAPA_TALLAS_DESKTOP = "//*[@data-testid='plp.product.sizeSelector.panel']";
-	private static final String XP_CAPA_TALLAS_MOBILE = "//*[@data-testid='productCard.sizeSheet']/div";
 	private String getXPathCapaTallas() {
 		if (isDevice()) {
 			return XP_CAPA_TALLAS_MOBILE;
@@ -711,6 +749,27 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		secFiltros.selecFiltroColores(colorsToSelect);
 		return waitForArticleVisibleAndGetNumberOfThem(10);
 	}
+
+	@Override
+	public String getNombreArticuloWithText(String literal, int seconds) {
+		var articuloOpt = getArticleThatContainsLit(literal, seconds);
+		if (articuloOpt.isPresent()) {
+			return getNombreArticulo(articuloOpt.get());
+		}
+		return "";
+	}
+	
+	private Optional<WebElement> getArticleThatContainsLit(String literal, int seconds) {
+		By byArticleName = By.xpath(
+				getXPathArticulo() +
+				getXPathNombreRelativeToArticle() +
+				"//self::*[text()[contains(.,'" + literal + "')]]");
+		
+		if (state(PRESENT, byArticleName).wait(seconds).check()) {
+			return Optional.of(getElement(getXPathArticulo()));
+		}
+		return Optional.empty();
+	}	
 	
 	private int waitForArticleVisibleAndGetNumberOfThem(int seconds) {
 		int numArticle = 1;
@@ -756,9 +815,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	public String getXPathPagina(int pagina) {
 		throw new UnsupportedOperationException();
 	}
-	public int getNumArticulosFromPagina(int pagina, TypeArticleDesktop sizeArticle) {
-		throw new UnsupportedOperationException();
-	}
 	public WebElement getArticleFromPagina(int numPagina, int numArticle) {
 		throw new UnsupportedOperationException();
 	}
@@ -779,9 +835,6 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		throw new UnsupportedOperationException();
 	}
 	
-	public String getNombreArticuloWithText(String literal, int secondsWait) {
-		throw new UnsupportedOperationException();
-	}
 	public int selecOrdenacionAndReturnNumArticles(FilterOrdenacion typeOrden) throws Exception {
 		throw new UnsupportedOperationException();
 	}
@@ -789,7 +842,4 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		throw new UnsupportedOperationException();
 	}
 	
-
-
-
 }

@@ -36,21 +36,21 @@ public class SecBolsaCheckoutMobil extends PageBase {
 	}
 	
 	public float getSumPreciosArticles() {
+		try {
+			return getSumPreciosArticlesInternal();
+		} catch (StaleElementReferenceException e) {
+			waitMillis(1000);
+			return getSumPreciosArticlesInternal();
+		}
+	}
+	
+	private float getSumPreciosArticlesInternal() {
 		float sumPrecios = 0.0f;
 		for (var article : getElements(XP_LINE_ARTICLE)) {
 			sumPrecios+=getMinPrice(article);
 		}
 		return sumPrecios;
 	}
-	
-//	private int getNumArticulos(WebElement article) {
-//		var amount = getElement(article, "." + XP_AMOUNT);
-//		if (amount!=null) {
-//			String amountStr = amount.getText().replaceAll("[^0-9]", "");
-//			return Integer.parseInt(amountStr);
-//		}
-//		return 1;
-//	}
 	
 	private float getMinPrice(WebElement article) {
 		float minPrice = 999999999f;

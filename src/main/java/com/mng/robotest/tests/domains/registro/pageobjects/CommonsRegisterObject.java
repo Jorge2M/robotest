@@ -6,11 +6,15 @@ import com.mng.robotest.testslegacy.data.PaisShop;
 public class CommonsRegisterObject extends PageBase {
 
 	public boolean isGenesis() {
-		String urlBase = inputParamsSuite.getUrlBase();
-		return 
-			!isPRO(urlBase) &&
-			PaisShop.ESPANA.isEquals(dataTest.getPais()) &&
-			!channel.isDevice();
+		return !PaisShop.COREA_DEL_SUR.isEquals(dataTest.getPais());
 	}
+	
+//	public boolean isGenesis() {
+//		String urlBase = inputParamsSuite.getUrlBase();
+//		return 
+//			!isPRO(urlBase) &&
+//			PaisShop.ESPANA.isEquals(dataTest.getPais()) &&
+//			!channel.isDevice();
+//	}	
 
 }

@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.compra.tests;
 import java.util.Map;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.BuilderCheckout;
 import com.mng.robotest.testslegacy.steps.navigations.shop.CheckoutFlow.From;
@@ -30,7 +30,7 @@ public class Com005 extends TestBase {
 	}
 
 	private void loginWithNewUser(String usrEmail, String password) {
-		new SecMenusUserSteps().logoffLogin(usrEmail, password);
+		new MenusUserSteps().logoffLogin(usrEmail, password);
 	}	
 	
 	private void checkMisDatos(String usrEmail, String password) {

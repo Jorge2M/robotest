@@ -1,9 +1,9 @@
 package com.mng.robotest.tests.domains.micuenta.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
-import com.mng.robotest.tests.domains.micuenta.steps.PageMisDatosSteps;
+import com.mng.robotest.tests.domains.micuenta.steps.MisDatosSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
@@ -37,7 +37,7 @@ public class Mic003 extends TestBase {
 
 	private void accesoAndClickRegistrate() throws Exception {
 		access();
-		new SecMenusUserSteps().selectRegistrate();
+		new MenusUserSteps().selectRegistrate();
 	}	
 	
 	private void inputInitialDataAndClickCreate() {
@@ -46,9 +46,9 @@ public class Mic003 extends TestBase {
 	}
 	
 	private void cancelarCuentaAndCheckLoginKO() {
-		new MiCuentaSteps().goToMisDatosAndValidateData(dataNewRegister);
-		new PageMisDatosSteps().cancelarCuenta();
-		new SecMenusUserSteps().logoff();
+		new MiCuentaSteps().goToMisDatosAndCheckData(dataNewRegister);
+		new MisDatosSteps().cancelarCuenta();
+		new MenusUserSteps().logoff();
 		new AccesoSteps().inicioSesionDatosKO(
 				dataNewRegister.getEmail(), dataNewRegister.getPassword());
 	}	

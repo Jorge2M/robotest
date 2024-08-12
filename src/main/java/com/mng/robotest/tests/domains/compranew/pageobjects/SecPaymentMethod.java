@@ -13,7 +13,8 @@ public class SecPaymentMethod extends PageBase {
 	private static final String XP_PAYMENT_METHOD_BLOCK = "//*[@data-testid='checkout.payment.paymentMethodsList']";
 	private static final String XP_SAVE_CARD = "//*[@data-testid='checkout.payment.save.checkbox']";
 	private static final String XP_SAVED_CARD = "//*[@data-testid='checkout.paymentMethod.storedCard']";
-	private static final String XP_NEW_CARD = "//*[@data-testid='checkout.payment.card.options-NEW_CARD']";
+	private static final String XP_DELETE_SAVED_CARD = "//*[@data-testid='checkout.paymentMethod.storedCard.action']";
+	private static final String XP_NEW_CARD = "//*[@data-testid='payment-method-CREDIT_CARD.title']";
 	private static final String XP_CARD_HOLDER_INPUT = "//input[@data-testid='checkout.payment.cardHolder']";
 	private static final String XP_CARD_NUMBER_INPUT = "//input[@data-testid='checkout.payment.cardNumber']";
 	private static final String XP_CARD_EXPIRATION_INPUT = "//input[@data-testid='checkout.payment.expirationDate']";
@@ -21,6 +22,10 @@ public class SecPaymentMethod extends PageBase {
 
 	private String getXPathOptionPayment(TypePago typePago) {
 		return "//*[@data-testid[contains(.,'checkout.payment.paymentMethodsList." + typePago.getCode() + "')]]";
+	}
+	
+	private String getXPathStoredCard(String tipoTarjeta) {
+		return XP_SAVED_CARD + "//*[@data-testid[contains(.,'" + tipoTarjeta.toLowerCase() + "')]]";
 	}
 	
 	public boolean isVisible(int seconds) {
@@ -45,11 +50,21 @@ public class SecPaymentMethod extends PageBase {
 	}
 	
 	public void selectSaveCard() {
+		goToIframeInputsCard();
 		click(XP_SAVE_CARD).exec();
+		leaveIframe();
+	}
+	
+	public boolean isSavedCard(String tipoTarjeta) {
+		return state(VISIBLE, getXPathStoredCard(tipoTarjeta)).check();
+	}
+	
+	public void removeSavedCard() {
+		click(XP_DELETE_SAVED_CARD).exec();
 	}
 	
 	public void selectSavedCard() {
-		click(XP_SAVED_CARD).exec();
+		click(XP_SAVED_CARD).waitLink(2).exec();
 	}
 	
 	public void unfoldCardFormulary() {
@@ -108,7 +123,7 @@ public class SecPaymentMethod extends PageBase {
 	
 	private boolean goToIframeInputsCard(int seconds) {
 		for (int i=0; i<=seconds; i++) {
-			if (goToIframe("cardFormIframe")) {
+			if (goToIframe("checkout.paymentMethod.iframeWrapper.CREDIT_CARD")) {
 				return true;
 			}
 			waitMillis(1000);

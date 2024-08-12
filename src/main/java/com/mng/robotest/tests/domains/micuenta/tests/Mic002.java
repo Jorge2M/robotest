@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.micuenta.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.PageMisComprasSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
@@ -94,7 +94,7 @@ public class Mic002 extends TestBase {
 	private void compraTienda() throws Exception {
 		dataTest.setUserConnected(userWithStorePurchases);
 		dataTest.setPasswordUser(passUserWithStorePurchases);
-		new SecMenusUserSteps().logoff();
+		new MenusUserSteps().logoff();
 		
 		//Existe un problema en por el cual si te vuelves a loginar manteniendo el navegador
 		//se muestran las compras del anterior usuario

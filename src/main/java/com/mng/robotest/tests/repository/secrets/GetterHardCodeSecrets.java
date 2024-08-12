@@ -25,7 +25,7 @@ public class GetterHardCodeSecrets extends GetterSecretsFromInputStream {
 			"   </secret>" + lineJump +
 			"   <secret type=\"MANTO_USER\">" + lineJump +
 			"      <user>00556106</user>" + lineJump +
-			"      <password>Abracito2025</password>" + lineJump +
+			"      <password>Abracito2026</password>" + lineJump +
 			"   </secret>" + lineJump +
 			"   <secret type=\"BROWSERSTACK_USER\">" + lineJump +
 			"      <user>equipoqa1</user>" + lineJump +

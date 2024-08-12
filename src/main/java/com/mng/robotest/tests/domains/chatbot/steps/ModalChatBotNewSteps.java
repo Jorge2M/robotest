@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.mng.robotest.tests.domains.chatbot.beans.AnswersExpected;
 import com.mng.robotest.tests.domains.chatbot.pageobjects.ModalChatBot;
 import com.mng.robotest.tests.domains.chatbot.pageobjects.ModalChatBotNew;
 import com.mng.robotest.tests.domains.votfconsole.utils.ChecksResultWithStringData;
@@ -66,8 +67,8 @@ public class ModalChatBotNewSteps extends ModalChatBotSteps {
 		mdChatBot.selectButton(button);
 	}
 	
-	@Validation (description="Es visible alguna de las respuestas \"#{answersExpected}\" " + SECONDS_WAIT)
-	public boolean checkAnyResponseVisible(List<String> answersExpected, int seconds) {
+	@Validation (description="Es visible alguna de las respuestas:<br>#{answersExpected.toHtml()} " + SECONDS_WAIT)
+	public boolean checkAnyResponseVisible(AnswersExpected answersExpected, int seconds) {
 		return mdChatBot.checkAnyResponseVisible(answersExpected, seconds);
 	}
 	

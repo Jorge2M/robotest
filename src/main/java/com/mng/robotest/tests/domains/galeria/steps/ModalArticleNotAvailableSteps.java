@@ -59,7 +59,7 @@ public class ModalArticleNotAvailableSteps extends StepBase {
 		expected="Aparece el snackbar de Petición confirmada")
 	public void clickRecibirAviso() {
 		mdArticleNotAvailable.clickRecibirAviso();
-		checkSnackvarAvisoOkVisible(3);
+		checkSnackvarAvisoOkVisible(5);
 	}
 	
 	@Validation (

@@ -4,7 +4,7 @@ import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.J
 import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType.NEW_NOW;
 
 import com.mng.robotest.tests.domains.base.StepBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.compra.pageobjects.beans.DiscountLikes;
 import com.mng.robotest.tests.domains.compra.steps.CheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
@@ -15,7 +15,7 @@ import com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou.TabL
 import com.mng.robotest.tests.domains.loyalty.steps.PageHistorialLikesSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 
 public class LoyTestCommons extends StepBase {
 	
@@ -23,11 +23,11 @@ public class LoyTestCommons extends StepBase {
 			new User("ticket_digital_es@mango.com", "6051483570048367458", "ES");
 
 	public static int clickMangoLikesYou() {
-		return new SecMenusUserSteps().clickMenuMangoLikesYou();
+		return new MenusUserSteps().clickMenuMangoLikesYou();
 	}
 	
 	public static int clickMyAccountAndGetPoints() {
-		return new SecMenusUserSteps().clickMyAccountAndGetPoints();
+		return new MenusUserSteps().clickMyAccountAndGetPoints();
 	}
 	
 	public static int addLoyaltyPoints(User user) {
@@ -43,7 +43,7 @@ public class LoyTestCommons extends StepBase {
 			clickMenu(JERSEIS_Y_CARDIGANS_SHE);
 		}
 		new GaleriaSteps().selectTallaAvailable();
-        new SecBolsaSteps().selectButtonComprar();
+        new BolsaSteps().selectButtonComprar();
 	}
 	
 	private boolean isGroupNewNowSelectable() {

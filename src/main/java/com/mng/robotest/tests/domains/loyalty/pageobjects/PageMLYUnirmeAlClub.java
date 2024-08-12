@@ -6,6 +6,8 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class PageMLYUnirmeAlClub extends PageBase {
 
+	private static final String XP_LINK_QUE_SON_LIKES = "//*[@data-testid='landingMangoLikesYou.likesInfo.modalButton.open']";
+	private static final String XP_MODAL_TODO_SOBRE_LIKES = "//*[@id='mlyLanding-likesInfo-modal']";
 	private static final String XP_BUTTON_UNIRME = "//button[@data-testid='landingMangoLikesYou.signUp.modalButton.open']";
 	private static final String XP_INPUT_EMAIL = "//input[@data-testid='registry.emailInput.text']";
 	private static final String XP_INPUT_PASSWORD = "//input[@data-testid='registry.passwordInput.text']";
@@ -14,6 +16,14 @@ public class PageMLYUnirmeAlClub extends PageBase {
 	
 	public boolean isPage(int seconds) {
 		return state(VISIBLE, XP_BUTTON_UNIRME).wait(seconds).check();
+	}
+	
+	public void selectQueSonLosLikes() {
+		click(XP_LINK_QUE_SON_LIKES).exec();
+	}
+	
+	public boolean isVisibleModalTodoSobreLosLikes(int seconds) {
+		return state(VISIBLE, XP_MODAL_TODO_SOBRE_LIKES).wait(seconds).check();
 	}
 	
 	public void selectUnirmeAlClub() {

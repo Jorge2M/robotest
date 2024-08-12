@@ -12,11 +12,8 @@ public abstract class ModalBuscarEnTienda extends PageBase implements PageFromFo
 	public abstract boolean isPresentAnyTiendaUntil(int seconds);
 	public abstract void close();
 	
-	public static ModalBuscarEnTienda make(AppEcom app, Pais pais) {
-		if (pais.isFichaGenesis(pais, app)) {
-			return new ModalBuscarEnTiendaGenesis();
-		}
-		return new ModalBuscarEnTiendaNoGenesis();
+	public static ModalBuscarEnTienda make() {
+		return new ModalBuscarEnTiendaGenesis();
 	}
 	
 	@Override

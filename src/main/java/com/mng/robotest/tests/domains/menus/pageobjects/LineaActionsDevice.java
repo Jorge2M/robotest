@@ -3,6 +3,9 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
 
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
+
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.menus.beans.Linea;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
@@ -13,13 +16,6 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 
 	private final LineaType lineaType;
 	private final SublineaType sublineaType;
-	
-//	private static final String XP_LINK_SUBLINEA_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_nina')]]";
-//	private static final String XP_LINK_SUBLINEA_BEBE_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_babyNina')]]";
-//	private static final String XP_LINK_SUBLINEA_TEEN_NINA = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenQ')]]";
-//	private static final String XP_LINK_SUBLINEA_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_nino')]]";
-//	private static final String XP_LINK_SUBLINEA_BEBE_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_babyNino')]]";
-//	private static final String XP_LINK_SUBLINEA_TEEN_NINO = "//*[@data-testid[contains(.,'menu.subBrand.sections_teenP')]]";
 	
 	private String getXPathSublineaLink() {
 		return "//*[@data-testid[contains(.,'menu.subBrand." + sublineaType.getId(app) + ".section')]]";
@@ -56,14 +52,24 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 	
 	@Override
 	public void clickLinea() {
+		try {
+			clickLineaInternal();
+		} catch (StaleElementReferenceException | NoSuchElementException e) {
+			waitMillis(1000);
+			clickLineaInternal();
+		}
+ 	}
+	
+	private void clickLineaInternal() {
 		boolean toOpenMenus = true;
 		var secCabecera = SecCabecera.make();
 		secCabecera.clickIconoMenuHamburguerMobil(toOpenMenus);
 		Linea linea = Linea.getLinea(lineaType, dataTest.getPais());
 		if ("n".compareTo(linea.getExtended())==0) {
 			click(getXPathLineaLink()).type(JAVASCRIPT).exec();
-		}
- 	}
+		}		
+	}
+	
 	@Override
 	public void hoverLinea() {
 		clickLinea();
@@ -120,7 +126,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 
 	@Override
 	public boolean isLineaPresent(int seconds) {
-		return state(VISIBLE, getXPathLineaLink()).wait(seconds).check();
+		return state(VISIBLE, getXPathLineaLink() + "/../..").wait(seconds).check();
 	}
 	@Override
 	public boolean isSublineaPresent(int seconds) {

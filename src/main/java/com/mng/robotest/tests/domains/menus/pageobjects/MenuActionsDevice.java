@@ -2,11 +2,12 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.SecFiltrosMobilNoGenesis;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+
+import com.github.jorge2m.testmaker.conf.Channel;
 
 public class MenuActionsDevice extends PageBase implements MenuActions {
 
@@ -54,7 +55,16 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	@Override
 	public String click() {
 		clickGroup();
-		return clickMenu();
+		String nameMenu = clickMenu();
+		ifGalerySetGridOneColumn();
+		return nameMenu;
+	}
+
+	private void ifGalerySetGridOneColumn() {
+		var pageGaleria = PageGaleria.make(Channel.mobile);
+		if (pageGaleria.isVisibleAnyArticle()) {
+			pageGaleria.clickGridview("01");
+		}
 	}
 	
 	@Override
@@ -69,8 +79,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 	@Override
 	public boolean isVisibleSubMenus() {
-		return new SecFiltrosMobilNoGenesis()
-				.isAvailableFiltros(FiltroMobil.FAMILIA, menu.getSubMenus());
+		return SecFiltros.make().isAvailableFiltrosFamilia(menu.getSubMenus());
 	}
 
 	private void clickGroup() {
@@ -85,8 +94,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 	
 	private void clickSubLevelMenu() {
-		SecFiltros.make(channel, app, dataTest.getPais())
-			.selectMenu2onLevelDevice(menu.getSubMenu());
+		SecFiltros.make().selectMenu2onLevelDevice(menu.getSubMenu());
 	}
 	
 }

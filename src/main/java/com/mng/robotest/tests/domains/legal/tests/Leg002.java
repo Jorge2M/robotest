@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.legal.tests;
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroInitialShop;
 import com.mng.robotest.testslegacy.data.PaisShop;
 
@@ -69,7 +69,7 @@ public class Leg002 extends TestBase {
 
 	private void goToRegister() throws Exception {
 		access();
-		new SecMenusUserSteps().selectRegistrate();
+		new MenusUserSteps().selectRegistrate();
 	}
 	
 	private void checkTextoLegal() {

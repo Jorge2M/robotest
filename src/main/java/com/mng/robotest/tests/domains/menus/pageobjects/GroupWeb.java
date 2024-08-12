@@ -141,10 +141,11 @@ public class GroupWeb extends PageBase {
 	}
 	
 	private String getXPathGroupDesktop() {
-		String dataTestId = "[@data-testid[contains(.,'" + group.getId() + "_" + getIdLinea() + "')]]";
 		if (group.getGroupResponse()==GroupResponse.ARTICLES) {
+			String dataTestId = "[@data-testid[contains(.,'" + group.getId() + ".link')]]";
 			return XP_GROUP_DESKTOP + "//a" + dataTestId;
 		} else {
+			String dataTestId = "[@data-testid[contains(.,'" + group.getId() + "_" + getIdLinea() + "')]]";
 			return XP_GROUP_DESKTOP + "//button" + dataTestId;
 		}
 	}

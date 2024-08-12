@@ -1,10 +1,10 @@
 package com.mng.robotest.tests.domains.legal.tests;
 
-import static com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps.FluxBolsaCheckout.CONTINUAR_SIN_CUENTA;
+import static com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps.FluxBolsaCheckout.CONTINUAR_SIN_CUENTA;
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.compra.pageobjects.Page2IdentCheckout;
 import com.mng.robotest.tests.domains.compra.steps.Page1IdentCheckoutSteps;
 import com.mng.robotest.tests.domains.compra.steps.Page2IdentCheckoutSteps;
@@ -54,11 +54,11 @@ public class Leg003 extends TestBase {
 	}	
 	
 	private void altaArticulosBolsa() throws Exception {
-		new SecBolsaSteps().altaListaArticulosEnBolsa(getArticles(1));
+		new BolsaSteps().altaListaArticulosEnBolsa(getArticles(1));
 	}
 	
 	private void clickComprarAndSelectContinuarSinCuenta() {
-		new SecBolsaSteps().selectButtonComprar(CONTINUAR_SIN_CUENTA);
+		new BolsaSteps().selectButtonComprar(CONTINUAR_SIN_CUENTA);
 	}	
 	
 	private void inputEmailAndContinue() {

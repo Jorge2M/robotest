@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.registro.tests;
 import java.util.Arrays;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroPersonalizacionShop.GenderOption;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroInitialShopSteps;
@@ -74,7 +74,7 @@ public class Reg007 extends TestBase {
 
 	private void accesoAndClickRegistrate() throws Exception {
 		access();
-		new SecMenusUserSteps().selectRegistrate();
+		new MenusUserSteps().selectRegistrate();
 	}	
 	
 	private void inputInitialDataUserExistent() {

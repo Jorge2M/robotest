@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+
+import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 public class MenusWebAllDevice extends PageBase implements MenusWebAll {
 
-	//TODO eliminar el OLD cuando suba la nueva versión a PRO (31-05-2023)
-	private static final String XP_MENU_ITEM_OLD = "//a[@data-testid[contains(.,'header.subMenu.item')]]";
-	private static final String XP_MENU_ITEM_NEW = "//li[@data-testid]/a[@data-testid[contains(.,'menu.family.')]]";
+	private static final String XP_MENU_OPEN_GENESIS = "//*[@data-testid='menu.brands']//*[@data-testid='up-small']";
+	private static final String XP_MENU_OPEN_OLD = "//*[@id='headerMenuScroll']"; 
+	private static final String XP_MENU_ITEM = "//li[@data-testid]/a[@data-testid[contains(.,'menu.family.')]]";
 	
-	private String getXPathMenuItem() {
-		return "(" + XP_MENU_ITEM_OLD + " | " + XP_MENU_ITEM_NEW + ")";
+	private String getXPathMenuOpen() {
+		return "(" + XP_MENU_OPEN_GENESIS + " | " + XP_MENU_OPEN_OLD + ")";
 	}
 	
 	@Override
@@ -32,7 +33,7 @@ public class MenusWebAllDevice extends PageBase implements MenusWebAll {
 	
 	private List<MenuWeb> getVisibleMenus(GroupWeb groupWeb) {
 		List<MenuWeb> menus = new ArrayList<>();
-		var menuElements = getElements(getXPathMenuItem());
+		var menuElements = getElements(XP_MENU_ITEM);
 		for (var menuElement : menuElements) {
 			String name = menuElement.getText();
 			if ("".compareTo(name)!=0) {
@@ -47,9 +48,8 @@ public class MenusWebAllDevice extends PageBase implements MenusWebAll {
 		return menus;
 	}
 
-	
 	private boolean isMenuOpen(int seconds) {
-		return (new LineaWeb(LineaType.SHE).isLineaPresent(seconds));
+		return state(PRESENT, getXPathMenuOpen()).wait(seconds).check();
 	}
 	private boolean isMenuClose(int seconds) {
 		for (int i=0; i<seconds; i++) {

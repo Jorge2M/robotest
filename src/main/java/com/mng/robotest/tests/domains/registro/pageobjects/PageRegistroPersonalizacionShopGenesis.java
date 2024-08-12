@@ -36,7 +36,7 @@ public class PageRegistroPersonalizacionShopGenesis extends PageRegistroPersonal
 	}
 	@Override
 	public boolean isNotPage(int seconds) {
-		return state(INVISIBLE, XP_INPUT_NOMBRE).wait(seconds).check();
+		return state(INVISIBLE, XP_SAVE_BUTTON).wait(seconds).check();
 	}
 	@Override
 	public boolean isPostalCodeVisible() {

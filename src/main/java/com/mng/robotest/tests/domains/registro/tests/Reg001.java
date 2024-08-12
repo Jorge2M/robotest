@@ -2,7 +2,7 @@ package com.mng.robotest.tests.domains.registro.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
 import com.mng.robotest.tests.domains.registro.pageobjects.CommonsRegisterObject;
@@ -15,14 +15,16 @@ import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 public class Reg001 extends TestBase {
 
-	private final PageRegistroInitialShopSteps pgRegistroInitialSteps = new PageRegistroInitialShopSteps();
-	private final PageRegistroPersonalizacionShopSteps pgRegistroPersonalizacionSteps = new PageRegistroPersonalizacionShopSteps();
+	private final PageRegistroInitialShopSteps pgRegistroInitialSteps;
+	private final PageRegistroPersonalizacionShopSteps pgRegistroPersonalizacionSteps;
 	private final DataNewRegister dataNewRegister;
 
 	public Reg001(Pais pais, IdiomaPais idioma) {
 		super();
 		dataTest.setPais(pais);
 		dataTest.setIdioma(idioma);
+		pgRegistroInitialSteps = new PageRegistroInitialShopSteps();
+		pgRegistroPersonalizacionSteps = new PageRegistroPersonalizacionShopSteps();		
 		dataNewRegister = DataNewRegister.makeDefault(pais);
 	}
 	
@@ -40,7 +42,7 @@ public class Reg001 extends TestBase {
 	
 	private void accesoAndClickRegistrate() throws Exception {
 		access();
-		new SecMenusUserSteps().selectRegistrate();
+		new MenusUserSteps().selectRegistrate();
 	}	
 	
 	private void inputBirthDateAndConsentPersonalInfo() {
@@ -50,10 +52,11 @@ public class Reg001 extends TestBase {
 	}
 	
 	private void selectLinkPoliticaPrivacidad() {
-		pgRegistroInitialSteps.clickPoliticaPrivacidad();
-		if (new CommonsRegisterObject().isGenesis()) {
-			pgRegistroInitialSteps.clickPoliticaPrivacidadModal();
-			pgRegistroInitialSteps.clickCondicionesVenta();
+		if (pgRegistroInitialSteps.clickPoliticaPrivacidad()) {
+			if (new CommonsRegisterObject().isGenesis()) {
+				pgRegistroInitialSteps.clickPoliticaPrivacidadModal();
+				pgRegistroInitialSteps.clickCondicionesVenta();
+			}
 		}
 	}
 	
@@ -68,6 +71,7 @@ public class Reg001 extends TestBase {
 	private void inputPersonalizedDataAndClickGuardar() {
 		pgRegistroPersonalizacionSteps.inputData(dataNewRegister);
 		pgRegistroPersonalizacionSteps.clickGuardar();
+		new MenusUserSteps().isVisibleNameUser(dataNewRegister.getName(), 3);
 	}
 	
 	private void checkNewsletterSuscription() {
@@ -75,10 +79,13 @@ public class Reg001 extends TestBase {
 	}
 	
 	private void checkLoginAndUserData() {
-		new SecMenusUserSteps().logoffLogin(dataNewRegister.getEmail(), dataNewRegister.getPassword());
-		var pgMiCuentaSteps = new MiCuentaSteps();
-		pgMiCuentaSteps.goToMisDatosAndValidateData(dataNewRegister);
-		pgMiCuentaSteps.goToSuscripcionesAndValidateData(dataNewRegister.getLineas());
+		var menuUserSteps = new MenusUserSteps();
+		menuUserSteps.logoffLogin(dataNewRegister.getEmail(), dataNewRegister.getPassword());
+		menuUserSteps.isVisibleNameUser(dataNewRegister.getName(), 2);
+		
+		var miCuentaSteps = new MiCuentaSteps();
+		miCuentaSteps.goToMisDatosAndCheckData(dataNewRegister);
+		miCuentaSteps.goToSuscripcionesAndValidateData(dataNewRegister.getLineas());
 	}	
 
 	private boolean isCorea() {

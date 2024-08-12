@@ -5,8 +5,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.PageGaleriaDesktopBaseNoGenesis.NumColumnas;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.menus.SecBannerHeadGallery.TypeLinkInfo;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.data.Color;
 
@@ -56,14 +54,6 @@ public class PageGaleriaDeviceGenesis extends PageGaleriaGenesis {
     public boolean isBannerHeadSalesBanner(IdiomaPais idioma) {
     	throw new UnsupportedOperationException();
     }
-	@Override
-    public boolean isVisibleLinkInfoRebajasBannerHead() {
-		throw new UnsupportedOperationException();
-    }
-	@Override
-    public boolean isVisibleLinkInfoRebajasBannerHead(TypeLinkInfo typeLinkInfo) {
-		throw new UnsupportedOperationException();
-    }
 	
 	@Override
 	public boolean isVisibleSelectorPrecios() {
@@ -91,10 +81,6 @@ public class PageGaleriaDeviceGenesis extends PageGaleriaGenesis {
 	}
 	@Override
 	public List<String> searchForArticlesNoValid(List<String> articleNames) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void clickLinkColumnas(NumColumnas numColumnas) {
 		throw new UnsupportedOperationException();
 	}
 	

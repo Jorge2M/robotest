@@ -46,7 +46,7 @@ public class Ficha {
 	public void articuloPersonalizableNoreg() throws Exception {
 		//Todavía no se ha implementado en la ficha Genesis 
 		//el tema de la personalización, le damos un margen de tiempo
-		if (!UtilsTest.todayBeforeDate("2024-06-30")) {
+		if (!UtilsTest.todayBeforeDate("2024-10-01")) {
 			new Fic005().execute();
 		}
 	}

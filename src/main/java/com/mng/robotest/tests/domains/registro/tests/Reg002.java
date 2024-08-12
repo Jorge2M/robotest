@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.registro.beans.ListDataRegistro;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
@@ -18,7 +18,7 @@ import static com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType
 
 public class Reg002 extends TestBase {
 
-	private final SecMenusUserSteps userMenusSteps = new SecMenusUserSteps();
+	private final MenusUserSteps userMenusSteps = new MenusUserSteps();
 	private final PageRegistroIniStepsOld pgRegistroIniSteps = new PageRegistroIniStepsOld();
 	
 	private final Map<String, String> dataRegister = new HashMap<>();

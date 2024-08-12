@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 
 import com.github.jorge2m.testmaker.boundary.aspects.step.Step;
 import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
+import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
@@ -50,7 +51,7 @@ public class PageSuscripcionesSteps extends StepBase {
 	}
 	
 	@Validation
-	public ChecksTM validaIsDataAssociatedToRegister(List<LineaType> linesMarked) {
+	public ChecksTM checkIsDataAssociatedToRegister(List<LineaType> linesMarked) {
 		var checks = ChecksTM.getNew();
 		
 		var linesAll = PageRegistroPersonalizacionShop.getAllLineas();
@@ -61,9 +62,13 @@ public class PageSuscripcionesSteps extends StepBase {
 		
 		for (var linea : linesAll) {
 			if (linesMarked.contains(linea)) {
+				State state = DEFECT;
+				if (!dataTest.getPais().isVentaOnline()) {
+					state = WARN;
+				}
 				checks.add(
 				    "Aparecen marcada la suscripción de <b>" + linea + "</b>",
-				    pageSuscripciones.isNewsletterMarcada(linea.name()));
+				    pageSuscripciones.isNewsletterMarcada(linea.name()), state);
 			} else {
 				checks.add(
 					"Aparecen desmarcada la suscripción de <b>" + linea + "</b>",

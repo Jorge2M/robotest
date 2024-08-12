@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import com.mng.robotest.tests.domains.favoritos.entity.Favorite;
 import com.mng.robotest.testslegacy.generic.beans.ArticuloScreen;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
@@ -53,12 +54,22 @@ public class DataBag implements Serializable {
 		this.listArticulos.clear();
 	}
 	
-	public void addArticulo(ArticuloScreen articulo) {
+	public void add(ArticuloScreen articulo) {
 		this.listArticulos.add(0, articulo);
 	}
 	
-	public void removeArticulo(int index) {
+	public void remove(int index) {
 		this.listArticulos.remove(index);
+	}
+	
+	public void remove(Favorite favorite) {
+		for (var article : listArticulos) {
+			if (article.getReferencia().compareTo(favorite.getReferencia())==0 &&
+				article.getCodigoColor().compareTo(favorite.getCodigoColor())==0) {
+				removeArticulo(article);
+				break;
+			}
+		}
 	}
 	
 	public void removeArticulo(Object article) {

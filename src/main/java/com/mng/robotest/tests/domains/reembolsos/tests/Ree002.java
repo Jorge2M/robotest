@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.reembolsos.tests;
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.reembolsos.pageobjects.PageReembolsos;
@@ -52,7 +52,7 @@ public class Ree002 extends TestBase {
 			pageReembolsosSteps.clickSaveButtonStoreCredit();
 		}
 		float saldoCtaIni = new PageReembolsos().getImporteStoreCredit();
-		new SecBolsaSteps().addArticlesWithColors(1);
+		new BolsaSteps().addArticlesWithColors(1);
 		
 		//Seleccionar el botón comprar y completar el proceso hasta la página de checkout con los métodos de pago
 		var configCheckout = ConfigCheckout.config()

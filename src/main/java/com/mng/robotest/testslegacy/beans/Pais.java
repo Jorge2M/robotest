@@ -275,15 +275,8 @@ public class Pais implements Serializable {
 		this.multidireccion = multidireccion;
 	}
 	
-	public boolean isGaleriaGenesis(AppEcom app) {
-		return true;
-	}
-	
 	public boolean isFichaGenesis(Pais pais, AppEcom app) {
-		if (PaisShop.COLOMBIA.isEquals(pais)) {
-			return false;
-		}
-		return true;
+		return (!PaisShop.COLOMBIA.isEquals(pais));
 	}
 	
 	public String getMicuentanew() {

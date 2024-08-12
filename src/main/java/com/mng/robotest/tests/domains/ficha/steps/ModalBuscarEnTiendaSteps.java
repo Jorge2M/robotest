@@ -11,7 +11,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class ModalBuscarEnTiendaSteps extends StepBase {
 
-	private final ModalBuscarEnTienda modalBuscarEnTienda = ModalBuscarEnTienda.make(app, dataTest.getPais());
+	private final ModalBuscarEnTienda modalBuscarEnTienda = ModalBuscarEnTienda.make();
 	
 	public ChecksTM checkBusquedaConResultados() {
 		return 	checkBusquedaConResultados(State.DEFECT);

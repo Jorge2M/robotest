@@ -6,7 +6,7 @@ import com.mng.robotest.tests.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageRegalarMisLikesSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps.DataRegaloPuntos;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 
@@ -80,7 +80,7 @@ public class Loy005 extends TestBase {
 	}
 	
 	private void login(User user, String password) {
-		SecMenusUserSteps secMenusUserSteps = new SecMenusUserSteps();
+		MenusUserSteps secMenusUserSteps = new MenusUserSteps();
 		secMenusUserSteps.logoffLogin(user.getEmail(), password);
 	}
 }

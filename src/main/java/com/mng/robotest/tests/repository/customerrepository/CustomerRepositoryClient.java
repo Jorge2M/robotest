@@ -21,8 +21,10 @@ import com.mng.robotest.tests.repository.customerrepository.entity.Communication
 import com.mng.robotest.tests.repository.customerrepository.entity.Consent;
 import com.mng.robotest.tests.repository.customerrepository.entity.Customer;
 
-public class CustomerRepositoryClient extends BaseCustomerClient {
+public class CustomerRepositoryClient extends BaseTokenClient {
 
+	private String urlCustomerBase = "https://apitest2.mango.com/uat-e-consumer/consumer";
+	
 	public Optional<Customer> createCustomerWithContactability(String email) {
 	    return execCreateCustomerWithContactability(email);
 	}
@@ -34,7 +36,7 @@ public class CustomerRepositoryClient extends BaseCustomerClient {
 	private Optional<Customer> execGetCustomer(String email) {
 		String bearerToken = getCustomerToken();
 		
-        var builder = UriBuilder.fromUri(urlBase)
+        var builder = UriBuilder.fromUri(urlCustomerBase)
         		.path("contact")
                 .queryParam("contact", email);
         String customerUrl = builder.build().toString();
@@ -63,7 +65,7 @@ public class CustomerRepositoryClient extends BaseCustomerClient {
 
 	    var client = getClient();
 	    try {
-	        Response response = client.target(urlBase)
+	        Response response = client.target(urlCustomerBase)
 	                .request(MediaType.APPLICATION_JSON)
 	                .header("Authorization", "Bearer " + bearerToken)
 	                .post(Entity.entity(customerRequest, MediaType.APPLICATION_JSON));

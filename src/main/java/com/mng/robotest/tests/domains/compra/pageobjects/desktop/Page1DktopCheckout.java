@@ -232,8 +232,13 @@ public class Page1DktopCheckout extends PageBase {
 			clickAplicarPromo();
 		}
 	}
+	
 	public boolean isVisibleInputCodigoPromoUntil(int seconds) {
 		return state(VISIBLE, XP_INPUT_PROMO).wait(seconds).check();
+	}
+	
+	public void clickButtonAplicarChequeRegalo() {
+		
 	}
 
 	public void clickEliminarValeIfExists() {
@@ -402,18 +407,18 @@ public class Page1DktopCheckout extends PageBase {
 			}
 			
 			var preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
-			if (!validateArticleImport(preciosArticuloScreen, articuloScreen.getPrecio())) {
+			if (!checkArticleImport(preciosArticuloScreen, articuloScreen.getPrecio())) {
 				return false;
 			}
 		}
 		return true;
 	}
 	
-	public boolean validateArticleImport(PreciosArticulo preciosScreen, String precioArticulo) {
+	public boolean checkArticleImport(PreciosArticulo preciosScreen, String precioArticulo) {
 		return (preciosScreen.getDefinitivo() == ImporteScreen.getFloatFromImporteMangoScreen(precioArticulo));
 	}
 	
-	public boolean validateArticlesAndDiscount(Descuento descuento) {
+	public boolean checkArticlesAndDiscount(Descuento descuento) {
 	    var pgCheckoutWrapper = new PageCheckoutWrapper();
 	    for (var articulo : dataTest.getDataBag().getListArticlesTypeViewInBolsa()) {
 	        var lineaArticulo = getLineaArticle(articulo.getReferencia());
@@ -423,7 +428,7 @@ public class Page1DktopCheckout extends PageBase {
 
 	        var preciosArticuloScreen = getPreciosArticuloResumen(lineaArticulo);
 	        var descuentoToValidate = (articulo.getValePais() != null) ? descuento : new Descuento(0);
-	        if (!pgCheckoutWrapper.validateDiscountOk(preciosArticuloScreen, descuentoToValidate)) {
+	        if (!pgCheckoutWrapper.checkDiscountOk(preciosArticuloScreen, descuentoToValidate)) {
 	            return false;
 	        }
 	    }

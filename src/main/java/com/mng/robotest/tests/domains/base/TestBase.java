@@ -2,9 +2,8 @@ package com.mng.robotest.tests.domains.base;
 
 import java.util.List;
 
-import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.base.datatest.DataTest;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.compra.tests.CompraSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.steps.SecCabeceraSteps;
@@ -36,8 +35,8 @@ public abstract class TestBase extends StepBase {
     }	
     
     protected void altaArticulosBolsaAndClickComprar(List<Article> articles) throws Exception {
-        new SecBolsaSteps().altaListaArticulosEnBolsa(articles);
-        new SecBolsaSteps().selectButtonComprar();
+        new BolsaSteps().altaListaArticulosEnBolsa(articles);
+        new BolsaSteps().selectButtonComprar();
     }
 	
 	protected void clickLogoMango() {
@@ -76,10 +75,6 @@ public abstract class TestBase extends StepBase {
         new PageResultPagoSteps().checkIsPageOk();
     }
     
-	protected void renewBrowser() {
-		dataTest.setUserConnected("");
-		TestMaker.renewDriverTestCase();
-	}
 	protected void renewTest() {
 		dataTest.setUserConnected("");
 		driver.get(inputParamsSuite.getUrlBase());		

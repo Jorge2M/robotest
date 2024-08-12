@@ -2,6 +2,7 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 
 import com.mng.robotest.tests.domains.base.PageBase;
@@ -75,16 +76,28 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	public void hoverLinea() {
 		try {
 			hoverLineaInternal();
-		}
-		catch (StaleElementReferenceException e) {
-			hoverLineaInternal();
+		} catch (StaleElementReferenceException | NoSuchElementException e) {
+			manageExceptionHoverLinea();
 		}
 	}
+	
 	private void hoverLineaInternal() {
 		state(VISIBLE, getXPathLinea()).wait(3).check();
 		moveToElement(getXPathLinea());
 	}
 	
+	private void manageExceptionHoverLinea() {
+		try {
+			hoverLineaInternal();
+		} catch (NoSuchElementException e) {
+			if (lineaType==LineaType.NINO) {
+				refreshPage();
+				hoverLineaInternal();
+			} else {
+				throw e;
+			}
+		}
+	}
 	
 	@Override 
 	public void hoverSublinea() {

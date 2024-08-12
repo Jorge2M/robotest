@@ -210,6 +210,14 @@ public class PageBase extends PageObjTM {
 	    }
 	}
 	
+	protected Optional<WebElement> findElement(String xpath, String xpathChild) {
+		var parentOpt = findElement(xpath);
+		if (parentOpt.isEmpty()) {
+			return Optional.empty();
+		}
+		return findElement(parentOpt.get(), xpathChild);
+	}
+	
 	protected Optional<WebElement> findElement(WebElement element, String xpath) {
 	    try {
 	        return Optional.of(getElement(element, xpath));
@@ -227,6 +235,7 @@ public class PageBase extends PageObjTM {
 	}
 	
 	protected void renewBrowser() {
+		dataTest.setUserConnected("");
 		TestMaker.renewDriverTestCase();
 	}
 	
@@ -317,7 +326,7 @@ public class PageBase extends PageObjTM {
 	//Comenta Alberte (22-05): la infra de checkout aun no esta para QA, 
 	//esta pendiente que la desplieguen en PCI
 	protected boolean isCheckeableNewCheckout() {
-		return (!isPRO() || !UtilsTest.todayBeforeDate("2024-07-06"));
+		return !(isPRO() && UtilsTest.todayBeforeDate("2024-09-15"));
 	}
 	
 	protected boolean isVisibleInScreen(String xpath) {

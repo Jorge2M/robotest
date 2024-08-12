@@ -3,7 +3,7 @@ package com.mng.robotest.tests.domains.legal.tests;
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMisDatos;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 
@@ -37,7 +37,7 @@ public class Leg006 extends TestBase {
 	}
 	
 	private void goToMisDatos() {
-		new SecMenusUserSteps().clickMenuMiCuenta();
+		new MenusUserSteps().clickMenuMiCuenta();
 		new MiCuentaSteps().clickLinkMisDatos();
 	}	
 	

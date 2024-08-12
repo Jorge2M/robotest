@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.buscador.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.buscador.steps.SecBuscadorSteps;
+import com.mng.robotest.tests.domains.buscador.steps.BuscadorSteps;
 import com.mng.robotest.tests.domains.landings.steps.LandingSteps;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog;
@@ -12,7 +12,7 @@ public class Bus001 extends TestBase {
 	private final String categoriaProdExistente; 
 	private final String catProdInexistente;
 	
-	private final SecBuscadorSteps secBuscadorSteps = new SecBuscadorSteps();
+	private final BuscadorSteps secBuscadorSteps = new BuscadorSteps();
 	private final LandingSteps pgLandingSteps = new LandingSteps();
 	
 	public Bus001(String categoriaProdExistente, String catProdInexistente) {

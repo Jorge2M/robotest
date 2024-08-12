@@ -4,21 +4,26 @@ import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupTyp
 import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
-import com.mng.robotest.tests.domains.favoritos.steps.PageFavoritosSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
+import com.mng.robotest.tests.domains.favoritos.pageobjects.PageFavoritos;
+import com.mng.robotest.tests.domains.favoritos.steps.FavoritosSteps;
 import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 
 public class Fav002 extends TestBase {
 
-	private final PageFavoritosSteps pageFavoritosSteps = new PageFavoritosSteps();
-	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
+	private final FavoritosSteps pageFavoritosSteps = new FavoritosSteps();
+	private final BolsaSteps secBolsaSteps = new BolsaSteps();
 	private final GaleriaSteps galeriaSteps = new GaleriaSteps();
+	
+	public Fav002() {
+		super();
+	}
 	
 	public Fav002(Pais pais, IdiomaPais idioma) {
 		super();
@@ -35,6 +40,10 @@ public class Fav002 extends TestBase {
 		goToFavoritesAndCheckSharedFavorites();
 		selectFirstFavoriteAndAddBolsa();
 		clearFirstFavoriteFromFavorites();		
+	}
+	
+	private boolean isGenesis() {
+		return PageFavoritos.isGenesis(dataTest.getPais(), app);
 	}
 	
 	private void accessWithoutLoginAndClearData() throws Exception {
@@ -66,9 +75,11 @@ public class Fav002 extends TestBase {
 	}	
 	
 	private void goToFavoritesAndCheckSharedFavorites() {
-		new SecMenusUserSteps().selectFavoritos();
-		pageFavoritosSteps.clickShareIsOk();
-		pageFavoritosSteps.closeShareModal();
+		new MenusUserSteps().selectFavoritos();
+		if (!isGenesis()) {
+			pageFavoritosSteps.clickShareIsOk();
+			pageFavoritosSteps.closeShareModal();
+		}
 	}	
 	
 	private void selectFirstFavoriteAndAddBolsa() {
@@ -82,7 +93,7 @@ public class Fav002 extends TestBase {
 
 	private void clearFirstFavoriteFromFavorites() {
 		var firstFavorite = dataTest.getDataFavoritos().getArticulo(0);
-		new SecMenusUserSteps().selectFavoritos();
+		new MenusUserSteps().selectFavoritos();
 		pageFavoritosSteps.clear(firstFavorite);
 	}	
 }

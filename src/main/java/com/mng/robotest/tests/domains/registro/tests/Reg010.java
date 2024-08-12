@@ -2,12 +2,14 @@ package com.mng.robotest.tests.domains.registro.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMLYUnirmeAlClubSteps;
-import com.mng.robotest.tests.domains.menus.steps.SecMenusUserSteps;
+import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNewRegister;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 public class Reg010 extends TestBase {
 
 	private final DataNewRegister dataRegister = makeDataRegister();
+	private final PageMLYUnirmeAlClubSteps pgMLYUnirmeAlClubSteps = new PageMLYUnirmeAlClubSteps();
 
 	private DataNewRegister makeDataRegister() {
 		var dataNewRegister = DataNewRegister.makeDefault(dataTest.getPais());
@@ -17,24 +19,30 @@ public class Reg010 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		accesoAndClickMangoLikesYou();
+		access();
+		clickMangoLikesYou();
+		clickQueSonLosLikes();
 		unirmeAlClub();
 		checkLogin();
 	}
 	
-	private void accesoAndClickMangoLikesYou() throws Exception {
-		access();
-		new SecMenusUserSteps().clickMenuMangoLikesYou();
-	}	
+	private void clickMangoLikesYou() {
+		new MenusUserSteps().clickMenuMangoLikesYou();
+	}
+	
+	private void clickQueSonLosLikes() {
+		if (!(isPRO() && UtilsTest.todayBeforeDate("2024-09-30"))) {
+			pgMLYUnirmeAlClubSteps.selectQueSonLosLikes();
+		}
+	}
 	
 	private void unirmeAlClub() {
-		var pgMLYUnirmeAlClubSteps = new PageMLYUnirmeAlClubSteps();
 		pgMLYUnirmeAlClubSteps.selectUnirmeAlClub();
 		pgMLYUnirmeAlClubSteps.registro(dataRegister);
 	}
 	
 	private void checkLogin() {
-		new SecMenusUserSteps().logoffLogin(dataRegister.getEmail(), dataRegister.getPassword());
+		new MenusUserSteps().logoffLogin(dataRegister.getEmail(), dataRegister.getPassword());
 	}
 	
 }

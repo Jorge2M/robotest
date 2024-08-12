@@ -27,7 +27,7 @@ public abstract class SecCabecera extends PageBase {
 	private static final String XP_LINK_LOGO_MANGO_V2 = 
 			"//a/*[@data-test-id[contains(.,'logo.mango')]]/..";
 	
-	private static final String XP_HAMBURGUER_DEVICE_ICON = "//*[@data-testid='menu.burger']";
+	private static final String XP_HAMBURGUER_DEVICE_ICON = "//*[@data-testid='menu.burger'] | //*[@data-testid='hamburger']/..";
 
 	abstract String getXPathNumberArtIcono();
 	public abstract boolean isInStateIconoBolsa(State state, int seconds);

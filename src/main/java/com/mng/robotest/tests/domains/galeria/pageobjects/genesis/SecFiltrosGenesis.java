@@ -1,14 +1,12 @@
 package com.mng.robotest.tests.domains.galeria.pageobjects.genesis;
 
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.FilterOrdenacion;
-import com.mng.robotest.tests.domains.galeria.pageobjects.nogenesis.sections.filters.mobil.FiltroMobil;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.FilterOrdenacion;
 import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
@@ -33,13 +31,16 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		}
 	}
 
-	private static final String XP_BUTTON_FILTRAR_DESKTOP = "//*[@data-testid='plp.filters.desktop.button']";
-	private static final String XP_BUTTON_FILTRAR_MOBIL = "//*[@data-testid='plp.filters.mobile.button']";
-	private static final String XP_PANEL_FILTRO_MOBIL = "//*[@data-testid='plp.filters.mobile.panel']";
-	private static final String XP_LABEL_FILTRO_DESKTOP = XP_BUTTON_FILTRAR_DESKTOP + "//following-sibling::ul/li/span";
-	private static final String XP_LABEL_FILTRO_MOBIL = XP_PANEL_FILTRO_MOBIL + "//div[@class[contains(.,'Element_subtitle')]]";
+	private static final String XP_BUTTON_FILTRAR = "//*["
+			+ "@data-testid='plp.filters.desktop.button' or " //Old
+			+ "@data-testid='plp.filters.mobile.button' or " //Old
+			+ "@data-testid='productList.filters.small.button' or " //New
+			+ "@data-testid='productList.filters.large.button']"; //New
+
+	private static final String XP_LABEL_FILTRO_DESKTOP = XP_BUTTON_FILTRAR + "//following-sibling::ul/li/span";
+	private static final String XP_LABEL_FILTRO_MOBIL = "//*[@data-testid[contains(.,'plp.filters.mobile.panel.')]]//div[@class[contains(.,'Element_subtitle')]]";
 	
-	private static final String XP_WRAPPER_DESKTOP = XP_BUTTON_FILTRAR_DESKTOP + "/../..";
+	private static final String XP_WRAPPER_DESKTOP = XP_BUTTON_FILTRAR + "/../..";
 	private static final String XP_WRAPPER_MOBIL = "//*[@data-testid='plp.filters.mobile.panel']";
 	
 	private static final String XP_CAPA_FILTERS = "//*[@data-testid='plp.filters.desktop.panel']"; //
@@ -60,13 +61,6 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 			return XP_WRAPPER_MOBIL;
 		}
 		return XP_WRAPPER_DESKTOP;
-	}
-	
-	private String getXPathButtonFiltrar() {
-		if (isDevice()) {
-			return XP_BUTTON_FILTRAR_MOBIL;
-		}
-		return XP_BUTTON_FILTRAR_DESKTOP;
 	}
 	
 	private String getXPathLabelFiltro() {
@@ -125,13 +119,10 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	
 	@Override
 	public void selectMenu2onLevelDevice(String menuLabel) {
-		showFilters();
-		if (isDevice()) {
-			showPanelFiltroMobil(TypeFiltro.FAMILIA);
-		}
+		openSubfamilyFilter();
 		click(getXPathLinkFamily(menuLabel)).exec();
 		acceptFilters();
-	}	
+	}
 	
 	@Override
 	public void selectMenu2onLevelDevice(List<String> listMenus) {
@@ -152,7 +143,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	}	
 	
 	private void showPanelFiltroMobil(TypeFiltro typeFiltro) {
-		click(typeFiltro.getXPathPanelMobil()).exec();
+		click(typeFiltro.getXPathPanelMobil()).waitLink(1).exec();
 	}
 	
 	@Override
@@ -168,7 +159,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	@Override
 	public void showFilters() {
 		if (!isFiltersShopVisible(1) &&
-			state(CLICKABLE, getXPathButtonFiltrar()).check()) {
+			state(CLICKABLE, XP_BUTTON_FILTRAR).check()) {
 			clickFilterAndSortButton();
 			isFiltersShopVisible(1);
 		}
@@ -176,7 +167,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	
 	@Override
 	public void clickFilterAndSortButton() {
-		click(getXPathButtonFiltrar()).exec();
+		click(XP_BUTTON_FILTRAR).exec();
 	}
 	
 	private void hideFilters() {
@@ -188,7 +179,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		click(XP_BUTTON_MOSTRAR_ARTICULOS).exec();
 		waitMillis(1000);
 		waitForPageLoaded(driver);
-		PageGaleria pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
+		PageGaleria pageGaleria = PageGaleria.make(channel);
 		pageGaleria.isVisibleImageArticle(1, 2);
 	}
 	
@@ -248,6 +239,27 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		return true;
 	}
 	
+	@Override
+	public boolean isAvailableFiltrosFamilia(List<String> submenus) {
+		openSubfamilyFilter();
+		for (var submenu : submenus) {
+			if (!state(VISIBLE, getXPathLinkFamily(submenu)).check()) {
+				return false;
+			}
+		}
+		if (isDevice()) {
+			close();
+		}
+		return true;
+	}
+	
+	private void openSubfamilyFilter() {
+		showFilters();
+		if (isDevice()) {
+			showPanelFiltroMobil(TypeFiltro.FAMILIA);
+		}
+	}
+	
 	private boolean isVisibleLabelFiltroApplied(String labelExpected) {
 		return isVisibleLabelFiltroApplied(Pattern.compile(labelExpected));
 	}
@@ -262,8 +274,9 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		}
 		boolean found = false;
 		for (var labelFiltro : labelsFiltro) {
-			Matcher matcher = labelExpected.matcher(labelFiltro.getText());
-			if (matcher.matches()) {
+			String filtroLabel = labelFiltro.getText();
+			var matcher = labelExpected.matcher(labelFiltro.getText());
+			if (filtroLabel.contains(labelExpected.toString()) || matcher.matches()) {
 				found = true;
 				break;
 			}
@@ -274,11 +287,6 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 		return found;
 	}
 
-	@Override
-	public boolean isAvailableFiltros(FiltroMobil typeFiltro, List<String> listTextFiltros) {
-		throw new UnsupportedOperationException();
-	}
-	
 	private boolean isFiltersShopVisible(int seconds) {
 		return state(VISIBLE, XP_CAPA_FILTERS).wait(seconds).check();
 	}	

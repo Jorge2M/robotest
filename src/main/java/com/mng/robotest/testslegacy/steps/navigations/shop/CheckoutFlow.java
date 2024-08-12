@@ -14,7 +14,7 @@ import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.tests.conf.factories.entities.EgyptCity;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.pageobjects.SecBolsa;
-import com.mng.robotest.tests.domains.bolsa.steps.SecBolsaSteps;
+import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountry;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.compra.pageobjects.mobile.Page1EnvioCheckoutMobil;
@@ -50,7 +50,7 @@ public class CheckoutFlow extends StepBase {
 	private final Pais pais = dataTest.getPais();
 	
 	private final ValeDiscount valeTest = new ValeDiscount("TEST", 10, "EXTRA SOBRE LOS ARTÍCULOS");
-	private final SecBolsaSteps secBolsaSteps = new SecBolsaSteps();
+	private final BolsaSteps secBolsaSteps = new BolsaSteps();
 	private final CheckoutSteps checkoutSteps = new CheckoutSteps();
 	
 	private static final String TAG_LOGIN_OR_LOGOFF = "@TagLoginOfLogoff";

@@ -5,6 +5,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import java.util.List;
 import java.util.Optional;
 
+import com.mng.robotest.tests.domains.chatbot.beans.AnswersExpected;
+
 public class ModalChatBotNew extends ModalChatBot {
 
 	private static final String XP_WEBCHAT = "//div[@data-testid='iris']";
@@ -53,9 +55,9 @@ public class ModalChatBotNew extends ModalChatBot {
 		click(getXPathButton(button)).exec();
 	}
 	
-	public boolean checkAnyResponseVisible(List<String> answersExpected, int seconds) {
+	public boolean checkAnyResponseVisible(AnswersExpected answersExpected, int seconds) {
 		for (int i=0; i<seconds; i++) {
-			for (String answerExpected : answersExpected) {
+			for (String answerExpected : answersExpected.getAnswers()) {
 				if (checkResponseVisible(answerExpected, 0)) {
 					return true;
 				}

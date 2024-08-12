@@ -86,6 +86,12 @@ public interface PageFicha {
 	public boolean isLinkAddBordado(int seconds);
 	public void clickAddBordado();
 	
+	public String getSrcImagenCentralDevice();
+	public void clickImagenCentralDevice();
+	public boolean isVisibleFichaConZoomDevice(int seconds);
+	public boolean srcImagenCentralConZoomContainsDevice(String pngImgCentralOriginal);
+	public void closeZoomImageCentralDevice();
+	
 	public static PageFicha make(Channel channel, AppEcom app, Pais pais) {
 		if (pais.isFichaGenesis(pais, app)) {
 			return new PageFichaGenesis();

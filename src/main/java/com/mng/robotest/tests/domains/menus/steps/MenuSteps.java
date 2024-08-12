@@ -162,15 +162,12 @@ public class MenuSteps extends StepBase {
 	
 	public void checkSelecMenu(MenuWeb menu) {
 		String menuName = menu.getNameScreen();
-		isTitleAssociatedMenu(menuName);
+		isTitleAssociatedMenu(menuName, menu.getLinea());
 		if (isMenuWithArticles(menuName)) {
 			new GaleriaSteps().checkGaleriaAfeterSelectMenu();
 		}
 		if (menu.getSubMenus()!=null && !menu.getSubMenus().isEmpty()) {
-			//TODO eliminar esta condición cuando implementen los submenús en la galería de Genesis
-			if (!dataTest.getPais().isGaleriaGenesis(app)) {
-				checkVisibilitySubmenus(menu);
-			}
+			checkVisibilitySubmenus(menu);
 		}
 		if (isDesktop() && 
 			menu.getArticles()!=null && !menu.getArticles().isEmpty() &&
@@ -189,7 +186,7 @@ public class MenuSteps extends StepBase {
 	}
 	
 	@Validation
-	private ChecksTM isTitleAssociatedMenu(String nameMenu) {
+	private ChecksTM isTitleAssociatedMenu(String nameMenu, LineaType linea) {
 		var checks = ChecksTM.getNew();
 		boolean isTitleAccording = isTitleAssociatedToMenu(nameMenu, 1);
 	 	checks.add(
@@ -199,14 +196,23 @@ public class MenuSteps extends StepBase {
 	 			.store(NONE).build());
 	 	
 	 	if (!isTitleAccording) {
+	 		String nameInGaleryExpected = getNameInGaleryExpected(nameMenu, linea);
 		 	checks.add(
 		 	    Check.make(
 				    "El título no coincide -> Validamos que exista el header <b>" + 
-		 	        nameMenu + "</b> en el inicio de la galería",
-		 	       PageGaleria.make(channel, app, dataTest.getPais()).isHeaderArticlesVisible(nameMenu), WARN)
+				    nameInGaleryExpected + "</b> en el inicio de la galería",
+		 	       PageGaleria.make(channel).isHeaderArticlesVisible(nameInGaleryExpected), WARN)
 		 	    .store(EVIDENCES).build());
 	 	}
 	 	return checks;
+	}
+	
+	private String getNameInGaleryExpected(String nameMenu, LineaType linea) {
+		if (linea==LineaType.TEEN && 
+			nameMenu.toLowerCase().compareTo("trousers")==0) {
+			return "Pants";
+		}
+		return nameMenu;
 	}
 	
 	private void checkSelectSubMenu(MenuWeb menu) {
@@ -225,7 +231,7 @@ public class MenuSteps extends StepBase {
 	
 	@Validation
 	private ChecksTM checkArticlesContainsLiteralsDesktop(List<String> articles) {
-		var pageGaleria = PageGaleria.make(channel, app, dataTest.getPais());
+		var pageGaleria = PageGaleria.make(channel);
 		var articlesNoValid = pageGaleria.searchForArticlesNoValid(articles);
 		var stateVal = (articlesNoValid.size()<10) ? WARN : DEFECT;
 		
