@@ -1,6 +1,6 @@
 package com.mng.robotest.tests.domains.chequeregalo.tests;
 
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.SHE;
+import static com.mng.robotest.tests.domains.menus.entity.LineaType.SHE;
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;

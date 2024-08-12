@@ -9,8 +9,8 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 
 import com.mng.robotest.tests.conf.AppEcom;
-import com.mng.robotest.tests.domains.menus.beans.Linea;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.Linea;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
 import com.mng.robotest.testslegacy.data.Constantes.ThreeState;
 
 

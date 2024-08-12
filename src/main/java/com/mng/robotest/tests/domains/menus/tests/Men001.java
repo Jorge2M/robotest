@@ -2,10 +2,10 @@ package com.mng.robotest.tests.domains.menus.tests;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.landings.steps.LandingSteps;
-import com.mng.robotest.tests.domains.menus.beans.Linea;
-import com.mng.robotest.tests.domains.menus.beans.Sublinea;
+import com.mng.robotest.tests.domains.menus.entity.GroupTypeO.GroupType;
+import com.mng.robotest.tests.domains.menus.entity.Linea;
+import com.mng.robotest.tests.domains.menus.entity.Sublinea;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb;
-import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
 import com.mng.robotest.tests.domains.menus.steps.MenuSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
@@ -54,11 +54,11 @@ public class Men001 extends TestBase {
 	}
 	
 	private void clickMenusLinea() {
-		new MenuSteps().clickAllMenus(new LineaWeb(line.getType(), null), group);
+		new MenuSteps().clickAllMenus(LineaWeb.make(line.getType(), null, dataTest.getPais()), group);
 	}
 	
 	private void clickMenusSublinea() {
-		new MenuSteps().clickAllMenus(new LineaWeb(line.getType(), subline.getTypeSublinea()), group);
+		new MenuSteps().clickAllMenus(LineaWeb.make(line.getType(), subline.getTypeSublinea(), dataTest.getPais()), group);
 	}
 	
 	private boolean isTestMenus(Linea line, GroupType group) {

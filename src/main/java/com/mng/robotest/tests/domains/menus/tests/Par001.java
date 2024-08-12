@@ -5,13 +5,13 @@ import java.util.List;
 import com.mng.robotest.tests.conf.suites.FlagsNaviationLineas;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.landings.steps.LandingSteps;
-import com.mng.robotest.tests.domains.menus.beans.Linea;
-import com.mng.robotest.tests.domains.menus.beans.Sublinea;
-import com.mng.robotest.tests.domains.menus.beans.Linea.TypeContentDesk;
+import com.mng.robotest.tests.domains.menus.entity.GroupTypeO.GroupType;
+import com.mng.robotest.tests.domains.menus.entity.Linea;
+import com.mng.robotest.tests.domains.menus.entity.Sublinea;
+import com.mng.robotest.tests.domains.menus.entity.Linea.TypeContentDesk;
 import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
-import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.SublineaType;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
@@ -22,13 +22,24 @@ public class Par001 extends TestBase {
 
 	private final List<Linea> linesToTest;
 	private final FlagsNaviationLineas flagsNavigation;
+
+	//Access from @Test
+	public Par001(List<Linea> linesToTest, FlagsNaviationLineas flagsNavigation) {
+		if (linesToTest==null) {
+			linesToTest = dataTest.getPais().getShoponline().getLineasToTest(app);
+		}
+		this.linesToTest = linesToTest;
+		this.flagsNavigation = flagsNavigation;
+	}
 	
+	//Access from @Factory
 	public Par001(Pais pais, IdiomaPais idioma, List<Linea> linesToTest, FlagsNaviationLineas flagsNavigation) {
+		this.dataTest.setPais(pais);
+		this.dataTest.setIdioma(idioma);
+		
 		if (linesToTest==null) {
 			linesToTest = pais.getShoponline().getLineasToTest(app);
 		}
-		this.dataTest.setPais(pais);
-		this.dataTest.setIdioma(idioma);
 		this.linesToTest = linesToTest;
 		this.flagsNavigation = flagsNavigation;
 	}

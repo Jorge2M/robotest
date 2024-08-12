@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.favoritos.tests;
 
-import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType.*;
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
+import static com.mng.robotest.tests.domains.menus.entity.LineaType.*;
+import static com.mng.robotest.tests.domains.menus.entity.GroupTypeO.GroupType.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;

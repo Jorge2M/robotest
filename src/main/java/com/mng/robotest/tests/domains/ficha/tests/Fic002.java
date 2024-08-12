@@ -19,7 +19,7 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Artic
 import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecProductDescrDevice.TypePanel.*;
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
+import static com.mng.robotest.tests.domains.menus.entity.LineaType.*;
 import static com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType.*;
 
 public class Fic002 extends TestBase {

@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.menus.beans;
+package com.mng.robotest.tests.domains.menus.entity;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

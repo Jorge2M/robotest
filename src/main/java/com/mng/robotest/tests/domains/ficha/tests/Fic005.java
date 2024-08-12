@@ -15,7 +15,7 @@ import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Artic
 import java.util.Optional;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
+import static com.mng.robotest.tests.domains.menus.entity.LineaType.*;
 import static com.mng.robotest.tests.repository.productlist.Menu.*;
 import static com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType.*;
 

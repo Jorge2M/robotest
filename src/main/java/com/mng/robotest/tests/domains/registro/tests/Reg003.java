@@ -6,7 +6,7 @@ import java.util.Map;
 import com.mng.robotest.tests.conf.suites.RegistrosSuite.VersionRegistroSuite;
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.footer.steps.FooterSteps;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
 import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.beans.DataNino;

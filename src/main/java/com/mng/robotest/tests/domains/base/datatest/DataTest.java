@@ -7,7 +7,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.favoritos.entity.Favorite;
 import com.mng.robotest.tests.domains.favoritos.entity.FavoritesStored;
-import com.mng.robotest.tests.domains.menus.beans.Linea;
+import com.mng.robotest.tests.domains.menus.entity.Linea;
 import com.mng.robotest.tests.repository.usuarios.GestorUsersShop;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;

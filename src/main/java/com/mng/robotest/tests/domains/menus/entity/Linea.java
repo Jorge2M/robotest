@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.menus.beans;
+package com.mng.robotest.tests.domains.menus.entity;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -10,8 +10,6 @@ import java.util.ArrayList;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.mng.robotest.tests.conf.AppEcom;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
 import com.mng.robotest.testslegacy.beans.Pais;
 
 public class Linea implements Serializable {

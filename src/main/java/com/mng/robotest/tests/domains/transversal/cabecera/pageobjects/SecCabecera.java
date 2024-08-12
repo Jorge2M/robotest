@@ -123,7 +123,7 @@ public abstract class SecCabecera extends PageBase {
 	 *			  'false' queremos que el menú lateral de móvil se cierre
 	 */
 	public void clickIconoMenuHamburguerMobil(boolean toOpenMenus) {
-		var secMenus = MenusWebAll.make(channel);
+		var secMenus = MenusWebAll.make(channel, dataTest.getPais());
 		boolean menuVisible = secMenus.isMenuInState(toOpenMenus, 1);
 		int i=0;
 		var typeClick = WEBDRIVER;

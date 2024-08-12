@@ -8,7 +8,7 @@ import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
 import com.mng.robotest.testslegacy.beans.Pais;
 
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
+import static com.mng.robotest.tests.domains.menus.entity.LineaType.*;
 
 public class Otr001 extends TestBase {
 

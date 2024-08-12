@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.menus.pageobjects;
+package com.mng.robotest.tests.domains.menus.pageobjects.currentmenus;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 
@@ -13,7 +13,7 @@ public interface LineaActions {
 	public boolean isLineaPresent(int seconds);
 	public boolean isSublineaPresent(int seconds);
 
-	public static LineaActions make(LineaWeb linea, Channel channel) {
+	public static LineaActions make(LineaWebCurrent linea, Channel channel) {
 		if (channel.isDevice()) {
 			return new LineaActionsDevice(linea);
 		}

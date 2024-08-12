@@ -20,7 +20,7 @@ import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProd
 import com.mng.robotest.tests.domains.ficha.pageobjects.commons.ActionFavButton;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecDetalleProduct.ItemBreadcrumb;
 import com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecProductDescrDevice.TypePanel;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
 import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.data.Talla;

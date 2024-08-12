@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.menus.pageobjects;
+package com.mng.robotest.tests.domains.menus.pageobjects.currentmenus;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
@@ -6,8 +6,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.SublineaType;
 
 public class LineaActionsDesktop extends PageBase implements LineaActions {
 	
@@ -25,7 +25,7 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 			"@data-testid='menu.subBrand.sections_" + TAG_ID_SUBLINEA2 + "']" + //Shop
 			"/button[@data-testid[contains(.,'menu.subBrand')]]";
 	
-	public LineaActionsDesktop(LineaWeb lineaWeb) {
+	public LineaActionsDesktop(LineaWebCurrent lineaWeb) {
 		this.lineaType = lineaWeb.getLinea();
 		this.sublineaType = lineaWeb.getSublinea();
 	}
@@ -64,7 +64,7 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 
 	@Override
 	public void clickLinea() {
-		state(PRESENT, getXPathLinea()).wait(1).check();
+		hoverLinea();
 		click(getXPathLinea()).exec();
 	}	
 	@Override 

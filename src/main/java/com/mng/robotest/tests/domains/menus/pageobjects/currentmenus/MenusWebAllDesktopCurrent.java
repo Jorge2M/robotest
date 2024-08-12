@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.menus.pageobjects;
+package com.mng.robotest.tests.domains.menus.pageobjects.currentmenus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +8,13 @@ import org.openqa.selenium.WebElement;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
+import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
+import com.mng.robotest.tests.domains.menus.pageobjects.MenusWebAll;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class MenusWebAllDesktop extends PageBase implements MenusWebAll {
+public class MenusWebAllDesktopCurrent extends PageBase implements MenusWebAll {
 
 	private static final String XP_WRAPPER_MENU = "//div[@id[contains(.,'subMenu')]]";
 	

@@ -1,15 +1,12 @@
 package com.mng.robotest.tests.domains.registro.pageobjects;
 
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.HE;
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.HOME;
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.KIDS;
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.SHE;
+import static com.mng.robotest.tests.domains.menus.entity.LineaType.*;
 
 import java.util.Arrays;
 import java.util.List;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
 
 public abstract class PageRegistroPersonalizacionShop extends PageBase {
 

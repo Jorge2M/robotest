@@ -78,7 +78,9 @@ public class GestorUsersShop {
 					.getPassword();
 		
 		listTestPerformanceUsers = new CopyOnWriteArrayList<>();
-		for (int i=1; i<=50; i++) {
+		//TODO el usuario test.performance01@mango.com ha perdido la password mango457
+		//así que mientras que no podamos recuperarlo comenzaremos desde el 02
+		for (int i=2; i<=50; i++) {
 			String number = String.valueOf(i);
 			if (i<10) {
 				number = "0" + number;

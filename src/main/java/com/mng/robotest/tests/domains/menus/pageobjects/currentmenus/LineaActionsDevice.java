@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.menus.pageobjects;
+package com.mng.robotest.tests.domains.menus.pageobjects.currentmenus;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.TypeClick.*;
@@ -7,9 +7,9 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.menus.beans.Linea;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
+import com.mng.robotest.tests.domains.menus.entity.Linea;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.SublineaType;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 
 public class LineaActionsDevice extends PageBase implements LineaActions {
@@ -21,7 +21,7 @@ public class LineaActionsDevice extends PageBase implements LineaActions {
 		return "//*[@data-testid[contains(.,'menu.subBrand." + sublineaType.getId(app) + ".section')]]";
 	}
 
-	public LineaActionsDevice(LineaWeb lineaWeb) {
+	public LineaActionsDevice(LineaWebCurrent lineaWeb) {
 		this.lineaType = lineaWeb.getLinea();
 		this.sublineaType = lineaWeb.getSublinea();
 	}

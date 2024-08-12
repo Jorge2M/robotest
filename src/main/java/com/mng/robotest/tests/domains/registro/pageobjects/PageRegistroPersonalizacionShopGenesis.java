@@ -2,8 +2,8 @@ package com.mng.robotest.tests.domains.registro.pageobjects;
 
 import java.util.List;
 
-import com.mng.robotest.tests.domains.menus.beans.Linea;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.Linea;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
