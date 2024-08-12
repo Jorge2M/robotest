@@ -801,6 +801,7 @@
 	nombre="UTÁNVÉTELES FIZETÉS" nombremovil="Utánvételes Fizetés" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
 <micuentanew>shop,outlet</micuentanew>
+	<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Iceland" codigo="024">
@@ -3491,7 +3492,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <idioma acceso="lk">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>04101</codpos>
+<codpos>120101</codpos>
 <telefono>86232004</telefono>
 <dni>123456789</dni>
 <tiendas_online>shop</tiendas_online>
