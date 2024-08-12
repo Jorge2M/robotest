@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mng.robotest.access.InputParamsMango;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
 import com.mng.robotest.tests.repository.UtilsRepository;
 import com.mng.robotest.tests.repository.canonicalproduct.GetterProductApiCanonical;
 import com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType;

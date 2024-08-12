@@ -1,9 +1,7 @@
 package com.mng.robotest.testslegacy.pageobject.shop.modales.buscarentienda;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.footer.pageobjects.PageFromFooter;
-import com.mng.robotest.testslegacy.beans.Pais;
 
 public abstract class ModalBuscarEnTienda extends PageBase implements PageFromFooter {
 

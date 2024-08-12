@@ -14,7 +14,7 @@ import com.mng.robotest.tests.repository.usuarios.UserShop;
 import com.mng.robotest.testslegacy.data.DataMango;
 import com.mng.robotest.testslegacy.data.PaisShop;
 
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
+import static com.mng.robotest.tests.domains.menus.entity.LineaType.*;
 import static com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType.*;
 
 public class Reg007 extends TestBase {

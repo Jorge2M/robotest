@@ -1,8 +1,6 @@
-package com.mng.robotest.tests.domains.menus.beans;
+package com.mng.robotest.tests.domains.menus.entity;
 
 import java.io.Serializable;
-
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
 
 public class Sublinea extends Linea implements Serializable {
 

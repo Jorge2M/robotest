@@ -1,13 +1,11 @@
 package com.mng.robotest.tests.domains.registro.beans;
 
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.HE;
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.KIDS;
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.SHE;
+import static com.mng.robotest.tests.domains.menus.entity.LineaType.*;
 
 import java.util.Arrays;
 import java.util.List;
 
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
 import com.mng.robotest.tests.domains.registro.pageobjects.PageRegistroPersonalizacionShop.GenderOption;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;

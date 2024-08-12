@@ -1,7 +1,7 @@
 package com.mng.robotest.tests.domains.loyalty.tests;
 
-import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.JERSEIS_Y_CARDIGANS_SHE;
-import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType.NEW_NOW;
+import static com.mng.robotest.tests.domains.menus.entity.FactoryMenus.MenuItem.JERSEIS_Y_CARDIGANS_SHE;
+import static com.mng.robotest.tests.domains.menus.entity.GroupTypeO.GroupType.*;
 
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
@@ -47,7 +47,7 @@ public class LoyTestCommons extends StepBase {
 	}
 	
 	private boolean isGroupNewNowSelectable() {
-		return new GroupWeb(NEW_NOW).isPresent();
+		return GroupWeb.make(NEW_NOW, dataTest.getPais()).isPresent();
 	}	
 	
 	public DiscountLikes inputLoyaltyPoints() {

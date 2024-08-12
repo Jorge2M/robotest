@@ -4,8 +4,8 @@ import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.testslegacy.beans.Pais;
 
-import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*;
-import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType.NEW_NOW;
+import static com.mng.robotest.tests.domains.menus.entity.FactoryMenus.MenuItem.*;
+import static com.mng.robotest.tests.domains.menus.entity.GroupTypeO.GroupType.*;
 import static com.mng.robotest.testslegacy.data.PaisShop.MONACO;
 
 public class Gpo009 extends TestBase {

@@ -3,9 +3,9 @@ package com.mng.robotest.tests.domains.menus.pageobjects;
 import java.util.List;
 
 import com.mng.robotest.tests.domains.base.PageBase;
-import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
+import com.mng.robotest.tests.domains.menus.entity.GroupTypeO.GroupType;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.SublineaType;
 
 public class MenuWeb extends PageBase implements MenuActions {
 	
@@ -39,7 +39,7 @@ public class MenuWeb extends PageBase implements MenuActions {
 		this.subMenusShop = subMenusShop;
 		this.subMenusOutlet = subMenusOutlet;
 		this.articlesSubMenu = articlesSubMenu;
-		this.menuActions = MenuActions.make(this, channel);
+		this.menuActions = MenuActions.make(this, channel, dataTest.getPais());
 	}
 	
 	@Override
@@ -174,7 +174,6 @@ public class MenuWeb extends PageBase implements MenuActions {
 			this.articlesSubMenu = articlesSubMenu;
 			return this;
 		}
-		
 	}
 
 }

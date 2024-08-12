@@ -1,6 +1,5 @@
 package com.mng.robotest.tests.domains.transversal.genericchecks;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -9,14 +8,9 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-//import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.testng.ITestContext;
 
-import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.conf.State;
 import com.github.jorge2m.testmaker.domain.suitetree.Check;
@@ -25,14 +19,12 @@ import com.github.jorge2m.testmaker.domain.suitetree.TestCaseTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
 import com.github.jorge2m.testmaker.service.exceptions.NotFoundException;
 import com.github.jorge2m.testmaker.service.genericchecks.Checker;
-import com.github.jorge2m.testmaker.service.webdriver.pageobject.PageObjTM;
 import com.github.jorge2m.testmaker.testreports.html.ResultadoErrores;
 
 import static com.github.jorge2m.testmaker.testreports.html.ResultadoErrores.Resultado.*;
 
 public class CheckerImgsBroken implements Checker {
 
-	private static final int MAX_ERRORES = 1;
 	private static final List<String> WHITELIST = Arrays.asList(
 			"https://st.mngbcn.com/images/imgWar/loadingGif/teen.gif");
 	

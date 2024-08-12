@@ -15,16 +15,16 @@ import com.mng.robotest.tests.domains.ficha.steps.FichaSteps;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.landings.steps.LandingSteps;
-import com.mng.robotest.tests.domains.menus.beans.FactoryMenus;
-import com.mng.robotest.tests.domains.menus.beans.Linea;
+import com.mng.robotest.tests.domains.menus.entity.FactoryMenus;
+import com.mng.robotest.tests.domains.menus.entity.GroupResponse;
+import com.mng.robotest.tests.domains.menus.entity.GroupTypeO.GroupType;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
 import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb;
 import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
 import com.mng.robotest.tests.domains.menus.pageobjects.MenusWebAll;
-import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupResponse;
-import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
+import com.mng.robotest.tests.domains.menus.entity.Linea;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.SublineaType;
 import com.mng.robotest.tests.domains.transversal.cabecera.pageobjects.SecCabecera;
 import com.mng.robotest.tests.repository.productlist.GetterProducts;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
@@ -34,7 +34,7 @@ import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.github.jorge2m.testmaker.conf.StoreType.*;
-import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.ABRIGOS_HE;
+import static com.mng.robotest.tests.domains.menus.entity.FactoryMenus.MenuItem.ABRIGOS_HE;
 
 public class MenuSteps extends StepBase {
 
@@ -248,13 +248,13 @@ public class MenuSteps extends StepBase {
 	
 	@Override
 	public void clickLinea(LineaType lineaType) {
-		clickLinea(new LineaWeb(lineaType));
+		clickLinea(LineaWeb.make(lineaType, dataTest.getPais()));
 	}
 	
 	@Override
 	public void clickLinea(LineaType lineaType, SublineaType sublineaType) {
 		if (sublineaType==null) {
-			clickLinea(new LineaWeb(lineaType));
+			clickLinea(LineaWeb.make(lineaType, dataTest.getPais()));
 		}
 		if (sublineaType!=null) {
 			if (channel.isDevice()) {
@@ -266,13 +266,13 @@ public class MenuSteps extends StepBase {
 	}
 	
 	private void clickSublineaDevice(LineaType lineaType, SublineaType sublineaType) {
-		clickLinea(new LineaWeb(lineaType));
-		clickSublinea(new LineaWeb(lineaType, sublineaType));
+		clickLinea(LineaWeb.make(lineaType, dataTest.getPais()));
+		clickSublinea(LineaWeb.make(lineaType, sublineaType, dataTest.getPais()));
 	}
 	
 	private void clickSublineaDesktop(LineaType lineaType, SublineaType sublineaType) {
-		var linea = new LineaWeb(lineaType);
-		var sublinea = new LineaWeb(lineaType, sublineaType);
+		var linea = LineaWeb.make(lineaType, dataTest.getPais());
+		var sublinea = LineaWeb.make(lineaType, sublineaType, dataTest.getPais());
 		hoverLineaDesktop(linea);
 		clickSublinea(sublinea);
 	}
@@ -307,7 +307,7 @@ public class MenuSteps extends StepBase {
         
         //En ocasiones no aparecen los menús después de un Hover sobre la línea de niños
 		if (!checkHoverLineaDesktop(lineaWeb)) {
-	        new LineaWeb(LineaType.SHE).hoverLinea();
+	        LineaWeb.make(LineaType.SHE, dataTest.getPais()).hoverLinea();
 	        lineaWeb.hoverLinea();
 	        checkHoverLineaDesktop(lineaWeb);
 		}
@@ -316,7 +316,7 @@ public class MenuSteps extends StepBase {
 	
 	@Validation (description="Aparecen los menús", level=INFO)
 	public boolean checkHoverLineaDesktop(LineaWeb lineaWeb) {
-		return MenusWebAll.make(channel).isMenuInState(true, 1);
+		return MenusWebAll.make(channel, dataTest.getPais()).isMenuInState(true, 1);
 	}	
 	
 	@Validation (
@@ -402,7 +402,7 @@ public class MenuSteps extends StepBase {
 	private void checkLineaVisible(ChecksTM checks, LineaType lineaType, int seconds) {
 		var apareceLinea = dataTest.getPais().getShoponline().stateLinea(lineaType, app);
 		if (checkLinea(lineaType, apareceLinea)) {
-			boolean isLineaPresent = new LineaWeb(lineaType).isLineaPresent(seconds);
+			boolean isLineaPresent = LineaWeb.make(lineaType, dataTest.getPais()).isLineaPresent(seconds);
 			if (apareceLinea==ThreeState.TRUE) {
 				checks.add (
 					"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
@@ -445,7 +445,7 @@ public class MenuSteps extends StepBase {
 	}	
 	
 	public void clickAllMenus(LineaWeb lineaWeb, GroupType group) {
-		clickAllMenus(new GroupWeb(lineaWeb.getLinea(), lineaWeb.getSublinea(), group));
+		clickAllMenus(GroupWeb.make(lineaWeb.getLinea(), lineaWeb.getSublinea(), group, dataTest.getPais()));
 	}
 	
 	public void clickAllMenus(LineaWeb lineaWeb) {
@@ -454,13 +454,13 @@ public class MenuSteps extends StepBase {
 			if (group.getGroupResponse()==GroupResponse.ARTICLES) {
 				//TODO pending
 			} else {
-				clickAllMenus(new GroupWeb(lineaWeb.getLinea(), lineaWeb.getSublinea(), group));
+				clickAllMenus(GroupWeb.make(lineaWeb.getLinea(), lineaWeb.getSublinea(), group, dataTest.getPais()));
 			}
 		}
 	}
 	
 	public void clickAllMenus(GroupWeb groupWeb) {
-		var menusWebAll = MenusWebAll.make(channel);
+		var menusWebAll = MenusWebAll.make(channel, dataTest.getPais());
 		if (groupWeb.isPresent()) {
 			clickGroup(groupWeb);
 			var listMenus = menusWebAll.getMenus(groupWeb);

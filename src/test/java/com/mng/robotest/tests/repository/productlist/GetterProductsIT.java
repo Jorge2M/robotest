@@ -18,7 +18,7 @@ import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.data.PaisShop;
 import com.mng.robotest.testslegacy.utils.PaisGetter;
 
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
+import static com.mng.robotest.tests.domains.menus.entity.LineaType.*;
 import static com.mng.robotest.tests.repository.productlist.ProductFilter.FilterType.*;
 
 public class GetterProductsIT {

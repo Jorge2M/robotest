@@ -1,8 +1,8 @@
 package com.mng.robotest.tests.domains.galeria.tests;
 
 import static com.mng.robotest.tests.conf.AppEcom.*;
-import static com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem.*;
-import static com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType.*;
+import static com.mng.robotest.tests.domains.menus.entity.FactoryMenus.MenuItem.*;
+import static com.mng.robotest.tests.domains.menus.entity.GroupTypeO.GroupType.*;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;

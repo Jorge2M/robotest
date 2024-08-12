@@ -8,8 +8,8 @@ import com.mng.robotest.testslegacy.beans.Pais;
 import com.mng.robotest.testslegacy.pageobject.utils.DataFichaArt;
 
 import static com.mng.robotest.tests.domains.ficha.pageobjects.nogenesis.SecProductDescrDevice.TypePanel.*;
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType.*;
-import static com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType.*;
+import static com.mng.robotest.tests.domains.menus.entity.LineaType.*;
+import static com.mng.robotest.tests.domains.menus.entity.SublineaType.*;
 import static com.mng.robotest.testslegacy.data.PaisShop.*;
 
 public class Fic003 extends TestBase {

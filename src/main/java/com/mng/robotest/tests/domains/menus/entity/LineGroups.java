@@ -1,9 +1,8 @@
-package com.mng.robotest.tests.domains.menus.beans;
+package com.mng.robotest.tests.domains.menus.entity;
 
 import java.util.List;
 
-import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.GroupTypeO.GroupType;
 
 public class LineGroups {
 

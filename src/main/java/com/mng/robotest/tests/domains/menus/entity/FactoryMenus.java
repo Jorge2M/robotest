@@ -1,10 +1,10 @@
-package com.mng.robotest.tests.domains.menus.beans;
+package com.mng.robotest.tests.domains.menus.entity;
 
 import java.util.Arrays;
 
 import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
-import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
+
+import static com.mng.robotest.tests.domains.menus.entity.GroupTypeO.GroupType.*;
 
 public class FactoryMenus {
 
@@ -38,7 +38,7 @@ public class FactoryMenus {
 		return new MenuWeb
 			.Builder("Vestidos")
 			.linea(LineaType.SHE)
-			.group(GroupType.PRENDAS)
+			.group(PRENDAS)
 			.articles(Arrays.asList("Vestido", "Pichi", "Peto", "Mono", "Caftán", "Blusón"))
 			.subMenusShop(Arrays.asList("largos", "cortos", "midi"))
 			.subMenusOutlet(Arrays.asList("Vestidos largos", "Vestidos cortos", "Vestidos midi"))
@@ -49,7 +49,7 @@ public class FactoryMenus {
 		return new MenuWeb
 			.Builder("Camisas")
 			.linea(LineaType.SHE)
-			.group(GroupType.PRENDAS)
+			.group(PRENDAS)
 			.articles(Arrays.asList(
 					"Camisa", "Blusa", "Bluson", "Blusón", "Top", "Bustier", "Body", "Camisero", 
 					"Poncho", "Corsé", "Camiseta"))
@@ -64,7 +64,7 @@ public class FactoryMenus {
 		return new MenuWeb
 			.Builder("Abrigos")
 			.linea(LineaType.SHE)
-			.group(GroupType.PRENDAS)
+			.group(PRENDAS)
 			.articles(Arrays.asList("Anorak", "Abrigo", "Gabardina", "Trench", "Parka", "Chubasquero"))
 			.subMenusShop(Arrays.asList("abrigos", "gabardinas"))
 			.subMenusOutlet(Arrays.asList("abrigos", "anoraks"))
@@ -77,7 +77,7 @@ public class FactoryMenus {
 		return new MenuWeb
 			.Builder("Cárdigans y jerséis")
 			.linea(LineaType.SHE)
-			.group(GroupType.PRENDAS)
+			.group(PRENDAS)
 			.articles(Arrays.asList("Jersey", "Chaleco", "Top", "Sudadera", "Cárdigan", "Cardigan"))
 			.subMenus(Arrays.asList("jerséis", "cárdigans"))
 			.subMenu("jerséis")
@@ -88,7 +88,7 @@ public class FactoryMenus {
 		return new MenuWeb
 			.Builder("Abrigos")
 			.linea(LineaType.HE)
-			.group(GroupType.PRENDAS)
+			.group(PRENDAS)
 			.articles(Arrays.asList("Abrigo", "Anorak", "Parka", "Trench", "Chaquetón", "Sobrecamisa", "Chaleco", "Chaqueta", "Cazadora"))
 			.subMenusShop(Arrays.asList("abrigos", "trench"))
 			.subMenusOutlet(Arrays.asList("todo", "chaquetas de piel"))

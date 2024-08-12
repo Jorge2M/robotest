@@ -13,13 +13,13 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.legal.legaltexts.LegalTextsPage;
 import com.mng.robotest.tests.domains.manto.tests.ManXXX;
-import com.mng.robotest.tests.domains.menus.beans.FactoryMenus;
-import com.mng.robotest.tests.domains.menus.beans.FactoryMenus.MenuItem;
+import com.mng.robotest.tests.domains.menus.entity.FactoryMenus;
+import com.mng.robotest.tests.domains.menus.entity.FactoryMenus.MenuItem;
+import com.mng.robotest.tests.domains.menus.entity.GroupTypeO.GroupType;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
 import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
-import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.LineaType;
-import com.mng.robotest.tests.domains.menus.pageobjects.LineaWeb.SublineaType;
+import com.mng.robotest.tests.domains.menus.entity.LineaType;
+import com.mng.robotest.tests.domains.menus.entity.SublineaType;
 import com.mng.robotest.tests.domains.menus.steps.MenuSteps;
 import com.mng.robotest.tests.domains.transversal.acceso.navigations.AccesoFlows;
 import com.mng.robotest.tests.domains.transversal.acceso.steps.AccesoSteps;
@@ -88,10 +88,10 @@ public abstract class StepBase extends PageBase {
 		new MenuSteps().click(menu);
 	}
 	protected void clickGroup(GroupType groupType) {
-		new MenuSteps().clickGroup(new GroupWeb(groupType));
+		new MenuSteps().clickGroup(GroupWeb.make(groupType, dataTest.getPais()));
 	}
 	public void clickGroup(LineaType linea, SublineaType sublinea, GroupType groupType) {
-		new MenuSteps().clickGroup(new GroupWeb(linea, sublinea, groupType));
+		new MenuSteps().clickGroup(GroupWeb.make(linea, sublinea, groupType, dataTest.getPais()));
 	}
 	protected void clickSubMenu(MenuItem menuItem) {
 		clickSubMenu(FactoryMenus.get(menuItem));

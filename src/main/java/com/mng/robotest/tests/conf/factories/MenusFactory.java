@@ -5,10 +5,10 @@ import java.util.*;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
-import com.mng.robotest.tests.domains.menus.beans.Linea;
-import com.mng.robotest.tests.domains.menus.beans.Sublinea;
-import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupResponse;
-import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb.GroupType;
+import com.mng.robotest.tests.domains.menus.entity.GroupResponse;
+import com.mng.robotest.tests.domains.menus.entity.GroupTypeO.GroupType;
+import com.mng.robotest.tests.domains.menus.entity.Linea;
+import com.mng.robotest.tests.domains.menus.entity.Sublinea;
 import com.mng.robotest.tests.domains.menus.tests.Menus;
 import com.mng.robotest.testslegacy.beans.*;
 

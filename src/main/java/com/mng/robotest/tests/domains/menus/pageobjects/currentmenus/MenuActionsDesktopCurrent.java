@@ -1,17 +1,20 @@
-package com.mng.robotest.tests.domains.menus.pageobjects;
+package com.mng.robotest.tests.domains.menus.pageobjects.currentmenus;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
+import com.mng.robotest.tests.domains.menus.pageobjects.MenuActions;
+import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
+import com.mng.robotest.tests.domains.menus.pageobjects.UtilsMenusPO;
 
-public class MenuActionsDesktop extends PageBase implements MenuActions {
+public class MenuActionsDesktopCurrent extends PageBase implements MenuActions {
 
 	private final MenuWeb menu;
 	private final PageGaleria pageGaleria = PageGaleria.make(channel);
 
-	public MenuActionsDesktop(MenuWeb menu) {
+	public MenuActionsDesktopCurrent(MenuWeb menu) {
 		this.menu = menu;
 	}
 	
@@ -80,7 +83,7 @@ public class MenuActionsDesktop extends PageBase implements MenuActions {
 	}
 
 	private void hoverGroup() {
-		new GroupWeb(menu.getLinea(), menu.getSublinea(), menu.getGroup())
+		new GroupWebCurrent(menu.getLinea(), menu.getSublinea(), menu.getGroup())
 			.hover();
 	}	
 	

@@ -3,7 +3,7 @@ package com.mng.robotest.tests.conf.factories;
 import java.util.*;
 
 import com.mng.robotest.tests.conf.AppEcom;
-import com.mng.robotest.tests.domains.menus.beans.Linea;
+import com.mng.robotest.tests.domains.menus.entity.Linea;
 import com.mng.robotest.testslegacy.beans.Pais;
 
 

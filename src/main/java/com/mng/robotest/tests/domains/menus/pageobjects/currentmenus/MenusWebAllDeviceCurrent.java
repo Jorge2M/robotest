@@ -1,21 +1,19 @@
-package com.mng.robotest.tests.domains.menus.pageobjects;
+package com.mng.robotest.tests.domains.menus.pageobjects.currentmenus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mng.robotest.tests.domains.base.PageBase;
+import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
+import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
+import com.mng.robotest.tests.domains.menus.pageobjects.MenusWebAll;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
-public class MenusWebAllDevice extends PageBase implements MenusWebAll {
+public class MenusWebAllDeviceCurrent extends PageBase implements MenusWebAll {
 
-	private static final String XP_MENU_OPEN_GENESIS = "//*[@data-testid='menu.brands']//*[@data-testid='up-small']";
-	private static final String XP_MENU_OPEN_OLD = "//*[@id='headerMenuScroll']"; 
+	private static final String XP_MENU_OPEN = "//*[@data-testid='menu.brands']//*[@data-testid='up-small']";
 	private static final String XP_MENU_ITEM = "//li[@data-testid]/a[@data-testid[contains(.,'menu.family.')]]";
-	
-	private String getXPathMenuOpen() {
-		return "(" + XP_MENU_OPEN_GENESIS + " | " + XP_MENU_OPEN_OLD + ")";
-	}
 	
 	@Override
 	public boolean isMenuInState(boolean open, int seconds) {
@@ -49,7 +47,7 @@ public class MenusWebAllDevice extends PageBase implements MenusWebAll {
 	}
 
 	private boolean isMenuOpen(int seconds) {
-		return state(PRESENT, getXPathMenuOpen()).wait(seconds).check();
+		return state(PRESENT, XP_MENU_OPEN).wait(seconds).check();
 	}
 	private boolean isMenuClose(int seconds) {
 		for (int i=0; i<seconds; i++) {

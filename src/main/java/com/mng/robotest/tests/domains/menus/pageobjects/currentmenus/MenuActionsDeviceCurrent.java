@@ -1,17 +1,24 @@
-package com.mng.robotest.tests.domains.menus.pageobjects;
+package com.mng.robotest.tests.domains.menus.pageobjects.currentmenus;
 
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
+import com.mng.robotest.tests.domains.menus.pageobjects.MenuActions;
+import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
+import com.mng.robotest.tests.domains.menus.pageobjects.UtilsMenusPO;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 
-public class MenuActionsDevice extends PageBase implements MenuActions {
+public class MenuActionsDeviceCurrent extends PageBase implements MenuActions {
 
 	private final MenuWeb menu;
+
+	public MenuActionsDeviceCurrent(MenuWeb menu) {
+		this.menu = menu;
+	}
 	
 	private String getXPathMenu() {
 		return "//*[@data-testid[contains(.,'menu.subMenu')]]" + getXPathMenuBase();
@@ -47,10 +54,6 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
         }
         return value.substring(0, 1).toUpperCase() + value.substring(1);
 	}
-
-	public MenuActionsDevice(MenuWeb menu) {
-		this.menu = menu;
-	}
 	
 	@Override
 	public String click() {
@@ -83,7 +86,7 @@ public class MenuActionsDevice extends PageBase implements MenuActions {
 	}
 
 	private void clickGroup() {
-		new GroupWeb(menu.getLinea(), menu.getSublinea(), menu.getGroup())
+		new GroupWebCurrent(menu.getLinea(), menu.getSublinea(), menu.getGroup())
 			.click();
 	}
 	
