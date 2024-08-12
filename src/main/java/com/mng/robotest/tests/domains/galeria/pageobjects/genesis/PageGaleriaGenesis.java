@@ -149,7 +149,13 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	}
 
 	private String getReference(WebElement articulo) {
-		return articulo.getAttribute("data-slot");
+		if (articulo!=null) {
+			String dataSlot = articulo.getAttribute("data-slot");
+			if (dataSlot!=null && "".compareTo(dataSlot)!=0) {
+				return articulo.getAttribute("data-slot");
+			}
+		}
+		return "00000000:00";
 	}
 
 	@Override
