@@ -801,6 +801,7 @@
 	nombre="UTÁNVÉTELES FIZETÉS" nombremovil="Utánvételes Fizetés" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
 <micuentanew>shop,outlet</micuentanew>
+	<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Iceland" codigo="024">
