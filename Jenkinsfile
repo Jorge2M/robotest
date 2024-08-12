@@ -62,6 +62,7 @@ pipeline {
         }       
 
         stage('Sonar') {
+            when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
             agent {
                 docker {
                     image 'maven:3.8.4-openjdk-17'
@@ -77,6 +78,7 @@ pipeline {
         }
 
         stage('Package') {
+            when { expression { return env.BRANCH_NAME.equals('master') || env.BRANCH_NAME.equals('develop') || env.BRANCH_NAME.contains('release') } }
             agent {
                 docker {
                     image 'maven:3.8.4-openjdk-17'
