@@ -3447,7 +3447,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <idioma acceso="lk">IN</idioma>
 <paistop>N</paistop>
 <loyalty>N</loyalty>
-<codpos>04101</codpos>
+<codpos>120101</codpos>
 <telefono>86232004</telefono>
 <dni>123456789</dni>
 <tiendas_online>shop</tiendas_online>
