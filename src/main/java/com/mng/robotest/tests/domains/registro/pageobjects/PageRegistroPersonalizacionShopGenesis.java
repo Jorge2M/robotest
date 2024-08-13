@@ -48,8 +48,8 @@ public class PageRegistroPersonalizacionShopGenesis extends PageRegistroPersonal
 	}
 	@Override
 	public void inputPostalCode(String postalCode) {
-		state(PRESENT, XP_INPUT_POSTALCODE).wait(2).check();
-		sendKeysWithRetry(2, getElement(XP_INPUT_POSTALCODE), postalCode);
+		state(VISIBLE, XP_INPUT_POSTALCODE).wait(2).check();
+		sendKeysWithRetry(3, getElement(XP_INPUT_POSTALCODE), postalCode);
 	}
 	@Override
 	public void inputDateOfBirth(String date) {

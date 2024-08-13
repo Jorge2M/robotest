@@ -76,7 +76,7 @@ public class Reg003 extends TestBase {
 		//until Frontend implements double opt-in in this country
 		return (
 			PaisShop.DEUTSCHLAND.isEquals(dataTest.getPais()) &&
-			UtilsTest.todayBeforeDate("2024-08-07"));
+			UtilsTest.todayBeforeDate("2024-11-01"));
 	}
 
 	private void registerAndGoShoppingSiPubli() {

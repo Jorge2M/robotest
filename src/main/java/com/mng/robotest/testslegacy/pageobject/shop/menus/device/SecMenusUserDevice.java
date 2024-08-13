@@ -58,7 +58,7 @@ public class SecMenusUserDevice extends PageBase {
 		}
 	}
 	
-	private static final String XP_USER_LOGGED = "//p[@class[contains(.,'UserLinks_hello')]]";
+	private static final String XP_USER_LOGGED = "//*[@class[contains(.,'UserLinks_hello')] or @data-testid='header.userLinks.message']";
 	
 	private String getXPathUserLogged(String nameUser) {
 		return XP_USER_LOGGED + "//self::*[text()[contains(.,'" + nameUser + "')]]";

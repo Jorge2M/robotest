@@ -28,7 +28,7 @@ public abstract class PageMiCuenta extends PageBase {
 	
 	public void click(LinkMiCuenta link) {
 		var xpLink = getXPath(link);
-		click(xpLink).exec();
+		click(xpLink).waitLink(1).exec();
 		if (!state(INVISIBLE, xpLink).wait(1).check()) {
 			click(xpLink).exec();
 		}
