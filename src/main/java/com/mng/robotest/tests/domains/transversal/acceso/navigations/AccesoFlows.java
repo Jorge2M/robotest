@@ -97,7 +97,7 @@ public class AccesoFlows extends StepBase {
 		pageLogin.clickButtonEntrar();
 		closeModalsPostLogin();
 	}
-	private void closeModalsPostLogin() {
+	public void closeModalsPostLogin() {
 		ModalChangeCountry.make(app).closeModalIfVisible();
 		new ModalActPoliticaPrivacidad().clickOkIfVisible();
 		new ModalLoyaltyAfterLogin().closeModalIfVisible();
@@ -131,6 +131,7 @@ public class AccesoFlows extends StepBase {
 			}
 		}
 		new MenusUserWrapper().moveAndClick(INICIAR_SESION);
+		new ModalGeolocation().closeModalIfVisible();
 	}	
 	
 	private void workAroundLoginProblem() {
