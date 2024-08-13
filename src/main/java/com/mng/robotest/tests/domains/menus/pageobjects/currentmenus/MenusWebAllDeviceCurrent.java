@@ -12,8 +12,13 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class MenusWebAllDeviceCurrent extends PageBase implements MenusWebAll {
 
-	private static final String XP_MENU_OPEN = "//*[@data-testid='menu.brands']//*[@data-testid='up-small']";
+	private static final String XP_MENU_OPEN_NORMAL = "//*[@data-testid='menu.brands']//*[@data-testid='up-small']";
+	private static final String XP_MENU_OPEN_REBAJAS = "//*[@id='headerMenuScroll']";
 	private static final String XP_MENU_ITEM = "//li[@data-testid]/a[@data-testid[contains(.,'menu.family.')]]";
+	
+	private String getXPathMenuOpen() {
+		return "(" + XP_MENU_OPEN_NORMAL + " | " + XP_MENU_OPEN_REBAJAS + ")";
+	}
 	
 	@Override
 	public boolean isMenuInState(boolean open, int seconds) {
@@ -47,7 +52,7 @@ public class MenusWebAllDeviceCurrent extends PageBase implements MenusWebAll {
 	}
 
 	private boolean isMenuOpen(int seconds) {
-		return state(PRESENT, XP_MENU_OPEN).wait(seconds).check();
+		return state(PRESENT, getXPathMenuOpen()).wait(seconds).check();
 	}
 	private boolean isMenuClose(int seconds) {
 		for (int i=0; i<seconds; i++) {
