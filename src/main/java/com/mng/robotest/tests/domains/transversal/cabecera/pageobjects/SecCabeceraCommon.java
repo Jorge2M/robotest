@@ -2,6 +2,7 @@ package com.mng.robotest.tests.domains.transversal.cabecera.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 import com.github.jorge2m.testmaker.conf.Log4jTM;
@@ -113,7 +114,12 @@ public class SecCabeceraCommon extends SecCabecera {
 
 	public void clickIconoAndWait(IconoCabecera icono) {
 		isInStateIconoBolsa(VISIBLE, 3); //Con los nuevos menús ahora tardan bastante en aparecer los iconos
-		click(icono.getBy(channel)).type(JAVASCRIPT).exec(); //TODO
+		try {
+			click(icono.getBy(channel)).type(JAVASCRIPT).exec();
+		} catch (StaleElementReferenceException e) {
+			waitMillis(1000);
+			click(icono.getBy(channel)).exec();
+		}
 	}
 	
 	public boolean isIconoInState(IconoCabecera icono, State state) {
