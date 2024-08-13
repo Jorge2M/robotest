@@ -612,6 +612,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		} catch (Exception e) {
 			scrollEjeY(100);			
 		}
+		waitMillis(500); //Time to wait full unfold
 	}
 	
 	@Override
@@ -659,9 +660,8 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	
 	private Optional<Talla> selectTalla(String xpTalla, int posArticulo) {
 		if (state(VISIBLE, xpTalla).wait(1).check()) {
-			var tallaToSelect = getElement(xpTalla);
-			var labelTalla = tallaToSelect.getText();
-			tallaToSelect.click();
+			var labelTalla = getElement(xpTalla).getText();
+			click(xpTalla).exec();
 			if (isDevice()) { //wait for tallas unshow in webmobil
 				isInvisibleArticleCapaTallasUntil(posArticulo, 2);
 			}
