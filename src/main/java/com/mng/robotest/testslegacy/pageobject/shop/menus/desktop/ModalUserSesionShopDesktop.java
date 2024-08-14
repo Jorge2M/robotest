@@ -30,7 +30,9 @@ public class ModalUserSesionShopDesktop extends PageBase {
 		}
 	}
 	
-	private static final String XP_USER_LOGGED = "//p[@class[contains(.,'userLogged')]]";
+	private static final String XP_USER_LOGGED = "//*["
+			+ "@class[contains(.,'userLogged')] or " //genesis
+			+ "@data-testid='loyaltyMyAccount.HeaderInfo.container']"; //old
 	
 	private String getXPathUserLogged(String nameUser) {
 		return XP_USER_LOGGED + "//self::*[text()[contains(.,'" + nameUser + "')]]";

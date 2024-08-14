@@ -594,6 +594,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	private void showTallasArticuloMobile(int posArticulo) {
 		String xpathArticle = getXPathArticulo(posArticulo);
 		state(VISIBLE, xpathArticle).wait(3).check();
+		clickGridview("01");
 		moveToElement(xpathArticle);
 		var articleElem = getElement(xpathArticle);
 		var showTallasButton = getElement(articleElem, "." + XP_ANADIR_ARTICLE_MOBILE);
