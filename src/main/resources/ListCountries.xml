@@ -143,6 +143,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Беларусь" codigo="073"> <!-- Bielorrusia -->
@@ -478,6 +479,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <mobiluser>20123456</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Estonia" codigo="053">
@@ -804,7 +806,7 @@
 	nombre="UTÁNVÉTELES FIZETÉS" nombremovil="Utánvételes Fizetés" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
 <micuentanew>shop,outlet</micuentanew>
-<newcheckout>shop</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Iceland" codigo="024">
@@ -1573,6 +1575,7 @@
 	type="ContraReembolso" tiendas="shop,outlet" 
 	nombre="PLATA PRIN RAMBURS" nombremovil="Plata Prin Ramburs" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>S</multidireccion>
+<newcheckout>outlet</newcheckout>
 <micuentanew>shop,outlet</micuentanew>
 </pais>
 
@@ -1715,6 +1718,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n" 
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<newcheckout>outlet</newcheckout>
 <micuentanew>shop,outlet</micuentanew>
 </pais>
 
@@ -1768,6 +1772,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<newcheckout>outlet</newcheckout>
 <micuentanew>shop,outlet</micuentanew>
 </pais>
 
@@ -2126,6 +2131,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
 <emailuser>jorge.munoz@mango.com</emailuser> <!-- Utilizaremos un email con timestamp para superar el control de fraude de "Rechnung" -->
+<newcheckout>outlet</newcheckout>
 <micuentanew>shop,outlet</micuentanew>
 </pais>
 
@@ -2280,6 +2286,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>shop,outlet</newcheckout>
 <micuentanew>shop,outlet</micuentanew>
 </pais>
 
