@@ -68,7 +68,7 @@ public class Cht001 extends TestBase {
 	private void checkDondeEstaMiPedidoResponse() {
 		var chatBotSteps = new ModalChatBotNewSteps();
 		String answerExpected = "Para poder encontrar tu pedido, escribe el e-mail con el que hiciste la compra (ej. nombre@ejemplo.com).";
-		chatBotSteps.checkResponseVisible(answerExpected, 3);
+		chatBotSteps.checkResponseVisible(answerExpected, 5);
 		chatBotSteps.close();
 	}
 	

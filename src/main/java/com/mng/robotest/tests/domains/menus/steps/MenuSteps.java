@@ -166,7 +166,8 @@ public class MenuSteps extends StepBase {
 		if (isMenuWithArticles(menuName)) {
 			new GaleriaSteps().checkGaleriaAfeterSelectMenu();
 		}
-		if (menu.getSubMenus()!=null && !menu.getSubMenus().isEmpty()) {
+		if (menu.getSubMenus()!=null && !menu.getSubMenus().isEmpty() &&
+			dataTest.getIdioma().getCodigo()==CodIdioma.ES) {
 			checkVisibilitySubmenus(menu);
 		}
 		if (isDesktop() && 

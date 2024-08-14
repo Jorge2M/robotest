@@ -16,7 +16,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class MenusWebAllDesktopNew extends PageBase implements MenusWebAll {
 
-	private static final String XP_WRAPPER_MENU = "//div[@id[contains(.,'subMenu')]]";
+	private static final String XP_WRAPPER_MENU = "//div[@class[contains(.,'StructureLPlus')]]";
 	
 	private static final String XP_MENU_ITEM = 
 			"//li[@data-testid[contains(.,'menu.family.')] and " + 

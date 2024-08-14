@@ -33,7 +33,9 @@ public class Bor002 extends TestBase {
 	private void loginAndClearData() throws Exception {
 		accessAndLogin();
 		new BolsaSteps().clear();
-		new FavoritosSteps().clearAll();
+		if (!isOutlet()) {
+			new FavoritosSteps().clearAll();
+		}
 	}
 	
 	private void addBagArticleWithColors() throws Exception {

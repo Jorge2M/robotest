@@ -298,6 +298,7 @@
 	nombre="НАЛОЖЕН ПЛАТЕЖ" testpasarela='s' testpago='s'></pago>-->
 <multidireccion>N</multidireccion>
 <micuentanew>shop,outlet</micuentanew>
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Croatia" codigo="092">
@@ -339,6 +340,7 @@
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newcheckout>outlet</newcheckout>
 <micuentanew>shop,outlet</micuentanew>
 </pais>
 
@@ -427,6 +429,7 @@
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
 	nombre="PLATBA NA DOBÍRKU" nombremovil="Platba Na Dobírku" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>S</multidireccion>
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Denmark" codigo="008">

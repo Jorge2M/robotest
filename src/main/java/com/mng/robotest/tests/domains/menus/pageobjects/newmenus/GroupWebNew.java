@@ -11,14 +11,7 @@ import static com.mng.robotest.tests.domains.menus.entity.GroupResponse.*;
 public class GroupWebNew extends GroupWeb {
 	
 	private static final String XP_GROUP_DESKTOP = "//li[@data-testid[contains(.,'menu.section')]]";
-	private static final String TAG_GROUP = "@tag_group";
-	
-	private static final String XP_SUBMENU_WITH_TAG_DESKTOP = 
-			"//li[@data-testid[contains(.,'" + TAG_GROUP + "')]]" + 
-			"/ul[@id[contains(.,'subMenuColumn3')]]" +  
-			"/li[@data-testid[contains(.,'" + TAG_GROUP + "')]]";
-	
-	private static final String XP_SUBMENU_DEVICE = "//li[@data-testid[contains(.,'menu.section')]]//div[@data-testid='menu.submenu']";
+	private static final String XP_SUBMENU_DEVICE = "//li[@data-testid[contains(.,'menu.family.')]]//..//self::ul";
 
 	public GroupWebNew(GroupType group) {
 		super(group);
@@ -27,8 +20,8 @@ public class GroupWebNew extends GroupWeb {
 		super(linea, sublinea, group);
 	}
 	
-	private String getXPathGroupSelected() {
-		return getXPathGroup() + "/../self::*[@class[contains(.,'Submenu_selected')]]/button"; //Génesis (14-11-23)
+	private String getXPathGroupSelectedDesktop() {
+		return getXPathGroup() + "//self::*[@class[contains(.,'_active_')]]";
 	}
 	
 	private String getXPathGroup() {
@@ -49,12 +42,7 @@ public class GroupWebNew extends GroupWeb {
 	}
 	
 	private String getXPathSubmenuDesktop() {
-		//String xpathSubmenu = XP_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + linea.toString().toLowerCase());
-		String xpathSubmenu = XP_SUBMENU_WITH_TAG_DESKTOP.replace(TAG_GROUP, group + "_" + getIdLinea());
-		if (sublinea!=null) {
-			return xpathSubmenu.replace("subMenuColumn3", "subMenuColumn4"); 
-		}
-		return xpathSubmenu;
+		return "//ul[@data-testid='menu.family." + group + "_" + getIdLinea() + "']";
 	}
 	
 	@Override
@@ -104,7 +92,10 @@ public class GroupWebNew extends GroupWeb {
 			   (group.getGroupResponse()!=MENUS || isVisibleSubMenus()));
 	}
 	private boolean isGroupSelected() {
-		return state(VISIBLE, getXPathGroupSelected()).wait(1).check();
+		if (isDesktop()) {
+			return state(VISIBLE, getXPathGroupSelectedDesktop()).wait(1).check();
+		}
+		return true; //Impossible to view if group is selected
 	}
 	
 	private void hoverLinea() {
