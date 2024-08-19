@@ -91,6 +91,13 @@ public class PageBase extends PageObjTM {
 		return isPRO(driver.getCurrentUrl());
 	}
 	
+	public boolean isPRE() {
+		if (TestCaseTM.getTestCaseInExecution().isEmpty()) {
+			return false;
+		}
+		return getEnvironment(driver.getCurrentUrl())==Environment.PREPRODUCTION;
+	}
+	
 	public static Environment getEnvironment(String url) {
 		if (isEnvPRO()) {
 			return Environment.PRODUCTION;

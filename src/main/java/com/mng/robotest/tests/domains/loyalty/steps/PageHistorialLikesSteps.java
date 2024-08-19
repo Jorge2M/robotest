@@ -4,8 +4,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.PageHistorialLikes;
+import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import static com.mng.robotest.tests.domains.loyalty.steps.PageHistorialLikesSteps.TypePoints.*;
+import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageHistorialLikesSteps extends StepBase {
 
@@ -33,13 +35,17 @@ public class PageHistorialLikesSteps extends StepBase {
 	public ChecksTM checkPointsPayment(int pointsUsed, int pointsReceived, String idPedido) {
 		var checks = ChecksTM.getNew();
 		int marginPoints = 5;
+		var levelError = DEFECT;
+		if (UtilsTest.todayBeforeDate("2024-10-15") && isPRE()) { //Hay un problema de entorno en PRE que algún día habría que reclamar a Mercurio
+			levelError = WARN;
+		}
 		checks.add(
 			"En los primeros 4 movimientos existe uno de <b>" + pointsReceived + "</b> puntos recibidos asociado al código de pedido <b>" + idPedido + "</b>",
-			isInFirst4Movements(RECEIVED, pointsReceived, idPedido));
+			isInFirst4Movements(RECEIVED, pointsReceived, idPedido), levelError);
 		
 		checks.add(
 			"En los primeros 4 movimientos existe uno de <b>" + pointsUsed + "</b> (±" + marginPoints + ") puntos usados asociado al código de pedido <b>" + idPedido + "</b>",
-			isInFirst4Movements(USED, pointsUsed, marginPoints, idPedido));
+			isInFirst4Movements(USED, pointsUsed, marginPoints, idPedido), levelError);
 			
 		return checks;
 	}
