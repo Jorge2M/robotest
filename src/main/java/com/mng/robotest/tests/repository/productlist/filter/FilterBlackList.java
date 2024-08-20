@@ -13,7 +13,9 @@ public class FilterBlackList implements Filter {
 		"77093262",
 		"77083263",
 		"77014034",
-		"77014032" //Tienen problemas en CloudTest/PRE (se visualiza la PLP en lugar de la PDP)
+		"77014032", //Tienen problemas en CloudTest/PRE (se visualiza la PLP en lugar de la PDP)
+		"77014023", 
+		"77074794"  //No se encuentran desde el buscador de PRE
 	);
 //	private static final List<String> BLACK_LIST = new ArrayList<>();
 	

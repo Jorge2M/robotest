@@ -23,7 +23,7 @@ public class SecBolsa extends SecBolsaBase {
 	private static final String XP_SIGN_IN_BUTTON_MOBILE = "//*[@data-testid='shoppingCart.loginModal.cta.login']";
 	private static final String XP_CREATE_ACCOUNT_BUTTON_MOBILE = "//*[@data-testid='shoppingCart.loginModal.cta.register']";	
 	private static final String XP_CONTINUE_AS_GUEST_LINK_MOBILE = "//*[@data-testid='shoppingCart.loginModal.cta.guest']";
-	private static final String XP_HEARTH_ICON = "//*[@data-testid='bag.item.removeItem.button']";
+	private static final String XP_HEARTH_ICON = "//*[@data-testid='bag.item.moveToWishlist.button']";
 
 	@Override
 	String getXPathPanelBolsa() {

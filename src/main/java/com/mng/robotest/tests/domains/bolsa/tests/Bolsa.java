@@ -14,7 +14,7 @@ public class Bolsa {
 	
 	@Test (
 		testName="BOR002",
-		groups={"Bolsa", "Smoke", "Canal:all_App:all"}, 
+		groups={"Bolsa", "Favoritos", "Smoke", "Canal:all_App:all"}, 
 		description="[Usuario registrado][Bolsa -> Favoritos][Acceder a checkout]")
 	public void anyadirBolsayCompraSiReg() throws Exception {
 		new Bor002().execute();
