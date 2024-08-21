@@ -15,16 +15,16 @@ public class PageEdits extends PageBase {
 	}
 	
 	public boolean isVisibleAnyArticle() {
-		boolean isVisible = isVisibleAnyArticleSimple(0);
+		boolean isVisible = isVisibleAnyArticleSimple();
 		if (!isVisible) {
 			scrollEjeY(10000);
-			return isVisibleAnyArticleSimple(1);
+			return isVisibleAnyArticleSimple();
 		}
-		return false;
+		return true;
 	}
 	
-	private boolean isVisibleAnyArticleSimple(int seconds) {
-		return state(VISIBLE, XP_IMAGE_PRODUCT).wait(seconds).check();
+	private boolean isVisibleAnyArticleSimple() {
+		return state(VISIBLE, XP_IMAGE_PRODUCT).check();
 	}
 	
 }
