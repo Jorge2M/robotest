@@ -31,6 +31,7 @@ public class SecPromotion extends PageBase {
 	}
 	
 	private void inputChequeData(String id, String cvc) {
+		state(VISIBLE, XP_INPUT_PROMOTIONAL_CODE).wait(1).check();
 		inputClearAndSendKeys(XP_INPUT_PROMOTIONAL_CODE, id);
 		click(XP_BUTTON_APPLY_CODE).exec();
 		state(PRESENT, XP_INPUT_CVC_CHEQUE).wait(1).check();
