@@ -6,7 +6,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.conf.Suites;
 
-public class CmdRunTests {  
+public class RobotestTestRunner {  
 	
 	public static void main(String[] args) throws Exception { 
 		var inputParamsMango = new InputParamsMango(Suites.class, AppEcom.class);
