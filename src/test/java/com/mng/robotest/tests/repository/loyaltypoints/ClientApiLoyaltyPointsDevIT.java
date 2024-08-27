@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import com.mng.robotest.tests.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
 import com.mng.robotest.tests.domains.loyalty.getdata.data.ResultAddPoints;
-import com.mng.robotest.tests.domains.loyalty.tests.Loy002;
+import com.mng.robotest.tests.domains.loyalty.tests.testsnew.Loy002;
 
 public class ClientApiLoyaltyPointsDevIT {
 

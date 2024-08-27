@@ -1,11 +1,12 @@
-package com.mng.robotest.tests.domains.loyalty.tests;
+package com.mng.robotest.tests.domains.loyalty.tests.testsnew;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.loyalty.beans.User;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.tests.domains.loyalty.steps.PageHistorialLikesSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageHomeConseguirPorLikesSteps;
-import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
+import com.mng.robotest.tests.domains.loyalty.tests.LoyTestCommons;
+import com.mng.robotest.tests.domains.loyalty.steps.MangoLikesYouSteps;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 
@@ -53,7 +54,7 @@ public class Loy003 extends TestBase {
 	}
 	
 	private void clickConseguirPorLikesButton() {
-		new PageMangoLikesYouSteps().clickConseguirPorLikesButton();
+		new MangoLikesYouSteps().clickConseguirPorLikesButton();
 	}	
 	
 	private int selectConseguirButton() {
@@ -62,7 +63,7 @@ public class Loy003 extends TestBase {
 	
 	private void checkLikes(int likesUsed) {
 		clickMangoLikesYou();
-		new PageMangoLikesYouSteps().click(TabLink.HISTORIAL);
+		new MangoLikesYouSteps().click(TabLink.HISTORIAL);
 		new PageHistorialLikesSteps().isLastMovementOf(likesUsed);
 	}
 

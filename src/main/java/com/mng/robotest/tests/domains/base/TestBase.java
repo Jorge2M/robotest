@@ -4,10 +4,12 @@ import java.util.List;
 
 import com.mng.robotest.tests.domains.base.datatest.DataTest;
 import com.mng.robotest.tests.domains.bolsa.steps.BolsaSteps;
+import com.mng.robotest.tests.domains.compra.pageobjects.envio.TipoTransporteEnum.TipoTransporte;
 import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.compra.tests.CompraSteps;
 import com.mng.robotest.tests.domains.transversal.cabecera.steps.SecCabeceraSteps;
 import com.mng.robotest.tests.repository.productlist.entity.GarmentCatalog.Article;
+import com.mng.robotest.testslegacy.beans.Pago;
 import com.mng.robotest.testslegacy.data.PaisShop;
 
 public abstract class TestBase extends StepBase {
@@ -49,6 +51,9 @@ public abstract class TestBase extends StepBase {
     protected void executeMastercardPayment() throws Exception {
     	executePayment("MASTERCARD");
     }
+    protected void executeMastercardTiendaPayment() throws Exception {
+    	executePayment("MASTERCARD", TipoTransporte.TIENDA);
+    }    
     
     protected void executeVisaPaymentSavingCard() throws Exception {
         var dataPago = dataTest.getDataPago();
@@ -63,10 +68,18 @@ public abstract class TestBase extends StepBase {
         dataPago.setUseSavedCard(true);
         executePayment();
     }
-    
+
     protected void executePayment(String payment) throws Exception {
+    	executePayment(payment, null);
+    }
+    
+    protected void executePayment(String payment, TipoTransporte tipoTransporte) throws Exception {
         var dataPago = dataTest.getDataPago();
-        dataPago.setPago(dataTest.getPais().getPago(payment));
+        Pago pago = dataTest.getPais().getPago(payment);
+        if (tipoTransporte!=null) {
+        	pago.setTipoEnvio(tipoTransporte);
+        }
+        dataPago.setPago(pago);
         executePayment();
     }
     

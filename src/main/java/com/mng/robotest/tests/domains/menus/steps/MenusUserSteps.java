@@ -9,7 +9,7 @@ import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.favoritos.steps.FavoritosSteps;
 import com.mng.robotest.tests.domains.login.pageobjects.PageLogin;
 import com.mng.robotest.tests.domains.loyalty.steps.PageMLYUnirmeAlClubSteps;
-import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
+import com.mng.robotest.tests.domains.loyalty.steps.MangoLikesYouSteps;
 import com.mng.robotest.tests.domains.micuenta.pageobjects.PageMiCuentaOld;
 import com.mng.robotest.tests.domains.micuenta.steps.MiCuentaSteps;
 import com.mng.robotest.tests.domains.registro.steps.PageRegistroIniStepsOld;
@@ -188,7 +188,7 @@ public class MenusUserSteps extends StepBase {
 		expected="Aparece la página de \"Mango Likes You\"")
 	private int clickMenuMangoLikesYouLogged() {
 		clickUserMenu(MANGO_LIKES_YOU);
-		int numberPoints = new PageMangoLikesYouSteps().checkIsPage().getNumberPoints();
+		int numberPoints = new MangoLikesYouSteps().checkIsPage().getNumberPoints();
 		checksDefault();
 		
 		replaceStepDescription(TAG_POINTS, String.valueOf(numberPoints));

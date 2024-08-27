@@ -35,7 +35,8 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 			+ "@data-testid='plp.filters.desktop.button' or " //Old
 			+ "@data-testid='plp.filters.mobile.button' or " //Old
 			+ "@data-testid='productList.filters.small.button' or " //New
-			+ "@data-testid='productList.filters.large.button']"; //New
+			+ "@data-testid='productList.filters.large.button' or " //New
+			+ "@data-testid='productList.filters.button']"; //New menu
 
 	private static final String XP_LABEL_FILTRO_DESKTOP = XP_BUTTON_FILTRAR + "//following-sibling::ul/li/span";
 	private static final String XP_LABEL_FILTRO_MOBIL = "//*[@data-testid[contains(.,'plp.filters.mobile.panel.')]]//div[@class[contains(.,'Element_subtitle')]]";
@@ -43,7 +44,10 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	private static final String XP_WRAPPER_DESKTOP = XP_BUTTON_FILTRAR + "/../..";
 	private static final String XP_WRAPPER_MOBIL = "//*[@data-testid='plp.filters.mobile.panel']";
 	
-	private static final String XP_CAPA_FILTERS = "//*[@data-testid='plp.filters.desktop.panel']"; //
+	private static final String XP_CAPA_FILTERS = "//*["
+			+ "@data-testid='plp.filters.desktop.panel' or "
+			+ "@data-testid='plp.filters.mobile.panel']"; //New menus
+	
 	private static final String XP_BUTTON_MOSTRAR_ARTICULOS = "//*[@data-testid='plp.filters.apply.button']"; //
 	
 	private static final String XP_INPUT_MINIMO = "//input[@step='1']";

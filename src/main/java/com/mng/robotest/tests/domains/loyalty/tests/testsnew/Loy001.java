@@ -1,7 +1,8 @@
-package com.mng.robotest.tests.domains.loyalty.tests;
+package com.mng.robotest.tests.domains.loyalty.tests.testsnew;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.loyalty.beans.User;
+import com.mng.robotest.tests.domains.loyalty.tests.LoyTestCommons;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
 

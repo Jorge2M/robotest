@@ -13,7 +13,7 @@ import com.mng.robotest.tests.domains.loyalty.beans.User;
 import com.mng.robotest.tests.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.tests.domains.loyalty.steps.PageHistorialLikesSteps;
-import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
+import com.mng.robotest.tests.domains.loyalty.steps.MangoLikesYouSteps;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
 import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 
@@ -21,7 +21,7 @@ public class LoyTestCommons extends StepBase {
 	
 	public static final User USER_PRO_WITH_LOY_POINTS = 
 			new User("ticket_digital_es@mango.com", "6051483570048367458", "ES");
-
+	
 	public static int clickMangoLikesYou() {
 		return new MenusUserSteps().clickMenuMangoLikesYou();
 	}
@@ -70,7 +70,7 @@ public class LoyTestCommons extends StepBase {
     	var pageResultPagoSteps = new PageResultPagoSteps();
     	int pointsGenerated = pageResultPagoSteps.checkLoyaltyPointsGenerated().getNumberPoints();
 		pageResultPagoSteps.clickLinkDescubrirVentajas();
-		new PageMangoLikesYouSteps().click(TabLink.HISTORIAL);
+		new MangoLikesYouSteps().click(TabLink.HISTORIAL);
 		return pointsGenerated;
     }
 

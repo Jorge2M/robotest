@@ -7,6 +7,7 @@ import com.github.jorge2m.testmaker.service.TestMaker;
 import com.mng.robotest.tests.domains.compra.beans.ConfigCheckout;
 import com.mng.robotest.tests.domains.favoritos.entity.Favorite;
 import com.mng.robotest.tests.domains.favoritos.entity.FavoritesStored;
+import com.mng.robotest.tests.domains.loyalty.beans.User;
 import com.mng.robotest.tests.domains.menus.entity.Linea;
 import com.mng.robotest.tests.repository.usuarios.GestorUsersShop;
 import com.mng.robotest.testslegacy.beans.IdiomaPais;
@@ -179,6 +180,12 @@ public class DataTest implements Cloneable, Serializable {
 
 	public void setUserConnected(String userConnected) {
 		this.userConnected = userConnected;
+	}
+	
+	public void setUser(User user) {
+		setUserConnected(user.getEmail());
+		setUserRegistered(true);
+		setPasswordUser(user.getPassword());
 	}
 
 	public void setPasswordUser(String passwordUser) {

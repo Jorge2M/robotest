@@ -11,13 +11,13 @@ public class PageMangoLikesYou extends PageBase {
 	private static final String XP_POINTS = XP_WRAPP_PAGE + "//div[@id='space-header']/div[3]";
 	
 	//TODO solicitar data-testid en lugar de React
-	private static final String XP_LINK_AYUDA = "//div[text()='Ayuda']";
+	private static final String XP_LINK_AYUDA = "//div[text()='Ayuda' or text()='Help']";
 	
 	//TODO solicitar data-testid en lugar de React (Kiritaki)
 	public enum TabLink {
-		VENTAJAS("//button[text()='Ventajas']"),
-		CONSEGUIR_LIKES("//button[text()='Conseguir Likes']"),
-		HISTORIAL("//button[text()='Historial']");
+		VENTAJAS("//button[text()='Ventajas' or text()='Benefits']"),
+		CONSEGUIR_LIKES("//button[text()='Conseguir Likes' or text()='Get Likes']"),
+		HISTORIAL("//button[text()='Historial' or text()='History']");
 		
 		private String xpath;
 		private TabLink(String xpath) {
@@ -29,10 +29,10 @@ public class PageMangoLikesYou extends PageBase {
 	}
 	
 	public enum ButtonUseLikes {
-		COMPRA_CON_DESCUENTO("//button/span[text()='Comprar con descuento']"),
-		DONAR_MIS_LIKES("//button/span[contains(text(), 'Donar Likes')]"),
+		COMPRA_CON_DESCUENTO("//button/span[text()='Comprar con descuento' or text()='Shop with a discount']"),
+		DONAR_MIS_LIKES("//button/span[text()[contains(.,'Donar Likes')] or text()[contains(.,'Donate Likes')]]"),
 		ENTRADA_CINE("//img[@src[contains(.,'card_cine')]]/..//button/span"),
-		LIKES_1200("//button/span[contains(text(), '1200 Likes')]"),
+		LIKES_1200("//button/span[text()[contains(.,'1200 Likes')] or text()[contains(.,'1,500 Likes')]]"),
 		REGALAR_MIS_LIKES("//button/span[text()[contains(.,'Regalar')]]");
 		
 		private String xpath;

@@ -14,7 +14,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 import static com.mng.robotest.tests.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes.*;
 import static com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou.ButtonUseLikes.*;
 
-public class PageMangoLikesYouSteps extends StepBase {
+public class MangoLikesYouSteps extends StepBase {
 
 	private final PageMangoLikesYou pgMangoLikesYou = new PageMangoLikesYou();
 	
@@ -217,4 +217,5 @@ public class PageMangoLikesYouSteps extends StepBase {
 			this.finPointsReceptorReal = finPointsReceptorReal;
 		}
 	}
+	
 }

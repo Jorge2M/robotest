@@ -1,11 +1,12 @@
-package com.mng.robotest.tests.domains.loyalty.tests;
+package com.mng.robotest.tests.domains.loyalty.tests.testsnew;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.loyalty.beans.User;
 import com.mng.robotest.tests.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
-import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps;
+import com.mng.robotest.tests.domains.loyalty.steps.MangoLikesYouSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageRegalarMisLikesSteps;
-import com.mng.robotest.tests.domains.loyalty.steps.PageMangoLikesYouSteps.DataRegaloPuntos;
+import com.mng.robotest.tests.domains.loyalty.steps.MangoLikesYouSteps.DataRegaloPuntos;
+import com.mng.robotest.tests.domains.loyalty.tests.LoyTestCommons;
 import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType;
@@ -15,7 +16,7 @@ public class Loy005 extends TestBase {
 	static final User EMISOR_USER = new User("test.performance23@mango.com", "6875476978997042979", "ES");
 	static final User RECEPTOR_USER = new User("test.performance24@mango.com", "6876477022921042981", "ES");
 	
-	private final PageMangoLikesYouSteps pageHomeLikesSteps = new PageMangoLikesYouSteps();
+	private final MangoLikesYouSteps pageHomeLikesSteps = new MangoLikesYouSteps();
 	private final PageRegalarMisLikesSteps pageRegalarMisLikesSteps = new PageRegalarMisLikesSteps();
 	
 	public Loy005() throws Exception {
@@ -56,7 +57,7 @@ public class Loy005 extends TestBase {
 		dataPoints.setFinPointsReceptorExpected(iniPointsReceptor + pointsToGive);
 		dataPoints.setFinPointsEmisorReal(finPointsEmisor);
 		dataPoints.setFinPointsReceptorReal(finPointsReceptor);
-		PageMangoLikesYouSteps.checkRegalarPointsOk(dataPoints);
+		MangoLikesYouSteps.checkRegalarPointsOk(dataPoints);
 	}
 
 	private int clickMangoLikesYou() {

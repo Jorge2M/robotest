@@ -1,4 +1,4 @@
-package com.mng.robotest.tests.domains.loyalty.tests;
+package com.mng.robotest.tests.domains.loyalty.tests.testsnew;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.landings.steps.LandingSteps;

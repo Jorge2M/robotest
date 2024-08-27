@@ -43,7 +43,9 @@ public class ModalDroppointsSteps extends StepBase {
 		var dataPago = dataTest.getDataPago();
 		Pago pago = dataPago.getDataPedido().getPago();
 		DataSearchDeliveryPoint dataSearchDp = new DataSearchDeliveryPoint(pago, app, dataTest.getPais());
-		secSelectDPointSteps.searchPoblacion(dataSearchDp);
+		if (dataSearchDp.getData()!=null) {
+			secSelectDPointSteps.searchPoblacion(dataSearchDp);
+		}
 		DataDeliveryPoint dataDp = secSelectDPointSteps.clickDeliveryPointAndGetData(2);
 		dataPago.getDataPedido().setTypeEnvio(pago.getTipoEnvioType(app));
 		dataPago.getDataPedido().setDataDeliveryPoint(dataDp);

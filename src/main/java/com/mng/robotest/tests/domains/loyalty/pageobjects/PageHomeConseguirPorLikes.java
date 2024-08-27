@@ -7,32 +7,42 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageHomeConseguirPorLikes extends PageBase {
 
-	private static final String XP_BUTTON_LIKES = 
+	private static final String XP_BUTTON_LIKES_ES = 
 			"//button/span[" + 
 			    "text()[contains(.,'Conseguir por')] and " + 
+				"text()[contains(.,'Likes')]]";
+	
+	private static final String XP_BUTTON_LIKES_ENG = 
+			"//button/span[" + 
+			    "text()[contains(.,'Get for')] and " + 
 				"text()[contains(.,'Likes')]]";
 	
 	private static final String XP_ICON_OPERATION_DONE = 
 			"//*[@class[contains(.,'icon-outline-done')]]";
 	
+	private String getXPathButtonLikes() {
+		return "(" + XP_BUTTON_LIKES_ES + " | " + XP_BUTTON_LIKES_ENG + ")";
+	}
+	
 	public boolean isPage(int seconds) {
-		return state(VISIBLE, XP_BUTTON_LIKES).wait(seconds).check();
+		return state(VISIBLE, getXPathButtonLikes()).wait(seconds).check();
 	}
 	
 	public int selectConseguirButton() {
 		int likes = getLikesFromButton();
-		click(XP_BUTTON_LIKES).exec();
+		click(getXPathButtonLikes()).exec();
 		return likes;
 	}
 	
 	private int getLikesFromButton() {
-		String textButton = getElement(XP_BUTTON_LIKES).getText();
-		var pattern = Pattern.compile(".(\\d+).");
-		var matcher = pattern.matcher(textButton);
-		if (matcher.find()) {
-			return Integer.valueOf(matcher.group(1));
-		}
-		return 0;
+	    String textButton = getElement(getXPathButtonLikes()).getText();
+	    String sanitizedText = textButton.replaceAll("[.,]", "");
+	    var pattern = Pattern.compile("(\\d+)");
+	    var matcher = pattern.matcher(sanitizedText);
+	    if (matcher.find()) {
+	        return Integer.valueOf(matcher.group(1));
+	    }
+	    return 0;
 	}
 	
 	public boolean isVisibleIconOperationDoneUntil(int seconds) {
