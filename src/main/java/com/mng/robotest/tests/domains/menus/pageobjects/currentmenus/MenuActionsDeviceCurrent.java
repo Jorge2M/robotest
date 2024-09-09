@@ -9,6 +9,7 @@ import com.mng.robotest.tests.domains.menus.pageobjects.MenuWeb;
 import com.mng.robotest.tests.domains.menus.pageobjects.UtilsMenusPO;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.entity.GridviewType.*;
 
 import com.github.jorge2m.testmaker.conf.Channel;
 
@@ -66,7 +67,7 @@ public class MenuActionsDeviceCurrent extends PageBase implements MenuActions {
 	private void ifGalerySetGridOneColumn() {
 		var pageGaleria = PageGaleria.make(Channel.mobile);
 		if (pageGaleria.isVisibleAnyArticle()) {
-			pageGaleria.clickGridview("01");
+			pageGaleria.clickGridview(ONE_COLUMN);
 		}
 	}
 	

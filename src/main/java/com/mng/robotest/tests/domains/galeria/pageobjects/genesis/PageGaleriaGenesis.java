@@ -3,6 +3,7 @@ package com.mng.robotest.tests.domains.galeria.pageobjects.genesis;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria.AttributeArticle.*;
 import static com.mng.robotest.tests.domains.galeria.pageobjects.entity.StateFavorito.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.entity.GridviewType.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +23,7 @@ import com.mng.robotest.tests.domains.galeria.pageobjects.PageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.SecFiltros;
 import com.mng.robotest.tests.domains.galeria.pageobjects.UtilsPageGaleria;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entity.FilterOrdenacion;
+import com.mng.robotest.tests.domains.galeria.pageobjects.entity.GridviewType;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entity.StateFavorito;
 import com.mng.robotest.tests.domains.galeria.pageobjects.entity.TypeSlider;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps.TypeActionFav;
@@ -80,8 +82,8 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 		return XP_ARTICULO_OLD + " | " + XP_ARTICULO_NEW;
 	}
 	
-	private String getXPathGridviewIcon(String gridview) {
-		return "//label[@title[contains(.,'accessibility.gridview" + gridview + "')]]";
+	private String getXPathGridviewIcon(GridviewType gridview) {
+		return "//label/*[@data-testid='productList.view." + gridview.getType() + "']/..";
 	}
 	
 	private String getXPathArticulo(int numArticulo) {
@@ -114,7 +116,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	}
 	
 	@Override
-	public void clickGridview(String gridview) {
+	public void clickGridview(GridviewType gridview) {
 		click(getXPathGridviewIcon(gridview)).exec();
 	}
 	
@@ -594,7 +596,7 @@ public abstract class PageGaleriaGenesis extends PageBase implements PageGaleria
 	private void showTallasArticuloMobile(int posArticulo) {
 		String xpathArticle = getXPathArticulo(posArticulo);
 		state(VISIBLE, xpathArticle).wait(3).check();
-		clickGridview("01");
+		clickGridview(ONE_COLUMN);
 		moveToElement(xpathArticle);
 		var articleElem = getElement(xpathArticle);
 		var showTallasButton = getElement(articleElem, "." + XP_ANADIR_ARTICLE_MOBILE);
