@@ -38,11 +38,8 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 			+ "@data-testid='productList.filters.large.button' or " //New
 			+ "@data-testid='productList.filters.button']"; //New menu
 
-	private static final String XP_LABEL_FILTRO_DESKTOP = XP_BUTTON_FILTRAR + "//following-sibling::ul/li/span";
-	private static final String XP_LABEL_FILTRO_MOBIL = "//*[@data-testid[contains(.,'plp.filters.mobile.panel.')]]//div[@class[contains(.,'Element_subtitle')]]";
-	
-	private static final String XP_WRAPPER_DESKTOP = XP_BUTTON_FILTRAR + "/../..";
-	private static final String XP_WRAPPER_MOBIL = "//*[@data-testid='plp.filters.mobile.panel']";
+	private static final String XP_LABEL_FILTRO = "//*[@data-testid[contains(.,'plp.filters.mobile.panel.')]]//div[@class[contains(.,'Element_subtitle')]]";
+	private static final String XP_WRAPPER = "//*[@data-testid='plp.filters.mobile.panel']";
 	
 	private static final String XP_CAPA_FILTERS = "//*["
 			+ "@data-testid='plp.filters.desktop.panel' or "
@@ -57,28 +54,11 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	private static final String XP_ITEM_ORDENACION = "//*[@data-testid[contains(.,'plp.filters.mobile.panel.order')]]";
 	private static final String XP_ITEM_FAMILIA = "//*[@data-testid[contains(.,'plp.filters.mobile.panel.generic-generic-subfamilies')]]";
 	
-	private static final String XP_CLOSE_DESKTOP = "//*[@data-testid='plp.filters.desktop.panel.close']";
+//	private static final String XP_CLOSE_DESKTOP = "//*[@data-testid='plp.filters.desktop.panel.close']";
 	private static final String XP_CLOSE_MOBIL = "//*[@data-testid='modal.close.button']";
-
-	private String getXPathWrapper() {
-		if (isDevice()) {
-			return XP_WRAPPER_MOBIL;
-		}
-		return XP_WRAPPER_DESKTOP;
-	}
-	
-	private String getXPathLabelFiltro() {
-		if (isDevice()) {
-			return XP_LABEL_FILTRO_MOBIL;
-		}
-		return XP_LABEL_FILTRO_DESKTOP;
-	}
 	
 	private String getXPathClose() {
-		if (isDevice()) {
-			return XP_CLOSE_MOBIL;
-		}
-		return XP_CLOSE_DESKTOP;
+		return XP_CLOSE_MOBIL;
 	}
 	
 	private String getXPathLinkOrdenacion(FilterOrdenacion ordenacion) {
@@ -157,7 +137,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	}
 	
 	public void bring(BringTo bringTo) {
-		bringElement(getElement(getXPathWrapper()), bringTo);
+		bringElement(getElement(XP_WRAPPER), bringTo);
 	}
 	
 	@Override
@@ -269,10 +249,8 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	}
 	
 	private boolean isVisibleLabelFiltroApplied(Pattern labelExpected) {
-		if (isDevice()) {
-			showFilters();
-		}
-		var labelsFiltro = getElements(getXPathLabelFiltro());
+		showFilters();
+		var labelsFiltro = getElements(XP_LABEL_FILTRO);
 		if (labelsFiltro.isEmpty()) {
 			return false;
 		}
@@ -285,9 +263,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 				break;
 			}
 		}
-		if (isDevice()) {
-			close();
-		}
+		close();
 		return found;
 	}
 
