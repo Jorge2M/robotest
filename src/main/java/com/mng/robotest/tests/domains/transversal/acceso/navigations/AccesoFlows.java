@@ -137,7 +137,7 @@ public class AccesoFlows extends StepBase {
 	private void workAroundLoginProblem() {
 		//TODO workaround 06-08-2024 para corregir el problema de prehome->login->checkout
 		boolean apply = 
-				UtilsTest.todayBeforeDate("2024-09-06") && 
+				UtilsTest.todayBeforeDate("2024-10-06") && 
 				PageBase.getEnvironment(inputParamsSuite.getUrlBase())!=Environment.DEVELOPMENT;
 		
 		if (apply) {
