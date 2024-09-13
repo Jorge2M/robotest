@@ -289,7 +289,8 @@ public class Pais implements Serializable {
 	}
 	
 	public boolean isMicuentanew(AppEcom app) {
-		return getTiendasMicuentanew().contains(app);
+		return true;
+//		return getTiendasMicuentanew().contains(app);
 	}
 	
 	private List<AppEcom> getTiendasMicuentanew() {
