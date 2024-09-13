@@ -23,7 +23,7 @@ public class SecCabeceraCheckoutMobil extends PageBase {
 	}
 	
 	private void clickVerBolsa() {
-		state(VISIBLE, XP_LINK_VER_BOLSA).wait(1).check();
+		state(VISIBLE, XP_LINK_VER_BOLSA).wait(2).check();
 		click(XP_LINK_VER_BOLSA).exec();
 	}
 

@@ -139,7 +139,7 @@ public class AccesoSteps extends StepBase {
 		}
 		
 		if (!isDesktop() && dataTest.getPais().isVentaOnline()) {
-			boolean isPresentLinkMisCompras = userMenus.isMenuInState(MIS_COMPRAS, PRESENT);
+			boolean isPresentLinkMisCompras = userMenus.isMenuInStateUntil(MIS_COMPRAS, PRESENT, 1);
 			checks.add(
 				"Aparece el link \"Mis Compras\"",
 				isPresentLinkMisCompras);
