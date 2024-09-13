@@ -96,7 +96,7 @@ public class ClientApiLoyaltyPointsDev {
 		var transferPoints = new TransferPoints();
 		transferPoints.setScore(loyaltyPoints);
 		transferPoints.setCountry(user.getCountry());
-		transferPoints.setLocation_id(11667);
+		//transferPoints.setLocation_id(11667);
 		transferPoints.setComments("hola");
 				
 		return 

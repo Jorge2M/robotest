@@ -1,10 +1,13 @@
 package com.mng.robotest.tests.domains.loyalty.getdata.data;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TransferPoints {
 
 	public int score;
 	public String country;
-	public int location_id;
+	public Integer location_id;
 	public String comments;
 	
 	public int getScore() {
