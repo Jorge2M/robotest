@@ -27,7 +27,7 @@ public class SecCabeceraCommon extends SecCabecera {
 		LUPA(
 			"//*[@data-testid='header.userMenu.search.button']",
 			"//*[@data-testid='header.userMenu.search.button']",
-			"//button[@class[contains(.,'SearchIcon')]]"),
+			"//*[@data-testid='header.userMenu.search.button']"),
 		INICIAR_SESION(
 			"//*[@data-testid='header.userMenu.login_mobile_any']",
 			"//*[@data-testid='header.userMenu.login_any']",

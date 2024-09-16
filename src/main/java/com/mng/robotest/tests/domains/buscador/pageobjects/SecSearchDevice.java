@@ -8,7 +8,10 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class SecSearchDevice extends PageBase implements SecSearch {
 	
-	private static final String XP_INPUT_BUSCADOR = "//*[@data-testid='header.search.input']"; 
+	private static final String XP_INPUT_BUSCADOR = "//*[" + 
+			"@data-testid='header.search.input' or " + //Current menus 
+			"@data-testid='header.searchBar.input']"; //New menus
+	
 	private static final String XP_CANCELAR_LINK = "//div[@class[contains(.,'search-cancel')]]";
 	
 	@Override

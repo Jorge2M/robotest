@@ -8,7 +8,9 @@ public class IsNewMenu {
 	private IsNewMenu() {}
 	
 	public static boolean is(Pais pais) {
-		return PaisShop.ANDORRA.isEquals(pais);
+		return 
+				PaisShop.ANDORRA.isEquals(pais) ||
+				PaisShop.LIECHTENSTEIN.isEquals(pais);
 	}
 
 }

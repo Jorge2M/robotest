@@ -8,8 +8,12 @@ import com.mng.robotest.tests.domains.base.PageBase;
 
 public class SecSearchDesktop extends PageBase implements SecSearch {
 	
-	private static final String XP_INPUT_BUSCADOR = "//input[@data-testid='header.search.input']";
-	private static final String XP_CLOSE_ASPA = "//span[@class[contains(.,'icon-outline-close')]]";
+	private static final String XP_INPUT_BUSCADOR = "//input[" + 
+			"@data-testid='header.search.input' or " + //Current menus 
+			"@data-testid='header.searchBar.input']"; //New menus
+	private static final String XP_CLOSE_ASPA = "//span[" + 
+			"@class[contains(.,'icon-outline-close')] or " + //Current menus 
+			"@data-testid='header.searchBar.close']"; //New menus
 
 	@Override
 	public void search(String referencia) {

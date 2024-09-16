@@ -96,9 +96,29 @@ public abstract class SecCabecera extends PageBase {
 		String xpathNumberArtIcono = getXPathNumberArtIcono();
 		int seconds = (isOutlet()) ? 1 : 0; 
 		if (state(VISIBLE, xpathNumberArtIcono).wait(seconds).check()) {
-			return getElement(xpathNumberArtIcono).getText();
+			return String.valueOf(
+					extractInteger(getElement(xpathNumberArtIcono).getText()));
 		}
 		return "0";
+	}
+	
+	private Integer extractInteger(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            int startIndex = input.indexOf('(');
+            int endIndex = input.indexOf(')');
+            if (startIndex != -1 && endIndex != -1 && startIndex < endIndex) {
+                String numberStr = input.substring(startIndex + 1, endIndex);
+                try {
+                    return Integer.parseInt(numberStr);
+                } catch (NumberFormatException ex) {
+                    return 0;
+                }
+            } else {
+                return 0; 
+            }
+        }	
 	}
 
 	//-- Específic functions for movil (Shop & Outlet)
