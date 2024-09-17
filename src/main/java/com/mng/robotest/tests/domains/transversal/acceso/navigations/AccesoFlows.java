@@ -85,7 +85,7 @@ public class AccesoFlows extends StepBase {
 	}
 	
 	public void identification(String user, String password) {
-		workAroundLoginProblem();
+//		workAroundLoginProblem();
 		clickIniciarSesion();
 		login(user, password);
 	}
@@ -134,24 +134,24 @@ public class AccesoFlows extends StepBase {
 		new ModalGeolocation().closeModalIfVisible();
 	}	
 	
-	private void workAroundLoginProblem() {
-		//TODO workaround 06-08-2024 para corregir el problema de prehome->login->checkout
-		boolean apply = 
-				UtilsTest.todayBeforeDate("2024-10-06") && 
-				PageBase.getEnvironment(inputParamsSuite.getUrlBase())!=Environment.DEVELOPMENT;
-		
-		if (apply) {
-			String urlHelp = "";
-			try {
-				String accesoIdioma = dataTest.getIdioma().getAcceso();
-				urlHelp = inputParamsSuite.getDnsUrlAcceso() + "/" + accesoIdioma + "/help";
-				driver.get(urlHelp);
-			}
-			catch (Exception e) {
-				Log4jTM.getLogger().warn("Problem loading " + urlHelp, e);
-			}
-		}
-	}
+//	private void workAroundLoginProblem() {
+//		//TODO workaround 06-08-2024 para corregir el problema de prehome->login->checkout
+//		boolean apply = 
+//				UtilsTest.todayBeforeDate("2024-10-06") && 
+//				PageBase.getEnvironment(inputParamsSuite.getUrlBase())!=Environment.DEVELOPMENT;
+//		
+//		if (apply) {
+//			String urlHelp = "";
+//			try {
+//				String accesoIdioma = dataTest.getIdioma().getAcceso();
+//				urlHelp = inputParamsSuite.getDnsUrlAcceso() + "/" + accesoIdioma + "/help";
+//				driver.get(urlHelp);
+//			}
+//			catch (Exception e) {
+//				Log4jTM.getLogger().warn("Problem loading " + urlHelp, e);
+//			}
+//		}
+//	}
 	
 	public void cambioPaisFromHomeIfNeeded(Pais newPais, IdiomaPais newIdioma) {
 		cambioPais(newPais, newIdioma);
