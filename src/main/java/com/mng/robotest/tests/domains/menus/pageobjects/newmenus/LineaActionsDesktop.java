@@ -31,7 +31,7 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	}
 
 	private String getXPathLinkLinea() {
-		return getXPathLinea() + "/a";
+		return getXPathLinea() + "//a";
 	}
 	
 	private String getXPathLinea() {
@@ -65,12 +65,12 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 	@Override
 	public void clickLinea() {
 		hoverLinea();
-		click(getXPathLinea()).exec();
+		click(getXPathLinkLinea()).exec();
 	}	
 	@Override 
 	public void clickSublinea() {
 		state(PRESENT, getXPathLinea()).wait(1).check();
-		click(getXPathSublinea()).exec();
+		click(getXPathLinkLinea()).exec();
 	}
 	@Override
 	public void hoverLinea() {
