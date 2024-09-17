@@ -1,6 +1,7 @@
 package com.mng.robotest.tests.domains.menus.pageobjects;
 
 import com.github.jorge2m.testmaker.conf.Channel;
+import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.menus.pageobjects.currentmenus.MenuActionsDesktopCurrent;
 import com.mng.robotest.tests.domains.menus.pageobjects.currentmenus.MenuActionsDeviceCurrent;
 import com.mng.robotest.tests.domains.menus.pageobjects.newmenus.MenuActionsDesktopNew;
@@ -14,8 +15,8 @@ public interface MenuActions {
 	public boolean isVisibleMenu();
 	public boolean isVisibleSubMenus();
 	
-	public static MenuActions make(MenuWeb menu, Channel channel, Pais pais) {
-		if (IsNewMenu.is(pais)) {
+	public static MenuActions make(MenuWeb menu, Channel channel, Pais pais, AppEcom app) {
+		if (pais.isNewmenu(app)) {
 			if (channel.isDevice()) {
 				return new MenuActionsDeviceNew(menu);
 			}

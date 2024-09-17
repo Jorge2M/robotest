@@ -249,13 +249,13 @@ public class MenuSteps extends StepBase {
 	
 	@Override
 	public void clickLinea(LineaType lineaType) {
-		clickLinea(LineaWeb.make(lineaType, dataTest.getPais()));
+		clickLinea(LineaWeb.make(lineaType, dataTest.getPais(), app));
 	}
 	
 	@Override
 	public void clickLinea(LineaType lineaType, SublineaType sublineaType) {
 		if (sublineaType==null) {
-			clickLinea(LineaWeb.make(lineaType, dataTest.getPais()));
+			clickLinea(LineaWeb.make(lineaType, dataTest.getPais(), app));
 		}
 		if (sublineaType!=null) {
 			if (channel.isDevice()) {
@@ -267,13 +267,13 @@ public class MenuSteps extends StepBase {
 	}
 	
 	private void clickSublineaDevice(LineaType lineaType, SublineaType sublineaType) {
-		clickLinea(LineaWeb.make(lineaType, dataTest.getPais()));
-		clickSublinea(LineaWeb.make(lineaType, sublineaType, dataTest.getPais()));
+		clickLinea(LineaWeb.make(lineaType, dataTest.getPais(), app));
+		clickSublinea(LineaWeb.make(lineaType, sublineaType, dataTest.getPais(), app));
 	}
 	
 	private void clickSublineaDesktop(LineaType lineaType, SublineaType sublineaType) {
-		var linea = LineaWeb.make(lineaType, dataTest.getPais());
-		var sublinea = LineaWeb.make(lineaType, sublineaType, dataTest.getPais());
+		var linea = LineaWeb.make(lineaType, dataTest.getPais(), app);
+		var sublinea = LineaWeb.make(lineaType, sublineaType, dataTest.getPais(), app);
 		hoverLineaDesktop(linea);
 		clickSublinea(sublinea);
 	}
@@ -308,7 +308,7 @@ public class MenuSteps extends StepBase {
         
         //En ocasiones no aparecen los menús después de un Hover sobre la línea de niños
 		if (!checkHoverLineaDesktop(lineaWeb)) {
-	        LineaWeb.make(LineaType.SHE, dataTest.getPais()).hoverLinea();
+	        LineaWeb.make(LineaType.SHE, dataTest.getPais(), app).hoverLinea();
 	        lineaWeb.hoverLinea();
 	        checkHoverLineaDesktop(lineaWeb);
 		}
@@ -317,7 +317,7 @@ public class MenuSteps extends StepBase {
 	
 	@Validation (description="Aparecen los menús", level=INFO)
 	public boolean checkHoverLineaDesktop(LineaWeb lineaWeb) {
-		return MenusWebAll.make(channel, dataTest.getPais()).isMenuInState(true, 1);
+		return MenusWebAll.make(channel, dataTest.getPais(), app).isMenuInState(true, 1);
 	}	
 	
 	@Validation (
@@ -403,7 +403,7 @@ public class MenuSteps extends StepBase {
 	private void checkLineaVisible(ChecksTM checks, LineaType lineaType, int seconds) {
 		var apareceLinea = dataTest.getPais().getShoponline().stateLinea(lineaType, app);
 		if (checkLinea(lineaType, apareceLinea)) {
-			boolean isLineaPresent = LineaWeb.make(lineaType, dataTest.getPais()).isLineaPresent(seconds);
+			boolean isLineaPresent = LineaWeb.make(lineaType, dataTest.getPais(), app).isLineaPresent(seconds);
 			if (apareceLinea==ThreeState.TRUE) {
 				checks.add (
 					"<b>Sí</b> aparece el link de la línea <b>" + lineaType + "</b>",
@@ -446,7 +446,7 @@ public class MenuSteps extends StepBase {
 	}	
 	
 	public void clickAllMenus(LineaWeb lineaWeb, GroupType group) {
-		clickAllMenus(GroupWeb.make(lineaWeb.getLinea(), lineaWeb.getSublinea(), group, dataTest.getPais()));
+		clickAllMenus(GroupWeb.make(lineaWeb.getLinea(), lineaWeb.getSublinea(), group, dataTest.getPais(), app));
 	}
 	
 	public void clickAllMenus(LineaWeb lineaWeb) {
@@ -455,13 +455,13 @@ public class MenuSteps extends StepBase {
 			if (group.getGroupResponse()==GroupResponse.ARTICLES) {
 				//TODO pending
 			} else {
-				clickAllMenus(GroupWeb.make(lineaWeb.getLinea(), lineaWeb.getSublinea(), group, dataTest.getPais()));
+				clickAllMenus(GroupWeb.make(lineaWeb.getLinea(), lineaWeb.getSublinea(), group, dataTest.getPais(), app));
 			}
 		}
 	}
 	
 	public void clickAllMenus(GroupWeb groupWeb) {
-		var menusWebAll = MenusWebAll.make(channel, dataTest.getPais());
+		var menusWebAll = MenusWebAll.make(channel, dataTest.getPais(), app);
 		if (groupWeb.isPresent()) {
 			clickGroup(groupWeb);
 			var listMenus = menusWebAll.getMenus(groupWeb);

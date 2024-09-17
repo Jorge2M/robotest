@@ -39,7 +39,7 @@ public class MenuWeb extends PageBase implements MenuActions {
 		this.subMenusShop = subMenusShop;
 		this.subMenusOutlet = subMenusOutlet;
 		this.articlesSubMenu = articlesSubMenu;
-		this.menuActions = MenuActions.make(this, channel, dataTest.getPais());
+		this.menuActions = MenuActions.make(this, channel, dataTest.getPais(), app);
 	}
 	
 	@Override

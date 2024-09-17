@@ -20,14 +20,14 @@ public abstract class GroupWeb extends PageBase {
 	protected final SublineaType sublinea;
 	protected final GroupType group;
 	
-	public static GroupWeb make(GroupType group, Pais pais) {
-		if (IsNewMenu.is(pais)) {
+	public static GroupWeb make(GroupType group, Pais pais, AppEcom app) {
+		if (pais.isNewmenu(app)) {
 			return new GroupWebNew(group);
 		}
 		return new GroupWebCurrent(group);
 	}
-	public static GroupWeb make(LineaType linea, SublineaType sublinea, GroupType group, Pais pais) {
-		if (IsNewMenu.is(pais)) {
+	public static GroupWeb make(LineaType linea, SublineaType sublinea, GroupType group, Pais pais, AppEcom app) {
+		if (pais.isNewmenu(app)) {
 			return new GroupWebNew(linea, sublinea, group);
 		}
 		return new GroupWebCurrent(linea, sublinea, group);

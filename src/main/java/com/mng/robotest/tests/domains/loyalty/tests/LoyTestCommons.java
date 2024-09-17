@@ -47,7 +47,7 @@ public class LoyTestCommons extends StepBase {
 	}
 	
 	private boolean isGroupNewNowSelectable() {
-		return GroupWeb.make(NEW_NOW, dataTest.getPais()).isPresent();
+		return GroupWeb.make(NEW_NOW, dataTest.getPais(), app).isPresent();
 	}	
 	
 	public DiscountLikes inputLoyaltyPoints() {

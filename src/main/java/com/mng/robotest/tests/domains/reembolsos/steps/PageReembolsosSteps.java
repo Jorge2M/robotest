@@ -25,7 +25,7 @@ public class PageReembolsosSteps extends StepBase {
 		description="Seleccionar la opción \"Reembolsos\"", 
 		expected="Aparece la página de reembolsos")
 	public void selectReembolsos(boolean paisConSaldoCta) {
-		PageMiCuenta.make(dataTest.getPais(), app).click(REEMBOLSOS);
+		PageMiCuenta.make().click(REEMBOLSOS);
 		checkClickReembolsos(paisConSaldoCta);
 	}
 	

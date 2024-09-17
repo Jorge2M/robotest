@@ -51,7 +51,7 @@ public class Pais implements Serializable {
 	List<Pago> listPagos = new LinkedList<>();
 	
 	String multidireccion;
-	String micuentanew;
+	String newmenu;
 	String newcheckout;
 	String emailuser;
 	String mobiluser;
@@ -279,24 +279,23 @@ public class Pais implements Serializable {
 		return (!PaisShop.COLOMBIA.isEquals(pais));
 	}
 	
-	public String getMicuentanew() {
-		return this.micuentanew;
+	public String getNewmenu() {
+		return this.newmenu;
 	}
-	
+
 	@XmlElement
-	public void setMicuentanew(String micuentanew) {
-		this.micuentanew = micuentanew;
+	public void setNewmenu(String newmenu) {
+		this.newmenu = newmenu;
 	}
 	
-	public boolean isMicuentanew(AppEcom app) {
-		return true;
-//		return getTiendasMicuentanew().contains(app);
+	public boolean isNewmenu(AppEcom app) {
+		return getTiendasNewmenu().contains(app);
 	}
 	
-	private List<AppEcom> getTiendasMicuentanew() {
+	private List<AppEcom> getTiendasNewmenu() {
 		List<AppEcom> listApps = new ArrayList<>();
-		if (getMicuentanew()!=null && getMicuentanew().length()>0) {
-			var listAppsStr = Arrays.asList(getMicuentanew().split(","));
+		if (getNewmenu()!=null && getNewmenu().length()>0) {
+			var listAppsStr = Arrays.asList(getNewmenu().split(","));
 			for (String app : listAppsStr) {
 				listApps.add(AppEcom.valueOf(app));
 			}

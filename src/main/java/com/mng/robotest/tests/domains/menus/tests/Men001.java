@@ -54,11 +54,11 @@ public class Men001 extends TestBase {
 	}
 	
 	private void clickMenusLinea() {
-		new MenuSteps().clickAllMenus(LineaWeb.make(line.getType(), null, dataTest.getPais()), group);
+		new MenuSteps().clickAllMenus(LineaWeb.make(line.getType(), null, dataTest.getPais(), app), group);
 	}
 	
 	private void clickMenusSublinea() {
-		new MenuSteps().clickAllMenus(LineaWeb.make(line.getType(), subline.getTypeSublinea(), dataTest.getPais()), group);
+		new MenuSteps().clickAllMenus(LineaWeb.make(line.getType(), subline.getTypeSublinea(), dataTest.getPais(), app), group);
 	}
 	
 	private boolean isTestMenus(Linea line, GroupType group) {

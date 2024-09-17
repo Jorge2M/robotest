@@ -20,7 +20,7 @@ import static com.mng.robotest.tests.domains.micuenta.pageobjects.LinkMiCuenta.*
 
 public class MiCuentaSteps extends StepBase {
 	
-	private final PageMiCuenta pgMiCuenta = PageMiCuenta.make(dataTest.getPais(), app);
+	private final PageMiCuenta pgMiCuenta = PageMiCuenta.make();
 	private final MenusUserSteps userMenusSteps = new MenusUserSteps();
 	
 	public void goTo() {

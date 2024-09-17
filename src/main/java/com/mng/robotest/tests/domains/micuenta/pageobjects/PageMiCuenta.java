@@ -4,10 +4,8 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.VISIBLE;
 import static com.mng.robotest.tests.domains.micuenta.pageobjects.LinkMiCuenta.*;
 
-import com.mng.robotest.tests.conf.AppEcom;
 import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.utils.UtilsLoyaltyPage;
-import com.mng.robotest.testslegacy.beans.Pais;
 
 public abstract class PageMiCuenta extends PageBase {
 
@@ -15,11 +13,8 @@ public abstract class PageMiCuenta extends PageBase {
 	abstract String getXPathNumberPoints();
 	public abstract boolean isPurchase(String idOrder, int seconds);
 	
-	public static PageMiCuenta make(Pais pais, AppEcom app) {
-		if (pais.isMicuentanew(app)) {
-			return new PageMiCuentaNew();
-		}
-		return new PageMiCuentaOld();
+	public static PageMiCuenta make() {
+		return new PageMiCuentaNew();
 	}
 	
 	public boolean isPage(int seconds) {

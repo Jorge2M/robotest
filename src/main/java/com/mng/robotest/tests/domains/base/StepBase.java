@@ -88,10 +88,10 @@ public abstract class StepBase extends PageBase {
 		new MenuSteps().click(menu);
 	}
 	protected void clickGroup(GroupType groupType) {
-		new MenuSteps().clickGroup(GroupWeb.make(groupType, dataTest.getPais()));
+		new MenuSteps().clickGroup(GroupWeb.make(groupType, dataTest.getPais(), app));
 	}
 	public void clickGroup(LineaType linea, SublineaType sublinea, GroupType groupType) {
-		new MenuSteps().clickGroup(GroupWeb.make(linea, sublinea, groupType, dataTest.getPais()));
+		new MenuSteps().clickGroup(GroupWeb.make(linea, sublinea, groupType, dataTest.getPais(), app));
 	}
 	protected void clickSubMenu(MenuItem menuItem) {
 		clickSubMenu(FactoryMenus.get(menuItem));

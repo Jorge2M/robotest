@@ -11,7 +11,7 @@ public class CommonsGaleria extends StepBase {
 	public boolean isGroupNewNowSelectable() {
 		return 
 			app==shop && !channel.isDevice() &&	
-			GroupWeb.make(NEW_NOW, dataTest.getPais()).isPresent();
+			GroupWeb.make(NEW_NOW, dataTest.getPais(), app).isPresent();
 	}
 
 }
