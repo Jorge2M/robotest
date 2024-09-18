@@ -9,8 +9,6 @@ import org.openqa.selenium.JavascriptExecutor;
 
 import com.github.jorge2m.testmaker.conf.Log4jTM;
 import com.github.jorge2m.testmaker.service.TestMaker;
-import com.mng.robotest.tests.domains.base.Environment;
-import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountry;
 import com.mng.robotest.tests.domains.changecountry.pageobjects.ModalChangeCountryOld;
@@ -29,7 +27,6 @@ import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalActPoliticaPriv
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterAccess;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalLoyaltyAfterLogin;
 import com.mng.robotest.testslegacy.pageobject.shop.modales.ModalNewsLetterAfterAccess;
-import com.mng.robotest.testslegacy.utils.UtilsTest;
 
 import io.netty.handler.timeout.TimeoutException;
 

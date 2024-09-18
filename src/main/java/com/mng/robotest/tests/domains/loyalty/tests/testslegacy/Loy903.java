@@ -4,7 +4,6 @@ import static com.mng.robotest.testslegacy.data.PaisShop.USA;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.loyalty.beans.User;
-import com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.tests.domains.loyalty.steps.PageHistorialLikesSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageHomeConseguirPorLikesSteps;
 import com.mng.robotest.tests.domains.loyalty.tests.LoyTestCommons;
@@ -48,7 +47,7 @@ public class Loy903 extends TestBase {
 	}
 	
 	private void clickConseguirPorLikesButton() {
-		new MangoLikesYouSteps().clickConseguirPorLikesButton();
+		new MangoLikesYouSteps().clickExchangeLikesForExperience();
 	}	
 	
 	private int selectConseguirButton() {
@@ -57,7 +56,7 @@ public class Loy903 extends TestBase {
 	
 	private void checkLikes(int likesUsed) {
 		clickMangoLikesYou();
-		new MangoLikesYouSteps().click(TabLink.HISTORIAL);
+		new MangoLikesYouSteps().clickHistorial();
 		new PageHistorialLikesSteps().isLastMovementOf(likesUsed);
 	}
 

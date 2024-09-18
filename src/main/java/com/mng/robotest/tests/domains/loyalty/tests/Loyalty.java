@@ -129,13 +129,4 @@ public class Loyalty {
 //		new Loy008().execute();
 //	}	
 
-//  Se ha desactivado la operativa de transferencia de Likes
-//	@Test (
-//		testName="LOY005",	
-//		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
-//		description="Transferencia de Likes de un cliente a otro")
-//	public void transferLikesToAnotherClient() throws Exception {
-//		new Loy005().execute();
-//	}
-
 }

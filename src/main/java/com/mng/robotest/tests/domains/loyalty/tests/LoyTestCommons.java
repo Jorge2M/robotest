@@ -11,11 +11,12 @@ import com.mng.robotest.tests.domains.compra.steps.PageResultPagoSteps;
 import com.mng.robotest.tests.domains.galeria.steps.GaleriaSteps;
 import com.mng.robotest.tests.domains.loyalty.beans.User;
 import com.mng.robotest.tests.domains.loyalty.getdata.ClientApiLoyaltyPointsDev;
-import com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.tests.domains.loyalty.steps.PageHistorialLikesSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.MangoLikesYouSteps;
 import com.mng.robotest.tests.domains.menus.pageobjects.GroupWeb;
 import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps;
+import com.mng.robotest.testslegacy.beans.Pais;
+import com.mng.robotest.testslegacy.data.PaisShop;
 
 public class LoyTestCommons extends StepBase {
 	
@@ -66,11 +67,17 @@ public class LoyTestCommons extends StepBase {
 		new PageHistorialLikesSteps().checkPointsForEnvioTiendaPayment(pointsUsed, pointsGenerated, idPedido);    	
     }
     
+    public static boolean isMlyTiers(Pais pais) {
+		return 
+			PaisShop.ESPANA.isEquals(pais) ||
+			PaisShop.FRANCE.isEquals(pais);
+    }
+    
     private int goToLoyaltyPointsHistorial() {
     	var pageResultPagoSteps = new PageResultPagoSteps();
     	int pointsGenerated = pageResultPagoSteps.checkLoyaltyPointsGenerated().getNumberPoints();
 		pageResultPagoSteps.clickLinkDescubrirVentajas();
-		new MangoLikesYouSteps().click(TabLink.HISTORIAL);
+		new MangoLikesYouSteps().clickHistorial();
 		return pointsGenerated;
     }
 

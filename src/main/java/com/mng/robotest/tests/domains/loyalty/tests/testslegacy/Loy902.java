@@ -2,7 +2,6 @@ package com.mng.robotest.tests.domains.loyalty.tests.testslegacy;
 
 import com.mng.robotest.tests.domains.base.TestBase;
 import com.mng.robotest.tests.domains.loyalty.beans.User;
-import com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou.TabLink;
 import com.mng.robotest.tests.domains.loyalty.steps.PageHistorialLikesSteps;
 import com.mng.robotest.tests.domains.loyalty.steps.PageHomeDonateLikesSteps;
 import com.mng.robotest.tests.domains.loyalty.tests.LoyTestCommons;
@@ -60,7 +59,7 @@ public class Loy902 extends TestBase {
 	
 	private void checkLikes(int likesDonated) {
 		clickMangoLikesYou();
-		new MangoLikesYouSteps().click(TabLink.HISTORIAL);
+		new MangoLikesYouSteps().clickHistorial();
 		new PageHistorialLikesSteps().isLastMovementOf(likesDonated);
 	}
 	
