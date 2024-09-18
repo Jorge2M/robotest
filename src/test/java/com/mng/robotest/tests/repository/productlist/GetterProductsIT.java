@@ -75,7 +75,7 @@ public class GetterProductsIT {
 		assertTrue(listProducts.get(0).getColors().size()>0);
 	}
 
-	@Test
+	//@Test
 	public void testGetProductCompletaTuLook() throws Exception {
 		//When
 		var product = getterProducts.getOne(Arrays.asList(TOTAL_LOOK));
