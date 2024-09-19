@@ -297,6 +297,7 @@
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="НАЛОЖЕН ПЛАТЕЖ" testpasarela='s' testpago='s'></pago>-->
 <multidireccion>N</multidireccion>
+<newmenu>outlet</newmenu>
 <newcheckout>outlet</newcheckout>
 </pais>
 
@@ -339,6 +340,7 @@
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newmenu>outlet</newmenu>
 <newcheckout>outlet</newcheckout>
 </pais>
 
@@ -378,7 +380,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
-<newmenu>shop</newmenu>
+<newmenu>shop,outlet</newmenu>
 </pais>
 
 <pais nombre_pais="Czech Republic" codigo="061">
@@ -475,6 +477,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <mobiluser>20123456</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
+<newmenu>outlet</newmenu>
 <newcheckout>outlet</newcheckout>
 </pais>
 
@@ -526,7 +529,7 @@
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
-<newmenu>shop</newmenu>
+<newmenu>shop,outlet</newmenu>
 <newcheckout>outlet</newcheckout>
 </pais>
 
@@ -585,7 +588,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
-<newmenu>shop</newmenu>
+<newmenu>shop,outlet</newmenu>
 <mobiluser>0401234567</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
 </pais>
 
@@ -1100,6 +1103,7 @@
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<newmenu>outlet</newmenu>
 </pais>
 
 <pais nombre_pais="Luxemburg" codigo="018">
@@ -1209,6 +1213,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<newmenu>outlet</newmenu>
 <newcheckout>outlet</newcheckout>
 </pais>
 
@@ -1519,6 +1524,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<newmenu>outlet</newmenu>
 </pais>
 
 <pais nombre_pais="Romania" codigo="066">
@@ -1702,6 +1708,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n" 
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<newmenu>outlet</newmenu>
 <newcheckout>outlet</newcheckout>
 </pais>
 
@@ -1755,7 +1762,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
-<newmenu>shop</newmenu>
+<newmenu>shop,outlet</newmenu>
 <newcheckout>outlet</newcheckout>
 </pais>
 
@@ -2213,6 +2220,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet" empleado="n" 
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<newmenu>outlet</newmenu>
 </pais>
 
 <pais nombre_pais="United Kingdom (Channel Islands)" codigo="019">
@@ -2262,6 +2270,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<newmenu>outlet</newmenu>
 <newcheckout>shop,outlet</newcheckout>
 </pais>
 
@@ -2564,6 +2573,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
+<newmenu>shop</newmenu>
 <newcheckout>shop</newcheckout>
 </pais>
 

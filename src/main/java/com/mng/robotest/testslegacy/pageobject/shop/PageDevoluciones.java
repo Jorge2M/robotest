@@ -7,17 +7,15 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 public class PageDevoluciones extends PageBase {
 	
 	public enum Devolucion {
-		EN_TIENDA("En tienda", "returns.tab.returnInStore", "returns.tab.store"),
-		EN_PUNTO_DE_ENTREGA("En punto de entrega", "returns.tab.dropPoint", "returns.tab.dropPoint"),
-		RECOGIDA_GRATUITA_A_DOMICILIO("Recogida gratuita a domicilio", "returns.tab.homePickUp", "returns.tab.home");
+		EN_TIENDA("Devolución en tienda", "myPurchases.online.details.returns.store.title"),
+		EN_PUNTO_DE_ENTREGA("Devolución en punto de entrega", "myPurchases.online.details.returns.dropPoint.title"),
+		RECOGIDA_GRATUITA_A_DOMICILIO("Recogida gratuita a domicilio", "myPurchases.online.details.returns.homePickup.title");
 
 		private final String literal;
 		private final String testid;
-		private final String testidold;
-		private Devolucion(String literal, String testid, String testidold) {
+		private Devolucion(String literal, String testid) {
 			this.literal = literal;
 			this.testid = testid;
-			this.testidold = testidold;
 		}
 
 		public String getLiteral() {
@@ -25,16 +23,11 @@ public class PageDevoluciones extends PageBase {
 		}		
 		
 		public String getXPath() {
-			return "//*["
-					+ "@data-testid[contains(.,'" + testid + "')] or "
-					+ "@data-testid[contains(.,'" + testidold + "')]"
-					+ "]";
+			return "//*[@data-testid[contains(.,'" + testid + "')]]";
 		}
 	}
 	
-	private static final String XP_BUTTON_SOLICITAR_RECOGIDA = "//*["
-			+ "@data-testid='myPurchases.online.details.returns.requestPickup.button' or "
-			+ "@data-testid='myPurchases.returns.seeInstructions.button']";
+	private static final String XP_BUTTON_SOLICITAR_RECOGIDA = "//*[@data-testid='myPurchases.online.details.returns.requestPickup.button']";
 
 	public boolean isPage(int seconds) {
 		return state(VISIBLE, Devolucion.EN_TIENDA.getXPath()).wait(seconds).check();
