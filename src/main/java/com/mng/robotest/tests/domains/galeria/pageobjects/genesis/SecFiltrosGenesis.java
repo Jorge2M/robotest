@@ -11,6 +11,7 @@ import com.mng.robotest.testslegacy.data.Color;
 import com.mng.robotest.testslegacy.utils.ImporteScreen;
 
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.*;
+import static com.mng.robotest.tests.domains.galeria.pageobjects.genesis.SecFiltrosGenesis.TypeFiltro.*;
 
 public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	
@@ -79,9 +80,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	@Override
 	public void selectOrdenacion(FilterOrdenacion ordenacion) {
 		showFilters();
-		if (isDevice()) {
-			showPanelFiltroMobil(TypeFiltro.ORDENAR);
-		}
+		showPanelFiltroMobil(ORDENAR);
 		String xpathLink = getXPathLinkOrdenacion(ordenacion);
 		click(xpathLink).exec();
 		acceptFilters();
@@ -90,9 +89,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	@Override
 	public void selecFiltroColores(List<Color> colorsToSelect) {
 		showFilters();
-		if (isDevice()) {
-			showPanelFiltroMobil(TypeFiltro.COLORES);
-		}
+		showPanelFiltroMobil(COLORES);
 		for (Color color : colorsToSelect) {
 			String xpathLinkColor = getXPathLinkColor(color);
 			moveToElement(xpathLinkColor);
@@ -111,9 +108,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	@Override
 	public void selectMenu2onLevelDevice(List<String> listMenus) {
 		showFilters();
-		if (isDevice()) {
-			showPanelFiltroMobil(TypeFiltro.FAMILIA);
-		}
+		showPanelFiltroMobil(FAMILIA);
 		for (var menu : listMenus) {
 			click(getXPathLinkFamily(menu)).exec();
 		}
@@ -239,9 +234,7 @@ public class SecFiltrosGenesis extends PageBase implements SecFiltros {
 	
 	private void openSubfamilyFilter() {
 		showFilters();
-		if (isDevice()) {
-			showPanelFiltroMobil(TypeFiltro.FAMILIA);
-		}
+		showPanelFiltroMobil(FAMILIA);
 	}
 	
 	private boolean isVisibleLabelFiltroApplied(String labelExpected) {
