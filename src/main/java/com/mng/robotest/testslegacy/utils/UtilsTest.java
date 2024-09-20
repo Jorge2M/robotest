@@ -157,6 +157,17 @@ public class UtilsTest {
 		return listArticles;
 	}
 	
+	public static Optional<Article> getArticleFromWarehouse(Pais pais, AppEcom app, String warehouse) throws Exception {
+		var listGarments = getProductFromApi(pais, app);
+		for (var garment : listGarments) {
+			var almacen = garment.getAlmacenFirstArticle();
+			if (almacen.compareTo(warehouse)==0) {
+				return Optional.of(Article.getArticleForTest(garment));
+			}
+		}
+		return Optional.empty();
+	}
+	
 	public static Pair<Article, Article> getTwoArticlesFromDistinctWarehouses(Pais pais, AppEcom app) throws Exception {
 		var listGarments = getProductFromApi(pais, app);
 		var garment1Opt = getGarmentAlmacenFirstArticleNotNull(listGarments);

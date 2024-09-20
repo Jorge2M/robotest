@@ -31,7 +31,7 @@ public class MangoLikesYouSteps extends StepBase {
 		int secondsButton = 10;
 		checks.add(
 			"Es visible el botón \"Compra con descuento\" (esperamos hasta " + secondsButton + " segundos)",
-			pgMangoLikesYou.isVisibleCompraConDescuento(secondsButton));
+			pgMangoLikesYou.isVisibleCompraConDescuentoExperience(secondsButton));
 		
 		checks.setNumberPoints(pgMangoLikesYou.getPoints());
 		checks.add(
@@ -87,7 +87,7 @@ public class MangoLikesYouSteps extends StepBase {
 		description="Seleccionar el link \"Compra un descuento\"",
 		expected="Aparece la página de \"Compra con descuento\"")
 	public void clickOpcionCompraUnDescuento() {
-		pgMangoLikesYou.clickCompraConDescuento();
+		pgMangoLikesYou.clickCompraConDescuentoExperience();
 		new PageHomePurchaseWithDiscountSteps()
 			.checkHomePurchaseWithDiscountPageOk();
 	}
@@ -96,7 +96,7 @@ public class MangoLikesYouSteps extends StepBase {
 		description="Seleccionar el 1er botón \"Donar Likes\"",
 		expected="Aparece una página para donar mis Likes")
 	public void clickButtonDonarLikes() {
-		pgMangoLikesYou.clickDonarMisLikes();
+		pgMangoLikesYou.clickDonation();
 		new PageHomeDonateLikesSteps().checkIsPage(5, BUTTON_50_LIKES, BUTTON_100_LIKES);
 		checksDefault();
 	}

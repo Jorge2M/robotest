@@ -9,9 +9,9 @@ public abstract class PageMangoLikesYou extends PageBase {
 	public abstract boolean isPage(int seconds);
 	public abstract int getPoints();
 	public abstract void clickHistorial();
-	public abstract boolean isVisibleCompraConDescuento(int seconds);
-	public abstract void clickCompraConDescuento();
-	public abstract void clickDonarMisLikes();
+	public abstract boolean isVisibleCompraConDescuentoExperience(int seconds);
+	public abstract void clickCompraConDescuentoExperience();
+	public abstract void clickDonation();
 	public abstract void clickExchangeLikesForExperience();
 	public abstract void clickAyuda();
 	public abstract boolean isPageAyudaMangoLikesYouVisible(int seconds);	

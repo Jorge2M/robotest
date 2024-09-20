@@ -63,17 +63,17 @@ public class PageMangoLikesYouOld extends PageMangoLikesYou {
 	}
 
 	@Override
-	public boolean isVisibleCompraConDescuento(int seconds) {
+	public boolean isVisibleCompraConDescuentoExperience(int seconds) {
 		return isVisibleButton(ButtonUseLikes.COMPRA_CON_DESCUENTO, seconds);
 	}
 	
 	@Override
-	public void clickCompraConDescuento() {
+	public void clickCompraConDescuentoExperience() {
 		
 	}
 	
 	@Override
-	public void clickDonarMisLikes() {
+	public void clickDonation() {
 		clickButton(ButtonUseLikes.DONAR_MIS_LIKES);
 	}
 	

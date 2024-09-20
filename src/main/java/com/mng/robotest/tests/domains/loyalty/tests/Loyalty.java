@@ -37,7 +37,7 @@ public class Loyalty {
 	
 	@Test (
 		testName="LOY002",
-		enabled=false,		
+		enabled=false,	
 		groups={"Loyalty", "Canal:desktop,mobile_App:shop"},
 		description="Exchange mediante donación de Likes")
 	public void exhangeDonacionLikes() throws Exception {

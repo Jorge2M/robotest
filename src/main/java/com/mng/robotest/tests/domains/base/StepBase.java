@@ -2,6 +2,7 @@ package com.mng.robotest.tests.domains.base;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -109,6 +110,10 @@ public abstract class StepBase extends PageBase {
 	
 	protected List<Article> getArticles(int numArticles) throws Exception {
 		return UtilsTest.getArticlesForTest(dataTest.getPais(), app, numArticles, driver);
+	}
+	
+	protected Optional<Article> getArticleFromWarehouse(String warehouse) throws Exception {
+		return UtilsTest.getArticleFromWarehouse(dataTest.getPais(), app, warehouse);
 	}
 	
 	protected Pair<Article, Article> getTwoArticlesFromDistinctWarehouses() throws Exception {
