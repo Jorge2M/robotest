@@ -64,8 +64,7 @@ public class GetterProductsIT {
 		return listProducts.equals(listProductsSorted);
 	}
 
-	//TODO revisar
-	//@Test
+	@Test
 	public void testGetProductsManyColors() throws Exception {
 		//When
 		var listProducts = getterProducts.getAll(Arrays.asList(MANY_COLORS));
@@ -75,7 +74,7 @@ public class GetterProductsIT {
 		assertTrue(listProducts.get(0).getColors().size()>0);
 	}
 
-	//@Test
+	@Test
 	public void testGetProductCompletaTuLook() throws Exception {
 		//When
 		var product = getterProducts.getOne(Arrays.asList(TOTAL_LOOK));
