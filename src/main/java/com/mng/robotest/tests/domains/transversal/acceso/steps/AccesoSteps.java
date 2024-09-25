@@ -70,6 +70,10 @@ public class AccesoSteps extends StepBase {
 		accesoFlows.closeModalsPostAccessAndManageCookies(acceptCookies);
 	}
 	
+	public void identification() {
+		identification(dataTest, false);
+	}
+	
 	@Step (
 		description= 
 			"Seleccionar \"Iniciar sesión\" e identificarse con el usuario <b style=\"color:blue;\">#{dataTest.getUserConnected()}</b> " + 

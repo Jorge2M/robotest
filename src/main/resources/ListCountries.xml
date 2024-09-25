@@ -143,6 +143,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<newmenu>outlet</newmenu>
 <newcheckout>outlet</newcheckout>
 </pais>
 
@@ -637,6 +638,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<newmenu>outlet</newmenu>
 </pais>
 
 <pais nombre_pais="Deutschland" codigo="004">
@@ -691,6 +693,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<newmenu>outlet</newmenu>
 </pais>
 
 <pais nombre_pais="Gibraltar" codigo="044">
@@ -946,6 +949,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<newmenu>outlet</newmenu>
 </pais>
 
 <pais nombre_pais="Kosovo" codigo="095">
@@ -2117,6 +2121,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
 <emailuser>jorge.munoz@mango.com</emailuser> <!-- Utilizaremos un email con timestamp para superar el control de fraude de "Rechnung" -->
+<newmenu>outlet</newmenu>
 <newcheckout>outlet</newcheckout>
 </pais>
 

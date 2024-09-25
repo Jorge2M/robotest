@@ -73,6 +73,17 @@ public class LoyTestCommons extends StepBase {
 			PaisShop.FRANCE.isEquals(pais);
     }
     
+	public void accessFlowUSA() throws Exception {
+		accessAndLogin();
+		
+		//Workaround for solve the problem in MLY Page (in webmobil displais desktop version)
+		//is related with the Robotest user-agent (with "MangoRobotest")
+		if (!isPRO() && isDevice()) {
+			String urlToLoad = inputParamsSuite.getDnsUrlAcceso() + "/mobil";
+			driver.get(urlToLoad);
+		}
+	}
+    
     private int goToLoyaltyPointsHistorial() {
     	var pageResultPagoSteps = new PageResultPagoSteps();
     	int pointsGenerated = pageResultPagoSteps.checkLoyaltyPointsGenerated().getNumberPoints();

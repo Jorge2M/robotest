@@ -25,7 +25,7 @@ public class Loy903 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		accessAndLogin();
+		new LoyTestCommons().accessFlowUSA();
 		int loyaltyPointsIni = clickMangoLikesYou();
 		if (loyaltyPointsIni < 3000 && !isPRO()) {
 			chargePoints();

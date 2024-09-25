@@ -25,7 +25,7 @@ public class Loy904 extends TestBase {
 	
 	@Override
 	public void execute() throws Exception {
-		accessAndLogin();
+		new LoyTestCommons().accessFlowUSA();
 		LoyTestCommons.clickMangoLikesYou();
 		pageMangoLikesYouSteps.clickHistorial();
 		pageMangoLikesYouSteps.clickAyuda();
