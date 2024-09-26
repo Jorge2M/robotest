@@ -214,6 +214,7 @@
 <pago 
 	type="Ideal" tiendas="shop,outlet" empleado="s"
 	nombre="IDEAL" testpasarela='s' testpago='s'></pago>
+<newmenu>outlet</newmenu>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -429,7 +430,8 @@
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
 	nombre="PLATBA NA DOBÍRKU" nombremovil="Platba Na Dobírku" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>S</multidireccion>
-<newcheckout>outlet</newcheckout>
+<newmenu>shop</newmenu>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Denmark" codigo="008">
@@ -478,7 +480,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <mobiluser>20123456</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
-<newmenu>outlet</newmenu>
+<newmenu>shop,outlet</newmenu>
 <newcheckout>outlet</newcheckout>
 </pais>
 
@@ -760,6 +762,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
+<newmenu>outlet</newmenu>
 </pais>
 
 <pais nombre_pais="Hungary" codigo="064">
@@ -1347,6 +1350,7 @@
 <pago 
 	type="Ideal" tiendas="shop,outlet" empleado="s"
 	nombre="IDEAL" testpasarela='s' testpago='s'></pago>
+<newmenu>outlet</newmenu>	
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -1477,6 +1481,7 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
 	nombre="Płatność przy odbiorze" namefilter="Platnosc przy odbiorze" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
+<newmenu>outlet</newmenu>	
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -2664,6 +2669,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
+<newmenu>shop</newmenu>	
 <newcheckout>shop</newcheckout>
 </pais>
 
@@ -4460,6 +4466,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="TRJintegrada" tiendas="shop,outlet"
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
+<newmenu>shop</newmenu>
 <newcheckout>shop</newcheckout>
 </pais>
 

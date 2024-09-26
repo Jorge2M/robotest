@@ -60,7 +60,7 @@ public class Loy902 extends TestBase {
 	private void checkLikes(int likesDonated) {
 		clickMangoLikesYou();
 		new MangoLikesYouSteps().clickHistorial();
-		new PageHistorialLikesSteps().isLastMovementOf(likesDonated);
+		new PageHistorialLikesSteps().isMovementOf(likesDonated, 3);
 	}
 	
 }

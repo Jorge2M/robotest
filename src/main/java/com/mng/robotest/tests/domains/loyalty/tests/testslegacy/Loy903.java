@@ -57,7 +57,7 @@ public class Loy903 extends TestBase {
 	private void checkLikes(int likesUsed) {
 		clickMangoLikesYou();
 		new MangoLikesYouSteps().clickHistorial();
-		new PageHistorialLikesSteps().isLastMovementOf(likesUsed);
+		new PageHistorialLikesSteps().isMovementOf(likesUsed, 3);
 	}
 
 }

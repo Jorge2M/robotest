@@ -26,6 +26,20 @@ public class PageHistorialLikesSteps extends StepBase {
 		return (!mov1Opt.isEmpty() && mov1Opt.get().getPointsReceived()==likes);		
 	}
 	
+	@Validation(description = "Entre los primeros #{movements} hay uno de <b>#{likes}</b> puntos")
+	public boolean isMovementOf(int likes, int movements) {
+		for (int i=1; i<=movements; i++) {
+			var movOpt = pgHistorialLikes.getLoyaltyMovement(i);
+			if (movOpt.isEmpty()) {
+				return false;
+			}
+			if (movOpt.get().getPointsReceived()==likes) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void checkPointsForEnvioTiendaPayment(int pointsUsed, int pointsReceived, String idPedido) {
 		checkPointsPayment(pointsUsed, pointsReceived, idPedido);
 		checkSpecificPointsEnvioTienda(10);
@@ -45,7 +59,7 @@ public class PageHistorialLikesSteps extends StepBase {
 		
 		checks.add(
 			"En los primeros 4 movimientos existe uno de <b>" + pointsUsed + "</b> (±" + marginPoints + ") puntos usados asociado al código de pedido <b>" + idPedido + "</b>",
-			isInFirst4Movements(USED, pointsUsed, marginPoints, idPedido), levelError);
+			isInFirstXMovements(USED, pointsUsed, marginPoints, 4, idPedido), levelError);
 			
 		return checks;
 	}
@@ -60,11 +74,11 @@ public class PageHistorialLikesSteps extends StepBase {
 	}
 	
 	private boolean isInFirst4Movements(TypePoints type, int points, String idPedido) {
-		return isInFirst4Movements(type, points, 0, idPedido);
+		return isInFirstXMovements(type, points, 0, 4, idPedido);
 	}
 	
-	private boolean isInFirst4Movements(TypePoints typePoints, int pointsExpected, int margin, String idPedido) {
-		for (int i=1; i<=4; i++) {
+	private boolean isInFirstXMovements(TypePoints typePoints, int pointsExpected, int margin, int movements, String idPedido) {
+		for (int i=1; i<=movements; i++) {
 			var movementOpt = pgHistorialLikes.getLoyaltyMovement(i);
 			if (movementOpt.isEmpty()) {
 				return false;
