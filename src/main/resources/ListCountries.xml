@@ -343,7 +343,7 @@
 	nombre="VISA ELECTRON" testpasarela='s'></pago>
 <multidireccion>N</multidireccion>
 <newmenu>outlet</newmenu>
-<newcheckout>outlet</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Cyprus (Euros)" codigo="600">
@@ -533,7 +533,7 @@
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
 <newmenu>shop,outlet</newmenu>
-<newcheckout>outlet</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Finland" codigo="032">
@@ -856,6 +856,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago> 
 <multidireccion>N</multidireccion>
 <newmenu>shop</newmenu>
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Ireland" codigo="007">
@@ -1019,7 +1020,7 @@
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
 <newmenu>shop</newmenu>
-<newcheckout>outlet</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Liechtenstein" codigo="037">
@@ -1221,7 +1222,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <newmenu>outlet</newmenu>
-<newcheckout>outlet</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Moldova" codigo="074">
@@ -1430,7 +1431,7 @@
 	type="Paypal" tiendas="shop,outlet"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
-<newcheckout>outlet</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Poland" codigo="060">
@@ -1718,7 +1719,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
 <newmenu>outlet</newmenu>
-<newcheckout>outlet</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Slovenia" codigo="091">
@@ -1772,7 +1773,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
 <newmenu>shop,outlet</newmenu>
-<newcheckout>outlet</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="España (Península y Baleares)" codigo="001">
@@ -3996,6 +3997,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
+<newcheckout>shop</newcheckout>
 <newmenu>shop</newmenu>
 </pais>
 
@@ -4240,6 +4242,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
 <newmenu>shop</newmenu>
+<newcheckout>shop</newcheckout>
 <!--<emailuser>oman.test.saldo@mango.com</emailuser>--> <!-- Es preciso probar con este email si queremos certificar el tema de storec -->
 </pais>
 
@@ -4350,6 +4353,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <newmenu>shop</newmenu>	
+<newcheckout>shop</newcheckout>
 <multidireccion>N</multidireccion>
 </pais>
 
