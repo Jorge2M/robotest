@@ -36,9 +36,12 @@ public class ProductList {
 	}
 	public void addGroups(List<Group> groups) {
 		if (groups!=null) {
-			this.groups = groups;
+			if (this.groups==null) {
+				this.groups = groups;
+			} else {
+				this.groups.addAll(groups);
+			}
 		}
-		this.groups.addAll(groups);
 	}
 
 	public String getStockId() {
