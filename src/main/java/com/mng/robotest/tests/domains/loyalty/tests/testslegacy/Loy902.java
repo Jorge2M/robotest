@@ -9,7 +9,6 @@ import com.mng.robotest.tests.domains.loyalty.steps.MangoLikesYouSteps;
 import com.mng.robotest.tests.repository.usuarios.GestorUsersShop;
 import com.mng.robotest.testslegacy.utils.PaisGetter;
 
-import static com.mng.robotest.tests.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes.*;
 import static com.mng.robotest.testslegacy.data.PaisShop.USA;
 
 public class Loy902 extends TestBase {
@@ -52,9 +51,7 @@ public class Loy902 extends TestBase {
 	}
 	
 	private int clickDonateLikesButton() {
-		return new PageHomeDonateLikesSteps().selectDonateButton(
-				BUTTON_50_LIKES, 
-				BUTTON_100_LIKES);
+		return new PageHomeDonateLikesSteps().selectDonateButton(50, 100);
 	}
 	
 	private void checkLikes(int likesDonated) {

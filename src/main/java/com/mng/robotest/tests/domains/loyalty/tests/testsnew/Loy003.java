@@ -53,7 +53,7 @@ public class Loy003 extends TestBase {
 	}
 	
 	private void clickConseguirPorLikesButton() {
-		new MangoLikesYouSteps().clickExchangeLikesForExperience();
+		new MangoLikesYouSteps().clickExchangeLikesForExperience(2);
 	}	
 	
 	private int selectConseguirButton() {
@@ -62,8 +62,10 @@ public class Loy003 extends TestBase {
 	
 	private void checkLikes(int likesUsed) {
 		clickMangoLikesYou();
-		new MangoLikesYouSteps().clickHistorial();
+		var mangoLikesYouSteps = new MangoLikesYouSteps();
+		mangoLikesYouSteps.clickHistorial();
 		new PageHistorialLikesSteps().isLastMovementOf(likesUsed);
+		mangoLikesYouSteps.closeHistorial();
 	}
 
 }

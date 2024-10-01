@@ -8,7 +8,6 @@ import com.mng.robotest.tests.domains.loyalty.tests.LoyTestCommons;
 import com.mng.robotest.tests.domains.loyalty.steps.MangoLikesYouSteps;
 import com.mng.robotest.tests.repository.secrets.GetterSecrets;
 
-import static com.mng.robotest.tests.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes.*;
 import static com.mng.robotest.tests.repository.secrets.GetterSecrets.SecretType.*;
 
 public class Loy002 extends TestBase {
@@ -59,15 +58,15 @@ public class Loy002 extends TestBase {
 	}
 	
 	private int clickDonateLikesButton() {
-		return new PageHomeDonateLikesSteps().selectDonateButton(
-				BUTTON_50_LIKES, 
-				BUTTON_100_LIKES);
+		return new PageHomeDonateLikesSteps().selectDonateButton(50, 100);
 	}
 	
 	private void checkLikes(int likesDonated) {
 		clickMangoLikesYou();
-		new MangoLikesYouSteps().clickHistorial();
+		var mangoLikesYouSteps = new MangoLikesYouSteps();
+		mangoLikesYouSteps.clickHistorial();
 		new PageHistorialLikesSteps().isLastMovementOf(likesDonated);
+		mangoLikesYouSteps.closeHistorial();
 	}
 	
 }

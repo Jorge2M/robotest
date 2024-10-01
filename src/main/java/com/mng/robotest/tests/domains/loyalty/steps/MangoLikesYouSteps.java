@@ -7,10 +7,10 @@ import com.github.jorge2m.testmaker.boundary.aspects.validation.Validation;
 import com.github.jorge2m.testmaker.domain.suitetree.ChecksTM;
 import com.mng.robotest.tests.domains.base.StepBase;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.PageMangoLikesYou;
+import com.mng.robotest.tests.domains.loyalty.tests.LoyTestCommons;
 import com.mng.robotest.tests.domains.menus.steps.MenusUserSteps.ChecksResultWithNumberPoints;
 
 import static com.github.jorge2m.testmaker.conf.State.*;
-import static com.mng.robotest.tests.domains.loyalty.pageobjects.PageHomeDonateLikes.ButtonLikes.*;
 
 public class MangoLikesYouSteps extends StepBase {
 
@@ -41,20 +41,32 @@ public class MangoLikesYouSteps extends StepBase {
 	}
 
 	public void clickAyuda() {
-		Pair<String, String> pair = clickAyudaStep();
-		switchToParent(pair.getLeft(), pair.getRight());
+		if (LoyTestCommons.isMlyTiers(dataTest.getPais())) {
+			clickAyudaNewStep();
+		} else {
+			Pair<String, String> pair = clickAyudaOldStep();
+			switchToParent(pair.getLeft(), pair.getRight());
+		}
 	}	
 	
 	@Step(
 		description="Seleccionar el link de <b>Ayuda</b>",
 		expected="Aparece la página de ayuda específica de Mango Likes You")
-	private Pair<String, String> clickAyudaStep() {
+	private Pair<String, String> clickAyudaOldStep() {
 		String parentWindow = driver.getWindowHandle();
 		pgMangoLikesYou.clickAyuda();
 		String childWindow = switchToAnotherWindow(driver, parentWindow);
 		checkPageAyudaMangoLikesYouVisible(2);
 		return Pair.of(parentWindow, childWindow);
 	}
+	
+	@Step(
+		description="Seleccionar el primer link de ayuda <b>¿Qué es el Club Mango likes you y cómo funciona</b>",
+		expected="Aparece el modal de ayuda del Club Mango likes you")
+	private void clickAyudaNewStep() {
+		pgMangoLikesYou.clickAyuda();
+		checkPageAyudaMangoLikesYouVisible(2);
+	}	
 	
 	private void switchToParent(String parentWindow, String childWindow) {
 		if (childWindow.compareTo(parentWindow)!=0) {
@@ -81,8 +93,15 @@ public class MangoLikesYouSteps extends StepBase {
 	public void clickHistorial() {
 		pgMangoLikesYou.clickHistorial();
 		new PageHistorialLikesSteps().checkHistorialVisible(5);
-	}	
+	}
 	
+	@Step(
+		description="Cerrar el historial de likes",
+		expected="Desaparece el historial de likes")
+	public void closeHistorial() {
+		pgMangoLikesYou.closeHistorial();
+	}
+
 	@Step(
 		description="Seleccionar el link \"Compra un descuento\"",
 		expected="Aparece la página de \"Compra con descuento\"")
@@ -97,15 +116,15 @@ public class MangoLikesYouSteps extends StepBase {
 		expected="Aparece una página para donar mis Likes")
 	public void clickButtonDonarLikes() {
 		pgMangoLikesYou.clickDonation();
-		new PageHomeDonateLikesSteps().checkIsPage(5, BUTTON_50_LIKES, BUTTON_100_LIKES);
+		new PageHomeDonateLikesSteps().checkIsPage(5, 50, 100);
 		checksDefault();
 	}
 	
 	@Step(
-		description="Seleccionar la primera experiencia",
+		description="Seleccionar la experiencia número <b>#{numExperience}</b>",
 		expected="Aparece una página para conseguir la experiencia")
-	public void clickExchangeLikesForExperience() {
-		pgMangoLikesYou.clickExchangeLikesForExperience();
+	public void clickExchangeLikesForExperience(int numExperience) {
+		pgMangoLikesYou.clickExchangeLikesForExperience(numExperience);
 		new PageHomeConseguirPorLikesSteps().checkIsPage(3);
 		checksDefault();
 	}

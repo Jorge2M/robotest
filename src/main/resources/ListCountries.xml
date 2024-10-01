@@ -383,6 +383,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>	
 <multidireccion>N</multidireccion>
 <newmenu>shop,outlet</newmenu>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Czech Republic" codigo="061">
@@ -592,6 +593,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <newmenu>shop,outlet</newmenu>
+<newcheckout>outlet</newcheckout>
 <mobiluser>0401234567</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
 </pais>
 
@@ -763,6 +765,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
 <newmenu>outlet</newmenu>
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Hungary" codigo="064">
@@ -1112,6 +1115,7 @@
 	nombre="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
 <multidireccion>N</multidireccion>
 <newmenu>outlet</newmenu>
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Luxemburg" codigo="018">
@@ -1284,6 +1288,7 @@
 	nombre="PAYPAL" testpasarela='n' testpago='n' useremail='Test.mango@mango.com' passwordemail='mango123'></pago> <!-- Desactivada la validación de la pasarela porque no acepta mail asociado a otro país -->
 <multidireccion>N</multidireccion>
 <newmenu>shop</newmenu>
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Montenegro" codigo="090">
@@ -1891,6 +1896,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <transporte nombre="Estándar"           importe="2,95"     gratuito="30"/>
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
 <transporte nombre="Urgente 24 h"       importe="7,95"     gratuito="99999"/>
+<newcheckout>outlet</newcheckout>
 <multidireccion>N</multidireccion>
 </pais>
 
@@ -2000,6 +2006,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <transporte nombre="Express 48 h"       importe="5,95"     gratuito="99999"/>
 <transporte nombre="Urgente 24 h"       importe="7,95"     gratuito="99999"/>
 <multidireccion>N</multidireccion>
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Sweden" codigo="030">
@@ -2057,6 +2064,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <mobiluser>0765-260000</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Schweiz" codigo="036">
@@ -2232,6 +2240,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
 <newmenu>outlet</newmenu>
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="United Kingdom (Channel Islands)" codigo="019">
@@ -4653,6 +4662,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <pago 
 	type="KrediKarti" tiendas="outlet"
 	nombre="KREDI KARTI" testpasarela='s' testpago='s' tipotarj="VISAESTANDAR" numtarj="5311570000000005" mescad="12" anycad="2020" cvc="000"></pago>
+<newcheckout>outlet</newcheckout>	
 <multidireccion>N</multidireccion>
 </pais>
 

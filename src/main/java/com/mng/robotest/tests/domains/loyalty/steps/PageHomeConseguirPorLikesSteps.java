@@ -8,7 +8,7 @@ import com.mng.robotest.tests.domains.loyalty.pageobjects.PageHomeConseguirPorLi
 
 public class PageHomeConseguirPorLikesSteps extends StepBase {
 
-	private final PageHomeConseguirPorLikes pgHomeConseguirPorLikes = new PageHomeConseguirPorLikes();
+	private final PageHomeConseguirPorLikes pgHomeConseguirPorLikes = PageHomeConseguirPorLikes.make(dataTest.getPais());
 	
 	@Validation (
 		description="Aparece el botón de \"Conseguir por Likes\" " + SECONDS_WAIT)

@@ -11,7 +11,7 @@ import static com.github.jorge2m.testmaker.conf.State.*;
 
 public class PageHistorialLikesSteps extends StepBase {
 
-	private final PageHistorialLikes pgHistorialLikes = new PageHistorialLikes();
+	private final PageHistorialLikes pgHistorialLikes = PageHistorialLikes.make(dataTest.getPais());
 	
 	public enum TypePoints { RECEIVED, USED }
 	

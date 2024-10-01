@@ -29,6 +29,7 @@ public class Loy004 extends TestBase {
 		accessAndLogin();
 		LoyTestCommons.clickMangoLikesYou();
 		pageMangoLikesYouSteps.clickHistorial();
+		pageMangoLikesYouSteps.closeHistorial();
 		pageMangoLikesYouSteps.clickAyuda();
 	}
 

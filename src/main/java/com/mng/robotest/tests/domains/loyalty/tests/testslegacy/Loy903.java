@@ -47,7 +47,7 @@ public class Loy903 extends TestBase {
 	}
 	
 	private void clickConseguirPorLikesButton() {
-		new MangoLikesYouSteps().clickExchangeLikesForExperience();
+		new MangoLikesYouSteps().clickExchangeLikesForExperience(1);
 	}	
 	
 	private int selectConseguirButton() {

@@ -49,11 +49,11 @@ public class CookiesChecker extends PageBase {
 		replaceAllowedCookies("_hjSessionUser", "_hjSessionUser*");
 		replaceAllowedCookies("_hjSession", "_hjSession*");
 		
-		if (UtilsTest.todayBeforeDate("2024-10-01")) {
+		if (UtilsTest.todayBeforeDate("2025-03-01")) {
 			whiteList.get().add(Pattern.compile("AWSALBTGCORS"));
 			whiteList.get().add(Pattern.compile("AWSALBTG"));
 		}
-		if (UtilsTest.todayBeforeDate("2024-10-15")) {
+		if (UtilsTest.todayBeforeDate("2025-03-01")) {
 			whiteList.get().add(Pattern.compile("FPGSID"));
 		}
 	}

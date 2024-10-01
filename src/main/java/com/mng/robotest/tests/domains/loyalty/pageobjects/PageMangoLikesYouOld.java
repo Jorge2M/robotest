@@ -3,9 +3,10 @@ package com.mng.robotest.tests.domains.loyalty.pageobjects;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.PRESENT;
 import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateElement.State.VISIBLE;
 
+import com.mng.robotest.tests.domains.base.PageBase;
 import com.mng.robotest.tests.domains.loyalty.pageobjects.utils.UtilsLoyaltyPage;
 
-public class PageMangoLikesYouOld extends PageMangoLikesYou {
+public class PageMangoLikesYouOld extends PageBase implements PageMangoLikesYou {
 
 	private static final String XP_WRAPP_PAGE = "//micro-frontend[@id='loyaltySpace']";
 	private static final String XP_POINTS = XP_WRAPP_PAGE + "//div[@id='space-header']/div[3]";
@@ -61,6 +62,10 @@ public class PageMangoLikesYouOld extends PageMangoLikesYou {
 	public void clickHistorial() {
 		click(TabLink.HISTORIAL);
 	}
+	
+	@Override
+	public void closeHistorial() {
+	}
 
 	@Override
 	public boolean isVisibleCompraConDescuentoExperience(int seconds) {
@@ -84,6 +89,11 @@ public class PageMangoLikesYouOld extends PageMangoLikesYou {
 		} else {
 			clickButton(ButtonUseLikes.ENTRADA_CINE);
 		}
+	}
+	
+	@Override
+	public void clickExchangeLikesForExperience(int posExperience) {
+		clickExchangeLikesForExperience();
 	}
 	
 	@Override
