@@ -45,7 +45,7 @@ public class Mic003 extends TestBase {
 		pageRegistroInitialSteps.clickCreateAccountButton();
 	}
 	
-	private void cancelarCuentaAndCheckLoginKO() {
+	private void cancelarCuentaAndCheckLoginKO() throws Exception {
 		new MiCuentaSteps().goToMisDatosAndCheckData(dataNewRegister);
 		new MisDatosSteps().cancelarCuenta();
 		new MenusUserSteps().logoff();

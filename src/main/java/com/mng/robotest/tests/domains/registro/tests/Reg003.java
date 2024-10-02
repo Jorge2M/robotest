@@ -79,7 +79,7 @@ public class Reg003 extends TestBase {
 			UtilsTest.todayBeforeDate("2024-11-01"));
 	}
 
-	private void registerAndGoShoppingSiPubli() {
+	private void registerAndGoShoppingSiPubli() throws Exception {
 		firstPageRegister();
 		secondPageRegister();
 		thirdPageRegister();
@@ -119,7 +119,7 @@ public class Reg003 extends TestBase {
 		}
 	}
 	
-	private void loginAfterRegister() {
+	private void loginAfterRegister() throws Exception {
 		String emailUsr = dataRegister.get("cfEmail");
 		String password = dataRegister.get("cfPass");
 		userMenusSteps.logoffLogin(emailUsr, password);

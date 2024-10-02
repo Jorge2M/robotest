@@ -67,11 +67,16 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 		hoverLinea();
 		click(getXPathLinkLinea()).exec();
 	}	
+	
 	@Override 
 	public void clickSublinea() {
-		state(PRESENT, getXPathLinea()).wait(1).check();
-		click(getXPathLinkLinea()).exec();
+		try {
+			clickSublineaInternal();
+		} catch (StaleElementReferenceException | NoSuchElementException e) {
+			manageExceptionClickLinea();
+		}
 	}
+	
 	@Override
 	public void hoverLinea() {
 		try {
@@ -81,9 +86,20 @@ public class LineaActionsDesktop extends PageBase implements LineaActions {
 		}
 	}
 	
+	private void clickSublineaInternal() {
+		state(PRESENT, getXPathLinea()).wait(1).check();
+		click(getXPathLinkLinea()).exec();
+	}
+	
 	private void hoverLineaInternal() {
 		state(VISIBLE, getXPathLinea()).wait(3).check();
 		moveToElement(getXPathLinea());
+	}
+	
+	private void manageExceptionClickLinea() {
+		waitMillis(1000);
+		clickLinea();
+		clickSublineaInternal();
 	}
 	
 	private void manageExceptionHoverLinea() {

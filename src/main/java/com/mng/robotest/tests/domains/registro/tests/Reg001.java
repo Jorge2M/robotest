@@ -78,7 +78,7 @@ public class Reg001 extends TestBase {
 		new FooterSteps().clickFooterSubscriptionInput(false);
 	}
 	
-	private void checkLoginAndUserData() {
+	private void checkLoginAndUserData() throws Exception {
 		var menuUserSteps = new MenusUserSteps();
 		menuUserSteps.logoffLogin(dataNewRegister.getEmail(), dataNewRegister.getPassword());
 		menuUserSteps.isVisibleNameUser(dataNewRegister.getName(), 2);

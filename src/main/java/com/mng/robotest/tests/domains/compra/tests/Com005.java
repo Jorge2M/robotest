@@ -33,7 +33,7 @@ public class Com005 extends TestBase {
 		new MenusUserSteps().logoffLogin(usrEmail, password);
 	}	
 	
-	private void checkMisDatos(String usrEmail, String password) {
+	private void checkMisDatos(String usrEmail, String password) throws Exception {
 		var dataPago = dataTest.getDataPago();
 		Map<String,String> datosRegistro = dataPago.getDatosRegistro();
 		datosRegistro.put("cfEmail", usrEmail);

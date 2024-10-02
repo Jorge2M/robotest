@@ -51,7 +51,7 @@ public class MiCuentaSteps extends StepBase {
 		clickLinkMisDatos(usuarioReg);
 	}
 	
-	private void goToMisDirecciones() {
+	private void goToMisDirecciones() throws Exception {
 		userMenusSteps.clickMenuMiCuenta();
 	    clickLinkMisDirecciones();
 	}
@@ -108,7 +108,7 @@ public class MiCuentaSteps extends StepBase {
 		checksDefault();
 	}
  
-	public void goToMisDatosAndValidateData(Map<String,String> dataRegistro, String codPais) {
+	public void goToMisDatosAndValidateData(Map<String,String> dataRegistro, String codPais) throws Exception {
 		if (dataTest.getPais().isMisdirecciones(app)) {
 			goToMisDirecciones();
 			new PageMisDireccionesSteps().checkData(dataRegistro);
@@ -117,10 +117,15 @@ public class MiCuentaSteps extends StepBase {
 		new MisDatosSteps().validaIsDataAssociatedToRegister(dataRegistro, codPais);
 		checksDefault();
 	}
-	public void goToMisDatosAndCheckData(DataNewRegister dataNewRegister) {
+	public void goToMisDatosAndCheckData(DataNewRegister dataNewRegister) throws Exception {
 		if (dataTest.getPais().isMisdirecciones(app)) {
 			goToMisDirecciones();
 			new PageMisDireccionesSteps().checkData();
+			
+		    //Problema página mis direcciones que aparece en formato desktop
+		    if (isDevice()) {
+		    	driver.get(inputParamsSuite.getDnsUrlAcceso() + "/mobil");
+		    }
 		}
 		goToMisDatos(dataNewRegister.getEmail());
 		new MisDatosSteps().checkIsDataAssociatedToRegister(dataNewRegister);
