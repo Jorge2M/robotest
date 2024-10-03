@@ -215,6 +215,7 @@
 	type="Ideal" tiendas="shop,outlet" empleado="s"
 	nombre="IDEAL" testpasarela='s' testpago='s'></pago>
 <newmenu>outlet</newmenu>
+<newcheckout>outlet</newcheckout>
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -482,7 +483,7 @@
 <multidireccion>N</multidireccion>
 <mobiluser>20123456</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
 <newmenu>shop,outlet</newmenu>
-<newcheckout>outlet</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Estonia" codigo="053">
@@ -593,7 +594,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <newmenu>shop,outlet</newmenu>
-<newcheckout>outlet</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 <mobiluser>0401234567</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
 </pais>
 
@@ -957,6 +958,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
 <newmenu>outlet</newmenu>
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Kosovo" codigo="095">
@@ -1356,7 +1358,8 @@
 <pago 
 	type="Ideal" tiendas="shop,outlet" empleado="s"
 	nombre="IDEAL" testpasarela='s' testpago='s'></pago>
-<newmenu>outlet</newmenu>	
+<newmenu>outlet</newmenu>
+<newcheckout>outlet</newcheckout>	
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -1487,7 +1490,8 @@
 <pago 
 	type="ContraReembolso" tiendas="shop,outlet" empleado="n"
 	nombre="Płatność przy odbiorze" namefilter="Platnosc przy odbiorze" testpasarela='s' testpago='s'></pago> <!-- Pago transf bancaria: cuidado porque no necesita confirmación -->
-<newmenu>outlet</newmenu>	
+<newmenu>outlet</newmenu>
+<newcheckout>outlet</newcheckout>	
 <multidireccion>S</multidireccion>
 </pais>
 
@@ -2064,7 +2068,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>N</multidireccion>
 <mobiluser>0765-260000</mobiluser> <!-- Es preciso introducir este móvil para que funcione Klarna Invoice (no podemos modificarlo desde la página de precompra porque el 'Change Details' no funciona) -->
-<newcheckout>outlet</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Schweiz" codigo="036">
