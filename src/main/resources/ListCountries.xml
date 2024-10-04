@@ -644,6 +644,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
 <newmenu>outlet</newmenu>
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Deutschland" codigo="004">
