@@ -275,7 +275,9 @@ public class BolsaSteps extends StepBase {
 	private void normalizeRandomErrorIfExistsInMobil() {
 		if (!isNotRandomErrorInMobil()) {
 			back();
+			String url = driver.getCurrentUrl();
 			inputUrlMobil();
+			get(url);
 			forceStateBolsaTo(OPEN);
 			selectButtonComprarBasic();
 		}
