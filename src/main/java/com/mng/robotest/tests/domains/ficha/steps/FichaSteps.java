@@ -342,7 +342,7 @@ public class FichaSteps extends StepBase {
 	
 	public boolean checkLinkDispTiendaInvisible() {
 		//These feature is still in developping fase by Kaliope (11-junio-2024)
-		if (!UtilsTest.todayBeforeDate("2024-09-06")) {
+		if (!UtilsTest.todayBeforeDate("2025-03-01")) {
 			return checkLinkDispTiendaInvisibleOriginal();
 		}
 		return true;

@@ -9,8 +9,7 @@ import static com.github.jorge2m.testmaker.service.webdriver.pageobject.StateEle
 
 public class PageHistorialLikesNew extends PageBase implements PageHistorialLikes {
 
-	private static final String XP_CONTAINER = "//button[@data-testid='spaceMangoLikesYou.statusModule.historyButton']/../dialog";
-	private static final String XP_MOVIMIENTO = XP_CONTAINER + "//*[@class[contains(.,'listInfo')]]"; //necesitamos data-testid
+	private static final String XP_MOVIMIENTO = "//*[@data-testid[contains(.,'statusModule.historyItem')]]";
 	
 	private String getXPathMovimiento(int position) {
 		return "(" + XP_MOVIMIENTO + ")[" + position + "]"; 
