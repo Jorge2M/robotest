@@ -40,6 +40,7 @@ public class CookiesChecker extends PageBase {
 						Pattern.compile("GUEST_LANGUAGE_ID"),
 						Pattern.compile("LFR_SESSION_STATE_20102"),
 						Pattern.compile("COOKIE_SUPPORT"),
+						Pattern.compile("X-Robotest"),
 						
 						//Sólo aparece en Cloud con development=enabled
 						Pattern.compile("disable-s3-microfrontend") 
