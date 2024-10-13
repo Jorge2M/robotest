@@ -290,7 +290,7 @@ public class Pais implements Serializable {
 	
 	public boolean isNewmenu(AppEcom app) {
 		if (app==AppEcom.outlet && 
-			codigoPais.compareTo(PaisShop.ESPANA.getCodigoPais())==0) {
+			codigoPais.compareTo(PaisShop.ESPANA.getCodigoPais())!=0) {
 			return true;
 		}
 		return getTiendasNewmenu().contains(app);
