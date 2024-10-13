@@ -289,6 +289,9 @@ public class Pais implements Serializable {
 	}
 	
 	public boolean isNewmenu(AppEcom app) {
+		if (app==AppEcom.outlet) {
+			return true;
+		}
 		return getTiendasNewmenu().contains(app);
 	}
 	
