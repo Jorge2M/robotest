@@ -50,7 +50,9 @@ public class PageHistorialLikesSteps extends StepBase {
 		var checks = ChecksTM.getNew();
 		int marginPoints = 5;
 		var levelError = DEFECT;
-		if (UtilsTest.todayBeforeDate("2024-10-15") && isPRE()) { //Hay un problema de entorno en PRE que algún día habría que reclamar a Mercurio
+		
+		//Hay un problema de entorno en PRE que algún día habría que reclamar a Mercurio
+		if (UtilsTest.todayBeforeDate("2025-06-15") && isPRE()) { 
 			levelError = WARN;
 		}
 		checks.add(
