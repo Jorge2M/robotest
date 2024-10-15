@@ -37,7 +37,11 @@ public class Rgl002 extends TestBase {
 	@Override
 	public void execute() throws Exception {
 		loginAndClearBolsa();
+		
+		//Realmente hay un bug en pro que provoca que falle el primer click
+		selectFooterLinkChequeRegalo(); 
 		selectFooterLinkChequeRegalo();
+		
 		inputDataChequeRegalo();
 		checkoutChequeRegalo();
 		//El acceso al manto de PRE falla constantemente por timeout, no podemos mantener esta validación
