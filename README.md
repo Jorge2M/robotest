@@ -17,7 +17,7 @@ Covers the web channels: desktop, mobile, tablet
 
 ### Infrastructure
 
-[k8s: https://bitbucket.intranet.mango.es/projects/TEST-OL/repos/k8s-tools-robotest/browse](https://bitbucket.intranet.mango.es/projects/TEST-OL/repos/k8s-tools-robotest/browse)
+[k8s: https://bitbucket.org/mangospain/k8s-manifests/src/main/k8s-tools/all/pro/robotest/deployment.yaml](https://bitbucket.org/mangospain/k8s-manifests/src/main/k8s-tools/all/pro/robotest/deployment.yaml)
 
 [ArgoCD: https://argocd.pro-k8s-tools.sys.mango/applications/robotest](https://argocd.dev-k8s-tools.sys.mango/applications/robotest)
 
