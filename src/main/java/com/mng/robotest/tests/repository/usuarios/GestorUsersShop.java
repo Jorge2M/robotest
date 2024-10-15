@@ -78,14 +78,17 @@ public class GestorUsersShop {
 					.getPassword();
 		
 		listTestPerformanceUsers = new CopyOnWriteArrayList<>();
-		//TODO el usuario test.performance01@mango.com ha perdido la password mango457
-		//así que mientras que no podamos recuperarlo comenzaremos desde el 02
-		for (int i=2; i<=50; i++) {
+		for (int i=1; i<=50; i++) {
 			String number = String.valueOf(i);
 			if (i<10) {
 				number = "0" + number;
 			}
-			listTestPerformanceUsers.add(new UserShop("test.performance" + number + "@mango.com", passwordTestPerformance));
+			
+			//TODO los usuarios test.performance01@mango.com y 10 han perdido la password mango457
+			//así que mientras que no podamos recuperarla los excluimos
+			if ("01".compareTo(number)!=0 && "10".compareTo(number)!=0) {
+				listTestPerformanceUsers.add(new UserShop("test.performance" + number + "@mango.com", passwordTestPerformance));
+			}
 		}
 	}
 	
