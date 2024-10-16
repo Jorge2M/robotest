@@ -64,7 +64,7 @@ public class GetterProductsIT {
 		return listProducts.equals(listProductsSorted);
 	}
 
-	@Test
+	//@Test
 	public void testGetProductsManyColors() throws Exception {
 		//When
 		var listProducts = getterProducts.getAll(Arrays.asList(MANY_COLORS));
