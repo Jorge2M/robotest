@@ -106,13 +106,8 @@ public class AccesoSteps extends StepBase {
 		} else {
 			//Overcome random performance problem in PRE
 			var checks = checkIsLogged(seconds, WARN);
-			if (!checks.areAllChecksOvercomed()) { 
-				if (!isDevice()) {
-					//In webmobil-pre the link ins incorrect always
-					//but the user is logged
-					checkIsLogged(seconds, WARN);
-				}
-			} else {
+			if (!checks.areAllChecksOvercomed() &&
+				!isDevice()) { //In webmobil-pre the link ins incorrect always but the user is logged
 				checkIsLogged(seconds, DEFECT);
 			}
 		}		
@@ -152,7 +147,7 @@ public class AccesoSteps extends StepBase {
 			boolean isPresentLinkMisCompras = userMenus.isMenuInStateUntil(MIS_COMPRAS, PRESENT, 1);
 			checks.add(
 				"Aparece el link \"Mis Compras\"",
-				isPresentLinkMisCompras);
+				isPresentLinkMisCompras, WARN);
 		}
 		
 		if (!isDesktop()) {
