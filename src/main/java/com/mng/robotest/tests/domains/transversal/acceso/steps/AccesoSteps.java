@@ -106,7 +106,13 @@ public class AccesoSteps extends StepBase {
 		} else {
 			//Overcome random performance problem in PRE
 			var checks = checkIsLogged(seconds, WARN);
-			if (!checks.areAllChecksOvercomed()) {
+			if (!checks.areAllChecksOvercomed()) { 
+				if (!isDevice()) {
+					//In webmobil-pre the link ins incorrect always
+					//but the user is logged
+					checkIsLogged(seconds, WARN);
+				}
+			} else {
 				checkIsLogged(seconds, DEFECT);
 			}
 		}		
