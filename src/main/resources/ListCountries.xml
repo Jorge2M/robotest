@@ -144,7 +144,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
 <newmenu>outlet</newmenu>
-<newcheckout>shop,outlet</newcheckout>
+<newcheckout>outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Беларусь" codigo="073"> <!-- Bielorrusia -->
@@ -699,7 +699,7 @@
 	type="Paypal" tiendas="shop,outlet" empleado="n"
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
-<newmenu>outlet</newmenu>
+<newmenu>shop,outlet</newmenu>
 </pais>
 
 <pais nombre_pais="Gibraltar" codigo="044">
@@ -767,7 +767,7 @@
 	nombre="PAYPAL" testpasarela='s' testpago='s' useremail='Test.mango@mango.com' passwordemail='mango123'></pago>
 <multidireccion>S</multidireccion>
 <newmenu>outlet</newmenu>
-<newcheckout>outlet</newcheckout>
+<newcheckout>shop,outlet</newcheckout>
 </pais>
 
 <pais nombre_pais="Hungary" codigo="064">
@@ -2780,6 +2780,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 -->
 <multidireccion>N</multidireccion>
 <!-- <emailuser>test_user_722183@testuser.com</emailuser>--> <!-- Es preciso probar con este email para que se pinte el pago 'mercadopago' -->
+<newcheckout>shop</newcheckout>
 </pais>
 
 <pais nombre_pais="Curaçao" codigo="478">
@@ -3004,10 +3005,6 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 <linea 		  id="NINO"      shop="s" outlet="s" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
 	<sublinea id="NINO_NINO" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 	<sublinea id="NINO_BEBE" shop="s" outlet="s" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-</linea>
-<linea 		  id="TEEN" 	 shop="s" outlet="n" menus="n" menusart="n" contentDesk="BANNERS"   contentMovil="SUBLINEAS">
-	<sublinea id="TEEN_NINA" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
-	<sublinea id="TEEN_NINO" shop="s" outlet="n" menus="s" menusart="s" contentDesk="VACIO"     contentMovil="MENUS2"/>
 </linea>
 </shoponline>
 <multidireccion>N</multidireccion>
@@ -4414,6 +4411,7 @@ select visible from MNGBD.pais_tarjeta where tarjeta = 'yandex-offline';
 	type="ContraReembolso" tiendas="shop,outlet"
 	nombre="الدفع عند الإستلام" namefilter="CASH ON DELIVERY" testpasarela='s' testpago='s'></pago>
 <newmenu>shop</newmenu>	
+<newcheckout>shop</newcheckout>
 <multidireccion>N</multidireccion>
 <!-- <emailuser>arabia.test@mango.com</emailuser>--> <!-- Es preciso probar con este email si queremos certificar el tema de storec -->
 </pais>
