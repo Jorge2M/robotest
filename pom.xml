@@ -11,20 +11,21 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!--suppress UnresolvedMavenProperty -->
 		<skipUnitTests>${skipTests}</skipUnitTests>
-        <nexus.url>https://nexus.sys.mango/nexus</nexus.url>
+        <!--<nexus.url>https://nexus.sys.mango/nexus</nexus.url>-->
         
         <aspectj.version>1.9.19</aspectj.version>
         
-        <sonar.host.url>https://sonarqube.pro-k8s-tools.sys.mango</sonar.host.url>
-        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-        <sonar.jacoco.reportPaths>${project.build.directory}/coverage-merged/merged.exec</sonar.jacoco.reportPaths>
-        <sonar.coverage.exclusions>**/pageobjects/**/*, **/pageobject/**/*, **/steps/**/*, **/tests/**/*, **/suites/**/*, **/beans/**/*, **/entity/**/*</sonar.coverage.exclusions>
-        <sonar.language>java</sonar.language>
+        <!--<sonar.host.url>https://sonarqube.pro-k8s-tools.sys.mango</sonar.host.url>-->
+        <!--<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>-->
+        <!--<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>-->
+        <!--<sonar.jacoco.reportPaths>${project.build.directory}/coverage-merged/merged.exec</sonar.jacoco.reportPaths>-->
+        <!--<sonar.coverage.exclusions>**/pageobjects/**/*, **/pageobject/**/*, **/steps/**/*, **/tests/**/*, **/suites/**/*, **/beans/**/*, **/entity/**/*</sonar.coverage.exclusions> -->
+        <!--<sonar.language>java</sonar.language>-->
 	</properties>
 
 
 	<distributionManagement>
+		<!--
         <repository>
             <id>nexus</id>
             <name>releases</name>
@@ -35,6 +36,7 @@
             <name>snapshots</name>
             <url>${nexus.url}/content/repositories/snapshots</url>
         </snapshotRepository>
+        -->
     </distributionManagement>
   
 	<dependencies>
@@ -68,11 +70,13 @@
 			<artifactId>aws.secrets.client</artifactId>
 			<version>master-20190308-092928-9dd2c6c-2</version>
 		</dependency>-->
+		<!--
 		<dependency>
 			<groupId>com.mango</groupId>
 			<artifactId>mng-java-feature-flag</artifactId>
 			<version>1.0.8</version>		
 		</dependency>
+		-->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-annotations</artifactId>
@@ -96,11 +100,12 @@
             <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
+        <!--
 		<dependency>
 		    <groupId>org.jacoco</groupId> 
 		    <artifactId>jacoco-maven-plugin</artifactId>
 		    <version>0.8.6</version>
-		</dependency>        
+		</dependency>-->        
 		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -156,12 +161,15 @@
 				</executions>
 			</plugin>
 			 
+			<!--
 			<plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.9.1.2184</version>
             </plugin>
+            -->
             
+            <!--
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -219,7 +227,8 @@
 						</configuration>
 					</execution>
 				</executions>
-            </plugin>            
+            </plugin>
+            -->            
 
 			<plugin>
 				<!-- Configuración extraída de: http://emystein.blogspot.com.es/2010/12/empaquetar-una-aplicacion-de-consola.html -->
